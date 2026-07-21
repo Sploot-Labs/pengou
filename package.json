@@ -8,6 +8,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
     "dev": "pnpm --filter @kahoot/server dev"
   },
   "devDependencies": {
