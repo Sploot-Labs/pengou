@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { io as ioClient, type Socket } from 'socket.io-client'
+import { io as ioClient } from 'socket.io-client'
 import { buildServer } from './app'
 import { attachRealtime } from './realtime'
 import { loadConfig } from '@kahoot/shared'
-import type { Server as SocketIOServer } from 'socket.io'
 
 describe('Socket.IO ping/pong', () => {
   it('répond pong à ping:test', async () => {
@@ -17,28 +16,30 @@ describe('Socket.IO ping/pong', () => {
       reconnection: false
     })
 
-    await new Promise<void>((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error('Connection timeout')), 3000)
-      client.once('connect', () => {
-        clearTimeout(timeout)
-        resolve()
+    try {
+      await new Promise<void>((resolve, reject) => {
+        const timeout = setTimeout(() => reject(new Error('Connection timeout')), 3000)
+        client.once('connect', () => {
+          clearTimeout(timeout)
+          resolve()
+        })
+        client.once('connect_error', (err) => {
+          clearTimeout(timeout)
+          reject(err)
+        })
       })
-      client.once('connect_error', (err) => {
-        clearTimeout(timeout)
-        reject(err)
+
+      const reply = await new Promise<string>((resolve) => {
+        client.emit('ping:test', (msg: string) => {
+          resolve(msg)
+        })
       })
-    })
 
-    const reply = await new Promise<string>((resolve) => {
-      client.emit('ping:test', (msg: string) => {
-        resolve(msg)
-      })
-    })
-
-    expect(reply).toBe('pong')
-
-    client.disconnect()
-    await io.close()
-    await app.close()
+      expect(reply).toBe('pong')
+    } finally {
+      client.disconnect()
+      await io.close()
+      await app.close()
+    }
   }, 10000)
 })
