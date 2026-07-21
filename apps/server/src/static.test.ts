@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest'
-import { mkdtempSync, writeFileSync } from 'node:fs'
+import { mkdtempSync, writeFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { buildServer } from './app'
@@ -11,6 +11,10 @@ let dist: string
 beforeAll(() => {
   dist = mkdtempSync(join(tmpdir(), 'web-dist-'))
   writeFileSync(join(dist, 'index.html'), '<!doctype html><title>t</title><div id="root"></div>')
+})
+
+afterAll(() => {
+  rmSync(dist, { recursive: true, force: true })
 })
 
 describe('service statique du SPA', () => {

@@ -1,6 +1,5 @@
 import type { FastifyInstance } from 'fastify'
 import fastifyStatic from '@fastify/static'
-import { join } from 'node:path'
 
 export function registerStatic(app: FastifyInstance, webDistDir: string): void {
   app.register(fastifyStatic, { root: webDistDir, wildcard: false })
