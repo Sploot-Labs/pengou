@@ -1,0 +1,16 @@
+{
+  "name": "open-source-saas",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter @kahoot/server dev"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  }
+}
