@@ -1,8 +1,8 @@
 import { join } from 'node:path'
 import { loadConfig } from '@kahoot/shared'
-import { buildServer } from './app'
-import { attachRealtime } from './realtime'
-import { registerStatic } from './static'
+import { buildServer } from './app.js'
+import { attachRealtime } from './realtime.js'
+import { registerStatic } from './static.js'
 
 const config = loadConfig()
 const app = buildServer(config)

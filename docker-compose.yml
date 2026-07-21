@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      # Defaults self-host : single-tenant, SQLite, scaling mémoire
+      TENANCY_MODE: single
+      DATABASE_URL: file:/app/data/app.db
+      SESSION_SECRET: change-me-in-production-please!!
+    volumes:
+      - app-data:/app/data
+
+volumes:
+  app-data:

@@ -1,0 +1,27 @@
+# --- Stage build ---
+FROM node:20-slim AS build
+RUN corepack enable
+WORKDIR /app
+COPY pnpm-workspace.yaml package.json tsconfig.base.json ./
+COPY packages ./packages
+COPY apps ./apps
+RUN pnpm install --frozen-lockfile=false
+RUN pnpm --filter @kahoot/web build
+RUN pnpm --filter @kahoot/shared build
+RUN pnpm --filter @kahoot/server build
+
+# --- Stage runtime ---
+FROM node:20-slim AS runtime
+RUN corepack enable
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=build /app/pnpm-workspace.yaml /app/package.json ./
+COPY --from=build /app/packages ./packages
+COPY --from=build /app/apps/server/package.json ./apps/server/package.json
+COPY --from=build /app/apps/server/dist ./apps/server/dist
+RUN pnpm install --prod --frozen-lockfile=false
+# Le build du SPA est servi depuis ./public
+COPY --from=build /app/apps/web/dist ./apps/server/public
+ENV WEB_DIST=/app/apps/server/public
+EXPOSE 3000
+CMD ["node", "apps/server/dist/index.js"]
