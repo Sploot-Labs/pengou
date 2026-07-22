@@ -103,15 +103,16 @@
   transition: transform var(--transition-fast), filter var(--transition-fast);
 }
 
-.ab-button:hover:not(:disabled) {
+.ab-button:hover:not(:disabled):not([aria-disabled='true']) {
   filter: brightness(1.08);
 }
 
-.ab-button:active:not(:disabled) {
+.ab-button:active:not(:disabled):not([aria-disabled='true']) {
   transform: translateY(1px);
 }
 
-.ab-button:disabled {
+.ab-button:disabled,
+.ab-button[aria-disabled='true'] {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -189,7 +190,10 @@
 }
 
 .ab-tile--incorrect {
-  opacity: 0.55;
+  /* Recede non-correct tiles WITHOUT collapsing text contrast: a global
+     opacity would bring the amber tile's dark ink toward its dark-on-dark
+     background. Desaturate + dim instead so the label stays legible. */
+  filter: grayscale(0.3) brightness(0.8);
 }
 
 .ab-tile__shape {
@@ -243,8 +247,10 @@
   display: inline-flex;
   gap: var(--space-2);
   padding: var(--space-4) var(--space-5);
-  background: var(--stage-2);
-  border: 1px solid var(--line);
+  /* Arcade cabinet: the frame sits ABOVE the sunken digit cells, so it is the
+     lighter surface with a brand-tinted edge. */
+  background: var(--surface);
+  border: 1px solid rgba(255, 61, 127, 0.25);
   border-radius: var(--radius-lg);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
   overflow: hidden;
@@ -261,8 +267,11 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   color: var(--ink-strong);
-  background: var(--surface);
+  /* Sunken cells, darker than the frame, with an inset well so the glowing
+     segment reads like an encased arcade display. */
+  background: var(--stage);
   border-radius: var(--radius-sm);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55);
   text-shadow: 0 0 12px rgba(255, 61, 127, 0.55);
 }
 
@@ -329,6 +338,12 @@
   border-radius: var(--radius-md);
   color: var(--ink-dim);
   text-align: center;
+}
+
+/* Single source of truth for big-screen / podium hero headings.
+   Replaces per-screen inline style={{ fontSize: 'var(--fs-display)' }}. */
+.ab-hero-title {
+  font-size: var(--fs-display);
 }
 
 /* ====================================================================== */
@@ -449,8 +464,8 @@
 
 .host-badge--warn {
   background: rgba(255, 197, 61, 0.16);
-  border-color: var(--gold);
-  color: var(--gold);
+  border-color: var(--warn);
+  color: var(--warn);
 }
 
 /* HostEditor metadata + launch validation */
@@ -475,11 +490,30 @@
   text-align: right;
 }
 
+.host-launch__confirm {
+  font-size: var(--fs-small);
+  color: var(--ink);
+  max-width: 40ch;
+  text-align: right;
+}
+
+/* Permanent, lightweight brand/positioning line in the host shell header. */
+.host-brandline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-small);
+  color: var(--ink);
+}
+
+.host-brandline strong {
+  color: var(--brand);
+}
+
 .host-launch__warning {
   padding: var(--space-3);
   margin-bottom: var(--space-4);
   background: rgba(255, 197, 61, 0.12);
-  border: 1px solid var(--gold);
+  border: 1px solid var(--warn);
   border-radius: var(--radius-sm);
   color: var(--ink-strong);
   font-size: var(--fs-small);
@@ -488,10 +522,20 @@
 .host-field-error {
   padding: var(--space-3);
   background: rgba(255, 197, 61, 0.12);
-  border: 1px solid var(--gold);
+  border: 1px solid var(--warn);
   border-radius: var(--radius-sm);
   color: var(--ink-strong);
   font-size: var(--fs-small);
+}
+
+/* Per-field validation message tied to an input via aria-describedby.
+   Silent to AT on its own (the aggregate .host-field-error carries the live
+   announcement); this provides the field-level programmatic association. */
+.host-inline-error {
+  margin-top: var(--space-1);
+  color: var(--warn);
+  font-size: var(--fs-small);
+  font-weight: 600;
 }
 
 .host-field__help {
@@ -509,7 +553,13 @@
 .host-variant-row {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-2);
+}
+
+.host-variant-row .host-inline-error {
+  flex-basis: 100%;
+  margin-top: 0;
 }
 
 .host-variant-row input[type='text'] {
@@ -591,7 +641,14 @@
 .host-option-row {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-2);
+}
+
+/* Per-answer validation message drops onto its own line under the row. */
+.host-option-row .host-inline-error {
+  flex-basis: 100%;
+  margin-top: 0;
 }
 
 .host-option-row input[type='text'] {
@@ -745,6 +802,15 @@
   background: var(--surface);
   border-radius: var(--radius-md);
   border: 1px solid var(--line);
+  text-align: center;
+}
+
+/* « Question X / N » progress marker, mirroring the BigScreen counter. */
+.player-progress {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--ink-dim);
 }
 
 .player-tiles {
@@ -878,9 +944,11 @@
 }
 
 .player-result--partial {
-  background: rgba(255, 197, 61, 0.16);
-  background: color-mix(in srgb, var(--gold) 16%, transparent);
-  border: 1px solid var(--gold);
+  /* Not a winner state — keep --gold reserved for the podium. Use the violet
+     brand accent for « partial credit » instead. */
+  background: rgba(122, 92, 255, 0.16);
+  background: color-mix(in srgb, var(--brand-2) 16%, transparent);
+  border: 1px solid var(--brand-2);
 }
 
 .player-result__points {
@@ -1046,6 +1114,29 @@
   margin-right: auto;
 }
 
+/* Compact, persistent join reminder pinned to a corner during the active
+   phases so latecomers can still enter (PIN + URL, Kahoot-style). */
+.big-join-reminder {
+  position: fixed;
+  top: var(--space-3);
+  right: var(--space-3);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  color: var(--ink-dim);
+}
+
+.big-join-reminder strong {
+  font-family: var(--font-mono);
+  color: var(--ink-strong);
+}
+
 .big-lobby__address {
   font-size: var(--fs-h2);
   color: var(--ink);
@@ -1106,8 +1197,13 @@
 .big-scoreboard__rank {
   font-family: var(--font-mono);
   font-size: var(--fs-h2);
-  color: var(--gold);
+  color: var(--ink-dim);
   width: 2ch;
+}
+
+/* Only the leader wears the podium gold; ranks 4–5 are not winners. */
+.big-scoreboard__rank--first {
+  color: var(--gold);
 }
 
 .big-scoreboard__name {
@@ -1294,11 +1390,11 @@
   text-align: center;
 }
 
-/* Local player highlight in rankings (BigScreen scoreboard + Podium list). */
-.big-scoreboard__row--you,
+/* Local player highlight in rankings (Podium list only; the projected
+   BigScreen scoreboard no longer marks « you » — ambiguous on a shared wall). */
 .podium-list__item--you {
   border-color: var(--brand);
-  background: color-mix(in srgb, var(--brand) 14%, var(--surface));
+  /* Fallback first, then the color-mix that enriches it (no dead duplicate). */
   background: rgba(255, 61, 127, 0.14);
   background: color-mix(in srgb, var(--brand) 14%, var(--surface));
 }
@@ -1307,7 +1403,9 @@
   margin-left: var(--space-2);
   font-size: var(--fs-small);
   font-weight: 700;
-  color: var(--brand);
+  /* The « (vous) » text + the row's pink border already carry the identity;
+     use strong ink so the tag clears AA (var(--brand) was ~3.8:1 here). */
+  color: var(--ink-strong);
 }
 
 /* ====================================================================== */

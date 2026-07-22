@@ -153,6 +153,33 @@ export function getRanking(players: Player[] = sessionPlayers): (Player & { rank
     .map((player, index) => ({ ...player, rank: index + 1 }))
 }
 
+/**
+ * Mock per-question point gains per player. Growth rates differ so the
+ * projected scoreboard order actually shuffles between questions (the tension
+ * of « who climbs / who drops » that the format is about) — instead of a frozen
+ * ranking derived from constant totals.
+ */
+const perQuestionGains: Record<string, number[]> = {
+  p1: [900, 500, 1000, 0, 1100],
+  p2: [1000, 500, 800, 1500, 600],
+  p3: [800, 0, 1000, 1500, 900],
+  p4: [1000, 500, 0, 1500, 1100],
+  p5: [900, 500, 1000, 0, 1000],
+  p6: [1000, 0, 800, 1500, 900],
+  you: [1000, 500, 1000, 1500, 1200],
+}
+
+/** Cumulative scores through question `index` (0-based), for the projected
+ *  scoreboard. Falls back to each player's default score if unlisted. */
+export function playersAtQuestion(index: number): Player[] {
+  return sessionPlayers.map((p) => {
+    const gains = perQuestionGains[p.id]
+    if (!gains) return p
+    const score = gains.slice(0, index + 1).reduce((sum, g) => sum + g, 0)
+    return { ...p, score }
+  })
+}
+
 /** Mock distribution of answers for the current live question (BigScreen). */
 export interface AnswerDistributionEntry {
   optionId: string

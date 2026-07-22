@@ -60,7 +60,7 @@ export function Join() {
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
         <div className="join-card join-card--confirm" role="status">
-          <h1 ref={welcomeRef} tabIndex={-1} style={{ fontSize: 'var(--fs-title)' }}>
+          <h1 ref={welcomeRef} tabIndex={-1}>
             Bienvenue {pseudo.trim()} !
           </h1>
           <p style={{ color: 'var(--ink-dim)' }}>
@@ -79,15 +79,14 @@ export function Join() {
     <main className="join-screen" id="contenu-principal" tabIndex={-1}>
       <Logo />
 
-      <div>
-        <p style={{ color: 'var(--ink-dim)', marginBottom: 'var(--space-3)' }}>
-          Saisissez le PIN affiché à l’écran pour rejoindre.
-        </p>
-        <PinDisplay pin={mockGamePin} label="Code PIN de la partie" />
-      </div>
+      {/* No PIN shown here: the player reads it off the big screen. Revealing
+          it on the joining device conflicts with the projector's role. */}
+      <p style={{ color: 'var(--ink-dim)' }}>
+        Saisissez le PIN affiché sur le grand écran pour rejoindre.
+      </p>
 
       <form className="join-card" onSubmit={handleSubmit} noValidate>
-        <h1 style={{ fontSize: 'var(--fs-title)' }}>Rejoindre la partie</h1>
+        <h1>Rejoindre la partie</h1>
 
         <div className="join-field">
           <label htmlFor="join-pin">Code PIN</label>
@@ -99,7 +98,7 @@ export function Join() {
             pattern="[0-9]*"
             autoComplete="off"
             maxLength={6}
-            placeholder="482913"
+            placeholder="6 chiffres"
             value={pin}
             onChange={(e) => {
               // Filter in real time: digits only, capped at 6.

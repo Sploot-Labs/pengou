@@ -37,10 +37,14 @@ export function PlayerLive() {
   const [boolChoice, setBoolChoice] = useState<boolean | null>(null)
   const [textValue, setTextValue] = useState('')
   const [sliderValue, setSliderValue] = useState<number>(0)
+  // A slider left untouched must count as « no submission » (timeout), not as
+  // an answer at the min value.
+  const [sliderTouched, setSliderTouched] = useState(false)
 
   const question = mockQuiz.questions[questionIndex]
 
   const answeredRef = useRef<HTMLParagraphElement>(null)
+  const promptRef = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
     if (state !== 'question') return
@@ -59,6 +63,12 @@ export function PlayerLive() {
     if (state === 'answered') answeredRef.current?.focus()
   }, [state])
 
+  // Announce the « hero moment »: when a question appears, move focus to its
+  // heading so a screen reader reads the prompt (not just the timer).
+  useEffect(() => {
+    if (state === 'question') promptRef.current?.focus()
+  }, [state, questionIndex])
+
   // The « Reconnecté » banner must not linger the whole game — fade back to
   // « online » after a few seconds (announcement stays live meanwhile).
   useEffect(() => {
@@ -72,6 +82,7 @@ export function PlayerLive() {
     setBoolChoice(null)
     setTextValue('')
     setSliderValue(q.type === 'slider' ? q.min : 0)
+    setSliderTouched(false)
   }
 
   function startQuestion(index = questionIndex) {
@@ -140,7 +151,8 @@ export function PlayerLive() {
       case 'text':
         return textValue.trim().length > 0
       case 'slider':
-        return true
+        // Only a deliberate interaction counts (drag or explicit « Valider »).
+        return sliderTouched
     }
   }
 
@@ -263,24 +275,26 @@ export function PlayerLive() {
 
       {state === 'waiting' && (
         <div className="player-waiting">
-          <h1 style={{ fontSize: 'var(--fs-title)' }}>En attente de la prochaine question…</h1>
+          <h1>En attente de la prochaine question…</h1>
           <p style={{ color: 'var(--ink-dim)' }}>
             Restez sur cet écran. La question suivante s’affichera automatiquement.
           </p>
-          <Button variant="primary" type="button" onClick={() => startQuestion()}>
-            Afficher la question (démo)
-          </Button>
         </div>
       )}
 
       {(state === 'question' || state === 'answered') && (
         <div className="player-question">
+          <p className="player-progress">
+            Question {questionIndex + 1} / {mockQuiz.questions.length}
+          </p>
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
             <TimerRing remainingSeconds={remaining} totalSeconds={question.durationSeconds} />
           </div>
-          <p className="player-question__prompt">
-            <strong>{question.prompt}</strong>
-          </p>
+          {/* A real heading restores the « hero » title to the view and gets
+              focused on appearance so a screen reader reads the question. */}
+          <h1 className="player-question__prompt" tabIndex={-1} ref={promptRef}>
+            {question.prompt}
+          </h1>
 
           <div style={{ marginTop: 'var(--space-4)' }}>
             {state === 'question' &&
@@ -363,6 +377,9 @@ export function PlayerLive() {
                 className="player-slider-answer"
                 onSubmit={(e) => {
                   e.preventDefault()
+                  // An explicit « Valider » is a deliberate submission of the
+                  // current value, even if the thumb was never dragged.
+                  setSliderTouched(true)
                   submitAnswer()
                 }}
               >
@@ -378,7 +395,10 @@ export function PlayerLive() {
                   step={question.step}
                   value={sliderValue}
                   disabled={state === 'answered'}
-                  onChange={(e) => setSliderValue(Number(e.target.value))}
+                  onChange={(e) => {
+                    setSliderValue(Number(e.target.value))
+                    setSliderTouched(true)
+                  }}
                 />
                 <Button variant="primary" type="submit" disabled={state === 'answered'}>
                   Valider
@@ -412,7 +432,7 @@ export function PlayerLive() {
           }`}
           role="status"
         >
-          <h1 style={{ fontSize: 'var(--fs-title)' }}>
+          <h1>
             {evaluation.kind === 'timeout'
               ? 'Temps écoulé'
               : evaluation.kind === 'correct'

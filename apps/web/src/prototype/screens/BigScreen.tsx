@@ -3,6 +3,7 @@ import {
   getRanking,
   mockGamePin,
   mockLiveQuestionState,
+  playersAtQuestion,
   sessionPlayers,
 } from '../mockData'
 import type { AnswerShapeKind, Question } from '../mockData'
@@ -140,7 +141,9 @@ export function BigScreen() {
     })
   }
 
-  const ranking = getRanking(sessionPlayers)
+  // Cumulative scores through the current question so the ranking evolves
+  // question-to-question rather than staying frozen on constant totals.
+  const ranking = getRanking(playersAtQuestion(questionIndex))
   const bars = phase === 'reveal' ? revealBars(question) : null
   const maxCount = bars ? Math.max(1, ...bars.map((b) => b.count)) : 1
 
@@ -198,18 +201,26 @@ export function BigScreen() {
 
   return (
     <main className="big-screen" id="contenu-principal" tabIndex={-1}>
+      {/* Persistent join reminder for latecomers once the game is underway
+          (the full PIN marquee + address only show in the lobby). */}
+      {(phase === 'question' || phase === 'reveal' || phase === 'scoreboard') && (
+        <div className="big-join-reminder">
+          Rejoignez sur <strong>arena.app</strong> · PIN <strong>{mockGamePin}</strong>
+        </div>
+      )}
+
       {phase === 'lobby' && (
         <div className="big-lobby">
           <Logo />
           <div>
-            <h1 style={{ fontSize: 'var(--fs-display)' }}>{mockQuiz.title}</h1>
+            <h1 className="ab-hero-title">{mockQuiz.title}</h1>
             <p className="big-lobby__tagline">Le quiz en direct, open-source.</p>
             <p className="big-lobby__proof">
-              Vos données restent chez vous. Sans limite de joueurs, sans abonnement par siège.
+              Rejoignez en 5 secondes, aucune appli à installer. Vos données restent chez vous.
             </p>
           </div>
           <p className="big-lobby__address">
-            Rejoignez sur <strong>arena.exemple.fr</strong>
+            Rejoignez sur <strong>arena.app</strong>
           </p>
           <PinDisplay pin={mockGamePin} />
 
@@ -262,7 +273,7 @@ export function BigScreen() {
           {renderLiveAnswers()}
 
           <p className="big-live__answered">
-            {liveAnswered} / {sessionPlayers.length} ont répondu
+            {liveAnswered} / {sessionPlayers.length} {liveAnswered <= 1 ? 'a' : 'ont'} répondu
           </p>
         </div>
       )}
@@ -336,14 +347,18 @@ export function BigScreen() {
 
       {phase === 'scoreboard' && (
         <div className="big-scoreboard">
-          <h1 style={{ fontSize: 'var(--fs-display)' }}>Classement</h1>
+          <h1 className="ab-hero-title">Classement</h1>
           <ol className="big-scoreboard__list">
+            {/* No « you » highlight on the shared wall: a colour-only marker is
+                invisible to colour-blind viewers and « you » is ambiguous on a
+                projected screen. */}
             {ranking.slice(0, 5).map((p) => (
-              <li
-                key={p.id}
-                className={`big-scoreboard__row${p.id === 'you' ? ' big-scoreboard__row--you' : ''}`}
-              >
-                <span className="big-scoreboard__rank">{p.rank}</span>
+              <li key={p.id} className="big-scoreboard__row">
+                <span
+                  className={`big-scoreboard__rank${p.rank === 1 ? ' big-scoreboard__rank--first' : ''}`}
+                >
+                  {p.rank}
+                </span>
                 <span className="big-scoreboard__name">{p.pseudo}</span>
                 <span className="big-scoreboard__score">{p.score} pts</span>
               </li>
@@ -354,7 +369,7 @@ export function BigScreen() {
 
       {phase === 'end' && (
         <div className="big-lobby">
-          <h1 style={{ fontSize: 'var(--fs-display)' }}>Partie terminée</h1>
+          <h1 className="ab-hero-title">Partie terminée</h1>
           <p style={{ color: 'var(--ink-dim)' }}>
             Toutes les questions ont été jouées. Place au classement final.
           </p>

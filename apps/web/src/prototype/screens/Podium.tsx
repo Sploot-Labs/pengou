@@ -8,10 +8,22 @@ export function Podium() {
   const rest = ranking.slice(3)
   const [message, setMessage] = useState<string | null>(null)
 
+  /** Escape one CSV field: neutralise formula injection (= + - @) and quote
+   *  fields containing a comma, quote or newline (doubling inner quotes). */
+  function csvCell(value: string | number): string {
+    let s = String(value)
+    if (/^[=+\-@]/.test(s)) s = `'${s}`
+    if (/[",\n]/.test(s)) s = `"${s.replace(/"/g, '""')}"`
+    return s
+  }
+
   function exportResults() {
     const header = 'rang,pseudo,score'
-    const rows = ranking.map((p) => `${p.rank},${p.pseudo},${p.score}`)
-    const csv = [header, ...rows].join('\n')
+    const rows = ranking.map((p) =>
+      [csvCell(p.rank), csvCell(p.pseudo), csvCell(p.score)].join(','),
+    )
+    // UTF-8 BOM so Excel renders accented pseudos correctly; CRLF line endings.
+    const csv = '﻿' + [header, ...rows].join('\r\n')
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
@@ -32,7 +44,7 @@ export function Podium() {
     <main className="podium-screen" id="contenu-principal" tabIndex={-1}>
       <Logo />
       <div style={{ textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'var(--fs-display)' }}>Classement final</h1>
+        <h1 className="ab-hero-title">Classement final</h1>
         <p style={{ color: 'var(--ink-dim)' }}>{mockQuiz.title}</p>
       </div>
 
@@ -107,12 +119,21 @@ export function Podium() {
         </p>
       )}
 
+      {/* Two conversion doors: a frictionless cloud path for the non-technical
+          host (teacher/animator), and the self-host path for the technical one.
+          The verb matches each persona's real effort. */}
       <p className="podium-convert">
-        Arena est open-source.{' '}
-        <a href="#host" onClick={(e) => e.preventDefault()}>
-          Créez votre quiz et hébergez le vôtre
+        <a href="#cloud" onClick={(e) => e.preventDefault()}>
+          Créez votre quiz gratuitement — aucune installation
         </a>
-        .
+        , ou{' '}
+        <a href="#host" onClick={(e) => e.preventDefault()}>
+          hébergez votre propre instance
+        </a>
+        , c’est open-source.{' '}
+        <a href="#source" onClick={(e) => e.preventDefault()}>
+          Voir le code
+        </a>
       </p>
     </main>
   )

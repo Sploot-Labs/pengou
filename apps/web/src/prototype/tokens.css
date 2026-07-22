@@ -20,9 +20,13 @@
   /* Brand */
   --brand: #ff3d7f; /* rose électrique — la signature */
   --brand-2: #7a5cff; /* violet, pour dégradés d'accent */
-  --gold: #ffc53d; /* vainqueur / podium */
+  --gold: #ffc53d; /* vainqueur / podium — RÉSERVÉ au classement/podium */
   --silver: #c7ccdd;
   --bronze: #e0954f;
+
+  /* Warning — ambre assumé, rôle SÉPARÉ de --gold (état incomplet/éditable,
+     bannières d'avertissement). Ne pas réutiliser --gold hors podium. */
+  --warn: #ffc53d;
 
   /* Answers — couleur + forme + label, jamais la couleur seule.
      Valeurs assombries pour atteindre ≥4.5:1 avec le texte blanc
