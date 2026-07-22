@@ -10,7 +10,7 @@ export const sessionStatusEnum = pgEnum('session_status', ['lobby', 'active', 'e
 
 export const tenant = pgTable('tenant', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
-  name: text('name').notNull(),
+  name: text('name').notNull().unique(),
   plan: planEnum('plan').notNull().default('free'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 })
