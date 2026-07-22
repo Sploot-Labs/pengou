@@ -1,11 +1,36 @@
-import { describe, it } from 'vitest'
+import { describe, it, expect, afterAll, beforeAll } from 'vitest'
+import { sql } from 'drizzle-orm'
+import { startTestDb } from './test-helpers.js'
+import { runMigrations } from './migrate.js'
 
-// NOTE: Ce fichier de test dépend de `runMigrations` (Task 3, `./migrate.js`), qui n'existe pas
-// encore à ce stade (Task 2). Les assertions sont donc différées via `describe.todo` pour garder
-// `pnpm --filter @splootlabs/db test` vert. Elles seront activées lors de la Task 3 en important
-// `startTestDb` + `runMigrations` et en exécutant les vraies requêtes contre Postgres.
-describe.todo('schéma', () => {
-  it('crée les 9 tables attendues', () => {})
+let ctx: Awaited<ReturnType<typeof startTestDb>>
 
-  it("applique l'unicité du PIN uniquement aux sessions non terminées", () => {})
+beforeAll(async () => {
+  ctx = await startTestDb()
+  await runMigrations(ctx.db)
+}, 120_000)
+
+afterAll(async () => {
+  await ctx?.stop()
+})
+
+describe('schéma', () => {
+  it('crée les 9 tables attendues', async () => {
+    const rows = await ctx.db.execute(sql`
+      select table_name from information_schema.tables where table_schema = 'public' order by table_name
+    `)
+    const names = rows.map((r) => (r as { table_name: string }).table_name)
+    for (const t of ['answer_record', 'game_session', 'membership', 'oauth_account', 'question', 'quiz', 'session_player', 'tenant', 'user']) {
+      expect(names).toContain(t)
+    }
+  })
+
+  it('applique l\'unicité du PIN uniquement aux sessions non terminées', async () => {
+    // Deux sessions "ended" avec le même PIN sont permises ; deux "lobby" avec le même PIN non.
+    const info = await ctx.db.execute(sql`
+      select indexdef from pg_indexes where indexname = 'game_session_active_pin_uidx'
+    `)
+    // Postgres inclut le cast d'enum dans indexdef (ex. 'ended'::session_status).
+    expect((info[0] as { indexdef: string }).indexdef.toLowerCase()).toContain("where (status <> 'ended'::session_status)")
+  })
 })
