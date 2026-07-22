@@ -15,12 +15,12 @@ afterAll(async () => {
 })
 
 describe('schéma', () => {
-  it('crée les 9 tables attendues', async () => {
+  it('crée les 11 tables attendues (dont user/session/account/verification de Better Auth)', async () => {
     const rows = await ctx.db.execute(sql`
       select table_name from information_schema.tables where table_schema = 'public' order by table_name
     `)
     const names = rows.map((r) => (r as { table_name: string }).table_name)
-    for (const t of ['answer_record', 'game_session', 'membership', 'oauth_account', 'question', 'quiz', 'session_player', 'tenant', 'user']) {
+    for (const t of ['account', 'answer_record', 'game_session', 'membership', 'question', 'quiz', 'session', 'session_player', 'tenant', 'user', 'verification']) {
       expect(names).toContain(t)
     }
   })

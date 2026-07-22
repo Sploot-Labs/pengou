@@ -2,6 +2,7 @@ import { sql } from 'drizzle-orm'
 import {
   pgTable, pgEnum, uuid, text, integer, boolean, timestamp, jsonb, uniqueIndex, index,
 } from 'drizzle-orm/pg-core'
+import { user } from './auth-schema.js'
 
 export const planEnum = pgEnum('plan', ['free', 'pro'])
 export const roleEnum = pgEnum('role', ['owner', 'admin', 'member'])
@@ -15,26 +16,9 @@ export const tenant = pgTable('tenant', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 })
 
-export const user = pgTable('user', {
-  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
-  email: text('email').notNull().unique(),
-  passwordHash: text('password_hash'), // null pour un compte OAuth-only
-  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
-})
-
-export const oauthAccount = pgTable('oauth_account', {
-  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
-  userId: uuid('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
-  provider: text('provider').notNull(),
-  providerAccountId: text('provider_account_id').notNull(),
-  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
-}, (t) => ({
-  providerUnique: uniqueIndex('oauth_provider_account_uidx').on(t.provider, t.providerAccountId),
-}))
-
 export const membership = pgTable('membership', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
-  userId: uuid('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+  userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
   tenantId: uuid('tenant_id').notNull().references(() => tenant.id, { onDelete: 'cascade' }),
   role: roleEnum('role').notNull().default('owner'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
@@ -45,7 +29,7 @@ export const membership = pgTable('membership', {
 export const quiz = pgTable('quiz', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
   tenantId: uuid('tenant_id').notNull().references(() => tenant.id, { onDelete: 'cascade' }),
-  ownerId: uuid('owner_id').notNull().references(() => user.id),
+  ownerId: text('owner_id').notNull().references(() => user.id),
   title: text('title').notNull(),
   description: text('description'),
   cover: text('cover'),
@@ -73,7 +57,7 @@ export const gameSession = pgTable('game_session', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
   tenantId: uuid('tenant_id').notNull().references(() => tenant.id, { onDelete: 'cascade' }),
   quizId: uuid('quiz_id').notNull().references(() => quiz.id),
-  hostId: uuid('host_id').notNull().references(() => user.id),
+  hostId: text('host_id').notNull().references(() => user.id),
   pin: text('pin').notNull(),
   status: sessionStatusEnum('status').notNull().default('lobby'),
   startedAt: timestamp('started_at', { withTimezone: true }),
@@ -109,3 +93,6 @@ export const answerRecord = pgTable('answer_record', {
 }, (t) => ({
   sessionQuestionIdx: index('answer_session_question_idx').on(t.sessionId, t.questionId),
 }))
+
+// Tables Better Auth (user/session/account/verification) — générées, source de vérité des colonnes.
+export * from './auth-schema.js'

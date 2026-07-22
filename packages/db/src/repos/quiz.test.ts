@@ -16,8 +16,12 @@ beforeAll(async () => {
   await runMigrations(ctx.db)
   const [tA] = await ctx.db.insert(schema.tenant).values({ name: 'Tenant A' }).returning()
   const [tB] = await ctx.db.insert(schema.tenant).values({ name: 'Tenant B' }).returning()
-  const [uA] = await ctx.db.insert(schema.user).values({ email: 'a@x.fr' }).returning()
-  const [uB] = await ctx.db.insert(schema.user).values({ email: 'b@x.fr' }).returning()
+  const [uA] = await ctx.db.insert(schema.user)
+    .values({ id: crypto.randomUUID(), email: 'a@x.fr', name: 'Owner A', emailVerified: false })
+    .returning()
+  const [uB] = await ctx.db.insert(schema.user)
+    .values({ id: crypto.randomUUID(), email: 'b@x.fr', name: 'Owner B', emailVerified: false })
+    .returning()
   tenantA = tA.id; tenantB = tB.id; ownerA = uA.id; ownerB = uB.id
 }, 120_000)
 
