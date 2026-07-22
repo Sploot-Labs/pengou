@@ -22,14 +22,16 @@ Toute la machinerie (y compris multi-tenant) est **construite d'un bloc**. Les d
 | Axe | Valeurs | Défaut self-host |
 |---|---|---|
 | `TENANCY_MODE` | `single` \| `multi` | `single` |
-| `DATABASE_URL` | SQLite \| Postgres | SQLite (fichier) |
+| `DATABASE_URL` | URL Postgres | Postgres embarqué au `docker compose` (service `db`) |
 | Scaling (`REDIS_URL` présent ?) | mémoire (mono-instance) \| Redis (multi-instance) | mémoire |
+
+**Décision DB (révisée 2026-07-22) : Postgres partout.** Puisque la distribution passe déjà par `docker compose`, le self-host embarque un conteneur Postgres (`docker compose up` lève l'app + la base, zéro config manuelle). Un seul dialecte, un seul schéma, un seul jeu de requêtes, tests contre du vrai Postgres. On abandonne SQLite/PGlite et la complexité dual-dialecte. Compromis assumé : plus de self-host « zéro service » en bare-metal (sans Docker) — marginal car la distribution est Docker.
 
 Combinaisons cibles :
 
-- **Self-host simple** (défaut) : `single` + SQLite + mémoire.
-- **Self-host multi-tenant** : `multi` + SQLite/Postgres + mémoire (ex. une académie hébergeant plusieurs écoles).
-- **Cloud** : `multi` + Postgres + Redis + multi-instance.
+- **Self-host simple** (défaut) : `single` + Postgres (conteneur) + mémoire.
+- **Self-host multi-tenant** : `multi` + Postgres + mémoire (ex. une académie hébergeant plusieurs écoles).
+- **Cloud** : `multi` + Postgres (managé) + Redis + multi-instance.
 
 ---
 
@@ -38,7 +40,7 @@ Combinaisons cibles :
 - **Langage** : TypeScript full-stack (un seul langage front + back, écosystème riche, vélocité — cohérent avec l'objectif d'usine).
 - **Backend** : monolithe Node **modulaire**, packagé en **une seule image Docker** (un seul processus à lancer = self-host trivial).
 - **Temps réel** : **Socket.IO**. Les *rooms* correspondent exactement à une partie (1 code PIN = 1 room). Reconnexion et gestion des déconnexions intégrées. Adaptateur **Redis** pour le fan-out multi-instance en cloud.
-- **ORM / BDD** : **Drizzle ORM**, même code pour **SQLite** (self-host, BDD = un fichier, zéro service) et **Postgres** (cloud/multi-tenant robuste).
+- **ORM / BDD** : **Drizzle ORM** sur **Postgres partout** (dialecte `pg-core` unique). Self-host : conteneur Postgres dans `docker compose`. Cloud : Postgres managé.
 - **Frontend** : **React** (SPA via Vite), servi par le même processus Node (une image, un port). Choix optimisé pour le **vivier de contributeurs open-source** et l'écosystème de briques.
 - **Auth** : **Lucia** (email/mot de passe + OAuth), hash **argon2**.
 
@@ -61,7 +63,7 @@ CRUD et plan de gestion : comptes & OAuth, organisations/tenants, quiz & questio
 Le cœur de valeur. **Sans dépendance à l'UI**, testable seul. Gère les sessions live, les rooms PIN, le chrono serveur, le scoring, le classement, les projections par rôle. État **autoritatif en mémoire**, derrière une **interface de store de session** (implémentations : mémoire / Redis).
 
 ### 3.3 Module Data
-Schéma, migrations, accès BDD via Drizzle. Applique le **scoping tenant** (guard) sur toutes les requêtes. Abstrait SQLite/Postgres.
+Schéma, migrations (drizzle-kit), accès BDD via Drizzle (Postgres). Applique le **scoping tenant** (guard) sur toutes les requêtes.
 
 ### 3.4 Frontend (SPA React)
 Trois expériences distinctes (voir §5), consommant l'API HTTP + les événements Socket.IO.
@@ -191,8 +193,8 @@ Trois briques (le **suivi longitudinal inter-parties est explicitement hors pér
 
 - **Une image Docker unique** ; le SPA React (build Vite) est servi par le processus Node.
 - **Config par variables d'environnement** : `TENANCY_MODE`, `DATABASE_URL`, `REDIS_URL?`, secrets (session, OAuth).
-- **Self-host** : `docker compose up` avec SQLite (volume) = complet, zéro config. Reco : passer `DATABASE_URL` vers Postgres si multi-tenant à charge élevée (même code Drizzle).
-- **Cloud** : Postgres + Redis (adaptateur Socket.IO + `SessionStore` Redis) + plusieurs instances.
+- **Self-host** : `docker compose up` = app + service Postgres `db` (volume) + migrations auto au démarrage = complet, zéro config.
+- **Cloud** : Postgres managé + Redis (adaptateur Socket.IO + `SessionStore` Redis) + plusieurs instances.
 
 ---
 
@@ -200,7 +202,7 @@ Trois briques (le **suivi longitudinal inter-parties est explicitement hors pér
 
 - **Module Game-engine** : testé **isolément** (sans UI ni réseau) — machine à états, chrono/scoring déterministe, chaque **stratégie de type de question** (`isCorrect`, `score`, normalisation `text`, proximité `slider`).
 - **Multi-tenancy** : tests garantissant l'**isolation** (aucune fuite de données entre tenants via le guard).
-- **Module Data** : mêmes tests contre SQLite et Postgres (parité Drizzle).
+- **Module Data** : tests d'intégration contre un vrai Postgres jetable (conteneur Docker éphémère).
 - **Temps réel** : tests d'intégration Socket.IO (jonction, soumission, reconnexion, projections par rôle — la bonne réponse ne fuit pas avant `REVEAL`).
 - **E2E** : un parcours de partie complet (hôte + grand écran + ≥2 joueurs → podium + rapport).
 
@@ -209,7 +211,7 @@ Trois briques (le **suivi longitudinal inter-parties est explicitement hors pér
 ## 13. Périmètre
 
 ### Dans ce spec (tout conçu et construit d'un bloc)
-Moteur de jeu temps réel · 4 types de questions (stratégies branchables) · 3 écrans · monitoring live + rapports post-partie + home dashboard · auth email-mdp + OAuth · multi-tenant activable partout (self-host inclus) · SQLite/Postgres · Redis/multi-instance · plans & limites modélisés.
+Moteur de jeu temps réel · 4 types de questions (stratégies branchables) · 3 écrans · monitoring live + rapports post-partie + home dashboard · auth email-mdp + OAuth · multi-tenant activable partout (self-host inclus) · Postgres partout · Redis/multi-instance · plans & limites modélisés.
 
 ### Hors périmètre (travaux dédiés ultérieurs)
 - **Extraction des briques « usine »** (après ce produit).
@@ -229,7 +231,7 @@ Pas de portes « on s'arrête et on livre », mais l'implémentation se **séque
 | Langage | TypeScript full-stack |
 | Backend | Monolithe Node modulaire, une image Docker |
 | Temps réel | Socket.IO (+ adaptateur Redis en cloud) |
-| ORM/BDD | Drizzle — SQLite (self-host) / Postgres (cloud) |
+| ORM/BDD | Drizzle — Postgres partout (self-host = conteneur `db`, cloud = managé) |
 | Frontend | React (SPA Vite) |
 | Auth | Lucia, argon2, OAuth Google + GitHub |
 | Multi-tenancy | `tenant_id` niveau ligne + guard ; résolution par organisation + sélecteur ; sous-domaine optionnel |
