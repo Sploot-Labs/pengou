@@ -21,6 +21,7 @@ const auth = createAuth(db, {
   // (déjà requis, min 16 caractères) plutôt que d'échouer au démarrage.
   secret: config.authSecret ?? config.sessionSecret,
   baseURL: config.authUrl,
+  tenancyMode: config.tenancyMode,
   socialProviders: enabledSocialProviders(config),
 })
 await registerAuth(app, auth)

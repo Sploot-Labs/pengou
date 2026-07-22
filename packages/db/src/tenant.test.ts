@@ -34,7 +34,9 @@ describe('resolveTenantId', () => {
 
   it('mode multi : exige un tenant explicite, sinon lève', async () => {
     await expect(resolveTenantId(ctx.db, { tenancyMode: 'multi' })).rejects.toThrow()
-    const ok = await resolveTenantId(ctx.db, { tenancyMode: 'multi' }, 'some-uuid')
-    expect(ok).toBe('some-uuid')
+    await expect(resolveTenantId(ctx.db, { tenancyMode: 'multi' }, { explicitTenantId: 'some-uuid' })).rejects.toThrow()
   })
+  // Note (Plan 3, Task 5) : resolveTenantId en mode multi valide désormais l'appartenance
+  // (membership) de l'utilisateur au tenant. Voir tenant-membership.test.ts pour le cas
+  // « userId + membership existante → renvoie le tenant ».
 })
