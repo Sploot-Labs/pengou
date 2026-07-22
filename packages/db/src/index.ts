@@ -4,4 +4,5 @@ export { startTestDb } from './test-helpers.js'
 export {
   tenantScope, type TenantScope, ensureDefaultTenant, resolveTenantId, ensureMembership, DEFAULT_TENANT_NAME,
 } from './tenant.js'
+export { createQuiz, listQuizzes, getQuiz, type Quiz } from './repos/quiz.js'
 export * as schema from './schema.js'

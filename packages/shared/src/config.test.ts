@@ -44,4 +44,23 @@ describe('loadConfig', () => {
     const cfg = loadConfig({ GOOGLE_CLIENT_ID: 'gid', GOOGLE_CLIENT_SECRET: 'gsecret' })
     expect(cfg.oauth.google).toEqual({ clientId: 'gid', clientSecret: 'gsecret' })
   })
+
+  it('lève une erreur claire en production sans BETTER_AUTH_SECRET', () => {
+    expect(() => loadConfig({ NODE_ENV: 'production' })).toThrow(/BETTER_AUTH_SECRET/)
+  })
+
+  it("n'exige pas BETTER_AUTH_SECRET en développement (fallback toléré)", () => {
+    expect(() => loadConfig({})).not.toThrow()
+    expect(loadConfig({}).authSecret).toBeUndefined()
+  })
+
+  it("n'exige pas BETTER_AUTH_SECRET en test (fallback toléré)", () => {
+    expect(() => loadConfig({ NODE_ENV: 'test' })).not.toThrow()
+  })
+
+  it('accepte la production quand BETTER_AUTH_SECRET est fourni (32+ caractères)', () => {
+    const secret = 'a'.repeat(32)
+    const cfg = loadConfig({ NODE_ENV: 'production', BETTER_AUTH_SECRET: secret })
+    expect(cfg.authSecret).toBe(secret)
+  })
 })

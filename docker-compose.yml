@@ -21,6 +21,19 @@ services:
       TENANCY_MODE: single
       DATABASE_URL: postgres://kahoot:kahoot@db:5432/kahoot
       SESSION_SECRET: change-me-in-production-please!!
+      # Requis en production (NODE_ENV=production, fixé dans le Dockerfile) : le serveur refuse
+      # de démarrer sans BETTER_AUTH_SECRET (cf. packages/shared/src/config.ts loadConfig).
+      # Générer une vraie valeur secrète (ex. `openssl rand -base64 32`) avant tout déploiement réel.
+      BETTER_AUTH_SECRET: change-me-in-production-32-chars-min!!
+      BETTER_AUTH_URL: http://localhost:3000
+      # Providers OAuth sociaux (optionnels) : décommenter et renseigner pour les activer.
+      # Voir enabledSocialProviders() dans packages/auth/src/providers.ts.
+      # GOOGLE_CLIENT_ID:
+      # GOOGLE_CLIENT_SECRET:
+      # FACEBOOK_CLIENT_ID:
+      # FACEBOOK_CLIENT_SECRET:
+      # GITHUB_CLIENT_ID:
+      # GITHUB_CLIENT_SECRET:
     depends_on:
       db:
         condition: service_healthy

@@ -41,6 +41,13 @@ export type AppConfig = {
 
 export function loadConfig(env: Record<string, string | undefined> = process.env): AppConfig {
   const parsed = EnvSchema.parse(env)
+  if (parsed.NODE_ENV === 'production' && !parsed.BETTER_AUTH_SECRET) {
+    throw new Error(
+      "Configuration invalide : BETTER_AUTH_SECRET est requis en production (NODE_ENV=production). " +
+        'Définissez une valeur secrète stable d\'au moins 32 caractères (ex. `openssl rand -base64 32`) ' +
+        'pour signer les sessions Better Auth. En développement/test, une valeur par défaut est tolérée.',
+    )
+  }
   return {
     nodeEnv: parsed.NODE_ENV,
     port: parsed.PORT,
