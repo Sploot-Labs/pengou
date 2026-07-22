@@ -136,8 +136,12 @@ export const mockPlayers: Player[] = [
  * lobby → live → provisional ranking → podium all describe the same game.
  * Its score is a plausible default used by BigScreen/Podium; PlayerLive
  * overrides it with the live score accumulated on the device.
+ *
+ * The pseudo is a real demo handle (not the literal « Vous ») so that shared
+ * projected views read coherently; personal surfaces (PlayerLive, Podium on
+ * the player's own device) flag this row with a « (vous) » suffix instead.
  */
-export const youPlayer: Player = { id: 'you', pseudo: 'Vous', score: 6800 }
+export const youPlayer: Player = { id: 'you', pseudo: 'RenardAgile', score: 6800 }
 
 /** Coherent per-session player set shared by every screen (includes « Vous »). */
 export const sessionPlayers: Player[] = [...mockPlayers, youPlayer]
@@ -160,7 +164,7 @@ export const mockLiveQuestionState = {
   remainingSeconds: 12,
   totalSeconds: 20,
   answersReceived: 4,
-  totalPlayers: mockPlayers.length,
+  totalPlayers: sessionPlayers.length,
   distribution: [
     { optionId: 'q1-a', count: 1 },
     { optionId: 'q1-b', count: 4 },

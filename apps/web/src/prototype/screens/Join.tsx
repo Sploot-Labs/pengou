@@ -1,4 +1,4 @@
-import { useRef, useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { mockGamePin } from '../mockData'
 import { Button, Logo, PinDisplay } from '../ui'
 
@@ -16,6 +16,14 @@ export function Join() {
   const [status, setStatus] = useState<Status>('idle')
   const pinRef = useRef<HTMLInputElement>(null)
   const pseudoRef = useRef<HTMLInputElement>(null)
+  const welcomeRef = useRef<HTMLHeadingElement>(null)
+
+  // WCAG 2.4.3: when the form is replaced by the confirmation card, the
+  // focused submit button is unmounted and focus would fall back to <body>.
+  // Move it to the welcome heading instead.
+  useEffect(() => {
+    if (status === 'joined') welcomeRef.current?.focus()
+  }, [status])
 
   function validate(): FieldErrors {
     const next: FieldErrors = {}
@@ -49,22 +57,26 @@ export function Join() {
 
   if (status === 'joined') {
     return (
-      <div className="join-screen">
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
         <div className="join-card join-card--confirm" role="status">
-          <h1 style={{ fontSize: 'var(--fs-title)' }}>Bienvenue {pseudo.trim()} !</h1>
+          <h1 ref={welcomeRef} tabIndex={-1} style={{ fontSize: 'var(--fs-title)' }}>
+            Bienvenue {pseudo.trim()} !
+          </h1>
           <p style={{ color: 'var(--ink-dim)' }}>
             Vous avez rejoint la partie. En attente du démarrage — gardez cet écran ouvert.
           </p>
           <PinDisplay pin={mockGamePin} label="Code PIN de la partie" />
         </div>
-        <p className="join-tagline">Arena — quiz en direct, open-source, hébergé chez vous.</p>
-      </div>
+        <p className="join-tagline">
+          Arena — le quiz en direct, open-source. Chez vous ou dans le cloud.
+        </p>
+      </main>
     )
   }
 
   return (
-    <div className="join-screen">
+    <main className="join-screen" id="contenu-principal" tabIndex={-1}>
       <Logo />
 
       <div>
@@ -131,9 +143,13 @@ export function Join() {
         <Button variant="primary" type="submit" disabled={status === 'pending'}>
           {status === 'pending' ? 'Connexion…' : 'Rejoindre'}
         </Button>
+
+        <p className="join-reassure">Aucun compte, aucune installation — juste un pseudo.</p>
       </form>
 
-      <p className="join-tagline">Arena — quiz en direct, open-source, hébergé chez vous.</p>
-    </div>
+      <p className="join-tagline">
+        Arena — le quiz en direct, open-source. Chez vous ou dans le cloud.
+      </p>
+    </main>
   )
 }

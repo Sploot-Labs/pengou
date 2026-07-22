@@ -29,7 +29,7 @@ export function Podium() {
   }
 
   return (
-    <div className="podium-screen">
+    <main className="podium-screen" id="contenu-principal" tabIndex={-1}>
       <Logo />
       <div style={{ textAlign: 'center' }}>
         <h1 style={{ fontSize: 'var(--fs-display)' }}>Classement final</h1>
@@ -76,9 +76,15 @@ export function Podium() {
           <h2 style={{ marginBottom: 'var(--space-3)' }}>Classement complet</h2>
           <ol className="podium-list">
             {rest.map((p) => (
-              <li key={p.id} className="podium-list__item">
+              <li
+                key={p.id}
+                className={`podium-list__item${p.id === 'you' ? ' podium-list__item--you' : ''}`}
+              >
                 <span className="podium-list__rank">{p.rank}</span>
-                <span>{p.pseudo}</span>
+                <span>
+                  {p.pseudo}
+                  {p.id === 'you' && <span className="ranking-you-tag">(vous)</span>}
+                </span>
                 <span className="podium-list__score">{p.score} pts</span>
               </li>
             ))}
@@ -108,6 +114,6 @@ export function Podium() {
         </a>
         .
       </p>
-    </div>
+    </main>
   )
 }

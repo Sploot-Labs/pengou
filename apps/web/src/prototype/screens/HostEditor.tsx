@@ -62,11 +62,16 @@ function hasTypeSpecificData(q: Question): boolean {
 /** Returns a human reason string when the question is incomplete, else null. */
 function validationError(q: Question): string | null {
   if (q.prompt.trim().length === 0) return 'Intitulé manquant.'
+  // Number fields yield NaN when cleared; reject NaN and out-of-range values so
+  // an invalid duration can never reach the timer, nor an invalid launch.
+  if (!Number.isInteger(q.durationSeconds) || q.durationSeconds < 5 || q.durationSeconds > 120)
+    return 'Durée entre 5 et 120 s.'
+  if (!Number.isInteger(q.points) || q.points < 0) return 'Points positifs requis.'
   switch (q.type) {
     case 'mcq': {
       if (q.options.some((o) => o.label.trim().length === 0))
         return 'Chaque réponse doit avoir un libellé.'
-      if (!q.options.some((o) => o.correct)) return 'Cochez au moins une bonne réponse.'
+      if (!q.options.some((o) => o.correct)) return 'Choisissez la bonne réponse.'
       return null
     }
     case 'text':
@@ -89,9 +94,16 @@ export function HostEditor() {
   const [questions, setQuestions] = useState<Question[]>(mockQuiz.questions)
   const [selectedId, setSelectedId] = useState<string | null>(mockQuiz.questions[0]?.id ?? null)
   const [announcement, setAnnouncement] = useState('')
+  // In-app replacements for window.confirm: a destructive type-change dialog
+  // and an undo affordance for deletion.
+  const [pendingType, setPendingType] = useState<QuestionType | null>(null)
+  const [lastDeleted, setLastDeleted] = useState<{ question: Question; index: number } | null>(null)
 
   const itemRefs = useRef<Map<string, HTMLButtonElement>>(new Map())
   const addRef = useRef<HTMLButtonElement>(null)
+  const typeSelectRef = useRef<HTMLSelectElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const dialogConfirmRef = useRef<HTMLButtonElement>(null)
   const pendingFocus = useRef<{ kind: 'item'; id: string } | { kind: 'add' } | null>(null)
 
   useEffect(() => {
@@ -105,11 +117,22 @@ export function HostEditor() {
     }
   }, [questions])
 
+  // Focus the dialog's primary action when it opens (focus trap in JSX below).
+  useEffect(() => {
+    if (pendingType) dialogConfirmRef.current?.focus()
+  }, [pendingType])
+
   const selectedIndex = questions.findIndex((q) => q.id === selectedId)
   const selected = selectedIndex >= 0 ? questions[selectedIndex] : null
 
   const invalidCount = questions.filter((q) => validationError(q) !== null).length
-  const canLaunch = questions.length > 0 && invalidCount === 0
+  const launchReason =
+    questions.length === 0
+      ? 'Ajoutez au moins une question pour lancer la partie.'
+      : invalidCount > 0
+        ? `${invalidCount} question${invalidCount > 1 ? 's' : ''} à compléter avant de lancer la partie.`
+        : null
+  const canLaunch = launchReason === null
 
   function updateSelected(patch: Partial<Question>) {
     if (!selected) return
@@ -118,15 +141,8 @@ export function HostEditor() {
     )
   }
 
-  function changeType(type: QuestionType) {
+  function applyTypeChange(type: QuestionType) {
     if (!selected) return
-    if (type === selected.type) return
-    if (hasTypeSpecificData(selected)) {
-      const ok = window.confirm(
-        'Changer de type effacera les réponses de cette question. Continuer ?',
-      )
-      if (!ok) return
-    }
     const draft = createDefaultQuestion(type)
     setQuestions((prev) =>
       prev.map((q) =>
@@ -141,6 +157,28 @@ export function HostEditor() {
           : q,
       ),
     )
+  }
+
+  function changeType(type: QuestionType) {
+    if (!selected) return
+    if (type === selected.type) return
+    // Destructive change: confirm via an in-app dialog (no native confirm()).
+    if (hasTypeSpecificData(selected)) {
+      setPendingType(type)
+      return
+    }
+    applyTypeChange(type)
+  }
+
+  function confirmTypeChange() {
+    if (pendingType) applyTypeChange(pendingType)
+    setPendingType(null)
+    typeSelectRef.current?.focus()
+  }
+
+  function cancelTypeChange() {
+    setPendingType(null)
+    typeSelectRef.current?.focus()
   }
 
   function move(index: number, direction: -1 | 1) {
@@ -169,8 +207,9 @@ export function HostEditor() {
   function removeQuestion(id: string) {
     const index = questions.findIndex((q) => q.id === id)
     if (index < 0) return
-    const ok = window.confirm('Supprimer cette question ? Cette action est définitive.')
-    if (!ok) return
+    const removed = questions[index]
+    // Immediate, non-blocking removal + an « Annuler » affordance (no native
+    // confirm dialog). The undo banner restores the question at its position.
     setQuestions((prev) => {
       const next = prev.filter((q) => q.id !== id)
       if (selectedId === id) {
@@ -181,7 +220,21 @@ export function HostEditor() {
       pendingFocus.current = neighbour ? { kind: 'item', id: neighbour.id } : { kind: 'add' }
       return next
     })
-    setAnnouncement('Question supprimée.')
+    setLastDeleted({ question: removed, index })
+    setAnnouncement('Question supprimée. Utilisez « Annuler » pour la restaurer.')
+  }
+
+  function undoDelete() {
+    if (!lastDeleted) return
+    const { question: q, index } = lastDeleted
+    setQuestions((prev) => {
+      const next = [...prev]
+      next.splice(Math.min(index, next.length), 0, q)
+      return next
+    })
+    setSelectedId(q.id)
+    setLastDeleted(null)
+    setAnnouncement('Question restaurée.')
   }
 
   return (
@@ -193,7 +246,15 @@ export function HostEditor() {
           <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>{title}</span>
         </div>
         <div className="host-launch">
-          <Button variant="primary" type="button" disabled={!canLaunch}>
+          <Button
+            variant="primary"
+            type="button"
+            aria-disabled={!canLaunch}
+            aria-describedby={!canLaunch ? 'host-launch-reason' : undefined}
+            onClick={(e) => {
+              if (!canLaunch) e.preventDefault()
+            }}
+          >
             Lancer la partie
           </Button>
           <p className="host-launch__hint">
@@ -202,7 +263,7 @@ export function HostEditor() {
         </div>
       </header>
 
-      <main className="ab-shell__main">
+      <main className="ab-shell__main" id="contenu-principal" tabIndex={-1}>
         <h1 style={{ marginBottom: 'var(--space-4)' }}>Éditeur de quiz</h1>
 
         <div className="host-meta">
@@ -228,10 +289,19 @@ export function HostEditor() {
           </div>
         </div>
 
-        {invalidCount > 0 && (
-          <p className="host-launch__warning" role="status">
-            {invalidCount} question{invalidCount > 1 ? 's' : ''} à compléter avant de lancer la partie.
+        {launchReason && (
+          <p className="host-launch__warning" role="status" id="host-launch-reason">
+            {launchReason}
           </p>
+        )}
+
+        {lastDeleted && (
+          <div className="host-undo" role="status">
+            <span>Question supprimée.</span>
+            <Button variant="ghost" type="button" onClick={undoDelete}>
+              Annuler
+            </Button>
+          </div>
         )}
 
         <div className="host-layout">
@@ -260,7 +330,11 @@ export function HostEditor() {
                           {q.prompt.trim() || 'Question sans intitulé'}
                         </span>
                         {error && (
-                          <span className="host-badge host-badge--warn" title={error}>
+                          <span
+                            className="host-badge host-badge--warn"
+                            title={error}
+                            aria-label={`Incomplète : ${error}`}
+                          >
                             Incomplète
                           </span>
                         )}
@@ -334,6 +408,7 @@ export function HostEditor() {
                     <label htmlFor="q-type">Type de question</label>
                     <select
                       id="q-type"
+                      ref={typeSelectRef}
                       value={selected.type}
                       onChange={(e) => changeType(e.target.value as QuestionType)}
                     >
@@ -550,6 +625,57 @@ export function HostEditor() {
       <p className="visually-hidden" role="status" aria-live="polite">
         {announcement}
       </p>
+
+      {pendingType && (
+        <div className="host-dialog__backdrop">
+          <div
+            className="host-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="host-dialog-title"
+            aria-describedby="host-dialog-desc"
+            ref={dialogRef}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') {
+                e.preventDefault()
+                cancelTypeChange()
+                return
+              }
+              if (e.key !== 'Tab') return
+              const nodes = dialogRef.current?.querySelectorAll<HTMLElement>('button')
+              if (!nodes || nodes.length === 0) return
+              const first = nodes[0]
+              const last = nodes[nodes.length - 1]
+              if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault()
+                last.focus()
+              } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault()
+                first.focus()
+              }
+            }}
+          >
+            <h2 id="host-dialog-title">Changer le type de question ?</h2>
+            <p id="host-dialog-desc" style={{ color: 'var(--ink-dim)' }}>
+              Les réponses saisies pour cette question seront effacées. Le reste (intitulé,
+              durée, points) est conservé.
+            </p>
+            <div className="host-dialog__actions">
+              <Button variant="ghost" type="button" onClick={cancelTypeChange}>
+                Annuler
+              </Button>
+              <Button
+                variant="danger"
+                type="button"
+                onClick={confirmTypeChange}
+                ref={dialogConfirmRef}
+              >
+                Changer de type
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

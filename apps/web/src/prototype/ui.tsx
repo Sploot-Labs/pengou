@@ -172,9 +172,11 @@ interface TimerRingProps {
   remainingSeconds: number
   totalSeconds: number
   size?: number
+  /** Projector scale: enlarges the numeric value to match a big-screen ring. */
+  large?: boolean
 }
 
-export function TimerRing({ remainingSeconds, totalSeconds, size = 96 }: TimerRingProps) {
+export function TimerRing({ remainingSeconds, totalSeconds, size = 96, large = false }: TimerRingProps) {
   const clamped = Math.max(0, Math.min(remainingSeconds, totalSeconds))
   const ratio = totalSeconds > 0 ? clamped / totalSeconds : 0
   const radius = (size - 12) / 2
@@ -199,7 +201,7 @@ export function TimerRing({ remainingSeconds, totalSeconds, size = 96 }: TimerRi
   const urgent = clamped <= 5
 
   return (
-    <div className={`ab-timer${urgent ? ' ab-timer--urgent' : ''}`}>
+    <div className={`ab-timer${urgent ? ' ab-timer--urgent' : ''}${large ? ' ab-timer--xl' : ''}`}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
         <circle
           cx={size / 2}

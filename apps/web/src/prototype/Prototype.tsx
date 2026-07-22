@@ -23,6 +23,9 @@ export function Prototype() {
 
   return (
     <div className="prototype-root">
+      <a className="ab-skip-link" href="#contenu-principal">
+        Aller au contenu
+      </a>
       <nav className="ab-switcher" aria-label="Sélecteur de prototype">
         <span className="ab-switcher__label">Prototype</span>
         <ul className="ab-switcher__nav">

@@ -144,35 +144,99 @@ export function BigScreen() {
   const bars = phase === 'reveal' ? revealBars(question) : null
   const maxCount = bars ? Math.max(1, ...bars.map((b) => b.count)) : 1
 
+  // Live respondent count derived from the countdown, so the monitor moves
+  // instead of showing a frozen « 4 / 7 ».
+  const liveAnswered = Math.min(
+    sessionPlayers.length,
+    Math.round(sessionPlayers.length * (1 - remaining / question.durationSeconds)),
+  )
+
+  /** Read-only answer preview shown during the live question (never a button). */
+  function renderLiveAnswers() {
+    if (question.type === 'mcq') {
+      return (
+        <div className="big-answers">
+          {question.options.map((opt) => (
+            <div
+              key={opt.id}
+              className="big-answer"
+              style={{
+                ['--tile-color' as string]: `var(--ans-${opt.shape})`,
+                ['--tile-ink' as string]: `var(--ans-${opt.shape}-ink)`,
+              }}
+            >
+              <AnswerShape shape={opt.shape} size={36} />
+              <span>{opt.label}</span>
+            </div>
+          ))}
+        </div>
+      )
+    }
+    if (question.type === 'truefalse') {
+      return (
+        <div className="big-answers big-answers--duo">
+          <div className="big-answer big-answer--neutral">Vrai</div>
+          <div className="big-answer big-answer--neutral">Faux</div>
+        </div>
+      )
+    }
+    if (question.type === 'slider') {
+      return (
+        <div className="big-answer__range">
+          <span>
+            De {question.min} à {question.max}
+          </span>
+        </div>
+      )
+    }
+    return (
+      <div className="big-answer__range">
+        <span>Réponse libre — tapez sur votre mobile</span>
+      </div>
+    )
+  }
+
   return (
-    <div className="big-screen">
+    <main className="big-screen" id="contenu-principal" tabIndex={-1}>
       {phase === 'lobby' && (
         <div className="big-lobby">
           <Logo />
           <div>
             <h1 style={{ fontSize: 'var(--fs-display)' }}>{mockQuiz.title}</h1>
-            <p className="big-lobby__tagline">Quiz en direct, open-source, hébergé chez vous.</p>
+            <p className="big-lobby__tagline">Le quiz en direct, open-source.</p>
+            <p className="big-lobby__proof">
+              Vos données restent chez vous. Sans limite de joueurs, sans abonnement par siège.
+            </p>
           </div>
-          <PinDisplay pin={mockGamePin} />
-          <p style={{ color: 'var(--ink-dim)' }}>
-            Rendez-vous sur l’écran « Rejoindre » et saisissez ce code.
+          <p className="big-lobby__address">
+            Rejoignez sur <strong>arena.exemple.fr</strong>
           </p>
+          <PinDisplay pin={mockGamePin} />
 
-          <ul className="big-players" aria-label="Joueurs ayant rejoint la partie">
-            {joined.map((p) => {
-              const off = disconnectedIds.has(p.id)
-              return (
-                <li key={p.id} className={`big-players__chip${off ? ' big-players__chip--off' : ''}`}>
-                  {p.pseudo}
-                  {off && (
-                    <span className="big-players__badge">
-                      <span aria-hidden="true">⚠</span> déconnecté
-                    </span>
-                  )}
-                </li>
-              )
-            })}
-          </ul>
+          {joined.length === 0 ? (
+            <p className="big-lobby__empty">
+              En attente des joueurs… Saisissez le PIN pour rejoindre.
+            </p>
+          ) : (
+            <ul className="big-players" aria-label="Joueurs ayant rejoint la partie">
+              {joined.map((p) => {
+                const off = disconnectedIds.has(p.id)
+                return (
+                  <li
+                    key={p.id}
+                    className={`big-players__chip${off ? ' big-players__chip--off' : ''}`}
+                  >
+                    {p.pseudo}
+                    {off && (
+                      <span className="big-players__badge">
+                        <span aria-hidden="true">⚠</span> déconnecté
+                      </span>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
+          )}
           <p role="status" aria-live="polite">
             {announced}
           </p>
@@ -185,13 +249,20 @@ export function BigScreen() {
             <span className="host-badge">
               Question {questionIndex + 1} / {mockQuiz.questions.length}
             </span>
-            <TimerRing remainingSeconds={remaining} totalSeconds={question.durationSeconds} />
+            <TimerRing
+              remainingSeconds={remaining}
+              totalSeconds={question.durationSeconds}
+              size={180}
+              large
+            />
           </div>
 
           <h1 className="big-live__prompt">{question.prompt}</h1>
 
+          {renderLiveAnswers()}
+
           <p className="big-live__answered">
-            {mockLiveQuestionState.answersReceived} / {sessionPlayers.length} ont répondu
+            {liveAnswered} / {sessionPlayers.length} ont répondu
           </p>
         </div>
       )}
@@ -245,11 +316,21 @@ export function BigScreen() {
             </div>
           ) : null}
 
-          {question.type === 'slider' && (
-            <p className="big-reveal-answer__value" style={{ textAlign: 'center' }}>
-              Valeur correcte : {question.correctValue}
-            </p>
-          )}
+          {question.type === 'slider' &&
+            (() => {
+              const range = Math.max(1, question.max - question.min)
+              const tol = Math.max(1, Math.round(range * 0.05))
+              const lo = Math.max(question.min, question.correctValue - tol)
+              const hi = Math.min(question.max, question.correctValue + tol)
+              return (
+                <div className="big-reveal-answer">
+                  <p className="big-reveal-answer__value">Valeur correcte : {question.correctValue}</p>
+                  <p style={{ color: 'var(--ink-dim)' }}>
+                    Zone acceptée (points de proximité) : {lo} – {hi}
+                  </p>
+                </div>
+              )
+            })()}
         </div>
       )}
 
@@ -258,7 +339,10 @@ export function BigScreen() {
           <h1 style={{ fontSize: 'var(--fs-display)' }}>Classement</h1>
           <ol className="big-scoreboard__list">
             {ranking.slice(0, 5).map((p) => (
-              <li key={p.id} className="big-scoreboard__row">
+              <li
+                key={p.id}
+                className={`big-scoreboard__row${p.id === 'you' ? ' big-scoreboard__row--you' : ''}`}
+              >
                 <span className="big-scoreboard__rank">{p.rank}</span>
                 <span className="big-scoreboard__name">{p.pseudo}</span>
                 <span className="big-scoreboard__score">{p.score} pts</span>
@@ -324,6 +408,6 @@ export function BigScreen() {
           )}
         </div>
       </div>
-    </div>
+    </main>
   )
 }

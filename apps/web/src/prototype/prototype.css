@@ -179,7 +179,8 @@
 
 .ab-tile--selected {
   border-color: var(--ink-strong);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  /* Preserve the arcade drop AND add the selection ring — never flatten. */
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(255, 255, 255, 0.3);
 }
 
 .ab-tile--correct {
@@ -226,6 +227,11 @@
 
 .ab-timer--urgent .ab-timer__value {
   color: var(--brand);
+}
+
+/* Projector-scale timer: the countdown is a hero of the big screen. */
+.ab-timer--xl .ab-timer__value {
+  font-size: 3.25rem;
 }
 
 /* ====================================================================== */
@@ -643,7 +649,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 100%;
   padding: var(--space-5);
   gap: var(--space-5);
   text-align: center;
@@ -711,7 +717,7 @@
 .player-screen {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100%;
   max-width: 480px;
   margin: 0 auto;
   padding: var(--space-4);
@@ -860,13 +866,21 @@
 }
 
 .player-result--correct {
-  background: rgba(20, 163, 139, 0.16);
+  background: rgba(14, 124, 104, 0.16);
+  background: color-mix(in srgb, var(--success) 16%, transparent);
   border: 1px solid var(--success);
 }
 
 .player-result--incorrect {
-  background: rgba(226, 59, 46, 0.16);
+  background: rgba(198, 40, 40, 0.16);
+  background: color-mix(in srgb, var(--danger) 16%, transparent);
   border: 1px solid var(--danger);
+}
+
+.player-result--partial {
+  background: rgba(255, 197, 61, 0.16);
+  background: color-mix(in srgb, var(--gold) 16%, transparent);
+  border: 1px solid var(--gold);
 }
 
 .player-result__points {
@@ -893,7 +907,7 @@
 /* ====================================================================== */
 
 .big-screen {
-  min-height: 100vh;
+  min-height: 100%;
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
@@ -1023,6 +1037,30 @@
   margin-top: var(--space-2);
 }
 
+.big-lobby__proof {
+  color: var(--ink-dim);
+  font-size: var(--fs-small);
+  margin-top: var(--space-2);
+  max-width: 46ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.big-lobby__address {
+  font-size: var(--fs-h2);
+  color: var(--ink);
+}
+
+.big-lobby__address strong {
+  font-family: var(--font-mono);
+  color: var(--ink-strong);
+}
+
+.big-lobby__empty {
+  color: var(--ink-dim);
+  font-style: italic;
+}
+
 .big-players__chip--off {
   opacity: 0.7;
   border-style: dashed;
@@ -1142,7 +1180,7 @@
 /* ====================================================================== */
 
 .podium-screen {
-  min-height: 100vh;
+  min-height: 100%;
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
@@ -1254,4 +1292,199 @@
   color: var(--ink-dim);
   font-size: var(--fs-small);
   text-align: center;
+}
+
+/* Local player highlight in rankings (BigScreen scoreboard + Podium list). */
+.big-scoreboard__row--you,
+.podium-list__item--you {
+  border-color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 14%, var(--surface));
+  background: rgba(255, 61, 127, 0.14);
+  background: color-mix(in srgb, var(--brand) 14%, var(--surface));
+}
+
+.ranking-you-tag {
+  margin-left: var(--space-2);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--brand);
+}
+
+/* ====================================================================== */
+/* Skip link (RGAA — skip the sticky prototype switcher)                  */
+/* ====================================================================== */
+
+.ab-skip-link {
+  position: absolute;
+  left: var(--space-3);
+  top: var(--space-2);
+  z-index: 100;
+  padding: var(--space-2) var(--space-3);
+  background: var(--brand);
+  color: var(--stage);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  transform: translateY(-200%);
+  transition: transform var(--transition-fast);
+}
+
+.ab-skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ====================================================================== */
+/* BigScreen — read-only answer preview during the live question          */
+/* ====================================================================== */
+
+.big-answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  width: min(1000px, 100%);
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .big-answers {
+    grid-template-columns: 1fr;
+  }
+}
+
+.big-answers--duo {
+  grid-template-columns: 1fr 1fr;
+}
+
+.big-answer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 88px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--tile-color);
+  color: var(--tile-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+.big-answer--neutral {
+  background: var(--surface);
+  color: var(--ink-strong);
+  border: 1px solid var(--line);
+}
+
+.big-answer__range {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: min(1000px, 100%);
+  margin: 0 auto;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--fs-h2);
+}
+
+/* ====================================================================== */
+/* Player — commit affordance + result reveal recap                       */
+/* ====================================================================== */
+
+.player-commit-hint {
+  margin-bottom: var(--space-3);
+  text-align: center;
+  color: var(--ink-dim);
+  font-size: var(--fs-small);
+}
+
+.player-result__recap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: min(420px, 100%);
+  margin-top: var(--space-3);
+}
+
+.player-result__recap-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-align: left;
+}
+
+.player-result__recap-line--correct {
+  border-color: var(--success);
+}
+
+.player-result__recap-line--yours {
+  border-color: var(--danger);
+}
+
+.player-result__recap-mark {
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* ====================================================================== */
+/* Join — reassurance line                                                */
+/* ====================================================================== */
+
+.join-reassure {
+  color: var(--ink-dim);
+  font-size: var(--fs-small);
+  max-width: 40ch;
+}
+
+/* ====================================================================== */
+/* HostEditor — undo banner + type-change dialog (replace window.confirm) */
+/* ====================================================================== */
+
+.host-undo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  margin-bottom: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+}
+
+.host-dialog__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: rgba(6, 8, 24, 0.72);
+}
+
+.host-dialog {
+  width: min(440px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+.host-dialog__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }

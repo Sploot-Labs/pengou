@@ -106,6 +106,10 @@
   color: var(--ink-strong);
 }
 
+.prototype-root h1 {
+  font-size: var(--fs-title);
+}
+
 .prototype-root h2 {
   font-size: var(--fs-h2);
 }
