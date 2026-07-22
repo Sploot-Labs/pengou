@@ -29,4 +29,19 @@ describe('loadConfig', () => {
     const cfg = loadConfig({ PORT: '8080' })
     expect(cfg.port).toBe(8080)
   })
+
+  it('par défaut : aucun provider social complet, authUrl par défaut', () => {
+    const cfg = loadConfig({})
+    expect(cfg.authUrl).toBe('http://localhost:3000')
+    expect(cfg.authSecret).toBeUndefined()
+    expect(cfg.oauth.google.clientId).toBeUndefined()
+    expect(cfg.oauth.google.clientSecret).toBeUndefined()
+    expect(cfg.oauth.facebook.clientId).toBeUndefined()
+    expect(cfg.oauth.github.clientId).toBeUndefined()
+  })
+
+  it('expose les identifiants Google quand GOOGLE_CLIENT_ID et GOOGLE_CLIENT_SECRET sont définis', () => {
+    const cfg = loadConfig({ GOOGLE_CLIENT_ID: 'gid', GOOGLE_CLIENT_SECRET: 'gsecret' })
+    expect(cfg.oauth.google).toEqual({ clientId: 'gid', clientSecret: 'gsecret' })
+  })
 })

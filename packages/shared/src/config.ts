@@ -7,7 +7,20 @@ const EnvSchema = z.object({
   DATABASE_URL: z.string().min(1).default('postgres://kahoot:kahoot@localhost:5432/kahoot'),
   REDIS_URL: z.string().min(1).optional(),
   SESSION_SECRET: z.string().min(16).default('dev-secret-change-me-please!!'),
+  BETTER_AUTH_SECRET: z.string().min(32).optional(),
+  BETTER_AUTH_URL: z.string().url().default('http://localhost:3000'),
+  GOOGLE_CLIENT_ID: z.string().optional(),
+  GOOGLE_CLIENT_SECRET: z.string().optional(),
+  FACEBOOK_CLIENT_ID: z.string().optional(),
+  FACEBOOK_CLIENT_SECRET: z.string().optional(),
+  GITHUB_CLIENT_ID: z.string().optional(),
+  GITHUB_CLIENT_SECRET: z.string().optional(),
 })
+
+export type OAuthProviderCreds = {
+  clientId?: string
+  clientSecret?: string
+}
 
 export type AppConfig = {
   nodeEnv: 'development' | 'test' | 'production'
@@ -17,6 +30,13 @@ export type AppConfig = {
   redisUrl?: string
   sessionSecret: string
   scaling: 'memory' | 'redis'
+  authSecret?: string
+  authUrl: string
+  oauth: {
+    google: OAuthProviderCreds
+    facebook: OAuthProviderCreds
+    github: OAuthProviderCreds
+  }
 }
 
 export function loadConfig(env: Record<string, string | undefined> = process.env): AppConfig {
@@ -29,5 +49,12 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     redisUrl: parsed.REDIS_URL,
     sessionSecret: parsed.SESSION_SECRET,
     scaling: parsed.REDIS_URL ? 'redis' : 'memory',
+    authSecret: parsed.BETTER_AUTH_SECRET,
+    authUrl: parsed.BETTER_AUTH_URL,
+    oauth: {
+      google: { clientId: parsed.GOOGLE_CLIENT_ID, clientSecret: parsed.GOOGLE_CLIENT_SECRET },
+      facebook: { clientId: parsed.FACEBOOK_CLIENT_ID, clientSecret: parsed.FACEBOOK_CLIENT_SECRET },
+      github: { clientId: parsed.GITHUB_CLIENT_ID, clientSecret: parsed.GITHUB_CLIENT_SECRET },
+    },
   }
 }
