@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" width="360" height="100" role="img" aria-label="sploot labs">
+  <title>Sploot Labs — logotype</title>
+  <!-- NB: texte non vectorisé. Pour un asset final figé, ouvrir « sploot labs »
+       en Bricolage Grotesque 700, puis Texte -> Vectoriser (outline). -->
+  <text x="8" y="66" font-family="Bricolage Grotesque, Bahnschrift, sans-serif" font-size="64" font-weight="700" letter-spacing="-1.5" fill="#241F18">spl<tspan fill="#D9772B">oo</tspan>t <tspan fill="#6E665A" font-weight="400">labs</tspan></text>
+</svg>

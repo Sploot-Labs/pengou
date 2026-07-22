@@ -1,0 +1,40 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "name": "sploot-labs",
+  "version": "1.0.0",
+  "color": {
+    "brand": {
+      "ginger":      { "light": "#D9772B", "dark": "#E88A3C" },
+      "gingerDeep":  { "light": "#B85F1E", "dark": "#C86E24" },
+      "petrol":      { "light": "#1E5F60", "dark": "#4FA3A0" },
+      "petrolSoft":  { "light": "#2F7C7B", "dark": "#6FBDB8" },
+      "cream":       { "light": "#F5EDDD", "dark": "#F5EDDD" }
+    },
+    "neutral": {
+      "bg":        { "light": "#ECE7DD", "dark": "#17150F" },
+      "surface":   { "light": "#F5F1E9", "dark": "#201D15" },
+      "surface2":  { "light": "#E4DECF", "dark": "#2A261C" },
+      "text":      { "light": "#241F18", "dark": "#EDE7DA" },
+      "muted":     { "light": "#6E665A", "dark": "#A29A8B" },
+      "line":      { "light": "#D8D0C1", "dark": "#34301F" }
+    },
+    "semantic": {
+      "ok":   { "light": "#3F7D57", "dark": "#5FA778" },
+      "warn": { "light": "#C98A2E", "dark": "#E0A64B" },
+      "bad":  { "light": "#C0503A", "dark": "#D96A52" }
+    }
+  },
+  "font": {
+    "display": "Bricolage Grotesque, Bahnschrift, ui-sans-serif, system-ui, sans-serif",
+    "body": "Hanken Grotesk, ui-sans-serif, system-ui, Segoe UI, Roboto, sans-serif",
+    "mono": "JetBrains Mono, ui-monospace, Cascadia Code, SF Mono, Consolas, monospace"
+  },
+  "fontSource": {
+    "display": "https://fontsource.org/fonts/bricolage-grotesque",
+    "body": "https://fontsource.org/fonts/hanken-grotesk",
+    "mono": "https://fontsource.org/fonts/jetbrains-mono"
+  },
+  "scale": { "px": [12, 14, 16, 20, 25, 31, 39, 49] },
+  "radius": { "card": "14px", "pill": "999px" },
+  "layout": { "maxWidth": "1080px", "gap": "18px" }
+}

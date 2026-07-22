@@ -1,0 +1,70 @@
+/* ============================================================
+   Sploot Labs — Design Tokens
+   Réagit à prefers-color-scheme ET à data-theme="dark|light".
+   Style toujours via les tokens, jamais des hex en dur.
+   ============================================================ */
+
+:root {
+  /* Brand */
+  --sploot-ginger:      #D9772B;
+  --sploot-ginger-deep: #B85F1E;
+  --sploot-petrol:      #1E5F60;
+  --sploot-petrol-soft: #2F7C7B;
+  --sploot-cream:       #F5EDDD;
+
+  /* Neutres (biais chaud) */
+  --sploot-bg:        #ECE7DD;
+  --sploot-surface:   #F5F1E9;
+  --sploot-surface-2: #E4DECF;
+  --sploot-text:      #241F18;
+  --sploot-muted:     #6E665A;
+  --sploot-line:      #D8D0C1;
+
+  /* Sémantique (séparé de l'accent) */
+  --sploot-ok:   #3F7D57;
+  --sploot-warn: #C98A2E;
+  --sploot-bad:  #C0503A;
+
+  /* Type */
+  --font-display: "Bricolage Grotesque", "Bahnschrift", ui-sans-serif, system-ui, sans-serif;
+  --font-body:    "Hanken Grotesk", ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "Cascadia Code", "SF Mono", Consolas, Menlo, monospace;
+
+  /* Layout */
+  --sploot-radius:      14px;
+  --sploot-radius-pill: 999px;
+  --sploot-maxw:        1080px;
+  --sploot-gap:         18px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sploot-ginger:      #E88A3C;
+    --sploot-ginger-deep: #C86E24;
+    --sploot-petrol:      #4FA3A0;
+    --sploot-petrol-soft: #6FBDB8;
+    --sploot-bg:        #17150F;
+    --sploot-surface:   #201D15;
+    --sploot-surface-2: #2A261C;
+    --sploot-text:      #EDE7DA;
+    --sploot-muted:     #A29A8B;
+    --sploot-line:      #34301F;
+    --sploot-ok:   #5FA778;
+    --sploot-warn: #E0A64B;
+    --sploot-bad:  #D96A52;
+  }
+}
+
+/* Toggle manuel — gagne dans les deux sens */
+:root[data-theme="light"] {
+  --sploot-ginger:#D9772B; --sploot-ginger-deep:#B85F1E; --sploot-petrol:#1E5F60; --sploot-petrol-soft:#2F7C7B;
+  --sploot-bg:#ECE7DD; --sploot-surface:#F5F1E9; --sploot-surface-2:#E4DECF;
+  --sploot-text:#241F18; --sploot-muted:#6E665A; --sploot-line:#D8D0C1;
+  --sploot-ok:#3F7D57; --sploot-warn:#C98A2E; --sploot-bad:#C0503A;
+}
+:root[data-theme="dark"] {
+  --sploot-ginger:#E88A3C; --sploot-ginger-deep:#C86E24; --sploot-petrol:#4FA3A0; --sploot-petrol-soft:#6FBDB8;
+  --sploot-bg:#17150F; --sploot-surface:#201D15; --sploot-surface-2:#2A261C;
+  --sploot-text:#EDE7DA; --sploot-muted:#A29A8B; --sploot-line:#34301F;
+  --sploot-ok:#5FA778; --sploot-warn:#E0A64B; --sploot-bad:#D96A52;
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32" role="img" aria-label="Sploot Labs">
+  <rect x="4" y="4" width="92" height="92" rx="24" fill="#D9772B"/>
+  <path d="M26 30 L22 12 L44 26 Z" fill="#B85F1E"/>
+  <path d="M74 30 L78 12 L56 26 Z" fill="#B85F1E"/>
+  <path d="M22 52 Q22 40 34 38 L66 38 Q78 40 78 52 L78 60 Q78 78 50 80 Q22 78 22 60 Z" fill="#F5EDDD"/>
+  <circle cx="39" cy="54" r="5" fill="#241F18"/>
+  <circle cx="61" cy="54" r="5" fill="#241F18"/>
+</svg>

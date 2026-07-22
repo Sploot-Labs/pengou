@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="256" height="256" role="img" aria-label="Sploot — vue de dessus">
+  <title>Sploot Labs — marque signature (sploot vu du ciel)</title>
+  <path d="M32 20 L24 6 L44 16 Z" fill="#D9772B"/>
+  <path d="M68 20 L76 6 L56 16 Z" fill="#D9772B"/>
+  <ellipse cx="50" cy="52" rx="30" ry="34" fill="#D9772B"/>
+  <rect x="10" y="74" width="26" height="14" rx="7" transform="rotate(24 23 81)" fill="#D9772B"/>
+  <rect x="64" y="74" width="26" height="14" rx="7" transform="rotate(-24 77 81)" fill="#D9772B"/>
+  <circle cx="42" cy="40" r="3.4" fill="#17150F"/>
+  <circle cx="58" cy="40" r="3.4" fill="#17150F"/>
+</svg>
