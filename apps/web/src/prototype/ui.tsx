@@ -238,12 +238,21 @@ export function TimerRing({ remainingSeconds, totalSeconds, size = 96, large = f
 /* PinDisplay — the signature PIN Marquee                               */
 /* ------------------------------------------------------------------ */
 
-export function PinDisplay({ pin, label = 'Code PIN de la partie' }: { pin: string; label?: string }) {
+export function PinDisplay({
+  pin,
+  label = 'Code PIN de la partie',
+  compact = false,
+}: {
+  pin: string
+  label?: string
+  /** Smaller marquee for cramped headers (e.g. HostLive) — same signature element, scaled down. */
+  compact?: boolean
+}) {
   const digits = pin.split('')
   const spaced = digits.join(' ')
 
   return (
-    <div className="ab-pin">
+    <div className={`ab-pin${compact ? ' ab-pin--compact' : ''}`}>
       <span className="ab-pin__panel" aria-hidden="true">
         {digits.map((digit, index) => (
           <span className="ab-pin__digit" key={index}>

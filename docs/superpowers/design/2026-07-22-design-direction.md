@@ -62,6 +62,7 @@ Le **PIN Marquee** : le code de partie affiché comme un high-score de borne —
 3. **PlayerLive** — écran joueur (mobile-first) : les 4 tuiles forme+couleur, états attente / question / résultat (bon/mauvais + points + rang).
 4. **BigScreen** — présentateur/vidéoprojecteur : lobby (PIN + joueurs qui affluent), question + distribution des réponses en direct + anneau de décompte.
 5. **Podium** — top 3 (or/argent/bronze), classement complet, actions de fin.
+6. **HostLive** — le contrôleur hôte live : la télécommande de l'opérateur (laptop ou mobile), distincte du grand écran projeté. Phases identiques au grand écran (lobby / question / révélation / classement / fin), mais ici l'hôte voit la bonne réponse et pilote le rythme (« Lancer la partie », compteur de répondants en direct, distribution des réponses qui se forme, « Révéler la réponse » / « Passer », « Question suivante »). Classement des joueurs affiché en panneau.
 
 Un **sélecteur de prototype** (barre discrète) permet de naviguer entre écrans pour l'audit.
 

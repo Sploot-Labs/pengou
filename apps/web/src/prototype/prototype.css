@@ -306,6 +306,18 @@
   }
 }
 
+/* Compact marquee — same signature element, scaled for cramped headers
+   (HostLive's operator remote). Still the PIN Marquee, never plain text. */
+.ab-pin--compact .ab-pin__panel {
+  padding: var(--space-1) var(--space-2);
+  gap: 2px;
+}
+
+.ab-pin--compact .ab-pin__digit {
+  padding: 2px var(--space-1);
+  font-size: 1.1rem;
+}
+
 /* ====================================================================== */
 /* Shared app shell                                                        */
 /* ====================================================================== */
@@ -1585,4 +1597,270 @@
   gap: var(--space-3);
   flex-wrap: wrap;
   justify-content: flex-end;
+}
+
+/* ====================================================================== */
+/* HostLive — the operator's remote (control panel, not the projection)   */
+/* ====================================================================== */
+
+.hostlive-header {
+  gap: var(--space-3);
+}
+
+.hostlive-header__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.hostlive-header__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-small);
+  color: var(--ink-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hostlive-header__status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.hostlive-main {
+  padding: var(--space-4);
+}
+
+.hostlive-layout {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.hostlive-primary {
+  flex: 3 1 420px;
+  min-width: 0;
+}
+
+.hostlive-aside {
+  flex: 1 1 240px;
+  min-width: 220px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+@media (max-width: 640px) {
+  .hostlive-layout {
+    flex-direction: column;
+  }
+  .hostlive-aside {
+    min-width: 0;
+  }
+}
+
+.hostlive-phase {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.hostlive-phase__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.hostlive-phase__header h2 {
+  flex: 1;
+  min-width: 220px;
+}
+
+.hostlive-progress {
+  font-family: var(--font-mono);
+  font-size: var(--fs-h2);
+  color: var(--ink-dim);
+}
+
+.hostlive-empty {
+  color: var(--ink-dim);
+  font-style: italic;
+}
+
+.hostlive-players {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.hostlive-players__chip {
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-2);
+  border-radius: 999px;
+  font-weight: 600;
+  border: 1px solid var(--line);
+}
+
+.hostlive-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.hostlive-controls__hint {
+  font-size: var(--fs-small);
+  color: var(--ink-dim);
+}
+
+/* Answer distribution — horizontal bars suit the narrow control-panel /
+   phone layout better than BigScreen's vertical columns. */
+.hostlive-answers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.hostlive-answer-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.hostlive-answer-row--correct {
+  border-color: var(--gold);
+}
+
+.hostlive-answer-row__shape {
+  display: inline-flex;
+  grid-row: 1;
+}
+
+.hostlive-answer-row__label {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-weight: 700;
+  grid-column: 2;
+}
+
+.hostlive-answer-row__correct-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.hostlive-answer-row__count {
+  font-family: var(--font-mono);
+  color: var(--ink-dim);
+  grid-column: 3;
+  text-align: right;
+  min-width: 2ch;
+}
+
+.hostlive-answer-row__bar-track {
+  grid-column: 1 / -1;
+  display: block;
+  height: 10px;
+  background: var(--stage);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.hostlive-answer-row__bar {
+  display: block;
+  height: 100%;
+  background: var(--brand-2);
+  transition: width var(--transition-base);
+}
+
+.hostlive-answer-row--correct .hostlive-answer-row__bar {
+  background: var(--gold);
+}
+
+.hostlive-text-answer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.hostlive-text-answer__label {
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: var(--fs-small);
+}
+
+.hostlive-text-answer__value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-h2);
+  color: var(--gold);
+}
+
+.hostlive-board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.hostlive-board__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.hostlive-aside .hostlive-board__row {
+  background: var(--surface);
+}
+
+.hostlive-board__rank {
+  font-family: var(--font-mono);
+  color: var(--ink-dim);
+  width: 2ch;
+  flex-shrink: 0;
+}
+
+.hostlive-board__rank--first {
+  color: var(--gold);
+}
+
+.hostlive-board__name {
+  flex: 1;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hostlive-board__score {
+  font-family: var(--font-mono);
+  flex-shrink: 0;
 }

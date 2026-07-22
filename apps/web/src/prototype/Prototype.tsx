@@ -3,14 +3,16 @@ import './tokens.css'
 import './prototype.css'
 import { BigScreen } from './screens/BigScreen'
 import { HostEditor } from './screens/HostEditor'
+import { HostLive } from './screens/HostLive'
 import { Join } from './screens/Join'
 import { Podium } from './screens/Podium'
 import { PlayerLive } from './screens/PlayerLive'
 
-type ScreenKey = 'host' | 'join' | 'player' | 'big' | 'podium'
+type ScreenKey = 'host' | 'hostlive' | 'join' | 'player' | 'big' | 'podium'
 
 const SCREENS: { key: ScreenKey; label: string; render: () => JSX.Element }[] = [
   { key: 'host', label: 'Éditeur (backstage)', render: () => <HostEditor /> },
+  { key: 'hostlive', label: 'Contrôleur hôte live', render: () => <HostLive /> },
   { key: 'join', label: 'Rejoindre', render: () => <Join /> },
   { key: 'player', label: 'Joueur (mobile)', render: () => <PlayerLive /> },
   { key: 'big', label: 'Grand écran', render: () => <BigScreen /> },
