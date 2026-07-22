@@ -31,3 +31,16 @@ app
     dbUp = false
     process.exit(1)
   })
+
+// Fastify n'installe pas de handlers SIGTERM/SIGINT lui-même : sans ça, `docker stop` /
+// `docker compose down` tue le process directement et le hook onClose (fermeture du client pg)
+// ne s'exécute jamais.
+for (const signal of ['SIGTERM', 'SIGINT'] as const) {
+  process.on(signal, () => {
+    app.log.info(`signal ${signal} reçu, arrêt gracieux du serveur...`)
+    app
+      .close()
+      .then(() => process.exit(0))
+      .catch(() => process.exit(1))
+  })
+}
