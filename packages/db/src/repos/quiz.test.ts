@@ -1,0 +1,47 @@
+import { describe, it, expect, afterAll, beforeAll } from 'vitest'
+import { startTestDb } from '../test-helpers.js'
+import { runMigrations } from '../migrate.js'
+import { schema } from '../index.js'
+import { tenantScope } from '../tenant.js'
+import { createQuiz, listQuizzes, getQuiz } from './quiz.js'
+
+let ctx: Awaited<ReturnType<typeof startTestDb>>
+let tenantA: string
+let tenantB: string
+let ownerA: string
+let ownerB: string
+
+beforeAll(async () => {
+  ctx = await startTestDb()
+  await runMigrations(ctx.db)
+  const [tA] = await ctx.db.insert(schema.tenant).values({ name: 'Tenant A' }).returning()
+  const [tB] = await ctx.db.insert(schema.tenant).values({ name: 'Tenant B' }).returning()
+  const [uA] = await ctx.db.insert(schema.user).values({ email: 'a@x.fr' }).returning()
+  const [uB] = await ctx.db.insert(schema.user).values({ email: 'b@x.fr' }).returning()
+  tenantA = tA.id; tenantB = tB.id; ownerA = uA.id; ownerB = uB.id
+}, 120_000)
+
+afterAll(async () => { await ctx?.stop() })
+
+describe('repo quiz scoped par tenant', () => {
+  it('createQuiz écrit le tenant_id du scope', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    const q = await createQuiz(scope, { ownerId: ownerA, title: 'Quiz A1' })
+    expect(q.tenantId).toBe(tenantA)
+  })
+
+  it('listQuizzes ne renvoie que les quiz du tenant du scope', async () => {
+    await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerB, title: 'Quiz B1' })
+    const listA = await listQuizzes(tenantScope(ctx.db, tenantA))
+    const listB = await listQuizzes(tenantScope(ctx.db, tenantB))
+    expect(listA.every((q) => q.tenantId === tenantA)).toBe(true)
+    expect(listB.every((q) => q.tenantId === tenantB)).toBe(true)
+    expect(listA.some((q) => q.title === 'Quiz B1')).toBe(false)
+  })
+
+  it('getQuiz renvoie null pour un quiz d\'un autre tenant (pas de fuite)', async () => {
+    const qb = await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerB, title: 'Quiz B2' })
+    const leaked = await getQuiz(tenantScope(ctx.db, tenantA), qb.id)
+    expect(leaked).toBeNull()
+  })
+})
