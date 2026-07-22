@@ -154,7 +154,7 @@ Trois briques (le **suivi longitudinal inter-parties est explicitement hors pér
 `tenant_id` présent **partout où pertinent** dès le départ (coût quasi nul, gros refactor évité).
 
 - **tenant** — `id, name, plan, created_at`. En `TENANCY_MODE=single` : une ligne unique implicite.
-- **user** (hôte/créateur) — `id, tenant_id, email, password_hash?, role, created_at`.
+- **user** (hôte/créateur) — `id, email, password_hash?, created_at`. **Identité globale, PAS de `tenant_id`** (raffiné 2026-07-22) : le lien user↔tenant et le rôle vivent dans `membership`.
 - **oauth_account** — `id, user_id, provider, provider_account_id`. (Google, GitHub par défaut.)
 - **membership** — `id, user_id, tenant_id, role`. Support d'un utilisateur appartenant à ≥1 organisation ; base du **sélecteur d'organisation**.
 - **quiz** — `id, tenant_id, owner_id, title, description, cover?, created_at, updated_at`.
