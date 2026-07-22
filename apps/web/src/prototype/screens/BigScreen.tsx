@@ -1,75 +1,127 @@
 import { useEffect, useRef, useState } from 'react'
-import { mockGamePin, mockPlayers, mockQuiz } from '../mockData'
+import {
+  getRanking,
+  mockGamePin,
+  mockLiveQuestionState,
+  sessionPlayers,
+} from '../mockData'
 import type { AnswerShapeKind, Question } from '../mockData'
-import { AnswerShape, Button, PinDisplay, TimerRing } from '../ui'
+import { AnswerShape, Button, Logo, PinDisplay, TimerRing } from '../ui'
+import { mockQuiz } from '../mockData'
 
-type Phase = 'lobby' | 'live'
+type Phase = 'lobby' | 'question' | 'reveal' | 'scoreboard' | 'end'
 
 /** Mock per-answer counts, indexed to match each question's option order
- * (for mcq/truefalse). Purely illustrative for the prototype. */
+ * (mcq/truefalse) or slider buckets. Purely illustrative for the prototype. */
 const mockDistributions: Record<string, number[]> = {
-  q1: [1, 4, 0, 1],
-  q2: [4, 2],
-  q3: [0, 1, 5, 0],
-  q5: [1, 2, 2, 1, 0],
+  q1: [1, 4, 0, 2],
+  q2: [5, 2],
+  q3: [0, 1, 6, 0],
+  q5: [1, 2, 3, 1, 0],
 }
 
 interface DistributionBar {
-  shape: AnswerShapeKind
   label: string
   count: number
+  correct: boolean
+  /** QCM answer shape, or null for true/false and slider buckets. */
+  shape: AnswerShapeKind | null
+  color: string
 }
 
-function distributionFor(question: Question): DistributionBar[] | null {
+/** Build the distribution shown only at REVEAL — never during the countdown. */
+function revealBars(question: Question): DistributionBar[] | null {
   if (question.type === 'mcq') {
     const counts = mockDistributions[question.id] ?? question.options.map(() => 0)
-    return question.options.map((opt, i) => ({ shape: opt.shape, label: opt.label, count: counts[i] ?? 0 }))
+    return question.options.map((opt, i) => ({
+      label: opt.label,
+      count: counts[i] ?? 0,
+      correct: opt.correct,
+      shape: opt.shape,
+      color: `var(--ans-${opt.shape})`,
+    }))
   }
   if (question.type === 'truefalse') {
     const counts = mockDistributions[question.id] ?? [0, 0]
+    // Neutral bars — no invented QCM shape/colour on the projector.
     return [
-      { shape: 'triangle', label: 'Vrai', count: counts[0] ?? 0 },
-      { shape: 'diamond', label: 'Faux', count: counts[1] ?? 0 },
+      { label: 'Vrai', count: counts[0] ?? 0, correct: question.correctAnswer === true, shape: null, color: 'var(--brand-2)' },
+      { label: 'Faux', count: counts[1] ?? 0, correct: question.correctAnswer === false, shape: null, color: 'var(--brand-2)' },
     ]
+  }
+  if (question.type === 'slider') {
+    const counts = mockDistributions[question.id] ?? [0, 0, 0, 0, 0]
+    const buckets = counts.length
+    const span = (question.max - question.min) / buckets
+    const correctBucket = Math.min(
+      buckets - 1,
+      Math.floor((question.correctValue - question.min) / span),
+    )
+    return counts.map((count, i) => {
+      const lo = Math.round(question.min + i * span)
+      const hi = Math.round(question.min + (i + 1) * span)
+      return {
+        label: `${lo}–${hi}`,
+        count,
+        correct: i === correctBucket,
+        shape: null,
+        color: 'var(--brand-2)',
+      }
+    })
   }
   return null
 }
 
 export function BigScreen() {
   const [phase, setPhase] = useState<Phase>('lobby')
-  const [joined, setJoined] = useState<typeof mockPlayers>([])
+  const [joined, setJoined] = useState<typeof sessionPlayers>([])
   const [questionIndex, setQuestionIndex] = useState(0)
   const [remaining, setRemaining] = useState(mockQuiz.questions[0].durationSeconds)
-  const announceRef = useRef<HTMLParagraphElement>(null)
+  const [disconnectedIds, setDisconnectedIds] = useState<Set<string>>(new Set())
+  const [announced, setAnnounced] = useState('')
 
   const question = mockQuiz.questions[questionIndex]
+  const isLast = questionIndex === mockQuiz.questions.length - 1
 
+  // Lobby: players trickle in.
   useEffect(() => {
     if (phase !== 'lobby') return
-    if (joined.length >= mockPlayers.length) return
+    if (joined.length >= sessionPlayers.length) return
     const timer = window.setTimeout(() => {
-      setJoined((prev) => [...prev, mockPlayers[prev.length]])
+      setJoined((prev) => [...prev, sessionPlayers[prev.length]])
     }, 900)
     return () => window.clearTimeout(timer)
   }, [phase, joined])
 
+  // Debounced screen-reader announcement of the joined count (avoids 7 rapid
+  // announcements as players arrive one after another).
   useEffect(() => {
-    if (phase !== 'live') return
+    if (phase !== 'lobby') return
+    const timer = window.setTimeout(() => {
+      const verb = joined.length > 1 ? 'ont' : 'a'
+      setAnnounced(`${joined.length} joueur${joined.length > 1 ? 's' : ''} sur ${sessionPlayers.length} ${verb} rejoint la partie.`)
+    }, 600)
+    return () => window.clearTimeout(timer)
+  }, [phase, joined])
+
+  // Countdown only during the active question.
+  useEffect(() => {
+    if (phase !== 'question') return
     if (remaining <= 0) return
     const timer = window.setTimeout(() => setRemaining((s) => s - 1), 1000)
     return () => window.clearTimeout(timer)
   }, [phase, remaining])
 
   function startGame() {
-    setPhase('live')
+    setPhase('question')
     setQuestionIndex(0)
     setRemaining(mockQuiz.questions[0].durationSeconds)
   }
 
-  function nextQuestion() {
-    const next = (questionIndex + 1) % mockQuiz.questions.length
-    setQuestionIndex(next)
-    setRemaining(mockQuiz.questions[next].durationSeconds)
+  function goToQuestion(index: number) {
+    setQuestionIndex(index)
+    setRemaining(mockQuiz.questions[index].durationSeconds)
+    setPhase('question')
   }
 
   function restartLobby() {
@@ -77,38 +129,57 @@ export function BigScreen() {
     setJoined([])
   }
 
-  const bars = distributionFor(question)
+  function toggleDisconnect() {
+    setDisconnectedIds((prev) => {
+      const next = new Set(prev)
+      const last = joined[joined.length - 1]
+      if (!last) return prev
+      if (next.has(last.id)) next.delete(last.id)
+      else next.add(last.id)
+      return next
+    })
+  }
+
+  const ranking = getRanking(sessionPlayers)
+  const bars = phase === 'reveal' ? revealBars(question) : null
   const maxCount = bars ? Math.max(1, ...bars.map((b) => b.count)) : 1
 
   return (
     <div className="big-screen">
       {phase === 'lobby' && (
         <div className="big-lobby">
-          <h1 style={{ fontSize: 'var(--fs-display)' }}>{mockQuiz.title}</h1>
+          <Logo />
+          <div>
+            <h1 style={{ fontSize: 'var(--fs-display)' }}>{mockQuiz.title}</h1>
+            <p className="big-lobby__tagline">Quiz en direct, open-source, hébergé chez vous.</p>
+          </div>
           <PinDisplay pin={mockGamePin} />
           <p style={{ color: 'var(--ink-dim)' }}>
             Rendez-vous sur l’écran « Rejoindre » et saisissez ce code.
           </p>
 
           <ul className="big-players" aria-label="Joueurs ayant rejoint la partie">
-            {joined.map((p) => (
-              <li key={p.id} className="big-players__chip">
-                {p.pseudo}
-              </li>
-            ))}
+            {joined.map((p) => {
+              const off = disconnectedIds.has(p.id)
+              return (
+                <li key={p.id} className={`big-players__chip${off ? ' big-players__chip--off' : ''}`}>
+                  {p.pseudo}
+                  {off && (
+                    <span className="big-players__badge">
+                      <span aria-hidden="true">⚠</span> déconnecté
+                    </span>
+                  )}
+                </li>
+              )
+            })}
           </ul>
-          <p role="status" aria-live="polite" ref={announceRef}>
-            {joined.length} joueur{joined.length > 1 ? 's' : ''} sur {mockPlayers.length} a rejoint
-            la partie.
+          <p role="status" aria-live="polite">
+            {announced}
           </p>
-
-          <Button variant="primary" type="button" onClick={startGame}>
-            Lancer la partie
-          </Button>
         </div>
       )}
 
-      {phase === 'live' && (
+      {phase === 'question' && (
         <div className="big-live">
           <div className="big-live__header">
             <span className="host-badge">
@@ -119,53 +190,140 @@ export function BigScreen() {
 
           <h1 className="big-live__prompt">{question.prompt}</h1>
 
+          <p className="big-live__answered">
+            {mockLiveQuestionState.answersReceived} / {sessionPlayers.length} ont répondu
+          </p>
+        </div>
+      )}
+
+      {phase === 'reveal' && (
+        <div className="big-live">
+          <div className="big-live__header">
+            <span className="host-badge">
+              Question {questionIndex + 1} / {mockQuiz.questions.length} — révélation
+            </span>
+          </div>
+
+          <h1 className="big-live__prompt">{question.prompt}</h1>
+
           {bars ? (
-            <div className="big-distribution">
-              {bars.map((bar) => (
-                <div className="big-distribution__col" key={bar.label}>
+            <div
+              className="big-distribution"
+              style={{ ['--dist-cols' as string]: String(bars.length) }}
+            >
+              {bars.map((bar, i) => (
+                <div
+                  className={`big-distribution__col${bar.correct ? ' big-distribution__col--correct' : ''}`}
+                  key={`${bar.label}-${i}`}
+                >
                   <div className="big-distribution__bar-track">
                     <div
                       className="big-distribution__bar"
                       style={{
                         height: `${(bar.count / maxCount) * 100}%`,
-                        ['--bar-color' as string]: `var(${
-                          bar.shape === 'triangle'
-                            ? '--ans-triangle'
-                            : bar.shape === 'diamond'
-                              ? '--ans-diamond'
-                              : bar.shape === 'circle'
-                                ? '--ans-circle'
-                                : '--ans-square'
-                        })`,
+                        ['--bar-color' as string]: bar.color,
                       }}
                     />
                   </div>
                   <span className="big-distribution__label">
-                    <AnswerShape shape={bar.shape} size={20} />
+                    {bar.shape && <AnswerShape shape={bar.shape} size={20} />}
                     {bar.label}
+                    {bar.correct && <span className="big-distribution__check" aria-hidden="true">✓</span>}
+                    {bar.correct && <span className="visually-hidden"> (bonne réponse)</span>}
                   </span>
                   <span className="big-distribution__count">{bar.count} réponse(s)</span>
                 </div>
               ))}
             </div>
           ) : question.type === 'text' ? (
-            <p className="ab-empty-state">5 réponses libres reçues sur {mockPlayers.length}.</p>
-          ) : question.type === 'slider' ? (
-            <p className="ab-empty-state">
-              Estimation moyenne des joueurs : {question.correctValue} (valeur correcte)
-            </p>
+            <div className="big-reveal-answer">
+              <p className="big-reveal-answer__label">Réponse(s) acceptée(s)</p>
+              <p className="big-reveal-answer__value">{question.acceptedAnswers.join(' · ')}</p>
+              <p style={{ color: 'var(--ink-dim)' }}>
+                {mockLiveQuestionState.answersReceived} réponses libres reçues sur {sessionPlayers.length}.
+              </p>
+            </div>
           ) : null}
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 'var(--space-3)' }}>
-            <Button variant="ghost" type="button" onClick={restartLobby}>
-              Retour au lobby (démo)
-            </Button>
-            <Button variant="primary" type="button" onClick={nextQuestion}>
-              Question suivante
-            </Button>
-          </div>
+          {question.type === 'slider' && (
+            <p className="big-reveal-answer__value" style={{ textAlign: 'center' }}>
+              Valeur correcte : {question.correctValue}
+            </p>
+          )}
         </div>
       )}
+
+      {phase === 'scoreboard' && (
+        <div className="big-scoreboard">
+          <h1 style={{ fontSize: 'var(--fs-display)' }}>Classement</h1>
+          <ol className="big-scoreboard__list">
+            {ranking.slice(0, 5).map((p) => (
+              <li key={p.id} className="big-scoreboard__row">
+                <span className="big-scoreboard__rank">{p.rank}</span>
+                <span className="big-scoreboard__name">{p.pseudo}</span>
+                <span className="big-scoreboard__score">{p.score} pts</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+
+      {phase === 'end' && (
+        <div className="big-lobby">
+          <h1 style={{ fontSize: 'var(--fs-display)' }}>Partie terminée</h1>
+          <p style={{ color: 'var(--ink-dim)' }}>
+            Toutes les questions ont été jouées. Place au classement final.
+          </p>
+          <p style={{ color: 'var(--ink-dim)' }}>
+            Ouvrez l’écran « Podium » pour le classement complet.
+          </p>
+        </div>
+      )}
+
+      {/* Demo control bar — this projector view is read-only (§5.2); these
+          buttons only simulate what the host would drive from backstage. */}
+      <div className="big-dev-controls">
+        <p className="big-dev-controls__label">
+          Contrôles de démonstration (piloterait l’hôte, pas le projecteur)
+        </p>
+        <div className="big-dev-controls__row">
+          {phase === 'lobby' && (
+            <Button variant="primary" type="button" onClick={startGame}>
+              Lancer la partie
+            </Button>
+          )}
+          {phase === 'lobby' && joined.length > 0 && (
+            <Button variant="ghost" type="button" onClick={toggleDisconnect}>
+              Simuler une déconnexion
+            </Button>
+          )}
+          {phase === 'question' && (
+            <Button variant="primary" type="button" onClick={() => setPhase('reveal')}>
+              Révéler les réponses
+            </Button>
+          )}
+          {phase === 'reveal' && (
+            <Button variant="primary" type="button" onClick={() => setPhase('scoreboard')}>
+              Afficher le classement
+            </Button>
+          )}
+          {phase === 'scoreboard' &&
+            (isLast ? (
+              <Button variant="primary" type="button" onClick={() => setPhase('end')}>
+                Voir le podium
+              </Button>
+            ) : (
+              <Button variant="primary" type="button" onClick={() => goToQuestion(questionIndex + 1)}>
+                Question suivante
+              </Button>
+            ))}
+          {phase !== 'lobby' && (
+            <Button variant="ghost" type="button" onClick={restartLobby}>
+              Retour au lobby
+            </Button>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

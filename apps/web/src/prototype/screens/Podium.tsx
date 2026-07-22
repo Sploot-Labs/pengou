@@ -36,17 +36,9 @@ export function Podium() {
         <p style={{ color: 'var(--ink-dim)' }}>{mockQuiz.title}</p>
       </div>
 
+      {/* DOM order is 1-2-3 (logical reading/tab order); CSS `order` renders
+          the classic 2-1-3 podium shape visually. */}
       <div className="podium-top3" aria-label="Podium des trois premiers">
-        {silver && (
-          <div className="podium-step podium-step--silver">
-            <span className="visually-hidden">2ᵉ place</span>
-            <div className="podium-step__block" aria-hidden="true">
-              2
-            </div>
-            <strong>{silver.pseudo}</strong>
-            <span style={{ fontFamily: 'var(--font-mono)' }}>{silver.score} pts</span>
-          </div>
-        )}
         {gold && (
           <div className="podium-step podium-step--gold">
             <span className="visually-hidden">1ʳᵉ place</span>
@@ -55,6 +47,16 @@ export function Podium() {
             </div>
             <strong>{gold.pseudo}</strong>
             <span style={{ fontFamily: 'var(--font-mono)' }}>{gold.score} pts</span>
+          </div>
+        )}
+        {silver && (
+          <div className="podium-step podium-step--silver">
+            <span className="visually-hidden">2ᵉ place</span>
+            <div className="podium-step__block" aria-hidden="true">
+              2
+            </div>
+            <strong>{silver.pseudo}</strong>
+            <span style={{ fontFamily: 'var(--font-mono)' }}>{silver.score} pts</span>
           </div>
         )}
         {bronze && (
@@ -71,7 +73,7 @@ export function Podium() {
 
       <section aria-label="Classement complet" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <div style={{ width: 'min(560px, 100%)' }}>
-          <h2 style={{ fontSize: '1.1rem', marginBottom: 'var(--space-3)' }}>Classement complet</h2>
+          <h2 style={{ marginBottom: 'var(--space-3)' }}>Classement complet</h2>
           <ol className="podium-list">
             {rest.map((p) => (
               <li key={p.id} className="podium-list__item">
@@ -98,6 +100,14 @@ export function Podium() {
           {message}
         </p>
       )}
+
+      <p className="podium-convert">
+        Arena est open-source.{' '}
+        <a href="#host" onClick={(e) => e.preventDefault()}>
+          Créez votre quiz et hébergez le vôtre
+        </a>
+        .
+      </p>
     </div>
   )
 }

@@ -131,8 +131,19 @@ export const mockPlayers: Player[] = [
   { id: 'p6', pseudo: 'ZebreDeMinuit', score: 4300 },
 ]
 
+/**
+ * The local player ("Vous"). Included in the single session dataset so that
+ * lobby → live → provisional ranking → podium all describe the same game.
+ * Its score is a plausible default used by BigScreen/Podium; PlayerLive
+ * overrides it with the live score accumulated on the device.
+ */
+export const youPlayer: Player = { id: 'you', pseudo: 'Vous', score: 6800 }
+
+/** Coherent per-session player set shared by every screen (includes « Vous »). */
+export const sessionPlayers: Player[] = [...mockPlayers, youPlayer]
+
 /** Ranking sorted by score descending, with rank attached. */
-export function getRanking(players: Player[] = mockPlayers): (Player & { rank: number })[] {
+export function getRanking(players: Player[] = sessionPlayers): (Player & { rank: number })[] {
   return [...players]
     .sort((a, b) => b.score - a.score)
     .map((player, index) => ({ ...player, rank: index + 1 }))

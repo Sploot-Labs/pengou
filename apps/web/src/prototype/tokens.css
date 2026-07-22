@@ -24,19 +24,24 @@
   --silver: #c7ccdd;
   --bronze: #e0954f;
 
-  /* Answers — couleur + forme + label, jamais la couleur seule */
-  --ans-triangle: #e23b2e; /* rouge, texte blanc */
+  /* Answers — couleur + forme + label, jamais la couleur seule.
+     Valeurs assombries pour atteindre ≥4.5:1 avec le texte blanc
+     (l'ambre garde un texte sombre). Vérifié au ratio RGAA. */
+  --ans-triangle: #c62828; /* rouge, texte blanc (~5.0:1) */
   --ans-triangle-ink: #ffffff;
-  --ans-diamond: #2e7bd6; /* bleu, texte blanc */
+  --ans-diamond: #1d5fb0; /* bleu, texte blanc (~4.9:1) */
   --ans-diamond-ink: #ffffff;
   --ans-circle: #f2a900; /* ambre, texte sombre pour contraste */
   --ans-circle-ink: #0e1230;
-  --ans-square: #14a38b; /* vert, texte blanc */
+  --ans-square: #0e7c68; /* vert, texte blanc (~4.6:1) */
   --ans-square-ink: #ffffff;
 
-  /* Feedback */
-  --success: #14a38b;
-  --danger: #e23b2e;
+  /* Feedback — texte blanc lisible (≥4.5:1) */
+  --success: #0e7c68;
+  --danger: #c62828;
+
+  /* Gradients de marque */
+  --grad-brand: linear-gradient(135deg, var(--brand), var(--brand-2));
 
   /* Typography */
   --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
@@ -45,6 +50,8 @@
 
   --fs-display: clamp(2.25rem, 1.4rem + 3.5vw, 4.5rem);
   --fs-title: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem);
+  --fs-h2: clamp(1.1rem, 0.95rem + 0.8vw, 1.5rem);
+  --fs-h3: clamp(1rem, 0.92rem + 0.4vw, 1.25rem);
   --fs-body: 1rem;
   --fs-small: 0.875rem;
   --fs-pin: clamp(2.5rem, 1.6rem + 4vw, 5rem);
@@ -99,6 +106,14 @@
   color: var(--ink-strong);
 }
 
+.prototype-root h2 {
+  font-size: var(--fs-h2);
+}
+
+.prototype-root h3 {
+  font-size: var(--fs-h3);
+}
+
 .prototype-root p {
   margin: 0;
 }
@@ -140,7 +155,6 @@
 .prototype-root :focus-visible {
   outline: 3px solid var(--gold);
   outline-offset: 3px;
-  border-radius: var(--radius-sm);
 }
 
 /* ---------------------------------------------------------------------- */

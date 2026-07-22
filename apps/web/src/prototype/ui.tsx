@@ -1,4 +1,11 @@
-import { useEffect, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react'
+import {
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+  type ButtonHTMLAttributes,
+  type ReactNode,
+} from 'react'
 import type { AnswerShapeKind } from './mockData'
 
 /* ------------------------------------------------------------------ */
@@ -8,8 +15,15 @@ import type { AnswerShapeKind } from './mockData'
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <span className={`ab-logo${compact ? ' ab-logo--compact' : ''}`}>
+      {/* Mark = les 4 formes-réponses réunies, pas le seul triangle : évite la
+          collision sémantique avec la forme fonctionnelle --ans-triangle. */}
       <span className="ab-logo__mark" aria-hidden="true">
-        ▲
+        <svg viewBox="0 0 24 24" width="1em" height="1em" focusable="false">
+          <polygon points="7,3 12,11 2,11" fill="var(--ans-triangle)" />
+          <polygon points="18,2 23,7 18,12 13,7" fill="var(--ans-diamond)" />
+          <circle cx="7" cy="18" r="4.5" fill="var(--ans-circle)" />
+          <rect x="14" y="14" width="9" height="9" rx="2" fill="var(--ans-square)" />
+        </svg>
       </span>
       <span className="ab-logo__text">Arena</span>
     </span>
@@ -27,13 +41,16 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
 }
 
-export function Button({ variant = 'primary', className = '', children, ...rest }: ButtonProps) {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  { variant = 'primary', className = '', children, ...rest },
+  ref,
+) {
   return (
-    <button className={`ab-button ab-button--${variant} ${className}`.trim()} {...rest}>
+    <button ref={ref} className={`ab-button ab-button--${variant} ${className}`.trim()} {...rest}>
       {children}
     </button>
   )
-}
+})
 
 /* ------------------------------------------------------------------ */
 /* AnswerShape — decorative glyph reinforcing shape, never the only cue */
@@ -92,7 +109,7 @@ const SHAPE_INK_TOKEN: Record<AnswerShapeKind, string> = {
   square: '--ans-square-ink',
 }
 
-const SHAPE_NAME_FR: Record<AnswerShapeKind, string> = {
+export const SHAPE_NAME_FR: Record<AnswerShapeKind, string> = {
   triangle: 'triangle',
   diamond: 'losange',
   circle: 'rond',

@@ -28,15 +28,21 @@ Croisement **plateau télé (scoreboard de diffusion)** × **borne d'arcade**. S
 --gold:         #FFC53D   /* vainqueur / podium */
 ```
 
-Réponses (couleur + **forme** + label — jamais la couleur seule) :
+Réponses (couleur + **forme** + label — jamais la couleur seule). Valeurs
+assombries après mesure RGAA pour tenir ≥4.5:1 avec le texte blanc :
 ```
---ans-triangle: #E23B2E  (rouge)   texte blanc
---ans-diamond:  #2E7BD6  (bleu)    texte blanc
+--ans-triangle: #C62828  (rouge)   texte blanc   (~5.0:1)
+--ans-diamond:  #1D5FB0  (bleu)    texte blanc   (~4.9:1)
 --ans-circle:   #F2A900  (ambre)   texte SOMBRE (#0E1230) — contraste
---ans-square:   #14A38B  (vert)    texte blanc
+--ans-square:   #0E7C68  (vert)    texte blanc   (~4.6:1)
 ```
 
-Règles contraste : boutons brand = ink sombre sur rose (~6:1). Tuiles : blanc sur rouge/bleu/vert, ink sombre sur ambre. Texte courant `--ink` sur `--stage` (>12:1). Rien ne repose sur la couleur seule (forme + label systématiques).
+Règles contraste : boutons brand = ink sombre sur rose (~6:1). Tuiles : blanc
+sur rouge/bleu/vert **une fois assombri** (les valeurs d'origine #E23B2E/#2E7BD6/#14A38B
+étaient sous le seuil — 3,2 à 4,3:1 — et ont été corrigées), ink sombre sur ambre.
+Feedback : `--success` (#0E7C68) et `--danger` (#C62828) alignés sur ces valeurs
+pour rester lisibles en texte blanc. Texte courant `--ink` sur `--stage` (>12:1).
+Rien ne repose sur la couleur seule (forme + label systématiques).
 
 ## Typographie
 
