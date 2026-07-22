@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { buildServer } from './app'
 import { registerStatic } from './static'
-import { loadConfig } from '@kahoot/shared'
+import { loadConfig } from '@splootlabs/shared'
 
 let dist: string
 

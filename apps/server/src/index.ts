@@ -1,5 +1,5 @@
 import { join } from 'node:path'
-import { loadConfig } from '@kahoot/shared'
+import { loadConfig } from '@splootlabs/shared'
 import { buildServer } from './app.js'
 import { attachRealtime } from './realtime.js'
 import { registerStatic } from './static.js'

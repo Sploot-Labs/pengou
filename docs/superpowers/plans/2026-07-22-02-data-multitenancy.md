@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Bâtir la couche Data du produit : un package `@kahoot/db` (Drizzle sur Postgres) avec le schéma complet, les migrations, un guard de scoping tenant à isolation prouvée, et le câblage self-host (`docker compose` avec un service Postgres + migrations auto).
+**Goal:** Bâtir la couche Data du produit : un package `@splootlabs/db` (Drizzle sur Postgres) avec le schéma complet, les migrations, un guard de scoping tenant à isolation prouvée, et le câblage self-host (`docker compose` avec un service Postgres + migrations auto).
 
-**Architecture:** Un package `@kahoot/db` isolé expose un client Drizzle Postgres créé depuis `AppConfig.databaseUrl`, le schéma (9 tables + enums), un runner de migrations, et un helper `tenantScope` que toute requête tenant-scoped traverse. Postgres PARTOUT (décision 2026-07-22) : self-host = conteneur Postgres dans `docker compose`, cloud = Postgres managé. Les tests d'intégration tournent contre un Postgres jetable via testcontainers.
+**Architecture:** Un package `@splootlabs/db` isolé expose un client Drizzle Postgres créé depuis `AppConfig.databaseUrl`, le schéma (9 tables + enums), un runner de migrations, et un helper `tenantScope` que toute requête tenant-scoped traverse. Postgres PARTOUT (décision 2026-07-22) : self-host = conteneur Postgres dans `docker compose`, cloud = Postgres managé. Les tests d'intégration tournent contre un Postgres jetable via testcontainers.
 
 **Tech Stack:** TypeScript, Drizzle ORM (`drizzle-orm/postgres-js`), `postgres` (postgres.js), `drizzle-kit` (migrations), `@testcontainers/postgresql` (tests), Vitest.
 
@@ -14,9 +14,9 @@
 - **`tenant_id` au niveau ligne** sur toutes les tables tenant-scoped (`tenant` lui-même exclu). Un guard `tenantScope` filtre toutes les requêtes tenant-scoped ; **aucune fuite inter-tenant** (prouvé par test).
 - **`user` = identité globale** (pas de `tenant_id`) ; la table `membership` relie `user`↔`tenant`. (Raffinement du spec §7 qui doublonnait.)
 - **ESM / NodeNext** : imports relatifs avec extension `.js`. TypeScript strict.
-- **Node ≥ 20**, pnpm workspaces, scope `@kahoot/*`, Vitest.
+- **Node ≥ 20**, pnpm workspaces, scope `@splootlabs/*`, Vitest.
 - **Les tests d'intégration exigent un démon Docker** (testcontainers lance `postgres:16-alpine`).
-- Consomme `AppConfig` de `@kahoot/shared` : `databaseUrl`, `tenancyMode`.
+- Consomme `AppConfig` de `@splootlabs/shared` : `databaseUrl`, `tenancyMode`.
 - Image Postgres épinglée : **`postgres:16-alpine`** (tests ET compose).
 
 ---
@@ -48,7 +48,7 @@ docker-compose.yml              # Task 6 : + service db
 
 ---
 
-### Task 1: Package `@kahoot/db` + client Postgres + smoke test testcontainers
+### Task 1: Package `@splootlabs/db` + client Postgres + smoke test testcontainers
 
 **Files:**
 - Create: `packages/db/package.json`, `packages/db/tsconfig.json`, `packages/db/src/client.ts`, `packages/db/src/test-helpers.ts`, `packages/db/src/index.ts`, `packages/db/src/client.test.ts`
@@ -87,7 +87,7 @@ describe('createDb', () => {
 
 - [ ] **Step 2: Lancer le test pour vérifier l'échec**
 
-Run: `pnpm --filter @kahoot/db test`
+Run: `pnpm --filter @splootlabs/db test`
 Expected: FAIL — modules `./test-helpers` / `./client` introuvables.
 
 - [ ] **Step 3: Créer le package et implémenter le client + le helper de test**
@@ -95,7 +95,7 @@ Expected: FAIL — modules `./test-helpers` / `./client` introuvables.
 `packages/db/package.json`
 ```json
 {
-  "name": "@kahoot/db",
+  "name": "@splootlabs/db",
   "version": "0.0.0",
   "type": "module",
   "exports": { ".": { "development": "./src/index.ts", "types": "./dist/index.d.ts", "default": "./dist/index.js" } },
@@ -108,7 +108,7 @@ Expected: FAIL — modules `./test-helpers` / `./client` introuvables.
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
-    "@kahoot/shared": "workspace:*",
+    "@splootlabs/shared": "workspace:*",
     "drizzle-orm": "^0.36.0",
     "postgres": "^3.4.0"
   },
@@ -188,14 +188,14 @@ export {}
 
 - [ ] **Step 4: Installer et vérifier que le smoke test passe**
 
-Run: `pnpm install && pnpm --filter @kahoot/db test`
+Run: `pnpm install && pnpm --filter @splootlabs/db test`
 Expected: PASS — le conteneur Postgres démarre, `select 1` renvoie `{ one: 1 }`. (Premier run : téléchargement de l'image `postgres:16-alpine`.)
 
 - [ ] **Step 5: Commit**
 
 ```bash
 git add -A
-git commit -m "feat(db): package @kahoot/db + client Postgres + smoke test testcontainers"
+git commit -m "feat(db): package @splootlabs/db + client Postgres + smoke test testcontainers"
 ```
 
 ---
@@ -350,7 +350,7 @@ export * as schema from './schema.js'
 
 - [ ] **Step 3: Générer la migration initiale**
 
-Run: `pnpm --filter @kahoot/db db:generate`
+Run: `pnpm --filter @splootlabs/db db:generate`
 Expected: crée `packages/db/drizzle/0000_*.sql` + `packages/db/drizzle/meta/`. Le SQL contient `CREATE TYPE ... plan`, les 9 `CREATE TABLE`, et l'index partiel `game_session_active_pin_uidx ... WHERE status <> 'ended'`.
 
 - [ ] **Step 4: Écrire le test de schéma**
@@ -440,7 +440,7 @@ describe('runMigrations', () => {
 
 - [ ] **Step 2: Lancer pour vérifier l'échec**
 
-Run: `pnpm --filter @kahoot/db test`
+Run: `pnpm --filter @splootlabs/db test`
 Expected: FAIL — `./migrate` / `runMigrations` introuvable.
 
 - [ ] **Step 3: Implémenter le runner**
@@ -470,7 +470,7 @@ Note : en dev/test (tsx/vitest, condition `development`), `import.meta.url` poin
 - [ ] **Step 4: Vérifier que les tests passent (et activer le test schéma de Task 2)**
 
 Si tu avais mis `it.todo` en Task 2, remplace-le par le vrai test maintenant.
-Run: `pnpm --filter @kahoot/db test`
+Run: `pnpm --filter @splootlabs/db test`
 Expected: PASS — migrate + schema + client verts.
 
 - [ ] **Step 5: Commit**
@@ -552,7 +552,7 @@ describe('repo quiz scoped par tenant', () => {
 
 - [ ] **Step 2: Lancer pour vérifier l'échec**
 
-Run: `pnpm --filter @kahoot/db test`
+Run: `pnpm --filter @splootlabs/db test`
 Expected: FAIL — `../tenant` / `./quiz` introuvables.
 
 - [ ] **Step 3: Implémenter le scope et le repo**
@@ -616,7 +616,7 @@ export * as schema from './schema.js'
 
 - [ ] **Step 4: Vérifier que les tests passent**
 
-Run: `pnpm --filter @kahoot/db test`
+Run: `pnpm --filter @splootlabs/db test`
 Expected: PASS — les 3 tests d'isolation + tous les précédents. **Aucune fuite inter-tenant.**
 
 - [ ] **Step 5: Commit**
@@ -635,7 +635,7 @@ git commit -m "feat(db): guard tenantScope + repo quiz + tests d'isolation inter
 - Create: `packages/db/src/tenant.test.ts`
 
 **Interfaces:**
-- Consumes: `Db`, `schema`, `AppConfig` (`@kahoot/shared`).
+- Consumes: `Db`, `schema`, `AppConfig` (`@splootlabs/shared`).
 - Produces:
   - `ensureDefaultTenant(db: Db): Promise<string>` — crée (si absent) le tenant par défaut du mode single et renvoie son id. Idempotent.
   - `resolveTenantId(db: Db, config: Pick<AppConfig, 'tenancyMode'>, explicitTenantId?: string): Promise<string>` — en `single` renvoie le tenant par défaut ; en `multi` exige `explicitTenantId` (sinon lève).
@@ -681,7 +681,7 @@ describe('resolveTenantId', () => {
 
 - [ ] **Step 2: Lancer pour vérifier l'échec**
 
-Run: `pnpm --filter @kahoot/db test`
+Run: `pnpm --filter @splootlabs/db test`
 Expected: FAIL — `ensureDefaultTenant` / `resolveTenantId` non exportés.
 
 - [ ] **Step 3: Implémenter**
@@ -689,7 +689,7 @@ Expected: FAIL — `ensureDefaultTenant` / `resolveTenantId` non exportés.
 `packages/db/src/tenant.ts` (ajouts sous le code existant)
 ```ts
 import { eq } from 'drizzle-orm'
-import type { AppConfig } from '@kahoot/shared'
+import type { AppConfig } from '@splootlabs/shared'
 import { schema } from './index.js'
 
 export const DEFAULT_TENANT_NAME = 'default'
@@ -727,11 +727,11 @@ export async function resolveTenantId(
 }
 ```
 
-Pour que `onConflictDoNothing` sur le name fonctionne comme garde-fou d'idempotence, ajoute une contrainte d'unicité sur `tenant.name` dans le schéma (Task 2) : dans `tenant`, remplace `name: text('name').notNull()` par `name: text('name').notNull().unique()`, puis régénère la migration (`pnpm --filter @kahoot/db db:generate`) et commit le nouveau SQL. (Fais-le dans cette tâche pour rester cohérent.)
+Pour que `onConflictDoNothing` sur le name fonctionne comme garde-fou d'idempotence, ajoute une contrainte d'unicité sur `tenant.name` dans le schéma (Task 2) : dans `tenant`, remplace `name: text('name').notNull()` par `name: text('name').notNull().unique()`, puis régénère la migration (`pnpm --filter @splootlabs/db db:generate`) et commit le nouveau SQL. (Fais-le dans cette tâche pour rester cohérent.)
 
 - [ ] **Step 4: Régénérer la migration et vérifier les tests**
 
-Run: `pnpm --filter @kahoot/db db:generate && pnpm --filter @kahoot/db test`
+Run: `pnpm --filter @splootlabs/db db:generate && pnpm --filter @splootlabs/db test`
 Expected: PASS — tenant + tous les tests verts. (La nouvelle migration ajoute l'unicité sur `tenant.name`.)
 
 - [ ] **Step 5: Commit**
@@ -746,12 +746,12 @@ git commit -m "feat(db): tenant par défaut (mode single) idempotent + resolveTe
 ### Task 6: Câblage serveur + service Postgres compose + migrations auto + /health readiness
 
 **Files:**
-- Modify: `apps/server/package.json` (dép `@kahoot/db`), `apps/server/src/app.ts` (health readiness), `apps/server/src/index.ts` (créer db + migrer + ensureDefaultTenant), `apps/server/src/app.test.ts` (health)
+- Modify: `apps/server/package.json` (dép `@splootlabs/db`), `apps/server/src/app.ts` (health readiness), `apps/server/src/index.ts` (créer db + migrer + ensureDefaultTenant), `apps/server/src/app.test.ts` (health)
 - Modify: `docker-compose.yml` (service `db`), `Dockerfile` (copier `packages/db/drizzle` dans l'image), `packages/shared/src/config.ts` (défaut `DATABASE_URL`)
 - Modify: `packages/shared/src/config.test.ts` (nouveau défaut)
 
 **Interfaces:**
-- Consumes: `createDb`, `runMigrations`, `ensureDefaultTenant` (`@kahoot/db`), `AppConfig`.
+- Consumes: `createDb`, `runMigrations`, `ensureDefaultTenant` (`@splootlabs/db`), `AppConfig`.
 - Produces: le serveur crée un client db au démarrage, applique les migrations, et (mode single) garantit le tenant par défaut ; `GET /health` renvoie `{ status, db: 'up' | 'down', ... }`.
 
 - [ ] **Step 1: Réviser le défaut DATABASE_URL (Postgres) + son test**
@@ -777,7 +777,7 @@ Dans `apps/server/src/app.test.ts`, ajoute (le health prend maintenant un statut
 ```ts
 import { describe, it, expect } from 'vitest'
 import { buildServer } from './app.js'
-import { loadConfig } from '@kahoot/shared'
+import { loadConfig } from '@splootlabs/shared'
 
 describe('GET /health', () => {
   it('renvoie ok + statut db', async () => {
@@ -792,7 +792,7 @@ describe('GET /health', () => {
 
 - [ ] **Step 3: Lancer pour vérifier l'échec**
 
-Run: `pnpm --filter @kahoot/server test`
+Run: `pnpm --filter @splootlabs/server test`
 Expected: FAIL — `buildServer` n'accepte pas de 2e argument / `db` absent de la réponse.
 
 - [ ] **Step 4: Implémenter le health readiness**
@@ -800,7 +800,7 @@ Expected: FAIL — `buildServer` n'accepte pas de 2e argument / `db` absent de l
 `apps/server/src/app.ts`
 ```ts
 import Fastify, { type FastifyInstance } from 'fastify'
-import type { AppConfig } from '@kahoot/shared'
+import type { AppConfig } from '@splootlabs/shared'
 
 export type ServerDeps = { dbStatus?: () => 'up' | 'down' }
 
@@ -818,13 +818,13 @@ export function buildServer(config: AppConfig, deps: ServerDeps = {}): FastifyIn
 
 - [ ] **Step 5: Câbler l'entrypoint (db + migrations + tenant par défaut)**
 
-`apps/server/package.json` → `dependencies` : ajoute `"@kahoot/db": "workspace:*"`.
+`apps/server/package.json` → `dependencies` : ajoute `"@splootlabs/db": "workspace:*"`.
 
 `apps/server/src/index.ts` (remplace le contenu wiring existant, en gardant static + realtime)
 ```ts
 import { join } from 'node:path'
-import { loadConfig } from '@kahoot/shared'
-import { createDb, runMigrations, ensureDefaultTenant } from '@kahoot/db'
+import { loadConfig } from '@splootlabs/shared'
+import { createDb, runMigrations, ensureDefaultTenant } from '@splootlabs/db'
 import { buildServer } from './app.js'
 import { attachRealtime } from './realtime.js'
 import { registerStatic } from './static.js'
@@ -903,7 +903,7 @@ Expected: `{"status":"ok","db":"up","tenancyMode":"single","scaling":"memory"}`.
 
 ```bash
 git add -A
-git commit -m "feat(server): câblage @kahoot/db (migrations auto + tenant par défaut) + service Postgres compose + /health readiness"
+git commit -m "feat(server): câblage @splootlabs/db (migrations auto + tenant par défaut) + service Postgres compose + /health readiness"
 ```
 
 ---

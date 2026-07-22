@@ -9,7 +9,7 @@
     "test:watch": "vitest",
     "build": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
-    "dev": "pnpm --filter @kahoot/server dev"
+    "dev": "pnpm --filter @splootlabs/server dev"
   },
   "devDependencies": {
     "typescript": "^5.5.0",

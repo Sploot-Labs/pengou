@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { io as ioClient } from 'socket.io-client'
 import { buildServer } from './app'
 import { attachRealtime } from './realtime'
-import { loadConfig } from '@kahoot/shared'
+import { loadConfig } from '@splootlabs/shared'
 
 describe('Socket.IO ping/pong', () => {
   it('répond pong à ping:test', async () => {

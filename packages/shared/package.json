@@ -1,5 +1,5 @@
 {
-  "name": "@kahoot/shared",
+  "name": "@splootlabs/shared",
   "version": "0.0.0",
   "type": "module",
   "main": "./dist/index.js",

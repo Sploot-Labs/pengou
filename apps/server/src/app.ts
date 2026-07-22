@@ -1,5 +1,5 @@
 import Fastify, { type FastifyInstance } from 'fastify'
-import type { AppConfig } from '@kahoot/shared'
+import type { AppConfig } from '@splootlabs/shared'
 
 export function buildServer(config: AppConfig): FastifyInstance {
   const app = Fastify({ logger: config.nodeEnv !== 'test' })

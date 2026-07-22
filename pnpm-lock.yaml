@@ -20,7 +20,7 @@ importers:
       '@fastify/static':
         specifier: ^7.0.0
         version: 7.0.4
-      '@kahoot/shared':
+      '@splootlabs/shared':
         specifier: workspace:*
         version: link:../../packages/shared
       fastify:

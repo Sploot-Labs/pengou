@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { buildServer } from './app'
-import { loadConfig } from '@kahoot/shared'
+import { loadConfig } from '@splootlabs/shared'
 
 describe('GET /health', () => {
   it('renvoie ok avec le mode runtime', async () => {

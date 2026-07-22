@@ -6,9 +6,9 @@ COPY pnpm-workspace.yaml package.json pnpm-lock.yaml tsconfig.base.json ./
 COPY packages ./packages
 COPY apps ./apps
 RUN pnpm install --frozen-lockfile
-RUN pnpm --filter @kahoot/web build
-RUN pnpm --filter @kahoot/shared build
-RUN pnpm --filter @kahoot/server build
+RUN pnpm --filter @splootlabs/web build
+RUN pnpm --filter @splootlabs/shared build
+RUN pnpm --filter @splootlabs/server build
 
 # --- Stage runtime ---
 FROM node:20-slim AS runtime
