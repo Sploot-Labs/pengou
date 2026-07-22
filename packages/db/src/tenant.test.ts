@@ -9,6 +9,15 @@ beforeAll(async () => { ctx = await startTestDb(); await runMigrations(ctx.db) }
 afterAll(async () => { await ctx?.stop() })
 
 describe('ensureDefaultTenant', () => {
+  it('reste idempotent sous concurrence (course)', async () => {
+    const results = await Promise.all([
+      ensureDefaultTenant(ctx.db),
+      ensureDefaultTenant(ctx.db),
+      ensureDefaultTenant(ctx.db),
+    ])
+    expect(new Set(results).size).toBe(1) // un seul id, aucune erreur, pas de doublon
+  })
+
   it('est idempotent : deux appels renvoient le même id', async () => {
     const a = await ensureDefaultTenant(ctx.db)
     const b = await ensureDefaultTenant(ctx.db)

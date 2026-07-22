@@ -21,7 +21,7 @@ export async function ensureDefaultTenant(db: Db): Promise<string> {
   const [created] = await db
     .insert(schema.tenant)
     .values({ name: DEFAULT_TENANT_NAME })
-    .onConflictDoNothing()
+    .onConflictDoNothing({ target: schema.tenant.name })
     .returning({ id: schema.tenant.id })
   if (created) return created.id
   // course concurrente : relire
