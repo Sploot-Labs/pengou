@@ -14,4 +14,12 @@ describe('GET /health', () => {
     })
     await app.close()
   })
+
+  it('renvoie ok + statut db', async () => {
+    const app = buildServer(loadConfig({ NODE_ENV: 'test' }), { dbStatus: () => 'up' })
+    const res = await app.inject({ method: 'GET', url: '/health' })
+    expect(res.statusCode).toBe(200)
+    expect(res.json()).toMatchObject({ status: 'ok', db: 'up', tenancyMode: 'single', scaling: 'memory' })
+    await app.close()
+  })
 })

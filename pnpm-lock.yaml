@@ -20,6 +20,9 @@ importers:
       '@fastify/static':
         specifier: ^7.0.0
         version: 7.0.4
+      '@splootlabs/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@splootlabs/shared':
         specifier: workspace:*
         version: link:../../packages/shared

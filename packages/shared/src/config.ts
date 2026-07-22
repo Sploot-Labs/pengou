@@ -4,7 +4,7 @@ const EnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().positive().default(3000),
   TENANCY_MODE: z.enum(['single', 'multi']).default('single'),
-  DATABASE_URL: z.string().min(1).default('file:./data/app.db'),
+  DATABASE_URL: z.string().min(1).default('postgres://kahoot:kahoot@localhost:5432/kahoot'),
   REDIS_URL: z.string().min(1).optional(),
   SESSION_SECRET: z.string().min(16).default('dev-secret-change-me-please!!'),
 })

@@ -8,6 +8,7 @@ COPY apps ./apps
 RUN pnpm install --frozen-lockfile
 RUN pnpm --filter @splootlabs/web build
 RUN pnpm --filter @splootlabs/shared build
+RUN pnpm --filter @splootlabs/db build
 RUN pnpm --filter @splootlabs/server build
 
 # --- Stage runtime ---
@@ -17,6 +18,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=build /app/pnpm-workspace.yaml /app/package.json /app/pnpm-lock.yaml ./
 COPY --from=build /app/packages ./packages
+COPY --from=build /app/packages/db/drizzle ./packages/db/drizzle
 COPY --from=build /app/apps/server/package.json ./apps/server/package.json
 COPY --from=build /app/apps/server/dist ./apps/server/dist
 RUN pnpm install --prod --frozen-lockfile

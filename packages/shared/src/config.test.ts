@@ -2,10 +2,10 @@ import { describe, it, expect } from 'vitest'
 import { loadConfig } from './config'
 
 describe('loadConfig', () => {
-  it('par défaut : single-tenant, SQLite fichier, scaling mémoire', () => {
+  it('par défaut : single-tenant, Postgres local, scaling mémoire', () => {
     const cfg = loadConfig({})
     expect(cfg.tenancyMode).toBe('single')
-    expect(cfg.databaseUrl).toBe('file:./data/app.db')
+    expect(cfg.databaseUrl).toBe('postgres://kahoot:kahoot@localhost:5432/kahoot')
     expect(cfg.scaling).toBe('memory')
     expect(cfg.port).toBe(3000)
   })

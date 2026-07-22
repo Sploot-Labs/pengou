@@ -1,15 +1,29 @@
 services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: kahoot
+      POSTGRES_PASSWORD: kahoot
+      POSTGRES_DB: kahoot
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kahoot"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
   app:
     build: .
     ports:
       - "3000:3000"
     environment:
-      # Defaults self-host : single-tenant, SQLite, scaling mémoire
       TENANCY_MODE: single
-      DATABASE_URL: file:/app/data/app.db
+      DATABASE_URL: postgres://kahoot:kahoot@db:5432/kahoot
       SESSION_SECRET: change-me-in-production-please!!
-    volumes:
-      - app-data:/app/data
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
-  app-data:
+  db-data:
