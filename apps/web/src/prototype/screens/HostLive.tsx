@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import {
   getRanking,
+  mockDistributions,
   mockGamePin,
   mockQuiz,
   playersAtQuestion,
@@ -10,16 +11,6 @@ import type { AnswerShapeKind, Question } from '../mockData'
 import { AnswerShape, Button, Logo, PinDisplay, TimerRing } from '../ui'
 
 type Phase = 'lobby' | 'question' | 'reveal' | 'scoreboard' | 'end'
-
-/** Mock per-answer counts, indexed to match each question's option order
- * (mcq/truefalse) or slider buckets. Mirrors BigScreen's fixture so both the
- * operator remote and the projector agree on the same session's numbers. */
-const mockDistributions: Record<string, number[]> = {
-  q1: [1, 4, 0, 2],
-  q2: [5, 2],
-  q3: [0, 1, 6, 0],
-  q5: [1, 2, 3, 1, 0],
-}
 
 interface DistRow {
   key: string
@@ -98,7 +89,10 @@ export function HostLive() {
   const [remaining, setRemaining] = useState(mockQuiz.questions[0].durationSeconds)
   const [lobbyAnnouncement, setLobbyAnnouncement] = useState('')
   const [respondedAnnouncement, setRespondedAnnouncement] = useState('')
-  const [endMessage, setEndMessage] = useState<string | null>(null)
+  // Snapshot of how many players had actually joined at launch — monitoring
+  // counters after launch track this, not the idealized full mock roster
+  // (`sessionPlayers.length`), so the operator sees who's really in the room.
+  const [launchedCount, setLaunchedCount] = useState(0)
 
   const question = mockQuiz.questions[questionIndex]
   const isLast = questionIndex === mockQuiz.questions.length - 1
@@ -106,8 +100,9 @@ export function HostLive() {
 
   // RGAA 2.4.3: on every phase change, move focus to the new phase's own
   // heading so a screen reader announces it — but never steal focus on the
-  // very first render (the shared [contenu-principal] main already receives
-  // it, like every other screen).
+  // very first render. Focus is intentionally left alone at mount: no screen
+  // in this prototype calls `.focus()` on its own <main>; only the skip-link
+  // in Prototype.tsx moves focus, and only when a user explicitly activates it.
   const phaseHeadingRef = useRef<HTMLHeadingElement>(null)
   const isFirstRender = useRef(true)
   useEffect(() => {
@@ -151,9 +146,11 @@ export function HostLive() {
   }, [phase, remaining])
 
   // Live respondent count, derived from the countdown so the monitor moves.
+  // Denominator is the roster actually present at launch (`launchedCount`),
+  // not the full mock roster.
   const liveAnswered = Math.min(
-    sessionPlayers.length,
-    Math.round(sessionPlayers.length * (1 - remaining / question.durationSeconds)),
+    launchedCount,
+    Math.round(launchedCount * (1 - remaining / question.durationSeconds)),
   )
 
   // RGAA: the respondent counter is a MEASURED aria-live region — it must not
@@ -164,13 +161,14 @@ export function HostLive() {
     if (phase !== 'question') return
     const timer = window.setTimeout(() => {
       setRespondedAnnouncement(
-        `${liveAnswered} sur ${sessionPlayers.length} ${liveAnswered > 1 ? 'ont' : 'a'} répondu.`,
+        `${liveAnswered} sur ${launchedCount} ${liveAnswered > 1 ? 'ont' : 'a'} répondu.`,
       )
     }, 700)
     return () => window.clearTimeout(timer)
-  }, [phase, liveAnswered])
+  }, [phase, liveAnswered, launchedCount])
 
   function startGame() {
+    setLaunchedCount(joined.length)
     setPhase('question')
     setQuestionIndex(0)
     setRemaining(mockQuiz.questions[0].durationSeconds)
@@ -183,13 +181,16 @@ export function HostLive() {
 
   /** « Passer » bypasses the reveal entirely for this question (e.g. a broken
    * question) and goes straight to the leaderboard, unlike « Révéler la
-   * réponse » which stops to show the distribution. */
+   * réponse » which stops to show the distribution. It's one accidental tap
+   * away from the primary reveal button and can't be undone, hence the
+   * confirmation guard at the call site. */
   function skipQuestion() {
     setPhase('scoreboard')
   }
 
-  /** Reveal's « Question suivante »: always moves to the leaderboard next —
-   * the leaderboard's own « Question suivante » is what advances the question. */
+  /** Reveal's « Afficher le classement »: moves to the leaderboard phase —
+   * it does NOT advance the question. The leaderboard's own « Question
+   * suivante » button is what actually loads the next question. */
   function goToScoreboard() {
     setPhase('scoreboard')
   }
@@ -205,13 +206,31 @@ export function HostLive() {
     setPhase('question')
   }
 
-  const connectedCount = phase === 'lobby' ? joined.length : sessionPlayers.length
+  const connectedCount = phase === 'lobby' ? joined.length : launchedCount
   const canLaunch = joined.length > 0
+  // `ranking` (through the current question, inclusive) is only accurate once
+  // that question's reveal has actually happened — i.e. from the scoreboard
+  // phase on. Before that, the "Classement en cours" aside must show
+  // `priorRanking` (through the previous question only), or it leaks the
+  // current question's points a phase early.
+  const priorRanking = getRanking(playersAtQuestion(questionIndex - 1))
   const ranking = getRanking(playersAtQuestion(questionIndex))
   const rows = phase === 'question' || phase === 'reveal'
-    ? distributionRows(question, phase === 'reveal' ? 1 : liveAnswered / sessionPlayers.length)
+    ? distributionRows(question, phase === 'reveal' ? 1 : liveAnswered / launchedCount)
     : null
   const maxRowCount = rows ? Math.max(1, ...rows.map((r) => r.count)) : 1
+
+  // RGAA 4.1.2 / status change: the reveal heading text is otherwise
+  // identical to the question phase's heading, so a screen-reader user needs
+  // an explicit announcement that the answer just came in.
+  const revealedAnswerText =
+    phase === 'reveal'
+      ? rows
+        ? rows.find((r) => r.correct)?.label ?? ''
+        : question.type === 'text'
+          ? question.acceptedAnswers.join(' · ')
+          : ''
+      : ''
 
   function renderDistribution() {
     if (rows) {
@@ -223,7 +242,13 @@ export function HostLive() {
               className={`hostlive-answer-row${row.correct ? ' hostlive-answer-row--correct' : ''}`}
             >
               {row.shape && (
-                <span className="hostlive-answer-row__shape" style={{ color: `var(--ans-${row.shape})` }}>
+                <span
+                  className="hostlive-answer-row__shape"
+                  style={{
+                    ['--shape-bg' as string]: `var(--ans-${row.shape})`,
+                    ['--shape-ink' as string]: `var(--ans-${row.shape}-ink)`,
+                  }}
+                >
                   <AnswerShape shape={row.shape} size={22} />
                 </span>
               )}
@@ -238,7 +263,10 @@ export function HostLive() {
               <span className="hostlive-answer-row__bar-track">
                 <span
                   className="hostlive-answer-row__bar"
-                  style={{ width: `${(row.count / maxRowCount) * 100}%` }}
+                  style={{
+                    width: `${(row.count / maxRowCount) * 100}%`,
+                    ['--bar-color' as string]: row.shape ? `var(--ans-${row.shape})` : 'var(--brand-2)',
+                  }}
                 />
               </span>
               <span className="hostlive-answer-row__count">{row.count}</span>
@@ -248,14 +276,14 @@ export function HostLive() {
       )
     }
     if (question.type === 'text') {
-      const receivedFraction = phase === 'reveal' ? 1 : liveAnswered / sessionPlayers.length
-      const received = Math.round(sessionPlayers.length * receivedFraction)
+      const receivedFraction = phase === 'reveal' ? 1 : liveAnswered / launchedCount
+      const received = Math.round(launchedCount * receivedFraction)
       return (
         <div className="hostlive-text-answer">
           <p className="hostlive-text-answer__label">Réponse(s) acceptée(s)</p>
           <p className="hostlive-text-answer__value">{question.acceptedAnswers.join(' · ')}</p>
           <p style={{ color: 'var(--ink-dim)' }}>
-            {received} / {sessionPlayers.length} réponse(s) libre(s) reçue(s).
+            {received} / {launchedCount} réponse(s) libre(s) reçue(s).
           </p>
         </div>
       )
@@ -268,8 +296,8 @@ export function HostLive() {
    * one the phase-change effect must focus). The aside preview reuses the
    * same markup but must never fight it for the shared ref.
    */
-  function renderLeaderboard(limit: number, focusTarget: boolean) {
-    const top = ranking.slice(0, limit)
+  function renderLeaderboard(limit: number, focusTarget: boolean, source: ReturnType<typeof getRanking>) {
+    const top = source.slice(0, limit)
     return (
       <>
         {focusTarget ? (
@@ -301,7 +329,10 @@ export function HostLive() {
       <header className="ab-shell__header hostlive-header">
         <Logo compact />
         <div className="hostlive-header__meta">
-          <span className="hostlive-header__title">{mockQuiz.title}</span>
+          <div style={{ minWidth: 0 }}>
+            <span className="hostlive-header__title">{mockQuiz.title}</span>
+            <p className="host-brandline">Arena — open-source · chez vous ou dans le cloud</p>
+          </div>
           <PinDisplay pin={mockGamePin} compact label="Code PIN de la partie" />
         </div>
         <div className="hostlive-header__status">
@@ -378,7 +409,7 @@ export function HostLive() {
                 </div>
 
                 <p className="hostlive-progress" aria-hidden="true">
-                  {liveAnswered} / {sessionPlayers.length} {liveAnswered > 1 ? 'ont' : 'a'} répondu
+                  {liveAnswered} / {launchedCount} {liveAnswered > 1 ? 'ont' : 'a'} répondu
                 </p>
                 <p className="visually-hidden" role="status" aria-live="polite">
                   {respondedAnnouncement}
@@ -390,7 +421,15 @@ export function HostLive() {
                   <Button variant="primary" type="button" onClick={revealAnswer}>
                     Révéler la réponse
                   </Button>
-                  <Button variant="ghost" type="button" onClick={skipQuestion}>
+                  <Button
+                    variant="ghost"
+                    type="button"
+                    onClick={() => {
+                      if (window.confirm('Passer cette question sans révéler la réponse ?')) {
+                        skipQuestion()
+                      }
+                    }}
+                  >
                     Passer
                   </Button>
                 </div>
@@ -400,14 +439,17 @@ export function HostLive() {
             {phase === 'reveal' && (
               <div className="hostlive-phase">
                 <h2 ref={phaseHeadingRef} tabIndex={-1}>
-                  {question.prompt}
+                  Révélation — {question.prompt}
                 </h2>
+                <p className="visually-hidden" role="status" aria-live="polite">
+                  Réponse révélée : {revealedAnswerText}
+                </p>
 
                 {renderDistribution()}
 
                 <div className="hostlive-controls">
                   <Button variant="primary" type="button" onClick={goToScoreboard}>
-                    Question suivante
+                    Afficher le classement
                   </Button>
                 </div>
               </div>
@@ -415,7 +457,7 @@ export function HostLive() {
 
             {phase === 'scoreboard' && (
               <div className="hostlive-phase">
-                {renderLeaderboard(8, true)}
+                {renderLeaderboard(8, true, ranking)}
                 <div className="hostlive-controls">
                   {isLast ? (
                     <Button variant="primary" type="button" onClick={advanceFromScoreboard}>
@@ -438,31 +480,16 @@ export function HostLive() {
                 <p style={{ color: 'var(--ink-dim)' }}>
                   Toutes les questions ont été jouées.
                 </p>
-                <div className="hostlive-controls">
-                  <Button
-                    variant="primary"
-                    type="button"
-                    onClick={() =>
-                      setEndMessage(
-                        'Podium affiché sur le grand écran (démonstration).',
-                      )
-                    }
-                  >
-                    Voir le podium
-                  </Button>
-                </div>
-                {endMessage && (
-                  <p role="status" aria-live="polite">
-                    {endMessage}
-                  </p>
-                )}
+                <p style={{ color: 'var(--ink-dim)' }}>
+                  Ouvrez l’écran « Podium » pour le classement complet.
+                </p>
               </div>
             )}
           </section>
 
           {phase !== 'lobby' && phase !== 'scoreboard' && (
             <aside className="hostlive-aside" aria-label="Classement en cours">
-              {renderLeaderboard(5, false)}
+              {renderLeaderboard(5, false, priorRanking)}
             </aside>
           )}
         </div>

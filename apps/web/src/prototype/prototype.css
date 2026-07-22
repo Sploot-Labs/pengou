@@ -111,9 +111,20 @@
   transform: translateY(1px);
 }
 
-.ab-button:disabled,
-.ab-button[aria-disabled='true'] {
+.ab-button:disabled {
   opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* `aria-disabled` (unlike native `disabled`) keeps the button focusable and
+   described — it isn't exempt from WCAG's non-text/text contrast requirements
+   the way a truly inert control is. A blanket opacity dim here drops the
+   primary button's text to ~2.2:1 once composited over the panel background,
+   so this state gets its own explicit, verified colors instead of a dim. */
+.ab-button[aria-disabled='true'] {
+  background: var(--surface-2);
+  color: var(--ink-dim);
+  border-color: var(--line);
   cursor: not-allowed;
 }
 
@@ -1617,10 +1628,9 @@
 }
 
 .hostlive-header__title {
-  font-family: var(--font-display);
-  font-weight: 700;
+  display: block;
   font-size: var(--fs-small);
-  color: var(--ink-dim);
+  color: var(--ink);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1753,6 +1763,10 @@
 .hostlive-answer-row__shape {
   display: inline-flex;
   grid-row: 1;
+  background: var(--shape-bg);
+  color: var(--shape-ink);
+  padding: 4px;
+  border-radius: var(--radius-sm);
 }
 
 .hostlive-answer-row__label {
@@ -1793,12 +1807,8 @@
 .hostlive-answer-row__bar {
   display: block;
   height: 100%;
-  background: var(--brand-2);
+  background: var(--bar-color, var(--brand-2));
   transition: width var(--transition-base);
-}
-
-.hostlive-answer-row--correct .hostlive-answer-row__bar {
-  background: var(--gold);
 }
 
 .hostlive-text-answer {
@@ -1843,6 +1853,7 @@
 
 .hostlive-board__rank {
   font-family: var(--font-mono);
+  font-size: var(--fs-h2);
   color: var(--ink-dim);
   width: 2ch;
   flex-shrink: 0;

@@ -116,6 +116,18 @@ export const mockQuiz: Quiz = {
   ],
 }
 
+/** Mock per-answer counts, indexed to match each question's option order
+ * (mcq/truefalse) or slider buckets. Shared by HostLive and BigScreen so the
+ * operator remote and the projector always agree on the same session's
+ * numbers — a single source instead of two copies that could silently
+ * diverge after an edit to only one screen. */
+export const mockDistributions: Record<string, number[]> = {
+  q1: [1, 4, 0, 2],
+  q2: [5, 2],
+  q3: [0, 1, 6, 0],
+  q5: [1, 2, 3, 1, 0],
+}
+
 export interface Player {
   id: string
   pseudo: string

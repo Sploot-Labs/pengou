@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import {
   getRanking,
+  mockDistributions,
   mockGamePin,
-  mockLiveQuestionState,
   playersAtQuestion,
   sessionPlayers,
 } from '../mockData'
@@ -11,15 +11,6 @@ import { AnswerShape, Button, Logo, PinDisplay, TimerRing } from '../ui'
 import { mockQuiz } from '../mockData'
 
 type Phase = 'lobby' | 'question' | 'reveal' | 'scoreboard' | 'end'
-
-/** Mock per-answer counts, indexed to match each question's option order
- * (mcq/truefalse) or slider buckets. Purely illustrative for the prototype. */
-const mockDistributions: Record<string, number[]> = {
-  q1: [1, 4, 0, 2],
-  q2: [5, 2],
-  q3: [0, 1, 6, 0],
-  q5: [1, 2, 3, 1, 0],
-}
 
 interface DistributionBar {
   label: string
@@ -322,7 +313,7 @@ export function BigScreen() {
               <p className="big-reveal-answer__label">Réponse(s) acceptée(s)</p>
               <p className="big-reveal-answer__value">{question.acceptedAnswers.join(' · ')}</p>
               <p style={{ color: 'var(--ink-dim)' }}>
-                {mockLiveQuestionState.answersReceived} réponses libres reçues sur {sessionPlayers.length}.
+                {liveAnswered} réponses libres reçues sur {sessionPlayers.length}.
               </p>
             </div>
           ) : null}
@@ -387,6 +378,9 @@ export function BigScreen() {
         </p>
         <div className="big-dev-controls__row">
           {phase === 'lobby' && (
+            // Unlike HostLive's real "Lancer la partie" (which requires ≥1
+            // joined player), this demo control intentionally has no such
+            // gate — it's a simulation-only shortcut, not the operator surface.
             <Button variant="primary" type="button" onClick={startGame}>
               Lancer la partie
             </Button>
@@ -398,7 +392,7 @@ export function BigScreen() {
           )}
           {phase === 'question' && (
             <Button variant="primary" type="button" onClick={() => setPhase('reveal')}>
-              Révéler les réponses
+              Révéler la réponse
             </Button>
           )}
           {phase === 'reveal' && (
