@@ -4,6 +4,8 @@ import { signOut, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
 import { createQuiz, listQuizzes, type Quiz } from '../api/quizzes'
 import { listSessions, type SessionStatus, type SessionSummary } from '../api/sessions'
+import { Reveal } from '../motion/index.js'
+import { ThemeProvider } from '../theme/ThemeProvider.js'
 import { Button, Logo } from '../ui'
 
 /**
@@ -133,6 +135,7 @@ export function Home() {
   }, [])
 
   return (
+    <ThemeProvider theme="app">
     <div className="ab-shell">
       <header className="ab-shell__header">
         <Logo />
@@ -204,16 +207,18 @@ export function Home() {
               Vous n'avez encore aucun quiz. Créez-en un pour commencer.
             </p>
           ) : (
-            <ul className="home-list">
-              {quizzes.map((q) => (
-                <li key={q.id}>
-                  <Link className="home-list__item" to={`/quizzes/${q.id}`}>
-                    <span className="home-list__title">{q.title}</span>
-                    {q.description && <span className="home-list__meta">{q.description}</span>}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <Reveal from="up">
+              <ul className="home-list">
+                {quizzes.map((q) => (
+                  <li key={q.id}>
+                    <Link className="home-list__item" to={`/quizzes/${q.id}`}>
+                      <span className="home-list__title">{q.title}</span>
+                      {q.description && <span className="home-list__meta">{q.description}</span>}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           )}
         </section>
 
@@ -254,5 +259,6 @@ export function Home() {
         </section>
       </main>
     </div>
+    </ThemeProvider>
   )
 }
