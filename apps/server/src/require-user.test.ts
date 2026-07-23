@@ -3,7 +3,7 @@ import { startTestDb, runMigrations } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { buildServer } from './app.js'
 import { registerAuth } from './auth-plugin.js'
-import { registerRequireUser, requireUser } from './require-user.js'
+import { registerRequireUser, requireUser, resolveScopeOr403 } from './require-user.js'
 import { loadConfig } from '@splootlabs/shared'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
@@ -20,6 +20,75 @@ describe('requireUser', () => {
     app.get('/api/protected', { preHandler: requireUser }, async (req) => ({ id: req.user.id }))
     const res = await app.inject({ method: 'GET', url: '/api/protected' })
     expect(res.statusCode).toBe(401)
+    await app.close()
+  })
+})
+
+describe('resolveScopeOr403 : ne masque QUE le refus de membership en 403', () => {
+  it('mode multi, sans membership sur le tenant demandé → 403 (pas 500)', async () => {
+    const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'multi' })
+    const auth = createAuth(ctx.db, { secret: 'test-secret-at-least-32-chars-long!!', baseURL: 'http://localhost:3000', tenancyMode: config.tenancyMode })
+    const app = buildServer(config, { dbStatus: () => 'up' })
+    await registerAuth(app, auth)
+    registerRequireUser(app, auth)
+    app.get('/api/scoped', { preHandler: requireUser }, async (req, reply) => {
+      const scope = await resolveScopeOr403(req, reply, ctx.db, config)
+      if (!scope) return
+      return { tenantId: scope.tenantId }
+    })
+
+    const signUp = await app.inject({
+      method: 'POST',
+      url: '/api/auth/sign-up/email',
+      payload: { email: 'scope-403@example.com', password: 'motdepasse-123456', name: 'Sans Membership' },
+      headers: { 'content-type': 'application/json' },
+    })
+    const rawCookies = signUp.headers['set-cookie']
+    const cookie = Array.isArray(rawCookies)
+      ? rawCookies.map((c) => c.split(';')[0]).join('; ')
+      : String(rawCookies).split(';')[0]
+
+    // Tenant existant mais auquel l'utilisateur n'a jamais été rattaché : `resolveTenantId`
+    // lève « accès refusé : aucune appartenance à ce tenant » → doit devenir 403, pas 500.
+    const res = await app.inject({
+      method: 'GET',
+      url: '/api/scoped',
+      headers: { cookie, 'x-tenant-id': '00000000-0000-0000-0000-000000000000' },
+    })
+    expect(res.statusCode).toBe(403)
+
+    await app.close()
+  })
+
+  it('mode multi, erreur NON liée au membership (tenant explicite manquant) → 500, pas 403', async () => {
+    const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'multi' })
+    const auth = createAuth(ctx.db, { secret: 'test-secret-at-least-32-chars-long!!', baseURL: 'http://localhost:3000', tenancyMode: config.tenancyMode })
+    const app = buildServer(config, { dbStatus: () => 'up' })
+    await registerAuth(app, auth)
+    registerRequireUser(app, auth)
+    app.get('/api/scoped', { preHandler: requireUser }, async (req, reply) => {
+      const scope = await resolveScopeOr403(req, reply, ctx.db, config)
+      if (!scope) return
+      return { tenantId: scope.tenantId }
+    })
+
+    const signUp = await app.inject({
+      method: 'POST',
+      url: '/api/auth/sign-up/email',
+      payload: { email: 'scope-500@example.com', password: 'motdepasse-123456', name: 'Sans Tenant Explicite' },
+      headers: { 'content-type': 'application/json' },
+    })
+    const rawCookies = signUp.headers['set-cookie']
+    const cookie = Array.isArray(rawCookies)
+      ? rawCookies.map((c) => c.split(';')[0]).join('; ')
+      : String(rawCookies).split(';')[0]
+
+    // Pas de header x-tenant-id : `resolveTenantId` lève « mode multi : un tenant explicite
+    // est requis » — un message qui NE contient PAS « accès refusé ». `resolveScopeOr403`
+    // doit relancer cette erreur (Fastify répond 500), pas la maquiller en 403.
+    const res = await app.inject({ method: 'GET', url: '/api/scoped', headers: { cookie } })
+    expect(res.statusCode).toBe(500)
+
     await app.close()
   })
 })

@@ -29,3 +29,26 @@ export async function requestScope(request: FastifyRequest, db: Db, config: AppC
   const tenantId = await resolveTenantId(db, config, { userId: request.user.id, explicitTenantId })
   return tenantScope(db, tenantId)
 }
+
+/**
+ * Résout le scope tenant pour une route, ou répond 403 et renvoie `null` — mais UNIQUEMENT
+ * pour le cas « pas de membership » (message contenant « accès refusé », levé par
+ * `resolveTenantId` en mode multi). Toute autre erreur (panne DB, etc.) est relancée telle
+ * quelle pour que Fastify la traduise en 500 : elle ne doit jamais être masquée en 403.
+ */
+export async function resolveScopeOr403(
+  request: FastifyRequest,
+  reply: FastifyReply,
+  db: Db,
+  config: AppConfig,
+): Promise<TenantScope | null> {
+  try {
+    return await requestScope(request, db, config)
+  } catch (e) {
+    if (e instanceof Error && e.message.includes('accès refusé')) {
+      reply.code(403).send({ error: 'Accès refusé à ce tenant.' })
+      return null
+    }
+    throw e
+  }
+}

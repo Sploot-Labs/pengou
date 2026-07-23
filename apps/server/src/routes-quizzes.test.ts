@@ -1,6 +1,6 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import type { FastifyInstance } from 'fastify'
-import { startTestDb, runMigrations } from '@splootlabs/db'
+import { startTestDb, runMigrations, schema, tenantScope, createQuiz, getQuiz } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { loadConfig } from '@splootlabs/shared'
 import { buildServer } from './app.js'
@@ -165,6 +165,79 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
       headers: { cookie },
     })
     expect(res.statusCode).toBe(404)
+    await app.close()
+  })
+
+  it('PATCH/DELETE sans cookie → 401', async () => {
+    const app = await buildApp()
+    const cookie = await signUp(app, 'editeur6@example.com')
+    const create = await app.inject({
+      method: 'POST',
+      url: '/api/quizzes',
+      payload: { title: 'Quiz protégé' },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    const created = create.json() as { id: string }
+
+    const getNoCookie = await app.inject({ method: 'GET', url: `/api/quizzes/${created.id}` })
+    expect(getNoCookie.statusCode).toBe(401)
+
+    const patchNoCookie = await app.inject({
+      method: 'PATCH',
+      url: `/api/quizzes/${created.id}`,
+      payload: { title: 'x' },
+      headers: { 'content-type': 'application/json' },
+    })
+    expect(patchNoCookie.statusCode).toBe(401)
+
+    const deleteNoCookie = await app.inject({ method: 'DELETE', url: `/api/quizzes/${created.id}` })
+    expect(deleteNoCookie.statusCode).toBe(401)
+
+    await app.close()
+  })
+
+  it('un quiz d\'un AUTRE tenant est invisible (404, pas juste un id manquant) et absent de la liste', async () => {
+    const app = await buildApp()
+
+    // Seed direct en base : un second tenant, un owner qui lui appartient, et un quiz
+    // qui lui est rattaché — sans passer par les routes (le tenant courant, en mode
+    // single, résout toujours vers le tenant par défaut ; on simule ainsi un tenant
+    // "étranger" que l'utilisateur de test ne pourra jamais atteindre via l'API).
+    const [foreignTenant] = await ctx.db.insert(schema.tenant).values({ name: 'Autre' }).returning()
+    const [foreignOwner] = await ctx.db.insert(schema.user)
+      .values({ id: crypto.randomUUID(), email: 'etranger@x.fr', name: 'Étranger', emailVerified: false })
+      .returning()
+    const foreignQuiz = await createQuiz(tenantScope(ctx.db, foreignTenant.id), {
+      ownerId: foreignOwner.id,
+      title: 'Étranger',
+    })
+
+    // Utilisateur normal : résout vers le tenant PAR DÉFAUT (différent du tenant étranger ci-dessus).
+    const cookie = await signUp(app, 'editeur7@example.com')
+
+    const get = await app.inject({ method: 'GET', url: `/api/quizzes/${foreignQuiz.id}`, headers: { cookie } })
+    expect(get.statusCode).toBe(404)
+
+    const patch = await app.inject({
+      method: 'PATCH',
+      url: `/api/quizzes/${foreignQuiz.id}`,
+      payload: { title: 'hack' },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(patch.statusCode).toBe(404)
+
+    const del = await app.inject({ method: 'DELETE', url: `/api/quizzes/${foreignQuiz.id}`, headers: { cookie } })
+    expect(del.statusCode).toBe(404)
+
+    const list = await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie } })
+    const body = list.json() as Array<{ id: string }>
+    expect(body.some((q) => q.id === foreignQuiz.id)).toBe(false)
+
+    // Le quiz étranger existe toujours réellement (la DELETE 404 ci-dessus ne l'a pas supprimé) :
+    // relu directement via son propre tenant, pas via l'API.
+    const stillThere = await getQuiz(tenantScope(ctx.db, foreignTenant.id), foreignQuiz.id)
+    expect(stillThere).not.toBeNull()
+
     await app.close()
   })
 })
