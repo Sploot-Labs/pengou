@@ -171,6 +171,16 @@ export function PlayerLive() {
   const [sliderValue, setSliderValue] = useState(0)
   const [sliderTouched, setSliderTouched] = useState(false)
 
+  // Vérité serveur sur LA réponse effectivement comptabilisée pour cette
+  // manche — distincte des valeurs capturées ci-dessus, qui ne reflètent que
+  // ce que le joueur a cliqué/tapé localement. `evaluation()`/`renderRecap()`
+  // ne doivent JAMAIS présenter une valeur locale comme « la » réponse si le
+  // serveur ne l'a pas acceptée (course reveal/réponse-déjà-soumise/hors
+  // phase, etc.) — sans quoi on afficherait « Bonne réponse ! » pour un choix
+  // qui n'a jamais compté.
+  const [answerAccepted, setAnswerAccepted] = useState(false)
+  const [answerRejection, setAnswerRejection] = useState<string | null>(null)
+
   const promptRef = useRef<HTMLHeadingElement>(null)
   const answeredRef = useRef<HTMLParagraphElement>(null)
   const podiumHeadingRef = useRef<HTMLHeadingElement>(null)
@@ -197,14 +207,62 @@ export function PlayerLive() {
     }
   }
 
-  function submitAnswer(answer: unknown) {
+  /**
+   * Politique de nouvelle tentative après un rejet, décidée sur la raison
+   * EXACTE renvoyée par le moteur (`packages/game/src/engine.ts` —
+   * `submitAnswer`) :
+   *  - « réponse invalide pour ce type de question » : ce garde est le
+   *    DERNIER de `submitAnswer` côté moteur (après phase/joueur/question/
+   *    déjà-répondu) — la manche est donc encore active, rien n'empêche un
+   *    nouvel essai. On réaffiche la question (déverrouillée).
+   *  - toute autre raison (« hors phase question », « réponse déjà soumise
+   *    pour cette question », « aucune question active », question mal
+   *    démarrée, joueur non rattaché) : la manche est déjà terminée côté
+   *    serveur ou l'état est incohérent — on reste verrouillé ; le prochain
+   *    `question:reveal`/`scoreboard` (déjà en vol ou imminent) reprendra le
+   *    fil normalement.
+   */
+  function handleRejectedAnswer(reason: string | undefined) {
+    setAnswerRejection(
+      reason ? `Réponse non prise en compte : ${reason}` : 'Réponse non prise en compte.',
+    )
+    if (reason === 'réponse invalide pour ce type de question') {
+      setPhase('question')
+    }
+  }
+
+  async function submitAnswer(answer: unknown) {
     if (phase !== 'question') return
     // Verrouille l'UI immédiatement (perçu instantané) — la confirmation
-    // serveur arrive en tâche de fond ; un rejet (déjà répondu / hors phase)
-    // n'a rien de plus à faire ici, le score réel viendra de toute façon de
-    // `scoreboard`, jamais deviné côté client.
+    // serveur arrive en tâche de fond.
+    setAnswerRejection(null)
     setPhase('answered')
-    emitAck<AnswerAck>('player:answer', { answer }).catch(() => {})
+    try {
+      const ack = await emitAck<AnswerAck>('player:answer', { answer })
+      if (ack.accepted) {
+        setAnswerAccepted(true)
+        return
+      }
+      // Rejet « normal » du moteur (accepted:false + reason, PAS de champ
+      // `error`) : emitAck résout au lieu de rejeter — c'est à NOUS de
+      // vérifier `accepted`, sans quoi ce rejet serait silencieusement
+      // ignoré et l'écran continuerait de prétendre que la réponse a été
+      // enregistrée (course réaliste : le joueur répond juste au moment où
+      // l'hôte révèle → accepted:false côté serveur, mais l'UI locale
+      // resterait bloquée sur « enregistrée » puis calculerait « Bonne
+      // réponse ! » à partir d'un choix qui n'a jamais compté).
+      handleRejectedAnswer(ack.reason)
+    } catch (err) {
+      // Échec technique (emitAck a rejeté : ack `{error}` ou timeout) —
+      // distinct d'un rejet de règle de jeu, mais le joueur doit savoir que
+      // rien n'a été comptabilisé. Rien ne prouve que la manche soit
+      // terminée (c'est peut-être juste la socket qui a un accroc) : on
+      // rouvre la question pour permettre un nouvel essai.
+      setAnswerRejection(
+        err instanceof Error ? `Réponse non envoyée (${err.message}).` : 'Réponse non envoyée.',
+      )
+      setPhase('question')
+    }
   }
 
   /* ---------------------------------------------------------------- */
@@ -270,6 +328,8 @@ export function PlayerLive() {
       setRemaining(null)
       setRevealPayload(null)
       setLastAward(null)
+      setAnswerAccepted(false)
+      setAnswerRejection(null)
       resetAnswer(view)
       setPhase('question')
     })
@@ -345,16 +405,22 @@ export function PlayerLive() {
   }, [phase, remaining])
 
   // WCAG 2.4.3 : la soumission désactive le contrôle de réponse focalisé, le
-  // focus tomberait sur <body>. Le déplacer vers le message de confirmation.
+  // focus tomberait sur <body>. Le déplacer vers le message de confirmation
+  // — ou vers le message de rejet s'il y en a un (y compris quand un rejet
+  // retryable rouvre la question : `answerRejection` seul suffit à
+  // déclencher le focus, sans dépendre de `phase`).
   useEffect(() => {
-    if (phase === 'answered') answeredRef.current?.focus()
-  }, [phase])
+    if (phase === 'answered' || answerRejection) answeredRef.current?.focus()
+  }, [phase, answerRejection])
 
-  // Annonce le « moment phare » : à l'arrivée d'une question, le focus va sur
-  // son intitulé pour qu'un lecteur d'écran le lise en premier.
+  // Annonce le « moment phare » : à l'arrivée d'une NOUVELLE question, le
+  // focus va sur son intitulé pour qu'un lecteur d'écran le lise en premier.
+  // Gardé sur `[question]` seul (et non `phase`) : un rejet retryable remet
+  // aussi `phase` à 'question' sans changer `question` — cet effet ne doit
+  // PAS reprendre le focus au message de rejet dans ce cas.
   useEffect(() => {
-    if (phase === 'question') promptRef.current?.focus()
-  }, [phase, question])
+    if (question) promptRef.current?.focus()
+  }, [question])
 
   // Le podium remplace tout l'écran comme la carte de confirmation de /join —
   // même traitement : déplacer le focus sur son titre.
@@ -382,17 +448,29 @@ export function PlayerLive() {
     ? 'Réponse enregistrée. En attente de la suite…'
     : 'Temps écoulé. En attente de la suite…'
 
+  // Ce que le serveur a réellement compté pour cette manche — `null`/vide si
+  // la réponse n'a jamais été acceptée (rejetée, jamais soumise, temps
+  // écoulé). Utilisé PARTOUT où on affiche « la » réponse du joueur, pour ne
+  // jamais faire passer un choix local rejeté pour une réponse retenue.
+  const effectiveMcqOptionIndex = answerAccepted ? mcqOptionIndex : null
+  const effectiveBoolChoice = answerAccepted ? boolChoice : null
+  const effectiveTextValue = answerAccepted ? textValue : ''
+  const effectiveSliderValue = answerAccepted && sliderTouched ? sliderValue : null
+
   function evaluation(): { kind: ResultKind; diff: number | null } | null {
     if (!question || !revealPayload) return null
     switch (question.type) {
       case 'mcq':
-        return { kind: evaluateMcq(revealPayload.correct as McqCorrect, mcqOptionIndex), diff: null }
+        return { kind: evaluateMcq(revealPayload.correct as McqCorrect, effectiveMcqOptionIndex), diff: null }
       case 'truefalse':
-        return { kind: evaluateTrueFalse(revealPayload.correct as TrueFalseCorrect, boolChoice), diff: null }
+        return {
+          kind: evaluateTrueFalse(revealPayload.correct as TrueFalseCorrect, effectiveBoolChoice),
+          diff: null,
+        }
       case 'text':
-        return { kind: evaluateText(revealPayload.correct as TextCorrect, textValue), diff: null }
+        return { kind: evaluateText(revealPayload.correct as TextCorrect, effectiveTextValue), diff: null }
       case 'slider':
-        return evaluateSlider(revealPayload.correct as SliderCorrect, sliderTouched ? sliderValue : null)
+        return evaluateSlider(revealPayload.correct as SliderCorrect, effectiveSliderValue)
     }
   }
 
@@ -409,7 +487,7 @@ export function PlayerLive() {
                 shape={MCQ_SHAPES[index % MCQ_SHAPES.length]}
                 label={opt.label}
                 disabled
-                reveal={opt.correct ? 'correct' : index === mcqOptionIndex ? 'incorrect' : null}
+                reveal={opt.correct ? 'correct' : index === effectiveMcqOptionIndex ? 'incorrect' : null}
               />
             ))}
           </div>
@@ -418,8 +496,8 @@ export function PlayerLive() {
       case 'truefalse': {
         const correct = revealPayload.correct as TrueFalseCorrect
         const correctLabel = correct.correct ? 'Vrai' : 'Faux'
-        const chose = boolChoice === null ? null : boolChoice ? 'Vrai' : 'Faux'
-        const wrong = chose !== null && boolChoice !== correct.correct
+        const chose = effectiveBoolChoice === null ? null : effectiveBoolChoice ? 'Vrai' : 'Faux'
+        const wrong = chose !== null && effectiveBoolChoice !== correct.correct
         return (
           <>
             <div className="player-result__recap-line player-result__recap-line--correct">
@@ -464,7 +542,7 @@ export function PlayerLive() {
               <span>Valeur correcte : {correct.correct}</span>
             </div>
             <div className="player-result__recap-line">
-              <span>Votre estimation : {sliderTouched ? sliderValue : '—'}</span>
+              <span>Votre estimation : {effectiveSliderValue !== null ? effectiveSliderValue : '—'}</span>
             </div>
           </>
         )
@@ -618,7 +696,7 @@ export function PlayerLive() {
             )}
           </div>
 
-          {phase === 'answered' && (
+          {phase === 'answered' && !answerRejection && (
             <p
               className="player-answered"
               role="status"
@@ -627,6 +705,15 @@ export function PlayerLive() {
               tabIndex={-1}
             >
               {answeredMessage}
+            </p>
+          )}
+
+          {answerRejection && (
+            // role="alert" (pas juste status) : c'est une correction d'un
+            // état affiché juste avant (« enregistrée ») — le joueur doit
+            // être notifié de façon plus appuyée qu'une simple mise à jour.
+            <p className="player-answered" role="alert" ref={answeredRef} tabIndex={-1}>
+              {answerRejection}
             </p>
           )}
         </div>
