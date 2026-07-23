@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
+import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue } from '../motion/index.js'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
+import { ThemeProvider } from '../theme/ThemeProvider.js'
 import { AnswerShape, JoinInvite, Logo, PinDisplay, TimerRing } from '../ui'
 import { PodiumView } from './Podium'
 
@@ -69,7 +71,7 @@ type JoinState = 'connecting' | 'joined' | 'error'
  * choisi côté front). */
 const REVEAL_HOLD_MS = 5000
 
-export function BigScreen() {
+function BigScreenInner() {
   const { sessionId } = useParams<{ sessionId: string }>()
   const [searchParams] = useSearchParams()
   const token = searchParams.get('token')
@@ -77,6 +79,7 @@ export function BigScreen() {
   const quizTitle = searchParams.get('title') ?? 'Le quiz en direct, open-source.'
 
   const { socket, emitAck, on } = useGameSocket()
+  const cue = useCue()
 
   const [joinState, setJoinState] = useState<JoinState>(token ? 'connecting' : 'error')
   const [joinError, setJoinError] = useState<string | null>(
@@ -191,6 +194,7 @@ export function BigScreen() {
       // bascule auto reveal→scoreboard ci-dessous (voir REVEAL_HOLD_MS) — il
       // ne doit jamais se déclencher sur les données de la question PRÉCÉDENTE.
       setRanking([])
+      cue('phase.enter:question')
       setPhase('question')
     })
 
@@ -204,6 +208,7 @@ export function BigScreen() {
 
     const offReveal = on<RevealPayload>('question:reveal', (r) => {
       setRevealPayload(r)
+      cue('phase.enter:reveal')
       setPhase('reveal')
     })
 
@@ -213,6 +218,7 @@ export function BigScreen() {
 
     const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
       setPodiumTop(top)
+      cue('phase.enter:podium')
       setPhase('podium')
     })
 
@@ -233,7 +239,10 @@ export function BigScreen() {
   // arrivé (jamais sur un `ranking` resté vide depuis le reset ci-dessus).
   useEffect(() => {
     if (phase !== 'reveal' || ranking.length === 0) return
-    const t = window.setTimeout(() => setPhase('scoreboard'), REVEAL_HOLD_MS)
+    const t = window.setTimeout(() => {
+      cue('phase.enter:scoreboard')
+      setPhase('scoreboard')
+    }, REVEAL_HOLD_MS)
     return () => window.clearTimeout(t)
   }, [phase, ranking])
 
@@ -373,11 +382,14 @@ export function BigScreen() {
             <div className="big-distribution__bar-track">
               <div
                 className="big-distribution__bar"
-                style={{
-                  height: `${(row.count / maxCount) * 100}%`,
-                  ['--bar-color' as string]: row.shape ? `var(--ans-${row.shape})` : 'var(--brand-2)',
-                }}
-              />
+                style={{ height: `${(row.count / maxCount) * 100}%` }}
+              >
+                <AnimatedBar
+                  value={row.count}
+                  max={maxCount}
+                  color={row.shape ? `var(--ans-${row.shape})` : 'var(--brand-2)'}
+                />
+              </div>
             </div>
             <span className="big-distribution__label">
               {row.shape && <AnswerShape shape={row.shape} size={20} />}
@@ -526,7 +538,9 @@ export function BigScreen() {
                     {index + 1}
                   </span>
                   <span className="big-scoreboard__name">{p.nickname}</span>
-                  <span className="big-scoreboard__score">{p.score} pts</span>
+                  <span className="big-scoreboard__score">
+                    <CountUp value={p.score} format={(n) => `${n} pts`} />
+                  </span>
                 </li>
               ))}
             </ol>
@@ -535,8 +549,19 @@ export function BigScreen() {
       )}
 
       {phase === 'podium' && (
-        <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={podiumHeadingRef} showConversionFooter />
+        <div style={{ position: 'relative' }}>
+          <Confetti active />
+          <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={podiumHeadingRef} showConversionFooter />
+        </div>
       )}
     </main>
+  )
+}
+
+export function BigScreen() {
+  return (
+    <ThemeProvider theme="scene" scheme="dark">
+      <BigScreenInner />
+    </ThemeProvider>
   )
 }
