@@ -1,35 +1,37 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { mockGamePin } from '../mockData'
-import { Button, Logo, PinDisplay } from '../ui'
+import { useRef, useState, type FormEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { savePlayerSession } from '../realtime/playerSession'
+import { useGameSocket } from '../realtime/useGameSocket'
+import { Button, Logo } from '../ui'
 
 interface FieldErrors {
   pin?: string
   pseudo?: string
 }
 
-type Status = 'idle' | 'pending' | 'joined'
+interface JoinAck {
+  playerId: string
+  joinToken: string
+}
+
+type Status = 'idle' | 'pending'
 
 export function Join() {
+  const navigate = useNavigate()
+  const { emitAck } = useGameSocket()
+
   const [pin, setPin] = useState('')
   const [pseudo, setPseudo] = useState('')
   const [errors, setErrors] = useState<FieldErrors>({})
   const [status, setStatus] = useState<Status>('idle')
   const pinRef = useRef<HTMLInputElement>(null)
   const pseudoRef = useRef<HTMLInputElement>(null)
-  const welcomeRef = useRef<HTMLHeadingElement>(null)
-
-  // WCAG 2.4.3: when the form is replaced by the confirmation card, the
-  // focused submit button is unmounted and focus would fall back to <body>.
-  // Move it to the welcome heading instead.
-  useEffect(() => {
-    if (status === 'joined') welcomeRef.current?.focus()
-  }, [status])
 
   function validate(): FieldErrors {
     const next: FieldErrors = {}
     const digitsOnly = pin.replace(/\D/g, '')
-    if (digitsOnly.length !== 6 || digitsOnly !== mockGamePin) {
-      next.pin = 'PIN introuvable. Vérifiez les 6 chiffres.'
+    if (digitsOnly.length !== 6) {
+      next.pin = 'Le PIN doit comporter exactement 6 chiffres.'
     }
     if (pseudo.trim().length === 0) {
       next.pseudo = 'Pseudo requis. Choisissez un pseudo pour rejoindre.'
@@ -37,7 +39,7 @@ export function Join() {
     return next
   }
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
     // Validate both fields at once (no sequential back-and-forth).
     const next = validate()
@@ -50,29 +52,28 @@ export function Join() {
       pseudoRef.current?.focus()
       return
     }
-    // Nominal path: show a pending → confirmation state (handoff to PlayerLive).
-    setStatus('pending')
-    window.setTimeout(() => setStatus('joined'), 700)
-  }
 
-  if (status === 'joined') {
-    return (
-      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
-        <Logo />
-        <div className="join-card join-card--confirm" role="status">
-          <h1 ref={welcomeRef} tabIndex={-1}>
-            Bienvenue {pseudo.trim()} !
-          </h1>
-          <p style={{ color: 'var(--ink-dim)' }}>
-            Vous avez rejoint la partie. En attente du démarrage — gardez cet écran ouvert.
-          </p>
-          <PinDisplay pin={mockGamePin} label="Code PIN de la partie" />
-        </div>
-        <p className="join-tagline">
-          Arena — le quiz en direct, open-source. Chez vous ou dans le cloud.
-        </p>
-      </main>
-    )
+    setStatus('pending')
+    try {
+      const trimmedPseudo = pseudo.trim()
+      const ack = await emitAck<JoinAck>('player:join', { pin, nickname: trimmedPseudo })
+      savePlayerSession({
+        pin,
+        playerId: ack.playerId,
+        joinToken: ack.joinToken,
+        nickname: trimmedPseudo,
+      })
+      navigate('/play')
+    } catch (err) {
+      setStatus('idle')
+      // The server's own message (e.g. "PIN invalide") — surfaced through the
+      // existing textual error UI, on the PIN field since an unknown PIN is
+      // by far the most common cause.
+      setErrors({
+        pin: err instanceof Error ? err.message : 'Impossible de rejoindre la partie.',
+      })
+      pinRef.current?.focus()
+    }
   }
 
   return (

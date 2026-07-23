@@ -1,200 +1,425 @@
 import { useEffect, useRef, useState } from 'react'
-import { getRanking, mockQuiz, sessionPlayers } from '../mockData'
-import type { Question } from '../mockData'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { clearPlayerSession, loadPlayerSession } from '../realtime/playerSession'
+import { useGameSocket } from '../realtime/useGameSocket'
 import { AnswerTile, Button, TimerRing } from '../ui'
 
-type ResultKind = 'correct' | 'partial' | 'incorrect' | 'timeout'
-interface Evaluation {
-  kind: ResultKind
-  award: number
-  /** Absolute distance to the correct slider value, when relevant. */
-  sliderDiff: number | null
-  /** True when the answer was submitted with time to spare (speed bonus). */
-  fast: boolean
+/**
+ * Parcours joueur réel, câblé sur la passerelle Socket.IO du serveur de jeu
+ * (voir `apps/server/src/game-gateway.ts` — le contrat verbatim est reproduit
+ * ci-dessous en commentaires). Plus aucune donnée mockée : tout provient des
+ * événements serveur, et la bonne réponse n'existe nulle part côté client
+ * avant `question:reveal`.
+ */
+
+/* ------------------------------------------------------------------ */
+/* Contrat serveur (types locaux — pas de mock)                        */
+/* ------------------------------------------------------------------ */
+
+type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider'
+
+/** `question:show` — projection anti-triche : jamais de bonne réponse. */
+interface QuestionShowPayload {
+  id: string
+  type: QuestionKind
+  prompt: string
+  timeLimit: number
+  payload: unknown
 }
 
-type PlayerState = 'waiting' | 'question' | 'answered' | 'result'
-type Connection = 'online' | 'reconnecting' | 'reconnected'
+interface McqShowPayload {
+  options: { label: string }[]
+}
+interface SliderShowPayload {
+  min: number
+  max: number
+}
 
-/** Accent/diacritic-insensitive comparison for free-text answers. */
-function normalize(value: string): string {
-  return value
+interface TimerPayload {
+  timeLimit: number
+  /** Horodatage serveur (ms epoch) du démarrage de la question — `null` si
+   * aucune question courante. Le compte à rebours se recalcule à partir de
+   * cette valeur, jamais d'un simple chrono local démarré à la réception. */
+  startedAt: number | null
+}
+
+/** `question:reveal` — seul moment où la bonne réponse existe côté client,
+ * et seulement le temps de calculer le rendu (jamais stockée avant). Forme
+ * exacte selon le type (voir packages/quiz/src/{mcq,truefalse,text,slider}.ts). */
+interface RevealPayload {
+  correct: unknown
+  distribution: Record<string, number>
+}
+interface McqCorrect {
+  options: { label: string; correct: boolean }[]
+}
+interface TrueFalseCorrect {
+  correct: boolean
+}
+interface TextCorrect {
+  answers: string[]
+  caseSensitive?: boolean
+}
+interface SliderCorrect {
+  min: number
+  max: number
+  correct: number
+  step?: number
+}
+
+interface RankingEntry {
+  playerId: string
+  nickname: string
+  score: number
+}
+
+interface ReconnectAck {
+  playerId: string
+  phase: 'lobby' | 'question' | 'reveal' | 'scoreboard' | 'podium'
+  score: number
+}
+
+interface AnswerAck {
+  accepted: boolean
+  reason?: string
+}
+
+/* ------------------------------------------------------------------ */
+/* Évaluation locale de la correction — UNIQUEMENT après reveal         */
+/* ------------------------------------------------------------------ */
+
+type ResultKind = 'correct' | 'partial' | 'incorrect' | 'timeout'
+
+/** Forme décorative des tuiles mcq : le serveur n'envoie que des labels, la
+ * forme (triangle/losange/rond/carré) est une reconstitution purement
+ * visuelle côté client — jamais un signal de correction. Cycle au-delà de 4
+ * options (le schéma en autorise jusqu'à 6). */
+type TileShape = 'triangle' | 'diamond' | 'circle' | 'square'
+const MCQ_SHAPES: readonly TileShape[] = ['triangle', 'diamond', 'circle', 'square']
+
+/** Repli des accents/casse — mêmes règles que `packages/quiz/src/text.ts`. */
+function normalizeText(value: string, caseSensitive: boolean): string {
+  const folded = value
     .trim()
-    .toLowerCase()
     .normalize('NFD')
     .replace(/\p{Diacritic}/gu, '')
+  return caseSensitive ? folded : folded.toLowerCase()
 }
 
-export function PlayerLive() {
-  const [questionIndex, setQuestionIndex] = useState(0)
-  const [state, setState] = useState<PlayerState>('waiting')
-  const [remaining, setRemaining] = useState(mockQuiz.questions[0].durationSeconds)
-  const [score, setScore] = useState(0)
-  const [connection, setConnection] = useState<Connection>('online')
+function evaluateMcq(correct: McqCorrect, optionIndex: number | null): ResultKind {
+  if (optionIndex === null) return 'timeout'
+  return correct.options[optionIndex]?.correct ? 'correct' : 'incorrect'
+}
 
-  // Captured answer, reset each question.
-  const [optionId, setOptionId] = useState<string | null>(null)
+function evaluateTrueFalse(correct: TrueFalseCorrect, value: boolean | null): ResultKind {
+  if (value === null) return 'timeout'
+  return value === correct.correct ? 'correct' : 'incorrect'
+}
+
+function evaluateText(correct: TextCorrect, text: string): ResultKind {
+  if (text.trim().length === 0) return 'timeout'
+  const caseSensitive = correct.caseSensitive ?? false
+  const given = normalizeText(text, caseSensitive)
+  return correct.answers.some((candidate) => normalizeText(candidate, caseSensitive) === given)
+    ? 'correct'
+    : 'incorrect'
+}
+
+/** Même tolérance que `packages/quiz/src/slider.ts` : `max(1, round(5% de l'étendue))`. */
+function evaluateSlider(
+  correct: SliderCorrect,
+  value: number | null,
+): { kind: ResultKind; diff: number | null } {
+  if (value === null) return { kind: 'timeout', diff: null }
+  const diff = Math.abs(value - correct.correct)
+  const tolerance = Math.max(1, Math.round(0.05 * (correct.max - correct.min)))
+  if (diff === 0) return { kind: 'correct', diff: 0 }
+  if (diff <= tolerance) return { kind: 'partial', diff }
+  return { kind: 'incorrect', diff }
+}
+
+type PlayerPhase = 'waiting' | 'question' | 'answered' | 'result' | 'podium'
+type Connection = 'online' | 'reconnecting' | 'reconnected'
+
+export function PlayerLive() {
+  const navigate = useNavigate()
+  const { socket, emitAck, on } = useGameSocket()
+
+  // Chargé une seule fois : c'est l'identité de joueur anonyme (voir
+  // realtime/playerSession.ts). Si absente, `/join` est la seule route valide.
+  const storedRef = useRef(loadPlayerSession())
+  const stored = storedRef.current
+
+  const [phase, setPhase] = useState<PlayerPhase>('waiting')
+  const [connection, setConnection] = useState<Connection>('online')
+  const [score, setScore] = useState(0)
+  const scoreRef = useRef(0)
+
+  const [question, setQuestion] = useState<QuestionShowPayload | null>(null)
+  const [timer, setTimer] = useState<TimerPayload | null>(null)
+  const [remaining, setRemaining] = useState<number | null>(null)
+
+  const [revealPayload, setRevealPayload] = useState<RevealPayload | null>(null)
+  const [lastAward, setLastAward] = useState<number | null>(null)
+  const [lastRanking, setLastRanking] = useState<RankingEntry[]>([])
+  const [podiumTop, setPodiumTop] = useState<RankingEntry[]>([])
+
+  // Réponse en cours de capture, remise à zéro à chaque nouvelle question.
+  const [mcqOptionIndex, setMcqOptionIndex] = useState<number | null>(null)
   const [boolChoice, setBoolChoice] = useState<boolean | null>(null)
   const [textValue, setTextValue] = useState('')
-  const [sliderValue, setSliderValue] = useState<number>(0)
-  // A slider left untouched must count as « no submission » (timeout), not as
-  // an answer at the min value.
+  const [sliderValue, setSliderValue] = useState(0)
   const [sliderTouched, setSliderTouched] = useState(false)
 
-  const question = mockQuiz.questions[questionIndex]
-
-  const answeredRef = useRef<HTMLParagraphElement>(null)
   const promptRef = useRef<HTMLHeadingElement>(null)
+  const answeredRef = useRef<HTMLParagraphElement>(null)
+  const podiumHeadingRef = useRef<HTMLHeadingElement>(null)
 
-  useEffect(() => {
-    if (state !== 'question') return
-    if (remaining <= 0) {
-      // Time out with no submission: lock into the answered/waiting state.
-      setState('answered')
-      return
-    }
-    const timer = window.setTimeout(() => setRemaining((s) => s - 1), 1000)
-    return () => window.clearTimeout(timer)
-  }, [state, remaining])
-
-  // WCAG 2.4.3: submitting disables the focused answer control, dropping focus
-  // to <body>. Move focus to the confirmation message instead.
-  useEffect(() => {
-    if (state === 'answered') answeredRef.current?.focus()
-  }, [state])
-
-  // Announce the « hero moment »: when a question appears, move focus to its
-  // heading so a screen reader reads the prompt (not just the timer).
-  useEffect(() => {
-    if (state === 'question') promptRef.current?.focus()
-  }, [state, questionIndex])
-
-  // The « Reconnecté » banner must not linger the whole game — fade back to
-  // « online » after a few seconds (announcement stays live meanwhile).
-  useEffect(() => {
-    if (connection !== 'reconnected') return
-    const timer = window.setTimeout(() => setConnection('online'), 3000)
-    return () => window.clearTimeout(timer)
-  }, [connection])
-
-  function resetAnswer(q: Question) {
-    setOptionId(null)
+  function resetAnswer(q: QuestionShowPayload) {
+    setMcqOptionIndex(null)
     setBoolChoice(null)
     setTextValue('')
-    setSliderValue(q.type === 'slider' ? q.min : 0)
     setSliderTouched(false)
-  }
-
-  function startQuestion(index = questionIndex) {
-    const q = mockQuiz.questions[index]
-    setQuestionIndex(index)
-    setRemaining(q.durationSeconds)
-    resetAnswer(q)
-    setState('question')
-  }
-
-  /** Player has submitted — lock the UI, DO NOT reveal correctness yet. */
-  function submitAnswer() {
-    if (state !== 'question') return
-    setState('answered')
-  }
-
-  /**
-   * Score the current answer (mock). Correct answers earn a speed-modulated
-   * award; the slider grants proximity (partial) credit near the target.
-   * `remaining` is frozen at submission time (the timer only ticks while the
-   * state is 'question'), so it doubles as the captured time-left.
-   */
-  function evaluate(): Evaluation {
-    if (!hasSubmission()) return { kind: 'timeout', award: 0, sliderDiff: null, fast: false }
-    const duration = question.durationSeconds
-    const speedFactor = 0.5 + 0.5 * (Math.max(0, remaining) / duration)
-    const fast = remaining / duration > 0.5
-
-    if (question.type === 'slider') {
-      const diff = Math.abs(sliderValue - question.correctValue)
-      const range = Math.max(1, question.max - question.min)
-      const tolBand = Math.max(1, Math.round(range * 0.05))
-      if (diff === 0) {
-        return { kind: 'correct', award: Math.round(question.points * speedFactor), sliderDiff: 0, fast }
-      }
-      if (diff <= tolBand) {
-        const proximity = 1 - diff / (tolBand + 1)
-        const base = question.points * 0.6 * proximity
-        return { kind: 'partial', award: Math.round(base * speedFactor), sliderDiff: diff, fast }
-      }
-      return { kind: 'incorrect', award: 0, sliderDiff: diff, fast: false }
-    }
-
-    const ok = isCorrect()
-    return {
-      kind: ok ? 'correct' : 'incorrect',
-      award: ok ? Math.round(question.points * speedFactor) : 0,
-      sliderDiff: null,
-      fast: ok && fast,
-    }
-  }
-
-  /** Reveal correctness + points — driven by the host's REVEAL (demo control). */
-  function reveal() {
-    const award = evaluate().award
-    if (award > 0) setScore((s) => s + award)
-    setState('result')
+    setSliderValue(q.type === 'slider' ? (q.payload as SliderShowPayload).min : 0)
   }
 
   function hasSubmission(): boolean {
+    if (!question) return false
     switch (question.type) {
       case 'mcq':
-        return optionId !== null
+        return mcqOptionIndex !== null
       case 'truefalse':
         return boolChoice !== null
       case 'text':
         return textValue.trim().length > 0
       case 'slider':
-        // Only a deliberate interaction counts (drag or explicit « Valider »).
         return sliderTouched
     }
   }
 
-  function isCorrect(): boolean {
+  function submitAnswer(answer: unknown) {
+    if (phase !== 'question') return
+    // Verrouille l'UI immédiatement (perçu instantané) — la confirmation
+    // serveur arrive en tâche de fond ; un rejet (déjà répondu / hors phase)
+    // n'a rien de plus à faire ici, le score réel viendra de toute façon de
+    // `scoreboard`, jamais deviné côté client.
+    setPhase('answered')
+    emitAck<AnswerAck>('player:answer', { answer }).catch(() => {})
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Connexion, reconnexion, abonnements — un seul effet, un seul montage */
+  /* ---------------------------------------------------------------- */
+
+  useEffect(() => {
+    if (!stored) return
+
+    let cancelled = false
+    let hasConnectedOnce = false
+
+    async function resync(showReconnectedBanner: boolean) {
+      try {
+        const ack = await emitAck<ReconnectAck>('player:reconnect', {
+          pin: stored!.pin,
+          joinToken: stored!.joinToken,
+        })
+        if (cancelled) return
+        scoreRef.current = ack.score
+        setScore(ack.score)
+        // Le serveur ne renvoie une projection `question:show`/`timer` que si
+        // la phase est 'question' (voir game-gateway.ts) — pour toute autre
+        // phase (lobby/reveal/scoreboard/podium), on retombe sur « en attente »
+        // et les prochains événements diffusés (question:show suivant, ou
+        // podium) reprendront le fil normalement.
+        if (ack.phase !== 'question') setPhase('waiting')
+        if (showReconnectedBanner) setConnection('reconnected')
+      } catch {
+        // joinToken invalide/périmé (ou PIN inconnu) : impossible de
+        // continuer sans identité de joueur valide.
+        if (cancelled) return
+        clearPlayerSession()
+        navigate('/join', { replace: true })
+      }
+    }
+
+    // Si la socket est déjà connectée au moment où cet effet s'exécute (cas
+    // courant : la connexion transport a eu le temps de s'établir avant que
+    // React ne monte l'effet), on tente la resynchronisation tout de suite —
+    // sans attendre un événement 'connect' qui ne se reproduira pas puisqu'il
+    // a déjà eu lieu. Sinon, le listener 'connect' ci-dessous s'en charge dès
+    // que le transport est prêt. Dans les deux cas, pas de bannière
+    // « reconnecté » pour cette toute première tentative : ce n'est pas une
+    // coupure, c'est l'arrivée normale sur l'écran.
+    if (socket.connected) {
+      hasConnectedOnce = true
+      void resync(false)
+    }
+
+    const offConnect = on('connect', () => {
+      const isRealReconnect = hasConnectedOnce
+      hasConnectedOnce = true
+      void resync(isRealReconnect)
+    })
+    const offDisconnect = on('disconnect', () => {
+      setConnection('reconnecting')
+    })
+
+    const offShow = on<QuestionShowPayload>('question:show', (view) => {
+      setQuestion(view)
+      setTimer(null)
+      setRemaining(null)
+      setRevealPayload(null)
+      setLastAward(null)
+      resetAnswer(view)
+      setPhase('question')
+    })
+
+    const offTimer = on<TimerPayload>('timer', (t) => {
+      setTimer(t)
+    })
+
+    const offReveal = on<RevealPayload>('question:reveal', (r) => {
+      setRevealPayload(r)
+      setPhase('result')
+    })
+
+    const offScoreboard = on<{ ranking: RankingEntry[] }>('scoreboard', ({ ranking }) => {
+      setLastRanking(ranking)
+      const own = stored ? ranking.find((entry) => entry.playerId === stored.playerId) : undefined
+      if (own) {
+        setLastAward(own.score - scoreRef.current)
+        scoreRef.current = own.score
+        setScore(own.score)
+      }
+    })
+
+    const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
+      setPodiumTop(top)
+      setPhase('podium')
+    })
+
+    return () => {
+      cancelled = true
+      offConnect()
+      offDisconnect()
+      offShow()
+      offTimer()
+      offReveal()
+      offScoreboard()
+      offPodium()
+    }
+    // Un seul montage : `emitAck`/`on` sont stables pour la durée de vie du
+    // composant (voir useGameSocket.ts), `stored` ne change jamais après le
+    // premier rendu (chargé une fois dans `storedRef`).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  /* ---------------------------------------------------------------- */
+  /* Chrono — dérivé de `startedAt` serveur, jamais d'un chrono local seul */
+  /* ---------------------------------------------------------------- */
+
+  useEffect(() => {
+    if (!timer || phase !== 'question') return
+    function tick() {
+      if (!timer) return
+      if (timer.startedAt === null) {
+        setRemaining(timer.timeLimit)
+        return
+      }
+      const elapsedMs = Date.now() - timer.startedAt
+      const remainingSeconds = Math.max(0, Math.ceil((timer.timeLimit * 1000 - elapsedMs) / 1000))
+      setRemaining(remainingSeconds)
+    }
+    tick()
+    const id = window.setInterval(tick, 250)
+    return () => window.clearInterval(id)
+  }, [timer, phase])
+
+  // Temps écoulé sans action du joueur : verrouille sur l'état « répondu »,
+  // comme un envoi (mais `hasSubmission()` restera faux → message « temps
+  // écoulé »).
+  useEffect(() => {
+    if (phase === 'question' && remaining === 0) {
+      setPhase('answered')
+    }
+  }, [phase, remaining])
+
+  // WCAG 2.4.3 : la soumission désactive le contrôle de réponse focalisé, le
+  // focus tomberait sur <body>. Le déplacer vers le message de confirmation.
+  useEffect(() => {
+    if (phase === 'answered') answeredRef.current?.focus()
+  }, [phase])
+
+  // Annonce le « moment phare » : à l'arrivée d'une question, le focus va sur
+  // son intitulé pour qu'un lecteur d'écran le lise en premier.
+  useEffect(() => {
+    if (phase === 'question') promptRef.current?.focus()
+  }, [phase, question])
+
+  // Le podium remplace tout l'écran comme la carte de confirmation de /join —
+  // même traitement : déplacer le focus sur son titre.
+  useEffect(() => {
+    if (phase === 'podium') podiumHeadingRef.current?.focus()
+  }, [phase])
+
+  // La bannière « Reconnecté » ne doit pas rester affichée toute la partie.
+  useEffect(() => {
+    if (connection !== 'reconnected') return
+    const timeout = window.setTimeout(() => setConnection('online'), 3000)
+    return () => window.clearTimeout(timeout)
+  }, [connection])
+
+  if (!stored) {
+    return <Navigate to="/join" replace />
+  }
+
+  const myRank = (() => {
+    const index = lastRanking.findIndex((entry) => entry.playerId === stored.playerId)
+    return index === -1 ? null : index + 1
+  })()
+
+  const answeredMessage = hasSubmission()
+    ? 'Réponse enregistrée. En attente de la suite…'
+    : 'Temps écoulé. En attente de la suite…'
+
+  function evaluation(): { kind: ResultKind; diff: number | null } | null {
+    if (!question || !revealPayload) return null
     switch (question.type) {
       case 'mcq':
-        return question.options.find((o) => o.id === optionId)?.correct ?? false
+        return { kind: evaluateMcq(revealPayload.correct as McqCorrect, mcqOptionIndex), diff: null }
       case 'truefalse':
-        return boolChoice === question.correctAnswer
+        return { kind: evaluateTrueFalse(revealPayload.correct as TrueFalseCorrect, boolChoice), diff: null }
       case 'text':
-        return question.acceptedAnswers.some((a) => normalize(a) === normalize(textValue))
+        return { kind: evaluateText(revealPayload.correct as TextCorrect, textValue), diff: null }
       case 'slider':
-        return sliderValue === question.correctValue
+        return evaluateSlider(revealPayload.correct as SliderCorrect, sliderTouched ? sliderValue : null)
     }
   }
 
-  function backToWaiting() {
-    setState('waiting')
-    resetAnswer(question)
-  }
-
-  /** Reveal the answer key on the player's own screen (closes the loop). */
   function renderRecap() {
+    if (!question || !revealPayload) return null
     switch (question.type) {
-      case 'mcq':
+      case 'mcq': {
+        const correct = revealPayload.correct as McqCorrect
         return (
           <div className="player-tiles">
-            {question.options.map((opt) => (
+            {correct.options.map((opt, index) => (
               <AnswerTile
-                key={opt.id}
-                shape={opt.shape}
+                key={index}
+                shape={MCQ_SHAPES[index % MCQ_SHAPES.length]}
                 label={opt.label}
                 disabled
-                reveal={opt.correct ? 'correct' : opt.id === optionId ? 'incorrect' : null}
+                reveal={opt.correct ? 'correct' : index === mcqOptionIndex ? 'incorrect' : null}
               />
             ))}
           </div>
         )
+      }
       case 'truefalse': {
-        const correctLabel = question.correctAnswer ? 'Vrai' : 'Faux'
+        const correct = revealPayload.correct as TrueFalseCorrect
+        const correctLabel = correct.correct ? 'Vrai' : 'Faux'
         const chose = boolChoice === null ? null : boolChoice ? 'Vrai' : 'Faux'
-        const wrong = chose !== null && boolChoice !== question.correctAnswer
+        const wrong = chose !== null && boolChoice !== correct.correct
         return (
           <>
             <div className="player-result__recap-line player-result__recap-line--correct">
@@ -214,7 +439,8 @@ export function PlayerLive() {
           </>
         )
       }
-      case 'text':
+      case 'text': {
+        const correct = revealPayload.correct as TextCorrect
         return (
           <div className="player-result__recap-line player-result__recap-line--correct">
             <span className="player-result__recap-mark" aria-hidden="true">
@@ -222,58 +448,48 @@ export function PlayerLive() {
             </span>
             <span>
               Réponse(s) acceptée(s) :{' '}
-              {question.acceptedAnswers.filter((a) => a.trim().length > 0).join(' · ')}
+              {correct.answers.filter((a) => a.trim().length > 0).join(' · ')}
             </span>
           </div>
         )
-      case 'slider':
+      }
+      case 'slider': {
+        const correct = revealPayload.correct as SliderCorrect
         return (
           <>
             <div className="player-result__recap-line player-result__recap-line--correct">
               <span className="player-result__recap-mark" aria-hidden="true">
                 ✓
               </span>
-              <span>Valeur correcte : {question.correctValue}</span>
+              <span>Valeur correcte : {correct.correct}</span>
             </div>
             <div className="player-result__recap-line">
-              <span>Votre estimation : {sliderValue}</span>
+              <span>Votre estimation : {sliderTouched ? sliderValue : '—'}</span>
             </div>
           </>
         )
+      }
     }
   }
 
-  const evaluation = state === 'result' ? evaluate() : null
-
-  const ranking = getRanking(
-    sessionPlayers.map((p) => (p.id === 'you' ? { ...p, score } : p)),
-  )
-  const myRank = ranking.find((p) => p.id === 'you')?.rank ?? ranking.length
-
-  const answeredMessage = 'Réponse enregistrée. En attente de la suite…'
+  const evalResult = phase === 'result' ? evaluation() : null
 
   return (
     <main className="player-screen" id="contenu-principal" tabIndex={-1}>
       <div className="player-status-bar">
-        <span style={{ fontWeight: 700 }}>{mockQuiz.title}</span>
+        <span style={{ fontWeight: 700 }}>PIN {stored.pin}</span>
         <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--ink-dim)' }}>
           Score : {score}
         </span>
       </div>
 
       {connection !== 'online' && (
-        <p
-          className={`player-net player-net--${connection}`}
-          role="status"
-          aria-live="polite"
-        >
-          {connection === 'reconnecting'
-            ? 'Reconnexion…'
-            : 'Reconnecté, score conservé.'}
+        <p className={`player-net player-net--${connection}`} role="status" aria-live="polite">
+          {connection === 'reconnecting' ? 'Reconnexion…' : 'Reconnecté, score conservé.'}
         </p>
       )}
 
-      {state === 'waiting' && (
+      {phase === 'waiting' && (
         <div className="player-waiting">
           <h1>En attente de la prochaine question…</h1>
           <p style={{ color: 'var(--ink-dim)' }}>
@@ -282,38 +498,35 @@ export function PlayerLive() {
         </div>
       )}
 
-      {(state === 'question' || state === 'answered') && (
+      {(phase === 'question' || phase === 'answered') && question && (
         <div className="player-question">
-          <p className="player-progress">
-            Question {questionIndex + 1} / {mockQuiz.questions.length}
-          </p>
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
-            <TimerRing remainingSeconds={remaining} totalSeconds={question.durationSeconds} />
+            <TimerRing
+              remainingSeconds={remaining ?? question.timeLimit}
+              totalSeconds={question.timeLimit}
+            />
           </div>
-          {/* A real heading restores the « hero » title to the view and gets
-              focused on appearance so a screen reader reads the question. */}
           <h1 className="player-question__prompt" tabIndex={-1} ref={promptRef}>
             {question.prompt}
           </h1>
 
           <div style={{ marginTop: 'var(--space-4)' }}>
-            {state === 'question' &&
-              (question.type === 'mcq' || question.type === 'truefalse') && (
-                <p className="player-commit-hint">Le premier appui valide votre réponse.</p>
-              )}
+            {phase === 'question' && (question.type === 'mcq' || question.type === 'truefalse') && (
+              <p className="player-commit-hint">Le premier appui valide votre réponse.</p>
+            )}
 
             {question.type === 'mcq' && (
               <div className="player-tiles">
-                {question.options.map((opt) => (
+                {(question.payload as McqShowPayload).options.map((opt, index) => (
                   <AnswerTile
-                    key={opt.id}
-                    shape={opt.shape}
+                    key={index}
+                    shape={MCQ_SHAPES[index % MCQ_SHAPES.length]}
                     label={opt.label}
-                    selected={state === 'answered' && optionId === opt.id}
-                    disabled={state === 'answered'}
+                    selected={phase === 'answered' && mcqOptionIndex === index}
+                    disabled={phase === 'answered'}
                     onClick={() => {
-                      setOptionId(opt.id)
-                      submitAnswer()
+                      setMcqOptionIndex(index)
+                      submitAnswer({ optionIndex: index })
                     }}
                   />
                 ))}
@@ -327,13 +540,13 @@ export function PlayerLive() {
                     key={String(val)}
                     type="button"
                     className={`player-tf-btn${
-                      state === 'answered' && boolChoice === val ? ' player-tf-btn--selected' : ''
+                      phase === 'answered' && boolChoice === val ? ' player-tf-btn--selected' : ''
                     }`}
-                    disabled={state === 'answered'}
-                    aria-pressed={state === 'answered' && boolChoice === val}
+                    disabled={phase === 'answered'}
+                    aria-pressed={phase === 'answered' && boolChoice === val}
                     onClick={() => {
                       setBoolChoice(val)
-                      submitAnswer()
+                      submitAnswer({ value: val })
                     }}
                   >
                     {val ? 'Vrai' : 'Faux'}
@@ -347,7 +560,7 @@ export function PlayerLive() {
                 className="player-text-answer"
                 onSubmit={(e) => {
                   e.preventDefault()
-                  if (textValue.trim().length > 0) submitAnswer()
+                  if (textValue.trim().length > 0) submitAnswer({ text: textValue })
                 }}
               >
                 <label htmlFor="player-text-input" className="visually-hidden">
@@ -357,7 +570,7 @@ export function PlayerLive() {
                   id="player-text-input"
                   type="text"
                   value={textValue}
-                  disabled={state === 'answered'}
+                  disabled={phase === 'answered'}
                   onChange={(e) => setTextValue(e.target.value)}
                   placeholder="Tapez votre réponse"
                   autoComplete="off"
@@ -365,7 +578,7 @@ export function PlayerLive() {
                 <Button
                   variant="primary"
                   type="submit"
-                  disabled={state === 'answered' || textValue.trim().length === 0}
+                  disabled={phase === 'answered' || textValue.trim().length === 0}
                 >
                   Valider
                 </Button>
@@ -377,37 +590,35 @@ export function PlayerLive() {
                 className="player-slider-answer"
                 onSubmit={(e) => {
                   e.preventDefault()
-                  // An explicit « Valider » is a deliberate submission of the
-                  // current value, even if the thumb was never dragged.
                   setSliderTouched(true)
-                  submitAnswer()
+                  submitAnswer({ value: sliderValue })
                 }}
               >
                 <output htmlFor="player-slider-input">{sliderValue}</output>
                 <label htmlFor="player-slider-input" className="visually-hidden">
-                  Votre estimation (de {question.min} à {question.max})
+                  Votre estimation (de {(question.payload as SliderShowPayload).min} à{' '}
+                  {(question.payload as SliderShowPayload).max})
                 </label>
                 <input
                   id="player-slider-input"
                   type="range"
-                  min={question.min}
-                  max={question.max}
-                  step={question.step}
+                  min={(question.payload as SliderShowPayload).min}
+                  max={(question.payload as SliderShowPayload).max}
                   value={sliderValue}
-                  disabled={state === 'answered'}
+                  disabled={phase === 'answered'}
                   onChange={(e) => {
                     setSliderValue(Number(e.target.value))
                     setSliderTouched(true)
                   }}
                 />
-                <Button variant="primary" type="submit" disabled={state === 'answered'}>
+                <Button variant="primary" type="submit" disabled={phase === 'answered'}>
                   Valider
                 </Button>
               </form>
             )}
           </div>
 
-          {state === 'answered' && (
+          {phase === 'answered' && (
             <p
               className="player-answered"
               role="status"
@@ -415,103 +626,68 @@ export function PlayerLive() {
               ref={answeredRef}
               tabIndex={-1}
             >
-              {hasSubmission() ? answeredMessage : 'Temps écoulé. En attente de la suite…'}
+              {answeredMessage}
             </p>
           )}
         </div>
       )}
 
-      {state === 'result' && evaluation && (
+      {phase === 'result' && evalResult && (
         <div
           className={`player-result player-result--${
-            evaluation.kind === 'correct'
+            evalResult.kind === 'correct'
               ? 'correct'
-              : evaluation.kind === 'partial'
+              : evalResult.kind === 'partial'
                 ? 'partial'
                 : 'incorrect'
           }`}
           role="status"
         >
           <h1>
-            {evaluation.kind === 'timeout'
+            {evalResult.kind === 'timeout'
               ? 'Temps écoulé'
-              : evaluation.kind === 'correct'
+              : evalResult.kind === 'correct'
                 ? 'Bonne réponse !'
-                : evaluation.kind === 'partial'
-                  ? `À ${evaluation.sliderDiff} près !`
+                : evalResult.kind === 'partial'
+                  ? `À ${evalResult.diff} près !`
                   : 'Mauvaise réponse'}
           </h1>
           <p className="player-result__points">
-            {evaluation.fast && evaluation.award > 0 && 'Rapide ! '}+{evaluation.award}
-            {evaluation.kind === 'partial' ? ' points partiels' : ' points'}
+            {lastAward === null ? '…' : `+${lastAward}`}
+            {evalResult.kind === 'partial' ? ' points partiels' : ' points'}
           </p>
 
           <div className="player-result__recap">{renderRecap()}</div>
 
-          <p>Classement provisoire : {myRank}ᵉ place</p>
-          <Button variant="ghost" type="button" onClick={backToWaiting}>
-            Revenir à l’attente (démo)
-          </Button>
+          {myRank !== null && <p>Classement provisoire : {myRank}ᵉ place</p>}
         </div>
       )}
 
-      <div className="player-dev-controls">
-        <p style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
-          Contrôles de démonstration (simulent la progression de la partie)
-        </p>
-        <div className="player-dev-controls__row">
-          <label
-            className="player-dev-controls__type"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--space-2)' }}
-          >
-            <span style={{ fontSize: 'var(--fs-small)', color: 'var(--ink-dim)' }}>
-              Type de question
-            </span>
-            <select
-              value={questionIndex}
-              onChange={(e) => startQuestion(Number(e.target.value))}
-            >
-              {mockQuiz.questions.map((q, i) => (
-                <option key={q.id} value={i}>
-                  {i + 1}. {q.type}
-                </option>
+      {phase === 'podium' && (
+        <div className="player-result" role="status">
+          <h1 ref={podiumHeadingRef} tabIndex={-1}>
+            Partie terminée !
+          </h1>
+          <p className="player-result__points">Score final : {score}</p>
+          {myRank !== null ? (
+            <p>Vous terminez {myRank}ᵉ place.</p>
+          ) : (
+            <p>Merci d’avoir joué !</p>
+          )}
+          {podiumTop.length > 0 && (
+            <ol className="player-result__recap">
+              {podiumTop.map((entry, index) => (
+                <li key={entry.playerId} className="player-result__recap-line">
+                  <span>
+                    {index + 1}. {entry.nickname} — {entry.score} points
+                    {entry.playerId === stored.playerId ? ' (vous)' : ''}
+                  </span>
+                </li>
               ))}
-            </select>
-          </label>
-        </div>
-        <div className="player-dev-controls__row">
-          <Button variant="ghost" type="button" onClick={() => setState('waiting')}>
-            État : attente
-          </Button>
-          <Button variant="ghost" type="button" onClick={() => startQuestion()}>
-            État : question
-          </Button>
-          <Button
-            variant="ghost"
-            type="button"
-            onClick={reveal}
-            disabled={state === 'waiting'}
-          >
-            Révéler le résultat
-          </Button>
-        </div>
-        <div className="player-dev-controls__row">
-          <Button
-            variant="ghost"
-            type="button"
-            onClick={() =>
-              setConnection((c) => (c === 'online' ? 'reconnecting' : 'online'))
-            }
-          >
-            {connection === 'online' ? 'Simuler une coupure' : 'Rétablir'}
-          </Button>
-          {connection === 'reconnecting' && (
-            <Button variant="ghost" type="button" onClick={() => setConnection('reconnected')}>
-              Simuler la reconnexion
-            </Button>
+            </ol>
           )}
         </div>
-      </div>
+      )}
     </main>
   )
 }
