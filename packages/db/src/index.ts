@@ -10,4 +10,8 @@ export {
 export {
   createQuestion, listQuestions, getQuestion, updateQuestion, deleteQuestion, reorderQuestions, type Question,
 } from './repos/question.js'
+export {
+  createGameSession, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore, listSessionPlayersByScore,
+  type GameSession, type SessionPlayer, type AnswerRecord, type SessionStatus,
+} from './repos/session.js'
 export * as schema from './schema.js'
