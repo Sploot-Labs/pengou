@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { signUp } from '../api/auth'
+import { signUp, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
 import { Button, Logo } from '../ui'
 
@@ -18,6 +18,7 @@ const MIN_PASSWORD_LENGTH = 8
 
 export function Signup() {
   const navigate = useNavigate()
+  const { refresh } = useSession()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -79,6 +80,9 @@ export function Signup() {
     setPending(true)
     try {
       await signUp({ email: email.trim(), password, name: name.trim() })
+      // Same reasoning as Login: refresh the shared context before
+      // navigating so <RequireAuth> on `/` sees the new session immediately.
+      await refresh()
       navigate('/', { replace: true })
     } catch (err) {
       setPending(false)

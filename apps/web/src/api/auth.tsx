@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useState } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from 'react'
 import { apiGet, apiPost, ApiError } from './client'
 
 /**
@@ -63,7 +70,10 @@ export async function signOut(): Promise<void> {
 
 /** Session probe: `GET /api/me` → `{user}` when a session cookie is present,
  * `401 {error}` otherwise — the 401 case is expected (logged-out is normal),
- * so it resolves to `null` instead of throwing. Any other failure propagates. */
+ * so it resolves to `null` instead of throwing. Any other failure (5xx,
+ * network blip, proxy hiccup) propagates to the caller, which MUST handle it
+ * (see `SessionProvider.refresh` below) rather than let it surface as an
+ * unhandled rejection. */
 export async function fetchSession(): Promise<User | null> {
   try {
     const response = await apiGet<{ user: User }>('/api/me')
@@ -77,23 +87,51 @@ export async function fetchSession(): Promise<User | null> {
 export interface UseSessionResult {
   user: User | null
   loading: boolean
+  /** Set when the last `refresh()` failed for a reason other than "no
+   * session" (401) — a transient 5xx/network/proxy failure. `user` is left
+   * at its previous value (or `null` on the very first load) rather than
+   * treated as a confirmed sign-out; a caller could use this to show a
+   * retry affordance, though nothing does yet. */
+  error: unknown
   /** Re-runs the session probe (e.g. after sign-in/sign-out) without a full reload. */
   refresh: () => Promise<void>
 }
 
-/** Session state for the whole app. Plain `useState`/`useEffect` — no state
- * library, per the task's constraints. Each caller gets its own probe (no
- * shared cache): acceptable at this app's size, and simpler than wiring a
- * context for a single `GET /api/me` call. */
-export function useSession(): UseSessionResult {
+/**
+ * Session state shared by the whole app via context — one `GET /api/me`
+ * probe for the app's lifetime (plus explicit `refresh()` calls after
+ * sign-in/sign-up/sign-out), not one per `useSession()` call site. This is
+ * what lets `<RequireAuth>` avoid re-showing its loading interstitial when
+ * navigating between two already-protected routes (e.g. `/` →
+ * `/host/:sessionId`): both read the same resolved state instead of each
+ * mounting its own probe.
+ *
+ * `SessionProvider` must be rendered once, above the router's routes (see
+ * `AppShell.tsx`) — mounting it per-route would defeat the whole point.
+ */
+const SessionContext = createContext<UseSessionResult | null>(null)
+
+export function SessionProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<unknown>(null)
 
   const refresh = useCallback(async () => {
     setLoading(true)
     try {
       const nextUser = await fetchSession()
       setUser(nextUser)
+      setError(null)
+    } catch (err) {
+      // Transient failure, NOT the same as "logged out" (401 is already
+      // handled inside fetchSession and never reaches this catch). Without
+      // this catch, the rejection would escape `void refresh()` at the call
+      // site below as an unhandled promise rejection on every 5xx/network
+      // blip — exactly the kind of thing a proxy hiccup produces, and this
+      // dev setup has one (see vite.config.ts). Treated as "no session for
+      // now" rather than crashing; `error` is exposed for a future retry UI.
+      setUser(null)
+      setError(err)
     } finally {
       setLoading(false)
     }
@@ -103,5 +141,14 @@ export function useSession(): UseSessionResult {
     void refresh()
   }, [refresh])
 
-  return { user, loading, refresh }
+  const value: UseSessionResult = { user, loading, error, refresh }
+  return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>
+}
+
+export function useSession(): UseSessionResult {
+  const ctx = useContext(SessionContext)
+  if (!ctx) {
+    throw new Error('useSession() must be used within a <SessionProvider> (see AppShell.tsx)')
+  }
+  return ctx
 }

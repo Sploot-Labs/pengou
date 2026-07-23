@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { signIn } from '../api/auth'
+import { signIn, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
 import { Button, Logo } from '../ui'
 
@@ -13,6 +13,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function Login() {
   const navigate = useNavigate()
+  const { refresh } = useSession()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<FieldErrors>({})
@@ -61,6 +62,11 @@ export function Login() {
     setPending(true)
     try {
       await signIn({ email: email.trim(), password })
+      // Update the shared session context BEFORE navigating: <RequireAuth>
+      // on `/` reads this same context, and without the refresh it would
+      // still see the pre-login (logged-out) state and bounce straight
+      // back to /login.
+      await refresh()
       navigate('/', { replace: true })
     } catch (err) {
       setPending(false)
