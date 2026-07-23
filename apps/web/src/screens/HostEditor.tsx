@@ -1,14 +1,13 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { signOut, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
 import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import {
   createQuestion,
-  createQuiz,
   deleteQuestion,
+  getQuiz,
   listQuestions,
-  listQuizzes,
   reorderQuestions,
   updateQuestion,
   updateQuiz,
@@ -22,13 +21,16 @@ import { ANSWER_SHAPES, type AnswerShapeKind } from '../constants'
 import { AnswerShape, Button, Logo, SHAPE_NAME_FR } from '../ui'
 
 /**
- * HostEditor — wired to the real quiz/question REST API (Plan 06 Task 3).
- * Previously driven by `mockData.ts`'s single hardcoded `mockQuiz`; now loads
- * the signed-in host's quizzes, lets them pick/create one, and persists every
- * edit through `src/api/quizzes.ts`. See the module comments below for the
- * three deliberate adaptations forced by the real API's shape (no `points`
- * field, immutable question `type`, permanent deletion) — the plan explicitly
- * allows "adapt minimally, don't redesign" for exactly this situation.
+ * HostEditor — wired to the real quiz/question REST API (Plan 06 Task 3),
+ * now addressing a SPECIFIC quiz via the route (Plan 07 Task 4:
+ * `/quizzes/:quizId`, read with `useParams`) instead of an internal
+ * quiz-picker/selection state — picking and creating a quiz now happens on
+ * `Home` (`screens/Home.tsx`), which navigates here once one is chosen.
+ * Persists every edit through `src/api/quizzes.ts`. See the module comments
+ * below for the three deliberate adaptations forced by the real API's shape
+ * (no `points` field, immutable question `type`, permanent deletion) — the
+ * plan explicitly allows "adapt minimally, don't redesign" for exactly this
+ * situation.
  */
 
 const TYPE_LABEL: Record<QuestionType, string> = {
@@ -288,8 +290,6 @@ function errorMessage(err: unknown): string {
   return err instanceof ApiError ? err.message : 'Une erreur réseau est survenue. Réessayez.'
 }
 
-const LAST_QUIZ_KEY = 'arena.hostEditor.lastQuizId'
-
 /** Ack de succès de `host:create` — voir `apps/server/src/game-gateway.ts`. */
 interface HostCreateAck {
   sessionId: string
@@ -308,6 +308,9 @@ interface PendingSave {
 
 export function HostEditor() {
   const navigate = useNavigate()
+  // Guaranteed present by the matching route (`/quizzes/:quizId`) — `useParams`
+  // types it optional only because react-router can't know that statically.
+  const { quizId } = useParams<{ quizId: string }>()
   const { emitAck } = useSharedGameSocket()
   const { refresh: refreshSession } = useSession()
   const [launching, setLaunching] = useState(false)
@@ -331,18 +334,14 @@ export function HostEditor() {
     }
   }
 
-  // --- Quiz list + selection --------------------------------------------
-  const [quizzes, setQuizzes] = useState<Quiz[]>([])
-  const [quizzesLoading, setQuizzesLoading] = useState(true)
-  const [quizzesError, setQuizzesError] = useState<string | null>(null)
-  const [currentQuizId, setCurrentQuizId] = useState<string | null>(null)
-
-  const [creatingQuiz, setCreatingQuiz] = useState(false)
-  const [newQuizTitle, setNewQuizTitle] = useState('')
-  const [newQuizError, setNewQuizError] = useState<string | null>(null)
-  const [newQuizPending, setNewQuizPending] = useState(false)
-  const newQuizTitleRef = useRef<HTMLInputElement>(null)
-  const quizPickerRef = useRef<HTMLSelectElement>(null)
+  // --- The quiz addressed by the route ------------------------------------
+  const [quiz, setQuiz] = useState<Quiz | null>(null)
+  const [quizLoading, setQuizLoading] = useState(true)
+  // 404 (quiz gone/not this tenant's) gets its own flag: it's not a transient
+  // failure a "Réessayer" button can fix, and the message/affordance differ
+  // (see the full-page states below).
+  const [quizNotFound, setQuizNotFound] = useState(false)
+  const [quizError, setQuizError] = useState<string | null>(null)
 
   // --- Selected quiz's editable fields (title/description) ---------------
   const [title, setTitle] = useState('')
@@ -386,45 +385,37 @@ export function HostEditor() {
   }
 
   /* ---------------------------------------------------------------- */
-  /* Load the host's quizzes on mount                                    */
+  /* Load the quiz addressed by the route                                */
   /* ---------------------------------------------------------------- */
-  function loadQuizzes() {
-    setQuizzesLoading(true)
-    setQuizzesError(null)
-    listQuizzes()
-      .then((rows) => {
-        setQuizzes(rows)
-        setQuizzesLoading(false)
-        if (rows.length > 0) {
-          const remembered = localStorage.getItem(LAST_QUIZ_KEY)
-          const initial = rows.find((q) => q.id === remembered) ?? rows[0]
-          setCurrentQuizId(initial.id)
-        }
+  function loadQuiz(id: string) {
+    setQuizLoading(true)
+    setQuizNotFound(false)
+    setQuizError(null)
+    getQuiz(id)
+      .then((row) => {
+        setQuiz(row)
+        setTitle(row.title)
+        setDescription(row.description ?? '')
+        setTitleError(null)
+        setQuizLoading(false)
       })
       .catch((err) => {
-        setQuizzesLoading(false)
-        setQuizzesError(errorMessage(err))
+        setQuizLoading(false)
+        if (err instanceof ApiError && err.status === 404) {
+          setQuizNotFound(true)
+        } else {
+          setQuizError(errorMessage(err))
+        }
       })
   }
 
   useEffect(() => {
-    loadQuizzes()
-    // Runs once on mount; loadQuizzes is a stable module-scope-free closure
-    // recreated each render, but re-running it isn't desired on every render.
+    if (!quizId) return
+    loadQuiz(quizId)
+    // Re-runs if the route param itself changes (navigating between two
+    // quizzes' editors without an intervening full reload).
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  // Keep the title/description fields in sync when the selected quiz changes
-  // (switching quizzes, or the freshly created one becoming current).
-  useEffect(() => {
-    const q = quizzes.find((x) => x.id === currentQuizId)
-    if (q) {
-      setTitle(q.title)
-      setDescription(q.description ?? '')
-      setTitleError(null)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentQuizId])
+  }, [quizId])
 
   /* ---------------------------------------------------------------- */
   /* Load the selected quiz's questions                                  */
@@ -454,14 +445,14 @@ export function HostEditor() {
   }
 
   useEffect(() => {
-    if (!currentQuizId) {
+    if (!quizId) {
       setQuestions([])
       setSelectedId(null)
       return
     }
-    loadQuestions(currentQuizId)
+    loadQuestions(quizId)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentQuizId])
+  }, [quizId])
 
   useEffect(() => {
     const target = pendingFocus.current
@@ -478,12 +469,6 @@ export function HostEditor() {
   useEffect(() => {
     if (pendingType) dialogConfirmRef.current?.focus()
   }, [pendingType])
-
-  // Focus the revealed title field when "Nouveau quiz" is opened, so keyboard
-  // users land directly in the input instead of having to tab past the form.
-  useEffect(() => {
-    if (creatingQuiz) newQuizTitleRef.current?.focus()
-  }, [creatingQuiz])
 
   const selectedIndex = questions.findIndex((q) => q.id === selectedId)
   const selected = selectedIndex >= 0 ? questions[selectedIndex] : null
@@ -548,7 +533,7 @@ export function HostEditor() {
    * from the database, so launching while an edit is still only debounced client-side (or, worse,
    * failed to flush) would silently run the game on stale content. */
   async function launchGame() {
-    if (!canLaunch || launching || !currentQuizId) return
+    if (!canLaunch || launching || !quizId) return
     setLaunching(true)
     setLaunchError(null)
     try {
@@ -561,7 +546,7 @@ export function HostEditor() {
       return
     }
     try {
-      const ack = await emitAck<HostCreateAck>('host:create', { quizId: currentQuizId })
+      const ack = await emitAck<HostCreateAck>('host:create', { quizId })
       // Le PIN et le titre ne sont connus qu'ICI (host:create ne les redonne
       // jamais ensuite) — transmis à HostLive via l'état de navigation
       // plutôt que par l'URL (le PIN n'a rien à faire dans un lien
@@ -579,12 +564,11 @@ export function HostEditor() {
   // until fixed) and only when it actually differs from what was last
   // persisted (see lastSavedRef above).
   useEffect(() => {
-    if (!selected || !currentQuizId) return
+    if (!selected || !quizId) return
     if (validationError(selected)) return
     const patch = toQuestionPatch(selected)
     const key = JSON.stringify(patch)
     if (lastSavedRef.current.get(selected.id) === key) return
-    const quizId = currentQuizId
     const id = selected.id
 
     // Switching away from a DIFFERENT question that still has an unsent debounced edit: flush it
@@ -617,7 +601,7 @@ export function HostEditor() {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selected, currentQuizId])
+  }, [selected, quizId])
 
   function updateSelected(patch: Partial<Question>) {
     if (!selected) return
@@ -677,8 +661,7 @@ export function HostEditor() {
    * than destroying anything — handled below by resyncing from the server so
    * the host can see and manually clear the leftover duplicate. */
   async function applyTypeChangeImmediate(type: QuestionType) {
-    if (!selected || !currentQuizId) return
-    const quizId = currentQuizId
+    if (!selected || !quizId) return
     const originalId = selected.id
     const index = questions.findIndex((q) => q.id === originalId)
     const draft = draftForType(type, selected)
@@ -744,7 +727,7 @@ export function HostEditor() {
   }
 
   async function move(index: number, direction: -1 | 1) {
-    if (!currentQuizId) return
+    if (!quizId) return
     const target = index + direction
     if (target < 0 || target >= questions.length) return
     const previous = questions
@@ -759,7 +742,7 @@ export function HostEditor() {
     try {
       setActionError(null)
       await reorderQuestions(
-        currentQuizId,
+        quizId,
         next.map((q) => q.id),
       )
       // Announce success only once the server confirms the move — announcing
@@ -782,10 +765,10 @@ export function HostEditor() {
   }
 
   async function addQuestion() {
-    if (!currentQuizId) return
+    if (!quizId) return
     try {
       setActionError(null)
-      const created = await createQuestion(currentQuizId, defaultCreateInput('mcq'))
+      const created = await createQuestion(quizId, defaultCreateInput('mcq'))
       const q = fromApiQuestion(created)
       primeSaved(q)
       setQuestions((prev) => [...prev, q])
@@ -797,13 +780,13 @@ export function HostEditor() {
   }
 
   async function removeQuestion(id: string) {
-    if (!currentQuizId) return
+    if (!quizId) return
     const index = questions.findIndex((q) => q.id === id)
     if (index < 0) return
     const removed = questions[index]
     try {
       setActionError(null)
-      await deleteQuestion(currentQuizId, id)
+      await deleteQuestion(quizId, id)
     } catch (err) {
       setActionError(errorMessage(err))
       return // deletion did not happen server-side — keep it in the list
@@ -828,9 +811,8 @@ export function HostEditor() {
    * position via `reorderQuestions`. Indistinguishable from a true undo from
    * the host's point of view. */
   async function undoDelete() {
-    if (!lastDeleted || !currentQuizId) return
+    if (!lastDeleted || !quizId) return
     const { question: q, index } = lastDeleted
-    const quizId = currentQuizId
     try {
       setActionError(null)
       const created = await createQuestion(quizId, toCreateInput(q))
@@ -863,45 +845,11 @@ export function HostEditor() {
     }
   }
 
-  function selectQuiz(id: string) {
-    // Same rationale as the debounce effect's own flush-on-switch: the questions list is about to
-    // be torn down and reloaded for the new quiz (see the `currentQuizId` effect above), which
-    // would otherwise silently discard a still-debounced edit on the OUTGOING quiz exactly like
-    // switching questions used to (Plan 06 review, finding #1).
-    void flushPendingSave().catch(() => {})
-    setCurrentQuizId(id)
-    localStorage.setItem(LAST_QUIZ_KEY, id)
-  }
-
-  async function handleCreateQuiz(event: FormEvent) {
-    event.preventDefault()
-    const trimmed = newQuizTitle.trim()
-    if (trimmed.length === 0) {
-      setNewQuizError('Le titre est requis.')
-      newQuizTitleRef.current?.focus()
-      return
-    }
-    setNewQuizPending(true)
-    try {
-      const created = await createQuiz({ title: trimmed })
-      setQuizzes((prev) => [...prev, created])
-      setNewQuizTitle('')
-      setNewQuizError(null)
-      setCreatingQuiz(false)
-      selectQuiz(created.id)
-      quizPickerRef.current?.focus()
-    } catch (err) {
-      setNewQuizError(errorMessage(err))
-    } finally {
-      setNewQuizPending(false)
-    }
-  }
-
   async function saveQuizField(patch: { title?: string; description?: string | null }) {
-    if (!currentQuizId) return
+    if (!quizId) return
     try {
-      const updated = await updateQuiz(currentQuizId, patch)
-      setQuizzes((prev) => prev.map((q) => (q.id === updated.id ? updated : q)))
+      const updated = await updateQuiz(quizId, patch)
+      setQuiz(updated)
       setActionError(null)
     } catch (err) {
       setActionError(errorMessage(err))
@@ -920,74 +868,57 @@ export function HostEditor() {
       return
     }
     setTitleError(null)
-    const current = quizzes.find((q) => q.id === currentQuizId)
-    if (current && current.title === trimmed) return
+    if (quiz && quiz.title === trimmed) return
     void saveQuizField({ title: trimmed })
   }
 
   function handleDescriptionBlur() {
-    const current = quizzes.find((q) => q.id === currentQuizId)
     const normalized = description.trim().length > 0 ? description : null
-    if (current && (current.description ?? null) === normalized) return
+    if (quiz && (quiz.description ?? null) === normalized) return
     void saveQuizField({ description: normalized })
   }
 
   /* ---------------------------------------------------------------- */
-  /* Full-page states: loading / error / empty                          */
+  /* Full-page states: loading / not found / error                      */
   /* ---------------------------------------------------------------- */
 
-  if (quizzesLoading) {
+  if (quizLoading) {
     return (
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
-        <p role="status">Chargement de vos quiz…</p>
+        <p role="status">Chargement du quiz…</p>
       </main>
     )
   }
 
-  if (quizzesError && quizzes.length === 0) {
+  // Not the same as `quizError` below: a 404 (deleted quiz, another
+  // tenant's, stale/bookmarked link, typo'd URL) isn't a transient failure a
+  // "Réessayer" button can fix by retrying the same request — the only way
+  // forward is back to the quiz list.
+  if (quizNotFound) {
     return (
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
         <p className="join-error" role="alert">
-          {quizzesError}
+          Quiz introuvable.
         </p>
-        <Button variant="primary" type="button" onClick={loadQuizzes}>
-          Réessayer
-        </Button>
+        <Link className="ab-button ab-button--primary" to="/">
+          ← Retour à l'accueil
+        </Link>
       </main>
     )
   }
 
-  if (quizzes.length === 0) {
+  if (quizError || !quiz) {
     return (
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
-        <h1>Créez votre premier quiz</h1>
-        <p className="ab-empty-state">Vous n'avez encore aucun quiz. Donnez-lui un titre pour commencer.</p>
-        <form className="join-card" onSubmit={handleCreateQuiz} noValidate>
-          {newQuizError && (
-            <p className="join-error" role="alert" id="new-quiz-title-error">
-              {newQuizError}
-            </p>
-          )}
-          <div className="join-field">
-            <label htmlFor="first-quiz-title">Titre du quiz</label>
-            <input
-              id="first-quiz-title"
-              ref={newQuizTitleRef}
-              type="text"
-              value={newQuizTitle}
-              onChange={(e) => setNewQuizTitle(e.target.value)}
-              placeholder="Ex. Culture générale — spécial vendredi"
-              aria-invalid={newQuizError ? true : undefined}
-              aria-describedby={newQuizError ? 'new-quiz-title-error' : undefined}
-            />
-          </div>
-          <Button variant="primary" type="submit" disabled={newQuizPending}>
-            {newQuizPending ? 'Création…' : 'Créer le quiz'}
-          </Button>
-        </form>
+        <p className="join-error" role="alert">
+          {quizError ?? 'Une erreur inattendue est survenue.'}
+        </p>
+        <Button variant="primary" type="button" onClick={() => quizId && loadQuiz(quizId)}>
+          Réessayer
+        </Button>
       </main>
     )
   }
@@ -1003,7 +934,9 @@ export function HostEditor() {
           <p className="host-brandline">
             <strong>Arena</strong> — quiz en direct, open-source · chez vous ou dans le cloud
           </p>
-          <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>{title}</span>
+          <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
+            <Link to="/">← Retour à l'accueil</Link> · {title}
+          </span>
         </div>
         <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
           {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
@@ -1044,57 +977,6 @@ export function HostEditor() {
           <p className="join-error" role="alert">
             {actionError}
           </p>
-        )}
-
-        <section className="host-field-row" aria-label="Sélection du quiz" style={{ marginBottom: 'var(--space-4)' }}>
-          <div className="host-field">
-            <label htmlFor="quiz-picker">Quiz</label>
-            <select
-              id="quiz-picker"
-              ref={quizPickerRef}
-              value={currentQuizId ?? ''}
-              onChange={(e) => selectQuiz(e.target.value)}
-            >
-              {quizzes.map((q) => (
-                <option key={q.id} value={q.id}>
-                  {q.title}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="host-field" style={{ justifyContent: 'flex-end' }}>
-            <Button variant="ghost" type="button" onClick={() => setCreatingQuiz((v) => !v)}>
-              {creatingQuiz ? 'Annuler' : 'Nouveau quiz'}
-            </Button>
-          </div>
-        </section>
-
-        {creatingQuiz && (
-          <form className="host-meta" onSubmit={handleCreateQuiz} noValidate>
-            {newQuizError && (
-              <p className="join-error" role="alert" id="new-quiz-title-error">
-                {newQuizError}
-              </p>
-            )}
-            <div className="host-field">
-              <label htmlFor="new-quiz-title">Titre du nouveau quiz</label>
-              <input
-                id="new-quiz-title"
-                ref={newQuizTitleRef}
-                type="text"
-                value={newQuizTitle}
-                onChange={(e) => setNewQuizTitle(e.target.value)}
-                placeholder="Ex. Spécial géographie"
-                aria-invalid={newQuizError ? true : undefined}
-                aria-describedby={newQuizError ? 'new-quiz-title-error' : undefined}
-              />
-            </div>
-            <div className="host-actions">
-              <Button variant="primary" type="submit" disabled={newQuizPending}>
-                {newQuizPending ? 'Création…' : 'Créer'}
-              </Button>
-            </div>
-          </form>
         )}
 
         <div className="host-meta">
@@ -1151,7 +1033,7 @@ export function HostEditor() {
         ) : questionsError && questions.length === 0 ? (
           <div className="ab-empty-state">
             <p role="alert">{questionsError}</p>
-            <Button variant="primary" type="button" onClick={() => currentQuizId && loadQuestions(currentQuizId)}>
+            <Button variant="primary" type="button" onClick={() => quizId && loadQuestions(quizId)}>
               Réessayer
             </Button>
           </div>
