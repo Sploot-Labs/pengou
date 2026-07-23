@@ -29,6 +29,9 @@ importers:
       '@splootlabs/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@splootlabs/quiz':
+        specifier: workspace:*
+        version: link:../../packages/quiz
       '@splootlabs/shared':
         specifier: workspace:*
         version: link:../../packages/shared

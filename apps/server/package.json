@@ -13,6 +13,7 @@
     "@fastify/static": "^7.0.0",
     "@splootlabs/auth": "workspace:*",
     "@splootlabs/db": "workspace:*",
+    "@splootlabs/quiz": "workspace:*",
     "@splootlabs/shared": "workspace:*",
     "better-auth": "^1.6.24",
     "fastify": "^4.28.0",
