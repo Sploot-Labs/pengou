@@ -1,6 +1,6 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
 import { fromNodeHeaders } from 'better-auth/node'
-import { resolveTenantId, tenantScope, type Db, type TenantScope } from '@splootlabs/db'
+import { resolveTenantId, tenantScope, TenantAccessDeniedError, type Db, type TenantScope } from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
 import type { Auth } from '@splootlabs/auth'
 
@@ -32,9 +32,14 @@ export async function requestScope(request: FastifyRequest, db: Db, config: AppC
 
 /**
  * Résout le scope tenant pour une route, ou répond 403 et renvoie `null` — mais UNIQUEMENT
- * pour le cas « pas de membership » (message contenant « accès refusé », levé par
- * `resolveTenantId` en mode multi). Toute autre erreur (panne DB, etc.) est relancée telle
- * quelle pour que Fastify la traduise en 500 : elle ne doit jamais être masquée en 403.
+ * pour le cas « pas de membership » (`TenantAccessDeniedError`, levée par `resolveTenantId`
+ * en mode multi). Toute autre erreur (panne DB, etc.) est relancée telle quelle pour que
+ * Fastify la traduise en 500 : elle ne doit jamais être masquée en 403.
+ *
+ * Match sur le TYPE de l'erreur (`instanceof TenantAccessDeniedError`), pas sur une sous-chaîne
+ * de son message : coupler la couche HTTP à la formulation française exacte de `@splootlabs/db`
+ * est fragile (un simple reformulation du message côté db casserait silencieusement ce garde,
+ * transformant un 403 attendu en 500).
  */
 export async function resolveScopeOr403(
   request: FastifyRequest,
@@ -45,7 +50,7 @@ export async function resolveScopeOr403(
   try {
     return await requestScope(request, db, config)
   } catch (e) {
-    if (e instanceof Error && e.message.includes('accès refusé')) {
+    if (e instanceof TenantAccessDeniedError) {
       reply.code(403).send({ error: 'Accès refusé à ce tenant.' })
       return null
     }

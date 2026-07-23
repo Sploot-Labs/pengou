@@ -5,6 +5,21 @@ import { schema } from './index.js'
 
 export type TenantScope = { db: Db; tenantId: string }
 
+/**
+ * Erreur typée levée par `resolveTenantId` quand l'utilisateur authentifié n'a pas de
+ * membership sur le tenant demandé (mode multi). Exportée pour que la couche HTTP
+ * (`apps/server/src/require-user.ts`) puisse la reconnaître par son TYPE plutôt qu'en
+ * matchant une sous-chaîne du message d'erreur (couplage fragile à une chaîne française,
+ * en plus d'un couplage indésirable de `@splootlabs/server` à la formulation exacte de
+ * `@splootlabs/db`).
+ */
+export class TenantAccessDeniedError extends Error {
+  constructor(message = 'accès refusé : aucune appartenance à ce tenant') {
+    super(message)
+    this.name = 'TenantAccessDeniedError'
+  }
+}
+
 export function tenantScope(db: Db, tenantId: string): TenantScope {
   return { db, tenantId }
 }
@@ -66,6 +81,6 @@ export async function resolveTenantId(
   if (!userId) throw new Error('mode multi : utilisateur requis')
   const [m] = await db.select({ id: schema.membership.id }).from(schema.membership)
     .where(and(eq(schema.membership.userId, userId), eq(schema.membership.tenantId, explicitTenantId))).limit(1)
-  if (!m) throw new Error('accès refusé : aucune appartenance à ce tenant')
+  if (!m) throw new TenantAccessDeniedError()
   return explicitTenantId
 }

@@ -38,6 +38,12 @@ export async function getQuestion(scope: TenantScope, quizId: string, questionId
 
 export async function updateQuestion(scope: TenantScope, quizId: string, questionId: string, patch: Partial<{ prompt: string; timeLimit: number; payload: unknown; media: string | null }>): Promise<Question | null> {
   if (!(await assertQuizInTenant(scope, quizId))) return null
+  // Patch vide : `.set({})` fait échouer drizzle ("No values to set") — un patch vide est un
+  // no-op légitime (ex. PATCH sans corps utile), pas une erreur serveur. On renvoie simplement
+  // la ligne courante, sans écriture, plutôt que de laisser drizzle lever une 500 non gérée.
+  if (Object.keys(patch).length === 0) {
+    return getQuestion(scope, quizId, questionId)
+  }
   const [row] = await scope.db.update(schema.question)
     .set({ ...patch, payload: patch.payload as never })
     .where(and(eq(schema.question.id, questionId), eq(schema.question.quizId, quizId)))
@@ -55,6 +61,22 @@ export async function deleteQuestion(scope: TenantScope, quizId: string, questio
 
 export async function reorderQuestions(scope: TenantScope, quizId: string, orderedIds: string[]): Promise<boolean> {
   if (!(await assertQuizInTenant(scope, quizId))) return false
+
+  // `orderedIds` DOIT être une permutation EXACTE des questions du quiz — sans ça,
+  // `matched === orderedIds.length` (l'ancienne garde) laissait passer des doublons
+  // (ex. [a, a] : 2 updates, 2 lignes affectées, "count===length" alors qu'une seule question a
+  // réellement bougé) et des listes partielles (les questions omises gardent un orderIndex
+  // périmé, incohérent avec celles ré-indexées). On vérifie donc l'ENSEMBLE avant toute écriture.
+  const existing = await scope.db.select({ id: schema.question.id }).from(schema.question)
+    .where(eq(schema.question.quizId, quizId))
+  const existingIds = new Set(existing.map((q) => q.id))
+  const uniqueOrderedIds = new Set(orderedIds)
+  const isExactPermutation =
+    uniqueOrderedIds.size === orderedIds.length &&
+    uniqueOrderedIds.size === existingIds.size &&
+    orderedIds.every((id) => existingIds.has(id))
+  if (!isExactPermutation) return false
+
   const matched = await scope.db.transaction(async (tx) => {
     let count = 0
     for (let i = 0; i < orderedIds.length; i++) {

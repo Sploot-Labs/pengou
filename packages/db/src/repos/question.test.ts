@@ -81,6 +81,15 @@ describe('repo question scopé par jointure sur quiz', () => {
     expect(untouched?.find((q) => q.id === created!.id)?.prompt).toBe('Guard')
   })
 
+  it('updateQuestion avec un patch vide est un no-op qui renvoie la ligne courante (pas de 500 drizzle)', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    const created = await createQuestion(scope, quizA, { type: 'mcq', prompt: 'Unchanged', timeLimit: 20, payload: validMcq })
+    const result = await updateQuestion(scope, quizA, created!.id, {})
+    expect(result).not.toBeNull()
+    expect(result?.id).toBe(created!.id)
+    expect(result?.prompt).toBe('Unchanged')
+  })
+
   it('deleteQuestion supprime une question du quiz du tenant', async () => {
     const scope = tenantScope(ctx.db, tenantA)
     const created = await createQuestion(scope, quizA, { type: 'mcq', prompt: 'ToDelete', timeLimit: 20, payload: validMcq })
@@ -132,5 +141,47 @@ describe('repo question scopé par jointure sur quiz', () => {
     const foreignAfter = await listQuestions(scope, quizA2.id)
     const untouched = foreignAfter?.find((q) => q.id === foreign!.id)
     expect(untouched?.orderIndex).toBe(foreignOrderIndexBefore)
+  })
+
+  it('reorderQuestions rejette une liste avec des doublons ([a, a]) — pas une permutation exacte', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    const quiz = await createQuiz(scope, { ownerId: ownerA, title: 'Quiz Reorder Dup' })
+    const q1 = await createQuestion(scope, quiz.id, { type: 'mcq', prompt: 'D1', timeLimit: 20, payload: validMcq })
+    await createQuestion(scope, quiz.id, { type: 'mcq', prompt: 'D2', timeLimit: 20, payload: validMcq })
+
+    const ok = await reorderQuestions(scope, quiz.id, [q1!.id, q1!.id])
+    expect(ok).toBe(false)
+
+    const list = await listQuestions(scope, quiz.id)
+    expect(list?.map((q) => q.prompt)).toEqual(['D1', 'D2']) // ordre inchangé
+  })
+
+  it('reorderQuestions rejette une liste partielle (questions omises) — orderIndex non touché', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    const quiz = await createQuiz(scope, { ownerId: ownerA, title: 'Quiz Reorder Partial' })
+    const q1 = await createQuestion(scope, quiz.id, { type: 'mcq', prompt: 'P1', timeLimit: 20, payload: validMcq })
+    const q2 = await createQuestion(scope, quiz.id, { type: 'mcq', prompt: 'P2', timeLimit: 20, payload: validMcq })
+
+    const ok = await reorderQuestions(scope, quiz.id, [q2!.id])
+    expect(ok).toBe(false)
+
+    const list = await listQuestions(scope, quiz.id)
+    expect(list?.map((q) => q.id)).toEqual([q1!.id, q2!.id])
+  })
+
+  it('reorderQuestions rejette une liste vide sur un quiz non vide', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    const quiz = await createQuiz(scope, { ownerId: ownerA, title: 'Quiz Reorder Empty List' })
+    await createQuestion(scope, quiz.id, { type: 'mcq', prompt: 'E1', timeLimit: 20, payload: validMcq })
+
+    const ok = await reorderQuestions(scope, quiz.id, [])
+    expect(ok).toBe(false)
+  })
+
+  it('reorderQuestions accepte une liste vide sur un quiz sans question (permutation vide valide)', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    const quiz = await createQuiz(scope, { ownerId: ownerA, title: 'Quiz Reorder No Question' })
+    const ok = await reorderQuestions(scope, quiz.id, [])
+    expect(ok).toBe(true)
   })
 })
