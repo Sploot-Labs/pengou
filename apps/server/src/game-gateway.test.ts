@@ -467,8 +467,16 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const answerAck = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
       expect(answerAck.accepted).toBe(true)
 
+      // Capture le score EXACT crédité par reveal (via `scoreboard`, avant toute déconnexion) —
+      // pour comparer une égalité stricte après reconnexion, pas seulement `> 0`.
+      const scoreboardPromise = waitFor<{ ranking: Array<{ playerId: string; score: number }> }>(player1, 'scoreboard')
       const revealAck = await ack<{ error?: string }>(hostSocket, 'host:reveal', {})
       expect(revealAck.error).toBeUndefined()
+      const scoreboard = await scoreboardPromise
+      const aliceEntry = scoreboard.ranking.find((r) => r.playerId === join1.playerId)
+      expect(aliceEntry).toBeDefined()
+      const scoreBeforeDisconnect = aliceEntry!.score
+      expect(scoreBeforeDisconnect).toBeGreaterThan(0)
 
       // Alice se déconnecte (le serveur doit la marquer non-connectée, sans perdre son score).
       player1.disconnect()
@@ -485,7 +493,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       expect(reconnectAck.error).toBeUndefined()
       expect(reconnectAck.playerId).toBeTruthy()
       expect(reconnectAck.phase).toBe('scoreboard') // host:reveal enchaîne engine.scoreboard()
-      expect(reconnectAck.score).toBeGreaterThan(0) // le score gagné avant déconnexion est conservé
+      expect(reconnectAck.score).toBe(scoreBeforeDisconnect) // score EXACTEMENT conservé (pas juste > 0)
 
       // Le socket reconnecté est bien rattaché à la room : il reçoit les diffusions suivantes
       // (ici `podium`, plus de questions dans ce quiz mono-question).
@@ -525,6 +533,124 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       await app.close()
     }
   }, 15_000)
+
+  it("player:reconnect EN PLEINE QUESTION renvoie question:show (sans bonne réponse) + timer au socket reconnecté, qui peut alors répondre", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-reconnect-midq@example.com', 30)
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(
+        player1,
+        'player:join',
+        { pin, nickname: 'Alice' },
+      )
+      expect(join1.error).toBeUndefined()
+      const joinToken = join1.joinToken!
+
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+
+      // Alice se déconnecte EN PLEINE QUESTION (avant d'avoir répondu) — cas critique : sans
+      // la fix, elle ne verrait plus jamais cette question (aveugle jusqu'à la suivante).
+      player1.disconnect()
+      await new Promise((resolve) => setTimeout(resolve, 150))
+
+      const player1b = await connectClient(url)
+      clients.push(player1b)
+
+      // Écouteurs posés AVANT l'appel — le serveur émet `question:show`/`timer` au socket
+      // reconnecté de façon synchrone dans le handler `player:reconnect`.
+      const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(player1b, 'question:show')
+      const timerPromise = waitFor<{ timeLimit?: number; startedAt?: number }>(player1b, 'timer')
+
+      const reconnectAck = await ack<{ phase?: string; score?: number; error?: string }>(
+        player1b,
+        'player:reconnect',
+        { pin, joinToken },
+      )
+      expect(reconnectAck.error).toBeUndefined()
+      expect(reconnectAck.phase).toBe('question')
+
+      const show = await showPromise
+      expect(show.payload).toBeDefined()
+      for (const option of show.payload.options) expect(option).not.toHaveProperty('correct')
+      expect(JSON.stringify(show)).not.toContain('correct') // anti-triche : même garde que host:start
+
+      const timer = await timerPromise
+      expect(timer.timeLimit).toBe(30)
+
+      // Alice peut désormais répondre à la question qu'elle vient de recevoir en reconnectant.
+      const answerAck = await ack<{ accepted?: boolean; error?: string }>(
+        player1b,
+        'player:answer',
+        { answer: { optionIndex: 0 } },
+      )
+      expect(answerAck.accepted).toBe(true)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("un disconnect TARDIF de l'ANCIEN socket (après une reconnexion sur un nouveau socket) ne repasse PAS le joueur à connected:false", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-reconnect-race@example.com')
+      clients.push(hostSocket)
+
+      const lobbyUpdates = collect<{ players: Array<{ id: string; connected: boolean }> }>(hostSocket, 'lobby:update')
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(
+        player1,
+        'player:join',
+        { pin, nickname: 'Alice' },
+      )
+      expect(join1.error).toBeUndefined()
+      const { playerId, joinToken } = join1 as { playerId: string; joinToken: string }
+      await lobbyUpdates.atLeast(1) // lobby:update du player:join
+
+      await ack<{ error?: string }>(hostSocket, 'host:start', {})
+
+      // Simule la course : un NOUVEAU socket reconnecte AVANT que l'ANCIEN (player1, toujours
+      // "connecté" du point de vue du serveur) n'ait émis son événement `disconnect` — exactement
+      // le scénario où Socket.IO détecte la coupure d'un client mort avec un peu de retard
+      // (~pingTimeout) par rapport à un client qui a déjà rouvert une nouvelle connexion.
+      const player1b = await connectClient(url)
+      clients.push(player1b)
+      const reconnectAck = await ack<{ error?: string; phase?: string }>(
+        player1b,
+        'player:reconnect',
+        { pin, joinToken },
+      )
+      expect(reconnectAck.error).toBeUndefined()
+      await lobbyUpdates.atLeast(2) // lobby:update du player:reconnect
+
+      // MAINTENANT l'ancien socket se déconnecte (le "disconnect tardif").
+      player1.disconnect()
+      await new Promise((resolve) => setTimeout(resolve, 150))
+
+      // Un nouveau joueur rejoint pour déclencher un `lobby:update` observable et vérifier l'état
+      // courant d'Alice — si le garde échouait, le disconnect tardif de l'ancien socket aurait
+      // écrasé `connected:false` malgré la reconnexion déjà en place.
+      const player2 = await connectClient(url)
+      clients.push(player2)
+      await ack(player2, 'player:join', { pin, nickname: 'Bob' })
+      const lobbyAfter = await lobbyUpdates.atLeast(3)
+      const alice = lobbyAfter.players.find((p) => p.id === playerId)
+      expect(alice).toBeDefined()
+      expect(alice!.connected).toBe(true)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
 
   it("host:createScreenToken + screen:join : token d'affichage à usage unique", async () => {
     const { app, url } = await buildApp()
@@ -567,6 +693,27 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       await ack(player1, 'player:join', { pin, nickname: 'Zoé' })
       const lobby = await lobbyPromise
       expect(lobby.players).toHaveLength(1)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("host:createScreenToken est refusé pour un socket non-hôte (requireHost, comme les autres commandes hôte)", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-screen-authz@example.com')
+      clients.push(hostSocket)
+
+      const mallory = await connectClient(url)
+      clients.push(mallory)
+      const joinRes = await ack<{ playerId?: string; error?: string }>(mallory, 'player:join', { pin, nickname: 'Mallory' })
+      expect(joinRes.error).toBeUndefined()
+
+      const res = await ack<{ displayToken?: string; error?: string }>(mallory, 'host:createScreenToken', {})
+      expect(res.error).toBeTruthy()
+      expect(res.displayToken).toBeUndefined()
     } finally {
       for (const c of clients) c.disconnect()
       await app.close()

@@ -79,6 +79,12 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
   // Token d'affichage grand écran : à usage unique (consommé au premier screen:join réussi),
   // au niveau de la passerelle (pas du moteur — c'est un concept de transport, pas d'état de jeu).
   const screenTokenToSessionId = new Map<string, string>()
+  // Socket ACTUELLEMENT actif pour chaque joueur (mis à jour par player:join ET player:reconnect).
+  // Garde contre la course reconnexion-rapide : Socket.IO peut détecter la coupure d'un socket
+  // mort jusqu'à ~pingTimeout après qu'un nouveau socket ait déjà repris le même joueur via
+  // player:reconnect — sans cette Map, le `disconnect` tardif de l'ANCIEN socket écraserait
+  // `connected:false` sur un joueur pourtant déjà reconnecté.
+  const activeSocketIdByPlayerId = new Map<string, string>()
 
   function requireHost(socket: Socket): { sessionId: string; meta: SessionMeta } {
     const data = socket.data as SocketData
@@ -143,17 +149,21 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
     }
   }
 
-  /** Émet un `timer` de chrono MESURÉ (valeur unique au démarrage de la question, jamais un
-   * flux par seconde) : `timeLimit` (secondes, pour dimensionner le compte à rebours côté
-   * client) + `startedAt` (horodatage serveur de `questionStartedAt`, pour resynchroniser un
-   * client qui rejoint/rafraîchit en cours de question). Ne contient aucun contenu de réponse. */
-  function emitTimer(sessionId: string, session: GameSession): void {
+  /** Payload `timer` : chrono MESURÉ (valeur unique au démarrage de la question, jamais un flux
+   * par seconde) — `timeLimit` (secondes, pour dimensionner le compte à rebours côté client) +
+   * `startedAt` (horodatage serveur de `questionStartedAt`, pour resynchroniser un client qui
+   * rejoint/rafraîchit en cours de question). Ne contient aucun contenu de réponse. `null` si
+   * aucune question courante (ex. session encore en lobby). */
+  function timerPayload(session: GameSession): { timeLimit: number; startedAt: number | null } | null {
     const question = session.questions[session.currentIndex]
-    if (!question) return
-    io.to(roomName(sessionId)).emit('timer', {
-      timeLimit: question.timeLimit,
-      startedAt: session.questionStartedAt,
-    })
+    if (!question) return null
+    return { timeLimit: question.timeLimit, startedAt: session.questionStartedAt }
+  }
+
+  /** Diffuse `timer` à TOUTE la room (host:start / host:next qui démarre une question). */
+  function emitTimer(sessionId: string, session: GameSession): void {
+    const payload = timerPayload(session)
+    if (payload) io.to(roomName(sessionId)).emit('timer', payload)
   }
 
   io.on('connection', (socket: Socket) => {
@@ -267,6 +277,7 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
         data.role = 'player'
         data.sessionId = sessionId
         data.playerId = player.id
+        activeSocketIdByPlayerId.set(player.id, socket.id)
         await socket.join(roomName(sessionId))
 
         reply({ playerId: player.id, joinToken: player.joinToken })
@@ -322,21 +333,41 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
         data.role = 'player'
         data.sessionId = sessionId
         data.playerId = player.id
+        // CE socket devient le socket actif du joueur — voir le garde dans le handler
+        // `disconnect` : un disconnect tardif de l'ANCIEN socket ne devra plus rien changer.
+        activeSocketIdByPlayerId.set(player.id, socket.id)
         await socket.join(roomName(sessionId))
 
         reply({ playerId: player.id, phase: session.phase, score: player.score })
         io.to(roomName(sessionId)).emit('lobby:update', { players: playersPayload(session) })
+
+        // Un joueur qui reconnecte EN PLEINE QUESTION doit pouvoir la voir/y répondre tout de
+        // suite, pas seulement à partir de la question suivante : on lui renvoie, à LUI SEUL
+        // (pas à la room — les autres l'ont déjà reçu), la même projection anti-triche que
+        // host:start/host:next (`playerQuestionView`, jamais `questionResult`) + le `timer`.
+        if (session.phase === 'question') {
+          const view = engine.playerQuestionView(session)
+          socket.emit('question:show', view)
+          const timer = timerPayload(session)
+          if (timer) socket.emit('timer', timer)
+        }
       } catch (e) {
         reply({ error: message(e) })
       }
     })
 
     // Marque le joueur non-connecté sans le retirer de la session (score/réponses conservés,
-    // récupérables via player:reconnect). Ne s'applique qu'aux sockets 'player' rattachés.
+    // récupérables via player:reconnect). Ne s'applique qu'aux sockets 'player' rattachés, et
+    // SEULEMENT si CE socket est toujours le socket actif référencé pour ce joueur — sinon un
+    // disconnect tardif de l'ANCIEN socket (Socket.IO peut détecter la coupure d'un client mort
+    // jusqu'à ~pingTimeout après coup) écraserait à tort `connected:true` posé par une
+    // reconnexion entre-temps déjà survenue sur un nouveau socket.
     socket.on('disconnect', () => {
       const data = socket.data as SocketData
       if (data.role === 'player' && data.sessionId && data.playerId) {
-        void engine.setPlayerConnected(data.sessionId, data.playerId, false)
+        if (activeSocketIdByPlayerId.get(data.playerId) === socket.id) {
+          engine.setPlayerConnected(data.sessionId, data.playerId, false).catch(() => {})
+        }
       }
     })
 
