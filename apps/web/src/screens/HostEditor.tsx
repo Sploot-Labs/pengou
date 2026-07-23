@@ -396,7 +396,14 @@ export function HostEditor() {
         const mapped = rows.map(fromApiQuestion)
         mapped.forEach(primeSaved)
         setQuestions(mapped)
-        setSelectedId(mapped[0]?.id ?? null)
+        // Preserve the current selection across a reload when it still
+        // exists in the reloaded list — this function doubles as a
+        // failure-resync (type change, undo), and unconditionally jumping to
+        // the first question there would silently steal the host's place
+        // with no explanation. Only fall back to the first question when the
+        // previously selected one is genuinely gone (or on the very first
+        // load, where `prev` is null).
+        setSelectedId((prev) => (prev && mapped.some((q) => q.id === prev) ? prev : (mapped[0]?.id ?? null)))
         setQuestionsLoading(false)
       })
       .catch((err) => {
@@ -430,6 +437,12 @@ export function HostEditor() {
   useEffect(() => {
     if (pendingType) dialogConfirmRef.current?.focus()
   }, [pendingType])
+
+  // Focus the revealed title field when "Nouveau quiz" is opened, so keyboard
+  // users land directly in the input instead of having to tab past the form.
+  useEffect(() => {
+    if (creatingQuiz) newQuizTitleRef.current?.focus()
+  }, [creatingQuiz])
 
   const selectedIndex = questions.findIndex((q) => q.id === selectedId)
   const selected = selectedIndex >= 0 ? questions[selectedIndex] : null
@@ -530,16 +543,23 @@ export function HostEditor() {
       const created = await createQuestion(quizId, toCreateInput(draft))
       const next = fromApiQuestion(created)
       primeSaved(next)
-      let orderedIds: string[] = []
-      setQuestions((prev) => {
-        const withoutOld = prev.filter((q) => q.id !== selected.id)
-        const spliced = [...withoutOld]
-        spliced.splice(Math.min(index, spliced.length), 0, next)
-        orderedIds = spliced.map((q) => q.id)
-        return spliced
-      })
+      // Computed as a plain local array (like `move()`), NOT captured from
+      // inside a `setQuestions` functional-updater callback: React doesn't
+      // guarantee that updater runs synchronously before the next line, so
+      // reading a closure variable it assigns can still see it unset — which
+      // previously sent `reorderQuestions` an EMPTY orderedIds list (still
+      // "succeeds" server-side, vacuously, silently leaving the real order
+      // wrong). `questions` here is the current render's list, safe to read
+      // synchronously since nothing else mutates it between this render and
+      // this call.
+      const spliced = questions.filter((q) => q.id !== selected.id)
+      spliced.splice(Math.min(index, spliced.length), 0, next)
+      setQuestions(spliced)
       setSelectedId(next.id)
-      await reorderQuestions(quizId, orderedIds)
+      await reorderQuestions(
+        quizId,
+        spliced.map((q) => q.id),
+      )
     } catch (err) {
       setActionError(errorMessage(err))
       // Best-effort resync so the list doesn't silently diverge from the
@@ -572,16 +592,28 @@ export function HostEditor() {
     setQuestions(next)
     // Keep focus on the item that moved, at its new position.
     pendingFocus.current = { kind: 'item', id: moved.id }
-    setAnnouncement(`Question déplacée en position ${target + 1}.`)
     try {
       setActionError(null)
       await reorderQuestions(
         currentQuizId,
         next.map((q) => q.id),
       )
+      // Announce success only once the server confirms the move — announcing
+      // before the await resolves would tell screen-reader users the move
+      // succeeded even when it's rolled back a moment later in the catch
+      // below (sighted users would see the list revert while SR users never
+      // hear about it).
+      setAnnouncement(`Question déplacée en position ${target + 1}.`)
     } catch (err) {
       setActionError(errorMessage(err))
       setQuestions(previous)
+      // The list just reverted to `previous` — keep focus with the item
+      // (back at its original position) and correct the record for
+      // screen-reader users, who otherwise never learn the move didn't stick.
+      pendingFocus.current = { kind: 'item', id: moved.id }
+      setAnnouncement(
+        `Déplacement annulé, la question est revenue en position ${index + 1}.`,
+      )
     }
   }
 
@@ -641,19 +673,29 @@ export function HostEditor() {
       const restored = fromApiQuestion(created)
       primeSaved(restored)
       pendingFocus.current = { kind: 'item', id: restored.id }
-      let orderedIds: string[] = []
-      setQuestions((prev) => {
-        const next = [...prev]
-        next.splice(Math.min(index, next.length), 0, restored)
-        orderedIds = next.map((x) => x.id)
-        return next
-      })
+      // Computed as a plain local array, not read back out of a
+      // `setQuestions` functional-updater closure — see the comment in
+      // `applyTypeChangeImmediate` for why that pattern can silently send an
+      // empty/stale orderedIds list.
+      const next = [...questions]
+      next.splice(Math.min(index, next.length), 0, restored)
+      setQuestions(next)
       setSelectedId(restored.id)
       setLastDeleted(null)
       setAnnouncement('Question restaurée.')
-      await reorderQuestions(quizId, orderedIds)
+      await reorderQuestions(
+        quizId,
+        next.map((x) => x.id),
+      )
     } catch (err) {
       setActionError(errorMessage(err))
+      // Best-effort resync so the list doesn't silently diverge from the
+      // server: if `createQuestion` above succeeded but the following
+      // `reorderQuestions` failed, the UI would otherwise keep showing the
+      // restored question at its original position while the server
+      // actually appended it at the end (creation always appends). Same
+      // rationale as `applyTypeChangeImmediate`'s catch.
+      loadQuestions(quizId)
     }
   }
 
@@ -756,7 +798,7 @@ export function HostEditor() {
         <p className="ab-empty-state">Vous n'avez encore aucun quiz. Donnez-lui un titre pour commencer.</p>
         <form className="join-card" onSubmit={handleCreateQuiz} noValidate>
           {newQuizError && (
-            <p className="join-error" role="alert">
+            <p className="join-error" role="alert" id="new-quiz-title-error">
               {newQuizError}
             </p>
           )}
@@ -770,6 +812,7 @@ export function HostEditor() {
               onChange={(e) => setNewQuizTitle(e.target.value)}
               placeholder="Ex. Culture générale — spécial vendredi"
               aria-invalid={newQuizError ? true : undefined}
+              aria-describedby={newQuizError ? 'new-quiz-title-error' : undefined}
             />
           </div>
           <Button variant="primary" type="submit" disabled={newQuizPending}>
@@ -854,7 +897,7 @@ export function HostEditor() {
         {creatingQuiz && (
           <form className="host-meta" onSubmit={handleCreateQuiz} noValidate>
             {newQuizError && (
-              <p className="join-error" role="alert">
+              <p className="join-error" role="alert" id="new-quiz-title-error">
                 {newQuizError}
               </p>
             )}
@@ -867,6 +910,8 @@ export function HostEditor() {
                 value={newQuizTitle}
                 onChange={(e) => setNewQuizTitle(e.target.value)}
                 placeholder="Ex. Spécial géographie"
+                aria-invalid={newQuizError ? true : undefined}
+                aria-describedby={newQuizError ? 'new-quiz-title-error' : undefined}
               />
             </div>
             <div className="host-actions">
@@ -930,7 +975,7 @@ export function HostEditor() {
           <p role="status">Chargement des questions…</p>
         ) : questionsError && questions.length === 0 ? (
           <div className="ab-empty-state">
-            <p>{questionsError}</p>
+            <p role="alert">{questionsError}</p>
             <Button variant="primary" type="button" onClick={() => currentQuizId && loadQuestions(currentQuizId)}>
               Réessayer
             </Button>
