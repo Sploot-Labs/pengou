@@ -2,10 +2,12 @@ import { join } from 'node:path'
 import { loadConfig } from '@splootlabs/shared'
 import { createDb, runMigrations, ensureDefaultTenant } from '@splootlabs/db'
 import { createAuth, enabledSocialProviders } from '@splootlabs/auth'
+import { createEngine, MemorySessionStore, generatePin } from '@splootlabs/game'
 import { buildServer } from './app.js'
 import { registerAuth } from './auth-plugin.js'
 import { registerEditor } from './editor.js'
 import { attachRealtime } from './realtime.js'
+import { registerGameGateway } from './game-gateway.js'
 import { registerStatic } from './static.js'
 
 const config = loadConfig()
@@ -28,7 +30,17 @@ const auth = createAuth(db, {
 await registerAuth(app, auth)
 registerEditor(app, { db, auth, config })
 
-attachRealtime(app)
+const io = attachRealtime(app)
+
+// Moteur de jeu : une seule instance (mémoire) pour tout le process — voir Plan 7 pour le
+// passage à un SessionStore Redis derrière la même interface.
+const engine = createEngine({
+  store: new MemorySessionStore(),
+  now: () => Date.now(),
+  genPin: generatePin,
+  genId: () => crypto.randomUUID(),
+})
+registerGameGateway(io, { engine, db, auth, config })
 
 // En production, le build du SPA est copié à côté du serveur (voir Dockerfile).
 const webDist = process.env.WEB_DIST ?? join(process.cwd(), 'public')
