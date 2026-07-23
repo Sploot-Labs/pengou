@@ -1099,6 +1099,34 @@
   margin-right: auto;
 }
 
+/* QR + URL en clair sous le PIN (lobby) : rejoindre sans rien taper. Le QR
+   vit sur une carte blanche — sa zone de silence claire lui garde sa
+   scannabilité sur le fond sombre du grand écran. */
+.join-invite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.join-invite__qr {
+  background: #ffffff;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  line-height: 0; /* pas d'espace parasite sous le SVG inline */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.join-invite__hint {
+  color: var(--ink-dim);
+  font-size: var(--fs-small);
+}
+
+.join-invite__hint strong {
+  color: var(--ink-strong);
+  font-weight: 700;
+}
+
 /* Compact, persistent join reminder pinned to a corner during the active
    phases so latecomers can still enter (PIN + URL, Kahoot-style). */
 .big-join-reminder {

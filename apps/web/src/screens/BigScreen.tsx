@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
-import { AnswerShape, Logo, PinDisplay, TimerRing } from '../ui'
+import { AnswerShape, JoinInvite, Logo, PinDisplay, TimerRing } from '../ui'
 import { PodiumView } from './Podium'
 
 /**
@@ -433,7 +433,10 @@ export function BigScreen() {
             </p>
           </div>
           {pin ? (
-            <PinDisplay pin={pin} />
+            <>
+              <PinDisplay pin={pin} />
+              <JoinInvite pin={pin} />
+            </>
           ) : (
             <p style={{ color: 'var(--ink-dim)' }}>PIN indisponible — demandez-le à l’hôte.</p>
           )}
@@ -494,12 +497,13 @@ export function BigScreen() {
               {renderDistribution()}
             </>
           ) : (
-            // Écran connecté (`screen:join`) EN PLEINE question (Plan 06 review, finding #2) : le
-            // serveur ne rejoue `question:show` que sur `player:reconnect`, jamais sur
-            // `screen:join` — l'écran a donc `question === null` quand `question:reveal` fait
-            // passer la phase à 'reveal'. Repli honnête plutôt qu'un écran vide jusqu'à la
-            // question suivante (la bascule auto reveal→scoreboard ci-dessus continue de
-            // fonctionner normalement, elle ne dépend pas de `question`).
+            // Repli DÉFENSIF (cas devenu rare depuis le lot hardening) : le serveur rejoue
+            // désormais `question:show` à un écran qui rejoint en pleine question
+            // (`replayCurrentQuestionTo`, appelé sur `screen:join` ET `screen:reconnect`,
+            // game-gateway.ts) — l'écran a donc normalement la question. Ce repli ne subsiste
+            // que pour la fenêtre de course résiduelle (ex. `question:reveal` traité avant le
+            // `question:show` rejoué) : mieux vaut ce message honnête qu'un écran vide. La
+            // bascule auto reveal→scoreboard ci-dessus ne dépend pas de `question`.
             <h1 className="big-live__prompt" ref={phaseHeadingRef} tabIndex={-1}>
               Résultat indisponible pour cette question — la suivante arrive.
             </h1>

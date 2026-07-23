@@ -6,6 +6,7 @@ import {
   type ButtonHTMLAttributes,
   type ReactNode,
 } from 'react'
+import { QRCodeSVG } from 'qrcode.react'
 import type { AnswerShapeKind } from './constants'
 
 /* ------------------------------------------------------------------ */
@@ -262,6 +263,44 @@ export function PinDisplay({
         <span className="ab-pin__scanline motion-safe-only" />
       </span>
       <span className="visually-hidden">{`${label} : ${spaced}`}</span>
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* JoinInvite — QR + URL en clair pour rejoindre sans saisir le PIN     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Affiché sur le grand écran à côté du PIN : un QR encodant l'URL de jointure
+ * (`/join?pin=…`, préremplissage lu par `Join.tsx`) ET l'URL en toutes lettres
+ * pour ceux qui préfèrent la taper. Le QR est purement visuel — l'information
+ * actionnable reste accessible via le texte de l'URL en dessous ; le `title` du
+ * SVG (rendu `role="img"`) donne malgré tout un équivalent aux lecteurs d'écran.
+ *
+ * `window.location.origin` est l'URL réellement joignable de CE déploiement
+ * (self-host ou cloud) — en dev sur `localhost`, le QR n'est pas scannable
+ * depuis un mobile distant (résolution locale) : c'est attendu, pas un bug.
+ */
+export function JoinInvite({ pin, size = 208 }: { pin: string; size?: number }) {
+  const joinUrl = `${window.location.origin}/join?pin=${encodeURIComponent(pin)}`
+  const displayUrl = `${window.location.host}/join`
+  return (
+    <div className="join-invite">
+      <div className="join-invite__qr">
+        <QRCodeSVG
+          value={joinUrl}
+          size={size}
+          level="M"
+          marginSize={2}
+          bgColor="#ffffff"
+          fgColor="#0b1220"
+          title={`QR code pour rejoindre la partie sur ${displayUrl}`}
+        />
+      </div>
+      <p className="join-invite__hint">
+        Scannez pour rejoindre, ou allez sur <strong>{displayUrl}</strong>
+      </p>
     </div>
   )
 }

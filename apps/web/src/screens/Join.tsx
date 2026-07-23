@@ -1,5 +1,5 @@
-import { useRef, useState, type FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { savePlayerSession } from '../realtime/playerSession'
 import { useGameSocket } from '../realtime/useGameSocket'
 import { Button, Logo } from '../ui'
@@ -19,13 +19,28 @@ type Status = 'idle' | 'pending'
 export function Join() {
   const navigate = useNavigate()
   const { emitAck } = useGameSocket()
+  const [searchParams] = useSearchParams()
 
-  const [pin, setPin] = useState('')
+  // PIN prérempli depuis l'URL (QR du grand écran : `/join?pin=…`) — filtré aux
+  // mêmes règles que la saisie manuelle (6 chiffres max) pour qu'un paramètre
+  // douteux ne contourne pas la validation. Le champ reste éditable.
+  const prefilledPin = (searchParams.get('pin') ?? '').replace(/\D/g, '').slice(0, 6)
+
+  const [pin, setPin] = useState(prefilledPin)
   const [pseudo, setPseudo] = useState('')
   const [errors, setErrors] = useState<FieldErrors>({})
   const [status, setStatus] = useState<Status>('idle')
   const pinRef = useRef<HTMLInputElement>(null)
   const pseudoRef = useRef<HTMLInputElement>(null)
+
+  // Arrivée via QR (PIN déjà valide) : le seul geste restant est le pseudo — on
+  // y place le focus au montage. Sinon (saisie manuelle), on ne vole pas le
+  // focus, le lecteur lit la page depuis le début.
+  useEffect(() => {
+    if (prefilledPin.length === 6) pseudoRef.current?.focus()
+    // Montage uniquement : les paramètres d'URL ne changent pas sous cet écran.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   function validate(): FieldErrors {
     const next: FieldErrors = {}
