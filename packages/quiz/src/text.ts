@@ -24,8 +24,18 @@ function stripCombiningDiacritics(value: string): string {
   return out
 }
 
-// trim + repli des accents (NFD puis suppression des marques combinantes) + casse selon `caseSensitive`.
-function normalize(value: string, caseSensitive: boolean): string {
+/**
+ * trim + repli des accents (NFD puis suppression des marques combinantes U+0300–U+036F) + casse
+ * selon `caseSensitive`. Exportée (pas seulement interne à `text.ts`) car le front doit appliquer
+ * EXACTEMENT cette règle pour son évaluation locale immédiate (`PlayerLive.tsx`, avant que
+ * `question:reveal` ne confirme via le serveur) et pour le libellé de répartition
+ * (`realtime/distribution.ts`) — une réimplémentation locale via `\p{Diacritic}` dérivait
+ * silencieusement de celle-ci : cette classe Unicode matche aussi des caractères D'ESPACEMENT
+ * porteurs du trait Diacritic=Yes (accents autonomes, ex. U+00B4 ACUTE ACCENT), pas seulement les
+ * marques combinantes réellement laissées par normalize('NFD') après une lettre accentuée — donc
+ * le verdict local du client pouvait différer du score effectivement retenu par le serveur.
+ */
+export function normalizeText(value: string, caseSensitive: boolean): string {
   const folded = stripCombiningDiacritics(value.trim().normalize('NFD'))
   return caseSensitive ? folded : folded.toLowerCase()
 }
@@ -36,8 +46,8 @@ export const text: QuestionTypeDef<TextPayload, TextAnswer> = {
   validateAnswer: (raw) => answerSchema.parse(raw),
   playerView: () => ({}), // pas de `answers`
   isCorrect: (p, a) => {
-    const given = normalize(a.text, p.caseSensitive)
-    return p.answers.some((candidate) => normalize(candidate, p.caseSensitive) === given)
+    const given = normalizeText(a.text, p.caseSensitive)
+    return p.answers.some((candidate) => normalizeText(candidate, p.caseSensitive) === given)
   },
   score: (p, a, o) => (text.isCorrect(p, a) ? speedBonus(o.basePoints, o.timeMs, o.maxMs) : 0),
 }

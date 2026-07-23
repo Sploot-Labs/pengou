@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { signOut, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
 import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import {
@@ -295,11 +296,40 @@ interface HostCreateAck {
   pin: string
 }
 
+/** A debounced-but-not-yet-sent question edit, tracked in `pendingSaveRef` so it can be flushed on
+ * demand (switching to another question, launching the game) instead of only ever firing from
+ * `saveTimerRef`'s 600ms timeout — see the Plan 06 review's critical finding #1. */
+interface PendingSave {
+  quizId: string
+  id: string
+  patch: UpdateQuestionInput
+  key: string
+}
+
 export function HostEditor() {
   const navigate = useNavigate()
   const { emitAck } = useSharedGameSocket()
+  const { refresh: refreshSession } = useSession()
   const [launching, setLaunching] = useState(false)
   const [launchError, setLaunchError] = useState<string | null>(null)
+  const [signingOut, setSigningOut] = useState(false)
+
+  /** There was previously NO sign-out affordance anywhere in the app (Plan 06 review finding #8) —
+   * `signOut()` was exported from `api/auth.tsx` but called from zero call sites. Best-effort: even
+   * if the server call fails (network blip), clear the client's session state and navigate to
+   * `/login` regardless — staying "logged in" on a screen the host just asked to leave would be
+   * worse than a redundant sign-in prompt. */
+  async function handleSignOut() {
+    setSigningOut(true)
+    try {
+      await signOut()
+    } catch {
+      // Ignored deliberately — see comment above.
+    } finally {
+      await refreshSession()
+      navigate('/login')
+    }
+  }
 
   // --- Quiz list + selection --------------------------------------------
   const [quizzes, setQuizzes] = useState<Quiz[]>([])
@@ -347,6 +377,9 @@ export function HostEditor() {
   // unchanged content.
   const lastSavedRef = useRef<Map<string, string>>(new Map())
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  // The one debounced-but-not-yet-sent edit, if any — see `flushPendingSave` below for why this
+  // needs to be flushable on demand rather than only ever fired by `saveTimerRef`'s timeout.
+  const pendingSaveRef = useRef<PendingSave | null>(null)
 
   function primeSaved(q: Question) {
     lastSavedRef.current.set(q.id, JSON.stringify(toQuestionPatch(q)))
@@ -465,6 +498,42 @@ export function HostEditor() {
         : null
   const canLaunch = launchReason === null
 
+  /** Actually PATCHes one pending question edit and records it as saved. Shared by the debounce
+   * timer and by `flushPendingSave` below, so both paths update `lastSavedRef`/`actionError`
+   * identically. Throws on failure (after surfacing the message in `actionError`) so a caller that
+   * needs to know the flush failed — `launchGame` — can react instead of silently proceeding. */
+  async function persistQuestionPatch(entry: PendingSave): Promise<void> {
+    try {
+      await updateQuestion(entry.quizId, entry.id, entry.patch)
+      lastSavedRef.current.set(entry.id, entry.key)
+      setActionError(null)
+    } catch (err) {
+      setActionError(errorMessage(err))
+      throw err
+    }
+  }
+
+  /**
+   * Flushes whatever question edit is currently debounced, bypassing the 600ms delay, and returns
+   * once it's actually persisted (or immediately if nothing is pending). Two call sites:
+   *  - the debounce effect below, right before it moves its single timer/pending-slot to a
+   *    DIFFERENT question — so switching away from an edited question no longer silently drops
+   *    it (Plan 06 review, critical finding #1, first loss path).
+   *  - `launchGame`, awaited before `host:create` — which reads the questions straight from the
+   *    database — so a launch can never run against content the editor still shows as unsaved
+   *    (same finding, second — worse — loss path: launching on stale content).
+   */
+  async function flushPendingSave(): Promise<void> {
+    if (saveTimerRef.current) {
+      clearTimeout(saveTimerRef.current)
+      saveTimerRef.current = null
+    }
+    const entry = pendingSaveRef.current
+    if (!entry) return
+    pendingSaveRef.current = null
+    await persistQuestionPatch(entry)
+  }
+
   /** « Lancer la partie » : `host:create {quizId}` sur la socket PARTAGÉE
    * (voir `realtime/GameSocketProvider.tsx`) — c'est cette connexion précise
    * qui devient « hôte » de la session côté serveur, et `HostLive` doit donc
@@ -472,11 +541,25 @@ export function HostEditor() {
    * pas en ouvrir une nouvelle. Succès → navigation vers `/host/:sessionId`.
    * Échec (quiz introuvable/refusé, pas de session authentifiée, socket
    * injoignable) → message affiché dans l'UI d'erreur existante, jamais de
-   * PIN/session fabriqué. */
+   * PIN/session fabriqué.
+   *
+   * `flushPendingSave()` is awaited FIRST, and its failure short-circuits the launch entirely: the
+   * whole point of Plan 06 review finding #1 is that `host:create` reads the questions straight
+   * from the database, so launching while an edit is still only debounced client-side (or, worse,
+   * failed to flush) would silently run the game on stale content. */
   async function launchGame() {
     if (!canLaunch || launching || !currentQuizId) return
     setLaunching(true)
     setLaunchError(null)
+    try {
+      await flushPendingSave()
+    } catch (err) {
+      setLaunching(false)
+      setLaunchError(
+        `Vos dernières modifications n'ont pas pu être enregistrées, la partie n'a pas été lancée. ${errorMessage(err)}`,
+      )
+      return
+    }
     try {
       const ack = await emitAck<HostCreateAck>('host:create', { quizId: currentQuizId })
       // Le PIN et le titre ne sont connus qu'ICI (host:create ne les redonne
@@ -503,14 +586,32 @@ export function HostEditor() {
     if (lastSavedRef.current.get(selected.id) === key) return
     const quizId = currentQuizId
     const id = selected.id
+
+    // Switching away from a DIFFERENT question that still has an unsent debounced edit: flush it
+    // immediately instead of just clearing its timer below (which used to drop it — see
+    // `flushPendingSave`'s doc comment). Fire-and-forget here (best-effort, mirrors the original
+    // timer's fire-and-forget save) — `launchGame` is what actually AWAITS a flush.
+    if (pendingSaveRef.current && pendingSaveRef.current.id !== id) {
+      const outgoing = pendingSaveRef.current
+      pendingSaveRef.current = null
+      if (saveTimerRef.current) {
+        clearTimeout(saveTimerRef.current)
+        saveTimerRef.current = null
+      }
+      void persistQuestionPatch(outgoing).catch(() => {
+        // Already surfaced via actionError inside persistQuestionPatch; nothing further to do
+        // here (there is no more specific UI target once we've navigated away from this question).
+      })
+    }
+
+    pendingSaveRef.current = { quizId, id, patch, key }
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current)
     saveTimerRef.current = setTimeout(() => {
-      updateQuestion(quizId, id, patch)
-        .then(() => {
-          lastSavedRef.current.set(id, key)
-          setActionError(null)
-        })
-        .catch((err) => setActionError(errorMessage(err)))
+      saveTimerRef.current = null
+      const toSave = pendingSaveRef.current
+      if (!toSave || toSave.id !== id) return
+      pendingSaveRef.current = null
+      void persistQuestionPatch(toSave).catch(() => {})
     }, 600)
     return () => {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current)
@@ -560,43 +661,73 @@ export function HostEditor() {
    * `apps/server/src/routes/questions.ts`'s PATCH handler: it revalidates any
    * `payload` against the STORED type and has no `type` field at all in its
    * accepted patch). The prototype's UI assumed an in-place type change was
-   * possible; here it's simulated by deleting the old row and creating a new
-   * one of the new type at the same list position (fixed up with an explicit
+   * possible; here it's simulated by creating a new row of the new type and
+   * only THEN deleting the old one (fixed up with an explicit
    * `reorderQuestions` call, since creation always appends at the end). The
    * new row necessarily gets a NEW id — invisible to the host, but worth
-   * knowing if you're reading network logs. */
+   * knowing if you're reading network logs.
+   *
+   * CREATE-then-delete, not delete-then-create (Plan 06 review, critical
+   * finding #6): with delete first, a `createQuestion` failure (network blip,
+   * validation) left the original question already gone with nothing to
+   * restore — a type change could permanently destroy a question. Creating
+   * first means a failed create leaves the original completely untouched; the
+   * only remaining failure mode is the delete itself failing AFTER the create
+   * succeeded, which leaves both rows momentarily present server-side rather
+   * than destroying anything — handled below by resyncing from the server so
+   * the host can see and manually clear the leftover duplicate. */
   async function applyTypeChangeImmediate(type: QuestionType) {
     if (!selected || !currentQuizId) return
     const quizId = currentQuizId
-    const index = questions.findIndex((q) => q.id === selected.id)
+    const originalId = selected.id
+    const index = questions.findIndex((q) => q.id === originalId)
     const draft = draftForType(type, selected)
+    let created: ApiQuestion
     try {
       setActionError(null)
-      await deleteQuestion(quizId, selected.id)
-      const created = await createQuestion(quizId, toCreateInput(draft))
-      const next = fromApiQuestion(created)
-      primeSaved(next)
-      // Computed as a plain local array (like `move()`), NOT captured from
-      // inside a `setQuestions` functional-updater callback: React doesn't
-      // guarantee that updater runs synchronously before the next line, so
-      // reading a closure variable it assigns can still see it unset — which
-      // previously sent `reorderQuestions` an EMPTY orderedIds list (still
-      // "succeeds" server-side, vacuously, silently leaving the real order
-      // wrong). `questions` here is the current render's list, safe to read
-      // synchronously since nothing else mutates it between this render and
-      // this call.
-      const spliced = questions.filter((q) => q.id !== selected.id)
-      spliced.splice(Math.min(index, spliced.length), 0, next)
-      setQuestions(spliced)
-      setSelectedId(next.id)
+      created = await createQuestion(quizId, toCreateInput(draft))
+    } catch (err) {
+      // Create itself failed: nothing changed server-side, the original question is intact and
+      // still selected — no resync needed, just surface the message.
+      setActionError(errorMessage(err))
+      return
+    }
+    const next = fromApiQuestion(created)
+    primeSaved(next)
+    try {
+      await deleteQuestion(quizId, originalId)
+    } catch (err) {
+      // The new row now exists ALONGSIDE the old one server-side — never silently drop either;
+      // resync from the server so the host sees the duplicate for what it is (and can delete the
+      // leftover original manually) instead of the local list quietly diverging from reality.
+      setActionError(
+        `La nouvelle question a été créée, mais l'ancienne n'a pas pu être supprimée : ${errorMessage(err)}. Liste resynchronisée — vous pouvez supprimer le doublon manuellement.`,
+      )
+      loadQuestions(quizId)
+      return
+    }
+    // Computed as a plain local array (like `move()`), NOT captured from
+    // inside a `setQuestions` functional-updater callback: React doesn't
+    // guarantee that updater runs synchronously before the next line, so
+    // reading a closure variable it assigns can still see it unset — which
+    // previously sent `reorderQuestions` an EMPTY orderedIds list (still
+    // "succeeds" server-side, vacuously, silently leaving the real order
+    // wrong). `questions` here is the current render's list, safe to read
+    // synchronously since nothing else mutates it between this render and
+    // this call.
+    const spliced = questions.filter((q) => q.id !== originalId)
+    spliced.splice(Math.min(index, spliced.length), 0, next)
+    setQuestions(spliced)
+    setSelectedId(next.id)
+    try {
       await reorderQuestions(
         quizId,
         spliced.map((q) => q.id),
       )
     } catch (err) {
       setActionError(errorMessage(err))
-      // Best-effort resync so the list doesn't silently diverge from the
-      // server if the delete succeeded but the recreate/reorder didn't.
+      // Best-effort resync so the list doesn't silently diverge from the server if the reorder
+      // didn't stick (create + delete already succeeded at this point).
       loadQuestions(quizId)
     }
   }
@@ -733,6 +864,11 @@ export function HostEditor() {
   }
 
   function selectQuiz(id: string) {
+    // Same rationale as the debounce effect's own flush-on-switch: the questions list is about to
+    // be torn down and reloaded for the new quiz (see the `currentQuizId` effect above), which
+    // would otherwise silently discard a still-debounced edit on the OUTGOING quiz exactly like
+    // switching questions used to (Plan 06 review, finding #1).
+    void flushPendingSave().catch(() => {})
     setCurrentQuizId(id)
     localStorage.setItem(LAST_QUIZ_KEY, id)
   }
@@ -869,6 +1005,9 @@ export function HostEditor() {
           </p>
           <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>{title}</span>
         </div>
+        <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
+          {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
+        </Button>
         <div className="host-launch">
           <Button
             variant="primary"

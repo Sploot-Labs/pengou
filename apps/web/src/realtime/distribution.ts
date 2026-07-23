@@ -7,7 +7,7 @@
  * payload de `packages/quiz/src/{mcq,truefalse,text,slider}.ts`.
  */
 
-import { sliderTolerance } from '@splootlabs/quiz'
+import { normalizeText, sliderTolerance } from '@splootlabs/quiz'
 
 export type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider'
 
@@ -103,11 +103,6 @@ function sliderRows(correct: SliderCorrect, distribution: Record<string, number>
     }))
 }
 
-function normalizeTextLocal(value: string, caseSensitive: boolean): string {
-  const folded = value.trim().normalize('NFD').replace(/\p{Diacritic}/gu, '')
-  return caseSensitive ? folded : folded.toLowerCase()
-}
-
 /** Idem : réponses libres, listées par fréquence décroissante (pas de
  * regroupement inventé au-delà du repli accents/casse déjà appliqué côté
  * moteur pour décider de la correction). */
@@ -128,7 +123,7 @@ function textRows(correct: TextCorrect, distribution: Record<string, number>): D
       key: e.value,
       label: e.value.trim().length > 0 ? e.value : '(réponse vide)',
       correct: correct.answers.some(
-        (candidate) => normalizeTextLocal(candidate, caseSensitive) === normalizeTextLocal(e.value, caseSensitive),
+        (candidate) => normalizeText(candidate, caseSensitive) === normalizeText(e.value, caseSensitive),
       ),
       shape: null,
       count: e.count,

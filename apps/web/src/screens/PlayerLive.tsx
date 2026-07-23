@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { sliderTolerance } from '@splootlabs/quiz'
+import { normalizeText, sliderTolerance } from '@splootlabs/quiz'
 import { clearPlayerSession, loadPlayerSession } from '../realtime/playerSession'
 import { useGameSocket } from '../realtime/useGameSocket'
 import { AnswerTile, Button, TimerRing } from '../ui'
@@ -98,15 +98,6 @@ type ResultKind = 'correct' | 'partial' | 'incorrect' | 'timeout'
 type TileShape = 'triangle' | 'diamond' | 'circle' | 'square'
 const MCQ_SHAPES: readonly TileShape[] = ['triangle', 'diamond', 'circle', 'square']
 
-/** Repli des accents/casse — mêmes règles que `packages/quiz/src/text.ts`. */
-function normalizeText(value: string, caseSensitive: boolean): string {
-  const folded = value
-    .trim()
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
-  return caseSensitive ? folded : folded.toLowerCase()
-}
-
 function evaluateMcq(correct: McqCorrect, optionIndex: number | null): ResultKind {
   if (optionIndex === null) return 'timeout'
   return correct.options[optionIndex]?.correct ? 'correct' : 'incorrect'
@@ -183,6 +174,7 @@ export function PlayerLive() {
 
   const promptRef = useRef<HTMLHeadingElement>(null)
   const answeredRef = useRef<HTMLParagraphElement>(null)
+  const resultHeadingRef = useRef<HTMLHeadingElement>(null)
   const podiumHeadingRef = useRef<HTMLHeadingElement>(null)
 
   function resetAnswer(q: QuestionShowPayload) {
@@ -422,6 +414,16 @@ export function PlayerLive() {
     if (question) promptRef.current?.focus()
   }, [question])
 
+  // Le résultat ('result') est le moment le plus important de la manche pour le joueur — au même
+  // titre que la nouvelle question ci-dessus, mais sans effet dédié jusqu'ici (Plan 06 review,
+  // finding #3) : sans ce focus explicite, le contrôle de réponse (bouton/tuile) disparaît du DOM
+  // en repassant en 'question'→'result' et le focus retombe sur <body>, et le `role="status"`
+  // fraîchement inséré n'est pas fiablement annoncé par tous les lecteurs d'écran. Même
+  // traitement que `promptRef`/`podiumHeadingRef` ci-dessus/dessous.
+  useEffect(() => {
+    if (phase === 'result') resultHeadingRef.current?.focus()
+  }, [phase])
+
   // Le podium remplace tout l'écran comme la carte de confirmation de /join —
   // même traitement : déplacer le focus sur son titre.
   useEffect(() => {
@@ -551,6 +553,19 @@ export function PlayerLive() {
   }
 
   const evalResult = phase === 'result' ? evaluation() : null
+
+  // Reconnexion en pleine question (Plan 06 review, finding #5) : `player:reconnect` re-émet
+  // `question:show`, dont le handler remet systématiquement à zéro la réponse capturée
+  // localement (`resetAnswer` — voir l'abonnement plus haut) — y compris pour un joueur qui AVAIT
+  // déjà répondu avant la coupure. `evaluation()` retombe alors sur `effectiveXxx === null` →
+  // verdict 'timeout', directement contredit un instant plus tard par un delta de scoreboard
+  // positif (« Temps écoulé » juste au-dessus de « +850 points »). Un vrai correctif demanderait
+  // un flag serveur distinguant « n'a vraiment pas répondu » de « a répondu avant une reconnexion »
+  // (suivi Plan 7) ; côté client, on se contente de ne pas AFFICHER la contradiction : un delta de
+  // score strictement positif pour cette manche est la preuve qu'UNE réponse a bien été retenue,
+  // même si on ne sait plus laquelle.
+  const reconnectMismatch =
+    evalResult?.kind === 'timeout' && lastAward !== null && lastAward > 0
 
   return (
     <main className="player-screen" id="contenu-principal" tabIndex={-1}>
@@ -719,10 +734,26 @@ export function PlayerLive() {
         </div>
       )}
 
+      {phase === 'result' && !evalResult && (
+        // Rejoindre en pleine question (Plan 06 review, finding #2) : le serveur ne rejoue
+        // `question:show` que sur `player:reconnect`, jamais sur `player:join` — un joueur qui
+        // rejoint APRÈS le début d'une question a donc `question === null` quand
+        // `question:reveal` fait passer la phase à 'result' juste après. `evaluation()` retourne
+        // alors `null` (elle a besoin de `question` pour interpréter `revealPayload.correct`) :
+        // sans ce repli explicite, l'écran resterait entièrement vide jusqu'à la question
+        // suivante. Repli honnête plutôt qu'un rendu fabriqué à partir de rien.
+        <div className="player-result" role="status">
+          <h1 ref={resultHeadingRef} tabIndex={-1}>
+            Résultat indisponible pour cette question
+          </h1>
+          <p style={{ color: 'var(--ink-dim)' }}>La question suivante arrive…</p>
+        </div>
+      )}
+
       {phase === 'result' && evalResult && (
         <div
           className={`player-result player-result--${
-            evalResult.kind === 'correct'
+            reconnectMismatch || evalResult.kind === 'correct'
               ? 'correct'
               : evalResult.kind === 'partial'
                 ? 'partial'
@@ -730,14 +761,16 @@ export function PlayerLive() {
           }`}
           role="status"
         >
-          <h1>
-            {evalResult.kind === 'timeout'
-              ? 'Temps écoulé'
-              : evalResult.kind === 'correct'
-                ? 'Bonne réponse !'
-                : evalResult.kind === 'partial'
-                  ? `À ${evalResult.diff} près !`
-                  : 'Mauvaise réponse'}
+          <h1 ref={resultHeadingRef} tabIndex={-1}>
+            {reconnectMismatch
+              ? 'Réponse comptabilisée'
+              : evalResult.kind === 'timeout'
+                ? 'Temps écoulé'
+                : evalResult.kind === 'correct'
+                  ? 'Bonne réponse !'
+                  : evalResult.kind === 'partial'
+                    ? `À ${evalResult.diff} près !`
+                    : 'Mauvaise réponse'}
           </h1>
           <p className="player-result__points">
             {lastAward === null ? '…' : `+${lastAward}`}

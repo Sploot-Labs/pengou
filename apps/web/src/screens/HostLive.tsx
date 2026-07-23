@@ -675,7 +675,18 @@ export function HostLive() {
                     type="button"
                     disabled={actionPending}
                     onClick={() => {
-                      if (window.confirm('Passer cette question sans révéler la réponse ?')) {
+                      // Honnêteté : `host:skip` est un ALIAS serveur de `host:reveal` (voir
+                      // `doReveal`, game-gateway.ts) — il diffuse `question:reveal` à TOUTE la
+                      // room comme un reveal normal ; seul `skipRequestedRef` (ci-dessus) empêche
+                      // CET écran hôte de basculer sur la vue révélation. Les joueurs et le grand
+                      // écran, eux, voient la réponse. Un vrai skip serveur (sans révélation pour
+                      // personne) est un suivi Plan 7 — ce libellé ne doit jamais prétendre le
+                      // contraire.
+                      if (
+                        window.confirm(
+                          'Révéler la réponse et passer directement au classement ? La réponse sera affichée aux joueurs et au grand écran.',
+                        )
+                      ) {
                         skipQuestion()
                       }
                     }}

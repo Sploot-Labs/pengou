@@ -479,17 +479,31 @@ export function BigScreen() {
         </div>
       )}
 
-      {phase === 'reveal' && question && (
+      {phase === 'reveal' && (
         <div className="big-live">
-          <div className="big-live__header">
-            <span className="host-badge">Révélation</span>
-          </div>
+          {question ? (
+            <>
+              <div className="big-live__header">
+                <span className="host-badge">Révélation</span>
+              </div>
 
-          <h1 className="big-live__prompt" ref={phaseHeadingRef} tabIndex={-1}>
-            {question.prompt}
-          </h1>
+              <h1 className="big-live__prompt" ref={phaseHeadingRef} tabIndex={-1}>
+                {question.prompt}
+              </h1>
 
-          {renderDistribution()}
+              {renderDistribution()}
+            </>
+          ) : (
+            // Écran connecté (`screen:join`) EN PLEINE question (Plan 06 review, finding #2) : le
+            // serveur ne rejoue `question:show` que sur `player:reconnect`, jamais sur
+            // `screen:join` — l'écran a donc `question === null` quand `question:reveal` fait
+            // passer la phase à 'reveal'. Repli honnête plutôt qu'un écran vide jusqu'à la
+            // question suivante (la bascule auto reveal→scoreboard ci-dessus continue de
+            // fonctionner normalement, elle ne dépend pas de `question`).
+            <h1 className="big-live__prompt" ref={phaseHeadingRef} tabIndex={-1}>
+              Résultat indisponible pour cette question — la suivante arrive.
+            </h1>
+          )}
         </div>
       )}
 
