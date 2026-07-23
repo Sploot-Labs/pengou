@@ -40,4 +40,7 @@ export type GameSession = {
   players: Record<string, Player>
   // par index de question, puis par id de joueur
   answers: Record<number, Record<string, SubmittedAnswer>>
+  // par index de question : true une fois que ses points ont été crédités aux joueurs (reveal()
+  // idempotent, découplé de `phase` — voir engine.ts:reveal).
+  credited: Record<number, boolean>
 }

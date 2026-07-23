@@ -15,6 +15,7 @@ function makeSession(overrides: Partial<GameSession> = {}): GameSession {
     questionStartedAt: null,
     players: {},
     answers: {},
+    credited: {},
     ...overrides,
   }
 }

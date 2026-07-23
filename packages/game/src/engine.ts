@@ -60,13 +60,18 @@ export function createEngine(deps: EngineDeps): Engine {
     return session
   }
 
-  /** PIN unique parmi les sessions actives : retente tant que genPin() collide. */
+  // Borne le retry : un genPin dégénéré/épuisé (ex. espace de PIN saturé, générateur bugué) ne
+  // doit jamais faire boucler createSession indéfiniment.
+  const MAX_PIN_ATTEMPTS = 50
+
+  /** PIN unique parmi les sessions actives : retente tant que genPin() collide, borné. */
   async function uniquePin(): Promise<string> {
-    for (;;) {
+    for (let attempt = 0; attempt < MAX_PIN_ATTEMPTS; attempt++) {
       const pin = genPin()
       const collision = await store.getByPin(pin)
       if (!collision) return pin
     }
+    throw new Error('impossible de générer un PIN unique')
   }
 
   function currentQuestion(session: GameSession): EngineQuestion | undefined {
@@ -88,6 +93,7 @@ export function createEngine(deps: EngineDeps): Engine {
         questionStartedAt: null,
         players: {},
         answers: {},
+        credited: {},
       }
       await store.save(session)
       return session
@@ -137,6 +143,12 @@ export function createEngine(deps: EngineDeps): Engine {
       if (alreadyAnswered) {
         return { accepted: false, reason: 'réponse déjà soumise pour cette question' }
       }
+      // Invariant normalement garanti par startQuestion (phase 'question' ⟹ questionStartedAt
+      // posé) ; si jamais corrompu, on échoue FERMÉ (rejet) plutôt que d'ouvrir un fallback
+      // `now()` qui accorderait silencieusement timeMs=0 (score plein) à une question mal démarrée.
+      if (session.questionStartedAt === null) {
+        return { accepted: false, reason: "question non démarrée correctement (questionStartedAt manquant)" }
+      }
 
       const def = questionTypes[question.type]
       let answer: unknown
@@ -148,8 +160,7 @@ export function createEngine(deps: EngineDeps): Engine {
 
       // Horodatage 100% serveur : jamais de confiance dans un timing fourni par le client.
       const maxMs = question.timeLimit * 1000
-      const startedAt = session.questionStartedAt ?? now()
-      const rawTimeMs = now() - startedAt
+      const rawTimeMs = now() - session.questionStartedAt
       const timeMs = Math.max(0, Math.min(rawTimeMs, maxMs))
 
       const correct = def.isCorrect(question.payload, answer)
@@ -165,14 +176,19 @@ export function createEngine(deps: EngineDeps): Engine {
 
     async reveal(sessionId) {
       const session = await requireSession(sessionId)
-      // Idempotent : on ne crédite les points qu'une seule fois, à la transition question→reveal.
-      // Un appel répété à reveal() (déjà en phase reveal ou plus loin) ne recrédite pas les scores.
-      if (session.phase === 'question') {
+      // Crédite les points de la question courante EXACTEMENT une fois, quelle que soit la phase
+      // au moment de l'appel. Découplé de `phase` à dessein : si l'hôte enchaîne
+      // scoreboard()/nextQuestion() avant reveal() (ou skip), la phase a déjà quitté 'question'
+      // — un gate sur `phase === 'question'` ferait alors disparaître silencieusement les points
+      // de la manche. `credited[currentIndex]` est la seule source de vérité pour l'idempotence :
+      // un reveal() répété (même après un skip) ne recrédite jamais deux fois.
+      if (!session.credited[session.currentIndex]) {
         const roundAnswers = session.answers[session.currentIndex] ?? {}
         for (const [playerId, submitted] of Object.entries(roundAnswers)) {
           const player = session.players[playerId]
           if (player) player.score += submitted.points
         }
+        session.credited[session.currentIndex] = true
       }
       session.phase = 'reveal'
       await store.save(session)
@@ -220,6 +236,11 @@ export function createEngine(deps: EngineDeps): Engine {
       }
     },
 
+    // NOTE anti-triche (défense en profondeur) : cette méthode expose la bonne réponse en clair
+    // (`correct: question.payload`). Le moteur ne la restreint pas lui-même à la phase `reveal`
+    // (c'est une projection pure/synchrone, sans accès au store) — c'est à l'appelant (la
+    // passerelle Socket.IO, Task 4) de NE l'émettre aux joueurs qu'après `reveal()`, jamais
+    // pendant `question`.
     questionResult(session) {
       const question = currentQuestion(session)
       const roundAnswers = session.answers[session.currentIndex] ?? {}

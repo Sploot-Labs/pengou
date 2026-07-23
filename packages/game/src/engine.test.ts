@@ -296,5 +296,74 @@ describe('game engine — cycle déterministe complet', () => {
       const second = await e2.createSession({ quizId: 'q2', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
       expect(second.pin).toBe('111111') // réutilisé, aucune collision détectée
     })
+
+    it('genPin qui collide TOUJOURS → createSession rejette après la borne (pas de boucle infinie)', async () => {
+      const sharedStore = new MemorySessionStore()
+      const e1 = createEngine({ store: sharedStore, now: clock.now, genPin: makePinGen(['111111']), genId: makeIdGen('a') })
+      await e1.createSession({ quizId: 'q1', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+
+      let calls = 0
+      const alwaysColliding = () => {
+        calls++
+        return '111111' // toujours le même PIN déjà pris
+      }
+      const e2 = createEngine({ store: sharedStore, now: clock.now, genPin: alwaysColliding, genId: makeIdGen('b') })
+
+      await expect(
+        e2.createSession({ quizId: 'q2', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+      ).rejects.toThrow(/PIN/)
+      // borné : ne doit pas avoir retenté indéfiniment
+      expect(calls).toBeLessThanOrEqual(50)
+      expect(calls).toBeGreaterThan(1)
+    })
+  })
+
+  describe('crédit des points — découplé de la phase, idempotent', () => {
+    it('reveal() après scoreboard()/nextQuestion() (host a sauté reveal) crédite quand même les points', async () => {
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [mcqQuestion, tfQuestion],
+      })
+      const { player } = await engine.addPlayer(session.id, 'Alice')
+
+      await engine.startQuestion(session.id)
+      clock.set(1000)
+      const submit = await engine.submitAnswer(session.id, player.id, { optionIndex: 1 }) // correct
+      expect(submit.accepted).toBe(true)
+
+      // L'hôte enchaîne scoreboard() (ou nextQuestion()) AVANT reveal() : la phase quitte
+      // 'question' avant que les points n'aient été crédités.
+      let s = await engine.scoreboard(session.id)
+      expect(s.phase).toBe('scoreboard')
+      expect(s.players[player.id]!.score).toBe(0) // pas encore crédité
+
+      // reveal() appelé après-coup doit tout de même créditer la manche (le crédit est indexé
+      // par question, pas gaté par la phase courante).
+      s = await engine.reveal(session.id)
+      expect(s.players[player.id]!.score).toBeGreaterThan(0)
+    })
+
+    it('reveal() appelé deux fois ne crédite pas les points en double (idempotent)', async () => {
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [mcqQuestion],
+      })
+      const { player } = await engine.addPlayer(session.id, 'Alice')
+
+      await engine.startQuestion(session.id)
+      clock.set(1000)
+      await engine.submitAnswer(session.id, player.id, { optionIndex: 1 }) // correct
+
+      const firstReveal = await engine.reveal(session.id)
+      const scoreAfterFirst = firstReveal.players[player.id]!.score
+      expect(scoreAfterFirst).toBeGreaterThan(0)
+
+      const secondReveal = await engine.reveal(session.id)
+      expect(secondReveal.players[player.id]!.score).toBe(scoreAfterFirst) // inchangé
+    })
   })
 })
