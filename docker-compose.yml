@@ -21,10 +21,16 @@ services:
       TENANCY_MODE: single
       DATABASE_URL: postgres://kahoot:kahoot@db:5432/kahoot
       SESSION_SECRET: change-me-in-production-please!!
-      # Requis en production (NODE_ENV=production, fixé dans le Dockerfile) : le serveur refuse
-      # de démarrer sans BETTER_AUTH_SECRET (cf. packages/shared/src/config.ts loadConfig).
-      # Générer une vraie valeur secrète (ex. `openssl rand -base64 32`) avant tout déploiement réel.
-      BETTER_AUTH_SECRET: change-me-in-production-32-chars-min!!
+      # AUCUNE valeur par défaut ici, INTENTIONNELLEMENT (hardening) : un placeholder committé
+      # (même ≥32 caractères, donc valide aux yeux du garde de production dans loadConfig)
+      # serait une clé de signature PUBLIQUEMENT CONNUE dans l'historique git — un copier-coller
+      # de ce fichier en déploiement réel signerait alors des sessions avec un secret que
+      # N'IMPORTE QUI peut lire sur GitHub. `${BETTER_AUTH_SECRET:?...}` fait échouer `docker
+      # compose up` IMMÉDIATEMENT (avant même de démarrer le conteneur) avec un message clair si
+      # la variable n'est pas définie dans l'environnement du shell ou un fichier `.env` local
+      # (non commité — voir `.env.example`) : `openssl rand -base64 32` puis
+      # `export BETTER_AUTH_SECRET=...` (ou renseignez `.env`) avant `docker compose up`.
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Définissez BETTER_AUTH_SECRET (≥32 caractères, ex. openssl rand -base64 32) dans votre environnement ou un fichier .env avant docker compose up — voir .env.example.}
       BETTER_AUTH_URL: http://localhost:3000
       # Providers OAuth sociaux (optionnels) : décommenter et renseigner pour les activer.
       # Voir enabledSocialProviders() dans packages/auth/src/providers.ts.
