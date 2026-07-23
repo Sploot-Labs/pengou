@@ -17,6 +17,7 @@ import {
   type Quiz,
   type UpdateQuestionInput,
 } from '../api/quizzes'
+import { ANSWER_SHAPES, type AnswerShapeKind } from '../constants'
 import { AnswerShape, Button, Logo, SHAPE_NAME_FR } from '../ui'
 
 /**
@@ -37,14 +38,8 @@ const TYPE_LABEL: Record<QuestionType, string> = {
 }
 
 /** Decorative only (color + glyph reinforcing the shape cue on mcq tiles) —
- * never persisted. Structurally identical to `AnswerShapeKind` in `ui.tsx`
- * (which still imports its name from `mockData.ts` for the *other* prototype
- * screens not yet wired); re-declared locally instead of importing from
- * `mockData` so this screen carries zero mock imports, per Task 3's
- * self-review checklist. TS matches these by structural (literal-union)
- * shape, not by declaration identity, so this is safe. */
-type ShapeKind = 'triangle' | 'diamond' | 'circle' | 'square'
-const MCQ_SHAPES: ShapeKind[] = ['triangle', 'diamond', 'circle', 'square']
+ * never persisted. Shared with `ui.tsx` via `src/constants.ts`. */
+const MCQ_SHAPES = ANSWER_SHAPES
 
 /* ------------------------------------------------------------------ */
 /* Local editable question model                                        */
@@ -70,7 +65,7 @@ interface QuestionBase {
 }
 interface McqOption {
   id: string
-  shape: ShapeKind
+  shape: AnswerShapeKind
   label: string
   correct: boolean
 }

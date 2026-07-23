@@ -6,7 +6,7 @@ import {
   type ButtonHTMLAttributes,
   type ReactNode,
 } from 'react'
-import type { AnswerShapeKind } from './mockData'
+import type { AnswerShapeKind } from './constants'
 
 /* ------------------------------------------------------------------ */
 /* Logo                                                                 */
