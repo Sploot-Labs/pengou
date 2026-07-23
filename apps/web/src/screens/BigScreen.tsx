@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue } from '../motion/index.js'
+import { AnimatedBar, Confetti, CountUp, useCue } from '../motion/index.js'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
 import { ThemeProvider } from '../theme/ThemeProvider.js'
