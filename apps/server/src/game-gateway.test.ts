@@ -1,7 +1,10 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import type { FastifyInstance } from 'fastify'
 import { io as ioClient, type Socket as ClientSocket } from 'socket.io-client'
-import { startTestDb, runMigrations } from '@splootlabs/db'
+import { eq } from 'drizzle-orm'
+import {
+  startTestDb, runMigrations, schema, tenantScope, createQuiz, createQuestion,
+} from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { loadConfig } from '@splootlabs/shared'
 import { createEngine, MemorySessionStore, generatePin } from '@splootlabs/game'
@@ -89,6 +92,23 @@ function ack<T = unknown>(client: ClientSocket, event: string, payload: unknown)
 
 function waitFor<T = unknown>(client: ClientSocket, event: string): Promise<T> {
   return new Promise((resolve) => client.once(event, (payload: T) => resolve(payload)))
+}
+
+/** Course « `event` arrive-t-il sur `client` avant `ms` ? » — résout `true` si le délai gagne
+ * (aucun événement reçu, ce qu'on veut prouver pour une action refusée côté serveur), `false`
+ * si l'événement arrive quand même (fuite/anomalie à détecter). */
+function raceNoEvent(client: ClientSocket, event: string, ms: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const handler = () => {
+      clearTimeout(timer)
+      resolve(false)
+    }
+    const timer = setTimeout(() => {
+      client.off(event, handler)
+      resolve(true)
+    }, ms)
+    client.once(event, handler)
+  })
 }
 
 /** Collecte tous les événements `event` reçus par `client` (au lieu de `.once`, qui rate un
@@ -261,4 +281,119 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       await app.close()
     }
   }, 15_000)
+
+  it("un joueur ne peut pas piloter les événements hôte (host:reveal refusé, aucune fuite sur le fil)", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const cookie = await signUp(app, 'gateway-host-authz@example.com')
+
+      const quizRes = await app.inject({
+        method: 'POST',
+        url: '/api/quizzes',
+        payload: { title: 'Quiz autorisation hôte' },
+        headers: { 'content-type': 'application/json', cookie },
+      })
+      expect(quizRes.statusCode).toBe(201)
+      const quiz = quizRes.json() as { id: string }
+
+      const questionRes = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quiz.id}/questions`,
+        payload: {
+          type: 'mcq',
+          prompt: 'Q ?',
+          timeLimit: 20,
+          payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+        },
+        headers: { 'content-type': 'application/json', cookie },
+      })
+      expect(questionRes.statusCode).toBe(201)
+
+      const hostSocket = await connectClient(url, { cookie })
+      clients.push(hostSocket)
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
+        hostSocket,
+        'host:create',
+        { quizId: quiz.id },
+      )
+      expect(created.error).toBeUndefined()
+      const { pin } = created as { sessionId: string; pin: string }
+
+      // Un joueur anonyme rejoint — il n'a JAMAIS le rôle 'host' côté passerelle.
+      const mallory = await connectClient(url)
+      clients.push(mallory)
+      const joinRes = await ack<{ playerId?: string; error?: string }>(mallory, 'player:join', { pin, nickname: 'Mallory' })
+      expect(joinRes.error).toBeUndefined()
+      expect(joinRes.playerId).toBeTruthy()
+
+      // Le joueur tente de piloter le jeu à la place de l'hôte. `requireHost` doit rejeter
+      // AVANT tout appel moteur : donc ni `question:reveal` (qui contiendrait la bonne
+      // réponse) ni aucun autre événement d'état ne doit jamais être émis suite à cette
+      // tentative — on fait courir l'écoute de l'événement contre un court délai.
+      const noRevealLeak = raceNoEvent(mallory, 'question:reveal', 500)
+      const revealAck = await ack<{ error?: string }>(mallory, 'host:reveal', {})
+      expect(revealAck.error).toBeTruthy()
+      expect(await noRevealLeak).toBe(true) // le timeout a gagné : aucune fuite
+
+      // Même refus pour host:start et host:next (aucun état ne doit changer non plus).
+      const noShowLeak = raceNoEvent(mallory, 'question:show', 500)
+      const startAck = await ack<{ error?: string }>(mallory, 'host:start', {})
+      expect(startAck.error).toBeTruthy()
+      expect(await noShowLeak).toBe(true)
+
+      const noPodiumLeak = raceNoEvent(mallory, 'podium', 500)
+      const nextAck = await ack<{ error?: string }>(mallory, 'host:next', {})
+      expect(nextAck.error).toBeTruthy()
+      expect(await noPodiumLeak).toBe(true)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("host:create sur un quiz d'un AUTRE tenant est refusé (aucune session créée en base)", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const cookie = await signUp(app, 'gateway-tenant-iso@example.com')
+
+      // Tenant B, seedé directement via les repos (même approche que editor-e2e.test.ts) :
+      // un tenant + un owner qui lui appartient + un quiz + une question, tous hors du tenant
+      // par défaut résolu pour l'hôte authentifié ci-dessus (mode 'single').
+      const [foreignTenant] = await ctx.db.insert(schema.tenant).values({ name: 'Tenant étranger (gateway)' }).returning()
+      const [foreignOwner] = await ctx.db.insert(schema.user)
+        .values({ id: crypto.randomUUID(), email: 'foreign-owner-gateway@x.fr', name: 'Étranger', emailVerified: false })
+        .returning()
+      const foreignScope = tenantScope(ctx.db, foreignTenant.id)
+      const foreignQuiz = await createQuiz(foreignScope, { ownerId: foreignOwner.id, title: 'Quiz étranger (gateway)' })
+      await createQuestion(foreignScope, foreignQuiz.id, {
+        type: 'mcq',
+        prompt: 'Question étrangère',
+        timeLimit: 20,
+        payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+      })
+
+      const hostSocket = await connectClient(url, { cookie })
+      clients.push(hostSocket)
+
+      // L'hôte (tenant par défaut) tente de créer une session sur le quiz du tenant étranger.
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
+        hostSocket,
+        'host:create',
+        { quizId: foreignQuiz.id },
+      )
+      expect(created.error).toBeTruthy()
+      expect(created.sessionId).toBeUndefined()
+      expect(created.pin).toBeUndefined()
+
+      // Aucune ligne game_session n'a été créée pour ce quiz — la garde de scope
+      // (listQuestions/createGameSession scopés) a bloqué la persistance, pas seulement l'ack.
+      const rows = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, foreignQuiz.id))
+      expect(rows).toHaveLength(0)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
 })
