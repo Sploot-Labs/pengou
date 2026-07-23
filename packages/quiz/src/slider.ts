@@ -29,7 +29,9 @@ export const slider: QuestionTypeDef<SliderPayload, SliderAnswer> = {
     if (!slider.isCorrect(p, a)) return 0
     const tol = tolerance(p)
     const distance = Math.abs(a.value - p.correct)
-    const proximity = Math.max(0, 1 - distance / tol) // plein si exact, dégressif jusqu'à 0 à la limite de tolérance
-    return Math.round(speedBonus(o.basePoints, o.timeMs, o.maxMs) * proximity)
+    // plein si exact, dégressif mais TOUJOURS > 0 dans la tolérance (dénominateur tol+1 :
+    // à distance===tol, proximity = 1/(tol+1) > 0). Garantit isCorrect===true ⟹ score > 0.
+    const proximity = 1 - distance / (tol + 1)
+    return speedBonus(Math.round(o.basePoints * proximity), o.timeMs, o.maxMs)
   },
 }

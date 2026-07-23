@@ -160,4 +160,31 @@ describe('slider gameplay', () => {
     expect(exactSlow).toBeLessThan(exact)
     expect(exactSlow).toBeGreaterThan(0)
   })
+
+  // Invariant : isCorrect(payload, answer) === true ⟹ score(...) > 0.
+  // Régression : la valeur à la bordure exacte de la tolérance (distance === tolérance) est
+  // "correcte" mais l'ancienne courbe de proximité (1 - distance/tolérance) y valait pile 0,
+  // ce qui aurait fait gagner 0 point à un joueur pourtant déclaré correct.
+  it('bordure de tolérance (distance === tolérance) : isCorrect=true ET score > 0', () => {
+    // plage 100 → tolérance = round(0.05*100) = 5 ; value=55 → distance=5 === tolérance
+    const boundaryAnswer = { value: 55 }
+    expect(slider.isCorrect(payload, boundaryAnswer)).toBe(true)
+    expect(slider.score(payload, boundaryAnswer, opts(0))).toBeGreaterThan(0)
+  })
+
+  it('juste hors tolérance (distance === tolérance + 1) : isCorrect=false ET score === 0', () => {
+    // value=56 → distance=6 === tolérance(5) + 1
+    const justOutside = { value: 56 }
+    expect(slider.isCorrect(payload, justOutside)).toBe(false)
+    expect(slider.score(payload, justOutside, opts(0))).toBe(0)
+  })
+
+  it('invariant général : sur tout le domaine, isCorrect ⟹ score > 0', () => {
+    for (let value = payload.min; value <= payload.max; value += 1) {
+      const answer = { value }
+      if (slider.isCorrect(payload, answer)) {
+        expect(slider.score(payload, answer, opts(0))).toBeGreaterThan(0)
+      }
+    }
+  })
 })
