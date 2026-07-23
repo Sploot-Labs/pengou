@@ -9,6 +9,7 @@ import { HostLive } from './screens/HostLive'
 import { Join } from './screens/Join'
 import { Login } from './screens/Login'
 import { PlayerLive } from './screens/PlayerLive'
+import { SessionReport } from './screens/SessionReport'
 import { Signup } from './screens/Signup'
 
 /**
@@ -43,11 +44,11 @@ function HostRealtimeLayout() {
  * Plan 07 Task 4 : `/` héberge désormais l'accueil hôte (`Home` — liste des
  * quiz + parties récentes) et l'éditeur a déménagé sur `/quizzes/:quizId`
  * (il lit l'id du quiz depuis l'URL au lieu de son ancien état de sélection
- * interne — voir `HostEditor.tsx`). `/sessions/:sessionId` (le rapport de
- * partie, Task 5) n'est PAS encore montée ici : `Home` construit déjà les
- * liens vers cette route (`react-router` ne résout les liens qu'à la
- * navigation, jamais au rendu — un lien vers une route pas encore montée ne
- * casse donc rien tant que personne ne clique dessus avant Task 5).
+ * interne — voir `HostEditor.tsx`). Plan 07 Task 5 : `/sessions/:sessionId`
+ * (le rapport de partie) est désormais montée, protégée, en dehors de
+ * `HostRealtimeLayout` (elle n'a besoin d'aucune socket partagée — voir le
+ * commentaire sur sa route ci-dessous) — le lien que `Home` construisait
+ * déjà vers cette route résout enfin vers un écran réel.
  *
  * Pas de route `/podium/:sessionId` : l'événement `podium` n'est diffusé
  * qu'aux sockets déjà membres de la room de session (hôte ou grand écran —
@@ -93,6 +94,18 @@ export const router = createBrowserRouter([
             ),
           },
         ],
+      },
+      {
+        // Report screen (Plan 07 Task 5) does NOT need `HostRealtimeLayout`'s
+        // shared socket — it's a plain REST read (`getSessionReport`), no
+        // `host:*` gateway events involved — so it's mounted as its own
+        // protected route rather than nested under that layout.
+        path: '/sessions/:sessionId',
+        element: (
+          <RequireAuth>
+            <SessionReport />
+          </RequireAuth>
+        ),
       },
       { path: '/join', element: <Join /> },
       { path: '/play', element: <PlayerLive /> },

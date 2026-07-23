@@ -334,6 +334,19 @@ export function HostEditor() {
     }
   }
 
+  /** "← Retour à l'accueil" (Task 4 review, carried-over fix): a plain `<Link
+   * to="/">` here would navigate away WITHOUT flushing whatever question edit
+   * is still only debounced (`pendingSaveRef`) — the host could silently lose
+   * a pending edit. Flush first (fire-and-forget, same as the removed
+   * `selectQuiz`'s old navigation used to do — `launchGame` is the only
+   * caller that AWAITS a flush, since a failed launch must be visible;
+   * leaving the editor is lower-stakes and shouldn't block on the network),
+   * then navigate regardless of whether the flush actually lands. */
+  function handleBackToHome() {
+    void flushPendingSave()
+    navigate('/')
+  }
+
   // --- The quiz addressed by the route ------------------------------------
   const [quiz, setQuiz] = useState<Quiz | null>(null)
   const [quizLoading, setQuizLoading] = useState(true)
@@ -935,7 +948,10 @@ export function HostEditor() {
             <strong>Arena</strong> — quiz en direct, open-source · chez vous ou dans le cloud
           </p>
           <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
-            <Link to="/">← Retour à l'accueil</Link> · {title}
+            <button type="button" className="host-link-button" onClick={handleBackToHome}>
+              ← Retour à l'accueil
+            </button>{' '}
+            · {title}
           </span>
         </div>
         <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>

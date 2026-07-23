@@ -66,7 +66,6 @@ export function Home() {
   const [newQuizError, setNewQuizError] = useState<string | null>(null)
   const [newQuizPending, setNewQuizPending] = useState(false)
   const newQuizTitleRef = useRef<HTMLInputElement>(null)
-  const newQuizButtonRef = useRef<HTMLButtonElement>(null)
 
   function loadQuizzes() {
     setQuizzesLoading(true)
@@ -156,7 +155,6 @@ export function Home() {
             <Button
               variant="ghost"
               type="button"
-              ref={newQuizButtonRef}
               onClick={() => {
                 setCreatingQuiz((v) => !v)
                 setNewQuizError(null)

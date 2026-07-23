@@ -475,6 +475,25 @@
   color: var(--brand);
 }
 
+/* Looks/behaves like the inline text link it sits next to (e.g. "· {title}"
+   in HostEditor's header), but is a real <button> so it can run
+   `flushPendingSave()` before navigating instead of an inert <Link>'s
+   direct-to-navigation. */
+.host-link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: var(--brand);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.host-link-button:hover {
+  text-decoration: underline;
+}
+
 .host-launch__warning {
   padding: var(--space-3);
   margin-bottom: var(--space-4);
@@ -1881,4 +1900,65 @@
 .home-list__meta {
   color: var(--ink-dim);
   font-size: var(--fs-small);
+}
+
+/* ====================================================================== */
+/* SessionReport                                                          */
+/* ====================================================================== */
+
+.report-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.report-summary__facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--ink-dim);
+  font-size: var(--fs-small);
+}
+
+/* Wide tables (long prompts, four columns) scroll inside their own box
+   rather than pushing the page into horizontal scroll. */
+.report-table-wrap {
+  overflow-x: auto;
+  margin-top: var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-small);
+}
+
+.report-table th,
+.report-table td {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.report-table thead th {
+  background: var(--surface);
+  color: var(--ink-dim);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.report-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.report-table tbody tr:hover {
+  background: var(--surface);
 }
