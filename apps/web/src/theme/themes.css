@@ -1,7 +1,7 @@
 /* Rôles produit dérivés des primitives brand-kit, par thème.
    Le brand-kit fournit les primitives --sploot-* (light/dark via data-scheme). */
 
-:root[data-theme='app'] {
+[data-theme='app'] {
   --stage: var(--sploot-bg);
   --stage-2: var(--sploot-surface-2);
   --surface: var(--sploot-surface);
@@ -20,7 +20,7 @@
 }
 
 /* Grand écran : sombre assumé (le sous-arbre force data-scheme="dark"). */
-:root[data-theme='scene'] {
+[data-theme='scene'] {
   --stage: var(--sploot-bg);
   --stage-2: var(--sploot-surface-2);
   --surface: var(--sploot-surface);
@@ -39,10 +39,10 @@
 }
 
 /* data-scheme force la palette brand-kit indépendamment de prefers-color-scheme.
-   Le brand-kit expose déjà :root[data-theme="dark"|"light"] ; on réexpose les
-   mêmes valeurs sous notre attribut dédié data-scheme pour lever l'ambiguïté
-   avec le thème PRODUIT (data-theme). */
-:root[data-scheme='dark'] {
+   Le brand-kit expose déjà data-theme="dark"|"light" sur :root ; on réexpose
+   les mêmes valeurs sous notre attribut dédié data-scheme pour lever
+   l'ambiguïté avec le thème PRODUIT (data-theme). */
+[data-scheme='dark'] {
   --sploot-ginger: #e88a3c;
   --sploot-ginger-deep: #c86e24;
   --sploot-petrol: #4fa3a0;
@@ -57,7 +57,7 @@
   --sploot-warn: #e0a64b;
   --sploot-bad: #d96a52;
 }
-:root[data-scheme='light'] {
+[data-scheme='light'] {
   --sploot-ginger: #d9772b;
   --sploot-ginger-deep: #b85f1e;
   --sploot-petrol: #1e5f60;
