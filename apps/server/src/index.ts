@@ -4,6 +4,7 @@ import { createDb, runMigrations, ensureDefaultTenant } from '@splootlabs/db'
 import { createAuth, enabledSocialProviders } from '@splootlabs/auth'
 import { buildServer } from './app.js'
 import { registerAuth } from './auth-plugin.js'
+import { registerEditor } from './editor.js'
 import { attachRealtime } from './realtime.js'
 import { registerStatic } from './static.js'
 
@@ -25,6 +26,7 @@ const auth = createAuth(db, {
   socialProviders: enabledSocialProviders(config),
 })
 await registerAuth(app, auth)
+registerEditor(app, { db, auth, config })
 
 attachRealtime(app)
 

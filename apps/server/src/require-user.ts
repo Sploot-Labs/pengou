@@ -19,7 +19,12 @@ export async function requireUser(request: FastifyRequest, reply: FastifyReply):
   request.user = { id: session.user.id, email: session.user.email }
 }
 
+// Invariant : `requestScope` suppose que le preHandler `requireUser` a déjà tourné
+// (donc `request.user` est renseigné). Garde défensive ci-dessous : sans ça, un appel
+// erroné produirait un TypeError obscur (`Cannot read properties of undefined`) au lieu
+// d'un message clair pointant vers la cause réelle.
 export async function requestScope(request: FastifyRequest, db: Db, config: AppConfig): Promise<TenantScope> {
+  if (!request.user?.id) throw new Error('requestScope requires requireUser preHandler')
   const explicitTenantId = typeof request.headers['x-tenant-id'] === 'string' ? (request.headers['x-tenant-id'] as string) : undefined
   const tenantId = await resolveTenantId(db, config, { userId: request.user.id, explicitTenantId })
   return tenantScope(db, tenantId)
