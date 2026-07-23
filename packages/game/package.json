@@ -1,0 +1,10 @@
+{
+  "name": "@splootlabs/game",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": { ".": { "development": "./src/index.ts", "types": "./dist/index.d.ts", "default": "./dist/index.js" } },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": { "build": "tsc -p tsconfig.json", "typecheck": "tsc --noEmit -p tsconfig.json", "test": "vitest run" },
+  "dependencies": { "@splootlabs/quiz": "workspace:*" }
+}
