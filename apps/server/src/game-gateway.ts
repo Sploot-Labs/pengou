@@ -23,7 +23,8 @@ type SessionMeta = {
   /** playerId moteur (genId()) → id de ligne `session_player` en base (ids indépendants). */
   playerDbIds: Map<string, string>
   /** Index de question déjà persistés (recordAnswer) — évite un double-insert si host:reveal
-   * (ou son alias host:skip) est invoqué plusieurs fois sur la même manche. */
+   * (ou host:skip, qui crédite/persiste aussi — voir `doSkip`) est invoqué plusieurs fois sur
+   * la même manche. */
   revealedRounds: Set<number>
   /** `game_session.status` ne passe à 'active' qu'une seule fois (au premier host:start) :
    * un ré-appel écraserait sinon `startedAt` à chaque question suivante. */
