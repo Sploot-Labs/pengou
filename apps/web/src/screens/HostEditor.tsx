@@ -1,7 +1,31 @@
-import { useEffect, useRef, useState } from 'react'
-import type { AnswerShapeKind, McqQuestion, Question, QuestionType, TextQuestion } from '../mockData'
-import { mockQuiz } from '../mockData'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { ApiError } from '../api/client'
+import {
+  createQuestion,
+  createQuiz,
+  deleteQuestion,
+  listQuestions,
+  listQuizzes,
+  reorderQuestions,
+  updateQuestion,
+  updateQuiz,
+  type CreateQuestionInput,
+  type Question as ApiQuestion,
+  type QuestionType,
+  type Quiz,
+  type UpdateQuestionInput,
+} from '../api/quizzes'
 import { AnswerShape, Button, Logo, SHAPE_NAME_FR } from '../ui'
+
+/**
+ * HostEditor — wired to the real quiz/question REST API (Plan 06 Task 3).
+ * Previously driven by `mockData.ts`'s single hardcoded `mockQuiz`; now loads
+ * the signed-in host's quizzes, lets them pick/create one, and persists every
+ * edit through `src/api/quizzes.ts`. See the module comments below for the
+ * three deliberate adaptations forced by the real API's shape (no `points`
+ * field, immutable question `type`, permanent deletion) — the plan explicitly
+ * allows "adapt minimally, don't redesign" for exactly this situation.
+ */
 
 const TYPE_LABEL: Record<QuestionType, string> = {
   mcq: 'QCM',
@@ -10,39 +34,173 @@ const TYPE_LABEL: Record<QuestionType, string> = {
   slider: 'Curseur',
 }
 
-const MCQ_SHAPES: AnswerShapeKind[] = ['triangle', 'diamond', 'circle', 'square']
+/** Decorative only (color + glyph reinforcing the shape cue on mcq tiles) —
+ * never persisted. Structurally identical to `AnswerShapeKind` in `ui.tsx`
+ * (which still imports its name from `mockData.ts` for the *other* prototype
+ * screens not yet wired); re-declared locally instead of importing from
+ * `mockData` so this screen carries zero mock imports, per Task 3's
+ * self-review checklist. TS matches these by structural (literal-union)
+ * shape, not by declaration identity, so this is safe. */
+type ShapeKind = 'triangle' | 'diamond' | 'circle' | 'square'
+const MCQ_SHAPES: ShapeKind[] = ['triangle', 'diamond', 'circle', 'square']
 
-let idCounter = 1000
-function nextId(prefix: string) {
-  idCounter += 1
-  return `${prefix}-${idCounter}`
+/* ------------------------------------------------------------------ */
+/* Local editable question model                                        */
+/* ------------------------------------------------------------------ */
+/**
+ * The server's `Question` row (`api/quizzes.ts`) carries `payload` as an
+ * opaque per-type blob. The editor form needs it flattened into concrete
+ * fields (and, for mcq, a client-only `shape` per option) — this is that
+ * flattened shape, converted to/from the API row by `fromApiQuestion` /
+ * `toQuestionPatch` / `toCreateInput` below.
+ *
+ * NOTE — no `points` field: the prototype's mock model had one, but the real
+ * `question` table/API has no `points`/`basePoints` column at all (scoring's
+ * base value isn't per-question-configurable yet). Rather than fake a field
+ * that silently wouldn't persist, it's dropped from the editor entirely. If
+ * a later plan adds it server-side, this is where it comes back.
+ */
+interface QuestionBase {
+  id: string
+  type: QuestionType
+  prompt: string
+  timeLimit: number
 }
+interface McqOption {
+  id: string
+  shape: ShapeKind
+  label: string
+  correct: boolean
+}
+export interface McqQuestion extends QuestionBase {
+  type: 'mcq'
+  options: McqOption[]
+}
+export interface TrueFalseQuestion extends QuestionBase {
+  type: 'truefalse'
+  correctAnswer: boolean
+}
+export interface TextQuestion extends QuestionBase {
+  type: 'text'
+  acceptedAnswers: string[]
+}
+export interface SliderQuestion extends QuestionBase {
+  type: 'slider'
+  min: number
+  max: number
+  step: number
+  correctValue: number
+}
+export type Question = McqQuestion | TrueFalseQuestion | TextQuestion | SliderQuestion
 
-function createDefaultQuestion(type: QuestionType): Question {
-  const base = {
-    id: nextId('q'),
-    prompt: '',
-    durationSeconds: 20,
-    points: 1000,
-  }
-  switch (type) {
-    case 'mcq':
+function fromApiQuestion(row: ApiQuestion): Question {
+  const base = { id: row.id, prompt: row.prompt, timeLimit: row.timeLimit }
+  switch (row.type) {
+    case 'mcq': {
+      const payload = row.payload as { options: { label: string; correct: boolean }[] }
       return {
         ...base,
         type: 'mcq',
-        options: MCQ_SHAPES.map((shape, index) => ({
-          id: nextId('opt'),
-          shape,
-          label: '',
-          correct: index === 0,
+        options: payload.options.map((o, i) => ({
+          id: `opt-${i}`,
+          shape: MCQ_SHAPES[i % MCQ_SHAPES.length],
+          label: o.label,
+          correct: o.correct,
         })),
       }
+    }
+    case 'truefalse': {
+      const payload = row.payload as { correct: boolean }
+      return { ...base, type: 'truefalse', correctAnswer: payload.correct }
+    }
+    case 'text': {
+      const payload = row.payload as { answers: string[]; caseSensitive?: boolean }
+      return { ...base, type: 'text', acceptedAnswers: payload.answers.length > 0 ? payload.answers : [''] }
+    }
+    case 'slider': {
+      const payload = row.payload as { min: number; max: number; correct: number; step?: number }
+      return {
+        ...base,
+        type: 'slider',
+        min: payload.min,
+        max: payload.max,
+        step: payload.step ?? 1,
+        correctValue: payload.correct,
+      }
+    }
+  }
+}
+
+/** Builds the PATCH body for an existing question. Text answers are trimmed
+ * and blank rows filtered out before sending: the local UI tolerates a blank
+ * "in progress" variant row (so typing a new one doesn't need to start
+ * non-empty), but the server's schema requires every entry in `answers` to
+ * be non-empty — sending a blank one would 400 the whole payload even though
+ * the already-filled variants are fine. */
+function toQuestionPatch(q: Question): UpdateQuestionInput {
+  switch (q.type) {
+    case 'mcq':
+      return {
+        prompt: q.prompt,
+        timeLimit: q.timeLimit,
+        payload: { options: q.options.map((o) => ({ label: o.label, correct: o.correct })) },
+      }
     case 'truefalse':
-      return { ...base, type: 'truefalse', correctAnswer: true }
+      return { prompt: q.prompt, timeLimit: q.timeLimit, payload: { correct: q.correctAnswer } }
     case 'text':
-      return { ...base, type: 'text', acceptedAnswers: [''] }
+      return {
+        prompt: q.prompt,
+        timeLimit: q.timeLimit,
+        payload: {
+          answers: q.acceptedAnswers.map((a) => a.trim()).filter((a) => a.length > 0),
+          caseSensitive: false,
+        },
+      }
     case 'slider':
-      return { ...base, type: 'slider', min: 0, max: 100, step: 1, correctValue: 50 }
+      return {
+        prompt: q.prompt,
+        timeLimit: q.timeLimit,
+        payload: { min: q.min, max: q.max, correct: q.correctValue, step: q.step > 0 ? q.step : undefined },
+      }
+  }
+}
+
+function toCreateInput(q: Question): CreateQuestionInput {
+  return { type: q.type, ...toQuestionPatch(q) } as CreateQuestionInput
+}
+
+/** Valid-by-construction defaults for a brand-new question of `type`. Unlike
+ * the prototype's mock defaults (deliberately blank, to force the host to
+ * fill them in before "Incomplete" clears), these MUST already satisfy the
+ * server's per-type zod schema: `POST .../questions` validates the payload
+ * immediately, there is no server-side concept of an unsaved draft. A
+ * side-effect: a freshly added question no longer shows the "Incomplete"
+ * badge (its placeholder content already passes validation) — documented
+ * trade-off, not a bug. */
+function defaultCreateInput(type: QuestionType): CreateQuestionInput {
+  const prompt = 'Nouvelle question'
+  const timeLimit = 20
+  switch (type) {
+    case 'mcq':
+      return {
+        type,
+        prompt,
+        timeLimit,
+        payload: {
+          options: [
+            { label: 'Réponse 1', correct: true },
+            { label: 'Réponse 2', correct: false },
+            { label: 'Réponse 3', correct: false },
+            { label: 'Réponse 4', correct: false },
+          ],
+        },
+      }
+    case 'truefalse':
+      return { type, prompt, timeLimit, payload: { correct: true } }
+    case 'text':
+      return { type, prompt, timeLimit, payload: { answers: ['Réponse'], caseSensitive: false } }
+    case 'slider':
+      return { type, prompt, timeLimit, payload: { min: 0, max: 100, correct: 50, step: 1 } }
   }
 }
 
@@ -63,10 +221,11 @@ function hasTypeSpecificData(q: Question): boolean {
 function validationError(q: Question): string | null {
   if (q.prompt.trim().length === 0) return 'Intitulé manquant.'
   // Number fields yield NaN when cleared; reject NaN and out-of-range values so
-  // an invalid duration can never reach the timer, nor an invalid launch.
-  if (!Number.isInteger(q.durationSeconds) || q.durationSeconds < 5 || q.durationSeconds > 120)
+  // an invalid duration can never reach the timer, nor an invalid launch. The
+  // server itself only requires a positive integer — [5, 120] is a client-side
+  // product guardrail, kept from the prototype.
+  if (!Number.isInteger(q.timeLimit) || q.timeLimit < 5 || q.timeLimit > 120)
     return 'Durée entre 5 et 120 s.'
-  if (!Number.isInteger(q.points) || q.points < 0) return 'Points positifs requis.'
   switch (q.type) {
     case 'mcq': {
       if (q.options.some((o) => o.label.trim().length === 0))
@@ -82,6 +241,7 @@ function validationError(q: Question): string | null {
       if (q.min >= q.max) return 'Le minimum doit être inférieur au maximum.'
       if (q.correctValue < q.min || q.correctValue > q.max)
         return 'La valeur correcte doit être comprise entre le minimum et le maximum.'
+      if (!(q.step > 0)) return 'Le pas doit être positif.'
       return null
     case 'truefalse':
       return null
@@ -96,9 +256,8 @@ function validationError(q: Question): string | null {
 function fieldErrors(q: Question): Record<string, string> {
   const errs: Record<string, string> = {}
   if (q.prompt.trim().length === 0) errs['q-prompt'] = 'Intitulé manquant.'
-  if (!Number.isInteger(q.durationSeconds) || q.durationSeconds < 5 || q.durationSeconds > 120)
+  if (!Number.isInteger(q.timeLimit) || q.timeLimit < 5 || q.timeLimit > 120)
     errs['q-duration'] = 'Durée entre 5 et 120 s.'
-  if (!Number.isInteger(q.points) || q.points < 0) errs['q-points'] = 'Points positifs requis.'
   switch (q.type) {
     case 'mcq':
       q.options.forEach((o, i) => {
@@ -119,6 +278,7 @@ function fieldErrors(q: Question): Record<string, string> {
       if (q.correctValue < q.min || q.correctValue > q.max)
         errs['q-slider-correct'] =
           'La valeur correcte doit être comprise entre le minimum et le maximum.'
+      if (!(q.step > 0)) errs['q-slider-step'] = 'Le pas doit être positif.'
       break
     case 'truefalse':
       break
@@ -126,18 +286,45 @@ function fieldErrors(q: Question): Record<string, string> {
   return errs
 }
 
+function errorMessage(err: unknown): string {
+  return err instanceof ApiError ? err.message : 'Une erreur réseau est survenue. Réessayez.'
+}
+
+const LAST_QUIZ_KEY = 'arena.hostEditor.lastQuizId'
+
 export function HostEditor() {
-  const [title, setTitle] = useState(mockQuiz.title)
-  const [description, setDescription] = useState(mockQuiz.description)
-  const [questions, setQuestions] = useState<Question[]>(mockQuiz.questions)
-  const [selectedId, setSelectedId] = useState<string | null>(mockQuiz.questions[0]?.id ?? null)
+  // --- Quiz list + selection --------------------------------------------
+  const [quizzes, setQuizzes] = useState<Quiz[]>([])
+  const [quizzesLoading, setQuizzesLoading] = useState(true)
+  const [quizzesError, setQuizzesError] = useState<string | null>(null)
+  const [currentQuizId, setCurrentQuizId] = useState<string | null>(null)
+
+  const [creatingQuiz, setCreatingQuiz] = useState(false)
+  const [newQuizTitle, setNewQuizTitle] = useState('')
+  const [newQuizError, setNewQuizError] = useState<string | null>(null)
+  const [newQuizPending, setNewQuizPending] = useState(false)
+  const newQuizTitleRef = useRef<HTMLInputElement>(null)
+  const quizPickerRef = useRef<HTMLSelectElement>(null)
+
+  // --- Selected quiz's editable fields (title/description) ---------------
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [titleError, setTitleError] = useState<string | null>(null)
+
+  // --- Questions for the selected quiz ------------------------------------
+  const [questions, setQuestions] = useState<Question[]>([])
+  const [questionsLoading, setQuestionsLoading] = useState(false)
+  const [questionsError, setQuestionsError] = useState<string | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
   const [announcement, setAnnouncement] = useState('')
+  // Surfaces the server's own message on a failed mutation (create/update/
+  // delete/reorder/type-change) — the client-side checks above are for UX,
+  // the server is the source of truth for validation (Task 3 requirement).
+  const [actionError, setActionError] = useState<string | null>(null)
   // In-app replacements for window.confirm: a destructive type-change dialog
   // and an undo affordance for deletion.
   const [pendingType, setPendingType] = useState<QuestionType | null>(null)
   const [lastDeleted, setLastDeleted] = useState<{ question: Question; index: number } | null>(null)
-  // Confirmation shown after a valid « Lancer la partie » click (demo).
-  const [launchMessage, setLaunchMessage] = useState<string | null>(null)
 
   const itemRefs = useRef<Map<string, HTMLButtonElement>>(new Map())
   const addRef = useRef<HTMLButtonElement>(null)
@@ -145,6 +332,88 @@ export function HostEditor() {
   const dialogRef = useRef<HTMLDivElement>(null)
   const dialogConfirmRef = useRef<HTMLButtonElement>(null)
   const pendingFocus = useRef<{ kind: 'item'; id: string } | { kind: 'add' } | null>(null)
+
+  // Debounced autosave: tracks, per question id, the JSON of the patch last
+  // successfully persisted, so (a) freshly loaded/created questions don't
+  // trigger a no-op PATCH, and (b) unrelated re-renders don't re-save
+  // unchanged content.
+  const lastSavedRef = useRef<Map<string, string>>(new Map())
+  const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  function primeSaved(q: Question) {
+    lastSavedRef.current.set(q.id, JSON.stringify(toQuestionPatch(q)))
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Load the host's quizzes on mount                                    */
+  /* ---------------------------------------------------------------- */
+  function loadQuizzes() {
+    setQuizzesLoading(true)
+    setQuizzesError(null)
+    listQuizzes()
+      .then((rows) => {
+        setQuizzes(rows)
+        setQuizzesLoading(false)
+        if (rows.length > 0) {
+          const remembered = localStorage.getItem(LAST_QUIZ_KEY)
+          const initial = rows.find((q) => q.id === remembered) ?? rows[0]
+          setCurrentQuizId(initial.id)
+        }
+      })
+      .catch((err) => {
+        setQuizzesLoading(false)
+        setQuizzesError(errorMessage(err))
+      })
+  }
+
+  useEffect(() => {
+    loadQuizzes()
+    // Runs once on mount; loadQuizzes is a stable module-scope-free closure
+    // recreated each render, but re-running it isn't desired on every render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Keep the title/description fields in sync when the selected quiz changes
+  // (switching quizzes, or the freshly created one becoming current).
+  useEffect(() => {
+    const q = quizzes.find((x) => x.id === currentQuizId)
+    if (q) {
+      setTitle(q.title)
+      setDescription(q.description ?? '')
+      setTitleError(null)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentQuizId])
+
+  /* ---------------------------------------------------------------- */
+  /* Load the selected quiz's questions                                  */
+  /* ---------------------------------------------------------------- */
+  function loadQuestions(quizId: string) {
+    setQuestionsLoading(true)
+    setQuestionsError(null)
+    listQuestions(quizId)
+      .then((rows) => {
+        const mapped = rows.map(fromApiQuestion)
+        mapped.forEach(primeSaved)
+        setQuestions(mapped)
+        setSelectedId(mapped[0]?.id ?? null)
+        setQuestionsLoading(false)
+      })
+      .catch((err) => {
+        setQuestionsLoading(false)
+        setQuestionsError(errorMessage(err))
+      })
+  }
+
+  useEffect(() => {
+    if (!currentQuizId) {
+      setQuestions([])
+      setSelectedId(null)
+      return
+    }
+    loadQuestions(currentQuizId)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentQuizId])
 
   useEffect(() => {
     const target = pendingFocus.current
@@ -175,6 +444,34 @@ export function HostEditor() {
         : null
   const canLaunch = launchReason === null
 
+  // Debounced autosave for the currently selected question: fires 600ms
+  // after the last edit, only when the draft passes client-side validation
+  // (an invalid draft is never sent — the "Incomplete" state stays local
+  // until fixed) and only when it actually differs from what was last
+  // persisted (see lastSavedRef above).
+  useEffect(() => {
+    if (!selected || !currentQuizId) return
+    if (validationError(selected)) return
+    const patch = toQuestionPatch(selected)
+    const key = JSON.stringify(patch)
+    if (lastSavedRef.current.get(selected.id) === key) return
+    const quizId = currentQuizId
+    const id = selected.id
+    if (saveTimerRef.current) clearTimeout(saveTimerRef.current)
+    saveTimerRef.current = setTimeout(() => {
+      updateQuestion(quizId, id, patch)
+        .then(() => {
+          lastSavedRef.current.set(id, key)
+          setActionError(null)
+        })
+        .catch((err) => setActionError(errorMessage(err)))
+    }, 600)
+    return () => {
+      if (saveTimerRef.current) clearTimeout(saveTimerRef.current)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, currentQuizId])
+
   function updateSelected(patch: Partial<Question>) {
     if (!selected) return
     setQuestions((prev) =>
@@ -182,22 +479,24 @@ export function HostEditor() {
     )
   }
 
-  function applyTypeChange(type: QuestionType) {
-    if (!selected) return
-    const draft = createDefaultQuestion(type)
-    setQuestions((prev) =>
-      prev.map((q) =>
-        q.id === selected.id
-          ? {
-              ...draft,
-              id: q.id,
-              prompt: q.prompt,
-              durationSeconds: q.durationSeconds,
-              points: q.points,
-            }
-          : q,
-      ),
-    )
+  /** Applies a new type LOCALLY only — used to build the create-input for the
+   * delete+recreate flow in `confirmTypeChange` (see its comment for why a
+   * question's type can't simply be PATCHed). */
+  function draftForType(type: QuestionType, keep: Question): Question {
+    const input = defaultCreateInput(type)
+    input.prompt = keep.prompt
+    input.timeLimit = keep.timeLimit
+    return fromApiQuestion({
+      id: keep.id,
+      quizId: '',
+      type,
+      prompt: input.prompt,
+      media: null,
+      timeLimit: input.timeLimit,
+      orderIndex: 0,
+      payload: input.payload,
+      createdAt: '',
+    })
   }
 
   function changeType(type: QuestionType) {
@@ -208,11 +507,49 @@ export function HostEditor() {
       setPendingType(type)
       return
     }
-    applyTypeChange(type)
+    applyTypeChangeImmediate(type)
+  }
+
+  /** A question's `type` is IMMUTABLE server-side (see
+   * `apps/server/src/routes/questions.ts`'s PATCH handler: it revalidates any
+   * `payload` against the STORED type and has no `type` field at all in its
+   * accepted patch). The prototype's UI assumed an in-place type change was
+   * possible; here it's simulated by deleting the old row and creating a new
+   * one of the new type at the same list position (fixed up with an explicit
+   * `reorderQuestions` call, since creation always appends at the end). The
+   * new row necessarily gets a NEW id — invisible to the host, but worth
+   * knowing if you're reading network logs. */
+  async function applyTypeChangeImmediate(type: QuestionType) {
+    if (!selected || !currentQuizId) return
+    const quizId = currentQuizId
+    const index = questions.findIndex((q) => q.id === selected.id)
+    const draft = draftForType(type, selected)
+    try {
+      setActionError(null)
+      await deleteQuestion(quizId, selected.id)
+      const created = await createQuestion(quizId, toCreateInput(draft))
+      const next = fromApiQuestion(created)
+      primeSaved(next)
+      let orderedIds: string[] = []
+      setQuestions((prev) => {
+        const withoutOld = prev.filter((q) => q.id !== selected.id)
+        const spliced = [...withoutOld]
+        spliced.splice(Math.min(index, spliced.length), 0, next)
+        orderedIds = spliced.map((q) => q.id)
+        return spliced
+      })
+      setSelectedId(next.id)
+      await reorderQuestions(quizId, orderedIds)
+    } catch (err) {
+      setActionError(errorMessage(err))
+      // Best-effort resync so the list doesn't silently diverge from the
+      // server if the delete succeeded but the recreate/reorder didn't.
+      loadQuestions(quizId)
+    }
   }
 
   function confirmTypeChange() {
-    if (pendingType) applyTypeChange(pendingType)
+    if (pendingType) void applyTypeChangeImmediate(pendingType)
     setPendingType(null)
     typeSelectRef.current?.focus()
   }
@@ -222,35 +559,59 @@ export function HostEditor() {
     typeSelectRef.current?.focus()
   }
 
-  function move(index: number, direction: -1 | 1) {
+  async function move(index: number, direction: -1 | 1) {
+    if (!currentQuizId) return
     const target = index + direction
     if (target < 0 || target >= questions.length) return
-    const moved = questions[index]
-    setQuestions((prev) => {
-      const next = [...prev]
-      const tmp = next[index]
-      next[index] = next[target]
-      next[target] = tmp
-      return next
-    })
+    const previous = questions
+    const moved = previous[index]
+    const next = [...previous]
+    const tmp = next[index]
+    next[index] = next[target]
+    next[target] = tmp
+    setQuestions(next)
     // Keep focus on the item that moved, at its new position.
     pendingFocus.current = { kind: 'item', id: moved.id }
     setAnnouncement(`Question déplacée en position ${target + 1}.`)
+    try {
+      setActionError(null)
+      await reorderQuestions(
+        currentQuizId,
+        next.map((q) => q.id),
+      )
+    } catch (err) {
+      setActionError(errorMessage(err))
+      setQuestions(previous)
+    }
   }
 
-  function addQuestion() {
-    const draft = createDefaultQuestion('mcq')
-    setQuestions((prev) => [...prev, draft])
-    setSelectedId(draft.id)
-    setAnnouncement('Question ajoutée.')
+  async function addQuestion() {
+    if (!currentQuizId) return
+    try {
+      setActionError(null)
+      const created = await createQuestion(currentQuizId, defaultCreateInput('mcq'))
+      const q = fromApiQuestion(created)
+      primeSaved(q)
+      setQuestions((prev) => [...prev, q])
+      setSelectedId(q.id)
+      setAnnouncement('Question ajoutée.')
+    } catch (err) {
+      setActionError(errorMessage(err))
+    }
   }
 
-  function removeQuestion(id: string) {
+  async function removeQuestion(id: string) {
+    if (!currentQuizId) return
     const index = questions.findIndex((q) => q.id === id)
     if (index < 0) return
     const removed = questions[index]
-    // Immediate, non-blocking removal + an « Annuler » affordance (no native
-    // confirm dialog). The undo banner restores the question at its position.
+    try {
+      setActionError(null)
+      await deleteQuestion(currentQuizId, id)
+    } catch (err) {
+      setActionError(errorMessage(err))
+      return // deletion did not happen server-side — keep it in the list
+    }
     setQuestions((prev) => {
       const next = prev.filter((q) => q.id !== id)
       if (selectedId === id) {
@@ -265,21 +626,158 @@ export function HostEditor() {
     setAnnouncement('Question supprimée. Utilisez « Annuler » pour la restaurer.')
   }
 
-  function undoDelete() {
-    if (!lastDeleted) return
+  /** Deletion is permanent server-side (204, no soft-delete) — there is no
+   * "restore" endpoint. "Annuler" re-creates the question from the content
+   * it had (new id under the hood) and puts it back at its original list
+   * position via `reorderQuestions`. Indistinguishable from a true undo from
+   * the host's point of view. */
+  async function undoDelete() {
+    if (!lastDeleted || !currentQuizId) return
     const { question: q, index } = lastDeleted
-    // The « Annuler » button holding focus is about to be unmounted; without a
-    // refocus target, focus falls to <body> (WCAG 2.4.3). Steer the shared
-    // [questions] effect to the restored item, exactly like removeQuestion().
-    pendingFocus.current = { kind: 'item', id: q.id }
-    setQuestions((prev) => {
-      const next = [...prev]
-      next.splice(Math.min(index, next.length), 0, q)
-      return next
-    })
-    setSelectedId(q.id)
-    setLastDeleted(null)
-    setAnnouncement('Question restaurée.')
+    const quizId = currentQuizId
+    try {
+      setActionError(null)
+      const created = await createQuestion(quizId, toCreateInput(q))
+      const restored = fromApiQuestion(created)
+      primeSaved(restored)
+      pendingFocus.current = { kind: 'item', id: restored.id }
+      let orderedIds: string[] = []
+      setQuestions((prev) => {
+        const next = [...prev]
+        next.splice(Math.min(index, next.length), 0, restored)
+        orderedIds = next.map((x) => x.id)
+        return next
+      })
+      setSelectedId(restored.id)
+      setLastDeleted(null)
+      setAnnouncement('Question restaurée.')
+      await reorderQuestions(quizId, orderedIds)
+    } catch (err) {
+      setActionError(errorMessage(err))
+    }
+  }
+
+  function selectQuiz(id: string) {
+    setCurrentQuizId(id)
+    localStorage.setItem(LAST_QUIZ_KEY, id)
+  }
+
+  async function handleCreateQuiz(event: FormEvent) {
+    event.preventDefault()
+    const trimmed = newQuizTitle.trim()
+    if (trimmed.length === 0) {
+      setNewQuizError('Le titre est requis.')
+      newQuizTitleRef.current?.focus()
+      return
+    }
+    setNewQuizPending(true)
+    try {
+      const created = await createQuiz({ title: trimmed })
+      setQuizzes((prev) => [...prev, created])
+      setNewQuizTitle('')
+      setNewQuizError(null)
+      setCreatingQuiz(false)
+      selectQuiz(created.id)
+      quizPickerRef.current?.focus()
+    } catch (err) {
+      setNewQuizError(errorMessage(err))
+    } finally {
+      setNewQuizPending(false)
+    }
+  }
+
+  async function saveQuizField(patch: { title?: string; description?: string | null }) {
+    if (!currentQuizId) return
+    try {
+      const updated = await updateQuiz(currentQuizId, patch)
+      setQuizzes((prev) => prev.map((q) => (q.id === updated.id ? updated : q)))
+      setActionError(null)
+    } catch (err) {
+      setActionError(errorMessage(err))
+    }
+  }
+
+  // Title/description are saved on blur rather than per-keystroke or on a
+  // fixed debounce timer: they're the two fields least likely to need
+  // instant persistence (unlike question content, nothing downstream reads
+  // them mid-edit), and "commit on leaving the field" is a familiar, simple
+  // mental model that also naturally coalesces rapid typing into one call.
+  function handleTitleBlur() {
+    const trimmed = title.trim()
+    if (trimmed.length === 0) {
+      setTitleError('Le titre est requis.')
+      return
+    }
+    setTitleError(null)
+    const current = quizzes.find((q) => q.id === currentQuizId)
+    if (current && current.title === trimmed) return
+    void saveQuizField({ title: trimmed })
+  }
+
+  function handleDescriptionBlur() {
+    const current = quizzes.find((q) => q.id === currentQuizId)
+    const normalized = description.trim().length > 0 ? description : null
+    if (current && (current.description ?? null) === normalized) return
+    void saveQuizField({ description: normalized })
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Full-page states: loading / error / empty                          */
+  /* ---------------------------------------------------------------- */
+
+  if (quizzesLoading) {
+    return (
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+        <Logo />
+        <p role="status">Chargement de vos quiz…</p>
+      </main>
+    )
+  }
+
+  if (quizzesError && quizzes.length === 0) {
+    return (
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+        <Logo />
+        <p className="join-error" role="alert">
+          {quizzesError}
+        </p>
+        <Button variant="primary" type="button" onClick={loadQuizzes}>
+          Réessayer
+        </Button>
+      </main>
+    )
+  }
+
+  if (quizzes.length === 0) {
+    return (
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+        <Logo />
+        <h1>Créez votre premier quiz</h1>
+        <p className="ab-empty-state">Vous n'avez encore aucun quiz. Donnez-lui un titre pour commencer.</p>
+        <form className="join-card" onSubmit={handleCreateQuiz} noValidate>
+          {newQuizError && (
+            <p className="join-error" role="alert">
+              {newQuizError}
+            </p>
+          )}
+          <div className="join-field">
+            <label htmlFor="first-quiz-title">Titre du quiz</label>
+            <input
+              id="first-quiz-title"
+              ref={newQuizTitleRef}
+              type="text"
+              value={newQuizTitle}
+              onChange={(e) => setNewQuizTitle(e.target.value)}
+              placeholder="Ex. Culture générale — spécial vendredi"
+              aria-invalid={newQuizError ? true : undefined}
+            />
+          </div>
+          <Button variant="primary" type="submit" disabled={newQuizPending}>
+            {newQuizPending ? 'Création…' : 'Créer le quiz'}
+          </Button>
+        </form>
+      </main>
+    )
   }
 
   return (
@@ -302,31 +800,17 @@ export function HostEditor() {
             aria-disabled={!canLaunch}
             aria-describedby={!canLaunch ? 'host-launch-reason' : undefined}
             onClick={(e) => {
-              if (!canLaunch) {
-                e.preventDefault()
-                return
-              }
-              setLaunchMessage(
-                'Partie prête — un code PIN 482913 serait généré (démonstration).',
-              )
+              e.preventDefault()
+              if (!canLaunch) return
+              // TODO(Plan 06 Task 5): host:create {quizId} via the game
+              // socket → {sessionId, pin}, then navigate to
+              // /host/:sessionId. Intentionally a no-op for now — do NOT
+              // fake a PIN or a session here.
             }}
           >
             Lancer la partie
           </Button>
-          {canLaunch ? (
-            <p className="host-launch__hint">
-              Un code PIN sera généré ; partagez-le pour que la salle rejoigne.
-            </p>
-          ) : (
-            // Anchor the blocking reason directly under the button (not only in
-            // the banner far down in <main>).
-            <p className="host-launch__hint">{launchReason}</p>
-          )}
-          {launchMessage && (
-            <p className="host-launch__confirm" role="status">
-              {launchMessage}
-            </p>
-          )}
+          {launchReason && <p className="host-launch__hint">{launchReason}</p>}
         </div>
       </header>
 
@@ -338,6 +822,61 @@ export function HostEditor() {
       >
         <h1 style={{ marginBottom: 'var(--space-4)' }}>Éditeur de quiz</h1>
 
+        {actionError && (
+          <p className="join-error" role="alert">
+            {actionError}
+          </p>
+        )}
+
+        <section className="host-field-row" aria-label="Sélection du quiz" style={{ marginBottom: 'var(--space-4)' }}>
+          <div className="host-field">
+            <label htmlFor="quiz-picker">Quiz</label>
+            <select
+              id="quiz-picker"
+              ref={quizPickerRef}
+              value={currentQuizId ?? ''}
+              onChange={(e) => selectQuiz(e.target.value)}
+            >
+              {quizzes.map((q) => (
+                <option key={q.id} value={q.id}>
+                  {q.title}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="host-field" style={{ justifyContent: 'flex-end' }}>
+            <Button variant="ghost" type="button" onClick={() => setCreatingQuiz((v) => !v)}>
+              {creatingQuiz ? 'Annuler' : 'Nouveau quiz'}
+            </Button>
+          </div>
+        </section>
+
+        {creatingQuiz && (
+          <form className="host-meta" onSubmit={handleCreateQuiz} noValidate>
+            {newQuizError && (
+              <p className="join-error" role="alert">
+                {newQuizError}
+              </p>
+            )}
+            <div className="host-field">
+              <label htmlFor="new-quiz-title">Titre du nouveau quiz</label>
+              <input
+                id="new-quiz-title"
+                ref={newQuizTitleRef}
+                type="text"
+                value={newQuizTitle}
+                onChange={(e) => setNewQuizTitle(e.target.value)}
+                placeholder="Ex. Spécial géographie"
+              />
+            </div>
+            <div className="host-actions">
+              <Button variant="primary" type="submit" disabled={newQuizPending}>
+                {newQuizPending ? 'Création…' : 'Créer'}
+              </Button>
+            </div>
+          </form>
+        )}
+
         <div className="host-meta">
           <div className="host-field">
             <label htmlFor="quiz-title">Titre du quiz</label>
@@ -346,8 +885,16 @@ export function HostEditor() {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              onBlur={handleTitleBlur}
               placeholder="Ex. Culture générale — spécial vendredi"
+              aria-invalid={titleError ? true : undefined}
+              aria-describedby={titleError ? 'quiz-title-error' : undefined}
             />
+            {titleError && (
+              <p className="host-inline-error" id="quiz-title-error">
+                {titleError}
+              </p>
+            )}
           </div>
           <div className="host-field">
             <label htmlFor="quiz-description">Description</label>
@@ -356,6 +903,7 @@ export function HostEditor() {
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              onBlur={handleDescriptionBlur}
               placeholder="Une phrase pour situer le quiz."
             />
           </div>
@@ -378,393 +926,393 @@ export function HostEditor() {
           </div>
         )}
 
-        <div className="host-layout">
-          <section aria-label="Liste des questions">
-            <h2 style={{ marginBottom: 'var(--space-3)' }}>Questions</h2>
-            {questions.length === 0 ? (
-              <p className="ab-empty-state">Aucune question. Ajoutez-en une pour commencer.</p>
-            ) : (
-              <ul className="host-list">
-                {questions.map((q, index) => {
-                  const error = validationError(q)
-                  return (
-                    <li key={q.id}>
-                      <button
-                        type="button"
-                        ref={(el) => {
-                          if (el) itemRefs.current.set(q.id, el)
-                          else itemRefs.current.delete(q.id)
-                        }}
-                        className={`host-list__item${q.id === selectedId ? ' host-list__item--active' : ''}`}
-                        onClick={() => setSelectedId(q.id)}
-                        aria-current={q.id === selectedId ? 'true' : undefined}
-                      >
-                        <span className="host-list__index">{index + 1}</span>
-                        <span className="host-list__prompt">
-                          {q.prompt.trim() || 'Question sans intitulé'}
-                        </span>
-                        {error && (
-                          <span
-                            className="host-badge host-badge--warn"
-                            title={error}
-                            aria-label={`Incomplète : ${error}`}
-                          >
-                            Incomplète
+        {questionsLoading ? (
+          <p role="status">Chargement des questions…</p>
+        ) : questionsError && questions.length === 0 ? (
+          <div className="ab-empty-state">
+            <p>{questionsError}</p>
+            <Button variant="primary" type="button" onClick={() => currentQuizId && loadQuestions(currentQuizId)}>
+              Réessayer
+            </Button>
+          </div>
+        ) : (
+          <div className="host-layout">
+            <section aria-label="Liste des questions">
+              <h2 style={{ marginBottom: 'var(--space-3)' }}>Questions</h2>
+              {questions.length === 0 ? (
+                <p className="ab-empty-state">Aucune question. Ajoutez-en une pour commencer.</p>
+              ) : (
+                <ul className="host-list">
+                  {questions.map((q, index) => {
+                    const error = validationError(q)
+                    return (
+                      <li key={q.id}>
+                        <button
+                          type="button"
+                          ref={(el) => {
+                            if (el) itemRefs.current.set(q.id, el)
+                            else itemRefs.current.delete(q.id)
+                          }}
+                          className={`host-list__item${q.id === selectedId ? ' host-list__item--active' : ''}`}
+                          onClick={() => setSelectedId(q.id)}
+                          aria-current={q.id === selectedId ? 'true' : undefined}
+                        >
+                          <span className="host-list__index">{index + 1}</span>
+                          <span className="host-list__prompt">
+                            {q.prompt.trim() || 'Question sans intitulé'}
                           </span>
-                        )}
-                        <span className="host-badge">{TYPE_LABEL[q.type]}</span>
-                      </button>
-                      <div
-                        className="host-list__reorder"
-                        role="group"
-                        aria-label={`Réordonner la question ${index + 1}`}
-                      >
-                        <button
-                          type="button"
-                          className="host-list__reorder-btn"
-                          onClick={() => move(index, -1)}
-                          disabled={index === 0}
-                          aria-label={`Monter la question ${index + 1}`}
-                        >
-                          ▲
-                        </button>
-                        <button
-                          type="button"
-                          className="host-list__reorder-btn"
-                          onClick={() => move(index, 1)}
-                          disabled={index === questions.length - 1}
-                          aria-label={`Descendre la question ${index + 1}`}
-                        >
-                          ▼
-                        </button>
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
-            )}
-            <div style={{ marginTop: 'var(--space-3)' }}>
-              <Button variant="ghost" type="button" onClick={addQuestion} ref={addRef}>
-                Ajouter une question
-              </Button>
-            </div>
-          </section>
-
-          <section className="host-panel" aria-label="Formulaire de question">
-            {!selected ? (
-              <p className="ab-empty-state">
-                Aucune question sélectionnée. Ajoutez une question pour commencer.
-              </p>
-            ) : (
-              <form className="host-form" onSubmit={(e) => e.preventDefault()}>
-                {(() => {
-                  const error = validationError(selected)
-                  return error ? (
-                    <p className="host-field-error" role="status">
-                      À corriger : {error}
-                    </p>
-                  ) : null
-                })()}
-
-                <div className="host-field">
-                  <label htmlFor="q-prompt">Intitulé de la question</label>
-                  <input
-                    id="q-prompt"
-                    type="text"
-                    value={selected.prompt}
-                    onChange={(e) => updateSelected({ prompt: e.target.value })}
-                    placeholder="Ex. Quelle planète est surnommée la « planète rouge » ?"
-                    aria-invalid={fErrors['q-prompt'] ? true : undefined}
-                    aria-describedby={fErrors['q-prompt'] ? 'q-prompt-error' : undefined}
-                  />
-                  {fErrors['q-prompt'] && (
-                    <p className="host-inline-error" id="q-prompt-error">
-                      {fErrors['q-prompt']}
-                    </p>
-                  )}
-                </div>
-
-                <div className="host-field-row">
-                  <div className="host-field">
-                    <label htmlFor="q-type">Type de question</label>
-                    <select
-                      id="q-type"
-                      ref={typeSelectRef}
-                      value={selected.type}
-                      onChange={(e) => changeType(e.target.value as QuestionType)}
-                    >
-                      <option value="mcq">QCM (4 réponses)</option>
-                      <option value="truefalse">Vrai / Faux</option>
-                      <option value="text">Réponse libre</option>
-                      <option value="slider">Curseur</option>
-                    </select>
-                  </div>
-                  <div className="host-field">
-                    <label htmlFor="q-duration">Durée (secondes)</label>
-                    <input
-                      id="q-duration"
-                      type="number"
-                      min={5}
-                      max={120}
-                      value={selected.durationSeconds}
-                      onChange={(e) => updateSelected({ durationSeconds: Number(e.target.value) })}
-                      aria-invalid={fErrors['q-duration'] ? true : undefined}
-                      aria-describedby={fErrors['q-duration'] ? 'q-duration-error' : undefined}
-                    />
-                    {fErrors['q-duration'] && (
-                      <p className="host-inline-error" id="q-duration-error">
-                        {fErrors['q-duration']}
-                      </p>
-                    )}
-                  </div>
-                  <div className="host-field">
-                    <label htmlFor="q-points">Points</label>
-                    <input
-                      id="q-points"
-                      type="number"
-                      min={0}
-                      step={100}
-                      value={selected.points}
-                      onChange={(e) => updateSelected({ points: Number(e.target.value) })}
-                      aria-invalid={fErrors['q-points'] ? true : undefined}
-                      aria-describedby={fErrors['q-points'] ? 'q-points-error' : undefined}
-                    />
-                    {fErrors['q-points'] && (
-                      <p className="host-inline-error" id="q-points-error">
-                        {fErrors['q-points']}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                {selected.type === 'mcq' && (
-                  <fieldset className="host-field">
-                    <legend>Réponses (cochez la bonne réponse)</legend>
-                    {fErrors['mcq-correct'] && (
-                      <p className="host-inline-error" id="mcq-correct-error">
-                        {fErrors['mcq-correct']}
-                      </p>
-                    )}
-                    <div className="host-options-grid">
-                      {selected.options.map((opt, index) => (
-                        <div className="host-option-row" key={opt.id}>
-                          <label className="host-option-row__correct-label">
-                            <input
-                              type="radio"
-                              name="mcq-correct"
-                              checked={opt.correct}
-                              onChange={() => {
-                                const options = selected.options.map((o, i) => ({
-                                  ...o,
-                                  correct: i === index,
-                                }))
-                                updateSelected({ options } as Partial<McqQuestion>)
-                              }}
-                            />
-                            <span className="visually-hidden">
-                              Marquer « {opt.label || `réponse ${index + 1}`} » comme correcte
+                          {error && (
+                            <span
+                              className="host-badge host-badge--warn"
+                              title={error}
+                              aria-label={`Incomplète : ${error}`}
+                            >
+                              Incomplète
                             </span>
-                            <span aria-hidden="true">Correcte</span>
-                          </label>
-                          <AnswerShape shape={opt.shape} size={20} />
-                          <label htmlFor={`mcq-label-${opt.id}`} className="visually-hidden">
-                            Libellé réponse {index + 1} — {SHAPE_NAME_FR[opt.shape]}
-                          </label>
-                          <input
-                            id={`mcq-label-${opt.id}`}
-                            type="text"
-                            value={opt.label}
-                            placeholder={`Réponse ${index + 1}`}
-                            onChange={(e) => {
-                              const options = selected.options.map((o, i) =>
-                                i === index ? { ...o, label: e.target.value } : o,
-                              )
-                              updateSelected({ options } as Partial<McqQuestion>)
-                            }}
-                            aria-invalid={fErrors[`mcq-label-${opt.id}`] ? true : undefined}
-                            aria-describedby={
-                              fErrors[`mcq-label-${opt.id}`]
-                                ? `mcq-label-${opt.id}-error`
-                                : undefined
-                            }
-                          />
-                          {fErrors[`mcq-label-${opt.id}`] && (
-                            <p className="host-inline-error" id={`mcq-label-${opt.id}-error`}>
-                              {fErrors[`mcq-label-${opt.id}`]}
-                            </p>
                           )}
-                        </div>
-                      ))}
-                    </div>
-                  </fieldset>
-                )}
-
-                {selected.type === 'truefalse' && (
-                  <fieldset className="host-field">
-                    <legend>Bonne réponse</legend>
-                    <div className="host-truefalse">
-                      <label>
-                        <input
-                          type="radio"
-                          name="truefalse"
-                          checked={selected.correctAnswer === true}
-                          onChange={() => updateSelected({ correctAnswer: true })}
-                        />
-                        Vrai
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          name="truefalse"
-                          checked={selected.correctAnswer === false}
-                          onChange={() => updateSelected({ correctAnswer: false })}
-                        />
-                        Faux
-                      </label>
-                    </div>
-                  </fieldset>
-                )}
-
-                {selected.type === 'text' && (
-                  <fieldset className="host-field">
-                    <legend>Réponses acceptées</legend>
-                    <p className="host-field__help">Casse et accents ignorés.</p>
-                    <div className="host-variants">
-                      {selected.acceptedAnswers.map((answer, index) => (
-                        <div className="host-variant-row" key={index}>
-                          <label htmlFor={`text-answer-${index}`} className="visually-hidden">
-                            Variante {index + 1}
-                          </label>
-                          <input
-                            id={`text-answer-${index}`}
-                            type="text"
-                            value={answer}
-                            placeholder="Ex. Reykjavik"
-                            onChange={(e) => {
-                              const acceptedAnswers = selected.acceptedAnswers.map((a, i) =>
-                                i === index ? e.target.value : a,
-                              )
-                              updateSelected({ acceptedAnswers } as Partial<TextQuestion>)
-                            }}
-                            aria-invalid={fErrors[`text-answer-${index}`] ? true : undefined}
-                            aria-describedby={
-                              fErrors[`text-answer-${index}`]
-                                ? `text-answer-${index}-error`
-                                : undefined
-                            }
-                          />
+                          <span className="host-badge">{TYPE_LABEL[q.type]}</span>
+                        </button>
+                        <div
+                          className="host-list__reorder"
+                          role="group"
+                          aria-label={`Réordonner la question ${index + 1}`}
+                        >
                           <button
                             type="button"
-                            className="host-variant-remove"
-                            aria-label={`Supprimer la variante ${index + 1}`}
-                            disabled={selected.acceptedAnswers.length <= 1}
-                            onClick={() => {
-                              const acceptedAnswers = selected.acceptedAnswers.filter(
-                                (_, i) => i !== index,
-                              )
-                              updateSelected({ acceptedAnswers } as Partial<TextQuestion>)
-                            }}
+                            className="host-list__reorder-btn"
+                            onClick={() => void move(index, -1)}
+                            disabled={index === 0}
+                            aria-label={`Monter la question ${index + 1}`}
                           >
-                            ✕
+                            ▲
                           </button>
-                          {fErrors[`text-answer-${index}`] && (
-                            <p className="host-inline-error" id={`text-answer-${index}-error`}>
-                              {fErrors[`text-answer-${index}`]}
-                            </p>
-                          )}
+                          <button
+                            type="button"
+                            className="host-list__reorder-btn"
+                            onClick={() => void move(index, 1)}
+                            disabled={index === questions.length - 1}
+                            aria-label={`Descendre la question ${index + 1}`}
+                          >
+                            ▼
+                          </button>
                         </div>
-                      ))}
-                    </div>
-                    <div style={{ marginTop: 'var(--space-2)' }}>
-                      <Button
-                        variant="ghost"
-                        type="button"
-                        onClick={() =>
-                          updateSelected({
-                            acceptedAnswers: [...selected.acceptedAnswers, ''],
-                          } as Partial<TextQuestion>)
-                        }
-                      >
-                        Ajouter une variante
-                      </Button>
-                    </div>
-                  </fieldset>
-                )}
+                      </li>
+                    )
+                  })}
+                </ul>
+              )}
+              <div style={{ marginTop: 'var(--space-3)' }}>
+                <Button variant="ghost" type="button" onClick={() => void addQuestion()} ref={addRef}>
+                  Ajouter une question
+                </Button>
+              </div>
+            </section>
 
-                {selected.type === 'slider' && (
+            <section className="host-panel" aria-label="Formulaire de question">
+              {!selected ? (
+                <p className="ab-empty-state">
+                  Aucune question sélectionnée. Ajoutez une question pour commencer.
+                </p>
+              ) : (
+                <form className="host-form" onSubmit={(e) => e.preventDefault()}>
+                  {(() => {
+                    const error = validationError(selected)
+                    return error ? (
+                      <p className="host-field-error" role="status">
+                        À corriger : {error}
+                      </p>
+                    ) : null
+                  })()}
+
+                  <div className="host-field">
+                    <label htmlFor="q-prompt">Intitulé de la question</label>
+                    <input
+                      id="q-prompt"
+                      type="text"
+                      value={selected.prompt}
+                      onChange={(e) => updateSelected({ prompt: e.target.value })}
+                      placeholder="Ex. Quelle planète est surnommée la « planète rouge » ?"
+                      aria-invalid={fErrors['q-prompt'] ? true : undefined}
+                      aria-describedby={fErrors['q-prompt'] ? 'q-prompt-error' : undefined}
+                    />
+                    {fErrors['q-prompt'] && (
+                      <p className="host-inline-error" id="q-prompt-error">
+                        {fErrors['q-prompt']}
+                      </p>
+                    )}
+                  </div>
+
                   <div className="host-field-row">
                     <div className="host-field">
-                      <label htmlFor="q-slider-min">Minimum</label>
-                      <input
-                        id="q-slider-min"
-                        type="number"
-                        value={selected.min}
-                        onChange={(e) => updateSelected({ min: Number(e.target.value) })}
-                        aria-invalid={fErrors['q-slider-min'] ? true : undefined}
-                        aria-describedby={fErrors['q-slider-min'] ? 'q-slider-min-error' : undefined}
-                      />
-                      {fErrors['q-slider-min'] && (
-                        <p className="host-inline-error" id="q-slider-min-error">
-                          {fErrors['q-slider-min']}
-                        </p>
-                      )}
+                      <label htmlFor="q-type">Type de question</label>
+                      <select
+                        id="q-type"
+                        ref={typeSelectRef}
+                        value={selected.type}
+                        onChange={(e) => changeType(e.target.value as QuestionType)}
+                      >
+                        <option value="mcq">QCM (4 réponses)</option>
+                        <option value="truefalse">Vrai / Faux</option>
+                        <option value="text">Réponse libre</option>
+                        <option value="slider">Curseur</option>
+                      </select>
                     </div>
                     <div className="host-field">
-                      <label htmlFor="q-slider-max">Maximum</label>
+                      <label htmlFor="q-duration">Durée (secondes)</label>
                       <input
-                        id="q-slider-max"
+                        id="q-duration"
                         type="number"
-                        value={selected.max}
-                        onChange={(e) => updateSelected({ max: Number(e.target.value) })}
-                        aria-invalid={fErrors['q-slider-max'] ? true : undefined}
-                        aria-describedby={fErrors['q-slider-max'] ? 'q-slider-max-error' : undefined}
+                        min={5}
+                        max={120}
+                        value={selected.timeLimit}
+                        onChange={(e) => updateSelected({ timeLimit: Number(e.target.value) })}
+                        aria-invalid={fErrors['q-duration'] ? true : undefined}
+                        aria-describedby={fErrors['q-duration'] ? 'q-duration-error' : undefined}
                       />
-                      {fErrors['q-slider-max'] && (
-                        <p className="host-inline-error" id="q-slider-max-error">
-                          {fErrors['q-slider-max']}
-                        </p>
-                      )}
-                    </div>
-                    <div className="host-field">
-                      <label htmlFor="q-slider-step">Pas (step)</label>
-                      <input
-                        id="q-slider-step"
-                        type="number"
-                        min={1}
-                        value={selected.step}
-                        onChange={(e) => updateSelected({ step: Number(e.target.value) })}
-                      />
-                    </div>
-                    <div className="host-field">
-                      <label htmlFor="q-slider-correct">Valeur correcte</label>
-                      <input
-                        id="q-slider-correct"
-                        type="number"
-                        value={selected.correctValue}
-                        onChange={(e) => updateSelected({ correctValue: Number(e.target.value) })}
-                        aria-invalid={fErrors['q-slider-correct'] ? true : undefined}
-                        aria-describedby={
-                          fErrors['q-slider-correct'] ? 'q-slider-correct-error' : undefined
-                        }
-                      />
-                      {fErrors['q-slider-correct'] && (
-                        <p className="host-inline-error" id="q-slider-correct-error">
-                          {fErrors['q-slider-correct']}
+                      {fErrors['q-duration'] && (
+                        <p className="host-inline-error" id="q-duration-error">
+                          {fErrors['q-duration']}
                         </p>
                       )}
                     </div>
                   </div>
-                )}
 
-                <div className="host-actions">
-                  <Button variant="danger" type="button" onClick={() => removeQuestion(selected.id)}>
-                    Supprimer la question
-                  </Button>
-                </div>
-              </form>
-            )}
-          </section>
-        </div>
+                  {selected.type === 'mcq' && (
+                    <fieldset className="host-field">
+                      <legend>Réponses (cochez la bonne réponse)</legend>
+                      {fErrors['mcq-correct'] && (
+                        <p className="host-inline-error" id="mcq-correct-error">
+                          {fErrors['mcq-correct']}
+                        </p>
+                      )}
+                      <div className="host-options-grid">
+                        {selected.options.map((opt, index) => (
+                          <div className="host-option-row" key={opt.id}>
+                            <label className="host-option-row__correct-label">
+                              <input
+                                type="radio"
+                                name="mcq-correct"
+                                checked={opt.correct}
+                                onChange={() => {
+                                  const options = selected.options.map((o, i) => ({
+                                    ...o,
+                                    correct: i === index,
+                                  }))
+                                  updateSelected({ options } as Partial<McqQuestion>)
+                                }}
+                              />
+                              <span className="visually-hidden">
+                                Marquer « {opt.label || `réponse ${index + 1}`} » comme correcte
+                              </span>
+                              <span aria-hidden="true">Correcte</span>
+                            </label>
+                            <AnswerShape shape={opt.shape} size={20} />
+                            <label htmlFor={`mcq-label-${opt.id}`} className="visually-hidden">
+                              Libellé réponse {index + 1} — {SHAPE_NAME_FR[opt.shape]}
+                            </label>
+                            <input
+                              id={`mcq-label-${opt.id}`}
+                              type="text"
+                              value={opt.label}
+                              placeholder={`Réponse ${index + 1}`}
+                              onChange={(e) => {
+                                const options = selected.options.map((o, i) =>
+                                  i === index ? { ...o, label: e.target.value } : o,
+                                )
+                                updateSelected({ options } as Partial<McqQuestion>)
+                              }}
+                              aria-invalid={fErrors[`mcq-label-${opt.id}`] ? true : undefined}
+                              aria-describedby={
+                                fErrors[`mcq-label-${opt.id}`]
+                                  ? `mcq-label-${opt.id}-error`
+                                  : undefined
+                              }
+                            />
+                            {fErrors[`mcq-label-${opt.id}`] && (
+                              <p className="host-inline-error" id={`mcq-label-${opt.id}-error`}>
+                                {fErrors[`mcq-label-${opt.id}`]}
+                              </p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </fieldset>
+                  )}
+
+                  {selected.type === 'truefalse' && (
+                    <fieldset className="host-field">
+                      <legend>Bonne réponse</legend>
+                      <div className="host-truefalse">
+                        <label>
+                          <input
+                            type="radio"
+                            name="truefalse"
+                            checked={selected.correctAnswer === true}
+                            onChange={() => updateSelected({ correctAnswer: true })}
+                          />
+                          Vrai
+                        </label>
+                        <label>
+                          <input
+                            type="radio"
+                            name="truefalse"
+                            checked={selected.correctAnswer === false}
+                            onChange={() => updateSelected({ correctAnswer: false })}
+                          />
+                          Faux
+                        </label>
+                      </div>
+                    </fieldset>
+                  )}
+
+                  {selected.type === 'text' && (
+                    <fieldset className="host-field">
+                      <legend>Réponses acceptées</legend>
+                      <p className="host-field__help">Casse et accents ignorés.</p>
+                      <div className="host-variants">
+                        {selected.acceptedAnswers.map((answer, index) => (
+                          <div className="host-variant-row" key={index}>
+                            <label htmlFor={`text-answer-${index}`} className="visually-hidden">
+                              Variante {index + 1}
+                            </label>
+                            <input
+                              id={`text-answer-${index}`}
+                              type="text"
+                              value={answer}
+                              placeholder="Ex. Reykjavik"
+                              onChange={(e) => {
+                                const acceptedAnswers = selected.acceptedAnswers.map((a, i) =>
+                                  i === index ? e.target.value : a,
+                                )
+                                updateSelected({ acceptedAnswers } as Partial<TextQuestion>)
+                              }}
+                              aria-invalid={fErrors[`text-answer-${index}`] ? true : undefined}
+                              aria-describedby={
+                                fErrors[`text-answer-${index}`]
+                                  ? `text-answer-${index}-error`
+                                  : undefined
+                              }
+                            />
+                            <button
+                              type="button"
+                              className="host-variant-remove"
+                              aria-label={`Supprimer la variante ${index + 1}`}
+                              disabled={selected.acceptedAnswers.length <= 1}
+                              onClick={() => {
+                                const acceptedAnswers = selected.acceptedAnswers.filter(
+                                  (_, i) => i !== index,
+                                )
+                                updateSelected({ acceptedAnswers } as Partial<TextQuestion>)
+                              }}
+                            >
+                              ✕
+                            </button>
+                            {fErrors[`text-answer-${index}`] && (
+                              <p className="host-inline-error" id={`text-answer-${index}-error`}>
+                                {fErrors[`text-answer-${index}`]}
+                              </p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      <div style={{ marginTop: 'var(--space-2)' }}>
+                        <Button
+                          variant="ghost"
+                          type="button"
+                          onClick={() =>
+                            updateSelected({
+                              acceptedAnswers: [...selected.acceptedAnswers, ''],
+                            } as Partial<TextQuestion>)
+                          }
+                        >
+                          Ajouter une variante
+                        </Button>
+                      </div>
+                    </fieldset>
+                  )}
+
+                  {selected.type === 'slider' && (
+                    <div className="host-field-row">
+                      <div className="host-field">
+                        <label htmlFor="q-slider-min">Minimum</label>
+                        <input
+                          id="q-slider-min"
+                          type="number"
+                          value={selected.min}
+                          onChange={(e) => updateSelected({ min: Number(e.target.value) })}
+                          aria-invalid={fErrors['q-slider-min'] ? true : undefined}
+                          aria-describedby={fErrors['q-slider-min'] ? 'q-slider-min-error' : undefined}
+                        />
+                        {fErrors['q-slider-min'] && (
+                          <p className="host-inline-error" id="q-slider-min-error">
+                            {fErrors['q-slider-min']}
+                          </p>
+                        )}
+                      </div>
+                      <div className="host-field">
+                        <label htmlFor="q-slider-max">Maximum</label>
+                        <input
+                          id="q-slider-max"
+                          type="number"
+                          value={selected.max}
+                          onChange={(e) => updateSelected({ max: Number(e.target.value) })}
+                          aria-invalid={fErrors['q-slider-max'] ? true : undefined}
+                          aria-describedby={fErrors['q-slider-max'] ? 'q-slider-max-error' : undefined}
+                        />
+                        {fErrors['q-slider-max'] && (
+                          <p className="host-inline-error" id="q-slider-max-error">
+                            {fErrors['q-slider-max']}
+                          </p>
+                        )}
+                      </div>
+                      <div className="host-field">
+                        <label htmlFor="q-slider-step">Pas (step)</label>
+                        <input
+                          id="q-slider-step"
+                          type="number"
+                          min={1}
+                          value={selected.step}
+                          onChange={(e) => updateSelected({ step: Number(e.target.value) })}
+                          aria-invalid={fErrors['q-slider-step'] ? true : undefined}
+                          aria-describedby={fErrors['q-slider-step'] ? 'q-slider-step-error' : undefined}
+                        />
+                        {fErrors['q-slider-step'] && (
+                          <p className="host-inline-error" id="q-slider-step-error">
+                            {fErrors['q-slider-step']}
+                          </p>
+                        )}
+                      </div>
+                      <div className="host-field">
+                        <label htmlFor="q-slider-correct">Valeur correcte</label>
+                        <input
+                          id="q-slider-correct"
+                          type="number"
+                          value={selected.correctValue}
+                          onChange={(e) => updateSelected({ correctValue: Number(e.target.value) })}
+                          aria-invalid={fErrors['q-slider-correct'] ? true : undefined}
+                          aria-describedby={
+                            fErrors['q-slider-correct'] ? 'q-slider-correct-error' : undefined
+                          }
+                        />
+                        {fErrors['q-slider-correct'] && (
+                          <p className="host-inline-error" id="q-slider-correct-error">
+                            {fErrors['q-slider-correct']}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="host-actions">
+                    <Button variant="danger" type="button" onClick={() => void removeQuestion(selected.id)}>
+                      Supprimer la question
+                    </Button>
+                  </div>
+                </form>
+              )}
+            </section>
+          </div>
+        )}
       </main>
 
       <p className="visually-hidden" role="status" aria-live="polite">
@@ -803,7 +1351,7 @@ export function HostEditor() {
             <h2 id="host-dialog-title">Changer le type de question ?</h2>
             <p id="host-dialog-desc" style={{ color: 'var(--ink-dim)' }}>
               Les réponses saisies pour cette question seront effacées. Le reste (intitulé,
-              durée, points) est conservé.
+              durée) est conservé.
             </p>
             <div className="host-dialog__actions">
               <Button variant="ghost" type="button" onClick={cancelTypeChange}>
