@@ -19,16 +19,31 @@
  * ni guillemet, ni saut de ligne. C'est l'appelant qui décide du typage (repos de rapport :
  * les scores/compteurs doivent être passés en `number`, jamais en `string`, pour rester
  * lisibles tels quels dans le tableur).
+ *
+ * **Contournement par espaces de tête (corrigé)** : un déclencheur de formule précédé
+ * d'espace(s) — espace normal, NBSP, tab non-déclencheur, etc. — reste un déclencheur pour
+ * Excel/Sheets, qui ignorent les blancs de tête avant d'évaluer une cellule. On détecte donc
+ * `=`/`+`/`-`/`@` après avoir retiré les blancs de tête (`\s` JS couvre espace, NBSP, tab...),
+ * tandis que TAB/CR ne comptent que s'ils sont le tout premier caractère brut (ce sont eux-
+ * mêmes des déclencheurs bruts pour certains tableurs, pas seulement des blancs à ignorer).
+ * L'apostrophe de neutralisation est toujours préfixée à la valeur ORIGINALE (non trimée) :
+ * on ne modifie jamais le contenu, seulement son statut d'évaluation.
  */
 
-const FORMULA_TRIGGER = /^[=+\-@\t\r]/
+const FORMULA_TRIGGER_AFTER_TRIM = /^[=+\-@]/
+const LEADING_TAB_OR_CR = /^[\t\r]/
 const NEEDS_QUOTING = /["\n\r]/
+
+function isFormulaLike(value: string): boolean {
+  const trimmed = value.replace(/^\s+/, '')
+  return FORMULA_TRIGGER_AFTER_TRIM.test(trimmed) || LEADING_TAB_OR_CR.test(value)
+}
 
 function formatCell(value: string | number | null): string {
   if (value === null) return ''
   if (typeof value === 'number') return String(value)
 
-  const neutralized = FORMULA_TRIGGER.test(value) ? `'${value}` : value
+  const neutralized = isFormulaLike(value) ? `'${value}` : value
   const forceQuote = neutralized !== value // une neutralisation a eu lieu
   const needsQuoting = forceQuote || value.includes(',') || NEEDS_QUOTING.test(neutralized)
 

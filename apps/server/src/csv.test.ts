@@ -72,6 +72,62 @@ describe('toCsv — neutralisation de l\'injection de formule', () => {
   })
 })
 
+describe('toCsv — contournement par espaces de tête (régression adversariale)', () => {
+  it('neutralise "=1+1" précédé d\'un espace normal', () => {
+    expect(toCsv([[' =1+1']])).toBe(`"' =1+1"${CRLF}`)
+  })
+
+  it('neutralise "=1+1" précédé d\'un espace insécable (NBSP)', () => {
+    expect(toCsv([[' =1+1']])).toBe(`"' =1+1"${CRLF}`)
+  })
+
+  it('neutralise "=1+1" précédé d\'une tabulation (déjà couvert par le déclencheur brut de tête)', () => {
+    expect(toCsv([['\t=1+1']])).toBe(`"'\t=1+1"${CRLF}`)
+  })
+
+  it('neutralise "@SUM(A1)" précédé d\'un espace', () => {
+    expect(toCsv([[' @SUM(A1)']])).toBe(`"' @SUM(A1)"${CRLF}`)
+  })
+
+  it('neutralise "-2+3" précédé d\'un espace', () => {
+    expect(toCsv([[' -2+3']])).toBe(`"' -2+3"${CRLF}`)
+  })
+
+  it('neutralise "+1" précédé d\'un espace', () => {
+    expect(toCsv([[' +1']])).toBe(`"' +1"${CRLF}`)
+  })
+
+  it('neutralise une charge DDE précédée d\'un espace', () => {
+    const payload = " =cmd|'/c calc'!A1"
+    expect(toCsv([[payload]])).toBe(`"'${payload.replace(/"/g, '""')}"${CRLF}`)
+  })
+
+  it('une chaîne DÉJÀ préfixée par une apostrophe n\'est pas re-neutralisée (pas de double apostrophe)', () => {
+    // Le premier caractère non-blanc est "'", qui n'est pas un déclencheur : le tableur
+    // traite déjà la cellule comme du texte littéral, donc round-trip inchangé, sans quoting
+    // forcé superflu (aucune virgule/guillemet/saut de ligne dans ce cas précis).
+    expect(toCsv([["'=1+1"]])).toBe(`'=1+1${CRLF}`)
+  })
+})
+
+describe('toCsv — nombres non-neutralisés (garde-fou de régression)', () => {
+  it('-0 numérique se rend en "0", jamais neutralisé', () => {
+    expect(toCsv([[-0]])).toBe(`0${CRLF}`)
+  })
+
+  it('1e21 numérique se rend en "1e+21", jamais neutralisé', () => {
+    expect(toCsv([[1e21]])).toBe(`1e+21${CRLF}`)
+  })
+
+  it('NaN numérique se rend en "NaN", jamais neutralisé', () => {
+    expect(toCsv([[NaN]])).toBe(`NaN${CRLF}`)
+  })
+
+  it('Infinity numérique se rend en "Infinity", jamais neutralisé', () => {
+    expect(toCsv([[Infinity]])).toBe(`Infinity${CRLF}`)
+  })
+})
+
 describe('toCsv — valeurs null et numériques', () => {
   it('null devient une cellule vide', () => {
     expect(toCsv([[null, 'x', null]])).toBe(`,x,${CRLF}`)
