@@ -404,7 +404,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     url: string,
     email: string,
     timeLimit = 20,
-  ): Promise<{ hostSocket: ClientSocket; sessionId: string; pin: string }> {
+  ): Promise<{ hostSocket: ClientSocket; sessionId: string; pin: string; quizId: string }> {
     const cookie = await signUp(app, email)
     const quizRes = await app.inject({
       method: 'POST',
@@ -440,7 +440,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       { quizId: quiz.id },
     )
     expect(created.error).toBeUndefined()
-    return { hostSocket, sessionId: created.sessionId!, pin: created.pin! }
+    return { hostSocket, sessionId: created.sessionId!, pin: created.pin!, quizId: quiz.id }
   }
 
   it("player:reconnect (joinToken) : un joueur déconnecté puis reconnecté retrouve son score et sa place dans la room", async () => {
@@ -780,4 +780,90 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       await app.close()
     }
   }, 20_000)
+
+  it("host:next SANS host:reveal préalable crédite ET persiste quand même la manche en cours (bug important corrigé)", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin, quizId } = await setupHostedSession(app, url, 'gateway-next-noreveal@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      const join1 = await ack<{ playerId?: string; error?: string }>(player1, 'player:join', { pin, nickname: 'Alice' })
+      expect(join1.error).toBeUndefined()
+      const alicePlayerId = join1.playerId!
+
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+
+      // Alice répond correctement (index 0 = Paris)...
+      const answerAck = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect(answerAck.accepted).toBe(true)
+
+      // ...mais l'hôte enchaîne DIRECTEMENT host:next, SANS émettre host:reveal au préalable —
+      // exactement le scénario du bug (phase encore 'question' au moment de host:next). Avec le
+      // fix, host:next révèle en interne AVANT d'avancer : question:reveal est donc quand même
+      // émis, suivi (quiz mono-question) du podium avec le score d'Alice crédité.
+      const revealPromise = waitFor<{ correct: unknown }>(player1, 'question:reveal')
+      const podiumPromise = waitFor<{ top: Array<{ playerId: string; score: number }> }>(player1, 'podium')
+      const nextAck = await ack<{ phase?: string; error?: string }>(hostSocket, 'host:next', {})
+      expect(nextAck.error).toBeUndefined()
+      expect(nextAck.phase).toBe('podium')
+
+      const reveal = await revealPromise
+      expect(reveal.correct).toBeDefined()
+
+      const podium = await podiumPromise
+      const aliceTop = podium.top.find((r) => r.playerId === alicePlayerId)
+      expect(aliceTop).toBeDefined()
+      expect(aliceTop!.score).toBeGreaterThan(0)
+
+      // Persistance en base : un answer_record existe bien pour Alice (correct, points > 0) et
+      // son total_score reflète ces points — la manche n'a pas été silencieusement perdue.
+      const [dbSession] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, quizId))
+      expect(dbSession).toBeDefined()
+      const dbPlayers = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.sessionId, dbSession.id))
+      const aliceDb = dbPlayers.find((p) => p.nickname === 'Alice')
+      expect(aliceDb).toBeDefined()
+      expect(aliceDb!.totalScore).toBeGreaterThan(0)
+      expect(aliceDb!.totalScore).toBe(aliceTop!.score)
+
+      const dbAnswers = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+      expect(dbAnswers).toHaveLength(1)
+      expect(dbAnswers[0].playerId).toBe(aliceDb!.id)
+      expect(dbAnswers[0].isCorrect).toBe(true)
+      expect(dbAnswers[0].points).toBeGreaterThan(0)
+      expect(dbAnswers[0].points).toBe(aliceDb!.totalScore)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("host:reveal émis depuis le lobby (avant host:start) est refusé, sans fuite de question:reveal/scoreboard", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-reveal-lobby@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      const join1 = await ack<{ playerId?: string; error?: string }>(player1, 'player:join', { pin, nickname: 'Alice' })
+      expect(join1.error).toBeUndefined()
+
+      // Toujours en lobby (host:start n'a jamais été émis) : host:reveal doit être refusé, sans
+      // émettre le moindre `question:reveal` (qui contiendrait `correct: undefined`) ni `scoreboard`.
+      const noRevealLeak = raceNoEvent(player1, 'question:reveal', 500)
+      const noScoreboardLeak = raceNoEvent(player1, 'scoreboard', 500)
+      const revealAck = await ack<{ error?: string }>(hostSocket, 'host:reveal', {})
+      expect(revealAck.error).toBeTruthy()
+      expect(await noRevealLeak).toBe(true) // le timeout a gagné : aucune fuite
+      expect(await noScoreboardLeak).toBe(true)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 15_000)
 })

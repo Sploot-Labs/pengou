@@ -66,6 +66,11 @@ export interface Engine {
   /** Compteur de réponses pour la question courante — pour le grand écran (jamais de contenu
    * de réponse, uniquement `answered`/`total`). */
   progress(sessionId: string): Promise<ProgressInfo>
+  /** Lecture seule de la session courante (aucune mutation, aucun effet de bord) — utilisé par
+   * la passerelle pour des décisions de routage (ex. détecter si la manche courante a déjà été
+   * révélée avant `host:next`, ou si `host:reveal` est invoqué hors phase question) sans
+   * dupliquer l'état moteur côté passerelle. */
+  getSession(sessionId: string): Promise<GameSession>
 }
 
 export function createEngine(deps: EngineDeps): Engine {
@@ -293,6 +298,10 @@ export function createEngine(deps: EngineDeps): Engine {
       const total = Object.keys(session.players).length
       const answered = Object.keys(session.answers[session.currentIndex] ?? {}).length
       return { answered, total }
+    },
+
+    async getSession(sessionId) {
+      return requireSession(sessionId)
     },
   }
 

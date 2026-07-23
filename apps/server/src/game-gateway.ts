@@ -233,13 +233,43 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
       }
     })
 
-    socket.on('host:reveal', (_payload: unknown, ack?: (res: unknown) => void) => void doReveal(socket, ack))
+    // Garde `host:reveal` hors phase question (ex. juste après host:create, encore en lobby) :
+    // sans ce garde, engine.reveal() ferait quand même avancer la phase et émettrait un
+    // `question:reveal { correct: undefined }` / `scoreboard` bidon (aucune question courante).
+    // Volontairement PAS dans `doReveal` (partagé avec host:skip, qu'on ne doit pas modifier) :
+    // le garde vit uniquement dans ce handler `host:reveal`.
+    socket.on('host:reveal', async (_payload: unknown, ack?: (res: unknown) => void) => {
+      const reply = typeof ack === 'function' ? ack : () => {}
+      try {
+        const { sessionId } = requireHost(socket)
+        const current = await engine.getSession(sessionId)
+        if (current.phase === 'lobby') {
+          throw new Error('host:reveal : aucune question active (session encore en lobby)')
+        }
+      } catch (e) {
+        reply({ error: message(e) })
+        return
+      }
+      void doReveal(socket, ack)
+    })
     socket.on('host:skip', (_payload: unknown, ack?: (res: unknown) => void) => void doReveal(socket, ack))
 
     socket.on('host:next', async (_payload: unknown, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
         const { sessionId, meta } = requireHost(socket)
+        // Bug important (revue finale) : engine.nextQuestion() ne révèle jamais la manche en
+        // cours — si l'hôte enchaîne host:next SANS host:reveal préalable (phase encore
+        // 'question'), les points de cette manche ne seraient jamais crédités ni persistés
+        // (answer_record) alors que la partie avance quand même vers la manche suivante /
+        // le podium. On révèle donc explicitement ici AVANT d'avancer, en réutilisant EXACTEMENT
+        // le chemin de host:reveal (credit + persist + emit question:reveal/scoreboard).
+        // Idempotent par construction : revealedRounds/credited (voir persistRound/engine.reveal)
+        // empêchent tout double-crédit si la manche a déjà été révélée entre-temps.
+        const current = await engine.getSession(sessionId)
+        if (current.phase === 'question') {
+          await doReveal(socket)
+        }
         const session = await engine.nextQuestion(sessionId)
         if (session.phase === 'podium') {
           await setSessionStatus(db, meta.dbSessionId, 'ended')
