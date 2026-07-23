@@ -15,4 +15,16 @@ describe('Reveal', () => {
     )
     expect(screen.getByText('coucou')).toBeDefined()
   })
+
+  it("n'applique aucune animation inline en reduced-motion", () => {
+    window.matchMedia = ((q: string) =>
+      ({ matches: true, media: q, addEventListener() {}, removeEventListener() {} }) as unknown as MediaQueryList)
+    render(
+      <MotionProvider>
+        <Reveal>salut</Reveal>
+      </MotionProvider>,
+    )
+    const el = screen.getByText('salut')
+    expect(el.style.animation).toBeFalsy()
+  })
 })

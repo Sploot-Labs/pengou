@@ -15,22 +15,23 @@ export function CountUp({
 }) {
   const reduced = useReducedMotion()
   const [display, setDisplay] = useState(value)
-  const fromRef = useRef(value)
+  const displayRef = useRef(value)
 
   useEffect(() => {
     if (reduced) {
       setDisplay(value)
-      fromRef.current = value
+      displayRef.current = value
       return
     }
-    const from = fromRef.current
+    const from = displayRef.current
     const start = performance.now()
     let raf = 0
     function frame(now: number) {
       const t = Math.min(1, (now - start) / durationMs)
-      setDisplay(Math.round(interpolate(from, value, easeOut(t))))
+      const v = Math.round(interpolate(from, value, easeOut(t)))
+      setDisplay(v)
+      displayRef.current = v
       if (t < 1) raf = requestAnimationFrame(frame)
-      else fromRef.current = value
     }
     raf = requestAnimationFrame(frame)
     return () => cancelAnimationFrame(raf)
