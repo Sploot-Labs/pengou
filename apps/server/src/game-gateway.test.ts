@@ -396,4 +396,241 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       await app.close()
     }
   }, 20_000)
+
+  /** Crée un hôte inscrit + un quiz mono-question (mcq) + une session (host:create) — factorisé
+   * pour les tests Task 5 (reconnexion / écran / timer / compteur) qui partagent tous ce setup. */
+  async function setupHostedSession(
+    app: FastifyInstance,
+    url: string,
+    email: string,
+    timeLimit = 20,
+  ): Promise<{ hostSocket: ClientSocket; sessionId: string; pin: string }> {
+    const cookie = await signUp(app, email)
+    const quizRes = await app.inject({
+      method: 'POST',
+      url: '/api/quizzes',
+      payload: { title: 'Quiz Task 5' },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(quizRes.statusCode).toBe(201)
+    const quiz = quizRes.json() as { id: string }
+
+    const questionRes = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quiz.id}/questions`,
+      payload: {
+        type: 'mcq',
+        prompt: 'Capitale de la France ?',
+        timeLimit,
+        payload: {
+          options: [
+            { label: 'Paris', correct: true },
+            { label: 'Lyon', correct: false },
+          ],
+        },
+      },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(questionRes.statusCode).toBe(201)
+
+    const hostSocket = await connectClient(url, { cookie })
+    const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
+      hostSocket,
+      'host:create',
+      { quizId: quiz.id },
+    )
+    expect(created.error).toBeUndefined()
+    return { hostSocket, sessionId: created.sessionId!, pin: created.pin! }
+  }
+
+  it("player:reconnect (joinToken) : un joueur déconnecté puis reconnecté retrouve son score et sa place dans la room", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-reconnect@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(
+        player1,
+        'player:join',
+        { pin, nickname: 'Alice' },
+      )
+      expect(join1.error).toBeUndefined()
+      const joinToken = join1.joinToken!
+
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+
+      // Alice répond correctement (index 0 = Paris) → reveal lui créditera des points.
+      const answerAck = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect(answerAck.accepted).toBe(true)
+
+      const revealAck = await ack<{ error?: string }>(hostSocket, 'host:reveal', {})
+      expect(revealAck.error).toBeUndefined()
+
+      // Alice se déconnecte (le serveur doit la marquer non-connectée, sans perdre son score).
+      player1.disconnect()
+      await new Promise((resolve) => setTimeout(resolve, 150))
+
+      // Reconnexion depuis un NOUVEAU socket (ex. rechargement de page), munie du joinToken.
+      const player1b = await connectClient(url)
+      clients.push(player1b)
+      const reconnectAck = await ack<{ playerId?: string; phase?: string; score?: number; error?: string }>(
+        player1b,
+        'player:reconnect',
+        { pin, joinToken },
+      )
+      expect(reconnectAck.error).toBeUndefined()
+      expect(reconnectAck.playerId).toBeTruthy()
+      expect(reconnectAck.phase).toBe('scoreboard') // host:reveal enchaîne engine.scoreboard()
+      expect(reconnectAck.score).toBeGreaterThan(0) // le score gagné avant déconnexion est conservé
+
+      // Le socket reconnecté est bien rattaché à la room : il reçoit les diffusions suivantes
+      // (ici `podium`, plus de questions dans ce quiz mono-question).
+      const podiumPromise = waitFor<{ top: Array<{ playerId: string; score: number }> }>(player1b, 'podium')
+      const nextAck = await ack<{ error?: string }>(hostSocket, 'host:next', {})
+      expect(nextAck.error).toBeUndefined()
+      const podium = await podiumPromise
+      expect(podium.top[0]!.score).toBeGreaterThan(0)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("player:reconnect avec un joinToken invalide/inconnu est refusé", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-reconnect-bad@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+
+      const player2 = await connectClient(url)
+      clients.push(player2)
+      const res = await ack<{ error?: string; playerId?: string }>(
+        player2,
+        'player:reconnect',
+        { pin, joinToken: 'jeton-inexistant' },
+      )
+      expect(res.error).toBeTruthy()
+      expect(res.playerId).toBeUndefined()
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 15_000)
+
+  it("host:createScreenToken + screen:join : token d'affichage à usage unique", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-screen@example.com')
+      clients.push(hostSocket)
+
+      const tokenAck = await ack<{ displayToken?: string; error?: string }>(hostSocket, 'host:createScreenToken', {})
+      expect(tokenAck.error).toBeUndefined()
+      expect(tokenAck.displayToken).toBeTruthy()
+      const { displayToken } = tokenAck as { displayToken: string }
+
+      // Token inconnu → refusé.
+      const badScreen = await connectClient(url)
+      clients.push(badScreen)
+      const badJoin = await ack<{ error?: string; ok?: boolean }>(badScreen, 'screen:join', { displayToken: 'nimporte-quoi' })
+      expect(badJoin.error).toBeTruthy()
+      expect(badJoin.ok).toBeUndefined()
+
+      // Token valide → l'écran rejoint en lecture seule (consomme le token).
+      const screen = await connectClient(url)
+      clients.push(screen)
+      const joinRes = await ack<{ ok?: boolean; error?: string }>(screen, 'screen:join', { displayToken })
+      expect(joinRes.error).toBeUndefined()
+      expect(joinRes.ok).toBe(true)
+
+      // Réutilisation du même token, depuis un autre socket → refusée.
+      const screen2 = await connectClient(url)
+      clients.push(screen2)
+      const reuseJoin = await ack<{ ok?: boolean; error?: string }>(screen2, 'screen:join', { displayToken })
+      expect(reuseJoin.error).toBeTruthy()
+      expect(reuseJoin.ok).toBeUndefined()
+
+      // Le premier écran (déjà joint AVANT la tentative de réutilisation) garde son accès à la
+      // room : il continue de recevoir les diffusions suivantes.
+      const lobbyPromise = waitFor<{ players: Array<{ id: string }> }>(screen, 'lobby:update')
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      await ack(player1, 'player:join', { pin, nickname: 'Zoé' })
+      const lobby = await lobbyPromise
+      expect(lobby.players).toHaveLength(1)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("host:start émet `timer` (chrono mesuré, dérivé du timeLimit de la question) à toute la room", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-timer@example.com', 15)
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+
+      const timerPromise = waitFor<{ timeLimit?: number; startedAt?: number }>(player1, 'timer')
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+
+      const timer = await timerPromise
+      expect(timer.timeLimit).toBe(15)
+      expect(typeof timer.startedAt).toBe('number')
+      // Anti-triche : le timer ne porte évidemment aucun contenu de réponse.
+      expect(JSON.stringify(timer)).not.toContain('correct')
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("screen:progress : le grand écran reçoit le compteur de réponses (answered/total), sans jamais la bonne réponse", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-progress@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      const player2 = await connectClient(url)
+      clients.push(player1, player2)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+      await ack(player2, 'player:join', { pin, nickname: 'Bob' })
+
+      const tokenAck = await ack<{ displayToken?: string }>(hostSocket, 'host:createScreenToken', {})
+      const screen = await connectClient(url)
+      clients.push(screen)
+      await ack(screen, 'screen:join', { displayToken: tokenAck.displayToken })
+
+      await ack(hostSocket, 'host:start', {})
+
+      const progressPromise = waitFor<{ answered?: number; total?: number }>(screen, 'screen:progress')
+      const answerAck = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect(answerAck.accepted).toBe(true)
+
+      const progress = await progressPromise
+      expect(progress).toEqual({ answered: 1, total: 2 })
+      // Anti-triche : le compteur ne contient AUCUN contenu de réponse (ni options, ni `correct`).
+      expect(JSON.stringify(progress)).not.toContain('correct')
+      expect(JSON.stringify(progress)).not.toContain('Paris')
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
 })

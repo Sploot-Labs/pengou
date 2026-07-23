@@ -27,6 +27,15 @@ export type QuestionResult = {
   distribution: Record<string, number>
 }
 
+/** Compteur de réponses pour la question courante (destiné au grand écran) — jamais de contenu
+ * de réponse ici, uniquement des compteurs (anti-triche : rien à divulguer). */
+export type ProgressInfo = { answered: number; total: number }
+
+/** Résultat d'une reconnexion (Task 5) : `null` si aucun joueur ne correspond au joinToken
+ * (session existante mais token inconnu/périmé) — distinct d'une session introuvable, qui reste
+ * une erreur levée (cohérent avec le reste du moteur, voir `requireSession`). */
+export type ReconnectResult = { session: GameSession; player: Player } | null
+
 export type EngineDeps = {
   store: SessionStore
   /** Horloge injectée (jamais Date.now dans le moteur) — pour un timing déterministe/testable. */
@@ -49,6 +58,14 @@ export interface Engine {
   ranking(session: GameSession): RankingEntry[]
   playerQuestionView(session: GameSession): PlayerQuestionView
   questionResult(session: GameSession): QuestionResult
+  /** Marque un joueur (dé)connecté — n'affecte ni son score ni ses réponses. */
+  setPlayerConnected(sessionId: string, playerId: string, connected: boolean): Promise<GameSession>
+  /** Retrouve un joueur par joinToken (Task 5 : reconnexion) et le remarque `connected`. `null`
+   * si aucun joueur de la session ne porte ce token. */
+  reconnect(sessionId: string, joinToken: string): Promise<ReconnectResult>
+  /** Compteur de réponses pour la question courante — pour le grand écran (jamais de contenu
+   * de réponse, uniquement `answered`/`total`). */
+  progress(sessionId: string): Promise<ProgressInfo>
 }
 
 export function createEngine(deps: EngineDeps): Engine {
@@ -250,6 +267,32 @@ export function createEngine(deps: EngineDeps): Engine {
         distribution[key] = (distribution[key] ?? 0) + 1
       }
       return { correct: question?.payload, distribution }
+    },
+
+    async setPlayerConnected(sessionId, playerId, connected) {
+      const session = await requireSession(sessionId)
+      const player = session.players[playerId]
+      if (player) {
+        player.connected = connected
+        await store.save(session)
+      }
+      return session
+    },
+
+    async reconnect(sessionId, joinToken) {
+      const session = await requireSession(sessionId)
+      const player = Object.values(session.players).find((p) => p.joinToken === joinToken)
+      if (!player) return null
+      player.connected = true
+      await store.save(session)
+      return { session, player }
+    },
+
+    async progress(sessionId) {
+      const session = await requireSession(sessionId)
+      const total = Object.keys(session.players).length
+      const answered = Object.keys(session.answers[session.currentIndex] ?? {}).length
+      return { answered, total }
     },
   }
 

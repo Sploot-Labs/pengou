@@ -366,4 +366,73 @@ describe('game engine — cycle déterministe complet', () => {
       expect(secondReveal.players[player.id]!.score).toBe(scoreAfterFirst) // inchangé
     })
   })
+
+  describe('reconnexion (join_token) — Task 5', () => {
+    it('reconnect retrouve le joueur par joinToken, le remarque connected, et son score est conservé', async () => {
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [mcqQuestion],
+      })
+      const { player } = await engine.addPlayer(session.id, 'Alice')
+      await engine.startQuestion(session.id)
+      clock.set(1000)
+      await engine.submitAnswer(session.id, player.id, { optionIndex: 1 }) // correct
+      const revealed = await engine.reveal(session.id)
+      const scoreBeforeDisconnect = revealed.players[player.id]!.score
+      expect(scoreBeforeDisconnect).toBeGreaterThan(0)
+
+      // Le joueur se déconnecte (marqué non-connecté, mais reste dans la session avec son score).
+      const disconnected = await engine.setPlayerConnected(session.id, player.id, false)
+      expect(disconnected.players[player.id]!.connected).toBe(false)
+      expect(disconnected.players[player.id]!.score).toBe(scoreBeforeDisconnect)
+
+      // Reconnexion via joinToken : retrouve le MÊME joueur, remarqué connected, score intact.
+      const result = await engine.reconnect(session.id, player.joinToken)
+      expect(result).not.toBeNull()
+      expect(result!.player.id).toBe(player.id)
+      expect(result!.player.connected).toBe(true)
+      expect(result!.player.score).toBe(scoreBeforeDisconnect)
+      expect(result!.session.phase).toBe(revealed.phase)
+    })
+
+    it('reconnect avec un joinToken inconnu renvoie null (pas trouvé)', async () => {
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [mcqQuestion],
+      })
+      await engine.addPlayer(session.id, 'Alice')
+
+      const result = await engine.reconnect(session.id, 'jeton-inexistant')
+      expect(result).toBeNull()
+    })
+  })
+
+  describe('progress — compteur de réponses (pour le grand écran)', () => {
+    it("total = nombre de joueurs, answered = nombre de réponses soumises pour la question courante", async () => {
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [mcqQuestion],
+      })
+      const { player: alice } = await engine.addPlayer(session.id, 'Alice')
+      const { player: bob } = await engine.addPlayer(session.id, 'Bob')
+      await engine.startQuestion(session.id)
+
+      const before = await engine.progress(session.id)
+      expect(before).toEqual({ answered: 0, total: 2 })
+
+      await engine.submitAnswer(session.id, alice.id, { optionIndex: 1 })
+      const afterOne = await engine.progress(session.id)
+      expect(afterOne).toEqual({ answered: 1, total: 2 })
+
+      await engine.submitAnswer(session.id, bob.id, { optionIndex: 0 })
+      const afterBoth = await engine.progress(session.id)
+      expect(afterBoth).toEqual({ answered: 2, total: 2 })
+    })
+  })
 })

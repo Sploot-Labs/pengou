@@ -10,5 +10,7 @@ export type {
   RankingEntry,
   PlayerQuestionView,
   QuestionResult,
+  ProgressInfo,
+  ReconnectResult,
 } from './engine.js'
 export { createEngine } from './engine.js'

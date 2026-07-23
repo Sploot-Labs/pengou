@@ -76,6 +76,9 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
   // (ex. plusieurs suites de test dans le même process).
   const sessionMetaByEngineId = new Map<string, SessionMeta>()
   const pinToSessionId = new Map<string, string>()
+  // Token d'affichage grand écran : à usage unique (consommé au premier screen:join réussi),
+  // au niveau de la passerelle (pas du moteur — c'est un concept de transport, pas d'état de jeu).
+  const screenTokenToSessionId = new Map<string, string>()
 
   function requireHost(socket: Socket): { sessionId: string; meta: SessionMeta } {
     const data = socket.data as SocketData
@@ -140,6 +143,19 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
     }
   }
 
+  /** Émet un `timer` de chrono MESURÉ (valeur unique au démarrage de la question, jamais un
+   * flux par seconde) : `timeLimit` (secondes, pour dimensionner le compte à rebours côté
+   * client) + `startedAt` (horodatage serveur de `questionStartedAt`, pour resynchroniser un
+   * client qui rejoint/rafraîchit en cours de question). Ne contient aucun contenu de réponse. */
+  function emitTimer(sessionId: string, session: GameSession): void {
+    const question = session.questions[session.currentIndex]
+    if (!question) return
+    io.to(roomName(sessionId)).emit('timer', {
+      timeLimit: question.timeLimit,
+      startedAt: session.questionStartedAt,
+    })
+  }
+
   io.on('connection', (socket: Socket) => {
     socket.on('host:create', async (payload: { quizId?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
@@ -200,6 +216,7 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
         // à TOUTE la room (hôte + joueurs + grand écran) — jamais `questionResult`.
         const view = engine.playerQuestionView(session)
         io.to(roomName(sessionId)).emit('question:show', view)
+        emitTimer(sessionId, session)
         reply(view)
       } catch (e) {
         reply({ error: message(e) })
@@ -221,6 +238,7 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
         } else {
           const view = engine.playerQuestionView(session)
           io.to(roomName(sessionId)).emit('question:show', view)
+          emitTimer(sessionId, session)
         }
         reply({ phase: session.phase })
       } catch (e) {
@@ -268,28 +286,86 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
         // Horodatage 100% serveur : engine.submitAnswer utilise `now()` en interne, jamais un
         // timing fourni par le client.
         const result = await engine.submitAnswer(data.sessionId, data.playerId, payload?.answer)
+        if (result.accepted) {
+          // Compteur grand écran : UNIQUEMENT answered/total, jamais le contenu de la réponse
+          // ni la bonne réponse (anti-triche — voir engine.progress()).
+          const progress = await engine.progress(data.sessionId)
+          io.to(roomName(data.sessionId)).emit('screen:progress', progress)
+        }
         reply(result)
       } catch (e) {
         reply({ accepted: false, error: message(e) })
       }
     })
 
-    // Reconnexion (join_token) : Task 5. Stub qui ne casse pas le build/les autres flux —
-    // ne renvoie jamais d'état de jeu tant que l'implémentation réelle n'est pas là.
-    socket.on('player:reconnect', (_payload: unknown, ack?: (res: unknown) => void) => {
-      const reply = typeof ack === 'function' ? ack : () => {}
-      reply({ error: 'reconnexion pas encore implémentée (Task 5)' })
-    })
-
-    // Grand écran : pour cette tâche, un simple join en lecture seule à la room de session
-    // (le token d'affichage à usage unique est ajouté au Task 5).
-    socket.on('screen:join', async (payload: { sessionId?: unknown } | undefined, ack?: (res: unknown) => void) => {
+    // Reconnexion (join_token) : le client envoie { pin, joinToken } — le PIN (visible/mémorisable
+    // par le joueur) plutôt qu'un sessionId interne, symétrique de player:join. Le moteur retrouve
+    // le joueur par joinToken, le remarque connected, et son score/état sont conservés (le moteur
+    // ne réinitialise jamais un joueur existant — voir engine.reconnect()).
+    socket.on('player:reconnect', async (payload: { pin?: unknown; joinToken?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const sessionId = payload?.sessionId
-        if (typeof sessionId !== 'string' || !sessionMetaByEngineId.has(sessionId)) {
-          throw new Error('session introuvable')
-        }
+        const pin = payload?.pin
+        const joinToken = payload?.joinToken
+        if (typeof pin !== 'string' || !pin) throw new Error('pin requis')
+        if (typeof joinToken !== 'string' || !joinToken) throw new Error('joinToken requis')
+
+        const sessionId = pinToSessionId.get(pin)
+        if (!sessionId) throw new Error('PIN invalide')
+        if (!sessionMetaByEngineId.has(sessionId)) throw new Error('session introuvable')
+
+        const result = await engine.reconnect(sessionId, joinToken)
+        if (!result) throw new Error('joinToken invalide')
+        const { session, player } = result
+
+        const data = socket.data as SocketData
+        data.role = 'player'
+        data.sessionId = sessionId
+        data.playerId = player.id
+        await socket.join(roomName(sessionId))
+
+        reply({ playerId: player.id, phase: session.phase, score: player.score })
+        io.to(roomName(sessionId)).emit('lobby:update', { players: playersPayload(session) })
+      } catch (e) {
+        reply({ error: message(e) })
+      }
+    })
+
+    // Marque le joueur non-connecté sans le retirer de la session (score/réponses conservés,
+    // récupérables via player:reconnect). Ne s'applique qu'aux sockets 'player' rattachés.
+    socket.on('disconnect', () => {
+      const data = socket.data as SocketData
+      if (data.role === 'player' && data.sessionId && data.playerId) {
+        void engine.setPlayerConnected(data.sessionId, data.playerId, false)
+      }
+    })
+
+    // Grand écran : token d'affichage à usage unique, obtenu par l'hôte via host:createScreenToken.
+    socket.on('host:createScreenToken', (_payload: unknown, ack?: (res: unknown) => void) => {
+      const reply = typeof ack === 'function' ? ack : () => {}
+      try {
+        const { sessionId } = requireHost(socket)
+        const displayToken = crypto.randomUUID()
+        screenTokenToSessionId.set(displayToken, sessionId)
+        reply({ displayToken })
+      } catch (e) {
+        reply({ error: message(e) })
+      }
+    })
+
+    socket.on('screen:join', async (payload: { displayToken?: unknown } | undefined, ack?: (res: unknown) => void) => {
+      const reply = typeof ack === 'function' ? ack : () => {}
+      try {
+        const displayToken = payload?.displayToken
+        if (typeof displayToken !== 'string' || !displayToken) throw new Error('displayToken requis')
+
+        const sessionId = screenTokenToSessionId.get(displayToken)
+        if (!sessionId) throw new Error('displayToken invalide ou déjà utilisé')
+        // Usage unique : consommé dès qu'on le trouve, AVANT toute autre vérification, pour
+        // qu'un token trouvé mais menant à une session introuvable ne reste pas réutilisable.
+        screenTokenToSessionId.delete(displayToken)
+        if (!sessionMetaByEngineId.has(sessionId)) throw new Error('session introuvable')
+
         const data = socket.data as SocketData
         data.role = 'screen'
         data.sessionId = sessionId
