@@ -1,2 +1,7 @@
-export type { QuestionType, QuestionTypeDef } from './types.js'
+export type { QuestionType, QuestionTypeDef, ScoreOpts } from './types.js'
 export { questionTypes, validateQuestionPayload } from './registry.js'
+export { speedBonus } from './scoring.js'
+export type { McqPayload, McqAnswer } from './mcq.js'
+export type { TrueFalsePayload, TrueFalseAnswer } from './truefalse.js'
+export type { TextPayload, TextAnswer } from './text.js'
+export type { SliderPayload, SliderAnswer } from './slider.js'
