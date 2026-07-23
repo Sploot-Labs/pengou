@@ -61,7 +61,7 @@ async function buildApp(): Promise<BuiltApp> {
   await registerAuth(app, auth)
   // registerEditor câble aussi registerReportRoutes (/api/sessions…) — voir editor.ts.
   registerEditor(app, { db: ctx.db, auth, config })
-  const io = attachRealtime(app)
+  const io = attachRealtime(app, config)
 
   const engine = createEngine({
     store: new MemorySessionStore(),
