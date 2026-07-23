@@ -46,6 +46,9 @@ export function MotionProvider({ children }: { children: ReactNode }) {
       fire(cue, ctx) {
         const effect = registry[cue]
         if (!effect) return // no-op : cue non enregistré
+        // reducedMotion: 'skip' (défaut) = on saute le visuel, le son passe. 'crossfade' est
+        // RÉSERVÉ : le fondu enchaîné entre phases est géré par <PhaseTransition> (qui lit
+        // useReducedMotion directement), pas par ce moteur — donc traité comme 'skip' ici pour l'instant.
         if (effect.animation && !reducedMotion) effect.animation(ctx ?? {})
         if (effect.sound) sound.play(effect.sound)
         // media : câblé au MediaOverlay en Task 8 (ici : rien à faire côté moteur).

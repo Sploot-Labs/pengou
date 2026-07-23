@@ -8,7 +8,11 @@ export interface CueEffect {
   sound?: SoundId
   /** Overlay vidéo optionnel. */
   media?: { src: string; mode: 'overlay' | 'background' }
-  /** Comportement visuel en reduced-motion. Défaut : 'skip' (le son passe). */
+  /**
+   * Comportement visuel en reduced-motion. Défaut : 'skip' (le son passe).
+   * 'crossfade' est RÉSERVÉ pour <PhaseTransition> (Task ultérieure) : ce moteur
+   * n'implémente pas de fondu enchaîné générique et traite 'crossfade' comme 'skip'.
+   */
   reducedMotion?: 'skip' | 'crossfade'
 }
 

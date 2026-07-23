@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { render } from '@testing-library/react'
 import { useEffect } from 'react'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { MotionProvider } from './MotionProvider.js'
 import { useCue } from './useCue.js'
 import { registry } from './registry.js'
@@ -13,6 +13,16 @@ function Emit({ cue }: { cue: string }) {
   }, [cue, fire])
   return null
 }
+
+const originalMatchMedia = window.matchMedia
+
+afterEach(() => {
+  // Isolation : les tests qui polluent le registre partagé ou window.matchMedia
+  // ne doivent jamais laisser de résidu, même si une assertion a levé avant leur nettoyage local.
+  delete registry['test.ping']
+  delete registry['test.rm']
+  window.matchMedia = originalMatchMedia
+})
 
 describe('moteur de cues', () => {
   it("un cue non enregistré est un no-op (ne lève pas)", () => {
@@ -34,7 +44,6 @@ describe('moteur de cues', () => {
       </MotionProvider>,
     )
     expect(spy).toHaveBeenCalledOnce()
-    delete registry['test.ping']
   })
 
   it("saute l'animation en reduced-motion mais laisse le cue passer", () => {
@@ -48,6 +57,5 @@ describe('moteur de cues', () => {
       </MotionProvider>,
     )
     expect(anim).not.toHaveBeenCalled()
-    delete registry['test.rm']
   })
 })
