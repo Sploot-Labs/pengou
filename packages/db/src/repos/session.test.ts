@@ -4,7 +4,8 @@ import { startTestDb, runMigrations, schema } from '../index.js'
 import { tenantScope } from '../tenant.js'
 import { createQuiz } from './quiz.js'
 import {
-  createGameSession, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore, listSessionPlayersByScore,
+  createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
+  listSessionPlayersByScore,
 } from './session.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
@@ -109,6 +110,18 @@ describe('repo session scopé au tenant du quiz', () => {
     await expect(
       createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '999999' }),
     ).rejects.toThrow()
+  })
+
+  it('getGameSessionById renvoie la session par id, hostId inclus', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '112233' })
+    const found = await getGameSessionById(ctx.db, session!.id)
+    expect(found?.id).toBe(session!.id)
+    expect(found?.hostId).toBe(ownerA)
+  })
+
+  it('getGameSessionById renvoie null pour un id inconnu', async () => {
+    const found = await getGameSessionById(ctx.db, crypto.randomUUID())
+    expect(found).toBeNull()
   })
 
   it('createGameSession réutilise un PIN déjà pris par une session ended (index partiel)', async () => {

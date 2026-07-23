@@ -32,6 +32,14 @@ export async function createGameSession(
   return row
 }
 
+// Lecture directe par id (pas de scope tenant requis : l'appelant — la passerelle Socket.IO,
+// `host:reconnect` — connaît déjà l'id de session moteur/DB associé et veut seulement vérifier
+// `host_id`, en défense en profondeur de la vérification faite sur l'état mémoire du moteur).
+export async function getGameSessionById(db: Db, sessionId: string): Promise<GameSession | null> {
+  const [row] = await db.select().from(schema.gameSession).where(eq(schema.gameSession.id, sessionId))
+  return row ?? null
+}
+
 export async function addSessionPlayer(
   db: Db,
   sessionId: string,

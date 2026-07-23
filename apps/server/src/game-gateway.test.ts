@@ -841,6 +841,285 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
+  it("host:reconnect : un NOUVEAU socket authentifié comme le même hôte reprend la main (host:start/host:reveal) ; un autre utilisateur authentifié est refusé", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const cookie = await signUp(app, 'gateway-host-reconnect@example.com')
+      const quizRes = await app.inject({
+        method: 'POST',
+        url: '/api/quizzes',
+        payload: { title: 'Quiz reconnexion hôte' },
+        headers: { 'content-type': 'application/json', cookie },
+      })
+      expect(quizRes.statusCode).toBe(201)
+      const quiz = quizRes.json() as { id: string }
+      const questionRes = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quiz.id}/questions`,
+        payload: {
+          type: 'mcq',
+          prompt: 'Q ?',
+          timeLimit: 20,
+          payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+        },
+        headers: { 'content-type': 'application/json', cookie },
+      })
+      expect(questionRes.statusCode).toBe(201)
+
+      const hostSocketA = await connectClient(url, { cookie })
+      clients.push(hostSocketA)
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
+        hostSocketA,
+        'host:create',
+        { quizId: quiz.id },
+      )
+      expect(created.error).toBeUndefined()
+      const { sessionId } = created as { sessionId: string; pin: string }
+
+      // L'hôte A disparaît (ex. rechargement de page) — l'ancien socket ne peut plus rien piloter.
+      hostSocketA.disconnect()
+      await new Promise((resolve) => setTimeout(resolve, 150))
+
+      // Un NOUVEAU socket, authentifié avec le MÊME utilisateur (même cookie), reprend la main.
+      const hostSocketB = await connectClient(url, { cookie })
+      clients.push(hostSocketB)
+      const reconnectAck = await ack<{ sessionId?: string; pin?: string; phase?: string; error?: string }>(
+        hostSocketB,
+        'host:reconnect',
+        { sessionId },
+      )
+      expect(reconnectAck.error).toBeUndefined()
+      expect(reconnectAck.sessionId).toBe(sessionId)
+      expect(reconnectAck.phase).toBe('lobby')
+
+      // hostSocketB peut désormais piloter la partie exactement comme l'aurait fait hostSocketA.
+      const startAck = await ack<{ error?: string }>(hostSocketB, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+      const revealAck = await ack<{ error?: string }>(hostSocketB, 'host:reveal', {})
+      expect(revealAck.error).toBeUndefined()
+
+      // Un AUTRE utilisateur authentifié (pas l'hôte de CETTE session) tente host:reconnect → refusé.
+      const otherCookie = await signUp(app, 'gateway-host-reconnect-intruder@example.com')
+      const intruder = await connectClient(url, { cookie: otherCookie })
+      clients.push(intruder)
+      const intruderAck = await ack<{ error?: string; sessionId?: string }>(intruder, 'host:reconnect', { sessionId })
+      expect(intruderAck.error).toBeTruthy()
+      expect(intruderAck.sessionId).toBeUndefined()
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("screen:reconnect : un écran déconnecté puis reconnecté rejoint à nouveau et continue de recevoir les diffusions", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin, sessionId } = await setupHostedSession(app, url, 'gateway-screen-reconnect@example.com')
+      clients.push(hostSocket)
+
+      const tokenAck = await ack<{ displayToken?: string }>(hostSocket, 'host:createScreenToken', {})
+      const displayToken = tokenAck.displayToken!
+
+      const screen = await connectClient(url)
+      clients.push(screen)
+      const joinRes = await ack<{ ok?: boolean; error?: string }>(screen, 'screen:join', { displayToken })
+      expect(joinRes.error).toBeUndefined()
+      expect(joinRes.ok).toBe(true)
+
+      // Coupure réseau : l'écran se déconnecte.
+      screen.disconnect()
+      await new Promise((resolve) => setTimeout(resolve, 150))
+
+      // Reconnexion via un NOUVEAU socket, muni du MÊME displayToken (déjà connu du client, ex.
+      // localStorage) — sans ce chemin, le token déjà consommé par screen:join rendrait le
+      // projecteur définitivement inaccessible après le moindre blip réseau.
+      const screen2 = await connectClient(url)
+      clients.push(screen2)
+      const reconnectRes = await ack<{ ok?: boolean; error?: string }>(
+        screen2,
+        'screen:reconnect',
+        { sessionId, displayToken },
+      )
+      expect(reconnectRes.error).toBeUndefined()
+      expect(reconnectRes.ok).toBe(true)
+
+      // Le nouvel écran continue bien de recevoir les diffusions de la room.
+      const lobbyPromise = waitFor<{ players: Array<{ id: string }> }>(screen2, 'lobby:update')
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      await ack(player1, 'player:join', { pin, nickname: 'Zoé' })
+      const lobby = await lobbyPromise
+      expect(lobby.players).toHaveLength(1)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("player:join et screen:join EN PLEINE QUESTION (latecomer) reçoivent question:show (sans bonne réponse) + timer", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-latecomer@example.com', 25)
+      clients.push(hostSocket)
+
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+
+      // Un joueur rejoint APRÈS le lancement de la question (PIN partagé en cours de manche).
+      const latePlayer = await connectClient(url)
+      clients.push(latePlayer)
+      const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(latePlayer, 'question:show')
+      const timerPromise = waitFor<{ timeLimit?: number }>(latePlayer, 'timer')
+      const joinAck = await ack<{ playerId?: string; error?: string }>(latePlayer, 'player:join', { pin, nickname: 'Latecomer' })
+      expect(joinAck.error).toBeUndefined()
+
+      const show = await showPromise
+      for (const option of show.payload.options) expect(option).not.toHaveProperty('correct')
+      expect(JSON.stringify(show)).not.toContain('correct') // anti-triche
+      const timer = await timerPromise
+      expect(timer.timeLimit).toBe(25)
+
+      // Un grand écran qui rejoint APRÈS le lancement reçoit aussi la question en cours.
+      const tokenAck = await ack<{ displayToken?: string }>(hostSocket, 'host:createScreenToken', {})
+      const screen = await connectClient(url)
+      clients.push(screen)
+      const screenShowPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(screen, 'question:show')
+      const screenJoinAck = await ack<{ ok?: boolean; error?: string }>(screen, 'screen:join', { displayToken: tokenAck.displayToken })
+      expect(screenJoinAck.error).toBeUndefined()
+      const screenShow = await screenShowPromise
+      expect(JSON.stringify(screenShow)).not.toContain('correct') // anti-triche
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("host:skip : avance SANS jamais émettre question:reveal, mais crédite et persiste les réponses déjà données (vrai skip, pas un alias de reveal)", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin, quizId } = await setupHostedSession(app, url, 'gateway-skip@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      const join1 = await ack<{ playerId?: string; error?: string }>(player1, 'player:join', { pin, nickname: 'Alice' })
+      expect(join1.error).toBeUndefined()
+
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+
+      const answerAck = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect(answerAck.accepted).toBe(true)
+
+      const noRevealLeak = raceNoEvent(player1, 'question:reveal', 500)
+      const scoreboardPromise = waitFor<{ ranking: Array<{ playerId: string; score: number }> }>(player1, 'scoreboard')
+      const skipAck = await ack<{ ok?: boolean; error?: string }>(hostSocket, 'host:skip', {})
+      expect(skipAck.error).toBeUndefined()
+      expect(await noRevealLeak).toBe(true) // le timeout a gagné : aucune fuite de question:reveal
+
+      const scoreboard = await scoreboardPromise
+      const alice = scoreboard.ranking.find((r) => r.playerId === join1.playerId)
+      expect(alice).toBeDefined()
+      expect(alice!.score).toBeGreaterThan(0) // créditée malgré le skip (elle avait répondu)
+
+      // La partie avance bien (quiz mono-question → podium via host:next, sans host:reveal
+      // préalable requis puisque la manche a déjà été révélée/créditée par host:skip).
+      const podiumPromise = waitFor<{ top: Array<{ playerId: string; score: number }> }>(player1, 'podium')
+      const nextAck = await ack<{ phase?: string; error?: string }>(hostSocket, 'host:next', {})
+      expect(nextAck.error).toBeUndefined()
+      const podium = await podiumPromise
+      expect(podium.top[0]!.score).toBeGreaterThan(0)
+
+      // Persistance : la réponse d'Alice a bien été enregistrée en base malgré le skip.
+      const [dbSession] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, quizId))
+      const dbAnswers = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+      expect(dbAnswers).toHaveLength(1)
+      expect(dbAnswers[0].isCorrect).toBe(true)
+      expect(dbAnswers[0].points).toBeGreaterThan(0)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("host:skip émis depuis le lobby (avant host:start) est refusé, sans fuite de scoreboard", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-skip-lobby@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+
+      const noScoreboardLeak = raceNoEvent(player1, 'scoreboard', 500)
+      const skipAck = await ack<{ error?: string }>(hostSocket, 'host:skip', {})
+      expect(skipAck.error).toBeTruthy()
+      expect(await noScoreboardLeak).toBe(true)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 15_000)
+
+  it("player:reconnect inclut `alreadyAnswered` : true si le joueur avait déjà répondu à la question en cours, false sinon", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-already-answered@example.com', 30)
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player1, 'player:join', { pin, nickname: 'Alice' })
+      expect(join1.error).toBeUndefined()
+
+      const player2 = await connectClient(url)
+      clients.push(player2)
+      const join2 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player2, 'player:join', { pin, nickname: 'Bob' })
+      expect(join2.error).toBeUndefined()
+
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+
+      // Alice répond, Bob ne répond pas.
+      const answerAck = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect(answerAck.accepted).toBe(true)
+
+      player1.disconnect()
+      player2.disconnect()
+      await new Promise((resolve) => setTimeout(resolve, 150))
+
+      const player1b = await connectClient(url)
+      clients.push(player1b)
+      const reconnect1 = await ack<{ alreadyAnswered?: boolean; error?: string }>(
+        player1b,
+        'player:reconnect',
+        { pin, joinToken: join1.joinToken },
+      )
+      expect(reconnect1.error).toBeUndefined()
+      expect(reconnect1.alreadyAnswered).toBe(true)
+
+      const player2b = await connectClient(url)
+      clients.push(player2b)
+      const reconnect2 = await ack<{ alreadyAnswered?: boolean; error?: string }>(
+        player2b,
+        'player:reconnect',
+        { pin, joinToken: join2.joinToken },
+      )
+      expect(reconnect2.error).toBeUndefined()
+      expect(reconnect2.alreadyAnswered).toBe(false)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
   it("host:reveal émis depuis le lobby (avant host:start) est refusé, sans fuite de question:reveal/scoreboard", async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
