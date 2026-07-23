@@ -48,13 +48,17 @@ export async function deleteQuestion(scope: TenantScope, quizId: string, questio
 
 export async function reorderQuestions(scope: TenantScope, quizId: string, orderedIds: string[]): Promise<boolean> {
   if (!(await assertQuizInTenant(scope, quizId))) return false
-  await scope.db.transaction(async (tx) => {
+  const matched = await scope.db.transaction(async (tx) => {
+    let count = 0
     for (let i = 0; i < orderedIds.length; i++) {
-      await tx.update(schema.question).set({ orderIndex: i })
+      const rows = await tx.update(schema.question).set({ orderIndex: i })
         .where(and(eq(schema.question.id, orderedIds[i]), eq(schema.question.quizId, quizId)))
+        .returning({ id: schema.question.id })
+      count += rows.length
     }
+    return count
   })
-  return true
+  return matched === orderedIds.length
 }
 
 async function nextOrderIndex(scope: TenantScope, quizId: string): Promise<number> {

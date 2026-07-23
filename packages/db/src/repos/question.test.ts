@@ -100,4 +100,18 @@ describe('repo question scopé par jointure sur quiz', () => {
     const list = await listQuestions(scope, quiz.id)
     expect(list?.map((q) => q.id)).toEqual([q1!.id, q2!.id])
   })
+
+  it('reorderQuestions renvoie false et ne touche pas un autre quiz du même tenant (id empoisonné)', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    const quizA2 = await createQuiz(scope, { ownerId: ownerA, title: 'Quiz A2 sibling' })
+    const foreign = await createQuestion(scope, quizA2.id, { type: 'mcq', prompt: 'Foreign', timeLimit: 20, payload: validMcq })
+    const foreignOrderIndexBefore = foreign!.orderIndex
+
+    const ok = await reorderQuestions(scope, quizA, [foreign!.id])
+    expect(ok).toBe(false)
+
+    const foreignAfter = await listQuestions(scope, quizA2.id)
+    const untouched = foreignAfter?.find((q) => q.id === foreign!.id)
+    expect(untouched?.orderIndex).toBe(foreignOrderIndexBefore)
+  })
 })
