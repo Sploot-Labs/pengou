@@ -8,6 +8,6 @@ export {
   createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz, type Quiz,
 } from './repos/quiz.js'
 export {
-  createQuestion, listQuestions, updateQuestion, deleteQuestion, reorderQuestions, type Question,
+  createQuestion, listQuestions, getQuestion, updateQuestion, deleteQuestion, reorderQuestions, type Question,
 } from './repos/question.js'
 export * as schema from './schema.js'

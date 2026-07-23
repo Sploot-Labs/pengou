@@ -2,7 +2,7 @@ import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import { startTestDb, runMigrations, schema } from '../index.js'
 import { tenantScope } from '../tenant.js'
 import { createQuiz } from './quiz.js'
-import { createQuestion, listQuestions, updateQuestion, deleteQuestion, reorderQuestions } from './question.js'
+import { createQuestion, listQuestions, getQuestion, updateQuestion, deleteQuestion, reorderQuestions } from './question.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
 let tenantA: string, tenantB: string, ownerA: string, ownerB: string, quizA: string
@@ -36,6 +36,25 @@ describe('repo question scopé par jointure sur quiz', () => {
     expect(await listQuestions(tenantScope(ctx.db, tenantB), quizA)).toBeNull()
     const own = await listQuestions(tenantScope(ctx.db, tenantA), quizA)
     expect(Array.isArray(own)).toBe(true)
+  })
+
+  it('getQuestion renvoie la question du quiz du tenant', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    const created = await createQuestion(scope, quizA, { type: 'mcq', prompt: 'GetMe', timeLimit: 20, payload: validMcq })
+    const fetched = await getQuestion(scope, quizA, created!.id)
+    expect(fetched?.id).toBe(created!.id)
+    expect(fetched?.type).toBe('mcq')
+  })
+
+  it('getQuestion renvoie null si le quiz appartient à un autre tenant (pas de fuite)', async () => {
+    const created = await createQuestion(tenantScope(ctx.db, tenantA), quizA, { type: 'mcq', prompt: 'Hidden', timeLimit: 20, payload: validMcq })
+    const leaked = await getQuestion(tenantScope(ctx.db, tenantB), quizA, created!.id)
+    expect(leaked).toBeNull()
+  })
+
+  it('getQuestion renvoie null pour un questionId inexistant', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    expect(await getQuestion(scope, quizA, '00000000-0000-0000-0000-000000000000')).toBeNull()
   })
 
   it('createQuestion incrémente orderIndex automatiquement', async () => {

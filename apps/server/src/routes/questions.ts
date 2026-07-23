@@ -1,5 +1,5 @@
 import type { FastifyInstance } from 'fastify'
-import { createQuestion, listQuestions, updateQuestion, deleteQuestion, reorderQuestions, type Db } from '@splootlabs/db'
+import { createQuestion, listQuestions, getQuestion, updateQuestion, deleteQuestion, reorderQuestions, type Db } from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
 import { validateQuestionPayload, questionTypes, type QuestionType } from '@splootlabs/quiz'
 import { requireUser, resolveScopeOr403 } from '../require-user.js'
@@ -15,7 +15,7 @@ function isPositiveInt(value: unknown): value is number {
 }
 
 function isQuestionType(value: unknown): value is QuestionType {
-  return typeof value === 'string' && value in questionTypes
+  return typeof value === 'string' && Object.prototype.hasOwnProperty.call(questionTypes, value)
 }
 
 export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
@@ -76,11 +76,12 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
     },
   )
 
-  // Revalidation du payload à la modification : le type ne peut pas être changé après
-  // création (colonne immuable côté repo). Si `payload` est fourni, le type utilisé pour
-  // le revalider est celui envoyé dans le body (`type`, optionnel) — s'il est absent, on
-  // exige explicitement que le body inclue `type` pour éviter de valider contre le mauvais
-  // schéma sans faire un aller-retour DB supplémentaire pour lire le type existant.
+  // Revalidation du payload à la modification : le type d'une question est IMMUABLE via
+  // cette route (aucun champ `type` dans `updateQuestion`). Si `payload` est fourni, on va
+  // chercher le type RÉELLEMENT STOCKÉ via `getQuestion` et on valide contre celui-ci — tout
+  // `type` envoyé par le client est ignoré pour la validation (il ne peut jamais faire
+  // dévier le schéma utilisé). Sans ça, un client pourrait déclarer un type différent du
+  // type stocké et faire persister un payload mal formé pour le moteur de scoring (Plan 5).
   app.patch<{ Params: { quizId: string; questionId: string } }>(
     '/api/quizzes/:quizId/questions/:questionId',
     { preHandler: requireUser },
@@ -89,7 +90,7 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       if (!scope) return
 
       const body = request.body as
-        | { type?: unknown; prompt?: unknown; timeLimit?: unknown; payload?: unknown; media?: unknown }
+        | { prompt?: unknown; timeLimit?: unknown; payload?: unknown; media?: unknown }
         | undefined
 
       const patch: Partial<{ prompt: string; timeLimit: number; payload: unknown; media: string | null }> = {}
@@ -109,11 +110,10 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
         patch.media = body.media
       }
       if (body?.payload !== undefined) {
-        if (!isQuestionType(body.type)) {
-          return reply.code(400).send({ error: 'Le champ type est requis pour revalider le payload modifié.' })
-        }
+        const existing = await getQuestion(scope, request.params.quizId, request.params.questionId)
+        if (!existing) return reply.code(404).send({ error: 'Question ou quiz introuvable.' })
         try {
-          patch.payload = validateQuestionPayload(body.type, body.payload)
+          patch.payload = validateQuestionPayload(existing.type as QuestionType, body.payload)
         } catch {
           return reply.code(400).send({ error: 'Le payload est invalide pour ce type de question.' })
         }

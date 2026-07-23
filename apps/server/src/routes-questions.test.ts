@@ -204,6 +204,44 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
     await app.close()
   })
 
+  it('PATCH valide le payload contre le type STOCKÉ, pas contre un type déclaré par le client', async () => {
+    const app = await buildApp()
+    const { cookie, quizId } = await createQuizAndCookie(app, 'q7bis@example.com')
+
+    const create = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/questions`,
+      payload: { type: 'mcq', prompt: 'Question mcq', timeLimit: 20, payload: validMcq },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    const created = create.json() as { id: string; type: string }
+    expect(created.type).toBe('mcq')
+
+    // Le client déclare (à tort) `type: 'truefalse'` et envoie un payload valide pour
+    // `truefalse` mais invalide pour `mcq` (le type RÉEL, stocké en base). Le bypass
+    // consisterait à valider contre le type déclaré par le client au lieu du type stocké —
+    // ici on attend un 400 car le payload ne correspond pas au type mcq réellement stocké.
+    const bypassAttempt = await app.inject({
+      method: 'PATCH',
+      url: `/api/quizzes/${quizId}/questions/${created.id}`,
+      payload: { type: 'truefalse', payload: { correct: true } },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(bypassAttempt.statusCode).toBe(400)
+
+    // Un payload valide pour le type stocké (mcq) doit toujours passer.
+    const validUpdate = await app.inject({
+      method: 'PATCH',
+      url: `/api/quizzes/${quizId}/questions/${created.id}`,
+      payload: { payload: { options: [{ label: 'X', correct: true }, { label: 'Y', correct: false }] } },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(validUpdate.statusCode).toBe(200)
+    expect((validUpdate.json() as { type: string }).type).toBe('mcq')
+
+    await app.close()
+  })
+
   it('PATCH sous un quiz inexistant/étranger → 404', async () => {
     const app = await buildApp()
     const { cookie, quizId } = await createQuizAndCookie(app, 'q8@example.com')

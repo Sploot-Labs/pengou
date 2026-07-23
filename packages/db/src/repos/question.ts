@@ -29,6 +29,13 @@ export async function listQuestions(scope: TenantScope, quizId: string): Promise
     .orderBy(schema.question.orderIndex)
 }
 
+export async function getQuestion(scope: TenantScope, quizId: string, questionId: string): Promise<Question | null> {
+  if (!(await assertQuizInTenant(scope, quizId))) return null
+  const [row] = await scope.db.select().from(schema.question)
+    .where(and(eq(schema.question.id, questionId), eq(schema.question.quizId, quizId)))
+  return row ?? null
+}
+
 export async function updateQuestion(scope: TenantScope, quizId: string, questionId: string, patch: Partial<{ prompt: string; timeLimit: number; payload: unknown; media: string | null }>): Promise<Question | null> {
   if (!(await assertQuizInTenant(scope, quizId))) return null
   const [row] = await scope.db.update(schema.question)
