@@ -16,9 +16,22 @@ export interface CueEffect {
   reducedMotion?: 'skip' | 'crossfade'
 }
 
+import { pulseGreen, shake, sweepIn } from './effects.js'
+
 /**
  * LA table cue → effets. Ajouter une animation/son/vidéo « partout » = éditer
- * CE fichier, jamais un écran. Démarre quasi vide (rempli surface par surface,
- * Tasks 9+).
+ * CE fichier, jamais un écran.
  */
-export const registry: Partial<Record<string, CueEffect>> = {}
+export const registry: Partial<Record<string, CueEffect>> = {
+  'phase.enter:podium': {
+    animation: sweepIn,
+    sound: 'fanfare',
+    media: { src: 'confetti-bg', mode: 'overlay' },
+  },
+  'phase.enter:scoreboard': { animation: sweepIn },
+  'phase.enter:reveal': { animation: sweepIn },
+  'answer.correct': { animation: pulseGreen, sound: 'ding' },
+  'answer.incorrect': { animation: shake, sound: 'buzz' },
+  'timer.urgent': { sound: 'tick', reducedMotion: 'skip' },
+  'player.join': { sound: 'ding' },
+}
