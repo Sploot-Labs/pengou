@@ -5,6 +5,11 @@ export default defineConfig({
   plugins: [react()],
   build: { outDir: 'dist' },
   server: {
+    // Vite bloque par défaut toute requête dont le Host n'est pas localhost
+    // (« This host is not allowed »). Pour exposer le dev server via un tunnel
+    // (ngrok) le temps d'un test, on autorise UNIQUEMENT les domaines ngrok
+    // (wildcards à point initial) — pas « n'importe quel host ».
+    allowedHosts: ['.ngrok-free.app', '.ngrok.app', '.ngrok.io', '.ngrok.dev'],
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
@@ -25,7 +30,24 @@ export default defineConfig({
           })
         },
       },
-      '/socket.io': { target: 'http://localhost:3000', ws: true, changeOrigin: false },
+      '/socket.io': {
+        target: 'http://localhost:3000',
+        ws: true,
+        changeOrigin: false,
+        // Même raison que /api : le CORS Socket.IO (resserré au lot hardening)
+        // n'autorise que l'origine de baseURL (+ localhost en dev). Sans cette
+        // réécriture, un accès via tunnel (ngrok) présenterait l'Origin du
+        // tunnel → handshake rejeté. On réécrit vers baseURL à la fois sur la
+        // requête HTTP (handshake polling) ET sur l'upgrade WebSocket.
+        configure: (proxy) => {
+          proxy.on('proxyReq', (proxyReq) => {
+            proxyReq.setHeader('origin', 'http://localhost:3000')
+          })
+          proxy.on('proxyReqWs', (proxyReq) => {
+            proxyReq.setHeader('origin', 'http://localhost:3000')
+          })
+        },
+      },
     },
   },
 })
