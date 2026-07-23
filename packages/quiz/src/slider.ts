@@ -15,8 +15,18 @@ export type SliderPayload = z.infer<typeof sliderSchema>
 const answerSchema = z.object({ value: z.number() })
 export type SliderAnswer = z.infer<typeof answerSchema>
 
+/** Tolérance en unités du curseur : `max(1, round(5% de l'étendue [min, max]))`.
+ * Exportée (pas seulement interne à `slider.ts`) car le front (`apps/web/src/
+ * realtime/distribution.ts`, décodage de `question:reveal` pour l'affichage
+ * hôte/grand écran) doit appliquer EXACTEMENT la même règle pour marquer une
+ * valeur reçue comme « dans la tolérance » — une formule dupliquée à la main
+ * dériverait silencieusement de celle-ci au moindre changement ici. */
+export function sliderTolerance(min: number, max: number): number {
+  return Math.max(1, Math.round(0.05 * (max - min)))
+}
+
 function tolerance(p: SliderPayload): number {
-  return Math.max(1, Math.round(0.05 * (p.max - p.min)))
+  return sliderTolerance(p.min, p.max)
 }
 
 export const slider: QuestionTypeDef<SliderPayload, SliderAnswer> = {

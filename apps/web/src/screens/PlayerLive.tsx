@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { sliderTolerance } from '@splootlabs/quiz'
 import { clearPlayerSession, loadPlayerSession } from '../realtime/playerSession'
 import { useGameSocket } from '../realtime/useGameSocket'
 import { AnswerTile, Button, TimerRing } from '../ui'
@@ -125,14 +126,13 @@ function evaluateText(correct: TextCorrect, text: string): ResultKind {
     : 'incorrect'
 }
 
-/** Même tolérance que `packages/quiz/src/slider.ts` : `max(1, round(5% de l'étendue))`. */
 function evaluateSlider(
   correct: SliderCorrect,
   value: number | null,
 ): { kind: ResultKind; diff: number | null } {
   if (value === null) return { kind: 'timeout', diff: null }
   const diff = Math.abs(value - correct.correct)
-  const tolerance = Math.max(1, Math.round(0.05 * (correct.max - correct.min)))
+  const tolerance = sliderTolerance(correct.min, correct.max)
   if (diff === 0) return { kind: 'correct', diff: 0 }
   if (diff <= tolerance) return { kind: 'partial', diff }
   return { kind: 'incorrect', diff }

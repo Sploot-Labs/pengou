@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { mcq } from './mcq.js'
 import { truefalse } from './truefalse.js'
 import { text } from './text.js'
-import { slider } from './slider.js'
+import { slider, sliderTolerance } from './slider.js'
 
 const opts = (timeMs: number) => ({ timeMs, maxMs: 10000, basePoints: 1000 })
 
@@ -186,5 +186,22 @@ describe('slider gameplay', () => {
         expect(slider.score(payload, answer, opts(0))).toBeGreaterThan(0)
       }
     }
+  })
+
+  // `sliderTolerance` est exportée précisément pour que d'autres consommateurs
+  // (le front, `apps/web/src/realtime/distribution.ts` — décodage de
+  // `question:reveal` pour l'affichage hôte/grand écran) n'aient JAMAIS à
+  // recopier à la main la formule de tolérance : ce test fige l'accord entre
+  // la fonction exportée et le comportement réel de `isCorrect`, pour toute
+  // régression future de l'une ou l'autre.
+  it('sliderTolerance() est la même tolérance que celle appliquée par isCorrect', () => {
+    const tol = sliderTolerance(payload.min, payload.max)
+    expect(tol).toBe(5) // plage 100 → round(0.05*100) = 5, comme les tests ci-dessus
+    expect(slider.isCorrect(payload, { value: payload.correct + tol })).toBe(true)
+    expect(slider.isCorrect(payload, { value: payload.correct + tol + 1 })).toBe(false)
+  })
+
+  it('sliderTolerance() a un plancher de 1 même sur une très petite plage', () => {
+    expect(sliderTolerance(0, 4)).toBe(1) // round(0.05*4) = 0 → plancher à 1
   })
 })

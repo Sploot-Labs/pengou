@@ -83,6 +83,18 @@ export function BigScreen() {
     token ? null : 'Lien invalide : jeton d’affichage manquant dans l’URL.',
   )
   const joinAttemptedRef = useRef(false)
+  // `true` une fois `screen:join` réellement réussi au moins une fois — sert
+  // à distinguer, après une coupure réseau, un échec de RE-jointure (message
+  // actionnable spécifique) d'un tout premier échec (message serveur brut,
+  // déjà géré ci-dessous).
+  const hasJoinedOnceRef = useRef(false)
+  // Reflète l'état de transport Socket.IO, INDÉPENDAMMENT de `joinState` :
+  // sans `connectionStateRecovery` côté serveur (aucun configuré — voir
+  // `apps/server/src/realtime.ts`), toute coupure réseau fait renaître la
+  // socket avec un `socket.id`/`socket.data` neufs et SANS ré-appartenance à
+  // la room de session au reconnect — sans ce suivi, l'écran resterait figé
+  // sur son dernier contenu, sans le moindre signe qu'il ne reçoit plus rien.
+  const [connection, setConnection] = useState<'online' | 'reconnecting'>('online')
 
   const [phase, setPhase] = useState<Phase>('lobby')
   const [players, setPlayers] = useState<LobbyPlayer[]>([])
@@ -114,27 +126,48 @@ export function BigScreen() {
       joinAttemptedRef.current = true
       try {
         await emitAck('screen:join', { displayToken: token })
-        if (!cancelled) setJoinState('joined')
+        if (cancelled) return
+        hasJoinedOnceRef.current = true
+        setConnection('online')
+        setJoinState('joined')
       } catch (err) {
-        if (!cancelled) {
-          setJoinState('error')
-          setJoinError(
-            err instanceof Error
+        if (cancelled) return
+        setJoinState('error')
+        setJoinError(
+          // Une coupure réseau après une jointure réussie fait renaître la
+          // socket (nouveau socket.id/socket.data, room perdue) : le
+          // prochain `screen:join` réutilise FORCÉMENT le même jeton — à
+          // usage unique, il a déjà été consommé par la première jointure.
+          // Message actionnable plutôt que la string technique du serveur
+          // (« displayToken invalide ou déjà utilisé »), qui ne dirait pas
+          // à l'opérateur QUOI FAIRE.
+          hasJoinedOnceRef.current
+            ? 'Lien grand écran expiré après une coupure réseau. Demandez un nouveau lien à l’hôte.'
+            : err instanceof Error
               ? err.message
               : 'Connexion au grand écran impossible.',
-          )
-        }
+        )
       }
     }
 
     if (socket.connected) void join()
     const offConnect = on('connect', () => void join())
+    const offDisconnect = on('disconnect', () => {
+      setConnection('reconnecting')
+      // Autorise une nouvelle tentative au prochain `connect` (voir le
+      // commentaire de `hasJoinedOnceRef` ci-dessus) — elle échouera très
+      // probablement (jeton à usage unique déjà consommé), mais ÉCHOUERA
+      // VISIBLEMENT (voir le catch de `join()`), jamais en gelant l'écran
+      // silencieusement sur son dernier contenu.
+      joinAttemptedRef.current = false
+    })
     return () => {
       cancelled = true
       offConnect()
+      offDisconnect()
     }
-    // Une seule tentative de jointure pour la durée de vie du composant —
-    // `token` ne change jamais après le premier rendu (lu depuis l'URL).
+    // Un seul montage : `token` ne change jamais après le premier rendu (lu
+    // depuis l'URL).
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token])
 
@@ -365,6 +398,16 @@ export function BigScreen() {
 
   return (
     <main className="big-screen" id="contenu-principal" tabIndex={-1}>
+      {/* Coupure réseau : jamais un gel silencieux — voir le commentaire de
+          `connection` plus haut. Superposé au contenu de phase (qui reste
+          affiché tel quel derrière, faute de mieux à montrer) plutôt que de
+          le remplacer, pour que la salle continue de voir le PIN/la
+          question pendant la tentative de reconnexion. */}
+      {connection === 'reconnecting' && (
+        <p className="player-net player-net--reconnecting" role="alert">
+          Connexion perdue — reconnexion…
+        </p>
+      )}
       {(phase === 'question' || phase === 'reveal' || phase === 'scoreboard') && (
         <div className="big-join-reminder">
           Rejoignez sur <strong>{window.location.host}</strong>

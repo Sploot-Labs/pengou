@@ -60,6 +60,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@splootlabs/quiz':
+        specifier: workspace:*
+        version: link:../../packages/quiz
       react:
         specifier: ^18.3.0
         version: 18.3.1

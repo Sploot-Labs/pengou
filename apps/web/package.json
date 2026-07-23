@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "@splootlabs/quiz": "workspace:*",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-router-dom": "^6.28.0",

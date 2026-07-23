@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import { Button, Logo, PinDisplay, TimerRing } from '../ui'
@@ -91,10 +91,46 @@ function buildScreenUrl(sessionId: string, displayToken: string, pin: string | n
   return url.toString()
 }
 
+/**
+ * État de connexion de la socket PARTAGÉE, indépendant de `phase` :
+ *  - 'online' : transport connecté, aucune coupure détectée depuis le montage.
+ *  - 'reconnecting' : coupure en cours, Socket.IO retente automatiquement.
+ *  - 'broken' : le transport a effectivement RECONNECTÉ après une coupure —
+ *    mais sans `connectionStateRecovery` côté serveur (aucun configuré, voir
+ *    `apps/server/src/realtime.ts`), cette reconnexion crée un NOUVEAU socket
+ *    serveur (socket.id/socket.data neufs, room perdue). L'autorité « hôte »
+ *    posée par `host:create` (voir `GameSocketProvider.tsx`) est donc perdue
+ *    IRRÉVOCABLEMENT pour ce montage : tout `host:*` échouera désormais avec
+ *    « action réservée à l'hôte de la session ». Un vrai correctif demande un
+ *    changement serveur (recovery, ou un `host:reconnect` — suivi Plan 7) ;
+ *    côté front, le mieux qu'on puisse faire est de le détecter et de guider
+ *    l'hôte vers la seule issue possible : relancer depuis l'éditeur.
+ */
+type ConnectionState = 'online' | 'reconnecting' | 'broken'
+
+const HOST_AUTHORITY_LOST_MESSAGE =
+  'La connexion a été interrompue puis rétablie, mais cette partie ne peut plus être pilotée depuis cet onglet (le serveur ne permet pas de reprendre l’autorité hôte après une coupure). Retournez à l’éditeur et relancez la partie.'
+
+/** Traduit une erreur serveur brute en message actionnable. La string exacte
+ * « action réservée à l'hôte de la session » (`requireHost`, game-gateway.ts)
+ * ne dit à l'hôte ni CE QUI s'est passé ni QUOI FAIRE — si elle survient
+ * alors qu'on sait la connexion compromise (`connection === 'broken'`), ou
+ * même si on ne le savait pas encore (course reconnect/clic), on la remplace
+ * par une consigne claire plutôt que de l'afficher telle quelle. */
+function friendlyActionError(err: unknown, connection: ConnectionState): string {
+  if (connection === 'broken') return HOST_AUTHORITY_LOST_MESSAGE
+  const message = err instanceof Error ? err.message : null
+  if (message === "action réservée à l'hôte de la session") return HOST_AUTHORITY_LOST_MESSAGE
+  return message ?? 'Une erreur est survenue.'
+}
+
 export function HostLive() {
   const { sessionId } = useParams<{ sessionId: string }>()
   const location = useLocation()
-  const { emitAck, on } = useSharedGameSocket()
+  const navigate = useNavigate()
+  const { emitAck, on, socket } = useSharedGameSocket()
+
+  const [connection, setConnection] = useState<ConnectionState>('online')
 
   // Transmis par HostEditor au moment de la navigation (`host:create` ne
   // redonne le PIN/titre qu'à CE moment précis ; aucun événement ultérieur
@@ -152,6 +188,26 @@ export function HostLive() {
   /* ---------------------------------------------------------------- */
 
   useEffect(() => {
+    // `hasConnectedOnce` distingue la toute première connexion (rien à
+    // signaler) d'une VRAIE reconnexion (voir le commentaire de
+    // `ConnectionState` ci-dessus) — même garde que PlayerLive.tsx pour le
+    // même besoin. Capturé dans une closure (pas un ref) : cet effet ne
+    // monte qu'une fois, donc pas de risque de valeur périmée entre rendus.
+    let hasConnectedOnce = socket.connected
+    const offConnect = on('connect', () => {
+      if (hasConnectedOnce) {
+        // Reconnexion effective : l'autorité hôte est perdue pour de bon
+        // (voir ConnectionState) — signalé IMMÉDIATEMENT, sans attendre
+        // qu'un clic échoue, contrairement au comportement précédent.
+        setConnection('broken')
+      } else {
+        hasConnectedOnce = true
+      }
+    })
+    const offDisconnect = on('disconnect', () => {
+      setConnection((prev) => (prev === 'broken' ? 'broken' : 'reconnecting'))
+    })
+
     const offLobby = on<{ players: LobbyPlayer[] }>('lobby:update', ({ players: list }) => {
       setPlayers(list)
     })
@@ -192,6 +248,8 @@ export function HostLive() {
     })
 
     return () => {
+      offConnect()
+      offDisconnect()
       offLobby()
       offShow()
       offTimer()
@@ -274,10 +332,18 @@ export function HostLive() {
   async function runHostAction(event: string): Promise<void> {
     setActionPending(true)
     setActionError(null)
+    // Autorité déjà connue perdue (voir ConnectionState) : inutile d'attendre
+    // un aller-retour réseau qui échouera à coup sûr — message actionnable
+    // immédiat plutôt qu'un délai suivi de la même conclusion.
+    if (connection === 'broken') {
+      setActionError(HOST_AUTHORITY_LOST_MESSAGE)
+      setActionPending(false)
+      return
+    }
     try {
       await emitAck(event, {})
     } catch (err) {
-      setActionError(err instanceof Error ? err.message : `« ${event} » a échoué.`)
+      setActionError(friendlyActionError(err, connection))
     } finally {
       setActionPending(false)
     }
@@ -302,10 +368,16 @@ export function HostLive() {
     skipRequestedRef.current = true
     setActionPending(true)
     setActionError(null)
+    if (connection === 'broken') {
+      skipRequestedRef.current = false
+      setActionError(HOST_AUTHORITY_LOST_MESSAGE)
+      setActionPending(false)
+      return
+    }
     emitAck('host:skip', {})
       .catch((err) => {
         skipRequestedRef.current = false
-        setActionError(err instanceof Error ? err.message : '« host:skip » a échoué.')
+        setActionError(friendlyActionError(err, connection))
       })
       .finally(() => setActionPending(false))
   }
@@ -326,11 +398,16 @@ export function HostLive() {
     setScreenPending(true)
     setScreenError(null)
     setScreenCopyStatus(null)
+    if (connection === 'broken') {
+      setScreenError(HOST_AUTHORITY_LOST_MESSAGE)
+      setScreenPending(false)
+      return
+    }
     try {
       const ack = await emitAck<ScreenTokenAck>('host:createScreenToken', {})
       setScreenUrl(buildScreenUrl(sessionId, ack.displayToken, pin, quizTitle))
     } catch (err) {
-      setScreenError(err instanceof Error ? err.message : 'Impossible de générer le lien.')
+      setScreenError(friendlyActionError(err, connection))
     } finally {
       setScreenPending(false)
     }
@@ -447,6 +524,24 @@ export function HostLive() {
           <span className="host-badge">{phaseLabel(phase)}</span>
         </div>
       </header>
+
+      {connection === 'reconnecting' && (
+        <p className="player-net player-net--reconnecting" role="alert">
+          Connexion perdue — reconnexion…
+        </p>
+      )}
+      {connection === 'broken' && (
+        <p
+          className="player-net player-net--reconnecting"
+          role="alert"
+          style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-3)' }}
+        >
+          <span>{HOST_AUTHORITY_LOST_MESSAGE}</span>
+          <Button variant="ghost" type="button" onClick={() => navigate('/')}>
+            Retour à l’éditeur
+          </Button>
+        </p>
+      )}
 
       {/* Passerelle grand écran : lien à usage unique généré à la demande —
           voir buildScreenUrl ci-dessus pour pourquoi le PIN y est encodé. */}

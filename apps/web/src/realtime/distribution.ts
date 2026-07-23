@@ -7,6 +7,8 @@
  * payload de `packages/quiz/src/{mcq,truefalse,text,slider}.ts`.
  */
 
+import { sliderTolerance } from '@splootlabs/quiz'
+
 export type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider'
 
 export interface McqCorrect {
@@ -80,7 +82,7 @@ function truefalseRows(correct: TrueFalseCorrect, distribution: Record<string, n
  * chaque valeur EXACTE effectivement soumise est comptée séparément — on
  * liste donc les valeurs reçues, triées, plutôt que d'inventer des buckets. */
 function sliderRows(correct: SliderCorrect, distribution: Record<string, number>): DistRow[] {
-  const tolerance = Math.max(1, Math.round(0.05 * (correct.max - correct.min)))
+  const tolerance = sliderTolerance(correct.min, correct.max)
   return Object.entries(distribution)
     .map(([key, count]) => {
       const parsed = parseAnswerKey(key)
