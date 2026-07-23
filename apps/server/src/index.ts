@@ -30,7 +30,7 @@ const auth = createAuth(db, {
 await registerAuth(app, auth)
 registerEditor(app, { db, auth, config })
 
-const io = attachRealtime(app)
+const io = attachRealtime(app, config)
 
 // Moteur de jeu : une seule instance (mémoire) pour tout le process — voir Plan 7 pour le
 // passage à un SessionStore Redis derrière la même interface.

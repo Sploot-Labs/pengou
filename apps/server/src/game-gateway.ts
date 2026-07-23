@@ -2,7 +2,7 @@ import type { Server, Socket } from 'socket.io'
 import { fromNodeHeaders } from 'better-auth/node'
 import {
   resolveTenantId, tenantScope, listQuestions,
-  createGameSession, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
+  createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
   type Db,
 } from '@splootlabs/db'
 import type { Auth } from '@splootlabs/auth'
@@ -23,7 +23,8 @@ type SessionMeta = {
   /** playerId moteur (genId()) → id de ligne `session_player` en base (ids indépendants). */
   playerDbIds: Map<string, string>
   /** Index de question déjà persistés (recordAnswer) — évite un double-insert si host:reveal
-   * (ou son alias host:skip) est invoqué plusieurs fois sur la même manche. */
+   * (ou host:skip, qui crédite/persiste aussi — voir `doSkip`) est invoqué plusieurs fois sur
+   * la même manche. */
   revealedRounds: Set<number>
   /** `game_session.status` ne passe à 'active' qu'une seule fois (au premier host:start) :
    * un ré-appel écraserait sinon `startedAt` à chaque question suivante. */
@@ -76,9 +77,18 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
   // (ex. plusieurs suites de test dans le même process).
   const sessionMetaByEngineId = new Map<string, SessionMeta>()
   const pinToSessionId = new Map<string, string>()
-  // Token d'affichage grand écran : à usage unique (consommé au premier screen:join réussi),
-  // au niveau de la passerelle (pas du moteur — c'est un concept de transport, pas d'état de jeu).
+  // Token d'affichage grand écran : émis une seule fois par host:createScreenToken, mais
+  // valable pour toute la durée de vie de la session (single-*issue*, multi-*join*) — pas de
+  // Map au niveau module, pas de suppression après consommation. `screen:join` (première prise
+  // de contrôle) reste à usage unique via `consumedScreenTokens` ci-dessous ; `screen:reconnect`
+  // réutilise EXACTEMENT le même token (déjà connu du client, ex. localStorage) pour rejoindre
+  // à nouveau après une coupure réseau — sans ça, un simple blip réseau tuait le projecteur
+  // définitivement (le token étant déjà consommé, il ne pouvait plus jamais rejoindre).
   const screenTokenToSessionId = new Map<string, string>()
+  // Un token de `screen:join` initial ne peut être consommé qu'une fois (empêche un second
+  // écran de voler la place avec un token fuité APRÈS la prise de contrôle légitime) — mais
+  // rejoindre à nouveau APRÈS consommation reste possible via `screen:reconnect`.
+  const consumedScreenTokens = new Set<string>()
   // Socket ACTUELLEMENT actif pour chaque joueur (mis à jour par player:join ET player:reconnect).
   // Garde contre la course reconnexion-rapide : Socket.IO peut détecter la coupure d'un socket
   // mort jusqu'à ~pingTimeout après qu'un nouveau socket ait déjà repris le même joueur via
@@ -124,9 +134,9 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
     }
   }
 
-  /** Commun à `host:reveal` et `host:skip` (Task 4 : le plan mentionne les deux événements mais
-   * ne décrit qu'un mapping engine reveal+scoreboard — `skip` est traité comme une révélation
-   * anticipée forcée par l'hôte, sans attendre la fin du chrono). */
+  /** `host:reveal` : révèle la bonne réponse (`question:reveal`) puis le classement cumulé
+   * (`scoreboard`). Crédite les points de la manche EXACTEMENT une fois (idempotent via
+   * `engine.reveal`/`persistRound`, voir leurs commentaires). */
   async function doReveal(socket: Socket, ack?: (res: unknown) => void): Promise<void> {
     const reply = typeof ack === 'function' ? ack : () => {}
     try {
@@ -138,6 +148,39 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
       // strictement après engine.reveal() — jamais avant, jamais pour `question:show`.
       const result = engine.questionResult(revealed)
       io.to(roomName(sessionId)).emit('question:reveal', result)
+
+      const scored = await engine.scoreboard(sessionId)
+      const ranking = engine.ranking(scored)
+      io.to(roomName(sessionId)).emit('scoreboard', { ranking })
+
+      reply({ ok: true })
+    } catch (e) {
+      reply({ error: message(e) })
+    }
+  }
+
+  /** `host:skip` (hardening, Task 4 — corrige l'ancien alias trompeur de `doReveal`) : avance
+   * au-delà de la question en cours SANS jamais émettre `question:reveal` (la bonne réponse ne
+   * doit JAMAIS être diffusée pour un "skip" — c'est précisément ce qui distingue un skip d'un
+   * reveal). Décision produit (documentée ici, cf. backlog) : les réponses déjà données par les
+   * joueurs sont quand même CRÉDITÉES et PERSISTÉES — ils ont répondu, ce n'est pas de leur
+   * faute si l'hôte écourte la manche — seule la RÉVÉLATION de la bonne réponse est sautée.
+   * Réutilise `engine.reveal()` pour le crédit (idempotent via `credited[]`) et `persistRound`
+   * pour la persistance (idempotent via `revealedRounds`), mais s'arrête là : aucun
+   * `questionResult`/`question:reveal` n'est jamais calculé ni émis dans ce chemin. Émet quand
+   * même `scoreboard` (classement cumulé, sans contenu de réponse — pas une fuite anti-triche)
+   * pour que l'hôte/l'écran voient la partie avancer. */
+  async function doSkip(socket: Socket, ack?: (res: unknown) => void): Promise<void> {
+    const reply = typeof ack === 'function' ? ack : () => {}
+    try {
+      const { sessionId, meta } = requireHost(socket)
+      const current = await engine.getSession(sessionId)
+      if (current.phase === 'lobby') {
+        throw new Error('host:skip : aucune question active (session encore en lobby)')
+      }
+
+      const revealed = await engine.reveal(sessionId) // crédite uniquement — PAS de question:reveal
+      await persistRound(meta, revealed)
 
       const scored = await engine.scoreboard(sessionId)
       const ranking = engine.ranking(scored)
@@ -164,6 +207,20 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
   function emitTimer(sessionId: string, session: GameSession): void {
     const payload = timerPayload(session)
     if (payload) io.to(roomName(sessionId)).emit('timer', payload)
+  }
+
+  /** Rejoue la question en cours à UN SEUL socket qui vient de rejoindre/rafraîchir EN PLEINE
+   * QUESTION (`player:join`/`screen:join` arrivant mid-question, symétrique du traitement déjà
+   * fait par `player:reconnect`) — sans ça, un tel arrivant reste aveugle jusqu'à la question
+   * suivante. Anti-triche : utilise EXCLUSIVEMENT `engine.playerQuestionView` (jamais le payload
+   * brut ni `questionResult`), exactement comme `host:start`/`host:next`. Émis à CE socket
+   * seulement (pas à la room — les autres l'ont déjà reçu). */
+  function replayCurrentQuestionTo(socket: Socket, session: GameSession): void {
+    if (session.phase !== 'question') return
+    const view = engine.playerQuestionView(session)
+    socket.emit('question:show', view)
+    const timer = timerPayload(session)
+    if (timer) socket.emit('timer', timer)
   }
 
   io.on('connection', (socket: Socket) => {
@@ -213,6 +270,47 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
       }
     })
 
+    // Reconnexion hôte (Task 1, hardening) : l'autorité hôte était liée à UN SEUL socket
+    // (posée par host:create) — un simple rechargement de page perdait DÉFINITIVEMENT le
+    // contrôle de la partie. Le client renvoie le `sessionId` reçu à host:create (persisté
+    // côté client, ex. localStorage) ; on ré-authentifie via la session Better Auth du NOUVEAU
+    // handshake et on vérifie qu'il s'agit bien de l'hôte de CETTE session avant de rebind
+    // `socket.data` + rejoindre la room. Double vérification (défense en profondeur) :
+    // l'état moteur EN MÉMOIRE (`session.hostId`, source de vérité pendant la partie) ET la
+    // ligne `game_session.host_id` PERSISTÉE — un écart entre les deux (qui ne devrait jamais
+    // arriver) fait échouer FERMÉ plutôt que de faire confiance à une seule source.
+    socket.on('host:reconnect', async (payload: { sessionId?: unknown } | undefined, ack?: (res: unknown) => void) => {
+      const reply = typeof ack === 'function' ? ack : () => {}
+      try {
+        const sessionId = payload?.sessionId
+        if (typeof sessionId !== 'string' || !sessionId) throw new Error('sessionId requis')
+
+        const meta = sessionMetaByEngineId.get(sessionId)
+        if (!meta) throw new Error('session introuvable')
+
+        const authSession = await auth.api.getSession({ headers: fromNodeHeaders(socket.handshake.headers) })
+        if (!authSession?.user) throw new Error('authentification requise')
+
+        const session = await engine.getSession(sessionId)
+        if (session.hostId !== authSession.user.id) {
+          throw new Error("cet utilisateur n'est pas l'hôte de cette session")
+        }
+        const dbSession = await getGameSessionById(db, meta.dbSessionId)
+        if (!dbSession || dbSession.hostId !== authSession.user.id) {
+          throw new Error("cet utilisateur n'est pas l'hôte de cette session")
+        }
+
+        const data = socket.data as SocketData
+        data.role = 'host'
+        data.sessionId = sessionId
+        await socket.join(roomName(sessionId))
+
+        reply({ sessionId, pin: session.pin, phase: session.phase })
+      } catch (e) {
+        reply({ error: message(e) })
+      }
+    })
+
     socket.on('host:start', async (_payload: unknown, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
@@ -236,7 +334,7 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
     // Garde `host:reveal` hors phase question (ex. juste après host:create, encore en lobby) :
     // sans ce garde, engine.reveal() ferait quand même avancer la phase et émettrait un
     // `question:reveal { correct: undefined }` / `scoreboard` bidon (aucune question courante).
-    // Volontairement PAS dans `doReveal` (partagé avec host:skip, qu'on ne doit pas modifier) :
+    // Volontairement PAS dans `doReveal` (le garde équivalent pour `host:skip` vit dans `doSkip`) :
     // le garde vit uniquement dans ce handler `host:reveal`.
     socket.on('host:reveal', async (_payload: unknown, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
@@ -252,7 +350,11 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
       }
       void doReveal(socket, ack)
     })
-    socket.on('host:skip', (_payload: unknown, ack?: (res: unknown) => void) => void doReveal(socket, ack))
+    // `host:skip` : un VRAI skip (voir `doSkip`) — plus un simple alias de `doReveal`. Ne
+    // diffuse JAMAIS `question:reveal` : c'est la garantie anti-triche/anti-mensonge de cet
+    // événement (l'ancien alias annonçait "passer" tout en révélant quand même la réponse à
+    // toute la room).
+    socket.on('host:skip', (_payload: unknown, ack?: (res: unknown) => void) => void doSkip(socket, ack))
 
     socket.on('host:next', async (_payload: unknown, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
@@ -312,6 +414,11 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
 
         reply({ playerId: player.id, joinToken: player.joinToken })
         io.to(roomName(sessionId)).emit('lobby:update', { players: playersPayload(session) })
+
+        // Latecomer (Task 3, hardening) : un joueur qui rejoint EN PLEINE QUESTION (ex. PIN
+        // partagé après le lancement) ne doit pas rester aveugle jusqu'à la question suivante —
+        // on lui rejoue, à LUI SEUL, la même projection anti-triche que host:start/host:next.
+        replayCurrentQuestionTo(socket, session)
       } catch (e) {
         reply({ error: message(e) })
       }
@@ -368,19 +475,22 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
         activeSocketIdByPlayerId.set(player.id, socket.id)
         await socket.join(roomName(sessionId))
 
-        reply({ playerId: player.id, phase: session.phase, score: player.score })
+        // "Déjà répondu" (hardening, Task 5) : `question:show` (replayé ci-dessous) rend un
+        // client qui avait DÉJÀ soumis pour la question en cours indiscernable d'un client qui
+        // n'a pas encore répondu — sans ce booléen, l'UI reconnectée affiche à tort "en attente
+        // de réponse" à côté d'un score pourtant déjà crédité pour cette manche. Ne lit QUE
+        // l'existence d'une réponse (booléen) — jamais son contenu (`submitted.answer`/`.correct`
+        // ne sont jamais exposés ici, anti-triche).
+        const alreadyAnswered = Boolean(session.answers[session.currentIndex]?.[player.id])
+
+        reply({ playerId: player.id, phase: session.phase, score: player.score, alreadyAnswered })
         io.to(roomName(sessionId)).emit('lobby:update', { players: playersPayload(session) })
 
         // Un joueur qui reconnecte EN PLEINE QUESTION doit pouvoir la voir/y répondre tout de
         // suite, pas seulement à partir de la question suivante : on lui renvoie, à LUI SEUL
         // (pas à la room — les autres l'ont déjà reçu), la même projection anti-triche que
         // host:start/host:next (`playerQuestionView`, jamais `questionResult`) + le `timer`.
-        if (session.phase === 'question') {
-          const view = engine.playerQuestionView(session)
-          socket.emit('question:show', view)
-          const timer = timerPayload(session)
-          if (timer) socket.emit('timer', timer)
-        }
+        replayCurrentQuestionTo(socket, session)
       } catch (e) {
         reply({ error: message(e) })
       }
@@ -422,9 +532,11 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
 
         const sessionId = screenTokenToSessionId.get(displayToken)
         if (!sessionId) throw new Error('displayToken invalide ou déjà utilisé')
-        // Usage unique : consommé dès qu'on le trouve, AVANT toute autre vérification, pour
-        // qu'un token trouvé mais menant à une session introuvable ne reste pas réutilisable.
-        screenTokenToSessionId.delete(displayToken)
+        // Prise de contrôle initiale à usage unique : refusée si CE token a déjà servi une
+        // première fois — mais on ne SUPPRIME plus la correspondance token → session (voir
+        // `screenTokenToSessionId` plus haut) : elle reste valable pour `screen:reconnect`.
+        if (consumedScreenTokens.has(displayToken)) throw new Error('displayToken invalide ou déjà utilisé')
+        consumedScreenTokens.add(displayToken)
         if (!sessionMetaByEngineId.has(sessionId)) throw new Error('session introuvable')
 
         const data = socket.data as SocketData
@@ -432,6 +544,43 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
         data.sessionId = sessionId
         await socket.join(roomName(sessionId))
         reply({ ok: true })
+
+        // Latecomer (Task 3, hardening) : le grand écran connecté en PLEINE QUESTION doit
+        // afficher la question courante tout de suite, pas seulement à partir de la suivante.
+        const session = await engine.getSession(sessionId)
+        replayCurrentQuestionTo(socket, session)
+      } catch (e) {
+        reply({ error: message(e) })
+      }
+    })
+
+    // Reconnexion grand écran (Task 2, hardening) : un blip réseau ne doit plus tuer le
+    // projecteur définitivement. Réutilise le MÊME `displayToken` (déjà connu du client, ex.
+    // localStorage) — il reste "unguessable" (UUID v4, jamais raccourci/dérivé) — mais cette
+    // fois SANS exiger qu'il soit encore "non consommé" : `screen:reconnect` fonctionne aussi
+    // bien pour la toute première prise de contrôle que pour un ré-accrochage ultérieur, tant
+    // que le token correspond bien à LA session demandée (`sessionId`, connu du client) et que
+    // la session existe toujours.
+    socket.on('screen:reconnect', async (payload: { sessionId?: unknown; displayToken?: unknown } | undefined, ack?: (res: unknown) => void) => {
+      const reply = typeof ack === 'function' ? ack : () => {}
+      try {
+        const sessionId = payload?.sessionId
+        const displayToken = payload?.displayToken
+        if (typeof sessionId !== 'string' || !sessionId) throw new Error('sessionId requis')
+        if (typeof displayToken !== 'string' || !displayToken) throw new Error('displayToken requis')
+
+        const mappedSessionId = screenTokenToSessionId.get(displayToken)
+        if (!mappedSessionId || mappedSessionId !== sessionId) throw new Error('displayToken invalide')
+        if (!sessionMetaByEngineId.has(sessionId)) throw new Error('session introuvable')
+
+        const data = socket.data as SocketData
+        data.role = 'screen'
+        data.sessionId = sessionId
+        await socket.join(roomName(sessionId))
+        reply({ ok: true })
+
+        const session = await engine.getSession(sessionId)
+        replayCurrentQuestionTo(socket, session)
       } catch (e) {
         reply({ error: message(e) })
       }

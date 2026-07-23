@@ -33,7 +33,9 @@ export const slider: QuestionTypeDef<SliderPayload, SliderAnswer> = {
   key: 'slider',
   validatePayload: (raw) => sliderSchema.parse(raw),
   validateAnswer: (raw) => answerSchema.parse(raw),
-  playerView: (p) => ({ min: p.min, max: p.max }), // pas de `correct`
+  // `step` (granularité de drag) n'a aucune valeur de triche : il ne révèle ni `correct` ni la
+  // tolérance — on l'inclut seulement quand défini (curseur continu sinon côté client).
+  playerView: (p) => (p.step === undefined ? { min: p.min, max: p.max } : { min: p.min, max: p.max, step: p.step }), // pas de `correct`
   isCorrect: (p, a) => Math.abs(a.value - p.correct) <= tolerance(p),
   score: (p, a, o) => {
     if (!slider.isCorrect(p, a)) return 0

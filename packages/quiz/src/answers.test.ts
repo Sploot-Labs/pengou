@@ -140,9 +140,16 @@ describe('slider gameplay', () => {
     expect(slider.isCorrect(payload, { value: 44 })).toBe(false)
   })
 
-  it('playerView ne contient JAMAIS `correct`, seulement { min, max }', () => {
+  it('playerView ne contient JAMAIS `correct`, seulement { min, max } quand step absent', () => {
     const view = slider.playerView(payload)
     expect(view).toEqual({ min: 0, max: 100 })
+    expect(view).not.toHaveProperty('correct')
+  })
+
+  it('playerView inclut `step` quand défini (granularité de drag, ne révèle pas la réponse)', () => {
+    const withStep = slider.validatePayload({ min: 0, max: 100, correct: 50, step: 5 })
+    const view = slider.playerView(withStep)
+    expect(view).toEqual({ min: 0, max: 100, step: 5 })
     expect(view).not.toHaveProperty('correct')
   })
 
