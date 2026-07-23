@@ -1,168 +1,303 @@
 import { useEffect, useRef, useState } from 'react'
-import {
-  getRanking,
-  mockDistributions,
-  mockGamePin,
-  playersAtQuestion,
-  sessionPlayers,
-} from '../mockData'
-import type { AnswerShapeKind, Question } from '../mockData'
-import { AnswerShape, Button, Logo, PinDisplay, TimerRing } from '../ui'
-import { mockQuiz } from '../mockData'
+import { useParams, useSearchParams } from 'react-router-dom'
+import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
+import { useGameSocket } from '../realtime/useGameSocket'
+import { AnswerShape, Logo, PinDisplay, TimerRing } from '../ui'
+import { PodiumView } from './Podium'
 
-type Phase = 'lobby' | 'question' | 'reveal' | 'scoreboard' | 'end'
+/**
+ * Grand écran réel, lecture seule — câblé sur `apps/server/src/game-gateway.ts`
+ * via `screen:join {displayToken}`. Une socket dédiée à ce montage (pas la
+ * socket partagée hôte — voir `realtime/GameSocketProvider.tsx` : le grand
+ * écran a son propre rôle `'screen'`, indépendant de l'hôte). Plus aucune
+ * donnée mockée : tout vient des événements diffusés à la room de session.
+ */
 
-interface DistributionBar {
-  label: string
-  count: number
-  correct: boolean
-  /** QCM answer shape, or null for true/false and slider buckets. */
-  shape: AnswerShapeKind | null
-  color: string
+/* ------------------------------------------------------------------ */
+/* Contrat serveur (types locaux — pas de mock)                        */
+/* ------------------------------------------------------------------ */
+
+interface QuestionShowPayload {
+  id: string
+  type: QuestionKind
+  prompt: string
+  timeLimit: number
+  payload: unknown
+}
+interface McqShowPayload {
+  options: { label: string }[]
+}
+interface SliderShowPayload {
+  min: number
+  max: number
 }
 
-/** Build the distribution shown only at REVEAL — never during the countdown. */
-function revealBars(question: Question): DistributionBar[] | null {
-  if (question.type === 'mcq') {
-    const counts = mockDistributions[question.id] ?? question.options.map(() => 0)
-    return question.options.map((opt, i) => ({
-      label: opt.label,
-      count: counts[i] ?? 0,
-      correct: opt.correct,
-      shape: opt.shape,
-      color: `var(--ans-${opt.shape})`,
-    }))
-  }
-  if (question.type === 'truefalse') {
-    const counts = mockDistributions[question.id] ?? [0, 0]
-    // Neutral bars — no invented QCM shape/colour on the projector.
-    return [
-      { label: 'Vrai', count: counts[0] ?? 0, correct: question.correctAnswer === true, shape: null, color: 'var(--brand-2)' },
-      { label: 'Faux', count: counts[1] ?? 0, correct: question.correctAnswer === false, shape: null, color: 'var(--brand-2)' },
-    ]
-  }
-  if (question.type === 'slider') {
-    const counts = mockDistributions[question.id] ?? [0, 0, 0, 0, 0]
-    const buckets = counts.length
-    const span = (question.max - question.min) / buckets
-    const correctBucket = Math.min(
-      buckets - 1,
-      Math.floor((question.correctValue - question.min) / span),
-    )
-    return counts.map((count, i) => {
-      const lo = Math.round(question.min + i * span)
-      const hi = Math.round(question.min + (i + 1) * span)
-      return {
-        label: `${lo}–${hi}`,
-        count,
-        correct: i === correctBucket,
-        shape: null,
-        color: 'var(--brand-2)',
-      }
-    })
-  }
-  return null
+interface TimerPayload {
+  timeLimit: number
+  startedAt: number | null
 }
+
+interface RevealPayload {
+  correct: unknown
+  distribution: Record<string, number>
+}
+
+interface RankingEntry {
+  playerId: string
+  nickname: string
+  score: number
+}
+
+interface LobbyPlayer {
+  id: string
+  nickname: string
+  score: number
+  connected: boolean
+}
+
+type Phase = 'lobby' | 'question' | 'reveal' | 'scoreboard' | 'podium'
+type JoinState = 'connecting' | 'joined' | 'error'
+
+/** Le grand écran n'a AUCUN contrôle propre (lecture seule) : contrairement à
+ * `HostLive`, où l'hôte clique « Afficher le classement » une fois prêt, la
+ * projection doit avancer TOUTE SEULE de la révélation vers le classement.
+ * Or le serveur émet `question:reveal` ET `scoreboard` pour un seul et même
+ * `host:reveal`/`host:skip` (voir `doReveal`, game-gateway.ts) — il n'y a
+ * aucun second signal serveur pour cadencer cette transition. On tient donc
+ * l'écran de révélation un temps fixe avant de basculer, en utilisant les
+ * données déjà reçues (aucune donnée inventée, seulement un délai d'affichage
+ * choisi côté front). */
+const REVEAL_HOLD_MS = 5000
 
 export function BigScreen() {
-  const [phase, setPhase] = useState<Phase>('lobby')
-  const [joined, setJoined] = useState<typeof sessionPlayers>([])
-  const [questionIndex, setQuestionIndex] = useState(0)
-  const [remaining, setRemaining] = useState(mockQuiz.questions[0].durationSeconds)
-  const [disconnectedIds, setDisconnectedIds] = useState<Set<string>>(new Set())
-  const [announced, setAnnounced] = useState('')
+  const { sessionId } = useParams<{ sessionId: string }>()
+  const [searchParams] = useSearchParams()
+  const token = searchParams.get('token')
+  const pin = searchParams.get('pin')
+  const quizTitle = searchParams.get('title') ?? 'Le quiz en direct, open-source.'
 
-  const question = mockQuiz.questions[questionIndex]
-  const isLast = questionIndex === mockQuiz.questions.length - 1
+  const { socket, emitAck, on } = useGameSocket()
 
-  // Lobby: players trickle in.
-  useEffect(() => {
-    if (phase !== 'lobby') return
-    if (joined.length >= sessionPlayers.length) return
-    const timer = window.setTimeout(() => {
-      setJoined((prev) => [...prev, sessionPlayers[prev.length]])
-    }, 900)
-    return () => window.clearTimeout(timer)
-  }, [phase, joined])
-
-  // Debounced screen-reader announcement of the joined count (avoids 7 rapid
-  // announcements as players arrive one after another).
-  useEffect(() => {
-    if (phase !== 'lobby') return
-    const timer = window.setTimeout(() => {
-      const verb = joined.length > 1 ? 'ont' : 'a'
-      setAnnounced(`${joined.length} joueur${joined.length > 1 ? 's' : ''} sur ${sessionPlayers.length} ${verb} rejoint la partie.`)
-    }, 600)
-    return () => window.clearTimeout(timer)
-  }, [phase, joined])
-
-  // Countdown only during the active question.
-  useEffect(() => {
-    if (phase !== 'question') return
-    if (remaining <= 0) return
-    const timer = window.setTimeout(() => setRemaining((s) => s - 1), 1000)
-    return () => window.clearTimeout(timer)
-  }, [phase, remaining])
-
-  function startGame() {
-    setPhase('question')
-    setQuestionIndex(0)
-    setRemaining(mockQuiz.questions[0].durationSeconds)
-  }
-
-  function goToQuestion(index: number) {
-    setQuestionIndex(index)
-    setRemaining(mockQuiz.questions[index].durationSeconds)
-    setPhase('question')
-  }
-
-  function restartLobby() {
-    setPhase('lobby')
-    setJoined([])
-  }
-
-  function toggleDisconnect() {
-    setDisconnectedIds((prev) => {
-      const next = new Set(prev)
-      const last = joined[joined.length - 1]
-      if (!last) return prev
-      if (next.has(last.id)) next.delete(last.id)
-      else next.add(last.id)
-      return next
-    })
-  }
-
-  // Cumulative scores through the current question so the ranking evolves
-  // question-to-question rather than staying frozen on constant totals.
-  const ranking = getRanking(playersAtQuestion(questionIndex))
-  const bars = phase === 'reveal' ? revealBars(question) : null
-  const maxCount = bars ? Math.max(1, ...bars.map((b) => b.count)) : 1
-
-  // Live respondent count derived from the countdown, so the monitor moves
-  // instead of showing a frozen « 4 / 7 ».
-  const liveAnswered = Math.min(
-    sessionPlayers.length,
-    Math.round(sessionPlayers.length * (1 - remaining / question.durationSeconds)),
+  const [joinState, setJoinState] = useState<JoinState>(token ? 'connecting' : 'error')
+  const [joinError, setJoinError] = useState<string | null>(
+    token ? null : 'Lien invalide : jeton d’affichage manquant dans l’URL.',
   )
+  const joinAttemptedRef = useRef(false)
 
-  /** Read-only answer preview shown during the live question (never a button). */
+  const [phase, setPhase] = useState<Phase>('lobby')
+  const [players, setPlayers] = useState<LobbyPlayer[]>([])
+  const [announcement, setAnnouncement] = useState('')
+
+  const [question, setQuestion] = useState<QuestionShowPayload | null>(null)
+  const [timer, setTimer] = useState<TimerPayload | null>(null)
+  const [remaining, setRemaining] = useState<number | null>(null)
+  const [progressAnswered, setProgressAnswered] = useState(0)
+
+  const [revealPayload, setRevealPayload] = useState<RevealPayload | null>(null)
+  const [ranking, setRanking] = useState<RankingEntry[]>([])
+  const [podiumTop, setPodiumTop] = useState<RankingEntry[]>([])
+
+  const phaseHeadingRef = useRef<HTMLHeadingElement>(null)
+  const podiumHeadingRef = useRef<HTMLHeadingElement>(null)
+  const isFirstRender = useRef(true)
+
+  /* ---------------------------------------------------------------- */
+  /* screen:join — une seule tentative (jeton à usage unique)           */
+  /* ---------------------------------------------------------------- */
+
+  useEffect(() => {
+    if (!token) return
+    let cancelled = false
+
+    async function join() {
+      if (joinAttemptedRef.current) return
+      joinAttemptedRef.current = true
+      try {
+        await emitAck('screen:join', { displayToken: token })
+        if (!cancelled) setJoinState('joined')
+      } catch (err) {
+        if (!cancelled) {
+          setJoinState('error')
+          setJoinError(
+            err instanceof Error
+              ? err.message
+              : 'Connexion au grand écran impossible.',
+          )
+        }
+      }
+    }
+
+    if (socket.connected) void join()
+    const offConnect = on('connect', () => void join())
+    return () => {
+      cancelled = true
+      offConnect()
+    }
+    // Une seule tentative de jointure pour la durée de vie du composant —
+    // `token` ne change jamais après le premier rendu (lu depuis l'URL).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token])
+
+  /* ---------------------------------------------------------------- */
+  /* Abonnements — un seul montage                                     */
+  /* ---------------------------------------------------------------- */
+
+  useEffect(() => {
+    const offLobby = on<{ players: LobbyPlayer[] }>('lobby:update', ({ players: list }) => {
+      setPlayers(list)
+    })
+
+    const offShow = on<QuestionShowPayload>('question:show', (view) => {
+      setQuestion(view)
+      setTimer(null)
+      setRemaining(null)
+      setRevealPayload(null)
+      setProgressAnswered(0)
+      // Reset volontaire (contrairement à HostLive, qui garde le dernier
+      // classement connu pour son aside) : sert de garde pour l'effet de
+      // bascule auto reveal→scoreboard ci-dessous (voir REVEAL_HOLD_MS) — il
+      // ne doit jamais se déclencher sur les données de la question PRÉCÉDENTE.
+      setRanking([])
+      setPhase('question')
+    })
+
+    const offTimer = on<TimerPayload>('timer', (t) => {
+      setTimer(t)
+    })
+
+    const offProgress = on<{ answered: number; total: number }>('screen:progress', ({ answered }) => {
+      setProgressAnswered(answered)
+    })
+
+    const offReveal = on<RevealPayload>('question:reveal', (r) => {
+      setRevealPayload(r)
+      setPhase('reveal')
+    })
+
+    const offScoreboard = on<{ ranking: RankingEntry[] }>('scoreboard', ({ ranking: r }) => {
+      setRanking(r)
+    })
+
+    const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
+      setPodiumTop(top)
+      setPhase('podium')
+    })
+
+    return () => {
+      offLobby()
+      offShow()
+      offTimer()
+      offProgress()
+      offReveal()
+      offScoreboard()
+      offPodium()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Bascule auto révélation → classement (voir le commentaire de
+  // REVEAL_HOLD_MS) : seulement une fois le VRAI `scoreboard` de cette manche
+  // arrivé (jamais sur un `ranking` resté vide depuis le reset ci-dessus).
+  useEffect(() => {
+    if (phase !== 'reveal' || ranking.length === 0) return
+    const t = window.setTimeout(() => setPhase('scoreboard'), REVEAL_HOLD_MS)
+    return () => window.clearTimeout(t)
+  }, [phase, ranking])
+
+  // Chrono — dérivé de `startedAt` serveur, comme PlayerLive/HostLive.
+  useEffect(() => {
+    if (!timer || phase !== 'question') return
+    function tick() {
+      if (!timer) return
+      if (timer.startedAt === null) {
+        setRemaining(timer.timeLimit)
+        return
+      }
+      const elapsedMs = Date.now() - timer.startedAt
+      const remainingSeconds = Math.max(0, Math.ceil((timer.timeLimit * 1000 - elapsedMs) / 1000))
+      setRemaining(remainingSeconds)
+    }
+    tick()
+    const id = window.setInterval(tick, 250)
+    return () => window.clearInterval(id)
+  }, [timer, phase])
+
+  // Annonce debouncée de l'arrivée des joueurs (lobby uniquement).
+  useEffect(() => {
+    if (phase !== 'lobby') return
+    const t = window.setTimeout(() => {
+      if (players.length === 0) return
+      const verb = players.length > 1 ? 'ont' : 'a'
+      setAnnouncement(`${players.length} joueur${players.length > 1 ? 's' : ''} ${verb} rejoint la partie.`)
+    }, 600)
+    return () => window.clearTimeout(t)
+  }, [phase, players])
+
+  // RGAA 2.4.3 : focus sur le titre propre à la nouvelle phase — jamais au
+  // tout premier rendu.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+    phaseHeadingRef.current?.focus()
+  }, [phase])
+
+  useEffect(() => {
+    if (phase === 'podium') podiumHeadingRef.current?.focus()
+  }, [phase])
+
+  if (joinState === 'error') {
+    return (
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+        <Logo />
+        <p className="join-error" role="alert">
+          {joinError}
+        </p>
+        <p style={{ color: 'var(--ink-dim)' }}>
+          Générez un nouveau lien depuis le contrôleur hôte (« Grand écran »).
+        </p>
+      </main>
+    )
+  }
+
+  if (joinState === 'connecting') {
+    return (
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+        <Logo />
+        <p role="status">Connexion au grand écran…</p>
+      </main>
+    )
+  }
+
+  const rows =
+    phase === 'reveal' && question && revealPayload
+      ? buildDistributionRows(question.type, revealPayload.correct, revealPayload.distribution)
+      : null
+  const maxCount = rows && rows.length > 0 ? Math.max(1, ...rows.map((r) => r.count)) : 1
+
   function renderLiveAnswers() {
+    if (!question) return null
     if (question.type === 'mcq') {
+      const shapes = ['triangle', 'diamond', 'circle', 'square'] as const
       return (
         <div className="big-answers">
-          {question.options.map((opt) => (
-            <div
-              key={opt.id}
-              className="big-answer"
-              style={{
-                ['--tile-color' as string]: `var(--ans-${opt.shape})`,
-                ['--tile-ink' as string]: `var(--ans-${opt.shape}-ink)`,
-              }}
-            >
-              <AnswerShape shape={opt.shape} size={36} />
-              <span>{opt.label}</span>
-            </div>
-          ))}
+          {(question.payload as McqShowPayload).options.map((opt, i) => {
+            const shape = shapes[i % shapes.length]
+            return (
+              <div
+                key={i}
+                className="big-answer"
+                style={{
+                  ['--tile-color' as string]: `var(--ans-${shape})`,
+                  ['--tile-ink' as string]: `var(--ans-${shape}-ink)`,
+                }}
+              >
+                <AnswerShape shape={shape} size={36} />
+                <span>{opt.label}</span>
+              </div>
+            )
+          })}
         </div>
       )
     }
@@ -175,10 +310,11 @@ export function BigScreen() {
       )
     }
     if (question.type === 'slider') {
+      const { min, max } = question.payload as SliderShowPayload
       return (
         <div className="big-answer__range">
           <span>
-            De {question.min} à {question.max}
+            De {min} à {max}
           </span>
         </div>
       )
@@ -190,13 +326,54 @@ export function BigScreen() {
     )
   }
 
+  function renderDistribution() {
+    if (!rows || rows.length === 0) {
+      return <p style={{ color: 'var(--ink-dim)' }}>Aucune réponse reçue pour cette question.</p>
+    }
+    return (
+      <div className="big-distribution" style={{ ['--dist-cols' as string]: String(rows.length) }}>
+        {rows.map((row) => (
+          <div
+            className={`big-distribution__col${row.correct ? ' big-distribution__col--correct' : ''}`}
+            key={row.key}
+          >
+            <div className="big-distribution__bar-track">
+              <div
+                className="big-distribution__bar"
+                style={{
+                  height: `${(row.count / maxCount) * 100}%`,
+                  ['--bar-color' as string]: row.shape ? `var(--ans-${row.shape})` : 'var(--brand-2)',
+                }}
+              />
+            </div>
+            <span className="big-distribution__label">
+              {row.shape && <AnswerShape shape={row.shape} size={20} />}
+              {row.label}
+              {row.correct && (
+                <span className="big-distribution__check" aria-hidden="true">
+                  ✓
+                </span>
+              )}
+              {row.correct && <span className="visually-hidden"> (bonne réponse)</span>}
+            </span>
+            <span className="big-distribution__count">{row.count} réponse(s)</span>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
   return (
     <main className="big-screen" id="contenu-principal" tabIndex={-1}>
-      {/* Persistent join reminder for latecomers once the game is underway
-          (the full PIN marquee + address only show in the lobby). */}
       {(phase === 'question' || phase === 'reveal' || phase === 'scoreboard') && (
         <div className="big-join-reminder">
-          Rejoignez sur <strong>arena.app</strong> · PIN <strong>{mockGamePin}</strong>
+          Rejoignez sur <strong>{window.location.host}</strong>
+          {pin && (
+            <>
+              {' '}
+              · PIN <strong>{pin}</strong>
+            </>
+          )}
         </div>
       )}
 
@@ -204,219 +381,101 @@ export function BigScreen() {
         <div className="big-lobby">
           <Logo />
           <div>
-            <h1 className="ab-hero-title">{mockQuiz.title}</h1>
+            <h1 className="ab-hero-title" ref={phaseHeadingRef} tabIndex={-1}>
+              {quizTitle}
+            </h1>
             <p className="big-lobby__tagline">Le quiz en direct, open-source.</p>
             <p className="big-lobby__proof">
               Rejoignez en 5 secondes, aucune appli à installer. Vos données restent chez vous.
             </p>
           </div>
-          <p className="big-lobby__address">
-            Rejoignez sur <strong>arena.app</strong>
-          </p>
-          <PinDisplay pin={mockGamePin} />
+          {pin ? (
+            <PinDisplay pin={pin} />
+          ) : (
+            <p style={{ color: 'var(--ink-dim)' }}>PIN indisponible — demandez-le à l’hôte.</p>
+          )}
 
-          {joined.length === 0 ? (
-            <p className="big-lobby__empty">
-              En attente des joueurs… Saisissez le PIN pour rejoindre.
-            </p>
+          {players.length === 0 ? (
+            <p className="big-lobby__empty">En attente des joueurs… Saisissez le PIN pour rejoindre.</p>
           ) : (
             <ul className="big-players" aria-label="Joueurs ayant rejoint la partie">
-              {joined.map((p) => {
-                const off = disconnectedIds.has(p.id)
-                return (
-                  <li
-                    key={p.id}
-                    className={`big-players__chip${off ? ' big-players__chip--off' : ''}`}
-                  >
-                    {p.pseudo}
-                    {off && (
-                      <span className="big-players__badge">
-                        <span aria-hidden="true">⚠</span> déconnecté
-                      </span>
-                    )}
-                  </li>
-                )
-              })}
+              {players.map((p) => (
+                <li key={p.id} className={`big-players__chip${!p.connected ? ' big-players__chip--off' : ''}`}>
+                  {p.nickname}
+                  {!p.connected && (
+                    <span className="big-players__badge">
+                      <span aria-hidden="true">⚠</span> déconnecté
+                    </span>
+                  )}
+                </li>
+              ))}
             </ul>
           )}
           <p role="status" aria-live="polite">
-            {announced}
+            {announcement}
           </p>
         </div>
       )}
 
-      {phase === 'question' && (
+      {phase === 'question' && question && (
         <div className="big-live">
           <div className="big-live__header">
-            <span className="host-badge">
-              Question {questionIndex + 1} / {mockQuiz.questions.length}
-            </span>
-            <TimerRing
-              remainingSeconds={remaining}
-              totalSeconds={question.durationSeconds}
-              size={180}
-              large
-            />
+            <span className="host-badge">Question en cours</span>
+            <TimerRing remainingSeconds={remaining ?? question.timeLimit} totalSeconds={question.timeLimit} size={180} large />
           </div>
 
-          <h1 className="big-live__prompt">{question.prompt}</h1>
+          <h1 className="big-live__prompt" ref={phaseHeadingRef} tabIndex={-1}>
+            {question.prompt}
+          </h1>
 
           {renderLiveAnswers()}
 
           <p className="big-live__answered">
-            {liveAnswered} / {sessionPlayers.length} {liveAnswered <= 1 ? 'a' : 'ont'} répondu
+            {progressAnswered} / {players.length} {progressAnswered <= 1 ? 'a' : 'ont'} répondu
           </p>
         </div>
       )}
 
-      {phase === 'reveal' && (
+      {phase === 'reveal' && question && (
         <div className="big-live">
           <div className="big-live__header">
-            <span className="host-badge">
-              Question {questionIndex + 1} / {mockQuiz.questions.length} — révélation
-            </span>
+            <span className="host-badge">Révélation</span>
           </div>
 
-          <h1 className="big-live__prompt">{question.prompt}</h1>
+          <h1 className="big-live__prompt" ref={phaseHeadingRef} tabIndex={-1}>
+            {question.prompt}
+          </h1>
 
-          {bars ? (
-            <div
-              className="big-distribution"
-              style={{ ['--dist-cols' as string]: String(bars.length) }}
-            >
-              {bars.map((bar, i) => (
-                <div
-                  className={`big-distribution__col${bar.correct ? ' big-distribution__col--correct' : ''}`}
-                  key={`${bar.label}-${i}`}
-                >
-                  <div className="big-distribution__bar-track">
-                    <div
-                      className="big-distribution__bar"
-                      style={{
-                        height: `${(bar.count / maxCount) * 100}%`,
-                        ['--bar-color' as string]: bar.color,
-                      }}
-                    />
-                  </div>
-                  <span className="big-distribution__label">
-                    {bar.shape && <AnswerShape shape={bar.shape} size={20} />}
-                    {bar.label}
-                    {bar.correct && <span className="big-distribution__check" aria-hidden="true">✓</span>}
-                    {bar.correct && <span className="visually-hidden"> (bonne réponse)</span>}
-                  </span>
-                  <span className="big-distribution__count">{bar.count} réponse(s)</span>
-                </div>
-              ))}
-            </div>
-          ) : question.type === 'text' ? (
-            <div className="big-reveal-answer">
-              <p className="big-reveal-answer__label">Réponse(s) acceptée(s)</p>
-              <p className="big-reveal-answer__value">{question.acceptedAnswers.join(' · ')}</p>
-              <p style={{ color: 'var(--ink-dim)' }}>
-                {liveAnswered} réponses libres reçues sur {sessionPlayers.length}.
-              </p>
-            </div>
-          ) : null}
-
-          {question.type === 'slider' &&
-            (() => {
-              const range = Math.max(1, question.max - question.min)
-              const tol = Math.max(1, Math.round(range * 0.05))
-              const lo = Math.max(question.min, question.correctValue - tol)
-              const hi = Math.min(question.max, question.correctValue + tol)
-              return (
-                <div className="big-reveal-answer">
-                  <p className="big-reveal-answer__value">Valeur correcte : {question.correctValue}</p>
-                  <p style={{ color: 'var(--ink-dim)' }}>
-                    Zone acceptée (points de proximité) : {lo} – {hi}
-                  </p>
-                </div>
-              )
-            })()}
+          {renderDistribution()}
         </div>
       )}
 
       {phase === 'scoreboard' && (
         <div className="big-scoreboard">
-          <h1 className="ab-hero-title">Classement</h1>
-          <ol className="big-scoreboard__list">
-            {/* No « you » highlight on the shared wall: a colour-only marker is
-                invisible to colour-blind viewers and « you » is ambiguous on a
-                projected screen. */}
-            {ranking.slice(0, 5).map((p) => (
-              <li key={p.id} className="big-scoreboard__row">
-                <span
-                  className={`big-scoreboard__rank${p.rank === 1 ? ' big-scoreboard__rank--first' : ''}`}
-                >
-                  {p.rank}
-                </span>
-                <span className="big-scoreboard__name">{p.pseudo}</span>
-                <span className="big-scoreboard__score">{p.score} pts</span>
-              </li>
-            ))}
-          </ol>
+          <h1 className="ab-hero-title" ref={phaseHeadingRef} tabIndex={-1}>
+            Classement
+          </h1>
+          {ranking.length === 0 ? (
+            <p style={{ color: 'var(--ink-dim)' }}>Le classement s’affichera après la première question.</p>
+          ) : (
+            <ol className="big-scoreboard__list">
+              {ranking.slice(0, 5).map((p, index) => (
+                <li key={p.playerId} className="big-scoreboard__row">
+                  <span className={`big-scoreboard__rank${index === 0 ? ' big-scoreboard__rank--first' : ''}`}>
+                    {index + 1}
+                  </span>
+                  <span className="big-scoreboard__name">{p.nickname}</span>
+                  <span className="big-scoreboard__score">{p.score} pts</span>
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
       )}
 
-      {phase === 'end' && (
-        <div className="big-lobby">
-          <h1 className="ab-hero-title">Partie terminée</h1>
-          <p style={{ color: 'var(--ink-dim)' }}>
-            Toutes les questions ont été jouées. Place au classement final.
-          </p>
-          <p style={{ color: 'var(--ink-dim)' }}>
-            Ouvrez l’écran « Podium » pour le classement complet.
-          </p>
-        </div>
+      {phase === 'podium' && (
+        <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={podiumHeadingRef} showConversionFooter />
       )}
-
-      {/* Demo control bar — this projector view is read-only (§5.2); these
-          buttons only simulate what the host would drive from backstage. */}
-      <div className="big-dev-controls">
-        <p className="big-dev-controls__label">
-          Contrôles de démonstration (piloterait l’hôte, pas le projecteur)
-        </p>
-        <div className="big-dev-controls__row">
-          {phase === 'lobby' && (
-            // Unlike HostLive's real "Lancer la partie" (which requires ≥1
-            // joined player), this demo control intentionally has no such
-            // gate — it's a simulation-only shortcut, not the operator surface.
-            <Button variant="primary" type="button" onClick={startGame}>
-              Lancer la partie
-            </Button>
-          )}
-          {phase === 'lobby' && joined.length > 0 && (
-            <Button variant="ghost" type="button" onClick={toggleDisconnect}>
-              Simuler une déconnexion
-            </Button>
-          )}
-          {phase === 'question' && (
-            <Button variant="primary" type="button" onClick={() => setPhase('reveal')}>
-              Révéler la réponse
-            </Button>
-          )}
-          {phase === 'reveal' && (
-            <Button variant="primary" type="button" onClick={() => setPhase('scoreboard')}>
-              Afficher le classement
-            </Button>
-          )}
-          {phase === 'scoreboard' &&
-            (isLast ? (
-              <Button variant="primary" type="button" onClick={() => setPhase('end')}>
-                Voir le podium
-              </Button>
-            ) : (
-              <Button variant="primary" type="button" onClick={() => goToQuestion(questionIndex + 1)}>
-                Question suivante
-              </Button>
-            ))}
-          {phase !== 'lobby' && (
-            <Button variant="ghost" type="button" onClick={restartLobby}>
-              Retour au lobby
-            </Button>
-          )}
-        </div>
-      </div>
     </main>
   )
 }

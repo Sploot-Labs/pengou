@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ApiError } from '../api/client'
+import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import {
   createQuestion,
   createQuiz,
@@ -292,7 +294,18 @@ function errorMessage(err: unknown): string {
 
 const LAST_QUIZ_KEY = 'arena.hostEditor.lastQuizId'
 
+/** Ack de succès de `host:create` — voir `apps/server/src/game-gateway.ts`. */
+interface HostCreateAck {
+  sessionId: string
+  pin: string
+}
+
 export function HostEditor() {
+  const navigate = useNavigate()
+  const { emitAck } = useSharedGameSocket()
+  const [launching, setLaunching] = useState(false)
+  const [launchError, setLaunchError] = useState<string | null>(null)
+
   // --- Quiz list + selection --------------------------------------------
   const [quizzes, setQuizzes] = useState<Quiz[]>([])
   const [quizzesLoading, setQuizzesLoading] = useState(true)
@@ -456,6 +469,31 @@ export function HostEditor() {
         ? `${invalidCount} question${invalidCount > 1 ? 's' : ''} à compléter avant de lancer la partie.`
         : null
   const canLaunch = launchReason === null
+
+  /** « Lancer la partie » : `host:create {quizId}` sur la socket PARTAGÉE
+   * (voir `realtime/GameSocketProvider.tsx`) — c'est cette connexion précise
+   * qui devient « hôte » de la session côté serveur, et `HostLive` doit donc
+   * réutiliser exactement la même socket (assuré par le contexte partagé),
+   * pas en ouvrir une nouvelle. Succès → navigation vers `/host/:sessionId`.
+   * Échec (quiz introuvable/refusé, pas de session authentifiée, socket
+   * injoignable) → message affiché dans l'UI d'erreur existante, jamais de
+   * PIN/session fabriqué. */
+  async function launchGame() {
+    if (!canLaunch || launching || !currentQuizId) return
+    setLaunching(true)
+    setLaunchError(null)
+    try {
+      const ack = await emitAck<HostCreateAck>('host:create', { quizId: currentQuizId })
+      // Le PIN et le titre ne sont connus qu'ICI (host:create ne les redonne
+      // jamais ensuite) — transmis à HostLive via l'état de navigation
+      // plutôt que par l'URL (le PIN n'a rien à faire dans un lien
+      // partageable de la page hôte).
+      navigate(`/host/${ack.sessionId}`, { state: { pin: ack.pin, quizTitle: title } })
+    } catch (err) {
+      setLaunching(false)
+      setLaunchError(err instanceof Error ? err.message : 'Impossible de lancer la partie.')
+    }
+  }
 
   // Debounced autosave for the currently selected question: fires 600ms
   // after the last edit, only when the draft passes client-side validation
@@ -840,18 +878,15 @@ export function HostEditor() {
           <Button
             variant="primary"
             type="button"
-            aria-disabled={!canLaunch}
+            aria-disabled={!canLaunch || launching}
             aria-describedby={!canLaunch ? 'host-launch-reason' : undefined}
             onClick={(e) => {
               e.preventDefault()
-              if (!canLaunch) return
-              // TODO(Plan 06 Task 5): host:create {quizId} via the game
-              // socket → {sessionId, pin}, then navigate to
-              // /host/:sessionId. Intentionally a no-op for now — do NOT
-              // fake a PIN or a session here.
+              if (!canLaunch || launching) return
+              void launchGame()
             }}
           >
-            Lancer la partie
+            {launching ? 'Lancement…' : 'Lancer la partie'}
           </Button>
           {launchReason && <p className="host-launch__hint">{launchReason}</p>}
         </div>
@@ -864,6 +899,12 @@ export function HostEditor() {
         aria-hidden={pendingType ? true : undefined}
       >
         <h1 style={{ marginBottom: 'var(--space-4)' }}>Éditeur de quiz</h1>
+
+        {launchError && (
+          <p className="join-error" role="alert">
+            {launchError}
+          </p>
+        )}
 
         {actionError && (
           <p className="join-error" role="alert">
