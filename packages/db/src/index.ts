@@ -14,4 +14,7 @@ export {
   createGameSession, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore, listSessionPlayersByScore,
   type GameSession, type SessionPlayer, type AnswerRecord, type SessionStatus,
 } from './repos/session.js'
+export {
+  listSessions, getSessionReport, type SessionSummary, type SessionReport,
+} from './repos/reports.js'
 export * as schema from './schema.js'
