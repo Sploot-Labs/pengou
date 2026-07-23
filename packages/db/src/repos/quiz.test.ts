@@ -3,7 +3,7 @@ import { startTestDb } from '../test-helpers.js'
 import { runMigrations } from '../migrate.js'
 import { schema } from '../index.js'
 import { tenantScope } from '../tenant.js'
-import { createQuiz, listQuizzes, getQuiz } from './quiz.js'
+import { createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz } from './quiz.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
 let tenantA: string
@@ -47,5 +47,33 @@ describe('repo quiz scoped par tenant', () => {
     const qb = await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerB, title: 'Quiz B2' })
     const leaked = await getQuiz(tenantScope(ctx.db, tenantA), qb.id)
     expect(leaked).toBeNull()
+  })
+
+  it('updateQuiz modifie un quiz du tenant du scope', async () => {
+    const q = await createQuiz(tenantScope(ctx.db, tenantA), { ownerId: ownerA, title: 'Quiz A2' })
+    const updated = await updateQuiz(tenantScope(ctx.db, tenantA), q.id, { title: 'Quiz A2 modifié' })
+    expect(updated?.title).toBe('Quiz A2 modifié')
+  })
+
+  it('updateQuiz renvoie null pour un quiz d\'un autre tenant (pas de fuite)', async () => {
+    const qb = await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerB, title: 'Quiz B3' })
+    const result = await updateQuiz(tenantScope(ctx.db, tenantA), qb.id, { title: 'hack' })
+    expect(result).toBeNull()
+    const untouched = await getQuiz(tenantScope(ctx.db, tenantB), qb.id)
+    expect(untouched?.title).toBe('Quiz B3')
+  })
+
+  it('deleteQuiz supprime un quiz du tenant du scope', async () => {
+    const q = await createQuiz(tenantScope(ctx.db, tenantA), { ownerId: ownerA, title: 'Quiz A3' })
+    const ok = await deleteQuiz(tenantScope(ctx.db, tenantA), q.id)
+    expect(ok).toBe(true)
+    expect(await getQuiz(tenantScope(ctx.db, tenantA), q.id)).toBeNull()
+  })
+
+  it('deleteQuiz renvoie false pour un quiz d\'un autre tenant (pas de fuite)', async () => {
+    const qb = await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerB, title: 'Quiz B4' })
+    const ok = await deleteQuiz(tenantScope(ctx.db, tenantA), qb.id)
+    expect(ok).toBe(false)
+    expect(await getQuiz(tenantScope(ctx.db, tenantB), qb.id)).not.toBeNull()
   })
 })
