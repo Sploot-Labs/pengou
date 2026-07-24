@@ -1,4 +1,4 @@
-import type { RefObject } from 'react'
+import type { Ref } from 'react'
 
 /**
  * `PodiumView` — composant de PRÉSENTATION pur, alimenté par l'événement
@@ -37,8 +37,11 @@ export interface PodiumViewProps {
    * (ex. un grand écran qui aurait rejoint juste avant `podium` sans avoir
    * vu le `scoreboard` précédent). */
   fullRanking?: PodiumEntry[]
-  /** Cible du focus RGAA 2.4.3 au passage à cette phase — posée par l'appelant. */
-  headingRef?: RefObject<HTMLHeadingElement>
+  /** Cible du focus RGAA 2.4.3 au passage à cette phase — posée par l'appelant.
+   * Accepte aussi bien un `RefObject` (HostLive) qu'une callback ref (grand
+   * écran — voir `useFocusOnMount`, qui focalise au montage plutôt que sur
+   * le changement de `phase`). */
+  headingRef?: Ref<HTMLHeadingElement>
   /** Pitch de conversion en bas d'écran (grand écran / audience) — absent sur
    * le contrôleur hôte, qui est déjà un utilisateur inscrit. */
   showConversionFooter?: boolean

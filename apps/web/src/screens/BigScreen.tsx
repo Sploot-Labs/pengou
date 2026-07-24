@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { AnimatedBar, Confetti, CountUp, useCue } from '../motion/index.js'
+import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue, useFocusOnMount } from '../motion/index.js'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
 import { ThemeProvider } from '../theme/ThemeProvider.js'
@@ -112,9 +112,7 @@ function BigScreenInner() {
   const [ranking, setRanking] = useState<RankingEntry[]>([])
   const [podiumTop, setPodiumTop] = useState<RankingEntry[]>([])
 
-  const phaseHeadingRef = useRef<HTMLHeadingElement>(null)
-  const podiumHeadingRef = useRef<HTMLHeadingElement>(null)
-  const isFirstRender = useRef(true)
+  const focusPhaseHeading = useFocusOnMount<HTMLHeadingElement>()
 
   /* ---------------------------------------------------------------- */
   /* screen:join — une seule tentative (jeton à usage unique)           */
@@ -275,20 +273,6 @@ function BigScreenInner() {
     return () => window.clearTimeout(t)
   }, [phase, players])
 
-  // RGAA 2.4.3 : focus sur le titre propre à la nouvelle phase — jamais au
-  // tout premier rendu.
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false
-      return
-    }
-    phaseHeadingRef.current?.focus()
-  }, [phase])
-
-  useEffect(() => {
-    if (phase === 'podium') podiumHeadingRef.current?.focus()
-  }, [phase])
-
   if (joinState === 'error') {
     return (
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
@@ -436,11 +420,12 @@ function BigScreenInner() {
         </div>
       )}
 
+      <PhaseTransition phaseKey={phase} className="big-phase-layer">
       {phase === 'lobby' && (
         <div className="big-lobby">
           <Logo />
           <div>
-            <h1 className="ab-hero-title" ref={phaseHeadingRef} tabIndex={-1}>
+            <h1 className="ab-hero-title" ref={focusPhaseHeading} tabIndex={-1}>
               {quizTitle}
             </h1>
             <p className="big-lobby__tagline">Le quiz en direct, open-source.</p>
@@ -486,7 +471,7 @@ function BigScreenInner() {
             <TimerRing remainingSeconds={remaining ?? question.timeLimit} totalSeconds={question.timeLimit} size={180} large />
           </div>
 
-          <h1 className="big-live__prompt" ref={phaseHeadingRef} tabIndex={-1}>
+          <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
             {question.prompt}
           </h1>
 
@@ -506,7 +491,7 @@ function BigScreenInner() {
                 <span className="host-badge">Révélation</span>
               </div>
 
-              <h1 className="big-live__prompt" ref={phaseHeadingRef} tabIndex={-1}>
+              <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
                 {question.prompt}
               </h1>
 
@@ -520,7 +505,7 @@ function BigScreenInner() {
             // que pour la fenêtre de course résiduelle (ex. `question:reveal` traité avant le
             // `question:show` rejoué) : mieux vaut ce message honnête qu'un écran vide. La
             // bascule auto reveal→scoreboard ci-dessus ne dépend pas de `question`.
-            <h1 className="big-live__prompt" ref={phaseHeadingRef} tabIndex={-1}>
+            <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
               Résultat indisponible pour cette question — la suivante arrive.
             </h1>
           )}
@@ -529,7 +514,7 @@ function BigScreenInner() {
 
       {phase === 'scoreboard' && (
         <div className="big-scoreboard">
-          <h1 className="ab-hero-title" ref={phaseHeadingRef} tabIndex={-1}>
+          <h1 className="ab-hero-title" ref={focusPhaseHeading} tabIndex={-1}>
             Classement
           </h1>
           {ranking.length === 0 ? (
@@ -555,9 +540,10 @@ function BigScreenInner() {
       {phase === 'podium' && (
         <div style={{ position: 'relative' }}>
           <Confetti active />
-          <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={podiumHeadingRef} showConversionFooter />
+          <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={focusPhaseHeading} showConversionFooter />
         </div>
       )}
+      </PhaseTransition>
     </main>
   )
 }

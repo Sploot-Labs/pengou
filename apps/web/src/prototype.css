@@ -967,6 +967,16 @@
   gap: var(--space-5);
 }
 
+/* Couche de transition de phase : le wrapper de <PhaseTransition> remplace le
+   bloc de phase comme enfant flex de .big-screen — il doit donc porter le même
+   comportement (flex:1 + colonne) pour que le `flex:1` du bloc interne opère. */
+.big-phase-layer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
 .big-lobby {
   flex: 1;
   display: flex;
