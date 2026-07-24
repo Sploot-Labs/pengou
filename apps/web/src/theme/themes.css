@@ -1,0 +1,74 @@
+/* Rôles produit dérivés des primitives brand-kit, par thème.
+   Le brand-kit fournit les primitives --sploot-* (light/dark via data-scheme). */
+
+[data-theme='app'] {
+  --stage: var(--sploot-bg);
+  --stage-2: var(--sploot-surface-2);
+  --surface: var(--sploot-surface);
+  --surface-2: var(--sploot-surface-2);
+  --line: var(--sploot-line);
+  --ink: var(--sploot-text);
+  --ink-dim: var(--sploot-muted);
+  --ink-strong: var(--sploot-text);
+  --brand: var(--sploot-ginger);
+  --brand-2: var(--sploot-petrol);
+  --success: var(--sploot-ok);
+  --warn: var(--sploot-warn);
+  --danger: var(--sploot-bad);
+  --grad-brand: linear-gradient(135deg, var(--sploot-ginger), var(--sploot-petrol));
+  color-scheme: light dark;
+}
+
+/* Grand écran : sombre assumé (le sous-arbre force data-scheme="dark"). */
+[data-theme='scene'] {
+  --stage: var(--sploot-bg);
+  --stage-2: var(--sploot-surface-2);
+  --surface: var(--sploot-surface);
+  --surface-2: var(--sploot-surface-2);
+  --line: var(--sploot-line);
+  --ink: var(--sploot-text);
+  --ink-dim: var(--sploot-muted);
+  --ink-strong: var(--sploot-text);
+  --brand: var(--sploot-ginger);
+  --brand-2: var(--sploot-petrol-soft);
+  --success: var(--sploot-ok);
+  --warn: var(--sploot-warn);
+  --danger: var(--sploot-bad);
+  --grad-brand: linear-gradient(135deg, var(--sploot-ginger), var(--sploot-petrol-soft));
+  color-scheme: dark;
+}
+
+/* data-scheme force la palette brand-kit indépendamment de prefers-color-scheme.
+   Le brand-kit expose déjà data-theme="dark"|"light" sur :root ; on réexpose
+   les mêmes valeurs sous notre attribut dédié data-scheme pour lever
+   l'ambiguïté avec le thème PRODUIT (data-theme). */
+[data-scheme='dark'] {
+  --sploot-ginger: #e88a3c;
+  --sploot-ginger-deep: #c86e24;
+  --sploot-petrol: #4fa3a0;
+  --sploot-petrol-soft: #6fbdb8;
+  --sploot-bg: #17150f;
+  --sploot-surface: #201d15;
+  --sploot-surface-2: #2a261c;
+  --sploot-text: #ede7da;
+  --sploot-muted: #a29a8b;
+  --sploot-line: #34301f;
+  --sploot-ok: #5fa778;
+  --sploot-warn: #e0a64b;
+  --sploot-bad: #d96a52;
+}
+[data-scheme='light'] {
+  --sploot-ginger: #d9772b;
+  --sploot-ginger-deep: #b85f1e;
+  --sploot-petrol: #1e5f60;
+  --sploot-petrol-soft: #2f7c7b;
+  --sploot-bg: #ece7dd;
+  --sploot-surface: #f5f1e9;
+  --sploot-surface-2: #e4decf;
+  --sploot-text: #241f18;
+  --sploot-muted: #6e665a;
+  --sploot-line: #d8d0c1;
+  --sploot-ok: #3f7d57;
+  --sploot-warn: #c98a2e;
+  --sploot-bad: #c0503a;
+}

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { normalizeText, sliderTolerance } from '@splootlabs/quiz'
+import { useCue, useSound } from '../motion/index.js'
 import { clearPlayerSession, loadPlayerSession } from '../realtime/playerSession'
 import { useGameSocket } from '../realtime/useGameSocket'
 import { AnswerTile, Button, TimerRing } from '../ui'
@@ -135,6 +136,8 @@ type Connection = 'online' | 'reconnecting' | 'reconnected'
 export function PlayerLive() {
   const navigate = useNavigate()
   const { socket, emitAck, on } = useGameSocket()
+  const cue = useCue()
+  const sound = useSound()
 
   // Chargé une seule fois : c'est l'identité de joueur anonyme (voir
   // realtime/playerSession.ts). Si absente, `/join` est la seule route valide.
@@ -225,6 +228,8 @@ export function PlayerLive() {
 
   async function submitAnswer(answer: unknown) {
     if (phase !== 'question') return
+    sound.unlock()
+    cue('answer.submit')
     // Verrouille l'UI immédiatement (perçu instantané) — la confirmation
     // serveur arrive en tâche de fond.
     setAnswerRejection(null)
@@ -386,6 +391,12 @@ export function PlayerLive() {
     const id = window.setInterval(tick, 250)
     return () => window.clearInterval(id)
   }, [timer, phase])
+
+  // Cue sonore/visuel d'urgence quand il reste 5 s — fixée une seule fois au
+  // passage à 5 (les ticks suivants ne re-déclenchent pas la même valeur).
+  useEffect(() => {
+    if (phase === 'question' && remaining === 5) cue('timer.urgent')
+  }, [remaining, phase])
 
   // Temps écoulé sans action du joueur : verrouille sur l'état « répondu »,
   // comme un envoi (mais `hasSubmission()` restera faux → message « temps
@@ -566,6 +577,23 @@ export function PlayerLive() {
   // même si on ne sait plus laquelle.
   const reconnectMismatch =
     evalResult?.kind === 'timeout' && lastAward !== null && lastAward > 0
+
+  // Cue de résultat — une seule fois par transition vers 'result'. `evalResult`/
+  // `reconnectMismatch` sont volontairement absents des deps : ils sont
+  // recalculés à chaque rendu à partir de `phase`/`revealPayload`/etc., et les
+  // inclure redéclencherait la cue sur des rendus qui ne changent pas de phase
+  // (même logique que les effets `phase === 'result'` ci-dessus).
+  useEffect(() => {
+    if (phase !== 'result' || !evalResult) return
+    // On passe l'élément du titre de résultat en `ctx.el` : c'est ce qui permet à
+    // `pulseGreen`/`shake` (motion/effects.ts) de réellement animer quelque chose — sans
+    // contexte, ces effets sont des no-op (voir le commentaire en tête d'effects.ts).
+    if (reconnectMismatch || evalResult.kind === 'correct' || evalResult.kind === 'partial')
+      cue('answer.correct', { el: resultHeadingRef.current ?? undefined })
+    else if (evalResult.kind === 'incorrect') cue('answer.incorrect', { el: resultHeadingRef.current ?? undefined })
+    // 'timeout' → aucun cue (le joueur n'a pas répondu)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase])
 
   return (
     <main className="player-screen" id="contenu-principal" tabIndex={-1}>
