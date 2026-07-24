@@ -2,7 +2,15 @@ import type { CueContext } from './cues.js'
 
 /** Effets visuels ponctuels via la Web Animations API (el.animate) : pas besoin
  * de framer-motion pour ces micro-animations ancrées à un élément. Chaque effet
- * est un no-op si aucun élément n'est fourni. */
+ * est un no-op si aucun élément n'est fourni.
+ *
+ * IMPORTANT (portée réelle) : ces effets ne jouent QUE si le cue est déclenché
+ * AVEC `{ el }`. Les cues `phase.enter:*` de BigScreen (BigScreen.tsx) sont
+ * actuellement déclenchés sans contexte (`cue('phase.enter:reveal')`, etc.) —
+ * donc no-op, silencieusement. Seuls les cues `answer.correct`/`answer.incorrect`
+ * de PlayerLive (PlayerLive.tsx, via `resultHeadingRef`) passent un élément à ce
+ * jour, ce qui en fait le seul chemin de production où ce mécanisme s'exécute
+ * réellement. */
 
 export function pulseGreen(ctx: CueContext): void {
   ctx.el?.animate(

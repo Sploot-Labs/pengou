@@ -26,6 +26,12 @@ export const registry: Partial<Record<string, CueEffect>> = {
   'phase.enter:podium': {
     animation: sweepIn,
     sound: 'fanfare',
+    // NOTE (scope honnête) : ce champ `media` n'est PAS ENCORE consommé par
+    // `MotionProvider.fire` (voir MotionProvider.tsx) — aucun composant ne lit
+    // `effect.media`, et `MediaOverlay` n'a aucun consommateur. La célébration
+    // confettis du podium vient en réalité du `<Confetti active />` monté
+    // directement dans BigScreen (screens/BigScreen.tsx), PAS de cette entrée
+    // de registre. Le câblage MediaOverlay est un suivi (follow-up).
     media: { src: 'confetti-bg', mode: 'overlay' },
   },
   'phase.enter:scoreboard': { animation: sweepIn },

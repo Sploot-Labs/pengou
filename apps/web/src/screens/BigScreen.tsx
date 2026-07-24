@@ -381,8 +381,12 @@ function BigScreenInner() {
           >
             <div className="big-distribution__bar-track">
               <div
+                // La proportion (row.count / maxCount) est encodée UNE SEULE fois, par le
+                // scaleY de <AnimatedBar> ci-dessous. Cette div ne fait que remplir le rail
+                // (height: 100%) : lui redonner ici (row.count/maxCount)*100% doublerait
+                // l'encodage (fill = ratio_outer × scaleY(ratio) = ratio² au lieu de ratio).
                 className="big-distribution__bar"
-                style={{ height: `${(row.count / maxCount) * 100}%` }}
+                style={{ height: '100%' }}
               >
                 <AnimatedBar
                   value={row.count}

@@ -585,8 +585,12 @@ export function PlayerLive() {
   // (même logique que les effets `phase === 'result'` ci-dessus).
   useEffect(() => {
     if (phase !== 'result' || !evalResult) return
-    if (reconnectMismatch || evalResult.kind === 'correct' || evalResult.kind === 'partial') cue('answer.correct')
-    else if (evalResult.kind === 'incorrect') cue('answer.incorrect')
+    // On passe l'élément du titre de résultat en `ctx.el` : c'est ce qui permet à
+    // `pulseGreen`/`shake` (motion/effects.ts) de réellement animer quelque chose — sans
+    // contexte, ces effets sont des no-op (voir le commentaire en tête d'effects.ts).
+    if (reconnectMismatch || evalResult.kind === 'correct' || evalResult.kind === 'partial')
+      cue('answer.correct', { el: resultHeadingRef.current ?? undefined })
+    else if (evalResult.kind === 'incorrect') cue('answer.incorrect', { el: resultHeadingRef.current ?? undefined })
     // 'timeout' → aucun cue (le joueur n'a pas répondu)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase])
