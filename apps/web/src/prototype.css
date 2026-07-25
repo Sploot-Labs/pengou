@@ -1952,6 +1952,22 @@
   width: min(420px, 100%);
 }
 
+.home-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+/* Active filter chip — the `.ab-button--ghost` base already gives the
+   44px tap target; this just adds a visible "pressed" state on top of it,
+   driven by the same `aria-pressed` a screen reader announces. */
+.home-filters .ab-button--ghost[aria-pressed='true'] {
+  background: var(--surface-2);
+  border-color: var(--brand);
+  color: var(--ink-strong);
+}
+
 .home-list {
   display: flex;
   flex-direction: column;

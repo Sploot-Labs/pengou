@@ -32,6 +32,23 @@ const STATUS_LABEL: Record<SessionStatus, string> = {
   ended: 'Terminée',
 }
 
+type SessionFilter = 'all' | SessionStatus
+
+/** Filter chips shown above "Parties récentes" — order matches the brief:
+ * Toutes / En cours / En attente / Terminées (not the `SessionStatus` key
+ * order, which reads lobby/active/ended). */
+const SESSION_FILTERS: { key: SessionFilter; label: string }[] = [
+  { key: 'all', label: 'Toutes' },
+  { key: 'active', label: 'En cours' },
+  { key: 'lobby', label: 'En attente' },
+  { key: 'ended', label: 'Terminées' },
+]
+
+/** How many rows render before the "Voir toutes" ghost button takes over —
+ * keeps a tenant with hundreds of sessions from turning this into an
+ * unscrollable wall by default. */
+const SESSIONS_PAGE_SIZE = 8
+
 /** `Intl`-based formatting, not a manual split: handles locale, and reads
  * clearly for a French host (`23 juil. 2026, 14:05`). `null` (session never
  * started — still in lobby) renders as an explicit label rather than a
@@ -115,6 +132,22 @@ export function Home() {
   const [sessions, setSessions] = useState<SessionSummary[]>([])
   const [sessionsLoading, setSessionsLoading] = useState(true)
   const [sessionsError, setSessionsError] = useState<string | null>(null)
+  const [sessionFilter, setSessionFilter] = useState<SessionFilter>('all')
+  const [showAllSessions, setShowAllSessions] = useState(false)
+
+  const filteredSessions =
+    sessionFilter === 'all' ? sessions : sessions.filter((s) => s.status === sessionFilter)
+  const visibleSessions = showAllSessions
+    ? filteredSessions
+    : filteredSessions.slice(0, SESSIONS_PAGE_SIZE)
+  const hiddenSessionCount = filteredSessions.length - visibleSessions.length
+
+  function selectSessionFilter(next: SessionFilter) {
+    setSessionFilter(next)
+    // A new filter starts collapsed again — "Voir toutes" is scoped to
+    // whichever filter was active when it was clicked, not a global switch.
+    setShowAllSessions(false)
+  }
 
   function loadSessions() {
     setSessionsLoading(true)
@@ -246,20 +279,48 @@ export function Home() {
               Aucune partie pour l'instant — lancez-en une depuis un quiz.
             </p>
           ) : (
-            <ul className="home-list">
-              {sessions.map((s) => (
-                <li key={s.id}>
-                  <Link className="home-list__item" to={`/sessions/${s.id}`}>
-                    <span className="home-list__title">{s.quizTitle}</span>
-                    <span className="home-list__meta">
-                      PIN {s.pin} · {formatDate(s.startedAt)} · {s.playerCount} joueur
-                      {s.playerCount > 1 ? 's' : ''}
-                    </span>
-                    <span className="host-badge">{STATUS_LABEL[s.status]}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <>
+              <div className="home-filters" role="group" aria-label="Filtrer les parties par statut">
+                {SESSION_FILTERS.map((f) => (
+                  <Button
+                    key={f.key}
+                    variant="ghost"
+                    type="button"
+                    aria-pressed={sessionFilter === f.key}
+                    onClick={() => selectSessionFilter(f.key)}
+                  >
+                    {f.label}
+                  </Button>
+                ))}
+              </div>
+
+              {filteredSessions.length === 0 ? (
+                <p className="ab-empty-state">Aucune partie ne correspond à ce filtre.</p>
+              ) : (
+                <>
+                  <ul className="home-list">
+                    {visibleSessions.map((s) => (
+                      <li key={s.id}>
+                        <Link className="home-list__item" to={`/sessions/${s.id}`}>
+                          <span className="home-list__title">{s.quizTitle}</span>
+                          <span className="home-list__meta">
+                            PIN {s.pin} · {formatDate(s.startedAt)} · {s.playerCount} joueur
+                            {s.playerCount > 1 ? 's' : ''}
+                          </span>
+                          <span className="host-badge">{STATUS_LABEL[s.status]}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {hiddenSessionCount > 0 && (
+                    <Button variant="ghost" type="button" onClick={() => setShowAllSessions(true)}>
+                      Voir toutes les parties ({filteredSessions.length})
+                    </Button>
+                  )}
+                </>
+              )}
+            </>
           )}
         </section>
       </main>

@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
-import { render, screen, waitFor } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { describe, expect, it, vi, beforeEach } from 'vitest'
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
 import { MotionProvider } from '../motion/index.js'
+import type { SessionStatus, SessionSummary } from '../api/sessions'
 
 vi.mock('../api/quizzes', () => ({
   listQuizzes: vi.fn(() =>
@@ -18,8 +19,33 @@ vi.mock('../api/auth', () => ({
 
 import { Home } from './Home'
 
+/** 12 sessions of varied statuses — enough to exercise both the 8-row
+ * limit and the status filter without depending on real API data. */
+function makeSessions(): SessionSummary[] {
+  const statuses: SessionStatus[] = [
+    'ended', 'ended', 'ended', 'ended', 'ended',
+    'active', 'active', 'active',
+    'lobby', 'lobby', 'lobby', 'lobby',
+  ]
+  return statuses.map((status, i) => ({
+    id: `s${i}`,
+    pin: String(100000 + i),
+    status,
+    startedAt: status === 'lobby' ? null : '2026-07-20T10:00:00.000Z',
+    endedAt: status === 'ended' ? '2026-07-20T10:30:00.000Z' : null,
+    quizId: 'q1',
+    quizTitle: `Partie ${i}`,
+    playerCount: 3,
+  }))
+}
+
 describe('Home', () => {
   beforeEach(() => vi.clearAllMocks())
+  // No global cleanup is configured in this repo (see vitest.setup.ts) —
+  // without this, each test's <Home> tree piles up in `document`, and the
+  // filter tests' broad role queries (group/button by name) would match
+  // stale nodes from earlier tests in this file.
+  afterEach(cleanup)
 
   it('affiche le CTA primaire et les quiz en cartes', async () => {
     render(
@@ -53,5 +79,65 @@ describe('Home', () => {
     )
 
     await waitFor(() => expect(screen.getByText(/on te fait de la place/i)).toBeInTheDocument())
+  })
+
+  it('limite les parties récentes à 8 lignes avec un bouton « Voir toutes »', async () => {
+    const { listSessions } = await import('../api/sessions')
+    vi.mocked(listSessions).mockResolvedValueOnce(makeSessions())
+
+    render(
+      <MotionProvider>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </MotionProvider>,
+    )
+
+    await waitFor(() => {
+      const items = document.querySelectorAll('.home-list__item')
+      expect(items.length).toBe(8)
+    })
+
+    const showAllButton = screen.getByRole('button', { name: /voir toutes les parties \(12\)/i })
+    expect(showAllButton).toBeInTheDocument()
+
+    fireEvent.click(showAllButton)
+    await waitFor(() => {
+      const items = document.querySelectorAll('.home-list__item')
+      expect(items.length).toBe(12)
+    })
+  })
+
+  it('le filtre « Terminées » ne laisse que les sessions ended', async () => {
+    const { listSessions } = await import('../api/sessions')
+    vi.mocked(listSessions).mockResolvedValueOnce(makeSessions())
+
+    render(
+      <MotionProvider>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </MotionProvider>,
+    )
+
+    await waitFor(() =>
+      expect(document.querySelectorAll('.home-list__item').length).toBeGreaterThan(0),
+    )
+
+    const filterGroup = screen.getByRole('group', { name: /filtrer les parties par statut/i })
+    const endedButton = within(filterGroup).getByRole('button', { name: 'Terminées' })
+    expect(endedButton).toHaveAttribute('aria-pressed', 'false')
+
+    fireEvent.click(endedButton)
+
+    expect(endedButton).toHaveAttribute('aria-pressed', 'true')
+    await waitFor(() => {
+      const items = document.querySelectorAll('.home-list__item')
+      expect(items.length).toBe(5)
+    })
+    // Every remaining row shows the "Terminée" status badge.
+    document.querySelectorAll('.home-list__item .host-badge').forEach((badge) => {
+      expect(badge.textContent).toBe('Terminée')
+    })
   })
 })
