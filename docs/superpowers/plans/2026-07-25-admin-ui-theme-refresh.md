@@ -15,7 +15,7 @@
 - **Le nom produit reste « Arena »** (le grief portait sur les couleurs).
 - **Voix Sploot** dans l'accueil/états vides : un seul clin d'œil 🐾 par écran, sérieux d'abord (cf. `brand-kit/voice-and-tone.md`).
 - **Commits fréquents**, un par task minimum. Vitest doit rester vert après chaque task.
-- Lancer les tests web : `npm --prefix apps/web test -- --run` (ou le task runner du repo si différent — vérifier `apps/web/package.json`).
+- Lancer les tests web : `pnpm test` (ou le task runner du repo si différent — vérifier `apps/web/package.json`).
 
 ---
 
@@ -74,7 +74,7 @@ it('ne réintroduit pas la palette Kahoot (rose/violet)', () => {
 
 - [ ] **Step 2 : Lancer, vérifier l'échec**
 
-Run: `npm --prefix apps/web test -- --run themes.test.ts`
+Run: `pnpm vitest run apps/web/src/theme/themes.test.ts`
 Expected: FAIL (les rôles `--ans-*`/`--gold`/`--focus` ne sont pas encore dans `themes.css`).
 
 - [ ] **Step 3 : Ajouter les rôles dans `themes.css`**
@@ -101,7 +101,7 @@ Note : `--warn` est déjà mappé sur `--sploot-warn` dans les deux blocs — ne
 
 - [ ] **Step 4 : Lancer, vérifier le vert**
 
-Run: `npm --prefix apps/web test -- --run themes.test.ts`
+Run: `pnpm vitest run apps/web/src/theme/themes.test.ts`
 Expected: PASS.
 
 - [ ] **Step 5 : Commit**
@@ -151,7 +151,7 @@ describe('AppShell', () => {
 
 - [ ] **Step 2 : Lancer, vérifier l'échec**
 
-Run: `npm --prefix apps/web test -- --run theme-mounting.test.tsx`
+Run: `pnpm vitest run apps/web/src/theme/theme-mounting.test.tsx`
 Expected: FAIL (aucun `[data-theme="app"]` rendu par AppShell).
 
 - [ ] **Step 3 : Envelopper le contenu d'AppShell**
@@ -175,7 +175,7 @@ import { ThemeProvider } from './theme/ThemeProvider'
 
 - [ ] **Step 4 : Lancer, vérifier le vert (et non-régression globale)**
 
-Run: `npm --prefix apps/web test -- --run`
+Run: `pnpm test`
 Expected: PASS (theme-mounting + suite existante).
 
 - [ ] **Step 5 : Commit**
@@ -217,7 +217,7 @@ it("tokens.css ne définit plus de primitive couleur Kahoot", () => {
 
 - [ ] **Step 2 : Lancer, vérifier l'échec**
 
-Run: `npm --prefix apps/web test -- --run themes.test.ts`
+Run: `pnpm vitest run apps/web/src/theme/themes.test.ts`
 Expected: FAIL (ces valeurs sont encore dans `tokens.css`).
 
 - [ ] **Step 3 : Retirer les primitives couleur de `tokens.css`**
@@ -232,9 +232,9 @@ Puis, dans les styles de base, remplacer les usages devenus orphelins :
 
 - [ ] **Step 4 : Lancer toute la suite + inspection visuelle**
 
-Run: `npm --prefix apps/web test -- --run`
+Run: `pnpm test`
 Expected: PASS.
-Puis QA visuelle rapide : `npm --prefix apps/web run dev`, vérifier `/` (accueil) — fond chaud, accents ginger/petrol, plus aucun rose/violet.
+Puis QA visuelle rapide : `pnpm --filter @splootlabs/web dev`, vérifier `/` (accueil) — fond chaud, accents ginger/petrol, plus aucun rose/violet.
 
 - [ ] **Step 5 : Commit**
 
@@ -279,7 +279,7 @@ Si le montage réel de `/join` échoue (dépendances socket), remplacer par un t
 
 - [ ] **Step 2 : Lancer, vérifier l'échec**
 
-Run: `npm --prefix apps/web test -- --run theme-mounting.test.tsx`
+Run: `pnpm vitest run apps/web/src/theme/theme-mounting.test.tsx`
 Expected: FAIL.
 
 - [ ] **Step 3 : Wrapper les routes scene**
@@ -307,7 +307,7 @@ Puis envelopper les éléments concernés :
 
 - [ ] **Step 4 : Lancer + QA visuelle**
 
-Run: `npm --prefix apps/web test -- --run`
+Run: `pnpm test`
 Expected: PASS.
 QA : `/join` et le live host = fond dark chaud (`#17150F`), accents ginger/petrol, plus de midnight bleu.
 
@@ -353,7 +353,7 @@ describe('AppHeader', () => {
 
 - [ ] **Step 2 : Lancer, vérifier l'échec**
 
-Run: `npm --prefix apps/web test -- --run AppHeader.test.tsx`
+Run: `pnpm vitest run apps/web/src/ui/AppHeader.test.tsx`
 Expected: FAIL (module introuvable).
 
 - [ ] **Step 3 : Implémenter `AppHeader`**
@@ -381,7 +381,7 @@ export function AppHeader({ brandline, actions }: { brandline?: string; actions?
 
 - [ ] **Step 4 : Lancer, vérifier le vert**
 
-Run: `npm --prefix apps/web test -- --run AppHeader.test.tsx`
+Run: `pnpm vitest run apps/web/src/ui/AppHeader.test.tsx`
 Expected: PASS.
 
 - [ ] **Step 5 : Commit**
@@ -442,7 +442,7 @@ Note : ce test suppose que `listQuizzes` renvoie `questionCount`. Vérifier le t
 
 - [ ] **Step 2 : Lancer, vérifier l'échec**
 
-Run: `npm --prefix apps/web test -- --run Home.test.tsx`
+Run: `pnpm vitest run apps/web/src/screens/Home.test.tsx`
 Expected: FAIL (pas encore de cartes / de bouton « Nouveau quiz » primaire au bon rôle).
 
 - [ ] **Step 3 : Refondre le rendu de `Home.tsx`**
@@ -543,7 +543,7 @@ Ajouter (section Home) :
 
 - [ ] **Step 5 : Lancer + QA**
 
-Run: `npm --prefix apps/web test -- --run Home.test.tsx`
+Run: `pnpm vitest run apps/web/src/screens/Home.test.tsx`
 Expected: PASS. QA visuelle : grille responsive, focus visible sur cartes, CTA primaire ginger.
 
 - [ ] **Step 6 : Commit**
@@ -590,7 +590,7 @@ Vérifier que les cartes de questions utilisent `--surface`/`--line`/`--radius-m
 
 - [ ] **Step 4 : Lancer + QA**
 
-Run: `npm --prefix apps/web test -- --run`
+Run: `pnpm test`
 Expected: PASS. QA : éditeur en thème app chaud, header cohérent avec Home.
 
 - [ ] **Step 5 : Commit**
@@ -627,7 +627,7 @@ Si besoin, dans `prototype.css`, donner à `.join-card` un fond `--surface`, bor
 
 - [ ] **Step 4 : Lancer + QA**
 
-Run: `npm --prefix apps/web test -- --run`
+Run: `pnpm test`
 Expected: PASS. QA : les deux écrans identiques en structure, thème app.
 
 - [ ] **Step 5 : Commit**
@@ -672,7 +672,7 @@ Ajouter/ajuster dans `prototype.css` :
 
 - [ ] **Step 4 : Lancer + QA**
 
-Run: `npm --prefix apps/web test -- --run`
+Run: `pnpm test`
 Expected: PASS. QA : rapport lisible, cartes de stats, thème app.
 
 - [ ] **Step 5 : Commit**
@@ -701,12 +701,12 @@ Compléter `theme-mounting.test.tsx` : un cas vérifiant qu'un écran admin mont
 
 - [ ] **Step 2 : Lancer**
 
-Run: `npm --prefix apps/web test -- --run`
+Run: `pnpm test`
 Expected: PASS.
 
 - [ ] **Step 3 : Revue de contraste manuelle (checklist)**
 
-Avec `npm --prefix apps/web run dev`, en **app-clair, app-sombre et scene-dark**, vérifier au contrôleur de contraste du navigateur :
+Avec `pnpm --filter @splootlabs/web dev`, en **app-clair, app-sombre et scene-dark**, vérifier au contrôleur de contraste du navigateur :
 - texte principal `--ink` sur `--stage`/`--surface` ≥ 4.5:1 ;
 - `--ink-dim` sur `--surface` ≥ 4.5:1 (sinon le réserver aux gros textes) ;
 - focus `--focus` sur `--surface` et `--stage` ≥ 3:1 ;
