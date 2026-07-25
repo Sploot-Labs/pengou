@@ -9,7 +9,7 @@ export default defineConfig({
     // (« This host is not allowed »). Pour exposer le dev server via un tunnel
     // (ngrok) le temps d'un test, on autorise UNIQUEMENT les domaines ngrok
     // (wildcards à point initial) — pas « n'importe quel host ».
-    allowedHosts: ['.ngrok-free.app', '.ngrok.app', '.ngrok.io', '.ngrok.dev'],
+    allowedHosts: ['.ngrok-free.app', '.ngrok-free.dev', '.ngrok.app', '.ngrok.io', '.ngrok.dev'],
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
