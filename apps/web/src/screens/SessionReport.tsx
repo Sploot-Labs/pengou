@@ -150,9 +150,6 @@ export function SessionReport() {
       <header className="ab-shell__header">
         <Logo />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p className="host-brandline">
-            <strong>Arena</strong> — quiz en direct, open-source · chez vous ou dans le cloud
-          </p>
           <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
             <Link to="/">← Retour à l'accueil</Link>
           </span>
@@ -168,8 +165,8 @@ export function SessionReport() {
         <div className="report-summary">
           <PinDisplay pin={session.pin} compact />
           <div className="report-summary__facts">
-            <span className="host-badge">
-              <span aria-hidden="true">●</span> {STATUS_LABEL[session.status]}
+            <span className={`host-badge host-badge--${session.status}`}>
+              {STATUS_LABEL[session.status]}
             </span>
             <span>{formatDate(session.startedAt)}</span>
             {session.startedAt && session.endedAt && (

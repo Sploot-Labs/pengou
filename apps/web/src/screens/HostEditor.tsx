@@ -942,20 +942,12 @@ export function HostEditor() {
       <div aria-hidden={pendingType ? true : undefined}>
         <AppHeader
           brandline={
-            <>
-              {/* Visible brand/positioning line — carries the dual-mode promise on a
-                  host surface, and replaces the SR-only title that duplicated the
-                  <h1>Éditeur de quiz</h1> in <main>. */}
-              <p>
-                <strong>Arena</strong> — quiz en direct, open-source · chez vous ou dans le cloud
-              </p>
-              <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
-                <button type="button" className="host-link-button" onClick={handleBackToHome}>
-                  ← Retour à l'accueil
-                </button>{' '}
-                · {title}
-              </span>
-            </>
+            <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
+              <button type="button" className="host-link-button" onClick={handleBackToHome}>
+                ← Retour à l'accueil
+              </button>{' '}
+              · {title}
+            </span>
           }
           actions={
             <>

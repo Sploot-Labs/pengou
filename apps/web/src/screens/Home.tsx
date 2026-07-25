@@ -313,7 +313,9 @@ export function Home() {
                             PIN {s.pin} · {formatDate(s.startedAt)} · {s.playerCount} joueur
                             {s.playerCount > 1 ? 's' : ''}
                           </span>
-                          <span className="host-badge">{STATUS_LABEL[s.status]}</span>
+                          <span className={`host-badge host-badge--${s.status}`}>
+                            {STATUS_LABEL[s.status]}
+                          </span>
                         </Link>
                       </li>
                     ))}

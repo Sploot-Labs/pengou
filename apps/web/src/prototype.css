@@ -441,6 +441,57 @@
   color: var(--warn);
 }
 
+/* Session status badges (SessionStatus: lobby/active/ended) — dot + tint per
+   state so the three statuses are scannable at a glance, never by color
+   alone: the status word (STATUS_LABEL) is always the real text content,
+   the dot is a decorative CSS ::before (not exposed as accessible text), and
+   the label color stays --ink-strong (the app's primary text token) so
+   contrast holds well above 4.5:1 regardless of the light tint behind it —
+   only the border and dot carry the full accent color. */
+.host-badge--lobby,
+.host-badge--active,
+.host-badge--ended {
+  color: var(--ink-strong);
+}
+
+.host-badge--lobby::before,
+.host-badge--active::before,
+.host-badge--ended::before {
+  content: '•';
+  margin-right: 4px;
+  line-height: 1;
+}
+
+.host-badge--lobby {
+  background: rgba(255, 197, 61, 0.16);
+  background: color-mix(in srgb, var(--warn) 16%, transparent);
+  border-color: var(--warn);
+}
+
+.host-badge--lobby::before {
+  color: var(--warn);
+}
+
+.host-badge--active {
+  background: rgba(14, 124, 104, 0.16);
+  background: color-mix(in srgb, var(--success) 16%, transparent);
+  border-color: var(--success);
+}
+
+.host-badge--active::before {
+  color: var(--success);
+}
+
+.host-badge--ended {
+  background: rgba(110, 102, 90, 0.16);
+  background: color-mix(in srgb, var(--ink-dim) 16%, transparent);
+  border-color: var(--ink-dim);
+}
+
+.host-badge--ended::before {
+  color: var(--ink-dim);
+}
+
 /* HostEditor metadata + launch validation */
 .host-meta {
   display: grid;
