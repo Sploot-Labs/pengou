@@ -6,7 +6,7 @@ export {
   TenantAccessDeniedError,
 } from './tenant.js'
 export {
-  createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz, type Quiz,
+  createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz, type Quiz, type QuizListItem,
 } from './repos/quiz.js'
 export {
   createQuestion, listQuestions, getQuestion, updateQuestion, deleteQuestion, reorderQuestions, type Question,

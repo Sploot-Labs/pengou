@@ -4,6 +4,7 @@ import { runMigrations } from '../migrate.js'
 import { schema } from '../index.js'
 import { tenantScope } from '../tenant.js'
 import { createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz } from './quiz.js'
+import { createQuestion } from './question.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
 let tenantA: string
@@ -75,5 +76,21 @@ describe('repo quiz scoped par tenant', () => {
     const ok = await deleteQuiz(tenantScope(ctx.db, tenantA), qb.id)
     expect(ok).toBe(false)
     expect(await getQuiz(tenantScope(ctx.db, tenantB), qb.id)).not.toBeNull()
+  })
+
+  it('listQuizzes expose questionCount (N questions, et 0 sans question)', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    const withQuestions = await createQuiz(scope, { ownerId: ownerA, title: 'Quiz avec questions' })
+    const withoutQuestions = await createQuiz(scope, { ownerId: ownerA, title: 'Quiz sans question' })
+    const validMcq = { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] }
+    await createQuestion(scope, withQuestions.id, { type: 'mcq', prompt: 'Q1', timeLimit: 20, payload: validMcq })
+    await createQuestion(scope, withQuestions.id, { type: 'mcq', prompt: 'Q2', timeLimit: 20, payload: validMcq })
+    await createQuestion(scope, withQuestions.id, { type: 'mcq', prompt: 'Q3', timeLimit: 20, payload: validMcq })
+
+    const list = await listQuizzes(scope)
+    const found = list.find((q) => q.id === withQuestions.id)
+    const foundEmpty = list.find((q) => q.id === withoutQuestions.id)
+    expect(found?.questionCount).toBe(3)
+    expect(foundEmpty?.questionCount).toBe(0)
   })
 })

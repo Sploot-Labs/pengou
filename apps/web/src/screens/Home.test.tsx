@@ -7,7 +7,9 @@ import type { SessionStatus, SessionSummary } from '../api/sessions'
 
 vi.mock('../api/quizzes', () => ({
   listQuizzes: vi.fn(() =>
-    Promise.resolve([{ id: 'q1', title: 'Culture G', description: null, updatedAt: '2026-07-20T15:30:00Z' }]),
+    Promise.resolve([
+      { id: 'q1', title: 'Culture G', description: null, updatedAt: '2026-07-20T15:30:00Z', questionCount: 5 },
+    ]),
   ),
   createQuiz: vi.fn(),
 }))
@@ -165,6 +167,7 @@ describe('Home', () => {
         title: 'Quiz avec description',
         description: 'Ceci est une description',
         updatedAt: '2026-07-20T15:30:00Z',
+        questionCount: 1,
       },
     ])
 
@@ -185,8 +188,59 @@ describe('Home', () => {
     expect(screen.getByText(/Modifié le/)).toBeInTheDocument()
     expect(screen.getByText(/20 juil\. 2026/)).toBeInTheDocument()
 
+    // Assert the question count is shown, singular for questionCount === 1
+    expect(screen.getByText(/1 question(?!s)/)).toBeInTheDocument()
+
     // Assert the CTA says "Ouvrir"
     const card = screen.getByText('Quiz avec description').closest('.home-card')
     expect(within(card as Element).getByText('Ouvrir →')).toBeInTheDocument()
+  })
+
+  it('affiche le nombre de questions au pluriel sur les cartes', async () => {
+    const { listQuizzes } = await import('../api/quizzes')
+    vi.mocked(listQuizzes).mockResolvedValueOnce([
+      {
+        id: 'q3',
+        title: 'Quiz avec plusieurs questions',
+        description: null,
+        updatedAt: '2026-07-20T15:30:00Z',
+        questionCount: 5,
+      },
+    ])
+
+    render(
+      <MotionProvider>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </MotionProvider>,
+    )
+
+    await waitFor(() => expect(screen.getByText('Quiz avec plusieurs questions')).toBeInTheDocument())
+    expect(screen.getByText(/5 questions/)).toBeInTheDocument()
+  })
+
+  it('affiche 0 question quand le quiz est vide', async () => {
+    const { listQuizzes } = await import('../api/quizzes')
+    vi.mocked(listQuizzes).mockResolvedValueOnce([
+      {
+        id: 'q4',
+        title: 'Quiz vide',
+        description: null,
+        updatedAt: '2026-07-20T15:30:00Z',
+        questionCount: 0,
+      },
+    ])
+
+    render(
+      <MotionProvider>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </MotionProvider>,
+    )
+
+    await waitFor(() => expect(screen.getByText('Quiz vide')).toBeInTheDocument())
+    expect(screen.getByText(/0 question(?!s)/)).toBeInTheDocument()
   })
 })

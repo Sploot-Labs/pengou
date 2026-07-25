@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { signOut, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
-import { createQuiz, listQuizzes, type Quiz } from '../api/quizzes'
+import { createQuiz, listQuizzes, type QuizListItem } from '../api/quizzes'
 import { listSessions, type SessionStatus, type SessionSummary } from '../api/sessions'
 import { Reveal } from '../motion/index.js'
 import { AppHeader } from '../ui/AppHeader.js'
@@ -64,6 +64,12 @@ function formatDateOnly(iso: string): string {
   return new Date(iso).toLocaleDateString('fr-FR', { dateStyle: 'medium' })
 }
 
+/** `0 question` / `1 question` / `N questions` (Task 6) — plural agreement,
+ * not just an `s` tacked onto a count. */
+function formatQuestionCount(count: number): string {
+  return `${count} question${count > 1 ? 's' : ''}`
+}
+
 export function Home() {
   const navigate = useNavigate()
   const { refresh: refreshSession } = useSession()
@@ -82,7 +88,7 @@ export function Home() {
   }
 
   // --- Mes quiz -----------------------------------------------------------
-  const [quizzes, setQuizzes] = useState<Quiz[]>([])
+  const [quizzes, setQuizzes] = useState<QuizListItem[]>([])
   const [quizzesLoading, setQuizzesLoading] = useState(true)
   const [quizzesError, setQuizzesError] = useState<string | null>(null)
 
@@ -280,7 +286,9 @@ export function Home() {
                         </span>
                         <span className="home-card__title">{q.title}</span>
                         {q.description && <span className="home-card__desc">{q.description}</span>}
-                        <span className="home-card__meta">Modifié le {formatDateOnly(q.updatedAt)}</span>
+                        <span className="home-card__meta">
+                          Modifié le {formatDateOnly(q.updatedAt)} · {formatQuestionCount(q.questionCount)}
+                        </span>
                         <span className="home-card__cta" aria-hidden="true">
                           Ouvrir →
                         </span>

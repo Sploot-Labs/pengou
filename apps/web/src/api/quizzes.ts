@@ -24,6 +24,12 @@ export interface Quiz {
   updatedAt: string
 }
 
+/** `Quiz` + `questionCount` (Task 6) — what `GET /api/quizzes` actually
+ * returns (see `listQuizzes` in `packages/db/src/repos/quiz.ts`), as a
+ * list-only shape so it doesn't pollute the base `Quiz` type used
+ * elsewhere (single-quiz fetch/create/update responses have no such field). */
+export type QuizListItem = Quiz & { questionCount: number }
+
 export interface McqOption {
   label: string
   correct: boolean
@@ -85,8 +91,8 @@ export interface UpdateQuestionInput {
   media?: string | null
 }
 
-export function listQuizzes(): Promise<Quiz[]> {
-  return apiGet<Quiz[]>('/api/quizzes')
+export function listQuizzes(): Promise<QuizListItem[]> {
+  return apiGet<QuizListItem[]>('/api/quizzes')
 }
 
 export function createQuiz(input: CreateQuizInput): Promise<Quiz> {
