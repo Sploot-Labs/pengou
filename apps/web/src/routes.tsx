@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { createBrowserRouter, Outlet } from 'react-router-dom'
 import { AppShell } from './AppShell'
 import { GameSocketProvider } from './realtime/GameSocketProvider'
@@ -11,6 +12,23 @@ import { Login } from './screens/Login'
 import { PlayerLive } from './screens/PlayerLive'
 import { SessionReport } from './screens/SessionReport'
 import { Signup } from './screens/Signup'
+import { ThemeProvider } from './theme/ThemeProvider'
+
+/**
+ * Écrans de jeu en direct (host live, joueur, écran de rejoin) : thème
+ * produit `scene`, schéma forcé `dark` — fond dark chaud énergique,
+ * indépendant du thème `app` par défaut posé par `AppShell` (voir
+ * `ThemeProvider`). `BigScreen` a son propre wrapper interne identique et
+ * n'est pas concerné ici ; `Podium` est rendu inline par `HostLive` et
+ * `BigScreen` et hérite donc de leur thème sans wrapper dédié.
+ */
+export function SceneRoute({ children }: { children: ReactNode }) {
+  return (
+    <ThemeProvider theme="scene" scheme="dark">
+      {children}
+    </ThemeProvider>
+  )
+}
 
 /**
  * Route de layout (sans `path` propre) partagée par `/`, `/quizzes/:quizId`
@@ -89,7 +107,9 @@ export const router = createBrowserRouter([
             path: '/host/:sessionId',
             element: (
               <RequireAuth>
-                <HostLive />
+                <SceneRoute>
+                  <HostLive />
+                </SceneRoute>
               </RequireAuth>
             ),
           },
@@ -107,8 +127,22 @@ export const router = createBrowserRouter([
           </RequireAuth>
         ),
       },
-      { path: '/join', element: <Join /> },
-      { path: '/play', element: <PlayerLive /> },
+      {
+        path: '/join',
+        element: (
+          <SceneRoute>
+            <Join />
+          </SceneRoute>
+        ),
+      },
+      {
+        path: '/play',
+        element: (
+          <SceneRoute>
+            <PlayerLive />
+          </SceneRoute>
+        ),
+      },
       { path: '/screen/:sessionId', element: <BigScreen /> },
     ],
   },
