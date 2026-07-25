@@ -298,6 +298,13 @@
   padding: var(--space-5);
 }
 
+.ab-shell__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
 .ab-empty-state {
   padding: var(--space-5);
   border: 1px dashed var(--line);

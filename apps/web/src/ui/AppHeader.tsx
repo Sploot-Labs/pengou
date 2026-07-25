@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { Logo } from '../ui'
 
-export function AppHeader({ brandline, actions }: { brandline?: string; actions?: ReactNode }) {
+export function AppHeader({ brandline, actions }: { brandline?: ReactNode; actions?: ReactNode }) {
   return (
     <header className="ab-shell__header">
       <Logo />

@@ -19,6 +19,7 @@ import {
 } from '../api/quizzes'
 import { ANSWER_SHAPES, type AnswerShapeKind } from '../constants'
 import { AnswerShape, Button, Logo, SHAPE_NAME_FR } from '../ui'
+import { AppHeader } from '../ui/AppHeader.js'
 
 /**
  * HostEditor — wired to the real quiz/question REST API (Plan 06 Task 3),
@@ -938,42 +939,49 @@ export function HostEditor() {
 
   return (
     <div className="ab-shell">
-      <header className="ab-shell__header" aria-hidden={pendingType ? true : undefined}>
-        <Logo />
-        <div style={{ flex: 1, minWidth: 0 }}>
-          {/* Visible brand/positioning line — carries the dual-mode promise on a
-              host surface, and replaces the SR-only title that duplicated the
-              <h1>Éditeur de quiz</h1> in <main>. */}
-          <p className="host-brandline">
-            <strong>Arena</strong> — quiz en direct, open-source · chez vous ou dans le cloud
-          </p>
-          <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
-            <button type="button" className="host-link-button" onClick={handleBackToHome}>
-              ← Retour à l'accueil
-            </button>{' '}
-            · {title}
-          </span>
-        </div>
-        <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
-          {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
-        </Button>
-        <div className="host-launch">
-          <Button
-            variant="primary"
-            type="button"
-            aria-disabled={!canLaunch || launching}
-            aria-describedby={!canLaunch ? 'host-launch-reason' : undefined}
-            onClick={(e) => {
-              e.preventDefault()
-              if (!canLaunch || launching) return
-              void launchGame()
-            }}
-          >
-            {launching ? 'Lancement…' : 'Lancer la partie'}
-          </Button>
-          {launchReason && <p className="host-launch__hint">{launchReason}</p>}
-        </div>
-      </header>
+      <div aria-hidden={pendingType ? true : undefined}>
+        <AppHeader
+          brandline={
+            <>
+              {/* Visible brand/positioning line — carries the dual-mode promise on a
+                  host surface, and replaces the SR-only title that duplicated the
+                  <h1>Éditeur de quiz</h1> in <main>. */}
+              <p className="host-brandline">
+                <strong>Arena</strong> — quiz en direct, open-source · chez vous ou dans le cloud
+              </p>
+              <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
+                <button type="button" className="host-link-button" onClick={handleBackToHome}>
+                  ← Retour à l'accueil
+                </button>{' '}
+                · {title}
+              </span>
+            </>
+          }
+          actions={
+            <>
+              <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
+                {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
+              </Button>
+              <div className="host-launch">
+                <Button
+                  variant="primary"
+                  type="button"
+                  aria-disabled={!canLaunch || launching}
+                  aria-describedby={!canLaunch ? 'host-launch-reason' : undefined}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    if (!canLaunch || launching) return
+                    void launchGame()
+                  }}
+                >
+                  {launching ? 'Lancement…' : 'Lancer la partie'}
+                </Button>
+                {launchReason && <p className="host-launch__hint">{launchReason}</p>}
+              </div>
+            </>
+          }
+        />
+      </div>
 
       <main
         className="ab-shell__main"
@@ -1058,7 +1066,7 @@ export function HostEditor() {
             <section aria-label="Liste des questions">
               <h2 style={{ marginBottom: 'var(--space-3)' }}>Questions</h2>
               {questions.length === 0 ? (
-                <p className="ab-empty-state">Aucune question. Ajoutez-en une pour commencer.</p>
+                <p className="ab-empty-state">Aucune question pour l'instant — ajoutez-en une pour commencer. 🐾</p>
               ) : (
                 <ul className="host-list">
                   {questions.map((q, index) => {
