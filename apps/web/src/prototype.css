@@ -1960,6 +1960,7 @@
   gap: var(--space-3);
 }
 .home-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
@@ -1978,6 +1979,29 @@
 .home-card__title { font-weight: 700; font-size: var(--fs-h3); color: var(--ink-strong); }
 .home-card__desc, .home-card__meta { color: var(--ink-dim); font-size: var(--fs-small); }
 .home-card__cta { margin-top: auto; color: var(--brand); font-size: var(--fs-small); }
+
+/* Signature accent — one of the 4 brand answer shapes (Task 5), cycled per
+   card index. Purely decorative (aria-hidden): small, low-opacity, tucked
+   in the bottom-right corner so it never competes with the title or CTA. */
+.home-card__glyph {
+  position: absolute;
+  bottom: var(--space-3);
+  right: var(--space-3);
+  display: inline-flex;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Empty-state motif — the 4 shapes assembled together, anchoring the empty
+   "Mes quiz" state in the Arena world. Static, decorative, low-opacity. */
+.home-empty-motif {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  opacity: 0.4;
+}
+.home-empty-motif__shape { display: inline-flex; }
 
 .home-section__header {
   display: flex;

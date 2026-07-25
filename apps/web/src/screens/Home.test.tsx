@@ -64,6 +64,14 @@ describe('Home', () => {
     const card = screen.getByText('Culture G').closest('.home-card')
     expect(card).not.toBeNull()
     expect(card).toHaveAttribute('href', '/quizzes/q1')
+
+    // The decorative signature glyph (Task 5) is aria-hidden — it must not
+    // leak any text into the link's accessible name, which still starts
+    // with the quiz title.
+    expect(screen.getByRole('link', { name: /^Culture G/ })).toBe(card)
+    const glyph = (card as Element).querySelector('.home-card__glyph')
+    expect(glyph).not.toBeNull()
+    expect(glyph).toHaveAttribute('aria-hidden', 'true')
   })
 
   it("affiche un état vide chaleureux quand il n'y a pas de quiz", async () => {
@@ -79,6 +87,14 @@ describe('Home', () => {
     )
 
     await waitFor(() => expect(screen.getByText(/on te fait de la place/i)).toBeInTheDocument())
+
+    // The single 🐾 stays, and the decorative shape motif (Task 5) is
+    // aria-hidden — it anchors the empty state visually without being
+    // announced to screen readers.
+    expect(screen.getByText(/on te fait de la place/i).textContent).toMatch(/🐾$/)
+    const motif = document.querySelector('.home-empty-motif')
+    expect(motif).not.toBeNull()
+    expect(motif).toHaveAttribute('aria-hidden', 'true')
   })
 
   it('limite les parties récentes à 8 lignes avec un bouton « Voir toutes »', async () => {

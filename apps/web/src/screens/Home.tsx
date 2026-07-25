@@ -6,7 +6,8 @@ import { createQuiz, listQuizzes, type Quiz } from '../api/quizzes'
 import { listSessions, type SessionStatus, type SessionSummary } from '../api/sessions'
 import { Reveal } from '../motion/index.js'
 import { AppHeader } from '../ui/AppHeader.js'
-import { Button } from '../ui'
+import { AnswerShape, Button } from '../ui'
+import { ANSWER_SHAPES } from '../constants'
 
 /**
  * Home — the host's landing screen (Plan 07 Task 4), now living at `/`
@@ -243,24 +244,50 @@ export function Home() {
               </Button>
             </div>
           ) : quizzes.length === 0 ? (
-            <p className="ab-empty-state">
-              Pas encore de quiz. On te fait de la place — crée-en un pour démarrer. 🐾
-            </p>
+            <div className="ab-empty-state">
+              {/* Discreet nod to the brand's answer-shape motif (logo, editor) —
+                  purely decorative, so it stays out of the accessible name. */}
+              <div className="home-empty-motif" aria-hidden="true">
+                {ANSWER_SHAPES.map((shape) => (
+                  <span
+                    key={shape}
+                    className="home-empty-motif__shape"
+                    style={{ color: `var(--ans-${shape})` }}
+                  >
+                    <AnswerShape shape={shape} size={22} />
+                  </span>
+                ))}
+              </div>
+              <p>Pas encore de quiz. On te fait de la place — crée-en un pour démarrer. 🐾</p>
+            </div>
           ) : (
             <Reveal from="up">
               <ul className="home-cards">
-                {quizzes.map((q) => (
-                  <li key={q.id}>
-                    <Link className="home-card" to={`/quizzes/${q.id}`}>
-                      <span className="home-card__title">{q.title}</span>
-                      {q.description && <span className="home-card__desc">{q.description}</span>}
-                      <span className="home-card__meta">Modifié le {formatDateOnly(q.updatedAt)}</span>
-                      <span className="home-card__cta" aria-hidden="true">
-                        Ouvrir →
-                      </span>
-                    </Link>
-                  </li>
-                ))}
+                {quizzes.map((q, i) => {
+                  const shape = ANSWER_SHAPES[i % ANSWER_SHAPES.length]
+                  return (
+                    <li key={q.id}>
+                      <Link className="home-card" to={`/quizzes/${q.id}`}>
+                        {/* Corner signature glyph — decorative only, cycles the
+                            4 answer shapes so the dashboard echoes the brand
+                            motif shown in the logo and the editor. */}
+                        <span
+                          className="home-card__glyph"
+                          aria-hidden="true"
+                          style={{ color: `var(--ans-${shape})` }}
+                        >
+                          <AnswerShape shape={shape} size={18} />
+                        </span>
+                        <span className="home-card__title">{q.title}</span>
+                        {q.description && <span className="home-card__desc">{q.description}</span>}
+                        <span className="home-card__meta">Modifié le {formatDateOnly(q.updatedAt)}</span>
+                        <span className="home-card__cta" aria-hidden="true">
+                          Ouvrir →
+                        </span>
+                      </Link>
+                    </li>
+                  )
+                })}
               </ul>
             </Reveal>
           )}
