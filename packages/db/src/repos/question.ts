@@ -5,7 +5,7 @@ import { getQuiz } from './quiz.js'
 
 export type Question = typeof schema.question.$inferSelect
 
-type CreateInput = { type: 'mcq' | 'truefalse' | 'text' | 'slider'; prompt: string; timeLimit: number; payload: unknown; media?: string | null; orderIndex?: number }
+type CreateInput = { type: 'mcq' | 'truefalse' | 'text' | 'slider'; prompt: string; timeLimit: number; readingTime?: number; payload: unknown; media?: string | null; orderIndex?: number }
 
 // Garde-fou multi-tenant : le quiz parent DOIT appartenir au tenant du scope.
 async function assertQuizInTenant(scope: TenantScope, quizId: string): Promise<boolean> {
@@ -16,7 +16,7 @@ export async function createQuestion(scope: TenantScope, quizId: string, input: 
   if (!(await assertQuizInTenant(scope, quizId))) return null
   const orderIndex = input.orderIndex ?? (await nextOrderIndex(scope, quizId))
   const [row] = await scope.db.insert(schema.question).values({
-    quizId, type: input.type, prompt: input.prompt, timeLimit: input.timeLimit,
+    quizId, type: input.type, prompt: input.prompt, timeLimit: input.timeLimit, readingTime: input.readingTime ?? 0,
     payload: input.payload as never, media: input.media ?? null, orderIndex,
   }).returning()
   return row
@@ -36,7 +36,7 @@ export async function getQuestion(scope: TenantScope, quizId: string, questionId
   return row ?? null
 }
 
-export async function updateQuestion(scope: TenantScope, quizId: string, questionId: string, patch: Partial<{ prompt: string; timeLimit: number; payload: unknown; media: string | null }>): Promise<Question | null> {
+export async function updateQuestion(scope: TenantScope, quizId: string, questionId: string, patch: Partial<{ prompt: string; timeLimit: number; readingTime: number; payload: unknown; media: string | null }>): Promise<Question | null> {
   if (!(await assertQuizInTenant(scope, quizId))) return null
   // Patch vide : `.set({})` fait échouer drizzle ("No values to set") — un patch vide est un
   // no-op légitime (ex. PATCH sans corps utile), pas une erreur serveur. On renvoie simplement

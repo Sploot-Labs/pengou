@@ -46,6 +46,7 @@ export const question = pgTable('question', {
   prompt: text('prompt').notNull(),
   media: text('media'),
   timeLimit: integer('time_limit').notNull().default(20),
+  readingTime: integer('reading_time').notNull().default(0),
   orderIndex: integer('order_index').notNull(),
   payload: jsonb('payload').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),

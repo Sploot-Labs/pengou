@@ -1,0 +1,1 @@
+ALTER TABLE "question" ADD COLUMN "reading_time" integer DEFAULT 0 NOT NULL;
