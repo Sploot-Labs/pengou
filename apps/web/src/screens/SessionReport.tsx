@@ -168,12 +168,37 @@ export function SessionReport() {
         <div className="report-summary">
           <PinDisplay pin={session.pin} compact />
           <div className="report-summary__facts">
-            <span className="host-badge">{STATUS_LABEL[session.status]}</span>
+            <span className="host-badge">
+              <span aria-hidden="true">●</span> {STATUS_LABEL[session.status]}
+            </span>
             <span>{formatDate(session.startedAt)}</span>
             {session.startedAt && session.endedAt && (
               <span>Durée : {formatDuration(session.startedAt, session.endedAt)}</span>
             )}
           </div>
+        </div>
+
+        <div className="report-stats">
+          <div className="report-stat">
+            <span className="report-stat__value">{players.length}</span>
+            <span className="report-stat__label">
+              joueur{players.length > 1 ? 's' : ''}
+            </span>
+          </div>
+          <div className="report-stat">
+            <span className="report-stat__value">{questions.length}</span>
+            <span className="report-stat__label">
+              question{questions.length > 1 ? 's' : ''}
+            </span>
+          </div>
+          {session.startedAt && session.endedAt && (
+            <div className="report-stat">
+              <span className="report-stat__value">
+                {formatDuration(session.startedAt, session.endedAt)}
+              </span>
+              <span className="report-stat__label">durée</span>
+            </div>
+          )}
         </div>
 
         <section aria-labelledby="report-players-heading" style={{ marginTop: 'var(--space-6)' }}>

@@ -2009,6 +2009,34 @@
   font-size: var(--fs-small);
 }
 
+.report-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.report-stat {
+  flex: 1 1 140px;
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+.report-stat__value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  color: var(--ink-strong);
+}
+
+.report-stat__label {
+  display: block;
+  color: var(--ink-dim);
+  font-size: var(--fs-small);
+}
+
 /* Wide tables (long prompts, four columns) scroll inside their own box
    rather than pushing the page into horizontal scroll. */
 .report-table-wrap {
