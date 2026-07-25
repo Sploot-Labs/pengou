@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { SessionProvider } from './api/auth'
 import { MotionProvider } from './motion/index.js'
+import { ThemeProvider } from './theme/ThemeProvider'
 import './tokens.css'
 import './prototype.css'
 
@@ -23,12 +24,14 @@ export function AppShell() {
   return (
     <SessionProvider>
       <MotionProvider>
-        <div className="prototype-root">
-          <a className="ab-skip-link" href="#contenu-principal">
-            Aller au contenu
-          </a>
-          <Outlet />
-        </div>
+        <ThemeProvider theme="app">
+          <div className="prototype-root">
+            <a className="ab-skip-link" href="#contenu-principal">
+              Aller au contenu
+            </a>
+            <Outlet />
+          </div>
+        </ThemeProvider>
       </MotionProvider>
     </SessionProvider>
   )
