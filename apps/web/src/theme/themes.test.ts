@@ -37,3 +37,15 @@ describe('themes.css', () => {
     expect(themesCss.toLowerCase()).not.toContain('#7a5cff')
   })
 })
+
+it('tokens.css ne définit plus de primitive couleur Kahoot', () => {
+  const tokensCss = readFileSync(
+    fileURLToPath(new URL('../tokens.css', import.meta.url)),
+    'utf-8',
+  ).toLowerCase()
+  expect(tokensCss).not.toContain('#ff3d7f') // rose Kahoot
+  expect(tokensCss).not.toContain('#7a5cff') // violet Kahoot
+  expect(tokensCss).not.toContain('#0e1230') // midnight bleuté
+  expect(tokensCss).not.toContain('--brand:')
+  expect(tokensCss).not.toContain('--stage:')
+})

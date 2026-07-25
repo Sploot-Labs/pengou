@@ -5,53 +5,6 @@
 */
 
 :root {
-  /* Scene */
-  --stage: #0e1230; /* fond scène, midnight (pas de noir pur) */
-  --stage-2: #161b3e;
-  --surface: #1e2450; /* panneaux */
-  --surface-2: #2a3168;
-  --line: rgba(255, 255, 255, 0.12);
-
-  /* Ink */
-  --ink: #f5f7ff; /* texte sur sombre */
-  --ink-dim: #aeb4d8;
-  --ink-strong: #ffffff;
-
-  /* Brand */
-  --brand: #ff3d7f; /* rose électrique — la signature */
-  --brand-2: #7a5cff; /* violet, pour dégradés d'accent */
-  --gold: #ffc53d; /* vainqueur / podium — RÉSERVÉ au classement/podium */
-  --silver: #c7ccdd;
-  --bronze: #e0954f;
-
-  /* Warning — ambre assumé, rôle SÉPARÉ de --gold (état incomplet/éditable,
-     bannières d'avertissement). Ne pas réutiliser --gold hors podium. */
-  --warn: #ffc53d;
-
-  /* Answers — couleur + forme + label, jamais la couleur seule.
-     Valeurs assombries pour atteindre ≥4.5:1 avec le texte blanc
-     (l'ambre garde un texte sombre). Vérifié au ratio RGAA. */
-  --ans-triangle: #c62828; /* rouge, texte blanc (~5.0:1) */
-  --ans-triangle-ink: #ffffff;
-  --ans-diamond: #1d5fb0; /* bleu, texte blanc (~4.9:1) */
-  --ans-diamond-ink: #ffffff;
-  --ans-circle: #f2a900; /* ambre, texte sombre pour contraste */
-  --ans-circle-ink: #0e1230;
-  --ans-square: #0e7c68; /* vert, texte blanc (~4.6:1) */
-  --ans-square-ink: #ffffff;
-
-  /* Feedback — texte blanc lisible (≥4.5:1) */
-  --success: #0e7c68;
-  --danger: #c62828;
-
-  /* Gradients de marque */
-  --grad-brand: linear-gradient(135deg, var(--brand), var(--brand-2));
-
-  /* Typography */
-  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
-  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
-
   --fs-display: clamp(2.25rem, 1.4rem + 3.5vw, 4.5rem);
   --fs-title: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem);
   --fs-h2: clamp(1.1rem, 0.95rem + 0.8vw, 1.5rem);
@@ -74,8 +27,6 @@
   /* Motion (disabled wholesale under prefers-reduced-motion, see below) */
   --transition-fast: 120ms ease;
   --transition-base: 200ms ease;
-
-  color-scheme: dark;
 }
 
 /* ---------------------------------------------------------------------- */
@@ -161,7 +112,7 @@
 }
 
 .prototype-root :focus-visible {
-  outline: 3px solid var(--gold);
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
 
