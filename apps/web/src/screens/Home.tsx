@@ -58,6 +58,11 @@ function formatDate(iso: string | null): string {
   return new Date(iso).toLocaleString('fr-FR', { dateStyle: 'medium', timeStyle: 'short' })
 }
 
+/** Format a date string as `23 juil. 2026` for the quiz card metadata. */
+function formatDateOnly(iso: string): string {
+  return new Date(iso).toLocaleDateString('fr-FR', { dateStyle: 'medium' })
+}
+
 export function Home() {
   const navigate = useNavigate()
   const { refresh: refreshSession } = useSession()
@@ -249,8 +254,9 @@ export function Home() {
                     <Link className="home-card" to={`/quizzes/${q.id}`}>
                       <span className="home-card__title">{q.title}</span>
                       {q.description && <span className="home-card__desc">{q.description}</span>}
+                      <span className="home-card__meta">Modifié le {formatDateOnly(q.updatedAt)}</span>
                       <span className="home-card__cta" aria-hidden="true">
-                        Éditer →
+                        Ouvrir →
                       </span>
                     </Link>
                   </li>

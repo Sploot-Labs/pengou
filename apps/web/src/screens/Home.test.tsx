@@ -7,7 +7,7 @@ import type { SessionStatus, SessionSummary } from '../api/sessions'
 
 vi.mock('../api/quizzes', () => ({
   listQuizzes: vi.fn(() =>
-    Promise.resolve([{ id: 'q1', title: 'Culture G', description: null }]),
+    Promise.resolve([{ id: 'q1', title: 'Culture G', description: null, updatedAt: '2026-07-20T15:30:00Z' }]),
   ),
   createQuiz: vi.fn(),
 }))
@@ -139,5 +139,38 @@ describe('Home', () => {
     document.querySelectorAll('.home-list__item .host-badge').forEach((badge) => {
       expect(badge.textContent).toBe('Terminée')
     })
+  })
+
+  it('affiche la date de modification et la description sur les cartes de quiz', async () => {
+    const { listQuizzes } = await import('../api/quizzes')
+    vi.mocked(listQuizzes).mockResolvedValueOnce([
+      {
+        id: 'q2',
+        title: 'Quiz avec description',
+        description: 'Ceci est une description',
+        updatedAt: '2026-07-20T15:30:00Z',
+      },
+    ])
+
+    render(
+      <MotionProvider>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </MotionProvider>,
+    )
+
+    await waitFor(() => expect(screen.getByText('Quiz avec description')).toBeInTheDocument())
+
+    // Assert the description is shown
+    expect(screen.getByText('Ceci est une description')).toBeInTheDocument()
+
+    // Assert the meta line with the modified date is shown
+    expect(screen.getByText(/Modifié le/)).toBeInTheDocument()
+    expect(screen.getByText(/20 juil\. 2026/)).toBeInTheDocument()
+
+    // Assert the CTA says "Ouvrir"
+    const card = screen.getByText('Quiz avec description').closest('.home-card')
+    expect(within(card as Element).getByText('Ouvrir →')).toBeInTheDocument()
   })
 })
