@@ -19,6 +19,25 @@ vi.mock('../api/auth', () => ({
   useSession: () => ({ refresh: vi.fn() }),
 }))
 
+// `Home` now calls `useLaunchGame` (Task 7), which itself calls `useSharedGameSocket` — mocked
+// here rather than rendered under a real `<GameSocketProvider>` so the suite never opens an
+// actual `socket.io-client` connection. `emitAck`'s resolved value is set per-test below.
+// Names are prefixed `mock` deliberately — Vitest only allows referencing
+// outer-scope variables inside a hoisted `vi.mock` factory when they start
+// with that prefix (otherwise: "cannot access '...' before initialization").
+const mockEmitAck = vi.fn()
+vi.mock('../realtime/GameSocketProvider', () => ({
+  useSharedGameSocket: () => ({ emitAck: mockEmitAck, connected: true, socket: {}, on: vi.fn() }),
+}))
+
+// Only `useNavigate` is faked — everything else (MemoryRouter, Link, …) stays real so the
+// existing link-based assertions (e.g. the card's `href`) keep working unmodified.
+const mockNavigate = vi.fn()
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual<typeof import('react-router-dom')>('react-router-dom')
+  return { ...actual, useNavigate: () => mockNavigate }
+})
+
 import { Home } from './Home'
 
 /** 12 sessions of varied statuses — enough to exercise both the 8-row
@@ -194,6 +213,35 @@ describe('Home', () => {
     // Assert the CTA says "Ouvrir"
     const card = screen.getByText('Quiz avec description').closest('.home-card')
     expect(within(card as Element).getByText('Ouvrir →')).toBeInTheDocument()
+  })
+
+  it('le bouton « Lancer » d\'une carte lance la partie sur la socket partagée et navigue vers /host/:id', async () => {
+    mockEmitAck.mockResolvedValueOnce({ sessionId: 's1', pin: '123456' })
+
+    render(
+      <MotionProvider>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </MotionProvider>,
+    )
+
+    await waitFor(() => expect(screen.getByText('Culture G')).toBeInTheDocument())
+    const card = screen.getByText('Culture G').closest('.home-card-item') as Element
+    const launchButton = within(card).getByRole('button', { name: /^Lancer$/ })
+
+    // The button is a SIBLING of the card-link, not nested inside it — clicking it must not
+    // trigger the link's own navigation to the editor.
+    expect(card.querySelector('a')?.contains(launchButton)).toBe(false)
+
+    fireEvent.click(launchButton)
+
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('host:create', { quizId: 'q1' }))
+    await waitFor(() =>
+      expect(mockNavigate).toHaveBeenCalledWith('/host/s1', {
+        state: { pin: '123456', quizTitle: 'Culture G' },
+      }),
+    )
   })
 
   it('affiche le nombre de questions au pluriel sur les cartes', async () => {

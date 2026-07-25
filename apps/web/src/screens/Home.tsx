@@ -5,6 +5,7 @@ import { ApiError } from '../api/client'
 import { createQuiz, listQuizzes, type QuizListItem } from '../api/quizzes'
 import { listSessions, type SessionStatus, type SessionSummary } from '../api/sessions'
 import { Reveal } from '../motion/index.js'
+import { useLaunchGame } from '../realtime/useLaunchGame'
 import { AppHeader } from '../ui/AppHeader.js'
 import { AnswerShape, Button } from '../ui'
 import { ANSWER_SHAPES } from '../constants'
@@ -74,6 +75,10 @@ export function Home() {
   const navigate = useNavigate()
   const { refresh: refreshSession } = useSession()
   const [signingOut, setSigningOut] = useState(false)
+  // Task 7: "Lancer" on a quiz card reuses the SAME shared socket as
+  // `HostEditor`/`HostLive` (see `HostRealtimeLayout` in `routes.tsx`) via this hook, instead of
+  // requiring a detour through the editor just to start a game.
+  const { launch, launching: gameLaunching, error: launchError } = useLaunchGame()
 
   async function handleSignOut() {
     setSigningOut(true)
@@ -268,11 +273,16 @@ export function Home() {
             </div>
           ) : (
             <Reveal from="up">
+              {launchError && (
+                <p className="join-error" role="alert">
+                  {launchError}
+                </p>
+              )}
               <ul className="home-cards">
                 {quizzes.map((q, i) => {
                   const shape = ANSWER_SHAPES[i % ANSWER_SHAPES.length]
                   return (
-                    <li key={q.id}>
+                    <li key={q.id} className="home-card-item">
                       <Link className="home-card" to={`/quizzes/${q.id}`}>
                         {/* Corner signature glyph — decorative only, cycles the
                             4 answer shapes so the dashboard echoes the brand
@@ -293,6 +303,26 @@ export function Home() {
                           Ouvrir →
                         </span>
                       </Link>
+                      {/* Sibling of the `<Link>` above, NOT nested inside it — a `<button>` inside
+                          an `<a>` is invalid HTML, and clicking it would also fire the link's
+                          navigation. Launching here reuses the same shared socket as the editor's
+                          own "Lancer la partie" (`useLaunchGame`), so a host doesn't need to open
+                          the editor first just to start a game from an already-finished quiz. */}
+                      <Button
+                        variant="ghost"
+                        type="button"
+                        className="home-card__launch"
+                        disabled={gameLaunching}
+                        onClick={() => {
+                          // `launch` rethrows so `HostEditor` can react to its own flush/launch
+                          // sequencing — here the failure is already reflected in `launchError`
+                          // (via the hook's own `error` state) above, so it's swallowed rather
+                          // than left as an unhandled rejection.
+                          launch(q.id, q.title).catch(() => {})
+                        }}
+                      >
+                        {gameLaunching ? 'Lancement…' : 'Lancer'}
+                      </Button>
                     </li>
                   )
                 })}

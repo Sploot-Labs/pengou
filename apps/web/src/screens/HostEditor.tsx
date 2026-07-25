@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { signOut, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
-import { useSharedGameSocket } from '../realtime/GameSocketProvider'
+import { useLaunchGame } from '../realtime/useLaunchGame'
 import {
   createQuestion,
   deleteQuestion,
@@ -291,12 +291,6 @@ function errorMessage(err: unknown): string {
   return err instanceof ApiError ? err.message : 'Une erreur réseau est survenue. Réessayez.'
 }
 
-/** Ack de succès de `host:create` — voir `apps/server/src/game-gateway.ts`. */
-interface HostCreateAck {
-  sessionId: string
-  pin: string
-}
-
 /** A debounced-but-not-yet-sent question edit, tracked in `pendingSaveRef` so it can be flushed on
  * demand (switching to another question, launching the game) instead of only ever firing from
  * `saveTimerRef`'s 600ms timeout — see the Plan 06 review's critical finding #1. */
@@ -312,7 +306,7 @@ export function HostEditor() {
   // Guaranteed present by the matching route (`/quizzes/:quizId`) — `useParams`
   // types it optional only because react-router can't know that statically.
   const { quizId } = useParams<{ quizId: string }>()
-  const { emitAck } = useSharedGameSocket()
+  const { launch } = useLaunchGame()
   const { refresh: refreshSession } = useSession()
   const [launching, setLaunching] = useState(false)
   const [launchError, setLaunchError] = useState<string | null>(null)
@@ -533,19 +527,16 @@ export function HostEditor() {
     await persistQuestionPatch(entry)
   }
 
-  /** « Lancer la partie » : `host:create {quizId}` sur la socket PARTAGÉE
-   * (voir `realtime/GameSocketProvider.tsx`) — c'est cette connexion précise
-   * qui devient « hôte » de la session côté serveur, et `HostLive` doit donc
-   * réutiliser exactement la même socket (assuré par le contexte partagé),
-   * pas en ouvrir une nouvelle. Succès → navigation vers `/host/:sessionId`.
-   * Échec (quiz introuvable/refusé, pas de session authentifiée, socket
-   * injoignable) → message affiché dans l'UI d'erreur existante, jamais de
-   * PIN/session fabriqué.
+  /** « Lancer la partie » : délègue le `host:create {quizId}` + la navigation vers
+   * `/host/:sessionId` au hook partagé `useLaunchGame` (voir sa doc — même socket que `HostLive`
+   * réutilisera, même contrat succès/échec). Ce qui reste ICI, spécifique à l'éditeur : le garde
+   * `canLaunch`/`launching`, et le flush de l'édition en attente AVANT d'appeler `launch` — le
+   * point du Plan 06 review finding #1 est que `host:create` lit les questions directement en
+   * base, donc lancer pendant qu'une édition n'est encore que debounced côté client (ou pire,
+   * n'a pas pu être flushée) ferait tourner la partie sur un contenu périmé.
    *
-   * `flushPendingSave()` is awaited FIRST, and its failure short-circuits the launch entirely: the
-   * whole point of Plan 06 review finding #1 is that `host:create` reads the questions straight
-   * from the database, so launching while an edit is still only debounced client-side (or, worse,
-   * failed to flush) would silently run the game on stale content. */
+   * `flushPendingSave()` est awaited EN PREMIER, et son échec court-circuite le lancement
+   * entièrement (message dédié, distinct de celui d'un échec de `launch`). */
   async function launchGame() {
     if (!canLaunch || launching || !quizId) return
     setLaunching(true)
@@ -560,12 +551,7 @@ export function HostEditor() {
       return
     }
     try {
-      const ack = await emitAck<HostCreateAck>('host:create', { quizId })
-      // Le PIN et le titre ne sont connus qu'ICI (host:create ne les redonne
-      // jamais ensuite) — transmis à HostLive via l'état de navigation
-      // plutôt que par l'URL (le PIN n'a rien à faire dans un lien
-      // partageable de la page hôte).
-      navigate(`/host/${ack.sessionId}`, { state: { pin: ack.pin, quizTitle: title } })
+      await launch(quizId, title)
     } catch (err) {
       setLaunching(false)
       setLaunchError(err instanceof Error ? err.message : 'Impossible de lancer la partie.')

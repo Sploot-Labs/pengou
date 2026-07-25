@@ -1980,6 +1980,21 @@
 .home-card__desc, .home-card__meta { color: var(--ink-dim); font-size: var(--fs-small); }
 .home-card__cta { margin-top: auto; color: var(--brand); font-size: var(--fs-small); }
 
+/* Two-action card (Task 7): `.home-card-item` is the `<li>` — a plain flex
+   column stacking the "Ouvrir" card-link above a full-width "Lancer" button.
+   They're siblings, not nested (a `<button>` inside the `<a>` would be
+   invalid HTML and would also fire the link's own navigation on click), so
+   the two actions never fight for the same click. */
+.home-card-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.home-card__launch {
+  width: 100%;
+  min-height: 44px;
+}
+
 /* Signature accent — one of the 4 brand answer shapes (Task 5), cycled per
    card index. Purely decorative (aria-hidden): small, low-opacity, tucked
    in the bottom-right corner so it never competes with the title or CTA. */
