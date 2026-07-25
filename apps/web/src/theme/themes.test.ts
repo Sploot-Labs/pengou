@@ -49,3 +49,11 @@ it('tokens.css ne définit plus de primitive couleur Kahoot', () => {
   expect(tokensCss).not.toContain('--brand:')
   expect(tokensCss).not.toContain('--stage:')
 })
+
+it("la règle de couleur de lien de base ne s'applique qu'aux liens textuels (pas aux liens à classe)", () => {
+  const tokensCss = readFileSync(
+    fileURLToPath(new URL('../tokens.css', import.meta.url)),
+    'utf-8',
+  )
+  expect(tokensCss).toContain('.prototype-root a:not([class])')
+})

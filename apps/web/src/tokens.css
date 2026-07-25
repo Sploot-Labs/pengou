@@ -100,7 +100,13 @@
   border-radius: var(--radius-sm);
 }
 
-.prototype-root a {
+/* Only bare textual links (no className — e.g. inline cross-links like
+   "Créer un compte") inherit brand ginger here. Link-components (buttons,
+   cards, list rows) carry their own explicit color so this base rule can't
+   cascade over them (see .ab-button--primary, .home-card, .home-list__item
+   in prototype.css) — that override is what made the CSV export button's
+   ginger-on-ginger text invisible before this fix. */
+.prototype-root a:not([class]) {
   color: var(--brand);
 }
 

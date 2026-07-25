@@ -1924,7 +1924,7 @@
   border-color: var(--brand);
   background: var(--surface-2);
 }
-.home-card__title { font-weight: 700; font-size: var(--fs-h3); }
+.home-card__title { font-weight: 700; font-size: var(--fs-h3); color: var(--ink-strong); }
 .home-card__desc, .home-card__meta { color: var(--ink-dim); font-size: var(--fs-small); }
 .home-card__cta { margin-top: auto; color: var(--brand); font-size: var(--fs-small); }
 
@@ -1981,6 +1981,7 @@
 .home-list__title {
   font-weight: 700;
   flex-basis: 100%;
+  color: var(--ink-strong);
 }
 
 .home-list__meta {
