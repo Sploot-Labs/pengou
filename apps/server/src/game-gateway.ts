@@ -81,6 +81,17 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
   // (ex. plusieurs suites de test dans le même process).
   const sessionMetaByEngineId = new Map<string, SessionMeta>()
   const pinToSessionId = new Map<string, string>()
+  // Reprise depuis Home (Task 8) : `Home.tsx` liste les parties via `listSessions()`
+  // (`packages/db/src/repos/reports.ts`), qui n'expose que l'id `game_session` PERSISTÉ
+  // (`meta.dbSessionId`) — jamais l'id moteur EN MÉMOIRE (`session.id`, celui que porte
+  // normalement `/host/:sessionId` juste après `host:create`, voir `useLaunchGame.ts`). Sans
+  // cette table de correspondance inverse, un hôte qui reprend une partie live depuis Home
+  // enverrait l'id DB à `host:reconnect`, qui ne le trouverait jamais dans
+  // `sessionMetaByEngineId` (indexée par id moteur) et échouerait à tort avec « session
+  // introuvable ». `host:reconnect` accepte donc les DEUX espaces d'id (voir plus bas) : l'id
+  // moteur (rechargement de page en cours de partie, id déjà dans l'URL) ET l'id DB (reprise
+  // depuis Home, seul id que ce dernier connaît).
+  const dbSessionIdToEngineId = new Map<string, string>()
   // Token d'affichage grand écran : émis une seule fois par host:createScreenToken, mais
   // valable pour toute la durée de vie de la session (single-*issue*, multi-*join*) — pas de
   // Map au niveau module, pas de suppression après consommation. `screen:join` (première prise
@@ -251,6 +262,56 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
     if (timer) socket.emit('timer', timer)
   }
 
+  /** Snapshot d'état émis à UN SEUL socket qui vient de `host:reconnect` (Task 8) — sans lui, un
+   * hôte qui reprend une partie live (reprise depuis Home, ou simple rechargement de page en
+   * cours de partie) atterrit sur un écran vide : `HostLive` ne peuple joueurs/question/
+   * classement QUE via ses abonnements `on(...)`, jamais par un état initial fabriqué. Réutilise
+   * EXACTEMENT les mêmes événements que le reste de la passerelle (`lobby:update`,
+   * `question:show`+`timer` via `replayCurrentQuestionTo`, `question:reveal`, `scoreboard`,
+   * `podium`) — jamais un événement inédit que `HostLive` ne saurait pas gérer. Émis UNIQUEMENT
+   * à `socket` (jamais `io.to(room)`) : les autres membres de la room ont déjà leur propre état,
+   * à jour.
+   *
+   * Toujours précédé d'un `lobby:update` (liste des joueurs courante) quelle que soit la phase :
+   * l'en-tête de `HostLive` (nombre de joueurs, connectés) et le compteur de réponses en phase
+   * 'question' en dépendent tous deux, indépendamment de la phase affichée.
+   *
+   * Anti-triche : `engine.ranking(session)`/`engine.questionResult(session)` sont des
+   * projections PURES (prennent `session` directement, aucun accès au store) — contrairement à
+   * `engine.scoreboard(sessionId)`, qui RE-LIT la session par id et MUTE sa phase en 'scoreboard'
+   * ; les appeler ici muterait à tort la phase réelle de la session pendant une simple
+   * reconnexion (ex. un hôte qui reprend en pleine 'reveal' verrait la partie sauter directement
+   * en 'scoreboard' pour tout le monde). `questionResult` (bonne réponse) n'est calculé QUE pour
+   * les phases post-`reveal()` (reveal/scoreboard/podium) — jamais pour 'question', exactement
+   * comme `doRevealBySession`. */
+  function emitReconnectSnapshot(socket: Socket, session: GameSession): void {
+    socket.emit('lobby:update', { players: playersPayload(session) })
+
+    switch (session.phase) {
+      case 'question':
+        replayCurrentQuestionTo(socket, session)
+        break
+      case 'reveal': {
+        const view = engine.playerQuestionView(session)
+        if (view) socket.emit('question:show', view)
+        socket.emit('question:reveal', engine.questionResult(session))
+        socket.emit('scoreboard', { ranking: engine.ranking(session) })
+        break
+      }
+      case 'scoreboard':
+        socket.emit('scoreboard', { ranking: engine.ranking(session) })
+        break
+      case 'podium':
+        socket.emit('scoreboard', { ranking: engine.ranking(session) })
+        socket.emit('podium', { top: engine.ranking(session).slice(0, 3) })
+        break
+      case 'lobby':
+      default:
+        // Rien de plus : le `lobby:update` ci-dessus suffit déjà pour la phase 'lobby'.
+        break
+    }
+  }
+
   io.on('connection', (socket: Socket) => {
     socket.on('host:create', async (payload: { quizId?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
@@ -287,6 +348,7 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
           statusActiveSet: false,
         })
         pinToSessionId.set(session.pin, session.id)
+        dbSessionIdToEngineId.set(dbSession.id, session.id)
 
         const data = socket.data as SocketData
         data.role = 'host'
@@ -299,21 +361,32 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
       }
     })
 
-    // Reconnexion hôte (Task 1, hardening) : l'autorité hôte était liée à UN SEUL socket
-    // (posée par host:create) — un simple rechargement de page perdait DÉFINITIVEMENT le
-    // contrôle de la partie. Le client renvoie le `sessionId` reçu à host:create (persisté
-    // côté client, ex. localStorage) ; on ré-authentifie via la session Better Auth du NOUVEAU
-    // handshake et on vérifie qu'il s'agit bien de l'hôte de CETTE session avant de rebind
-    // `socket.data` + rejoindre la room. Double vérification (défense en profondeur) :
-    // l'état moteur EN MÉMOIRE (`session.hostId`, source de vérité pendant la partie) ET la
-    // ligne `game_session.host_id` PERSISTÉE — un écart entre les deux (qui ne devrait jamais
-    // arriver) fait échouer FERMÉ plutôt que de faire confiance à une seule source.
+    // Reconnexion hôte (Task 1, hardening ; Task 8, snapshot + reprise depuis Home) :
+    // l'autorité hôte était liée à UN SEUL socket (posée par host:create) — un simple
+    // rechargement de page perdait DÉFINITIVEMENT le contrôle de la partie. Le client renvoie un
+    // `sessionId` — soit l'id moteur reçu à host:create (persisté côté client, ex. localStorage,
+    // ou déjà présent dans l'URL `/host/:sessionId` après un simple F5), SOIT l'id `game_session`
+    // persisté tel que `Home.tsx` le connaît via `listSessions()` (reprise d'une partie live
+    // listée sur l'accueil, qui n'a jamais vu l'id moteur) — résolu vers l'id moteur via
+    // `dbSessionIdToEngineId` si besoin (voir sa doc plus haut). On ré-authentifie ensuite via la
+    // session Better Auth du NOUVEAU handshake et on vérifie qu'il s'agit bien de l'hôte de CETTE
+    // session avant de rebind `socket.data` + rejoindre la room. Double vérification (défense en
+    // profondeur) : l'état moteur EN MÉMOIRE (`session.hostId`, source de vérité pendant la
+    // partie) ET la ligne `game_session.host_id` PERSISTÉE — un écart entre les deux (qui ne
+    // devrait jamais arriver) fait échouer FERMÉ plutôt que de faire confiance à une seule
+    // source. Pousse enfin un snapshot de l'état courant à CE socket (`emitReconnectSnapshot`) :
+    // sans lui, l'hôte reprendrait la main sur une partie dont l'écran ne montre rien (aucun
+    // joueur, aucune question) jusqu'au prochain événement diffusé à toute la room.
     socket.on('host:reconnect', async (payload: { sessionId?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const sessionId = payload?.sessionId
-        if (typeof sessionId !== 'string' || !sessionId) throw new Error('sessionId requis')
+        const rawSessionId = payload?.sessionId
+        if (typeof rawSessionId !== 'string' || !rawSessionId) throw new Error('sessionId requis')
 
+        const sessionId = sessionMetaByEngineId.has(rawSessionId)
+          ? rawSessionId
+          : dbSessionIdToEngineId.get(rawSessionId)
+        if (!sessionId) throw new Error('session introuvable')
         const meta = sessionMetaByEngineId.get(sessionId)
         if (!meta) throw new Error('session introuvable')
 
@@ -333,7 +406,11 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
         data.role = 'host'
         data.sessionId = sessionId
         await socket.join(roomName(sessionId))
+        emitReconnectSnapshot(socket, session)
 
+        // `sessionId` renvoyé ici est TOUJOURS l'id moteur (canonique, quel que soit celui reçu
+        // en entrée) — c'est celui que la passerelle utilise partout ailleurs (room, tokens grand
+        // écran…) ; le front s'en ressert pour le reste de la session (voir `HostLive.tsx`).
         reply({ sessionId, pin: session.pin, phase: session.phase })
       } catch (e) {
         reply({ error: message(e) })

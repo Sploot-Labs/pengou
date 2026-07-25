@@ -36,10 +36,12 @@ export function SceneRoute({ children }: { children: ReactNode }) {
  * des trois, pour que la socket qui appelle `host:create` (HostEditor, sur
  * `/quizzes/:quizId`) soit la MÊME que celle qui appelle ensuite
  * `host:start`/`reveal`/`next`/`skip` (HostLive) — voir la doc de
- * `GameSocketProvider` pour pourquoi c'est requis (pas de `host:reconnect`
- * côté serveur). Ne remonte pas lors d'une navigation
+ * `GameSocketProvider` pour le détail. Ne remonte pas lors d'une navigation
  * `/` → `/quizzes/:id` → `/host/:id` gérée par le routeur (seul un
- * rechargement complet de page le ferait).
+ * rechargement complet de page le ferait) — un tel rechargement (ou une
+ * reprise directe depuis `Home`, qui ne passe jamais par `host:create`)
+ * atterrit avec une socket sans autorité hôte, que `HostLive` regagne via
+ * `host:reconnect` à son montage (Task 8).
  */
 function HostRealtimeLayout() {
   return (

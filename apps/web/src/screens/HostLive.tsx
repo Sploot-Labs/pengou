@@ -100,11 +100,19 @@ function buildScreenUrl(sessionId: string, displayToken: string, pin: string | n
  *    `apps/server/src/realtime.ts`), cette reconnexion crée un NOUVEAU socket
  *    serveur (socket.id/socket.data neufs, room perdue). L'autorité « hôte »
  *    posée par `host:create` (voir `GameSocketProvider.tsx`) est donc perdue
- *    IRRÉVOCABLEMENT pour ce montage : tout `host:*` échouera désormais avec
- *    « action réservée à l'hôte de la session ». Un vrai correctif demande un
- *    changement serveur (recovery, ou un `host:reconnect` — suivi Plan 7) ;
- *    côté front, le mieux qu'on puisse faire est de le détecter et de guider
- *    l'hôte vers la seule issue possible : relancer depuis l'éditeur.
+ *    pour ce montage : tout `host:*` échouerait désormais avec « action
+ *    réservée à l'hôte de la session ». Le serveur EXPOSE bien `host:reconnect`
+ *    (Task 8, `game-gateway.ts`, avec snapshot d'état) — c'est d'ailleurs ce
+ *    que cet écran appelle AU MONTAGE quand `navState?.pin` est absent (voir
+ *    l'effet d'abonnement ci-dessous) — mais on ne le redéclenche PAS
+ *    automatiquement ICI, en pleine session déjà rendue à l'écran : re-pousser
+ *    un snapshot en douce PENDANT que l'hôte pilote activement la partie
+ *    (état local déjà affiché, action potentiellement en cours) risquerait de
+ *    lui substituer un état sous les pieds sans qu'il l'ait demandé. Le plus
+ *    sûr, pour CE cas précis (coupure en pleine session déjà montée), reste
+ *    de guider l'hôte vers l'éditeur puis de relancer/reprendre la partie
+ *    explicitement (ce qui remonte cet écran et redéclenche `host:reconnect`
+ *    proprement) plutôt que de le faire taire dans son dos.
  */
 type ConnectionState = 'online' | 'reconnecting' | 'broken'
 
@@ -134,11 +142,21 @@ export function HostLive() {
 
   // Transmis par HostEditor au moment de la navigation (`host:create` ne
   // redonne le PIN/titre qu'à CE moment précis ; aucun événement ultérieur
-  // ne les renvoie). Absents si cet écran est atteint autrement (ex.
-  // rechargement complet de page) — dégradé gracieusement, jamais fabriqué.
+  // ne les renvoie). Absents si cet écran est atteint autrement (reprise
+  // depuis Home, ou rechargement complet de page) — dans ce cas, `pin` est
+  // reconstitué par `host:reconnect` (voir l'effet de montage plus bas) ;
+  // `quizTitle`, lui, RESTE dégradé gracieusement (le serveur ne le renvoie
+  // jamais, ni à host:create ni à host:reconnect), jamais fabriqué.
   const navState = location.state as { pin?: string; quizTitle?: string } | null
-  const [pin] = useState<string | null>(navState?.pin ?? null)
+  const [pin, setPin] = useState<string | null>(navState?.pin ?? null)
   const quizTitle = navState?.quizTitle ?? 'Partie en direct'
+
+  // Reprise (Task 8) : `true` tant que `host:reconnect` n'a pas répondu, UNIQUEMENT quand cet
+  // écran est atteint SANS `navState?.pin` (reprise depuis Home, ou rechargement de page) — un
+  // lancement direct (`navState?.pin` présent, `host:create` déjà passé sur cette même socket)
+  // n'a rien à reprendre et démarre directement en 'lobby'.
+  const [resuming, setResuming] = useState(!navState?.pin)
+  const [resumeError, setResumeError] = useState<string | null>(null)
 
   const [phase, setPhase] = useState<UiPhase>('lobby')
   const [players, setPlayers] = useState<LobbyPlayer[]>([])
@@ -247,7 +265,40 @@ export function HostLive() {
       setPhase('podium')
     })
 
+    // Reprise (Task 8) : émis en DERNIER dans CE MÊME effet — tous les `on(...)` ci-dessus sont
+    // donc déjà enregistrés, de façon SYNCHRONE, avant ce `host:reconnect` asynchrone. Le serveur
+    // pousse son snapshot (`lobby:update`/`question:show`+`timer`/`question:reveal`+`scoreboard`/
+    // `podium`, voir `emitReconnectSnapshot`, game-gateway.ts) AVANT de répondre à l'ack — ces
+    // abonnements ne peuvent donc jamais rater le snapshot. `sessionId` ici est celui de l'URL —
+    // l'id moteur (rechargement de `/host/:sessionId` déjà lancé) OU l'id `game_session` persisté
+    // (reprise d'une partie live depuis `Home`, seul id qu'elle connaît) — la passerelle accepte
+    // les deux (voir sa doc). `phase`, contrairement à `players`/`question`/`ranking`/`podiumTop`
+    // (peuplés par les événements ci-dessus), est posé directement depuis l'ack : c'est le SEUL
+    // moyen fiable de savoir qu'une session déjà en 'scoreboard' l'est vraiment (le seul
+    // événement de snapshot pour cette phase, `scoreboard`, ne fait volontairement PAS avancer
+    // `phase` en dehors d'un skip — voir son handler ci-dessus).
+    let cancelled = false
+    if (!navState?.pin && sessionId) {
+      emitAck<{ sessionId?: string; pin?: string; phase?: UiPhase }>('host:reconnect', { sessionId })
+        .then((res) => {
+          if (cancelled) return
+          if (res.pin) setPin(res.pin)
+          if (res.phase) setPhase(res.phase)
+          setResuming(false)
+        })
+        .catch((err) => {
+          if (cancelled) return
+          setResuming(false)
+          setResumeError(
+            err instanceof Error
+              ? err.message
+              : "Impossible de reprendre cette partie : session introuvable, terminée, ou vous n'en êtes pas l'hôte.",
+          )
+        })
+    }
+
     return () => {
+      cancelled = true
       offConnect()
       offDisconnect()
       offLobby()
@@ -321,6 +372,36 @@ export function HostLive() {
         <p className="join-error" role="alert">
           Identifiant de session manquant dans l’URL.
         </p>
+      </main>
+    )
+  }
+
+  // Reprise (Task 8) en échec : session terminée/introuvable, ou cet utilisateur n'est pas
+  // l'hôte de cette session (voir `host:reconnect`, game-gateway.ts). Aucun état de jeu n'a été
+  // reçu (les abonnements n'ont livré aucun snapshot) — un message clair plutôt qu'un lobby vide
+  // fabriqué qui laisserait croire à tort qu'il suffit d'attendre des joueurs.
+  if (resumeError) {
+    return (
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+        <Logo />
+        <p className="join-error" role="alert">
+          {resumeError}
+        </p>
+        <Button variant="primary" type="button" onClick={() => navigate('/')}>
+          Retour à l’accueil
+        </Button>
+      </main>
+    )
+  }
+
+  // Reprise (Task 8) en cours : `host:reconnect` n'a pas encore répondu — tant qu'on ne sait pas
+  // si cette reprise va réussir (et avec quelle phase), rien n'est rendu à part ce statut : pas
+  // de lobby vide ni de phase par défaut qui laisserait croire à un état réel avant confirmation.
+  if (resuming) {
+    return (
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+        <Logo />
+        <p role="status">Reprise de la partie…</p>
       </main>
     )
   }

@@ -884,15 +884,25 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         { quizId: quiz.id },
       )
       expect(created.error).toBeUndefined()
-      const { sessionId } = created as { sessionId: string; pin: string }
+      const { sessionId, pin } = created as { sessionId: string; pin: string }
+
+      // Un joueur rejoint AVANT que l'hôte ne disparaisse — pour vérifier que le socket
+      // reconnecté reçoit bien le snapshot lobby (Task 8), pas seulement l'ack.
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      const joinRes = await ack<{ playerId?: string; error?: string }>(player1, 'player:join', { pin, nickname: 'Alice' })
+      expect(joinRes.error).toBeUndefined()
 
       // L'hôte A disparaît (ex. rechargement de page) — l'ancien socket ne peut plus rien piloter.
       hostSocketA.disconnect()
       await new Promise((resolve) => setTimeout(resolve, 150))
 
       // Un NOUVEAU socket, authentifié avec le MÊME utilisateur (même cookie), reprend la main.
+      // Écouteur posé AVANT l'appel : le snapshot est émis de façon synchrone dans le handler
+      // `host:reconnect`, donc AVANT que l'ack ne résolve côté client.
       const hostSocketB = await connectClient(url, { cookie })
       clients.push(hostSocketB)
+      const lobbySnapshotPromise = waitFor<{ players: Array<{ id: string; nickname: string }> }>(hostSocketB, 'lobby:update')
       const reconnectAck = await ack<{ sessionId?: string; pin?: string; phase?: string; error?: string }>(
         hostSocketB,
         'host:reconnect',
@@ -901,6 +911,13 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       expect(reconnectAck.error).toBeUndefined()
       expect(reconnectAck.sessionId).toBe(sessionId)
       expect(reconnectAck.phase).toBe('lobby')
+
+      // Snapshot phase 'lobby' (Task 8) : le socket reconnecté reçoit la liste des joueurs
+      // ACTUELS — pas seulement l'ack {sessionId,pin,phase} — sans attendre un futur
+      // `player:join`/`host:start`, uniquement à LUI (jamais rediffusé à toute la room).
+      const lobbySnapshot = await lobbySnapshotPromise
+      expect(lobbySnapshot.players).toHaveLength(1)
+      expect(lobbySnapshot.players[0]!.nickname).toBe('Alice')
 
       // hostSocketB peut désormais piloter la partie exactement comme l'aurait fait hostSocketA.
       const startAck = await ack<{ error?: string }>(hostSocketB, 'host:start', {})
@@ -915,6 +932,75 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const intruderAck = await ack<{ error?: string; sessionId?: string }>(intruder, 'host:reconnect', { sessionId })
       expect(intruderAck.error).toBeTruthy()
       expect(intruderAck.sessionId).toBeUndefined()
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("host:reconnect accepte aussi l'id `game_session` PERSISTÉ (pas seulement l'id moteur) — reprise d'une partie live depuis Home, qui ne connaît que ce premier id", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const cookie = await signUp(app, 'gateway-host-reconnect-dbid@example.com')
+      const quizRes = await app.inject({
+        method: 'POST',
+        url: '/api/quizzes',
+        payload: { title: 'Quiz reconnexion hôte (id DB)' },
+        headers: { 'content-type': 'application/json', cookie },
+      })
+      expect(quizRes.statusCode).toBe(201)
+      const quiz = quizRes.json() as { id: string }
+      const questionRes = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quiz.id}/questions`,
+        payload: {
+          type: 'mcq',
+          prompt: 'Q ?',
+          timeLimit: 20,
+          payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+        },
+        headers: { 'content-type': 'application/json', cookie },
+      })
+      expect(questionRes.statusCode).toBe(201)
+
+      const hostSocketA = await connectClient(url, { cookie })
+      clients.push(hostSocketA)
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
+        hostSocketA,
+        'host:create',
+        { quizId: quiz.id },
+      )
+      expect(created.error).toBeUndefined()
+      const { sessionId: engineSessionId } = created as { sessionId: string; pin: string }
+
+      // L'id `game_session` PERSISTÉ (celui que `Home.tsx` connaît via `GET /api/sessions`,
+      // `listSessions()`) — DIFFÉRENT de l'id moteur EN MÉMOIRE reçu ci-dessus par host:create.
+      const [dbSession] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, quiz.id))
+      expect(dbSession).toBeDefined()
+      expect(dbSession.id).not.toBe(engineSessionId)
+
+      hostSocketA.disconnect()
+      await new Promise((resolve) => setTimeout(resolve, 150))
+
+      // Reprise depuis Home : le front envoie l'id DB (jamais vu l'id moteur) à host:reconnect.
+      const hostSocketB = await connectClient(url, { cookie })
+      clients.push(hostSocketB)
+      const reconnectAck = await ack<{ sessionId?: string; pin?: string; phase?: string; error?: string }>(
+        hostSocketB,
+        'host:reconnect',
+        { sessionId: dbSession.id },
+      )
+      expect(reconnectAck.error).toBeUndefined()
+      expect(reconnectAck.phase).toBe('lobby')
+      // L'ack renvoie l'id moteur CANONIQUE (celui utilisé partout ailleurs côté passerelle),
+      // pas l'id DB reçu en entrée — le front s'en ressert pour le reste de la session.
+      expect(reconnectAck.sessionId).toBe(engineSessionId)
+
+      // hostSocketB pilote bien la partie : la reconnexion via l'id DB a réellement rebind
+      // l'autorité hôte de CETTE session (pas d'une autre / d'aucune).
+      const startAck = await ack<{ error?: string }>(hostSocketB, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
     } finally {
       for (const c of clients) c.disconnect()
       await app.close()

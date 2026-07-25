@@ -244,6 +244,46 @@ describe('Home', () => {
     )
   })
 
+  it('les parties "lobby"/"active" mènent vers /host/:id (Reprendre) ; "ended" vers /sessions/:id (rapport)', async () => {
+    const { listSessions } = await import('../api/sessions')
+    vi.mocked(listSessions).mockResolvedValueOnce([
+      {
+        id: 'live-1', pin: '111111', status: 'active', startedAt: '2026-07-20T10:00:00.000Z',
+        endedAt: null, quizId: 'q1', quizTitle: 'Partie en cours', playerCount: 2,
+      },
+      {
+        id: 'lobby-1', pin: '222222', status: 'lobby', startedAt: null,
+        endedAt: null, quizId: 'q1', quizTitle: 'Partie en attente', playerCount: 0,
+      },
+      {
+        id: 'ended-1', pin: '333333', status: 'ended', startedAt: '2026-07-20T10:00:00.000Z',
+        endedAt: '2026-07-20T10:30:00.000Z', quizId: 'q1', quizTitle: 'Partie terminée', playerCount: 4,
+      },
+    ])
+
+    render(
+      <MotionProvider>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </MotionProvider>,
+    )
+
+    await waitFor(() => expect(screen.getByText('Partie en cours')).toBeInTheDocument())
+
+    const activeLink = screen.getByText('Partie en cours').closest('a')
+    expect(activeLink).toHaveAttribute('href', '/host/live-1')
+    expect(within(activeLink as HTMLElement).getByText('Reprendre →')).toBeInTheDocument()
+
+    const lobbyLink = screen.getByText('Partie en attente').closest('a')
+    expect(lobbyLink).toHaveAttribute('href', '/host/lobby-1')
+    expect(within(lobbyLink as HTMLElement).getByText('Reprendre →')).toBeInTheDocument()
+
+    const endedLink = screen.getByText('Partie terminée').closest('a')
+    expect(endedLink).toHaveAttribute('href', '/sessions/ended-1')
+    expect(within(endedLink as HTMLElement).getByText('Voir le rapport →')).toBeInTheDocument()
+  })
+
   it('affiche le nombre de questions au pluriel sur les cartes', async () => {
     const { listQuizzes } = await import('../api/quizzes')
     vi.mocked(listQuizzes).mockResolvedValueOnce([

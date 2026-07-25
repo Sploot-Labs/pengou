@@ -34,6 +34,25 @@ const STATUS_LABEL: Record<SessionStatus, string> = {
   ended: 'Terminée',
 }
 
+/** Une partie encore vivante (`lobby`/`active`) mène vers le contrôleur hôte LIVE (`/host/:id`,
+ * Task 8 : `host:reconnect` y repeuple l'état — lobby/joueurs, question en cours, classement —
+ * via un snapshot poussé par le serveur, voir `HostLive.tsx`) — jamais vers le rapport, qui lit
+ * des agrégats FIGÉS (`getSessionReport`) inadaptés à une partie encore en mouvement. Une partie
+ * `ended`, elle, n'a plus rien à « reprendre » : direction le rapport (`/sessions/:id`). `s.id`
+ * est l'id `game_session` PERSISTÉ (celui que `listSessions()` connaît) — `host:reconnect`
+ * accepte aussi bien cet id que l'id moteur en mémoire (voir sa doc, `game-gateway.ts`). */
+function sessionHref(s: SessionSummary): string {
+  return s.status === 'ended' ? `/sessions/${s.id}` : `/host/${s.id}`
+}
+
+/** Libellé d'affordance visuel (décoratif, `aria-hidden` — même convention que `home-card__cta`
+ * ci-dessous pour les cartes de quiz) : distingue clairement, au survol de la liste, une partie
+ * qu'on REPREND d'une partie dont on consulte le RAPPORT — le badge de statut seul (« En cours »,
+ * « Terminée ») ne dit pas ce que le clic va faire. */
+function sessionCtaLabel(s: SessionStatus): string {
+  return s === 'ended' ? 'Voir le rapport →' : 'Reprendre →'
+}
+
 type SessionFilter = 'all' | SessionStatus
 
 /** Filter chips shown above "Parties récentes" — order matches the brief:
@@ -372,7 +391,7 @@ export function Home() {
                   <ul className="home-list">
                     {visibleSessions.map((s) => (
                       <li key={s.id}>
-                        <Link className="home-list__item" to={`/sessions/${s.id}`}>
+                        <Link className="home-list__item" to={sessionHref(s)}>
                           <span className="home-list__title">{s.quizTitle}</span>
                           <span className="home-list__meta">
                             PIN {s.pin} · {formatDate(s.startedAt)} · {s.playerCount} joueur
@@ -380,6 +399,9 @@ export function Home() {
                           </span>
                           <span className={`host-badge host-badge--${s.status}`}>
                             {STATUS_LABEL[s.status]}
+                          </span>
+                          <span className="home-list__cta" aria-hidden="true">
+                            {sessionCtaLabel(s.status)}
                           </span>
                         </Link>
                       </li>
