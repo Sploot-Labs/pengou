@@ -24,7 +24,7 @@
   --ans-square:   #0e7c68;  --ans-square-ink:   #ffffff;
 
   /* Podium — or/argent/bronze, RÉSERVÉ au classement, jamais accent. */
-  --gold:   var(--sploot-warn);
+  --gold:   #e3b341;
   --silver: #c7ccdd;
   --bronze: #e0954f;
 
@@ -58,7 +58,7 @@
   --ans-square:   #0e7c68;  --ans-square-ink:   #ffffff;
 
   /* Podium — or/argent/bronze, RÉSERVÉ au classement, jamais accent. */
-  --gold:   var(--sploot-warn);
+  --gold:   #e3b341;
   --silver: #c7ccdd;
   --bronze: #e0954f;
 

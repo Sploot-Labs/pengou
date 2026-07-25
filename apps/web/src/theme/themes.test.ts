@@ -17,12 +17,18 @@ describe('themes.css', () => {
     expect(themesCss).not.toContain(':root[data-')
   })
 
-  it('définit les rôles réponse, podium et focus (source unique)', () => {
-    for (const role of [
+  it('définit les rôles réponse, podium et focus dans les deux blocs (source unique)', () => {
+    const roles = [
       '--ans-triangle', '--ans-diamond', '--ans-circle', '--ans-square',
       '--gold', '--silver', '--bronze', '--focus',
-    ]) {
-      expect(themesCss).toContain(role)
+    ]
+    for (const selector of ["[data-theme='app']", "[data-theme='scene']"]) {
+      const start = themesCss.indexOf(selector)
+      expect(start, `bloc ${selector} introuvable`).toBeGreaterThanOrEqual(0)
+      const block = themesCss.slice(start, themesCss.indexOf('}', start))
+      for (const role of roles) {
+        expect(block, `${role} manquant dans ${selector}`).toContain(role)
+      }
     }
   })
 
