@@ -1880,6 +1880,41 @@
 /* Home (Plan 07 Task 4)                                                   */
 /* ====================================================================== */
 
+.home-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.home-hero__sub { color: var(--ink-dim); margin-top: var(--space-1); }
+
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-3);
+}
+.home-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-height: 120px;
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  text-decoration: none;
+}
+.home-card:hover, .home-card:focus-visible {
+  border-color: var(--brand);
+  background: var(--surface-2);
+}
+.home-card__title { font-weight: 700; font-size: var(--fs-h3); }
+.home-card__desc, .home-card__meta { color: var(--ink-dim); font-size: var(--fs-small); }
+.home-card__cta { margin-top: auto; color: var(--brand); font-size: var(--fs-small); }
+
 .home-section__header {
   display: flex;
   align-items: center;

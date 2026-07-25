@@ -5,8 +5,8 @@ import { ApiError } from '../api/client'
 import { createQuiz, listQuizzes, type Quiz } from '../api/quizzes'
 import { listSessions, type SessionStatus, type SessionSummary } from '../api/sessions'
 import { Reveal } from '../motion/index.js'
-import { ThemeProvider } from '../theme/ThemeProvider.js'
-import { Button, Logo } from '../ui'
+import { AppHeader } from '../ui/AppHeader.js'
+import { Button } from '../ui'
 
 /**
  * Home — the host's landing screen (Plan 07 Task 4), now living at `/`
@@ -135,36 +135,38 @@ export function Home() {
   }, [])
 
   return (
-    <ThemeProvider theme="app">
     <div className="ab-shell">
-      <header className="ab-shell__header">
-        <Logo />
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <p className="host-brandline">
-            <strong>Arena</strong> — quiz en direct, open-source · chez vous ou dans le cloud
-          </p>
-        </div>
-        <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
-          {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
-        </Button>
-      </header>
+      <AppHeader
+        brandline="quiz en direct, open-source · chez vous ou dans le cloud"
+        actions={
+          <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
+            {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
+          </Button>
+        }
+      />
 
       <main className="ab-shell__main" id="contenu-principal" tabIndex={-1}>
-        <h1 style={{ marginBottom: 'var(--space-4)' }}>Accueil</h1>
+        <section className="home-hero">
+          <div>
+            <h1>Bonjour 👋</h1>
+            <p className="home-hero__sub">Prêt à lancer une partie&nbsp;?</p>
+          </div>
+          <Button
+            variant="primary"
+            type="button"
+            aria-expanded={creatingQuiz}
+            onClick={() => {
+              setCreatingQuiz((v) => !v)
+              setNewQuizError(null)
+            }}
+          >
+            {creatingQuiz ? 'Annuler' : '+ Nouveau quiz'}
+          </Button>
+        </section>
 
         <section aria-labelledby="home-quizzes-heading" style={{ marginBottom: 'var(--space-6)' }}>
           <div className="home-section__header">
             <h2 id="home-quizzes-heading">Mes quiz</h2>
-            <Button
-              variant="ghost"
-              type="button"
-              onClick={() => {
-                setCreatingQuiz((v) => !v)
-                setNewQuizError(null)
-              }}
-            >
-              {creatingQuiz ? 'Annuler' : 'Nouveau quiz'}
-            </Button>
           </div>
 
           {creatingQuiz && (
@@ -204,16 +206,19 @@ export function Home() {
             </div>
           ) : quizzes.length === 0 ? (
             <p className="ab-empty-state">
-              Vous n'avez encore aucun quiz. Créez-en un pour commencer.
+              Pas encore de quiz. On te fait de la place — crée-en un pour démarrer. 🐾
             </p>
           ) : (
             <Reveal from="up">
-              <ul className="home-list">
+              <ul className="home-cards">
                 {quizzes.map((q) => (
                   <li key={q.id}>
-                    <Link className="home-list__item" to={`/quizzes/${q.id}`}>
-                      <span className="home-list__title">{q.title}</span>
-                      {q.description && <span className="home-list__meta">{q.description}</span>}
+                    <Link className="home-card" to={`/quizzes/${q.id}`}>
+                      <span className="home-card__title">{q.title}</span>
+                      {q.description && <span className="home-card__desc">{q.description}</span>}
+                      <span className="home-card__cta" aria-hidden="true">
+                        Éditer →
+                      </span>
                     </Link>
                   </li>
                 ))}
@@ -259,6 +264,5 @@ export function Home() {
         </section>
       </main>
     </div>
-    </ThemeProvider>
   )
 }
