@@ -1,9 +1,9 @@
-import { describe, it, expect, afterAll, beforeAll } from 'vitest'
+import { describe, it, expect, afterAll, beforeAll, vi } from 'vitest'
 import type { FastifyInstance } from 'fastify'
 import { io as ioClient, type Socket as ClientSocket } from 'socket.io-client'
 import { eq } from 'drizzle-orm'
 import {
-  startTestDb, runMigrations, schema, tenantScope, createQuiz, createQuestion,
+  startTestDb, runMigrations, schema, tenantScope, createQuiz, createQuestion, ensureDefaultTenant,
 } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { loadConfig } from '@splootlabs/shared'
@@ -441,6 +441,52 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     )
     expect(created.error).toBeUndefined()
     return { hostSocket, sessionId: created.sessionId!, pin: created.pin!, quizId: quiz.id }
+  }
+
+  /** Variante de `setupHostedSession` avec un `readingTime > 0` (Task 3, phase 'reading') — la
+   * route éditeur HTTP (`POST /api/quizzes/:id/questions`) ne porte pas encore ce champ (Task 5,
+   * hors périmètre ici), donc la question est insérée directement via le repo `createQuestion`
+   * (même tenant — mode 'single' de test, résolu comme `resolveTenantId` le ferait). */
+  async function setupHostedSessionWithReading(
+    app: FastifyInstance,
+    url: string,
+    email: string,
+    readingTime: number,
+    timeLimit = 20,
+  ): Promise<{ hostSocket: ClientSocket; sessionId: string; pin: string; quizId: string; cookie: string }> {
+    const cookie = await signUp(app, email)
+    const quizRes = await app.inject({
+      method: 'POST',
+      url: '/api/quizzes',
+      payload: { title: 'Quiz reading' },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(quizRes.statusCode).toBe(201)
+    const quiz = quizRes.json() as { id: string }
+
+    const tenantId = await ensureDefaultTenant(ctx.db)
+    const scope = tenantScope(ctx.db, tenantId)
+    await createQuestion(scope, quiz.id, {
+      type: 'mcq',
+      prompt: 'Capitale de la France ?',
+      timeLimit,
+      readingTime,
+      payload: {
+        options: [
+          { label: 'Paris', correct: true },
+          { label: 'Lyon', correct: false },
+        ],
+      },
+    })
+
+    const hostSocket = await connectClient(url, { cookie })
+    const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
+      hostSocket,
+      'host:create',
+      { quizId: quiz.id },
+    )
+    expect(created.error).toBeUndefined()
+    return { hostSocket, sessionId: created.sessionId!, pin: created.pin!, quizId: quiz.id, cookie }
   }
 
   it("player:reconnect (joinToken) : un joueur déconnecté puis reconnecté retrouve son score et sa place dans la room", async () => {
@@ -1363,4 +1409,188 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       await app.close()
     }
   }, 20_000)
+
+  // Task 3 — phase 'reading' (temps de lecture) : planification serveur (setTimeout) de la
+  // révélation automatique. Fake timers (`vi.useFakeTimers`) pour ne jamais attendre de vraies
+  // secondes en test — voir le commentaire de `raceNoEvent` et les notes de `SessionMeta.readingTimeout`
+  // côté passerelle. Le champ `toFake` est restreint à `setTimeout`/`clearTimeout` (les seuls
+  // timers que la passerelle utilise pour cette fonctionnalité) pour ne pas perturber les
+  // mécanismes internes de Socket.IO (ping/heartbeat, etc.) qui tournent dans le MÊME process.
+  describe("phase 'reading' (temps de lecture) — planification serveur", () => {
+    it("host:start d'une question avec readingTime>0 émet question:reading (sans options) puis, à échéance, question:show + timer", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSessionWithReading(app, url, 'gateway-reading-flow@example.com', 6, 20)
+        clients.push(hostSocket)
+
+        const player1 = await connectClient(url)
+        clients.push(player1)
+        await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+
+        vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+        try {
+          const readingPromise = waitFor<{ prompt?: string; index?: number; total?: number; readingTime?: number; startedAt?: number }>(
+            player1,
+            'question:reading',
+          )
+          const startAckPromise = ack<{ prompt?: string; readingTime?: number; error?: string }>(hostSocket, 'host:start', {})
+
+          const reading = await readingPromise
+          expect(reading.readingTime).toBe(6)
+          expect(reading.prompt).toBeTruthy()
+          // Anti-triche : la projection « lecture » ne porte JAMAIS les options/la bonne réponse.
+          expect(reading).not.toHaveProperty('payload')
+          expect(reading).not.toHaveProperty('options')
+          expect(JSON.stringify(reading)).not.toContain('Paris')
+          expect(JSON.stringify(reading)).not.toContain('correct')
+
+          const startAck = await startAckPromise
+          expect(startAck.error).toBeUndefined()
+          expect(startAck.readingTime).toBe(6) // l'ack de host:start reflète aussi la readingView
+
+          // Avant échéance : pas encore de question:show.
+          const noShowYet = raceNoEvent(player1, 'question:show', 500)
+          await vi.advanceTimersByTimeAsync(500)
+          expect(await noShowYet).toBe(true)
+
+          // À l'échéance (6 s au total) : question:show (sans bonne réponse) + timer.
+          const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(player1, 'question:show')
+          const timerPromise = waitFor<{ timeLimit?: number; startedAt?: number }>(player1, 'timer')
+          await vi.advanceTimersByTimeAsync(5_600)
+
+          const show = await showPromise
+          expect(show.payload).toBeDefined()
+          for (const option of show.payload.options) expect(option).not.toHaveProperty('correct')
+          expect(JSON.stringify(show)).not.toContain('correct')
+
+          const timer = await timerPromise
+          expect(timer.timeLimit).toBe(20)
+          expect(typeof timer.startedAt).toBe('number')
+        } finally {
+          vi.useRealTimers()
+        }
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("une révélation manuelle anticipée (host:reveal) pendant la lecture annule le minuteur planifié (pas de question:show fantôme après échéance)", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSessionWithReading(app, url, 'gateway-reading-cancel@example.com', 6)
+        clients.push(hostSocket)
+
+        const player1 = await connectClient(url)
+        clients.push(player1)
+        await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+
+        vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+        try {
+          const readingPromise = waitFor(player1, 'question:reading')
+          const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+          expect(startAck.error).toBeUndefined()
+          await readingPromise
+
+          // Révélation manuelle anticipée, encore en pleine lecture (bien avant les 6 s).
+          const revealAck = await ack<{ error?: string }>(hostSocket, 'host:reveal', {})
+          expect(revealAck.error).toBeUndefined()
+
+          const showsAfterReveal: unknown[] = []
+          player1.on('question:show', (payload: unknown) => showsAfterReveal.push(payload))
+
+          // Avance largement au-delà de l'échéance de lecture (6 s) : si le minuteur n'avait pas
+          // été annulé, un `question:show` fantôme (double révélation) arriverait ici.
+          await vi.advanceTimersByTimeAsync(10_000)
+
+          expect(showsAfterReveal).toHaveLength(0)
+        } finally {
+          vi.useRealTimers()
+        }
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("emitReconnectSnapshot en phase 'reading' émet question:reading avec le temps de lecture restant (jamais fabriqué côté client)", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin, sessionId, cookie } = await setupHostedSessionWithReading(
+          app,
+          url,
+          'gateway-reading-reconnect@example.com',
+          6,
+        )
+        clients.push(hostSocket)
+
+        const player1 = await connectClient(url)
+        clients.push(player1)
+        await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+
+        // Le socket de reprise est connecté AVANT d'activer les fake timers : Socket.IO
+        // (client ET serveur) s'appuie en interne sur de VRAIS timers pour son propre
+        // handshake — établir une connexion réseau pendant que `setTimeout` est mocké la ferait
+        // rester bloquée indéfiniment (observé : timeout de test). Seule la partie « minuterie
+        // de jeu » (readingTimeout planifié par la passerelle) doit être fake-timée ; la
+        // connexion réseau elle-même, non.
+        const hostSocketB = await connectClient(url, { cookie })
+        clients.push(hostSocketB)
+        // Laisse le temps à la mise à niveau de transport (polling → websocket, asynchrone en
+        // arrière-plan après le premier `connect`) de se terminer AVANT d'activer les fake
+        // timers — sinon sa poursuite (qui dépend de VRAIS setTimeout internes programmés APRÈS
+        // ce point) resterait bloquée indéfiniment, sans qu'aucun paquet ultérieur ne puisse
+        // plus jamais être délivré sur ce socket (observé : `host:reconnect` jamais reçu côté
+        // serveur, alors que `hostSocketB.connected` reste pourtant `true`).
+        await new Promise((resolve) => setTimeout(resolve, 200))
+
+        vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+        try {
+          const readingPromise = waitFor(player1, 'question:reading')
+          const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+          expect(startAck.error).toBeUndefined()
+          await readingPromise
+
+          // Avance un peu (mais reste bien EN DEÇÀ de l'échéance de 6 s) avant la reprise.
+          await vi.advanceTimersByTimeAsync(2_000)
+
+          // Reprise hôte (déjà connecté ci-dessus) EN PLEINE lecture — symétrique de
+          // host:reconnect en phase 'question' (voir les tests Task 5/8 plus haut).
+          const reconnectReadingPromise = waitFor<{ prompt?: string; readingTime?: number; startedAt?: number }>(
+            hostSocketB,
+            'question:reading',
+          )
+          const reconnectAck = await ack<{ sessionId?: string; phase?: string; error?: string }>(
+            hostSocketB,
+            'host:reconnect',
+            { sessionId },
+          )
+          expect(reconnectAck.error).toBeUndefined()
+          expect(reconnectAck.phase).toBe('reading')
+
+          const reconnectReading = await reconnectReadingPromise
+          expect(reconnectReading.readingTime).toBe(6)
+          expect(typeof reconnectReading.startedAt).toBe('number')
+          // Anti-triche : toujours aucune option/bonne réponse dans ce snapshot.
+          expect(JSON.stringify(reconnectReading)).not.toContain('correct')
+          expect(JSON.stringify(reconnectReading)).not.toContain('Paris')
+
+          // Le minuteur serveur continue de courir indépendamment de la reconnexion : à
+          // échéance, la room reçoit toujours question:show + timer.
+          const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(player1, 'question:show')
+          await vi.advanceTimersByTimeAsync(4_500) // 2000 déjà écoulés + 4500 = 6500 > 6000
+          const show = await showPromise
+          expect(show.payload).toBeDefined()
+        } finally {
+          vi.useRealTimers()
+        }
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+  })
 })

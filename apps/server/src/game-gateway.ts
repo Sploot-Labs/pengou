@@ -33,6 +33,12 @@ type SessionMeta = {
   /** `game_session.status` ne passe à 'active' qu'une seule fois (au premier host:start) :
    * un ré-appel écraserait sinon `startedAt` à chaque question suivante. */
   statusActiveSet: boolean
+  /** Minuteur serveur planifiant la révélation automatique de fin de lecture (phase 'reading' →
+   * 'question', voir `startQuestionFlow`/`revealAnswersFlow`). `null` hors phase 'reading' ou une
+   * fois consommé/annulé. Toujours nettoyé via `clearReadingTimeout` avant toute transition
+   * manuelle anticipée (host:reveal/host:skip/host:next) ou fin de session — sans ça, une
+   * révélation fantôme se déclencherait après coup sur une manche déjà avancée par ailleurs. */
+  readingTimeout: ReturnType<typeof setTimeout> | null
 }
 
 type SocketData = {
@@ -112,6 +118,18 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
   // `connected:false` sur un joueur pourtant déjà reconnecté.
   const activeSocketIdByPlayerId = new Map<string, string>()
 
+  /** Annule le minuteur de fin de lecture planifié (voir `SessionMeta.readingTimeout`), s'il y en
+   * a un en attente — sûr à appeler inconditionnellement (no-op si `null`). Appelé au tout début
+   * de toute transition manuelle anticipée (`host:reveal`, `host:skip`, `host:next`) et à la fin
+   * de session, pour qu'une révélation planifiée ne se déclenche jamais après coup sur une manche
+   * déjà avancée par ailleurs (idempotence : une seule révélation par manche). */
+  function clearReadingTimeout(meta: SessionMeta): void {
+    if (meta.readingTimeout) {
+      clearTimeout(meta.readingTimeout)
+      meta.readingTimeout = null
+    }
+  }
+
   function requireHost(socket: Socket): { sessionId: string; meta: SessionMeta } {
     const data = socket.data as SocketData
     if (data.role !== 'host' || !data.sessionId) throw new Error('action réservée à l\'hôte de la session')
@@ -171,6 +189,12 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
    * s'intercale plus entre `engine.reveal()` et `engine.scoreboard()` : les deux s'exécutent
    * l'un après l'autre sans qu'un autre événement socket (ex. host:next) ne puisse s'intercaler. */
   async function doRevealBySession(sessionId: string, meta: SessionMeta): Promise<void> {
+    // Annulation : une révélation manuelle (ou auto-révélation) qui arrive PENDANT la phase
+    // 'reading' (ex. host:reveal anticipé — voir le garde dans le handler `host:reveal`, qui
+    // laisse passer 'reading' comme n'importe quelle phase hors 'lobby') doit annuler le minuteur
+    // planifié par `startQuestionFlow` — sinon celui-ci se déclencherait une seconde fois plus
+    // tard (révélation fantôme) sur une manche déjà avancée par ce chemin-ci.
+    clearReadingTimeout(meta)
     const revealed = await engine.reveal(sessionId)
 
     // Anti-triche : `questionResult` (qui contient la bonne réponse) n'est calculé qu'ICI,
@@ -218,6 +242,10 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
       if (current.phase === 'lobby') {
         throw new Error('host:skip : aucune question active (session encore en lobby)')
       }
+      // Annulation : voir le commentaire équivalent dans `doRevealBySession` — un host:skip
+      // anticipé pendant 'reading' ne doit jamais laisser un minuteur planifié se déclencher
+      // après coup.
+      clearReadingTimeout(meta)
 
       const revealed = await engine.reveal(sessionId) // crédite uniquement — PAS de question:reveal
       await persistRound(meta, revealed)
@@ -247,6 +275,49 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
   function emitTimer(sessionId: string, session: GameSession): void {
     const payload = timerPayload(session)
     if (payload) io.to(roomName(sessionId)).emit('timer', payload)
+  }
+
+  /** Démarre la question suivante (factorise `host:start` et `host:next` — appelé APRÈS que ces
+   * derniers aient géré le reste de leur logique propre, ex. statut/ack/reveal préalable). Route
+   * selon la phase posée par `engine.startQuestion` :
+   * - `'reading'` (question avec `readingTime > 0`) : diffuse `question:reading` (énoncé SEUL,
+   *   `readingView` — jamais les options, anti-triche) à TOUTE la room, puis planifie
+   *   `meta.readingTimeout` : à échéance (readingTime secondes), révèle automatiquement via
+   *   `revealAnswersFlow`. `clearReadingTimeout` d'abord par prudence (aucun minuteur ne devrait
+   *   déjà courir ici — startQuestion vient de (re)partir d'une nouvelle manche — mais reste sûr).
+   * - `'question'` (readingTime === 0) : flux ACTUEL inchangé — `question:show` (projection
+   *   anti-triche) + `timer` immédiatement, à toute la room. */
+  async function startQuestionFlow(sessionId: string, meta: SessionMeta): Promise<GameSession> {
+    const session = await engine.startQuestion(sessionId)
+    if (session.phase === 'reading') {
+      const view = engine.readingView(session)
+      io.to(roomName(sessionId)).emit('question:reading', { ...view, startedAt: session.readingStartedAt })
+      clearReadingTimeout(meta)
+      meta.readingTimeout = setTimeout(() => {
+        void revealAnswersFlow(sessionId, meta)
+      }, view.readingTime * 1000)
+    } else {
+      const view = engine.playerQuestionView(session)
+      io.to(roomName(sessionId)).emit('question:show', view)
+      emitTimer(sessionId, session)
+    }
+    return session
+  }
+
+  /** Fait sortir la session de la phase 'reading' vers 'question' (via `engine.revealAnswers`) et
+   * diffuse `question:show` + `timer` à toute la room — déclenché soit par l'échéance du minuteur
+   * planifié dans `startQuestionFlow`, soit potentiellement rejoué. Idempotent : `clearReadingTimeout`
+   * d'abord (empêche une double échéance), puis garde `phase === 'question'` après l'appel moteur
+   * (lui-même un no-op sûr hors phase 'reading', voir `engine.revealAnswers`) — si la phase a déjà
+   * avancé autrement (ex. host:skip/host:next entre-temps a annulé CE minuteur, mais défense en
+   * profondeur en cas d'appel concurrent), on n'émet rien de plus. */
+  async function revealAnswersFlow(sessionId: string, meta: SessionMeta): Promise<void> {
+    clearReadingTimeout(meta)
+    const session = await engine.revealAnswers(sessionId)
+    if (session.phase !== 'question') return
+    const view = engine.playerQuestionView(session)
+    io.to(roomName(sessionId)).emit('question:show', view)
+    emitTimer(sessionId, session)
   }
 
   /** Rejoue la question en cours à UN SEUL socket qui vient de rejoindre/rafraîchir EN PLEINE
@@ -289,6 +360,16 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
     socket.emit('lobby:update', { players: playersPayload(session) })
 
     switch (session.phase) {
+      case 'reading':
+        // Reprise pendant la lecture (ex. hôte qui recharge la page) : le temps restant est
+        // recalculé SERVEUR (`readingStartedAt`, jamais fabriqué par le client — cf. risques du
+        // design). `readingStartedAt` n'est significatif QUE dans cette phase (il peut être
+        // périmé/stale une fois passé en 'question' ou plus loin) — ne jamais le lire ailleurs.
+        socket.emit('question:reading', {
+          ...engine.readingView(session),
+          startedAt: session.readingStartedAt,
+        })
+        break
       case 'question':
         replayCurrentQuestionTo(socket, session)
         break
@@ -347,6 +428,7 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
           revealedRounds: new Set(),
           autoRevealedRounds: new Set(),
           statusActiveSet: false,
+          readingTimeout: null,
         })
         pinToSessionId.set(session.pin, session.id)
         dbSessionIdToEngineId.set(dbSession.id, session.id)
@@ -422,16 +504,16 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
         const { sessionId, meta } = requireHost(socket)
-        const session = await engine.startQuestion(sessionId)
         if (!meta.statusActiveSet) {
           await setSessionStatus(db, meta.dbSessionId, 'active')
           meta.statusActiveSet = true
         }
-        // Anti-triche : SEULE la projection joueur (sans la bonne réponse) est diffusée ici,
-        // à TOUTE la room (hôte + joueurs + grand écran) — jamais `questionResult`.
-        const view = engine.playerQuestionView(session)
-        io.to(roomName(sessionId)).emit('question:show', view)
-        emitTimer(sessionId, session)
+        // Démarrage de la question : voir `startQuestionFlow` (route 'reading' vs 'question'
+        // selon le `readingTime` de la question — anti-triche : SEULE une projection sans la
+        // bonne réponse est diffusée, à TOUTE la room, que ce soit `question:reading` ou
+        // `question:show`).
+        const session = await startQuestionFlow(sessionId, meta)
+        const view = session.phase === 'reading' ? engine.readingView(session) : engine.playerQuestionView(session)
         reply(view)
       } catch (e) {
         reply({ error: message(e) })
@@ -467,6 +549,12 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
         const { sessionId, meta } = requireHost(socket)
+        // Annulation : un host:next anticipé (ex. hôte qui écourte la phase 'reading' avant
+        // échéance) doit annuler tout minuteur de fin de lecture encore planifié pour la manche
+        // qu'on quitte — sans ça il se déclencherait plus tard sur une manche déjà avancée
+        // (`revealAnswersFlow`/`engine.revealAnswers` restent de toute façon des no-op sûrs hors
+        // phase 'reading', mais on ne laisse jamais un minuteur obsolète traîner).
+        clearReadingTimeout(meta)
         // Bug important (revue finale) : engine.nextQuestion() ne révèle jamais la manche en
         // cours — si l'hôte enchaîne host:next SANS host:reveal préalable (phase encore
         // 'question'), les points de cette manche ne seraient jamais crédités ni persistés
@@ -479,17 +567,19 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
         if (current.phase === 'question') {
           await doReveal(socket)
         }
-        const session = await engine.nextQuestion(sessionId)
-        if (session.phase === 'podium') {
+        // Fin de partie (inchangée) vs démarrage de la question suivante — seul ce dernier
+        // chemin passe désormais par `startQuestionFlow` (routage 'reading'/'question' identique
+        // à host:start).
+        if (current.currentIndex + 1 < current.questions.length) {
+          const session = await startQuestionFlow(sessionId, meta)
+          reply({ phase: session.phase })
+        } else {
+          const session = await engine.podium(sessionId)
           await setSessionStatus(db, meta.dbSessionId, 'ended')
           const top = engine.ranking(session).slice(0, 3)
           io.to(roomName(sessionId)).emit('podium', { top })
-        } else {
-          const view = engine.playerQuestionView(session)
-          io.to(roomName(sessionId)).emit('question:show', view)
-          emitTimer(sessionId, session)
+          reply({ phase: session.phase })
         }
-        reply({ phase: session.phase })
       } catch (e) {
         reply({ error: message(e) })
       }
