@@ -100,8 +100,44 @@ Le motif ▲◆●■ (logo, éditeur) est absent du dashboard. L'amener discrè
 
 ---
 
-## Hors périmètre (nécessite backend/architecture — signalé au bilan)
-- **Nombre de questions sur les cartes** : `listQuizzes` ne renvoie pas le compte → nécessite d'étendre l'endpoint serveur + type partagé.
-- **« Lancer » directement depuis une carte** : nécessite de câbler le flux `host:create` (socket) hors de l'éditeur (dédup de la logique de `HostEditor`).
-- **« Reprendre » une partie en cours depuis le Home** : pas de `host:reconnect` côté serveur (voir `routes.tsx`).
-- **Refonte du hero** : laissé volontairement (risque de régression) — le motif signature (Task 5) apporte la personnalité.
+## Task 6 : Nombre de questions sur les cartes (API + db + web)
+
+**Files:** Modify `packages/db/src/repos/quiz.ts`, `apps/web/src/api/quizzes.ts`, `apps/web/src/screens/Home.tsx`, `apps/web/src/prototype.css`. Tests: un test repo db + `Home.test.tsx`.
+
+`listQuizzes` (repos/quiz.ts:23) renvoie `Quiz[]` sans compte de questions. L'ajouter proprement.
+
+- [ ] **Step 1 — db** : dans `packages/db/src/repos/quiz.ts`, faire renvoyer à `listQuizzes` un `questionCount` par quiz (Drizzle : `leftJoin` sur la table `questions` + `groupBy(quiz.id)` + `count()`, OU sous-requête corrélée). Exposer un type `QuizListItem = Quiz & { questionCount: number }` (ne PAS polluer le `Quiz` de base). Adapter la signature de retour `Promise<QuizListItem[]>`.
+- [ ] **Step 2 — test db** : ajouter/adapter un test du repo (il existe des tests db — repérer le fichier) : un quiz avec N questions → `questionCount === N` ; un quiz sans question → `0`.
+- [ ] **Step 3 — API/web** : `apps/server/src/routes/quizzes.ts` GET `/api/quizzes` renvoie déjà `listQuizzes(scope)` — le nouveau champ passe automatiquement. Côté web, dans `apps/web/src/api/quizzes.ts`, exposer `questionCount` sur le type renvoyé par `listQuizzes` (ajouter un type de liste ou l'étendre).
+- [ ] **Step 4 — carte** : afficher `{questionCount} question(s)` dans `.home-card__meta` (à côté de la date de modif de T3). Pluriel géré.
+- [ ] **Step 5 — tests** : `pnpm vitest run apps/web/src/screens/Home.test.tsx` (assert le compte) + le test db. Web suite verte.
+- [ ] **Step 6 — commit** : `git commit -am "feat(quiz): listQuizzes expose questionCount, affiché sur les cartes"`
+
+## Task 7 : « Lancer la partie » depuis la carte (hook partagé)
+
+**Files:** Create `apps/web/src/realtime/useLaunchGame.ts`. Modify `apps/web/src/screens/HostEditor.tsx`, `apps/web/src/screens/Home.tsx`, `apps/web/src/prototype.css`. Tests: `Home.test.tsx` (+ HostEditor test s'il existe).
+
+Le flux de lancement vit dans `HostEditor.launchGame` (HostEditor.tsx:549) : `emitAck<HostCreateAck>('host:create',{quizId})` → `navigate('/host/:sessionId',{state:{pin,quizTitle}})`. Home partage la MÊME socket (sous `HostRealtimeLayout`/`GameSocketProvider`), donc peut lancer aussi.
+
+- [ ] **Step 1 — extraire le hook** : `useLaunchGame()` retourne `{ launch(quizId, quizTitle), launching, error }`. Interne : `emitAck('host:create',{quizId})` puis `navigate('/host/'+ack.sessionId,{state:{pin:ack.pin,quizTitle}})` ; gère `launching`/`error`. Utilise `useSharedGameSocket()` (comme HostEditor/HostLive). Ne PAS inclure le `flushPendingSave` (spécifique éditeur).
+- [ ] **Step 2 — refactor HostEditor** : `launchGame` appelle `await flushPendingSave()` PUIS `launch(quizId, title)` du hook (conserver exactement la gestion d'erreur flush existante + `canLaunch`/`launching`). Ne rien régresser du comportement actuel.
+- [ ] **Step 3 — Home** : sur chaque carte, ajouter un bouton « Lancer » (secondaire, distinct du lien « Ouvrir »). `onClick` → `launch(q.id, q.title)`, `disabled` pendant `launching`. La carte-lien reste « Ouvrir » vers l'éditeur. Empêcher que le clic « Lancer » ne déclenche la navigation du lien parent (le bouton n'est PAS dans le `<Link>`, ou `stopPropagation`).
+- [ ] **Step 4 — styles** `prototype.css` : disposition carte avec 2 actions (Ouvrir / Lancer). Tokens only, cibles ≥44px.
+- [ ] **Step 5 — test** : dans `Home.test.tsx`, mocker le socket (`emitAck` résout `{sessionId,pin}`) + `useNavigate` ; asserter qu'un clic « Lancer » émet `host:create {quizId}` et navigue vers `/host/:id`. Web suite verte.
+- [ ] **Step 6 — commit** : `git commit -am "feat(admin): lancer une partie directement depuis la carte (hook useLaunchGame)"`
+
+## Task 8 : « Reprendre » une partie live (snapshot reconnect serveur + câblage)
+
+**Files:** Modify `apps/server/src/game-gateway.ts`, `apps/web/src/screens/HostLive.tsx`, `apps/web/src/screens/Home.tsx`. Tests: `apps/server/src/game-gateway.test.ts` (reconnect), web au moins pas de régression.
+
+État actuel : le serveur a `host:reconnect` (game-gateway.ts:311) qui rebinde `socket.data`, rejoint la room et renvoie `{sessionId,pin,phase}` — MAIS ne pousse aucun snapshot (joueurs/question courante) au socket. Le front ne l'appelle jamais (uniquement dans des commentaires). Les commentaires « pas de host:reconnect » (routes.tsx, GameSocketProvider.tsx) sont PÉRIMÉS.
+
+- [ ] **Step 1 — serveur : snapshot au reconnect** : dans le handler `host:reconnect`, après `socket.join(...)` et AVANT/avec le `reply`, émettre à CE socket l'état courant selon `session.phase`, en réutilisant les helpers existants du gateway (repérer `emitCurrentQuestionTo`, `engine.scoreboard`, la source de la liste des joueurs du lobby, `emitTimer`) : lobby → liste des joueurs actuels ; question → vue question joueur courante + timer ; reveal/scoreboard → scoreboard courant. Émettre UNIQUEMENT à `socket` (pas à toute la room). NE PAS exposer la bonne réponse (même anti-triche que host:start).
+- [ ] **Step 2 — test serveur** : dans `game-gateway.test.ts`, un test : hôte crée une session, un joueur rejoint, l'hôte se reconnecte (`host:reconnect {sessionId}`) → l'ack renvoie `phase` correct ET le socket reçoit le snapshot (ex. `lobby:update`/liste joueurs). Suivre les patrons de test existants du fichier.
+- [ ] **Step 3 — front HostLive** : au montage, si `navState?.pin` est absent (écran atteint hors lancement direct — reprise depuis Home ou rechargement), appeler `emitAck('host:reconnect',{sessionId})` ; utiliser `{pin,phase}` de l'ack pour initialiser `pin`/`phase` ; le snapshot (Step 1) peuplera joueurs/question via les abonnements déjà en place. Gérer l'échec (session finie/introuvable, pas l'hôte) → message clair, pas d'état fabriqué.
+- [ ] **Step 4 — front Home** : les parties de statut `active`/`lobby` pointent vers `/host/:sessionId` (reprendre) au lieu de `/sessions/:id` ; `ended` → `/sessions/:id` (rapport). Adapter le libellé/affordance (une partie live « Reprendre », une terminée « Voir le rapport »).
+- [ ] **Step 5 — tests** : test serveur (Step 2) vert ; `pnpm vitest run apps/web/src` vert (adapter les tests HostLive/Home impactés). NE PAS lancer les e2e serveur en boucle (flaky/lents).
+- [ ] **Step 6 — commit** : `git commit -am "feat(game): reprendre une partie live (snapshot au host:reconnect + câblage Home/HostLive)"`
+
+## Hors périmètre (assumé)
+- **Refonte du hero** : laissée volontairement (risque de régression) — le motif signature (Task 5) apporte la personnalité.
