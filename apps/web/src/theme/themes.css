@@ -16,6 +16,21 @@
   --warn: var(--sploot-warn);
   --danger: var(--sploot-bad);
   --grad-brand: linear-gradient(135deg, var(--sploot-ginger), var(--sploot-petrol));
+
+  /* Réponses — couleur + forme + label. Contraste ≥4.5:1 vérifié RGAA. */
+  --ans-triangle: #c62828;  --ans-triangle-ink: #ffffff;
+  --ans-diamond:  #1d5fb0;  --ans-diamond-ink:  #ffffff;
+  --ans-circle:   #f2a900;  --ans-circle-ink:   #0e1230;
+  --ans-square:   #0e7c68;  --ans-square-ink:   #ffffff;
+
+  /* Podium — or/argent/bronze, RÉSERVÉ au classement, jamais accent. */
+  --gold:   var(--sploot-warn);
+  --silver: #c7ccdd;
+  --bronze: #e0954f;
+
+  /* Focus visible — token de rôle (remplace le gold codé en dur). */
+  --focus: var(--sploot-petrol-soft);
+
   color-scheme: light dark;
 }
 
@@ -35,6 +50,21 @@
   --warn: var(--sploot-warn);
   --danger: var(--sploot-bad);
   --grad-brand: linear-gradient(135deg, var(--sploot-ginger), var(--sploot-petrol-soft));
+
+  /* Réponses — couleur + forme + label. Contraste ≥4.5:1 vérifié RGAA. */
+  --ans-triangle: #c62828;  --ans-triangle-ink: #ffffff;
+  --ans-diamond:  #1d5fb0;  --ans-diamond-ink:  #ffffff;
+  --ans-circle:   #f2a900;  --ans-circle-ink:   #0e1230;
+  --ans-square:   #0e7c68;  --ans-square-ink:   #ffffff;
+
+  /* Podium — or/argent/bronze, RÉSERVÉ au classement, jamais accent. */
+  --gold:   var(--sploot-warn);
+  --silver: #c7ccdd;
+  --bronze: #e0954f;
+
+  /* Focus visible — token de rôle (remplace le gold codé en dur). */
+  --focus: var(--sploot-petrol-soft);
+
   color-scheme: dark;
 }
 

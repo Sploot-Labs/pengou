@@ -16,4 +16,18 @@ describe('themes.css', () => {
   it('ne réintroduit pas le sélecteur cassé :root[data-…] (ne matche jamais un wrapper imbriqué)', () => {
     expect(themesCss).not.toContain(':root[data-')
   })
+
+  it('définit les rôles réponse, podium et focus (source unique)', () => {
+    for (const role of [
+      '--ans-triangle', '--ans-diamond', '--ans-circle', '--ans-square',
+      '--gold', '--silver', '--bronze', '--focus',
+    ]) {
+      expect(themesCss).toContain(role)
+    }
+  })
+
+  it('ne réintroduit pas la palette Kahoot (rose/violet)', () => {
+    expect(themesCss.toLowerCase()).not.toContain('#ff3d7f')
+    expect(themesCss.toLowerCase()).not.toContain('#7a5cff')
+  })
 })
