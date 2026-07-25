@@ -1,7 +1,8 @@
 /*
-  Arena Broadcast — design tokens
-  Source: docs/superpowers/design/2026-07-22-design-direction.md
-  Do not hardcode these values elsewhere — always reference the custom properties.
+  Tokens NON-COULEUR partagés — échelle typographique (--fs-*), espacements
+  (--space-*), rayons (--radius-*), durées (--transition-*) + reset/base.
+  Les rôles COULEUR vivent dans theme/themes.css (dérivés des primitives
+  brand-kit Sploot). Toujours référencer les tokens de rôle, jamais un hex.
 */
 
 :root {

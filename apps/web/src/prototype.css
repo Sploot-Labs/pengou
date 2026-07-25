@@ -718,7 +718,7 @@
 }
 
 .join-subtitle {
-  margin-top: calc(-1 * var(--space-2));
+  margin-top: calc(-1 * var(--space-2)); /* resserre l'écart sous le <h1> */
   color: var(--ink-dim);
   font-size: var(--fs-body);
 }
