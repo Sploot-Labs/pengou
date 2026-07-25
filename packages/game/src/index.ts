@@ -9,6 +9,7 @@ export type {
   SubmitAnswerResult,
   RankingEntry,
   PlayerQuestionView,
+  ReadingView,
   QuestionResult,
   ProgressInfo,
   ReconnectResult,

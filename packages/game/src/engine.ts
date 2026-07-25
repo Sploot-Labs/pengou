@@ -22,6 +22,15 @@ export type PlayerQuestionView = {
   payload: unknown
 } | null
 
+/** Projection « temps de lecture » envoyée aux joueurs/écrans avant l'ouverture des réponses —
+ * ne DOIT jamais contenir les options ni la bonne réponse (anti-triche). */
+export type ReadingView = {
+  prompt: string
+  index: number
+  total: number
+  readingTime: number
+}
+
 export type QuestionResult = {
   correct: unknown
   distribution: Record<string, number>
@@ -50,6 +59,10 @@ export interface Engine {
   createSession(input: CreateSessionInput): Promise<GameSession>
   addPlayer(sessionId: string, nickname: string): Promise<{ session: GameSession; player: Player }>
   startQuestion(sessionId: string): Promise<GameSession>
+  /** Fait sortir la session de la phase 'reading' (temps de lecture) vers 'question' et démarre
+   * le chrono de réponse (`questionStartedAt = now()`). Garde : hors phase 'reading', no-op sûr
+   * et idempotent (retourne la session inchangée) — cohérent avec les autres gardes du moteur. */
+  revealAnswers(sessionId: string): Promise<GameSession>
   submitAnswer(sessionId: string, playerId: string, rawAnswer: unknown): Promise<SubmitAnswerResult>
   reveal(sessionId: string): Promise<GameSession>
   scoreboard(sessionId: string): Promise<GameSession>
@@ -62,6 +75,9 @@ export interface Engine {
    * connecté ⟹ false (ne jamais auto-révéler une salle vide). */
   allConnectedAnswered(session: GameSession): boolean
   playerQuestionView(session: GameSession): PlayerQuestionView
+  /** Projection « temps de lecture » — énoncé SEUL (jamais les options/réponses possibles :
+   * anti-triche, cohérent avec `playerQuestionView`). */
+  readingView(session: GameSession): ReadingView
   questionResult(session: GameSession): QuestionResult
   /** Marque un joueur (dé)connecté — n'affecte ni son score ni ses réponses. */
   setPlayerConnected(sessionId: string, playerId: string, connected: boolean): Promise<GameSession>
@@ -118,6 +134,7 @@ export function createEngine(deps: EngineDeps): Engine {
         questions,
         currentIndex: -1,
         questionStartedAt: null,
+        readingStartedAt: null,
         players: {},
         answers: {},
         credited: {},
@@ -147,6 +164,23 @@ export function createEngine(deps: EngineDeps): Engine {
         throw new Error('startQuestion : plus de questions disponibles')
       }
       session.currentIndex = nextIndex
+      const q = session.questions[nextIndex]
+      if (q && q.readingTime > 0) {
+        session.phase = 'reading'
+        session.readingStartedAt = now()
+        session.questionStartedAt = null
+      } else {
+        session.phase = 'question'
+        session.questionStartedAt = now()
+        session.readingStartedAt = null
+      }
+      await store.save(session)
+      return session
+    },
+
+    async revealAnswers(sessionId) {
+      const session = await requireSession(sessionId)
+      if (session.phase !== 'reading') return session
       session.phase = 'question'
       session.questionStartedAt = now()
       await store.save(session)
@@ -268,6 +302,16 @@ export function createEngine(deps: EngineDeps): Engine {
         prompt: question.prompt,
         timeLimit: question.timeLimit,
         payload: def.playerView(question.payload),
+      }
+    },
+
+    readingView(session) {
+      const q = currentQuestion(session)
+      return {
+        prompt: q?.prompt ?? '',
+        index: session.currentIndex,
+        total: session.questions.length,
+        readingTime: q?.readingTime ?? 0,
       }
     },
 

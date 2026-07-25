@@ -28,6 +28,7 @@ const mcqQuestion: EngineQuestion = {
   type: 'mcq',
   prompt: '2+2?',
   timeLimit: 10, // secondes
+  readingTime: 0,
   basePoints: 1000,
   payload: {
     options: [
@@ -42,6 +43,7 @@ const tfQuestion: EngineQuestion = {
   type: 'truefalse',
   prompt: 'La Terre est ronde',
   timeLimit: 10,
+  readingTime: 0,
   basePoints: 500,
   payload: { correct: true },
 }
@@ -51,6 +53,7 @@ const textQuestion: EngineQuestion = {
   type: 'text',
   prompt: 'Capitale de la France ?',
   timeLimit: 10,
+  readingTime: 0,
   basePoints: 500,
   payload: { answers: ['paris'], caseSensitive: false },
 }
@@ -60,8 +63,24 @@ const sliderQuestion: EngineQuestion = {
   type: 'slider',
   prompt: 'Devine le nombre',
   timeLimit: 10,
+  readingTime: 0,
   basePoints: 500,
   payload: { min: 0, max: 100, correct: 42 },
+}
+
+const readingQuestion: EngineQuestion = {
+  id: 'q5',
+  type: 'mcq',
+  prompt: 'Capitale du Japon ?',
+  timeLimit: 10,
+  readingTime: 6,
+  basePoints: 1000,
+  payload: {
+    options: [
+      { label: 'Osaka', correct: false },
+      { label: 'Tokyo', correct: true },
+    ],
+  },
 }
 
 describe('game engine — cycle déterministe complet', () => {
@@ -470,6 +489,95 @@ describe('game engine — cycle déterministe complet', () => {
       await engine.setPlayerConnected(session.id, bob.id, false)
       const current = await engine.getSession(session.id)
       expect(engine.allConnectedAnswered(current)).toBe(true)
+    })
+  })
+
+  describe("phase 'reading' — temps de lecture (readingTime)", () => {
+    it("startQuestion entre en 'reading' quand readingTime>0, sinon 'question'", async () => {
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [mcqQuestion, readingQuestion],
+      })
+
+      // question 0 : readingTime 0 → 'question' (questionStartedAt posé, readingStartedAt null)
+      let s = await engine.startQuestion(session.id)
+      expect(s.phase).toBe('question')
+      expect(s.questionStartedAt).toBe(0)
+      expect(s.readingStartedAt).toBeNull()
+
+      s = await engine.reveal(session.id)
+      s = await engine.scoreboard(session.id)
+
+      // question 1 : readingTime 6 → 'reading' (readingStartedAt posé, questionStartedAt null)
+      clock.set(1000)
+      s = await engine.nextQuestion(session.id)
+      expect(s.phase).toBe('reading')
+      expect(s.currentIndex).toBe(1)
+      expect(s.readingStartedAt).toBe(1000)
+      expect(s.questionStartedAt).toBeNull()
+    })
+
+    it("revealAnswers passe 'reading' → 'question' et pose questionStartedAt", async () => {
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [readingQuestion],
+      })
+      let s = await engine.startQuestion(session.id)
+      expect(s.phase).toBe('reading')
+
+      clock.set(6000)
+      s = await engine.revealAnswers(session.id)
+      expect(s.phase).toBe('question')
+      expect(s.questionStartedAt).toBe(6000)
+    })
+
+    it('revealAnswers hors phase reading est un no-op sûr (idempotent)', async () => {
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [mcqQuestion],
+      })
+      const started = await engine.startQuestion(session.id) // readingTime 0 → 'question' directement
+      expect(started.phase).toBe('question')
+
+      const s = await engine.revealAnswers(session.id)
+      expect(s.phase).toBe('question')
+      expect(s.questionStartedAt).toBe(started.questionStartedAt)
+    })
+
+    it("submitAnswer est rejeté en phase 'reading'", async () => {
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [readingQuestion],
+      })
+      const { player } = await engine.addPlayer(session.id, 'Alice')
+      const s = await engine.startQuestion(session.id)
+      expect(s.phase).toBe('reading')
+
+      const res = await engine.submitAnswer(session.id, player.id, { optionIndex: 1 })
+      expect(res.accepted).toBe(false)
+    })
+
+    it('readingView ne contient pas les options', async () => {
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [readingQuestion],
+      })
+      const s = await engine.startQuestion(session.id)
+      const view = engine.readingView(s) as Record<string, unknown>
+      expect(view).not.toHaveProperty('options')
+      expect(view).not.toHaveProperty('payload')
+      expect(view.prompt).toBeDefined()
+      expect(view).toEqual({ prompt: 'Capitale du Japon ?', index: 0, total: 1, readingTime: 6 })
     })
   })
 

@@ -1,6 +1,6 @@
 import type { QuestionType } from '@splootlabs/quiz'
 
-export type Phase = 'lobby' | 'question' | 'reveal' | 'scoreboard' | 'podium'
+export type Phase = 'lobby' | 'reading' | 'question' | 'reveal' | 'scoreboard' | 'podium'
 
 export type Player = {
   id: string
@@ -16,6 +16,7 @@ export type EngineQuestion = {
   type: QuestionType
   prompt: string
   timeLimit: number // secondes
+  readingTime: number // secondes, 0 = pas de phase de lecture (rétro-compatible)
   basePoints: number
   payload: unknown
 }
@@ -37,6 +38,7 @@ export type GameSession = {
   questions: EngineQuestion[]
   currentIndex: number // -1 en lobby
   questionStartedAt: number | null
+  readingStartedAt: number | null
   players: Record<string, Player>
   // par index de question, puis par id de joueur
   answers: Record<number, Record<string, SubmittedAnswer>>

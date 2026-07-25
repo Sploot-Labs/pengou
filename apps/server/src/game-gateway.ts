@@ -53,12 +53,13 @@ function message(err: unknown): string {
  * (voir plan, notes de fin) — 1000 par défaut, aligné sur le prototype Kahoot. */
 const DEFAULT_BASE_POINTS = 1000
 
-function toEngineQuestion(row: { id: string; type: string; prompt: string; timeLimit: number; payload: unknown }): EngineQuestion {
+function toEngineQuestion(row: { id: string; type: string; prompt: string; timeLimit: number; readingTime: number; payload: unknown }): EngineQuestion {
   return {
     id: row.id,
     type: row.type as EngineQuestion['type'],
     prompt: row.prompt,
     timeLimit: row.timeLimit,
+    readingTime: row.readingTime,
     basePoints: DEFAULT_BASE_POINTS,
     payload: row.payload,
   }
