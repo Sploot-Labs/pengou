@@ -41,6 +41,18 @@
   box-sizing: border-box;
 }
 
+/* Reset global html/body. `body { margin: 0 }` supprime la bande du canvas
+   navigateur qui apparaissait tout autour de l'app (marge UA par défaut de
+   8px, visible depuis que `color-scheme: dark` a quitté :root). `color-scheme`
+   sur html aligne ce canvas ET les scrollbars sur le mode clair/sombre de
+   l'OS, comme le thème `app` (light dark). */
+html {
+  color-scheme: light dark;
+}
+body {
+  margin: 0;
+}
+
 .prototype-root {
   min-height: 100vh;
   background: var(--stage);
