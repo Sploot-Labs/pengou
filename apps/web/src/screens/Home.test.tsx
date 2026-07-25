@@ -183,8 +183,12 @@ describe('Home', () => {
     vi.mocked(listQuizzes).mockResolvedValueOnce([
       {
         id: 'q2',
+        tenantId: 't1',
+        ownerId: 'u1',
         title: 'Quiz avec description',
         description: 'Ceci est une description',
+        cover: null,
+        createdAt: '2026-07-20T15:30:00Z',
         updatedAt: '2026-07-20T15:30:00Z',
         questionCount: 1,
       },
@@ -212,7 +216,7 @@ describe('Home', () => {
 
     // Assert the CTA says "Ouvrir"
     const card = screen.getByText('Quiz avec description').closest('.home-card')
-    expect(within(card as Element).getByText('Ouvrir →')).toBeInTheDocument()
+    expect(within(card as HTMLElement).getByText('Ouvrir →')).toBeInTheDocument()
   })
 
   it('le bouton « Lancer » d\'une carte lance la partie sur la socket partagée et navigue vers /host/:id', async () => {
@@ -227,7 +231,7 @@ describe('Home', () => {
     )
 
     await waitFor(() => expect(screen.getByText('Culture G')).toBeInTheDocument())
-    const card = screen.getByText('Culture G').closest('.home-card-item') as Element
+    const card = screen.getByText('Culture G').closest('.home-card-item') as HTMLElement
     const launchButton = within(card).getByRole('button', { name: /^Lancer$/ })
 
     // The button is a SIBLING of the card-link, not nested inside it — clicking it must not
@@ -289,8 +293,12 @@ describe('Home', () => {
     vi.mocked(listQuizzes).mockResolvedValueOnce([
       {
         id: 'q3',
+        tenantId: 't1',
+        ownerId: 'u1',
         title: 'Quiz avec plusieurs questions',
         description: null,
+        cover: null,
+        createdAt: '2026-07-20T15:30:00Z',
         updatedAt: '2026-07-20T15:30:00Z',
         questionCount: 5,
       },
@@ -313,8 +321,12 @@ describe('Home', () => {
     vi.mocked(listQuizzes).mockResolvedValueOnce([
       {
         id: 'q4',
+        tenantId: 't1',
+        ownerId: 'u1',
         title: 'Quiz vide',
         description: null,
+        cover: null,
+        createdAt: '2026-07-20T15:30:00Z',
         updatedAt: '2026-07-20T15:30:00Z',
         questionCount: 0,
       },

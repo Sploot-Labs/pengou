@@ -587,7 +587,6 @@ export function HostLive() {
         <div className="hostlive-header__meta">
           <div style={{ minWidth: 0 }}>
             <span className="hostlive-header__title">{quizTitle}</span>
-            <p className="host-brandline">Arena — open-source · chez vous ou dans le cloud</p>
           </div>
           {pin ? (
             <PinDisplay pin={pin} compact label="Code PIN de la partie" />
