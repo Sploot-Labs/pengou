@@ -794,6 +794,15 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       expect(join1.error).toBeUndefined()
       const alicePlayerId = join1.playerId!
 
+      // Bob rejoint aussi mais ne répondra JAMAIS dans ce test : sans un second joueur connecté
+      // qui n'a pas répondu, la réponse d'Alice seule déclencherait l'auto-révélation serveur
+      // (tous les connectés auraient répondu) AVANT même que host:next ne soit invoqué — ce qui
+      // fausserait ce test qui vise spécifiquement le filet de sécurité PROPRE à host:next
+      // (révéler en interne avant d'avancer), indépendamment de l'auto-révélation.
+      const player2 = await connectClient(url)
+      clients.push(player2)
+      await ack(player2, 'player:join', { pin, nickname: 'Bob' })
+
       const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
       expect(startAck.error).toBeUndefined()
 
@@ -1009,6 +1018,15 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const join1 = await ack<{ playerId?: string; error?: string }>(player1, 'player:join', { pin, nickname: 'Alice' })
       expect(join1.error).toBeUndefined()
 
+      // Bob rejoint aussi mais ne répondra JAMAIS dans ce test : sans un second joueur connecté
+      // qui n'a pas répondu, la réponse d'Alice seule déclencherait l'auto-révélation serveur
+      // (tous les connectés auraient répondu) AVANT même que host:skip ne soit invoqué — ce qui
+      // fausserait ce test qui vise spécifiquement le comportement de host:skip sur une manche
+      // PAS ENCORE révélée.
+      const player2 = await connectClient(url)
+      clients.push(player2)
+      await ack(player2, 'player:join', { pin, nickname: 'Bob' })
+
       const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
       expect(startAck.error).toBeUndefined()
 
@@ -1145,4 +1163,118 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       await app.close()
     }
   }, 15_000)
+
+  it("auto-révélation serveur : quand TOUS les joueurs connectés ont répondu, question:reveal + scoreboard sont émis SANS host:reveal/host:skip", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-autoreveal-happy@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      const player2 = await connectClient(url)
+      clients.push(player1, player2)
+      const join1 = await ack<{ playerId?: string; error?: string }>(player1, 'player:join', { pin, nickname: 'Alice' })
+      expect(join1.error).toBeUndefined()
+      const join2 = await ack<{ playerId?: string; error?: string }>(player2, 'player:join', { pin, nickname: 'Bob' })
+      expect(join2.error).toBeUndefined()
+
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+
+      // hostSocket observe la room (jamais host:reveal/host:skip émis dans ce test — la
+      // révélation doit provenir UNIQUEMENT du serveur, déclenchée par les 2 réponses ci-dessous).
+      const revealPromise = waitFor<{ correct: unknown; distribution: Record<string, number> }>(hostSocket, 'question:reveal')
+      const scoreboardPromise = waitFor<{ ranking: Array<{ playerId: string; score: number }> }>(hostSocket, 'scoreboard')
+
+      const answer1 = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect(answer1.accepted).toBe(true)
+      const answer2 = await ack<{ accepted?: boolean }>(player2, 'player:answer', { answer: { optionIndex: 1 } })
+      expect(answer2.accepted).toBe(true)
+
+      const reveal = await revealPromise
+      expect(reveal.correct).toBeDefined()
+      expect(JSON.stringify(reveal.correct)).toContain('Paris')
+
+      const scoreboard = await scoreboardPromise
+      expect(scoreboard.ranking).toHaveLength(2)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("auto-révélation serveur : ne se déclenche PAS tant qu'un joueur connecté n'a pas répondu, puis se déclenche dès qu'il répond", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-autoreveal-early@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      const player2 = await connectClient(url)
+      clients.push(player1, player2)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+      await ack(player2, 'player:join', { pin, nickname: 'Bob' })
+
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+
+      // Seule Alice répond : Bob (connecté) n'a pas encore répondu → pas de révélation.
+      const noRevealLeak = raceNoEvent(hostSocket, 'question:reveal', 500)
+      const answer1 = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect(answer1.accepted).toBe(true)
+      expect(await noRevealLeak).toBe(true) // le timeout a gagné : aucune révélation prématurée
+
+      // Bob répond à son tour : maintenant TOUS les connectés ont répondu → révélation.
+      const revealPromise = waitFor<{ correct: unknown }>(hostSocket, 'question:reveal')
+      const answer2 = await ack<{ accepted?: boolean }>(player2, 'player:answer', { answer: { optionIndex: 1 } })
+      expect(answer2.accepted).toBe(true)
+      const reveal = await revealPromise
+      expect(reveal.correct).toBeDefined()
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("auto-révélation serveur : un seul question:reveal par manche (idempotent), même si les 2 dernières réponses arrivent quasi simultanément", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-autoreveal-idem@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      const player2 = await connectClient(url)
+      clients.push(player1, player2)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+      await ack(player2, 'player:join', { pin, nickname: 'Bob' })
+
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+
+      const receivedReveals: Array<{ correct: unknown }> = []
+      hostSocket.on('question:reveal', (payload: { correct: unknown }) => receivedReveals.push(payload))
+
+      // Les 2 réponses partent quasi simultanément (pas d'attente de l'ack entre les deux) —
+      // exactement le scénario de course que la garde `autoRevealedRounds` doit couvrir.
+      const [answer1, answer2] = await Promise.all([
+        ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } }),
+        ack<{ accepted?: boolean }>(player2, 'player:answer', { answer: { optionIndex: 1 } }),
+      ])
+      expect(answer1.accepted).toBe(true)
+      expect(answer2.accepted).toBe(true)
+
+      // Laisse le temps à un éventuel second `question:reveal` en double d'arriver s'il existait
+      // (idempotence anti-race — voir `meta.autoRevealedRounds`).
+      await new Promise((resolve) => setTimeout(resolve, 300))
+      expect(receivedReveals).toHaveLength(1)
+      expect(receivedReveals[0]!.correct).toBeDefined()
+      expect(JSON.stringify(receivedReveals[0]!.correct)).toContain('Paris')
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
 })

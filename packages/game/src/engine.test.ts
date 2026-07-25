@@ -411,6 +411,68 @@ describe('game engine — cycle déterministe complet', () => {
     })
   })
 
+  describe('allConnectedAnswered — auto-révélation (tous les joueurs CONNECTÉS ont répondu)', () => {
+    it("false en phase 'lobby'", async () => {
+      const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+      await engine.addPlayer(session.id, 'Alice')
+      const s = await engine.getSession(session.id)
+      expect(s.phase).toBe('lobby')
+      expect(engine.allConnectedAnswered(s)).toBe(false)
+    })
+
+    it("false en phase 'reveal'", async () => {
+      const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+      const { player } = await engine.addPlayer(session.id, 'Alice')
+      await engine.startQuestion(session.id)
+      await engine.submitAnswer(session.id, player.id, { optionIndex: 1 })
+      const s = await engine.reveal(session.id)
+      expect(s.phase).toBe('reveal')
+      expect(engine.allConnectedAnswered(s)).toBe(false)
+    })
+
+    it("false quand un joueur CONNECTÉ n'a pas encore répondu", async () => {
+      const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+      const { player: alice } = await engine.addPlayer(session.id, 'Alice')
+      await engine.addPlayer(session.id, 'Bob')
+      const s = await engine.startQuestion(session.id)
+      await engine.submitAnswer(session.id, alice.id, { optionIndex: 1 })
+      const current = await engine.getSession(session.id)
+      expect(engine.allConnectedAnswered(current)).toBe(false)
+    })
+
+    it('true quand TOUS les joueurs connectés ont répondu', async () => {
+      const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+      const { player: alice } = await engine.addPlayer(session.id, 'Alice')
+      const { player: bob } = await engine.addPlayer(session.id, 'Bob')
+      await engine.startQuestion(session.id)
+      await engine.submitAnswer(session.id, alice.id, { optionIndex: 1 })
+      await engine.submitAnswer(session.id, bob.id, { optionIndex: 0 })
+      const current = await engine.getSession(session.id)
+      expect(engine.allConnectedAnswered(current)).toBe(true)
+    })
+
+    it('false quand il y a zéro joueur connecté (même en phase question)', async () => {
+      const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+      const { player } = await engine.addPlayer(session.id, 'Alice')
+      await engine.startQuestion(session.id)
+      await engine.setPlayerConnected(session.id, player.id, false)
+      const current = await engine.getSession(session.id)
+      expect(engine.allConnectedAnswered(current)).toBe(false)
+    })
+
+    it('true quand tous les CONNECTÉS ont répondu même si un joueur DÉCONNECTÉ, lui, n\'a pas répondu (ignoré)', async () => {
+      const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+      const { player: alice } = await engine.addPlayer(session.id, 'Alice')
+      const { player: bob } = await engine.addPlayer(session.id, 'Bob')
+      await engine.startQuestion(session.id)
+      await engine.submitAnswer(session.id, alice.id, { optionIndex: 1 })
+      // Bob se déconnecte SANS avoir répondu : il ne doit plus bloquer l'auto-révélation.
+      await engine.setPlayerConnected(session.id, bob.id, false)
+      const current = await engine.getSession(session.id)
+      expect(engine.allConnectedAnswered(current)).toBe(true)
+    })
+  })
+
   describe('progress — compteur de réponses (pour le grand écran)', () => {
     it("total = nombre de joueurs, answered = nombre de réponses soumises pour la question courante", async () => {
       const session = await engine.createSession({

@@ -56,6 +56,11 @@ export interface Engine {
   nextQuestion(sessionId: string): Promise<GameSession>
   podium(sessionId: string): Promise<GameSession>
   ranking(session: GameSession): RankingEntry[]
+  /** Auto-révélation (lecture seule, synchrone) : vrai ssi la session est en phase 'question',
+   * qu'il y a AU MOINS un joueur connecté, et que CHAQUE joueur connecté a soumis une réponse
+   * pour la question courante. Un joueur déconnecté ne bloque jamais (ignoré). Zéro joueur
+   * connecté ⟹ false (ne jamais auto-révéler une salle vide). */
+  allConnectedAnswered(session: GameSession): boolean
   playerQuestionView(session: GameSession): PlayerQuestionView
   questionResult(session: GameSession): QuestionResult
   /** Marque un joueur (dé)connecté — n'affecte ni son score ni ses réponses. */
@@ -243,6 +248,14 @@ export function createEngine(deps: EngineDeps): Engine {
       return Object.values(session.players)
         .map((p) => ({ playerId: p.id, nickname: p.nickname, score: p.score }))
         .sort((a, b) => b.score - a.score)
+    },
+
+    allConnectedAnswered(session) {
+      if (session.phase !== 'question') return false
+      const connectedPlayers = Object.values(session.players).filter((p) => p.connected)
+      if (connectedPlayers.length < 1) return false
+      const roundAnswers = session.answers[session.currentIndex] ?? {}
+      return connectedPlayers.every((p) => roundAnswers[p.id] !== undefined)
     },
 
     playerQuestionView(session) {

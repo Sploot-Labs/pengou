@@ -26,6 +26,10 @@ type SessionMeta = {
    * (ou host:skip, qui crédite/persiste aussi — voir `doSkip`) est invoqué plusieurs fois sur
    * la même manche. */
   revealedRounds: Set<number>
+  /** Index de question déjà auto-révélés (voir `player:answer`) — garde d'émission unique :
+   * évite un double `question:reveal`/`scoreboard` si les deux dernières réponses d'une manche
+   * arrivent quasi simultanément (deux appels concurrents à `player:answer`). */
+  autoRevealedRounds: Set<number>
   /** `game_session.status` ne passe à 'active' qu'une seule fois (au premier host:start) :
    * un ré-appel écraserait sinon `startedAt` à chaque question suivante. */
   statusActiveSet: boolean
@@ -134,6 +138,41 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
     }
   }
 
+  /** Corps commun de révélation (crédit + persistance + diffusion `question:reveal`/`scoreboard`),
+   * factorisé pour être appelé aussi bien par `host:reveal` (via `doReveal`) que par
+   * l'auto-révélation serveur déclenchée depuis `player:answer` quand tous les joueurs connectés
+   * ont répondu. Idempotent (comme avant) via `engine.reveal`/`persistRound`.
+   *
+   * Ordre IMPORTANT (revu pour l'auto-révélation) : `persistRound` (écritures DB, potentiellement
+   * plusieurs allers-retours lents) est appelé EN DERNIER, après `engine.scoreboard()` et ses
+   * deux diffusions. Sur le chemin hôte (toujours entièrement `await`-é de façon séquentielle par
+   * un seul socket), l'ordre relatif était invisible. Mais l'auto-révélation (déclenchée depuis
+   * `player:answer`, jamais attendue par aucun client — voir plus bas) est un chemin best-effort
+   * qui peut s'exécuter en parallèle du jeu qui continue d'avancer : si `persistRound` (lent)
+   * s'exécutait AVANT `engine.scoreboard(sessionId)`, celui-ci — qui relit l'état COURANT de la
+   * session par `sessionId`, pas un instantané figé — risquerait de faire `phase = 'scoreboard'`
+   * sur la MANCHE SUIVANTE (déjà démarrée entre-temps par l'hôte) si elle a eu le temps de
+   * commencer pendant l'attente DB, corrompant sa phase (`engine.reveal()`/`questionResult`,
+   * eux, restent sûrs : ils opèrent sur `revealed`, un instantané renvoyé par le store — qui clone
+   * profondément l'état, voir `MemorySessionStore` — donc jamais muté après coup). En plaçant
+   * `persistRound` après les deux mutations+diffusions, aucune opération lente (I/O réel) ne
+   * s'intercale plus entre `engine.reveal()` et `engine.scoreboard()` : les deux s'exécutent
+   * l'un après l'autre sans qu'un autre événement socket (ex. host:next) ne puisse s'intercaler. */
+  async function doRevealBySession(sessionId: string, meta: SessionMeta): Promise<void> {
+    const revealed = await engine.reveal(sessionId)
+
+    // Anti-triche : `questionResult` (qui contient la bonne réponse) n'est calculé qu'ICI,
+    // strictement après engine.reveal() — jamais avant, jamais pour `question:show`.
+    const result = engine.questionResult(revealed)
+    io.to(roomName(sessionId)).emit('question:reveal', result)
+
+    const scored = await engine.scoreboard(sessionId)
+    const ranking = engine.ranking(scored)
+    io.to(roomName(sessionId)).emit('scoreboard', { ranking })
+
+    await persistRound(meta, revealed)
+  }
+
   /** `host:reveal` : révèle la bonne réponse (`question:reveal`) puis le classement cumulé
    * (`scoreboard`). Crédite les points de la manche EXACTEMENT une fois (idempotent via
    * `engine.reveal`/`persistRound`, voir leurs commentaires). */
@@ -141,18 +180,7 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
     const reply = typeof ack === 'function' ? ack : () => {}
     try {
       const { sessionId, meta } = requireHost(socket)
-      const revealed = await engine.reveal(sessionId)
-      await persistRound(meta, revealed)
-
-      // Anti-triche : `questionResult` (qui contient la bonne réponse) n'est calculé qu'ICI,
-      // strictement après engine.reveal() — jamais avant, jamais pour `question:show`.
-      const result = engine.questionResult(revealed)
-      io.to(roomName(sessionId)).emit('question:reveal', result)
-
-      const scored = await engine.scoreboard(sessionId)
-      const ranking = engine.ranking(scored)
-      io.to(roomName(sessionId)).emit('scoreboard', { ranking })
-
+      await doRevealBySession(sessionId, meta)
       reply({ ok: true })
     } catch (e) {
       reply({ error: message(e) })
@@ -255,6 +283,7 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
           tenantId,
           playerDbIds: new Map(),
           revealedRounds: new Set(),
+          autoRevealedRounds: new Set(),
           statusActiveSet: false,
         })
         pinToSessionId.set(session.pin, session.id)
@@ -441,6 +470,24 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
           io.to(roomName(data.sessionId)).emit('screen:progress', progress)
         }
         reply(result)
+
+        // Auto-révélation serveur : dès que TOUS les joueurs connectés ont répondu, on révèle
+        // sans attendre l'hôte ni le timer (le chrono s'arrête côté clients au passage en 'reveal').
+        // Best-effort et isolé : une erreur ici ne doit jamais affecter la réponse déjà acquittée au
+        // joueur. Idempotent via meta.autoRevealedRounds (évite un double question:reveal/scoreboard si
+        // deux dernières réponses arrivent quasi simultanément).
+        if (result.accepted) {
+          try {
+            const meta = sessionMetaByEngineId.get(data.sessionId)
+            const session = await engine.getSession(data.sessionId)
+            if (meta && engine.allConnectedAnswered(session) && !meta.autoRevealedRounds.has(session.currentIndex)) {
+              meta.autoRevealedRounds.add(session.currentIndex)
+              await doRevealBySession(data.sessionId, meta)
+            }
+          } catch {
+            // best-effort — l'hôte peut toujours révéler manuellement
+          }
+        }
       } catch (e) {
         reply({ accepted: false, error: message(e) })
       }
