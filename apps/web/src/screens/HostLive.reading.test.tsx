@@ -13,7 +13,7 @@ import { HostLive } from './HostLive'
 
 type Handler = (payload: unknown) => void
 const handlers = new Map<string, Handler[]>()
-const mockEmitAck = vi.fn(async () => ({}))
+const mockEmitAck = vi.fn(async (_event?: string, _payload?: unknown): Promise<Record<string, unknown>> => ({}))
 
 function emitServerEvent(event: string, payload: unknown) {
   act(() => {
@@ -111,7 +111,7 @@ describe('HostLive — phase lecture (question:reading)', () => {
   })
 
   it('host:reconnect en phase « reading » (snapshot Task 3) atterrit sur l’état lecture', async () => {
-    mockEmitAck.mockImplementation(async (event: string) => {
+    mockEmitAck.mockImplementation(async (event?: string): Promise<Record<string, unknown>> => {
       if (event === 'host:reconnect') return { sessionId: 's1', pin: '1234', phase: 'reading' }
       return {}
     })
