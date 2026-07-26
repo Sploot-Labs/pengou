@@ -1112,6 +1112,15 @@
   color: var(--ink-dim);
 }
 
+/* Décompte de lecture (badge décoratif, aria-hidden) — la valeur qui compte
+   pour l'accessibilité est le texte de `.big-live__answered` juste en
+   dessous (role="status"), pas ce badge. */
+.big-live__reading-count {
+  font-family: var(--font-mono);
+  font-size: var(--fs-h2);
+  color: var(--ink-dim);
+}
+
 .big-distribution {
   display: grid;
   grid-template-columns: repeat(var(--dist-cols, 4), 1fr);

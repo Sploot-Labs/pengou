@@ -26,6 +26,18 @@ interface QuestionShowPayload {
   timeLimit: number
   payload: unknown
 }
+
+/** Projection « lecture seule » émise par `question:reading` (Task 3, moteur
+ * `readingView`) — DÉLIBÉRÉMENT sans `id`/`type`/`payload`/options : le grand
+ * écran ne doit rien pouvoir afficher qui ressemble à une réponse pendant la
+ * lecture (anti-triche, cohérent avec le moteur qui ne les envoie pas). */
+interface ReadingView {
+  prompt: string
+  index: number
+  total: number
+  readingTime: number
+  startedAt: number | null
+}
 interface McqShowPayload {
   options: { label: string }[]
 }
@@ -57,7 +69,7 @@ interface LobbyPlayer {
   connected: boolean
 }
 
-type Phase = 'lobby' | 'question' | 'reveal' | 'scoreboard' | 'podium'
+type Phase = 'lobby' | 'reading' | 'question' | 'reveal' | 'scoreboard' | 'podium'
 type JoinState = 'connecting' | 'joined' | 'error'
 
 /** Le grand écran n'a AUCUN contrôle propre (lecture seule) : contrairement à
@@ -103,6 +115,8 @@ function BigScreenInner() {
   const [players, setPlayers] = useState<LobbyPlayer[]>([])
   const [announcement, setAnnouncement] = useState('')
 
+  const [reading, setReading] = useState<ReadingView | null>(null)
+  const [readingRemaining, setReadingRemaining] = useState<number | null>(null)
   const [question, setQuestion] = useState<QuestionShowPayload | null>(null)
   const [timer, setTimer] = useState<TimerPayload | null>(null)
   const [remaining, setRemaining] = useState<number | null>(null)
@@ -181,8 +195,26 @@ function BigScreenInner() {
       setPlayers(list)
     })
 
+    const offReading = on<ReadingView>('question:reading', (view) => {
+      setReading(view)
+      setReadingRemaining(null)
+      // Même reset qu'à `question:show` ci-dessous — la phase lecture précède
+      // la phase question de la MÊME manche, mais on ne veut aucune donnée de
+      // la manche PRÉCÉDENTE qui traîne à l'écran pendant la lecture.
+      setQuestion(null)
+      setTimer(null)
+      setRemaining(null)
+      setRevealPayload(null)
+      setProgressAnswered(0)
+      setRanking([])
+      cue('phase.enter:reading')
+      setPhase('reading')
+    })
+
     const offShow = on<QuestionShowPayload>('question:show', (view) => {
       setQuestion(view)
+      setReading(null)
+      setReadingRemaining(null)
       setTimer(null)
       setRemaining(null)
       setRevealPayload(null)
@@ -222,6 +254,7 @@ function BigScreenInner() {
 
     return () => {
       offLobby()
+      offReading()
       offShow()
       offTimer()
       offProgress()
@@ -243,6 +276,28 @@ function BigScreenInner() {
     }, REVEAL_HOLD_MS)
     return () => window.clearTimeout(t)
   }, [phase, ranking])
+
+  // Décompte de lecture — même dérivation que le chrono de réponse ci-dessous
+  // (`startedAt` + durée serveur, jamais un minuteur local indépendant) :
+  // c'est le serveur qui planifie la bascule vers `question:show`, ce décompte
+  // ne fait que la REFLÉTER pour l'affichage. Valeur toujours rendue en texte
+  // (RGAA — jamais la seule animation/couleur qui porte l'information).
+  useEffect(() => {
+    if (!reading || phase !== 'reading') return
+    function tick() {
+      if (!reading) return
+      if (reading.startedAt === null) {
+        setReadingRemaining(reading.readingTime)
+        return
+      }
+      const elapsedMs = Date.now() - reading.startedAt
+      const remainingSeconds = Math.max(0, Math.ceil((reading.readingTime * 1000 - elapsedMs) / 1000))
+      setReadingRemaining(remainingSeconds)
+    }
+    tick()
+    const id = window.setInterval(tick, 250)
+    return () => window.clearInterval(id)
+  }, [reading, phase])
 
   // Chrono — dérivé de `startedAt` serveur, comme PlayerLive/HostLive.
   useEffect(() => {
@@ -408,7 +463,7 @@ function BigScreenInner() {
           Connexion perdue — reconnexion…
         </p>
       )}
-      {(phase === 'question' || phase === 'reveal' || phase === 'scoreboard') && (
+      {(phase === 'reading' || phase === 'question' || phase === 'reveal' || phase === 'scoreboard') && (
         <div className="big-join-reminder">
           Rejoignez sur <strong>{window.location.host}</strong>
           {pin && (
@@ -460,6 +515,34 @@ function BigScreenInner() {
           )}
           <p role="status" aria-live="polite">
             {announcement}
+          </p>
+        </div>
+      )}
+
+      {phase === 'reading' && reading && (
+        <div className="big-live big-live--reading">
+          <div className="big-live__header">
+            <span className="host-badge">Lecture en cours</span>
+            <span className="big-live__reading-count" aria-hidden="true">
+              {readingRemaining ?? reading.readingTime} s
+            </span>
+          </div>
+
+          {/* L'énoncé SEUL — aucune option/réponse : le payload `question:reading`
+              n'en contient d'ailleurs pas (voir `ReadingView` ci-dessus, anti-triche). */}
+          <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
+            {reading.prompt}
+          </h1>
+
+          {/* Décompte textuel (pas seulement le badge décoratif aria-hidden
+              ci-dessus) — RGAA : la valeur doit toujours être lisible, pas
+              seulement visible/animée. `role="status"`/`aria-live="polite"`
+              annonce la lecture en cours sans re-annoncer chaque tick (le
+              texte du nœud change, mais son rôle status ne relit pas à
+              chaque frame chez tous les lecteurs d'écran — cohérent avec le
+              chrono de réponse, non annoncé en continu lui non plus). */}
+          <p className="big-live__answered" role="status" aria-live="polite">
+            Lecture — {readingRemaining ?? reading.readingTime} s restantes
           </p>
         </div>
       )}
