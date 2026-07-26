@@ -66,6 +66,7 @@ interface QuestionBase {
   type: QuestionType
   prompt: string
   timeLimit: number
+  readingTime: number
 }
 interface McqOption {
   id: string
@@ -95,7 +96,7 @@ export interface SliderQuestion extends QuestionBase {
 export type Question = McqQuestion | TrueFalseQuestion | TextQuestion | SliderQuestion
 
 function fromApiQuestion(row: ApiQuestion): Question {
-  const base = { id: row.id, prompt: row.prompt, timeLimit: row.timeLimit }
+  const base = { id: row.id, prompt: row.prompt, timeLimit: row.timeLimit, readingTime: row.readingTime }
   switch (row.type) {
     case 'mcq': {
       const payload = row.payload as { options: { label: string; correct: boolean }[] }
@@ -144,14 +145,21 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
       return {
         prompt: q.prompt,
         timeLimit: q.timeLimit,
+        readingTime: q.readingTime,
         payload: { options: q.options.map((o) => ({ label: o.label, correct: o.correct })) },
       }
     case 'truefalse':
-      return { prompt: q.prompt, timeLimit: q.timeLimit, payload: { correct: q.correctAnswer } }
+      return {
+        prompt: q.prompt,
+        timeLimit: q.timeLimit,
+        readingTime: q.readingTime,
+        payload: { correct: q.correctAnswer },
+      }
     case 'text':
       return {
         prompt: q.prompt,
         timeLimit: q.timeLimit,
+        readingTime: q.readingTime,
         payload: {
           answers: q.acceptedAnswers.map((a) => a.trim()).filter((a) => a.length > 0),
           caseSensitive: false,
@@ -161,6 +169,7 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
       return {
         prompt: q.prompt,
         timeLimit: q.timeLimit,
+        readingTime: q.readingTime,
         payload: { min: q.min, max: q.max, correct: q.correctValue, step: q.step > 0 ? q.step : undefined },
       }
   }
@@ -181,12 +190,14 @@ function toCreateInput(q: Question): CreateQuestionInput {
 function defaultCreateInput(type: QuestionType): CreateQuestionInput {
   const prompt = 'Nouvelle question'
   const timeLimit = 20
+  const readingTime = 0
   switch (type) {
     case 'mcq':
       return {
         type,
         prompt,
         timeLimit,
+        readingTime,
         payload: {
           options: [
             { label: 'Réponse 1', correct: true },
@@ -197,11 +208,11 @@ function defaultCreateInput(type: QuestionType): CreateQuestionInput {
         },
       }
     case 'truefalse':
-      return { type, prompt, timeLimit, payload: { correct: true } }
+      return { type, prompt, timeLimit, readingTime, payload: { correct: true } }
     case 'text':
-      return { type, prompt, timeLimit, payload: { answers: ['Réponse'], caseSensitive: false } }
+      return { type, prompt, timeLimit, readingTime, payload: { answers: ['Réponse'], caseSensitive: false } }
     case 'slider':
-      return { type, prompt, timeLimit, payload: { min: 0, max: 100, correct: 50, step: 1 } }
+      return { type, prompt, timeLimit, readingTime, payload: { min: 0, max: 100, correct: 50, step: 1 } }
   }
 }
 
@@ -227,6 +238,10 @@ function validationError(q: Question): string | null {
   // product guardrail, kept from the prototype.
   if (!Number.isInteger(q.timeLimit) || q.timeLimit < 5 || q.timeLimit > 120)
     return 'Durée entre 5 et 120 s.'
+  // 0 = pas de temps de lecture (valeur légitime), donc seul le signe/l'intégrité est vérifié —
+  // pas de borne haute produit comme pour `timeLimit`.
+  if (!Number.isInteger(q.readingTime) || q.readingTime < 0)
+    return 'Le temps de lecture doit être un entier ≥ 0.'
   switch (q.type) {
     case 'mcq': {
       if (q.options.some((o) => o.label.trim().length === 0))
@@ -259,6 +274,8 @@ function fieldErrors(q: Question): Record<string, string> {
   if (q.prompt.trim().length === 0) errs['q-prompt'] = 'Intitulé manquant.'
   if (!Number.isInteger(q.timeLimit) || q.timeLimit < 5 || q.timeLimit > 120)
     errs['q-duration'] = 'Durée entre 5 et 120 s.'
+  if (!Number.isInteger(q.readingTime) || q.readingTime < 0)
+    errs['q-reading-time'] = 'Le temps de lecture doit être un entier ≥ 0.'
   switch (q.type) {
     case 'mcq':
       q.options.forEach((o, i) => {
@@ -617,6 +634,7 @@ export function HostEditor() {
     const input = defaultCreateInput(type)
     input.prompt = keep.prompt
     input.timeLimit = keep.timeLimit
+    input.readingTime = keep.readingTime
     return fromApiQuestion({
       id: keep.id,
       quizId: '',
@@ -624,6 +642,7 @@ export function HostEditor() {
       prompt: input.prompt,
       media: null,
       timeLimit: input.timeLimit,
+      readingTime: input.readingTime ?? 0,
       orderIndex: 0,
       payload: input.payload,
       createdAt: '',
@@ -1176,6 +1195,28 @@ export function HostEditor() {
                       {fErrors['q-duration'] && (
                         <p className="host-inline-error" id="q-duration-error">
                           {fErrors['q-duration']}
+                        </p>
+                      )}
+                    </div>
+                    <div className="host-field">
+                      <label htmlFor="q-reading-time">Temps de lecture (s)</label>
+                      <input
+                        id="q-reading-time"
+                        type="number"
+                        min={0}
+                        value={selected.readingTime}
+                        onChange={(e) => updateSelected({ readingTime: Number(e.target.value) })}
+                        aria-invalid={fErrors['q-reading-time'] ? true : undefined}
+                        aria-describedby={
+                          fErrors['q-reading-time'] ? 'q-reading-time-error q-reading-time-help' : 'q-reading-time-help'
+                        }
+                      />
+                      <p className="host-field__help" id="q-reading-time-help">
+                        0 = pas de temps de lecture
+                      </p>
+                      {fErrors['q-reading-time'] && (
+                        <p className="host-inline-error" id="q-reading-time-error">
+                          {fErrors['q-reading-time']}
                         </p>
                       )}
                     </div>

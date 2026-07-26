@@ -242,6 +242,97 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
     await app.close()
   })
 
+  it('PATCH accepte readingTime (entier ≥ 0), mirror de timeLimit', async () => {
+    const app = await buildApp()
+    const { cookie, quizId } = await createQuizAndCookie(app, 'q7ter@example.com')
+
+    const create = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/questions`,
+      payload: { type: 'mcq', prompt: 'Avant', timeLimit: 20, payload: validMcq },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    const created = create.json() as { id: string; readingTime: number }
+    // Défaut serveur (Task 1) : 0 quand non fourni à la création.
+    expect(created.readingTime).toBe(0)
+
+    const patch = await app.inject({
+      method: 'PATCH',
+      url: `/api/quizzes/${quizId}/questions/${created.id}`,
+      payload: { readingTime: 8 },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(patch.statusCode).toBe(200)
+    expect((patch.json() as { readingTime: number }).readingTime).toBe(8)
+
+    // 0 est une valeur légitime (« pas de temps de lecture »), pas un rejet.
+    const patchZero = await app.inject({
+      method: 'PATCH',
+      url: `/api/quizzes/${quizId}/questions/${created.id}`,
+      payload: { readingTime: 0 },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(patchZero.statusCode).toBe(200)
+    expect((patchZero.json() as { readingTime: number }).readingTime).toBe(0)
+
+    await app.close()
+  })
+
+  it('PATCH avec readingTime négatif ou non entier → 400', async () => {
+    const app = await buildApp()
+    const { cookie, quizId } = await createQuizAndCookie(app, 'q7quater@example.com')
+
+    const create = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/questions`,
+      payload: { type: 'mcq', prompt: 'Avant', timeLimit: 20, payload: validMcq },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    const created = create.json() as { id: string }
+
+    const negative = await app.inject({
+      method: 'PATCH',
+      url: `/api/quizzes/${quizId}/questions/${created.id}`,
+      payload: { readingTime: -1 },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(negative.statusCode).toBe(400)
+
+    const nonInteger = await app.inject({
+      method: 'PATCH',
+      url: `/api/quizzes/${quizId}/questions/${created.id}`,
+      payload: { readingTime: 2.5 },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(nonInteger.statusCode).toBe(400)
+
+    await app.close()
+  })
+
+  it('POST avec readingTime négatif → 400 ; readingTime valide est persisté', async () => {
+    const app = await buildApp()
+    const { cookie, quizId } = await createQuizAndCookie(app, 'q7quinquies@example.com')
+
+    const invalid = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/questions`,
+      payload: { type: 'mcq', prompt: 'X', timeLimit: 20, readingTime: -3, payload: validMcq },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(invalid.statusCode).toBe(400)
+
+    const valid = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/questions`,
+      payload: { type: 'mcq', prompt: 'X', timeLimit: 20, readingTime: 12, payload: validMcq },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(valid.statusCode).toBe(201)
+    expect((valid.json() as { readingTime: number }).readingTime).toBe(12)
+
+    await app.close()
+  })
+
   it('PATCH sous un quiz inexistant/étranger → 404', async () => {
     const app = await buildApp()
     const { cookie, quizId } = await createQuizAndCookie(app, 'q8@example.com')

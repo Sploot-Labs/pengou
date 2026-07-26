@@ -14,6 +14,10 @@ function isPositiveInt(value: unknown): value is number {
   return typeof value === 'number' && Number.isInteger(value) && value > 0
 }
 
+function isNonNegativeInt(value: unknown): value is number {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0
+}
+
 function isQuestionType(value: unknown): value is QuestionType {
   return typeof value === 'string' && Object.prototype.hasOwnProperty.call(questionTypes, value)
 }
@@ -29,7 +33,7 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       if (!scope) return
 
       const body = request.body as
-        | { type?: unknown; prompt?: unknown; timeLimit?: unknown; payload?: unknown; media?: unknown }
+        | { type?: unknown; prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown }
         | undefined
 
       if (!isQuestionType(body?.type)) {
@@ -40,6 +44,11 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       }
       if (!isPositiveInt(body?.timeLimit)) {
         return reply.code(400).send({ error: 'timeLimit doit être un entier positif.' })
+      }
+      // Optionnel à la création (défaut 0 = pas de phase de lecture, voir `createQuestion` en
+      // base) — mais si fourni, doit être un entier ≥ 0, mirror de `timeLimit`.
+      if (body?.readingTime !== undefined && !isNonNegativeInt(body.readingTime)) {
+        return reply.code(400).send({ error: 'readingTime doit être un entier positif ou nul.' })
       }
 
       let validatedPayload: unknown
@@ -55,6 +64,7 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
         type: body.type,
         prompt: body.prompt,
         timeLimit: body.timeLimit,
+        readingTime: isNonNegativeInt(body.readingTime) ? body.readingTime : undefined,
         payload: validatedPayload,
         media,
       })
@@ -90,10 +100,10 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       if (!scope) return
 
       const body = request.body as
-        | { prompt?: unknown; timeLimit?: unknown; payload?: unknown; media?: unknown }
+        | { prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown }
         | undefined
 
-      const patch: Partial<{ prompt: string; timeLimit: number; payload: unknown; media: string | null }> = {}
+      const patch: Partial<{ prompt: string; timeLimit: number; readingTime: number; payload: unknown; media: string | null }> = {}
 
       if (body?.prompt !== undefined) {
         if (!isNonEmptyString(body.prompt)) return reply.code(400).send({ error: "L'énoncé (prompt) ne peut pas être vide." })
@@ -102,6 +112,10 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       if (body?.timeLimit !== undefined) {
         if (!isPositiveInt(body.timeLimit)) return reply.code(400).send({ error: 'timeLimit doit être un entier positif.' })
         patch.timeLimit = body.timeLimit
+      }
+      if (body?.readingTime !== undefined) {
+        if (!isNonNegativeInt(body.readingTime)) return reply.code(400).send({ error: 'readingTime doit être un entier positif ou nul.' })
+        patch.readingTime = body.readingTime
       }
       if (body?.media !== undefined) {
         if (body.media !== null && typeof body.media !== 'string') {

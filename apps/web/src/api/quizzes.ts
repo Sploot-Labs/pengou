@@ -60,6 +60,7 @@ export interface Question {
   prompt: string
   media: string | null
   timeLimit: number
+  readingTime: number
   orderIndex: number
   payload: QuestionPayload
   createdAt: string
@@ -80,6 +81,7 @@ export interface CreateQuestionInput {
   type: QuestionType
   prompt: string
   timeLimit: number
+  readingTime?: number
   payload: QuestionPayload
   media?: string
 }
@@ -87,6 +89,7 @@ export interface CreateQuestionInput {
 export interface UpdateQuestionInput {
   prompt?: string
   timeLimit?: number
+  readingTime?: number
   payload?: QuestionPayload
   media?: string | null
 }
