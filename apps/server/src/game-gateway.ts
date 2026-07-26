@@ -294,7 +294,11 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
       io.to(roomName(sessionId)).emit('question:reading', { ...view, startedAt: session.readingStartedAt })
       clearReadingTimeout(meta)
       meta.readingTimeout = setTimeout(() => {
-        void revealAnswersFlow(sessionId, meta)
+        // `.catch` défensif comme les autres appels moteur fire-and-forget du fichier
+        // (ex. setPlayerConnected au disconnect) : un rejet ici deviendrait sinon une
+        // unhandled rejection (fatale sous Node) — non atteignable aujourd'hui (les
+        // sessions ne sont jamais supprimées du store) mais cohérent avec le durcissement.
+        revealAnswersFlow(sessionId, meta).catch(() => {})
       }, view.readingTime * 1000)
     } else {
       const view = engine.playerQuestionView(session)
