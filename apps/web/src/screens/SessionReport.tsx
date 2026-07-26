@@ -148,7 +148,7 @@ export function SessionReport() {
   return (
     <div className="ab-shell">
       <header className="ab-shell__header">
-        <Logo />
+        <Logo to="/" />
         <div style={{ flex: 1, minWidth: 0 }}>
           <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
             <Link to="/">← Retour à l'accueil</Link>

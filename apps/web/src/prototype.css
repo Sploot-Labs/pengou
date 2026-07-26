@@ -27,6 +27,19 @@
   font-size: 1rem;
 }
 
+/* Logo cliquable (retour à l'accueil) : garde l'apparence du logo (couleur
+   héritée, pas de soulignement de lien) ; le survol teinte le mot en accent
+   pour signaler l'interactivité. Le focus clavier est couvert par la règle
+   globale :focus-visible. */
+.ab-logo--link {
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+.ab-logo--link:hover .ab-logo__text {
+  color: var(--brand);
+}
+
 /* ====================================================================== */
 /* Button                                                                   */
 /* ====================================================================== */
@@ -1973,6 +1986,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
+  /* `flex: 1` : la carte remplit la hauteur (étirée par la grille) de sa
+     cellule `.home-card-item`, pour que toutes les cartes d'une même rangée
+     aient LA MÊME hauteur (indépendamment d'un titre sur 1 ou 2 lignes) et que
+     le CTA — puis le bouton « Lancer » frère — s'alignent en bas de rangée. */
+  flex: 1;
   min-height: 100px;
   padding: var(--space-4);
   background: var(--surface);
@@ -1985,7 +2003,19 @@
   border-color: var(--brand);
   background: var(--surface-2);
 }
-.home-card__title { font-weight: 700; font-size: var(--fs-h3); color: var(--ink-strong); }
+/* Titre limité à 2 lignes (ellipsis) : un titre très long ne fait plus enfler
+   la hauteur de toute la rangée. Combiné à `.home-card { flex: 1 }`, les cartes
+   restent alignées quelle que soit la longueur du titre. */
+.home-card__title {
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  color: var(--ink-strong);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
 .home-card__desc, .home-card__meta { color: var(--ink-dim); font-size: var(--fs-small); }
 .home-card__cta { margin-top: auto; color: var(--brand); font-size: var(--fs-small); }
 

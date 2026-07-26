@@ -4,7 +4,7 @@ import { Logo } from '../ui'
 export function AppHeader({ brandline, actions }: { brandline?: ReactNode; actions?: ReactNode }) {
   return (
     <header className="ab-shell__header">
-      <Logo />
+      <Logo to="/" />
       {brandline && (
         <div className="host-brandline" style={{ flex: 1, minWidth: 0 }}>
           {brandline}

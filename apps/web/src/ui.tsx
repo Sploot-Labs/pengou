@@ -7,15 +7,24 @@ import {
   type ReactNode,
 } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
+import { Link } from 'react-router-dom'
 import type { AnswerShapeKind } from './constants'
 
 /* ------------------------------------------------------------------ */
 /* Logo                                                                 */
 /* ------------------------------------------------------------------ */
 
-export function Logo({ compact = false }: { compact?: boolean }) {
-  return (
-    <span className={`ab-logo${compact ? ' ab-logo--compact' : ''}`}>
+/**
+ * `to` (optionnel) rend le logo cliquable — un `<Link>` vers cette route (ex.
+ * `/` pour revenir à l'accueil, le pattern web habituel). À NE PAS fournir sur
+ * les surfaces publiques/joueur/scène (Login, Join, PlayerLive, BigScreen) où
+ * l'accueil hôte protégé n'a pas de sens et casserait le flux anonyme : sans
+ * `to`, le logo reste un simple `<span>` non interactif, comportement d'origine.
+ */
+export function Logo({ compact = false, to }: { compact?: boolean; to?: string }) {
+  const className = `ab-logo${compact ? ' ab-logo--compact' : ''}`
+  const content = (
+    <>
       {/* Mark = les 4 formes-réponses réunies, pas le seul triangle : évite la
           collision sémantique avec la forme fonctionnelle --ans-triangle. */}
       <span className="ab-logo__mark" aria-hidden="true">
@@ -27,8 +36,17 @@ export function Logo({ compact = false }: { compact?: boolean }) {
         </svg>
       </span>
       <span className="ab-logo__text">Arena</span>
-    </span>
+    </>
   )
+
+  if (to) {
+    return (
+      <Link to={to} className={`${className} ab-logo--link`} aria-label="Arena — retour à l'accueil">
+        {content}
+      </Link>
+    )
+  }
+  return <span className={className}>{content}</span>
 }
 
 /* ------------------------------------------------------------------ */
