@@ -27,6 +27,22 @@ interface QuestionShowPayload {
   payload: unknown
 }
 
+/** Projection « lecture seule » émise par `question:reading` (Task 3, moteur
+ * `readingView`) — même forme que celle consommée par `BigScreen`/`PlayerLive`
+ * (voir leurs commentaires) : DÉLIBÉRÉMENT sans options ni bonne réponse, y
+ * compris pour l'hôte (anti-triche, le moteur ne les envoie pas avant
+ * `question:show`). Émise aussi par `emitReconnectSnapshot` (game-gateway.ts)
+ * pour un hôte qui reprend en pleine lecture — voir l'abonnement `host:reconnect`
+ * ci-dessous, qui n'a rien à faire de plus : cette même souscription
+ * `question:reading` reçoit ce cas comme n'importe quel autre. */
+interface ReadingView {
+  prompt: string
+  index: number
+  total: number
+  readingTime: number
+  startedAt: number | null
+}
+
 interface TimerPayload {
   timeLimit: number
   startedAt: number | null
@@ -54,12 +70,14 @@ interface LobbyPlayer {
   connected: boolean
 }
 
-type UiPhase = 'lobby' | 'question' | 'reveal' | 'scoreboard' | 'podium'
+type UiPhase = 'lobby' | 'reading' | 'question' | 'reveal' | 'scoreboard' | 'podium'
 
 function phaseLabel(phase: UiPhase): string {
   switch (phase) {
     case 'lobby':
       return 'Lobby'
+    case 'reading':
+      return 'Lecture en cours'
     case 'question':
       return 'Question en cours'
     case 'reveal':
@@ -162,6 +180,8 @@ export function HostLive() {
   const [players, setPlayers] = useState<LobbyPlayer[]>([])
   const [lobbyAnnouncement, setLobbyAnnouncement] = useState('')
 
+  const [reading, setReading] = useState<ReadingView | null>(null)
+  const [readingRemaining, setReadingRemaining] = useState<number | null>(null)
   const [question, setQuestion] = useState<QuestionShowPayload | null>(null)
   const [timer, setTimer] = useState<TimerPayload | null>(null)
   const [remaining, setRemaining] = useState<number | null>(null)
@@ -230,8 +250,24 @@ export function HostLive() {
       setPlayers(list)
     })
 
+    const offReading = on<ReadingView>('question:reading', (view) => {
+      setReading(view)
+      setReadingRemaining(null)
+      // Même reset qu'à `question:show` ci-dessous — la phase lecture précède
+      // la phase question de la MÊME manche, mais on ne veut aucune donnée de
+      // la manche PRÉCÉDENTE qui traîne à l'écran pendant la lecture.
+      setQuestion(null)
+      setTimer(null)
+      setRemaining(null)
+      setRevealPayload(null)
+      setProgressAnswered(0)
+      setPhase('reading')
+    })
+
     const offShow = on<QuestionShowPayload>('question:show', (view) => {
       setQuestion(view)
+      setReading(null)
+      setReadingRemaining(null)
       setTimer(null)
       setRemaining(null)
       setRevealPayload(null)
@@ -302,6 +338,7 @@ export function HostLive() {
       offConnect()
       offDisconnect()
       offLobby()
+      offReading()
       offShow()
       offTimer()
       offProgress()
@@ -313,6 +350,30 @@ export function HostLive() {
     // partagée (voir useGameSocket.ts).
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  /* ---------------------------------------------------------------- */
+  /* Décompte de lecture — même dérivation que BigScreen : `startedAt` +   */
+  /* durée serveur, jamais un minuteur local indépendant (c'est le serveur */
+  /* qui planifie la bascule vers `question:show`, ce décompte ne fait que */
+  /* la REFLÉTER). Valeur toujours rendue en texte (RGAA).                */
+  /* ---------------------------------------------------------------- */
+
+  useEffect(() => {
+    if (!reading || phase !== 'reading') return
+    function tick() {
+      if (!reading) return
+      if (reading.startedAt === null) {
+        setReadingRemaining(reading.readingTime)
+        return
+      }
+      const elapsedMs = Date.now() - reading.startedAt
+      const remainingSeconds = Math.max(0, Math.ceil((reading.readingTime * 1000 - elapsedMs) / 1000))
+      setReadingRemaining(remainingSeconds)
+    }
+    tick()
+    const id = window.setInterval(tick, 250)
+    return () => window.clearInterval(id)
+  }, [reading, phase])
 
   /* ---------------------------------------------------------------- */
   /* Chrono — dérivé de `startedAt` serveur, comme PlayerLive            */
@@ -727,6 +788,24 @@ export function HostLive() {
                     </p>
                   )}
                 </div>
+              </div>
+            )}
+
+            {phase === 'reading' && reading && (
+              // Aucun contrôle hôte pendant la lecture : le serveur pilote seul la bascule vers
+              // 'question' (`meta.readingTimeout`, voir game-gateway.ts) — l'hôte n'a rien à
+              // cliquer, juste à patienter comme les joueurs et le grand écran. Cohérent avec le
+              // snapshot reconnect (`emitReconnectSnapshot`) : un hôte qui reprend pendant la
+              // lecture atterrit sur ce même bloc, via la même souscription `question:reading`.
+              <div className="hostlive-phase">
+                <div className="hostlive-phase__header">
+                  <h2 ref={phaseHeadingRef} tabIndex={-1}>
+                    {reading.prompt}
+                  </h2>
+                </div>
+                <p role="status" aria-live="polite">
+                  Lecture en cours… {readingRemaining ?? reading.readingTime} s restantes
+                </p>
               </div>
             )}
 

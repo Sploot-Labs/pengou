@@ -29,6 +29,19 @@ interface QuestionShowPayload {
   payload: unknown
 }
 
+/** Projection « lecture seule » émise par `question:reading` (Task 3, moteur
+ * `readingView`) — DÉLIBÉRÉMENT sans `id`/`type`/`payload`/options, même
+ * forme que celle consommée par `BigScreen` (voir son commentaire) : le
+ * joueur ne doit rien pouvoir afficher qui ressemble à une réponse pendant la
+ * lecture (anti-triche, cohérent avec le moteur qui ne les envoie pas). */
+interface ReadingView {
+  prompt: string
+  index: number
+  total: number
+  readingTime: number
+  startedAt: number | null
+}
+
 interface McqShowPayload {
   options: { label: string }[]
 }
@@ -130,7 +143,7 @@ function evaluateSlider(
   return { kind: 'incorrect', diff }
 }
 
-type PlayerPhase = 'waiting' | 'question' | 'answered' | 'result' | 'podium'
+type PlayerPhase = 'waiting' | 'reading' | 'question' | 'answered' | 'result' | 'podium'
 type Connection = 'online' | 'reconnecting' | 'reconnected'
 
 export function PlayerLive() {
@@ -149,6 +162,7 @@ export function PlayerLive() {
   const [score, setScore] = useState(0)
   const scoreRef = useRef(0)
 
+  const [reading, setReading] = useState<ReadingView | null>(null)
   const [question, setQuestion] = useState<QuestionShowPayload | null>(null)
   const [timer, setTimer] = useState<TimerPayload | null>(null)
   const [remaining, setRemaining] = useState<number | null>(null)
@@ -319,8 +333,25 @@ export function PlayerLive() {
       setConnection('reconnecting')
     })
 
+    const offReading = on<ReadingView>('question:reading', (view) => {
+      setReading(view)
+      // Même reset qu'à `question:show` ci-dessous — la phase lecture précède
+      // la phase question de la MÊME manche, mais on ne veut aucune donnée de
+      // la manche PRÉCÉDENTE qui traîne pendant la lecture (résultat/score
+      // affiché par erreur, tuiles de la question d'avant, etc.).
+      setQuestion(null)
+      setTimer(null)
+      setRemaining(null)
+      setRevealPayload(null)
+      setLastAward(null)
+      setAnswerAccepted(false)
+      setAnswerRejection(null)
+      setPhase('reading')
+    })
+
     const offShow = on<QuestionShowPayload>('question:show', (view) => {
       setQuestion(view)
+      setReading(null)
       setTimer(null)
       setRemaining(null)
       setRevealPayload(null)
@@ -359,6 +390,7 @@ export function PlayerLive() {
       cancelled = true
       offConnect()
       offDisconnect()
+      offReading()
       offShow()
       offTimer()
       offReveal()
@@ -416,14 +448,16 @@ export function PlayerLive() {
     if (phase === 'answered' || answerRejection) answeredRef.current?.focus()
   }, [phase, answerRejection])
 
-  // Annonce le « moment phare » : à l'arrivée d'une NOUVELLE question, le
-  // focus va sur son intitulé pour qu'un lecteur d'écran le lise en premier.
-  // Gardé sur `[question]` seul (et non `phase`) : un rejet retryable remet
-  // aussi `phase` à 'question' sans changer `question` — cet effet ne doit
-  // PAS reprendre le focus au message de rejet dans ce cas.
+  // Annonce le « moment phare » : à l'arrivée d'une NOUVELLE question (ou de
+  // sa phase de lecture, qui la précède — voir `phase === 'reading'` plus
+  // bas, qui réutilise CE MÊME `promptRef` sur son propre titre), le focus va
+  // sur l'intitulé pour qu'un lecteur d'écran le lise en premier. Gardé sur
+  // `[question, reading]` (et non `phase`) : un rejet retryable remet aussi
+  // `phase` à 'question' sans changer `question` — cet effet ne doit PAS
+  // reprendre le focus au message de rejet dans ce cas.
   useEffect(() => {
-    if (question) promptRef.current?.focus()
-  }, [question])
+    if (question || reading) promptRef.current?.focus()
+  }, [question, reading])
 
   // Le résultat ('result') est le moment le plus important de la manche pour le joueur — au même
   // titre que la nouvelle question ci-dessus, mais sans effet dédié jusqu'ici (Plan 06 review,
@@ -615,6 +649,24 @@ export function PlayerLive() {
           <h1>En attente de la prochaine question…</h1>
           <p style={{ color: 'var(--ink-dim)' }}>
             Restez sur cet écran. La question suivante s’affichera automatiquement.
+          </p>
+        </div>
+      )}
+
+      {phase === 'reading' && reading && (
+        // Énoncé SEUL, AUCUNE tuile de réponse rendue — contrairement au bloc
+        // 'question'/'answered' ci-dessous, ce bloc ne rend jamais les
+        // contrôles de saisie (mcq/vrai-faux/texte/slider) : rien à masquer
+        // ni désactiver explicitement, ils ne sont tout simplement PAS dans
+        // le DOM tant que le serveur n'a pas diffusé `question:show` — cohérent
+        // avec le rejet serveur des réponses hors phase 'question'
+        // (`submitAnswer`, packages/game/src/engine.ts).
+        <div className="player-question player-question--reading">
+          <h1 className="player-question__prompt" tabIndex={-1} ref={promptRef}>
+            {reading.prompt}
+          </h1>
+          <p role="status" aria-live="polite">
+            Préparez-vous…
           </p>
         </div>
       )}
