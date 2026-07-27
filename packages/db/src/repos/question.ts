@@ -16,7 +16,7 @@ export async function createQuestion(scope: TenantScope, quizId: string, input: 
   if (!(await assertQuizInTenant(scope, quizId))) return null
   const orderIndex = input.orderIndex ?? (await nextOrderIndex(scope, quizId))
   const [row] = await scope.db.insert(schema.question).values({
-    quizId, type: input.type, prompt: input.prompt, timeLimit: input.timeLimit, readingTime: input.readingTime ?? 0,
+    quizId, type: input.type, prompt: input.prompt, timeLimit: input.timeLimit, readingTime: input.readingTime ?? 6,
     payload: input.payload as never, media: input.media ?? null, orderIndex,
   }).returning()
   return row

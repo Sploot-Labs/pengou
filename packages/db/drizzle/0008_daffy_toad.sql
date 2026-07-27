@@ -1,0 +1,1 @@
+ALTER TABLE "question" ALTER COLUMN "reading_time" SET DEFAULT 6;

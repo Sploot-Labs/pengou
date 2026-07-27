@@ -190,7 +190,7 @@ function toCreateInput(q: Question): CreateQuestionInput {
 function defaultCreateInput(type: QuestionType): CreateQuestionInput {
   const prompt = 'Nouvelle question'
   const timeLimit = 20
-  const readingTime = 0
+  const readingTime = 6
   switch (type) {
     case 'mcq':
       return {

@@ -185,10 +185,10 @@ describe('repo question scopé par jointure sur quiz', () => {
     expect(ok).toBe(true)
   })
 
-  it('createQuestion/updateQuestion gèrent readingTime (défaut 0)', async () => {
+  it('createQuestion/updateQuestion gèrent readingTime (défaut 6)', async () => {
     const scope = tenantScope(ctx.db, tenantA)
     const def = await createQuestion(scope, quizA, { type: 'mcq', prompt: 'D', timeLimit: 20, payload: validMcq })
-    expect(def!.readingTime).toBe(0) // défaut
+    expect(def!.readingTime).toBe(6) // défaut
     const withReading = await createQuestion(scope, quizA, { type: 'mcq', prompt: 'R', timeLimit: 20, readingTime: 6, payload: validMcq })
     expect(withReading!.readingTime).toBe(6)
     const patched = await updateQuestion(scope, quizA, def!.id, { readingTime: 4 })
