@@ -253,8 +253,8 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
       headers: { 'content-type': 'application/json', cookie },
     })
     const created = create.json() as { id: string; readingTime: number }
-    // Défaut serveur (Task 1) : 0 quand non fourni à la création.
-    expect(created.readingTime).toBe(0)
+    // Défaut serveur : 6 s quand non fourni à la création (phase lecture active par défaut).
+    expect(created.readingTime).toBe(6)
 
     const patch = await app.inject({
       method: 'PATCH',
