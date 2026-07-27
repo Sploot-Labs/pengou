@@ -1,4 +1,6 @@
-import { desc, eq } from 'drizzle-orm'
+import {
+  and, desc, eq, gte, inArray, isNotNull, lt, ne,
+} from 'drizzle-orm'
 import { schema } from '../index.js'
 import type { Db } from '../client.js'
 import type { TenantScope } from '../tenant.js'
@@ -100,4 +102,68 @@ export async function listSessionPlayersByScore(db: Db, sessionId: string): Prom
   return db.select().from(schema.sessionPlayer)
     .where(eq(schema.sessionPlayer.sessionId, sessionId))
     .orderBy(desc(schema.sessionPlayer.totalScore))
+}
+
+// --- Persistance / résumé de session (checkpoint de l'état moteur) ---
+//
+// Le moteur (@splootlabs/game) sérialise périodiquement son état en mémoire
+// dans `engine_state` (jsonb) pour permettre une reprise après crash serveur.
+// Ces helpers ne connaissent rien de la forme de l'état : `unknown` de bout en bout.
+
+export async function saveEngineState(db: Db, sessionId: string, state: unknown): Promise<void> {
+  await db.update(schema.gameSession)
+    .set({ engineState: state as never })
+    .where(eq(schema.gameSession.id, sessionId))
+}
+
+export async function clearEngineState(db: Db, sessionId: string): Promise<void> {
+  await db.update(schema.gameSession)
+    .set({ engineState: null })
+    .where(eq(schema.gameSession.id, sessionId))
+}
+
+export async function loadEngineState(db: Db, sessionId: string): Promise<unknown | null> {
+  const [row] = await db.select({ engineState: schema.gameSession.engineState })
+    .from(schema.gameSession)
+    .where(eq(schema.gameSession.id, sessionId))
+  return row?.engineState ?? null
+}
+
+// État de la session courante (non close) associée à ce PIN — un PIN ne peut
+// correspondre qu'à au plus une session non-`ended` (index partiel unique).
+export async function loadEngineStateByPin(db: Db, pin: string): Promise<unknown | null> {
+  const [row] = await db.select({ engineState: schema.gameSession.engineState })
+    .from(schema.gameSession)
+    .where(and(eq(schema.gameSession.pin, pin), ne(schema.gameSession.status, 'ended')))
+  return row?.engineState ?? null
+}
+
+// Sessions candidates à la reprise au (re)démarrage du serveur : encore en cours
+// (lobby/active), avec un checkpoint mémorisé, et pas trop anciennes.
+export async function listResumableSessions(
+  db: Db,
+  maxAgeMs: number,
+): Promise<Array<{ id: string; engineState: unknown }>> {
+  const cutoff = new Date(Date.now() - maxAgeMs)
+  return db.select({ id: schema.gameSession.id, engineState: schema.gameSession.engineState })
+    .from(schema.gameSession)
+    .where(and(
+      inArray(schema.gameSession.status, ['active', 'lobby']),
+      isNotNull(schema.gameSession.engineState),
+      gte(schema.gameSession.createdAt, cutoff),
+    ))
+}
+
+// Ménage : les sessions lobby/active trop anciennes pour être reprises sont closes
+// et leur checkpoint effacé (pas de resurrection tardive après un long redémarrage).
+export async function endStaleSessions(db: Db, maxAgeMs: number): Promise<number> {
+  const cutoff = new Date(Date.now() - maxAgeMs)
+  const rows = await db.update(schema.gameSession)
+    .set({ status: 'ended', endedAt: new Date(), engineState: null })
+    .where(and(
+      inArray(schema.gameSession.status, ['active', 'lobby']),
+      lt(schema.gameSession.createdAt, cutoff),
+    ))
+    .returning({ id: schema.gameSession.id })
+  return rows.length
 }

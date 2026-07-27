@@ -1,11 +1,12 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
-import { eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { startTestDb, runMigrations, schema } from '../index.js'
 import { tenantScope } from '../tenant.js'
 import { createQuiz } from './quiz.js'
 import {
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
-  listSessionPlayersByScore,
+  listSessionPlayersByScore, saveEngineState, clearEngineState, loadEngineState, loadEngineStateByPin,
+  listResumableSessions, endStaleSessions,
 } from './session.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
@@ -129,5 +130,32 @@ describe('repo session scopé au tenant du quiz', () => {
     await setSessionStatus(ctx.db, ended!.id, 'ended')
     const reused = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '000001' })
     expect(reused).not.toBeNull()
+  })
+
+  it('engine_state : save/load/clear + resumable/stale', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    const s = await createGameSession(scope, { quizId: quizA, hostId: ownerA, pin: '900001' })
+    await setSessionStatus(ctx.db, s!.id, 'active')
+    await saveEngineState(ctx.db, s!.id, { id: s!.id, phase: 'question', answers: { 0: {} } })
+    expect(await loadEngineState(ctx.db, s!.id)).toMatchObject({ phase: 'question' })
+    expect(await loadEngineStateByPin(ctx.db, '900001')).toMatchObject({ phase: 'question' })
+    const resumable = await listResumableSessions(ctx.db, 60_000)
+    expect(resumable.map((r) => r.id)).toContain(s!.id)
+    await clearEngineState(ctx.db, s!.id)
+    expect(await loadEngineState(ctx.db, s!.id)).toBeNull()
+
+    // stale : une session dont created_at est ancien → endStaleSessions la clôt.
+    const stale = await createGameSession(scope, { quizId: quizA, hostId: ownerA, pin: '900002' })
+    await setSessionStatus(ctx.db, stale!.id, 'active')
+    await saveEngineState(ctx.db, stale!.id, { id: stale!.id, phase: 'question' })
+    await ctx.db.execute(sql`UPDATE game_session SET created_at = now() - interval '2 days' WHERE id = ${stale!.id}`)
+    const endedCount = await endStaleSessions(ctx.db, 3600_000)
+    expect(endedCount).toBeGreaterThanOrEqual(1)
+    const [after] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.id, stale!.id))
+    expect(after.status).toBe('ended')
+    expect(after.engineState).toBeNull()
+
+    // loadEngineStateByPin exclut les sessions ended : plus de résultat après clôture.
+    expect(await loadEngineStateByPin(ctx.db, '900002')).toBeNull()
   })
 })

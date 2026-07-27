@@ -1,0 +1,1 @@
+ALTER TABLE "game_session" ADD COLUMN "engine_state" jsonb;

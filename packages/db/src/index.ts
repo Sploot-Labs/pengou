@@ -14,6 +14,8 @@ export {
 export {
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
   listSessionPlayersByScore,
+  saveEngineState, clearEngineState, loadEngineState, loadEngineStateByPin,
+  listResumableSessions, endStaleSessions,
   type GameSession, type SessionPlayer, type AnswerRecord, type SessionStatus,
 } from './repos/session.js'
 export {
