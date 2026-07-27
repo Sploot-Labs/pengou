@@ -4,3 +4,6 @@ data/
 *.log
 .env
 apps/web/dist/
+
+# SDD / superpowers scratch workspace
+.superpowers/
