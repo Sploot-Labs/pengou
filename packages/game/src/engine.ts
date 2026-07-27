@@ -3,6 +3,14 @@ import type { GameSession, Player, EngineQuestion, SubmittedAnswer } from './sta
 import type { SessionStore } from './store.js'
 
 export type CreateSessionInput = {
+  /** Id de session imposé (Task 2, unification moteur↔DB) — quand fourni (ex. depuis la
+   * passerelle, qui l'a fait pointer vers une ligne `game_session` DÉJÀ créée), utilisé TEL
+   * QUEL au lieu de `genId()`. Omis (tests moteur seuls, sans DB) : comportement inchangé. */
+  id?: string
+  /** PIN imposé (Task 2) — même logique que `id` : fourni quand déjà généré en amont via
+   * `generateUniquePin()` (ex. par la passerelle, pour connaître le PIN AVANT de créer la ligne
+   * DB). Omis : comportement inchangé (`uniquePin()` interne). */
+  pin?: string
   quizId: string
   tenantId: string
   hostId: string
@@ -57,6 +65,12 @@ export type EngineDeps = {
 
 export interface Engine {
   createSession(input: CreateSessionInput): Promise<GameSession>
+  /** Génère un PIN garanti unique parmi les sessions actives, SANS créer de session (Task 2,
+   * unification moteur↔DB) — délègue au même `uniquePin()` interne que `createSession`. Permet à
+   * l'appelant (la passerelle) de connaître le PIN AVANT de créer la ligne DB, elle-même
+   * nécessaire avant `createSession` (voir `store.save`/Task 3 : la ligne `game_session` doit
+   * exister avant le premier `UPDATE … SET engine_state`). */
+  generateUniquePin(): Promise<string>
   addPlayer(sessionId: string, nickname: string): Promise<{ session: GameSession; player: Player }>
   startQuestion(sessionId: string): Promise<GameSession>
   /** Fait sortir la session de la phase 'reading' (temps de lecture) vers 'question' et démarre
@@ -122,10 +136,14 @@ export function createEngine(deps: EngineDeps): Engine {
   }
 
   const engine: Engine = {
-    async createSession({ quizId, tenantId, hostId, questions }) {
-      const pin = await uniquePin()
+    async generateUniquePin() {
+      return uniquePin()
+    },
+
+    async createSession({ id, pin: inputPin, quizId, tenantId, hostId, questions }) {
+      const pin = inputPin ?? (await uniquePin())
       const session: GameSession = {
-        id: genId(),
+        id: id ?? genId(),
         pin,
         quizId,
         tenantId,

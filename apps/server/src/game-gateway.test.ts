@@ -984,15 +984,15 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("host:reconnect accepte aussi l'id `game_session` PERSISTÉ (pas seulement l'id moteur) — reprise d'une partie live depuis Home, qui ne connaît que ce premier id", async () => {
+  it("host:create : l'id de session renvoyé par l'ack EST l'id `game_session` PERSISTÉ (Task 2, unification moteur↔DB — plus deux espaces d'id distincts)", async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
-      const cookie = await signUp(app, 'gateway-host-reconnect-dbid@example.com')
+      const cookie = await signUp(app, 'gateway-host-create-unified-id@example.com')
       const quizRes = await app.inject({
         method: 'POST',
         url: '/api/quizzes',
-        payload: { title: 'Quiz reconnexion hôte (id DB)' },
+        payload: { title: 'Quiz id unifié' },
         headers: { 'content-type': 'application/json', cookie },
       })
       expect(quizRes.statusCode).toBe(201)
@@ -1010,43 +1010,23 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       })
       expect(questionRes.statusCode).toBe(201)
 
-      const hostSocketA = await connectClient(url, { cookie })
-      clients.push(hostSocketA)
+      const hostSocket = await connectClient(url, { cookie })
+      clients.push(hostSocket)
       const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
-        hostSocketA,
+        hostSocket,
         'host:create',
         { quizId: quiz.id },
       )
       expect(created.error).toBeUndefined()
-      const { sessionId: engineSessionId } = created as { sessionId: string; pin: string }
+      const { sessionId } = created as { sessionId: string; pin: string }
 
-      // L'id `game_session` PERSISTÉ (celui que `Home.tsx` connaît via `GET /api/sessions`,
-      // `listSessions()`) — DIFFÉRENT de l'id moteur EN MÉMOIRE reçu ci-dessus par host:create.
-      const [dbSession] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, quiz.id))
-      expect(dbSession).toBeDefined()
-      expect(dbSession.id).not.toBe(engineSessionId)
-
-      hostSocketA.disconnect()
-      await new Promise((resolve) => setTimeout(resolve, 150))
-
-      // Reprise depuis Home : le front envoie l'id DB (jamais vu l'id moteur) à host:reconnect.
-      const hostSocketB = await connectClient(url, { cookie })
-      clients.push(hostSocketB)
-      const reconnectAck = await ack<{ sessionId?: string; pin?: string; phase?: string; error?: string }>(
-        hostSocketB,
-        'host:reconnect',
-        { sessionId: dbSession.id },
-      )
-      expect(reconnectAck.error).toBeUndefined()
-      expect(reconnectAck.phase).toBe('lobby')
-      // L'ack renvoie l'id moteur CANONIQUE (celui utilisé partout ailleurs côté passerelle),
-      // pas l'id DB reçu en entrée — le front s'en ressert pour le reste de la session.
-      expect(reconnectAck.sessionId).toBe(engineSessionId)
-
-      // hostSocketB pilote bien la partie : la reconnexion via l'id DB a réellement rebind
-      // l'autorité hôte de CETTE session (pas d'une autre / d'aucune).
-      const startAck = await ack<{ error?: string }>(hostSocketB, 'host:start', {})
-      expect(startAck.error).toBeUndefined()
+      // Une SEULE ligne `game_session` est créée pour ce quiz, et son id est EXACTEMENT celui
+      // renvoyé par l'ack — plus de `dbSessionIdToEngineId` : un unique id sert à la fois de clé
+      // moteur (mémoire) et de clé `game_session.id` (DB, colonne `engine_state` du store
+      // persistant Task 3).
+      const dbSessions = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, quiz.id))
+      expect(dbSessions).toHaveLength(1)
+      expect(dbSessions[0]!.id).toBe(sessionId)
     } finally {
       for (const c of clients) c.disconnect()
       await app.close()

@@ -89,16 +89,11 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
   const sessionMetaByEngineId = new Map<string, SessionMeta>()
   const pinToSessionId = new Map<string, string>()
   // Reprise depuis Home (Task 8) : `Home.tsx` liste les parties via `listSessions()`
-  // (`packages/db/src/repos/reports.ts`), qui n'expose que l'id `game_session` PERSISTÉ
-  // (`meta.dbSessionId`) — jamais l'id moteur EN MÉMOIRE (`session.id`, celui que porte
-  // normalement `/host/:sessionId` juste après `host:create`, voir `useLaunchGame.ts`). Sans
-  // cette table de correspondance inverse, un hôte qui reprend une partie live depuis Home
-  // enverrait l'id DB à `host:reconnect`, qui ne le trouverait jamais dans
-  // `sessionMetaByEngineId` (indexée par id moteur) et échouerait à tort avec « session
-  // introuvable ». `host:reconnect` accepte donc les DEUX espaces d'id (voir plus bas) : l'id
-  // moteur (rechargement de page en cours de partie, id déjà dans l'URL) ET l'id DB (reprise
-  // depuis Home, seul id que ce dernier connaît).
-  const dbSessionIdToEngineId = new Map<string, string>()
+  // (`packages/db/src/repos/reports.ts`), qui expose l'id `game_session` PERSISTÉ. Depuis
+  // l'unification moteur↔DB (Task 2), c'est EXACTEMENT le même id que `session.id` EN MÉMOIRE
+  // (celui que porte `/host/:sessionId` juste après `host:create`, voir `useLaunchGame.ts`) —
+  // un seul espace d'id, `sessionMetaByEngineId.get(sessionId)` suffit donc directement dans
+  // `host:reconnect` (plus de table de correspondance inverse `dbSessionIdToEngineId`).
   // Token d'affichage grand écran : émis une seule fois par host:createScreenToken, mais
   // valable pour toute la durée de vie de la session (single-*issue*, multi-*join*) — pas de
   // Map au niveau module, pas de suppression après consommation. `screen:join` (première prise
@@ -415,15 +410,26 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
         if (!questionRows) throw new Error('quiz introuvable')
 
         const questions = questionRows.map(toEngineQuestion)
+
+        // DB d'abord (Task 2, unification moteur↔DB) : la ligne `game_session` doit exister
+        // AVANT le premier `engine.createSession` (qui appelle `store.save` — Task 3/4, le store
+        // persistant fait `UPDATE game_session SET engine_state=… WHERE id = session.id`, un
+        // UPDATE sur une ligne inexistante ne persisterait rien). Il faut donc connaître le PIN
+        // (généré par le moteur) AVANT de créer la ligne DB — d'où `generateUniquePin()`.
+        const pin = await engine.generateUniquePin()
+        const dbSession = await createGameSession(scope, { quizId, hostId: authSession.user.id, pin })
+        if (!dbSession) throw new Error('création de la session impossible')
+
+        // L'id `game_session` DB devient l'id moteur — UN SEUL id partout (plus de map de
+        // correspondance inverse entre les deux, désormais inutile).
         const session = await engine.createSession({
+          id: dbSession.id,
+          pin,
           quizId,
           tenantId,
           hostId: authSession.user.id,
           questions,
         })
-
-        const dbSession = await createGameSession(scope, { quizId, hostId: authSession.user.id, pin: session.pin })
-        if (!dbSession) throw new Error('création de la session impossible')
 
         sessionMetaByEngineId.set(session.id, {
           dbSessionId: dbSession.id,
@@ -435,7 +441,6 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
           readingTimeout: null,
         })
         pinToSessionId.set(session.pin, session.id)
-        dbSessionIdToEngineId.set(dbSession.id, session.id)
 
         const data = socket.data as SocketData
         data.role = 'host'
@@ -448,32 +453,29 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
       }
     })
 
-    // Reconnexion hôte (Task 1, hardening ; Task 8, snapshot + reprise depuis Home) :
-    // l'autorité hôte était liée à UN SEUL socket (posée par host:create) — un simple
-    // rechargement de page perdait DÉFINITIVEMENT le contrôle de la partie. Le client renvoie un
-    // `sessionId` — soit l'id moteur reçu à host:create (persisté côté client, ex. localStorage,
-    // ou déjà présent dans l'URL `/host/:sessionId` après un simple F5), SOIT l'id `game_session`
-    // persisté tel que `Home.tsx` le connaît via `listSessions()` (reprise d'une partie live
-    // listée sur l'accueil, qui n'a jamais vu l'id moteur) — résolu vers l'id moteur via
-    // `dbSessionIdToEngineId` si besoin (voir sa doc plus haut). On ré-authentifie ensuite via la
-    // session Better Auth du NOUVEAU handshake et on vérifie qu'il s'agit bien de l'hôte de CETTE
-    // session avant de rebind `socket.data` + rejoindre la room. Double vérification (défense en
-    // profondeur) : l'état moteur EN MÉMOIRE (`session.hostId`, source de vérité pendant la
-    // partie) ET la ligne `game_session.host_id` PERSISTÉE — un écart entre les deux (qui ne
-    // devrait jamais arriver) fait échouer FERMÉ plutôt que de faire confiance à une seule
-    // source. Pousse enfin un snapshot de l'état courant à CE socket (`emitReconnectSnapshot`) :
-    // sans lui, l'hôte reprendrait la main sur une partie dont l'écran ne montre rien (aucun
-    // joueur, aucune question) jusqu'au prochain événement diffusé à toute la room.
+    // Reconnexion hôte (Task 1, hardening ; Task 8, snapshot + reprise depuis Home ; Task 2,
+    // unification moteur↔DB) : l'autorité hôte était liée à UN SEUL socket (posée par
+    // host:create) — un simple rechargement de page perdait DÉFINITIVEMENT le contrôle de la
+    // partie. Le client renvoie un `sessionId` — reçu à host:create (persisté côté client, ex.
+    // localStorage, ou déjà présent dans l'URL `/host/:sessionId` après un simple F5) OU listé
+    // par `Home.tsx` via `listSessions()` (reprise d'une partie live depuis l'accueil) : depuis
+    // l'unification moteur↔DB, c'est EXACTEMENT le même id dans les deux cas — plus de résolution
+    // via une table de correspondance inverse, `sessionMetaByEngineId.get(sessionId)` directement.
+    // On ré-authentifie ensuite via la session Better Auth du NOUVEAU handshake et on vérifie
+    // qu'il s'agit bien de l'hôte de CETTE session avant de rebind `socket.data` + rejoindre la
+    // room. Double vérification (défense en profondeur) : l'état moteur EN MÉMOIRE
+    // (`session.hostId`, source de vérité pendant la partie) ET la ligne `game_session.host_id`
+    // PERSISTÉE — un écart entre les deux (qui ne devrait jamais arriver) fait échouer FERMÉ
+    // plutôt que de faire confiance à une seule source. Pousse enfin un snapshot de l'état
+    // courant à CE socket (`emitReconnectSnapshot`) : sans lui, l'hôte reprendrait la main sur une
+    // partie dont l'écran ne montre rien (aucun joueur, aucune question) jusqu'au prochain
+    // événement diffusé à toute la room.
     socket.on('host:reconnect', async (payload: { sessionId?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const rawSessionId = payload?.sessionId
-        if (typeof rawSessionId !== 'string' || !rawSessionId) throw new Error('sessionId requis')
+        const sessionId = payload?.sessionId
+        if (typeof sessionId !== 'string' || !sessionId) throw new Error('sessionId requis')
 
-        const sessionId = sessionMetaByEngineId.has(rawSessionId)
-          ? rawSessionId
-          : dbSessionIdToEngineId.get(rawSessionId)
-        if (!sessionId) throw new Error('session introuvable')
         const meta = sessionMetaByEngineId.get(sessionId)
         if (!meta) throw new Error('session introuvable')
 
@@ -495,8 +497,8 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
         await socket.join(roomName(sessionId))
         emitReconnectSnapshot(socket, session)
 
-        // `sessionId` renvoyé ici est TOUJOURS l'id moteur (canonique, quel que soit celui reçu
-        // en entrée) — c'est celui que la passerelle utilise partout ailleurs (room, tokens grand
+        // `sessionId` renvoyé ici est EXACTEMENT celui reçu en entrée (id unifié moteur↔DB,
+        // Task 2) — c'est celui que la passerelle utilise partout ailleurs (room, tokens grand
         // écran…) ; le front s'en ressert pour le reste de la session (voir `HostLive.tsx`).
         reply({ sessionId, pin: session.pin, phase: session.phase })
       } catch (e) {

@@ -337,6 +337,49 @@ describe('game engine — cycle déterministe complet', () => {
     })
   })
 
+  describe('id/pin fournis (unification moteur↔DB, Task 2 persistance)', () => {
+    it('createSession({ id, pin }) utilise EXACTEMENT l\'id et le PIN fournis (pas de genId/uniquePin)', async () => {
+      const session = await engine.createSession({
+        id: 'fixed-id',
+        pin: '424242',
+        quizId: 'q1',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [mcqQuestion],
+      })
+      expect(session.id).toBe('fixed-id')
+      expect(session.pin).toBe('424242')
+    })
+
+    it('createSession sans id/pin conserve le comportement existant (genId/uniquePin)', async () => {
+      const session = await engine.createSession({
+        quizId: 'q1',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [mcqQuestion],
+      })
+      expect(session.id).toBe('id-1') // genId('id') — premier appel
+      expect(session.pin).toBe('123456') // genPin injecté dans beforeEach
+    })
+
+    it('generateUniquePin() renvoie un PIN valide non déjà pris par une session existante', async () => {
+      const sharedStore = new MemorySessionStore()
+      const takenPin = 'takenPin' // volontairement invalide/non numérique : juste une valeur témoin
+      const e = createEngine({
+        store: sharedStore,
+        now: clock.now,
+        genPin: makePinGen(['111111', '222222']),
+        genId: makeIdGen('a'),
+      })
+      await e.createSession({ id: 'sess-1', pin: takenPin, quizId: 'q1', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+
+      // genPin() renvoie d'abord '111111' (libre, pas de collision avec takenPin) : accepté direct.
+      const pin = await e.generateUniquePin()
+      expect(pin).toBe('111111')
+      expect(pin).not.toBe(takenPin)
+    })
+  })
+
   describe('crédit des points — découplé de la phase, idempotent', () => {
     it('reveal() après scoreboard()/nextQuestion() (host a sauté reveal) crédite quand même les points', async () => {
       const session = await engine.createSession({
