@@ -197,6 +197,16 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // planifié par `startQuestionFlow` — sinon celui-ci se déclencherait une seconde fois plus
     // tard (révélation fantôme) sur une manche déjà avancée par ce chemin-ci.
     clearReadingTimeout(meta)
+    // FENÊTRE DE CRASH CONNUE (compromis assumé — voir revue de la persistance) : `engine.reveal()`
+    // pose `credited[idx]` + persiste `engine_state` AVANT que `persistRound` (plus bas) n'écrive
+    // `answer_record`/`total_score` en base. Un crash serveur PILE dans cette fenêtre (deux `await`)
+    // ferait, au redémarrage, dériver `revealedRounds` de `credited` → `persistRound` sauterait
+    // cette manche → le DÉTAIL par-question du RAPPORT DB manquerait pour elle. Le jeu live et le
+    // CLASSEMENT restent corrects (scores dans `engine_state` ; `total_score` se rattrape à la
+    // manche suivante). On garde délibérément les écritures DB EN DERNIER pour éviter un bug pire
+    // (persistRound entre reveal() et scoreboard() pourrait tamponner `phase='scoreboard'` sur la
+    // manche SUIVANTE). Durcissement possible (suivi) : écrire answer_record avant de créditer, ou
+    // un flag « persisté » distinct de `credited`.
     const revealed = await engine.reveal(sessionId)
 
     // Anti-triche : `questionResult` (qui contient la bonne réponse) n'est calculé qu'ICI,
