@@ -177,6 +177,7 @@ describe('e2e — jouer une partie puis consulter le rapport (liste, détail, CS
           type: 'mcq',
           prompt: 'Capitale de la France ?',
           timeLimit: 5,
+          readingTime: 0,
           payload: {
             options: [
               { label: 'Paris', correct: true },
@@ -196,6 +197,7 @@ describe('e2e — jouer une partie puis consulter le rapport (liste, détail, CS
           type: 'truefalse',
           prompt: 'La Terre est ronde.',
           timeLimit: 5,
+          readingTime: 0,
           payload: { correct: true },
         },
         headers: { 'content-type': 'application/json', cookie },

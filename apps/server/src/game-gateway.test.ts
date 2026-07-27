@@ -158,6 +158,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
           type: 'mcq',
           prompt: 'Capitale de la France ?',
           timeLimit: 20,
+          readingTime: 0,
           payload: {
             options: [
               { label: 'Paris', correct: true },
@@ -304,6 +305,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
           type: 'mcq',
           prompt: 'Q ?',
           timeLimit: 20,
+          readingTime: 0,
           payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
         },
         headers: { 'content-type': 'application/json', cookie },
@@ -371,6 +373,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         type: 'mcq',
         prompt: 'Question étrangère',
         timeLimit: 20,
+        readingTime: 0,
         payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
       })
 
@@ -404,6 +407,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     url: string,
     email: string,
     timeLimit = 20,
+    readingTime = 0,
   ): Promise<{ hostSocket: ClientSocket; sessionId: string; pin: string; quizId: string }> {
     const cookie = await signUp(app, email)
     const quizRes = await app.inject({
@@ -422,6 +426,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         type: 'mcq',
         prompt: 'Capitale de la France ?',
         timeLimit,
+        readingTime,
         payload: {
           options: [
             { label: 'Paris', correct: true },
@@ -916,6 +921,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
           type: 'mcq',
           prompt: 'Q ?',
           timeLimit: 20,
+          readingTime: 0,
           payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
         },
         headers: { 'content-type': 'application/json', cookie },
@@ -1004,6 +1010,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
           type: 'mcq',
           prompt: 'Q ?',
           timeLimit: 20,
+          readingTime: 0,
           payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
         },
         headers: { 'content-type': 'application/json', cookie },
