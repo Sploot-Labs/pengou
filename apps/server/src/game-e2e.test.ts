@@ -64,7 +64,7 @@ async function buildApp(): Promise<BuiltApp> {
     genPin: generatePin,
     genId: () => crypto.randomUUID(),
   })
-  registerGameGateway(io, { engine, db: ctx.db, auth, config })
+  await registerGameGateway(io, { engine, db: ctx.db, auth, config })
 
   await app.listen({ port: 0, host: '127.0.0.1' })
   const address = app.server.address()

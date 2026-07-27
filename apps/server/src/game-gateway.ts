@@ -3,6 +3,7 @@ import { fromNodeHeaders } from 'better-auth/node'
 import {
   resolveTenantId, tenantScope, listQuestions,
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
+  clearEngineState, listResumableSessions, endStaleSessions, listSessionPlayers,
   type Db,
 } from '@splootlabs/db'
 import type { Auth } from '@splootlabs/auth'
@@ -59,6 +60,12 @@ function message(err: unknown): string {
  * (voir plan, notes de fin) — 1000 par défaut, aligné sur le prototype Kahoot. */
 const DEFAULT_BASE_POINTS = 1000
 
+/** Fenêtre de reprise (Task 4, réhydratation au boot) : une session `lobby`/`active` plus
+ * ancienne que ça au démarrage n'est plus considérée reprenable (`endStaleSessions` la bascule
+ * en `ended`, `engine_state` effacé) — évite de ressusciter indéfiniment une partie abandonnée
+ * après un très long redémarrage. 12 h, cohérent avec la durée réaliste d'une session de jeu. */
+const SESSION_MAX_AGE = 12 * 3600_000
+
 function toEngineQuestion(row: { id: string; type: string; prompt: string; timeLimit: number; readingTime: number; payload: unknown }): EngineQuestion {
   return {
     id: row.id,
@@ -80,7 +87,7 @@ function playersPayload(session: GameSession): Array<{ id: string; nickname: str
   }))
 }
 
-export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
+export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Promise<void> {
   const { engine, db, auth, config } = deps
 
   // État de la passerelle : local à CET appel de registerGameGateway (donc à CETTE instance
@@ -393,6 +400,82 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
     }
   }
 
+  /** Réhydratation au démarrage (Task 4) : après un redémarrage serveur, `sessionMetaByEngineId`/
+   * `pinToSessionId` sont vides (état local à CET appel de `registerGameGateway`, voir plus haut)
+   * même si l'état moteur a survécu en base (`PersistentSessionStore`, Task 3) — sans cette
+   * fonction, `host:reconnect`/`player:reconnect` répondraient "session introuvable" sur une
+   * partie pourtant reprenable. Ménage d'abord (`endStaleSessions`, sessions trop vieilles → plus
+   * jamais reprenables), puis reconstruit la `SessionMeta` de chaque session candidate et
+   * ré-ancre le chrono de sa phase courante à neuf (décision produit, voir le design : le chrono
+   * ne reprend jamais là où il en était — il repart de zéro pour la durée COMPLÈTE de la phase).
+   * Best-effort par session : une session individuellement corrompue/absente du store (ex. race
+   * avec une écriture concurrente) ne doit jamais empêcher la reprise des autres. */
+  async function rehydrateActiveSessions(maxAgeMs: number): Promise<void> {
+    await endStaleSessions(db, maxAgeMs)
+    const rows = await listResumableSessions(db, maxAgeMs)
+
+    for (const row of rows) {
+      try {
+        // `engine.getSession` lit via le store persistant (Task 3) — qui charge `row.engineState`
+        // depuis `engine_state` au premier accès (cache froid, process neuf) et le désérialise
+        // (clés numériques `answers`/`credited` reconverties, voir `PersistentSessionStore`).
+        const session = await engine.getSession(row.id)
+
+        const dbPlayers = await listSessionPlayers(db, row.id)
+        const playerDbIds = new Map<string, string>()
+        for (const enginePlayer of Object.values(session.players)) {
+          const dbPlayer = dbPlayers.find((p) => p.joinToken === enginePlayer.joinToken)
+          if (dbPlayer) playerDbIds.set(enginePlayer.id, dbPlayer.id)
+        }
+
+        // Les manches créditées (`session.credited`) sont déjà révélées/persistées avant le
+        // redémarrage — `revealedRounds`/`autoRevealedRounds` doivent refléter ça pour ne jamais
+        // re-créditer/re-diffuser une manche déjà close (idempotence, voir `persistRound`/
+        // `doRevealBySession`).
+        const revealedRounds = new Set(
+          Object.entries(session.credited)
+            .filter(([, credited]) => credited)
+            .map(([idx]) => Number(idx)),
+        )
+
+        const meta: SessionMeta = {
+          dbSessionId: row.id,
+          tenantId: session.tenantId,
+          playerDbIds,
+          revealedRounds,
+          autoRevealedRounds: new Set(revealedRounds),
+          statusActiveSet: session.phase !== 'lobby',
+          readingTimeout: null,
+        }
+        sessionMetaByEngineId.set(session.id, meta)
+        pinToSessionId.set(session.pin, row.id)
+
+        // Re-ancrage du chrono à neuf (voir la doc de `engine.reanchorTimer`) + reprogrammation/
+        // ré-émission — SEULES les phases 'reading'/'question' portent un chrono actif ; les
+        // autres ('lobby'/'reveal'/'scoreboard'/'podium') n'ont rien à reprogrammer, la
+        // reconnexion (déjà en place, T8) suffira à renvoyer le bon snapshot.
+        if (session.phase === 'reading') {
+          const reanchored = await engine.reanchorTimer(row.id)
+          const view = engine.readingView(reanchored)
+          io.to(roomName(row.id)).emit('question:reading', { ...view, startedAt: reanchored.readingStartedAt })
+          clearReadingTimeout(meta)
+          meta.readingTimeout = setTimeout(() => {
+            revealAnswersFlow(row.id, meta).catch(() => {})
+          }, view.readingTime * 1000)
+        } else if (session.phase === 'question') {
+          const reanchored = await engine.reanchorTimer(row.id)
+          const view = engine.playerQuestionView(reanchored)
+          if (view) io.to(roomName(row.id)).emit('question:show', view)
+          emitTimer(row.id, reanchored)
+        }
+      } catch {
+        // Session individuellement introuvable/corrompue (ex. `engine_state` absent malgré la
+        // ligne `game_session` — course avec un `host:create` jamais allé jusqu'à son premier
+        // `store.save`) : on l'ignore et on continue avec les autres candidates.
+      }
+    }
+  }
+
   io.on('connection', (socket: Socket) => {
     socket.on('host:create', async (payload: { quizId?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
@@ -582,6 +665,14 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
         } else {
           const session = await engine.podium(sessionId)
           await setSessionStatus(db, meta.dbSessionId, 'ended')
+          // Nettoyage (Task 4) : `engine_state` n'a plus lieu d'être conservé passé le podium —
+          // le rapport final reste entièrement lisible via `session_player`/`answer_record`
+          // (inchangés). N'affecte QUE la colonne DB : le cache en mémoire du store persistant
+          // garde l'état pour CE process (aucune régression de `host:reconnect`/`ranking` tant
+          // que le serveur ne redémarre pas) ; après un redémarrage, `listResumableSessions`
+          // exclurait de toute façon cette session (status déjà 'ended' ci-dessus) — ce nettoyage
+          // est donc une hygiène de stockage, pas une condition de correction de la réhydratation.
+          await clearEngineState(db, meta.dbSessionId)
           const top = engine.ranking(session).slice(0, 3)
           io.to(roomName(sessionId)).emit('podium', { top })
           reply({ phase: session.phase })
@@ -807,4 +898,11 @@ export function registerGameGateway(io: Server, deps: GameGatewayDeps): void {
       }
     })
   })
+
+  // Réhydratation au montage (Task 4) : APRÈS avoir câblé tous les handlers (une reconnexion
+  // qui arriverait entre-temps, ex. juste après `io.on('connection', …)`, trouve déjà tout en
+  // place) mais avant que `registerGameGateway` ne rende la main — `index.ts`/les tests
+  // (`buildApp`) l'attendent donc explicitement (`await registerGameGateway(...)`), garantissant
+  // qu'aucune reconnexion n'est traitée avant que la reprise ne soit terminée.
+  await rehydrateActiveSessions(SESSION_MAX_AGE)
 }

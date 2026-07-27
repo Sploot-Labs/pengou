@@ -2,12 +2,13 @@ import { join } from 'node:path'
 import { loadConfig } from '@splootlabs/shared'
 import { createDb, runMigrations, ensureDefaultTenant } from '@splootlabs/db'
 import { createAuth, enabledSocialProviders } from '@splootlabs/auth'
-import { createEngine, MemorySessionStore, generatePin } from '@splootlabs/game'
+import { createEngine, generatePin } from '@splootlabs/game'
 import { buildServer } from './app.js'
 import { registerAuth } from './auth-plugin.js'
 import { registerEditor } from './editor.js'
 import { attachRealtime } from './realtime.js'
 import { registerGameGateway } from './game-gateway.js'
+import { PersistentSessionStore } from './persistent-store.js'
 import { registerStatic } from './static.js'
 
 const config = loadConfig()
@@ -32,15 +33,19 @@ registerEditor(app, { db, auth, config })
 
 const io = attachRealtime(app, config)
 
-// Moteur de jeu : une seule instance (mémoire) pour tout le process — voir Plan 7 pour le
-// passage à un SessionStore Redis derrière la même interface.
+// Moteur de jeu : une seule instance par process, mais son état survit désormais aux
+// redémarrages (Task 3/4, persistance des sessions) — `PersistentSessionStore` fait un
+// write-through Postgres (colonne `engine_state`) derrière un cache mémoire, et
+// `registerGameGateway` réhydrate au montage les sessions encore actives et récentes
+// (`rehydrateActiveSessions`, dans `game-gateway.ts`). Un futur passage à un backend partagé
+// (Redis, multi-instance) resterait un simple changement d'implémentation de `SessionStore`.
 const engine = createEngine({
-  store: new MemorySessionStore(),
+  store: new PersistentSessionStore(db),
   now: () => Date.now(),
   genPin: generatePin,
   genId: () => crypto.randomUUID(),
 })
-registerGameGateway(io, { engine, db, auth, config })
+await registerGameGateway(io, { engine, db, auth, config })
 
 // En production, le build du SPA est copié à côté du serveur (voir Dockerfile).
 const webDist = process.env.WEB_DIST ?? join(process.cwd(), 'public')

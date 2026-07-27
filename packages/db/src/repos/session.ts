@@ -104,6 +104,21 @@ export async function listSessionPlayersByScore(db: Db, sessionId: string): Prom
     .orderBy(desc(schema.sessionPlayer.totalScore))
 }
 
+// Réhydratation (Task 4) : reconstruit `SessionMeta.playerDbIds` (playerId moteur → id
+// `session_player`) en matchant par `join_token` ↔ `session.players[*].joinToken` — pas de
+// tri particulier requis, l'appelant fait la correspondance lui-même.
+export async function listSessionPlayers(
+  db: Db,
+  sessionId: string,
+): Promise<Array<{ id: string; joinToken: string; nickname: string }>> {
+  return db.select({
+    id: schema.sessionPlayer.id,
+    joinToken: schema.sessionPlayer.joinToken,
+    nickname: schema.sessionPlayer.nickname,
+  }).from(schema.sessionPlayer)
+    .where(eq(schema.sessionPlayer.sessionId, sessionId))
+}
+
 // --- Persistance / résumé de session (checkpoint de l'état moteur) ---
 //
 // Le moteur (@splootlabs/game) sérialise périodiquement son état en mémoire

@@ -13,7 +13,7 @@ export {
 } from './repos/question.js'
 export {
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
-  listSessionPlayersByScore,
+  listSessionPlayersByScore, listSessionPlayers,
   saveEngineState, clearEngineState, loadEngineState, loadEngineStateByPin,
   listResumableSessions, endStaleSessions,
   type GameSession, type SessionPlayer, type AnswerRecord, type SessionStatus,

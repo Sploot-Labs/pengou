@@ -106,6 +106,14 @@ export interface Engine {
    * révélée avant `host:next`, ou si `host:reveal` est invoqué hors phase question) sans
    * dupliquer l'état moteur côté passerelle. */
   getSession(sessionId: string): Promise<GameSession>
+  /** Re-ancre à `now()` le chrono de la phase COURANTE, sans changer de phase ni avancer
+   * `currentIndex` (Task 4, réhydratation au boot) : après un redémarrage serveur, le chrono
+   * repart à zéro plutôt que d'hériter d'un `questionStartedAt`/`readingStartedAt` figé à
+   * l'instant du crash — décision produit du plan de persistance ("chrono qui repart à neuf").
+   * Seule façon propre de persister ce ré-ancrage : le moteur est le seul dépositaire du
+   * `store` — la passerelle n'y a pas d'accès direct. No-op sûr (retourne la session inchangée,
+   * SANS `store.save`) hors phases 'reading'/'question' : rien à ré-ancrer ailleurs. */
+  reanchorTimer(sessionId: string): Promise<GameSession>
 }
 
 export function createEngine(deps: EngineDeps): Engine {
@@ -377,6 +385,19 @@ export function createEngine(deps: EngineDeps): Engine {
 
     async getSession(sessionId) {
       return requireSession(sessionId)
+    },
+
+    async reanchorTimer(sessionId) {
+      const session = await requireSession(sessionId)
+      if (session.phase === 'reading') {
+        session.readingStartedAt = now()
+      } else if (session.phase === 'question') {
+        session.questionStartedAt = now()
+      } else {
+        return session
+      }
+      await store.save(session)
+      return session
     },
   }
 

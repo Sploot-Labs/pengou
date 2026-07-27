@@ -7,12 +7,13 @@ import {
 } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { loadConfig } from '@splootlabs/shared'
-import { createEngine, MemorySessionStore, generatePin } from '@splootlabs/game'
+import { createEngine, MemorySessionStore, generatePin, type SessionStore } from '@splootlabs/game'
 import { buildServer } from './app.js'
 import { registerAuth } from './auth-plugin.js'
 import { registerEditor } from './editor.js'
 import { attachRealtime } from './realtime.js'
 import { registerGameGateway } from './game-gateway.js'
+import { PersistentSessionStore } from './persistent-store.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
 
@@ -43,7 +44,12 @@ async function signUp(app: FastifyInstance, email: string): Promise<string> {
 
 type BuiltApp = { app: FastifyInstance; url: string }
 
-async function buildApp(): Promise<BuiltApp> {
+// `store` : injectable (Task 4, réhydratation) — `MemorySessionStore` par défaut (comportement
+// historique, aucune écriture DB superflue pour les tests qui n'ont pas besoin de survivre à un
+// "redémarrage") ; le test « survit à un redémarrage » ci-dessous passe explicitement un
+// `PersistentSessionStore(ctx.db)` (deux instances successives, même base — simule un process
+// neuf) pour prouver que la réhydratation fonctionne à travers un VRAI aller-retour Postgres.
+async function buildApp(store: SessionStore = new MemorySessionStore()): Promise<BuiltApp> {
   const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'single' })
   const auth = createAuth(ctx.db, {
     secret: 'test-secret-at-least-32-chars-long!!',
@@ -56,12 +62,15 @@ async function buildApp(): Promise<BuiltApp> {
   const io = attachRealtime(app, config)
 
   const engine = createEngine({
-    store: new MemorySessionStore(),
+    store,
     now: () => Date.now(),
     genPin: generatePin,
     genId: () => crypto.randomUUID(),
   })
-  registerGameGateway(io, { engine, db: ctx.db, auth, config })
+  // Réhydratation (Task 4) : `registerGameGateway` réhydrate les sessions actives à son montage
+  // — `await` ici garantit qu'elle est terminée avant que le test n'interagisse avec l'app (pas
+  // de course entre la reprise et les premiers `player:join`/`host:reconnect` du test).
+  await registerGameGateway(io, { engine, db: ctx.db, auth, config })
 
   await app.listen({ port: 0, host: '127.0.0.1' })
   const address = app.server.address()
@@ -1579,5 +1588,195 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         await app.close()
       }
     }, 20_000)
+  })
+
+  // Task 4 — réhydratation au boot : un `PersistentSessionStore` (Task 3) écrit l'état moteur en
+  // base à chaque mutation. Ici on simule un VRAI redémarrage serveur : deux instances
+  // successives de l'app, chacune avec son PROPRE `PersistentSessionStore` (cache mémoire froid)
+  // mais la MÊME base Postgres (`ctx.db`) — la seconde ne partage RIEN en mémoire avec la
+  // première, exactement comme un process qui reprendrait après un crash/déploiement.
+  describe('Task 4 — réhydratation au boot (redémarrage serveur)', () => {
+    it("survit à un redémarrage (phase 'question') : host:reconnect sur la NOUVELLE instance retrouve la même session, la bonne phase, et rejoue joueurs + question au socket", async () => {
+      const store1 = new PersistentSessionStore(ctx.db)
+      const { app: app1, url: url1 } = await buildApp(store1)
+      const clients1: ClientSocket[] = []
+      let sessionId = ''
+      let pin = ''
+      let cookie = ''
+      let timerBeforeRestart = 0
+      try {
+        cookie = await signUp(app1, 'gateway-restart-question@example.com')
+        const quizRes = await app1.inject({
+          method: 'POST',
+          url: '/api/quizzes',
+          payload: { title: 'Quiz redémarrage' },
+          headers: { 'content-type': 'application/json', cookie },
+        })
+        expect(quizRes.statusCode).toBe(201)
+        const quiz = quizRes.json() as { id: string }
+
+        const questionRes = await app1.inject({
+          method: 'POST',
+          url: `/api/quizzes/${quiz.id}/questions`,
+          payload: {
+            type: 'mcq',
+            prompt: 'Capitale de la France ?',
+            timeLimit: 20,
+            readingTime: 0,
+            payload: {
+              options: [
+                { label: 'Paris', correct: true },
+                { label: 'Lyon', correct: false },
+              ],
+            },
+          },
+          headers: { 'content-type': 'application/json', cookie },
+        })
+        expect(questionRes.statusCode).toBe(201)
+
+        const hostSocket = await connectClient(url1, { cookie })
+        clients1.push(hostSocket)
+        const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
+          hostSocket,
+          'host:create',
+          { quizId: quiz.id },
+        )
+        expect(created.error).toBeUndefined()
+        sessionId = created.sessionId!
+        pin = created.pin!
+
+        const player1 = await connectClient(url1)
+        clients1.push(player1)
+        const join1 = await ack<{ playerId?: string; error?: string }>(player1, 'player:join', { pin, nickname: 'Alice' })
+        expect(join1.error).toBeUndefined()
+
+        const timerPromise = waitFor<{ startedAt?: number }>(player1, 'timer')
+        const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+        expect(startAck.error).toBeUndefined()
+        const timer = await timerPromise
+        timerBeforeRestart = timer.startedAt!
+        expect(typeof timerBeforeRestart).toBe('number')
+
+        // Laisse s'écouler un peu de temps réel AVANT le "redémarrage" — sert à prouver plus bas
+        // que le chrono repart bien à neuf (nouveau `startedAt`, strictement postérieur), et pas
+        // seulement recopié tel quel depuis l'état persisté.
+        await new Promise((resolve) => setTimeout(resolve, 300))
+      } finally {
+        for (const c of clients1) c.disconnect()
+        await app1.close()
+      }
+
+      // "Redémarrage" : nouveau store persistant (cache mémoire froid), même base Postgres.
+      const store2 = new PersistentSessionStore(ctx.db)
+      const { app: app2, url: url2 } = await buildApp(store2)
+      const clients2: ClientSocket[] = []
+      try {
+        const hostSocketB = await connectClient(url2, { cookie })
+        clients2.push(hostSocketB)
+
+        // Posés AVANT l'appel : `emitReconnectSnapshot` les émet de façon synchrone dans le
+        // handler `host:reconnect`, avant que son ack ne résolve côté client.
+        const lobbyPromise = waitFor<{ players: Array<{ id: string; nickname: string }> }>(hostSocketB, 'lobby:update')
+        const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(hostSocketB, 'question:show')
+        const timerAfterRestartPromise = waitFor<{ timeLimit?: number; startedAt?: number }>(hostSocketB, 'timer')
+
+        const reconnectAck = await ack<{ sessionId?: string; pin?: string; phase?: string; error?: string }>(
+          hostSocketB,
+          'host:reconnect',
+          { sessionId },
+        )
+        expect(reconnectAck.error).toBeUndefined()
+        // Même id partout (Task 2, unification moteur↔DB) : la NOUVELLE instance retrouve la
+        // session sous EXACTEMENT le même id, reconstruit depuis `game_session`/`engine_state`.
+        expect(reconnectAck.sessionId).toBe(sessionId)
+        expect(reconnectAck.phase).toBe('question')
+
+        const lobby = await lobbyPromise
+        expect(lobby.players).toHaveLength(1)
+        expect(lobby.players[0]!.nickname).toBe('Alice')
+
+        const show = await showPromise
+        expect(show.payload).toBeDefined()
+        for (const option of show.payload.options) expect(option).not.toHaveProperty('correct')
+        expect(JSON.stringify(show)).not.toContain('correct') // anti-triche, même garde qu'ailleurs
+
+        const timerAfterRestart = await timerAfterRestartPromise
+        expect(timerAfterRestart.timeLimit).toBe(20)
+        expect(typeof timerAfterRestart.startedAt).toBe('number')
+        // Le chrono est bien ré-ancré À NEUF (décision produit : "chrono qui repart à neuf") —
+        // le nouveau `startedAt` est strictement postérieur à celui d'avant redémarrage, jamais
+        // recopié tel quel depuis l'état persisté (qui daterait d'avant le délai réel ci-dessus).
+        expect(timerAfterRestart.startedAt!).toBeGreaterThan(timerBeforeRestart)
+      } finally {
+        for (const c of clients2) c.disconnect()
+        await app2.close()
+      }
+    }, 30_000)
+
+    it("survit à un redémarrage (phase 'reading') : ré-ancre readingStartedAt à neuf ET reprogramme la révélation automatique pour le readingTime COMPLET (pas le reliquat)", async () => {
+      const store1 = new PersistentSessionStore(ctx.db)
+      const { app: app1, url: url1 } = await buildApp(store1)
+      const clients1: ClientSocket[] = []
+      let sessionId = ''
+      let cookie = ''
+      let readingStartedAtBeforeRestart = 0
+      try {
+        const setup = await setupHostedSessionWithReading(app1, url1, 'gateway-restart-reading@example.com', 2, 20)
+        clients1.push(setup.hostSocket)
+        sessionId = setup.sessionId
+        cookie = setup.cookie
+
+        const player1 = await connectClient(url1)
+        clients1.push(player1)
+        const join1 = await ack<{ error?: string }>(player1, 'player:join', { pin: setup.pin, nickname: 'Alice' })
+        expect(join1.error).toBeUndefined()
+
+        const readingPromise = waitFor<{ startedAt?: number; readingTime?: number }>(player1, 'question:reading')
+        const startAck = await ack<{ error?: string }>(setup.hostSocket, 'host:start', {})
+        expect(startAck.error).toBeUndefined()
+        const reading = await readingPromise
+        readingStartedAtBeforeRestart = reading.startedAt!
+        expect(reading.readingTime).toBe(2)
+
+        // Redémarrage AVANT échéance des 2 s de lecture (reliquat encore présent) — c'est
+        // précisément ce reliquat que le re-ancrage "à neuf" doit ignorer.
+        await new Promise((resolve) => setTimeout(resolve, 300))
+      } finally {
+        for (const c of clients1) c.disconnect()
+        await app1.close()
+      }
+
+      const store2 = new PersistentSessionStore(ctx.db)
+      const { app: app2, url: url2 } = await buildApp(store2)
+      const clients2: ClientSocket[] = []
+      try {
+        const hostSocketB = await connectClient(url2, { cookie })
+        clients2.push(hostSocketB)
+
+        const reconnectReadingPromise = waitFor<{ startedAt?: number; readingTime?: number }>(hostSocketB, 'question:reading')
+        const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(hostSocketB, 'question:show')
+
+        const reconnectAck = await ack<{ sessionId?: string; phase?: string; error?: string }>(
+          hostSocketB,
+          'host:reconnect',
+          { sessionId },
+        )
+        expect(reconnectAck.error).toBeUndefined()
+        expect(reconnectAck.phase).toBe('reading')
+
+        const reconnectReading = await reconnectReadingPromise
+        expect(reconnectReading.readingTime).toBe(2)
+        // Ré-ancré à neuf : strictement postérieur au `startedAt` d'avant redémarrage.
+        expect(reconnectReading.startedAt!).toBeGreaterThan(readingStartedAtBeforeRestart)
+
+        // La révélation automatique a bien été REPROGRAMMÉE côté nouvelle instance : elle finit
+        // par arriver (readingTime complet, 2 s, depuis le redémarrage) — sans reprogrammation,
+        // plus aucun minuteur ne courrait jamais pour cette session dans le nouveau process.
+        await showPromise
+      } finally {
+        for (const c of clients2) c.disconnect()
+        await app2.close()
+      }
+    }, 30_000)
   })
 })
