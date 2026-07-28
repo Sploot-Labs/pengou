@@ -123,6 +123,32 @@ Pas de `.github/`. Les scripts `typecheck`/`test`/`build` existent mais ne tourn
 
 ---
 
+## 4bis. État d'avancement de la remédiation (branche `feat/audit-remediation`, 2026-07-28)
+
+Cycle réalisé : **corrections → re-audit adversarial (sécurité + régression) → corrections**.
+Suite verte de bout en bout (**385 tests**, +21 vs baseline). 9 commits.
+
+**✅ Traité et vérifié**
+- **Licence** : Apache-2.0 (LICENSE, NOTICE, LICENSING.md, 8 package.json, templates).
+- **P0-1 accès intra-tenant** : scoping `ownerId` (quiz + rapports) + `host:create` ; test de non-régression. *(reste : fermeture inscription — livrée en option `DISABLE_SIGNUP`.)*
+- **P0-2 OSS** : README produit, CONTRIBUTING, SECURITY, CODE_OF_CONDUCT, templates `.github`.
+- **P0-3 honnêteté scaling** : avertissement boot + README « mono-instance ». *(vraie correction Redis = P0-3 réel, non faite.)*
+- **P0-4 CI** : GitHub Actions (lint/typecheck/build/test + audit) + Biome.
+- **P1-1/P1-2 rate-limit** : helmet + `@fastify/rate-limit` + `trustProxy` + Better Auth anti-brute-force + PIN CSPRNG.
+- **P1-3 lint/format** : Biome (config alignée, 0 erreur bloquante).
+- **P1-6 éviction mémoire** : parties terminées évincées après délai de grâce (avec garde anti-régression PIN). *(reste : parties abandonnées — cf. « abandon auto ».)*
+- **P1-11 fichiers OSS** : faits.
+- **P2** : bornes de longueur, `cover`, validation `media` (allowlist), cookies `Secure`, en-têtes helmet.
+
+**⏳ Restant, par priorité (confirmé par le re-audit)**
+1. **P1-8 atomicité reveal/persistRound** (intégrité) — fenêtre de crash entre `engine.reveal()` et `persistRound` (`game-gateway.ts:242-263`). **Fix cadré** : index unique sur `answer_record (session_id, question_id, player_id)` + `ON CONFLICT DO NOTHING` dans `recordAnswer` (migration), puis reconstruire l'état « persisté » depuis la présence en DB plutôt que depuis `credited` → `persistRound` rejouable sans double-insert. Nécessite des tests de simulation de crash dédiés (le simple réordonnancement déplace la corruption, il ne la corrige pas).
+2. **P1-7 timer serveur autoritatif phase `question`** — symétriser `startQuestionFlow` (un `setTimeout` n'existe que pour `reading`) pour auto-révéler à expiration de `timeLimit` ; reprogrammer à la réhydratation. (Décision produit : auto-clore une manche expirée.)
+3. **P1-4/P1-5 contrats Socket.IO typés** — package `contracts` (zod) partagé front/back (supprime le stringly-typed + ~80 l. de types dupliqués + 14 casts).
+4. **P0-3 réel / P0-5** — adaptateur Redis + index de routage externalisés + fin du blob write-through O(n²) (uniquement quand le multi-instance devient réel).
+5. **P1-9 migrations dédiées, P1-10 observabilité, éviction des parties abandonnées, découpage des fichiers-Dieu.**
+
+---
+
 ## 5. Feuille de route d'action
 
 Découpée en jalons livrables. L'ordre privilégie : *ne rien exposer d'exploitable ou d'illégal* → *ne pas mentir sur les capacités* → *fiabiliser* → *ouvrir proprement à la contribution*.
