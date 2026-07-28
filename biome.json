@@ -1,0 +1,57 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "organizeImports": { "enabled": false },
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "files": {
+    "ignore": ["**/dist/**", "**/node_modules/**", ".worktrees/**", "**/drizzle/**", "pnpm-lock.yaml"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "asNeeded",
+      "trailingCommas": "all"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "style": {
+        "noNonNullAssertion": "off",
+        "noParameterAssign": "off",
+        "useSingleVarDeclarator": "off",
+        "useTemplate": "warn",
+        "useNumberNamespace": "off",
+        "useExponentiationOperator": "warn"
+      },
+      "suspicious": {
+        "noArrayIndexKey": "off",
+        "noRedeclare": "off"
+      },
+      "complexity": {
+        "noForEach": "off",
+        "noUselessSwitchCase": "warn"
+      },
+      "performance": {
+        "noDelete": "warn"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "warn"
+      },
+      "a11y": {
+        "noAriaHiddenOnFocusable": "warn",
+        "noSvgWithoutTitle": "off",
+        "useValidAnchor": "warn",
+        "useButtonType": "warn",
+        "useKeyWithClickEvents": "off",
+        "useSemanticElements": "warn"
+      }
+    }
+  }
+}

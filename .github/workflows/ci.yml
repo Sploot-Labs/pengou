@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Annule les exécutions précédentes encore en cours sur la même réf (économie de runners).
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: lint · typecheck · build · test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4 # lit packageManager: pnpm@… dans package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint (Biome)
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Build
+        run: pnpm build
+
+      # Les suites DB/e2e utilisent @testcontainers/postgresql : Docker est disponible
+      # d'office sur ubuntu-latest. Timeout généreux pour le premier pull d'image Postgres.
+      - name: Test
+        run: pnpm test
+        timeout-minutes: 15
+
+  audit:
+    name: pnpm audit (dépendances)
+    runs-on: ubuntu-latest
+    # Informel : ne bloque pas la CI (une advisory sur une dép transitive ne doit pas
+    # geler les PR), mais rend les vulnérabilités visibles dans les logs.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --prod
