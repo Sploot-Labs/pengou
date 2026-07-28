@@ -22,6 +22,29 @@ function isQuestionType(value: unknown): value is QuestionType {
   return typeof value === 'string' && Object.prototype.hasOwnProperty.call(questionTypes, value)
 }
 
+// Bornes de longueur (P2).
+const MAX_PROMPT = 500
+const MAX_MEDIA = 2048
+function tooLong(value: unknown, max: number): boolean {
+  return typeof value === 'string' && value.length > max
+}
+
+// Validation de `media` (P2, anti-XSS latent) : `media` n'est aujourd'hui pas rendu comme URL
+// brute, mais le deviendrait au premier composant qui l'affiche — on refuse donc dès l'écriture
+// les schémas dangereux (javascript:/data:/vbscript:) et on borne la longueur. Sont acceptés :
+// une URL http(s) ou une référence relative (chemin/clé de média servie par l'app).
+function isSafeMedia(value: string): boolean {
+  if (value.length > MAX_MEDIA) return false
+  // Refuse tout caractere de controle (U+0000-U+001F, U+007F).
+  for (let i = 0; i < value.length; i++) {
+    const c = value.charCodeAt(i)
+    if (c < 0x20 || c === 0x7f) return false
+  }
+  // Refuse les schemas d URL dangereux (XSS latent). http(s) et references relatives OK.
+  const lowered = value.trimStart().toLowerCase()
+  return !(lowered.startsWith('javascript:') || lowered.startsWith('data:') || lowered.startsWith('vbscript:'))
+}
+
 export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
   const { db, config } = deps
 
@@ -42,6 +65,9 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       if (!isNonEmptyString(body?.prompt)) {
         return reply.code(400).send({ error: "L'énoncé (prompt) est requis." })
       }
+      if (tooLong(body.prompt, MAX_PROMPT)) {
+        return reply.code(400).send({ error: `L'énoncé est trop long (${MAX_PROMPT} caractères max).` })
+      }
       if (!isPositiveInt(body?.timeLimit)) {
         return reply.code(400).send({ error: 'timeLimit doit être un entier positif.' })
       }
@@ -59,6 +85,9 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       }
 
       const media = isNonEmptyString(body?.media) ? body.media : undefined
+      if (media !== undefined && !isSafeMedia(media)) {
+        return reply.code(400).send({ error: 'media invalide (URL http(s) ou référence relative attendue).' })
+      }
 
       const question = await createQuestion(scope, request.params.quizId, {
         type: body.type,
@@ -107,6 +136,7 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
 
       if (body?.prompt !== undefined) {
         if (!isNonEmptyString(body.prompt)) return reply.code(400).send({ error: "L'énoncé (prompt) ne peut pas être vide." })
+        if (tooLong(body.prompt, MAX_PROMPT)) return reply.code(400).send({ error: `L'énoncé est trop long (${MAX_PROMPT} caractères max).` })
         patch.prompt = body.prompt
       }
       if (body?.timeLimit !== undefined) {
@@ -120,6 +150,9 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       if (body?.media !== undefined) {
         if (body.media !== null && typeof body.media !== 'string') {
           return reply.code(400).send({ error: 'media doit être une chaîne ou null.' })
+        }
+        if (typeof body.media === 'string' && !isSafeMedia(body.media)) {
+          return reply.code(400).send({ error: 'media invalide (URL http(s) ou référence relative attendue).' })
         }
         patch.media = body.media
       }

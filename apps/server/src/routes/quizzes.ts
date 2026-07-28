@@ -10,6 +10,13 @@ function isNonEmptyString(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0
 }
 
+// Bornes de longueur (P2) : évite le stockage/rediffusion de chaînes démesurées.
+const MAX_TITLE = 200
+const MAX_DESCRIPTION = 2000
+function tooLong(value: unknown, max: number): boolean {
+  return typeof value === 'string' && value.length > max
+}
+
 export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
   const { db, config } = deps
 
@@ -20,6 +27,12 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
     const body = request.body as { title?: unknown; description?: unknown } | undefined
     if (!isNonEmptyString(body?.title)) {
       return reply.code(400).send({ error: 'Le titre est requis.' })
+    }
+    if (tooLong(body.title, MAX_TITLE)) {
+      return reply.code(400).send({ error: `Le titre est trop long (${MAX_TITLE} caractères max).` })
+    }
+    if (tooLong(body?.description, MAX_DESCRIPTION)) {
+      return reply.code(400).send({ error: `La description est trop longue (${MAX_DESCRIPTION} caractères max).` })
     }
     const description = isNonEmptyString(body?.description) ? body.description : undefined
 
@@ -49,12 +62,14 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
     const patch: Partial<{ title: string; description: string | null; cover: string | null }> = {}
     if (body?.title !== undefined) {
       if (!isNonEmptyString(body.title)) return reply.code(400).send({ error: 'Le titre ne peut pas être vide.' })
+      if (tooLong(body.title, MAX_TITLE)) return reply.code(400).send({ error: `Le titre est trop long (${MAX_TITLE} caractères max).` })
       patch.title = body.title
     }
     if (body?.description !== undefined) {
       if (body.description !== null && typeof body.description !== 'string') {
         return reply.code(400).send({ error: 'La description doit être une chaîne ou null.' })
       }
+      if (tooLong(body.description, MAX_DESCRIPTION)) return reply.code(400).send({ error: `La description est trop longue (${MAX_DESCRIPTION} caractères max).` })
       patch.description = body.description
     }
     if (body?.cover !== undefined) {

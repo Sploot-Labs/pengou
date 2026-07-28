@@ -699,9 +699,12 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
         const pin = payload?.pin
-        const nickname = payload?.nickname
         if (typeof pin !== 'string' || !pin) throw new Error('pin requis')
-        if (typeof nickname !== 'string' || !nickname.trim()) throw new Error('nickname requis')
+        // Pseudo borné à 32 caractères (P2) et trimmé : sans borne, un joueur pouvait diffuser
+        // un pseudo géant re-broadcasté à toute la room (lobby:update) et persisté en base.
+        const nickname = typeof payload?.nickname === 'string' ? payload.nickname.trim() : ''
+        if (!nickname) throw new Error('nickname requis')
+        if (nickname.length > 32) throw new Error('nickname trop long (32 caractères max)')
 
         const sessionId = pinToSessionId.get(pin)
         if (!sessionId) throw new Error('PIN invalide')

@@ -2,13 +2,17 @@ import { z } from 'zod'
 import type { QuestionTypeDef } from './types.js'
 import { speedBonus } from './scoring.js'
 
+// Bornes de longueur (P2) : réponses acceptées ≤ 200 car., et 20 réponses valides max —
+// évite l'abus stockage sur le payload de question.
 const textSchema = z.object({
-  answers: z.array(z.string().min(1)).min(1),
+  answers: z.array(z.string().min(1).max(200)).min(1).max(20),
   caseSensitive: z.boolean().optional().default(false),
 })
 export type TextPayload = z.infer<typeof textSchema>
 
-const answerSchema = z.object({ text: z.string() })
+// Réponse joueur bornée à 500 car. (P2) : un joueur ne peut pas soumettre un mégaoctet
+// (re-diffusé/persisté), tout en laissant de la marge pour une réponse libre légitime.
+const answerSchema = z.object({ text: z.string().max(500) })
 export type TextAnswer = z.infer<typeof answerSchema>
 
 // Plage Unicode des marques diacritiques combinantes (U+0300–U+036F) laissées par normalize('NFD').
