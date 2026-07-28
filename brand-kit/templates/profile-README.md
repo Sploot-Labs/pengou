@@ -13,7 +13,7 @@
 
   ![PRs Welcome](https://img.shields.io/badge/PRs-welcome%20%F0%9F%90%BE-D9772B?style=flat-square)
   ![Good first issues](https://img.shields.io/badge/good%20first%20issue-hello!-1E5F60?style=flat-square)
-  ![License MIT](https://img.shields.io/badge/license-MIT-3F7D57?style=flat-square)
+  ![License Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-3F7D57?style=flat-square)
 </div>
 
 ---

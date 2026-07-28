@@ -9,7 +9,7 @@
 
   **{{ONE_LINE — ce que ça fait, pour qui. Une phrase claire.}}**
 
-  ![License](https://img.shields.io/badge/license-MIT-3F7D57?style=flat-square)
+  ![License](https://img.shields.io/badge/license-Apache--2.0-3F7D57?style=flat-square)
   ![Build](https://img.shields.io/badge/build-passing-3F7D57?style=flat-square)
   ![PRs Welcome](https://img.shields.io/badge/PRs-welcome%20%F0%9F%90%BE-D9772B?style=flat-square)
   ![By Sploot Labs](https://img.shields.io/badge/by-sploot%20labs-1E5F60?style=flat-square)
@@ -47,6 +47,12 @@ Regarde les [`good first issue`]({{ISSUES_URL}}), ou ouvre une discussion. Voir 
 
 ## 📜 Licence
 
-MIT © Sploot Labs — voir [LICENSE](./LICENSE).
+Apache-2.0 © Sploot Labs — voir [LICENSE](./LICENSE).
+
+<!--
+  Licence par défaut Sploot Labs : Apache-2.0 (open source permissif + clause de brevets),
+  pour une réutilisation et une adoption maximales. Voir Arena / LICENSING.md comme référence.
+-->
+
 
 <div align="center"><sub>Un projet <a href="https://github.com/splootlabs">Sploot Labs</a> · à hauteur de pattes 🐾</sub></div>
