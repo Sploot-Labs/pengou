@@ -40,17 +40,18 @@ registerEditor(app, { db, auth, config })
 
 const io = attachRealtime(app, config)
 
-// Honnêteté de configuration (P0-3) : `REDIS_URL` fait passer `config.scaling` à 'redis', mais
-// l'adaptateur Redis Socket.IO n'est PAS encore branché et l'état de jeu (Maps de la passerelle,
-// minuteurs) reste local au process. Tant que ce n'est pas résolu, le déploiement est
-// STRICTEMENT MONO-INSTANCE : ne pas lancer plusieurs répliques derrière un load balancer, sous
-// peine d'états divergents entre joueurs. On avertit bruyamment plutôt que de laisser croire au
-// scaling annoncé par /health.
+// Honnêteté de configuration (P0-3) : avec `REDIS_URL`, l'adaptateur Redis Socket.IO est branché
+// (pub/sub cross-instance, voir attachRealtime), MAIS l'état de ROUTAGE de la passerelle
+// (pinToSessionId, tokens d'écran, minuteurs) reste LOCAL au process. Le multi-instance n'est donc
+// PAS encore pleinement fonctionnel (un player:join sur une autre instance ne retrouve pas le PIN).
+// Tant que ce routage n'est pas externalisé, garder un déploiement MONO-INSTANCE. On avertit
+// bruyamment plutôt que de laisser croire au scaling annoncé par /health.
 if (config.scaling === 'redis') {
   app.log.warn(
-    "REDIS_URL est défini mais l'adaptateur Redis Socket.IO n'est pas encore branché : " +
-      'déploiement MONO-INSTANCE uniquement (état de jeu et pub/sub temps réel locaux au process). ' +
-      'Ne pas exécuter plusieurs instances derrière un load balancer pour le moment.',
+    "REDIS_URL défini : adaptateur Redis Socket.IO branché (pub/sub cross-instance), mais l'état " +
+      'de routage de la passerelle reste local au process → multi-instance PAS encore pleinement ' +
+      'fonctionnel. Garder UNE seule instance tant que le routage (PIN→session, tokens, minuteurs) ' +
+      "n'est pas externalisé.",
   )
 }
 
