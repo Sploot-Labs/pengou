@@ -64,3 +64,17 @@ describe('loadConfig', () => {
     expect(cfg.authSecret).toBe(secret)
   })
 })
+
+describe('loadConfig — inactivité/balayage', () => {
+  it('défauts : 30 min d\'inactivité, 5 min de balayage (en ms)', () => {
+    const c = loadConfig({ NODE_ENV: 'test' })
+    expect(c.sessionInactivityTimeoutMs).toBe(30 * 60_000)
+    expect(c.sessionSweepIntervalMs).toBe(5 * 60_000)
+  })
+
+  it('surcharge via env (minutes → ms)', () => {
+    const c = loadConfig({ NODE_ENV: 'test', SESSION_INACTIVITY_TIMEOUT_MINUTES: '10', SESSION_SWEEP_INTERVAL_MINUTES: '1' })
+    expect(c.sessionInactivityTimeoutMs).toBe(10 * 60_000)
+    expect(c.sessionSweepIntervalMs).toBe(1 * 60_000)
+  })
+})

@@ -15,6 +15,8 @@ const EnvSchema = z.object({
   FACEBOOK_CLIENT_SECRET: z.string().optional(),
   GITHUB_CLIENT_ID: z.string().optional(),
   GITHUB_CLIENT_SECRET: z.string().optional(),
+  SESSION_INACTIVITY_TIMEOUT_MINUTES: z.coerce.number().int().positive().default(30),
+  SESSION_SWEEP_INTERVAL_MINUTES: z.coerce.number().int().positive().default(5),
 })
 
 export type OAuthProviderCreds = {
@@ -32,6 +34,8 @@ export type AppConfig = {
   scaling: 'memory' | 'redis'
   authSecret?: string
   authUrl: string
+  sessionInactivityTimeoutMs: number
+  sessionSweepIntervalMs: number
   oauth: {
     google: OAuthProviderCreds
     facebook: OAuthProviderCreds
@@ -58,6 +62,8 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     scaling: parsed.REDIS_URL ? 'redis' : 'memory',
     authSecret: parsed.BETTER_AUTH_SECRET,
     authUrl: parsed.BETTER_AUTH_URL,
+    sessionInactivityTimeoutMs: parsed.SESSION_INACTIVITY_TIMEOUT_MINUTES * 60_000,
+    sessionSweepIntervalMs: parsed.SESSION_SWEEP_INTERVAL_MINUTES * 60_000,
     oauth: {
       google: { clientId: parsed.GOOGLE_CLIENT_ID, clientSecret: parsed.GOOGLE_CLIENT_SECRET },
       facebook: { clientId: parsed.FACEBOOK_CLIENT_ID, clientSecret: parsed.FACEBOOK_CLIENT_SECRET },
