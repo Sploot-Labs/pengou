@@ -140,12 +140,14 @@ Suite verte de bout en bout (**385 tests**, +21 vs baseline). 9 commits.
 - **P1-11 fichiers OSS** : faits.
 - **P2** : bornes de longueur, `cover`, validation `media` (allowlist), cookies `Secure`, en-têtes helmet.
 
-**⏳ Restant, par priorité (confirmé par le re-audit)**
-1. **P1-8 atomicité reveal/persistRound** (intégrité) — fenêtre de crash entre `engine.reveal()` et `persistRound` (`game-gateway.ts:242-263`). **Fix cadré** : index unique sur `answer_record (session_id, question_id, player_id)` + `ON CONFLICT DO NOTHING` dans `recordAnswer` (migration), puis reconstruire l'état « persisté » depuis la présence en DB plutôt que depuis `credited` → `persistRound` rejouable sans double-insert. Nécessite des tests de simulation de crash dédiés (le simple réordonnancement déplace la corruption, il ne la corrige pas).
-2. **P1-7 timer serveur autoritatif phase `question`** — symétriser `startQuestionFlow` (un `setTimeout` n'existe que pour `reading`) pour auto-révéler à expiration de `timeLimit` ; reprogrammer à la réhydratation. (Décision produit : auto-clore une manche expirée.)
-3. **P1-4/P1-5 contrats Socket.IO typés** — package `contracts` (zod) partagé front/back (supprime le stringly-typed + ~80 l. de types dupliqués + 14 casts).
-4. **P0-3 réel / P0-5** — adaptateur Redis + index de routage externalisés + fin du blob write-through O(n²) (uniquement quand le multi-instance devient réel).
-5. **P1-9 migrations dédiées, P1-10 observabilité, éviction des parties abandonnées, découpage des fichiers-Dieu.**
+**✅ Ajouté au 2ᵉ cycle (P1-8 puis P1-7, chacun avec re-audit)**
+- **P1-8 atomicité reveal/persistRound** — index unique `answer_record(session,question,player)` [migration 0010] + `recordAnswer` idempotent (ON CONFLICT DO NOTHING) + **cicatrisation au boot** (la réhydratation ré-persiste les manches créditées). Tests : idempotence repo + cicatrisation bout-en-bout.
+- **P1-7 timer serveur autoritatif phase `question`** — `questionTimeout` symétrique du minuteur de lecture ; auto-révélation à expiration de `timeLimit` (gardée par `autoRevealedRounds`, annulée par toute révélation manuelle), reprogrammée à la réhydratation. Test : auto-révélation sans host:reveal.
+
+**⏳ Restant, par priorité**
+1. **P1-4/P1-5 contrats Socket.IO typés** — package `contracts` (zod) partagé front/back (supprime le stringly-typed + ~80 l. de types dupliqués + 14 casts).
+2. **P0-3 réel / P0-5** — adaptateur Redis + index de routage externalisés + fin du blob write-through O(n²) (uniquement quand le multi-instance devient réel).
+3. **P1-9 migrations dédiées, P1-10 observabilité, découpage des fichiers-Dieu.**
 
 ---
 
