@@ -130,6 +130,32 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
     await app.close()
   })
 
+  it('GET /api/sessions?status=ended ne renvoie que les parties terminées', async () => {
+    const app = await buildApp()
+    const cookie = await signUp(app, 'hote-status@example.com')
+    const me = await app.inject({ method: 'GET', url: '/api/me', headers: { cookie } })
+    const userId = (me.json() as { user: { id: string } }).user.id
+
+    const created = await app.inject({
+      method: 'POST', url: '/api/quizzes', payload: { title: 'x' },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    const tenantId = (created.json() as { tenantId: string }).tenantId
+    const scope = tenantScope(ctx.db, tenantId)
+
+    await seedFinishedSession(userId, tenantId, '555555')
+    // Une session encore en lobby (jamais démarrée) : ne doit pas ressortir avec ?status=ended.
+    const quiz = await createQuiz(scope, { ownerId: userId, title: 'Quiz lobby' })
+    await createGameSession(scope, { quizId: quiz.id, hostId: userId, pin: '666666' })
+
+    const res = await app.inject({ method: 'GET', url: '/api/sessions?status=ended', headers: { cookie } })
+    expect(res.statusCode).toBe(200)
+    const rows = res.json() as { status: string }[]
+    expect(rows.every((r) => r.status === 'ended')).toBe(true)
+
+    await app.close()
+  })
+
   it('GET /api/sessions/:id renvoie les agrégats du rapport', async () => {
     const app = await buildApp()
     const cookie = await signUp(app, 'hote2@example.com')

@@ -19,6 +19,19 @@ function parseLimit(raw: unknown): number | undefined {
   return Math.min(n, MAX_LIMIT)
 }
 
+const VALID_STATUSES = ['lobby', 'active', 'ended', 'abandoned'] as const
+type SessionStatus = (typeof VALID_STATUSES)[number]
+
+/** Parse `?status=a,b` en un jeu de statuts valides ; ignore les valeurs inconnues. Renvoie
+ * `undefined` si rien de valide (⇒ pas de filtre, comme une query absente). */
+function parseStatuses(raw: unknown): SessionStatus[] | undefined {
+  if (typeof raw !== 'string') return undefined
+  const parsed = raw.split(',')
+    .map((s) => s.trim())
+    .filter((s): s is SessionStatus => (VALID_STATUSES as readonly string[]).includes(s))
+  return parsed.length > 0 ? parsed : undefined
+}
+
 /** Section CSV : une ligne titre, une ligne d'en-têtes, puis les lignes de données. Deux sections
  * (joueurs, questions) séparées par une ligne vide dans le même fichier — plus simple à consommer
  * dans un tableur qu'un ZIP à deux fichiers, et les deux blocs sont clairement titrés. */
@@ -50,9 +63,10 @@ export function registerReportRoutes(app: FastifyInstance, deps: Deps): void {
   app.get('/api/sessions', { preHandler: requireUser }, async (request, reply) => {
     const scope = await resolveScopeOr403(request, reply, db, config)
     if (!scope) return
-    const query = request.query as { limit?: unknown } | undefined
+    const query = request.query as { limit?: unknown; status?: unknown } | undefined
     const limit = parseLimit(query?.limit)
-    return listSessions(scope, limit === undefined ? undefined : { limit })
+    const status = parseStatuses(query?.status)
+    return listSessions(scope, { limit, status })
   })
 
   app.get<{ Params: { sessionId: string } }>(
