@@ -144,10 +144,18 @@ Suite verte de bout en bout (**385 tests**, +21 vs baseline). 9 commits.
 - **P1-8 atomicité reveal/persistRound** — index unique `answer_record(session,question,player)` [migration 0010] + `recordAnswer` idempotent (ON CONFLICT DO NOTHING) + **cicatrisation au boot** (la réhydratation ré-persiste les manches créditées). Tests : idempotence repo + cicatrisation bout-en-bout.
 - **P1-7 timer serveur autoritatif phase `question`** — `questionTimeout` symétrique du minuteur de lecture ; auto-révélation à expiration de `timeLimit` (gardée par `autoRevealedRounds`, annulée par toute révélation manuelle), reprogrammée à la réhydratation. Test : auto-révélation sans host:reveal.
 
-**⏳ Restant, par priorité**
-1. **P1-4/P1-5 contrats Socket.IO typés** — package `contracts` (zod) partagé front/back (supprime le stringly-typed + ~80 l. de types dupliqués + 14 casts).
-2. **P0-3 réel / P0-5** — adaptateur Redis + index de routage externalisés + fin du blob write-through O(n²) (uniquement quand le multi-instance devient réel).
-3. **P1-9 migrations dédiées, P1-10 observabilité, découpage des fichiers-Dieu.**
+**✅ Ajouté au 3ᵉ cycle (« tout le reste »)**
+- **P1-10 observabilité** — pino (redact secrets/cookies), `/ready` (ping DB, 200/503), `/metrics` (Prometheus). `/health` reste liveness pur.
+- **P1-9 migrations dédiées** — entrée `migrate.ts` + script `migrate` + `MIGRATE_ON_BOOT`.
+- **P0-5 blob O(n²)** — coalescence des écritures `engine_state` « answers-only » (cache immédiat, DB débouncée) + flush critique + flushAll à l'arrêt gracieux.
+- **P1-5 (partiel)** — source unique des types de payload temps réel côté web (`realtime/contracts.ts`, fin de la duplication des 3 écrans).
+- **P0-3 (fondation)** — adaptateur Redis Socket.IO branché conditionnellement (pub/sub cross-instance) avec repli défensif.
+- **CI fiabilisée** — parallélisme des tests plafonné (contention des conteneurs Postgres) → suite complète déterministe (392 tests).
+
+**⏳ Restant (gros chantiers, à faire avec l'infra/la revue dédiées)**
+1. **P1-4 typage COMPLET des events Socket.IO** serveur↔web (package `contracts` partagé + generics `Server<>`/`Socket<>`) — surface étendue sur `game-gateway.ts` (~950 l.), à faire d'un bloc.
+2. **P0-3 réel : externalisation de l'état de ROUTAGE** de la passerelle (pinToSessionId, tokens d'écran, minuteurs) + coordination des minuteurs → multi-instance réellement fonctionnel. **Nécessite un harnais de test multi-instance** (l'adaptateur Redis, la fondation pub/sub, est en place).
+3. **Découpage des fichiers-Dieu** (`game-gateway.ts`, `HostEditor.tsx`) — refactor pur, à faire sous revue.
 
 ---
 
