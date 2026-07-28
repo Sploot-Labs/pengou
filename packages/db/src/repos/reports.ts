@@ -43,6 +43,16 @@ export type SessionReport = {
 
 const DEFAULT_LIST_LIMIT = 50
 
+/**
+ * Prédicat d'appartenance : en scope utilisateur (`ownerId` présent), on ne voit que les
+ * parties dont on est l'hôte (`game_session.host_id`). En scope système, `undefined` →
+ * accès tenant-large (inchangé). Ferme la faille P0 : sans ce filtre, tout membre du tenant
+ * pouvait lire les rapports (scores, pseudos, réponses) des parties d'autrui.
+ */
+function hostPredicate(scope: TenantScope) {
+  return scope.ownerId ? eq(schema.gameSession.hostId, scope.ownerId) : undefined
+}
+
 // Liste des parties du tenant, plus récentes d'abord. `playerCount` vient d'un
 // left join agrégé (count distinct) pour couvrir les sessions sans joueur
 // (lobby jamais rejoint) sans les exclure de la liste.
@@ -62,7 +72,7 @@ export async function listSessions(scope: TenantScope, opts?: { limit?: number }
     .from(schema.gameSession)
     .innerJoin(schema.quiz, eq(schema.quiz.id, schema.gameSession.quizId))
     .leftJoin(schema.sessionPlayer, eq(schema.sessionPlayer.sessionId, schema.gameSession.id))
-    .where(eq(schema.gameSession.tenantId, scope.tenantId))
+    .where(and(eq(schema.gameSession.tenantId, scope.tenantId), hostPredicate(scope)))
     .groupBy(schema.gameSession.id, schema.quiz.title)
     .orderBy(desc(schema.gameSession.createdAt))
     .limit(limit)
@@ -84,7 +94,7 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
     })
     .from(schema.gameSession)
     .innerJoin(schema.quiz, eq(schema.quiz.id, schema.gameSession.quizId))
-    .where(and(eq(schema.gameSession.id, sessionId), eq(schema.gameSession.tenantId, scope.tenantId)))
+    .where(and(eq(schema.gameSession.id, sessionId), eq(schema.gameSession.tenantId, scope.tenantId), hostPredicate(scope)))
     .limit(1)
   if (!session) return null
 

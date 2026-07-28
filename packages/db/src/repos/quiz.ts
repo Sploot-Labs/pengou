@@ -4,6 +4,17 @@ import type { TenantScope } from '../tenant.js'
 
 export type Quiz = typeof schema.quiz.$inferSelect
 
+/**
+ * Prédicat d'appartenance au propriétaire, appliqué EN PLUS du filtre tenant dès que le
+ * scope porte un `ownerId` (scope utilisateur). Renvoie `undefined` en scope système —
+ * `and(...)` de drizzle ignore les conditions `undefined`, donc l'accès reste tenant-large.
+ * Ferme la faille P0 d'accès intra-tenant : sans ce filtre, tout membre du tenant pouvait
+ * lister/lire/modifier/supprimer les quiz d'autrui.
+ */
+function ownerPredicate(scope: TenantScope) {
+  return scope.ownerId ? eq(schema.quiz.ownerId, scope.ownerId) : undefined
+}
+
 /** `Quiz` + `questionCount` (Task 6) — a list-only shape, so it does NOT
  * pollute the base `Quiz` type used by `getQuiz`/`createQuiz`/etc. */
 export type QuizListItem = Quiz & { questionCount: number }
@@ -42,7 +53,7 @@ export async function listQuizzes(scope: TenantScope): Promise<QuizListItem[]> {
     })
     .from(schema.quiz)
     .leftJoin(schema.question, eq(schema.question.quizId, schema.quiz.id))
-    .where(eq(schema.quiz.tenantId, scope.tenantId))
+    .where(and(eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
     .groupBy(schema.quiz.id)
 }
 
@@ -50,7 +61,7 @@ export async function getQuiz(scope: TenantScope, id: string): Promise<Quiz | nu
   const [row] = await scope.db
     .select()
     .from(schema.quiz)
-    .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId)))
+    .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
     .limit(1)
   return row ?? null
 }
@@ -58,14 +69,14 @@ export async function getQuiz(scope: TenantScope, id: string): Promise<Quiz | nu
 export async function updateQuiz(scope: TenantScope, id: string, patch: Partial<{ title: string; description: string | null; cover: string | null }>): Promise<Quiz | null> {
   const [row] = await scope.db.update(schema.quiz)
     .set({ ...patch, updatedAt: new Date() })
-    .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId)))
+    .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
     .returning()
   return row ?? null
 }
 
 export async function deleteQuiz(scope: TenantScope, id: string): Promise<boolean> {
   const rows = await scope.db.delete(schema.quiz)
-    .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId)))
+    .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
     .returning({ id: schema.quiz.id })
   return rows.length > 0
 }

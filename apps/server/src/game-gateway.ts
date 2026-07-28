@@ -497,7 +497,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (typeof quizId !== 'string' || !quizId) throw new Error('quizId requis')
 
         const tenantId = await resolveTenantId(db, config, { userId: authSession.user.id })
-        const scope = tenantScope(db, tenantId)
+        // Scope UTILISATEUR (ownerId) : on ne peut lancer une partie que sur un quiz que l'on
+        // possède. `listQuestions` → `getQuiz` filtre alors par ownerId → « quiz introuvable »
+        // pour le quiz d'un tiers (ferme la faille P0 côté host:create).
+        const scope = tenantScope(db, tenantId, authSession.user.id)
 
         const questionRows = await listQuestions(scope, quizId)
         if (!questionRows) throw new Error('quiz introuvable')

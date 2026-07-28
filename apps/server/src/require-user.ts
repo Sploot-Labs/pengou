@@ -27,7 +27,9 @@ export async function requestScope(request: FastifyRequest, db: Db, config: AppC
   if (!request.user?.id) throw new Error('requestScope requires requireUser preHandler')
   const explicitTenantId = typeof request.headers['x-tenant-id'] === 'string' ? (request.headers['x-tenant-id'] as string) : undefined
   const tenantId = await resolveTenantId(db, config, { userId: request.user.id, explicitTenantId })
-  return tenantScope(db, tenantId)
+  // Scope UTILISATEUR : `ownerId` = utilisateur authentifié → les routes éditeur/rapports
+  // sont restreintes aux entités possédées (ferme la faille P0 d'accès intra-tenant).
+  return tenantScope(db, tenantId, request.user.id)
 }
 
 /**

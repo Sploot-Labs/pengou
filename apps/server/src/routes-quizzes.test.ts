@@ -196,6 +196,48 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await app.close()
   })
 
+  it('P0 intra-tenant : un quiz d\'un AUTRE utilisateur du MÊME tenant est invisible (404) et non modifiable/supprimable', async () => {
+    const app = await buildApp()
+
+    // Deux utilisateurs distincts qui, en mode single, résolvent vers LE MÊME tenant par défaut.
+    // Avant le correctif d'accès intra-tenant, userB pouvait lire/modifier/supprimer le quiz de userA.
+    const cookieA = await signUp(app, 'owner-a@example.com')
+    const cookieB = await signUp(app, 'owner-b@example.com')
+
+    const create = await app.inject({
+      method: 'POST',
+      url: '/api/quizzes',
+      payload: { title: 'Quiz privé de A' },
+      headers: { 'content-type': 'application/json', cookie: cookieA },
+    })
+    const created = create.json() as { id: string }
+
+    // userB ne doit RIEN pouvoir faire sur le quiz de userA.
+    const getB = await app.inject({ method: 'GET', url: `/api/quizzes/${created.id}`, headers: { cookie: cookieB } })
+    expect(getB.statusCode).toBe(404)
+
+    const patchB = await app.inject({
+      method: 'PATCH',
+      url: `/api/quizzes/${created.id}`,
+      payload: { title: 'volé par B' },
+      headers: { 'content-type': 'application/json', cookie: cookieB },
+    })
+    expect(patchB.statusCode).toBe(404)
+
+    const delB = await app.inject({ method: 'DELETE', url: `/api/quizzes/${created.id}`, headers: { cookie: cookieB } })
+    expect(delB.statusCode).toBe(404)
+
+    const listB = await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie: cookieB } })
+    expect((listB.json() as Array<{ id: string }>).some((q) => q.id === created.id)).toBe(false)
+
+    // userA, lui, voit et garde son quiz intact.
+    const getA = await app.inject({ method: 'GET', url: `/api/quizzes/${created.id}`, headers: { cookie: cookieA } })
+    expect(getA.statusCode).toBe(200)
+    expect((getA.json() as { title: string }).title).toBe('Quiz privé de A')
+
+    await app.close()
+  })
+
   it('un quiz d\'un AUTRE tenant est invisible (404, pas juste un id manquant) et absent de la liste', async () => {
     const app = await buildApp()
 

@@ -3,7 +3,18 @@ import type { AppConfig } from '@splootlabs/shared'
 import type { Db } from './client.js'
 import { schema } from './index.js'
 
-export type TenantScope = { db: Db; tenantId: string }
+/**
+ * Contexte d'accès aux données d'une requête.
+ * - `tenantId` : frontière d'isolation DURE entre tenants — toujours appliquée.
+ * - `ownerId` (optionnel) : frontière d'isolation intra-tenant par utilisateur.
+ *   Présent = « scope utilisateur » : les lectures/écritures d'entités possédées
+ *   (quiz, rapports de partie) sont RESTREINTES à ce propriétaire. Construit ainsi
+ *   par `requestScope` (routes HTTP) et `host:create` (socket), à partir de
+ *   l'utilisateur authentifié. Absent = « scope système » : accès à tout le tenant
+ *   (réhydratation moteur au boot, tests unitaires de repo). Un scope sans `ownerId`
+ *   ne doit JAMAIS être dérivé d'une entrée client — voir `requestScope`.
+ */
+export type TenantScope = { db: Db; tenantId: string; ownerId?: string }
 
 /**
  * Erreur typée levée par `resolveTenantId` quand l'utilisateur authentifié n'a pas de
@@ -20,8 +31,8 @@ export class TenantAccessDeniedError extends Error {
   }
 }
 
-export function tenantScope(db: Db, tenantId: string): TenantScope {
-  return { db, tenantId }
+export function tenantScope(db: Db, tenantId: string, ownerId?: string): TenantScope {
+  return { db, tenantId, ownerId }
 }
 
 export const DEFAULT_TENANT_NAME = 'default'
