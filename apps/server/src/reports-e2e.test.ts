@@ -63,13 +63,14 @@ async function buildApp(): Promise<BuiltApp> {
   registerEditor(app, { db: ctx.db, auth, config })
   const io = attachRealtime(app, config)
 
+  const store = new MemorySessionStore()
   const engine = createEngine({
-    store: new MemorySessionStore(),
+    store,
     now: () => Date.now(),
     genPin: generatePin,
     genId: () => crypto.randomUUID(),
   })
-  await registerGameGateway(io, { engine, db: ctx.db, auth, config })
+  await registerGameGateway(io, { engine, db: ctx.db, auth, config, store })
 
   await app.listen({ port: 0, host: '127.0.0.1' })
   const address = app.server.address()
