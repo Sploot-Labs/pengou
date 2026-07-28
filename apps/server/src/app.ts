@@ -1,9 +1,23 @@
 import Fastify, { type FastifyInstance } from 'fastify'
 import helmet from '@fastify/helmet'
 import rateLimit from '@fastify/rate-limit'
+import { collectDefaultMetrics, Registry } from 'prom-client'
 import type { AppConfig } from '@splootlabs/shared'
 
-export type ServerDeps = { dbStatus?: () => 'up' | 'down' }
+export type ServerDeps = {
+  dbStatus?: () => 'up' | 'down'
+  /** Ping DB réel pour la readiness (P1-10) — distinct du `dbStatus` (drapeau statique). */
+  dbPing?: () => Promise<boolean>
+}
+
+// Observabilité (P1-10) : métriques process/Node (CPU, heap, event-loop lag, GC…) exposées au
+// format Prometheus sur /metrics. Registre dédié (pas le registre global) pour éviter les
+// doubles inscriptions quand plusieurs `buildServer` coexistent (suites de test).
+function buildMetricsRegistry(): Registry {
+  const registry = new Registry()
+  collectDefaultMetrics({ register: registry })
+  return registry
+}
 
 // `buildServer` est ASYNC et `await`e l'enregistrement des plugins de sécurité :
 // dans Fastify, un hook (ici l'`onRequest` de helmet/rate-limit) ne s'applique QU'AUX
@@ -17,7 +31,20 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
   // rate-limit partage un seul bucket (auto-DoS + anti-brute-force ciblé défait). Avec
   // trustProxy, Fastify lit X-Forwarded-For → `req.ip` = vraie IP client. En dev/test, aucun
   // proxy : neutre.
-  const app = Fastify({ logger: config.nodeEnv !== 'test', trustProxy: true })
+  // Logger pino (P1-10) : niveau via LOG_LEVEL (défaut info), et REDACTION des secrets/cookies
+  // dans les logs de requêtes (Authorization, Cookie, Set-Cookie) — sans ça, un cookie de session
+  // ou un header d'auth se retrouverait en clair dans les logs. Coupé en test.
+  const loggerOptions = {
+    level: process.env.LOG_LEVEL ?? 'info',
+    redact: {
+      paths: ['req.headers.authorization', 'req.headers.cookie', 'res.headers["set-cookie"]'],
+      censor: '[redacted]',
+    },
+  }
+  const app = Fastify({
+    logger: config.nodeEnv !== 'test' ? loggerOptions : false,
+    trustProxy: true,
+  })
 
   // Sécurité (P2) : en-têtes HTTP durcis (anti-clickjacking, anti-sniffing MIME, Referrer-Policy…).
   // CSP réglée pour rester compatible avec le SPA servi par le même serveur : styles inline
@@ -50,12 +77,31 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
     timeWindow: '1 minute',
   })
 
+  // Liveness (P1-10) : le process répond. Volontairement SANS I/O — un /health qui pinguerait la
+  // DB ferait redémarrer le pod en boucle sur une simple lenteur DB. La readiness (ci-dessous) est
+  // le bon endroit pour tester les dépendances.
   app.get('/health', async () => ({
     status: 'ok',
     db: deps.dbStatus ? deps.dbStatus() : 'unknown',
     tenancyMode: config.tenancyMode,
     scaling: config.scaling,
   }))
+
+  // Readiness (P1-10) : ping DB RÉEL → 200 si prêt, 503 sinon. À câbler sur la `readinessProbe`
+  // K8s (n'envoie du trafic qu'aux pods prêts ; ne redémarre pas sur un simple 503 transitoire).
+  app.get('/ready', async (_request, reply) => {
+    const dbReady = deps.dbPing ? await deps.dbPing() : true
+    if (!dbReady) return reply.code(503).send({ status: 'not-ready', db: 'down' })
+    return { status: 'ready', db: 'up' }
+  })
+
+  // Métriques Prometheus (P1-10). Non plafonné par le rate-limit ? Si, il l'est (route Fastify) —
+  // en pratique le scraper est interne ; ajuster RATE_LIMIT_MAX ou une allowlist si besoin.
+  const metricsRegistry = buildMetricsRegistry()
+  app.get('/metrics', async (_request, reply) => {
+    reply.header('content-type', metricsRegistry.contentType)
+    return metricsRegistry.metrics()
+  })
 
   return app
 }

@@ -24,6 +24,30 @@ describe('GET /health', () => {
   })
 })
 
+describe('observabilité (readiness + metrics)', () => {
+  it('/ready ping la DB : 200 si up, 503 si down', async () => {
+    const up = await buildServer(loadConfig({ NODE_ENV: 'test' }), { dbPing: async () => true })
+    const rUp = await up.inject({ method: 'GET', url: '/ready' })
+    expect(rUp.statusCode).toBe(200)
+    expect(rUp.json()).toMatchObject({ status: 'ready', db: 'up' })
+    await up.close()
+
+    const down = await buildServer(loadConfig({ NODE_ENV: 'test' }), { dbPing: async () => false })
+    const rDown = await down.inject({ method: 'GET', url: '/ready' })
+    expect(rDown.statusCode).toBe(503)
+    await down.close()
+  })
+
+  it('/metrics expose des métriques Prometheus', async () => {
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
+    const res = await app.inject({ method: 'GET', url: '/metrics' })
+    expect(res.statusCode).toBe(200)
+    expect(res.headers['content-type']).toContain('text/plain')
+    expect(res.body).toContain('process_cpu_user_seconds_total')
+    await app.close()
+  })
+})
+
 describe('durcissement sécurité (helmet + rate-limit)', () => {
   it('helmet pose des en-têtes de sécurité (X-Content-Type-Options, X-Frame-Options, CSP)', async () => {
     const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))

@@ -15,6 +15,11 @@ const EnvSchema = z.object({
   // Self-host : fermer l'inscription publique une fois le(s) compte(s) créé(s). 'true' désactive
   // le sign-up e-mail/mot de passe (les comptes existants continuent de se connecter).
   DISABLE_SIGNUP: z.enum(['true', 'false']).default('false'),
+  // Appliquer les migrations au démarrage du serveur. Pratique en mono-instance/self-host.
+  // Mettre 'false' en multi-instance et lancer les migrations dans une étape DÉDIÉE
+  // (`pnpm --filter @splootlabs/server migrate`) avant de démarrer les répliques — évite N
+  // migrations concurrentes au boot.
+  MIGRATE_ON_BOOT: z.enum(['true', 'false']).default('true'),
   GOOGLE_CLIENT_ID: z.string().optional(),
   GOOGLE_CLIENT_SECRET: z.string().optional(),
   FACEBOOK_CLIENT_ID: z.string().optional(),
@@ -40,6 +45,7 @@ export type AppConfig = {
   authUrl: string
   rateLimitMax: number
   disableSignup: boolean
+  migrateOnBoot: boolean
   oauth: {
     google: OAuthProviderCreds
     facebook: OAuthProviderCreds
@@ -68,6 +74,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     authUrl: parsed.BETTER_AUTH_URL,
     rateLimitMax: parsed.RATE_LIMIT_MAX,
     disableSignup: parsed.DISABLE_SIGNUP === 'true',
+    migrateOnBoot: parsed.MIGRATE_ON_BOOT === 'true',
     oauth: {
       google: { clientId: parsed.GOOGLE_CLIENT_ID, clientSecret: parsed.GOOGLE_CLIENT_SECRET },
       facebook: { clientId: parsed.FACEBOOK_CLIENT_ID, clientSecret: parsed.FACEBOOK_CLIENT_SECRET },

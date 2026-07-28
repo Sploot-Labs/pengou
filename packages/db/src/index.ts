@@ -1,4 +1,4 @@
-export { createDb, type Db } from './client.js'
+export { createDb, pingDb, type Db } from './client.js'
 export { runMigrations } from './migrate.js'
 export { startTestDb } from './test-helpers.js'
 export {

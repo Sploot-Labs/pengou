@@ -1,6 +1,6 @@
 import { join } from 'node:path'
 import { loadConfig } from '@splootlabs/shared'
-import { createDb, runMigrations, ensureDefaultTenant } from '@splootlabs/db'
+import { createDb, runMigrations, ensureDefaultTenant, pingDb } from '@splootlabs/db'
 import { createAuth, enabledSocialProviders } from '@splootlabs/auth'
 import { createEngine, generatePin } from '@splootlabs/game'
 import { buildServer } from './app.js'
@@ -14,11 +14,16 @@ import { registerStatic } from './static.js'
 const config = loadConfig()
 const { db, client } = createDb(config.databaseUrl)
 
-await runMigrations(db)
+// Migration au boot (P1-9) : pratique en mono-instance ; désactivable (MIGRATE_ON_BOOT=false)
+// au profit d'une étape dédiée (`pnpm --filter @splootlabs/server migrate`) en multi-instance.
+if (config.migrateOnBoot) await runMigrations(db)
 if (config.tenancyMode === 'single') await ensureDefaultTenant(db)
 
 let dbUp = true
-const app = await buildServer(config, { dbStatus: () => (dbUp ? 'up' : 'down') })
+const app = await buildServer(config, {
+  dbStatus: () => (dbUp ? 'up' : 'down'),
+  dbPing: () => pingDb(client),
+})
 
 const auth = createAuth(db, {
   // En dev, `BETTER_AUTH_SECRET` peut être absent : on retombe sur `SESSION_SECRET`
