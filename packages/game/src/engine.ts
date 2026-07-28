@@ -114,6 +114,11 @@ export interface Engine {
    * `store` — la passerelle n'y a pas d'accès direct. No-op sûr (retourne la session inchangée,
    * SANS `store.save`) hors phases 'reading'/'question' : rien à ré-ancrer ailleurs. */
   reanchorTimer(sessionId: string): Promise<GameSession>
+  /** Évince une session TERMINÉE du store (cache mémoire) — la passerelle n'a pas d'accès
+   * direct au store (seul le moteur le porte). Ne touche PAS la DB (l'`engine_state` est déjà
+   * effacé côté passerelle via `clearEngineState`). Sans cette éviction, toute partie jouée
+   * resterait indéfiniment dans le cache du store → fuite mémoire sur un serveur long-running. */
+  evictSession(sessionId: string): Promise<void>
 }
 
 export function createEngine(deps: EngineDeps): Engine {
@@ -398,6 +403,10 @@ export function createEngine(deps: EngineDeps): Engine {
       }
       await store.save(session)
       return session
+    },
+
+    async evictSession(sessionId) {
+      await store.delete(sessionId)
     },
   }
 

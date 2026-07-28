@@ -66,6 +66,14 @@ const DEFAULT_BASE_POINTS = 1000
  * après un très long redémarrage. 12 h, cohérent avec la durée réaliste d'une session de jeu. */
 const SESSION_MAX_AGE = 12 * 3600_000
 
+/** Délai de grâce avant éviction mémoire d'une partie terminée (P1-6). On NE purge pas au
+ * podium immédiatement : l'hôte/les joueurs peuvent se reconnecter pour revoir le podium
+ * juste après la fin. Passé ce délai, on libère les structures locales (Maps de la passerelle
+ * + cache du store) — sinon chaque partie jouée fuit indéfiniment en mémoire. Le redémarrage
+ * serveur n'est pas un problème (mémoire repartie de zéro, session déjà `ended` en DB donc non
+ * réhydratée). 10 min : large pour un post-partie, borné pour la mémoire. */
+const PODIUM_EVICTION_DELAY = 10 * 60_000
+
 function toEngineQuestion(row: { id: string; type: string; prompt: string; timeLimit: number; readingTime: number; payload: unknown }): EngineQuestion {
   return {
     id: row.id,
@@ -130,6 +138,25 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       clearTimeout(meta.readingTimeout)
       meta.readingTimeout = null
     }
+  }
+
+  /** Éviction mémoire d'une partie TERMINÉE (P1-6) : libère toutes les structures locales à la
+   * passerelle (metas, index PIN, sockets actifs des joueurs, tokens d'écran) ET le cache du
+   * store (via `engine.evictSession`). Idempotent : sûr à appeler même si déjà évincé. Ne touche
+   * pas la DB (le rapport final reste lisible via session_player/answer_record). */
+  async function evictSessionMemory(sessionId: string, meta: SessionMeta): Promise<void> {
+    clearReadingTimeout(meta)
+    for (const playerId of meta.playerDbIds.keys()) activeSocketIdByPlayerId.delete(playerId)
+    for (const [token, sid] of screenTokenToSessionId) {
+      if (sid === sessionId) {
+        screenTokenToSessionId.delete(token)
+        consumedScreenTokens.delete(token)
+      }
+    }
+    const session = await engine.getSession(sessionId).catch(() => null)
+    if (session) pinToSessionId.delete(session.pin)
+    sessionMetaByEngineId.delete(sessionId)
+    await engine.evictSession(sessionId).catch(() => {})
   }
 
   function requireHost(socket: Socket): { sessionId: string; meta: SessionMeta } {
@@ -689,6 +716,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           const top = engine.ranking(session).slice(0, 3)
           io.to(roomName(sessionId)).emit('podium', { top })
           reply({ phase: session.phase })
+          // Éviction mémoire différée (P1-6) : fenêtre de grâce pour une reconnexion au podium,
+          // puis libération des structures locales + cache du store. `.unref()` : ce minuteur ne
+          // doit jamais retarder l'arrêt du process.
+          setTimeout(() => { void evictSessionMemory(sessionId, meta) }, PODIUM_EVICTION_DELAY).unref()
         }
       } catch (e) {
         reply({ error: message(e) })

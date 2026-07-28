@@ -34,6 +34,20 @@ registerEditor(app, { db, auth, config })
 
 const io = attachRealtime(app, config)
 
+// Honnêteté de configuration (P0-3) : `REDIS_URL` fait passer `config.scaling` à 'redis', mais
+// l'adaptateur Redis Socket.IO n'est PAS encore branché et l'état de jeu (Maps de la passerelle,
+// minuteurs) reste local au process. Tant que ce n'est pas résolu, le déploiement est
+// STRICTEMENT MONO-INSTANCE : ne pas lancer plusieurs répliques derrière un load balancer, sous
+// peine d'états divergents entre joueurs. On avertit bruyamment plutôt que de laisser croire au
+// scaling annoncé par /health.
+if (config.scaling === 'redis') {
+  app.log.warn(
+    "REDIS_URL est défini mais l'adaptateur Redis Socket.IO n'est pas encore branché : " +
+      'déploiement MONO-INSTANCE uniquement (état de jeu et pub/sub temps réel locaux au process). ' +
+      'Ne pas exécuter plusieurs instances derrière un load balancer pour le moment.',
+  )
+}
+
 // Moteur de jeu : une seule instance par process, mais son état survit désormais aux
 // redémarrages (Task 3/4, persistance des sessions) — `PersistentSessionStore` fait un
 // write-through Postgres (colonne `engine_state`) derrière un cache mémoire, et
