@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
+import type { RankingEntry, ReadingView } from '../realtime/contracts'
 import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import { Button, Logo, PinDisplay, TimerRing } from '../ui'
 import { PodiumView } from './Podium'
@@ -35,13 +36,6 @@ interface QuestionShowPayload {
  * pour un hôte qui reprend en pleine lecture — voir l'abonnement `host:reconnect`
  * ci-dessous, qui n'a rien à faire de plus : cette même souscription
  * `question:reading` reçoit ce cas comme n'importe quel autre. */
-interface ReadingView {
-  prompt: string
-  index: number
-  total: number
-  readingTime: number
-  startedAt: number | null
-}
 
 interface TimerPayload {
   timeLimit: number
@@ -57,11 +51,6 @@ interface RevealPayload {
   distribution: Record<string, number>
 }
 
-interface RankingEntry {
-  playerId: string
-  nickname: string
-  score: number
-}
 
 interface LobbyPlayer {
   id: string

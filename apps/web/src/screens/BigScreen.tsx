@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue, useFocusOnMount } from '../motion/index.js'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
+import type { RankingEntry, ReadingView } from '../realtime/contracts'
 import { ThemeProvider } from '../theme/ThemeProvider.js'
 import { AnswerShape, JoinInvite, Logo, PinDisplay, TimerRing } from '../ui'
 import { PodiumView } from './Podium'
@@ -31,13 +32,6 @@ interface QuestionShowPayload {
  * `readingView`) — DÉLIBÉRÉMENT sans `id`/`type`/`payload`/options : le grand
  * écran ne doit rien pouvoir afficher qui ressemble à une réponse pendant la
  * lecture (anti-triche, cohérent avec le moteur qui ne les envoie pas). */
-interface ReadingView {
-  prompt: string
-  index: number
-  total: number
-  readingTime: number
-  startedAt: number | null
-}
 interface McqShowPayload {
   options: { label: string }[]
 }
@@ -56,11 +50,6 @@ interface RevealPayload {
   distribution: Record<string, number>
 }
 
-interface RankingEntry {
-  playerId: string
-  nickname: string
-  score: number
-}
 
 interface LobbyPlayer {
   id: string

@@ -4,6 +4,7 @@ import { normalizeText, sliderTolerance } from '@splootlabs/quiz'
 import { useCue, useSound } from '../motion/index.js'
 import { clearPlayerSession, loadPlayerSession } from '../realtime/playerSession'
 import { useGameSocket } from '../realtime/useGameSocket'
+import type { RankingEntry, ReadingView } from '../realtime/contracts'
 import { AnswerTile, Button, TimerRing } from '../ui'
 
 /**
@@ -34,13 +35,6 @@ interface QuestionShowPayload {
  * forme que celle consommée par `BigScreen` (voir son commentaire) : le
  * joueur ne doit rien pouvoir afficher qui ressemble à une réponse pendant la
  * lecture (anti-triche, cohérent avec le moteur qui ne les envoie pas). */
-interface ReadingView {
-  prompt: string
-  index: number
-  total: number
-  readingTime: number
-  startedAt: number | null
-}
 
 interface McqShowPayload {
   options: { label: string }[]
@@ -82,11 +76,6 @@ interface SliderCorrect {
   step?: number
 }
 
-interface RankingEntry {
-  playerId: string
-  nickname: string
-  score: number
-}
 
 interface ReconnectAck {
   playerId: string
