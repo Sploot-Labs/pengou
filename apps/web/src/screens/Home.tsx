@@ -13,15 +13,18 @@ import { ANSWER_SHAPES } from '../constants'
 /**
  * Home — the host's landing screen (Plan 07 Task 4), now living at `/`
  * (the quiz editor moved to `/quizzes/:quizId`, see `routes.tsx` and
- * `HostEditor.tsx`). Two independent sections, each with its own
+ * `HostEditor.tsx`). Independent top-level sections, each with its own
  * loading/empty/error state so a slow or failing `listSessions()` never
  * blocks the (usually fast, and more important) quiz list from rendering:
  *  - **Mes quiz** — `listQuizzes()`, each a link to its editor, plus a
  *    "Nouveau quiz" inline form (`createQuiz` then navigate straight to the
  *    new quiz's editor — no separate empty "untitled quiz" step).
- *  - **Parties récentes** — `listSessions()`, each a link to the (Task 5)
- *    report screen, showing quiz title, PIN, date, player count and status
- *    as visible TEXT (never colour alone).
+ *  - **Parties** (Task 9) — split into « En cours » (`lobby`/`active`,
+ *    routes back to the live host controller `/host/:id`) and
+ *    « Historique » (`ended`/`abandoned` — Task 9 adds automatic abandon
+ *    for inactivity, see the server sweep — both route to the (Task 5)
+ *    report screen `/sessions/:id`), each a link showing quiz title, PIN,
+ *    date, player count and status as visible TEXT (never colour alone).
  */
 
 function errorMessage(err: unknown): string {
@@ -39,32 +42,23 @@ const STATUS_LABEL: Record<SessionStatus, string> = {
  * Task 8 : `host:reconnect` y repeuple l'état — lobby/joueurs, question en cours, classement —
  * via un snapshot poussé par le serveur, voir `HostLive.tsx`) — jamais vers le rapport, qui lit
  * des agrégats FIGÉS (`getSessionReport`) inadaptés à une partie encore en mouvement. Une partie
- * `ended`, elle, n'a plus rien à « reprendre » : direction le rapport (`/sessions/:id`). `s.id`
- * est l'id `game_session` PERSISTÉ (celui que `listSessions()` connaît) — `host:reconnect`
- * accepte aussi bien cet id que l'id moteur en mémoire (voir sa doc, `game-gateway.ts`). */
+ * `ended` OU `abandoned` (Task 9 : abandon automatique pour inactivité, voir le sweep serveur),
+ * elle, n'a plus rien à « reprendre » : direction le rapport (`/sessions/:id`). `s.id` est l'id
+ * `game_session` PERSISTÉ (celui que `listSessions()` connaît) — `host:reconnect` accepte aussi
+ * bien cet id que l'id moteur en mémoire (voir sa doc, `game-gateway.ts`). */
 function sessionHref(s: SessionSummary): string {
-  return s.status === 'ended' ? `/sessions/${s.id}` : `/host/${s.id}`
+  const terminal = s.status === 'ended' || s.status === 'abandoned'
+  return terminal ? `/sessions/${s.id}` : `/host/${s.id}`
 }
 
 /** Libellé d'affordance visuel (décoratif, `aria-hidden` — même convention que `home-card__cta`
  * ci-dessous pour les cartes de quiz) : distingue clairement, au survol de la liste, une partie
  * qu'on REPREND d'une partie dont on consulte le RAPPORT — le badge de statut seul (« En cours »,
- * « Terminée ») ne dit pas ce que le clic va faire. */
+ * « Terminée », « Abandonnée ») ne dit pas ce que le clic va faire. */
 function sessionCtaLabel(s: SessionStatus): string {
-  return s === 'ended' ? 'Voir le rapport →' : 'Reprendre →'
+  const terminal = s === 'ended' || s === 'abandoned'
+  return terminal ? 'Voir le rapport →' : 'Reprendre →'
 }
-
-type SessionFilter = 'all' | SessionStatus
-
-/** Filter chips shown above "Parties récentes" — order matches the brief:
- * Toutes / En cours / En attente / Terminées (not the `SessionStatus` key
- * order, which reads lobby/active/ended). */
-const SESSION_FILTERS: { key: SessionFilter; label: string }[] = [
-  { key: 'all', label: 'Toutes' },
-  { key: 'active', label: 'En cours' },
-  { key: 'lobby', label: 'En attente' },
-  { key: 'ended', label: 'Terminées' },
-]
 
 /** How many rows render before the "Voir toutes" ghost button takes over —
  * keeps a tenant with hundreds of sessions from turning this into an
@@ -165,33 +159,23 @@ export function Home() {
     }
   }
 
-  // --- Parties récentes -----------------------------------------------------
-  const [sessions, setSessions] = useState<SessionSummary[]>([])
+  // --- Parties : En cours (lobby+active) et Historique (ended+abandoned) --------
+  const [liveSessions, setLiveSessions] = useState<SessionSummary[]>([])
+  const [historySessions, setHistorySessions] = useState<SessionSummary[]>([])
   const [sessionsLoading, setSessionsLoading] = useState(true)
   const [sessionsError, setSessionsError] = useState<string | null>(null)
-  const [sessionFilter, setSessionFilter] = useState<SessionFilter>('all')
-  const [showAllSessions, setShowAllSessions] = useState(false)
-
-  const filteredSessions =
-    sessionFilter === 'all' ? sessions : sessions.filter((s) => s.status === sessionFilter)
-  const visibleSessions = showAllSessions
-    ? filteredSessions
-    : filteredSessions.slice(0, SESSIONS_PAGE_SIZE)
-  const hiddenSessionCount = filteredSessions.length - visibleSessions.length
-
-  function selectSessionFilter(next: SessionFilter) {
-    setSessionFilter(next)
-    // A new filter starts collapsed again — "Voir toutes" is scoped to
-    // whichever filter was active when it was clicked, not a global switch.
-    setShowAllSessions(false)
-  }
+  const [showAllHistory, setShowAllHistory] = useState(false)
 
   function loadSessions() {
     setSessionsLoading(true)
     setSessionsError(null)
-    listSessions()
-      .then((rows) => {
-        setSessions(rows)
+    Promise.all([
+      listSessions({ status: ['lobby', 'active'] }),
+      listSessions({ status: ['ended', 'abandoned'] }),
+    ])
+      .then(([live, history]) => {
+        setLiveSessions(live)
+        setHistorySessions(history)
         setSessionsLoading(false)
       })
       .catch((err) => {
@@ -203,6 +187,9 @@ export function Home() {
   useEffect(() => {
     loadSessions()
   }, [])
+
+  const visibleHistory = showAllHistory ? historySessions : historySessions.slice(0, SESSIONS_PAGE_SIZE)
+  const hiddenHistoryCount = historySessions.length - visibleHistory.length
 
   return (
     <div className="ab-shell">
@@ -351,73 +338,59 @@ export function Home() {
           )}
         </section>
 
-        <section aria-labelledby="home-sessions-heading">
-          <div className="home-section__header">
-            <h2 id="home-sessions-heading">Parties récentes</h2>
-          </div>
-
-          {sessionsLoading ? (
-            <p role="status">Chargement des parties récentes…</p>
-          ) : sessionsError && sessions.length === 0 ? (
-            <div className="ab-empty-state">
-              <p role="alert">{sessionsError}</p>
-              <Button variant="primary" type="button" onClick={loadSessions}>
-                Réessayer
-              </Button>
-            </div>
-          ) : sessions.length === 0 ? (
-            <p className="ab-empty-state">
-              Aucune partie pour l'instant — lancez-en une depuis un quiz.
-            </p>
-          ) : (
-            <>
-              <div className="home-filters" role="group" aria-label="Filtrer les parties par statut">
-                {SESSION_FILTERS.map((f) => (
-                  <Button
-                    key={f.key}
-                    variant="ghost"
-                    type="button"
-                    aria-pressed={sessionFilter === f.key}
-                    onClick={() => selectSessionFilter(f.key)}
-                  >
-                    {f.label}
-                  </Button>
-                ))}
-              </div>
-
-              {filteredSessions.length === 0 ? (
-                <p className="ab-empty-state">Aucune partie ne correspond à ce filtre.</p>
-              ) : (
-                <>
-                  <ul className="home-list">
-                    {visibleSessions.map((s) => (
-                      <li key={s.id}>
-                        <Link className="home-list__item" to={sessionHref(s)}>
-                          <span className="home-list__title">{s.quizTitle}</span>
-                          <span className="home-list__meta">
-                            PIN {s.pin} · {formatDate(s.startedAt)} · {s.playerCount} joueur
-                            {s.playerCount > 1 ? 's' : ''}
-                          </span>
-                          <span className={`host-badge host-badge--${s.status}`}>
-                            {STATUS_LABEL[s.status]}
-                          </span>
-                          <span className="home-list__cta" aria-hidden="true">
-                            {sessionCtaLabel(s.status)}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {hiddenSessionCount > 0 && (
-                    <Button variant="ghost" type="button" onClick={() => setShowAllSessions(true)}>
-                      Voir toutes les parties ({filteredSessions.length})
-                    </Button>
+        <section aria-label="Parties">
+          {(() => {
+            const renderRow = (s: SessionSummary) => (
+              <li key={s.id}>
+                <Link className="home-list__item" to={sessionHref(s)}>
+                  <span className="home-list__title">{s.quizTitle}</span>
+                  <span className="home-list__meta">
+                    PIN {s.pin} · {formatDate(s.startedAt)} · {s.playerCount} joueur
+                    {s.playerCount > 1 ? 's' : ''}
+                  </span>
+                  <span className={`host-badge host-badge--${s.status}`}>{STATUS_LABEL[s.status]}</span>
+                  <span className="home-list__cta" aria-hidden="true">{sessionCtaLabel(s.status)}</span>
+                </Link>
+              </li>
+            )
+            if (sessionsLoading) return <p role="status">Chargement des parties…</p>
+            if (sessionsError && liveSessions.length === 0 && historySessions.length === 0) {
+              return (
+                <div className="ab-empty-state">
+                  <p role="alert">{sessionsError}</p>
+                  <Button variant="primary" type="button" onClick={loadSessions}>Réessayer</Button>
+                </div>
+              )
+            }
+            return (
+              <>
+                <section aria-labelledby="home-live-heading" style={{ marginBottom: 'var(--space-6)' }}>
+                  <div className="home-section__header"><h2 id="home-live-heading">En cours</h2></div>
+                  {liveSessions.length === 0 ? (
+                    <p className="ab-empty-state">Aucune partie en cours — lancez-en une depuis un quiz.</p>
+                  ) : (
+                    <ul className="home-list">{liveSessions.map(renderRow)}</ul>
                   )}
-                </>
-              )}
-            </>
-          )}
+                </section>
+
+                <section aria-labelledby="home-history-heading">
+                  <div className="home-section__header"><h2 id="home-history-heading">Historique</h2></div>
+                  {historySessions.length === 0 ? (
+                    <p className="ab-empty-state">Aucune partie terminée pour l'instant.</p>
+                  ) : (
+                    <>
+                      <ul className="home-list">{visibleHistory.map(renderRow)}</ul>
+                      {hiddenHistoryCount > 0 && (
+                        <Button variant="ghost" type="button" onClick={() => setShowAllHistory(true)}>
+                          Voir tout l'historique ({historySessions.length})
+                        </Button>
+                      )}
+                    </>
+                  )}
+                </section>
+              </>
+            )
+          })()}
         </section>
       </main>
     </div>
