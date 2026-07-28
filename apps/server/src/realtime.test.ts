@@ -15,7 +15,7 @@ async function listenOn(app: FastifyInstance): Promise<string> {
 describe('Socket.IO ping/pong', () => {
   it('répond pong à ping:test', async () => {
     const config = loadConfig({ NODE_ENV: 'test' })
-    const app = buildServer(config)
+    const app = await buildServer(config)
     const io = attachRealtime(app, config)
     await app.listen({ port: 0, host: '127.0.0.1' })
     const address = app.server.address()
@@ -78,7 +78,7 @@ describe('Socket.IO CORS — origine restreinte à AppConfig.authUrl (hardening)
 
   it("une origine hors liste (ex. site tiers) ne reçoit PAS d'en-tête Access-Control-Allow-Origin (le navigateur bloquerait la lecture)", async () => {
     const config = loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'http://localhost:3000' })
-    const app = buildServer(config)
+    const app = await buildServer(config)
     const io = attachRealtime(app, config)
     const url = await listenOn(app)
 
@@ -94,7 +94,7 @@ describe('Socket.IO CORS — origine restreinte à AppConfig.authUrl (hardening)
 
   it("l'origine autorisée (AppConfig.authUrl) reçoit bien Access-Control-Allow-Origin la désignant", async () => {
     const config = loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'http://localhost:3000' })
-    const app = buildServer(config)
+    const app = await buildServer(config)
     const io = attachRealtime(app, config)
     const url = await listenOn(app)
 

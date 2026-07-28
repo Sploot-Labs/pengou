@@ -11,6 +11,8 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@fastify/helmet": "^11",
+    "@fastify/rate-limit": "^9",
     "@fastify/static": "^7.0.0",
     "@splootlabs/auth": "workspace:*",
     "@splootlabs/db": "workspace:*",

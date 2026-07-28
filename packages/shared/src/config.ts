@@ -9,6 +9,9 @@ const EnvSchema = z.object({
   SESSION_SECRET: z.string().min(16).default('dev-secret-change-me-please!!'),
   BETTER_AUTH_SECRET: z.string().min(32).optional(),
   BETTER_AUTH_URL: z.string().url().default('http://localhost:3000'),
+  // Sécurité : plafond de requêtes HTTP par IP et par minute (anti-DoS/abus). Volontairement
+  // haut par défaut pour ne pas gêner un usage légitime ; à abaisser selon l'exposition.
+  RATE_LIMIT_MAX: z.coerce.number().int().positive().default(1000),
   GOOGLE_CLIENT_ID: z.string().optional(),
   GOOGLE_CLIENT_SECRET: z.string().optional(),
   FACEBOOK_CLIENT_ID: z.string().optional(),
@@ -32,6 +35,7 @@ export type AppConfig = {
   scaling: 'memory' | 'redis'
   authSecret?: string
   authUrl: string
+  rateLimitMax: number
   oauth: {
     google: OAuthProviderCreds
     facebook: OAuthProviderCreds
@@ -58,6 +62,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     scaling: parsed.REDIS_URL ? 'redis' : 'memory',
     authSecret: parsed.BETTER_AUTH_SECRET,
     authUrl: parsed.BETTER_AUTH_URL,
+    rateLimitMax: parsed.RATE_LIMIT_MAX,
     oauth: {
       google: { clientId: parsed.GOOGLE_CLIENT_ID, clientSecret: parsed.GOOGLE_CLIENT_SECRET },
       facebook: { clientId: parsed.FACEBOOK_CLIENT_ID, clientSecret: parsed.FACEBOOK_CLIENT_SECRET },

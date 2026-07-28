@@ -19,7 +19,7 @@ afterAll(() => {
 
 describe('service statique du SPA', () => {
   it('sert index.html à la racine', async () => {
-    const app = buildServer(loadConfig({ NODE_ENV: 'test' }))
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
     registerStatic(app, dist)
     const res = await app.inject({ method: 'GET', url: '/' })
     expect(res.statusCode).toBe(200)
@@ -28,7 +28,7 @@ describe('service statique du SPA', () => {
   })
 
   it('fait un fallback SPA sur une route inconnue', async () => {
-    const app = buildServer(loadConfig({ NODE_ENV: 'test' }))
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
     registerStatic(app, dist)
     const res = await app.inject({ method: 'GET', url: '/quiz/123' })
     expect(res.statusCode).toBe(200)
@@ -37,7 +37,7 @@ describe('service statique du SPA', () => {
   })
 
   it('ne fait pas de fallback SPA sur /health ou /api (404 JSON)', async () => {
-    const app = buildServer(loadConfig({ NODE_ENV: 'test' }))
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
     registerStatic(app, dist)
 
     const apiRes = await app.inject({ method: 'GET', url: '/api/unknown' })

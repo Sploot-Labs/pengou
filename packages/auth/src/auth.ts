@@ -7,6 +7,7 @@ export type AuthConfig = {
   secret: string
   baseURL: string
   tenancyMode?: 'single' | 'multi'
+  nodeEnv?: 'development' | 'test' | 'production'
   socialProviders?: Record<string, { clientId: string; clientSecret: string }>
 }
 
@@ -16,6 +17,22 @@ export function createAuth(db: Db, config: AuthConfig) {
     secret: config.secret,
     baseURL: config.baseURL,
     emailAndPassword: { enabled: true },
+    // Sécurité (P2) : cookie de session `Secure` dès que l'URL publique est en HTTPS.
+    // En production, servez impérativement Arena derrière HTTPS et fixez BETTER_AUTH_URL
+    // en https:// (sinon le cookie de session pourrait transiter en clair). httpOnly +
+    // sameSite=lax sont déjà les défauts Better Auth.
+    advanced: {
+      useSecureCookies: config.baseURL.startsWith('https://'),
+    },
+    // Sécurité (P1) : anti-brute-force / credential stuffing sur /api/auth/*. Actif en
+    // production uniquement (évite de gêner les suites de test qui enchaînent les requêtes).
+    // Fenêtre glissante en mémoire — suffisant en mono-instance ; à externaliser (secondary
+    // storage) lors d'un passage multi-instance.
+    rateLimit: {
+      enabled: config.nodeEnv === 'production',
+      window: 60,
+      max: 20,
+    },
     socialProviders: config.socialProviders ?? {},
     databaseHooks: {
       user: {

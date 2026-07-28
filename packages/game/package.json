@@ -3,9 +3,24 @@
   "version": "0.0.0",
   "type": "module",
   "license": "Apache-2.0",
-  "exports": { ".": { "development": "./src/index.ts", "types": "./dist/index.d.ts", "default": "./dist/index.js" } },
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "scripts": { "build": "tsc -p tsconfig.json", "typecheck": "tsc --noEmit -p tsconfig.json", "test": "vitest run" },
-  "dependencies": { "@splootlabs/quiz": "workspace:*" }
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@splootlabs/quiz": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22"
+  }
 }

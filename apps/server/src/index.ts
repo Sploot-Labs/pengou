@@ -18,7 +18,7 @@ await runMigrations(db)
 if (config.tenancyMode === 'single') await ensureDefaultTenant(db)
 
 let dbUp = true
-const app = buildServer(config, { dbStatus: () => (dbUp ? 'up' : 'down') })
+const app = await buildServer(config, { dbStatus: () => (dbUp ? 'up' : 'down') })
 
 const auth = createAuth(db, {
   // En dev, `BETTER_AUTH_SECRET` peut être absent : on retombe sur `SESSION_SECRET`
@@ -26,6 +26,7 @@ const auth = createAuth(db, {
   secret: config.authSecret ?? config.sessionSecret,
   baseURL: config.authUrl,
   tenancyMode: config.tenancyMode,
+  nodeEnv: config.nodeEnv,
   socialProviders: enabledSocialProviders(config),
 })
 await registerAuth(app, auth)

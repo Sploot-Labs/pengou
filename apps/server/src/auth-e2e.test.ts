@@ -27,7 +27,7 @@ describe('e2e : inscription hôte → session → quiz scopé au tenant', () => 
       baseURL: 'http://localhost:3000',
       tenancyMode: config.tenancyMode,
     })
-    const app = buildServer(config, { dbStatus: () => 'up' })
+    const app = await buildServer(config, { dbStatus: () => 'up' })
     await registerAuth(app, auth)
 
     // 1. Inscription (email/mot de passe) via la route Better Auth réellement montée.

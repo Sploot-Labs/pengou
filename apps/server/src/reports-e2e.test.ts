@@ -57,7 +57,7 @@ async function buildApp(): Promise<BuiltApp> {
     baseURL: 'http://localhost:3000',
     tenancyMode: config.tenancyMode,
   })
-  const app = buildServer(config, { dbStatus: () => 'up' })
+  const app = await buildServer(config, { dbStatus: () => 'up' })
   await registerAuth(app, auth)
   // registerEditor câble aussi registerReportRoutes (/api/sessions…) — voir editor.ts.
   registerEditor(app, { db: ctx.db, auth, config })
