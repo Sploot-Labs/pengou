@@ -3,7 +3,7 @@ import { fromNodeHeaders } from 'better-auth/node'
 import {
   resolveTenantId, tenantScope, listQuestions,
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
-  clearEngineState, listResumableSessions, endStaleSessions, listSessionPlayers,
+  clearEngineState, listResumableSessions, abandonStaleSessions, abandonInactiveSessions, listSessionPlayers,
   type Db,
 } from '@splootlabs/db'
 import type { Auth } from '@splootlabs/auth'
@@ -61,8 +61,8 @@ function message(err: unknown): string {
 const DEFAULT_BASE_POINTS = 1000
 
 /** Fenêtre de reprise (Task 4, réhydratation au boot) : une session `lobby`/`active` plus
- * ancienne que ça au démarrage n'est plus considérée reprenable (`endStaleSessions` la bascule
- * en `ended`, `engine_state` effacé) — évite de ressusciter indéfiniment une partie abandonnée
+ * ancienne que ça au démarrage n'est plus considérée reprenable (`abandonStaleSessions` la bascule
+ * en `abandoned`, `engine_state` effacé) — évite de ressusciter indéfiniment une partie abandonnée
  * après un très long redémarrage. 12 h, cohérent avec la durée réaliste d'une session de jeu. */
 const SESSION_MAX_AGE = 12 * 3600_000
 
@@ -414,14 +414,14 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
    * `pinToSessionId` sont vides (état local à CET appel de `registerGameGateway`, voir plus haut)
    * même si l'état moteur a survécu en base (`PersistentSessionStore`, Task 3) — sans cette
    * fonction, `host:reconnect`/`player:reconnect` répondraient "session introuvable" sur une
-   * partie pourtant reprenable. Ménage d'abord (`endStaleSessions`, sessions trop vieilles → plus
-   * jamais reprenables), puis reconstruit la `SessionMeta` de chaque session candidate et
+   * partie pourtant reprenable. Ménage d'abord (`abandonStaleSessions`, sessions trop vieilles →
+   * plus jamais reprenables), puis reconstruit la `SessionMeta` de chaque session candidate et
    * ré-ancre le chrono de sa phase courante à neuf (décision produit, voir le design : le chrono
    * ne reprend jamais là où il en était — il repart de zéro pour la durée COMPLÈTE de la phase).
    * Best-effort par session : une session individuellement corrompue/absente du store (ex. race
    * avec une écriture concurrente) ne doit jamais empêcher la reprise des autres. */
   async function rehydrateActiveSessions(maxAgeMs: number): Promise<void> {
-    await endStaleSessions(db, maxAgeMs)
+    await abandonStaleSessions(db, maxAgeMs)
     const rows = await listResumableSessions(db, maxAgeMs)
 
     for (const row of rows) {

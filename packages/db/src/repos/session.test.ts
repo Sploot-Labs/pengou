@@ -6,7 +6,7 @@ import { createQuiz } from './quiz.js'
 import {
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
   listSessionPlayersByScore, saveEngineState, clearEngineState, loadEngineState, loadEngineStateByPin,
-  listResumableSessions, endStaleSessions,
+  listResumableSessions, abandonStaleSessions, abandonInactiveSessions,
 } from './session.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
@@ -144,18 +144,18 @@ describe('repo session scopé au tenant du quiz', () => {
     await clearEngineState(ctx.db, s!.id)
     expect(await loadEngineState(ctx.db, s!.id)).toBeNull()
 
-    // stale : une session dont created_at est ancien → endStaleSessions la clôt.
+    // stale : une session dont created_at est ancien → abandonStaleSessions la bascule vers abandoned.
     const stale = await createGameSession(scope, { quizId: quizA, hostId: ownerA, pin: '900002' })
     await setSessionStatus(ctx.db, stale!.id, 'active')
     await saveEngineState(ctx.db, stale!.id, { id: stale!.id, phase: 'question' })
     await ctx.db.execute(sql`UPDATE game_session SET created_at = now() - interval '2 days' WHERE id = ${stale!.id}`)
-    const endedCount = await endStaleSessions(ctx.db, 3600_000)
-    expect(endedCount).toBeGreaterThanOrEqual(1)
+    const abandonedIds = await abandonStaleSessions(ctx.db, 3600_000)
+    expect(abandonedIds).toContain(stale!.id)
     const [after] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.id, stale!.id))
-    expect(after.status).toBe('ended')
+    expect(after.status).toBe('abandoned')
     expect(after.engineState).toBeNull()
 
-    // loadEngineStateByPin exclut les sessions ended : plus de résultat après clôture.
+    // loadEngineStateByPin exclut les sessions non lobby/active : plus de résultat après bascule.
     expect(await loadEngineStateByPin(ctx.db, '900002')).toBeNull()
   })
 
@@ -168,5 +168,55 @@ describe('repo session scopé au tenant du quiz', () => {
     const [row] = await ctx.db.select({ last: schema.gameSession.lastActivityAt })
       .from(schema.gameSession).where(eq(schema.gameSession.id, session!.id))
     expect(row.last.getTime()).toBeGreaterThan(new Date('2021-01-01T00:00:00Z').getTime())
+  })
+
+  it('abandonInactiveSessions bascule les parties inactives vers abandoned et libère le PIN', async () => {
+    const s = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '818181' })
+    await setSessionStatus(ctx.db, s!.id, 'active')
+    await saveEngineState(ctx.db, s!.id, { phase: 'question' })
+    await ctx.db.update(schema.gameSession)
+      .set({ lastActivityAt: new Date('2020-01-01T00:00:00Z') })
+      .where(eq(schema.gameSession.id, s!.id))
+
+    const ids = await abandonInactiveSessions(ctx.db, 30 * 60_000)
+    expect(ids).toContain(s!.id)
+
+    const [row] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.id, s!.id))
+    expect(row.status).toBe('abandoned')
+    expect(row.endedAt).not.toBeNull()
+    expect(row.engineState).toBeNull()
+
+    // PIN réutilisable : une nouvelle session peut reprendre le même PIN sans violer l'index partiel.
+    const reuse = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '818181' })
+    expect(reuse).not.toBeNull()
+  })
+
+  it('abandonInactiveSessions ignore les parties récentes et déjà terminées', async () => {
+    const fresh = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '828282' })
+    await setSessionStatus(ctx.db, fresh!.id, 'active') // last_activity_at = now (défaut/insert récent)
+    const ids = await abandonInactiveSessions(ctx.db, 30 * 60_000)
+    expect(ids).not.toContain(fresh!.id)
+  })
+
+  it('loadEngineStateByPin ignore une ancienne session abandoned et renvoie la nouvelle session live sur le même PIN', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    const old = await createGameSession(scope, { quizId: quizA, hostId: ownerA, pin: '838383' })
+    await setSessionStatus(ctx.db, old!.id, 'active')
+    await saveEngineState(ctx.db, old!.id, { phase: 'question', who: 'old' })
+    await ctx.db.update(schema.gameSession)
+      .set({ lastActivityAt: new Date('2020-01-01T00:00:00Z') })
+      .where(eq(schema.gameSession.id, old!.id))
+    const abandonedIds = await abandonInactiveSessions(ctx.db, 30 * 60_000)
+    expect(abandonedIds).toContain(old!.id)
+
+    // Le PIN est libre (index partiel restreint à lobby/active) : une nouvelle session le reprend.
+    const fresh = await createGameSession(scope, { quizId: quizA, hostId: ownerA, pin: '838383' })
+    expect(fresh).not.toBeNull()
+    await setSessionStatus(ctx.db, fresh!.id, 'active')
+    await saveEngineState(ctx.db, fresh!.id, { phase: 'question', who: 'fresh' })
+
+    // Sans le filtre lobby/active, la ligne abandoned (engine_state = null) pourrait être
+    // retournée à la place de la session live → régression de la Task 3.
+    expect(await loadEngineStateByPin(ctx.db, '838383')).toMatchObject({ who: 'fresh' })
   })
 })
