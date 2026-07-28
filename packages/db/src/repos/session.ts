@@ -47,8 +47,13 @@ export async function addSessionPlayer(
   sessionId: string,
   input: { nickname: string; joinToken: string },
 ): Promise<SessionPlayer> {
+  // Pas de scope tenant dans la couche temps réel : on dérive le tenant_id de la session parente.
+  const [parent] = await db.select({ tenantId: schema.gameSession.tenantId })
+    .from(schema.gameSession).where(eq(schema.gameSession.id, sessionId))
+  if (!parent) throw new Error(`addSessionPlayer: session introuvable (${sessionId})`)
   const [row] = await db.insert(schema.sessionPlayer).values({
     sessionId,
+    tenantId: parent.tenantId,
     nickname: input.nickname,
     joinToken: input.joinToken,
   }).returning()

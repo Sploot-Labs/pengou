@@ -219,4 +219,19 @@ describe('repo session scopé au tenant du quiz', () => {
     // retournée à la place de la session live → régression de la Task 3.
     expect(await loadEngineStateByPin(ctx.db, '838383')).toMatchObject({ who: 'fresh' })
   })
+
+  it('addSessionPlayer pose le tenant_id de la session parente (signature inchangée)', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '242424' })
+    const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Tenanted', joinToken: 'tok-tenanted' })
+    expect(player.tenantId).toBe(tenantA)
+  })
+
+  it('la FK composite rejette un session_player dont le tenant_id ne colle pas à la session', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '252525' })
+    await expect(
+      ctx.db.insert(schema.sessionPlayer).values({
+        sessionId: session!.id, tenantId: tenantB, nickname: 'Cross', joinToken: 'tok-cross',
+      }).returning(),
+    ).rejects.toThrow()
+  })
 })

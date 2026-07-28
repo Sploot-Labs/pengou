@@ -82,17 +82,27 @@ export const gameSession = pgTable('game_session', {
   // PIN unique PARMI les sessions actives (index partiel Postgres)
   activePinUnique: uniqueIndex('game_session_active_pin_uidx').on(t.pin).where(sql`${t.status} in ('lobby', 'active')`),
   tenantIdx: index('game_session_tenant_idx').on(t.tenantId),
+  // Cible référençable par la FK composite de session_player et answer_record.
+  idTenantUq: uniqueIndex('game_session_id_tenant_uidx').on(t.id, t.tenantId),
 }))
 
 export const sessionPlayer = pgTable('session_player', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
   sessionId: uuid('session_id').notNull().references(() => gameSession.id, { onDelete: 'cascade' }),
+  tenantId: uuid('tenant_id').notNull().references(() => tenant.id),
   nickname: text('nickname').notNull(),
   joinToken: text('join_token').notNull(),
   totalScore: integer('total_score').notNull().default(0),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 }, (t) => ({
   sessionIdx: index('session_player_session_idx').on(t.sessionId),
+  tenantIdx: index('session_player_tenant_idx').on(t.tenantId),
+  // Garantie base : tenant_id enfant DOIT coller au tenant de la session parente.
+  sessionTenantFk: foreignKey({
+    columns: [t.sessionId, t.tenantId],
+    foreignColumns: [gameSession.id, gameSession.tenantId],
+    name: 'session_player_session_tenant_fk',
+  }),
 }))
 
 export const answerRecord = pgTable('answer_record', {

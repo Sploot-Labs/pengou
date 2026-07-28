@@ -68,7 +68,10 @@ export async function listSessions(
     })
     .from(schema.gameSession)
     .innerJoin(schema.quiz, eq(schema.quiz.id, schema.gameSession.quizId))
-    .leftJoin(schema.sessionPlayer, eq(schema.sessionPlayer.sessionId, schema.gameSession.id))
+    .leftJoin(schema.sessionPlayer, and(
+      eq(schema.sessionPlayer.sessionId, schema.gameSession.id),
+      eq(schema.sessionPlayer.tenantId, scope.tenantId),
+    ))
     .where(and(...conditions))
     .groupBy(schema.gameSession.id, schema.quiz.title)
     .orderBy(desc(schema.gameSession.createdAt))
@@ -131,7 +134,7 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
     })
     .from(schema.sessionPlayer)
     .leftJoin(schema.answerRecord, eq(schema.answerRecord.playerId, schema.sessionPlayer.id))
-    .where(eq(schema.sessionPlayer.sessionId, sessionId))
+    .where(and(eq(schema.sessionPlayer.sessionId, sessionId), eq(schema.sessionPlayer.tenantId, scope.tenantId)))
     .groupBy(schema.sessionPlayer.id)
     .orderBy(desc(schema.sessionPlayer.totalScore))
 
