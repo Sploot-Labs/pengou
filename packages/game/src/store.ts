@@ -6,6 +6,9 @@ export interface SessionStore {
   getByPin(pin: string): Promise<GameSession | undefined>
   save(s: GameSession): Promise<void>
   delete(id: string): Promise<void>
+  /** Retire une session du cache mémoire SANS persistance (retourne le PIN évincé, ou undefined).
+   * Distinct de `delete` qui, lui, efface aussi l'état persistant. */
+  evict(id: string): string | undefined
 }
 
 /**
@@ -47,5 +50,13 @@ export class MemorySessionStore implements SessionStore {
     const session = this.byId.get(id)
     if (session) this.pinToId.delete(session.pin)
     this.byId.delete(id)
+  }
+
+  evict(id: string): string | undefined {
+    const session = this.byId.get(id)
+    if (!session) return undefined
+    this.byId.delete(id)
+    this.pinToId.delete(session.pin)
+    return session.pin
   }
 }
