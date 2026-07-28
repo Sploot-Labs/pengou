@@ -27,6 +27,7 @@ const auth = createAuth(db, {
   baseURL: config.authUrl,
   tenancyMode: config.tenancyMode,
   nodeEnv: config.nodeEnv,
+  disableSignup: config.disableSignup,
   socialProviders: enabledSocialProviders(config),
 })
 await registerAuth(app, auth)

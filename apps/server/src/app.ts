@@ -12,7 +12,12 @@ export type ServerDeps = { dbStatus?: () => 'up' | 'down' }
 // `await app.register(...)` amorce le plugin immédiatement (les instances Fastify sont
 // thenables) → les hooks sont posés avant toute route, protégeant l'ensemble de l'app.
 export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Promise<FastifyInstance> {
-  const app = Fastify({ logger: config.nodeEnv !== 'test' })
+  // `trustProxy` (P2) : en production Arena tourne derrière un reverse-proxy/load-balancer
+  // (Docker, Caddy/Traefik…). Sans ça, `req.ip` = IP du proxy pour TOUS les clients → le
+  // rate-limit partage un seul bucket (auto-DoS + anti-brute-force ciblé défait). Avec
+  // trustProxy, Fastify lit X-Forwarded-For → `req.ip` = vraie IP client. En dev/test, aucun
+  // proxy : neutre.
+  const app = Fastify({ logger: config.nodeEnv !== 'test', trustProxy: true })
 
   // Sécurité (P2) : en-têtes HTTP durcis (anti-clickjacking, anti-sniffing MIME, Referrer-Policy…).
   // CSP réglée pour rester compatible avec le SPA servi par le même serveur : styles inline
@@ -25,7 +30,9 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
         scriptSrc: ["'self'"],
         styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
         fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
-        imgSrc: ["'self'", 'data:', 'blob:'],
+        // `https:` autorisé pour couvertures/médias externes en http(s) (cohérent avec la
+        // validation isSafeMedia côté serveur, qui accepte les URLs http(s)).
+        imgSrc: ["'self'", 'data:', 'blob:', 'https:'],
         connectSrc: ["'self'", 'ws:', 'wss:'],
       },
     },

@@ -2,6 +2,7 @@ import type { FastifyInstance } from 'fastify'
 import { createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz, type Db } from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
 import { requireUser, resolveScopeOr403 } from '../require-user.js'
+import { LIMITS, tooLong, isSafeMedia } from '../validation.js'
 
 type Deps = { db: Db; config: AppConfig }
 
@@ -11,11 +12,8 @@ function isNonEmptyString(value: unknown): value is string {
 }
 
 // Bornes de longueur (P2) : évite le stockage/rediffusion de chaînes démesurées.
-const MAX_TITLE = 200
-const MAX_DESCRIPTION = 2000
-function tooLong(value: unknown, max: number): boolean {
-  return typeof value === 'string' && value.length > max
-}
+const MAX_TITLE = LIMITS.title
+const MAX_DESCRIPTION = LIMITS.description
 
 export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
   const { db, config } = deps
@@ -75,6 +73,11 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
     if (body?.cover !== undefined) {
       if (body.cover !== null && typeof body.cover !== 'string') {
         return reply.code(400).send({ error: 'La couverture doit être une chaîne ou null.' })
+      }
+      // Même durcissement que `media` (P2) : la couverture est une URL d'image → bornée +
+      // schémas dangereux refusés (anti-XSS latent / abus stockage).
+      if (typeof body.cover === 'string' && !isSafeMedia(body.cover, LIMITS.cover)) {
+        return reply.code(400).send({ error: 'Couverture invalide (URL http(s) ou référence relative attendue).' })
       }
       patch.cover = body.cover
     }

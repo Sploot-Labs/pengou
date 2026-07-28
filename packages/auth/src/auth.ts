@@ -8,6 +8,8 @@ export type AuthConfig = {
   baseURL: string
   tenancyMode?: 'single' | 'multi'
   nodeEnv?: 'development' | 'test' | 'production'
+  /** Self-host : coupe l'inscription publique (les comptes existants se connectent toujours). */
+  disableSignup?: boolean
   socialProviders?: Record<string, { clientId: string; clientSecret: string }>
 }
 
@@ -16,7 +18,7 @@ export function createAuth(db: Db, config: AuthConfig) {
     database: drizzleAdapter(db, { provider: 'pg', schema }),
     secret: config.secret,
     baseURL: config.baseURL,
-    emailAndPassword: { enabled: true },
+    emailAndPassword: { enabled: true, disableSignUp: config.disableSignup ?? false },
     // Sécurité (P2) : cookie de session `Secure` dès que l'URL publique est en HTTPS.
     // En production, servez impérativement Arena derrière HTTPS et fixez BETTER_AUTH_URL
     // en https:// (sinon le cookie de session pourrait transiter en clair). httpOnly +
@@ -24,12 +26,15 @@ export function createAuth(db: Db, config: AuthConfig) {
     advanced: {
       useSecureCookies: config.baseURL.startsWith('https://'),
     },
-    // Sécurité (P1) : anti-brute-force / credential stuffing sur /api/auth/*. Actif en
-    // production uniquement (évite de gêner les suites de test qui enchaînent les requêtes).
-    // Fenêtre glissante en mémoire — suffisant en mono-instance ; à externaliser (secondary
-    // storage) lors d'un passage multi-instance.
+    // Sécurité (P1) : anti-brute-force / credential stuffing sur /api/auth/*. Actif en dev ET en
+    // prod, désactivé seulement en test (les suites enchaînent volontairement les requêtes) et
+    // si `nodeEnv` est absent (contexte de test construisant l'auth sans le préciser). On NE gate
+    // PAS sur `=== 'production'` seul : `loadConfig` fait défaut `NODE_ENV` à 'development' (jamais
+    // undefined côté serveur réel), donc un déploiement avec NODE_ENV non mis à 'production'
+    // resterait protégé (pas de fail-open). Fenêtre glissante en mémoire — suffisant en
+    // mono-instance ; à externaliser (secondary storage) lors d'un passage multi-instance.
     rateLimit: {
-      enabled: config.nodeEnv === 'production',
+      enabled: config.nodeEnv === 'development' || config.nodeEnv === 'production',
       window: 60,
       max: 20,
     },

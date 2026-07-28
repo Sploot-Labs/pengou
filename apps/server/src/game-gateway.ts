@@ -46,7 +46,17 @@ type SocketData = {
   role?: 'host' | 'player' | 'screen'
   sessionId?: string
   playerId?: string
+  /** Fenêtre de throttle par socket (anti-DoS d'events, P2). */
+  rateWindowStart?: number
+  rateCount?: number
 }
+
+/** Throttle par socket (P2) : Socket.IO court-circuite le rate-limit HTTP (serveur brut), donc
+ * les events (`player:join`/`player:answer`/`host:*`) n'ont sinon aucune borne de fréquence —
+ * un seul socket pourrait inonder Postgres d'INSERT/UPDATE. Fenêtre glissante généreuse : le jeu
+ * légitime reste très en-dessous, un flood (milliers/s) est coupé net. */
+const SOCKET_RATE_WINDOW_MS = 10_000
+const SOCKET_RATE_MAX = 240
 
 function roomName(sessionId: string): string {
   return `session:${sessionId}`
@@ -153,8 +163,13 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         consumedScreenTokens.delete(token)
       }
     }
-    const session = await engine.getSession(sessionId).catch(() => null)
-    if (session) pinToSessionId.delete(session.pin)
+    // On ne supprime QUE les entrées PIN pointant ENCORE vers CETTE session : entre le podium
+    // et l'éviction différée (+10 min), le PIN a pu être réattribué à une NOUVELLE partie live
+    // (`generateUniquePin` ignore les sessions au podium + engine_state DB vidé) — supprimer par
+    // `session.pin` sans ce garde casserait le mapping de cette autre partie (régression).
+    for (const [pin, sid] of pinToSessionId) {
+      if (sid === sessionId) pinToSessionId.delete(pin)
+    }
     sessionMetaByEngineId.delete(sessionId)
     await engine.evictSession(sessionId).catch(() => {})
   }
@@ -514,6 +529,24 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   }
 
   io.on('connection', (socket: Socket) => {
+    // Throttle par socket (P2, anti-DoS) : middleware exécuté avant CHAQUE handler d'event.
+    // Au-delà de SOCKET_RATE_MAX events par fenêtre, l'event est rejeté (le handler n'est pas
+    // appelé). `Date.now()` ici (couche passerelle, pas le moteur pur) est acceptable.
+    socket.use((_event, next) => {
+      const data = socket.data as SocketData
+      const now = Date.now()
+      if (data.rateWindowStart === undefined || now - data.rateWindowStart > SOCKET_RATE_WINDOW_MS) {
+        data.rateWindowStart = now
+        data.rateCount = 0
+      }
+      data.rateCount = (data.rateCount ?? 0) + 1
+      if (data.rateCount > SOCKET_RATE_MAX) {
+        next(new Error('trop de requêtes (throttle)'))
+        return
+      }
+      next()
+    })
+
     socket.on('host:create', async (payload: { quizId?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {

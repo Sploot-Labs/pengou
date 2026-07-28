@@ -114,10 +114,11 @@ export interface Engine {
    * `store` — la passerelle n'y a pas d'accès direct. No-op sûr (retourne la session inchangée,
    * SANS `store.save`) hors phases 'reading'/'question' : rien à ré-ancrer ailleurs. */
   reanchorTimer(sessionId: string): Promise<GameSession>
-  /** Évince une session TERMINÉE du store (cache mémoire) — la passerelle n'a pas d'accès
-   * direct au store (seul le moteur le porte). Ne touche PAS la DB (l'`engine_state` est déjà
-   * effacé côté passerelle via `clearEngineState`). Sans cette éviction, toute partie jouée
-   * resterait indéfiniment dans le cache du store → fuite mémoire sur un serveur long-running. */
+  /** Évince une session TERMINÉE du store (cache mémoire) — la passerelle n'a pas d'accès direct
+   * au store (seul le moteur le porte). Selon l'implémentation du `SessionStore`, `delete` peut
+   * aussi effacer l'`engine_state` en DB (c'est le cas du store persistant) : au podium cette
+   * colonne est déjà à null, la 2ᵉ passe est donc idempotente/inoffensive. Sans cette éviction,
+   * toute partie jouée resterait indéfiniment dans le cache du store → fuite mémoire. */
   evictSession(sessionId: string): Promise<void>
 }
 

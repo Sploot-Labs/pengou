@@ -12,6 +12,9 @@ const EnvSchema = z.object({
   // Sécurité : plafond de requêtes HTTP par IP et par minute (anti-DoS/abus). Volontairement
   // haut par défaut pour ne pas gêner un usage légitime ; à abaisser selon l'exposition.
   RATE_LIMIT_MAX: z.coerce.number().int().positive().default(1000),
+  // Self-host : fermer l'inscription publique une fois le(s) compte(s) créé(s). 'true' désactive
+  // le sign-up e-mail/mot de passe (les comptes existants continuent de se connecter).
+  DISABLE_SIGNUP: z.enum(['true', 'false']).default('false'),
   GOOGLE_CLIENT_ID: z.string().optional(),
   GOOGLE_CLIENT_SECRET: z.string().optional(),
   FACEBOOK_CLIENT_ID: z.string().optional(),
@@ -36,6 +39,7 @@ export type AppConfig = {
   authSecret?: string
   authUrl: string
   rateLimitMax: number
+  disableSignup: boolean
   oauth: {
     google: OAuthProviderCreds
     facebook: OAuthProviderCreds
@@ -63,6 +67,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     authSecret: parsed.BETTER_AUTH_SECRET,
     authUrl: parsed.BETTER_AUTH_URL,
     rateLimitMax: parsed.RATE_LIMIT_MAX,
+    disableSignup: parsed.DISABLE_SIGNUP === 'true',
     oauth: {
       google: { clientId: parsed.GOOGLE_CLIENT_ID, clientSecret: parsed.GOOGLE_CLIENT_SECRET },
       facebook: { clientId: parsed.FACEBOOK_CLIENT_ID, clientSecret: parsed.FACEBOOK_CLIENT_SECRET },
