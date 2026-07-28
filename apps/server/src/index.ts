@@ -60,8 +60,9 @@ if (config.scaling === 'redis') {
 // `registerGameGateway` réhydrate au montage les sessions encore actives et récentes
 // (`rehydrateActiveSessions`, dans `game-gateway.ts`). Un futur passage à un backend partagé
 // (Redis, multi-instance) resterait un simple changement d'implémentation de `SessionStore`.
+const sessionStore = new PersistentSessionStore(db)
 const engine = createEngine({
-  store: new PersistentSessionStore(db),
+  store: sessionStore,
   now: () => Date.now(),
   genPin: generatePin,
   genId: () => crypto.randomUUID(),
@@ -73,6 +74,8 @@ const webDist = process.env.WEB_DIST ?? join(process.cwd(), 'public')
 registerStatic(app, webDist)
 
 app.addHook('onClose', async () => {
+  // Arrêt gracieux : écrit d'abord les états de jeu encore coalescés (P0-5), PUIS ferme le pool.
+  await sessionStore.flushAll().catch(() => {})
   await client.end({ timeout: 5 })
 })
 

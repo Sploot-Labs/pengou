@@ -110,6 +110,47 @@ describe('PersistentSessionStore', () => {
     expect(await fresh.get(s.id)).toBeDefined()
   })
 
+  it('P0-5 : une écriture « answers-only » est coalescée (DB pas encore à jour), flushAll la persiste', async () => {
+    const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900201' })
+    await setSessionStatus(ctx.db, dbSession!.id, 'active')
+    const s = makeSession(dbSession!.id, dbSession!.pin)
+
+    const store = new PersistentSessionStore(ctx.db)
+    await store.save(s) // 1re écriture = CRITIQUE → flush immédiat
+
+    // Ajout d'une réponse SEULEMENT (même phase/manche/crédit/joueurs) → coalescé, pas encore en DB.
+    const s2 = structuredClone(s)
+    s2.answers[0]['player-2'] = { answer: { choice: 1 }, timeMs: 4000, correct: false, points: 0 }
+    s2.players['player-2'] = { id: 'player-2', nickname: 'Bob', joinToken: 'tok-bob', score: 0, connected: true }
+    // NB : ajouter un joueur EST critique — on teste ici le cas answers-only pur :
+    delete s2.players['player-2']
+    await store.save(s2)
+
+    // Un process neuf ne voit PAS encore la 2e réponse (écriture coalescée en attente).
+    const beforeFlush = await new PersistentSessionStore(ctx.db).get(s.id)
+    expect(beforeFlush!.answers[0]['player-2']).toBeUndefined()
+
+    await store.flushAll()
+
+    const afterFlush = await new PersistentSessionStore(ctx.db).get(s.id)
+    expect(afterFlush!.answers[0]['player-2']).toBeDefined()
+    expect(afterFlush!.answers[0]['player-2'].timeMs).toBe(4000)
+  })
+
+  it('P0-5 : un changement de phase (critique) est écrit immédiatement, sans flushAll', async () => {
+    const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900202' })
+    await setSessionStatus(ctx.db, dbSession!.id, 'active')
+    const s = makeSession(dbSession!.id, dbSession!.pin)
+    const store = new PersistentSessionStore(ctx.db)
+    await store.save(s)
+
+    const revealed = { ...structuredClone(s), phase: 'reveal' as const }
+    await store.save(revealed) // phase change → CRITIQUE → durabilité immédiate
+
+    const fresh = await new PersistentSessionStore(ctx.db).get(s.id)
+    expect(fresh!.phase).toBe('reveal')
+  })
+
   it('save puis get renvoie des clones (mutation ultérieure de la référence sans effet)', async () => {
     const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900103' })
     await setSessionStatus(ctx.db, dbSession!.id, 'active')

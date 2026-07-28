@@ -31,8 +31,53 @@ function deserialize(raw: unknown): GameSession {
 export class PersistentSessionStore implements SessionStore {
   private readonly byId = new Map<string, GameSession>()
   private readonly pinToId = new Map<string, string>()
+  // Coalescence des écritures DB (P0-5) : signature du dernier état PERSISTÉ + minuteur en attente
+  // par session. Le cache mémoire (`byId`) est toujours à jour immédiatement ; seule l'écriture
+  // Postgres est débouncée pour les changements « answers-only ».
+  private readonly lastPersistedSig = new Map<string, string>()
+  private readonly pendingFlush = new Map<string, ReturnType<typeof setTimeout>>()
+  private static readonly FLUSH_DELAY_MS = 250
 
   constructor(private readonly db: Db) {}
+
+  /** Signature des champs dont un changement rend l'écriture CRITIQUE (durabilité immédiate) :
+   * phase, index de manche, ensemble des manches créditées, ensemble des joueurs. Un changement
+   * « answers-only » (réponses accumulées d'une manche non révélée) ne modifie AUCUN de ces champs
+   * → écriture coalescée. Le crédit (scoring) et les transitions de phase restent, eux, durables
+   * immédiatement — condition de la cicatrisation P1-8 et de l'idempotence du reveal. */
+  private signature(s: GameSession): string {
+    const creditedRounds = Object.keys(s.credited ?? {}).filter((k) => s.credited[Number(k)]).sort()
+    const players = Object.keys(s.players ?? {}).sort()
+    return JSON.stringify({ phase: s.phase, idx: s.currentIndex, creditedRounds, players })
+  }
+
+  private scheduleFlush(id: string): void {
+    if (this.pendingFlush.has(id)) return
+    const timer = setTimeout(() => {
+      void this.flush(id).catch(() => {})
+    }, PersistentSessionStore.FLUSH_DELAY_MS)
+    timer.unref() // ne maintient pas le process en vie ; l'arrêt gracieux appelle flushAll().
+    this.pendingFlush.set(id, timer)
+  }
+
+  /** Écrit immédiatement l'état COURANT (cache) en base et met à jour la signature persistée. */
+  private async flush(id: string): Promise<void> {
+    const pending = this.pendingFlush.get(id)
+    if (pending) {
+      clearTimeout(pending)
+      this.pendingFlush.delete(id)
+    }
+    const s = this.byId.get(id)
+    if (!s) return
+    await saveEngineState(this.db, id, s)
+    this.lastPersistedSig.set(id, this.signature(s))
+  }
+
+  /** Persiste immédiatement tous les états en attente (arrêt gracieux — voir onClose serveur).
+   * Sans ça, un `docker stop` pourrait perdre les dernières réponses coalescées d'une manche. */
+  async flushAll(): Promise<void> {
+    for (const id of [...this.pendingFlush.keys()]) await this.flush(id)
+  }
 
   async get(id: string): Promise<GameSession | undefined> {
     const cached = this.byId.get(id)
@@ -61,13 +106,26 @@ export class PersistentSessionStore implements SessionStore {
     const clone = structuredClone(s)
     const previous = this.byId.get(s.id)
     if (previous && previous.pin !== clone.pin) this.pinToId.delete(previous.pin)
-    this.byId.set(clone.id, clone)
+    this.byId.set(clone.id, clone) // cache TOUJOURS à jour immédiatement
     this.pinToId.set(clone.pin, clone.id)
-    // jsonb accepte l'objet tel quel (mêmes clés numériques-en-chaînes que `deserialize` re-parse).
-    await saveEngineState(this.db, s.id, clone)
+
+    // Écriture DB : immédiate si CRITIQUE (1re écriture, ou changement de phase/manche/crédit/
+    // joueurs), coalescée sinon (« answers-only »). Réduit l'amplification O(n²) du blob
+    // write-through quand N joueurs répondent à la même manche.
+    if (this.lastPersistedSig.get(s.id) !== this.signature(clone)) {
+      await this.flush(s.id)
+    } else {
+      this.scheduleFlush(s.id)
+    }
   }
 
   async delete(id: string): Promise<void> {
+    const pending = this.pendingFlush.get(id)
+    if (pending) {
+      clearTimeout(pending)
+      this.pendingFlush.delete(id)
+    }
+    this.lastPersistedSig.delete(id)
     const session = this.byId.get(id)
     if (session) this.pinToId.delete(session.pin)
     this.byId.delete(id)
