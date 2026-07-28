@@ -32,6 +32,7 @@ const STATUS_LABEL: Record<SessionStatus, string> = {
   lobby: 'En attente',
   active: 'En cours',
   ended: 'Terminée',
+  abandoned: 'Abandonnée',
 }
 
 /** Une partie encore vivante (`lobby`/`active`) mène vers le contrôleur hôte LIVE (`/host/:id`,
