@@ -24,7 +24,7 @@ beforeAll(async () => {
   const qb = await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerA, title: 'Quiz B' })
   quizB = qb.id
   const [question] = await ctx.db.insert(schema.question).values({
-    quizId: quizA, type: 'mcq', prompt: 'Q1', timeLimit: 20, orderIndex: 0,
+    quizId: quizA, tenantId: tenantA, type: 'mcq', prompt: 'Q1', timeLimit: 20, orderIndex: 0,
     payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
   }).returning()
   questionA = question.id

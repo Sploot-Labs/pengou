@@ -78,6 +78,13 @@
       "when": 1785196591405,
       "tag": "0010_romantic_anthem",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1785278968771,
+      "tag": "0011_jittery_gladiator",
+      "breakpoints": true
     }
   ]
 }

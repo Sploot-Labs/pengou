@@ -56,7 +56,7 @@ async function seedFinishedSession(ownerId: string, tenantId: string, pin: strin
   const scope = tenantScope(ctx.db, tenantId)
   const quiz = await createQuiz(scope, { ownerId, title: 'Quiz rapport' })
   const [question] = await ctx.db.insert(schema.question).values({
-    quizId: quiz.id, type: 'mcq', prompt: 'Question 1', timeLimit: 20, orderIndex: 0,
+    quizId: quiz.id, tenantId, type: 'mcq', prompt: 'Question 1', timeLimit: 20, orderIndex: 0,
     payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
   }).returning()
 

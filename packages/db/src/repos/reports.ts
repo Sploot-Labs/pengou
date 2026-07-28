@@ -114,7 +114,7 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
       schema.answerRecord,
       and(eq(schema.answerRecord.questionId, schema.question.id), eq(schema.answerRecord.sessionId, sessionId)),
     )
-    .where(eq(schema.question.quizId, session.quizId))
+    .where(and(eq(schema.question.quizId, session.quizId), eq(schema.question.tenantId, scope.tenantId)))
     .groupBy(schema.question.id)
     .orderBy(schema.question.orderIndex)
 

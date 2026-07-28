@@ -1,6 +1,6 @@
 import { sql } from 'drizzle-orm'
 import {
-  pgTable, pgEnum, uuid, text, integer, boolean, timestamp, jsonb, uniqueIndex, index,
+  pgTable, pgEnum, uuid, text, integer, boolean, timestamp, jsonb, uniqueIndex, index, foreignKey,
 } from 'drizzle-orm/pg-core'
 import { user } from './auth-schema.js'
 
@@ -37,11 +37,14 @@ export const quiz = pgTable('quiz', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 }, (t) => ({
   tenantIdx: index('quiz_tenant_idx').on(t.tenantId),
+  // Cible référençable par la FK composite des tables enfants (question.tenant_id doit coller au quiz).
+  idTenantUq: uniqueIndex('quiz_id_tenant_uidx').on(t.id, t.tenantId),
 }))
 
 export const question = pgTable('question', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
   quizId: uuid('quiz_id').notNull().references(() => quiz.id, { onDelete: 'cascade' }),
+  tenantId: uuid('tenant_id').notNull().references(() => tenant.id),
   type: questionTypeEnum('type').notNull(),
   prompt: text('prompt').notNull(),
   media: text('media'),
@@ -52,6 +55,13 @@ export const question = pgTable('question', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 }, (t) => ({
   quizOrderIdx: index('question_quiz_order_idx').on(t.quizId, t.orderIndex),
+  tenantIdx: index('question_tenant_idx').on(t.tenantId),
+  // Garantie base : tenant_id enfant DOIT coller au tenant du quiz parent.
+  quizTenantFk: foreignKey({
+    columns: [t.quizId, t.tenantId],
+    foreignColumns: [quiz.id, quiz.tenantId],
+    name: 'question_quiz_tenant_fk',
+  }),
 }))
 
 export const gameSession = pgTable('game_session', {
