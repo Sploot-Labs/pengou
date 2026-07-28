@@ -25,6 +25,7 @@ const STATUS_LABEL: Record<SessionStatus, string> = {
   lobby: 'En attente',
   active: 'En cours',
   ended: 'Terminée',
+  abandoned: 'Abandonnée',
 }
 
 function errorMessage(err: unknown): string {

@@ -61,22 +61,31 @@ if (config.scaling === 'redis') {
 // `registerGameGateway` réhydrate au montage les sessions encore actives et récentes
 // (`rehydrateActiveSessions`, dans `game-gateway.ts`). Un futur passage à un backend partagé
 // (Redis, multi-instance) resterait un simple changement d'implémentation de `SessionStore`.
-const sessionStore = new PersistentSessionStore(db)
+const store = new PersistentSessionStore(db)
 const engine = createEngine({
-  store: sessionStore,
+  store,
   now: () => Date.now(),
   genPin: generatePin,
   genId: () => crypto.randomUUID(),
 })
-await registerGameGateway(io, { engine, db, auth, config })
+const gateway = await registerGameGateway(io, { engine, db, auth, config, store })
+
+// Balayage périodique des parties inactives (mono-instance). `.unref()` : ne maintient jamais le
+// process en vie à lui seul. Erreurs loggées, jamais propagées (un tick ne doit pas tuer le serveur).
+const sweepTimer = setInterval(() => {
+  gateway.sweepAbandonedSessions().catch((err) => app.log.error(err, 'balayage des parties inactives échoué'))
+}, config.sessionSweepIntervalMs)
+sweepTimer.unref()
 
 // En production, le build du SPA est copié à côté du serveur (voir Dockerfile).
 const webDist = process.env.WEB_DIST ?? join(process.cwd(), 'public')
 registerStatic(app, webDist)
 
 app.addHook('onClose', async () => {
-  // Arrêt gracieux : écrit d'abord les états de jeu encore coalescés (P0-5), PUIS ferme le pool.
-  await sessionStore.flushAll().catch(() => {})
+  // Arrêt gracieux : écrit d'abord les états de jeu encore coalescés (P0-5), arrête le balayage,
+  // PUIS ferme le pool.
+  await store.flushAll().catch(() => {})
+  clearInterval(sweepTimer)
   await client.end({ timeout: 5 })
 })
 

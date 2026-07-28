@@ -3,18 +3,19 @@ import { fromNodeHeaders } from 'better-auth/node'
 import {
   resolveTenantId, tenantScope, listQuestions,
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
-  clearEngineState, listResumableSessions, endStaleSessions, listSessionPlayers,
+  clearEngineState, listResumableSessions, abandonStaleSessions, abandonInactiveSessions, listSessionPlayers,
   type Db,
 } from '@splootlabs/db'
 import type { Auth } from '@splootlabs/auth'
 import type { AppConfig } from '@splootlabs/shared'
-import type { Engine, EngineQuestion, GameSession } from '@splootlabs/game'
+import type { Engine, EngineQuestion, GameSession, SessionStore } from '@splootlabs/game'
 
 export type GameGatewayDeps = {
   engine: Engine
   db: Db
   auth: Auth
   config: AppConfig
+  store: SessionStore
 }
 
 /** Métadonnées côté passerelle reliant une session moteur (mémoire) à sa persistance en base. */
@@ -77,8 +78,8 @@ function message(err: unknown): string {
 const DEFAULT_BASE_POINTS = 1000
 
 /** Fenêtre de reprise (Task 4, réhydratation au boot) : une session `lobby`/`active` plus
- * ancienne que ça au démarrage n'est plus considérée reprenable (`endStaleSessions` la bascule
- * en `ended`, `engine_state` effacé) — évite de ressusciter indéfiniment une partie abandonnée
+ * ancienne que ça au démarrage n'est plus considérée reprenable (`abandonStaleSessions` la bascule
+ * en `abandoned`, `engine_state` effacé) — évite de ressusciter indéfiniment une partie abandonnée
  * après un très long redémarrage. 12 h, cohérent avec la durée réaliste d'une session de jeu. */
 const SESSION_MAX_AGE = 12 * 3600_000
 
@@ -111,8 +112,8 @@ function playersPayload(session: GameSession): Array<{ id: string; nickname: str
   }))
 }
 
-export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Promise<void> {
-  const { engine, db, auth, config } = deps
+export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Promise<{ sweepAbandonedSessions: () => Promise<void> }> {
+  const { engine, db, auth, config, store } = deps
 
   // État de la passerelle : local à CET appel de registerGameGateway (donc à CETTE instance
   // `io`) — pas de Map au niveau module, pour ne pas fuiter entre plusieurs serveurs
@@ -543,14 +544,14 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
    * `pinToSessionId` sont vides (état local à CET appel de `registerGameGateway`, voir plus haut)
    * même si l'état moteur a survécu en base (`PersistentSessionStore`, Task 3) — sans cette
    * fonction, `host:reconnect`/`player:reconnect` répondraient "session introuvable" sur une
-   * partie pourtant reprenable. Ménage d'abord (`endStaleSessions`, sessions trop vieilles → plus
-   * jamais reprenables), puis reconstruit la `SessionMeta` de chaque session candidate et
+   * partie pourtant reprenable. Ménage d'abord (`abandonStaleSessions`, sessions trop vieilles →
+   * plus jamais reprenables), puis reconstruit la `SessionMeta` de chaque session candidate et
    * ré-ancre le chrono de sa phase courante à neuf (décision produit, voir le design : le chrono
    * ne reprend jamais là où il en était — il repart de zéro pour la durée COMPLÈTE de la phase).
    * Best-effort par session : une session individuellement corrompue/absente du store (ex. race
    * avec une écriture concurrente) ne doit jamais empêcher la reprise des autres. */
   async function rehydrateActiveSessions(maxAgeMs: number): Promise<void> {
-    await endStaleSessions(db, maxAgeMs)
+    await abandonStaleSessions(db, maxAgeMs)
     const rows = await listResumableSessions(db, maxAgeMs)
 
     for (const row of rows) {
@@ -1085,10 +1086,32 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     })
   })
 
+  /** Balayage d'abandon (mono-instance) : bascule en base les parties inactives (autoritatif via
+   * `abandonInactiveSessions`), puis nettoie l'état mémoire LOCAL de CE process pour chacune —
+   * annule le minuteur de fin de lecture (sinon révélation fantôme), retire les entrées de
+   * correspondance, et évince le cache du store (le PIN redevient réutilisable). Best-effort :
+   * une session déjà absente de la mémoire (ex. jamais pilotée par ce process) est simplement
+   * ignorée par les `get`/`delete` de Map. Appelé périodiquement par la composition root. */
+  async function sweepAbandonedSessions(): Promise<void> {
+    const ids = await abandonInactiveSessions(db, config.sessionInactivityTimeoutMs)
+    for (const id of ids) {
+      const meta = sessionMetaByEngineId.get(id)
+      if (meta) clearReadingTimeout(meta)
+      sessionMetaByEngineId.delete(id)
+      const pin = store.evict(id)
+      if (pin) pinToSessionId.delete(pin)
+      for (const [token, sid] of screenTokenToSessionId) {
+        if (sid === id) screenTokenToSessionId.delete(token)
+      }
+    }
+  }
+
   // Réhydratation au montage (Task 4) : APRÈS avoir câblé tous les handlers (une reconnexion
   // qui arriverait entre-temps, ex. juste après `io.on('connection', …)`, trouve déjà tout en
   // place) mais avant que `registerGameGateway` ne rende la main — `index.ts`/les tests
   // (`buildApp`) l'attendent donc explicitement (`await registerGameGateway(...)`), garantissant
   // qu'aucune reconnexion n'est traitée avant que la reprise ne soit terminée.
   await rehydrateActiveSessions(SESSION_MAX_AGE)
+
+  return { sweepAbandonedSessions }
 }

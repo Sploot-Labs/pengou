@@ -163,4 +163,19 @@ describe('PersistentSessionStore', () => {
     const found = await store.get(s.id)
     expect(found?.phase).toBe('question')
   })
+
+  it('evict retire la session du cache sans toucher la base et retourne le PIN', async () => {
+    const store = new PersistentSessionStore(ctx.db)
+    const s = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '767676' })
+    const session = makeSession(s!.id, '767676')
+    await store.save(session)
+
+    const pin = store.evict(s!.id)
+    expect(pin).toBe('767676')
+
+    // Le cache est vide : getByPin ne doit PAS ressusciter la session (engine_state existe encore
+    // en base ici, mais getByPin exclut les sessions non vivantes — la ligne est toujours 'lobby',
+    // donc on vérifie plutôt via un second evict qui ne retrouve rien en cache).
+    expect(store.evict(s!.id)).toBeUndefined()
+  })
 })

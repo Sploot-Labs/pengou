@@ -33,9 +33,17 @@ describe('api/sessions — routes et méthodes HTTP', () => {
 
   it('listSessions(limit) → GET /api/sessions?limit=', async () => {
     mockFetchOnce(200, [])
-    await listSessions(10)
+    await listSessions({ limit: 10 })
     const [path] = lastCall()
     expect(path).toBe('/api/sessions?limit=10')
+  })
+
+  it('listSessions({ status }) → GET /api/sessions?status=a,b', async () => {
+    mockFetchOnce(200, [])
+    await listSessions({ status: ['lobby', 'active'] })
+    const [path] = lastCall()
+    expect(String(path)).toContain('/api/sessions?')
+    expect(decodeURIComponent(String(path))).toContain('status=lobby,active')
   })
 
   it('getSessionReport → GET /api/sessions/:id', async () => {

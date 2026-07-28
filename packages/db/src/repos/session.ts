@@ -1,5 +1,5 @@
 import {
-  and, desc, eq, gte, inArray, isNotNull, lt, ne,
+  and, desc, eq, gte, inArray, isNotNull, lt,
 } from 'drizzle-orm'
 import { schema } from '../index.js'
 import type { Db } from '../client.js'
@@ -19,7 +19,7 @@ export async function createGameSession(
 ): Promise<GameSession | null> {
   const quiz = await getQuiz(scope, input.quizId)
   if (!quiz) return null
-  // NB : un PIN dupliqué parmi les sessions actives (status <> 'ended') viole
+  // NB : un PIN dupliqué parmi les sessions LIVE (status lobby/active) viole
   // l'index partiel unique `game_session_active_pin_uidx`. On NE catch PAS ici :
   // le moteur (@splootlabs/game, Task 2) garantit déjà l'unicité en mémoire avant
   // d'appeler ce repo, donc une violation ici ne peut venir que d'une course ou
@@ -132,7 +132,7 @@ export async function listSessionPlayers(
 
 export async function saveEngineState(db: Db, sessionId: string, state: unknown): Promise<void> {
   await db.update(schema.gameSession)
-    .set({ engineState: state as never })
+    .set({ engineState: state as never, lastActivityAt: new Date() })
     .where(eq(schema.gameSession.id, sessionId))
 }
 
@@ -149,12 +149,15 @@ export async function loadEngineState(db: Db, sessionId: string): Promise<unknow
   return row?.engineState ?? null
 }
 
-// État de la session courante (non close) associée à ce PIN — un PIN ne peut
-// correspondre qu'à au plus une session non-`ended` (index partiel unique).
+// État de la session LIVE (lobby/active) associée à ce PIN — un PIN ne peut
+// correspondre qu'à au plus une session lobby/active (index partiel unique). Ne PAS élargir à
+// `ne(status, 'ended')` : `abandoned` libère aussi le PIN (Task 3), et une ancienne ligne
+// `abandoned` (engine_state=null) pourrait alors être retournée à la place de la session live
+// qui a repris le même PIN — on doit filtrer strictement sur les statuts vivants.
 export async function loadEngineStateByPin(db: Db, pin: string): Promise<unknown | null> {
   const [row] = await db.select({ engineState: schema.gameSession.engineState })
     .from(schema.gameSession)
-    .where(and(eq(schema.gameSession.pin, pin), ne(schema.gameSession.status, 'ended')))
+    .where(and(eq(schema.gameSession.pin, pin), inArray(schema.gameSession.status, ['lobby', 'active'])))
   return row?.engineState ?? null
 }
 
@@ -174,16 +177,34 @@ export async function listResumableSessions(
     ))
 }
 
-// Ménage : les sessions lobby/active trop anciennes pour être reprises sont closes
-// et leur checkpoint effacé (pas de resurrection tardive après un long redémarrage).
-export async function endStaleSessions(db: Db, maxAgeMs: number): Promise<number> {
+// Bascule vers le statut terminal `abandoned` les parties encore vivantes (lobby/active) TRAITÉES
+// comme inactives : aucune mutation moteur (donc aucun `saveEngineState`) au-delà de `inactivityMs`.
+// C'est une HEURISTIQUE d'inactivité, non une garantie de présence moteur. Efface le checkpoint
+// (`engine_state`) et pose `ended_at`. Retourne les ids basculés pour permettre à l'appelant
+// (passerelle) de nettoyer son état mémoire (timers/caches).
+export async function abandonInactiveSessions(db: Db, inactivityMs: number): Promise<string[]> {
+  const cutoff = new Date(Date.now() - inactivityMs)
+  const rows = await db.update(schema.gameSession)
+    .set({ status: 'abandoned', endedAt: new Date(), engineState: null })
+    .where(and(
+      inArray(schema.gameSession.status, ['active', 'lobby']),
+      lt(schema.gameSession.lastActivityAt, cutoff),
+    ))
+    .returning({ id: schema.gameSession.id })
+  return rows.map((r) => r.id)
+}
+
+// Ménage au (re)démarrage : les parties lobby/active trop ANCIENNES (created_at) pour être
+// reprises sont marquées `abandoned` (plus `ended` : une partie coupée par un long arrêt n'a
+// jamais atteint son podium) et leur checkpoint effacé.
+export async function abandonStaleSessions(db: Db, maxAgeMs: number): Promise<string[]> {
   const cutoff = new Date(Date.now() - maxAgeMs)
   const rows = await db.update(schema.gameSession)
-    .set({ status: 'ended', endedAt: new Date(), engineState: null })
+    .set({ status: 'abandoned', endedAt: new Date(), engineState: null })
     .where(and(
       inArray(schema.gameSession.status, ['active', 'lobby']),
       lt(schema.gameSession.createdAt, cutoff),
     ))
     .returning({ id: schema.gameSession.id })
-  return rows.length
+  return rows.map((r) => r.id)
 }

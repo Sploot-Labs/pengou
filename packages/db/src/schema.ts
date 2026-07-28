@@ -7,7 +7,7 @@ import { user } from './auth-schema.js'
 export const planEnum = pgEnum('plan', ['free', 'pro'])
 export const roleEnum = pgEnum('role', ['owner', 'admin', 'member'])
 export const questionTypeEnum = pgEnum('question_type', ['mcq', 'truefalse', 'text', 'slider'])
-export const sessionStatusEnum = pgEnum('session_status', ['lobby', 'active', 'ended'])
+export const sessionStatusEnum = pgEnum('session_status', ['lobby', 'active', 'ended', 'abandoned'])
 
 export const tenant = pgTable('tenant', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
@@ -64,12 +64,13 @@ export const gameSession = pgTable('game_session', {
   startedAt: timestamp('started_at', { withTimezone: true }),
   endedAt: timestamp('ended_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  lastActivityAt: timestamp('last_activity_at', { withTimezone: true }).notNull().defaultNow(),
   // État moteur sérialisé (résumé après crash serveur) : nul tant que la session
   // n'a pas été checkpointée par le moteur (@splootlabs/game, Task 2/3).
   engineState: jsonb('engine_state'),
 }, (t) => ({
   // PIN unique PARMI les sessions actives (index partiel Postgres)
-  activePinUnique: uniqueIndex('game_session_active_pin_uidx').on(t.pin).where(sql`${t.status} <> 'ended'`),
+  activePinUnique: uniqueIndex('game_session_active_pin_uidx').on(t.pin).where(sql`${t.status} in ('lobby', 'active')`),
   tenantIdx: index('game_session_tenant_idx').on(t.tenantId),
 }))
 

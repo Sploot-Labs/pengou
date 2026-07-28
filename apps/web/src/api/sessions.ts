@@ -10,7 +10,7 @@
 import { apiGet } from './client'
 import type { QuestionType } from './quizzes'
 
-export type SessionStatus = 'lobby' | 'active' | 'ended'
+export type SessionStatus = 'lobby' | 'active' | 'ended' | 'abandoned'
 
 export interface SessionSummary {
   id: string
@@ -55,13 +55,14 @@ export interface SessionReport {
   players: SessionReportPlayer[]
 }
 
-/** `GET /api/sessions?limit=` — sessions of the caller's tenant, most recent
- * first. `limit` is omitted from the query string entirely when not given
- * (the server falls back to its own default rather than this client
- * hardcoding one). */
-export function listSessions(limit?: number): Promise<SessionSummary[]> {
-  const query = limit === undefined ? '' : `?limit=${encodeURIComponent(String(limit))}`
-  return apiGet<SessionSummary[]>(`/api/sessions${query}`)
+/** `GET /api/sessions` — sessions of the caller's tenant, most recent first. `limit` and `status` are
+ * omitted from the query string when not provided (the server applies its own defaults). */
+export function listSessions(opts?: { limit?: number; status?: SessionStatus[] }): Promise<SessionSummary[]> {
+  const params = new URLSearchParams()
+  if (opts?.limit !== undefined) params.set('limit', String(opts.limit))
+  if (opts?.status && opts.status.length > 0) params.set('status', opts.status.join(','))
+  const qs = params.toString()
+  return apiGet<SessionSummary[]>(`/api/sessions${qs ? `?${qs}` : ''}`)
 }
 
 /** `GET /api/sessions/:id` — throws `ApiError` with `status === 404` when the

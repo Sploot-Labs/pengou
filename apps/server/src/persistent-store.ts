@@ -132,6 +132,16 @@ export class PersistentSessionStore implements SessionStore {
     await clearEngineState(this.db, id)
   }
 
+  /** Éviction cache uniquement : le balayage d'abandon (`sweepAbandonedSessions`, game-gateway)
+   * a déjà mis `engine_state` à null via l'UPDATE SQL — inutile de réécrire en base ici. */
+  evict(id: string): string | undefined {
+    const session = this.byId.get(id)
+    if (!session) return undefined
+    this.byId.delete(id)
+    this.pinToId.delete(session.pin)
+    return session.pin
+  }
+
   private index(session: GameSession): void {
     this.byId.set(session.id, structuredClone(session))
     this.pinToId.set(session.pin, session.id)

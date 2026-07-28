@@ -1,5 +1,5 @@
 {
-  "id": "f42f8515-2f94-4f90-a912-3a8c247ba47a",
+  "id": "241714c4-32c7-4f19-bfb3-40f46dbaacd0",
   "prevId": "c0b62253-52c6-42e5-9858-bb1d10dc6408",
   "version": "7",
   "dialect": "postgresql",
@@ -84,33 +84,6 @@
             }
           ],
           "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "answer_session_question_player_uidx": {
-          "name": "answer_session_question_player_uidx",
-          "columns": [
-            {
-              "expression": "session_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
-            {
-              "expression": "question_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
-            {
-              "expression": "player_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": true,
           "concurrently": false,
           "method": "btree",
           "with": {}
@@ -225,6 +198,13 @@
           "notNull": true,
           "default": "now()"
         },
+        "last_activity_at": {
+          "name": "last_activity_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
         "engine_state": {
           "name": "engine_state",
           "type": "jsonb",
@@ -244,7 +224,7 @@
             }
           ],
           "isUnique": true,
-          "where": "\"game_session\".\"status\" <> 'ended'",
+          "where": "\"game_session\".\"status\" in ('lobby', 'active')",
           "concurrently": false,
           "method": "btree",
           "with": {}
@@ -1150,7 +1130,8 @@
       "values": [
         "lobby",
         "active",
-        "ended"
+        "ended",
+        "abandoned"
       ]
     }
   },

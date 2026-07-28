@@ -117,6 +117,20 @@ describe('listSessions', () => {
     expect(rows).toHaveLength(1)
     expect(rows[0].id).toBe(sessionRecent)
   })
+
+  it('listSessions filtre par statut quand `status` est fourni', async () => {
+    const ended = await listSessions(tenantScope(ctx.db, tenantA), { status: ['ended', 'abandoned'] })
+    expect(ended.every((s) => s.status === 'ended' || s.status === 'abandoned')).toBe(true)
+    expect(ended.some((s) => s.id === sessionOld)).toBe(true)
+
+    const live = await listSessions(tenantScope(ctx.db, tenantA), { status: ['lobby', 'active'] })
+    expect(live.some((s) => s.id === sessionOld)).toBe(false)
+  })
+
+  it('listSessions sans `status` renvoie tous les statuts (rétro-compat)', async () => {
+    const all = await listSessions(tenantScope(ctx.db, tenantA))
+    expect(all.some((s) => s.id === sessionOld)).toBe(true)
+  })
 })
 
 describe('getSessionReport', () => {

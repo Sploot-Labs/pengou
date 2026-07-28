@@ -41,7 +41,8 @@ vi.mock('react-router-dom', async () => {
 import { Home } from './Home'
 
 /** 12 sessions of varied statuses — enough to exercise both the 8-row
- * limit and the status filter without depending on real API data. */
+ * limit and the En cours / Historique split without depending on real API
+ * data. */
 function makeSessions(): SessionSummary[] {
   const statuses: SessionStatus[] = [
     'ended', 'ended', 'ended', 'ended', 'ended',
@@ -54,6 +55,23 @@ function makeSessions(): SessionSummary[] {
     status,
     startedAt: status === 'lobby' ? null : '2026-07-20T10:00:00.000Z',
     endedAt: status === 'ended' ? '2026-07-20T10:30:00.000Z' : null,
+    quizId: 'q1',
+    quizTitle: `Partie ${i}`,
+    playerCount: 3,
+  }))
+}
+
+/** 12 terminal ("ended") sessions — `Home` (Task 9) resolves `listSessions()`
+ * for « En cours » and « Historique » via two separate calls, so a test
+ * exercising the Historique pagination must feed the SECOND `listSessions`
+ * call, not a single combined list. */
+function makeHistorySessions(): SessionSummary[] {
+  return Array.from({ length: 12 }, (_, i) => ({
+    id: `h${i}`,
+    pin: String(200000 + i),
+    status: 'ended' as const,
+    startedAt: '2026-07-20T10:00:00.000Z',
+    endedAt: '2026-07-20T10:30:00.000Z',
     quizId: 'q1',
     quizTitle: `Partie ${i}`,
     playerCount: 3,
@@ -118,9 +136,12 @@ describe('Home', () => {
     expect(motif).toHaveAttribute('aria-hidden', 'true')
   })
 
-  it('limite les parties récentes à 8 lignes avec un bouton « Voir toutes »', async () => {
+  it('limite l\'historique à 8 lignes avec un bouton « Voir tout l\'historique »', async () => {
     const { listSessions } = await import('../api/sessions')
-    vi.mocked(listSessions).mockResolvedValueOnce(makeSessions())
+    // Home (Task 9) issues two independent listSessions() calls in this
+    // order: En cours (lobby/active) first, Historique (ended/abandoned)
+    // second — see loadSessions's Promise.all.
+    vi.mocked(listSessions).mockResolvedValueOnce([]).mockResolvedValueOnce(makeHistorySessions())
 
     render(
       <MotionProvider>
@@ -135,7 +156,7 @@ describe('Home', () => {
       expect(items.length).toBe(8)
     })
 
-    const showAllButton = screen.getByRole('button', { name: /voir toutes les parties \(12\)/i })
+    const showAllButton = screen.getByRole('button', { name: /voir tout l'historique \(12\)/i })
     expect(showAllButton).toBeInTheDocument()
 
     fireEvent.click(showAllButton)
@@ -145,9 +166,29 @@ describe('Home', () => {
     })
   })
 
-  it('le filtre « Terminées » ne laisse que les sessions ended', async () => {
+  it('sépare les parties en deux sections « En cours » (lobby/active) et « Historique » (ended/abandoned), avec le badge « Abandonnée »', async () => {
     const { listSessions } = await import('../api/sessions')
-    vi.mocked(listSessions).mockResolvedValueOnce(makeSessions())
+    vi.mocked(listSessions)
+      .mockResolvedValueOnce([
+        {
+          id: 'live-1', pin: '111111', status: 'active', startedAt: '2026-07-20T10:00:00.000Z',
+          endedAt: null, quizId: 'q1', quizTitle: 'Partie en cours', playerCount: 2,
+        },
+        {
+          id: 'lobby-1', pin: '222222', status: 'lobby', startedAt: null,
+          endedAt: null, quizId: 'q1', quizTitle: 'Partie en attente', playerCount: 0,
+        },
+      ])
+      .mockResolvedValueOnce([
+        {
+          id: 'ended-1', pin: '333333', status: 'ended', startedAt: '2026-07-20T10:00:00.000Z',
+          endedAt: '2026-07-20T10:30:00.000Z', quizId: 'q1', quizTitle: 'Partie terminée', playerCount: 4,
+        },
+        {
+          id: 'abandoned-1', pin: '444444', status: 'abandoned', startedAt: '2026-07-20T10:00:00.000Z',
+          endedAt: '2026-07-20T10:20:00.000Z', quizId: 'q1', quizTitle: 'Partie abandonnée', playerCount: 1,
+        },
+      ])
 
     render(
       <MotionProvider>
@@ -157,25 +198,33 @@ describe('Home', () => {
       </MotionProvider>,
     )
 
-    await waitFor(() =>
-      expect(document.querySelectorAll('.home-list__item').length).toBeGreaterThan(0),
-    )
+    await waitFor(() => expect(screen.getByText('Partie en cours')).toBeInTheDocument())
 
-    const filterGroup = screen.getByRole('group', { name: /filtrer les parties par statut/i })
-    const endedButton = within(filterGroup).getByRole('button', { name: 'Terminées' })
-    expect(endedButton).toHaveAttribute('aria-pressed', 'false')
+    // The two independent calls carry the right server-side status filters.
+    expect(listSessions).toHaveBeenNthCalledWith(1, { status: ['lobby', 'active'] })
+    expect(listSessions).toHaveBeenNthCalledWith(2, { status: ['ended', 'abandoned'] })
 
-    fireEvent.click(endedButton)
+    const liveSection = document.getElementById('home-live-heading')?.closest('section') as HTMLElement
+    expect(within(liveSection).getByText('Partie en cours')).toBeInTheDocument()
+    expect(within(liveSection).getByText('Partie en attente')).toBeInTheDocument()
+    expect(within(liveSection).queryByText('Partie terminée')).toBeNull()
+    expect(within(liveSection).queryByText('Partie abandonnée')).toBeNull()
 
-    expect(endedButton).toHaveAttribute('aria-pressed', 'true')
-    await waitFor(() => {
-      const items = document.querySelectorAll('.home-list__item')
-      expect(items.length).toBe(5)
-    })
-    // Every remaining row shows the "Terminée" status badge.
-    document.querySelectorAll('.home-list__item .host-badge').forEach((badge) => {
-      expect(badge.textContent).toBe('Terminée')
-    })
+    const historySection = document.getElementById('home-history-heading')?.closest('section') as HTMLElement
+    expect(within(historySection).getByText('Partie terminée')).toBeInTheDocument()
+    expect(within(historySection).getByText('Partie abandonnée')).toBeInTheDocument()
+
+    // The « Abandonnée » badge carries a distinct class (dashed border, see
+    // prototype.css) on top of the required visible-text label — status is
+    // never conveyed by colour alone.
+    const abandonedBadge = within(historySection).getByText('Abandonnée')
+    expect(abandonedBadge).toHaveClass('host-badge', 'host-badge--abandoned')
+
+    // abandoned is terminal, exactly like ended: routes to the report, not
+    // back to the live host controller, with the matching CTA copy.
+    const abandonedLink = screen.getByText('Partie abandonnée').closest('a')
+    expect(abandonedLink).toHaveAttribute('href', '/sessions/abandoned-1')
+    expect(within(abandonedLink as HTMLElement).getByText('Voir le rapport →')).toBeInTheDocument()
   })
 
   it('affiche la date de modification et la description sur les cartes de quiz', async () => {
@@ -250,20 +299,23 @@ describe('Home', () => {
 
   it('les parties "lobby"/"active" mènent vers /host/:id (Reprendre) ; "ended" vers /sessions/:id (rapport)', async () => {
     const { listSessions } = await import('../api/sessions')
-    vi.mocked(listSessions).mockResolvedValueOnce([
-      {
-        id: 'live-1', pin: '111111', status: 'active', startedAt: '2026-07-20T10:00:00.000Z',
-        endedAt: null, quizId: 'q1', quizTitle: 'Partie en cours', playerCount: 2,
-      },
-      {
-        id: 'lobby-1', pin: '222222', status: 'lobby', startedAt: null,
-        endedAt: null, quizId: 'q1', quizTitle: 'Partie en attente', playerCount: 0,
-      },
-      {
-        id: 'ended-1', pin: '333333', status: 'ended', startedAt: '2026-07-20T10:00:00.000Z',
-        endedAt: '2026-07-20T10:30:00.000Z', quizId: 'q1', quizTitle: 'Partie terminée', playerCount: 4,
-      },
-    ])
+    vi.mocked(listSessions)
+      .mockResolvedValueOnce([
+        {
+          id: 'live-1', pin: '111111', status: 'active', startedAt: '2026-07-20T10:00:00.000Z',
+          endedAt: null, quizId: 'q1', quizTitle: 'Partie en cours', playerCount: 2,
+        },
+        {
+          id: 'lobby-1', pin: '222222', status: 'lobby', startedAt: null,
+          endedAt: null, quizId: 'q1', quizTitle: 'Partie en attente', playerCount: 0,
+        },
+      ])
+      .mockResolvedValueOnce([
+        {
+          id: 'ended-1', pin: '333333', status: 'ended', startedAt: '2026-07-20T10:00:00.000Z',
+          endedAt: '2026-07-20T10:30:00.000Z', quizId: 'q1', quizTitle: 'Partie terminée', playerCount: 4,
+        },
+      ])
 
     render(
       <MotionProvider>

@@ -463,13 +463,15 @@
    only the border and dot carry the full accent color. */
 .host-badge--lobby,
 .host-badge--active,
-.host-badge--ended {
+.host-badge--ended,
+.host-badge--abandoned {
   color: var(--ink-strong);
 }
 
 .host-badge--lobby::before,
 .host-badge--active::before,
-.host-badge--ended::before {
+.host-badge--ended::before,
+.host-badge--abandoned::before {
   content: '•';
   margin-right: 4px;
   line-height: 1;
@@ -502,6 +504,16 @@
 }
 
 .host-badge--ended::before {
+  color: var(--ink-dim);
+}
+
+.host-badge--abandoned {
+  background: color-mix(in srgb, var(--ink-dim) 10%, transparent);
+  border-color: var(--ink-dim);
+  border-style: dashed;
+}
+
+.host-badge--abandoned::before {
   color: var(--ink-dim);
 }
 
@@ -2079,22 +2091,6 @@
 
 .home-inline-form .host-field {
   width: min(420px, 100%);
-}
-
-.home-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-bottom: var(--space-3);
-}
-
-/* Active filter chip — the `.ab-button--ghost` base already gives the
-   44px tap target; this just adds a visible "pressed" state on top of it,
-   driven by the same `aria-pressed` a screen reader announces. */
-.home-filters .ab-button--ghost[aria-pressed='true'] {
-  background: var(--surface-2);
-  border-color: var(--brand);
-  color: var(--ink-strong);
 }
 
 .home-list {

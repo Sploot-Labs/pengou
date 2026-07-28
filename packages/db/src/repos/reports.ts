@@ -1,4 +1,4 @@
-import { and, desc, eq, sql } from 'drizzle-orm'
+import { and, desc, eq, inArray, sql } from 'drizzle-orm'
 import { schema } from '../index.js'
 import type { TenantScope } from '../tenant.js'
 
@@ -56,8 +56,17 @@ function hostPredicate(scope: TenantScope) {
 // Liste des parties du tenant, plus récentes d'abord. `playerCount` vient d'un
 // left join agrégé (count distinct) pour couvrir les sessions sans joueur
 // (lobby jamais rejoint) sans les exclure de la liste.
-export async function listSessions(scope: TenantScope, opts?: { limit?: number }): Promise<SessionSummary[]> {
+export async function listSessions(
+  scope: TenantScope,
+  opts?: { limit?: number; status?: SessionSummary['status'][] },
+): Promise<SessionSummary[]> {
   const limit = opts?.limit ?? DEFAULT_LIST_LIMIT
+  // Combine : tenant + appartenance au propriétaire (hostPredicate, faille P0) + filtre de statut
+  // optionnel (feature « abandon des parties inactives »). `and(...)` ignore les prédicats undefined.
+  const conditions = [eq(schema.gameSession.tenantId, scope.tenantId), hostPredicate(scope)]
+  if (opts?.status && opts.status.length > 0) {
+    conditions.push(inArray(schema.gameSession.status, opts.status))
+  }
   return scope.db
     .select({
       id: schema.gameSession.id,
@@ -72,7 +81,7 @@ export async function listSessions(scope: TenantScope, opts?: { limit?: number }
     .from(schema.gameSession)
     .innerJoin(schema.quiz, eq(schema.quiz.id, schema.gameSession.quizId))
     .leftJoin(schema.sessionPlayer, eq(schema.sessionPlayer.sessionId, schema.gameSession.id))
-    .where(and(eq(schema.gameSession.tenantId, scope.tenantId), hostPredicate(scope)))
+    .where(and(...conditions))
     .groupBy(schema.gameSession.id, schema.quiz.title)
     .orderBy(desc(schema.gameSession.createdAt))
     .limit(limit)
