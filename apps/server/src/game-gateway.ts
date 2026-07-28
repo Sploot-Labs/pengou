@@ -177,12 +177,20 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   function scheduleQuestionTimeout(sessionId: string, meta: SessionMeta, session: GameSession): void {
     clearQuestionTimeout(meta)
     if (session.phase !== 'question') return
-    const question = session.questions[session.currentIndex]
+    const scheduledIndex = session.currentIndex
+    const question = session.questions[scheduledIndex]
     if (!question) return
     const timer = setTimeout(() => {
       void (async () => {
         const current = await engine.getSession(sessionId).catch(() => null)
         if (!current || current.phase !== 'question') return
+        // Défense en profondeur (P1-7-2) : ne révèle QUE la manche pour laquelle ce minuteur a été
+        // planifié — un minuteur périmé (discipline slot-unique déjà cassée par un refactor futur)
+        // ne peut pas révéler prématurément la manche courante.
+        if (current.currentIndex !== scheduledIndex) return
+        // Re-vérifiée APRÈS l'await : si une révélation (auto « tous ont répondu », ou manuelle
+        // reveal/skip qui pose désormais ce drapeau — P1-7-1) a résolu la manche pendant le gap
+        // async, on n'émet rien (anti-double-reveal, et respect du contrat « skip ne révèle pas »).
         if (meta.autoRevealedRounds.has(current.currentIndex)) return
         meta.autoRevealedRounds.add(current.currentIndex)
         await doRevealBySession(sessionId, meta)
@@ -315,6 +323,11 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // manche SUIVANTE). Durcissement possible (suivi) : écrire answer_record avant de créditer, ou
     // un flag « persisté » distinct de `credited`.
     const revealed = await engine.reveal(sessionId)
+    // Marque la manche comme résolue AVANT d'émettre (P1-7-1) : un minuteur d'auto-révélation
+    // qui aurait fire en parallèle (course à la frontière de `timeLimit`) re-teste
+    // `autoRevealedRounds.has(currentIndex)` après son `await` et n'émettra donc pas un second
+    // `question:reveal`. Set idempotent : le chemin timer/auto l'a déjà ajouté avant d'appeler.
+    meta.autoRevealedRounds.add(revealed.currentIndex)
 
     // Anti-triche : `questionResult` (qui contient la bonne réponse) n'est calculé qu'ICI,
     // strictement après engine.reveal() — jamais avant, jamais pour `question:show`.
@@ -364,6 +377,12 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       // Annulation : voir le commentaire équivalent dans `doRevealBySession` — un host:skip
       // anticipé pendant 'reading'/'question' ne doit jamais laisser un minuteur planifié se
       // déclencher après coup.
+      // Anti-triche (P1-7-1) : on MARQUE d'abord la manche comme résolue AVANT d'annuler le
+      // minuteur. Si le minuteur d'auto-révélation venait juste de fire (course à la frontière
+      // exacte de `timeLimit`, où `clearQuestionTimeout` arrive trop tard), sa callback re-teste
+      // `autoRevealedRounds.has(currentIndex)` APRÈS son `await` et bat donc en retraite sans
+      // émettre `question:reveal` — le contrat « skip ne révèle JAMAIS la réponse » est préservé.
+      meta.autoRevealedRounds.add(current.currentIndex)
       clearReadingTimeout(meta)
       clearQuestionTimeout(meta)
 
