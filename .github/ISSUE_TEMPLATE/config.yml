@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Questions & discussions
+    url: https://github.com/splootlabs/arena/discussions
+    about: Une question, une idée à débattre, besoin d'aide pour démarrer ? C'est ici, on accueille.
+  - name: 🔒 Vulnérabilité de sécurité
+    url: https://github.com/splootlabs/arena/security/advisories/new
+    about: Ne pas ouvrir d'issue publique — signalement privé via un Security Advisory.

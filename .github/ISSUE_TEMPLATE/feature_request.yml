@@ -1,0 +1,27 @@
+name: ✨ Proposition de fonctionnalité
+description: Une idée pour améliorer Arena.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: "Merci pour l'idée ! 🐾 Décris le besoin avant la solution, ça aide."
+  - type: textarea
+    id: problem
+    attributes:
+      label: Quel problème ça résout ?
+      description: Le besoin réel, du point de vue de l'utilisateur.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solution envisagée
+      description: Ce à quoi tu penses (si tu as une idée — pas obligatoire).
+    validations:
+      required: false
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives / contexte
+    validations:
+      required: false
