@@ -182,15 +182,12 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     return { sessionId: data.sessionId, meta }
   }
 
-  /** Persiste les réponses + scores de la manche EN COURS (session.currentIndex), après reveal().
-   * Idempotent via `meta.revealedRounds` : un reveal rejoué (host:reveal ou host:skip) sur la
-   * même manche ne réinsère jamais les mêmes answer_record. */
-  async function persistRound(meta: SessionMeta, session: GameSession): Promise<void> {
-    const idx = session.currentIndex
+  /** Écrit les answer_record d'UNE manche donnée (`idx`), sans garde `revealedRounds`. Idempotent
+   * au niveau DB (`recordAnswer` = ON CONFLICT DO NOTHING). Utilisé par `persistRound` (flux live)
+   * ET par la cicatrisation au redémarrage (P1-8). */
+  async function persistRoundAnswers(meta: SessionMeta, session: GameSession, idx: number): Promise<void> {
     const question = session.questions[idx]
-    if (!question || meta.revealedRounds.has(idx)) return
-    meta.revealedRounds.add(idx)
-
+    if (!question) return
     const roundAnswers = session.answers[idx] ?? {}
     for (const [enginePlayerId, submitted] of Object.entries(roundAnswers)) {
       const dbPlayerId = meta.playerDbIds.get(enginePlayerId)
@@ -205,11 +202,29 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         points: submitted.points,
       })
     }
+  }
+
+  /** Persiste les scores totaux de tous les joueurs (idempotent : simple overwrite). */
+  async function persistPlayerScores(meta: SessionMeta, session: GameSession): Promise<void> {
     for (const player of Object.values(session.players)) {
       const dbPlayerId = meta.playerDbIds.get(player.id)
       if (!dbPlayerId) continue
       await setPlayerScore(db, dbPlayerId, player.score)
     }
+  }
+
+  /** Persiste les réponses + scores de la manche EN COURS (session.currentIndex), après reveal().
+   * Garde `meta.revealedRounds` : évite le travail redondant d'un reveal rejoué (host:reveal ou
+   * host:skip) sur la même manche. La correction de la fenêtre de crash (P1-8) ne repose PLUS sur
+   * cette garde mémoire (qui, reconstruite depuis `credited` au boot, laissait échapper une manche
+   * créditée-mais-non-persistée) mais sur l'idempotence DB + la cicatrisation au redémarrage. */
+  async function persistRound(meta: SessionMeta, session: GameSession): Promise<void> {
+    const idx = session.currentIndex
+    const question = session.questions[idx]
+    if (!question || meta.revealedRounds.has(idx)) return
+    meta.revealedRounds.add(idx)
+    await persistRoundAnswers(meta, session, idx)
+    await persistPlayerScores(meta, session)
   }
 
   /** Corps commun de révélation (crédit + persistance + diffusion `question:reveal`/`scoreboard`),
@@ -501,6 +516,18 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         }
         sessionMetaByEngineId.set(session.id, meta)
         pinToSessionId.set(session.pin, row.id)
+
+        // Cicatrisation de la fenêtre de crash reveal()/persistRound (P1-8) : une manche
+        // CRÉDITÉE (dans `engine_state`) dont les `answer_record` n'ont pas été écrits (crash
+        // serveur pile entre `engine.reveal()` et `persistRound`) verrait sinon son détail
+        // par-question manquer du rapport DB À JAMAIS (`revealedRounds` reconstruit depuis
+        // `credited` empêcherait toute ré-écriture). On ré-persiste donc ici, idempotemment
+        // (`recordAnswer` = ON CONFLICT DO NOTHING), les réponses + scores de chaque manche
+        // créditée. En régime nominal (déjà persisté), ce sont des no-op DB.
+        for (const idx of revealedRounds) {
+          await persistRoundAnswers(meta, session, idx).catch(() => {})
+        }
+        if (revealedRounds.size > 0) await persistPlayerScores(meta, session).catch(() => {})
 
         // Re-ancrage du chrono à neuf (voir la doc de `engine.reanchorTimer`) + reprogrammation/
         // ré-émission — SEULES les phases 'reading'/'question' portent un chrono actif ; les

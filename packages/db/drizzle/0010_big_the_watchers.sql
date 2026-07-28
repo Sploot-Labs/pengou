@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX "answer_session_question_player_uidx" ON "answer_record" USING btree ("session_id","question_id","player_id");

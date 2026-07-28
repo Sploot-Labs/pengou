@@ -71,6 +71,13 @@
       "when": 1785163181572,
       "tag": "0009_complex_komodo",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1785220502050,
+      "tag": "0010_big_the_watchers",
+      "breakpoints": true
     }
   ]
 }

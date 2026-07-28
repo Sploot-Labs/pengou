@@ -74,6 +74,24 @@ describe('repo session scopé au tenant du quiz', () => {
     expect(row.points).toBe(850)
   })
 
+  it('recordAnswer est IDEMPOTENT (P1-8) : un 2e appel (session,question,joueur) est un no-op', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '556677' })
+    const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Idem', joinToken: 'tok-idem' })
+    const args = {
+      sessionId: session!.id, questionId: questionA, playerId: player.id,
+      answer: { choice: 1 }, timeMs: 1000, isCorrect: false, points: 0,
+    }
+    await recordAnswer(ctx.db, args)
+    // Ré-écriture (ex. cicatrisation au redémarrage) : ne doit PAS créer de doublon ni lever.
+    await recordAnswer(ctx.db, { ...args, points: 999, answer: { choice: 9 } })
+    const rows = await ctx.db.select().from(schema.answerRecord)
+      .where(eq(schema.answerRecord.playerId, player.id))
+    expect(rows).toHaveLength(1)
+    // La 1re écriture gagne (ON CONFLICT DO NOTHING) : la valeur d'origine est conservée.
+    expect(rows[0].points).toBe(0)
+    expect(rows[0].answer).toEqual({ choice: 1 })
+  })
+
   it('setSessionStatus met à jour le statut (et startedAt/endedAt)', async () => {
     const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '666666' })
     await setSessionStatus(ctx.db, session!.id, 'active')

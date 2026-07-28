@@ -67,6 +67,9 @@ export async function recordAnswer(
     points: number
   },
 ): Promise<void> {
+  // Idempotent (P1-8) : `onConflictDoNothing` sur l'index unique (session, question, joueur) —
+  // ré-écrire un answer_record déjà présent est un no-op. Rend `persistRound` rejouable (au
+  // redémarrage, cicatrisation d'une manche créditée mais non persistée) sans double-insert.
   await db.insert(schema.answerRecord).values({
     sessionId: input.sessionId,
     questionId: input.questionId,
@@ -75,6 +78,8 @@ export async function recordAnswer(
     timeMs: input.timeMs,
     isCorrect: input.isCorrect,
     points: input.points,
+  }).onConflictDoNothing({
+    target: [schema.answerRecord.sessionId, schema.answerRecord.questionId, schema.answerRecord.playerId],
   })
 }
 

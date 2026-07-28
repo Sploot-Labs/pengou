@@ -96,6 +96,15 @@ export const answerRecord = pgTable('answer_record', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 }, (t) => ({
   sessionQuestionIdx: index('answer_session_question_idx').on(t.sessionId, t.questionId),
+  // Unicité (session, question, joueur) : un joueur ne répond qu'une fois par question. Permet un
+  // `recordAnswer` IDEMPOTENT (ON CONFLICT DO NOTHING) → la persistance d'une manche est rejouable
+  // sans double-insert. Base de la cicatrisation de la fenêtre de crash reveal()/persistRound
+  // (P1-8) : au redémarrage, on ré-écrit les answer_record des manches créditées sans risque.
+  sessionQuestionPlayerUnique: uniqueIndex('answer_session_question_player_uidx').on(
+    t.sessionId,
+    t.questionId,
+    t.playerId,
+  ),
 }))
 
 // Tables Better Auth (user/session/account/verification) — générées, source de vérité des colonnes.

@@ -1713,6 +1713,72 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       }
     }, 30_000)
 
+    it('P1-8 cicatrisation : une manche créditée dont les answer_record ont été perdus (fenêtre de crash) est ré-persistée au redémarrage', async () => {
+      const store1 = new PersistentSessionStore(ctx.db)
+      const { app: app1, url: url1 } = await buildApp(store1)
+      const clients1: ClientSocket[] = []
+      let sessionId = ''
+      let cookie = ''
+      let quizId = ''
+      try {
+        cookie = await signUp(app1, 'p1-8-heal@example.com')
+        const quizRes = await app1.inject({
+          method: 'POST', url: '/api/quizzes',
+          payload: { title: 'Quiz cicatrisation' },
+          headers: { 'content-type': 'application/json', cookie },
+        })
+        quizId = (quizRes.json() as { id: string }).id
+        await app1.inject({
+          method: 'POST', url: `/api/quizzes/${quizId}/questions`,
+          payload: {
+            type: 'mcq', prompt: 'Capitale ?', timeLimit: 20, readingTime: 0,
+            payload: { options: [{ label: 'Paris', correct: true }, { label: 'Lyon', correct: false }] },
+          },
+          headers: { 'content-type': 'application/json', cookie },
+        })
+
+        const hostSocket = await connectClient(url1, { cookie })
+        clients1.push(hostSocket)
+        const created = await ack<{ sessionId?: string; pin?: string }>(hostSocket, 'host:create', { quizId })
+        sessionId = created.sessionId!
+
+        const player1 = await connectClient(url1)
+        clients1.push(player1)
+        await ack(player1, 'player:join', { pin: created.pin, nickname: 'Alice' })
+        await ack(hostSocket, 'host:start', {})
+        await ack(player1, 'player:answer', { answer: { optionIndex: 0 } })
+        // host:reveal crédite (credited[0]=true, persisté dans engine_state) ET écrit answer_record.
+        await ack(hostSocket, 'host:reveal', {})
+
+        const [dbSession] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.id, sessionId))
+        const before = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+        expect(before).toHaveLength(1)
+
+        // SIMULATION de la fenêtre de crash : les answer_record n'ont jamais atteint la base
+        // (crash pile entre engine.reveal() et persistRound) — mais engine_state a bien credited[0].
+        await ctx.db.delete(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+        const gap = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+        expect(gap).toHaveLength(0)
+      } finally {
+        for (const c of clients1) c.disconnect()
+        await app1.close()
+      }
+
+      // Redémarrage : la réhydratation (registerGameGateway) doit CICATRISER la manche créditée
+      // en ré-écrivant ses answer_record depuis engine_state, idempotemment.
+      const store2 = new PersistentSessionStore(ctx.db)
+      const { app: app2 } = await buildApp(store2)
+      try {
+        const [dbSession] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.id, sessionId))
+        const healed = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+        expect(healed).toHaveLength(1)
+        expect(healed[0].isCorrect).toBe(true)
+        expect(healed[0].points).toBeGreaterThan(0)
+      } finally {
+        await app2.close()
+      }
+    }, 30_000)
+
     it("survit à un redémarrage (phase 'reading') : ré-ancre readingStartedAt à neuf ET reprogramme la révélation automatique pour le readingTime COMPLET (pas le reliquat)", async () => {
       const store1 = new PersistentSessionStore(ctx.db)
       const { app: app1, url: url1 } = await buildApp(store1)
