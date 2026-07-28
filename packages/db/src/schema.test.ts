@@ -26,8 +26,8 @@ describe('schéma', () => {
     }
   })
 
-  it('applique l\'unicité du PIN uniquement aux sessions non terminées', async () => {
-    // Deux sessions "ended" avec le même PIN sont permises ; deux "lobby" avec le même PIN non.
+  it('applique l\'unicité du PIN uniquement aux sessions non terminées (ended/abandoned)', async () => {
+    // Deux sessions "ended" ou "abandoned" avec le même PIN sont permises ; deux "lobby" avec le même PIN non.
     const info = await ctx.db.execute(sql`
       select indexdef from pg_indexes where indexname = 'game_session_active_pin_uidx'
     `)

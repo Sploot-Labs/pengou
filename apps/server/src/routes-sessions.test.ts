@@ -151,6 +151,7 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
     const res = await app.inject({ method: 'GET', url: '/api/sessions?status=ended', headers: { cookie } })
     expect(res.statusCode).toBe(200)
     const rows = res.json() as { status: string }[]
+    expect(rows.length).toBeGreaterThan(0)
     expect(rows.every((r) => r.status === 'ended')).toBe(true)
 
     await app.close()

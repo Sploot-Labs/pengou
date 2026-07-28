@@ -172,10 +172,11 @@ export async function listResumableSessions(
     ))
 }
 
-// Bascule vers le statut terminal `abandoned` les parties encore vivantes (lobby/active) restées
-// inactives au-delà de `inactivityMs` (aucune mutation moteur — donc aucun `saveEngineState` —
-// depuis ce délai). Efface le checkpoint (`engine_state`) et pose `ended_at`. Retourne les ids
-// basculés pour permettre à l'appelant (passerelle) de nettoyer son état mémoire (timers/caches).
+// Bascule vers le statut terminal `abandoned` les parties encore vivantes (lobby/active) TRAITÉES
+// comme inactives : aucune mutation moteur (donc aucun `saveEngineState`) au-delà de `inactivityMs`.
+// C'est une HEURISTIQUE d'inactivité, non une garantie de présence moteur. Efface le checkpoint
+// (`engine_state`) et pose `ended_at`. Retourne les ids basculés pour permettre à l'appelant
+// (passerelle) de nettoyer son état mémoire (timers/caches).
 export async function abandonInactiveSessions(db: Db, inactivityMs: number): Promise<string[]> {
   const cutoff = new Date(Date.now() - inactivityMs)
   const rows = await db.update(schema.gameSession)
