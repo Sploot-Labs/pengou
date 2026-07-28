@@ -127,7 +127,7 @@ export async function listSessionPlayers(
 
 export async function saveEngineState(db: Db, sessionId: string, state: unknown): Promise<void> {
   await db.update(schema.gameSession)
-    .set({ engineState: state as never })
+    .set({ engineState: state as never, lastActivityAt: new Date() })
     .where(eq(schema.gameSession.id, sessionId))
 }
 

@@ -158,4 +158,15 @@ describe('repo session scopé au tenant du quiz', () => {
     // loadEngineStateByPin exclut les sessions ended : plus de résultat après clôture.
     expect(await loadEngineStateByPin(ctx.db, '900002')).toBeNull()
   })
+
+  it('saveEngineState rafraîchit last_activity_at', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '717171' })
+    await ctx.db.update(schema.gameSession)
+      .set({ lastActivityAt: new Date('2020-01-01T00:00:00Z') })
+      .where(eq(schema.gameSession.id, session!.id))
+    await saveEngineState(ctx.db, session!.id, { phase: 'question' })
+    const [row] = await ctx.db.select({ last: schema.gameSession.lastActivityAt })
+      .from(schema.gameSession).where(eq(schema.gameSession.id, session!.id))
+    expect(row.last.getTime()).toBeGreaterThan(new Date('2021-01-01T00:00:00Z').getTime())
+  })
 })
