@@ -115,7 +115,11 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
     .from(schema.question)
     .leftJoin(
       schema.answerRecord,
-      and(eq(schema.answerRecord.questionId, schema.question.id), eq(schema.answerRecord.sessionId, sessionId)),
+      and(
+        eq(schema.answerRecord.questionId, schema.question.id),
+        eq(schema.answerRecord.sessionId, sessionId),
+        eq(schema.answerRecord.tenantId, scope.tenantId),
+      ),
     )
     .where(and(eq(schema.question.quizId, session.quizId), eq(schema.question.tenantId, scope.tenantId)))
     .groupBy(schema.question.id)
@@ -133,7 +137,10 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
       answerCount: sql<number>`count(${schema.answerRecord.id})`.mapWith(Number),
     })
     .from(schema.sessionPlayer)
-    .leftJoin(schema.answerRecord, eq(schema.answerRecord.playerId, schema.sessionPlayer.id))
+    .leftJoin(schema.answerRecord, and(
+      eq(schema.answerRecord.playerId, schema.sessionPlayer.id),
+      eq(schema.answerRecord.tenantId, scope.tenantId),
+    ))
     .where(and(eq(schema.sessionPlayer.sessionId, sessionId), eq(schema.sessionPlayer.tenantId, scope.tenantId)))
     .groupBy(schema.sessionPlayer.id)
     .orderBy(desc(schema.sessionPlayer.totalScore))

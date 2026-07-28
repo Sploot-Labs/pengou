@@ -108,6 +108,7 @@ export const sessionPlayer = pgTable('session_player', {
 export const answerRecord = pgTable('answer_record', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
   sessionId: uuid('session_id').notNull().references(() => gameSession.id, { onDelete: 'cascade' }),
+  tenantId: uuid('tenant_id').notNull().references(() => tenant.id),
   questionId: uuid('question_id').notNull().references(() => question.id),
   playerId: uuid('player_id').notNull().references(() => sessionPlayer.id, { onDelete: 'cascade' }),
   answer: jsonb('answer').notNull(),
@@ -117,6 +118,13 @@ export const answerRecord = pgTable('answer_record', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 }, (t) => ({
   sessionQuestionIdx: index('answer_session_question_idx').on(t.sessionId, t.questionId),
+  tenantIdx: index('answer_record_tenant_idx').on(t.tenantId),
+  // Garantie base : tenant_id enfant DOIT coller au tenant de la session parente.
+  sessionTenantFk: foreignKey({
+    columns: [t.sessionId, t.tenantId],
+    foreignColumns: [gameSession.id, gameSession.tenantId],
+    name: 'answer_record_session_tenant_fk',
+  }),
 }))
 
 // Tables Better Auth (user/session/account/verification) — générées, source de vérité des colonnes.

@@ -72,8 +72,13 @@ export async function recordAnswer(
     points: number
   },
 ): Promise<void> {
+  // Pas de scope tenant dans la couche temps réel : on dérive le tenant_id de la session parente.
+  const [parent] = await db.select({ tenantId: schema.gameSession.tenantId })
+    .from(schema.gameSession).where(eq(schema.gameSession.id, input.sessionId))
+  if (!parent) throw new Error(`recordAnswer: session introuvable (${input.sessionId})`)
   await db.insert(schema.answerRecord).values({
     sessionId: input.sessionId,
+    tenantId: parent.tenantId,
     questionId: input.questionId,
     playerId: input.playerId,
     answer: input.answer as never,

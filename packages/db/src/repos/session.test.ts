@@ -234,4 +234,26 @@ describe('repo session scopé au tenant du quiz', () => {
       }).returning(),
     ).rejects.toThrow()
   })
+
+  it('recordAnswer pose le tenant_id de la session parente (signature inchangée)', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '262626' })
+    const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Ans', joinToken: 'tok-ans' })
+    await recordAnswer(ctx.db, {
+      sessionId: session!.id, questionId: questionA, playerId: player.id,
+      answer: { choice: 0 }, timeMs: 1000, isCorrect: true, points: 500,
+    })
+    const [row] = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.playerId, player.id))
+    expect(row.tenantId).toBe(tenantA)
+  })
+
+  it('la FK composite rejette un answer_record dont le tenant_id ne colle pas à la session', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '272727' })
+    const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'X', joinToken: 'tok-x2' })
+    await expect(
+      ctx.db.insert(schema.answerRecord).values({
+        sessionId: session!.id, tenantId: tenantB, questionId: questionA, playerId: player.id,
+        answer: { choice: 0 } as never, timeMs: 1, isCorrect: false, points: 0,
+      }).returning(),
+    ).rejects.toThrow()
+  })
 })

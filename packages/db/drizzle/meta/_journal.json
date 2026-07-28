@@ -92,6 +92,13 @@
       "when": 1785279183960,
       "tag": "0012_public_killer_shrike",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1785279346897,
+      "tag": "0013_stiff_wolfsbane",
+      "breakpoints": true
     }
   ]
 }
