@@ -40,6 +40,12 @@ type SessionMeta = {
    * manuelle anticipée (host:reveal/host:skip/host:next) ou fin de session — sans ça, une
    * révélation fantôme se déclencherait après coup sur une manche déjà avancée par ailleurs. */
   readingTimeout: ReturnType<typeof setTimeout> | null
+  /** Minuteur serveur AUTORITATIF de la phase 'question' (P1-7) : à l'expiration de `timeLimit`,
+   * la manche est auto-révélée (`doRevealBySession`). Sans lui, `timeLimit` n'était qu'un décompte
+   * CLIENT : hôte déconnecté + un joueur qui ne répond jamais → manche ouverte indéfiniment côté
+   * serveur. `null` hors phase 'question' ou une fois consommé/annulé. Toujours nettoyé
+   * (`clearQuestionTimeout`) avant toute transition (reveal/skip/next) ou fin de session. */
+  questionTimeout: ReturnType<typeof setTimeout> | null
 }
 
 type SocketData = {
@@ -150,12 +156,51 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     }
   }
 
+  /** Annule le minuteur autoritatif de fin de question (`SessionMeta.questionTimeout`), s'il y en
+   * a un en attente. Sûr à appeler inconditionnellement (no-op si `null`). Appelé au début de
+   * toute transition manuelle/auto (reveal/skip/next), à la fin de session, et avant de
+   * (re)planifier — pour qu'une auto-révélation planifiée ne se déclenche jamais après coup sur
+   * une manche déjà avancée par ailleurs (idempotence : une seule révélation par manche). */
+  function clearQuestionTimeout(meta: SessionMeta): void {
+    if (meta.questionTimeout) {
+      clearTimeout(meta.questionTimeout)
+      meta.questionTimeout = null
+    }
+  }
+
+  /** Planifie l'auto-révélation autoritative de la manche 'question' courante à l'expiration de
+   * `timeLimit` (P1-7). No-op hors phase 'question'. À l'échéance, révèle via `doRevealBySession`,
+   * en réutilisant la MÊME garde d'émission unique (`autoRevealedRounds`) que l'auto-révélation
+   * « tous ont répondu » (`player:answer`) — pas de double `question:reveal` si les deux se
+   * déclenchent. `doRevealBySession` appelle `clearQuestionTimeout` en premier : une révélation
+   * manuelle (host:reveal) annule donc ce minuteur avant qu'il ne fire. */
+  function scheduleQuestionTimeout(sessionId: string, meta: SessionMeta, session: GameSession): void {
+    clearQuestionTimeout(meta)
+    if (session.phase !== 'question') return
+    const question = session.questions[session.currentIndex]
+    if (!question) return
+    const timer = setTimeout(() => {
+      void (async () => {
+        const current = await engine.getSession(sessionId).catch(() => null)
+        if (!current || current.phase !== 'question') return
+        if (meta.autoRevealedRounds.has(current.currentIndex)) return
+        meta.autoRevealedRounds.add(current.currentIndex)
+        await doRevealBySession(sessionId, meta)
+      })().catch(() => {})
+    }, question.timeLimit * 1000)
+    // `.unref()` : ce minuteur ne doit jamais, à lui seul, maintenir le process en vie (le serveur
+    // HTTP le fait déjà). Évite aussi de retarder l'arrêt en test (timeLimit par défaut = 20 s).
+    timer.unref()
+    meta.questionTimeout = timer
+  }
+
   /** Éviction mémoire d'une partie TERMINÉE (P1-6) : libère toutes les structures locales à la
    * passerelle (metas, index PIN, sockets actifs des joueurs, tokens d'écran) ET le cache du
    * store (via `engine.evictSession`). Idempotent : sûr à appeler même si déjà évincé. Ne touche
    * pas la DB (le rapport final reste lisible via session_player/answer_record). */
   async function evictSessionMemory(sessionId: string, meta: SessionMeta): Promise<void> {
     clearReadingTimeout(meta)
+    clearQuestionTimeout(meta)
     for (const playerId of meta.playerDbIds.keys()) activeSocketIdByPlayerId.delete(playerId)
     for (const [token, sid] of screenTokenToSessionId) {
       if (sid === sessionId) {
@@ -252,12 +297,17 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // 'reading' (ex. host:reveal anticipé — voir le garde dans le handler `host:reveal`, qui
     // laisse passer 'reading' comme n'importe quelle phase hors 'lobby') doit annuler le minuteur
     // planifié par `startQuestionFlow` — sinon celui-ci se déclencherait une seconde fois plus
-    // tard (révélation fantôme) sur une manche déjà avancée par ce chemin-ci.
+    // tard (révélation fantôme) sur une manche déjà avancée par ce chemin-ci. Idem pour le
+    // minuteur autoritatif de fin de question (P1-7) : une révélation (manuelle ou « tous ont
+    // répondu ») annule l'auto-révélation planifiée pour cette manche.
     clearReadingTimeout(meta)
-    // FENÊTRE DE CRASH CONNUE (compromis assumé — voir revue de la persistance) : `engine.reveal()`
-    // pose `credited[idx]` + persiste `engine_state` AVANT que `persistRound` (plus bas) n'écrive
-    // `answer_record`/`total_score` en base. Un crash serveur PILE dans cette fenêtre (deux `await`)
-    // ferait, au redémarrage, dériver `revealedRounds` de `credited` → `persistRound` sauterait
+    clearQuestionTimeout(meta)
+    // Persistance en DERNIER (cf. commentaire ci-dessous). NOTE (P1-8) : la fenêtre de crash entre
+    // `engine.reveal()` (crédite + persiste `engine_state`) et `persistRound` (écrit
+    // `answer_record`) est désormais CICATRISÉE au redémarrage (réhydratation ré-persiste
+    // idempotemment les manches créditées — voir `rehydrateActiveSessions`). Historique conservé :
+    // avant P1-8, un crash pile ici ferait, au redémarrage, dériver `revealedRounds` de `credited`
+    // → `persistRound` sauterait
     // cette manche → le DÉTAIL par-question du RAPPORT DB manquerait pour elle. Le jeu live et le
     // CLASSEMENT restent corrects (scores dans `engine_state` ; `total_score` se rattrape à la
     // manche suivante). On garde délibérément les écritures DB EN DERNIER pour éviter un bug pire
@@ -312,9 +362,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         throw new Error('host:skip : aucune question active (session encore en lobby)')
       }
       // Annulation : voir le commentaire équivalent dans `doRevealBySession` — un host:skip
-      // anticipé pendant 'reading' ne doit jamais laisser un minuteur planifié se déclencher
-      // après coup.
+      // anticipé pendant 'reading'/'question' ne doit jamais laisser un minuteur planifié se
+      // déclencher après coup.
       clearReadingTimeout(meta)
+      clearQuestionTimeout(meta)
 
       const revealed = await engine.reveal(sessionId) // crédite uniquement — PAS de question:reveal
       await persistRound(meta, revealed)
@@ -373,6 +424,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       const view = engine.playerQuestionView(session)
       io.to(roomName(sessionId)).emit('question:show', view)
       emitTimer(sessionId, session)
+      scheduleQuestionTimeout(sessionId, meta, session) // P1-7 : auto-révélation à expiration
     }
     return session
   }
@@ -391,6 +443,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     const view = engine.playerQuestionView(session)
     io.to(roomName(sessionId)).emit('question:show', view)
     emitTimer(sessionId, session)
+    scheduleQuestionTimeout(sessionId, meta, session) // P1-7 : idem après la phase de lecture
   }
 
   /** Rejoue la question en cours à UN SEUL socket qui vient de rejoindre/rafraîchir EN PLEINE
@@ -513,6 +566,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           autoRevealedRounds: new Set(revealedRounds),
           statusActiveSet: session.phase !== 'lobby',
           readingTimeout: null,
+          questionTimeout: null,
         }
         sessionMetaByEngineId.set(session.id, meta)
         pinToSessionId.set(session.pin, row.id)
@@ -546,6 +600,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           const view = engine.playerQuestionView(reanchored)
           if (view) io.to(roomName(row.id)).emit('question:show', view)
           emitTimer(row.id, reanchored)
+          // P1-7 : reprogramme l'auto-révélation autoritative pour le timeLimit COMPLET (chrono
+          // ré-ancré à neuf, cohérent avec la phase 'reading' ci-dessus) — sans ça, une manche
+          // reprise après redémarrage ne se fermerait jamais côté serveur si personne n'agit.
+          scheduleQuestionTimeout(row.id, meta, reanchored)
         }
       } catch {
         // Session individuellement introuvable/corrompue (ex. `engine_state` absent malgré la
@@ -622,6 +680,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           autoRevealedRounds: new Set(),
           statusActiveSet: false,
           readingTimeout: null,
+          questionTimeout: null,
         })
         pinToSessionId.set(session.pin, session.id)
 
@@ -744,6 +803,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         // (`revealAnswersFlow`/`engine.revealAnswers` restent de toute façon des no-op sûrs hors
         // phase 'reading', mais on ne laisse jamais un minuteur obsolète traîner).
         clearReadingTimeout(meta)
+        clearQuestionTimeout(meta) // P1-7 : idem pour l'auto-révélation de fin de question
         // Bug important (revue finale) : engine.nextQuestion() ne révèle jamais la manche en
         // cours — si l'hôte enchaîne host:next SANS host:reveal préalable (phase encore
         // 'question'), les points de cette manche ne seraient jamais crédités ni persistés

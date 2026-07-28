@@ -1332,6 +1332,32 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
+  it('P1-7 timer autoritatif : une question expire côté SERVEUR (timeLimit) et est auto-révélée sans host:reveal ni réponse', async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      // timeLimit = 1 s : le minuteur serveur doit auto-révéler ~1 s après host:start.
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-p1-7-timer@example.com', 1)
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+
+      // Le joueur NE répond PAS et l'hôte N'émet PAS host:reveal : seule l'expiration serveur
+      // peut déclencher la révélation. Avant P1-7, la manche restait ouverte indéfiniment.
+      const revealPromise = waitFor<{ correct: unknown }>(player1, 'question:reveal')
+      await ack(hostSocket, 'host:start', {})
+
+      const reveal = await revealPromise
+      expect(reveal.correct).toBeDefined()
+      expect(JSON.stringify(reveal.correct)).toContain('Paris')
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
   it("auto-révélation serveur : ne se déclenche PAS tant qu'un joueur connecté n'a pas répondu, puis se déclenche dès qu'il répond", async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
