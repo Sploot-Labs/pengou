@@ -1,5 +1,5 @@
 import { and, eq } from 'drizzle-orm'
-import type { AppConfig } from '@splootlabs/shared'
+import { hasPermission, type AppConfig, type Role } from '@splootlabs/shared'
 import type { Db } from './client.js'
 import { schema } from './index.js'
 
@@ -63,7 +63,7 @@ export async function ensureMembership(
   db: Db,
   userId: string,
   tenantId: string,
-  role: 'owner' | 'admin' | 'member' = 'owner',
+  role: Role = 'owner',
 ): Promise<void> {
   await db.insert(schema.membership)
     .values({ userId, tenantId, role })
@@ -94,4 +94,29 @@ export async function resolveTenantId(
     .where(and(eq(schema.membership.userId, userId), eq(schema.membership.tenantId, explicitTenantId))).limit(1)
   if (!m) throw new TenantAccessDeniedError()
   return explicitTenantId
+}
+
+/** Rôle du membership (userId, tenantId), ou null si l'utilisateur n'est pas membre. */
+export async function getMembershipRole(db: Db, userId: string, tenantId: string): Promise<Role | null> {
+  const [m] = await db.select({ role: schema.membership.role }).from(schema.membership)
+    .where(and(eq(schema.membership.userId, userId), eq(schema.membership.tenantId, tenantId))).limit(1)
+  return m ? (m.role as Role) : null
+}
+
+/**
+ * Scope role-aware d'un utilisateur authentifié dans un tenant déjà résolu.
+ * owner/admin (content:access-all) → `ownerId` absent = tout le tenant.
+ * member / non-membre → `ownerId` = userId = son contenu seul (défaut restrictif).
+ */
+export async function scopeForUser(db: Db, tenantId: string, userId: string): Promise<TenantScope> {
+  const role = (await getMembershipRole(db, userId, tenantId)) ?? 'member'
+  const ownerId = hasPermission(role, 'content:access-all') ? undefined : userId
+  return tenantScope(db, tenantId, ownerId)
+}
+
+/** Rôle à attribuer à une nouvelle inscription : owner si le tenant n'a encore aucun membre, member sinon. */
+export async function firstMembershipRole(db: Db, tenantId: string): Promise<Role> {
+  const [m] = await db.select({ id: schema.membership.id }).from(schema.membership)
+    .where(eq(schema.membership.tenantId, tenantId)).limit(1)
+  return m ? 'member' : 'owner'
 }

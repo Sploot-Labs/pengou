@@ -3,7 +3,7 @@ export { runMigrations } from './migrate.js'
 export { startTestDb } from './test-helpers.js'
 export {
   tenantScope, type TenantScope, ensureDefaultTenant, resolveTenantId, ensureMembership, DEFAULT_TENANT_NAME,
-  TenantAccessDeniedError,
+  TenantAccessDeniedError, getMembershipRole, scopeForUser, firstMembershipRole,
 } from './tenant.js'
 export {
   createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz, type Quiz, type QuizListItem,
