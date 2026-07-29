@@ -1,4 +1,5 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
+import { eq } from 'drizzle-orm'
 import type { FastifyInstance } from 'fastify'
 import { startTestDb, runMigrations, schema, tenantScope, createQuiz, getQuiz } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
@@ -196,13 +197,18 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await app.close()
   })
 
-  it('P0 intra-tenant : un quiz d\'un AUTRE utilisateur du MÊME tenant est invisible (404) et non modifiable/supprimable', async () => {
+  it('intra-tenant (member) : le quiz d\'un autre MEMBER du même tenant est invisible (404) et non modifiable/supprimable', async () => {
     const app = await buildApp()
 
     // Deux utilisateurs distincts qui, en mode single, résolvent vers LE MÊME tenant par défaut.
-    // Avant le correctif d'accès intra-tenant, userB pouvait lire/modifier/supprimer le quiz de userA.
+    // Depuis Slice 1 (RBAC), l'isolation intra-tenant s'applique aux `member` (les owner/admin
+    // ont un accès croisé — couvert par le test « admin voit… »). On force donc les deux en `member`.
     const cookieA = await signUp(app, 'owner-a@example.com')
     const cookieB = await signUp(app, 'owner-b@example.com')
+    const [uA] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'owner-a@example.com'))
+    const [uB] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'owner-b@example.com'))
+    await ctx.db.update(schema.membership).set({ role: 'member' }).where(eq(schema.membership.userId, uA.id))
+    await ctx.db.update(schema.membership).set({ role: 'member' }).where(eq(schema.membership.userId, uB.id))
 
     const create = await app.inject({
       method: 'POST',
@@ -279,6 +285,60 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     // relu directement via son propre tenant, pas via l'API.
     const stillThere = await getQuiz(tenantScope(ctx.db, foreignTenant.id), foreignQuiz.id)
     expect(stillThere).not.toBeNull()
+
+    await app.close()
+  })
+
+  it('un admin voit et modifie le quiz d\'un autre membre du même tenant (accès croisé par rôle)', async () => {
+    const app = await buildApp()
+    const adminCookie = await signUp(app, 'admin-x@example.com')
+    const memberCookie = await signUp(app, 'member-x@example.com')
+
+    // Fixer explicitement les rôles (indépendant du défaut de signup) : admin-x = admin, member-x = member.
+    const [adminU] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'admin-x@example.com'))
+    const [memberU] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'member-x@example.com'))
+    await ctx.db.update(schema.membership).set({ role: 'admin' }).where(eq(schema.membership.userId, adminU.id))
+    await ctx.db.update(schema.membership).set({ role: 'member' }).where(eq(schema.membership.userId, memberU.id))
+
+    // member-x crée un quiz.
+    const created = await app.inject({
+      method: 'POST', url: '/api/quizzes',
+      payload: { title: 'Quiz du membre' },
+      headers: { 'content-type': 'application/json', cookie: memberCookie },
+    })
+    const quizId = (created.json() as { id: string }).id
+
+    // admin-x le voit dans sa liste (accès croisé) et peut le modifier.
+    const listAdmin = await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie: adminCookie } })
+    expect((listAdmin.json() as { id: string }[]).some((q) => q.id === quizId)).toBe(true)
+    const patch = await app.inject({
+      method: 'PATCH', url: `/api/quizzes/${quizId}`,
+      payload: { title: 'Modifié par admin' },
+      headers: { 'content-type': 'application/json', cookie: adminCookie },
+    })
+    expect(patch.statusCode).toBe(200)
+
+    await app.close()
+  })
+
+  it('un member ne voit pas le quiz d\'un autre (owner-scoping maintenu)', async () => {
+    const app = await buildApp()
+    const ownerCookie = await signUp(app, 'owner-y@example.com')
+    const memberCookie = await signUp(app, 'member-y@example.com')
+    const [memberU] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'member-y@example.com'))
+    await ctx.db.update(schema.membership).set({ role: 'member' }).where(eq(schema.membership.userId, memberU.id))
+
+    const created = await app.inject({
+      method: 'POST', url: '/api/quizzes',
+      payload: { title: 'Quiz owner-y' },
+      headers: { 'content-type': 'application/json', cookie: ownerCookie },
+    })
+    const quizId = (created.json() as { id: string }).id
+
+    const listMember = await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie: memberCookie } })
+    expect((listMember.json() as { id: string }[]).some((q) => q.id === quizId)).toBe(false)
+    const getOne = await app.inject({ method: 'GET', url: `/api/quizzes/${quizId}`, headers: { cookie: memberCookie } })
+    expect(getOne.statusCode).toBe(404)
 
     await app.close()
   })

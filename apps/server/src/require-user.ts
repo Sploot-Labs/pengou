@@ -1,6 +1,6 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
 import { fromNodeHeaders } from 'better-auth/node'
-import { resolveTenantId, tenantScope, TenantAccessDeniedError, type Db, type TenantScope } from '@splootlabs/db'
+import { resolveTenantId, scopeForUser, TenantAccessDeniedError, type Db, type TenantScope } from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
 import type { Auth } from '@splootlabs/auth'
 
@@ -27,9 +27,10 @@ export async function requestScope(request: FastifyRequest, db: Db, config: AppC
   if (!request.user?.id) throw new Error('requestScope requires requireUser preHandler')
   const explicitTenantId = typeof request.headers['x-tenant-id'] === 'string' ? (request.headers['x-tenant-id'] as string) : undefined
   const tenantId = await resolveTenantId(db, config, { userId: request.user.id, explicitTenantId })
-  // Scope UTILISATEUR : `ownerId` = utilisateur authentifié → les routes éditeur/rapports
-  // sont restreintes aux entités possédées (ferme la faille P0 d'accès intra-tenant).
-  return tenantScope(db, tenantId, request.user.id)
+  // Scope role-aware (Slice 1) : owner/admin → tout le tenant ; member → ses entités seules.
+  // Surcharge l'owner-scoping (ferme la faille P0 d'accès intra-tenant tout en autorisant
+  // l'accès croisé des rôles élevés).
+  return scopeForUser(db, tenantId, request.user.id)
 }
 
 /**

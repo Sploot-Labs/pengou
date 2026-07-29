@@ -409,6 +409,48 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
+  it("host:create : un admin peut lancer sur le quiz d'un autre membre, un member non (parité RBAC)", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const adminCookie = await signUp(app, 'gw-admin@example.com')
+      const memberBCookie = await signUp(app, 'gw-memberb@example.com')
+      await signUp(app, 'gw-membera@example.com') // memberA : propriétaire du quiz
+      const tenantId = await ensureDefaultTenant(ctx.db)
+      const [adminU] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'gw-admin@example.com'))
+      const [memberAU] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'gw-membera@example.com'))
+      const [memberBU] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'gw-memberb@example.com'))
+      await ctx.db.update(schema.membership).set({ role: 'admin' }).where(eq(schema.membership.userId, adminU.id))
+      await ctx.db.update(schema.membership).set({ role: 'member' }).where(eq(schema.membership.userId, memberAU.id))
+      await ctx.db.update(schema.membership).set({ role: 'member' }).where(eq(schema.membership.userId, memberBU.id))
+
+      // memberA crée un quiz + une question (il en est le propriétaire).
+      const scopeA = tenantScope(ctx.db, tenantId, memberAU.id)
+      const quiz = await createQuiz(scopeA, { ownerId: memberAU.id, title: 'Quiz de memberA' })
+      await createQuestion(scopeA, quiz.id, {
+        type: 'mcq', prompt: 'Q', timeLimit: 20, readingTime: 0,
+        payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+      })
+
+      // Un autre member ne peut PAS lancer sur le quiz de memberA (owner-scoping maintenu).
+      const memberBSock = await connectClient(url, { cookie: memberBCookie })
+      clients.push(memberBSock)
+      const refused = await ack<{ sessionId?: string; error?: string }>(memberBSock, 'host:create', { quizId: quiz.id })
+      expect(refused.error).toBeTruthy()
+      expect(refused.sessionId).toBeUndefined()
+
+      // L'admin, lui, PEUT lancer sur le quiz de memberA (accès croisé par rôle — parité avec HTTP).
+      const adminSock = await connectClient(url, { cookie: adminCookie })
+      clients.push(adminSock)
+      const ok = await ack<{ sessionId?: string; pin?: string; error?: string }>(adminSock, 'host:create', { quizId: quiz.id })
+      expect(ok.error).toBeUndefined()
+      expect(ok.sessionId).toBeTruthy()
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
   /** Crée un hôte inscrit + un quiz mono-question (mcq) + une session (host:create) — factorisé
    * pour les tests Task 5 (reconnexion / écran / timer / compteur) qui partagent tous ce setup. */
   async function setupHostedSession(
