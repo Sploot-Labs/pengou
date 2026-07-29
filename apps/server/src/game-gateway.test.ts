@@ -1819,7 +1819,14 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         await ack(hostSocket, 'host:reveal', {})
 
         const [dbSession] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.id, sessionId))
-        const before = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+        // La persistance de la manche (persistRound → recordAnswer) peut se terminer juste APRÈS
+        // l'ack de host:reveal : on attend (poll court) que l'answer_record soit écrit avant
+        // d'asserter, au lieu de supposer une écriture synchrone (source de flakiness sous charge).
+        let before = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+        for (let i = 0; i < 50 && before.length === 0; i++) {
+          await new Promise((r) => setTimeout(r, 20))
+          before = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+        }
         expect(before).toHaveLength(1)
 
         // SIMULATION de la fenêtre de crash : les answer_record n'ont jamais atteint la base
