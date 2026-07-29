@@ -16,8 +16,8 @@ export async function createQuestion(scope: TenantScope, quizId: string, input: 
   if (!(await assertQuizInTenant(scope, quizId))) return null
   const orderIndex = input.orderIndex ?? (await nextOrderIndex(scope, quizId))
   const [row] = await scope.db.insert(schema.question).values({
-    quizId, type: input.type, prompt: input.prompt, timeLimit: input.timeLimit, readingTime: input.readingTime ?? 6,
-    payload: input.payload as never, media: input.media ?? null, orderIndex,
+    quizId, tenantId: scope.tenantId, type: input.type, prompt: input.prompt, timeLimit: input.timeLimit,
+    readingTime: input.readingTime ?? 6, payload: input.payload as never, media: input.media ?? null, orderIndex,
   }).returning()
   return row
 }
@@ -25,14 +25,18 @@ export async function createQuestion(scope: TenantScope, quizId: string, input: 
 export async function listQuestions(scope: TenantScope, quizId: string): Promise<Question[] | null> {
   if (!(await assertQuizInTenant(scope, quizId))) return null
   return scope.db.select().from(schema.question)
-    .where(eq(schema.question.quizId, quizId))
+    .where(and(eq(schema.question.quizId, quizId), eq(schema.question.tenantId, scope.tenantId)))
     .orderBy(schema.question.orderIndex)
 }
 
 export async function getQuestion(scope: TenantScope, quizId: string, questionId: string): Promise<Question | null> {
   if (!(await assertQuizInTenant(scope, quizId))) return null
   const [row] = await scope.db.select().from(schema.question)
-    .where(and(eq(schema.question.id, questionId), eq(schema.question.quizId, quizId)))
+    .where(and(
+      eq(schema.question.id, questionId),
+      eq(schema.question.quizId, quizId),
+      eq(schema.question.tenantId, scope.tenantId),
+    ))
   return row ?? null
 }
 

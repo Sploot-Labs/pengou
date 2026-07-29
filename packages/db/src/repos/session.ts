@@ -47,8 +47,13 @@ export async function addSessionPlayer(
   sessionId: string,
   input: { nickname: string; joinToken: string },
 ): Promise<SessionPlayer> {
+  // Pas de scope tenant dans la couche temps réel : on dérive le tenant_id de la session parente.
+  const [parent] = await db.select({ tenantId: schema.gameSession.tenantId })
+    .from(schema.gameSession).where(eq(schema.gameSession.id, sessionId))
+  if (!parent) throw new Error(`addSessionPlayer: session introuvable (${sessionId})`)
   const [row] = await db.insert(schema.sessionPlayer).values({
     sessionId,
+    tenantId: parent.tenantId,
     nickname: input.nickname,
     joinToken: input.joinToken,
   }).returning()
@@ -68,10 +73,15 @@ export async function recordAnswer(
   },
 ): Promise<void> {
   // Idempotent (P1-8) : `onConflictDoNothing` sur l'index unique (session, question, joueur) —
-  // ré-écrire un answer_record déjà présent est un no-op. Rend `persistRound` rejouable (au
-  // redémarrage, cicatrisation d'une manche créditée mais non persistée) sans double-insert.
+  // ré-écrire un answer_record déjà présent est un no-op (persistRound rejouable / cicatrisation
+  // au redémarrage). Pas de scope tenant dans la couche temps réel : on dérive le tenant_id de la
+  // session parente (multi-tenancy Slice 0).
+  const [parent] = await db.select({ tenantId: schema.gameSession.tenantId })
+    .from(schema.gameSession).where(eq(schema.gameSession.id, input.sessionId))
+  if (!parent) throw new Error(`recordAnswer: session introuvable (${input.sessionId})`)
   await db.insert(schema.answerRecord).values({
     sessionId: input.sessionId,
+    tenantId: parent.tenantId,
     questionId: input.questionId,
     playerId: input.playerId,
     answer: input.answer as never,

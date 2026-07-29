@@ -24,7 +24,7 @@ beforeAll(async () => {
   const qb = await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerA, title: 'Quiz B' })
   quizB = qb.id
   const [question] = await ctx.db.insert(schema.question).values({
-    quizId: quizA, type: 'mcq', prompt: 'Q1', timeLimit: 20, orderIndex: 0,
+    quizId: quizA, tenantId: tenantA, type: 'mcq', prompt: 'Q1', timeLimit: 20, orderIndex: 0,
     payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
   }).returning()
   questionA = question.id
@@ -236,5 +236,42 @@ describe('repo session scopé au tenant du quiz', () => {
     // Sans le filtre lobby/active, la ligne abandoned (engine_state = null) pourrait être
     // retournée à la place de la session live → régression de la Task 3.
     expect(await loadEngineStateByPin(ctx.db, '838383')).toMatchObject({ who: 'fresh' })
+  })
+
+  it('addSessionPlayer pose le tenant_id de la session parente (signature inchangée)', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '242424' })
+    const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Tenanted', joinToken: 'tok-tenanted' })
+    expect(player.tenantId).toBe(tenantA)
+  })
+
+  it('la FK composite rejette un session_player dont le tenant_id ne colle pas à la session', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '252525' })
+    await expect(
+      ctx.db.insert(schema.sessionPlayer).values({
+        sessionId: session!.id, tenantId: tenantB, nickname: 'Cross', joinToken: 'tok-cross',
+      }).returning(),
+    ).rejects.toThrow()
+  })
+
+  it('recordAnswer pose le tenant_id de la session parente (signature inchangée)', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '262626' })
+    const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Ans', joinToken: 'tok-ans' })
+    await recordAnswer(ctx.db, {
+      sessionId: session!.id, questionId: questionA, playerId: player.id,
+      answer: { choice: 0 }, timeMs: 1000, isCorrect: true, points: 500,
+    })
+    const [row] = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.playerId, player.id))
+    expect(row.tenantId).toBe(tenantA)
+  })
+
+  it('la FK composite rejette un answer_record dont le tenant_id ne colle pas à la session', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '272727' })
+    const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'X', joinToken: 'tok-x2' })
+    await expect(
+      ctx.db.insert(schema.answerRecord).values({
+        sessionId: session!.id, tenantId: tenantB, questionId: questionA, playerId: player.id,
+        answer: { choice: 0 } as never, timeMs: 1, isCorrect: false, points: 0,
+      }).returning(),
+    ).rejects.toThrow()
   })
 })

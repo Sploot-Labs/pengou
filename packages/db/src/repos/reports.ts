@@ -80,7 +80,10 @@ export async function listSessions(
     })
     .from(schema.gameSession)
     .innerJoin(schema.quiz, eq(schema.quiz.id, schema.gameSession.quizId))
-    .leftJoin(schema.sessionPlayer, eq(schema.sessionPlayer.sessionId, schema.gameSession.id))
+    .leftJoin(schema.sessionPlayer, and(
+      eq(schema.sessionPlayer.sessionId, schema.gameSession.id),
+      eq(schema.sessionPlayer.tenantId, scope.tenantId),
+    ))
     .where(and(...conditions))
     .groupBy(schema.gameSession.id, schema.quiz.title)
     .orderBy(desc(schema.gameSession.createdAt))
@@ -124,9 +127,13 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
     .from(schema.question)
     .leftJoin(
       schema.answerRecord,
-      and(eq(schema.answerRecord.questionId, schema.question.id), eq(schema.answerRecord.sessionId, sessionId)),
+      and(
+        eq(schema.answerRecord.questionId, schema.question.id),
+        eq(schema.answerRecord.sessionId, sessionId),
+        eq(schema.answerRecord.tenantId, scope.tenantId),
+      ),
     )
-    .where(eq(schema.question.quizId, session.quizId))
+    .where(and(eq(schema.question.quizId, session.quizId), eq(schema.question.tenantId, scope.tenantId)))
     .groupBy(schema.question.id)
     .orderBy(schema.question.orderIndex)
 
@@ -142,8 +149,11 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
       answerCount: sql<number>`count(${schema.answerRecord.id})`.mapWith(Number),
     })
     .from(schema.sessionPlayer)
-    .leftJoin(schema.answerRecord, eq(schema.answerRecord.playerId, schema.sessionPlayer.id))
-    .where(eq(schema.sessionPlayer.sessionId, sessionId))
+    .leftJoin(schema.answerRecord, and(
+      eq(schema.answerRecord.playerId, schema.sessionPlayer.id),
+      eq(schema.answerRecord.tenantId, scope.tenantId),
+    ))
+    .where(and(eq(schema.sessionPlayer.sessionId, sessionId), eq(schema.sessionPlayer.tenantId, scope.tenantId)))
     .groupBy(schema.sessionPlayer.id)
     .orderBy(desc(schema.sessionPlayer.totalScore))
 

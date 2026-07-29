@@ -139,7 +139,7 @@ async function seedForeignSession(): Promise<string> {
   const scope = tenantScope(ctx.db, foreignTenant.id)
   const quiz = await createQuiz(scope, { ownerId: foreignOwner.id, title: 'Quiz étranger' })
   const [question] = await ctx.db.insert(schema.question).values({
-    quizId: quiz.id, type: 'mcq', prompt: 'Q étrangère', timeLimit: 20, orderIndex: 0,
+    quizId: quiz.id, tenantId: foreignTenant.id, type: 'mcq', prompt: 'Q étrangère', timeLimit: 20, orderIndex: 0,
     payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
   }).returning()
 

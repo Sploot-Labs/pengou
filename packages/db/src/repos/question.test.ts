@@ -1,4 +1,5 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
+import { eq, sql } from 'drizzle-orm'
 import { startTestDb, runMigrations, schema } from '../index.js'
 import { tenantScope } from '../tenant.js'
 import { createQuiz } from './quiz.js'
@@ -193,5 +194,38 @@ describe('repo question scopé par jointure sur quiz', () => {
     expect(withReading!.readingTime).toBe(6)
     const patched = await updateQuestion(scope, quizA, def!.id, { readingTime: 4 })
     expect(patched!.readingTime).toBe(4)
+  })
+
+  it('createQuestion écrit le tenant_id du scope', async () => {
+    const q = await createQuestion(tenantScope(ctx.db, tenantA), quizA, { type: 'mcq', prompt: 'TenantSet', timeLimit: 20, payload: validMcq })
+    expect(q?.tenantId).toBe(tenantA)
+  })
+
+  it('la FK composite rejette une question dont le tenant_id ne colle pas au quiz parent', async () => {
+    // quizA appartient à tenantA ; forcer tenantB viole (quiz_id, tenant_id) → quiz(id, tenant_id)
+    await expect(
+      ctx.db.insert(schema.question).values({
+        quizId: quizA, tenantId: tenantB, type: 'mcq', prompt: 'Cross', timeLimit: 20, orderIndex: 999, payload: validMcq,
+      }).returning(),
+    ).rejects.toThrow()
+  })
+
+  it('la colonne tenant_id est NOT NULL (aucun insert sans tenant résoluble)', async () => {
+    await expect(
+      ctx.db.insert(schema.question).values({
+        quizId: quizA, type: 'mcq', prompt: 'NoTenant', timeLimit: 20, orderIndex: 998, payload: validMcq,
+      } as never).returning(),
+    ).rejects.toThrow()
+  })
+
+  it('le backfill dérive tenant_id du quiz parent (simulation d\'une ligne legacy)', async () => {
+    const created = await createQuestion(tenantScope(ctx.db, tenantA), quizA, { type: 'mcq', prompt: 'Legacy', timeLimit: 20, payload: validMcq })
+    // Simuler une ligne d'avant la migration : relâcher NOT NULL, vider la colonne, rejouer le backfill.
+    await ctx.db.execute(sql`ALTER TABLE question ALTER COLUMN tenant_id DROP NOT NULL`)
+    await ctx.db.execute(sql`UPDATE question SET tenant_id = NULL WHERE id = ${created!.id}`)
+    await ctx.db.execute(sql`UPDATE question q SET tenant_id = z.tenant_id FROM quiz z WHERE z.id = q.quiz_id AND q.tenant_id IS NULL`)
+    await ctx.db.execute(sql`ALTER TABLE question ALTER COLUMN tenant_id SET NOT NULL`)
+    const [row] = await ctx.db.select().from(schema.question).where(eq(schema.question.id, created!.id))
+    expect(row.tenantId).toBe(tenantA)
   })
 })

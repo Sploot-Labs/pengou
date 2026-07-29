@@ -29,17 +29,17 @@ beforeAll(async () => {
   quizB = quizBRow.id
 
   const [question1] = await ctx.db.insert(schema.question).values({
-    quizId: quizA, type: 'mcq', prompt: 'Question 1', timeLimit: 20, orderIndex: 0,
+    quizId: quizA, tenantId: tenantA, type: 'mcq', prompt: 'Question 1', timeLimit: 20, orderIndex: 0,
     payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
   }).returning()
   q1 = question1.id
   const [question2] = await ctx.db.insert(schema.question).values({
-    quizId: quizA, type: 'mcq', prompt: 'Question 2', timeLimit: 20, orderIndex: 1,
+    quizId: quizA, tenantId: tenantA, type: 'mcq', prompt: 'Question 2', timeLimit: 20, orderIndex: 1,
     payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
   }).returning()
   q2 = question2.id
   const [questionB] = await ctx.db.insert(schema.question).values({
-    quizId: quizB, type: 'mcq', prompt: 'Question B', timeLimit: 20, orderIndex: 0,
+    quizId: quizB, tenantId: tenantB, type: 'mcq', prompt: 'Question B', timeLimit: 20, orderIndex: 0,
     payload: { options: [{ label: 'A', correct: true }] },
   }).returning()
   qB = questionB.id
