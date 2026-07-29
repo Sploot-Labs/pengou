@@ -1,7 +1,7 @@
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import type { Db } from '@splootlabs/db'
-import { schema, ensureDefaultTenant, ensureMembership } from '@splootlabs/db'
+import { schema, ensureDefaultTenant, ensureMembership, firstMembershipRole } from '@splootlabs/db'
 
 export type AuthConfig = {
   secret: string
@@ -48,7 +48,9 @@ export function createAuth(db: Db, config: AuthConfig) {
           after: async (user) => {
             if ((config.tenancyMode ?? 'single') === 'single') {
               const tenantId = await ensureDefaultTenant(db)
-              await ensureMembership(db, user.id, tenantId)
+              // Défaut de rôle (Slice 1) : 1er membre du tenant = owner, suivants = member.
+              const role = await firstMembershipRole(db, tenantId)
+              await ensureMembership(db, user.id, tenantId, role)
             }
           },
         },

@@ -32,7 +32,7 @@ describe('Better Auth email/mot de passe', () => {
     expect(signIn.token).toBeTruthy()
   })
 
-  it('mode single : l\'inscription crée un membership au tenant par défaut', async () => {
+  it('mode single : 1er inscrit = owner, suivant = member (défaut de rôle)', async () => {
     const signUp = await auth.api.signUpEmail({
       body: { email: 'membre@arena.fr', password: 'motdepasse-solide-123', name: 'Membre Test' },
     })
@@ -43,6 +43,11 @@ describe('Better Auth email/mot de passe', () => {
       .where(eq(schema.membership.userId, userId))
     expect(m).toBeTruthy()
     expect(m.tenantId).toBe(defaultTenantId)
-    expect(m.role).toBe('owner')
+    expect(m.role).toBe('member') // 2e inscrit (hote@arena.fr du test précédent était le 1er)
+
+    // Le 1er inscrit (hote@arena.fr) est bien owner.
+    const [hote] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'hote@arena.fr'))
+    const [mHote] = await ctx.db.select().from(schema.membership).where(eq(schema.membership.userId, hote.id))
+    expect(mHote.role).toBe('owner')
   })
 })
