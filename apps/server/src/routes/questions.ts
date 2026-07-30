@@ -1,11 +1,11 @@
 import type { FastifyInstance } from 'fastify'
-import { createQuestion, listQuestions, getQuestion, updateQuestion, deleteQuestion, reorderQuestions, type Db } from '@splootlabs/db'
+import { createQuestion, listQuestions, getQuestion, updateQuestion, deleteQuestion, reorderQuestions, withTenantTx, type Db } from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
 import { validateQuestionPayload, questionTypes, type QuestionType } from '@splootlabs/quiz'
-import { requireUser, resolveScopeOr403 } from '../require-user.js'
+import { requireUser, resolveContextOr403 } from '../require-user.js'
 import { LIMITS, tooLong, isSafeMedia } from '../validation.js'
 
-type Deps = { db: Db; config: AppConfig }
+type Deps = { systemDb: Db; appDb: Db; config: AppConfig }
 
 function isNonEmptyString(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0
@@ -26,14 +26,14 @@ function isQuestionType(value: unknown): value is QuestionType {
 const MAX_PROMPT = LIMITS.prompt
 
 export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
-  const { db, config } = deps
+  const { systemDb, appDb, config } = deps
 
   app.post<{ Params: { quizId: string } }>(
     '/api/quizzes/:quizId/questions',
     { preHandler: requireUser },
     async (request, reply) => {
-      const scope = await resolveScopeOr403(request, reply, db, config)
-      if (!scope) return
+      const context = await resolveContextOr403(request, reply, systemDb, config)
+      if (!context) return
 
       const body = request.body as
         | { type?: unknown; prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown }
@@ -69,16 +69,18 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
         return reply.code(400).send({ error: 'media invalide (URL http(s) ou référence relative attendue).' })
       }
 
-      const question = await createQuestion(scope, request.params.quizId, {
-        type: body.type,
-        prompt: body.prompt,
-        timeLimit: body.timeLimit,
-        readingTime: isNonNegativeInt(body.readingTime) ? body.readingTime : undefined,
-        payload: validatedPayload,
-        media,
+      return withTenantTx(appDb, context, async (scope) => {
+        const question = await createQuestion(scope, request.params.quizId, {
+          type: body.type as QuestionType,
+          prompt: body.prompt as string,
+          timeLimit: body.timeLimit as number,
+          readingTime: isNonNegativeInt(body.readingTime) ? body.readingTime : undefined,
+          payload: validatedPayload,
+          media,
+        })
+        if (!question) return reply.code(404).send({ error: 'Quiz introuvable.' })
+        return reply.code(201).send(question)
       })
-      if (!question) return reply.code(404).send({ error: 'Quiz introuvable.' })
-      return reply.code(201).send(question)
     },
   )
 
@@ -86,12 +88,13 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
     '/api/quizzes/:quizId/questions',
     { preHandler: requireUser },
     async (request, reply) => {
-      const scope = await resolveScopeOr403(request, reply, db, config)
-      if (!scope) return
-
-      const questions = await listQuestions(scope, request.params.quizId)
-      if (!questions) return reply.code(404).send({ error: 'Quiz introuvable.' })
-      return questions
+      const context = await resolveContextOr403(request, reply, systemDb, config)
+      if (!context) return
+      return withTenantTx(appDb, context, async (scope) => {
+        const questions = await listQuestions(scope, request.params.quizId)
+        if (!questions) return reply.code(404).send({ error: 'Quiz introuvable.' })
+        return questions
+      })
     },
   )
 
@@ -105,8 +108,8 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
     '/api/quizzes/:quizId/questions/:questionId',
     { preHandler: requireUser },
     async (request, reply) => {
-      const scope = await resolveScopeOr403(request, reply, db, config)
-      if (!scope) return
+      const context = await resolveContextOr403(request, reply, systemDb, config)
+      if (!context) return
 
       const body = request.body as
         | { prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown }
@@ -136,19 +139,22 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
         }
         patch.media = body.media
       }
-      if (body?.payload !== undefined) {
-        const existing = await getQuestion(scope, request.params.quizId, request.params.questionId)
-        if (!existing) return reply.code(404).send({ error: 'Question ou quiz introuvable.' })
-        try {
-          patch.payload = validateQuestionPayload(existing.type as QuestionType, body.payload)
-        } catch {
-          return reply.code(400).send({ error: 'Le payload est invalide pour ce type de question.' })
-        }
-      }
 
-      const question = await updateQuestion(scope, request.params.quizId, request.params.questionId, patch)
-      if (!question) return reply.code(404).send({ error: 'Question ou quiz introuvable.' })
-      return question
+      return withTenantTx(appDb, context, async (scope) => {
+        if (body?.payload !== undefined) {
+          const existing = await getQuestion(scope, request.params.quizId, request.params.questionId)
+          if (!existing) return reply.code(404).send({ error: 'Question ou quiz introuvable.' })
+          try {
+            patch.payload = validateQuestionPayload(existing.type as QuestionType, body.payload)
+          } catch {
+            return reply.code(400).send({ error: 'Le payload est invalide pour ce type de question.' })
+          }
+        }
+
+        const question = await updateQuestion(scope, request.params.quizId, request.params.questionId, patch)
+        if (!question) return reply.code(404).send({ error: 'Question ou quiz introuvable.' })
+        return question
+      })
     },
   )
 
@@ -156,12 +162,13 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
     '/api/quizzes/:quizId/questions/:questionId',
     { preHandler: requireUser },
     async (request, reply) => {
-      const scope = await resolveScopeOr403(request, reply, db, config)
-      if (!scope) return
-
-      const ok = await deleteQuestion(scope, request.params.quizId, request.params.questionId)
-      if (!ok) return reply.code(404).send({ error: 'Question ou quiz introuvable.' })
-      return reply.code(204).send()
+      const context = await resolveContextOr403(request, reply, systemDb, config)
+      if (!context) return
+      return withTenantTx(appDb, context, async (scope) => {
+        const ok = await deleteQuestion(scope, request.params.quizId, request.params.questionId)
+        if (!ok) return reply.code(404).send({ error: 'Question ou quiz introuvable.' })
+        return reply.code(204).send()
+      })
     },
   )
 
@@ -169,17 +176,19 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
     '/api/quizzes/:quizId/questions/order',
     { preHandler: requireUser },
     async (request, reply) => {
-      const scope = await resolveScopeOr403(request, reply, db, config)
-      if (!scope) return
+      const context = await resolveContextOr403(request, reply, systemDb, config)
+      if (!context) return
 
       const body = request.body as { orderedIds?: unknown } | undefined
       if (!Array.isArray(body?.orderedIds) || !body.orderedIds.every((id) => typeof id === 'string')) {
         return reply.code(400).send({ error: 'orderedIds doit être un tableau de chaînes.' })
       }
 
-      const ok = await reorderQuestions(scope, request.params.quizId, body.orderedIds)
-      if (!ok) return reply.code(404).send({ error: 'Quiz introuvable ou orderedIds invalide.' })
-      return { ok: true }
+      return withTenantTx(appDb, context, async (scope) => {
+        const ok = await reorderQuestions(scope, request.params.quizId, body.orderedIds as string[])
+        if (!ok) return reply.code(404).send({ error: 'Quiz introuvable ou orderedIds invalide.' })
+        return { ok: true }
+      })
     },
   )
 }

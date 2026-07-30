@@ -1,6 +1,9 @@
 import { join } from 'node:path'
 import { loadConfig } from '@splootlabs/shared'
-import { createDb, runMigrations, ensureDefaultTenant, pingDb } from '@splootlabs/db'
+import {
+  createDb, createAppDb, deriveAppUrl, ensureAppRole, setAppRolePassword,
+  runMigrations, ensureDefaultTenant, pingDb,
+} from '@splootlabs/db'
 import { createAuth, enabledSocialProviders } from '@splootlabs/auth'
 import { createEngine, generatePin } from '@splootlabs/game'
 import { buildServer } from './app.js'
@@ -12,12 +15,22 @@ import { PersistentSessionStore } from './persistent-store.js'
 import { registerStatic } from './static.js'
 
 const config = loadConfig()
-const { db, client } = createDb(config.databaseUrl)
+// Connexion PRIVILÉGIÉE (propriétaire, bypass RLS) : migrations, provisioning, ops cross-tenant.
+const { db: systemDb, client } = createDb(config.databaseUrl)
+
+// RLS (Slice 2) : provisionner le rôle applicatif restreint AVANT les migrations (qui posent
+// ses GRANTs) et construire le handle `appDb` (soumis au RLS, GUC par transaction via withTenantTx).
+const APP_ROLE = 'app_role'
+await ensureAppRole(client, APP_ROLE)
+await setAppRolePassword(client, APP_ROLE, config.appDbPassword)
 
 // Migration au boot (P1-9) : pratique en mono-instance ; désactivable (MIGRATE_ON_BOOT=false)
 // au profit d'une étape dédiée (`pnpm --filter @splootlabs/server migrate`) en multi-instance.
-if (config.migrateOnBoot) await runMigrations(db)
-if (config.tenancyMode === 'single') await ensureDefaultTenant(db)
+if (config.migrateOnBoot) await runMigrations(systemDb)
+if (config.tenancyMode === 'single') await ensureDefaultTenant(systemDb)
+
+const appUrl = config.appDatabaseUrl ?? deriveAppUrl(config.databaseUrl, { user: APP_ROLE, password: config.appDbPassword })
+const { db: appDb, client: appClient } = createAppDb(appUrl)
 
 let dbUp = true
 const app = await buildServer(config, {
@@ -25,7 +38,7 @@ const app = await buildServer(config, {
   dbPing: () => pingDb(client),
 })
 
-const auth = createAuth(db, {
+const auth = createAuth(systemDb, {
   // En dev, `BETTER_AUTH_SECRET` peut être absent : on retombe sur `SESSION_SECRET`
   // (déjà requis, min 16 caractères) plutôt que d'échouer au démarrage.
   secret: config.authSecret ?? config.sessionSecret,
@@ -36,7 +49,7 @@ const auth = createAuth(db, {
   socialProviders: enabledSocialProviders(config),
 })
 await registerAuth(app, auth)
-registerEditor(app, { db, auth, config })
+registerEditor(app, { systemDb, appDb, auth, config })
 
 const io = attachRealtime(app, config)
 
@@ -61,14 +74,14 @@ if (config.scaling === 'redis') {
 // `registerGameGateway` réhydrate au montage les sessions encore actives et récentes
 // (`rehydrateActiveSessions`, dans `game-gateway.ts`). Un futur passage à un backend partagé
 // (Redis, multi-instance) resterait un simple changement d'implémentation de `SessionStore`.
-const store = new PersistentSessionStore(db)
+const store = new PersistentSessionStore(systemDb)
 const engine = createEngine({
   store,
   now: () => Date.now(),
   genPin: generatePin,
   genId: () => crypto.randomUUID(),
 })
-const gateway = await registerGameGateway(io, { engine, db, auth, config, store })
+const gateway = await registerGameGateway(io, { engine, db: systemDb, auth, config, store })
 
 // Balayage périodique des parties inactives (mono-instance). `.unref()` : ne maintient jamais le
 // process en vie à lui seul. Erreurs loggées, jamais propagées (un tick ne doit pas tuer le serveur).
@@ -86,6 +99,7 @@ app.addHook('onClose', async () => {
   // PUIS ferme le pool.
   await store.flushAll().catch(() => {})
   clearInterval(sweepTimer)
+  await appClient.end({ timeout: 5 })
   await client.end({ timeout: 5 })
 })
 

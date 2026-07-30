@@ -3,7 +3,7 @@ import { startTestDb, runMigrations } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { buildServer } from './app.js'
 import { registerAuth } from './auth-plugin.js'
-import { registerRequireUser, requireUser, resolveScopeOr403 } from './require-user.js'
+import { registerRequireUser, requireUser, resolveContextOr403 } from './require-user.js'
 import { loadConfig } from '@splootlabs/shared'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
@@ -24,7 +24,7 @@ describe('requireUser', () => {
   })
 })
 
-describe('resolveScopeOr403 : ne masque QUE le refus de membership en 403', () => {
+describe('resolveContextOr403 : ne masque QUE le refus de membership en 403', () => {
   it('mode multi, sans membership sur le tenant demandé → 403 (pas 500)', async () => {
     const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'multi' })
     const auth = createAuth(ctx.db, { secret: 'test-secret-at-least-32-chars-long!!', baseURL: 'http://localhost:3000', tenancyMode: config.tenancyMode })
@@ -32,9 +32,9 @@ describe('resolveScopeOr403 : ne masque QUE le refus de membership en 403', () =
     await registerAuth(app, auth)
     registerRequireUser(app, auth)
     app.get('/api/scoped', { preHandler: requireUser }, async (req, reply) => {
-      const scope = await resolveScopeOr403(req, reply, ctx.db, config)
-      if (!scope) return
-      return { tenantId: scope.tenantId }
+      const context = await resolveContextOr403(req, reply, ctx.db, config)
+      if (!context) return
+      return { tenantId: context.tenantId }
     })
 
     const signUp = await app.inject({
@@ -67,9 +67,9 @@ describe('resolveScopeOr403 : ne masque QUE le refus de membership en 403', () =
     await registerAuth(app, auth)
     registerRequireUser(app, auth)
     app.get('/api/scoped', { preHandler: requireUser }, async (req, reply) => {
-      const scope = await resolveScopeOr403(req, reply, ctx.db, config)
-      if (!scope) return
-      return { tenantId: scope.tenantId }
+      const context = await resolveContextOr403(req, reply, ctx.db, config)
+      if (!context) return
+      return { tenantId: context.tenantId }
     })
 
     const signUp = await app.inject({

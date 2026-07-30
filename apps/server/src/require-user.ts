@@ -1,13 +1,18 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
 import { fromNodeHeaders } from 'better-auth/node'
-import { resolveTenantId, scopeForUser, TenantAccessDeniedError, type Db, type TenantScope } from '@splootlabs/db'
-import type { AppConfig } from '@splootlabs/shared'
+import { resolveTenantId, getMembershipRole, TenantAccessDeniedError, type Db } from '@splootlabs/db'
+import { hasPermission, type AppConfig } from '@splootlabs/shared'
 import type { Auth } from '@splootlabs/auth'
 
 declare module 'fastify' {
   interface FastifyRequest { user: { id: string; email: string } }
   interface FastifyInstance { auth: Auth }
 }
+
+/** Contexte tenant résolu pour une requête : le tenant applicable + `ownerId` role-aware
+ * (owner/admin → undefined = tout le tenant ; member → son userId). Utilisé pour construire
+ * un scope RLS via `withTenantTx(appDb, context, …)`. */
+export type TenantContext = { tenantId: string; ownerId?: string }
 
 export function registerRequireUser(app: FastifyInstance, auth: Auth): void {
   if (!app.hasDecorator('auth')) app.decorate('auth', auth)
@@ -19,39 +24,40 @@ export async function requireUser(request: FastifyRequest, reply: FastifyReply):
   request.user = { id: session.user.id, email: session.user.email }
 }
 
-// Invariant : `requestScope` suppose que le preHandler `requireUser` a déjà tourné
-// (donc `request.user` est renseigné). Garde défensive ci-dessous : sans ça, un appel
-// erroné produirait un TypeError obscur (`Cannot read properties of undefined`) au lieu
-// d'un message clair pointant vers la cause réelle.
-export async function requestScope(request: FastifyRequest, db: Db, config: AppConfig): Promise<TenantScope> {
-  if (!request.user?.id) throw new Error('requestScope requires requireUser preHandler')
+/**
+ * Résout le contexte tenant de la requête via la connexion PRIVILÉGIÉE (`systemDb`) : le
+ * tenant applicable (mode single/multi) puis le rôle → `ownerId` role-aware. La résolution du
+ * membership est PRÉ-contexte (elle détermine le tenant) → elle ne passe pas par le RLS.
+ * Le travail scopé se fait ensuite dans `withTenantTx(appDb, context, …)`.
+ *
+ * Invariant : suppose que `requireUser` a déjà renseigné `request.user` (garde défensive).
+ */
+export async function resolveTenantContext(
+  request: FastifyRequest,
+  systemDb: Db,
+  config: AppConfig,
+): Promise<TenantContext> {
+  if (!request.user?.id) throw new Error('resolveTenantContext requires requireUser preHandler')
   const explicitTenantId = typeof request.headers['x-tenant-id'] === 'string' ? (request.headers['x-tenant-id'] as string) : undefined
-  const tenantId = await resolveTenantId(db, config, { userId: request.user.id, explicitTenantId })
-  // Scope role-aware (Slice 1) : owner/admin → tout le tenant ; member → ses entités seules.
-  // Surcharge l'owner-scoping (ferme la faille P0 d'accès intra-tenant tout en autorisant
-  // l'accès croisé des rôles élevés).
-  return scopeForUser(db, tenantId, request.user.id)
+  const tenantId = await resolveTenantId(systemDb, config, { userId: request.user.id, explicitTenantId })
+  const role = (await getMembershipRole(systemDb, request.user.id, tenantId)) ?? 'member'
+  const ownerId = hasPermission(role, 'content:access-all') ? undefined : request.user.id
+  return { tenantId, ownerId }
 }
 
 /**
- * Résout le scope tenant pour une route, ou répond 403 et renvoie `null` — mais UNIQUEMENT
- * pour le cas « pas de membership » (`TenantAccessDeniedError`, levée par `resolveTenantId`
- * en mode multi). Toute autre erreur (panne DB, etc.) est relancée telle quelle pour que
- * Fastify la traduise en 500 : elle ne doit jamais être masquée en 403.
- *
- * Match sur le TYPE de l'erreur (`instanceof TenantAccessDeniedError`), pas sur une sous-chaîne
- * de son message : coupler la couche HTTP à la formulation française exacte de `@splootlabs/db`
- * est fragile (un simple reformulation du message côté db casserait silencieusement ce garde,
- * transformant un 403 attendu en 500).
+ * Résout le contexte, ou répond 403 et renvoie `null` — UNIQUEMENT pour « pas de membership »
+ * (`TenantAccessDeniedError`, mode multi). Toute autre erreur est relancée (→ 500 Fastify),
+ * jamais masquée en 403. Match sur le TYPE de l'erreur, pas sur son message.
  */
-export async function resolveScopeOr403(
+export async function resolveContextOr403(
   request: FastifyRequest,
   reply: FastifyReply,
-  db: Db,
+  systemDb: Db,
   config: AppConfig,
-): Promise<TenantScope | null> {
+): Promise<TenantContext | null> {
   try {
-    return await requestScope(request, db, config)
+    return await resolveTenantContext(request, systemDb, config)
   } catch (e) {
     if (e instanceof TenantAccessDeniedError) {
       reply.code(403).send({ error: 'Accès refusé à ce tenant.' })

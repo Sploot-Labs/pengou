@@ -1,10 +1,10 @@
 import type { FastifyInstance } from 'fastify'
-import { listSessions, getSessionReport, type SessionReport, type Db } from '@splootlabs/db'
+import { listSessions, getSessionReport, withTenantTx, type SessionReport, type Db } from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
-import { requireUser, resolveScopeOr403 } from '../require-user.js'
+import { requireUser, resolveContextOr403 } from '../require-user.js'
 import { toCsv } from '../csv.js'
 
-type Deps = { db: Db; config: AppConfig }
+type Deps = { systemDb: Db; appDb: Db; config: AppConfig }
 
 const DEFAULT_LIMIT = 50
 const MAX_LIMIT = 200
@@ -58,26 +58,28 @@ function buildReportCsv(report: SessionReport): string {
 }
 
 export function registerReportRoutes(app: FastifyInstance, deps: Deps): void {
-  const { db, config } = deps
+  const { systemDb, appDb, config } = deps
 
   app.get('/api/sessions', { preHandler: requireUser }, async (request, reply) => {
-    const scope = await resolveScopeOr403(request, reply, db, config)
-    if (!scope) return
+    const context = await resolveContextOr403(request, reply, systemDb, config)
+    if (!context) return
     const query = request.query as { limit?: unknown; status?: unknown } | undefined
     const limit = parseLimit(query?.limit)
     const status = parseStatuses(query?.status)
-    return listSessions(scope, { limit, status })
+    return withTenantTx(appDb, context, (scope) => listSessions(scope, { limit, status }))
   })
 
   app.get<{ Params: { sessionId: string } }>(
     '/api/sessions/:sessionId',
     { preHandler: requireUser },
     async (request, reply) => {
-      const scope = await resolveScopeOr403(request, reply, db, config)
-      if (!scope) return
-      const report = await getSessionReport(scope, request.params.sessionId)
-      if (!report) return reply.code(404).send({ error: 'Partie introuvable.' })
-      return report
+      const context = await resolveContextOr403(request, reply, systemDb, config)
+      if (!context) return
+      return withTenantTx(appDb, context, async (scope) => {
+        const report = await getSessionReport(scope, request.params.sessionId)
+        if (!report) return reply.code(404).send({ error: 'Partie introuvable.' })
+        return report
+      })
     },
   )
 
@@ -85,9 +87,9 @@ export function registerReportRoutes(app: FastifyInstance, deps: Deps): void {
     '/api/sessions/:sessionId/export.csv',
     { preHandler: requireUser },
     async (request, reply) => {
-      const scope = await resolveScopeOr403(request, reply, db, config)
-      if (!scope) return
-      const report = await getSessionReport(scope, request.params.sessionId)
+      const context = await resolveContextOr403(request, reply, systemDb, config)
+      if (!context) return
+      const report = await withTenantTx(appDb, context, (scope) => getSessionReport(scope, request.params.sessionId))
       if (!report) return reply.code(404).send({ error: 'Partie introuvable.' })
 
       // Nom de fichier dérivé du PIN (chiffres uniquement) : jamais le titre du quiz, texte

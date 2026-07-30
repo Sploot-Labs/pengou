@@ -58,7 +58,7 @@ async function buildApp(store: SessionStore = new MemorySessionStore()): Promise
   })
   const app = await buildServer(config, { dbStatus: () => 'up' })
   await registerAuth(app, auth)
-  registerEditor(app, { db: ctx.db, auth, config })
+  registerEditor(app, { systemDb: ctx.db, appDb: ctx.appDb, auth, config })
   const io = attachRealtime(app, config)
 
   const engine = createEngine({

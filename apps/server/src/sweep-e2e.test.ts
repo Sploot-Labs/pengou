@@ -77,7 +77,7 @@ describe('sweepAbandonedSessions — balayage périodique des parties inactives'
       tenancyMode: config.tenancyMode,
     })
     await registerAuth(app, auth)
-    registerEditor(app, { db: ctx.db, auth, config })
+    registerEditor(app, { systemDb: ctx.db, appDb: ctx.appDb, auth, config })
     const io = attachRealtime(app, config)
     const store = new PersistentSessionStore(ctx.db)
     const engine = createEngine({ store, now: () => Date.now(), genPin: generatePin, genId: () => crypto.randomUUID() })

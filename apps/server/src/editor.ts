@@ -7,9 +7,13 @@ import { registerQuizRoutes } from './routes/quizzes.js'
 import { registerQuestionRoutes } from './routes/questions.js' // Task 5
 import { registerReportRoutes } from './routes/sessions.js'
 
-export function registerEditor(app: FastifyInstance, deps: { db: Db; auth: Auth; config: AppConfig }): void {
+export function registerEditor(
+  app: FastifyInstance,
+  deps: { systemDb: Db; appDb: Db; auth: Auth; config: AppConfig },
+): void {
   registerRequireUser(app, deps.auth)
-  registerQuizRoutes(app, deps)
-  registerQuestionRoutes(app, deps) // Task 5
-  registerReportRoutes(app, deps)
+  const routeDeps = { systemDb: deps.systemDb, appDb: deps.appDb, config: deps.config }
+  registerQuizRoutes(app, routeDeps)
+  registerQuestionRoutes(app, routeDeps) // Task 5
+  registerReportRoutes(app, routeDeps)
 }
