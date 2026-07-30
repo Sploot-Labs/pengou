@@ -7,6 +7,16 @@ export {
   TenantAccessDeniedError, getMembershipRole, scopeForUser, firstMembershipRole, withTenantTx,
 } from './tenant.js'
 export {
+  slugify, generateUniqueSlug, createWorkspace, listUserWorkspaces, getWorkspaceBySlug, isMember,
+  listMembers, getMemberRole, countOwners, setMemberRole, removeMember,
+  type Workspace, type UserWorkspace, type Member,
+} from './workspace.js'
+export {
+  createInvitation, listInvitations, getInvitationById, revokeInvitation, resendInvitation,
+  getInvitationByToken, acceptInvitation, newInvitationToken, invitationExpiry, InvitationError,
+  INVITATION_TTL_MS, type Invitation, type InvitationWithWorkspace, type AcceptCode,
+} from './repos/invitation.js'
+export {
   createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz, type Quiz, type QuizListItem,
 } from './repos/quiz.js'
 export {

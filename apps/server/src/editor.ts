@@ -6,6 +6,9 @@ import { registerRequireUser } from './require-user.js'
 import { registerQuizRoutes } from './routes/quizzes.js'
 import { registerQuestionRoutes } from './routes/questions.js' // Task 5
 import { registerReportRoutes } from './routes/sessions.js'
+import { registerWorkspaceRoutes } from './routes/workspaces.js' // Slice 3a
+import { registerMemberRoutes } from './routes/members.js' // Slice 3b
+import { registerInvitationRoutes } from './routes/invitations.js' // Slice 3b
 
 export function registerEditor(
   app: FastifyInstance,
@@ -16,4 +19,9 @@ export function registerEditor(
   registerQuizRoutes(app, routeDeps)
   registerQuestionRoutes(app, routeDeps) // Task 5
   registerReportRoutes(app, routeDeps)
+  registerWorkspaceRoutes(app, routeDeps) // Slice 3a : gestion des workspaces
+  registerMemberRoutes(app, routeDeps) // Slice 3b : gestion des membres
+  registerInvitationRoutes(app, routeDeps) // Slice 3b : invitations
 }
+// NOTE : les routes 3b (membres/invitations) sont enregistrées ci-dessus ; leurs fichiers sont
+// livrés dans le même chantier. Voir routes/members.ts, routes/invitations.ts, require-permission.ts.

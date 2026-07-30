@@ -1,7 +1,7 @@
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import type { Db } from '@splootlabs/db'
-import { schema, ensureDefaultTenant, ensureMembership, firstMembershipRole } from '@splootlabs/db'
+import { schema, ensureDefaultTenant, ensureMembership, firstMembershipRole, createWorkspace } from '@splootlabs/db'
 
 export type AuthConfig = {
   secret: string
@@ -11,6 +11,16 @@ export type AuthConfig = {
   /** Self-host : coupe l'inscription publique (les comptes existants se connectent toujours). */
   disableSignup?: boolean
   socialProviders?: Record<string, { clientId: string; clientSecret: string }>
+}
+
+/** Nom du workspace personnel créé au signup multi : nom d'affichage s'il est non vide, sinon la
+ * partie locale de l'e-mail, sinon un repli générique. Le slug unique est dérivé par `createWorkspace`. */
+function personalWorkspaceName(user: { name?: string | null; email?: string | null }): string {
+  const name = user.name?.trim()
+  if (name) return name
+  const local = user.email?.split('@')[0]?.trim()
+  if (local) return local
+  return 'Mon espace'
 }
 
 export function createAuth(db: Db, config: AuthConfig) {
@@ -51,7 +61,13 @@ export function createAuth(db: Db, config: AuthConfig) {
               // Défaut de rôle (Slice 1) : 1er membre du tenant = owner, suivants = member.
               const role = await firstMembershipRole(db, tenantId)
               await ensureMembership(db, user.id, tenantId, role)
+              return
             }
+            // Multi (Slice 3) : chaque inscription obtient un workspace personnel dont elle est
+            // owner — pas d'état « aucun workspace ». Nom dérivé du nom d'affichage, à défaut de la
+            // partie locale de l'e-mail. L'utilisateur pourra créer/rejoindre d'autres workspaces.
+            const label = personalWorkspaceName(user)
+            await createWorkspace(db, { name: label, ownerId: user.id })
           },
         },
       },
