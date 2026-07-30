@@ -81,7 +81,7 @@ const engine = createEngine({
   genPin: generatePin,
   genId: () => crypto.randomUUID(),
 })
-const gateway = await registerGameGateway(io, { engine, db: systemDb, auth, config, store })
+const gateway = await registerGameGateway(io, { engine, systemDb, appDb, auth, config, store })
 
 // Balayage périodique des parties inactives (mono-instance). `.unref()` : ne maintient jamais le
 // process en vie à lui seul. Erreurs loggées, jamais propagées (un tick ne doit pas tuer le serveur).

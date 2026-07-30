@@ -81,7 +81,7 @@ describe('sweepAbandonedSessions — balayage périodique des parties inactives'
     const io = attachRealtime(app, config)
     const store = new PersistentSessionStore(ctx.db)
     const engine = createEngine({ store, now: () => Date.now(), genPin: generatePin, genId: () => crypto.randomUUID() })
-    const gateway = await registerGameGateway(io, { engine, db: ctx.db, auth, config, store })
+    const gateway = await registerGameGateway(io, { engine, systemDb: ctx.db, appDb: ctx.appDb, auth, config, store })
 
     await app.listen({ port: 0, host: '127.0.0.1' })
     const address = app.server.address()

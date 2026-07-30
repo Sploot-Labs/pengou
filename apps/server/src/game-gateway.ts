@@ -1,18 +1,23 @@
 import type { Server, Socket } from 'socket.io'
 import { fromNodeHeaders } from 'better-auth/node'
 import {
-  resolveTenantId, scopeForUser, listQuestions,
+  resolveTenantId, getMembershipRole, withTenantTx, listQuestions,
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
   clearEngineState, listResumableSessions, abandonStaleSessions, abandonInactiveSessions, listSessionPlayers,
   type Db,
 } from '@splootlabs/db'
 import type { Auth } from '@splootlabs/auth'
-import type { AppConfig } from '@splootlabs/shared'
+import { hasPermission, type AppConfig } from '@splootlabs/shared'
 import type { Engine, EngineQuestion, GameSession, SessionStore } from '@splootlabs/game'
 
 export type GameGatewayDeps = {
   engine: Engine
-  db: Db
+  /** Connexion privilégiée (bypass RLS) : boot rehydration, sweep, store moteur, bookkeeping
+   * `engine_state` — opérations système/cross-tenant sans contexte tenant par requête. */
+  systemDb: Db
+  /** Connexion applicative restreinte (soumise au RLS) : opérations de contenu scopées à un
+   * tenant (host:create, join, réponses, scores) via `withTenantTx(appDb, { tenantId }, …)`. */
+  appDb: Db
   auth: Auth
   config: AppConfig
   store: SessionStore
@@ -113,7 +118,7 @@ function playersPayload(session: GameSession): Array<{ id: string; nickname: str
 }
 
 export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Promise<{ sweepAbandonedSessions: () => Promise<void> }> {
-  const { engine, db, auth, config, store } = deps
+  const { engine, systemDb, appDb, auth, config, store } = deps
 
   // État de la passerelle : local à CET appel de registerGameGateway (donc à CETTE instance
   // `io`) — pas de Map au niveau module, pour ne pas fuiter entre plusieurs serveurs
@@ -243,28 +248,34 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     const question = session.questions[idx]
     if (!question) return
     const roundAnswers = session.answers[idx] ?? {}
-    for (const [enginePlayerId, submitted] of Object.entries(roundAnswers)) {
-      const dbPlayerId = meta.playerDbIds.get(enginePlayerId)
-      if (!dbPlayerId) continue
-      await recordAnswer(db, {
-        sessionId: meta.dbSessionId,
-        questionId: question.id,
-        playerId: dbPlayerId,
-        answer: submitted.answer,
-        timeMs: submitted.timeMs,
-        isCorrect: submitted.correct,
-        points: submitted.points,
-      })
-    }
+    // RLS : écritures answer_record scopées au tenant de la session (contexte connu via meta).
+    await withTenantTx(appDb, { tenantId: meta.tenantId }, async (scope) => {
+      for (const [enginePlayerId, submitted] of Object.entries(roundAnswers)) {
+        const dbPlayerId = meta.playerDbIds.get(enginePlayerId)
+        if (!dbPlayerId) continue
+        await recordAnswer(scope.db, {
+          sessionId: meta.dbSessionId,
+          questionId: question.id,
+          playerId: dbPlayerId,
+          answer: submitted.answer,
+          timeMs: submitted.timeMs,
+          isCorrect: submitted.correct,
+          points: submitted.points,
+        })
+      }
+    })
   }
 
   /** Persiste les scores totaux de tous les joueurs (idempotent : simple overwrite). */
   async function persistPlayerScores(meta: SessionMeta, session: GameSession): Promise<void> {
-    for (const player of Object.values(session.players)) {
-      const dbPlayerId = meta.playerDbIds.get(player.id)
-      if (!dbPlayerId) continue
-      await setPlayerScore(db, dbPlayerId, player.score)
-    }
+    // RLS : écritures session_player scopées au tenant de la session.
+    await withTenantTx(appDb, { tenantId: meta.tenantId }, async (scope) => {
+      for (const player of Object.values(session.players)) {
+        const dbPlayerId = meta.playerDbIds.get(player.id)
+        if (!dbPlayerId) continue
+        await setPlayerScore(scope.db, dbPlayerId, player.score)
+      }
+    })
   }
 
   /** Persiste les réponses + scores de la manche EN COURS (session.currentIndex), après reveal().
@@ -551,8 +562,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
    * Best-effort par session : une session individuellement corrompue/absente du store (ex. race
    * avec une écriture concurrente) ne doit jamais empêcher la reprise des autres. */
   async function rehydrateActiveSessions(maxAgeMs: number): Promise<void> {
-    await abandonStaleSessions(db, maxAgeMs)
-    const rows = await listResumableSessions(db, maxAgeMs)
+    await abandonStaleSessions(systemDb, maxAgeMs)
+    const rows = await listResumableSessions(systemDb, maxAgeMs)
 
     for (const row of rows) {
       try {
@@ -561,7 +572,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         // (clés numériques `answers`/`credited` reconverties, voir `PersistentSessionStore`).
         const session = await engine.getSession(row.id)
 
-        const dbPlayers = await listSessionPlayers(db, row.id)
+        const dbPlayers = await listSessionPlayers(systemDb, row.id)
         const playerDbIds = new Map<string, string>()
         for (const enginePlayer of Object.values(session.players)) {
           const dbPlayer = dbPlayers.find((p) => p.joinToken === enginePlayer.joinToken)
@@ -661,12 +672,17 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         const quizId = payload?.quizId
         if (typeof quizId !== 'string' || !quizId) throw new Error('quizId requis')
 
-        const tenantId = await resolveTenantId(db, config, { userId: authSession.user.id })
-        // Scope role-aware (Slice 1) : un owner/admin peut lancer une partie sur n'importe quel
-        // quiz du tenant ; un member seulement sur les siens (parité avec les routes HTTP).
-        const scope = await scopeForUser(db, tenantId, authSession.user.id)
+        // Résolution PRÉ-contexte via systemDb (détermine le tenant + le rôle → ownerId
+        // role-aware : owner/admin peut lancer sur n'importe quel quiz du tenant, member sur les
+        // siens — parité avec les routes HTTP).
+        const tenantId = await resolveTenantId(systemDb, config, { userId: authSession.user.id })
+        const role = (await getMembershipRole(systemDb, authSession.user.id, tenantId)) ?? 'member'
+        const ownerId = hasPermission(role, 'content:access-all') ? undefined : authSession.user.id
+        const context = { tenantId, ownerId }
 
-        const questionRows = await listQuestions(scope, quizId)
+        // Lecture du quiz sous RLS (appDb + GUC) : un quiz d'un autre tenant n'existe pas pour ce
+        // contexte → « quiz introuvable ».
+        const questionRows = await withTenantTx(appDb, context, (scope) => listQuestions(scope, quizId))
         if (!questionRows) throw new Error('quiz introuvable')
 
         const questions = questionRows.map(toEngineQuestion)
@@ -677,7 +693,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         // UPDATE sur une ligne inexistante ne persisterait rien). Il faut donc connaître le PIN
         // (généré par le moteur) AVANT de créer la ligne DB — d'où `generateUniquePin()`.
         const pin = await engine.generateUniquePin()
-        const dbSession = await createGameSession(scope, { quizId, hostId: authSession.user.id, pin })
+        // Création sous RLS (appDb + GUC) : WITH CHECK garantit tenant_id = contexte.
+        const dbSession = await withTenantTx(appDb, context, (scope) =>
+          createGameSession(scope, { quizId, hostId: authSession.user.id, pin }))
         if (!dbSession) throw new Error('création de la session impossible')
 
         // L'id `game_session` DB devient l'id moteur — UN SEUL id partout (plus de map de
@@ -747,7 +765,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (session.hostId !== authSession.user.id) {
           throw new Error("cet utilisateur n'est pas l'hôte de cette session")
         }
-        const dbSession = await getGameSessionById(db, meta.dbSessionId)
+        const dbSession = await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
+          getGameSessionById(scope.db, meta.dbSessionId))
         if (!dbSession || dbSession.hostId !== authSession.user.id) {
           throw new Error("cet utilisateur n'est pas l'hôte de cette session")
         }
@@ -772,7 +791,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       try {
         const { sessionId, meta } = requireHost(socket)
         if (!meta.statusActiveSet) {
-          await setSessionStatus(db, meta.dbSessionId, 'active')
+          await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
+            setSessionStatus(scope.db, meta.dbSessionId, 'active'))
           meta.statusActiveSet = true
         }
         // Démarrage de la question : voir `startQuestionFlow` (route 'reading' vs 'question'
@@ -843,7 +863,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           reply({ phase: session.phase })
         } else {
           const session = await engine.podium(sessionId)
-          await setSessionStatus(db, meta.dbSessionId, 'ended')
+          await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
+            setSessionStatus(scope.db, meta.dbSessionId, 'ended'))
           // Nettoyage (Task 4) : `engine_state` n'a plus lieu d'être conservé passé le podium —
           // le rapport final reste entièrement lisible via `session_player`/`answer_record`
           // (inchangés). N'affecte QUE la colonne DB : le cache en mémoire du store persistant
@@ -851,7 +872,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           // que le serveur ne redémarre pas) ; après un redémarrage, `listResumableSessions`
           // exclurait de toute façon cette session (status déjà 'ended' ci-dessus) — ce nettoyage
           // est donc une hygiène de stockage, pas une condition de correction de la réhydratation.
-          await clearEngineState(db, meta.dbSessionId)
+          await clearEngineState(systemDb, meta.dbSessionId)
           const top = engine.ranking(session).slice(0, 3)
           io.to(roomName(sessionId)).emit('podium', { top })
           reply({ phase: session.phase })
@@ -882,7 +903,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (!meta) throw new Error('session introuvable')
 
         const { session, player } = await engine.addPlayer(sessionId, nickname)
-        const dbPlayer = await addSessionPlayer(db, meta.dbSessionId, { nickname, joinToken: player.joinToken })
+        const dbPlayer = await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
+          addSessionPlayer(scope.db, meta.dbSessionId, { nickname, joinToken: player.joinToken }))
         meta.playerDbIds.set(player.id, dbPlayer.id)
 
         const data = socket.data as SocketData
@@ -1092,7 +1114,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
    * une session déjà absente de la mémoire (ex. jamais pilotée par ce process) est simplement
    * ignorée par les `get`/`delete` de Map. Appelé périodiquement par la composition root. */
   async function sweepAbandonedSessions(): Promise<void> {
-    const ids = await abandonInactiveSessions(db, config.sessionInactivityTimeoutMs)
+    const ids = await abandonInactiveSessions(systemDb, config.sessionInactivityTimeoutMs)
     for (const id of ids) {
       const meta = sessionMetaByEngineId.get(id)
       if (meta) clearReadingTimeout(meta)

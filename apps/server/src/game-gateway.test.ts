@@ -70,7 +70,7 @@ async function buildApp(store: SessionStore = new MemorySessionStore()): Promise
   // Réhydratation (Task 4) : `registerGameGateway` réhydrate les sessions actives à son montage
   // — `await` ici garantit qu'elle est terminée avant que le test n'interagisse avec l'app (pas
   // de course entre la reprise et les premiers `player:join`/`host:reconnect` du test).
-  await registerGameGateway(io, { engine, db: ctx.db, auth, config, store })
+  await registerGameGateway(io, { engine, systemDb: ctx.db, appDb: ctx.appDb, auth, config, store })
 
   await app.listen({ port: 0, host: '127.0.0.1' })
   const address = app.server.address()
