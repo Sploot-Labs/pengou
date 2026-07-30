@@ -1,4 +1,4 @@
-import { and, eq } from 'drizzle-orm'
+import { and, eq, sql } from 'drizzle-orm'
 import { hasPermission, type AppConfig, type Role } from '@splootlabs/shared'
 import type { Db } from './client.js'
 import { schema } from './index.js'
@@ -119,4 +119,21 @@ export async function firstMembershipRole(db: Db, tenantId: string): Promise<Rol
   const [m] = await db.select({ id: schema.membership.id }).from(schema.membership)
     .where(eq(schema.membership.tenantId, tenantId)).limit(1)
   return m ? 'member' : 'owner'
+}
+
+/**
+ * Exécute `fn` dans une transaction sur `appDb` (rôle restreint, soumis au RLS) avec
+ * `app.tenant_id` posé en SET LOCAL (`set_config(..., true)`) — scopé à la transaction, donc
+ * AUCUNE fuite de GUC entre requêtes du pool (contrairement à un SET de session sur connexion
+ * réservée). Le scope fourni porte la transaction comme `db` : les repos restent inchangés.
+ */
+export async function withTenantTx<T>(
+  appDb: Db,
+  ctx: { tenantId: string; ownerId?: string },
+  fn: (scope: TenantScope) => Promise<T>,
+): Promise<T> {
+  return appDb.transaction(async (tx) => {
+    await tx.execute(sql`select set_config('app.tenant_id', ${ctx.tenantId}, true)`)
+    return fn({ db: tx as unknown as Db, tenantId: ctx.tenantId, ownerId: ctx.ownerId })
+  })
 }

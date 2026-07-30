@@ -5,6 +5,12 @@ const EnvSchema = z.object({
   PORT: z.coerce.number().int().positive().default(3000),
   TENANCY_MODE: z.enum(['single', 'multi']).default('single'),
   DATABASE_URL: z.string().min(1).default('postgres://kahoot:kahoot@localhost:5432/kahoot'),
+  // RLS (Slice 2) : connexion du rôle applicatif restreint (soumis au RLS). Optionnelle —
+  // par défaut dérivée de DATABASE_URL en substituant user=app_role/APP_DB_PASSWORD (self-host
+  // à une seule URL). Fournir explicitement pour un rôle géré (cloud/managed).
+  APP_DATABASE_URL: z.string().min(1).optional(),
+  // Mot de passe du rôle `app_role` (posé au boot par la connexion privilégiée). Défaut dev.
+  APP_DB_PASSWORD: z.string().min(1).default('app-dev-password-change-me'),
   REDIS_URL: z.string().min(1).optional(),
   SESSION_SECRET: z.string().min(16).default('dev-secret-change-me-please!!'),
   BETTER_AUTH_SECRET: z.string().min(32).optional(),
@@ -40,6 +46,8 @@ export type AppConfig = {
   port: number
   tenancyMode: 'single' | 'multi'
   databaseUrl: string
+  appDatabaseUrl?: string
+  appDbPassword: string
   redisUrl?: string
   sessionSecret: string
   scaling: 'memory' | 'redis'
@@ -71,6 +79,8 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     port: parsed.PORT,
     tenancyMode: parsed.TENANCY_MODE,
     databaseUrl: parsed.DATABASE_URL,
+    appDatabaseUrl: parsed.APP_DATABASE_URL,
+    appDbPassword: parsed.APP_DB_PASSWORD,
     redisUrl: parsed.REDIS_URL,
     sessionSecret: parsed.SESSION_SECRET,
     scaling: parsed.REDIS_URL ? 'redis' : 'memory',

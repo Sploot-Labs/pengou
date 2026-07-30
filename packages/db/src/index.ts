@@ -1,9 +1,10 @@
-export { createDb, pingDb, type Db } from './client.js'
+export { createDb, createAppDb, deriveAppUrl, pingDb, type Db } from './client.js'
 export { runMigrations } from './migrate.js'
 export { startTestDb } from './test-helpers.js'
+export { ensureAppRole, setAppRolePassword } from './role-provisioning.js'
 export {
   tenantScope, type TenantScope, ensureDefaultTenant, resolveTenantId, ensureMembership, DEFAULT_TENANT_NAME,
-  TenantAccessDeniedError, getMembershipRole, scopeForUser, firstMembershipRole,
+  TenantAccessDeniedError, getMembershipRole, scopeForUser, firstMembershipRole, withTenantTx,
 } from './tenant.js'
 export {
   createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz, type Quiz, type QuizListItem,
