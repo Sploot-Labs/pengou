@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useSession } from './api/auth'
+import { useWorkspaces } from './api/workspace-context'
 import { Button, Logo } from './ui'
 
 /**
@@ -51,5 +52,24 @@ export function RequireAuth({ children }: { children: ReactNode }) {
     return <Navigate to="/login" replace />
   }
 
+  return <WorkspaceGate>{children}</WorkspaceGate>
+}
+
+/**
+ * Attend la résolution du workspace actif avant de rendre un écran protégé. En multi, un écran de
+ * contenu monté trop tôt lancerait ses requêtes SANS `x-tenant-id` (workspace pas encore choisi) →
+ * 403. On patiente donc sur `ready`. En single, `ready` bascule tout aussi vite (résolution triviale)
+ * sans exiger de workspace actif.
+ */
+function WorkspaceGate({ children }: { children: ReactNode }) {
+  const { ready } = useWorkspaces()
+  if (!ready) {
+    return (
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+        <Logo />
+        <p role="status">Chargement de votre espace…</p>
+      </main>
+    )
+  }
   return <>{children}</>
 }

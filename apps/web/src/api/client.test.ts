@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { apiDelete, apiGet, apiPatch, apiPost, ApiError } from './client.js'
+import { setActiveTenantId } from './activeTenant.js'
 
 function mockFetchOnce(status: number, body: unknown, ok = status >= 200 && status < 300) {
   const text = body === undefined ? '' : JSON.stringify(body)
@@ -15,6 +16,7 @@ function mockFetchOnce(status: number, body: unknown, ok = status >= 200 && stat
 
 afterEach(() => {
   vi.unstubAllGlobals()
+  setActiveTenantId(null)
 })
 
 describe('client API typé', () => {
@@ -49,6 +51,29 @@ describe('client API typé', () => {
     mockFetchOnce(200, {})
     await apiDelete('/api/quizzes/1')
     expect((fetch as unknown as ReturnType<typeof vi.fn>).mock.calls[0][1].method).toBe('DELETE')
+  })
+
+  it("n'ajoute PAS d'en-tête x-tenant-id quand aucun workspace n'est actif (mode single)", async () => {
+    mockFetchOnce(200, { ok: true })
+    await apiGet('/api/quizzes')
+    const [, init] = (fetch as unknown as ReturnType<typeof vi.fn>).mock.calls[0]
+    expect(init.headers).toBeUndefined()
+  })
+
+  it('ajoute x-tenant-id sur GET quand un workspace est actif', async () => {
+    setActiveTenantId('tenant-123')
+    mockFetchOnce(200, { ok: true })
+    await apiGet('/api/quizzes')
+    const [, init] = (fetch as unknown as ReturnType<typeof vi.fn>).mock.calls[0]
+    expect(init.headers).toEqual({ 'x-tenant-id': 'tenant-123' })
+  })
+
+  it('combine Content-Type et x-tenant-id sur un POST avec corps', async () => {
+    setActiveTenantId('tenant-abc')
+    mockFetchOnce(200, { ok: true })
+    await apiPost('/api/quizzes', { title: 'Quiz' })
+    const [, init] = (fetch as unknown as ReturnType<typeof vi.fn>).mock.calls[0]
+    expect(init.headers).toEqual({ 'Content-Type': 'application/json', 'x-tenant-id': 'tenant-abc' })
   })
 
   it("lève une ApiError avec le message du champ `error` du serveur (routes maison)", async () => {

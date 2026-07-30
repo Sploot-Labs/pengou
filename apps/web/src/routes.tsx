@@ -12,6 +12,8 @@ import { Login } from './screens/Login'
 import { PlayerLive } from './screens/PlayerLive'
 import { SessionReport } from './screens/SessionReport'
 import { Signup } from './screens/Signup'
+import { AcceptInvitation } from './screens/AcceptInvitation'
+import { WorkspaceSettings } from './screens/WorkspaceSettings'
 import { ThemeProvider } from './theme/ThemeProvider'
 
 /**
@@ -128,6 +130,22 @@ export const router = createBrowserRouter([
             <SessionReport />
           </RequireAuth>
         ),
+      },
+      {
+        // Gestion des workspaces (Slice 3c) — protégée, hors HostRealtimeLayout (aucune socket
+        // partagée requise). Le switcher/la création/les membres/les invitations vivent ici.
+        path: '/workspace',
+        element: (
+          <RequireAuth>
+            <WorkspaceSettings />
+          </RequireAuth>
+        ),
+      },
+      {
+        // Acceptation d'invitation (Slice 3c) — PUBLIQUE : l'aperçu ne requiert pas de session (le
+        // token est la capacité), et un invité sans compte doit pouvoir voir puis s'inscrire.
+        path: '/invitations/:token',
+        element: <AcceptInvitation />,
       },
       {
         path: '/join',

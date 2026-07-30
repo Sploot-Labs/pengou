@@ -102,7 +102,10 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: Deps): void
 
   // --- Endpoints par token (pré-contexte, systemDb) ---
 
-  app.get<{ Params: { token: string } }>('/api/invitations/:token', { preHandler: requireUser }, async (request, reply) => {
+  // Aperçu PUBLIC (pas de requireUser) : le token est la capacité (bearer). Permet à un invité qui
+  // n'a pas encore de compte de voir dans quel workspace il est invité avant de s'inscrire. Ne
+  // divulgue que le strict nécessaire (nom du workspace, e-mail invité, rôle, expiration).
+  app.get<{ Params: { token: string } }>('/api/invitations/:token', async (request, reply) => {
     const inv = await getInvitationByToken(systemDb, request.params.token)
     const view = publicInvitation(inv, Date.now())
     if (!view) return reply.code(404).send({ error: 'Invitation introuvable.' })

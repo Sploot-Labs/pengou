@@ -9,6 +9,8 @@
  * real one.
  */
 
+import { getActiveTenantId } from './activeTenant'
+
 /** Thrown on any non-2xx response. `message` is the server's own error text
  * when the body carries one (Better Auth uses `{message}`, our own routes
  * use `{error}` — both are checked), else a generic fallback. */
@@ -43,12 +45,21 @@ function safeJsonParse(text: string): unknown {
 
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
   const hasBody = body !== undefined
+  // Multi-tenant (Slice 3) : le workspace actif est porté par `x-tenant-id` sur CHAQUE requête.
+  // En mode single (ou avant résolution du workspace), `getActiveTenantId()` renvoie null et
+  // l'en-tête est omis — le serveur retombe sur le tenant `default`. C'est l'unique point
+  // d'injection : toute la CRUD passe par `request()`.
+  const tenantId = getActiveTenantId()
+  const headers: Record<string, string> = {}
+  if (hasBody) headers['Content-Type'] = 'application/json'
+  if (tenantId) headers['x-tenant-id'] = tenantId
+
   const response = await fetch(path, {
     method,
     // Always same-origin: no cross-origin auth calls are ever intended, and
     // this is what carries the Better Auth session cookie.
     credentials: 'same-origin',
-    headers: hasBody ? { 'Content-Type': 'application/json' } : undefined,
+    headers: Object.keys(headers).length > 0 ? headers : undefined,
     body: hasBody ? JSON.stringify(body) : undefined,
   })
 
