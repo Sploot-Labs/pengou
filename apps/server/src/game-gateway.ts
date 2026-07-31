@@ -674,8 +674,13 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
 
         // Résolution PRÉ-contexte via systemDb (détermine le tenant + le rôle → ownerId
         // role-aware : owner/admin peut lancer sur n'importe quel quiz du tenant, member sur les
-        // siens — parité avec les routes HTTP).
-        const tenantId = await resolveTenantId(systemDb, config, { userId: authSession.user.id })
+        // siens — parité avec les routes HTTP). En mode multi, le workspace actif est porté par le
+        // handshake socket (`io({ auth: { tenantId } })`, voir apps/web) — l'équivalent WS de
+        // l'en-tête `x-tenant-id`. Sans ça, `resolveTenantId` lèverait « tenant explicite requis ».
+        const explicitTenantId = typeof socket.handshake.auth?.tenantId === 'string'
+          ? (socket.handshake.auth.tenantId as string)
+          : undefined
+        const tenantId = await resolveTenantId(systemDb, config, { userId: authSession.user.id, explicitTenantId })
         const role = (await getMembershipRole(systemDb, authSession.user.id, tenantId)) ?? 'member'
         const ownerId = hasPermission(role, 'content:access-all') ? undefined : authSession.user.id
         const context = { tenantId, ownerId }

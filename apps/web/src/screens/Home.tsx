@@ -7,6 +7,7 @@ import { listSessions, type SessionStatus, type SessionSummary } from '../api/se
 import { Reveal } from '../motion/index.js'
 import { useLaunchGame } from '../realtime/useLaunchGame'
 import { AppHeader } from '../ui/AppHeader.js'
+import { WorkspaceSwitcher } from '../ui/WorkspaceSwitcher.js'
 import { AnswerShape, Button } from '../ui'
 import { ANSWER_SHAPES } from '../constants'
 
@@ -196,9 +197,12 @@ export function Home() {
       <AppHeader
         brandline="quiz en direct, open-source · chez vous ou dans le cloud"
         actions={
-          <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
-            {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
-          </Button>
+          <>
+            <WorkspaceSwitcher />
+            <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
+              {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
+            </Button>
+          </>
         }
       />
 

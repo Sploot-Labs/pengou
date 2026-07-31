@@ -46,8 +46,10 @@ export async function ensureDefaultTenant(db: Db): Promise<string> {
   if (existing) return existing.id
   const [created] = await db
     .insert(schema.tenant)
-    .values({ name: DEFAULT_TENANT_NAME })
-    .onConflictDoNothing({ target: schema.tenant.name })
+    .values({ name: DEFAULT_TENANT_NAME, slug: DEFAULT_TENANT_NAME })
+    // `name` n'est plus unique (Slice 3) : le garde-course s'appuie désormais sur `slug` (unique),
+    // dont la valeur pour le tenant par défaut est aussi `default`.
+    .onConflictDoNothing({ target: schema.tenant.slug })
     .returning({ id: schema.tenant.id })
   if (created) return created.id
   // course concurrente : relire

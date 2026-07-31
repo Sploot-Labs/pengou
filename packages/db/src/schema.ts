@@ -6,12 +6,21 @@ import { user } from './auth-schema.js'
 
 export const planEnum = pgEnum('plan', ['free', 'pro'])
 export const roleEnum = pgEnum('role', ['owner', 'admin', 'member'])
+export const invitationStatusEnum = pgEnum('invitation_status', ['pending', 'accepted', 'revoked'])
 export const questionTypeEnum = pgEnum('question_type', ['mcq', 'truefalse', 'text', 'slider'])
 export const sessionStatusEnum = pgEnum('session_status', ['lobby', 'active', 'ended', 'abandoned'])
 
 export const tenant = pgTable('tenant', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
-  name: text('name').notNull().unique(),
+  // Slice 3 : `name` n'est PLUS unique globalement (deux orgs « Acme » sont légitimes) — l'ancien
+  // `tenant_name_unique` est retiré par la migration. `slug` est l'identifiant humain STABLE et
+  // unique global (URL-safe, dérivé du nom avec désambiguïsation). `id` (uuid) reste la valeur
+  // portée par `x-tenant-id` et le GUC RLS `app.tenant_id`.
+  name: text('name').notNull(),
+  // Défaut aléatoire = filet : tout insert qui omet `slug` (tests, chemins bas niveau) reste
+  // valide et unique. `createWorkspace` fournit un slug LISIBLE dérivé du nom ; `ensureDefaultTenant`
+  // force `default`.
+  slug: text('slug').notNull().unique().default(sql`replace(gen_random_uuid()::text, '-', '')`),
   plan: planEnum('plan').notNull().default('free'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 })
@@ -24,6 +33,28 @@ export const membership = pgTable('membership', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 }, (t) => ({
   userTenantUnique: uniqueIndex('membership_user_tenant_uidx').on(t.userId, t.tenantId),
+}))
+
+// Invitations (Slice 3) : un membre habilité (`members:manage`) invite par e-mail avec un rôle.
+// Le `token` opaque EST la capacité d'acceptation (bearer). Usage unique (status → accepted).
+// Sous RLS (clefée sur tenant_id) comme membership : les endpoints de gestion tournent sur appDb
+// dans withTenantTx ; l'acceptation par token tourne sur systemDb (pré-contexte).
+export const invitation = pgTable('invitation', {
+  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
+  tenantId: uuid('tenant_id').notNull().references(() => tenant.id, { onDelete: 'cascade' }),
+  email: text('email').notNull(),
+  // Rôle attribué à l'acceptation. Contrainte applicative : jamais 'owner' à l'invitation
+  // (l'ownership se transfère séparément) — l'enum réutilise `role` par simplicité.
+  role: roleEnum('role').notNull().default('member'),
+  token: text('token').notNull().unique(),
+  invitedBy: text('invited_by').notNull().references(() => user.id),
+  status: invitationStatusEnum('status').notNull().default('pending'),
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  acceptedAt: timestamp('accepted_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+}, (t) => ({
+  tenantIdx: index('invitation_tenant_idx').on(t.tenantId),
+  emailIdx: index('invitation_email_idx').on(t.email),
 }))
 
 export const quiz = pgTable('quiz', {

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { io, type Socket } from 'socket.io-client'
+import { getActiveTenantId } from '../api/activeTenant'
 
 /**
  * Hook socket temps réel partagé par les écrans joueur/hôte/grand écran.
@@ -67,7 +68,13 @@ export function useGameSocket(): UseGameSocket {
     // la socket restait injoignable pour le reste de la vie du composant. En
     // connectant explicitement dans l'effet (rejoué à chaque remontage,
     // simulé ou réel), le second passage relance bien la connexion.
-    socketRef.current = io({ path: '/socket.io', autoConnect: false })
+    // Multi-tenant (Slice 3) : le workspace actif voyage dans le handshake (`auth.tenantId`) —
+    // l'équivalent WS de l'en-tête `x-tenant-id`. Le serveur le lit dans `host:create`
+    // (`socket.handshake.auth.tenantId`). Null en single/anonyme → omis, le serveur retombe sur
+    // `default`. Fixé à la création de la socket (une par montage) : basculer de workspace passe
+    // par un rechargement (voir le switcher), ce qui recrée la socket avec le bon tenant.
+    const tenantId = getActiveTenantId() ?? undefined
+    socketRef.current = io({ path: '/socket.io', autoConnect: false, auth: tenantId ? { tenantId } : undefined })
   }
   const socket = socketRef.current
 

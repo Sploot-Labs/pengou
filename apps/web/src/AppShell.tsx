@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { SessionProvider } from './api/auth'
+import { WorkspaceProvider } from './api/workspace-context'
 import { MotionProvider } from './motion/index.js'
 import { ThemeProvider } from './theme/ThemeProvider'
 import './tokens.css'
@@ -23,16 +24,18 @@ import './prototype.css'
 export function AppShell() {
   return (
     <SessionProvider>
-      <MotionProvider>
-        <ThemeProvider theme="app">
-          <div className="prototype-root">
-            <a className="ab-skip-link" href="#contenu-principal">
-              Aller au contenu
-            </a>
-            <Outlet />
-          </div>
-        </ThemeProvider>
-      </MotionProvider>
+      <WorkspaceProvider>
+        <MotionProvider>
+          <ThemeProvider theme="app">
+            <div className="prototype-root">
+              <a className="ab-skip-link" href="#contenu-principal">
+                Aller au contenu
+              </a>
+              <Outlet />
+            </div>
+          </ThemeProvider>
+        </MotionProvider>
+      </WorkspaceProvider>
     </SessionProvider>
   )
 }
