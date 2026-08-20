@@ -7,3 +7,6 @@ apps/web/dist/
 
 # SDD / superpowers scratch workspace
 .superpowers/
+
+# Claude Code local tooling state (worktrees, settings)
+.claude/
