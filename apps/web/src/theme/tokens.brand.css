@@ -1,3 +1,5 @@
 /* Primitives brand-kit Sploot Labs — source de vérité des couleurs.
-   Alias vers le fichier partagé à la racine du repo (hors apps/web). */
-@import '../../../../brand-kit/design-tokens.css';
+   Copie vendorée depuis le dépôt de marque SplootLabs (D:/Source/SplootLabs,
+   futur github.com/splootlabs → design-tokens.css).
+   Resynchroniser ce fichier si la palette de marque change. */
+@import './brand-primitives.css';
