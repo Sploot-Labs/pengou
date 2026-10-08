@@ -5,7 +5,7 @@ describe('loadConfig', () => {
   it('par défaut : single-tenant, Postgres local, scaling mémoire', () => {
     const cfg = loadConfig({})
     expect(cfg.tenancyMode).toBe('single')
-    expect(cfg.databaseUrl).toBe('postgres://kahoot:kahoot@localhost:5432/kahoot')
+    expect(cfg.databaseUrl).toBe('postgres://pingou:pingou@localhost:5432/pingou')
     expect(cfg.scaling).toBe('memory')
     expect(cfg.port).toBe(3000)
   })

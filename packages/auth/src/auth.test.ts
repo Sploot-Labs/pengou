@@ -21,20 +21,20 @@ afterAll(async () => { await ctx?.stop() })
 describe('Better Auth email/mot de passe', () => {
   it('inscrit puis connecte un hôte', async () => {
     const signUp = await auth.api.signUpEmail({
-      body: { email: 'hote@arena.fr', password: 'motdepasse-solide-123', name: 'Hôte Test' },
+      body: { email: 'hote@pingou.app', password: 'motdepasse-solide-123', name: 'Hôte Test' },
     })
-    expect(signUp.user?.email).toBe('hote@arena.fr')
+    expect(signUp.user?.email).toBe('hote@pingou.app')
 
     const signIn = await auth.api.signInEmail({
-      body: { email: 'hote@arena.fr', password: 'motdepasse-solide-123' },
+      body: { email: 'hote@pingou.app', password: 'motdepasse-solide-123' },
     })
-    expect(signIn.user?.email).toBe('hote@arena.fr')
+    expect(signIn.user?.email).toBe('hote@pingou.app')
     expect(signIn.token).toBeTruthy()
   })
 
   it('mode single : 1er inscrit = owner, suivant = member (défaut de rôle)', async () => {
     const signUp = await auth.api.signUpEmail({
-      body: { email: 'membre@arena.fr', password: 'motdepasse-solide-123', name: 'Membre Test' },
+      body: { email: 'membre@pingou.app', password: 'motdepasse-solide-123', name: 'Membre Test' },
     })
     const userId = signUp.user!.id
     const defaultTenantId = await ensureDefaultTenant(ctx.db)
@@ -43,10 +43,10 @@ describe('Better Auth email/mot de passe', () => {
       .where(eq(schema.membership.userId, userId))
     expect(m).toBeTruthy()
     expect(m.tenantId).toBe(defaultTenantId)
-    expect(m.role).toBe('member') // 2e inscrit (hote@arena.fr du test précédent était le 1er)
+    expect(m.role).toBe('member') // 2e inscrit (hote@pingou.app du test précédent était le 1er)
 
-    // Le 1er inscrit (hote@arena.fr) est bien owner.
-    const [hote] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'hote@arena.fr'))
+    // Le 1er inscrit (hote@pingou.app) est bien owner.
+    const [hote] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'hote@pingou.app'))
     const [mHote] = await ctx.db.select().from(schema.membership).where(eq(schema.membership.userId, hote.id))
     expect(mHote.role).toBe('owner')
   })

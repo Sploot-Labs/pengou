@@ -195,7 +195,7 @@ export function Home() {
   return (
     <div className="ab-shell">
       <AppHeader
-        brandline="quiz en direct, open-source · chez vous ou dans le cloud"
+        brandline="quiz en direct, open-source, chez vous ou dans le cloud"
         actions={
           <>
             <WorkspaceSwitcher />
@@ -245,7 +245,7 @@ export function Home() {
                   type="text"
                   value={newQuizTitle}
                   onChange={(e) => setNewQuizTitle(e.target.value)}
-                  placeholder="Ex. Culture générale — spécial vendredi"
+                  placeholder="Ex. Culture générale, spécial vendredi"
                   aria-invalid={newQuizError ? true : undefined}
                   aria-describedby={newQuizError ? 'new-quiz-title-error' : undefined}
                 />
@@ -280,7 +280,7 @@ export function Home() {
                   </span>
                 ))}
               </div>
-              <p>Pas encore de quiz. On te fait de la place — crée-en un pour démarrer. 🐾</p>
+              <p>Pas encore de quiz. On te fait de la place, crée-en un pour démarrer. 🐾</p>
             </div>
           ) : (
             <Reveal from="up">
@@ -308,7 +308,7 @@ export function Home() {
                         <span className="home-card__title">{q.title}</span>
                         {q.description && <span className="home-card__desc">{q.description}</span>}
                         <span className="home-card__meta">
-                          Modifié le {formatDateOnly(q.updatedAt)} · {formatQuestionCount(q.questionCount)}
+                          Modifié le {formatDateOnly(q.updatedAt)}, {formatQuestionCount(q.questionCount)}
                         </span>
                         <span className="home-card__cta" aria-hidden="true">
                           Ouvrir →
@@ -349,7 +349,7 @@ export function Home() {
                 <Link className="home-list__item" to={sessionHref(s)}>
                   <span className="home-list__title">{s.quizTitle}</span>
                   <span className="home-list__meta">
-                    PIN {s.pin} · {formatDate(s.startedAt)} · {s.playerCount} joueur
+                    PIN {s.pin}, {formatDate(s.startedAt)}, {s.playerCount} joueur
                     {s.playerCount > 1 ? 's' : ''}
                   </span>
                   <span className={`host-badge host-badge--${s.status}`}>{STATUS_LABEL[s.status]}</span>
@@ -371,7 +371,7 @@ export function Home() {
                 <section aria-labelledby="home-live-heading" style={{ marginBottom: 'var(--space-6)' }}>
                   <div className="home-section__header"><h2 id="home-live-heading">En cours</h2></div>
                   {liveSessions.length === 0 ? (
-                    <p className="ab-empty-state">Aucune partie en cours — lancez-en une depuis un quiz.</p>
+                    <p className="ab-empty-state">Aucune partie en cours, lancez-en une depuis un quiz.</p>
                   ) : (
                     <ul className="home-list">{liveSessions.map(renderRow)}</ul>
                   )}

@@ -2,13 +2,13 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: kahoot
-      POSTGRES_PASSWORD: kahoot
-      POSTGRES_DB: kahoot
+      POSTGRES_USER: pingou
+      POSTGRES_PASSWORD: pingou
+      POSTGRES_DB: pingou
     volumes:
       - db-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U kahoot"]
+      test: ["CMD-SHELL", "pg_isready -U pingou"]
       interval: 5s
       timeout: 3s
       retries: 10
@@ -19,7 +19,7 @@ services:
       - "3000:3000"
     environment:
       TENANCY_MODE: single
-      DATABASE_URL: postgres://kahoot:kahoot@db:5432/kahoot
+      DATABASE_URL: postgres://pingou:pingou@db:5432/pingou
       SESSION_SECRET: change-me-in-production-please!!
       # AUCUNE valeur par défaut ici, INTENTIONNELLEMENT (hardening) : un placeholder committé
       # (même ≥32 caractères, donc valide aux yeux du garde de production dans loadConfig)
@@ -31,7 +31,11 @@ services:
       # (non commité — voir `.env.example`) : `openssl rand -base64 32` puis
       # `export BETTER_AUTH_SECRET=...` (ou renseignez `.env`) avant `docker compose up`.
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Définissez BETTER_AUTH_SECRET (≥32 caractères, ex. openssl rand -base64 32) dans votre environnement ou un fichier .env avant docker compose up — voir .env.example.}
-      BETTER_AUTH_URL: http://localhost:3000
+      # Origine publique de l'app = seule origine de confiance Better Auth (validation Origin des
+      # requêtes d'auth) ET seule origine autorisée par le CORS Socket.IO. Surchargeable par
+      # l'environnement / `.env` (non commité) pour exposer l'app via un tunnel (ngrok) le temps
+      # d'un test : y mettre l'URL HTTPS publique du tunnel. Défaut : localhost.
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3000}
       # Providers OAuth sociaux (optionnels) : décommenter et renseigner pour les activer.
       # Voir enabledSocialProviders() dans packages/auth/src/providers.ts.
       # GOOGLE_CLIENT_ID:

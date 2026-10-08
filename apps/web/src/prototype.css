@@ -1,5 +1,5 @@
 /*
-  Screen-specific layout styles for the Arena Broadcast prototype.
+  Screen-specific layout styles for the Pingou live-quiz UI.
   Convention: every rule is scoped under a component/screen class
   (BEM-ish) so nothing here cancels another rule's padding/margins.
 */
@@ -13,9 +13,33 @@
   align-items: center;
   gap: var(--space-2);
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 600;
   font-size: 1.25rem;
   color: var(--ink-strong);
+}
+
+/* ====================================================================== */
+/* Mascot — Pingou (décoratif)                                             */
+/* ====================================================================== */
+
+.ab-mascot {
+  display: inline-block;
+  line-height: 0;
+}
+
+.ab-mascot svg {
+  display: block;
+  filter: drop-shadow(0 14px 18px rgba(11, 37, 69, 0.22));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ab-mascot svg {
+    animation: ab-mascot-bob 4.5s ease-in-out infinite;
+  }
+  @keyframes ab-mascot-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+  }
 }
 
 .ab-logo__mark {
@@ -84,25 +108,29 @@
   cursor: not-allowed;
 }
 
-.ab-button--primary {
+/* Les variantes portent `.prototype-root` pour passer devant le reset
+   `.prototype-root button { color: inherit }` de tokens.css (spécificité
+   (0,1,1)) qui, sinon, écrase la couleur de texte de chaque variante et
+   ramène tout à --ink (contraste cassé sur les aplats de marque). */
+.prototype-root .ab-button--primary {
   background: var(--brand);
   color: var(--stage);
 }
 
-.ab-button--ghost {
+.prototype-root .ab-button--ghost {
   background: transparent;
   border-color: var(--line);
   color: var(--ink);
 }
 
-.ab-button--success {
+.prototype-root .ab-button--success {
   background: var(--success);
-  color: var(--ink-strong);
+  color: var(--success-ink);
 }
 
-.ab-button--danger {
+.prototype-root .ab-button--danger {
   background: var(--danger);
-  color: var(--ink-strong);
+  color: var(--danger-ink);
 }
 
 /* ====================================================================== */
@@ -121,13 +149,20 @@
   background: var(--tile-color);
   color: var(--tile-ink);
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.35rem;
   text-align: left;
   cursor: pointer;
   /* Arcade key relief: a solid drop that compresses on press. */
   box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+/* La tuile EST un <button> : il faut repasser devant le reset
+   `.prototype-root button { color: inherit }` (tokens.css), sinon l'encre de
+   réponse --tile-ink (contrastée avec l'aplat) est écrasée par --ink. */
+.prototype-root .ab-tile {
+  color: var(--tile-ink);
 }
 
 .ab-tile:hover:not(:disabled) {
@@ -192,7 +227,7 @@
   position: absolute;
   font-family: var(--font-mono);
   font-size: 1.75rem;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--ink-strong);
 }
 
@@ -217,7 +252,7 @@
   /* Arcade cabinet: the frame sits ABOVE the sunken digit cells, so it is the
      lighter surface with a brand-tinted edge. */
   background: var(--surface);
-  border: 1px solid rgba(255, 61, 127, 0.25);
+  border: 1px solid color-mix(in srgb, var(--brand) 30%, transparent);
   border-radius: var(--radius-lg);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
   overflow: hidden;
@@ -231,7 +266,7 @@
   padding: var(--space-2) var(--space-2);
   font-family: var(--font-mono);
   font-size: var(--fs-pin);
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.05em;
   color: var(--ink-strong);
   /* Sunken cells, darker than the frame, with an inset well so the glowing
@@ -239,7 +274,7 @@
   background: var(--stage);
   border-radius: var(--radius-sm);
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55);
-  text-shadow: 0 0 12px rgba(255, 61, 127, 0.55);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--brand) 55%, transparent);
 }
 
 .ab-pin__scanline {
@@ -549,7 +584,7 @@
 /* Permanent, lightweight brand/positioning line in the host shell header. */
 .host-brandline {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: var(--fs-small);
   color: var(--ink);
 }
@@ -937,7 +972,7 @@
   background: var(--surface);
   color: var(--ink-strong);
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 600;
   font-size: 1.6rem;
   cursor: pointer;
   box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
@@ -1189,7 +1224,7 @@
 .big-reveal-answer__value {
   font-family: var(--font-display);
   font-size: var(--fs-h2);
-  font-weight: 800;
+  font-weight: 600;
   color: var(--gold);
 }
 
@@ -1236,7 +1271,7 @@
 }
 
 /* Compact, persistent join reminder pinned to a corner during the active
-   phases so latecomers can still enter (PIN + URL, Kahoot-style). */
+   phases so latecomers can still enter (PIN + URL). */
 .big-join-reminder {
   position: fixed;
   top: var(--space-3);
@@ -1449,7 +1484,7 @@
   padding-top: var(--space-3);
   font-family: var(--font-mono);
   font-size: 1.75rem;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .podium-step--gold .podium-step__block {
@@ -1515,8 +1550,6 @@
    BigScreen scoreboard no longer marks « you » — ambiguous on a shared wall). */
 .podium-list__item--you {
   border-color: var(--brand);
-  /* Fallback first, then the color-mix that enriches it (no dead duplicate). */
-  background: rgba(255, 61, 127, 0.14);
   background: color-mix(in srgb, var(--brand) 14%, var(--surface));
 }
 
@@ -1524,7 +1557,7 @@
   margin-left: var(--space-2);
   font-size: var(--fs-small);
   font-weight: 700;
-  /* The « (vous) » text + the row's pink border already carry the identity;
+  /* The « (vous) » text + the row's cyan border already carry the identity;
      use strong ink so the tag clears AA (var(--brand) was ~3.8:1 here). */
   color: var(--ink-strong);
 }
@@ -1583,7 +1616,7 @@
   background: var(--tile-color);
   color: var(--tile-ink);
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: var(--fs-h2);
   box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
 }
@@ -1924,7 +1957,7 @@
 
 .hostlive-text-answer__value {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 600;
   font-size: var(--fs-h2);
   color: var(--gold);
 }
@@ -2059,7 +2092,7 @@
 }
 
 /* Empty-state motif — the 4 shapes assembled together, anchoring the empty
-   "Mes quiz" state in the Arena world. Static, decorative, low-opacity. */
+   "Mes quiz" state in the Pingou world. Static, decorative, low-opacity. */
 .home-empty-motif {
   display: flex;
   justify-content: center;

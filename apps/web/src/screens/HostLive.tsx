@@ -124,7 +124,7 @@ function buildScreenUrl(sessionId: string, displayToken: string, pin: string | n
 type ConnectionState = 'online' | 'reconnecting' | 'broken'
 
 const HOST_AUTHORITY_LOST_MESSAGE =
-  'La connexion a été interrompue puis rétablie, mais cette partie ne peut plus être pilotée depuis cet onglet (le serveur ne permet pas de reprendre l’autorité hôte après une coupure). Retournez à l’éditeur et relancez la partie.'
+  "La connexion a été interrompue puis rétablie, mais cette partie ne peut plus être pilotée depuis cet onglet (le serveur ne permet pas de reprendre l'autorité hôte après une coupure). Retournez à l'éditeur et relancez la partie."
 
 /** Traduit une erreur serveur brute en message actionnable. La string exacte
  * « action réservée à l'hôte de la session » (`requireHost`, game-gateway.ts)
@@ -420,7 +420,7 @@ export function HostLive() {
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
         <p className="join-error" role="alert">
-          Identifiant de session manquant dans l’URL.
+          Identifiant de session manquant dans l'URL.
         </p>
       </main>
     )
@@ -438,7 +438,7 @@ export function HostLive() {
           {resumeError}
         </p>
         <Button variant="primary" type="button" onClick={() => navigate('/')}>
-          Retour à l’accueil
+          Retour à l'accueil
         </Button>
       </main>
     )
@@ -550,7 +550,7 @@ export function HostLive() {
       await navigator.clipboard.writeText(screenUrl)
       setScreenCopyStatus('Lien copié.')
     } catch {
-      setScreenCopyStatus('Copie impossible — sélectionnez et copiez le lien manuellement.')
+      setScreenCopyStatus('Copie impossible, sélectionnez et copiez le lien manuellement.')
     }
   }
 
@@ -604,7 +604,7 @@ export function HostLive() {
   function renderLeaderboard(limit: number, focusTarget: boolean) {
     const top = ranking.slice(0, limit)
     if (top.length === 0) {
-      return <p style={{ color: 'var(--ink-dim)' }}>Le classement s’affichera après la première question.</p>
+      return <p style={{ color: 'var(--ink-dim)' }}>Le classement s'affichera après la première question.</p>
     }
     return (
       <>
@@ -657,7 +657,7 @@ export function HostLive() {
 
       {connection === 'reconnecting' && (
         <p className="player-net player-net--reconnecting" role="alert">
-          Connexion perdue — reconnexion…
+          Connexion perdue, reconnexion…
         </p>
       )}
       {connection === 'broken' && (
@@ -668,7 +668,7 @@ export function HostLive() {
         >
           <span>{HOST_AUTHORITY_LOST_MESSAGE}</span>
           <Button variant="ghost" type="button" onClick={() => navigate('/')}>
-            Retour à l’éditeur
+            Retour à l'éditeur
           </Button>
         </p>
       )}
@@ -739,7 +739,7 @@ export function HostLive() {
 
                 {players.length === 0 ? (
                   <p className="hostlive-empty">
-                    Aucun joueur pour l’instant. La partie se lance dès qu’un joueur rejoint.
+                    Aucun joueur pour l'instant. La partie se lance dès qu'un joueur rejoint.
                   </p>
                 ) : (
                   <ul className="hostlive-players" aria-label="Joueurs ayant rejoint la partie">
@@ -773,7 +773,7 @@ export function HostLive() {
                   </Button>
                   {!canLaunch && (
                     <p className="hostlive-controls__hint" id="hostlive-launch-reason">
-                      En attente d’au moins un joueur pour lancer la partie.
+                      En attente d'au moins un joueur pour lancer la partie.
                     </p>
                   )}
                 </div>
@@ -848,7 +848,7 @@ export function HostLive() {
             {phase === 'reveal' && question && (
               <div className="hostlive-phase">
                 <h2 ref={phaseHeadingRef} tabIndex={-1}>
-                  Révélation — {question.prompt}
+                  Révélation : {question.prompt}
                 </h2>
                 <p className="visually-hidden" role="status" aria-live="polite">
                   Réponse révélée : {revealedAnswerText}

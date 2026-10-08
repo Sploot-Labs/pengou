@@ -100,7 +100,7 @@ export function Signup() {
 
       <form className="join-card" onSubmit={handleSubmit} noValidate>
         <h1>Inscription</h1>
-        <p className="join-subtitle">On vous fait de la place — quelques infos et votre compte est prêt. 🐾</p>
+        <p className="join-subtitle">On vous fait de la place : quelques infos et votre compte est prêt. 🐾</p>
 
         {formError && (
           <p className="join-error" role="alert" tabIndex={-1} ref={formErrorRef}>

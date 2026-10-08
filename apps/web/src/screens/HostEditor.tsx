@@ -703,7 +703,7 @@ export function HostEditor() {
       // resync from the server so the host sees the duplicate for what it is (and can delete the
       // leftover original manually) instead of the local list quietly diverging from reality.
       setActionError(
-        `La nouvelle question a été créée, mais l'ancienne n'a pas pu être supprimée : ${errorMessage(err)}. Liste resynchronisée — vous pouvez supprimer le doublon manuellement.`,
+        `La nouvelle question a été créée, mais l'ancienne n'a pas pu être supprimée : ${errorMessage(err)}. Liste resynchronisée, vous pouvez supprimer le doublon manuellement.`,
       )
       loadQuestions(quizId)
       return
@@ -951,7 +951,7 @@ export function HostEditor() {
               <button type="button" className="host-link-button" onClick={handleBackToHome}>
                 ← Retour à l'accueil
               </button>{' '}
-              · {title}
+              ({title})
             </span>
           }
           actions={
@@ -1009,7 +1009,7 @@ export function HostEditor() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               onBlur={handleTitleBlur}
-              placeholder="Ex. Culture générale — spécial vendredi"
+              placeholder="Ex. Culture générale, spécial vendredi"
               aria-invalid={titleError ? true : undefined}
               aria-describedby={titleError ? 'quiz-title-error' : undefined}
             />
@@ -1063,7 +1063,7 @@ export function HostEditor() {
             <section aria-label="Liste des questions">
               <h2 style={{ marginBottom: 'var(--space-3)' }}>Questions</h2>
               {questions.length === 0 ? (
-                <p className="ab-empty-state">Aucune question pour l'instant — ajoutez-en une pour commencer. 🐾</p>
+                <p className="ab-empty-state">Aucune question pour l'instant, ajoutez-en une pour commencer. 🐾</p>
               ) : (
                 <ul className="host-list">
                   {questions.map((q, index) => {
@@ -1253,7 +1253,7 @@ export function HostEditor() {
                             </label>
                             <AnswerShape shape={opt.shape} size={20} />
                             <label htmlFor={`mcq-label-${opt.id}`} className="visually-hidden">
-                              Libellé réponse {index + 1} — {SHAPE_NAME_FR[opt.shape]}
+                              Libellé réponse {index + 1}, {SHAPE_NAME_FR[opt.shape]}
                             </label>
                             <input
                               id={`mcq-label-${opt.id}`}

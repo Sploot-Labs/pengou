@@ -84,7 +84,7 @@ export function Login() {
 
       <form className="join-card" onSubmit={handleSubmit} noValidate>
         <h1>Connexion</h1>
-        <p className="join-subtitle">Content de vous revoir — vos parties vous attendent.</p>
+        <p className="join-subtitle">Content de vous revoir : vos parties vous attendent.</p>
 
         {formError && (
           <p className="join-error" role="alert" tabIndex={-1} ref={formErrorRef}>

@@ -79,7 +79,7 @@ function message(err: unknown): string {
 }
 
 /** Un seul type de question en base pour l'instant : pas de champ `basePoints` dédié au schéma
- * (voir plan, notes de fin) — 1000 par défaut, aligné sur le prototype Kahoot. */
+ * (voir plan, notes de fin) : 1000 par défaut, barème standard d'un quiz en direct. */
 const DEFAULT_BASE_POINTS = 1000
 
 /** Fenêtre de reprise (Task 4, réhydratation au boot) : une session `lobby`/`active` plus

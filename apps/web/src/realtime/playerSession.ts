@@ -5,7 +5,7 @@
  * (voir Join/PlayerLive) : ce `localStorage` est leur seule « session ».
  */
 
-const STORAGE_KEY = 'arena.playerSession'
+const STORAGE_KEY = 'pingou.playerSession'
 
 export interface StoredPlayerSession {
   /** Non renvoyé par `player:join` aujourd'hui (voir game-gateway.ts) — gardé

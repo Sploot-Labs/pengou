@@ -122,13 +122,13 @@ export function PodiumView({
       {showConversionFooter && (
         <p className="podium-convert">
           <a href="#cloud" onClick={(e) => e.preventDefault()}>
-            Créez votre quiz gratuitement — aucune installation
+            Créez votre quiz gratuitement, aucune installation
           </a>
           , ou{' '}
           <a href="#host" onClick={(e) => e.preventDefault()}>
             hébergez votre propre instance
           </a>
-          , c’est open-source.{' '}
+          , c'est open-source.{' '}
           <a href="#source" onClick={(e) => e.preventDefault()}>
             Voir le code
           </a>

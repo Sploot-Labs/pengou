@@ -13,7 +13,7 @@ describe('AppHeader', () => {
         <AppHeader brandline="quiz en direct" actions={<button>Se déconnecter</button>} />
       </MemoryRouter>,
     )
-    expect(screen.getByText('Arena')).toBeInTheDocument()
+    expect(screen.getByText('Pingou')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /retour à l.accueil/i })).toHaveAttribute('href', '/')
     expect(screen.getByText(/quiz en direct/)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Se déconnecter' })).toBeInTheDocument()

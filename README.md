@@ -1,6 +1,6 @@
 <div align="center">
 
-# Arena 🐾
+# Pingou 🐧
 
 **Le quiz en direct, open-source. Chez vous ou dans le cloud.**
 
@@ -16,7 +16,7 @@ projetez le grand écran, jouez depuis n'importe quel téléphone. Auto-héberge
 
 ---
 
-## ✨ Ce que fait Arena
+## ✨ Ce que fait Pingou
 
 - **Quiz en direct multijoueur** — QCM, vrai/faux, réponse libre, curseur numérique.
 - **Scoring serveur-autoritaire** avec bonus de rapidité — impossible à tricher côté client.
@@ -58,9 +58,9 @@ sur `:5173` et proxifie `/api` + `/socket.io` vers le serveur.
 pnpm install
 
 # 1. Une base Postgres (exemple jetable via Docker)
-docker run --name arena-pg -e POSTGRES_USER=kahoot -e POSTGRES_PASSWORD=kahoot \
-  -e POSTGRES_DB=kahoot -p 5433:5432 -d postgres:16-alpine
-export DATABASE_URL=postgres://kahoot:kahoot@localhost:5433/kahoot
+docker run --name pingou-pg -e POSTGRES_USER=pingou -e POSTGRES_PASSWORD=pingou \
+  -e POSTGRES_DB=pingou -p 5433:5432 -d postgres:16-alpine
+export DATABASE_URL=postgres://pingou:pingou@localhost:5433/pingou
 # En dev, BETTER_AUTH_SECRET est optionnel (repli toléré) ; requis en production.
 
 # 2. Serveur (migrations appliquées au boot) — port 3000
@@ -109,9 +109,9 @@ par construction. Voir les specs de conception dans [`docs/superpowers/`](docs/s
 - **Multi-instance** : le passage à l'échelle horizontale (Redis, état de jeu partagé) est en
   cours — le déploiement actuel est **mono-instance**. Voir [`docs/audit/`](docs/audit/).
 
-## 🐾 Contribuer
+## 🐧 Contribuer
 
-Les contributions — surtout les premières — sont célébrées ici. Voir
+Les contributions, surtout les premières, sont célébrées ici. Voir
 [CONTRIBUTING.md](./CONTRIBUTING.md), le [code de conduite](./CODE_OF_CONDUCT.md), et la
 politique de [sécurité](./SECURITY.md).
 
@@ -122,4 +122,4 @@ politique de [sécurité](./SECURITY.md).
 [Apache-2.0](./LICENSE) © Sploot Labs. Voir [LICENSING.md](./LICENSING.md) pour ce que ça
 autorise en clair (spoiler : à peu près tout).
 
-<div align="center"><sub>Un projet <a href="https://github.com/splootlabs">Sploot Labs</a> · à hauteur de pattes 🐾</sub></div>
+<div align="center"><sub>Un projet <a href="https://github.com/splootlabs">Sploot Labs</a>, à hauteur de pattes 🐾</sub></div>

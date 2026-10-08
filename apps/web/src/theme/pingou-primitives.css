@@ -1,0 +1,80 @@
+/* ============================================================
+   Pingou — primitives produit (palette banquise)
+   Identité DISTINCTE des primitives éditeur --sploot-* : Sploot Labs
+   (ginger/petrol) édite le produit Pingou (cyan banquise, corail, violet).
+   Réagit à prefers-color-scheme ET à data-theme="dark|light" (parité avec
+   brand-primitives). Style toujours via les rôles de themes.css, jamais un hex.
+   ============================================================ */
+
+:root {
+  /* Cyan banquise — couleur d'identité. --pingou-cyan : version vive
+     (dégradés, grands aplats décoratifs) ; --pingou-brand : version profonde,
+     sûre comme texte sur fond clair ET comme aplat sous texte clair (≥4.5:1). */
+  --pingou-cyan:      #00A6CC;
+  --pingou-brand:     #0A7188;
+  --pingou-cyan-soft: #D6F2F9;
+
+  --pingou-ink:    #0B2545; /* bleu nuit polaire — texte fort */
+  --pingou-coral:  #FF7A3C; /* bec & pattes — accent décoratif */
+  --pingou-yellow: #FFC43D; /* soleil */
+  --pingou-violet: #7C6BF0; /* glacier — 2nd accent, dégradé live */
+
+  /* Neutres (biais bleuté neige) */
+  --pingou-bg:        #EEF6FB;
+  --pingou-surface:   #FFFFFF;
+  --pingou-surface-2: #F0F7FC;
+  --pingou-text:      #12222F;
+  --pingou-muted:     #566B7A;
+  --pingou-line:      #D6E6EF;
+
+  /* Sémantique (séparée de l'accent) */
+  --pingou-ok:   #25A873;
+  --pingou-warn: #B8860B;
+  --pingou-bad:  #D14336;
+  /* Encre du bouton danger : blanche en clair (sur rouge soutenu), bleu nuit en
+     sombre (sur corail-rouge vif). Le bouton succès garde une encre bleu nuit
+     dans les deux schémas (voir --success-ink dans themes.css). */
+  --pingou-on-danger: #FFFFFF;
+
+  /* Focus visible — cyan profond, contrasté sur fonds clairs */
+  --pingou-focus: #0C7A99;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pingou-cyan:      #2CC7E8;
+    --pingou-brand:     #35CBEC;
+    --pingou-cyan-soft: #0E3647;
+    --pingou-ink:       #BFE4F2;
+    --pingou-coral:     #FF8A52;
+    --pingou-yellow:    #FFD15E;
+    --pingou-violet:    #9A8BFF;
+    --pingou-bg:        #071826;
+    --pingou-surface:   #0D2435;
+    --pingou-surface-2: #0A1E2D;
+    --pingou-text:      #E8F4FB;
+    --pingou-muted:     #9DB4C4;
+    --pingou-line:      #1C3A52;
+    --pingou-ok:        #53D6A6;
+    --pingou-warn:      #FFD15E;
+    --pingou-bad:       #FF6B5C;
+    --pingou-on-danger: #0B2545;
+    --pingou-focus:     #6FD3EE;
+  }
+}
+
+/* Toggle manuel — gagne dans les deux sens (parité brand-primitives) */
+:root[data-theme="light"] {
+  --pingou-cyan:#00A6CC; --pingou-brand:#0A7188; --pingou-cyan-soft:#D6F2F9;
+  --pingou-ink:#0B2545; --pingou-coral:#FF7A3C; --pingou-yellow:#FFC43D; --pingou-violet:#7C6BF0;
+  --pingou-bg:#EEF6FB; --pingou-surface:#FFFFFF; --pingou-surface-2:#F0F7FC;
+  --pingou-text:#12222F; --pingou-muted:#566B7A; --pingou-line:#D6E6EF;
+  --pingou-ok:#25A873; --pingou-warn:#B8860B; --pingou-bad:#D14336; --pingou-on-danger:#FFFFFF; --pingou-focus:#0C7A99;
+}
+:root[data-theme="dark"] {
+  --pingou-cyan:#2CC7E8; --pingou-brand:#35CBEC; --pingou-cyan-soft:#0E3647;
+  --pingou-ink:#BFE4F2; --pingou-coral:#FF8A52; --pingou-yellow:#FFD15E; --pingou-violet:#9A8BFF;
+  --pingou-bg:#071826; --pingou-surface:#0D2435; --pingou-surface-2:#0A1E2D;
+  --pingou-text:#E8F4FB; --pingou-muted:#9DB4C4; --pingou-line:#1C3A52;
+  --pingou-ok:#53D6A6; --pingou-warn:#FFD15E; --pingou-bad:#FF6B5C; --pingou-on-danger:#0B2545; --pingou-focus:#6FD3EE;
+}

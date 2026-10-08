@@ -2,7 +2,7 @@
   Tokens NON-COULEUR partagés — échelle typographique (--fs-*), espacements
   (--space-*), rayons (--radius-*), durées (--transition-*) + reset/base.
   Les rôles COULEUR vivent dans theme/themes.css (dérivés des primitives
-  brand-kit Sploot). Toujours référencer les tokens de rôle, jamais un hex.
+  produit Pingou). Toujours référencer les tokens de rôle, jamais un hex.
 */
 
 :root {
@@ -68,7 +68,8 @@ body {
 .prototype-root h3,
 .prototype-root h4 {
   font-family: var(--font-display);
-  font-weight: 800;
+  /* Fredoka culmine à 600 : au-delà le navigateur synthétiserait un faux-gras. */
+  font-weight: 600;
   line-height: 1.1;
   margin: 0;
   color: var(--ink-strong);
@@ -113,11 +114,11 @@ body {
 }
 
 /* Only bare textual links (no className — e.g. inline cross-links like
-   "Créer un compte") inherit brand ginger here. Link-components (buttons,
+   "Créer un compte") inherit the brand color here. Link-components (buttons,
    cards, list rows) carry their own explicit color so this base rule can't
    cascade over them (see .ab-button--primary, .home-card, .home-list__item
    in prototype.css) — that override is what made the CSV export button's
-   ginger-on-ginger text invisible before this fix. */
+   brand-on-brand text invisible before this fix. */
 .prototype-root a:not([class]) {
   color: var(--brand);
 }

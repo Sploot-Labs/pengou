@@ -1,104 +1,135 @@
-/* Rôles produit dérivés des primitives brand-kit, par thème.
-   Le brand-kit fournit les primitives --sploot-* (light/dark via data-scheme). */
+/* Rôles produit dérivés des primitives Pingou (palette banquise), par thème.
+   Les primitives --pingou-* (light/dark via prefers-color-scheme + data-scheme)
+   vivent dans pingou-primitives.css. Les primitives éditeur --sploot-* restent
+   disponibles pour les surfaces de marque Sploot Labs. */
 
 [data-theme='app'] {
-  --stage: var(--sploot-bg);
-  --stage-2: var(--sploot-surface-2);
-  --surface: var(--sploot-surface);
-  --surface-2: var(--sploot-surface-2);
-  --line: var(--sploot-line);
-  --ink: var(--sploot-text);
-  --ink-dim: var(--sploot-muted);
-  --ink-strong: var(--sploot-text);
-  --brand: var(--sploot-ginger);
-  --brand-2: var(--sploot-petrol);
-  --success: var(--sploot-ok);
-  --warn: var(--sploot-warn);
-  --danger: var(--sploot-bad);
-  --grad-brand: linear-gradient(135deg, var(--sploot-ginger), var(--sploot-petrol));
+  /* Typo produit : Fredoka (display) + Nunito Sans (corps) + DM Mono. */
+  --font-display: "Fredoka", "Trebuchet MS", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Nunito Sans", system-ui, ui-sans-serif, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "DM Mono", "SFMono-Regular", ui-monospace, "Cascadia Code", Consolas, Menlo, monospace;
 
-  /* Réponses — couleur + forme + label. Contraste ≥4.5:1 vérifié RGAA. */
-  --ans-triangle: #c62828;  --ans-triangle-ink: #ffffff;
-  --ans-diamond:  #1d5fb0;  --ans-diamond-ink:  #ffffff;
-  --ans-circle:   #f2a900;  --ans-circle-ink:   #0e1230;
-  --ans-square:   #0e7c68;  --ans-square-ink:   #ffffff;
+  --stage: var(--pingou-bg);
+  --stage-2: var(--pingou-surface-2);
+  --surface: var(--pingou-surface);
+  --surface-2: var(--pingou-surface-2);
+  --line: var(--pingou-line);
+  --ink: var(--pingou-text);
+  --ink-dim: var(--pingou-muted);
+  --ink-strong: var(--pingou-ink);
+  --brand: var(--pingou-brand);
+  --brand-2: var(--pingou-violet);
+  --accent: var(--pingou-coral);
+  --success: var(--pingou-ok);
+  --warn: var(--pingou-warn);
+  --danger: var(--pingou-bad);
+  /* Encre des boutons sémantiques, découplée de --ink-strong (qui bascule en
+     clair en mode sombre et s'effondrerait sur les aplats vifs). Vérifié ≥4.5:1
+     dans les deux schémas. */
+  --success-ink: #0b2545;
+  --danger-ink: var(--pingou-on-danger);
+  --grad-brand: linear-gradient(135deg, var(--pingou-cyan), var(--pingou-violet));
+
+  /* Réponses — couleur + forme + label (jamais la couleur seule). Contraste
+     texte/fond ≥4.5:1 vérifié : cyan/violet profonds en encre blanche,
+     corail/jaune vifs en encre bleu nuit. */
+  --ans-triangle: #0e7490;  --ans-triangle-ink: #ffffff;
+  --ans-diamond:  #ff7a3c;  --ans-diamond-ink:  #0b2545;
+  --ans-circle:   #ffc43d;  --ans-circle-ink:   #0b2545;
+  --ans-square:   #5b45d9;  --ans-square-ink:   #ffffff;
 
   /* Podium — or/argent/bronze, RÉSERVÉ au classement, jamais accent. */
   --gold:   #e3b341;
   --silver: #c7ccdd;
   --bronze: #e0954f;
 
-  /* Focus visible — token de rôle (remplace le gold codé en dur). */
-  --focus: var(--sploot-petrol-soft);
+  /* Focus visible — token de rôle. */
+  --focus: var(--pingou-focus);
 
   color-scheme: light dark;
 }
 
 /* Grand écran : sombre assumé (le sous-arbre force data-scheme="dark"). */
 [data-theme='scene'] {
-  --stage: var(--sploot-bg);
-  --stage-2: var(--sploot-surface-2);
-  --surface: var(--sploot-surface);
-  --surface-2: var(--sploot-surface-2);
-  --line: var(--sploot-line);
-  --ink: var(--sploot-text);
-  --ink-dim: var(--sploot-muted);
-  --ink-strong: var(--sploot-text);
-  --brand: var(--sploot-ginger);
-  --brand-2: var(--sploot-petrol-soft);
-  --success: var(--sploot-ok);
-  --warn: var(--sploot-warn);
-  --danger: var(--sploot-bad);
-  --grad-brand: linear-gradient(135deg, var(--sploot-ginger), var(--sploot-petrol-soft));
+  --font-display: "Fredoka", "Trebuchet MS", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Nunito Sans", system-ui, ui-sans-serif, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "DM Mono", "SFMono-Regular", ui-monospace, "Cascadia Code", Consolas, Menlo, monospace;
 
-  /* Réponses — couleur + forme + label. Contraste ≥4.5:1 vérifié RGAA. */
-  --ans-triangle: #c62828;  --ans-triangle-ink: #ffffff;
-  --ans-diamond:  #1d5fb0;  --ans-diamond-ink:  #ffffff;
-  --ans-circle:   #f2a900;  --ans-circle-ink:   #0e1230;
-  --ans-square:   #0e7c68;  --ans-square-ink:   #ffffff;
+  --stage: var(--pingou-bg);
+  --stage-2: var(--pingou-surface-2);
+  --surface: var(--pingou-surface);
+  --surface-2: var(--pingou-surface-2);
+  --line: var(--pingou-line);
+  --ink: var(--pingou-text);
+  --ink-dim: var(--pingou-muted);
+  --ink-strong: var(--pingou-ink);
+  --brand: var(--pingou-brand);
+  --brand-2: var(--pingou-violet);
+  --accent: var(--pingou-coral);
+  --success: var(--pingou-ok);
+  --warn: var(--pingou-warn);
+  --danger: var(--pingou-bad);
+  --success-ink: #0b2545;
+  --danger-ink: var(--pingou-on-danger);
+  --grad-brand: linear-gradient(135deg, var(--pingou-cyan), var(--pingou-violet));
+
+  /* Réponses — couleur + forme + label. Contraste ≥4.5:1 vérifié. */
+  --ans-triangle: #0e7490;  --ans-triangle-ink: #ffffff;
+  --ans-diamond:  #ff7a3c;  --ans-diamond-ink:  #0b2545;
+  --ans-circle:   #ffc43d;  --ans-circle-ink:   #0b2545;
+  --ans-square:   #5b45d9;  --ans-square-ink:   #ffffff;
 
   /* Podium — or/argent/bronze, RÉSERVÉ au classement, jamais accent. */
   --gold:   #e3b341;
   --silver: #c7ccdd;
   --bronze: #e0954f;
 
-  /* Focus visible — token de rôle (remplace le gold codé en dur). */
-  --focus: var(--sploot-petrol-soft);
+  /* Focus visible — token de rôle. */
+  --focus: var(--pingou-focus);
 
   color-scheme: dark;
 }
 
-/* data-scheme force la palette brand-kit indépendamment de prefers-color-scheme.
-   Le brand-kit expose déjà data-theme="dark"|"light" sur :root ; on réexpose
-   les mêmes valeurs sous notre attribut dédié data-scheme pour lever
-   l'ambiguïté avec le thème PRODUIT (data-theme). */
+/* data-scheme force la palette produit indépendamment de prefers-color-scheme.
+   On réexpose les primitives Pingou sous notre attribut dédié data-scheme pour
+   lever l'ambiguïté avec le thème PRODUIT (data-theme="app"|"scene"). */
 [data-scheme='dark'] {
-  --sploot-ginger: #e88a3c;
-  --sploot-ginger-deep: #c86e24;
-  --sploot-petrol: #4fa3a0;
-  --sploot-petrol-soft: #6fbdb8;
-  --sploot-bg: #17150f;
-  --sploot-surface: #201d15;
-  --sploot-surface-2: #2a261c;
-  --sploot-text: #ede7da;
-  --sploot-muted: #a29a8b;
-  --sploot-line: #34301f;
-  --sploot-ok: #5fa778;
-  --sploot-warn: #e0a64b;
-  --sploot-bad: #d96a52;
+  --pingou-cyan: #2cc7e8;
+  --pingou-brand: #35cbec;
+  --pingou-cyan-soft: #0e3647;
+  --pingou-ink: #bfe4f2;
+  --pingou-coral: #ff8a52;
+  --pingou-yellow: #ffd15e;
+  --pingou-violet: #9a8bff;
+  --pingou-bg: #071826;
+  --pingou-surface: #0d2435;
+  --pingou-surface-2: #0a1e2d;
+  --pingou-text: #e8f4fb;
+  --pingou-muted: #9db4c4;
+  --pingou-line: #1c3a52;
+  --pingou-ok: #53d6a6;
+  --pingou-warn: #ffd15e;
+  --pingou-bad: #ff6b5c;
+  --pingou-on-danger: #0b2545;
+  --pingou-focus: #6fd3ee;
 }
 [data-scheme='light'] {
-  --sploot-ginger: #d9772b;
-  --sploot-ginger-deep: #b85f1e;
-  --sploot-petrol: #1e5f60;
-  --sploot-petrol-soft: #2f7c7b;
-  --sploot-bg: #ece7dd;
-  --sploot-surface: #f5f1e9;
-  --sploot-surface-2: #e4decf;
-  --sploot-text: #241f18;
-  --sploot-muted: #6e665a;
-  --sploot-line: #d8d0c1;
-  --sploot-ok: #3f7d57;
-  --sploot-warn: #c98a2e;
-  --sploot-bad: #c0503a;
+  --pingou-cyan: #00a6cc;
+  --pingou-brand: #0a7188;
+  --pingou-cyan-soft: #d6f2f9;
+  --pingou-ink: #0b2545;
+  --pingou-coral: #ff7a3c;
+  --pingou-yellow: #ffc43d;
+  --pingou-violet: #7c6bf0;
+  --pingou-bg: #eef6fb;
+  --pingou-surface: #ffffff;
+  --pingou-surface-2: #f0f7fc;
+  --pingou-text: #12222f;
+  --pingou-muted: #566b7a;
+  --pingou-line: #d6e6ef;
+  --pingou-ok: #25a873;
+  --pingou-warn: #b8860b;
+  --pingou-bad: #d14336;
+  --pingou-on-danger: #ffffff;
+  --pingou-focus: #0c7a99;
 }

@@ -3,3 +3,7 @@
    futur github.com/splootlabs → design-tokens.css).
    Resynchroniser ce fichier si la palette de marque change. */
 @import './brand-primitives.css';
+
+/* Primitives PRODUIT Pingou (palette banquise) — identité propre au produit,
+   distincte de la marque éditeur Sploot Labs ci-dessus. */
+@import './pingou-primitives.css';

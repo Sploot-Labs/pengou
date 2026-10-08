@@ -39,7 +39,7 @@ export function RequireAuth({ children }: { children: ReactNode }) {
         <Logo />
         <p className="join-error" role="alert">
           Impossible de vérifier votre session (problème réseau ou serveur temporairement
-          indisponible). Vous n'avez pas été déconnecté — réessayez.
+          indisponible). Vous n'avez pas été déconnecté, réessayez.
         </p>
         <Button variant="primary" type="button" onClick={() => void refresh()}>
           Réessayer

@@ -10,3 +10,6 @@ apps/web/dist/
 
 # Claude Code local tooling state (worktrees, settings)
 .claude/
+
+# Historique de prompts reconstruit (local, non versionné)
+historique-prompts.md

@@ -32,22 +32,36 @@ describe('themes.css', () => {
     }
   })
 
-  it('ne réintroduit pas la palette Kahoot (rose/violet)', () => {
+  it("ne réintroduit pas l'ancienne palette rose/violet", () => {
     expect(themesCss.toLowerCase()).not.toContain('#ff3d7f')
     expect(themesCss.toLowerCase()).not.toContain('#7a5cff')
   })
+
+  it('mappe les rôles produit sur les primitives Pingou (palette banquise)', () => {
+    expect(themesCss).toContain('--pingou-brand')
+    expect(themesCss).toContain('--pingou-cyan')
+  })
 })
 
-it('tokens.css ne définit plus de primitive couleur Kahoot', () => {
+it("tokens.css ne définit plus de primitive couleur de l'ancienne palette", () => {
   const tokensCss = readFileSync(
     fileURLToPath(new URL('../tokens.css', import.meta.url)),
     'utf-8',
   ).toLowerCase()
-  expect(tokensCss).not.toContain('#ff3d7f') // rose Kahoot
-  expect(tokensCss).not.toContain('#7a5cff') // violet Kahoot
-  expect(tokensCss).not.toContain('#0e1230') // midnight bleuté
+  expect(tokensCss).not.toContain('#ff3d7f') // ancien rose
+  expect(tokensCss).not.toContain('#7a5cff') // ancien violet
+  expect(tokensCss).not.toContain('#0e1230') // ancien midnight bleuté
   expect(tokensCss).not.toContain('--brand:')
   expect(tokensCss).not.toContain('--stage:')
+})
+
+it("prototype.css ne réintroduit pas l'ancien rose (hex ni rgba)", () => {
+  const prototypeCss = readFileSync(
+    fileURLToPath(new URL('../prototype.css', import.meta.url)),
+    'utf-8',
+  ).toLowerCase()
+  expect(prototypeCss).not.toContain('#ff3d7f')
+  expect(prototypeCss).not.toMatch(/rgba\(\s*255\s*,\s*61\s*,\s*127/)
 })
 
 it("la règle de couleur de lien de base ne s'applique qu'aux liens textuels (pas aux liens à classe)", () => {

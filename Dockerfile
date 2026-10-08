@@ -11,6 +11,9 @@ WORKDIR /app
 COPY pnpm-workspace.yaml package.json pnpm-lock.yaml tsconfig.base.json ./
 COPY packages ./packages
 COPY apps ./apps
+# Les primitives de marque sont vendorées dans apps/web/src/theme/brand-primitives.css
+# (copie du dépôt Sploot Labs) et importées localement par tokens.brand.css : plus de
+# dossier brand-kit/ à la racine, donc rien de plus à copier ici.
 RUN pnpm install --frozen-lockfile
 # Build tous les packages dans l'ordre topologique (pnpm) — robuste à l'ajout de nouveaux packages.
 RUN pnpm -r build

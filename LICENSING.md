@@ -1,10 +1,10 @@
-# Licence d'Arena — en clair
+# Licence de Pingou, en clair
 
-Arena est **open source**, sous **Apache License 2.0** (`Apache-2.0`). Le texte qui fait foi est
+Pingou est **open source**, sous **Apache License 2.0** (`Apache-2.0`). Le texte qui fait foi est
 le fichier [`LICENSE`](./LICENSE) ; cette page l'explique en langage courant et **n'a aucune
 valeur juridique** en cas de divergence.
 
-> **En une phrase :** faites ce que vous voulez avec Arena — self-host, modification, usage
+> **En une phrase :** faites ce que vous voulez avec Pingou — self-host, modification, usage
 > commercial, intégration dans un autre produit, redistribution — gratuitement. Gardez juste la
 > mention de licence et d'attribution.
 
@@ -18,11 +18,11 @@ sûr pour un projet destiné à durer et à attirer des contributeurs entreprise
 
 ## Ce que vous POUVEZ faire ✅ (c.-à-d. tout)
 
-- **Self-héberger** Arena — pour vous, votre organisation, vos clients — gratuitement, sans limite.
+- **Self-héberger** Pingou — pour vous, votre organisation, vos clients — gratuitement, sans limite.
 - **Modifier, forker, redistribuer**, y compris à des fins commerciales.
-- **Intégrer Arena** comme composant d'un produit plus large (CRM, LMS/formation, etc.).
-- **Proposer Arena en service hébergé**, y compris payant. Oui, y compris un concurrent — c'est le
-  prix, assumé, d'une ouverture réelle : ses utilisateurs aussi profitent d'Arena.
+- **Intégrer Pingou** comme composant d'un produit plus large (CRM, LMS/formation, etc.).
+- **Proposer Pingou en service hébergé**, y compris payant. Oui, y compris un concurrent — c'est le
+  prix, assumé, d'une ouverture réelle : ses utilisateurs aussi profitent de Pingou.
 
 ## Vos seules obligations (légères)
 
@@ -30,14 +30,14 @@ sûr pour un projet destiné à durer et à attirer des contributeurs entreprise
 2. **Conserver les mentions** de copyright, brevets, marques et attribution présentes dans les
    sources (dont le fichier [`NOTICE`](./NOTICE)).
 3. **Signaler les fichiers que vous modifiez** (mention « changed »).
-4. **Ne pas utiliser la marque/le nom « Arena » ou « Sploot Labs »** pour endosser ou promouvoir
+4. **Ne pas utiliser la marque/le nom « Pingou » ou « Sploot Labs »** pour endosser ou promouvoir
    votre version dérivée (au-delà de la mention d'origine). Le code est libre ; la marque ne l'est
    pas.
 
 ## Communication de marque
 
 Ici, dire **« open source »** est exact : Apache-2.0 est une licence approuvée par l'OSI. Le badge
-et le pitch « open source » de Sploot Labs sont pleinement justifiés pour Arena.
+et le pitch « open source » de Sploot Labs sont pleinement justifiés pour Pingou.
 
 ## Et le modèle économique alors ?
 

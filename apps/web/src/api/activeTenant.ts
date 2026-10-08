@@ -8,7 +8,7 @@
  * l'état React. Persisté en `localStorage` pour survivre à un rechargement.
  */
 
-const STORAGE_KEY = 'arena.activeTenantId'
+const STORAGE_KEY = 'pingou.activeTenantId'
 
 function readInitial(): string | null {
   try {

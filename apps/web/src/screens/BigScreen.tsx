@@ -84,7 +84,7 @@ function BigScreenInner() {
 
   const [joinState, setJoinState] = useState<JoinState>(token ? 'connecting' : 'error')
   const [joinError, setJoinError] = useState<string | null>(
-    token ? null : 'Lien invalide : jeton d’affichage manquant dans l’URL.',
+    token ? null : "Lien invalide : jeton d'affichage manquant dans l'URL.",
   )
   const joinAttemptedRef = useRef(false)
   // `true` une fois `screen:join` réellement réussi au moins une fois — sert
@@ -146,7 +146,7 @@ function BigScreenInner() {
           // (« displayToken invalide ou déjà utilisé »), qui ne dirait pas
           // à l'opérateur QUOI FAIRE.
           hasJoinedOnceRef.current
-            ? 'Lien grand écran expiré après une coupure réseau. Demandez un nouveau lien à l’hôte.'
+            ? "Lien grand écran expiré après une coupure réseau. Demandez un nouveau lien à l'hôte."
             : err instanceof Error
               ? err.message
               : 'Connexion au grand écran impossible.',
@@ -391,7 +391,7 @@ function BigScreenInner() {
     }
     return (
       <div className="big-answer__range">
-        <span>Réponse libre — tapez sur votre mobile</span>
+        <span>Réponse libre : tapez sur votre mobile</span>
       </div>
     )
   }
@@ -449,7 +449,7 @@ function BigScreenInner() {
           question pendant la tentative de reconnexion. */}
       {connection === 'reconnecting' && (
         <p className="player-net player-net--reconnecting" role="alert">
-          Connexion perdue — reconnexion…
+          Connexion perdue, reconnexion…
         </p>
       )}
       {(phase === 'reading' || phase === 'question' || phase === 'reveal' || phase === 'scoreboard') && (
@@ -457,8 +457,8 @@ function BigScreenInner() {
           Rejoignez sur <strong>{window.location.host}</strong>
           {pin && (
             <>
-              {' '}
-              · PIN <strong>{pin}</strong>
+              {', '}
+              code banquise <strong>{pin}</strong>
             </>
           )}
         </div>
@@ -483,11 +483,11 @@ function BigScreenInner() {
               <JoinInvite pin={pin} />
             </>
           ) : (
-            <p style={{ color: 'var(--ink-dim)' }}>PIN indisponible — demandez-le à l’hôte.</p>
+            <p style={{ color: 'var(--ink-dim)' }}>PIN indisponible, demandez-le à l'hôte.</p>
           )}
 
           {players.length === 0 ? (
-            <p className="big-lobby__empty">En attente des joueurs… Saisissez le PIN pour rejoindre.</p>
+            <p className="big-lobby__empty">En attente de la colonie… Saisissez le code banquise pour rejoindre.</p>
           ) : (
             <ul className="big-players" aria-label="Joueurs ayant rejoint la partie">
               {players.map((p) => (
@@ -531,7 +531,7 @@ function BigScreenInner() {
               chaque frame chez tous les lecteurs d'écran — cohérent avec le
               chrono de réponse, non annoncé en continu lui non plus). */}
           <p className="big-live__answered" role="status" aria-live="polite">
-            Lecture — {readingRemaining ?? reading.readingTime} s restantes
+            Lecture : {readingRemaining ?? reading.readingTime} s restantes
           </p>
         </div>
       )}
@@ -578,7 +578,7 @@ function BigScreenInner() {
             // `question:show` rejoué) : mieux vaut ce message honnête qu'un écran vide. La
             // bascule auto reveal→scoreboard ci-dessus ne dépend pas de `question`.
             <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
-              Résultat indisponible pour cette question — la suivante arrive.
+              Résultat indisponible pour cette question, la suivante arrive.
             </h1>
           )}
         </div>
@@ -590,7 +590,7 @@ function BigScreenInner() {
             Classement
           </h1>
           {ranking.length === 0 ? (
-            <p style={{ color: 'var(--ink-dim)' }}>Le classement s’affichera après la première question.</p>
+            <p style={{ color: 'var(--ink-dim)' }}>Le classement s'affichera après la première question.</p>
           ) : (
             <ol className="big-scoreboard__list">
               {ranking.slice(0, 5).map((p, index) => (

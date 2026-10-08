@@ -14,8 +14,8 @@ async function makeUser(email: string): Promise<string> {
 beforeAll(async () => {
   ctx = await startTestDb()
   await runMigrations(ctx.db)
-  ownerA = await makeUser('rlsA@arena.fr')
-  ownerB = await makeUser('rlsB@arena.fr')
+  ownerA = await makeUser('rlsA@pingou.app')
+  ownerB = await makeUser('rlsB@pingou.app')
   const wsA = await createWorkspace(ctx.db, { name: 'RLS A', ownerId: ownerA })
   const wsB = await createWorkspace(ctx.db, { name: 'RLS B', ownerId: ownerB })
   tenantA = wsA.id; tenantB = wsB.id

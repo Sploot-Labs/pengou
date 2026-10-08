@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { savePlayerSession } from '../realtime/playerSession'
 import { useGameSocket } from '../realtime/useGameSocket'
-import { Button, Logo } from '../ui'
+import { Button, Logo, Mascot } from '../ui'
 
 interface FieldErrors {
   pin?: string
@@ -49,7 +49,7 @@ export function Join() {
       next.pin = 'Le PIN doit comporter exactement 6 chiffres.'
     }
     if (pseudo.trim().length === 0) {
-      next.pseudo = 'Pseudo requis. Choisissez un pseudo pour rejoindre.'
+      next.pseudo = 'Pseudo requis. Choisis un pseudo pour rejoindre.'
     }
     return next
   }
@@ -93,12 +93,13 @@ export function Join() {
 
   return (
     <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+      <Mascot size={140} />
       <Logo />
 
       {/* No PIN shown here: the player reads it off the big screen. Revealing
           it on the joining device conflicts with the projector's role. */}
       <p style={{ color: 'var(--ink-dim)' }}>
-        Saisissez le PIN affiché sur le grand écran pour rejoindre.
+        Saisis le code banquise affiché sur le grand écran pour rejoindre la colonie.
       </p>
 
       <form className="join-card" onSubmit={handleSubmit} noValidate>
@@ -139,7 +140,7 @@ export function Join() {
             type="text"
             autoComplete="off"
             maxLength={20}
-            placeholder="Votre pseudo"
+            placeholder="Ton pseudo"
             value={pseudo}
             onChange={(e) => {
               setPseudo(e.target.value)
@@ -159,11 +160,11 @@ export function Join() {
           {status === 'pending' ? 'Connexion…' : 'Rejoindre'}
         </Button>
 
-        <p className="join-reassure">Aucun compte, aucune installation — juste un pseudo.</p>
+        <p className="join-reassure">Aucun compte, aucune installation, juste un pseudo.</p>
       </form>
 
       <p className="join-tagline">
-        Arena — le quiz en direct, open-source. Chez vous ou dans le cloud.
+        Pingou : le quiz en direct, open-source. Chez vous ou dans le cloud.
       </p>
     </main>
   )

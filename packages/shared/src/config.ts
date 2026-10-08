@@ -4,7 +4,7 @@ const EnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().positive().default(3000),
   TENANCY_MODE: z.enum(['single', 'multi']).default('single'),
-  DATABASE_URL: z.string().min(1).default('postgres://kahoot:kahoot@localhost:5432/kahoot'),
+  DATABASE_URL: z.string().min(1).default('postgres://pingou:pingou@localhost:5432/pingou'),
   // RLS (Slice 2) : connexion du rôle applicatif restreint (soumis au RLS). Optionnelle —
   // par défaut dérivée de DATABASE_URL en substituant user=app_role/APP_DB_PASSWORD (self-host
   // à une seule URL). Fournir explicitement pour un rôle géré (cloud/managed).

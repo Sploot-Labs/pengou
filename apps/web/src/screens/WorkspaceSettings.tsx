@@ -154,7 +154,7 @@ function MembersSection({ tenantId, actorRole }: { tenantId: string; actorRole: 
               return (
                 <li key={m.userId} className="ab-member-row">
                   <span className="home-list__title">{m.name || m.email}</span>
-                  <span className="home-list__meta">{m.email}{isSelf ? ' · vous' : ''}</span>
+                  <span className="home-list__meta">{m.email}{isSelf ? ' (vous)' : ''}</span>
                   <span className="ab-member-row__controls">
                     <label className="visually-hidden" htmlFor={`role-${m.userId}`}>Rôle de {m.email}</label>
                     <select
@@ -251,7 +251,7 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
 
       {lastLink && (
         <p className="ab-invite-link" role="status">
-          Lien d’invitation (à transmettre) : <code>{lastLink}</code>
+          Lien d'invitation (à transmettre) : <code>{lastLink}</code>
         </p>
       )}
 
@@ -264,7 +264,7 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
               <li key={inv.id} className="ab-member-row">
                 <span className="home-list__title">{inv.email}</span>
                 <span className="home-list__meta">
-                  {ROLE_LABEL[inv.role]} · expire le {new Date(inv.expiresAt).toLocaleDateString('fr-FR')}
+                  {ROLE_LABEL[inv.role]}, expire le {new Date(inv.expiresAt).toLocaleDateString('fr-FR')}
                 </span>
                 <span className="ab-member-row__controls">
                   <Button variant="ghost" type="button" onClick={() => void handleResend(inv.id)}>Renvoyer</Button>

@@ -100,7 +100,7 @@ describe('BigScreen — phase lecture (question:reading)', () => {
 
     // Décompte textuel toujours présent (RGAA — jamais seulement l'animation
     // du badge décoratif).
-    expect(screen.getByText(/Lecture — \d+ s restantes/)).toBeInTheDocument()
+    expect(screen.getByText(/Lecture : \d+ s restantes/)).toBeInTheDocument()
 
     // Anti-triche : aucun libellé d'option ne doit fuiter pendant la lecture
     // (le payload `question:reading` n'en contient d'ailleurs aucun).
@@ -146,7 +146,7 @@ describe('BigScreen — phase lecture (question:reading)', () => {
     expect(screen.getByText('Madrid')).toBeInTheDocument()
 
     // Le décompte de lecture a disparu avec la bascule de phase.
-    expect(screen.queryByText(/Lecture — \d+ s restantes/)).toBeNull()
+    expect(screen.queryByText(/Lecture : \d+ s restantes/)).toBeNull()
 
     // Le nouveau titre de phase (même montage React que le titre lecture,
     // mais une phase différente sous PhaseTransition) reste focalisé.

@@ -48,7 +48,7 @@ export function AcceptInvitation() {
       // Rechargement dur : la nouvelle membership + le nouveau contexte tenant sont pris en compte.
       window.location.assign('/')
     } catch (err) {
-      setAcceptError(err instanceof ApiError ? err.message : 'Impossible d’accepter l’invitation.')
+      setAcceptError(err instanceof ApiError ? err.message : "Impossible d'accepter l'invitation.")
       setAccepting(false)
     }
   }
@@ -71,11 +71,11 @@ export function AcceptInvitation() {
           </div>
         </section>
 
-        {loading && <p role="status">Chargement de l’invitation…</p>}
+        {loading && <p role="status">Chargement de l'invitation…</p>}
         {loadError && !loading && (
           <div className="ab-empty-state">
             <p role="alert">{loadError}</p>
-            <Link className="ab-button ab-button--primary" to="/">Retour à l’accueil</Link>
+            <Link className="ab-button ab-button--primary" to="/">Retour à l'accueil</Link>
           </div>
         )}
 

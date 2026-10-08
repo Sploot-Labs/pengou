@@ -1,6 +1,6 @@
 # Politique de sécurité
 
-Merci d'aider à garder Arena sûr pour tout le monde. 🐾
+Merci d'aider à garder Pingou sûr pour tout le monde. 🐧
 
 ## Signaler une vulnérabilité
 
@@ -9,7 +9,7 @@ correctif expose tous les déploiements.
 
 À la place :
 
-- Utilisez **[GitHub Security Advisories](https://github.com/splootlabs/arena/security/advisories/new)**
+- Utilisez **[GitHub Security Advisories](https://github.com/splootlabs/pingou/security/advisories/new)**
   (« Report a vulnerability ») — canal privé, recommandé ; **ou**
 - écrivez à **security@splootlabs.dev**.
 

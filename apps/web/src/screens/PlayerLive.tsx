@@ -562,7 +562,7 @@ export function PlayerLive() {
             </span>
             <span>
               Réponse(s) acceptée(s) :{' '}
-              {correct.answers.filter((a) => a.trim().length > 0).join(' · ')}
+              {correct.answers.filter((a) => a.trim().length > 0).join(', ')}
             </span>
           </div>
         )
@@ -578,7 +578,7 @@ export function PlayerLive() {
               <span>Valeur correcte : {correct.correct}</span>
             </div>
             <div className="player-result__recap-line">
-              <span>Votre estimation : {effectiveSliderValue !== null ? effectiveSliderValue : '—'}</span>
+              <span>Votre estimation : {effectiveSliderValue !== null ? effectiveSliderValue : 'aucune'}</span>
             </div>
           </>
         )
@@ -637,7 +637,7 @@ export function PlayerLive() {
         <div className="player-waiting">
           <h1>En attente de la prochaine question…</h1>
           <p style={{ color: 'var(--ink-dim)' }}>
-            Restez sur cet écran. La question suivante s’affichera automatiquement.
+            Restez sur cet écran. La question suivante s'affichera automatiquement.
           </p>
         </div>
       )}
@@ -861,14 +861,14 @@ export function PlayerLive() {
           {myRank !== null ? (
             <p>Vous terminez {myRank}ᵉ place.</p>
           ) : (
-            <p>Merci d’avoir joué !</p>
+            <p>Merci d'avoir joué !</p>
           )}
           {podiumTop.length > 0 && (
             <ol className="player-result__recap">
               {podiumTop.map((entry, index) => (
                 <li key={entry.playerId} className="player-result__recap-line">
                   <span>
-                    {index + 1}. {entry.nickname} — {entry.score} points
+                    {index + 1}. {entry.nickname} : {entry.score} points
                     {entry.playerId === stored.playerId ? ' (vous)' : ''}
                   </span>
                 </li>

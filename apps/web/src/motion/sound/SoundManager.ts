@@ -1,6 +1,6 @@
 import { sounds, type SoundId } from './sounds.js'
 
-const MUTE_STORAGE_KEY = 'arena.sound.muted'
+const MUTE_STORAGE_KEY = 'pingou.sound.muted'
 
 interface SoundManagerOptions {
   /** Injection pour les tests : remplace la vraie lecture <audio>. */

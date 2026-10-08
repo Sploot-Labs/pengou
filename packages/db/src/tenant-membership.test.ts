@@ -10,7 +10,7 @@ beforeAll(async () => {
   ctx = await startTestDb(); await runMigrations(ctx.db)
   tenantId = await ensureDefaultTenant(ctx.db)
   const [u] = await ctx.db.insert(schema.user)
-    .values({ id: crypto.randomUUID(), email: 'm@arena.fr', name: 'M', emailVerified: false })
+    .values({ id: crypto.randomUUID(), email: 'm@pingou.app', name: 'M', emailVerified: false })
     .returning()
   userId = u.id
 }, 120_000)

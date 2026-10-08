@@ -42,7 +42,7 @@ export function WorkspaceSwitcher() {
         {workspaces.map((w) => (
           <option key={w.tenantId} value={w.tenantId}>
             {w.name}
-            {w.role !== 'member' ? ` · ${ROLE_LABEL[w.role]}` : ''}
+            {w.role !== 'member' ? ` (${ROLE_LABEL[w.role]})` : ''}
           </option>
         ))}
       </select>

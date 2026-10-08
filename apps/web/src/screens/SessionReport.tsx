@@ -51,7 +51,7 @@ function formatDuration(startedAt: string, endedAt: string): string {
  * zero values doesn't exist, so this renders the explicit "—" the plan
  * requires rather than inventing a `0 s`. */
 function formatAvgTime(avgTimeMs: number | null): string {
-  if (avgTimeMs === null) return '—'
+  if (avgTimeMs === null) return '-'
   return `${(avgTimeMs / 1000).toFixed(1)} s`
 }
 
@@ -273,7 +273,7 @@ export function SessionReport() {
                         </td>
                         <td>
                           {rate === null
-                            ? '— (aucune réponse)'
+                            ? '(aucune réponse)'
                             : `${Math.round(rate * 100)} % (${q.correctCount}/${q.answerCount})`}
                         </td>
                         <td>{formatAvgTime(q.avgTimeMs)}</td>
