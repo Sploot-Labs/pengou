@@ -143,6 +143,7 @@
   align-items: center;
   gap: var(--space-3);
   min-height: 72px;
+  min-width: 0;
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
   border: 2px solid transparent;
@@ -150,7 +151,9 @@
   color: var(--tile-ink);
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.35rem;
+  /* Responsive : évite le mot-par-ligne sur les tuiles étroites (mobile) tout
+     en gardant une frappe arcade sur les libellés courts / écrans larges. */
+  font-size: clamp(1.05rem, 0.9rem + 1.1vw, 1.3rem);
   text-align: left;
   cursor: pointer;
   /* Arcade key relief: a solid drop that compresses on press. */
@@ -205,6 +208,12 @@
 
 .ab-tile__label {
   flex: 1;
+  /* `min-width:0` laisse le libellé rétrécir sous sa largeur min-content : sans
+     ça, un mot long force la tuile (et sa piste de grille) à déborder — c'est
+     ce qui poussait la 2ᵉ colonne hors de l'écran dans le récap de résultat. */
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.25;
 }
 
 .ab-tile__reveal {
@@ -922,16 +931,15 @@
   color: var(--ink-dim);
 }
 
+/* Une colonne sur mobile : les options portent du texte (parfois long), pas
+   seulement une couleur comme chez Kahoot — en pleine largeur elles restent
+   lisibles au lieu de casser mot par mot. `auto-fit` + `minmax(min(100%,16rem))`
+   passe à deux colonnes uniquement si le conteneur offre vraiment la place
+   (au-delà de la colonne joueur de 480px), jamais au prix de la lisibilité. */
 .player-tiles {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   gap: var(--space-3);
-}
-
-@media (max-width: 420px) {
-  .player-tiles {
-    grid-template-columns: 1fr;
-  }
 }
 
 .player-text-answer,
@@ -1036,7 +1044,9 @@
   justify-content: center;
   gap: var(--space-3);
   text-align: center;
-  padding: var(--space-5);
+  /* Marge resserrée sur mobile pour rendre toute sa largeur aux tuiles du
+     récap (sinon les 32px de chaque côté les étranglent). */
+  padding: clamp(var(--space-4), 5vw, var(--space-5));
   border-radius: var(--radius-lg);
 }
 
