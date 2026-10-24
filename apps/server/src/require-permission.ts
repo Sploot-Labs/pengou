@@ -24,7 +24,7 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
  * pour ne pas divulguer l'existence d'un workspace à un non-membre.
  */
 export function requirePermission(systemDb: Db, cap: Capability) {
-  return async function (request: FastifyRequest, reply: FastifyReply): Promise<void> {
+  return async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
     if (!request.user?.id) {
       reply.code(401).send({ error: 'Non authentifié.' })
       return

@@ -13,7 +13,7 @@ const ask = (sock, ev, payload) =>
     const t = setTimeout(() => reject(new Error(`timeout ${ev}`)), 8000)
     sock.emit(ev, payload, (ack) => {
       clearTimeout(t)
-      if (ack && ack.error) return reject(new Error(`${ev} → ${ack.error}`))
+      if (ack?.error) return reject(new Error(`${ev} → ${ack.error}`))
       resolve(ack)
     })
   })
