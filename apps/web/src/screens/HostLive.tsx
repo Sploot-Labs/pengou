@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import type { RankingEntry, ReadingView } from '../realtime/contracts'
+import { listQuizzes, type QuizListItem } from '../api/quizzes'
+import { hardReload } from '../realtime/hardReload'
 import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import { Button, Logo, PinDisplay, TimerRing } from '../ui'
 import { PodiumView } from './Podium'
@@ -207,6 +209,9 @@ export function HostLive() {
 
   const phaseHeadingRef = useRef<HTMLHeadingElement>(null)
   const podiumHeadingRef = useRef<HTMLHeadingElement>(null)
+  const [relaunchQuizzes, setRelaunchQuizzes] = useState<QuizListItem[] | null>(null)
+  const [relaunchQuizId, setRelaunchQuizId] = useState('')
+  const [relaunchLoadError, setRelaunchLoadError] = useState<string | null>(null)
   const isFirstRender = useRef(true)
 
   // RGAA 2.4.3 : focus sur le titre propre à la nouvelle phase — jamais au
@@ -455,6 +460,38 @@ export function HostLive() {
   useEffect(() => {
     if (phase === 'podium') podiumHeadingRef.current?.focus()
   }, [phase])
+
+  // Relance depuis le podium : liste des quiz de l'hôte, chargée une seule fois à l'arrivée au podium.
+  useEffect(() => {
+    if (phase !== 'podium' || relaunchQuizzes !== null) return
+    let cancelled = false
+    listQuizzes()
+      .then((list) => {
+        if (cancelled) return
+        setRelaunchQuizzes(list)
+        setRelaunchQuizId((current) => current || list[0]?.id || '')
+      })
+      .catch(() => {
+        if (!cancelled) setRelaunchLoadError('Impossible de charger vos quiz.')
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [phase, relaunchQuizzes])
+
+  async function relaunch(): Promise<void> {
+    if (!relaunchQuizId) return
+    setActionPending(true)
+    setActionError(null)
+    try {
+      const ack = await emitAck<{ sessionId: string; pin: string }>('host:relaunch', { quizId: relaunchQuizId })
+      // Rechargement complet : HostLive se remonte sur la nouvelle session et reprend via host:reconnect.
+      hardReload('/host/' + ack.sessionId)
+    } catch (err) {
+      setActionError(friendlyActionError(err, connection))
+      setActionPending(false)
+    }
+  }
 
   if (!sessionId) {
     return (
@@ -955,7 +992,41 @@ export function HostLive() {
             )}
 
             {phase === 'podium' && (
-              <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={podiumHeadingRef} />
+              <>
+                <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={podiumHeadingRef} />
+                <div className="hostlive-relaunch">
+                  {relaunchLoadError ? (
+                    <p className="join-error" role="alert">
+                      {relaunchLoadError}
+                    </p>
+                  ) : relaunchQuizzes === null ? (
+                    <p role="status">Chargement de vos quiz…</p>
+                  ) : (
+                    <>
+                      <label htmlFor="relaunch-quiz">Quiz de la prochaine partie</label>
+                      <select
+                        id="relaunch-quiz"
+                        value={relaunchQuizId}
+                        onChange={(e) => setRelaunchQuizId(e.target.value)}
+                      >
+                        {relaunchQuizzes.map((q) => (
+                          <option key={q.id} value={q.id}>
+                            {q.title}
+                          </option>
+                        ))}
+                      </select>
+                      <Button
+                        variant="primary"
+                        type="button"
+                        disabled={actionPending || !relaunchQuizId}
+                        onClick={() => void relaunch()}
+                      >
+                        Relancer une partie
+                      </Button>
+                    </>
+                  )}
+                </div>
+              </>
             )}
           </section>
 
