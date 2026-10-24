@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "@splootlabs/shared": "workspace:*",
-    "drizzle-orm": "^0.45.2",
+    "drizzle-orm": "^0.45.4",
     "postgres": "^3.4.0"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.31.10",
+    "drizzle-kit": "^0.31.11",
     "@testcontainers/postgresql": "^10.13.0"
   }
 }

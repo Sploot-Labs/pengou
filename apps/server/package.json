@@ -21,14 +21,14 @@
     "@splootlabs/game": "workspace:*",
     "@splootlabs/quiz": "workspace:*",
     "@splootlabs/shared": "workspace:*",
-    "better-auth": "^1.6.24",
+    "better-auth": "^1.7.12",
     "fastify": "^5.12.0",
     "ioredis": "^5",
     "prom-client": "^15",
     "socket.io": "^4.7.0"
   },
   "devDependencies": {
-    "drizzle-orm": "^0.45.2",
+    "drizzle-orm": "^0.45.4",
     "socket.io-client": "^4.7.0",
     "tsx": "^4.16.0"
   }
