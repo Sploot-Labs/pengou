@@ -214,7 +214,7 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
     const res = await app.inject({ method: 'GET', url: `/api/sessions/${sessionId}/export.csv`, headers: { cookie } })
     expect(res.statusCode).toBe(200)
     expect(res.headers['content-type']).toMatch(/^text\/csv/)
-    expect(res.headers['content-disposition']).toMatch(/^attachment; filename="pingou-partie-444444\.csv"$/)
+    expect(res.headers['content-disposition']).toMatch(/^attachment; filename="pengou-partie-444444\.csv"$/)
     const body = res.body
     expect(body.charCodeAt(0)).toBe(0xfeff) // BOM UTF-8
     expect(body).toContain('Alice')

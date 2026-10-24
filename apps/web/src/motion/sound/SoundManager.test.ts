@@ -6,7 +6,7 @@ describe('SoundManager', () => {
   it('ne joue rien avant unlock()', () => {
     const play = vi.fn()
     const sm = new SoundManager({ playFn: play })
-    sm.play('ding')
+    sm.play('correct')
     expect(play).not.toHaveBeenCalled()
   })
 
@@ -14,8 +14,16 @@ describe('SoundManager', () => {
     const play = vi.fn()
     const sm = new SoundManager({ playFn: play })
     sm.unlock()
-    sm.play('ding')
-    expect(play).toHaveBeenCalledWith('ding')
+    sm.play('correct')
+    expect(play).toHaveBeenCalledWith('correct')
+  })
+
+  it('loop() passe l’option loop au playFn', () => {
+    const play = vi.fn()
+    const sm = new SoundManager({ playFn: play })
+    sm.unlock()
+    sm.loop('lobby')
+    expect(play).toHaveBeenCalledWith('lobby', { loop: true })
   })
 
   it('muted coupe la lecture même après unlock', () => {
@@ -23,13 +31,14 @@ describe('SoundManager', () => {
     const sm = new SoundManager({ playFn: play })
     sm.unlock()
     sm.setMuted(true)
-    sm.play('ding')
+    sm.play('correct')
     expect(play).not.toHaveBeenCalled()
     expect(sm.muted).toBe(true)
   })
 
-  it('le catalogue résout chaque clé vers une URL', () => {
-    expect(sounds.ding).toMatch(/\.mp3$/)
-    expect(Object.keys(sounds)).toContain('fanfare')
+  it('le catalogue expose les clés de sons attendues', () => {
+    expect(sounds.correct).toBeDefined()
+    expect(sounds.question).toBeDefined()
+    expect(Object.keys(sounds)).toContain('podium')
   })
 })

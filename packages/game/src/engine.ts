@@ -21,13 +21,18 @@ export type SubmitAnswerResult = { accepted: boolean; reason?: string }
 
 export type RankingEntry = { playerId: string; nickname: string; score: number }
 
-/** Projection question envoyée aux joueurs — ne DOIT jamais contenir la bonne réponse. */
+/** Projection question envoyée aux joueurs — ne DOIT jamais contenir la bonne réponse.
+ * `index`/`total` sont PUREMENT positionnels (numéro de question dans le quiz) : aucune
+ * fuite de réponse, même rôle que sur `ReadingView`, pour afficher « n / N » côté joueur
+ * aussi bien en phase lecture qu'en phase question. */
 export type PlayerQuestionView = {
   id: string
   type: EngineQuestion['type']
   prompt: string
   timeLimit: number
   payload: unknown
+  index: number
+  total: number
 } | null
 
 /** Projection « temps de lecture » envoyée aux joueurs/écrans avant l'ouverture des réponses —
@@ -334,6 +339,8 @@ export function createEngine(deps: EngineDeps): Engine {
         prompt: question.prompt,
         timeLimit: question.timeLimit,
         payload: def.playerView(question.payload),
+        index: session.currentIndex,
+        total: session.questions.length,
       }
     },
 

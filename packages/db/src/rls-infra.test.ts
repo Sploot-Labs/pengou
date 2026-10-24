@@ -10,8 +10,8 @@ afterAll(async () => { await ctx?.stop() })
 
 describe('RLS infra', () => {
   it('deriveAppUrl substitue user/password en gardant host/port/db', () => {
-    const out = deriveAppUrl('postgres://owner:pw@db.host:5433/pingou', { user: 'app_role', password: 's3cret' })
-    expect(out).toBe('postgres://app_role:s3cret@db.host:5433/pingou')
+    const out = deriveAppUrl('postgres://owner:pw@db.host:5433/pengou', { user: 'app_role', password: 's3cret' })
+    expect(out).toBe('postgres://app_role:s3cret@db.host:5433/pengou')
   })
 
   it('withTenantTx pose app.tenant_id (SET LOCAL) dans la transaction', async () => {

@@ -27,3 +27,11 @@ export interface ReadingView {
   readingTime: number
   startedAt: number | null
 }
+
+/** Payload de `auto:advance` (enchaînement automatique des étapes) : horodatage serveur (ms epoch)
+ * de la bascule planifiée vers l'étape suivante, pour le compte à rebours CLIENT — même esprit que
+ * le `startedAt` du chrono (le serveur est seul maître de la bascule, le client ne fait que la
+ * refléter). `nextAt: null` annule le compte à rebours (mode auto désactivé par l'hôte). */
+export interface AutoAdvanceView {
+  nextAt: number | null
+}

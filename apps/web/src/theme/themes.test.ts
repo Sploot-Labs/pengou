@@ -37,9 +37,9 @@ describe('themes.css', () => {
     expect(themesCss.toLowerCase()).not.toContain('#7a5cff')
   })
 
-  it('mappe les rôles produit sur les primitives Pingou (palette banquise)', () => {
-    expect(themesCss).toContain('--pingou-brand')
-    expect(themesCss).toContain('--pingou-cyan')
+  it('mappe les rôles produit sur les primitives Pengou (palette banquise)', () => {
+    expect(themesCss).toContain('--pengou-brand')
+    expect(themesCss).toContain('--pengou-cyan')
   })
 })
 

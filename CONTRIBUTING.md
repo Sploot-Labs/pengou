@@ -1,4 +1,4 @@
-# Contribuer à Pingou 🐧
+# Contribuer à Pengou 🐧
 
 Bienvenue. Vraiment. Que tu sois mainteneur chevronné ou que ce soit ta **toute première
 contribution open source**, tu es à ta place ici.
@@ -6,12 +6,12 @@ contribution open source**, tu es à ta place ici.
 ## La règle numéro un
 
 **On accueille avant de corriger.** Aucune question n'est bête, aucune PR n'est « trop petite ».
-Si tu bloques, ouvre une [discussion](https://github.com/splootlabs/pingou/discussions), on
+Si tu bloques, ouvre une [discussion](https://github.com/splootlabs/pengou/discussions), on
 répond, on n'explique pas de haut.
 
 ## Première contribution ?
 
-1. Cherche une issue [`good first issue`](https://github.com/splootlabs/pingou/labels/good%20first%20issue), choisies pour démarrer en douceur.
+1. Cherche une issue [`good first issue`](https://github.com/splootlabs/pengou/labels/good%20first%20issue), choisies pour démarrer en douceur.
 2. Commente « je prends » pour qu'on te la réserve.
 3. Fork → branche → code → PR. **Dis dans la description que c'est ta première** : on te déroule le tapis.
 
@@ -19,8 +19,8 @@ répond, on n'explique pas de haut.
 
 ```bash
 # 1. Fork + clone
-git clone https://github.com/<toi>/pingou.git
-cd pingou
+git clone https://github.com/<toi>/pengou.git
+cd pengou
 
 # 2. Installe + vérifie que tout passe AVANT de coder
 pnpm install

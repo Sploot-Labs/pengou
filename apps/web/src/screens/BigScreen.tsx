@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue, useFocusOnMount } from '../motion/index.js'
+import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue, useFocusOnMount, useSound } from '../motion/index.js'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { RankingEntry, ReadingView } from '../realtime/contracts'
 import { ThemeProvider } from '../theme/ThemeProvider.js'
-import { AnswerShape, JoinInvite, Logo, PinDisplay, TimerRing } from '../ui'
+import { AnswerShape, JoinInvite, Logo, PinDisplay, SoundToggle, TimerRing } from '../ui'
 import { PodiumView } from './Podium'
 
 /**
@@ -81,6 +81,7 @@ function BigScreenInner() {
 
   const { socket, emitAck, on } = useGameSocket()
   const cue = useCue()
+  const sound = useSound()
 
   const [joinState, setJoinState] = useState<JoinState>(token ? 'connecting' : 'error')
   const [joinError, setJoinError] = useState<string | null>(
@@ -114,6 +115,11 @@ function BigScreenInner() {
   const [revealPayload, setRevealPayload] = useState<RevealPayload | null>(null)
   const [ranking, setRanking] = useState<RankingEntry[]>([])
   const [podiumTop, setPodiumTop] = useState<RankingEntry[]>([])
+
+  // Enchaînement automatique : horodatage serveur de la prochaine bascule (diffusé par
+  // `auto:advance`), reflété en compte à rebours — jamais un minuteur local indépendant.
+  const [autoNextAt, setAutoNextAt] = useState<number | null>(null)
+  const [autoRemaining, setAutoRemaining] = useState<number | null>(null)
 
   const focusPhaseHeading = useFocusOnMount<HTMLHeadingElement>()
 
@@ -196,6 +202,7 @@ function BigScreenInner() {
       setRevealPayload(null)
       setProgressAnswered(0)
       setRanking([])
+      setAutoNextAt(null)
       cue('phase.enter:reading')
       setPhase('reading')
     })
@@ -213,6 +220,7 @@ function BigScreenInner() {
       // bascule auto reveal→scoreboard ci-dessous (voir REVEAL_HOLD_MS) — il
       // ne doit jamais se déclencher sur les données de la question PRÉCÉDENTE.
       setRanking([])
+      setAutoNextAt(null)
       cue('phase.enter:question')
       setPhase('question')
     })
@@ -237,8 +245,13 @@ function BigScreenInner() {
 
     const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
       setPodiumTop(top)
+      setAutoNextAt(null)
       cue('phase.enter:podium')
       setPhase('podium')
+    })
+
+    const offAuto = on<{ nextAt: number | null }>('auto:advance', ({ nextAt }) => {
+      setAutoNextAt(nextAt)
     })
 
     return () => {
@@ -250,6 +263,7 @@ function BigScreenInner() {
       offReveal()
       offScoreboard()
       offPodium()
+      offAuto()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -305,6 +319,59 @@ function BigScreenInner() {
     const id = window.setInterval(tick, 250)
     return () => window.clearInterval(id)
   }, [timer, phase])
+
+  // Cue sonore d'urgence à 5 s restantes (comme PlayerLive) — fixée une seule
+  // fois au passage à 5, les ticks suivants ne re-déclenchent pas la valeur.
+  useEffect(() => {
+    if (phase === 'question' && remaining === 5) cue('timer.urgent')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [remaining, phase])
+
+  // Ambiance sonore du lobby : nappe « banquise » en boucle tant qu'on attend
+  // les joueurs, coupée dès qu'une manche commence (et à l'unmount). Reste un
+  // no-op tant que le son n'est pas déverrouillé (voir l'effet de geste
+  // ci-dessous) ou si l'opérateur a coupé le son.
+  const phaseRef = useRef(phase)
+  useEffect(() => {
+    phaseRef.current = phase
+    if (phase === 'lobby') sound.loop('lobby')
+    else sound.stop('lobby')
+  }, [phase, sound])
+
+  useEffect(() => () => sound.stop('lobby'), [sound])
+
+  // Le grand écran est passif (aucun contrôle de jeu) : son audio ne se
+  // déverrouille qu'au 1er geste de l'opérateur dans l'onglet. Comme le lobby
+  // est la toute première phase, l'ambiance ne peut pas démarrer avant ce
+  // geste — on la (re)lance donc ici, une fois le contexte audio amorcé.
+  useEffect(() => {
+    const start = () => {
+      sound.unlock()
+      if (phaseRef.current === 'lobby') sound.loop('lobby')
+    }
+    window.addEventListener('pointerdown', start, { once: true })
+    window.addEventListener('keydown', start, { once: true })
+    return () => {
+      window.removeEventListener('pointerdown', start)
+      window.removeEventListener('keydown', start)
+    }
+  }, [sound])
+
+  // Compte à rebours inter-étapes (enchaînement automatique) — dérivé de l'horodatage serveur
+  // `autoNextAt`, comme les autres chronos (jamais un minuteur local autonome).
+  useEffect(() => {
+    if (autoNextAt === null) {
+      setAutoRemaining(null)
+      return
+    }
+    function tick() {
+      if (autoNextAt === null) return
+      setAutoRemaining(Math.max(0, Math.ceil((autoNextAt - Date.now()) / 1000)))
+    }
+    tick()
+    const id = window.setInterval(tick, 250)
+    return () => window.clearInterval(id)
+  }, [autoNextAt])
 
   // Annonce debouncée de l'arrivée des joueurs (lobby uniquement).
   useEffect(() => {
@@ -442,6 +509,7 @@ function BigScreenInner() {
 
   return (
     <main className="big-screen" id="contenu-principal" tabIndex={-1}>
+      <SoundToggle className="ab-soundtoggle--fixed" />
       {/* Coupure réseau : jamais un gel silencieux — voir le commentaire de
           `connection` plus haut. Superposé au contenu de phase (qui reste
           affiché tel quel derrière, faute de mieux à montrer) plutôt que de
@@ -589,6 +657,11 @@ function BigScreenInner() {
           <h1 className="ab-hero-title" ref={focusPhaseHeading} tabIndex={-1}>
             Classement
           </h1>
+          {autoRemaining !== null && (
+            <p className="big-auto-countdown" role="status" aria-live="polite">
+              Question suivante dans {autoRemaining} s
+            </p>
+          )}
           {ranking.length === 0 ? (
             <p style={{ color: 'var(--ink-dim)' }}>Le classement s'affichera après la première question.</p>
           ) : (

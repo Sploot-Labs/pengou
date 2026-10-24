@@ -2,13 +2,13 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: pingou
-      POSTGRES_PASSWORD: pingou
-      POSTGRES_DB: pingou
+      POSTGRES_USER: pengou
+      POSTGRES_PASSWORD: pengou
+      POSTGRES_DB: pengou
     volumes:
       - db-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U pingou"]
+      test: ["CMD-SHELL", "pg_isready -U pengou"]
       interval: 5s
       timeout: 3s
       retries: 10
@@ -19,7 +19,7 @@ services:
       - "3000:3000"
     environment:
       TENANCY_MODE: single
-      DATABASE_URL: postgres://pingou:pingou@db:5432/pingou
+      DATABASE_URL: postgres://pengou:pengou@db:5432/pengou
       SESSION_SECRET: change-me-in-production-please!!
       # AUCUNE valeur par défaut ici, INTENTIONNELLEMENT (hardening) : un placeholder committé
       # (même ≥32 caractères, donc valide aux yeux du garde de production dans loadConfig)

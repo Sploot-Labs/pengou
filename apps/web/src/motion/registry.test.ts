@@ -4,7 +4,17 @@ import { sounds } from './sound/sounds.js'
 
 describe('registre de cues (moments de jeu)', () => {
   it('couvre les moments de jeu clés', () => {
-    for (const cue of ['phase.enter:podium', 'answer.correct', 'answer.incorrect', 'timer.urgent']) {
+    for (const cue of [
+      'phase.enter:reading',
+      'phase.enter:question',
+      'phase.enter:reveal',
+      'phase.enter:scoreboard',
+      'phase.enter:podium',
+      'answer.submit',
+      'answer.correct',
+      'answer.incorrect',
+      'timer.urgent',
+    ]) {
       expect(registry[cue], `manque: ${cue}`).toBeDefined()
     }
   })

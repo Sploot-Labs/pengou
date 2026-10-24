@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { normalizeText, sliderTolerance } from '@splootlabs/quiz'
 import { useCue, useSound } from '../motion/index.js'
 import { clearPlayerSession, loadPlayerSession } from '../realtime/playerSession'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { RankingEntry, ReadingView } from '../realtime/contracts'
-import { AnswerTile, Button, TimerRing } from '../ui'
+import { AnswerShape, AnswerTile, Logo, SoundToggle, TimerPill } from '../ui'
 
 /**
  * Parcours joueur réel, câblé sur la passerelle Socket.IO du serveur de jeu
@@ -21,13 +21,29 @@ import { AnswerTile, Button, TimerRing } from '../ui'
 
 type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider'
 
-/** `question:show` — projection anti-triche : jamais de bonne réponse. */
+/** `question:show` — projection anti-triche : jamais de bonne réponse.
+ * `index`/`total` sont positionnels (numéro de question), ajoutés à la
+ * projection moteur (voir `packages/game/src/engine.ts`,
+ * `playerQuestionView`) pour afficher « n / N » côté joueur ; optionnels côté
+ * client pour tolérer un flux plus ancien (ex. tests) sans planter. */
 interface QuestionShowPayload {
   id: string
   type: QuestionKind
   prompt: string
   timeLimit: number
   payload: unknown
+  index?: number
+  total?: number
+}
+
+/** `lobby:update` — liste des joueurs de la room, diffusée par la passerelle
+ * (`game-gateway.ts`) à TOUTE la room, joueur compris. On n'en consomme que
+ * le compteur « manchots sur la glace » : aucun autre détail joueur n'est
+ * affiché côté joueur. */
+interface LobbyPlayer {
+  id: string
+  nickname: string
+  connected?: boolean
 }
 
 /** Projection « lecture seule » émise par `question:reading` (Task 3, moteur
@@ -76,7 +92,6 @@ interface SliderCorrect {
   step?: number
 }
 
-
 interface ReconnectAck {
   playerId: string
   phase: 'lobby' | 'question' | 'reveal' | 'scoreboard' | 'podium'
@@ -95,11 +110,43 @@ interface AnswerAck {
 type ResultKind = 'correct' | 'partial' | 'incorrect' | 'timeout'
 
 /** Forme décorative des tuiles mcq : le serveur n'envoie que des labels, la
- * forme (triangle/losange/rond/carré) est une reconstitution purement
- * visuelle côté client — jamais un signal de correction. Cycle au-delà de 4
- * options (le schéma en autorise jusqu'à 6). */
+ * forme (étoile/goutte/vague/flocon, cf. AnswerShape) est une reconstitution
+ * purement visuelle côté client, jamais un signal de correction. Les
+ * identifiants restent triangle/diamond/circle/square (emplacements), cycle
+ * au-delà de 4 options (le schéma en autorise jusqu'à 6). */
 type TileShape = 'triangle' | 'diamond' | 'circle' | 'square'
 const MCQ_SHAPES: readonly TileShape[] = ['triangle', 'diamond', 'circle', 'square']
+
+/** Variables CSS d'un aplat de réponse (couleur + encre + ombre portée) pour
+ * une grande tuile de verdict, depuis les tokens `--ans-*` (une option, une
+ * couleur partout). */
+function tileVars(shape: TileShape): CSSProperties {
+  return {
+    ['--tile-color' as string]: `var(--ans-${shape})`,
+    ['--tile-ink' as string]: `var(--ans-${shape}-ink)`,
+    ['--tile-shadow' as string]: `var(--ans-${shape}-sh)`,
+  } as CSSProperties
+}
+
+/** Pengou qui se dandine sur le lobby (décoratif, aria-hidden) — l'oscillation
+ * est portée par `.player-penguin` et coupée sous prefers-reduced-motion. */
+function WaddlePenguin() {
+  return (
+    <svg className="player-penguin" width="150" height="176" viewBox="0 0 64 76" aria-hidden="true" focusable="false">
+      <ellipse cx="32" cy="40" rx="20" ry="28" fill="#12305a" />
+      <ellipse cx="32" cy="46" rx="13" ry="20" fill="#ffffff" />
+      <ellipse cx="13" cy="44" rx="4" ry="12" fill="#12305a" transform="rotate(18 13 44)" />
+      <ellipse cx="51" cy="44" rx="4" ry="12" fill="#12305a" transform="rotate(-18 51 44)" />
+      <circle cx="26" cy="27" r="3" fill="#ffffff" />
+      <circle cx="38" cy="27" r="3" fill="#ffffff" />
+      <circle cx="26.6" cy="27.6" r="1.5" fill="#0b2545" />
+      <circle cx="38.6" cy="27.6" r="1.5" fill="#0b2545" />
+      <path d="M28 32 L36 32 L32 37 Z" fill="#ff7a3c" />
+      <ellipse cx="25" cy="69" rx="6" ry="2.6" fill="#ff7a3c" />
+      <ellipse cx="39" cy="69" rx="6" ry="2.6" fill="#ff7a3c" />
+    </svg>
+  )
+}
 
 function evaluateMcq(correct: McqCorrect, optionIndex: number | null): ResultKind {
   if (optionIndex === null) return 'timeout'
@@ -120,10 +167,7 @@ function evaluateText(correct: TextCorrect, text: string): ResultKind {
     : 'incorrect'
 }
 
-function evaluateSlider(
-  correct: SliderCorrect,
-  value: number | null,
-): { kind: ResultKind; diff: number | null } {
+function evaluateSlider(correct: SliderCorrect, value: number | null): { kind: ResultKind; diff: number | null } {
   if (value === null) return { kind: 'timeout', diff: null }
   const diff = Math.abs(value - correct.correct)
   const tolerance = sliderTolerance(correct.min, correct.max)
@@ -160,6 +204,22 @@ export function PlayerLive() {
   const [lastAward, setLastAward] = useState<number | null>(null)
   const [lastRanking, setLastRanking] = useState<RankingEntry[]>([])
   const [podiumTop, setPodiumTop] = useState<RankingEntry[]>([])
+
+  // Enchaînement automatique : horodatage serveur de la prochaine bascule (diffusé par
+  // `auto:advance`), reflété en compte à rebours — jamais un minuteur local indépendant.
+  const [autoNextAt, setAutoNextAt] = useState<number | null>(null)
+  const [autoRemaining, setAutoRemaining] = useState<number | null>(null)
+
+  // Compteur « manchots sur la glace » (lobby) — alimenté par `lobby:update`,
+  // vraie donnée serveur ; `null` tant qu'aucune liste n'est arrivée (on
+  // n'invente pas de nombre).
+  const [lobbyCount, setLobbyCount] = useState<number | null>(null)
+
+  // Série de bonnes réponses consécutives — calculée côté client à partir des
+  // verdicts successifs (donnée locale honnête ; remise à zéro à la première
+  // erreur / au premier temps écoulé, et non récupérable après une
+  // reconnexion, voir l'effet de résultat plus bas).
+  const [streak, setStreak] = useState(0)
 
   // Réponse en cours de capture, remise à zéro à chaque nouvelle question.
   const [mcqOptionIndex, setMcqOptionIndex] = useState<number | null>(null)
@@ -221,9 +281,7 @@ export function PlayerLive() {
    *    fil normalement.
    */
   function handleRejectedAnswer(reason: string | undefined) {
-    setAnswerRejection(
-      reason ? `Réponse non prise en compte : ${reason}` : 'Réponse non prise en compte.',
-    )
+    setAnswerRejection(reason ? `Réponse non prise en compte : ${reason}` : 'Réponse non prise en compte.')
     if (reason === 'réponse invalide pour ce type de question') {
       setPhase('question')
     }
@@ -258,9 +316,7 @@ export function PlayerLive() {
       // rien n'a été comptabilisé. Rien ne prouve que la manche soit
       // terminée (c'est peut-être juste la socket qui a un accroc) : on
       // rouvre la question pour permettre un nouvel essai.
-      setAnswerRejection(
-        err instanceof Error ? `Réponse non envoyée (${err.message}).` : 'Réponse non envoyée.',
-      )
+      setAnswerRejection(err instanceof Error ? `Réponse non envoyée (${err.message}).` : 'Réponse non envoyée.')
       setPhase('question')
     }
   }
@@ -335,6 +391,7 @@ export function PlayerLive() {
       setLastAward(null)
       setAnswerAccepted(false)
       setAnswerRejection(null)
+      setAutoNextAt(null)
       setPhase('reading')
     })
 
@@ -347,6 +404,7 @@ export function PlayerLive() {
       setLastAward(null)
       setAnswerAccepted(false)
       setAnswerRejection(null)
+      setAutoNextAt(null)
       resetAnswer(view)
       setPhase('question')
     })
@@ -372,7 +430,19 @@ export function PlayerLive() {
 
     const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
       setPodiumTop(top)
+      setAutoNextAt(null)
       setPhase('podium')
+    })
+
+    const offAuto = on<{ nextAt: number | null }>('auto:advance', ({ nextAt }) => {
+      setAutoNextAt(nextAt)
+    })
+
+    // Compteur du lobby (« manchots sur la glace ») — diffusé à toute la room
+    // à chaque arrivée/départ, et rejoué sur `player:reconnect`. On ne garde
+    // que le nombre : aucun autre détail joueur n'est exposé côté joueur.
+    const offLobby = on<{ players: LobbyPlayer[] }>('lobby:update', ({ players }) => {
+      setLobbyCount(players.filter((p) => p.connected !== false).length)
     })
 
     return () => {
@@ -385,6 +455,8 @@ export function PlayerLive() {
       offReveal()
       offScoreboard()
       offPodium()
+      offLobby()
+      offAuto()
     }
     // Un seul montage : `emitAck`/`on` sont stables pour la durée de vie du
     // composant (voir useGameSocket.ts), `stored` ne change jamais après le
@@ -412,6 +484,22 @@ export function PlayerLive() {
     const id = window.setInterval(tick, 250)
     return () => window.clearInterval(id)
   }, [timer, phase])
+
+  // Compte à rebours inter-étapes (enchaînement automatique) — dérivé de l'horodatage serveur
+  // `autoNextAt`, comme le chrono de question (jamais un minuteur local autonome).
+  useEffect(() => {
+    if (autoNextAt === null) {
+      setAutoRemaining(null)
+      return
+    }
+    function tick() {
+      if (autoNextAt === null) return
+      setAutoRemaining(Math.max(0, Math.ceil((autoNextAt - Date.now()) / 1000)))
+    }
+    tick()
+    const id = window.setInterval(tick, 250)
+    return () => window.clearInterval(id)
+  }, [autoNextAt])
 
   // Cue sonore/visuel d'urgence quand il reste 5 s — fixée une seule fois au
   // passage à 5 (les ticks suivants ne re-déclenchent pas la même valeur).
@@ -510,77 +598,91 @@ export function PlayerLive() {
     }
   }
 
-  function renderRecap() {
+  // Présentation de la bonne réponse sur le verdict (états raté / temps
+  // écoulé, et — pour slider — toujours). La VÉRITÉ reste `evaluation()` : ici
+  // on ne fait qu'AFFICHER `revealPayload.correct` et, le cas échéant, le choix
+  // réellement comptabilisé du joueur (`effectiveXxx`, jamais un choix local
+  // rejeté).
+  function renderVerdictAnswer() {
     if (!question || !revealPayload) return null
     switch (question.type) {
       case 'mcq': {
         const correct = revealPayload.correct as McqCorrect
+        const ci = correct.options.findIndex((o) => o.correct)
+        const shape = MCQ_SHAPES[(ci < 0 ? 0 : ci) % MCQ_SHAPES.length]
+        const chosen = effectiveMcqOptionIndex
+        const wrong = chosen !== null && !correct.options[chosen]?.correct
         return (
-          <div className="player-tiles">
-            {correct.options.map((opt, index) => (
-              <AnswerTile
-                key={index}
-                shape={MCQ_SHAPES[index % MCQ_SHAPES.length]}
-                label={opt.label}
-                disabled
-                reveal={opt.correct ? 'correct' : index === effectiveMcqOptionIndex ? 'incorrect' : null}
-              />
-            ))}
-          </div>
+          <>
+            <div className="player-answer-tile" style={tileVars(shape)}>
+              <span className="player-answer-tile__shape">
+                <AnswerShape shape={shape} size={40} />
+              </span>
+              <span>
+                {correct.options[ci]?.label}
+                <span className="visually-hidden"> (bonne réponse)</span>
+              </span>
+            </div>
+            {wrong && (
+              <span className="player-verdict__your">
+                <AnswerShape shape={MCQ_SHAPES[chosen % MCQ_SHAPES.length]} size={20} />
+                Ton choix : {correct.options[chosen]?.label}
+              </span>
+            )}
+          </>
         )
       }
       case 'truefalse': {
         const correct = revealPayload.correct as TrueFalseCorrect
-        const correctLabel = correct.correct ? 'Vrai' : 'Faux'
-        const chose = effectiveBoolChoice === null ? null : effectiveBoolChoice ? 'Vrai' : 'Faux'
-        const wrong = chose !== null && effectiveBoolChoice !== correct.correct
+        const shape: TileShape = correct.correct ? 'triangle' : 'diamond'
+        const chose = effectiveBoolChoice
+        const wrong = chose !== null && chose !== correct.correct
         return (
           <>
-            <div className="player-result__recap-line player-result__recap-line--correct">
-              <span className="player-result__recap-mark" aria-hidden="true">
-                ✓
+            <div className="player-answer-tile" style={tileVars(shape)}>
+              <span className="player-answer-tile__shape">
+                <AnswerShape shape={shape} size={40} />
               </span>
-              <span>Bonne réponse : {correctLabel}</span>
+              <span>
+                {correct.correct ? 'Vrai' : 'Faux'}
+                <span className="visually-hidden"> (bonne réponse)</span>
+              </span>
             </div>
             {wrong && (
-              <div className="player-result__recap-line player-result__recap-line--yours">
-                <span className="player-result__recap-mark" aria-hidden="true">
-                  ✕
-                </span>
-                <span>Votre réponse : {chose}</span>
-              </div>
+              <span className="player-verdict__your">
+                <AnswerShape shape={chose ? 'triangle' : 'diamond'} size={20} />
+                Ton choix : {chose ? 'Vrai' : 'Faux'}
+              </span>
             )}
           </>
         )
       }
       case 'text': {
         const correct = revealPayload.correct as TextCorrect
+        const answers = correct.answers.filter((a) => a.trim().length > 0)
         return (
-          <div className="player-result__recap-line player-result__recap-line--correct">
-            <span className="player-result__recap-mark" aria-hidden="true">
-              ✓
-            </span>
-            <span>
-              Réponse(s) acceptée(s) :{' '}
-              {correct.answers.filter((a) => a.trim().length > 0).join(', ')}
-            </span>
-          </div>
+          <>
+            <div className="player-answer-tile player-answer-tile--neutral">
+              <span>
+                {answers.join(', ')}
+                <span className="visually-hidden"> (réponse acceptée)</span>
+              </span>
+            </div>
+            {effectiveTextValue.trim().length > 0 && (
+              <span className="player-verdict__your">Ta réponse : {effectiveTextValue}</span>
+            )}
+          </>
         )
       }
       case 'slider': {
         const correct = revealPayload.correct as SliderCorrect
         return (
-          <>
-            <div className="player-result__recap-line player-result__recap-line--correct">
-              <span className="player-result__recap-mark" aria-hidden="true">
-                ✓
-              </span>
-              <span>Valeur correcte : {correct.correct}</span>
+          <div className="player-verdict__recap">
+            <div className="player-verdict__recap-line">Bonne valeur : {correct.correct}</div>
+            <div className="player-verdict__recap-line">
+              Ton estimation : {effectiveSliderValue !== null ? effectiveSliderValue : 'aucune'}
             </div>
-            <div className="player-result__recap-line">
-              <span>Votre estimation : {effectiveSliderValue !== null ? effectiveSliderValue : 'aucune'}</span>
-            </div>
-          </>
+          </div>
         )
       }
     }
@@ -598,8 +700,7 @@ export function PlayerLive() {
   // (suivi Plan 7) ; côté client, on se contente de ne pas AFFICHER la contradiction : un delta de
   // score strictement positif pour cette manche est la preuve qu'UNE réponse a bien été retenue,
   // même si on ne sait plus laquelle.
-  const reconnectMismatch =
-    evalResult?.kind === 'timeout' && lastAward !== null && lastAward > 0
+  const reconnectMismatch = evalResult?.kind === 'timeout' && lastAward !== null && lastAward > 0
 
   // Cue de résultat — une seule fois par transition vers 'result'. `evalResult`/
   // `reconnectMismatch` sont volontairement absents des deps : ils sont
@@ -608,25 +709,38 @@ export function PlayerLive() {
   // (même logique que les effets `phase === 'result'` ci-dessus).
   useEffect(() => {
     if (phase !== 'result' || !evalResult) return
+    const win = reconnectMismatch || evalResult.kind === 'correct' || evalResult.kind === 'partial'
+    // Série : +1 sur une réussite (y compris crédit partiel et réponse
+    // comptée malgré une reconnexion), remise à zéro sinon. Calcul local
+    // honnête — le serveur ne diffuse pas de « streak ».
+    setStreak((s) => (win ? s + 1 : 0))
     // On passe l'élément du titre de résultat en `ctx.el` : c'est ce qui permet à
     // `pulseGreen`/`shake` (motion/effects.ts) de réellement animer quelque chose — sans
     // contexte, ces effets sont des no-op (voir le commentaire en tête d'effects.ts).
-    if (reconnectMismatch || evalResult.kind === 'correct' || evalResult.kind === 'partial')
-      cue('answer.correct', { el: resultHeadingRef.current ?? undefined })
+    if (win) cue('answer.correct', { el: resultHeadingRef.current ?? undefined })
     else if (evalResult.kind === 'incorrect') cue('answer.incorrect', { el: resultHeadingRef.current ?? undefined })
     // 'timeout' → aucun cue (le joueur n'a pas répondu)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase])
 
+  // Affichage « n / N » : positionnel, fourni par le serveur (projection
+  // `question:show`) ; absent → on n'affiche pas de numéro (jamais inventé).
+  const qShownIndex = typeof question?.index === 'number' ? question.index + 1 : null
+  const qTotal = typeof question?.total === 'number' ? question.total : null
+  // Barre de progression = fraction de temps restant (donnée réelle du chrono).
+  const timeFraction = question ? Math.max(0, Math.min(1, (remaining ?? question.timeLimit) / question.timeLimit)) : 0
+  const kicker =
+    question?.type === 'truefalse'
+      ? 'Vrai ou faux'
+      : question?.type === 'slider'
+        ? 'Curseur'
+        : question?.type === 'text'
+          ? 'Réponse libre'
+          : null
+
   return (
     <main className="player-screen" id="contenu-principal" tabIndex={-1}>
-      <div className="player-status-bar">
-        <span style={{ fontWeight: 700 }}>PIN {stored.pin}</span>
-        <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--ink-dim)' }}>
-          Score : {score}
-        </span>
-      </div>
-
+      <SoundToggle className="ab-soundtoggle--fixed" />
       {connection !== 'online' && (
         <p className={`player-net player-net--${connection}`} role="status" aria-live="polite">
           {connection === 'reconnecting' ? 'Reconnexion…' : 'Reconnecté, score conservé.'}
@@ -634,11 +748,47 @@ export function PlayerLive() {
       )}
 
       {phase === 'waiting' && (
-        <div className="player-waiting">
-          <h1>En attente de la prochaine question…</h1>
-          <p style={{ color: 'var(--ink-dim)' }}>
-            Restez sur cet écran. La question suivante s'affichera automatiquement.
-          </p>
+        <div className="player-lobby">
+          <div role="status" className="visually-hidden">
+            Tu as rejoint la partie. En attente du lancement.
+          </div>
+
+          <div className="player-lobby__top">
+            <Logo compact />
+            <span className="player-lobby__pin">PIN {stored.pin}</span>
+          </div>
+
+          <div className="player-lobby__hero">
+            <h1>Tu es sur la banquise !</h1>
+            <p style={{ color: 'var(--ink-dim)' }}>
+              En attente de la colonie
+              <span className="player-lobby__dots" aria-hidden="true">
+                <span>.</span>
+                <span>.</span>
+                <span>.</span>
+              </span>
+            </p>
+          </div>
+
+          <WaddlePenguin />
+
+          <div className="player-floe player-floe--back" aria-hidden="true" />
+          <div className="player-floe player-floe--front" aria-hidden="true" />
+
+          <div className="player-lobby__foot">
+            <span className="player-namepill">
+              {stored.nickname} <small>(toi)</small>
+            </span>
+            {lobbyCount !== null && (
+              <span className="player-count">
+                <b>{lobbyCount}</b>
+                <span>{lobbyCount > 1 ? 'manchots sur la glace' : 'manchot sur la glace'}</span>
+              </span>
+            )}
+            <span className="player-lobby__hint">
+              Regarde le grand écran : la partie démarre dès que l'animateur la lance.
+            </span>
+          </div>
         </div>
       )}
 
@@ -650,144 +800,189 @@ export function PlayerLive() {
         // le DOM tant que le serveur n'a pas diffusé `question:show` — cohérent
         // avec le rejet serveur des réponses hors phase 'question'
         // (`submitAnswer`, packages/game/src/engine.ts).
-        <div className="player-question player-question--reading">
-          <h1 className="player-question__prompt" tabIndex={-1} ref={promptRef}>
+        <div className="player-question">
+          <div className="player-question__spacer" />
+          <h1 className="player-question__prompt" style={{ textAlign: 'center' }} tabIndex={-1} ref={promptRef}>
             {reading.prompt}
           </h1>
-          <p role="status" aria-live="polite">
+          <p className="player-status" role="status" aria-live="polite">
             Préparez-vous…
           </p>
+          <div className="player-question__spacer" />
         </div>
       )}
 
       {(phase === 'question' || phase === 'answered') && question && (
         <div className="player-question">
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
-            <TimerRing
-              remainingSeconds={remaining ?? question.timeLimit}
-              totalSeconds={question.timeLimit}
-            />
+          <div className="player-qhead">
+            <span className="player-qnum">
+              {qShownIndex !== null && (
+                <>
+                  {qShownIndex}
+                  {qTotal !== null && <span> / {qTotal}</span>}
+                </>
+              )}
+            </span>
+            <TimerPill remainingSeconds={remaining ?? question.timeLimit} totalSeconds={question.timeLimit} />
           </div>
+          <div className="player-qbar" aria-hidden="true">
+            <div className="player-qbar__fill" style={{ width: `${timeFraction * 100}%` }} />
+          </div>
+
+          {kicker && <span className="player-qtag">{kicker}</span>}
           <h1 className="player-question__prompt" tabIndex={-1} ref={promptRef}>
             {question.prompt}
           </h1>
 
-          <div style={{ marginTop: 'var(--space-4)' }}>
-            {phase === 'question' && (question.type === 'mcq' || question.type === 'truefalse') && (
-              <p className="player-commit-hint">Le premier appui valide votre réponse.</p>
-            )}
+          <div className="player-question__spacer" />
 
-            {question.type === 'mcq' && (
-              <div className="player-tiles">
-                {(question.payload as McqShowPayload).options.map((opt, index) => (
-                  <AnswerTile
-                    key={index}
-                    shape={MCQ_SHAPES[index % MCQ_SHAPES.length]}
-                    label={opt.label}
-                    selected={phase === 'answered' && mcqOptionIndex === index}
-                    disabled={phase === 'answered'}
-                    onClick={() => {
-                      setMcqOptionIndex(index)
-                      submitAnswer({ optionIndex: index })
-                    }}
-                  />
-                ))}
-              </div>
-            )}
+          {phase === 'question' && (question.type === 'mcq' || question.type === 'truefalse') && (
+            <p className="player-commit-hint">Le premier appui valide ta réponse.</p>
+          )}
 
-            {question.type === 'truefalse' && (
-              <div className="player-truefalse">
-                {[true, false].map((val) => (
-                  <button
-                    key={String(val)}
-                    type="button"
-                    className={`player-tf-btn${
-                      phase === 'answered' && boolChoice === val ? ' player-tf-btn--selected' : ''
-                    }`}
-                    disabled={phase === 'answered'}
-                    aria-pressed={phase === 'answered' && boolChoice === val}
-                    onClick={() => {
-                      setBoolChoice(val)
-                      submitAnswer({ value: val })
-                    }}
-                  >
-                    {val ? 'Vrai' : 'Faux'}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {question.type === 'text' && (
-              <form
-                className="player-text-answer"
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  if (textValue.trim().length > 0) submitAnswer({ text: textValue })
-                }}
-              >
-                <label htmlFor="player-text-input" className="visually-hidden">
-                  Votre réponse
-                </label>
-                <input
-                  id="player-text-input"
-                  type="text"
-                  value={textValue}
+          {question.type === 'mcq' && (
+            <div className="player-tiles" role="group" aria-label="Réponses">
+              {(question.payload as McqShowPayload).options.map((opt, index) => (
+                <AnswerTile
+                  key={index}
+                  shape={MCQ_SHAPES[index % MCQ_SHAPES.length]}
+                  label={opt.label}
+                  selected={phase === 'answered' && mcqOptionIndex === index}
+                  dimmed={phase === 'answered' && mcqOptionIndex !== index}
                   disabled={phase === 'answered'}
-                  onChange={(e) => setTextValue(e.target.value)}
-                  placeholder="Tapez votre réponse"
-                  autoComplete="off"
-                />
-                <Button
-                  variant="primary"
-                  type="submit"
-                  disabled={phase === 'answered' || textValue.trim().length === 0}
-                >
-                  Valider
-                </Button>
-              </form>
-            )}
-
-            {question.type === 'slider' && (
-              <form
-                className="player-slider-answer"
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  setSliderTouched(true)
-                  submitAnswer({ value: sliderValue })
-                }}
-              >
-                <output htmlFor="player-slider-input">{sliderValue}</output>
-                <label htmlFor="player-slider-input" className="visually-hidden">
-                  Votre estimation (de {(question.payload as SliderShowPayload).min} à{' '}
-                  {(question.payload as SliderShowPayload).max})
-                </label>
-                <input
-                  id="player-slider-input"
-                  type="range"
-                  min={(question.payload as SliderShowPayload).min}
-                  max={(question.payload as SliderShowPayload).max}
-                  value={sliderValue}
-                  disabled={phase === 'answered'}
-                  onChange={(e) => {
-                    setSliderValue(Number(e.target.value))
-                    setSliderTouched(true)
+                  onClick={() => {
+                    setMcqOptionIndex(index)
+                    submitAnswer({ optionIndex: index })
                   }}
                 />
-                <Button variant="primary" type="submit" disabled={phase === 'answered'}>
-                  Valider
-                </Button>
-              </form>
-            )}
-          </div>
+              ))}
+            </div>
+          )}
+
+          {question.type === 'truefalse' && (
+            <div className="player-duo" role="group" aria-label="Réponses">
+              {[true, false].map((val) => (
+                <AnswerTile
+                  key={String(val)}
+                  shape={val ? 'triangle' : 'diamond'}
+                  label={val ? 'Vrai' : 'Faux'}
+                  selected={phase === 'answered' && boolChoice === val}
+                  dimmed={phase === 'answered' && boolChoice !== val}
+                  disabled={phase === 'answered'}
+                  onClick={() => {
+                    setBoolChoice(val)
+                    submitAnswer({ value: val })
+                  }}
+                />
+              ))}
+            </div>
+          )}
+
+          {question.type === 'text' && (
+            <form
+              className="player-text"
+              onSubmit={(e) => {
+                e.preventDefault()
+                if (textValue.trim().length > 0) submitAnswer({ text: textValue })
+              }}
+            >
+              <label htmlFor="player-text-input" className="visually-hidden">
+                Ta réponse
+              </label>
+              <input
+                id="player-text-input"
+                type="text"
+                maxLength={40}
+                value={textValue}
+                disabled={phase === 'answered'}
+                onChange={(e) => setTextValue(e.target.value)}
+                placeholder="Tape ta réponse…"
+                autoComplete="off"
+              />
+              <div className="player-text__row">
+                <span>Les accents et majuscules ne comptent pas.</span>
+                <span className="player-text__count">{textValue.length}/40</span>
+              </div>
+              <button
+                type="submit"
+                className="player-cta"
+                disabled={phase === 'answered' || textValue.trim().length === 0}
+              >
+                Envoyer
+              </button>
+            </form>
+          )}
+
+          {question.type === 'slider' &&
+            (() => {
+              const sp = question.payload as SliderShowPayload
+              const clamp = (v: number) => Math.max(sp.min, Math.min(sp.max, v))
+              return (
+                <form
+                  className="player-slider"
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    setSliderTouched(true)
+                    submitAnswer({ value: sliderValue })
+                  }}
+                >
+                  <div className="player-slider__value">
+                    <output htmlFor="player-slider-input">{sliderValue}</output>
+                  </div>
+                  <label htmlFor="player-slider-input" className="visually-hidden">
+                    Ton estimation (de {sp.min} à {sp.max})
+                  </label>
+                  <input
+                    id="player-slider-input"
+                    type="range"
+                    min={sp.min}
+                    max={sp.max}
+                    value={sliderValue}
+                    disabled={phase === 'answered'}
+                    onChange={(e) => {
+                      setSliderValue(Number(e.target.value))
+                      setSliderTouched(true)
+                    }}
+                  />
+                  <div className="player-slider__scale" aria-hidden="true">
+                    <span>{sp.min}</span>
+                    <span>{sp.max}</span>
+                  </div>
+                  <div className="player-slider__steps">
+                    <button
+                      type="button"
+                      className="player-step"
+                      aria-label="Diminuer"
+                      disabled={phase === 'answered'}
+                      onClick={() => {
+                        setSliderValue((v) => clamp(v - 1))
+                        setSliderTouched(true)
+                      }}
+                    >
+                      −
+                    </button>
+                    <button type="submit" className="player-cta" disabled={phase === 'answered'}>
+                      Valider
+                    </button>
+                    <button
+                      type="button"
+                      className="player-step"
+                      aria-label="Augmenter"
+                      disabled={phase === 'answered'}
+                      onClick={() => {
+                        setSliderValue((v) => clamp(v + 1))
+                        setSliderTouched(true)
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
+                </form>
+              )
+            })()}
 
           {phase === 'answered' && !answerRejection && (
-            <p
-              className="player-answered"
-              role="status"
-              aria-live="polite"
-              ref={answeredRef}
-              tabIndex={-1}
-            >
+            <p className="player-answered" role="status" aria-live="polite" ref={answeredRef} tabIndex={-1}>
               {answeredMessage}
             </p>
           )}
@@ -811,55 +1006,121 @@ export function PlayerLive() {
         // alors `null` (elle a besoin de `question` pour interpréter `revealPayload.correct`) :
         // sans ce repli explicite, l'écran resterait entièrement vide jusqu'à la question
         // suivante. Repli honnête plutôt qu'un rendu fabriqué à partir de rien.
-        <div className="player-result" role="status">
-          <h1 ref={resultHeadingRef} tabIndex={-1}>
-            Résultat indisponible pour cette question
+        <div className="player-verdict player-verdict--timeout" role="status">
+          <div className="player-verdict__spacer" />
+          <h1 className="player-verdict__title" ref={resultHeadingRef} tabIndex={-1}>
+            Résultat indisponible
           </h1>
-          <p style={{ color: 'var(--ink-dim)' }}>La question suivante arrive…</p>
+          <p className="player-verdict__sub">La question suivante arrive…</p>
+          <div className="player-verdict__spacer" />
         </div>
       )}
 
-      {phase === 'result' && evalResult && (
-        <div
-          className={`player-result player-result--${
-            reconnectMismatch || evalResult.kind === 'correct'
-              ? 'correct'
-              : evalResult.kind === 'partial'
-                ? 'partial'
-                : 'incorrect'
-          }`}
-          role="status"
-        >
-          <h1 ref={resultHeadingRef} tabIndex={-1}>
-            {reconnectMismatch
-              ? 'Réponse comptabilisée'
-              : evalResult.kind === 'timeout'
-                ? 'Temps écoulé'
-                : evalResult.kind === 'correct'
-                  ? 'Bonne réponse !'
-                  : evalResult.kind === 'partial'
-                    ? `À ${evalResult.diff} près !`
-                    : 'Mauvaise réponse'}
-          </h1>
-          <p className="player-result__points">
-            {lastAward === null ? '…' : `+${lastAward}`}
-            {evalResult.kind === 'partial' ? ' points partiels' : ' points'}
-          </p>
+      {phase === 'result' &&
+        evalResult &&
+        (() => {
+          const win = reconnectMismatch || evalResult.kind === 'correct' || evalResult.kind === 'partial'
+          const stateClass = win ? 'juste' : evalResult.kind === 'timeout' ? 'timeout' : 'rate'
+          const title = reconnectMismatch
+            ? 'Réponse comptée'
+            : evalResult.kind === 'timeout'
+              ? 'Temps écoulé'
+              : evalResult.kind === 'correct'
+                ? 'Juste !'
+                : evalResult.kind === 'partial'
+                  ? `À ${evalResult.diff} près !`
+                  : 'Raté'
+          return (
+            <div className={`player-verdict player-verdict--${stateClass}`} role="status">
+              <div className="player-verdict__meta">
+                <span>
+                  {qShownIndex !== null && qTotal !== null ? `Question ${qShownIndex} / ${qTotal}` : 'Résultat'}
+                </span>
+                <span>{stored.nickname}</span>
+              </div>
 
-          <div className="player-result__recap">{renderRecap()}</div>
+              <div className="player-verdict__spacer" />
 
-          {myRank !== null && <p>Classement provisoire : {myRank}ᵉ place</p>}
-        </div>
-      )}
+              {win && !reconnectMismatch && evalResult.kind === 'correct' && (
+                <svg className="player-verdict__check" width="132" height="132" viewBox="0 0 48 48" aria-hidden="true">
+                  <circle cx="24" cy="24" r="23" fill="#0b2545" />
+                  <circle cx="24" cy="24" r="23" fill="none" stroke="#9fd3e6" strokeWidth="2" />
+                  <path
+                    className="draw"
+                    d="M13 25 L21 32 L35 17"
+                    fill="none"
+                    stroke="#ffffff"
+                    strokeWidth="4.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              )}
+
+              <h1 className="player-verdict__title" ref={resultHeadingRef} tabIndex={-1}>
+                {title}
+              </h1>
+
+              {win && (
+                <p className="player-verdict__points">
+                  {lastAward === null ? '…' : `+${lastAward}`}
+                  {evalResult.kind === 'partial' ? ' pts partiels' : ' pts'}
+                </p>
+              )}
+
+              {win && streak >= 2 && (
+                <div className="player-streak">
+                  {Array.from({ length: Math.min(streak, 5) }).map((_, i) => (
+                    <svg key={i} viewBox="0 0 24 24" aria-hidden="true">
+                      <circle cx="12" cy="12" r="7" fill="#00708c" />
+                    </svg>
+                  ))}
+                  Série de {streak}
+                </div>
+              )}
+
+              {!win && (
+                <>
+                  <p className="player-verdict__sub">
+                    {evalResult.kind === 'timeout'
+                      ? 'Pas de réponse à temps. La bonne réponse :'
+                      : 'La banquise est glissante. La bonne réponse :'}
+                  </p>
+                  {renderVerdictAnswer()}
+                </>
+              )}
+
+              <div className="player-verdict__spacer" />
+
+              {myRank !== null && (
+                <div className="player-rankbar">
+                  <span className="player-rankbar__rank">
+                    Tu es <strong>{myRank}ᵉ</strong>
+                    {lastRanking.length > 0 ? ` sur ${lastRanking.length}` : ''}
+                  </span>
+                  <span className="player-rankbar__score">{score.toLocaleString('fr-FR')}</span>
+                </div>
+              )}
+
+              {autoRemaining !== null && (
+                <p className="player-auto-countdown" aria-live="polite">
+                  Question suivante dans {autoRemaining} s
+                </p>
+              )}
+            </div>
+          )
+        })()}
 
       {phase === 'podium' && (
         <div className="player-result" role="status">
           <h1 ref={podiumHeadingRef} tabIndex={-1}>
             Partie terminée !
           </h1>
-          <p className="player-result__points">Score final : {score}</p>
+          <p className="player-result__points">Score final : {score.toLocaleString('fr-FR')}</p>
           {myRank !== null ? (
-            <p>Vous terminez {myRank}ᵉ place.</p>
+            <p>
+              Tu termines {myRank}ᵉ sur {lastRanking.length || podiumTop.length}.
+            </p>
           ) : (
             <p>Merci d'avoir joué !</p>
           )}
@@ -869,7 +1130,7 @@ export function PlayerLive() {
                 <li key={entry.playerId} className="player-result__recap-line">
                   <span>
                     {index + 1}. {entry.nickname} : {entry.score} points
-                    {entry.playerId === stored.playerId ? ' (vous)' : ''}
+                    {entry.playerId === stored.playerId ? ' (toi)' : ''}
                   </span>
                 </li>
               ))}

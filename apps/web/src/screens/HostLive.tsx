@@ -181,6 +181,15 @@ export function HostLive() {
   const [ranking, setRanking] = useState<RankingEntry[]>([])
   const [podiumTop, setPodiumTop] = useState<RankingEntry[]>([])
 
+  // Enchaînement automatique des étapes (demande produit) : l'hôte bascule le mode, le serveur
+  // planifie l'avance vers la question suivante après une pause sur le classement. Activé par
+  // défaut (côté serveur aussi — voir `host:create`/`DEFAULT_AUTO_ADVANCE`, game-gateway.ts), donc
+  // cet état local démarre à `true` sans aller-retour. `autoNextAt` : horodatage serveur de la
+  // prochaine bascule (diffusé par `auto:advance`), `null` hors étape classement ou mode désactivé.
+  const [autoAdvance, setAutoAdvance] = useState(true)
+  const [autoNextAt, setAutoNextAt] = useState<number | null>(null)
+  const [autoRemaining, setAutoRemaining] = useState<number | null>(null)
+
   const [actionPending, setActionPending] = useState(false)
   const [actionError, setActionError] = useState<string | null>(null)
   // `host:skip` déclenche EXACTEMENT le même reveal+scoreboard serveur que
@@ -250,6 +259,7 @@ export function HostLive() {
       setRemaining(null)
       setRevealPayload(null)
       setProgressAnswered(0)
+      setAutoNextAt(null)
       setPhase('reading')
     })
 
@@ -261,6 +271,7 @@ export function HostLive() {
       setRemaining(null)
       setRevealPayload(null)
       setProgressAnswered(0)
+      setAutoNextAt(null)
       setPhase('question')
     })
 
@@ -287,7 +298,15 @@ export function HostLive() {
 
     const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
       setPodiumTop(top)
+      setAutoNextAt(null)
       setPhase('podium')
+    })
+
+    // Enchaînement automatique : le serveur diffuse l'horodatage de la prochaine bascule (ou
+    // `null` quand l'hôte coupe le mode) — on ne fait que le refléter, jamais un minuteur local
+    // indépendant (même discipline que le chrono de question).
+    const offAuto = on<{ nextAt: number | null }>('auto:advance', ({ nextAt }) => {
+      setAutoNextAt(nextAt)
     })
 
     // Reprise (Task 8) : émis en DERNIER dans CE MÊME effet — tous les `on(...)` ci-dessus sont
@@ -304,11 +323,12 @@ export function HostLive() {
     // `phase` en dehors d'un skip — voir son handler ci-dessus).
     let cancelled = false
     if (!navState?.pin && sessionId) {
-      emitAck<{ sessionId?: string; pin?: string; phase?: UiPhase }>('host:reconnect', { sessionId })
+      emitAck<{ sessionId?: string; pin?: string; phase?: UiPhase; autoAdvance?: boolean }>('host:reconnect', { sessionId })
         .then((res) => {
           if (cancelled) return
           if (res.pin) setPin(res.pin)
           if (res.phase) setPhase(res.phase)
+          if (typeof res.autoAdvance === 'boolean') setAutoAdvance(res.autoAdvance)
           setResuming(false)
         })
         .catch((err) => {
@@ -334,6 +354,7 @@ export function HostLive() {
       offReveal()
       offScoreboard()
       offPodium()
+      offAuto()
     }
     // Un seul montage : `on` est stable pour la durée de vie de la socket
     // partagée (voir useGameSocket.ts).
@@ -384,6 +405,26 @@ export function HostLive() {
     const id = window.setInterval(tick, 250)
     return () => window.clearInterval(id)
   }, [timer, phase])
+
+  /* ---------------------------------------------------------------- */
+  /* Compte à rebours inter-étapes (enchaînement automatique) — dérivé */
+  /* de l'horodatage serveur `autoNextAt`, jamais un minuteur local    */
+  /* indépendant (c'est le serveur qui planifie la bascule).           */
+  /* ---------------------------------------------------------------- */
+
+  useEffect(() => {
+    if (autoNextAt === null) {
+      setAutoRemaining(null)
+      return
+    }
+    function tick() {
+      if (autoNextAt === null) return
+      setAutoRemaining(Math.max(0, Math.ceil((autoNextAt - Date.now()) / 1000)))
+    }
+    tick()
+    const id = window.setInterval(tick, 250)
+    return () => window.clearInterval(id)
+  }, [autoNextAt])
 
   // Annonce debouncée de l'arrivée des joueurs (lobby uniquement) — pas une
   // annonce par joueur.
@@ -523,6 +564,20 @@ export function HostLive() {
   function advance() {
     void runHostAction('host:next')
   }
+
+  /** Bascule le mode d'enchaînement automatique. Optimiste côté UI (coche immédiate), puis
+   * `host:setAuto` côté serveur : couper le mode annule l'avance planifiée et efface le compte à
+   * rebours (le serveur rediffuse `auto:advance { nextAt: null }`, géré par l'abonnement). Un échec
+   * réseau laisse l'état serveur faire foi au prochain événement. */
+  function toggleAuto(next: boolean) {
+    setAutoAdvance(next)
+    if (!next) setAutoNextAt(null)
+    emitAck('host:setAuto', { enabled: next }).catch(() => {})
+  }
+
+  /** Libellé réutilisé sur les vues révélation et classement quand une avance est en attente. */
+  const autoCountdownLabel =
+    autoAdvance && autoRemaining !== null ? `Question suivante dans ${autoRemaining} s` : null
 
   async function createScreenLink() {
     if (!sessionId) return
@@ -717,6 +772,14 @@ export function HostLive() {
         )}
       </div>
 
+      {/* Enchaînement automatique : l'hôte garde la main pour reprendre le contrôle manuel. */}
+      <div className="host-field" style={{ padding: 'var(--space-3) var(--space-4)' }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', cursor: 'pointer' }}>
+          <input type="checkbox" checked={autoAdvance} onChange={(e) => toggleAuto(e.currentTarget.checked)} />
+          <span>Enchaînement automatique des étapes (10 s de pause sur le classement)</span>
+        </label>
+      </div>
+
       <main className="ab-shell__main hostlive-main" id="contenu-principal" tabIndex={-1}>
         <h1 className="visually-hidden">Contrôleur hôte live</h1>
 
@@ -860,6 +923,11 @@ export function HostLive() {
                   <Button variant="primary" type="button" onClick={goToScoreboard}>
                     Afficher le classement
                   </Button>
+                  {autoCountdownLabel && (
+                    <p className="hostlive-controls__hint" role="status" aria-live="polite">
+                      {autoCountdownLabel}
+                    </p>
+                  )}
                 </div>
               </div>
             )}
@@ -877,6 +945,11 @@ export function HostLive() {
                   <Button variant="primary" type="button" disabled={actionPending} onClick={advance}>
                     {actionPending ? '…' : 'Suivant'}
                   </Button>
+                  {autoCountdownLabel && (
+                    <p className="hostlive-controls__hint" role="status" aria-live="polite">
+                      {autoCountdownLabel}
+                    </p>
+                  )}
                 </div>
               </div>
             )}

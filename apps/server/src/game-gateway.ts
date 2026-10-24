@@ -52,7 +52,30 @@ type SessionMeta = {
    * serveur. `null` hors phase 'question' ou une fois consommé/annulé. Toujours nettoyé
    * (`clearQuestionTimeout`) avant toute transition (reveal/skip/next) ou fin de session. */
   questionTimeout: ReturnType<typeof setTimeout> | null
+  /** Enchaînement automatique des étapes (demande produit) : quand actif, la session avance seule
+   * de l'étape classement vers la question suivante (ou le podium) après `autoAdvanceDelayMs`, sans
+   * geste de l'hôte. Activé par défaut ; l'hôte bascule via `host:setAuto`. */
+  autoAdvance: boolean
+  /** Délai (ms) de la pause sur le classement avant l'avance automatique vers l'étape suivante.
+   * Borné côté `host:setAuto`. 10 s par défaut. */
+  autoAdvanceDelayMs: number
+  /** Minuteur planifiant l'avance automatique vers l'étape suivante (voir `scheduleAutoAdvance`).
+   * `null` hors étape classement, ou une fois consommé/annulé. Toujours nettoyé
+   * (`clearAdvanceTimeout`) avant toute transition manuelle/auto ou fin de session — sinon une
+   * avance fantôme se déclencherait sur une manche déjà avancée par ailleurs. */
+  advanceTimeout: ReturnType<typeof setTimeout> | null
+  /** Horodatage serveur (ms epoch) de la bascule automatique planifiée, diffusé aux clients
+   * (`auto:advance`) pour le compte à rebours, et rejoué au snapshot de reconnexion hôte. `null`
+   * quand aucune avance n'est planifiée. */
+  advanceNextAt: number | null
 }
+
+/** Valeurs par défaut de l'enchaînement automatique à la création d'une session. */
+const DEFAULT_AUTO_ADVANCE = true
+const DEFAULT_AUTO_ADVANCE_DELAY_MS = 10_000
+/** Bornes du délai réglable via `host:setAuto` (secondes) — garde-fou anti-valeur absurde. */
+const MIN_AUTO_ADVANCE_DELAY_S = 1
+const MAX_AUTO_ADVANCE_DELAY_S = 120
 
 type SocketData = {
   role?: 'host' | 'player' | 'screen'
@@ -174,6 +197,75 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     }
   }
 
+  /** Annule le minuteur d'avance automatique (`SessionMeta.advanceTimeout`), s'il y en a un en
+   * attente, et oublie l'horodatage planifié. Sûr à appeler inconditionnellement (no-op si `null`).
+   * Appelé au début de toute transition (manuelle ou auto), quand l'hôte désactive le mode auto, et
+   * à la fin de session — pour qu'une avance planifiée ne se déclenche jamais après coup sur une
+   * manche déjà avancée par ailleurs (idempotence : une seule avance par étape classement). */
+  function clearAdvanceTimeout(meta: SessionMeta): void {
+    if (meta.advanceTimeout) {
+      clearTimeout(meta.advanceTimeout)
+      meta.advanceTimeout = null
+    }
+    meta.advanceNextAt = null
+  }
+
+  /** Planifie l'avance automatique de l'étape classement vers la suite (question suivante ou
+   * podium) à l'échéance de `meta.autoAdvanceDelayMs`, puis diffuse `auto:advance { nextAt }` à
+   * toute la room pour le compte à rebours CLIENT (même esprit que `timer` : le serveur est seul
+   * maître de la bascule, le client ne fait que la refléter). No-op si le mode auto est désactivé,
+   * ou si la session est déjà au podium / encore en lobby (rien à enchaîner). Annule d'abord tout
+   * minuteur d'avance encore en attente (une seule avance par étape). À l'échéance, délègue à
+   * `doAdvance`, qui re-nettoie ce minuteur et route vers question suivante/podium. */
+  function scheduleAutoAdvance(sessionId: string, meta: SessionMeta, session: GameSession): void {
+    clearAdvanceTimeout(meta)
+    if (!meta.autoAdvance) return
+    if (session.phase === 'podium' || session.phase === 'lobby') return
+    const nextAt = Date.now() + meta.autoAdvanceDelayMs
+    meta.advanceNextAt = nextAt
+    io.to(roomName(sessionId)).emit('auto:advance', { nextAt })
+    const timer = setTimeout(() => {
+      void doAdvance(sessionId, meta).catch(() => {})
+    }, meta.autoAdvanceDelayMs)
+    // `.unref()` : ce minuteur ne doit jamais, à lui seul, maintenir le process en vie (cohérent
+    // avec `readingTimeout`/`questionTimeout`) — le serveur HTTP s'en charge déjà.
+    timer.unref()
+    meta.advanceTimeout = timer
+  }
+
+  /** Avance la session au-delà de l'étape classement : vers la question suivante (`startQuestionFlow`)
+   * ou, s'il n'en reste plus, vers le podium (fin de partie, statut DB + nettoyage `engine_state` +
+   * éviction mémoire différée). Corps commun de `host:next` (geste manuel) et de l'avance
+   * automatique planifiée par `scheduleAutoAdvance`. Nettoie d'abord TOUS les minuteurs (lecture,
+   * question, avance) pour ne jamais laisser une transition fantôme traîner. Filet de sécurité
+   * repris de l'ancien `host:next` : si la phase est encore 'question' (host:next anticipé, sans
+   * révélation préalable), on révèle d'abord en interne (crédit + persistance + diffusion) pour ne
+   * pas perdre silencieusement les points de la manche — via `doRevealBySession(..., false)` : pas
+   * de re-planification d'avance, puisqu'on avance justement là tout de suite. */
+  async function doAdvance(sessionId: string, meta: SessionMeta): Promise<GameSession> {
+    clearReadingTimeout(meta)
+    clearQuestionTimeout(meta)
+    clearAdvanceTimeout(meta)
+    const current = await engine.getSession(sessionId)
+    if (current.phase === 'question') {
+      await doRevealBySession(sessionId, meta, false)
+    }
+    if (current.currentIndex + 1 < current.questions.length) {
+      return startQuestionFlow(sessionId, meta)
+    }
+    const session = await engine.podium(sessionId)
+    await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
+      setSessionStatus(scope.db, meta.dbSessionId, 'ended'))
+    // Nettoyage `engine_state` passé le podium — cohérent avec l'ancien host:next (le rapport final
+    // reste lisible via session_player/answer_record).
+    await clearEngineState(systemDb, meta.dbSessionId)
+    const top = engine.ranking(session).slice(0, 3)
+    io.to(roomName(sessionId)).emit('podium', { top })
+    // Éviction mémoire différée (P1-6) : fenêtre de grâce pour une reconnexion au podium.
+    setTimeout(() => { void evictSessionMemory(sessionId, meta) }, PODIUM_EVICTION_DELAY).unref()
+    return session
+  }
+
   /** Planifie l'auto-révélation autoritative de la manche 'question' courante à l'expiration de
    * `timeLimit` (P1-7). No-op hors phase 'question'. À l'échéance, révèle via `doRevealBySession`,
    * en réutilisant la MÊME garde d'émission unique (`autoRevealedRounds`) que l'auto-révélation
@@ -215,6 +307,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   async function evictSessionMemory(sessionId: string, meta: SessionMeta): Promise<void> {
     clearReadingTimeout(meta)
     clearQuestionTimeout(meta)
+    clearAdvanceTimeout(meta)
     for (const playerId of meta.playerDbIds.keys()) activeSocketIdByPlayerId.delete(playerId)
     for (const [token, sid] of screenTokenToSessionId) {
       if (sid === sessionId) {
@@ -312,7 +405,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
    * `persistRound` après les deux mutations+diffusions, aucune opération lente (I/O réel) ne
    * s'intercale plus entre `engine.reveal()` et `engine.scoreboard()` : les deux s'exécutent
    * l'un après l'autre sans qu'un autre événement socket (ex. host:next) ne puisse s'intercaler. */
-  async function doRevealBySession(sessionId: string, meta: SessionMeta): Promise<void> {
+  async function doRevealBySession(sessionId: string, meta: SessionMeta, scheduleAuto = true): Promise<void> {
     // Annulation : une révélation manuelle (ou auto-révélation) qui arrive PENDANT la phase
     // 'reading' (ex. host:reveal anticipé — voir le garde dans le handler `host:reveal`, qui
     // laisse passer 'reading' comme n'importe quelle phase hors 'lobby') doit annuler le minuteur
@@ -349,6 +442,11 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     const scored = await engine.scoreboard(sessionId)
     const ranking = engine.ranking(scored)
     io.to(roomName(sessionId)).emit('scoreboard', { ranking })
+
+    // Enchaînement automatique : on vient d'entrer dans l'étape classement — si le mode auto est
+    // actif, planifie la bascule vers la suite. Désactivé (`scheduleAuto === false`) quand ce
+    // reveal n'est qu'un préalable à `doAdvance` (host:next anticipé), qui avance aussitôt.
+    if (scheduleAuto) scheduleAutoAdvance(sessionId, meta, scored)
 
     await persistRound(meta, revealed)
   }
@@ -405,6 +503,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       const ranking = engine.ranking(scored)
       io.to(roomName(sessionId)).emit('scoreboard', { ranking })
 
+      // Même enchaînement automatique qu'après une révélation : « Passer » amène aussi à l'étape
+      // classement, qui doit avancer seule si le mode auto est actif.
+      scheduleAutoAdvance(sessionId, meta, scored)
+
       reply({ ok: true })
     } catch (e) {
       reply({ error: message(e) })
@@ -439,6 +541,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
    * - `'question'` (readingTime === 0) : flux ACTUEL inchangé — `question:show` (projection
    *   anti-triche) + `timer` immédiatement, à toute la room. */
   async function startQuestionFlow(sessionId: string, meta: SessionMeta): Promise<GameSession> {
+    // Toute nouvelle question annule une éventuelle avance automatique encore planifiée pour
+    // l'étape classement qu'on quitte (geste manuel « Suivant », ou avance déjà déclenchée) — sinon
+    // elle se rejouerait plus tard sur une manche déjà avancée.
+    clearAdvanceTimeout(meta)
     const session = await engine.startQuestion(sessionId)
     if (session.phase === 'reading') {
       const view = engine.readingView(session)
@@ -598,6 +704,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           statusActiveSet: session.phase !== 'lobby',
           readingTimeout: null,
           questionTimeout: null,
+          autoAdvance: DEFAULT_AUTO_ADVANCE,
+          autoAdvanceDelayMs: DEFAULT_AUTO_ADVANCE_DELAY_MS,
+          advanceTimeout: null,
+          advanceNextAt: null,
         }
         sessionMetaByEngineId.set(session.id, meta)
         pinToSessionId.set(session.pin, row.id)
@@ -723,6 +833,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           statusActiveSet: false,
           readingTimeout: null,
           questionTimeout: null,
+          autoAdvance: DEFAULT_AUTO_ADVANCE,
+          autoAdvanceDelayMs: DEFAULT_AUTO_ADVANCE_DELAY_MS,
+          advanceTimeout: null,
+          advanceNextAt: null,
         })
         pinToSessionId.set(session.pin, session.id)
 
@@ -781,11 +895,23 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         data.sessionId = sessionId
         await socket.join(roomName(sessionId))
         emitReconnectSnapshot(socket, session)
+        // Enchaînement automatique : rejoue le compte à rebours en cours à l'hôte qui reprend en
+        // pleine étape classement (le minuteur serveur, lui, continue de tourner sans être touché),
+        // pour qu'il revoie le compteur plutôt qu'un écran figé.
+        if (meta.autoAdvance && meta.advanceNextAt !== null && (session.phase === 'reveal' || session.phase === 'scoreboard')) {
+          socket.emit('auto:advance', { nextAt: meta.advanceNextAt })
+        }
 
         // `sessionId` renvoyé ici est EXACTEMENT celui reçu en entrée (id unifié moteur↔DB,
         // Task 2) — c'est celui que la passerelle utilise partout ailleurs (room, tokens grand
         // écran…) ; le front s'en ressert pour le reste de la session (voir `HostLive.tsx`).
-        reply({ sessionId, pin: session.pin, phase: session.phase })
+        reply({
+          sessionId,
+          pin: session.pin,
+          phase: session.phase,
+          autoAdvance: meta.autoAdvance,
+          autoAdvanceDelaySeconds: meta.autoAdvanceDelayMs / 1000,
+        })
       } catch (e) {
         reply({ error: message(e) })
       }
@@ -841,51 +967,40 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
         const { sessionId, meta } = requireHost(socket)
-        // Annulation : un host:next anticipé (ex. hôte qui écourte la phase 'reading' avant
-        // échéance) doit annuler tout minuteur de fin de lecture encore planifié pour la manche
-        // qu'on quitte — sans ça il se déclencherait plus tard sur une manche déjà avancée
-        // (`revealAnswersFlow`/`engine.revealAnswers` restent de toute façon des no-op sûrs hors
-        // phase 'reading', mais on ne laisse jamais un minuteur obsolète traîner).
-        clearReadingTimeout(meta)
-        clearQuestionTimeout(meta) // P1-7 : idem pour l'auto-révélation de fin de question
-        // Bug important (revue finale) : engine.nextQuestion() ne révèle jamais la manche en
-        // cours — si l'hôte enchaîne host:next SANS host:reveal préalable (phase encore
-        // 'question'), les points de cette manche ne seraient jamais crédités ni persistés
-        // (answer_record) alors que la partie avance quand même vers la manche suivante /
-        // le podium. On révèle donc explicitement ici AVANT d'avancer, en réutilisant EXACTEMENT
-        // le chemin de host:reveal (credit + persist + emit question:reveal/scoreboard).
-        // Idempotent par construction : revealedRounds/credited (voir persistRound/engine.reveal)
-        // empêchent tout double-crédit si la manche a déjà été révélée entre-temps.
+        // Geste manuel « Suivant » : même corps que l'avance automatique (`doAdvance`), qui gère
+        // l'annulation de tous les minuteurs, la révélation de filet de sécurité d'une manche
+        // encore en phase 'question' (host:next anticipé, sans reveal préalable), puis le routage
+        // vers la question suivante ou le podium (statut DB + nettoyage + éviction différée).
+        const session = await doAdvance(sessionId, meta)
+        reply({ phase: session.phase })
+      } catch (e) {
+        reply({ error: message(e) })
+      }
+    })
+
+    // Enchaînement automatique des étapes (demande produit) : l'hôte active/désactive le mode et
+    // règle le délai de pause sur le classement. Réservé à l'hôte (`requireHost`). Activer pendant
+    // une étape classement en cours planifie l'avance immédiatement ; désactiver annule toute
+    // avance planifiée et notifie les clients d'effacer leur compte à rebours (`auto:advance`
+    // `{ nextAt: null }`).
+    socket.on('host:setAuto', async (payload: { enabled?: unknown; delaySeconds?: unknown } | undefined, ack?: (res: unknown) => void) => {
+      const reply = typeof ack === 'function' ? ack : () => {}
+      try {
+        const { sessionId, meta } = requireHost(socket)
+        if (typeof payload?.enabled === 'boolean') meta.autoAdvance = payload.enabled
+        if (typeof payload?.delaySeconds === 'number' && Number.isFinite(payload.delaySeconds)) {
+          const clamped = Math.min(Math.max(payload.delaySeconds, MIN_AUTO_ADVANCE_DELAY_S), MAX_AUTO_ADVANCE_DELAY_S)
+          meta.autoAdvanceDelayMs = clamped * 1000
+        }
         const current = await engine.getSession(sessionId)
-        if (current.phase === 'question') {
-          await doReveal(socket)
+        if (!meta.autoAdvance) {
+          clearAdvanceTimeout(meta)
+          io.to(roomName(sessionId)).emit('auto:advance', { nextAt: null })
+        } else if (current.phase === 'reveal' || current.phase === 'scoreboard') {
+          // Activé en pleine étape classement : enchaîne sans attendre la manche suivante.
+          scheduleAutoAdvance(sessionId, meta, current)
         }
-        // Fin de partie (inchangée) vs démarrage de la question suivante — seul ce dernier
-        // chemin passe désormais par `startQuestionFlow` (routage 'reading'/'question' identique
-        // à host:start).
-        if (current.currentIndex + 1 < current.questions.length) {
-          const session = await startQuestionFlow(sessionId, meta)
-          reply({ phase: session.phase })
-        } else {
-          const session = await engine.podium(sessionId)
-          await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
-            setSessionStatus(scope.db, meta.dbSessionId, 'ended'))
-          // Nettoyage (Task 4) : `engine_state` n'a plus lieu d'être conservé passé le podium —
-          // le rapport final reste entièrement lisible via `session_player`/`answer_record`
-          // (inchangés). N'affecte QUE la colonne DB : le cache en mémoire du store persistant
-          // garde l'état pour CE process (aucune régression de `host:reconnect`/`ranking` tant
-          // que le serveur ne redémarre pas) ; après un redémarrage, `listResumableSessions`
-          // exclurait de toute façon cette session (status déjà 'ended' ci-dessus) — ce nettoyage
-          // est donc une hygiène de stockage, pas une condition de correction de la réhydratation.
-          await clearEngineState(systemDb, meta.dbSessionId)
-          const top = engine.ranking(session).slice(0, 3)
-          io.to(roomName(sessionId)).emit('podium', { top })
-          reply({ phase: session.phase })
-          // Éviction mémoire différée (P1-6) : fenêtre de grâce pour une reconnexion au podium,
-          // puis libération des structures locales + cache du store. `.unref()` : ce minuteur ne
-          // doit jamais retarder l'arrêt du process.
-          setTimeout(() => { void evictSessionMemory(sessionId, meta) }, PODIUM_EVICTION_DELAY).unref()
-        }
+        reply({ ok: true, autoAdvance: meta.autoAdvance, delaySeconds: meta.autoAdvanceDelayMs / 1000 })
       } catch (e) {
         reply({ error: message(e) })
       }

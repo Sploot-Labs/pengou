@@ -26,7 +26,7 @@ function buildMetricsRegistry(): Registry {
 // `await app.register(...)` amorce le plugin immédiatement (les instances Fastify sont
 // thenables) → les hooks sont posés avant toute route, protégeant l'ensemble de l'app.
 export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Promise<FastifyInstance> {
-  // `trustProxy` (P2) : en production Pingou tourne derrière un reverse-proxy/load-balancer
+  // `trustProxy` (P2) : en production Pengou tourne derrière un reverse-proxy/load-balancer
   // (Docker, Caddy/Traefik…). Sans ça, `req.ip` = IP du proxy pour TOUS les clients → le
   // rate-limit partage un seul bucket (auto-DoS + anti-brute-force ciblé défait). Avec
   // trustProxy, Fastify lit X-Forwarded-For → `req.ip` = vraie IP client. En dev/test, aucun

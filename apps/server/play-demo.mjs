@@ -32,7 +32,7 @@ async function api(path, init) {
 
 async function main() {
   hr('1. Inscription de l’hôte + création du quiz (API REST)')
-  const email = `hote-${Date.now()}@pingou.app`
+  const email = `hote-${Date.now()}@pengou.app`
   const { res: signUp } = await api('/api/auth/sign-up/email', {
     method: 'POST', headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ email, password: 'motdepasse-demo-123', name: 'Hôte Démo' }),

@@ -1,5 +1,5 @@
 /*
-  Screen-specific layout styles for the Pingou live-quiz UI.
+  Screen-specific layout styles for the Pengou live-quiz UI.
   Convention: every rule is scoped under a component/screen class
   (BEM-ish) so nothing here cancels another rule's padding/margins.
 */
@@ -19,7 +19,7 @@
 }
 
 /* ====================================================================== */
-/* Mascot — Pingou (décoratif)                                             */
+/* Mascot — Pengou (décoratif)                                             */
 /* ====================================================================== */
 
 .ab-mascot {
@@ -37,8 +37,13 @@
     animation: ab-mascot-bob 4.5s ease-in-out infinite;
   }
   @keyframes ab-mascot-bob {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-7px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-7px);
+    }
   }
 }
 
@@ -83,11 +88,11 @@
   transition: transform var(--transition-fast), filter var(--transition-fast);
 }
 
-.ab-button:hover:not(:disabled):not([aria-disabled='true']) {
+.ab-button:hover:not(:disabled):not([aria-disabled="true"]) {
   filter: brightness(1.08);
 }
 
-.ab-button:active:not(:disabled):not([aria-disabled='true']) {
+.ab-button:active:not(:disabled):not([aria-disabled="true"]) {
   transform: translateY(1px);
 }
 
@@ -101,7 +106,7 @@
    the way a truly inert control is. A blanket opacity dim here drops the
    primary button's text to ~2.2:1 once composited over the panel background,
    so this state gets its own explicit, verified colors instead of a dim. */
-.ab-button[aria-disabled='true'] {
+.ab-button[aria-disabled="true"] {
   background: var(--surface-2);
   color: var(--ink-dim);
   border-color: var(--line);
@@ -156,8 +161,10 @@
   font-size: clamp(1.05rem, 0.9rem + 1.1vw, 1.3rem);
   text-align: left;
   cursor: pointer;
-  /* Arcade key relief: a solid drop that compresses on press. */
-  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
+  /* Relief de touche arcade : une ombre pleine (nuance foncée de l'aplat via
+     --tile-shadow, posée par AnswerTile ; repli noir translucide pour tout
+     usage sans token de forme) qui se compresse à l'appui. */
+  box-shadow: 0 6px 0 var(--tile-shadow, rgba(0, 0, 0, 0.35));
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
@@ -170,23 +177,29 @@
 
 .ab-tile:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 0 var(--tile-shadow, rgba(0, 0, 0, 0.35));
 }
 
 .ab-tile:active:not(:disabled) {
   transform: translateY(2px);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 0 var(--tile-shadow, rgba(0, 0, 0, 0.35));
 }
 
 .ab-tile:disabled {
   cursor: not-allowed;
-  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
 }
 
+/* Choix validé : la tuile s'enfonce (relief écrasé) et s'entoure d'un liseré
+   blanc intérieur — le geste « clic arcade » figé (maquette QCM / vrai-faux). */
 .ab-tile--selected {
-  border-color: var(--ink-strong);
-  /* Preserve the arcade drop AND add the selection ring — never flatten. */
-  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(255, 255, 255, 0.3);
+  transform: translateY(6px);
+  box-shadow: 0 2px 0 var(--tile-shadow, rgba(0, 0, 0, 0.35)), inset 0 0 0 4px #ffffff;
+}
+
+/* Les autres tuiles reculent après le choix, sans perdre le contraste du
+   libellé (simple opacité, l'aplat et son encre baissent ensemble). */
+.ab-tile--dim {
+  opacity: 0.35;
 }
 
 .ab-tile--correct {
@@ -289,12 +302,7 @@
 .ab-pin__scanline {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(255, 255, 255, 0.09) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.09) 50%, transparent 100%);
   height: 40%;
   animation: ab-scan 3.2s linear infinite;
   pointer-events: none;
@@ -516,7 +524,7 @@
 .host-badge--active::before,
 .host-badge--ended::before,
 .host-badge--abandoned::before {
-  content: '•';
+  content: "•";
   margin-right: 4px;
   line-height: 1;
 }
@@ -674,7 +682,7 @@
   margin-top: 0;
 }
 
-.host-variant-row input[type='text'] {
+.host-variant-row input[type="text"] {
   flex: 1;
   min-height: 44px;
   padding: var(--space-2) var(--space-3);
@@ -763,11 +771,11 @@
   margin-top: 0;
 }
 
-.host-option-row input[type='text'] {
+.host-option-row input[type="text"] {
   flex: 1;
 }
 
-.host-option-row input[type='radio'] {
+.host-option-row input[type="radio"] {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
@@ -816,73 +824,124 @@
 .join-screen {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   min-height: 100%;
-  padding: var(--space-5);
-  gap: var(--space-5);
-  text-align: center;
-  background: radial-gradient(circle at 50% 0%, var(--stage-2), var(--stage) 70%);
+  max-width: 390px;
+  margin: 0 auto;
+  padding: 48px 24px 28px;
+  gap: 24px;
 }
 
-.join-card {
-  width: min(420px, 100%);
+.join-head {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  padding: var(--space-5);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  text-align: left;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
 }
 
-.join-subtitle {
-  margin-top: calc(-1 * var(--space-2)); /* resserre l'écart sous le <h1> */
+.join-tagline {
   color: var(--ink-dim);
-  font-size: var(--fs-body);
+  font-size: 16px;
+}
+
+.join-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
 .join-field {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 10px;
 }
 
-.join-field label {
-  font-weight: 600;
-  font-size: var(--fs-small);
+.join-field > label {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--ink-dim);
 }
 
-.join-field input {
-  min-height: 48px;
-  padding: 0 var(--space-3);
-  font-size: 1.1rem;
-  letter-spacing: 0.05em;
+/* PIN segmenté : 6 cases creusées, input transparent par-dessus (la saisie
+   réelle reste le <input>, les cases ne sont qu'un reflet visuel aria-hidden). */
+.join-pin {
+  position: relative;
+  height: 84px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+  padding: 10px;
+  border-radius: 18px;
+  background: var(--stage-2);
+  box-shadow: inset 0 4px 0 rgba(0, 0, 0, 0.45), inset 0 -2px 0 rgba(189, 235, 247, 0.15);
+}
+.join-pin__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #0e2a4f;
+  box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.4);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 34px;
+  color: #ddf3fa;
+}
+.prototype-root .join-pin__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  font-size: 16px; /* ≥16px : pas de zoom auto iOS au focus */
+  cursor: text;
+}
+
+.join-hint {
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+
+.prototype-root .join-pseudo {
+  height: 60px;
+  border-radius: 16px;
+  border: 2px solid #1f4778;
+  background: #12305a;
+  color: #ffffff;
+  padding: 0 18px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
 }
 
 .join-error {
   display: flex;
   gap: var(--space-2);
-  margin-top: var(--space-1);
-  padding: var(--space-3);
-  background: rgba(198, 40, 40, 0.2);
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--danger) 22%, transparent);
   border: 1px solid var(--danger);
-  border-radius: var(--radius-sm);
-  color: var(--ink-strong);
-  font-size: var(--fs-small);
+  color: #ffffff;
+  font-size: 14px;
 }
 
-.join-card--confirm {
-  align-items: center;
+.join-spacer {
+  flex: 1;
+}
+
+.join-reassure {
   text-align: center;
-  gap: var(--space-4);
-}
-
-.join-tagline {
   color: var(--ink-dim);
-  font-size: var(--fs-small);
+  font-size: 13px;
 }
 
 /* ====================================================================== */
@@ -893,121 +952,507 @@
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  max-width: 480px;
+  max-width: 430px;
   margin: 0 auto;
-  padding: var(--space-4);
-  gap: var(--space-4);
+  padding: 40px 16px 24px;
+  gap: var(--space-3);
 }
 
+/* Barre d'identité fine (PIN + score) — présente hors question, pour garder
+   l'écran de jeu épuré comme la maquette. */
 .player-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--ink-dim);
+}
+
+.player-status-bar strong {
+  color: #ffffff;
+  font-family: var(--font-display);
+}
+
+/* ---- Lobby / attente -------------------------------------------------- */
+.player-lobby {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.player-lobby__top {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.player-waiting {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-3);
-  text-align: center;
-}
-
-.player-question__prompt {
-  padding: var(--space-4);
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--line);
-  text-align: center;
-}
-
-/* « Question X / N » progress marker, mirroring the BigScreen counter. */
-.player-progress {
-  text-align: center;
+.player-lobby__pin {
   font-family: var(--font-mono);
-  font-size: var(--fs-small);
+  font-size: 15px;
   color: var(--ink-dim);
 }
 
-/* Une colonne sur mobile : les options portent du texte (parfois long), pas
-   seulement une couleur comme chez Kahoot — en pleine largeur elles restent
-   lisibles au lieu de casser mot par mot. `auto-fit` + `minmax(min(100%,16rem))`
-   passe à deux colonnes uniquement si le conteneur offre vraiment la place
-   (au-delà de la colonne joueur de 480px), jamais au prix de la lisibilité. */
-.player-tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-  gap: var(--space-3);
+.player-lobby__hero {
+  position: relative;
+  z-index: 2;
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
 }
 
-.player-text-answer,
-.player-slider-answer {
+.player-lobby__hero h1 {
+  font-size: 34px;
+}
+
+.player-lobby__dots {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.player-lobby__dots span {
+  animation: player-dots 1.4s infinite;
+}
+.player-lobby__dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.player-lobby__dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes player-dots {
+  0%,
+  20% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.player-penguin {
+  align-self: center;
+  margin-top: auto;
+  transform-origin: 50% 90%;
+  position: relative;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .player-penguin {
+    animation: player-waddle 1.6s ease-in-out infinite;
+  }
+}
+@keyframes player-waddle {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+.player-floe {
+  position: absolute;
+  left: -20px;
+  right: -20px;
+  bottom: 0;
+  z-index: 1;
+  clip-path: polygon(0 12%, 20% 6%, 42% 12%, 64% 3%, 84% 10%, 100% 6%, 100% 100%, 0 100%);
+}
+.player-floe--back {
+  height: 300px;
+  background: #9fd3e6;
+}
+.player-floe--front {
+  height: 282px;
+  background: #ddf3fa;
+}
+
+.player-lobby__foot {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.player-namepill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: #0b2545;
+  box-shadow: 0 5px 0 #06162b;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  color: #ffffff;
+}
+.player-namepill::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.player-namepill small {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+
+.player-count {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: #0b2545;
+}
+.player-count b {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 36px;
+}
+.player-count span {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.player-lobby__hint {
+  max-width: 30ch;
+  color: #12305a;
+  font-size: 14px;
+}
+
+/* ---- En question ------------------------------------------------------ */
+.player-question {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
 }
 
-.player-text-answer input {
-  min-height: 56px;
-  padding: 0 var(--space-3);
-  font-size: 1.2rem;
+.player-qhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-
-.player-slider-answer input[type='range'] {
-  width: 100%;
-  min-height: 44px;
-}
-
-.player-slider-answer output {
+.player-qnum {
   font-family: var(--font-mono);
-  font-size: 1.5rem;
-  text-align: center;
+  font-weight: 500;
+  font-size: 17px;
+  color: #ffffff;
+}
+.player-qnum span {
+  color: var(--ink-dim);
 }
 
-/* True/False — two large typed targets (≥44px, well beyond). */
-.player-truefalse {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-3);
+.player-qbar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  overflow: hidden;
+}
+.player-qbar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  transition: width var(--transition-base) linear;
 }
 
-.player-tf-btn {
-  min-height: 96px;
-  border-radius: var(--radius-md);
-  border: 2px solid var(--line);
-  background: var(--surface);
-  color: var(--ink-strong);
+.player-qtag {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.player-question__prompt {
+  margin: 4px 0 0;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.6rem;
+  font-size: 26px;
+  line-height: 1.2;
+  text-align: left;
+  text-wrap: balance;
+}
+
+.player-question__spacer {
+  flex: 1;
+}
+
+.player-status {
+  min-height: 24px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: #dde9f4;
+}
+
+.player-commit-hint {
+  margin: 0;
+  text-align: center;
+  color: var(--ink-dim);
+  font-size: var(--fs-small);
+}
+
+/* mcq : grille 2 colonnes de tuiles « hautes » (pouce) */
+.player-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding-bottom: 10px;
+}
+.player-tiles .ab-tile {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-height: 150px;
+  padding: 18px;
+  border-radius: 22px;
+  font-size: clamp(1.05rem, 0.9rem + 1.1vw, 1.35rem);
+}
+.player-tiles .ab-tile__shape svg {
+  width: 36px;
+  height: 36px;
+}
+
+/* vrai/faux : 2 tuiles pleine largeur empilées */
+.player-duo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 10px;
+}
+.player-duo .ab-tile {
+  min-height: 150px;
+  gap: 22px;
+  padding: 0 28px;
+  border-radius: 26px;
+  font-size: clamp(1.6rem, 1rem + 4vw, 2.75rem);
+  font-weight: 700;
+}
+.player-duo .ab-tile__shape svg {
+  width: 48px;
+  height: 48px;
+}
+
+/* Entrée « pop » des tuiles (coupée sous prefers-reduced-motion par la règle
+   globale de tokens.css, qui ramène toute animation à ~0ms). */
+.player-tiles .ab-tile,
+.player-duo .ab-tile {
+  animation: player-tile-up 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+.player-tiles .ab-tile:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.player-tiles .ab-tile:nth-child(3) {
+  animation-delay: 0.16s;
+}
+.player-tiles .ab-tile:nth-child(4) {
+  animation-delay: 0.24s;
+}
+.player-duo .ab-tile:nth-child(2) {
+  animation-delay: 0.08s;
+}
+@keyframes player-tile-up {
+  0% {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* curseur */
+.player-slider {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-bottom: 10px;
+}
+.player-slider__value {
+  align-self: center;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 14px 26px;
+  border-radius: 22px;
+  background: var(--stage-2);
+  box-shadow: inset 0 4px 0 rgba(0, 0, 0, 0.45), 0 0 0 2px var(--line);
+}
+.player-slider__value output {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 1;
+  color: #ddf3fa;
+  font-variant-numeric: tabular-nums;
+}
+.player-slider__value span {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  color: var(--ink-dim);
+}
+.player-slider__scale {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+.player-slider__steps {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) 64px;
+  gap: 12px;
+}
+.player-step {
+  min-height: 64px;
+  border: 0;
+  border-radius: 20px;
+  background: var(--surface);
+  color: #ffffff;
+  box-shadow: 0 6px 0 var(--stage-2);
+  font-family: var(--font-mono);
+  font-size: 30px;
   cursor: pointer;
-  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
-
-.player-tf-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.35);
+.player-step:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--stage-2);
+}
+.player-step:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.player-slider input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 56px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.player-slider input[type="range"]::-webkit-slider-runnable-track {
+  height: 22px;
+  border-radius: 11px;
+  background: var(--stage-2);
+  box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.45);
+}
+.player-slider input[type="range"]::-moz-range-track {
+  height: 22px;
+  border-radius: 11px;
+  background: var(--stage-2);
+}
+.player-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 48px;
+  height: 48px;
+  margin-top: -13px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 6px solid var(--brand);
+  box-shadow: 0 6px 0 var(--ans-circle-sh);
+}
+.player-slider input[type="range"]::-moz-range-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 6px solid var(--brand);
+  box-shadow: 0 6px 0 var(--ans-circle-sh);
+}
+.player-slider input[type="range"]:disabled {
+  opacity: 0.7;
 }
 
-.player-tf-btn:active:not(:disabled) {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+/* réponse libre */
+.player-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 10px;
+}
+.player-text input {
+  height: 72px;
+  border: 0;
+  border-radius: 20px;
+  background: #ddf3fa;
+  color: #0b2545;
+  padding: 0 20px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 26px;
+  box-shadow: inset 0 4px 0 #9fd3e6;
+}
+.player-text__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+.player-text__count {
+  font-family: var(--font-mono);
 }
 
-.player-tf-btn--selected {
-  border-color: var(--brand);
-  background: var(--surface-2);
+/* CTA à relief glace (rejoindre, valider, envoyer) — bouton nu, pas la
+   variante --primary cyan du reste de l'app. */
+/* `.prototype-root` préfixe : passe devant le reset `.prototype-root button
+   { color: inherit }` (même raison que .ab-button--primary), sinon l'encre
+   bleu nuit du CTA glace serait écrasée par la couleur héritée (blanc). */
+.prototype-root .player-cta {
+  width: 100%;
+  min-height: 64px;
+  border: 0;
+  border-radius: 20px;
+  background: #ddf3fa;
+  color: #0b2545;
+  box-shadow: 0 8px 0 #9fd3e6;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
-
-.player-tf-btn:disabled {
+.prototype-root .player-cta:active:not(:disabled) {
+  transform: translateY(6px);
+  box-shadow: 0 2px 0 #9fd3e6;
+}
+.prototype-root .player-cta:disabled {
+  background: #6f87a3;
+  box-shadow: 0 8px 0 #4a6380;
+  color: #0b2545;
   cursor: not-allowed;
 }
 
 .player-answered {
-  margin-top: var(--space-4);
+  margin-top: var(--space-3);
   padding: var(--space-3);
   text-align: center;
   color: var(--ink-dim);
@@ -1025,17 +1470,254 @@
 }
 
 .player-net--reconnecting {
-  background: rgba(255, 197, 61, 0.16);
-  border: 1px solid var(--gold);
+  background: color-mix(in srgb, var(--warn) 18%, transparent);
+  border: 1px solid var(--warn);
   color: var(--ink-strong);
 }
 
 .player-net--reconnected {
-  background: rgba(14, 124, 104, 0.2);
+  background: color-mix(in srgb, var(--success) 20%, transparent);
   border: 1px solid var(--success);
   color: var(--ink-strong);
 }
 
+/* ---- Verdict par question (juste / raté) ------------------------------ */
+/* Plein cadre : annule le padding de .player-screen pour que l'aplat atteigne
+   les bords, comme la maquette. */
+.player-verdict {
+  flex: 1;
+  margin: -40px -16px -24px;
+  padding: 44px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+.player-verdict--juste {
+  background: #ddf3fa;
+  color: #0b2545;
+}
+.player-verdict--rate,
+.player-verdict--timeout {
+  background: var(--stage);
+  color: #ffffff;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .player-verdict--rate {
+    animation: player-slip 0.18s ease-in-out 2;
+  }
+}
+@keyframes player-slip {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+.player-verdict__meta {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 15px;
+}
+.player-verdict--juste .player-verdict__meta {
+  color: #12305a;
+}
+.player-verdict--rate .player-verdict__meta,
+.player-verdict--timeout .player-verdict__meta {
+  color: var(--ink-dim);
+}
+
+.player-verdict__spacer {
+  flex: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .player-verdict__check {
+    animation: player-pop 0.45s cubic-bezier(0.3, 1.4, 0.5, 1) both;
+  }
+  .player-verdict__check .draw {
+    animation: player-draw 0.3s 0.25s ease-out both;
+  }
+}
+.player-verdict__check .draw {
+  stroke-dasharray: 40;
+}
+@keyframes player-pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes player-draw {
+  0% {
+    stroke-dashoffset: 40;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.player-verdict__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.05;
+}
+.player-verdict--juste .player-verdict__title {
+  font-size: 60px;
+}
+.player-verdict--rate .player-verdict__title,
+.player-verdict--timeout .player-verdict__title {
+  font-size: 46px;
+}
+
+.player-verdict__points {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 50px;
+}
+.player-verdict--juste .player-verdict__points {
+  color: #00566c;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .player-verdict__points,
+  .player-streak {
+    animation: player-rise 0.5s 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+}
+@keyframes player-rise {
+  0% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.player-streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 4px 0 #9fd3e6;
+  font-weight: 800;
+  font-size: 17px;
+  color: #0b2545;
+}
+.player-streak svg {
+  width: 18px;
+  height: 18px;
+}
+
+.player-verdict__sub {
+  font-size: 18px;
+}
+.player-verdict--rate .player-verdict__sub,
+.player-verdict--timeout .player-verdict__sub {
+  color: #dde9f4;
+}
+
+/* Grosse tuile de bonne réponse (états raté / temps écoulé) */
+.player-answer-tile {
+  align-self: stretch;
+  min-height: 96px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 22px;
+  border-radius: 22px;
+  background: var(--tile-color);
+  color: var(--tile-ink);
+  box-shadow: 0 8px 0 var(--tile-shadow);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  text-align: left;
+}
+.player-answer-tile__shape {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.player-answer-tile__shape svg {
+  width: 40px;
+  height: 40px;
+}
+
+.player-verdict__your {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: var(--ink-dim);
+}
+.player-verdict__your svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Barre rang + score en pied de verdict */
+.player-rankbar {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  border-radius: 20px;
+}
+.player-verdict--juste .player-rankbar {
+  background: #0b2545;
+  color: #ffffff;
+  box-shadow: 0 6px 0 #06162b;
+}
+.player-verdict--rate .player-rankbar,
+.player-verdict--timeout .player-rankbar {
+  background: var(--surface);
+  box-shadow: 0 6px 0 var(--stage-2);
+}
+.player-rankbar__rank {
+  font-size: 17px;
+  font-weight: 700;
+}
+/* Compte à rebours inter-étapes (enchaînement automatique) sur l'écran de résultat du joueur. */
+.player-auto-countdown {
+  margin: 12px 0 0;
+  font-size: var(--fs-small);
+  color: var(--ink-dim);
+  text-align: center;
+}
+.player-rankbar__rank strong {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 24px;
+}
+.player-rankbar__score {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 24px;
+}
+
+/* ---- Podium joueur (fin de partie) ------------------------------------ */
 .player-result {
   flex: 1;
   display: flex;
@@ -1044,49 +1726,14 @@
   justify-content: center;
   gap: var(--space-3);
   text-align: center;
-  /* Marge resserrée sur mobile pour rendre toute sa largeur aux tuiles du
-     récap (sinon les 32px de chaque côté les étranglent). */
   padding: clamp(var(--space-4), 5vw, var(--space-5));
   border-radius: var(--radius-lg);
-}
-
-.player-result--correct {
-  background: rgba(14, 124, 104, 0.16);
-  background: color-mix(in srgb, var(--success) 16%, transparent);
-  border: 1px solid var(--success);
-}
-
-.player-result--incorrect {
-  background: rgba(198, 40, 40, 0.16);
-  background: color-mix(in srgb, var(--danger) 16%, transparent);
-  border: 1px solid var(--danger);
-}
-
-.player-result--partial {
-  /* Not a winner state — keep --gold reserved for the podium. Use the violet
-     brand accent for « partial credit » instead. */
-  background: rgba(122, 92, 255, 0.16);
-  background: color-mix(in srgb, var(--brand-2) 16%, transparent);
-  border: 1px solid var(--brand-2);
 }
 
 .player-result__points {
   font-family: var(--font-mono);
   font-size: 2rem;
-}
-
-.player-dev-controls {
-  padding: var(--space-3);
-  border-top: 1px dashed var(--line);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.player-dev-controls__row {
-  display: flex;
-  gap: var(--space-2);
-  flex-wrap: wrap;
+  color: var(--accent);
 }
 
 /* ====================================================================== */
@@ -1164,7 +1811,7 @@
 
 /* Brand gradient glow behind the hero question (decorative, no text on it). */
 .big-live__prompt::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -10% -5%;
   z-index: -1;
@@ -1189,6 +1836,14 @@
   font-family: var(--font-mono);
   font-size: var(--fs-h2);
   color: var(--ink-dim);
+}
+
+/* Compte à rebours inter-étapes (enchaînement automatique) sur le classement grand écran. */
+.big-auto-countdown {
+  font-family: var(--font-mono);
+  font-size: var(--fs-h2);
+  color: var(--ink-dim);
+  margin: 0;
 }
 
 .big-distribution {
@@ -1653,14 +2308,33 @@
 }
 
 /* ====================================================================== */
-/* Player — commit affordance + result reveal recap                       */
+/* Player — result reveal recap (podium + verdict honnête)                 */
 /* ====================================================================== */
 
-.player-commit-hint {
-  margin-bottom: var(--space-3);
-  text-align: center;
-  color: var(--ink-dim);
-  font-size: var(--fs-small);
+/* Récap adaptatif inséré dans le verdict (texte/curseur, et choix erroné) :
+   bordure en currentColor + fond transparent, lisible aussi bien sur l'aplat
+   glace clair (juste) que sur la banquise (raté). */
+.player-verdict__recap {
+  align-self: stretch;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.player-verdict__recap-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid currentColor;
+  text-align: left;
+  font-weight: 600;
+}
+.player-answer-tile--neutral {
+  background: var(--surface);
+  color: #ffffff;
+  box-shadow: 0 8px 0 var(--stage-2);
 }
 
 .player-result__recap {
@@ -1693,16 +2367,6 @@
 .player-result__recap-mark {
   font-weight: 800;
   flex-shrink: 0;
-}
-
-/* ====================================================================== */
-/* Join — reassurance line                                                */
-/* ====================================================================== */
-
-.join-reassure {
-  color: var(--ink-dim);
-  font-size: var(--fs-small);
-  max-width: 40ch;
 }
 
 /* ====================================================================== */
@@ -2029,7 +2693,10 @@
   gap: var(--space-4);
   margin-bottom: var(--space-6);
 }
-.home-hero__sub { color: var(--ink-dim); margin-top: var(--space-1); }
+.home-hero__sub {
+  color: var(--ink-dim);
+  margin-top: var(--space-1);
+}
 
 .home-cards {
   display: grid;
@@ -2054,7 +2721,8 @@
   color: var(--ink);
   text-decoration: none;
 }
-.home-card:hover, .home-card:focus-visible {
+.home-card:hover,
+.home-card:focus-visible {
   border-color: var(--brand);
   background: var(--surface-2);
 }
@@ -2071,8 +2739,16 @@
   line-clamp: 2;
   overflow: hidden;
 }
-.home-card__desc, .home-card__meta { color: var(--ink-dim); font-size: var(--fs-small); }
-.home-card__cta { margin-top: auto; color: var(--brand); font-size: var(--fs-small); }
+.home-card__desc,
+.home-card__meta {
+  color: var(--ink-dim);
+  font-size: var(--fs-small);
+}
+.home-card__cta {
+  margin-top: auto;
+  color: var(--brand);
+  font-size: var(--fs-small);
+}
 
 /* Two-action card (Task 7): `.home-card-item` is the `<li>` — a plain flex
    column stacking the "Ouvrir" card-link above a full-width "Lancer" button.
@@ -2102,7 +2778,7 @@
 }
 
 /* Empty-state motif — the 4 shapes assembled together, anchoring the empty
-   "Mes quiz" state in the Pingou world. Static, decorative, low-opacity. */
+   "Mes quiz" state in the Pengou world. Static, decorative, low-opacity. */
 .home-empty-motif {
   display: flex;
   justify-content: center;
@@ -2110,7 +2786,9 @@
   margin-bottom: var(--space-3);
   opacity: 0.4;
 }
-.home-empty-motif__shape { display: inline-flex; }
+.home-empty-motif__shape {
+  display: inline-flex;
+}
 
 .home-section__header {
   display: flex;
@@ -2304,7 +2982,9 @@
   padding: var(--space-3, 0.75rem);
 }
 
-.ab-member-row .home-list__title { flex: 1 1 12rem; }
+.ab-member-row .home-list__title {
+  flex: 1 1 12rem;
+}
 
 .ab-member-row__controls {
   display: flex;
@@ -2322,4 +3002,54 @@
   background: var(--surface-2);
   padding: 0.2rem 0.4rem;
   border-radius: var(--radius-1, 6px);
+}
+
+/* ------------------------------------------------------------------ */
+/* SoundToggle — bouton haut-parleur (coupe/active le son)             */
+/* ------------------------------------------------------------------ */
+
+.ab-soundtoggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-2) 82%, transparent);
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform var(--transition-fast, 120ms), background var(--transition-fast, 120ms),
+    color var(--transition-fast, 120ms);
+}
+
+.ab-soundtoggle:hover {
+  background: var(--surface-2);
+}
+
+.ab-soundtoggle:active {
+  transform: scale(0.94);
+}
+
+.ab-soundtoggle[aria-pressed='true'] {
+  color: var(--ink-dim);
+}
+
+/* Variante flottante : coin supérieur droit des écrans de jeu. */
+.ab-soundtoggle--fixed {
+  position: fixed;
+  top: var(--space-3, 0.75rem);
+  right: var(--space-3, 0.75rem);
+  z-index: 50;
+  backdrop-filter: blur(6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ab-soundtoggle {
+    transition: none;
+  }
+  .ab-soundtoggle:active {
+    transform: none;
+  }
 }

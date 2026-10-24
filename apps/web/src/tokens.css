@@ -2,7 +2,7 @@
   Tokens NON-COULEUR partagés — échelle typographique (--fs-*), espacements
   (--space-*), rayons (--radius-*), durées (--transition-*) + reset/base.
   Les rôles COULEUR vivent dans theme/themes.css (dérivés des primitives
-  produit Pingou). Toujours référencer les tokens de rôle, jamais un hex.
+  produit Pengou). Toujours référencer les tokens de rôle, jamais un hex.
 */
 
 :root {

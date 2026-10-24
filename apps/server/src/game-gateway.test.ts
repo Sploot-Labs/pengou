@@ -883,6 +883,113 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
+  it("enchaînement automatique (défaut activé) : après la révélation, le serveur diffuse `auto:advance` puis avance SEUL vers le podium, sans host:next", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-auto-advance@example.com')
+      clients.push(hostSocket)
+
+      // Raccourcit la pause classement à 1 s pour le test (défaut 10 s) — le mode reste activé.
+      const autoAck = await ack<{ ok?: boolean; autoAdvance?: boolean; delaySeconds?: number; error?: string }>(
+        hostSocket,
+        'host:setAuto',
+        { enabled: true, delaySeconds: 1 },
+      )
+      expect(autoAck.error).toBeUndefined()
+      expect(autoAck.autoAdvance).toBe(true)
+      expect(autoAck.delaySeconds).toBe(1)
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+
+      await ack(hostSocket, 'host:start', {})
+
+      // Écouteurs posés AVANT la réponse : la réponse de l'unique joueur connecté déclenche
+      // l'auto-révélation serveur, qui entre dans l'étape classement et planifie l'avance — puis
+      // le podium arrive SEUL ~1 s plus tard, sans aucun host:next.
+      const autoPromise = waitFor<{ nextAt: number | null }>(player1, 'auto:advance')
+      const podiumPromise = waitFor<{ top: Array<{ playerId: string; score: number }> }>(player1, 'podium')
+
+      const answerAck = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect(answerAck.accepted).toBe(true)
+
+      const auto = await autoPromise
+      expect(typeof auto.nextAt).toBe('number')
+      expect((auto.nextAt as number)).toBeGreaterThan(Date.now())
+
+      const podium = await podiumPromise // arrive sans host:next
+      expect(podium.top[0]!.score).toBeGreaterThan(0)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("host:setAuto { enabled: false } désactive l'enchaînement : `auto:advance {nextAt:null}`, aucune avance automatique, host:next reste nécessaire", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-auto-off@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+
+      // Désactivation du mode (le défaut est activé) → diffusion `auto:advance {nextAt:null}`.
+      const nullAutoPromise = waitFor<{ nextAt: number | null }>(player1, 'auto:advance')
+      const offAck = await ack<{ ok?: boolean; autoAdvance?: boolean; error?: string }>(
+        hostSocket,
+        'host:setAuto',
+        { enabled: false },
+      )
+      expect(offAck.error).toBeUndefined()
+      expect(offAck.autoAdvance).toBe(false)
+      const nullAuto = await nullAutoPromise
+      expect(nullAuto.nextAt).toBeNull()
+
+      await ack(hostSocket, 'host:start', {})
+      // La réponse déclenche l'auto-révélation (classement) — mais mode auto coupé : AUCUNE avance.
+      await ack(player1, 'player:answer', { answer: { optionIndex: 0 } })
+
+      // Pas de podium automatique tant que l'hôte ne clique pas « Suivant ».
+      const noPodium = raceNoEvent(player1, 'podium', 1500)
+      expect(await noPodium).toBe(true)
+
+      // host:next reste le seul moyen d'avancer.
+      const podiumPromise = waitFor<{ top: Array<{ playerId: string; score: number }> }>(player1, 'podium')
+      const nextAck = await ack<{ phase?: string; error?: string }>(hostSocket, 'host:next', {})
+      expect(nextAck.error).toBeUndefined()
+      const podium = await podiumPromise
+      expect(podium.top[0]!.score).toBeGreaterThan(0)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("host:setAuto est refusé pour un socket non-hôte (requireHost)", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-auto-authz@example.com')
+      clients.push(hostSocket)
+
+      const mallory = await connectClient(url)
+      clients.push(mallory)
+      await ack(mallory, 'player:join', { pin, nickname: 'Mallory' })
+
+      const res = await ack<{ ok?: boolean; error?: string }>(mallory, 'host:setAuto', { enabled: false })
+      expect(res.error).toBeTruthy()
+      expect(res.ok).toBeUndefined()
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
   it("host:next SANS host:reveal préalable crédite ET persiste quand même la manche en cours (bug important corrigé)", async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []

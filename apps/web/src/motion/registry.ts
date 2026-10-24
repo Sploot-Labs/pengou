@@ -23,9 +23,18 @@ import { pulseGreen, shake, sweepIn } from './effects.js'
  * CE fichier, jamais un écran.
  */
 export const registry: Partial<Record<string, CueEffect>> = {
+  // Passage de phase : chaque bascule a son son « banquise ». L'ambiance du
+  // lobby (son `lobby`, en boucle) n'est PAS déclenchée ici : c'est une boucle
+  // à cycle de vie (démarrer en lobby, couper en sortant), pilotée directement
+  // par BigScreen via `sound.loop`/`sound.stop` — ce moteur ne fait que des
+  // one-shots.
+  'phase.enter:reading': { sound: 'reading' },
+  'phase.enter:question': { sound: 'question' },
+  'phase.enter:reveal': { animation: sweepIn, sound: 'reveal' },
+  'phase.enter:scoreboard': { animation: sweepIn, sound: 'scoreboard' },
   'phase.enter:podium': {
     animation: sweepIn,
-    sound: 'fanfare',
+    sound: 'podium',
     // NOTE (scope honnête) : ce champ `media` n'est PAS ENCORE consommé par
     // `MotionProvider.fire` (voir MotionProvider.tsx) — aucun composant ne lit
     // `effect.media`, et `MediaOverlay` n'a aucun consommateur. La célébration
@@ -34,10 +43,9 @@ export const registry: Partial<Record<string, CueEffect>> = {
     // de registre. Le câblage MediaOverlay est un suivi (follow-up).
     media: { src: 'confetti-bg', mode: 'overlay' },
   },
-  'phase.enter:scoreboard': { animation: sweepIn },
-  'phase.enter:reveal': { animation: sweepIn },
-  'answer.correct': { animation: pulseGreen, sound: 'ding' },
-  'answer.incorrect': { animation: shake, sound: 'buzz' },
+  'answer.submit': { sound: 'tap' },
+  'answer.correct': { animation: pulseGreen, sound: 'correct' },
+  'answer.incorrect': { animation: shake, sound: 'incorrect' },
   'timer.urgent': { sound: 'tick', reducedMotion: 'skip' },
-  'player.join': { sound: 'ding' },
+  'player.join': { sound: 'join' },
 }

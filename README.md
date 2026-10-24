@@ -1,6 +1,6 @@
 <div align="center">
 
-# Pingou 🐧
+# Pengou 🐧
 
 **Le quiz en direct, open-source. Chez vous ou dans le cloud.**
 
@@ -16,7 +16,7 @@ projetez le grand écran, jouez depuis n'importe quel téléphone. Auto-héberge
 
 ---
 
-## ✨ Ce que fait Pingou
+## ✨ Ce que fait Pengou
 
 - **Quiz en direct multijoueur** — QCM, vrai/faux, réponse libre, curseur numérique.
 - **Scoring serveur-autoritaire** avec bonus de rapidité — impossible à tricher côté client.
@@ -58,9 +58,9 @@ sur `:5173` et proxifie `/api` + `/socket.io` vers le serveur.
 pnpm install
 
 # 1. Une base Postgres (exemple jetable via Docker)
-docker run --name pingou-pg -e POSTGRES_USER=pingou -e POSTGRES_PASSWORD=pingou \
-  -e POSTGRES_DB=pingou -p 5433:5432 -d postgres:16-alpine
-export DATABASE_URL=postgres://pingou:pingou@localhost:5433/pingou
+docker run --name pengou-pg -e POSTGRES_USER=pengou -e POSTGRES_PASSWORD=pengou \
+  -e POSTGRES_DB=pengou -p 5433:5432 -d postgres:16-alpine
+export DATABASE_URL=postgres://pengou:pengou@localhost:5433/pengou
 # En dev, BETTER_AUTH_SECRET est optionnel (repli toléré) ; requis en production.
 
 # 2. Serveur (migrations appliquées au boot) — port 3000

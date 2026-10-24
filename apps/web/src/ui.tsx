@@ -9,6 +9,7 @@ import {
 import { QRCodeSVG } from 'qrcode.react'
 import { Link } from 'react-router-dom'
 import type { AnswerShapeKind } from './constants'
+import { useSound } from './motion/index.js'
 
 /* ------------------------------------------------------------------ */
 /* Logo                                                                 */
@@ -25,23 +26,32 @@ export function Logo({ compact = false, to }: { compact?: boolean; to?: string }
   const className = `ab-logo${compact ? ' ab-logo--compact' : ''}`
   const content = (
     <>
-      {/* Mark = les 4 formes-réponses réunies, pas le seul triangle : évite la
-          collision sémantique avec la forme fonctionnelle --ans-triangle. */}
+      {/* Symbole « Croissant » du kit de marque : le pengouin sous-entendu, un
+          disque (le dos) + un disque décalé (le ventre) + un bec corail. Les
+          teintes dos/ventre suivent les tokens de thème (ink-strong / surface),
+          ce qui reproduit le favicon adaptatif : dos foncé sur fond clair, dos
+          clair sur fond sombre. Le corail reste réservé au bec (règle d'usage du
+          kit : ne jamais recolorer le symbole). */}
       <span className="ab-logo__mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="1em" height="1em" focusable="false">
-          <polygon points="7,3 12,11 2,11" fill="var(--ans-triangle)" />
-          <polygon points="18,2 23,7 18,12 13,7" fill="var(--ans-diamond)" />
-          <circle cx="7" cy="18" r="4.5" fill="var(--ans-circle)" />
-          <rect x="14" y="14" width="9" height="9" rx="2" fill="var(--ans-square)" />
+        <svg viewBox="12 12 76 76" width="1em" height="1em" focusable="false">
+          <circle cx="50" cy="50" r="38" fill="var(--ink-strong)" />
+          <circle cx="58" cy="52" r="28" fill="var(--surface)" />
+          <path
+            fill="var(--accent)"
+            stroke="var(--accent)"
+            strokeWidth="3"
+            strokeLinejoin="round"
+            d="M58 48L76 54L58 60Z"
+          />
         </svg>
       </span>
-      <span className="ab-logo__text">Pingou</span>
+      <span className="ab-logo__text">Pengou</span>
     </>
   )
 
   if (to) {
     return (
-      <Link to={to} className={`${className} ab-logo--link`} aria-label="Pingou, retour à l'accueil">
+      <Link to={to} className={`${className} ab-logo--link`} aria-label="Pengou, retour à l'accueil">
         {content}
       </Link>
     )
@@ -50,15 +60,15 @@ export function Logo({ compact = false, to }: { compact?: boolean; to?: string }
 }
 
 /* ------------------------------------------------------------------ */
-/* Mascot — Pingou en position « sploot » (ventre au sol)               */
+/* Mascot — Pengou en position « sploot » (ventre au sol)               */
 /* ------------------------------------------------------------------ */
 
 /**
  * Illustration de marque, purement décorative (`aria-hidden`) : elle n'ajoute
  * aucune information, l'identité textuelle reste portée par le logo. Les teintes
- * sont les couleurs de marque Pingou en dur — volontairement indépendantes du
+ * sont les couleurs de marque Pengou en dur — volontairement indépendantes du
  * thème : la mascotte pose toujours sur sa propre « banquise » (disque clair),
- * donc le pingouin bleu nuit reste lisible aussi bien en clair qu'en sombre.
+ * donc le pengouin bleu nuit reste lisible aussi bien en clair qu'en sombre.
  * L'oscillation respecte `prefers-reduced-motion` (coupée globalement dans
  * tokens.css ; ici la classe `ab-mascot` ne s'anime que via la règle dédiée).
  */
@@ -131,29 +141,50 @@ export function AnswerShape({ shape, size = 28 }: { shape: AnswerShapeKind; size
     focusable: false as const,
   }
 
+  // Glyphes « Arcade polaire » : les 4 emplacements de réponse gardent leurs
+  // identifiants (triangle/diamond/circle/square) mais sont dessinés en motifs
+  // de banquise — étoile, goutte, vague, flocon. Forme + couleur + libellé
+  // restent redondants (jamais la couleur seule).
   switch (shape) {
     case 'triangle':
+      // Étoile / scintillement à 4 branches.
       return (
         <svg {...common}>
-          <polygon points="12,3 21,20 3,20" fill="currentColor" />
+          <path
+            d="M12 1.5 L14.8 9.2 L22.5 12 L14.8 14.8 L12 22.5 L9.2 14.8 L1.5 12 L9.2 9.2 Z"
+            fill="currentColor"
+          />
         </svg>
       )
     case 'diamond':
+      // Goutte de glace.
       return (
         <svg {...common}>
-          <polygon points="12,2 22,12 12,22 2,12" fill="currentColor" />
+          <path
+            d="M12 2 C9 6.5 4.5 11 4.5 15 A7.5 7.5 0 0 0 19.5 15 C19.5 11 15 6.5 12 2 Z"
+            fill="currentColor"
+          />
         </svg>
       )
     case 'circle':
+      // Vague / congère.
       return (
         <svg {...common}>
-          <circle cx="12" cy="12" r="10" fill="currentColor" />
+          <path
+            d="M2 11 Q4.5 6 7 11 T12 11 T17 11 T22 11 V19.5 Q22 21 20.5 21 H3.5 Q2 21 2 19.5 Z"
+            fill="currentColor"
+          />
         </svg>
       )
     case 'square':
+      // Flocon (astérisque à 6 branches).
       return (
         <svg {...common}>
-          <rect x="3" y="3" width="18" height="18" rx="2" fill="currentColor" />
+          <g fill="currentColor">
+            <rect x="10.4" y="1.5" width="3.2" height="21" rx="1.6" />
+            <rect x="10.4" y="1.5" width="3.2" height="21" rx="1.6" transform="rotate(60 12 12)" />
+            <rect x="10.4" y="1.5" width="3.2" height="21" rx="1.6" transform="rotate(-60 12 12)" />
+          </g>
         </svg>
       )
     default:
@@ -175,11 +206,22 @@ const SHAPE_INK_TOKEN: Record<AnswerShapeKind, string> = {
   square: '--ans-square-ink',
 }
 
+// Ombre portée pleine par forme (nuance foncée de l'aplat) — relief de touche
+// arcade, compressé au clic/sélection (voir .ab-tile dans prototype.css).
+const SHAPE_SH_TOKEN: Record<AnswerShapeKind, string> = {
+  triangle: '--ans-triangle-sh',
+  diamond: '--ans-diamond-sh',
+  circle: '--ans-circle-sh',
+  square: '--ans-square-sh',
+}
+
+// Noms alignés sur les glyphes polaires réellement dessinés (voir AnswerShape) :
+// la lecture d'écran décrit la forme vue, pas une géométrie abstraite.
 export const SHAPE_NAME_FR: Record<AnswerShapeKind, string> = {
-  triangle: 'triangle',
-  diamond: 'losange',
-  circle: 'rond',
-  square: 'carré',
+  triangle: 'étoile',
+  diamond: 'goutte',
+  circle: 'vague',
+  square: 'flocon',
 }
 
 /* ------------------------------------------------------------------ */
@@ -192,20 +234,24 @@ interface AnswerTileProps {
   onClick?: () => void
   disabled?: boolean
   selected?: boolean
+  /** Autre tuile choisie : celle-ci recule (opacité réduite) sans perdre son
+   * contraste texte — focus visuel sur le choix validé (maquette QCM). */
+  dimmed?: boolean
   /** When set, reveals correctness with icon + text, not color alone. */
   reveal?: 'correct' | 'incorrect' | null
 }
 
-export function AnswerTile({ shape, label, onClick, disabled, selected, reveal }: AnswerTileProps) {
+export function AnswerTile({ shape, label, onClick, disabled, selected, dimmed, reveal }: AnswerTileProps) {
   const style = {
     ['--tile-color' as string]: `var(${SHAPE_TOKEN[shape]})`,
     ['--tile-ink' as string]: `var(${SHAPE_INK_TOKEN[shape]})`,
+    ['--tile-shadow' as string]: `var(${SHAPE_SH_TOKEN[shape]})`,
   }
 
   return (
     <button
       type="button"
-      className={`ab-tile${selected ? ' ab-tile--selected' : ''}${reveal ? ` ab-tile--${reveal}` : ''}`}
+      className={`ab-tile${selected ? ' ab-tile--selected' : ''}${dimmed ? ' ab-tile--dim' : ''}${reveal ? ` ab-tile--${reveal}` : ''}`}
       style={style}
       onClick={onClick}
       disabled={disabled}
@@ -301,6 +347,50 @@ export function TimerRing({ remainingSeconds, totalSeconds, size = 96, large = f
 }
 
 /* ------------------------------------------------------------------ */
+/* TimerPill — compteur mm:ss (vue joueur en question)                  */
+/* ------------------------------------------------------------------ */
+
+function formatClock(totalSeconds: number): string {
+  const s = Math.max(0, Math.floor(totalSeconds))
+  const m = Math.floor(s / 60)
+  const r = s % 60
+  return `${String(m).padStart(2, '0')}:${String(r).padStart(2, '0')}`
+}
+
+/**
+ * Pastille minuteur de la vue joueur « au pouce » : chiffre mm:ss en DM Mono,
+ * passage à l'état urgent (couleur de marque) dans les 5 dernières secondes.
+ * L'annonce lecteur d'écran est volontairement throttlée (mêmes points de
+ * contrôle que `TimerRing` : multiples de 5 et chaque seconde du sprint final)
+ * pour ne pas marteler l'`aria-live` à chaque tick.
+ */
+export function TimerPill({ remainingSeconds, totalSeconds }: { remainingSeconds: number; totalSeconds: number }) {
+  const clamped = Math.max(0, Math.min(remainingSeconds, totalSeconds))
+  const [announced, setAnnounced] = useState(clamped)
+  const lastAnnounced = useRef(clamped)
+
+  useEffect(() => {
+    const shouldAnnounce =
+      clamped === totalSeconds || clamped <= 5 || clamped % 5 === 0 || clamped === 0
+    if (shouldAnnounce && clamped !== lastAnnounced.current) {
+      lastAnnounced.current = clamped
+      setAnnounced(clamped)
+    }
+  }, [clamped, totalSeconds])
+
+  const urgent = clamped <= 5
+
+  return (
+    <span className={`ab-timerpill${urgent ? ' ab-timerpill--urgent' : ''}`}>
+      <span aria-hidden="true">{formatClock(clamped)}</span>
+      <span className="visually-hidden" role="status" aria-live="polite">
+        {`Temps restant : ${announced} seconde${announced > 1 ? 's' : ''}`}
+      </span>
+    </span>
+  )
+}
+
+/* ------------------------------------------------------------------ */
 /* PinDisplay — the signature PIN Marquee                               */
 /* ------------------------------------------------------------------ */
 
@@ -367,5 +457,52 @@ export function JoinInvite({ pin, size = 208 }: { pin: string; size?: number }) 
         Scannez pour rejoindre, ou allez sur <strong>{displayUrl}</strong>
       </p>
     </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* SoundToggle — bouton haut-parleur (coupe/active le son)              */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Bouton son partagé par les deux écrans de jeu (joueur et grand écran). Le
+ * clic sert AUSSI de geste de déverrouillage audio (`sound.unlock()`), utile
+ * surtout sur le grand écran, écran passif sans autre contrôle. L'état muet
+ * vit dans le `SoundManager` (persisté en localStorage) ; on le reflète dans
+ * un état local pour redessiner l'icône, le `SoundManager` n'étant pas réactif.
+ */
+export function SoundToggle({ className = '' }: { className?: string }) {
+  const sound = useSound()
+  const [muted, setMuted] = useState(() => sound.muted)
+
+  function toggle() {
+    sound.unlock()
+    const next = !muted
+    sound.setMuted(next)
+    setMuted(next)
+  }
+
+  return (
+    <button
+      type="button"
+      className={`ab-soundtoggle ${className}`.trim()}
+      onClick={toggle}
+      aria-pressed={muted}
+      aria-label={muted ? 'Activer le son' : 'Couper le son'}
+      title={muted ? 'Activer le son' : 'Couper le son'}
+    >
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+        <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
+        {muted ? (
+          <path d="M16 9l5 5m0-5l-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+        ) : (
+          <>
+            <path d="M16 8.5a5 5 0 0 1 0 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+            <path d="M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+          </>
+        )}
+      </svg>
+      <span className="visually-hidden">{muted ? 'Son coupé' : 'Son activé'}</span>
+    </button>
   )
 }

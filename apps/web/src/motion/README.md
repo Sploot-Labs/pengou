@@ -9,9 +9,16 @@ Aucun écran à toucher.
 2. Émettre depuis l'écran : `const cue = useCue(); cue('mon.moment')` ou `<Cue on="mon.moment" when={…} />`.
 3. Enregistrer son effet dans `registry.ts`.
 
-## Assets
-- Sons : `apps/web/public/sfx/<clé>.mp3`, déclarés dans `sound/sounds.ts`.
-- Vidéos : `apps/web/public/media/<src>.mp4` (fallback dégradé si absent).
+## Sons
+- Synthétisés en Web Audio à la volée (aucun fichier mp3) : une recette par clé
+  dans `sound/synth.ts`, catalogue des clés + libellés dans `sound/sounds.ts`.
+- Ajouter un son = ajouter une clé au catalogue et sa recette dans `synth.ts`,
+  puis le référencer depuis `registry.ts`.
+- One-shots via `sound.play(clé)` (le moteur de cues) ; boucles (ambiance
+  lobby) via `sound.loop(clé)` / `sound.stop(clé)` directement dans l'écran.
+
+## Vidéos
+- `apps/web/public/media/<src>.mp4` (fallback dégradé si absent).
 
 ## Règles
 - Ne JAMAIS importer `framer-motion`, le canvas ou Web Audio hors de `motion/`

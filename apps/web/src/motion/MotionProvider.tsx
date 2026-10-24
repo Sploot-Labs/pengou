@@ -38,6 +38,23 @@ export function MotionProvider({ children }: { children: ReactNode }) {
     return () => mq.removeEventListener('change', handler)
   }, [])
 
+  // Déverrouillage du son au 1er geste utilisateur (exigence autoplay). Un seul
+  // geste suffit, n'importe lequel : c'est ce qui permet au grand écran — écran
+  // passif, sans contrôle de jeu — d'émettre du son dès que l'opérateur clique
+  // quelque part dans l'onglet (ou appuie sur une touche). Le bouton son et le
+  // premier appui joueur restent des gestes valides parmi d'autres.
+  useEffect(() => {
+    const sound = soundRef.current
+    if (!sound) return
+    const unlock = () => sound.unlock()
+    window.addEventListener('pointerdown', unlock, { once: true })
+    window.addEventListener('keydown', unlock, { once: true })
+    return () => {
+      window.removeEventListener('pointerdown', unlock)
+      window.removeEventListener('keydown', unlock)
+    }
+  }, [])
+
   const value = useMemo<MotionContextValue>(() => {
     const sound = soundRef.current!
     return {

@@ -1,6 +1,6 @@
-/* Rôles produit dérivés des primitives Pingou (palette banquise), par thème.
-   Les primitives --pingou-* (light/dark via prefers-color-scheme + data-scheme)
-   vivent dans pingou-primitives.css. Les primitives éditeur --sploot-* restent
+/* Rôles produit dérivés des primitives Pengou (palette banquise), par thème.
+   Les primitives --pengou-* (light/dark via prefers-color-scheme + data-scheme)
+   vivent dans pengou-primitives.css. Les primitives éditeur --sploot-* restent
    disponibles pour les surfaces de marque Sploot Labs. */
 
 [data-theme='app'] {
@@ -9,34 +9,37 @@
   --font-body: "Nunito Sans", system-ui, ui-sans-serif, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: "DM Mono", "SFMono-Regular", ui-monospace, "Cascadia Code", Consolas, Menlo, monospace;
 
-  --stage: var(--pingou-bg);
-  --stage-2: var(--pingou-surface-2);
-  --surface: var(--pingou-surface);
-  --surface-2: var(--pingou-surface-2);
-  --line: var(--pingou-line);
-  --ink: var(--pingou-text);
-  --ink-dim: var(--pingou-muted);
-  --ink-strong: var(--pingou-ink);
-  --brand: var(--pingou-brand);
-  --brand-2: var(--pingou-violet);
-  --accent: var(--pingou-coral);
-  --success: var(--pingou-ok);
-  --warn: var(--pingou-warn);
-  --danger: var(--pingou-bad);
+  --stage: var(--pengou-bg);
+  --stage-2: var(--pengou-surface-2);
+  --surface: var(--pengou-surface);
+  --surface-2: var(--pengou-surface-2);
+  --line: var(--pengou-line);
+  --ink: var(--pengou-text);
+  --ink-dim: var(--pengou-muted);
+  --ink-strong: var(--pengou-ink);
+  --brand: var(--pengou-brand);
+  --brand-2: var(--pengou-violet);
+  --accent: var(--pengou-coral);
+  --success: var(--pengou-ok);
+  --warn: var(--pengou-warn);
+  --danger: var(--pengou-bad);
   /* Encre des boutons sémantiques, découplée de --ink-strong (qui bascule en
      clair en mode sombre et s'effondrerait sur les aplats vifs). Vérifié ≥4.5:1
      dans les deux schémas. */
   --success-ink: #0b2545;
-  --danger-ink: var(--pingou-on-danger);
-  --grad-brand: linear-gradient(135deg, var(--pingou-cyan), var(--pingou-violet));
+  --danger-ink: var(--pengou-on-danger);
+  --grad-brand: linear-gradient(135deg, var(--pengou-cyan), var(--pengou-violet));
 
-  /* Réponses — couleur + forme + label (jamais la couleur seule). Contraste
-     texte/fond ≥4.5:1 vérifié : cyan/violet profonds en encre blanche,
-     corail/jaune vifs en encre bleu nuit. */
-  --ans-triangle: #0e7490;  --ans-triangle-ink: #ffffff;
-  --ans-diamond:  #ff7a3c;  --ans-diamond-ink:  #0b2545;
-  --ans-circle:   #ffc43d;  --ans-circle-ink:   #0b2545;
-  --ans-square:   #5b45d9;  --ans-square-ink:   #ffffff;
+  /* Réponses — couleur + forme + label (jamais la couleur seule), palette
+     « Arcade polaire » : une option garde la MÊME couleur partout (éditeur,
+     tuiles joueur, grand écran, révélation). `--ans-*-sh` = ombre portée
+     pleine (nuance foncée de l'aplat, relief de touche arcade). Contraste
+     texte/fond ≥4.5:1 vérifié : violet/sarcelle en encre blanche,
+     rose/glace en encre bleu nuit. */
+  --ans-triangle: #5b4bd6;  --ans-triangle-ink: #ffffff;  --ans-triangle-sh: #3a2e9e;
+  --ans-diamond:  #ff9ec4;  --ans-diamond-ink:  #0b2545;  --ans-diamond-sh:  #d9669a;
+  --ans-circle:   #007a99;  --ans-circle-ink:   #ffffff;  --ans-circle-sh:   #00566c;
+  --ans-square:   #bdebf7;  --ans-square-ink:   #0b2545;  --ans-square-sh:   #7fc3d8;
 
   /* Podium — or/argent/bronze, RÉSERVÉ au classement, jamais accent. */
   --gold:   #e3b341;
@@ -44,92 +47,106 @@
   --bronze: #e0954f;
 
   /* Focus visible — token de rôle. */
-  --focus: var(--pingou-focus);
+  --focus: var(--pengou-focus);
 
   color-scheme: light dark;
 }
 
-/* Grand écran : sombre assumé (le sous-arbre force data-scheme="dark"). */
+/* Scène live (joueur /play, rejoindre /join, pilotage /host, grand écran) :
+   banquise « Arcade polaire » assumée, indépendante de prefers-color-scheme
+   et du thème `app`. Valeurs en dur ici (plus de dérivation --pengou-*) pour
+   que la banquise reste identique quel que soit le mode OS, sans toucher
+   l'admin. Fond posé sur le wrapper lui-même : la scène ne dépend plus du
+   fond de .prototype-root derrière elle. */
 [data-theme='scene'] {
+  /* Fond posé sur le wrapper lui-même : la scène ne dépend plus du fond de
+     .prototype-root derrière elle. */
+  background: #0b2545;
+  color: #ffffff;
+  min-height: 100vh;
+
   --font-display: "Fredoka", "Trebuchet MS", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Nunito Sans", system-ui, ui-sans-serif, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: "DM Mono", "SFMono-Regular", ui-monospace, "Cascadia Code", Consolas, Menlo, monospace;
 
-  --stage: var(--pingou-bg);
-  --stage-2: var(--pingou-surface-2);
-  --surface: var(--pingou-surface);
-  --surface-2: var(--pingou-surface-2);
-  --line: var(--pingou-line);
-  --ink: var(--pingou-text);
-  --ink-dim: var(--pingou-muted);
-  --ink-strong: var(--pingou-ink);
-  --brand: var(--pingou-brand);
-  --brand-2: var(--pingou-violet);
-  --accent: var(--pingou-coral);
-  --success: var(--pingou-ok);
-  --warn: var(--pingou-warn);
-  --danger: var(--pingou-bad);
+  /* Banquise en dur : fond nuit polaire, surfaces creusées/en relief, glace
+     claire pour l'encre forte. */
+  --stage: #0b2545;
+  --stage-2: #06162b;
+  --surface: #12305a;
+  --surface-2: #0e2a4f;
+  --line: #1f4778;
+  --ink: #ffffff;
+  --ink-dim: #a9c3dd;
+  --ink-strong: #ffffff;
+  --brand: #00a6cc;
+  --brand-2: #7c6bf0;
+  --accent: #ff7a3c;
+  --success: #4fd6a6;
+  --warn: #ffd15e;
+  --danger: #ff6b5c;
   --success-ink: #0b2545;
-  --danger-ink: var(--pingou-on-danger);
-  --grad-brand: linear-gradient(135deg, var(--pingou-cyan), var(--pingou-violet));
+  --danger-ink: #0b2545;
+  --grad-brand: linear-gradient(135deg, #00a6cc, #7c6bf0);
 
-  /* Réponses — couleur + forme + label. Contraste ≥4.5:1 vérifié. */
-  --ans-triangle: #0e7490;  --ans-triangle-ink: #ffffff;
-  --ans-diamond:  #ff7a3c;  --ans-diamond-ink:  #0b2545;
-  --ans-circle:   #ffc43d;  --ans-circle-ink:   #0b2545;
-  --ans-square:   #5b45d9;  --ans-square-ink:   #ffffff;
+  /* Réponses — même mapping que le thème `app` (une option, une couleur
+     partout). Contraste ≥4.5:1 vérifié sur banquise. */
+  --ans-triangle: #5b4bd6;  --ans-triangle-ink: #ffffff;  --ans-triangle-sh: #3a2e9e;
+  --ans-diamond:  #ff9ec4;  --ans-diamond-ink:  #0b2545;  --ans-diamond-sh:  #d9669a;
+  --ans-circle:   #007a99;  --ans-circle-ink:   #ffffff;  --ans-circle-sh:   #00566c;
+  --ans-square:   #bdebf7;  --ans-square-ink:   #0b2545;  --ans-square-sh:   #7fc3d8;
 
   /* Podium — or/argent/bronze, RÉSERVÉ au classement, jamais accent. */
   --gold:   #e3b341;
   --silver: #c7ccdd;
   --bronze: #e0954f;
 
-  /* Focus visible — token de rôle. */
-  --focus: var(--pingou-focus);
+  /* Focus visible — cyan vif, contrasté sur banquise. */
+  --focus: #7fd6f0;
 
   color-scheme: dark;
 }
 
 /* data-scheme force la palette produit indépendamment de prefers-color-scheme.
-   On réexpose les primitives Pingou sous notre attribut dédié data-scheme pour
+   On réexpose les primitives Pengou sous notre attribut dédié data-scheme pour
    lever l'ambiguïté avec le thème PRODUIT (data-theme="app"|"scene"). */
 [data-scheme='dark'] {
-  --pingou-cyan: #2cc7e8;
-  --pingou-brand: #35cbec;
-  --pingou-cyan-soft: #0e3647;
-  --pingou-ink: #bfe4f2;
-  --pingou-coral: #ff8a52;
-  --pingou-yellow: #ffd15e;
-  --pingou-violet: #9a8bff;
-  --pingou-bg: #071826;
-  --pingou-surface: #0d2435;
-  --pingou-surface-2: #0a1e2d;
-  --pingou-text: #e8f4fb;
-  --pingou-muted: #9db4c4;
-  --pingou-line: #1c3a52;
-  --pingou-ok: #53d6a6;
-  --pingou-warn: #ffd15e;
-  --pingou-bad: #ff6b5c;
-  --pingou-on-danger: #0b2545;
-  --pingou-focus: #6fd3ee;
+  --pengou-cyan: #2cc7e8;
+  --pengou-brand: #35cbec;
+  --pengou-cyan-soft: #0e3647;
+  --pengou-ink: #bfe4f2;
+  --pengou-coral: #ff8a52;
+  --pengou-yellow: #ffd15e;
+  --pengou-violet: #9a8bff;
+  --pengou-bg: #071826;
+  --pengou-surface: #0d2435;
+  --pengou-surface-2: #0a1e2d;
+  --pengou-text: #e8f4fb;
+  --pengou-muted: #9db4c4;
+  --pengou-line: #1c3a52;
+  --pengou-ok: #53d6a6;
+  --pengou-warn: #ffd15e;
+  --pengou-bad: #ff6b5c;
+  --pengou-on-danger: #0b2545;
+  --pengou-focus: #6fd3ee;
 }
 [data-scheme='light'] {
-  --pingou-cyan: #00a6cc;
-  --pingou-brand: #0a7188;
-  --pingou-cyan-soft: #d6f2f9;
-  --pingou-ink: #0b2545;
-  --pingou-coral: #ff7a3c;
-  --pingou-yellow: #ffc43d;
-  --pingou-violet: #7c6bf0;
-  --pingou-bg: #eef6fb;
-  --pingou-surface: #ffffff;
-  --pingou-surface-2: #f0f7fc;
-  --pingou-text: #12222f;
-  --pingou-muted: #566b7a;
-  --pingou-line: #d6e6ef;
-  --pingou-ok: #25a873;
-  --pingou-warn: #b8860b;
-  --pingou-bad: #d14336;
-  --pingou-on-danger: #ffffff;
-  --pingou-focus: #0c7a99;
+  --pengou-cyan: #00a6cc;
+  --pengou-brand: #0a7188;
+  --pengou-cyan-soft: #d6f2f9;
+  --pengou-ink: #0b2545;
+  --pengou-coral: #ff7a3c;
+  --pengou-yellow: #ffc43d;
+  --pengou-violet: #7c6bf0;
+  --pengou-bg: #eef6fb;
+  --pengou-surface: #ffffff;
+  --pengou-surface-2: #f0f7fc;
+  --pengou-text: #12222f;
+  --pengou-muted: #566b7a;
+  --pengou-line: #d6e6ef;
+  --pengou-ok: #25a873;
+  --pengou-warn: #b8860b;
+  --pengou-bad: #d14336;
+  --pengou-on-danger: #ffffff;
+  --pengou-focus: #0c7a99;
 }

@@ -5,7 +5,7 @@ describe('loadConfig', () => {
   it('par défaut : single-tenant, Postgres local, scaling mémoire', () => {
     const cfg = loadConfig({})
     expect(cfg.tenancyMode).toBe('single')
-    expect(cfg.databaseUrl).toBe('postgres://pingou:pingou@localhost:5432/pingou')
+    expect(cfg.databaseUrl).toBe('postgres://pengou:pengou@localhost:5432/pengou')
     expect(cfg.scaling).toBe('memory')
     expect(cfg.port).toBe(3000)
   })

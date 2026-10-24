@@ -95,7 +95,7 @@ export function registerReportRoutes(app: FastifyInstance, deps: Deps): void {
       // Nom de fichier dérivé du PIN (chiffres uniquement) : jamais le titre du quiz, texte
       // non-fiable saisi par l'hôte, qui ne doit jamais atterrir tel quel dans un en-tête HTTP.
       const pinDigits = report.session.pin.replace(/[^0-9]/g, '')
-      const filename = `pingou-partie-${pinDigits}.csv`
+      const filename = `pengou-partie-${pinDigits}.csv`
 
       reply
         .header('content-type', 'text/csv; charset=utf-8')

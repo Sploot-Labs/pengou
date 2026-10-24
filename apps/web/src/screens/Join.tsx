@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { savePlayerSession } from '../realtime/playerSession'
 import { useGameSocket } from '../realtime/useGameSocket'
-import { Button, Logo, Mascot } from '../ui'
+import { Logo, Mascot } from '../ui'
 
 interface FieldErrors {
   pin?: string
@@ -91,40 +91,56 @@ export function Join() {
     }
   }
 
+  // Reflet visuel du PIN dans les 6 cases (aria-hidden) — la saisie réelle
+  // reste le <input> transparent posé par-dessus.
+  const pinCells = [0, 1, 2, 3, 4, 5].map((i) => pin[i] ?? '')
+  // Le champ PIN est toujours décrit par son aide ; l'éventuel message d'erreur
+  // s'ajoute devant (ordre de lecture : erreur puis rappel de l'attendu).
+  const pinDescribedBy = [errors.pin ? 'join-pin-error' : null, 'join-pin-aide']
+    .filter(Boolean)
+    .join(' ')
+
   return (
     <main className="join-screen" id="contenu-principal" tabIndex={-1}>
-      <Mascot size={140} />
-      <Logo />
+      <div className="join-head">
+        <Mascot size={120} />
+        <Logo />
+        {/* No PIN shown here: the player reads it off the big screen. Revealing
+            it on the joining device conflicts with the projector's role. */}
+        <p className="join-tagline">Pas de compte. Juste un code et un pseudo.</p>
+      </div>
 
-      {/* No PIN shown here: the player reads it off the big screen. Revealing
-          it on the joining device conflicts with the projector's role. */}
-      <p style={{ color: 'var(--ink-dim)' }}>
-        Saisis le code banquise affiché sur le grand écran pour rejoindre la colonie.
-      </p>
-
-      <form className="join-card" onSubmit={handleSubmit} noValidate>
-        <h1>Rejoindre la partie</h1>
-
+      <form className="join-form" onSubmit={handleSubmit} noValidate>
         <div className="join-field">
-          <label htmlFor="join-pin">Code PIN</label>
-          <input
-            id="join-pin"
-            ref={pinRef}
-            type="text"
-            inputMode="numeric"
-            pattern="[0-9]*"
-            autoComplete="off"
-            maxLength={6}
-            placeholder="6 chiffres"
-            value={pin}
-            onChange={(e) => {
-              // Filter in real time: digits only, capped at 6.
-              setPin(e.target.value.replace(/\D/g, '').slice(0, 6))
-              if (errors.pin) setErrors((prev) => ({ ...prev, pin: undefined }))
-            }}
-            aria-describedby={errors.pin ? 'join-pin-error' : undefined}
-            aria-invalid={errors.pin ? true : undefined}
-          />
+          <label htmlFor="join-pin">Code banquise</label>
+          <div className="join-pin">
+            {pinCells.map((digit, index) => (
+              <span className="join-pin__cell" key={index} aria-hidden="true">
+                {digit}
+              </span>
+            ))}
+            <input
+              id="join-pin"
+              className="join-pin__input"
+              ref={pinRef}
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              autoComplete="one-time-code"
+              maxLength={6}
+              value={pin}
+              onChange={(e) => {
+                // Filter in real time: digits only, capped at 6.
+                setPin(e.target.value.replace(/\D/g, '').slice(0, 6))
+                if (errors.pin) setErrors((prev) => ({ ...prev, pin: undefined }))
+              }}
+              aria-describedby={pinDescribedBy}
+              aria-invalid={errors.pin ? true : undefined}
+            />
+          </div>
+          <span className="join-hint" id="join-pin-aide">
+            Les 6 chiffres affichés sur le grand écran.
+          </span>
           {errors.pin && (
             <p className="join-error" id="join-pin-error" role="alert">
               {errors.pin}
@@ -133,14 +149,15 @@ export function Join() {
         </div>
 
         <div className="join-field">
-          <label htmlFor="join-pseudo">Pseudo</label>
+          <label htmlFor="join-pseudo">Ton pseudo</label>
           <input
             id="join-pseudo"
+            className="join-pseudo"
             ref={pseudoRef}
             type="text"
             autoComplete="off"
             maxLength={20}
-            placeholder="Ton pseudo"
+            placeholder="ex. Plume"
             value={pseudo}
             onChange={(e) => {
               setPseudo(e.target.value)
@@ -156,16 +173,13 @@ export function Join() {
           )}
         </div>
 
-        <Button variant="primary" type="submit" disabled={status === 'pending'}>
-          {status === 'pending' ? 'Connexion…' : 'Rejoindre'}
-        </Button>
+        <div className="join-spacer" />
 
-        <p className="join-reassure">Aucun compte, aucune installation, juste un pseudo.</p>
+        <button type="submit" className="player-cta" disabled={status === 'pending'}>
+          {status === 'pending' ? 'Connexion…' : 'Rejoindre la colonie'}
+        </button>
+        <p className="join-reassure">Ton pseudo est visible par toute la salle.</p>
       </form>
-
-      <p className="join-tagline">
-        Pingou : le quiz en direct, open-source. Chez vous ou dans le cloud.
-      </p>
     </main>
   )
 }
