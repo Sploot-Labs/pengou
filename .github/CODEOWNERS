@@ -1,7 +1,10 @@
-# Remplacez @OWNER-A-DEFINIR par le login GitHub du mainteneur ou une équipe @Sploot-Labs/<equipe>
-# Une règle par ligne : motif puis owners. La dernière règle qui correspond l'emporte.
-* @OWNER-A-DEFINIR
+# Propriétaires par défaut du code. Un owner CODEOWNERS doit être un utilisateur
+# (@login) ou une équipe de l'org (@org/equipe), jamais l'organisation seule.
+# L'équipe @Sploot-Labs/maintainers doit exister dans l'org pour que GitHub la
+# reconnaisse. Une règle par ligne : motif puis owners. La dernière règle qui
+# correspond l'emporte.
+* @Sploot-Labs/maintainers
 
-# Zones sensibles (à activer une fois le login connu) :
-# /packages/auth/ @OWNER-A-DEFINIR
-# /.github/ @OWNER-A-DEFINIR
+# Zones sensibles (décommenter pour les activer) :
+# /packages/auth/ @Sploot-Labs/maintainers
+# /.github/ @Sploot-Labs/maintainers
