@@ -1,9 +1,9 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": { "enabled": false },
+  "$schema": "https://biomejs.dev/schemas/2.6.3/schema.json",
+  "assist": { "actions": { "source": { "organizeImports": "off" } } },
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
-    "ignore": ["**/dist/**", "**/node_modules/**", ".worktrees/**", "**/drizzle/**", "pnpm-lock.yaml"]
+    "includes": ["**", "!**/dist/**", "!**/node_modules/**", "!**/.worktrees/**", "!**/drizzle/**", "!**/pnpm-lock.yaml"]
   },
   "formatter": {
     "enabled": true,
@@ -21,7 +21,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "style": {
         "noNonNullAssertion": "off",
         "noParameterAssign": "off",
@@ -32,7 +32,8 @@
       },
       "suspicious": {
         "noArrayIndexKey": "off",
-        "noRedeclare": "off"
+        "noRedeclare": "off",
+        "noDuplicateProperties": "warn"
       },
       "complexity": {
         "noForEach": "off",
@@ -42,7 +43,8 @@
         "noDelete": "warn"
       },
       "correctness": {
-        "useExhaustiveDependencies": "warn"
+        "useExhaustiveDependencies": "warn",
+        "useHookAtTopLevel": "warn"
       },
       "a11y": {
         "noAriaHiddenOnFocusable": "warn",
@@ -50,7 +52,8 @@
         "useValidAnchor": "warn",
         "useButtonType": "warn",
         "useKeyWithClickEvents": "off",
-        "useSemanticElements": "warn"
+        "useSemanticElements": "warn",
+        "useAriaPropsSupportedByRole": "warn"
       }
     }
   }
