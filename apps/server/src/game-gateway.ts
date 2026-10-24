@@ -326,6 +326,82 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     await engine.evictSession(sessionId).catch(() => {})
   }
 
+  /** Réauth + résolution tenant/rôle/owner (début historique de `host:create`). */
+  async function resolveHostContext(socket: Socket): Promise<{ userId: string; context: { tenantId: string; ownerId?: string } }> {
+    const authSession = await auth.api.getSession({ headers: fromNodeHeaders(socket.handshake.headers) })
+    if (!authSession?.user) throw new Error('authentification requise')
+
+    // Résolution PRÉ-contexte via systemDb (détermine le tenant + le rôle → ownerId
+    // role-aware : owner/admin peut lancer sur n'importe quel quiz du tenant, member sur les
+    // siens — parité avec les routes HTTP). En mode multi, le workspace actif est porté par le
+    // handshake socket (`io({ auth: { tenantId } })`, voir apps/web) — l'équivalent WS de
+    // l'en-tête `x-tenant-id`. Sans ça, `resolveTenantId` lèverait « tenant explicite requis ».
+    const explicitTenantId = typeof socket.handshake.auth?.tenantId === 'string'
+      ? (socket.handshake.auth.tenantId as string)
+      : undefined
+    const tenantId = await resolveTenantId(systemDb, config, { userId: authSession.user.id, explicitTenantId })
+    const role = (await getMembershipRole(systemDb, authSession.user.id, tenantId)) ?? 'member'
+    const ownerId = hasPermission(role, 'content:access-all') ? undefined : authSession.user.id
+    const context = { tenantId, ownerId }
+    return { userId: authSession.user.id, context }
+  }
+
+  /** Crée la partie (questions sous RLS, PIN, ligne DB, session moteur, meta, maps). Ne touche NI `socket.data` NI les rooms. */
+  async function buildHostedSession(
+    socket: Socket,
+    userId: string,
+    context: { tenantId: string; ownerId?: string },
+    quizId: string,
+  ): Promise<{ session: GameSession }> {
+    void socket
+    const { tenantId } = context
+    // Lecture du quiz sous RLS (appDb + GUC) : un quiz d'un autre tenant n'existe pas pour ce
+    // contexte → « quiz introuvable ».
+    const questionRows = await withTenantTx(appDb, context, (scope) => listQuestions(scope, quizId))
+    if (!questionRows) throw new Error('quiz introuvable')
+
+    const questions = questionRows.map(toEngineQuestion)
+
+    // DB d'abord (Task 2, unification moteur↔DB) : la ligne `game_session` doit exister
+    // AVANT le premier `engine.createSession` (qui appelle `store.save` — Task 3/4, le store
+    // persistant fait `UPDATE game_session SET engine_state=… WHERE id = session.id`, un
+    // UPDATE sur une ligne inexistante ne persisterait rien). Il faut donc connaître le PIN
+    // (généré par le moteur) AVANT de créer la ligne DB — d'où `generateUniquePin()`.
+    const pin = await engine.generateUniquePin()
+    // Création sous RLS (appDb + GUC) : WITH CHECK garantit tenant_id = contexte.
+    const dbSession = await withTenantTx(appDb, context, (scope) =>
+      createGameSession(scope, { quizId, hostId: userId, pin }))
+    if (!dbSession) throw new Error('création de la session impossible')
+
+    // L'id `game_session` DB devient l'id moteur — UN SEUL id partout (plus de map de
+    // correspondance inverse entre les deux, désormais inutile).
+    const session = await engine.createSession({
+      id: dbSession.id,
+      pin,
+      quizId,
+      tenantId,
+      hostId: userId,
+      questions,
+    })
+
+    sessionMetaByEngineId.set(session.id, {
+      dbSessionId: dbSession.id,
+      tenantId,
+      playerDbIds: new Map(),
+      revealedRounds: new Set(),
+      autoRevealedRounds: new Set(),
+      statusActiveSet: false,
+      readingTimeout: null,
+      questionTimeout: null,
+      autoAdvance: DEFAULT_AUTO_ADVANCE,
+      autoAdvanceDelayMs: DEFAULT_AUTO_ADVANCE_DELAY_MS,
+      advanceTimeout: null,
+      advanceNextAt: null,
+    })
+    pinToSessionId.set(session.pin, session.id)
+    return { session }
+  }
+
   function requireHost(socket: Socket): { sessionId: string; meta: SessionMeta } {
     const data = socket.data as SocketData
     if (data.role !== 'host' || !data.sessionId) throw new Error('action réservée à l\'hôte de la session')
@@ -776,69 +852,12 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     socket.on('host:create', async (payload: { quizId?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const authSession = await auth.api.getSession({ headers: fromNodeHeaders(socket.handshake.headers) })
-        if (!authSession?.user) throw new Error('authentification requise')
+        const { userId, context } = await resolveHostContext(socket)
 
         const quizId = payload?.quizId
         if (typeof quizId !== 'string' || !quizId) throw new Error('quizId requis')
 
-        // Résolution PRÉ-contexte via systemDb (détermine le tenant + le rôle → ownerId
-        // role-aware : owner/admin peut lancer sur n'importe quel quiz du tenant, member sur les
-        // siens — parité avec les routes HTTP). En mode multi, le workspace actif est porté par le
-        // handshake socket (`io({ auth: { tenantId } })`, voir apps/web) — l'équivalent WS de
-        // l'en-tête `x-tenant-id`. Sans ça, `resolveTenantId` lèverait « tenant explicite requis ».
-        const explicitTenantId = typeof socket.handshake.auth?.tenantId === 'string'
-          ? (socket.handshake.auth.tenantId as string)
-          : undefined
-        const tenantId = await resolveTenantId(systemDb, config, { userId: authSession.user.id, explicitTenantId })
-        const role = (await getMembershipRole(systemDb, authSession.user.id, tenantId)) ?? 'member'
-        const ownerId = hasPermission(role, 'content:access-all') ? undefined : authSession.user.id
-        const context = { tenantId, ownerId }
-
-        // Lecture du quiz sous RLS (appDb + GUC) : un quiz d'un autre tenant n'existe pas pour ce
-        // contexte → « quiz introuvable ».
-        const questionRows = await withTenantTx(appDb, context, (scope) => listQuestions(scope, quizId))
-        if (!questionRows) throw new Error('quiz introuvable')
-
-        const questions = questionRows.map(toEngineQuestion)
-
-        // DB d'abord (Task 2, unification moteur↔DB) : la ligne `game_session` doit exister
-        // AVANT le premier `engine.createSession` (qui appelle `store.save` — Task 3/4, le store
-        // persistant fait `UPDATE game_session SET engine_state=… WHERE id = session.id`, un
-        // UPDATE sur une ligne inexistante ne persisterait rien). Il faut donc connaître le PIN
-        // (généré par le moteur) AVANT de créer la ligne DB — d'où `generateUniquePin()`.
-        const pin = await engine.generateUniquePin()
-        // Création sous RLS (appDb + GUC) : WITH CHECK garantit tenant_id = contexte.
-        const dbSession = await withTenantTx(appDb, context, (scope) =>
-          createGameSession(scope, { quizId, hostId: authSession.user.id, pin }))
-        if (!dbSession) throw new Error('création de la session impossible')
-
-        // L'id `game_session` DB devient l'id moteur — UN SEUL id partout (plus de map de
-        // correspondance inverse entre les deux, désormais inutile).
-        const session = await engine.createSession({
-          id: dbSession.id,
-          pin,
-          quizId,
-          tenantId,
-          hostId: authSession.user.id,
-          questions,
-        })
-
-        sessionMetaByEngineId.set(session.id, {
-          dbSessionId: dbSession.id,
-          tenantId,
-          playerDbIds: new Map(),
-          revealedRounds: new Set(),
-          autoRevealedRounds: new Set(),
-          statusActiveSet: false,
-          readingTimeout: null,
-          questionTimeout: null,
-          autoAdvance: DEFAULT_AUTO_ADVANCE,
-          autoAdvanceDelayMs: DEFAULT_AUTO_ADVANCE_DELAY_MS,
-          advanceTimeout: null,
-          advanceNextAt: null,
-        })
-        pinToSessionId.set(session.pin, session.id)
+        const { session } = await buildHostedSession(socket, userId, context, quizId)
 
         const data = socket.data as SocketData
         data.role = 'host'
@@ -846,6 +865,52 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         await socket.join(roomName(session.id))
 
         reply({ sessionId: session.id, pin: session.pin })
+      } catch (e) {
+        reply({ error: message(e) })
+      }
+    })
+
+    // Relance depuis le podium : crée une NOUVELLE partie sur `quizId` et invite chaque participant
+    // connecté (joueurs + grand écran) à la rejoindre via `session:relaunched`. Le serveur ne
+    // déplace aucune socket ni aucune room : chaque client recharge et rejoint par son chemin de
+    // reconnexion habituel. Les échecs pré-vol (podium, quiz, droits) surviennent AVANT toute
+    // migration ; la migration elle-même est best-effort.
+    socket.on('host:relaunch', async (payload: { quizId?: unknown } | undefined, ack?: (res: unknown) => void) => {
+      const reply = typeof ack === 'function' ? ack : () => {}
+      try {
+        const { sessionId: oldId } = requireHost(socket)
+        const quizId = payload?.quizId
+        if (typeof quizId !== 'string' || !quizId) throw new Error('quizId requis')
+
+        const oldSession = await engine.getSession(oldId)
+        if (oldSession.phase !== 'podium') throw new Error('host:relaunch : relance possible seulement en fin de partie')
+
+        const { userId, context } = await resolveHostContext(socket)
+        const { session: neu } = await buildHostedSession(socket, userId, context, quizId)
+        const newMeta = sessionMetaByEngineId.get(neu.id)!
+
+        const sockets = await io.in(roomName(oldId)).fetchSockets()
+        for (const s of sockets) {
+          const sd = s.data as SocketData
+          if (sd.role === 'player' && sd.playerId) {
+            const oldPlayer = oldSession.players[sd.playerId]
+            if (!oldPlayer) continue
+            try {
+              const { player } = await engine.addPlayer(neu.id, oldPlayer.nickname)
+              const dbPlayer = await withTenantTx(appDb, { tenantId: newMeta.tenantId }, (scope) =>
+                addSessionPlayer(scope.db, newMeta.dbSessionId, { nickname: oldPlayer.nickname, joinToken: player.joinToken }))
+              newMeta.playerDbIds.set(player.id, dbPlayer.id)
+              s.emit('session:relaunched', { role: 'player', pin: neu.pin, playerId: player.id, joinToken: player.joinToken, nickname: oldPlayer.nickname })
+            } catch { /* best-effort : ce participant reste sur l'ancien podium */ }
+          } else if (sd.role === 'screen') {
+            const displayToken = crypto.randomUUID()
+            screenTokenToSessionId.set(displayToken, neu.id)
+            s.emit('session:relaunched', { role: 'screen', pin: neu.pin, sessionId: neu.id, displayToken })
+          }
+          // role 'host' (socket appelante) : ignorée, l'ack suffit.
+        }
+
+        reply({ sessionId: neu.id, pin: neu.pin })
       } catch (e) {
         reply({ error: message(e) })
       }

@@ -1581,6 +1581,168 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
+  describe('host:relaunch (relance depuis le podium)', () => {
+    /** Hôte + quizA (session créée dessus) + quizB (non lancé), même cookie. */
+    async function setupRelaunch(app: FastifyInstance, url: string, email: string) {
+      const cookie = await signUp(app, email)
+      const mkQuiz = async (title: string) => {
+        const quizRes = await app.inject({ method: 'POST', url: '/api/quizzes', payload: { title }, headers: { 'content-type': 'application/json', cookie } })
+        expect(quizRes.statusCode).toBe(201)
+        const quiz = quizRes.json() as { id: string }
+        const qRes = await app.inject({
+          method: 'POST',
+          url: `/api/quizzes/${quiz.id}/questions`,
+          payload: { type: 'mcq', prompt: 'Capitale de la France ?', timeLimit: 20, readingTime: 0, payload: { options: [{ label: 'Paris', correct: true }, { label: 'Lyon', correct: false }] } },
+          headers: { 'content-type': 'application/json', cookie },
+        })
+        expect(qRes.statusCode).toBe(201)
+        return quiz.id
+      }
+      const quizA = await mkQuiz('Quiz A')
+      const quizB = await mkQuiz('Quiz B')
+      const hostSocket = await connectClient(url, { cookie })
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', { quizId: quizA })
+      expect(created.error).toBeUndefined()
+      return { hostSocket, pinA: created.pin!, quizA, quizB }
+    }
+
+    async function toPodium(hostSocket: ClientSocket, observer: ClientSocket) {
+      const podium = waitFor(observer, 'podium')
+      expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+      expect((await ack<{ error?: string }>(hostSocket, 'host:next', {})).error).toBeUndefined()
+      await podium
+    }
+
+    it('host:relaunch au podium crée une nouvelle partie et migre le joueur connecté', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pinA, quizB } = await setupRelaunch(app, url, 'gateway-relaunch-ok@example.com')
+        clients.push(hostSocket)
+        const player = await connectClient(url)
+        clients.push(player)
+        expect((await ack<{ error?: string }>(player, 'player:join', { pin: pinA, nickname: 'Ana' })).error).toBeUndefined()
+        await toPodium(hostSocket, player)
+
+        const relaunched = waitFor<{ role: string; pin: string; playerId: string; joinToken: string; nickname: string }>(player, 'session:relaunched')
+        const res = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:relaunch', { quizId: quizB })
+        expect(res.error).toBeUndefined()
+        const ev = await relaunched
+        expect(ev.role).toBe('player')
+        expect(ev.nickname).toBe('Ana')
+        expect(ev.pin).toBe(res.pin)
+        expect(res.pin).not.toBe(pinA)
+        expect(ev.playerId).toBeTruthy()
+        expect(ev.joinToken).toBeTruthy()
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('host:relaunch hors podium est refusé (aucune nouvelle partie, aucune migration)', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pinA, quizB } = await setupRelaunch(app, url, 'gateway-relaunch-nopodium@example.com')
+        clients.push(hostSocket)
+        const player = await connectClient(url)
+        clients.push(player)
+        await ack(player, 'player:join', { pin: pinA, nickname: 'Ana' })
+        expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+
+        const noRelaunch = raceNoEvent(player, 'session:relaunched', 400)
+        const res = await ack<{ error?: string; sessionId?: string }>(hostSocket, 'host:relaunch', { quizId: quizB })
+        expect(res.error).toBeDefined()
+        expect(res.sessionId).toBeUndefined()
+        expect(await noRelaunch).toBe(true)
+        const rows = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, quizB))
+        expect(rows).toHaveLength(0)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('host:relaunch est refusé pour un socket non-hôte', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pinA, quizB } = await setupRelaunch(app, url, 'gateway-relaunch-nonhost@example.com')
+        clients.push(hostSocket)
+        const mallory = await connectClient(url)
+        clients.push(mallory)
+        await ack(mallory, 'player:join', { pin: pinA, nickname: 'Mallory' })
+        const res = await ack<{ error?: string }>(mallory, 'host:relaunch', { quizId: quizB })
+        expect(res.error).toBeDefined()
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("host:relaunch sur un quiz d'un autre tenant est refusé, aucune nouvelle partie", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pinA } = await setupRelaunch(app, url, 'gateway-relaunch-foreign@example.com')
+        clients.push(hostSocket)
+        const [foreignTenant] = await ctx.db.insert(schema.tenant).values({ name: 'Tenant étranger (relaunch)' }).returning()
+        const [foreignOwner] = await ctx.db.insert(schema.user)
+          .values({ id: crypto.randomUUID(), email: 'foreign-owner-relaunch@x.fr', name: 'Étranger', emailVerified: false })
+          .returning()
+        const foreignScope = tenantScope(ctx.db, foreignTenant.id)
+        const foreignQuiz = await createQuiz(foreignScope, { ownerId: foreignOwner.id, title: 'Quiz étranger (relaunch)' })
+        await createQuestion(foreignScope, foreignQuiz.id, {
+          type: 'mcq', prompt: 'Question étrangère', timeLimit: 20, readingTime: 0,
+          payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+        })
+        const player = await connectClient(url)
+        clients.push(player)
+        await ack(player, 'player:join', { pin: pinA, nickname: 'Ana' })
+        await toPodium(hostSocket, player)
+
+        const noRelaunch = raceNoEvent(player, 'session:relaunched', 400)
+        const res = await ack<{ error?: string; sessionId?: string }>(hostSocket, 'host:relaunch', { quizId: foreignQuiz.id })
+        expect(res.error).toBeDefined()
+        expect(res.sessionId).toBeUndefined()
+        expect(await noRelaunch).toBe(true)
+        const rows = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, foreignQuiz.id))
+        expect(rows).toHaveLength(0)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("un joueur déconnecté au podium n'est pas migré, les connectés le sont", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pinA, quizB } = await setupRelaunch(app, url, 'gateway-relaunch-disc@example.com')
+        clients.push(hostSocket)
+        const player1 = await connectClient(url)
+        const player2 = await connectClient(url)
+        clients.push(player1, player2)
+        await ack(player1, 'player:join', { pin: pinA, nickname: 'Ana' })
+        await ack(player2, 'player:join', { pin: pinA, nickname: 'Bob' })
+        await toPodium(hostSocket, player1)
+        player2.disconnect()
+        await new Promise((r) => setTimeout(r, 200))
+
+        const got1 = waitFor<{ nickname: string }>(player1, 'session:relaunched')
+        const noEv2 = raceNoEvent(player2, 'session:relaunched', 400)
+        const res = await ack<{ error?: string }>(hostSocket, 'host:relaunch', { quizId: quizB })
+        expect(res.error).toBeUndefined()
+        expect((await got1).nickname).toBe('Ana')
+        expect(await noEv2).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+  })
+
   // Task 3 — phase 'reading' (temps de lecture) : planification serveur (setTimeout) de la
   // révélation automatique. Fake timers (`vi.useFakeTimers`) pour ne jamais attendre de vraies
   // secondes en test — voir le commentaire de `raceNoEvent` et les notes de `SessionMeta.readingTimeout`
