@@ -97,9 +97,15 @@ describe('PlayerLive — phase lecture (question:reading)', () => {
     // Aucune saisie possible pendant la lecture : ni tuile mcq, ni bouton
     // vrai/faux, ni champ texte/slider — cohérent avec le rejet serveur des
     // réponses hors phase 'question' (le payload `question:reading` n'a de
-    // toute façon aucune option à afficher).
+    // toute façon aucune option à afficher). Le seul bouton présent est le
+    // contrôle de son global (coupe/active le son), jamais une réponse.
     expect(document.querySelector('.player-tiles')).toBeNull()
-    expect(screen.queryAllByRole('button')).toHaveLength(0)
+    expect(document.querySelector('.player-duo')).toBeNull()
+    expect(document.querySelector('.player-text')).toBeNull()
+    expect(document.querySelector('.player-slider')).toBeNull()
+    const buttons = screen.queryAllByRole('button')
+    expect(buttons).toHaveLength(1)
+    expect(buttons[0]).toHaveAccessibleName(/son/i)
     expect(document.querySelector('input')).toBeNull()
 
     // Focus RGAA 2.4.3 : le titre de la nouvelle phase reçoit le focus au montage.
