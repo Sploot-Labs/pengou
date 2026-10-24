@@ -15,11 +15,11 @@
   "dependencies": {
     "@splootlabs/db": "workspace:*",
     "@splootlabs/shared": "workspace:*",
-    "better-auth": "^1.6.24"
+    "better-auth": "^1.7.12"
   },
   "devDependencies": {
     "@better-auth/cli": "^1.4.21",
     "@types/node": "^18.0.0 || >=20.0.0",
-    "drizzle-orm": "^0.45.2"
+    "drizzle-orm": "^0.45.4"
   }
 }
