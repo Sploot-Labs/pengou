@@ -35,3 +35,8 @@ export interface ReadingView {
 export interface AutoAdvanceView {
   nextAt: number | null
 }
+
+/** Diffusé quand l'hôte relance une partie depuis le podium (une variante par rôle). */
+export type SessionRelaunchedView =
+  | { role: 'player'; pin: string; playerId: string; joinToken: string; nickname: string }
+  | { role: 'screen'; pin: string; sessionId: string; displayToken: string }

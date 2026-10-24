@@ -2,9 +2,10 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { normalizeText, sliderTolerance } from '@splootlabs/quiz'
 import { useCue, useSound } from '../motion/index.js'
-import { clearPlayerSession, loadPlayerSession } from '../realtime/playerSession'
+import { clearPlayerSession, loadPlayerSession, savePlayerSession } from '../realtime/playerSession'
+import { hardReload } from '../realtime/hardReload'
 import { useGameSocket } from '../realtime/useGameSocket'
-import type { RankingEntry, ReadingView } from '../realtime/contracts'
+import type { RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
 import { AnswerShape, AnswerTile, Logo, SoundToggle, TimerPill } from '../ui'
 
 /**
@@ -378,6 +379,14 @@ export function PlayerLive() {
       setConnection('reconnecting')
     })
 
+    // Relance depuis le podium : on adopte la nouvelle identité puis on recharge
+    // /play ; le remontage rejoint le nouveau lobby via `player:reconnect`.
+    const offRelaunch = on<SessionRelaunchedView>('session:relaunched', (v) => {
+      if (v.role !== 'player') return
+      savePlayerSession({ pin: v.pin, playerId: v.playerId, joinToken: v.joinToken, nickname: v.nickname })
+      hardReload('/play')
+    })
+
     const offReading = on<ReadingView>('question:reading', (view) => {
       setReading(view)
       // Même reset qu'à `question:show` ci-dessous — la phase lecture précède
@@ -449,6 +458,7 @@ export function PlayerLive() {
       cancelled = true
       offConnect()
       offDisconnect()
+      offRelaunch()
       offReading()
       offShow()
       offTimer()

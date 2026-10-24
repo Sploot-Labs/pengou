@@ -4,6 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { MotionProvider } from '../motion/index.js'
 import { clearPlayerSession, loadPlayerSession, savePlayerSession } from '../realtime/playerSession'
+import { hardReload } from '../realtime/hardReload'
 import { PlayerLive } from './PlayerLive'
 
 /**
@@ -51,6 +52,8 @@ vi.mock('../realtime/useGameSocket', () => ({
     },
   }),
 }))
+
+vi.mock('../realtime/hardReload', () => ({ hardReload: vi.fn() }))
 
 function renderPlayerLive() {
   return render(
@@ -102,5 +105,34 @@ describe('PlayerLive — enchaîner une partie depuis le podium', () => {
     // (sinon PlayerLive tenterait de se reconnecter à l'ancienne room).
     expect(await screen.findByText('Rejoindre')).toBeInTheDocument()
     expect(loadPlayerSession()).toBeNull()
+  })
+})
+
+describe('PlayerLive : adoption de la partie relancée', () => {
+  beforeEach(() => {
+    handlers.clear()
+    mockEmitAck.mockClear()
+    vi.mocked(hardReload).mockClear()
+    savePlayerSession({ pin: '482913', playerId: 'p1', joinToken: 'tok1', nickname: 'Ana' })
+  })
+  afterEach(() => {
+    cleanup()
+    clearPlayerSession()
+  })
+
+  it('session:relaunched (joueur) : enregistre la nouvelle identité et recharge /play', async () => {
+    renderPlayerLive()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:reconnect', expect.anything()))
+    emitServerEvent('session:relaunched', { role: 'player', pin: '777777', playerId: 'p9', joinToken: 'tok9', nickname: 'Ana' })
+    expect(loadPlayerSession()).toMatchObject({ pin: '777777', playerId: 'p9', joinToken: 'tok9', nickname: 'Ana' })
+    expect(hardReload).toHaveBeenCalledWith('/play')
+  })
+
+  it('session:relaunched (écran) : ignoré', async () => {
+    renderPlayerLive()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:reconnect', expect.anything()))
+    emitServerEvent('session:relaunched', { role: 'screen', pin: '777777', sessionId: 's9', displayToken: 'd9' })
+    expect(loadPlayerSession()).toMatchObject({ pin: '482913', playerId: 'p1' })
+    expect(hardReload).not.toHaveBeenCalled()
   })
 })
