@@ -3,7 +3,8 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue, useFocusOnMount, useSound } from '../motion/index.js'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
-import type { RankingEntry, ReadingView } from '../realtime/contracts'
+import type { RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
+import { hardReload } from '../realtime/hardReload'
 import { ThemeProvider } from '../theme/ThemeProvider.js'
 import { AnswerShape, JoinInvite, Logo, PinDisplay, SoundToggle, TimerRing } from '../ui'
 import { PodiumView } from './Podium'
@@ -254,7 +255,19 @@ function BigScreenInner() {
       setAutoNextAt(nextAt)
     })
 
+    // Relance depuis le podium : recharge complet vers le nouveau grand écran
+    // (le `screen:join` du remontage consomme le nouveau jeton, à usage unique).
+    const offRelaunch = on<SessionRelaunchedView>('session:relaunched', (v) => {
+      if (v.role !== 'screen') return
+      const u = new URL('/screen/' + v.sessionId, window.location.origin)
+      u.searchParams.set('token', v.displayToken)
+      u.searchParams.set('pin', v.pin)
+      if (quizTitle) u.searchParams.set('title', quizTitle)
+      hardReload(u.pathname + u.search)
+    })
+
     return () => {
+      offRelaunch()
       offLobby()
       offReading()
       offShow()
