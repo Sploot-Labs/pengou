@@ -1,4 +1,4 @@
-import { createElement, type ReactNode } from 'react'
+import { createElement, type JSX, type ReactNode } from 'react'
 import { useReducedMotion } from '../MotionProvider.js'
 
 /** Apparition (fade + rise). Le contenu est TOUJOURS dans le DOM (l'animation
