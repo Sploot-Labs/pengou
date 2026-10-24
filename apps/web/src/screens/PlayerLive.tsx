@@ -1136,6 +1136,21 @@ export function PlayerLive() {
               ))}
             </ol>
           )}
+
+          {/* Enchaîner une autre partie : on oublie l'identité de CETTE partie
+              (sinon, de retour sur /play, PlayerLive tenterait de se reconnecter
+              à la room terminée via `player:reconnect`) puis on renvoie vers
+              /join, où le joueur saisit un nouveau code. */}
+          <button
+            type="button"
+            className="player-cta player-result__rejoin"
+            onClick={() => {
+              clearPlayerSession()
+              navigate('/join')
+            }}
+          >
+            Rejoindre une autre partie
+          </button>
         </div>
       )}
     </main>

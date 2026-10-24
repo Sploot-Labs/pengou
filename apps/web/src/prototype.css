@@ -1736,6 +1736,13 @@
   color: var(--accent);
 }
 
+/* Bouton « rejoindre une autre partie » : le CTA fait 100 % de large par
+   défaut, on le borne dans la colonne centrée du podium. */
+.player-result__rejoin {
+  margin-top: var(--space-4);
+  max-width: 420px;
+}
+
 /* ====================================================================== */
 /* BigScreen                                                               */
 /* ====================================================================== */
