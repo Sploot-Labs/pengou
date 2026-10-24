@@ -1,0 +1,7 @@
+# Remplacez @OWNER-A-DEFINIR par le login GitHub du mainteneur ou une équipe @Sploot-Labs/<equipe>
+# Une règle par ligne : motif puis owners. La dernière règle qui correspond l'emporte.
+* @OWNER-A-DEFINIR
+
+# Zones sensibles (à activer une fois le login connu) :
+# /packages/auth/ @OWNER-A-DEFINIR
+# /.github/ @OWNER-A-DEFINIR

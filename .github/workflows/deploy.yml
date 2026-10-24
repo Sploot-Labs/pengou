@@ -1,0 +1,118 @@
+name: Deploy
+
+# Déploiement SSH vers le VPS. Le job est protégé par l'environnement `production`
+# (approbation requise). Les secrets VPS_* et GHCR_* vivent dans cet environnement.
+# Ce workflow démarre en parallèle de Release sur le même tag : approuvez le déploiement
+# `production` seulement après que le workflow Release a publié l'image sur GHCR.
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version à déployer, sans le préfixe v (ex. 1.2.3)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Déterminer la version à déployer
+        id: version
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_VERSION: ${{ inputs.version }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            tag="$INPUT_VERSION"
+          else
+            tag="$REF_NAME"
+          fi
+          tag="${tag#v}"
+          if ! echo "$tag" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
+            echo "Version invalide : '$tag' (attendu : 1.2.3)" >&2
+            exit 1
+          fi
+          echo "image_tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Copier docker-compose.prod.yml sur le VPS
+        uses: appleboy/scp-action@ff85246acaad7bdce478db94a363cd2bf7c90345 # v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_SSH_PORT || 22 }}
+          source: docker-compose.prod.yml
+          target: ${{ secrets.VPS_DEPLOY_PATH }}
+
+      - name: Déployer sur le VPS
+        uses: appleboy/ssh-action@0ff4204d59e8e51228ff73bce53f80d53301dee2 # v1.2.5
+        env:
+          IMAGE_TAG: ${{ steps.version.outputs.image_tag }}
+          GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
+          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+          DEPLOY_PATH: ${{ secrets.VPS_DEPLOY_PATH }}
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_SSH_PORT || 22 }}
+          envs: IMAGE_TAG,GHCR_USERNAME,GHCR_TOKEN,DEPLOY_PATH
+          script_stop: true
+          script: |
+            set -euo pipefail
+            cd "$DEPLOY_PATH"
+            echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
+            export IMAGE_TAG
+            COMPOSE="docker compose -f docker-compose.prod.yml"
+            # L'image peut ne pas être encore publiée (Release tourne en parallèle) : retry borné.
+            pulled=0
+            for i in 1 2 3 4 5 6; do
+              if $COMPOSE pull; then
+                pulled=1
+                break
+              fi
+              if [ "$i" -lt 6 ]; then
+                echo "Pull en échec (tentative $i/6), nouvelle tentative dans $((i * 10))s..."
+                sleep $((i * 10))
+              fi
+            done
+            if [ "$pulled" -ne 1 ]; then
+              echo "Impossible de récupérer l'image $IMAGE_TAG après 6 tentatives" >&2
+              exit 1
+            fi
+            # Migration bloquante avant le up : un échec interrompt le déploiement.
+            $COMPOSE run --rm app node apps/server/dist/migrate.js
+            $COMPOSE up -d
+            docker image prune -f
+            # Sonde post-déploiement : /health doit répondre 2xx.
+            ok=0
+            for i in 1 2 3 4 5 6 7 8; do
+              if curl -fsS --max-time 5 http://127.0.0.1:3000/health > /dev/null; then
+                echo "Sonde /health OK (tentative $i)"
+                ok=1
+                break
+              fi
+              echo "Sonde /health en échec (tentative $i), nouvelle tentative..."
+              if [ "$i" -lt 8 ]; then
+                sleep $((i * 3))
+              fi
+            done
+            if [ "$ok" -ne 1 ]; then
+              echo "Le service ne répond pas sur /health après déploiement" >&2
+              $COMPOSE logs --tail=50 app >&2 || true
+              exit 1
+            fi
