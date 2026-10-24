@@ -1603,7 +1603,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const hostSocket = await connectClient(url, { cookie })
       const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', { quizId: quizA })
       expect(created.error).toBeUndefined()
-      return { hostSocket, pinA: created.pin!, quizA, quizB }
+      return { hostSocket, pinA: created.pin!, sessionIdA: created.sessionId!, quizA, quizB }
     }
 
     async function toPodium(hostSocket: ClientSocket, observer: ClientSocket) {
@@ -1634,6 +1634,11 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         expect(res.pin).not.toBe(pinA)
         expect(ev.playerId).toBeTruthy()
         expect(ev.joinToken).toBeTruthy()
+        // Ligne DB du nouveau joueur, dans la NOUVELLE session, avec le joinToken émis.
+        const rows = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.sessionId, res.sessionId!))
+        expect(rows).toHaveLength(1)
+        expect(rows[0].nickname).toBe('Ana')
+        expect(rows[0].joinToken).toBe(ev.joinToken)
       } finally {
         for (const c of clients) c.disconnect()
         await app.close()
@@ -1673,8 +1678,11 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         const mallory = await connectClient(url)
         clients.push(mallory)
         await ack(mallory, 'player:join', { pin: pinA, nickname: 'Mallory' })
+        const before = await ctx.db.select().from(schema.gameSession)
         const res = await ack<{ error?: string }>(mallory, 'host:relaunch', { quizId: quizB })
         expect(res.error).toBeDefined()
+        const after = await ctx.db.select().from(schema.gameSession)
+        expect(after).toHaveLength(before.length)
       } finally {
         for (const c of clients) c.disconnect()
         await app.close()
@@ -1715,6 +1723,70 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       }
     }, 30_000)
 
+    it('un grand écran connecté reçoit session:relaunched (role screen) avec un nouveau displayToken et le pin de la nouvelle partie', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, quizB } = await setupRelaunch(app, url, 'gateway-relaunch-screen@example.com')
+        clients.push(hostSocket)
+        const tokenAck = await ack<{ displayToken?: string; error?: string }>(hostSocket, 'host:createScreenToken', {})
+        expect(tokenAck.error).toBeUndefined()
+        const screen = await connectClient(url)
+        clients.push(screen)
+        expect((await ack<{ error?: string }>(screen, 'screen:join', { displayToken: tokenAck.displayToken })).error).toBeUndefined()
+        await toPodium(hostSocket, screen)
+
+        const relaunched = waitFor<{ role: string; pin: string; sessionId: string; displayToken: string }>(screen, 'session:relaunched')
+        const res = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:relaunch', { quizId: quizB })
+        expect(res.error).toBeUndefined()
+        const ev = await relaunched
+        expect(ev.role).toBe('screen')
+        expect(ev.pin).toBe(res.pin)
+        expect(ev.sessionId).toBe(res.sessionId)
+        expect(ev.displayToken).toBeTruthy()
+        expect(ev.displayToken).not.toBe(tokenAck.displayToken)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("host:relaunch : un member ne peut pas relancer sur le quiz d'un autre member (parité RBAC), aucune migration", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pinA } = await setupRelaunch(app, url, 'gw-relaunch-memberb@example.com')
+        clients.push(hostSocket)
+        await signUp(app, 'gw-relaunch-membera@example.com')
+        const tenantId = await ensureDefaultTenant(ctx.db)
+        const [memberAU] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'gw-relaunch-membera@example.com'))
+        const [memberBU] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'gw-relaunch-memberb@example.com'))
+        await ctx.db.update(schema.membership).set({ role: 'member' }).where(eq(schema.membership.userId, memberAU.id))
+        await ctx.db.update(schema.membership).set({ role: 'member' }).where(eq(schema.membership.userId, memberBU.id))
+        const scopeA = tenantScope(ctx.db, tenantId, memberAU.id)
+        const quizOfA = await createQuiz(scopeA, { ownerId: memberAU.id, title: 'Quiz de memberA (relaunch)' })
+        await createQuestion(scopeA, quizOfA.id, {
+          type: 'mcq', prompt: 'Q', timeLimit: 20, readingTime: 0,
+          payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+        })
+        const player = await connectClient(url)
+        clients.push(player)
+        await ack(player, 'player:join', { pin: pinA, nickname: 'Ana' })
+        await toPodium(hostSocket, player)
+
+        const noRelaunch = raceNoEvent(player, 'session:relaunched', 400)
+        const res = await ack<{ error?: string; sessionId?: string }>(hostSocket, 'host:relaunch', { quizId: quizOfA.id })
+        expect(res.error).toBeTruthy()
+        expect(res.sessionId).toBeUndefined()
+        expect(await noRelaunch).toBe(true)
+        const rows = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, quizOfA.id))
+        expect(rows).toHaveLength(0)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
     it("un joueur déconnecté au podium n'est pas migré, les connectés le sont", async () => {
       const { app, url } = await buildApp()
       const clients: ClientSocket[] = []
@@ -1731,11 +1803,12 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         await new Promise((r) => setTimeout(r, 200))
 
         const got1 = waitFor<{ nickname: string }>(player1, 'session:relaunched')
-        const noEv2 = raceNoEvent(player2, 'session:relaunched', 400)
-        const res = await ack<{ error?: string }>(hostSocket, 'host:relaunch', { quizId: quizB })
+        const res = await ack<{ sessionId?: string; error?: string }>(hostSocket, 'host:relaunch', { quizId: quizB })
         expect(res.error).toBeUndefined()
         expect((await got1).nickname).toBe('Ana')
-        expect(await noEv2).toBe(true)
+        // État serveur : seule Ana a été recréée dans la nouvelle session (Bob, déconnecté, non migré).
+        const rows = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.sessionId, res.sessionId!))
+        expect(rows.map((r) => r.nickname)).toEqual(['Ana'])
       } finally {
         for (const c of clients) c.disconnect()
         await app.close()
