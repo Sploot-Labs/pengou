@@ -89,6 +89,16 @@ describe('HostLive, relance au podium', () => {
     expect(hardReload).not.toHaveBeenCalled()
   })
 
+  it('aucun quiz : message à la place du sélecteur et du bouton', async () => {
+    const { listQuizzes } = await import('../api/quizzes')
+    vi.mocked(listQuizzes).mockResolvedValueOnce([])
+    renderHostLive()
+    emitServerEvent('podium', { top: [] })
+
+    await screen.findByText('Aucun quiz disponible à relancer.')
+    expect(screen.queryByRole('button', { name: 'Relancer une partie' })).toBeNull()
+  })
+
   it('pas de contrôle de relance hors podium', () => {
     renderHostLive()
     expect(screen.queryByRole('button', { name: 'Relancer une partie' })).toBeNull()

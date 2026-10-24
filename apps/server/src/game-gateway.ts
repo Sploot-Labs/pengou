@@ -348,12 +348,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
 
   /** Crée la partie (questions sous RLS, PIN, ligne DB, session moteur, meta, maps). Ne touche NI `socket.data` NI les rooms. */
   async function buildHostedSession(
-    socket: Socket,
     userId: string,
     context: { tenantId: string; ownerId?: string },
     quizId: string,
   ): Promise<{ session: GameSession }> {
-    void socket
     const { tenantId } = context
     // Lecture du quiz sous RLS (appDb + GUC) : un quiz d'un autre tenant n'existe pas pour ce
     // contexte → « quiz introuvable ».
@@ -852,12 +850,12 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     socket.on('host:create', async (payload: { quizId?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { userId, context } = await resolveHostContext(socket)
-
         const quizId = payload?.quizId
         if (typeof quizId !== 'string' || !quizId) throw new Error('quizId requis')
 
-        const { session } = await buildHostedSession(socket, userId, context, quizId)
+        const { userId, context } = await resolveHostContext(socket)
+
+        const { session } = await buildHostedSession(userId, context, quizId)
 
         const data = socket.data as SocketData
         data.role = 'host'
@@ -886,28 +884,42 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (oldSession.phase !== 'podium') throw new Error('host:relaunch : relance possible seulement en fin de partie')
 
         const { userId, context } = await resolveHostContext(socket)
-        const { session: neu } = await buildHostedSession(socket, userId, context, quizId)
+        const { session: neu } = await buildHostedSession(userId, context, quizId)
         const newMeta = sessionMetaByEngineId.get(neu.id)!
 
-        const sockets = await io.in(roomName(oldId)).fetchSockets()
-        for (const s of sockets) {
-          const sd = s.data as SocketData
-          if (sd.role === 'player' && sd.playerId) {
-            const oldPlayer = oldSession.players[sd.playerId]
-            if (!oldPlayer) continue
-            try {
-              const { player } = await engine.addPlayer(neu.id, oldPlayer.nickname)
-              const dbPlayer = await withTenantTx(appDb, { tenantId: newMeta.tenantId }, (scope) =>
-                addSessionPlayer(scope.db, newMeta.dbSessionId, { nickname: oldPlayer.nickname, joinToken: player.joinToken }))
-              newMeta.playerDbIds.set(player.id, dbPlayer.id)
-              s.emit('session:relaunched', { role: 'player', pin: neu.pin, playerId: player.id, joinToken: player.joinToken, nickname: oldPlayer.nickname })
-            } catch { /* best-effort : ce participant reste sur l'ancien podium */ }
-          } else if (sd.role === 'screen') {
-            const displayToken = crypto.randomUUID()
-            screenTokenToSessionId.set(displayToken, neu.id)
-            s.emit('session:relaunched', { role: 'screen', pin: neu.pin, sessionId: neu.id, displayToken })
+        // Invariant : une relance engagée (nouvelle session créée) n'est jamais abandonnée.
+        // Toute la migration est best-effort et ne doit pas atteindre le `catch` externe, sinon
+        // l'hôte recevrait une erreur alors que des clients ont déjà rejoint la nouvelle partie.
+        try {
+          const sockets = await io.in(roomName(oldId)).fetchSockets()
+          for (const s of sockets) {
+            const sd = s.data as SocketData
+            if (sd.role === 'player' && sd.playerId) {
+              const oldPlayer = oldSession.players[sd.playerId]
+              if (!oldPlayer) continue
+              try {
+                const { player } = await engine.addPlayer(neu.id, oldPlayer.nickname)
+                const dbPlayer = await withTenantTx(appDb, { tenantId: newMeta.tenantId }, (scope) =>
+                  addSessionPlayer(scope.db, newMeta.dbSessionId, { nickname: oldPlayer.nickname, joinToken: player.joinToken }))
+                newMeta.playerDbIds.set(player.id, dbPlayer.id)
+                s.emit('session:relaunched', { role: 'player', pin: neu.pin, playerId: player.id, joinToken: player.joinToken, nickname: oldPlayer.nickname })
+              } catch (err) {
+                /* best-effort : ce participant reste sur l'ancien podium */
+                console.error(`host:relaunch : migration du joueur ${oldPlayer.nickname} (${sd.playerId}) échouée`, err)
+              }
+            } else if (sd.role === 'screen') {
+              try {
+                const displayToken = crypto.randomUUID()
+                screenTokenToSessionId.set(displayToken, neu.id)
+                s.emit('session:relaunched', { role: 'screen', pin: neu.pin, sessionId: neu.id, displayToken })
+              } catch (err) {
+                console.error('host:relaunch : migration du grand écran échouée', err)
+              }
+            }
+            // role 'host' (socket appelante) : ignorée, l'ack suffit.
           }
-          // role 'host' (socket appelante) : ignorée, l'ack suffit.
+        } catch (err) {
+          console.error('host:relaunch : migration échouée (relance maintenue)', err)
         }
 
         reply({ sessionId: neu.id, pin: neu.pin })

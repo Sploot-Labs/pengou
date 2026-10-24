@@ -1001,6 +1001,8 @@ export function HostLive() {
                     </p>
                   ) : relaunchQuizzes === null ? (
                     <p role="status">Chargement de vos quiz…</p>
+                  ) : relaunchQuizzes.length === 0 ? (
+                    <p role="status">Aucun quiz disponible à relancer.</p>
                   ) : (
                     <>
                       <label htmlFor="relaunch-quiz">Quiz de la prochaine partie</label>
