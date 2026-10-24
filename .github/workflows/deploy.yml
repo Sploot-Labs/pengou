@@ -2,6 +2,8 @@ name: Deploy
 
 # Déploiement SSH vers le VPS. Le job est protégé par l'environnement `production`
 # (approbation requise). Les secrets VPS_* et GHCR_* vivent dans cet environnement.
+# Ce workflow démarre en parallèle de Release sur le même tag : approuvez le déploiement
+# `production` seulement après que le workflow Release a publié l'image sur GHCR.
 on:
   push:
     tags: ["v*.*.*"]
@@ -40,7 +42,7 @@ jobs:
             tag="$REF_NAME"
           fi
           tag="${tag#v}"
-          if ! echo "$tag" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$'; then
+          if ! echo "$tag" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
             echo "Version invalide : '$tag' (attendu : 1.2.3)" >&2
             exit 1
           fi
@@ -76,7 +78,22 @@ jobs:
             echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
             export IMAGE_TAG
             COMPOSE="docker compose -f docker-compose.prod.yml"
-            $COMPOSE pull
+            # L'image peut ne pas être encore publiée (Release tourne en parallèle) : retry borné.
+            pulled=0
+            for i in 1 2 3 4 5 6; do
+              if $COMPOSE pull; then
+                pulled=1
+                break
+              fi
+              if [ "$i" -lt 6 ]; then
+                echo "Pull en échec (tentative $i/6), nouvelle tentative dans $((i * 10))s..."
+                sleep $((i * 10))
+              fi
+            done
+            if [ "$pulled" -ne 1 ]; then
+              echo "Impossible de récupérer l'image $IMAGE_TAG après 6 tentatives" >&2
+              exit 1
+            fi
             # Migration bloquante avant le up : un échec interrompt le déploiement.
             $COMPOSE run --rm app node apps/server/dist/migrate.js
             $COMPOSE up -d
@@ -90,7 +107,9 @@ jobs:
                 break
               fi
               echo "Sonde /health en échec (tentative $i), nouvelle tentative..."
-              sleep $((i * 3))
+              if [ "$i" -lt 8 ]; then
+                sleep $((i * 3))
+              fi
             done
             if [ "$ok" -ne 1 ]; then
               echo "Le service ne répond pas sur /health après déploiement" >&2
