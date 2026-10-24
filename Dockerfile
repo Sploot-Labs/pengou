@@ -1,5 +1,5 @@
 # --- Stage build ---
-FROM node:20-slim AS build
+FROM node:24-slim AS build
 RUN corepack enable
 # Outils de compilation requis pour les dépendances natives optionnelles résolues
 # transitivement par drizzle-orm/drizzle-kit (ex. better-sqlite3, non utilisé au runtime
@@ -19,7 +19,7 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm -r build
 
 # --- Stage runtime ---
-FROM node:20-slim AS runtime
+FROM node:24-slim AS runtime
 RUN corepack enable
 WORKDIR /app
 ENV NODE_ENV=production
@@ -46,7 +46,7 @@ EXPOSE 3000
 HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 \
   CMD node -e "fetch('http://127.0.0.1:3000/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
 
-# Exécution en non-root : l'image de base `node:20-slim` fournit déjà un utilisateur `node`
+# Exécution en non-root : l'image de base `node:24-slim` fournit déjà un utilisateur `node`
 # (uid/gid 1000). Les fichiers copiés depuis le stage `build` appartiennent à root mais restent
 # lisibles/exécutables par `node` (permissions par défaut d'un COPY, sans écriture requise au
 # runtime — aucun fichier n'est modifié après le démarrage). `USER` doit venir APRÈS les étapes

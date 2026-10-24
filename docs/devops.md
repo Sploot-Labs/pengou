@@ -1,9 +1,9 @@
 # DevOps : réglages du dépôt et du déploiement
 
-Ce document consigne les réglages à appliquer par un humain sur GitHub et sur le VPS. Ils ne peuvent pas être versionnés dans le dépôt. Les commandes `gh` supposent un dépôt `Sploot-Labs/Pengou` (adapter `OWNER/REPO` si besoin) et une session authentifiée avec des droits d'administration.
+Ce document consigne les réglages à appliquer par un humain sur GitHub et sur le VPS. Ils ne peuvent pas être versionnés dans le dépôt. Les commandes `gh` supposent un dépôt `Sploot-Labs/pengou` (adapter `OWNER/REPO` si besoin) et une session authentifiée avec des droits d'administration.
 
 ```sh
-export REPO=Sploot-Labs/Pengou
+export REPO=Sploot-Labs/pengou
 ```
 
 ## 1. Séquencement
@@ -108,6 +108,8 @@ Le service app n'écoute que sur `127.0.0.1:3000`. Un reverse proxy TLS (Caddy, 
 Le volume `db-data` fige le mot de passe de la base au premier démarrage. Changer `POSTGRES_PASSWORD` ensuite dans `.env` ne modifie pas la base existante : il faut soit changer le mot de passe dans PostgreSQL, soit supprimer le volume (perte de données).
 
 Tant que le paquet GHCR est privé, le VPS doit pouvoir tirer l'image. Le workflow de déploiement fait le `docker login` avec `GHCR_USERNAME` et `GHCR_TOKEN`.
+
+Prérequis : `curl` doit être installé sur le VPS, car la sonde de déploiement `/health` l'utilise.
 
 ## 7. Fonctions de sécurité
 
