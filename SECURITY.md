@@ -9,7 +9,7 @@ correctif expose tous les déploiements.
 
 À la place :
 
-- Utilisez **[GitHub Security Advisories](https://github.com/splootlabs/pengou/security/advisories/new)**
+- Utilisez **[GitHub Security Advisories](https://github.com/Sploot-Labs/pengou/security/advisories/new)**
   (« Report a vulnerability ») — canal privé, recommandé ; **ou**
 - écrivez à **security@splootlabs.dev**.
 
