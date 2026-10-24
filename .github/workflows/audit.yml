@@ -2,6 +2,7 @@ name: Audit
 
 # Audit hebdomadaire des dépendances. L'audit au fil de l'eau est délégué à Dependabot.
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 6 * * 1'
 
