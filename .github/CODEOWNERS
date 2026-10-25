@@ -1,10 +1,10 @@
 # Propriétaires par défaut du code. Un owner CODEOWNERS doit être un utilisateur
 # (@login) ou une équipe de l'org (@org/equipe), jamais l'organisation seule.
-# L'équipe @Sploot-Labs/maintainers doit exister dans l'org pour que GitHub la
-# reconnaisse. Une règle par ligne : motif puis owners. La dernière règle qui
-# correspond l'emporte.
-* @Sploot-Labs/maintainers
+# @LujienZ doit avoir accès en écriture au dépôt pour que GitHub le reconnaisse.
+# Une règle par ligne : motif puis owners. La dernière règle qui correspond
+# l'emporte.
+* @LujienZ
 
 # Zones sensibles (décommenter pour les activer) :
-# /packages/auth/ @Sploot-Labs/maintainers
-# /.github/ @Sploot-Labs/maintainers
+# /packages/auth/ @LujienZ
+# /.github/ @LujienZ
