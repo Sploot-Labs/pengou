@@ -11,6 +11,13 @@
  */
 import { apiDelete, apiGet, apiPatch, apiPost, apiPut } from './client'
 
+/** Attribution d'un contenu issu de la bibliothèque (copie conservée sur le quiz et ses questions). */
+export interface ContentSource {
+  name: string
+  license: string
+  url?: string
+}
+
 export type QuestionType = 'mcq' | 'truefalse' | 'text' | 'slider'
 
 export interface Quiz {
@@ -20,6 +27,7 @@ export interface Quiz {
   title: string
   description: string | null
   cover: string | null
+  source: ContentSource | null
   createdAt: string
   updatedAt: string
 }
@@ -63,6 +71,7 @@ export interface Question {
   readingTime: number
   orderIndex: number
   payload: QuestionPayload
+  source: ContentSource | null
   createdAt: string
 }
 

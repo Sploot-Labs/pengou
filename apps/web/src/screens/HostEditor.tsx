@@ -645,6 +645,7 @@ export function HostEditor() {
       readingTime: input.readingTime ?? 0,
       orderIndex: 0,
       payload: input.payload,
+      source: null,
       createdAt: '',
     })
   }
