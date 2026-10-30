@@ -8,6 +8,7 @@ import { Home } from './screens/Home'
 import { HostEditor } from './screens/HostEditor'
 import { HostLive } from './screens/HostLive'
 import { Join } from './screens/Join'
+import { Library } from './screens/Library'
 import { Login } from './screens/Login'
 import { PlayerLive } from './screens/PlayerLive'
 import { SessionReport } from './screens/SessionReport'
@@ -138,6 +139,15 @@ export const router = createBrowserRouter([
         element: (
           <RequireAuth>
             <WorkspaceSettings />
+          </RequireAuth>
+        ),
+      },
+      {
+        // Bibliothèque de questions — protégée, hors HostRealtimeLayout (REST uniquement).
+        path: '/library',
+        element: (
+          <RequireAuth>
+            <Library />
           </RequireAuth>
         ),
       },

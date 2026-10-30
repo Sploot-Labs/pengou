@@ -228,6 +228,9 @@ export function Home() {
         <section aria-labelledby="home-quizzes-heading" style={{ marginBottom: 'var(--space-6)' }}>
           <div className="home-section__header">
             <h2 id="home-quizzes-heading">Mes quiz</h2>
+            <Link className="ab-button ab-button--ghost" to="/library">
+              Bibliothèque
+            </Link>
           </div>
 
           {creatingQuiz && (

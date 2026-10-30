@@ -370,6 +370,17 @@ describe('Home', () => {
     expect(screen.getByText(/5 questions/)).toBeInTheDocument()
   })
 
+  it('propose un lien « Bibliothèque » vers /library', () => {
+    render(
+      <MotionProvider>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </MotionProvider>,
+    )
+    expect(screen.getByRole('link', { name: 'Bibliothèque' })).toHaveAttribute('href', '/library')
+  })
+
   it('affiche 0 question quand le quiz est vide', async () => {
     const { listQuizzes } = await import('../api/quizzes')
     vi.mocked(listQuizzes).mockResolvedValueOnce([
