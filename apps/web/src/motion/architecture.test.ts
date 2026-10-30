@@ -30,8 +30,13 @@ describe('garde d\'architecture', () => {
 
   // README.md (motion/) promet que le canvas ET la Web Audio API sont, eux
   // aussi, confinés à motion/ — pas seulement framer-motion.
+  // Exception : media/downscale.ts redessine une image envoyée sur un canvas hors écran pour la
+  // réduire. Ce n'est pas de l'animation ; c'est le seul usage autorisé hors de motion/.
+  const CANVAS_ALLOWED = join(SRC, 'media', 'downscale.ts')
   it("aucun fichier hors motion/ n'utilise l'API canvas (.getContext)", () => {
-    const offenders = filesOutsideMotion().filter((p) => /\.getContext\(/.test(readFileSync(p, 'utf8')))
+    const offenders = filesOutsideMotion()
+      .filter((p) => p !== CANVAS_ALLOWED)
+      .filter((p) => /\.getContext\(/.test(readFileSync(p, 'utf8')))
     expect(offenders, `.getContext( utilisé hors de motion/: ${offenders.join(', ')}`).toEqual([])
   })
 
