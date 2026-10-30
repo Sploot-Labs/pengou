@@ -109,6 +109,13 @@ comme étapes ultérieures, pour que les choix de cette version ne les bloquent 
 - La bibliothèque est une page à part. Valider une sélection crée toujours un
   nouveau quiz.
 - Tout ce qui sort du catalogue est copié dans le tenant de l'utilisateur.
+- Le catalogue est stocké en base, dans des tables communes à toute l'instance (hors
+  tenant), parce que d'autres contenus viendront s'y ajouter plus tard (propositions
+  des utilisateurs, partage). Les fichiers JSON restent la source du catalogue livré
+  et du catalogue d'instance : une synchronisation au démarrage du serveur les
+  recopie en base, avec des identifiants stables tirés des fichiers. Chaque ligne
+  retient son origine (livré ou instance) pour que les contenus ajoutés plus tard
+  par d'autres voies ne soient jamais touchés par cette synchronisation.
 - La source et la licence suivent la copie : une question ou un quiz copié depuis
   le catalogue garde sa provenance (nom de la source, licence, lien), y compris
   après modification par l'utilisateur, puisque les licences de type CC BY-SA
@@ -138,10 +145,14 @@ document soit complet, et ils restent révisables.
   conflit.
 - Politique d'erreur à l'import. Le catalogue livré est validé par un test en CI,
   il ne peut donc pas arriver invalide sur une instance. Un fichier d'instance
-  invalide ou en conflit est écarté en entier (rien de ce fichier n'est importé),
-  l'erreur est journalisée de façon visible, et le reste du catalogue est servi.
-  Pengou démarre quand même. Une commande d'import ou de vérification dédiée, si
-  elle existe, sort avec un code d'erreur dans ce cas.
+  invalide ou en conflit est écarté en entier (rien de sa nouvelle version n'est
+  importé), l'erreur est journalisée de façon visible, et le reste du catalogue est
+  servi. Pengou démarre quand même. Ce qui avait été importé de ce fichier lors d'une
+  synchronisation précédente reste en place, pour qu'une faute de frappe ne vide
+  pas le catalogue de l'instance.
+- Une question ou un quiz qui disparaît des fichiers est retiré de la base à la
+  synchronisation suivante. Les copies déjà faites ne sont pas touchées, puisqu'elles
+  ne pointent pas vers le catalogue.
 - Adaptation des thèmes. Les thèmes sont référencés par un identifiant stable,
   avec un libellé. Une instance peut ajouter des thèmes, changer le libellé d'un
   thème livré, ou en masquer un. Elle ne peut pas le supprimer. Les questions et
@@ -152,12 +163,8 @@ document soit complet, et ils restent révisables.
 
 - Le format exact des fichiers JSON (questions, quiz tout prêts, thèmes, sources et
   licences) et son schéma de validation.
-- Le stockage du catalogue : tables en base hors tenant, alimentées au démarrage ou
-  par une commande d'import, ou lecture directe des fichiers. Le stockage doit
-  garantir des identifiants stables d'une version du catalogue à l'autre.
-- Le moment où le catalogue est chargé ou rechargé (démarrage du serveur, migration,
-  commande dédiée), et le comportement quand une version du catalogue retire une
-  question.
+- Le détail des tables du catalogue et de la synchronisation, dans le cadre fixé
+  plus haut (stockage en base, synchronisation au démarrage).
 - Le choix des bases sources et leur conversion au format JSON, à condition que la
   licence permette la redistribution et que les questions soient classées selon les
   quatre critères. OpenQuizzDB (français) et Open Trivia DB (anglais) sont des
