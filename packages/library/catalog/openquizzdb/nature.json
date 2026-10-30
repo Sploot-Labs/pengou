@@ -1,0 +1,3661 @@
+{
+  "source": {
+    "name": "OpenQuizzDB",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0043-1",
+      "type": "mcq",
+      "prompt": "Quel fruit se compose d'une coque sphérique protégeant une amande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Noix du Brésil",
+            "correct": false
+          },
+          {
+            "label": "Noix de cajou",
+            "correct": false
+          },
+          {
+            "label": "Noix de pécan",
+            "correct": false
+          },
+          {
+            "label": "Noix de coco",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0043-2",
+      "type": "mcq",
+      "prompt": "Dans quelle enveloppe se cachent les graines de petits-pois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gousse",
+            "correct": true
+          },
+          {
+            "label": "Capsule",
+            "correct": false
+          },
+          {
+            "label": "Drupe",
+            "correct": false
+          },
+          {
+            "label": "Follicule",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0043-3",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on un fruit charnu à noyau tel que la cerise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Faîne",
+            "correct": false
+          },
+          {
+            "label": "Nucule",
+            "correct": false
+          },
+          {
+            "label": "Drupe",
+            "correct": true
+          },
+          {
+            "label": "Baie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0043-4",
+      "type": "mcq",
+      "prompt": "Quelle enveloppe verte entourant la coque est spécifique à la noix ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brou",
+            "correct": true
+          },
+          {
+            "label": "Pédoncule",
+            "correct": false
+          },
+          {
+            "label": "Cramoisi",
+            "correct": false
+          },
+          {
+            "label": "Pourpre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0045-1",
+      "type": "mcq",
+      "prompt": "Au nord de quelle île se dresse la montagne Pelée, qui est un volcan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Guadeloupe",
+            "correct": false
+          },
+          {
+            "label": "Martinique",
+            "correct": true
+          },
+          {
+            "label": "Nouvelle-Calédonie",
+            "correct": false
+          },
+          {
+            "label": "Réunion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0045-2",
+      "type": "mcq",
+      "prompt": "Quel est le pays du Kilimandjaro, au trois volcans éteints ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Japon",
+            "correct": false
+          },
+          {
+            "label": "Tanzanie",
+            "correct": true
+          },
+          {
+            "label": "Tibet",
+            "correct": false
+          },
+          {
+            "label": "Népal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0045-3",
+      "type": "mcq",
+      "prompt": "Quel volcan des îles Éoliennes est situé au nord de la Sicile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pinatubo",
+            "correct": false
+          },
+          {
+            "label": "Stromboli",
+            "correct": true
+          },
+          {
+            "label": "Villarrica",
+            "correct": false
+          },
+          {
+            "label": "Vésuve",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0045-4",
+      "type": "mcq",
+      "prompt": "Quelle marque spécialisée en eaux minérales a pour logo un volcan vert ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vittel",
+            "correct": false
+          },
+          {
+            "label": "Vichy",
+            "correct": false
+          },
+          {
+            "label": "Volvic",
+            "correct": true
+          },
+          {
+            "label": "Valvert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0069-1",
+      "type": "mcq",
+      "prompt": "Quelle ville des États-Unis est surnommée la « grosse pomme » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Miami",
+            "correct": false
+          },
+          {
+            "label": "Las Vegas",
+            "correct": false
+          },
+          {
+            "label": "Los Angeles",
+            "correct": false
+          },
+          {
+            "label": "New York",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0069-2",
+      "type": "mcq",
+      "prompt": "Dans quel verger poussent presque exclusivement des pommiers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pommeraie",
+            "correct": true
+          },
+          {
+            "label": "Pommiseau",
+            "correct": false
+          },
+          {
+            "label": "Vergepommes",
+            "correct": false
+          },
+          {
+            "label": "Vergeture",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0069-3",
+      "type": "mcq",
+      "prompt": "Quelle variété de pommes est principalement produite en France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Pink Lady",
+            "correct": false
+          },
+          {
+            "label": "La Golden",
+            "correct": true
+          },
+          {
+            "label": "La Gala",
+            "correct": false
+          },
+          {
+            "label": "La Jonagold",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0069-4",
+      "type": "mcq",
+      "prompt": "Quel physicien anglais a été attentif à la chute des pommes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tycho Brahe",
+            "correct": false
+          },
+          {
+            "label": "Isaac Newton",
+            "correct": true
+          },
+          {
+            "label": "Peter Higgs",
+            "correct": false
+          },
+          {
+            "label": "Nicolas Copernic",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0109-1",
+      "type": "mcq",
+      "prompt": "Combien de temps dure en moyenne la gestation d'une éléphante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "17 mois",
+            "correct": false
+          },
+          {
+            "label": "21 mois",
+            "correct": true
+          },
+          {
+            "label": "13 mois",
+            "correct": false
+          },
+          {
+            "label": "9 mois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0109-2",
+      "type": "mcq",
+      "prompt": "À combien de pulsations bat le coeur d'un hérisson en hibernation ?",
+      "payload": {
+        "options": [
+          {
+            "label": "18 par minute",
+            "correct": true
+          },
+          {
+            "label": "38 par minute",
+            "correct": false
+          },
+          {
+            "label": "28 par minute",
+            "correct": false
+          },
+          {
+            "label": "8 par minute",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0109-3",
+      "type": "mcq",
+      "prompt": "Jusqu'à quelle altitude vivent en général les bouquetins des Alpes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "3 500 m",
+            "correct": true
+          },
+          {
+            "label": "4 600 m",
+            "correct": false
+          },
+          {
+            "label": "1 900 m",
+            "correct": false
+          },
+          {
+            "label": "2 300 m",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0109-4",
+      "type": "mcq",
+      "prompt": "Combien de minutes une otarie peut-elle nager sous l'eau sans respirer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "11 minutes",
+            "correct": false
+          },
+          {
+            "label": "5 minutes",
+            "correct": true
+          },
+          {
+            "label": "7 minutes",
+            "correct": false
+          },
+          {
+            "label": "9 minutes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0207-1",
+      "type": "mcq",
+      "prompt": "Grâce à quoi les requins peuvent-ils respirer, tout comme les raies ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peau",
+            "correct": false
+          },
+          {
+            "label": "Branchies",
+            "correct": true
+          },
+          {
+            "label": "Nageoires",
+            "correct": false
+          },
+          {
+            "label": "Poumons",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0207-2",
+      "type": "mcq",
+      "prompt": "Quel élément de la silhouette du requin nous fait trembler ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Queue",
+            "correct": false
+          },
+          {
+            "label": "Nageoire dorsale",
+            "correct": true
+          },
+          {
+            "label": "Nez",
+            "correct": false
+          },
+          {
+            "label": "Branchies",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0207-3",
+      "type": "mcq",
+      "prompt": "De quoi se nourrit surtout le requin-baleine, tout en se déplaçant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "De mousses",
+            "correct": false
+          },
+          {
+            "label": "De crabes",
+            "correct": false
+          },
+          {
+            "label": "De phoques",
+            "correct": false
+          },
+          {
+            "label": "Du plancton",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0207-4",
+      "type": "mcq",
+      "prompt": "Quel pourcentage du poids du requin le foie peut-il représenter ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jusqu'à 12 %",
+            "correct": false
+          },
+          {
+            "label": "Jusqu'à 25 %",
+            "correct": true
+          },
+          {
+            "label": "Jusqu'à 2 %",
+            "correct": false
+          },
+          {
+            "label": "Jusqu'à 6 %",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0213-1",
+      "type": "mcq",
+      "prompt": "De quoi est issu le fruit issu de nos arbres fruitiers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Racine",
+            "correct": false
+          },
+          {
+            "label": "Fleur",
+            "correct": true
+          },
+          {
+            "label": "Graine",
+            "correct": false
+          },
+          {
+            "label": "Feuille",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0213-2",
+      "type": "mcq",
+      "prompt": "Quel espace de terrain est dévolu à la culture d'arbres fruitiers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jardinière",
+            "correct": false
+          },
+          {
+            "label": "Potager",
+            "correct": false
+          },
+          {
+            "label": "Verger",
+            "correct": true
+          },
+          {
+            "label": "Friche",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0213-3",
+      "type": "mcq",
+      "prompt": "Quel arbre fruitier propose une floraison spectaculaire au Japon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grenadier",
+            "correct": false
+          },
+          {
+            "label": "Pêcher",
+            "correct": false
+          },
+          {
+            "label": "Châtaignier",
+            "correct": false
+          },
+          {
+            "label": "Cerisier",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0213-4",
+      "type": "mcq",
+      "prompt": "Quel arbre fruitier produit la reine-claude ou la mirabelle de Nancy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cerisier",
+            "correct": false
+          },
+          {
+            "label": "Châtaignier",
+            "correct": false
+          },
+          {
+            "label": "Figuier",
+            "correct": false
+          },
+          {
+            "label": "Prunier",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0310-1",
+      "type": "mcq",
+      "prompt": "Où se trouvent les « lunettes » du serpent à lunettes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sur le ventre",
+            "correct": false
+          },
+          {
+            "label": "Sur le cou",
+            "correct": true
+          },
+          {
+            "label": "Sur la queue",
+            "correct": false
+          },
+          {
+            "label": "Sur la langue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0310-2",
+      "type": "mcq",
+      "prompt": "Quel est le plus grand serpent venimeux du monde de par sa longueur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Python réticulé",
+            "correct": false
+          },
+          {
+            "label": "Grand anaconda",
+            "correct": false
+          },
+          {
+            "label": "Mamba noir",
+            "correct": false
+          },
+          {
+            "label": "Cobra royal",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0310-3",
+      "type": "mcq",
+      "prompt": "Quel serpent accompagne le Prince Jean dans « Robin des Bois » de Disney ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Triste Sire",
+            "correct": true
+          },
+          {
+            "label": "Affreux Jojo",
+            "correct": false
+          },
+          {
+            "label": "Troube-Fête",
+            "correct": false
+          },
+          {
+            "label": "Rabat-Joie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0310-4",
+      "type": "mcq",
+      "prompt": "Quelle langue est parlée par les serpents dans « Harry Potter » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le cuillerlang",
+            "correct": false
+          },
+          {
+            "label": "Le fourchelang",
+            "correct": true
+          },
+          {
+            "label": "Le verrelang",
+            "correct": false
+          },
+          {
+            "label": "Le coutelang",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0318-1",
+      "type": "mcq",
+      "prompt": "Quelle est l'espérance de vie moyenne d'une girafe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "25 ans",
+            "correct": true
+          },
+          {
+            "label": "55 ans",
+            "correct": false
+          },
+          {
+            "label": "75 ans",
+            "correct": false
+          },
+          {
+            "label": "15 ans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0318-2",
+      "type": "mcq",
+      "prompt": "Quelle girafe en caoutchouc pour bébés est apparue en 1961 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Barbie",
+            "correct": false
+          },
+          {
+            "label": "Mimie",
+            "correct": false
+          },
+          {
+            "label": "Sophie",
+            "correct": true
+          },
+          {
+            "label": "Noémie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0318-3",
+      "type": "mcq",
+      "prompt": "Quel est le nom du petit de la girafe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Girofet",
+            "correct": false
+          },
+          {
+            "label": "Giraflet",
+            "correct": false
+          },
+          {
+            "label": "Girafau",
+            "correct": false
+          },
+          {
+            "label": "Girafon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0318-4",
+      "type": "mcq",
+      "prompt": "Quelle taille environ peut atteindre une girafe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "4 mètres",
+            "correct": false
+          },
+          {
+            "label": "3 mètres",
+            "correct": false
+          },
+          {
+            "label": "8 mètres",
+            "correct": false
+          },
+          {
+            "label": "6 mètres",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0338-1",
+      "type": "mcq",
+      "prompt": "Dans quel film d'animation Pixar, Tilt est-il un ouvrier fourmi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Toy Story",
+            "correct": false
+          },
+          {
+            "label": "Ratatouille",
+            "correct": false
+          },
+          {
+            "label": "1001 pattes",
+            "correct": true
+          },
+          {
+            "label": "Monstres et Cie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0338-2",
+      "type": "mcq",
+      "prompt": "Quels insectes sont parfois appelés « fourmis blanches » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les blattes",
+            "correct": false
+          },
+          {
+            "label": "Les termites",
+            "correct": true
+          },
+          {
+            "label": "Les cancrelats",
+            "correct": false
+          },
+          {
+            "label": "Les cafards",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0338-3",
+      "type": "mcq",
+      "prompt": "Avec quel insecte la fourmi est-elle associée dans une fable ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La libellule",
+            "correct": false
+          },
+          {
+            "label": "La coccinelle",
+            "correct": false
+          },
+          {
+            "label": "La mouche",
+            "correct": false
+          },
+          {
+            "label": "La cigale",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0338-4",
+      "type": "mcq",
+      "prompt": "Quel écrivain français a publié une trilogie sur les fourmis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alain Grousset",
+            "correct": false
+          },
+          {
+            "label": "Robert Merle",
+            "correct": false
+          },
+          {
+            "label": "Gaston Boca",
+            "correct": false
+          },
+          {
+            "label": "Bernard Werber",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0340-1",
+      "type": "mcq",
+      "prompt": "Quelle bâtisse est destinée au logement des ânes et des chevaux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Écurie",
+            "correct": true
+          },
+          {
+            "label": "Arène",
+            "correct": false
+          },
+          {
+            "label": "Ranch",
+            "correct": false
+          },
+          {
+            "label": "Hippodrome",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0340-2",
+      "type": "mcq",
+      "prompt": "Quel abri, aménagé par l'homme, est aussi appelé « cabane à oiseaux » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Garenne",
+            "correct": false
+          },
+          {
+            "label": "Poulailler",
+            "correct": false
+          },
+          {
+            "label": "Frayère",
+            "correct": false
+          },
+          {
+            "label": "Nichoir",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0340-3",
+      "type": "mcq",
+      "prompt": "Dans quoi sont généralement réunis les lapins au fond des jardins ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Clapier",
+            "correct": true
+          },
+          {
+            "label": "Écloserie",
+            "correct": false
+          },
+          {
+            "label": "Nichoir",
+            "correct": false
+          },
+          {
+            "label": "Volière",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0340-4",
+      "type": "mcq",
+      "prompt": "Quelle cage de grande taille est destinée à contenir des oiseaux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Volière",
+            "correct": true
+          },
+          {
+            "label": "Valise",
+            "correct": false
+          },
+          {
+            "label": "Volute",
+            "correct": false
+          },
+          {
+            "label": "Vitrine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0342-1",
+      "type": "mcq",
+      "prompt": "Combien le chat possède-t-il de doigts aux pattes antérieures ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinq",
+            "correct": true
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0342-2",
+      "type": "mcq",
+      "prompt": "Comment s'appellent les « moustaches » du chat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vibrisses",
+            "correct": true
+          },
+          {
+            "label": "Bréchets",
+            "correct": false
+          },
+          {
+            "label": "Tectrices",
+            "correct": false
+          },
+          {
+            "label": "Barbules",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0342-3",
+      "type": "mcq",
+      "prompt": "Quel est en moyenne le nombre de lapées par seconde pour le chat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quatre",
+            "correct": true
+          },
+          {
+            "label": "Deux",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0342-4",
+      "type": "mcq",
+      "prompt": "Quel chat est presque sans poils ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sphynx",
+            "correct": true
+          },
+          {
+            "label": "Persan",
+            "correct": false
+          },
+          {
+            "label": "Maine coon",
+            "correct": false
+          },
+          {
+            "label": "Siamois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0367-1",
+      "type": "mcq",
+      "prompt": "Quel nutriment est particulièrement présent dans les amandes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fer",
+            "correct": false
+          },
+          {
+            "label": "Vitamine C",
+            "correct": false
+          },
+          {
+            "label": "Vitamine E",
+            "correct": true
+          },
+          {
+            "label": "Protéines",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0367-2",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur la plus fréquente de la fleur de l'amandier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bleue",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          },
+          {
+            "label": "Blanche",
+            "correct": true
+          },
+          {
+            "label": "Jaune citron",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0367-3",
+      "type": "mcq",
+      "prompt": "Quelle utilisation culinaire est courante pour les amandes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pain sans farine",
+            "correct": false
+          },
+          {
+            "label": "Fromage",
+            "correct": false
+          },
+          {
+            "label": "Vinaigre",
+            "correct": false
+          },
+          {
+            "label": "Lait végétal",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0367-4",
+      "type": "mcq",
+      "prompt": "Quel pays est aujourd'hui le plus grand producteur d'amandes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "États-Unis",
+            "correct": true
+          },
+          {
+            "label": "Espagne",
+            "correct": false
+          },
+          {
+            "label": "Maroc",
+            "correct": false
+          },
+          {
+            "label": "Italie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0368-1",
+      "type": "mcq",
+      "prompt": "Quel facteur peut influencer la couleur du miel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lune",
+            "correct": false
+          },
+          {
+            "label": "Température",
+            "correct": false
+          },
+          {
+            "label": "Taille des abeilles",
+            "correct": false
+          },
+          {
+            "label": "Type de fleurs",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0368-2",
+      "type": "mcq",
+      "prompt": "Quel est le rôle principal du miel pour les abeilles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Refroidisseur",
+            "correct": false
+          },
+          {
+            "label": "Matériau",
+            "correct": false
+          },
+          {
+            "label": "Piège",
+            "correct": false
+          },
+          {
+            "label": "Nourriture",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0368-3",
+      "type": "mcq",
+      "prompt": "Quelle abeille est responsable de la production du miel dans la ruche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Faux-bourdon",
+            "correct": false
+          },
+          {
+            "label": "Ouvrière",
+            "correct": true
+          },
+          {
+            "label": "Bourdon",
+            "correct": false
+          },
+          {
+            "label": "Reine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0368-4",
+      "type": "mcq",
+      "prompt": "Combien de miel une abeille produit-elle en moyenne dans sa vie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1 kg",
+            "correct": false
+          },
+          {
+            "label": "10 kg",
+            "correct": false
+          },
+          {
+            "label": "1 g",
+            "correct": true
+          },
+          {
+            "label": "100 g",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0370-1",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur du coquelicot des terrains fraîchement remués ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pourpre",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": true
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0370-2",
+      "type": "mcq",
+      "prompt": "Quel est l'autre nom de la primevère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pivert",
+            "correct": false
+          },
+          {
+            "label": "Merle",
+            "correct": false
+          },
+          {
+            "label": "Moineau",
+            "correct": false
+          },
+          {
+            "label": "Coucou",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0370-3",
+      "type": "mcq",
+      "prompt": "Avec quelle plante peut-on confondre l'ail des ours ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Muguet",
+            "correct": true
+          },
+          {
+            "label": "Origan",
+            "correct": false
+          },
+          {
+            "label": "Primevère",
+            "correct": false
+          },
+          {
+            "label": "Basilic",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0370-4",
+      "type": "mcq",
+      "prompt": "Quand fleurit la camomille sauvage, ou camomille allemande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Automne",
+            "correct": false
+          },
+          {
+            "label": "Hiver",
+            "correct": false
+          },
+          {
+            "label": "Été",
+            "correct": true
+          },
+          {
+            "label": "Printemps uniquement",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0371-1",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on la femelle du renard ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Renardine",
+            "correct": false
+          },
+          {
+            "label": "Renardelle",
+            "correct": false
+          },
+          {
+            "label": "Renardeaude",
+            "correct": false
+          },
+          {
+            "label": "Renarde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0371-2",
+      "type": "mcq",
+      "prompt": "Quelle vitesse maximale peut atteindre un lièvre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "110 km/h",
+            "correct": false
+          },
+          {
+            "label": "90 km/h",
+            "correct": false
+          },
+          {
+            "label": "50 km/h",
+            "correct": false
+          },
+          {
+            "label": "70 km/h",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0371-3",
+      "type": "mcq",
+      "prompt": "Quel animal est une sorte de « souris des champs » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mulet",
+            "correct": false
+          },
+          {
+            "label": "Musaraigne",
+            "correct": false
+          },
+          {
+            "label": "Muscardin",
+            "correct": false
+          },
+          {
+            "label": "Mulot",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0371-4",
+      "type": "mcq",
+      "prompt": "Quelle partie du corps de la taupe lui permet de s'orienter sous terre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sa tête",
+            "correct": false
+          },
+          {
+            "label": "Sa queue",
+            "correct": true
+          },
+          {
+            "label": "Ses pattes",
+            "correct": false
+          },
+          {
+            "label": "Son museau",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0381-1",
+      "type": "mcq",
+      "prompt": "Comment sont appelées les larves du hanneton qui sont radicivores ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vers blancs",
+            "correct": true
+          },
+          {
+            "label": "Nymphes",
+            "correct": false
+          },
+          {
+            "label": "Chenilles",
+            "correct": false
+          },
+          {
+            "label": "Coques",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0381-2",
+      "type": "mcq",
+      "prompt": "Quelle partie du corps de la mouche bleue lui permet de manger ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pattes",
+            "correct": false
+          },
+          {
+            "label": "Ailes",
+            "correct": false
+          },
+          {
+            "label": "Trompe",
+            "correct": true
+          },
+          {
+            "label": "Mâchoire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0381-3",
+      "type": "mcq",
+      "prompt": "Combien de points visibles a la coccinelle des légumineuses ?",
+      "payload": {
+        "options": [
+          {
+            "label": "24",
+            "correct": true
+          },
+          {
+            "label": "14",
+            "correct": false
+          },
+          {
+            "label": "44",
+            "correct": false
+          },
+          {
+            "label": "34",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0381-4",
+      "type": "mcq",
+      "prompt": "Considéré comme ravageur, à quelle hauteur un criquet peut-il sauter ?",
+      "payload": {
+        "options": [
+          {
+            "label": "12 cm",
+            "correct": false
+          },
+          {
+            "label": "130 cm",
+            "correct": false
+          },
+          {
+            "label": "70 cm",
+            "correct": true
+          },
+          {
+            "label": "210 cm",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0383-1",
+      "type": "mcq",
+      "prompt": "Quel est le régime alimentaire de l'éléphant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Carnivore",
+            "correct": false
+          },
+          {
+            "label": "Herbivore",
+            "correct": true
+          },
+          {
+            "label": "Insectivore",
+            "correct": false
+          },
+          {
+            "label": "Omnivore",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0383-2",
+      "type": "mcq",
+      "prompt": "Combien de temps dure environ la gestation d'une éléphante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "3 mois",
+            "correct": false
+          },
+          {
+            "label": "12 mois",
+            "correct": false
+          },
+          {
+            "label": "6 mois",
+            "correct": false
+          },
+          {
+            "label": "22 mois",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0383-3",
+      "type": "mcq",
+      "prompt": "Quelle est la principale menace pour les éléphants ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Prédation",
+            "correct": false
+          },
+          {
+            "label": "Braconnage",
+            "correct": true
+          },
+          {
+            "label": "Tempêtes",
+            "correct": false
+          },
+          {
+            "label": "Froid",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0383-4",
+      "type": "mcq",
+      "prompt": "Qu'est-ce qui distingue les éléphants d'Asie des éléphants d'Afrique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oreilles",
+            "correct": true
+          },
+          {
+            "label": "Couleur",
+            "correct": false
+          },
+          {
+            "label": "Trompe",
+            "correct": false
+          },
+          {
+            "label": "Queue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0416-1",
+      "type": "mcq",
+      "prompt": "Quelle est la longueur du mur du parc forestier de Chambord ?",
+      "payload": {
+        "options": [
+          {
+            "label": "32 km",
+            "correct": true
+          },
+          {
+            "label": "16 km",
+            "correct": false
+          },
+          {
+            "label": "27 km",
+            "correct": false
+          },
+          {
+            "label": "9 km",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0416-2",
+      "type": "mcq",
+      "prompt": "En plus du sanglier, quelle espèce est emblématique de Chambord ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lapin",
+            "correct": false
+          },
+          {
+            "label": "Autruche",
+            "correct": false
+          },
+          {
+            "label": "Cerf",
+            "correct": true
+          },
+          {
+            "label": "Lémurien",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0416-3",
+      "type": "mcq",
+      "prompt": "Dans quelle région forestière française se situe le château de Chambord ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Drouais",
+            "correct": false
+          },
+          {
+            "label": "Sologne",
+            "correct": true
+          },
+          {
+            "label": "Beauce",
+            "correct": false
+          },
+          {
+            "label": "Cévennes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0416-4",
+      "type": "mcq",
+      "prompt": "Sur les 5 440 hectares de Chambord, combien sont ouverts au public ?",
+      "payload": {
+        "options": [
+          {
+            "label": "4 000 ha",
+            "correct": false
+          },
+          {
+            "label": "2 000 ha",
+            "correct": false
+          },
+          {
+            "label": "3 000 ha",
+            "correct": false
+          },
+          {
+            "label": "1 000 ha",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0446-1",
+      "type": "mcq",
+      "prompt": "Dans quel film de Pixar un rat se révèle-t-il excellent cuisinier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cars",
+            "correct": false
+          },
+          {
+            "label": "Toy Story",
+            "correct": false
+          },
+          {
+            "label": "Monstres et Cie",
+            "correct": false
+          },
+          {
+            "label": "Ratatouille",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0446-2",
+      "type": "mcq",
+      "prompt": "Quelle souris de dessin animé est la plus rapide du Mexique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Speedy Gonzales",
+            "correct": true
+          },
+          {
+            "label": "Stuart Little",
+            "correct": false
+          },
+          {
+            "label": "Mickey Mouse",
+            "correct": false
+          },
+          {
+            "label": "Jerry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0446-3",
+      "type": "mcq",
+      "prompt": "Quels rongeurs sont les héros du film « Misson-G », sorti en 2009 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Souris",
+            "correct": false
+          },
+          {
+            "label": "Hamsters",
+            "correct": false
+          },
+          {
+            "label": "Cochons d'Inde",
+            "correct": true
+          },
+          {
+            "label": "Rats",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0446-4",
+      "type": "mcq",
+      "prompt": "À quelle série d'animation Eric et Ramzi ont-ils prêté leur voix ?",
+      "payload": {
+        "options": [
+          {
+            "label": "South Park",
+            "correct": false
+          },
+          {
+            "label": "Futurama",
+            "correct": false
+          },
+          {
+            "label": "Les Griffin",
+            "correct": false
+          },
+          {
+            "label": "Ratz",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0452-1",
+      "type": "mcq",
+      "prompt": "Quel chien maladroit est un ami de Mickey et Pluto ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Félix",
+            "correct": false
+          },
+          {
+            "label": "Donald",
+            "correct": false
+          },
+          {
+            "label": "Mortimer",
+            "correct": false
+          },
+          {
+            "label": "Dingo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0452-2",
+      "type": "mcq",
+      "prompt": "Quel renardeau est l'ami d'un chien de chasse dans un film Disney ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Simba",
+            "correct": false
+          },
+          {
+            "label": "Figaro",
+            "correct": false
+          },
+          {
+            "label": "Alex",
+            "correct": false
+          },
+          {
+            "label": "Rox",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0452-3",
+      "type": "mcq",
+      "prompt": "Quelle race de chiens intéresse fortement Cruella d'Enfer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fox-terrier",
+            "correct": false
+          },
+          {
+            "label": "Husky",
+            "correct": false
+          },
+          {
+            "label": "Jack Russel",
+            "correct": false
+          },
+          {
+            "label": "Dalmatien",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0452-4",
+      "type": "mcq",
+      "prompt": "Dans « Robin des Bois », de Disney, quel animal est Robin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Renard",
+            "correct": true
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          },
+          {
+            "label": "Tigre",
+            "correct": false
+          },
+          {
+            "label": "Ours",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0461-1",
+      "type": "mcq",
+      "prompt": "Le pétrole, le gaz et le charbon font partie de quelles énergies ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Renouvelables",
+            "correct": false
+          },
+          {
+            "label": "Propres",
+            "correct": false
+          },
+          {
+            "label": "Fossiles",
+            "correct": true
+          },
+          {
+            "label": "Solaires",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0461-2",
+      "type": "mcq",
+      "prompt": "Quel pays est le plus grand émetteur de gaz à effet de serre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Inde",
+            "correct": false
+          },
+          {
+            "label": "Chine",
+            "correct": true
+          },
+          {
+            "label": "Russie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0461-3",
+      "type": "mcq",
+      "prompt": "Quelle température y aurait-il sur Terre sans l'effet de serre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "98°C",
+            "correct": false
+          },
+          {
+            "label": "-18°C",
+            "correct": true
+          },
+          {
+            "label": "4°C",
+            "correct": false
+          },
+          {
+            "label": "47°C",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0461-4",
+      "type": "mcq",
+      "prompt": "En quelle année est apparu le terme « effet de serre » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1824",
+            "correct": true
+          },
+          {
+            "label": "1934",
+            "correct": false
+          },
+          {
+            "label": "1989",
+            "correct": false
+          },
+          {
+            "label": "1956",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0482-1",
+      "type": "mcq",
+      "prompt": "Quelle infusion est utile pour les inflammations des muqueuses ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Basilic",
+            "correct": false
+          },
+          {
+            "label": "Romarin",
+            "correct": false
+          },
+          {
+            "label": "Sarriette",
+            "correct": false
+          },
+          {
+            "label": "Sauge",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0482-2",
+      "type": "mcq",
+      "prompt": "Quelle infusion à forte qualité gustative apporte apaisement et calme ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pin",
+            "correct": false
+          },
+          {
+            "label": "Cèdre",
+            "correct": false
+          },
+          {
+            "label": "Tilleul",
+            "correct": true
+          },
+          {
+            "label": "Frêne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0482-3",
+      "type": "mcq",
+      "prompt": "Quelle camomille est surtout recherchée pour ses vertus digestives ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grecque",
+            "correct": false
+          },
+          {
+            "label": "Romaine",
+            "correct": true
+          },
+          {
+            "label": "Égyptien",
+            "correct": false
+          },
+          {
+            "label": "Gauloise",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0482-4",
+      "type": "mcq",
+      "prompt": "Quelle infusion est reconnue pour ses propriétés anti-anémiques ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coriandre",
+            "correct": false
+          },
+          {
+            "label": "Ortie",
+            "correct": true
+          },
+          {
+            "label": "Belladone",
+            "correct": false
+          },
+          {
+            "label": "Jasmin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0491-1",
+      "type": "mcq",
+      "prompt": "Quel oiseau de couleur blanche est un des symboles de la paix ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Colibri",
+            "correct": false
+          },
+          {
+            "label": "Colombe",
+            "correct": true
+          },
+          {
+            "label": "Cigogne",
+            "correct": false
+          },
+          {
+            "label": "Canard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0491-2",
+      "type": "mcq",
+      "prompt": "Quel oiseau fournit le duvet servant à la fabrication des édredons ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eider",
+            "correct": true
+          },
+          {
+            "label": "Sarcelle",
+            "correct": false
+          },
+          {
+            "label": "Perruche",
+            "correct": false
+          },
+          {
+            "label": "Colvert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0491-3",
+      "type": "mcq",
+      "prompt": "Quel oiseau pond ses oeufs dans le nid des autres espèces ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mésange",
+            "correct": false
+          },
+          {
+            "label": "Coucou",
+            "correct": true
+          },
+          {
+            "label": "Merle",
+            "correct": false
+          },
+          {
+            "label": "Faisan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0491-4",
+      "type": "mcq",
+      "prompt": "À quel oiseau ressemble un marabout ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Moineau",
+            "correct": false
+          },
+          {
+            "label": "Cigogne",
+            "correct": true
+          },
+          {
+            "label": "Goëland",
+            "correct": false
+          },
+          {
+            "label": "Mouette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0536-1",
+      "type": "mcq",
+      "prompt": "Que mangent surtout les coccinelles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chenilles",
+            "correct": false
+          },
+          {
+            "label": "Fourmis",
+            "correct": false
+          },
+          {
+            "label": "Pucerons",
+            "correct": true
+          },
+          {
+            "label": "Moustiques",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0536-2",
+      "type": "mcq",
+      "prompt": "Quel environnement favorise les acariens ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chaud et humide",
+            "correct": true
+          },
+          {
+            "label": "Venteux",
+            "correct": false
+          },
+          {
+            "label": "Glacé",
+            "correct": false
+          },
+          {
+            "label": "Sec",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0536-3",
+      "type": "mcq",
+      "prompt": "Combien pèse environ la plus petite espèce de musaraigne connue ?",
+      "payload": {
+        "options": [
+          {
+            "label": "130 grammes",
+            "correct": false
+          },
+          {
+            "label": "70 grammes",
+            "correct": false
+          },
+          {
+            "label": "2 grammes",
+            "correct": true
+          },
+          {
+            "label": "20 grammes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0536-4",
+      "type": "mcq",
+      "prompt": "Comment les mille-pattes se protègent-ils de leurs prédateurs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Par leurs sécrétions",
+            "correct": true
+          },
+          {
+            "label": "En mordant",
+            "correct": false
+          },
+          {
+            "label": "Par camouflage",
+            "correct": false
+          },
+          {
+            "label": "En criant",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0537-1",
+      "type": "mcq",
+      "prompt": "Qu'observe-t-on pour estimer l'âge approximatif d'un cheval ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Queue",
+            "correct": false
+          },
+          {
+            "label": "Dents",
+            "correct": true
+          },
+          {
+            "label": "Sabots",
+            "correct": false
+          },
+          {
+            "label": "Crinière",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0537-2",
+      "type": "mcq",
+      "prompt": "Après combien de temps un poulain peut-il marcher ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Une heure",
+            "correct": true
+          },
+          {
+            "label": "Deux semaines",
+            "correct": false
+          },
+          {
+            "label": "Un mois",
+            "correct": false
+          },
+          {
+            "label": "Quatre semaines",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0537-3",
+      "type": "mcq",
+      "prompt": "À quelle fréquence faut-il idéalement curer les sabots du cheval ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chaque jour",
+            "correct": true
+          },
+          {
+            "label": "Chaque semaine",
+            "correct": false
+          },
+          {
+            "label": "Chaque mois",
+            "correct": false
+          },
+          {
+            "label": "Chaque année",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0537-4",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur de Stewball dans la chanson d'Hugues Aufray ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alezan",
+            "correct": false
+          },
+          {
+            "label": "Gris",
+            "correct": false
+          },
+          {
+            "label": "Noir",
+            "correct": false
+          },
+          {
+            "label": "Blanc",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0545-1",
+      "type": "mcq",
+      "prompt": "De quelle fonction vitale le fennec peut-il étonnamment se passer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Voir",
+            "correct": false
+          },
+          {
+            "label": "Boire",
+            "correct": true
+          },
+          {
+            "label": "Dormir",
+            "correct": false
+          },
+          {
+            "label": "Manger",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0545-2",
+      "type": "mcq",
+      "prompt": "De quelle manière le lynx a-t-il l'habitude de marquer son territoire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Excréments",
+            "correct": false
+          },
+          {
+            "label": "Éraflures",
+            "correct": true
+          },
+          {
+            "label": "Souris mortes",
+            "correct": false
+          },
+          {
+            "label": "Poils",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0545-3",
+      "type": "mcq",
+      "prompt": "Taillé pour la course, jusqu'à quelle vitesse un guépard peut-il courir ?",
+      "payload": {
+        "options": [
+          {
+            "label": "120 km/h",
+            "correct": true
+          },
+          {
+            "label": "90 km/h",
+            "correct": false
+          },
+          {
+            "label": "60 km/h",
+            "correct": false
+          },
+          {
+            "label": "150 km/h",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0545-4",
+      "type": "mcq",
+      "prompt": "À quel âge un tigreau commence-t-il à manger de la viande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Un an",
+            "correct": false
+          },
+          {
+            "label": "Deux mois",
+            "correct": true
+          },
+          {
+            "label": "Deux ans",
+            "correct": false
+          },
+          {
+            "label": "Six mois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0555-1",
+      "type": "mcq",
+      "prompt": "Dans « L'Âge de glace », qu'est-ce qui échappe à l'écureuil Scrat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Un gland",
+            "correct": true
+          },
+          {
+            "label": "Une bille",
+            "correct": false
+          },
+          {
+            "label": "Un os",
+            "correct": false
+          },
+          {
+            "label": "Une pierre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0555-2",
+      "type": "mcq",
+      "prompt": "Comment se nomme l'orque à sauver dans une saga populaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tom",
+            "correct": false
+          },
+          {
+            "label": "Jennifer",
+            "correct": false
+          },
+          {
+            "label": "Willy",
+            "correct": true
+          },
+          {
+            "label": "Monica",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0555-3",
+      "type": "mcq",
+      "prompt": "Qui le chat prénommé Tom poursuit-il sans cesse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joshua",
+            "correct": false
+          },
+          {
+            "label": "Jason",
+            "correct": false
+          },
+          {
+            "label": "James",
+            "correct": false
+          },
+          {
+            "label": "Jerry",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0555-4",
+      "type": "mcq",
+      "prompt": "Dans les deux films « Babe », quel animal campe le personnage principal ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chien",
+            "correct": false
+          },
+          {
+            "label": "Mouton",
+            "correct": false
+          },
+          {
+            "label": "Chèvre",
+            "correct": false
+          },
+          {
+            "label": "Cochon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0563-1",
+      "type": "mcq",
+      "prompt": "Quel volcan des îles Éoliennes est situé au nord de la Sicile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stromboli",
+            "correct": true
+          },
+          {
+            "label": "Pinatubo",
+            "correct": false
+          },
+          {
+            "label": "Villarrica",
+            "correct": false
+          },
+          {
+            "label": "Vésuve",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0563-2",
+      "type": "mcq",
+      "prompt": "Quel volcan actif est le plus haut d'Europe, avec ses 3 330 mètres ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Etna",
+            "correct": true
+          },
+          {
+            "label": "Mont Fuji",
+            "correct": false
+          },
+          {
+            "label": "Olca",
+            "correct": false
+          },
+          {
+            "label": "Ebeko",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0563-3",
+      "type": "mcq",
+      "prompt": "Quel volcan, connu des touristes, est le point culminant du Japon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mont Longonot",
+            "correct": false
+          },
+          {
+            "label": "Mont Ontake",
+            "correct": false
+          },
+          {
+            "label": "Mont Spurr",
+            "correct": false
+          },
+          {
+            "label": "Mont Fuji",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0563-4",
+      "type": "mcq",
+      "prompt": "Quel volcan a provoqué un refroidissement mondial de 0,6°C ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pinatubo",
+            "correct": true
+          },
+          {
+            "label": "Misti",
+            "correct": false
+          },
+          {
+            "label": "Rasshua",
+            "correct": false
+          },
+          {
+            "label": "Kurub",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0568-1",
+      "type": "mcq",
+      "prompt": "Quelle est la troisième forêt domaniale de France métropolitaine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cranou",
+            "correct": false
+          },
+          {
+            "label": "Creuse",
+            "correct": false
+          },
+          {
+            "label": "Compiègne",
+            "correct": true
+          },
+          {
+            "label": "Tusson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0568-2",
+      "type": "mcq",
+      "prompt": "Quelle forêt a inspiré Victor Hugo pour sa ferme des Thénardier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cîteaux",
+            "correct": false
+          },
+          {
+            "label": "Bondy",
+            "correct": true
+          },
+          {
+            "label": "Vercors",
+            "correct": false
+          },
+          {
+            "label": "Corsuet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0568-3",
+      "type": "mcq",
+      "prompt": "Quelle forêt de Corse occupe un majestueux cirque montagneux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bavella",
+            "correct": false
+          },
+          {
+            "label": "Vizzavona",
+            "correct": false
+          },
+          {
+            "label": "Tusson",
+            "correct": false
+          },
+          {
+            "label": "Bonifatu",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0568-4",
+      "type": "mcq",
+      "prompt": "Quelle forêt est parfois identifiée à la forêt de Brocéliande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bondy",
+            "correct": false
+          },
+          {
+            "label": "Paimpont",
+            "correct": true
+          },
+          {
+            "label": "Seillon",
+            "correct": false
+          },
+          {
+            "label": "Thelle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0592-1",
+      "type": "mcq",
+      "prompt": "Que stockent les cactus dans leurs tissus pour résister à la sécheresse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sucre",
+            "correct": false
+          },
+          {
+            "label": "Amidon",
+            "correct": false
+          },
+          {
+            "label": "Suc",
+            "correct": true
+          },
+          {
+            "label": "Sel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0592-2",
+      "type": "mcq",
+      "prompt": "Combien d'espèces environ comprend la famille des Cactaceae ?",
+      "payload": {
+        "options": [
+          {
+            "label": "3 500",
+            "correct": false
+          },
+          {
+            "label": "1 500",
+            "correct": false
+          },
+          {
+            "label": "4 500",
+            "correct": false
+          },
+          {
+            "label": "2 500",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0592-3",
+      "type": "mcq",
+      "prompt": "Dans quel pays le fait de ramasser des cactus est-il puni de prison ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Inde",
+            "correct": false
+          },
+          {
+            "label": "Argentine",
+            "correct": false
+          },
+          {
+            "label": "Mexique",
+            "correct": true
+          },
+          {
+            "label": "Algérie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0592-4",
+      "type": "mcq",
+      "prompt": "Dans quelles régions du globe les cactus poussent-ils le mieux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Déserts",
+            "correct": true
+          },
+          {
+            "label": "Prairies",
+            "correct": false
+          },
+          {
+            "label": "Plaines",
+            "correct": false
+          },
+          {
+            "label": "Montagnes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0618-1",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on une personne qui élève des abeilles à miel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Raniculteur",
+            "correct": false
+          },
+          {
+            "label": "Apiculteur",
+            "correct": true
+          },
+          {
+            "label": "Aviculteur",
+            "correct": false
+          },
+          {
+            "label": "Ostréiculteur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0618-2",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on un rassemblement important d'abeilles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Essaim",
+            "correct": true
+          },
+          {
+            "label": "Sac",
+            "correct": false
+          },
+          {
+            "label": "Manteau",
+            "correct": false
+          },
+          {
+            "label": "Grappe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0618-3",
+      "type": "mcq",
+      "prompt": "Avec quel autre insecte plus agressif confond-on souvent l'abeille ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bourdon",
+            "correct": false
+          },
+          {
+            "label": "Taon",
+            "correct": false
+          },
+          {
+            "label": "Guêpe",
+            "correct": true
+          },
+          {
+            "label": "Frelon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0618-4",
+      "type": "mcq",
+      "prompt": "Quel phénomène important l'abeille assure-t-elle en butinant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sporulation",
+            "correct": false
+          },
+          {
+            "label": "Pollinisation",
+            "correct": true
+          },
+          {
+            "label": "Germination",
+            "correct": false
+          },
+          {
+            "label": "Introgression",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-animaux-du-monde",
+      "title": "Animaux du monde",
+      "description": "D'après les quiz OpenQuizzDB « Animaux de la savane », « Les géants de la Terre », « Requins des Océans » et « Oiseaux ».",
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0545-1",
+        "oqdb-0545-2",
+        "oqdb-0545-3",
+        "oqdb-0545-4",
+        "oqdb-0383-1",
+        "oqdb-0383-2",
+        "oqdb-0383-3",
+        "oqdb-0383-4",
+        "oqdb-0207-1",
+        "oqdb-0207-2",
+        "oqdb-0207-3",
+        "oqdb-0207-4",
+        "oqdb-0491-1",
+        "oqdb-0491-2",
+        "oqdb-0491-3",
+        "oqdb-0491-4"
+      ]
+    },
+    {
+      "id": "oqdb-quiz-arbres-fleurs-volcans",
+      "title": "Arbres, fleurs et volcans",
+      "description": "D'après les quiz OpenQuizzDB « Arbres fruitiers », « Fleurs de nos jardins », « Volcans en activité » et « Volcans en sommeil ».",
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0213-1",
+        "oqdb-0213-2",
+        "oqdb-0213-3",
+        "oqdb-0213-4",
+        "oqdb-0370-1",
+        "oqdb-0370-2",
+        "oqdb-0370-3",
+        "oqdb-0370-4",
+        "oqdb-0563-1",
+        "oqdb-0563-2",
+        "oqdb-0563-3",
+        "oqdb-0563-4",
+        "oqdb-0045-1",
+        "oqdb-0045-2",
+        "oqdb-0045-3",
+        "oqdb-0045-4"
+      ]
+    }
+  ]
+}

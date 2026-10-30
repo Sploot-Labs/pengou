@@ -1,0 +1,2849 @@
+{
+  "source": {
+    "name": "OpenQuizzDB",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0031-1",
+      "type": "mcq",
+      "prompt": "Que vous fournira-t-on pour mettre sur vos frites aux États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pickles",
+            "correct": false
+          },
+          {
+            "label": "Ketchup",
+            "correct": true
+          },
+          {
+            "label": "Mayonnaise",
+            "correct": false
+          },
+          {
+            "label": "Tartare",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0031-2",
+      "type": "mcq",
+      "prompt": "Que vous fournira-t-on avec le sel pour vos frites en Angleterre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vinaigre",
+            "correct": true
+          },
+          {
+            "label": "Lait",
+            "correct": false
+          },
+          {
+            "label": "Sucre",
+            "correct": false
+          },
+          {
+            "label": "Sirop",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0031-3",
+      "type": "mcq",
+      "prompt": "Quel mets québécois est constitué de frites et de cheddar frais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poutine",
+            "correct": true
+          },
+          {
+            "label": "Cipaille",
+            "correct": false
+          },
+          {
+            "label": "Tourtière",
+            "correct": false
+          },
+          {
+            "label": "Gibelotte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0031-4",
+      "type": "mcq",
+      "prompt": "Quelle entreprise est fournisseur historique de frites chez McDonald's ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Flodor",
+            "correct": false
+          },
+          {
+            "label": "Lutosa",
+            "correct": false
+          },
+          {
+            "label": "McCain",
+            "correct": true
+          },
+          {
+            "label": "Intersnack",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0169-1",
+      "type": "mcq",
+      "prompt": "Quelle carbonade est composée de viande mijotée dans la bière ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Germanique",
+            "correct": false
+          },
+          {
+            "label": "Flamande",
+            "correct": true
+          },
+          {
+            "label": "Bruxelloise",
+            "correct": false
+          },
+          {
+            "label": "Wallone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0169-2",
+      "type": "mcq",
+      "prompt": "Quel pain brioché constellé de pépites de sucre est vendu en Belgique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Merveilleux",
+            "correct": false
+          },
+          {
+            "label": "Gosette",
+            "correct": false
+          },
+          {
+            "label": "Craquelin",
+            "correct": true
+          },
+          {
+            "label": "Croustillon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0169-3",
+      "type": "mcq",
+      "prompt": "Quelle saucisse panée et épicée est souvent servie dans les friteries ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gandeuillot",
+            "correct": false
+          },
+          {
+            "label": "Fricadelle",
+            "correct": true
+          },
+          {
+            "label": "Rosette",
+            "correct": false
+          },
+          {
+            "label": "Longeole",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0169-4",
+      "type": "mcq",
+      "prompt": "Quelle demi-baguette contient viande chaude, frites et sauce ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mitraillette",
+            "correct": true
+          },
+          {
+            "label": "Truffade",
+            "correct": false
+          },
+          {
+            "label": "Rosti",
+            "correct": false
+          },
+          {
+            "label": "Frico",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0189-1",
+      "type": "mcq",
+      "prompt": "Quelle bière belge est fabriquée en ajoutant des cerises au lambic ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kwak",
+            "correct": false
+          },
+          {
+            "label": "Kronenbourg",
+            "correct": false
+          },
+          {
+            "label": "Kriek",
+            "correct": true
+          },
+          {
+            "label": "Keystone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0189-2",
+      "type": "mcq",
+      "prompt": "Quelle bière belge, produit phare de la brasserie Dubuisson, titre 12 % ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bush",
+            "correct": true
+          },
+          {
+            "label": "Chimay Bleue",
+            "correct": false
+          },
+          {
+            "label": "Mort Subite",
+            "correct": false
+          },
+          {
+            "label": "Tongerlo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0189-3",
+      "type": "mcq",
+      "prompt": "Quel système de bouchon est utilisé sur les bouteilles de Quintine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "À capsule",
+            "correct": false
+          },
+          {
+            "label": "De liège",
+            "correct": false
+          },
+          {
+            "label": "À visser",
+            "correct": false
+          },
+          {
+            "label": "Mécanique",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0189-4",
+      "type": "mcq",
+      "prompt": "Quelle bière belge reste la référence au pays des blanches ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Corsendonk",
+            "correct": false
+          },
+          {
+            "label": "Hoegaarden",
+            "correct": true
+          },
+          {
+            "label": "Bacchus",
+            "correct": false
+          },
+          {
+            "label": "Floreffe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0201-1",
+      "type": "mcq",
+      "prompt": "Quel fromage industriel est enrobé de paraffine teinte en rouge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Époisses",
+            "correct": false
+          },
+          {
+            "label": "Babybel",
+            "correct": true
+          },
+          {
+            "label": "Chavroux",
+            "correct": false
+          },
+          {
+            "label": "Saint-paulin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0201-2",
+      "type": "mcq",
+      "prompt": "Quel fromage est enveloppé dans un papier en aluminium gaufré ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roquefort",
+            "correct": false
+          },
+          {
+            "label": "Reblochon",
+            "correct": false
+          },
+          {
+            "label": "Boursin",
+            "correct": true
+          },
+          {
+            "label": "Emmental",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0201-3",
+      "type": "mcq",
+      "prompt": "Lequel de ces fromages français est vendu dans une boîte en bois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roquefort",
+            "correct": false
+          },
+          {
+            "label": "Cabécou",
+            "correct": false
+          },
+          {
+            "label": "Petit-suisse",
+            "correct": false
+          },
+          {
+            "label": "Époisses",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0201-4",
+      "type": "mcq",
+      "prompt": "Quel fromage est cerclé de trois à cinq bandelettes végétales ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Montbriac",
+            "correct": false
+          },
+          {
+            "label": "Fédou",
+            "correct": false
+          },
+          {
+            "label": "Livernon",
+            "correct": false
+          },
+          {
+            "label": "Livarot",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0205-1",
+      "type": "mcq",
+      "prompt": "Quel fromage est associé à la ville de Meaux, en France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cantal",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": false
+          },
+          {
+            "label": "Gruyère",
+            "correct": false
+          },
+          {
+            "label": "Brie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0205-2",
+      "type": "mcq",
+      "prompt": "Quel fromage français est connu pour avoir une pâte criblée de trous ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emmental",
+            "correct": true
+          },
+          {
+            "label": "Camembert",
+            "correct": false
+          },
+          {
+            "label": "Brie",
+            "correct": false
+          },
+          {
+            "label": "Beaufort",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0205-3",
+      "type": "mcq",
+      "prompt": "Quel fromage a un nom qui signifie « traire une deuxième fois » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gruyère",
+            "correct": false
+          },
+          {
+            "label": "Reblochon",
+            "correct": true
+          },
+          {
+            "label": "Emmental",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0205-4",
+      "type": "mcq",
+      "prompt": "Quel fromage à pâte persillée est fabriqué à partir de lait cru de brebis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beaufort",
+            "correct": false
+          },
+          {
+            "label": "Munster",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": true
+          },
+          {
+            "label": "Brie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0211-1",
+      "type": "mcq",
+      "prompt": "Quel fromage italien rentre dans la composition du tiramisu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ricotta",
+            "correct": false
+          },
+          {
+            "label": "Gorgonzola",
+            "correct": false
+          },
+          {
+            "label": "Mascarpone",
+            "correct": true
+          },
+          {
+            "label": "Grana padano",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0211-2",
+      "type": "mcq",
+      "prompt": "Quel gâteau comporte oeufs, beurre, farine et sucre en quantités égales ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quatre-gares",
+            "correct": false
+          },
+          {
+            "label": "Quatre-parts",
+            "correct": false
+          },
+          {
+            "label": "Quatre-fards",
+            "correct": false
+          },
+          {
+            "label": "Quatre-quarts",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0211-3",
+      "type": "mcq",
+      "prompt": "Quel entremets de génoise équilibre le goût café et le chocolat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Diplomate",
+            "correct": false
+          },
+          {
+            "label": "Bavarois",
+            "correct": false
+          },
+          {
+            "label": "Religieuse",
+            "correct": false
+          },
+          {
+            "label": "Opéra",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0211-4",
+      "type": "mcq",
+      "prompt": "Quels fruits rouges entrent dans la préparation du clafoutis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Framboises",
+            "correct": false
+          },
+          {
+            "label": "Groseilles",
+            "correct": false
+          },
+          {
+            "label": "Cerises",
+            "correct": true
+          },
+          {
+            "label": "Fraises",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0229-1",
+      "type": "mcq",
+      "prompt": "De quel composé chimique est principalement constitué le sucre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saccharose",
+            "correct": true
+          },
+          {
+            "label": "Fructose",
+            "correct": false
+          },
+          {
+            "label": "Glucose",
+            "correct": false
+          },
+          {
+            "label": "Maltose",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0229-2",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on le sucre naturel présent dans les fruits ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Glucose",
+            "correct": false
+          },
+          {
+            "label": "Fructose",
+            "correct": true
+          },
+          {
+            "label": "Lactose",
+            "correct": false
+          },
+          {
+            "label": "Saccharose",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0229-3",
+      "type": "mcq",
+      "prompt": "Combien de morceaux de sucre contient une canette de cola 33 cl ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Environ sept",
+            "correct": true
+          },
+          {
+            "label": "Environ trois",
+            "correct": false
+          },
+          {
+            "label": "Environ quinze",
+            "correct": false
+          },
+          {
+            "label": "Environ onze",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0229-4",
+      "type": "mcq",
+      "prompt": "En quelle année est né le sucre en morceaux, par procédé artisanal ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1949",
+            "correct": false
+          },
+          {
+            "label": "1843",
+            "correct": true
+          },
+          {
+            "label": "1742",
+            "correct": false
+          },
+          {
+            "label": "1644",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0235-1",
+      "type": "mcq",
+      "prompt": "À partir de la fève de quel arbre spécifique le chocolat est-il produit ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Palmier",
+            "correct": false
+          },
+          {
+            "label": "Figuier",
+            "correct": false
+          },
+          {
+            "label": "Pacanier",
+            "correct": false
+          },
+          {
+            "label": "Cacaoyer",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0235-2",
+      "type": "mcq",
+      "prompt": "Quel chocolat, riche en acides gras saturés, est le plus amer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Au lait",
+            "correct": false
+          },
+          {
+            "label": "Noir",
+            "correct": true
+          },
+          {
+            "label": "Blanc",
+            "correct": false
+          },
+          {
+            "label": "Praliné",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0235-3",
+      "type": "mcq",
+      "prompt": "Quel est le premier pays producteur de cacao, loin devant le Ghana ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nigeria",
+            "correct": false
+          },
+          {
+            "label": "Côte d'Ivoire",
+            "correct": true
+          },
+          {
+            "label": "Brésil",
+            "correct": false
+          },
+          {
+            "label": "Mexique",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0235-4",
+      "type": "mcq",
+      "prompt": "Que fait-on en torréfiant les fèves de cacao pour le chocolat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "On les écrase",
+            "correct": false
+          },
+          {
+            "label": "On les épluche",
+            "correct": false
+          },
+          {
+            "label": "On les grille",
+            "correct": true
+          },
+          {
+            "label": "On les tord",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0273-1",
+      "type": "mcq",
+      "prompt": "Quelle plante composait la couronne des vainqueurs dans l'Antiquité ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Persil",
+            "correct": false
+          },
+          {
+            "label": "Basilic",
+            "correct": false
+          },
+          {
+            "label": "Laurier",
+            "correct": true
+          },
+          {
+            "label": "Thym",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0273-2",
+      "type": "mcq",
+      "prompt": "Quelle plante sert à préparer le thé au Maghreb ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Menthe",
+            "correct": true
+          },
+          {
+            "label": "Anis",
+            "correct": false
+          },
+          {
+            "label": "Coriandre",
+            "correct": false
+          },
+          {
+            "label": "Cannelle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0273-3",
+      "type": "mcq",
+      "prompt": "Quelle plante est appelée « farigoule » en Provence ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thym",
+            "correct": true
+          },
+          {
+            "label": "Marjolaine",
+            "correct": false
+          },
+          {
+            "label": "Bergamote",
+            "correct": false
+          },
+          {
+            "label": "Basilic",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0273-4",
+      "type": "mcq",
+      "prompt": "Quelle plante compose le pistou, avec l'ail et l'huile d'olive ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cumin",
+            "correct": false
+          },
+          {
+            "label": "Menthe",
+            "correct": false
+          },
+          {
+            "label": "Marjolaine",
+            "correct": false
+          },
+          {
+            "label": "Basilic",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0277-1",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur du paprika utilisé en cuisine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rouge",
+            "correct": true
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Blanche",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0277-2",
+      "type": "mcq",
+      "prompt": "Le safran est une épice tirée de quelle variété de fleur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Acacia",
+            "correct": false
+          },
+          {
+            "label": "Crocus",
+            "correct": true
+          },
+          {
+            "label": "Pavot",
+            "correct": false
+          },
+          {
+            "label": "Tulipe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0277-3",
+      "type": "mcq",
+      "prompt": "Quelle herbe est essentielle dans la sauce béarnaise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cerfeuil",
+            "correct": false
+          },
+          {
+            "label": "Estragon",
+            "correct": true
+          },
+          {
+            "label": "Sauge",
+            "correct": false
+          },
+          {
+            "label": "Romarin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0277-4",
+      "type": "mcq",
+      "prompt": "Quelle épice parfume le risotto à la milanaise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Curcuma",
+            "correct": false
+          },
+          {
+            "label": "Safran",
+            "correct": true
+          },
+          {
+            "label": "Origan",
+            "correct": false
+          },
+          {
+            "label": "Curry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0337-1",
+      "type": "mcq",
+      "prompt": "De quel pays provient principalement la datte medjool ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maroc",
+            "correct": true
+          },
+          {
+            "label": "Japon",
+            "correct": false
+          },
+          {
+            "label": "Canada",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0337-2",
+      "type": "mcq",
+      "prompt": "Quel goût a généralement la datte medjool ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Salé",
+            "correct": false
+          },
+          {
+            "label": "Sucré",
+            "correct": true
+          },
+          {
+            "label": "Amère",
+            "correct": false
+          },
+          {
+            "label": "Acide",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0337-3",
+      "type": "mcq",
+      "prompt": "Qu'est-ce qui distingue la datte medjool d'autres variétés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sans sucre",
+            "correct": false
+          },
+          {
+            "label": "Croquante",
+            "correct": false
+          },
+          {
+            "label": "Toujours verte",
+            "correct": false
+          },
+          {
+            "label": "Plus charnue",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0337-4",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur typique de la datte medjool mûre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brun foncé",
+            "correct": true
+          },
+          {
+            "label": "Bleu violacé",
+            "correct": false
+          },
+          {
+            "label": "Vert vif",
+            "correct": false
+          },
+          {
+            "label": "Jaune citron",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0372-1",
+      "type": "mcq",
+      "prompt": "Quelle confiserie est constituée d'une pomme enrobée de sucre cuit ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pomme d'amour",
+            "correct": true
+          },
+          {
+            "label": "Tarte Tatin",
+            "correct": false
+          },
+          {
+            "label": "Le crumble",
+            "correct": false
+          },
+          {
+            "label": "Apfelstrudel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0372-2",
+      "type": "mcq",
+      "prompt": "Quel dessert consiste en des pommes en pâte frites dans l'huile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Clafoutis",
+            "correct": false
+          },
+          {
+            "label": "Beignet de pomme",
+            "correct": true
+          },
+          {
+            "label": "Tarte Tatin",
+            "correct": false
+          },
+          {
+            "label": "Crumble",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0372-3",
+      "type": "mcq",
+      "prompt": "Quel gâteau traditionnel autrichien est cuisiné à base de pommes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tarte Tatin",
+            "correct": false
+          },
+          {
+            "label": "Croustade",
+            "correct": false
+          },
+          {
+            "label": "Crumble",
+            "correct": false
+          },
+          {
+            "label": "Apfelstrudel",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0372-4",
+      "type": "mcq",
+      "prompt": "Dans quelle tarte les pommes renversée sont-elles caramélisées ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tarte Tatin",
+            "correct": true
+          },
+          {
+            "label": "Tarte au riz",
+            "correct": false
+          },
+          {
+            "label": "Tarte normande",
+            "correct": false
+          },
+          {
+            "label": "Tarte au maton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0390-1",
+      "type": "mcq",
+      "prompt": "Qu'est-ce qu'un blini, dont le nom slave signifie « moudre » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tarte aux fruits",
+            "correct": false
+          },
+          {
+            "label": "Crêpe épaisse",
+            "correct": true
+          },
+          {
+            "label": "Gâteau sec",
+            "correct": false
+          },
+          {
+            "label": "Gaufre plate",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0390-2",
+      "type": "mcq",
+      "prompt": "Quelle est la forme traditionnelle des samoussas ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Carrée",
+            "correct": false
+          },
+          {
+            "label": "Ovale",
+            "correct": false
+          },
+          {
+            "label": "Triangulaire",
+            "correct": true
+          },
+          {
+            "label": "Ronde",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0390-3",
+      "type": "mcq",
+      "prompt": "Quel ingrédient trouve-t-on dans le sushi et le gohan japonais nature ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Canard",
+            "correct": false
+          },
+          {
+            "label": "Saumon",
+            "correct": false
+          },
+          {
+            "label": "Riz",
+            "correct": true
+          },
+          {
+            "label": "Boeuf",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0390-4",
+      "type": "mcq",
+      "prompt": "Quelle ville, à l'est de Milan, a donné son nom à un fromage bleu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gorgonzola",
+            "correct": true
+          },
+          {
+            "label": "Corbetta",
+            "correct": false
+          },
+          {
+            "label": "Dresano",
+            "correct": false
+          },
+          {
+            "label": "Bresso",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0396-1",
+      "type": "mcq",
+      "prompt": "Autour de quelle ville italienne fabrique-t-on l'Asti Spumante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Turin",
+            "correct": false
+          },
+          {
+            "label": "Asti",
+            "correct": true
+          },
+          {
+            "label": "Rivoli",
+            "correct": false
+          },
+          {
+            "label": "Biella",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0396-2",
+      "type": "mcq",
+      "prompt": "Les feuilles de quelle plante met-on dans le thé au Maroc ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eucalyptus",
+            "correct": false
+          },
+          {
+            "label": "Menthe",
+            "correct": true
+          },
+          {
+            "label": "Sauge",
+            "correct": false
+          },
+          {
+            "label": "Bleuet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0396-3",
+      "type": "mcq",
+      "prompt": "Que vous offre votre hôte Chinois quand il vous propose du « cha » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Du café",
+            "correct": false
+          },
+          {
+            "label": "Du chocolat",
+            "correct": false
+          },
+          {
+            "label": "Du whisky",
+            "correct": false
+          },
+          {
+            "label": "Du thé",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0396-4",
+      "type": "mcq",
+      "prompt": "Qu'est-ce qu'une bombilla glissée dans le thé en Argentine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cuillère plate",
+            "correct": false
+          },
+          {
+            "label": "Pâte de fruit",
+            "correct": false
+          },
+          {
+            "label": "Paille filtrante",
+            "correct": true
+          },
+          {
+            "label": "Cerise confite",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0418-1",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on les sensations olfactives du vin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bouquet",
+            "correct": true
+          },
+          {
+            "label": "Texture",
+            "correct": false
+          },
+          {
+            "label": "Nez",
+            "correct": false
+          },
+          {
+            "label": "Robe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0418-2",
+      "type": "mcq",
+      "prompt": "Quel verbe signifie refroidir un vin dans de la glace ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Forcer",
+            "correct": false
+          },
+          {
+            "label": "Frapper",
+            "correct": true
+          },
+          {
+            "label": "Froncer",
+            "correct": false
+          },
+          {
+            "label": "Figer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0418-3",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on un vin qui peut se garder longtemps et vieillir ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Échanson",
+            "correct": false
+          },
+          {
+            "label": "Graves",
+            "correct": false
+          },
+          {
+            "label": "Élixir",
+            "correct": false
+          },
+          {
+            "label": "Vin de garde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0418-4",
+      "type": "mcq",
+      "prompt": "Quel appareil permet une mesure directe du taux d'alcool d'un vin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oenolitre",
+            "correct": false
+          },
+          {
+            "label": "Ebullioscope",
+            "correct": false
+          },
+          {
+            "label": "Alcoomètre",
+            "correct": true
+          },
+          {
+            "label": "Barrica",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0445-1",
+      "type": "mcq",
+      "prompt": "Quelles pâtes italiennes farcies ont une forme de petites couronnes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fusilli",
+            "correct": false
+          },
+          {
+            "label": "Tortellini",
+            "correct": true
+          },
+          {
+            "label": "Gnocchi",
+            "correct": false
+          },
+          {
+            "label": "Capellini",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0445-2",
+      "type": "mcq",
+      "prompt": "Que mangerez-vous en commandant un « grana padano », protégé par AOP ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Potage",
+            "correct": false
+          },
+          {
+            "label": "Ragoût",
+            "correct": false
+          },
+          {
+            "label": "Gâteau",
+            "correct": false
+          },
+          {
+            "label": "Fromage",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0445-3",
+      "type": "mcq",
+      "prompt": "Quel plat italien est fait à base de semoule de maïs bouillie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Padano",
+            "correct": false
+          },
+          {
+            "label": "Pecorino",
+            "correct": false
+          },
+          {
+            "label": "Polenta",
+            "correct": true
+          },
+          {
+            "label": "Panzerotti",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0445-4",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur des truffes du Piémont ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Verte",
+            "correct": false
+          },
+          {
+            "label": "Noire",
+            "correct": false
+          },
+          {
+            "label": "Blanche",
+            "correct": true
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0457-1",
+      "type": "mcq",
+      "prompt": "Quelle friandise belge sucrée est aussi appelée « chapeau de curé » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cuberdon",
+            "correct": true
+          },
+          {
+            "label": "Calisson",
+            "correct": false
+          },
+          {
+            "label": "Rigolette",
+            "correct": false
+          },
+          {
+            "label": "Speculoos",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0457-2",
+      "type": "mcq",
+      "prompt": "Quel biscuit au miel très dur fait la fierté de la ville de Dinant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tuile",
+            "correct": false
+          },
+          {
+            "label": "Rocher",
+            "correct": false
+          },
+          {
+            "label": "Couque",
+            "correct": true
+          },
+          {
+            "label": "Palette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0457-3",
+      "type": "mcq",
+      "prompt": "Quelle bière a pour symbole une truite avec un anneau dans la bouche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Omega",
+            "correct": false
+          },
+          {
+            "label": "Orval",
+            "correct": true
+          },
+          {
+            "label": "Orezza",
+            "correct": false
+          },
+          {
+            "label": "Omer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0457-4",
+      "type": "mcq",
+      "prompt": "Quel plat belge peut être fait avec volaille, poisson ou crustacés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Godverdom",
+            "correct": false
+          },
+          {
+            "label": "Waterzooï",
+            "correct": true
+          },
+          {
+            "label": "Potferdeke",
+            "correct": false
+          },
+          {
+            "label": "Smerlap",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0458-1",
+      "type": "mcq",
+      "prompt": "Que mange-t-on traditionnellement à la Chandeleur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Croissants",
+            "correct": false
+          },
+          {
+            "label": "Crêpes",
+            "correct": true
+          },
+          {
+            "label": "Brioches",
+            "correct": false
+          },
+          {
+            "label": "Tartes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0458-2",
+      "type": "mcq",
+      "prompt": "Quel gâteau décore-t-on avec des sapins et des petits personnages ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Palet de dame",
+            "correct": false
+          },
+          {
+            "label": "Forêt noire",
+            "correct": false
+          },
+          {
+            "label": "Galette des Rois",
+            "correct": false
+          },
+          {
+            "label": "Bûche de Noël",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0458-3",
+      "type": "mcq",
+      "prompt": "Maman est en haut, qui fait des gâteaux, papa est en bas, qui fait...",
+      "payload": {
+        "options": [
+          {
+            "label": "Des dégâts",
+            "correct": false
+          },
+          {
+            "label": "Du nougat",
+            "correct": true
+          },
+          {
+            "label": "Du cinéma",
+            "correct": false
+          },
+          {
+            "label": "Des rasta",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0458-4",
+      "type": "mcq",
+      "prompt": "Dans quelle région de France mange-t-on les treize desserts de Noël ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alsace",
+            "correct": false
+          },
+          {
+            "label": "Auvergne",
+            "correct": false
+          },
+          {
+            "label": "Bretagne",
+            "correct": false
+          },
+          {
+            "label": "Provence",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0508-1",
+      "type": "mcq",
+      "prompt": "Dans quelle région naturelle se trouve le Château Latour Premier Cru ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Libournais",
+            "correct": false
+          },
+          {
+            "label": "Fronsac",
+            "correct": false
+          },
+          {
+            "label": "Médoc",
+            "correct": true
+          },
+          {
+            "label": "Graves",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0508-2",
+      "type": "mcq",
+      "prompt": "Dans quelle région viticole est produit le Monbazillac AOC ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Champagne",
+            "correct": false
+          },
+          {
+            "label": "Bergerac",
+            "correct": true
+          },
+          {
+            "label": "Cahors",
+            "correct": false
+          },
+          {
+            "label": "Béarn",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0508-3",
+      "type": "mcq",
+      "prompt": "La Clairette de Die est produite le long de quelle rivière ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vienne",
+            "correct": false
+          },
+          {
+            "label": "Ardèche",
+            "correct": false
+          },
+          {
+            "label": "Drôme",
+            "correct": true
+          },
+          {
+            "label": "Isère",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0508-4",
+      "type": "mcq",
+      "prompt": "Le Marignan est un cru de quelle région de France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Béarn",
+            "correct": false
+          },
+          {
+            "label": "Jura",
+            "correct": true
+          },
+          {
+            "label": "Savoie",
+            "correct": false
+          },
+          {
+            "label": "Tarn",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0514-1",
+      "type": "mcq",
+      "prompt": "Quelle île grecque produit un muscat très réputé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Samos",
+            "correct": true
+          },
+          {
+            "label": "Ikaria",
+            "correct": false
+          },
+          {
+            "label": "Lesbos",
+            "correct": false
+          },
+          {
+            "label": "Rhodes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0514-2",
+      "type": "mcq",
+      "prompt": "De quel pays assez riche en soleil provient le Muscat de Patras ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grèce",
+            "correct": true
+          },
+          {
+            "label": "Espagne",
+            "correct": false
+          },
+          {
+            "label": "Chypre",
+            "correct": false
+          },
+          {
+            "label": "Turquie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0514-3",
+      "type": "mcq",
+      "prompt": "Quel pays européen produit le vin blanc Aphrodite ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Espagne",
+            "correct": false
+          },
+          {
+            "label": "Grèce",
+            "correct": false
+          },
+          {
+            "label": "Chypre",
+            "correct": true
+          },
+          {
+            "label": "France",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0514-4",
+      "type": "mcq",
+      "prompt": "Quel est le cépage de cuve blanc le plus répandu en Allemagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sylvaner",
+            "correct": false
+          },
+          {
+            "label": "Riesling",
+            "correct": false
+          },
+          {
+            "label": "Müller-Thurgau",
+            "correct": true
+          },
+          {
+            "label": "Mauzac",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0516-1",
+      "type": "mcq",
+      "prompt": "Quelle liqueur de citron italienne est notamment produite à Capri ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grappa",
+            "correct": false
+          },
+          {
+            "label": "Sambuca",
+            "correct": false
+          },
+          {
+            "label": "Amaretto",
+            "correct": false
+          },
+          {
+            "label": "Limoncello",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0516-2",
+      "type": "mcq",
+      "prompt": "Quelle boisson alcoolisée douce présente une saveur d'amande amère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sambuca",
+            "correct": false
+          },
+          {
+            "label": "Grappa",
+            "correct": false
+          },
+          {
+            "label": "Amaretto",
+            "correct": true
+          },
+          {
+            "label": "Negroni",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0516-3",
+      "type": "mcq",
+      "prompt": "Quel long drink alcoolisé est composé de prosecco et d'eau de Seltz ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hyprocas",
+            "correct": false
+          },
+          {
+            "label": "Grappa",
+            "correct": false
+          },
+          {
+            "label": "Spritz",
+            "correct": true
+          },
+          {
+            "label": "Aquardiente",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0516-4",
+      "type": "mcq",
+      "prompt": "Quelle eau-de-vie de marc de raisin est produite à Saint-Marin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sambuca",
+            "correct": false
+          },
+          {
+            "label": "Negroni",
+            "correct": false
+          },
+          {
+            "label": "Grappa",
+            "correct": true
+          },
+          {
+            "label": "Amaretto",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0519-1",
+      "type": "mcq",
+      "prompt": "Quelle sauce est faite à base de boeuf haché, sauce tomate et oignons ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bolognaise",
+            "correct": true
+          },
+          {
+            "label": "Génoise",
+            "correct": false
+          },
+          {
+            "label": "Béchamel",
+            "correct": false
+          },
+          {
+            "label": "Tartare",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0519-2",
+      "type": "mcq",
+      "prompt": "Quelle préparation propose du boeuf cru coupé en tranches très fines ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Risotto",
+            "correct": false
+          },
+          {
+            "label": "Crostino",
+            "correct": false
+          },
+          {
+            "label": "Frico",
+            "correct": false
+          },
+          {
+            "label": "Carpaccio",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0519-3",
+      "type": "mcq",
+      "prompt": "Quelle spécialité de veau peut être préparée à la milanaise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Escalope",
+            "correct": true
+          },
+          {
+            "label": "Blanquette",
+            "correct": false
+          },
+          {
+            "label": "Aiguillette",
+            "correct": false
+          },
+          {
+            "label": "Osso buco",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0519-4",
+      "type": "mcq",
+      "prompt": "Quelle spécialité des Pouilles est une pizza pliée et farcie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sicilienne",
+            "correct": false
+          },
+          {
+            "label": "Panzerotti",
+            "correct": false
+          },
+          {
+            "label": "Calzone",
+            "correct": true
+          },
+          {
+            "label": "Stromboli",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0523-1",
+      "type": "mcq",
+      "prompt": "Quelles pâtes alimentaires se présentent en feuilles rectangulaires ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lasagnes",
+            "correct": true
+          },
+          {
+            "label": "Tortellini",
+            "correct": false
+          },
+          {
+            "label": "Cannelloni",
+            "correct": false
+          },
+          {
+            "label": "Fusilli",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0523-2",
+      "type": "mcq",
+      "prompt": "Quelle pâte farcie pliée vient du nord-ouest de l'Italie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Macaroni",
+            "correct": false
+          },
+          {
+            "label": "Fusilli",
+            "correct": false
+          },
+          {
+            "label": "Spaghetti",
+            "correct": false
+          },
+          {
+            "label": "Ravioli",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0523-3",
+      "type": "mcq",
+      "prompt": "Quelle variété de pâtes longues est vendue sous forme de lanières ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spaghetti",
+            "correct": false
+          },
+          {
+            "label": "Fettuccine",
+            "correct": false
+          },
+          {
+            "label": "Luinguine",
+            "correct": false
+          },
+          {
+            "label": "Tagliatelles",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0523-4",
+      "type": "mcq",
+      "prompt": "Quel plat de pâtes est jeté dans une poêle avec oeufs et lardons ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lasagne",
+            "correct": false
+          },
+          {
+            "label": "Tortellini",
+            "correct": false
+          },
+          {
+            "label": "Carbonara",
+            "correct": true
+          },
+          {
+            "label": "Ravioli",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0591-1",
+      "type": "mcq",
+      "prompt": "Quelle spécialité du Périgord est issue du gavage ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blanc de boeuf",
+            "correct": false
+          },
+          {
+            "label": "Poil de jarre",
+            "correct": false
+          },
+          {
+            "label": "Propolis",
+            "correct": false
+          },
+          {
+            "label": "Foie gras",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0591-2",
+      "type": "mcq",
+      "prompt": "Quel confit accompagne souvent les pommes de terre à la sarladaise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "De vin",
+            "correct": false
+          },
+          {
+            "label": "De fleurs",
+            "correct": false
+          },
+          {
+            "label": "D'oignons",
+            "correct": false
+          },
+          {
+            "label": "De canard",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0591-3",
+      "type": "mcq",
+      "prompt": "Que produisent, en classification AOC, 612 communes du Périgord ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Noix",
+            "correct": true
+          },
+          {
+            "label": "Pommes",
+            "correct": false
+          },
+          {
+            "label": "Haricots",
+            "correct": false
+          },
+          {
+            "label": "Citrons",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0591-4",
+      "type": "mcq",
+      "prompt": "Quel château domine le vignoble, face à Bergerac ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Magny",
+            "correct": false
+          },
+          {
+            "label": "Montardier",
+            "correct": false
+          },
+          {
+            "label": "Marfontaine",
+            "correct": false
+          },
+          {
+            "label": "Monbazillac",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-fromages-desserts",
+      "title": "Fromages et desserts",
+      "description": "D'après les quiz OpenQuizzDB « Fromages de France », « Fromages enveloppés », « Desserts gourmands » et « Chocolatissimo ».",
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0205-1",
+        "oqdb-0205-2",
+        "oqdb-0205-3",
+        "oqdb-0205-4",
+        "oqdb-0201-1",
+        "oqdb-0201-2",
+        "oqdb-0201-3",
+        "oqdb-0201-4",
+        "oqdb-0211-1",
+        "oqdb-0211-2",
+        "oqdb-0211-3",
+        "oqdb-0211-4",
+        "oqdb-0235-1",
+        "oqdb-0235-2",
+        "oqdb-0235-3",
+        "oqdb-0235-4"
+      ]
+    },
+    {
+      "id": "oqdb-quiz-cuisines-ailleurs",
+      "title": "Cuisines d'ailleurs",
+      "description": "D'après les quiz OpenQuizzDB « Cuisine italienne », « Des pâtes, oui ! », « Gastronomie italienne » et « Cuisine étrangère ».",
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0519-1",
+        "oqdb-0519-2",
+        "oqdb-0519-3",
+        "oqdb-0519-4",
+        "oqdb-0523-1",
+        "oqdb-0523-2",
+        "oqdb-0523-3",
+        "oqdb-0523-4",
+        "oqdb-0445-1",
+        "oqdb-0445-2",
+        "oqdb-0445-3",
+        "oqdb-0445-4",
+        "oqdb-0390-1",
+        "oqdb-0390-2",
+        "oqdb-0390-3",
+        "oqdb-0390-4"
+      ]
+    }
+  ]
+}

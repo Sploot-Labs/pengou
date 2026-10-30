@@ -1,0 +1,2733 @@
+{
+  "source": {
+    "name": "OpenQuizzDB",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0057-1",
+      "type": "mcq",
+      "prompt": "Combien de temps met la Terre pour faire le tour du Soleil ?",
+      "payload": {
+        "options": [
+          {
+            "label": "6 mois",
+            "correct": false
+          },
+          {
+            "label": "365 jours",
+            "correct": true
+          },
+          {
+            "label": "1 mois",
+            "correct": false
+          },
+          {
+            "label": "24 heures",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0057-2",
+      "type": "mcq",
+      "prompt": "Quelle distance approximative sépare la Terre de la Lune ?",
+      "payload": {
+        "options": [
+          {
+            "label": "420 000 km",
+            "correct": false
+          },
+          {
+            "label": "380 000 km",
+            "correct": true
+          },
+          {
+            "label": "460 000 km",
+            "correct": false
+          },
+          {
+            "label": "340 000 km",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0057-3",
+      "type": "mcq",
+      "prompt": "Quelle étoile, vue de la Terre, est la plus brillante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sirius",
+            "correct": false
+          },
+          {
+            "label": "Canopus",
+            "correct": false
+          },
+          {
+            "label": "Véga",
+            "correct": false
+          },
+          {
+            "label": "Le Soleil",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0057-4",
+      "type": "mcq",
+      "prompt": "Qui a effectué la première mesure de la circonférence de la Terre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eurydice",
+            "correct": false
+          },
+          {
+            "label": "Ératosthène",
+            "correct": true
+          },
+          {
+            "label": "Euripide",
+            "correct": false
+          },
+          {
+            "label": "Épicure",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0063-1",
+      "type": "mcq",
+      "prompt": "Quel satellite naturel est le principal responsable des marées ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Neptune",
+            "correct": false
+          },
+          {
+            "label": "Mars",
+            "correct": false
+          },
+          {
+            "label": "Mercure",
+            "correct": false
+          },
+          {
+            "label": "La Lune",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0063-2",
+      "type": "mcq",
+      "prompt": "Quel est le satellite naturel le plus proche de sa planète-mère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deimos",
+            "correct": false
+          },
+          {
+            "label": "Titan",
+            "correct": false
+          },
+          {
+            "label": "Charon",
+            "correct": false
+          },
+          {
+            "label": "Phobos",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0063-3",
+      "type": "mcq",
+      "prompt": "Quel est le plus grand satellite naturel de notre système solaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Lune",
+            "correct": false
+          },
+          {
+            "label": "Ganymède",
+            "correct": true
+          },
+          {
+            "label": "Umbriel",
+            "correct": false
+          },
+          {
+            "label": "Titan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0063-4",
+      "type": "mcq",
+      "prompt": "Quel est le satellite naturel le plus éloigné de sa planète-mère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Phobos",
+            "correct": false
+          },
+          {
+            "label": "Sinopé",
+            "correct": true
+          },
+          {
+            "label": "Titan",
+            "correct": false
+          },
+          {
+            "label": "Charon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0135-1",
+      "type": "mcq",
+      "prompt": "En mesure, quelle est la valeur en millimètres d'un pouce anglais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "25 mm",
+            "correct": true
+          },
+          {
+            "label": "32 mm",
+            "correct": false
+          },
+          {
+            "label": "16 mm",
+            "correct": false
+          },
+          {
+            "label": "45 mm",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0135-2",
+      "type": "mcq",
+      "prompt": "Combien de travaux Hercule dut-il exécuter pour Eurysthée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dix",
+            "correct": false
+          },
+          {
+            "label": "Cent",
+            "correct": false
+          },
+          {
+            "label": "Quarante",
+            "correct": false
+          },
+          {
+            "label": "Douze",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0135-3",
+      "type": "mcq",
+      "prompt": "À quel âge Nadia Comaneci a-t-elle obtenu la note de 10 aux JO ?",
+      "payload": {
+        "options": [
+          {
+            "label": "13 ans",
+            "correct": false
+          },
+          {
+            "label": "15 ans",
+            "correct": false
+          },
+          {
+            "label": "14 ans",
+            "correct": true
+          },
+          {
+            "label": "16 ans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0135-4",
+      "type": "mcq",
+      "prompt": "En quelle année Charlemagne a-t-il été couronné empereur à Rome ?",
+      "payload": {
+        "options": [
+          {
+            "label": "700",
+            "correct": false
+          },
+          {
+            "label": "800",
+            "correct": true
+          },
+          {
+            "label": "900",
+            "correct": false
+          },
+          {
+            "label": "600",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0139-1",
+      "type": "mcq",
+      "prompt": "Qu'est censée imiter une machine faisant le test de Turing ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mouvement",
+            "correct": false
+          },
+          {
+            "label": "Silhouette",
+            "correct": false
+          },
+          {
+            "label": "Conversation",
+            "correct": true
+          },
+          {
+            "label": "Dessin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0139-2",
+      "type": "mcq",
+      "prompt": "Quelle machine Alan Turing a-t-il décryptée pendant la guerre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deep Blue",
+            "correct": false
+          },
+          {
+            "label": "Delilah",
+            "correct": false
+          },
+          {
+            "label": "Enigma",
+            "correct": true
+          },
+          {
+            "label": "ENIAC",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0139-3",
+      "type": "mcq",
+      "prompt": "Quel programme Turing a-t-il écrit en 1952 pour réaliser son test ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dames",
+            "correct": false
+          },
+          {
+            "label": "Jeu d'échecs",
+            "correct": true
+          },
+          {
+            "label": "Jeu de l'oie",
+            "correct": false
+          },
+          {
+            "label": "OXO",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0139-4",
+      "type": "mcq",
+      "prompt": "Dans quel système informatique Enigma a-t-il été implémenté ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Android",
+            "correct": false
+          },
+          {
+            "label": "Mac OS",
+            "correct": false
+          },
+          {
+            "label": "Windows",
+            "correct": false
+          },
+          {
+            "label": "UNIX",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0153-1",
+      "type": "mcq",
+      "prompt": "Quel élément d'une voiture électrique permet d'en stocker l'énergie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Batterie",
+            "correct": true
+          },
+          {
+            "label": "Démarreur",
+            "correct": false
+          },
+          {
+            "label": "Alternateur",
+            "correct": false
+          },
+          {
+            "label": "Radiateur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0153-2",
+      "type": "mcq",
+      "prompt": "Quelle entreprise propose un réseau de Superchargeurs pour voitures ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shell",
+            "correct": false
+          },
+          {
+            "label": "ExxonMobil",
+            "correct": false
+          },
+          {
+            "label": "BP",
+            "correct": false
+          },
+          {
+            "label": "Tesla",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0153-3",
+      "type": "mcq",
+      "prompt": "Où est le plus souvent placée la batterie dans un véhicule électrique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sous la voiture",
+            "correct": true
+          },
+          {
+            "label": "Dans le coffre",
+            "correct": false
+          },
+          {
+            "label": "Sur les ailes",
+            "correct": false
+          },
+          {
+            "label": "À l'avant",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0153-4",
+      "type": "mcq",
+      "prompt": "Qui fut numéro un mondial de la voiture électrique en 2022 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "BYD",
+            "correct": true
+          },
+          {
+            "label": "Tesla",
+            "correct": false
+          },
+          {
+            "label": "Honda",
+            "correct": false
+          },
+          {
+            "label": "Volvo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0171-1",
+      "type": "mcq",
+      "prompt": "Dans quel portefeuille peuvent être stockés les Ethers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Disket",
+            "correct": false
+          },
+          {
+            "label": "Wallet",
+            "correct": true
+          },
+          {
+            "label": "Magnet",
+            "correct": false
+          },
+          {
+            "label": "Basket",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0171-2",
+      "type": "mcq",
+      "prompt": "Qu'apporte la crypto-monnaie par rapport à d'autres solutions ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Identification",
+            "correct": false
+          },
+          {
+            "label": "Anonymat",
+            "correct": true
+          },
+          {
+            "label": "Frais de dossier",
+            "correct": false
+          },
+          {
+            "label": "Traçabilité",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0171-3",
+      "type": "mcq",
+      "prompt": "Quelle monnaie native est utilisée par le protocole de paiement Ripple ?",
+      "payload": {
+        "options": [
+          {
+            "label": "XPP",
+            "correct": false
+          },
+          {
+            "label": "XRP",
+            "correct": true
+          },
+          {
+            "label": "XLE",
+            "correct": false
+          },
+          {
+            "label": "XPL",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0171-4",
+      "type": "mcq",
+      "prompt": "Quel investisseur est aussi le créateur du site bitcoin.com ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roger Ver",
+            "correct": true
+          },
+          {
+            "label": "Charlie Lee",
+            "correct": false
+          },
+          {
+            "label": "Sunny King",
+            "correct": false
+          },
+          {
+            "label": "Gavin Wood",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0191-1",
+      "type": "mcq",
+      "prompt": "En quelle année Steve Jobs a-t-il racheté le studio d'animation Pixar ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1979",
+            "correct": false
+          },
+          {
+            "label": "1995",
+            "correct": false
+          },
+          {
+            "label": "2001",
+            "correct": false
+          },
+          {
+            "label": "1986",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0191-2",
+      "type": "mcq",
+      "prompt": "Qui est officiellement devenu en 2011 le successeur de Steve Jobs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jony Ive",
+            "correct": false
+          },
+          {
+            "label": "Elon Musk",
+            "correct": false
+          },
+          {
+            "label": "Tim Cook",
+            "correct": true
+          },
+          {
+            "label": "Steve Wozniak",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0191-3",
+      "type": "mcq",
+      "prompt": "Quelle entreprise a-t-il créé dans le garage de sa maison d'enfance ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Microsoft",
+            "correct": false
+          },
+          {
+            "label": "Apple",
+            "correct": true
+          },
+          {
+            "label": "IBM",
+            "correct": false
+          },
+          {
+            "label": "Google",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0191-4",
+      "type": "mcq",
+      "prompt": "Quel symbole commun relie la ville de New York et Steve Jobs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pomme",
+            "correct": true
+          },
+          {
+            "label": "Taxi",
+            "correct": false
+          },
+          {
+            "label": "Gratte-ciel",
+            "correct": false
+          },
+          {
+            "label": "Ordinateur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0237-1",
+      "type": "mcq",
+      "prompt": "Quelle est l'encyclopédie collaborative la plus utilisée sur Internet ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Framasoft",
+            "correct": false
+          },
+          {
+            "label": "Pandocréon",
+            "correct": false
+          },
+          {
+            "label": "Netalya",
+            "correct": false
+          },
+          {
+            "label": "Wikipédia",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0237-2",
+      "type": "mcq",
+      "prompt": "Que sont « Google Chrome », « Internet Explorer » et « Mozilla Firefox » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Navigateurs",
+            "correct": true
+          },
+          {
+            "label": "Moteurs",
+            "correct": false
+          },
+          {
+            "label": "Encyclopédies",
+            "correct": false
+          },
+          {
+            "label": "Routeurs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0237-3",
+      "type": "mcq",
+      "prompt": "Que signifie le deuxième w du www des adresses de sites internet ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wide",
+            "correct": true
+          },
+          {
+            "label": "Web",
+            "correct": false
+          },
+          {
+            "label": "Worse",
+            "correct": false
+          },
+          {
+            "label": "World",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0237-4",
+      "type": "mcq",
+      "prompt": "Quel nom portait le navigateur Internet devenu « Microsoft Edge » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Firefox",
+            "correct": false
+          },
+          {
+            "label": "Internet Explorer",
+            "correct": true
+          },
+          {
+            "label": "Chrome",
+            "correct": false
+          },
+          {
+            "label": "Safari",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0289-1",
+      "type": "mcq",
+      "prompt": "Quels logiciels permettent de naviguer sur Internet ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tableurs",
+            "correct": false
+          },
+          {
+            "label": "Émulateurs",
+            "correct": false
+          },
+          {
+            "label": "Navigateurs",
+            "correct": true
+          },
+          {
+            "label": "Éditeurs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0289-2",
+      "type": "mcq",
+      "prompt": "Quel logiciel protège un ordinateur des menaces en ligne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chat",
+            "correct": false
+          },
+          {
+            "label": "Antivirus",
+            "correct": true
+          },
+          {
+            "label": "Messagerie",
+            "correct": false
+          },
+          {
+            "label": "Navigateur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0289-3",
+      "type": "mcq",
+      "prompt": "Quelle start-up a été rachetée pour un milliard par Facebook en 2012 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Backelite",
+            "correct": false
+          },
+          {
+            "label": "Instagram",
+            "correct": true
+          },
+          {
+            "label": "Valve",
+            "correct": false
+          },
+          {
+            "label": "Globalnet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0289-4",
+      "type": "mcq",
+      "prompt": "Quel nom portait le navigateur Internet devenu « Microsoft Edge » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Safari",
+            "correct": false
+          },
+          {
+            "label": "Internet Explorer",
+            "correct": true
+          },
+          {
+            "label": "Firefox",
+            "correct": false
+          },
+          {
+            "label": "Chrome",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0303-1",
+      "type": "mcq",
+      "prompt": "Qui a créé et dirige encore le noyau Linux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bill Gates",
+            "correct": false
+          },
+          {
+            "label": "Larry Ellison",
+            "correct": false
+          },
+          {
+            "label": "Linus Torvalds",
+            "correct": true
+          },
+          {
+            "label": "Steeve Jobs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0303-2",
+      "type": "mcq",
+      "prompt": "En quelle année le noyau Linux a-t-il été publié pour la première fois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1993",
+            "correct": false
+          },
+          {
+            "label": "1997",
+            "correct": false
+          },
+          {
+            "label": "1995",
+            "correct": false
+          },
+          {
+            "label": "1991",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0303-3",
+      "type": "mcq",
+      "prompt": "Quel système mobile majeur repose sur le noyau Linux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Windows Phone",
+            "correct": false
+          },
+          {
+            "label": "BlackBerry 10",
+            "correct": false
+          },
+          {
+            "label": "Android",
+            "correct": true
+          },
+          {
+            "label": "iOS",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0303-4",
+      "type": "mcq",
+      "prompt": "Quel est le nom de la mascotte de Linux, connue des mordus ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Puffy",
+            "correct": false
+          },
+          {
+            "label": "Gnu",
+            "correct": false
+          },
+          {
+            "label": "Tux",
+            "correct": true
+          },
+          {
+            "label": "Wilber",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0333-1",
+      "type": "mcq",
+      "prompt": "Quel informaticien et chef d'entreprise américain a inventé « Facebook » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Steve Ballmer",
+            "correct": false
+          },
+          {
+            "label": "Paul Allen",
+            "correct": false
+          },
+          {
+            "label": "Larry Page",
+            "correct": false
+          },
+          {
+            "label": "Mark Zuckeberg",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0333-2",
+      "type": "mcq",
+      "prompt": "Quel est le principal réseau social professionnel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Friendster",
+            "correct": false
+          },
+          {
+            "label": "LinkedIn",
+            "correct": true
+          },
+          {
+            "label": "Heeloo",
+            "correct": false
+          },
+          {
+            "label": "Movim",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0333-3",
+      "type": "mcq",
+      "prompt": "Que fait-on lors d'un « swap » avec une youtubeuse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Des vidéos",
+            "correct": false
+          },
+          {
+            "label": "Des messages",
+            "correct": false
+          },
+          {
+            "label": "Des cadeaux",
+            "correct": true
+          },
+          {
+            "label": "Des blagues",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0333-4",
+      "type": "mcq",
+      "prompt": "Combien « Facebook » a-t-il payé pour acheter « Whatsapp » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "650 000",
+            "correct": false
+          },
+          {
+            "label": "19 milliards",
+            "correct": true
+          },
+          {
+            "label": "220 millions",
+            "correct": false
+          },
+          {
+            "label": "850 millions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0366-1",
+      "type": "mcq",
+      "prompt": "En quelle année fut fondée l'entreprise à but lucratif plafonné OpenAI ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2019",
+            "correct": false
+          },
+          {
+            "label": "2017",
+            "correct": false
+          },
+          {
+            "label": "2021",
+            "correct": false
+          },
+          {
+            "label": "2015",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0366-2",
+      "type": "mcq",
+      "prompt": "Dans quelle ville des États-Unis se situe le siège social d'OpenAI ?",
+      "payload": {
+        "options": [
+          {
+            "label": "San Francisco",
+            "correct": true
+          },
+          {
+            "label": "Miami",
+            "correct": false
+          },
+          {
+            "label": "Los Angeles",
+            "correct": false
+          },
+          {
+            "label": "Chicago",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0366-3",
+      "type": "mcq",
+      "prompt": "Qui a quitté OpenAI en 2018 à la suite d'un conflit de direction ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ilya Sutskever",
+            "correct": false
+          },
+          {
+            "label": "Elon Musk",
+            "correct": true
+          },
+          {
+            "label": "Greg Brockman",
+            "correct": false
+          },
+          {
+            "label": "Sam Altman",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0366-4",
+      "type": "mcq",
+      "prompt": "Quel outil d'OpenAI peut générer du texte de manière autonome ?",
+      "payload": {
+        "options": [
+          {
+            "label": "OpenChat",
+            "correct": false
+          },
+          {
+            "label": "AlphaGo",
+            "correct": false
+          },
+          {
+            "label": "DALL-E",
+            "correct": false
+          },
+          {
+            "label": "ChatGPT",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0375-1",
+      "type": "mcq",
+      "prompt": "Parmi les métaux alcalins, quel est le symbole chimique du sodium ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Na",
+            "correct": true
+          },
+          {
+            "label": "So",
+            "correct": false
+          },
+          {
+            "label": "Sd",
+            "correct": false
+          },
+          {
+            "label": "Um",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0375-2",
+      "type": "mcq",
+      "prompt": "Quel élément a pour symbole Na et pour numéro atomique 11 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sodium",
+            "correct": true
+          },
+          {
+            "label": "Sélénium",
+            "correct": false
+          },
+          {
+            "label": "Soufre",
+            "correct": false
+          },
+          {
+            "label": "Silicium",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0375-3",
+      "type": "mcq",
+      "prompt": "Quel est le symbole chimique du potassium, d'aspect blanc métallique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "T",
+            "correct": false
+          },
+          {
+            "label": "K",
+            "correct": true
+          },
+          {
+            "label": "P",
+            "correct": false
+          },
+          {
+            "label": "O",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0375-4",
+      "type": "mcq",
+      "prompt": "Quel élément chimique est représenté par le symbole B ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bismuth",
+            "correct": false
+          },
+          {
+            "label": "Bore",
+            "correct": true
+          },
+          {
+            "label": "Benzène",
+            "correct": false
+          },
+          {
+            "label": "Brome",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0380-1",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on un récipient sphérique en chimie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bécher",
+            "correct": false
+          },
+          {
+            "label": "Burette",
+            "correct": false
+          },
+          {
+            "label": "Ballon",
+            "correct": true
+          },
+          {
+            "label": "Bocal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0380-2",
+      "type": "mcq",
+      "prompt": "Quel métal brûle avec une flamme blanche aveuglante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Radium",
+            "correct": false
+          },
+          {
+            "label": "Baryum",
+            "correct": false
+          },
+          {
+            "label": "Calcium",
+            "correct": false
+          },
+          {
+            "label": "Magnésium",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0380-3",
+      "type": "mcq",
+      "prompt": "Quel paramètre indique si une solution est acide, neutre ou basique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le pH",
+            "correct": true
+          },
+          {
+            "label": "La constante",
+            "correct": false
+          },
+          {
+            "label": "La base",
+            "correct": false
+          },
+          {
+            "label": "La puissance",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0380-4",
+      "type": "mcq",
+      "prompt": "Quel métal en fusion pouvez-vous tenir dans le creux de la main ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mercure",
+            "correct": true
+          },
+          {
+            "label": "Iridium",
+            "correct": false
+          },
+          {
+            "label": "Platine",
+            "correct": false
+          },
+          {
+            "label": "Manganèse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0419-1",
+      "type": "mcq",
+      "prompt": "Que mesure-t-on avec l'échelle Kelvin, du nom de Lord Kelvin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Distance",
+            "correct": false
+          },
+          {
+            "label": "Poids",
+            "correct": false
+          },
+          {
+            "label": "Vitesse",
+            "correct": false
+          },
+          {
+            "label": "Température",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0419-2",
+      "type": "mcq",
+      "prompt": "Qui a développé l'échelle de magnitude des séismes en 1935 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pauling",
+            "correct": false
+          },
+          {
+            "label": "Rankine",
+            "correct": false
+          },
+          {
+            "label": "Richter",
+            "correct": true
+          },
+          {
+            "label": "Monoyer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0419-3",
+      "type": "mcq",
+      "prompt": "Lequel de ces pays ou territoires n'utilise pas le degré Celsius ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Canada",
+            "correct": false
+          },
+          {
+            "label": "Italie",
+            "correct": false
+          },
+          {
+            "label": "États-Unis",
+            "correct": true
+          },
+          {
+            "label": "Australie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0419-4",
+      "type": "mcq",
+      "prompt": "Quelle unité du Système international permet de mesurer une fréquence ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joule",
+            "correct": false
+          },
+          {
+            "label": "Becquerel",
+            "correct": false
+          },
+          {
+            "label": "Katal",
+            "correct": false
+          },
+          {
+            "label": "Hertz",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0456-1",
+      "type": "mcq",
+      "prompt": "Laquelle de ces inventions ne porte pas le nom de son inventeur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poubelle",
+            "correct": false
+          },
+          {
+            "label": "Colt",
+            "correct": false
+          },
+          {
+            "label": "Macadam",
+            "correct": false
+          },
+          {
+            "label": "Laser",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0456-2",
+      "type": "mcq",
+      "prompt": "Quel concours prime les meilleures inventions françaises ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lépine",
+            "correct": true
+          },
+          {
+            "label": "Novastar",
+            "correct": false
+          },
+          {
+            "label": "Edison",
+            "correct": false
+          },
+          {
+            "label": "Thomas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0456-3",
+      "type": "mcq",
+      "prompt": "Quel mot a été inventé en 1955 par le philologue Jacques Perret ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Imprimante",
+            "correct": false
+          },
+          {
+            "label": "Transistor",
+            "correct": false
+          },
+          {
+            "label": "Ampoule",
+            "correct": false
+          },
+          {
+            "label": "Ordinateur",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0456-4",
+      "type": "mcq",
+      "prompt": "Quel savant italien a découvert le principe de la pile électrique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bugatti",
+            "correct": false
+          },
+          {
+            "label": "Volta",
+            "correct": true
+          },
+          {
+            "label": "Turriano",
+            "correct": false
+          },
+          {
+            "label": "Marconi",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0503-1",
+      "type": "mcq",
+      "prompt": "Avec qui Nikola Tesla a-t-il travaillé après avoir émigré aux États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "James Cash Jr.",
+            "correct": false
+          },
+          {
+            "label": "Nela Park",
+            "correct": false
+          },
+          {
+            "label": "Thomas Edison",
+            "correct": true
+          },
+          {
+            "label": "Bob Wright",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0503-2",
+      "type": "mcq",
+      "prompt": "Combien de brevets Nikola Tesla a-t-il déposé au cours de sa vie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Environ 100",
+            "correct": false
+          },
+          {
+            "label": "Environ 300",
+            "correct": true
+          },
+          {
+            "label": "Environ 200",
+            "correct": false
+          },
+          {
+            "label": "Environ 400",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0503-3",
+      "type": "mcq",
+      "prompt": "Devenu polyglotte, combien de langues parlait Nikola Tesla ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Huit",
+            "correct": true
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Sept",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0503-4",
+      "type": "mcq",
+      "prompt": "Grâce à quel type de courant Nikola Tesla a-t-il révolutionné l'électricité ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Continu",
+            "correct": false
+          },
+          {
+            "label": "Alternatif",
+            "correct": true
+          },
+          {
+            "label": "Statique",
+            "correct": false
+          },
+          {
+            "label": "Inductif",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0557-1",
+      "type": "mcq",
+      "prompt": "De combien de paires de côtes est constitué le squelette humain ?",
+      "payload": {
+        "options": [
+          {
+            "label": "32",
+            "correct": false
+          },
+          {
+            "label": "24",
+            "correct": false
+          },
+          {
+            "label": "12",
+            "correct": true
+          },
+          {
+            "label": "6",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0557-2",
+      "type": "mcq",
+      "prompt": "Quelle est la durée de vie moyenne d'un globule rouge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "3 semaines",
+            "correct": false
+          },
+          {
+            "label": "4 mois",
+            "correct": true
+          },
+          {
+            "label": "1 heure",
+            "correct": false
+          },
+          {
+            "label": "2 jours",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0557-3",
+      "type": "mcq",
+      "prompt": "À combien a été mesurée la vitesse record d'un éternuement ?",
+      "payload": {
+        "options": [
+          {
+            "label": "105 km/h",
+            "correct": false
+          },
+          {
+            "label": "145 km/h",
+            "correct": false
+          },
+          {
+            "label": "125 km/h",
+            "correct": false
+          },
+          {
+            "label": "165 km/h",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0557-4",
+      "type": "mcq",
+      "prompt": "Quelle quantité d'eau peut-on perdre environ par jour en respirant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2 litres",
+            "correct": false
+          },
+          {
+            "label": "3 litres",
+            "correct": false
+          },
+          {
+            "label": "1 litre",
+            "correct": true
+          },
+          {
+            "label": "4 litres",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0573-1",
+      "type": "mcq",
+      "prompt": "Contre quelle pathologie le magnésium est-il parfois conseillé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Boulimie",
+            "correct": false
+          },
+          {
+            "label": "Anorexie",
+            "correct": false
+          },
+          {
+            "label": "Asthme",
+            "correct": false
+          },
+          {
+            "label": "Stress",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0573-2",
+      "type": "mcq",
+      "prompt": "Lequel de ces troubles peut être lié à une carence en magnésium ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crampes",
+            "correct": true
+          },
+          {
+            "label": "Anorexie",
+            "correct": false
+          },
+          {
+            "label": "Asthme",
+            "correct": false
+          },
+          {
+            "label": "Boulimie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0573-3",
+      "type": "mcq",
+      "prompt": "Lequel de ces fruits est de loin le plus riche en magnésium ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poire",
+            "correct": false
+          },
+          {
+            "label": "Raisin",
+            "correct": false
+          },
+          {
+            "label": "Banane",
+            "correct": true
+          },
+          {
+            "label": "Pomme",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0573-4",
+      "type": "mcq",
+      "prompt": "Quel effet est provoqué par un excès de magnésium ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Excitant",
+            "correct": false
+          },
+          {
+            "label": "Anabolisant",
+            "correct": false
+          },
+          {
+            "label": "Somnolent",
+            "correct": false
+          },
+          {
+            "label": "Laxatif",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0581-1",
+      "type": "mcq",
+      "prompt": "Que représente le logo de l'application mobile Snapchat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ours",
+            "correct": false
+          },
+          {
+            "label": "Appareil photo",
+            "correct": false
+          },
+          {
+            "label": "Singe",
+            "correct": false
+          },
+          {
+            "label": "Fantôme",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0581-2",
+      "type": "mcq",
+      "prompt": "Qui est devenu milliardaire à l'âge de 24 ans grâce à Snapchat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jeff Bezos",
+            "correct": false
+          },
+          {
+            "label": "Tom Golisano",
+            "correct": false
+          },
+          {
+            "label": "Evan Spiegel",
+            "correct": true
+          },
+          {
+            "label": "Paul Allen",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0581-3",
+      "type": "mcq",
+      "prompt": "Quelle couleur est généralement associée à Snapchat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jaune",
+            "correct": true
+          },
+          {
+            "label": "Bleu",
+            "correct": false
+          },
+          {
+            "label": "Vert",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0581-4",
+      "type": "mcq",
+      "prompt": "Combien d'utilisateurs quotidiens Snapchat comptait-il en 2017 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "106 millions",
+            "correct": false
+          },
+          {
+            "label": "146 millions",
+            "correct": false
+          },
+          {
+            "label": "126 millions",
+            "correct": false
+          },
+          {
+            "label": "178 millions",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0609-1",
+      "type": "mcq",
+      "prompt": "Dans combien de dépôts CVS le noyau d'OpenBSD est-il développé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Deux",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Un seul",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0609-2",
+      "type": "mcq",
+      "prompt": "Quel pare-feu d'OpenBSD équipe désormais macOS ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Firestarter",
+            "correct": false
+          },
+          {
+            "label": "ClearOS",
+            "correct": false
+          },
+          {
+            "label": "Packet Filter",
+            "correct": true
+          },
+          {
+            "label": "Comodo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0609-3",
+      "type": "mcq",
+      "prompt": "Quelle licence open source propre est utilisée par OpenBSD ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Licence GPL",
+            "correct": false
+          },
+          {
+            "label": "Licence LPPL",
+            "correct": false
+          },
+          {
+            "label": "Licence MIT",
+            "correct": false
+          },
+          {
+            "label": "Licence ISC",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0609-4",
+      "type": "mcq",
+      "prompt": "Quel algorithme a été ajouté à OpenBSD pour hacher les mots de passe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Camellia",
+            "correct": false
+          },
+          {
+            "label": "Blowfish",
+            "correct": true
+          },
+          {
+            "label": "Skipjack",
+            "correct": false
+          },
+          {
+            "label": "Square",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0611-1",
+      "type": "mcq",
+      "prompt": "Que faites-vous si vous regardez vos vidéos familiale en ligne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hacking",
+            "correct": false
+          },
+          {
+            "label": "Phishing",
+            "correct": false
+          },
+          {
+            "label": "Streaming",
+            "correct": true
+          },
+          {
+            "label": "Spamming",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0611-2",
+      "type": "mcq",
+      "prompt": "Comment montrer que vous aimez quelque chose sur Facebook ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fake",
+            "correct": false
+          },
+          {
+            "label": "Push",
+            "correct": false
+          },
+          {
+            "label": "Geek",
+            "correct": false
+          },
+          {
+            "label": "Like",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0611-3",
+      "type": "mcq",
+      "prompt": "Comment identifier une personne sur une photo en ligne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cloud",
+            "correct": false
+          },
+          {
+            "label": "Rank",
+            "correct": false
+          },
+          {
+            "label": "ActiveX",
+            "correct": false
+          },
+          {
+            "label": "Tag",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0611-4",
+      "type": "mcq",
+      "prompt": "Quel courrier indésirable est souvent utilisé à des fins publicitaires ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spam",
+            "correct": true
+          },
+          {
+            "label": "Baud",
+            "correct": false
+          },
+          {
+            "label": "Bump",
+            "correct": false
+          },
+          {
+            "label": "Favicon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0615-1",
+      "type": "mcq",
+      "prompt": "Quel marqueur Internet utilise un croisillon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Backup",
+            "correct": false
+          },
+          {
+            "label": "Asset",
+            "correct": false
+          },
+          {
+            "label": "Hashtag",
+            "correct": true
+          },
+          {
+            "label": "Counter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0615-2",
+      "type": "mcq",
+      "prompt": "Quel outil permet de suivre une commande en temps réel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tracking",
+            "correct": true
+          },
+          {
+            "label": "Permalink",
+            "correct": false
+          },
+          {
+            "label": "Backlink",
+            "correct": false
+          },
+          {
+            "label": "Cookie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0615-3",
+      "type": "mcq",
+      "prompt": "Quel défaut informatique peut provoquer un dysfonctionnement ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alias",
+            "correct": false
+          },
+          {
+            "label": "Bug",
+            "correct": true
+          },
+          {
+            "label": "Java",
+            "correct": false
+          },
+          {
+            "label": "Blacklist",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0615-4",
+      "type": "mcq",
+      "prompt": "Quelle liste de morceaux peut être publiée sur le web ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Query",
+            "correct": false
+          },
+          {
+            "label": "Playlist",
+            "correct": true
+          },
+          {
+            "label": "Facticiel",
+            "correct": false
+          },
+          {
+            "label": "Registrar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-chimie-corps",
+      "title": "Chimie, corps humain et mesures",
+      "description": "D'après les quiz OpenQuizzDB « Chimie », « Symboles chimiques », « Corps humain » et « Unités de mesure ».",
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0380-1",
+        "oqdb-0380-2",
+        "oqdb-0380-3",
+        "oqdb-0380-4",
+        "oqdb-0375-1",
+        "oqdb-0375-2",
+        "oqdb-0375-3",
+        "oqdb-0375-4",
+        "oqdb-0557-1",
+        "oqdb-0557-2",
+        "oqdb-0557-3",
+        "oqdb-0557-4",
+        "oqdb-0419-1",
+        "oqdb-0419-2",
+        "oqdb-0419-3",
+        "oqdb-0419-4"
+      ]
+    },
+    {
+      "id": "oqdb-quiz-planetes-inventeurs",
+      "title": "Planètes et inventeurs",
+      "description": "D'après les quiz OpenQuizzDB « Planète bleue », « Satellites naturels », « Alan Turing » et « Nikola Tesla ».",
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0057-1",
+        "oqdb-0057-2",
+        "oqdb-0057-3",
+        "oqdb-0057-4",
+        "oqdb-0063-1",
+        "oqdb-0063-2",
+        "oqdb-0063-3",
+        "oqdb-0063-4",
+        "oqdb-0139-1",
+        "oqdb-0139-2",
+        "oqdb-0139-3",
+        "oqdb-0139-4",
+        "oqdb-0503-1",
+        "oqdb-0503-2",
+        "oqdb-0503-3",
+        "oqdb-0503-4"
+      ]
+    }
+  ]
+}

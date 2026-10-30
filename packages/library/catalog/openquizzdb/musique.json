@@ -1,0 +1,3777 @@
+{
+  "source": {
+    "name": "OpenQuizzDB",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0029-1",
+      "type": "mcq",
+      "prompt": "Dans quelle région habite la dame chantée par Francis Cabrel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gironde",
+            "correct": false
+          },
+          {
+            "label": "Ardèche",
+            "correct": false
+          },
+          {
+            "label": "Haute-Savoie",
+            "correct": true
+          },
+          {
+            "label": "Haute-Corse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0029-2",
+      "type": "mcq",
+      "prompt": "De quoi sont faits les murs du premier album de Francis Cabrel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "De briques",
+            "correct": false
+          },
+          {
+            "label": "De poussière",
+            "correct": true
+          },
+          {
+            "label": "De paille",
+            "correct": false
+          },
+          {
+            "label": "De terre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0029-3",
+      "type": "mcq",
+      "prompt": "Quel artiste a eu une forte influence dans la carrière de Francis Cabrel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bob Dylan",
+            "correct": true
+          },
+          {
+            "label": "Jimmy Page",
+            "correct": false
+          },
+          {
+            "label": "Elvis Presley",
+            "correct": false
+          },
+          {
+            "label": "Frank Sinatra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0029-4",
+      "type": "mcq",
+      "prompt": "Qui a parodié Francis Cabrel avec « Ma Cabane au fond du jardin » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nicolas Canteloup",
+            "correct": false
+          },
+          {
+            "label": "Laurent Gerra",
+            "correct": true
+          },
+          {
+            "label": "Didier Gustin",
+            "correct": false
+          },
+          {
+            "label": "Jean Roucas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0077-1",
+      "type": "mcq",
+      "prompt": "Pour quel pays Aznavour joua-t-il un rôle actif dans la collecte de fonds ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Arménie",
+            "correct": true
+          },
+          {
+            "label": "Lituanie",
+            "correct": false
+          },
+          {
+            "label": "Ukraine",
+            "correct": false
+          },
+          {
+            "label": "Grèce",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0077-2",
+      "type": "mcq",
+      "prompt": "Quelle saison est citée dans « La Bohème » de Charles Aznavour ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hiver",
+            "correct": true
+          },
+          {
+            "label": "Été",
+            "correct": false
+          },
+          {
+            "label": "Printemps",
+            "correct": false
+          },
+          {
+            "label": "Automne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0077-3",
+      "type": "mcq",
+      "prompt": "Quel était le véritable nom du chanteur français Charles Aznavour ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aznavourian",
+            "correct": true
+          },
+          {
+            "label": "Aznavourev",
+            "correct": false
+          },
+          {
+            "label": "Aznavouriak",
+            "correct": false
+          },
+          {
+            "label": "Aznavour",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0077-4",
+      "type": "mcq",
+      "prompt": "« La Mamma » a été écrite pour Aznavour par le père de quelle artiste ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mireille Mathieu",
+            "correct": false
+          },
+          {
+            "label": "Sheila",
+            "correct": false
+          },
+          {
+            "label": "Dalida",
+            "correct": false
+          },
+          {
+            "label": "France Gall",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0083-1",
+      "type": "mcq",
+      "prompt": "Qui cherchait des poux à Serge Gainsbourg dans une de ses chansons ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emma",
+            "correct": false
+          },
+          {
+            "label": "Élisa",
+            "correct": true
+          },
+          {
+            "label": "Élodie",
+            "correct": false
+          },
+          {
+            "label": "Émilie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0083-2",
+      "type": "mcq",
+      "prompt": "Quel prénom Serge Gainsbourg écrit-il sur sa Remington portative ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lola",
+            "correct": false
+          },
+          {
+            "label": "Léa",
+            "correct": false
+          },
+          {
+            "label": "Loane",
+            "correct": false
+          },
+          {
+            "label": "Lætitia",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0083-3",
+      "type": "mcq",
+      "prompt": "Pour qui Serge Gainsbourg a-t-il écrit « Les petits papiers » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Catherine Deneuve",
+            "correct": false
+          },
+          {
+            "label": "Brigitte Bardot",
+            "correct": false
+          },
+          {
+            "label": "Régine",
+            "correct": true
+          },
+          {
+            "label": "Jane Birkin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0083-4",
+      "type": "mcq",
+      "prompt": "En 1986, avec qui Serge Gainsbourg a-t-il créé un incident télévisé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sacha Distel",
+            "correct": false
+          },
+          {
+            "label": "Jean Ferrat",
+            "correct": false
+          },
+          {
+            "label": "Guy Béart",
+            "correct": true
+          },
+          {
+            "label": "Adamo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0203-1",
+      "type": "mcq",
+      "prompt": "Que voit-on au verso de la pochette l'album « Laundry Service », de Shakira ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Machine à laver",
+            "correct": true
+          },
+          {
+            "label": "Téléphone",
+            "correct": false
+          },
+          {
+            "label": "Menottes",
+            "correct": false
+          },
+          {
+            "label": "Radio",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0203-2",
+      "type": "mcq",
+      "prompt": "De quel pays est originaire Shakira, la reine de la musique latine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Colombie",
+            "correct": true
+          },
+          {
+            "label": "Mexique",
+            "correct": false
+          },
+          {
+            "label": "Bolivie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0203-3",
+      "type": "mcq",
+      "prompt": "Comment se prénomme le premier fils de Shakira et de Gerard Piqué ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Donovan",
+            "correct": false
+          },
+          {
+            "label": "Esteban",
+            "correct": false
+          },
+          {
+            "label": "Ivan",
+            "correct": false
+          },
+          {
+            "label": "Milan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0203-4",
+      "type": "mcq",
+      "prompt": "Quel est le titre du premier album où Shakira a écrit en anglais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "You And Me",
+            "correct": false
+          },
+          {
+            "label": "Oral Fixation",
+            "correct": false
+          },
+          {
+            "label": "Laundry Service",
+            "correct": true
+          },
+          {
+            "label": "She Wolf",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0239-1",
+      "type": "mcq",
+      "prompt": "Quel alter ego Eminem utilise-t-il parfois dans ses chansons ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Posh",
+            "correct": false
+          },
+          {
+            "label": "Slim Shady",
+            "correct": true
+          },
+          {
+            "label": "Love symbol",
+            "correct": false
+          },
+          {
+            "label": "Fat Man",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0239-2",
+      "type": "mcq",
+      "prompt": "Dans quel film Eminem interprète-t-il un jeune rappeur blanc ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wonder Boys",
+            "correct": false
+          },
+          {
+            "label": "Crazy Heart",
+            "correct": false
+          },
+          {
+            "label": "8 Mile",
+            "correct": true
+          },
+          {
+            "label": "Once",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0239-3",
+      "type": "mcq",
+      "prompt": "Quel prénom masculin est l'un des titres du rappeur Eminem ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bran",
+            "correct": false
+          },
+          {
+            "label": "Sam",
+            "correct": false
+          },
+          {
+            "label": "Stan",
+            "correct": true
+          },
+          {
+            "label": "Dan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0239-4",
+      "type": "mcq",
+      "prompt": "Quelle jeune chanteuseest la petite protégée du rappeur Eminem ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Marie Osmond",
+            "correct": false
+          },
+          {
+            "label": "Bella Thorne",
+            "correct": false
+          },
+          {
+            "label": "Lisa Germano",
+            "correct": false
+          },
+          {
+            "label": "Skylar Grey",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0287-1",
+      "type": "mcq",
+      "prompt": "En plus des lunettes, que porte souvent Jul dans ses clips ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cravate",
+            "correct": false
+          },
+          {
+            "label": "Chapeau",
+            "correct": false
+          },
+          {
+            "label": "Casquette",
+            "correct": true
+          },
+          {
+            "label": "Masque",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0287-2",
+      "type": "mcq",
+      "prompt": "Quel est le véritable nom du rappeur Jul ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Julien Dupont",
+            "correct": false
+          },
+          {
+            "label": "Jean-Marie Lopez",
+            "correct": false
+          },
+          {
+            "label": "Julien Mari",
+            "correct": true
+          },
+          {
+            "label": "Jules Martin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0287-3",
+      "type": "mcq",
+      "prompt": "Quelle ville est très associée à l'univers musical de Jul ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bordeaux",
+            "correct": false
+          },
+          {
+            "label": "Marseille",
+            "correct": true
+          },
+          {
+            "label": "Nice",
+            "correct": false
+          },
+          {
+            "label": "Toulouse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0287-4",
+      "type": "mcq",
+      "prompt": "Quelle caractéristique décrit le mieux Jul ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peu de sorties",
+            "correct": false
+          },
+          {
+            "label": "Instrumentaux",
+            "correct": false
+          },
+          {
+            "label": "Très productif",
+            "correct": true
+          },
+          {
+            "label": "Pas d'albums",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0307-1",
+      "type": "mcq",
+      "prompt": "Quel groupe new wave a sorti les tubes « Electricity » et « Enola Gay » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joy Division",
+            "correct": false
+          },
+          {
+            "label": "Yazoo",
+            "correct": false
+          },
+          {
+            "label": "Fox The Fox",
+            "correct": false
+          },
+          {
+            "label": "OMD",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0307-2",
+      "type": "mcq",
+      "prompt": "Quel groupe a connu son premier tube en 1981 avec « Tainted Love » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Depeche Mode",
+            "correct": false
+          },
+          {
+            "label": "Yazoo",
+            "correct": false
+          },
+          {
+            "label": "Soft Cell",
+            "correct": true
+          },
+          {
+            "label": "Simple Minds",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0307-3",
+      "type": "mcq",
+      "prompt": "À quel groupe new wave doit-on le hit « Shout », enregistré en 1984 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pet Shop Boys",
+            "correct": false
+          },
+          {
+            "label": "Dead Or Alive",
+            "correct": false
+          },
+          {
+            "label": "Cocteau Twins",
+            "correct": false
+          },
+          {
+            "label": "Tears For Fears",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0307-4",
+      "type": "mcq",
+      "prompt": "Quel est le plus gros succès commercial du groupe New Order ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Paradise",
+            "correct": false
+          },
+          {
+            "label": "Sunrise",
+            "correct": false
+          },
+          {
+            "label": "Blue Monday",
+            "correct": true
+          },
+          {
+            "label": "Ultraviolence",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0309-1",
+      "type": "mcq",
+      "prompt": "De quel instrument joue Lisa Simpson, créée par Matt Groening ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Flûte",
+            "correct": false
+          },
+          {
+            "label": "Trompette",
+            "correct": false
+          },
+          {
+            "label": "Saxophone",
+            "correct": true
+          },
+          {
+            "label": "Piano",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0309-2",
+      "type": "mcq",
+      "prompt": "De quoi est faite la mèche d'un archet de violon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crin de cheval",
+            "correct": true
+          },
+          {
+            "label": "Coton",
+            "correct": false
+          },
+          {
+            "label": "Angora",
+            "correct": false
+          },
+          {
+            "label": "Mohair",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0309-3",
+      "type": "mcq",
+      "prompt": "Combien de cordes possède un violon de musique classique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": true
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0309-4",
+      "type": "mcq",
+      "prompt": "De quel instrument jouait John Lennon au sein des Beatles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Batterie",
+            "correct": false
+          },
+          {
+            "label": "Guitare",
+            "correct": true
+          },
+          {
+            "label": "Clavier",
+            "correct": false
+          },
+          {
+            "label": "Saxophone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0311-1",
+      "type": "mcq",
+      "prompt": "Quel style musical caractérise l'univers de Stromae ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Metal",
+            "correct": false
+          },
+          {
+            "label": "Électro-pop",
+            "correct": true
+          },
+          {
+            "label": "Rock",
+            "correct": false
+          },
+          {
+            "label": "Jazz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0311-2",
+      "type": "mcq",
+      "prompt": "Quelle chanson a rendu Stromae célèbre en 2009 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Formidable",
+            "correct": false
+          },
+          {
+            "label": "Papaoutai",
+            "correct": false
+          },
+          {
+            "label": "Tous les mêmes",
+            "correct": false
+          },
+          {
+            "label": "Alors on danse",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0311-3",
+      "type": "mcq",
+      "prompt": "Quel album de Stromae contient le succès « Papaoutai » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cheese",
+            "correct": false
+          },
+          {
+            "label": "Stromae Live",
+            "correct": false
+          },
+          {
+            "label": "Multitude",
+            "correct": false
+          },
+          {
+            "label": "Racine carrée",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0311-4",
+      "type": "mcq",
+      "prompt": "Quelle chanson de Stromae aborde la rupture amoureuse avec ironie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Santé",
+            "correct": false
+          },
+          {
+            "label": "Papaoutai",
+            "correct": false
+          },
+          {
+            "label": "Tous les mêmes",
+            "correct": true
+          },
+          {
+            "label": "Formidable",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0313-1",
+      "type": "mcq",
+      "prompt": "Dans quel groupe chante Robert Smith, avec sa coiffure arachnéenne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alphaville",
+            "correct": false
+          },
+          {
+            "label": "Cocteau Twins",
+            "correct": false
+          },
+          {
+            "label": "Indochine",
+            "correct": false
+          },
+          {
+            "label": "The Cure",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0313-2",
+      "type": "mcq",
+      "prompt": "Quel groupe a connu son premier succès avec « People Are People » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bauhaus",
+            "correct": false
+          },
+          {
+            "label": "U2",
+            "correct": false
+          },
+          {
+            "label": "Depeche Mode",
+            "correct": true
+          },
+          {
+            "label": "The Chameleons",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0313-3",
+      "type": "mcq",
+      "prompt": "Quel groupe anglais a obtenu son premier numéro un avec « Relax » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "OMD",
+            "correct": false
+          },
+          {
+            "label": "A4D",
+            "correct": false
+          },
+          {
+            "label": "FGTH",
+            "correct": true
+          },
+          {
+            "label": "U2",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0313-4",
+      "type": "mcq",
+      "prompt": "Quel groupe a été formé par les membres restants de Joy Division ?",
+      "payload": {
+        "options": [
+          {
+            "label": "New World",
+            "correct": false
+          },
+          {
+            "label": "Soft Cell",
+            "correct": false
+          },
+          {
+            "label": "New Order",
+            "correct": true
+          },
+          {
+            "label": "Kajagoogoo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0315-1",
+      "type": "mcq",
+      "prompt": "Quel instrument à cordes pincées est utilisé en Inde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Théorbe",
+            "correct": false
+          },
+          {
+            "label": "Banjo",
+            "correct": false
+          },
+          {
+            "label": "Sitar",
+            "correct": true
+          },
+          {
+            "label": "Gling",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0315-2",
+      "type": "mcq",
+      "prompt": "Quel instrument à cordes pincées est souvent utilisé en country ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Balalaïka",
+            "correct": false
+          },
+          {
+            "label": "Bouzouki",
+            "correct": false
+          },
+          {
+            "label": "Basson",
+            "correct": false
+          },
+          {
+            "label": "Banjo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0315-3",
+      "type": "mcq",
+      "prompt": "Combien de cordes au minimum dénombre-t-on sur une guitare basse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0315-4",
+      "type": "mcq",
+      "prompt": "Quelle est la forme de la balalaïka, qui nous vient de Russie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rectangulaire",
+            "correct": false
+          },
+          {
+            "label": "Carrée",
+            "correct": false
+          },
+          {
+            "label": "Ronde",
+            "correct": false
+          },
+          {
+            "label": "Triangulaire",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0329-1",
+      "type": "mcq",
+      "prompt": "Quelle est l'identité civile de la chanteuse Aya Nakamura ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Anna Diop",
+            "correct": false
+          },
+          {
+            "label": "Aïcha Nakamura",
+            "correct": false
+          },
+          {
+            "label": "Amel Nakamura",
+            "correct": false
+          },
+          {
+            "label": "Aya Danioko",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0329-2",
+      "type": "mcq",
+      "prompt": "Quel titre a révélé Aya Nakamura au grand public en 2018 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Copines",
+            "correct": false
+          },
+          {
+            "label": "La dot",
+            "correct": false
+          },
+          {
+            "label": "Djadja",
+            "correct": true
+          },
+          {
+            "label": "Pookie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0329-3",
+      "type": "mcq",
+      "prompt": "Quel est le titre du tout premier album d'Aya Nakamura ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aya",
+            "correct": false
+          },
+          {
+            "label": "Nakamura",
+            "correct": false
+          },
+          {
+            "label": "Journal intime",
+            "correct": true
+          },
+          {
+            "label": "DNK",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0329-4",
+      "type": "mcq",
+      "prompt": "Quel titre contient la phrase « j'suis trop djomb » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Djadja",
+            "correct": false
+          },
+          {
+            "label": "Pookie",
+            "correct": false
+          },
+          {
+            "label": "Il veut",
+            "correct": true
+          },
+          {
+            "label": "Copines",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-1",
+      "type": "mcq",
+      "prompt": "Quel chanteur de reggae a été découvert par son tube « Boombastic » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bob Marley",
+            "correct": false
+          },
+          {
+            "label": "Alpha Blondy",
+            "correct": false
+          },
+          {
+            "label": "Ziggy Marley",
+            "correct": false
+          },
+          {
+            "label": "Shaggy",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-2",
+      "type": "mcq",
+      "prompt": "Qui est le musicien de reggae le plus célèbre et le plus influent ?",
+      "payload": {
+        "options": [
+          {
+            "label": "King Sporty",
+            "correct": false
+          },
+          {
+            "label": "Dobby Dobson",
+            "correct": false
+          },
+          {
+            "label": "Bob Marley",
+            "correct": true
+          },
+          {
+            "label": "Dawn Penn",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-3",
+      "type": "mcq",
+      "prompt": "À qui doit-on le célèbre titre « Reggae Night », sorti en 1983 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maxi Priest",
+            "correct": false
+          },
+          {
+            "label": "Jimmy Cliff",
+            "correct": true
+          },
+          {
+            "label": "Alpha Blondy",
+            "correct": false
+          },
+          {
+            "label": "Bob Marley",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-4",
+      "type": "mcq",
+      "prompt": "Que chanteur français est connu pour son tube « Chacun sa route » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Papa Dee",
+            "correct": false
+          },
+          {
+            "label": "Purpleman",
+            "correct": false
+          },
+          {
+            "label": "Pierpoljak",
+            "correct": false
+          },
+          {
+            "label": "Tonton David",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0363-1",
+      "type": "mcq",
+      "prompt": "Dans quelle ville a eu lieu le concert « Rendez-Vous », de Jean-Michel Jarre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Los Angeles",
+            "correct": false
+          },
+          {
+            "label": "Houston",
+            "correct": true
+          },
+          {
+            "label": "Miami",
+            "correct": false
+          },
+          {
+            "label": "Chicago",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0363-2",
+      "type": "mcq",
+      "prompt": "Le texte de quel tube de Christophe a été écrit par Jean-Michel Jarre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Dolce Vita",
+            "correct": false
+          },
+          {
+            "label": "Succès Fou",
+            "correct": false
+          },
+          {
+            "label": "Les Mots Bleus",
+            "correct": true
+          },
+          {
+            "label": "Aline",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0363-3",
+      "type": "mcq",
+      "prompt": "Quel album de Jean-Michel Jarre est sorti en 1976 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rendez-vous",
+            "correct": false
+          },
+          {
+            "label": "Equinoxe",
+            "correct": false
+          },
+          {
+            "label": "Oxygène",
+            "correct": true
+          },
+          {
+            "label": "Chronologie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0363-4",
+      "type": "mcq",
+      "prompt": "Quel album de Jean-Michel Jarre est un hommage au vent ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Téo et Téa",
+            "correct": false
+          },
+          {
+            "label": "Aero",
+            "correct": true
+          },
+          {
+            "label": "Chronologie",
+            "correct": false
+          },
+          {
+            "label": "Geometry of Love",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0401-1",
+      "type": "mcq",
+      "prompt": "Quel groupe de musique anglais est mené par le chanteur Jay Kay ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jamiroquai",
+            "correct": true
+          },
+          {
+            "label": "Jethro Tull",
+            "correct": false
+          },
+          {
+            "label": "Joy Division",
+            "correct": false
+          },
+          {
+            "label": "Judas Priest",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0401-2",
+      "type": "mcq",
+      "prompt": "Quel est le surnom de Jean-Paul Maunick, fondateur d'Incognito ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bluey",
+            "correct": true
+          },
+          {
+            "label": "Greeny",
+            "correct": false
+          },
+          {
+            "label": "Redest",
+            "correct": false
+          },
+          {
+            "label": "Yellow",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0401-3",
+      "type": "mcq",
+      "prompt": "Quel quartet acid jazz est renommé pour ses performances live ?",
+      "payload": {
+        "options": [
+          {
+            "label": "MJQ",
+            "correct": false
+          },
+          {
+            "label": "DSQ",
+            "correct": false
+          },
+          {
+            "label": "JTQ",
+            "correct": true
+          },
+          {
+            "label": "FJQ",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0401-4",
+      "type": "mcq",
+      "prompt": "Quel sigle retrouve-t-on sur tous les albums de Brand New Heavies ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Une girafe",
+            "correct": false
+          },
+          {
+            "label": "Une tortue",
+            "correct": false
+          },
+          {
+            "label": "Un lion",
+            "correct": false
+          },
+          {
+            "label": "Un éléphant",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0417-1",
+      "type": "mcq",
+      "prompt": "Quel gagnant de le « Nouvelle Star » est surnommé « la Tortue » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Julien Doré",
+            "correct": false
+          },
+          {
+            "label": "Steeve Estatof",
+            "correct": false
+          },
+          {
+            "label": "Christophe Willem",
+            "correct": true
+          },
+          {
+            "label": "Amel Bent",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0417-2",
+      "type": "mcq",
+      "prompt": "En 1991, quel tube Yannick Noah a-t-il associé à la coupe Davis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les Lionnes",
+            "correct": false
+          },
+          {
+            "label": "Saga Africa",
+            "correct": true
+          },
+          {
+            "label": "Vagabond",
+            "correct": false
+          },
+          {
+            "label": "Ose",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0417-3",
+      "type": "mcq",
+      "prompt": "Quel chanteur prénommé Mathieu est issu du groupe Linkup ?",
+      "payload": {
+        "options": [
+          {
+            "label": "M. Pokora",
+            "correct": true
+          },
+          {
+            "label": "Corneille",
+            "correct": false
+          },
+          {
+            "label": "Raphaël",
+            "correct": false
+          },
+          {
+            "label": "Keen'V",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0417-4",
+      "type": "mcq",
+      "prompt": "Quel est le style musical de l'album de Rohff, « La fierté des années » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tango",
+            "correct": false
+          },
+          {
+            "label": "Disco",
+            "correct": false
+          },
+          {
+            "label": "Rap",
+            "correct": true
+          },
+          {
+            "label": "Techno",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0429-1",
+      "type": "mcq",
+      "prompt": "Quel album de Depeche Mode propose une rose rouge sur sa pochette ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Violator",
+            "correct": true
+          },
+          {
+            "label": "A Broken Frame",
+            "correct": false
+          },
+          {
+            "label": "Ultra",
+            "correct": false
+          },
+          {
+            "label": "Exciter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0429-2",
+      "type": "mcq",
+      "prompt": "Qui a dirigé la plupart des clips vidéos du groupe Depeche Mode ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Clive Richardson",
+            "correct": false
+          },
+          {
+            "label": "Anton Corbijn",
+            "correct": true
+          },
+          {
+            "label": "Julien Temple",
+            "correct": false
+          },
+          {
+            "label": "John Hillcoat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0429-3",
+      "type": "mcq",
+      "prompt": "Avec quel label anglais le groupe Depeche Mode a-t-il géré sa carrière ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Warner",
+            "correct": false
+          },
+          {
+            "label": "EMI",
+            "correct": false
+          },
+          {
+            "label": "Mute Records",
+            "correct": true
+          },
+          {
+            "label": "Mercury",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0429-4",
+      "type": "mcq",
+      "prompt": "Qui est le chanteur principal du groupe Depeche Mode ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vince Clarke",
+            "correct": false
+          },
+          {
+            "label": "Andrew Fletcher",
+            "correct": false
+          },
+          {
+            "label": "Dave Gahan",
+            "correct": true
+          },
+          {
+            "label": "Alan Wilder",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0434-1",
+      "type": "mcq",
+      "prompt": "Laquelle de ces propositions désigne un titre de Depeche Mode ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Little 13",
+            "correct": false
+          },
+          {
+            "label": "Little 21",
+            "correct": false
+          },
+          {
+            "label": "Little 9",
+            "correct": false
+          },
+          {
+            "label": "Little 15",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0434-2",
+      "type": "mcq",
+      "prompt": "Quel morceau instrumental apparaît sur l'album « Sounds of the Universe » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Introspectre",
+            "correct": false
+          },
+          {
+            "label": "Jazz Thieves",
+            "correct": false
+          },
+          {
+            "label": "Easy Tiger",
+            "correct": false
+          },
+          {
+            "label": "Spacewalker",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0434-3",
+      "type": "mcq",
+      "prompt": "Quel est le premier morceau écrit par Martin Gore pour Depeche Mode ?",
+      "payload": {
+        "options": [
+          {
+            "label": "See You",
+            "correct": true
+          },
+          {
+            "label": "Shout",
+            "correct": false
+          },
+          {
+            "label": "Leave in Silence",
+            "correct": false
+          },
+          {
+            "label": "New Life",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0434-4",
+      "type": "mcq",
+      "prompt": "Qui a écrit le célébrissime morceau « Just Can't Get Enough » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alan Wilder",
+            "correct": false
+          },
+          {
+            "label": "Martin Gore",
+            "correct": false
+          },
+          {
+            "label": "Dave Gahan",
+            "correct": false
+          },
+          {
+            "label": "Vince Clarke",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0476-1",
+      "type": "mcq",
+      "prompt": "Quel était le métier des deux membres du groupe Début de Soirée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Plombiers",
+            "correct": false
+          },
+          {
+            "label": "Avocats",
+            "correct": false
+          },
+          {
+            "label": "Comptables",
+            "correct": false
+          },
+          {
+            "label": "Disc-jockeys",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0476-2",
+      "type": "mcq",
+      "prompt": "Quel membre du groupe Mano Negra est aussi appelé Oscar Tramor ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pierre Gauthé",
+            "correct": false
+          },
+          {
+            "label": "Joseph Dahan",
+            "correct": false
+          },
+          {
+            "label": "Daniel Jamet",
+            "correct": false
+          },
+          {
+            "label": "Manu Chao",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0476-3",
+      "type": "mcq",
+      "prompt": "Quel titre des Avions sera d'abord un flop avant de devenir un tube ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Loin",
+            "correct": false
+          },
+          {
+            "label": "Cargo de nuit",
+            "correct": false
+          },
+          {
+            "label": "Fanfare",
+            "correct": false
+          },
+          {
+            "label": "Nuit Sauvage",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0476-4",
+      "type": "mcq",
+      "prompt": "À quel groupe originaire de Toulouse doit-on le tube « Thaï nana » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les Vagabonds",
+            "correct": false
+          },
+          {
+            "label": "Images",
+            "correct": false
+          },
+          {
+            "label": "Kazero",
+            "correct": true
+          },
+          {
+            "label": "Les Forbans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0495-1",
+      "type": "mcq",
+      "prompt": "Quel est le seul et unique véritable tube du groupe Bandolero ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tchiki Boum",
+            "correct": false
+          },
+          {
+            "label": "Yakadansé",
+            "correct": false
+          },
+          {
+            "label": "La saga",
+            "correct": false
+          },
+          {
+            "label": "Paris Latino",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0495-2",
+      "type": "mcq",
+      "prompt": "Quel groupe de rock'n'roll français est devenu populaire avec « Chante » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mano Negra",
+            "correct": false
+          },
+          {
+            "label": "Pacifique",
+            "correct": false
+          },
+          {
+            "label": "Les Forbans",
+            "correct": true
+          },
+          {
+            "label": "Luna Parker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0495-3",
+      "type": "mcq",
+      "prompt": "Quel titre du groupe Trust passe encore en radio en France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Serre les poings",
+            "correct": false
+          },
+          {
+            "label": "Certitude",
+            "correct": false
+          },
+          {
+            "label": "Idéal",
+            "correct": false
+          },
+          {
+            "label": "Antisocial",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0495-4",
+      "type": "mcq",
+      "prompt": "Quel groupe de « l'after punk » vous invite à « Chercher le garçon » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Élégance",
+            "correct": false
+          },
+          {
+            "label": "Indochine",
+            "correct": false
+          },
+          {
+            "label": "Les Ablettes",
+            "correct": false
+          },
+          {
+            "label": "Taxi Girl",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0509-1",
+      "type": "mcq",
+      "prompt": "Qui interpréta le tube « Macumba », chanson sortie en février 1985 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dave",
+            "correct": false
+          },
+          {
+            "label": "Renaud",
+            "correct": false
+          },
+          {
+            "label": "Jean-Pierre Mader",
+            "correct": true
+          },
+          {
+            "label": "Marc Lavoine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0509-2",
+      "type": "mcq",
+      "prompt": "Quelle artiste a chanté « Africa », paru sur son album « Déraisonnable » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rose Laurens",
+            "correct": true
+          },
+          {
+            "label": "Desireless",
+            "correct": false
+          },
+          {
+            "label": "Julie Pietri",
+            "correct": false
+          },
+          {
+            "label": "Zazie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0509-3",
+      "type": "mcq",
+      "prompt": "Quel groupe français nous a fait danser avec « Les Démons de minuit » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tableaux",
+            "correct": false
+          },
+          {
+            "label": "Dessins",
+            "correct": false
+          },
+          {
+            "label": "Photos",
+            "correct": false
+          },
+          {
+            "label": "Images",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0509-4",
+      "type": "mcq",
+      "prompt": "Quel tube planétaire a permis à Patrick Hernandez de devenir rentier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Born to Somebody",
+            "correct": false
+          },
+          {
+            "label": "Born to Be Alive",
+            "correct": true
+          },
+          {
+            "label": "Born to Sing",
+            "correct": false
+          },
+          {
+            "label": "To be Three",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-1",
+      "type": "mcq",
+      "prompt": "Quelle chanteuse britannique a interprété le hit « Kids in America » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Madonna",
+            "correct": false
+          },
+          {
+            "label": "Bonnie Thyler",
+            "correct": false
+          },
+          {
+            "label": "Kim Carnes",
+            "correct": false
+          },
+          {
+            "label": "Kim Wilde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-2",
+      "type": "mcq",
+      "prompt": "Quel groupe de rock suédois a chanté « The Final Countdown » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "ACDC",
+            "correct": false
+          },
+          {
+            "label": "Trust",
+            "correct": false
+          },
+          {
+            "label": "Europe",
+            "correct": true
+          },
+          {
+            "label": "Scorpions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-3",
+      "type": "mcq",
+      "prompt": "Quel groupe musical a interprété « Sweet Dreams (Are Made of This) » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sweet Sensation",
+            "correct": false
+          },
+          {
+            "label": "Sister Sledge",
+            "correct": false
+          },
+          {
+            "label": "Eurythmics",
+            "correct": true
+          },
+          {
+            "label": "Europe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-4",
+      "type": "mcq",
+      "prompt": "Quel est le titre du troisième single du groupe Alphaville ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Forever Young",
+            "correct": true
+          },
+          {
+            "label": "Forever Blue",
+            "correct": false
+          },
+          {
+            "label": "Forever Alive",
+            "correct": false
+          },
+          {
+            "label": "Forever Love",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0517-1",
+      "type": "mcq",
+      "prompt": "Comment se prénomme la métisse d'Ibiza chantée par Julien Clerc ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rosanna",
+            "correct": false
+          },
+          {
+            "label": "Mélissa",
+            "correct": true
+          },
+          {
+            "label": "Marbella",
+            "correct": false
+          },
+          {
+            "label": "Cassandra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0517-2",
+      "type": "mcq",
+      "prompt": "Dans quelle ville « Nathalie » guide-t-elle Gilbert Bécaud dans une chanson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Belgrade",
+            "correct": false
+          },
+          {
+            "label": "Paris",
+            "correct": false
+          },
+          {
+            "label": "Madrid",
+            "correct": false
+          },
+          {
+            "label": "Moscou",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0517-3",
+      "type": "mcq",
+      "prompt": "Quelle est la matière préférée de la chanteuse Caroline Loeb ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ouate",
+            "correct": true
+          },
+          {
+            "label": "Ormeau",
+            "correct": false
+          },
+          {
+            "label": "Organza",
+            "correct": false
+          },
+          {
+            "label": "Osier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0517-4",
+      "type": "mcq",
+      "prompt": "Quel artiste strasbourgeois au grand coeur chantait « Pour le plaisir » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gérard Blanc",
+            "correct": false
+          },
+          {
+            "label": "Alain Souchon",
+            "correct": false
+          },
+          {
+            "label": "Hervé Vilard",
+            "correct": false
+          },
+          {
+            "label": "Herbert Léonard",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0524-1",
+      "type": "mcq",
+      "prompt": "Quel auteur-compositeur-interprète est « Tombé pour la France » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Francis Cabrel",
+            "correct": false
+          },
+          {
+            "label": "Étienne Daho",
+            "correct": true
+          },
+          {
+            "label": "Alain Bashung",
+            "correct": false
+          },
+          {
+            "label": "Marc Lavoine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0524-2",
+      "type": "mcq",
+      "prompt": "Quel était le prénom du « Chanteur » de Daniel Balavoine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Charlie",
+            "correct": false
+          },
+          {
+            "label": "Henri",
+            "correct": true
+          },
+          {
+            "label": "Johnny",
+            "correct": false
+          },
+          {
+            "label": "Eddy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0524-3",
+      "type": "mcq",
+      "prompt": "Quel groupe de gitans s'est imposé au Top 50 à partir de l'année 1987 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Las Ketchup",
+            "correct": false
+          },
+          {
+            "label": "Gipsy Kings",
+            "correct": true
+          },
+          {
+            "label": "Pata Negra",
+            "correct": false
+          },
+          {
+            "label": "Alabina",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0524-4",
+      "type": "mcq",
+      "prompt": "Quel dessert l'abominable homme des neiges sert-il pour Lio ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Éclair",
+            "correct": false
+          },
+          {
+            "label": "Merveilleux",
+            "correct": false
+          },
+          {
+            "label": "Banana split",
+            "correct": true
+          },
+          {
+            "label": "Dame blanche",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0535-1",
+      "type": "mcq",
+      "prompt": "Qui fut en 2020 meilleur vendeur de disque de l'histoire du rap français ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bambi Cruz",
+            "correct": false
+          },
+          {
+            "label": "Jul",
+            "correct": true
+          },
+          {
+            "label": "Stomy Bugsy",
+            "correct": false
+          },
+          {
+            "label": "Passi",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0535-2",
+      "type": "mcq",
+      "prompt": "À quel rappeur doit-on les succès comme « Bouge de là » et « Caroline » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dayen",
+            "correct": false
+          },
+          {
+            "label": "MC Solaar",
+            "correct": true
+          },
+          {
+            "label": "Komplex",
+            "correct": false
+          },
+          {
+            "label": "Treyz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0535-3",
+      "type": "mcq",
+      "prompt": "Qui est considéré comme le rappeur ayant popularisé la trap en France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Booba",
+            "correct": true
+          },
+          {
+            "label": "Katana",
+            "correct": false
+          },
+          {
+            "label": "Rod Janois",
+            "correct": false
+          },
+          {
+            "label": "Joe Lucazz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0535-4",
+      "type": "mcq",
+      "prompt": "Quel rappeur et acteur français se faisait appeler « le fennec » au collège ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hayce Lemsi",
+            "correct": false
+          },
+          {
+            "label": "Sofiane",
+            "correct": true
+          },
+          {
+            "label": "Rimkus",
+            "correct": false
+          },
+          {
+            "label": "Seth Gueko",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0544-1",
+      "type": "mcq",
+      "prompt": "Comment s'intitule le premier double album studio de Johnny Hallyday ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Peur",
+            "correct": false
+          },
+          {
+            "label": "Gang",
+            "correct": false
+          },
+          {
+            "label": "Hamlet",
+            "correct": true
+          },
+          {
+            "label": "Insolitudes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0544-2",
+      "type": "mcq",
+      "prompt": "Combien de disques Johnny Hallyday a-t-il vendu de son vivant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "150 millions",
+            "correct": false
+          },
+          {
+            "label": "90 millions",
+            "correct": false
+          },
+          {
+            "label": "110 millions",
+            "correct": true
+          },
+          {
+            "label": "130 millions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0544-3",
+      "type": "mcq",
+      "prompt": "Quel artiste a écrit, composé et réalisé l'album « Rock'n'Roll Attitude » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yodelice",
+            "correct": false
+          },
+          {
+            "label": "Michel Berger",
+            "correct": true
+          },
+          {
+            "label": "Matthieu Chedid",
+            "correct": false
+          },
+          {
+            "label": "Pascal Obispo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0544-4",
+      "type": "mcq",
+      "prompt": "Avec quel label Johnny Hallyday a-t-il signé son premier disque ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Philips",
+            "correct": false
+          },
+          {
+            "label": "Warner",
+            "correct": false
+          },
+          {
+            "label": "Vogue",
+            "correct": true
+          },
+          {
+            "label": "Barclay",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0561-1",
+      "type": "mcq",
+      "prompt": "Quel titre de France Gall est célèbre pour ses deux niveaux de lecture ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Cloche",
+            "correct": false
+          },
+          {
+            "label": "La Petite",
+            "correct": false
+          },
+          {
+            "label": "Les Sucettes",
+            "correct": true
+          },
+          {
+            "label": "Il neige",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0561-2",
+      "type": "mcq",
+      "prompt": "En hommage à quel artiste France Gall a-t-elle chanté « Évidemment » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sacha Distel",
+            "correct": false
+          },
+          {
+            "label": "Daniel Balavoine",
+            "correct": true
+          },
+          {
+            "label": "Coluche",
+            "correct": false
+          },
+          {
+            "label": "Michel Berger",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0561-3",
+      "type": "mcq",
+      "prompt": "Quel titre France Gall a-t-elle sorti en hommage à Ella Fitzgerald ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ella, elle l'a",
+            "correct": true
+          },
+          {
+            "label": "Calypso",
+            "correct": false
+          },
+          {
+            "label": "Résiste",
+            "correct": false
+          },
+          {
+            "label": "Babacar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0561-4",
+      "type": "mcq",
+      "prompt": "Sur quel album retrouve-t-on « Hong-Kong Star » et « Cézanne peint » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dancing Disco",
+            "correct": false
+          },
+          {
+            "label": "Débranche !",
+            "correct": true
+          },
+          {
+            "label": "Babacar",
+            "correct": false
+          },
+          {
+            "label": "Double Jeu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0562-1",
+      "type": "mcq",
+      "prompt": "Qui est le seul membre présent depuis l'origine du groupe The Cure ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Reeves Gabrels",
+            "correct": false
+          },
+          {
+            "label": "Roger O'Donnell",
+            "correct": false
+          },
+          {
+            "label": "Robert Smith",
+            "correct": true
+          },
+          {
+            "label": "Simon Gallup",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0562-2",
+      "type": "mcq",
+      "prompt": "À quel mouvement musical le groupe The Cure est-il encore associé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rock",
+            "correct": false
+          },
+          {
+            "label": "New wave",
+            "correct": true
+          },
+          {
+            "label": "Pop",
+            "correct": false
+          },
+          {
+            "label": "Dance",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0562-3",
+      "type": "mcq",
+      "prompt": "Quel instrument d'accompagnement est mis en avant chez The Cure ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Piano",
+            "correct": false
+          },
+          {
+            "label": "Saxophone",
+            "correct": false
+          },
+          {
+            "label": "Basse",
+            "correct": true
+          },
+          {
+            "label": "Trompette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0562-4",
+      "type": "mcq",
+      "prompt": "Quel est le titre du premier 45 tours de The Cure, sorti en 1978 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Another Day",
+            "correct": false
+          },
+          {
+            "label": "Killing an Arab",
+            "correct": true
+          },
+          {
+            "label": "So What",
+            "correct": false
+          },
+          {
+            "label": "Fire in Cairo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0565-1",
+      "type": "mcq",
+      "prompt": "Dans quel album retrouve-t-on à la fois France Gall et Michel Berger ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Baby pop",
+            "correct": false
+          },
+          {
+            "label": "France Gall",
+            "correct": false
+          },
+          {
+            "label": "Débranche !",
+            "correct": false
+          },
+          {
+            "label": "Double Jeu",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0565-2",
+      "type": "mcq",
+      "prompt": "Quel est le titre du premier album studio enregistré par France Gall ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Babacar",
+            "correct": false
+          },
+          {
+            "label": "Dancing Disco",
+            "correct": false
+          },
+          {
+            "label": "France Gall",
+            "correct": true
+          },
+          {
+            "label": "Débranche !",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0565-3",
+      "type": "mcq",
+      "prompt": "Quel album reste à ce jour le plus grand succès de France Gall ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Double Jeu",
+            "correct": false
+          },
+          {
+            "label": "Dancing Disco",
+            "correct": false
+          },
+          {
+            "label": "Babacar",
+            "correct": true
+          },
+          {
+            "label": "Débranche !",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0565-4",
+      "type": "mcq",
+      "prompt": "Quel titre porte l'unique album-concept enregistré par France Gall ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Double Jeu",
+            "correct": false
+          },
+          {
+            "label": "Dancing Disco",
+            "correct": true
+          },
+          {
+            "label": "Débranche !",
+            "correct": false
+          },
+          {
+            "label": "Babacar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0571-1",
+      "type": "mcq",
+      "prompt": "Quel album est considéré comme le plus noir du groupe The Cure ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wish",
+            "correct": false
+          },
+          {
+            "label": "Disintegration",
+            "correct": false
+          },
+          {
+            "label": "Bloodflowers",
+            "correct": false
+          },
+          {
+            "label": "Pornography",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0571-2",
+      "type": "mcq",
+      "prompt": "Quel deuxième album de The Cure est plus sombre que le premier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pornography",
+            "correct": false
+          },
+          {
+            "label": "The Top",
+            "correct": false
+          },
+          {
+            "label": "Seventeen Seconds",
+            "correct": true
+          },
+          {
+            "label": "Faith",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0571-3",
+      "type": "mcq",
+      "prompt": "Laquelle de ces propositions ne désigne pas un album live de The Cure ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Entreat",
+            "correct": false
+          },
+          {
+            "label": "Dublin",
+            "correct": true
+          },
+          {
+            "label": "Paris",
+            "correct": false
+          },
+          {
+            "label": "Concert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0571-4",
+      "type": "mcq",
+      "prompt": "Combien d'albums The Cure avait-il vendu dans le monde fin 2018 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "20 millions",
+            "correct": false
+          },
+          {
+            "label": "30 millions",
+            "correct": true
+          },
+          {
+            "label": "10 millions",
+            "correct": false
+          },
+          {
+            "label": "40 millions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0612-1",
+      "type": "mcq",
+      "prompt": "Quel tube de Village People évoque un mouvement de jeunesse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Go West",
+            "correct": false
+          },
+          {
+            "label": "In the Navy",
+            "correct": false
+          },
+          {
+            "label": "Y.M.C.A.",
+            "correct": true
+          },
+          {
+            "label": "Macho Man",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0612-2",
+      "type": "mcq",
+      "prompt": "Quel tube disco planétaire du groupe ABBA est sorti en 1979 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "SOS",
+            "correct": false
+          },
+          {
+            "label": "Mamma Mia",
+            "correct": false
+          },
+          {
+            "label": "Waterloo",
+            "correct": false
+          },
+          {
+            "label": "Voulez-Vous",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0612-3",
+      "type": "mcq",
+      "prompt": "Quel tube disco fut initialement écrit pour Stacy Lattisaw ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Viva America",
+            "correct": false
+          },
+          {
+            "label": "Ring My Bell",
+            "correct": true
+          },
+          {
+            "label": "Shadow Dancing",
+            "correct": false
+          },
+          {
+            "label": "Copacabana",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0612-4",
+      "type": "mcq",
+      "prompt": "Quel titre des Gibson Brothers leur a valu quatorze disques d'or ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oooh What a Life",
+            "correct": false
+          },
+          {
+            "label": "Que Sera Mi Vida",
+            "correct": false
+          },
+          {
+            "label": "Mariana",
+            "correct": false
+          },
+          {
+            "label": "Cuba",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0617-1",
+      "type": "mcq",
+      "prompt": "Quel est le single disco le plus vendu du label Atlantic ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ten Percent",
+            "correct": false
+          },
+          {
+            "label": "Dancin'",
+            "correct": false
+          },
+          {
+            "label": "Sweet dynamite",
+            "correct": false
+          },
+          {
+            "label": "Le Freak",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0617-2",
+      "type": "mcq",
+      "prompt": "Quel tube de Diana Ross a été écrit par les membres du groupe Chic ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Surrender",
+            "correct": false
+          },
+          {
+            "label": "Love Child",
+            "correct": false
+          },
+          {
+            "label": "Upside Down",
+            "correct": true
+          },
+          {
+            "label": "Remember Me",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0617-3",
+      "type": "mcq",
+      "prompt": "Qui se demande s'il est sexy dans un tube disco sorti en 1978 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Elton John",
+            "correct": false
+          },
+          {
+            "label": "Rod Stewart",
+            "correct": true
+          },
+          {
+            "label": "Barry White",
+            "correct": false
+          },
+          {
+            "label": "Walter Murphy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0617-4",
+      "type": "mcq",
+      "prompt": "Qui a enregistré « You Make Me Feel » avant Jimmy Somerville ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sylvester",
+            "correct": true
+          },
+          {
+            "label": "Randy Jones",
+            "correct": false
+          },
+          {
+            "label": "Bobby Farrell",
+            "correct": false
+          },
+          {
+            "label": "Dan Hartman",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-chanson-francaise",
+      "title": "Chanson française",
+      "description": "D'après les quiz OpenQuizzDB « Charles Aznavour », « Francis Cabrel », « Serge Gainsbourg » et « Chanteurs français ».",
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0077-1",
+        "oqdb-0077-2",
+        "oqdb-0077-3",
+        "oqdb-0077-4",
+        "oqdb-0029-1",
+        "oqdb-0029-2",
+        "oqdb-0029-3",
+        "oqdb-0029-4",
+        "oqdb-0083-1",
+        "oqdb-0083-2",
+        "oqdb-0083-3",
+        "oqdb-0083-4",
+        "oqdb-0417-1",
+        "oqdb-0417-2",
+        "oqdb-0417-3",
+        "oqdb-0417-4"
+      ]
+    },
+    {
+      "id": "oqdb-quiz-new-wave",
+      "title": "Les années new wave",
+      "description": "D'après les quiz OpenQuizzDB « Groupes new wave », « Titres new wave », « Depeche Mode » et « The Cure ».",
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0313-1",
+        "oqdb-0313-2",
+        "oqdb-0313-3",
+        "oqdb-0313-4",
+        "oqdb-0307-1",
+        "oqdb-0307-2",
+        "oqdb-0307-3",
+        "oqdb-0307-4",
+        "oqdb-0429-1",
+        "oqdb-0429-2",
+        "oqdb-0429-3",
+        "oqdb-0429-4",
+        "oqdb-0562-1",
+        "oqdb-0562-2",
+        "oqdb-0562-3",
+        "oqdb-0562-4"
+      ]
+    }
+  ]
+}

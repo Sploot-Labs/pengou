@@ -1,0 +1,1809 @@
+{
+  "source": {
+    "name": "OpenQuizzDB",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0049-1",
+      "type": "mcq",
+      "prompt": "Combien de temps dure le mandat du président des États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "6 ans",
+            "correct": false
+          },
+          {
+            "label": "4 ans",
+            "correct": true
+          },
+          {
+            "label": "7 ans",
+            "correct": false
+          },
+          {
+            "label": "5 ans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0049-2",
+      "type": "mcq",
+      "prompt": "Quelle est la résidence du président des États-Unis à Washington ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maison-Blanche",
+            "correct": true
+          },
+          {
+            "label": "Maison-Bleue",
+            "correct": false
+          },
+          {
+            "label": "Maison-Rouge",
+            "correct": false
+          },
+          {
+            "label": "Maison-Verte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0049-3",
+      "type": "mcq",
+      "prompt": "Combien de fois au maximum peut-on être élu président des États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deux fois",
+            "correct": true
+          },
+          {
+            "label": "Quatre fois",
+            "correct": false
+          },
+          {
+            "label": "Trois fois",
+            "correct": false
+          },
+          {
+            "label": "Une fois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0049-4",
+      "type": "mcq",
+      "prompt": "Quel est le lieu de villégiature officiel du président des États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Camp David",
+            "correct": true
+          },
+          {
+            "label": "Camp Devon",
+            "correct": false
+          },
+          {
+            "label": "Camp Damon",
+            "correct": false
+          },
+          {
+            "label": "Camp Donald",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0117-1",
+      "type": "mcq",
+      "prompt": "Qui a perdu deux fois au second tour face à Emmanuel Macron ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Édith Cresson",
+            "correct": false
+          },
+          {
+            "label": "Marine Le Pen",
+            "correct": true
+          },
+          {
+            "label": "Anne Hidalgo",
+            "correct": false
+          },
+          {
+            "label": "Rachida Dati",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0117-2",
+      "type": "mcq",
+      "prompt": "Quelle actrice de la saga Harry Potter est devenue une voix féministe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gal Gadot",
+            "correct": false
+          },
+          {
+            "label": "Margot Robbie",
+            "correct": false
+          },
+          {
+            "label": "Jennifer Lawrence",
+            "correct": false
+          },
+          {
+            "label": "Emma Watson",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0117-3",
+      "type": "mcq",
+      "prompt": "En quoi les Obama ont-ils transformé le jardin de la Maison Blanche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Salle de sport",
+            "correct": false
+          },
+          {
+            "label": "Théâtre ouvert",
+            "correct": false
+          },
+          {
+            "label": "Potager",
+            "correct": true
+          },
+          {
+            "label": "Parking",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0117-4",
+      "type": "mcq",
+      "prompt": "Quelle jeune militante écologiste suédoise engagée est très médiatisée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hedy Epstein",
+            "correct": false
+          },
+          {
+            "label": "Greta Thunberg",
+            "correct": true
+          },
+          {
+            "label": "Rachel Corrie",
+            "correct": false
+          },
+          {
+            "label": "Mary Dreier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0127-1",
+      "type": "mcq",
+      "prompt": "Dans quel pays fut découverte la cité préhispanique de Teotihuacan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Salvador",
+            "correct": false
+          },
+          {
+            "label": "Costa Rica",
+            "correct": false
+          },
+          {
+            "label": "Nicaragua",
+            "correct": false
+          },
+          {
+            "label": "Mexique",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0127-2",
+      "type": "mcq",
+      "prompt": "Quelle est la forme des structures du site archéologique de Teotihuacan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Carrée",
+            "correct": false
+          },
+          {
+            "label": "Ronde",
+            "correct": false
+          },
+          {
+            "label": "Pyramidale",
+            "correct": true
+          },
+          {
+            "label": "Ovale",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0127-3",
+      "type": "mcq",
+      "prompt": "Quel événement a provoqué l'effondrement de Teotihuacan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Séisme",
+            "correct": false
+          },
+          {
+            "label": "Incendie",
+            "correct": true
+          },
+          {
+            "label": "Éclipse",
+            "correct": false
+          },
+          {
+            "label": "Invasion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0127-4",
+      "type": "mcq",
+      "prompt": "Combien d'habitants vivaient dans la cité de Teotihuacan à son apogée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "200 000",
+            "correct": true
+          },
+          {
+            "label": "300 000",
+            "correct": false
+          },
+          {
+            "label": "500 000",
+            "correct": false
+          },
+          {
+            "label": "400 000",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0199-1",
+      "type": "mcq",
+      "prompt": "Dans quelle ville est exposé le masque doré de Toutânkhamon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Louxor",
+            "correct": false
+          },
+          {
+            "label": "Boulaq",
+            "correct": false
+          },
+          {
+            "label": "Le Caire",
+            "correct": true
+          },
+          {
+            "label": "Alexandrie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0199-2",
+      "type": "mcq",
+      "prompt": "Combien de sarcophages protégeaient la momie de Toutânkhamon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": true
+          },
+          {
+            "label": "Deux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0199-3",
+      "type": "mcq",
+      "prompt": "De quelle matière est fait le masque mortuaire de Toutânkhamon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Or",
+            "correct": true
+          },
+          {
+            "label": "Bronze",
+            "correct": false
+          },
+          {
+            "label": "Plâtre",
+            "correct": false
+          },
+          {
+            "label": "Argent",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0199-4",
+      "type": "mcq",
+      "prompt": "Comment les Égyptiens ouvraient-ils à l'âme le monde souterrain ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crémation",
+            "correct": false
+          },
+          {
+            "label": "Pendaison",
+            "correct": false
+          },
+          {
+            "label": "Embaumement",
+            "correct": true
+          },
+          {
+            "label": "Dissection",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0394-1",
+      "type": "mcq",
+      "prompt": "Dans les plaines de quel champ de bataille se dresse la Butte du Lion ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Warburg",
+            "correct": false
+          },
+          {
+            "label": "Wagram",
+            "correct": false
+          },
+          {
+            "label": "White Mountain",
+            "correct": false
+          },
+          {
+            "label": "Waterloo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0394-2",
+      "type": "mcq",
+      "prompt": "Où a eu lieu le grand procès des criminels de guerre nazis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Munich",
+            "correct": false
+          },
+          {
+            "label": "Nuremberg",
+            "correct": true
+          },
+          {
+            "label": "Hambourg",
+            "correct": false
+          },
+          {
+            "label": "Berlin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0394-3",
+      "type": "mcq",
+      "prompt": "En 1515, quelle bataille fit 16 000 morts en seize heures ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Valmy",
+            "correct": false
+          },
+          {
+            "label": "Marignan",
+            "correct": true
+          },
+          {
+            "label": "Waterloo",
+            "correct": false
+          },
+          {
+            "label": "Marino",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0394-4",
+      "type": "mcq",
+      "prompt": "Dans quelle ville fut signé le traité de fin de la Première Guerre mondiale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lyon",
+            "correct": false
+          },
+          {
+            "label": "Bordeaux",
+            "correct": false
+          },
+          {
+            "label": "Paris",
+            "correct": false
+          },
+          {
+            "label": "Versailles",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0402-1",
+      "type": "mcq",
+      "prompt": "Quel métier fut exercé au Louvre par Jean-François Champollion ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Conservateur",
+            "correct": true
+          },
+          {
+            "label": "Architecte",
+            "correct": false
+          },
+          {
+            "label": "Archéologue",
+            "correct": false
+          },
+          {
+            "label": "Surveillant",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0402-2",
+      "type": "mcq",
+      "prompt": "Comment était utilisé le Louvre à sa construction en 1190 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "En ferme",
+            "correct": false
+          },
+          {
+            "label": "En forteresse",
+            "correct": true
+          },
+          {
+            "label": "En musée",
+            "correct": false
+          },
+          {
+            "label": "En bureau",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0402-3",
+      "type": "mcq",
+      "prompt": "Quelle exposition annuelle présentait au Louvre les artistes officiels ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Crèche",
+            "correct": false
+          },
+          {
+            "label": "La Vente",
+            "correct": false
+          },
+          {
+            "label": "La Biennale",
+            "correct": false
+          },
+          {
+            "label": "Le Salon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0402-4",
+      "type": "mcq",
+      "prompt": "Quand le Louvre est-il devenu un musée, le plus grand de Paris ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sous Mitterrand",
+            "correct": false
+          },
+          {
+            "label": "À la Révolution",
+            "correct": true
+          },
+          {
+            "label": "À l'Antiquité",
+            "correct": false
+          },
+          {
+            "label": "Au Moyen Âge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0404-1",
+      "type": "mcq",
+      "prompt": "Quel peuple germanique s'installa au Ve siècle dans l'actuelle Espagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wisigoths",
+            "correct": true
+          },
+          {
+            "label": "Ostrogoths",
+            "correct": false
+          },
+          {
+            "label": "Burgondes",
+            "correct": false
+          },
+          {
+            "label": "Jutes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0404-2",
+      "type": "mcq",
+      "prompt": "Lequel de ces termes faisait autrefois référence aux Vikings ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gallois",
+            "correct": false
+          },
+          {
+            "label": "Normands",
+            "correct": true
+          },
+          {
+            "label": "Germains",
+            "correct": false
+          },
+          {
+            "label": "Bretons",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0404-3",
+      "type": "mcq",
+      "prompt": "Quel peuple antique occupait les territoires de l'actuelle Bulgarie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alains",
+            "correct": false
+          },
+          {
+            "label": "Wisigothes",
+            "correct": false
+          },
+          {
+            "label": "Thraces",
+            "correct": true
+          },
+          {
+            "label": "Scythes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0404-4",
+      "type": "mcq",
+      "prompt": "Dans quel pays les Parses se sont-ils installés au XIIIe siècle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Inde",
+            "correct": true
+          },
+          {
+            "label": "Égypte",
+            "correct": false
+          },
+          {
+            "label": "Afghanistan",
+            "correct": false
+          },
+          {
+            "label": "Chine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0415-1",
+      "type": "mcq",
+      "prompt": "En 1941, quel pays décréta un embargo total sur le Japon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Allemagne",
+            "correct": false
+          },
+          {
+            "label": "URSS",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "États-Unis",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0415-2",
+      "type": "mcq",
+      "prompt": "Quels aviateurs suicides ont marqué la Seconde Guerre mondiale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kazoku",
+            "correct": false
+          },
+          {
+            "label": "Shinobi",
+            "correct": false
+          },
+          {
+            "label": "Kamikazes",
+            "correct": true
+          },
+          {
+            "label": "Samuraïs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0415-3",
+      "type": "mcq",
+      "prompt": "Quelle ville du Kansai fut la capitale impériale du Japon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kamakura",
+            "correct": false
+          },
+          {
+            "label": "Noro",
+            "correct": false
+          },
+          {
+            "label": "Kyoto",
+            "correct": true
+          },
+          {
+            "label": "Tokyo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0415-4",
+      "type": "mcq",
+      "prompt": "Quelle ville japonaise a organisé les Jeux olympiques d'hiver de 1972 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sapporo",
+            "correct": true
+          },
+          {
+            "label": "Nagano",
+            "correct": false
+          },
+          {
+            "label": "Yokohama",
+            "correct": false
+          },
+          {
+            "label": "Kumamoto",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0420-1",
+      "type": "mcq",
+      "prompt": "En France, de quand datent les congés payés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1936",
+            "correct": true
+          },
+          {
+            "label": "1956",
+            "correct": false
+          },
+          {
+            "label": "1946",
+            "correct": false
+          },
+          {
+            "label": "1926",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0420-2",
+      "type": "mcq",
+      "prompt": "En quelle année JFK (John F. Kennedy) a-t-il été assassiné ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1953",
+            "correct": false
+          },
+          {
+            "label": "1973",
+            "correct": false
+          },
+          {
+            "label": "1983",
+            "correct": false
+          },
+          {
+            "label": "1963",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0420-3",
+      "type": "mcq",
+      "prompt": "En quelle année Charles De Gaulle a-t-il été élu au suffrage universel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1965",
+            "correct": true
+          },
+          {
+            "label": "1955",
+            "correct": false
+          },
+          {
+            "label": "1945",
+            "correct": false
+          },
+          {
+            "label": "1975",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0420-4",
+      "type": "mcq",
+      "prompt": "En quelle année a-t-on connu une crise économique mondiale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1939",
+            "correct": false
+          },
+          {
+            "label": "1929",
+            "correct": true
+          },
+          {
+            "label": "1949",
+            "correct": false
+          },
+          {
+            "label": "1919",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0422-1",
+      "type": "mcq",
+      "prompt": "En quelle année a eu lieu la Bataille de Verdun ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1926",
+            "correct": false
+          },
+          {
+            "label": "1916",
+            "correct": true
+          },
+          {
+            "label": "1936",
+            "correct": false
+          },
+          {
+            "label": "1946",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0422-2",
+      "type": "mcq",
+      "prompt": "Quand eut lieu la première Bataille de la Marne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Avril 1940",
+            "correct": false
+          },
+          {
+            "label": "Mai 1942",
+            "correct": false
+          },
+          {
+            "label": "Juin 1916",
+            "correct": false
+          },
+          {
+            "label": "Septembre 1914",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0422-3",
+      "type": "mcq",
+      "prompt": "Quelle bataille marque la défaite finale de Napoléon Ier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Waterloo",
+            "correct": true
+          },
+          {
+            "label": "Leipzig",
+            "correct": false
+          },
+          {
+            "label": "Trafalgar",
+            "correct": false
+          },
+          {
+            "label": "Austerlitz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0422-4",
+      "type": "mcq",
+      "prompt": "Quelle bataille fit de Guillaume le Conquérant le roi d'Angleterre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crécy",
+            "correct": false
+          },
+          {
+            "label": "Azincourt",
+            "correct": false
+          },
+          {
+            "label": "Stamford Bridge",
+            "correct": false
+          },
+          {
+            "label": "Hastings",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0453-1",
+      "type": "mcq",
+      "prompt": "Dans quel musée est conservée la pierre de Rosette ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Musée du Caire",
+            "correct": false
+          },
+          {
+            "label": "British Museum",
+            "correct": true
+          },
+          {
+            "label": "MET",
+            "correct": false
+          },
+          {
+            "label": "Le Louvre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0453-2",
+      "type": "mcq",
+      "prompt": "Combien de grandes pyramides y a-t-il sur le plateau de Gizeh ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Une seule",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": true
+          },
+          {
+            "label": "Dix",
+            "correct": false
+          },
+          {
+            "label": "Aucune",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0453-3",
+      "type": "mcq",
+      "prompt": "Quelle partie du visage manque au Sphinx de Gizeh ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coin de bouche",
+            "correct": false
+          },
+          {
+            "label": "Oreille",
+            "correct": false
+          },
+          {
+            "label": "Bras",
+            "correct": false
+          },
+          {
+            "label": "Nez",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0453-4",
+      "type": "mcq",
+      "prompt": "Près de quelle grande ville actuelle se situe la Vallée des Rois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Assiout",
+            "correct": false
+          },
+          {
+            "label": "Gizeh",
+            "correct": false
+          },
+          {
+            "label": "El-Minia",
+            "correct": false
+          },
+          {
+            "label": "Louxor",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0513-1",
+      "type": "mcq",
+      "prompt": "Le Machu Picchu a été abandonné après la chute de quel empire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Inca",
+            "correct": true
+          },
+          {
+            "label": "Corsaire",
+            "correct": false
+          },
+          {
+            "label": "Iroquois",
+            "correct": false
+          },
+          {
+            "label": "Aztèque",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0513-2",
+      "type": "mcq",
+      "prompt": "Aux limites de quelle forêt se dresse le Machu Picchu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Atlantique",
+            "correct": false
+          },
+          {
+            "label": "De Gola",
+            "correct": false
+          },
+          {
+            "label": "Boréale",
+            "correct": false
+          },
+          {
+            "label": "Amazonienne",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0513-3",
+      "type": "mcq",
+      "prompt": "Quelles constructions composent la zone agricole du Machu Picchu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Paillis",
+            "correct": false
+          },
+          {
+            "label": "Versoirs",
+            "correct": false
+          },
+          {
+            "label": "Terrasses",
+            "correct": true
+          },
+          {
+            "label": "Brûlis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0513-4",
+      "type": "mcq",
+      "prompt": "À quel animal peut-on associer la forme du site du Machu Picchu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ours",
+            "correct": false
+          },
+          {
+            "label": "Puma",
+            "correct": true
+          },
+          {
+            "label": "Serpent",
+            "correct": false
+          },
+          {
+            "label": "Dauphin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0518-1",
+      "type": "mcq",
+      "prompt": "Quelle ville française était appelée la cité des papes au Moyen Âge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tours",
+            "correct": false
+          },
+          {
+            "label": "Avignon",
+            "correct": true
+          },
+          {
+            "label": "Metz",
+            "correct": false
+          },
+          {
+            "label": "Nantes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0518-2",
+      "type": "mcq",
+      "prompt": "Quel diplomate français a succédé au Cardinal de Richelieu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Colbert",
+            "correct": false
+          },
+          {
+            "label": "Mazarin",
+            "correct": true
+          },
+          {
+            "label": "Sully",
+            "correct": false
+          },
+          {
+            "label": "Talleyrand",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0518-3",
+      "type": "mcq",
+      "prompt": "Quelle ville Jeanne d'Arc a-t-elle héroïquement libérée des Anglais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Angers",
+            "correct": false
+          },
+          {
+            "label": "Orléans",
+            "correct": true
+          },
+          {
+            "label": "Tours",
+            "correct": false
+          },
+          {
+            "label": "Le Mans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0518-4",
+      "type": "mcq",
+      "prompt": "Quel âge avait Clovis lorsqu'il fut élu roi des Francs en 481 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "26 ans",
+            "correct": false
+          },
+          {
+            "label": "46 ans",
+            "correct": false
+          },
+          {
+            "label": "16 ans",
+            "correct": true
+          },
+          {
+            "label": "36 ans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0528-1",
+      "type": "mcq",
+      "prompt": "Quel gentilhomme est chargé du service de la chambre d'un monarque ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Auguste",
+            "correct": false
+          },
+          {
+            "label": "Grand veneur",
+            "correct": false
+          },
+          {
+            "label": "Chambellan",
+            "correct": true
+          },
+          {
+            "label": "Connétable",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0528-2",
+      "type": "mcq",
+      "prompt": "Quel qualificatif est donné à l'époux du chef d'État dans les monarchies ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Consort",
+            "correct": true
+          },
+          {
+            "label": "Dauphin",
+            "correct": false
+          },
+          {
+            "label": "Régent",
+            "correct": false
+          },
+          {
+            "label": "Archonte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0528-3",
+      "type": "mcq",
+      "prompt": "Quel titre monarchique est porté par le souverain d'un empire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sultan",
+            "correct": false
+          },
+          {
+            "label": "Chancelier",
+            "correct": false
+          },
+          {
+            "label": "Prince",
+            "correct": false
+          },
+          {
+            "label": "Empereur",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0528-4",
+      "type": "mcq",
+      "prompt": "Quel titre est porté par les monarques musulmans depuis l'an 1000 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maharajah",
+            "correct": false
+          },
+          {
+            "label": "Émir",
+            "correct": false
+          },
+          {
+            "label": "Sultan",
+            "correct": true
+          },
+          {
+            "label": "Calife",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0550-1",
+      "type": "mcq",
+      "prompt": "Dans quel type d'édifice se déroulaient les combats de gladiateurs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Temple",
+            "correct": false
+          },
+          {
+            "label": "Gallodrome",
+            "correct": false
+          },
+          {
+            "label": "Forum",
+            "correct": false
+          },
+          {
+            "label": "Amphithéâtre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0550-2",
+      "type": "mcq",
+      "prompt": "Quel marchand était entraîneur et propriétaire de gladiateurs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Laniste",
+            "correct": true
+          },
+          {
+            "label": "Étaleur",
+            "correct": false
+          },
+          {
+            "label": "Gargotier",
+            "correct": false
+          },
+          {
+            "label": "Centurion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0550-3",
+      "type": "mcq",
+      "prompt": "Qui est le plus populaire des gladiateurs d'origine thrace ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crixus",
+            "correct": false
+          },
+          {
+            "label": "Jugurtha",
+            "correct": false
+          },
+          {
+            "label": "Spartacus",
+            "correct": true
+          },
+          {
+            "label": "Maximus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0550-4",
+      "type": "mcq",
+      "prompt": "Comment un gladiateur signalait-il qu'il abandonnait le combat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Il hurle",
+            "correct": false
+          },
+          {
+            "label": "Il lève le doigt",
+            "correct": true
+          },
+          {
+            "label": "Il retire son casque",
+            "correct": false
+          },
+          {
+            "label": "Il jette son épée",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-civilisations-anciennes",
+      "title": "Civilisations anciennes",
+      "description": "D'après les quiz OpenQuizzDB « Égypte ancienne », « Toutânkhamon », « Gladiateurs », « Teotihuacan » et « Machu Picchu ».",
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0453-1",
+        "oqdb-0453-2",
+        "oqdb-0453-3",
+        "oqdb-0453-4",
+        "oqdb-0199-1",
+        "oqdb-0199-2",
+        "oqdb-0199-3",
+        "oqdb-0199-4",
+        "oqdb-0550-1",
+        "oqdb-0550-2",
+        "oqdb-0550-3",
+        "oqdb-0550-4",
+        "oqdb-0127-1",
+        "oqdb-0127-2",
+        "oqdb-0127-3",
+        "oqdb-0127-4",
+        "oqdb-0513-1",
+        "oqdb-0513-2",
+        "oqdb-0513-3",
+        "oqdb-0513-4"
+      ]
+    },
+    {
+      "id": "oqdb-quiz-guerres-et-dates",
+      "title": "Batailles et grandes dates",
+      "description": "D'après les quiz OpenQuizzDB « Batailles dans l’histoire », « Guerres et batailles », « Dates du XXe siècle » et « Histoire de France ».",
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0422-1",
+        "oqdb-0422-2",
+        "oqdb-0422-3",
+        "oqdb-0422-4",
+        "oqdb-0394-1",
+        "oqdb-0394-2",
+        "oqdb-0394-3",
+        "oqdb-0394-4",
+        "oqdb-0420-1",
+        "oqdb-0420-2",
+        "oqdb-0420-3",
+        "oqdb-0420-4",
+        "oqdb-0518-1",
+        "oqdb-0518-2",
+        "oqdb-0518-3",
+        "oqdb-0518-4"
+      ]
+    }
+  ]
+}

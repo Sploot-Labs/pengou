@@ -34,6 +34,22 @@ sûr pour un projet destiné à durer et à attirer des contributeurs entreprise
    votre version dérivée (au-delà de la mention d'origine). Le code est libre ; la marque ne l'est
    pas.
 
+## Données du catalogue de questions
+
+Le catalogue de questions livré avec Pengou (dossier `packages/library/catalog/`) n'est pas
+couvert par la licence Apache-2.0 du code. Chaque source y a son propre dossier, avec un fichier
+`LICENSE.md` qui fait foi pour ses données et liste l'attribution à reprendre.
+
+Les questions d'OpenQuizzDB (`catalog/openquizzdb/`, en français) et d'Open Trivia Database
+(`catalog/opentdb/`, en anglais) sont sous licence Creative Commons BY-SA 4.0. Vous pouvez les
+copier, les modifier et les utiliser, y compris commercialement, à deux conditions : citer la
+source (nom, licence, lien) et diffuser les questions modifiées sous la même licence. Pengou garde
+cette attribution sur chaque question copiée depuis la bibliothèque et l'affiche dans la
+bibliothèque et l'éditeur.
+
+La liste des thèmes (`catalog/themes.json`) et les scripts de conversion
+(`packages/library/scripts/`) relèvent d'Apache-2.0, comme le reste du code.
+
 ## Communication de marque
 
 Ici, dire **« open source »** est exact : Apache-2.0 est une licence approuvée par l'OSI. Le badge
