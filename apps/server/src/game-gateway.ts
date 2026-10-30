@@ -260,8 +260,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // Nettoyage `engine_state` passé le podium — cohérent avec l'ancien host:next (le rapport final
     // reste lisible via session_player/answer_record).
     await clearEngineState(systemDb, meta.dbSessionId)
-    const top = engine.ranking(session).slice(0, 3)
-    io.to(roomName(sessionId)).emit('podium', { top })
+    // `ranking` complet (moteur, donc sans joueur exclu) : les écrans s'en servent pour le
+    // « Classement complet » au lieu du dernier `scoreboard`, qui peut contenir un exclu.
+    const ranking = engine.ranking(session)
+    io.to(roomName(sessionId)).emit('podium', { top: ranking.slice(0, 3), ranking })
     // Éviction mémoire différée (P1-6) : fenêtre de grâce pour une reconnexion au podium.
     setTimeout(() => { void evictSessionMemory(sessionId, meta) }, PODIUM_EVICTION_DELAY).unref()
     return session
@@ -735,10 +737,12 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       case 'scoreboard':
         socket.emit('scoreboard', { ranking: engine.ranking(session) })
         break
-      case 'podium':
-        socket.emit('scoreboard', { ranking: engine.ranking(session) })
-        socket.emit('podium', { top: engine.ranking(session).slice(0, 3) })
+      case 'podium': {
+        const ranking = engine.ranking(session)
+        socket.emit('scoreboard', { ranking })
+        socket.emit('podium', { top: ranking.slice(0, 3), ranking })
         break
+      }
       case 'lobby':
       default:
         // Rien de plus : le `lobby:update` ci-dessus suffit déjà pour la phase 'lobby'.

@@ -18,6 +18,14 @@ export interface RankingEntry {
   score: number
 }
 
+/** Payload de `podium` : les 3 premiers et le classement complet calculé par le moteur, donc sans
+ * joueur exclu (contrairement au dernier `scoreboard`, qui peut en contenir un). `ranking` est
+ * absent sur un serveur antérieur : les écrans retombent alors sur le dernier `scoreboard`. */
+export interface PodiumPayload {
+  top: RankingEntry[]
+  ranking?: RankingEntry[]
+}
+
 /** Payload de `question:reading` (phase de lecture) : projection « énoncé seul » du moteur +
  * `startedAt` (horodatage serveur, pour resynchroniser le compte à rebours côté client). */
 export interface ReadingView {

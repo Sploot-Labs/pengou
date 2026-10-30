@@ -93,4 +93,34 @@ describe('BigScreen, exclusion d\'un joueur', () => {
     expect(names).toEqual(['Ana'])
     expect(container.textContent).not.toMatch(/exclu|retiré/i)
   }, 15000)
+
+  it("podium : le classement final suit le ranking du podium, sans l'exclu du dernier scoreboard", async () => {
+    const { container, findByRole } = renderBigScreen('token=tok-abc&pin=1234')
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalled())
+
+    // Dernier scoreboard : Zoe (4e) y figure encore ; l'hôte l'exclut avant le podium.
+    emitServerEvent('scoreboard', {
+      ranking: [
+        { playerId: 'p1', nickname: 'Ana', score: 500 },
+        { playerId: 'p2', nickname: 'Bob', score: 400 },
+        { playerId: 'p3', nickname: 'Cleo', score: 300 },
+        { playerId: 'p-zoe', nickname: 'Zoe', score: 250 },
+        { playerId: 'p4', nickname: 'Dan', score: 200 },
+        { playerId: 'p5', nickname: 'Eve', score: 100 },
+      ],
+    })
+    const ranking = [
+      { playerId: 'p1', nickname: 'Ana', score: 500 },
+      { playerId: 'p2', nickname: 'Bob', score: 400 },
+      { playerId: 'p3', nickname: 'Cleo', score: 300 },
+      { playerId: 'p4', nickname: 'Dan', score: 200 },
+      { playerId: 'p5', nickname: 'Eve', score: 100 },
+    ]
+    emitServerEvent('podium', { top: ranking.slice(0, 3), ranking })
+
+    const full = await findByRole('region', { name: 'Classement complet' })
+    const names = Array.from(full.querySelectorAll('.podium-list__item > span:nth-child(2)')).map((n) => n.textContent)
+    expect(names).toEqual(['Dan', 'Eve'])
+    expect(container.textContent).not.toContain('Zoe')
+  })
 })

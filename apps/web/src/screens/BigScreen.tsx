@@ -4,7 +4,7 @@ import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue, useFocusOnMoun
 import { boardEntries } from '../realtime/board'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
-import type { RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
+import type { PodiumPayload, RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
 import { hardReload } from '../realtime/hardReload'
 import { ThemeProvider } from '../theme/ThemeProvider.js'
 import { AnswerShape, JoinInvite, Logo, PinDisplay, SoundToggle, TimerRing } from '../ui'
@@ -245,8 +245,9 @@ function BigScreenInner() {
       setRanking(r)
     })
 
-    const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
+    const offPodium = on<PodiumPayload>('podium', ({ top, ranking: full }) => {
       setPodiumTop(top)
+      if (full) setRanking(full)
       setAutoNextAt(null)
       cue('phase.enter:podium')
       setPhase('podium')

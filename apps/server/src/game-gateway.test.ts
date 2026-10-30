@@ -2088,6 +2088,45 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       }
     }, 30_000)
 
+    it("exclusion pendant le dernier scoreboard puis podium : ranking du podium sans l'exclu", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, sessionId, pin, cookie } = await setupHostedSession(app, url, 'gw-kick-last-scoreboard@example.com')
+        clients.push(hostSocket)
+        const { anaId, bobId } = await joinAnaAndBob(url, hostSocket, pin, clients)
+        expect((await ack<{ error?: string }>(hostSocket, 'host:setAuto', { enabled: false })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+
+        // host:reveal enchaîne le classement : Ana y figure encore.
+        const scoreboard = waitFor<{ ranking: Array<{ playerId: string }> }>(hostSocket, 'scoreboard')
+        expect((await ack<{ error?: string }>(hostSocket, 'host:reveal', {})).error).toBeUndefined()
+        expect((await scoreboard).ranking.map((r) => r.playerId)).toContain(anaId)
+
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+
+        type PodiumPayload = { top: Array<{ playerId: string }>; ranking: Array<{ playerId: string }> }
+        const podium = waitFor<PodiumPayload>(hostSocket, 'podium')
+        expect((await ack<{ error?: string }>(hostSocket, 'host:next', {})).error).toBeUndefined()
+        const live = await podium
+        expect(live.ranking.map((r) => r.playerId)).toEqual([bobId])
+        expect(live.top.map((r) => r.playerId)).toEqual([bobId])
+
+        // Snapshot de reprise au podium : même classement complet, toujours sans l'exclue.
+        hostSocket.disconnect()
+        const host2 = await connectClient(url, { cookie })
+        clients.push(host2)
+        const resumed = waitFor<PodiumPayload>(host2, 'podium')
+        expect((await ack<{ error?: string }>(host2, 'host:reconnect', { sessionId })).error).toBeUndefined()
+        const snapshot = await resumed
+        expect(snapshot.ranking.map((r) => r.playerId)).toEqual([bobId])
+        expect(snapshot.top.map((r) => r.playerId)).toEqual([bobId])
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
     it("après exclusion, host:relaunch au podium ne migre pas l'exclu", async () => {
       const { app, url } = await buildApp()
       const clients: ClientSocket[] = []
