@@ -1,8 +1,7 @@
 import { and, asc, eq, inArray, notInArray, or, sql, type SQL } from 'drizzle-orm'
-import type { Audience, Difficulty } from '@splootlabs/library'
+import type { Audience, ContentSource, Difficulty } from '@splootlabs/library'
 import type { Db } from '../client.js'
 import * as schema from '../schema.js'
-import type { ContentSource } from '@splootlabs/library'
 import { normalizeSearch } from './library-sync.js'
 
 const { libraryTheme, libraryQuestion, libraryQuiz, libraryQuizQuestion } = schema
@@ -57,7 +56,7 @@ const questionColumns = {
 }
 
 // Compte des questions d'un quiz dans la jointure de liaison.
-const questionCount = sql<number>`(select count(*) from ${libraryQuizQuestion} where ${libraryQuizQuestion.quizId} = ${libraryQuiz.id})`.mapWith(Number)
+const questionCount = sql<number>`(select count(*) from ${libraryQuizQuestion} inner join ${libraryQuestion} on ${libraryQuestion.id} = ${libraryQuizQuestion.questionId} inner join ${libraryTheme} on ${libraryTheme.id} = ${libraryQuestion.themeId} where ${libraryQuizQuestion.quizId} = ${libraryQuiz.id} and ${libraryTheme.hidden} = false)`.mapWith(Number)
 
 const quizColumns = {
   id: libraryQuiz.id,
@@ -187,7 +186,8 @@ export async function getLibraryQuiz(
   if (!quiz) return null
   const questions = await db.select(questionColumns).from(libraryQuizQuestion)
     .innerJoin(libraryQuestion, eq(libraryQuestion.id, libraryQuizQuestion.questionId))
-    .where(eq(libraryQuizQuestion.quizId, id))
+    .innerJoin(libraryTheme, eq(libraryTheme.id, libraryQuestion.themeId))
+    .where(and(eq(libraryQuizQuestion.quizId, id), eq(libraryTheme.hidden, false)))
     .orderBy(asc(libraryQuizQuestion.position))
   return { quiz, questions }
 }

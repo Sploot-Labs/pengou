@@ -43,7 +43,7 @@ const snapshot: CatalogSnapshot = {
   ],
   quizzes: [
     quiz('z1', ['q3', 'q1', 'q2'], { title: 'Zèbre' }),
-    quiz('z2', ['q1'], { title: 'Abeille', audience: 'adultes' }),
+    quiz('z2', ['q1', 'q5'], { title: 'Abeille', audience: 'adultes' }),
     quiz('z3', ['q5'], { theme: 'secret' }),
   ],
   rejectedFiles: [],
@@ -128,6 +128,13 @@ describe('lecture du catalogue', () => {
     expect(res?.quiz).toMatchObject({ id: 'z1', title: 'Zèbre', questionCount: 3 })
     expect(res?.questions.map((i) => i.id)).toEqual(['q3', 'q1', 'q2'])
     expect(await getLibraryQuiz(ctx.db, 'inconnu')).toBeNull()
+  })
+
+  it("exclut les questions d'un thème masqué d'un quiz visible", async () => {
+    const res = await getLibraryQuiz(ctx.db, 'z2')
+    expect(res?.questions.map((i) => i.id)).toEqual(['q1'])
+    expect(res?.quiz.questionCount).toBe(1)
+    expect((await listLibraryQuizzes(ctx.db, {})).find((z) => z.id === 'z2')?.questionCount).toBe(1)
   })
 
   it('fonctionne avec le rôle restreint appDb', async () => {
