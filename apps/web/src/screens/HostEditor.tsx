@@ -11,6 +11,7 @@ import {
   reorderQuestions,
   updateQuestion,
   updateQuiz,
+  type ContentSource,
   type CreateQuestionInput,
   type Question as ApiQuestion,
   type QuestionType,
@@ -20,6 +21,7 @@ import {
 import { ANSWER_SHAPES, type AnswerShapeKind } from '../constants'
 import { AnswerShape, Button, Logo, SHAPE_NAME_FR } from '../ui'
 import { AppHeader } from '../ui/AppHeader.js'
+import { SourceCredit } from '../ui/SourceCredit.js'
 
 /**
  * HostEditor — wired to the real quiz/question REST API (Plan 06 Task 3),
@@ -67,6 +69,8 @@ interface QuestionBase {
   prompt: string
   timeLimit: number
   readingTime: number
+  /** Attribution héritée de la bibliothèque (absente pour une question créée ici). */
+  source?: ContentSource | null
 }
 interface McqOption {
   id: string
@@ -96,7 +100,7 @@ export interface SliderQuestion extends QuestionBase {
 export type Question = McqQuestion | TrueFalseQuestion | TextQuestion | SliderQuestion
 
 function fromApiQuestion(row: ApiQuestion): Question {
-  const base = { id: row.id, prompt: row.prompt, timeLimit: row.timeLimit, readingTime: row.readingTime }
+  const base = { id: row.id, prompt: row.prompt, timeLimit: row.timeLimit, readingTime: row.readingTime, source: row.source }
   switch (row.type) {
     case 'mcq': {
       const payload = row.payload as { options: { label: string; correct: boolean }[] }
@@ -1019,6 +1023,7 @@ export function HostEditor() {
                 {titleError}
               </p>
             )}
+            <SourceCredit source={quiz?.source ?? null} />
           </div>
           <div className="host-field">
             <label htmlFor="quiz-description">Description</label>
@@ -1096,6 +1101,7 @@ export function HostEditor() {
                           )}
                           <span className="host-badge">{TYPE_LABEL[q.type]}</span>
                         </button>
+                        <SourceCredit source={q.source ?? null} />
                         <div
                           className="host-list__reorder"
                           role="group"

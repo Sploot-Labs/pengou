@@ -15,7 +15,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 // `const` declarations) — anything they reference must come from
 // `vi.hoisted` (not a plain top-level `const`), or the reference throws
 // "Cannot access '...' before initialization" at collection time.
-const { mockUpdateQuestion, baseQuestion } = vi.hoisted(() => ({
+const { mockUpdateQuestion, baseQuestion, fixtures } = vi.hoisted(() => ({
+  fixtures: { quizSource: null as unknown, questionSource: null as unknown },
   mockUpdateQuestion: vi.fn(() => Promise.resolve({ id: 'quest1' })),
   baseQuestion: {
     id: 'quest1',
@@ -45,11 +46,12 @@ vi.mock('../api/quizzes', () => ({
       title: 'Mon quiz',
       description: null,
       cover: null,
+      source: fixtures.quizSource,
       createdAt: '2026-07-20T15:30:00Z',
       updatedAt: '2026-07-20T15:30:00Z',
     }),
   ),
-  listQuestions: vi.fn(() => Promise.resolve([baseQuestion])),
+  listQuestions: vi.fn(() => Promise.resolve([{ ...baseQuestion, source: fixtures.questionSource }])),
   createQuestion: vi.fn(),
   deleteQuestion: vi.fn(),
   reorderQuestions: vi.fn(),
@@ -107,5 +109,35 @@ describe('HostEditor — champ Temps de lecture', () => {
       },
       { timeout: 2000 },
     )
+  })
+})
+
+describe('HostEditor : attribution des sources', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+    fixtures.quizSource = null
+    fixtures.questionSource = null
+  })
+  afterEach(cleanup)
+
+  it('affiche la source du quiz sous le titre', async () => {
+    fixtures.quizSource = { name: 'Open Trivia', license: 'CC BY-SA 4.0' }
+    renderEditor()
+    await screen.findByLabelText('Titre du quiz')
+    expect(screen.getByText(/Source : Open Trivia, licence CC BY-SA 4\.0/)).toBeInTheDocument()
+  })
+
+  it("affiche la source d'une question dans sa carte", async () => {
+    fixtures.questionSource = { name: 'Wikiquiz', license: 'CC0', url: 'https://example.org/q' }
+    renderEditor()
+    const link = await screen.findByRole('link', { name: 'Wikiquiz' })
+    expect(link).toHaveAttribute('href', 'https://example.org/q')
+    expect(screen.getByText(/licence CC0/)).toBeInTheDocument()
+  })
+
+  it("n'affiche aucune mention de source sans attribution", async () => {
+    renderEditor()
+    await screen.findByLabelText('Temps de lecture (s)')
+    expect(screen.queryByText(/Source :/)).toBeNull()
   })
 })
