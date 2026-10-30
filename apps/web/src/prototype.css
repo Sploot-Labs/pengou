@@ -2676,6 +2676,16 @@
   background: var(--surface);
 }
 
+.hostlive-all-players {
+  margin-top: var(--space-4);
+}
+
+.hostlive-all-players > summary {
+  cursor: pointer;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
 .hostlive-board__rank {
   font-family: var(--font-mono);
   font-size: var(--fs-h2);

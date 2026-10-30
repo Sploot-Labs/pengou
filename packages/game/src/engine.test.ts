@@ -710,9 +710,8 @@ describe('game engine — cycle déterministe complet', () => {
     it('tolère un état ancien sans kickedJoinTokens', async () => {
       const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
       const { player: ana } = await engine.addPlayer(session.id, 'Ana')
-      const raw = await store.get(session.id)
-      delete raw!.kickedJoinTokens
-      await store.save(raw!)
+      // `createSession` ne pose pas le champ : l'état stocké ressemble déjà à un état ancien.
+      expect((await store.get(session.id))!.kickedJoinTokens).toBeUndefined()
       expect(await engine.reconnect(session.id, 'jeton-inexistant')).toBeNull()
       const { kicked } = await engine.kickPlayer(session.id, ana.id)
       expect(kicked).not.toBeNull()

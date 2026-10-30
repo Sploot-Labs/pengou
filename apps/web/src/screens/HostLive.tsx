@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
-import type { RankingEntry, ReadingView } from '../realtime/contracts'
+import type { PodiumPayload, RankingEntry, ReadingView } from '../realtime/contracts'
 import { listQuizzes, type QuizListItem } from '../api/quizzes'
 import { boardEntries } from '../realtime/board'
 import { hardReload } from '../realtime/hardReload'
@@ -303,8 +303,9 @@ export function HostLive() {
       }
     })
 
-    const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
+    const offPodium = on<PodiumPayload>('podium', ({ top, ranking: full }) => {
       setPodiumTop(top)
+      if (full) setRanking(full)
       setAutoNextAt(null)
       setPhase('podium')
     })
@@ -711,6 +712,7 @@ export function HostLive() {
 
   function renderLeaderboard(limit: number, focusTarget: boolean) {
     const top = boardEntries(ranking, players).slice(0, limit)
+    const hasRanking = ranking.length > 0
     if (top.length === 0) {
       return <p style={{ color: 'var(--ink-dim)' }}>Le classement s'affichera après la première question.</p>
     }
@@ -726,9 +728,12 @@ export function HostLive() {
         <ol className="hostlive-board">
           {top.map((p, index) => (
             <li key={p.playerId} className="hostlive-board__row">
-              <span className={`hostlive-board__rank${index === 0 ? ' hostlive-board__rank--first' : ''}`}>
-                {index + 1}
-              </span>
+              {/* Avant le premier classement, l'ordre n'est que celui d'arrivée : pas de rang. */}
+              {hasRanking && (
+                <span className={`hostlive-board__rank${index === 0 ? ' hostlive-board__rank--first' : ''}`}>
+                  {index + 1}
+                </span>
+              )}
               <span className="hostlive-board__name">{p.nickname}</span>
               <span className="hostlive-board__score">{p.score} pts</span>
               <Button
@@ -745,6 +750,37 @@ export function HostLive() {
           ))}
         </ol>
       </>
+    )
+  }
+
+  // Liste repliable de tous les joueurs présents (retardataires et joueurs au-delà du top
+  // compris), pour pouvoir exclure n'importe lequel en cours de partie.
+  function renderAllPlayers() {
+    if (players.length === 0) return null
+    return (
+      <details className="hostlive-all-players">
+        <summary>Tous les joueurs ({players.length})</summary>
+        <ul className="hostlive-board">
+          {players.map((p) => (
+            <li key={p.id} className="hostlive-board__row">
+              <span className="hostlive-board__name">
+                {p.nickname}
+                {!p.connected && <span className="visually-hidden"> (hors ligne)</span>}
+              </span>
+              <Button
+                variant="ghost"
+                type="button"
+                className="hostlive-kick"
+                aria-label={`Exclure ${p.nickname}`}
+                disabled={kickPendingId === p.id}
+                onClick={() => void kickPlayer(p.id, p.nickname)}
+              >
+                Exclure
+              </Button>
+            </li>
+          ))}
+        </ul>
+      </details>
     )
   }
 
@@ -1071,6 +1107,12 @@ export function HostLive() {
           {(phase === 'reading' || phase === 'question' || phase === 'reveal') && (
             <aside className="hostlive-aside" aria-label="Dernier classement connu">
               {renderLeaderboard(5, false)}
+              {renderAllPlayers()}
+            </aside>
+          )}
+          {phase === 'scoreboard' && players.length > 0 && (
+            <aside className="hostlive-aside" aria-label="Joueurs de la partie">
+              {renderAllPlayers()}
             </aside>
           )}
         </div>

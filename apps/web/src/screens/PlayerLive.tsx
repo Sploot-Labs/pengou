@@ -771,11 +771,16 @@ export function PlayerLive() {
   // Rendu prioritaire sur tout le reste (la session locale est déjà effacée).
   if (kicked) {
     return (
-      <main className="player-live player-live--kicked">
-        <h1 ref={kickedHeadingRef} tabIndex={-1}>
-          L'animateur t'a retiré de la partie.
-        </h1>
-        <Link to="/join">Rejoindre une partie</Link>
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+        <div className="join-head">
+          <Logo />
+          <h1 ref={kickedHeadingRef} tabIndex={-1}>
+            L'animateur t'a retiré de la partie.
+          </h1>
+        </div>
+        <Link className="ab-button ab-button--primary" to="/join">
+          Rejoindre une partie
+        </Link>
       </main>
     )
   }

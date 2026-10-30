@@ -163,6 +163,9 @@ describe("PlayerLive : exclusion par l'animateur", () => {
     expect(await screen.findByText("L'animateur t'a retiré de la partie.")).toBeTruthy()
     expect(loadPlayerSession()).toBeNull()
     expect(screen.getByRole('link', { name: 'Rejoindre une partie' }).getAttribute('href')).toBe('/join')
+    // Même gabarit que les autres écrans publics : cible d'évitement et titre focalisable.
+    expect(screen.getByRole('main').id).toBe('contenu-principal')
+    expect(screen.getByRole('heading', { level: 1, name: "L'animateur t'a retiré de la partie." }).tabIndex).toBe(-1)
   })
 
   it('reconnexion refusée pour exclusion : même écran, pas de redirection silencieuse', async () => {
