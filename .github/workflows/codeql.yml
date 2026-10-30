@@ -18,6 +18,9 @@ jobs:
     name: Analyze (javascript-typescript)
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    # Le code scanning d'un dépôt privé exige GitHub Advanced Security. Le job reste
+    # ignoré tant que le dépôt est privé et s'active de lui-même à sa publication.
+    if: ${{ !github.event.repository.private }}
     permissions:
       security-events: write
       contents: read
