@@ -6,6 +6,7 @@ export const LIMITS = {
   description: 2000,
   prompt: 500,
   media: 2048,
+  mediaAlt: 200,
   cover: 2048,
   nickname: 32,
 } as const

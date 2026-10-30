@@ -36,7 +36,7 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       if (!context) return
 
       const body = request.body as
-        | { type?: unknown; prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown }
+        | { type?: unknown; prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown; mediaAlt?: unknown }
         | undefined
 
       if (!isQuestionType(body?.type)) {
@@ -69,6 +69,14 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
         return reply.code(400).send({ error: 'media invalide (URL http(s) ou référence relative attendue).' })
       }
 
+      if (body?.mediaAlt != null && typeof body.mediaAlt !== 'string') {
+        return reply.code(400).send({ error: 'mediaAlt doit être une chaîne ou null.' })
+      }
+      if (tooLong(body?.mediaAlt, LIMITS.mediaAlt)) {
+        return reply.code(400).send({ error: `Le texte alternatif est trop long (${LIMITS.mediaAlt} caractères max).` })
+      }
+      const mediaAlt = isNonEmptyString(body?.mediaAlt) ? body.mediaAlt : undefined
+
       return withTenantTx(appDb, context, async (scope) => {
         const question = await createQuestion(scope, request.params.quizId, {
           type: body.type as QuestionType,
@@ -77,6 +85,7 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
           readingTime: isNonNegativeInt(body.readingTime) ? body.readingTime : undefined,
           payload: validatedPayload,
           media,
+          mediaAlt,
         })
         if (!question) return reply.code(404).send({ error: 'Quiz introuvable.' })
         return reply.code(201).send(question)
@@ -112,10 +121,10 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       if (!context) return
 
       const body = request.body as
-        | { prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown }
+        | { prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown; mediaAlt?: unknown }
         | undefined
 
-      const patch: Partial<{ prompt: string; timeLimit: number; readingTime: number; payload: unknown; media: string | null }> = {}
+      const patch: Partial<{ prompt: string; timeLimit: number; readingTime: number; payload: unknown; media: string | null; mediaAlt: string | null }> = {}
 
       if (body?.prompt !== undefined) {
         if (!isNonEmptyString(body.prompt)) return reply.code(400).send({ error: "L'énoncé (prompt) ne peut pas être vide." })
@@ -138,6 +147,17 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
           return reply.code(400).send({ error: 'media invalide (URL http(s) ou référence relative attendue).' })
         }
         patch.media = body.media
+        // Retirer l'image retire aussi son texte alternatif, sauf si le corps en fournit un.
+        if (body.media === null && body.mediaAlt === undefined) patch.mediaAlt = null
+      }
+      if (body?.mediaAlt !== undefined) {
+        if (body.mediaAlt !== null && typeof body.mediaAlt !== 'string') {
+          return reply.code(400).send({ error: 'mediaAlt doit être une chaîne ou null.' })
+        }
+        if (tooLong(body.mediaAlt, LIMITS.mediaAlt)) {
+          return reply.code(400).send({ error: `Le texte alternatif est trop long (${LIMITS.mediaAlt} caractères max).` })
+        }
+        patch.mediaAlt = body.mediaAlt
       }
 
       return withTenantTx(appDb, context, async (scope) => {
