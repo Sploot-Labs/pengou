@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue, useFocusOnMount, useSound } from '../motion/index.js'
+import { boardEntries } from '../realtime/board'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
@@ -679,7 +680,7 @@ function BigScreenInner() {
             <p style={{ color: 'var(--ink-dim)' }}>Le classement s'affichera après la première question.</p>
           ) : (
             <ol className="big-scoreboard__list">
-              {ranking.slice(0, 5).map((p, index) => (
+              {boardEntries(ranking, players).slice(0, 5).map((p, index) => (
                 <li key={p.playerId} className="big-scoreboard__row">
                   <span className={`big-scoreboard__rank${index === 0 ? ' big-scoreboard__rank--first' : ''}`}>
                     {index + 1}
