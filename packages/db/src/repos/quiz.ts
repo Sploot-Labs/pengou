@@ -1,5 +1,5 @@
 import { and, eq, sql } from 'drizzle-orm'
-import { schema } from '../index.js'
+import { schema, type ContentSource } from '../index.js'
 import type { TenantScope } from '../tenant.js'
 
 export type Quiz = typeof schema.quiz.$inferSelect
@@ -80,4 +80,52 @@ export async function deleteQuiz(scope: TenantScope, id: string): Promise<boolea
     .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
     .returning({ id: schema.quiz.id })
   return rows.length > 0
+}
+
+export type ImportedQuestion = {
+  type: typeof schema.question.$inferSelect['type']
+  prompt: string
+  payload: unknown
+  timeLimit: number
+  readingTime: number
+  source: ContentSource | null
+}
+
+/** Crée un quiz et ses questions (copie d'une source externe) dans le scope courant. Sans
+ * transaction interne : l'appelant est dans `withTenantTx`. */
+export async function importQuiz(
+  scope: TenantScope,
+  input: {
+    ownerId: string
+    title: string
+    description?: string | null
+    source: ContentSource | null
+    questions: ImportedQuestion[]
+  },
+): Promise<Quiz> {
+  const [row] = await scope.db
+    .insert(schema.quiz)
+    .values({
+      tenantId: scope.tenantId,
+      ownerId: input.ownerId,
+      title: input.title,
+      description: input.description ?? null,
+      source: input.source,
+    })
+    .returning()
+  if (input.questions.length > 0) {
+    await scope.db.insert(schema.question).values(input.questions.map((q, orderIndex) => ({
+      quizId: row.id,
+      tenantId: scope.tenantId,
+      type: q.type,
+      prompt: q.prompt,
+      timeLimit: q.timeLimit,
+      readingTime: q.readingTime,
+      payload: q.payload as never,
+      media: null,
+      source: q.source,
+      orderIndex,
+    })))
+  }
+  return row
 }
