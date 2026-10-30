@@ -41,15 +41,14 @@ et le pitch « open source » de Sploot Labs sont pleinement justifiés pour Pen
 
 ## Et le modèle économique alors ?
 
-L'ouverture n'empêche pas de monétiser — elle déplace juste le levier : la valeur payante se
-construit **autour** du code libre, pas via une restriction de licence. Pistes classiques
-(compatibles Apache-2.0, à décider plus tard) :
-- **Cloud hébergé Sploot Labs** : la commodité du « zéro-ops » (hébergement managé, sauvegardes,
-  SLA, support) — la majorité des utilisateurs de SaaS open source paient pour ne pas opérer.
-- **Features/edition entreprise** (SSO/SAML, audit, SCIM, marque blanche avancée…) proposées en
-  add-on. Si un jour vous voulez les garder fermées, c'est le modèle **open core** — décision de
-  produit, pas de licence, qui reste ouverte pour le cœur.
-- **Support, formation, intégration** sur mesure.
+Il n'y en a pas, au sens commercial. Le service hébergé par Sploot Labs sur
+[app.pengou.fr](https://app.pengou.fr) est gratuit pour tout le monde, sans offre payante ni
+version premium, et le code reste entièrement libre : pas d'édition entreprise fermée, pas
+d'open core. Les fonctionnalités arrivent dans le même code pour tous.
+
+Le serveur et le temps passé sont financés par les dons de celles et ceux qui le souhaitent, sur
+le principe « offrir un café ». Si ce choix devait changer un jour, il serait annoncé ici et dans
+le journal des nouveautés, et ce qui est gratuit aujourd'hui le resterait.
 
 ## Contribuer : DCO (recommandé)
 
