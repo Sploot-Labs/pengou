@@ -1,7 +1,7 @@
 import { describe, it, expect, afterAll, beforeAll, vi } from 'vitest'
 import type { FastifyInstance } from 'fastify'
 import { io as ioClient, type Socket as ClientSocket } from 'socket.io-client'
-import { and, eq } from 'drizzle-orm'
+import { and, eq, sql } from 'drizzle-orm'
 import {
   startTestDb, runMigrations, schema, tenantScope, createQuiz, createQuestion, ensureDefaultTenant,
 } from '@splootlabs/db'
@@ -1881,6 +1881,48 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         expect(await ack(ana, 'player:answer', { answer: { optionIndex: 0 } }))
           .toEqual({ accepted: false, error: 'joueur non rattaché à une session' })
       } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("échec de la suppression en base : l'exclusion est quand même notifiée et diffusée", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      // Échec base réel et déterministe : un trigger BEFORE DELETE lève une exception pour les
+      // seules lignes de CETTE session (l'import ESM de `deleteSessionPlayer` n'est pas espionnable).
+      let triggerSessionId = ''
+      const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+      try {
+        const { hostSocket, sessionId, pin } = await setupHostedSession(app, url, 'gw-kick-dbfail@example.com')
+        clients.push(hostSocket)
+        const { ana, anaId, bobId } = await joinAnaAndBob(url, hostSocket, pin, clients)
+        triggerSessionId = sessionId
+        await ctx.db.execute(sql.raw(`
+          CREATE OR REPLACE FUNCTION kick_test_fail_delete() RETURNS trigger AS $$
+          BEGIN
+            IF OLD.session_id = '${sessionId}' THEN RAISE EXCEPTION 'suppression refusée (test)'; END IF;
+            RETURN OLD;
+          END $$ LANGUAGE plpgsql;
+          CREATE TRIGGER kick_test_fail_delete BEFORE DELETE ON session_player
+            FOR EACH ROW EXECUTE FUNCTION kick_test_fail_delete();
+        `))
+
+        const kickedAna = waitFor(ana, 'player:kicked')
+        const lobby = waitFor<Lobby>(hostSocket, 'lobby:update')
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+        await kickedAna
+        expect((await lobby).players.map((p) => p.id)).toEqual([bobId])
+        // La ligne est restée (la suppression a bien échoué) et l'échec a été journalisé.
+        expect(await playerRows(sessionId, 'Ana')).toHaveLength(1)
+        expect(consoleError).toHaveBeenCalledWith(expect.stringContaining('host:kick'), expect.anything())
+        expect(await ack(ana, 'player:answer', { answer: { optionIndex: 0 } }))
+          .toEqual({ accepted: false, error: 'joueur non rattaché à une session' })
+      } finally {
+        if (triggerSessionId) {
+          await ctx.db.execute(sql.raw('DROP TRIGGER IF EXISTS kick_test_fail_delete ON session_player; DROP FUNCTION IF EXISTS kick_test_fail_delete();'))
+        }
+        consoleError.mockRestore()
         for (const c of clients) c.disconnect()
         await app.close()
       }

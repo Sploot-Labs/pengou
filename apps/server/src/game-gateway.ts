@@ -1103,8 +1103,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // non créditée, et mémorise son joinToken dans `kickedJoinTokens`, persisté avec l'état : un
     // `player:reconnect` sur ce jeton est refusé, même après redémarrage) ; 2) `meta.playerDbIds`
     // purgé AVANT toute I/O, pour qu'un `persistRound`/`persistPlayerScores` lancé ensuite ne vise
-    // plus la ligne ; 3) suppression de la ligne `session_player` (RLS, tenant de la session).
-    // Risque connu (non couvert) : un `persistRound` DÉJÀ en vol pour la manche courante a pu lire
+    // plus la ligne ; 3) suppression de la ligne `session_player` (RLS, tenant de la session), en
+    // best-effort : un échec est journalisé et n'empêche jamais les notifications, diffusions et
+    // l'auto-révélation qui suivent (sans quoi le kick resterait à moitié appliqué). Risque connu (non couvert) : un `persistRound` DÉJÀ en vol pour la manche courante a pu lire
     // l'id de ligne avant l'étape 2 ; son `recordAnswer` échoue alors sur la FK (ligne supprimée)
     // et annule la transaction de la manche, sans cicatrisation au boot. La fenêtre se réduit au
     // trajet aller-retour d'une transaction déjà commencée. Idempotent : un joueur déjà absent
@@ -1127,7 +1128,16 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         const dbPlayerId = meta.playerDbIds.get(playerId)
         meta.playerDbIds.delete(playerId)
         if (dbPlayerId) {
-          await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) => deleteSessionPlayer(scope.db, dbPlayerId))
+          // Best-effort : l'exclusion est déjà actée côté moteur (et persistée). Un échec base ici
+          // ne doit PAS interrompre la suite, sinon le kick resterait à moitié appliqué sans
+          // rattrapage possible (un nouveau `host:kick` répond `kicked: null`, donc rien n'est
+          // diffusé) : socket de l'exclu toujours dans la room, listes périmées, manche bloquée.
+          // La ligne orpheline n'est plus visée par aucune écriture (`playerDbIds` déjà purgé).
+          try {
+            await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) => deleteSessionPlayer(scope.db, dbPlayerId))
+          } catch (err) {
+            console.error(`host:kick : suppression de la ligne session_player ${dbPlayerId} échouée (exclusion maintenue)`, err)
+          }
         }
 
         // Tous les sockets locaux encore rattachés à ce joueur (y compris un ancien socket resté
