@@ -44,6 +44,9 @@ importers:
       '@splootlabs/game':
         specifier: workspace:*
         version: link:../../packages/game
+      '@splootlabs/library':
+        specifier: workspace:*
+        version: link:../../packages/library
       '@splootlabs/quiz':
         specifier: workspace:*
         version: link:../../packages/quiz
