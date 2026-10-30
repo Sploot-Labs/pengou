@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@fastify/helmet": "^13",
+    "@fastify/multipart": "^9",
     "@fastify/rate-limit": "^11",
     "@fastify/static": "^10",
     "@socket.io/redis-adapter": "^8",

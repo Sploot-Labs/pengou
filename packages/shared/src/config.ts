@@ -1,3 +1,4 @@
+import path from 'node:path'
 import { z } from 'zod'
 
 const EnvSchema = z.object({
@@ -34,6 +35,9 @@ const EnvSchema = z.object({
   GITHUB_CLIENT_SECRET: z.string().optional(),
   SESSION_INACTIVITY_TIMEOUT_MINUTES: z.coerce.number().int().positive().default(30),
   SESSION_SWEEP_INTERVAL_MINUTES: z.coerce.number().int().positive().default(5),
+  // Dossier des images de question envoyées par les rédacteurs (`<tenantId>/<uuid>.<ext>`).
+  // Relatif au répertoire courant du process ; à monter sur un volume persistant en production.
+  MEDIA_DIR: z.string().min(1).default('./data/media'),
 })
 
 export type OAuthProviderCreds = {
@@ -58,6 +62,8 @@ export type AppConfig = {
   migrateOnBoot: boolean
   sessionInactivityTimeoutMs: number
   sessionSweepIntervalMs: number
+  /** Chemin absolu du dossier des images envoyées. */
+  mediaDir: string
   oauth: {
     google: OAuthProviderCreds
     facebook: OAuthProviderCreds
@@ -91,6 +97,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     migrateOnBoot: parsed.MIGRATE_ON_BOOT === 'true',
     sessionInactivityTimeoutMs: parsed.SESSION_INACTIVITY_TIMEOUT_MINUTES * 60_000,
     sessionSweepIntervalMs: parsed.SESSION_SWEEP_INTERVAL_MINUTES * 60_000,
+    mediaDir: path.resolve(parsed.MEDIA_DIR),
     oauth: {
       google: { clientId: parsed.GOOGLE_CLIENT_ID, clientSecret: parsed.GOOGLE_CLIENT_SECRET },
       facebook: { clientId: parsed.FACEBOOK_CLIENT_ID, clientSecret: parsed.FACEBOOK_CLIENT_SECRET },

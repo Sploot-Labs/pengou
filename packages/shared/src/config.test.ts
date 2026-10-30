@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import path from 'node:path'
 import { loadConfig } from './config'
 
 describe('loadConfig', () => {
@@ -76,5 +77,15 @@ describe('loadConfig — inactivité/balayage', () => {
     const c = loadConfig({ NODE_ENV: 'test', SESSION_INACTIVITY_TIMEOUT_MINUTES: '10', SESSION_SWEEP_INTERVAL_MINUTES: '1' })
     expect(c.sessionInactivityTimeoutMs).toBe(10 * 60_000)
     expect(c.sessionSweepIntervalMs).toBe(1 * 60_000)
+  })
+})
+
+describe('loadConfig — dossier des médias envoyés', () => {
+  it('par défaut : ./data/media résolu en chemin absolu', () => {
+    expect(loadConfig({}).mediaDir).toBe(path.resolve('./data/media'))
+  })
+
+  it('MEDIA_DIR surcharge le dossier, résolu en chemin absolu', () => {
+    expect(loadConfig({ MEDIA_DIR: '/srv/media' }).mediaDir).toBe(path.resolve('/srv/media'))
   })
 })
