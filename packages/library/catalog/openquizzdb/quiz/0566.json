@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=566"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0566-1",
+      "type": "mcq",
+      "prompt": "Quelle couleur peut être associée à une fièvre, un nain ou un rire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jaune",
+            "correct": true
+          },
+          {
+            "label": "Bleue",
+            "correct": false
+          },
+          {
+            "label": "Orange",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0566-2",
+      "type": "mcq",
+      "prompt": "Quel est le point commun entre une tente, un gréviste et une punition ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crochet",
+            "correct": false
+          },
+          {
+            "label": "Piquet",
+            "correct": true
+          },
+          {
+            "label": "Ficelle",
+            "correct": false
+          },
+          {
+            "label": "Toile",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0566-3",
+      "type": "mcq",
+      "prompt": "Quel récipient désigne aussi le ventre des enfants ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bidon",
+            "correct": true
+          },
+          {
+            "label": "Verre",
+            "correct": false
+          },
+          {
+            "label": "Bol",
+            "correct": false
+          },
+          {
+            "label": "Bouteille",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0566-4",
+      "type": "mcq",
+      "prompt": "Qu'est-ce qui peut être de laine, d'avoine ou de neige ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Flocon",
+            "correct": true
+          },
+          {
+            "label": "Glaçon",
+            "correct": false
+          },
+          {
+            "label": "Fil",
+            "correct": false
+          },
+          {
+            "label": "Bas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

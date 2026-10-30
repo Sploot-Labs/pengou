@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=368"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0368-1",
+      "type": "mcq",
+      "prompt": "Quel facteur peut influencer la couleur du miel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lune",
+            "correct": false
+          },
+          {
+            "label": "Température",
+            "correct": false
+          },
+          {
+            "label": "Taille des abeilles",
+            "correct": false
+          },
+          {
+            "label": "Type de fleurs",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0368-2",
+      "type": "mcq",
+      "prompt": "Quel est le rôle principal du miel pour les abeilles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Refroidisseur",
+            "correct": false
+          },
+          {
+            "label": "Matériau",
+            "correct": false
+          },
+          {
+            "label": "Piège",
+            "correct": false
+          },
+          {
+            "label": "Nourriture",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0368-3",
+      "type": "mcq",
+      "prompt": "Quelle abeille est responsable de la production du miel dans la ruche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Faux-bourdon",
+            "correct": false
+          },
+          {
+            "label": "Ouvrière",
+            "correct": true
+          },
+          {
+            "label": "Bourdon",
+            "correct": false
+          },
+          {
+            "label": "Reine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0368-4",
+      "type": "mcq",
+      "prompt": "Combien de miel une abeille produit-elle en moyenne dans sa vie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1 kg",
+            "correct": false
+          },
+          {
+            "label": "10 kg",
+            "correct": false
+          },
+          {
+            "label": "1 g",
+            "correct": true
+          },
+          {
+            "label": "100 g",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

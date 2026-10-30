@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=488"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0488-1",
+      "type": "mcq",
+      "prompt": "Combien de temps dure un round de boxe chez les hommes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trois minutes",
+            "correct": true
+          },
+          {
+            "label": "Cinq minutes",
+            "correct": false
+          },
+          {
+            "label": "Deux minutes",
+            "correct": false
+          },
+          {
+            "label": "Quatre minutes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0488-2",
+      "type": "mcq",
+      "prompt": "En boxe, quel coup touche le boxeur adverse en passant sous sa garde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Direct",
+            "correct": false
+          },
+          {
+            "label": "Esquive",
+            "correct": false
+          },
+          {
+            "label": "Crochet",
+            "correct": false
+          },
+          {
+            "label": "Uppercut",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0488-3",
+      "type": "mcq",
+      "prompt": "Combien de temps un boxeur est-il compté avant de passer K.O. ?",
+      "payload": {
+        "options": [
+          {
+            "label": "10 secondes",
+            "correct": true
+          },
+          {
+            "label": "5 secondes",
+            "correct": false
+          },
+          {
+            "label": "15 secondes",
+            "correct": false
+          },
+          {
+            "label": "20 secondes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0488-4",
+      "type": "mcq",
+      "prompt": "Si vous pesez 48 kilos, dans quelle catégorie boxeriez-vous ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pailles",
+            "correct": false
+          },
+          {
+            "label": "Coqs",
+            "correct": false
+          },
+          {
+            "label": "Plumes",
+            "correct": false
+          },
+          {
+            "label": "Mouches",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

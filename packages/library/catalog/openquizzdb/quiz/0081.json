@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=81"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0081-1",
+      "type": "mcq",
+      "prompt": "Quel gâteau du « Père Noël est une ordure » possède une double couche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ragoutchi",
+            "correct": false
+          },
+          {
+            "label": "Klug",
+            "correct": true
+          },
+          {
+            "label": "Schtonk",
+            "correct": false
+          },
+          {
+            "label": "Doubitchou",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0081-2",
+      "type": "mcq",
+      "prompt": "Combien de doigts possède le gant tricoté par Thérèse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0081-3",
+      "type": "mcq",
+      "prompt": "Quel est le prénom de Gérard Jugnot dans « Le Père Noël est une ordure » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pierre",
+            "correct": false
+          },
+          {
+            "label": "Félix",
+            "correct": true
+          },
+          {
+            "label": "Gérard",
+            "correct": false
+          },
+          {
+            "label": "Roger",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0081-4",
+      "type": "mcq",
+      "prompt": "À quel réalisateur français doit-on le film « Le père Noël est une ordure » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alain Terzian",
+            "correct": false
+          },
+          {
+            "label": "Claude Zidi",
+            "correct": false
+          },
+          {
+            "label": "Patrice Ledoux",
+            "correct": false
+          },
+          {
+            "label": "Jean-Marie Poiré",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

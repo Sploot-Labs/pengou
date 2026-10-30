@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=183"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0183-1",
+      "type": "mcq",
+      "prompt": "Dans quelles aventures retrouve-t-on les personnages de Loïs et Clark ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Superman",
+            "correct": true
+          },
+          {
+            "label": "Spider-Man",
+            "correct": false
+          },
+          {
+            "label": "Batman",
+            "correct": false
+          },
+          {
+            "label": "Hulk",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0183-2",
+      "type": "mcq",
+      "prompt": "Quelle substance constitue le squelette principal de Wolverine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vibranium",
+            "correct": false
+          },
+          {
+            "label": "Cavorite",
+            "correct": false
+          },
+          {
+            "label": "Adamantium",
+            "correct": true
+          },
+          {
+            "label": "Neutronium",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0183-3",
+      "type": "mcq",
+      "prompt": "Quel jeune garçon est le principal compagnon d'armes de Batman ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tim Drake",
+            "correct": false
+          },
+          {
+            "label": "Superboy",
+            "correct": false
+          },
+          {
+            "label": "Robin",
+            "correct": true
+          },
+          {
+            "label": "Mystek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0183-4",
+      "type": "mcq",
+      "prompt": "Quel super-héros ne se sépare jamais de son marteau ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thunderbird",
+            "correct": false
+          },
+          {
+            "label": "Tornade",
+            "correct": false
+          },
+          {
+            "label": "Thor",
+            "correct": true
+          },
+          {
+            "label": "Tempest",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

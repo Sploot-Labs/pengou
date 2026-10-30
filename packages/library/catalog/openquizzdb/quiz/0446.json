@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=446"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0446-1",
+      "type": "mcq",
+      "prompt": "Dans quel film de Pixar un rat se révèle-t-il excellent cuisinier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cars",
+            "correct": false
+          },
+          {
+            "label": "Toy Story",
+            "correct": false
+          },
+          {
+            "label": "Monstres et Cie",
+            "correct": false
+          },
+          {
+            "label": "Ratatouille",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0446-2",
+      "type": "mcq",
+      "prompt": "Quelle souris de dessin animé est la plus rapide du Mexique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Speedy Gonzales",
+            "correct": true
+          },
+          {
+            "label": "Stuart Little",
+            "correct": false
+          },
+          {
+            "label": "Mickey Mouse",
+            "correct": false
+          },
+          {
+            "label": "Jerry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0446-3",
+      "type": "mcq",
+      "prompt": "Quels rongeurs sont les héros du film « Misson-G », sorti en 2009 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Souris",
+            "correct": false
+          },
+          {
+            "label": "Hamsters",
+            "correct": false
+          },
+          {
+            "label": "Cochons d'Inde",
+            "correct": true
+          },
+          {
+            "label": "Rats",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0446-4",
+      "type": "mcq",
+      "prompt": "À quelle série d'animation Eric et Ramzi ont-ils prêté leur voix ?",
+      "payload": {
+        "options": [
+          {
+            "label": "South Park",
+            "correct": false
+          },
+          {
+            "label": "Futurama",
+            "correct": false
+          },
+          {
+            "label": "Les Griffin",
+            "correct": false
+          },
+          {
+            "label": "Ratz",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

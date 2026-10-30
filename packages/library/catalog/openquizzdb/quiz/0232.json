@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=232"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0232-1",
+      "type": "mcq",
+      "prompt": "Qui est en lévitation sur la couverture des « Sept Boules de cristal » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tintin",
+            "correct": false
+          },
+          {
+            "label": "Thorgal",
+            "correct": false
+          },
+          {
+            "label": "Tournesol",
+            "correct": true
+          },
+          {
+            "label": "Tchang",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0232-2",
+      "type": "mcq",
+      "prompt": "De quelle ville française les Tourquennois sont-ils les habitants ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Toulouse",
+            "correct": false
+          },
+          {
+            "label": "Tournus",
+            "correct": false
+          },
+          {
+            "label": "Tours",
+            "correct": false
+          },
+          {
+            "label": "Tourcoing",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0232-3",
+      "type": "mcq",
+      "prompt": "Quel personnage des Looney Tunes dévore tout sur son passage ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tee",
+            "correct": false
+          },
+          {
+            "label": "Tag",
+            "correct": false
+          },
+          {
+            "label": "Taz",
+            "correct": true
+          },
+          {
+            "label": "Tux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0232-4",
+      "type": "mcq",
+      "prompt": "Quel site de micro blogging fut symbolisé par un oiseau bleu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tinder",
+            "correct": false
+          },
+          {
+            "label": "Twitter",
+            "correct": true
+          },
+          {
+            "label": "Tumblr",
+            "correct": false
+          },
+          {
+            "label": "Telegram",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

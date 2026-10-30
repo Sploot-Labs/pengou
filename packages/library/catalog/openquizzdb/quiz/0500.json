@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=500"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0500-1",
+      "type": "mcq",
+      "prompt": "Quel véhicule à cabine circule sur les routes enneigées ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Autoneige",
+            "correct": true
+          },
+          {
+            "label": "Téléphérique",
+            "correct": false
+          },
+          {
+            "label": "Aéroglisseur",
+            "correct": false
+          },
+          {
+            "label": "Chasse-neige",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0500-2",
+      "type": "mcq",
+      "prompt": "Quel mot d'usage courant en France désigne un véhicule habitable ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monocycle",
+            "correct": false
+          },
+          {
+            "label": "Camping-car",
+            "correct": true
+          },
+          {
+            "label": "Diligence",
+            "correct": false
+          },
+          {
+            "label": "Caravane",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0500-3",
+      "type": "mcq",
+      "prompt": "Quel avion possède la capacité de se poser ou de décoller sur l'eau ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hydravion",
+            "correct": true
+          },
+          {
+            "label": "Deltaplane",
+            "correct": false
+          },
+          {
+            "label": "Planeur",
+            "correct": false
+          },
+          {
+            "label": "ULM",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0500-4",
+      "type": "mcq",
+      "prompt": "Quelle motocyclette est pourvue d'une troisième roue et d'un panier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Solex",
+            "correct": false
+          },
+          {
+            "label": "Coccinelle",
+            "correct": false
+          },
+          {
+            "label": "Tandem",
+            "correct": false
+          },
+          {
+            "label": "Side-car",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=124"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0124-1",
+      "type": "mcq",
+      "prompt": "De quelle planète fictive sont originaires Superman et Supergirl ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Krusty",
+            "correct": false
+          },
+          {
+            "label": "Krypton",
+            "correct": true
+          },
+          {
+            "label": "Kamini",
+            "correct": false
+          },
+          {
+            "label": "Kirby",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0124-2",
+      "type": "mcq",
+      "prompt": "Quel groupe interpréta le titre à succès « I was made for loving you » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kodaline",
+            "correct": false
+          },
+          {
+            "label": "Kiss",
+            "correct": true
+          },
+          {
+            "label": "Korn",
+            "correct": false
+          },
+          {
+            "label": "Kraftwerk",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0124-3",
+      "type": "mcq",
+      "prompt": "Que fait-on en chantant et en suivant les paroles sur un écran ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Krusty",
+            "correct": false
+          },
+          {
+            "label": "Kaoma",
+            "correct": false
+          },
+          {
+            "label": "Kojiki",
+            "correct": false
+          },
+          {
+            "label": "Karaoké",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0124-4",
+      "type": "mcq",
+      "prompt": "Quel avertisseur sonore retrouve-t-on dans la plupart des voitures ?",
+      "payload": {
+        "options": [
+          {
+            "label": "K-way",
+            "correct": false
+          },
+          {
+            "label": "Kilt",
+            "correct": false
+          },
+          {
+            "label": "Kalachnikov",
+            "correct": false
+          },
+          {
+            "label": "Klaxon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

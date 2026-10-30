@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=233"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0233-1",
+      "type": "mcq",
+      "prompt": "Quel acteur donne la réplique à Keanu Reeves dans le film « Speed » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dennis Hopper",
+            "correct": true
+          },
+          {
+            "label": "Harvey Keittel",
+            "correct": false
+          },
+          {
+            "label": "Nicolas Cage",
+            "correct": false
+          },
+          {
+            "label": "Val Kilmer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0233-2",
+      "type": "mcq",
+      "prompt": "Quel hacker Keanu Reeves incarne-t-il dans la trilogie « Matrix » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Morpheus",
+            "correct": false
+          },
+          {
+            "label": "Neo",
+            "correct": true
+          },
+          {
+            "label": "Trinity",
+            "correct": false
+          },
+          {
+            "label": "Smith",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0233-3",
+      "type": "mcq",
+      "prompt": "Dans quelle franchise d'action incarne-t-il un ancien assassin redouté ?",
+      "payload": {
+        "options": [
+          {
+            "label": "John Wick",
+            "correct": true
+          },
+          {
+            "label": "The Equalizer",
+            "correct": false
+          },
+          {
+            "label": "Speed",
+            "correct": false
+          },
+          {
+            "label": "Taken",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0233-4",
+      "type": "mcq",
+      "prompt": "Pour quelle raison ne participa-t-il pas au tournage de « Speed 2 » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Son salaire",
+            "correct": false
+          },
+          {
+            "label": "Son poids",
+            "correct": true
+          },
+          {
+            "label": "Sa réputation",
+            "correct": false
+          },
+          {
+            "label": "Son caractère",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

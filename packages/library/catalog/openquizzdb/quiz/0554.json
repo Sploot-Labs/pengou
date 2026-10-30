@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=554"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0554-1",
+      "type": "mcq",
+      "prompt": "Quelle est la plus grande ville du Grand-Duché de Luxembourg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vianden",
+            "correct": false
+          },
+          {
+            "label": "Diekirch",
+            "correct": false
+          },
+          {
+            "label": "Luxembourg",
+            "correct": true
+          },
+          {
+            "label": "Wiltz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0554-2",
+      "type": "mcq",
+      "prompt": "Dans quel pays se trouve Ankara, aux origines très anciennes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Turquie",
+            "correct": true
+          },
+          {
+            "label": "Inde",
+            "correct": false
+          },
+          {
+            "label": "Birmanie",
+            "correct": false
+          },
+          {
+            "label": "Pakistan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0554-3",
+      "type": "mcq",
+      "prompt": "Quel fleuve d'Afrique occidentale borde le Sahel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Niger",
+            "correct": true
+          },
+          {
+            "label": "Zambèze",
+            "correct": false
+          },
+          {
+            "label": "Congo",
+            "correct": false
+          },
+          {
+            "label": "Sénégal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0554-4",
+      "type": "mcq",
+      "prompt": "Quelle mer est dépourvue de poissons et d'algues ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mer Jaune",
+            "correct": false
+          },
+          {
+            "label": "Mer Rouge",
+            "correct": false
+          },
+          {
+            "label": "Mer Blanche",
+            "correct": false
+          },
+          {
+            "label": "Mer Morte",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

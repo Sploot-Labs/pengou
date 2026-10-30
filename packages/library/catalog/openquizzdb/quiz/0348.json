@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=348"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0348-1",
+      "type": "mcq",
+      "prompt": "Quel bâtiment situé en montagne acceuille les randonneurs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Caserne",
+            "correct": false
+          },
+          {
+            "label": "Bunker",
+            "correct": false
+          },
+          {
+            "label": "Tenaille",
+            "correct": false
+          },
+          {
+            "label": "Refuge",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0348-2",
+      "type": "mcq",
+      "prompt": "Quelles couleurs indiquent les chemins de grande randonnée (GR) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vert et gris",
+            "correct": false
+          },
+          {
+            "label": "Rouge et blanc",
+            "correct": true
+          },
+          {
+            "label": "Jaune et rouge",
+            "correct": false
+          },
+          {
+            "label": "Bleu et vert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0348-3",
+      "type": "mcq",
+      "prompt": "Quel campement rudimentaire permet de dormir en pleine nature ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Guitoune",
+            "correct": false
+          },
+          {
+            "label": "Gîte",
+            "correct": false
+          },
+          {
+            "label": "Colonie",
+            "correct": false
+          },
+          {
+            "label": "Bivouac",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0348-4",
+      "type": "mcq",
+      "prompt": "Le trait rouge des GR est en fait la marque de quelle communauté ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alpinistes",
+            "correct": false
+          },
+          {
+            "label": "Montagnards",
+            "correct": false
+          },
+          {
+            "label": "Bûcherons",
+            "correct": true
+          },
+          {
+            "label": "Bergers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

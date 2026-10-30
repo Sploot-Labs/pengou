@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=433"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0433-1",
+      "type": "mcq",
+      "prompt": "Lequel de ces personnages n'est pas un des enfants de Marge Simpson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Abe",
+            "correct": true
+          },
+          {
+            "label": "Lisa",
+            "correct": false
+          },
+          {
+            "label": "Bart",
+            "correct": false
+          },
+          {
+            "label": "Maggie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0433-2",
+      "type": "mcq",
+      "prompt": "Comment se prénomme la mère de la Famille Addams ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aurora",
+            "correct": false
+          },
+          {
+            "label": "Eva",
+            "correct": false
+          },
+          {
+            "label": "Elvira",
+            "correct": false
+          },
+          {
+            "label": "Morticia",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0433-3",
+      "type": "mcq",
+      "prompt": "De quel héros de fiction Lily, tuée par Lord Voldemort, est-elle la mère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mowgli",
+            "correct": false
+          },
+          {
+            "label": "Harry Potter",
+            "correct": true
+          },
+          {
+            "label": "Luke Skywalker",
+            "correct": false
+          },
+          {
+            "label": "Frodon Sacquet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0433-4",
+      "type": "mcq",
+      "prompt": "Dans « Breaking Bad », quel est le prénom de la mère de la famille White ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jayne",
+            "correct": false
+          },
+          {
+            "label": "Angela",
+            "correct": false
+          },
+          {
+            "label": "Rhona",
+            "correct": false
+          },
+          {
+            "label": "Skyler",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

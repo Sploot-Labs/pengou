@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=607"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0607-1",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on les grandes collines de sable du littoral ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lagunes",
+            "correct": false
+          },
+          {
+            "label": "Monts",
+            "correct": false
+          },
+          {
+            "label": "Dunes",
+            "correct": true
+          },
+          {
+            "label": "Falaises",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0607-2",
+      "type": "mcq",
+      "prompt": "À quelle saison la plupart des arbres fleurissent-ils en Europe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Été",
+            "correct": false
+          },
+          {
+            "label": "Automne",
+            "correct": false
+          },
+          {
+            "label": "Hiver",
+            "correct": false
+          },
+          {
+            "label": "Printemps",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0607-3",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on un jeune mouton mâle de moins d'un an ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Agneau",
+            "correct": true
+          },
+          {
+            "label": "Biquette",
+            "correct": false
+          },
+          {
+            "label": "Bélier",
+            "correct": false
+          },
+          {
+            "label": "Bouc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0607-4",
+      "type": "mcq",
+      "prompt": "Quelle médaille reçoit le deuxième d'une épreuve aux JO ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Argent",
+            "correct": true
+          },
+          {
+            "label": "Cuivre",
+            "correct": false
+          },
+          {
+            "label": "Or",
+            "correct": false
+          },
+          {
+            "label": "Bronze",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

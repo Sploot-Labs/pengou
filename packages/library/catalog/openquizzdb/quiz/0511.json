@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=511"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0511-1",
+      "type": "mcq",
+      "prompt": "Quelle chanteuse britannique a interprété le hit « Kids in America » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Madonna",
+            "correct": false
+          },
+          {
+            "label": "Bonnie Thyler",
+            "correct": false
+          },
+          {
+            "label": "Kim Carnes",
+            "correct": false
+          },
+          {
+            "label": "Kim Wilde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-2",
+      "type": "mcq",
+      "prompt": "Quel groupe de rock suédois a chanté « The Final Countdown » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "ACDC",
+            "correct": false
+          },
+          {
+            "label": "Trust",
+            "correct": false
+          },
+          {
+            "label": "Europe",
+            "correct": true
+          },
+          {
+            "label": "Scorpions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-3",
+      "type": "mcq",
+      "prompt": "Quel groupe musical a interprété « Sweet Dreams (Are Made of This) » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sweet Sensation",
+            "correct": false
+          },
+          {
+            "label": "Sister Sledge",
+            "correct": false
+          },
+          {
+            "label": "Eurythmics",
+            "correct": true
+          },
+          {
+            "label": "Europe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-4",
+      "type": "mcq",
+      "prompt": "Quel est le titre du troisième single du groupe Alphaville ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Forever Young",
+            "correct": true
+          },
+          {
+            "label": "Forever Blue",
+            "correct": false
+          },
+          {
+            "label": "Forever Alive",
+            "correct": false
+          },
+          {
+            "label": "Forever Love",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

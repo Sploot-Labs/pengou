@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=275"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0275-1",
+      "type": "mcq",
+      "prompt": "Quelle ville est la capitale de la République d'Irlande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cork",
+            "correct": false
+          },
+          {
+            "label": "Galway",
+            "correct": false
+          },
+          {
+            "label": "Belfast",
+            "correct": false
+          },
+          {
+            "label": "Dublin",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0275-2",
+      "type": "mcq",
+      "prompt": "Quel symbole est traditionnellement associé à l'Irlande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lion",
+            "correct": false
+          },
+          {
+            "label": "Étoile",
+            "correct": false
+          },
+          {
+            "label": "Aigle",
+            "correct": false
+          },
+          {
+            "label": "Trèfle",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0275-3",
+      "type": "mcq",
+      "prompt": "Quelle boisson emblématique est consommée en Irlande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Guinness",
+            "correct": true
+          },
+          {
+            "label": "Tequila",
+            "correct": false
+          },
+          {
+            "label": "Champagne",
+            "correct": false
+          },
+          {
+            "label": "Saké",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0275-4",
+      "type": "mcq",
+      "prompt": "Quelle célébration populaire trouve ses origines en Irlande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pâques",
+            "correct": false
+          },
+          {
+            "label": "Halloween",
+            "correct": false
+          },
+          {
+            "label": "Noël",
+            "correct": false
+          },
+          {
+            "label": "Saint-Patrick",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

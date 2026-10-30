@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=418"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0418-1",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on les sensations olfactives du vin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bouquet",
+            "correct": true
+          },
+          {
+            "label": "Texture",
+            "correct": false
+          },
+          {
+            "label": "Nez",
+            "correct": false
+          },
+          {
+            "label": "Robe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0418-2",
+      "type": "mcq",
+      "prompt": "Quel verbe signifie refroidir un vin dans de la glace ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Forcer",
+            "correct": false
+          },
+          {
+            "label": "Frapper",
+            "correct": true
+          },
+          {
+            "label": "Froncer",
+            "correct": false
+          },
+          {
+            "label": "Figer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0418-3",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on un vin qui peut se garder longtemps et vieillir ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Échanson",
+            "correct": false
+          },
+          {
+            "label": "Graves",
+            "correct": false
+          },
+          {
+            "label": "Élixir",
+            "correct": false
+          },
+          {
+            "label": "Vin de garde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0418-4",
+      "type": "mcq",
+      "prompt": "Quel appareil permet une mesure directe du taux d'alcool d'un vin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oenolitre",
+            "correct": false
+          },
+          {
+            "label": "Ebullioscope",
+            "correct": false
+          },
+          {
+            "label": "Alcoomètre",
+            "correct": true
+          },
+          {
+            "label": "Barrica",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

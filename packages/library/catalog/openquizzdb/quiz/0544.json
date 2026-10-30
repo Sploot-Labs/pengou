@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=544"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0544-1",
+      "type": "mcq",
+      "prompt": "Comment s'intitule le premier double album studio de Johnny Hallyday ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Peur",
+            "correct": false
+          },
+          {
+            "label": "Gang",
+            "correct": false
+          },
+          {
+            "label": "Hamlet",
+            "correct": true
+          },
+          {
+            "label": "Insolitudes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0544-2",
+      "type": "mcq",
+      "prompt": "Combien de disques Johnny Hallyday a-t-il vendu de son vivant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "150 millions",
+            "correct": false
+          },
+          {
+            "label": "90 millions",
+            "correct": false
+          },
+          {
+            "label": "110 millions",
+            "correct": true
+          },
+          {
+            "label": "130 millions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0544-3",
+      "type": "mcq",
+      "prompt": "Quel artiste a écrit, composé et réalisé l'album « Rock'n'Roll Attitude » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yodelice",
+            "correct": false
+          },
+          {
+            "label": "Michel Berger",
+            "correct": true
+          },
+          {
+            "label": "Matthieu Chedid",
+            "correct": false
+          },
+          {
+            "label": "Pascal Obispo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0544-4",
+      "type": "mcq",
+      "prompt": "Avec quel label Johnny Hallyday a-t-il signé son premier disque ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Philips",
+            "correct": false
+          },
+          {
+            "label": "Warner",
+            "correct": false
+          },
+          {
+            "label": "Vogue",
+            "correct": true
+          },
+          {
+            "label": "Barclay",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

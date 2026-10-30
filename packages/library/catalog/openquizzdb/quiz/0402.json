@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=402"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0402-1",
+      "type": "mcq",
+      "prompt": "Quel métier fut exercé au Louvre par Jean-François Champollion ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Conservateur",
+            "correct": true
+          },
+          {
+            "label": "Architecte",
+            "correct": false
+          },
+          {
+            "label": "Archéologue",
+            "correct": false
+          },
+          {
+            "label": "Surveillant",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0402-2",
+      "type": "mcq",
+      "prompt": "Comment était utilisé le Louvre à sa construction en 1190 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "En ferme",
+            "correct": false
+          },
+          {
+            "label": "En forteresse",
+            "correct": true
+          },
+          {
+            "label": "En musée",
+            "correct": false
+          },
+          {
+            "label": "En bureau",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0402-3",
+      "type": "mcq",
+      "prompt": "Quelle exposition annuelle présentait au Louvre les artistes officiels ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Crèche",
+            "correct": false
+          },
+          {
+            "label": "La Vente",
+            "correct": false
+          },
+          {
+            "label": "La Biennale",
+            "correct": false
+          },
+          {
+            "label": "Le Salon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0402-4",
+      "type": "mcq",
+      "prompt": "Quand le Louvre est-il devenu un musée, le plus grand de Paris ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sous Mitterrand",
+            "correct": false
+          },
+          {
+            "label": "À la Révolution",
+            "correct": true
+          },
+          {
+            "label": "À l'Antiquité",
+            "correct": false
+          },
+          {
+            "label": "Au Moyen Âge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

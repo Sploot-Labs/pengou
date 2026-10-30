@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=220"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0220-1",
+      "type": "mcq",
+      "prompt": "Où étaient tournées les scènes extérieures de « Sous le soleil » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saint-Nazaire",
+            "correct": false
+          },
+          {
+            "label": "Saint-Brieuc",
+            "correct": false
+          },
+          {
+            "label": "Saint-Tropez",
+            "correct": true
+          },
+          {
+            "label": "Saint-Malo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0220-2",
+      "type": "mcq",
+      "prompt": "Quel est le prénom de l'animateur et chroniqueur français Cauet ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sébastien",
+            "correct": true
+          },
+          {
+            "label": "Simon",
+            "correct": false
+          },
+          {
+            "label": "Stan",
+            "correct": false
+          },
+          {
+            "label": "Stéphane",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0220-3",
+      "type": "mcq",
+      "prompt": "Quelle application permet d'identifier une chanson en l'écoutant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shazam",
+            "correct": true
+          },
+          {
+            "label": "Skype",
+            "correct": false
+          },
+          {
+            "label": "Spotify",
+            "correct": false
+          },
+          {
+            "label": "Snapchat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0220-4",
+      "type": "mcq",
+      "prompt": "Quelle est l'origine nationale du célèbre groupe musical ABBA ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Suédoise",
+            "correct": true
+          },
+          {
+            "label": "Serbe",
+            "correct": false
+          },
+          {
+            "label": "Suisse",
+            "correct": false
+          },
+          {
+            "label": "Slovaque",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

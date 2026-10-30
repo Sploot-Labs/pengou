@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=407"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0407-1",
+      "type": "mcq",
+      "prompt": "Combien d'yeux ont les extraterrestres de Pizza Planet dans « Toy Story » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Deux",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": true
+          },
+          {
+            "label": "Un seul",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0407-3",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le chien d'Andy dans la saga « Toy Story » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Razmotte",
+            "correct": true
+          },
+          {
+            "label": "Lotso",
+            "correct": false
+          },
+          {
+            "label": "Pile-Poil",
+            "correct": false
+          },
+          {
+            "label": "Scud",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0407-4",
+      "type": "mcq",
+      "prompt": "À qui appartiennent les jouets dont font partie Woody et ses amis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Andy",
+            "correct": true
+          },
+          {
+            "label": "Lisa",
+            "correct": false
+          },
+          {
+            "label": "Sid",
+            "correct": false
+          },
+          {
+            "label": "Daisy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

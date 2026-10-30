@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=352"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0352-1",
+      "type": "mcq",
+      "prompt": "Comment se présentent naturellement les cheveux des africains ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fourchus",
+            "correct": false
+          },
+          {
+            "label": "Frisés",
+            "correct": false
+          },
+          {
+            "label": "Crépus",
+            "correct": true
+          },
+          {
+            "label": "Lisses",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0352-2",
+      "type": "mcq",
+      "prompt": "Quel insecte parasite vit parfois dans les cheveux humains ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La mite",
+            "correct": false
+          },
+          {
+            "label": "La teigne",
+            "correct": false
+          },
+          {
+            "label": "La punaise",
+            "correct": false
+          },
+          {
+            "label": "Le pou",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0352-3",
+      "type": "mcq",
+      "prompt": "Quelle était la coupe de cheveux des premiers rockers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Banane",
+            "correct": true
+          },
+          {
+            "label": "Pomme",
+            "correct": false
+          },
+          {
+            "label": "Pêche",
+            "correct": false
+          },
+          {
+            "label": "Poire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0352-4",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on la partie non visible et vivante du cheveu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Follicule",
+            "correct": false
+          },
+          {
+            "label": "Pointe",
+            "correct": false
+          },
+          {
+            "label": "Racine",
+            "correct": true
+          },
+          {
+            "label": "Tige",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

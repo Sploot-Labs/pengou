@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=101"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0101-1",
+      "type": "mcq",
+      "prompt": "Quelle série retrace les aventures d'Assane Diop, interprété par Omar Sy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lupin",
+            "correct": true
+          },
+          {
+            "label": "Sweet Tooth",
+            "correct": false
+          },
+          {
+            "label": "The Circle",
+            "correct": false
+          },
+          {
+            "label": "You",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0101-2",
+      "type": "mcq",
+      "prompt": "Quel film met en scène Virginie Efira, Omar Sy et Grégory Gadebois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Police",
+            "correct": true
+          },
+          {
+            "label": "Benedetta",
+            "correct": false
+          },
+          {
+            "label": "Continuer",
+            "correct": false
+          },
+          {
+            "label": "Sibyl",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0101-3",
+      "type": "mcq",
+      "prompt": "Dans quel lieu Omar Sy exerce-t-il son talent dans « Le Chant du loup » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Forêt",
+            "correct": false
+          },
+          {
+            "label": "Église",
+            "correct": false
+          },
+          {
+            "label": "Théâtre",
+            "correct": false
+          },
+          {
+            "label": "Sous-marin",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0101-4",
+      "type": "mcq",
+      "prompt": "Pour quelle marque de boisson Omar Sy a-t-il fait plusieurs publicités ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ricqlès",
+            "correct": false
+          },
+          {
+            "label": "Ovomaltine",
+            "correct": false
+          },
+          {
+            "label": "Get 27",
+            "correct": false
+          },
+          {
+            "label": "Finley",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

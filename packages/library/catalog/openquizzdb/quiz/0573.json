@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=573"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0573-1",
+      "type": "mcq",
+      "prompt": "Contre quelle pathologie le magnésium est-il parfois conseillé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Boulimie",
+            "correct": false
+          },
+          {
+            "label": "Anorexie",
+            "correct": false
+          },
+          {
+            "label": "Asthme",
+            "correct": false
+          },
+          {
+            "label": "Stress",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0573-2",
+      "type": "mcq",
+      "prompt": "Lequel de ces troubles peut être lié à une carence en magnésium ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crampes",
+            "correct": true
+          },
+          {
+            "label": "Anorexie",
+            "correct": false
+          },
+          {
+            "label": "Asthme",
+            "correct": false
+          },
+          {
+            "label": "Boulimie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0573-3",
+      "type": "mcq",
+      "prompt": "Lequel de ces fruits est de loin le plus riche en magnésium ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poire",
+            "correct": false
+          },
+          {
+            "label": "Raisin",
+            "correct": false
+          },
+          {
+            "label": "Banane",
+            "correct": true
+          },
+          {
+            "label": "Pomme",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0573-4",
+      "type": "mcq",
+      "prompt": "Quel effet est provoqué par un excès de magnésium ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Excitant",
+            "correct": false
+          },
+          {
+            "label": "Anabolisant",
+            "correct": false
+          },
+          {
+            "label": "Somnolent",
+            "correct": false
+          },
+          {
+            "label": "Laxatif",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

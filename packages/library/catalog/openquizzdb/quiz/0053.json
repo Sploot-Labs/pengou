@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=53"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0053-1",
+      "type": "mcq",
+      "prompt": "Quel personnage Roger Moore et Sean Connery ont-ils interprété ?",
+      "payload": {
+        "options": [
+          {
+            "label": "James Bond",
+            "correct": true
+          },
+          {
+            "label": "Le Saint",
+            "correct": false
+          },
+          {
+            "label": "OSS 117",
+            "correct": false
+          },
+          {
+            "label": "Dick Tracy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0053-2",
+      "type": "mcq",
+      "prompt": "Quel film a réuni sur les écrans Sean Connery et Christophe Lambert ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Greystoke",
+            "correct": false
+          },
+          {
+            "label": "Highlander",
+            "correct": true
+          },
+          {
+            "label": "Mad Max",
+            "correct": false
+          },
+          {
+            "label": "Subway",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0053-3",
+      "type": "mcq",
+      "prompt": "De quel pays Sean Connery est-il originaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Etats-Unis",
+            "correct": false
+          },
+          {
+            "label": "Irlande",
+            "correct": false
+          },
+          {
+            "label": "Écosse",
+            "correct": true
+          },
+          {
+            "label": "Angleterre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0053-4",
+      "type": "mcq",
+      "prompt": "Quel single de Vangelis comprend un texte récité par Sean Connery ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mythodea",
+            "correct": false
+          },
+          {
+            "label": "Alexandre",
+            "correct": false
+          },
+          {
+            "label": "Pulstar",
+            "correct": false
+          },
+          {
+            "label": "Ithaka",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

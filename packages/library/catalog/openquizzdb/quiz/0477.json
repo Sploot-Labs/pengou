@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=477"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0477-1",
+      "type": "mcq",
+      "prompt": "Quelle fleur de la Toussaint est consommée en infusion en Chine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Myosotis",
+            "correct": false
+          },
+          {
+            "label": "Jasmin",
+            "correct": false
+          },
+          {
+            "label": "Gerbera",
+            "correct": false
+          },
+          {
+            "label": "Chrysanthème",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0477-2",
+      "type": "mcq",
+      "prompt": "La racine de quelle plante est réputée aphrodisiaque en infusion ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bardane",
+            "correct": false
+          },
+          {
+            "label": "Gingembre",
+            "correct": true
+          },
+          {
+            "label": "Topinambour",
+            "correct": false
+          },
+          {
+            "label": "Radis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0477-3",
+      "type": "mcq",
+      "prompt": "Quelle plante de jardin a des vertus digestives et respiratoires ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Estragon",
+            "correct": false
+          },
+          {
+            "label": "Thym",
+            "correct": true
+          },
+          {
+            "label": "Persil",
+            "correct": false
+          },
+          {
+            "label": "Ciboulette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0477-4",
+      "type": "mcq",
+      "prompt": "Quelle plante vivace est souvent confondue avec la citronnelle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sauge",
+            "correct": false
+          },
+          {
+            "label": "Sarriette",
+            "correct": false
+          },
+          {
+            "label": "Mélisse",
+            "correct": true
+          },
+          {
+            "label": "Romarin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

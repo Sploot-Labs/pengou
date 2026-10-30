@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=347"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0347-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale du Luxembourg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Metz",
+            "correct": false
+          },
+          {
+            "label": "Bruxelles",
+            "correct": false
+          },
+          {
+            "label": "Luxembourg",
+            "correct": true
+          },
+          {
+            "label": "Strasbourg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0347-2",
+      "type": "mcq",
+      "prompt": "Quelle est la forme de régime politique du Luxembourg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monarchie",
+            "correct": false
+          },
+          {
+            "label": "Fédération",
+            "correct": false
+          },
+          {
+            "label": "Grand-duché",
+            "correct": true
+          },
+          {
+            "label": "République",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0347-3",
+      "type": "mcq",
+      "prompt": "Quel est le nom du souverain du Luxembourg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Président",
+            "correct": false
+          },
+          {
+            "label": "Empereur",
+            "correct": false
+          },
+          {
+            "label": "Roi",
+            "correct": false
+          },
+          {
+            "label": "Grand-duc",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0347-4",
+      "type": "mcq",
+      "prompt": "Quel fleuve traverse le Luxembourg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rhin",
+            "correct": false
+          },
+          {
+            "label": "Moselle",
+            "correct": true
+          },
+          {
+            "label": "Danube",
+            "correct": false
+          },
+          {
+            "label": "Seine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -15,8 +15,8 @@ Les fichiers de ce dossier sont une adaptation des questions d'origine, produite
 `packages/library/scripts/convert-opentdb.ts` : conversion au format des packs Pengou, classement
 par thème (d'après la catégorie d'origine), difficulté (easy, medium, hard deviennent facile, moyen,
 difficile) et public, ordre des propositions déterminé par le script, regroupement en quiz de 15
-questions. Le texte des questions et des réponses n'est pas modifié, hormis la normalisation des
-espaces.
+questions, retrait des questions dont l'énoncé figure déjà plus haut. Le texte des questions et
+des réponses n'est pas modifié, hormis la normalisation des espaces.
 
 Cette adaptation est diffusée sous la même licence, CC BY-SA 4.0. Elle ne relève pas de la
 licence Apache-2.0 du code de Pengou.

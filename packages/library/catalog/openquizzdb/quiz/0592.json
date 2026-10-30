@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=592"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0592-1",
+      "type": "mcq",
+      "prompt": "Que stockent les cactus dans leurs tissus pour résister à la sécheresse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sucre",
+            "correct": false
+          },
+          {
+            "label": "Amidon",
+            "correct": false
+          },
+          {
+            "label": "Suc",
+            "correct": true
+          },
+          {
+            "label": "Sel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0592-2",
+      "type": "mcq",
+      "prompt": "Combien d'espèces environ comprend la famille des Cactaceae ?",
+      "payload": {
+        "options": [
+          {
+            "label": "3 500",
+            "correct": false
+          },
+          {
+            "label": "1 500",
+            "correct": false
+          },
+          {
+            "label": "4 500",
+            "correct": false
+          },
+          {
+            "label": "2 500",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0592-3",
+      "type": "mcq",
+      "prompt": "Dans quel pays le fait de ramasser des cactus est-il puni de prison ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Inde",
+            "correct": false
+          },
+          {
+            "label": "Argentine",
+            "correct": false
+          },
+          {
+            "label": "Mexique",
+            "correct": true
+          },
+          {
+            "label": "Algérie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0592-4",
+      "type": "mcq",
+      "prompt": "Dans quelles régions du globe les cactus poussent-ils le mieux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Déserts",
+            "correct": true
+          },
+          {
+            "label": "Prairies",
+            "correct": false
+          },
+          {
+            "label": "Plaines",
+            "correct": false
+          },
+          {
+            "label": "Montagnes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

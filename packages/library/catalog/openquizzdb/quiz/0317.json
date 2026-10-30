@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=317"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0317-1",
+      "type": "mcq",
+      "prompt": "Dans quel film apparaît-elle aux côtés de Leonardo DiCaprio ?",
+      "payload": {
+        "options": [
+          {
+            "label": "The revenant",
+            "correct": false
+          },
+          {
+            "label": "Inception",
+            "correct": true
+          },
+          {
+            "label": "Tenet",
+            "correct": false
+          },
+          {
+            "label": "Interstellar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0317-2",
+      "type": "mcq",
+      "prompt": "Dans quel film Marion Cotillard joue-t-elle aux côtés de Brad Pitt ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Allied",
+            "correct": true
+          },
+          {
+            "label": "Troy",
+            "correct": false
+          },
+          {
+            "label": "Fury",
+            "correct": false
+          },
+          {
+            "label": "Seven",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0317-3",
+      "type": "mcq",
+      "prompt": "Dans quelle saga populaire française est-elle apparue ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les Visiteurs",
+            "correct": false
+          },
+          {
+            "label": "OSS 117",
+            "correct": false
+          },
+          {
+            "label": "Astérix",
+            "correct": false
+          },
+          {
+            "label": "Taxi",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0317-4",
+      "type": "mcq",
+      "prompt": "Pour quel film a-t-elle remporté l'Oscar de la meilleure actrice ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Big Fish",
+            "correct": false
+          },
+          {
+            "label": "La Môme",
+            "correct": true
+          },
+          {
+            "label": "Cavalcade",
+            "correct": false
+          },
+          {
+            "label": "Lisa",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=536"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0536-1",
+      "type": "mcq",
+      "prompt": "Que mangent surtout les coccinelles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chenilles",
+            "correct": false
+          },
+          {
+            "label": "Fourmis",
+            "correct": false
+          },
+          {
+            "label": "Pucerons",
+            "correct": true
+          },
+          {
+            "label": "Moustiques",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0536-2",
+      "type": "mcq",
+      "prompt": "Quel environnement favorise les acariens ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chaud et humide",
+            "correct": true
+          },
+          {
+            "label": "Venteux",
+            "correct": false
+          },
+          {
+            "label": "Glacé",
+            "correct": false
+          },
+          {
+            "label": "Sec",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0536-3",
+      "type": "mcq",
+      "prompt": "Combien pèse environ la plus petite espèce de musaraigne connue ?",
+      "payload": {
+        "options": [
+          {
+            "label": "130 grammes",
+            "correct": false
+          },
+          {
+            "label": "70 grammes",
+            "correct": false
+          },
+          {
+            "label": "2 grammes",
+            "correct": true
+          },
+          {
+            "label": "20 grammes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0536-4",
+      "type": "mcq",
+      "prompt": "Comment les mille-pattes se protègent-ils de leurs prédateurs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Par leurs sécrétions",
+            "correct": true
+          },
+          {
+            "label": "En mordant",
+            "correct": false
+          },
+          {
+            "label": "Par camouflage",
+            "correct": false
+          },
+          {
+            "label": "En criant",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

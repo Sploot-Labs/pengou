@@ -1,0 +1,502 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0087-1",
+      "type": "mcq",
+      "prompt": "Que portent les silhouettes du trophée de la Coupe du monde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Flamme",
+            "correct": false
+          },
+          {
+            "label": "Sifflet",
+            "correct": false
+          },
+          {
+            "label": "Chaussure",
+            "correct": false
+          },
+          {
+            "label": "Globe terrestre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0087-2",
+      "type": "mcq",
+      "prompt": "Qui a été expulsé en finale de la Coupe du monde de football en 1998 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thierry Henry",
+            "correct": false
+          },
+          {
+            "label": "Marcel Desailly",
+            "correct": true
+          },
+          {
+            "label": "Laurent Blanc",
+            "correct": false
+          },
+          {
+            "label": "Franck Leboeuf",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0087-3",
+      "type": "mcq",
+      "prompt": "Quelle était la marque du ballon de la Coupe du monde de football 2002 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Adidas",
+            "correct": true
+          },
+          {
+            "label": "Reebok",
+            "correct": false
+          },
+          {
+            "label": "Nike",
+            "correct": false
+          },
+          {
+            "label": "Puma",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0087-4",
+      "type": "mcq",
+      "prompt": "Quelles trompettes furent utilisées par les supporters en 2010 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vovomelas",
+            "correct": false
+          },
+          {
+            "label": "Vivigalas",
+            "correct": false
+          },
+          {
+            "label": "Vavadolas",
+            "correct": false
+          },
+          {
+            "label": "Vuvuzelas",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0099-1",
+      "type": "mcq",
+      "prompt": "Quel gardien de but français est devenu pilote sur Porsche en 2008 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fabien Barthez",
+            "correct": true
+          },
+          {
+            "label": "Roland Amar",
+            "correct": false
+          },
+          {
+            "label": "Jean Castaneda",
+            "correct": false
+          },
+          {
+            "label": "Rudy Riou",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0099-2",
+      "type": "mcq",
+      "prompt": "Quel gardien de but a joué dix-sept ans pour le club de la Juventus ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gianluigi Buffon",
+            "correct": true
+          },
+          {
+            "label": "Dino Zoff",
+            "correct": false
+          },
+          {
+            "label": "Luciano Bodini",
+            "correct": false
+          },
+          {
+            "label": "Mattia Perin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0099-3",
+      "type": "mcq",
+      "prompt": "Quel gardien a joué son dernier match en Bundesliga en mai 2008 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jens Lehmann",
+            "correct": false
+          },
+          {
+            "label": "Sepp Maier",
+            "correct": false
+          },
+          {
+            "label": "Oliver Kahn",
+            "correct": true
+          },
+          {
+            "label": "Robert Enke",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0099-4",
+      "type": "mcq",
+      "prompt": "Qui est gardien de but dans le film « À nous la victoire » de John Huston ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jason Statham",
+            "correct": false
+          },
+          {
+            "label": "Bruce Willis",
+            "correct": false
+          },
+          {
+            "label": "Sylvester Stallone",
+            "correct": true
+          },
+          {
+            "label": "Tom Cruise",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0502-1",
+      "type": "mcq",
+      "prompt": "Combien de pays sont à l'origine de la création de la FIFA en 1904 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Douze",
+            "correct": false
+          },
+          {
+            "label": "Huit",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": true
+          },
+          {
+            "label": "Dix",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0502-2",
+      "type": "mcq",
+      "prompt": "Qui était le gardien de but du Benfica Lisbonne en 1981 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pedro Estrems",
+            "correct": false
+          },
+          {
+            "label": "Manuel Bento",
+            "correct": true
+          },
+          {
+            "label": "José Valero",
+            "correct": false
+          },
+          {
+            "label": "Carlos Medrano",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0502-3",
+      "type": "mcq",
+      "prompt": "Quel joueur de football portugais était souvent comparé à Pelé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Figo",
+            "correct": false
+          },
+          {
+            "label": "Manecas",
+            "correct": false
+          },
+          {
+            "label": "Eusébio",
+            "correct": true
+          },
+          {
+            "label": "Nani",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0502-4",
+      "type": "mcq",
+      "prompt": "Quel footballeur fut élu Meilleur joueur français de l'année 1989 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jean-Pierre Papin",
+            "correct": true
+          },
+          {
+            "label": "Michel Platini",
+            "correct": false
+          },
+          {
+            "label": "Alain Giresse",
+            "correct": false
+          },
+          {
+            "label": "Eric Cantona",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0400-1",
+      "type": "mcq",
+      "prompt": "Dans quel stade le FC Barcelone joue-t-il ses matchs à domicile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maracana",
+            "correct": false
+          },
+          {
+            "label": "Camp Nou",
+            "correct": true
+          },
+          {
+            "label": "Wembley",
+            "correct": false
+          },
+          {
+            "label": "Bernableu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0400-2",
+      "type": "mcq",
+      "prompt": "À quel club Zlatan Ibrahimovic a-t-il été acheté par le Barça en 2009 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Göteborg",
+            "correct": false
+          },
+          {
+            "label": "Leeds United",
+            "correct": false
+          },
+          {
+            "label": "Bayern Munich",
+            "correct": false
+          },
+          {
+            "label": "Inter Milan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0400-3",
+      "type": "mcq",
+      "prompt": "Qui a succédé à Pep Guardiola au Barça B en 2008 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Luis Figo",
+            "correct": false
+          },
+          {
+            "label": "Patrick Kluivert",
+            "correct": false
+          },
+          {
+            "label": "Luis Enrique",
+            "correct": true
+          },
+          {
+            "label": "Andoni Zubizarreta",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0400-4",
+      "type": "mcq",
+      "prompt": "Quelle croix apparaît sur l'emblème du FC Barcelone ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saint-Patrick",
+            "correct": false
+          },
+          {
+            "label": "Saint-Simon",
+            "correct": false
+          },
+          {
+            "label": "Saint-George",
+            "correct": true
+          },
+          {
+            "label": "Saint-Andrew",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-football",
+      "title": "Football",
+      "description": "D'après les quiz OpenQuizzDB « Coupe du monde de football », « Gardiens de but au football », « Histoire du foot » et « FC Barcelone ».",
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0087-1",
+        "oqdb-0087-2",
+        "oqdb-0087-3",
+        "oqdb-0087-4",
+        "oqdb-0099-1",
+        "oqdb-0099-2",
+        "oqdb-0099-3",
+        "oqdb-0099-4",
+        "oqdb-0502-1",
+        "oqdb-0502-2",
+        "oqdb-0502-3",
+        "oqdb-0502-4",
+        "oqdb-0400-1",
+        "oqdb-0400-2",
+        "oqdb-0400-3",
+        "oqdb-0400-4"
+      ]
+    }
+  ]
+}

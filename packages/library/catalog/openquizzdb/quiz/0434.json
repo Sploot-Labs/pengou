@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=434"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0434-1",
+      "type": "mcq",
+      "prompt": "Laquelle de ces propositions désigne un titre de Depeche Mode ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Little 13",
+            "correct": false
+          },
+          {
+            "label": "Little 21",
+            "correct": false
+          },
+          {
+            "label": "Little 9",
+            "correct": false
+          },
+          {
+            "label": "Little 15",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0434-2",
+      "type": "mcq",
+      "prompt": "Quel morceau instrumental apparaît sur l'album « Sounds of the Universe » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Introspectre",
+            "correct": false
+          },
+          {
+            "label": "Jazz Thieves",
+            "correct": false
+          },
+          {
+            "label": "Easy Tiger",
+            "correct": false
+          },
+          {
+            "label": "Spacewalker",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0434-3",
+      "type": "mcq",
+      "prompt": "Quel est le premier morceau écrit par Martin Gore pour Depeche Mode ?",
+      "payload": {
+        "options": [
+          {
+            "label": "See You",
+            "correct": true
+          },
+          {
+            "label": "Shout",
+            "correct": false
+          },
+          {
+            "label": "Leave in Silence",
+            "correct": false
+          },
+          {
+            "label": "New Life",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0434-4",
+      "type": "mcq",
+      "prompt": "Qui a écrit le célébrissime morceau « Just Can't Get Enough » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alan Wilder",
+            "correct": false
+          },
+          {
+            "label": "Martin Gore",
+            "correct": false
+          },
+          {
+            "label": "Dave Gahan",
+            "correct": false
+          },
+          {
+            "label": "Vince Clarke",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=556"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0556-1",
+      "type": "mcq",
+      "prompt": "Quelles constructions ont été érigées le long du cours de la Durance ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Musées",
+            "correct": false
+          },
+          {
+            "label": "Barrages",
+            "correct": true
+          },
+          {
+            "label": "Hôpitaux",
+            "correct": false
+          },
+          {
+            "label": "Écoles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0556-2",
+      "type": "mcq",
+      "prompt": "Dans quel type de catégorie de cours d'eau peut-on classer la Durance ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ruisseau",
+            "correct": false
+          },
+          {
+            "label": "Fleuve",
+            "correct": false
+          },
+          {
+            "label": "Rivière",
+            "correct": true
+          },
+          {
+            "label": "Canal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0556-3",
+      "type": "mcq",
+      "prompt": "Quel écrivain s'être fortement inspiré de la Durance pour son oeuvre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pierre Martel",
+            "correct": false
+          },
+          {
+            "label": "Jean Proal",
+            "correct": false
+          },
+          {
+            "label": "Jean Giono",
+            "correct": true
+          },
+          {
+            "label": "Pierre Magnan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0556-4",
+      "type": "mcq",
+      "prompt": "Dans quel fleuve la Durance se jette-t-elle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Garonne",
+            "correct": false
+          },
+          {
+            "label": "Rhône",
+            "correct": true
+          },
+          {
+            "label": "Seine",
+            "correct": false
+          },
+          {
+            "label": "Meuse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

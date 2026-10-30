@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=39"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0039-1",
+      "type": "mcq",
+      "prompt": "Qui a réalisé le film de guerre « Platoon », inspiré par sa propre vie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brian De Palma",
+            "correct": false
+          },
+          {
+            "label": "Clint Eastwood",
+            "correct": false
+          },
+          {
+            "label": "John Woo",
+            "correct": false
+          },
+          {
+            "label": "Oliver Stone",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0039-2",
+      "type": "mcq",
+      "prompt": "Dans quel film de guerre Clint Eastwood incarne-t-il Tom Highway ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Sanction",
+            "correct": false
+          },
+          {
+            "label": "Platoon",
+            "correct": false
+          },
+          {
+            "label": "Le Canardeur",
+            "correct": false
+          },
+          {
+            "label": "Le Maître de guerre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0039-3",
+      "type": "mcq",
+      "prompt": "Dans quel film de guerre américain Jean Reno incarne-t-il un capitaine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Premier Cercle",
+            "correct": false
+          },
+          {
+            "label": "Blindés",
+            "correct": false
+          },
+          {
+            "label": "Flyboys",
+            "correct": true
+          },
+          {
+            "label": "Ronin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0039-4",
+      "type": "mcq",
+      "prompt": "Quel film de guerre commence par une allocution du général Patton ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Full Metal Jacket",
+            "correct": false
+          },
+          {
+            "label": "Platoon",
+            "correct": false
+          },
+          {
+            "label": "Outrages",
+            "correct": false
+          },
+          {
+            "label": "Patton",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

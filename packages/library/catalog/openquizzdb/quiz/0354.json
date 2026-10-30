@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=354"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0354-1",
+      "type": "mcq",
+      "prompt": "Comment Jacquouille appelle-t-il le postier dans le film « Les Visiteurs » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Noir",
+            "correct": false
+          },
+          {
+            "label": "Sarrazin",
+            "correct": true
+          },
+          {
+            "label": "Vilain",
+            "correct": false
+          },
+          {
+            "label": "Gueux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0354-2",
+      "type": "mcq",
+      "prompt": "Quelle est la réplique mythique de Jacquouille dans « Les Visiteurs » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Voui",
+            "correct": false
+          },
+          {
+            "label": "D'accord",
+            "correct": false
+          },
+          {
+            "label": "Oui messire",
+            "correct": false
+          },
+          {
+            "label": "Okay",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0354-3",
+      "type": "mcq",
+      "prompt": "Où se dresse le château de Godefroy dans le film « Les Visiteurs » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mont-de-Marsan",
+            "correct": false
+          },
+          {
+            "label": "Montmirail",
+            "correct": true
+          },
+          {
+            "label": "Mont-Dore",
+            "correct": false
+          },
+          {
+            "label": "Montargis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0354-4",
+      "type": "mcq",
+      "prompt": "De qui Jacquouille tombe-t-il amoureux dans « Les Visiteurs » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dame Janette",
+            "correct": false
+          },
+          {
+            "label": "Dame Josette",
+            "correct": false
+          },
+          {
+            "label": "Dame Gilberte",
+            "correct": false
+          },
+          {
+            "label": "Dame Ginette",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

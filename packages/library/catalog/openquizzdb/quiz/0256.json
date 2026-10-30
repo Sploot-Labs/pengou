@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=256"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0256-1",
+      "type": "mcq",
+      "prompt": "Dans quelle ville peut-on admirer le très touristique pont des Soupirs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Valence",
+            "correct": false
+          },
+          {
+            "label": "Venise",
+            "correct": true
+          },
+          {
+            "label": "Vérone",
+            "correct": false
+          },
+          {
+            "label": "Versailles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0256-2",
+      "type": "mcq",
+      "prompt": "À quel violoniste et compositeur doit-on « Les Quatre Saisons » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vivaldi",
+            "correct": true
+          },
+          {
+            "label": "Vassiliev",
+            "correct": false
+          },
+          {
+            "label": "Vitali",
+            "correct": false
+          },
+          {
+            "label": "Verdi",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0256-3",
+      "type": "mcq",
+      "prompt": "Quelle ville est depuis 1596 la capitale de la Pologne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vilnius",
+            "correct": false
+          },
+          {
+            "label": "Vaduz",
+            "correct": false
+          },
+          {
+            "label": "Vienne",
+            "correct": false
+          },
+          {
+            "label": "Varsovie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

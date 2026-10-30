@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=463"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0463-1",
+      "type": "mcq",
+      "prompt": "Quel surnom est donné aux joueurs de football du Standard de Liège ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les Chônes",
+            "correct": false
+          },
+          {
+            "label": "Les Ferts",
+            "correct": false
+          },
+          {
+            "label": "Les Bleusses",
+            "correct": false
+          },
+          {
+            "label": "Les Rouches",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0463-3",
+      "type": "mcq",
+      "prompt": "En quelle année Eddy Merckx a-t-il remporté son premier Tour de France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1967",
+            "correct": false
+          },
+          {
+            "label": "1971",
+            "correct": false
+          },
+          {
+            "label": "1965",
+            "correct": false
+          },
+          {
+            "label": "1969",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0463-4",
+      "type": "mcq",
+      "prompt": "Quel est le sport le plus populaire en Belgique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Football",
+            "correct": true
+          },
+          {
+            "label": "Hockey",
+            "correct": false
+          },
+          {
+            "label": "Tennis",
+            "correct": false
+          },
+          {
+            "label": "Cyclisme",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

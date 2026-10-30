@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=366"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0366-1",
+      "type": "mcq",
+      "prompt": "En quelle année fut fondée l'entreprise à but lucratif plafonné OpenAI ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2019",
+            "correct": false
+          },
+          {
+            "label": "2017",
+            "correct": false
+          },
+          {
+            "label": "2021",
+            "correct": false
+          },
+          {
+            "label": "2015",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0366-2",
+      "type": "mcq",
+      "prompt": "Dans quelle ville des États-Unis se situe le siège social d'OpenAI ?",
+      "payload": {
+        "options": [
+          {
+            "label": "San Francisco",
+            "correct": true
+          },
+          {
+            "label": "Miami",
+            "correct": false
+          },
+          {
+            "label": "Los Angeles",
+            "correct": false
+          },
+          {
+            "label": "Chicago",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0366-3",
+      "type": "mcq",
+      "prompt": "Qui a quitté OpenAI en 2018 à la suite d'un conflit de direction ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ilya Sutskever",
+            "correct": false
+          },
+          {
+            "label": "Elon Musk",
+            "correct": true
+          },
+          {
+            "label": "Greg Brockman",
+            "correct": false
+          },
+          {
+            "label": "Sam Altman",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0366-4",
+      "type": "mcq",
+      "prompt": "Quel outil d'OpenAI peut générer du texte de manière autonome ?",
+      "payload": {
+        "options": [
+          {
+            "label": "OpenChat",
+            "correct": false
+          },
+          {
+            "label": "AlphaGo",
+            "correct": false
+          },
+          {
+            "label": "DALL-E",
+            "correct": false
+          },
+          {
+            "label": "ChatGPT",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

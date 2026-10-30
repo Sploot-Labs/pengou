@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=121"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0121-1",
+      "type": "mcq",
+      "prompt": "Quel club évolue au stade Pierre-Mauroy de Villeneuve-d'Ascq ?",
+      "payload": {
+        "options": [
+          {
+            "label": "RC Lens",
+            "correct": false
+          },
+          {
+            "label": "LOSC Lille",
+            "correct": true
+          },
+          {
+            "label": "Amiens SC",
+            "correct": false
+          },
+          {
+            "label": "Valenciennes FC",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0121-2",
+      "type": "mcq",
+      "prompt": "Le stade du Moustoir accueille des festivals et quel club résident ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vannes Olympique",
+            "correct": false
+          },
+          {
+            "label": "FC Lorient",
+            "correct": true
+          },
+          {
+            "label": "Stade Brestois 29",
+            "correct": false
+          },
+          {
+            "label": "AJ Auxerre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0121-3",
+      "type": "mcq",
+      "prompt": "Quel est le véritable nom du stade de Furiani, utilisé par le FC Bastia ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Victor-Lorenzi",
+            "correct": false
+          },
+          {
+            "label": "Jean-Bouin",
+            "correct": false
+          },
+          {
+            "label": "Armand-Cesari",
+            "correct": true
+          },
+          {
+            "label": "Claude-Papi",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0121-4",
+      "type": "mcq",
+      "prompt": "Quel est le surnom du stade Geoffroy-Guichard, situé à Saint-Étienne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Marmite",
+            "correct": false
+          },
+          {
+            "label": "La Cuvette",
+            "correct": false
+          },
+          {
+            "label": "Le Puits",
+            "correct": false
+          },
+          {
+            "label": "Le Chaudron",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

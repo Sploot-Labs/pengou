@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=221"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0221-1",
+      "type": "mcq",
+      "prompt": "Quel rôle apportera à Jennifer Lawrence une notoriété internationale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aurora Lane",
+            "correct": false
+          },
+          {
+            "label": "Katniss Everdeen",
+            "correct": true
+          },
+          {
+            "label": "Mystique",
+            "correct": false
+          },
+          {
+            "label": "Bella Swan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0221-2",
+      "type": "mcq",
+      "prompt": "Qui a choisi Jennifer Lawrence pour jouer « Le Complexe du castor » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Holly Hunter",
+            "correct": false
+          },
+          {
+            "label": "Jodie Foster",
+            "correct": true
+          },
+          {
+            "label": "Susan Sarandon",
+            "correct": false
+          },
+          {
+            "label": "Meryl Streep",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0221-3",
+      "type": "mcq",
+      "prompt": "Quel acteur incarne le mari de Jennifer Lawrence dans « Mother! » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michael Fassbender",
+            "correct": false
+          },
+          {
+            "label": "Ed Harris",
+            "correct": false
+          },
+          {
+            "label": "Robert de Niro",
+            "correct": false
+          },
+          {
+            "label": "Javier Bardem",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0221-4",
+      "type": "mcq",
+      "prompt": "De quel parfum Dior Jennifer Lawrence est-elle devenue le visage ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joy",
+            "correct": true
+          },
+          {
+            "label": "J'adore",
+            "correct": false
+          },
+          {
+            "label": "Jimmy Choo",
+            "correct": false
+          },
+          {
+            "label": "Joop",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

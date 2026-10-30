@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=589"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0589-1",
+      "type": "mcq",
+      "prompt": "Combien de trous compte généralement un parcours de golf ?",
+      "payload": {
+        "options": [
+          {
+            "label": "16",
+            "correct": false
+          },
+          {
+            "label": "12",
+            "correct": false
+          },
+          {
+            "label": "14",
+            "correct": false
+          },
+          {
+            "label": "18",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0589-2",
+      "type": "mcq",
+      "prompt": "Quelle pièce de sable pimente le jeu au golf ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grip",
+            "correct": false
+          },
+          {
+            "label": "Bunker",
+            "correct": true
+          },
+          {
+            "label": "Fairway",
+            "correct": false
+          },
+          {
+            "label": "Rough",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0589-3",
+      "type": "mcq",
+      "prompt": "Quel nom donne-t-on à la zone d'herbe située autour du trou au golf ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Green",
+            "correct": true
+          },
+          {
+            "label": "Rough",
+            "correct": false
+          },
+          {
+            "label": "Fairway",
+            "correct": false
+          },
+          {
+            "label": "Bunker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0589-4",
+      "type": "mcq",
+      "prompt": "Qui peut conseiller un joueur sur le parcours de golf ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Caddie",
+            "correct": true
+          },
+          {
+            "label": "Arbitre",
+            "correct": false
+          },
+          {
+            "label": "Practice",
+            "correct": false
+          },
+          {
+            "label": "Capitaine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

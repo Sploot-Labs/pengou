@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Gérard Le Bras",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=560"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0560-1",
+      "type": "mcq",
+      "prompt": "À l'entrée de quel golfe se situe la ville de Vannes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Du Lion",
+            "correct": false
+          },
+          {
+            "label": "Du Morbihan",
+            "correct": true
+          },
+          {
+            "label": "De Saint Florent",
+            "correct": false
+          },
+          {
+            "label": "De Sagone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0560-2",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on les habitants de la ville de Vannes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vannetais",
+            "correct": true
+          },
+          {
+            "label": "Vannois",
+            "correct": false
+          },
+          {
+            "label": "Vannais",
+            "correct": false
+          },
+          {
+            "label": "Vannetois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0560-3",
+      "type": "mcq",
+      "prompt": "Vannes se situe entre Quimper et quelle autre grande ville de France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bordeaux",
+            "correct": false
+          },
+          {
+            "label": "Bourges",
+            "correct": false
+          },
+          {
+            "label": "Nantes",
+            "correct": true
+          },
+          {
+            "label": "Laval",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0560-4",
+      "type": "mcq",
+      "prompt": "Quel peuple de Gaule celtique occupait le pays de Vannes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wisigoths",
+            "correct": false
+          },
+          {
+            "label": "Vanètes",
+            "correct": false
+          },
+          {
+            "label": "Vénigoths",
+            "correct": false
+          },
+          {
+            "label": "Vénètes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

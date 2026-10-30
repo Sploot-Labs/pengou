@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=569"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0569-1",
+      "type": "mcq",
+      "prompt": "Quel soda de Coca-Cola concurrence directement le 7 Up ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fanta",
+            "correct": false
+          },
+          {
+            "label": "Bonaqua",
+            "correct": false
+          },
+          {
+            "label": "Sprite",
+            "correct": true
+          },
+          {
+            "label": "Nalu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0569-3",
+      "type": "mcq",
+      "prompt": "Quel thé glacé est produit conjointement par Nestlé et Coca-Cola ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nestea",
+            "correct": true
+          },
+          {
+            "label": "Arizona",
+            "correct": false
+          },
+          {
+            "label": "May Tea",
+            "correct": false
+          },
+          {
+            "label": "Virgin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0569-4",
+      "type": "mcq",
+      "prompt": "Dans quelle ville de Géorgie se situe le siège de la société Coca-Cola ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dalton",
+            "correct": false
+          },
+          {
+            "label": "Atlanta",
+            "correct": true
+          },
+          {
+            "label": "Albany",
+            "correct": false
+          },
+          {
+            "label": "Brunswick",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

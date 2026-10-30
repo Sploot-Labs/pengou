@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=157"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0157-1",
+      "type": "mcq",
+      "prompt": "Quelle destination estivale est surtout connue pour sa tour penchée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Athènes",
+            "correct": false
+          },
+          {
+            "label": "Pise",
+            "correct": true
+          },
+          {
+            "label": "Barcelone",
+            "correct": false
+          },
+          {
+            "label": "Paris",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0157-2",
+      "type": "mcq",
+      "prompt": "Quelle île grecque affiche maisons blanches et dômes bleus ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mykonos",
+            "correct": false
+          },
+          {
+            "label": "Santorin",
+            "correct": true
+          },
+          {
+            "label": "Rhodes",
+            "correct": false
+          },
+          {
+            "label": "Crète",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0157-3",
+      "type": "mcq",
+      "prompt": "Dans quelles îles caribéennes marchez-vous sur du sable rose ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grenade",
+            "correct": false
+          },
+          {
+            "label": "Bahamas",
+            "correct": true
+          },
+          {
+            "label": "La Barbade",
+            "correct": false
+          },
+          {
+            "label": "Sainte-Lucie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0157-4",
+      "type": "mcq",
+      "prompt": "Quelle île européenne est réputée pour ses fjords et aurores boréales ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Norvège",
+            "correct": false
+          },
+          {
+            "label": "Finlande",
+            "correct": false
+          },
+          {
+            "label": "Suède",
+            "correct": false
+          },
+          {
+            "label": "Islande",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

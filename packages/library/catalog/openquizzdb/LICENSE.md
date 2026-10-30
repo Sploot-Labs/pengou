@@ -16,7 +16,8 @@ proposé sous licence Creative Commons CC BY-SA Attribution-ShareAlike 4.0 Inter
 Les fichiers de ce dossier sont une adaptation des quiz d'origine, produite par le script
 `packages/library/scripts/convert-openquizzdb.ts` : conversion au format des packs Pengou,
 classement par thème, difficulté (« moyen » par défaut, la source n'en indiquant pas) et public,
-regroupement en quiz de 10 à 20 questions, retrait des anecdotes et des liens Wikipédia. Le texte
+regroupement en quiz de 10 à 20 questions, retrait des anecdotes, des liens Wikipédia et des
+questions dont l'énoncé figure déjà dans un quiz source de numéro inférieur. Le texte
 des questions et des propositions n'est pas modifié, hormis la normalisation des espaces.
 
 Cette adaptation est diffusée sous la même licence, CC BY-SA 4.0. Elle ne relève pas de la
@@ -25,6 +26,12 @@ licence Apache-2.0 du code de Pengou.
 ## Attribution
 
 Attribution à reprendre : « Questions issues d'OpenQuizzDB (https://www.openquizzdb.org), sous licence CC BY-SA 4.0 ».
+
+Chaque pack porte sa propre source, reprise sur chaque question copiée dans Pengou : le dossier
+`quiz/` contient un pack par quiz source, dont la source nomme le rédacteur (« OpenQuizzDB,
+<rédacteur> ») et pointe vers la page du quiz sur OpenQuizzDB ; le dossier `composes/` contient un
+pack par quiz composé, dont la source nomme le rédacteur commun ou « OpenQuizzDB, plusieurs
+auteurs » et pointe vers le site. Le détail par quiz source figure ci-dessous.
 
 Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 
@@ -59,7 +66,7 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 77, « Charles Aznavour », rédigé par Philippe Bresoux (4 questions, thème musique) : https://www.openquizzdb.org/download.php?id=77
 - n° 79, « Slogans publicitaires », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=79
 - n° 81, « Le Père Noël est une ordure », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=81
-- n° 83, « Serge Gainsbourg », rédigé par Philippe Bresoux (4 questions, thème musique) : https://www.openquizzdb.org/download.php?id=83
+- n° 83, « Serge Gainsbourg », rédigé par Philippe Bresoux (3 questions, thème musique) : https://www.openquizzdb.org/download.php?id=83
 - n° 85, « Romans de science-fiction », rédigé par Philippe Bresoux (4 questions, thème litterature) : https://www.openquizzdb.org/download.php?id=85
 - n° 87, « Coupe du monde de football », rédigé par Philippe Bresoux (4 questions, thème sport) : https://www.openquizzdb.org/download.php?id=87
 - n° 88, « Alphaquizz #H », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=88
@@ -70,7 +77,7 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 100, « Alphaquizz #I », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=100
 - n° 101, « Omar Sy », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=101
 - n° 103, « Vers l’infini et au-delà », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=103
-- n° 105, « Bienvenue chez les Schtroumpfs », rédigé par Philippe Bresoux (4 questions, thème litterature) : https://www.openquizzdb.org/download.php?id=105
+- n° 105, « Bienvenue chez les Schtroumpfs », rédigé par Philippe Bresoux (3 questions, thème litterature) : https://www.openquizzdb.org/download.php?id=105
 - n° 107, « Dany Boon », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=107
 - n° 109, « Animaux en chiffres », rédigé par Philippe Bresoux (4 questions, thème nature) : https://www.openquizzdb.org/download.php?id=109
 - n° 111, « Les héros de l’Ironman », rédigé par Philippe Bresoux (4 questions, thème sport) : https://www.openquizzdb.org/download.php?id=111
@@ -84,7 +91,7 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 131, « Sharon Stone », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=131
 - n° 133, « Sports de raquette », rédigé par Philippe Bresoux (4 questions, thème sport) : https://www.openquizzdb.org/download.php?id=133
 - n° 135, « Nombreux nombres », rédigé par Philippe Bresoux (4 questions, thème sciences) : https://www.openquizzdb.org/download.php?id=135
-- n° 136, « Alphaquizz #L », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=136
+- n° 136, « Alphaquizz #L », rédigé par Philippe Bresoux (3 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=136
 - n° 139, « Alan Turing », rédigé par Philippe Bresoux (4 questions, thème sciences) : https://www.openquizzdb.org/download.php?id=139
 - n° 141, « Rendez-vous au bar », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=141
 - n° 145, « Céramique et poterie », rédigé par Philippe Bresoux (4 questions, thème art) : https://www.openquizzdb.org/download.php?id=145
@@ -144,7 +151,7 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 251, « Bulgarie », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=251
 - n° 253, « Joueurs de tennis », rédigé par Philippe Bresoux (4 questions, thème sport) : https://www.openquizzdb.org/download.php?id=253
 - n° 255, « La vie de château », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=255
-- n° 256, « Alphaquizz #V », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=256
+- n° 256, « Alphaquizz #V », rédigé par Philippe Bresoux (3 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=256
 - n° 257, « Allemagne », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=257
 - n° 261, « Jeux olympiques », rédigé par Philippe Bresoux (4 questions, thème sport) : https://www.openquizzdb.org/download.php?id=261
 - n° 263, « Danemark », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=263
@@ -158,7 +165,7 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 281, « Quentin Tarantino », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=281
 - n° 283, « Bruxelles ma Belle », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=283
 - n° 287, « Jul », rédigé par Philippe Bresoux (4 questions, thème musique) : https://www.openquizzdb.org/download.php?id=287
-- n° 289, « Applications web », rédigé par Philippe Bresoux (4 questions, thème sciences) : https://www.openquizzdb.org/download.php?id=289
+- n° 289, « Applications web », rédigé par Philippe Bresoux (3 questions, thème sciences) : https://www.openquizzdb.org/download.php?id=289
 - n° 291, « Dragons », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=291
 - n° 292, « Alphaquizz #Y », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=292
 - n° 293, « Antoine Griezmann », rédigé par Philippe Bresoux (4 questions, thème sport) : https://www.openquizzdb.org/download.php?id=293
@@ -209,7 +216,7 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 358, « Sites touristiques », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=358
 - n° 359, « Autriche », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=359
 - n° 360, « Villes du monde », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=360
-- n° 361, « Des pays à visiter », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=361
+- n° 361, « Des pays à visiter », rédigé par Philippe Bresoux (3 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=361
 - n° 363, « Jean-Michel Jarre », rédigé par Philippe Bresoux (4 questions, thème musique) : https://www.openquizzdb.org/download.php?id=363
 - n° 364, « Jurassic Park », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=364
 - n° 365, « Portugal », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=365
@@ -226,13 +233,13 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 376, « Ponts en longueur », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=376
 - n° 377, « Sculpture », rédigé par Philippe Bresoux (4 questions, thème art) : https://www.openquizzdb.org/download.php?id=377
 - n° 378, « Basket européen », rédigé par Philippe Bresoux (4 questions, thème sport) : https://www.openquizzdb.org/download.php?id=378
-- n° 379, « Tranchées à Hollywood », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=379
+- n° 379, « Tranchées à Hollywood », rédigé par Philippe Bresoux (3 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=379
 - n° 380, « Chimie », rédigé par Philippe Bresoux (4 questions, thème sciences) : https://www.openquizzdb.org/download.php?id=380
 - n° 381, « Chasse aux insectes », rédigé par Philippe Bresoux (4 questions, thème nature) : https://www.openquizzdb.org/download.php?id=381
 - n° 382, « NBA », rédigé par Philippe Bresoux (4 questions, thème sport) : https://www.openquizzdb.org/download.php?id=382
 - n° 383, « Les géants de la Terre », rédigé par Philippe Bresoux (4 questions, thème nature) : https://www.openquizzdb.org/download.php?id=383
 - n° 384, « Actrices dans la saga Alien », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=384
-- n° 385, « Règles du basket », rédigé par Philippe Bresoux (4 questions, thème sport) : https://www.openquizzdb.org/download.php?id=385
+- n° 385, « Règles du basket », rédigé par Philippe Bresoux (3 questions, thème sport) : https://www.openquizzdb.org/download.php?id=385
 - n° 386, « Boucles de corde », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=386
 - n° 389, « Androïdes dans Alien », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=389
 - n° 390, « Cuisine étrangère », rédigé par Philippe Bresoux (4 questions, thème gastronomie) : https://www.openquizzdb.org/download.php?id=390
@@ -251,7 +258,7 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 404, « Peuples dans l’histoire », rédigé par Philippe Bresoux (4 questions, thème histoire) : https://www.openquizzdb.org/download.php?id=404
 - n° 405, « Musée du Louvre », rédigé par Philippe Bresoux (4 questions, thème art) : https://www.openquizzdb.org/download.php?id=405
 - n° 406, « Maxime Chattam », rédigé par Philippe Bresoux (4 questions, thème litterature) : https://www.openquizzdb.org/download.php?id=406
-- n° 407, « Toy Story », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=407
+- n° 407, « Toy Story », rédigé par Philippe Bresoux (3 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=407
 - n° 408, « Héros de Star Wars », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=408
 - n° 409, « Romans de Maxime Chattam », rédigé par Philippe Bresoux (4 questions, thème litterature) : https://www.openquizzdb.org/download.php?id=409
 - n° 410, « Héros de Toy Story », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=410
@@ -273,7 +280,7 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 427, « Marques de café », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=427
 - n° 428, « Les îles du Globe », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=428
 - n° 429, « Depeche Mode », rédigé par Philippe Bresoux (4 questions, thème musique) : https://www.openquizzdb.org/download.php?id=429
-- n° 430, « Canada », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=430
+- n° 430, « Canada », rédigé par Philippe Bresoux (3 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=430
 - n° 431, « Méditerranée côté Français », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=431
 - n° 433, « Mamans de fiction », rédigé par Philippe Bresoux (4 questions, thème cinema) : https://www.openquizzdb.org/download.php?id=433
 - n° 434, « Titres de Depeche Mode », rédigé par Philippe Bresoux (4 questions, thème musique) : https://www.openquizzdb.org/download.php?id=434
@@ -299,8 +306,8 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 459, « Tintin », rédigé par Philippe Bresoux (4 questions, thème litterature) : https://www.openquizzdb.org/download.php?id=459
 - n° 460, « Objets et accessoires », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=460
 - n° 461, « Alerte climat », rédigé par Philippe Bresoux (4 questions, thème nature) : https://www.openquizzdb.org/download.php?id=461
-- n° 463, « Sport en Belgique », rédigé par Philippe Bresoux (4 questions, thème sport) : https://www.openquizzdb.org/download.php?id=463
-- n° 464, « Albums de Tintin », rédigé par Philippe Bresoux (4 questions, thème litterature) : https://www.openquizzdb.org/download.php?id=464
+- n° 463, « Sport en Belgique », rédigé par Philippe Bresoux (3 questions, thème sport) : https://www.openquizzdb.org/download.php?id=463
+- n° 464, « Albums de Tintin », rédigé par Philippe Bresoux (3 questions, thème litterature) : https://www.openquizzdb.org/download.php?id=464
 - n° 465, « Instruments de mesure », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=465
 - n° 466, « Romantisme », rédigé par Philippe Bresoux (4 questions, thème art) : https://www.openquizzdb.org/download.php?id=466
 - n° 467, « Les couleurs », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=467
@@ -319,7 +326,7 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 488, « Boxe », rédigé par Philippe Bresoux (4 questions, thème sport) : https://www.openquizzdb.org/download.php?id=488
 - n° 489, « Saints », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=489
 - n° 490, « Planche à voile », rédigé par Philippe Bresoux (4 questions, thème sport) : https://www.openquizzdb.org/download.php?id=490
-- n° 491, « Oiseaux », rédigé par Philippe Bresoux (4 questions, thème nature) : https://www.openquizzdb.org/download.php?id=491
+- n° 491, « Oiseaux », rédigé par Philippe Bresoux (3 questions, thème nature) : https://www.openquizzdb.org/download.php?id=491
 - n° 494, « Surnoms des auteurs », rédigé par Philippe Bresoux (4 questions, thème litterature) : https://www.openquizzdb.org/download.php?id=494
 - n° 495, « Connus pour un seul titre », rédigé par Philippe Bresoux (4 questions, thème musique) : https://www.openquizzdb.org/download.php?id=495
 - n° 496, « Week-end à Rome », rédigé par Philippe Bresoux (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=496
@@ -374,12 +381,12 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 560, « Ville de Vannes », rédigé par Gérard Le Bras (4 questions, thème geographie) : https://www.openquizzdb.org/download.php?id=560
 - n° 561, « Chansons de France Gall », rédigé par Philippe Bresoux (4 questions, thème musique) : https://www.openquizzdb.org/download.php?id=561
 - n° 562, « The Cure », rédigé par Philippe Bresoux (4 questions, thème musique) : https://www.openquizzdb.org/download.php?id=562
-- n° 563, « Volcans en activité », rédigé par Philippe Bresoux (4 questions, thème nature) : https://www.openquizzdb.org/download.php?id=563
+- n° 563, « Volcans en activité », rédigé par Philippe Bresoux (3 questions, thème nature) : https://www.openquizzdb.org/download.php?id=563
 - n° 565, « Albums de France Gall », rédigé par Philippe Bresoux (4 questions, thème musique) : https://www.openquizzdb.org/download.php?id=565
 - n° 566, « Élémentaire mon cher Watson », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=566
 - n° 567, « Super-héroïnes », rédigé par Philippe Bresoux (4 questions, thème litterature) : https://www.openquizzdb.org/download.php?id=567
 - n° 568, « Forêts de France », rédigé par Philippe Bresoux (4 questions, thème nature) : https://www.openquizzdb.org/download.php?id=568
-- n° 569, « Coca-Cola Company », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=569
+- n° 569, « Coca-Cola Company », rédigé par Philippe Bresoux (3 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=569
 - n° 571, « Albums du groupe The Cure », rédigé par Philippe Bresoux (4 questions, thème musique) : https://www.openquizzdb.org/download.php?id=571
 - n° 572, « Variantes du Coca-Cola », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=572
 - n° 573, « Magnésium et santé », rédigé par Philippe Bresoux (4 questions, thème sciences) : https://www.openquizzdb.org/download.php?id=573

@@ -1,0 +1,472 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0077-1",
+      "type": "mcq",
+      "prompt": "Pour quel pays Aznavour joua-t-il un rôle actif dans la collecte de fonds ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Arménie",
+            "correct": true
+          },
+          {
+            "label": "Lituanie",
+            "correct": false
+          },
+          {
+            "label": "Ukraine",
+            "correct": false
+          },
+          {
+            "label": "Grèce",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0077-2",
+      "type": "mcq",
+      "prompt": "Quelle saison est citée dans « La Bohème » de Charles Aznavour ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hiver",
+            "correct": true
+          },
+          {
+            "label": "Été",
+            "correct": false
+          },
+          {
+            "label": "Printemps",
+            "correct": false
+          },
+          {
+            "label": "Automne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0077-3",
+      "type": "mcq",
+      "prompt": "Quel était le véritable nom du chanteur français Charles Aznavour ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aznavourian",
+            "correct": true
+          },
+          {
+            "label": "Aznavourev",
+            "correct": false
+          },
+          {
+            "label": "Aznavouriak",
+            "correct": false
+          },
+          {
+            "label": "Aznavour",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0077-4",
+      "type": "mcq",
+      "prompt": "« La Mamma » a été écrite pour Aznavour par le père de quelle artiste ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mireille Mathieu",
+            "correct": false
+          },
+          {
+            "label": "Sheila",
+            "correct": false
+          },
+          {
+            "label": "Dalida",
+            "correct": false
+          },
+          {
+            "label": "France Gall",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0029-1",
+      "type": "mcq",
+      "prompt": "Dans quelle région habite la dame chantée par Francis Cabrel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gironde",
+            "correct": false
+          },
+          {
+            "label": "Ardèche",
+            "correct": false
+          },
+          {
+            "label": "Haute-Savoie",
+            "correct": true
+          },
+          {
+            "label": "Haute-Corse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0029-2",
+      "type": "mcq",
+      "prompt": "De quoi sont faits les murs du premier album de Francis Cabrel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "De briques",
+            "correct": false
+          },
+          {
+            "label": "De poussière",
+            "correct": true
+          },
+          {
+            "label": "De paille",
+            "correct": false
+          },
+          {
+            "label": "De terre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0029-3",
+      "type": "mcq",
+      "prompt": "Quel artiste a eu une forte influence dans la carrière de Francis Cabrel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bob Dylan",
+            "correct": true
+          },
+          {
+            "label": "Jimmy Page",
+            "correct": false
+          },
+          {
+            "label": "Elvis Presley",
+            "correct": false
+          },
+          {
+            "label": "Frank Sinatra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0029-4",
+      "type": "mcq",
+      "prompt": "Qui a parodié Francis Cabrel avec « Ma Cabane au fond du jardin » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nicolas Canteloup",
+            "correct": false
+          },
+          {
+            "label": "Laurent Gerra",
+            "correct": true
+          },
+          {
+            "label": "Didier Gustin",
+            "correct": false
+          },
+          {
+            "label": "Jean Roucas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0083-2",
+      "type": "mcq",
+      "prompt": "Quel prénom Serge Gainsbourg écrit-il sur sa Remington portative ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lola",
+            "correct": false
+          },
+          {
+            "label": "Léa",
+            "correct": false
+          },
+          {
+            "label": "Loane",
+            "correct": false
+          },
+          {
+            "label": "Lætitia",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0083-3",
+      "type": "mcq",
+      "prompt": "Pour qui Serge Gainsbourg a-t-il écrit « Les petits papiers » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Catherine Deneuve",
+            "correct": false
+          },
+          {
+            "label": "Brigitte Bardot",
+            "correct": false
+          },
+          {
+            "label": "Régine",
+            "correct": true
+          },
+          {
+            "label": "Jane Birkin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0083-4",
+      "type": "mcq",
+      "prompt": "En 1986, avec qui Serge Gainsbourg a-t-il créé un incident télévisé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sacha Distel",
+            "correct": false
+          },
+          {
+            "label": "Jean Ferrat",
+            "correct": false
+          },
+          {
+            "label": "Guy Béart",
+            "correct": true
+          },
+          {
+            "label": "Adamo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0417-1",
+      "type": "mcq",
+      "prompt": "Quel gagnant de le « Nouvelle Star » est surnommé « la Tortue » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Julien Doré",
+            "correct": false
+          },
+          {
+            "label": "Steeve Estatof",
+            "correct": false
+          },
+          {
+            "label": "Christophe Willem",
+            "correct": true
+          },
+          {
+            "label": "Amel Bent",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0417-2",
+      "type": "mcq",
+      "prompt": "En 1991, quel tube Yannick Noah a-t-il associé à la coupe Davis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les Lionnes",
+            "correct": false
+          },
+          {
+            "label": "Saga Africa",
+            "correct": true
+          },
+          {
+            "label": "Vagabond",
+            "correct": false
+          },
+          {
+            "label": "Ose",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0417-3",
+      "type": "mcq",
+      "prompt": "Quel chanteur prénommé Mathieu est issu du groupe Linkup ?",
+      "payload": {
+        "options": [
+          {
+            "label": "M. Pokora",
+            "correct": true
+          },
+          {
+            "label": "Corneille",
+            "correct": false
+          },
+          {
+            "label": "Raphaël",
+            "correct": false
+          },
+          {
+            "label": "Keen'V",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0417-4",
+      "type": "mcq",
+      "prompt": "Quel est le style musical de l'album de Rohff, « La fierté des années » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tango",
+            "correct": false
+          },
+          {
+            "label": "Disco",
+            "correct": false
+          },
+          {
+            "label": "Rap",
+            "correct": true
+          },
+          {
+            "label": "Techno",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-chanson-francaise",
+      "title": "Chanson française",
+      "description": "D'après les quiz OpenQuizzDB « Charles Aznavour », « Francis Cabrel », « Serge Gainsbourg » et « Chanteurs français ».",
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0077-1",
+        "oqdb-0077-2",
+        "oqdb-0077-3",
+        "oqdb-0077-4",
+        "oqdb-0029-1",
+        "oqdb-0029-2",
+        "oqdb-0029-3",
+        "oqdb-0029-4",
+        "oqdb-0083-2",
+        "oqdb-0083-3",
+        "oqdb-0083-4",
+        "oqdb-0417-1",
+        "oqdb-0417-2",
+        "oqdb-0417-3",
+        "oqdb-0417-4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=31"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0031-1",
+      "type": "mcq",
+      "prompt": "Que vous fournira-t-on pour mettre sur vos frites aux États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pickles",
+            "correct": false
+          },
+          {
+            "label": "Ketchup",
+            "correct": true
+          },
+          {
+            "label": "Mayonnaise",
+            "correct": false
+          },
+          {
+            "label": "Tartare",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0031-2",
+      "type": "mcq",
+      "prompt": "Que vous fournira-t-on avec le sel pour vos frites en Angleterre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vinaigre",
+            "correct": true
+          },
+          {
+            "label": "Lait",
+            "correct": false
+          },
+          {
+            "label": "Sucre",
+            "correct": false
+          },
+          {
+            "label": "Sirop",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0031-3",
+      "type": "mcq",
+      "prompt": "Quel mets québécois est constitué de frites et de cheddar frais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poutine",
+            "correct": true
+          },
+          {
+            "label": "Cipaille",
+            "correct": false
+          },
+          {
+            "label": "Tourtière",
+            "correct": false
+          },
+          {
+            "label": "Gibelotte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0031-4",
+      "type": "mcq",
+      "prompt": "Quelle entreprise est fournisseur historique de frites chez McDonald's ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Flodor",
+            "correct": false
+          },
+          {
+            "label": "Lutosa",
+            "correct": false
+          },
+          {
+            "label": "McCain",
+            "correct": true
+          },
+          {
+            "label": "Intersnack",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

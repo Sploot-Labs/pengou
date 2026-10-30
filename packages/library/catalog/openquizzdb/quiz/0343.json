@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=343"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0343-1",
+      "type": "mcq",
+      "prompt": "Qui tient le rôle de Jacques Mayol dans le film « Le Grand Bleu » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jean-Marc Barr",
+            "correct": true
+          },
+          {
+            "label": "Paul Shenar",
+            "correct": false
+          },
+          {
+            "label": "Marc Duret",
+            "correct": false
+          },
+          {
+            "label": "Jean Reno",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0343-2",
+      "type": "mcq",
+      "prompt": "Dans quel pays se déroule la première scène du film « Le Grand Bleu » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "Grèce",
+            "correct": true
+          },
+          {
+            "label": "Sicile",
+            "correct": false
+          },
+          {
+            "label": "Espagne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0343-3",
+      "type": "mcq",
+      "prompt": "Quel est le plat favori de Johanna Baker dans le film « Le Grand Bleu » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les pâtes",
+            "correct": true
+          },
+          {
+            "label": "Les pizzas",
+            "correct": false
+          },
+          {
+            "label": "Le tiramisu",
+            "correct": false
+          },
+          {
+            "label": "Les lasagnes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0343-4",
+      "type": "mcq",
+      "prompt": "Dans quelle langue le film « Le Grand Bleu » a-t-il été tourné ?",
+      "payload": {
+        "options": [
+          {
+            "label": "En anglais",
+            "correct": true
+          },
+          {
+            "label": "En grec",
+            "correct": false
+          },
+          {
+            "label": "En français",
+            "correct": false
+          },
+          {
+            "label": "En espagnol",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

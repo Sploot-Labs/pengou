@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=283"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0283-1",
+      "type": "mcq",
+      "prompt": "À quel endroit du territoire belge est située la ville de Bruxelles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sud",
+            "correct": false
+          },
+          {
+            "label": "Ouest",
+            "correct": false
+          },
+          {
+            "label": "Centre",
+            "correct": true
+          },
+          {
+            "label": "Nord",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0283-2",
+      "type": "mcq",
+      "prompt": "Le Bois de la Cambre est une extension de quelle forêt historique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chaux",
+            "correct": false
+          },
+          {
+            "label": "Soignes",
+            "correct": true
+          },
+          {
+            "label": "Retz",
+            "correct": false
+          },
+          {
+            "label": "Brotonne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0283-3",
+      "type": "mcq",
+      "prompt": "Comment est couramment nommé l'aéroport de Bruxelles-National ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zwevegem",
+            "correct": false
+          },
+          {
+            "label": "Zandhoven",
+            "correct": false
+          },
+          {
+            "label": "Zottegem",
+            "correct": false
+          },
+          {
+            "label": "Zaventem",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0283-4",
+      "type": "mcq",
+      "prompt": "Quel style architectural est lié à Victor Horta et Henry Van de Velde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Art déco",
+            "correct": false
+          },
+          {
+            "label": "Art baroque",
+            "correct": false
+          },
+          {
+            "label": "Art moderne",
+            "correct": false
+          },
+          {
+            "label": "Art nouveau",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

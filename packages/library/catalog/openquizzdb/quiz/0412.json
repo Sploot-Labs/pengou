@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=412"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0412-1",
+      "type": "mcq",
+      "prompt": "Comment s'appelle la recherche des lieux de tournage d'un film ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Storyboard",
+            "correct": false
+          },
+          {
+            "label": "Repérage",
+            "correct": true
+          },
+          {
+            "label": "Montage",
+            "correct": false
+          },
+          {
+            "label": "Casting",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0412-2",
+      "type": "mcq",
+      "prompt": "Combien de personnes ont voté pour l'attribution des Oscars en 2026 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Environ 3 000",
+            "correct": false
+          },
+          {
+            "label": "Environ 10 000",
+            "correct": true
+          },
+          {
+            "label": "Environ 2 000",
+            "correct": false
+          },
+          {
+            "label": "Environ 1 000",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0412-3",
+      "type": "mcq",
+      "prompt": "Quel pays le film « Les Dieux sont tombés sur la tête » fit-il connaître ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Botswana",
+            "correct": true
+          },
+          {
+            "label": "Gabon",
+            "correct": false
+          },
+          {
+            "label": "Zambie",
+            "correct": false
+          },
+          {
+            "label": "Rwanda",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0412-4",
+      "type": "mcq",
+      "prompt": "Quelle comédienne américaine a créé une forme de gymnastique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Diane Keaton",
+            "correct": false
+          },
+          {
+            "label": "Jane Fonda",
+            "correct": true
+          },
+          {
+            "label": "Sally Field",
+            "correct": false
+          },
+          {
+            "label": "Faye Dunaway",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

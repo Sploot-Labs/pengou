@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=177"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0177-1",
+      "type": "mcq",
+      "prompt": "Passé minuit, en quoi le carrosse de Cendrillon se transforme-t-il ?",
+      "payload": {
+        "options": [
+          {
+            "label": "En citrouille",
+            "correct": true
+          },
+          {
+            "label": "En gâteau",
+            "correct": false
+          },
+          {
+            "label": "En souris",
+            "correct": false
+          },
+          {
+            "label": "En pomme",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0177-2",
+      "type": "mcq",
+      "prompt": "Qui chante « Un jour, mon prince viendra » dans un dessin animé Disney ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jasmine",
+            "correct": false
+          },
+          {
+            "label": "Alice",
+            "correct": false
+          },
+          {
+            "label": "Blanche-Neige",
+            "correct": true
+          },
+          {
+            "label": "Cendrillon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0177-3",
+      "type": "mcq",
+      "prompt": "Quelle couleur est associée à Aurore dans « La Belle au bois dormant » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bleue",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          },
+          {
+            "label": "Rose",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0177-4",
+      "type": "mcq",
+      "prompt": "Quelle princesse Disney est une sirène vivant auprès du roi Triton ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Merida",
+            "correct": false
+          },
+          {
+            "label": "Tiana",
+            "correct": false
+          },
+          {
+            "label": "Jasmine",
+            "correct": false
+          },
+          {
+            "label": "Ariel",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

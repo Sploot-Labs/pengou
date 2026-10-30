@@ -7,8 +7,9 @@
 // il doit rester hors du dépôt. Un fichier déjà en cache n'est pas retéléchargé, ce qui rend la
 // conversion reproductible : relancer le script sur le même cache produit les mêmes packs.
 //
-// Sortie : packages/library/catalog/openquizzdb/<thème>.json (un pack par thème Pengou) et
-// LICENSE.md (licence et attribution détaillée, quiz source par quiz source).
+// Sortie : packages/library/catalog/openquizzdb/composes/<quiz>.json (un pack par quiz composé),
+// quiz/<n°>.json (un pack par autre quiz source, dont la source cite le rédacteur et la page du quiz)
+// et LICENSE.md (licence et attribution détaillée, quiz source par quiz source).
 
 import { existsSync } from 'node:fs'
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises'
@@ -18,7 +19,8 @@ import { readCatalog } from '../src/index.ts'
 const SITE = 'https://www.openquizzdb.org'
 const OUT_DIR = fileURLToPath(new URL('../catalog/openquizzdb', import.meta.url))
 const CATALOG_DIR = fileURLToPath(new URL('../catalog', import.meta.url))
-const SOURCE = { name: 'OpenQuizzDB', license: 'CC BY-SA 4.0', url: SITE }
+const LICENSE = 'CC BY-SA 4.0'
+const quizPage = (id: number) => `${SITE}/download.php?id=${id}`
 const PREFIX = 'oqdb'
 
 // Catégories OpenQuizzDB (ancres de la page de liste) vers thèmes Pengou. Les catégories absentes
@@ -59,6 +61,7 @@ const THEME_OVERRIDES: Record<number, string> = {
 // Quiz source centrés sur l'alcool : public « adultes ». Tous les autres : « tous ».
 const ADULT_QUIZZES = new Set<number>([
   141, // Rendez-vous au bar
+  575, // Une larme de gin
   189, // Bières belges
   396, // Boissons hors des frontières
   418, // Vocabulaire du vin
@@ -179,6 +182,17 @@ async function loadQuiz(cache: string, id: number): Promise<RawQuiz> {
 
 const clean = (s: string) => s.replace(/\s+/g, ' ').trim()
 
+// Clé de comparaison des énoncés : minuscules, sans diacritiques, espaces normalisés.
+const normalizePrompt = (s: string) =>
+  clean(
+    s
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .toLowerCase(),
+  )
+
+type Credit = { entry: ListingEntry; author: string; theme: string; count: number }
+
 type OutQuestion = {
   id: string
   type: 'mcq'
@@ -222,40 +236,68 @@ async function main() {
   const selected = listing.filter((e) => e.category in CATEGORY_THEME)
   console.log(`${listing.length} quiz listés, ${selected.length} retenus`)
 
-  const byTheme = new Map<string, OutQuestion[]>()
+  // Énoncés en double d'un quiz source à l'autre : seule la première occurrence (ordre des numéros
+  // de quiz source) est gardée.
+  const seenPrompts = new Map<string, string>()
   const questionsBySource = new Map<number, OutQuestion[]>()
-  const credits: { entry: ListingEntry; author: string; theme: string; count: number }[] = []
+  const authors = new Map<number, string>()
+  const credits: Credit[] = []
+  let duplicates = 0
   for (const entry of selected.sort((a, b) => a.id - b.id)) {
     const theme = THEME_OVERRIDES[entry.id] ?? CATEGORY_THEME[entry.category]
     const raw = await loadQuiz(cache, entry.id)
     const kept: OutQuestion[] = []
     for (const q of raw.quizz) {
       const out = convertQuestion(entry, theme, q)
-      if (typeof out === 'string') console.warn(`quiz ${entry.id} question ${q.id} écartée : ${out}`)
-      else kept.push(out)
+      if (typeof out === 'string') {
+        console.warn(`quiz ${entry.id} question ${q.id} écartée : ${out}`)
+        continue
+      }
+      const key = normalizePrompt(out.prompt)
+      const first = seenPrompts.get(key)
+      if (first) {
+        console.warn(`${out.id} écartée : même énoncé que ${first}`)
+        duplicates++
+        continue
+      }
+      seenPrompts.set(key, out.id)
+      kept.push(out)
     }
     if (kept.length === 0) continue
+    const author = clean(raw.rédacteur)
     questionsBySource.set(entry.id, kept)
-    byTheme.set(theme, [...(byTheme.get(theme) ?? []), ...kept])
-    credits.push({ entry, author: clean(raw.rédacteur), theme, count: kept.length })
+    authors.set(entry.id, author)
+    credits.push({ entry, author, theme, count: kept.length })
   }
+  console.log(`${duplicates} questions écartées comme doublons`)
 
-  const quizzesByTheme = new Map<string, unknown[]>()
+  // Un pack par quiz composé (ses questions et le quiz) et un pack par quiz source restant : la source
+  // d'un pack s'applique à toutes ses questions, ce qui permet de citer le rédacteur et la page du
+  // quiz source sur chaque question.
+  await rm(OUT_DIR, { recursive: true, force: true })
+  await mkdir(`${OUT_DIR}/composes`, { recursive: true })
+  await mkdir(`${OUT_DIR}/quiz`, { recursive: true })
+  const used = new Set<number>()
+  let total = 0
   for (const plan of QUIZZES) {
     const titles: string[] = []
-    const questionIds: string[] = []
+    const questions: OutQuestion[] = []
+    const planAuthors = new Set<string>()
     for (const id of plan.sources) {
       const qs = questionsBySource.get(id)
       const entry = listing.find((e) => e.id === id)
       if (!qs || !entry) throw new Error(`quiz « ${plan.slug} » : quiz source ${id} indisponible`)
+      if (used.has(id)) throw new Error(`quiz « ${plan.slug} » : quiz source ${id} déjà utilisé`)
       if (qs.some((q) => q.theme !== plan.theme || q.audience !== 'tous')) {
         throw new Error(`quiz « ${plan.slug} » : quiz source ${id} hors thème ou hors public « tous »`)
       }
+      used.add(id)
       titles.push(`« ${entry.title} »`)
-      questionIds.push(...qs.map((q) => q.id))
+      questions.push(...qs)
+      planAuthors.add(authors.get(id) ?? '')
     }
-    if (questionIds.length < 10 || questionIds.length > 20) {
-      throw new Error(`quiz « ${plan.slug} » : ${questionIds.length} questions (10 à 20 attendues)`)
+    if (questions.length < 10 || questions.length > 20) {
+      throw new Error(`quiz « ${plan.slug} » : ${questions.length} questions (10 à 20 attendues)`)
     }
     const list = `${titles.slice(0, -1).join(', ')} et ${titles.at(-1)}`
     const quiz = {
@@ -266,18 +308,24 @@ async function main() {
       difficulty: DIFFICULTY,
       language: 'fr',
       audience: 'tous',
-      questionIds,
+      questionIds: questions.map((q) => q.id),
     }
-    quizzesByTheme.set(plan.theme, [...(quizzesByTheme.get(plan.theme) ?? []), quiz])
+    const name = planAuthors.size === 1 ? `OpenQuizzDB, ${[...planAuthors][0]}` : 'OpenQuizzDB, plusieurs auteurs'
+    const pack = { source: { name, license: LICENSE, url: SITE }, questions, quizzes: [quiz] }
+    await writeFile(`${OUT_DIR}/composes/${plan.slug}.json`, `${JSON.stringify(pack, null, 2)}
+`)
+    total += questions.length
   }
-
-  await rm(OUT_DIR, { recursive: true, force: true })
-  await mkdir(OUT_DIR, { recursive: true })
-  for (const [theme, questions] of [...byTheme].sort(([a], [b]) => a.localeCompare(b))) {
-    const pack = { source: SOURCE, questions, quizzes: quizzesByTheme.get(theme) ?? [] }
-    await writeFile(`${OUT_DIR}/${theme}.json`, `${JSON.stringify(pack, null, 2)}\n`)
-    console.log(`${theme} : ${questions.length} questions, ${pack.quizzes.length} quiz`)
+  for (const [id, questions] of questionsBySource) {
+    if (used.has(id)) continue
+    const source = { name: `OpenQuizzDB, ${authors.get(id)}`, license: LICENSE, url: quizPage(id) }
+    const pack = { source, questions, quizzes: [] }
+    await writeFile(`${OUT_DIR}/quiz/${String(id).padStart(4, '0')}.json`, `${JSON.stringify(pack, null, 2)}
+`)
+    total += questions.length
   }
+  const rest = questionsBySource.size - used.size
+  console.log(`${total} questions, ${QUIZZES.length} quiz composés, ${rest} packs de quiz source`)
   await writeFile(`${OUT_DIR}/LICENSE.md`, licenseFile(credits))
 
   // Vérification : le catalogue complet doit se lire sans erreur.
@@ -286,11 +334,11 @@ async function main() {
   console.log(`fichiers : ${(await readdir(OUT_DIR)).join(', ')}`)
 }
 
-function licenseFile(credits: { entry: ListingEntry; author: string; theme: string; count: number }[]): string {
+function licenseFile(credits: Credit[]): string {
   const lines = credits.map(
     (c) =>
       `- n° ${c.entry.id}, « ${c.entry.title} », rédigé par ${c.author} ` +
-      `(${c.count} questions, thème ${c.theme}) : ${SITE}/download.php?id=${c.entry.id}`,
+      `(${c.count} questions, thème ${c.theme}) : ${quizPage(c.entry.id)}`,
   )
   return `# Données OpenQuizzDB
 
@@ -310,7 +358,8 @@ proposé sous licence Creative Commons CC BY-SA Attribution-ShareAlike 4.0 Inter
 Les fichiers de ce dossier sont une adaptation des quiz d'origine, produite par le script
 \`packages/library/scripts/convert-openquizzdb.ts\` : conversion au format des packs Pengou,
 classement par thème, difficulté (« moyen » par défaut, la source n'en indiquant pas) et public,
-regroupement en quiz de 10 à 20 questions, retrait des anecdotes et des liens Wikipédia. Le texte
+regroupement en quiz de 10 à 20 questions, retrait des anecdotes, des liens Wikipédia et des
+questions dont l'énoncé figure déjà dans un quiz source de numéro inférieur. Le texte
 des questions et des propositions n'est pas modifié, hormis la normalisation des espaces.
 
 Cette adaptation est diffusée sous la même licence, CC BY-SA 4.0. Elle ne relève pas de la
@@ -319,6 +368,12 @@ licence Apache-2.0 du code de Pengou.
 ## Attribution
 
 Attribution à reprendre : « Questions issues d'OpenQuizzDB (${SITE}), sous licence CC BY-SA 4.0 ».
+
+Chaque pack porte sa propre source, reprise sur chaque question copiée dans Pengou : le dossier
+\`quiz/\` contient un pack par quiz source, dont la source nomme le rédacteur (« OpenQuizzDB,
+<rédacteur> ») et pointe vers la page du quiz sur OpenQuizzDB ; le dossier \`composes/\` contient un
+pack par quiz composé, dont la source nomme le rédacteur commun ou « OpenQuizzDB, plusieurs
+auteurs » et pointe vers le site. Le détail par quiz source figure ci-dessous.
 
 Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 

@@ -1,0 +1,502 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0422-1",
+      "type": "mcq",
+      "prompt": "En quelle année a eu lieu la Bataille de Verdun ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1926",
+            "correct": false
+          },
+          {
+            "label": "1916",
+            "correct": true
+          },
+          {
+            "label": "1936",
+            "correct": false
+          },
+          {
+            "label": "1946",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0422-2",
+      "type": "mcq",
+      "prompt": "Quand eut lieu la première Bataille de la Marne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Avril 1940",
+            "correct": false
+          },
+          {
+            "label": "Mai 1942",
+            "correct": false
+          },
+          {
+            "label": "Juin 1916",
+            "correct": false
+          },
+          {
+            "label": "Septembre 1914",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0422-3",
+      "type": "mcq",
+      "prompt": "Quelle bataille marque la défaite finale de Napoléon Ier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Waterloo",
+            "correct": true
+          },
+          {
+            "label": "Leipzig",
+            "correct": false
+          },
+          {
+            "label": "Trafalgar",
+            "correct": false
+          },
+          {
+            "label": "Austerlitz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0422-4",
+      "type": "mcq",
+      "prompt": "Quelle bataille fit de Guillaume le Conquérant le roi d'Angleterre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crécy",
+            "correct": false
+          },
+          {
+            "label": "Azincourt",
+            "correct": false
+          },
+          {
+            "label": "Stamford Bridge",
+            "correct": false
+          },
+          {
+            "label": "Hastings",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0394-1",
+      "type": "mcq",
+      "prompt": "Dans les plaines de quel champ de bataille se dresse la Butte du Lion ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Warburg",
+            "correct": false
+          },
+          {
+            "label": "Wagram",
+            "correct": false
+          },
+          {
+            "label": "White Mountain",
+            "correct": false
+          },
+          {
+            "label": "Waterloo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0394-2",
+      "type": "mcq",
+      "prompt": "Où a eu lieu le grand procès des criminels de guerre nazis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Munich",
+            "correct": false
+          },
+          {
+            "label": "Nuremberg",
+            "correct": true
+          },
+          {
+            "label": "Hambourg",
+            "correct": false
+          },
+          {
+            "label": "Berlin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0394-3",
+      "type": "mcq",
+      "prompt": "En 1515, quelle bataille fit 16 000 morts en seize heures ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Valmy",
+            "correct": false
+          },
+          {
+            "label": "Marignan",
+            "correct": true
+          },
+          {
+            "label": "Waterloo",
+            "correct": false
+          },
+          {
+            "label": "Marino",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0394-4",
+      "type": "mcq",
+      "prompt": "Dans quelle ville fut signé le traité de fin de la Première Guerre mondiale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lyon",
+            "correct": false
+          },
+          {
+            "label": "Bordeaux",
+            "correct": false
+          },
+          {
+            "label": "Paris",
+            "correct": false
+          },
+          {
+            "label": "Versailles",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0420-1",
+      "type": "mcq",
+      "prompt": "En France, de quand datent les congés payés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1936",
+            "correct": true
+          },
+          {
+            "label": "1956",
+            "correct": false
+          },
+          {
+            "label": "1946",
+            "correct": false
+          },
+          {
+            "label": "1926",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0420-2",
+      "type": "mcq",
+      "prompt": "En quelle année JFK (John F. Kennedy) a-t-il été assassiné ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1953",
+            "correct": false
+          },
+          {
+            "label": "1973",
+            "correct": false
+          },
+          {
+            "label": "1983",
+            "correct": false
+          },
+          {
+            "label": "1963",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0420-3",
+      "type": "mcq",
+      "prompt": "En quelle année Charles De Gaulle a-t-il été élu au suffrage universel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1965",
+            "correct": true
+          },
+          {
+            "label": "1955",
+            "correct": false
+          },
+          {
+            "label": "1945",
+            "correct": false
+          },
+          {
+            "label": "1975",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0420-4",
+      "type": "mcq",
+      "prompt": "En quelle année a-t-on connu une crise économique mondiale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1939",
+            "correct": false
+          },
+          {
+            "label": "1929",
+            "correct": true
+          },
+          {
+            "label": "1949",
+            "correct": false
+          },
+          {
+            "label": "1919",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0518-1",
+      "type": "mcq",
+      "prompt": "Quelle ville française était appelée la cité des papes au Moyen Âge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tours",
+            "correct": false
+          },
+          {
+            "label": "Avignon",
+            "correct": true
+          },
+          {
+            "label": "Metz",
+            "correct": false
+          },
+          {
+            "label": "Nantes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0518-2",
+      "type": "mcq",
+      "prompt": "Quel diplomate français a succédé au Cardinal de Richelieu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Colbert",
+            "correct": false
+          },
+          {
+            "label": "Mazarin",
+            "correct": true
+          },
+          {
+            "label": "Sully",
+            "correct": false
+          },
+          {
+            "label": "Talleyrand",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0518-3",
+      "type": "mcq",
+      "prompt": "Quelle ville Jeanne d'Arc a-t-elle héroïquement libérée des Anglais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Angers",
+            "correct": false
+          },
+          {
+            "label": "Orléans",
+            "correct": true
+          },
+          {
+            "label": "Tours",
+            "correct": false
+          },
+          {
+            "label": "Le Mans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0518-4",
+      "type": "mcq",
+      "prompt": "Quel âge avait Clovis lorsqu'il fut élu roi des Francs en 481 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "26 ans",
+            "correct": false
+          },
+          {
+            "label": "46 ans",
+            "correct": false
+          },
+          {
+            "label": "16 ans",
+            "correct": true
+          },
+          {
+            "label": "36 ans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-guerres-et-dates",
+      "title": "Batailles et grandes dates",
+      "description": "D'après les quiz OpenQuizzDB « Batailles dans l’histoire », « Guerres et batailles », « Dates du XXe siècle » et « Histoire de France ».",
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0422-1",
+        "oqdb-0422-2",
+        "oqdb-0422-3",
+        "oqdb-0422-4",
+        "oqdb-0394-1",
+        "oqdb-0394-2",
+        "oqdb-0394-3",
+        "oqdb-0394-4",
+        "oqdb-0420-1",
+        "oqdb-0420-2",
+        "oqdb-0420-3",
+        "oqdb-0420-4",
+        "oqdb-0518-1",
+        "oqdb-0518-2",
+        "oqdb-0518-3",
+        "oqdb-0518-4"
+      ]
+    }
+  ]
+}

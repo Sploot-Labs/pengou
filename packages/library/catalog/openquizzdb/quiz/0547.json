@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=547"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0547-1",
+      "type": "mcq",
+      "prompt": "Qu'allez-vous chausser pour faire une randonnée sur de la neige molle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Patins à glace",
+            "correct": false
+          },
+          {
+            "label": "Raquettes à neige",
+            "correct": true
+          },
+          {
+            "label": "Bottes",
+            "correct": false
+          },
+          {
+            "label": "Palmes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0547-2",
+      "type": "mcq",
+      "prompt": "À quoi procède-t-on sur les pistes de ski entre 17h et 9h du matin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Séchage",
+            "correct": false
+          },
+          {
+            "label": "Arrosage",
+            "correct": false
+          },
+          {
+            "label": "Damage",
+            "correct": true
+          },
+          {
+            "label": "Mouillage",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0547-3",
+      "type": "mcq",
+      "prompt": "Quelle substance utilise-t-on pour obtenir une glisse optimale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Huile",
+            "correct": false
+          },
+          {
+            "label": "Résine",
+            "correct": false
+          },
+          {
+            "label": "Fart",
+            "correct": true
+          },
+          {
+            "label": "Cire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0547-4",
+      "type": "mcq",
+      "prompt": "Dans quel pays se situe la station skiable très prisée d'Innsbruck ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Allemagne",
+            "correct": false
+          },
+          {
+            "label": "Autriche",
+            "correct": true
+          },
+          {
+            "label": "Italie",
+            "correct": false
+          },
+          {
+            "label": "Suisse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

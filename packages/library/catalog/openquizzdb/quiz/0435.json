@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=435"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0435-1",
+      "type": "mcq",
+      "prompt": "Dans quel pays se situe le canal de Suez ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tunisie",
+            "correct": false
+          },
+          {
+            "label": "Algérie",
+            "correct": false
+          },
+          {
+            "label": "Égypte",
+            "correct": true
+          },
+          {
+            "label": "Libye",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0435-2",
+      "type": "mcq",
+      "prompt": "À quel pays appartiennent les Cyclades, formées d'environ 250 îles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bulgarie",
+            "correct": false
+          },
+          {
+            "label": "Grèce",
+            "correct": true
+          },
+          {
+            "label": "Libye",
+            "correct": false
+          },
+          {
+            "label": "Turquie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0435-3",
+      "type": "mcq",
+      "prompt": "À quel pays appartiennent les golfes de Messénie et de Corinthe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Turquie",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "Italie",
+            "correct": false
+          },
+          {
+            "label": "Grèce",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0435-4",
+      "type": "mcq",
+      "prompt": "Quel océan est relié à la mer Méditerranée par le détroit de Gibraltar ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Arctique",
+            "correct": false
+          },
+          {
+            "label": "Pacifique",
+            "correct": false
+          },
+          {
+            "label": "Atlantique",
+            "correct": true
+          },
+          {
+            "label": "Indien",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

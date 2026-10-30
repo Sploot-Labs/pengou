@@ -35,6 +35,38 @@ describe('catalogue livré', () => {
     expect(snap.questions.some((q) => q.language === 'fr')).toBe(true)
   })
 
+  it('aucune question en double (énoncé normalisé) dans un quiz ni dans une même langue', async () => {
+    const snap = await readCatalog({ builtinDir: BUILTIN_CATALOG_DIR })
+    const norm = (s: string) =>
+      s
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim()
+    const prompts = new Map(snap.questions.map((q) => [q.id, norm(q.prompt)]))
+    for (const quiz of snap.quizzes) {
+      const list = quiz.questionIds.map((id) => prompts.get(id))
+      expect(new Set(list).size, quiz.id).toBe(list.length)
+    }
+    const seen = new Map<string, string>()
+    const duplicates: string[] = []
+    for (const q of snap.questions) {
+      const key = `${q.language}|${norm(q.prompt)}`
+      const first = seen.get(key)
+      if (first) duplicates.push(`${first} / ${q.id}`)
+      else seen.set(key, q.id)
+    }
+    expect(duplicates).toEqual([])
+  })
+
+  it('chaque question OpenQuizzDB cite son rédacteur', async () => {
+    const snap = await readCatalog({ builtinDir: BUILTIN_CATALOG_DIR })
+    const oqdb = snap.questions.filter((q) => q.id.startsWith('oqdb-'))
+    expect(oqdb.length).toBeGreaterThan(0)
+    for (const q of oqdb) expect(q.source.name, q.id).toMatch(/^OpenQuizzDB, \S/)
+  })
+
   it('chaque dossier de source contient un fichier LICENSE*', async () => {
     const entries = await readdir(BUILTIN_CATALOG_DIR, { withFileTypes: true })
     const dirs = entries.filter((e) => e.isDirectory()).map((e) => e.name)

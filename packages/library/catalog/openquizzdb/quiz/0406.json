@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=406"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0406-1",
+      "type": "mcq",
+      "prompt": "Quel est le véritable nom du romancier français Maxime Chattam ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maxime Ducrot",
+            "correct": false
+          },
+          {
+            "label": "Paul Château",
+            "correct": false
+          },
+          {
+            "label": "Luc Chattam",
+            "correct": false
+          },
+          {
+            "label": "Maxime Drouot",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0406-2",
+      "type": "mcq",
+      "prompt": "Quel métier Maxime Chattam a-t-il exercé avant de devenir romancier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Boucher",
+            "correct": false
+          },
+          {
+            "label": "Avocat",
+            "correct": false
+          },
+          {
+            "label": "Comptable",
+            "correct": false
+          },
+          {
+            "label": "Libraire",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0406-3",
+      "type": "mcq",
+      "prompt": "Chez quel éditeur Maxime Chattam a-t-il publié « Les Arcanes du chaos » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "France Loisirs",
+            "correct": false
+          },
+          {
+            "label": "Michel Lafon",
+            "correct": false
+          },
+          {
+            "label": "Albin Michel",
+            "correct": true
+          },
+          {
+            "label": "Gallimard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0406-4",
+      "type": "mcq",
+      "prompt": "Avec quelle animatrice de télévision Maxime Chattam fut-il marié ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Karine Ferri",
+            "correct": false
+          },
+          {
+            "label": "Flavie Flament",
+            "correct": false
+          },
+          {
+            "label": "Faustine Bollaert",
+            "correct": true
+          },
+          {
+            "label": "Sophie Davant",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=349"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0349-1",
+      "type": "mcq",
+      "prompt": "Quel chanteur de reggae a été découvert par son tube « Boombastic » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bob Marley",
+            "correct": false
+          },
+          {
+            "label": "Alpha Blondy",
+            "correct": false
+          },
+          {
+            "label": "Ziggy Marley",
+            "correct": false
+          },
+          {
+            "label": "Shaggy",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-2",
+      "type": "mcq",
+      "prompt": "Qui est le musicien de reggae le plus célèbre et le plus influent ?",
+      "payload": {
+        "options": [
+          {
+            "label": "King Sporty",
+            "correct": false
+          },
+          {
+            "label": "Dobby Dobson",
+            "correct": false
+          },
+          {
+            "label": "Bob Marley",
+            "correct": true
+          },
+          {
+            "label": "Dawn Penn",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-3",
+      "type": "mcq",
+      "prompt": "À qui doit-on le célèbre titre « Reggae Night », sorti en 1983 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maxi Priest",
+            "correct": false
+          },
+          {
+            "label": "Jimmy Cliff",
+            "correct": true
+          },
+          {
+            "label": "Alpha Blondy",
+            "correct": false
+          },
+          {
+            "label": "Bob Marley",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-4",
+      "type": "mcq",
+      "prompt": "Que chanteur français est connu pour son tube « Chacun sa route » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Papa Dee",
+            "correct": false
+          },
+          {
+            "label": "Purpleman",
+            "correct": false
+          },
+          {
+            "label": "Pierpoljak",
+            "correct": false
+          },
+          {
+            "label": "Tonton David",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

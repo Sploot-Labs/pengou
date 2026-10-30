@@ -135,7 +135,14 @@ async function main() {
       const wrong = q.incorrect_answers.map(clean)
       const id = `${PREFIX}-${hash(`${prompt}\n${correct}`).slice(0, 12)}`
       const difficulty = DIFFICULTY[q.difficulty]
-      if (seen.has(id) || !difficulty || !prompt || prompt.length > 500) continue
+      // Énoncé déjà vu (comparaison sans casse, diacritiques ni écarts d'espaces) : seule la première
+      // occurrence est gardée, dans l'ordre des catégories puis du cache.
+      const key = clean(prompt.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase())
+      if (seen.has(key)) {
+        console.warn(`${id} écartée : énoncé en double`)
+        continue
+      }
+      if (!difficulty || !prompt || prompt.length > 500) continue
       let out: Out
       if (q.type === 'boolean') {
         if (correct !== 'True' && correct !== 'False') continue
@@ -151,7 +158,7 @@ async function main() {
           .sort((a, b) => hash(`${id}${a.label}`).localeCompare(hash(`${id}${b.label}`)))
         out = { id, type: 'mcq', prompt, payload: { options }, theme, difficulty }
       }
-      seen.add(id)
+      seen.add(key)
       byTheme.set(theme, [...(byTheme.get(theme) ?? []), out])
       byCategory.set(category, [...(byCategory.get(category) ?? []), { ...out, rawDifficulty: q.difficulty }])
     }
@@ -216,8 +223,8 @@ Les fichiers de ce dossier sont une adaptation des questions d'origine, produite
 \`packages/library/scripts/convert-opentdb.ts\` : conversion au format des packs Pengou, classement
 par thème (d'après la catégorie d'origine), difficulté (easy, medium, hard deviennent facile, moyen,
 difficile) et public, ordre des propositions déterminé par le script, regroupement en quiz de 15
-questions. Le texte des questions et des réponses n'est pas modifié, hormis la normalisation des
-espaces.
+questions, retrait des questions dont l'énoncé figure déjà plus haut. Le texte des questions et
+des réponses n'est pas modifié, hormis la normalisation des espaces.
 
 Cette adaptation est diffusée sous la même licence, CC BY-SA 4.0. Elle ne relève pas de la
 licence Apache-2.0 du code de Pengou.

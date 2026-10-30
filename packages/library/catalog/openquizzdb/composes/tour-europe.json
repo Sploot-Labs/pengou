@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0257-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de l'Allemagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hambourg",
+            "correct": false
+          },
+          {
+            "label": "Francfort",
+            "correct": false
+          },
+          {
+            "label": "Munich",
+            "correct": false
+          },
+          {
+            "label": "Berlin",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0257-2",
+      "type": "mcq",
+      "prompt": "Quelle grande chaîne de montagnes se situe en Allemagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Andes",
+            "correct": false
+          },
+          {
+            "label": "Alpes",
+            "correct": true
+          },
+          {
+            "label": "Himalaya",
+            "correct": false
+          },
+          {
+            "label": "Rocheuses",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0257-3",
+      "type": "mcq",
+      "prompt": "Quelle fête attire des millions de visiteurs en Allemagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oktoberfest",
+            "correct": true
+          },
+          {
+            "label": "Thanksgiving",
+            "correct": false
+          },
+          {
+            "label": "Carnaval",
+            "correct": false
+          },
+          {
+            "label": "Halloween",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0257-4",
+      "type": "mcq",
+      "prompt": "Quelle industrie est très développée en Allemagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Culture du café",
+            "correct": false
+          },
+          {
+            "label": "Pêche",
+            "correct": false
+          },
+          {
+            "label": "Pétrolière",
+            "correct": false
+          },
+          {
+            "label": "Automobile",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0359-1",
+      "type": "mcq",
+      "prompt": "Quelle monnaie utilisait l'Autriche avant l'euro ?",
+      "payload": {
+        "options": [
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "Livre",
+            "correct": false
+          },
+          {
+            "label": "Shilling",
+            "correct": true
+          },
+          {
+            "label": "Mark",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0359-2",
+      "type": "mcq",
+      "prompt": "Quelle langue est officielle en Autriche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Autrichien",
+            "correct": false
+          },
+          {
+            "label": "Allemand",
+            "correct": true
+          },
+          {
+            "label": "Hongrois",
+            "correct": false
+          },
+          {
+            "label": "Français",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0359-3",
+      "type": "mcq",
+      "prompt": "Quel fleuve traverse Vienne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rhin",
+            "correct": false
+          },
+          {
+            "label": "Loire",
+            "correct": false
+          },
+          {
+            "label": "Seine",
+            "correct": false
+          },
+          {
+            "label": "Danube",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0359-4",
+      "type": "mcq",
+      "prompt": "Quelle ville est célèbre pour Mozart ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vienne",
+            "correct": false
+          },
+          {
+            "label": "Linz",
+            "correct": false
+          },
+          {
+            "label": "Salzbourg",
+            "correct": true
+          },
+          {
+            "label": "Insbruck",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0454-1",
+      "type": "mcq",
+      "prompt": "Quel logement privé est loué à des étudiants en Belgique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bizut",
+            "correct": false
+          },
+          {
+            "label": "Chalet",
+            "correct": false
+          },
+          {
+            "label": "Kot",
+            "correct": true
+          },
+          {
+            "label": "Souk",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0454-2",
+      "type": "mcq",
+      "prompt": "Combien de langues officielles parle-t-on en Belgique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deux",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Une",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0454-3",
+      "type": "mcq",
+      "prompt": "Combien de chiffres composent un code postal belge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0454-4",
+      "type": "mcq",
+      "prompt": "À quelle date célèbre-t-on chaque année la fête nationale en Belgique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "11 septembre",
+            "correct": false
+          },
+          {
+            "label": "14 juillet",
+            "correct": false
+          },
+          {
+            "label": "4 octobre",
+            "correct": false
+          },
+          {
+            "label": "21 juillet",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0353-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de la Grèce ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Patras",
+            "correct": false
+          },
+          {
+            "label": "Thessalonique",
+            "correct": false
+          },
+          {
+            "label": "Héraklion",
+            "correct": false
+          },
+          {
+            "label": "Athènes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0353-2",
+      "type": "mcq",
+      "prompt": "Quelle mer touche les côtes de la Grèce ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mer Noire",
+            "correct": false
+          },
+          {
+            "label": "Mer du Nord",
+            "correct": false
+          },
+          {
+            "label": "Mer Rouge",
+            "correct": false
+          },
+          {
+            "label": "Mer Égée",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0353-3",
+      "type": "mcq",
+      "prompt": "Quel est le mont sacré des dieux grecs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mont Atlas",
+            "correct": false
+          },
+          {
+            "label": "Mont Etna",
+            "correct": false
+          },
+          {
+            "label": "Mont Olympe",
+            "correct": true
+          },
+          {
+            "label": "Mont Fuji",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0353-4",
+      "type": "mcq",
+      "prompt": "Quelle ville grecque est célèbre pour son Acropole ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Corinthe",
+            "correct": false
+          },
+          {
+            "label": "Delphes",
+            "correct": false
+          },
+          {
+            "label": "Athènes",
+            "correct": true
+          },
+          {
+            "label": "Sparte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0365-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale du Portugal ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lisbonne",
+            "correct": true
+          },
+          {
+            "label": "Faro",
+            "correct": false
+          },
+          {
+            "label": "Porto",
+            "correct": false
+          },
+          {
+            "label": "Coimbra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0365-2",
+      "type": "mcq",
+      "prompt": "Quelle ville portugaise est célèbre pour ses caves à vin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lisbonne",
+            "correct": false
+          },
+          {
+            "label": "Porto",
+            "correct": true
+          },
+          {
+            "label": "Faro",
+            "correct": false
+          },
+          {
+            "label": "Braga",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0365-3",
+      "type": "mcq",
+      "prompt": "Quelle région portugaise est célèbre pour ses falaises ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lisbonne",
+            "correct": false
+          },
+          {
+            "label": "Madère",
+            "correct": false
+          },
+          {
+            "label": "Porto",
+            "correct": false
+          },
+          {
+            "label": "Algarve",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0365-4",
+      "type": "mcq",
+      "prompt": "Quel pays est le seul voisin terrestre du Portugal ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Espagne",
+            "correct": true
+          },
+          {
+            "label": "Italie",
+            "correct": false
+          },
+          {
+            "label": "Maroc",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-tour-europe",
+      "title": "Tour d'Europe",
+      "description": "D'après les quiz OpenQuizzDB « Allemagne », « Autriche », « Belgique », « Grèce » et « Portugal ».",
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0257-1",
+        "oqdb-0257-2",
+        "oqdb-0257-3",
+        "oqdb-0257-4",
+        "oqdb-0359-1",
+        "oqdb-0359-2",
+        "oqdb-0359-3",
+        "oqdb-0359-4",
+        "oqdb-0454-1",
+        "oqdb-0454-2",
+        "oqdb-0454-3",
+        "oqdb-0454-4",
+        "oqdb-0353-1",
+        "oqdb-0353-2",
+        "oqdb-0353-3",
+        "oqdb-0353-4",
+        "oqdb-0365-1",
+        "oqdb-0365-2",
+        "oqdb-0365-3",
+        "oqdb-0365-4"
+      ]
+    }
+  ]
+}

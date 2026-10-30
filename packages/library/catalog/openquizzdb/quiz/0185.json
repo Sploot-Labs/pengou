@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=185"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0185-1",
+      "type": "mcq",
+      "prompt": "Dans quel film Sandra Bullock est-elle astronaute avec George Clooney ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Minority Report",
+            "correct": false
+          },
+          {
+            "label": "The Warrior",
+            "correct": false
+          },
+          {
+            "label": "Gravity",
+            "correct": true
+          },
+          {
+            "label": "Skyfall",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0185-2",
+      "type": "mcq",
+      "prompt": "Dans quelle comédie Sandra Bullock joue-t-elle une cruciverbiste ?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Heat",
+            "correct": false
+          },
+          {
+            "label": "The Proposal",
+            "correct": false
+          },
+          {
+            "label": "Gravity",
+            "correct": false
+          },
+          {
+            "label": "All about Steve",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0185-3",
+      "type": "mcq",
+      "prompt": "À qui Sandra Bullock fait-elle une « proposition » dans une comédie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jim Carrey",
+            "correct": false
+          },
+          {
+            "label": "Ryan Reynolds",
+            "correct": true
+          },
+          {
+            "label": "Michael J. Fox",
+            "correct": false
+          },
+          {
+            "label": "Simon Baker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0185-4",
+      "type": "mcq",
+      "prompt": "Quel a été le premier thriller dans lequel a participé Sandra Bullock ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Murder by Numbers",
+            "correct": false
+          },
+          {
+            "label": "<T>The Net",
+            "correct": false
+          },
+          {
+            "label": "Speed",
+            "correct": false
+          },
+          {
+            "label": "Demolition Man",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}
