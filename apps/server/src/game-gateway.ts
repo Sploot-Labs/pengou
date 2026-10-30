@@ -119,7 +119,7 @@ const SESSION_MAX_AGE = 12 * 3600_000
  * réhydratée). 10 min : large pour un post-partie, borné pour la mémoire. */
 const PODIUM_EVICTION_DELAY = 10 * 60_000
 
-function toEngineQuestion(row: { id: string; type: string; prompt: string; timeLimit: number; readingTime: number; payload: unknown }): EngineQuestion {
+function toEngineQuestion(row: { id: string; type: string; prompt: string; timeLimit: number; readingTime: number; payload: unknown; media: string | null; mediaAlt: string | null }): EngineQuestion {
   return {
     id: row.id,
     type: row.type as EngineQuestion['type'],
@@ -128,6 +128,8 @@ function toEngineQuestion(row: { id: string; type: string; prompt: string; timeL
     readingTime: row.readingTime,
     basePoints: DEFAULT_BASE_POINTS,
     payload: row.payload,
+    media: row.media,
+    mediaAlt: row.mediaAlt,
   }
 }
 

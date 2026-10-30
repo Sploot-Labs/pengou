@@ -33,6 +33,8 @@ export type PlayerQuestionView = {
   payload: unknown
   index: number
   total: number
+  media: string | null
+  mediaAlt: string | null
 } | null
 
 /** Projection « temps de lecture » envoyée aux joueurs/écrans avant l'ouverture des réponses —
@@ -42,6 +44,8 @@ export type ReadingView = {
   index: number
   total: number
   readingTime: number
+  media: string | null
+  mediaAlt: string | null
 }
 
 export type QuestionResult = {
@@ -341,6 +345,8 @@ export function createEngine(deps: EngineDeps): Engine {
         payload: def.playerView(question.payload),
         index: session.currentIndex,
         total: session.questions.length,
+        media: question.media ?? null,
+        mediaAlt: question.mediaAlt ?? null,
       }
     },
 
@@ -351,6 +357,8 @@ export function createEngine(deps: EngineDeps): Engine {
         index: session.currentIndex,
         total: session.questions.length,
         readingTime: q?.readingTime ?? 0,
+        media: q?.media ?? null,
+        mediaAlt: q?.mediaAlt ?? null,
       }
     },
 

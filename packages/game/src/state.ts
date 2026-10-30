@@ -19,6 +19,10 @@ export type EngineQuestion = {
   readingTime: number // secondes, 0 = pas de phase de lecture (rétro-compatible)
   basePoints: number
   payload: unknown
+  // Image facultative. Optionnels car l'état moteur est persisté en JSON : un état écrit avant
+  // cette version n'a pas ces clés (les projections renvoient alors null).
+  media?: string | null
+  mediaAlt?: string | null
 }
 
 export type SubmittedAnswer = {

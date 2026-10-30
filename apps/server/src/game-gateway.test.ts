@@ -509,6 +509,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     email: string,
     readingTime: number,
     timeLimit = 20,
+    image?: { media: string; mediaAlt: string },
   ): Promise<{ hostSocket: ClientSocket; sessionId: string; pin: string; quizId: string; cookie: string }> {
     const cookie = await signUp(app, email)
     const quizRes = await app.inject({
@@ -527,6 +528,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       prompt: 'Capitale de la France ?',
       timeLimit,
       readingTime,
+      ...(image ?? {}),
       payload: {
         options: [
           { label: 'Paris', correct: true },
@@ -1876,6 +1878,54 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         } finally {
           vi.useRealTimers()
         }
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("question:reading puis question:show portent media et mediaAlt de la question", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const image = { media: '/uploads/x/y.png', mediaAlt: 'alt' }
+        const { hostSocket, pin } = await setupHostedSessionWithReading(app, url, 'gateway-reading-media@example.com', 6, 20, image)
+        clients.push(hostSocket)
+        const player1 = await connectClient(url)
+        clients.push(player1)
+        await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+
+        vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+        try {
+          const readingPromise = waitFor<Record<string, unknown>>(player1, 'question:reading')
+          const startAckPromise = ack(hostSocket, 'host:start', {})
+          expect(await readingPromise).toMatchObject(image)
+          await startAckPromise
+
+          const showPromise = waitFor<Record<string, unknown>>(player1, 'question:show')
+          await vi.advanceTimersByTimeAsync(6_100)
+          expect(await showPromise).toMatchObject(image)
+        } finally {
+          vi.useRealTimers()
+        }
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("une question sans image émet media: null et mediaAlt: null", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSessionWithReading(app, url, 'gateway-noreading-nomedia@example.com', 0, 20)
+        clients.push(hostSocket)
+        const player1 = await connectClient(url)
+        clients.push(player1)
+        await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+        const showPromise = waitFor<Record<string, unknown>>(player1, 'question:show')
+        await ack(hostSocket, 'host:start', {})
+        expect(await showPromise).toMatchObject({ media: null, mediaAlt: null })
       } finally {
         for (const c of clients) c.disconnect()
         await app.close()
