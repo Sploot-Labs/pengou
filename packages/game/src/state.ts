@@ -45,4 +45,7 @@ export type GameSession = {
   // par index de question : true une fois que ses points ont été crédités aux joueurs (reveal()
   // idempotent, découplé de `phase` — voir engine.ts:reveal).
   credited: Record<number, boolean>
+  // joinTokens des joueurs exclus par l'animateur : refusés à la reconnexion. Optionnel pour
+  // tolérer un `engine_state` antérieur à l'exclusion (lu `?? []`, absent tant qu'aucune exclusion).
+  kickedJoinTokens?: string[]
 }
