@@ -149,6 +149,9 @@ importers:
 
   packages/db:
     dependencies:
+      '@splootlabs/library':
+        specifier: workspace:*
+        version: link:../library
       '@splootlabs/shared':
         specifier: workspace:*
         version: link:../shared

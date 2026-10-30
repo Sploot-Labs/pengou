@@ -32,4 +32,6 @@ export {
 export {
   listSessions, getSessionReport, type SessionSummary, type SessionReport,
 } from './repos/reports.js'
+export { syncLibrary, normalizeSearch } from './repos/library-sync.js'
+export type { ContentSource } from '@splootlabs/library'
 export * as schema from './schema.js'

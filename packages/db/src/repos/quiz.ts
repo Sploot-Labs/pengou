@@ -47,6 +47,7 @@ export async function listQuizzes(scope: TenantScope): Promise<QuizListItem[]> {
       title: schema.quiz.title,
       description: schema.quiz.description,
       cover: schema.quiz.cover,
+      source: schema.quiz.source,
       createdAt: schema.quiz.createdAt,
       updatedAt: schema.quiz.updatedAt,
       questionCount: sql<number>`count(${schema.question.id})`.mapWith(Number),

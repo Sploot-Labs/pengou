@@ -1,13 +1,17 @@
 import { sql } from 'drizzle-orm'
 import {
-  pgTable, pgEnum, uuid, text, integer, boolean, timestamp, jsonb, uniqueIndex, index, foreignKey,
+  pgTable, pgEnum, uuid, text, integer, boolean, timestamp, jsonb, uniqueIndex, index, foreignKey, primaryKey,
 } from 'drizzle-orm/pg-core'
+import type { ContentSource } from '@splootlabs/library'
 import { user } from './auth-schema.js'
 
 export const planEnum = pgEnum('plan', ['free', 'pro'])
 export const roleEnum = pgEnum('role', ['owner', 'admin', 'member'])
 export const invitationStatusEnum = pgEnum('invitation_status', ['pending', 'accepted', 'revoked'])
 export const questionTypeEnum = pgEnum('question_type', ['mcq', 'truefalse', 'text', 'slider'])
+export const libraryDifficultyEnum = pgEnum('library_difficulty', ['facile', 'moyen', 'difficile'])
+export const libraryAudienceEnum = pgEnum('library_audience', ['enfants', 'adultes', 'tous'])
+export const libraryOriginEnum = pgEnum('library_origin', ['builtin', 'instance'])
 export const sessionStatusEnum = pgEnum('session_status', ['lobby', 'active', 'ended', 'abandoned'])
 
 export const tenant = pgTable('tenant', {
@@ -64,6 +68,8 @@ export const quiz = pgTable('quiz', {
   title: text('title').notNull(),
   description: text('description'),
   cover: text('cover'),
+  // Attribution du contenu importé de la bibliothèque (null pour un quiz créé à la main).
+  source: jsonb('source').$type<ContentSource>(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 }, (t) => ({
@@ -83,6 +89,7 @@ export const question = pgTable('question', {
   readingTime: integer('reading_time').notNull().default(6),
   orderIndex: integer('order_index').notNull(),
   payload: jsonb('payload').notNull(),
+  source: jsonb('source').$type<ContentSource>(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 }, (t) => ({
   quizOrderIdx: index('question_quiz_order_idx').on(t.quizId, t.orderIndex),
@@ -169,3 +176,55 @@ export const answerRecord = pgTable('answer_record', {
 
 // Tables Better Auth (user/session/account/verification) — générées, source de vérité des colonnes.
 export * from './auth-schema.js'
+
+// Catalogue de la bibliothèque : global (ni tenant_id ni RLS), lecture seule pour app_role,
+// écrit uniquement par la synchronisation sur la connexion privilégiée.
+export const libraryTheme = pgTable('library_theme', {
+  id: text('id').primaryKey(),
+  label: text('label').notNull(),
+  hidden: boolean('hidden').notNull().default(false),
+  origin: libraryOriginEnum('origin').notNull(),
+})
+
+export const libraryQuestion = pgTable('library_question', {
+  id: text('id').primaryKey(),
+  type: questionTypeEnum('type').notNull(),
+  prompt: text('prompt').notNull(),
+  // Prompt en minuscules sans diacritiques, calculé à la synchronisation (recherche).
+  promptSearch: text('prompt_search').notNull(),
+  payload: jsonb('payload').notNull(),
+  themeId: text('theme_id').notNull().references(() => libraryTheme.id),
+  difficulty: libraryDifficultyEnum('difficulty').notNull(),
+  language: text('language').notNull(),
+  audience: libraryAudienceEnum('audience').notNull(),
+  timeLimit: integer('time_limit').notNull(),
+  readingTime: integer('reading_time').notNull(),
+  source: jsonb('source').$type<ContentSource>().notNull(),
+  origin: libraryOriginEnum('origin').notNull(),
+  originFile: text('origin_file').notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+}, (t) => ({
+  criteriaIdx: index('library_question_criteria_idx').on(t.themeId, t.difficulty, t.language, t.audience),
+}))
+
+export const libraryQuiz = pgTable('library_quiz', {
+  id: text('id').primaryKey(),
+  title: text('title').notNull(),
+  description: text('description'),
+  themeId: text('theme_id').notNull().references(() => libraryTheme.id),
+  difficulty: libraryDifficultyEnum('difficulty').notNull(),
+  language: text('language').notNull(),
+  audience: libraryAudienceEnum('audience').notNull(),
+  source: jsonb('source').$type<ContentSource>().notNull(),
+  origin: libraryOriginEnum('origin').notNull(),
+  originFile: text('origin_file').notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+})
+
+export const libraryQuizQuestion = pgTable('library_quiz_question', {
+  quizId: text('quiz_id').notNull().references(() => libraryQuiz.id, { onDelete: 'cascade' }),
+  questionId: text('question_id').notNull().references(() => libraryQuestion.id, { onDelete: 'cascade' }),
+  position: integer('position').notNull(),
+}, (t) => ({
+  pk: primaryKey({ columns: [t.quizId, t.position] }),
+}))
