@@ -641,6 +641,7 @@ export function HostEditor() {
       type,
       prompt: input.prompt,
       media: null,
+      mediaAlt: null,
       timeLimit: input.timeLimit,
       readingTime: input.readingTime ?? 0,
       orderIndex: 0,

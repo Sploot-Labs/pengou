@@ -59,6 +59,7 @@ export interface Question {
   type: QuestionType
   prompt: string
   media: string | null
+  mediaAlt: string | null
   timeLimit: number
   readingTime: number
   orderIndex: number
@@ -83,7 +84,8 @@ export interface CreateQuestionInput {
   timeLimit: number
   readingTime?: number
   payload: QuestionPayload
-  media?: string
+  media?: string | null
+  mediaAlt?: string | null
 }
 
 export interface UpdateQuestionInput {
@@ -92,6 +94,7 @@ export interface UpdateQuestionInput {
   readingTime?: number
   payload?: QuestionPayload
   media?: string | null
+  mediaAlt?: string | null
 }
 
 export function listQuizzes(): Promise<QuizListItem[]> {
