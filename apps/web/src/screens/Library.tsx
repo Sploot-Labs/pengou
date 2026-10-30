@@ -28,6 +28,9 @@ import { WorkspaceSwitcher } from '../ui/WorkspaceSwitcher'
 
 const PAGE_SIZE = 20
 const DRAW_MAX = 50
+// Bornes de l'API : composition de 100 questions au plus, tirage avec 200 exclusions au plus.
+const SELECTION_MAX = 100
+const TITLE_MAX = 200
 
 const DIFFICULTY_LABEL: Record<Difficulty, string> = { facile: 'Facile', moyen: 'Moyen', difficile: 'Difficile' }
 const AUDIENCE_LABEL: Record<Audience, string> = { enfants: 'Enfants', adultes: 'Adultes', tous: 'Tous publics' }
@@ -36,6 +39,23 @@ const TYPE_LABEL: Record<string, string> = {
   truefalse: 'Vrai ou faux',
   text: 'Réponse libre',
   slider: 'Curseur',
+}
+
+// Noms de langue en français (« fr » devient « français »), le code ISO en repli.
+const languageNames = (() => {
+  try {
+    return new Intl.DisplayNames(['fr'], { type: 'language' })
+  } catch {
+    return null
+  }
+})()
+
+function languageLabel(code: string): string {
+  try {
+    return languageNames?.of(code) ?? code
+  } catch {
+    return code
+  }
 }
 
 function errorMessage(err: unknown): string {
@@ -209,7 +229,9 @@ export function Library() {
   }
 
   async function handleDraw() {
-    const n = Math.min(DRAW_MAX, Math.max(1, Math.floor(Number(drawCount)) || 1))
+    const room = SELECTION_MAX - selection.length
+    if (room <= 0) return
+    const n = Math.min(DRAW_MAX, room, Math.max(1, Math.floor(Number(drawCount)) || 1))
     setDrawCount(String(n))
     setDrawPending(true)
     setDrawNote(null)
@@ -218,7 +240,9 @@ export function Library() {
       const f: LibraryFilters = { ...(JSON.parse(filterKey) as LibraryFilters) }
       if (searchTerm) f.search = searchTerm
       const drawn = await drawLibraryQuestions(f, n, selection.map((q) => q.id))
-      setSelection((prev) => [...prev, ...drawn.filter((q) => !prev.some((p) => p.id === q.id))])
+      setSelection((prev) =>
+        [...prev, ...drawn.filter((q) => !prev.some((p) => p.id === q.id))].slice(0, Math.max(prev.length, SELECTION_MAX)),
+      )
       setDrawNote(drawn.length < n ? drawMessage(drawn.length) : null)
     } catch (err) {
       setDrawError(errorMessage(err))
@@ -230,7 +254,7 @@ export function Library() {
   async function handleCompose(event: FormEvent) {
     event.preventDefault()
     const trimmed = title.trim()
-    if (selection.length === 0 || trimmed === '') return
+    if (selection.length === 0 || selection.length > SELECTION_MAX || trimmed === '') return
     setComposePending(true)
     setComposeError(null)
     try {
@@ -260,7 +284,8 @@ export function Library() {
   }
 
   const themeLabel = (id: string) => meta?.themes.find((t) => t.id === id)?.label ?? id
-  const canCompose = selection.length > 0 && title.trim() !== '' && !composePending
+  const selectionFull = selection.length >= SELECTION_MAX
+  const canCompose = selection.length > 0 && selection.length <= SELECTION_MAX && title.trim() !== '' && !composePending
 
   return (
     <div className="ab-shell">
@@ -302,7 +327,7 @@ export function Library() {
             label="Langue"
             value={language}
             onChange={setLanguage}
-            options={(meta?.languages ?? []).map((l) => ({ value: l, label: l }))}
+            options={(meta?.languages ?? []).map((l) => ({ value: l, label: languageLabel(l) }))}
           />
           <FilterSelect
             id="library-audience"
@@ -417,7 +442,7 @@ export function Library() {
                     onChange={(e) => setDrawCount(e.target.value)}
                   />
                 </div>
-                <Button variant="primary" type="button" disabled={drawPending} onClick={() => void handleDraw()}>
+                <Button variant="primary" type="button" disabled={drawPending || selectionFull} onClick={() => void handleDraw()}>
                   {drawPending ? 'Tirage…' : 'Tirer'}
                 </Button>
                 {drawError && (
@@ -475,7 +500,12 @@ export function Library() {
             </section>
 
             <aside aria-labelledby="library-selection-heading" className="library-selection">
-              <h2 id="library-selection-heading">Ma sélection ({selection.length})</h2>
+              <h2 id="library-selection-heading">Ma sélection ({selection.length}/{SELECTION_MAX})</h2>
+              {selection.length > SELECTION_MAX && (
+                <p className="join-error" role="status">
+                  Un quiz contient au plus {SELECTION_MAX} questions : retirez-en {selection.length - SELECTION_MAX}.
+                </p>
+              )}
               {selection.length === 0 ? (
                 <p className="ab-empty-state">Cochez ou tirez des questions pour composer un quiz.</p>
               ) : (
@@ -507,6 +537,7 @@ export function Library() {
                     id="library-title"
                     type="text"
                     required
+                    maxLength={TITLE_MAX}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                   />

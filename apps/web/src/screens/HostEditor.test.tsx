@@ -124,7 +124,7 @@ describe('HostEditor : attribution des sources', () => {
     fixtures.quizSource = { name: 'Open Trivia', license: 'CC BY-SA 4.0' }
     renderEditor()
     await screen.findByLabelText('Titre du quiz')
-    expect(screen.getByText(/Source : Open Trivia, licence CC BY-SA 4\.0/)).toBeInTheDocument()
+    expect(document.body).toHaveTextContent('Source : Open Trivia, licence CC BY-SA 4.0 (adapté)')
   })
 
   it("affiche la source d'une question dans sa carte", async () => {
@@ -132,7 +132,7 @@ describe('HostEditor : attribution des sources', () => {
     renderEditor()
     const link = await screen.findByRole('link', { name: 'Wikiquiz' })
     expect(link).toHaveAttribute('href', 'https://example.org/q')
-    expect(screen.getByText(/licence CC0/)).toBeInTheDocument()
+    expect(screen.getByText(/licence CC0 \(adapté\)/)).toBeInTheDocument()
   })
 
   it("n'affiche aucune mention de source sans attribution", async () => {

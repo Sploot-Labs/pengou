@@ -101,7 +101,7 @@ describe('Library', () => {
     await openQuestions()
     fireEvent.click(screen.getByRole('checkbox', { name: /Énoncé a/ }))
     fireEvent.click(screen.getByRole('checkbox', { name: /Énoncé b/ }))
-    expect(screen.getByRole('heading', { name: 'Ma sélection (2)' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Ma sélection (2/100)' })).toBeInTheDocument()
     fireEvent.change(screen.getByLabelText('Titre du quiz'), { target: { value: 'Mon quiz' } })
     fireEvent.click(screen.getByRole('button', { name: 'Créer le quiz' }))
     await waitFor(() => expect(lib.composeQuiz).toHaveBeenCalledWith('Mon quiz', ['a', 'b']))
@@ -114,6 +114,53 @@ describe('Library', () => {
     expect(screen.getByRole('button', { name: 'Créer le quiz' })).toBeDisabled()
   })
 
+  it('plafonne la sélection à 100 : tirage borné, « Tirer » et « Créer le quiz » désactivés', async () => {
+    const batch = (prefix: string, n: number) => Array.from({ length: n }, (_, i) => question(`${prefix}${i}`))
+    vi.mocked(lib.drawLibraryQuestions)
+      .mockResolvedValueOnce(batch('d', 50))
+      .mockResolvedValueOnce(batch('e', 48))
+    await openQuestions()
+    fireEvent.click(screen.getByRole('checkbox', { name: /Énoncé a/ }))
+    fireEvent.click(screen.getByRole('checkbox', { name: /Énoncé b/ }))
+    const count = screen.getByLabelText('Tirer N questions au hasard')
+    const draw = screen.getByRole('button', { name: 'Tirer' })
+    fireEvent.change(count, { target: { value: '50' } })
+    fireEvent.click(draw)
+    await waitFor(() => expect(screen.getByRole('heading', { name: 'Ma sélection (52/100)' })).toBeInTheDocument())
+    // Le tirage suivant est ramené à la place restante (48).
+    fireEvent.change(count, { target: { value: '50' } })
+    fireEvent.click(draw)
+    await waitFor(() => expect(screen.getByRole('heading', { name: 'Ma sélection (100/100)' })).toBeInTheDocument())
+    expect(vi.mocked(lib.drawLibraryQuestions).mock.calls[1][1]).toBe(48)
+    expect(draw).toBeDisabled()
+  })
+
+  it('désactive « Créer le quiz » et « Tirer » au-dessus de 100 questions', async () => {
+    const batch = (prefix: string) => Array.from({ length: 50 }, (_, i) => question(`${prefix}${i}`))
+    vi.mocked(lib.drawLibraryQuestions).mockResolvedValueOnce(batch('d')).mockResolvedValueOnce(batch('e'))
+    await openQuestions()
+    const count = screen.getByLabelText('Tirer N questions au hasard')
+    fireEvent.change(count, { target: { value: '50' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Tirer' }))
+    await waitFor(() => expect(screen.getByRole('heading', { name: 'Ma sélection (50/100)' })).toBeInTheDocument())
+    fireEvent.click(screen.getByRole('button', { name: 'Tirer' }))
+    await waitFor(() => expect(screen.getByRole('heading', { name: 'Ma sélection (100/100)' })).toBeInTheDocument())
+    fireEvent.change(screen.getByLabelText('Titre du quiz'), { target: { value: 'Mon quiz' } })
+    expect(screen.getByRole('button', { name: 'Créer le quiz' })).not.toBeDisabled()
+    fireEvent.click(screen.getByRole('checkbox', { name: /Énoncé a/ }))
+    expect(screen.getByRole('heading', { name: 'Ma sélection (101/100)' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Créer le quiz' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Tirer' })).toBeDisabled()
+  })
+
+  it('limite le titre à 200 caractères et affiche les langues en français', async () => {
+    await openQuestions()
+    expect(screen.getByLabelText('Titre du quiz')).toHaveAttribute('maxLength', '200')
+    const language = screen.getByLabelText('Langue')
+    expect(within(language).getByRole('option', { name: 'français' })).toHaveValue('fr')
+    expect(within(language).getByRole('option', { name: 'anglais' })).toHaveValue('en')
+  })
+
   it("un tirage partiel affiche la disponibilité et n'ajoute pas de doublon", async () => {
     vi.mocked(lib.drawLibraryQuestions).mockResolvedValue([question('b'), question('c')])
     await openQuestions()
@@ -124,7 +171,7 @@ describe('Library', () => {
       expect(screen.getByText('Seulement 2 questions disponibles avec ces filtres.')).toBeInTheDocument(),
     )
     expect(lib.drawLibraryQuestions).toHaveBeenCalledWith({}, 5, ['b'])
-    expect(screen.getByRole('heading', { name: 'Ma sélection (2)' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Ma sélection (2/100)' })).toBeInTheDocument()
   })
 
   it('un tirage vide affiche « Aucune question disponible »', async () => {
@@ -170,8 +217,15 @@ describe('Library', () => {
 
   it('SourceCredit affiche nom et licence, rien sans source', () => {
     const { container, rerender } = render(<SourceCredit source={source} />)
-    expect(container).toHaveTextContent('Source : Open Trivia, licence CC BY-SA 4.0')
+    expect(container).toHaveTextContent('Source : Open Trivia, licence CC BY-SA 4.0 (adapté)')
     expect(within(container).getByRole('link', { name: 'Open Trivia' })).toHaveAttribute('href', 'https://example.org')
+    expect(within(container).getByRole('link', { name: 'CC BY-SA 4.0' })).toHaveAttribute(
+      'href',
+      'https://creativecommons.org/licenses/by-sa/4.0/deed.fr',
+    )
+    rerender(<SourceCredit source={{ name: 'Autre', license: 'Licence maison' }} />)
+    expect(container).toHaveTextContent('Source : Autre, licence Licence maison (adapté)')
+    expect(within(container).queryByRole('link')).toBeNull()
     rerender(<SourceCredit source={null} />)
     expect(container).toBeEmptyDOMElement()
   })
