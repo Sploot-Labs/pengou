@@ -147,6 +147,27 @@ describe('Library', () => {
     )
   })
 
+  it('navigue entre onglets au clavier (ArrowRight, Home, End)', async () => {
+    renderLibrary()
+    const quizzesTab = screen.getByRole('tab', { name: 'Quiz tout prêts' })
+    const questionsTab = screen.getByRole('tab', { name: 'Questions' })
+    await waitFor(() => expect(screen.getByText('Quiz q1')).toBeInTheDocument())
+    fireEvent.keyDown(quizzesTab, { key: 'ArrowRight' })
+    expect(questionsTab).toHaveAttribute('aria-selected', 'true')
+    expect(questionsTab).toHaveFocus()
+    await waitFor(() => expect(screen.getByText('Énoncé a')).toBeInTheDocument())
+    fireEvent.keyDown(questionsTab, { key: 'Home' })
+    expect(quizzesTab).toHaveAttribute('aria-selected', 'true')
+    expect(quizzesTab).toHaveFocus()
+    fireEvent.keyDown(quizzesTab, { key: 'Home' })
+    expect(quizzesTab).toHaveAttribute('aria-selected', 'true')
+    fireEvent.keyDown(quizzesTab, { key: 'End' })
+    expect(questionsTab).toHaveAttribute('aria-selected', 'true')
+    fireEvent.keyDown(questionsTab, { key: 'End' })
+    expect(questionsTab).toHaveAttribute('aria-selected', 'true')
+    await waitFor(() => expect(screen.getByText('Énoncé a')).toBeInTheDocument())
+  })
+
   it('SourceCredit affiche nom et licence, rien sans source', () => {
     const { container, rerender } = render(<SourceCredit source={source} />)
     expect(container).toHaveTextContent('Source : Open Trivia, licence CC BY-SA 4.0')

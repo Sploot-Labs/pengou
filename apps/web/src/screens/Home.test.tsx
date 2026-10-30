@@ -370,7 +370,7 @@ describe('Home', () => {
     expect(screen.getByText(/5 questions/)).toBeInTheDocument()
   })
 
-  it('propose un lien « Bibliothèque » vers /library', () => {
+  it('propose un lien « Bibliothèque » vers /library', async () => {
     render(
       <MotionProvider>
         <MemoryRouter>
@@ -379,6 +379,7 @@ describe('Home', () => {
       </MotionProvider>,
     )
     expect(screen.getByRole('link', { name: 'Bibliothèque' })).toHaveAttribute('href', '/library')
+    await waitFor(() => expect(screen.getByText('Culture G')).toBeInTheDocument())
   })
 
   it('affiche 0 question quand le quiz est vide', async () => {

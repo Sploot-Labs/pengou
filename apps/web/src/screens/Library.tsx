@@ -243,9 +243,17 @@ export function Library() {
   }
 
   function onTabKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
-    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft' || event.key === 'Home' || event.key === 'End') {
+    const order: Tab[] = ['quizzes', 'questions']
+    const last = order.length - 1
+    const index = order.indexOf(tab)
+    let target: number | null = null
+    if (event.key === 'ArrowRight') target = index === last ? 0 : index + 1
+    else if (event.key === 'ArrowLeft') target = index === 0 ? last : index - 1
+    else if (event.key === 'Home') target = 0
+    else if (event.key === 'End') target = last
+    if (target !== null) {
       event.preventDefault()
-      const next: Tab = tab === 'quizzes' ? 'questions' : 'quizzes'
+      const next = order[target]
       setTab(next)
       document.getElementById(`library-tab-${next}`)?.focus()
     }
@@ -380,8 +388,13 @@ export function Library() {
         )}
 
         {tab === 'questions' && (
-          <div className="library-questions">
-            <section role="tabpanel" id="library-panel-questions" aria-labelledby="library-tab-questions">
+          <div
+            className="library-questions"
+            role="tabpanel"
+            id="library-panel-questions"
+            aria-labelledby="library-tab-questions"
+          >
+            <section aria-label="Questions">
               <div className="host-field">
                 <label htmlFor="library-search">Rechercher une question</label>
                 <input
