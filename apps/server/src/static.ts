@@ -6,7 +6,12 @@ export function registerStatic(app: FastifyInstance, webDistDir: string): void {
 
   // Fallback SPA : toute route non-API renvoie index.html
   app.setNotFoundHandler((req, reply) => {
-    if (req.url.startsWith('/api') || req.url.startsWith('/health')) {
+    // /uploads : un fichier envoyé absent doit répondre 404, jamais index.html en 200.
+    if (
+      req.url.startsWith('/api') ||
+      req.url.startsWith('/health') ||
+      req.url.startsWith('/uploads')
+    ) {
       reply.code(404).send({ error: 'not found' })
       return
     }

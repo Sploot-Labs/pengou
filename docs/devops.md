@@ -73,6 +73,8 @@ Le service app n'écoute que sur `127.0.0.1:3000`. Un reverse proxy TLS (Caddy, 
 
 Le volume `db-data` fige le mot de passe de la base au premier démarrage. Changer `POSTGRES_PASSWORD` ensuite dans `.env` ne modifie pas la base existante : il faut soit changer le mot de passe dans PostgreSQL, soit supprimer le volume (perte de données).
 
+Le volume `media-data` contient les images envoyées depuis l'éditeur (montées dans `/app/data/media`). Il est à sauvegarder avec la base, par exemple : `docker run --rm -v <projet>_media-data:/data -v "$PWD":/backup alpine tar czf /backup/media.tgz -C /data .`. Les fichiers orphelins (image remplacée, question ou quiz supprimé) ne sont pas nettoyés automatiquement.
+
 Tant que le paquet GHCR est privé, l'hôte doit s'authentifier (`docker login ghcr.io`) avec un jeton disposant du scope `read:packages` pour tirer l'image.
 
 ## 7. Fonctions de sécurité

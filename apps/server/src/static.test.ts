@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { buildServer } from './app'
 import { registerStatic } from './static'
+import { registerUploads } from './uploads'
 import { loadConfig } from '@splootlabs/shared'
 
 let dist: string
@@ -49,5 +50,19 @@ describe('service statique du SPA', () => {
     expect(healthRes.json()).toMatchObject({ error: expect.any(String) })
 
     await app.close()
+  })
+
+  it('ne fait pas de fallback SPA sous /uploads (404, pas index.html)', async () => {
+    const media = mkdtempSync(join(tmpdir(), 'media-'))
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
+    registerUploads(app, media)
+    registerStatic(app, dist)
+    for (const url of ['/uploads/t1/absent.png', '/uploads/t1/', '/uploads']) {
+      const res = await app.inject({ method: 'GET', url })
+      expect(res.statusCode, url).toBe(404)
+      expect(res.body, url).not.toContain('id="root"')
+    }
+    await app.close()
+    rmSync(media, { recursive: true, force: true })
   })
 })

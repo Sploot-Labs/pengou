@@ -51,6 +51,11 @@ HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 \
 # lisibles/exécutables par `node` (permissions par défaut d'un COPY, sans écriture requise au
 # runtime — aucun fichier n'est modifié après le démarrage). `USER` doit venir APRÈS les étapes
 # `apt-get`/`pnpm install --prod` ci-dessus (qui nécessitent root) et AVANT `CMD`.
+# Images envoyées par l'éditeur : le dossier doit exister et appartenir à `node` AVANT `USER node`,
+# sinon le volume nommé monté dessus (hérité du propriétaire à sa création) serait en lecture
+# seule pour l'utilisateur non-root.
+ENV MEDIA_DIR=/app/data/media
+RUN mkdir -p /app/data/media && chown -R node:node /app/data
 USER node
 
 CMD ["node", "apps/server/dist/index.js"]
