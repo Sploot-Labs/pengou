@@ -79,6 +79,7 @@ export const question = pgTable('question', {
   type: questionTypeEnum('type').notNull(),
   prompt: text('prompt').notNull(),
   media: text('media'),
+  mediaAlt: text('media_alt'),
   timeLimit: integer('time_limit').notNull().default(20),
   readingTime: integer('reading_time').notNull().default(6),
   orderIndex: integer('order_index').notNull(),

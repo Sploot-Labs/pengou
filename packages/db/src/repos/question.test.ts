@@ -229,3 +229,22 @@ describe('repo question scopé par jointure sur quiz', () => {
     expect(row.tenantId).toBe(tenantA)
   })
 })
+
+describe('texte alternatif de l\'image (media_alt)', () => {
+  const scopeA = () => tenantScope(ctx.db, tenantA)
+  it('createQuestion stocke media et mediaAlt', async () => {
+    const q = await createQuestion(scopeA(), quizA, { type: 'truefalse', prompt: 'P', timeLimit: 20, payload: { correct: true }, media: '/uploads/t/a.png', mediaAlt: 'Un manchot' })
+    expect(q?.media).toBe('/uploads/t/a.png')
+    expect(q?.mediaAlt).toBe('Un manchot')
+  })
+  it('createQuestion sans mediaAlt le laisse à null', async () => {
+    const q = await createQuestion(scopeA(), quizA, { type: 'truefalse', prompt: 'P', timeLimit: 20, payload: { correct: true } })
+    expect(q?.mediaAlt).toBeNull()
+  })
+  it('updateQuestion peut effacer media et mediaAlt', async () => {
+    const q = await createQuestion(scopeA(), quizA, { type: 'truefalse', prompt: 'P', timeLimit: 20, payload: { correct: true }, media: 'https://exemple.org/a.png', mediaAlt: 'alt' })
+    const u = await updateQuestion(scopeA(), quizA, q!.id, { media: null, mediaAlt: null })
+    expect(u?.media).toBeNull()
+    expect(u?.mediaAlt).toBeNull()
+  })
+})
