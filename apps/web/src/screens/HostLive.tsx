@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import type { RankingEntry, ReadingView } from '../realtime/contracts'
 import { listQuizzes, type QuizListItem } from '../api/quizzes'
+import { boardEntries } from '../realtime/board'
 import { hardReload } from '../realtime/hardReload'
 import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import { Button, Logo, PinDisplay, TimerRing } from '../ui'
@@ -194,6 +195,7 @@ export function HostLive() {
 
   const [actionPending, setActionPending] = useState(false)
   const [actionError, setActionError] = useState<string | null>(null)
+  const [kickPendingId, setKickPendingId] = useState<string | null>(null)
   // `host:skip` déclenche EXACTEMENT le même reveal+scoreboard serveur que
   // `host:reveal` (voir doReveal côté passerelle) — la seule différence
   // voulue est visuelle : « Passer » ne doit jamais montrer l'écran de
@@ -493,6 +495,20 @@ export function HostLive() {
     }
   }
 
+  // Exclusion d'un joueur : pas de retrait optimiste, la liste suit le `lobby:update` du serveur.
+  async function kickPlayer(playerId: string, nickname: string): Promise<void> {
+    if (!window.confirm(`Exclure ${nickname} de la partie ?`)) return
+    setKickPendingId(playerId)
+    setActionError(null)
+    try {
+      await emitAck('host:kick', { playerId })
+    } catch (err) {
+      setActionError(friendlyActionError(err, connection))
+    } finally {
+      setKickPendingId(null)
+    }
+  }
+
   if (!sessionId) {
     return (
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
@@ -694,7 +710,7 @@ export function HostLive() {
   }
 
   function renderLeaderboard(limit: number, focusTarget: boolean) {
-    const top = ranking.slice(0, limit)
+    const top = boardEntries(ranking, players).slice(0, limit)
     if (top.length === 0) {
       return <p style={{ color: 'var(--ink-dim)' }}>Le classement s'affichera après la première question.</p>
     }
@@ -715,6 +731,16 @@ export function HostLive() {
               </span>
               <span className="hostlive-board__name">{p.nickname}</span>
               <span className="hostlive-board__score">{p.score} pts</span>
+              <Button
+                variant="ghost"
+                type="button"
+                className="hostlive-kick"
+                aria-label={`Exclure ${p.nickname}`}
+                disabled={kickPendingId === p.playerId}
+                onClick={() => void kickPlayer(p.playerId, p.nickname)}
+              >
+                Exclure
+              </Button>
             </li>
           ))}
         </ol>
@@ -847,6 +873,16 @@ export function HostLive() {
                       <li key={p.id} className="hostlive-players__chip">
                         {p.nickname}
                         {!p.connected && <span className="visually-hidden"> (hors ligne)</span>}
+                        <Button
+                          variant="ghost"
+                          type="button"
+                          className="hostlive-kick"
+                          aria-label={`Exclure ${p.nickname}`}
+                          disabled={kickPendingId === p.id}
+                          onClick={() => void kickPlayer(p.id, p.nickname)}
+                        >
+                          Exclure
+                        </Button>
                       </li>
                     ))}
                   </ul>
@@ -1032,7 +1068,7 @@ export function HostLive() {
             )}
           </section>
 
-          {(phase === 'question' || phase === 'reveal') && (
+          {(phase === 'reading' || phase === 'question' || phase === 'reveal') && (
             <aside className="hostlive-aside" aria-label="Dernier classement connu">
               {renderLeaderboard(5, false)}
             </aside>
