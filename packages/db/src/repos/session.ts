@@ -112,6 +112,16 @@ export async function setPlayerScore(db: Db, playerId: string, totalScore: numbe
   await db.update(schema.sessionPlayer).set({ totalScore }).where(eq(schema.sessionPlayer.id, playerId))
 }
 
+// Suppression d'un joueur (exclusion par l'animateur) : le pseudo ne doit subsister dans aucun
+// rapport. Les answer_record du joueur partent par la cascade ON DELETE CASCADE. Vrai si une
+// ligne a été supprimée (faux si le joueur n'existe plus, ou n'appartient pas au tenant du contexte RLS).
+export async function deleteSessionPlayer(db: Db, playerId: string): Promise<boolean> {
+  const rows = await db.delete(schema.sessionPlayer)
+    .where(eq(schema.sessionPlayer.id, playerId))
+    .returning({ id: schema.sessionPlayer.id })
+  return rows.length > 0
+}
+
 // Classement d'une session : joueurs triés par total_score desc (podium/scoreboard).
 export async function listSessionPlayersByScore(db: Db, sessionId: string): Promise<SessionPlayer[]> {
   return db.select().from(schema.sessionPlayer)

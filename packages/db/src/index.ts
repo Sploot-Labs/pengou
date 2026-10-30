@@ -24,7 +24,7 @@ export {
 } from './repos/question.js'
 export {
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
-  listSessionPlayersByScore, listSessionPlayers,
+  listSessionPlayersByScore, listSessionPlayers, deleteSessionPlayer,
   saveEngineState, clearEngineState, loadEngineState, loadEngineStateByPin,
   listResumableSessions, abandonStaleSessions, abandonInactiveSessions,
   type GameSession, type SessionPlayer, type AnswerRecord, type SessionStatus,

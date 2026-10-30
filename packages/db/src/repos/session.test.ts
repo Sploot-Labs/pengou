@@ -1,12 +1,12 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import { eq, sql } from 'drizzle-orm'
-import { startTestDb, runMigrations, schema } from '../index.js'
+import { startTestDb, runMigrations, schema, withTenantTx } from '../index.js'
 import { tenantScope } from '../tenant.js'
 import { createQuiz } from './quiz.js'
 import {
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
   listSessionPlayersByScore, saveEngineState, clearEngineState, loadEngineState, loadEngineStateByPin,
-  listResumableSessions, abandonStaleSessions, abandonInactiveSessions,
+  listResumableSessions, abandonStaleSessions, abandonInactiveSessions, deleteSessionPlayer,
 } from './session.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
@@ -273,5 +273,26 @@ describe('repo session scopé au tenant du quiz', () => {
         answer: { choice: 0 } as never, timeMs: 1, isCorrect: false, points: 0,
       }).returning(),
     ).rejects.toThrow()
+  })
+
+  it('deleteSessionPlayer supprime le joueur et, en cascade, ses answer_record', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '777001' })
+    const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Injure', joinToken: 'tok-kick' })
+    await recordAnswer(ctx.db, {
+      sessionId: session!.id, questionId: questionA, playerId: player.id,
+      answer: { choice: 0 }, timeMs: 1000, isCorrect: true, points: 900,
+    })
+    expect(await deleteSessionPlayer(ctx.db, player.id)).toBe(true)
+    expect(await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.id, player.id))).toHaveLength(0)
+    expect(await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.playerId, player.id))).toHaveLength(0)
+    expect(await deleteSessionPlayer(ctx.db, player.id)).toBe(false)
+  })
+
+  it('deleteSessionPlayer sous RLS ne supprime rien dans le contexte d\'un autre tenant', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '777002' })
+    const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Hors champ', joinToken: 'tok-kick-rls' })
+    expect(await withTenantTx(ctx.appDb, { tenantId: tenantB }, (s) => deleteSessionPlayer(s.db, player.id))).toBe(false)
+    expect(await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.id, player.id))).toHaveLength(1)
+    expect(await withTenantTx(ctx.appDb, { tenantId: tenantA }, (s) => deleteSessionPlayer(s.db, player.id))).toBe(true)
   })
 })
