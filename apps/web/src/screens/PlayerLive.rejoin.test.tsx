@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { MotionProvider } from '../motion/index.js'
 import { clearPlayerSession, loadPlayerSession, savePlayerSession } from '../realtime/playerSession'
 import { hardReload } from '../realtime/hardReload'
+import { AckError } from '../realtime/ackError'
 import { PlayerLive } from './PlayerLive'
 
 /**
@@ -134,5 +135,54 @@ describe('PlayerLive : adoption de la partie relancée', () => {
     emitServerEvent('session:relaunched', { role: 'screen', pin: '777777', sessionId: 's9', displayToken: 'd9' })
     expect(loadPlayerSession()).toMatchObject({ pin: '482913', playerId: 'p1' })
     expect(hardReload).not.toHaveBeenCalled()
+  })
+})
+
+describe("PlayerLive : exclusion par l'animateur", () => {
+  const defaultAck = async (event: string) => {
+    if (event === 'player:reconnect') return { playerId: 'p1', phase: 'lobby', score: 0 }
+    return {}
+  }
+  beforeEach(() => {
+    handlers.clear()
+    mockEmitAck.mockReset()
+    mockEmitAck.mockImplementation(defaultAck)
+    savePlayerSession({ pin: '482913', playerId: 'p1', joinToken: 'tok1', nickname: 'Ana' })
+  })
+  afterEach(() => {
+    cleanup()
+    clearPlayerSession()
+    mockEmitAck.mockReset()
+    mockEmitAck.mockImplementation(defaultAck)
+  })
+
+  it('player:kicked : efface la session locale et affiche le message avec un lien vers /join', async () => {
+    renderPlayerLive()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:reconnect', expect.anything()))
+    emitServerEvent('player:kicked', {})
+    expect(await screen.findByText("L'animateur t'a retiré de la partie.")).toBeTruthy()
+    expect(loadPlayerSession()).toBeNull()
+    expect(screen.getByRole('link', { name: 'Rejoindre une partie' }).getAttribute('href')).toBe('/join')
+  })
+
+  it('reconnexion refusée pour exclusion : même écran, pas de redirection silencieuse', async () => {
+    mockEmitAck.mockImplementation(async (event: string) => {
+      if (event === 'player:reconnect') throw new AckError('joueur exclu de la partie', 'kicked')
+      return {}
+    })
+    renderPlayerLive()
+    expect(await screen.findByText("L'animateur t'a retiré de la partie.")).toBeTruthy()
+    expect(loadPlayerSession()).toBeNull()
+    expect(screen.queryByText('Rejoindre')).toBeNull()
+  })
+
+  it('autre échec de reconnexion : comportement inchangé (redirection vers /join)', async () => {
+    mockEmitAck.mockImplementation(async (event: string) => {
+      if (event === 'player:reconnect') throw new Error('joinToken invalide')
+      return {}
+    })
+    renderPlayerLive()
+    expect(await screen.findByText('Rejoindre')).toBeTruthy()
+    expect(screen.queryByText("L'animateur t'a retiré de la partie.")).toBeNull()
   })
 })

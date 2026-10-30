@@ -40,3 +40,6 @@ export interface AutoAdvanceView {
 export type SessionRelaunchedView =
   | { role: 'player'; pin: string; playerId: string; joinToken: string; nickname: string }
   | { role: 'screen'; pin: string; sessionId: string; displayToken: string }
+
+/** Code d'ack renvoyé par `player:reconnect` quand le joueur a été exclu. */
+export const KICKED_ACK_CODE = 'kicked'
