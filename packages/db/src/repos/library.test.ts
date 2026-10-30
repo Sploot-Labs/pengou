@@ -45,6 +45,7 @@ const snapshot: CatalogSnapshot = {
     quiz('z1', ['q3', 'q1', 'q2'], { title: 'Zèbre' }),
     quiz('z2', ['q1', 'q5'], { title: 'Abeille', audience: 'adultes' }),
     quiz('z3', ['q5'], { theme: 'secret' }),
+    quiz('z4', ['q5', 'q6']),
   ],
   rejectedFiles: [],
 }
@@ -102,6 +103,11 @@ describe('lecture du catalogue', () => {
     expect(await getLibraryQuiz(ctx.db, 'z3')).toBeNull()
     expect(await getLibraryQuestions(ctx.db, ['q1', 'q5'])).toBeNull()
     expect((await drawLibraryQuestions(ctx.db, {}, 100, [])).some((i) => i.id === 'q5')).toBe(false)
+  })
+
+  it('ignore un quiz visible dont toutes les questions sont masquées', async () => {
+    expect((await listLibraryQuizzes(ctx.db, {})).some((z) => z.id === 'z4')).toBe(false)
+    expect(await getLibraryQuiz(ctx.db, 'z4')).toBeNull()
   })
 
   it('liste les quiz triés par titre avec leur nombre de questions', async () => {

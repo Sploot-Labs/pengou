@@ -141,6 +141,16 @@ describe('readCatalog', () => {
     expect(log).toHaveBeenCalledTimes(1)
   })
 
+  it('extraDir illisible (ENOTDIR) : journalisé, catalogue livré seul, sans lever', async () => {
+    const notADir = join(root, 'fichier.txt')
+    await put(root, 'fichier.txt', 'x')
+    const log = vi.fn()
+    const snap = await readCatalog({ builtinDir, extraDir: notADir, log })
+    expect(snap.questions.every((q) => q.origin === 'builtin')).toBe(true)
+    expect(snap.rejectedFiles).toEqual([])
+    expect(log).toHaveBeenCalledWith(expect.stringContaining('illisible'))
+  })
+
   it('sans extraDir : seul le catalogue livré', async () => {
     const snap = await readCatalog({ builtinDir })
     expect(snap.questions.every((q) => q.origin === 'builtin')).toBe(true)

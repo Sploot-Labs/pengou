@@ -38,6 +38,12 @@ services:
       FACEBOOK_CLIENT_SECRET: ${FACEBOOK_CLIENT_SECRET:-}
       GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
       GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+      # Contenu de bibliothèque propre à l'instance (optionnel, voir docs/devops.md) :
+      # décommenter cette ligne et le volume ci-dessous.
+      # LIBRARY_EXTRA_DIR: /data/library
+    # volumes:
+    #   # Lecture seule, dossier lisible par l'utilisateur node de l'image.
+    #   - ./library:/data/library:ro
     depends_on:
       db:
         condition: service_healthy

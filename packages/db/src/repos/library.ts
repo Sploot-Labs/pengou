@@ -143,7 +143,8 @@ export async function listLibraryQuizzes(
 ): Promise<LibraryQuizSummary[]> {
   return db.select(quizColumns).from(libraryQuiz)
     .innerJoin(libraryTheme, eq(libraryTheme.id, libraryQuiz.themeId))
-    .where(quizWhere(filters)).orderBy(asc(libraryQuiz.title), asc(libraryQuiz.id))
+    // Un quiz dont toutes les questions sont dans des thèmes masqués n'est pas listé.
+    .where(quizWhere(filters, [sql`${questionCount} > 0`])).orderBy(asc(libraryQuiz.title), asc(libraryQuiz.id))
 }
 
 /** Tirage aléatoire sans doublon, hors `excludeIds`. Renvoie moins de `count` si le catalogue
@@ -189,5 +190,7 @@ export async function getLibraryQuiz(
     .innerJoin(libraryTheme, eq(libraryTheme.id, libraryQuestion.themeId))
     .where(and(eq(libraryQuizQuestion.quizId, id), eq(libraryTheme.hidden, false)))
     .orderBy(asc(libraryQuizQuestion.position))
+  // Quiz orphelin (toutes ses questions masquées) : comme s'il n'existait pas.
+  if (questions.length === 0) return null
   return { quiz, questions }
 }

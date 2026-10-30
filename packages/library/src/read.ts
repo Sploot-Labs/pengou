@@ -209,7 +209,10 @@ export async function readCatalog(opts: ReadCatalogOptions = {}): Promise<Catalo
     try {
       files = await listJsonFiles(opts.extraDir)
     } catch (err) {
-      if ((err as NodeJS.ErrnoException).code !== 'ENOENT') throw err
+      // Dossier absent : normal. Illisible (EACCES, ENOTDIR...) : journalisé, catalogue livré seul.
+      if ((err as NodeJS.ErrnoException).code !== 'ENOENT') {
+        log(`dossier d'instance illisible, ignoré : ${reason(err)}`)
+      }
     }
     for (const rel of files) {
       const originFile = `instance:${rel}`

@@ -11,7 +11,7 @@ const CHUNK = 500
 /** Minuscules sans diacritiques (NFD puis retrait des marques combinantes). Sert à stocker
  * `prompt_search` et à normaliser le terme de recherche côté lecture. */
 export function normalizeSearch(text: string): string {
-  return text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+  return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
 }
 
 function chunks<T>(items: T[]): T[][] {
@@ -89,9 +89,10 @@ export async function syncLibrary(
     // Suppression des lignes retirées, hors fichiers écartés (leurs lignes sont conservées).
     const origins = ['builtin', 'instance'] as const
     let deleted = 0
+    // Les ids passent en un seul paramètre tableau (pas un paramètre par id : limite de 65535 du protocole).
     const stale = (table: typeof libraryQuestion | typeof libraryQuiz, ids: string[]) => and(
       inArray(table.origin, [...origins]),
-      ids.length ? notInArray(table.id, ids) : undefined,
+      ids.length ? sql`${table.id} <> all(${sql.param(ids)}::text[])` : undefined,
       snapshot.rejectedFiles.length ? notInArray(table.originFile, snapshot.rejectedFiles) : undefined,
     )
     const delQuizzes = await tx.delete(libraryQuiz)

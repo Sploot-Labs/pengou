@@ -100,6 +100,15 @@ describe('syncLibrary', () => {
     expect((await ctx.db.select().from(schema.libraryQuestion)).some((r) => r.id === 'i1')).toBe(false)
   })
 
+  it('supprime au-delà de 65535 ids retenus (un seul paramètre tableau)', async () => {
+    const many = Array.from({ length: 70_000 }, (_, i) => q(`m${i}`))
+    await syncLibrary(ctx.db, snap({ questions: many, quizzes: [] }))
+    const res = await syncLibrary(ctx.db, snap({ questions: [q('m0')], quizzes: [] }))
+    expect(res.deleted).toBe(69_999)
+    await syncLibrary(ctx.db, snap())
+    expect((await counts()).questions).toBe(3)
+  }, 120_000)
+
   it('deux synchronisations concurrentes réussissent', async () => {
     await Promise.all([syncLibrary(ctx.db, snap()), syncLibrary(ctx.db, snap())])
     expect(await counts()).toEqual({ themes: 1, questions: 3, quizzes: 1, links: 3 })
