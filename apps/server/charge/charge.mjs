@@ -317,12 +317,13 @@ async function main() {
   writeFileSync(chemin, `${JSON.stringify(resume, null, 2)}\n`)
 
   console.table(latences)
+  const mesure = (x) => (Number.isFinite(x) ? x : 'n/d')
   console.table({
-    'lag event loop p99 max (ms)': { valeur: serveur.lagP99MaxMs },
-    'mémoire RSS max (Mo)': { valeur: serveur.rssMaxMo },
-    'heap max (Mo)': { valeur: serveur.heapMaxMo },
-    "CPU moyen (% d'un cœur)": { valeur: serveur.cpuMoyenPct },
-    "CPU max (% d'un cœur)": { valeur: serveur.cpuMaxPct },
+    'lag event loop p99 max (ms)': { valeur: mesure(serveur.lagP99MaxMs) },
+    'mémoire RSS max (Mo)': { valeur: mesure(serveur.rssMaxMo) },
+    'heap max (Mo)': { valeur: mesure(serveur.heapMaxMo) },
+    "CPU moyen (% d'un cœur)": { valeur: mesure(serveur.cpuMoyenPct) },
+    "CPU max (% d'un cœur)": { valeur: mesure(serveur.cpuMaxPct) },
     'échantillons /metrics': { valeur: serveur.echantillons },
   })
   if (docker && Object.keys(docker).length > 0) console.table(docker)

@@ -52,7 +52,8 @@ export function verdict(resume) {
     zeroDeconnexion: resume.deconnexions === 0,
     reponseP95: resume.latences.reponse.p95 <= REPONSE_P95_MAX_MS,
     diffusionP95: resume.latences.diffusion.p95 <= DIFFUSION_P95_MAX_MS,
-    lagServeurP99: resume.serveur.lagP99MaxMs <= LAG_SERVEUR_P99_MAX_MS,
+    // Sans aucun échantillon /metrics, le critère ne peut pas être tenu.
+    lagServeurP99: resume.serveur.echantillons > 0 && resume.serveur.lagP99MaxMs <= LAG_SERVEUR_P99_MAX_MS,
   }
   if (resume.generateur.lagP99MaxMs > LAG_GENERATEUR_P99_MAX_MS || resume.horlogeIncoherente > 0) {
     return { criteres, verdict: 'invalide' }

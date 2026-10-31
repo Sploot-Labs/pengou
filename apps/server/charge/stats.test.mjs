@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { lireMetriques } from './metriques.mjs'
+import { echantillonnerServeur, lireMetriques } from './metriques.mjs'
 import { estCibleLocale, percentile, resumer, verdict } from './stats.mjs'
 
 describe('percentile (rang le plus proche)', () => {
@@ -90,7 +90,7 @@ function resumeType(surcharges = {}) {
     deconnexions: 0,
     horlogeIncoherente: 0,
     latences: { reponse: { p95: 50 }, diffusion: { p95: 200 } },
-    serveur: { lagP99MaxMs: 20 },
+    serveur: { lagP99MaxMs: 20, echantillons: 5 },
     generateur: { lagP99MaxMs: 5 },
     ...surcharges,
   }
@@ -110,11 +110,11 @@ describe('verdict', () => {
     expect(verdict(resumeType({ deconnexions: 1 })).criteres.zeroDeconnexion).toBe(false)
     expect(verdict(resumeType({ latences: { reponse: { p95: 301 }, diffusion: { p95: 200 } } })).criteres.reponseP95).toBe(false)
     expect(verdict(resumeType({ latences: { reponse: { p95: 50 }, diffusion: { p95: 1001 } } })).criteres.diffusionP95).toBe(false)
-    expect(verdict(resumeType({ serveur: { lagP99MaxMs: 201 } })).criteres.lagServeurP99).toBe(false)
+    expect(verdict(resumeType({ serveur: { lagP99MaxMs: 201, echantillons: 5 } })).criteres.lagServeurP99).toBe(false)
   })
 
   it('accepte les valeurs exactement égales aux seuils', () => {
-    const v = verdict(resumeType({ latences: { reponse: { p95: 300 }, diffusion: { p95: 1000 } }, serveur: { lagP99MaxMs: 200 } }))
+    const v = verdict(resumeType({ latences: { reponse: { p95: 300 }, diffusion: { p95: 1000 } }, serveur: { lagP99MaxMs: 200, echantillons: 5 } }))
     expect(v.verdict).toBe('reussi')
   })
 
@@ -126,6 +126,12 @@ describe('verdict', () => {
     const v = verdict(resumeType({ generateur: { lagP99MaxMs: 100.1 }, deconnexions: 3 }))
     expect(v.verdict).toBe('invalide')
     expect(verdict(resumeType({ generateur: { lagP99MaxMs: 100 } })).verdict).toBe('reussi')
+  })
+
+  it('echoue sans échantillon serveur, même avec un lag à 0 ou absent', () => {
+    expect(verdict(resumeType({ serveur: { lagP99MaxMs: 0, echantillons: 0 } })).criteres.lagServeurP99).toBe(false)
+    expect(verdict(resumeType({ serveur: { lagP99MaxMs: Number.NaN, echantillons: 0 } })).verdict).toBe('echoue')
+    expect(verdict(resumeType({ serveur: { lagP99MaxMs: 0 } })).criteres.lagServeurP99).toBe(false)
   })
 
   it('invalide si une horloge est incohérente', () => {
@@ -154,5 +160,15 @@ describe('lireMetriques', () => {
 
   it('renvoie NaN pour une métrique absente', () => {
     expect(lireMetriques('').rssMo).toBeNaN()
+  })
+})
+
+describe('echantillonnerServeur', () => {
+  it('renvoie NaN et zéro échantillon quand /metrics est injoignable', async () => {
+    const mesures = await echantillonnerServeur('http://127.0.0.1:1', 50).arreter()
+    expect(mesures.echantillons).toBe(0)
+    expect(mesures.lagP99MaxMs).toBeNaN()
+    expect(mesures.rssMaxMo).toBeNaN()
+    expect(mesures.cpuMoyenPct).toBeNaN()
   })
 })

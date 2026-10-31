@@ -20,6 +20,7 @@ function valeurMetrique(texte, nom) {
 }
 
 const MO = 1024 * 1024
+const DELAI_LECTURE_MS = 2000
 
 /** Extrait du texte de /metrics les quatre mesures utiles (lag en ms, mémoire en Mo, CPU en secondes). */
 export function lireMetriques(texte) {
@@ -31,7 +32,8 @@ export function lireMetriques(texte) {
   }
 }
 
-const maxDe = (valeurs) => valeurs.reduce((a, b) => Math.max(a, b), 0)
+// Maximum d'une série ; `NaN` si elle est vide (aucune mesure ne doit passer pour un zéro).
+const maxDe = (valeurs) => (valeurs.length === 0 ? Number.NaN : Math.max(...valeurs))
 const auDixieme = (x) => Math.round(x * 10) / 10
 
 /**
@@ -48,7 +50,7 @@ export function echantillonnerServeur(cible, periodeMs = 1000) {
 
   const lire = async () => {
     try {
-      const res = await fetch(`${cible}/metrics`)
+      const res = await fetch(`${cible}/metrics`, { signal: AbortSignal.timeout(DELAI_LECTURE_MS) })
       if (!res.ok) return
       const maintenant = Date.now()
       const m = lireMetriques(await res.text())
@@ -79,7 +81,7 @@ export function echantillonnerServeur(cible, periodeMs = 1000) {
         lagP99MaxMs: auDixieme(maxDe(lag)),
         rssMaxMo: auDixieme(maxDe(rss)),
         heapMaxMo: auDixieme(maxDe(heap)),
-        cpuMoyenPct: cpu.length ? auDixieme(cpu.reduce((a, b) => a + b, 0) / cpu.length) : 0,
+        cpuMoyenPct: cpu.length ? auDixieme(cpu.reduce((a, b) => a + b, 0) / cpu.length) : Number.NaN,
         cpuMaxPct: auDixieme(maxDe(cpu)),
         echantillons: lag.length,
       }
