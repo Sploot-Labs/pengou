@@ -213,10 +213,9 @@ async function main() {
   const selected = listing.filter((e) => e.category in CATEGORY_THEME)
   console.log(`${listing.length} quiz listés, ${selected.length} retenus`)
 
-  // Énoncés en double d'un quiz source à l'autre : seule la première occurrence (ordre des numéros
-  // de quiz source) est gardée.
-  // Les questions livrées amorcent la table : elles gagnent le dédoublonnage quel que soit le numéro
-  // de leur quiz source.
+  // Énoncés en double d'un quiz source à l'autre : seule la première occurrence est gardée. Les
+  // questions déjà livrées amorcent la table et gagnent donc le dédoublonnage, quel que soit le
+  // numéro de leur quiz source ; pour les autres, l'ordre des numéros de quiz source décide.
   const seenPrompts = new Map<string, string>()
   for (const [id, d] of delivered) if (!(id in EXCLUDED)) seenPrompts.set(normalizePrompt(d.prompt), id)
   const questionsBySource = new Map<number, OutQuestion[]>()
