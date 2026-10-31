@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=340"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0340-1",
+      "type": "mcq",
+      "prompt": "Quelle bâtisse est destinée au logement des ânes et des chevaux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Écurie",
+            "correct": true
+          },
+          {
+            "label": "Arène",
+            "correct": false
+          },
+          {
+            "label": "Ranch",
+            "correct": false
+          },
+          {
+            "label": "Hippodrome",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0340-2",
+      "type": "mcq",
+      "prompt": "Quel abri, aménagé par l'homme, est aussi appelé « cabane à oiseaux » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Garenne",
+            "correct": false
+          },
+          {
+            "label": "Poulailler",
+            "correct": false
+          },
+          {
+            "label": "Frayère",
+            "correct": false
+          },
+          {
+            "label": "Nichoir",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0340-3",
+      "type": "mcq",
+      "prompt": "Dans quoi sont généralement réunis les lapins au fond des jardins ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Clapier",
+            "correct": true
+          },
+          {
+            "label": "Écloserie",
+            "correct": false
+          },
+          {
+            "label": "Nichoir",
+            "correct": false
+          },
+          {
+            "label": "Volière",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0340-4",
+      "type": "mcq",
+      "prompt": "Quelle cage de grande taille est destinée à contenir des oiseaux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Volière",
+            "correct": true
+          },
+          {
+            "label": "Valise",
+            "correct": false
+          },
+          {
+            "label": "Volute",
+            "correct": false
+          },
+          {
+            "label": "Vitrine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

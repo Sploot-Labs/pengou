@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=133"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0133-1",
+      "type": "mcq",
+      "prompt": "Comment est aussi appelé le tennis de table ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ping-pong",
+            "correct": true
+          },
+          {
+            "label": "Padel",
+            "correct": false
+          },
+          {
+            "label": "Pelote basque",
+            "correct": false
+          },
+          {
+            "label": "Jokari",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0133-2",
+      "type": "mcq",
+      "prompt": "Dans quel jeu un chistera est-il fixé à la main du joueur via un gant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pelote basque",
+            "correct": true
+          },
+          {
+            "label": "Tennis",
+            "correct": false
+          },
+          {
+            "label": "Padel",
+            "correct": false
+          },
+          {
+            "label": "Jokari",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0133-3",
+      "type": "mcq",
+      "prompt": "Quel sport de raquette se joue sur un terrain de jeu entouré de murs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tennis",
+            "correct": false
+          },
+          {
+            "label": "Crosse",
+            "correct": false
+          },
+          {
+            "label": "Badminton",
+            "correct": false
+          },
+          {
+            "label": "Squash",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0133-4",
+      "type": "mcq",
+      "prompt": "Quel jeu utilise une balle en caoutchouc attachée à un socle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Footbag",
+            "correct": false
+          },
+          {
+            "label": "Jokari",
+            "correct": true
+          },
+          {
+            "label": "Smolball",
+            "correct": false
+          },
+          {
+            "label": "Chuiwan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

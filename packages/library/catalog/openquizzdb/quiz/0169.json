@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=169"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0169-1",
+      "type": "mcq",
+      "prompt": "Quelle carbonade est composée de viande mijotée dans la bière ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Germanique",
+            "correct": false
+          },
+          {
+            "label": "Flamande",
+            "correct": true
+          },
+          {
+            "label": "Bruxelloise",
+            "correct": false
+          },
+          {
+            "label": "Wallone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0169-2",
+      "type": "mcq",
+      "prompt": "Quel pain brioché constellé de pépites de sucre est vendu en Belgique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Merveilleux",
+            "correct": false
+          },
+          {
+            "label": "Gosette",
+            "correct": false
+          },
+          {
+            "label": "Craquelin",
+            "correct": true
+          },
+          {
+            "label": "Croustillon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0169-3",
+      "type": "mcq",
+      "prompt": "Quelle saucisse panée et épicée est souvent servie dans les friteries ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gandeuillot",
+            "correct": false
+          },
+          {
+            "label": "Fricadelle",
+            "correct": true
+          },
+          {
+            "label": "Rosette",
+            "correct": false
+          },
+          {
+            "label": "Longeole",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0169-4",
+      "type": "mcq",
+      "prompt": "Quelle demi-baguette contient viande chaude, frites et sauce ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mitraillette",
+            "correct": true
+          },
+          {
+            "label": "Truffade",
+            "correct": false
+          },
+          {
+            "label": "Rosti",
+            "correct": false
+          },
+          {
+            "label": "Frico",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

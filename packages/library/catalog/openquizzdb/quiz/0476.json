@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=476"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0476-1",
+      "type": "mcq",
+      "prompt": "Quel était le métier des deux membres du groupe Début de Soirée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Plombiers",
+            "correct": false
+          },
+          {
+            "label": "Avocats",
+            "correct": false
+          },
+          {
+            "label": "Comptables",
+            "correct": false
+          },
+          {
+            "label": "Disc-jockeys",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0476-2",
+      "type": "mcq",
+      "prompt": "Quel membre du groupe Mano Negra est aussi appelé Oscar Tramor ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pierre Gauthé",
+            "correct": false
+          },
+          {
+            "label": "Joseph Dahan",
+            "correct": false
+          },
+          {
+            "label": "Daniel Jamet",
+            "correct": false
+          },
+          {
+            "label": "Manu Chao",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0476-3",
+      "type": "mcq",
+      "prompt": "Quel titre des Avions sera d'abord un flop avant de devenir un tube ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Loin",
+            "correct": false
+          },
+          {
+            "label": "Cargo de nuit",
+            "correct": false
+          },
+          {
+            "label": "Fanfare",
+            "correct": false
+          },
+          {
+            "label": "Nuit Sauvage",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0476-4",
+      "type": "mcq",
+      "prompt": "À quel groupe originaire de Toulouse doit-on le tube « Thaï nana » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les Vagabonds",
+            "correct": false
+          },
+          {
+            "label": "Images",
+            "correct": false
+          },
+          {
+            "label": "Kazero",
+            "correct": true
+          },
+          {
+            "label": "Les Forbans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

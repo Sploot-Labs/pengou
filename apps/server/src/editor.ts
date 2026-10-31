@@ -9,6 +9,7 @@ import { registerReportRoutes } from './routes/sessions.js'
 import { registerWorkspaceRoutes } from './routes/workspaces.js' // Slice 3a
 import { registerMemberRoutes } from './routes/members.js' // Slice 3b
 import { registerInvitationRoutes } from './routes/invitations.js' // Slice 3b
+import { registerLibraryRoutes } from './routes/library.js' // Bibliothèque de questions
 
 export function registerEditor(
   app: FastifyInstance,
@@ -22,6 +23,7 @@ export function registerEditor(
   registerWorkspaceRoutes(app, routeDeps) // Slice 3a : gestion des workspaces
   registerMemberRoutes(app, routeDeps) // Slice 3b : gestion des membres
   registerInvitationRoutes(app, routeDeps) // Slice 3b : invitations
+  registerLibraryRoutes(app, routeDeps) // Bibliothèque de questions
 }
 // NOTE : les routes 3b (membres/invitations) sont enregistrées ci-dessus ; leurs fichiers sont
 // livrés dans le même chantier. Voir routes/members.ts, routes/invitations.ts, require-permission.ts.

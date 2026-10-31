@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=268"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0268-1",
+      "type": "mcq",
+      "prompt": "À quel héros des studios Pixar Tom Hanks prête-t-il sa voix ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Woody",
+            "correct": true
+          },
+          {
+            "label": "Wolverine",
+            "correct": false
+          },
+          {
+            "label": "Wukong",
+            "correct": false
+          },
+          {
+            "label": "Walter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0268-2",
+      "type": "mcq",
+      "prompt": "Dans quel château a eu lieu le mariage de Charles et Camilla ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Westerlo",
+            "correct": false
+          },
+          {
+            "label": "Windsor",
+            "correct": true
+          },
+          {
+            "label": "Wollaton Hall",
+            "correct": false
+          },
+          {
+            "label": "Wervik",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0268-3",
+      "type": "mcq",
+      "prompt": "Qui est Logan dans la bande dessinée de Marvel Comics « X-Men » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wyatt Earp",
+            "correct": false
+          },
+          {
+            "label": "Wukong",
+            "correct": false
+          },
+          {
+            "label": "Woody",
+            "correct": false
+          },
+          {
+            "label": "Wolverine",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0268-4",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de la Nouvelle-Zélande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Winnipeg",
+            "correct": false
+          },
+          {
+            "label": "Worcester",
+            "correct": false
+          },
+          {
+            "label": "Wellington",
+            "correct": true
+          },
+          {
+            "label": "Washington",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

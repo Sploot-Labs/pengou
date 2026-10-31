@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=378"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0378-1",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le championnat de France de basket depuis 1993 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "B Pro",
+            "correct": false
+          },
+          {
+            "label": "CFA",
+            "correct": false
+          },
+          {
+            "label": "Super G",
+            "correct": false
+          },
+          {
+            "label": "Pro A",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0378-2",
+      "type": "mcq",
+      "prompt": "Quelle organisation regroupe les clubs pros de basket en France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "LNB",
+            "correct": true
+          },
+          {
+            "label": "Pro A",
+            "correct": false
+          },
+          {
+            "label": "B Pro",
+            "correct": false
+          },
+          {
+            "label": "Super G",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0378-3",
+      "type": "mcq",
+      "prompt": "Quel pays est premier fournisseur de joueurs NBA non-américains ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Portugal",
+            "correct": false
+          },
+          {
+            "label": "Belgique",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": true
+          },
+          {
+            "label": "Suisse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0378-4",
+      "type": "mcq",
+      "prompt": "Quelle fédération gère le basket-ball en Belgique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "LNB",
+            "correct": false
+          },
+          {
+            "label": "MLB",
+            "correct": false
+          },
+          {
+            "label": "FBBL",
+            "correct": false
+          },
+          {
+            "label": "FLBB",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

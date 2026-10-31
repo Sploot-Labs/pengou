@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=572"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0572-1",
+      "type": "mcq",
+      "prompt": "Quel Coca-Cola sans sucre vise un public plus masculin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coca Zoom",
+            "correct": false
+          },
+          {
+            "label": "Coca Zen",
+            "correct": false
+          },
+          {
+            "label": "Coca Zèbre",
+            "correct": false
+          },
+          {
+            "label": "Coca Zero",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0572-2",
+      "type": "mcq",
+      "prompt": "Quelle boisson est aussi connue sous le nom de Diet Coke ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coca Zero",
+            "correct": false
+          },
+          {
+            "label": "Coca Life",
+            "correct": false
+          },
+          {
+            "label": "Coca BlaK",
+            "correct": false
+          },
+          {
+            "label": "Coca Light",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0572-3",
+      "type": "mcq",
+      "prompt": "Quelle variation du Coca-Cola fut mise en vente après le Light ?",
+      "payload": {
+        "options": [
+          {
+            "label": "BlaK",
+            "correct": false
+          },
+          {
+            "label": "Zero",
+            "correct": false
+          },
+          {
+            "label": "Life",
+            "correct": false
+          },
+          {
+            "label": "Cherry",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0572-4",
+      "type": "mcq",
+      "prompt": "Quelle version du Coca-Cola présente un goût enrichi au café ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zero",
+            "correct": false
+          },
+          {
+            "label": "BlaK",
+            "correct": true
+          },
+          {
+            "label": "Life",
+            "correct": false
+          },
+          {
+            "label": "Cherry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

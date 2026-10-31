@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=43"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0043-1",
+      "type": "mcq",
+      "prompt": "Quel fruit se compose d'une coque sphérique protégeant une amande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Noix du Brésil",
+            "correct": false
+          },
+          {
+            "label": "Noix de cajou",
+            "correct": false
+          },
+          {
+            "label": "Noix de pécan",
+            "correct": false
+          },
+          {
+            "label": "Noix de coco",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0043-2",
+      "type": "mcq",
+      "prompt": "Dans quelle enveloppe se cachent les graines de petits-pois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gousse",
+            "correct": true
+          },
+          {
+            "label": "Capsule",
+            "correct": false
+          },
+          {
+            "label": "Drupe",
+            "correct": false
+          },
+          {
+            "label": "Follicule",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0043-3",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on un fruit charnu à noyau tel que la cerise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Faîne",
+            "correct": false
+          },
+          {
+            "label": "Nucule",
+            "correct": false
+          },
+          {
+            "label": "Drupe",
+            "correct": true
+          },
+          {
+            "label": "Baie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0043-4",
+      "type": "mcq",
+      "prompt": "Quelle enveloppe verte entourant la coque est spécifique à la noix ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brou",
+            "correct": true
+          },
+          {
+            "label": "Pédoncule",
+            "correct": false
+          },
+          {
+            "label": "Cramoisi",
+            "correct": false
+          },
+          {
+            "label": "Pourpre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

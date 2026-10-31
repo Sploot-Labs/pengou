@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=237"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0237-1",
+      "type": "mcq",
+      "prompt": "Quelle est l'encyclopédie collaborative la plus utilisée sur Internet ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Framasoft",
+            "correct": false
+          },
+          {
+            "label": "Pandocréon",
+            "correct": false
+          },
+          {
+            "label": "Netalya",
+            "correct": false
+          },
+          {
+            "label": "Wikipédia",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0237-2",
+      "type": "mcq",
+      "prompt": "Que sont « Google Chrome », « Internet Explorer » et « Mozilla Firefox » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Navigateurs",
+            "correct": true
+          },
+          {
+            "label": "Moteurs",
+            "correct": false
+          },
+          {
+            "label": "Encyclopédies",
+            "correct": false
+          },
+          {
+            "label": "Routeurs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0237-3",
+      "type": "mcq",
+      "prompt": "Que signifie le deuxième w du www des adresses de sites internet ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wide",
+            "correct": true
+          },
+          {
+            "label": "Web",
+            "correct": false
+          },
+          {
+            "label": "Worse",
+            "correct": false
+          },
+          {
+            "label": "World",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0237-4",
+      "type": "mcq",
+      "prompt": "Quel nom portait le navigateur Internet devenu « Microsoft Edge » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Firefox",
+            "correct": false
+          },
+          {
+            "label": "Internet Explorer",
+            "correct": true
+          },
+          {
+            "label": "Chrome",
+            "correct": false
+          },
+          {
+            "label": "Safari",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

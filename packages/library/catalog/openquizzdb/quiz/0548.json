@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=548"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0548-1",
+      "type": "mcq",
+      "prompt": "Quel est le nom du cheval de Lucky Luke, célèbre cow-boy de BD ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pégase",
+            "correct": false
+          },
+          {
+            "label": "Yakari",
+            "correct": false
+          },
+          {
+            "label": "Tornado",
+            "correct": false
+          },
+          {
+            "label": "Jolly Jumper",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0548-2",
+      "type": "mcq",
+      "prompt": "Quelle célèbre marque automobile a pour emblème un cheval cabré ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alfa Romeo",
+            "correct": false
+          },
+          {
+            "label": "Ferrari",
+            "correct": true
+          },
+          {
+            "label": "Peugeot",
+            "correct": false
+          },
+          {
+            "label": "Lamborghini",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0548-3",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le cheval ailé relaté dans la mythologie grecque ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fungus",
+            "correct": false
+          },
+          {
+            "label": "Arion",
+            "correct": false
+          },
+          {
+            "label": "Bucéphale",
+            "correct": false
+          },
+          {
+            "label": "Pégase",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0548-4",
+      "type": "mcq",
+      "prompt": "Combien y a-t-il de cavaliers sur un échiquier au début d'une partie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Deux",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": true
+          },
+          {
+            "label": "Un",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

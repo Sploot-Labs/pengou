@@ -75,6 +75,73 @@ Le volume `db-data` fige le mot de passe de la base au premier démarrage. Chang
 
 Tant que le paquet GHCR est privé, l'hôte doit s'authentifier (`docker login ghcr.io`) avec un jeton disposant du scope `read:packages` pour tirer l'image.
 
+### Contenu de bibliothèque propre à l'instance
+
+La bibliothèque de questions contient un catalogue livré avec l'image. Un auto-hébergeur peut y ajouter ses propres quiz et questions, sans reconstruire l'image, en pointant la variable `LIBRARY_EXTRA_DIR` vers un dossier. Le serveur lit ce dossier à chaque démarrage, en plus du catalogue livré, et synchronise la base.
+
+Chaque fichier `*.json` du dossier (sous-dossiers compris, hors `themes.json`) est un pack :
+
+```json
+{
+  "source": { "name": "Mon club", "license": "CC0", "url": "https://example.org" },
+  "questions": [
+    {
+      "id": "club-001",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de la France ?",
+      "payload": { "options": [{ "label": "Paris", "correct": true }, { "label": "Lyon", "correct": false }] },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous",
+      "timeLimit": 20,
+      "readingTime": 6
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "club-quiz-1",
+      "title": "Géographie pour débuter",
+      "description": "Optionnel.",
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": ["club-001"]
+    }
+  ]
+}
+```
+
+Les champs `source`, `questions` et `quizzes` sont obligatoires (les deux listes peuvent être vides). La source (`name`, `license`, `url` facultatif) s'applique à tout le pack et s'affiche dans la bibliothèque et l'éditeur. Les identifiants de questions et de quiz doivent être uniques dans tout le catalogue, livré compris : préfixer les siens évite les collisions. Le `payload` suit le format de l'éditeur pour le type choisi (`mcq`, `truefalse`, `text` ou `slider`) et il est validé comme pour une question créée à la main. `timeLimit` (20 par défaut) et `readingTime` (6 par défaut) sont facultatifs, ainsi que `description`. Les critères prennent leurs valeurs dans des listes fixes : `difficulty` vaut `facile`, `moyen` ou `difficile`, `audience` vaut `enfants`, `adultes` ou `tous`, `language` est un code ISO 639-1 en minuscules (`fr`, `en`) et `theme` est l'identifiant d'un thème existant. Un quiz ne référence que des questions du même pack. Il n'y a pas de média dans le catalogue.
+
+Un fichier `themes.json` à la racine du dossier ajuste la liste des thèmes :
+
+```json
+{
+  "add": [{ "id": "geographie", "label": "Géographie" }],
+  "relabel": { "cinema": "Cinéma et séries" },
+  "hide": ["sport"]
+}
+```
+
+`add` crée des thèmes (identifiant en minuscules, chiffres et tirets), `relabel` change le libellé d'un thème existant et `hide` le masque. Un thème masqué retire ses questions et ses quiz de toutes les réponses de l'API. Un thème ne se supprime pas : pour le retirer, on le masque. Les entrées de `relabel` ou `hide` qui visent un thème inconnu sont ignorées et journalisées.
+
+Un fichier invalide (JSON mal formé, champ hors format, payload refusé, identifiant déjà pris, thème ou question inconnus) est écarté en entier : l'erreur est journalisée au démarrage avec le nom du fichier et la raison, les lignes que ce fichier avait déjà fournies restent en base dans leur version précédente, et le serveur démarre normalement. C'est valable aussi pour un `themes.json` invalide. Un dossier absent ou illisible est journalisé et ignoré : seul le catalogue livré est utilisé. Une question ou un quiz qui disparaît d'un fichier valide est supprimé de la base au démarrage suivant.
+
+Le contenu ajouté relève de la responsabilité de l'hébergeur : il doit avoir le droit de le diffuser et indiquer la licence exacte dans `source.license`. Les copies faites par les utilisateurs conservent cette attribution. La licence `CC BY-SA 4.0` est reconnue par l'interface, qui y ajoute un lien vers son texte.
+
+Avec Docker, monter le dossier en lecture seule dans le conteneur et le rendre lisible par l'utilisateur `node` (l'image ne tourne pas en root). Dans `docker-compose.prod.yml`, décommenter le volume et la variable d'environnement du service `app` :
+
+```yaml
+    environment:
+      LIBRARY_EXTRA_DIR: /data/library
+    volumes:
+      - ./library:/data/library:ro
+```
+
+Sur l'hôte, `chmod -R a+rX ./library` suffit si le dossier n'appartient pas à l'utilisateur d'uid 1000 (celui de `node`).
+
 ## 7. Fonctions de sécurité
 
 À activer dans Settings, Code security (valable pour un dépôt public).

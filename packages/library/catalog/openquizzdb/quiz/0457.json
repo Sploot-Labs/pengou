@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=457"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0457-1",
+      "type": "mcq",
+      "prompt": "Quelle friandise belge sucrée est aussi appelée « chapeau de curé » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cuberdon",
+            "correct": true
+          },
+          {
+            "label": "Calisson",
+            "correct": false
+          },
+          {
+            "label": "Rigolette",
+            "correct": false
+          },
+          {
+            "label": "Speculoos",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0457-2",
+      "type": "mcq",
+      "prompt": "Quel biscuit au miel très dur fait la fierté de la ville de Dinant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tuile",
+            "correct": false
+          },
+          {
+            "label": "Rocher",
+            "correct": false
+          },
+          {
+            "label": "Couque",
+            "correct": true
+          },
+          {
+            "label": "Palette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0457-3",
+      "type": "mcq",
+      "prompt": "Quelle bière a pour symbole une truite avec un anneau dans la bouche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Omega",
+            "correct": false
+          },
+          {
+            "label": "Orval",
+            "correct": true
+          },
+          {
+            "label": "Orezza",
+            "correct": false
+          },
+          {
+            "label": "Omer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0457-4",
+      "type": "mcq",
+      "prompt": "Quel plat belge peut être fait avec volaille, poisson ou crustacés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Godverdom",
+            "correct": false
+          },
+          {
+            "label": "Waterzooï",
+            "correct": true
+          },
+          {
+            "label": "Potferdeke",
+            "correct": false
+          },
+          {
+            "label": "Smerlap",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

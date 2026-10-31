@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=379"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0379-1",
+      "type": "mcq",
+      "prompt": "De quelle guerre le film britanno-américain « Full Metal Jacket » traite-t-il ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Koweit",
+            "correct": false
+          },
+          {
+            "label": "Corée",
+            "correct": false
+          },
+          {
+            "label": "Viêt Nam",
+            "correct": true
+          },
+          {
+            "label": "Irak",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0379-3",
+      "type": "mcq",
+      "prompt": "Quel réalisateur a dirigé « Apocalypse Now » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oliver Stone",
+            "correct": false
+          },
+          {
+            "label": "Francis Ford Coppola",
+            "correct": true
+          },
+          {
+            "label": "David Lynch",
+            "correct": false
+          },
+          {
+            "label": "Ridley Scott",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0379-4",
+      "type": "mcq",
+      "prompt": "Quel film de Sam Mendes semble être tourné en un seul plan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fury",
+            "correct": false
+          },
+          {
+            "label": "1917",
+            "correct": true
+          },
+          {
+            "label": "Platoon",
+            "correct": false
+          },
+          {
+            "label": "War Machine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

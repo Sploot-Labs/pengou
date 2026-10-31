@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=291"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0291-1",
+      "type": "mcq",
+      "prompt": "Quel jeune Viking est le héros de « Dragons » (2010) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Harold",
+            "correct": true
+          },
+          {
+            "label": "Hector",
+            "correct": false
+          },
+          {
+            "label": "Harry",
+            "correct": false
+          },
+          {
+            "label": "Victor",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0291-2",
+      "type": "mcq",
+      "prompt": "Dans quel pays le dragon est-il un symbole de vie et de puissance ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chine",
+            "correct": true
+          },
+          {
+            "label": "Pérou",
+            "correct": false
+          },
+          {
+            "label": "Inde",
+            "correct": false
+          },
+          {
+            "label": "Islande",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0291-3",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le petit dragon dans « Mulan » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fitou",
+            "correct": false
+          },
+          {
+            "label": "Golu",
+            "correct": false
+          },
+          {
+            "label": "Krokmou",
+            "correct": false
+          },
+          {
+            "label": "Mushu",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0291-4",
+      "type": "mcq",
+      "prompt": "Dans quel film Dragon est un vaisseau militaire du colonel Quaritch ?",
+      "payload": {
+        "options": [
+          {
+            "label": "X-Men",
+            "correct": false
+          },
+          {
+            "label": "Avatar",
+            "correct": true
+          },
+          {
+            "label": "Cloverfield",
+            "correct": false
+          },
+          {
+            "label": "Avengers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

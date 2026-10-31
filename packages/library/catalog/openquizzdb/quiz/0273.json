@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=273"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0273-1",
+      "type": "mcq",
+      "prompt": "Quelle plante composait la couronne des vainqueurs dans l'Antiquité ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Persil",
+            "correct": false
+          },
+          {
+            "label": "Basilic",
+            "correct": false
+          },
+          {
+            "label": "Laurier",
+            "correct": true
+          },
+          {
+            "label": "Thym",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0273-2",
+      "type": "mcq",
+      "prompt": "Quelle plante sert à préparer le thé au Maghreb ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Menthe",
+            "correct": true
+          },
+          {
+            "label": "Anis",
+            "correct": false
+          },
+          {
+            "label": "Coriandre",
+            "correct": false
+          },
+          {
+            "label": "Cannelle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0273-3",
+      "type": "mcq",
+      "prompt": "Quelle plante est appelée « farigoule » en Provence ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thym",
+            "correct": true
+          },
+          {
+            "label": "Marjolaine",
+            "correct": false
+          },
+          {
+            "label": "Bergamote",
+            "correct": false
+          },
+          {
+            "label": "Basilic",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0273-4",
+      "type": "mcq",
+      "prompt": "Quelle plante compose le pistou, avec l'ail et l'huile d'olive ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cumin",
+            "correct": false
+          },
+          {
+            "label": "Menthe",
+            "correct": false
+          },
+          {
+            "label": "Marjolaine",
+            "correct": false
+          },
+          {
+            "label": "Basilic",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

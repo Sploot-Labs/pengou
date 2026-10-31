@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=430"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0430-1",
+      "type": "mcq",
+      "prompt": "Quelles sont les deux couleurs du drapeau du Québec, révélé en 1948 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rouge et bleu",
+            "correct": false
+          },
+          {
+            "label": "Bleu et blanc",
+            "correct": true
+          },
+          {
+            "label": "Bleu et rouge",
+            "correct": false
+          },
+          {
+            "label": "Rouge et blanc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0430-2",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on le renne des régions arctiques au Canada ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Boisé",
+            "correct": false
+          },
+          {
+            "label": "Grand cerf",
+            "correct": false
+          },
+          {
+            "label": "Caribou",
+            "correct": true
+          },
+          {
+            "label": "Renne canadien",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0430-3",
+      "type": "mcq",
+      "prompt": "Quelle artiste célèbre, née à Nieppe, a chanté « Ma cabane au Canada » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sheila",
+            "correct": false
+          },
+          {
+            "label": "Line Renaud",
+            "correct": true
+          },
+          {
+            "label": "Régine",
+            "correct": false
+          },
+          {
+            "label": "Juliette Greco",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

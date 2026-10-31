@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=517"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0517-1",
+      "type": "mcq",
+      "prompt": "Comment se prénomme la métisse d'Ibiza chantée par Julien Clerc ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rosanna",
+            "correct": false
+          },
+          {
+            "label": "Mélissa",
+            "correct": true
+          },
+          {
+            "label": "Marbella",
+            "correct": false
+          },
+          {
+            "label": "Cassandra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0517-2",
+      "type": "mcq",
+      "prompt": "Dans quelle ville « Nathalie » guide-t-elle Gilbert Bécaud dans une chanson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Belgrade",
+            "correct": false
+          },
+          {
+            "label": "Paris",
+            "correct": false
+          },
+          {
+            "label": "Madrid",
+            "correct": false
+          },
+          {
+            "label": "Moscou",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0517-3",
+      "type": "mcq",
+      "prompt": "Quelle est la matière préférée de la chanteuse Caroline Loeb ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ouate",
+            "correct": true
+          },
+          {
+            "label": "Ormeau",
+            "correct": false
+          },
+          {
+            "label": "Organza",
+            "correct": false
+          },
+          {
+            "label": "Osier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0517-4",
+      "type": "mcq",
+      "prompt": "Quel artiste strasbourgeois au grand coeur chantait « Pour le plaisir » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gérard Blanc",
+            "correct": false
+          },
+          {
+            "label": "Alain Souchon",
+            "correct": false
+          },
+          {
+            "label": "Hervé Vilard",
+            "correct": false
+          },
+          {
+            "label": "Herbert Léonard",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

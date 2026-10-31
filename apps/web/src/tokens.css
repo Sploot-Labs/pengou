@@ -53,6 +53,11 @@ body {
   margin: 0;
 }
 
+/* Les resets d'éléments ci-dessous passent par `:where(.prototype-root)`,
+   dont la spécificité est nulle : `p { margin: 0 }` ou `button { color:
+   inherit }` ne pèsent alors que (0,0,1), et la moindre classe de composant
+   (`.host-launch__warning`, `.ab-button--primary`…) l'emporte sans avoir à
+   se préfixer par `.prototype-root`. */
 .prototype-root {
   min-height: 100vh;
   background: var(--stage);
@@ -63,10 +68,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.prototype-root h1,
-.prototype-root h2,
-.prototype-root h3,
-.prototype-root h4 {
+:where(.prototype-root) :is(h1, h2, h3, h4) {
   font-family: var(--font-display);
   /* Fredoka culmine à 600 : au-delà le navigateur synthétiserait un faux-gras. */
   font-weight: 600;
@@ -75,42 +77,49 @@ body {
   color: var(--ink-strong);
 }
 
-.prototype-root h1 {
+:where(.prototype-root) h1 {
   font-size: var(--fs-title);
 }
 
-.prototype-root h2 {
+:where(.prototype-root) h2 {
   font-size: var(--fs-h2);
 }
 
-.prototype-root h3 {
+:where(.prototype-root) h3 {
   font-size: var(--fs-h3);
 }
 
-.prototype-root p {
+:where(.prototype-root) p {
   margin: 0;
 }
 
-.prototype-root ul {
+/* ol aussi : toutes les listes ordonnées de l'app (scores, podium, récap,
+   sélection de la bibliothèque) affichent leur propre rang, et le retrait
+   navigateur de 40px les décalait vers la droite. */
+:where(.prototype-root) :is(ul, ol) {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.prototype-root button {
+:where(.prototype-root) button {
   font-family: inherit;
   color: inherit;
 }
 
-.prototype-root input,
-.prototype-root select,
-.prototype-root textarea {
+:where(.prototype-root) :is(input, select, textarea) {
   font-family: inherit;
   font-size: inherit;
   color: var(--ink-strong);
   background: var(--surface-2);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
+}
+
+/* Cases à cocher et boutons radio aux couleurs du thème, pas en gris et
+   bleu système. */
+:where(.prototype-root) :is(input[type="radio"], input[type="checkbox"]) {
+  accent-color: var(--brand);
 }
 
 /* Only bare textual links (no className — e.g. inline cross-links like

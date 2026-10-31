@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=473"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0473-1",
+      "type": "mcq",
+      "prompt": "Laquelle de ces communes importantes est la plus peuplée d'Italie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rome",
+            "correct": true
+          },
+          {
+            "label": "Naples",
+            "correct": false
+          },
+          {
+            "label": "Milan",
+            "correct": false
+          },
+          {
+            "label": "Florence",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0473-2",
+      "type": "mcq",
+      "prompt": "Quel État enclavé est contenu dans le territoire de la ville de Rome ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vatican",
+            "correct": true
+          },
+          {
+            "label": "Lichtenstein",
+            "correct": false
+          },
+          {
+            "label": "Monaco",
+            "correct": false
+          },
+          {
+            "label": "Saint-Marin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0473-3",
+      "type": "mcq",
+      "prompt": "De quel climat particulièrement clément bénéficie la ville de Rome ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tropical",
+            "correct": false
+          },
+          {
+            "label": "Tempéré",
+            "correct": false
+          },
+          {
+            "label": "Océanique",
+            "correct": false
+          },
+          {
+            "label": "Méditerranéen",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0473-4",
+      "type": "mcq",
+      "prompt": "Quel animal a été choisi comme symbole de la ville de Rome ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Louve",
+            "correct": true
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          },
+          {
+            "label": "Chèvre",
+            "correct": false
+          },
+          {
+            "label": "Cerf",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

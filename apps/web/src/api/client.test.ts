@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { apiDelete, apiGet, apiPatch, apiPost, ApiError } from './client.js'
+import { apiDelete, apiGet, apiPatch, apiPost } from './client.js'
 import { setActiveTenantId } from './activeTenant.js'
 
 function mockFetchOnce(status: number, body: unknown, ok = status >= 200 && status < 300) {
@@ -92,12 +92,22 @@ describe('client API typé', () => {
     })
   })
 
-  it('retombe sur un message générique si le corps ne porte ni `error` ni `message`', async () => {
+  it('retombe sur un message en français si le corps ne porte ni `error` ni `message`', async () => {
     mockFetchOnce(500, { whatever: true })
     await expect(apiGet('/api/broken')).rejects.toMatchObject({
       status: 500,
-      message: 'Erreur 500',
+      message: 'Le serveur a rencontré une erreur. Réessayez dans un instant.',
     })
+  })
+
+  it("ignore le corps d'erreur par défaut de Fastify (libellés techniques en anglais)", async () => {
+    mockFetchOnce(404, { statusCode: 404, error: 'Not Found', message: 'Route GET:/api/x not found' })
+    await expect(apiGet('/api/x')).rejects.toMatchObject({ status: 404, message: 'Élément introuvable.' })
+  })
+
+  it('garde le code HTTP dans le repli pour un statut sans message dédié', async () => {
+    mockFetchOnce(418, {})
+    await expect(apiGet('/api/x')).rejects.toMatchObject({ status: 418, message: 'Erreur 418' })
   })
 
   it('gère un corps non-JSON (ex. page 502 en HTML) sans lever une erreur de parsing', async () => {
@@ -105,7 +115,10 @@ describe('client API typé', () => {
       'fetch',
       vi.fn().mockResolvedValue({ ok: false, status: 502, text: () => Promise.resolve('<html>Bad Gateway</html>') }),
     )
-    await expect(apiGet('/api/x')).rejects.toBeInstanceOf(ApiError)
+    await expect(apiGet('/api/x')).rejects.toMatchObject({
+      status: 502,
+      message: 'Le serveur ne répond pas. Réessayez dans un instant.',
+    })
   })
 
   it('gère un corps vide (ex. 204) sans lever une erreur de parsing', async () => {

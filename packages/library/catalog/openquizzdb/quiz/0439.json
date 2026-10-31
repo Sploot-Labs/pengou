@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=439"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0439-1",
+      "type": "mcq",
+      "prompt": "En quelle année Marcel Pagnol a-t-il publié « Le Château de ma mère » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1957",
+            "correct": true
+          },
+          {
+            "label": "1977",
+            "correct": false
+          },
+          {
+            "label": "1917",
+            "correct": false
+          },
+          {
+            "label": "1937",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0439-2",
+      "type": "mcq",
+      "prompt": "Quel film de Jane Campion met en scène une mère muette pianiste ?",
+      "payload": {
+        "options": [
+          {
+            "label": "In the cut",
+            "correct": false
+          },
+          {
+            "label": "Bright Star",
+            "correct": false
+          },
+          {
+            "label": "La leçon de piano",
+            "correct": true
+          },
+          {
+            "label": "Sweetie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0439-3",
+      "type": "mcq",
+      "prompt": "Dans quel roman de Jules Renard le héros affronte la haine de sa mère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Maîtresse",
+            "correct": false
+          },
+          {
+            "label": "L'Écornifleur",
+            "correct": false
+          },
+          {
+            "label": "Poil de Carotte",
+            "correct": true
+          },
+          {
+            "label": "Bucoliques",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0439-4",
+      "type": "mcq",
+      "prompt": "Qui a peint « La Madone à la prairie » représentant Jésus et sa mère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Auguste Renoir",
+            "correct": false
+          },
+          {
+            "label": "Rembrandt",
+            "correct": false
+          },
+          {
+            "label": "Michel-Ange",
+            "correct": false
+          },
+          {
+            "label": "Raphaël",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

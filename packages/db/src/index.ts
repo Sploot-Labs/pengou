@@ -17,7 +17,7 @@ export {
   INVITATION_TTL_MS, type Invitation, type InvitationWithWorkspace, type AcceptCode,
 } from './repos/invitation.js'
 export {
-  createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz, type Quiz, type QuizListItem,
+  createQuiz, listQuizzes, getQuiz, updateQuiz, archiveQuiz, restoreQuiz, deleteQuiz, importQuiz, type Quiz, type QuizListItem, type ImportedQuestion,
 } from './repos/quiz.js'
 export {
   createQuestion, listQuestions, getQuestion, updateQuestion, deleteQuestion, reorderQuestions, type Question,
@@ -32,4 +32,11 @@ export {
 export {
   listSessions, getSessionReport, type SessionSummary, type SessionReport,
 } from './repos/reports.js'
+export { syncLibrary, normalizeSearch } from './repos/library-sync.js'
+export {
+  listLibraryThemes, listLibraryLanguages, searchLibraryQuestions, listLibraryQuizzes,
+  drawLibraryQuestions, getLibraryQuestions, getLibraryQuiz,
+  type LibraryFilters, type LibraryQuestion, type LibraryQuizSummary,
+} from './repos/library.js'
+export type { ContentSource } from '@splootlabs/library'
 export * as schema from './schema.js'

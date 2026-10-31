@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=424"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0424-1",
+      "type": "mcq",
+      "prompt": "Quel était l'ancien nom du Sri Lanka ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ceylan",
+            "correct": true
+          },
+          {
+            "label": "Formose",
+            "correct": false
+          },
+          {
+            "label": "Batavia",
+            "correct": false
+          },
+          {
+            "label": "Cipango",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0424-2",
+      "type": "mcq",
+      "prompt": "À quel pays est rattachée la Tasmanie et ses mille petites îles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Royaume-Uni",
+            "correct": false
+          },
+          {
+            "label": "Nouvelle-Zélande",
+            "correct": false
+          },
+          {
+            "label": "Australie",
+            "correct": true
+          },
+          {
+            "label": "France",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0424-3",
+      "type": "mcq",
+      "prompt": "Avec quel pays la France partage-t-elle l'île de Saint-Martin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Danemark",
+            "correct": false
+          },
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Pays-Bas",
+            "correct": true
+          },
+          {
+            "label": "Royaume-Uni",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0424-4",
+      "type": "mcq",
+      "prompt": "En hawaïen, que signifie Honolulu, capitale de l'État d'Hawaï ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deux mers",
+            "correct": false
+          },
+          {
+            "label": "Soleil cruel",
+            "correct": false
+          },
+          {
+            "label": "Baie abritée",
+            "correct": true
+          },
+          {
+            "label": "Grand port",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

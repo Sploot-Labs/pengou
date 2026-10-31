@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=416"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0416-1",
+      "type": "mcq",
+      "prompt": "Quelle est la longueur du mur du parc forestier de Chambord ?",
+      "payload": {
+        "options": [
+          {
+            "label": "32 km",
+            "correct": true
+          },
+          {
+            "label": "16 km",
+            "correct": false
+          },
+          {
+            "label": "27 km",
+            "correct": false
+          },
+          {
+            "label": "9 km",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0416-2",
+      "type": "mcq",
+      "prompt": "En plus du sanglier, quelle espèce est emblématique de Chambord ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lapin",
+            "correct": false
+          },
+          {
+            "label": "Autruche",
+            "correct": false
+          },
+          {
+            "label": "Cerf",
+            "correct": true
+          },
+          {
+            "label": "Lémurien",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0416-3",
+      "type": "mcq",
+      "prompt": "Dans quelle région forestière française se situe le château de Chambord ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Drouais",
+            "correct": false
+          },
+          {
+            "label": "Sologne",
+            "correct": true
+          },
+          {
+            "label": "Beauce",
+            "correct": false
+          },
+          {
+            "label": "Cévennes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0416-4",
+      "type": "mcq",
+      "prompt": "Sur les 5 440 hectares de Chambord, combien sont ouverts au public ?",
+      "payload": {
+        "options": [
+          {
+            "label": "4 000 ha",
+            "correct": false
+          },
+          {
+            "label": "2 000 ha",
+            "correct": false
+          },
+          {
+            "label": "3 000 ha",
+            "correct": false
+          },
+          {
+            "label": "1 000 ha",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

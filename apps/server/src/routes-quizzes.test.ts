@@ -343,3 +343,96 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await app.close()
   })
 })
+
+describe('archivage /api/quizzes/:id/archive et /restore', () => {
+  /** Inscrit un utilisateur, fixe son rôle dans le tenant par défaut et renvoie son cookie. */
+  async function signUpAs(app: FastifyInstance, email: string, role: 'owner' | 'admin' | 'member'): Promise<string> {
+    const cookie = await signUp(app, email)
+    const [u] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, email))
+    await ctx.db.update(schema.membership).set({ role }).where(eq(schema.membership.userId, u.id))
+    return cookie
+  }
+
+  async function createVia(app: FastifyInstance, cookie: string, title: string): Promise<string> {
+    const res = await app.inject({
+      method: 'POST', url: '/api/quizzes',
+      payload: { title },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(res.statusCode).toBe(201)
+    return (res.json() as { id: string }).id
+  }
+
+  const ids = (res: { json: () => unknown }) => (res.json() as Array<{ id: string }>).map((q) => q.id)
+
+  it('archive masque le quiz de la liste par défaut et le montre avec ?archived=1 ; restore le ramène', async () => {
+    const app = await buildApp()
+    const cookie = await signUpAs(app, 'archive-auteur@example.com', 'member')
+    const quizId = await createVia(app, cookie, 'Quiz à archiver')
+
+    const archive = await app.inject({ method: 'POST', url: `/api/quizzes/${quizId}/archive`, headers: { cookie } })
+    expect(archive.statusCode).toBe(200)
+    expect((archive.json() as { archivedAt: string | null }).archivedAt).not.toBeNull()
+
+    const active = await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie } })
+    expect(ids(active)).not.toContain(quizId)
+    const archived = await app.inject({ method: 'GET', url: '/api/quizzes?archived=1', headers: { cookie } })
+    expect(ids(archived)).toContain(quizId)
+    expect((archived.json() as Array<{ id: string; archivedAt: string | null }>).find((q) => q.id === quizId)!.archivedAt).not.toBeNull()
+
+    // Toujours lisible dans l'éditeur, avec sa date d'archivage.
+    const get = await app.inject({ method: 'GET', url: `/api/quizzes/${quizId}`, headers: { cookie } })
+    expect(get.statusCode).toBe(200)
+    expect((get.json() as { archivedAt: string | null }).archivedAt).not.toBeNull()
+
+    const restore = await app.inject({ method: 'POST', url: `/api/quizzes/${quizId}/restore`, headers: { cookie } })
+    expect(restore.statusCode).toBe(200)
+    expect((restore.json() as { archivedAt: string | null }).archivedAt).toBeNull()
+
+    const activeAgain = await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie } })
+    expect(ids(activeAgain)).toContain(quizId)
+    const archivedAgain = await app.inject({ method: 'GET', url: '/api/quizzes?archived=1', headers: { cookie } })
+    expect(ids(archivedAgain)).not.toContain(quizId)
+
+    await app.close()
+  })
+
+  it('un member ne peut ni archiver ni restaurer le quiz d\'un autre member (404) ; un admin et un owner le peuvent', async () => {
+    const app = await buildApp()
+    const authorCookie = await signUpAs(app, 'archive-a@example.com', 'member')
+    const otherCookie = await signUpAs(app, 'archive-b@example.com', 'member')
+    const adminCookie = await signUpAs(app, 'archive-admin@example.com', 'admin')
+    const ownerCookie = await signUpAs(app, 'archive-owner@example.com', 'owner')
+    const quizId = await createVia(app, authorCookie, 'Quiz de A')
+
+    const denied = await app.inject({ method: 'POST', url: `/api/quizzes/${quizId}/archive`, headers: { cookie: otherCookie } })
+    expect(denied.statusCode).toBe(404)
+    expect((denied.json() as { error: string }).error).toBe('Quiz introuvable.')
+    const stillActive = await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie: authorCookie } })
+    expect(ids(stillActive)).toContain(quizId)
+
+    const byAdmin = await app.inject({ method: 'POST', url: `/api/quizzes/${quizId}/archive`, headers: { cookie: adminCookie } })
+    expect(byAdmin.statusCode).toBe(200)
+
+    const restoreDenied = await app.inject({ method: 'POST', url: `/api/quizzes/${quizId}/restore`, headers: { cookie: otherCookie } })
+    expect(restoreDenied.statusCode).toBe(404)
+    const otherArchived = await app.inject({ method: 'GET', url: '/api/quizzes?archived=1', headers: { cookie: otherCookie } })
+    expect(ids(otherArchived)).not.toContain(quizId)
+
+    const byOwner = await app.inject({ method: 'POST', url: `/api/quizzes/${quizId}/restore`, headers: { cookie: ownerCookie } })
+    expect(byOwner.statusCode).toBe(200)
+    expect((byOwner.json() as { archivedAt: string | null }).archivedAt).toBeNull()
+
+    await app.close()
+  })
+
+  it('archive sans cookie → 401, quiz inexistant → 404', async () => {
+    const app = await buildApp()
+    const noCookie = await app.inject({ method: 'POST', url: '/api/quizzes/00000000-0000-0000-0000-000000000000/archive' })
+    expect(noCookie.statusCode).toBe(401)
+    const cookie = await signUp(app, 'archive-404@example.com')
+    const missing = await app.inject({ method: 'POST', url: '/api/quizzes/00000000-0000-0000-0000-000000000000/archive', headers: { cookie } })
+    expect(missing.statusCode).toBe(404)
+    await app.close()
+  })
+})

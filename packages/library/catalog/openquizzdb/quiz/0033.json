@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=33"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0033-1",
+      "type": "mcq",
+      "prompt": "Quelle héroïne de Lewis Carroll voit passer un lapin blanc en retard ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alice",
+            "correct": true
+          },
+          {
+            "label": "Aurore",
+            "correct": false
+          },
+          {
+            "label": "Camille",
+            "correct": false
+          },
+          {
+            "label": "Cendrillon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0033-2",
+      "type": "mcq",
+      "prompt": "Quel lapin est célèbre dans le monde des dessins animés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Porky Pig",
+            "correct": false
+          },
+          {
+            "label": "Elmer Fudd",
+            "correct": false
+          },
+          {
+            "label": "Bugs Bunny",
+            "correct": true
+          },
+          {
+            "label": "Speedy Gonzales",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0033-3",
+      "type": "mcq",
+      "prompt": "Quelle entreprise de conserverie a fait porter des lunettes aux lapins ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Géant Vert",
+            "correct": false
+          },
+          {
+            "label": "Saupiquet",
+            "correct": false
+          },
+          {
+            "label": "Bonduelle",
+            "correct": false
+          },
+          {
+            "label": "Cassegrain",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0033-4",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur du lapin Duracell, à l'énergie inépuisable ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bleue",
+            "correct": false
+          },
+          {
+            "label": "Rose",
+            "correct": true
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

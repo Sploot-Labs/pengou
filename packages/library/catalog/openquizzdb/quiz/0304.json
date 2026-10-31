@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=304"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0304-1",
+      "type": "mcq",
+      "prompt": "Quelle capitale de la Croatie compte près de 700 000 habitants ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zaria",
+            "correct": false
+          },
+          {
+            "label": "Zaporijia",
+            "correct": false
+          },
+          {
+            "label": "Zagreb",
+            "correct": true
+          },
+          {
+            "label": "Zaragoza",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0304-2",
+      "type": "mcq",
+      "prompt": "Quel fleuve se jette dans les chutes Victoria, hautes de 108 mètres ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zala",
+            "correct": false
+          },
+          {
+            "label": "Zambèze",
+            "correct": true
+          },
+          {
+            "label": "Zanskar",
+            "correct": false
+          },
+          {
+            "label": "Zaire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0304-3",
+      "type": "mcq",
+      "prompt": "Avec quel fils de Bob Marley le chanteur Sting a-t-il fait un duo ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ziad",
+            "correct": false
+          },
+          {
+            "label": "Zachary",
+            "correct": false
+          },
+          {
+            "label": "Ziggy",
+            "correct": true
+          },
+          {
+            "label": "Zane",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0304-4",
+      "type": "mcq",
+      "prompt": "Quel groupe de blues-rock est composé de trois Texans barbus ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zed Yago",
+            "correct": false
+          },
+          {
+            "label": "Zella Day",
+            "correct": false
+          },
+          {
+            "label": "ZZ Top",
+            "correct": true
+          },
+          {
+            "label": "Zwan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

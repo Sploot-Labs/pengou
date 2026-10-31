@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=431"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0431-1",
+      "type": "mcq",
+      "prompt": "Quelle ville méditerranéenne accueille un Grand Prix de F1 depuis 1929 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Split",
+            "correct": false
+          },
+          {
+            "label": "Monaco",
+            "correct": true
+          },
+          {
+            "label": "Marseille",
+            "correct": false
+          },
+          {
+            "label": "Venise",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0431-2",
+      "type": "mcq",
+      "prompt": "Dans quelle ville peut-on marcher sur la promenade des Anglais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monaco",
+            "correct": false
+          },
+          {
+            "label": "Nice",
+            "correct": true
+          },
+          {
+            "label": "Marseille",
+            "correct": false
+          },
+          {
+            "label": "Cannes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0431-3",
+      "type": "mcq",
+      "prompt": "Quelle série télévisée française a pour quartier fictif principal « Le Mistral » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Plus belle la vie",
+            "correct": true
+          },
+          {
+            "label": "Braquo",
+            "correct": false
+          },
+          {
+            "label": "Julie Lescaut",
+            "correct": false
+          },
+          {
+            "label": "Nerdz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0431-4",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le littoral méditerranéen autour de Nice et Monaco ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Côte Camarguaise",
+            "correct": false
+          },
+          {
+            "label": "Côte d'Azur",
+            "correct": true
+          },
+          {
+            "label": "Côte Vermeille",
+            "correct": false
+          },
+          {
+            "label": "Côte Bleue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

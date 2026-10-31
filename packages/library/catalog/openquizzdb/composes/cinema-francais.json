@@ -1,0 +1,502 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0035-1",
+      "type": "mcq",
+      "prompt": "Dans quel clan peut-on retrouver le trio Gabin-Ventura-Delon au cinéma ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Des Polonais",
+            "correct": false
+          },
+          {
+            "label": "Des Siciliens",
+            "correct": true
+          },
+          {
+            "label": "Des Indiens",
+            "correct": false
+          },
+          {
+            "label": "Des Écossais",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0035-2",
+      "type": "mcq",
+      "prompt": "Quel film, avec Alain Delon, a pour titre un nom de chapeau ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Borsalino",
+            "correct": true
+          },
+          {
+            "label": "Casquette",
+            "correct": false
+          },
+          {
+            "label": "Bicorne",
+            "correct": false
+          },
+          {
+            "label": "Cagoule",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0035-3",
+      "type": "mcq",
+      "prompt": "Sur le tournage de quel film Mireille Darc a-t-elle rencontré Alain Delon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Blonde de Pékin",
+            "correct": false
+          },
+          {
+            "label": "Jeff",
+            "correct": true
+          },
+          {
+            "label": "Madly",
+            "correct": false
+          },
+          {
+            "label": "Du rififi à Paname",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0035-4",
+      "type": "mcq",
+      "prompt": "Avec qui Alain Delon a-t-il formé un couple dans « La Piscine » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Romy Schneider",
+            "correct": true
+          },
+          {
+            "label": "Brigitte Bardot",
+            "correct": false
+          },
+          {
+            "label": "Mireille Darc",
+            "correct": false
+          },
+          {
+            "label": "Sylvie Vartan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0047-1",
+      "type": "mcq",
+      "prompt": "Dans quelle ville du Maroc Jean Reno a-t-il vu le jour ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Agadir",
+            "correct": false
+          },
+          {
+            "label": "Marrakech",
+            "correct": false
+          },
+          {
+            "label": "Casablanca",
+            "correct": true
+          },
+          {
+            "label": "Tanger",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0047-2",
+      "type": "mcq",
+      "prompt": "Qui donne la réplique à Jean Reno dans le film « Les rivières pourpres » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Samy Naceri",
+            "correct": false
+          },
+          {
+            "label": "Vincent Cassel",
+            "correct": true
+          },
+          {
+            "label": "Alain Delon",
+            "correct": false
+          },
+          {
+            "label": "François Cluzet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0047-3",
+      "type": "mcq",
+      "prompt": "Quel film français Jean Réno et Patrick Bruel ont-ils tourné ensemble ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le guépard",
+            "correct": false
+          },
+          {
+            "label": "Le renard",
+            "correct": false
+          },
+          {
+            "label": "Le léopard",
+            "correct": false
+          },
+          {
+            "label": "Le jaguar",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0047-4",
+      "type": "mcq",
+      "prompt": "Dans quel film de Luc Besson Jean Reno incarne-t-il Enzo ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Léon",
+            "correct": false
+          },
+          {
+            "label": "Le Grand Bleu",
+            "correct": true
+          },
+          {
+            "label": "Nikita",
+            "correct": false
+          },
+          {
+            "label": "Le dernier combat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0107-1",
+      "type": "mcq",
+      "prompt": "Dans quel film Dany Boon partage-t-il l'affiche avec Benoît Poelvoorde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Raid dingue",
+            "correct": false
+          },
+          {
+            "label": "Rien à déclarer",
+            "correct": true
+          },
+          {
+            "label": "Pédale dure",
+            "correct": false
+          },
+          {
+            "label": "Radin !",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0107-2",
+      "type": "mcq",
+      "prompt": "Dans quelle ville du nord de la France Dany Boon a-t-il vu le jour en 1966 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Armentières",
+            "correct": true
+          },
+          {
+            "label": "Ronchin",
+            "correct": false
+          },
+          {
+            "label": "Comines",
+            "correct": false
+          },
+          {
+            "label": "Warneton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0107-3",
+      "type": "mcq",
+      "prompt": "Quel fromage a connu son heure de gloire suite à un film de Dany Boon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maroilles",
+            "correct": true
+          },
+          {
+            "label": "Gruyère",
+            "correct": false
+          },
+          {
+            "label": "Brie",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0107-4",
+      "type": "mcq",
+      "prompt": "Le véritable prénom de Dany Boon est Daniel, mais quel est son nom ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nodier",
+            "correct": false
+          },
+          {
+            "label": "Hamidou",
+            "correct": true
+          },
+          {
+            "label": "Boonval",
+            "correct": false
+          },
+          {
+            "label": "Boonaers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0065-1",
+      "type": "mcq",
+      "prompt": "Mademoiselle Julie a été interprétée par Isabelle Adjani puis par qui ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sabine Azéma",
+            "correct": false
+          },
+          {
+            "label": "Fanny Ardant",
+            "correct": true
+          },
+          {
+            "label": "Juliette Binoche",
+            "correct": false
+          },
+          {
+            "label": "Claire Keim",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0065-2",
+      "type": "mcq",
+      "prompt": "Quel film a réuni sur les écrans Isabelle Adjani et Sharon Stone ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Diabolique",
+            "correct": true
+          },
+          {
+            "label": "Ange et Démon",
+            "correct": false
+          },
+          {
+            "label": "Les sorcières",
+            "correct": false
+          },
+          {
+            "label": "Les ensorceleuses",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0065-3",
+      "type": "mcq",
+      "prompt": "Pour quel titre d'Isabelle Adjani Luc Besson a-t-il réalisé le clip en 1984 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Je t'aime idiot",
+            "correct": false
+          },
+          {
+            "label": "Ohio",
+            "correct": false
+          },
+          {
+            "label": "Pull marine",
+            "correct": true
+          },
+          {
+            "label": "Le Mal intérieur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0065-4",
+      "type": "mcq",
+      "prompt": "Quel film a réuni Pierre Niney, Isabelle Adjani et François Cluzet ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Goliath",
+            "correct": false
+          },
+          {
+            "label": "Mascarade",
+            "correct": true
+          },
+          {
+            "label": "Boîte noire",
+            "correct": false
+          },
+          {
+            "label": "Amant",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-cinema-francais",
+      "title": "Stars du cinéma français",
+      "description": "D'après les quiz OpenQuizzDB « Alain Delon », « Jean Reno », « Dany Boon » et « Isabelle Adjani ».",
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0035-1",
+        "oqdb-0035-2",
+        "oqdb-0035-3",
+        "oqdb-0035-4",
+        "oqdb-0047-1",
+        "oqdb-0047-2",
+        "oqdb-0047-3",
+        "oqdb-0047-4",
+        "oqdb-0107-1",
+        "oqdb-0107-2",
+        "oqdb-0107-3",
+        "oqdb-0107-4",
+        "oqdb-0065-1",
+        "oqdb-0065-2",
+        "oqdb-0065-3",
+        "oqdb-0065-4"
+      ]
+    }
+  ]
+}

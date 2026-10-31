@@ -76,6 +76,10 @@ export function Mascot({ size = 180 }: { size?: number }) {
   return (
     <span className="ab-mascot" aria-hidden="true" style={{ width: size }}>
       <svg viewBox="0 0 320 280" width={size} height={size * (280 / 320)} focusable="false">
+        {/* halo clair derrière le corps : sans lui, le bleu nuit du pengouin
+            (#0B2545) se confond avec le fond sombre de la page joueur et
+            seuls le ventre, les pattes et le bec restent visibles. */}
+        <circle cx="160" cy="150" r="128" fill="#D6F2F9" opacity="0.22" />
         {/* banquise */}
         <ellipse cx="160" cy="214" rx="140" ry="42" fill="#D6F2F9" />
         <ellipse cx="160" cy="226" rx="108" ry="22" fill="#0B2545" opacity="0.08" />

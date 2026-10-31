@@ -1,0 +1,502 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0519-1",
+      "type": "mcq",
+      "prompt": "Quelle sauce est faite à base de boeuf haché, sauce tomate et oignons ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bolognaise",
+            "correct": true
+          },
+          {
+            "label": "Génoise",
+            "correct": false
+          },
+          {
+            "label": "Béchamel",
+            "correct": false
+          },
+          {
+            "label": "Tartare",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0519-2",
+      "type": "mcq",
+      "prompt": "Quelle préparation propose du boeuf cru coupé en tranches très fines ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Risotto",
+            "correct": false
+          },
+          {
+            "label": "Crostino",
+            "correct": false
+          },
+          {
+            "label": "Frico",
+            "correct": false
+          },
+          {
+            "label": "Carpaccio",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0519-3",
+      "type": "mcq",
+      "prompt": "Quelle spécialité de veau peut être préparée à la milanaise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Escalope",
+            "correct": true
+          },
+          {
+            "label": "Blanquette",
+            "correct": false
+          },
+          {
+            "label": "Aiguillette",
+            "correct": false
+          },
+          {
+            "label": "Osso buco",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0519-4",
+      "type": "mcq",
+      "prompt": "Quelle spécialité des Pouilles est une pizza pliée et farcie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sicilienne",
+            "correct": false
+          },
+          {
+            "label": "Panzerotti",
+            "correct": false
+          },
+          {
+            "label": "Calzone",
+            "correct": true
+          },
+          {
+            "label": "Stromboli",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0523-1",
+      "type": "mcq",
+      "prompt": "Quelles pâtes alimentaires se présentent en feuilles rectangulaires ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lasagnes",
+            "correct": true
+          },
+          {
+            "label": "Tortellini",
+            "correct": false
+          },
+          {
+            "label": "Cannelloni",
+            "correct": false
+          },
+          {
+            "label": "Fusilli",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0523-2",
+      "type": "mcq",
+      "prompt": "Quelle pâte farcie pliée vient du nord-ouest de l'Italie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Macaroni",
+            "correct": false
+          },
+          {
+            "label": "Fusilli",
+            "correct": false
+          },
+          {
+            "label": "Spaghetti",
+            "correct": false
+          },
+          {
+            "label": "Ravioli",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0523-3",
+      "type": "mcq",
+      "prompt": "Quelle variété de pâtes longues est vendue sous forme de lanières ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spaghetti",
+            "correct": false
+          },
+          {
+            "label": "Fettuccine",
+            "correct": false
+          },
+          {
+            "label": "Luinguine",
+            "correct": false
+          },
+          {
+            "label": "Tagliatelles",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0523-4",
+      "type": "mcq",
+      "prompt": "Quel plat de pâtes est jeté dans une poêle avec oeufs et lardons ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lasagne",
+            "correct": false
+          },
+          {
+            "label": "Tortellini",
+            "correct": false
+          },
+          {
+            "label": "Carbonara",
+            "correct": true
+          },
+          {
+            "label": "Ravioli",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0445-1",
+      "type": "mcq",
+      "prompt": "Quelles pâtes italiennes farcies ont une forme de petites couronnes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fusilli",
+            "correct": false
+          },
+          {
+            "label": "Tortellini",
+            "correct": true
+          },
+          {
+            "label": "Gnocchi",
+            "correct": false
+          },
+          {
+            "label": "Capellini",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0445-2",
+      "type": "mcq",
+      "prompt": "Que mangerez-vous en commandant un « grana padano », protégé par AOP ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Potage",
+            "correct": false
+          },
+          {
+            "label": "Ragoût",
+            "correct": false
+          },
+          {
+            "label": "Gâteau",
+            "correct": false
+          },
+          {
+            "label": "Fromage",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0445-3",
+      "type": "mcq",
+      "prompt": "Quel plat italien est fait à base de semoule de maïs bouillie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Padano",
+            "correct": false
+          },
+          {
+            "label": "Pecorino",
+            "correct": false
+          },
+          {
+            "label": "Polenta",
+            "correct": true
+          },
+          {
+            "label": "Panzerotti",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0445-4",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur des truffes du Piémont ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Verte",
+            "correct": false
+          },
+          {
+            "label": "Noire",
+            "correct": false
+          },
+          {
+            "label": "Blanche",
+            "correct": true
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0390-1",
+      "type": "mcq",
+      "prompt": "Qu'est-ce qu'un blini, dont le nom slave signifie « moudre » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tarte aux fruits",
+            "correct": false
+          },
+          {
+            "label": "Crêpe épaisse",
+            "correct": true
+          },
+          {
+            "label": "Gâteau sec",
+            "correct": false
+          },
+          {
+            "label": "Gaufre plate",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0390-2",
+      "type": "mcq",
+      "prompt": "Quelle est la forme traditionnelle des samoussas ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Carrée",
+            "correct": false
+          },
+          {
+            "label": "Ovale",
+            "correct": false
+          },
+          {
+            "label": "Triangulaire",
+            "correct": true
+          },
+          {
+            "label": "Ronde",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0390-3",
+      "type": "mcq",
+      "prompt": "Quel ingrédient trouve-t-on dans le sushi et le gohan japonais nature ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Canard",
+            "correct": false
+          },
+          {
+            "label": "Saumon",
+            "correct": false
+          },
+          {
+            "label": "Riz",
+            "correct": true
+          },
+          {
+            "label": "Boeuf",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0390-4",
+      "type": "mcq",
+      "prompt": "Quelle ville, à l'est de Milan, a donné son nom à un fromage bleu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gorgonzola",
+            "correct": true
+          },
+          {
+            "label": "Corbetta",
+            "correct": false
+          },
+          {
+            "label": "Dresano",
+            "correct": false
+          },
+          {
+            "label": "Bresso",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-cuisines-ailleurs",
+      "title": "Cuisines d'ailleurs",
+      "description": "D'après les quiz OpenQuizzDB « Cuisine italienne », « Des pâtes, oui ! », « Gastronomie italienne » et « Cuisine étrangère ».",
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0519-1",
+        "oqdb-0519-2",
+        "oqdb-0519-3",
+        "oqdb-0519-4",
+        "oqdb-0523-1",
+        "oqdb-0523-2",
+        "oqdb-0523-3",
+        "oqdb-0523-4",
+        "oqdb-0445-1",
+        "oqdb-0445-2",
+        "oqdb-0445-3",
+        "oqdb-0445-4",
+        "oqdb-0390-1",
+        "oqdb-0390-2",
+        "oqdb-0390-3",
+        "oqdb-0390-4"
+      ]
+    }
+  ]
+}

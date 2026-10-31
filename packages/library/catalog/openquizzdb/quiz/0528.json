@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=528"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0528-1",
+      "type": "mcq",
+      "prompt": "Quel gentilhomme est chargé du service de la chambre d'un monarque ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Auguste",
+            "correct": false
+          },
+          {
+            "label": "Grand veneur",
+            "correct": false
+          },
+          {
+            "label": "Chambellan",
+            "correct": true
+          },
+          {
+            "label": "Connétable",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0528-2",
+      "type": "mcq",
+      "prompt": "Quel qualificatif est donné à l'époux du chef d'État dans les monarchies ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Consort",
+            "correct": true
+          },
+          {
+            "label": "Dauphin",
+            "correct": false
+          },
+          {
+            "label": "Régent",
+            "correct": false
+          },
+          {
+            "label": "Archonte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0528-3",
+      "type": "mcq",
+      "prompt": "Quel titre monarchique est porté par le souverain d'un empire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sultan",
+            "correct": false
+          },
+          {
+            "label": "Chancelier",
+            "correct": false
+          },
+          {
+            "label": "Prince",
+            "correct": false
+          },
+          {
+            "label": "Empereur",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0528-4",
+      "type": "mcq",
+      "prompt": "Quel titre est porté par les monarques musulmans depuis l'an 1000 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maharajah",
+            "correct": false
+          },
+          {
+            "label": "Émir",
+            "correct": false
+          },
+          {
+            "label": "Sultan",
+            "correct": true
+          },
+          {
+            "label": "Calife",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

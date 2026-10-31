@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=612"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0612-1",
+      "type": "mcq",
+      "prompt": "Quel tube de Village People évoque un mouvement de jeunesse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Go West",
+            "correct": false
+          },
+          {
+            "label": "In the Navy",
+            "correct": false
+          },
+          {
+            "label": "Y.M.C.A.",
+            "correct": true
+          },
+          {
+            "label": "Macho Man",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0612-2",
+      "type": "mcq",
+      "prompt": "Quel tube disco planétaire du groupe ABBA est sorti en 1979 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "SOS",
+            "correct": false
+          },
+          {
+            "label": "Mamma Mia",
+            "correct": false
+          },
+          {
+            "label": "Waterloo",
+            "correct": false
+          },
+          {
+            "label": "Voulez-Vous",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0612-3",
+      "type": "mcq",
+      "prompt": "Quel tube disco fut initialement écrit pour Stacy Lattisaw ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Viva America",
+            "correct": false
+          },
+          {
+            "label": "Ring My Bell",
+            "correct": true
+          },
+          {
+            "label": "Shadow Dancing",
+            "correct": false
+          },
+          {
+            "label": "Copacabana",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0612-4",
+      "type": "mcq",
+      "prompt": "Quel titre des Gibson Brothers leur a valu quatorze disques d'or ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oooh What a Life",
+            "correct": false
+          },
+          {
+            "label": "Que Sera Mi Vida",
+            "correct": false
+          },
+          {
+            "label": "Mariana",
+            "correct": false
+          },
+          {
+            "label": "Cuba",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

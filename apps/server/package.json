@@ -19,6 +19,7 @@
     "@splootlabs/auth": "workspace:*",
     "@splootlabs/db": "workspace:*",
     "@splootlabs/game": "workspace:*",
+    "@splootlabs/library": "workspace:*",
     "@splootlabs/quiz": "workspace:*",
     "@splootlabs/shared": "workspace:*",
     "better-auth": "^1.7.12",

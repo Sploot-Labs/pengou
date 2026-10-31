@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=310"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0310-1",
+      "type": "mcq",
+      "prompt": "Où se trouvent les « lunettes » du serpent à lunettes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sur le ventre",
+            "correct": false
+          },
+          {
+            "label": "Sur le cou",
+            "correct": true
+          },
+          {
+            "label": "Sur la queue",
+            "correct": false
+          },
+          {
+            "label": "Sur la langue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0310-2",
+      "type": "mcq",
+      "prompt": "Quel est le plus grand serpent venimeux du monde de par sa longueur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Python réticulé",
+            "correct": false
+          },
+          {
+            "label": "Grand anaconda",
+            "correct": false
+          },
+          {
+            "label": "Mamba noir",
+            "correct": false
+          },
+          {
+            "label": "Cobra royal",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0310-3",
+      "type": "mcq",
+      "prompt": "Quel serpent accompagne le Prince Jean dans « Robin des Bois » de Disney ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Triste Sire",
+            "correct": true
+          },
+          {
+            "label": "Affreux Jojo",
+            "correct": false
+          },
+          {
+            "label": "Troube-Fête",
+            "correct": false
+          },
+          {
+            "label": "Rabat-Joie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0310-4",
+      "type": "mcq",
+      "prompt": "Quelle langue est parlée par les serpents dans « Harry Potter » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le cuillerlang",
+            "correct": false
+          },
+          {
+            "label": "Le fourchelang",
+            "correct": true
+          },
+          {
+            "label": "Le verrelang",
+            "correct": false
+          },
+          {
+            "label": "Le coutelang",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

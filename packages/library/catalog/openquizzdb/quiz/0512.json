@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=512"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0512-1",
+      "type": "mcq",
+      "prompt": "Quel constructeur a produit les modèles Diablo et Countach ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ferrari",
+            "correct": false
+          },
+          {
+            "label": "Porsche",
+            "correct": false
+          },
+          {
+            "label": "Lamborghini",
+            "correct": true
+          },
+          {
+            "label": "Maserati",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0512-2",
+      "type": "mcq",
+      "prompt": "Quel modèle de SUV fut commercialisé en 2007 par la marque Nissan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quantum",
+            "correct": false
+          },
+          {
+            "label": "Quoris",
+            "correct": false
+          },
+          {
+            "label": "Qashqai",
+            "correct": true
+          },
+          {
+            "label": "Quattro",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0512-3",
+      "type": "mcq",
+      "prompt": "Quel constructeur automobile a créé le modèle Cayenne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ferrari",
+            "correct": false
+          },
+          {
+            "label": "Maserati",
+            "correct": false
+          },
+          {
+            "label": "Lamborghini",
+            "correct": false
+          },
+          {
+            "label": "Porsche",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0512-4",
+      "type": "mcq",
+      "prompt": "Dacia est un constructeur automobile originaire de quel pays ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bulgarie",
+            "correct": false
+          },
+          {
+            "label": "Grèce",
+            "correct": false
+          },
+          {
+            "label": "Pologne",
+            "correct": false
+          },
+          {
+            "label": "Roumanie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

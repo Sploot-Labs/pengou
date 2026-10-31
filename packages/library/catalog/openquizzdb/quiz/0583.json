@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=583"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0583-1",
+      "type": "mcq",
+      "prompt": "Quel sportif a dominé le golf masculin dans les années 2000 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Payne Stewart",
+            "correct": false
+          },
+          {
+            "label": "Curtis Strange",
+            "correct": false
+          },
+          {
+            "label": "Tiger Woods",
+            "correct": true
+          },
+          {
+            "label": "Raymond Floyd",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0583-2",
+      "type": "mcq",
+      "prompt": "Quel joueur surnommé « The King » a rendu le golf très populaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jordan Spieth",
+            "correct": false
+          },
+          {
+            "label": "Martin Kaymer",
+            "correct": false
+          },
+          {
+            "label": "Justin Rose",
+            "correct": false
+          },
+          {
+            "label": "Arnold Palmer",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0583-3",
+      "type": "mcq",
+      "prompt": "Quel précurseur du golf moderne est surnommé « The Golden Bear » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lucas Glover",
+            "correct": false
+          },
+          {
+            "label": "Gary Player",
+            "correct": false
+          },
+          {
+            "label": "Jack Nicklaus",
+            "correct": true
+          },
+          {
+            "label": "Webb Simpson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0583-4",
+      "type": "mcq",
+      "prompt": "Quel espagnol a popularisé le golf en dehors de ses pays traditionnels ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Casper",
+            "correct": false
+          },
+          {
+            "label": "Coody",
+            "correct": false
+          },
+          {
+            "label": "Aaron",
+            "correct": false
+          },
+          {
+            "label": "Ballesteros",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

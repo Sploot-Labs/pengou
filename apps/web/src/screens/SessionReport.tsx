@@ -152,7 +152,9 @@ export function SessionReport() {
         <Logo to="/" />
         <div style={{ flex: 1, minWidth: 0 }}>
           <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
-            <Link to="/">← Retour à l'accueil</Link>
+            <Link className="host-link-button" to="/">
+              ← Retour à l'accueil
+            </Link>
           </span>
         </div>
         <a className="ab-button ab-button--primary" href={sessionCsvUrl(session.id)} download>

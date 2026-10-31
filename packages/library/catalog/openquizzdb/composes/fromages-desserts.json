@@ -1,0 +1,502 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0205-1",
+      "type": "mcq",
+      "prompt": "Quel fromage est associé à la ville de Meaux, en France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cantal",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": false
+          },
+          {
+            "label": "Gruyère",
+            "correct": false
+          },
+          {
+            "label": "Brie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0205-2",
+      "type": "mcq",
+      "prompt": "Quel fromage français est connu pour avoir une pâte criblée de trous ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emmental",
+            "correct": true
+          },
+          {
+            "label": "Camembert",
+            "correct": false
+          },
+          {
+            "label": "Brie",
+            "correct": false
+          },
+          {
+            "label": "Beaufort",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0205-3",
+      "type": "mcq",
+      "prompt": "Quel fromage a un nom qui signifie « traire une deuxième fois » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gruyère",
+            "correct": false
+          },
+          {
+            "label": "Reblochon",
+            "correct": true
+          },
+          {
+            "label": "Emmental",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0205-4",
+      "type": "mcq",
+      "prompt": "Quel fromage à pâte persillée est fabriqué à partir de lait cru de brebis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beaufort",
+            "correct": false
+          },
+          {
+            "label": "Munster",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": true
+          },
+          {
+            "label": "Brie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0201-1",
+      "type": "mcq",
+      "prompt": "Quel fromage industriel est enrobé de paraffine teinte en rouge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Époisses",
+            "correct": false
+          },
+          {
+            "label": "Babybel",
+            "correct": true
+          },
+          {
+            "label": "Chavroux",
+            "correct": false
+          },
+          {
+            "label": "Saint-paulin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0201-2",
+      "type": "mcq",
+      "prompt": "Quel fromage est enveloppé dans un papier en aluminium gaufré ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roquefort",
+            "correct": false
+          },
+          {
+            "label": "Reblochon",
+            "correct": false
+          },
+          {
+            "label": "Boursin",
+            "correct": true
+          },
+          {
+            "label": "Emmental",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0201-3",
+      "type": "mcq",
+      "prompt": "Lequel de ces fromages français est vendu dans une boîte en bois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roquefort",
+            "correct": false
+          },
+          {
+            "label": "Cabécou",
+            "correct": false
+          },
+          {
+            "label": "Petit-suisse",
+            "correct": false
+          },
+          {
+            "label": "Époisses",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0201-4",
+      "type": "mcq",
+      "prompt": "Quel fromage est cerclé de trois à cinq bandelettes végétales ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Montbriac",
+            "correct": false
+          },
+          {
+            "label": "Fédou",
+            "correct": false
+          },
+          {
+            "label": "Livernon",
+            "correct": false
+          },
+          {
+            "label": "Livarot",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0211-1",
+      "type": "mcq",
+      "prompt": "Quel fromage italien rentre dans la composition du tiramisu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ricotta",
+            "correct": false
+          },
+          {
+            "label": "Gorgonzola",
+            "correct": false
+          },
+          {
+            "label": "Mascarpone",
+            "correct": true
+          },
+          {
+            "label": "Grana padano",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0211-2",
+      "type": "mcq",
+      "prompt": "Quel gâteau comporte oeufs, beurre, farine et sucre en quantités égales ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quatre-gares",
+            "correct": false
+          },
+          {
+            "label": "Quatre-parts",
+            "correct": false
+          },
+          {
+            "label": "Quatre-fards",
+            "correct": false
+          },
+          {
+            "label": "Quatre-quarts",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0211-3",
+      "type": "mcq",
+      "prompt": "Quel entremets de génoise équilibre le goût café et le chocolat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Diplomate",
+            "correct": false
+          },
+          {
+            "label": "Bavarois",
+            "correct": false
+          },
+          {
+            "label": "Religieuse",
+            "correct": false
+          },
+          {
+            "label": "Opéra",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0211-4",
+      "type": "mcq",
+      "prompt": "Quels fruits rouges entrent dans la préparation du clafoutis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Framboises",
+            "correct": false
+          },
+          {
+            "label": "Groseilles",
+            "correct": false
+          },
+          {
+            "label": "Cerises",
+            "correct": true
+          },
+          {
+            "label": "Fraises",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0235-1",
+      "type": "mcq",
+      "prompt": "À partir de la fève de quel arbre spécifique le chocolat est-il produit ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Palmier",
+            "correct": false
+          },
+          {
+            "label": "Figuier",
+            "correct": false
+          },
+          {
+            "label": "Pacanier",
+            "correct": false
+          },
+          {
+            "label": "Cacaoyer",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0235-2",
+      "type": "mcq",
+      "prompt": "Quel chocolat, riche en acides gras saturés, est le plus amer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Au lait",
+            "correct": false
+          },
+          {
+            "label": "Noir",
+            "correct": true
+          },
+          {
+            "label": "Blanc",
+            "correct": false
+          },
+          {
+            "label": "Praliné",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0235-3",
+      "type": "mcq",
+      "prompt": "Quel est le premier pays producteur de cacao, loin devant le Ghana ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nigeria",
+            "correct": false
+          },
+          {
+            "label": "Côte d'Ivoire",
+            "correct": true
+          },
+          {
+            "label": "Brésil",
+            "correct": false
+          },
+          {
+            "label": "Mexique",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0235-4",
+      "type": "mcq",
+      "prompt": "Que fait-on en torréfiant les fèves de cacao pour le chocolat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "On les écrase",
+            "correct": false
+          },
+          {
+            "label": "On les épluche",
+            "correct": false
+          },
+          {
+            "label": "On les grille",
+            "correct": true
+          },
+          {
+            "label": "On les tord",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-fromages-desserts",
+      "title": "Fromages et desserts",
+      "description": "D'après les quiz OpenQuizzDB « Fromages de France », « Fromages enveloppés », « Desserts gourmands » et « Chocolatissimo ».",
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0205-1",
+        "oqdb-0205-2",
+        "oqdb-0205-3",
+        "oqdb-0205-4",
+        "oqdb-0201-1",
+        "oqdb-0201-2",
+        "oqdb-0201-3",
+        "oqdb-0201-4",
+        "oqdb-0211-1",
+        "oqdb-0211-2",
+        "oqdb-0211-3",
+        "oqdb-0211-4",
+        "oqdb-0235-1",
+        "oqdb-0235-2",
+        "oqdb-0235-3",
+        "oqdb-0235-4"
+      ]
+    }
+  ]
+}

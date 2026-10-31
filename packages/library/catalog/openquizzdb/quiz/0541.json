@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=541"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0541-1",
+      "type": "mcq",
+      "prompt": "En ski, quel est le niveau de difficulté associé à une piste verte ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Très facile",
+            "correct": true
+          },
+          {
+            "label": "Moyen",
+            "correct": false
+          },
+          {
+            "label": "Très difficile",
+            "correct": false
+          },
+          {
+            "label": "Difficile",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0541-2",
+      "type": "mcq",
+      "prompt": "Quel autre nom donne-t-on au téléski qui vous mène en haut des pistes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tire-fesses",
+            "correct": true
+          },
+          {
+            "label": "Casse-tête",
+            "correct": false
+          },
+          {
+            "label": "Porte-pieds",
+            "correct": false
+          },
+          {
+            "label": "Attache-bras",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0541-3",
+      "type": "mcq",
+      "prompt": "De quoi a-t-on besoin pour pouvoir utiliser des remontées mécaniques ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Forfait de ski",
+            "correct": true
+          },
+          {
+            "label": "Bonnet",
+            "correct": false
+          },
+          {
+            "label": "Carte d'identité",
+            "correct": false
+          },
+          {
+            "label": "Empreinte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0541-4",
+      "type": "mcq",
+      "prompt": "Quel nom donne-t-on à la partie située à l'avant d'une fixation de ski ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Télémark",
+            "correct": false
+          },
+          {
+            "label": "Butée",
+            "correct": true
+          },
+          {
+            "label": "Spatule",
+            "correct": false
+          },
+          {
+            "label": "Talonnière",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

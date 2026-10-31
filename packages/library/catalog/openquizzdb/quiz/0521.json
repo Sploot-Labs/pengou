@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=521"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0521-1",
+      "type": "mcq",
+      "prompt": "Quel acteur joue avec Christian Clavier dans le film « Les anges gardiens » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gérard Depardieu",
+            "correct": true
+          },
+          {
+            "label": "Gérard Jugnot",
+            "correct": false
+          },
+          {
+            "label": "Jean Reno",
+            "correct": false
+          },
+          {
+            "label": "Pierre Richard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0521-2",
+      "type": "mcq",
+      "prompt": "Quelle somme les héros des « Trois Frères » pensent-ils hériter ?",
+      "payload": {
+        "options": [
+          {
+            "label": "100 euros",
+            "correct": false
+          },
+          {
+            "label": "100 briques",
+            "correct": false
+          },
+          {
+            "label": "100 patates",
+            "correct": true
+          },
+          {
+            "label": "100 francs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0521-3",
+      "type": "mcq",
+      "prompt": "Dans quel film Jean Dujardin est-il surfeur blond à planche jaune ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brice de Nice",
+            "correct": true
+          },
+          {
+            "label": "OSS 117",
+            "correct": false
+          },
+          {
+            "label": "99 francs",
+            "correct": false
+          },
+          {
+            "label": "Cash",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0521-4",
+      "type": "mcq",
+      "prompt": "Lequel de ces acteurs n'apparaît pas dans « Le gendarme se marie » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maurice Rich",
+            "correct": true
+          },
+          {
+            "label": "Christian Marin",
+            "correct": false
+          },
+          {
+            "label": "Jean Lefebvre",
+            "correct": false
+          },
+          {
+            "label": "Michel Galabru",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

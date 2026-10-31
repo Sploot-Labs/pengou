@@ -1,0 +1,502 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0261-1",
+      "type": "mcq",
+      "prompt": "Combien dénombre-t-on de couloirs dans une piscine olympique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Douze",
+            "correct": false
+          },
+          {
+            "label": "Quatorze",
+            "correct": false
+          },
+          {
+            "label": "Dix",
+            "correct": true
+          },
+          {
+            "label": "Six",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0261-2",
+      "type": "mcq",
+      "prompt": "Dans quelle ville se sont déroulés les Jeux olympiques de 2016 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tokyo",
+            "correct": false
+          },
+          {
+            "label": "Londres",
+            "correct": false
+          },
+          {
+            "label": "Rio de Janeiro",
+            "correct": true
+          },
+          {
+            "label": "Pékin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0261-3",
+      "type": "mcq",
+      "prompt": "Quelle épreuve olympique débute hors stade et finit dans le stade ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cross-country",
+            "correct": false
+          },
+          {
+            "label": "Marathon",
+            "correct": true
+          },
+          {
+            "label": "Trail",
+            "correct": false
+          },
+          {
+            "label": "10 000 m",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0261-4",
+      "type": "mcq",
+      "prompt": "Quel anneau du drapeau olympique est le plus proche du mât ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bleu",
+            "correct": true
+          },
+          {
+            "label": "Vert",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0437-1",
+      "type": "mcq",
+      "prompt": "Quel était le nom de la mascotte des Jeux olympiques d'été de 2016 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vinicius",
+            "correct": true
+          },
+          {
+            "label": "Smiley",
+            "correct": false
+          },
+          {
+            "label": "Youppi",
+            "correct": false
+          },
+          {
+            "label": "Blaze",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0437-2",
+      "type": "mcq",
+      "prompt": "Après les JO 2016, à quelle ville a été remise la flamme olympique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lima",
+            "correct": false
+          },
+          {
+            "label": "Copenhague",
+            "correct": false
+          },
+          {
+            "label": "Tokyo",
+            "correct": true
+          },
+          {
+            "label": "Mexico",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0437-3",
+      "type": "mcq",
+      "prompt": "Quel pays a été suspendu de l'athlétisme aux JO de 2016 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Autriche",
+            "correct": false
+          },
+          {
+            "label": "Russie",
+            "correct": true
+          },
+          {
+            "label": "Haïti",
+            "correct": false
+          },
+          {
+            "label": "Canada",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0437-4",
+      "type": "mcq",
+      "prompt": "Combien de bénévoles ont aidé aux JO de Rio 2016 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "30 000",
+            "correct": false
+          },
+          {
+            "label": "90 000",
+            "correct": false
+          },
+          {
+            "label": "70 000",
+            "correct": true
+          },
+          {
+            "label": "50 000",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0247-1",
+      "type": "mcq",
+      "prompt": "Au tennis, que crie-t-on quand une balle rebondit en dehors du terrain ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fausse",
+            "correct": false
+          },
+          {
+            "label": "Nulle",
+            "correct": false
+          },
+          {
+            "label": "Blanche",
+            "correct": false
+          },
+          {
+            "label": "Out",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0247-2",
+      "type": "mcq",
+      "prompt": "Quelle est la première action effectuée au début d'un point au tennis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Service",
+            "correct": true
+          },
+          {
+            "label": "Lift",
+            "correct": false
+          },
+          {
+            "label": "Smash",
+            "correct": false
+          },
+          {
+            "label": "Volée",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0247-3",
+      "type": "mcq",
+      "prompt": "Quelle douleur au coude est fréquente chez les joueurs de tennis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tennis middow",
+            "correct": false
+          },
+          {
+            "label": "Tennis elbow",
+            "correct": true
+          },
+          {
+            "label": "Tennis shadow",
+            "correct": false
+          },
+          {
+            "label": "Tennis longbow",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0247-4",
+      "type": "mcq",
+      "prompt": "En quelle année a été créé Wimbledon, le plus vieux tournoi de tennis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1877",
+            "correct": true
+          },
+          {
+            "label": "1887",
+            "correct": false
+          },
+          {
+            "label": "1897",
+            "correct": false
+          },
+          {
+            "label": "1867",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0253-1",
+      "type": "mcq",
+      "prompt": "Quelle est la nationalité de Roger Federer, grand joueur de tennis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Française",
+            "correct": false
+          },
+          {
+            "label": "Suisse",
+            "correct": true
+          },
+          {
+            "label": "Belge",
+            "correct": false
+          },
+          {
+            "label": "Allemande",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0253-2",
+      "type": "mcq",
+      "prompt": "Parmi ces joueurs de tennis professionnels, lequel est le plus âgé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rafael Nadal",
+            "correct": false
+          },
+          {
+            "label": "Roger Federer",
+            "correct": false
+          },
+          {
+            "label": "Marat Safin",
+            "correct": false
+          },
+          {
+            "label": "Andre Agassi",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0253-3",
+      "type": "mcq",
+      "prompt": "Qui est devenu à 19 ans le plus jeune vainqueur du tournoi US Open ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Andre Agassi",
+            "correct": false
+          },
+          {
+            "label": "Boris Becker",
+            "correct": false
+          },
+          {
+            "label": "Pete Sampras",
+            "correct": true
+          },
+          {
+            "label": "Roger Federer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0253-4",
+      "type": "mcq",
+      "prompt": "Quel ancien joueur de tennis était surnommé « le Terrible » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "John McEnroe",
+            "correct": false
+          },
+          {
+            "label": "Boris Becker",
+            "correct": false
+          },
+          {
+            "label": "Pete Sampras",
+            "correct": false
+          },
+          {
+            "label": "Ivan Lendl",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-olympisme-tennis",
+      "title": "Olympisme et tennis",
+      "description": "D'après les quiz OpenQuizzDB « Jeux olympiques », « Rio 2016 », « Jeu, set et smash » et « Joueurs de tennis ».",
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0261-1",
+        "oqdb-0261-2",
+        "oqdb-0261-3",
+        "oqdb-0261-4",
+        "oqdb-0437-1",
+        "oqdb-0437-2",
+        "oqdb-0437-3",
+        "oqdb-0437-4",
+        "oqdb-0247-1",
+        "oqdb-0247-2",
+        "oqdb-0247-3",
+        "oqdb-0247-4",
+        "oqdb-0253-1",
+        "oqdb-0253-2",
+        "oqdb-0253-3",
+        "oqdb-0253-4"
+      ]
+    }
+  ]
+}

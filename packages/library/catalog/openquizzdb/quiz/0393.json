@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=393"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0393-1",
+      "type": "mcq",
+      "prompt": "Dans la saga « Hunger Games », que manque-t-il à un Avox ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La parole",
+            "correct": true
+          },
+          {
+            "label": "L'odorat",
+            "correct": false
+          },
+          {
+            "label": "La vue",
+            "correct": false
+          },
+          {
+            "label": "Les dents",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0393-2",
+      "type": "mcq",
+      "prompt": "Que représente la broche de Katniss dans « Hunger Games » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Globe",
+            "correct": false
+          },
+          {
+            "label": "Pioche",
+            "correct": false
+          },
+          {
+            "label": "Geai moqueur",
+            "correct": true
+          },
+          {
+            "label": "Arc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0393-3",
+      "type": "mcq",
+      "prompt": "Quelles baies sont empoisonnées dans « Hunger Games » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Baies de sureau",
+            "correct": true
+          },
+          {
+            "label": "Baies de goji",
+            "correct": false
+          },
+          {
+            "label": "Myrtilles",
+            "correct": false
+          },
+          {
+            "label": "Baies de la nuit",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0393-4",
+      "type": "mcq",
+      "prompt": "Quel est le nom de famille de Haymitch dans « Hunger Game » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Everdeen",
+            "correct": false
+          },
+          {
+            "label": "Trinket",
+            "correct": false
+          },
+          {
+            "label": "Abernathy",
+            "correct": true
+          },
+          {
+            "label": "Mellark",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

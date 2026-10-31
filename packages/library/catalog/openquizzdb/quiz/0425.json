@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=425"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0425-1",
+      "type": "mcq",
+      "prompt": "Dans une célèbre comptine française, qui a perdu son chat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La mère Sylvie",
+            "correct": false
+          },
+          {
+            "label": "La mère Luce",
+            "correct": false
+          },
+          {
+            "label": "La mère Michel",
+            "correct": true
+          },
+          {
+            "label": "La mère Claire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0425-2",
+      "type": "mcq",
+      "prompt": "Dans « Les Misérables » de Victor Hugo, qui est la fille de Fantine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Enjolras",
+            "correct": false
+          },
+          {
+            "label": "Cosette",
+            "correct": true
+          },
+          {
+            "label": "Azelma",
+            "correct": false
+          },
+          {
+            "label": "Eponine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0425-3",
+      "type": "mcq",
+      "prompt": "De quelle chanteuse Lily-Rose Depp est-elle la fille ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Amber Heard",
+            "correct": false
+          },
+          {
+            "label": "Kate Moss",
+            "correct": false
+          },
+          {
+            "label": "Vanessa Paradis",
+            "correct": true
+          },
+          {
+            "label": "Winona Ryder",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0425-4",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on une femme qui porte un enfant pour un couple ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mère-porteuse",
+            "correct": true
+          },
+          {
+            "label": "Fille-mère",
+            "correct": false
+          },
+          {
+            "label": "Mère-donneuse",
+            "correct": false
+          },
+          {
+            "label": "Enfanteresse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

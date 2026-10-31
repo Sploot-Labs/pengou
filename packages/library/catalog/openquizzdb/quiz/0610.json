@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=610"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0610-1",
+      "type": "mcq",
+      "prompt": "Qui a dit : « La beauté est dans les yeux de celui qui regarde » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Confucius",
+            "correct": false
+          },
+          {
+            "label": "Stendhal",
+            "correct": false
+          },
+          {
+            "label": "Guy de Maupassant",
+            "correct": false
+          },
+          {
+            "label": "Oscar Wilde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0610-2",
+      "type": "mcq",
+      "prompt": "Qui a dit : « La chance est bien souvent un hasard qui se provoque » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bob Marley",
+            "correct": false
+          },
+          {
+            "label": "Guy de Maupassant",
+            "correct": false
+          },
+          {
+            "label": "Confucius",
+            "correct": true
+          },
+          {
+            "label": "Oscar Wilde",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0610-3",
+      "type": "mcq",
+      "prompt": "Qui a dit : « Une vie ne vaut rien, mais rien ne vaut une vie » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Albert Camus",
+            "correct": false
+          },
+          {
+            "label": "Oscar Wilde",
+            "correct": false
+          },
+          {
+            "label": "André Malraux",
+            "correct": true
+          },
+          {
+            "label": "Jules Renard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0610-4",
+      "type": "mcq",
+      "prompt": "Qui a dit : « L'imagination est plus importante que le savoir » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Guy de Maupassant",
+            "correct": false
+          },
+          {
+            "label": "Albert Einstein",
+            "correct": true
+          },
+          {
+            "label": "Oscar Wilde",
+            "correct": false
+          },
+          {
+            "label": "Confucius",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

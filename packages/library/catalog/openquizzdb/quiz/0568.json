@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=568"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0568-1",
+      "type": "mcq",
+      "prompt": "Quelle est la troisième forêt domaniale de France métropolitaine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cranou",
+            "correct": false
+          },
+          {
+            "label": "Creuse",
+            "correct": false
+          },
+          {
+            "label": "Compiègne",
+            "correct": true
+          },
+          {
+            "label": "Tusson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0568-2",
+      "type": "mcq",
+      "prompt": "Quelle forêt a inspiré Victor Hugo pour sa ferme des Thénardier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cîteaux",
+            "correct": false
+          },
+          {
+            "label": "Bondy",
+            "correct": true
+          },
+          {
+            "label": "Vercors",
+            "correct": false
+          },
+          {
+            "label": "Corsuet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0568-3",
+      "type": "mcq",
+      "prompt": "Quelle forêt de Corse occupe un majestueux cirque montagneux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bavella",
+            "correct": false
+          },
+          {
+            "label": "Vizzavona",
+            "correct": false
+          },
+          {
+            "label": "Tusson",
+            "correct": false
+          },
+          {
+            "label": "Bonifatu",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0568-4",
+      "type": "mcq",
+      "prompt": "Quelle forêt est parfois identifiée à la forêt de Brocéliande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bondy",
+            "correct": false
+          },
+          {
+            "label": "Paimpont",
+            "correct": true
+          },
+          {
+            "label": "Seillon",
+            "correct": false
+          },
+          {
+            "label": "Thelle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -2,8 +2,9 @@ import { join } from 'node:path'
 import { loadConfig } from '@splootlabs/shared'
 import {
   createDb, createAppDb, deriveAppUrl, ensureAppRole, setAppRolePassword,
-  runMigrations, ensureDefaultTenant, pingDb,
+  runMigrations, ensureDefaultTenant, pingDb, syncLibrary,
 } from '@splootlabs/db'
+import { readCatalog } from '@splootlabs/library'
 import { createAuth, enabledSocialProviders } from '@splootlabs/auth'
 import { createEngine, generatePin } from '@splootlabs/game'
 import { buildServer } from './app.js'
@@ -49,6 +50,12 @@ const auth = createAuth(systemDb, {
   socialProviders: enabledSocialProviders(config),
 })
 await registerAuth(app, auth)
+// Bibliothèque de questions : lecture du catalogue (livré + dossier d'instance) puis synchronisation
+// en base. Une erreur sur le catalogue livré lève ici et fait échouer le démarrage, comme une
+// migration en échec ; un fichier d'instance invalide est seulement journalisé et écarté.
+const snapshot = await readCatalog({ extraDir: config.libraryExtraDir, log: (m) => app.log.error(m) })
+const libraryCounts = await syncLibrary(systemDb, snapshot)
+app.log.info(libraryCounts, 'catalogue de la bibliothèque synchronisé')
 registerEditor(app, { systemDb, appDb, auth, config })
 
 const io = attachRealtime(app, config)

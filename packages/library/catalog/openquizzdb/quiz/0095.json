@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=95"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0095-1",
+      "type": "mcq",
+      "prompt": "Qui a réalisé « The Pledge », avec Jack Nicholson et Robin Wright Penn ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tom Hanks",
+            "correct": false
+          },
+          {
+            "label": "Sean Penn",
+            "correct": true
+          },
+          {
+            "label": "Sam Mendes",
+            "correct": false
+          },
+          {
+            "label": "John Astin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0095-2",
+      "type": "mcq",
+      "prompt": "Quelle est la profession de Jack Nicholson dans le film « Shining » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Explorateur",
+            "correct": false
+          },
+          {
+            "label": "Écrivain",
+            "correct": true
+          },
+          {
+            "label": "Ensorceleur",
+            "correct": false
+          },
+          {
+            "label": "Escrimeur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0095-3",
+      "type": "mcq",
+      "prompt": "Qui est sa partenaire dans « Le facteur sonne toujours deux fois » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ava Gardner",
+            "correct": false
+          },
+          {
+            "label": "Susan Sarandon",
+            "correct": false
+          },
+          {
+            "label": "Jessica Lange",
+            "correct": true
+          },
+          {
+            "label": "Holly Hunter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0095-4",
+      "type": "mcq",
+      "prompt": "Quel film a réuni Leonardo Di Caprio, Matt Damon et Jack Nicholson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aviator",
+            "correct": false
+          },
+          {
+            "label": "Celebrity",
+            "correct": false
+          },
+          {
+            "label": "Blood Diamond",
+            "correct": false
+          },
+          {
+            "label": "Les Infiltrés",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

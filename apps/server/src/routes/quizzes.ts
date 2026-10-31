@@ -1,5 +1,5 @@
 import type { FastifyInstance } from 'fastify'
-import { createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz, withTenantTx, type Db } from '@splootlabs/db'
+import { createQuiz, listQuizzes, getQuiz, updateQuiz, archiveQuiz, restoreQuiz, deleteQuiz, withTenantTx, type Db } from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
 import { LIMITS, tooLong, isSafeMedia } from '../validation.js'
@@ -40,10 +40,12 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
     })
   })
 
-  app.get('/api/quizzes', { preHandler: requireUser }, async (request, reply) => {
+  // `?archived=1` liste les quiz archivés ; par défaut, seulement les actifs (« Mes quiz »).
+  app.get<{ Querystring: { archived?: string } }>('/api/quizzes', { preHandler: requireUser }, async (request, reply) => {
     const context = await resolveContextOr403(request, reply, systemDb, config)
     if (!context) return
-    return withTenantTx(appDb, context, (scope) => listQuizzes(scope))
+    const archived = request.query.archived === '1' || request.query.archived === 'true'
+    return withTenantTx(appDb, context, (scope) => listQuizzes(scope, { archived }))
   })
 
   app.get<{ Params: { id: string } }>('/api/quizzes/:id', { preHandler: requireUser }, async (request, reply) => {
@@ -92,6 +94,20 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
       return quiz
     })
   })
+
+  // Archivage / restauration : mêmes droits que la modification (auteur, ou propriétaire/admin
+  // du workspace via `content:access-all`). Un quiz hors de portée répond 404 comme ailleurs.
+  for (const [action, apply] of [['archive', archiveQuiz], ['restore', restoreQuiz]] as const) {
+    app.post<{ Params: { id: string } }>(`/api/quizzes/:id/${action}`, { preHandler: requireUser }, async (request, reply) => {
+      const context = await resolveContextOr403(request, reply, systemDb, config)
+      if (!context) return
+      return withTenantTx(appDb, context, async (scope) => {
+        const quiz = await apply(scope, request.params.id)
+        if (!quiz) return reply.code(404).send({ error: 'Quiz introuvable.' })
+        return quiz
+      })
+    })
+  }
 
   app.delete<{ Params: { id: string } }>('/api/quizzes/:id', { preHandler: requireUser }, async (request, reply) => {
     const context = await resolveContextOr403(request, reply, systemDb, config)

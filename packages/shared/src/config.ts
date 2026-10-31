@@ -26,6 +26,8 @@ const EnvSchema = z.object({
   // (`pnpm --filter @splootlabs/server migrate`) avant de démarrer les répliques — évite N
   // migrations concurrentes au boot.
   MIGRATE_ON_BOOT: z.enum(['true', 'false']).default('true'),
+  // Dossier de contenu supplémentaire pour la bibliothèque de questions (fichiers JSON d'instance).
+  LIBRARY_EXTRA_DIR: z.string().min(1).optional(),
   GOOGLE_CLIENT_ID: z.string().optional(),
   GOOGLE_CLIENT_SECRET: z.string().optional(),
   FACEBOOK_CLIENT_ID: z.string().optional(),
@@ -56,6 +58,7 @@ export type AppConfig = {
   rateLimitMax: number
   disableSignup: boolean
   migrateOnBoot: boolean
+  libraryExtraDir?: string
   sessionInactivityTimeoutMs: number
   sessionSweepIntervalMs: number
   oauth: {
@@ -89,6 +92,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     rateLimitMax: parsed.RATE_LIMIT_MAX,
     disableSignup: parsed.DISABLE_SIGNUP === 'true',
     migrateOnBoot: parsed.MIGRATE_ON_BOOT === 'true',
+    libraryExtraDir: parsed.LIBRARY_EXTRA_DIR,
     sessionInactivityTimeoutMs: parsed.SESSION_INACTIVITY_TIMEOUT_MINUTES * 60_000,
     sessionSweepIntervalMs: parsed.SESSION_SWEEP_INTERVAL_MINUTES * 60_000,
     oauth: {

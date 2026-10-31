@@ -27,6 +27,10 @@ export class ApiError extends Error {
 function extractErrorMessage(body: unknown): string | undefined {
   if (body && typeof body === 'object') {
     const record = body as Record<string, unknown>
+    // Corps d'erreur par défaut de Fastify (`{statusCode, error: 'Not Found', message: 'Route GET:…'}`) :
+    // libellés techniques en anglais, jamais destinés à l'utilisateur. Nos routes n'envoient pas
+    // `statusCode`, Better Auth non plus.
+    if (typeof record.statusCode === 'number') return undefined
     if (typeof record.error === 'string' && record.error.length > 0) return record.error
     if (typeof record.message === 'string' && record.message.length > 0) return record.message
   }
@@ -41,6 +45,32 @@ function safeJsonParse(text: string): unknown {
     // "no structured error" rather than crashing the caller.
     return undefined
   }
+}
+
+/** Message de repli quand la réponse ne porte aucun texte exploitable (proxy, page HTML, corps vide). */
+function fallbackMessage(status: number): string {
+  switch (status) {
+    case 400:
+      return 'La demande est invalide.'
+    case 401:
+      return 'Votre session a expiré. Reconnectez-vous.'
+    case 403:
+      return "Vous n'avez pas les droits pour cette action."
+    case 404:
+      return 'Élément introuvable.'
+    case 409:
+      return 'Conflit avec une modification récente. Rechargez la page.'
+    case 413:
+      return 'Envoi trop volumineux.'
+    case 429:
+      return 'Trop de demandes. Patientez un instant puis réessayez.'
+    case 502:
+    case 503:
+    case 504:
+      return 'Le serveur ne répond pas. Réessayez dans un instant.'
+  }
+  if (status >= 500) return 'Le serveur a rencontré une erreur. Réessayez dans un instant.'
+  return `Erreur ${status}`
 }
 
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
@@ -67,7 +97,7 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
   const data = text.length > 0 ? safeJsonParse(text) : undefined
 
   if (!response.ok) {
-    const message = extractErrorMessage(data) ?? `Erreur ${response.status}`
+    const message = extractErrorMessage(data) ?? fallbackMessage(response.status)
     throw new ApiError(response.status, message)
   }
 

@@ -17,10 +17,10 @@ describe('themes.css', () => {
     expect(themesCss).not.toContain(':root[data-')
   })
 
-  it('définit les rôles réponse, podium et focus dans les deux blocs (source unique)', () => {
+  it('définit les rôles réponse, podium, focus et bouton secondaire dans les deux blocs (source unique)', () => {
     const roles = [
       '--ans-triangle', '--ans-diamond', '--ans-circle', '--ans-square',
-      '--gold', '--silver', '--bronze', '--focus',
+      '--gold', '--silver', '--bronze', '--focus', '--ghost-line', '--ghost-ink',
     ]
     for (const selector of ["[data-theme='app']", "[data-theme='scene']"]) {
       const start = themesCss.indexOf(selector)

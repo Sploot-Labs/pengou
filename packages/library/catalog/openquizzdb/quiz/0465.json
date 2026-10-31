@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=465"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0465-1",
+      "type": "mcq",
+      "prompt": "Avec quel appareil mesure-t-on la profondeur des océans ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Compteur Geiger",
+            "correct": false
+          },
+          {
+            "label": "Radar",
+            "correct": false
+          },
+          {
+            "label": "Sextant",
+            "correct": false
+          },
+          {
+            "label": "Sonar",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0465-2",
+      "type": "mcq",
+      "prompt": "Quel autre nom est donné au détecteur de mensonges ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Détectographe",
+            "correct": false
+          },
+          {
+            "label": "Tachigraphe",
+            "correct": false
+          },
+          {
+            "label": "Mésographe",
+            "correct": false
+          },
+          {
+            "label": "Polygraphe",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0465-3",
+      "type": "mcq",
+      "prompt": "Quel instrument de navigation mesure la vitesse des bateaux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Compas",
+            "correct": false
+          },
+          {
+            "label": "Loch",
+            "correct": true
+          },
+          {
+            "label": "Sextant",
+            "correct": false
+          },
+          {
+            "label": "Sonar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0465-4",
+      "type": "mcq",
+      "prompt": "Quel outil philatélique compte les debts d'un timbre-poste ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dentomètre",
+            "correct": false
+          },
+          {
+            "label": "Odontomètre",
+            "correct": true
+          },
+          {
+            "label": "Odontoscope",
+            "correct": false
+          },
+          {
+            "label": "Dentoscope",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

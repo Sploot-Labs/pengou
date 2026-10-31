@@ -1,0 +1,1358 @@
+{
+  "source": {
+    "name": "Open Trivia Database",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-000fa1bbbf23",
+      "type": "truefalse",
+      "prompt": "Pablo Picasso is one of the founding fathers of \"Cubism.\"",
+      "payload": {
+        "correct": true
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-053cd2db94e2",
+      "type": "truefalse",
+      "prompt": "The name \"Impressionsim\" was first given to that art movement by a critic's satirical review of a Monet painting.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0741d591f209",
+      "type": "mcq",
+      "prompt": "The painting \"Guernica\" by Pablo Picasso expressed emotions of dread in response to which war?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spanish Civil War",
+            "correct": true
+          },
+          {
+            "label": "The Crimean War",
+            "correct": false
+          },
+          {
+            "label": "Spanish-American War",
+            "correct": false
+          },
+          {
+            "label": "World War I",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-088c9981548a",
+      "type": "mcq",
+      "prompt": "The painting \"The Starry Night\" by Vincent van Gogh was part of which art movement?",
+      "payload": {
+        "options": [
+          {
+            "label": "Impressionism",
+            "correct": false
+          },
+          {
+            "label": "Neoclassical",
+            "correct": false
+          },
+          {
+            "label": "Romanticism",
+            "correct": false
+          },
+          {
+            "label": "Post-Impressionism",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0ad9d1a215aa",
+      "type": "mcq",
+      "prompt": "Who sculpted the statue of David?",
+      "payload": {
+        "options": [
+          {
+            "label": "Donatello",
+            "correct": false
+          },
+          {
+            "label": "Michelangelo",
+            "correct": true
+          },
+          {
+            "label": "Gian Lorenzo Bernini",
+            "correct": false
+          },
+          {
+            "label": "Auguste Rodin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0ed981a61b6f",
+      "type": "mcq",
+      "prompt": "Which one of these paintings is not by Caspar David Friedrich?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wanderer above the Sea of Fog",
+            "correct": false
+          },
+          {
+            "label": "The Sea of Ice",
+            "correct": false
+          },
+          {
+            "label": "The Black Sea",
+            "correct": true
+          },
+          {
+            "label": "The Monk by the Sea",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-12357890cb45",
+      "type": "mcq",
+      "prompt": "Which artist painted “The Treachery of Images,” a painting of a pipe with the description \"this is not a pipe\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Modigliani",
+            "correct": false
+          },
+          {
+            "label": "Magritte",
+            "correct": true
+          },
+          {
+            "label": "Munch",
+            "correct": false
+          },
+          {
+            "label": "Matisse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1a6cb452276f",
+      "type": "mcq",
+      "prompt": "What year did Albrecht Dürer create the painting \"The Young Hare\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "1702",
+            "correct": false
+          },
+          {
+            "label": "1602",
+            "correct": false
+          },
+          {
+            "label": "1402",
+            "correct": false
+          },
+          {
+            "label": "1502",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1f02cb2cb2a7",
+      "type": "mcq",
+      "prompt": "Painter Piet Mondrian (1872 - 1944) was a part of what movement?",
+      "payload": {
+        "options": [
+          {
+            "label": "Precisionism",
+            "correct": false
+          },
+          {
+            "label": "Cubism",
+            "correct": false
+          },
+          {
+            "label": "Impressionism",
+            "correct": false
+          },
+          {
+            "label": "Neoplasticism",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-211fff2b02a5",
+      "type": "mcq",
+      "prompt": "Who painted the epic mural Guernica?",
+      "payload": {
+        "options": [
+          {
+            "label": "Henri Matisse",
+            "correct": false
+          },
+          {
+            "label": "Francisco Goya",
+            "correct": false
+          },
+          {
+            "label": "Leonardo da Vinci",
+            "correct": false
+          },
+          {
+            "label": "Pablo Picasso",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2b81c25354c1",
+      "type": "mcq",
+      "prompt": "What nationality was the surrealist painter Salvador Dali?",
+      "payload": {
+        "options": [
+          {
+            "label": "Italian",
+            "correct": false
+          },
+          {
+            "label": "Spanish",
+            "correct": true
+          },
+          {
+            "label": "Portuguese",
+            "correct": false
+          },
+          {
+            "label": "French",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2bb62115b3fc",
+      "type": "mcq",
+      "prompt": "What nationality was the famous artist Pablo Picasso?",
+      "payload": {
+        "options": [
+          {
+            "label": "French",
+            "correct": false
+          },
+          {
+            "label": "German",
+            "correct": false
+          },
+          {
+            "label": "Italian",
+            "correct": false
+          },
+          {
+            "label": "Spanish",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2f79d0e72345",
+      "type": "mcq",
+      "prompt": "What were Marcel Duchamp's readymades?",
+      "payload": {
+        "options": [
+          {
+            "label": "a series focused on color and light as opposed to line and shape",
+            "correct": false
+          },
+          {
+            "label": "a group of identical steel boxes jutting from the wall",
+            "correct": false
+          },
+          {
+            "label": "utilitarian objects elevated to the status of art",
+            "correct": true
+          },
+          {
+            "label": "paintings with a barely visible outlined square",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3d4f755cea13",
+      "type": "mcq",
+      "prompt": "Which artist's style was to use small different colored dots to create a picture?",
+      "payload": {
+        "options": [
+          {
+            "label": "Georges Seurat",
+            "correct": true
+          },
+          {
+            "label": "Paul Cézanne",
+            "correct": false
+          },
+          {
+            "label": "Henri Rousseau",
+            "correct": false
+          },
+          {
+            "label": "Vincent Van Gogh",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3fb33d531d0f",
+      "type": "mcq",
+      "prompt": "Which artist is famous for cutting off his ear?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vincent van Gogh",
+            "correct": true
+          },
+          {
+            "label": "Rembrandt",
+            "correct": false
+          },
+          {
+            "label": "Michelangelo",
+            "correct": false
+          },
+          {
+            "label": "Salvador Dali",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-42ca7eb8bb08",
+      "type": "mcq",
+      "prompt": "What is another name for La Gioconda / La Joconde?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Starry Night",
+            "correct": false
+          },
+          {
+            "label": "The Girl with a Pearl Earring",
+            "correct": false
+          },
+          {
+            "label": "Sunflowers",
+            "correct": false
+          },
+          {
+            "label": "The Mona Lisa",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-461d78ca93be",
+      "type": "mcq",
+      "prompt": "Which Van Gogh painting depicts the view from his asylum in Saint-Rémy-de-Provence in southern France?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wheatfields with Crows",
+            "correct": false
+          },
+          {
+            "label": "The Starry Night",
+            "correct": true
+          },
+          {
+            "label": "The Sower with Setting Sun",
+            "correct": false
+          },
+          {
+            "label": "The Church at Auvers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-50b1da5d06bb",
+      "type": "truefalse",
+      "prompt": "Leonardo da Vinci was not the creator of the Mona Lisa.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5dddaff2f2cd",
+      "type": "mcq",
+      "prompt": "How many paint and pastel versions of \"The Scream\" is Norwegian painter Edvard Munch believed to have produced?",
+      "payload": {
+        "options": [
+          {
+            "label": "4",
+            "correct": true
+          },
+          {
+            "label": "1",
+            "correct": false
+          },
+          {
+            "label": "3",
+            "correct": false
+          },
+          {
+            "label": "2",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-666dedbcc9d1",
+      "type": "mcq",
+      "prompt": "What was the major distinction between the English and French Gothic styles of architecture?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gargoyles",
+            "correct": false
+          },
+          {
+            "label": "Fan vaulting",
+            "correct": true
+          },
+          {
+            "label": "Hemispherical Domes",
+            "correct": false
+          },
+          {
+            "label": "Pinnacles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6b4b8f8667e1",
+      "type": "mcq",
+      "prompt": "What color is produced by mixing black and white?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grey",
+            "correct": true
+          },
+          {
+            "label": "White",
+            "correct": false
+          },
+          {
+            "label": "Black",
+            "correct": false
+          },
+          {
+            "label": "Brown",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6f47d688ac0b",
+      "type": "mcq",
+      "prompt": "Which artist painted the late 15th century mural 'The Last Supper'?",
+      "payload": {
+        "options": [
+          {
+            "label": "Leonardo da Vinci",
+            "correct": true
+          },
+          {
+            "label": "Luca Pacioli",
+            "correct": false
+          },
+          {
+            "label": "Paolo Uccello",
+            "correct": false
+          },
+          {
+            "label": "Piero della Francesca",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7eb9f808bbd9",
+      "type": "mcq",
+      "prompt": "Which one of these colors are not featured in Mondrian's Broadway Boogie-Woogie?",
+      "payload": {
+        "options": [
+          {
+            "label": "Green",
+            "correct": true
+          },
+          {
+            "label": "Blue",
+            "correct": false
+          },
+          {
+            "label": "Yellow",
+            "correct": false
+          },
+          {
+            "label": "Red",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8288be0d6510",
+      "type": "mcq",
+      "prompt": "Who painted the Sistine Chapel?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michelangelo",
+            "correct": true
+          },
+          {
+            "label": "Leonardo da Vinci",
+            "correct": false
+          },
+          {
+            "label": "Raphael",
+            "correct": false
+          },
+          {
+            "label": "Pablo Picasso",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-844a42cb0220",
+      "type": "mcq",
+      "prompt": "Which art movement was Pablo Picasso known for co-founding?",
+      "payload": {
+        "options": [
+          {
+            "label": "Expressionism",
+            "correct": false
+          },
+          {
+            "label": "Impressionism",
+            "correct": false
+          },
+          {
+            "label": "Cubism",
+            "correct": true
+          },
+          {
+            "label": "Futurism",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-862aa8926bd9",
+      "type": "mcq",
+      "prompt": "What is the world's oldest known piece of fiction?",
+      "payload": {
+        "options": [
+          {
+            "label": "Papyrus of Ani",
+            "correct": false
+          },
+          {
+            "label": "Code of Hammurabi",
+            "correct": false
+          },
+          {
+            "label": "Epic of Gilgamesh",
+            "correct": true
+          },
+          {
+            "label": "Rosetta Stone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8b5359cb9525",
+      "type": "mcq",
+      "prompt": "Paul Gauguin moved to which country in 1895?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lithuania",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "Atuona",
+            "correct": false
+          },
+          {
+            "label": "Tahiti",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8ea0e8bf1026",
+      "type": "mcq",
+      "prompt": "Who painted The Starry Night?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pablo Picasso",
+            "correct": false
+          },
+          {
+            "label": "Leonardo da Vinci",
+            "correct": false
+          },
+          {
+            "label": "Michelangelo",
+            "correct": false
+          },
+          {
+            "label": "Vincent van Gogh",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-925ab2fe5863",
+      "type": "mcq",
+      "prompt": "Who painted \"The Scream\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Edvard Munch",
+            "correct": true
+          },
+          {
+            "label": "Picasso",
+            "correct": false
+          },
+          {
+            "label": "Henri Matisse",
+            "correct": false
+          },
+          {
+            "label": "Vincent Van Gogh",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9273219f83e4",
+      "type": "mcq",
+      "prompt": "Which painting was not made by Vincent Van Gogh?",
+      "payload": {
+        "options": [
+          {
+            "label": "Café Terrace at Night",
+            "correct": false
+          },
+          {
+            "label": "Starry Night",
+            "correct": false
+          },
+          {
+            "label": "Bedroom In Arles",
+            "correct": false
+          },
+          {
+            "label": "The Ninth Wave",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-995b9a0421c9",
+      "type": "mcq",
+      "prompt": "Albrecht Dürer's birthplace and place of death were in...",
+      "payload": {
+        "options": [
+          {
+            "label": "Berlin",
+            "correct": false
+          },
+          {
+            "label": "Nürnberg",
+            "correct": true
+          },
+          {
+            "label": "Augsburg",
+            "correct": false
+          },
+          {
+            "label": "Bamberg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9dbb4e24ea14",
+      "type": "mcq",
+      "prompt": "In \"Last Supper\" by Leonardo Da Vinci, what two colors were the robes worn by Jesus?",
+      "payload": {
+        "options": [
+          {
+            "label": "Red and White",
+            "correct": false
+          },
+          {
+            "label": "Red and Blue",
+            "correct": true
+          },
+          {
+            "label": "Red and Black",
+            "correct": false
+          },
+          {
+            "label": "Red and Yellow",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a1c9c58aed62",
+      "type": "mcq",
+      "prompt": "What French sculptor designed the Statue of Liberty?",
+      "payload": {
+        "options": [
+          {
+            "label": "Frédéric Auguste Bartholdi",
+            "correct": true
+          },
+          {
+            "label": "Jean-Léon Gérôme",
+            "correct": false
+          },
+          {
+            "label": "Auguste Rodin",
+            "correct": false
+          },
+          {
+            "label": "Henri Matisse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a3412c0f9437",
+      "type": "truefalse",
+      "prompt": "Ancient Greek and Roman sculptors often colored their statues.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a90d3842b2e9",
+      "type": "mcq",
+      "prompt": "Which time signature is commonly known as “Cut Time?”",
+      "payload": {
+        "options": [
+          {
+            "label": "3/4",
+            "correct": false
+          },
+          {
+            "label": "2/2",
+            "correct": true
+          },
+          {
+            "label": "6/8",
+            "correct": false
+          },
+          {
+            "label": "4/4",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b6f59084cac6",
+      "type": "mcq",
+      "prompt": "Who painted \"The Starry Night\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Claude Monet",
+            "correct": false
+          },
+          {
+            "label": "Pablo Picasso",
+            "correct": false
+          },
+          {
+            "label": "Edvard Munch",
+            "correct": false
+          },
+          {
+            "label": "Vincent van Gogh",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-bc7fa06e1513",
+      "type": "mcq",
+      "prompt": "Who painted the biblical fresco The Creation of Adam?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rembrandt",
+            "correct": false
+          },
+          {
+            "label": "Leonardo da Vinci",
+            "correct": false
+          },
+          {
+            "label": "Caravaggio",
+            "correct": false
+          },
+          {
+            "label": "Michelangelo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c1686c62d3cc",
+      "type": "mcq",
+      "prompt": "Who painted \"Swans Reflecting Elephants\", \"Sleep\", and \"The Persistence of Memory\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jackson Pollock",
+            "correct": false
+          },
+          {
+            "label": "Edgar Degas",
+            "correct": false
+          },
+          {
+            "label": "Salvador Dali",
+            "correct": true
+          },
+          {
+            "label": "Vincent van Gogh",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d9f8add86523",
+      "type": "mcq",
+      "prompt": "When was Salvador Dali's painting, \"The Persistence of Memory,\" completed?",
+      "payload": {
+        "options": [
+          {
+            "label": "1932",
+            "correct": false
+          },
+          {
+            "label": "1934",
+            "correct": false
+          },
+          {
+            "label": "1929",
+            "correct": false
+          },
+          {
+            "label": "1931",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-da8f7cbf7a36",
+      "type": "mcq",
+      "prompt": "Which Greek sculptor designed the Athena Parthenos statue inside the Parthenon?",
+      "payload": {
+        "options": [
+          {
+            "label": "Scopas",
+            "correct": false
+          },
+          {
+            "label": "Phidias",
+            "correct": true
+          },
+          {
+            "label": "Hesiod",
+            "correct": false
+          },
+          {
+            "label": "Praxiteles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dd159d16cad4",
+      "type": "mcq",
+      "prompt": "Who painted the Mona Lisa?",
+      "payload": {
+        "options": [
+          {
+            "label": "Leonardo da Vinci",
+            "correct": true
+          },
+          {
+            "label": "Michelangelo",
+            "correct": false
+          },
+          {
+            "label": "Vincent van Gogh",
+            "correct": false
+          },
+          {
+            "label": "Pablo Picasso",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dd6a1dd8ae03",
+      "type": "mcq",
+      "prompt": "What is a fundamental element of the Gothic style of architecture?",
+      "payload": {
+        "options": [
+          {
+            "label": "coffered ceilings",
+            "correct": false
+          },
+          {
+            "label": "pointed arch",
+            "correct": true
+          },
+          {
+            "label": "internal frescoes",
+            "correct": false
+          },
+          {
+            "label": "façades surmounted by a pediment",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ded97cb4eda3",
+      "type": "truefalse",
+      "prompt": "Vincent van Gogh cut off one of his ears.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e3bad7278823",
+      "type": "mcq",
+      "prompt": "What is the name of the Japanese art of folding paper into decorative shapes and figures?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sumi-e",
+            "correct": false
+          },
+          {
+            "label": "Ukiyo-e",
+            "correct": false
+          },
+          {
+            "label": "Origami",
+            "correct": true
+          },
+          {
+            "label": "Haiku",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e3eee6b7d997",
+      "type": "mcq",
+      "prompt": "Which of these paintings did Johannes Vermeer not paint?",
+      "payload": {
+        "options": [
+          {
+            "label": "Girl with a Pearl Earring",
+            "correct": false
+          },
+          {
+            "label": "Bacchus",
+            "correct": true
+          },
+          {
+            "label": "The Milkmaid",
+            "correct": false
+          },
+          {
+            "label": "The Lacemaker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ecc98988b1f9",
+      "type": "mcq",
+      "prompt": "What year was the Mona Lisa finished?",
+      "payload": {
+        "options": [
+          {
+            "label": "1511",
+            "correct": false
+          },
+          {
+            "label": "1487",
+            "correct": false
+          },
+          {
+            "label": "1504",
+            "correct": true
+          },
+          {
+            "label": "1523",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ed3d318e0ffd",
+      "type": "mcq",
+      "prompt": "What was the first successful and commercially viable photographic technique?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kodachrome film",
+            "correct": false
+          },
+          {
+            "label": "The Daguerreotype",
+            "correct": true
+          },
+          {
+            "label": "The Turin Shroud",
+            "correct": false
+          },
+          {
+            "label": "Collodion process",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ef19d9693cd0",
+      "type": "mcq",
+      "prompt": "Which of these are the name of a famous marker brand?",
+      "payload": {
+        "options": [
+          {
+            "label": "Copic",
+            "correct": true
+          },
+          {
+            "label": "Marx",
+            "correct": false
+          },
+          {
+            "label": "Dopix",
+            "correct": false
+          },
+          {
+            "label": "Cofix",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f70ac70311a1",
+      "type": "mcq",
+      "prompt": "What nationality was the famous artist Van Gogh?",
+      "payload": {
+        "options": [
+          {
+            "label": "French",
+            "correct": false
+          },
+          {
+            "label": "Dutch",
+            "correct": true
+          },
+          {
+            "label": "Polish",
+            "correct": false
+          },
+          {
+            "label": "Russian",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ffc71b129bf3",
+      "type": "truefalse",
+      "prompt": "Venus of Willendorf is one of the earliest works of art, depicting the planets Mars and Venus embrace in the heavens at night.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

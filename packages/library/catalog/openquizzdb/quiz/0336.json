@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=336"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0336-1",
+      "type": "mcq",
+      "prompt": "Quel animateur de radio déjanté apparaît dans « Le Cinquième Élément » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pacoli",
+            "correct": false
+          },
+          {
+            "label": "Ruby Rhod",
+            "correct": true
+          },
+          {
+            "label": "Vito Cornelius",
+            "correct": false
+          },
+          {
+            "label": "Mangalore",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0336-2",
+      "type": "mcq",
+      "prompt": "Quel est le métier de Korben Dallas dans « Le Cinquième Élément » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tueur à gages",
+            "correct": false
+          },
+          {
+            "label": "Militaire",
+            "correct": false
+          },
+          {
+            "label": "Chauffeur de taxi",
+            "correct": true
+          },
+          {
+            "label": "Policier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0336-3",
+      "type": "mcq",
+      "prompt": "Qui est en fait le cinquième élément dans le film du même nom ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Korben Dallas",
+            "correct": false
+          },
+          {
+            "label": "Ruby Rhod",
+            "correct": false
+          },
+          {
+            "label": "Leeloo",
+            "correct": true
+          },
+          {
+            "label": "Cornelius",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0336-4",
+      "type": "mcq",
+      "prompt": "Combien de pierres faut-il réunir dans « Le Cinquième Élément » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quatre",
+            "correct": true
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Deux",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

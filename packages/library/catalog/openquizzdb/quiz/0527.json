@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=527"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0527-1",
+      "type": "mcq",
+      "prompt": "Qui fut la première joueuse de tennis Russe à remporter Wimbledon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sharapova",
+            "correct": true
+          },
+          {
+            "label": "Bovina",
+            "correct": false
+          },
+          {
+            "label": "Kirilenko",
+            "correct": false
+          },
+          {
+            "label": "Panova",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0527-2",
+      "type": "mcq",
+      "prompt": "Quelle gymnaste roumaine a obtenu la note de 10 aux JO ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oana Ban",
+            "correct": false
+          },
+          {
+            "label": "Nadia Comaneci",
+            "correct": true
+          },
+          {
+            "label": "Catalina Ponor",
+            "correct": false
+          },
+          {
+            "label": "Olga Korbut",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0527-3",
+      "type": "mcq",
+      "prompt": "Qui fut la première femme à remporter une course dans un GP moto ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gina Bovaird",
+            "correct": false
+          },
+          {
+            "label": "Lucy Glockner",
+            "correct": false
+          },
+          {
+            "label": "Maria Herrera",
+            "correct": false
+          },
+          {
+            "label": "Ana Carrasco",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0527-4",
+      "type": "mcq",
+      "prompt": "Qui fut la première femme enregistrée à courir le marathon de Boston ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mary Decke",
+            "correct": false
+          },
+          {
+            "label": "Shalane Flanagan",
+            "correct": false
+          },
+          {
+            "label": "Kathrine Switzer",
+            "correct": true
+          },
+          {
+            "label": "Molly Huddle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

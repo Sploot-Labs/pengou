@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=555"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0555-1",
+      "type": "mcq",
+      "prompt": "Dans « L'Âge de glace », qu'est-ce qui échappe à l'écureuil Scrat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Un gland",
+            "correct": true
+          },
+          {
+            "label": "Une bille",
+            "correct": false
+          },
+          {
+            "label": "Un os",
+            "correct": false
+          },
+          {
+            "label": "Une pierre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0555-2",
+      "type": "mcq",
+      "prompt": "Comment se nomme l'orque à sauver dans une saga populaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tom",
+            "correct": false
+          },
+          {
+            "label": "Jennifer",
+            "correct": false
+          },
+          {
+            "label": "Willy",
+            "correct": true
+          },
+          {
+            "label": "Monica",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0555-3",
+      "type": "mcq",
+      "prompt": "Qui le chat prénommé Tom poursuit-il sans cesse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joshua",
+            "correct": false
+          },
+          {
+            "label": "Jason",
+            "correct": false
+          },
+          {
+            "label": "James",
+            "correct": false
+          },
+          {
+            "label": "Jerry",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0555-4",
+      "type": "mcq",
+      "prompt": "Dans les deux films « Babe », quel animal campe le personnage principal ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chien",
+            "correct": false
+          },
+          {
+            "label": "Mouton",
+            "correct": false
+          },
+          {
+            "label": "Chèvre",
+            "correct": false
+          },
+          {
+            "label": "Cochon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}
