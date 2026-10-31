@@ -121,6 +121,14 @@ const MCQ_SHAPES: readonly TileShape[] = ['triangle', 'diamond', 'circle', 'squa
 /** Variables CSS d'un aplat de réponse (couleur + encre + ombre portée) pour
  * une grande tuile de verdict, depuis les tokens `--ans-*` (une option, une
  * couleur partout). */
+/**
+ * Rang en toutes lettres abrégées, accordé à « place » (féminin) pour rester
+ * neutre vis-à-vis du joueur : 1ʳᵉ, 2ᵉ, 3ᵉ… (« 1ᵉ » n'existe pas).
+ */
+function placeOrdinal(rank: number): string {
+  return rank === 1 ? '1ʳᵉ' : `${rank}ᵉ`
+}
+
 function tileVars(shape: TileShape): CSSProperties {
   return {
     ['--tile-color' as string]: `var(--ans-${shape})`,
@@ -816,7 +824,7 @@ export function PlayerLive() {
             {reading.prompt}
           </h1>
           <p className="player-status" role="status" aria-live="polite">
-            Préparez-vous…
+            Prépare-toi…
           </p>
           <div className="player-question__spacer" />
         </div>
@@ -1105,7 +1113,7 @@ export function PlayerLive() {
               {myRank !== null && (
                 <div className="player-rankbar">
                   <span className="player-rankbar__rank">
-                    Tu es <strong>{myRank}ᵉ</strong>
+                    Tu es à la <strong>{placeOrdinal(myRank)}</strong> place
                     {lastRanking.length > 0 ? ` sur ${lastRanking.length}` : ''}
                   </span>
                   <span className="player-rankbar__score">{score.toLocaleString('fr-FR')}</span>
@@ -1129,7 +1137,7 @@ export function PlayerLive() {
           <p className="player-result__points">Score final : {score.toLocaleString('fr-FR')}</p>
           {myRank !== null ? (
             <p>
-              Tu termines {myRank}ᵉ sur {lastRanking.length || podiumTop.length}.
+              Tu termines à la {placeOrdinal(myRank)} place sur {lastRanking.length || podiumTop.length}.
             </p>
           ) : (
             <p>Merci d'avoir joué !</p>

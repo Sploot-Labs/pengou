@@ -125,12 +125,10 @@ describe('Home', () => {
       </MotionProvider>,
     )
 
-    await waitFor(() => expect(screen.getByText(/on te fait de la place/i)).toBeInTheDocument())
+    await waitFor(() => expect(screen.getByText(/on vous fait de la place/i)).toBeInTheDocument())
 
-    // The single 🐾 stays, and the decorative shape motif (Task 5) is
-    // aria-hidden — it anchors the empty state visually without being
-    // announced to screen readers.
-    expect(screen.getByText(/on te fait de la place/i).textContent).toMatch(/🐾$/)
+    // Le motif décoratif de formes est aria-hidden : il ancre visuellement
+    // l'état vide sans être annoncé aux lecteurs d'écran.
     const motif = document.querySelector('.home-empty-motif')
     expect(motif).not.toBeNull()
     expect(motif).toHaveAttribute('aria-hidden', 'true')

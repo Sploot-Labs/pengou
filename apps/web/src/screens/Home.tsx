@@ -195,7 +195,7 @@ export function Home() {
   return (
     <div className="ab-shell">
       <AppHeader
-        brandline="quiz en direct, open-source, chez vous ou dans le cloud"
+        brandline={<span className="host-brandline__tagline">quiz en direct, open-source, chez vous ou dans le cloud</span>}
         actions={
           <>
             <WorkspaceSwitcher />
@@ -209,11 +209,14 @@ export function Home() {
       <main className="ab-shell__main" id="contenu-principal" tabIndex={-1}>
         <section className="home-hero">
           <div>
-            <h1>Bonjour 👋</h1>
+            <h1>Bonjour</h1>
             <p className="home-hero__sub">Prêt à lancer une partie&nbsp;?</p>
           </div>
+          {/* Une fois le formulaire ouvert, l'action principale devient
+              « Créer et ouvrir » : « Annuler » passe en ghost pour ne pas
+              afficher deux boutons primaires côte à côte. */}
           <Button
-            variant="primary"
+            variant={creatingQuiz ? 'ghost' : 'primary'}
             type="button"
             aria-expanded={creatingQuiz}
             onClick={() => {
@@ -283,7 +286,7 @@ export function Home() {
                   </span>
                 ))}
               </div>
-              <p>Pas encore de quiz. On te fait de la place, crée-en un pour démarrer. 🐾</p>
+              <p>Pas encore de quiz. On vous fait de la place : créez-en un pour démarrer.</p>
             </div>
           ) : (
             <Reveal from="up">

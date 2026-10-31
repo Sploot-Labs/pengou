@@ -964,22 +964,23 @@ export function HostEditor() {
               <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
                 {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
               </Button>
-              <div className="host-launch">
-                <Button
-                  variant="primary"
-                  type="button"
-                  aria-disabled={!canLaunch || launching}
-                  aria-describedby={!canLaunch ? 'host-launch-reason' : undefined}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    if (!canLaunch || launching) return
-                    void launchGame()
-                  }}
-                >
-                  {launching ? 'Lancement…' : 'Lancer la partie'}
-                </Button>
-                {launchReason && <p className="host-launch__hint">{launchReason}</p>}
-              </div>
+              {/* La raison du blocage n'est affichée qu'une fois, dans le
+                  bandeau #host-launch-reason sous le titre : la répéter ici
+                  faisait changer la hauteur de l'en-tête et désalignait
+                  « Se déconnecter ». */}
+              <Button
+                variant="primary"
+                type="button"
+                aria-disabled={!canLaunch || launching}
+                aria-describedby={!canLaunch ? 'host-launch-reason' : undefined}
+                onClick={(e) => {
+                  e.preventDefault()
+                  if (!canLaunch || launching) return
+                  void launchGame()
+                }}
+              >
+                {launching ? 'Lancement…' : 'Lancer la partie'}
+              </Button>
             </>
           }
         />
@@ -1069,7 +1070,7 @@ export function HostEditor() {
             <section aria-label="Liste des questions">
               <h2 style={{ marginBottom: 'var(--space-3)' }}>Questions</h2>
               {questions.length === 0 ? (
-                <p className="ab-empty-state">Aucune question pour l'instant, ajoutez-en une pour commencer. 🐾</p>
+                <p className="ab-empty-state">Aucune question pour l'instant, ajoutez-en une pour commencer.</p>
               ) : (
                 <ul className="host-list">
                   {questions.map((q, index) => {
@@ -1258,7 +1259,9 @@ export function HostEditor() {
                               </span>
                               <span aria-hidden="true">Correcte</span>
                             </label>
-                            <AnswerShape shape={opt.shape} size={20} />
+                            <span className="host-option-row__shape">
+                              <AnswerShape shape={opt.shape} size={20} />
+                            </span>
                             <label htmlFor={`mcq-label-${opt.id}`} className="visually-hidden">
                               Libellé réponse {index + 1}, {SHAPE_NAME_FR[opt.shape]}
                             </label>

@@ -511,7 +511,7 @@ export function Library() {
               ) : (
                 <ol className="home-list">
                   {selection.map((q) => (
-                    <li key={q.id} className="ab-member-row">
+                    <li key={q.id} className="home-list__item ab-member-row">
                       <span className="home-list__title">{q.prompt}</span>
                       <Button
                         variant="ghost"
