@@ -438,7 +438,6 @@ export const QUIZZES: QuizPlan[] = [
       'oqdb-0492-3',
       'oqdb-0151-4',
       'oqdb-0349-1',
-      'oqdb-0599-4',
       'oqdb-0596-4',
       'oqdb-0061-3',
       'oqdb-0167-1',

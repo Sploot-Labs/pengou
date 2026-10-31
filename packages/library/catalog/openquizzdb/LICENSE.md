@@ -462,7 +462,7 @@ Quiz source utilisés (numéro OpenQuizzDB, titre, rédacteur, lien) :
 - n° 596, « Prénoms du cinéma #2 », rédigé par Philippe Bresoux (4 questions, dont 3 dans des quiz composés, thème cinema) : https://www.openquizzdb.org/download.php?id=596
 - n° 597, « Terres du Périgord », rédigé par Philippe Bresoux (4 questions, dont 1 dans des quiz composés, thème geographie) : https://www.openquizzdb.org/download.php?id=597
 - n° 598, « Stars mondiales #3 », rédigé par Philippe Bresoux (1 questions, thème people) : https://www.openquizzdb.org/download.php?id=598
-- n° 599, « Culture jeune », rédigé par Philippe Bresoux (4 questions, dont 1 dans des quiz composés, thème culture-generale) : https://www.openquizzdb.org/download.php?id=599
+- n° 599, « Culture jeune », rédigé par Philippe Bresoux (4 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=599
 - n° 601, « Intrusion #4 », rédigé par Philippe Bresoux (3 questions, dont 2 dans des quiz composés, thème culture-generale) : https://www.openquizzdb.org/download.php?id=601
 - n° 602, « Prénoms de séries télés », rédigé par Philippe Bresoux (4 questions, dont 3 dans des quiz composés, thème television) : https://www.openquizzdb.org/download.php?id=602
 - n° 603, « En avant la jeunesse », rédigé par Philippe Bresoux (3 questions, thème culture-generale) : https://www.openquizzdb.org/download.php?id=603
