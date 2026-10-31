@@ -3068,3 +3068,63 @@
   gap: 12px;
   margin-top: 24px;
 }
+
+/* Champ image d'une question (QuestionImageField). */
+.host-image {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  margin: 0;
+  padding: var(--space-3);
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.16));
+  border-radius: var(--radius-sm);
+}
+
+.host-image legend {
+  padding: 0 var(--space-2);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--ink-dim);
+}
+
+.host-image__preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.host-image__preview img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+}
+
+.host-image__upload {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+}
+
+.host-image__file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.host-image__url {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.host-image__url input {
+  flex: 1 1 200px;
+  min-width: 0;
+}

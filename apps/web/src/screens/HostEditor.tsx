@@ -20,6 +20,7 @@ import {
 import { ANSWER_SHAPES, type AnswerShapeKind } from '../constants'
 import { AnswerShape, Button, Logo, SHAPE_NAME_FR } from '../ui'
 import { AppHeader } from '../ui/AppHeader.js'
+import { QuestionImageField } from './QuestionImageField'
 
 /**
  * HostEditor — wired to the real quiz/question REST API (Plan 06 Task 3),
@@ -65,6 +66,8 @@ interface QuestionBase {
   id: string
   type: QuestionType
   prompt: string
+  media: string | null
+  mediaAlt: string | null
   timeLimit: number
   readingTime: number
 }
@@ -96,7 +99,14 @@ export interface SliderQuestion extends QuestionBase {
 export type Question = McqQuestion | TrueFalseQuestion | TextQuestion | SliderQuestion
 
 function fromApiQuestion(row: ApiQuestion): Question {
-  const base = { id: row.id, prompt: row.prompt, timeLimit: row.timeLimit, readingTime: row.readingTime }
+  const base = {
+    id: row.id,
+    prompt: row.prompt,
+    media: row.media,
+    mediaAlt: row.mediaAlt,
+    timeLimit: row.timeLimit,
+    readingTime: row.readingTime,
+  }
   switch (row.type) {
     case 'mcq': {
       const payload = row.payload as { options: { label: string; correct: boolean }[] }
@@ -144,6 +154,8 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
     case 'mcq':
       return {
         prompt: q.prompt,
+        media: q.media,
+        mediaAlt: q.mediaAlt,
         timeLimit: q.timeLimit,
         readingTime: q.readingTime,
         payload: { options: q.options.map((o) => ({ label: o.label, correct: o.correct })) },
@@ -151,6 +163,8 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
     case 'truefalse':
       return {
         prompt: q.prompt,
+        media: q.media,
+        mediaAlt: q.mediaAlt,
         timeLimit: q.timeLimit,
         readingTime: q.readingTime,
         payload: { correct: q.correctAnswer },
@@ -158,6 +172,8 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
     case 'text':
       return {
         prompt: q.prompt,
+        media: q.media,
+        mediaAlt: q.mediaAlt,
         timeLimit: q.timeLimit,
         readingTime: q.readingTime,
         payload: {
@@ -168,6 +184,8 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
     case 'slider':
       return {
         prompt: q.prompt,
+        media: q.media,
+        mediaAlt: q.mediaAlt,
         timeLimit: q.timeLimit,
         readingTime: q.readingTime,
         payload: { min: q.min, max: q.max, correct: q.correctValue, step: q.step > 0 ? q.step : undefined },
@@ -633,6 +651,8 @@ export function HostEditor() {
   function draftForType(type: QuestionType, keep: Question): Question {
     const input = defaultCreateInput(type)
     input.prompt = keep.prompt
+    input.media = keep.media
+    input.mediaAlt = keep.mediaAlt
     input.timeLimit = keep.timeLimit
     input.readingTime = keep.readingTime
     return fromApiQuestion({
@@ -640,8 +660,8 @@ export function HostEditor() {
       quizId: '',
       type,
       prompt: input.prompt,
-      media: null,
-      mediaAlt: null,
+      media: input.media ?? null,
+      mediaAlt: input.mediaAlt ?? null,
       timeLimit: input.timeLimit,
       readingTime: input.readingTime ?? 0,
       orderIndex: 0,
@@ -1165,6 +1185,12 @@ export function HostEditor() {
                       </p>
                     )}
                   </div>
+
+                  <QuestionImageField
+                    media={selected.media}
+                    mediaAlt={selected.mediaAlt}
+                    onChange={updateSelected}
+                  />
 
                   <div className="host-field-row">
                     <div className="host-field">

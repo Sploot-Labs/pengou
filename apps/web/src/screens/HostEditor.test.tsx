@@ -15,14 +15,26 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 // `const` declarations) — anything they reference must come from
 // `vi.hoisted` (not a plain top-level `const`), or the reference throws
 // "Cannot access '...' before initialization" at collection time.
-const { mockUpdateQuestion, baseQuestion } = vi.hoisted(() => ({
+const {
+  mockUpdateQuestion,
+  mockListQuestions,
+  mockCreateQuestion,
+  mockDeleteQuestion,
+  mockReorderQuestions,
+  baseQuestion,
+} = vi.hoisted(() => ({
   mockUpdateQuestion: vi.fn(() => Promise.resolve({ id: 'quest1' })),
+  mockListQuestions: vi.fn(),
+  mockCreateQuestion: vi.fn(),
+  mockDeleteQuestion: vi.fn(),
+  mockReorderQuestions: vi.fn(),
   baseQuestion: {
     id: 'quest1',
     quizId: 'quiz1',
     type: 'mcq' as const,
     prompt: 'Une question',
     media: null,
+    mediaAlt: null,
     timeLimit: 20,
     readingTime: 5,
     orderIndex: 0,
@@ -49,10 +61,10 @@ vi.mock('../api/quizzes', () => ({
       updatedAt: '2026-07-20T15:30:00Z',
     }),
   ),
-  listQuestions: vi.fn(() => Promise.resolve([baseQuestion])),
-  createQuestion: vi.fn(),
-  deleteQuestion: vi.fn(),
-  reorderQuestions: vi.fn(),
+  listQuestions: mockListQuestions,
+  createQuestion: mockCreateQuestion,
+  deleteQuestion: mockDeleteQuestion,
+  reorderQuestions: mockReorderQuestions,
   updateQuestion: mockUpdateQuestion,
   updateQuiz: vi.fn(),
 }))
@@ -67,6 +79,8 @@ vi.mock('../realtime/GameSocketProvider', () => ({
 }))
 
 import { HostEditor } from './HostEditor'
+
+mockListQuestions.mockResolvedValue([baseQuestion])
 
 function renderEditor() {
   return render(
@@ -106,6 +120,62 @@ describe('HostEditor — champ Temps de lecture', () => {
         )
       },
       { timeout: 2000 },
+    )
+  })
+})
+
+describe('HostEditor — image de la question', () => {
+  const withImage = { ...baseQuestion, media: '/uploads/t/a.png', mediaAlt: 'Un manchot' }
+  beforeEach(() => {
+    vi.clearAllMocks()
+    mockListQuestions.mockResolvedValue([withImage])
+  })
+  afterEach(() => {
+    cleanup()
+    mockListQuestions.mockResolvedValue([baseQuestion])
+  })
+
+  it("retirer l'image envoie un PATCH avec media et mediaAlt à null", async () => {
+    renderEditor()
+    fireEvent.click(await screen.findByRole('button', { name: "Retirer l'image" }))
+    await waitFor(
+      () =>
+        expect(mockUpdateQuestion).toHaveBeenCalledWith(
+          'quiz1',
+          'quest1',
+          expect.objectContaining({ media: null, mediaAlt: null }),
+        ),
+      { timeout: 2000 },
+    )
+  })
+
+  it("changer le type d'une question conserve son image", async () => {
+    mockCreateQuestion.mockResolvedValue({ ...withImage, id: 'quest2', type: 'truefalse', payload: { correct: true } })
+    mockDeleteQuestion.mockResolvedValue(undefined)
+    mockReorderQuestions.mockResolvedValue(undefined)
+    renderEditor()
+    fireEvent.change(await screen.findByLabelText('Type de question'), { target: { value: 'truefalse' } })
+    fireEvent.click(await screen.findByRole('button', { name: 'Changer de type' }))
+    await waitFor(() =>
+      expect(mockCreateQuestion).toHaveBeenCalledWith(
+        'quiz1',
+        expect.objectContaining({ media: '/uploads/t/a.png', mediaAlt: 'Un manchot' }),
+      ),
+    )
+  })
+
+  it('annuler une suppression recrée la question avec son image', async () => {
+    mockCreateQuestion.mockResolvedValue({ ...withImage, id: 'quest3' })
+    mockDeleteQuestion.mockResolvedValue(undefined)
+    mockReorderQuestions.mockResolvedValue(undefined)
+    renderEditor()
+    fireEvent.click(await screen.findByRole('button', { name: 'Supprimer la question' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Annuler' }))
+    await waitFor(() =>
+      expect(mockCreateQuestion).toHaveBeenCalledWith(
+        'quiz1',
+        expect.objectContaining({ media: '/uploads/t/a.png', mediaAlt: 'Un manchot' }),
+      ),
     )
   })
 })
