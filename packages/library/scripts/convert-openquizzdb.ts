@@ -150,7 +150,9 @@ const normalizePrompt = (s: string) =>
       .toLowerCase(),
   )
 
-type Credit = { entry: ListingEntry; author: string; theme: string; count: number }
+// count : questions livrées du quiz source ; composed : celles qui figurent dans un quiz composé
+// (les autres restent dans le pack du quiz source).
+type Credit = { entry: ListingEntry; author: string; theme: string; count: number; composed: number }
 
 type OutQuestion = {
   id: string
@@ -246,7 +248,7 @@ async function main() {
     const author = clean(raw.rédacteur)
     questionsBySource.set(entry.id, kept)
     authors.set(entry.id, author)
-    credits.push({ entry, author, theme, count: kept.length })
+    credits.push({ entry, author, theme, count: kept.length, composed: 0 })
   }
   console.log(`${duplicates} questions écartées comme doublons`)
 
@@ -359,6 +361,9 @@ async function main() {
     total += questions.length
   }
   console.log(`${total} questions, ${QUIZZES.length} quiz composés, ${rest} packs de quiz source`)
+  for (const c of credits) {
+    c.composed = (questionsBySource.get(c.entry.id) ?? []).filter((q) => usedQuestions.has(q.id)).length
+  }
   await writeFile(`${OUT_DIR}/LICENSE.md`, licenseFile(credits))
 
   // Vérification : le catalogue complet doit se lire sans erreur.
@@ -371,7 +376,8 @@ function licenseFile(credits: Credit[]): string {
   const lines = credits.map(
     (c) =>
       `- n° ${c.entry.id}, « ${c.entry.title} », rédigé par ${c.author} ` +
-      `(${c.count} questions, thème ${c.theme}) : ${quizPage(c.entry.id)}`,
+      `(${c.count} questions${c.composed ? `, dont ${c.composed} dans des quiz composés` : ''}, thème ${c.theme}) : ` +
+      quizPage(c.entry.id),
   )
   return `# Données OpenQuizzDB
 

@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0223-4",
+      "type": "mcq",
+      "prompt": "Qui est le « Bodyguard » de Whitney Houston dans un film du même nom ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Richard Gere",
+            "correct": false
+          },
+          {
+            "label": "Kevin Costner",
+            "correct": true
+          },
+          {
+            "label": "Mel Gibson",
+            "correct": false
+          },
+          {
+            "label": "Bruce Willis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0499-1",
+      "type": "mcq",
+      "prompt": "Qui fut le tout premier animateur à présenter « Une famille en or » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Laurent Cabrol",
+            "correct": false
+          },
+          {
+            "label": "Pascal Brunner",
+            "correct": false
+          },
+          {
+            "label": "Patrick Roy",
+            "correct": true
+          },
+          {
+            "label": "Bernard Montiel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0303-2",
+      "type": "mcq",
+      "prompt": "En quelle année le noyau Linux a-t-il été publié pour la première fois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1993",
+            "correct": false
+          },
+          {
+            "label": "1997",
+            "correct": false
+          },
+          {
+            "label": "1995",
+            "correct": false
+          },
+          {
+            "label": "1991",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0067-3",
+      "type": "mcq",
+      "prompt": "Quel constructeur allemand a repris en 1991 la marque Skoda ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Opel",
+            "correct": false
+          },
+          {
+            "label": "Volkswagen",
+            "correct": true
+          },
+          {
+            "label": "Audi",
+            "correct": false
+          },
+          {
+            "label": "Porsche",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0334-3",
+      "type": "mcq",
+      "prompt": "Dans quel film Bruce Willis incarne-t-il un psychologue pour enfant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sixième Sens",
+            "correct": true
+          },
+          {
+            "label": "Sale Môme",
+            "correct": false
+          },
+          {
+            "label": "Une vie à deux",
+            "correct": false
+          },
+          {
+            "label": "Otage",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0498-3",
+      "type": "mcq",
+      "prompt": "De quelle boisson était friande la marionnette de Jean-Pierre Papin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cacolac",
+            "correct": true
+          },
+          {
+            "label": "Ovomaltine",
+            "correct": false
+          },
+          {
+            "label": "Tropico",
+            "correct": false
+          },
+          {
+            "label": "Pulco",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0521-2",
+      "type": "mcq",
+      "prompt": "Quelle somme les héros des « Trois Frères » pensent-ils hériter ?",
+      "payload": {
+        "options": [
+          {
+            "label": "100 euros",
+            "correct": false
+          },
+          {
+            "label": "100 briques",
+            "correct": false
+          },
+          {
+            "label": "100 patates",
+            "correct": true
+          },
+          {
+            "label": "100 francs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0267-4",
+      "type": "mcq",
+      "prompt": "Qui a remporté le saut en longueur à Atlanta en 1996 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michael Johnson",
+            "correct": false
+          },
+          {
+            "label": "Dwight Phillips",
+            "correct": false
+          },
+          {
+            "label": "Carl Lewis",
+            "correct": true
+          },
+          {
+            "label": "Linford Christie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0172-2",
+      "type": "mcq",
+      "prompt": "Quel groupe de rock alternatif était composé des frères Gallagher ?",
+      "payload": {
+        "options": [
+          {
+            "label": "OMD",
+            "correct": false
+          },
+          {
+            "label": "Oasis",
+            "correct": true
+          },
+          {
+            "label": "Offspring",
+            "correct": false
+          },
+          {
+            "label": "Ottawan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0103-1",
+      "type": "mcq",
+      "prompt": "Quelle poupée cowboy tient le rôle principal dans « Toy Story » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Buzz",
+            "correct": false
+          },
+          {
+            "label": "Woody",
+            "correct": true
+          },
+          {
+            "label": "Bayonne",
+            "correct": false
+          },
+          {
+            "label": "Rex",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0450-2",
+      "type": "mcq",
+      "prompt": "Quelle comédie a été écrite et interprétée par Les Nuls ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Dîners de cons",
+            "correct": false
+          },
+          {
+            "label": "La Cité de la Peur",
+            "correct": true
+          },
+          {
+            "label": "Big",
+            "correct": false
+          },
+          {
+            "label": "Les Visiteurs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0061-4",
+      "type": "mcq",
+      "prompt": "Qui jouait le rôle de Lola dans la série télévisée « Le Miel et les Abeilles » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hélène Rolles",
+            "correct": false
+          },
+          {
+            "label": "Claire Keim",
+            "correct": false
+          },
+          {
+            "label": "Vanessa Demouy",
+            "correct": false
+          },
+          {
+            "label": "Mallaury Nataf",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0492-3",
+      "type": "mcq",
+      "prompt": "Quel jeu télévisé comprend une quête de clés et une salle du trésor ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Koh-Lanta",
+            "correct": false
+          },
+          {
+            "label": "Ninja Warrior",
+            "correct": false
+          },
+          {
+            "label": "Money Drop",
+            "correct": false
+          },
+          {
+            "label": "Fort Boyard",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0151-4",
+      "type": "mcq",
+      "prompt": "Comment Stephan Eicher souhaite-il prendre son déjeuner ?",
+      "payload": {
+        "options": [
+          {
+            "label": "En pyjama",
+            "correct": false
+          },
+          {
+            "label": "En lévitation",
+            "correct": false
+          },
+          {
+            "label": "En musique",
+            "correct": false
+          },
+          {
+            "label": "En paix",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-1",
+      "type": "mcq",
+      "prompt": "Quel chanteur de reggae a été découvert par son tube « Boombastic » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bob Marley",
+            "correct": false
+          },
+          {
+            "label": "Alpha Blondy",
+            "correct": false
+          },
+          {
+            "label": "Ziggy Marley",
+            "correct": false
+          },
+          {
+            "label": "Shaggy",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0533-2",
+      "type": "mcq",
+      "prompt": "Qui est la créatrice d'un mouvement sur la glace, le « salto arrière » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fanny Besson",
+            "correct": false
+          },
+          {
+            "label": "Simone Poujade",
+            "correct": false
+          },
+          {
+            "label": "Gaby Barbey",
+            "correct": false
+          },
+          {
+            "label": "Surya Bonaly",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0596-4",
+      "type": "mcq",
+      "prompt": "Quel tueur solitaire a été incarné au cinéma par Jean Reno ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Simon",
+            "correct": false
+          },
+          {
+            "label": "Odilon",
+            "correct": false
+          },
+          {
+            "label": "Léon",
+            "correct": true
+          },
+          {
+            "label": "Gaston",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0061-3",
+      "type": "mcq",
+      "prompt": "Qui détient le rôle principal dans la série télévisée « Julie Lescaut » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mimie Mathy",
+            "correct": false
+          },
+          {
+            "label": "Véronique Genest",
+            "correct": true
+          },
+          {
+            "label": "Astrid Veillon",
+            "correct": false
+          },
+          {
+            "label": "Zoé Félix",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0167-1",
+      "type": "mcq",
+      "prompt": "Quel médecin Georges Clooney incarnait-il dans la série « Urgences » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "John Carter",
+            "correct": false
+          },
+          {
+            "label": "Douglas Ross",
+            "correct": true
+          },
+          {
+            "label": "Mark Green",
+            "correct": false
+          },
+          {
+            "label": "Dylan Creed",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0061-1",
+      "type": "mcq",
+      "prompt": "Qui joua le rôle de Donna Martin dans la série « Beverly Hills 90210 » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tori Spelling",
+            "correct": true
+          },
+          {
+            "label": "Carol Potter",
+            "correct": false
+          },
+          {
+            "label": "Jenny Garth",
+            "correct": false
+          },
+          {
+            "label": "Hillary Swank",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-annees-90-2",
+      "title": "Les années 90 #2",
+      "description": "Télévision, musique, cinéma et sport des années 90.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0223-4",
+        "oqdb-0499-1",
+        "oqdb-0303-2",
+        "oqdb-0067-3",
+        "oqdb-0334-3",
+        "oqdb-0498-3",
+        "oqdb-0521-2",
+        "oqdb-0267-4",
+        "oqdb-0172-2",
+        "oqdb-0103-1",
+        "oqdb-0450-2",
+        "oqdb-0061-4",
+        "oqdb-0492-3",
+        "oqdb-0151-4",
+        "oqdb-0349-1",
+        "oqdb-0533-2",
+        "oqdb-0596-4",
+        "oqdb-0061-3",
+        "oqdb-0167-1",
+        "oqdb-0061-1"
+      ]
+    }
+  ]
+}

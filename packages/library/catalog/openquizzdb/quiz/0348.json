@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0348-2",
-      "type": "mcq",
-      "prompt": "Quelles couleurs indiquent les chemins de grande randonnée (GR) ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Vert et gris",
-            "correct": false
-          },
-          {
-            "label": "Rouge et blanc",
-            "correct": true
-          },
-          {
-            "label": "Jaune et rouge",
-            "correct": false
-          },
-          {
-            "label": "Bleu et vert",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0348-3",
       "type": "mcq",
       "prompt": "Quel campement rudimentaire permet de dormir en pleine nature ?",

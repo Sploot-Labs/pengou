@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0097-3",
+      "type": "mcq",
+      "prompt": "Quelle eau minérale vous a prodigué ces conseils : « Buvez, éliminez » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Perrier",
+            "correct": false
+          },
+          {
+            "label": "Badoit",
+            "correct": false
+          },
+          {
+            "label": "Vittel",
+            "correct": true
+          },
+          {
+            "label": "Evian",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0043-2",
+      "type": "mcq",
+      "prompt": "Dans quelle enveloppe se cachent les graines de petits-pois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gousse",
+            "correct": true
+          },
+          {
+            "label": "Capsule",
+            "correct": false
+          },
+          {
+            "label": "Drupe",
+            "correct": false
+          },
+          {
+            "label": "Follicule",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0535-3",
+      "type": "mcq",
+      "prompt": "Qui est considéré comme le rappeur ayant popularisé la trap en France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Booba",
+            "correct": true
+          },
+          {
+            "label": "Katana",
+            "correct": false
+          },
+          {
+            "label": "Rod Janois",
+            "correct": false
+          },
+          {
+            "label": "Joe Lucazz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0293-3",
+      "type": "mcq",
+      "prompt": "Quel est le surnom que les fans donnent à Antoine Griezmann ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grizmanito",
+            "correct": false
+          },
+          {
+            "label": "Grizou",
+            "correct": true
+          },
+          {
+            "label": "Grizmo",
+            "correct": false
+          },
+          {
+            "label": "Griez",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0456-1",
+      "type": "mcq",
+      "prompt": "Laquelle de ces inventions ne porte pas le nom de son inventeur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poubelle",
+            "correct": false
+          },
+          {
+            "label": "Colt",
+            "correct": false
+          },
+          {
+            "label": "Macadam",
+            "correct": false
+          },
+          {
+            "label": "Laser",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0483-3",
+      "type": "mcq",
+      "prompt": "Quelle était la nationalité du romancier et essayiste Aldous Huxley ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grecque",
+            "correct": false
+          },
+          {
+            "label": "Britannique",
+            "correct": true
+          },
+          {
+            "label": "Russe",
+            "correct": false
+          },
+          {
+            "label": "Hongroise",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0376-1",
+      "type": "mcq",
+      "prompt": "Dans quelle ville américaine se dresse le Golden Gate Bridge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "San Diego",
+            "correct": false
+          },
+          {
+            "label": "New York",
+            "correct": false
+          },
+          {
+            "label": "San Francisco",
+            "correct": true
+          },
+          {
+            "label": "Los Angeles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0572-2",
+      "type": "mcq",
+      "prompt": "Quelle boisson est aussi connue sous le nom de Diet Coke ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coca Zero",
+            "correct": false
+          },
+          {
+            "label": "Coca Life",
+            "correct": false
+          },
+          {
+            "label": "Coca BlaK",
+            "correct": false
+          },
+          {
+            "label": "Coca Light",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0507-2",
+      "type": "mcq",
+      "prompt": "Quel nom de sport de raquette vient d'une ville anglaise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Squash",
+            "correct": false
+          },
+          {
+            "label": "Badminton",
+            "correct": true
+          },
+          {
+            "label": "Padel",
+            "correct": false
+          },
+          {
+            "label": "Tennis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0553-2",
+      "type": "mcq",
+      "prompt": "Sur quelle chaîne était originalement diffusée la série « Bob l'éponge » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "NTV",
+            "correct": false
+          },
+          {
+            "label": "Nickelodeon",
+            "correct": true
+          },
+          {
+            "label": "Netflix",
+            "correct": false
+          },
+          {
+            "label": "NBC",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0183-1",
+      "type": "mcq",
+      "prompt": "Dans quelles aventures retrouve-t-on les personnages de Loïs et Clark ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Superman",
+            "correct": true
+          },
+          {
+            "label": "Spider-Man",
+            "correct": false
+          },
+          {
+            "label": "Batman",
+            "correct": false
+          },
+          {
+            "label": "Hulk",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0233-2",
+      "type": "mcq",
+      "prompt": "Quel hacker Keanu Reeves incarne-t-il dans la trilogie « Matrix » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Morpheus",
+            "correct": false
+          },
+          {
+            "label": "Neo",
+            "correct": true
+          },
+          {
+            "label": "Trinity",
+            "correct": false
+          },
+          {
+            "label": "Smith",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0381-2",
+      "type": "mcq",
+      "prompt": "Quelle partie du corps de la mouche bleue lui permet de manger ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pattes",
+            "correct": false
+          },
+          {
+            "label": "Ailes",
+            "correct": false
+          },
+          {
+            "label": "Trompe",
+            "correct": true
+          },
+          {
+            "label": "Mâchoire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0031-3",
+      "type": "mcq",
+      "prompt": "Quel mets québécois est constitué de frites et de cheddar frais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poutine",
+            "correct": true
+          },
+          {
+            "label": "Cipaille",
+            "correct": false
+          },
+          {
+            "label": "Tourtière",
+            "correct": false
+          },
+          {
+            "label": "Gibelotte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0595-4",
+      "type": "mcq",
+      "prompt": "Quel intrus se cache parmi ces capitales situées au sud de Paris ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pékin",
+            "correct": false
+          },
+          {
+            "label": "Vienne",
+            "correct": false
+          },
+          {
+            "label": "Budapest",
+            "correct": false
+          },
+          {
+            "label": "Kiev",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0517-2",
+      "type": "mcq",
+      "prompt": "Dans quelle ville « Nathalie » guide-t-elle Gilbert Bécaud dans une chanson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Belgrade",
+            "correct": false
+          },
+          {
+            "label": "Paris",
+            "correct": false
+          },
+          {
+            "label": "Madrid",
+            "correct": false
+          },
+          {
+            "label": "Moscou",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0473-2",
+      "type": "mcq",
+      "prompt": "Quel État enclavé est contenu dans le territoire de la ville de Rome ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vatican",
+            "correct": true
+          },
+          {
+            "label": "Lichtenstein",
+            "correct": false
+          },
+          {
+            "label": "Monaco",
+            "correct": false
+          },
+          {
+            "label": "Saint-Marin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0438-3",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on les membres de la mafia sicilienne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mafiosi",
+            "correct": true
+          },
+          {
+            "label": "Marvoli",
+            "correct": false
+          },
+          {
+            "label": "Tifosi",
+            "correct": false
+          },
+          {
+            "label": "Barzotti",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0059-3",
+      "type": "mcq",
+      "prompt": "Le film « Tango et Cash » réunit Sylvester Stallone et quel autre acteur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Edward Norton",
+            "correct": false
+          },
+          {
+            "label": "Brandon Lee",
+            "correct": false
+          },
+          {
+            "label": "Kurt Russel",
+            "correct": true
+          },
+          {
+            "label": "Russell Crow",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0402-1",
+      "type": "mcq",
+      "prompt": "Quel métier fut exercé au Louvre par Jean-François Champollion ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Conservateur",
+            "correct": true
+          },
+          {
+            "label": "Architecte",
+            "correct": false
+          },
+          {
+            "label": "Archéologue",
+            "correct": false
+          },
+          {
+            "label": "Surveillant",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-mix-culture-4",
+      "title": "Mix culture #4",
+      "description": "Un peu de tout : cinéma, sport, géographie, nature, musique et culture générale.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0097-3",
+        "oqdb-0043-2",
+        "oqdb-0535-3",
+        "oqdb-0293-3",
+        "oqdb-0456-1",
+        "oqdb-0483-3",
+        "oqdb-0376-1",
+        "oqdb-0572-2",
+        "oqdb-0507-2",
+        "oqdb-0553-2",
+        "oqdb-0183-1",
+        "oqdb-0233-2",
+        "oqdb-0381-2",
+        "oqdb-0031-3",
+        "oqdb-0595-4",
+        "oqdb-0517-2",
+        "oqdb-0473-2",
+        "oqdb-0438-3",
+        "oqdb-0059-3",
+        "oqdb-0402-1"
+      ]
+    }
+  ]
+}

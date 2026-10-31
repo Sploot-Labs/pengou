@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0528-1",
-      "type": "mcq",
-      "prompt": "Quel gentilhomme est chargé du service de la chambre d'un monarque ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Auguste",
-            "correct": false
-          },
-          {
-            "label": "Grand veneur",
-            "correct": false
-          },
-          {
-            "label": "Chambellan",
-            "correct": true
-          },
-          {
-            "label": "Connétable",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0528-2",
       "type": "mcq",
       "prompt": "Quel qualificatif est donné à l'époux du chef d'État dans les monarchies ?",

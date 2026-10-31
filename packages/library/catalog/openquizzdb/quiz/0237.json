@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0237-4",
-      "type": "mcq",
-      "prompt": "Quel nom portait le navigateur Internet devenu « Microsoft Edge » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Firefox",
-            "correct": false
-          },
-          {
-            "label": "Internet Explorer",
-            "correct": true
-          },
-          {
-            "label": "Chrome",
-            "correct": false
-          },
-          {
-            "label": "Safari",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

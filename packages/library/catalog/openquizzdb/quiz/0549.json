@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0549-2",
-      "type": "mcq",
-      "prompt": "Quelle jeune artiste a chanté « Jour de neige » à la télévision en 1988 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Patricia Kaas",
-            "correct": false
-          },
-          {
-            "label": "Elsa",
-            "correct": true
-          },
-          {
-            "label": "Jakie Quartz",
-            "correct": false
-          },
-          {
-            "label": "Lio",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0549-3",
       "type": "mcq",
       "prompt": "Quel engin est utilisé pour dégager la neige de nos chaussées ?",

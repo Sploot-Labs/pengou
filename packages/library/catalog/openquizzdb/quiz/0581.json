@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0581-1",
-      "type": "mcq",
-      "prompt": "Que représente le logo de l'application mobile Snapchat ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ours",
-            "correct": false
-          },
-          {
-            "label": "Appareil photo",
-            "correct": false
-          },
-          {
-            "label": "Singe",
-            "correct": false
-          },
-          {
-            "label": "Fantôme",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0581-2",
       "type": "mcq",
       "prompt": "Qui est devenu milliardaire à l'âge de 24 ans grâce à Snapchat ?",

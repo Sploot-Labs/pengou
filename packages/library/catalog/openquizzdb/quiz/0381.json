@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0381-2",
-      "type": "mcq",
-      "prompt": "Quelle partie du corps de la mouche bleue lui permet de manger ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Pattes",
-            "correct": false
-          },
-          {
-            "label": "Ailes",
-            "correct": false
-          },
-          {
-            "label": "Trompe",
-            "correct": true
-          },
-          {
-            "label": "Mâchoire",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0381-3",
       "type": "mcq",
       "prompt": "Combien de points visibles a la coccinelle des légumineuses ?",

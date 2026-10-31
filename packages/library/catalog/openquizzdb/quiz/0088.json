@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0088-2",
-      "type": "mcq",
-      "prompt": "Dans la série « Les Simpson », quel est le prénom du mari de Marge ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Harvey",
-            "correct": false
-          },
-          {
-            "label": "Horace",
-            "correct": false
-          },
-          {
-            "label": "Homer",
-            "correct": true
-          },
-          {
-            "label": "Herbert",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0088-3",
       "type": "mcq",
       "prompt": "Quelle ville est également la capitale de la Finlande ?",

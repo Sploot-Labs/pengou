@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0316-1",
-      "type": "mcq",
-      "prompt": "Quel jeu de dessin et de devinettes a été créé en 1985 par Rob Angel ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Mastermind",
-            "correct": false
-          },
-          {
-            "label": "Uno",
-            "correct": false
-          },
-          {
-            "label": "Blokus",
-            "correct": false
-          },
-          {
-            "label": "Pictionary",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0316-2",
       "type": "mcq",
       "prompt": "Quel jeu d'adresse consiste à retirer des baguettes une par une ?",

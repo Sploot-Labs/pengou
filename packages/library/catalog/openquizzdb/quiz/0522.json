@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0522-2",
-      "type": "mcq",
-      "prompt": "Quel héros de la saga « Dragon Ball Z » est parvenu à tuer Freezer ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Vegeta",
-            "correct": false
-          },
-          {
-            "label": "Petit-Coeur",
-            "correct": false
-          },
-          {
-            "label": "Goku",
-            "correct": false
-          },
-          {
-            "label": "Trunks",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0522-3",
       "type": "mcq",
       "prompt": "Quel personnage utilise les Potaras dans « Dragon Ball Z » ?",

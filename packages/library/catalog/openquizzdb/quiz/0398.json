@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0398-1",
-      "type": "mcq",
-      "prompt": "Dans quel pays vit principalement le peuple kabyle ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tunisie",
-            "correct": false
-          },
-          {
-            "label": "Algérie",
-            "correct": true
-          },
-          {
-            "label": "Libye",
-            "correct": false
-          },
-          {
-            "label": "Maroc",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0398-2",
       "type": "mcq",
       "prompt": "Le mot « lusitanien » désigne un peuple originaire de quel pays ?",

@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0112-2",
-      "type": "mcq",
-      "prompt": "À la télévision, quel est le métier du fils du commissaire Cordier ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Jongleur",
-            "correct": false
-          },
-          {
-            "label": "Jardinier",
-            "correct": false
-          },
-          {
-            "label": "Juge",
-            "correct": true
-          },
-          {
-            "label": "Journaliste",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0112-3",
       "type": "mcq",
       "prompt": "Le vendredi 13 est le jour préféré de quel célèbre tueur en série ?",

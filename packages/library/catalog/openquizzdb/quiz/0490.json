@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0490-1",
-      "type": "mcq",
-      "prompt": "Quel sport nautique combine à la fois glisse et voile ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Voile",
-            "correct": false
-          },
-          {
-            "label": "Windsurf",
-            "correct": true
-          },
-          {
-            "label": "Surf",
-            "correct": false
-          },
-          {
-            "label": "Kitesurf",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0490-2",
       "type": "mcq",
       "prompt": "Quel matériau est surtout utilisé pour fabriquer des planches à voile ?",

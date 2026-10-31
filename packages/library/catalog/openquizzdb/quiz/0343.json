@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0343-1",
-      "type": "mcq",
-      "prompt": "Qui tient le rôle de Jacques Mayol dans le film « Le Grand Bleu » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Jean-Marc Barr",
-            "correct": true
-          },
-          {
-            "label": "Paul Shenar",
-            "correct": false
-          },
-          {
-            "label": "Marc Duret",
-            "correct": false
-          },
-          {
-            "label": "Jean Reno",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0343-2",
       "type": "mcq",
       "prompt": "Dans quel pays se déroule la première scène du film « Le Grand Bleu » ?",
@@ -54,35 +25,6 @@
           },
           {
             "label": "Espagne",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0343-4",
-      "type": "mcq",
-      "prompt": "Dans quelle langue le film « Le Grand Bleu » a-t-il été tourné ?",
-      "payload": {
-        "options": [
-          {
-            "label": "En anglais",
-            "correct": true
-          },
-          {
-            "label": "En grec",
-            "correct": false
-          },
-          {
-            "label": "En français",
-            "correct": false
-          },
-          {
-            "label": "En espagnol",
             "correct": false
           }
         ]

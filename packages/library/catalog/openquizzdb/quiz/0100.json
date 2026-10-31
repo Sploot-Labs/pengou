@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0100-3",
-      "type": "mcq",
-      "prompt": "Que sont devenues Byzance et Constantinople ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Istanbul",
-            "correct": true
-          },
-          {
-            "label": "Islamabad",
-            "correct": false
-          },
-          {
-            "label": "Isparta",
-            "correct": false
-          },
-          {
-            "label": "Izmir",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0100-4",
-      "type": "mcq",
-      "prompt": "À quel mot anglais correspond la lettre I du sigle CIA ?",
-      "payload": {
-        "options": [
-          {
-            "label": "International",
-            "correct": false
-          },
-          {
-            "label": "Institutional",
-            "correct": false
-          },
-          {
-            "label": "Intelligence",
-            "correct": true
-          },
-          {
-            "label": "Instrumental",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

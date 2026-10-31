@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0425-4",
-      "type": "mcq",
-      "prompt": "Comment appelle-t-on une femme qui porte un enfant pour un couple ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Mère-porteuse",
-            "correct": true
-          },
-          {
-            "label": "Fille-mère",
-            "correct": false
-          },
-          {
-            "label": "Mère-donneuse",
-            "correct": false
-          },
-          {
-            "label": "Enfanteresse",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

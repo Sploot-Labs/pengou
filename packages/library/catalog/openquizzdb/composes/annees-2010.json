@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0584-2",
+      "type": "mcq",
+      "prompt": "Quel film musical a remporté en 2012 le César du meilleur film ?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Artist",
+            "correct": true
+          },
+          {
+            "label": "La La Land",
+            "correct": false
+          },
+          {
+            "label": "Polisse",
+            "correct": false
+          },
+          {
+            "label": "Intouchables",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0289-3",
+      "type": "mcq",
+      "prompt": "Quelle start-up a été rachetée pour un milliard par Facebook en 2012 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Backelite",
+            "correct": false
+          },
+          {
+            "label": "Instagram",
+            "correct": true
+          },
+          {
+            "label": "Valve",
+            "correct": false
+          },
+          {
+            "label": "Globalnet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0221-1",
+      "type": "mcq",
+      "prompt": "Quel rôle apportera à Jennifer Lawrence une notoriété internationale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aurora Lane",
+            "correct": false
+          },
+          {
+            "label": "Katniss Everdeen",
+            "correct": true
+          },
+          {
+            "label": "Mystique",
+            "correct": false
+          },
+          {
+            "label": "Bella Swan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0471-2",
+      "type": "mcq",
+      "prompt": "Contre qui Donald Trump a-t-il gagné l'élection présidentielle de 2016 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Barack Obama",
+            "correct": false
+          },
+          {
+            "label": "Hillary Clinton",
+            "correct": true
+          },
+          {
+            "label": "George W. Bush",
+            "correct": false
+          },
+          {
+            "label": "Bill Clinton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0379-4",
+      "type": "mcq",
+      "prompt": "Quel film de Sam Mendes semble être tourné en un seul plan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fury",
+            "correct": false
+          },
+          {
+            "label": "1917",
+            "correct": true
+          },
+          {
+            "label": "Platoon",
+            "correct": false
+          },
+          {
+            "label": "War Machine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0073-1",
+      "type": "mcq",
+      "prompt": "Qui a remporté en 2019 le titre de champion du monde de Formule 1 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lewis Hamilton",
+            "correct": true
+          },
+          {
+            "label": "Lando Norris",
+            "correct": false
+          },
+          {
+            "label": "Pierre Gasly",
+            "correct": false
+          },
+          {
+            "label": "Sebastian Vettel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0492-4",
+      "type": "mcq",
+      "prompt": "Quel jeu proposait 250 000 € répartis en 50 liasses indivisibles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Wall",
+            "correct": false
+          },
+          {
+            "label": "Boom",
+            "correct": false
+          },
+          {
+            "label": "Money Drop",
+            "correct": true
+          },
+          {
+            "label": "Le Bigdil",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0321-4",
+      "type": "mcq",
+      "prompt": "Où habite la famille Stark dans la série « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Winterland",
+            "correct": false
+          },
+          {
+            "label": "Winterfall",
+            "correct": false
+          },
+          {
+            "label": "Winterball",
+            "correct": false
+          },
+          {
+            "label": "Winterfell",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0149-1",
+      "type": "mcq",
+      "prompt": "Quel rôle Scarlett Johansson tient-elle dans le film « Iron Man 2 » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rebecca",
+            "correct": false
+          },
+          {
+            "label": "Veuve noire",
+            "correct": true
+          },
+          {
+            "label": "Christine Everhart",
+            "correct": false
+          },
+          {
+            "label": "Pepper Potts",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0325-1",
+      "type": "mcq",
+      "prompt": "Qui est la mère des dragons dans « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lisa",
+            "correct": false
+          },
+          {
+            "label": "Jon",
+            "correct": false
+          },
+          {
+            "label": "Donan",
+            "correct": false
+          },
+          {
+            "label": "Daenerys",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0321-1",
+      "type": "mcq",
+      "prompt": "Quel animal figure sur le blason de la maison Lannister ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ours",
+            "correct": false
+          },
+          {
+            "label": "Cheval",
+            "correct": false
+          },
+          {
+            "label": "Lion",
+            "correct": true
+          },
+          {
+            "label": "Aigle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0331-1",
+      "type": "mcq",
+      "prompt": "En quelle année est sorti le Dacia Duster ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2012",
+            "correct": false
+          },
+          {
+            "label": "2006",
+            "correct": false
+          },
+          {
+            "label": "2008",
+            "correct": false
+          },
+          {
+            "label": "2010",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0579-2",
+      "type": "mcq",
+      "prompt": "Quel acteur a perdu la vie sur la route de Santa Clarita ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Will Smith",
+            "correct": false
+          },
+          {
+            "label": "Chris Pratt",
+            "correct": false
+          },
+          {
+            "label": "Hugh Jackman",
+            "correct": false
+          },
+          {
+            "label": "Paul Walker",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0366-1",
+      "type": "mcq",
+      "prompt": "En quelle année fut fondée l'entreprise à but lucratif plafonné OpenAI ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2019",
+            "correct": false
+          },
+          {
+            "label": "2017",
+            "correct": false
+          },
+          {
+            "label": "2021",
+            "correct": false
+          },
+          {
+            "label": "2015",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0191-2",
+      "type": "mcq",
+      "prompt": "Qui est officiellement devenu en 2011 le successeur de Steve Jobs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jony Ive",
+            "correct": false
+          },
+          {
+            "label": "Elon Musk",
+            "correct": false
+          },
+          {
+            "label": "Tim Cook",
+            "correct": true
+          },
+          {
+            "label": "Steve Wozniak",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0322-4",
+      "type": "mcq",
+      "prompt": "Qui a gagné la saison 4 de « Danse avec les stars » avec Grégoire Lyonnet ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shy'm",
+            "correct": false
+          },
+          {
+            "label": "Lorie",
+            "correct": false
+          },
+          {
+            "label": "Alizée",
+            "correct": true
+          },
+          {
+            "label": "Tal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0448-4",
+      "type": "mcq",
+      "prompt": "Sur quelle île grecque les Ch'tis ont-ils débarqué ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mykonos",
+            "correct": true
+          },
+          {
+            "label": "Rhodes",
+            "correct": false
+          },
+          {
+            "label": "Santorin",
+            "correct": false
+          },
+          {
+            "label": "Corfou",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0185-1",
+      "type": "mcq",
+      "prompt": "Dans quel film Sandra Bullock est-elle astronaute avec George Clooney ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Minority Report",
+            "correct": false
+          },
+          {
+            "label": "The Warrior",
+            "correct": false
+          },
+          {
+            "label": "Gravity",
+            "correct": true
+          },
+          {
+            "label": "Skyfall",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0197-4",
+      "type": "mcq",
+      "prompt": "Quelle actrice partage l'affiche avec Leonardo DiCaprio dans « Inception » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Marion Cotillard",
+            "correct": true
+          },
+          {
+            "label": "Léa Seydoux",
+            "correct": false
+          },
+          {
+            "label": "Melanie Laurent",
+            "correct": false
+          },
+          {
+            "label": "Camille Cottin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0311-3",
+      "type": "mcq",
+      "prompt": "Quel album de Stromae contient le succès « Papaoutai » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cheese",
+            "correct": false
+          },
+          {
+            "label": "Stromae Live",
+            "correct": false
+          },
+          {
+            "label": "Multitude",
+            "correct": false
+          },
+          {
+            "label": "Racine carrée",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-annees-2010",
+      "title": "Les années 2010",
+      "description": "Séries, cinéma, célébrités et réseaux sociaux des années 2010.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0584-2",
+        "oqdb-0289-3",
+        "oqdb-0221-1",
+        "oqdb-0471-2",
+        "oqdb-0379-4",
+        "oqdb-0073-1",
+        "oqdb-0492-4",
+        "oqdb-0321-4",
+        "oqdb-0149-1",
+        "oqdb-0325-1",
+        "oqdb-0321-1",
+        "oqdb-0331-1",
+        "oqdb-0579-2",
+        "oqdb-0366-1",
+        "oqdb-0191-2",
+        "oqdb-0322-4",
+        "oqdb-0448-4",
+        "oqdb-0185-1",
+        "oqdb-0197-4",
+        "oqdb-0311-3"
+      ]
+    }
+  ]
+}

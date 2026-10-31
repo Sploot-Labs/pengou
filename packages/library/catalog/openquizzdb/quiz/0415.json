@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0415-3",
-      "type": "mcq",
-      "prompt": "Quelle ville du Kansai fut la capitale impériale du Japon ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Kamakura",
-            "correct": false
-          },
-          {
-            "label": "Noro",
-            "correct": false
-          },
-          {
-            "label": "Kyoto",
-            "correct": true
-          },
-          {
-            "label": "Tokyo",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0415-4",
-      "type": "mcq",
-      "prompt": "Quelle ville japonaise a organisé les Jeux olympiques d'hiver de 1972 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sapporo",
-            "correct": true
-          },
-          {
-            "label": "Nagano",
-            "correct": false
-          },
-          {
-            "label": "Yokohama",
-            "correct": false
-          },
-          {
-            "label": "Kumamoto",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

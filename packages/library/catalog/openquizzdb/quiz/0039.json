@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0039-1",
-      "type": "mcq",
-      "prompt": "Qui a réalisé le film de guerre « Platoon », inspiré par sa propre vie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Brian De Palma",
-            "correct": false
-          },
-          {
-            "label": "Clint Eastwood",
-            "correct": false
-          },
-          {
-            "label": "John Woo",
-            "correct": false
-          },
-          {
-            "label": "Oliver Stone",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0039-2",
       "type": "mcq",
       "prompt": "Dans quel film de guerre Clint Eastwood incarne-t-il Tom Highway ?",

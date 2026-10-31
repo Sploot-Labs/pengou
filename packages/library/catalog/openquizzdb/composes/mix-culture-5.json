@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0602-3",
+      "type": "mcq",
+      "prompt": "Quel est le prénom du capitaine français de « Star trek:NextGen » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jean-Luc",
+            "correct": true
+          },
+          {
+            "label": "Jean-Marc",
+            "correct": false
+          },
+          {
+            "label": "Jean-Pierre",
+            "correct": false
+          },
+          {
+            "label": "Jean-Charles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0597-3",
+      "type": "mcq",
+      "prompt": "Dans quel département le Périgord est-il inscrit ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aveyron",
+            "correct": false
+          },
+          {
+            "label": "Vaucluse",
+            "correct": false
+          },
+          {
+            "label": "Calvados",
+            "correct": false
+          },
+          {
+            "label": "Dordogne",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0586-1",
+      "type": "mcq",
+      "prompt": "Comment se prénomme la brune de la saga de science-fiction « Matrix » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Niobe",
+            "correct": false
+          },
+          {
+            "label": "Taranis",
+            "correct": false
+          },
+          {
+            "label": "Trinity",
+            "correct": true
+          },
+          {
+            "label": "Tek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0438-4",
+      "type": "mcq",
+      "prompt": "Quelle ville italienne le « T » du constructeur Fiat représente-t-il ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trieste",
+            "correct": false
+          },
+          {
+            "label": "Turin",
+            "correct": true
+          },
+          {
+            "label": "Trévise",
+            "correct": false
+          },
+          {
+            "label": "Tivoli",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0504-3",
+      "type": "mcq",
+      "prompt": "Quelle boisson fut la première boisson festive pour enfants ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Juicy Juice",
+            "correct": false
+          },
+          {
+            "label": "Capri-Sun",
+            "correct": false
+          },
+          {
+            "label": "Champomy",
+            "correct": true
+          },
+          {
+            "label": "Honest Kids",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0501-2",
+      "type": "mcq",
+      "prompt": "Quel nombre est à la base de nombreuses superstitions ?",
+      "payload": {
+        "options": [
+          {
+            "label": "13",
+            "correct": true
+          },
+          {
+            "label": "666",
+            "correct": false
+          },
+          {
+            "label": "101",
+            "correct": false
+          },
+          {
+            "label": "27",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0458-1",
+      "type": "mcq",
+      "prompt": "Que mange-t-on traditionnellement à la Chandeleur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Croissants",
+            "correct": false
+          },
+          {
+            "label": "Crêpes",
+            "correct": true
+          },
+          {
+            "label": "Brioches",
+            "correct": false
+          },
+          {
+            "label": "Tartes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0371-2",
+      "type": "mcq",
+      "prompt": "Quelle vitesse maximale peut atteindre un lièvre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "110 km/h",
+            "correct": false
+          },
+          {
+            "label": "90 km/h",
+            "correct": false
+          },
+          {
+            "label": "50 km/h",
+            "correct": false
+          },
+          {
+            "label": "70 km/h",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0483-4",
+      "type": "mcq",
+      "prompt": "Quel écrivain a fait publier les oeuvres de son ami La Boétie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Montesquieu",
+            "correct": false
+          },
+          {
+            "label": "Mallarmé",
+            "correct": false
+          },
+          {
+            "label": "Montaigne",
+            "correct": true
+          },
+          {
+            "label": "Mirabeau",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0195-4",
+      "type": "mcq",
+      "prompt": "Qui a réalisé en 1964 une série de sérigraphies de Marilyn Monroe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "James Rizzi",
+            "correct": false
+          },
+          {
+            "label": "Jasper Johns",
+            "correct": false
+          },
+          {
+            "label": "Andy Warhol",
+            "correct": true
+          },
+          {
+            "label": "Wayne Thiebaud",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0197-1",
+      "type": "mcq",
+      "prompt": "Dans quel film Leonardo DiCaprio traque-t-il une île paradisiaque ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aviator",
+            "correct": false
+          },
+          {
+            "label": "Celebrity",
+            "correct": false
+          },
+          {
+            "label": "La Plage",
+            "correct": true
+          },
+          {
+            "label": "Blood Diamond",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0352-4",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on la partie non visible et vivante du cheveu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Follicule",
+            "correct": false
+          },
+          {
+            "label": "Pointe",
+            "correct": false
+          },
+          {
+            "label": "Racine",
+            "correct": true
+          },
+          {
+            "label": "Tige",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0581-1",
+      "type": "mcq",
+      "prompt": "Que représente le logo de l'application mobile Snapchat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ours",
+            "correct": false
+          },
+          {
+            "label": "Appareil photo",
+            "correct": false
+          },
+          {
+            "label": "Singe",
+            "correct": false
+          },
+          {
+            "label": "Fantôme",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0357-3",
+      "type": "mcq",
+      "prompt": "Combien de joueurs compte-t-on dans une équipe de hockey sur gazon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Onze joueurs",
+            "correct": true
+          },
+          {
+            "label": "Huit joueurs",
+            "correct": false
+          },
+          {
+            "label": "Cinq joueurs",
+            "correct": false
+          },
+          {
+            "label": "Six joueurs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0541-1",
+      "type": "mcq",
+      "prompt": "En ski, quel est le niveau de difficulté associé à une piste verte ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Très facile",
+            "correct": true
+          },
+          {
+            "label": "Moyen",
+            "correct": false
+          },
+          {
+            "label": "Très difficile",
+            "correct": false
+          },
+          {
+            "label": "Difficile",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0461-3",
+      "type": "mcq",
+      "prompt": "Quelle température y aurait-il sur Terre sans l'effet de serre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "98°C",
+            "correct": false
+          },
+          {
+            "label": "-18°C",
+            "correct": true
+          },
+          {
+            "label": "4°C",
+            "correct": false
+          },
+          {
+            "label": "47°C",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0535-1",
+      "type": "mcq",
+      "prompt": "Qui fut en 2020 meilleur vendeur de disque de l'histoire du rap français ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bambi Cruz",
+            "correct": false
+          },
+          {
+            "label": "Jul",
+            "correct": true
+          },
+          {
+            "label": "Stomy Bugsy",
+            "correct": false
+          },
+          {
+            "label": "Passi",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0049-2",
+      "type": "mcq",
+      "prompt": "Quelle est la résidence du président des États-Unis à Washington ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maison-Blanche",
+            "correct": true
+          },
+          {
+            "label": "Maison-Bleue",
+            "correct": false
+          },
+          {
+            "label": "Maison-Rouge",
+            "correct": false
+          },
+          {
+            "label": "Maison-Verte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0376-3",
+      "type": "mcq",
+      "prompt": "Quel est, malgré son nom, le plus ancien pont de Paris ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pont du Roi",
+            "correct": false
+          },
+          {
+            "label": "Pont Neuf",
+            "correct": true
+          },
+          {
+            "label": "Pont Marie",
+            "correct": false
+          },
+          {
+            "label": "Pont du Diable",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0311-1",
+      "type": "mcq",
+      "prompt": "Quel style musical caractérise l'univers de Stromae ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Metal",
+            "correct": false
+          },
+          {
+            "label": "Électro-pop",
+            "correct": true
+          },
+          {
+            "label": "Rock",
+            "correct": false
+          },
+          {
+            "label": "Jazz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-mix-culture-5",
+      "title": "Mix culture #5",
+      "description": "Un peu de tout : cinéma, sport, géographie, nature, musique et culture générale.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0602-3",
+        "oqdb-0597-3",
+        "oqdb-0586-1",
+        "oqdb-0438-4",
+        "oqdb-0504-3",
+        "oqdb-0501-2",
+        "oqdb-0458-1",
+        "oqdb-0371-2",
+        "oqdb-0483-4",
+        "oqdb-0195-4",
+        "oqdb-0197-1",
+        "oqdb-0352-4",
+        "oqdb-0581-1",
+        "oqdb-0357-3",
+        "oqdb-0541-1",
+        "oqdb-0461-3",
+        "oqdb-0535-1",
+        "oqdb-0049-2",
+        "oqdb-0376-3",
+        "oqdb-0311-1"
+      ]
+    }
+  ]
+}

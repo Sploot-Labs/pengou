@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0580-1",
-      "type": "mcq",
-      "prompt": "Quel sculpteur a créé le trophée des César ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Delfoly",
-            "correct": false
-          },
-          {
-            "label": "César",
-            "correct": true
-          },
-          {
-            "label": "Arman",
-            "correct": false
-          },
-          {
-            "label": "Beppo",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0580-2",
-      "type": "mcq",
-      "prompt": "Avec quel équivalent américain les César sont-ils souvent cités ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Oscars",
-            "correct": true
-          },
-          {
-            "label": "Owens",
-            "correct": false
-          },
-          {
-            "label": "Ocatves",
-            "correct": false
-          },
-          {
-            "label": "Oliviers",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0580-3",
       "type": "mcq",
       "prompt": "Combien de nommés sont retenus pour le César du meilleur film ?",

@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0507-2",
-      "type": "mcq",
-      "prompt": "Quel nom de sport de raquette vient d'une ville anglaise ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Squash",
-            "correct": false
-          },
-          {
-            "label": "Badminton",
-            "correct": true
-          },
-          {
-            "label": "Padel",
-            "correct": false
-          },
-          {
-            "label": "Tennis",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0507-3",
       "type": "mcq",
       "prompt": "À combien de sauts a droit un athlète en longueur en qualification ?",

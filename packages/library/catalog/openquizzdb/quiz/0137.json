@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0137-2",
-      "type": "mcq",
-      "prompt": "Comme quelle joueuse Sharapova crie-t-elle à chaque frappe ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Coco Gauff",
-            "correct": false
-          },
-          {
-            "label": "Monica Seles",
-            "correct": true
-          },
-          {
-            "label": "Ana Ivanovic",
-            "correct": false
-          },
-          {
-            "label": "Nathalie Dechy",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0137-3",
-      "type": "mcq",
-      "prompt": "Quel surnom est utilisé pour désigner la joueuse Maria Sharapova ?",
-      "payload": {
-        "options": [
-          {
-            "label": "La Guêpe",
-            "correct": false
-          },
-          {
-            "label": "Masha",
-            "correct": true
-          },
-          {
-            "label": "Opa",
-            "correct": false
-          },
-          {
-            "label": "Boum-Boum",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0137-4",
       "type": "mcq",
       "prompt": "En quelle année Sharapova est-elle devenue numéro un mondiale ?",

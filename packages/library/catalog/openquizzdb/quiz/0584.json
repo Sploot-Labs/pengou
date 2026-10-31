@@ -33,64 +33,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0584-2",
-      "type": "mcq",
-      "prompt": "Quel film musical a remporté en 2012 le César du meilleur film ?",
-      "payload": {
-        "options": [
-          {
-            "label": "The Artist",
-            "correct": true
-          },
-          {
-            "label": "La La Land",
-            "correct": false
-          },
-          {
-            "label": "Polisse",
-            "correct": false
-          },
-          {
-            "label": "Intouchables",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0584-3",
-      "type": "mcq",
-      "prompt": "Quel film de Roman Polanski a été couronné de sept César ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Le Pianiste",
-            "correct": true
-          },
-          {
-            "label": "Frantic",
-            "correct": false
-          },
-          {
-            "label": "Tess",
-            "correct": false
-          },
-          {
-            "label": "Oliver Twist",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

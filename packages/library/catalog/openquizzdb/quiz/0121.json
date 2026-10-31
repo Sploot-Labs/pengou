@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0121-1",
-      "type": "mcq",
-      "prompt": "Quel club évolue au stade Pierre-Mauroy de Villeneuve-d'Ascq ?",
-      "payload": {
-        "options": [
-          {
-            "label": "RC Lens",
-            "correct": false
-          },
-          {
-            "label": "LOSC Lille",
-            "correct": true
-          },
-          {
-            "label": "Amiens SC",
-            "correct": false
-          },
-          {
-            "label": "Valenciennes FC",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0121-2",
       "type": "mcq",
       "prompt": "Le stade du Moustoir accueille des festivals et quel club résident ?",
@@ -84,35 +55,6 @@
           {
             "label": "Claude-Papi",
             "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0121-4",
-      "type": "mcq",
-      "prompt": "Quel est le surnom du stade Geoffroy-Guichard, situé à Saint-Étienne ?",
-      "payload": {
-        "options": [
-          {
-            "label": "La Marmite",
-            "correct": false
-          },
-          {
-            "label": "La Cuvette",
-            "correct": false
-          },
-          {
-            "label": "Le Puits",
-            "correct": false
-          },
-          {
-            "label": "Le Chaudron",
-            "correct": true
           }
         ]
       },

@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0388-1",
-      "type": "mcq",
-      "prompt": "Qui a été élue Miss Albigeois Midi-Pyrénées 2008 puis Miss France ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Valérie Bègue",
-            "correct": false
-          },
-          {
-            "label": "Diane Leyre",
-            "correct": false
-          },
-          {
-            "label": "Chloé Mortaud",
-            "correct": true
-          },
-          {
-            "label": "Malika Ménard",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0388-2",
       "type": "mcq",
       "prompt": "Qui a été Miss Paris 2009 et a participé à Miss France ?",

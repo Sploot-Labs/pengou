@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0161-2",
-      "type": "mcq",
-      "prompt": "Dans lequel de ses films se fait-elle passer pour un garçon ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Quadrille",
-            "correct": false
-          },
-          {
-            "label": "100% cachemire",
-            "correct": false
-          },
-          {
-            "label": "Palais Royal",
-            "correct": false
-          },
-          {
-            "label": "Le Derrière",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0161-4",
       "type": "mcq",
       "prompt": "Dans quelle comédie est-elle DRH dans une compagnie maritime ?",

@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0531-1",
-      "type": "mcq",
-      "prompt": "Quel titre inférieur à celui de vicomte est supérieur à celui de chevalier ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Lord",
-            "correct": false
-          },
-          {
-            "label": "Consort",
-            "correct": false
-          },
-          {
-            "label": "Comte",
-            "correct": false
-          },
-          {
-            "label": "Baron",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0531-2",
       "type": "mcq",
       "prompt": "Quel titre était attribué à sa naissance au fils aîné du roi de France ?",

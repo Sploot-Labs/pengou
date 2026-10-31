@@ -33,64 +33,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0095-2",
-      "type": "mcq",
-      "prompt": "Quelle est la profession de Jack Nicholson dans le film « Shining » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Explorateur",
-            "correct": false
-          },
-          {
-            "label": "Écrivain",
-            "correct": true
-          },
-          {
-            "label": "Ensorceleur",
-            "correct": false
-          },
-          {
-            "label": "Escrimeur",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0095-4",
-      "type": "mcq",
-      "prompt": "Quel film a réuni Leonardo Di Caprio, Matt Damon et Jack Nicholson ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Aviator",
-            "correct": false
-          },
-          {
-            "label": "Celebrity",
-            "correct": false
-          },
-          {
-            "label": "Blood Diamond",
-            "correct": false
-          },
-          {
-            "label": "Les Infiltrés",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

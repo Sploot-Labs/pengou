@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0402-1",
-      "type": "mcq",
-      "prompt": "Quel métier fut exercé au Louvre par Jean-François Champollion ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Conservateur",
-            "correct": true
-          },
-          {
-            "label": "Architecte",
-            "correct": false
-          },
-          {
-            "label": "Archéologue",
-            "correct": false
-          },
-          {
-            "label": "Surveillant",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0402-2",
       "type": "mcq",
       "prompt": "Comment était utilisé le Louvre à sa construction en 1190 ?",

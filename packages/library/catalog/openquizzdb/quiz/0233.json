@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0233-2",
-      "type": "mcq",
-      "prompt": "Quel hacker Keanu Reeves incarne-t-il dans la trilogie « Matrix » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Morpheus",
-            "correct": false
-          },
-          {
-            "label": "Neo",
-            "correct": true
-          },
-          {
-            "label": "Trinity",
-            "correct": false
-          },
-          {
-            "label": "Smith",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0233-3",
       "type": "mcq",
       "prompt": "Dans quelle franchise d'action incarne-t-il un ancien assassin redouté ?",

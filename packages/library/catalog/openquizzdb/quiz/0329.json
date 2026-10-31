@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0329-2",
-      "type": "mcq",
-      "prompt": "Quel titre a révélé Aya Nakamura au grand public en 2018 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Copines",
-            "correct": false
-          },
-          {
-            "label": "La dot",
-            "correct": false
-          },
-          {
-            "label": "Djadja",
-            "correct": true
-          },
-          {
-            "label": "Pookie",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0329-3",
       "type": "mcq",
       "prompt": "Quel est le titre du tout premier album d'Aya Nakamura ?",

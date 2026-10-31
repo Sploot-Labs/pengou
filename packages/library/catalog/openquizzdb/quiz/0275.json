@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0275-1",
-      "type": "mcq",
-      "prompt": "Quelle ville est la capitale de la République d'Irlande ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cork",
-            "correct": false
-          },
-          {
-            "label": "Galway",
-            "correct": false
-          },
-          {
-            "label": "Belfast",
-            "correct": false
-          },
-          {
-            "label": "Dublin",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0275-2",
-      "type": "mcq",
-      "prompt": "Quel symbole est traditionnellement associé à l'Irlande ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Lion",
-            "correct": false
-          },
-          {
-            "label": "Étoile",
-            "correct": false
-          },
-          {
-            "label": "Aigle",
-            "correct": false
-          },
-          {
-            "label": "Trèfle",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0275-3",
       "type": "mcq",
       "prompt": "Quelle boisson emblématique est consommée en Irlande ?",

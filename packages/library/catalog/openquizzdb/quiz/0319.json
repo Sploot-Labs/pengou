@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0319-3",
-      "type": "mcq",
-      "prompt": "Quel jeu de cartes, créé en 1971 par Merle Robbins, est édité par Mattel ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Korsar",
-            "correct": false
-          },
-          {
-            "label": "Dobble",
-            "correct": false
-          },
-          {
-            "label": "Uno",
-            "correct": true
-          },
-          {
-            "label": "1000 bornes",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0319-4",
       "type": "mcq",
       "prompt": "Combien y a-t-il de couleurs dans un jeu de cartes standard ?",

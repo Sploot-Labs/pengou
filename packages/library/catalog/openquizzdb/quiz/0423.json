@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0423-3",
-      "type": "mcq",
-      "prompt": "Quelle boisson énergisante possède un logo à trois griffes vertes ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Monster Energy",
-            "correct": true
-          },
-          {
-            "label": "Rockstar",
-            "correct": false
-          },
-          {
-            "label": "Red Bull",
-            "correct": false
-          },
-          {
-            "label": "Dark Dog",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0423-4",
       "type": "mcq",
       "prompt": "Quelle boisson est connue pour contenir du ginger ale ?",

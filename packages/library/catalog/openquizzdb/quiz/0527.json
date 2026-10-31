@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0527-1",
-      "type": "mcq",
-      "prompt": "Qui fut la première joueuse de tennis Russe à remporter Wimbledon ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sharapova",
-            "correct": true
-          },
-          {
-            "label": "Bovina",
-            "correct": false
-          },
-          {
-            "label": "Kirilenko",
-            "correct": false
-          },
-          {
-            "label": "Panova",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0527-2",
       "type": "mcq",
       "prompt": "Quelle gymnaste roumaine a obtenu la note de 10 aux JO ?",

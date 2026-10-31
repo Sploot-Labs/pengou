@@ -62,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0031-3",
-      "type": "mcq",
-      "prompt": "Quel mets québécois est constitué de frites et de cheddar frais ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Poutine",
-            "correct": true
-          },
-          {
-            "label": "Cipaille",
-            "correct": false
-          },
-          {
-            "label": "Tourtière",
-            "correct": false
-          },
-          {
-            "label": "Gibelotte",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

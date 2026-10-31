@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0559-1",
-      "type": "mcq",
-      "prompt": "Quel nom Mike Horn a-t-il donné à son tour du monde par l'équateur ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cap Zero",
-            "correct": false
-          },
-          {
-            "label": "Latitude Zéro",
-            "correct": true
-          },
-          {
-            "label": "Land Zero",
-            "correct": false
-          },
-          {
-            "label": "Ground Zero",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0559-2",
       "type": "mcq",
       "prompt": "Dans quelle expédition Mike Horn fit-il le tour du cercle polaire ?",

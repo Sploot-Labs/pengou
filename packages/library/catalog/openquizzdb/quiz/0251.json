@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0251-1",
-      "type": "mcq",
-      "prompt": "Quelle est la capitale de la Bulgarie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Bucarest",
-            "correct": false
-          },
-          {
-            "label": "Belgrade",
-            "correct": false
-          },
-          {
-            "label": "Budapest",
-            "correct": false
-          },
-          {
-            "label": "Sofia",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0251-2",
       "type": "mcq",
       "prompt": "Quelle mer borde la Bulgarie ?",

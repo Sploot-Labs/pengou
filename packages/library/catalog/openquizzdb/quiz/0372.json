@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0372-4",
-      "type": "mcq",
-      "prompt": "Dans quelle tarte les pommes renversée sont-elles caramélisées ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tarte Tatin",
-            "correct": true
-          },
-          {
-            "label": "Tarte au riz",
-            "correct": false
-          },
-          {
-            "label": "Tarte normande",
-            "correct": false
-          },
-          {
-            "label": "Tarte au maton",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

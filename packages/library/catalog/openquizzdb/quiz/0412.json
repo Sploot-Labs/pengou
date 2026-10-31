@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0412-4",
-      "type": "mcq",
-      "prompt": "Quelle comédienne américaine a créé une forme de gymnastique ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Diane Keaton",
-            "correct": false
-          },
-          {
-            "label": "Jane Fonda",
-            "correct": true
-          },
-          {
-            "label": "Sally Field",
-            "correct": false
-          },
-          {
-            "label": "Faye Dunaway",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

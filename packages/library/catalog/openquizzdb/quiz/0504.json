@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0504-3",
-      "type": "mcq",
-      "prompt": "Quelle boisson fut la première boisson festive pour enfants ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Juicy Juice",
-            "correct": false
-          },
-          {
-            "label": "Capri-Sun",
-            "correct": false
-          },
-          {
-            "label": "Champomy",
-            "correct": true
-          },
-          {
-            "label": "Honest Kids",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0504-4",
       "type": "mcq",
       "prompt": "Quelle est la plus ancienne des marques de soda américaines ?",

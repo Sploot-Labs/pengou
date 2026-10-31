@@ -33,64 +33,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0322-3",
-      "type": "mcq",
-      "prompt": "Qui a été sacré « homme le plus sexy de 2014 » par le magazine « People » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Hugh Jackman",
-            "correct": false
-          },
-          {
-            "label": "Brad Pitt",
-            "correct": false
-          },
-          {
-            "label": "Tom Cruise",
-            "correct": false
-          },
-          {
-            "label": "Chris Hemsworth",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0322-4",
-      "type": "mcq",
-      "prompt": "Qui a gagné la saison 4 de « Danse avec les stars » avec Grégoire Lyonnet ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Shy'm",
-            "correct": false
-          },
-          {
-            "label": "Lorie",
-            "correct": false
-          },
-          {
-            "label": "Alizée",
-            "correct": true
-          },
-          {
-            "label": "Tal",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

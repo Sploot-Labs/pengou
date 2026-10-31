@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0249-3",
-      "type": "mcq",
-      "prompt": "Quelle ouverture permettait d'observer l'ennemi dans un château fort ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Meurtrière",
-            "correct": true
-          },
-          {
-            "label": "Criminelle",
-            "correct": false
-          },
-          {
-            "label": "Bouchère",
-            "correct": false
-          },
-          {
-            "label": "Egorgeuse",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0249-4",
       "type": "mcq",
       "prompt": "Que trouve-t-on en général derrière le pont-levis d'un château ?",

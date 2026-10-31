@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0231-1",
-      "type": "mcq",
-      "prompt": "Dans « Star Trek », quelle flotte est liée à la Fédération des planètes unies ?",
-      "payload": {
-        "options": [
-          {
-            "label": "FedCon",
-            "correct": false
-          },
-          {
-            "label": "Starfleet",
-            "correct": true
-          },
-          {
-            "label": "Cardassia",
-            "correct": false
-          },
-          {
-            "label": "Klingon",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0231-2",
       "type": "mcq",
       "prompt": "Dans l'univers de « Star Trek », quel physicien est aussi un fin timonier ?",

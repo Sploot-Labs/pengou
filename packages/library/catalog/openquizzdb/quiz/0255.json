@@ -33,64 +33,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0255-3",
-      "type": "mcq",
-      "prompt": "De quel château Hergé s'est-il inspiré pour créer Moulinsart ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Villandry",
-            "correct": false
-          },
-          {
-            "label": "Chaumont",
-            "correct": false
-          },
-          {
-            "label": "Cheverny",
-            "correct": true
-          },
-          {
-            "label": "Langeais",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0255-4",
-      "type": "mcq",
-      "prompt": "Dans quel château est présumé être enterré Léonard de Vinci ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Amboise",
-            "correct": true
-          },
-          {
-            "label": "Sully-Sur-Loire",
-            "correct": false
-          },
-          {
-            "label": "Saumur",
-            "correct": false
-          },
-          {
-            "label": "Blois",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

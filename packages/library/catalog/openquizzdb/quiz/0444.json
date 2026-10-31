@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0444-2",
-      "type": "mcq",
-      "prompt": "Quel ex-Beatle a joué sur la place Rouge le 24 mai 2003 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "George Harrison",
-            "correct": false
-          },
-          {
-            "label": "Paul McCartney",
-            "correct": true
-          },
-          {
-            "label": "Ringo Starr",
-            "correct": false
-          },
-          {
-            "label": "John Lennon",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0444-3",
       "type": "mcq",
       "prompt": "Qui est l'auteur du « Da Vinci Code » publié à des millions d'exemplaires ?",

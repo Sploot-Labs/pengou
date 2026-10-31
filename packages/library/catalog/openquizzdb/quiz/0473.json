@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0473-2",
-      "type": "mcq",
-      "prompt": "Quel État enclavé est contenu dans le territoire de la ville de Rome ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Vatican",
-            "correct": true
-          },
-          {
-            "label": "Lichtenstein",
-            "correct": false
-          },
-          {
-            "label": "Monaco",
-            "correct": false
-          },
-          {
-            "label": "Saint-Marin",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0473-3",
       "type": "mcq",
       "prompt": "De quel climat particulièrement clément bénéficie la ville de Rome ?",

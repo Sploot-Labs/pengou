@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0093-1",
-      "type": "mcq",
-      "prompt": "Quel est le personnage principal de la série télévisée « Breaking Bad » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Saul Goodman",
-            "correct": false
-          },
-          {
-            "label": "Jesse Pinkman",
-            "correct": false
-          },
-          {
-            "label": "Walter White",
-            "correct": true
-          },
-          {
-            "label": "Hank Schrader",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0093-2",
-      "type": "mcq",
-      "prompt": "Quelle drogue est fabriquée et vendue par Walter White ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cocaïne",
-            "correct": false
-          },
-          {
-            "label": "Méthamphétamine",
-            "correct": true
-          },
-          {
-            "label": "Kétamine",
-            "correct": false
-          },
-          {
-            "label": "Héroïne",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0093-3",
       "type": "mcq",
       "prompt": "Dans quel véhicule cuisinent Walter et Jesse au début de la série ?",

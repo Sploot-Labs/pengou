@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0541-1",
-      "type": "mcq",
-      "prompt": "En ski, quel est le niveau de difficulté associé à une piste verte ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Très facile",
-            "correct": true
-          },
-          {
-            "label": "Moyen",
-            "correct": false
-          },
-          {
-            "label": "Très difficile",
-            "correct": false
-          },
-          {
-            "label": "Difficile",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0541-2",
       "type": "mcq",
       "prompt": "Quel autre nom donne-t-on au téléski qui vous mène en haut des pistes ?",

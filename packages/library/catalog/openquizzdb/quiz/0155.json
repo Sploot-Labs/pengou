@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0155-3",
-      "type": "mcq",
-      "prompt": "Dans quel film Louise Bourgoin joue-t-elle avec Romain Duris ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Intouchables",
-            "correct": false
-          },
-          {
-            "label": "Populaire",
-            "correct": false
-          },
-          {
-            "label": "L'Arnacoeur",
-            "correct": true
-          },
-          {
-            "label": "De rouille et d'os",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0155-4",
       "type": "mcq",
       "prompt": "Avant le cinéma, où Louise Bourgoin travaillait-elle ?",

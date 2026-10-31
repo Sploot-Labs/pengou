@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0526-1",
-      "type": "mcq",
-      "prompt": "Combien de boules faut-il rassembler pour qu'un voeu soit réalisé ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cinq",
-            "correct": false
-          },
-          {
-            "label": "Quatre",
-            "correct": false
-          },
-          {
-            "label": "Sept",
-            "correct": true
-          },
-          {
-            "label": "Six",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0526-2",
-      "type": "mcq",
-      "prompt": "En quoi se transforme le petit Son Gohan lors de la pleine Lune ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Loup-garou",
-            "correct": false
-          },
-          {
-            "label": "Fantôme",
-            "correct": false
-          },
-          {
-            "label": "Dragon",
-            "correct": false
-          },
-          {
-            "label": "Singe géant",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0526-3",
       "type": "mcq",
       "prompt": "Quel est l'ancien nom autrefois donné à la planète Vegeta ?",

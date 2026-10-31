@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0442-1",
-      "type": "mcq",
-      "prompt": "Quelle est la couleur du passeport de l'union européenne ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Bleue",
-            "correct": false
-          },
-          {
-            "label": "Verte",
-            "correct": false
-          },
-          {
-            "label": "Bordeaux",
-            "correct": true
-          },
-          {
-            "label": "Grise",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0442-2",
       "type": "mcq",
       "prompt": "Quelle ville belge est considérée comme le centre diamantaire mondial ?",

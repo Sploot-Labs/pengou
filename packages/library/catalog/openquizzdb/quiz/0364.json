@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0364-2",
-      "type": "mcq",
-      "prompt": "Qui a réalisé les deux premiers opus de la saga « Jurassic Park » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Joe Johnston",
-            "correct": false
-          },
-          {
-            "label": "Tim Burton",
-            "correct": false
-          },
-          {
-            "label": "Steven Spielberg",
-            "correct": true
-          },
-          {
-            "label": "Georges Lucas",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0364-3",
       "type": "mcq",
       "prompt": "Qui est l'auteur du roman « Jurassic Park » dont s'est inspiré le film ?",

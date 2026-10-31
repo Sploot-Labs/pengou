@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0217-2",
+      "type": "mcq",
+      "prompt": "Quel film met en scène Arnold Schwarzenegger dans le rôle d'un cyborg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Real Steel",
+            "correct": false
+          },
+          {
+            "label": "Terminator",
+            "correct": true
+          },
+          {
+            "label": "Sucker Punch",
+            "correct": false
+          },
+          {
+            "label": "Robots",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0492-1",
+      "type": "mcq",
+      "prompt": "À bord de quel engin voyagent les candidats de la « Chasse aux trésors » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hélicoptère",
+            "correct": true
+          },
+          {
+            "label": "Hydravion",
+            "correct": false
+          },
+          {
+            "label": "Taxi",
+            "correct": false
+          },
+          {
+            "label": "Sous-marin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0071-1",
+      "type": "mcq",
+      "prompt": "Qui est le complice de Louis de Funès dans « La Soupe aux choux » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michel Galabru",
+            "correct": false
+          },
+          {
+            "label": "Bourvil",
+            "correct": false
+          },
+          {
+            "label": "Jean Carmet",
+            "correct": true
+          },
+          {
+            "label": "Jacques Villeret",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0053-2",
+      "type": "mcq",
+      "prompt": "Quel film a réuni sur les écrans Sean Connery et Christophe Lambert ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Greystoke",
+            "correct": false
+          },
+          {
+            "label": "Highlander",
+            "correct": true
+          },
+          {
+            "label": "Mad Max",
+            "correct": false
+          },
+          {
+            "label": "Subway",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0055-1",
+      "type": "mcq",
+      "prompt": "Quelle célèbre voiture David Hasselhoff pilotait-il dans « K2000 » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kytie",
+            "correct": false
+          },
+          {
+            "label": "Kate",
+            "correct": false
+          },
+          {
+            "label": "Kitt",
+            "correct": true
+          },
+          {
+            "label": "Kiki",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0509-3",
+      "type": "mcq",
+      "prompt": "Quel groupe français nous a fait danser avec « Les Démons de minuit » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tableaux",
+            "correct": false
+          },
+          {
+            "label": "Dessins",
+            "correct": false
+          },
+          {
+            "label": "Photos",
+            "correct": false
+          },
+          {
+            "label": "Images",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0524-1",
+      "type": "mcq",
+      "prompt": "Quel auteur-compositeur-interprète est « Tombé pour la France » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Francis Cabrel",
+            "correct": false
+          },
+          {
+            "label": "Étienne Daho",
+            "correct": true
+          },
+          {
+            "label": "Alain Bashung",
+            "correct": false
+          },
+          {
+            "label": "Marc Lavoine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0517-3",
+      "type": "mcq",
+      "prompt": "Quelle est la matière préférée de la chanteuse Caroline Loeb ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ouate",
+            "correct": true
+          },
+          {
+            "label": "Ormeau",
+            "correct": false
+          },
+          {
+            "label": "Organza",
+            "correct": false
+          },
+          {
+            "label": "Osier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-2",
+      "type": "mcq",
+      "prompt": "Quel groupe de rock suédois a chanté « The Final Countdown » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "ACDC",
+            "correct": false
+          },
+          {
+            "label": "Trust",
+            "correct": false
+          },
+          {
+            "label": "Europe",
+            "correct": true
+          },
+          {
+            "label": "Scorpions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0476-4",
+      "type": "mcq",
+      "prompt": "À quel groupe originaire de Toulouse doit-on le tube « Thaï nana » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les Vagabonds",
+            "correct": false
+          },
+          {
+            "label": "Images",
+            "correct": false
+          },
+          {
+            "label": "Kazero",
+            "correct": true
+          },
+          {
+            "label": "Les Forbans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0073-2",
+      "type": "mcq",
+      "prompt": "Qui fut le premier français champion du monde de Formule 1 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Didier Pironi",
+            "correct": false
+          },
+          {
+            "label": "Jean Alesi",
+            "correct": false
+          },
+          {
+            "label": "Alain Prost",
+            "correct": true
+          },
+          {
+            "label": "Guy Ligier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0081-4",
+      "type": "mcq",
+      "prompt": "À quel réalisateur français doit-on le film « Le père Noël est une ordure » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alain Terzian",
+            "correct": false
+          },
+          {
+            "label": "Claude Zidi",
+            "correct": false
+          },
+          {
+            "label": "Patrice Ledoux",
+            "correct": false
+          },
+          {
+            "label": "Jean-Marie Poiré",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0316-1",
+      "type": "mcq",
+      "prompt": "Quel jeu de dessin et de devinettes a été créé en 1985 par Rob Angel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mastermind",
+            "correct": false
+          },
+          {
+            "label": "Uno",
+            "correct": false
+          },
+          {
+            "label": "Blokus",
+            "correct": false
+          },
+          {
+            "label": "Pictionary",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0343-1",
+      "type": "mcq",
+      "prompt": "Qui tient le rôle de Jacques Mayol dans le film « Le Grand Bleu » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jean-Marc Barr",
+            "correct": true
+          },
+          {
+            "label": "Paul Shenar",
+            "correct": false
+          },
+          {
+            "label": "Marc Duret",
+            "correct": false
+          },
+          {
+            "label": "Jean Reno",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0487-1",
+      "type": "mcq",
+      "prompt": "Quel est le nom de la famille de Bobby et de JR dans « Dallas » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Krebbs",
+            "correct": false
+          },
+          {
+            "label": "Shepard",
+            "correct": false
+          },
+          {
+            "label": "Barnes",
+            "correct": false
+          },
+          {
+            "label": "Ewing",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0223-3",
+      "type": "mcq",
+      "prompt": "Quel acteur danse avec Jennifer Grey dans « Dirty Dancing » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Patrick Swayze",
+            "correct": true
+          },
+          {
+            "label": "John Travolta",
+            "correct": false
+          },
+          {
+            "label": "Kevin Costner",
+            "correct": false
+          },
+          {
+            "label": "Michael Keaton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0493-1",
+      "type": "mcq",
+      "prompt": "Quel est le métier de Jessica Fletcher dans la série « Arabesque » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Écrivaine",
+            "correct": true
+          },
+          {
+            "label": "Avocate",
+            "correct": false
+          },
+          {
+            "label": "Journaliste",
+            "correct": false
+          },
+          {
+            "label": "Peintre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0143-2",
+      "type": "mcq",
+      "prompt": "Que vous proposait de passer Jean-Pierre Foucault à la télévision ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sacrée soirée",
+            "correct": true
+          },
+          {
+            "label": "Fameux défi",
+            "correct": false
+          },
+          {
+            "label": "Bon moment",
+            "correct": false
+          },
+          {
+            "label": "Unique voyage",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0449-2",
+      "type": "mcq",
+      "prompt": "Quels personnages colorés vivent sous l'eau avec un tuba sur la tête ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les Teletubbies",
+            "correct": false
+          },
+          {
+            "label": "Les Bisounours",
+            "correct": false
+          },
+          {
+            "label": "Les Snorky",
+            "correct": true
+          },
+          {
+            "label": "Les Barbapapa",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0495-4",
+      "type": "mcq",
+      "prompt": "Quel groupe de « l'after punk » vous invite à « Chercher le garçon » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Élégance",
+            "correct": false
+          },
+          {
+            "label": "Indochine",
+            "correct": false
+          },
+          {
+            "label": "Les Ablettes",
+            "correct": false
+          },
+          {
+            "label": "Taxi Girl",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-annees-80",
+      "title": "Les années 80",
+      "description": "Télévision, musique, cinéma et jeux des années 80.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0217-2",
+        "oqdb-0492-1",
+        "oqdb-0071-1",
+        "oqdb-0053-2",
+        "oqdb-0055-1",
+        "oqdb-0509-3",
+        "oqdb-0524-1",
+        "oqdb-0517-3",
+        "oqdb-0511-2",
+        "oqdb-0476-4",
+        "oqdb-0073-2",
+        "oqdb-0081-4",
+        "oqdb-0316-1",
+        "oqdb-0343-1",
+        "oqdb-0487-1",
+        "oqdb-0223-3",
+        "oqdb-0493-1",
+        "oqdb-0143-2",
+        "oqdb-0449-2",
+        "oqdb-0495-4"
+      ]
+    }
+  ]
+}

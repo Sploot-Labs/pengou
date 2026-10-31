@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0324-1",
-      "type": "mcq",
-      "prompt": "Quelle actrice joue Mikaela Banes dans « Transformers » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Kate Winslet",
-            "correct": false
-          },
-          {
-            "label": "Megan Fox",
-            "correct": true
-          },
-          {
-            "label": "Eva Mendes",
-            "correct": false
-          },
-          {
-            "label": "Jennifer Connelly",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0324-2",
-      "type": "mcq",
-      "prompt": "Quelle actrice a joué Catwoman et Tornade dans « X-Men » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Amber Heard",
-            "correct": false
-          },
-          {
-            "label": "Halle Berry",
-            "correct": true
-          },
-          {
-            "label": "Eva Mendes",
-            "correct": false
-          },
-          {
-            "label": "Kristen Stewart",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0324-3",
       "type": "mcq",
       "prompt": "Quelle actrice est devenue célèbre grâce à « Hunger Games » ?",

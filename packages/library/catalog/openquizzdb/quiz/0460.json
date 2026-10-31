@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0460-1",
-      "type": "mcq",
-      "prompt": "Quel petit objet sert à maintenir ensemble des feuilles de papier ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Trombone",
-            "correct": true
-          },
-          {
-            "label": "Rolodex",
-            "correct": false
-          },
-          {
-            "label": "Post-it",
-            "correct": false
-          },
-          {
-            "label": "Stencil",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0460-2",
       "type": "mcq",
       "prompt": "Quelle est la couleur de la « boîte noire » en aviation ?",

@@ -62,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0411-4",
-      "type": "mcq",
-      "prompt": "Quel phénomène naturel vient du japonais signifiant « vague de port » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Séisme",
-            "correct": false
-          },
-          {
-            "label": "Tsunami",
-            "correct": true
-          },
-          {
-            "label": "Kendo",
-            "correct": false
-          },
-          {
-            "label": "Sakura",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

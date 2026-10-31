@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0415-3",
+      "type": "mcq",
+      "prompt": "Quelle ville du Kansai fut la capitale impériale du Japon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kamakura",
+            "correct": false
+          },
+          {
+            "label": "Noro",
+            "correct": false
+          },
+          {
+            "label": "Kyoto",
+            "correct": true
+          },
+          {
+            "label": "Tokyo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0310-4",
+      "type": "mcq",
+      "prompt": "Quelle langue est parlée par les serpents dans « Harry Potter » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le cuillerlang",
+            "correct": false
+          },
+          {
+            "label": "Le fourchelang",
+            "correct": true
+          },
+          {
+            "label": "Le verrelang",
+            "correct": false
+          },
+          {
+            "label": "Le coutelang",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0531-1",
+      "type": "mcq",
+      "prompt": "Quel titre inférieur à celui de vicomte est supérieur à celui de chevalier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lord",
+            "correct": false
+          },
+          {
+            "label": "Consort",
+            "correct": false
+          },
+          {
+            "label": "Comte",
+            "correct": false
+          },
+          {
+            "label": "Baron",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0455-1",
+      "type": "mcq",
+      "prompt": "Quelle plante fleurit traditionnellement les tombes à la Toussaint ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cosmos",
+            "correct": false
+          },
+          {
+            "label": "Chrysanthème",
+            "correct": true
+          },
+          {
+            "label": "Crocus",
+            "correct": false
+          },
+          {
+            "label": "Camélia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0309-3",
+      "type": "mcq",
+      "prompt": "Combien de cordes possède un violon de musique classique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": true
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0223-2",
+      "type": "mcq",
+      "prompt": "Qui hante Andie MacDowell dans « Quatre mariages et un enterrement » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hugh Grant",
+            "correct": true
+          },
+          {
+            "label": "Colin Firth",
+            "correct": false
+          },
+          {
+            "label": "Kevin Costner",
+            "correct": false
+          },
+          {
+            "label": "Rowan Atkinson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0470-2",
+      "type": "mcq",
+      "prompt": "De quelle couleur sont les célèbres LTI, les taxis londoniens ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Noire",
+            "correct": true
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0334-2",
+      "type": "mcq",
+      "prompt": "Quel est le métier de Bruce Willis dans « Pulp Fiction », de Tarantino ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Boxeur",
+            "correct": true
+          },
+          {
+            "label": "Footballeur",
+            "correct": false
+          },
+          {
+            "label": "Vétérinaire",
+            "correct": false
+          },
+          {
+            "label": "Avocat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0169-4",
+      "type": "mcq",
+      "prompt": "Quelle demi-baguette contient viande chaude, frites et sauce ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mitraillette",
+            "correct": true
+          },
+          {
+            "label": "Truffade",
+            "correct": false
+          },
+          {
+            "label": "Rosti",
+            "correct": false
+          },
+          {
+            "label": "Frico",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0304-2",
+      "type": "mcq",
+      "prompt": "Quel fleuve se jette dans les chutes Victoria, hautes de 108 mètres ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zala",
+            "correct": false
+          },
+          {
+            "label": "Zambèze",
+            "correct": true
+          },
+          {
+            "label": "Zanskar",
+            "correct": false
+          },
+          {
+            "label": "Zaire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0423-3",
+      "type": "mcq",
+      "prompt": "Quelle boisson énergisante possède un logo à trois griffes vertes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monster Energy",
+            "correct": true
+          },
+          {
+            "label": "Rockstar",
+            "correct": false
+          },
+          {
+            "label": "Red Bull",
+            "correct": false
+          },
+          {
+            "label": "Dark Dog",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0580-1",
+      "type": "mcq",
+      "prompt": "Quel sculpteur a créé le trophée des César ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Delfoly",
+            "correct": false
+          },
+          {
+            "label": "César",
+            "correct": true
+          },
+          {
+            "label": "Arman",
+            "correct": false
+          },
+          {
+            "label": "Beppo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0485-2",
+      "type": "mcq",
+      "prompt": "Quel tournoi du Grand Chelem Sharapova a-t-elle deux fois remporté ?",
+      "payload": {
+        "options": [
+          {
+            "label": "US Open",
+            "correct": false
+          },
+          {
+            "label": "Wimbledon",
+            "correct": false
+          },
+          {
+            "label": "Open d'Australie",
+            "correct": false
+          },
+          {
+            "label": "Roland-Garros",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0494-2",
+      "type": "mcq",
+      "prompt": "Quel écrivain, mort en 1814, est parfois surnommé « le Divin Marquis » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rimbaud",
+            "correct": false
+          },
+          {
+            "label": "Diderot",
+            "correct": false
+          },
+          {
+            "label": "Sade",
+            "correct": true
+          },
+          {
+            "label": "Montesquieu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0544-2",
+      "type": "mcq",
+      "prompt": "Combien de disques Johnny Hallyday a-t-il vendu de son vivant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "150 millions",
+            "correct": false
+          },
+          {
+            "label": "90 millions",
+            "correct": false
+          },
+          {
+            "label": "110 millions",
+            "correct": true
+          },
+          {
+            "label": "130 millions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0069-4",
+      "type": "mcq",
+      "prompt": "Quel physicien anglais a été attentif à la chute des pommes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tycho Brahe",
+            "correct": false
+          },
+          {
+            "label": "Isaac Newton",
+            "correct": true
+          },
+          {
+            "label": "Peter Higgs",
+            "correct": false
+          },
+          {
+            "label": "Nicolas Copernic",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0451-3",
+      "type": "mcq",
+      "prompt": "Qui dirige l'école de conduite dans « Bob l'éponge » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Madame Puff",
+            "correct": true
+          },
+          {
+            "label": "Krabs",
+            "correct": false
+          },
+          {
+            "label": "Sandy",
+            "correct": false
+          },
+          {
+            "label": "Potty",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0435-2",
+      "type": "mcq",
+      "prompt": "À quel pays appartiennent les Cyclades, formées d'environ 250 îles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bulgarie",
+            "correct": false
+          },
+          {
+            "label": "Grèce",
+            "correct": true
+          },
+          {
+            "label": "Libye",
+            "correct": false
+          },
+          {
+            "label": "Turquie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0589-3",
+      "type": "mcq",
+      "prompt": "Quel nom donne-t-on à la zone d'herbe située autour du trou au golf ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Green",
+            "correct": true
+          },
+          {
+            "label": "Rough",
+            "correct": false
+          },
+          {
+            "label": "Fairway",
+            "correct": false
+          },
+          {
+            "label": "Bunker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0371-1",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on la femelle du renard ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Renardine",
+            "correct": false
+          },
+          {
+            "label": "Renardelle",
+            "correct": false
+          },
+          {
+            "label": "Renardeaude",
+            "correct": false
+          },
+          {
+            "label": "Renarde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-mix-culture-10",
+      "title": "Mix culture #10",
+      "description": "Un peu de tout : cinéma, sport, géographie, nature, musique et culture générale.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0415-3",
+        "oqdb-0310-4",
+        "oqdb-0531-1",
+        "oqdb-0455-1",
+        "oqdb-0309-3",
+        "oqdb-0223-2",
+        "oqdb-0470-2",
+        "oqdb-0334-2",
+        "oqdb-0169-4",
+        "oqdb-0304-2",
+        "oqdb-0423-3",
+        "oqdb-0580-1",
+        "oqdb-0485-2",
+        "oqdb-0494-2",
+        "oqdb-0544-2",
+        "oqdb-0069-4",
+        "oqdb-0451-3",
+        "oqdb-0435-2",
+        "oqdb-0589-3",
+        "oqdb-0371-1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0093-1",
+      "type": "mcq",
+      "prompt": "Quel est le personnage principal de la série télévisée « Breaking Bad » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saul Goodman",
+            "correct": false
+          },
+          {
+            "label": "Jesse Pinkman",
+            "correct": false
+          },
+          {
+            "label": "Walter White",
+            "correct": true
+          },
+          {
+            "label": "Hank Schrader",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0487-2",
+      "type": "mcq",
+      "prompt": "Quel ami du capitaine Kirk a les oreilles pointues ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sulu",
+            "correct": false
+          },
+          {
+            "label": "Spock",
+            "correct": true
+          },
+          {
+            "label": "Sanders",
+            "correct": false
+          },
+          {
+            "label": "Scotty",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0193-1",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur des cheveux de Miranda dans « Sex and the City » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blonde",
+            "correct": false
+          },
+          {
+            "label": "Noire",
+            "correct": false
+          },
+          {
+            "label": "Rousse",
+            "correct": true
+          },
+          {
+            "label": "Brune",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0481-1",
+      "type": "mcq",
+      "prompt": "Quel animal porte le nom de Flipper, de la série du même nom ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ours",
+            "correct": false
+          },
+          {
+            "label": "Dauphin",
+            "correct": true
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          },
+          {
+            "label": "Chien",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0101-1",
+      "type": "mcq",
+      "prompt": "Quelle série retrace les aventures d'Assane Diop, interprété par Omar Sy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lupin",
+            "correct": true
+          },
+          {
+            "label": "Sweet Tooth",
+            "correct": false
+          },
+          {
+            "label": "The Circle",
+            "correct": false
+          },
+          {
+            "label": "You",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0475-2",
+      "type": "mcq",
+      "prompt": "À quoi reconnaît-on « Les envahisseurs » dans la série du même nom ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Au petit doigt",
+            "correct": true
+          },
+          {
+            "label": "Aux pieds",
+            "correct": false
+          },
+          {
+            "label": "Au langage",
+            "correct": false
+          },
+          {
+            "label": "Aux yeux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0285-1",
+      "type": "mcq",
+      "prompt": "Combien de saisons compte la série télévisée « X-Files » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Diz",
+            "correct": false
+          },
+          {
+            "label": "Neuf",
+            "correct": false
+          },
+          {
+            "label": "Onze",
+            "correct": true
+          },
+          {
+            "label": "Huit",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0027-2",
+      "type": "mcq",
+      "prompt": "Comment se prénomme le compagnon de Zorro à la télévision ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bonifacio",
+            "correct": false
+          },
+          {
+            "label": "Bruno",
+            "correct": false
+          },
+          {
+            "label": "Bartolo",
+            "correct": false
+          },
+          {
+            "label": "Bernardo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0391-2",
+      "type": "mcq",
+      "prompt": "Qui est connue pour son rôle de Mélanie dans « Plus belle la vie » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Laëtitia Milot",
+            "correct": true
+          },
+          {
+            "label": "Hélène Médigue",
+            "correct": false
+          },
+          {
+            "label": "Cécilia Hornus",
+            "correct": false
+          },
+          {
+            "label": "Élodie Varlet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0093-2",
+      "type": "mcq",
+      "prompt": "Quelle drogue est fabriquée et vendue par Walter White ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cocaïne",
+            "correct": false
+          },
+          {
+            "label": "Méthamphétamine",
+            "correct": true
+          },
+          {
+            "label": "Kétamine",
+            "correct": false
+          },
+          {
+            "label": "Héroïne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0187-2",
+      "type": "mcq",
+      "prompt": "Quelle héroïne de « Ma sorcière bien aimée » est mariée à Jean-Pierre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Endora",
+            "correct": false
+          },
+          {
+            "label": "Serena",
+            "correct": false
+          },
+          {
+            "label": "Tabatha",
+            "correct": false
+          },
+          {
+            "label": "Samantha",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0481-2",
+      "type": "mcq",
+      "prompt": "Quelle est la race de Lassie, le célèbre chien de la série télévisée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Labrador",
+            "correct": false
+          },
+          {
+            "label": "Colley",
+            "correct": true
+          },
+          {
+            "label": "Golden Retriever",
+            "correct": false
+          },
+          {
+            "label": "Berger allemand",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0193-3",
+      "type": "mcq",
+      "prompt": "Quel est le nom de la famille de Buffy dans « Buffy contre les vampires » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Summers",
+            "correct": true
+          },
+          {
+            "label": "Sanders",
+            "correct": false
+          },
+          {
+            "label": "Bouwers",
+            "correct": false
+          },
+          {
+            "label": "Rogers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0475-3",
+      "type": "mcq",
+      "prompt": "Quel est le prénom de Kojak, élégant policier au crâne rasé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Walter",
+            "correct": false
+          },
+          {
+            "label": "Roger",
+            "correct": false
+          },
+          {
+            "label": "Theo",
+            "correct": true
+          },
+          {
+            "label": "Denis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0327-4",
+      "type": "mcq",
+      "prompt": "Qui a tenu le rôle de « Numéro 13 » dans la série « Dr House » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Keira Knightley",
+            "correct": false
+          },
+          {
+            "label": "Olivia Wilde",
+            "correct": true
+          },
+          {
+            "label": "Kaley Cuoco",
+            "correct": false
+          },
+          {
+            "label": "Salma Hayek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0193-2",
+      "type": "mcq",
+      "prompt": "Pour quelle espèce a-t-on créé une langue artificielle dans « Star Trek » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sylvidres",
+            "correct": false
+          },
+          {
+            "label": "Vulcains",
+            "correct": false
+          },
+          {
+            "label": "Klingons",
+            "correct": true
+          },
+          {
+            "label": "Romuliens",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0112-2",
+      "type": "mcq",
+      "prompt": "À la télévision, quel est le métier du fils du commissaire Cordier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jongleur",
+            "correct": false
+          },
+          {
+            "label": "Jardinier",
+            "correct": false
+          },
+          {
+            "label": "Juge",
+            "correct": true
+          },
+          {
+            "label": "Journaliste",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0475-1",
+      "type": "mcq",
+      "prompt": "Quelle série raconte les aventures d'un centre vétérinaire en Afrique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lassie",
+            "correct": false
+          },
+          {
+            "label": "Mon ami Ben",
+            "correct": false
+          },
+          {
+            "label": "Woobinda",
+            "correct": false
+          },
+          {
+            "label": "Daktari",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0301-4",
+      "type": "mcq",
+      "prompt": "Quel alter-ego Walter White a-t-il créé pour ses activités criminelles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gutenberg",
+            "correct": false
+          },
+          {
+            "label": "Heisenberg",
+            "correct": true
+          },
+          {
+            "label": "Einstein",
+            "correct": false
+          },
+          {
+            "label": "Iceberg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0481-3",
+      "type": "mcq",
+      "prompt": "Quel type d'animal est Ben, le héros de la série « Mon ami Ben » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ours",
+            "correct": true
+          },
+          {
+            "label": "Éléphant",
+            "correct": false
+          },
+          {
+            "label": "Panthère",
+            "correct": false
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-series-tele-cultes",
+      "title": "Séries télé cultes",
+      "description": "D'après des questions OpenQuizzDB de Philippe Bresoux.",
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0093-1",
+        "oqdb-0487-2",
+        "oqdb-0193-1",
+        "oqdb-0481-1",
+        "oqdb-0101-1",
+        "oqdb-0475-2",
+        "oqdb-0285-1",
+        "oqdb-0027-2",
+        "oqdb-0391-2",
+        "oqdb-0093-2",
+        "oqdb-0187-2",
+        "oqdb-0481-2",
+        "oqdb-0193-3",
+        "oqdb-0475-3",
+        "oqdb-0327-4",
+        "oqdb-0193-2",
+        "oqdb-0112-2",
+        "oqdb-0475-1",
+        "oqdb-0301-4",
+        "oqdb-0481-3"
+      ]
+    }
+  ]
+}

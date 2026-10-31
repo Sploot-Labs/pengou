@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0219-1",
-      "type": "mcq",
-      "prompt": "Quelle ville bretonne est connue pour ses alignements de menhirs ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Quimper",
-            "correct": false
-          },
-          {
-            "label": "Carnac",
-            "correct": true
-          },
-          {
-            "label": "Brest",
-            "correct": false
-          },
-          {
-            "label": "Lorient",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0219-2",
       "type": "mcq",
       "prompt": "Quel symbole à trois branches est emblématique de la Bretagne ?",
@@ -91,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "adultes"
-    },
-    {
-      "id": "oqdb-0219-4",
-      "type": "mcq",
-      "prompt": "Dans quel département français se dresse le phare de l'Île Vierge ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Finistère",
-            "correct": true
-          },
-          {
-            "label": "Ille-et-Vilaine",
-            "correct": false
-          },
-          {
-            "label": "Morbihan",
-            "correct": false
-          },
-          {
-            "label": "Côtes-d'Armor",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

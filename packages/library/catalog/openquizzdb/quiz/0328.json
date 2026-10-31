@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0328-1",
-      "type": "mcq",
-      "prompt": "Dans quel pays se situe le circuit de course automobile du Mans ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Suisse",
-            "correct": false
-          },
-          {
-            "label": "Belgique",
-            "correct": false
-          },
-          {
-            "label": "France",
-            "correct": true
-          },
-          {
-            "label": "Pays-Bas",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0328-2",
       "type": "mcq",
       "prompt": "Comment s'appelle la voiture de Batman ?",

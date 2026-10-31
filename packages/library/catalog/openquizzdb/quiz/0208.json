@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0208-3",
-      "type": "mcq",
-      "prompt": "La tartiflette est faite avec quel fromage ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ricotta",
-            "correct": false
-          },
-          {
-            "label": "Roquefort",
-            "correct": false
-          },
-          {
-            "label": "Reblochon",
-            "correct": true
-          },
-          {
-            "label": "Romano",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0208-4",
       "type": "mcq",
       "prompt": "Quel est le nom du chien peu malin dans les albums de « Lucky Luke » ?",

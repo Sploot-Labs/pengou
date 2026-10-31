@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0135-3",
-      "type": "mcq",
-      "prompt": "À quel âge Nadia Comaneci a-t-elle obtenu la note de 10 aux JO ?",
-      "payload": {
-        "options": [
-          {
-            "label": "13 ans",
-            "correct": false
-          },
-          {
-            "label": "15 ans",
-            "correct": false
-          },
-          {
-            "label": "14 ans",
-            "correct": true
-          },
-          {
-            "label": "16 ans",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0135-4",
-      "type": "mcq",
-      "prompt": "En quelle année Charlemagne a-t-il été couronné empereur à Rome ?",
-      "payload": {
-        "options": [
-          {
-            "label": "700",
-            "correct": false
-          },
-          {
-            "label": "800",
-            "correct": true
-          },
-          {
-            "label": "900",
-            "correct": false
-          },
-          {
-            "label": "600",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

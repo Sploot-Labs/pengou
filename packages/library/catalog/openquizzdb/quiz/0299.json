@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0299-1",
-      "type": "mcq",
-      "prompt": "Dans quel film de la série James Bond Léa Seydoux a-t-elle joué ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Spectre",
-            "correct": true
-          },
-          {
-            "label": "Licence to Kill",
-            "correct": false
-          },
-          {
-            "label": "Casino Royale",
-            "correct": false
-          },
-          {
-            "label": "Skyfall",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0299-2",
       "type": "mcq",
       "prompt": "Quel film a révélé Léa Seydoux au grand public ?",

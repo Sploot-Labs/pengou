@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0333-2",
-      "type": "mcq",
-      "prompt": "Quel est le principal réseau social professionnel ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Friendster",
-            "correct": false
-          },
-          {
-            "label": "LinkedIn",
-            "correct": true
-          },
-          {
-            "label": "Heeloo",
-            "correct": false
-          },
-          {
-            "label": "Movim",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0333-3",
       "type": "mcq",
       "prompt": "Que fait-on lors d'un « swap » avec une youtubeuse ?",
@@ -83,35 +54,6 @@
           },
           {
             "label": "Des blagues",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0333-4",
-      "type": "mcq",
-      "prompt": "Combien « Facebook » a-t-il payé pour acheter « Whatsapp » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "650 000",
-            "correct": false
-          },
-          {
-            "label": "19 milliards",
-            "correct": true
-          },
-          {
-            "label": "220 millions",
-            "correct": false
-          },
-          {
-            "label": "850 millions",
             "correct": false
           }
         ]

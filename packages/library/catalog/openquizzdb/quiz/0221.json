@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0221-1",
-      "type": "mcq",
-      "prompt": "Quel rôle apportera à Jennifer Lawrence une notoriété internationale ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Aurora Lane",
-            "correct": false
-          },
-          {
-            "label": "Katniss Everdeen",
-            "correct": true
-          },
-          {
-            "label": "Mystique",
-            "correct": false
-          },
-          {
-            "label": "Bella Swan",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0221-2",
       "type": "mcq",
       "prompt": "Qui a choisi Jennifer Lawrence pour jouer « Le Complexe du castor » ?",

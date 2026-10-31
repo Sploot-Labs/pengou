@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0341-1",
-      "type": "mcq",
-      "prompt": "Quelle est la capitale de la Roumanie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Belgrade",
-            "correct": false
-          },
-          {
-            "label": "Budapest",
-            "correct": false
-          },
-          {
-            "label": "Sofia",
-            "correct": false
-          },
-          {
-            "label": "Bucarest",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0341-2",
       "type": "mcq",
       "prompt": "Quelle chaîne de montagnes traverse la Roumanie ?",
@@ -54,35 +25,6 @@
           },
           {
             "label": "Andes",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0341-3",
-      "type": "mcq",
-      "prompt": "Quel célèbre personnage est associé à la Roumanie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Dracula",
-            "correct": true
-          },
-          {
-            "label": "Tarzan",
-            "correct": false
-          },
-          {
-            "label": "Sherlock Holmes",
-            "correct": false
-          },
-          {
-            "label": "Harry Potter",
             "correct": false
           }
         ]

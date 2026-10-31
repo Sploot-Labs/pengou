@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0167-2",
+      "type": "mcq",
+      "prompt": "Quel était le nom du cochon de compagnie de George Clooney ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fred",
+            "correct": false
+          },
+          {
+            "label": "Kyle",
+            "correct": false
+          },
+          {
+            "label": "Max",
+            "correct": true
+          },
+          {
+            "label": "Tom",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0209-3",
+      "type": "mcq",
+      "prompt": "Qui est la mère des enfants de Johnny Depp ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kim Basinger",
+            "correct": false
+          },
+          {
+            "label": "Penélope Cruz",
+            "correct": false
+          },
+          {
+            "label": "Angelina Jolie",
+            "correct": false
+          },
+          {
+            "label": "Vanessa Paradis",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0529-1",
+      "type": "mcq",
+      "prompt": "Avec quel ancien chanteur de NSYNC Cameron Diaz a-t-elle vécu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chris Kirkpatrick",
+            "correct": false
+          },
+          {
+            "label": "Joey Fatone",
+            "correct": false
+          },
+          {
+            "label": "Justin Timberlake",
+            "correct": true
+          },
+          {
+            "label": "Lance Bass",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0195-1",
+      "type": "mcq",
+      "prompt": "Quel prénom est inscrit sur le certificat de baptême de Marilyn Monroe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Norma Jeane",
+            "correct": true
+          },
+          {
+            "label": "Ruby Catherine",
+            "correct": false
+          },
+          {
+            "label": "Lucy Fay",
+            "correct": false
+          },
+          {
+            "label": "Louise Marie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0593-1",
+      "type": "mcq",
+      "prompt": "Quel était le métier de Meghan Markle avant de devenir duchesse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Actrice",
+            "correct": true
+          },
+          {
+            "label": "Juriste",
+            "correct": false
+          },
+          {
+            "label": "Joueuse de tennis",
+            "correct": false
+          },
+          {
+            "label": "Présentatrice télé",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0306-2",
+      "type": "mcq",
+      "prompt": "Dans quel pays Bruce Willis, fils de David Willis, a-t-il vu le jour ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Albanie",
+            "correct": false
+          },
+          {
+            "label": "Allemagne",
+            "correct": true
+          },
+          {
+            "label": "Brésil",
+            "correct": false
+          },
+          {
+            "label": "Portugal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0587-2",
+      "type": "mcq",
+      "prompt": "Quelle chanteuse et actrice est surnommée « la bomba latina » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Selena Gomez",
+            "correct": false
+          },
+          {
+            "label": "Shakira",
+            "correct": false
+          },
+          {
+            "label": "Mariah Carey",
+            "correct": false
+          },
+          {
+            "label": "Jennifer Lopez",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0498-1",
+      "type": "mcq",
+      "prompt": "Pour quelle marque de boisson Nicole Kidman fut-elle égérie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pepsi",
+            "correct": false
+          },
+          {
+            "label": "Aquarius",
+            "correct": false
+          },
+          {
+            "label": "Gini",
+            "correct": false
+          },
+          {
+            "label": "Schweppes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0089-3",
+      "type": "mcq",
+      "prompt": "Quel réalisateur a embauché Clint Eastwood pour la « Trilogie du dollar » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sergio Corbucci",
+            "correct": false
+          },
+          {
+            "label": "Tonino Valerii",
+            "correct": false
+          },
+          {
+            "label": "Giorgio Ferroni",
+            "correct": false
+          },
+          {
+            "label": "Sergio Leone",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0579-1",
+      "type": "mcq",
+      "prompt": "Quelle chanteuse est la mère de René-Charles, Nelson et Eddy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Katy Perry",
+            "correct": false
+          },
+          {
+            "label": "Whitney Houston",
+            "correct": false
+          },
+          {
+            "label": "Rihanna",
+            "correct": false
+          },
+          {
+            "label": "Céline Dion",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0529-2",
+      "type": "mcq",
+      "prompt": "Qui a vendu un baiser 350 000 euros pour une bonne cause ?",
+      "payload": {
+        "options": [
+          {
+            "label": "George Clooney",
+            "correct": true
+          },
+          {
+            "label": "Matt Damon",
+            "correct": false
+          },
+          {
+            "label": "Andy Garcia",
+            "correct": false
+          },
+          {
+            "label": "Brad Pitt",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0306-1",
+      "type": "mcq",
+      "prompt": "Combien de filles Bruce Willis a-t-il eu avec l'actrice Demi Moore ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": true
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Deux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0593-2",
+      "type": "mcq",
+      "prompt": "À l'issue de quelle saison Meghan Markle a-t-elle quitté la série « Suits » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sixième",
+            "correct": false
+          },
+          {
+            "label": "Septième",
+            "correct": true
+          },
+          {
+            "label": "Cinquième",
+            "correct": false
+          },
+          {
+            "label": "Huitième",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0195-3",
+      "type": "mcq",
+      "prompt": "Combien de fois Marilyn Monroe fut-elle mariée au cours de sa vie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trois fois",
+            "correct": true
+          },
+          {
+            "label": "Une fois",
+            "correct": false
+          },
+          {
+            "label": "Deux fois",
+            "correct": false
+          },
+          {
+            "label": "Quatre fois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0209-1",
+      "type": "mcq",
+      "prompt": "Quel acteur a fait rencontrer son agent à Johnny Depp, alors inconnu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nicolas Cage",
+            "correct": true
+          },
+          {
+            "label": "Clint Eastwood",
+            "correct": false
+          },
+          {
+            "label": "Tom Cruise",
+            "correct": false
+          },
+          {
+            "label": "Bruce Willis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0579-4",
+      "type": "mcq",
+      "prompt": "Quelle mannequin est souvent surnommée le garçon manqué ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kate Moss",
+            "correct": false
+          },
+          {
+            "label": "Cara Delevingne",
+            "correct": true
+          },
+          {
+            "label": "Elizabeth Hurley",
+            "correct": false
+          },
+          {
+            "label": "Kelly Brook",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0412-4",
+      "type": "mcq",
+      "prompt": "Quelle comédienne américaine a créé une forme de gymnastique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Diane Keaton",
+            "correct": false
+          },
+          {
+            "label": "Jane Fonda",
+            "correct": true
+          },
+          {
+            "label": "Sally Field",
+            "correct": false
+          },
+          {
+            "label": "Faye Dunaway",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0587-3",
+      "type": "mcq",
+      "prompt": "Quel chanteur est père de huit enfants nés de cinq mères différentes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lionel Richie",
+            "correct": false
+          },
+          {
+            "label": "Phil Collins",
+            "correct": false
+          },
+          {
+            "label": "Mick Jagger",
+            "correct": false
+          },
+          {
+            "label": "Rod Stewart",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0167-3",
+      "type": "mcq",
+      "prompt": "Pour quelle région du Soudan George Clooney est-il fortement mobilisé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kassala",
+            "correct": false
+          },
+          {
+            "label": "Darfour",
+            "correct": true
+          },
+          {
+            "label": "Sannar",
+            "correct": false
+          },
+          {
+            "label": "Atbara",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0593-4",
+      "type": "mcq",
+      "prompt": "Dans quelle série policière Meghan Markle a-t-elle incarné Amy Jessup ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dark Angel",
+            "correct": false
+          },
+          {
+            "label": "X-Files",
+            "correct": false
+          },
+          {
+            "label": "Fringe",
+            "correct": true
+          },
+          {
+            "label": "Beyond",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-vies-de-stars",
+      "title": "Vies de stars",
+      "description": "D'après des questions OpenQuizzDB de Philippe Bresoux.",
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0167-2",
+        "oqdb-0209-3",
+        "oqdb-0529-1",
+        "oqdb-0195-1",
+        "oqdb-0593-1",
+        "oqdb-0306-2",
+        "oqdb-0587-2",
+        "oqdb-0498-1",
+        "oqdb-0089-3",
+        "oqdb-0579-1",
+        "oqdb-0529-2",
+        "oqdb-0306-1",
+        "oqdb-0593-2",
+        "oqdb-0195-3",
+        "oqdb-0209-1",
+        "oqdb-0579-4",
+        "oqdb-0412-4",
+        "oqdb-0587-3",
+        "oqdb-0167-3",
+        "oqdb-0593-4"
+      ]
+    }
+  ]
+}

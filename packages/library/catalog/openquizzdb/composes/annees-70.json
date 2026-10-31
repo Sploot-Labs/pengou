@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0612-1",
+      "type": "mcq",
+      "prompt": "Quel tube de Village People évoque un mouvement de jeunesse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Go West",
+            "correct": false
+          },
+          {
+            "label": "In the Navy",
+            "correct": false
+          },
+          {
+            "label": "Y.M.C.A.",
+            "correct": true
+          },
+          {
+            "label": "Macho Man",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0135-3",
+      "type": "mcq",
+      "prompt": "À quel âge Nadia Comaneci a-t-elle obtenu la note de 10 aux JO ?",
+      "payload": {
+        "options": [
+          {
+            "label": "13 ans",
+            "correct": false
+          },
+          {
+            "label": "15 ans",
+            "correct": false
+          },
+          {
+            "label": "14 ans",
+            "correct": true
+          },
+          {
+            "label": "16 ans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0448-2",
+      "type": "mcq",
+      "prompt": "Dans quelle série télé Telly Savalas incarnait-il un policier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kojak",
+            "correct": true
+          },
+          {
+            "label": "Colombo",
+            "correct": false
+          },
+          {
+            "label": "Starsjy et Hutch",
+            "correct": false
+          },
+          {
+            "label": "Magnum",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0179-2",
+      "type": "mcq",
+      "prompt": "Quel personnage interprétait Ron Howard dans la série « Happy Days » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Charles",
+            "correct": false
+          },
+          {
+            "label": "Howard",
+            "correct": false
+          },
+          {
+            "label": "Arthur",
+            "correct": false
+          },
+          {
+            "label": "Richie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0524-2",
+      "type": "mcq",
+      "prompt": "Quel était le prénom du « Chanteur » de Daniel Balavoine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Charlie",
+            "correct": false
+          },
+          {
+            "label": "Henri",
+            "correct": true
+          },
+          {
+            "label": "Johnny",
+            "correct": false
+          },
+          {
+            "label": "Eddy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0602-2",
+      "type": "mcq",
+      "prompt": "Qui incarne la méchante dans « La petite maison dans la prairie » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stella",
+            "correct": false
+          },
+          {
+            "label": "Nellie",
+            "correct": true
+          },
+          {
+            "label": "Marie",
+            "correct": false
+          },
+          {
+            "label": "Laura",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0493-3",
+      "type": "mcq",
+      "prompt": "Quel personnage de feuilleton conduit une Aston-Martin jaune ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brett Sinclair",
+            "correct": true
+          },
+          {
+            "label": "Jessica Fletcher",
+            "correct": false
+          },
+          {
+            "label": "Arsène Lupin",
+            "correct": false
+          },
+          {
+            "label": "Kojak",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0524-4",
+      "type": "mcq",
+      "prompt": "Quel dessert l'abominable homme des neiges sert-il pour Lio ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Éclair",
+            "correct": false
+          },
+          {
+            "label": "Merveilleux",
+            "correct": false
+          },
+          {
+            "label": "Banana split",
+            "correct": true
+          },
+          {
+            "label": "Dame blanche",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0310-3",
+      "type": "mcq",
+      "prompt": "Quel serpent accompagne le Prince Jean dans « Robin des Bois » de Disney ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Triste Sire",
+            "correct": true
+          },
+          {
+            "label": "Affreux Jojo",
+            "correct": false
+          },
+          {
+            "label": "Troube-Fête",
+            "correct": false
+          },
+          {
+            "label": "Rabat-Joie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0449-4",
+      "type": "mcq",
+      "prompt": "Quel acteur a incarné « l'Homme de l'Atlantide » sur les écrans ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lee Majors",
+            "correct": false
+          },
+          {
+            "label": "Patrick Duffy",
+            "correct": true
+          },
+          {
+            "label": "Mark Harmon",
+            "correct": false
+          },
+          {
+            "label": "Mark Harris",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0363-2",
+      "type": "mcq",
+      "prompt": "Le texte de quel tube de Christophe a été écrit par Jean-Michel Jarre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Dolce Vita",
+            "correct": false
+          },
+          {
+            "label": "Succès Fou",
+            "correct": false
+          },
+          {
+            "label": "Les Mots Bleus",
+            "correct": true
+          },
+          {
+            "label": "Aline",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0071-2",
+      "type": "mcq",
+      "prompt": "Qui incarne le serviteur de Louis de Funès dans « La Folie des grandeurs » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bourvil",
+            "correct": false
+          },
+          {
+            "label": "Yves Montand",
+            "correct": true
+          },
+          {
+            "label": "Coluche",
+            "correct": false
+          },
+          {
+            "label": "Michel Galabru",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0124-2",
+      "type": "mcq",
+      "prompt": "Quel groupe interpréta le titre à succès « I was made for loving you » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kodaline",
+            "correct": false
+          },
+          {
+            "label": "Kiss",
+            "correct": true
+          },
+          {
+            "label": "Korn",
+            "correct": false
+          },
+          {
+            "label": "Kraftwerk",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0187-3",
+      "type": "mcq",
+      "prompt": "Pour qui travaillent les « Drôles de dames » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Charlie",
+            "correct": true
+          },
+          {
+            "label": "Clayton",
+            "correct": false
+          },
+          {
+            "label": "Calvin",
+            "correct": false
+          },
+          {
+            "label": "Chester",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0319-3",
+      "type": "mcq",
+      "prompt": "Quel jeu de cartes, créé en 1971 par Merle Robbins, est édité par Mattel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Korsar",
+            "correct": false
+          },
+          {
+            "label": "Dobble",
+            "correct": false
+          },
+          {
+            "label": "Uno",
+            "correct": true
+          },
+          {
+            "label": "1000 bornes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0217-3",
+      "type": "mcq",
+      "prompt": "Dans quel film rencontre-t-on un androïde scientifique prénommé Ash ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Robocop",
+            "correct": false
+          },
+          {
+            "label": "Alien",
+            "correct": true
+          },
+          {
+            "label": "Matrix",
+            "correct": false
+          },
+          {
+            "label": "Total Recall",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0379-3",
+      "type": "mcq",
+      "prompt": "Quel réalisateur a dirigé « Apocalypse Now » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oliver Stone",
+            "correct": false
+          },
+          {
+            "label": "Francis Ford Coppola",
+            "correct": true
+          },
+          {
+            "label": "David Lynch",
+            "correct": false
+          },
+          {
+            "label": "Ridley Scott",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0415-4",
+      "type": "mcq",
+      "prompt": "Quelle ville japonaise a organisé les Jeux olympiques d'hiver de 1972 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sapporo",
+            "correct": true
+          },
+          {
+            "label": "Nagano",
+            "correct": false
+          },
+          {
+            "label": "Yokohama",
+            "correct": false
+          },
+          {
+            "label": "Kumamoto",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0041-3",
+      "type": "mcq",
+      "prompt": "Quel est le prénom de John Travolta dans le film « Grease » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tony",
+            "correct": false
+          },
+          {
+            "label": "Johnny",
+            "correct": false
+          },
+          {
+            "label": "Billy",
+            "correct": false
+          },
+          {
+            "label": "Danny",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0509-4",
+      "type": "mcq",
+      "prompt": "Quel tube planétaire a permis à Patrick Hernandez de devenir rentier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Born to Somebody",
+            "correct": false
+          },
+          {
+            "label": "Born to Be Alive",
+            "correct": true
+          },
+          {
+            "label": "Born to Sing",
+            "correct": false
+          },
+          {
+            "label": "To be Three",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-annees-70",
+      "title": "Les années 70",
+      "description": "Télévision, musique, cinéma et sport des années 70.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0612-1",
+        "oqdb-0135-3",
+        "oqdb-0448-2",
+        "oqdb-0179-2",
+        "oqdb-0524-2",
+        "oqdb-0602-2",
+        "oqdb-0493-3",
+        "oqdb-0524-4",
+        "oqdb-0310-3",
+        "oqdb-0449-4",
+        "oqdb-0363-2",
+        "oqdb-0071-2",
+        "oqdb-0124-2",
+        "oqdb-0187-3",
+        "oqdb-0319-3",
+        "oqdb-0217-3",
+        "oqdb-0379-3",
+        "oqdb-0415-4",
+        "oqdb-0041-3",
+        "oqdb-0509-4"
+      ]
+    }
+  ]
+}

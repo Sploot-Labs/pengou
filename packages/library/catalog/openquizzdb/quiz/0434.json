@@ -62,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0434-4",
-      "type": "mcq",
-      "prompt": "Qui a écrit le célébrissime morceau « Just Can't Get Enough » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Alan Wilder",
-            "correct": false
-          },
-          {
-            "label": "Martin Gore",
-            "correct": false
-          },
-          {
-            "label": "Dave Gahan",
-            "correct": false
-          },
-          {
-            "label": "Vince Clarke",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

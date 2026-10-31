@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0488-2",
-      "type": "mcq",
-      "prompt": "En boxe, quel coup touche le boxeur adverse en passant sous sa garde ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Direct",
-            "correct": false
-          },
-          {
-            "label": "Esquive",
-            "correct": false
-          },
-          {
-            "label": "Crochet",
-            "correct": false
-          },
-          {
-            "label": "Uppercut",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0488-3",
       "type": "mcq",
       "prompt": "Combien de temps un boxeur est-il compté avant de passer K.O. ?",

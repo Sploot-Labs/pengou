@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0191-1",
-      "type": "mcq",
-      "prompt": "En quelle année Steve Jobs a-t-il racheté le studio d'animation Pixar ?",
-      "payload": {
-        "options": [
-          {
-            "label": "1979",
-            "correct": false
-          },
-          {
-            "label": "1995",
-            "correct": false
-          },
-          {
-            "label": "2001",
-            "correct": false
-          },
-          {
-            "label": "1986",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0191-2",
-      "type": "mcq",
-      "prompt": "Qui est officiellement devenu en 2011 le successeur de Steve Jobs ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Jony Ive",
-            "correct": false
-          },
-          {
-            "label": "Elon Musk",
-            "correct": false
-          },
-          {
-            "label": "Tim Cook",
-            "correct": true
-          },
-          {
-            "label": "Steve Wozniak",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0191-3",
       "type": "mcq",
       "prompt": "Quelle entreprise a-t-il créé dans le garage de sa maison d'enfance ?",

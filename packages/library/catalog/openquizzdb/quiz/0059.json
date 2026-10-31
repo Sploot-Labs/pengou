@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0059-3",
-      "type": "mcq",
-      "prompt": "Le film « Tango et Cash » réunit Sylvester Stallone et quel autre acteur ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Edward Norton",
-            "correct": false
-          },
-          {
-            "label": "Brandon Lee",
-            "correct": false
-          },
-          {
-            "label": "Kurt Russel",
-            "correct": true
-          },
-          {
-            "label": "Russell Crow",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0059-4",
       "type": "mcq",
       "prompt": "Quel film fait se confronter Sylvester Stallone et Antonio Banderas ?",

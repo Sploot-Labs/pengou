@@ -35,64 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0336-2",
-      "type": "mcq",
-      "prompt": "Quel est le métier de Korben Dallas dans « Le Cinquième Élément » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tueur à gages",
-            "correct": false
-          },
-          {
-            "label": "Militaire",
-            "correct": false
-          },
-          {
-            "label": "Chauffeur de taxi",
-            "correct": true
-          },
-          {
-            "label": "Policier",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0336-3",
-      "type": "mcq",
-      "prompt": "Qui est en fait le cinquième élément dans le film du même nom ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Korben Dallas",
-            "correct": false
-          },
-          {
-            "label": "Ruby Rhod",
-            "correct": false
-          },
-          {
-            "label": "Leeloo",
-            "correct": true
-          },
-          {
-            "label": "Cornelius",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0336-4",
       "type": "mcq",
       "prompt": "Combien de pierres faut-il réunir dans « Le Cinquième Élément » ?",

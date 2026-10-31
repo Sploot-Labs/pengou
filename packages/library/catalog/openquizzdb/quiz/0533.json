@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0533-2",
-      "type": "mcq",
-      "prompt": "Qui est la créatrice d'un mouvement sur la glace, le « salto arrière » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Fanny Besson",
-            "correct": false
-          },
-          {
-            "label": "Simone Poujade",
-            "correct": false
-          },
-          {
-            "label": "Gaby Barbey",
-            "correct": false
-          },
-          {
-            "label": "Surya Bonaly",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0533-3",
       "type": "mcq",
       "prompt": "Quelle spécialiste de l'épée est devenue femme politique française ?",
@@ -83,35 +54,6 @@
           },
           {
             "label": "Valérie Barlois",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0533-4",
-      "type": "mcq",
-      "prompt": "Qui est la seule athlète française à être triple championne olympique ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Marie-José Pérec",
-            "correct": true
-          },
-          {
-            "label": "Muriel Hurtis",
-            "correct": false
-          },
-          {
-            "label": "Marita Koch",
-            "correct": false
-          },
-          {
-            "label": "Sandra Myers",
             "correct": false
           }
         ]

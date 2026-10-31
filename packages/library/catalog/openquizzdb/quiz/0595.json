@@ -62,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0595-4",
-      "type": "mcq",
-      "prompt": "Quel intrus se cache parmi ces capitales situées au sud de Paris ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Pékin",
-            "correct": false
-          },
-          {
-            "label": "Vienne",
-            "correct": false
-          },
-          {
-            "label": "Budapest",
-            "correct": false
-          },
-          {
-            "label": "Kiev",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

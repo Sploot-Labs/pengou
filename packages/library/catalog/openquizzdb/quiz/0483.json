@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0483-3",
-      "type": "mcq",
-      "prompt": "Quelle était la nationalité du romancier et essayiste Aldous Huxley ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Grecque",
-            "correct": false
-          },
-          {
-            "label": "Britannique",
-            "correct": true
-          },
-          {
-            "label": "Russe",
-            "correct": false
-          },
-          {
-            "label": "Hongroise",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0483-4",
-      "type": "mcq",
-      "prompt": "Quel écrivain a fait publier les oeuvres de son ami La Boétie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Montesquieu",
-            "correct": false
-          },
-          {
-            "label": "Mallarmé",
-            "correct": false
-          },
-          {
-            "label": "Montaigne",
-            "correct": true
-          },
-          {
-            "label": "Mirabeau",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

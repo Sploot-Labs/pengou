@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0280-2",
-      "type": "mcq",
-      "prompt": "Quel nom porte la console de jeux vidéo conçue par Microsoft ?",
-      "payload": {
-        "options": [
-          {
-            "label": "X Window",
-            "correct": false
-          },
-          {
-            "label": "Xbox",
-            "correct": true
-          },
-          {
-            "label": "Xfinity",
-            "correct": false
-          },
-          {
-            "label": "Xerxès",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0280-4",
       "type": "mcq",
       "prompt": "Quel roi est sorti vainqueur à la bataille des Thermopyles ?",

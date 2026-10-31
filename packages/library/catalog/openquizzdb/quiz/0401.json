@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0401-1",
-      "type": "mcq",
-      "prompt": "Quel groupe de musique anglais est mené par le chanteur Jay Kay ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Jamiroquai",
-            "correct": true
-          },
-          {
-            "label": "Jethro Tull",
-            "correct": false
-          },
-          {
-            "label": "Joy Division",
-            "correct": false
-          },
-          {
-            "label": "Judas Priest",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0401-2",
       "type": "mcq",
       "prompt": "Quel est le surnom de Jean-Paul Maunick, fondateur d'Incognito ?",

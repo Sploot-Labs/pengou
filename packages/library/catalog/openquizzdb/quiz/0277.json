@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0277-1",
-      "type": "mcq",
-      "prompt": "Quelle est la couleur du paprika utilisé en cuisine ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Rouge",
-            "correct": true
-          },
-          {
-            "label": "Jaune",
-            "correct": false
-          },
-          {
-            "label": "Blanche",
-            "correct": false
-          },
-          {
-            "label": "Verte",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0277-2",
       "type": "mcq",
       "prompt": "Le safran est une épice tirée de quelle variété de fleur ?",
@@ -83,35 +54,6 @@
           },
           {
             "label": "Romarin",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0277-4",
-      "type": "mcq",
-      "prompt": "Quelle épice parfume le risotto à la milanaise ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Curcuma",
-            "correct": false
-          },
-          {
-            "label": "Safran",
-            "correct": true
-          },
-          {
-            "label": "Origan",
-            "correct": false
-          },
-          {
-            "label": "Curry",
             "correct": false
           }
         ]

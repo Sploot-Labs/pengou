@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0331-1",
-      "type": "mcq",
-      "prompt": "En quelle année est sorti le Dacia Duster ?",
-      "payload": {
-        "options": [
-          {
-            "label": "2012",
-            "correct": false
-          },
-          {
-            "label": "2006",
-            "correct": false
-          },
-          {
-            "label": "2008",
-            "correct": false
-          },
-          {
-            "label": "2010",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0331-3",
       "type": "mcq",
       "prompt": "Quelle marque automobile disparue est connue pour ses roadsters ?",

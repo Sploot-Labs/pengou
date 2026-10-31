@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0612-2",
+      "type": "mcq",
+      "prompt": "Quel tube disco planétaire du groupe ABBA est sorti en 1979 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "SOS",
+            "correct": false
+          },
+          {
+            "label": "Mamma Mia",
+            "correct": false
+          },
+          {
+            "label": "Waterloo",
+            "correct": false
+          },
+          {
+            "label": "Voulez-Vous",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-1",
+      "type": "mcq",
+      "prompt": "Quelle chanteuse britannique a interprété le hit « Kids in America » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Madonna",
+            "correct": false
+          },
+          {
+            "label": "Bonnie Thyler",
+            "correct": false
+          },
+          {
+            "label": "Kim Carnes",
+            "correct": false
+          },
+          {
+            "label": "Kim Wilde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0617-1",
+      "type": "mcq",
+      "prompt": "Quel est le single disco le plus vendu du label Atlantic ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ten Percent",
+            "correct": false
+          },
+          {
+            "label": "Dancin'",
+            "correct": false
+          },
+          {
+            "label": "Sweet dynamite",
+            "correct": false
+          },
+          {
+            "label": "Le Freak",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0495-3",
+      "type": "mcq",
+      "prompt": "Quel titre du groupe Trust passe encore en radio en France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Serre les poings",
+            "correct": false
+          },
+          {
+            "label": "Certitude",
+            "correct": false
+          },
+          {
+            "label": "Idéal",
+            "correct": false
+          },
+          {
+            "label": "Antisocial",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0220-4",
+      "type": "mcq",
+      "prompt": "Quelle est l'origine nationale du célèbre groupe musical ABBA ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Suédoise",
+            "correct": true
+          },
+          {
+            "label": "Serbe",
+            "correct": false
+          },
+          {
+            "label": "Suisse",
+            "correct": false
+          },
+          {
+            "label": "Slovaque",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0509-2",
+      "type": "mcq",
+      "prompt": "Quelle artiste a chanté « Africa », paru sur son album « Déraisonnable » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rose Laurens",
+            "correct": true
+          },
+          {
+            "label": "Desireless",
+            "correct": false
+          },
+          {
+            "label": "Julie Pietri",
+            "correct": false
+          },
+          {
+            "label": "Zazie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0612-3",
+      "type": "mcq",
+      "prompt": "Quel tube disco fut initialement écrit pour Stacy Lattisaw ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Viva America",
+            "correct": false
+          },
+          {
+            "label": "Ring My Bell",
+            "correct": true
+          },
+          {
+            "label": "Shadow Dancing",
+            "correct": false
+          },
+          {
+            "label": "Copacabana",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0434-4",
+      "type": "mcq",
+      "prompt": "Qui a écrit le célébrissime morceau « Just Can't Get Enough » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alan Wilder",
+            "correct": false
+          },
+          {
+            "label": "Martin Gore",
+            "correct": false
+          },
+          {
+            "label": "Dave Gahan",
+            "correct": false
+          },
+          {
+            "label": "Vince Clarke",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0617-3",
+      "type": "mcq",
+      "prompt": "Qui se demande s'il est sexy dans un tube disco sorti en 1978 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Elton John",
+            "correct": false
+          },
+          {
+            "label": "Rod Stewart",
+            "correct": true
+          },
+          {
+            "label": "Barry White",
+            "correct": false
+          },
+          {
+            "label": "Walter Murphy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0561-2",
+      "type": "mcq",
+      "prompt": "En hommage à quel artiste France Gall a-t-elle chanté « Évidemment » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sacha Distel",
+            "correct": false
+          },
+          {
+            "label": "Daniel Balavoine",
+            "correct": true
+          },
+          {
+            "label": "Coluche",
+            "correct": false
+          },
+          {
+            "label": "Michel Berger",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-3",
+      "type": "mcq",
+      "prompt": "À qui doit-on le célèbre titre « Reggae Night », sorti en 1983 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maxi Priest",
+            "correct": false
+          },
+          {
+            "label": "Jimmy Cliff",
+            "correct": true
+          },
+          {
+            "label": "Alpha Blondy",
+            "correct": false
+          },
+          {
+            "label": "Bob Marley",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-4",
+      "type": "mcq",
+      "prompt": "Quel est le titre du troisième single du groupe Alphaville ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Forever Young",
+            "correct": true
+          },
+          {
+            "label": "Forever Blue",
+            "correct": false
+          },
+          {
+            "label": "Forever Alive",
+            "correct": false
+          },
+          {
+            "label": "Forever Love",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0612-4",
+      "type": "mcq",
+      "prompt": "Quel titre des Gibson Brothers leur a valu quatorze disques d'or ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oooh What a Life",
+            "correct": false
+          },
+          {
+            "label": "Que Sera Mi Vida",
+            "correct": false
+          },
+          {
+            "label": "Mariana",
+            "correct": false
+          },
+          {
+            "label": "Cuba",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0517-4",
+      "type": "mcq",
+      "prompt": "Quel artiste strasbourgeois au grand coeur chantait « Pour le plaisir » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gérard Blanc",
+            "correct": false
+          },
+          {
+            "label": "Alain Souchon",
+            "correct": false
+          },
+          {
+            "label": "Hervé Vilard",
+            "correct": false
+          },
+          {
+            "label": "Herbert Léonard",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0617-4",
+      "type": "mcq",
+      "prompt": "Qui a enregistré « You Make Me Feel » avant Jimmy Somerville ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sylvester",
+            "correct": true
+          },
+          {
+            "label": "Randy Jones",
+            "correct": false
+          },
+          {
+            "label": "Bobby Farrell",
+            "correct": false
+          },
+          {
+            "label": "Dan Hartman",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0565-3",
+      "type": "mcq",
+      "prompt": "Quel album reste à ce jour le plus grand succès de France Gall ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Double Jeu",
+            "correct": false
+          },
+          {
+            "label": "Dancing Disco",
+            "correct": false
+          },
+          {
+            "label": "Babacar",
+            "correct": true
+          },
+          {
+            "label": "Débranche !",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0495-2",
+      "type": "mcq",
+      "prompt": "Quel groupe de rock'n'roll français est devenu populaire avec « Chante » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mano Negra",
+            "correct": false
+          },
+          {
+            "label": "Pacifique",
+            "correct": false
+          },
+          {
+            "label": "Les Forbans",
+            "correct": true
+          },
+          {
+            "label": "Luna Parker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0617-2",
+      "type": "mcq",
+      "prompt": "Quel tube de Diana Ross a été écrit par les membres du groupe Chic ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Surrender",
+            "correct": false
+          },
+          {
+            "label": "Love Child",
+            "correct": false
+          },
+          {
+            "label": "Upside Down",
+            "correct": true
+          },
+          {
+            "label": "Remember Me",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0517-1",
+      "type": "mcq",
+      "prompt": "Comment se prénomme la métisse d'Ibiza chantée par Julien Clerc ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rosanna",
+            "correct": false
+          },
+          {
+            "label": "Mélissa",
+            "correct": true
+          },
+          {
+            "label": "Marbella",
+            "correct": false
+          },
+          {
+            "label": "Cassandra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0476-1",
+      "type": "mcq",
+      "prompt": "Quel était le métier des deux membres du groupe Début de Soirée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Plombiers",
+            "correct": false
+          },
+          {
+            "label": "Avocats",
+            "correct": false
+          },
+          {
+            "label": "Comptables",
+            "correct": false
+          },
+          {
+            "label": "Disc-jockeys",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-tubes-70-80",
+      "title": "Tubes des années 70 et 80",
+      "description": "D'après des questions OpenQuizzDB de Philippe Bresoux.",
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0612-2",
+        "oqdb-0511-1",
+        "oqdb-0617-1",
+        "oqdb-0495-3",
+        "oqdb-0220-4",
+        "oqdb-0509-2",
+        "oqdb-0612-3",
+        "oqdb-0434-4",
+        "oqdb-0617-3",
+        "oqdb-0561-2",
+        "oqdb-0349-3",
+        "oqdb-0511-4",
+        "oqdb-0612-4",
+        "oqdb-0517-4",
+        "oqdb-0617-4",
+        "oqdb-0565-3",
+        "oqdb-0495-2",
+        "oqdb-0617-2",
+        "oqdb-0517-1",
+        "oqdb-0476-1"
+      ]
+    }
+  ]
+}

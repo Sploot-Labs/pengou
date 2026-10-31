@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0561-1",
-      "type": "mcq",
-      "prompt": "Quel titre de France Gall est célèbre pour ses deux niveaux de lecture ?",
-      "payload": {
-        "options": [
-          {
-            "label": "La Cloche",
-            "correct": false
-          },
-          {
-            "label": "La Petite",
-            "correct": false
-          },
-          {
-            "label": "Les Sucettes",
-            "correct": true
-          },
-          {
-            "label": "Il neige",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0561-2",
-      "type": "mcq",
-      "prompt": "En hommage à quel artiste France Gall a-t-elle chanté « Évidemment » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sacha Distel",
-            "correct": false
-          },
-          {
-            "label": "Daniel Balavoine",
-            "correct": true
-          },
-          {
-            "label": "Coluche",
-            "correct": false
-          },
-          {
-            "label": "Michel Berger",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0561-3",
       "type": "mcq",
       "prompt": "Quel titre France Gall a-t-elle sorti en hommage à Ella Fitzgerald ?",

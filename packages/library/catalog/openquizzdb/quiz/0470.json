@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0470-2",
-      "type": "mcq",
-      "prompt": "De quelle couleur sont les célèbres LTI, les taxis londoniens ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Noire",
-            "correct": true
-          },
-          {
-            "label": "Jaune",
-            "correct": false
-          },
-          {
-            "label": "Verte",
-            "correct": false
-          },
-          {
-            "label": "Rouge",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0470-3",
       "type": "mcq",
       "prompt": "À Londres, où êtes-vous si vous circulez dans le « Tube » ?",
@@ -83,35 +54,6 @@
           },
           {
             "label": "Dans le bus",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0470-4",
-      "type": "mcq",
-      "prompt": "À Londres, quel grand édifice porte le nom de Sir Benjamin Hall ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Big Ben",
-            "correct": true
-          },
-          {
-            "label": "Kew Palace",
-            "correct": false
-          },
-          {
-            "label": "Old Bailey",
-            "correct": false
-          },
-          {
-            "label": "Syon House",
             "correct": false
           }
         ]

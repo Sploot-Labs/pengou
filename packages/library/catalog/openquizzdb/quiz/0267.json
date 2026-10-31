@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0267-3",
-      "type": "mcq",
-      "prompt": "Quel athlète Jamaïcain a marqué les Jeux olympiques de 2008 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Dexter Lee",
-            "correct": false
-          },
-          {
-            "label": "Lerone Clarke",
-            "correct": false
-          },
-          {
-            "label": "Ray Stewart",
-            "correct": false
-          },
-          {
-            "label": "Usain Bolt",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0267-4",
-      "type": "mcq",
-      "prompt": "Qui a remporté le saut en longueur à Atlanta en 1996 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Michael Johnson",
-            "correct": false
-          },
-          {
-            "label": "Dwight Phillips",
-            "correct": false
-          },
-          {
-            "label": "Carl Lewis",
-            "correct": true
-          },
-          {
-            "label": "Linford Christie",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

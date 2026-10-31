@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0446-1",
-      "type": "mcq",
-      "prompt": "Dans quel film de Pixar un rat se révèle-t-il excellent cuisinier ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cars",
-            "correct": false
-          },
-          {
-            "label": "Toy Story",
-            "correct": false
-          },
-          {
-            "label": "Monstres et Cie",
-            "correct": false
-          },
-          {
-            "label": "Ratatouille",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0446-2",
-      "type": "mcq",
-      "prompt": "Quelle souris de dessin animé est la plus rapide du Mexique ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Speedy Gonzales",
-            "correct": true
-          },
-          {
-            "label": "Stuart Little",
-            "correct": false
-          },
-          {
-            "label": "Mickey Mouse",
-            "correct": false
-          },
-          {
-            "label": "Jerry",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0446-3",
       "type": "mcq",
       "prompt": "Quels rongeurs sont les héros du film « Misson-G », sorti en 2009 ?",

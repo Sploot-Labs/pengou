@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0265-1",
-      "type": "mcq",
-      "prompt": "Qui présentait le journal de 20 heures de TF1 entre 2008 et 2012 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Marie Drucker",
-            "correct": false
-          },
-          {
-            "label": "Claire Chazal",
-            "correct": false
-          },
-          {
-            "label": "Florence Schaal",
-            "correct": false
-          },
-          {
-            "label": "Laurence Ferrari",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0265-3",
       "type": "mcq",
       "prompt": "Qui a été une figure historique du JT de France 3 ?",
@@ -55,35 +26,6 @@
           {
             "label": "Henri Sannier",
             "correct": true
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0265-4",
-      "type": "mcq",
-      "prompt": "Quel journaliste a présenté le JT avant Anne-Sophie Lapix ?",
-      "payload": {
-        "options": [
-          {
-            "label": "David Pujadas",
-            "correct": true
-          },
-          {
-            "label": "Henri Sannier",
-            "correct": false
-          },
-          {
-            "label": "Michel Cymes",
-            "correct": false
-          },
-          {
-            "label": "Stéphane Bern",
-            "correct": false
           }
         ]
       },

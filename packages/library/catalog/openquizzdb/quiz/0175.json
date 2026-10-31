@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0175-2",
-      "type": "mcq",
-      "prompt": "Quelle marque de jeans mondialement connue fabrique le célèbre 501 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Lee Cooper",
-            "correct": false
-          },
-          {
-            "label": "Levis",
-            "correct": true
-          },
-          {
-            "label": "Lacoste",
-            "correct": false
-          },
-          {
-            "label": "Lindex",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0175-3",
       "type": "mcq",
       "prompt": "Quelle marque vous invite à savourer « un café nommé désir » ?",

@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0553-1",
+      "type": "mcq",
+      "prompt": "De quelle couleur est le corps de Bob l'éponge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jaune",
+            "correct": true
+          },
+          {
+            "label": "Blanche",
+            "correct": false
+          },
+          {
+            "label": "Rose",
+            "correct": false
+          },
+          {
+            "label": "Grise",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0088-2",
+      "type": "mcq",
+      "prompt": "Dans la série « Les Simpson », quel est le prénom du mari de Marge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Harvey",
+            "correct": false
+          },
+          {
+            "label": "Horace",
+            "correct": false
+          },
+          {
+            "label": "Homer",
+            "correct": true
+          },
+          {
+            "label": "Herbert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0115-1",
+      "type": "mcq",
+      "prompt": "Qui n'en finit plus de mourir dans les premières saisons de South Park ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stan",
+            "correct": false
+          },
+          {
+            "label": "Kenny",
+            "correct": true
+          },
+          {
+            "label": "Eric",
+            "correct": false
+          },
+          {
+            "label": "Kyle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0159-1",
+      "type": "mcq",
+      "prompt": "Qui est navigateur au sein de l'équipage du chapeau de paille ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nami",
+            "correct": true
+          },
+          {
+            "label": "Zoro",
+            "correct": false
+          },
+          {
+            "label": "Usopp",
+            "correct": false
+          },
+          {
+            "label": "Robin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0526-1",
+      "type": "mcq",
+      "prompt": "Combien de boules faut-il rassembler pour qu'un voeu soit réalisé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Sept",
+            "correct": true
+          },
+          {
+            "label": "Six",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0446-2",
+      "type": "mcq",
+      "prompt": "Quelle souris de dessin animé est la plus rapide du Mexique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Speedy Gonzales",
+            "correct": true
+          },
+          {
+            "label": "Stuart Little",
+            "correct": false
+          },
+          {
+            "label": "Mickey Mouse",
+            "correct": false
+          },
+          {
+            "label": "Jerry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0451-1",
+      "type": "mcq",
+      "prompt": "Quel personnage et ami de Bob l'éponge vit sous un rocher ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sandy",
+            "correct": false
+          },
+          {
+            "label": "Patrick",
+            "correct": true
+          },
+          {
+            "label": "Eugène",
+            "correct": false
+          },
+          {
+            "label": "Carlo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0115-3",
+      "type": "mcq",
+      "prompt": "Qui est le plus âgé des enfants de la famille Simpson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maggie",
+            "correct": false
+          },
+          {
+            "label": "Lisa",
+            "correct": false
+          },
+          {
+            "label": "Marge",
+            "correct": false
+          },
+          {
+            "label": "Bart",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0033-2",
+      "type": "mcq",
+      "prompt": "Quel lapin est célèbre dans le monde des dessins animés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Porky Pig",
+            "correct": false
+          },
+          {
+            "label": "Elmer Fudd",
+            "correct": false
+          },
+          {
+            "label": "Bugs Bunny",
+            "correct": true
+          },
+          {
+            "label": "Speedy Gonzales",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0426-2",
+      "type": "mcq",
+      "prompt": "Quel est le prénom du jeune héros du dessin animé « Pokémon » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Florent",
+            "correct": false
+          },
+          {
+            "label": "Sacha",
+            "correct": true
+          },
+          {
+            "label": "Pierre",
+            "correct": false
+          },
+          {
+            "label": "Jacky",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0449-1",
+      "type": "mcq",
+      "prompt": "À qui appartient le Crabe Croustillant dans « Bob l'éponge » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monsieur Krabs",
+            "correct": true
+          },
+          {
+            "label": "Carlo",
+            "correct": false
+          },
+          {
+            "label": "Sandy",
+            "correct": false
+          },
+          {
+            "label": "Bob l'éponge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0309-1",
+      "type": "mcq",
+      "prompt": "De quel instrument joue Lisa Simpson, créée par Matt Groening ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Flûte",
+            "correct": false
+          },
+          {
+            "label": "Trompette",
+            "correct": false
+          },
+          {
+            "label": "Saxophone",
+            "correct": true
+          },
+          {
+            "label": "Piano",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0115-2",
+      "type": "mcq",
+      "prompt": "Avec lequel des garçons de sa bande fait souvent équipe Scoubidou ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Logan",
+            "correct": false
+          },
+          {
+            "label": "Sammy",
+            "correct": true
+          },
+          {
+            "label": "Fred",
+            "correct": false
+          },
+          {
+            "label": "Roger",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0159-2",
+      "type": "mcq",
+      "prompt": "Dans « One Piece », sous quel autre nom est connu Marshall D. Teach ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shanks",
+            "correct": false
+          },
+          {
+            "label": "Barbe Noire",
+            "correct": true
+          },
+          {
+            "label": "Barbe Blanche",
+            "correct": false
+          },
+          {
+            "label": "Big Mom",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0526-2",
+      "type": "mcq",
+      "prompt": "En quoi se transforme le petit Son Gohan lors de la pleine Lune ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Loup-garou",
+            "correct": false
+          },
+          {
+            "label": "Fantôme",
+            "correct": false
+          },
+          {
+            "label": "Dragon",
+            "correct": false
+          },
+          {
+            "label": "Singe géant",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0555-3",
+      "type": "mcq",
+      "prompt": "Qui le chat prénommé Tom poursuit-il sans cesse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joshua",
+            "correct": false
+          },
+          {
+            "label": "Jason",
+            "correct": false
+          },
+          {
+            "label": "James",
+            "correct": false
+          },
+          {
+            "label": "Jerry",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0553-3",
+      "type": "mcq",
+      "prompt": "Qu'est-ce Bob l'éponge aime faire avec Sandy pour passer le temps ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Du tennis",
+            "correct": false
+          },
+          {
+            "label": "Du rugby",
+            "correct": false
+          },
+          {
+            "label": "Du karaté",
+            "correct": true
+          },
+          {
+            "label": "Du foot",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0433-1",
+      "type": "mcq",
+      "prompt": "Lequel de ces personnages n'est pas un des enfants de Marge Simpson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Abe",
+            "correct": true
+          },
+          {
+            "label": "Lisa",
+            "correct": false
+          },
+          {
+            "label": "Bart",
+            "correct": false
+          },
+          {
+            "label": "Maggie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0232-3",
+      "type": "mcq",
+      "prompt": "Quel personnage des Looney Tunes dévore tout sur son passage ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tee",
+            "correct": false
+          },
+          {
+            "label": "Tag",
+            "correct": false
+          },
+          {
+            "label": "Taz",
+            "correct": true
+          },
+          {
+            "label": "Tux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0522-2",
+      "type": "mcq",
+      "prompt": "Quel héros de la saga « Dragon Ball Z » est parvenu à tuer Freezer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vegeta",
+            "correct": false
+          },
+          {
+            "label": "Petit-Coeur",
+            "correct": false
+          },
+          {
+            "label": "Goku",
+            "correct": false
+          },
+          {
+            "label": "Trunks",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-dessins-animes",
+      "title": "Dessins animés",
+      "description": "D'après des questions OpenQuizzDB de Philippe Bresoux.",
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0553-1",
+        "oqdb-0088-2",
+        "oqdb-0115-1",
+        "oqdb-0159-1",
+        "oqdb-0526-1",
+        "oqdb-0446-2",
+        "oqdb-0451-1",
+        "oqdb-0115-3",
+        "oqdb-0033-2",
+        "oqdb-0426-2",
+        "oqdb-0449-1",
+        "oqdb-0309-1",
+        "oqdb-0115-2",
+        "oqdb-0159-2",
+        "oqdb-0526-2",
+        "oqdb-0555-3",
+        "oqdb-0553-3",
+        "oqdb-0433-1",
+        "oqdb-0232-3",
+        "oqdb-0522-2"
+      ]
+    }
+  ]
+}

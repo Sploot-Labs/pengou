@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0458-1",
-      "type": "mcq",
-      "prompt": "Que mange-t-on traditionnellement à la Chandeleur ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Croissants",
-            "correct": false
-          },
-          {
-            "label": "Crêpes",
-            "correct": true
-          },
-          {
-            "label": "Brioches",
-            "correct": false
-          },
-          {
-            "label": "Tartes",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0458-2",
       "type": "mcq",
       "prompt": "Quel gâteau décore-t-on avec des sapins et des petits personnages ?",
@@ -55,35 +26,6 @@
           {
             "label": "Bûche de Noël",
             "correct": true
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0458-3",
-      "type": "mcq",
-      "prompt": "Maman est en haut, qui fait des gâteaux, papa est en bas, qui fait...",
-      "payload": {
-        "options": [
-          {
-            "label": "Des dégâts",
-            "correct": false
-          },
-          {
-            "label": "Du nougat",
-            "correct": true
-          },
-          {
-            "label": "Du cinéma",
-            "correct": false
-          },
-          {
-            "label": "Des rasta",
-            "correct": false
           }
         ]
       },

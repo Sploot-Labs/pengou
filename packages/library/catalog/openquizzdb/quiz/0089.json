@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0089-3",
-      "type": "mcq",
-      "prompt": "Quel réalisateur a embauché Clint Eastwood pour la « Trilogie du dollar » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sergio Corbucci",
-            "correct": false
-          },
-          {
-            "label": "Tonino Valerii",
-            "correct": false
-          },
-          {
-            "label": "Giorgio Ferroni",
-            "correct": false
-          },
-          {
-            "label": "Sergio Leone",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0089-4",
       "type": "mcq",
       "prompt": "Avec quelle société Clint Eastwood est-il devenu producteur en 1968 ?",

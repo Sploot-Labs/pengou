@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0338-1",
-      "type": "mcq",
-      "prompt": "Dans quel film d'animation Pixar, Tilt est-il un ouvrier fourmi ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Toy Story",
-            "correct": false
-          },
-          {
-            "label": "Ratatouille",
-            "correct": false
-          },
-          {
-            "label": "1001 pattes",
-            "correct": true
-          },
-          {
-            "label": "Monstres et Cie",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0338-2",
       "type": "mcq",
       "prompt": "Quels insectes sont parfois appelés « fourmis blanches » ?",
@@ -83,35 +54,6 @@
           },
           {
             "label": "La cigale",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0338-4",
-      "type": "mcq",
-      "prompt": "Quel écrivain français a publié une trilogie sur les fourmis ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Alain Grousset",
-            "correct": false
-          },
-          {
-            "label": "Robert Merle",
-            "correct": false
-          },
-          {
-            "label": "Gaston Boca",
-            "correct": false
-          },
-          {
-            "label": "Bernard Werber",
             "correct": true
           }
         ]

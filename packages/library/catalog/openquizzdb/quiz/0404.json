@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0404-1",
-      "type": "mcq",
-      "prompt": "Quel peuple germanique s'installa au Ve siècle dans l'actuelle Espagne ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Wisigoths",
-            "correct": true
-          },
-          {
-            "label": "Ostrogoths",
-            "correct": false
-          },
-          {
-            "label": "Burgondes",
-            "correct": false
-          },
-          {
-            "label": "Jutes",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0404-2",
       "type": "mcq",
       "prompt": "Lequel de ces termes faisait autrefois référence aux Vikings ?",

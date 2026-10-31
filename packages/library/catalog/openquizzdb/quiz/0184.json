@@ -62,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0184-3",
-      "type": "mcq",
-      "prompt": "Quel personnage de Disney voit son nez augmenter de volume ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Pinocchio",
-            "correct": true
-          },
-          {
-            "label": "Pluto",
-            "correct": false
-          },
-          {
-            "label": "Pumbaa",
-            "correct": false
-          },
-          {
-            "label": "Pocahontas",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

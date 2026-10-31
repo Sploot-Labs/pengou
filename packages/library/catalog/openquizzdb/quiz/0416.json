@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0416-2",
-      "type": "mcq",
-      "prompt": "En plus du sanglier, quelle espèce est emblématique de Chambord ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Lapin",
-            "correct": false
-          },
-          {
-            "label": "Autruche",
-            "correct": false
-          },
-          {
-            "label": "Cerf",
-            "correct": true
-          },
-          {
-            "label": "Lémurien",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0416-3",
       "type": "mcq",
       "prompt": "Dans quelle région forestière française se situe le château de Chambord ?",

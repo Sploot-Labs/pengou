@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0371-1",
-      "type": "mcq",
-      "prompt": "Comment appelle-t-on la femelle du renard ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Renardine",
-            "correct": false
-          },
-          {
-            "label": "Renardelle",
-            "correct": false
-          },
-          {
-            "label": "Renardeaude",
-            "correct": false
-          },
-          {
-            "label": "Renarde",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0371-2",
-      "type": "mcq",
-      "prompt": "Quelle vitesse maximale peut atteindre un lièvre ?",
-      "payload": {
-        "options": [
-          {
-            "label": "110 km/h",
-            "correct": false
-          },
-          {
-            "label": "90 km/h",
-            "correct": false
-          },
-          {
-            "label": "50 km/h",
-            "correct": false
-          },
-          {
-            "label": "70 km/h",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0371-3",
       "type": "mcq",
       "prompt": "Quel animal est une sorte de « souris des champs » ?",

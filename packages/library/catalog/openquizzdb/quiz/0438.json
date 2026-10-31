@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0438-3",
-      "type": "mcq",
-      "prompt": "Comment appelle-t-on les membres de la mafia sicilienne ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Mafiosi",
-            "correct": true
-          },
-          {
-            "label": "Marvoli",
-            "correct": false
-          },
-          {
-            "label": "Tifosi",
-            "correct": false
-          },
-          {
-            "label": "Barzotti",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0438-4",
-      "type": "mcq",
-      "prompt": "Quelle ville italienne le « T » du constructeur Fiat représente-t-il ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Trieste",
-            "correct": false
-          },
-          {
-            "label": "Turin",
-            "correct": true
-          },
-          {
-            "label": "Trévise",
-            "correct": false
-          },
-          {
-            "label": "Tivoli",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []
