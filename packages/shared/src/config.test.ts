@@ -78,3 +78,17 @@ describe('loadConfig — inactivité/balayage', () => {
     expect(c.sessionSweepIntervalMs).toBe(1 * 60_000)
   })
 })
+
+describe('loadConfig — plafond de joueurs par partie', () => {
+  it('MAX_PLAYERS_PER_SESSION vaut 300 par défaut', () => {
+    expect(loadConfig({}).maxPlayersPerSession).toBe(300)
+  })
+
+  it('MAX_PLAYERS_PER_SESSION est coercé en nombre', () => {
+    expect(loadConfig({ MAX_PLAYERS_PER_SESSION: '1200' }).maxPlayersPerSession).toBe(1200)
+  })
+
+  it('MAX_PLAYERS_PER_SESSION refuse 0, un négatif et un décimal', () => {
+    for (const v of ['0', '-5', '2.5']) expect(() => loadConfig({ MAX_PLAYERS_PER_SESSION: v })).toThrow()
+  })
+})

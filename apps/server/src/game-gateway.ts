@@ -68,7 +68,14 @@ type SessionMeta = {
    * (`auto:advance`) pour le compte à rebours, et rejoué au snapshot de reconnexion hôte. `null`
    * quand aucune avance n'est planifiée. */
   advanceNextAt: number | null
+  /** Places prises (joueurs inscrits + arrivées en cours), lu et incrémenté sans await entre les deux.
+   * Compteur synchrone : `player:join` réserve sa place AVANT tout `await` (sinon des arrivées
+   * concurrentes dépasseraient `config.maxPlayersPerSession`) et la rend si l'ajout moteur échoue. */
+  seatsTaken: number
 }
+
+/** Refus de `player:join` quand la partie a atteint `config.maxPlayersPerSession`. */
+export const SESSION_FULL_MESSAGE = 'La partie est complète.'
 
 /** Valeurs par défaut de l'enchaînement automatique à la création d'une session. */
 const DEFAULT_AUTO_ADVANCE = true
@@ -395,6 +402,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       autoAdvanceDelayMs: DEFAULT_AUTO_ADVANCE_DELAY_MS,
       advanceTimeout: null,
       advanceNextAt: null,
+      seatsTaken: 0,
     })
     pinToSessionId.set(session.pin, session.id)
     return { session }
@@ -782,6 +790,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           autoAdvanceDelayMs: DEFAULT_AUTO_ADVANCE_DELAY_MS,
           advanceTimeout: null,
           advanceNextAt: null,
+          // Joueurs inscrits avant le redémarrage, déconnectés compris (ils peuvent revenir).
+          seatsTaken: Object.keys(session.players).length,
         }
         sessionMetaByEngineId.set(session.id, meta)
         pinToSessionId.set(session.pin, row.id)
@@ -898,7 +908,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
               const oldPlayer = oldSession.players[sd.playerId]
               if (!oldPlayer) continue
               try {
+                // Pas de contrôle de plafond : la partie d'origine le respectait déjà.
                 const { player } = await engine.addPlayer(neu.id, oldPlayer.nickname)
+                newMeta.seatsTaken += 1
                 const dbPlayer = await withTenantTx(appDb, { tenantId: newMeta.tenantId }, (scope) =>
                   addSessionPlayer(scope.db, newMeta.dbSessionId, { nickname: oldPlayer.nickname, joinToken: player.joinToken }))
                 newMeta.playerDbIds.set(player.id, dbPlayer.id)
@@ -1099,25 +1111,37 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         const meta = sessionMetaByEngineId.get(sessionId)
         if (!meta) throw new Error('session introuvable')
 
-        const { session, player } = await engine.addPlayer(sessionId, nickname)
-        const dbPlayer = await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
-          addSessionPlayer(scope.db, meta.dbSessionId, { nickname, joinToken: player.joinToken }))
-        meta.playerDbIds.set(player.id, dbPlayer.id)
+        // Plafond : place réservée de façon synchrone (aucun `await` entre lecture et incrément),
+        // rendue si le joueur n'a pas pu être ajouté au moteur. Une fois ajouté, il l'occupe même
+        // si la suite échoue (il existe côté moteur et pourrait revenir).
+        if (meta.seatsTaken >= config.maxPlayersPerSession) throw new Error(SESSION_FULL_MESSAGE)
+        meta.seatsTaken += 1
+        let added = false
+        try {
+          const { session, player } = await engine.addPlayer(sessionId, nickname)
+          added = true
+          const dbPlayer = await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
+            addSessionPlayer(scope.db, meta.dbSessionId, { nickname, joinToken: player.joinToken }))
+          meta.playerDbIds.set(player.id, dbPlayer.id)
 
-        const data = socket.data as SocketData
-        data.role = 'player'
-        data.sessionId = sessionId
-        data.playerId = player.id
-        activeSocketIdByPlayerId.set(player.id, socket.id)
-        await socket.join(roomName(sessionId))
+          const data = socket.data as SocketData
+          data.role = 'player'
+          data.sessionId = sessionId
+          data.playerId = player.id
+          activeSocketIdByPlayerId.set(player.id, socket.id)
+          await socket.join(roomName(sessionId))
 
-        reply({ playerId: player.id, joinToken: player.joinToken })
-        io.to(roomName(sessionId)).emit('lobby:update', { players: playersPayload(session) })
+          reply({ playerId: player.id, joinToken: player.joinToken })
+          io.to(roomName(sessionId)).emit('lobby:update', { players: playersPayload(session) })
 
-        // Latecomer (Task 3, hardening) : un joueur qui rejoint EN PLEINE QUESTION (ex. PIN
-        // partagé après le lancement) ne doit pas rester aveugle jusqu'à la question suivante —
-        // on lui rejoue, à LUI SEUL, la même projection anti-triche que host:start/host:next.
-        replayCurrentQuestionTo(socket, session)
+          // Latecomer (Task 3, hardening) : un joueur qui rejoint EN PLEINE QUESTION (ex. PIN
+          // partagé après le lancement) ne doit pas rester aveugle jusqu'à la question suivante —
+          // on lui rejoue, à LUI SEUL, la même projection anti-triche que host:start/host:next.
+          replayCurrentQuestionTo(socket, session)
+        } catch (e) {
+          if (!added) meta.seatsTaken -= 1
+          throw e
+        }
       } catch (e) {
         reply({ error: message(e) })
       }

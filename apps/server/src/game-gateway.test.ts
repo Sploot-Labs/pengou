@@ -49,8 +49,10 @@ type BuiltApp = { app: FastifyInstance; url: string }
 // "redémarrage") ; le test « survit à un redémarrage » ci-dessous passe explicitement un
 // `PersistentSessionStore(ctx.db)` (deux instances successives, même base — simule un process
 // neuf) pour prouver que la réhydratation fonctionne à travers un VRAI aller-retour Postgres.
-async function buildApp(store: SessionStore = new MemorySessionStore()): Promise<BuiltApp> {
-  const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'single' })
+// `env` : variables d'environnement supplémentaires fusionnées dans la config (ex.
+// `MAX_PLAYERS_PER_SESSION` pour les tests de plafond).
+async function buildApp(store: SessionStore = new MemorySessionStore(), env: Record<string, string> = {}): Promise<BuiltApp> {
+  const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'single', ...env })
   const auth = createAuth(ctx.db, {
     secret: 'test-secret-at-least-32-chars-long!!',
     baseURL: 'http://localhost:3000',
@@ -1581,6 +1583,99 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
+  describe('plafond de joueurs par partie (MAX_PLAYERS_PER_SESSION)', () => {
+    it('player:join refuse le joueur de trop avec « La partie est complète. »', async () => {
+      const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '2' })
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-cap-full@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        const bob = await connectClient(url)
+        const carl = await connectClient(url)
+        clients.push(ana, bob, carl)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })).error).toBeUndefined()
+
+        const noLobby = raceNoEvent(carl, 'lobby:update', 400)
+        const res = await ack<{ error?: string; playerId?: string }>(carl, 'player:join', { pin, nickname: 'Carl' })
+        expect(res.error).toBe('La partie est complète.')
+        expect(res.playerId).toBeUndefined()
+        expect(await noLobby).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('player:join concurrents : exactement MAX_PLAYERS_PER_SESSION places accordées', async () => {
+      const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '3' })
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, sessionId, pin } = await setupHostedSession(app, url, 'gateway-cap-race@example.com')
+        clients.push(hostSocket)
+        const players = await Promise.all(Array.from({ length: 5 }, () => connectClient(url)))
+        clients.push(...players)
+        const results = await Promise.all(players.map((c, i) =>
+          ack<{ error?: string; playerId?: string }>(c, 'player:join', { pin, nickname: `J${i}` })))
+        expect(results.filter((r) => r.playerId).length).toBe(3)
+        expect(results.filter((r) => r.error === 'La partie est complète.').length).toBe(2)
+        const rows = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.sessionId, sessionId))
+        expect(rows).toHaveLength(3)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('player:reconnect d’un joueur inscrit passe même quand la partie est pleine', async () => {
+      const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '1' })
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-cap-reconnect@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        clients.push(ana)
+        const joined = await ack<{ error?: string; joinToken?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })
+        expect(joined.error).toBeUndefined()
+        ana.disconnect()
+        await new Promise((r) => setTimeout(r, 200))
+
+        const anaBis = await connectClient(url)
+        clients.push(anaBis)
+        const reconnected = await ack<{ error?: string }>(anaBis, 'player:reconnect', { pin, joinToken: joined.joinToken })
+        expect(reconnected.error).toBeUndefined()
+
+        const bob = await connectClient(url)
+        clients.push(bob)
+        const refused = await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })
+        expect(refused.error).toBe('La partie est complète.')
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('un player:join refusé pour une autre raison ne consomme pas de place', async () => {
+      const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '1' })
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-cap-invalid@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        clients.push(ana)
+        const tooLong = await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'x'.repeat(33) })
+        expect(tooLong.error).toBeDefined()
+        expect(tooLong.error).not.toBe('La partie est complète.')
+        const ok = await ack<{ error?: string; playerId?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })
+        expect(ok.playerId).toBeDefined()
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+  })
+
   describe('host:relaunch (relance depuis le podium)', () => {
     /** Hôte + quizA (session créée dessus) + quizB (non lancé), même cookie. */
     async function setupRelaunch(app: FastifyInstance, url: string, email: string) {
@@ -1809,6 +1904,32 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         // État serveur : seule Ana a été recréée dans la nouvelle session (Bob, déconnecté, non migré).
         const rows = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.sessionId, res.sessionId!))
         expect(rows.map((r) => r.nickname)).toEqual(['Ana'])
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('les joueurs migrés par host:relaunch occupent leurs places dans la nouvelle partie', async () => {
+      const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '1' })
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pinA, quizB } = await setupRelaunch(app, url, 'gateway-relaunch-cap@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        clients.push(ana)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin: pinA, nickname: 'Ana' })).error).toBeUndefined()
+        await toPodium(hostSocket, ana)
+
+        const relaunched = waitFor<{ nickname: string }>(ana, 'session:relaunched')
+        const res = await ack<{ pin?: string; error?: string }>(hostSocket, 'host:relaunch', { quizId: quizB })
+        expect(res.error).toBeUndefined()
+        expect((await relaunched).nickname).toBe('Ana')
+
+        const bob = await connectClient(url)
+        clients.push(bob)
+        const refused = await ack<{ error?: string }>(bob, 'player:join', { pin: res.pin, nickname: 'Bob' })
+        expect(refused.error).toBe('La partie est complète.')
       } finally {
         for (const c of clients) c.disconnect()
         await app.close()
@@ -2256,6 +2377,38 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         // par arriver (readingTime complet, 2 s, depuis le redémarrage) — sans reprogrammation,
         // plus aucun minuteur ne courrait jamais pour cette session dans le nouveau process.
         await showPromise
+      } finally {
+        for (const c of clients2) c.disconnect()
+        await app2.close()
+      }
+    }, 30_000)
+
+    it('après redémarrage, les joueurs inscrits occupent toujours leurs places (plafond)', async () => {
+      const capEnv = { MAX_PLAYERS_PER_SESSION: '1' }
+      const store1 = new PersistentSessionStore(ctx.db)
+      const { app: app1, url: url1 } = await buildApp(store1, capEnv)
+      const clients1: ClientSocket[] = []
+      let pin = ''
+      try {
+        const hosted = await setupHostedSession(app1, url1, 'gateway-restart-cap@example.com')
+        clients1.push(hosted.hostSocket)
+        pin = hosted.pin
+        const ana = await connectClient(url1)
+        clients1.push(ana)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+      } finally {
+        for (const c of clients1) c.disconnect()
+        await app1.close()
+      }
+
+      const store2 = new PersistentSessionStore(ctx.db)
+      const { app: app2, url: url2 } = await buildApp(store2, capEnv)
+      const clients2: ClientSocket[] = []
+      try {
+        const bob = await connectClient(url2)
+        clients2.push(bob)
+        const refused = await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })
+        expect(refused.error).toBe('La partie est complète.')
       } finally {
         for (const c of clients2) c.disconnect()
         await app2.close()
