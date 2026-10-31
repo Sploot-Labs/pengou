@@ -649,3 +649,94 @@ describe('game engine — cycle déterministe complet', () => {
     })
   })
 })
+
+describe('game engine : chemin de réponse sans copie de la session', () => {
+  function makeSpyStore() {
+    const inner = new MemorySessionStore()
+    const calls = { get: 0, save: 0, peek: 0, recordAnswer: 0 }
+    const spy = {
+      get: (id: string) => {
+        calls.get++
+        return inner.get(id)
+      },
+      peek: (id: string) => {
+        calls.peek++
+        return inner.peek(id)
+      },
+      recordAnswer: (...args: Parameters<MemorySessionStore['recordAnswer']>) => {
+        calls.recordAnswer++
+        return inner.recordAnswer(...args)
+      },
+      getByPin: (pin: string) => inner.getByPin(pin),
+      save: (s: Parameters<MemorySessionStore['save']>[0]) => {
+        calls.save++
+        return inner.save(s)
+      },
+      delete: (id: string) => inner.delete(id),
+      evict: (id: string) => inner.evict(id),
+    }
+    return { spy, calls }
+  }
+
+  async function setup() {
+    const clock = makeClock(0)
+    const { spy, calls } = makeSpyStore()
+    const engine = createEngine({ store: spy, now: clock.now, genPin: makePinGen(['123456']), genId: makeIdGen('id') })
+    const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion, tfQuestion] })
+    const { player } = await engine.addPlayer(session.id, 'Alice')
+    await engine.startQuestion(session.id)
+    return { clock, engine, calls, session, player }
+  }
+
+  it("une réponse acceptée n'appelle ni get ni save et appelle recordAnswer une fois", async () => {
+    const { engine, calls, session, player } = await setup()
+    calls.get = calls.save = calls.peek = calls.recordAnswer = 0
+    const res = await engine.submitAnswer(session.id, player.id, { optionIndex: 1 })
+    expect(res.accepted).toBe(true)
+    expect(calls.get).toBe(0)
+    expect(calls.save).toBe(0)
+    expect(calls.recordAnswer).toBe(1)
+  })
+
+  it("progress n'appelle pas get", async () => {
+    const { engine, calls, session } = await setup()
+    calls.get = 0
+    await engine.progress(session.id)
+    expect(calls.get).toBe(0)
+  })
+
+  it('deux submitAnswer du même joueur lancés sans attendre : une seule acceptation', async () => {
+    const { engine, session, player } = await setup()
+    const [a, b] = await Promise.all([
+      engine.submitAnswer(session.id, player.id, { optionIndex: 1 }),
+      engine.submitAnswer(session.id, player.id, { optionIndex: 0 }),
+    ])
+    expect([a.accepted, b.accepted].filter(Boolean)).toHaveLength(1)
+    const rejected = a.accepted ? b : a
+    expect(rejected.reason).toBe('réponse déjà soumise pour cette question')
+  })
+
+  it('hors phase question : refus avec la même reason', async () => {
+    const { engine, session, player } = await setup()
+    await engine.reveal(session.id)
+    const res = await engine.submitAnswer(session.id, player.id, { optionIndex: 1 })
+    expect(res).toEqual({ accepted: false, reason: 'hors phase question' })
+  })
+
+  it('session introuvable : même erreur que getSession', async () => {
+    const { engine } = await setup()
+    await expect(engine.submitAnswer('nope', 'p', {})).rejects.toThrow('session introuvable : nope')
+    await expect(engine.peekSession('nope')).rejects.toThrow('session introuvable : nope')
+  })
+
+  it('une réponse puis reveal crédite les points une seule fois', async () => {
+    const { engine, clock, session, player } = await setup()
+    clock.set(1000)
+    await engine.submitAnswer(session.id, player.id, { optionIndex: 1 })
+    const first = await engine.reveal(session.id)
+    const score = first.players[player.id]!.score
+    expect(score).toBeGreaterThan(0)
+    const second = await engine.reveal(session.id)
+    expect(second.players[player.id]!.score).toBe(score)
+  })
+})

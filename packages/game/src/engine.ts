@@ -92,7 +92,7 @@ export interface Engine {
    * qu'il y a AU MOINS un joueur connecté, et que CHAQUE joueur connecté a soumis une réponse
    * pour la question courante. Un joueur déconnecté ne bloque jamais (ignoré). Zéro joueur
    * connecté ⟹ false (ne jamais auto-révéler une salle vide). */
-  allConnectedAnswered(session: GameSession): boolean
+  allConnectedAnswered(session: Readonly<GameSession>): boolean
   playerQuestionView(session: GameSession): PlayerQuestionView
   /** Projection « temps de lecture » — énoncé SEUL (jamais les options/réponses possibles :
    * anti-triche, cohérent avec `playerQuestionView`). */
@@ -111,6 +111,9 @@ export interface Engine {
    * révélée avant `host:next`, ou si `host:reveal` est invoqué hors phase question) sans
    * dupliquer l'état moteur côté passerelle. */
   getSession(sessionId: string): Promise<GameSession>
+  /** Lecture seule SANS copie (objet en cache du store, jamais à modifier) : réservée aux chemins
+   * chauds (réponse de joueur). Lève la même erreur que `getSession` si la session est introuvable. */
+  peekSession(sessionId: string): Promise<Readonly<GameSession>>
   /** Re-ancre à `now()` le chrono de la phase COURANTE, sans changer de phase ni avancer
    * `currentIndex` (Task 4, réhydratation au boot) : après un redémarrage serveur, le chrono
    * repart à zéro plutôt que d'hériter d'un `questionStartedAt`/`readingStartedAt` figé à
@@ -136,6 +139,12 @@ export function createEngine(deps: EngineDeps): Engine {
     return session
   }
 
+  async function requirePeek(sessionId: string): Promise<Readonly<GameSession>> {
+    const session = await store.peek(sessionId)
+    if (!session) throw new Error(`session introuvable : ${sessionId}`)
+    return session
+  }
+
   // Borne le retry : un genPin dégénéré/épuisé (ex. espace de PIN saturé, générateur bugué) ne
   // doit jamais faire boucler createSession indéfiniment.
   const MAX_PIN_ATTEMPTS = 50
@@ -150,7 +159,7 @@ export function createEngine(deps: EngineDeps): Engine {
     throw new Error('impossible de générer un PIN unique')
   }
 
-  function currentQuestion(session: GameSession): EngineQuestion | undefined {
+  function currentQuestion(session: Readonly<GameSession>): EngineQuestion | undefined {
     return session.questions[session.currentIndex]
   }
 
@@ -225,7 +234,7 @@ export function createEngine(deps: EngineDeps): Engine {
     },
 
     async submitAnswer(sessionId, playerId, rawAnswer) {
-      const session = await requireSession(sessionId)
+      const session = await requirePeek(sessionId)
 
       if (session.phase !== 'question') {
         return { accepted: false, reason: 'hors phase question' }
@@ -265,10 +274,10 @@ export function createEngine(deps: EngineDeps): Engine {
       const points = def.score(question.payload, answer, { timeMs, maxMs, basePoints: question.basePoints })
 
       const submitted: SubmittedAnswer = { answer, timeMs, correct, points }
-      if (!session.answers[session.currentIndex]) session.answers[session.currentIndex] = {}
-      session.answers[session.currentIndex]![playerId] = submitted
 
-      await store.save(session)
+      // Aucun await entre la lecture par peek et l'insertion : la vérification « déjà répondu » et
+      // l'enregistrement restent atomiques sur la boucle d'événements.
+      await store.recordAnswer(sessionId, session.currentIndex, playerId, submitted)
       return { accepted: true }
     },
 
@@ -390,7 +399,7 @@ export function createEngine(deps: EngineDeps): Engine {
     },
 
     async progress(sessionId) {
-      const session = await requireSession(sessionId)
+      const session = await requirePeek(sessionId)
       const total = Object.keys(session.players).length
       const answered = Object.keys(session.answers[session.currentIndex] ?? {}).length
       return { answered, total }
@@ -398,6 +407,10 @@ export function createEngine(deps: EngineDeps): Engine {
 
     async getSession(sessionId) {
       return requireSession(sessionId)
+    },
+
+    async peekSession(sessionId) {
+      return requirePeek(sessionId)
     },
 
     async reanchorTimer(sessionId) {

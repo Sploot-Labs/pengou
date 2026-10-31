@@ -1181,7 +1181,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (result.accepted) {
           try {
             const meta = sessionMetaByEngineId.get(data.sessionId)
-            const session = await engine.getSession(data.sessionId)
+            const session = await engine.peekSession(data.sessionId)
             if (meta && engine.allConnectedAnswered(session) && !meta.autoRevealedRounds.has(session.currentIndex)) {
               meta.autoRevealedRounds.add(session.currentIndex)
               await doRevealBySession(data.sessionId, meta)
