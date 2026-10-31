@@ -12,7 +12,7 @@ import { buildServer } from './app.js'
 import { registerAuth } from './auth-plugin.js'
 import { registerEditor } from './editor.js'
 import { attachRealtime } from './realtime.js'
-import { registerGameGateway } from './game-gateway.js'
+import { registerGameGateway, type GameGatewayDeps } from './game-gateway.js'
 import { PersistentSessionStore } from './persistent-store.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
@@ -51,7 +51,12 @@ type BuiltApp = { app: FastifyInstance; url: string; sweepAbandonedSessions: () 
 // neuf) pour prouver que la réhydratation fonctionne à travers un VRAI aller-retour Postgres.
 // `env` : variables d'environnement supplémentaires fusionnées dans la config (ex.
 // `MAX_PLAYERS_PER_SESSION` pour les tests de plafond).
-async function buildApp(store: SessionStore = new MemorySessionStore(), env: Record<string, string> = {}): Promise<BuiltApp> {
+// `gateway` : réglages de test de la passerelle (ex. `lobbyBroadcastIntervalMs`).
+async function buildApp(
+  store: SessionStore = new MemorySessionStore(),
+  env: Record<string, string> = {},
+  gateway: Pick<GameGatewayDeps, 'lobbyBroadcastIntervalMs'> = {},
+): Promise<BuiltApp> {
   const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'single', ...env })
   const auth = createAuth(ctx.db, {
     secret: 'test-secret-at-least-32-chars-long!!',
@@ -72,7 +77,7 @@ async function buildApp(store: SessionStore = new MemorySessionStore(), env: Rec
   // Réhydratation (Task 4) : `registerGameGateway` réhydrate les sessions actives à son montage
   // — `await` ici garantit qu'elle est terminée avant que le test n'interagisse avec l'app (pas
   // de course entre la reprise et les premiers `player:join`/`host:reconnect` du test).
-  const { sweepAbandonedSessions } = await registerGameGateway(io, { engine, systemDb: ctx.db, appDb: ctx.appDb, auth, config, store })
+  const { sweepAbandonedSessions } = await registerGameGateway(io, { engine, systemDb: ctx.db, appDb: ctx.appDb, auth, config, store, ...gateway })
 
   await app.listen({ port: 0, host: '127.0.0.1' })
   const address = app.server.address()
@@ -2652,7 +2657,13 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }, 20_000)
 
     it('session balayée pendant une diffusion différée : minuteur annulé, rien n\'est émis, aucune erreur', async () => {
-      const { app, url, sweepAbandonedSessions } = await buildApp()
+      // Fenêtre de coalescence de plus de deux heures, valeur propre au test : l'arrivée de Bob
+      // est forcément différée et sa diffusion forcément encore en attente au balayage, quelle
+      // que soit la lenteur de la machine. Le minuteur se repère à son délai, qu'aucun autre
+      // minuteur du serveur n'atteint (le plus long, la durée de vie d'une connexion Postgres,
+      // reste sous l'heure).
+      const intervalMs = 7_777_777
+      const { app, url, sweepAbandonedSessions } = await buildApp(undefined, {}, { lobbyBroadcastIntervalMs: intervalMs })
       const clients: ClientSocket[] = []
       const setTimeoutSpy = vi.spyOn(globalThis, 'setTimeout')
       const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout')
@@ -2674,20 +2685,25 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
         await hostUpdates.until((u) => u.players.length === 1) // diffusion immédiate (en tête)
 
-        // Arrivée suivante dans la fenêtre de 250 ms : diffusion différée, un minuteur en attente.
+        // Arrivée suivante dans la fenêtre : diffusion différée, un seul minuteur en attente.
         setTimeoutSpy.mockClear()
-        const afterSweep: string[] = []
         expect((await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })).error).toBeUndefined()
         const lobbyTimers = setTimeoutSpy.mock.calls
-          .map((call, i) => ({ fn: String(call[0]), handle: setTimeoutSpy.mock.results[i]?.value }))
-          .filter((t) => t.fn.includes('lobbyBroadcastTimeout'))
+          .map((call, i) => ({ fn: call[0], delay: Number(call[1]), handle: setTimeoutSpy.mock.results[i]?.value }))
+          .filter((t) => t.delay > intervalMs - 600_000 && t.delay <= intervalMs)
         expect(lobbyTimers).toHaveLength(1)
+        const lobbyTimer = lobbyTimers[0]!
 
         await sweepAbandonedSessions()
-        expect(clearTimeoutSpy).toHaveBeenCalledWith(lobbyTimers[0]!.handle)
+        expect(clearTimeoutSpy).toHaveBeenCalledWith(lobbyTimer.handle)
 
+        // Échéance simulée après le balayage (comme si l'annulation avait été manquée) : la
+        // diffusion relit une session disparue, n'émet rien et ne laisse échapper aucune erreur.
+        const afterSweep: string[] = []
         hostSocket.on('lobby:update', () => afterSweep.push('lobby:update'))
         for (const c of [hostSocket, ana, bob]) c.on('lobby:count', () => afterSweep.push('lobby:count'))
+        expect(typeof lobbyTimer.fn).toBe('function')
+        ;(lobbyTimer.fn as () => void)()
         await sleepMs(500)
         expect(afterSweep).toEqual([])
         expect(unhandled).toEqual([])

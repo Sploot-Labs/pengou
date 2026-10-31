@@ -21,6 +21,10 @@ export type GameGatewayDeps = {
   auth: Auth
   config: AppConfig
   store: SessionStore
+  /** Fenêtre de coalescence de la diffusion du lobby, `LOBBY_BROADCAST_INTERVAL_MS` par défaut.
+   * Réglable pour les tests seulement : une fenêtre très longue garantit qu'une diffusion différée
+   * est encore en attente au moment voulu, quelle que soit la charge de la machine. */
+  lobbyBroadcastIntervalMs?: number
 }
 
 /** Métadonnées côté passerelle reliant une session moteur (mémoire) à sa persistance en base. */
@@ -165,7 +169,7 @@ function playersPayload(session: GameSession): Array<{ id: string; nickname: str
 }
 
 export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Promise<{ sweepAbandonedSessions: () => Promise<void> }> {
-  const { engine, systemDb, appDb, auth, config, store } = deps
+  const { engine, systemDb, appDb, auth, config, store, lobbyBroadcastIntervalMs = LOBBY_BROADCAST_INTERVAL_MS } = deps
 
   // État de la passerelle : local à CET appel de registerGameGateway (donc à CETTE instance
   // `io`) — pas de Map au niveau module, pour ne pas fuiter entre plusieurs serveurs
@@ -270,7 +274,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   function scheduleLobbyBroadcast(sessionId: string): void {
     const meta = sessionMetaByEngineId.get(sessionId)
     if (!meta || meta.lobbyBroadcastTimeout) return
-    const delay = meta.lastLobbyBroadcastAt + LOBBY_BROADCAST_INTERVAL_MS - Date.now()
+    const delay = meta.lastLobbyBroadcastAt + lobbyBroadcastIntervalMs - Date.now()
     if (delay <= 0) {
       void broadcastLobby(sessionId, meta)
       return
