@@ -3138,9 +3138,41 @@
 }
 
 .question-image--player {
-  max-height: 28vh;
+  max-height: min(16vh, 110px);
+  max-height: min(16dvh, 110px);
   width: 100%;
   object-fit: contain;
+}
+
+/* Question avec image sur le téléphone : les réponses doivent rester visibles
+   sans défiler dès 360x640. Image plafonnée ci-dessus, écarts et contrôles
+   resserrés ici (sans image, la mise en page d'origine est inchangée). */
+.player-question:has(.question-image) {
+  gap: 10px;
+}
+.player-question:has(.question-image) .player-tiles .ab-tile {
+  min-height: 88px;
+  padding: 12px 14px;
+  gap: 8px;
+}
+.player-question:has(.question-image) .player-tiles .ab-tile__shape svg {
+  width: 28px;
+  height: 28px;
+}
+.player-question:has(.question-image) .player-duo .ab-tile {
+  min-height: 72px;
+}
+.player-question:has(.question-image) .player-slider {
+  gap: 8px;
+}
+.player-question:has(.question-image) .player-slider__value {
+  padding: 8px 20px;
+}
+.player-question:has(.question-image) .player-slider__value output {
+  font-size: 40px;
+}
+.player-question:has(.question-image) .player-slider input[type="range"] {
+  height: 48px;
 }
 
 .question-image--big {
