@@ -499,35 +499,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0365-3",
-      "type": "mcq",
-      "prompt": "Quelle région portugaise est célèbre pour ses falaises ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Lisbonne",
-            "correct": false
-          },
-          {
-            "label": "Madère",
-            "correct": false
-          },
-          {
-            "label": "Porto",
-            "correct": false
-          },
-          {
-            "label": "Algarve",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0365-4",
       "type": "mcq",
       "prompt": "Quel pays est le seul voisin terrestre du Portugal ?",
@@ -584,7 +555,6 @@
         "oqdb-0353-4",
         "oqdb-0365-1",
         "oqdb-0365-2",
-        "oqdb-0365-3",
         "oqdb-0365-4"
       ]
     }

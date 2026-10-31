@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0117-2",
-      "type": "mcq",
-      "prompt": "Quelle actrice de la saga Harry Potter est devenue une voix féministe ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Gal Gadot",
-            "correct": false
-          },
-          {
-            "label": "Margot Robbie",
-            "correct": false
-          },
-          {
-            "label": "Jennifer Lawrence",
-            "correct": false
-          },
-          {
-            "label": "Emma Watson",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0117-3",
       "type": "mcq",
       "prompt": "En quoi les Obama ont-ils transformé le jardin de la Maison Blanche ?",

@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0159-3",
-      "type": "mcq",
-      "prompt": "Dans « One Piece », qui est le capitaine de l'équipage du Heart ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Law",
-            "correct": true
-          },
-          {
-            "label": "Big Mom",
-            "correct": false
-          },
-          {
-            "label": "Baggy",
-            "correct": false
-          },
-          {
-            "label": "Kid",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0159-4",
       "type": "mcq",
       "prompt": "De quelle race font partie Dorry et Broggy, rencontrés sur Little Garden ?",

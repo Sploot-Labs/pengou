@@ -33,35 +33,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0533-3",
-      "type": "mcq",
-      "prompt": "Quelle spécialiste de l'épée est devenue femme politique française ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Laura Flessel",
-            "correct": true
-          },
-          {
-            "label": "Timea Nagy",
-            "correct": false
-          },
-          {
-            "label": "Britta Heidemann",
-            "correct": false
-          },
-          {
-            "label": "Valérie Barlois",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

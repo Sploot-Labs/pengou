@@ -33,35 +33,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0521-4",
-      "type": "mcq",
-      "prompt": "Lequel de ces acteurs n'apparaît pas dans « Le gendarme se marie » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Maurice Rich",
-            "correct": true
-          },
-          {
-            "label": "Christian Marin",
-            "correct": false
-          },
-          {
-            "label": "Jean Lefebvre",
-            "correct": false
-          },
-          {
-            "label": "Michel Galabru",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

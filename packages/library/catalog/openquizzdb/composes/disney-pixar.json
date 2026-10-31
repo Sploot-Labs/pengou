@@ -238,35 +238,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0268-1",
-      "type": "mcq",
-      "prompt": "À quel héros des studios Pixar Tom Hanks prête-t-il sa voix ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Woody",
-            "correct": true
-          },
-          {
-            "label": "Wolverine",
-            "correct": false
-          },
-          {
-            "label": "Wukong",
-            "correct": false
-          },
-          {
-            "label": "Walter",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0345-2",
       "type": "mcq",
       "prompt": "Quelle est la particularité physique de Scar dans « Le Roi Lion » ?",
@@ -526,64 +497,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0410-4",
-      "type": "mcq",
-      "prompt": "Quel dessin retrouve-t-on sur le tee-shirt noir de Sid dans « Toy Story » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tête de mort",
-            "correct": true
-          },
-          {
-            "label": "Nombre 95",
-            "correct": false
-          },
-          {
-            "label": "Éclair",
-            "correct": false
-          },
-          {
-            "label": "Smiley",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0407-3",
-      "type": "mcq",
-      "prompt": "Comment s'appelle le chien d'Andy dans la saga « Toy Story » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Razmotte",
-            "correct": true
-          },
-          {
-            "label": "Lotso",
-            "correct": false
-          },
-          {
-            "label": "Pile-Poil",
-            "correct": false
-          },
-          {
-            "label": "Scud",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": [
@@ -604,7 +517,6 @@
         "oqdb-0446-1",
         "oqdb-0291-3",
         "oqdb-0452-3",
-        "oqdb-0268-1",
         "oqdb-0345-2",
         "oqdb-0177-2",
         "oqdb-0338-1",
@@ -613,9 +525,7 @@
         "oqdb-0184-3",
         "oqdb-0452-2",
         "oqdb-0103-2",
-        "oqdb-0345-4",
-        "oqdb-0410-4",
-        "oqdb-0407-3"
+        "oqdb-0345-4"
       ]
     }
   ]

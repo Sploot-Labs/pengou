@@ -325,35 +325,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0389-1",
-      "type": "mcq",
-      "prompt": "Quelle est la couleur du fluide vital qui remplace le sang des androïdes ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Vert",
-            "correct": false
-          },
-          {
-            "label": "Jaune",
-            "correct": false
-          },
-          {
-            "label": "Blanc",
-            "correct": true
-          },
-          {
-            "label": "Rouge",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0389-2",
       "type": "mcq",
       "prompt": "Quel androïde Weyland considère-t-il comme le fils qu'il n'aura jamais ?",
@@ -433,7 +404,6 @@
         "oqdb-0384-2",
         "oqdb-0384-3",
         "oqdb-0384-4",
-        "oqdb-0389-1",
         "oqdb-0389-2",
         "oqdb-0389-4"
       ]

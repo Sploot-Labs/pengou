@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0599-4",
-      "type": "mcq",
-      "prompt": "Dans quel dessin animé peux-tu entendre la phrase « Hakuna matata » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Toy Story",
-            "correct": false
-          },
-          {
-            "label": "Cars",
-            "correct": false
-          },
-          {
-            "label": "Le Roi lion",
-            "correct": true
-          },
-          {
-            "label": "Dinosaure",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

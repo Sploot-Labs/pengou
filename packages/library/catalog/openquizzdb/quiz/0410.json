@@ -62,6 +62,35 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
+    },
+    {
+      "id": "oqdb-0410-4",
+      "type": "mcq",
+      "prompt": "Quel dessin retrouve-t-on sur le tee-shirt noir de Sid dans « Toy Story » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tête de mort",
+            "correct": true
+          },
+          {
+            "label": "Nombre 95",
+            "correct": false
+          },
+          {
+            "label": "Éclair",
+            "correct": false
+          },
+          {
+            "label": "Smiley",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
     }
   ],
   "quizzes": []

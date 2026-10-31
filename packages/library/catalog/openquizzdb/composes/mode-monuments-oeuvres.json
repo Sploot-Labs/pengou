@@ -328,7 +328,7 @@
   "quizzes": [
     {
       "id": "oqdb-quiz-mode-monuments-oeuvres",
-      "title": "Mode, monuments et chefs-d'oeuvre",
+      "title": "Mode, monuments et chefs-d'œuvre",
       "description": "D'après des questions OpenQuizzDB de Philippe Bresoux.",
       "theme": "art",
       "difficulty": "moyen",

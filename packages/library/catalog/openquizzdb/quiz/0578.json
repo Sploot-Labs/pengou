@@ -62,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0578-4",
-      "type": "mcq",
-      "prompt": "Quelle est la langue officielle du golf, fixée en raison de ses origines ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Français",
-            "correct": false
-          },
-          {
-            "label": "Allemand",
-            "correct": false
-          },
-          {
-            "label": "Anglais",
-            "correct": true
-          },
-          {
-            "label": "Espagnol",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

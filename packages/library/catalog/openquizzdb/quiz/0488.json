@@ -62,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0488-4",
-      "type": "mcq",
-      "prompt": "Si vous pesez 48 kilos, dans quelle catégorie boxeriez-vous ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Pailles",
-            "correct": false
-          },
-          {
-            "label": "Coqs",
-            "correct": false
-          },
-          {
-            "label": "Plumes",
-            "correct": false
-          },
-          {
-            "label": "Mouches",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

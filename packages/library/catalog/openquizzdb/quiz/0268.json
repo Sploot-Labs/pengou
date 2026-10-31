@@ -6,6 +6,35 @@
   },
   "questions": [
     {
+      "id": "oqdb-0268-1",
+      "type": "mcq",
+      "prompt": "À quel héros des studios Pixar Tom Hanks prête-t-il sa voix ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Woody",
+            "correct": true
+          },
+          {
+            "label": "Wolverine",
+            "correct": false
+          },
+          {
+            "label": "Wukong",
+            "correct": false
+          },
+          {
+            "label": "Walter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
       "id": "oqdb-0268-2",
       "type": "mcq",
       "prompt": "Dans quel château a eu lieu le mariage de Charles et Camilla ?",

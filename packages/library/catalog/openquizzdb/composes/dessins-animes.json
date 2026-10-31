@@ -93,25 +93,25 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0159-1",
+      "id": "oqdb-0159-3",
       "type": "mcq",
-      "prompt": "Qui est navigateur au sein de l'équipage du chapeau de paille ?",
+      "prompt": "Dans « One Piece », qui est le capitaine de l'équipage du Heart ?",
       "payload": {
         "options": [
           {
-            "label": "Nami",
+            "label": "Law",
             "correct": true
           },
           {
-            "label": "Zoro",
+            "label": "Big Mom",
             "correct": false
           },
           {
-            "label": "Usopp",
+            "label": "Baggy",
             "correct": false
           },
           {
-            "label": "Robin",
+            "label": "Kid",
             "correct": false
           }
         ]
@@ -122,26 +122,26 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0526-1",
+      "id": "oqdb-0446-4",
       "type": "mcq",
-      "prompt": "Combien de boules faut-il rassembler pour qu'un voeu soit réalisé ?",
+      "prompt": "À quelle série d'animation Eric et Ramzi ont-ils prêté leur voix ?",
       "payload": {
         "options": [
           {
-            "label": "Cinq",
+            "label": "South Park",
             "correct": false
           },
           {
-            "label": "Quatre",
+            "label": "Futurama",
             "correct": false
           },
           {
-            "label": "Sept",
+            "label": "Les Griffin",
+            "correct": false
+          },
+          {
+            "label": "Ratz",
             "correct": true
-          },
-          {
-            "label": "Six",
-            "correct": false
           }
         ]
       },
@@ -599,8 +599,8 @@
         "oqdb-0553-1",
         "oqdb-0088-2",
         "oqdb-0115-1",
-        "oqdb-0159-1",
-        "oqdb-0526-1",
+        "oqdb-0159-3",
+        "oqdb-0446-4",
         "oqdb-0446-2",
         "oqdb-0451-1",
         "oqdb-0115-3",

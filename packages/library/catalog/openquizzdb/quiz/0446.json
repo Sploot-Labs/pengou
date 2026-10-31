@@ -33,35 +33,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0446-4",
-      "type": "mcq",
-      "prompt": "À quelle série d'animation Eric et Ramzi ont-ils prêté leur voix ?",
-      "payload": {
-        "options": [
-          {
-            "label": "South Park",
-            "correct": false
-          },
-          {
-            "label": "Futurama",
-            "correct": false
-          },
-          {
-            "label": "Les Griffin",
-            "correct": false
-          },
-          {
-            "label": "Ratz",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

@@ -62,8 +62,8 @@ export const QUIZZES: QuizPlan[] = [
       'oqdb-0553-1',
       'oqdb-0088-2',
       'oqdb-0115-1',
-      'oqdb-0159-1',
-      'oqdb-0526-1',
+      'oqdb-0159-3',
+      'oqdb-0446-4',
       'oqdb-0446-2',
       'oqdb-0451-1',
       'oqdb-0115-3',
@@ -157,7 +157,7 @@ export const QUIZZES: QuizPlan[] = [
       'oqdb-0209-1',
       'oqdb-0579-4',
       'oqdb-0412-4',
-      'oqdb-0587-3',
+      'oqdb-0391-3',
       'oqdb-0167-3',
       'oqdb-0593-4',
     ],
@@ -169,7 +169,7 @@ export const QUIZZES: QuizPlan[] = [
     questions: [
       'oqdb-0173-1',
       'oqdb-0227-2',
-      'oqdb-0119-1',
+      'oqdb-0117-2',
       'oqdb-0471-1',
       'oqdb-0529-4',
       'oqdb-0137-3',
@@ -181,17 +181,17 @@ export const QUIZZES: QuizPlan[] = [
       'oqdb-0559-1',
       'oqdb-0119-4',
       'oqdb-0529-3',
-      'oqdb-0173-4',
-      'oqdb-0227-3',
-      'oqdb-0113-1',
+      'oqdb-0112-4',
+      'oqdb-0369-2',
+      'oqdb-0533-3',
       'oqdb-0137-2',
-      'oqdb-0471-3',
-      'oqdb-0227-4',
+      'oqdb-0444-3',
+      'oqdb-0610-4',
     ],
   },
   {
     slug: 'mode-monuments-oeuvres',
-    title: "Mode, monuments et chefs-d'oeuvre",
+    title: "Mode, monuments et chefs-d'œuvre",
     theme: 'art',
     questions: [
       'oqdb-0532-1',
@@ -266,7 +266,6 @@ export const QUIZZES: QuizPlan[] = [
       'oqdb-0446-1',
       'oqdb-0291-3',
       'oqdb-0452-3',
-      'oqdb-0268-1',
       'oqdb-0345-2',
       'oqdb-0177-2',
       'oqdb-0338-1',
@@ -276,8 +275,6 @@ export const QUIZZES: QuizPlan[] = [
       'oqdb-0452-2',
       'oqdb-0103-2',
       'oqdb-0345-4',
-      'oqdb-0410-4',
-      'oqdb-0407-3',
     ],
   },
   {
@@ -441,7 +438,7 @@ export const QUIZZES: QuizPlan[] = [
       'oqdb-0492-3',
       'oqdb-0151-4',
       'oqdb-0349-1',
-      'oqdb-0533-2',
+      'oqdb-0599-4',
       'oqdb-0596-4',
       'oqdb-0061-3',
       'oqdb-0167-1',
@@ -522,7 +519,7 @@ export const QUIZZES: QuizPlan[] = [
       'oqdb-0321-1',
       'oqdb-0331-1',
       'oqdb-0579-2',
-      'oqdb-0366-1',
+      'oqdb-0581-2',
       'oqdb-0191-2',
       'oqdb-0322-4',
       'oqdb-0448-4',
@@ -623,7 +620,7 @@ export const QUIZZES: QuizPlan[] = [
     description: 'Un peu de tout : cinéma, sport, géographie, nature, musique et culture générale.',
     questions: [
       'oqdb-0430-3',
-      'oqdb-0551-3',
+      'oqdb-0321-2',
       'oqdb-0456-3',
       'oqdb-0055-2',
       'oqdb-0220-3',
@@ -680,7 +677,7 @@ export const QUIZZES: QuizPlan[] = [
     questions: [
       'oqdb-0602-3',
       'oqdb-0597-3',
-      'oqdb-0586-1',
+      'oqdb-0292-4',
       'oqdb-0438-4',
       'oqdb-0504-3',
       'oqdb-0501-2',
@@ -874,6 +871,8 @@ export const EXCLUDED: Record<string, string> = {
   'oqdb-0109-4': "Exactitude douteuse : une otarie peut rester sous l'eau bien plus de 5 minutes, plusieurs propositions sont plausibles.",
   // Quiz source 111 (Les héros de l’Ironman)
   'oqdb-0111-3': "Exactitude douteuse : le nombre de finalistes à Kona varie selon les années et n'est pas de 2 000.",
+  // Quiz source 119 (Kim Kardashian)
+  'oqdb-0119-1': 'fait dépassé : Forbes ne compte plus Kylie Jenner parmi les milliardaires depuis 2020',
   // Quiz source 123 (Joyeux Noël)
   'oqdb-0123-2': "Exactitude douteuse : l'attribution de la coutume de la dinde à Charles VII est une légende.",
   // Quiz source 125 (Christophe Dechavanne)
@@ -891,13 +890,17 @@ export const EXCLUDED: Record<string, string> = {
   // Quiz source 143 (Jean-Pierre Foucault)
   'oqdb-0143-4': "Exactitude douteuse : l'identité de la première animatrice de Disney Parade n'est pas assurée.",
   // Quiz source 149 (Scarlett Johansson)
+  'oqdb-0149-2': "exactitude douteuse : le lieu de rencontre des parents de Scarlett Johansson n'est pas établi",
   'oqdb-0149-4': 'Bonne réponse ambiguë : Scoop réunit aussi Scarlett Johansson et Hugh Jackman.',
   // Quiz source 153 (Voiture électrique)
   'oqdb-0153-4': 'Fait faux ou ambigu : Tesla était le premier vendeur de voitures 100 % électriques en 2022, BYD le premier en véhicules électrifiés.',
+  // Quiz source 159 (One Piece)
+  'oqdb-0159-1': "question incompréhensible sans le contexte du quiz d'origine",
   // Quiz source 161 (Valérie Lemercier)
   'oqdb-0161-1': 'exactitude douteuse : titre de la chanson et édition des Césars non vérifiables',
   'oqdb-0161-2': "question incompréhensible sans le contexte du quiz d'origine",
   'oqdb-0161-3': "exactitude douteuse : la participation de Lemercier au film de Podalydès n'est pas certaine pour les autres titres",
+  'oqdb-0161-4': "question incompréhensible sans le contexte du quiz d'origine",
   // Quiz source 171 (Crypto-monnaies)
   'oqdb-0171-2': "fait faux : les cryptomonnaies offrent surtout le pseudonymat, pas l'anonymat",
   // Quiz source 173 (Barack Obama)
@@ -961,6 +964,10 @@ export const EXCLUDED: Record<string, string> = {
   'oqdb-0306-3': "exactitude douteuse : maîtrise courante de l'allemand non établie.",
   // Quiz source 311 (Stromae)
   'oqdb-0311-4': 'bonne réponse ambiguë : Formidable aborde aussi une rupture avec ironie.',
+  // Quiz source 317 (Marion Cotillard)
+  'oqdb-0317-1': "question incompréhensible sans le contexte du quiz d'origine",
+  'oqdb-0317-3': "question incompréhensible sans le contexte du quiz d'origine",
+  'oqdb-0317-4': "question incompréhensible sans le contexte du quiz d'origine",
   // Quiz source 322 (Potins de stars 2014)
   'oqdb-0322-2': 'exactitude douteuse : émancipation de sa famille en 2014 non établie.',
   // Quiz source 323 (Kylian Mbappé)
@@ -973,6 +980,8 @@ export const EXCLUDED: Record<string, string> = {
   'oqdb-0330-4': 'exactitude douteuse : durée du minuteur de la bombe non établie.',
   // Quiz source 331 (Modèles de voiture)
   'oqdb-0331-2': 'exactitude douteuse : voiture de Tintin au Congo non établie.',
+  // Quiz source 335 (Gary Oldman)
+  'oqdb-0335-2': "question incompréhensible sans le contexte du quiz d'origine",
   // Quiz source 337 (Datte medjool)
   'oqdb-0337-1': "exactitude douteuse : la datte medjool est aujourd'hui produite surtout ailleurs qu'au Maroc.",
   // Quiz source 343 (Le Grand Bleu)
@@ -993,6 +1002,10 @@ export const EXCLUDED: Record<string, string> = {
   'oqdb-0357-4': 'exactitude douteuse : nombre de cercles discutable.',
   // Quiz source 359 (Autriche)
   'oqdb-0359-4': 'bonne réponse ambiguë : Vienne est aussi liée à Mozart.',
+  // Quiz source 365 (Portugal)
+  'oqdb-0365-3': 'bonne réponse ambiguë : Madère est aussi célèbre pour ses falaises',
+  // Quiz source 366 (OpenAI)
+  'oqdb-0366-1': 'fait faux : la structure à but lucratif plafonné date de 2019',
   // Quiz source 369 (Stars de la NBA)
   'oqdb-0369-3': 'exactitude douteuse : titre de joueur de la décennie 2000 discutable.',
   // Quiz source 371 (Petits mammifères)
@@ -1003,6 +1016,10 @@ export const EXCLUDED: Record<string, string> = {
   'oqdb-0378-1': 'fait dépassé en 2026 : la Pro A a été rebaptisée depuis.',
   'oqdb-0378-3': 'exactitude douteuse : premier fournisseur non américain de la NBA, le Canada est devant.',
   'oqdb-0378-4': 'exactitude douteuse : sigle de la fédération belge non établi.',
+  // Quiz source 381 (Chasse aux insectes)
+  'oqdb-0381-4': 'exactitude douteuse : hauteur de saut du criquet non vérifiable',
+  // Quiz source 382 (NBA)
+  'oqdb-0382-2': 'bonne réponse ambiguë : Dominique Wilkins est aussi associé au tomahawk dunk',
   // Quiz source 385 (Règles du basket)
   'oqdb-0385-1': 'bonne réponse ambiguë : 5 joueurs par équipe, 10 au total',
   // Quiz source 386 (Boucles de corde)
@@ -1011,6 +1028,7 @@ export const EXCLUDED: Record<string, string> = {
   // Quiz source 388 (Mannequins français)
   'oqdb-0388-4': "contenu choquant envers une personne réelle (passé d'escort-girl)",
   // Quiz source 389 (Androïdes dans Alien)
+  'oqdb-0389-1': "question incompréhensible sans le contexte du quiz d'origine",
   'oqdb-0389-3': 'exactitude douteuse : personnage et événement incertains',
   // Quiz source 392 (Alien Passagers)
   'oqdb-0392-4': 'fait faux : le Nostromo est détruit, seule la navette Narcissus revient',
@@ -1059,6 +1077,9 @@ export const EXCLUDED: Record<string, string> = {
   'oqdb-0478-2': 'bonne réponse ambiguë : craie et magnésie désignent la même poudre',
   // Quiz source 484 (Lexique du véliplanchiste)
   'oqdb-0484-1': 'bonne réponse ambiguë : le tack change aussi la direction',
+  'oqdb-0484-4': 'fait faux : le wishbone tient la voile, la liaison avec la planche est le pied de mât',
+  // Quiz source 488 (Boxe)
+  'oqdb-0488-4': 'exactitude douteuse : à 48 kg, la catégorie dépend de la fédération (pailles ou mi-mouches)',
   // Quiz source 498 (Boissons de stars)
   'oqdb-0498-4': 'exactitude douteuse : partenariat de Neymar non établi',
   // Quiz source 502 (Histoire du foot)
@@ -1076,20 +1097,28 @@ export const EXCLUDED: Record<string, string> = {
   // Quiz source 519 (Cuisine italienne)
   'oqdb-0519-3': "bonne réponse ambiguë : l'osso buco se prépare aussi à la milanaise",
   'oqdb-0519-4': 'bonne réponse ambiguë : le panzerotto est aussi une pizza pliée des Pouilles',
+  // Quiz source 521 (Comédies françaises)
+  'oqdb-0521-4': "exactitude douteuse : nom d'acteur mal orthographié (Maurice Risch) et distribution incertaine",
   // Quiz source 522 (Dragon Ball Z)
   'oqdb-0522-1': 'exactitude douteuse : nombre de destructions de la Lune incertain',
   // Quiz source 523 (Des pâtes, oui !)
   'oqdb-0523-3': 'bonne réponse ambiguë : fettuccine aussi en lanières',
+  // Quiz source 526 (Dragon Ball)
+  'oqdb-0526-1': "question incompréhensible sans le contexte du quiz d'origine",
   // Quiz source 527 (Sport féminin international)
   'oqdb-0527-3': 'exactitude douteuse : Ana Carrasco a gagné en championnat du monde Supersport 300, pas en GP',
   // Quiz source 528 (Monarchie)
   'oqdb-0528-4': 'bonne réponse ambiguë : émir, sultan et calife conviennent',
+  // Quiz source 533 (Sport féminin français)
+  'oqdb-0533-2': "fait faux : Surya Bonaly n'a pas créé le salto arrière sur glace, exécuté dès 1976 par Terry Kubicka",
   // Quiz source 538 (Neige en littérature)
   'oqdb-0538-3': "exactitude douteuse : auteur de L'autre versant non vérifiable",
   // Quiz source 545 (Animaux de la savane)
   'oqdb-0545-2': "Bonne réponse ambiguë : le lynx marque aussi avec l'urine et les excréments.",
   // Quiz source 547 (Sports hivernaux)
   'oqdb-0547-3': 'Bonne réponse ambiguë : le fart est une cire, « Cire » est aussi juste.',
+  // Quiz source 551 (Secret Story)
+  'oqdb-0551-3': "question incompréhensible sans le contexte du quiz d'origine",
   // Quiz source 553 (Sacré Bob)
   'oqdb-0553-4': "Exactitude douteuse : la couleur des pantoufles de l'Homme Sirène n'est pas sûre.",
   // Quiz source 554 (Géo pour tous)
@@ -1107,6 +1136,10 @@ export const EXCLUDED: Record<string, string> = {
   'oqdb-0568-1': 'Exactitude douteuse : classement des forêts domaniales incertain et daté.',
   // Quiz source 569 (Coca-Cola Company)
   'oqdb-0569-3': 'Fait dépassé : le partenariat Nestlé et Coca-Cola pour Nestea a pris fin.',
+  // Quiz source 572 (Variantes du Coca-Cola)
+  'oqdb-0572-3': 'bonne réponse ambiguë : toutes les variantes proposées sont postérieures au Coca-Cola Light',
+  // Quiz source 573 (Magnésium et santé)
+  'oqdb-0573-1': "bonne réponse ambiguë : le magnésium est aussi conseillé contre l'asthme",
   // Quiz source 575 (Une larme de gin)
   'oqdb-0575-3': 'Exactitude douteuse : Churchill était plutôt connu pour le whisky et le champagne.',
   'oqdb-0575-4': "Bonne réponse ambiguë : « pionnière » est subjectif, d'autres marques le sont aussi.",
@@ -1114,12 +1147,18 @@ export const EXCLUDED: Record<string, string> = {
   'oqdb-0577-3': "Exactitude douteuse : la composition du Baltimore n'est pas sûre.",
   // Quiz source 578 (Golf)
   'oqdb-0578-2': "Bonne réponse ambiguë : l'alphabet phonétique est aussi l'alphabet radio.",
+  'oqdb-0578-4': "fait faux : le golf n'a pas de langue officielle",
+  // Quiz source 581 (Snapchat Challenge)
+  'oqdb-0581-4': "exactitude douteuse : le nombre d'utilisateurs varie selon le trimestre de 2017",
   // Quiz source 584 (Récompenses aux César)
   'oqdb-0584-4': "Exactitude douteuse : Ozon n'a pas reçu de César pour Frantz.",
   // Quiz source 585 (Intrusion #1)
   'oqdb-0585-3': "Exactitude douteuse : Charlot n'est pas un adepte reconnu du noeud papillon.",
+  // Quiz source 586 (Prénoms du cinéma #1)
+  'oqdb-0586-1': 'bonne réponse ambiguë : Niobe est aussi brune dans la saga',
   // Quiz source 587 (Stars mondiales #2)
   'oqdb-0587-1': 'Contenu moqueur et intime envers des personnes réelles.',
+  'oqdb-0587-3': 'bonne réponse ambiguë : Mick Jagger a aussi huit enfants de cinq mères',
   'oqdb-0587-4': "Exactitude douteuse : l'admiration de Bieber pour Hendrix n'est pas établie.",
   // Quiz source 592 (Ça pique ou ça passe)
   'oqdb-0592-2': 'Exactitude douteuse : la famille compte plutôt autour de 1 750 espèces.',
@@ -1215,6 +1254,7 @@ export const QUESTION_THEME: Record<string, string> = {
 // Questions isolées pour adultes, en plus des quiz source de `ADULT_QUIZZES`.
 export const ADULT_QUESTIONS: string[] = [
   'oqdb-0079-2',
+  'oqdb-0113-1', // titre de spectacle grossier affiché en réponse
   'oqdb-0119-3',
   'oqdb-0131-1',
   'oqdb-0167-4',

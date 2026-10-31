@@ -62,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0292-4",
-      "type": "mcq",
-      "prompt": "Quel petit bonhomme vert a enseigné à Luke comment utiliser la Force ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Youk",
-            "correct": false
-          },
-          {
-            "label": "Yoni",
-            "correct": false
-          },
-          {
-            "label": "Yazoo",
-            "correct": false
-          },
-          {
-            "label": "Yoda",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

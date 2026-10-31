@@ -2,29 +2,29 @@
   "source": {
     "name": "OpenQuizzDB, Philippe Bresoux",
     "license": "CC BY-SA 4.0",
-    "url": "https://www.openquizzdb.org/download.php?id=391"
+    "url": "https://www.openquizzdb.org/download.php?id=173"
   },
   "questions": [
     {
-      "id": "oqdb-0391-3",
+      "id": "oqdb-0173-4",
       "type": "mcq",
-      "prompt": "Quelle ancienne « classe mannequin » a prêté ses traits à Lara Croft ?",
+      "prompt": "De quel pays le père de Barack Obama était-il originaire ?",
       "payload": {
         "options": [
           {
-            "label": "Isabelle Mège",
+            "label": "Afrique du Sud",
             "correct": false
           },
           {
-            "label": "Isabelle Caro",
+            "label": "Mozambique",
             "correct": false
           },
           {
-            "label": "Alexa Davalos",
+            "label": "Congo",
             "correct": false
           },
           {
-            "label": "Vanessa Demouy",
+            "label": "Kenya",
             "correct": true
           }
         ]

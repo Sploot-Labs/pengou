@@ -383,26 +383,26 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0366-1",
+      "id": "oqdb-0581-2",
       "type": "mcq",
-      "prompt": "En quelle année fut fondée l'entreprise à but lucratif plafonné OpenAI ?",
+      "prompt": "Qui est devenu milliardaire à l'âge de 24 ans grâce à Snapchat ?",
       "payload": {
         "options": [
           {
-            "label": "2019",
+            "label": "Jeff Bezos",
             "correct": false
           },
           {
-            "label": "2017",
+            "label": "Tom Golisano",
             "correct": false
           },
           {
-            "label": "2021",
-            "correct": false
-          },
-          {
-            "label": "2015",
+            "label": "Evan Spiegel",
             "correct": true
+          },
+          {
+            "label": "Paul Allen",
+            "correct": false
           }
         ]
       },
@@ -609,7 +609,7 @@
         "oqdb-0321-1",
         "oqdb-0331-1",
         "oqdb-0579-2",
-        "oqdb-0366-1",
+        "oqdb-0581-2",
         "oqdb-0191-2",
         "oqdb-0322-4",
         "oqdb-0448-4",

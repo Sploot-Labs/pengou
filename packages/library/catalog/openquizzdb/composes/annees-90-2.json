@@ -441,30 +441,30 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0533-2",
+      "id": "oqdb-0599-4",
       "type": "mcq",
-      "prompt": "Qui est la créatrice d'un mouvement sur la glace, le « salto arrière » ?",
+      "prompt": "Dans quel dessin animé peux-tu entendre la phrase « Hakuna matata » ?",
       "payload": {
         "options": [
           {
-            "label": "Fanny Besson",
+            "label": "Toy Story",
             "correct": false
           },
           {
-            "label": "Simone Poujade",
+            "label": "Cars",
             "correct": false
           },
           {
-            "label": "Gaby Barbey",
-            "correct": false
-          },
-          {
-            "label": "Surya Bonaly",
+            "label": "Le Roi lion",
             "correct": true
+          },
+          {
+            "label": "Dinosaure",
+            "correct": false
           }
         ]
       },
-      "theme": "sport",
+      "theme": "culture-generale",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -611,7 +611,7 @@
         "oqdb-0492-3",
         "oqdb-0151-4",
         "oqdb-0349-1",
-        "oqdb-0533-2",
+        "oqdb-0599-4",
         "oqdb-0596-4",
         "oqdb-0061-3",
         "oqdb-0167-1",

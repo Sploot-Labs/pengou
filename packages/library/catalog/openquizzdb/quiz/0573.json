@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0573-1",
-      "type": "mcq",
-      "prompt": "Contre quelle pathologie le magnésium est-il parfois conseillé ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Boulimie",
-            "correct": false
-          },
-          {
-            "label": "Anorexie",
-            "correct": false
-          },
-          {
-            "label": "Asthme",
-            "correct": false
-          },
-          {
-            "label": "Stress",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0573-2",
       "type": "mcq",
       "prompt": "Lequel de ces troubles peut être lié à une carence en magnésium ?",

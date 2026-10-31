@@ -62,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0381-4",
-      "type": "mcq",
-      "prompt": "Considéré comme ravageur, à quelle hauteur un criquet peut-il sauter ?",
-      "payload": {
-        "options": [
-          {
-            "label": "12 cm",
-            "correct": false
-          },
-          {
-            "label": "130 cm",
-            "correct": false
-          },
-          {
-            "label": "70 cm",
-            "correct": true
-          },
-          {
-            "label": "210 cm",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

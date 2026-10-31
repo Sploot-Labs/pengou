@@ -35,25 +35,25 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0551-3",
+      "id": "oqdb-0321-2",
       "type": "mcq",
-      "prompt": "Que peut faire un candidat qui pense avoir trouvé un secret ?",
+      "prompt": "Combien de couronnes composent le royaume de « Game of Thrones » ?",
       "payload": {
         "options": [
           {
-            "label": "Buzzer",
+            "label": "Sept",
             "correct": true
           },
           {
-            "label": "Chanter",
+            "label": "Trois",
             "correct": false
           },
           {
-            "label": "Danser",
+            "label": "Dix",
             "correct": false
           },
           {
-            "label": "Crier",
+            "label": "Cinq",
             "correct": false
           }
         ]
@@ -597,7 +597,7 @@
       "audience": "tous",
       "questionIds": [
         "oqdb-0430-3",
-        "oqdb-0551-3",
+        "oqdb-0321-2",
         "oqdb-0456-3",
         "oqdb-0055-2",
         "oqdb-0220-3",

@@ -64,26 +64,26 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0586-1",
+      "id": "oqdb-0292-4",
       "type": "mcq",
-      "prompt": "Comment se prénomme la brune de la saga de science-fiction « Matrix » ?",
+      "prompt": "Quel petit bonhomme vert a enseigné à Luke comment utiliser la Force ?",
       "payload": {
         "options": [
           {
-            "label": "Niobe",
+            "label": "Youk",
             "correct": false
           },
           {
-            "label": "Taranis",
+            "label": "Yoni",
             "correct": false
           },
           {
-            "label": "Trinity",
+            "label": "Yazoo",
+            "correct": false
+          },
+          {
+            "label": "Yoda",
             "correct": true
-          },
-          {
-            "label": "Tek",
-            "correct": false
           }
         ]
       },
@@ -598,7 +598,7 @@
       "questionIds": [
         "oqdb-0602-3",
         "oqdb-0597-3",
-        "oqdb-0586-1",
+        "oqdb-0292-4",
         "oqdb-0438-4",
         "oqdb-0504-3",
         "oqdb-0501-2",

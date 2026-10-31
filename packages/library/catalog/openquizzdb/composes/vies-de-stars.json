@@ -499,25 +499,25 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0587-3",
+      "id": "oqdb-0391-3",
       "type": "mcq",
-      "prompt": "Quel chanteur est père de huit enfants nés de cinq mères différentes ?",
+      "prompt": "Quelle ancienne « classe mannequin » a prêté ses traits à Lara Croft ?",
       "payload": {
         "options": [
           {
-            "label": "Lionel Richie",
+            "label": "Isabelle Mège",
             "correct": false
           },
           {
-            "label": "Phil Collins",
+            "label": "Isabelle Caro",
             "correct": false
           },
           {
-            "label": "Mick Jagger",
+            "label": "Alexa Davalos",
             "correct": false
           },
           {
-            "label": "Rod Stewart",
+            "label": "Vanessa Demouy",
             "correct": true
           }
         ]
@@ -613,7 +613,7 @@
         "oqdb-0209-1",
         "oqdb-0579-4",
         "oqdb-0412-4",
-        "oqdb-0587-3",
+        "oqdb-0391-3",
         "oqdb-0167-3",
         "oqdb-0593-4"
       ]

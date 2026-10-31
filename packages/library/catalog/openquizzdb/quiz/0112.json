@@ -62,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0112-4",
-      "type": "mcq",
-      "prompt": "Comment se prénomme la benjamine de la famille Jackson ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Joyce",
-            "correct": false
-          },
-          {
-            "label": "Jasmine",
-            "correct": false
-          },
-          {
-            "label": "Jenifer",
-            "correct": false
-          },
-          {
-            "label": "Janet",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []
