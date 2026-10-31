@@ -30,35 +30,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-0741d591f209",
-      "type": "mcq",
-      "prompt": "The painting \"Guernica\" by Pablo Picasso expressed emotions of dread in response to which war?",
-      "payload": {
-        "options": [
-          {
-            "label": "Spanish Civil War",
-            "correct": true
-          },
-          {
-            "label": "The Crimean War",
-            "correct": false
-          },
-          {
-            "label": "Spanish-American War",
-            "correct": false
-          },
-          {
-            "label": "World War I",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-088c9981548a",
       "type": "mcq",
       "prompt": "The painting \"The Starry Night\" by Vincent van Gogh was part of which art movement?",
@@ -233,6 +204,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-20357285a49a",
+      "type": "mcq",
+      "prompt": "Which famed architect, who died in 2019 aged 102, designed the glass pyramid at the Louvre museum in Paris?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wang Shu",
+            "correct": false
+          },
+          {
+            "label": "Pascale Guédot",
+            "correct": false
+          },
+          {
+            "label": "I. M. Pei",
+            "correct": true
+          },
+          {
+            "label": "Frank Gehry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-211fff2b02a5",
       "type": "mcq",
       "prompt": "Who painted the epic mural Guernica?",
@@ -291,35 +291,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-2bb62115b3fc",
-      "type": "mcq",
-      "prompt": "What nationality was the famous artist Pablo Picasso?",
-      "payload": {
-        "options": [
-          {
-            "label": "French",
-            "correct": false
-          },
-          {
-            "label": "German",
-            "correct": false
-          },
-          {
-            "label": "Italian",
-            "correct": false
-          },
-          {
-            "label": "Spanish",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-2f79d0e72345",
       "type": "mcq",
       "prompt": "What were Marcel Duchamp's readymades?",
@@ -374,64 +345,6 @@
       },
       "theme": "art",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-3fb33d531d0f",
-      "type": "mcq",
-      "prompt": "Which artist is famous for cutting off his ear?",
-      "payload": {
-        "options": [
-          {
-            "label": "Vincent van Gogh",
-            "correct": true
-          },
-          {
-            "label": "Rembrandt",
-            "correct": false
-          },
-          {
-            "label": "Michelangelo",
-            "correct": false
-          },
-          {
-            "label": "Salvador Dali",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-42ca7eb8bb08",
-      "type": "mcq",
-      "prompt": "What is another name for La Gioconda / La Joconde?",
-      "payload": {
-        "options": [
-          {
-            "label": "The Starry Night",
-            "correct": false
-          },
-          {
-            "label": "The Girl with a Pearl Earring",
-            "correct": false
-          },
-          {
-            "label": "Sunflowers",
-            "correct": false
-          },
-          {
-            "label": "The Mona Lisa",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -506,93 +419,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-666dedbcc9d1",
-      "type": "mcq",
-      "prompt": "What was the major distinction between the English and French Gothic styles of architecture?",
-      "payload": {
-        "options": [
-          {
-            "label": "Gargoyles",
-            "correct": false
-          },
-          {
-            "label": "Fan vaulting",
-            "correct": true
-          },
-          {
-            "label": "Hemispherical Domes",
-            "correct": false
-          },
-          {
-            "label": "Pinnacles",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-6b4b8f8667e1",
-      "type": "mcq",
-      "prompt": "What color is produced by mixing black and white?",
-      "payload": {
-        "options": [
-          {
-            "label": "Grey",
-            "correct": true
-          },
-          {
-            "label": "White",
-            "correct": false
-          },
-          {
-            "label": "Black",
-            "correct": false
-          },
-          {
-            "label": "Brown",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-6f47d688ac0b",
-      "type": "mcq",
-      "prompt": "Which artist painted the late 15th century mural 'The Last Supper'?",
-      "payload": {
-        "options": [
-          {
-            "label": "Leonardo da Vinci",
-            "correct": true
-          },
-          {
-            "label": "Luca Pacioli",
-            "correct": false
-          },
-          {
-            "label": "Paolo Uccello",
-            "correct": false
-          },
-          {
-            "label": "Piero della Francesca",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-7eb9f808bbd9",
       "type": "mcq",
       "prompt": "Which one of these colors are not featured in Mondrian's Broadway Boogie-Woogie?",
@@ -622,35 +448,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-8288be0d6510",
-      "type": "mcq",
-      "prompt": "Who painted the Sistine Chapel?",
-      "payload": {
-        "options": [
-          {
-            "label": "Michelangelo",
-            "correct": true
-          },
-          {
-            "label": "Leonardo da Vinci",
-            "correct": false
-          },
-          {
-            "label": "Raphael",
-            "correct": false
-          },
-          {
-            "label": "Pablo Picasso",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-844a42cb0220",
       "type": "mcq",
       "prompt": "Which art movement was Pablo Picasso known for co-founding?",
@@ -676,35 +473,6 @@
       },
       "theme": "art",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-862aa8926bd9",
-      "type": "mcq",
-      "prompt": "What is the world's oldest known piece of fiction?",
-      "payload": {
-        "options": [
-          {
-            "label": "Papyrus of Ani",
-            "correct": false
-          },
-          {
-            "label": "Code of Hammurabi",
-            "correct": false
-          },
-          {
-            "label": "Epic of Gilgamesh",
-            "correct": true
-          },
-          {
-            "label": "Rosetta Stone",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -825,6 +593,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-973b51a3c544",
+      "type": "mcq",
+      "prompt": "Which church's interior in Vatican City was designed in 1503 by renaissance architects including Bramante, Michelangelo and Bernini?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Duomo of Florence",
+            "correct": false
+          },
+          {
+            "label": "Catania Cathedral",
+            "correct": false
+          },
+          {
+            "label": "St. Mark’s Basilica",
+            "correct": false
+          },
+          {
+            "label": "St. Peter's Basilica",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-995b9a0421c9",
       "type": "mcq",
       "prompt": "Albrecht Dürer's birthplace and place of death were in...",
@@ -920,35 +717,6 @@
       },
       "theme": "art",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-a90d3842b2e9",
-      "type": "mcq",
-      "prompt": "Which time signature is commonly known as “Cut Time?”",
-      "payload": {
-        "options": [
-          {
-            "label": "3/4",
-            "correct": false
-          },
-          {
-            "label": "2/2",
-            "correct": true
-          },
-          {
-            "label": "6/8",
-            "correct": false
-          },
-          {
-            "label": "4/4",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -1226,35 +994,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-ecc98988b1f9",
-      "type": "mcq",
-      "prompt": "What year was the Mona Lisa finished?",
-      "payload": {
-        "options": [
-          {
-            "label": "1511",
-            "correct": false
-          },
-          {
-            "label": "1487",
-            "correct": false
-          },
-          {
-            "label": "1504",
-            "correct": true
-          },
-          {
-            "label": "1523",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-ed3d318e0ffd",
       "type": "mcq",
       "prompt": "What was the first successful and commercially viable photographic technique?",
@@ -1313,35 +1052,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-f70ac70311a1",
-      "type": "mcq",
-      "prompt": "What nationality was the famous artist Van Gogh?",
-      "payload": {
-        "options": [
-          {
-            "label": "French",
-            "correct": false
-          },
-          {
-            "label": "Dutch",
-            "correct": true
-          },
-          {
-            "label": "Polish",
-            "correct": false
-          },
-          {
-            "label": "Russian",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-ffc71b129bf3",
       "type": "truefalse",
       "prompt": "Venus of Willendorf is one of the earliest works of art, depicting the planets Mars and Venus embrace in the heavens at night.",
@@ -1354,5 +1064,37 @@
       "audience": "tous"
     }
   ],
-  "quizzes": []
+  "quizzes": [
+    {
+      "id": "otdb-quiz-painters-and-masterpieces",
+      "title": "Painters and masterpieces",
+      "description": "Famous painters, sculptors and works of art.",
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-0ad9d1a215aa",
+        "otdb-211fff2b02a5",
+        "otdb-dd159d16cad4",
+        "otdb-925ab2fe5863",
+        "otdb-c1686c62d3cc",
+        "otdb-12357890cb45",
+        "otdb-3d4f755cea13",
+        "otdb-8ea0e8bf1026",
+        "otdb-a1c9c58aed62",
+        "otdb-da8f7cbf7a36",
+        "otdb-e3eee6b7d997",
+        "otdb-0ed981a61b6f",
+        "otdb-1f02cb2cb2a7",
+        "otdb-ffc71b129bf3",
+        "otdb-a3412c0f9437",
+        "otdb-e3bad7278823",
+        "otdb-dd6a1dd8ae03",
+        "otdb-ed3d318e0ffd",
+        "otdb-053cd2db94e2",
+        "otdb-7eb9f808bbd9"
+      ]
+    }
+  ]
 }

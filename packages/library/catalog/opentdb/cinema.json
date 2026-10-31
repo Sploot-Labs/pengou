@@ -18,64 +18,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-050d26b00d07",
-      "type": "mcq",
-      "prompt": "In what Disney movie can you spot the character \"Pac-Man\" in if you look closely enough in some scenes?",
-      "payload": {
-        "options": [
-          {
-            "label": "Fantasia",
-            "correct": false
-          },
-          {
-            "label": "Tron",
-            "correct": true
-          },
-          {
-            "label": "Monsters, Inc.",
-            "correct": false
-          },
-          {
-            "label": "Big Hero 6",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-0a1b5569601d",
-      "type": "mcq",
-      "prompt": "Who did the score to the original Blade Runner?",
-      "payload": {
-        "options": [
-          {
-            "label": "Kitaro",
-            "correct": false
-          },
-          {
-            "label": "Yanni",
-            "correct": false
-          },
-          {
-            "label": "Enya",
-            "correct": false
-          },
-          {
-            "label": "Vangelis",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-0cbf5ab82786",
       "type": "mcq",
       "prompt": "What film did James Cameron's Avatar dethrone as the highest-grossing film ever?",
@@ -113,35 +55,6 @@
       },
       "theme": "cinema",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-0f70818e0a07",
-      "type": "mcq",
-      "prompt": "In which movie does Robin Williams' character have to disguise themselves into a woman?",
-      "payload": {
-        "options": [
-          {
-            "label": "Mrs. Doubtfire",
-            "correct": true
-          },
-          {
-            "label": "Awakenings",
-            "correct": false
-          },
-          {
-            "label": "Old Dogs",
-            "correct": false
-          },
-          {
-            "label": "Jumanji",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -204,35 +117,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-196cb65435bb",
-      "type": "mcq",
-      "prompt": "In Mulan (1998), who is the leader of the Huns?",
-      "payload": {
-        "options": [
-          {
-            "label": "Shan Yu",
-            "correct": true
-          },
-          {
-            "label": "Chien-Po",
-            "correct": false
-          },
-          {
-            "label": "Fa Zhou",
-            "correct": false
-          },
-          {
-            "label": "Li Shang",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-1cd233626269",
       "type": "mcq",
       "prompt": "In the 1974 Christmas flick \"The Year Without a Santa Claus,\" what are the names of the two elves who help Mrs. Claus save Christmas?",
@@ -252,64 +136,6 @@
           },
           {
             "label": "Snowflake & Icicle",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-200dd2abeda2",
-      "type": "mcq",
-      "prompt": "In Big Hero 6, what were Baymax's motions modeled after?",
-      "payload": {
-        "options": [
-          {
-            "label": "Baby ostriches",
-            "correct": false
-          },
-          {
-            "label": "Baby bears",
-            "correct": false
-          },
-          {
-            "label": "Baby penguins",
-            "correct": true
-          },
-          {
-            "label": "Baby monkeys",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-21bf82c94f48",
-      "type": "mcq",
-      "prompt": "What was the name of the actor who played Leatherface in the 1974 horror film, The Texas Chainsaw Massacre?",
-      "payload": {
-        "options": [
-          {
-            "label": "Joe Bill Hogan",
-            "correct": false
-          },
-          {
-            "label": "Gunnar Hansen",
-            "correct": true
-          },
-          {
-            "label": "John Dugan",
-            "correct": false
-          },
-          {
-            "label": "Edwin Neal",
             "correct": false
           }
         ]
@@ -506,64 +332,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-3377f3cc932d",
-      "type": "mcq",
-      "prompt": "In Avengers: Infinity War, where was the Soul Stone located?",
-      "payload": {
-        "options": [
-          {
-            "label": "Xandar",
-            "correct": false
-          },
-          {
-            "label": "Knowhere",
-            "correct": false
-          },
-          {
-            "label": "Vormir",
-            "correct": true
-          },
-          {
-            "label": "Asgard",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-3a45dfced3e5",
-      "type": "mcq",
-      "prompt": "In the 2012 film, \"The Lorax\", who is the antagonist?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ted Wiggins",
-            "correct": false
-          },
-          {
-            "label": "The Once-Ler",
-            "correct": false
-          },
-          {
-            "label": "Grammy Norma",
-            "correct": false
-          },
-          {
-            "label": "Aloysius O'Hare",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-3c441a5ab9e5",
       "type": "mcq",
       "prompt": "Which animated film did Steven Lisberger direct in 1980 before going on to direct Tron?",
@@ -589,64 +357,6 @@
       },
       "theme": "cinema",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-409d3c197d33",
-      "type": "mcq",
-      "prompt": "Who played Deputy Marshal Samuel Gerard in the 1993 film \"The Fugitive\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Harrison Ford",
-            "correct": false
-          },
-          {
-            "label": "Harvey Keitel",
-            "correct": false
-          },
-          {
-            "label": "Tommy Lee Jones",
-            "correct": true
-          },
-          {
-            "label": "Martin Landau",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-4178f636400b",
-      "type": "mcq",
-      "prompt": "In the Super Mario Bros. Movie (2023), who plays Toad?",
-      "payload": {
-        "options": [
-          {
-            "label": "Jack Black",
-            "correct": false
-          },
-          {
-            "label": "Keegan-Michael Key",
-            "correct": true
-          },
-          {
-            "label": "Charlie Day",
-            "correct": false
-          },
-          {
-            "label": "Seth Rogan",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -709,18 +419,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-4e9c7a24028f",
-      "type": "truefalse",
-      "prompt": "In the original script of \"The Matrix\", the machines used humans as additional computing power instead of batteries.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-4ef95c765de0",
       "type": "mcq",
       "prompt": "The 1996 film 'Fargo' is primarily set in which US state?",
@@ -741,47 +439,6 @@
           {
             "label": "South Dakota",
             "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-501457e7a6bc",
-      "type": "truefalse",
-      "prompt": "Ewan McGregor did not know the name of the second prequel film of Star Wars during and after filming.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-55ea15c94a79",
-      "type": "mcq",
-      "prompt": "Who starred as Bruce Wayne and Batman in Tim Burton's 1989 movie \"Batman\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "George Clooney",
-            "correct": false
-          },
-          {
-            "label": "Adam West",
-            "correct": false
-          },
-          {
-            "label": "Val Kilmer",
-            "correct": false
-          },
-          {
-            "label": "Michael Keaton",
-            "correct": true
           }
         ]
       },
@@ -820,64 +477,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-5b05a12ae810",
-      "type": "mcq",
-      "prompt": "The film Mad Max: Fury Road features the Dies Irae from which composer's requiem?",
-      "payload": {
-        "options": [
-          {
-            "label": "Mozart",
-            "correct": false
-          },
-          {
-            "label": "Verdi",
-            "correct": true
-          },
-          {
-            "label": "Berlioz",
-            "correct": false
-          },
-          {
-            "label": "Brahms",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-5f3aef6e11c6",
-      "type": "mcq",
-      "prompt": "Who is the main protagonist in, the 1985 film, Back to the Future?",
-      "payload": {
-        "options": [
-          {
-            "label": "Emmett \"Doc\" Brown",
-            "correct": false
-          },
-          {
-            "label": "Biff Tannen",
-            "correct": false
-          },
-          {
-            "label": "George McFly",
-            "correct": false
-          },
-          {
-            "label": "Marty McFly",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-612f5bb4477e",
       "type": "mcq",
       "prompt": "Which movie did NOT feature the late actor John Candy?",
@@ -907,64 +506,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-61cd94809b8e",
-      "type": "mcq",
-      "prompt": "In the Lord of the Rings: The Two Towers, where are the party of orcs taking the hobbits?",
-      "payload": {
-        "options": [
-          {
-            "label": "Isengard",
-            "correct": true
-          },
-          {
-            "label": "Rivendell",
-            "correct": false
-          },
-          {
-            "label": "Moria",
-            "correct": false
-          },
-          {
-            "label": "Mordor",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-621d59541424",
-      "type": "mcq",
-      "prompt": "Which actor auditioned for the role of Luke Skywalker?",
-      "payload": {
-        "options": [
-          {
-            "label": "Laurence Fishburne",
-            "correct": false
-          },
-          {
-            "label": "Christopher Lambert",
-            "correct": false
-          },
-          {
-            "label": "James Remar",
-            "correct": false
-          },
-          {
-            "label": "Kurt Russell",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-6267b7f0adec",
       "type": "mcq",
       "prompt": "What was Marilyn Monroe`s character's first name in the film \"Some Like It Hot\"?",
@@ -990,47 +531,6 @@
       },
       "theme": "cinema",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-62b1bfb4d866",
-      "type": "truefalse",
-      "prompt": "YouTube personality Jenna Marbles served as an executive producer of the film Maximum Ride (2016).",
-      "payload": {
-        "correct": true
-      },
-      "theme": "cinema",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-62fba77d68d4",
-      "type": "mcq",
-      "prompt": "Which actress danced the twist with John Travolta in 'Pulp Fiction'?",
-      "payload": {
-        "options": [
-          {
-            "label": "Kathy Griffin",
-            "correct": false
-          },
-          {
-            "label": "Bridget Fonda",
-            "correct": false
-          },
-          {
-            "label": "Uma Thurman",
-            "correct": true
-          },
-          {
-            "label": "Pam Grier",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -1093,35 +593,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-67f54a87afb5",
-      "type": "mcq",
-      "prompt": "In which African country was the 2006 film 'Blood Diamond' mostly set in?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sierra Leone",
-            "correct": true
-          },
-          {
-            "label": "Burkina Faso",
-            "correct": false
-          },
-          {
-            "label": "Central African Republic",
-            "correct": false
-          },
-          {
-            "label": "Liberia",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-68b5cab9a7a2",
       "type": "truefalse",
       "prompt": "The original ending of \"Little Shop Of Horrors\" has the plants taking over the world.",
@@ -1139,35 +610,6 @@
       "prompt": "George Lucas directed the entire original Star Wars trilogy.",
       "payload": {
         "correct": false
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-6b0457c3fa4f",
-      "type": "mcq",
-      "prompt": "In the movie \"Spaceballs\", what are the Spaceballs attempting to steal from Planet Druidia?",
-      "payload": {
-        "options": [
-          {
-            "label": "Air",
-            "correct": true
-          },
-          {
-            "label": "Princess Lonestar",
-            "correct": false
-          },
-          {
-            "label": "Meatballs",
-            "correct": false
-          },
-          {
-            "label": "The Schwartz",
-            "correct": false
-          }
-        ]
       },
       "theme": "cinema",
       "difficulty": "facile",
@@ -1204,64 +646,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-725079512abb",
-      "type": "mcq",
-      "prompt": "In the 1979 British film \"Quadrophenia\" what is the name of the seaside city the mods are visiting?",
-      "payload": {
-        "options": [
-          {
-            "label": "Mousehole",
-            "correct": false
-          },
-          {
-            "label": "Bridlington",
-            "correct": false
-          },
-          {
-            "label": "Brighton",
-            "correct": true
-          },
-          {
-            "label": "Eastbourne",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-725ce6f7bfa5",
-      "type": "mcq",
-      "prompt": "Leonardo Di Caprio won his first Best Actor Oscar for his performance in which film?",
-      "payload": {
-        "options": [
-          {
-            "label": "Inception",
-            "correct": false
-          },
-          {
-            "label": "The Revenant",
-            "correct": true
-          },
-          {
-            "label": "Shutter Island",
-            "correct": false
-          },
-          {
-            "label": "The Wolf Of Wall Street",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-7dd3384fefcc",
       "type": "mcq",
       "prompt": "Which town is the setting for the Disney movie The Love Bug (1968)?",
@@ -1291,35 +675,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-7ebf96f29c7b",
-      "type": "mcq",
-      "prompt": "In order to cut costs, what were most of the extras of Mad Max (1979) paid with?",
-      "payload": {
-        "options": [
-          {
-            "label": "They weren't paid",
-            "correct": false
-          },
-          {
-            "label": "Food stamps",
-            "correct": false
-          },
-          {
-            "label": "Beer",
-            "correct": true
-          },
-          {
-            "label": "Fast food",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-821330856edc",
       "type": "mcq",
       "prompt": "What were the Chilled Monkey Brains made from during Indiana Jones and the Temple of Doom?",
@@ -1342,18 +697,6 @@
             "correct": false
           }
         ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-83ef3137274d",
-      "type": "truefalse",
-      "prompt": "The movie \"The Rocky Horror Picture Show\" (1975) opens with giant floating lips singing the opening song",
-      "payload": {
-        "correct": true
       },
       "theme": "cinema",
       "difficulty": "moyen",
@@ -1448,35 +791,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-87fa5e4002cc",
-      "type": "mcq",
-      "prompt": "What name did Tom Hanks give to his volleyball companion in the film `Cast Away`?",
-      "payload": {
-        "options": [
-          {
-            "label": "Billy",
-            "correct": false
-          },
-          {
-            "label": "Jones",
-            "correct": false
-          },
-          {
-            "label": "Friday",
-            "correct": false
-          },
-          {
-            "label": "Wilson",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-88ba3faade98",
       "type": "mcq",
       "prompt": "In what year was the movie \"Police Academy\" released?",
@@ -1496,64 +810,6 @@
           },
           {
             "label": "1984",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-8992bd6147fb",
-      "type": "mcq",
-      "prompt": "What is the name of the character Nicolas Cage plays in the movie \"National Treasure?\"",
-      "payload": {
-        "options": [
-          {
-            "label": "Benjamin Franklin Gates",
-            "correct": true
-          },
-          {
-            "label": "John Quincy Beckett",
-            "correct": false
-          },
-          {
-            "label": "George Washington Swanson",
-            "correct": false
-          },
-          {
-            "label": "Thomas Jefferson Walker",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-906acd1642bc",
-      "type": "mcq",
-      "prompt": "Which 90's comedy cult classic features cameos appearances from Meat Loaf, Alice Cooper and Chris Farley?",
-      "payload": {
-        "options": [
-          {
-            "label": "Austin Powers: International Man of Mystery",
-            "correct": false
-          },
-          {
-            "label": "Bill & Ted's Excellent Adventure",
-            "correct": false
-          },
-          {
-            "label": "Dumb and Dumber",
-            "correct": false
-          },
-          {
-            "label": "Wayne's World",
             "correct": true
           }
         ]
@@ -1589,35 +845,6 @@
       },
       "theme": "cinema",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-916ad59df8f2",
-      "type": "mcq",
-      "prompt": "In Finding Nemo, what was the name of Nemo's mom?",
-      "payload": {
-        "options": [
-          {
-            "label": "Pearl",
-            "correct": false
-          },
-          {
-            "label": "Coral",
-            "correct": true
-          },
-          {
-            "label": "Sandy",
-            "correct": false
-          },
-          {
-            "label": "Shelly",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -1676,93 +903,6 @@
       },
       "theme": "cinema",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-994dcdd1b321",
-      "type": "mcq",
-      "prompt": "Who is frozen at the end of the movie \"Goldeneye\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Natalya Simonova",
-            "correct": false
-          },
-          {
-            "label": "Alec Travelyan",
-            "correct": false
-          },
-          {
-            "label": "Boris Grishenko",
-            "correct": true
-          },
-          {
-            "label": "James Bond",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-9a034edb9924",
-      "type": "mcq",
-      "prompt": "Who is revealed to be the villain at the end of the first live action Scooby Doo movie?",
-      "payload": {
-        "options": [
-          {
-            "label": "Scrappy Doo",
-            "correct": true
-          },
-          {
-            "label": "Old Man Mason",
-            "correct": false
-          },
-          {
-            "label": "Fred",
-            "correct": false
-          },
-          {
-            "label": "The Local News Team",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-9a6e0a051bfb",
-      "type": "mcq",
-      "prompt": "What was the wifi password given to Stephen Strange in Doctor Strange?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ancient",
-            "correct": false
-          },
-          {
-            "label": "Chakra",
-            "correct": false
-          },
-          {
-            "label": "Shambala",
-            "correct": true
-          },
-          {
-            "label": "Peace",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -1878,64 +1018,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-a6fbb06b1612",
-      "type": "mcq",
-      "prompt": "Who directed \"E.T. the Extra-Terrestrial\" (1982)?",
-      "payload": {
-        "options": [
-          {
-            "label": "Stanley Kubrick",
-            "correct": false
-          },
-          {
-            "label": "Steven Spielberg",
-            "correct": true
-          },
-          {
-            "label": "James Cameron",
-            "correct": false
-          },
-          {
-            "label": "Tim Burton",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-b5723058621e",
-      "type": "mcq",
-      "prompt": "Which actor played the main character in the 1990 film \"Edward Scissorhands\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ben Stiller",
-            "correct": false
-          },
-          {
-            "label": "Clint Eastwood",
-            "correct": false
-          },
-          {
-            "label": "Leonardo DiCaprio",
-            "correct": false
-          },
-          {
-            "label": "Johnny Depp",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-b726441a7e1a",
       "type": "mcq",
       "prompt": "What was the first superhero film James Gunn was involved with?",
@@ -1961,64 +1043,6 @@
       },
       "theme": "cinema",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-ba07af7295c5",
-      "type": "mcq",
-      "prompt": "\"The first rule is: you don't talk about it\" is a reference to which movie?",
-      "payload": {
-        "options": [
-          {
-            "label": "The Island",
-            "correct": false
-          },
-          {
-            "label": "American Pie",
-            "correct": false
-          },
-          {
-            "label": "Fight Club",
-            "correct": true
-          },
-          {
-            "label": "Unthinkable",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-ba22c6e0fa70",
-      "type": "mcq",
-      "prompt": "In the 2002 film \"Kung Pow! Enter the Fist\", why was Wimp Lo purposely trained wrong?",
-      "payload": {
-        "options": [
-          {
-            "label": "As a joke",
-            "correct": true
-          },
-          {
-            "label": "To test him",
-            "correct": false
-          },
-          {
-            "label": "For cheating",
-            "correct": false
-          },
-          {
-            "label": "Revenge",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -2163,122 +1187,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-c6b537dc98a4",
-      "type": "mcq",
-      "prompt": "What year did the James Cameron film \"Titanic\" come out in theaters?",
-      "payload": {
-        "options": [
-          {
-            "label": "1998",
-            "correct": false
-          },
-          {
-            "label": "1997",
-            "correct": true
-          },
-          {
-            "label": "1999",
-            "correct": false
-          },
-          {
-            "label": "1996",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-c9edc97b7bd8",
-      "type": "mcq",
-      "prompt": "This movie contains the quote, \"Nobody puts Baby in a corner.\"",
-      "payload": {
-        "options": [
-          {
-            "label": "Ferris Bueller's Day Off",
-            "correct": false
-          },
-          {
-            "label": "Pretty in Pink",
-            "correct": false
-          },
-          {
-            "label": "Dirty Dancing",
-            "correct": true
-          },
-          {
-            "label": "Three Men and a Baby",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-cae449c9af24",
-      "type": "mcq",
-      "prompt": "In the 1976 film 'Taxi Driver', how many guns did Travis buy from the salesman?",
-      "payload": {
-        "options": [
-          {
-            "label": "4",
-            "correct": true
-          },
-          {
-            "label": "2",
-            "correct": false
-          },
-          {
-            "label": "1",
-            "correct": false
-          },
-          {
-            "label": "6",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-cc089b4bfcd0",
-      "type": "mcq",
-      "prompt": "In the \"Jurassic Park\" universe, when did \"Jurassic Park: San Diego\" begin construction?",
-      "payload": {
-        "options": [
-          {
-            "label": "1993",
-            "correct": false
-          },
-          {
-            "label": "1986",
-            "correct": false
-          },
-          {
-            "label": "1985",
-            "correct": true
-          },
-          {
-            "label": "1988",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-cd1a2252e968",
       "type": "mcq",
       "prompt": "What is the name of the fictional retro-mod band starring Austin Powers as the lead vocalist?",
@@ -2337,122 +1245,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-d9c5e03ae397",
-      "type": "mcq",
-      "prompt": "In the film \"John Wick\" why does John Wick get out of retirement?",
-      "payload": {
-        "options": [
-          {
-            "label": "He was punched in the face",
-            "correct": false
-          },
-          {
-            "label": "His puppy is killed and his car was stolen",
-            "correct": true
-          },
-          {
-            "label": "He needed money",
-            "correct": false
-          },
-          {
-            "label": "He got mugged",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-daa22593d5b6",
-      "type": "mcq",
-      "prompt": "What is the correct phrase for the Latin saying \"Romanes Eunt Domus\" in Monty Python's Life of Brian?",
-      "payload": {
-        "options": [
-          {
-            "label": "Roxani Ite Domum",
-            "correct": false
-          },
-          {
-            "label": "Romani Ite Domum",
-            "correct": true
-          },
-          {
-            "label": "Romans Go Home",
-            "correct": false
-          },
-          {
-            "label": "Tomate Ite Domum",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-dbaa3244600f",
-      "type": "mcq",
-      "prompt": "In \"ALF\", what was ALF's real name?",
-      "payload": {
-        "options": [
-          {
-            "label": "Gordon Shumway",
-            "correct": true
-          },
-          {
-            "label": "Gordon Foster",
-            "correct": false
-          },
-          {
-            "label": "Gordon Milipp",
-            "correct": false
-          },
-          {
-            "label": "Gordon von Gam",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-dd8f1cda33e2",
-      "type": "mcq",
-      "prompt": "In the movie “The Iron Giant,” this character is the protagonist.",
-      "payload": {
-        "options": [
-          {
-            "label": "Dean McCoppin",
-            "correct": false
-          },
-          {
-            "label": "Annie Hughes",
-            "correct": false
-          },
-          {
-            "label": "Kent Mansley",
-            "correct": false
-          },
-          {
-            "label": "Hogarth Hughes",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-e1b21408b87f",
       "type": "mcq",
       "prompt": "In the 1964 film \"Zulu\", what song does the British Army company sing before the final battle?",
@@ -2478,64 +1270,6 @@
       },
       "theme": "cinema",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-e95168f0e52a",
-      "type": "mcq",
-      "prompt": "Which stand-up comedian voiced the talking parrot \"Iago\" in Disney's 1992 adaptation of Aladdin?",
-      "payload": {
-        "options": [
-          {
-            "label": "Jonathan Freeman",
-            "correct": false
-          },
-          {
-            "label": "Robin Williams",
-            "correct": false
-          },
-          {
-            "label": "Gilbert Gottfried",
-            "correct": true
-          },
-          {
-            "label": "Pauly Shore",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-f4998a7d9f8d",
-      "type": "mcq",
-      "prompt": "What is the orange and white bot's name in \"Star Wars: The Force Awakens\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "AA-A",
-            "correct": false
-          },
-          {
-            "label": "BB-3",
-            "correct": false
-          },
-          {
-            "label": "BB-8",
-            "correct": true
-          },
-          {
-            "label": "R2-D2",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -2655,27 +1389,61 @@
     {
       "id": "otdb-quiz-film",
       "title": "Film",
-      "description": "Questions from the Open Trivia Database (opentdb.com), licensed under CC BY-SA 4.0.",
+      "description": "Classic films, directors and stars.",
       "theme": "cinema",
-      "difficulty": "facile",
+      "difficulty": "moyen",
       "language": "en",
       "audience": "tous",
       "questionIds": [
-        "otdb-01ee9af0f4df",
+        "otdb-6d581851331a",
         "otdb-0cfdbf597489",
-        "otdb-3377f3cc932d",
-        "otdb-3a45dfced3e5",
-        "otdb-409d3c197d33",
-        "otdb-4178f636400b",
-        "otdb-4e9c7a24028f",
+        "otdb-a2e941f44288",
+        "otdb-90b23e3c233f",
+        "otdb-6267b7f0adec",
+        "otdb-448bd9b4f3ab",
+        "otdb-0cbf5ab82786",
+        "otdb-01ee9af0f4df",
+        "otdb-2e0223c61a14",
+        "otdb-f9411cf7bacd",
+        "otdb-10d7ee9f7658",
+        "otdb-7dd3384fefcc",
+        "otdb-83fb611e799f",
+        "otdb-fdfb5113a762",
+        "otdb-a565849aa019",
+        "otdb-263226f6aa90",
+        "otdb-e1b21408b87f",
+        "otdb-68fa4b76fb60"
+      ]
+    },
+    {
+      "id": "otdb-quiz-movie-trivia",
+      "title": "Movie trivia",
+      "description": "Lesser-known facts about cult and popular films.",
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-30728241f068",
+        "otdb-68b5cab9a7a2",
+        "otdb-88ba3faade98",
+        "otdb-fba3285a9ba0",
         "otdb-4ef95c765de0",
-        "otdb-501457e7a6bc",
-        "otdb-55ea15c94a79",
-        "otdb-5f3aef6e11c6",
-        "otdb-61cd94809b8e",
-        "otdb-62fba77d68d4",
-        "otdb-68fa4b76fb60",
-        "otdb-6b0457c3fa4f"
+        "otdb-cd1a2252e968",
+        "otdb-d448aebcb61e",
+        "otdb-983e97b69788",
+        "otdb-85692f147efa",
+        "otdb-9cbbfb110614",
+        "otdb-c55e946d5c85",
+        "otdb-a296303d80ea",
+        "otdb-13a2fc0467a4",
+        "otdb-f99623b87890",
+        "otdb-fc99b197e0ba",
+        "otdb-2ef605496ff2",
+        "otdb-56f8ffdc7dce",
+        "otdb-bfa1ad4e00e8",
+        "otdb-3c441a5ab9e5",
+        "otdb-4c001279307e"
       ]
     }
   ]

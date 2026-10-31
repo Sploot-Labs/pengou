@@ -1,0 +1,515 @@
+{
+  "source": {
+    "name": "Open Trivia Database",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-0a1b5569601d",
+      "type": "mcq",
+      "prompt": "Who did the score to the original Blade Runner?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kitaro",
+            "correct": false
+          },
+          {
+            "label": "Yanni",
+            "correct": false
+          },
+          {
+            "label": "Enya",
+            "correct": false
+          },
+          {
+            "label": "Vangelis",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2ab6c55e5477",
+      "type": "mcq",
+      "prompt": "Which of these are NOT a Men at Work song?",
+      "payload": {
+        "options": [
+          {
+            "label": "Basket Case",
+            "correct": true
+          },
+          {
+            "label": "Be Good Johnny",
+            "correct": false
+          },
+          {
+            "label": "Who Can It Be Now?",
+            "correct": false
+          },
+          {
+            "label": "Dr. Heckyll and Mr. Jive",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-47f852b32b4a",
+      "type": "mcq",
+      "prompt": "Who recorded the album called \"Down to the Moon\" in 1986?",
+      "payload": {
+        "options": [
+          {
+            "label": "Andreas Vollenweider",
+            "correct": true
+          },
+          {
+            "label": "Jean-Michel Jarre",
+            "correct": false
+          },
+          {
+            "label": "Enya",
+            "correct": false
+          },
+          {
+            "label": "Bing Crosby",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-55ea15c94a79",
+      "type": "mcq",
+      "prompt": "Who starred as Bruce Wayne and Batman in Tim Burton's 1989 movie \"Batman\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "George Clooney",
+            "correct": false
+          },
+          {
+            "label": "Adam West",
+            "correct": false
+          },
+          {
+            "label": "Val Kilmer",
+            "correct": false
+          },
+          {
+            "label": "Michael Keaton",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5f3aef6e11c6",
+      "type": "mcq",
+      "prompt": "Who is the main protagonist in, the 1985 film, Back to the Future?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emmett \"Doc\" Brown",
+            "correct": false
+          },
+          {
+            "label": "Biff Tannen",
+            "correct": false
+          },
+          {
+            "label": "George McFly",
+            "correct": false
+          },
+          {
+            "label": "Marty McFly",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6b0457c3fa4f",
+      "type": "mcq",
+      "prompt": "In the movie \"Spaceballs\", what are the Spaceballs attempting to steal from Planet Druidia?",
+      "payload": {
+        "options": [
+          {
+            "label": "Air",
+            "correct": true
+          },
+          {
+            "label": "Princess Lonestar",
+            "correct": false
+          },
+          {
+            "label": "Meatballs",
+            "correct": false
+          },
+          {
+            "label": "The Schwartz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7b2d7af370c7",
+      "type": "mcq",
+      "prompt": "Which of these is not one of Dracula's relics found in the video game \"Castlevania II: Simon's Quest\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Nail",
+            "correct": false
+          },
+          {
+            "label": "The Tooth",
+            "correct": true
+          },
+          {
+            "label": "The Eyeball",
+            "correct": false
+          },
+          {
+            "label": "The Rib Bone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7f2b15d123a3",
+      "type": "mcq",
+      "prompt": "America's Strategic Defense System during the Cold War was nicknamed after this famous movie.",
+      "payload": {
+        "options": [
+          {
+            "label": "Blade Runner",
+            "correct": false
+          },
+          {
+            "label": "Alien",
+            "correct": false
+          },
+          {
+            "label": "Jaws",
+            "correct": false
+          },
+          {
+            "label": "Star Wars",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9043f57f959b",
+      "type": "mcq",
+      "prompt": "The 1988 Formula 1 season had McLaren win all but one race, what race did they not win?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brazilian Grand Prix",
+            "correct": false
+          },
+          {
+            "label": "Monaco Grand Prix",
+            "correct": false
+          },
+          {
+            "label": "Japanese Grand Prix",
+            "correct": false
+          },
+          {
+            "label": "Italian Grand Prix",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9e9575dbaa06",
+      "type": "mcq",
+      "prompt": "Which company did the animation for Peter Gabriel's Video Sledgehammer (1986)?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aardman Animations",
+            "correct": true
+          },
+          {
+            "label": "VIZ Media",
+            "correct": false
+          },
+          {
+            "label": "HIT Entertainment",
+            "correct": false
+          },
+          {
+            "label": "Illumination Entertainment",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a6a86237d176",
+      "type": "mcq",
+      "prompt": "Which Formula One driver was nicknamed 'The Professor'?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emerson Fittipaldi",
+            "correct": false
+          },
+          {
+            "label": "Ayrton Senna",
+            "correct": false
+          },
+          {
+            "label": "Alain Prost",
+            "correct": true
+          },
+          {
+            "label": "Niki Lauda",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a6fbb06b1612",
+      "type": "mcq",
+      "prompt": "Who directed \"E.T. the Extra-Terrestrial\" (1982)?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stanley Kubrick",
+            "correct": false
+          },
+          {
+            "label": "Steven Spielberg",
+            "correct": true
+          },
+          {
+            "label": "James Cameron",
+            "correct": false
+          },
+          {
+            "label": "Tim Burton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c9c9a363bbfd",
+      "type": "mcq",
+      "prompt": "In what year did the North American Video Game Crash occur?",
+      "payload": {
+        "options": [
+          {
+            "label": "1982",
+            "correct": false
+          },
+          {
+            "label": "1993",
+            "correct": false
+          },
+          {
+            "label": "1983",
+            "correct": true
+          },
+          {
+            "label": "1970",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c9edc97b7bd8",
+      "type": "mcq",
+      "prompt": "This movie contains the quote, \"Nobody puts Baby in a corner.\"",
+      "payload": {
+        "options": [
+          {
+            "label": "Ferris Bueller's Day Off",
+            "correct": false
+          },
+          {
+            "label": "Pretty in Pink",
+            "correct": false
+          },
+          {
+            "label": "Dirty Dancing",
+            "correct": true
+          },
+          {
+            "label": "Three Men and a Baby",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d50785021ee7",
+      "type": "truefalse",
+      "prompt": "The IBM PC used an Intel 8008 microprocessor clocked at 4.77 MHz and 8 kilobytes of memory.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "sciences",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d7ca02b8e7a7",
+      "type": "mcq",
+      "prompt": "With which doubles partner did John McEnroe have most success?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mary Carillo",
+            "correct": false
+          },
+          {
+            "label": "Peter Fleming",
+            "correct": true
+          },
+          {
+            "label": "Mark Woodforde",
+            "correct": false
+          },
+          {
+            "label": "Michael Stich",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e7712a23ce87",
+      "type": "mcq",
+      "prompt": "Blinky, Pinky, Inky and Clyde are characters from which classic video game?",
+      "payload": {
+        "options": [
+          {
+            "label": "Street Fighter",
+            "correct": false
+          },
+          {
+            "label": "Gauntlet",
+            "correct": false
+          },
+          {
+            "label": "Space Invaders",
+            "correct": false
+          },
+          {
+            "label": "Pac-Man",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-the-80s",
+      "title": "The 80s",
+      "description": "Films, games, music and sport from the 1980s.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-55ea15c94a79",
+        "otdb-7b2d7af370c7",
+        "otdb-9e9575dbaa06",
+        "otdb-6b0457c3fa4f",
+        "otdb-a6fbb06b1612",
+        "otdb-c9c9a363bbfd",
+        "otdb-5f3aef6e11c6",
+        "otdb-0a1b5569601d",
+        "otdb-e7712a23ce87",
+        "otdb-47f852b32b4a",
+        "otdb-d7ca02b8e7a7",
+        "otdb-c9edc97b7bd8",
+        "otdb-a6a86237d176",
+        "otdb-d50785021ee7",
+        "otdb-2ab6c55e5477",
+        "otdb-7f2b15d123a3",
+        "otdb-9043f57f959b"
+      ]
+    }
+  ]
+}

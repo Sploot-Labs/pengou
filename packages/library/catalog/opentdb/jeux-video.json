@@ -6,18 +6,6 @@
   },
   "questions": [
     {
-      "id": "otdb-00932b41ea9a",
-      "type": "truefalse",
-      "prompt": "The shotgun appears in every numbered Resident Evil game.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-015c9d383c7f",
       "type": "mcq",
       "prompt": "The first version of Blockland came out in which year?",
@@ -38,35 +26,6 @@
           {
             "label": "2004",
             "correct": true
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-01d846ce5610",
-      "type": "mcq",
-      "prompt": "Which soccer player is featured on the cover of EA Sport's FIFA 18?",
-      "payload": {
-        "options": [
-          {
-            "label": "Lionel Messi",
-            "correct": false
-          },
-          {
-            "label": "Cristiano Ronaldo",
-            "correct": true
-          },
-          {
-            "label": "Neymar",
-            "correct": false
-          },
-          {
-            "label": "Harry Kane",
-            "correct": false
           }
         ]
       },
@@ -134,35 +93,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-0afdda8e4d96",
-      "type": "mcq",
-      "prompt": "In \"Overwatch\", Coalescence is the name for the ultimate of which hero?",
-      "payload": {
-        "options": [
-          {
-            "label": "Torbjorn",
-            "correct": false
-          },
-          {
-            "label": "Moira",
-            "correct": true
-          },
-          {
-            "label": "Zenyatta",
-            "correct": false
-          },
-          {
-            "label": "Symmetra",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-0d55543d8a8f",
       "type": "mcq",
       "prompt": "What was the first game ever released that ran on the Source engine?",
@@ -182,35 +112,6 @@
           },
           {
             "label": "Team Fortress 2",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-13ecbd16d75a",
-      "type": "mcq",
-      "prompt": "What level do you have to be to get a service medal on CS:GO?",
-      "payload": {
-        "options": [
-          {
-            "label": "30",
-            "correct": false
-          },
-          {
-            "label": "50",
-            "correct": false
-          },
-          {
-            "label": "40",
-            "correct": true
-          },
-          {
-            "label": "20",
             "correct": false
           }
         ]
@@ -250,35 +151,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-15f7a84a4083",
-      "type": "mcq",
-      "prompt": "What vehicle in PUBG has the highest top speed?",
-      "payload": {
-        "options": [
-          {
-            "label": "Motorcycle",
-            "correct": true
-          },
-          {
-            "label": "PG-117",
-            "correct": false
-          },
-          {
-            "label": "Buggy",
-            "correct": false
-          },
-          {
-            "label": "Dacia",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-176d0a553785",
       "type": "mcq",
       "prompt": "Who is the victim mentioned in the second KG-8 incident, in Ace attorney Investigations, Case 4?",
@@ -304,18 +176,6 @@
       },
       "theme": "jeux-video",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-1ada3e1e5132",
-      "type": "truefalse",
-      "prompt": "In 2019, Minecraft outsold Tetris to become the world's best-selling video game.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -378,64 +238,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-1e7b02458957",
-      "type": "mcq",
-      "prompt": "How many aces can be shot down through the entirety of \"Ace Combat Zero: The Belkan War\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "169",
-            "correct": true
-          },
-          {
-            "label": "100",
-            "correct": false
-          },
-          {
-            "label": "132",
-            "correct": false
-          },
-          {
-            "label": "245",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-223fd3053398",
-      "type": "mcq",
-      "prompt": "Which of these is not a wonder weapon in \"Call Of Duty: Zombies\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ray Gun",
-            "correct": false
-          },
-          {
-            "label": "GKZ-45 Mk3",
-            "correct": false
-          },
-          {
-            "label": "Scavenger",
-            "correct": false
-          },
-          {
-            "label": "R115 Resonator",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-2245fb23476d",
       "type": "mcq",
       "prompt": "Which Kingdom Hearts game featured the cast of \"The World Ends With You\"?",
@@ -465,6 +267,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-290493c71112",
+      "type": "mcq",
+      "prompt": "In Half-Life, what is the name of the alien that attaches to heads?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vortigaunt",
+            "correct": false
+          },
+          {
+            "label": "Bullsquid",
+            "correct": false
+          },
+          {
+            "label": "Facehugger",
+            "correct": false
+          },
+          {
+            "label": "Headcrab",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-2bcf0e7abc68",
       "type": "mcq",
       "prompt": "Gordon Freeman is said to have burnt and destroyed what food in the break room microwave?",
@@ -490,6 +321,35 @@
       },
       "theme": "jeux-video",
       "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2d49b96a34f1",
+      "type": "mcq",
+      "prompt": "In \"Resident Evil 3\", how many inventory slots does Jill have at the start of the game?",
+      "payload": {
+        "options": [
+          {
+            "label": "8",
+            "correct": true
+          },
+          {
+            "label": "12",
+            "correct": false
+          },
+          {
+            "label": "10",
+            "correct": false
+          },
+          {
+            "label": "6",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -593,64 +453,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-3d94b1eb1cb5",
-      "type": "mcq",
-      "prompt": "Which is the model number of the common laser rifle found in Fallout 3, Fallout: New Vegas, and Fallout 4?",
-      "payload": {
-        "options": [
-          {
-            "label": "AER12",
-            "correct": false
-          },
-          {
-            "label": "AER9",
-            "correct": true
-          },
-          {
-            "label": "AER14",
-            "correct": false
-          },
-          {
-            "label": "AER10",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-3e0e689540be",
-      "type": "mcq",
-      "prompt": "\"The Potato Sack\" was a collection of indie games released on Steam in 2011 as a promotion for which game?",
-      "payload": {
-        "options": [
-          {
-            "label": "Half-Life 3",
-            "correct": false
-          },
-          {
-            "label": "Left 4 Dead 2",
-            "correct": false
-          },
-          {
-            "label": "Dota 2",
-            "correct": false
-          },
-          {
-            "label": "Portal 2",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-3e78c8622b56",
       "type": "mcq",
       "prompt": "In the Pokémon series, which type is Sudowoodo, the Imitation Pokémon?",
@@ -676,76 +478,6 @@
       },
       "theme": "jeux-video",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-3ec6a9506bf4",
-      "type": "mcq",
-      "prompt": "What is the name of the main character in \"Life is Strange\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Victoria Chase",
-            "correct": false
-          },
-          {
-            "label": "Maxine Caulfield",
-            "correct": true
-          },
-          {
-            "label": "Chloe Price",
-            "correct": false
-          },
-          {
-            "label": "Stella Hill",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-3f066c57e185",
-      "type": "truefalse",
-      "prompt": "In Terraria, you can craft the Cell Phone pre-hardmode.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-41f4dfb20591",
-      "type": "mcq",
-      "prompt": "In the game \"The Sims\", how many Simoleons does each family start with?",
-      "payload": {
-        "options": [
-          {
-            "label": "15,000",
-            "correct": false
-          },
-          {
-            "label": "20,000",
-            "correct": true
-          },
-          {
-            "label": "25,000",
-            "correct": false
-          },
-          {
-            "label": "10,000",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -808,60 +540,31 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-49e43603aa1c",
+      "id": "otdb-4fab33f38e71",
       "type": "mcq",
-      "prompt": "In what year was the first eSports competition?",
+      "prompt": "In the MMO RPG \"Realm of the Mad God\", what dungeon is widely considered to be the most difficult?",
       "payload": {
         "options": [
           {
-            "label": "1989",
+            "label": "Snake Pit",
             "correct": false
           },
           {
-            "label": "2000",
+            "label": "The Tomb of the Acient's",
             "correct": false
           },
           {
-            "label": "1990",
+            "label": "The Puppet Master's Theater",
             "correct": false
           },
           {
-            "label": "1972",
+            "label": "The Shatter's",
             "correct": true
           }
         ]
       },
       "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-4b7d117b5d4f",
-      "type": "mcq",
-      "prompt": "How many carbon cars are there in Burnout Paradise?",
-      "payload": {
-        "options": [
-          {
-            "label": "3",
-            "correct": false
-          },
-          {
-            "label": "4",
-            "correct": false
-          },
-          {
-            "label": "5",
-            "correct": false
-          },
-          {
-            "label": "6",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
+      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -907,69 +610,28 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-50c861205b6a",
+      "id": "otdb-5bd29c83b392",
       "type": "mcq",
-      "prompt": "In Spyro the Dragon, what is Spyro's dragonfly friend called?",
+      "prompt": "Which of these Marvel games was released on the Playstation 2?",
       "payload": {
         "options": [
           {
-            "label": "Sparx",
-            "correct": true
-          },
-          {
-            "label": "Spinkles",
+            "label": "Silver Surfer",
             "correct": false
           },
           {
-            "label": "Sam",
+            "label": "Wolverine: Adamantium Rage",
             "correct": false
           },
           {
-            "label": "Sparky",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-555c2354cc82",
-      "type": "mcq",
-      "prompt": "In Need For Speed Most Wanted (2005), what do you drive at the beginning of the career mode?",
-      "payload": {
-        "options": [
-          {
-            "label": "Nissan 240SX",
+            "label": "Howard the Duck",
             "correct": false
           },
           {
-            "label": "Porsche 911 Turbo",
-            "correct": false
-          },
-          {
-            "label": "Ford Mustang",
-            "correct": false
-          },
-          {
-            "label": "BMW M3 GTR",
+            "label": "Spider-Man 2",
             "correct": true
           }
         ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-579588941b6f",
-      "type": "truefalse",
-      "prompt": "In Sonic the Hedgehog universe, Tails' real name is Miles Prower.",
-      "payload": {
-        "correct": true
       },
       "theme": "jeux-video",
       "difficulty": "facile",
@@ -1129,47 +791,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-71320469cb32",
-      "type": "truefalse",
-      "prompt": "\"Sonic the Hedgehog 2\" originally was going to have a time travel system.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-72acfccb19c3",
-      "type": "mcq",
-      "prompt": "What is the highest level that you can reach in \"The Elder Scrolls 4: Oblivion\" without considering skill levels, class, and birthsign?",
-      "payload": {
-        "options": [
-          {
-            "label": "No limit",
-            "correct": false
-          },
-          {
-            "label": "50",
-            "correct": true
-          },
-          {
-            "label": "80",
-            "correct": false
-          },
-          {
-            "label": "100",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-739d63873aa9",
       "type": "mcq",
       "prompt": "What ingredients are required to make a cake in Minecraft?",
@@ -1228,35 +849,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-782dabd95012",
-      "type": "mcq",
-      "prompt": "Who is the villain company in \"Stardew Valley\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ronin",
-            "correct": false
-          },
-          {
-            "label": "Joja Co",
-            "correct": true
-          },
-          {
-            "label": "Robotnik Industry's",
-            "correct": false
-          },
-          {
-            "label": "Empire",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-79d8bc6017ef",
       "type": "mcq",
       "prompt": "What former MOBA, created by Waystone Games and published by EA, was shut down in 2014?",
@@ -1286,35 +878,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-7b2d7af370c7",
-      "type": "mcq",
-      "prompt": "Which of these is not one of Dracula's relics found in the video game \"Castlevania II: Simon's Quest\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "The Nail",
-            "correct": false
-          },
-          {
-            "label": "The Tooth",
-            "correct": true
-          },
-          {
-            "label": "The Eyeball",
-            "correct": false
-          },
-          {
-            "label": "The Rib Bone",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-7d0ad2427301",
       "type": "truefalse",
       "prompt": "The game \"Jetpack Joyride\" was created by \"Redbrick Studios\".",
@@ -1327,31 +890,31 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-82d5560445f5",
+      "id": "otdb-884950d93345",
       "type": "mcq",
-      "prompt": "When was the Valve Corporation founded?",
+      "prompt": "In \"Katamari Damacy\", you control a character known as:",
       "payload": {
         "options": [
           {
-            "label": "December 26, 1994",
-            "correct": false
-          },
-          {
-            "label": "March 13, 1997",
-            "correct": false
-          },
-          {
-            "label": "August 24, 1996",
+            "label": "The Prince",
             "correct": true
           },
           {
-            "label": "March 22, 1997",
+            "label": "Foomin",
+            "correct": false
+          },
+          {
+            "label": "Fujio",
+            "correct": false
+          },
+          {
+            "label": "Ichigo",
             "correct": false
           }
         ]
       },
       "theme": "jeux-video",
-      "difficulty": "difficile",
+      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -1385,64 +948,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-89de4d427e42",
-      "type": "mcq",
-      "prompt": "In the game \"VA-11 Hall-A\" during Virgilio's ending, Virgilio opens his own:",
-      "payload": {
-        "options": [
-          {
-            "label": "Law Firm",
-            "correct": false
-          },
-          {
-            "label": "Curry Stand",
-            "correct": true
-          },
-          {
-            "label": "Bar",
-            "correct": false
-          },
-          {
-            "label": "Museum",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-9209cec03f62",
-      "type": "mcq",
-      "prompt": "In \"PAYDAY 2\", what weapon has the highest base weapon damage on a per-shot basis?",
-      "payload": {
-        "options": [
-          {
-            "label": "HRL-7",
-            "correct": true
-          },
-          {
-            "label": "Heavy Crossbow",
-            "correct": false
-          },
-          {
-            "label": "Broomstick Pistol",
-            "correct": false
-          },
-          {
-            "label": "Thanatos .50 cal",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-92639a891983",
       "type": "mcq",
       "prompt": "In Overwatch, what is Lúcio's full name?",
@@ -1468,64 +973,6 @@
       },
       "theme": "jeux-video",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-93ea0239785d",
-      "type": "mcq",
-      "prompt": "In World of Warcraft Lore, four Old Gods created a giant and powerful creature. What was it called?",
-      "payload": {
-        "options": [
-          {
-            "label": "Eater of Souls",
-            "correct": false
-          },
-          {
-            "label": "Anomalous",
-            "correct": false
-          },
-          {
-            "label": "The Ancient One",
-            "correct": true
-          },
-          {
-            "label": "The Lich King",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-93f8c6e95485",
-      "type": "mcq",
-      "prompt": "In the \"Ace Attorney\" series, who was the truly responsible of the forging of the autopsy report of the pivotal IS-7 incident?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tateyuki Shigaraki",
-            "correct": false
-          },
-          {
-            "label": "Bansai Ichiyanagi",
-            "correct": true
-          },
-          {
-            "label": "Gregory Edgeworth",
-            "correct": false
-          },
-          {
-            "label": "Manfred Von Karma",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -1584,35 +1031,6 @@
       },
       "theme": "jeux-video",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-9b258da8c009",
-      "type": "mcq",
-      "prompt": "What are tiny Thwomps called in Super Mario World?",
-      "payload": {
-        "options": [
-          {
-            "label": "Little Thwomp",
-            "correct": false
-          },
-          {
-            "label": "Tiny Tims",
-            "correct": false
-          },
-          {
-            "label": "Mini Thwomp",
-            "correct": false
-          },
-          {
-            "label": "Thwimps",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -1704,64 +1122,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-afa9d4771193",
-      "type": "mcq",
-      "prompt": "In WarioWare: Smooth Moves, which one of these is NOT a Form?",
-      "payload": {
-        "options": [
-          {
-            "label": "The Elephant",
-            "correct": false
-          },
-          {
-            "label": "The Discard",
-            "correct": false
-          },
-          {
-            "label": "The Hotshot",
-            "correct": true
-          },
-          {
-            "label": "The Mohawk",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-b34547a50b7c",
-      "type": "mcq",
-      "prompt": "What year was the game Team Fortress 2 released?",
-      "payload": {
-        "options": [
-          {
-            "label": "2005",
-            "correct": false
-          },
-          {
-            "label": "2007",
-            "correct": true
-          },
-          {
-            "label": "2009",
-            "correct": false
-          },
-          {
-            "label": "2010",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-b7a3dd191d17",
       "type": "mcq",
       "prompt": "This weapon in Counter-Strike: Global Offensive does not exist in real life.",
@@ -1781,64 +1141,6 @@
           },
           {
             "label": "AWP",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-be21acbb7caa",
-      "type": "mcq",
-      "prompt": "One of the early prototypes of the Sega Dreamcast controller resembled which of the following?",
-      "payload": {
-        "options": [
-          {
-            "label": "Television Remote",
-            "correct": true
-          },
-          {
-            "label": "Tablet",
-            "correct": false
-          },
-          {
-            "label": "Hairdryer",
-            "correct": false
-          },
-          {
-            "label": "Flip Phone",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-c1a5b9c48f1d",
-      "type": "mcq",
-      "prompt": "Final Fantasy VI was originally released outside Japan under what name?",
-      "payload": {
-        "options": [
-          {
-            "label": "Final Fantasy V",
-            "correct": false
-          },
-          {
-            "label": "Final Fantasy VI",
-            "correct": false
-          },
-          {
-            "label": "Final Fantasy III",
-            "correct": true
-          },
-          {
-            "label": "Final Fantasy II",
             "correct": false
           }
         ]
@@ -1878,18 +1180,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-c507d052effe",
-      "type": "truefalse",
-      "prompt": "DragonForce's 'Through the Fire and Flames' is widely considered to be the hardest song in the Guitar Hero series.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-c9ed4aa6c2a8",
       "type": "mcq",
       "prompt": "Which company is the one responsible for creating the strategy videogame Stellaris?",
@@ -1919,18 +1209,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-ca8475c4225f",
-      "type": "truefalse",
-      "prompt": "The Paradox Interactive game \"Stellaris\" was released in 2016.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "jeux-video",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-ccee541f9f9b",
       "type": "mcq",
       "prompt": "The Touhou Project series of games is often associated with which genre?",
@@ -1950,35 +1228,6 @@
           },
           {
             "label": "Strategy",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-cf994fe859c4",
-      "type": "mcq",
-      "prompt": "Which water-type Pokémon starter was introduced in the 4th generation of the series?",
-      "payload": {
-        "options": [
-          {
-            "label": "Piplup",
-            "correct": true
-          },
-          {
-            "label": "Oshawott",
-            "correct": false
-          },
-          {
-            "label": "Mudkip",
-            "correct": false
-          },
-          {
-            "label": "Totodile",
             "correct": false
           }
         ]
@@ -2043,35 +1292,6 @@
       },
       "theme": "jeux-video",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-d4736cba5846",
-      "type": "mcq",
-      "prompt": "Which game is NOT part of the Science Adventure series by 5pb. and Nitroplus?",
-      "payload": {
-        "options": [
-          {
-            "label": "Occultic; Nine",
-            "correct": true
-          },
-          {
-            "label": "Robotics; Notes",
-            "correct": false
-          },
-          {
-            "label": "Chaos; Child",
-            "correct": false
-          },
-          {
-            "label": "Steins; Gate",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -2163,35 +1383,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-d7913206f611",
-      "type": "mcq",
-      "prompt": "In the Team Fortress 2 canon, what did Shakespearicles NOT invent?",
-      "payload": {
-        "options": [
-          {
-            "label": "Rocket Launcher",
-            "correct": false
-          },
-          {
-            "label": "Stairs",
-            "correct": true
-          },
-          {
-            "label": "Stage Play",
-            "correct": false
-          },
-          {
-            "label": "Two-Story Building",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-d7d5e009efb8",
       "type": "mcq",
       "prompt": "Which city hosted the CS:GO Dreamhack Open 2015?",
@@ -2217,35 +1408,6 @@
       },
       "theme": "jeux-video",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-d84a3d66e4d4",
-      "type": "mcq",
-      "prompt": "What type of Pokémon is Charizard?",
-      "payload": {
-        "options": [
-          {
-            "label": "Dragon",
-            "correct": false
-          },
-          {
-            "label": "Fire/Flying",
-            "correct": true
-          },
-          {
-            "label": "Fire",
-            "correct": false
-          },
-          {
-            "label": "Fire/Dragon",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -2291,64 +1453,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-e2f77f14a879",
-      "type": "mcq",
-      "prompt": "In which video game did Michael Fassbender star?",
-      "payload": {
-        "options": [
-          {
-            "label": "Assassin's Creed 3",
-            "correct": false
-          },
-          {
-            "label": "Red Dead Redemption",
-            "correct": false
-          },
-          {
-            "label": "Fable 3",
-            "correct": true
-          },
-          {
-            "label": "Call of Duty: Modern Warfare",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-e33d7831238f",
-      "type": "mcq",
-      "prompt": "What animal is on Link's pajamas in The Legend of Zelda: The Wind Waker?",
-      "payload": {
-        "options": [
-          {
-            "label": "Lobster",
-            "correct": false
-          },
-          {
-            "label": "Swordfish",
-            "correct": false
-          },
-          {
-            "label": "Salmon",
-            "correct": false
-          },
-          {
-            "label": "Crawfish",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-e48de694186e",
       "type": "truefalse",
       "prompt": "Super Mario Bros. was the first video game ever created.",
@@ -2361,84 +1465,31 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-e700e20a2042",
-      "type": "truefalse",
-      "prompt": "Amazon acquired Twitch in August 2014 for $970 million dollars.",
+      "id": "otdb-f076937531c5",
+      "type": "mcq",
+      "prompt": "What are the three starter Pokemon available in Pokemon Black and White?",
       "payload": {
-        "correct": true
+        "options": [
+          {
+            "label": "Chespin, Tepig, Froakie",
+            "correct": false
+          },
+          {
+            "label": "Snivy, Fennekin, Froakie",
+            "correct": false
+          },
+          {
+            "label": "Snivy, Tepig, Oshawott",
+            "correct": true
+          },
+          {
+            "label": "Chespin, Fennekin, Oshawott",
+            "correct": false
+          }
+        ]
       },
       "theme": "jeux-video",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-e7712a23ce87",
-      "type": "mcq",
-      "prompt": "Blinky, Pinky, Inky and Clyde are characters from which classic video game?",
-      "payload": {
-        "options": [
-          {
-            "label": "Street Fighter",
-            "correct": false
-          },
-          {
-            "label": "Gauntlet",
-            "correct": false
-          },
-          {
-            "label": "Space Invaders",
-            "correct": false
-          },
-          {
-            "label": "Pac-Man",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-eac186e3f158",
-      "type": "truefalse",
-      "prompt": "In \"Undertale\", the main character of the game is Sans.",
-      "payload": {
-        "correct": false
-      },
-      "theme": "jeux-video",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-ebda045c58af",
-      "type": "mcq",
-      "prompt": "Which car did not appear in the 2002 Lego Game: Drome Racers?",
-      "payload": {
-        "options": [
-          {
-            "label": "Raptor",
-            "correct": false
-          },
-          {
-            "label": "Behemoth",
-            "correct": false
-          },
-          {
-            "label": "Wasp",
-            "correct": true
-          },
-          {
-            "label": "Hornet",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -2472,35 +1523,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-f3fea19a153d",
-      "type": "mcq",
-      "prompt": "Which Crypt of the NecroDancer (2015) character has a soundtrack by Jake \"Virt\" Kaufman?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cadence",
-            "correct": false
-          },
-          {
-            "label": "Octavian (Bard)",
-            "correct": false
-          },
-          {
-            "label": "Uncle Eli",
-            "correct": true
-          },
-          {
-            "label": "Nocturna",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-f630bc6dd5a0",
       "type": "truefalse",
       "prompt": "In the Resident Evil series, Leon S. Kennedy is a member of STARS.",
@@ -2513,26 +1535,26 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-f7c35044c45c",
+      "id": "otdb-f64adfc90663",
       "type": "mcq",
-      "prompt": "In \"Call Of Duty: Zombies\", which map's opening cutscene shows \"Richtofen\" killing another version of himself?",
+      "prompt": "What type of sound chip does the Super Nintendo Entertainment System (SNES) have?",
       "payload": {
         "options": [
           {
-            "label": "Moon",
+            "label": "FM Synthesizer",
             "correct": false
           },
           {
-            "label": "Shadows Of Evil",
+            "label": "PCM Sampler",
             "correct": false
           },
           {
-            "label": "Der Eisendrache",
-            "correct": false
-          },
-          {
-            "label": "The Giant",
+            "label": "ADPCM Sampler",
             "correct": true
+          },
+          {
+            "label": "Programmable Sound Generator (PSG)",
+            "correct": false
           }
         ]
       },
@@ -2604,27 +1626,63 @@
     {
       "id": "otdb-quiz-video-games",
       "title": "Video games",
-      "description": "Questions from the Open Trivia Database (opentdb.com), licensed under CC BY-SA 4.0.",
+      "description": "Classic and modern video games.",
       "theme": "jeux-video",
       "difficulty": "facile",
       "language": "en",
       "audience": "tous",
       "questionIds": [
-        "otdb-00932b41ea9a",
-        "otdb-15f7a84a4083",
-        "otdb-1ada3e1e5132",
-        "otdb-1c87cc67d261",
-        "otdb-223fd3053398",
-        "otdb-2bcf0e7abc68",
         "otdb-3d869528a1de",
-        "otdb-3e0e689540be",
-        "otdb-3ec6a9506bf4",
-        "otdb-3f066c57e185",
-        "otdb-4b7d117b5d4f",
-        "otdb-50c861205b6a",
-        "otdb-579588941b6f",
+        "otdb-d717907049f4",
+        "otdb-e48de694186e",
+        "otdb-e23ee4ccf3c9",
+        "otdb-290493c71112",
+        "otdb-38b691991828",
+        "otdb-d40fc3644665",
         "otdb-5fb3198c378a",
-        "otdb-67928a134d79"
+        "otdb-ccee541f9f9b",
+        "otdb-6de6314240c9",
+        "otdb-0d55543d8a8f",
+        "otdb-2bcf0e7abc68",
+        "otdb-1c87cc67d261",
+        "otdb-c3ba6d3cad5b",
+        "otdb-f270083bbe29",
+        "otdb-8900afe44478",
+        "otdb-3e78c8622b56",
+        "otdb-48b962eb81ed",
+        "otdb-9e3ac5d63bb6",
+        "otdb-d685c89034e7"
+      ]
+    },
+    {
+      "id": "otdb-quiz-gaming-trivia",
+      "title": "Gaming trivia",
+      "description": "Characters, studios and details from popular games.",
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-037289554678",
+        "otdb-f9299759d428",
+        "otdb-1ae05d211545",
+        "otdb-5065cbef75a0",
+        "otdb-332adacd6a36",
+        "otdb-5d5097eb5f11",
+        "otdb-619097af447d",
+        "otdb-67928a134d79",
+        "otdb-7d0ad2427301",
+        "otdb-b7a3dd191d17",
+        "otdb-c9ed4aa6c2a8",
+        "otdb-fcdc1c1d51bc",
+        "otdb-f630bc6dd5a0",
+        "otdb-884950d93345",
+        "otdb-d3c7ac697452",
+        "otdb-d5a5faf50d36",
+        "otdb-e01f9734eccc",
+        "otdb-92639a891983",
+        "otdb-2d49b96a34f1",
+        "otdb-6fe3c0843a63"
       ]
     }
   ]

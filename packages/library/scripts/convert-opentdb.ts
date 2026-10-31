@@ -1,5 +1,9 @@
 // Conversion d'Open Trivia DB (https://opentdb.com, CC BY-SA 4.0) en packs du catalogue (anglais).
 //
+// Ne plus relancer : le cache des réponses de l'API est perdu et l'API tire ses questions au hasard,
+// une nouvelle conversion changerait les questions livrées. Les packs livrés sont désormais retouchés
+// par curate-opentdb.ts (retraits, reclassements, quiz composés à la main).
+//
 // Usage (depuis la racine du dépôt) :
 //   pnpm dlx tsx packages/library/scripts/convert-opentdb.ts --cache <dossier>
 //
