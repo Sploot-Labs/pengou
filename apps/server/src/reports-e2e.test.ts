@@ -104,9 +104,13 @@ function waitFor<T = unknown>(client: ClientSocket, event: string): Promise<T> {
 }
 
 /** Collecte tous les événements `event` reçus — même utilitaire que game-e2e.test.ts. */
-function collect<T = unknown>(client: ClientSocket, event: string): { atLeast: (n: number) => Promise<T> } {
+function collect<T = unknown>(client: ClientSocket, event: string): {
+  atLeast: (n: number) => Promise<T>
+  until: (predicate: (payload: T) => boolean) => Promise<T>
+} {
   const received: T[] = []
   const waiters: Array<{ n: number; resolve: (v: T) => void }> = []
+  const matchers: Array<{ predicate: (payload: T) => boolean; resolve: (v: T) => void }> = []
   client.on(event, (payload: T) => {
     received.push(payload)
     for (const w of [...waiters]) {
@@ -115,11 +119,24 @@ function collect<T = unknown>(client: ClientSocket, event: string): { atLeast: (
         w.resolve(received[w.n - 1])
       }
     }
+    for (const m of [...matchers]) {
+      if (m.predicate(payload)) {
+        matchers.splice(matchers.indexOf(m), 1)
+        m.resolve(payload)
+      }
+    }
   })
   return {
     atLeast(n: number) {
       if (received.length >= n) return Promise.resolve(received[n - 1])
       return new Promise((resolve) => waiters.push({ n, resolve }))
+    },
+    // Premier payload (déjà reçu ou à venir) qui satisfait `predicate` : la diffusion du lobby
+    // étant coalescée, on attend un état (ex. « 3 joueurs ») plutôt qu'un nombre d'événements.
+    until(predicate: (payload: T) => boolean) {
+      const found = received.find(predicate)
+      if (found !== undefined) return Promise.resolve(found)
+      return new Promise((resolve) => matchers.push({ predicate, resolve }))
     },
   }
 }
@@ -236,7 +253,8 @@ describe('e2e — jouer une partie puis consulter le rapport (liste, détail, CS
       const bobPlayerId = join2.playerId!
       const carolPlayerId = join3.playerId!
 
-      await lobbyUpdates.atLeast(3)
+      // Diffusion coalescée : on attend l'état final (3 joueurs), pas un événement par arrivée.
+      await lobbyUpdates.until((u) => u.players.length === 3)
 
       // ============================================================================
       // Q1 (mcq) : Alice rapide-correcte, Bob lent-correct (écart de 300ms mesuré

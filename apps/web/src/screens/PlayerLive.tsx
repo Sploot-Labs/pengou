@@ -37,16 +37,6 @@ interface QuestionShowPayload {
   total?: number
 }
 
-/** `lobby:update` — liste des joueurs de la room, diffusée par la passerelle
- * (`game-gateway.ts`) à TOUTE la room, joueur compris. On n'en consomme que
- * le compteur « manchots sur la glace » : aucun autre détail joueur n'est
- * affiché côté joueur. */
-interface LobbyPlayer {
-  id: string
-  nickname: string
-  connected?: boolean
-}
-
 /** Projection « lecture seule » émise par `question:reading` (Task 3, moteur
  * `readingView`) — DÉLIBÉRÉMENT sans `id`/`type`/`payload`/options, même
  * forme que celle consommée par `BigScreen` (voir son commentaire) : le
@@ -211,8 +201,8 @@ export function PlayerLive() {
   const [autoNextAt, setAutoNextAt] = useState<number | null>(null)
   const [autoRemaining, setAutoRemaining] = useState<number | null>(null)
 
-  // Compteur « manchots sur la glace » (lobby) — alimenté par `lobby:update`,
-  // vraie donnée serveur ; `null` tant qu'aucune liste n'est arrivée (on
+  // Compteur « manchots sur la glace » (lobby), alimenté par `lobby:count`,
+  // vraie donnée serveur ; `null` tant qu'aucun compteur n'est arrivé (on
   // n'invente pas de nombre).
   const [lobbyCount, setLobbyCount] = useState<number | null>(null)
 
@@ -447,11 +437,12 @@ export function PlayerLive() {
       setAutoNextAt(nextAt)
     })
 
-    // Compteur du lobby (« manchots sur la glace ») — diffusé à toute la room
-    // à chaque arrivée/départ, et rejoué sur `player:reconnect`. On ne garde
-    // que le nombre : aucun autre détail joueur n'est exposé côté joueur.
-    const offLobby = on<{ players: LobbyPlayer[] }>('lobby:update', ({ players }) => {
-      setLobbyCount(players.filter((p) => p.connected !== false).length)
+    // Compteur du lobby (« manchots sur la glace ») : `lobby:count` porte le
+    // nombre de joueurs connectés, diffusé de façon coalescée à chaque arrivée
+    // ou reconnexion. La liste des pseudos (`lobby:update`) est réservée à
+    // l'hôte et au grand écran : le joueur n'en reçoit jamais.
+    const offLobby = on<{ count: number }>('lobby:count', ({ count }) => {
+      setLobbyCount(count)
     })
 
     return () => {

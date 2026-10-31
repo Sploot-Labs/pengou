@@ -125,9 +125,13 @@ function raceNoEvent(client: ClientSocket, event: string, ms: number): Promise<b
 /** Collecte tous les événements `event` reçus par `client` (au lieu de `.once`, qui rate un
  * événement émis avant l'enregistrement du listener — race inhérente à 2 joueurs qui rejoignent
  * coup sur coup). `atLeast(n)` résout dès que le n-ième événement est arrivé. */
-function collect<T = unknown>(client: ClientSocket, event: string): { atLeast: (n: number) => Promise<T> } {
+function collect<T = unknown>(client: ClientSocket, event: string): {
+  atLeast: (n: number) => Promise<T>
+  until: (predicate: (payload: T) => boolean) => Promise<T>
+} {
   const received: T[] = []
   const waiters: Array<{ n: number; resolve: (v: T) => void }> = []
+  const matchers: Array<{ predicate: (payload: T) => boolean; resolve: (v: T) => void }> = []
   client.on(event, (payload: T) => {
     received.push(payload)
     for (const w of [...waiters]) {
@@ -136,11 +140,24 @@ function collect<T = unknown>(client: ClientSocket, event: string): { atLeast: (
         w.resolve(received[w.n - 1])
       }
     }
+    for (const m of [...matchers]) {
+      if (m.predicate(payload)) {
+        matchers.splice(matchers.indexOf(m), 1)
+        m.resolve(payload)
+      }
+    }
   })
   return {
     atLeast(n: number) {
       if (received.length >= n) return Promise.resolve(received[n - 1])
       return new Promise((resolve) => waiters.push({ n, resolve }))
+    },
+    // Premier payload (déjà reçu ou à venir) qui satisfait `predicate` : la diffusion du lobby
+    // étant coalescée, on attend un état (ex. « 3 joueurs ») plutôt qu'un nombre d'événements.
+    until(predicate: (payload: T) => boolean) {
+      const found = received.find(predicate)
+      if (found !== undefined) return Promise.resolve(found)
+      return new Promise((resolve) => matchers.push({ predicate, resolve }))
     },
   }
 }
@@ -219,7 +236,8 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       expect(join2.error).toBeUndefined()
       expect(join2.playerId).toBeTruthy()
 
-      const lobbyAfterBoth = await lobbyUpdates.atLeast(2)
+      // Diffusion coalescée : on attend l'état final (2 joueurs), pas un événement par arrivée.
+      const lobbyAfterBoth = await lobbyUpdates.until((u) => u.players.length === 2)
       expect(lobbyAfterBoth.players).toHaveLength(2)
 
       // 4. host:start → les DEUX joueurs reçoivent question:show SANS la bonne réponse
@@ -718,7 +736,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       )
       expect(join1.error).toBeUndefined()
       const { playerId, joinToken } = join1 as { playerId: string; joinToken: string }
-      await lobbyUpdates.atLeast(1) // lobby:update du player:join
+      await lobbyUpdates.until((u) => u.players.length === 1) // lobby:update du player:join
 
       await ack<{ error?: string }>(hostSocket, 'host:start', {})
 
@@ -734,7 +752,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         { pin, joinToken },
       )
       expect(reconnectAck.error).toBeUndefined()
-      await lobbyUpdates.atLeast(2) // lobby:update du player:reconnect
+      // lobby:update du player:reconnect (immédiat ou différé, mais un seul : rien n'était en
+      // attente depuis celui du player:join, déjà reçu).
+      await lobbyUpdates.atLeast(2)
 
       // MAINTENANT l'ancien socket se déconnecte (le "disconnect tardif").
       player1.disconnect()
@@ -746,7 +766,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const player2 = await connectClient(url)
       clients.push(player2)
       await ack(player2, 'player:join', { pin, nickname: 'Bob' })
-      const lobbyAfter = await lobbyUpdates.atLeast(3)
+      const lobbyAfter = await lobbyUpdates.until((u) => u.players.length === 2)
       const alice = lobbyAfter.players.find((p) => p.id === playerId)
       expect(alice).toBeDefined()
       expect(alice!.connected).toBe(true)
@@ -2495,5 +2515,127 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         await app2.close()
       }
     }, 30_000)
+  })
+
+  describe('diffusion du lobby coalescée (lobby:update réservé à l\'hôte et à l\'écran, lobby:count aux joueurs)', () => {
+    const sleepMs = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+    it('un joueur ne reçoit jamais lobby:update par diffusion, mais lobby:count avec le nombre de joueurs', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-lobby-count@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        const bob = await connectClient(url)
+        clients.push(ana, bob)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+
+        const anaCounts = collect<{ count: number }>(ana, 'lobby:count')
+        const noLobby = raceNoEvent(ana, 'lobby:update', 400)
+        expect((await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })).error).toBeUndefined()
+        expect(await noLobby).toBe(true)
+        const count = await anaCounts.until((c) => c.count === 2)
+        expect(count).toEqual({ count: 2 })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it('rafale de 30 arrivées : au plus 3 lobby:update dans les 600 ms après la dernière réponse, le dernier liste les 30 joueurs', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-lobby-burst@example.com')
+        clients.push(hostSocket)
+        const players = await Promise.all(Array.from({ length: 30 }, () => connectClient(url)))
+        clients.push(...players)
+
+        const received: Array<{ at: number; players: Array<{ id: string }> }> = []
+        hostSocket.on('lobby:update', (u: { players: Array<{ id: string }> }) => {
+          received.push({ at: Date.now(), players: u.players })
+        })
+
+        const burstStart = Date.now()
+        const results = await Promise.all(players.map((c, i) =>
+          ack<{ error?: string }>(c, 'player:join', { pin, nickname: `Joueur ${i}` })))
+        for (const r of results) expect(r.error).toBeUndefined()
+        const lastAckAt = Date.now()
+        await sleepMs(600)
+        const windowEnd = lastAckAt + 600
+
+        const inWindow = received.filter((r) => r.at >= lastAckAt && r.at <= windowEnd)
+        expect(inWindow.length).toBeLessThanOrEqual(3)
+        // Coalescence sur toute la rafale : au plus une diffusion par fenêtre de 250 ms (plus une
+        // de marge pour le décalage réseau), et non une par arrivée.
+        const total = received.filter((r) => r.at <= windowEnd)
+        expect(total.length).toBeLessThanOrEqual(2 + Math.floor((windowEnd - burstStart) / 250))
+        expect(total.length).toBeLessThan(30)
+        expect(received.at(-1)?.players).toHaveLength(30)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('arrivée isolée après un calme : lobby:update reçu par l\'hôte en moins de 100 ms après l\'ack', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-lobby-leading@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        const bob = await connectClient(url)
+        clients.push(ana, bob)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+        await sleepMs(400)
+
+        let receivedAt = 0
+        const lobbyPromise = new Promise<{ players: Array<{ id: string }> }>((resolve) => {
+          hostSocket.once('lobby:update', (u: { players: Array<{ id: string }> }) => {
+            receivedAt = Date.now()
+            resolve(u)
+          })
+        })
+        expect((await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })).error).toBeUndefined()
+        const ackAt = Date.now()
+        const lobby = await lobbyPromise
+        expect(lobby.players).toHaveLength(2)
+        expect(receivedAt - ackAt).toBeLessThan(100)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it('reconnexion : l\'hôte voit le joueur connected:true au lobby:update suivant, et le joueur reçoit lobby:count', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-lobby-reconnect@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        clients.push(ana)
+        const join = await ack<{ playerId?: string; joinToken?: string; error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })
+        expect(join.error).toBeUndefined()
+        const { playerId, joinToken } = join as { playerId: string; joinToken: string }
+        ana.disconnect()
+        await sleepMs(400)
+
+        const ana2 = await connectClient(url)
+        clients.push(ana2)
+        const nextLobby = waitFor<{ players: Array<{ id: string; connected: boolean }> }>(hostSocket, 'lobby:update')
+        const countPromise = waitFor<{ count: number }>(ana2, 'lobby:count')
+        const res = await ack<{ error?: string }>(ana2, 'player:reconnect', { pin, joinToken })
+        expect(res.error).toBeUndefined()
+        const lobby = await nextLobby
+        expect(lobby.players.find((p) => p.id === playerId)?.connected).toBe(true)
+        expect(await countPromise).toEqual({ count: 1 })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
   })
 })
