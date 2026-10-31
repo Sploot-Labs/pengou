@@ -34,3 +34,28 @@ export function estCibleLocale(url) {
   }
   return HOTES_LOCAUX.has(hote)
 }
+
+// Seuils de verdict d'un palier.
+export const REPONSE_P95_MAX_MS = 300
+export const DIFFUSION_P95_MAX_MS = 1000
+export const LAG_SERVEUR_P99_MAX_MS = 200
+export const LAG_GENERATEUR_P99_MAX_MS = 100
+
+/**
+ * Verdict d'un palier à partir du résumé JSON. `invalide` si le générateur lui-même est saturé ou
+ * si l'horloge est incohérente (la mesure ne vaut rien) ; sinon `reussi` si les cinq critères
+ * tiennent, `echoue` sinon. Une valeur manquante (NaN) fait échouer son critère.
+ */
+export function verdict(resume) {
+  const criteres = {
+    rejointTous: resume.joueurs.rejoints === resume.joueurs.tentes,
+    zeroDeconnexion: resume.deconnexions === 0,
+    reponseP95: resume.latences.reponse.p95 <= REPONSE_P95_MAX_MS,
+    diffusionP95: resume.latences.diffusion.p95 <= DIFFUSION_P95_MAX_MS,
+    lagServeurP99: resume.serveur.lagP99MaxMs <= LAG_SERVEUR_P99_MAX_MS,
+  }
+  if (resume.generateur.lagP99MaxMs > LAG_GENERATEUR_P99_MAX_MS || resume.horlogeIncoherente > 0) {
+    return { criteres, verdict: 'invalide' }
+  }
+  return { criteres, verdict: Object.values(criteres).every(Boolean) ? 'reussi' : 'echoue' }
+}

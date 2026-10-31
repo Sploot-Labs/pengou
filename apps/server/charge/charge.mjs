@@ -9,13 +9,16 @@ import { writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { parseArgs } from 'node:util'
 import { io } from 'socket.io-client'
-import { estCibleLocale, resumer } from './stats.mjs'
+import { echantillonnerDocker, echantillonnerServeur } from './metriques.mjs'
+import { estCibleLocale, resumer, verdict } from './stats.mjs'
 
 const REVEAL_MAX_MS = 25_000
 const ACK_HOTE_MAX_MS = 10_000
 const PAUSE_ENTRE_QUESTIONS_MS = 1000
 const DELAI_DEMARRAGE_MS = 2000
 const PLAGE_REPONSE_MS = [500, 3000]
+const PERIODE_METRIQUES_MS = 1000
+const PERIODE_DOCKER_MS = 5000
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
@@ -229,6 +232,9 @@ async function main() {
 
   const enfants = lots.map(() => fork(new URL('./joueurs.mjs', import.meta.url)))
   const arrivees = collecter(enfants, 'arrivees')
+  // Échantillonnage serveur : lancé juste avant le début des arrivées, arrêté au podium.
+  const echantillonServeur = echantillonnerServeur(opts.cible, PERIODE_METRIQUES_MS)
+  const echantillonDocker = opts.docker ? echantillonnerDocker(opts.docker, PERIODE_DOCKER_MS) : null
   const debutEpochMs = Date.now() + DELAI_DEMARRAGE_MS
   enfants.forEach((enfant, i) => {
     enfant.send({ type: 'demarrer', cible: opts.cible, debutEpochMs, joueurs: lots[i], reponseMs: PLAGE_REPONSE_MS })
@@ -246,6 +252,8 @@ async function main() {
   const t0ParCle = new Map()
   const resultats = collecter(enfants, 'resultat')
   await Promise.all(parties.map((partie) => jouerPartie(partie, t0ParCle)))
+  const serveur = await echantillonServeur.arreter()
+  const docker = echantillonDocker ? await echantillonDocker.arreter() : null
   for (const enfant of enfants) enfant.send({ type: 'terminer' })
   const recus = await resultats
   for (const partie of parties) partie.socket.close()
@@ -298,12 +306,26 @@ async function main() {
     deconnexions,
     horlogeIncoherente,
     generateur: { lagP99MaxMs: Math.round(lagP99MaxMs * 10) / 10 },
+    serveur,
+    ...(docker ? { docker } : {}),
   }
+  const { criteres, verdict: issue } = verdict(resume)
+  resume.criteres = criteres
+  resume.verdict = issue
 
   const chemin = resolve(opts.json ?? `charge-${opts.libelle}-${horodatage}.json`)
   writeFileSync(chemin, `${JSON.stringify(resume, null, 2)}\n`)
 
   console.table(latences)
+  console.table({
+    'lag event loop p99 max (ms)': { valeur: serveur.lagP99MaxMs },
+    'mémoire RSS max (Mo)': { valeur: serveur.rssMaxMo },
+    'heap max (Mo)': { valeur: serveur.heapMaxMo },
+    "CPU moyen (% d'un cœur)": { valeur: serveur.cpuMoyenPct },
+    "CPU max (% d'un cœur)": { valeur: serveur.cpuMaxPct },
+    'échantillons /metrics': { valeur: serveur.echantillons },
+  })
+  if (docker && Object.keys(docker).length > 0) console.table(docker)
   console.log(
     `Joueurs rejoints : ${rejoints}/${total}. Déconnexions : ${deconnexions}. ` +
       `Erreurs : ack hors délai ${erreurs.ackTimeout}, réponses refusées ${erreurs.reponseRefusee}, ` +
@@ -311,6 +333,8 @@ async function main() {
       `Lag p99 du générateur : ${resume.generateur.lagP99MaxMs} ms.`,
   )
   if (Object.keys(refus).length > 0) console.log(`Refus au join : ${JSON.stringify(refus)}.`)
+  console.log(`Critères : ${Object.entries(criteres).map(([nom, ok]) => `${nom} ${ok ? 'ok' : 'NON'}`).join(', ')}.`)
+  console.log(`Verdict : ${issue}.`)
   console.log(`Résumé écrit dans ${chemin}.`)
   process.exit(0)
 }

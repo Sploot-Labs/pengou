@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { estCibleLocale, percentile, resumer } from './stats.mjs'
+import { lireMetriques } from './metriques.mjs'
+import { estCibleLocale, percentile, resumer, verdict } from './stats.mjs'
 
 describe('percentile (rang le plus proche)', () => {
   it('renvoie NaN pour une liste vide', () => {
@@ -80,5 +81,78 @@ describe('estCibleLocale', () => {
     '',
   ])('refuse %s', (url) => {
     expect(estCibleLocale(url)).toBe(false)
+  })
+})
+
+function resumeType(surcharges = {}) {
+  return {
+    joueurs: { tentes: 10, rejoints: 10 },
+    deconnexions: 0,
+    horlogeIncoherente: 0,
+    latences: { reponse: { p95: 50 }, diffusion: { p95: 200 } },
+    serveur: { lagP99MaxMs: 20 },
+    generateur: { lagP99MaxMs: 5 },
+    ...surcharges,
+  }
+}
+
+describe('verdict', () => {
+  it('reussi quand les cinq critères tiennent', () => {
+    const v = verdict(resumeType())
+    expect(v.verdict).toBe('reussi')
+    expect(Object.values(v.criteres).every(Boolean)).toBe(true)
+  })
+
+  it('echoue et désigne le critère manqué', () => {
+    const v = verdict(resumeType({ joueurs: { tentes: 10, rejoints: 8 } }))
+    expect(v.verdict).toBe('echoue')
+    expect(v.criteres.rejointTous).toBe(false)
+    expect(verdict(resumeType({ deconnexions: 1 })).criteres.zeroDeconnexion).toBe(false)
+    expect(verdict(resumeType({ latences: { reponse: { p95: 301 }, diffusion: { p95: 200 } } })).criteres.reponseP95).toBe(false)
+    expect(verdict(resumeType({ latences: { reponse: { p95: 50 }, diffusion: { p95: 1001 } } })).criteres.diffusionP95).toBe(false)
+    expect(verdict(resumeType({ serveur: { lagP99MaxMs: 201 } })).criteres.lagServeurP99).toBe(false)
+  })
+
+  it('accepte les valeurs exactement égales aux seuils', () => {
+    const v = verdict(resumeType({ latences: { reponse: { p95: 300 }, diffusion: { p95: 1000 } }, serveur: { lagP99MaxMs: 200 } }))
+    expect(v.verdict).toBe('reussi')
+  })
+
+  it('une latence absente (NaN) fait échouer son critère', () => {
+    expect(verdict(resumeType({ latences: { reponse: { p95: Number.NaN }, diffusion: { p95: 1 } } })).verdict).toBe('echoue')
+  })
+
+  it('invalide si le générateur sature, même avec des critères en échec', () => {
+    const v = verdict(resumeType({ generateur: { lagP99MaxMs: 100.1 }, deconnexions: 3 }))
+    expect(v.verdict).toBe('invalide')
+    expect(verdict(resumeType({ generateur: { lagP99MaxMs: 100 } })).verdict).toBe('reussi')
+  })
+
+  it('invalide si une horloge est incohérente', () => {
+    expect(verdict(resumeType({ horlogeIncoherente: 1 })).verdict).toBe('invalide')
+  })
+})
+
+describe('lireMetriques', () => {
+  const texte = [
+    '# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.',
+    '# TYPE process_cpu_seconds_total counter',
+    'process_cpu_seconds_total 12.5',
+    'process_resident_memory_bytes 104857600',
+    'nodejs_eventloop_lag_p99_seconds_extra 9',
+    'nodejs_eventloop_lag_p99_seconds 0.0123',
+    'nodejs_heap_size_used_bytes 52428800',
+  ].join('\n')
+
+  it('convertit les unités et ignore les noms voisins', () => {
+    const m = lireMetriques(texte)
+    expect(m.lagP99Ms).toBeCloseTo(12.3, 5)
+    expect(m.rssMo).toBe(100)
+    expect(m.heapMo).toBe(50)
+    expect(m.cpuSecondes).toBe(12.5)
+  })
+
+  it('renvoie NaN pour une métrique absente', () => {
+    expect(lireMetriques('').rssMo).toBeNaN()
   })
 })
