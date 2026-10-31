@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=131"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0131-1",
+      "type": "mcq",
+      "prompt": "Dans quel film incarne-t-elle une romancière « au pic à glace » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Basic Instinct",
+            "correct": true
+          },
+          {
+            "label": "Sliver",
+            "correct": false
+          },
+          {
+            "label": "Mort ou vif",
+            "correct": false
+          },
+          {
+            "label": "Diabolique",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0131-2",
+      "type": "mcq",
+      "prompt": "Pour quel film Sharon Stone a-t-elle reçu un Golden Globe en 1995 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Casino",
+            "correct": true
+          },
+          {
+            "label": "Intersection",
+            "correct": false
+          },
+          {
+            "label": "Elle et lui",
+            "correct": false
+          },
+          {
+            "label": "Diabolique",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0131-3",
+      "type": "mcq",
+      "prompt": "À qui Sharon Stone a-t-elle dû laisser sa place pour « Liaison fatale » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Meryl Streep",
+            "correct": false
+          },
+          {
+            "label": "Candice Bergen",
+            "correct": false
+          },
+          {
+            "label": "Helen Hunt",
+            "correct": false
+          },
+          {
+            "label": "Glenn Close",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0131-4",
+      "type": "mcq",
+      "prompt": "Dans quel film incarne-t-elle une tueuse face à Arnold Schwarzenegger ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Total Recall",
+            "correct": true
+          },
+          {
+            "label": "Le Contrat",
+            "correct": false
+          },
+          {
+            "label": "Last Action Hero",
+            "correct": false
+          },
+          {
+            "label": "La Fin des temps",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

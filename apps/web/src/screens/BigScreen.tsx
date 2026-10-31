@@ -513,7 +513,7 @@ function BigScreenInner() {
               )}
               {row.correct && <span className="visually-hidden"> (bonne réponse)</span>}
             </span>
-            <span className="big-distribution__count">{row.count} réponse(s)</span>
+            <span className="big-distribution__count">{row.count} réponse{row.count > 1 ? 's' : ''}</span>
           </div>
         ))}
       </div>
@@ -559,10 +559,10 @@ function BigScreenInner() {
             </p>
           </div>
           {pin ? (
-            <>
+            <div className="big-lobby__join">
               <PinDisplay pin={pin} />
               <JoinInvite pin={pin} />
-            </>
+            </div>
           ) : (
             <p style={{ color: 'var(--ink-dim)' }}>PIN indisponible, demandez-le à l'hôte.</p>
           )}

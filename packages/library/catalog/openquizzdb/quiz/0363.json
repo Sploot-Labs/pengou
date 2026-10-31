@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=363"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0363-1",
+      "type": "mcq",
+      "prompt": "Dans quelle ville a eu lieu le concert « Rendez-Vous », de Jean-Michel Jarre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Los Angeles",
+            "correct": false
+          },
+          {
+            "label": "Houston",
+            "correct": true
+          },
+          {
+            "label": "Miami",
+            "correct": false
+          },
+          {
+            "label": "Chicago",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0363-2",
+      "type": "mcq",
+      "prompt": "Le texte de quel tube de Christophe a été écrit par Jean-Michel Jarre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Dolce Vita",
+            "correct": false
+          },
+          {
+            "label": "Succès Fou",
+            "correct": false
+          },
+          {
+            "label": "Les Mots Bleus",
+            "correct": true
+          },
+          {
+            "label": "Aline",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0363-3",
+      "type": "mcq",
+      "prompt": "Quel album de Jean-Michel Jarre est sorti en 1976 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rendez-vous",
+            "correct": false
+          },
+          {
+            "label": "Equinoxe",
+            "correct": false
+          },
+          {
+            "label": "Oxygène",
+            "correct": true
+          },
+          {
+            "label": "Chronologie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0363-4",
+      "type": "mcq",
+      "prompt": "Quel album de Jean-Michel Jarre est un hommage au vent ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Téo et Téa",
+            "correct": false
+          },
+          {
+            "label": "Aero",
+            "correct": true
+          },
+          {
+            "label": "Chronologie",
+            "correct": false
+          },
+          {
+            "label": "Geometry of Love",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

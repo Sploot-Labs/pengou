@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=59"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0059-1",
+      "type": "mcq",
+      "prompt": "Dans quel film Stallone incarne-t-il un shérif sourd de l'oreille droite ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cop Land",
+            "correct": true
+          },
+          {
+            "label": "Daylight",
+            "correct": false
+          },
+          {
+            "label": "Judge Dredd",
+            "correct": false
+          },
+          {
+            "label": "Spy Kids 3",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0059-2",
+      "type": "mcq",
+      "prompt": "Dans quel film Stallone incarne-t-il un secouriste des montagnes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cliffhanger",
+            "correct": true
+          },
+          {
+            "label": "Évasion",
+            "correct": false
+          },
+          {
+            "label": "Driven",
+            "correct": false
+          },
+          {
+            "label": "Le Vainqueur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0059-3",
+      "type": "mcq",
+      "prompt": "Le film « Tango et Cash » réunit Sylvester Stallone et quel autre acteur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Edward Norton",
+            "correct": false
+          },
+          {
+            "label": "Brandon Lee",
+            "correct": false
+          },
+          {
+            "label": "Kurt Russel",
+            "correct": true
+          },
+          {
+            "label": "Russell Crow",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0059-4",
+      "type": "mcq",
+      "prompt": "Quel film fait se confronter Sylvester Stallone et Antonio Banderas ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Assassins",
+            "correct": true
+          },
+          {
+            "label": "Cliffhanger",
+            "correct": false
+          },
+          {
+            "label": "Judge Dredd",
+            "correct": false
+          },
+          {
+            "label": "Demolition Man",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

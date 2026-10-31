@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=315"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0315-1",
+      "type": "mcq",
+      "prompt": "Quel instrument à cordes pincées est utilisé en Inde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Théorbe",
+            "correct": false
+          },
+          {
+            "label": "Banjo",
+            "correct": false
+          },
+          {
+            "label": "Sitar",
+            "correct": true
+          },
+          {
+            "label": "Gling",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0315-2",
+      "type": "mcq",
+      "prompt": "Quel instrument à cordes pincées est souvent utilisé en country ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Balalaïka",
+            "correct": false
+          },
+          {
+            "label": "Bouzouki",
+            "correct": false
+          },
+          {
+            "label": "Basson",
+            "correct": false
+          },
+          {
+            "label": "Banjo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0315-3",
+      "type": "mcq",
+      "prompt": "Combien de cordes au minimum dénombre-t-on sur une guitare basse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0315-4",
+      "type": "mcq",
+      "prompt": "Quelle est la forme de la balalaïka, qui nous vient de Russie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rectangulaire",
+            "correct": false
+          },
+          {
+            "label": "Carrée",
+            "correct": false
+          },
+          {
+            "label": "Ronde",
+            "correct": false
+          },
+          {
+            "label": "Triangulaire",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=514"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0514-1",
+      "type": "mcq",
+      "prompt": "Quelle île grecque produit un muscat très réputé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Samos",
+            "correct": true
+          },
+          {
+            "label": "Ikaria",
+            "correct": false
+          },
+          {
+            "label": "Lesbos",
+            "correct": false
+          },
+          {
+            "label": "Rhodes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0514-2",
+      "type": "mcq",
+      "prompt": "De quel pays assez riche en soleil provient le Muscat de Patras ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grèce",
+            "correct": true
+          },
+          {
+            "label": "Espagne",
+            "correct": false
+          },
+          {
+            "label": "Chypre",
+            "correct": false
+          },
+          {
+            "label": "Turquie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0514-3",
+      "type": "mcq",
+      "prompt": "Quel pays européen produit le vin blanc Aphrodite ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Espagne",
+            "correct": false
+          },
+          {
+            "label": "Grèce",
+            "correct": false
+          },
+          {
+            "label": "Chypre",
+            "correct": true
+          },
+          {
+            "label": "France",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0514-4",
+      "type": "mcq",
+      "prompt": "Quel est le cépage de cuve blanc le plus répandu en Allemagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sylvaner",
+            "correct": false
+          },
+          {
+            "label": "Riesling",
+            "correct": false
+          },
+          {
+            "label": "Müller-Thurgau",
+            "correct": true
+          },
+          {
+            "label": "Mauzac",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

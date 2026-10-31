@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=505"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0505-1",
+      "type": "mcq",
+      "prompt": "Quelle marque est identifiée par une ribambelle de fruits déjantés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Capri-Sun",
+            "correct": false
+          },
+          {
+            "label": "Oasis",
+            "correct": true
+          },
+          {
+            "label": "Calypso",
+            "correct": false
+          },
+          {
+            "label": "Lemonade",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0505-2",
+      "type": "mcq",
+      "prompt": "Quel jus de fruit est vendu dans une poche résistante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tropicana",
+            "correct": false
+          },
+          {
+            "label": "Casino",
+            "correct": false
+          },
+          {
+            "label": "Capri-Sun",
+            "correct": true
+          },
+          {
+            "label": "Andros",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0505-3",
+      "type": "mcq",
+      "prompt": "Quelle boisson contient beaucoup de jus et de pulpe d'orange ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pressade",
+            "correct": false
+          },
+          {
+            "label": "Orangina",
+            "correct": true
+          },
+          {
+            "label": "Joker",
+            "correct": false
+          },
+          {
+            "label": "Jafaden",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0505-4",
+      "type": "mcq",
+      "prompt": "Quels jus de fruits sont transformés dans l'usine historique de Mâcon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Minute Maid",
+            "correct": false
+          },
+          {
+            "label": "Tropicana",
+            "correct": false
+          },
+          {
+            "label": "Pampryl",
+            "correct": false
+          },
+          {
+            "label": "Joker",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=369"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0369-1",
+      "type": "mcq",
+      "prompt": "Quel basketteur a été champion NBA en 1998 pour la sixième fois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Karl Malone",
+            "correct": false
+          },
+          {
+            "label": "Michael Jordan",
+            "correct": true
+          },
+          {
+            "label": "Charles Barkley",
+            "correct": false
+          },
+          {
+            "label": "Patrick Ewing",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0369-2",
+      "type": "mcq",
+      "prompt": "Dans quelle pays est né le joueur de basket-ball Tony Parker ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pologne",
+            "correct": false
+          },
+          {
+            "label": "Belgique",
+            "correct": true
+          },
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "États-Unis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0369-3",
+      "type": "mcq",
+      "prompt": "Qui a été élu joueur NBA de la décennie 2000 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rick Fox",
+            "correct": false
+          },
+          {
+            "label": "Derek Fisher",
+            "correct": false
+          },
+          {
+            "label": "Ron Harper",
+            "correct": false
+          },
+          {
+            "label": "Kobe Bryant",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0369-4",
+      "type": "mcq",
+      "prompt": "Quel est le dernier club NBA dans lequel a joué Michael Jordan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lakers",
+            "correct": false
+          },
+          {
+            "label": "Bulls",
+            "correct": false
+          },
+          {
+            "label": "Wizards",
+            "correct": true
+          },
+          {
+            "label": "Spurs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

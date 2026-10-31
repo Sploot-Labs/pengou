@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=337"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0337-1",
+      "type": "mcq",
+      "prompt": "De quel pays provient principalement la datte medjool ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maroc",
+            "correct": true
+          },
+          {
+            "label": "Japon",
+            "correct": false
+          },
+          {
+            "label": "Canada",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0337-2",
+      "type": "mcq",
+      "prompt": "Quel goût a généralement la datte medjool ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Salé",
+            "correct": false
+          },
+          {
+            "label": "Sucré",
+            "correct": true
+          },
+          {
+            "label": "Amère",
+            "correct": false
+          },
+          {
+            "label": "Acide",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0337-3",
+      "type": "mcq",
+      "prompt": "Qu'est-ce qui distingue la datte medjool d'autres variétés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sans sucre",
+            "correct": false
+          },
+          {
+            "label": "Croquante",
+            "correct": false
+          },
+          {
+            "label": "Toujours verte",
+            "correct": false
+          },
+          {
+            "label": "Plus charnue",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0337-4",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur typique de la datte medjool mûre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brun foncé",
+            "correct": true
+          },
+          {
+            "label": "Bleu violacé",
+            "correct": false
+          },
+          {
+            "label": "Vert vif",
+            "correct": false
+          },
+          {
+            "label": "Jaune citron",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

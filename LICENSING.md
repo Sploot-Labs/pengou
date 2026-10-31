@@ -34,6 +34,22 @@ sûr pour un projet destiné à durer et à attirer des contributeurs entreprise
    votre version dérivée (au-delà de la mention d'origine). Le code est libre ; la marque ne l'est
    pas.
 
+## Données du catalogue de questions
+
+Le catalogue de questions livré avec Pengou (dossier `packages/library/catalog/`) n'est pas
+couvert par la licence Apache-2.0 du code. Chaque source y a son propre dossier, avec un fichier
+`LICENSE.md` qui fait foi pour ses données et liste l'attribution à reprendre.
+
+Les questions d'OpenQuizzDB (`catalog/openquizzdb/`, en français) et d'Open Trivia Database
+(`catalog/opentdb/`, en anglais) sont sous licence Creative Commons BY-SA 4.0. Vous pouvez les
+copier, les modifier et les utiliser, y compris commercialement, à deux conditions : citer la
+source (nom, licence, lien) et diffuser les questions modifiées sous la même licence. Pengou garde
+cette attribution sur chaque question copiée depuis la bibliothèque et l'affiche dans la
+bibliothèque et l'éditeur.
+
+La liste des thèmes (`catalog/themes.json`) et les scripts de conversion
+(`packages/library/scripts/`) relèvent d'Apache-2.0, comme le reste du code.
+
 ## Communication de marque
 
 Ici, dire **« open source »** est exact : Apache-2.0 est une licence approuvée par l'OSI. Le badge
@@ -41,15 +57,14 @@ et le pitch « open source » de Sploot Labs sont pleinement justifiés pour Pen
 
 ## Et le modèle économique alors ?
 
-L'ouverture n'empêche pas de monétiser — elle déplace juste le levier : la valeur payante se
-construit **autour** du code libre, pas via une restriction de licence. Pistes classiques
-(compatibles Apache-2.0, à décider plus tard) :
-- **Cloud hébergé Sploot Labs** : la commodité du « zéro-ops » (hébergement managé, sauvegardes,
-  SLA, support) — la majorité des utilisateurs de SaaS open source paient pour ne pas opérer.
-- **Features/edition entreprise** (SSO/SAML, audit, SCIM, marque blanche avancée…) proposées en
-  add-on. Si un jour vous voulez les garder fermées, c'est le modèle **open core** — décision de
-  produit, pas de licence, qui reste ouverte pour le cœur.
-- **Support, formation, intégration** sur mesure.
+Il n'y en a pas, au sens commercial. Le service hébergé par Sploot Labs sur
+[app.pengou.fr](https://app.pengou.fr) est gratuit pour tout le monde, sans offre payante ni
+version premium, et le code reste entièrement libre : pas d'édition entreprise fermée, pas
+d'open core. Les fonctionnalités arrivent dans le même code pour tous.
+
+Le serveur et le temps passé sont financés par les dons de celles et ceux qui le souhaitent, sur
+le principe « offrir un café ». Si ce choix devait changer un jour, il serait annoncé ici et dans
+le journal des nouveautés, et ce qui est gratuit aujourd'hui le resterait.
 
 ## Contribuer : DCO (recommandé)
 

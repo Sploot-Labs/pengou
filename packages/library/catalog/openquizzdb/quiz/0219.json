@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=219"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0219-1",
+      "type": "mcq",
+      "prompt": "Quelle ville bretonne est connue pour ses alignements de menhirs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quimper",
+            "correct": false
+          },
+          {
+            "label": "Carnac",
+            "correct": true
+          },
+          {
+            "label": "Brest",
+            "correct": false
+          },
+          {
+            "label": "Lorient",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0219-2",
+      "type": "mcq",
+      "prompt": "Quel symbole à trois branches est emblématique de la Bretagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Croix celtique",
+            "correct": false
+          },
+          {
+            "label": "Hermine",
+            "correct": false
+          },
+          {
+            "label": "Flèche",
+            "correct": false
+          },
+          {
+            "label": "Triskell",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0219-3",
+      "type": "mcq",
+      "prompt": "À partir de quoi est élaboré le chouchen, proche de l'hydromel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Malt d'orge",
+            "correct": false
+          },
+          {
+            "label": "Sirop de menthe",
+            "correct": false
+          },
+          {
+            "label": "Jus de pomme",
+            "correct": false
+          },
+          {
+            "label": "Miel Fermenté",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0219-4",
+      "type": "mcq",
+      "prompt": "Dans quel département français se dresse le phare de l'Île Vierge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Finistère",
+            "correct": true
+          },
+          {
+            "label": "Ille-et-Vilaine",
+            "correct": false
+          },
+          {
+            "label": "Morbihan",
+            "correct": false
+          },
+          {
+            "label": "Côtes-d'Armor",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

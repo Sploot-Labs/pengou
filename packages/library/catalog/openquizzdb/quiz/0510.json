@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=510"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0510-1",
+      "type": "mcq",
+      "prompt": "Quel constructeur automobile a pour slogan « le plaisir de conduire » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lotus",
+            "correct": false
+          },
+          {
+            "label": "Lexus",
+            "correct": false
+          },
+          {
+            "label": "BMW",
+            "correct": true
+          },
+          {
+            "label": "Mercedes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0510-2",
+      "type": "mcq",
+      "prompt": "Quel constructeur a pour slogan « la puissance des rêves » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jaguar",
+            "correct": false
+          },
+          {
+            "label": "Skoda",
+            "correct": false
+          },
+          {
+            "label": "Honda",
+            "correct": true
+          },
+          {
+            "label": "Land Rover",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0510-3",
+      "type": "mcq",
+      "prompt": "Quel constructeur a pour slogan « l'art de la performance » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mini Cooper",
+            "correct": false
+          },
+          {
+            "label": "Chevrolet",
+            "correct": false
+          },
+          {
+            "label": "Jaguar",
+            "correct": true
+          },
+          {
+            "label": "Peugeot",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0510-4",
+      "type": "mcq",
+      "prompt": "Quel constructeur a choisi pour slogan « innover autrement » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Volkswagen",
+            "correct": false
+          },
+          {
+            "label": "Nissan",
+            "correct": true
+          },
+          {
+            "label": "Jaguar",
+            "correct": false
+          },
+          {
+            "label": "Lexus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

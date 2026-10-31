@@ -44,6 +44,9 @@ importers:
       '@splootlabs/game':
         specifier: workspace:*
         version: link:../../packages/game
+      '@splootlabs/library':
+        specifier: workspace:*
+        version: link:../../packages/library
       '@splootlabs/quiz':
         specifier: workspace:*
         version: link:../../packages/quiz
@@ -149,6 +152,9 @@ importers:
 
   packages/db:
     dependencies:
+      '@splootlabs/library':
+        specifier: workspace:*
+        version: link:../library
       '@splootlabs/shared':
         specifier: workspace:*
         version: link:../shared
@@ -171,6 +177,19 @@ importers:
       '@splootlabs/quiz':
         specifier: workspace:*
         version: link:../quiz
+    devDependencies:
+      '@types/node':
+        specifier: ^24
+        version: 24.19.2
+
+  packages/library:
+    dependencies:
+      '@splootlabs/quiz':
+        specifier: workspace:*
+        version: link:../quiz
+      zod:
+        specifier: ^4.0.0
+        version: 4.6.7
     devDependencies:
       '@types/node':
         specifier: ^24

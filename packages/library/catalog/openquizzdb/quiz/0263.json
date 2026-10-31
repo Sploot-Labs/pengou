@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=263"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0263-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale du Danemark ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Helsinki",
+            "correct": false
+          },
+          {
+            "label": "Copenhague",
+            "correct": true
+          },
+          {
+            "label": "Oslo",
+            "correct": false
+          },
+          {
+            "label": "Stockholm",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0263-2",
+      "type": "mcq",
+      "prompt": "Quelle monnaie est utilisée quotidiennement au Danemark ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Franc",
+            "correct": false
+          },
+          {
+            "label": "Euro",
+            "correct": false
+          },
+          {
+            "label": "Couronne danoise",
+            "correct": true
+          },
+          {
+            "label": "Dollar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0263-3",
+      "type": "mcq",
+      "prompt": "De quelle région le Danemark fait-il partie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Balkans",
+            "correct": false
+          },
+          {
+            "label": "Maghreb",
+            "correct": false
+          },
+          {
+            "label": "Andes",
+            "correct": false
+          },
+          {
+            "label": "Scandinavie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0263-4",
+      "type": "mcq",
+      "prompt": "Quel symbole est régulièrement associé au Danemark ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Big Ben",
+            "correct": false
+          },
+          {
+            "label": "Statue de la Liberté",
+            "correct": false
+          },
+          {
+            "label": "Tour Eiffel",
+            "correct": false
+          },
+          {
+            "label": "Petite Sirène",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

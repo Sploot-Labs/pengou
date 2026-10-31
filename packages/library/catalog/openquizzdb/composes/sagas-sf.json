@@ -1,0 +1,502 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0037-1",
+      "type": "mcq",
+      "prompt": "Dans « Star Wars », quelle arme est utilisée par la plupart des Jedi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sabre laser",
+            "correct": true
+          },
+          {
+            "label": "Speeder",
+            "correct": false
+          },
+          {
+            "label": "X-wing",
+            "correct": false
+          },
+          {
+            "label": "Blaster",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0037-2",
+      "type": "mcq",
+      "prompt": "Qui est le padawan du chevalier et maître Jedi Obi-Wan Kenobi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yoda",
+            "correct": false
+          },
+          {
+            "label": "Mace Windu",
+            "correct": false
+          },
+          {
+            "label": "Leia",
+            "correct": false
+          },
+          {
+            "label": "Anakin Skywalker",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0037-3",
+      "type": "mcq",
+      "prompt": "Sur quelle planète Luke est-il parti pour apprendre à devenir Jedi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Naboo",
+            "correct": false
+          },
+          {
+            "label": "Malastare",
+            "correct": false
+          },
+          {
+            "label": "Utapau",
+            "correct": false
+          },
+          {
+            "label": "Dagobah",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0037-4",
+      "type": "mcq",
+      "prompt": "Que contrôlent les Jedi, qui les rendent très puissants ?",
+      "payload": {
+        "options": [
+          {
+            "label": "L'immortalité",
+            "correct": false
+          },
+          {
+            "label": "Le langage droïde",
+            "correct": false
+          },
+          {
+            "label": "La Force",
+            "correct": true
+          },
+          {
+            "label": "La lumière",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0408-1",
+      "type": "mcq",
+      "prompt": "Sur quelle planète Anakin Skywalker est-il arrivé à l'âge de quatre ans ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tatooine",
+            "correct": true
+          },
+          {
+            "label": "Touareg",
+            "correct": false
+          },
+          {
+            "label": "Tanghulu",
+            "correct": false
+          },
+          {
+            "label": "Tikrit",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0408-2",
+      "type": "mcq",
+      "prompt": "Quel guerrier Wookiee est le compagnon d'Han Solo ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jar Jar Binks",
+            "correct": false
+          },
+          {
+            "label": "Palpatine",
+            "correct": false
+          },
+          {
+            "label": "Watto",
+            "correct": false
+          },
+          {
+            "label": "Chewbacca",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0408-3",
+      "type": "mcq",
+      "prompt": "Quel est le nom du vaisseau spatial du contrebandier Han Solo ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Faucon Millenium",
+            "correct": true
+          },
+          {
+            "label": "B-Wing",
+            "correct": false
+          },
+          {
+            "label": "Speeder",
+            "correct": false
+          },
+          {
+            "label": "Aigle Solitaire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0408-4",
+      "type": "mcq",
+      "prompt": "Quel personnage de « Star Wars » ressemble à une limace géante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jabba le Hutt",
+            "correct": true
+          },
+          {
+            "label": "Lando Calrissian",
+            "correct": false
+          },
+          {
+            "label": "Dark Maul",
+            "correct": false
+          },
+          {
+            "label": "Mace Windu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0384-1",
+      "type": "mcq",
+      "prompt": "Quelle actrice interprète le rôle culte d'Ellen Ripley dans la saga « Alien » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Julianne Moore",
+            "correct": false
+          },
+          {
+            "label": "Sigourney Weaver",
+            "correct": true
+          },
+          {
+            "label": "Meryl Streep",
+            "correct": false
+          },
+          {
+            "label": "Briel Larson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0384-2",
+      "type": "mcq",
+      "prompt": "Quelle actrice interprète la fille de Weyland dans le film « Prometheus » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Charlize Theron",
+            "correct": true
+          },
+          {
+            "label": "Winona Ryder",
+            "correct": false
+          },
+          {
+            "label": "Jodie Foster",
+            "correct": false
+          },
+          {
+            "label": "Emily Watson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0384-3",
+      "type": "mcq",
+      "prompt": "Quelle actrice interprète le rôle de Call dans la saga « Alien » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Geena Davis",
+            "correct": false
+          },
+          {
+            "label": "Winona Ryder",
+            "correct": true
+          },
+          {
+            "label": "Natalia Dyer",
+            "correct": false
+          },
+          {
+            "label": "Natalie Portman",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0384-4",
+      "type": "mcq",
+      "prompt": "Quelle actrice joue le rôle de Daniels dans « Alien: Covenant » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mila Kunis",
+            "correct": false
+          },
+          {
+            "label": "Noomi Rapace",
+            "correct": false
+          },
+          {
+            "label": "Winona Ryder",
+            "correct": false
+          },
+          {
+            "label": "Katherine Waterston",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0389-1",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur du fluide vital qui remplace le sang des androïdes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vert",
+            "correct": false
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Blanc",
+            "correct": true
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0389-2",
+      "type": "mcq",
+      "prompt": "Quel androïde Weyland considère-t-il comme le fils qu'il n'aura jamais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Call",
+            "correct": false
+          },
+          {
+            "label": "David",
+            "correct": true
+          },
+          {
+            "label": "Walter",
+            "correct": false
+          },
+          {
+            "label": "Bishop",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0389-3",
+      "type": "mcq",
+      "prompt": "Qui sauve et répare David, le majordome androïde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Daniel Branson",
+            "correct": false
+          },
+          {
+            "label": "Elisabeth Shawn",
+            "correct": true
+          },
+          {
+            "label": "Bishop",
+            "correct": false
+          },
+          {
+            "label": "Ellen Ripley",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0389-4",
+      "type": "mcq",
+      "prompt": "Quel acteur joue à la fois David et Walter dans « Alien » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Idris Elba",
+            "correct": false
+          },
+          {
+            "label": "Tom Hardy",
+            "correct": false
+          },
+          {
+            "label": "Michael Fassbender",
+            "correct": true
+          },
+          {
+            "label": "Ryan Gosling",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-sagas-sf",
+      "title": "Sagas de science-fiction",
+      "description": "D'après les quiz OpenQuizzDB « De jeune padawan à maître Jedi », « Héros de Star Wars », « Actrices dans la saga Alien » et « Androïdes dans Alien ».",
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0037-1",
+        "oqdb-0037-2",
+        "oqdb-0037-3",
+        "oqdb-0037-4",
+        "oqdb-0408-1",
+        "oqdb-0408-2",
+        "oqdb-0408-3",
+        "oqdb-0408-4",
+        "oqdb-0384-1",
+        "oqdb-0384-2",
+        "oqdb-0384-3",
+        "oqdb-0384-4",
+        "oqdb-0389-1",
+        "oqdb-0389-2",
+        "oqdb-0389-3",
+        "oqdb-0389-4"
+      ]
+    }
+  ]
+}

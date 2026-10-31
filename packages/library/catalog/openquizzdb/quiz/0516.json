@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=516"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0516-1",
+      "type": "mcq",
+      "prompt": "Quelle liqueur de citron italienne est notamment produite à Capri ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grappa",
+            "correct": false
+          },
+          {
+            "label": "Sambuca",
+            "correct": false
+          },
+          {
+            "label": "Amaretto",
+            "correct": false
+          },
+          {
+            "label": "Limoncello",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0516-2",
+      "type": "mcq",
+      "prompt": "Quelle boisson alcoolisée douce présente une saveur d'amande amère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sambuca",
+            "correct": false
+          },
+          {
+            "label": "Grappa",
+            "correct": false
+          },
+          {
+            "label": "Amaretto",
+            "correct": true
+          },
+          {
+            "label": "Negroni",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0516-3",
+      "type": "mcq",
+      "prompt": "Quel long drink alcoolisé est composé de prosecco et d'eau de Seltz ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hyprocas",
+            "correct": false
+          },
+          {
+            "label": "Grappa",
+            "correct": false
+          },
+          {
+            "label": "Spritz",
+            "correct": true
+          },
+          {
+            "label": "Aquardiente",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0516-4",
+      "type": "mcq",
+      "prompt": "Quelle eau-de-vie de marc de raisin est produite à Saint-Marin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sambuca",
+            "correct": false
+          },
+          {
+            "label": "Negroni",
+            "correct": false
+          },
+          {
+            "label": "Grappa",
+            "correct": true
+          },
+          {
+            "label": "Amaretto",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

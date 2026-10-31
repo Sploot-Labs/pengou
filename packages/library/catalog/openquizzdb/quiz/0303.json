@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=303"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0303-1",
+      "type": "mcq",
+      "prompt": "Qui a créé et dirige encore le noyau Linux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bill Gates",
+            "correct": false
+          },
+          {
+            "label": "Larry Ellison",
+            "correct": false
+          },
+          {
+            "label": "Linus Torvalds",
+            "correct": true
+          },
+          {
+            "label": "Steeve Jobs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0303-2",
+      "type": "mcq",
+      "prompt": "En quelle année le noyau Linux a-t-il été publié pour la première fois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1993",
+            "correct": false
+          },
+          {
+            "label": "1997",
+            "correct": false
+          },
+          {
+            "label": "1995",
+            "correct": false
+          },
+          {
+            "label": "1991",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0303-3",
+      "type": "mcq",
+      "prompt": "Quel système mobile majeur repose sur le noyau Linux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Windows Phone",
+            "correct": false
+          },
+          {
+            "label": "BlackBerry 10",
+            "correct": false
+          },
+          {
+            "label": "Android",
+            "correct": true
+          },
+          {
+            "label": "iOS",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0303-4",
+      "type": "mcq",
+      "prompt": "Quel est le nom de la mascotte de Linux, connue des mordus ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Puffy",
+            "correct": false
+          },
+          {
+            "label": "Gnu",
+            "correct": false
+          },
+          {
+            "label": "Tux",
+            "correct": true
+          },
+          {
+            "label": "Wilber",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

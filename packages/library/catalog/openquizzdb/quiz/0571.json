@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=571"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0571-1",
+      "type": "mcq",
+      "prompt": "Quel album est considéré comme le plus noir du groupe The Cure ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wish",
+            "correct": false
+          },
+          {
+            "label": "Disintegration",
+            "correct": false
+          },
+          {
+            "label": "Bloodflowers",
+            "correct": false
+          },
+          {
+            "label": "Pornography",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0571-2",
+      "type": "mcq",
+      "prompt": "Quel deuxième album de The Cure est plus sombre que le premier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pornography",
+            "correct": false
+          },
+          {
+            "label": "The Top",
+            "correct": false
+          },
+          {
+            "label": "Seventeen Seconds",
+            "correct": true
+          },
+          {
+            "label": "Faith",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0571-3",
+      "type": "mcq",
+      "prompt": "Laquelle de ces propositions ne désigne pas un album live de The Cure ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Entreat",
+            "correct": false
+          },
+          {
+            "label": "Dublin",
+            "correct": true
+          },
+          {
+            "label": "Paris",
+            "correct": false
+          },
+          {
+            "label": "Concert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0571-4",
+      "type": "mcq",
+      "prompt": "Combien d'albums The Cure avait-il vendu dans le monde fin 2018 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "20 millions",
+            "correct": false
+          },
+          {
+            "label": "30 millions",
+            "correct": true
+          },
+          {
+            "label": "10 millions",
+            "correct": false
+          },
+          {
+            "label": "40 millions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

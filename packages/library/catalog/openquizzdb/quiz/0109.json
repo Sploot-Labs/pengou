@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=109"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0109-1",
+      "type": "mcq",
+      "prompt": "Combien de temps dure en moyenne la gestation d'une éléphante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "17 mois",
+            "correct": false
+          },
+          {
+            "label": "21 mois",
+            "correct": true
+          },
+          {
+            "label": "13 mois",
+            "correct": false
+          },
+          {
+            "label": "9 mois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0109-2",
+      "type": "mcq",
+      "prompt": "À combien de pulsations bat le coeur d'un hérisson en hibernation ?",
+      "payload": {
+        "options": [
+          {
+            "label": "18 par minute",
+            "correct": true
+          },
+          {
+            "label": "38 par minute",
+            "correct": false
+          },
+          {
+            "label": "28 par minute",
+            "correct": false
+          },
+          {
+            "label": "8 par minute",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0109-3",
+      "type": "mcq",
+      "prompt": "Jusqu'à quelle altitude vivent en général les bouquetins des Alpes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "3 500 m",
+            "correct": true
+          },
+          {
+            "label": "4 600 m",
+            "correct": false
+          },
+          {
+            "label": "1 900 m",
+            "correct": false
+          },
+          {
+            "label": "2 300 m",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0109-4",
+      "type": "mcq",
+      "prompt": "Combien de minutes une otarie peut-elle nager sous l'eau sans respirer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "11 minutes",
+            "correct": false
+          },
+          {
+            "label": "5 minutes",
+            "correct": true
+          },
+          {
+            "label": "7 minutes",
+            "correct": false
+          },
+          {
+            "label": "9 minutes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=255"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0255-1",
+      "type": "mcq",
+      "prompt": "Quelle partie du château contenait les appartements du seigneur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Parapet",
+            "correct": false
+          },
+          {
+            "label": "Donjon",
+            "correct": true
+          },
+          {
+            "label": "Beffroi",
+            "correct": false
+          },
+          {
+            "label": "Hourd",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0255-2",
+      "type": "mcq",
+      "prompt": "Quelle était la résidence favorite des Rois de France à la renaissance ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blois",
+            "correct": true
+          },
+          {
+            "label": "Fontainebleau",
+            "correct": false
+          },
+          {
+            "label": "Amboise",
+            "correct": false
+          },
+          {
+            "label": "Meudon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0255-3",
+      "type": "mcq",
+      "prompt": "De quel château Hergé s'est-il inspiré pour créer Moulinsart ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Villandry",
+            "correct": false
+          },
+          {
+            "label": "Chaumont",
+            "correct": false
+          },
+          {
+            "label": "Cheverny",
+            "correct": true
+          },
+          {
+            "label": "Langeais",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0255-4",
+      "type": "mcq",
+      "prompt": "Dans quel château est présumé être enterré Léonard de Vinci ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Amboise",
+            "correct": true
+          },
+          {
+            "label": "Sully-Sur-Loire",
+            "correct": false
+          },
+          {
+            "label": "Saumur",
+            "correct": false
+          },
+          {
+            "label": "Blois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

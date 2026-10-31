@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=163"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0163-1",
+      "type": "mcq",
+      "prompt": "Quelle île hébergea une prison fédérale de haute sécurité jusqu'en 1963 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Santa Cruz",
+            "correct": false
+          },
+          {
+            "label": "San Miguel",
+            "correct": false
+          },
+          {
+            "label": "Alvatraz",
+            "correct": true
+          },
+          {
+            "label": "Anacapa",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0163-2",
+      "type": "mcq",
+      "prompt": "Quelle riviera américaine possède une série télévisée à son nom ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Santa Monica",
+            "correct": false
+          },
+          {
+            "label": "Santa Barbara",
+            "correct": true
+          },
+          {
+            "label": "Santa Rosa",
+            "correct": false
+          },
+          {
+            "label": "Santa Clarita",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0163-3",
+      "type": "mcq",
+      "prompt": "Quel conifère géant est recensé en Californie, dans la Sierra Nevada ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Séquoia géant",
+            "correct": true
+          },
+          {
+            "label": "Noyer noir",
+            "correct": false
+          },
+          {
+            "label": "Frêne blanc",
+            "correct": false
+          },
+          {
+            "label": "Sapin gracieux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0163-4",
+      "type": "mcq",
+      "prompt": "Quel parc à thème spécialisé dans le monde marin se situe à Orlando ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Epcot",
+            "correct": false
+          },
+          {
+            "label": "Magic Kingdom",
+            "correct": false
+          },
+          {
+            "label": "Everland",
+            "correct": false
+          },
+          {
+            "label": "SeaWorld",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

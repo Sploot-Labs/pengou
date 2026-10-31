@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=530"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0530-1",
+      "type": "mcq",
+      "prompt": "Quel autre nom plus « branché » donne-t-on au brillant à lèvres ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fard",
+            "correct": false
+          },
+          {
+            "label": "Blush",
+            "correct": false
+          },
+          {
+            "label": "Gloss",
+            "correct": true
+          },
+          {
+            "label": "Correcteur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0530-2",
+      "type": "mcq",
+      "prompt": "Quel produit unifie le teint et couvre les défauts minimes de la peau ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Baume",
+            "correct": false
+          },
+          {
+            "label": "Fond de teint",
+            "correct": true
+          },
+          {
+            "label": "Correcteur",
+            "correct": false
+          },
+          {
+            "label": "Khôl",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0530-3",
+      "type": "mcq",
+      "prompt": "Quel produit de maquillage sert à tracer un trait le long des paupières ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eye-liner",
+            "correct": true
+          },
+          {
+            "label": "Lisseur",
+            "correct": false
+          },
+          {
+            "label": "Correcteur",
+            "correct": false
+          },
+          {
+            "label": "Protecteur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0530-4",
+      "type": "mcq",
+      "prompt": "Avec quoi ouvre-t-on le regard en recourbant et en allongeant les cils ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mascara",
+            "correct": true
+          },
+          {
+            "label": "Fard",
+            "correct": false
+          },
+          {
+            "label": "Gloss",
+            "correct": false
+          },
+          {
+            "label": "Blush",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

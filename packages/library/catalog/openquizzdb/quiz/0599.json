@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=599"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0599-1",
+      "type": "mcq",
+      "prompt": "Dans quel livre trouve-t-on principalement des cartes de géographie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Atlas",
+            "correct": true
+          },
+          {
+            "label": "Roman",
+            "correct": false
+          },
+          {
+            "label": "Agenda",
+            "correct": false
+          },
+          {
+            "label": "Dictionnaire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0599-2",
+      "type": "mcq",
+      "prompt": "De quelle matière très dure est principalement constituée la banquise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Glace",
+            "correct": true
+          },
+          {
+            "label": "Terre",
+            "correct": false
+          },
+          {
+            "label": "Métal",
+            "correct": false
+          },
+          {
+            "label": "Roche",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0599-3",
+      "type": "mcq",
+      "prompt": "Quelle opération arithmétique calcule le produit de deux nombres ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Soustraction",
+            "correct": false
+          },
+          {
+            "label": "Multiplication",
+            "correct": true
+          },
+          {
+            "label": "Simplification",
+            "correct": false
+          },
+          {
+            "label": "Division",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0599-4",
+      "type": "mcq",
+      "prompt": "Dans quel dessin animé peux-tu entendre la phrase « Hakuna matata » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Toy Story",
+            "correct": false
+          },
+          {
+            "label": "Cars",
+            "correct": false
+          },
+          {
+            "label": "Le Roi lion",
+            "correct": true
+          },
+          {
+            "label": "Dinosaure",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

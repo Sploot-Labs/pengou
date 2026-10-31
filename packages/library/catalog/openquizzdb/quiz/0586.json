@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=586"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0586-1",
+      "type": "mcq",
+      "prompt": "Comment se prénomme la brune de la saga de science-fiction « Matrix » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Niobe",
+            "correct": false
+          },
+          {
+            "label": "Taranis",
+            "correct": false
+          },
+          {
+            "label": "Trinity",
+            "correct": true
+          },
+          {
+            "label": "Tek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0586-2",
+      "type": "mcq",
+      "prompt": "Qui est incarné par Orlando Bloom dans « Le Seigneur des Anneaux » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Faramir",
+            "correct": false
+          },
+          {
+            "label": "Boromir",
+            "correct": false
+          },
+          {
+            "label": "Legolas",
+            "correct": true
+          },
+          {
+            "label": "Aragorn",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0586-3",
+      "type": "mcq",
+      "prompt": "Qui est la compagne de Thelma dans un film de Ridley Scott ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Geena",
+            "correct": false
+          },
+          {
+            "label": "Louise",
+            "correct": true
+          },
+          {
+            "label": "Susan",
+            "correct": false
+          },
+          {
+            "label": "Bethy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0586-4",
+      "type": "mcq",
+      "prompt": "Quel héros, créé par un inventeur, possède des mains d'argent ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dylan",
+            "correct": false
+          },
+          {
+            "label": "Edward",
+            "correct": true
+          },
+          {
+            "label": "Kevin",
+            "correct": false
+          },
+          {
+            "label": "Robert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

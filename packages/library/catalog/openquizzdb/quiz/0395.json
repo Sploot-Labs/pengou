@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=395"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0395-1",
+      "type": "mcq",
+      "prompt": "Le curaçao est une liqueur d'orange présentée sous quelle couleur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bleue",
+            "correct": true
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          },
+          {
+            "label": "Orange",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0395-2",
+      "type": "mcq",
+      "prompt": "Quelles couleurs faut-il associer pour obtenir du vert ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jaune et bleu",
+            "correct": true
+          },
+          {
+            "label": "Orange et gris",
+            "correct": false
+          },
+          {
+            "label": "Rouge et noir",
+            "correct": false
+          },
+          {
+            "label": "Marron et beige",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0395-3",
+      "type": "mcq",
+      "prompt": "Quel petit vin se boit sous les tonnelles du côté de Nogent ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vin rosé",
+            "correct": false
+          },
+          {
+            "label": "Vin gris",
+            "correct": false
+          },
+          {
+            "label": "Vin blanc",
+            "correct": true
+          },
+          {
+            "label": "Vin rouge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0395-4",
+      "type": "mcq",
+      "prompt": "Comment est la souris dans une célèbre comptine pour enfants ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Noire",
+            "correct": false
+          },
+          {
+            "label": "Rose",
+            "correct": false
+          },
+          {
+            "label": "Blanche",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

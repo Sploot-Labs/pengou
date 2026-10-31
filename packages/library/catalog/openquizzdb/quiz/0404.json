@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=404"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0404-1",
+      "type": "mcq",
+      "prompt": "Quel peuple germanique s'installa au Ve siècle dans l'actuelle Espagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wisigoths",
+            "correct": true
+          },
+          {
+            "label": "Ostrogoths",
+            "correct": false
+          },
+          {
+            "label": "Burgondes",
+            "correct": false
+          },
+          {
+            "label": "Jutes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0404-2",
+      "type": "mcq",
+      "prompt": "Lequel de ces termes faisait autrefois référence aux Vikings ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gallois",
+            "correct": false
+          },
+          {
+            "label": "Normands",
+            "correct": true
+          },
+          {
+            "label": "Germains",
+            "correct": false
+          },
+          {
+            "label": "Bretons",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0404-3",
+      "type": "mcq",
+      "prompt": "Quel peuple antique occupait les territoires de l'actuelle Bulgarie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alains",
+            "correct": false
+          },
+          {
+            "label": "Wisigothes",
+            "correct": false
+          },
+          {
+            "label": "Thraces",
+            "correct": true
+          },
+          {
+            "label": "Scythes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0404-4",
+      "type": "mcq",
+      "prompt": "Dans quel pays les Parses se sont-ils installés au XIIIe siècle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Inde",
+            "correct": true
+          },
+          {
+            "label": "Égypte",
+            "correct": false
+          },
+          {
+            "label": "Afghanistan",
+            "correct": false
+          },
+          {
+            "label": "Chine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

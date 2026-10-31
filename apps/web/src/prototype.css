@@ -84,6 +84,9 @@
   border: 2px solid transparent;
   font-weight: 700;
   font-size: var(--fs-body);
+  /* Un <Link> habillé en bouton (« Bibliothèque », « Retour ») ne doit pas
+     garder le soulignement par défaut des liens. */
+  text-decoration: none;
   cursor: pointer;
   transition: transform var(--transition-fast), filter var(--transition-fast);
 }
@@ -113,27 +116,39 @@
   cursor: not-allowed;
 }
 
-/* Les variantes portent `.prototype-root` pour passer devant le reset
-   `.prototype-root button { color: inherit }` de tokens.css (spécificité
-   (0,1,1)) qui, sinon, écrase la couleur de texte de chaque variante et
-   ramène tout à --ink (contraste cassé sur les aplats de marque). */
-.prototype-root .ab-button--primary {
+/* Les variantes n'ont plus besoin du préfixe `.prototype-root` : le reset
+   `button { color: inherit }` de tokens.css passe par `:where()` et ne pèse
+   que (0,0,1). Rester à une seule classe (0,1,0) laisse surtout l'état
+   `.ab-button[aria-disabled="true"]` (0,2,0) l'emporter : avec le préfixe,
+   un bouton primaire désactivé gardait son aplat cyan d'actif. */
+.ab-button--primary {
   background: var(--brand);
   color: var(--stage);
 }
 
-.prototype-root .ab-button--ghost {
+/* Boutons, variantes du système de design (composant `Button` de ui.tsx) :
+   - primary : action principale, aplat --brand ;
+   - ghost : action secondaire, contour --ghost-line et encre --ghost-ink (neutres en clair,
+     cyan en sombre pour ne pas paraître gris sur le fond nuit) ;
+   - success / danger : actions sémantiques.
+   Tout contrôle bouton maison qui n'utilise pas `.ab-button` (flèches de tri, etc.) reprend
+   ces mêmes rôles plutôt que --line / --ink, pour rester cohérent dans les deux schémas. */
+.ab-button--ghost {
   background: transparent;
-  border-color: var(--line);
-  color: var(--ink);
+  border-color: var(--ghost-line, var(--line));
+  color: var(--ghost-ink, var(--ink));
+}
+/* Sur fond transparent, l'éclaircissement générique du survol ne se voit pas : léger voile teinté. */
+.ab-button--ghost:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: color-mix(in srgb, var(--ghost-ink, var(--ink)) 10%, transparent);
 }
 
-.prototype-root .ab-button--success {
+.ab-button--success {
   background: var(--success);
   color: var(--success-ink);
 }
 
-.prototype-root .ab-button--danger {
+.ab-button--danger {
   background: var(--danger);
   color: var(--danger-ink);
 }
@@ -363,6 +378,14 @@
   padding: var(--space-5);
 }
 
+/* Bandeau d'erreur ou état vide posé directement dans la page (bibliothèque,
+   réglages d'espace) : sans marge, le bloc suivant venait le toucher. Les
+   marges verticales fusionnent, donc pas d'espace doublé si le voisin en a
+   déjà une. */
+.ab-shell__main > :is(.join-error, .ab-empty-state):not(:last-child) {
+  margin-bottom: var(--space-4);
+}
+
 .ab-shell__actions {
   display: flex;
   align-items: center;
@@ -458,9 +481,9 @@
   min-height: 44px;
   padding: 0;
   background: transparent;
-  border: 1px solid var(--line);
+  border: 1px solid var(--ghost-line, var(--line));
   border-radius: var(--radius-sm);
-  color: var(--ink-dim);
+  color: var(--ghost-ink, var(--ink-dim));
   cursor: pointer;
   font-size: 0.9rem;
   line-height: 1;
@@ -477,12 +500,18 @@
   font-size: var(--fs-small);
 }
 
+/* Deux lignes avant l'ellipse : sur une seule, la colonne étroite (badge de
+   type + flèches de réordonnancement) ne laissait que quelques lettres. */
 .host-list__prompt {
   flex: 1;
+  min-width: 0;
   font-weight: 600;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow-wrap: anywhere;
 }
 
 .host-badge {
@@ -577,33 +606,20 @@
   margin-bottom: var(--space-4);
 }
 
-.host-launch {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--space-1);
-}
-
-.host-launch__hint {
-  font-size: var(--fs-small);
-  color: var(--ink-dim);
-  max-width: 32ch;
-  text-align: right;
-}
-
-.host-launch__confirm {
-  font-size: var(--fs-small);
-  color: var(--ink);
-  max-width: 40ch;
-  text-align: right;
-}
-
 /* Permanent, lightweight brand/positioning line in the host shell header. */
 .host-brandline {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--fs-small);
   color: var(--ink);
+}
+
+/* Sur téléphone, le slogan se tassait sur trois lignes entre le logo et
+   « Se déconnecter » : le logo suffit à identifier l'app. */
+@media (max-width: 600px) {
+  .host-brandline__tagline {
+    display: none;
+  }
 }
 
 .host-brandline strong {
@@ -615,6 +631,11 @@
    `flushPendingSave()` before navigating instead of an inert <Link>'s
    direct-to-navigation. */
 .host-link-button {
+  /* Zone cliquable de 44px de haut (cible tactile) sans changer l'aspect
+     de lien en ligne. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   background: none;
   border: none;
   padding: 0;
@@ -739,7 +760,7 @@
   color: var(--ink-dim);
 }
 
-.host-field input,
+.host-field input:not([type="radio"]):not([type="checkbox"]),
 .host-field select,
 .host-field textarea {
   min-height: 44px;
@@ -752,9 +773,30 @@
   gap: var(--space-3);
 }
 
+/* Fieldsets de l'éditeur (réponses, bonne réponse, variantes) : on retire
+   le cadre « groove » du navigateur et on aligne la légende sur les labels
+   de .host-field. */
+fieldset.host-field {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+fieldset.host-field > legend {
+  padding: 0;
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--ink-dim);
+}
+
+/* Une ligne par réponse : pictogramme, libellé, puis la pastille
+   « Correcte ». 320px de large minimum pour que la ligne ne se casse pas
+   (deux colonnes dans le panneau desktop, une seule en mobile). */
 .host-options-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: var(--space-3);
 }
 
@@ -765,6 +807,12 @@
   gap: var(--space-2);
 }
 
+.host-option-row__shape {
+  order: -1;
+  display: inline-flex;
+  color: var(--ink-dim);
+}
+
 /* Per-answer validation message drops onto its own line under the row. */
 .host-option-row .host-inline-error {
   flex-basis: 100%;
@@ -773,26 +821,37 @@
 
 .host-option-row input[type="text"] {
   flex: 1;
+  min-width: 0;
 }
 
-.host-option-row input[type="radio"] {
+/* Même taille de bouton radio et de case à cocher partout côté animateur
+   (QCM, Vrai/Faux, enchaînement automatique). */
+.host-field input:is([type="radio"], [type="checkbox"]) {
   width: 20px;
   height: 20px;
+  margin: 0;
   flex-shrink: 0;
 }
 
 .host-option-row__correct-label {
+  order: 1;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: var(--space-2);
   min-height: 44px;
-  padding: var(--space-2);
+  padding: var(--space-2) var(--space-3);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   font-size: var(--fs-small);
   color: var(--ink-dim);
   cursor: pointer;
   flex-shrink: 0;
+}
+
+/* La bonne réponse se repère sans lire le bouton radio. */
+.host-option-row__correct-label:has(input:checked) {
+  border-color: var(--success);
+  color: var(--ink-strong);
 }
 
 .host-actions {
@@ -814,7 +873,13 @@
   padding: var(--space-2) var(--space-3);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
+  color: var(--ink-dim);
   cursor: pointer;
+}
+
+.host-truefalse label:has(input:checked) {
+  border-color: var(--success);
+  color: var(--ink-strong);
 }
 
 /* ====================================================================== */
@@ -851,12 +916,46 @@
   gap: 22px;
 }
 
+/* Formulaires Connexion / Inscription : même rythme vertical que .join-form
+   (22px entre blocs), sinon le bouton vient toucher le dernier champ. */
+.join-card {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Le sous-titre se rattache au titre : on rattrape une partie du gap. */
+.join-card > h1 + .join-subtitle {
+  margin-top: -14px;
+}
+
+.join-subtitle {
+  color: var(--ink-dim);
+}
+
+.join-card > .ab-button {
+  width: 100%;
+  min-height: 52px;
+  margin-top: var(--space-1);
+}
+
 .join-field {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
+/* Champs texte des formulaires d'authentification : hauteur tactile et
+   padding réel, au lieu du padding navigateur (1px 2px, 25px de haut). */
+.join-card .join-field input {
+  min-height: 48px;
+  padding: 0 var(--space-3);
+}
+
+/* Deux styles de label, volontairement : mono majuscule espacée sur les
+   écrans d'entrée (Join, Connexion, Inscription), sobre en casse de phrase
+   dans l'app animateur (.host-field label). Ne pas mélanger sur un même
+   écran. */
 .join-field > label {
   font-family: var(--font-mono);
   font-size: 14px;
@@ -996,6 +1095,17 @@
   font-family: var(--font-mono);
   font-size: 15px;
   color: var(--ink-dim);
+}
+
+/* Le bouton son (.ab-soundtoggle--fixed, 44px à 12px du bord) se pose sur
+   la droite des barres du haut dès que l'écran fait moins de ~520px : il
+   masquait le PIN du lobby et le chrono des questions. On lui réserve sa
+   place. */
+@media (max-width: 540px) {
+  .player-lobby__top,
+  .player-qhead {
+    padding-right: 52px;
+  }
 }
 
 .player-lobby__hero {
@@ -1153,6 +1263,27 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+/* Chrono de la vue joueur (TimerPill) : jusqu'ici sans aucun style, l'état
+   urgent des 5 dernières secondes ne se voyait pas. */
+.ab-timerpill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 2px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--stage-2);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+  color: #ffffff;
+}
+.ab-timerpill--urgent {
+  border-color: var(--danger);
+  background: var(--danger);
+  color: var(--danger-ink);
 }
 .player-qnum {
   font-family: var(--font-mono);
@@ -1755,6 +1886,20 @@
   gap: var(--space-5);
 }
 
+/* Pendant la partie, le rappel « Rejoignez sur… » occupe le haut de
+   l'écran : on descend le contenu pour que le chrono ne vienne pas le
+   toucher. */
+.big-screen:has(.big-join-reminder) {
+  padding-top: 76px;
+}
+
+/* Le focus posé au montage de chaque phase sert à l'annonce lecteur
+   d'écran. Sur un écran projeté, que personne ne pilote au clavier, son
+   cadre cyan autour du titre n'apporte rien et parasite l'affichage. */
+.big-screen [tabindex="-1"]:focus {
+  outline: none;
+}
+
 /* Couche de transition de phase : le wrapper de <PhaseTransition> remplace le
    bloc de phase comme enfant flex de .big-screen — il doit donc porter le même
    comportement (flex:1 + colonne) pour que le `flex:1` du bloc interne opère. */
@@ -1773,6 +1918,17 @@
   justify-content: center;
   gap: var(--space-5);
   text-align: center;
+}
+
+/* PIN et QR côte à côte : empilés, le lobby dépassait 720px de haut et
+   défilait sur un projecteur 1280×720. Ils repassent l'un sous l'autre
+   quand la largeur manque. */
+.big-lobby__join {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
 }
 
 .big-players {
@@ -1944,10 +2100,12 @@
 
 /* Compact, persistent join reminder pinned to a corner during the active
    phases so latecomers can still enter (PIN + URL). */
+/* Décalé à gauche du bouton son (lui aussi fixé en haut à droite, 44px) :
+   au même endroit, il masquait le code banquise. */
 .big-join-reminder {
   position: fixed;
   top: var(--space-3);
-  right: var(--space-3);
+  right: calc(var(--space-3) + 44px + var(--space-2));
   z-index: 40;
   display: flex;
   align-items: center;
@@ -2771,6 +2929,69 @@
   width: 100%;
   min-height: 44px;
 }
+/* « Lancer » (prioritaire, prend la place) et « Archiver » côte à côte sous la carte. */
+.home-card__actions {
+  display: flex;
+  gap: var(--space-2);
+}
+.home-card__actions .home-card__launch {
+  flex: 1;
+  width: auto;
+}
+.home-card__archive {
+  min-height: 44px;
+}
+
+/* Section repliable des quiz archivés (`<details>` natif), sous les cartes de « Mes quiz ». */
+.home-archived {
+  margin-top: var(--space-5);
+}
+.home-archived__summary {
+  display: list-item;
+  min-height: 44px;
+  padding: var(--space-2) 0;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--ink-strong);
+}
+.home-archived[open] .home-archived__summary {
+  margin-bottom: var(--space-3);
+}
+.home-archived__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.home-archived__item .home-list__item {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Éditeur : bandeau d'un quiz archivé (non lançable) et zone « Archiver » en pied de page. */
+.host-archived {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  margin-bottom: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--warn);
+  border-radius: var(--radius-sm);
+  color: var(--ink-strong);
+}
+.host-archived p {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+.host-archive-zone {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
 
 /* Signature accent — one of the 4 brand answer shapes (Task 5), cycled per
    card index. Purely decorative (aria-hidden): small, low-opacity, tucked
@@ -2877,7 +3098,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-4);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
 }
 
 .report-summary__facts {
@@ -2961,12 +3182,15 @@
 /* Workspaces (Slice 3c) — switcher, panneau, lignes membres/invites   */
 /* ------------------------------------------------------------------ */
 
+/* Tokens réels du thème (--text, --border et --radius-2 n'existent pas) :
+   la règle était masquée par le reset des champs tant que celui-ci pesait
+   plus lourd qu'une classe. */
 .ab-workspace-switcher__select {
   font: inherit;
-  color: var(--text);
-  background: var(--surface);
-  border: 1px solid var(--border, var(--surface-2));
-  border-radius: var(--radius-2, 8px);
+  color: var(--ink-strong);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
   padding: 0.4rem 0.6rem;
   max-width: 16rem;
 }
@@ -3067,4 +3291,153 @@
   align-items: center;
   gap: 12px;
   margin-top: 24px;
+}
+
+/* Même gabarit que les autres menus déroulants côté animateur (44px). */
+.hostlive-relaunch select {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+}
+
+/* Bibliothèque de questions */
+.library-filters {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.library-filters .host-field {
+  width: auto;
+  min-width: 10rem;
+}
+.library-tabs {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.library-card {
+  flex: 1;
+}
+.library-questions {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .library-questions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* Les deux colonnes de l'onglet Questions empilent des blocs (recherche,
+   tirage, liste ; titre, sélection, formulaire) : sans gap, ils se
+   touchaient. La marge basse de .home-inline-form ferait doublon. */
+.library-questions > section,
+.library-selection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.library-questions .home-inline-form {
+  margin-bottom: 0;
+}
+/* La zone d'annonce du tirage reste dans le DOM (live region), mais vide
+   elle ne doit pas ajouter un gap sous le bouton « Tirer ». */
+.library-questions .home-inline-form > [role="status"]:empty {
+  margin-top: calc(-1 * var(--space-3));
+}
+.library-question input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+}
+.library-question {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.library-question__body {
+  display: flex;
+  flex: 1 1 14rem;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.source-credit {
+  color: var(--ink-dim);
+  font-size: 0.85em;
+}
+p.source-credit {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Encadré « Sources et licences » en bas de l'éditeur : une seule mention pour tout le quiz,
+   plutôt qu'une ligne sous chaque question. */
+.sources-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+  color: var(--ink-dim);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+.sources-panel h2 {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--ink-strong);
+}
+.sources-panel p {
+  margin: 0;
+}
+
+/* Cartes de la bibliothèque : trois actions qui passent à la ligne sur mobile. */
+.library-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.library-card-actions .ab-button {
+  flex: 1 1 auto;
+  min-height: 44px;
+}
+
+/* Aperçu d'un quiz tout prêt : plus large que la boîte de confirmation, liste défilante. */
+.library-preview {
+  width: min(720px, 100%);
+  max-height: calc(100vh - 2 * var(--space-4));
+  gap: var(--space-3);
+}
+.library-preview__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.library-preview__list {
+  margin: 0;
+  padding-left: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.library-preview__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.library-preview__prompt {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.library-preview__answer {
+  color: var(--ink-strong);
+  font-size: var(--fs-small);
+  font-weight: 700;
 }

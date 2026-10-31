@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=482"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0482-1",
+      "type": "mcq",
+      "prompt": "Quelle infusion est utile pour les inflammations des muqueuses ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Basilic",
+            "correct": false
+          },
+          {
+            "label": "Romarin",
+            "correct": false
+          },
+          {
+            "label": "Sarriette",
+            "correct": false
+          },
+          {
+            "label": "Sauge",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0482-2",
+      "type": "mcq",
+      "prompt": "Quelle infusion à forte qualité gustative apporte apaisement et calme ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pin",
+            "correct": false
+          },
+          {
+            "label": "Cèdre",
+            "correct": false
+          },
+          {
+            "label": "Tilleul",
+            "correct": true
+          },
+          {
+            "label": "Frêne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0482-3",
+      "type": "mcq",
+      "prompt": "Quelle camomille est surtout recherchée pour ses vertus digestives ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grecque",
+            "correct": false
+          },
+          {
+            "label": "Romaine",
+            "correct": true
+          },
+          {
+            "label": "Égyptien",
+            "correct": false
+          },
+          {
+            "label": "Gauloise",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0482-4",
+      "type": "mcq",
+      "prompt": "Quelle infusion est reconnue pour ses propriétés anti-anémiques ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coriandre",
+            "correct": false
+          },
+          {
+            "label": "Ortie",
+            "correct": true
+          },
+          {
+            "label": "Belladone",
+            "correct": false
+          },
+          {
+            "label": "Jasmin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

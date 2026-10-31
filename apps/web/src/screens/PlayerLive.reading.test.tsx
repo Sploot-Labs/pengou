@@ -73,7 +73,7 @@ describe('PlayerLive — phase lecture (question:reading)', () => {
     clearPlayerSession()
   })
 
-  it('question:reading affiche l’énoncé et « Préparez-vous… », sans aucune tuile de réponse cliquable', async () => {
+  it('question:reading affiche l’énoncé et « Prépare-toi… », sans aucune tuile de réponse cliquable', async () => {
     renderPlayerLive()
 
     await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:reconnect', expect.anything()))
@@ -91,7 +91,7 @@ describe('PlayerLive — phase lecture (question:reading)', () => {
 
     // Annonce RGAA de l'entrée en lecture — texte toujours présent (pas
     // seulement une animation/couleur).
-    const status = screen.getByText('Préparez-vous…')
+    const status = screen.getByText('Prépare-toi…')
     expect(status.closest('[role="status"]')).not.toBeNull()
 
     // Aucune saisie possible pendant la lecture : ni tuile mcq, ni bouton
@@ -124,7 +124,7 @@ describe('PlayerLive — phase lecture (question:reading)', () => {
       startedAt: Date.now(),
     })
     await screen.findByText('Quelle est la capitale du Portugal ?')
-    expect(screen.getByText('Préparez-vous…')).toBeInTheDocument()
+    expect(screen.getByText('Prépare-toi…')).toBeInTheDocument()
 
     emitServerEvent('question:show', {
       id: 'q1',
@@ -139,6 +139,6 @@ describe('PlayerLive — phase lecture (question:reading)', () => {
     expect(tile).toBeEnabled()
 
     // Le message de lecture a disparu avec la bascule de phase.
-    expect(screen.queryByText('Préparez-vous…')).toBeNull()
+    expect(screen.queryByText('Prépare-toi…')).toBeNull()
   })
 })

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=196"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0196-1",
+      "type": "mcq",
+      "prompt": "À quel groupe doit-on la bande originale du film « Flash Gordon » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Queen",
+            "correct": true
+          },
+          {
+            "label": "Quantic",
+            "correct": false
+          },
+          {
+            "label": "Quiet Riot",
+            "correct": false
+          },
+          {
+            "label": "Quicksand",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0196-2",
+      "type": "mcq",
+      "prompt": "Quelle ville fut le berceau de la civilisation française en Amérique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quévy",
+            "correct": false
+          },
+          {
+            "label": "Quiberville",
+            "correct": false
+          },
+          {
+            "label": "Quito",
+            "correct": false
+          },
+          {
+            "label": "Québec",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0196-3",
+      "type": "mcq",
+      "prompt": "Quelle marque a proposé des cadeaux Koh-Lanta dans ses produits ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quézac",
+            "correct": false
+          },
+          {
+            "label": "Quick",
+            "correct": true
+          },
+          {
+            "label": "Quiksilver",
+            "correct": false
+          },
+          {
+            "label": "Quechua",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0196-4",
+      "type": "mcq",
+      "prompt": "Quel personnage fictif, difforme et sourd, est sonneur de cloches ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quark",
+            "correct": false
+          },
+          {
+            "label": "Quasimodo",
+            "correct": true
+          },
+          {
+            "label": "Qbert",
+            "correct": false
+          },
+          {
+            "label": "Quorra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

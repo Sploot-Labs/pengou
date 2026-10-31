@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=534"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0534-1",
+      "type": "mcq",
+      "prompt": "Quel traitement permet de soigner les maux du corps par l'eau de mer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sophrologie",
+            "correct": false
+          },
+          {
+            "label": "Réflexologie",
+            "correct": false
+          },
+          {
+            "label": "Naturopathie",
+            "correct": false
+          },
+          {
+            "label": "Thalassothérapie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0534-2",
+      "type": "mcq",
+      "prompt": "Que peut faire un sportif pour éviter l'arrivée inopinée de crampes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dormir",
+            "correct": false
+          },
+          {
+            "label": "Fumer",
+            "correct": false
+          },
+          {
+            "label": "S'hydrater",
+            "correct": true
+          },
+          {
+            "label": "Manger",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0534-3",
+      "type": "mcq",
+      "prompt": "Quelle est la position la plus fatigante pour notre colonne vertébrale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Debout",
+            "correct": false
+          },
+          {
+            "label": "Assise",
+            "correct": true
+          },
+          {
+            "label": "En équilibre",
+            "correct": false
+          },
+          {
+            "label": "Couchée",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0534-4",
+      "type": "mcq",
+      "prompt": "Que sécrètent principalement les glandes sudoripares ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cheveux",
+            "correct": false
+          },
+          {
+            "label": "Sueur",
+            "correct": true
+          },
+          {
+            "label": "Poils",
+            "correct": false
+          },
+          {
+            "label": "Ongles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

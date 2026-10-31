@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=401"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0401-1",
+      "type": "mcq",
+      "prompt": "Quel groupe de musique anglais est mené par le chanteur Jay Kay ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jamiroquai",
+            "correct": true
+          },
+          {
+            "label": "Jethro Tull",
+            "correct": false
+          },
+          {
+            "label": "Joy Division",
+            "correct": false
+          },
+          {
+            "label": "Judas Priest",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0401-2",
+      "type": "mcq",
+      "prompt": "Quel est le surnom de Jean-Paul Maunick, fondateur d'Incognito ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bluey",
+            "correct": true
+          },
+          {
+            "label": "Greeny",
+            "correct": false
+          },
+          {
+            "label": "Redest",
+            "correct": false
+          },
+          {
+            "label": "Yellow",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0401-3",
+      "type": "mcq",
+      "prompt": "Quel quartet acid jazz est renommé pour ses performances live ?",
+      "payload": {
+        "options": [
+          {
+            "label": "MJQ",
+            "correct": false
+          },
+          {
+            "label": "DSQ",
+            "correct": false
+          },
+          {
+            "label": "JTQ",
+            "correct": true
+          },
+          {
+            "label": "FJQ",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0401-4",
+      "type": "mcq",
+      "prompt": "Quel sigle retrouve-t-on sur tous les albums de Brand New Heavies ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Une girafe",
+            "correct": false
+          },
+          {
+            "label": "Une tortue",
+            "correct": false
+          },
+          {
+            "label": "Un lion",
+            "correct": false
+          },
+          {
+            "label": "Un éléphant",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

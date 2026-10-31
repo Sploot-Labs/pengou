@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=267"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0267-1",
+      "type": "mcq",
+      "prompt": "Quel pongiste belge a disputé ses septièmes JO à 42 ans ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Martin Bratanov",
+            "correct": false
+          },
+          {
+            "label": "Yan Vostes",
+            "correct": false
+          },
+          {
+            "label": "Greg Obert",
+            "correct": false
+          },
+          {
+            "label": "Jean-Michel Saive",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0267-2",
+      "type": "mcq",
+      "prompt": "Quelle gymnaste à obtenu le premier 10 aux Jeux olympiques ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Diana Mocanu",
+            "correct": false
+          },
+          {
+            "label": "Nadia Comaneci",
+            "correct": true
+          },
+          {
+            "label": "Doina Ignat",
+            "correct": false
+          },
+          {
+            "label": "Tatiana Gutsu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0267-3",
+      "type": "mcq",
+      "prompt": "Quel athlète Jamaïcain a marqué les Jeux olympiques de 2008 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dexter Lee",
+            "correct": false
+          },
+          {
+            "label": "Lerone Clarke",
+            "correct": false
+          },
+          {
+            "label": "Ray Stewart",
+            "correct": false
+          },
+          {
+            "label": "Usain Bolt",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0267-4",
+      "type": "mcq",
+      "prompt": "Qui a remporté le saut en longueur à Atlanta en 1996 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michael Johnson",
+            "correct": false
+          },
+          {
+            "label": "Dwight Phillips",
+            "correct": false
+          },
+          {
+            "label": "Carl Lewis",
+            "correct": true
+          },
+          {
+            "label": "Linford Christie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

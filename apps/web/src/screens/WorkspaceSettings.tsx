@@ -41,7 +41,7 @@ export function WorkspaceSettings() {
             La gestion des workspaces est disponible uniquement en mode multi (cloud). En self-host
             mono-espace, il n'y a qu'un seul workspace.
           </p>
-          <Link className="ab-button ab-button--ghost" to="/">← Retour</Link>
+          <Link className="ab-button ab-button--ghost" to="/">Retour à l'accueil</Link>
         </main>
       </div>
     )

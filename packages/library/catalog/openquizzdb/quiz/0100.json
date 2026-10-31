@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=100"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0100-1",
+      "type": "mcq",
+      "prompt": "Quel chien blanc accompagne Astérix et Obélix dans leurs aventures ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Imagix",
+            "correct": false
+          },
+          {
+            "label": "Idéfix",
+            "correct": true
+          },
+          {
+            "label": "Itinéris",
+            "correct": false
+          },
+          {
+            "label": "Isidore",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0100-2",
+      "type": "mcq",
+      "prompt": "Le tiramisu est une pâtisserie et un dessert de quelle origine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Indienne",
+            "correct": false
+          },
+          {
+            "label": "Iranienne",
+            "correct": false
+          },
+          {
+            "label": "Italienne",
+            "correct": true
+          },
+          {
+            "label": "Ivoirienne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0100-3",
+      "type": "mcq",
+      "prompt": "Que sont devenues Byzance et Constantinople ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Istanbul",
+            "correct": true
+          },
+          {
+            "label": "Islamabad",
+            "correct": false
+          },
+          {
+            "label": "Isparta",
+            "correct": false
+          },
+          {
+            "label": "Izmir",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0100-4",
+      "type": "mcq",
+      "prompt": "À quel mot anglais correspond la lettre I du sigle CIA ?",
+      "payload": {
+        "options": [
+          {
+            "label": "International",
+            "correct": false
+          },
+          {
+            "label": "Institutional",
+            "correct": false
+          },
+          {
+            "label": "Intelligence",
+            "correct": true
+          },
+          {
+            "label": "Instrumental",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

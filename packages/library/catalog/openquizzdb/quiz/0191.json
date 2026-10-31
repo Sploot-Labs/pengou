@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=191"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0191-1",
+      "type": "mcq",
+      "prompt": "En quelle année Steve Jobs a-t-il racheté le studio d'animation Pixar ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1979",
+            "correct": false
+          },
+          {
+            "label": "1995",
+            "correct": false
+          },
+          {
+            "label": "2001",
+            "correct": false
+          },
+          {
+            "label": "1986",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0191-2",
+      "type": "mcq",
+      "prompt": "Qui est officiellement devenu en 2011 le successeur de Steve Jobs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jony Ive",
+            "correct": false
+          },
+          {
+            "label": "Elon Musk",
+            "correct": false
+          },
+          {
+            "label": "Tim Cook",
+            "correct": true
+          },
+          {
+            "label": "Steve Wozniak",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0191-3",
+      "type": "mcq",
+      "prompt": "Quelle entreprise a-t-il créé dans le garage de sa maison d'enfance ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Microsoft",
+            "correct": false
+          },
+          {
+            "label": "Apple",
+            "correct": true
+          },
+          {
+            "label": "IBM",
+            "correct": false
+          },
+          {
+            "label": "Google",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0191-4",
+      "type": "mcq",
+      "prompt": "Quel symbole commun relie la ville de New York et Steve Jobs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pomme",
+            "correct": true
+          },
+          {
+            "label": "Taxi",
+            "correct": false
+          },
+          {
+            "label": "Gratte-ciel",
+            "correct": false
+          },
+          {
+            "label": "Ordinateur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

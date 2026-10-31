@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=409"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0409-1",
+      "type": "mcq",
+      "prompt": "Quel est le prénom du héros du roman « La Promesse des ténèbres » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "David",
+            "correct": false
+          },
+          {
+            "label": "Ronald",
+            "correct": false
+          },
+          {
+            "label": "Brady",
+            "correct": true
+          },
+          {
+            "label": "Kevin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0409-2",
+      "type": "mcq",
+      "prompt": "Quel est le titre du cinquième tome de la saga « Autre-Monde » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oz",
+            "correct": true
+          },
+          {
+            "label": "Neverland",
+            "correct": false
+          },
+          {
+            "label": "Entropia",
+            "correct": false
+          },
+          {
+            "label": "Malronce",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0409-3",
+      "type": "mcq",
+      "prompt": "Quelle histoire se déroule en partie au Mont Saint-Michel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Sang du temps",
+            "correct": true
+          },
+          {
+            "label": "Maléfices",
+            "correct": false
+          },
+          {
+            "label": "Malronce",
+            "correct": false
+          },
+          {
+            "label": "Entropia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0409-4",
+      "type": "mcq",
+      "prompt": "Quelle saison le livre « In Tenebris » de Maxime Chattam représente-t-il ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Automne",
+            "correct": false
+          },
+          {
+            "label": "Hiver",
+            "correct": true
+          },
+          {
+            "label": "Été",
+            "correct": false
+          },
+          {
+            "label": "Printemps",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

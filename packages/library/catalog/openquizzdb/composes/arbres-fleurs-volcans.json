@@ -1,0 +1,472 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0213-1",
+      "type": "mcq",
+      "prompt": "De quoi est issu le fruit issu de nos arbres fruitiers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Racine",
+            "correct": false
+          },
+          {
+            "label": "Fleur",
+            "correct": true
+          },
+          {
+            "label": "Graine",
+            "correct": false
+          },
+          {
+            "label": "Feuille",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0213-2",
+      "type": "mcq",
+      "prompt": "Quel espace de terrain est dévolu à la culture d'arbres fruitiers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jardinière",
+            "correct": false
+          },
+          {
+            "label": "Potager",
+            "correct": false
+          },
+          {
+            "label": "Verger",
+            "correct": true
+          },
+          {
+            "label": "Friche",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0213-3",
+      "type": "mcq",
+      "prompt": "Quel arbre fruitier propose une floraison spectaculaire au Japon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grenadier",
+            "correct": false
+          },
+          {
+            "label": "Pêcher",
+            "correct": false
+          },
+          {
+            "label": "Châtaignier",
+            "correct": false
+          },
+          {
+            "label": "Cerisier",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0213-4",
+      "type": "mcq",
+      "prompt": "Quel arbre fruitier produit la reine-claude ou la mirabelle de Nancy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cerisier",
+            "correct": false
+          },
+          {
+            "label": "Châtaignier",
+            "correct": false
+          },
+          {
+            "label": "Figuier",
+            "correct": false
+          },
+          {
+            "label": "Prunier",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0370-1",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur du coquelicot des terrains fraîchement remués ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pourpre",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": true
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0370-2",
+      "type": "mcq",
+      "prompt": "Quel est l'autre nom de la primevère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pivert",
+            "correct": false
+          },
+          {
+            "label": "Merle",
+            "correct": false
+          },
+          {
+            "label": "Moineau",
+            "correct": false
+          },
+          {
+            "label": "Coucou",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0370-3",
+      "type": "mcq",
+      "prompt": "Avec quelle plante peut-on confondre l'ail des ours ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Muguet",
+            "correct": true
+          },
+          {
+            "label": "Origan",
+            "correct": false
+          },
+          {
+            "label": "Primevère",
+            "correct": false
+          },
+          {
+            "label": "Basilic",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0370-4",
+      "type": "mcq",
+      "prompt": "Quand fleurit la camomille sauvage, ou camomille allemande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Automne",
+            "correct": false
+          },
+          {
+            "label": "Hiver",
+            "correct": false
+          },
+          {
+            "label": "Été",
+            "correct": true
+          },
+          {
+            "label": "Printemps uniquement",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0563-2",
+      "type": "mcq",
+      "prompt": "Quel volcan actif est le plus haut d'Europe, avec ses 3 330 mètres ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Etna",
+            "correct": true
+          },
+          {
+            "label": "Mont Fuji",
+            "correct": false
+          },
+          {
+            "label": "Olca",
+            "correct": false
+          },
+          {
+            "label": "Ebeko",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0563-3",
+      "type": "mcq",
+      "prompt": "Quel volcan, connu des touristes, est le point culminant du Japon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mont Longonot",
+            "correct": false
+          },
+          {
+            "label": "Mont Ontake",
+            "correct": false
+          },
+          {
+            "label": "Mont Spurr",
+            "correct": false
+          },
+          {
+            "label": "Mont Fuji",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0563-4",
+      "type": "mcq",
+      "prompt": "Quel volcan a provoqué un refroidissement mondial de 0,6°C ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pinatubo",
+            "correct": true
+          },
+          {
+            "label": "Misti",
+            "correct": false
+          },
+          {
+            "label": "Rasshua",
+            "correct": false
+          },
+          {
+            "label": "Kurub",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0045-1",
+      "type": "mcq",
+      "prompt": "Au nord de quelle île se dresse la montagne Pelée, qui est un volcan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Guadeloupe",
+            "correct": false
+          },
+          {
+            "label": "Martinique",
+            "correct": true
+          },
+          {
+            "label": "Nouvelle-Calédonie",
+            "correct": false
+          },
+          {
+            "label": "Réunion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0045-2",
+      "type": "mcq",
+      "prompt": "Quel est le pays du Kilimandjaro, au trois volcans éteints ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Japon",
+            "correct": false
+          },
+          {
+            "label": "Tanzanie",
+            "correct": true
+          },
+          {
+            "label": "Tibet",
+            "correct": false
+          },
+          {
+            "label": "Népal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0045-3",
+      "type": "mcq",
+      "prompt": "Quel volcan des îles Éoliennes est situé au nord de la Sicile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pinatubo",
+            "correct": false
+          },
+          {
+            "label": "Stromboli",
+            "correct": true
+          },
+          {
+            "label": "Villarrica",
+            "correct": false
+          },
+          {
+            "label": "Vésuve",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0045-4",
+      "type": "mcq",
+      "prompt": "Quelle marque spécialisée en eaux minérales a pour logo un volcan vert ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vittel",
+            "correct": false
+          },
+          {
+            "label": "Vichy",
+            "correct": false
+          },
+          {
+            "label": "Volvic",
+            "correct": true
+          },
+          {
+            "label": "Valvert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-arbres-fleurs-volcans",
+      "title": "Arbres, fleurs et volcans",
+      "description": "D'après les quiz OpenQuizzDB « Arbres fruitiers », « Fleurs de nos jardins », « Volcans en activité » et « Volcans en sommeil ».",
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0213-1",
+        "oqdb-0213-2",
+        "oqdb-0213-3",
+        "oqdb-0213-4",
+        "oqdb-0370-1",
+        "oqdb-0370-2",
+        "oqdb-0370-3",
+        "oqdb-0370-4",
+        "oqdb-0563-2",
+        "oqdb-0563-3",
+        "oqdb-0563-4",
+        "oqdb-0045-1",
+        "oqdb-0045-2",
+        "oqdb-0045-3",
+        "oqdb-0045-4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=148"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0148-1",
+      "type": "mcq",
+      "prompt": "Quel nom Franquin a-t-il donné à son animal jaune à longue queue ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mowgli",
+            "correct": false
+          },
+          {
+            "label": "Molosse",
+            "correct": false
+          },
+          {
+            "label": "Marsupilami",
+            "correct": true
+          },
+          {
+            "label": "Maximus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0148-2",
+      "type": "mcq",
+      "prompt": "Quel est le nom du chien de Tintin, accompagnant le jeune reporter ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Milou",
+            "correct": true
+          },
+          {
+            "label": "Molosse",
+            "correct": false
+          },
+          {
+            "label": "Médor",
+            "correct": false
+          },
+          {
+            "label": "Minou",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0148-3",
+      "type": "mcq",
+      "prompt": "À la pêche, quel terme désigne un appât artificiel léger ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Moustique",
+            "correct": false
+          },
+          {
+            "label": "Monarque",
+            "correct": false
+          },
+          {
+            "label": "Mouche",
+            "correct": true
+          },
+          {
+            "label": "Morio",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0148-4",
+      "type": "mcq",
+      "prompt": "Qui vit toujours dévêtue dans une chanson de Julien Clerc ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mélissa",
+            "correct": true
+          },
+          {
+            "label": "Marisa",
+            "correct": false
+          },
+          {
+            "label": "Melina",
+            "correct": false
+          },
+          {
+            "label": "Mathilda",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

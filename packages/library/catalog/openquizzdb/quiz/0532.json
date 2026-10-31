@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=532"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0532-1",
+      "type": "mcq",
+      "prompt": "Quelle icône de la mode portait un catogan et des lunettes noires ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thierry Mugler",
+            "correct": false
+          },
+          {
+            "label": "Karl Lagerfeld",
+            "correct": true
+          },
+          {
+            "label": "Paco Rabanne",
+            "correct": false
+          },
+          {
+            "label": "Pierre Cardin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0532-2",
+      "type": "mcq",
+      "prompt": "Quel prénom monsieur Takada a-t-il su faire rayonner dans la mode ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kyrio",
+            "correct": false
+          },
+          {
+            "label": "Kalvin",
+            "correct": false
+          },
+          {
+            "label": "Karl",
+            "correct": false
+          },
+          {
+            "label": "Kenzo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0532-3",
+      "type": "mcq",
+      "prompt": "Quelle fleur est devenue un symbole de la maison Coco Chanel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coquelicot",
+            "correct": false
+          },
+          {
+            "label": "Rose",
+            "correct": false
+          },
+          {
+            "label": "Camélia",
+            "correct": true
+          },
+          {
+            "label": "Marguerite",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0532-4",
+      "type": "mcq",
+      "prompt": "Quelle couleur signe les semelles des chaussures Louboutin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rouge",
+            "correct": true
+          },
+          {
+            "label": "Doré",
+            "correct": false
+          },
+          {
+            "label": "Mauve",
+            "correct": false
+          },
+          {
+            "label": "Bleu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

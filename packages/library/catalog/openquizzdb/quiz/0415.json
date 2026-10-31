@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=415"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0415-1",
+      "type": "mcq",
+      "prompt": "En 1941, quel pays décréta un embargo total sur le Japon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Allemagne",
+            "correct": false
+          },
+          {
+            "label": "URSS",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "États-Unis",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0415-2",
+      "type": "mcq",
+      "prompt": "Quels aviateurs suicides ont marqué la Seconde Guerre mondiale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kazoku",
+            "correct": false
+          },
+          {
+            "label": "Shinobi",
+            "correct": false
+          },
+          {
+            "label": "Kamikazes",
+            "correct": true
+          },
+          {
+            "label": "Samuraïs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0415-3",
+      "type": "mcq",
+      "prompt": "Quelle ville du Kansai fut la capitale impériale du Japon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kamakura",
+            "correct": false
+          },
+          {
+            "label": "Noro",
+            "correct": false
+          },
+          {
+            "label": "Kyoto",
+            "correct": true
+          },
+          {
+            "label": "Tokyo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0415-4",
+      "type": "mcq",
+      "prompt": "Quelle ville japonaise a organisé les Jeux olympiques d'hiver de 1972 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sapporo",
+            "correct": true
+          },
+          {
+            "label": "Nagano",
+            "correct": false
+          },
+          {
+            "label": "Yokohama",
+            "correct": false
+          },
+          {
+            "label": "Kumamoto",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

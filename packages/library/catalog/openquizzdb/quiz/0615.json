@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=615"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0615-1",
+      "type": "mcq",
+      "prompt": "Quel marqueur Internet utilise un croisillon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Backup",
+            "correct": false
+          },
+          {
+            "label": "Asset",
+            "correct": false
+          },
+          {
+            "label": "Hashtag",
+            "correct": true
+          },
+          {
+            "label": "Counter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0615-2",
+      "type": "mcq",
+      "prompt": "Quel outil permet de suivre une commande en temps réel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tracking",
+            "correct": true
+          },
+          {
+            "label": "Permalink",
+            "correct": false
+          },
+          {
+            "label": "Backlink",
+            "correct": false
+          },
+          {
+            "label": "Cookie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0615-3",
+      "type": "mcq",
+      "prompt": "Quel défaut informatique peut provoquer un dysfonctionnement ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alias",
+            "correct": false
+          },
+          {
+            "label": "Bug",
+            "correct": true
+          },
+          {
+            "label": "Java",
+            "correct": false
+          },
+          {
+            "label": "Blacklist",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0615-4",
+      "type": "mcq",
+      "prompt": "Quelle liste de morceaux peut être publiée sur le web ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Query",
+            "correct": false
+          },
+          {
+            "label": "Playlist",
+            "correct": true
+          },
+          {
+            "label": "Facticiel",
+            "correct": false
+          },
+          {
+            "label": "Registrar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

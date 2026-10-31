@@ -40,6 +40,12 @@ services:
       GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
       # Plafond de joueurs par partie (voir docs/charge).
       MAX_PLAYERS_PER_SESSION: ${MAX_PLAYERS_PER_SESSION:-640}
+      # Contenu de bibliothèque propre à l'instance (optionnel, voir docs/devops.md) :
+      # décommenter cette ligne et le volume ci-dessous.
+      # LIBRARY_EXTRA_DIR: /data/library
+    # volumes:
+    #   # Lecture seule, dossier lisible par l'utilisateur node de l'image.
+    #   - ./library:/data/library:ro
     depends_on:
       db:
         condition: service_healthy

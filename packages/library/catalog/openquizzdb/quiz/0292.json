@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=292"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0292-1",
+      "type": "mcq",
+      "prompt": "Quelle importante plate-forme de vidéos en ligne appartient à Google ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yandex",
+            "correct": false
+          },
+          {
+            "label": "Yahoo!",
+            "correct": false
+          },
+          {
+            "label": "Yammer",
+            "correct": false
+          },
+          {
+            "label": "YouTube",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0292-2",
+      "type": "mcq",
+      "prompt": "Quel constructeur de motos japonais fabrique également des pianos ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yamaha",
+            "correct": true
+          },
+          {
+            "label": "Yema",
+            "correct": false
+          },
+          {
+            "label": "Yulon",
+            "correct": false
+          },
+          {
+            "label": "Yutong",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0292-3",
+      "type": "mcq",
+      "prompt": "Dans quel manga le lycéen Yugi Muto acquiert-il d'étranges pouvoirs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yamada",
+            "correct": false
+          },
+          {
+            "label": "YuYu Hakusho",
+            "correct": false
+          },
+          {
+            "label": "Yu-Gi-Oh!",
+            "correct": true
+          },
+          {
+            "label": "Yona",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0292-4",
+      "type": "mcq",
+      "prompt": "Quel petit bonhomme vert a enseigné à Luke comment utiliser la Force ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Youk",
+            "correct": false
+          },
+          {
+            "label": "Yoni",
+            "correct": false
+          },
+          {
+            "label": "Yazoo",
+            "correct": false
+          },
+          {
+            "label": "Yoda",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=269"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0269-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de Chypre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ankara",
+            "correct": false
+          },
+          {
+            "label": "Athènes",
+            "correct": false
+          },
+          {
+            "label": "Nicosie",
+            "correct": true
+          },
+          {
+            "label": "La Valette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0269-2",
+      "type": "mcq",
+      "prompt": "Quelle mer entoure Chypre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mer Noire",
+            "correct": false
+          },
+          {
+            "label": "Mer Rouge",
+            "correct": false
+          },
+          {
+            "label": "Mer du Nord",
+            "correct": false
+          },
+          {
+            "label": "Mer Méditerranée",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0269-3",
+      "type": "mcq",
+      "prompt": "Quelle langue est officiellement parlée au sud de Chypre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grec",
+            "correct": true
+          },
+          {
+            "label": "Italien",
+            "correct": false
+          },
+          {
+            "label": "Arabe",
+            "correct": false
+          },
+          {
+            "label": "Espagnol",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0269-4",
+      "type": "mcq",
+      "prompt": "Quelle civilisation antique est fortement liée à Chypre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grecque",
+            "correct": true
+          },
+          {
+            "label": "Maya",
+            "correct": false
+          },
+          {
+            "label": "Viking",
+            "correct": false
+          },
+          {
+            "label": "Inca",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

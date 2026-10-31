@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=364"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0364-1",
+      "type": "mcq",
+      "prompt": "Quel est le nom du PDG de l'entreprise InGen dans « Jurassic Park » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "John Hammond",
+            "correct": true
+          },
+          {
+            "label": "Alan Grant",
+            "correct": false
+          },
+          {
+            "label": "Ian Malcolm",
+            "correct": false
+          },
+          {
+            "label": "Robert Muldoon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0364-2",
+      "type": "mcq",
+      "prompt": "Qui a réalisé les deux premiers opus de la saga « Jurassic Park » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joe Johnston",
+            "correct": false
+          },
+          {
+            "label": "Tim Burton",
+            "correct": false
+          },
+          {
+            "label": "Steven Spielberg",
+            "correct": true
+          },
+          {
+            "label": "Georges Lucas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0364-3",
+      "type": "mcq",
+      "prompt": "Qui est l'auteur du roman « Jurassic Park » dont s'est inspiré le film ?",
+      "payload": {
+        "options": [
+          {
+            "label": "J. K. Rowling",
+            "correct": false
+          },
+          {
+            "label": "Michael Crichton",
+            "correct": true
+          },
+          {
+            "label": "Isaac Asimov",
+            "correct": false
+          },
+          {
+            "label": "Stephen King",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0364-4",
+      "type": "mcq",
+      "prompt": "Combien d'Oscars le film « Jurassic Park » a-t-il remporté ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deux",
+            "correct": false
+          },
+          {
+            "label": "Un",
+            "correct": false
+          },
+          {
+            "label": "Aucun",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

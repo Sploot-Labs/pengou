@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=51"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0051-1",
+      "type": "mcq",
+      "prompt": "Quelle actrice belge a eu « 20 ans d'écart » dans un de ses films ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Virginie Haro",
+            "correct": false
+          },
+          {
+            "label": "Virginie Hocq",
+            "correct": false
+          },
+          {
+            "label": "Virginie Efira",
+            "correct": true
+          },
+          {
+            "label": "Virginie Wagon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0051-2",
+      "type": "mcq",
+      "prompt": "Quelle actrice belge adore les « poupées russes » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lubna Azabal",
+            "correct": false
+          },
+          {
+            "label": "Cécile de France",
+            "correct": true
+          },
+          {
+            "label": "Marie Gillain",
+            "correct": false
+          },
+          {
+            "label": "Anne Coesens",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0051-3",
+      "type": "mcq",
+      "prompt": "Quelle actrice belge a été révélée au grand public avec le film « Rosetta » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Émilie Dequenne",
+            "correct": true
+          },
+          {
+            "label": "Yolande Moreau",
+            "correct": false
+          },
+          {
+            "label": "Marie Gillain",
+            "correct": false
+          },
+          {
+            "label": "Lubna Azabal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0051-4",
+      "type": "mcq",
+      "prompt": "Qui donne la réplique à Charles Bronson dans « Le Passager de la pluie » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Laurence Bibot",
+            "correct": false
+          },
+          {
+            "label": "Annie Cordy",
+            "correct": true
+          },
+          {
+            "label": "Axelle Red",
+            "correct": false
+          },
+          {
+            "label": "Lio",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=225"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0225-1",
+      "type": "mcq",
+      "prompt": "Qui est le compositeur attitré des films de Steven Spielberg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Giorgio Moroder",
+            "correct": false
+          },
+          {
+            "label": "James Horner",
+            "correct": false
+          },
+          {
+            "label": "John Barry",
+            "correct": false
+          },
+          {
+            "label": "John Williams",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0225-2",
+      "type": "mcq",
+      "prompt": "De quelle actrice du film « E.T. », Steven Spielberg est-il le parrain ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dee Wallace",
+            "correct": false
+          },
+          {
+            "label": "Drew Barrymore",
+            "correct": true
+          },
+          {
+            "label": "Téa Leoni",
+            "correct": false
+          },
+          {
+            "label": "Dakota Fanning",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0225-3",
+      "type": "mcq",
+      "prompt": "Quel soldat faut-il sauver dans un film de Steven Spielberg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Soldat Moore",
+            "correct": false
+          },
+          {
+            "label": "Soldat Garner",
+            "correct": false
+          },
+          {
+            "label": "Soldat Adams",
+            "correct": false
+          },
+          {
+            "label": "Soldat Ryan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0225-4",
+      "type": "mcq",
+      "prompt": "Quel film de Steven Spielberg réinvente l'histoire de Peter Pan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hook",
+            "correct": true
+          },
+          {
+            "label": "Amistad",
+            "correct": false
+          },
+          {
+            "label": "Munich",
+            "correct": false
+          },
+          {
+            "label": "Sugarland Express",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

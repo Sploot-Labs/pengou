@@ -8,11 +8,12 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json --customConditions development",
     "test": "vitest run",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "@splootlabs/library": "workspace:*",
     "@splootlabs/shared": "workspace:*",
     "drizzle-orm": "^0.45.4",
     "postgres": "^3.4.0"

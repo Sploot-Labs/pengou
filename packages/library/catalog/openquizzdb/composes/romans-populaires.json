@@ -1,0 +1,502 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0181-1",
+      "type": "mcq",
+      "prompt": "Quel poste tient Harry Potter dans son équipe de quidditch ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Attrapeur",
+            "correct": true
+          },
+          {
+            "label": "Lanceur",
+            "correct": false
+          },
+          {
+            "label": "Gardien",
+            "correct": false
+          },
+          {
+            "label": "Poursuiveur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0181-2",
+      "type": "mcq",
+      "prompt": "Quel est le nom de famille de Hermione dans la saga « Harry Potter » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gaunt",
+            "correct": false
+          },
+          {
+            "label": "Greengrass",
+            "correct": false
+          },
+          {
+            "label": "Granger",
+            "correct": true
+          },
+          {
+            "label": "Grindelwald",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0181-3",
+      "type": "mcq",
+      "prompt": "Dans « Harry Potter », quel titre Voldemort a-t-il décidé de porter ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Comte",
+            "correct": false
+          },
+          {
+            "label": "Baron",
+            "correct": false
+          },
+          {
+            "label": "Duc",
+            "correct": false
+          },
+          {
+            "label": "Lord",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0181-4",
+      "type": "mcq",
+      "prompt": "Quelle forme prend l'épouvantard de Ron dans la saga « Harry Potter » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Une araignée",
+            "correct": true
+          },
+          {
+            "label": "Un loup",
+            "correct": false
+          },
+          {
+            "label": "Un dragon",
+            "correct": false
+          },
+          {
+            "label": "Un scorpion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0312-1",
+      "type": "mcq",
+      "prompt": "Quel roman met en scène une ado dotée de pouvoirs paranormaux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Christine",
+            "correct": false
+          },
+          {
+            "label": "Misery",
+            "correct": false
+          },
+          {
+            "label": "Carrie",
+            "correct": true
+          },
+          {
+            "label": "Cujo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0312-2",
+      "type": "mcq",
+      "prompt": "Qui représente le méchant dans le roman de Stephen King « Ça » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Un clown",
+            "correct": true
+          },
+          {
+            "label": "Un monstre",
+            "correct": false
+          },
+          {
+            "label": "Une ombre",
+            "correct": false
+          },
+          {
+            "label": "Un fantôme",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0312-3",
+      "type": "mcq",
+      "prompt": "Qui est Christine dans l'univers de Stephen King ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Une tombe",
+            "correct": false
+          },
+          {
+            "label": "Une voiture",
+            "correct": true
+          },
+          {
+            "label": "Une demeure",
+            "correct": false
+          },
+          {
+            "label": "Une poupée",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0312-4",
+      "type": "mcq",
+      "prompt": "Quel roman d'horreur de Stephen King est sous-titré « L'enfant lumière » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shining",
+            "correct": true
+          },
+          {
+            "label": "Dreamcatcher",
+            "correct": false
+          },
+          {
+            "label": "Colorado Kid",
+            "correct": false
+          },
+          {
+            "label": "Territoires",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0085-1",
+      "type": "mcq",
+      "prompt": "À quel écrivain de la science-fiction doit-on la monumentale saga « Dune » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Robert heinlein",
+            "correct": false
+          },
+          {
+            "label": "Arthur C. Clarke",
+            "correct": false
+          },
+          {
+            "label": "Isaac Asimov",
+            "correct": false
+          },
+          {
+            "label": "Frank Herbert",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0085-2",
+      "type": "mcq",
+      "prompt": "Qui a écrit le roman de science-fiction « L'Île du docteur Moreau » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aldous Huxley",
+            "correct": false
+          },
+          {
+            "label": "George Orwell",
+            "correct": false
+          },
+          {
+            "label": "H. G. Wells",
+            "correct": true
+          },
+          {
+            "label": "Arthur C. Clarke",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0085-3",
+      "type": "mcq",
+      "prompt": "Quel roman est le fondateur du mouvement Cyberpunk ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Code source",
+            "correct": false
+          },
+          {
+            "label": "Comte zéro",
+            "correct": false
+          },
+          {
+            "label": "Neuromancien",
+            "correct": true
+          },
+          {
+            "label": "Idoru",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0085-4",
+      "type": "mcq",
+      "prompt": "Quel célèbre auteur de science-fiction a été consultant pour OpenAI ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Isaac Asimov",
+            "correct": true
+          },
+          {
+            "label": "Arthur C. Clarke",
+            "correct": false
+          },
+          {
+            "label": "Philip K. Dick",
+            "correct": false
+          },
+          {
+            "label": "Ray Bradbury",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0397-1",
+      "type": "mcq",
+      "prompt": "Qui se porte volontaire pour remplacer Prim dans « Hunger Games » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Katniss",
+            "correct": true
+          },
+          {
+            "label": "Primrose",
+            "correct": false
+          },
+          {
+            "label": "Peeta",
+            "correct": false
+          },
+          {
+            "label": "Gale",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0397-2",
+      "type": "mcq",
+      "prompt": "Qui chasse et croit avoir tiré sur quelqu'un dans « Hunger Games » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinna",
+            "correct": false
+          },
+          {
+            "label": "Gale",
+            "correct": false
+          },
+          {
+            "label": "Katniss",
+            "correct": true
+          },
+          {
+            "label": "Peeta",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0397-3",
+      "type": "mcq",
+      "prompt": "Qui donne à Katniss un instrument qui extrait du liquide des arbres ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Haymitch",
+            "correct": false
+          },
+          {
+            "label": "Johanna",
+            "correct": false
+          },
+          {
+            "label": "Gale",
+            "correct": true
+          },
+          {
+            "label": "Peeta",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0397-4",
+      "type": "mcq",
+      "prompt": "Quel personnage important porte généralement une rose blanche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peeta",
+            "correct": false
+          },
+          {
+            "label": "Cinna",
+            "correct": false
+          },
+          {
+            "label": "Katniss",
+            "correct": false
+          },
+          {
+            "label": "Snow",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-romans-populaires",
+      "title": "Romans populaires",
+      "description": "D'après les quiz OpenQuizzDB « Harry Potter », « Romans de Stephen King », « Romans de science-fiction » et « Héros de Hunger Games ».",
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0181-1",
+        "oqdb-0181-2",
+        "oqdb-0181-3",
+        "oqdb-0181-4",
+        "oqdb-0312-1",
+        "oqdb-0312-2",
+        "oqdb-0312-3",
+        "oqdb-0312-4",
+        "oqdb-0085-1",
+        "oqdb-0085-2",
+        "oqdb-0085-3",
+        "oqdb-0085-4",
+        "oqdb-0397-1",
+        "oqdb-0397-2",
+        "oqdb-0397-3",
+        "oqdb-0397-4"
+      ]
+    }
+  ]
+}

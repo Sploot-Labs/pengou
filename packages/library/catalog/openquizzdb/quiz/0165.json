@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=165"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0165-1",
+      "type": "mcq",
+      "prompt": "Combien de joueurs composent chaque équipe de rugby à XV ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quinze",
+            "correct": true
+          },
+          {
+            "label": "Onze",
+            "correct": false
+          },
+          {
+            "label": "Dix",
+            "correct": false
+          },
+          {
+            "label": "Douze",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0165-2",
+      "type": "mcq",
+      "prompt": "En rugby à XV, combien de points vaut un essai, s'il est transformé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Sept",
+            "correct": true
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0165-3",
+      "type": "mcq",
+      "prompt": "Quel surnom est donné à l'équipe d'Afrique du Sud de rugby à XV ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chardon",
+            "correct": false
+          },
+          {
+            "label": "All Blacks",
+            "correct": false
+          },
+          {
+            "label": "Springboks",
+            "correct": true
+          },
+          {
+            "label": "Diables rouges",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0165-4",
+      "type": "mcq",
+      "prompt": "Quelle action sanctionne des remises en jeu incorrectes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Transformation",
+            "correct": false
+          },
+          {
+            "label": "Drop",
+            "correct": false
+          },
+          {
+            "label": "Mêlée",
+            "correct": true
+          },
+          {
+            "label": "Essai",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

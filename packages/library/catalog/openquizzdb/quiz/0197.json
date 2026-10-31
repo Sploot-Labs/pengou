@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=197"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0197-1",
+      "type": "mcq",
+      "prompt": "Dans quel film Leonardo DiCaprio traque-t-il une île paradisiaque ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aviator",
+            "correct": false
+          },
+          {
+            "label": "Celebrity",
+            "correct": false
+          },
+          {
+            "label": "La Plage",
+            "correct": true
+          },
+          {
+            "label": "Blood Diamond",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0197-2",
+      "type": "mcq",
+      "prompt": "Qui joue le rôle de la bien-aimée de Leonardo DiCaprio dans « Titanic » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Helen Hunt",
+            "correct": false
+          },
+          {
+            "label": "Cameron Diaz",
+            "correct": false
+          },
+          {
+            "label": "Kate Winslet",
+            "correct": true
+          },
+          {
+            "label": "Julia Roberts",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0197-3",
+      "type": "mcq",
+      "prompt": "Dans quel film de Scorsese DiCaprio incarne-t-il Edward Daniels ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Casino",
+            "correct": false
+          },
+          {
+            "label": "Shutter Island",
+            "correct": true
+          },
+          {
+            "label": "Aviator",
+            "correct": false
+          },
+          {
+            "label": "Hugo Cabret",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0197-4",
+      "type": "mcq",
+      "prompt": "Quelle actrice partage l'affiche avec Leonardo DiCaprio dans « Inception » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Marion Cotillard",
+            "correct": true
+          },
+          {
+            "label": "Léa Seydoux",
+            "correct": false
+          },
+          {
+            "label": "Melanie Laurent",
+            "correct": false
+          },
+          {
+            "label": "Camille Cottin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,7 +1,7 @@
 import type { Server, Socket } from 'socket.io'
 import { fromNodeHeaders } from 'better-auth/node'
 import {
-  resolveTenantId, getMembershipRole, withTenantTx, listQuestions,
+  resolveTenantId, getMembershipRole, withTenantTx, getQuiz, listQuestions,
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
   clearEngineState, listResumableSessions, abandonStaleSessions, abandonInactiveSessions, listSessionPlayers,
   type Db,
@@ -433,8 +433,14 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   ): Promise<{ session: GameSession }> {
     const { tenantId } = context
     // Lecture du quiz sous RLS (appDb + GUC) : un quiz d'un autre tenant n'existe pas pour ce
-    // contexte → « quiz introuvable ».
-    const questionRows = await withTenantTx(appDb, context, (scope) => listQuestions(scope, quizId))
+    // contexte → « quiz introuvable ». Un quiz archivé n'est plus lançable (création comme
+    // relance) ; les parties déjà en cours ne repassent pas par ici et restent jouables.
+    const questionRows = await withTenantTx(appDb, context, async (scope) => {
+      const quiz = await getQuiz(scope, quizId)
+      if (!quiz) return null
+      if (quiz.archivedAt) throw new Error('Ce quiz est archivé : restaurez-le pour lancer une partie.')
+      return listQuestions(scope, quizId)
+    })
     if (!questionRows) throw new Error('quiz introuvable')
 
     const questions = questionRows.map(toEngineQuestion)

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=334"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0334-1",
+      "type": "mcq",
+      "prompt": "Quel rôle joue Bruce Willis dans la saga à succès « Die Hard » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peter Fallow",
+            "correct": false
+          },
+          {
+            "label": "John McClane",
+            "correct": true
+          },
+          {
+            "label": "Tom Mix",
+            "correct": false
+          },
+          {
+            "label": "Walter Davis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0334-2",
+      "type": "mcq",
+      "prompt": "Quel est le métier de Bruce Willis dans « Pulp Fiction », de Tarantino ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Boxeur",
+            "correct": true
+          },
+          {
+            "label": "Footballeur",
+            "correct": false
+          },
+          {
+            "label": "Vétérinaire",
+            "correct": false
+          },
+          {
+            "label": "Avocat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0334-3",
+      "type": "mcq",
+      "prompt": "Dans quel film Bruce Willis incarne-t-il un psychologue pour enfant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sixième Sens",
+            "correct": true
+          },
+          {
+            "label": "Sale Môme",
+            "correct": false
+          },
+          {
+            "label": "Une vie à deux",
+            "correct": false
+          },
+          {
+            "label": "Otage",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0334-4",
+      "type": "mcq",
+      "prompt": "Dans quel film Bruce Willis commande-t-il une équipe d'astronautes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Armageddon",
+            "correct": true
+          },
+          {
+            "label": "Looper",
+            "correct": false
+          },
+          {
+            "label": "Sin City",
+            "correct": false
+          },
+          {
+            "label": "Sixième Sens",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

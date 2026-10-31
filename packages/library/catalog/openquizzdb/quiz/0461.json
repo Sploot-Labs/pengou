@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=461"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0461-1",
+      "type": "mcq",
+      "prompt": "Le pétrole, le gaz et le charbon font partie de quelles énergies ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Renouvelables",
+            "correct": false
+          },
+          {
+            "label": "Propres",
+            "correct": false
+          },
+          {
+            "label": "Fossiles",
+            "correct": true
+          },
+          {
+            "label": "Solaires",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0461-2",
+      "type": "mcq",
+      "prompt": "Quel pays est le plus grand émetteur de gaz à effet de serre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Inde",
+            "correct": false
+          },
+          {
+            "label": "Chine",
+            "correct": true
+          },
+          {
+            "label": "Russie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0461-3",
+      "type": "mcq",
+      "prompt": "Quelle température y aurait-il sur Terre sans l'effet de serre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "98°C",
+            "correct": false
+          },
+          {
+            "label": "-18°C",
+            "correct": true
+          },
+          {
+            "label": "4°C",
+            "correct": false
+          },
+          {
+            "label": "47°C",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0461-4",
+      "type": "mcq",
+      "prompt": "En quelle année est apparu le terme « effet de serre » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1824",
+            "correct": true
+          },
+          {
+            "label": "1934",
+            "correct": false
+          },
+          {
+            "label": "1989",
+            "correct": false
+          },
+          {
+            "label": "1956",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

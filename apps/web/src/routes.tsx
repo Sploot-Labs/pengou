@@ -8,8 +8,10 @@ import { Home } from './screens/Home'
 import { HostEditor } from './screens/HostEditor'
 import { HostLive } from './screens/HostLive'
 import { Join } from './screens/Join'
+import { Library } from './screens/Library'
 import { Login } from './screens/Login'
 import { PlayerLive } from './screens/PlayerLive'
+import { RouteError } from './screens/RouteError'
 import { SessionReport } from './screens/SessionReport'
 import { Signup } from './screens/Signup'
 import { AcceptInvitation } from './screens/AcceptInvitation'
@@ -85,6 +87,9 @@ function HostRealtimeLayout() {
 export const router = createBrowserRouter([
   {
     element: <AppShell />,
+    // Page introuvable (aucune route ne correspond) et erreur levée au rendu : écran maison
+    // plutôt que la page de développement de react-router.
+    errorElement: <RouteError />,
     children: [
       { path: '/login', element: <Login /> },
       { path: '/signup', element: <Signup /> },
@@ -104,6 +109,16 @@ export const router = createBrowserRouter([
             element: (
               <RequireAuth>
                 <HostEditor />
+              </RequireAuth>
+            ),
+          },
+          {
+            // Bibliothèque de questions : sous HostRealtimeLayout pour « Jouer maintenant », qui
+            // crée la partie sur la socket partagée que `HostLive` reprend ensuite.
+            path: '/library',
+            element: (
+              <RequireAuth>
+                <Library />
               </RequireAuth>
             ),
           },

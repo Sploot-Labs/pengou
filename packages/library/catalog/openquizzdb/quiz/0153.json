@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=153"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0153-1",
+      "type": "mcq",
+      "prompt": "Quel élément d'une voiture électrique permet d'en stocker l'énergie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Batterie",
+            "correct": true
+          },
+          {
+            "label": "Démarreur",
+            "correct": false
+          },
+          {
+            "label": "Alternateur",
+            "correct": false
+          },
+          {
+            "label": "Radiateur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0153-2",
+      "type": "mcq",
+      "prompt": "Quelle entreprise propose un réseau de Superchargeurs pour voitures ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shell",
+            "correct": false
+          },
+          {
+            "label": "ExxonMobil",
+            "correct": false
+          },
+          {
+            "label": "BP",
+            "correct": false
+          },
+          {
+            "label": "Tesla",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0153-3",
+      "type": "mcq",
+      "prompt": "Où est le plus souvent placée la batterie dans un véhicule électrique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sous la voiture",
+            "correct": true
+          },
+          {
+            "label": "Dans le coffre",
+            "correct": false
+          },
+          {
+            "label": "Sur les ailes",
+            "correct": false
+          },
+          {
+            "label": "À l'avant",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0153-4",
+      "type": "mcq",
+      "prompt": "Qui fut numéro un mondial de la voiture électrique en 2022 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "BYD",
+            "correct": true
+          },
+          {
+            "label": "Tesla",
+            "correct": false
+          },
+          {
+            "label": "Honda",
+            "correct": false
+          },
+          {
+            "label": "Volvo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

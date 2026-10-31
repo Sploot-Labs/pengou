@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=231"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0231-1",
+      "type": "mcq",
+      "prompt": "Dans « Star Trek », quelle flotte est liée à la Fédération des planètes unies ?",
+      "payload": {
+        "options": [
+          {
+            "label": "FedCon",
+            "correct": false
+          },
+          {
+            "label": "Starfleet",
+            "correct": true
+          },
+          {
+            "label": "Cardassia",
+            "correct": false
+          },
+          {
+            "label": "Klingon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0231-2",
+      "type": "mcq",
+      "prompt": "Dans l'univers de « Star Trek », quel physicien est aussi un fin timonier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sulu",
+            "correct": true
+          },
+          {
+            "label": "Uhura",
+            "correct": false
+          },
+          {
+            "label": "Chekov",
+            "correct": false
+          },
+          {
+            "label": "McCoy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0231-3",
+      "type": "mcq",
+      "prompt": "Quel dispositif technologique transporte les individus dans « Star Trek » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Télécran",
+            "correct": false
+          },
+          {
+            "label": "Cube cosmique",
+            "correct": false
+          },
+          {
+            "label": "Téléporteur",
+            "correct": true
+          },
+          {
+            "label": "Holodeck",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0231-4",
+      "type": "mcq",
+      "prompt": "Qui a remplacé Leonard Nimoy dans les derniers films « Star Trek » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zachary Quinto",
+            "correct": true
+          },
+          {
+            "label": "Chris Pine",
+            "correct": false
+          },
+          {
+            "label": "Avery Brooks",
+            "correct": false
+          },
+          {
+            "label": "Jonathan Frakes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

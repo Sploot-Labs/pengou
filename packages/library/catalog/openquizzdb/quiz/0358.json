@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=358"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0358-1",
+      "type": "mcq",
+      "prompt": "Dans quelle ville peut-on admirer la Petite Sirène sur son rocher ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bucarest",
+            "correct": false
+          },
+          {
+            "label": "Amsterdam",
+            "correct": false
+          },
+          {
+            "label": "Copenhague",
+            "correct": true
+          },
+          {
+            "label": "Budapest",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0358-2",
+      "type": "mcq",
+      "prompt": "Quel célèbre mausolée de marbre blanc peut-on visiter à Agra, en Inde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yantra Mandir",
+            "correct": false
+          },
+          {
+            "label": "Raj Ghat",
+            "correct": false
+          },
+          {
+            "label": "Bombay House",
+            "correct": false
+          },
+          {
+            "label": "Taj Mahal",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0358-3",
+      "type": "mcq",
+      "prompt": "Dans quelle ville espagnole se trouve l'Alhambra ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grenade",
+            "correct": true
+          },
+          {
+            "label": "Bilbao",
+            "correct": false
+          },
+          {
+            "label": "Séville",
+            "correct": false
+          },
+          {
+            "label": "Malaga",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0358-4",
+      "type": "mcq",
+      "prompt": "Quel site grec célèbre se trouve sur le Mont Parnasse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Delphes",
+            "correct": true
+          },
+          {
+            "label": "Olympie",
+            "correct": false
+          },
+          {
+            "label": "Amphipolis",
+            "correct": false
+          },
+          {
+            "label": "Lindos",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=117"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0117-1",
+      "type": "mcq",
+      "prompt": "Qui a perdu deux fois au second tour face à Emmanuel Macron ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Édith Cresson",
+            "correct": false
+          },
+          {
+            "label": "Marine Le Pen",
+            "correct": true
+          },
+          {
+            "label": "Anne Hidalgo",
+            "correct": false
+          },
+          {
+            "label": "Rachida Dati",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0117-2",
+      "type": "mcq",
+      "prompt": "Quelle actrice de la saga Harry Potter est devenue une voix féministe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gal Gadot",
+            "correct": false
+          },
+          {
+            "label": "Margot Robbie",
+            "correct": false
+          },
+          {
+            "label": "Jennifer Lawrence",
+            "correct": false
+          },
+          {
+            "label": "Emma Watson",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0117-3",
+      "type": "mcq",
+      "prompt": "En quoi les Obama ont-ils transformé le jardin de la Maison Blanche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Salle de sport",
+            "correct": false
+          },
+          {
+            "label": "Théâtre ouvert",
+            "correct": false
+          },
+          {
+            "label": "Potager",
+            "correct": true
+          },
+          {
+            "label": "Parking",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0117-4",
+      "type": "mcq",
+      "prompt": "Quelle jeune militante écologiste suédoise engagée est très médiatisée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hedy Epstein",
+            "correct": false
+          },
+          {
+            "label": "Greta Thunberg",
+            "correct": true
+          },
+          {
+            "label": "Rachel Corrie",
+            "correct": false
+          },
+          {
+            "label": "Mary Dreier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

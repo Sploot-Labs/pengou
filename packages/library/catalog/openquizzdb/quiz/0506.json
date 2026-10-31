@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=506"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0506-1",
+      "type": "mcq",
+      "prompt": "Quel navire transporte des passagers en haute mer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monocoque",
+            "correct": false
+          },
+          {
+            "label": "Galère",
+            "correct": false
+          },
+          {
+            "label": "Paquebot",
+            "correct": true
+          },
+          {
+            "label": "Trimaran",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0506-2",
+      "type": "mcq",
+      "prompt": "Quel navire submersible est capable de se déplacer sous l'eau ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sous-marin",
+            "correct": true
+          },
+          {
+            "label": "Bateau-mouche",
+            "correct": false
+          },
+          {
+            "label": "Paquebot",
+            "correct": false
+          },
+          {
+            "label": "Ferry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0506-3",
+      "type": "mcq",
+      "prompt": "Quel bateau de plaisance de luxe voit-on souvent à Saint-Tropez ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bateau-mouche",
+            "correct": false
+          },
+          {
+            "label": "Hydravion",
+            "correct": false
+          },
+          {
+            "label": "Porte-avions",
+            "correct": false
+          },
+          {
+            "label": "Yacht",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0506-4",
+      "type": "mcq",
+      "prompt": "Quel bateau est utilisé pour le tourisme sur la Seine à Paris ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bateau-bus",
+            "correct": false
+          },
+          {
+            "label": "Bateau-mouche",
+            "correct": true
+          },
+          {
+            "label": "Ferry",
+            "correct": false
+          },
+          {
+            "label": "Paquebot",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

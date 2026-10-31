@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=351"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0351-1",
+      "type": "mcq",
+      "prompt": "Quelle comédie de Josiane Balasko traite de l'homosexualité féminine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sac de noeuds",
+            "correct": false
+          },
+          {
+            "label": "Gazon maudit",
+            "correct": true
+          },
+          {
+            "label": "Cliente",
+            "correct": false
+          },
+          {
+            "label": "Les Keufs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0351-2",
+      "type": "mcq",
+      "prompt": "Dans lequel de ses films se fait-elle passer pour un garçon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "100% cachemire",
+            "correct": false
+          },
+          {
+            "label": "Le Derrière",
+            "correct": true
+          },
+          {
+            "label": "Palais Royal",
+            "correct": false
+          },
+          {
+            "label": "Quadrille",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0351-3",
+      "type": "mcq",
+      "prompt": "À qui doit-on le film « Je vous trouve très beau », avec Michel Blanc ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Isabelle Mergault",
+            "correct": true
+          },
+          {
+            "label": "Agnès Varda",
+            "correct": false
+          },
+          {
+            "label": "Coline Serreau",
+            "correct": false
+          },
+          {
+            "label": "Claire Denis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0351-4",
+      "type": "mcq",
+      "prompt": "Quelle réalisatrice vous propose de « se souvenir des belles choses » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coline Serreau",
+            "correct": false
+          },
+          {
+            "label": "Zabou Breitman",
+            "correct": true
+          },
+          {
+            "label": "Agnès Jaoui",
+            "correct": false
+          },
+          {
+            "label": "Léa Fehner",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

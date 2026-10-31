@@ -1,0 +1,502 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0604-1",
+      "type": "mcq",
+      "prompt": "Quel objet imposant est un incontournable de la cuisine moderne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Radiateur",
+            "correct": false
+          },
+          {
+            "label": "Réfrigérateur",
+            "correct": true
+          },
+          {
+            "label": "Aspirateur",
+            "correct": false
+          },
+          {
+            "label": "Surgélateur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0604-2",
+      "type": "mcq",
+      "prompt": "Quel objet, aussi appelé sofa ou divan, fait partie de la salle de séjour ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chaise",
+            "correct": false
+          },
+          {
+            "label": "Fauteuil",
+            "correct": false
+          },
+          {
+            "label": "Tabouret",
+            "correct": false
+          },
+          {
+            "label": "Canapé",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0604-3",
+      "type": "mcq",
+      "prompt": "Quel passage en surplomb dessert les pièces du niveau supérieur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Balcon",
+            "correct": false
+          },
+          {
+            "label": "Mezzanine",
+            "correct": true
+          },
+          {
+            "label": "Carport",
+            "correct": false
+          },
+          {
+            "label": "Véranda",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0604-4",
+      "type": "mcq",
+      "prompt": "Quelle alternative au garage classique est ouverte sur les côtés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Véranda",
+            "correct": false
+          },
+          {
+            "label": "Cellier",
+            "correct": false
+          },
+          {
+            "label": "Comble",
+            "correct": false
+          },
+          {
+            "label": "Carport",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0608-1",
+      "type": "mcq",
+      "prompt": "Dans quelle pièce de la maison place-t-on généralement un lave-linge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vestibule",
+            "correct": false
+          },
+          {
+            "label": "Buanderie",
+            "correct": true
+          },
+          {
+            "label": "Véranda",
+            "correct": false
+          },
+          {
+            "label": "Mezzanine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0608-2",
+      "type": "mcq",
+      "prompt": "Quelle pièce supplémentaire à la maison possède des parois vitrées ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Buanderie",
+            "correct": false
+          },
+          {
+            "label": "Fumoir",
+            "correct": false
+          },
+          {
+            "label": "Cellier",
+            "correct": false
+          },
+          {
+            "label": "Véranda",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0608-3",
+      "type": "mcq",
+      "prompt": "Quelle pièce sert à conserver les provisions et les légumes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cellier",
+            "correct": true
+          },
+          {
+            "label": "Garage",
+            "correct": false
+          },
+          {
+            "label": "Buanderie",
+            "correct": false
+          },
+          {
+            "label": "Dressing",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0608-4",
+      "type": "mcq",
+      "prompt": "Quelle pièce comporte généralement une douche sans baignoire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Suite parentale",
+            "correct": false
+          },
+          {
+            "label": "Salle de bains",
+            "correct": false
+          },
+          {
+            "label": "Boudoir",
+            "correct": false
+          },
+          {
+            "label": "Salle d'eau",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0467-1",
+      "type": "mcq",
+      "prompt": "Quelle couleur est associée à l'argent aux États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blanc",
+            "correct": false
+          },
+          {
+            "label": "Vert",
+            "correct": true
+          },
+          {
+            "label": "Bleu",
+            "correct": false
+          },
+          {
+            "label": "Brun",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0467-2",
+      "type": "mcq",
+      "prompt": "De quelle couleur est généralement habillé un ballon de basket-ball ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Orange",
+            "correct": true
+          },
+          {
+            "label": "Noire",
+            "correct": false
+          },
+          {
+            "label": "Grise",
+            "correct": false
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0467-3",
+      "type": "mcq",
+      "prompt": "Super Mario porte une casquette de quelle couleur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": true
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          },
+          {
+            "label": "Bleue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0467-4",
+      "type": "mcq",
+      "prompt": "De quelle couleur est le « B » du logo du site eBay ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Noir",
+            "correct": false
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Vert",
+            "correct": false
+          },
+          {
+            "label": "Bleu",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0472-1",
+      "type": "mcq",
+      "prompt": "Quel moyen de transport est utilisé par les médecins en Australie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Train",
+            "correct": false
+          },
+          {
+            "label": "Montgolfière",
+            "correct": false
+          },
+          {
+            "label": "Hélicoptère",
+            "correct": true
+          },
+          {
+            "label": "Voiture",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0472-2",
+      "type": "mcq",
+      "prompt": "Que portent aux mains de nombreux conducteurs de taxi au Japon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bagues",
+            "correct": false
+          },
+          {
+            "label": "Baguettes",
+            "correct": false
+          },
+          {
+            "label": "Gants blancs",
+            "correct": true
+          },
+          {
+            "label": "Coups",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0472-3",
+      "type": "mcq",
+      "prompt": "Quelle est l'altitude de croisière d'un Airbus A320 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "13 000 m",
+            "correct": false
+          },
+          {
+            "label": "10 000 m",
+            "correct": true
+          },
+          {
+            "label": "7 000 m",
+            "correct": false
+          },
+          {
+            "label": "4 000 m",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0472-4",
+      "type": "mcq",
+      "prompt": "Quelles lettres apparaissent à l'arrière des voitures en Suisse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "DK",
+            "correct": false
+          },
+          {
+            "label": "SU",
+            "correct": false
+          },
+          {
+            "label": "SE",
+            "correct": false
+          },
+          {
+            "label": "CH",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-maison-quotidien",
+      "title": "La maison et le quotidien",
+      "description": "D'après les quiz OpenQuizzDB « Dans la maison », « Pièces de la maison », « Les couleurs » et « Moyens de transport ».",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0604-1",
+        "oqdb-0604-2",
+        "oqdb-0604-3",
+        "oqdb-0604-4",
+        "oqdb-0608-1",
+        "oqdb-0608-2",
+        "oqdb-0608-3",
+        "oqdb-0608-4",
+        "oqdb-0467-1",
+        "oqdb-0467-2",
+        "oqdb-0467-3",
+        "oqdb-0467-4",
+        "oqdb-0472-1",
+        "oqdb-0472-2",
+        "oqdb-0472-3",
+        "oqdb-0472-4"
+      ]
+    }
+  ]
+}

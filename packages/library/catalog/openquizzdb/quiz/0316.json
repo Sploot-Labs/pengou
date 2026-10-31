@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=316"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0316-1",
+      "type": "mcq",
+      "prompt": "Quel jeu de dessin et de devinettes a été créé en 1985 par Rob Angel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mastermind",
+            "correct": false
+          },
+          {
+            "label": "Uno",
+            "correct": false
+          },
+          {
+            "label": "Blokus",
+            "correct": false
+          },
+          {
+            "label": "Pictionary",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0316-2",
+      "type": "mcq",
+      "prompt": "Quel jeu d'adresse consiste à retirer des baguettes une par une ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Samouraï",
+            "correct": false
+          },
+          {
+            "label": "Mandarin",
+            "correct": false
+          },
+          {
+            "label": "Mahjong",
+            "correct": false
+          },
+          {
+            "label": "Mikado",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0316-3",
+      "type": "mcq",
+      "prompt": "Quel jeu de société consiste à deviner une combinaison de couleurs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monopoly",
+            "correct": false
+          },
+          {
+            "label": "Memory",
+            "correct": false
+          },
+          {
+            "label": "Mastermind",
+            "correct": true
+          },
+          {
+            "label": "Brain",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0316-4",
+      "type": "mcq",
+      "prompt": "Avec quoi joue-t-on au « Boggle » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dés lettres",
+            "correct": true
+          },
+          {
+            "label": "Cartes",
+            "correct": false
+          },
+          {
+            "label": "Pions",
+            "correct": false
+          },
+          {
+            "label": "Billes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

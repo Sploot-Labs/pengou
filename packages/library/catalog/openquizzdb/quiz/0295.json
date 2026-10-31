@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=295"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0295-1",
+      "type": "mcq",
+      "prompt": "Avec qui joue Clint Eastwood dans le film « Sur la route de Madison » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jane Fonda",
+            "correct": false
+          },
+          {
+            "label": "Sondra Locke",
+            "correct": false
+          },
+          {
+            "label": "Meryl Streep",
+            "correct": true
+          },
+          {
+            "label": "Jodie Foster",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0295-2",
+      "type": "mcq",
+      "prompt": "Quel film de Clint Eastwood est consacré à Charlie Parker ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Dernière Chance",
+            "correct": false
+          },
+          {
+            "label": "Pink Cadillac",
+            "correct": false
+          },
+          {
+            "label": "Bird",
+            "correct": true
+          },
+          {
+            "label": "Breezy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0295-3",
+      "type": "mcq",
+      "prompt": "Quel film Clint Eastwood a-t-il tourné en accord avec la NASA ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Space Cowboys",
+            "correct": true
+          },
+          {
+            "label": "Invictus",
+            "correct": false
+          },
+          {
+            "label": "La Relève",
+            "correct": false
+          },
+          {
+            "label": "Au-delà",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0295-4",
+      "type": "mcq",
+      "prompt": "Quel réalisateur a embauché Clint Eastwood pour la « Trilogie du dollar » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sergio Leone",
+            "correct": true
+          },
+          {
+            "label": "Giorgio Ferroni",
+            "correct": false
+          },
+          {
+            "label": "Tonino Valerii",
+            "correct": false
+          },
+          {
+            "label": "Sergio Corbucci",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

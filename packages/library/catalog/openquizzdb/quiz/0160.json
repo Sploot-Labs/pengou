@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=160"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0160-1",
+      "type": "mcq",
+      "prompt": "Quel est le prénom du valet de chambre du Capitaine Haddock ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Narcisse",
+            "correct": false
+          },
+          {
+            "label": "Nestor",
+            "correct": true
+          },
+          {
+            "label": "Nelson",
+            "correct": false
+          },
+          {
+            "label": "Napoléon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0160-2",
+      "type": "mcq",
+      "prompt": "Dans quelle ville française circulez-vous sur la promenade des Anglais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nancy",
+            "correct": false
+          },
+          {
+            "label": "Nanterre",
+            "correct": false
+          },
+          {
+            "label": "Nantes",
+            "correct": false
+          },
+          {
+            "label": "Nice",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0160-3",
+      "type": "mcq",
+      "prompt": "Kurt Cobain a été le leader de quel groupe musical mythique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nickelback",
+            "correct": false
+          },
+          {
+            "label": "Nine Inch Nails",
+            "correct": false
+          },
+          {
+            "label": "New Order",
+            "correct": false
+          },
+          {
+            "label": "Nirvana",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0160-4",
+      "type": "mcq",
+      "prompt": "De quel groupe musical Muriel Moreno est-elle la fondatrice ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Niagara",
+            "correct": true
+          },
+          {
+            "label": "Nouvelle Vague",
+            "correct": false
+          },
+          {
+            "label": "Neg'Marrons",
+            "correct": false
+          },
+          {
+            "label": "Noir Désir",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

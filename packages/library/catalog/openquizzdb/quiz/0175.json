@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=175"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0175-1",
+      "type": "mcq",
+      "prompt": "De quelle filiale du groupe Nestlé George Clooney est-il ambassadeur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nespresso",
+            "correct": true
+          },
+          {
+            "label": "Ricoré",
+            "correct": false
+          },
+          {
+            "label": "Carte Noire",
+            "correct": false
+          },
+          {
+            "label": "Jacques Vabre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0175-2",
+      "type": "mcq",
+      "prompt": "Quelle marque de jeans mondialement connue fabrique le célèbre 501 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lee Cooper",
+            "correct": false
+          },
+          {
+            "label": "Levis",
+            "correct": true
+          },
+          {
+            "label": "Lacoste",
+            "correct": false
+          },
+          {
+            "label": "Lindex",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0175-3",
+      "type": "mcq",
+      "prompt": "Quelle marque vous invite à savourer « un café nommé désir » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Carte Noire",
+            "correct": true
+          },
+          {
+            "label": "Nespresso",
+            "correct": false
+          },
+          {
+            "label": "Ricoré",
+            "correct": false
+          },
+          {
+            "label": "Jacques Vabre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0175-4",
+      "type": "mcq",
+      "prompt": "Quelle marque vous garantit « le goût des choses simples » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Purina",
+            "correct": false
+          },
+          {
+            "label": "Maggi",
+            "correct": false
+          },
+          {
+            "label": "Buitoni",
+            "correct": false
+          },
+          {
+            "label": "Herta",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

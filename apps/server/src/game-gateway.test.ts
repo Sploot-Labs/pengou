@@ -1804,7 +1804,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const hostSocket = await connectClient(url, { cookie })
       const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', { quizId: quizA })
       expect(created.error).toBeUndefined()
-      return { hostSocket, pinA: created.pin!, sessionIdA: created.sessionId!, quizA, quizB }
+      return { hostSocket, pinA: created.pin!, sessionIdA: created.sessionId!, quizA, quizB, cookie }
     }
 
     async function toPodium(hostSocket: ClientSocket, observer: ClientSocket) {
@@ -1918,6 +1918,44 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         expect(await noRelaunch).toBe(true)
         const rows = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, foreignQuiz.id))
         expect(rows).toHaveLength(0)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("quiz archivé : host:create et host:relaunch sont refusés, la partie déjà en cours continue", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pinA, quizA, quizB, cookie } = await setupRelaunch(app, url, 'gateway-archived@example.com')
+        clients.push(hostSocket)
+        const player = await connectClient(url)
+        clients.push(player)
+        expect((await ack<{ error?: string }>(player, 'player:join', { pin: pinA, nickname: 'Ana' })).error).toBeUndefined()
+
+        // Archivage des deux quiz par l'API, pendant que la partie sur quizA est en lobby.
+        for (const id of [quizA, quizB]) {
+          const res = await app.inject({ method: 'POST', url: `/api/quizzes/${id}/archive`, headers: { cookie } })
+          expect(res.statusCode).toBe(200)
+        }
+
+        // Nouvelle partie sur un quiz archivé : refusée, aucune ligne game_session créée.
+        const before = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, quizA))
+        const created = await ack<{ sessionId?: string; error?: string }>(hostSocket, 'host:create', { quizId: quizA })
+        expect(created.error).toBe('Ce quiz est archivé : restaurez-le pour lancer une partie.')
+        expect(created.sessionId).toBeUndefined()
+        const after = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, quizA))
+        expect(after).toHaveLength(before.length)
+
+        // La partie déjà lancée se joue jusqu'au podium malgré l'archivage...
+        await toPodium(hostSocket, player)
+        // ... mais sa relance sur un quiz archivé est refusée.
+        const noRelaunch = raceNoEvent(player, 'session:relaunched', 400)
+        const res = await ack<{ error?: string; sessionId?: string }>(hostSocket, 'host:relaunch', { quizId: quizB })
+        expect(res.error).toBe('Ce quiz est archivé : restaurez-le pour lancer une partie.')
+        expect(res.sessionId).toBeUndefined()
+        expect(await noRelaunch).toBe(true)
       } finally {
         for (const c of clients) c.disconnect()
         await app.close()

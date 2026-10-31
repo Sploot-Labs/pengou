@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=372"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0372-1",
+      "type": "mcq",
+      "prompt": "Quelle confiserie est constituée d'une pomme enrobée de sucre cuit ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pomme d'amour",
+            "correct": true
+          },
+          {
+            "label": "Tarte Tatin",
+            "correct": false
+          },
+          {
+            "label": "Le crumble",
+            "correct": false
+          },
+          {
+            "label": "Apfelstrudel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0372-2",
+      "type": "mcq",
+      "prompt": "Quel dessert consiste en des pommes en pâte frites dans l'huile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Clafoutis",
+            "correct": false
+          },
+          {
+            "label": "Beignet de pomme",
+            "correct": true
+          },
+          {
+            "label": "Tarte Tatin",
+            "correct": false
+          },
+          {
+            "label": "Crumble",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0372-3",
+      "type": "mcq",
+      "prompt": "Quel gâteau traditionnel autrichien est cuisiné à base de pommes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tarte Tatin",
+            "correct": false
+          },
+          {
+            "label": "Croustade",
+            "correct": false
+          },
+          {
+            "label": "Crumble",
+            "correct": false
+          },
+          {
+            "label": "Apfelstrudel",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0372-4",
+      "type": "mcq",
+      "prompt": "Dans quelle tarte les pommes renversée sont-elles caramélisées ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tarte Tatin",
+            "correct": true
+          },
+          {
+            "label": "Tarte au riz",
+            "correct": false
+          },
+          {
+            "label": "Tarte normande",
+            "correct": false
+          },
+          {
+            "label": "Tarte au maton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

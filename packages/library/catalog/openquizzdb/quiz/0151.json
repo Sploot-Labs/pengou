@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=151"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0151-1",
+      "type": "mcq",
+      "prompt": "Quel petit déjeuner est plus copieux que le repas continental ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Norvégien",
+            "correct": false
+          },
+          {
+            "label": "Russe",
+            "correct": false
+          },
+          {
+            "label": "Croate",
+            "correct": false
+          },
+          {
+            "label": "Anglo-saxon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0151-2",
+      "type": "mcq",
+      "prompt": "Quel petit déjeuner est parfois mélangé avec le repas de midi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Banquet",
+            "correct": false
+          },
+          {
+            "label": "Brunch",
+            "correct": true
+          },
+          {
+            "label": "Pique-nique",
+            "correct": false
+          },
+          {
+            "label": "Goûter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0151-3",
+      "type": "mcq",
+      "prompt": "Dans quel établissement prend-on le petit déjeuner avec les clients ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinéma",
+            "correct": false
+          },
+          {
+            "label": "Sauna",
+            "correct": false
+          },
+          {
+            "label": "Chambre d'hôte",
+            "correct": true
+          },
+          {
+            "label": "Ascenseur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0151-4",
+      "type": "mcq",
+      "prompt": "Comment Stephan Eicher souhaite-il prendre son déjeuner ?",
+      "payload": {
+        "options": [
+          {
+            "label": "En pyjama",
+            "correct": false
+          },
+          {
+            "label": "En lévitation",
+            "correct": false
+          },
+          {
+            "label": "En musique",
+            "correct": false
+          },
+          {
+            "label": "En paix",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}
