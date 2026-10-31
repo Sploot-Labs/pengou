@@ -194,6 +194,33 @@ describe('PersistentSessionStore', () => {
     expect(await fresh.peek(crypto.randomUUID())).toBeUndefined()
   })
 
+  it('deux peek concurrents sur un store neuf renvoient le même objet', async () => {
+    const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900303' })
+    await setSessionStatus(ctx.db, dbSession!.id, 'active')
+    const s = makeSession(dbSession!.id, dbSession!.pin)
+    await new PersistentSessionStore(ctx.db).save(s)
+
+    const fresh = new PersistentSessionStore(ctx.db)
+    const [a, b] = await Promise.all([fresh.peek(s.id), fresh.peek(s.id)])
+    expect(a).toBeDefined()
+    expect(a).toBe(b)
+  })
+
+  it('un peek concurrent qui résout après un recordAnswer ne fait pas disparaître la réponse', async () => {
+    const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900304' })
+    await setSessionStatus(ctx.db, dbSession!.id, 'active')
+    const s = makeSession(dbSession!.id, dbSession!.pin)
+    await new PersistentSessionStore(ctx.db).save(s)
+
+    const fresh = new PersistentSessionStore(ctx.db)
+    const first = fresh.peek(s.id).then(async () => {
+      await fresh.recordAnswer(s.id, 0, 'player-2', { answer: { choice: 1 }, timeMs: 4000, correct: false, points: 0 })
+    })
+    const second = fresh.peek(s.id)
+    await Promise.all([first, second])
+    expect((await fresh.get(s.id))!.answers[0]['player-2']?.timeMs).toBe(4000)
+  })
+
   it('recordAnswer : visible tout de suite, écrit en base seulement après flushAll, copie de la réponse', async () => {
     const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900302' })
     await setSessionStatus(ctx.db, dbSession!.id, 'active')

@@ -700,9 +700,10 @@ describe('game engine : chemin de réponse sans copie de la session', () => {
 
   it("progress n'appelle pas get", async () => {
     const { engine, calls, session } = await setup()
-    calls.get = 0
+    calls.get = calls.peek = 0
     await engine.progress(session.id)
     expect(calls.get).toBe(0)
+    expect(calls.peek).toBe(1)
   })
 
   it('deux submitAnswer du même joueur lancés sans attendre : une seule acceptation', async () => {

@@ -111,7 +111,8 @@ export interface Engine {
    * révélée avant `host:next`, ou si `host:reveal` est invoqué hors phase question) sans
    * dupliquer l'état moteur côté passerelle. */
   getSession(sessionId: string): Promise<GameSession>
-  /** Lecture seule SANS copie (objet en cache du store, jamais à modifier) : réservée aux chemins
+  /** Lecture seule SANS copie (objet en cache du store). Lecture seule superficielle : ni l'objet
+   * ni ses sous-objets ne doivent être modifiés : réservée aux chemins
    * chauds (réponse de joueur). Lève la même erreur que `getSession` si la session est introuvable. */
   peekSession(sessionId: string): Promise<Readonly<GameSession>>
   /** Re-ancre à `now()` le chrono de la phase COURANTE, sans changer de phase ni avancer

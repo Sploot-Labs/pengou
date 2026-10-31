@@ -85,6 +85,10 @@ export class PersistentSessionStore implements SessionStore {
 
     const raw = await loadEngineState(this.db, id)
     if (!raw) return undefined
+    // Un appel concurrent a pu charger la session pendant l'attente : on garde son objet, qui a
+    // peut-être déjà reçu des réponses, plutôt que de le remplacer par une version relue en base.
+    const loaded = this.byId.get(id)
+    if (loaded) return structuredClone(loaded)
     const session = deserialize(raw)
     this.index(session)
     return structuredClone(session)
@@ -97,6 +101,9 @@ export class PersistentSessionStore implements SessionStore {
 
     const raw = await loadEngineState(this.db, id)
     if (!raw) return undefined
+    // Même garde que `get` : ne pas remplacer l'objet qu'un appel concurrent a déjà mis en cache.
+    const loaded = this.byId.get(id)
+    if (loaded) return loaded
     this.index(deserialize(raw))
     return this.byId.get(id)
   }

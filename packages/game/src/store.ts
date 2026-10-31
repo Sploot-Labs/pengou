@@ -2,8 +2,8 @@ import type { GameSession, SubmittedAnswer } from './state.js'
 
 export interface SessionStore {
   get(id: string): Promise<GameSession | undefined>
-  /** Comme `get`, mais renvoie l'objet du cache SANS copie : lecture seule, l'appelant ne doit
-   * jamais le modifier (chemin chaud de `submitAnswer`, où la copie de toute la session coûtait cher). */
+  /** Comme `get`, mais renvoie l'objet du cache SANS copie : lecture seule superficielle : ni l'objet
+   * ni ses sous-objets ne doivent être modifiés (chemin chaud de `submitAnswer`, où la copie de toute la session coûtait cher). */
   peek(id: string): Promise<Readonly<GameSession> | undefined>
   /** Insère une copie de `submitted` dans `answers[round][playerId]` de la session en cache, sans
    * copier la session. Rejette si la session n'est pas en cache (appeler `peek` ou `get` avant). */
