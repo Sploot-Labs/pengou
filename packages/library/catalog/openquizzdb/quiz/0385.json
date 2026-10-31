@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0385-1",
-      "type": "mcq",
-      "prompt": "Combien y a-t-il de joueurs sur le terrain durant un match de basket ?",
-      "payload": {
-        "options": [
-          {
-            "label": "5 joueurs",
-            "correct": false
-          },
-          {
-            "label": "11 joueurs",
-            "correct": false
-          },
-          {
-            "label": "10 joueurs",
-            "correct": true
-          },
-          {
-            "label": "15 joueurs",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0385-3",
       "type": "mcq",
       "prompt": "Comment appelle-t-on un arrêt de jeu au basket-ball ?",

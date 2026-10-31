@@ -64,64 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0519-3",
-      "type": "mcq",
-      "prompt": "Quelle spécialité de veau peut être préparée à la milanaise ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Escalope",
-            "correct": true
-          },
-          {
-            "label": "Blanquette",
-            "correct": false
-          },
-          {
-            "label": "Aiguillette",
-            "correct": false
-          },
-          {
-            "label": "Osso buco",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0519-4",
-      "type": "mcq",
-      "prompt": "Quelle spécialité des Pouilles est une pizza pliée et farcie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sicilienne",
-            "correct": false
-          },
-          {
-            "label": "Panzerotti",
-            "correct": false
-          },
-          {
-            "label": "Calzone",
-            "correct": true
-          },
-          {
-            "label": "Stromboli",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0523-1",
       "type": "mcq",
       "prompt": "Quelles pâtes alimentaires se présentent en feuilles rectangulaires ?",
@@ -170,35 +112,6 @@
           },
           {
             "label": "Ravioli",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0523-3",
-      "type": "mcq",
-      "prompt": "Quelle variété de pâtes longues est vendue sous forme de lanières ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Spaghetti",
-            "correct": false
-          },
-          {
-            "label": "Fettuccine",
-            "correct": false
-          },
-          {
-            "label": "Luinguine",
-            "correct": false
-          },
-          {
-            "label": "Tagliatelles",
             "correct": true
           }
         ]
@@ -482,11 +395,8 @@
       "questionIds": [
         "oqdb-0519-1",
         "oqdb-0519-2",
-        "oqdb-0519-3",
-        "oqdb-0519-4",
         "oqdb-0523-1",
         "oqdb-0523-2",
-        "oqdb-0523-3",
         "oqdb-0523-4",
         "oqdb-0445-1",
         "oqdb-0445-2",

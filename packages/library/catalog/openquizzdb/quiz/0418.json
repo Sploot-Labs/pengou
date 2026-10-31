@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0418-1",
-      "type": "mcq",
-      "prompt": "Comment appelle-t-on les sensations olfactives du vin ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Bouquet",
-            "correct": true
-          },
-          {
-            "label": "Texture",
-            "correct": false
-          },
-          {
-            "label": "Nez",
-            "correct": false
-          },
-          {
-            "label": "Robe",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "adultes"
-    },
-    {
       "id": "oqdb-0418-2",
       "type": "mcq",
       "prompt": "Quel verbe signifie refroidir un vin dans de la glace ?",

@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0239-4",
-      "type": "mcq",
-      "prompt": "Quelle jeune chanteuseest la petite protégée du rappeur Eminem ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Marie Osmond",
-            "correct": false
-          },
-          {
-            "label": "Bella Thorne",
-            "correct": false
-          },
-          {
-            "label": "Lisa Germano",
-            "correct": false
-          },
-          {
-            "label": "Skylar Grey",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

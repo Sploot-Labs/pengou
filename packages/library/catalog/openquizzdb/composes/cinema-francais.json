@@ -354,35 +354,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0065-1",
-      "type": "mcq",
-      "prompt": "Mademoiselle Julie a été interprétée par Isabelle Adjani puis par qui ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sabine Azéma",
-            "correct": false
-          },
-          {
-            "label": "Fanny Ardant",
-            "correct": true
-          },
-          {
-            "label": "Juliette Binoche",
-            "correct": false
-          },
-          {
-            "label": "Claire Keim",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0065-2",
       "type": "mcq",
       "prompt": "Quel film a réuni sur les écrans Isabelle Adjani et Sharon Stone ?",
@@ -402,35 +373,6 @@
           },
           {
             "label": "Les ensorceleuses",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0065-3",
-      "type": "mcq",
-      "prompt": "Pour quel titre d'Isabelle Adjani Luc Besson a-t-il réalisé le clip en 1984 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Je t'aime idiot",
-            "correct": false
-          },
-          {
-            "label": "Ohio",
-            "correct": false
-          },
-          {
-            "label": "Pull marine",
-            "correct": true
-          },
-          {
-            "label": "Le Mal intérieur",
             "correct": false
           }
         ]
@@ -492,9 +434,7 @@
         "oqdb-0107-2",
         "oqdb-0107-3",
         "oqdb-0107-4",
-        "oqdb-0065-1",
         "oqdb-0065-2",
-        "oqdb-0065-3",
         "oqdb-0065-4"
       ]
     }

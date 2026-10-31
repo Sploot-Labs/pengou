@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0109-4",
-      "type": "mcq",
-      "prompt": "Combien de minutes une otarie peut-elle nager sous l'eau sans respirer ?",
-      "payload": {
-        "options": [
-          {
-            "label": "11 minutes",
-            "correct": false
-          },
-          {
-            "label": "5 minutes",
-            "correct": true
-          },
-          {
-            "label": "7 minutes",
-            "correct": false
-          },
-          {
-            "label": "9 minutes",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

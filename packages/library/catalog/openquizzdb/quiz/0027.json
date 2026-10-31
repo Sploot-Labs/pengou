@@ -58,7 +58,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "television",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -87,7 +87,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "jeux-video",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -116,7 +116,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "litterature",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"

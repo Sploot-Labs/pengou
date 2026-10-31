@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0177-3",
-      "type": "mcq",
-      "prompt": "Quelle couleur est associée à Aurore dans « La Belle au bois dormant » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Bleue",
-            "correct": false
-          },
-          {
-            "label": "Rouge",
-            "correct": false
-          },
-          {
-            "label": "Verte",
-            "correct": false
-          },
-          {
-            "label": "Rose",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0177-4",
       "type": "mcq",
       "prompt": "Quelle princesse Disney est une sirène vivant auprès du roi Triton ?",

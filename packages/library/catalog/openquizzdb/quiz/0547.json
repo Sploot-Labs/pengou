@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0547-3",
-      "type": "mcq",
-      "prompt": "Quelle substance utilise-t-on pour obtenir une glisse optimale ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Huile",
-            "correct": false
-          },
-          {
-            "label": "Résine",
-            "correct": false
-          },
-          {
-            "label": "Fart",
-            "correct": true
-          },
-          {
-            "label": "Cire",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0547-4",
       "type": "mcq",
       "prompt": "Dans quel pays se situe la station skiable très prisée d'Innsbruck ?",

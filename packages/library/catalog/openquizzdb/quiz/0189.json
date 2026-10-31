@@ -64,35 +64,6 @@
       "audience": "adultes"
     },
     {
-      "id": "oqdb-0189-3",
-      "type": "mcq",
-      "prompt": "Quel système de bouchon est utilisé sur les bouteilles de Quintine ?",
-      "payload": {
-        "options": [
-          {
-            "label": "À capsule",
-            "correct": false
-          },
-          {
-            "label": "De liège",
-            "correct": false
-          },
-          {
-            "label": "À visser",
-            "correct": false
-          },
-          {
-            "label": "Mécanique",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "adultes"
-    },
-    {
       "id": "oqdb-0189-4",
       "type": "mcq",
       "prompt": "Quelle bière belge reste la référence au pays des blanches ?",

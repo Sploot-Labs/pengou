@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0478-2",
-      "type": "mcq",
-      "prompt": "Quel produit un haltérophile utilise-t-il pour améliorer la prise de barre ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Farine",
-            "correct": false
-          },
-          {
-            "label": "Craie",
-            "correct": false
-          },
-          {
-            "label": "Vaseline",
-            "correct": false
-          },
-          {
-            "label": "Magnésie",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0478-3",
       "type": "mcq",
       "prompt": "Combien pèse la barre utilisée par les femmes en haltérophilie ?",

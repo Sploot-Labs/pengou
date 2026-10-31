@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0095-3",
-      "type": "mcq",
-      "prompt": "Qui est sa partenaire dans « Le facteur sonne toujours deux fois » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ava Gardner",
-            "correct": false
-          },
-          {
-            "label": "Susan Sarandon",
-            "correct": false
-          },
-          {
-            "label": "Jessica Lange",
-            "correct": true
-          },
-          {
-            "label": "Holly Hunter",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0095-4",
       "type": "mcq",
       "prompt": "Quel film a réuni Leonardo Di Caprio, Matt Damon et Jack Nicholson ?",

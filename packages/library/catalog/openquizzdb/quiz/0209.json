@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0209-2",
-      "type": "mcq",
-      "prompt": "Avec quelle brindille l'acteur Johnny Depp a-t-il eu une liaison ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Kate Moss",
-            "correct": true
-          },
-          {
-            "label": "Katie Price",
-            "correct": false
-          },
-          {
-            "label": "Sienna Miller",
-            "correct": false
-          },
-          {
-            "label": "Lauren Gold",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0209-3",
       "type": "mcq",
       "prompt": "Qui est la mère des enfants de Johnny Depp ?",

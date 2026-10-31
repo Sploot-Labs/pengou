@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0304-3",
-      "type": "mcq",
-      "prompt": "Avec quel fils de Bob Marley le chanteur Sting a-t-il fait un duo ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ziad",
-            "correct": false
-          },
-          {
-            "label": "Zachary",
-            "correct": false
-          },
-          {
-            "label": "Ziggy",
-            "correct": true
-          },
-          {
-            "label": "Zane",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0304-4",
       "type": "mcq",
       "prompt": "Quel groupe de blues-rock est composé de trois Texans barbus ?",
@@ -116,7 +87,7 @@
           }
         ]
       },
-      "theme": "culture-generale",
+      "theme": "musique",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"

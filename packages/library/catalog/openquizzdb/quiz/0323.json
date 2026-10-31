@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0323-4",
-      "type": "mcq",
-      "prompt": "Quel numéro Kylian Mbappé porte-t-il en sélection nationale ?",
-      "payload": {
-        "options": [
-          {
-            "label": "7",
-            "correct": false
-          },
-          {
-            "label": "16",
-            "correct": false
-          },
-          {
-            "label": "11",
-            "correct": false
-          },
-          {
-            "label": "10",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

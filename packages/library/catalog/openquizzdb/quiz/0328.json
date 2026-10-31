@@ -29,7 +29,7 @@
           }
         ]
       },
-      "theme": "culture-generale",
+      "theme": "sport",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -84,35 +84,6 @@
           {
             "label": "Midas",
             "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0328-4",
-      "type": "mcq",
-      "prompt": "Quelle partie de votre voiture est parfois appelée « le dentier » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Calandre",
-            "correct": false
-          },
-          {
-            "label": "Coffre",
-            "correct": false
-          },
-          {
-            "label": "Radiateur",
-            "correct": false
-          },
-          {
-            "label": "Boîte de vitesse",
-            "correct": true
           }
         ]
       },

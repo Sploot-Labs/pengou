@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0357-4",
-      "type": "mcq",
-      "prompt": "Combien de cercles sont dessinés sur une patinoire de hockey sur glace ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cinq",
-            "correct": true
-          },
-          {
-            "label": "Sept",
-            "correct": false
-          },
-          {
-            "label": "Trois",
-            "correct": false
-          },
-          {
-            "label": "Neuf",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

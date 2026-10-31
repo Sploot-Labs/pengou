@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0565-2",
-      "type": "mcq",
-      "prompt": "Quel est le titre du premier album studio enregistré par France Gall ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Babacar",
-            "correct": false
-          },
-          {
-            "label": "Dancing Disco",
-            "correct": false
-          },
-          {
-            "label": "France Gall",
-            "correct": true
-          },
-          {
-            "label": "Débranche !",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0565-3",
       "type": "mcq",
       "prompt": "Quel album reste à ce jour le plus grand succès de France Gall ?",

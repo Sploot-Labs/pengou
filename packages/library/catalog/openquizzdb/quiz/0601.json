@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0601-1",
-      "type": "mcq",
-      "prompt": "Quel intrus se cache parmi ces chanteuses n'ayant pas eu le bac ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Chimène Badi",
-            "correct": false
-          },
-          {
-            "label": "Jenifer",
-            "correct": false
-          },
-          {
-            "label": "Ève Angeli",
-            "correct": true
-          },
-          {
-            "label": "Vanessa Paradis",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0601-2",
       "type": "mcq",
       "prompt": "Quel intrus se cache parmi ces inventions créées par des femmes ?",

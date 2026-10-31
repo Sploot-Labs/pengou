@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0299-3",
-      "type": "mcq",
-      "prompt": "Dans quel film de Quentin Tarantino Léa Seydoux a-t-elle joué ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Django Unchained",
-            "correct": true
-          },
-          {
-            "label": "Pulp Fiction",
-            "correct": false
-          },
-          {
-            "label": "Kill Bill",
-            "correct": false
-          },
-          {
-            "label": "Jackie Brown",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0299-4",
-      "type": "mcq",
-      "prompt": "Dans quel pays a-t-elle une forte carrière internationale ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Chine",
-            "correct": false
-          },
-          {
-            "label": "États-Unis",
-            "correct": true
-          },
-          {
-            "label": "Brésil",
-            "correct": false
-          },
-          {
-            "label": "Inde",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

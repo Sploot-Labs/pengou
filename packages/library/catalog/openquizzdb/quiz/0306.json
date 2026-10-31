@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0306-3",
-      "type": "mcq",
-      "prompt": "Quelle seconde langue Bruce Willis parle-t-il couramment ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Le grec",
-            "correct": false
-          },
-          {
-            "label": "L'allemand",
-            "correct": true
-          },
-          {
-            "label": "Le français",
-            "correct": false
-          },
-          {
-            "label": "L'espagnol",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0306-4",
       "type": "mcq",
       "prompt": "Pour quel groupe musical Bruce Willis est-il apparu dans le clip « Stylo » ?",

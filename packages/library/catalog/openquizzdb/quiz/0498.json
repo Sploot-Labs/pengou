@@ -62,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0498-4",
-      "type": "mcq",
-      "prompt": "Quelle boisson énergétique a été promue par Neymar ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Red Bull",
-            "correct": false
-          },
-          {
-            "label": "Gatorade",
-            "correct": false
-          },
-          {
-            "label": "Powerade",
-            "correct": true
-          },
-          {
-            "label": "Monster Energy",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

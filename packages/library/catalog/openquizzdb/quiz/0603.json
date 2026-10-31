@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0603-4",
-      "type": "mcq",
-      "prompt": "Dans la coquille de quel animal peut-on parfois trouver une perle ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tortue",
-            "correct": false
-          },
-          {
-            "label": "Escargot",
-            "correct": false
-          },
-          {
-            "label": "Moule",
-            "correct": false
-          },
-          {
-            "label": "Huître",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

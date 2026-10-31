@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0455-4",
-      "type": "mcq",
-      "prompt": "Quel animal est symbole de malheur pour les marins superstitieux ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Castor brun",
-            "correct": false
-          },
-          {
-            "label": "Dauphin bleu",
-            "correct": false
-          },
-          {
-            "label": "Lapin blanc",
-            "correct": false
-          },
-          {
-            "label": "Chat noir",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

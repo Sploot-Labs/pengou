@@ -58,7 +58,7 @@
           }
         ]
       },
-      "theme": "sciences",
+      "theme": "culture-generale",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -87,7 +87,7 @@
           }
         ]
       },
-      "theme": "sciences",
+      "theme": "sport",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -116,7 +116,7 @@
           }
         ]
       },
-      "theme": "sciences",
+      "theme": "histoire",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"

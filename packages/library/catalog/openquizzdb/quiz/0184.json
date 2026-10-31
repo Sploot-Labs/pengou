@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0184-4",
-      "type": "mcq",
-      "prompt": "Quel animal utilise-t-on le plus souvent pour trouver des truffes ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Porc",
-            "correct": true
-          },
-          {
-            "label": "Pélican",
-            "correct": false
-          },
-          {
-            "label": "Panda",
-            "correct": false
-          },
-          {
-            "label": "Poney",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

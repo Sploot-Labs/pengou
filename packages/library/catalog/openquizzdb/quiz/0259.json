@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0259-3",
-      "type": "mcq",
-      "prompt": "Qui a présenté jusque 2018 le « Grand Concours des Animateurs » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Estelle Denis",
-            "correct": false
-          },
-          {
-            "label": "Nathalie Simon",
-            "correct": false
-          },
-          {
-            "label": "Carole Rousseau",
-            "correct": true
-          },
-          {
-            "label": "Sophie Favier",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0259-4",
       "type": "mcq",
       "prompt": "Qui a dirigé depuis 2003 les candidats de « Fort Boyard » ?",

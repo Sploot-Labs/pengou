@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0280-3",
-      "type": "mcq",
-      "prompt": "Quelle société a inventé (et pas breveté) la souris de votre ordinateur ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Xfinity",
-            "correct": false
-          },
-          {
-            "label": "Xiaomi",
-            "correct": false
-          },
-          {
-            "label": "Xerox",
-            "correct": true
-          },
-          {
-            "label": "Xoom",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0280-4",
       "type": "mcq",
       "prompt": "Quel roi est sorti vainqueur à la bataille des Thermopyles ?",

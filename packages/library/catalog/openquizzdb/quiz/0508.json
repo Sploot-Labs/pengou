@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "adultes"
-    },
-    {
-      "id": "oqdb-0508-4",
-      "type": "mcq",
-      "prompt": "Le Marignan est un cru de quelle région de France ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Béarn",
-            "correct": false
-          },
-          {
-            "label": "Jura",
-            "correct": true
-          },
-          {
-            "label": "Savoie",
-            "correct": false
-          },
-          {
-            "label": "Tarn",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "adultes"
     }
   ],
   "quizzes": []

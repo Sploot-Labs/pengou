@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0337-1",
-      "type": "mcq",
-      "prompt": "De quel pays provient principalement la datte medjool ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Maroc",
-            "correct": true
-          },
-          {
-            "label": "Japon",
-            "correct": false
-          },
-          {
-            "label": "Canada",
-            "correct": false
-          },
-          {
-            "label": "France",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0337-2",
       "type": "mcq",
       "prompt": "Quel goût a généralement la datte medjool ?",

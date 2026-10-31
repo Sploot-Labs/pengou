@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0123-2",
-      "type": "mcq",
-      "prompt": "Que mange-t-on à Noël depuis une coutume instaurée par Charles VII ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Dinde",
-            "correct": true
-          },
-          {
-            "label": "Coq au vin",
-            "correct": false
-          },
-          {
-            "label": "Paupiettes",
-            "correct": false
-          },
-          {
-            "label": "Bouillabaisse",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0123-3",
       "type": "mcq",
       "prompt": "À quelle date les rois mages apparaissent-ils dans la crèche ?",

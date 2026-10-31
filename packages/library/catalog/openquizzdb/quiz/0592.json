@@ -35,64 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0592-2",
-      "type": "mcq",
-      "prompt": "Combien d'espèces environ comprend la famille des Cactaceae ?",
-      "payload": {
-        "options": [
-          {
-            "label": "3 500",
-            "correct": false
-          },
-          {
-            "label": "1 500",
-            "correct": false
-          },
-          {
-            "label": "4 500",
-            "correct": false
-          },
-          {
-            "label": "2 500",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0592-3",
-      "type": "mcq",
-      "prompt": "Dans quel pays le fait de ramasser des cactus est-il puni de prison ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Inde",
-            "correct": false
-          },
-          {
-            "label": "Argentine",
-            "correct": false
-          },
-          {
-            "label": "Mexique",
-            "correct": true
-          },
-          {
-            "label": "Algérie",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0592-4",
       "type": "mcq",
       "prompt": "Dans quelles régions du globe les cactus poussent-ils le mieux ?",

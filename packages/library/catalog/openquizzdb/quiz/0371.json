@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0371-4",
-      "type": "mcq",
-      "prompt": "Quelle partie du corps de la taupe lui permet de s'orienter sous terre ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sa tête",
-            "correct": false
-          },
-          {
-            "label": "Sa queue",
-            "correct": true
-          },
-          {
-            "label": "Ses pattes",
-            "correct": false
-          },
-          {
-            "label": "Son museau",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

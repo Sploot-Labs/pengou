@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0528-4",
-      "type": "mcq",
-      "prompt": "Quel titre est porté par les monarques musulmans depuis l'an 1000 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Maharajah",
-            "correct": false
-          },
-          {
-            "label": "Émir",
-            "correct": false
-          },
-          {
-            "label": "Sultan",
-            "correct": true
-          },
-          {
-            "label": "Calife",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

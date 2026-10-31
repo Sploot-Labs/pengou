@@ -122,35 +122,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0408-1",
-      "type": "mcq",
-      "prompt": "Sur quelle planète Anakin Skywalker est-il arrivé à l'âge de quatre ans ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tatooine",
-            "correct": true
-          },
-          {
-            "label": "Touareg",
-            "correct": false
-          },
-          {
-            "label": "Tanghulu",
-            "correct": false
-          },
-          {
-            "label": "Tikrit",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0408-2",
       "type": "mcq",
       "prompt": "Quel guerrier Wookiee est le compagnon d'Han Solo ?",
@@ -412,35 +383,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0389-3",
-      "type": "mcq",
-      "prompt": "Qui sauve et répare David, le majordome androïde ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Daniel Branson",
-            "correct": false
-          },
-          {
-            "label": "Elisabeth Shawn",
-            "correct": true
-          },
-          {
-            "label": "Bishop",
-            "correct": false
-          },
-          {
-            "label": "Ellen Ripley",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0389-4",
       "type": "mcq",
       "prompt": "Quel acteur joue à la fois David et Walter dans « Alien » ?",
@@ -484,7 +426,6 @@
         "oqdb-0037-2",
         "oqdb-0037-3",
         "oqdb-0037-4",
-        "oqdb-0408-1",
         "oqdb-0408-2",
         "oqdb-0408-3",
         "oqdb-0408-4",
@@ -494,7 +435,6 @@
         "oqdb-0384-4",
         "oqdb-0389-1",
         "oqdb-0389-2",
-        "oqdb-0389-3",
         "oqdb-0389-4"
       ]
     }

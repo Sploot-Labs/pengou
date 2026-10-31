@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0149-4",
-      "type": "mcq",
-      "prompt": "Quel film a une nouvelle fois réuni Scarlett Johansson et Hugh Jackman ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Scoop",
-            "correct": false
-          },
-          {
-            "label": "Real Steel",
-            "correct": false
-          },
-          {
-            "label": "Australia",
-            "correct": false
-          },
-          {
-            "label": "Le Prestige",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

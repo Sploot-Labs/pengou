@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0352-1",
-      "type": "mcq",
-      "prompt": "Comment se présentent naturellement les cheveux des africains ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Fourchus",
-            "correct": false
-          },
-          {
-            "label": "Frisés",
-            "correct": false
-          },
-          {
-            "label": "Crépus",
-            "correct": true
-          },
-          {
-            "label": "Lisses",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0352-2",
       "type": "mcq",
       "prompt": "Quel insecte parasite vit parfois dans les cheveux humains ?",

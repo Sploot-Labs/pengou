@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0584-4",
-      "type": "mcq",
-      "prompt": "Quel réalisateur a reçu un César pour « Frantz » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cédric Klapisch",
-            "correct": false
-          },
-          {
-            "label": "Patrice Chéreau",
-            "correct": false
-          },
-          {
-            "label": "Luc Besson",
-            "correct": false
-          },
-          {
-            "label": "François Ozon",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

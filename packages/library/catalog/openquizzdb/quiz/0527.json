@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0527-3",
-      "type": "mcq",
-      "prompt": "Qui fut la première femme à remporter une course dans un GP moto ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Gina Bovaird",
-            "correct": false
-          },
-          {
-            "label": "Lucy Glockner",
-            "correct": false
-          },
-          {
-            "label": "Maria Herrera",
-            "correct": false
-          },
-          {
-            "label": "Ana Carrasco",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0527-4",
       "type": "mcq",
       "prompt": "Qui fut la première femme enregistrée à courir le marathon de Boston ?",

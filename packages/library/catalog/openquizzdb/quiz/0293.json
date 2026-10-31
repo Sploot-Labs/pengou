@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0293-1",
-      "type": "mcq",
-      "prompt": "Dans quel club espagnol a-t-il été marquant à ses débuts ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sevilla FC",
-            "correct": false
-          },
-          {
-            "label": "FC Barcelone",
-            "correct": false
-          },
-          {
-            "label": "Real Madrid",
-            "correct": false
-          },
-          {
-            "label": "Atlético de Madrid",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0293-2",
-      "type": "mcq",
-      "prompt": "Contre qui a-t-il perdu sa finale de l'Euro 2016 avec la France ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Italie",
-            "correct": false
-          },
-          {
-            "label": "Portugal",
-            "correct": true
-          },
-          {
-            "label": "Allemagne",
-            "correct": false
-          },
-          {
-            "label": "Croatie",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0293-3",
       "type": "mcq",
       "prompt": "Quel est le surnom que les fans donnent à Antoine Griezmann ?",
@@ -83,35 +25,6 @@
           },
           {
             "label": "Griez",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0293-4",
-      "type": "mcq",
-      "prompt": "Quel est son numéro emblématique en sélection française ?",
-      "payload": {
-        "options": [
-          {
-            "label": "11",
-            "correct": false
-          },
-          {
-            "label": "7",
-            "correct": true
-          },
-          {
-            "label": "9",
-            "correct": false
-          },
-          {
-            "label": "10",
             "correct": false
           }
         ]

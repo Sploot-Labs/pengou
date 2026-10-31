@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0538-3",
-      "type": "mcq",
-      "prompt": "Quel écrivain français a publié « L'autre versant » en 1983 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Gauthier",
-            "correct": false
-          },
-          {
-            "label": "Genevoix",
-            "correct": false
-          },
-          {
-            "label": "Gauvin",
-            "correct": false
-          },
-          {
-            "label": "Gay-Lussac",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0538-4",
       "type": "mcq",
       "prompt": "Qui a composé la version originale de la chanson « Étoile des neiges » ?",

@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0129-1",
-      "type": "mcq",
-      "prompt": "Comment fait-on pour venir à bout d'un zombie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Le brûler",
-            "correct": false
-          },
-          {
-            "label": "Le nourrir",
-            "correct": false
-          },
-          {
-            "label": "L'étouffer",
-            "correct": false
-          },
-          {
-            "label": "Viser la tête",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0129-2",
       "type": "mcq",
       "prompt": "Avec quelle arme Michonne se bat-t-elle dans « The Walking Dead » ?",
@@ -58,7 +29,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "television",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -87,7 +58,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "jeux-video",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"

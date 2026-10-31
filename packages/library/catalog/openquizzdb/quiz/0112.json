@@ -58,7 +58,7 @@
           }
         ]
       },
-      "theme": "culture-generale",
+      "theme": "television",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -87,7 +87,7 @@
           }
         ]
       },
-      "theme": "culture-generale",
+      "theme": "cinema",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"

@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0559-4",
-      "type": "mcq",
-      "prompt": "En combien de jours Mike Horn a-t-il traversé le Groenland ?",
-      "payload": {
-        "options": [
-          {
-            "label": "60 jours",
-            "correct": false
-          },
-          {
-            "label": "45 jours",
-            "correct": false
-          },
-          {
-            "label": "15 jours",
-            "correct": true
-          },
-          {
-            "label": "30 jours",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

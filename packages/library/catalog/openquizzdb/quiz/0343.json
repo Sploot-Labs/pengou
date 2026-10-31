@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0343-3",
-      "type": "mcq",
-      "prompt": "Quel est le plat favori de Johanna Baker dans le film « Le Grand Bleu » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Les pâtes",
-            "correct": true
-          },
-          {
-            "label": "Les pizzas",
-            "correct": false
-          },
-          {
-            "label": "Le tiramisu",
-            "correct": false
-          },
-          {
-            "label": "Les lasagnes",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0343-4",
       "type": "mcq",
       "prompt": "Dans quelle langue le film « Le Grand Bleu » a-t-il été tourné ?",

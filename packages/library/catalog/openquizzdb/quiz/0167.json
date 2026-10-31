@@ -29,7 +29,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "television",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -58,7 +58,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "people",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -87,7 +87,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "people",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -116,10 +116,10 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "people",
       "difficulty": "moyen",
       "language": "fr",
-      "audience": "tous"
+      "audience": "adultes"
     }
   ],
   "quizzes": []

@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0183-3",
-      "type": "mcq",
-      "prompt": "Quel jeune garçon est le principal compagnon d'armes de Batman ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tim Drake",
-            "correct": false
-          },
-          {
-            "label": "Superboy",
-            "correct": false
-          },
-          {
-            "label": "Robin",
-            "correct": true
-          },
-          {
-            "label": "Mystek",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0183-4",
       "type": "mcq",
       "prompt": "Quel super-héros ne se sépare jamais de son marteau ?",

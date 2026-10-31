@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0404-4",
-      "type": "mcq",
-      "prompt": "Dans quel pays les Parses se sont-ils installés au XIIIe siècle ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Inde",
-            "correct": true
-          },
-          {
-            "label": "Égypte",
-            "correct": false
-          },
-          {
-            "label": "Afghanistan",
-            "correct": false
-          },
-          {
-            "label": "Chine",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

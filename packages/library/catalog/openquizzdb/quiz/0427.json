@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0427-3",
-      "type": "mcq",
-      "prompt": "Quelle couleur complète le noir et l'or de la marque de café Carte Noire ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Le blanc",
-            "correct": true
-          },
-          {
-            "label": "Le vert",
-            "correct": false
-          },
-          {
-            "label": "Le rouge",
-            "correct": false
-          },
-          {
-            "label": "Le bleu",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0427-4",
       "type": "mcq",
       "prompt": "Quelle société a créé la marque de café soluble Ricoré ?",

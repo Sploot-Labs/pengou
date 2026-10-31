@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0143-4",
-      "type": "mcq",
-      "prompt": "Qui fut la première à animer « Disney Parade » avec Jean-Pierre Foucault ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Séverinne",
-            "correct": false
-          },
-          {
-            "label": "Mélanie",
-            "correct": false
-          },
-          {
-            "label": "Anne",
-            "correct": true
-          },
-          {
-            "label": "Cécile",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

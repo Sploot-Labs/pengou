@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0251-3",
-      "type": "mcq",
-      "prompt": "Quel animal est souvent associé à la Bulgarie dans les Balkans ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Koala",
-            "correct": false
-          },
-          {
-            "label": "Lion",
-            "correct": false
-          },
-          {
-            "label": "Panda",
-            "correct": false
-          },
-          {
-            "label": "Ours brun",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0251-4",
       "type": "mcq",
       "prompt": "Quelle station balnéaire est réputée en Bulgarie ?",

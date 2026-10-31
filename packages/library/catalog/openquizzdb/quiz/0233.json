@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0233-4",
-      "type": "mcq",
-      "prompt": "Pour quelle raison ne participa-t-il pas au tournage de « Speed 2 » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Son salaire",
-            "correct": false
-          },
-          {
-            "label": "Son poids",
-            "correct": true
-          },
-          {
-            "label": "Sa réputation",
-            "correct": false
-          },
-          {
-            "label": "Son caractère",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

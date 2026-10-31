@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0522-1",
-      "type": "mcq",
-      "prompt": "Dans « Dragon Ball Z », combien de fois la Lune a-t-elle été détruite ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Trois fois",
-            "correct": false
-          },
-          {
-            "label": "Une fois",
-            "correct": false
-          },
-          {
-            "label": "Jamais",
-            "correct": false
-          },
-          {
-            "label": "Deux fois",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0522-2",
       "type": "mcq",
       "prompt": "Quel héros de la saga « Dragon Ball Z » est parvenu à tuer Freezer ?",

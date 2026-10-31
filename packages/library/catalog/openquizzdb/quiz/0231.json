@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0231-4",
-      "type": "mcq",
-      "prompt": "Qui a remplacé Leonard Nimoy dans les derniers films « Star Trek » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Zachary Quinto",
-            "correct": true
-          },
-          {
-            "label": "Chris Pine",
-            "correct": false
-          },
-          {
-            "label": "Avery Brooks",
-            "correct": false
-          },
-          {
-            "label": "Jonathan Frakes",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

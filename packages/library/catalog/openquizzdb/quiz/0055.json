@@ -29,7 +29,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "television",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -54,64 +54,6 @@
           },
           {
             "label": "Une C3",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0055-3",
-      "type": "mcq",
-      "prompt": "Quel film de Clint Eastwood de 2009 est aussi un modèle de voiture ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Invictus",
-            "correct": false
-          },
-          {
-            "label": "Gran Torino",
-            "correct": true
-          },
-          {
-            "label": "Dirty Harry",
-            "correct": false
-          },
-          {
-            "label": "Million Dollar Baby",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0055-4",
-      "type": "mcq",
-      "prompt": "Quel modèle de voiture est conduit par Enzo dans « Le Grand Bleu » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Fiat 500",
-            "correct": true
-          },
-          {
-            "label": "Lada 110",
-            "correct": false
-          },
-          {
-            "label": "Renault Super 5",
-            "correct": false
-          },
-          {
-            "label": "Citroën AX",
             "correct": false
           }
         ]

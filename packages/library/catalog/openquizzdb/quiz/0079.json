@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0079-1",
-      "type": "mcq",
-      "prompt": "Quelle enseigne vous invite à rester « tous unis contre la vie chère » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Super U",
-            "correct": false
-          },
-          {
-            "label": "Intermarché",
-            "correct": true
-          },
-          {
-            "label": "Cora",
-            "correct": false
-          },
-          {
-            "label": "Carrefour",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0079-2",
       "type": "mcq",
       "prompt": "Quelle bière belge a pour slogan : « Les hommes savent pourquoi » ?",
@@ -61,7 +32,7 @@
       "theme": "culture-generale",
       "difficulty": "moyen",
       "language": "fr",
-      "audience": "tous"
+      "audience": "adultes"
     },
     {
       "id": "oqdb-0079-3",

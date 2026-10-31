@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0322-2",
-      "type": "mcq",
-      "prompt": "Quelle actrice et chanteuse américaine a émancipé sa famille en 2014 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Nicki Minaj",
-            "correct": false
-          },
-          {
-            "label": "Miley Cyrus",
-            "correct": false
-          },
-          {
-            "label": "Selena Gomez",
-            "correct": true
-          },
-          {
-            "label": "Hilary Duff",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0322-3",
       "type": "mcq",
       "prompt": "Qui a été sacré « homme le plus sexy de 2014 » par le magazine « People » ?",

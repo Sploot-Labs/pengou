@@ -29,7 +29,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "litterature",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -87,7 +87,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "culture-generale",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -116,7 +116,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "culture-generale",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"

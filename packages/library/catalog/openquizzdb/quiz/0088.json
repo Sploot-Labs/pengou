@@ -58,7 +58,7 @@
           }
         ]
       },
-      "theme": "culture-generale",
+      "theme": "television",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -83,35 +83,6 @@
           },
           {
             "label": "Halifax",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0088-4",
-      "type": "mcq",
-      "prompt": "Qui a réalisé le film « La Mort aux trousses », inspiré d'une histoire vraie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Hitchcock",
-            "correct": true
-          },
-          {
-            "label": "Hamer",
-            "correct": false
-          },
-          {
-            "label": "Hicks",
-            "correct": false
-          },
-          {
-            "label": "Hawkins",
             "correct": false
           }
         ]

@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0137-1",
-      "type": "mcq",
-      "prompt": "Elle est la première joueuse russe à avoir remporté quel tournoi ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Open d'Australie",
-            "correct": false
-          },
-          {
-            "label": "Wimbledon",
-            "correct": true
-          },
-          {
-            "label": "Roland-Garros",
-            "correct": false
-          },
-          {
-            "label": "US Open",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0137-2",
       "type": "mcq",
       "prompt": "Comme quelle joueuse Sharapova crie-t-elle à chaque frappe ?",
@@ -83,6 +54,35 @@
           },
           {
             "label": "Boum-Boum",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0137-4",
+      "type": "mcq",
+      "prompt": "En quelle année Sharapova est-elle devenue numéro un mondiale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2005",
+            "correct": true
+          },
+          {
+            "label": "2002",
+            "correct": false
+          },
+          {
+            "label": "2011",
+            "correct": false
+          },
+          {
+            "label": "2008",
             "correct": false
           }
         ]

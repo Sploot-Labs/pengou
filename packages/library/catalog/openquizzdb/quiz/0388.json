@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0388-4",
-      "type": "mcq",
-      "prompt": "Quelle mannequin franco-algérienne était anciennement escort-girl ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Farida Khelfa",
-            "correct": false
-          },
-          {
-            "label": "Zahia Dehar",
-            "correct": true
-          },
-          {
-            "label": "Imen Noël",
-            "correct": false
-          },
-          {
-            "label": "Rym Amari",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

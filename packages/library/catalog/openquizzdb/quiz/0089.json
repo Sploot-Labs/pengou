@@ -29,7 +29,7 @@
           }
         ]
       },
-      "theme": "people",
+      "theme": "cinema",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -55,6 +55,35 @@
           {
             "label": "Brian de Palma",
             "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0089-3",
+      "type": "mcq",
+      "prompt": "Quel réalisateur a embauché Clint Eastwood pour la « Trilogie du dollar » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sergio Corbucci",
+            "correct": false
+          },
+          {
+            "label": "Tonino Valerii",
+            "correct": false
+          },
+          {
+            "label": "Giorgio Ferroni",
+            "correct": false
+          },
+          {
+            "label": "Sergio Leone",
+            "correct": true
           }
         ]
       },
@@ -87,7 +116,7 @@
           }
         ]
       },
-      "theme": "people",
+      "theme": "cinema",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"

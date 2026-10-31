@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0185-4",
-      "type": "mcq",
-      "prompt": "Quel a été le premier thriller dans lequel a participé Sandra Bullock ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Murder by Numbers",
-            "correct": false
-          },
-          {
-            "label": "<T>The Net",
-            "correct": false
-          },
-          {
-            "label": "Speed",
-            "correct": false
-          },
-          {
-            "label": "Demolition Man",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

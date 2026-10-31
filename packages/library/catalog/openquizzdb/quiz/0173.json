@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0173-2",
-      "type": "mcq",
-      "prompt": "Quelle était la profession de Barack Obama avant de devenir président ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Programmeur",
-            "correct": false
-          },
-          {
-            "label": "Consultant financier",
-            "correct": true
-          },
-          {
-            "label": "Agent du FBI",
-            "correct": false
-          },
-          {
-            "label": "Prêtre",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0173-3",
       "type": "mcq",
       "prompt": "Qui a chanté l'hymne national pour l'investiture de Barack Obama ?",

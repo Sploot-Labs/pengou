@@ -209,35 +209,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0063-4",
-      "type": "mcq",
-      "prompt": "Quel est le satellite naturel le plus éloigné de sa planète-mère ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Phobos",
-            "correct": false
-          },
-          {
-            "label": "Sinopé",
-            "correct": true
-          },
-          {
-            "label": "Titan",
-            "correct": false
-          },
-          {
-            "label": "Charon",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0139-1",
       "type": "mcq",
       "prompt": "Qu'est censée imiter une machine faisant le test de Turing ?",
@@ -287,64 +258,6 @@
           {
             "label": "ENIAC",
             "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0139-3",
-      "type": "mcq",
-      "prompt": "Quel programme Turing a-t-il écrit en 1952 pour réaliser son test ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Dames",
-            "correct": false
-          },
-          {
-            "label": "Jeu d'échecs",
-            "correct": true
-          },
-          {
-            "label": "Jeu de l'oie",
-            "correct": false
-          },
-          {
-            "label": "OXO",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0139-4",
-      "type": "mcq",
-      "prompt": "Dans quel système informatique Enigma a-t-il été implémenté ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Android",
-            "correct": false
-          },
-          {
-            "label": "Mac OS",
-            "correct": false
-          },
-          {
-            "label": "Windows",
-            "correct": false
-          },
-          {
-            "label": "UNIX",
-            "correct": true
           }
         ]
       },
@@ -487,11 +400,8 @@
         "oqdb-0063-1",
         "oqdb-0063-2",
         "oqdb-0063-3",
-        "oqdb-0063-4",
         "oqdb-0139-1",
         "oqdb-0139-2",
-        "oqdb-0139-3",
-        "oqdb-0139-4",
         "oqdb-0503-1",
         "oqdb-0503-2",
         "oqdb-0503-3",

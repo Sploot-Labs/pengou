@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0553-4",
-      "type": "mcq",
-      "prompt": "De quelle couleur sont les pantoufles de l'Homme Sirène ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Rose",
-            "correct": true
-          },
-          {
-            "label": "Jaune",
-            "correct": false
-          },
-          {
-            "label": "Rouge",
-            "correct": false
-          },
-          {
-            "label": "Bleue",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

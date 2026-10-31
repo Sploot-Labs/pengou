@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0125-1",
-      "type": "mcq",
-      "prompt": "Qui a présenté à ses côtés la série télévisée des « 100 plus grands » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sandrine Quétier",
-            "correct": true
-          },
-          {
-            "label": "Claire Keim",
-            "correct": false
-          },
-          {
-            "label": "Marina Carrère",
-            "correct": false
-          },
-          {
-            "label": "Karine Ferri",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0125-2",
       "type": "mcq",
       "prompt": "Quelle émission, avec Christophe Dechavanne, était diffusée le mardi ?",
@@ -84,35 +55,6 @@
           {
             "label": "Cobra",
             "correct": false
-          }
-        ]
-      },
-      "theme": "television",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0125-4",
-      "type": "mcq",
-      "prompt": "De quel magazine le montrant nu a-t-il obtenu un retrait en 2006 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Le Figaro",
-            "correct": false
-          },
-          {
-            "label": "VSD",
-            "correct": false
-          },
-          {
-            "label": "Paris Match",
-            "correct": false
-          },
-          {
-            "label": "Choc",
-            "correct": true
           }
         ]
       },

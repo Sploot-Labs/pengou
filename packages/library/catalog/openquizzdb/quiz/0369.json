@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0369-3",
-      "type": "mcq",
-      "prompt": "Qui a été élu joueur NBA de la décennie 2000 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Rick Fox",
-            "correct": false
-          },
-          {
-            "label": "Derek Fisher",
-            "correct": false
-          },
-          {
-            "label": "Ron Harper",
-            "correct": false
-          },
-          {
-            "label": "Kobe Bryant",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0369-4",
       "type": "mcq",
       "prompt": "Quel est le dernier club NBA dans lequel a joué Michael Jordan ?",

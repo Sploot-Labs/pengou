@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0348-4",
-      "type": "mcq",
-      "prompt": "Le trait rouge des GR est en fait la marque de quelle communauté ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Alpinistes",
-            "correct": false
-          },
-          {
-            "label": "Montagnards",
-            "correct": false
-          },
-          {
-            "label": "Bûcherons",
-            "correct": true
-          },
-          {
-            "label": "Bergers",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

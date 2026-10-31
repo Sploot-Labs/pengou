@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0554-3",
-      "type": "mcq",
-      "prompt": "Quel fleuve d'Afrique occidentale borde le Sahel ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Niger",
-            "correct": true
-          },
-          {
-            "label": "Zambèze",
-            "correct": false
-          },
-          {
-            "label": "Congo",
-            "correct": false
-          },
-          {
-            "label": "Sénégal",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0554-4",
       "type": "mcq",
       "prompt": "Quelle mer est dépourvue de poissons et d'algues ?",

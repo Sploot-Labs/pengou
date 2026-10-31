@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0331-2",
-      "type": "mcq",
-      "prompt": "Quelle voiture jaune Tintin conduit-il dans « Tintin au Congo » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Jeep",
-            "correct": false
-          },
-          {
-            "label": "Citroën Traction",
-            "correct": false
-          },
-          {
-            "label": "Corvette",
-            "correct": false
-          },
-          {
-            "label": "Ford T",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0331-3",
       "type": "mcq",
       "prompt": "Quelle marque automobile disparue est connue pour ses roadsters ?",

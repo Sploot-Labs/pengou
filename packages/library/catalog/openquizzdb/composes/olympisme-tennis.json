@@ -151,35 +151,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0437-2",
-      "type": "mcq",
-      "prompt": "Après les JO 2016, à quelle ville a été remise la flamme olympique ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Lima",
-            "correct": false
-          },
-          {
-            "label": "Copenhague",
-            "correct": false
-          },
-          {
-            "label": "Tokyo",
-            "correct": true
-          },
-          {
-            "label": "Mexico",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0437-3",
       "type": "mcq",
       "prompt": "Quel pays a été suspendu de l'athlétisme aux JO de 2016 ?",
@@ -485,7 +456,6 @@
         "oqdb-0261-3",
         "oqdb-0261-4",
         "oqdb-0437-1",
-        "oqdb-0437-2",
         "oqdb-0437-3",
         "oqdb-0437-4",
         "oqdb-0247-1",

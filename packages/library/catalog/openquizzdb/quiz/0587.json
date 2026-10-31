@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0587-1",
-      "type": "mcq",
-      "prompt": "Qui a annoncé que son mari, Orlando Bloom, était fétichiste des pieds ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Jessica Clarke",
-            "correct": false
-          },
-          {
-            "label": "Hannah Davis",
-            "correct": false
-          },
-          {
-            "label": "Rhea Durham",
-            "correct": false
-          },
-          {
-            "label": "Miranda Kerr",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0587-2",
       "type": "mcq",
       "prompt": "Quelle chanteuse et actrice est surnommée « la bomba latina » ?",
@@ -84,35 +55,6 @@
           {
             "label": "Rod Stewart",
             "correct": true
-          }
-        ]
-      },
-      "theme": "people",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0587-4",
-      "type": "mcq",
-      "prompt": "À quel chanteur Justin Bieber voue-t-il un culte tout particulier ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Otis Rush",
-            "correct": false
-          },
-          {
-            "label": "Luther Johnson",
-            "correct": false
-          },
-          {
-            "label": "Jimi Hendrix",
-            "correct": true
-          },
-          {
-            "label": "Elmore James",
-            "correct": false
           }
         ]
       },

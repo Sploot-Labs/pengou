@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0330-4",
-      "type": "mcq",
-      "prompt": "Sur combien de temps est réglée la bombe placée par Zorg ?",
-      "payload": {
-        "options": [
-          {
-            "label": "20 minutes",
-            "correct": true
-          },
-          {
-            "label": "30 minutes",
-            "correct": false
-          },
-          {
-            "label": "25 minutes",
-            "correct": false
-          },
-          {
-            "label": "15 minutes",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

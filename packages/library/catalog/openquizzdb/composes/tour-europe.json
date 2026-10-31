@@ -209,35 +209,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0359-4",
-      "type": "mcq",
-      "prompt": "Quelle ville est célèbre pour Mozart ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Vienne",
-            "correct": false
-          },
-          {
-            "label": "Linz",
-            "correct": false
-          },
-          {
-            "label": "Salzbourg",
-            "correct": true
-          },
-          {
-            "label": "Insbruck",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0454-1",
       "type": "mcq",
       "prompt": "Quel logement privé est loué à des étudiants en Belgique ?",
@@ -603,7 +574,6 @@
         "oqdb-0359-1",
         "oqdb-0359-2",
         "oqdb-0359-3",
-        "oqdb-0359-4",
         "oqdb-0454-1",
         "oqdb-0454-2",
         "oqdb-0454-3",

@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0311-4",
-      "type": "mcq",
-      "prompt": "Quelle chanson de Stromae aborde la rupture amoureuse avec ironie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Santé",
-            "correct": false
-          },
-          {
-            "label": "Papaoutai",
-            "correct": false
-          },
-          {
-            "label": "Tous les mêmes",
-            "correct": true
-          },
-          {
-            "label": "Formidable",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

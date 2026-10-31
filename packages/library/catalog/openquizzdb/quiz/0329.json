@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0329-4",
-      "type": "mcq",
-      "prompt": "Quel titre contient la phrase « j'suis trop djomb » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Djadja",
-            "correct": false
-          },
-          {
-            "label": "Pookie",
-            "correct": false
-          },
-          {
-            "label": "Il veut",
-            "correct": true
-          },
-          {
-            "label": "Copines",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []
