@@ -2020,6 +2020,37 @@
   ],
   "quizzes": [
     {
+      "id": "otdb-quiz-geography-fr",
+      "title": "Repères géographiques",
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-093fc816e5eb-fr",
+        "otdb-1d737639c45f-fr",
+        "otdb-346b2f4a8147-fr",
+        "otdb-85106bbe4fca-fr",
+        "otdb-7f2344b71db9-fr",
+        "otdb-572b001645d7-fr",
+        "otdb-5edeb288d9cf-fr",
+        "otdb-708ca8904460-fr",
+        "otdb-7824bcace715-fr",
+        "otdb-915ae24c6e90-fr",
+        "otdb-9618c355b1f9-fr",
+        "otdb-a64abeb66e74-fr",
+        "otdb-c233f2c2e7dd-fr",
+        "otdb-da02934a343b-fr",
+        "otdb-f925d2e7fb0d-fr",
+        "otdb-e53e4ce34812-fr",
+        "otdb-df994f5cfa0f-fr",
+        "otdb-376eace346da-fr",
+        "otdb-1cd4172ba8c3-fr",
+        "otdb-970c51eb946c-fr"
+      ],
+      "description": "Capitales, monuments, mers et montagnes."
+    },
+    {
       "id": "otdb-quiz-around-the-world-fr",
       "title": "Autour du monde",
       "theme": "geographie",
