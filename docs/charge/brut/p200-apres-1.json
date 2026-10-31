@@ -1,0 +1,85 @@
+{
+  "libelle": "p200-apres-1",
+  "horodatage": "2026-10-31T09-35-05-737Z",
+  "cible": "http://localhost:3000",
+  "parametres": {
+    "joueurs": 200,
+    "parties": 1,
+    "questions": 10,
+    "cadence": 25,
+    "processus": 2,
+    "docker": "pengou-charge"
+  },
+  "parties": [
+    {
+      "pin": "858242",
+      "sessionId": "0b677ad5-76d6-4217-bc92-b97040d4e644",
+      "rejoints": 200,
+      "reponsesAcceptees": 2000
+    }
+  ],
+  "joueurs": {
+    "tentes": 200,
+    "rejoints": 200,
+    "refus": {}
+  },
+  "latences": {
+    "join": {
+      "n": 200,
+      "p50": 11.1,
+      "p95": 16.3,
+      "p99": 32.1,
+      "max": 47
+    },
+    "reponse": {
+      "n": 2000,
+      "p50": 10,
+      "p95": 60.1,
+      "p99": 91.1,
+      "max": 127.6
+    },
+    "diffusion": {
+      "n": 10,
+      "p50": 28,
+      "p95": 43,
+      "p99": 43,
+      "max": 43
+    }
+  },
+  "erreurs": {
+    "ackTimeout": 0,
+    "reponseRefusee": 0,
+    "connexion": 0
+  },
+  "deconnexions": 0,
+  "horlogeIncoherente": 0,
+  "generateur": {
+    "lagP99MaxMs": 22.7
+  },
+  "serveur": {
+    "lagP99MaxMs": 111.6,
+    "rssMaxMo": 274.1,
+    "heapMaxMo": 106.9,
+    "cpuMoyenPct": 41.8,
+    "cpuMaxPct": 96.1,
+    "echantillons": 51
+  },
+  "docker": {
+    "pengou-charge-app-1": {
+      "cpuMaxPct": 96.28,
+      "memMaxMo": 233.4
+    },
+    "pengou-charge-db-1": {
+      "cpuMaxPct": 26.05,
+      "memMaxMo": 59.8
+    }
+  },
+  "criteres": {
+    "rejointTous": true,
+    "zeroDeconnexion": true,
+    "reponseP95": true,
+    "diffusionP95": true,
+    "lagServeurP99": true
+  },
+  "verdict": "reussi"
+}

@@ -1,6 +1,6 @@
 # Résultats du test de charge, 31 octobre 2026
 
-Ce document rend compte d'une campagne de mesure du serveur Pengou (une partie en direct de 50 à 300 joueurs, puis dix parties simultanées). Le chiffre annoncé est de 80 joueurs par partie. Le calcul est donné en fin de document.
+Ce document rend compte d'une campagne de mesure du serveur Pengou (une partie en direct de 50 à 300 joueurs, puis dix parties simultanées), suivie d'une correction du compteur de réponses et d'une seconde campagne (section « Après correction »). Le chiffre annoncé est désormais de 160 joueurs par partie (80 avant correction). Le calcul est donné en fin de document.
 
 ## Configuration
 
@@ -57,7 +57,7 @@ Cent joueurs (le plus haut palier réussi) arrivant à 250 par seconde au lieu d
 
 Après chaque passage, pour chaque partie, les lignes de `session_player` et d'`answer_record` ont été comptées. Sur tous les passages, `session_player` est égal au nombre de joueurs rejoints et `answer_record` égal au nombre d'accusés `player:answer` acceptés (joueurs multipliés par 10 questions : 500 pour 50 joueurs, 1000 pour 100, 2000 pour 200, 3000 pour 300, 300 par partie pour le scénario établissement). Aucun écart, y compris sur les paliers en échec : la lenteur n'a fait perdre aucune réponse et n'en a pas rejeté.
 
-Le décompte « moteur » du brief (`engine_state->'players'`) n'est pas exploitable après la partie : le serveur met `engine_state` à null au podium (`clearEngineState` dans `doAdvance`, comportement voulu, le rapport final reste lisible par `session_player` et `answer_record`). Les relevés a posteriori donnent donc 0 sur les parties de 200 et 300 joueurs. Sur les parties de 100 joueurs et moins, la valeur est restée égale au nombre de joueurs, ce qui indique qu'une écriture coalescée en attente (délai de 250 ms dans `PersistentSessionStore`) a réécrit l'état juste après son effacement. C'est un effet de bord bénin mais notable.
+Le décompte « moteur » du brief (`engine_state->'players'`) n'est pas exploitable après la partie : le serveur met `engine_state` à null au podium (`clearEngineState` dans `doAdvance`, comportement voulu, le rapport final reste lisible par `session_player` et `answer_record`). Les relevés a posteriori donnent donc 0 sur les parties de 200 et 300 joueurs. Sur les parties de 100 joueurs et moins, la valeur est restée égale au nombre de joueurs, ce qui indique probablement qu'une écriture coalescée en attente (délai de 250 ms dans `PersistentSessionStore`) a réécrit l'état juste après son effacement. C'est un effet de bord bénin mais notable.
 
 Pour obtenir la vraie comparaison, une lecture périodique a été faite pendant les deux passages de contrôle : la partie `active` contient 100 joueurs dans le moteur à 100 joueurs et 200 à 200 joueurs, avec 100 et 200 lignes `session_player`. Lignes, moteur et joueurs rejoints concordent donc. Les relevés sont dans `docs/charge/brut/*.coherence.txt` et `chk*.moteur.txt`.
 
@@ -65,14 +65,42 @@ Les noms de tables et de colonnes du brief (`session_player`, `game_session.engi
 
 ## Goulot identifié
 
-Le premier palier en échec est 200 joueurs. Il casse pendant les questions, pas pendant les arrivées : au palier 200 le join reste à 18,5 ms au p95 et 43 ms au p99 (comme à 100 joueurs), les 200 joueurs rejoignent sans refus, et la diffusion de la question est rapide (76 ms au plus). La dégradation apparaît quand les 200 joueurs répondent presque en même temps (fenêtre de 0,5 à 3 s après chaque question) : la réponse p95 passe à 1,1 à 1,7 s et le lag de l'event loop à 1,2 à 1,6 s. Au palier 300, les arrivées commencent aussi à souffrir (join p95 274 ms), mais le critère le plus touché reste la réponse (p95 5,2 s).
+Le premier palier en échec est 200 joueurs. Il casse pendant les questions, pas pendant les arrivées : au palier 200 le join reste à 18,5 ms au p95 et 43 ms au p99 (comme à 100 joueurs), les 200 joueurs rejoignent sans refus, et la diffusion de la question est rapide (76 ms au plus). La dégradation apparaît quand les 200 joueurs répondent presque en même temps (dans le générateur, chaque joueur répond après un délai tiré entre 0,5 et 3 s, constante `PLAGE_REPONSE_MS` de `apps/server/charge/charge.mjs`) : la réponse p95 passe à 1,1 à 1,7 s et le lag de l'event loop à 1,2 à 1,6 s. Au palier 300, les arrivées commencent aussi à souffrir (join p95 274 ms), mais le critère le plus touché reste la réponse (p95 5,2 s).
 
 Au moment de l'échec, le CPU de l'application dépasse 130 % (un thread JavaScript saturé, plus la collecte de mémoire et les threads annexes) tandis que Postgres reste sous 45 % et la mémoire à 275 Mo pour une limite de 15 Go. Ce n'est donc ni la base, ni la mémoire, ni le réseau : le goulot est l'event loop de l'application pendant le traitement des réponses d'une salle nombreuse.
 
 Pour la tâche optionnelle de coalescence de `lobby:update` : les arrivées ne sont pas le premier goulot (palier 200 sain à l'arrivée, rafale à 250 par seconde sans dégradation du jeu), la dégradation survient pendant les questions.
 
+## Après correction
+
+Cause identifiée à l'issue de la première campagne : à chaque réponse acceptée, le handler `player:answer` diffusait `screen:progress` à toute la salle de la partie, joueurs compris. N réponses faisaient donc N diffusions vers N+2 sockets, soit un nombre d'envois quadratique par question. Seuls l'écran de l'hôte et le grand écran lisent cet événement. La correction (commit `perf(server): compteur de réponses réservé à l'hôte et au grand écran`) ajoute une room `viewers:<sessionId>` que rejoignent uniquement les sockets hôte (création, reprise) et grand écran (jonction, reprise), et y émet `screen:progress`. Aucun autre événement n'a changé de room.
+
+Même protocole que la première campagne (pile reconstruite sur le code corrigé, base neuve avant chaque passage, 30 s d'attente après `/health`, 10 questions, cadence de 25 arrivées par seconde, un seul générateur à la fois, cible `localhost:3000`). Les libellés sont suffixés `-apres`. Le premier passage 100 a été joué sur la pile fraîchement démarrée sans nouvelle remise à zéro, après une tentative avortée (refus d'origine à l'inscription, aucune partie créée).
+
+| Palier | Essai | Rejoints | Déconnexions | Réponse p95 | Diffusion p95 | Diffusion max | Lag serveur p99 max | RSS max (Mo) | CPU app max | CPU db max | Verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 100 | 1 | 100/100 | 0 | 12,2 | 26 | 26 | 21,7 | 269,4 | 42 % | 12 % | reussi |
+| 100 | 2 | 100/100 | 0 | 12,4 | 25 | 25 | 20,8 | 269,0 | 26 % | 13 % | reussi |
+| 200 | 1 | 200/200 | 0 | 60,1 | 43 | 43 | 111,6 | 274,1 | 96 % | 26 % | reussi |
+| 200 | 2 | 200/200 | 0 | 44,1 | 35 | 35 | 70,1 | 275,9 | 73 % | 28 % | reussi |
+| 300 | 1 | 300/300 | 0 | 1767,8 | 90 | 90 | 972,0 | 277,8 | 101 % | 43 % | echoue |
+| 300 | 2 | 300/300 | 0 | 1800,7 | 279 | 279 | 978,8 | 275,3 | 110 % | 41 % | echoue |
+| 500 | 1 | 500/500 | 0 | 7913,7 | 6404 | 6404 | 1254,1 | 280,2 | 111 % | 23 % | echoue |
+
+À 200 joueurs, la réponse p95 passe de 1151 à 1662 ms avant correction à 44 à 60 ms après, et le lag serveur p99 de 1211 à 1625 ms à 70 à 112 ms. Le palier 200 passe deux fois sur deux. Le palier 300 échoue deux fois sur deux (réponse p95 environ 1,8 s, lag environ 0,97 s), le palier 500 échoue au passage joué pour documenter la dégradation : 85 accusés hors délai, diffusion p95 de 6,4 s, et un join p95 de 3 s. Les paliers 750 et 1000 n'ont pas été joués, l'échec étant confirmé à 300. Le premier échec (300) tombe à 100 du plus haut palier réussi (200), il n'y a donc pas de palier intermédiaire à jouer.
+
+Scénario établissement (dix parties de 30 joueurs, 3 processus) : deux passages `etab-apres-1` et `etab-apres-2`, tous deux reussi. Réponse p95 de 8,0 et 8,5 ms, diffusion p95 de 65 et 61 ms (max 100 et 97 ms), lag serveur p99 de 16,2 et 20,3 ms, aucune déconnexion. Les chiffres avant correction étaient du même ordre pour la diffusion (75 et 66 ms) et la réponse passe d'environ 25 ms à environ 8 ms.
+
+Rafale (`rafale-apres`, 200 joueurs, le plus haut palier réussi, 250 arrivées par seconde, 2 processus) : reussi, 200 rejoints sur 200, aucune déconnexion. Le join p95 monte à 1004 ms (contre 16 ms en cadence normale), la réponse p95 reste à 63 ms et le lag serveur à 131 ms. Comme avant correction, une arrivée en masse ralentit l'arrivée sans dégrader le jeu. Passage informatif.
+
+Cohérence de la base sur la rafale à 200 joueurs : `session_player` 200, moteur 200, `answer_record` 2000, égaux aux joueurs rejoints et aux 2000 accusés acceptés comptés par le générateur. La valeur « moteur » est encore lue après la fin de partie, ce qui confirme que `engine_state` est probablement réécrit après son effacement par une écriture en attente, comme signalé plus haut. Cette vérification n'a été faite que sur ce passage, les bases étant remises à zéro avant chaque passage. Relevé : `docs/charge/brut/rafale-apres.coherence.txt`.
+
+Nouveau premier échec : 300 joueurs, pendant les questions. L'event loop de l'application sature encore (lag de 0,97 s, réponse p95 de 1,8 s, CPU app de 100 à 110 % d'un cœur, Postgres sous 45 %, mémoire stable), ce qui indique un coût par réponse qui croît encore avec la taille de la salle, non analysé ici. Les arrivées commencent aussi à souffrir (join p95 de 161 à 415 ms), le critère décisif reste la réponse.
+
 ## Chiffre annoncé
 
-Le plus haut palier réussi est 100 joueurs (deux passages réussis sur deux). Il s'arrondit à 100 (centaine inférieure). On retire une marge de 20 % : 100 multiplié par 0,8 égale 80. Le chiffre annoncé est de 80 joueurs par partie.
+Après correction, le plus haut palier réussi est 200 joueurs (deux passages réussis sur deux, `p200-apres-1` et `p200-apres-2`). Il s'arrondit à 200 (centaine inférieure). On retire une marge de 20 % : 200 multiplié par 0,8 égale 160. Le chiffre annoncé est de 160 joueurs par partie.
 
-Le palier 100 passe avec une grande marge (réponse p95 environ 30 ms pour un seuil de 300, lag environ 35 ms pour un seuil de 200), et l'échec se produit entre 100 et 200 joueurs sans palier intermédiaire testé. Une campagne complémentaire sur 125, 150 et 175 joueurs affinerait le chiffre. Comme les biais connus sont surtout optimistes (voir « Configuration »), ne pas dépasser le palier mesuré reste prudent. Le défaut de `MAX_PLAYERS_PER_SESSION` est aligné sur 80 (étape 7, pré-validée par le propriétaire). Le scénario établissement montre par ailleurs que 300 connexions réparties en dix salles de 30 sont supportées.
+Avant correction, le plus haut palier réussi était 100, soit 100 multiplié par 0,8 égal 80 joueurs. Cette valeur reste mentionnée comme chiffre avant correction.
+
+Le palier 200 passe avec une marge modérée (réponse p95 de 44 à 60 ms pour un seuil de 300, lag serveur de 70 à 112 ms pour un seuil de 200), et l'échec se produit entre 200 et 300. Comme les biais connus sont surtout optimistes (voir « Configuration »), ne pas dépasser le palier mesuré reste prudent. Le défaut de `MAX_PLAYERS_PER_SESSION` est aligné sur 160. Le scénario établissement montre par ailleurs que 300 connexions réparties en dix salles de 30 sont supportées, avant comme après correction.
