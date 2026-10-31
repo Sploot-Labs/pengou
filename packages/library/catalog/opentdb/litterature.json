@@ -35,6 +35,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-082e816448cd",
+      "type": "mcq",
+      "prompt": "Who wrote the novel 'Fear And Loathing In Las Vegas'?",
+      "payload": {
+        "options": [
+          {
+            "label": "F. Scott Fitzgerald",
+            "correct": false
+          },
+          {
+            "label": "Henry Miller",
+            "correct": false
+          },
+          {
+            "label": "Hunter S. Thompson",
+            "correct": true
+          },
+          {
+            "label": "William S. Burroughs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-08987994f4ea",
       "type": "mcq",
       "prompt": "Who is the author of the series \"Malazan Book of the Fallen\"?",

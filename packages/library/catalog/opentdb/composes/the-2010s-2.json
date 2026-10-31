@@ -238,31 +238,31 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-9fdc2e1148ed",
+      "id": "otdb-a14540462533",
       "type": "mcq",
-      "prompt": "Which country hosted the 2018 FIFA World Cup?",
+      "prompt": "Which one of these characters was first introduced in Sonic Boom: Rise of Lyric?",
       "payload": {
         "options": [
           {
-            "label": "Germany",
-            "correct": false
-          },
-          {
-            "label": "Russia",
+            "label": "Sticks the Badger",
             "correct": true
           },
           {
-            "label": "United States",
+            "label": "Mighty the Armadillo",
             "correct": false
           },
           {
-            "label": "Saudi Arabia",
+            "label": "Espio the Chameleon",
+            "correct": false
+          },
+          {
+            "label": "Rouge the Bat",
             "correct": false
           }
         ]
       },
-      "theme": "sport",
-      "difficulty": "facile",
+      "theme": "jeux-video",
+      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -383,6 +383,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-c07181f61f06",
+      "type": "mcq",
+      "prompt": "Who was the top scorer of the 2014 FIFA World Cup?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lionel Messi",
+            "correct": false
+          },
+          {
+            "label": "Neymar",
+            "correct": false
+          },
+          {
+            "label": "Thomas Müller",
+            "correct": false
+          },
+          {
+            "label": "James Rodríguez",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-c0fd6d3a093a",
       "type": "mcq",
       "prompt": "Who won the UEFA Champions League in 2017?",
@@ -437,18 +466,6 @@
       },
       "theme": "sport",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-ca8475c4225f",
-      "type": "truefalse",
-      "prompt": "The Paradox Interactive game \"Stellaris\" was released in 2016.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "jeux-video",
-      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -554,10 +571,10 @@
         "otdb-0afdda8e4d96",
         "otdb-9a6e0a051bfb",
         "otdb-b9a2a03f0d27",
-        "otdb-9fdc2e1148ed",
+        "otdb-c07181f61f06",
         "otdb-8e2cb701bbba",
         "otdb-d313e78be9e3",
-        "otdb-ca8475c4225f",
+        "otdb-a14540462533",
         "otdb-bd63aadc24fc",
         "otdb-eac186e3f158",
         "otdb-5b05a12ae810",

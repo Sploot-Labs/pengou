@@ -5036,6 +5036,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-fb6cefe7dd4c",
+      "type": "mcq",
+      "prompt": "Which company was established on April 1st, 1976 by Steve Jobs, Steve Wozniak and Ronald Wayne?",
+      "payload": {
+        "options": [
+          {
+            "label": "Apple",
+            "correct": true
+          },
+          {
+            "label": "Atari",
+            "correct": false
+          },
+          {
+            "label": "Commodore",
+            "correct": false
+          },
+          {
+            "label": "Microsoft",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-fd288ec84610",
       "type": "truefalse",
       "prompt": "DHCP stands for Dynamic Host Configuration Port.",

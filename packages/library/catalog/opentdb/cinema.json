@@ -146,6 +146,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-21bf82c94f48",
+      "type": "mcq",
+      "prompt": "What was the name of the actor who played Leatherface in the 1974 horror film, The Texas Chainsaw Massacre?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joe Bill Hogan",
+            "correct": false
+          },
+          {
+            "label": "Gunnar Hansen",
+            "correct": true
+          },
+          {
+            "label": "John Dugan",
+            "correct": false
+          },
+          {
+            "label": "Edwin Neal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-263226f6aa90",
       "type": "mcq",
       "prompt": "Who played Baron Victor Frankestein in the 1957 Hammer horror film \"The Curse of Frankenstein\"?",
@@ -646,6 +675,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-725079512abb",
+      "type": "mcq",
+      "prompt": "In the 1979 British film \"Quadrophenia\" what is the name of the seaside city the mods are visiting?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mousehole",
+            "correct": false
+          },
+          {
+            "label": "Bridlington",
+            "correct": false
+          },
+          {
+            "label": "Brighton",
+            "correct": true
+          },
+          {
+            "label": "Eastbourne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-7dd3384fefcc",
       "type": "mcq",
       "prompt": "Which town is the setting for the Disney movie The Love Bug (1968)?",
@@ -675,6 +733,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-7ebf96f29c7b",
+      "type": "mcq",
+      "prompt": "In order to cut costs, what were most of the extras of Mad Max (1979) paid with?",
+      "payload": {
+        "options": [
+          {
+            "label": "They weren't paid",
+            "correct": false
+          },
+          {
+            "label": "Food stamps",
+            "correct": false
+          },
+          {
+            "label": "Beer",
+            "correct": true
+          },
+          {
+            "label": "Fast food",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-821330856edc",
       "type": "mcq",
       "prompt": "What were the Chilled Monkey Brains made from during Indiana Jones and the Temple of Doom?",
@@ -697,6 +784,18 @@
             "correct": false
           }
         ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-83ef3137274d",
+      "type": "truefalse",
+      "prompt": "The movie \"The Rocky Horror Picture Show\" (1975) opens with giant floating lips singing the opening song",
+      "payload": {
+        "correct": true
       },
       "theme": "cinema",
       "difficulty": "moyen",
@@ -1187,6 +1286,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-cae449c9af24",
+      "type": "mcq",
+      "prompt": "In the 1976 film 'Taxi Driver', how many guns did Travis buy from the salesman?",
+      "payload": {
+        "options": [
+          {
+            "label": "4",
+            "correct": true
+          },
+          {
+            "label": "2",
+            "correct": false
+          },
+          {
+            "label": "1",
+            "correct": false
+          },
+          {
+            "label": "6",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-cd1a2252e968",
       "type": "mcq",
       "prompt": "What is the name of the fictional retro-mod band starring Austin Powers as the lead vocalist?",
@@ -1241,6 +1369,35 @@
       },
       "theme": "cinema",
       "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-daa22593d5b6",
+      "type": "mcq",
+      "prompt": "What is the correct phrase for the Latin saying \"Romanes Eunt Domus\" in Monty Python's Life of Brian?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roxani Ite Domum",
+            "correct": false
+          },
+          {
+            "label": "Romani Ite Domum",
+            "correct": true
+          },
+          {
+            "label": "Romans Go Home",
+            "correct": false
+          },
+          {
+            "label": "Tomate Ite Domum",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },

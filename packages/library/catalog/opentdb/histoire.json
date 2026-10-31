@@ -1767,6 +1767,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-d859e34d6b81",
+      "type": "mcq",
+      "prompt": "In what year was the last natural case of smallpox documented?",
+      "payload": {
+        "options": [
+          {
+            "label": "1977",
+            "correct": true
+          },
+          {
+            "label": "1982",
+            "correct": false
+          },
+          {
+            "label": "1980",
+            "correct": false
+          },
+          {
+            "label": "1990",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-d9856a43f1c5",
       "type": "mcq",
       "prompt": "King Henry VIII was the second monarch of which European royal house?",

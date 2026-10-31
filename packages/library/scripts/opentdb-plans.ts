@@ -60,12 +60,14 @@ export const EXCLUDED: Record<string, string> = {
   'otdb-b2198ff06df6': 'fait faux : les cellules du corps humain ont 46 chromosomes (23 paires)',
   'otdb-b33f22361aec': 'bonne réponse ambiguë : victoire en février 2010 pour la saison 2009',
   'otdb-b410db6c9f14': "exactitude douteuse : le nombre de pattes des chilopodes dépend de l'espèce, plusieurs propositions sont impossibles",
+  'otdb-b6f59084cac6': 'doublon de otdb-8ea0e8bf1026',
   'otdb-b8fa4b62076f': 'exactitude douteuse : sens de « Lamora » en throne therin non vérifiable',
   'otdb-b92cff471f0a': 'bonne réponse ambiguë : SSD se développe en Solid State Drive ou Solid State Disk',
   'otdb-be21acbb7caa': 'exactitude douteuse : prototype de manette non vérifiable',
   'otdb-c7582fd2a8da': "fait faux : El Niño pousse l'eau chaude vers l'est du Pacifique, côtes d'Amérique du Sud",
   'otdb-c7e2899ff963': 'bonne réponse ambiguë : le déplacement se note aussi s ou d',
   'otdb-cc089b4bfcd0': 'exactitude douteuse : fait de fiction obscur et non vérifiable',
+  'otdb-cd7d09ecd000': 'doublon de otdb-acf39f60b7b9',
   'otdb-ce5580ee3490': 'bonne réponse ambiguë : la hyène rit par nervosité, frustration ou excitation',
   'otdb-d4736cba5846': 'fait faux : Occultic;Nine fait partie de la série Science Adventure',
   'otdb-d660060fbab2': 'exactitude douteuse : des roses bleues obtenues par génie génétique existent',
@@ -646,7 +648,7 @@ export const QUIZZES: QuizPlan[] = [
       'otdb-1c87cc67d261', // In "Rainbow Six: Siege", which of the following operators cannot breach reinforced wall...
       'otdb-c3ba6d3cad5b', // In Left 4 Dead, which campaign has the protagonists going through a subway in order to ...
       'otdb-f270083bbe29', // In the game "Fire Emblem: Shadow Dragon", what is the central protagonist's name? => Marth
-      'otdb-8900afe44478', // In Kingdom Hearts, how many members does Organization XIII have in total? => 14
+      'otdb-2245fb23476d', // Which Kingdom Hearts game featured the cast of "The World Ends With You"? => Dream Drop...
       'otdb-3e78c8622b56', // In the Pokémon series, which type is Sudowoodo, the Imitation Pokémon? => Rock
       'otdb-48b962eb81ed', // In "Resident Evil 2", what is Leon Kennedy's middle name? => Scott
       'otdb-9e3ac5d63bb6', // In Star Wars: Republic Commando (2005), what is the name of the squad that you play as?...
@@ -815,7 +817,7 @@ export const QUIZZES: QuizPlan[] = [
     slug: 'culture-mix-4',
     title: 'Culture mix #4',
     theme: 'culture-generale',
-    description: 'A mix of geography, history, science, nature, books and film questions.',
+    description: 'A mix of geography, history, science, nature, books, art and TV questions.',
     questions: [
       'otdb-dbaa3244600f', // In "ALF", what was ALF's real name? => Gordon Shumway
       'otdb-e25c0f1fae41', // How many Harry Potter books are there? => 7
@@ -837,29 +839,6 @@ export const QUIZZES: QuizPlan[] = [
       'otdb-5539e624a989', // Which team was the 2014-2015 NBA Champions? => Golden State Warriors
       'otdb-2cf90c158733', // What common name is given to the medial condition, tibial stress syndrome (MTSS)? => Sh...
       'otdb-02fb118da74a', // In DC comics where does the Green Arrow (Oliver Queen) live? => Star City
-    ],
-  },
-  {
-    slug: 'the-70s',
-    title: 'The 70s',
-    theme: 'culture-generale',
-    description: 'Films, music and events from the 1970s.',
-    questions: [
-      'otdb-4fefa79ecac8', // According to their 1974 hit, what were Brownsville Station doing "In The Boys' Room"? =...
-      'otdb-21bf82c94f48', // What was the name of the actor who played Leatherface in the 1974 horror film, The Texa...
-      'otdb-ebdfbb9e20ae', // How many French Open's did Björn Borg win? => 6
-      'otdb-49e43603aa1c', // In what year was the first eSports competition? => 1972
-      'otdb-725079512abb', // In the 1979 British film "Quadrophenia" what is the name of the seaside city the mods a...
-      'otdb-082e816448cd', // Who wrote the novel 'Fear And Loathing In Las Vegas'? => Hunter S. Thompson
-      'otdb-6c7121e9236b', // Who had a 1976 hit with the song 'You Make Me Feel Like Dancing'? => Leo Sayer
-      'otdb-6b524f33b042', // The 'In the Flesh' tour was used in support of what Pink Floyd album? => Animals
-      'otdb-264c8cc322dd', // What Led Zeppelin album contains "Stairway to Heaven"? => Led Zeppelin IV
-      'otdb-d859e34d6b81', // In what year was the last natural case of smallpox documented? => 1977
-      'otdb-fb6cefe7dd4c', // Which company was established on April 1st, 1976 by Steve Jobs, Steve Wozniak and Ronal...
-      'otdb-cae449c9af24', // In the 1976 film 'Taxi Driver', how many guns did Travis buy from the salesman? => 4
-      'otdb-7ebf96f29c7b', // In order to cut costs, what were most of the extras of Mad Max (1979) paid with? => Beer
-      'otdb-83ef3137274d', // The movie "The Rocky Horror Picture Show" (1975) opens with giant floating lips singing...
-      'otdb-daa22593d5b6', // What is the correct phrase for the Latin saying "Romanes Eunt Domus" in Monty Python's ...
     ],
   },
   {
@@ -1014,10 +993,10 @@ export const QUIZZES: QuizPlan[] = [
       'otdb-0afdda8e4d96', // In "Overwatch", Coalescence is the name for the ultimate of which hero? => Moira
       'otdb-9a6e0a051bfb', // What was the wifi password given to Stephen Strange in Doctor Strange? => Shambala
       'otdb-b9a2a03f0d27', // Who is the lead singer of The Lumineers? => Wesley Schultz
-      'otdb-9fdc2e1148ed', // Which country hosted the 2018 FIFA World Cup? => Russia
+      'otdb-c07181f61f06', // Who was the top scorer of the 2014 FIFA World Cup? => James Rodríguez
       'otdb-8e2cb701bbba', // Which of these was the name of a bug found in April 2014 in the publicly available Open...
       'otdb-d313e78be9e3', // The album reputation by Taylor Swift has 15 songs => true
-      'otdb-ca8475c4225f', // The Paradox Interactive game "Stellaris" was released in 2016. => true
+      'otdb-a14540462533', // Which one of these characters was first introduced in Sonic Boom: Rise of Lyric? => Sti...
       'otdb-bd63aadc24fc', // Which rapper had an album that went double platinum with no features? => J. Cole
       'otdb-eac186e3f158', // In "Undertale", the main character of the game is Sans. => false
       'otdb-5b05a12ae810', // The film Mad Max: Fury Road features the Dies Irae from which composer's requiem? => Verdi

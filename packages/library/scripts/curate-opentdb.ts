@@ -70,10 +70,14 @@ async function main() {
   }
   if (source === undefined) throw new Error(`aucun pack dans ${OUT_DIR}`)
 
-  // Retraits motivés. Une question déjà retirée par un passage précédent est ignorée.
+  // Retraits motivés. Une question déjà retirée par un passage précédent est ignorée ; le compte des
+  // identifiants sans question fait repérer une coquille (il vaut tout EXCLUDED dès le second passage).
+  let unmatched = 0
   for (const [id, reason] of Object.entries(EXCLUDED)) {
     if (questions.delete(id)) console.log(`${id} retirée : ${reason}`)
+    else unmatched++
   }
+  console.log(`${unmatched} identifiants de EXCLUDED sans question dans le catalogue`)
 
   // Reclassements de thème.
   for (const [id, theme] of Object.entries(QUESTION_THEME)) {

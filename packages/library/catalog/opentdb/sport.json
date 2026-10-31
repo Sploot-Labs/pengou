@@ -1168,6 +1168,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-9fdc2e1148ed",
+      "type": "mcq",
+      "prompt": "Which country hosted the 2018 FIFA World Cup?",
+      "payload": {
+        "options": [
+          {
+            "label": "Germany",
+            "correct": false
+          },
+          {
+            "label": "Russia",
+            "correct": true
+          },
+          {
+            "label": "United States",
+            "correct": false
+          },
+          {
+            "label": "Saudi Arabia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-a5b1d988413c",
       "type": "mcq",
       "prompt": "Hockey player Wayne Gretzky was born in what Canadian province?",
@@ -1383,35 +1412,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-c07181f61f06",
-      "type": "mcq",
-      "prompt": "Who was the top scorer of the 2014 FIFA World Cup?",
-      "payload": {
-        "options": [
-          {
-            "label": "Lionel Messi",
-            "correct": false
-          },
-          {
-            "label": "Neymar",
-            "correct": false
-          },
-          {
-            "label": "Thomas Müller",
-            "correct": false
-          },
-          {
-            "label": "James Rodríguez",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-c46857157256",
       "type": "mcq",
       "prompt": "What team did England beat in the semi-final stage to win in the 1966 World Cup final?",
@@ -1507,35 +1507,6 @@
       },
       "theme": "sport",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-cd7d09ecd000",
-      "type": "mcq",
-      "prompt": "Who won the premier league title in the 2015-2016 season following a fairy tale run?",
-      "payload": {
-        "options": [
-          {
-            "label": "Leicester City",
-            "correct": true
-          },
-          {
-            "label": "Tottenham Hotspur",
-            "correct": false
-          },
-          {
-            "label": "Stoke City",
-            "correct": false
-          },
-          {
-            "label": "Watford",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -1803,6 +1774,35 @@
           },
           {
             "label": "Football",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ebdfbb9e20ae",
+      "type": "mcq",
+      "prompt": "How many French Open's did Björn Borg win?",
+      "payload": {
+        "options": [
+          {
+            "label": "6",
+            "correct": true
+          },
+          {
+            "label": "4",
+            "correct": false
+          },
+          {
+            "label": "2",
+            "correct": false
+          },
+          {
+            "label": "9",
             "correct": false
           }
         ]

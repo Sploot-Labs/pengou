@@ -337,6 +337,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-264c8cc322dd",
+      "type": "mcq",
+      "prompt": "What Led Zeppelin album contains \"Stairway to Heaven\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Houses of the Holy",
+            "correct": false
+          },
+          {
+            "label": "Led Zeppelin IV",
+            "correct": true
+          },
+          {
+            "label": "Physical Graffiti",
+            "correct": false
+          },
+          {
+            "label": "Led Zeppelin III",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-27961f63be43",
       "type": "mcq",
       "prompt": "The Rush song \"YYZ\" derives its name from the IATA aiport identification code for which city?",
@@ -622,6 +651,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-4fefa79ecac8",
+      "type": "mcq",
+      "prompt": "According to their 1974 hit, what were Brownsville Station doing \"In The Boys' Room\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hangin'",
+            "correct": false
+          },
+          {
+            "label": "Peein'",
+            "correct": false
+          },
+          {
+            "label": "Lovin'",
+            "correct": false
+          },
+          {
+            "label": "Smokin'",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-5ecf956e01a0",
       "type": "truefalse",
       "prompt": "Daft Punk originated in France.",
@@ -688,6 +746,64 @@
       },
       "theme": "musique",
       "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6b524f33b042",
+      "type": "mcq",
+      "prompt": "The 'In the Flesh' tour was used in support of what Pink Floyd album?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Wall",
+            "correct": false
+          },
+          {
+            "label": "Wish You Were Here",
+            "correct": false
+          },
+          {
+            "label": "Animals",
+            "correct": true
+          },
+          {
+            "label": "The Final Cut",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6c7121e9236b",
+      "type": "mcq",
+      "prompt": "Who had a 1976 hit with the song 'You Make Me Feel Like Dancing'?",
+      "payload": {
+        "options": [
+          {
+            "label": "Billy Joel",
+            "correct": false
+          },
+          {
+            "label": "Leo Sayer",
+            "correct": true
+          },
+          {
+            "label": "Andy Gibb",
+            "correct": false
+          },
+          {
+            "label": "Elton John",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },

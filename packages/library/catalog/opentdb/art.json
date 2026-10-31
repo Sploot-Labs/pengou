@@ -721,35 +721,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-b6f59084cac6",
-      "type": "mcq",
-      "prompt": "Who painted \"The Starry Night\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Claude Monet",
-            "correct": false
-          },
-          {
-            "label": "Pablo Picasso",
-            "correct": false
-          },
-          {
-            "label": "Edvard Munch",
-            "correct": false
-          },
-          {
-            "label": "Vincent van Gogh",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "art",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-bc7fa06e1513",
       "type": "mcq",
       "prompt": "Who painted the biblical fresco The Creation of Adam?",

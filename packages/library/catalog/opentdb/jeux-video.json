@@ -540,6 +540,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-49e43603aa1c",
+      "type": "mcq",
+      "prompt": "In what year was the first eSports competition?",
+      "payload": {
+        "options": [
+          {
+            "label": "1989",
+            "correct": false
+          },
+          {
+            "label": "2000",
+            "correct": false
+          },
+          {
+            "label": "1990",
+            "correct": false
+          },
+          {
+            "label": "1972",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-4fab33f38e71",
       "type": "mcq",
       "prompt": "In the MMO RPG \"Realm of the Mad God\", what dungeon is widely considered to be the most difficult?",
@@ -1064,35 +1093,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-a14540462533",
-      "type": "mcq",
-      "prompt": "Which one of these characters was first introduced in Sonic Boom: Rise of Lyric?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sticks the Badger",
-            "correct": true
-          },
-          {
-            "label": "Mighty the Armadillo",
-            "correct": false
-          },
-          {
-            "label": "Espio the Chameleon",
-            "correct": false
-          },
-          {
-            "label": "Rouge the Bat",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "jeux-video",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-a71e30036307",
       "type": "mcq",
       "prompt": "Which team won the \"Tom Clancy's Rainbow Six Siege\" Invitational Event February 2017 in the PC Category?",
@@ -1205,6 +1205,18 @@
       },
       "theme": "jeux-video",
       "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ca8475c4225f",
+      "type": "truefalse",
+      "prompt": "The Paradox Interactive game \"Stellaris\" was released in 2016.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -1647,7 +1659,7 @@
         "otdb-1c87cc67d261",
         "otdb-c3ba6d3cad5b",
         "otdb-f270083bbe29",
-        "otdb-8900afe44478",
+        "otdb-2245fb23476d",
         "otdb-3e78c8622b56",
         "otdb-48b962eb81ed",
         "otdb-9e3ac5d63bb6",
