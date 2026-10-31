@@ -46,7 +46,8 @@ export function echantillonnerServeur(cible, periodeMs = 1000) {
   const heap = []
   const cpu = []
   let precedent = null
-  let enCours = Promise.resolve()
+  // Au plus une lecture en vol : un /metrics qui ne répond pas ne doit pas accumuler de lectures.
+  let enCours = null
 
   const lire = async () => {
     try {
@@ -67,7 +68,10 @@ export function echantillonnerServeur(cible, periodeMs = 1000) {
     }
   }
   const planifier = () => {
-    enCours = enCours.then(lire)
+    if (enCours) return enCours
+    enCours = lire().finally(() => {
+      enCours = null
+    })
     return enCours
   }
 
@@ -76,6 +80,7 @@ export function echantillonnerServeur(cible, periodeMs = 1000) {
   return {
     async arreter() {
       clearInterval(minuteur)
+      // Une lecture déjà en vol ferme la dernière fenêtre ; sinon on en fait une dernière.
       await planifier()
       return {
         lagP99MaxMs: auDixieme(maxDe(lag)),

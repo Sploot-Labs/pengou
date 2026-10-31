@@ -55,7 +55,9 @@ export function verdict(resume) {
     // Sans aucun échantillon /metrics, le critère ne peut pas être tenu.
     lagServeurP99: resume.serveur.echantillons > 0 && resume.serveur.lagP99MaxMs <= LAG_SERVEUR_P99_MAX_MS,
   }
-  if (resume.generateur.lagP99MaxMs > LAG_GENERATEUR_P99_MAX_MS || resume.horlogeIncoherente > 0) {
+  // Une mesure du générateur manquante (non finie) rend aussi la validité du palier inconnue.
+  const lagGenerateur = resume.generateur.lagP99MaxMs
+  if (!Number.isFinite(lagGenerateur) || lagGenerateur > LAG_GENERATEUR_P99_MAX_MS || resume.horlogeIncoherente > 0) {
     return { criteres, verdict: 'invalide' }
   }
   return { criteres, verdict: Object.values(criteres).every(Boolean) ? 'reussi' : 'echoue' }

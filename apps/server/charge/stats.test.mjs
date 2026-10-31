@@ -1,3 +1,4 @@
+import { createServer } from 'node:net'
 import { describe, expect, it } from 'vitest'
 import { echantillonnerServeur, lireMetriques } from './metriques.mjs'
 import { estCibleLocale, percentile, resumer, verdict } from './stats.mjs'
@@ -134,6 +135,11 @@ describe('verdict', () => {
     expect(verdict(resumeType({ serveur: { lagP99MaxMs: 0 } })).criteres.lagServeurP99).toBe(false)
   })
 
+  it('invalide si la mesure du générateur est manquante', () => {
+    expect(verdict(resumeType({ generateur: { lagP99MaxMs: Number.NaN } })).verdict).toBe('invalide')
+    expect(verdict(resumeType({ generateur: {} })).verdict).toBe('invalide')
+  })
+
   it('invalide si une horloge est incohérente', () => {
     expect(verdict(resumeType({ horlogeIncoherente: 1 })).verdict).toBe('invalide')
   })
@@ -171,4 +177,24 @@ describe('echantillonnerServeur', () => {
     expect(mesures.rssMaxMo).toBeNaN()
     expect(mesures.cpuMoyenPct).toBeNaN()
   })
+
+  it("ne s'empile pas derrière un /metrics qui ne répond jamais", async () => {
+    const sockets = new Set()
+    const serveur = createServer((socket) => {
+      sockets.add(socket)
+      socket.on('error', () => {})
+    })
+    await new Promise((ok) => serveur.listen(0, '127.0.0.1', ok))
+    try {
+      const echantillonneur = echantillonnerServeur(`http://127.0.0.1:${serveur.address().port}`, 100)
+      await new Promise((ok) => setTimeout(ok, 3000))
+      const debut = Date.now()
+      const mesures = await echantillonneur.arreter()
+      expect(Date.now() - debut).toBeLessThan(2500)
+      expect(mesures.echantillons).toBe(0)
+    } finally {
+      for (const socket of sockets) socket.destroy()
+      serveur.close()
+    }
+  }, 15_000)
 })
