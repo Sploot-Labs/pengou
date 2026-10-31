@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=451"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0451-1",
+      "type": "mcq",
+      "prompt": "Quel personnage et ami de Bob l'éponge vit sous un rocher ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sandy",
+            "correct": false
+          },
+          {
+            "label": "Patrick",
+            "correct": true
+          },
+          {
+            "label": "Eugène",
+            "correct": false
+          },
+          {
+            "label": "Carlo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0451-2",
+      "type": "mcq",
+      "prompt": "Quel est le prénom du maître nageur de Goo Lagoon dans « Bob l'éponge » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thomas",
+            "correct": false
+          },
+          {
+            "label": "Larry",
+            "correct": true
+          },
+          {
+            "label": "Ian",
+            "correct": false
+          },
+          {
+            "label": "Benny",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0451-3",
+      "type": "mcq",
+      "prompt": "Qui dirige l'école de conduite dans « Bob l'éponge » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Madame Puff",
+            "correct": true
+          },
+          {
+            "label": "Krabs",
+            "correct": false
+          },
+          {
+            "label": "Sandy",
+            "correct": false
+          },
+          {
+            "label": "Potty",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0451-4",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le perroquet de Patchy le pirate ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Looney",
+            "correct": false
+          },
+          {
+            "label": "Potty",
+            "correct": true
+          },
+          {
+            "label": "Nutty",
+            "correct": false
+          },
+          {
+            "label": "Marbles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

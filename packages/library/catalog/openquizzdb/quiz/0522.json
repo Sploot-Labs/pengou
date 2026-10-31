@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=522"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0522-1",
+      "type": "mcq",
+      "prompt": "Dans « Dragon Ball Z », combien de fois la Lune a-t-elle été détruite ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trois fois",
+            "correct": false
+          },
+          {
+            "label": "Une fois",
+            "correct": false
+          },
+          {
+            "label": "Jamais",
+            "correct": false
+          },
+          {
+            "label": "Deux fois",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0522-2",
+      "type": "mcq",
+      "prompt": "Quel héros de la saga « Dragon Ball Z » est parvenu à tuer Freezer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vegeta",
+            "correct": false
+          },
+          {
+            "label": "Petit-Coeur",
+            "correct": false
+          },
+          {
+            "label": "Goku",
+            "correct": false
+          },
+          {
+            "label": "Trunks",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0522-3",
+      "type": "mcq",
+      "prompt": "Quel personnage utilise les Potaras dans « Dragon Ball Z » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aralé",
+            "correct": false
+          },
+          {
+            "label": "Dr. Slump",
+            "correct": false
+          },
+          {
+            "label": "Lao",
+            "correct": false
+          },
+          {
+            "label": "Kaio Shin",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0522-4",
+      "type": "mcq",
+      "prompt": "Dans « Dragon Ball », quel métal est censé être le plus dur de l'univers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cooler",
+            "correct": false
+          },
+          {
+            "label": "Katchin",
+            "correct": true
+          },
+          {
+            "label": "Piccolo",
+            "correct": false
+          },
+          {
+            "label": "Dabra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

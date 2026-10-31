@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=321"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0321-1",
+      "type": "mcq",
+      "prompt": "Quel animal figure sur le blason de la maison Lannister ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ours",
+            "correct": false
+          },
+          {
+            "label": "Cheval",
+            "correct": false
+          },
+          {
+            "label": "Lion",
+            "correct": true
+          },
+          {
+            "label": "Aigle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0321-2",
+      "type": "mcq",
+      "prompt": "Combien de couronnes composent le royaume de « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sept",
+            "correct": true
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Dix",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0321-3",
+      "type": "mcq",
+      "prompt": "Que protège la Garde de Nuit dans « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le jardin",
+            "correct": false
+          },
+          {
+            "label": "La frontière",
+            "correct": false
+          },
+          {
+            "label": "Le Mur",
+            "correct": true
+          },
+          {
+            "label": "La reine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0321-4",
+      "type": "mcq",
+      "prompt": "Où habite la famille Stark dans la série « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Winterland",
+            "correct": false
+          },
+          {
+            "label": "Winterfall",
+            "correct": false
+          },
+          {
+            "label": "Winterball",
+            "correct": false
+          },
+          {
+            "label": "Winterfell",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

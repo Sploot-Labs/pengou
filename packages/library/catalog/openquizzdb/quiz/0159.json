@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=159"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0159-1",
+      "type": "mcq",
+      "prompt": "Qui est navigateur au sein de l'équipage du chapeau de paille ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nami",
+            "correct": true
+          },
+          {
+            "label": "Zoro",
+            "correct": false
+          },
+          {
+            "label": "Usopp",
+            "correct": false
+          },
+          {
+            "label": "Robin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0159-2",
+      "type": "mcq",
+      "prompt": "Dans « One Piece », sous quel autre nom est connu Marshall D. Teach ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shanks",
+            "correct": false
+          },
+          {
+            "label": "Barbe Noire",
+            "correct": true
+          },
+          {
+            "label": "Barbe Blanche",
+            "correct": false
+          },
+          {
+            "label": "Big Mom",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0159-3",
+      "type": "mcq",
+      "prompt": "Dans « One Piece », qui est le capitaine de l'équipage du Heart ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Law",
+            "correct": true
+          },
+          {
+            "label": "Big Mom",
+            "correct": false
+          },
+          {
+            "label": "Baggy",
+            "correct": false
+          },
+          {
+            "label": "Kid",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0159-4",
+      "type": "mcq",
+      "prompt": "De quelle race font partie Dorry et Broggy, rencontrés sur Little Garden ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Géants",
+            "correct": true
+          },
+          {
+            "label": "Shandias",
+            "correct": false
+          },
+          {
+            "label": "Hommes-Poissons",
+            "correct": false
+          },
+          {
+            "label": "Minks",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

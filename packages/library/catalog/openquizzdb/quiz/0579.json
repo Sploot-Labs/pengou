@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=579"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0579-1",
+      "type": "mcq",
+      "prompt": "Quelle chanteuse est la mère de René-Charles, Nelson et Eddy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Katy Perry",
+            "correct": false
+          },
+          {
+            "label": "Whitney Houston",
+            "correct": false
+          },
+          {
+            "label": "Rihanna",
+            "correct": false
+          },
+          {
+            "label": "Céline Dion",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0579-2",
+      "type": "mcq",
+      "prompt": "Quel acteur a perdu la vie sur la route de Santa Clarita ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Will Smith",
+            "correct": false
+          },
+          {
+            "label": "Chris Pratt",
+            "correct": false
+          },
+          {
+            "label": "Hugh Jackman",
+            "correct": false
+          },
+          {
+            "label": "Paul Walker",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0579-3",
+      "type": "mcq",
+      "prompt": "Quelle sulfureuse chanteuse est surnommée la « Black Barbie » du rap ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Foy Brown",
+            "correct": false
+          },
+          {
+            "label": "Nicki Minaj",
+            "correct": true
+          },
+          {
+            "label": "Christina Milian",
+            "correct": false
+          },
+          {
+            "label": "Lauryn Hill",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0579-4",
+      "type": "mcq",
+      "prompt": "Quelle mannequin est souvent surnommée le garçon manqué ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kate Moss",
+            "correct": false
+          },
+          {
+            "label": "Cara Delevingne",
+            "correct": true
+          },
+          {
+            "label": "Elizabeth Hurley",
+            "correct": false
+          },
+          {
+            "label": "Kelly Brook",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

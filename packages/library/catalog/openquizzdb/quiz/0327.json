@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=327"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0327-1",
+      "type": "mcq",
+      "prompt": "Quelle actrice d'origine mexicaine joue dans « Desperate Housewives » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emma Watson",
+            "correct": false
+          },
+          {
+            "label": "Eva Longoria",
+            "correct": true
+          },
+          {
+            "label": "Halle Berry",
+            "correct": false
+          },
+          {
+            "label": "Salma Hayek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0327-2",
+      "type": "mcq",
+      "prompt": "Qui a incarné Rachel Green dans la sitcom à succès mondial « Friends » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Charlize Theron",
+            "correct": false
+          },
+          {
+            "label": "Eva Longoria",
+            "correct": false
+          },
+          {
+            "label": "Lisa Kudrow",
+            "correct": false
+          },
+          {
+            "label": "Jennifer Aniston",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0327-3",
+      "type": "mcq",
+      "prompt": "Quelle actrice brune joue dans « Vampire Diaries » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nina Dobrev",
+            "correct": true
+          },
+          {
+            "label": "Eva Green",
+            "correct": false
+          },
+          {
+            "label": "Julianne Moore",
+            "correct": false
+          },
+          {
+            "label": "Kristen Stewart",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0327-4",
+      "type": "mcq",
+      "prompt": "Qui a tenu le rôle de « Numéro 13 » dans la série « Dr House » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Keira Knightley",
+            "correct": false
+          },
+          {
+            "label": "Olivia Wilde",
+            "correct": true
+          },
+          {
+            "label": "Kaley Cuoco",
+            "correct": false
+          },
+          {
+            "label": "Salma Hayek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

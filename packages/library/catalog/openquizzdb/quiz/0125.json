@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=125"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0125-1",
+      "type": "mcq",
+      "prompt": "Qui a présenté à ses côtés la série télévisée des « 100 plus grands » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sandrine Quétier",
+            "correct": true
+          },
+          {
+            "label": "Claire Keim",
+            "correct": false
+          },
+          {
+            "label": "Marina Carrère",
+            "correct": false
+          },
+          {
+            "label": "Karine Ferri",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0125-2",
+      "type": "mcq",
+      "prompt": "Quelle émission, avec Christophe Dechavanne, était diffusée le mardi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zone Interdite",
+            "correct": false
+          },
+          {
+            "label": "Quotidien",
+            "correct": false
+          },
+          {
+            "label": "Ciel mon mardi !",
+            "correct": true
+          },
+          {
+            "label": "The Voice",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0125-3",
+      "type": "mcq",
+      "prompt": "Quelle société de production appartient à Christophe Dechavanne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crotale",
+            "correct": false
+          },
+          {
+            "label": "Caméléon",
+            "correct": false
+          },
+          {
+            "label": "Coyote",
+            "correct": true
+          },
+          {
+            "label": "Cobra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0125-4",
+      "type": "mcq",
+      "prompt": "De quel magazine le montrant nu a-t-il obtenu un retrait en 2006 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Figaro",
+            "correct": false
+          },
+          {
+            "label": "VSD",
+            "correct": false
+          },
+          {
+            "label": "Paris Match",
+            "correct": false
+          },
+          {
+            "label": "Choc",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

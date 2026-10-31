@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=325"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0325-1",
+      "type": "mcq",
+      "prompt": "Qui est la mère des dragons dans « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lisa",
+            "correct": false
+          },
+          {
+            "label": "Jon",
+            "correct": false
+          },
+          {
+            "label": "Donan",
+            "correct": false
+          },
+          {
+            "label": "Daenerys",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0325-2",
+      "type": "mcq",
+      "prompt": "Comment meurt Ned Stark dans « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brûlé vif",
+            "correct": false
+          },
+          {
+            "label": "Poignardé",
+            "correct": false
+          },
+          {
+            "label": "Pendu",
+            "correct": false
+          },
+          {
+            "label": "Décapité",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0325-3",
+      "type": "mcq",
+      "prompt": "Comment s'appelle la fiancée de Joffrey dans « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Daenerys",
+            "correct": false
+          },
+          {
+            "label": "Arya",
+            "correct": false
+          },
+          {
+            "label": "Catelyn",
+            "correct": false
+          },
+          {
+            "label": "Sansa",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0325-4",
+      "type": "mcq",
+      "prompt": "Qui est poussé dans le vide par Jaime Lannister dans « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Craster",
+            "correct": false
+          },
+          {
+            "label": "Ned",
+            "correct": false
+          },
+          {
+            "label": "Bran",
+            "correct": true
+          },
+          {
+            "label": "Jon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

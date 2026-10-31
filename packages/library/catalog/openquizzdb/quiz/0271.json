@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=271"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0271-1",
+      "type": "mcq",
+      "prompt": "Quelle star a montré son piercing dentaire sur Instagram en 2013 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beyoncé",
+            "correct": false
+          },
+          {
+            "label": "Rihanna",
+            "correct": true
+          },
+          {
+            "label": "Jennifer Lopez",
+            "correct": false
+          },
+          {
+            "label": "Gwen Stefani",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0271-2",
+      "type": "mcq",
+      "prompt": "Quel DJ de la French Touch a fait une vidéo nu en 2013 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Claude Challe",
+            "correct": false
+          },
+          {
+            "label": "Bob Sinclar",
+            "correct": true
+          },
+          {
+            "label": "Laurent Wolf",
+            "correct": false
+          },
+          {
+            "label": "David Guetta",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0271-3",
+      "type": "mcq",
+      "prompt": "Quelle muse a exposé ses toiles à Milan en 2013 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Karen Cheryl",
+            "correct": false
+          },
+          {
+            "label": "Jeanne Mas",
+            "correct": false
+          },
+          {
+            "label": "Amanda Lear",
+            "correct": true
+          },
+          {
+            "label": "Linda de Suza",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0271-4",
+      "type": "mcq",
+      "prompt": "Quel chanteur a failli perdre son fils en 2013 dans une piscine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Uffie",
+            "correct": false
+          },
+          {
+            "label": "Usher",
+            "correct": true
+          },
+          {
+            "label": "U-God",
+            "correct": false
+          },
+          {
+            "label": "Uncle Murda",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

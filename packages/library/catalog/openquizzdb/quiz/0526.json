@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=526"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0526-1",
+      "type": "mcq",
+      "prompt": "Combien de boules faut-il rassembler pour qu'un voeu soit réalisé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Sept",
+            "correct": true
+          },
+          {
+            "label": "Six",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0526-2",
+      "type": "mcq",
+      "prompt": "En quoi se transforme le petit Son Gohan lors de la pleine Lune ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Loup-garou",
+            "correct": false
+          },
+          {
+            "label": "Fantôme",
+            "correct": false
+          },
+          {
+            "label": "Dragon",
+            "correct": false
+          },
+          {
+            "label": "Singe géant",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0526-3",
+      "type": "mcq",
+      "prompt": "Quel est l'ancien nom autrefois donné à la planète Vegeta ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beerus",
+            "correct": false
+          },
+          {
+            "label": "Plant",
+            "correct": true
+          },
+          {
+            "label": "Namek",
+            "correct": false
+          },
+          {
+            "label": "Melmac",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0526-4",
+      "type": "mcq",
+      "prompt": "Qui a aidé à éteindre le château en feu du père de Chi-Chi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tortue Géniale",
+            "correct": true
+          },
+          {
+            "label": "Goku",
+            "correct": false
+          },
+          {
+            "label": "Bulma",
+            "correct": false
+          },
+          {
+            "label": "Drum",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

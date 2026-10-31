@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=493"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0493-1",
+      "type": "mcq",
+      "prompt": "Quel est le métier de Jessica Fletcher dans la série « Arabesque » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Écrivaine",
+            "correct": true
+          },
+          {
+            "label": "Avocate",
+            "correct": false
+          },
+          {
+            "label": "Journaliste",
+            "correct": false
+          },
+          {
+            "label": "Peintre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0493-2",
+      "type": "mcq",
+      "prompt": "Quel policier est le chevalier servant de Dee Dee Mc Call à la télévision ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Matt Helm",
+            "correct": false
+          },
+          {
+            "label": "Sam Spade",
+            "correct": false
+          },
+          {
+            "label": "Jim Phelps",
+            "correct": false
+          },
+          {
+            "label": "Rick Hunter",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0493-3",
+      "type": "mcq",
+      "prompt": "Quel personnage de feuilleton conduit une Aston-Martin jaune ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brett Sinclair",
+            "correct": true
+          },
+          {
+            "label": "Jessica Fletcher",
+            "correct": false
+          },
+          {
+            "label": "Arsène Lupin",
+            "correct": false
+          },
+          {
+            "label": "Kojak",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0493-4",
+      "type": "mcq",
+      "prompt": "Quelle est la profession de « l'Homme qui tombe à pic » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vendeur de voitures",
+            "correct": false
+          },
+          {
+            "label": "Astronaute",
+            "correct": false
+          },
+          {
+            "label": "Cascadeur",
+            "correct": true
+          },
+          {
+            "label": "Banquier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

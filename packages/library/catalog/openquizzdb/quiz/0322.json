@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=322"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0322-1",
+      "type": "mcq",
+      "prompt": "Quelle rappeuse australienne a été révélation rap en 2014 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Iggy Azalea",
+            "correct": true
+          },
+          {
+            "label": "Minzy",
+            "correct": false
+          },
+          {
+            "label": "Amber Liu",
+            "correct": false
+          },
+          {
+            "label": "Leslie Hall",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0322-2",
+      "type": "mcq",
+      "prompt": "Quelle actrice et chanteuse américaine a émancipé sa famille en 2014 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nicki Minaj",
+            "correct": false
+          },
+          {
+            "label": "Miley Cyrus",
+            "correct": false
+          },
+          {
+            "label": "Selena Gomez",
+            "correct": true
+          },
+          {
+            "label": "Hilary Duff",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0322-3",
+      "type": "mcq",
+      "prompt": "Qui a été sacré « homme le plus sexy de 2014 » par le magazine « People » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hugh Jackman",
+            "correct": false
+          },
+          {
+            "label": "Brad Pitt",
+            "correct": false
+          },
+          {
+            "label": "Tom Cruise",
+            "correct": false
+          },
+          {
+            "label": "Chris Hemsworth",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0322-4",
+      "type": "mcq",
+      "prompt": "Qui a gagné la saison 4 de « Danse avec les stars » avec Grégoire Lyonnet ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shy'm",
+            "correct": false
+          },
+          {
+            "label": "Lorie",
+            "correct": false
+          },
+          {
+            "label": "Alizée",
+            "correct": true
+          },
+          {
+            "label": "Tal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

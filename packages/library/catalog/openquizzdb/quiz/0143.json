@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=143"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0143-1",
+      "type": "mcq",
+      "prompt": "Quelle est la ville natale de l'animateur Jean-Pierre Foucault ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Montpellier",
+            "correct": false
+          },
+          {
+            "label": "Metz",
+            "correct": false
+          },
+          {
+            "label": "Marseille",
+            "correct": true
+          },
+          {
+            "label": "Menton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0143-2",
+      "type": "mcq",
+      "prompt": "Que vous proposait de passer Jean-Pierre Foucault à la télévision ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sacrée soirée",
+            "correct": true
+          },
+          {
+            "label": "Fameux défi",
+            "correct": false
+          },
+          {
+            "label": "Bon moment",
+            "correct": false
+          },
+          {
+            "label": "Unique voyage",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0143-3",
+      "type": "mcq",
+      "prompt": "Quelle académie Jean-Pierre Foucault a-t-il présenté jusqu'en 1987 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Des onze",
+            "correct": false
+          },
+          {
+            "label": "Des douze",
+            "correct": false
+          },
+          {
+            "label": "Des neuf",
+            "correct": true
+          },
+          {
+            "label": "Des cinq",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0143-4",
+      "type": "mcq",
+      "prompt": "Qui fut la première à animer « Disney Parade » avec Jean-Pierre Foucault ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Séverinne",
+            "correct": false
+          },
+          {
+            "label": "Mélanie",
+            "correct": false
+          },
+          {
+            "label": "Anne",
+            "correct": true
+          },
+          {
+            "label": "Cécile",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

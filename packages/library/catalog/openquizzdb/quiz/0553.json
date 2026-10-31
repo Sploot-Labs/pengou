@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=553"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0553-1",
+      "type": "mcq",
+      "prompt": "De quelle couleur est le corps de Bob l'éponge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jaune",
+            "correct": true
+          },
+          {
+            "label": "Blanche",
+            "correct": false
+          },
+          {
+            "label": "Rose",
+            "correct": false
+          },
+          {
+            "label": "Grise",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0553-2",
+      "type": "mcq",
+      "prompt": "Sur quelle chaîne était originalement diffusée la série « Bob l'éponge » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "NTV",
+            "correct": false
+          },
+          {
+            "label": "Nickelodeon",
+            "correct": true
+          },
+          {
+            "label": "Netflix",
+            "correct": false
+          },
+          {
+            "label": "NBC",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0553-3",
+      "type": "mcq",
+      "prompt": "Qu'est-ce Bob l'éponge aime faire avec Sandy pour passer le temps ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Du tennis",
+            "correct": false
+          },
+          {
+            "label": "Du rugby",
+            "correct": false
+          },
+          {
+            "label": "Du karaté",
+            "correct": true
+          },
+          {
+            "label": "Du foot",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0553-4",
+      "type": "mcq",
+      "prompt": "De quelle couleur sont les pantoufles de l'Homme Sirène ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rose",
+            "correct": true
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          },
+          {
+            "label": "Bleue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=388"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0388-1",
+      "type": "mcq",
+      "prompt": "Qui a été élue Miss Albigeois Midi-Pyrénées 2008 puis Miss France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Valérie Bègue",
+            "correct": false
+          },
+          {
+            "label": "Diane Leyre",
+            "correct": false
+          },
+          {
+            "label": "Chloé Mortaud",
+            "correct": true
+          },
+          {
+            "label": "Malika Ménard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0388-2",
+      "type": "mcq",
+      "prompt": "Qui a été Miss Paris 2009 et a participé à Miss France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maëva Coucke",
+            "correct": false
+          },
+          {
+            "label": "Mélody Vibert",
+            "correct": false
+          },
+          {
+            "label": "Sonia Rolland",
+            "correct": false
+          },
+          {
+            "label": "Kelly Bochenko",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0388-3",
+      "type": "mcq",
+      "prompt": "Quelle mannequin française fut la compagne de Grégory Lemarchal ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Karine Ferri",
+            "correct": true
+          },
+          {
+            "label": "Tatiana Silva",
+            "correct": false
+          },
+          {
+            "label": "Victoria Silvstedt",
+            "correct": false
+          },
+          {
+            "label": "Élodie Gossuin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0388-4",
+      "type": "mcq",
+      "prompt": "Quelle mannequin franco-algérienne était anciennement escort-girl ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Farida Khelfa",
+            "correct": false
+          },
+          {
+            "label": "Zahia Dehar",
+            "correct": true
+          },
+          {
+            "label": "Imen Noël",
+            "correct": false
+          },
+          {
+            "label": "Rym Amari",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=487"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0487-1",
+      "type": "mcq",
+      "prompt": "Quel est le nom de la famille de Bobby et de JR dans « Dallas » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Krebbs",
+            "correct": false
+          },
+          {
+            "label": "Shepard",
+            "correct": false
+          },
+          {
+            "label": "Barnes",
+            "correct": false
+          },
+          {
+            "label": "Ewing",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0487-2",
+      "type": "mcq",
+      "prompt": "Quel ami du capitaine Kirk a les oreilles pointues ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sulu",
+            "correct": false
+          },
+          {
+            "label": "Spock",
+            "correct": true
+          },
+          {
+            "label": "Sanders",
+            "correct": false
+          },
+          {
+            "label": "Scotty",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0487-3",
+      "type": "mcq",
+      "prompt": "Comment se prénomme le fidèle serviteur du célèbre Zorro ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Garcia",
+            "correct": false
+          },
+          {
+            "label": "Esteban",
+            "correct": false
+          },
+          {
+            "label": "Galindo",
+            "correct": false
+          },
+          {
+            "label": "Bernardo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0487-4",
+      "type": "mcq",
+      "prompt": "Quelle marque de voiture est conduite par Thomas Magnum ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ferrari",
+            "correct": true
+          },
+          {
+            "label": "Porsche",
+            "correct": false
+          },
+          {
+            "label": "Audi",
+            "correct": false
+          },
+          {
+            "label": "BMW",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

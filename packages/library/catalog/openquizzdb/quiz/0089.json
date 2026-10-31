@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=89"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0089-1",
+      "type": "mcq",
+      "prompt": "Quel film de Clint Eastwood est une biographie de Charlie Parker ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dizzy",
+            "correct": false
+          },
+          {
+            "label": "Parker",
+            "correct": false
+          },
+          {
+            "label": "Charlie",
+            "correct": false
+          },
+          {
+            "label": "Bird",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0089-2",
+      "type": "mcq",
+      "prompt": "Qui a réalisé en 1993 le film « Un monde parfait », avec Clint Eastwood ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oliver Stone",
+            "correct": false
+          },
+          {
+            "label": "Clint Eastwood",
+            "correct": true
+          },
+          {
+            "label": "Martin Scorsese",
+            "correct": false
+          },
+          {
+            "label": "Brian de Palma",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0089-4",
+      "type": "mcq",
+      "prompt": "Avec quelle société Clint Eastwood est-il devenu producteur en 1968 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "TriStar",
+            "correct": false
+          },
+          {
+            "label": "Brooksfilms",
+            "correct": false
+          },
+          {
+            "label": "Newsreel",
+            "correct": false
+          },
+          {
+            "label": "Malpaso",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

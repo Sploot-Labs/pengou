@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=209"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0209-1",
+      "type": "mcq",
+      "prompt": "Quel acteur a fait rencontrer son agent à Johnny Depp, alors inconnu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nicolas Cage",
+            "correct": true
+          },
+          {
+            "label": "Clint Eastwood",
+            "correct": false
+          },
+          {
+            "label": "Tom Cruise",
+            "correct": false
+          },
+          {
+            "label": "Bruce Willis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0209-2",
+      "type": "mcq",
+      "prompt": "Avec quelle brindille l'acteur Johnny Depp a-t-il eu une liaison ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kate Moss",
+            "correct": true
+          },
+          {
+            "label": "Katie Price",
+            "correct": false
+          },
+          {
+            "label": "Sienna Miller",
+            "correct": false
+          },
+          {
+            "label": "Lauren Gold",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0209-3",
+      "type": "mcq",
+      "prompt": "Qui est la mère des enfants de Johnny Depp ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kim Basinger",
+            "correct": false
+          },
+          {
+            "label": "Penélope Cruz",
+            "correct": false
+          },
+          {
+            "label": "Angelina Jolie",
+            "correct": false
+          },
+          {
+            "label": "Vanessa Paradis",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0209-4",
+      "type": "mcq",
+      "prompt": "Quelle ex petite-amie de Johnny Depp a affirmé sa bisexualité en 2010 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vanessa Paradis",
+            "correct": false
+          },
+          {
+            "label": "Jennifer Grey",
+            "correct": false
+          },
+          {
+            "label": "Sherilyn Fenn",
+            "correct": false
+          },
+          {
+            "label": "Amber Heard",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

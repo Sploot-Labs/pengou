@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=115"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0115-1",
+      "type": "mcq",
+      "prompt": "Qui n'en finit plus de mourir dans les premières saisons de South Park ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stan",
+            "correct": false
+          },
+          {
+            "label": "Kenny",
+            "correct": true
+          },
+          {
+            "label": "Eric",
+            "correct": false
+          },
+          {
+            "label": "Kyle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0115-2",
+      "type": "mcq",
+      "prompt": "Avec lequel des garçons de sa bande fait souvent équipe Scoubidou ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Logan",
+            "correct": false
+          },
+          {
+            "label": "Sammy",
+            "correct": true
+          },
+          {
+            "label": "Fred",
+            "correct": false
+          },
+          {
+            "label": "Roger",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0115-3",
+      "type": "mcq",
+      "prompt": "Qui est le plus âgé des enfants de la famille Simpson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maggie",
+            "correct": false
+          },
+          {
+            "label": "Lisa",
+            "correct": false
+          },
+          {
+            "label": "Marge",
+            "correct": false
+          },
+          {
+            "label": "Bart",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0115-4",
+      "type": "mcq",
+      "prompt": "Quel animal est Capucin, le petit compagnon de Candy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lapin",
+            "correct": false
+          },
+          {
+            "label": "Raton laveur",
+            "correct": true
+          },
+          {
+            "label": "Chat",
+            "correct": false
+          },
+          {
+            "label": "Hamster",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

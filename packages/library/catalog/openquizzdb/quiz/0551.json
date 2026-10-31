@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=551"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0551-1",
+      "type": "mcq",
+      "prompt": "En quelle année fut diffusée pour la première fois « Secret Story » sur TF1 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "En 2010",
+            "correct": false
+          },
+          {
+            "label": "En 2008",
+            "correct": false
+          },
+          {
+            "label": "En 2009",
+            "correct": false
+          },
+          {
+            "label": "En 2007",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0551-2",
+      "type": "mcq",
+      "prompt": "Quel personnage invisible de « Secret Story » s'adresse aux candidats ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Voix",
+            "correct": true
+          },
+          {
+            "label": "Le Maître",
+            "correct": false
+          },
+          {
+            "label": "Le Gardien",
+            "correct": false
+          },
+          {
+            "label": "Le Producteur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0551-3",
+      "type": "mcq",
+      "prompt": "Que peut faire un candidat qui pense avoir trouvé un secret ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Buzzer",
+            "correct": true
+          },
+          {
+            "label": "Chanter",
+            "correct": false
+          },
+          {
+            "label": "Danser",
+            "correct": false
+          },
+          {
+            "label": "Crier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0551-4",
+      "type": "mcq",
+      "prompt": "Sur les principes de quelle autre émission est basée « Secret Story » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Golden Show",
+            "correct": false
+          },
+          {
+            "label": "Bachelor",
+            "correct": false
+          },
+          {
+            "label": "Dilemme",
+            "correct": false
+          },
+          {
+            "label": "Big Brother",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

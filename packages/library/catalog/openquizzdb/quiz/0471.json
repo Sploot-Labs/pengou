@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=471"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0471-1",
+      "type": "mcq",
+      "prompt": "De quelle émission télévisée Donald Trump a-t-il été l'animateur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spin City",
+            "correct": false
+          },
+          {
+            "label": "The Apprentice",
+            "correct": true
+          },
+          {
+            "label": "WWE Raw",
+            "correct": false
+          },
+          {
+            "label": "The Job",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0471-2",
+      "type": "mcq",
+      "prompt": "Contre qui Donald Trump a-t-il gagné l'élection présidentielle de 2016 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Barack Obama",
+            "correct": false
+          },
+          {
+            "label": "Hillary Clinton",
+            "correct": true
+          },
+          {
+            "label": "George W. Bush",
+            "correct": false
+          },
+          {
+            "label": "Bill Clinton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0471-3",
+      "type": "mcq",
+      "prompt": "Pour quel sport Donald Trump a-t-il acheté un terrain à Balmedie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ski",
+            "correct": false
+          },
+          {
+            "label": "Golf",
+            "correct": true
+          },
+          {
+            "label": "Rugby",
+            "correct": false
+          },
+          {
+            "label": "Squash",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0471-4",
+      "type": "mcq",
+      "prompt": "Pour quel personnage fictif Bob Gale s'est-il inspiré de Donald Trump ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Biff Tannen",
+            "correct": true
+          },
+          {
+            "label": "Sam Baines",
+            "correct": false
+          },
+          {
+            "label": "Emmett Brown",
+            "correct": false
+          },
+          {
+            "label": "Marty McFly",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

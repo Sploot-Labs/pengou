@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=497"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0497-1",
+      "type": "mcq",
+      "prompt": "Quels objets sont à la base du jeu télévisé « À prendre ou à laisser » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cadeaux",
+            "correct": false
+          },
+          {
+            "label": "Jetons",
+            "correct": false
+          },
+          {
+            "label": "Boules",
+            "correct": false
+          },
+          {
+            "label": "Boîtes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0497-2",
+      "type": "mcq",
+      "prompt": "Dans quel jeu d'aventure plusieurs binômes voyagent-ils en auto-stop ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Intervilles",
+            "correct": false
+          },
+          {
+            "label": "Ninja Warrior",
+            "correct": false
+          },
+          {
+            "label": "Fear Factor",
+            "correct": false
+          },
+          {
+            "label": "Pékin Express",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0497-3",
+      "type": "mcq",
+      "prompt": "Dans quel jeu télévisé fallait-il éviter de piocher une boule noire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pyramide",
+            "correct": false
+          },
+          {
+            "label": "Motus",
+            "correct": true
+          },
+          {
+            "label": "L'Or à l'appel",
+            "correct": false
+          },
+          {
+            "label": "Le Bigdil",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0497-4",
+      "type": "mcq",
+      "prompt": "Sur quelle chaîne se déroule « Le Grand Concours des animateurs » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "France 2",
+            "correct": false
+          },
+          {
+            "label": "C8",
+            "correct": false
+          },
+          {
+            "label": "Canal+",
+            "correct": false
+          },
+          {
+            "label": "TF1",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

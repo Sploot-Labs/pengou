@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=450"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0450-1",
+      "type": "mcq",
+      "prompt": "Sur quelle chaîne de télévision Les Nuls ont-ils débuté ?",
+      "payload": {
+        "options": [
+          {
+            "label": "TF1",
+            "correct": false
+          },
+          {
+            "label": "France 2",
+            "correct": false
+          },
+          {
+            "label": "M6",
+            "correct": false
+          },
+          {
+            "label": "Canal+",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0450-2",
+      "type": "mcq",
+      "prompt": "Quelle comédie a été écrite et interprétée par Les Nuls ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Dîners de cons",
+            "correct": false
+          },
+          {
+            "label": "La Cité de la Peur",
+            "correct": true
+          },
+          {
+            "label": "Big",
+            "correct": false
+          },
+          {
+            "label": "Les Visiteurs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0450-3",
+      "type": "mcq",
+      "prompt": "Dans quelle émission Les Nuls présentaient-ils un faux JT ?",
+      "payload": {
+        "options": [
+          {
+            "label": "NPA",
+            "correct": false
+          },
+          {
+            "label": "Ici Paris",
+            "correct": false
+          },
+          {
+            "label": "Groland",
+            "correct": false
+          },
+          {
+            "label": "Les Nuls, l'émission",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0450-4",
+      "type": "mcq",
+      "prompt": "Quel membre des Nuls est décédé après la création du groupe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alain Chabat",
+            "correct": false
+          },
+          {
+            "label": "Coluche",
+            "correct": false
+          },
+          {
+            "label": "Bruno Carette",
+            "correct": true
+          },
+          {
+            "label": "Chantal Lauby",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

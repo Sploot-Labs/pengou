@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=587"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0587-1",
+      "type": "mcq",
+      "prompt": "Qui a annoncé que son mari, Orlando Bloom, était fétichiste des pieds ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jessica Clarke",
+            "correct": false
+          },
+          {
+            "label": "Hannah Davis",
+            "correct": false
+          },
+          {
+            "label": "Rhea Durham",
+            "correct": false
+          },
+          {
+            "label": "Miranda Kerr",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0587-2",
+      "type": "mcq",
+      "prompt": "Quelle chanteuse et actrice est surnommée « la bomba latina » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Selena Gomez",
+            "correct": false
+          },
+          {
+            "label": "Shakira",
+            "correct": false
+          },
+          {
+            "label": "Mariah Carey",
+            "correct": false
+          },
+          {
+            "label": "Jennifer Lopez",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0587-3",
+      "type": "mcq",
+      "prompt": "Quel chanteur est père de huit enfants nés de cinq mères différentes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lionel Richie",
+            "correct": false
+          },
+          {
+            "label": "Phil Collins",
+            "correct": false
+          },
+          {
+            "label": "Mick Jagger",
+            "correct": false
+          },
+          {
+            "label": "Rod Stewart",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0587-4",
+      "type": "mcq",
+      "prompt": "À quel chanteur Justin Bieber voue-t-il un culte tout particulier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Otis Rush",
+            "correct": false
+          },
+          {
+            "label": "Luther Johnson",
+            "correct": false
+          },
+          {
+            "label": "Jimi Hendrix",
+            "correct": true
+          },
+          {
+            "label": "Elmore James",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

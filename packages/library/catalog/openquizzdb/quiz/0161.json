@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=161"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0161-1",
+      "type": "mcq",
+      "prompt": "Sur quelle chanson Valérie Lemercier a-t-elle ouvert les Césars 2007 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maldon",
+            "correct": true
+          },
+          {
+            "label": "Allumer le feu",
+            "correct": false
+          },
+          {
+            "label": "Aimer",
+            "correct": false
+          },
+          {
+            "label": "Tout nu et tout bronzé",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0161-3",
+      "type": "mcq",
+      "prompt": "Quelle comédie réunit Denis Podalydès et Valérie Lemercier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dieu seul me voit",
+            "correct": false
+          },
+          {
+            "label": "Adieu Berthe",
+            "correct": true
+          },
+          {
+            "label": "Liberté-Oléron",
+            "correct": false
+          },
+          {
+            "label": "La Magie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0161-4",
+      "type": "mcq",
+      "prompt": "Dans quelle comédie est-elle DRH dans une compagnie maritime ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Adieu Berthe",
+            "correct": false
+          },
+          {
+            "label": "Bienvenue à bord",
+            "correct": true
+          },
+          {
+            "label": "Beur sur la ville",
+            "correct": false
+          },
+          {
+            "label": "Monte Carlo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

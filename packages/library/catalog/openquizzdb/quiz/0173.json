@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=173"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0173-1",
+      "type": "mcq",
+      "prompt": "Dans quel État des États-Unis est né Barack Obama ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hawaï",
+            "correct": true
+          },
+          {
+            "label": "Colorado",
+            "correct": false
+          },
+          {
+            "label": "Arkansas",
+            "correct": false
+          },
+          {
+            "label": "Californie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0173-2",
+      "type": "mcq",
+      "prompt": "Quelle était la profession de Barack Obama avant de devenir président ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Programmeur",
+            "correct": false
+          },
+          {
+            "label": "Consultant financier",
+            "correct": true
+          },
+          {
+            "label": "Agent du FBI",
+            "correct": false
+          },
+          {
+            "label": "Prêtre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0173-3",
+      "type": "mcq",
+      "prompt": "Qui a chanté l'hymne national pour l'investiture de Barack Obama ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beyoncé",
+            "correct": true
+          },
+          {
+            "label": "Rihanna",
+            "correct": false
+          },
+          {
+            "label": "Madonna",
+            "correct": false
+          },
+          {
+            "label": "Britney Spears",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0173-4",
+      "type": "mcq",
+      "prompt": "De quel pays le père de Barack Obama était-il originaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Afrique du Sud",
+            "correct": false
+          },
+          {
+            "label": "Mozambique",
+            "correct": false
+          },
+          {
+            "label": "Congo",
+            "correct": false
+          },
+          {
+            "label": "Kenya",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

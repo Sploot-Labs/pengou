@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=559"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0559-1",
+      "type": "mcq",
+      "prompt": "Quel nom Mike Horn a-t-il donné à son tour du monde par l'équateur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cap Zero",
+            "correct": false
+          },
+          {
+            "label": "Latitude Zéro",
+            "correct": true
+          },
+          {
+            "label": "Land Zero",
+            "correct": false
+          },
+          {
+            "label": "Ground Zero",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0559-2",
+      "type": "mcq",
+      "prompt": "Dans quelle expédition Mike Horn fit-il le tour du cercle polaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Free to Run",
+            "correct": false
+          },
+          {
+            "label": "Taris",
+            "correct": false
+          },
+          {
+            "label": "Arktos",
+            "correct": true
+          },
+          {
+            "label": "Fabuloso",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0559-3",
+      "type": "mcq",
+      "prompt": "Combien d'années a duré l'expédition Pangaea, menée par Mike Horn ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deux ans",
+            "correct": false
+          },
+          {
+            "label": "Cinq ans",
+            "correct": false
+          },
+          {
+            "label": "Trois ans",
+            "correct": false
+          },
+          {
+            "label": "Quatre ans",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0559-4",
+      "type": "mcq",
+      "prompt": "En combien de jours Mike Horn a-t-il traversé le Groenland ?",
+      "payload": {
+        "options": [
+          {
+            "label": "60 jours",
+            "correct": false
+          },
+          {
+            "label": "45 jours",
+            "correct": false
+          },
+          {
+            "label": "15 jours",
+            "correct": true
+          },
+          {
+            "label": "30 jours",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

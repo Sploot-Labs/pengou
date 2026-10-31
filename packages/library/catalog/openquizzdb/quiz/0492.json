@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=492"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0492-1",
+      "type": "mcq",
+      "prompt": "À bord de quel engin voyagent les candidats de la « Chasse aux trésors » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hélicoptère",
+            "correct": true
+          },
+          {
+            "label": "Hydravion",
+            "correct": false
+          },
+          {
+            "label": "Taxi",
+            "correct": false
+          },
+          {
+            "label": "Sous-marin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0492-2",
+      "type": "mcq",
+      "prompt": "Qui a animé « Questions pour un champion » durant 28 ans ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Philippe Risoli",
+            "correct": false
+          },
+          {
+            "label": "Julien Lepers",
+            "correct": true
+          },
+          {
+            "label": "Vincent Perrot",
+            "correct": false
+          },
+          {
+            "label": "Samuel Étienne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0492-3",
+      "type": "mcq",
+      "prompt": "Quel jeu télévisé comprend une quête de clés et une salle du trésor ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Koh-Lanta",
+            "correct": false
+          },
+          {
+            "label": "Ninja Warrior",
+            "correct": false
+          },
+          {
+            "label": "Money Drop",
+            "correct": false
+          },
+          {
+            "label": "Fort Boyard",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0492-4",
+      "type": "mcq",
+      "prompt": "Quel jeu proposait 250 000 € répartis en 50 liasses indivisibles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Wall",
+            "correct": false
+          },
+          {
+            "label": "Boom",
+            "correct": false
+          },
+          {
+            "label": "Money Drop",
+            "correct": true
+          },
+          {
+            "label": "Le Bigdil",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=529"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0529-1",
+      "type": "mcq",
+      "prompt": "Avec quel ancien chanteur de NSYNC Cameron Diaz a-t-elle vécu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chris Kirkpatrick",
+            "correct": false
+          },
+          {
+            "label": "Joey Fatone",
+            "correct": false
+          },
+          {
+            "label": "Justin Timberlake",
+            "correct": true
+          },
+          {
+            "label": "Lance Bass",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0529-2",
+      "type": "mcq",
+      "prompt": "Qui a vendu un baiser 350 000 euros pour une bonne cause ?",
+      "payload": {
+        "options": [
+          {
+            "label": "George Clooney",
+            "correct": true
+          },
+          {
+            "label": "Matt Damon",
+            "correct": false
+          },
+          {
+            "label": "Andy Garcia",
+            "correct": false
+          },
+          {
+            "label": "Brad Pitt",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0529-3",
+      "type": "mcq",
+      "prompt": "Quel tennisman américain a été marié à Brooke Shields ?",
+      "payload": {
+        "options": [
+          {
+            "label": "John McEnroe",
+            "correct": false
+          },
+          {
+            "label": "Björn Borg",
+            "correct": false
+          },
+          {
+            "label": "André Agassi",
+            "correct": true
+          },
+          {
+            "label": "Jimmy Connors",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0529-4",
+      "type": "mcq",
+      "prompt": "Quel champion de la terre battue est né sur l'île de Majorque ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Marcelo Melo",
+            "correct": false
+          },
+          {
+            "label": "Andy Murray",
+            "correct": false
+          },
+          {
+            "label": "Rafael Nadal",
+            "correct": true
+          },
+          {
+            "label": "Roger Federer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

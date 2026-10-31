@@ -15,6 +15,7 @@ import { existsSync } from 'node:fs'
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import { readCatalog } from '../src/index.ts'
+import { ADULT_QUESTIONS, EXCLUDED, QUESTION_THEME, QUIZZES } from './openquizzdb-plans.ts'
 
 const SITE = 'https://www.openquizzdb.org'
 const OUT_DIR = fileURLToPath(new URL('../catalog/openquizzdb', import.meta.url))
@@ -24,9 +25,8 @@ const quizPage = (id: number) => `${SITE}/download.php?id=${id}`
 const PREFIX = 'oqdb'
 
 // Catégories OpenQuizzDB (ancres de la page de liste) vers thèmes Pengou. Les catégories absentes
-// sont écartées : ADULTES (contenu pour adultes), CELEBRITES (people), TELEVISION (pas de thème
-// correspondant), DEFI, MOTSCROISES, ORTHOQUIZZ et QUADRIQUIZZ (jeux de lettres et de calcul dont
-// le format ne se prête pas à un QCM de quiz en direct).
+// sont écartées : ADULTES (contenu pour adultes), DEFI, MOTSCROISES, ORTHOQUIZZ et QUADRIQUIZZ (jeux
+// de lettres et de calcul dont le format ne se prête pas à un QCM de quiz en direct).
 const CATEGORY_THEME: Record<string, string> = {
   CINEMA: 'cinema',
   MUSIQUE: 'musique',
@@ -50,6 +50,8 @@ const CATEGORY_THEME: Record<string, string> = {
   QUOTIDIEN: 'culture-generale',
   ALPHAQUIZZ: 'culture-generale',
   LOISIRS: 'culture-generale',
+  TELEVISION: 'television',
+  CELEBRITES: 'people',
 }
 
 // Exceptions par quiz source (identifiant OpenQuizzDB) au thème de sa catégorie.
@@ -74,51 +76,8 @@ const ADULT_QUIZZES = new Set<number>([
 // Les fichiers OpenQuizzDB ne portent pas de niveau : toutes les questions sont classées « moyen ».
 const DIFFICULTY = 'moyen'
 
-// Quiz Pengou composés à partir de quiz source (4 questions chacun), 10 à 20 questions par quiz.
-type QuizPlan = { slug: string; title: string; theme: string; sources: number[] }
-const QUIZZES: QuizPlan[] = [
-  { slug: 'cinema-francais', title: 'Stars du cinéma français', theme: 'cinema', sources: [35, 47, 107, 65] },
-  { slug: 'sagas-sf', title: 'Sagas de science-fiction', theme: 'cinema', sources: [37, 408, 384, 389] },
-  { slug: 'chanson-francaise', title: 'Chanson française', theme: 'musique', sources: [77, 29, 83, 417] },
-  { slug: 'new-wave', title: 'Les années new wave', theme: 'musique', sources: [313, 307, 429, 562] },
-  { slug: 'football', title: 'Football', theme: 'sport', sources: [87, 99, 502, 400] },
-  { slug: 'olympisme-tennis', title: 'Olympisme et tennis', theme: 'sport', sources: [261, 437, 247, 253] },
-  {
-    slug: 'civilisations-anciennes',
-    title: 'Civilisations anciennes',
-    theme: 'histoire',
-    sources: [453, 199, 550, 127, 513],
-  },
-  { slug: 'guerres-et-dates', title: 'Batailles et grandes dates', theme: 'histoire', sources: [422, 394, 420, 518] },
-  { slug: 'tour-europe', title: "Tour d'Europe", theme: 'geographie', sources: [257, 359, 454, 353, 365] },
-  { slug: 'villes-iles-lacs', title: 'Villes, îles et lacs', theme: 'geographie', sources: [360, 542, 428, 91] },
-  { slug: 'chimie-corps', title: 'Chimie, corps humain et mesures', theme: 'sciences', sources: [380, 375, 557, 419] },
-  { slug: 'planetes-inventeurs', title: 'Planètes et inventeurs', theme: 'sciences', sources: [57, 63, 139, 503] },
-  { slug: 'romans-populaires', title: 'Romans populaires', theme: 'litterature', sources: [181, 312, 85, 397] },
-  {
-    slug: 'bande-dessinee',
-    title: 'Bande dessinée',
-    theme: 'litterature',
-    sources: [464, 469, 459, 105, 567],
-  },
-  { slug: 'art-musees', title: 'Art et musées', theme: 'art', sources: [405, 377, 466, 145, 399] },
-  { slug: 'animaux-du-monde', title: 'Animaux du monde', theme: 'nature', sources: [545, 383, 207, 491] },
-  { slug: 'arbres-fleurs-volcans', title: 'Arbres, fleurs et volcans', theme: 'nature', sources: [213, 370, 563, 45] },
-  { slug: 'fromages-desserts', title: 'Fromages et desserts', theme: 'gastronomie', sources: [205, 201, 211, 235] },
-  { slug: 'cuisines-ailleurs', title: "Cuisines d'ailleurs", theme: 'gastronomie', sources: [519, 523, 445, 390] },
-  {
-    slug: 'alphaquizz',
-    title: 'Culture générale de C à G',
-    theme: 'culture-generale',
-    sources: [28, 40, 52, 64, 76],
-  },
-  {
-    slug: 'maison-quotidien',
-    title: 'La maison et le quotidien',
-    theme: 'culture-generale',
-    sources: [604, 608, 467, 472],
-  },
-]
+// Questions isolées pour adultes (liste dans openquizzdb-plans.ts).
+const ADULT_QUESTION_IDS = new Set(ADULT_QUESTIONS)
 
 type ListingEntry = { id: number; category: string; title: string }
 type RawQuestion = { id: number; question: string; propositions: string[]; réponse: string }
@@ -206,6 +165,8 @@ type OutQuestion = {
 
 // Une question source devient un QCM ; l'ordre des propositions est celui du fichier source.
 function convertQuestion(entry: ListingEntry, theme: string, q: RawQuestion): OutQuestion | string {
+  const id = `${PREFIX}-${String(entry.id).padStart(4, '0')}-${q.id}`
+  if (id in EXCLUDED) return `exclue (${EXCLUDED[id]})`
   const prompt = clean(q.question)
   const labels = q.propositions.map(clean)
   const answer = clean(q.réponse)
@@ -214,16 +175,31 @@ function convertQuestion(entry: ListingEntry, theme: string, q: RawQuestion): Ou
   if (labels.some((l) => !l || l.length > 200)) return 'proposition vide ou trop longue'
   if (new Set(labels).size !== labels.length) return 'propositions en double'
   if (labels.filter((l) => l === answer).length !== 1) return 'réponse absente des propositions'
+  if (labels.some((l) => l.length > 25)) return 'proposition trop longue pour une tuile'
   return {
-    id: `${PREFIX}-${String(entry.id).padStart(4, '0')}-${q.id}`,
+    id,
     type: 'mcq',
     prompt,
     payload: { options: labels.map((label) => ({ label, correct: label === answer })) },
-    theme,
+    theme: QUESTION_THEME[id] ?? theme,
     difficulty: DIFFICULTY,
     language: 'fr',
-    audience: ADULT_QUIZZES.has(entry.id) ? 'adultes' : 'tous',
+    audience: ADULT_QUIZZES.has(entry.id) || ADULT_QUESTION_IDS.has(id) ? 'adultes' : 'tous',
   }
+}
+
+type Delivered = { prompt: string; options: { label: string; correct: boolean }[] }
+
+// Questions déjà livrées (packs actuels de catalog/openquizzdb), à lire avant de régénérer le dossier.
+async function readDelivered(dir: string): Promise<Map<string, Delivered>> {
+  const out = new Map<string, Delivered>()
+  if (!existsSync(dir)) return out
+  for (const sub of await readdir(dir, { recursive: true })) {
+    if (!sub.endsWith('.json')) continue
+    const pack = JSON.parse(await readFile(`${dir}/${sub}`, 'utf8')) as { questions: OutQuestion[] }
+    for (const q of pack.questions) out.set(q.id, { prompt: q.prompt, options: q.payload.options })
+  }
+  return out
 }
 
 async function main() {
@@ -231,6 +207,7 @@ async function main() {
   const cache = i > 0 ? process.argv[i + 1] : undefined
   if (!cache) throw new Error('usage : convert-openquizzdb.ts --cache <dossier hors du dépôt>')
   await mkdir(cache, { recursive: true })
+  const delivered = await readDelivered(OUT_DIR)
 
   const listing = parseListing(await cached(`${cache}/listing.html`, () => fetchText(`${SITE}/listing/`)))
   const selected = listing.filter((e) => e.category in CATEGORY_THEME)
@@ -238,7 +215,10 @@ async function main() {
 
   // Énoncés en double d'un quiz source à l'autre : seule la première occurrence (ordre des numéros
   // de quiz source) est gardée.
+  // Les questions livrées amorcent la table : elles gagnent le dédoublonnage quel que soit le numéro
+  // de leur quiz source.
   const seenPrompts = new Map<string, string>()
+  for (const [id, d] of delivered) if (!(id in EXCLUDED)) seenPrompts.set(normalizePrompt(d.prompt), id)
   const questionsBySource = new Map<number, OutQuestion[]>()
   const authors = new Map<number, string>()
   const credits: Credit[] = []
@@ -255,7 +235,7 @@ async function main() {
       }
       const key = normalizePrompt(out.prompt)
       const first = seenPrompts.get(key)
-      if (first) {
+      if (first && first !== out.id) {
         console.warn(`${out.id} écartée : même énoncé que ${first}`)
         duplicates++
         continue
@@ -271,6 +251,38 @@ async function main() {
   }
   console.log(`${duplicates} questions écartées comme doublons`)
 
+  // Gel du livré : une question déjà livrée (hors EXCLUDED) doit exister en ligne à l'identique, et
+  // son quiz source doit toujours figurer dans la liste.
+  const converted = new Map<string, OutQuestion>()
+  const sourceOf = new Map<string, number>()
+  for (const [sourceId, qs] of questionsBySource) {
+    for (const q of qs) {
+      converted.set(q.id, q)
+      sourceOf.set(q.id, sourceId)
+    }
+  }
+  const listed = new Set(listing.map((e) => e.id))
+  const missingSources = new Set<number>()
+  const changed: string[] = []
+  for (const [id, d] of delivered) {
+    if (id in EXCLUDED) continue
+    const sourceId = Number(id.split('-')[1])
+    if (!listed.has(sourceId)) missingSources.add(sourceId)
+    const q = converted.get(id)
+    const same =
+      q &&
+      q.prompt === d.prompt &&
+      q.payload.options.length === d.options.length &&
+      q.payload.options.every((o, k) => o.label === d.options[k].label && o.correct === d.options[k].correct)
+    if (!same) changed.push(id)
+  }
+  if (missingSources.size > 0) {
+    throw new Error(`quiz source livrés absents de la liste en ligne : ${[...missingSources].join(', ')}`)
+  }
+  if (changed.length > 0) {
+    throw new Error(`questions livrées manquantes ou modifiées en ligne : ${changed.join(', ')}`)
+  }
+
   // Un pack par quiz composé (ses questions et le quiz) et un pack par quiz source restant : la source
   // d'un pack s'applique à toutes ses questions, ce qui permet de citer le rédacteur et la page du
   // quiz source sur chaque question.
@@ -278,12 +290,16 @@ async function main() {
   await mkdir(`${OUT_DIR}/composes`, { recursive: true })
   await mkdir(`${OUT_DIR}/quiz`, { recursive: true })
   const used = new Set<number>()
+  const usedQuestions = new Set<string>()
   let total = 0
   for (const plan of QUIZZES) {
+    if (!plan.sources === !plan.questions) {
+      throw new Error(`quiz « ${plan.slug} » : exactement un de « sources » et « questions » est attendu`)
+    }
     const titles: string[] = []
     const questions: OutQuestion[] = []
     const planAuthors = new Set<string>()
-    for (const id of plan.sources) {
+    for (const id of plan.sources ?? []) {
       const qs = questionsBySource.get(id)
       const entry = listing.find((e) => e.id === id)
       if (!qs || !entry) throw new Error(`quiz « ${plan.slug} » : quiz source ${id} indisponible`)
@@ -296,14 +312,30 @@ async function main() {
       questions.push(...qs)
       planAuthors.add(authors.get(id) ?? '')
     }
+    for (const qid of plan.questions ?? []) {
+      const q = converted.get(qid)
+      const sourceId = sourceOf.get(qid)
+      if (!q || sourceId === undefined) throw new Error(`quiz « ${plan.slug} » : question ${qid} indisponible`)
+      questions.push(q)
+      planAuthors.add(authors.get(sourceId) ?? '')
+    }
+    for (const q of questions) {
+      if (usedQuestions.has(q.id)) throw new Error(`quiz « ${plan.slug} » : question ${q.id} déjà utilisée`)
+      usedQuestions.add(q.id)
+    }
     if (questions.length < 10 || questions.length > 20) {
       throw new Error(`quiz « ${plan.slug} » : ${questions.length} questions (10 à 20 attendues)`)
     }
     const list = `${titles.slice(0, -1).join(', ')} et ${titles.at(-1)}`
+    const description =
+      plan.description ??
+      (plan.sources
+        ? `D'après les quiz OpenQuizzDB ${list}.`
+        : `D'après des questions OpenQuizzDB de ${[...planAuthors].join(', ')}.`)
     const quiz = {
       id: `${PREFIX}-quiz-${plan.slug}`,
       title: plan.title,
-      description: `D'après les quiz OpenQuizzDB ${list}.`,
+      description,
       theme: plan.theme,
       difficulty: DIFFICULTY,
       language: 'fr',
@@ -316,15 +348,17 @@ async function main() {
 `)
     total += questions.length
   }
-  for (const [id, questions] of questionsBySource) {
-    if (used.has(id)) continue
+  let rest = 0
+  for (const [id, all] of questionsBySource) {
+    const questions = all.filter((q) => !usedQuestions.has(q.id))
+    if (questions.length === 0) continue
+    rest++
     const source = { name: `OpenQuizzDB, ${authors.get(id)}`, license: LICENSE, url: quizPage(id) }
     const pack = { source, questions, quizzes: [] }
     await writeFile(`${OUT_DIR}/quiz/${String(id).padStart(4, '0')}.json`, `${JSON.stringify(pack, null, 2)}
 `)
     total += questions.length
   }
-  const rest = questionsBySource.size - used.size
   console.log(`${total} questions, ${QUIZZES.length} quiz composés, ${rest} packs de quiz source`)
   await writeFile(`${OUT_DIR}/LICENSE.md`, licenseFile(credits))
 
@@ -358,8 +392,10 @@ proposé sous licence Creative Commons CC BY-SA Attribution-ShareAlike 4.0 Inter
 Les fichiers de ce dossier sont une adaptation des quiz d'origine, produite par le script
 \`packages/library/scripts/convert-openquizzdb.ts\` : conversion au format des packs Pengou,
 classement par thème, difficulté (« moyen » par défaut, la source n'en indiquant pas) et public,
-regroupement en quiz de 10 à 20 questions, retrait des anecdotes, des liens Wikipédia et des
-questions dont l'énoncé figure déjà dans un quiz source de numéro inférieur. Le texte
+regroupement en quiz de 10 à 20 questions (quiz source entiers ou questions choisies), retrait des
+anecdotes, des liens Wikipédia, des questions dont l'énoncé figure déjà dans un quiz source de
+numéro inférieur et des questions dépassées ou erronées (liste dans
+\`scripts/openquizzdb-plans.ts\`), reclassement de certaines questions dans un autre thème. Le texte
 des questions et des propositions n'est pas modifié, hormis la normalisation des espaces.
 
 Cette adaptation est diffusée sous la même licence, CC BY-SA 4.0. Elle ne relève pas de la

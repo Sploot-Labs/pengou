@@ -10,5 +10,7 @@
   { "id": "nature", "label": "Nature" },
   { "id": "gastronomie", "label": "Gastronomie" },
   { "id": "jeux-video", "label": "Jeux vidéo" },
-  { "id": "culture-generale", "label": "Culture générale" }
+  { "id": "culture-generale", "label": "Culture générale" },
+  { "id": "television", "label": "Télévision" },
+  { "id": "people", "label": "People" }
 ]

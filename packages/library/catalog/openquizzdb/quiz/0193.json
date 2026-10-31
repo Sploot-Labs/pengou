@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=193"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0193-1",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur des cheveux de Miranda dans « Sex and the City » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blonde",
+            "correct": false
+          },
+          {
+            "label": "Noire",
+            "correct": false
+          },
+          {
+            "label": "Rousse",
+            "correct": true
+          },
+          {
+            "label": "Brune",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0193-2",
+      "type": "mcq",
+      "prompt": "Pour quelle espèce a-t-on créé une langue artificielle dans « Star Trek » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sylvidres",
+            "correct": false
+          },
+          {
+            "label": "Vulcains",
+            "correct": false
+          },
+          {
+            "label": "Klingons",
+            "correct": true
+          },
+          {
+            "label": "Romuliens",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0193-3",
+      "type": "mcq",
+      "prompt": "Quel est le nom de la famille de Buffy dans « Buffy contre les vampires » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Summers",
+            "correct": true
+          },
+          {
+            "label": "Sanders",
+            "correct": false
+          },
+          {
+            "label": "Bouwers",
+            "correct": false
+          },
+          {
+            "label": "Rogers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0193-4",
+      "type": "mcq",
+      "prompt": "Qui est le créateur de la série télévisée américaine à succès « Alias » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "J.J. Williams",
+            "correct": false
+          },
+          {
+            "label": "J.J. Abrams",
+            "correct": true
+          },
+          {
+            "label": "J.J. Lionel",
+            "correct": false
+          },
+          {
+            "label": "J.J. Morgan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=187"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0187-1",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur du maillot des sauveteurs dans « Alerte à Malibu » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rouge",
+            "correct": true
+          },
+          {
+            "label": "Bleue",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0187-2",
+      "type": "mcq",
+      "prompt": "Quelle héroïne de « Ma sorcière bien aimée » est mariée à Jean-Pierre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Endora",
+            "correct": false
+          },
+          {
+            "label": "Serena",
+            "correct": false
+          },
+          {
+            "label": "Tabatha",
+            "correct": false
+          },
+          {
+            "label": "Samantha",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0187-3",
+      "type": "mcq",
+      "prompt": "Pour qui travaillent les « Drôles de dames » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Charlie",
+            "correct": true
+          },
+          {
+            "label": "Clayton",
+            "correct": false
+          },
+          {
+            "label": "Calvin",
+            "correct": false
+          },
+          {
+            "label": "Chester",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0187-4",
+      "type": "mcq",
+      "prompt": "Qui est le plus costaud des héros de l' « Agence tous risques » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Looping",
+            "correct": false
+          },
+          {
+            "label": "Futé",
+            "correct": false
+          },
+          {
+            "label": "Hannibal",
+            "correct": false
+          },
+          {
+            "label": "Barracuda",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

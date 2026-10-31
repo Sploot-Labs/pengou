@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=259"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0259-1",
+      "type": "mcq",
+      "prompt": "Quel présentateur est un fin spécialiste des familles royales ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Denis Brogniart",
+            "correct": false
+          },
+          {
+            "label": "Michel Drucker",
+            "correct": false
+          },
+          {
+            "label": "Gérard Holtz",
+            "correct": false
+          },
+          {
+            "label": "Stéphane Bern",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0259-2",
+      "type": "mcq",
+      "prompt": "Quel animateur télé est incontestablement associé à « Koh-Lanta » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nikos Aliagas",
+            "correct": false
+          },
+          {
+            "label": "Stéphane Bern",
+            "correct": false
+          },
+          {
+            "label": "Denis Brogniart",
+            "correct": true
+          },
+          {
+            "label": "Michel Field",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0259-3",
+      "type": "mcq",
+      "prompt": "Qui a présenté jusque 2018 le « Grand Concours des Animateurs » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Estelle Denis",
+            "correct": false
+          },
+          {
+            "label": "Nathalie Simon",
+            "correct": false
+          },
+          {
+            "label": "Carole Rousseau",
+            "correct": true
+          },
+          {
+            "label": "Sophie Favier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0259-4",
+      "type": "mcq",
+      "prompt": "Qui a dirigé depuis 2003 les candidats de « Fort Boyard » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michel Field",
+            "correct": false
+          },
+          {
+            "label": "Florian Gazan",
+            "correct": false
+          },
+          {
+            "label": "Frédéric Lopez",
+            "correct": false
+          },
+          {
+            "label": "Olivier Minne",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

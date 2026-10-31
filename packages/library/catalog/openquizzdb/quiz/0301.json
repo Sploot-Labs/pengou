@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=301"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0301-1",
+      "type": "mcq",
+      "prompt": "Avec quel objet Salamanca communique-t-il dans « Breaking Bad » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Clavier",
+            "correct": false
+          },
+          {
+            "label": "Sonnette",
+            "correct": true
+          },
+          {
+            "label": "Marqueur",
+            "correct": false
+          },
+          {
+            "label": "Trompette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0301-2",
+      "type": "mcq",
+      "prompt": "Qui est la dernière personne à mourir dans « Breaking Bad » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wilfried",
+            "correct": false
+          },
+          {
+            "label": "William",
+            "correct": false
+          },
+          {
+            "label": "Walter",
+            "correct": true
+          },
+          {
+            "label": "Wade",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0301-4",
+      "type": "mcq",
+      "prompt": "Quel alter-ego Walter White a-t-il créé pour ses activités criminelles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gutenberg",
+            "correct": false
+          },
+          {
+            "label": "Heisenberg",
+            "correct": true
+          },
+          {
+            "label": "Einstein",
+            "correct": false
+          },
+          {
+            "label": "Iceberg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=391"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0391-1",
+      "type": "mcq",
+      "prompt": "Quelle mannequin joue dans « Astérix et Obélix contre César » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Karine Ferri",
+            "correct": false
+          },
+          {
+            "label": "Bérénice Marlohe",
+            "correct": false
+          },
+          {
+            "label": "Chloé Mortaud",
+            "correct": false
+          },
+          {
+            "label": "Laetitia Casta",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0391-2",
+      "type": "mcq",
+      "prompt": "Qui est connue pour son rôle de Mélanie dans « Plus belle la vie » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Laëtitia Milot",
+            "correct": true
+          },
+          {
+            "label": "Hélène Médigue",
+            "correct": false
+          },
+          {
+            "label": "Cécilia Hornus",
+            "correct": false
+          },
+          {
+            "label": "Élodie Varlet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0391-3",
+      "type": "mcq",
+      "prompt": "Quelle ancienne « classe mannequin » a prêté ses traits à Lara Croft ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Isabelle Mège",
+            "correct": false
+          },
+          {
+            "label": "Isabelle Caro",
+            "correct": false
+          },
+          {
+            "label": "Alexa Davalos",
+            "correct": false
+          },
+          {
+            "label": "Vanessa Demouy",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0391-4",
+      "type": "mcq",
+      "prompt": "Quelle mannequin a incarné la James Bond girl de « Quantum of Solace » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Olga Kurylenko",
+            "correct": true
+          },
+          {
+            "label": "Naomie Harris",
+            "correct": false
+          },
+          {
+            "label": "Eva Green",
+            "correct": false
+          },
+          {
+            "label": "Naomi Watts",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

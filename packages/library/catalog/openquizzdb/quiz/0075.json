@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=75"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0075-1",
+      "type": "mcq",
+      "prompt": "Quelle place est obtenue par la première dauphine de Miss France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Première",
+            "correct": false
+          },
+          {
+            "label": "Troisième",
+            "correct": false
+          },
+          {
+            "label": "Deuxième",
+            "correct": true
+          },
+          {
+            "label": "Quatrième",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0075-2",
+      "type": "mcq",
+      "prompt": "Quelle ancienne Miss France a participé à « La Ferme célébrités » sur TF1 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Valérie Bègue",
+            "correct": false
+          },
+          {
+            "label": "Élodie Gossuin",
+            "correct": true
+          },
+          {
+            "label": "Chloé Mortaud",
+            "correct": false
+          },
+          {
+            "label": "Malika Ménard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0075-3",
+      "type": "mcq",
+      "prompt": "Qui est devenu en 2011 président à vie du jury de Miss France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jacques Dutronc",
+            "correct": false
+          },
+          {
+            "label": "Daniel Auteuil",
+            "correct": false
+          },
+          {
+            "label": "Pierre Arditi",
+            "correct": false
+          },
+          {
+            "label": "Alain Delon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0075-4",
+      "type": "mcq",
+      "prompt": "Quelle humoriste belge a incarné Miss Bricola à la télévision ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Marie Gillain",
+            "correct": false
+          },
+          {
+            "label": "Laurence Bibot",
+            "correct": true
+          },
+          {
+            "label": "Yolande Moreau",
+            "correct": false
+          },
+          {
+            "label": "Virginie Hocq",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}
