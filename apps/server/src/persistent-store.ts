@@ -106,8 +106,9 @@ export class PersistentSessionStore implements SessionStore {
   async recordAnswer(id: string, round: number, playerId: string, submitted: SubmittedAnswer): Promise<void> {
     const session = this.byId.get(id)
     if (!session) throw new Error(`recordAnswer: session ${id} absente du cache`)
-    const forRound = session.answers[round] ?? (session.answers[round] = {})
+    const forRound = session.answers[round] ?? {}
     forRound[playerId] = structuredClone(submitted)
+    session.answers[round] = forRound
     this.scheduleFlush(id)
   }
 
