@@ -79,4 +79,24 @@ describe('catalogue livré', () => {
       ).toBe(true)
     }
   })
+
+  it('chaque traduction garde le type, le nombre de propositions et la bonne réponse de son original', async () => {
+    const snap = await readCatalog({ builtinDir: BUILTIN_CATALOG_DIR })
+    const byId = new Map(snap.questions.map((q) => [q.id, q]))
+    const options = (p: unknown) => (p as { options?: { correct: boolean }[] }).options
+    for (const q of snap.questions) {
+      const m = q.id.match(/^(.+)-(en|fr)$/)
+      const original = m ? byId.get(m[1]) : undefined
+      if (!original) continue
+      expect(q.type, q.id).toBe(original.type)
+      expect(q.language, q.id).not.toBe(original.language)
+      const mine = options(q.payload)
+      const theirs = options(original.payload)
+      expect(mine?.length, q.id).toBe(theirs?.length)
+      expect(mine?.findIndex((o) => o.correct), q.id).toBe(theirs?.findIndex((o) => o.correct))
+      if (q.type === 'truefalse') {
+        expect((q.payload as { correct: boolean }).correct, q.id).toBe((original.payload as { correct: boolean }).correct)
+      }
+    }
+  })
 })
