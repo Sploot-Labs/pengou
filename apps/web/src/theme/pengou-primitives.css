@@ -38,6 +38,11 @@
 
   /* Focus visible — cyan profond, contrasté sur fonds clairs */
   --pengou-focus: #0C7A99;
+
+  /* Bouton secondaire (ghost) : neutre en clair ; en sombre, contour et encre cyan, sinon le
+     contour (--pengou-line) se fond dans le fond et le bouton paraît gris. */
+  --pengou-ghost-line: #D6E6EF;
+  --pengou-ghost-ink:  #12222F;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -60,6 +65,8 @@
     --pengou-bad:       #FF6B5C;
     --pengou-on-danger: #0B2545;
     --pengou-focus:     #6FD3EE;
+    --pengou-ghost-line: #2B7F99;
+    --pengou-ghost-ink:  #6FD3EE;
   }
 }
 
@@ -70,6 +77,7 @@
   --pengou-bg:#EEF6FB; --pengou-surface:#FFFFFF; --pengou-surface-2:#F0F7FC;
   --pengou-text:#12222F; --pengou-muted:#566B7A; --pengou-line:#D6E6EF;
   --pengou-ok:#25A873; --pengou-warn:#B8860B; --pengou-bad:#D14336; --pengou-on-danger:#FFFFFF; --pengou-focus:#0C7A99;
+  --pengou-ghost-line:#D6E6EF; --pengou-ghost-ink:#12222F;
 }
 :root[data-theme="dark"] {
   --pengou-cyan:#2CC7E8; --pengou-brand:#35CBEC; --pengou-cyan-soft:#0E3647;
@@ -77,4 +85,5 @@
   --pengou-bg:#071826; --pengou-surface:#0D2435; --pengou-surface-2:#0A1E2D;
   --pengou-text:#E8F4FB; --pengou-muted:#9DB4C4; --pengou-line:#1C3A52;
   --pengou-ok:#53D6A6; --pengou-warn:#FFD15E; --pengou-bad:#FF6B5C; --pengou-on-danger:#0B2545; --pengou-focus:#6FD3EE;
+  --pengou-ghost-line:#2B7F99; --pengou-ghost-ink:#6FD3EE;
 }

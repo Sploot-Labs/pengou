@@ -126,10 +126,21 @@
   color: var(--stage);
 }
 
+/* Boutons, variantes du système de design (composant `Button` de ui.tsx) :
+   - primary : action principale, aplat --brand ;
+   - ghost : action secondaire, contour --ghost-line et encre --ghost-ink (neutres en clair,
+     cyan en sombre pour ne pas paraître gris sur le fond nuit) ;
+   - success / danger : actions sémantiques.
+   Tout contrôle bouton maison qui n'utilise pas `.ab-button` (flèches de tri, etc.) reprend
+   ces mêmes rôles plutôt que --line / --ink, pour rester cohérent dans les deux schémas. */
 .ab-button--ghost {
   background: transparent;
-  border-color: var(--line);
-  color: var(--ink);
+  border-color: var(--ghost-line, var(--line));
+  color: var(--ghost-ink, var(--ink));
+}
+/* Sur fond transparent, l'éclaircissement générique du survol ne se voit pas : léger voile teinté. */
+.ab-button--ghost:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: color-mix(in srgb, var(--ghost-ink, var(--ink)) 10%, transparent);
 }
 
 .ab-button--success {
@@ -470,9 +481,9 @@
   min-height: 44px;
   padding: 0;
   background: transparent;
-  border: 1px solid var(--line);
+  border: 1px solid var(--ghost-line, var(--line));
   border-radius: var(--radius-sm);
-  color: var(--ink-dim);
+  color: var(--ghost-ink, var(--ink-dim));
   cursor: pointer;
   font-size: 0.9rem;
   line-height: 1;
