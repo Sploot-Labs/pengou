@@ -104,6 +104,12 @@ function roomName(sessionId: string): string {
   return `session:${sessionId}`
 }
 
+/** Room des seuls hôte et grand écran : `screen:progress` n'a pas à être envoyé aux joueurs
+ * (N réponses feraient N diffusions vers N sockets, soit un coût quadratique par question). */
+function viewersRoomName(sessionId: string): string {
+  return `viewers:${sessionId}`
+}
+
 function message(err: unknown): string {
   return err instanceof Error ? err.message : 'erreur inconnue'
 }
@@ -871,6 +877,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         data.role = 'host'
         data.sessionId = session.id
         await socket.join(roomName(session.id))
+        await socket.join(viewersRoomName(session.id))
 
         reply({ sessionId: session.id, pin: session.pin })
       } catch (e) {
@@ -983,6 +990,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         data.role = 'host'
         data.sessionId = sessionId
         await socket.join(roomName(sessionId))
+        await socket.join(viewersRoomName(sessionId))
         emitReconnectSnapshot(socket, session)
         // Enchaînement automatique : rejoue le compte à rebours en cours à l'hôte qui reprend en
         // pleine étape classement (le minuteur serveur, lui, continue de tourner sans être touché),
@@ -1161,7 +1169,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           // Compteur grand écran : UNIQUEMENT answered/total, jamais le contenu de la réponse
           // ni la bonne réponse (anti-triche — voir engine.progress()).
           const progress = await engine.progress(data.sessionId)
-          io.to(roomName(data.sessionId)).emit('screen:progress', progress)
+          io.to(viewersRoomName(data.sessionId)).emit('screen:progress', progress)
         }
         reply(result)
 
@@ -1284,6 +1292,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         data.role = 'screen'
         data.sessionId = sessionId
         await socket.join(roomName(sessionId))
+        await socket.join(viewersRoomName(sessionId))
         reply({ ok: true })
 
         // Latecomer (Task 3, hardening) : le grand écran connecté en PLEINE QUESTION doit
@@ -1318,6 +1327,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         data.role = 'screen'
         data.sessionId = sessionId
         await socket.join(roomName(sessionId))
+        await socket.join(viewersRoomName(sessionId))
         reply({ ok: true })
 
         const session = await engine.getSession(sessionId)

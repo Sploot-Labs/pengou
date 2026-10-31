@@ -885,6 +885,87 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
+  it("screen:progress : réservé à l'hôte et au grand écran, les joueurs ne le reçoivent jamais", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-progress-viewers@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      const player2 = await connectClient(url)
+      clients.push(player1, player2)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+      await ack(player2, 'player:join', { pin, nickname: 'Bob' })
+
+      const tokenAck = await ack<{ displayToken?: string }>(hostSocket, 'host:createScreenToken', {})
+      const screen = await connectClient(url)
+      clients.push(screen)
+      await ack(screen, 'screen:join', { displayToken: tokenAck.displayToken })
+
+      await ack(hostSocket, 'host:start', {})
+
+      let playerReceived = 0
+      player1.on('screen:progress', () => { playerReceived += 1 })
+      player2.on('screen:progress', () => { playerReceived += 1 })
+
+      const hostProgress = waitFor<{ answered?: number; total?: number }>(hostSocket, 'screen:progress')
+      const screenProgress = waitFor<{ answered?: number; total?: number }>(screen, 'screen:progress')
+      const answerAck = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect(answerAck.accepted).toBe(true)
+      expect(await hostProgress).toEqual({ answered: 1, total: 2 })
+      expect(await screenProgress).toEqual({ answered: 1, total: 2 })
+
+      await new Promise((r) => setTimeout(r, 200))
+      expect(playerReceived).toBe(0)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("screen:progress : l'hôte reconnecté et le grand écran reconnecté reçoivent toujours le compteur", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket: hostA, sessionId, pin, cookie } = await setupHostedSessionWithReading(
+        app, url, 'gateway-progress-reconnect@example.com', 0,
+      )
+      clients.push(hostA)
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+
+      const tokenAck = await ack<{ displayToken?: string }>(hostA, 'host:createScreenToken', {})
+      const screenA = await connectClient(url)
+      clients.push(screenA)
+      await ack(screenA, 'screen:join', { displayToken: tokenAck.displayToken })
+
+      hostA.disconnect()
+      screenA.disconnect()
+      await new Promise((r) => setTimeout(r, 150))
+
+      const hostB = await connectClient(url, { cookie })
+      clients.push(hostB)
+      const reconnectAck = await ack<{ error?: string }>(hostB, 'host:reconnect', { sessionId })
+      expect(reconnectAck.error).toBeUndefined()
+      const screenB = await connectClient(url)
+      clients.push(screenB)
+      const rejoin = await ack<{ error?: string }>(screenB, 'screen:reconnect', { sessionId, displayToken: tokenAck.displayToken })
+      expect(rejoin.error).toBeUndefined()
+
+      await ack(hostB, 'host:start', {})
+      const hostProgress = waitFor<{ answered?: number }>(hostB, 'screen:progress')
+      const screenProgress = waitFor<{ answered?: number }>(screenB, 'screen:progress')
+      await ack(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect((await hostProgress).answered).toBe(1)
+      expect((await screenProgress).answered).toBe(1)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
   it("enchaînement automatique (défaut activé) : après la révélation, le serveur diffuse `auto:advance` puis avance SEUL vers le podium, sans host:next", async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
