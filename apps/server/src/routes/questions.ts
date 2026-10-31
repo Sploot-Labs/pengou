@@ -157,7 +157,8 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
         if (tooLong(body.mediaAlt, LIMITS.mediaAlt)) {
           return reply.code(400).send({ error: `Le texte alternatif est trop long (${LIMITS.mediaAlt} caractères max).` })
         }
-        patch.mediaAlt = body.mediaAlt
+        // Chaîne vide ou blanche : pas de texte alternatif (comme au POST).
+        patch.mediaAlt = isNonEmptyString(body.mediaAlt) ? body.mediaAlt : null
       }
 
       return withTenantTx(appDb, context, async (scope) => {

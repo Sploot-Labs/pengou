@@ -406,6 +406,29 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
       await app.close()
     })
 
+    it('PATCH mediaAlt vide ou blanc le ramène à null', async () => {
+      const app = await buildApp()
+      const { cookie, quizId } = await createQuizAndCookie(app, 'alt6@example.com')
+      const create = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quizId}/questions`,
+        payload: mcq({ media: '/uploads/x/y.png', mediaAlt: 'Un manchot' }),
+        headers: { ...json, cookie },
+      })
+      const created = create.json() as { id: string }
+      for (const mediaAlt of ['', '   ']) {
+        const patched = await app.inject({
+          method: 'PATCH',
+          url: `/api/quizzes/${quizId}/questions/${created.id}`,
+          payload: { mediaAlt },
+          headers: { ...json, cookie },
+        })
+        expect(patched.statusCode).toBe(200)
+        expect(patched.json()).toMatchObject({ media: '/uploads/x/y.png', mediaAlt: null })
+      }
+      await app.close()
+    })
+
     it('PATCH refuse un mediaAlt non chaîne (400)', async () => {
       const app = await buildApp()
       const { cookie, quizId } = await createQuizAndCookie(app, 'alt5@example.com')
