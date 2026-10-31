@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { act, cleanup, render, screen, waitFor } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { MotionProvider } from '../motion/index.js'
@@ -140,5 +140,71 @@ describe('PlayerLive — phase lecture (question:reading)', () => {
 
     // Le message de lecture a disparu avec la bascule de phase.
     expect(screen.queryByText('Préparez-vous…')).toBeNull()
+  })
+})
+
+describe('PlayerLive - image de la question', () => {
+  beforeEach(() => {
+    handlers.clear()
+    mockEmitAck.mockClear()
+    savePlayerSession({ pin: '1234', playerId: 'p1', joinToken: 'tok1', nickname: 'Ana' })
+  })
+  afterEach(() => {
+    cleanup()
+    clearPlayerSession()
+  })
+
+  const reading = {
+    prompt: 'Quel est cet animal ?',
+    index: 0,
+    total: 3,
+    readingTime: 6,
+    startedAt: Date.now(),
+    media: 'https://ok.example/manchot.png',
+    mediaAlt: 'Un manchot',
+  }
+  const show = {
+    id: 'q1',
+    type: 'mcq',
+    prompt: 'Quel est cet animal ?',
+    timeLimit: 20,
+    payload: { options: [{ label: 'Manchot' }, { label: 'Pingouin' }, { label: 'Otarie' }, { label: 'Phoque' }] },
+    media: 'https://ok.example/manchot.png',
+    mediaAlt: 'Un manchot',
+  }
+
+  it("affiche l'image pendant la question, pas pendant la lecture", async () => {
+    renderPlayerLive()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:reconnect', expect.anything()))
+
+    emitServerEvent('question:reading', reading)
+    await screen.findByText('Préparez-vous…')
+    expect(screen.queryByRole('img')).toBeNull()
+
+    emitServerEvent('question:show', show)
+    await screen.findByText('Manchot')
+    expect(screen.getByRole('img', { name: 'Un manchot' })).toBeInTheDocument()
+  })
+
+  it("image en échec : l'énoncé et les boutons de réponse restent affichés", async () => {
+    renderPlayerLive()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:reconnect', expect.anything()))
+
+    emitServerEvent('question:show', show)
+    fireEvent.error(await screen.findByRole('img', { name: 'Un manchot' }))
+
+    expect(screen.queryByRole('img')).toBeNull()
+    expect(screen.getByText('Quel est cet animal ?')).toBeInTheDocument()
+    expect(screen.getAllByRole('button').length).toBeGreaterThan(1)
+    expect(screen.getByRole('button', { name: /Manchot/ })).toBeEnabled()
+  })
+
+  it('question:show sans media (flux ancien) : aucun img, pas d’erreur', async () => {
+    renderPlayerLive()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:reconnect', expect.anything()))
+
+    emitServerEvent('question:show', { ...show, media: undefined, mediaAlt: undefined })
+    await screen.findByText('Manchot')
+    expect(screen.queryByRole('img')).toBeNull()
   })
 })

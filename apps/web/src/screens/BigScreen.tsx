@@ -7,6 +7,7 @@ import type { RankingEntry, ReadingView, SessionRelaunchedView } from '../realti
 import { hardReload } from '../realtime/hardReload'
 import { ThemeProvider } from '../theme/ThemeProvider.js'
 import { AnswerShape, JoinInvite, Logo, PinDisplay, SoundToggle, TimerRing } from '../ui'
+import { QuestionImage } from '../ui/QuestionImage'
 import { PodiumView } from './Podium'
 
 /**
@@ -27,6 +28,8 @@ interface QuestionShowPayload {
   prompt: string
   timeLimit: number
   payload: unknown
+  media?: string | null
+  mediaAlt?: string | null
 }
 
 /** Projection « lecture seule » émise par `question:reading` (Task 3, moteur
@@ -604,6 +607,8 @@ function BigScreenInner() {
             {reading.prompt}
           </h1>
 
+          <QuestionImage key={reading.media ?? ''} src={reading.media} alt={reading.mediaAlt} variant="big" />
+
           {/* Décompte textuel (pas seulement le badge décoratif aria-hidden
               ci-dessus) — RGAA : la valeur doit toujours être lisible, pas
               seulement visible/animée. `role="status"`/`aria-live="polite"`
@@ -627,6 +632,8 @@ function BigScreenInner() {
           <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
             {question.prompt}
           </h1>
+
+          <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="big" />
 
           {renderLiveAnswers()}
 

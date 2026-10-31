@@ -153,3 +153,45 @@ describe('BigScreen — phase lecture (question:reading)', () => {
     await waitFor(() => expect(document.activeElement).toBe(heading))
   })
 })
+
+describe('BigScreen - image de la question', () => {
+  beforeEach(() => {
+    handlers.clear()
+    mockEmitAck.mockClear()
+  })
+  afterEach(cleanup)
+
+  it("affiche l'image dès la phase lecture", async () => {
+    renderJoinedBigScreen()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('screen:join', { displayToken: 'tok-abc' }))
+
+    emitServerEvent('question:reading', {
+      prompt: 'Quel est cet animal ?',
+      index: 0,
+      total: 3,
+      readingTime: 6,
+      startedAt: Date.now(),
+      media: 'https://ok.example/manchot.png',
+      mediaAlt: 'Un manchot',
+    })
+
+    const img = await screen.findByRole('img', { name: 'Un manchot' })
+    expect(img).toHaveClass('question-image--big')
+  })
+
+  it('question:show sans media (flux ancien) : aucun img, pas d’erreur', async () => {
+    renderJoinedBigScreen()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('screen:join', { displayToken: 'tok-abc' }))
+
+    emitServerEvent('question:show', {
+      id: 'q1',
+      type: 'mcq',
+      prompt: 'Quel est cet animal ?',
+      timeLimit: 20,
+      payload: { options: [{ label: 'Manchot' }, { label: 'Pingouin' }] },
+    })
+
+    await screen.findByText('Manchot')
+    expect(screen.queryByRole('img')).toBeNull()
+  })
+})

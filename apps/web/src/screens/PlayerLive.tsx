@@ -7,6 +7,7 @@ import { hardReload } from '../realtime/hardReload'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
 import { AnswerShape, AnswerTile, Logo, SoundToggle, TimerPill } from '../ui'
+import { QuestionImage } from '../ui/QuestionImage'
 
 /**
  * Parcours joueur réel, câblé sur la passerelle Socket.IO du serveur de jeu
@@ -35,6 +36,8 @@ interface QuestionShowPayload {
   payload: unknown
   index?: number
   total?: number
+  media?: string | null
+  mediaAlt?: string | null
 }
 
 /** `lobby:update` — liste des joueurs de la room, diffusée par la passerelle
@@ -843,6 +846,8 @@ export function PlayerLive() {
           <h1 className="player-question__prompt" tabIndex={-1} ref={promptRef}>
             {question.prompt}
           </h1>
+
+          <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="player" />
 
           <div className="player-question__spacer" />
 

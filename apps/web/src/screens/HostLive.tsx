@@ -6,6 +6,7 @@ import { listQuizzes, type QuizListItem } from '../api/quizzes'
 import { hardReload } from '../realtime/hardReload'
 import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import { Button, Logo, PinDisplay, TimerRing } from '../ui'
+import { QuestionImage } from '../ui/QuestionImage'
 import { PodiumView } from './Podium'
 
 /**
@@ -28,6 +29,8 @@ interface QuestionShowPayload {
   prompt: string
   timeLimit: number
   payload: unknown
+  media?: string | null
+  mediaAlt?: string | null
 }
 
 /** Projection « lecture seule » émise par `question:reading` (Task 3, moteur
@@ -892,6 +895,7 @@ export function HostLive() {
                     {reading.prompt}
                   </h2>
                 </div>
+                <QuestionImage key={reading.media ?? ''} src={reading.media} alt={reading.mediaAlt} variant="host" />
                 <p role="status" aria-live="polite">
                   Lecture en cours… {readingRemaining ?? reading.readingTime} s restantes
                 </p>
@@ -906,6 +910,7 @@ export function HostLive() {
                   </h2>
                   <TimerRing remainingSeconds={remaining ?? question.timeLimit} totalSeconds={question.timeLimit} size={72} />
                 </div>
+                <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="host" />
 
                 <p className="hostlive-progress" aria-hidden="true">
                   {progressAnswered} / {players.length} {progressAnswered > 1 ? 'ont' : 'a'} répondu
@@ -950,6 +955,7 @@ export function HostLive() {
                 <h2 ref={phaseHeadingRef} tabIndex={-1}>
                   Révélation : {question.prompt}
                 </h2>
+                <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="host" />
                 <p className="visually-hidden" role="status" aria-live="polite">
                   Réponse révélée : {revealedAnswerText}
                 </p>
