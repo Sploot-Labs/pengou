@@ -1,0 +1,1042 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-000fa1bbbf23-fr",
+      "type": "truefalse",
+      "prompt": "Pablo Picasso est l'un des pères fondateurs du « cubisme ».",
+      "payload": {
+        "correct": true
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-053cd2db94e2-fr",
+      "type": "truefalse",
+      "prompt": "Le nom « impressionnisme » a été donné à ce mouvement artistique par la critique ironique d'un tableau de Monet.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-088c9981548a-fr",
+      "type": "mcq",
+      "prompt": "Le tableau « La Nuit étoilée » de Vincent van Gogh relève de quel mouvement artistique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Impressionnisme",
+            "correct": false
+          },
+          {
+            "label": "Néoclassicisme",
+            "correct": false
+          },
+          {
+            "label": "Romantisme",
+            "correct": false
+          },
+          {
+            "label": "Post-impressionnisme",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0ad9d1a215aa-fr",
+      "type": "mcq",
+      "prompt": "Qui a sculpté la statue du David ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Donatello",
+            "correct": false
+          },
+          {
+            "label": "Michel-Ange",
+            "correct": true
+          },
+          {
+            "label": "Le Bernin",
+            "correct": false
+          },
+          {
+            "label": "Auguste Rodin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0ed981a61b6f-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces tableaux n'est pas de Caspar David Friedrich ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Voyageur, mer de nuages",
+            "correct": false
+          },
+          {
+            "label": "Mer de glace",
+            "correct": false
+          },
+          {
+            "label": "Mer Noire",
+            "correct": true
+          },
+          {
+            "label": "Moine au bord de la mer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-12357890cb45-fr",
+      "type": "mcq",
+      "prompt": "Quel artiste a peint « La Trahison des images », une pipe accompagnée de la mention « Ceci n'est pas une pipe » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Modigliani",
+            "correct": false
+          },
+          {
+            "label": "Magritte",
+            "correct": true
+          },
+          {
+            "label": "Munch",
+            "correct": false
+          },
+          {
+            "label": "Matisse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1a6cb452276f-fr",
+      "type": "mcq",
+      "prompt": "En quelle année Albrecht Dürer a-t-il peint « Le Jeune Lièvre » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1702",
+            "correct": false
+          },
+          {
+            "label": "1602",
+            "correct": false
+          },
+          {
+            "label": "1402",
+            "correct": false
+          },
+          {
+            "label": "1502",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1f02cb2cb2a7-fr",
+      "type": "mcq",
+      "prompt": "Le peintre Piet Mondrian (1872-1944) appartenait à quel mouvement ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Précisionnisme",
+            "correct": false
+          },
+          {
+            "label": "Cubisme",
+            "correct": false
+          },
+          {
+            "label": "Impressionnisme",
+            "correct": false
+          },
+          {
+            "label": "Néoplasticisme",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-20357285a49a-fr",
+      "type": "mcq",
+      "prompt": "Quel célèbre architecte, mort en 2019 à 102 ans, a conçu la pyramide de verre du Louvre à Paris ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wang Shu",
+            "correct": false
+          },
+          {
+            "label": "Pascale Guédot",
+            "correct": false
+          },
+          {
+            "label": "I. M. Pei",
+            "correct": true
+          },
+          {
+            "label": "Frank Gehry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-211fff2b02a5-fr",
+      "type": "mcq",
+      "prompt": "Qui a peint la fresque monumentale « Guernica » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Henri Matisse",
+            "correct": false
+          },
+          {
+            "label": "Francisco Goya",
+            "correct": false
+          },
+          {
+            "label": "Léonard de Vinci",
+            "correct": false
+          },
+          {
+            "label": "Pablo Picasso",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2b81c25354c1-fr",
+      "type": "mcq",
+      "prompt": "Quelle était la nationalité du peintre surréaliste Salvador Dalí ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Italien",
+            "correct": false
+          },
+          {
+            "label": "Espagnol",
+            "correct": true
+          },
+          {
+            "label": "Portugais",
+            "correct": false
+          },
+          {
+            "label": "Français",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3d4f755cea13-fr",
+      "type": "mcq",
+      "prompt": "Quel artiste avait pour style de créer une image avec de petits points de couleurs différentes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Georges Seurat",
+            "correct": true
+          },
+          {
+            "label": "Paul Cézanne",
+            "correct": false
+          },
+          {
+            "label": "Henri Rousseau",
+            "correct": false
+          },
+          {
+            "label": "Vincent Van Gogh",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-461d78ca93be-fr",
+      "type": "mcq",
+      "prompt": "Quel tableau de Van Gogh représente la vue depuis l'asile de Saint-Rémy-de-Provence, dans le sud de la France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Champ de blé aux corbeaux",
+            "correct": false
+          },
+          {
+            "label": "La Nuit étoilée",
+            "correct": true
+          },
+          {
+            "label": "Semeur au soleil couchant",
+            "correct": false
+          },
+          {
+            "label": "L'Église d'Auvers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-50b1da5d06bb-fr",
+      "type": "truefalse",
+      "prompt": "Léonard de Vinci n'est pas l'auteur de « La Joconde ».",
+      "payload": {
+        "correct": false
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5dddaff2f2cd-fr",
+      "type": "mcq",
+      "prompt": "Combien de versions à la peinture et au pastel du « Cri » le peintre norvégien Edvard Munch aurait-il réalisées ?",
+      "payload": {
+        "options": [
+          {
+            "label": "4",
+            "correct": true
+          },
+          {
+            "label": "1",
+            "correct": false
+          },
+          {
+            "label": "3",
+            "correct": false
+          },
+          {
+            "label": "2",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7eb9f808bbd9-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces couleurs n'apparaît pas dans « Broadway Boogie Woogie » de Mondrian ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vert",
+            "correct": true
+          },
+          {
+            "label": "Bleu",
+            "correct": false
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-844a42cb0220-fr",
+      "type": "mcq",
+      "prompt": "Quel mouvement artistique Pablo Picasso a-t-il contribué à fonder ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Expressionnisme",
+            "correct": false
+          },
+          {
+            "label": "Impressionnisme",
+            "correct": false
+          },
+          {
+            "label": "Cubisme",
+            "correct": true
+          },
+          {
+            "label": "Futurisme",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8b5359cb9525-fr",
+      "type": "mcq",
+      "prompt": "Où Paul Gauguin s'installe-t-il en 1895 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lituanie",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "Atuona",
+            "correct": false
+          },
+          {
+            "label": "Tahiti",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8ea0e8bf1026-fr",
+      "type": "mcq",
+      "prompt": "Qui a peint « La Nuit étoilée » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pablo Picasso",
+            "correct": false
+          },
+          {
+            "label": "Léonard de Vinci",
+            "correct": false
+          },
+          {
+            "label": "Michel-Ange",
+            "correct": false
+          },
+          {
+            "label": "Vincent van Gogh",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-925ab2fe5863-fr",
+      "type": "mcq",
+      "prompt": "Qui a peint « Le Cri » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Edvard Munch",
+            "correct": true
+          },
+          {
+            "label": "Picasso",
+            "correct": false
+          },
+          {
+            "label": "Henri Matisse",
+            "correct": false
+          },
+          {
+            "label": "Vincent Van Gogh",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9273219f83e4-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces tableaux n'a pas été peint par Vincent Van Gogh ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Terrasse de café le soir",
+            "correct": false
+          },
+          {
+            "label": "La Nuit étoilée",
+            "correct": false
+          },
+          {
+            "label": "La Chambre à Arles",
+            "correct": false
+          },
+          {
+            "label": "La Neuvième Vague",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-973b51a3c544-fr",
+      "type": "mcq",
+      "prompt": "L'intérieur de quelle église de la Cité du Vatican a été conçu en 1503 par des architectes de la Renaissance dont Bramante, Michel-Ange et le Bernin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Duomo de Florence",
+            "correct": false
+          },
+          {
+            "label": "Cathédrale de Catane",
+            "correct": false
+          },
+          {
+            "label": "Basilique Saint-Marc",
+            "correct": false
+          },
+          {
+            "label": "Basilique Saint-Pierre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-995b9a0421c9-fr",
+      "type": "mcq",
+      "prompt": "Albrecht Dürer est né et mort à...",
+      "payload": {
+        "options": [
+          {
+            "label": "Berlin",
+            "correct": false
+          },
+          {
+            "label": "Nuremberg",
+            "correct": true
+          },
+          {
+            "label": "Augsbourg",
+            "correct": false
+          },
+          {
+            "label": "Bamberg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9dbb4e24ea14-fr",
+      "type": "mcq",
+      "prompt": "Dans « La Cène » de Léonard de Vinci, de quelles deux couleurs sont les vêtements de Jésus ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rouge et blanc",
+            "correct": false
+          },
+          {
+            "label": "Rouge et bleu",
+            "correct": true
+          },
+          {
+            "label": "Rouge et noir",
+            "correct": false
+          },
+          {
+            "label": "Rouge et jaune",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a1c9c58aed62-fr",
+      "type": "mcq",
+      "prompt": "Quel sculpteur français a conçu la statue de la Liberté ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Auguste Bartholdi",
+            "correct": true
+          },
+          {
+            "label": "Jean-Léon Gérôme",
+            "correct": false
+          },
+          {
+            "label": "Auguste Rodin",
+            "correct": false
+          },
+          {
+            "label": "Henri Matisse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a3412c0f9437-fr",
+      "type": "truefalse",
+      "prompt": "Les sculpteurs de la Grèce et de la Rome antiques coloraient souvent leurs statues.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-bc7fa06e1513-fr",
+      "type": "mcq",
+      "prompt": "Qui a peint la fresque biblique « La Création d'Adam » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rembrandt",
+            "correct": false
+          },
+          {
+            "label": "Léonard de Vinci",
+            "correct": false
+          },
+          {
+            "label": "Le Caravage",
+            "correct": false
+          },
+          {
+            "label": "Michel-Ange",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c1686c62d3cc-fr",
+      "type": "mcq",
+      "prompt": "Qui a peint « Cygnes se reflétant en éléphants », « Le Sommeil » et « La Persistance de la mémoire » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jackson Pollock",
+            "correct": false
+          },
+          {
+            "label": "Edgar Degas",
+            "correct": false
+          },
+          {
+            "label": "Salvador Dalí",
+            "correct": true
+          },
+          {
+            "label": "Vincent van Gogh",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d9f8add86523-fr",
+      "type": "mcq",
+      "prompt": "Quand « La Persistance de la mémoire » de Salvador Dalí a-t-elle été achevée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1932",
+            "correct": false
+          },
+          {
+            "label": "1934",
+            "correct": false
+          },
+          {
+            "label": "1929",
+            "correct": false
+          },
+          {
+            "label": "1931",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-da8f7cbf7a36-fr",
+      "type": "mcq",
+      "prompt": "Quel sculpteur grec a réalisé la statue d'Athéna Parthénos à l'intérieur du Parthénon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Scopas",
+            "correct": false
+          },
+          {
+            "label": "Phidias",
+            "correct": true
+          },
+          {
+            "label": "Hésiode",
+            "correct": false
+          },
+          {
+            "label": "Praxitèle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dd159d16cad4-fr",
+      "type": "mcq",
+      "prompt": "Qui a peint « La Joconde » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Léonard de Vinci",
+            "correct": true
+          },
+          {
+            "label": "Michel-Ange",
+            "correct": false
+          },
+          {
+            "label": "Vincent van Gogh",
+            "correct": false
+          },
+          {
+            "label": "Pablo Picasso",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dd6a1dd8ae03-fr",
+      "type": "mcq",
+      "prompt": "Quel est un élément fondamental du style architectural gothique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Plafonds à caissons",
+            "correct": false
+          },
+          {
+            "label": "Arc brisé",
+            "correct": true
+          },
+          {
+            "label": "Fresques intérieures",
+            "correct": false
+          },
+          {
+            "label": "Façades à fronton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ded97cb4eda3-fr",
+      "type": "truefalse",
+      "prompt": "Vincent van Gogh s'est coupé une oreille.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e3bad7278823-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle l'art japonais du pliage du papier en formes et figures décoratives ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sumi-e",
+            "correct": false
+          },
+          {
+            "label": "Ukiyo-e",
+            "correct": false
+          },
+          {
+            "label": "Origami",
+            "correct": true
+          },
+          {
+            "label": "Haïku",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e3eee6b7d997-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces tableaux n'a pas été peint par Johannes Vermeer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Jeune Fille à la perle",
+            "correct": false
+          },
+          {
+            "label": "Bacchus",
+            "correct": true
+          },
+          {
+            "label": "La Laitière",
+            "correct": false
+          },
+          {
+            "label": "La Dentellière",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ed3d318e0ffd-fr",
+      "type": "mcq",
+      "prompt": "Quel a été le premier procédé photographique réussi et rentable commercialement ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pellicule Kodachrome",
+            "correct": false
+          },
+          {
+            "label": "Le daguerréotype",
+            "correct": true
+          },
+          {
+            "label": "Le suaire de Turin",
+            "correct": false
+          },
+          {
+            "label": "Procédé au collodion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ef19d9693cd0-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces noms est celui d'une célèbre marque de marqueurs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Copic",
+            "correct": true
+          },
+          {
+            "label": "Marx",
+            "correct": false
+          },
+          {
+            "label": "Dopix",
+            "correct": false
+          },
+          {
+            "label": "Cofix",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ffc71b129bf3-fr",
+      "type": "truefalse",
+      "prompt": "La Vénus de Willendorf est l'une des plus anciennes œuvres d'art et représente les planètes Mars et Vénus s'embrassant dans le ciel nocturne.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-painters-and-masterpieces-fr",
+      "title": "Peintres et chefs-d'œuvre",
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-0ad9d1a215aa-fr",
+        "otdb-211fff2b02a5-fr",
+        "otdb-dd159d16cad4-fr",
+        "otdb-925ab2fe5863-fr",
+        "otdb-c1686c62d3cc-fr",
+        "otdb-12357890cb45-fr",
+        "otdb-3d4f755cea13-fr",
+        "otdb-8ea0e8bf1026-fr",
+        "otdb-a1c9c58aed62-fr",
+        "otdb-da8f7cbf7a36-fr",
+        "otdb-e3eee6b7d997-fr",
+        "otdb-0ed981a61b6f-fr",
+        "otdb-1f02cb2cb2a7-fr",
+        "otdb-ffc71b129bf3-fr",
+        "otdb-a3412c0f9437-fr",
+        "otdb-e3bad7278823-fr",
+        "otdb-dd6a1dd8ae03-fr",
+        "otdb-ed3d318e0ffd-fr",
+        "otdb-053cd2db94e2-fr",
+        "otdb-7eb9f808bbd9-fr"
+      ],
+      "description": "Peintres, sculpteurs et œuvres d'art célèbres."
+    }
+  ]
+}

@@ -1,0 +1,1242 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-037289554678-fr",
+      "type": "mcq",
+      "prompt": "Dans l'univers de World of Warcraft, combien de frères et sœurs Sylvanas Coursevent a-t-elle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "4",
+            "correct": false
+          },
+          {
+            "label": "3",
+            "correct": true
+          },
+          {
+            "label": "1",
+            "correct": false
+          },
+          {
+            "label": "2",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-065c869609e0-fr",
+      "type": "mcq",
+      "prompt": "Quel est le plan d'existence dans le « Magic: The Gathering » de MicroProse (1997) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shandalar",
+            "correct": true
+          },
+          {
+            "label": "Ravnica",
+            "correct": false
+          },
+          {
+            "label": "Theros",
+            "correct": false
+          },
+          {
+            "label": "Amonkhet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0d55543d8a8f-fr",
+      "type": "mcq",
+      "prompt": "Quel a été le premier jeu sorti sur le moteur Source ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Garry's Mod",
+            "correct": false
+          },
+          {
+            "label": "Half-Life 2",
+            "correct": false
+          },
+          {
+            "label": "Counter-Strike: Source",
+            "correct": true
+          },
+          {
+            "label": "Team Fortress 2",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1ae05d211545-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelait la petite amie humaine d'origine de Sonic le hérisson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nina",
+            "correct": false
+          },
+          {
+            "label": "Celeste",
+            "correct": false
+          },
+          {
+            "label": "Madonna",
+            "correct": true
+          },
+          {
+            "label": "Sierra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1c87cc67d261-fr",
+      "type": "mcq",
+      "prompt": "Dans Rainbow Six Siege, lequel de ces opérateurs ne peut pas percer les murs renforcés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Buck",
+            "correct": true
+          },
+          {
+            "label": "Hibana",
+            "correct": false
+          },
+          {
+            "label": "Thermite",
+            "correct": false
+          },
+          {
+            "label": "Maverick",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2245fb23476d-fr",
+      "type": "mcq",
+      "prompt": "Quel jeu « Kingdom Hearts » mettait en scène les personnages de « The World Ends With You » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Birth by Sleep",
+            "correct": false
+          },
+          {
+            "label": "365/2 Days",
+            "correct": false
+          },
+          {
+            "label": "Dream Drop Distance",
+            "correct": true
+          },
+          {
+            "label": "Re:Chain of Memories",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-290493c71112-fr",
+      "type": "mcq",
+      "prompt": "Dans « Half-Life », comment s'appelle l'alien qui s'accroche à la tête ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vortigaunt",
+            "correct": false
+          },
+          {
+            "label": "Bullsquid",
+            "correct": false
+          },
+          {
+            "label": "Facehugger",
+            "correct": false
+          },
+          {
+            "label": "Headcrab",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2bcf0e7abc68-fr",
+      "type": "mcq",
+      "prompt": "Dans Half-Life, quel plat Gordon Freeman aurait-il brûlé dans le micro-ondes de la salle de pause ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gratin",
+            "correct": true
+          },
+          {
+            "label": "Pizza au pepperoni",
+            "correct": false
+          },
+          {
+            "label": "Sandwich sous-marin",
+            "correct": false
+          },
+          {
+            "label": "Soupe au poulet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2d49b96a34f1-fr",
+      "type": "mcq",
+      "prompt": "Dans « Resident Evil 3 », combien d'emplacements d'inventaire Jill a-t-elle au début de la partie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "8",
+            "correct": true
+          },
+          {
+            "label": "12",
+            "correct": false
+          },
+          {
+            "label": "10",
+            "correct": false
+          },
+          {
+            "label": "6",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-332adacd6a36-fr",
+      "type": "mcq",
+      "prompt": "Dans « Paper Mario : La Porte millénaire », quel est le point faible de Hooktail ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le marteau",
+            "correct": false
+          },
+          {
+            "label": "Les attaques de Koopas",
+            "correct": false
+          },
+          {
+            "label": "Le bruit des grillons",
+            "correct": true
+          },
+          {
+            "label": "L'objet « Ice Storm »",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-38b691991828-fr",
+      "type": "mcq",
+      "prompt": "Combien y a-t-il de classes dans Team Fortress 2 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "8",
+            "correct": false
+          },
+          {
+            "label": "9",
+            "correct": true
+          },
+          {
+            "label": "10",
+            "correct": false
+          },
+          {
+            "label": "7",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3d869528a1de-fr",
+      "type": "mcq",
+      "prompt": "Qui est le compagnon de Sonic ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shadow",
+            "correct": false
+          },
+          {
+            "label": "Tails",
+            "correct": true
+          },
+          {
+            "label": "Amy",
+            "correct": false
+          },
+          {
+            "label": "Knuckles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3e78c8622b56-fr",
+      "type": "mcq",
+      "prompt": "Dans Pokémon, de quel type est Simularbre, le Pokémon Imitation ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sol",
+            "correct": false
+          },
+          {
+            "label": "Plante",
+            "correct": false
+          },
+          {
+            "label": "Insecte",
+            "correct": false
+          },
+          {
+            "label": "Roche",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-422c354909ed-fr",
+      "type": "mcq",
+      "prompt": "Quel jeu de la série « Monster Hunter » a introduit l'Insectoglaive ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monster Hunter 2",
+            "correct": false
+          },
+          {
+            "label": "Monster Hunter 4",
+            "correct": true
+          },
+          {
+            "label": "Monster Hunter Freedom",
+            "correct": false
+          },
+          {
+            "label": "Monster Hunter Stories",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-48b962eb81ed-fr",
+      "type": "mcq",
+      "prompt": "Dans Resident Evil 2, quel est le deuxième prénom de Leon Kennedy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Scott",
+            "correct": true
+          },
+          {
+            "label": "Sam",
+            "correct": false
+          },
+          {
+            "label": "Shaun",
+            "correct": false
+          },
+          {
+            "label": "Simon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-49e43603aa1c-fr",
+      "type": "mcq",
+      "prompt": "En quelle année a eu lieu la première compétition d'e-sport ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1989",
+            "correct": false
+          },
+          {
+            "label": "2000",
+            "correct": false
+          },
+          {
+            "label": "1990",
+            "correct": false
+          },
+          {
+            "label": "1972",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5065cbef75a0-fr",
+      "type": "truefalse",
+      "prompt": "Dans Kingdom Hearts, les Keyblades de Roxas s'appellent « Oathkeeper » et « Oblivion ».",
+      "payload": {
+        "correct": true
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5d5097eb5f11-fr",
+      "type": "mcq",
+      "prompt": "Dans la série PAYDAY, qui est le chef emblématique du gang ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hoxton",
+            "correct": false
+          },
+          {
+            "label": "Chains",
+            "correct": false
+          },
+          {
+            "label": "Dallas",
+            "correct": true
+          },
+          {
+            "label": "Wolf",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5fb3198c378a-fr",
+      "type": "mcq",
+      "prompt": "M.U.G.E.N est un moteur de jeu pour quel type de jeu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jeu de combat",
+            "correct": true
+          },
+          {
+            "label": "Jeu de tir",
+            "correct": false
+          },
+          {
+            "label": "Jeu de plateforme",
+            "correct": false
+          },
+          {
+            "label": "Jeu de puzzle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-619097af447d-fr",
+      "type": "truefalse",
+      "prompt": "La trilogie « Phoenix Wright : Ace Attorney » devait s'achever avec « Trials and Tribulations ».",
+      "payload": {
+        "correct": true
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-67928a134d79-fr",
+      "type": "truefalse",
+      "prompt": "L'antagoniste principal du jeu Saints Row IV est une entité appelée « The Mastermind ».",
+      "payload": {
+        "correct": false
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6de6314240c9-fr",
+      "type": "mcq",
+      "prompt": "Dans « Sonic the Hedgehog » (1991), combien d'émeraudes du chaos pouvait-on collecter ?",
+      "payload": {
+        "options": [
+          {
+            "label": "6",
+            "correct": true
+          },
+          {
+            "label": "7",
+            "correct": false
+          },
+          {
+            "label": "9",
+            "correct": false
+          },
+          {
+            "label": "8",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6fe3c0843a63-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces symboles figure sur le t-shirt de Bubsy T. Bobcat, héros du jeu de 1993 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Un point d'interrogation",
+            "correct": false
+          },
+          {
+            "label": "Un point d'exclamation",
+            "correct": true
+          },
+          {
+            "label": "La lettre B",
+            "correct": false
+          },
+          {
+            "label": "Rien",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7d0ad2427301-fr",
+      "type": "truefalse",
+      "prompt": "Le jeu « Jetpack Joyride » a été créé par « Redbrick Studios ».",
+      "payload": {
+        "correct": false
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-884950d93345-fr",
+      "type": "mcq",
+      "prompt": "Dans « Katamari Damacy », quel personnage contrôle-t-on ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Prince",
+            "correct": true
+          },
+          {
+            "label": "Foomin",
+            "correct": false
+          },
+          {
+            "label": "Fujio",
+            "correct": false
+          },
+          {
+            "label": "Ichigo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8900afe44478-fr",
+      "type": "mcq",
+      "prompt": "Dans Kingdom Hearts, combien de membres compte l'Organisation XIII au total ?",
+      "payload": {
+        "options": [
+          {
+            "label": "13",
+            "correct": false
+          },
+          {
+            "label": "14",
+            "correct": true
+          },
+          {
+            "label": "12",
+            "correct": false
+          },
+          {
+            "label": "10",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-92639a891983-fr",
+      "type": "mcq",
+      "prompt": "Dans Overwatch, quel est le nom complet de Lúcio ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lúcio João Lucas",
+            "correct": false
+          },
+          {
+            "label": "Lúcio Correia dos Santos",
+            "correct": true
+          },
+          {
+            "label": "Lúcio Chupar Prima",
+            "correct": false
+          },
+          {
+            "label": "Lúcio Luiz Lós Guilherme",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9e3ac5d63bb6-fr",
+      "type": "mcq",
+      "prompt": "Dans « Star Wars: Republic Commando » (2005), comment s'appelle l'escouade que l'on incarne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Escouade Delta",
+            "correct": true
+          },
+          {
+            "label": "Escouade Alpha",
+            "correct": false
+          },
+          {
+            "label": "Escouade Oméga",
+            "correct": false
+          },
+          {
+            "label": "Escouade Écho",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b7a3dd191d17-fr",
+      "type": "mcq",
+      "prompt": "Cette arme de Counter-Strike: Global Offensive n'existe pas dans la vraie vie.",
+      "payload": {
+        "options": [
+          {
+            "label": "M4A1",
+            "correct": false
+          },
+          {
+            "label": "M4A4",
+            "correct": true
+          },
+          {
+            "label": "MP9",
+            "correct": false
+          },
+          {
+            "label": "AWP",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c3ba6d3cad5b-fr",
+      "type": "mcq",
+      "prompt": "Dans Left 4 Dead, quelle campagne emmène les héros dans le métro jusqu'à un hôpital pour l'évacuation ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blood Harvest",
+            "correct": false
+          },
+          {
+            "label": "No Mercy",
+            "correct": true
+          },
+          {
+            "label": "Subway Sprint",
+            "correct": false
+          },
+          {
+            "label": "Hospital Havoc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c9ed4aa6c2a8-fr",
+      "type": "mcq",
+      "prompt": "Quelle entreprise a créé le jeu de stratégie « Stellaris » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tripwire Interactive LLC",
+            "correct": false
+          },
+          {
+            "label": "Paradox Development",
+            "correct": true
+          },
+          {
+            "label": "Ensemble Studios",
+            "correct": false
+          },
+          {
+            "label": "Overkill Software",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ca8475c4225f-fr",
+      "type": "truefalse",
+      "prompt": "Le jeu « Stellaris » de Paradox Interactive est sorti en 2016.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ccee541f9f9b-fr",
+      "type": "mcq",
+      "prompt": "Quel genre est souvent associé à la série de jeux « Touhou Project » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jeu occasionnel",
+            "correct": false
+          },
+          {
+            "label": "FPS",
+            "correct": false
+          },
+          {
+            "label": "Shoot 'em up",
+            "correct": true
+          },
+          {
+            "label": "Stratégie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d3c7ac697452-fr",
+      "type": "mcq",
+      "prompt": "Quel est le nom du premier niveau de « Call of Duty : World at War » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vendetta",
+            "correct": false
+          },
+          {
+            "label": "Semper Fi",
+            "correct": true
+          },
+          {
+            "label": "Eviction",
+            "correct": false
+          },
+          {
+            "label": "Ring of Steel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d40fc3644665-fr",
+      "type": "mcq",
+      "prompt": "Quel ingrédient n'entre PAS dans la recette du gâteau dans Minecraft ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lait",
+            "correct": false
+          },
+          {
+            "label": "Œuf",
+            "correct": false
+          },
+          {
+            "label": "Pain",
+            "correct": true
+          },
+          {
+            "label": "Blé",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d5a5faf50d36-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle l'AK-47 dans Counter-Strike: Source ?",
+      "payload": {
+        "options": [
+          {
+            "label": "AK",
+            "correct": false
+          },
+          {
+            "label": "CZ-75",
+            "correct": false
+          },
+          {
+            "label": "AK-74",
+            "correct": false
+          },
+          {
+            "label": "CV-47",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d685c89034e7-fr",
+      "type": "mcq",
+      "prompt": "Dans le jeu Bully, quel est le nom de famille du héros ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hopkins",
+            "correct": true
+          },
+          {
+            "label": "Crabblesnitch",
+            "correct": false
+          },
+          {
+            "label": "Kowalski",
+            "correct": false
+          },
+          {
+            "label": "Smith",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d717907049f4-fr",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on une pièce de Tetris ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tetris",
+            "correct": false
+          },
+          {
+            "label": "Tetromino",
+            "correct": true
+          },
+          {
+            "label": "Tetratile",
+            "correct": false
+          },
+          {
+            "label": "Tetripiece",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e01f9734eccc-fr",
+      "type": "truefalse",
+      "prompt": "Dans le mode carrière de « Need for Speed: Underground 2 », la première voiture disponible est la BMW M3 GTR.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e23ee4ccf3c9-fr",
+      "type": "mcq",
+      "prompt": "Qui, parmi ces personnes, est cofondateur de Valve ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gabe Newell",
+            "correct": true
+          },
+          {
+            "label": "Ray Ueno",
+            "correct": false
+          },
+          {
+            "label": "Robin Walker",
+            "correct": false
+          },
+          {
+            "label": "Marc Laidlaw",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e48de694186e-fr",
+      "type": "truefalse",
+      "prompt": "Super Mario Bros. a été le tout premier jeu vidéo jamais créé.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f270083bbe29-fr",
+      "type": "mcq",
+      "prompt": "Dans « Fire Emblem: Shadow Dragon », comment s'appelle le héros central ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Marth",
+            "correct": true
+          },
+          {
+            "label": "Robin",
+            "correct": false
+          },
+          {
+            "label": "Roy",
+            "correct": false
+          },
+          {
+            "label": "Eliwood",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f630bc6dd5a0-fr",
+      "type": "truefalse",
+      "prompt": "Dans la série Resident Evil, Leon S. Kennedy est membre des S.T.A.R.S.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f9299759d428-fr",
+      "type": "mcq",
+      "prompt": "Dans World of Warcraft, quelle est la couleur d'interface par défaut des druides ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Marron",
+            "correct": false
+          },
+          {
+            "label": "Bleu",
+            "correct": false
+          },
+          {
+            "label": "Orange",
+            "correct": true
+          },
+          {
+            "label": "Vert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-fcdc1c1d51bc-fr",
+      "type": "mcq",
+      "prompt": "Où est né le Sniper dans Team Fortress 2 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Afrique du Sud",
+            "correct": false
+          },
+          {
+            "label": "Nouvelle-Zélande",
+            "correct": true
+          },
+          {
+            "label": "Antarctique",
+            "correct": false
+          },
+          {
+            "label": "Australie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-video-games-fr",
+      "title": "Jeux vidéo",
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-3d869528a1de-fr",
+        "otdb-d717907049f4-fr",
+        "otdb-e48de694186e-fr",
+        "otdb-e23ee4ccf3c9-fr",
+        "otdb-290493c71112-fr",
+        "otdb-38b691991828-fr",
+        "otdb-d40fc3644665-fr",
+        "otdb-5fb3198c378a-fr",
+        "otdb-ccee541f9f9b-fr",
+        "otdb-6de6314240c9-fr",
+        "otdb-0d55543d8a8f-fr",
+        "otdb-2bcf0e7abc68-fr",
+        "otdb-1c87cc67d261-fr",
+        "otdb-c3ba6d3cad5b-fr",
+        "otdb-f270083bbe29-fr",
+        "otdb-2245fb23476d-fr",
+        "otdb-3e78c8622b56-fr",
+        "otdb-48b962eb81ed-fr",
+        "otdb-9e3ac5d63bb6-fr",
+        "otdb-d685c89034e7-fr"
+      ],
+      "description": "Jeux vidéo classiques et modernes."
+    },
+    {
+      "id": "otdb-quiz-gaming-trivia-fr",
+      "title": "Anecdotes de gamer",
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-037289554678-fr",
+        "otdb-f9299759d428-fr",
+        "otdb-1ae05d211545-fr",
+        "otdb-5065cbef75a0-fr",
+        "otdb-332adacd6a36-fr",
+        "otdb-5d5097eb5f11-fr",
+        "otdb-619097af447d-fr",
+        "otdb-67928a134d79-fr",
+        "otdb-7d0ad2427301-fr",
+        "otdb-b7a3dd191d17-fr",
+        "otdb-c9ed4aa6c2a8-fr",
+        "otdb-fcdc1c1d51bc-fr",
+        "otdb-f630bc6dd5a0-fr",
+        "otdb-884950d93345-fr",
+        "otdb-d3c7ac697452-fr",
+        "otdb-d5a5faf50d36-fr",
+        "otdb-e01f9734eccc-fr",
+        "otdb-92639a891983-fr",
+        "otdb-2d49b96a34f1-fr",
+        "otdb-6fe3c0843a63-fr"
+      ],
+      "description": "Personnages, studios et détails de jeux populaires."
+    }
+  ]
+}

@@ -1,0 +1,971 @@
+{
+  "questions": {
+    "otdb-29c0b88fc399": {
+      "prompt": "En 1818, la romancière Mary Shelley a écrit un roman et créé quel personnage célèbre ?",
+      "options": [
+        "Dracula",
+        "Monstre de Frankenstein",
+        "La Chose",
+        "L'Homme invisible"
+      ]
+    },
+    "otdb-2d39d38f6074": {
+      "prompt": "Dans « Harry Potter », que doit faire un élève pour entrer dans la salle commune de Serdaigle ?",
+      "options": [
+        "Tapoter des tonneaux",
+        "Résoudre une énigme",
+        "Frapper en séquence",
+        "Dire un mot de passe"
+      ]
+    },
+    "otdb-347881364e88": {
+      "prompt": "Lequel de ces auteurs n'est pas né en Angleterre ?",
+      "options": [
+        "Arthur Conan Doyle",
+        "H. G. Wells",
+        "Graham Greene",
+        "Arthur C. Clarke"
+      ]
+    },
+    "otdb-3ba71b59edeb": {
+      "prompt": "Dans le roman « Seul sur Mars », combien de temps Mark Watney est-il resté bloqué sur Mars (en sols) ?",
+      "options": [
+        "765 sols",
+        "401 sols",
+        "324 sols",
+        "549 sols"
+      ]
+    },
+    "otdb-3d5767d53e30": {
+      "prompt": "Qui a écrit « Le Petit Prince » ?",
+      "options": [
+        "Antoine de Saint-Exupéry",
+        "F. Scott Fitzgerald",
+        "Miguel de Cervantes",
+        "Jane Austen"
+      ]
+    },
+    "otdb-3f2cbd98c322": {
+      "prompt": "Dans « Alice au pays des merveilles », comment s'appelle la chatte d'Alice ?",
+      "options": [
+        "Smokey",
+        "Oscar",
+        "Dinah",
+        "Heath"
+      ]
+    },
+    "otdb-465651f04dc8": {
+      "prompt": "Comment s'appelle le chien à trois têtes dans « Harry Potter à l'école des sorciers » ?",
+      "options": [
+        "Spike",
+        "Pouffy",
+        "Touffu",
+        "Spot"
+      ]
+    },
+    "otdb-47d5e9d213be": {
+      "prompt": "Dans quel tome de « Harry Potter » rencontre-t-on un Horcruxe pour la première fois ?",
+      "options": [
+        "La Coupe de feu",
+        "La Chambre des secrets",
+        "Les Reliques de la Mort",
+        "Le Prince de sang-mêlé"
+      ]
+    },
+    "otdb-48d86b7ae2b9": {
+      "prompt": "De quel auteur est « Les Œufs verts au jambon » ?",
+      "options": [
+        "Dr. Seuss",
+        "Roald Dahl",
+        "A. A. Milne",
+        "Beatrix Potter"
+      ]
+    },
+    "otdb-49d27b977496": {
+      "prompt": "Les livres de la série « Harry Potter » totalisent plus d'un million de mots."
+    },
+    "otdb-517eb1564b0f": {
+      "prompt": "Dans la série de livres « Odd Thomas », de quelle maladie génétique Danny Jessup est-il atteint ?",
+      "options": [
+        "Adrénoleucodystrophie",
+        "Ostéogenèse imparfaite",
+        "Mucoviscidose",
+        "Ataxie spinocérébelleuse"
+      ]
+    },
+    "otdb-520f03d31f1a": {
+      "prompt": "Qui a écrit « Harry Potter » ?",
+      "options": [
+        "J.K. Rowling",
+        "J.R.R. Tolkien",
+        "Daniel Radcliffe",
+        "Terry Pratchett"
+      ]
+    },
+    "otdb-5eb44b56b155": {
+      "prompt": "Sous quel surnom Jack Dawkins est-il connu dans le roman « Oliver Twist » de Charles Dickens ?",
+      "options": [
+        "Bull's-eye",
+        "M. Fang",
+        "Fagin",
+        "Le Renard"
+      ]
+    },
+    "otdb-61a32e8f4243": {
+      "prompt": "Dans « Le Livre de la jungle » de Rudyard Kipling, quel type de serpent est Kaa ?",
+      "options": [
+        "Vipère",
+        "Anaconda",
+        "Python",
+        "Cobra"
+      ]
+    },
+    "otdb-621949d97144": {
+      "prompt": "Dans le roman « Jurassic Park » de Michael Crichton, quel dinosaure tue John Hammond ?",
+      "options": [
+        "Tyrannosaure",
+        "Vélociraptor",
+        "Procompsognathus",
+        "Dilophosaure"
+      ]
+    },
+    "otdb-6363afc472a1": {
+      "prompt": "Quel roman de John Grisham est né d'un voyage en voiture en Floride, quand l'auteur imaginait avec sa femme des livres volés ?",
+      "options": [
+        "Camino Island",
+        "Gray Mountain",
+        "Rogue Lawyer",
+        "The Litigators"
+      ]
+    },
+    "otdb-667fc853c9f7": {
+      "prompt": "Le roman « 1984 » a été publié en 1949."
+    },
+    "otdb-67266348c8e5": {
+      "prompt": "Parmi ces romans de Stephen King, lequel a été publié en premier ?",
+      "options": [
+        "Christine",
+        "Misery",
+        "Cujo",
+        "Ça"
+      ]
+    },
+    "otdb-6821c580114b": {
+      "prompt": "Quel est le deuxième prénom d'Hermione Granger ?",
+      "options": [
+        "Emma",
+        "Jo",
+        "Jane",
+        "Jean"
+      ]
+    },
+    "otdb-686026876e2c": {
+      "prompt": "Dans quel roman de Mark Twain un mendiant et le prince de Galles échangent-ils leurs habits ?",
+      "options": [
+        "Le Prince et le Pauvre",
+        "Une histoire à la Twain",
+        "Le Riche et le Nigaud",
+        "Hamlet"
+      ]
+    },
+    "otdb-68b8bb2236a7": {
+      "prompt": "Quel était le pseudonyme de la romancière Mary Ann Evans ?",
+      "options": [
+        "George Eliot",
+        "George Orwell",
+        "George Bernard Shaw",
+        "George Saunders"
+      ]
+    },
+    "otdb-6c5b974fa618": {
+      "prompt": "Combien de livres compte la série « Le Monde de Narnia » ?",
+      "options": [
+        "6",
+        "7",
+        "5",
+        "8"
+      ]
+    },
+    "otdb-6e19074f2ff4": {
+      "prompt": "Comment s'appelle le sous-marin du capitaine Nemo dans « Vingt mille lieues sous les mers » ?",
+      "options": [
+        "Le Nautilus",
+        "Le Poséidon",
+        "L'Atlantide",
+        "Le Neptune"
+      ]
+    },
+    "otdb-7ba7d06d2cdd": {
+      "prompt": "Dans « Les Trois Royaumes », qui n'a pas fait partie du serment du Jardin des pêchers ?",
+      "options": [
+        "Zhao Yun",
+        "Liu Bei",
+        "Guan Yu",
+        "Zhang Fei"
+      ]
+    },
+    "otdb-7ec3fa0f0a03": {
+      "prompt": "Dans l'univers de « Harry Potter », qui Drago Malefoy finit-il par épouser ?",
+      "options": [
+        "Astoria Greengrass",
+        "Millicent Bulstrode",
+        "Pansy Parkinson",
+        "Hermione Granger"
+      ]
+    },
+    "otdb-825fad4a4376": {
+      "prompt": "Quel célèbre auteur de romans d'espionnage a écrit l'histoire pour enfants « Chitty Chitty Bang Bang » ?",
+      "options": [
+        "John Buchan",
+        "Ian Fleming",
+        "Joseph Conrad",
+        "Graham Greene"
+      ]
+    },
+    "otdb-8647fd208275": {
+      "prompt": "Dans « Le Seigneur des anneaux », qui est le père du nain Gimli ?",
+      "options": [
+        "Glóin",
+        "Thorin Écu-de-Chêne",
+        "Dwalin",
+        "Bombur"
+      ]
+    },
+    "otdb-86c5df5a0ec9": {
+      "prompt": "Dans « Harry Potter et les Reliques de la Mort », Hermione détruit le quatrième Horcruxe en le transperçant avec l'épée de Gryffondor."
+    },
+    "otdb-8848a1943da4": {
+      "prompt": "Qui a écrit le roman « Moby Dick » ?",
+      "options": [
+        "William Shakespeare",
+        "William Golding",
+        "Herman Melville",
+        "J. R. R. Tolkien"
+      ]
+    },
+    "otdb-88feb8a54512": {
+      "prompt": "À l'origine, le personnage de Charlie, dans « Charlie et la Chocolaterie », devait être noir."
+    },
+    "otdb-899c292b5a3f": {
+      "prompt": "Quel est le titre du quatrième tome de la série « La Tour sombre » de Stephen King ?",
+      "options": [
+        "Les Loups de la Calla",
+        "Cœurs perdus en Atlantide",
+        "La Part des ténèbres",
+        "Magie et Cristal"
+      ]
+    },
+    "otdb-8bc5b6452899": {
+      "prompt": "Quel poète a écrit « La Ballade de la geôle de Reading » alors qu'il était emprisonné pour homosexualité ?",
+      "options": [
+        "Lord Byron",
+        "William Blake",
+        "Oscar Wilde",
+        "Wilfred Owen"
+      ]
+    },
+    "otdb-905958b18dc1": {
+      "prompt": "Quel a été le premier texte écrit pour le projet d'écriture collaboratif SCP Foundation ?",
+      "options": [
+        "SCP-1459",
+        "SCP-999",
+        "SCP-173",
+        "SCP-001"
+      ]
+    },
+    "otdb-96a05205906a": {
+      "prompt": "Quel livre classique s'ouvre sur la phrase « Appelez-moi Ismaël » ?",
+      "options": [
+        "Un conte de deux villes",
+        "Les Hauts de Hurlevent",
+        "Enlevé !",
+        "Moby Dick"
+      ]
+    },
+    "otdb-983fdaaa5930": {
+      "skip": "proposition trop longue"
+    },
+    "otdb-992bd66308cf": {
+      "prompt": "Dans « Le Seigneur des anneaux », à qui appartient Asfaloth, le cheval qui conduit Frodon à Fondcombe ?",
+      "options": [
+        "Aragorn",
+        "Haldir",
+        "Glorfindel",
+        "Arwen"
+      ]
+    },
+    "otdb-9a6358e21825": {
+      "prompt": "Qui a écrit le roman « Des souris et des hommes » ?",
+      "options": [
+        "Mark Twain",
+        "Harper Lee",
+        "George Orwell",
+        "John Steinbeck"
+      ]
+    },
+    "otdb-9ad03ab46b21": {
+      "prompt": "À quel poste Harry Potter joue-t-il au Quidditch ?",
+      "options": [
+        "Batteur",
+        "Gardien",
+        "Attrapeur",
+        "Poursuiveur"
+      ]
+    },
+    "otdb-9bdd80d9731c": {
+      "prompt": "Dans « Les Trois Sorcières » de Terry Pratchett (Disque-monde), laquelle n'est pas l'une des trois sorcières principales ?",
+      "options": [
+        "Magrat Ail",
+        "Mémé Ciredutemps",
+        "Winny Hathersham",
+        "Nounou Ogg"
+      ]
+    },
+    "otdb-9f04d7b75b3e": {
+      "prompt": "Qui a écrit le roman « Jane Eyre » ?",
+      "options": [
+        "Jane Austen",
+        "Emily Brontë",
+        "Charlotte Brontë",
+        "Louisa May Alcott"
+      ]
+    },
+    "otdb-a0923c884eef": {
+      "skip": "titres français des tomes différents selon les éditions"
+    },
+    "otdb-a96f73e225d3": {
+      "prompt": "Qui a écrit la saga de fantasy « A Song of Ice and Fire » (« Le Trône de fer ») ?",
+      "options": [
+        "George Lucas",
+        "George R. R. Martin",
+        "George Orwell",
+        "George Eliot"
+      ]
+    },
+    "otdb-a9a219e9cc53": {
+      "prompt": "Qui a écrit « Un conte de deux villes » ?",
+      "options": [
+        "Mark Twain",
+        "Roald Dahl",
+        "Charles Darwin",
+        "Charles Dickens"
+      ]
+    },
+    "otdb-aa3a43b5c70b": {
+      "prompt": "Laquelle de ces séries de livres est de James Patterson ?",
+      "options": [
+        "Trilogie de Bartiméus",
+        "Harry Potter",
+        "Maximum Ride",
+        "La Légende de Xanth"
+      ]
+    },
+    "otdb-aa91f7257840": {
+      "prompt": "Comment s'appelle le héros de « L'Attrape-cœurs » de J.D. Salinger ?",
+      "options": [
+        "Randall Flagg",
+        "Jay Gatsby",
+        "Fletcher Christian",
+        "Holden Caulfield"
+      ]
+    },
+    "otdb-ac65945bfb3e": {
+      "prompt": "Dans l'univers de « Magic : L'Assemblée », l'extension Fallen Empires se déroule sur quel continent ?",
+      "options": [
+        "Otaria",
+        "Terisiare",
+        "Sarpadia",
+        "Shiv"
+      ]
+    },
+    "otdb-b00da953a2eb": {
+      "prompt": "Quel a été le dernier message des dauphins dans « Le Guide du voyageur galactique » ?",
+      "options": [
+        "La réponse est 42.",
+        "Adieu, monde cruel !",
+        "Et merci pour le poisson",
+        "Terre des braves"
+      ]
+    },
+    "otdb-b068a9db8eea": {
+      "prompt": "Qui est l'auteur du roman « Sa Majesté des mouches », paru en 1954 ?",
+      "options": [
+        "Hunter Fox",
+        "William Golding",
+        "F. Scott Fitzgerald",
+        "Stephen King"
+      ]
+    },
+    "otdb-b7c25f888d42": {
+      "prompt": "Qui a écrit « La Lettre écarlate », publiée en 1850 ?",
+      "options": [
+        "Nathaniel Hawthorne",
+        "James Fenimore Cooper",
+        "Catherine Maria Sedgwick",
+        "Washington Irving"
+      ]
+    },
+    "otdb-b7f2265cc0c4": {
+      "prompt": "Quel comté anglais fictif sert de cadre aux romans de Thomas Hardy ?",
+      "options": [
+        "Ambridge",
+        "Barsetshire",
+        "Wessex",
+        "Fulchester"
+      ]
+    },
+    "otdb-b8e2ea06371e": {
+      "prompt": "Dans « Les Mensonges de Locke Lamora », quel titre Locke porte-t-il dans le milieu criminel ?",
+      "options": [
+        "La Rose des Marrows",
+        "L'Épine d'Emberlain",
+        "L'Épine de Camorr",
+        "L'Épine des Marrows"
+      ]
+    },
+    "otdb-baf8309e802a": {
+      "prompt": "Sous quel nom l'auteur Eric Blair est-il plus connu ?",
+      "options": [
+        "Aldous Huxley",
+        "George Orwell",
+        "Ernest Hemingway",
+        "Ray Bradbury"
+      ]
+    },
+    "otdb-c79ce531b843": {
+      "prompt": "Comment s'appelle la ville où sont enterrés Lily et James Potter ?",
+      "options": [
+        "Pré-au-Lard",
+        "Godric's Hollow",
+        "Little Hangleton",
+        "Loutry Ste Chaspoule"
+      ]
+    },
+    "otdb-ce7f1b6ca788": {
+      "prompt": "Quel écrivain russe a écrit le roman « Guerre et Paix » ?",
+      "options": [
+        "Fiodor Dostoïevski",
+        "Vladimir Nabokov",
+        "Léon Tolstoï",
+        "Alexandre Pouchkine"
+      ]
+    },
+    "otdb-cebd9759c538": {
+      "prompt": "Qui a écrit le roman d'horreur « Rosemary's Baby », paru en 1967 ?",
+      "options": [
+        "Mary Shelley",
+        "Robert Bloch",
+        "Stephen King",
+        "Ira Levin"
+      ]
+    },
+    "otdb-d24b5688efdd": {
+      "prompt": "Dans le roman « Outsiders », de quel gang Ponyboy fait-il partie ?",
+      "options": [
+        "Les Outsiders",
+        "Les Socs",
+        "La Mafia",
+        "Les Greasers"
+      ]
+    },
+    "otdb-d793a6af7353": {
+      "prompt": "Laquelle de ces œuvres n'a PAS été écrite par Shakespeare ?",
+      "options": [
+        "Mesure pour mesure",
+        "Épreuve de tempérance",
+        "Titus Andronicus",
+        "Cymbeline"
+      ]
+    },
+    "otdb-d7aff140508b": {
+      "prompt": "Quel célèbre livre a pour sous-titre « Le Prométhée moderne » ?",
+      "options": [
+        "Dracula",
+        "Légende de Sleepy Hollow",
+        "Frankenstein",
+        "Dr Jekyll et Mr Hyde"
+      ]
+    },
+    "otdb-d81d656cf7e7": {
+      "prompt": "Sous quel pseudonyme Stephen King a-t-il publié cinq romans entre 1977 et 1984 ?",
+      "options": [
+        "Richard Bachman",
+        "Lewis Carroll",
+        "Mark Twain",
+        "J. D. Robb"
+      ]
+    },
+    "otdb-e04397a43b47": {
+      "prompt": "Qui a écrit le roman pour jeunes adultes « Nos étoiles contraires » ?",
+      "options": [
+        "Stephenie Meyer",
+        "John Green",
+        "Suzanne Collins",
+        "Stephen Chbosky"
+      ]
+    },
+    "otdb-e0d70810ca13": {
+      "prompt": "Dans « Les Quatre Filles du docteur March », laquelle des sœurs March épouse Laurie ?",
+      "options": [
+        "Amy",
+        "Beth",
+        "Jo",
+        "Meg"
+      ]
+    },
+    "otdb-e25c0f1fae41": {
+      "prompt": "Combien y a-t-il de livres « Harry Potter » ?",
+      "options": [
+        "7",
+        "8",
+        "6",
+        "5"
+      ]
+    },
+    "otdb-e3e2514b4418": {
+      "prompt": "Quelle pièce, généralement considérée comme la plus adaptable de Shakespeare, met en scène deux « amants maudits » ?",
+      "options": [
+        "Hamlet",
+        "Le Roi Lear",
+        "La Tempête",
+        "Roméo et Juliette"
+      ]
+    },
+    "otdb-e681ede2f911": {
+      "prompt": "Où se déroule « Ça » de Stephen King ?",
+      "options": [
+        "Innsmouth, Massachusetts",
+        "Derry, Maine",
+        "Rockford, Illinois",
+        "Kingsland, Texas"
+      ]
+    },
+    "otdb-e6cf9491aa9d": {
+      "prompt": "Dans « Le Hobbit », qui tue Smaug ?",
+      "options": [
+        "Frodon",
+        "Gandalf le Gris",
+        "Bard",
+        "Bilbon Sacquet"
+      ]
+    },
+    "otdb-e6d85b2d35fa": {
+      "prompt": "Qui a écrit le conte « La Petite Fille aux allumettes » ?",
+      "options": [
+        "Hans Christian Andersen",
+        "Lewis Carroll",
+        "Charles Dickens",
+        "Oscar Wilde"
+      ]
+    },
+    "otdb-e6f3c47ff6da": {
+      "prompt": "Dans le roman « 1984 » de George Orwell, comment s'appelle le régime totalitaire qui contrôle l'Océania ?",
+      "options": [
+        "Néo-bolchevisme",
+        "Alliance terrestre",
+        "Ingsoc",
+        "Effacement du soi"
+      ]
+    },
+    "otdb-e83482a97591": {
+      "prompt": "Dans la série de livres pour enfants, d'où vient à l'origine l'ours Paddington ?",
+      "options": [
+        "Pérou",
+        "Inde",
+        "Canada",
+        "Islande"
+      ]
+    },
+    "otdb-eb2bb4827a0a": {
+      "prompt": "Quel est le titre du premier livre de Sherlock Holmes écrit par Arthur Conan Doyle ?",
+      "options": [
+        "Le Signe des quatre",
+        "Une affaire d'identité",
+        "The Doings of Raffles Haw",
+        "Une étude en rouge"
+      ]
+    },
+    "otdb-f2d10153e681": {
+      "prompt": "Qui est l'auteur de la saga « A Song of Ice and Fire », qui commence par « A Game of Thrones » ?",
+      "options": [
+        "George R. R. Martin",
+        "Brandon Sanderson",
+        "J. R. R. Tolkien",
+        "Steven Erikson"
+      ]
+    },
+    "otdb-f2ee7e6ddbc5": {
+      "prompt": "« Élémentaire, mon cher Watson » n'est jamais vraiment prononcé dans les livres de Conan Doyle sur Sherlock Holmes."
+    },
+    "otdb-f3028b2a1954": {
+      "prompt": "Dans quel roman classique y a-t-il un personnage nommé Homer Simpson ?",
+      "options": [
+        "A Separate Peace",
+        "Des souris et des hommes",
+        "Catch-22",
+        "Le Jour de la sauterelle"
+      ]
+    },
+    "otdb-f4aca684f4c2": {
+      "prompt": "Harry Potter est né le 31 juillet 1980."
+    },
+    "otdb-fc5f34cdfe15": {
+      "prompt": "Dans « Le Seigneur des anneaux », combien d'anneaux de pouvoir ont été donnés à la race des Hommes ?",
+      "options": [
+        "5",
+        "11",
+        "9",
+        "13"
+      ]
+    },
+    "otdb-0022bcee5bcc": {
+      "prompt": "Comment s'appelle la mixtape sortie en 2016 par le producteur vénézuélien de musique électronique Arca ?",
+      "options": [
+        "Entrañas",
+        "Xen",
+        "Sheep",
+        "&&&&&&"
+      ]
+    },
+    "otdb-0774fc6fff7b": {
+      "prompt": "Quel rappeur est plus connu sous le nom d'Artis Leon Ivey Jr. ?",
+      "options": [
+        "Dr. Dre",
+        "Snoop Dogg",
+        "Ice-T",
+        "Coolio"
+      ]
+    },
+    "otdb-0806098edbef": {
+      "prompt": "Quel est le vrai nom du rappeur américain Pitbull ?",
+      "options": [
+        "Belcalis Almánzar",
+        "Ramón Ayala Rodríguez",
+        "Benito Martinez Ocasio",
+        "Armando Christian Pérez"
+      ]
+    },
+    "otdb-0c33419931d3": {
+      "prompt": "En 1993, Prince a changé son nom pour un symbole imprononçable parce qu'il était mécontent de son contrat avec Warner Bros."
+    },
+    "otdb-0d36e1790a65": {
+      "prompt": "La chanson country « A Boy Named Sue » a été écrite par Shel Silverstein."
+    },
+    "otdb-0f05cba52747": {
+      "prompt": "Quel lien unit les membres du groupe de rock américain Kings of Leon ?",
+      "options": [
+        "Membres d'une fraternité",
+        "Anciens camarades",
+        "Amis d'enfance",
+        "Frères et cousins"
+      ]
+    },
+    "otdb-0f5def660039": {
+      "prompt": "En quelle année est sorti l'album « Pinkerton » de Weezer ?",
+      "options": [
+        "1996",
+        "2001",
+        "1990",
+        "1994"
+      ]
+    },
+    "otdb-11009659847f": {
+      "prompt": "Ozzy Osbourne était le chanteur de quel groupe de metal ?",
+      "options": [
+        "AC/DC",
+        "Black Sabbath",
+        "Judas Priest",
+        "Iron Maiden"
+      ]
+    },
+    "otdb-1124ddcc9d2f": {
+      "prompt": "L'album « American Idiot » de Green Day est considéré comme un « opéra punk rock »."
+    },
+    "otdb-152ff8ddf565": {
+      "prompt": "Quel membre des Beatles a raconté des épisodes de « Thomas et ses amis » ?",
+      "options": [
+        "George Harrison",
+        "Paul McCartney",
+        "John Lennon",
+        "Ringo Starr"
+      ]
+    },
+    "otdb-20358574edab": {
+      "prompt": "Laquelle de ces chansons de la comédie musicale « American Idiot » était un titre inédit de Green Day ?",
+      "options": [
+        "When It's Time",
+        "Before the Lobotomy",
+        "Are We the Waiting",
+        "Favorite Son"
+      ]
+    },
+    "otdb-2268e6c88869": {
+      "prompt": "« Make You Feel My Love » a été écrite et interprétée à l'origine par quel auteur-compositeur-interprète ?",
+      "options": [
+        "Elvis",
+        "Billy Joel",
+        "Bob Dylan",
+        "Adele"
+      ]
+    },
+    "otdb-22a9112ede8d": {
+      "prompt": "Lequel de ces titres n'est PAS un album de la chanteuse britannique Adele ?",
+      "options": [
+        "21",
+        "12",
+        "25",
+        "19"
+      ]
+    },
+    "otdb-2499893a8ca4": {
+      "prompt": "« Hallelujah » est une chanson écrite par quel artiste canadien ?",
+      "options": [
+        "Kory Lefkowits",
+        "Ryan Letourneau",
+        "Leonard Cohen",
+        "Justin Bieber"
+      ]
+    },
+    "otdb-25a2498a9b38": {
+      "prompt": "Qui a eu un tube classé dans le top 5 en 1969 avec la chanson « A Boy Named Sue » ?",
+      "options": [
+        "Willie Nelson",
+        "Bob Dylan",
+        "Kris Kristofferson",
+        "Johnny Cash"
+      ]
+    },
+    "otdb-264c8cc322dd": {
+      "prompt": "Quel album de Led Zeppelin contient « Stairway to Heaven » ?",
+      "options": [
+        "Houses of the Holy",
+        "Led Zeppelin IV",
+        "Physical Graffiti",
+        "Led Zeppelin III"
+      ]
+    },
+    "otdb-27961f63be43": {
+      "prompt": "Le titre « YYZ » de Rush tire son nom du code IATA de l'aéroport de quelle ville ?",
+      "options": [
+        "Vancouver",
+        "Toronto",
+        "Calgary",
+        "Ottawa"
+      ]
+    },
+    "otdb-282e7961545e": {
+      "prompt": "En quelle année est née Taylor Swift ?",
+      "options": [
+        "1989",
+        "1988",
+        "1990",
+        "1987"
+      ]
+    },
+    "otdb-2ab6c55e5477": {
+      "prompt": "Laquelle de ces chansons n'est PAS de Men at Work ?",
+      "options": [
+        "Basket Case",
+        "Be Good Johnny",
+        "Who Can It Be Now?",
+        "Dr. Heckyll and Mr. Jive"
+      ]
+    },
+    "otdb-2e9618b6e757": {
+      "prompt": "Comment s'appelait le groupe de hip-hop dont Kanye West faisait partie à la fin des années 1990 ?",
+      "options": [
+        "The Jumpers",
+        "The Kickstarters",
+        "The Beat-Busters",
+        "The Go-Getters"
+      ]
+    },
+    "otdb-342e650a0c31": {
+      "prompt": "Quel a été le premier single de Britney Spears ?",
+      "options": [
+        "(You Drive Me) Crazy",
+        "...Baby One More Time",
+        "Toxic",
+        "Oops!... I Did It Again"
+      ]
+    },
+    "otdb-35b6c876eade": {
+      "prompt": "Selon une chanson des Beatles, qui garde son visage dans un bocal près de la porte ?",
+      "options": [
+        "Loretta Martin",
+        "Lady Madonna",
+        "Molly Jones",
+        "Eleanor Rigby"
+      ]
+    },
+    "otdb-3e27619bc27c": {
+      "prompt": "« The Division Bell » est le dernier album du groupe de rock progressif Pink Floyd."
+    },
+    "otdb-410c224a0e1e": {
+      "prompt": "Quel est le vrai nom du rappeur The Notorious B.I.G. ?",
+      "options": [
+        "Eric Lynn Wright",
+        "O'Shea Jackson",
+        "Christopher Wallace",
+        "Calvin Broadus Jr."
+      ]
+    },
+    "otdb-44be3c326674": {
+      "prompt": "Quelle chanson contient les mots « Numa Numa » et a fait l'objet d'une vidéo virale en 2004 ?",
+      "options": [
+        "Despacito",
+        "Asereje",
+        "Dragostea Din Tei",
+        "Gangnam Style"
+      ]
+    },
+    "otdb-47823dde3a68": {
+      "prompt": "Qui est le chanteur des Smashing Pumpkins ?",
+      "options": [
+        "Eddie Vedder",
+        "Brett Scallions",
+        "Billy Corgan",
+        "Chino Moreno"
+      ]
+    },
+    "otdb-47f852b32b4a": {
+      "prompt": "Qui a enregistré l'album « Down to the Moon » en 1986 ?",
+      "options": [
+        "Andreas Vollenweider",
+        "Jean-Michel Jarre",
+        "Enya",
+        "Bing Crosby"
+      ]
+    },
+    "otdb-4b0d0e38b376": {
+      "prompt": "Le groupe Twenty One Pilots a sorti la chanson « The Motion » en featuring avec Sampha."
+    },
+    "otdb-4c4399a399ee": {
+      "prompt": "Quel est le vrai nom de MC Ride, le chanteur de Death Grips ?",
+      "options": [
+        "Stefan Burnett",
+        "Stanley Burrell",
+        "Andy Morin",
+        "Zach Hill"
+      ]
+    },
+    "otdb-4fefa79ecac8": {
+      "prompt": "Selon leur tube de 1974, que faisaient les Brownsville Station dans les toilettes des garçons (« In the Boys' Room ») ?",
+      "options": [
+        "Ils traînaient",
+        "Ils faisaient pipi",
+        "Ils s'embrassaient",
+        "Ils fumaient"
+      ]
+    },
+    "otdb-51d82f8ddafd": {
+      "prompt": "Quel a été le premier album studio de Daft Punk ?",
+      "options": [
+        "Human After All",
+        "Random Access Memories",
+        "Homework",
+        "Discovery"
+      ]
+    },
+    "otdb-5b7dd27c8663": {
+      "prompt": "Le single « Friday » de Rebecca Black est sorti le 10 février 2011."
+    },
+    "otdb-5ecf956e01a0": {
+      "prompt": "Daft Punk est originaire de France."
+    },
+    "otdb-65fb1590968e": {
+      "prompt": "Dave Grohl a enregistré seul le premier album des Foo Fighters, « Foo Fighters »."
+    },
+    "otdb-6a08a062bb05": {
+      "prompt": "Comment s'appelle le chanteur de l'époque de la guerre froide dont une chanson figure dans Grand Theft Auto IV et qui a un mur commémoratif à Moscou ?",
+      "options": [
+        "Viktor Tsoï",
+        "Brian Jones",
+        "Jimi Hendrix",
+        "Vladimir Vyssotski"
+      ]
+    },
+    "otdb-6b524f33b042": {
+      "prompt": "La tournée « In the Flesh » a accompagné quel album de Pink Floyd ?",
+      "options": [
+        "The Wall",
+        "Wish You Were Here",
+        "Animals",
+        "The Final Cut"
+      ]
+    },
+    "otdb-6c7121e9236b": {
+      "prompt": "Qui a eu un tube en 1976 avec la chanson « You Make Me Feel Like Dancing » ?",
+      "options": [
+        "Billy Joel",
+        "Leo Sayer",
+        "Andy Gibb",
+        "Elton John"
+      ]
+    },
+    "otdb-72c7001a4c86": {
+      "prompt": "Qui est le chanteur de Silverchair ?",
+      "options": [
+        "Ben Gillies",
+        "Daniel Johns",
+        "Chris Joannou",
+        "George Costanza"
+      ]
+    },
+    "otdb-7b8a87820a79": {
+      "prompt": "Qui est le chanteur et leader du groupe de rock Guns N' Roses ?",
+      "options": [
+        "Kurt Cobain",
+        "Slash",
+        "Axl Rose",
+        "Bono"
+      ]
+    },
+    "otdb-7baa79c65a3d": {
+      "prompt": "Quel groupe réunissait Sting, Stewart Copeland et Andy Summers ?",
+      "options": [
+        "The Police",
+        "Def Leppard",
+        "Bon Jovi",
+        "The Cure"
+      ]
+    },
+    "otdb-7cbe050cd412": {
+      "prompt": "De quel album de Daft Punk est tirée la chanson « Harder, Better, Faster, Stronger » ?",
+      "options": [
+        "Homework",
+        "Random Access Memories",
+        "Human After All",
+        "Discovery"
+      ]
+    },
+    "otdb-7cc0ff4e4afb": {
+      "prompt": "Lequel de ces pseudonymes n'a PAS été utilisé par le musicien électronique Aphex Twin ?",
+      "options": [
+        "Bradley Strider",
+        "Burial",
+        "Caustic Window",
+        "GAK"
+      ]
+    },
+    "otdb-7dc8f10d186c": {
+      "prompt": "De quel pays le piano est-il originaire ?",
+      "options": [
+        "Allemagne",
+        "Italie",
+        "Autriche",
+        "France"
+      ]
+    },
+    "otdb-8abfed286a97": {
+      "prompt": "Quelle est la première piste de l'album « Pure Heroine » de Lorde ?",
+      "options": [
+        "Team",
+        "400 Lux",
+        "Tennis Court",
+        "Royals"
+      ]
+    }
+  },
+  "quizzes": {}
+}

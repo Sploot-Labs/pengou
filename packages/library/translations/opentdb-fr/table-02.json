@@ -1,0 +1,917 @@
+{
+  "questions": {
+    "otdb-cae449c9af24": {
+      "prompt": "Dans le film « Taxi Driver » (1976), combien d'armes Travis achète-t-il au vendeur ?",
+      "options": [
+        "4",
+        "2",
+        "1",
+        "6"
+      ]
+    },
+    "otdb-cd1a2252e968": {
+      "prompt": "Comment s'appelle le groupe fictif rétro-mod dont Austin Powers est le chanteur ?",
+      "options": [
+        "Cough Fi",
+        "Mister E",
+        "Ming Tea",
+        "Spear Mint"
+      ]
+    },
+    "otdb-d448aebcb61e": {
+      "prompt": "Parmi ces titres, lequel est celui du film de 1993 réalisé par Ivan Reitman, écrit par Gary Ross, avec Kevin Kline ?",
+      "options": [
+        "Will",
+        "Carl",
+        "Dave",
+        "John"
+      ]
+    },
+    "otdb-d9c5e03ae397": {
+      "prompt": "Dans le film « John Wick », pourquoi John Wick sort-il de sa retraite ?",
+      "options": [
+        "Coup de poing au visage",
+        "Chiot tué, voiture volée",
+        "Besoin d'argent",
+        "Agressé dans la rue"
+      ]
+    },
+    "otdb-daa22593d5b6": {
+      "prompt": "Quelle est la bonne formulation de la phrase latine « Romanes Eunt Domus » dans « La Vie de Brian » des Monty Python ?",
+      "options": [
+        "Roxani Ite Domum",
+        "Romani Ite Domum",
+        "Romans Go Home",
+        "Tomate Ite Domum"
+      ]
+    },
+    "otdb-dbaa3244600f": {
+      "prompt": "Dans la série « ALF », quel est le vrai nom d'ALF ?",
+      "options": [
+        "Gordon Shumway",
+        "Gordon Foster",
+        "Gordon Milipp",
+        "Gordon von Gam"
+      ]
+    },
+    "otdb-dd8f1cda33e2": {
+      "prompt": "Dans le film « Le Géant de fer », quel personnage est le héros ?",
+      "options": [
+        "Dean McCoppin",
+        "Annie Hughes",
+        "Kent Mansley",
+        "Hogarth Hughes"
+      ]
+    },
+    "otdb-e1b21408b87f": {
+      "prompt": "Dans le film « Zoulou » (1964), quel chant la compagnie de l'armée britannique entonne-t-elle avant la bataille finale ?",
+      "options": [
+        "Men of Harlech",
+        "Colonel Bogey March",
+        "The British Grenadiers",
+        "Scotland the Brave"
+      ]
+    },
+    "otdb-e95168f0e52a": {
+      "prompt": "Quel humoriste de stand-up prête sa voix au perroquet Iago dans l'adaptation Disney d'« Aladdin » (1992) ?",
+      "options": [
+        "Jonathan Freeman",
+        "Robin Williams",
+        "Gilbert Gottfried",
+        "Pauly Shore"
+      ]
+    },
+    "otdb-f4998a7d9f8d": {
+      "prompt": "Comment s'appelle le droïde orange et blanc dans « Star Wars : Le Réveil de la Force » ?",
+      "options": [
+        "AA-A",
+        "BB-3",
+        "BB-8",
+        "R2-D2"
+      ]
+    },
+    "otdb-f9411cf7bacd": {
+      "prompt": "Lequel de ces méchants de James Bond n'est pas affilié au SPECTRE ?",
+      "options": [
+        "Rosa Klebb",
+        "Emilio Largo",
+        "Auric Goldfinger",
+        "Docteur No"
+      ]
+    },
+    "otdb-f99623b87890": {
+      "prompt": "Lequel de ces acteurs ou actrices ne fait pas partie de la distribution de « Suicide Squad » (2016) ?",
+      "options": [
+        "Scarlett Johansson",
+        "Margot Robbie",
+        "Will Smith",
+        "Jared Leto"
+      ]
+    },
+    "otdb-fba3285a9ba0": {
+      "prompt": "Comment s'appelait le héros du film « Commando » (1985) ?",
+      "options": [
+        "John Matrix",
+        "Ben Richards",
+        "Harry Tasker",
+        "Douglas Quaid"
+      ]
+    },
+    "otdb-fc99b197e0ba": {
+      "prompt": "Brandon Routh joue le personnage principal du film « John Wick »."
+    },
+    "otdb-fdfb5113a762": {
+      "prompt": "Sean Connery n'apparaît pas dans « Indiana Jones et le Royaume du crâne de cristal » parce qu'il trouvait la retraite trop agréable."
+    },
+    "otdb-02fb118da74a": {
+      "prompt": "Dans les comics DC, où vit Green Arrow (Oliver Queen) ?",
+      "options": [
+        "Central City",
+        "Star City",
+        "Metropolis",
+        "Gotham City"
+      ]
+    },
+    "otdb-052707e1b8a6": {
+      "prompt": "Rolex est une entreprise spécialisée dans quel type de produit ?",
+      "options": [
+        "Montres",
+        "Voitures",
+        "Ordinateurs",
+        "Équipement sportif"
+      ]
+    },
+    "otdb-062e53ea5c98": {
+      "prompt": "Quelle attraction emblématique de Disneyland a fermé en 2017 pour devenir une attraction sur le thème des « Gardiens de la Galaxie » ?",
+      "options": [
+        "Peter Pan's Flight",
+        "Pirates des Caraïbes",
+        "Tower of Terror",
+        "Haunted Mansion"
+      ]
+    },
+    "otdb-0e4e4043cb3c": {
+      "prompt": "« A3 », « B1 » et « Legal » sont des noms de formats typiques de quel objet ?",
+      "options": [
+        "Livres de droit",
+        "Écrans de téléphone",
+        "Papier",
+        "Avions"
+      ]
+    },
+    "otdb-0ff39d4f19b6": {
+      "prompt": "Les premières lanternes d'Halloween (jack-o'-lanterns) étaient en fait des navets évidés."
+    },
+    "otdb-156bcc53194d": {
+      "prompt": "Quel fruit entre traditionnellement dans la composition d'une forêt-noire ?",
+      "options": [
+        "Abricots",
+        "Raisins secs",
+        "Cerises",
+        "Pommes"
+      ]
+    },
+    "otdb-168a9d46e217": {
+      "prompt": "Qui a été le premier président du Mexique ?",
+      "options": [
+        "Miguel Hidalgo y Costilla",
+        "Benito Juárez",
+        "Guadalupe Victoria",
+        "Vicente Guerrero"
+      ]
+    },
+    "otdb-16c5ebcfb938": {
+      "prompt": "Seule une petite part de la population mondiale est intolérante au lactose."
+    },
+    "otdb-1abcbd8e8ab9": {
+      "skip": "question sur la langue anglaise"
+    },
+    "otdb-1e0d6a4763b8": {
+      "prompt": "Le monoxyde de dihydrogène a été interdit pour des risques sanitaires après sa découverte en 1983 dans des piscines et dans l'eau potable."
+    },
+    "otdb-1e69970acf18": {
+      "prompt": "Quand le site « Facebook » a-t-il été lancé ?",
+      "options": [
+        "2006",
+        "2005",
+        "2004",
+        "2003"
+      ]
+    },
+    "otdb-20357285a49a": {
+      "prompt": "Quel célèbre architecte, mort en 2019 à 102 ans, a conçu la pyramide de verre du Louvre à Paris ?",
+      "options": [
+        "Wang Shu",
+        "Pascale Guédot",
+        "I. M. Pei",
+        "Frank Gehry"
+      ]
+    },
+    "otdb-20d9976c9f51": {
+      "prompt": "Embrasser quelqu'un pendant une minute brûle environ 2 calories."
+    },
+    "otdb-230b8ef58364": {
+      "prompt": "Comment les marins appellent-ils l'avant d'un bateau ?",
+      "options": [
+        "Proue",
+        "Tribord",
+        "Poupe",
+        "Bâbord"
+      ]
+    },
+    "otdb-290493c71112": {
+      "prompt": "Dans « Half-Life », comment s'appelle l'alien qui s'accroche à la tête ?",
+      "options": [
+        "Vortigaunt",
+        "Bullsquid",
+        "Facehugger",
+        "Headcrab"
+      ]
+    },
+    "otdb-2ad26c2bcad9": {
+      "prompt": "Cinq dollars valent combien de pièces de 5 cents (« nickels ») ?",
+      "options": [
+        "69",
+        "25",
+        "50",
+        "100"
+      ]
+    },
+    "otdb-2d49b96a34f1": {
+      "prompt": "Dans « Resident Evil 3 », combien d'emplacements d'inventaire Jill a-t-elle au début de la partie ?",
+      "options": [
+        "8",
+        "12",
+        "10",
+        "6"
+      ]
+    },
+    "otdb-31a3c42d587e": {
+      "prompt": "Les concombres sont généralement composés de plus de 90 % d'eau."
+    },
+    "otdb-32080e238f7a": {
+      "prompt": "Le nom scientifique des aurores australes est Aurora Australis."
+    },
+    "otdb-3291e904c108": {
+      "prompt": "Quel président américain figure sur le billet d'un dollar ?",
+      "options": [
+        "Abraham Lincoln",
+        "George Washington",
+        "Thomas Jefferson",
+        "Benjamin Franklin"
+      ]
+    },
+    "otdb-32dfe9ed2fef": {
+      "prompt": "Quel pays produit environ 40 % de la vanille mondiale ?",
+      "options": [
+        "Chine",
+        "Mexique",
+        "Madagascar",
+        "Indonésie"
+      ]
+    },
+    "otdb-3404f5b69fbd": {
+      "prompt": "Comment la Pologne s'appelle-t-elle en polonais ?",
+      "options": [
+        "Pupcia",
+        "Póland",
+        "Polszka",
+        "Polska"
+      ]
+    },
+    "otdb-343661d9214f": {
+      "prompt": "Le terme « spam » est antérieur au produit alimentaire « Spam »."
+    },
+    "otdb-35a8f0d39774": {
+      "prompt": "Avec quelle entreprise Valve a-t-elle collaboré pour créer le Vive ?",
+      "options": [
+        "Razer",
+        "HTC",
+        "Oculus",
+        "Google"
+      ]
+    },
+    "otdb-39dce060749e": {
+      "prompt": "À qui appartient le visage en niveaux de gris de l'émoticône Kappa sur Twitch ?",
+      "options": [
+        "Jimmy DeSeno",
+        "John DeSeno",
+        "Josh DeSeno",
+        "Justin DeSeno"
+      ]
+    },
+    "otdb-3bbe83573e25": {
+      "prompt": "À quelle famille de langues appartient le kazakh ?",
+      "options": [
+        "Ouralienne",
+        "Indo-européenne",
+        "Mongolique",
+        "Turcique"
+      ]
+    },
+    "otdb-45be09803d4e": {
+      "prompt": "De quel pays viennent les sushis et le karaoké ?",
+      "options": [
+        "Japon",
+        "Chine",
+        "Vietnam",
+        "Corée du Sud"
+      ]
+    },
+    "otdb-463875432d3a": {
+      "prompt": "Dans quelle direction la statue de la Liberté regarde-t-elle ?",
+      "options": [
+        "Sud-ouest",
+        "Nord-est",
+        "Nord-ouest",
+        "Sud-est"
+      ]
+    },
+    "otdb-4aca7400693c": {
+      "prompt": "Quelle entreprise a développé la voix de synthèse Vocaloid Hatsune Miku ?",
+      "options": [
+        "Sony",
+        "Sega",
+        "Yamaha Corporation",
+        "Crypton Future Media"
+      ]
+    },
+    "otdb-4faaa6a3d415": {
+      "prompt": "Quel est le mot espagnol pour « âne » ?",
+      "options": [
+        "Caballo",
+        "Perro",
+        "Toro",
+        "Burro"
+      ]
+    },
+    "otdb-50988c1d35c8": {
+      "prompt": "Quelle était la destination du vol disparu MH370 ?",
+      "options": [
+        "Kuala Lumpur",
+        "Pékin",
+        "Tokyo",
+        "Singapour"
+      ]
+    },
+    "otdb-52f1cb662555": {
+      "prompt": "Comment les Néerlandais appellent-ils leur langue ?",
+      "options": [
+        "Dansk",
+        "Hollander",
+        "Deutsch",
+        "Nederlands"
+      ]
+    },
+    "otdb-530f585afb05": {
+      "prompt": "Le cancer n'est pas contagieux en lui-même."
+    },
+    "otdb-581bc67061a6": {
+      "prompt": "Laquelle de ces histoires ne fait pas partie des fables d'Ésope ?",
+      "options": [
+        "Le Renard et les Raisins",
+        "La Grenouille et le Bœuf",
+        "Rox et Rouky",
+        "La Tortue et le Lièvre"
+      ]
+    },
+    "otdb-59b042843e27": {
+      "prompt": "Quel est le mot coréen romanisé pour « cœur » ?",
+      "options": [
+        "Segseu",
+        "Simjang",
+        "Jeongsin",
+        "Aejeong"
+      ]
+    },
+    "otdb-5b4ff66a9abb": {
+      "prompt": "Laquelle de ces langues indiennes ne fait pas partie de la famille indo-européenne ?",
+      "options": [
+        "Tamoul",
+        "Ourdou",
+        "Pendjabi",
+        "Hindi"
+      ]
+    },
+    "otdb-6b98a9b2b279": {
+      "prompt": "Quel fleuve traverse la ville écossaise de Glasgow ?",
+      "options": [
+        "Clyde",
+        "Tweed",
+        "Tay",
+        "Dee"
+      ]
+    },
+    "otdb-76e3b6a86b9a": {
+      "prompt": "Qui est à l'origine de la citation « Ce qui ne nous tue pas nous rend plus forts » ?",
+      "options": [
+        "Friedrich Nietzsche",
+        "Christopher Hitchens",
+        "Kelly Clarkson",
+        "G. Gordon Liddy"
+      ]
+    },
+    "otdb-7c50e0e0f244": {
+      "prompt": "Comment appelle-t-on la cuisine indienne cuite sur du charbon dans un four en argile ?",
+      "options": [
+        "Biryani",
+        "Pani puri",
+        "Tandoori",
+        "Tiki masala"
+      ]
+    },
+    "otdb-884950d93345": {
+      "prompt": "Dans « Katamari Damacy », quel personnage contrôle-t-on ?",
+      "options": [
+        "Le Prince",
+        "Foomin",
+        "Fujio",
+        "Ichigo"
+      ]
+    },
+    "otdb-89099f00bba7": {
+      "prompt": "D'où l'ananas est-il originaire ?",
+      "options": [
+        "Amérique du Sud",
+        "Hawaï",
+        "Asie",
+        "Europe"
+      ]
+    },
+    "otdb-8937910110e0": {
+      "prompt": "De Eemhof, Port Zelande et Het Heijderbos sont des domaines de villas de vacances appartenant à quelle entreprise ?",
+      "options": [
+        "Villa Plus",
+        "Yelloh Village",
+        "Keycamp",
+        "Center Parcs"
+      ]
+    },
+    "otdb-89a263bb2a6a": {
+      "prompt": "Sur une cible de fléchettes, quel numéro est directement opposé au 1 ?",
+      "options": [
+        "15",
+        "20",
+        "12",
+        "19"
+      ]
+    },
+    "otdb-8e3d4fd4fbee": {
+      "prompt": "La médaille Fields, l'une des distinctions les plus convoitées en mathématiques, est décernée tous les combien d'années ?",
+      "options": [
+        "3 ans",
+        "6 ans",
+        "5 ans",
+        "4 ans"
+      ]
+    },
+    "otdb-92eb5125f007": {
+      "prompt": "Quel style de bière contient généralement plus de houblon que la moyenne ?",
+      "options": [
+        "India Pale Ale",
+        "Stout",
+        "Extra Special Bitter",
+        "Scotch Ale"
+      ]
+    },
+    "otdb-94f99d7b3982": {
+      "prompt": "All Souls et Merton sont des collèges de quelle université ?",
+      "options": [
+        "Manchester",
+        "Cambridge",
+        "Leeds",
+        "Oxford"
+      ]
+    },
+    "otdb-9618c355b1f9": {
+      "prompt": "Quel canal relie la Méditerranée à la mer Rouge ?",
+      "options": [
+        "Canal du Karakoum",
+        "Canal de Suez",
+        "Canal du Sinaï",
+        "Canal de Panama"
+      ]
+    },
+    "otdb-973b51a3c544": {
+      "prompt": "L'intérieur de quelle église de la Cité du Vatican a été conçu en 1503 par des architectes de la Renaissance dont Bramante, Michel-Ange et le Bernin ?",
+      "options": [
+        "Duomo de Florence",
+        "Cathédrale de Catane",
+        "Basilique Saint-Marc",
+        "Basilique Saint-Pierre"
+      ]
+    },
+    "otdb-9c4e2c92d1b4": {
+      "prompt": "La trypophobie est la peur de quoi ?",
+      "options": [
+        "Des amas de trous",
+        "De trop manger",
+        "De parler en public",
+        "De nager en eau profonde"
+      ]
+    },
+    "otdb-a64dba54c749": {
+      "prompt": "Avec quels fruits à coque fabrique-t-on le massepain ?",
+      "options": [
+        "Cacahuètes",
+        "Noix",
+        "Pistaches",
+        "Amandes"
+      ]
+    },
+    "otdb-abcd50db1083": {
+      "prompt": "Quelle est la plus grande espèce vivante de manchot ?",
+      "options": [
+        "Manchot royal",
+        "Manchot papou",
+        "Manchot d'Adélie",
+        "Manchot empereur"
+      ]
+    },
+    "otdb-aed2f8b8e80f": {
+      "prompt": "Quelle langue est la plus parlée en Suisse ?",
+      "options": [
+        "Suisse",
+        "Italien",
+        "Français",
+        "Allemand"
+      ]
+    },
+    "otdb-af9b61f11602": {
+      "prompt": "La purée de pommes de terre instantanée a été inventée par le Canadien Edward Asselbergs en 1962."
+    },
+    "otdb-b495fe142388": {
+      "prompt": "Le portrait de quel président figure sur le rare billet de 2 dollars américain ?",
+      "options": [
+        "Ulysses Grant",
+        "Martin Van Buren",
+        "Thomas Jefferson",
+        "John Quincy Adams"
+      ]
+    },
+    "otdb-b50bd693139c": {
+      "prompt": "Le Soleil se lève au nord."
+    },
+    "otdb-b59ce2c960ab": {
+      "prompt": "Quelle a été la toute première ligne du métro de Londres ?",
+      "options": [
+        "Metropolitan line",
+        "Victoria line",
+        "Bakerloo line",
+        "Circle line"
+      ]
+    },
+    "otdb-bc1879be96bc": {
+      "prompt": "Qui a inventé la toute première tablette de chocolat, en 1847 ?",
+      "options": [
+        "John Cadbury",
+        "Joseph Fry",
+        "John Tyler",
+        "Andrew Johnson"
+      ]
+    },
+    "otdb-bf8d1be8ff4e": {
+      "prompt": "Si vous plantiez des graines de Quercus robur, que pousserait-il ?",
+      "options": [
+        "Des fleurs",
+        "Des arbres",
+        "Des céréales",
+        "Des légumes"
+      ]
+    },
+    "otdb-c0de5e707233": {
+      "prompt": "L'Équateur utilise le peso mexicain comme monnaie."
+    },
+    "otdb-c0f88fed63ec": {
+      "prompt": "Cette entrepreneuse ghanéenne est une pionnière du microcrédit. Qui est-ce ?",
+      "options": [
+        "Sionne Neely",
+        "Ama Ata Aidoo",
+        "Esther Afua Ocloo",
+        "Farida Bedwei"
+      ]
+    },
+    "otdb-c35cd3600f10": {
+      "prompt": "La « gomme arabique » est une gomme naturelle formée de la sève durcie de quelle espèce d'arbre ?",
+      "options": [
+        "Palmier",
+        "Ficus",
+        "Acacia",
+        "Eucalyptus"
+      ]
+    },
+    "otdb-c522ca61af73": {
+      "prompt": "Quel pays a développé le fusil d'assaut AK-47 ?",
+      "options": [
+        "Union soviétique",
+        "Iran",
+        "Pologne",
+        "Israël"
+      ]
+    },
+    "otdb-ca2ff98c40ab": {
+      "prompt": "Le Nutella est produit par l'entreprise allemande Ferrero."
+    },
+    "otdb-ca9bec94ddd3": {
+      "prompt": "Comment dit-on au revoir en espagnol ?",
+      "options": [
+        "Adiós",
+        "Salir",
+        "Au revoir",
+        "Hola"
+      ]
+    },
+    "otdb-cfd2d4d720d5": {
+      "prompt": "Quelle est la monnaie de la Pologne ?",
+      "options": [
+        "Rouble",
+        "Złoty",
+        "Couronne",
+        "Euro"
+      ]
+    },
+    "otdb-d14e44231eac": {
+      "prompt": "Quel surnom portait le Hughes H-4 Hercules, un hydravion de transport lourd qui a volé en 1947 ?",
+      "options": [
+        "Cheval de Troie",
+        "Spruce Goose",
+        "Fat Man",
+        "Arche de Noé"
+      ]
+    },
+    "otdb-d582c04bf2cc": {
+      "prompt": "Lequel de ces termes anatomiques désigne l'extrémité du côté de la queue ?",
+      "options": [
+        "Ventral",
+        "Caudal",
+        "Proximal",
+        "Coronal"
+      ]
+    },
+    "otdb-db863aa53f9b": {
+      "prompt": "Que fabrique et vend une modiste ?",
+      "options": [
+        "Chaussures",
+        "Chapeaux",
+        "Chemises",
+        "Ceintures"
+      ]
+    },
+    "otdb-e10828935ccf": {
+      "prompt": "Les taureaux sont attirés par la couleur rouge."
+    },
+    "otdb-e3dafe0ae306": {
+      "skip": "question sur la langue anglaise"
+    },
+    "otdb-e7c00ba0d9e9": {
+      "prompt": "Quel est le mot russe romanisé pour « hiver » ?",
+      "options": [
+        "Vesna",
+        "Osen'",
+        "Leto",
+        "Zima"
+      ]
+    },
+    "otdb-e8d26e093a84": {
+      "prompt": "Quand la Déclaration d'indépendance a-t-elle été approuvée par le Second Congrès continental ?",
+      "options": [
+        "4 juin 1776",
+        "2 juillet 1776",
+        "4 juillet 1776",
+        "4 mai 1776"
+      ]
+    },
+    "otdb-eae72d4f6e65": {
+      "skip": "propositions trop longues"
+    },
+    "otdb-eb03cda2a252": {
+      "prompt": "Bob et Mike Bryan, deux frères célèbres, pratiquaient quel sport ?",
+      "options": [
+        "Tennis",
+        "Baseball",
+        "Basket-ball",
+        "Football"
+      ]
+    },
+    "otdb-eb53a1e7d8c6": {
+      "prompt": "Quelle boisson alcoolisée est principalement faite à partir de baies de genévrier ?",
+      "options": [
+        "Vodka",
+        "Tequila",
+        "Rhum",
+        "Gin"
+      ]
+    },
+    "otdb-f0534ac3f64b": {
+      "prompt": "Quel élément de machine se trouve au centre des fidget spinners ?",
+      "options": [
+        "Essieux",
+        "Engrenages",
+        "Roulements",
+        "Courroies"
+      ]
+    },
+    "otdb-f0bf2d93021c": {
+      "prompt": "Comment s'appelle la monnaie utilisée en Éthiopie ?",
+      "options": [
+        "Dirham",
+        "Birr",
+        "Dollar américain",
+        "Rand"
+      ]
+    },
+    "otdb-fcfe7eb0a77e": {
+      "prompt": "Quelle est la forme du jouet inventé par le professeur hongrois Ernő Rubik ?",
+      "options": [
+        "Sphère",
+        "Cylindre",
+        "Cube",
+        "Pyramide"
+      ]
+    },
+    "otdb-fd4c3f667f1c": {
+      "prompt": "Quelle est la deuxième langue maternelle la plus parlée en Espagne ?",
+      "options": [
+        "Français",
+        "Portugais",
+        "Catalan",
+        "Espagnol"
+      ]
+    },
+    "otdb-06e72217a34e": {
+      "prompt": "Quelle est la capitale du Sénégal ?",
+      "options": [
+        "Nouakchott",
+        "Monrovia",
+        "Conakry",
+        "Dakar"
+      ]
+    },
+    "otdb-093fc816e5eb": {
+      "prompt": "Quelle est la capitale de l'Inde ?",
+      "options": [
+        "New Delhi",
+        "Tithi",
+        "Montréal",
+        "Pékin"
+      ]
+    },
+    "otdb-09c4b49e009e": {
+      "prompt": "Quelle est la deuxième plus grande ville de Russie ?",
+      "options": [
+        "Nijni Novgorod",
+        "Saint-Pétersbourg",
+        "Vladivostok",
+        "Minsk"
+      ]
+    },
+    "otdb-0b69dea88ca7": {
+      "prompt": "Le drapeau de la Biélorussie comporte un motif de broderie rouge et blanc du côté de la hampe."
+    },
+    "otdb-13441e05cea3": {
+      "prompt": "Quel est le premier parc national créé aux États-Unis ?",
+      "options": [
+        "Rocky Mountain",
+        "Yellowstone",
+        "Sequoia",
+        "Yosemite"
+      ]
+    },
+    "otdb-16785d792b30": {
+      "prompt": "Il existe une île nommée « Java »."
+    },
+    "otdb-1cd4172ba8c3": {
+      "prompt": "Dans quelle ville se trouve la Space Needle ?",
+      "options": [
+        "Toronto",
+        "Seattle",
+        "Vancouver",
+        "Los Angeles"
+      ]
+    },
+    "otdb-1d737639c45f": {
+      "prompt": "Comment s'appelle la péninsule qui contient l'Espagne et le Portugal ?",
+      "options": [
+        "Péninsule européenne",
+        "Péninsule du Péloponnèse",
+        "Péninsule scandinave",
+        "Péninsule ibérique"
+      ]
+    },
+    "otdb-2327aa8212b8": {
+      "prompt": "En 2012, la principauté germanophone du Liechtenstein, en Europe centrale, comptait combien d'habitants ?",
+      "options": [
+        "2 400",
+        "90 000",
+        "36 600",
+        "323 400"
+      ]
+    },
+    "otdb-232a098b7803": {
+      "prompt": "Quel est le nom actuel de la ville russe de Königsberg, autrefois en Prusse-Orientale ?",
+      "options": [
+        "Kazan",
+        "Kaliningrad",
+        "Koursk",
+        "Krasnodar"
+      ]
+    },
+    "otdb-28eb3d9fb6e5": {
+      "prompt": "Quel fleuve a été barré pour créer le lac Gatún et le canal de Panama ?",
+      "options": [
+        "Río Chepo",
+        "Río Chucunaque",
+        "Río Tuira",
+        "Río Chagres"
+      ]
+    },
+    "otdb-2946a2afd207": {
+      "prompt": "Avec combien de pays les États-Unis partagent-ils une frontière terrestre ?",
+      "options": [
+        "1",
+        "3",
+        "2",
+        "4"
+      ]
+    },
+    "otdb-29510c243d0a": {
+      "skip": "doublon de oqdb-0245-1"
+    },
+    "otdb-2a67a99cd84b": {
+      "prompt": "Où se situe le désert de Sonora ?",
+      "options": [
+        "Asie",
+        "Amérique du Sud",
+        "Afrique",
+        "Amérique du Nord"
+      ]
+    },
+    "otdb-2b20e09b3cde": {
+      "prompt": "Lequel de ces noms de pays n'est pas écrit dans sa propre langue ?",
+      "options": [
+        "Elláda",
+        "Suomi",
+        "Schweiz",
+        "Slovaško"
+      ]
+    },
+    "otdb-3191a00b0650": {
+      "prompt": "Le troisième plus grand pays d'Amérique du Sud (en kilomètres carrés) est la Colombie."
+    },
+    "otdb-346b2f4a8147": {
+      "prompt": "Quel est le plus grand pays du monde ?",
+      "options": [
+        "Russie",
+        "Canada",
+        "États-Unis",
+        "Chine"
+      ]
+    },
+    "otdb-36d17a8a52f4": {
+      "prompt": "Le Groenland est presque aussi grand que l'Afrique."
+    },
+    "otdb-376eace346da": {
+      "prompt": "Dans quelle ville se trouve l'armée de terre cuite ?",
+      "options": [
+        "Hong Kong",
+        "Shanghai",
+        "Xi'an",
+        "Pékin"
+      ]
+    },
+    "otdb-3e9d6566d631": {
+      "prompt": "L'île de Bornéo, en Asie du Sud-Est, est politiquement partagée entre 3 pays."
+    },
+    "otdb-3feaf4c1b52f": {
+      "prompt": "Lequel de ces pays arabes n'a pas un drapeau composé uniquement de couleurs panarabes ?",
+      "options": [
+        "Émirats arabes unis",
+        "Qatar",
+        "Jordanie",
+        "Koweït"
+      ]
+    },
+    "otdb-43f26954c3d1": {
+      "prompt": "Les falaises blanches de Douvres se trouvent dans quel pays ?",
+      "options": [
+        "Pays-Bas",
+        "Suède",
+        "États-Unis",
+        "Royaume-Uni"
+      ]
+    },
+    "otdb-47a87c3b3675": {
+      "prompt": "Dans quel comté anglais se trouve l'université d'East Anglia ?",
+      "options": [
+        "Essex",
+        "Norfolk",
+        "Cambridgeshire",
+        "Suffolk"
+      ]
+    },
+    "otdb-47d0be6d9b10": {
+      "prompt": "La route 66 traverse tout le continent américain, de la Californie à New York."
+    }
+  },
+  "quizzes": {}
+}
