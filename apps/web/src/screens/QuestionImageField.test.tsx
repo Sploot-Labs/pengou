@@ -25,6 +25,14 @@ describe('parseImageUrl', () => {
     }))
   it('refuse une adresse invalide', () =>
     expect(parseImageUrl('pas une url')).toEqual({ ok: false, error: 'Adresse invalide.' }))
+  it('refuse une adresse plus longue que la limite du serveur (2048)', () => {
+    const base = 'https://exemple.org/'
+    expect(parseImageUrl(base + 'a'.repeat(2049 - base.length))).toEqual({
+      ok: false,
+      error: 'Adresse trop longue.',
+    })
+    expect(parseImageUrl(base + 'a'.repeat(2048 - base.length)).ok).toBe(true)
+  })
   it('accepte https et trime', () =>
     expect(parseImageUrl('  https://exemple.org/a.png ')).toEqual({
       ok: true,

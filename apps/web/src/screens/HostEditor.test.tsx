@@ -74,6 +74,14 @@ vi.mock('../api/auth', () => ({
   useSession: () => ({ refresh: vi.fn() }),
 }))
 
+const { mockUploadMedia } = vi.hoisted(() => ({ mockUploadMedia: vi.fn() }))
+vi.mock('../api/media', () => ({ uploadMedia: mockUploadMedia }))
+// Pas de canvas dans jsdom : le fichier est envoyé tel quel.
+vi.mock('../media/downscale', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../media/downscale')>()),
+  prepareImageForUpload: (file: File) => Promise.resolve({ blob: file, transformed: false }),
+}))
+
 vi.mock('../realtime/GameSocketProvider', () => ({
   useSharedGameSocket: () => ({ emitAck: vi.fn(), connected: true, socket: {}, on: vi.fn() }),
 }))
@@ -177,5 +185,46 @@ describe('HostEditor — image de la question', () => {
         expect.objectContaining({ media: '/uploads/t/a.png', mediaAlt: 'Un manchot' }),
       ),
     )
+  })
+})
+
+describe("HostEditor — envoi d'image et changement de question", () => {
+  const second = { ...baseQuestion, id: 'quest2', prompt: 'Deuxième question', orderIndex: 1 }
+  beforeEach(() => {
+    vi.clearAllMocks()
+    mockListQuestions.mockResolvedValue([baseQuestion, second])
+  })
+  afterEach(() => {
+    cleanup()
+    mockListQuestions.mockResolvedValue([baseQuestion])
+  })
+
+  it("un envoi terminé après être passé à une autre question est enregistré sur la question d'origine", async () => {
+    let resolveUpload: (value: { url: string }) => void = () => {}
+    mockUploadMedia.mockReturnValue(
+      new Promise((resolve) => {
+        resolveUpload = resolve
+      }),
+    )
+    renderEditor()
+    fireEvent.change(await screen.findByTestId('question-image-file'), {
+      target: { files: [new File(['x'], 'photo.png', { type: 'image/png' })] },
+    })
+    await waitFor(() => expect(mockUploadMedia).toHaveBeenCalled())
+    fireEvent.click(screen.getByRole('button', { name: /Deuxième question/ }))
+    expect(await screen.findByDisplayValue('Deuxième question')).toBeInTheDocument()
+    // Le champ image est propre à chaque question : pas d'« Envoi… » hérité de la première.
+    expect(screen.getByRole('button', { name: 'Envoyer une image' })).toBeEnabled()
+
+    resolveUpload({ url: '/uploads/t/nouvelle.png' })
+
+    await waitFor(() =>
+      expect(mockUpdateQuestion).toHaveBeenCalledWith(
+        'quiz1',
+        'quest1',
+        expect.objectContaining({ media: '/uploads/t/nouvelle.png' }),
+      ),
+    )
+    expect(mockUpdateQuestion).not.toHaveBeenCalledWith('quiz1', 'quest2', expect.anything())
   })
 })

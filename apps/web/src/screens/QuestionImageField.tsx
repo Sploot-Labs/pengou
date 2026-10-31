@@ -11,13 +11,17 @@ const EXTENSIONS: Record<string, string> = {
   'image/webp': 'webp',
   'image/gif': 'gif',
 }
-const TOO_HEAVY = 'Image trop lourde, même après réduction (2 Mo max).'
+const TOO_HEAVY = 'Image trop lourde (2 Mo max).'
+const TOO_HEAVY_AFTER_REDUCTION = 'Image trop lourde, même après réduction (2 Mo max).'
+/** Longueur maximale d'une adresse acceptée par le serveur (`LIMITS.media`). */
+const MAX_URL_LENGTH = 2048
 
 type ParsedUrl = { ok: true; url: string } | { ok: false; error: string }
 
 /** N'accepte que les adresses https (chaîne trimée, analysée par `new URL`). */
 export function parseImageUrl(input: string): ParsedUrl {
   const trimmed = input.trim()
+  if (trimmed.length > MAX_URL_LENGTH) return { ok: false, error: 'Adresse trop longue.' }
   let parsed: URL
   try {
     parsed = new URL(trimmed)
@@ -31,16 +35,16 @@ export function parseImageUrl(input: string): ParsedUrl {
 }
 
 class TooHeavyError extends Error {
-  constructor() {
-    super(TOO_HEAVY)
+  constructor(transformed: boolean) {
+    super(transformed ? TOO_HEAVY_AFTER_REDUCTION : TOO_HEAVY)
   }
 }
 
 /** Réduit l'image, vérifie la taille localement, puis l'envoie ; renvoie l'URL publique. */
 async function defaultUpload(file: File): Promise<string> {
-  const blob = await prepareImageForUpload(file)
-  if (blob.size > UPLOAD_MAX_BYTES) throw new TooHeavyError()
-  // Le blob renvoyé peut avoir un autre type que le fichier d'origine (repli PNG du canvas).
+  const { blob, transformed } = await prepareImageForUpload(file)
+  if (blob.size > UPLOAD_MAX_BYTES) throw new TooHeavyError(transformed)
+  // Le blob renvoyé peut avoir un autre type que le fichier d'origine (réencodage JPEG, repli PNG du canvas).
   const ext = EXTENSIONS[blob.type] ?? 'png'
   const { url } = await uploadMedia(blob, `image.${ext}`)
   return url

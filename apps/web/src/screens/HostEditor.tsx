@@ -645,6 +645,32 @@ export function HostEditor() {
     )
   }
 
+  // Latest questions and selection, read by `updateQuestionById` when an asynchronous edit (an
+  // image upload) lands after the host has moved to another question.
+  const questionsRef = useRef(questions)
+  questionsRef.current = questions
+  const selectedIdRef = useRef(selectedId)
+  selectedIdRef.current = selectedId
+
+  /** Applies a patch to the question `id`, whichever question is selected by then. The autosave
+   * effect above only watches the selected question: when `id` is no longer selected (an upload
+   * finished after a switch), the patch is persisted here directly, superseding any pending edit
+   * of that question so a later flush can't send the older content over it. */
+  function updateQuestionById(id: string, patch: Partial<Question>) {
+    const current = questionsRef.current.find((q) => q.id === id)
+    if (!current) return
+    const next = { ...current, ...patch } as Question
+    setQuestions((prev) => prev.map((q) => (q.id === id ? ({ ...q, ...patch } as Question) : q)))
+    if (id === selectedIdRef.current || !quizId || validationError(next)) return
+    const nextPatch = toQuestionPatch(next)
+    const key = JSON.stringify(nextPatch)
+    if (pendingSaveRef.current?.id === id) pendingSaveRef.current = null
+    if (lastSavedRef.current.get(id) === key) return
+    void persistQuestionPatch({ quizId, id, patch: nextPatch, key }).catch(() => {
+      // Already surfaced via actionError inside persistQuestionPatch.
+    })
+  }
+
   /** Applies a new type LOCALLY only — used to build the create-input for the
    * delete+recreate flow in `confirmTypeChange` (see its comment for why a
    * question's type can't simply be PATCHed). */
@@ -1187,9 +1213,10 @@ export function HostEditor() {
                   </div>
 
                   <QuestionImageField
+                    key={selected.id}
                     media={selected.media}
                     mediaAlt={selected.mediaAlt}
-                    onChange={updateSelected}
+                    onChange={(patch) => updateQuestionById(selected.id, patch)}
                   />
 
                   <div className="host-field-row">
@@ -1523,7 +1550,7 @@ export function HostEditor() {
             <h2 id="host-dialog-title">Changer le type de question ?</h2>
             <p id="host-dialog-desc" style={{ color: 'var(--ink-dim)' }}>
               Les réponses saisies pour cette question seront effacées. Le reste (intitulé,
-              durée) est conservé.
+              durée, image) est conservé.
             </p>
             <div className="host-dialog__actions">
               <Button variant="ghost" type="button" onClick={cancelTypeChange}>

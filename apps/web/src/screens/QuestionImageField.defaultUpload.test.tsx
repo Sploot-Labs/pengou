@@ -32,12 +32,27 @@ describe('QuestionImageField, envoi par défaut', () => {
   })
   afterEach(cleanup)
 
-  it('un blob de 2 Mo + 1 octet : aucun appel réseau et message de taille', async () => {
-    mockPrepare.mockResolvedValue(new Blob([new Uint8Array(TWO_MIB + 1)], { type: 'image/jpeg' }))
+  it('un blob réduit de 2 Mo + 1 octet : aucun appel réseau et message « même après réduction »', async () => {
+    mockPrepare.mockResolvedValue({
+      blob: new Blob([new Uint8Array(TWO_MIB + 1)], { type: 'image/jpeg' }),
+      transformed: true,
+    })
     const onChange = pick()
     expect(
       await screen.findByText('Image trop lourde, même après réduction (2 Mo max).'),
     ).toBeInTheDocument()
+    expect(mockUploadMedia).not.toHaveBeenCalled()
+    expect(onChange).not.toHaveBeenCalled()
+  })
+
+  it('un fichier non réduit (GIF) de 2 Mo + 1 octet : message de taille sans mention de réduction', async () => {
+    mockPrepare.mockResolvedValue({
+      blob: new Blob([new Uint8Array(TWO_MIB + 1)], { type: 'image/gif' }),
+      transformed: false,
+    })
+    const onChange = pick()
+    expect(await screen.findByText('Image trop lourde (2 Mo max).')).toBeInTheDocument()
+    expect(screen.queryByText(/même après réduction/)).not.toBeInTheDocument()
     expect(mockUploadMedia).not.toHaveBeenCalled()
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -48,7 +63,7 @@ describe('QuestionImageField, envoi par défaut', () => {
     ['image/png', 'image.png'],
   ])('un blob %s est envoyé sous le nom %s', async (type, filename) => {
     const blob = new Blob(['x'], { type })
-    mockPrepare.mockResolvedValue(blob)
+    mockPrepare.mockResolvedValue({ blob, transformed: true })
     const onChange = pick()
     await waitFor(() => expect(onChange).toHaveBeenCalledWith({ media: '/uploads/t/a.jpg' }))
     expect(mockUploadMedia).toHaveBeenCalledWith(blob, filename)
