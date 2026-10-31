@@ -42,7 +42,7 @@ async function signUp(app: FastifyInstance, email: string): Promise<string> {
     : String(rawCookies).split(';')[0]
 }
 
-type BuiltApp = { app: FastifyInstance; url: string }
+type BuiltApp = { app: FastifyInstance; url: string; sweepAbandonedSessions: () => Promise<void> }
 
 // `store` : injectable (Task 4, réhydratation) — `MemorySessionStore` par défaut (comportement
 // historique, aucune écriture DB superflue pour les tests qui n'ont pas besoin de survivre à un
@@ -72,12 +72,12 @@ async function buildApp(store: SessionStore = new MemorySessionStore(), env: Rec
   // Réhydratation (Task 4) : `registerGameGateway` réhydrate les sessions actives à son montage
   // — `await` ici garantit qu'elle est terminée avant que le test n'interagisse avec l'app (pas
   // de course entre la reprise et les premiers `player:join`/`host:reconnect` du test).
-  await registerGameGateway(io, { engine, systemDb: ctx.db, appDb: ctx.appDb, auth, config, store })
+  const { sweepAbandonedSessions } = await registerGameGateway(io, { engine, systemDb: ctx.db, appDb: ctx.appDb, auth, config, store })
 
   await app.listen({ port: 0, host: '127.0.0.1' })
   const address = app.server.address()
   if (!address || typeof address === 'string') throw new Error("pas d'adresse")
-  return { app, url: `http://127.0.0.1:${address.port}` }
+  return { app, url: `http://127.0.0.1:${address.port}`, sweepAbandonedSessions }
 }
 
 function connectClient(url: string, extraHeaders?: Record<string, string>): Promise<ClientSocket> {
@@ -2553,8 +2553,12 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         clients.push(...players)
 
         const received: Array<{ at: number; players: Array<{ id: string }> }> = []
+        let resolveFinal: (at: number) => void = () => {}
+        const finalPromise = new Promise<number>((resolve) => { resolveFinal = resolve })
         hostSocket.on('lobby:update', (u: { players: Array<{ id: string }> }) => {
-          received.push({ at: Date.now(), players: u.players })
+          const at = Date.now()
+          received.push({ at, players: u.players })
+          if (u.players.length === 30) resolveFinal(at)
         })
 
         const burstStart = Date.now()
@@ -2562,17 +2566,26 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
           ack<{ error?: string }>(c, 'player:join', { pin, nickname: `Joueur ${i}` })))
         for (const r of results) expect(r.error).toBeUndefined()
         const lastAckAt = Date.now()
-        await sleepMs(600)
-        const windowEnd = lastAckAt + 600
 
-        const inWindow = received.filter((r) => r.at >= lastAckAt && r.at <= windowEnd)
-        expect(inWindow.length).toBeLessThanOrEqual(3)
+        // Attente bornée (3 s) de l'état final plutôt qu'un délai fixe : une boucle d'événements
+        // ralentie ne fait pas échouer le test, seule une diffusion finale absente le fait.
+        const finalAt = await Promise.race([
+          finalPromise,
+          sleepMs(3000).then(() => { throw new Error('aucun lobby:update à 30 joueurs en 3 s') }),
+        ])
+        // Courte période de calme : rien d'autre ne doit suivre que l'état final.
+        await sleepMs(300)
+
+        // Après la dernière réponse et jusqu'à l'état final : au plus 3 diffusions.
+        const afterLastAck = received.filter((r) => r.at >= lastAckAt && r.at <= finalAt)
+        expect(afterLastAck.length).toBeLessThanOrEqual(3)
         // Coalescence sur toute la rafale : au plus une diffusion par fenêtre de 250 ms (plus une
         // de marge pour le décalage réseau), et non une par arrivée.
-        const total = received.filter((r) => r.at <= windowEnd)
-        expect(total.length).toBeLessThanOrEqual(2 + Math.floor((windowEnd - burstStart) / 250))
+        const total = received.filter((r) => r.at <= finalAt)
+        expect(total.length).toBeLessThanOrEqual(2 + Math.floor((finalAt - burstStart) / 250))
         expect(total.length).toBeLessThan(30)
-        expect(received.at(-1)?.players).toHaveLength(30)
+        for (const r of received.filter((x) => x.at > finalAt)) expect(r.players).toHaveLength(30)
+        expect(received[received.length - 1]?.players).toHaveLength(30)
       } finally {
         for (const c of clients) c.disconnect()
         await app.close()
@@ -2633,6 +2646,55 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         expect(lobby.players.find((p) => p.id === playerId)?.connected).toBe(true)
         expect(await countPromise).toEqual({ count: 1 })
       } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it('session balayée pendant une diffusion différée : minuteur annulé, rien n\'est émis, aucune erreur', async () => {
+      const { app, url, sweepAbandonedSessions } = await buildApp()
+      const clients: ClientSocket[] = []
+      const setTimeoutSpy = vi.spyOn(globalThis, 'setTimeout')
+      const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout')
+      const unhandled: unknown[] = []
+      const onUnhandled = (reason: unknown) => { unhandled.push(reason) }
+      process.on('unhandledRejection', onUnhandled)
+      try {
+        const { hostSocket, sessionId, pin } = await setupHostedSession(app, url, 'gateway-lobby-sweep@example.com')
+        clients.push(hostSocket)
+        // Partie « inactive » pour le balayage (même procédé que `sweep-e2e.test.ts`).
+        await ctx.db.update(schema.gameSession)
+          .set({ lastActivityAt: new Date('2020-01-01T00:00:00Z') })
+          .where(eq(schema.gameSession.id, sessionId))
+
+        const ana = await connectClient(url)
+        const bob = await connectClient(url)
+        clients.push(ana, bob)
+        const hostUpdates = collect<{ players: Array<{ id: string }> }>(hostSocket, 'lobby:update')
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+        await hostUpdates.until((u) => u.players.length === 1) // diffusion immédiate (en tête)
+
+        // Arrivée suivante dans la fenêtre de 250 ms : diffusion différée, un minuteur en attente.
+        setTimeoutSpy.mockClear()
+        const afterSweep: string[] = []
+        expect((await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })).error).toBeUndefined()
+        const lobbyTimers = setTimeoutSpy.mock.calls
+          .map((call, i) => ({ fn: String(call[0]), handle: setTimeoutSpy.mock.results[i]?.value }))
+          .filter((t) => t.fn.includes('lobbyBroadcastTimeout'))
+        expect(lobbyTimers).toHaveLength(1)
+
+        await sweepAbandonedSessions()
+        expect(clearTimeoutSpy).toHaveBeenCalledWith(lobbyTimers[0]!.handle)
+
+        hostSocket.on('lobby:update', () => afterSweep.push('lobby:update'))
+        for (const c of [hostSocket, ana, bob]) c.on('lobby:count', () => afterSweep.push('lobby:count'))
+        await sleepMs(500)
+        expect(afterSweep).toEqual([])
+        expect(unhandled).toEqual([])
+      } finally {
+        process.off('unhandledRejection', onUnhandled)
+        setTimeoutSpy.mockRestore()
+        clearTimeoutSpy.mockRestore()
         for (const c of clients) c.disconnect()
         await app.close()
       }
