@@ -82,4 +82,34 @@ describe('MemorySessionStore', () => {
     const found = await store.get('s1')
     expect(found?.phase).toBe('lobby')
   })
+
+  it('peek renvoie le même objet à chaque appel et reflète une save ultérieure', async () => {
+    const store = new MemorySessionStore()
+    await store.save(makeSession())
+    const a = await store.peek('s1')
+    expect(await store.peek('s1')).toBe(a)
+    await store.save(makeSession({ phase: 'question' }))
+    expect((await store.peek('s1'))?.phase).toBe('question')
+    expect(await store.peek('nope')).toBeUndefined()
+  })
+
+  it('recordAnswer rend la réponse visible par get et peek, sans lien avec l\'objet passé', async () => {
+    const store = new MemorySessionStore()
+    await store.save(makeSession({ phase: 'question', currentIndex: 0, answers: { 0: {} } }))
+    const submitted = { answer: { choice: 1 }, timeMs: 1200, correct: true, points: 800 }
+    await store.recordAnswer('s1', 0, 'p1', submitted)
+    submitted.points = 0
+    expect((await store.get('s1'))?.answers[0].p1.points).toBe(800)
+    expect((await store.peek('s1'))?.answers[0].p1.points).toBe(800)
+  })
+
+  it('recordAnswer crée la manche absente et rejette pour un id inconnu', async () => {
+    const store = new MemorySessionStore()
+    await store.save(makeSession())
+    await store.recordAnswer('s1', 2, 'p1', { answer: null, timeMs: 1, correct: false, points: 0 })
+    expect((await store.get('s1'))?.answers[2].p1.timeMs).toBe(1)
+    await expect(
+      store.recordAnswer('nope', 0, 'p1', { answer: null, timeMs: 1, correct: false, points: 0 }),
+    ).rejects.toThrow()
+  })
 })

@@ -1,7 +1,13 @@
-import type { GameSession } from './state.js'
+import type { GameSession, SubmittedAnswer } from './state.js'
 
 export interface SessionStore {
   get(id: string): Promise<GameSession | undefined>
+  /** Comme `get`, mais renvoie l'objet du cache SANS copie : lecture seule, l'appelant ne doit
+   * jamais le modifier (chemin chaud de `submitAnswer`, où la copie de toute la session coûtait cher). */
+  peek(id: string): Promise<Readonly<GameSession> | undefined>
+  /** Insère une copie de `submitted` dans `answers[round][playerId]` de la session en cache, sans
+   * copier la session. Rejette si la session n'est pas en cache (appeler `peek` ou `get` avant). */
+  recordAnswer(id: string, round: number, playerId: string, submitted: SubmittedAnswer): Promise<void>
   /** Sessions actives uniquement (voir décision "ended" ci-dessous). */
   getByPin(pin: string): Promise<GameSession | undefined>
   save(s: GameSession): Promise<void>
@@ -28,6 +34,17 @@ export class MemorySessionStore implements SessionStore {
   async get(id: string): Promise<GameSession | undefined> {
     const session = this.byId.get(id)
     return session ? structuredClone(session) : undefined
+  }
+
+  async peek(id: string): Promise<Readonly<GameSession> | undefined> {
+    return this.byId.get(id)
+  }
+
+  async recordAnswer(id: string, round: number, playerId: string, submitted: SubmittedAnswer): Promise<void> {
+    const session = this.byId.get(id)
+    if (!session) throw new Error(`recordAnswer: session ${id} absente du cache`)
+    const forRound = session.answers[round] ?? (session.answers[round] = {})
+    forRound[playerId] = structuredClone(submitted)
   }
 
   async getByPin(pin: string): Promise<GameSession | undefined> {

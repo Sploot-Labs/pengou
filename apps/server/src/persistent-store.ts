@@ -1,6 +1,6 @@
 import type { Db } from '@splootlabs/db'
 import { saveEngineState, loadEngineState, loadEngineStateByPin, clearEngineState } from '@splootlabs/db'
-import type { GameSession, SessionStore } from '@splootlabs/game'
+import type { GameSession, SessionStore, SubmittedAnswer } from '@splootlabs/game'
 
 /** Voir `packages/game/src/store.ts` (MemorySessionStore) : même décision — un PIN reste
  * associable jusqu'à ce que la session atteigne la phase terminale `podium`. */
@@ -88,6 +88,27 @@ export class PersistentSessionStore implements SessionStore {
     const session = deserialize(raw)
     this.index(session)
     return structuredClone(session)
+  }
+
+  /** Lecture sans copie (lecture seule) : renvoie l'objet du cache, chargé depuis la base si absent. */
+  async peek(id: string): Promise<Readonly<GameSession> | undefined> {
+    const cached = this.byId.get(id)
+    if (cached) return cached
+
+    const raw = await loadEngineState(this.db, id)
+    if (!raw) return undefined
+    this.index(deserialize(raw))
+    return this.byId.get(id)
+  }
+
+  /** Enregistre une réponse dans le cache sans copier la session. Une réponse ne change ni la phase,
+   * ni la manche, ni les crédits, ni les joueurs : la signature est inchangée, donc écriture coalescée. */
+  async recordAnswer(id: string, round: number, playerId: string, submitted: SubmittedAnswer): Promise<void> {
+    const session = this.byId.get(id)
+    if (!session) throw new Error(`recordAnswer: session ${id} absente du cache`)
+    const forRound = session.answers[round] ?? (session.answers[round] = {})
+    forRound[playerId] = structuredClone(submitted)
+    this.scheduleFlush(id)
   }
 
   async getByPin(pin: string): Promise<GameSession | undefined> {
