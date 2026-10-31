@@ -11,6 +11,7 @@ import { Join } from './screens/Join'
 import { Library } from './screens/Library'
 import { Login } from './screens/Login'
 import { PlayerLive } from './screens/PlayerLive'
+import { RouteError } from './screens/RouteError'
 import { SessionReport } from './screens/SessionReport'
 import { Signup } from './screens/Signup'
 import { AcceptInvitation } from './screens/AcceptInvitation'
@@ -86,6 +87,9 @@ function HostRealtimeLayout() {
 export const router = createBrowserRouter([
   {
     element: <AppShell />,
+    // Page introuvable (aucune route ne correspond) et erreur levée au rendu : écran maison
+    // plutôt que la page de développement de react-router.
+    errorElement: <RouteError />,
     children: [
       { path: '/login', element: <Login /> },
       { path: '/signup', element: <Signup /> },
