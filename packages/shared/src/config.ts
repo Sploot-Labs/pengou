@@ -36,7 +36,7 @@ const EnvSchema = z.object({
   SESSION_SWEEP_INTERVAL_MINUTES: z.coerce.number().int().positive().default(5),
   // Plafond de joueurs inscrits par partie (déconnectés compris). Valeur provisoire, à ajuster
   // d'après les mesures de charge (`docs/charge/`).
-  MAX_PLAYERS_PER_SESSION: z.coerce.number().int().positive().default(80),
+  MAX_PLAYERS_PER_SESSION: z.coerce.number().int().positive().default(160),
 })
 
 export type OAuthProviderCreds = {
