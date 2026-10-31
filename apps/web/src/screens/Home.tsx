@@ -2,11 +2,12 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { signOut, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
-import { createQuiz, listQuizzes, type QuizListItem } from '../api/quizzes'
+import { archiveQuiz, createQuiz, listQuizzes, restoreQuiz, type QuizListItem } from '../api/quizzes'
 import { listSessions, type SessionStatus, type SessionSummary } from '../api/sessions'
 import { Reveal } from '../motion/index.js'
 import { useLaunchGame } from '../realtime/useLaunchGame'
 import { AppHeader } from '../ui/AppHeader.js'
+import { ConfirmDialog } from '../ui/ConfirmDialog.js'
 import { WorkspaceSwitcher } from '../ui/WorkspaceSwitcher.js'
 import { AnswerShape, Button } from '../ui'
 import { ANSWER_SHAPES } from '../constants'
@@ -19,7 +20,10 @@ import { ANSWER_SHAPES } from '../constants'
  * blocks the (usually fast, and more important) quiz list from rendering:
  *  - **Mes quiz** — `listQuizzes()`, each a link to its editor, plus a
  *    "Nouveau quiz" inline form (`createQuiz` then navigate straight to the
- *    new quiz's editor — no separate empty "untitled quiz" step).
+ *    new quiz's editor — no separate empty "untitled quiz" step). Chaque carte
+ *    porte aussi « Archiver » (avec confirmation) ; les quiz archivés vivent
+ *    dans une section repliable « Archivés » (chargée à l'ouverture) d'où on
+ *    peut les « Restaurer ».
  *  - **Parties** (Task 9) — split into « En cours » (`lobby`/`active`,
  *    routes back to the live host controller `/host/:id`) and
  *    « Historique » (`ended`/`abandoned` — Task 9 adds automatic abandon
@@ -160,6 +164,72 @@ export function Home() {
     }
   }
 
+  // --- Archivage --------------------------------------------------------------
+  // Un quiz archivé quitte « Mes quiz » (non lançable) mais ses parties et rapports restent :
+  // il rejoint la section « Archivés », chargée paresseusement à sa première ouverture.
+  const [announcement, setAnnouncement] = useState('')
+  const quizzesHeadingRef = useRef<HTMLHeadingElement>(null)
+  const [archiveTarget, setArchiveTarget] = useState<QuizListItem | null>(null)
+  const [archivePending, setArchivePending] = useState(false)
+  const [archiveError, setArchiveError] = useState<string | null>(null)
+
+  const [archived, setArchived] = useState<QuizListItem[]>([])
+  const [archivedLoaded, setArchivedLoaded] = useState(false)
+  const [archivedLoading, setArchivedLoading] = useState(false)
+  const [archivedError, setArchivedError] = useState<string | null>(null)
+  const [restoringId, setRestoringId] = useState<string | null>(null)
+  const [restoreError, setRestoreError] = useState<string | null>(null)
+
+  function loadArchived() {
+    setArchivedLoading(true)
+    setArchivedError(null)
+    listQuizzes({ archived: true })
+      .then((rows) => {
+        setArchived(rows)
+        setArchivedLoaded(true)
+        setArchivedLoading(false)
+      })
+      .catch((err) => {
+        setArchivedLoading(false)
+        setArchivedError(errorMessage(err))
+      })
+  }
+
+  async function confirmArchive() {
+    if (!archiveTarget) return
+    const target = archiveTarget
+    setArchivePending(true)
+    setArchiveError(null)
+    try {
+      const row = await archiveQuiz(target.id)
+      // La carte (et donc le bouton d'origine) disparaît : le focus repart sur le titre de section.
+      quizzesHeadingRef.current?.focus()
+      setQuizzes((prev) => prev.filter((q) => q.id !== target.id))
+      if (archivedLoaded) setArchived((prev) => [{ ...target, archivedAt: row.archivedAt }, ...prev])
+      setArchiveTarget(null)
+      setAnnouncement(`Quiz « ${target.title} » archivé.`)
+    } catch (err) {
+      setArchiveError(errorMessage(err))
+    } finally {
+      setArchivePending(false)
+    }
+  }
+
+  async function handleRestore(target: QuizListItem) {
+    setRestoringId(target.id)
+    setRestoreError(null)
+    try {
+      await restoreQuiz(target.id)
+      setArchived((prev) => prev.filter((q) => q.id !== target.id))
+      setQuizzes((prev) => [...prev, { ...target, archivedAt: null }])
+      setAnnouncement(`Quiz « ${target.title} » restauré.`)
+    } catch (err) {
+      setRestoreError(errorMessage(err))
+    } finally {
+      setRestoringId(null)
+    }
+  }
+
   // --- Parties : En cours (lobby+active) et Historique (ended+abandoned) --------
   const [liveSessions, setLiveSessions] = useState<SessionSummary[]>([])
   const [historySessions, setHistorySessions] = useState<SessionSummary[]>([])
@@ -194,19 +264,26 @@ export function Home() {
 
   return (
     <div className="ab-shell">
-      <AppHeader
-        brandline={<span className="host-brandline__tagline">quiz en direct, open-source, chez vous ou dans le cloud</span>}
-        actions={
-          <>
-            <WorkspaceSwitcher />
-            <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
-              {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
-            </Button>
-          </>
-        }
-      />
+      <div aria-hidden={archiveTarget ? true : undefined}>
+        <AppHeader
+          brandline={<span className="host-brandline__tagline">quiz en direct, open-source, chez vous ou dans le cloud</span>}
+          actions={
+            <>
+              <WorkspaceSwitcher />
+              <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
+                {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
+              </Button>
+            </>
+          }
+        />
+      </div>
 
-      <main className="ab-shell__main" id="contenu-principal" tabIndex={-1}>
+      <main
+        className="ab-shell__main"
+        id="contenu-principal"
+        tabIndex={-1}
+        aria-hidden={archiveTarget ? true : undefined}
+      >
         <section className="home-hero">
           <div>
             <h1>Bonjour</h1>
@@ -230,7 +307,7 @@ export function Home() {
 
         <section aria-labelledby="home-quizzes-heading" style={{ marginBottom: 'var(--space-6)' }}>
           <div className="home-section__header">
-            <h2 id="home-quizzes-heading">Mes quiz</h2>
+            <h2 id="home-quizzes-heading" ref={quizzesHeadingRef} tabIndex={-1}>Mes quiz</h2>
             <Link className="ab-button ab-button--ghost" to="/library">
               Bibliothèque
             </Link>
@@ -325,27 +402,93 @@ export function Home() {
                           navigation. Launching here reuses the same shared socket as the editor's
                           own "Lancer la partie" (`useLaunchGame`), so a host doesn't need to open
                           the editor first just to start a game from an already-finished quiz. */}
-                      <Button
-                        variant="ghost"
-                        type="button"
-                        className="home-card__launch"
-                        disabled={gameLaunching}
-                        onClick={() => {
-                          // `launch` rethrows so `HostEditor` can react to its own flush/launch
-                          // sequencing — here the failure is already reflected in `launchError`
-                          // (via the hook's own `error` state) above, so it's swallowed rather
-                          // than left as an unhandled rejection.
-                          launch(q.id, q.title).catch(() => {})
-                        }}
-                      >
-                        {gameLaunching ? 'Lancement…' : 'Lancer'}
-                      </Button>
+                      <div className="home-card__actions">
+                        <Button
+                          variant="ghost"
+                          type="button"
+                          className="home-card__launch"
+                          disabled={gameLaunching}
+                          onClick={() => {
+                            // `launch` rethrows so `HostEditor` can react to its own flush/launch
+                            // sequencing — here the failure is already reflected in `launchError`
+                            // (via the hook's own `error` state) above, so it's swallowed rather
+                            // than left as an unhandled rejection.
+                            launch(q.id, q.title).catch(() => {})
+                          }}
+                        >
+                          {gameLaunching ? 'Lancement…' : 'Lancer'}
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          type="button"
+                          className="home-card__archive"
+                          aria-label={`Archiver le quiz ${q.title}`}
+                          onClick={() => {
+                            setArchiveError(null)
+                            setArchiveTarget(q)
+                          }}
+                        >
+                          Archiver
+                        </Button>
+                      </div>
                     </li>
                   )
                 })}
               </ul>
             </Reveal>
           )}
+
+          {/* Quiz archivés : repliés par défaut, chargés à la première ouverture seulement. */}
+          <details
+            className="home-archived"
+            onToggle={(e) => {
+              if (e.currentTarget.open && !archivedLoaded && !archivedLoading) loadArchived()
+            }}
+          >
+            <summary className="home-archived__summary">Archivés</summary>
+            {archivedLoading ? (
+              <p role="status">Chargement des quiz archivés…</p>
+            ) : archivedError ? (
+              <div className="ab-empty-state">
+                <p role="alert">{archivedError}</p>
+                <Button variant="primary" type="button" onClick={loadArchived}>
+                  Réessayer
+                </Button>
+              </div>
+            ) : archived.length === 0 ? (
+              <p className="ab-empty-state">Aucun quiz archivé.</p>
+            ) : (
+              <>
+                {restoreError && (
+                  <p className="join-error" role="alert">
+                    {restoreError}
+                  </p>
+                )}
+                <ul className="home-list">
+                  {archived.map((q) => (
+                    <li key={q.id} className="home-archived__item">
+                      <Link className="home-list__item" to={`/quizzes/${q.id}`}>
+                        <span className="home-list__title">{q.title}</span>
+                        <span className="home-list__meta">
+                          {q.archivedAt ? `Archivé le ${formatDateOnly(q.archivedAt)}, ` : ''}
+                          {formatQuestionCount(q.questionCount)}
+                        </span>
+                      </Link>
+                      <Button
+                        variant="ghost"
+                        type="button"
+                        aria-label={`Restaurer le quiz ${q.title}`}
+                        disabled={restoringId === q.id}
+                        onClick={() => void handleRestore(q)}
+                      >
+                        {restoringId === q.id ? 'Restauration…' : 'Restaurer'}
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </details>
         </section>
 
         <section aria-label="Parties">
@@ -403,6 +546,24 @@ export function Home() {
           })()}
         </section>
       </main>
+
+      <p className="visually-hidden" role="status" aria-live="polite">
+        {announcement}
+      </p>
+
+      {archiveTarget && (
+        <ConfirmDialog
+          id="home-archive-dialog"
+          title="Archiver ce quiz ?"
+          description={`« ${archiveTarget.title} » quittera « Mes quiz » et ne pourra plus être lancé. Ses parties passées et leurs rapports restent consultables, et vous pourrez le restaurer depuis la section « Archivés ».`}
+          confirmLabel="Archiver"
+          pendingLabel="Archivage…"
+          pending={archivePending}
+          error={archiveError}
+          onConfirm={() => void confirmArchive()}
+          onCancel={() => setArchiveTarget(null)}
+        />
+      )}
     </div>
   )
 }

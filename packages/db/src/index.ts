@@ -17,7 +17,7 @@ export {
   INVITATION_TTL_MS, type Invitation, type InvitationWithWorkspace, type AcceptCode,
 } from './repos/invitation.js'
 export {
-  createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz, importQuiz, type Quiz, type QuizListItem, type ImportedQuestion,
+  createQuiz, listQuizzes, getQuiz, updateQuiz, archiveQuiz, restoreQuiz, deleteQuiz, importQuiz, type Quiz, type QuizListItem, type ImportedQuestion,
 } from './repos/quiz.js'
 export {
   createQuestion, listQuestions, getQuestion, updateQuestion, deleteQuestion, reorderQuestions, type Question,

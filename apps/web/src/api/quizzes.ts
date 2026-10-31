@@ -30,6 +30,8 @@ export interface Quiz {
   source: ContentSource | null
   createdAt: string
   updatedAt: string
+  /** Date d'archivage (ISO), ou null pour un quiz actif. Un quiz archivé n'est plus lançable. */
+  archivedAt: string | null
 }
 
 /** `Quiz` + `questionCount` (Task 6) — what `GET /api/quizzes` actually
@@ -103,8 +105,9 @@ export interface UpdateQuestionInput {
   media?: string | null
 }
 
-export function listQuizzes(): Promise<QuizListItem[]> {
-  return apiGet<QuizListItem[]>('/api/quizzes')
+/** Par défaut les quiz actifs ; `{ archived: true }` liste uniquement les archivés. */
+export function listQuizzes(options: { archived?: boolean } = {}): Promise<QuizListItem[]> {
+  return apiGet<QuizListItem[]>(options.archived ? '/api/quizzes?archived=1' : '/api/quizzes')
 }
 
 export function createQuiz(input: CreateQuizInput): Promise<Quiz> {
@@ -117,6 +120,14 @@ export function getQuiz(id: string): Promise<Quiz> {
 
 export function updateQuiz(id: string, patch: UpdateQuizInput): Promise<Quiz> {
   return apiPatch<Quiz>(`/api/quizzes/${id}`, patch)
+}
+
+export function archiveQuiz(id: string): Promise<Quiz> {
+  return apiPost<Quiz>(`/api/quizzes/${id}/archive`)
+}
+
+export function restoreQuiz(id: string): Promise<Quiz> {
+  return apiPost<Quiz>(`/api/quizzes/${id}/restore`)
 }
 
 export function deleteQuiz(id: string): Promise<{ ok: boolean }> {

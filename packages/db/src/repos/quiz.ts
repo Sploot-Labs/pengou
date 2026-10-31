@@ -1,4 +1,4 @@
-import { and, eq, sql } from 'drizzle-orm'
+import { and, eq, isNotNull, isNull, sql } from 'drizzle-orm'
 import { schema, type ContentSource } from '../index.js'
 import type { TenantScope } from '../tenant.js'
 
@@ -38,7 +38,9 @@ export async function createQuiz(
 // `questionCount` vient d'un left join agrégé (count) sur `question`, comme
 // `playerCount` dans `listSessions` (repos/reports.ts) — un quiz sans
 // question renvoie 0 plutôt que d'être exclu de la liste.
-export async function listQuizzes(scope: TenantScope): Promise<QuizListItem[]> {
+// Par défaut seuls les quiz actifs sont listés ; `archived: true` liste uniquement les archivés.
+export async function listQuizzes(scope: TenantScope, options: { archived?: boolean } = {}): Promise<QuizListItem[]> {
+  const archived = options.archived ?? false
   return scope.db
     .select({
       id: schema.quiz.id,
@@ -50,11 +52,16 @@ export async function listQuizzes(scope: TenantScope): Promise<QuizListItem[]> {
       source: schema.quiz.source,
       createdAt: schema.quiz.createdAt,
       updatedAt: schema.quiz.updatedAt,
+      archivedAt: schema.quiz.archivedAt,
       questionCount: sql<number>`count(${schema.question.id})`.mapWith(Number),
     })
     .from(schema.quiz)
     .leftJoin(schema.question, eq(schema.question.quizId, schema.quiz.id))
-    .where(and(eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
+    .where(and(
+      eq(schema.quiz.tenantId, scope.tenantId),
+      ownerPredicate(scope),
+      archived ? isNotNull(schema.quiz.archivedAt) : isNull(schema.quiz.archivedAt),
+    ))
     .groupBy(schema.quiz.id)
 }
 
@@ -73,6 +80,24 @@ export async function updateQuiz(scope: TenantScope, id: string, patch: Partial<
     .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
     .returning()
   return row ?? null
+}
+
+/** Archive (`archived: true`) ou restaure un quiz, sous les mêmes gardes tenant + propriétaire
+ * que `updateQuiz` : l'auteur, ou un rôle `content:access-all` (scope sans `ownerId`). */
+async function setArchived(scope: TenantScope, id: string, archived: boolean): Promise<Quiz | null> {
+  const [row] = await scope.db.update(schema.quiz)
+    .set({ archivedAt: archived ? new Date() : null })
+    .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
+    .returning()
+  return row ?? null
+}
+
+export function archiveQuiz(scope: TenantScope, id: string): Promise<Quiz | null> {
+  return setArchived(scope, id, true)
+}
+
+export function restoreQuiz(scope: TenantScope, id: string): Promise<Quiz | null> {
+  return setArchived(scope, id, false)
 }
 
 export async function deleteQuiz(scope: TenantScope, id: string): Promise<boolean> {

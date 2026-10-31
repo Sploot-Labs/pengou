@@ -16,7 +16,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 // `vi.hoisted` (not a plain top-level `const`), or the reference throws
 // "Cannot access '...' before initialization" at collection time.
 const { mockUpdateQuestion, baseQuestion, fixtures } = vi.hoisted(() => ({
-  fixtures: { quizSource: null as unknown, questionSource: null as unknown },
+  fixtures: { quizSource: null as unknown, questionSource: null as unknown, archivedAt: null as string | null },
   mockUpdateQuestion: vi.fn(() => Promise.resolve({ id: 'quest1' })),
   baseQuestion: {
     id: 'quest1',
@@ -49,6 +49,7 @@ vi.mock('../api/quizzes', () => ({
       source: fixtures.quizSource,
       createdAt: '2026-07-20T15:30:00Z',
       updatedAt: '2026-07-20T15:30:00Z',
+      archivedAt: fixtures.archivedAt,
     }),
   ),
   listQuestions: vi.fn(() => Promise.resolve([{ ...baseQuestion, source: fixtures.questionSource }])),
@@ -57,6 +58,8 @@ vi.mock('../api/quizzes', () => ({
   reorderQuestions: vi.fn(),
   updateQuestion: mockUpdateQuestion,
   updateQuiz: vi.fn(),
+  archiveQuiz: vi.fn(),
+  restoreQuiz: vi.fn(),
 }))
 
 vi.mock('../api/auth', () => ({
@@ -75,6 +78,7 @@ function renderEditor() {
     <MemoryRouter initialEntries={['/quizzes/quiz1']}>
       <Routes>
         <Route path="/quizzes/:quizId" element={<HostEditor />} />
+        <Route path="/" element={<p>Page d'accueil</p>} />
       </Routes>
     </MemoryRouter>,
   )
@@ -138,5 +142,62 @@ describe('HostEditor : attribution des sources', () => {
     renderEditor()
     await screen.findByLabelText('Temps de lecture (s)')
     expect(screen.queryByRole('region', { name: 'Sources et licences' })).toBeNull()
+  })
+})
+
+describe('HostEditor : archivage', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+    fixtures.quizSource = null
+    fixtures.questionSource = null
+    fixtures.archivedAt = null
+  })
+  afterEach(cleanup)
+
+  it('« Archiver ce quiz » demande confirmation, archive puis revient à l\'accueil', async () => {
+    const { archiveQuiz } = await import('../api/quizzes')
+    vi.mocked(archiveQuiz).mockResolvedValueOnce({} as never)
+    renderEditor()
+
+    const trigger = await screen.findByRole('button', { name: 'Archiver ce quiz' })
+    trigger.focus()
+    fireEvent.click(trigger)
+    const dialog = screen.getByRole('dialog', { name: 'Archiver ce quiz ?' })
+    // L'éditeur passe en arrière-plan inerte pour les technologies d'assistance.
+    expect(document.getElementById('contenu-principal')).toHaveAttribute('aria-hidden', 'true')
+
+    fireEvent.keyDown(dialog, { key: 'Escape' })
+    expect(screen.queryByRole('dialog')).toBeNull()
+    expect(trigger).toHaveFocus()
+    expect(archiveQuiz).not.toHaveBeenCalled()
+
+    fireEvent.click(trigger)
+    fireEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Archiver' }))
+    await screen.findByText("Page d'accueil")
+    expect(archiveQuiz).toHaveBeenCalledWith('quiz1')
+  })
+
+  it('un quiz archivé affiche le bandeau « Restaurer », bloque le lancement, et redevient lançable une fois restauré', async () => {
+    fixtures.archivedAt = '2026-08-01T10:00:00Z'
+    const { restoreQuiz } = await import('../api/quizzes')
+    vi.mocked(restoreQuiz).mockResolvedValueOnce({
+      id: 'quiz1', tenantId: 't1', ownerId: 'u1', title: 'Mon quiz', description: null, cover: null,
+      source: null, createdAt: '2026-07-20T15:30:00Z', updatedAt: '2026-07-20T15:30:00Z', archivedAt: null,
+    })
+    renderEditor()
+
+    expect(await screen.findByText(/Ce quiz est archivé\./)).toBeInTheDocument()
+    const launch = screen.getByRole('button', { name: 'Lancer la partie' })
+    expect(launch).toHaveAttribute('aria-disabled', 'true')
+    expect(launch).toHaveAccessibleDescription(/Ce quiz est archivé/)
+    // Contenu toujours modifiable, mais pas de second « Archiver ».
+    expect(screen.getByLabelText('Titre du quiz')).not.toBeDisabled()
+    expect(screen.queryByRole('button', { name: 'Archiver ce quiz' })).toBeNull()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Restaurer' }))
+    await waitFor(() => expect(screen.queryByText(/Ce quiz est archivé\./)).toBeNull())
+    expect(restoreQuiz).toHaveBeenCalledWith('quiz1')
+    expect(screen.getByRole('button', { name: 'Lancer la partie' })).toHaveAttribute('aria-disabled', 'false')
+    expect(screen.getByRole('button', { name: 'Archiver ce quiz' })).toBeInTheDocument()
   })
 })

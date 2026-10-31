@@ -72,6 +72,8 @@ export const quiz = pgTable('quiz', {
   source: jsonb('source').$type<ContentSource>(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  // Archivage (suppression douce) : non null = masqué de « Mes quiz » et non lançable.
+  archivedAt: timestamp('archived_at', { withTimezone: true }),
 }, (t) => ({
   tenantIdx: index('quiz_tenant_idx').on(t.tenantId),
   // Cible référençable par la FK composite des tables enfants (question.tenant_id doit coller au quiz).

@@ -12,6 +12,8 @@ vi.mock('../api/quizzes', () => ({
     ]),
   ),
   createQuiz: vi.fn(),
+  archiveQuiz: vi.fn(),
+  restoreQuiz: vi.fn(),
 }))
 vi.mock('../api/sessions', () => ({ listSessions: vi.fn(() => Promise.resolve([])) }))
 vi.mock('../api/auth', () => ({
@@ -238,6 +240,7 @@ describe('Home', () => {
         source: null,
         createdAt: '2026-07-20T15:30:00Z',
         updatedAt: '2026-07-20T15:30:00Z',
+        archivedAt: null,
         questionCount: 1,
       },
     ])
@@ -352,6 +355,7 @@ describe('Home', () => {
         source: null,
         createdAt: '2026-07-20T15:30:00Z',
         updatedAt: '2026-07-20T15:30:00Z',
+        archivedAt: null,
         questionCount: 5,
       },
     ])
@@ -393,6 +397,7 @@ describe('Home', () => {
         source: null,
         createdAt: '2026-07-20T15:30:00Z',
         updatedAt: '2026-07-20T15:30:00Z',
+        archivedAt: null,
         questionCount: 0,
       },
     ])
@@ -407,5 +412,96 @@ describe('Home', () => {
 
     await waitFor(() => expect(screen.getByText('Quiz vide')).toBeInTheDocument())
     expect(screen.getByText(/0 question(?!s)/)).toBeInTheDocument()
+  })
+
+  describe('archivage', () => {
+    const archivedQuiz = {
+      id: 'qa',
+      tenantId: 't1',
+      ownerId: 'u1',
+      title: 'Vieux quiz',
+      description: null,
+      cover: null,
+      source: null,
+      createdAt: '2026-07-20T15:30:00Z',
+      updatedAt: '2026-07-20T15:30:00Z',
+      archivedAt: '2026-08-01T10:00:00Z',
+      questionCount: 3,
+    }
+
+    function renderHome() {
+      render(
+        <MotionProvider>
+          <MemoryRouter>
+            <Home />
+          </MemoryRouter>
+        </MotionProvider>,
+      )
+    }
+
+    it('« Archiver » ouvre une confirmation ; Annuler ne fait rien, confirmer retire la carte et l\'annonce', async () => {
+      const { archiveQuiz } = await import('../api/quizzes')
+      vi.mocked(archiveQuiz).mockResolvedValueOnce({ ...archivedQuiz, id: 'q1', title: 'Culture G' })
+      renderHome()
+
+      await waitFor(() => expect(screen.getByText('Culture G')).toBeInTheDocument())
+      const card = screen.getByText('Culture G').closest('.home-card-item') as HTMLElement
+      const archiveButton = within(card).getByRole('button', { name: 'Archiver le quiz Culture G' })
+
+      // Annuler (et Échap) referment sans appel réseau, le focus revient au bouton
+      // (focus explicite : `fireEvent.click` ne le déplace pas comme un vrai clic).
+      archiveButton.focus()
+      fireEvent.click(archiveButton)
+      let dialog = screen.getByRole('dialog', { name: 'Archiver ce quiz ?' })
+      fireEvent.click(within(dialog).getByRole('button', { name: 'Annuler' }))
+      expect(screen.queryByRole('dialog')).toBeNull()
+      expect(archiveButton).toHaveFocus()
+      fireEvent.click(archiveButton)
+      fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' })
+      expect(screen.queryByRole('dialog')).toBeNull()
+      expect(archiveQuiz).not.toHaveBeenCalled()
+
+      fireEvent.click(archiveButton)
+      dialog = screen.getByRole('dialog', { name: 'Archiver ce quiz ?' })
+      expect(within(dialog).getByRole('button', { name: 'Archiver' })).toHaveFocus()
+      fireEvent.click(within(dialog).getByRole('button', { name: 'Archiver' }))
+
+      await waitFor(() => expect(screen.queryByText('Culture G')).toBeNull())
+      expect(archiveQuiz).toHaveBeenCalledWith('q1')
+      expect(screen.queryByRole('dialog')).toBeNull()
+      expect(screen.getByText('Quiz « Culture G » archivé.')).toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: 'Mes quiz' })).toHaveFocus()
+    })
+
+    it('la section « Archivés » charge les quiz archivés à l\'ouverture et « Restaurer » les remet dans « Mes quiz »', async () => {
+      const { listQuizzes, restoreQuiz } = await import('../api/quizzes')
+      vi.mocked(restoreQuiz).mockResolvedValueOnce({ ...archivedQuiz, archivedAt: null })
+      renderHome()
+
+      await waitFor(() => expect(screen.getByText('Culture G')).toBeInTheDocument())
+      // Rien n'est chargé tant que la section reste repliée.
+      expect(listQuizzes).toHaveBeenCalledTimes(1)
+      expect(listQuizzes).not.toHaveBeenCalledWith({ archived: true })
+
+      vi.mocked(listQuizzes).mockResolvedValueOnce([archivedQuiz])
+      const summary = screen.getByText('Archivés')
+      const details = summary.closest('details') as HTMLDetailsElement
+      details.open = true
+      fireEvent(details, new Event('toggle'))
+
+      await waitFor(() => expect(screen.getByText('Vieux quiz')).toBeInTheDocument())
+      expect(listQuizzes).toHaveBeenCalledWith({ archived: true })
+      expect(screen.getByText(/Archivé le 1 août 2026/)).toBeInTheDocument()
+      // Pas de « Lancer » pour un quiz archivé.
+      const row = screen.getByText('Vieux quiz').closest('li') as HTMLElement
+      expect(within(row).queryByRole('button', { name: /^Lancer$/ })).toBeNull()
+
+      fireEvent.click(within(row).getByRole('button', { name: 'Restaurer le quiz Vieux quiz' }))
+
+      await waitFor(() => expect(restoreQuiz).toHaveBeenCalledWith('qa'))
+      await waitFor(() => expect(screen.getByText('Vieux quiz').closest('.home-card-item')).not.toBeNull())
+      expect(screen.getByText('Aucun quiz archivé.')).toBeInTheDocument()
+      expect(screen.getByText('Quiz « Vieux quiz » restauré.')).toBeInTheDocument()
+    })
   })
 })

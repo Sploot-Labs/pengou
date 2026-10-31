@@ -2929,6 +2929,69 @@ fieldset.host-field > legend {
   width: 100%;
   min-height: 44px;
 }
+/* « Lancer » (prioritaire, prend la place) et « Archiver » côte à côte sous la carte. */
+.home-card__actions {
+  display: flex;
+  gap: var(--space-2);
+}
+.home-card__actions .home-card__launch {
+  flex: 1;
+  width: auto;
+}
+.home-card__archive {
+  min-height: 44px;
+}
+
+/* Section repliable des quiz archivés (`<details>` natif), sous les cartes de « Mes quiz ». */
+.home-archived {
+  margin-top: var(--space-5);
+}
+.home-archived__summary {
+  display: list-item;
+  min-height: 44px;
+  padding: var(--space-2) 0;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--ink-strong);
+}
+.home-archived[open] .home-archived__summary {
+  margin-bottom: var(--space-3);
+}
+.home-archived__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.home-archived__item .home-list__item {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Éditeur : bandeau d'un quiz archivé (non lançable) et zone « Archiver » en pied de page. */
+.host-archived {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  margin-bottom: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--warn);
+  border-radius: var(--radius-sm);
+  color: var(--ink-strong);
+}
+.host-archived p {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+.host-archive-zone {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
 
 /* Signature accent — one of the 4 brand answer shapes (Task 5), cycled per
    card index. Purely decorative (aria-hidden): small, low-opacity, tucked
