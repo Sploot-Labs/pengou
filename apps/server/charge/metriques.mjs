@@ -122,7 +122,7 @@ function lireDockerStats() {
 /** Échantillonne `docker stats` pour les conteneurs du projet Compose ; renvoie le maximum par conteneur. */
 export function echantillonnerDocker(projet, periodeMs = 5000) {
   const maxima = {}
-  let enCours = Promise.resolve()
+  let enCours = null
   const lire = async () => {
     for (const c of await lireDockerStats()) {
       const nom = c.Name ?? ''
@@ -133,8 +133,12 @@ export function echantillonnerDocker(projet, periodeMs = 5000) {
       maxima[nom] = { cpuMaxPct: Math.max(actuel.cpuMaxPct, cpuPct), memMaxMo: Math.max(actuel.memMaxMo, auDixieme(memMo)) }
     }
   }
+  // Une seule lecture `docker stats` à la fois : un tick qui en trouve une en cours est sauté.
   const planifier = () => {
-    enCours = enCours.then(lire)
+    if (enCours) return enCours
+    enCours = lire().finally(() => {
+      enCours = null
+    })
     return enCours
   }
   planifier()

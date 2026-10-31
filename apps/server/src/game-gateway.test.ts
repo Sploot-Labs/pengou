@@ -1709,7 +1709,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       }
     }, 30_000)
 
-    it('player:reconnect d’un joueur inscrit passe même quand la partie est pleine', async () => {
+    it("player:reconnect d'un joueur inscrit passe même quand la partie est pleine", async () => {
       const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '1' })
       const clients: ClientSocket[] = []
       try {

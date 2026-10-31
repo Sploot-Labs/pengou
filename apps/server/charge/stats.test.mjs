@@ -89,6 +89,9 @@ function resumeType(surcharges = {}) {
   return {
     joueurs: { tentes: 10, rejoints: 10 },
     deconnexions: 0,
+    erreurs: { ackTimeout: 0, reponseRefusee: 0, connexion: 0 },
+    parametres: { questions: 10 },
+    parties: [{ rejoints: 10, reponsesAcceptees: 100 }],
     horlogeIncoherente: 0,
     latences: { reponse: { p95: 50 }, diffusion: { p95: 200 } },
     serveur: { lagP99MaxMs: 20, echantillons: 5 },
@@ -98,7 +101,17 @@ function resumeType(surcharges = {}) {
 }
 
 describe('verdict', () => {
-  it('reussi quand les cinq critères tiennent', () => {
+  it('echoue sur un ackTimeout ou une réponse manquante', () => {
+    expect(verdict(resumeType()).criteres).toMatchObject({ zeroErreur: true, toutesReponses: true })
+    const avecTimeout = verdict(resumeType({ erreurs: { ackTimeout: 1, reponseRefusee: 0, connexion: 0 } }))
+    expect(avecTimeout.criteres.zeroErreur).toBe(false)
+    expect(avecTimeout.verdict).toBe('echoue')
+    const manquante = verdict(resumeType({ parties: [{ rejoints: 10, reponsesAcceptees: 99 }] }))
+    expect(manquante.criteres.toutesReponses).toBe(false)
+    expect(manquante.verdict).toBe('echoue')
+  })
+
+  it('reussi quand les sept critères tiennent', () => {
     const v = verdict(resumeType())
     expect(v.verdict).toBe('reussi')
     expect(Object.values(v.criteres).every(Boolean)).toBe(true)

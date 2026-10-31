@@ -79,7 +79,7 @@ describe('loadConfig — inactivité/balayage', () => {
   })
 })
 
-describe('loadConfig — plafond de joueurs par partie', () => {
+describe('loadConfig, plafond de joueurs par partie', () => {
   it('MAX_PLAYERS_PER_SESSION vaut 160 par défaut', () => {
     expect(loadConfig({}).maxPlayersPerSession).toBe(160)
   })

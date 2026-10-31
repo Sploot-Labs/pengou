@@ -43,13 +43,18 @@ export const LAG_GENERATEUR_P99_MAX_MS = 100
 
 /**
  * Verdict d'un palier à partir du résumé JSON. `invalide` si le générateur lui-même est saturé ou
- * si l'horloge est incohérente (la mesure ne vaut rien) ; sinon `reussi` si les cinq critères
+ * si l'horloge est incohérente (la mesure ne vaut rien) ; sinon `reussi` si les sept critères
  * tiennent, `echoue` sinon. Une valeur manquante (NaN) fait échouer son critère.
  */
 export function verdict(resume) {
   const criteres = {
     rejointTous: resume.joueurs.rejoints === resume.joueurs.tentes,
     zeroDeconnexion: resume.deconnexions === 0,
+    // Aucune erreur du générateur (ack hors délai, réponse refusée, connexion).
+    zeroErreur: Object.values(resume.erreurs ?? {}).reduce((a, b) => a + b, 0) === 0 && resume.erreurs !== undefined,
+    // Chaque joueur rejoint a vu accepter une réponse à chaque question.
+    toutesReponses:
+      (resume.parties ?? []).reduce((a, p) => a + p.reponsesAcceptees, 0) === resume.joueurs.rejoints * resume.parametres?.questions,
     reponseP95: resume.latences.reponse.p95 <= REPONSE_P95_MAX_MS,
     diffusionP95: resume.latences.diffusion.p95 <= DIFFUSION_P95_MAX_MS,
     // Sans aucun échantillon /metrics, le critère ne peut pas être tenu.
