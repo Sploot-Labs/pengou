@@ -1,6 +1,6 @@
 # Résultats du test de charge, 31 octobre 2026
 
-Ce document rend compte d'une campagne de mesure du serveur Pengou (une partie en direct de 50 à 300 joueurs, puis dix parties simultanées), suivie d'une correction du compteur de réponses et d'une seconde campagne (section « Après correction »). Le chiffre annoncé est désormais de 160 joueurs par partie (80 avant correction). Le calcul est donné en fin de document.
+Ce document rend compte d'une campagne de mesure du serveur Pengou (une partie en direct de 50 à 300 joueurs, puis dix parties simultanées), suivie d'une correction du compteur de réponses et d'une seconde campagne (section « Après correction »), puis d'une troisième campagne après suppression des copies d'état de la partie (section « Réponse à coût constant »). Le chiffre annoncé reste de 160 joueurs par partie (80 avant la première correction). Le calcul est donné en fin de document.
 
 ## Configuration
 
@@ -97,6 +97,33 @@ Cohérence de la base sur la rafale à 200 joueurs : `session_player` 200, moteu
 
 Nouveau premier échec : 300 joueurs, pendant les questions. L'event loop de l'application sature encore (lag de 0,97 s, réponse p95 de 1,8 s, CPU app de 100 à 110 % d'un cœur, Postgres sous 45 %, mémoire stable), ce qui indique un coût par réponse qui croît encore avec la taille de la salle, non analysé ici. Les arrivées commencent aussi à souffrir (join p95 de 161 à 415 ms), le critère décisif reste la réponse.
 
+## Réponse à coût constant
+
+Cause traitée : à chaque réponse de joueur, le serveur copiait en profondeur la session entière (joueurs, réponses déjà données) pour la lire, puis encore pour l'enregistrer, ce qui rendait le coût d'une réponse proportionnel à la taille de la salle. La branche `perf/copies-etat-partie` supprime ces copies sur ce chemin : `peek` renvoie l'objet en cache en lecture seule et `recordAnswer` ne copie que la réponse soumise (commits `perf(game): lecture sans copie et enregistrement ciblé d'une réponse dans le store` et `perf(game): réponse de joueur sans copie de l'état de la partie`). Le comportement fonctionnel est inchangé.
+
+Même protocole que les campagnes précédentes (pile reconstruite sur le code de la branche, commit 1a8b03b, base neuve avant chaque passage, `/health` puis 30 s, 10 questions, cadence de 25 arrivées par seconde, un seul générateur à la fois, cible `localhost:3000`, environ un processus générateur par 100 joueurs). Les libellés sont suffixés `-cc`. Le lag du générateur est resté entre 20 et 28 ms sur tous les passages, les mesures sont valides. Un premier passage à 500 joueurs a été interrompu par le générateur (la commande `host:start` n'a pas reçu d'accusé en 10 s, aucun JSON produit) ; il a été rejoué une fois, c'est ce second passage qui figure ci-dessous.
+
+| Palier | Essai | Rejoints | Déconnexions | Réponse p95 | Diffusion p95 | Diffusion max | Lag serveur p99 max | RSS max (Mo) | CPU app max | CPU db max | Verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 200 | 1 | 200/200 | 0 | 20,9 | 146 | 146 | 62,8 | 279,5 | 130 % | 55 % | reussi |
+| 200 | 2 | 200/200 | 0 | 6,1 | 298 | 298 | 120,8 | 283,7 | 114 % | 38 % | reussi |
+| 300 | 1 | 300/300 | 0 | 8,1 | 140 | 140 | 119,5 | 290,8 | 106 % | 45 % | reussi |
+| 300 | 2 | 300/300 | 0 | 6,3 | 888 | 888 | 231,6 | 293,3 | 103 % | 52 % | echoue |
+| 300 | 3 | 300/300 | 0 | 5,1 | 1646 | 1646 | 334,8 | 298,5 | 149 % | 48 % | echoue |
+| 500 | 1 | 500/500 | 0 | 4,7 | 9920 | 9920 | 190,7 | 310,9 | 123 % | 48 % | echoue |
+
+Le palier 200 passe deux fois sur deux. Le palier 300 a été joué trois fois : un passage réussi, deux échoués (le troisième est un passage supplémentaire, joué parce que le deuxième était limite). Selon la règle du protocole (un palier est réussi si ses deux premiers passages le sont), 300 est donc en échec. Le palier 500 a été joué une fois pour documenter la dégradation, il échoue. Les paliers 750 et 1000 n'ont pas été joués, l'échec étant établi à 300. L'écart entre le plus haut palier réussi (200) et le premier échec (300) est de 100, il n'y a pas de palier intermédiaire à jouer.
+
+Le coût d'une réponse ne dépend plus de la taille de la salle : la réponse p95 est de 5 à 8 ms à 300 et 500 joueurs (1,8 s à 300 joueurs avant cette correction), et le critère de réponse n'échoue plus à aucun palier. Le critère de réponse passe de 44 à 60 ms à 200 joueurs après la correction du compteur à 6 à 21 ms.
+
+Scénario établissement (dix parties de 30 joueurs, 3 processus) : `etab-cc-1` et `etab-cc-2`, tous deux `reussi`. Réponse p95 de 5,6 et 6,2 ms, diffusion p95 de 86 et 90 ms (max 144 et 139 ms), lag serveur p99 de 18,6 et 17,6 ms, aucune déconnexion.
+
+Rafale (`rafale-cc`, 200 joueurs, le plus haut palier réussi, 250 arrivées par seconde, 2 processus) : `reussi`, 200 rejoints sur 200, aucune déconnexion. Le join p95 monte à 3453 ms (1004 ms avant cette correction) et le lag serveur p99 à 199,9 ms, juste sous le seuil de 200 ms ; la réponse p95 reste à 5,4 ms. Une arrivée en masse ralentit l'arrivée et touche de près le lag, sans dégrader les réponses. Passage informatif.
+
+Le plus haut palier réussi (200) n'atteint pas 1000, le passage `etab1000-cc` (30 parties de 35 joueurs) n'a donc pas été joué.
+
+Nouveau premier échec : 300 joueurs, et le goulot a changé de phase. Les réponses ne sont plus en cause (p95 de 5 à 8 ms, CPU db sous 55 %, RSS de 291 à 299 Mo). Ce qui sature l'event loop de l'application (lag p99 de 232 et 335 ms, CPU app de 103 à 149 % d'un cœur) est la phase d'arrivée et le premier envoi de question : le join p95 est de 249 ms à 1,6 s à 300 joueurs (de 17 à 40 ms à 200 joueurs dans le meilleur passage, mais 1,26 s dans le passage 200-2), et la diffusion de la question atteint 0,9 à 1,6 s à 300 joueurs et 9,9 s à 500. La cause probable est la diffusion de `lobby:update` à toute la salle à chaque arrivée (coût quadratique en nombre de joueurs), déjà notée comme tâche optionnelle ; elle n'a pas été analysée ici. La dispersion entre passages d'un même palier est forte (join p50 de 12 à 236 ms à 200 joueurs), ce qui laisse penser que la marge du palier 200 est plus étroite que ce que les médianes suggèrent.
+
 ## Chiffre annoncé
 
 Après correction, le plus haut palier réussi est 200 joueurs (deux passages réussis sur deux, `p200-apres-1` et `p200-apres-2`). Il s'arrondit à 200 (centaine inférieure). On retire une marge de 20 % : 200 multiplié par 0,8 égale 160. Le chiffre annoncé est de 160 joueurs par partie.
@@ -104,3 +131,5 @@ Après correction, le plus haut palier réussi est 200 joueurs (deux passages r�
 Avant correction, le plus haut palier réussi était 100, soit 100 multiplié par 0,8 égal 80 joueurs. Cette valeur reste mentionnée comme chiffre avant correction.
 
 Le palier 200 passe avec une marge modérée (réponse p95 de 44 à 60 ms pour un seuil de 300, lag serveur de 70 à 112 ms pour un seuil de 200), et l'échec se produit entre 200 et 300. Comme les biais connus sont surtout optimistes (voir « Configuration »), ne pas dépasser le palier mesuré reste prudent. Le défaut de `MAX_PLAYERS_PER_SESSION` est aligné sur 160. Le scénario établissement montre par ailleurs que 300 connexions réparties en dix salles de 30 sont supportées, avant comme après correction.
+
+Après la réponse à coût constant, le plus haut palier réussi reste 200 joueurs (`p200-cc-1` et `p200-cc-2`, deux passages réussis sur deux) : le palier 300 échoue (un passage réussi, deux échoués) et le palier 500 échoue. Le calcul est inchangé : 200 multiplié par 0,8 égale 160, le chiffre annoncé reste de 160 joueurs par partie et le défaut de `MAX_PLAYERS_PER_SESSION` n'est pas modifié. L'amélioration mesurée porte sur le coût des réponses, qui ne limite plus la salle ; la limite est désormais l'arrivée des joueurs et le premier envoi de question, au-delà de 200.
