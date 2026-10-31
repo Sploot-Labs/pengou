@@ -21,7 +21,7 @@ import {
 import { ANSWER_SHAPES, type AnswerShapeKind } from '../constants'
 import { AnswerShape, Button, Logo, SHAPE_NAME_FR } from '../ui'
 import { AppHeader } from '../ui/AppHeader.js'
-import { SourceCredit } from '../ui/SourceCredit.js'
+import { SourcesPanel } from '../ui/SourceCredit.js'
 
 /**
  * HostEditor — wired to the real quiz/question REST API (Plan 06 Task 3),
@@ -1024,7 +1024,6 @@ export function HostEditor() {
                 {titleError}
               </p>
             )}
-            <SourceCredit source={quiz?.source ?? null} />
           </div>
           <div className="host-field">
             <label htmlFor="quiz-description">Description</label>
@@ -1102,7 +1101,6 @@ export function HostEditor() {
                           )}
                           <span className="host-badge">{TYPE_LABEL[q.type]}</span>
                         </button>
-                        <SourceCredit source={q.source ?? null} />
                         <div
                           className="host-list__reorder"
                           role="group"
@@ -1137,6 +1135,7 @@ export function HostEditor() {
                   Ajouter une question
                 </Button>
               </div>
+              <SourcesPanel quizSource={quiz?.source ?? null} questionSources={questions.map((q) => q.source ?? null)} />
             </section>
 
             <section className="host-panel" aria-label="Formulaire de question">

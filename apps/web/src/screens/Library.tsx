@@ -17,12 +17,15 @@ import {
 } from '../api/library'
 import { AppHeader } from '../ui/AppHeader'
 import { Button } from '../ui'
-import { SourceCredit } from '../ui/SourceCredit'
+import { SourceShort, SourcesNote } from '../ui/SourceCredit'
 import { WorkspaceSwitcher } from '../ui/WorkspaceSwitcher'
+import { useLaunchGame } from '../realtime/useLaunchGame'
+import { LibraryPreview } from './LibraryPreview'
 
 /**
- * Bibliothèque de questions : deux onglets (quiz tout prêts à dupliquer, questions à cocher ou
- * tirer au hasard pour composer un quiz), filtres communs alimentés par `getLibraryMeta`.
+ * Bibliothèque de questions : deux onglets (quiz tout prêts à prévisualiser, personnaliser ou
+ * jouer tout de suite ; questions à cocher ou tirer au hasard pour composer un quiz), filtres
+ * communs alimentés par `getLibraryMeta`.
  * Tout ce qui sort d'ici est une COPIE dans l'espace de l'utilisateur (le serveur s'en charge).
  */
 
@@ -130,8 +133,11 @@ export function Library() {
   const [quizzes, setQuizzes] = useState<LibraryQuizSummary[]>([])
   const [quizzesLoading, setQuizzesLoading] = useState(true)
   const [quizzesError, setQuizzesError] = useState<string | null>(null)
-  const [duplicatingId, setDuplicatingId] = useState<string | null>(null)
-  const [duplicateError, setDuplicateError] = useState<string | null>(null)
+  // Une seule action à la fois sur les quiz tout prêts (copie, ou copie puis lancement).
+  const [pending, setPending] = useState<{ id: string; action: 'customize' | 'play' } | null>(null)
+  const [actionError, setActionError] = useState<string | null>(null)
+  const [previewId, setPreviewId] = useState<string | null>(null)
+  const { launch } = useLaunchGame()
 
   useEffect(() => {
     if (tab !== 'quizzes') return
@@ -154,16 +160,45 @@ export function Library() {
     }
   }, [tab, filterKey])
 
-  async function handleDuplicate(id: string) {
-    setDuplicatingId(id)
-    setDuplicateError(null)
+  /** « Personnaliser » : copie dans l'espace de l'utilisateur, puis ouverture dans l'éditeur. */
+  async function handleCustomize(id: string) {
+    setPending({ id, action: 'customize' })
+    setActionError(null)
     try {
       const copy = await duplicateLibraryQuiz(id)
       navigate(`/quizzes/${copy.id}`)
     } catch (err) {
-      setDuplicateError(errorMessage(err))
-      setDuplicatingId(null)
+      setActionError(errorMessage(err))
+      setPending(null)
     }
+  }
+
+  /** « Jouer maintenant » : même copie, puis lancement direct de la partie. */
+  async function handlePlay(id: string) {
+    setPending({ id, action: 'play' })
+    setActionError(null)
+    let copy: { id: string; title: string }
+    try {
+      copy = await duplicateLibraryQuiz(id)
+    } catch (err) {
+      setActionError(errorMessage(err))
+      setPending(null)
+      return
+    }
+    try {
+      await launch(copy.id, copy.title)
+    } catch (err) {
+      // La copie existe déjà : on le dit, pour qu'un nouvel essai ne crée pas un doublon à l'aveugle.
+      const reason = err instanceof Error ? err.message : 'Impossible de lancer la partie.'
+      setActionError(`Le quiz a été ajouté à vos quiz, mais la partie n'a pas pu démarrer. ${reason}`)
+      setPending(null)
+    }
+  }
+
+  function closePreview() {
+    const id = previewId
+    setPreviewId(null)
+    if (id) document.getElementById(`library-preview-${id}`)?.focus()
   }
 
   // --- Questions -------------------------------------------------------------
@@ -369,9 +404,9 @@ export function Library() {
 
         {tab === 'quizzes' && (
           <section role="tabpanel" id="library-panel-quizzes" aria-labelledby="library-tab-quizzes">
-            {duplicateError && (
+            {actionError && !previewId && (
               <p className="join-error" role="alert">
-                {duplicateError}
+                {actionError}
               </p>
             )}
             {quizzesLoading ? (
@@ -393,18 +428,40 @@ export function Library() {
                         {formatQuestionCount(q.questionCount)}, {DIFFICULTY_LABEL[q.difficulty] ?? q.difficulty},{' '}
                         {themeLabel(q.theme)}
                       </span>
-                      <SourceCredit source={q.source} />
+                      <SourceShort source={q.source} />
                     </div>
-                    <Button
-                      variant="primary"
-                      type="button"
-                      className="home-card__launch"
-                      disabled={duplicatingId !== null}
-                      aria-label={`Dupliquer le quiz ${q.title}`}
-                      onClick={() => void handleDuplicate(q.id)}
-                    >
-                      {duplicatingId === q.id ? 'Duplication…' : 'Dupliquer'}
-                    </Button>
+                    <div className="library-card-actions">
+                      <Button
+                        variant="ghost"
+                        type="button"
+                        id={`library-preview-${q.id}`}
+                        aria-label={`Aperçu du quiz ${q.title}`}
+                        onClick={() => {
+                          setActionError(null)
+                          setPreviewId(q.id)
+                        }}
+                      >
+                        Aperçu
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        type="button"
+                        disabled={pending !== null}
+                        aria-label={`Personnaliser le quiz ${q.title}`}
+                        onClick={() => void handleCustomize(q.id)}
+                      >
+                        {pending?.id === q.id && pending.action === 'customize' ? 'Création…' : 'Personnaliser'}
+                      </Button>
+                      <Button
+                        variant="primary"
+                        type="button"
+                        disabled={pending !== null}
+                        aria-label={`Jouer maintenant au quiz ${q.title}`}
+                        onClick={() => void handlePlay(q.id)}
+                      >
+                        {pending?.id === q.id && pending.action === 'play' ? 'Lancement…' : 'Jouer maintenant'}
+                      </Button>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -485,7 +542,6 @@ export function Library() {
                             </span>
                             <span className="home-list__title">{q.prompt}</span>
                           </label>
-                          <SourceCredit source={q.source} />
                         </li>
                       )
                     })}
@@ -495,6 +551,9 @@ export function Library() {
                       {moreLoading ? 'Chargement…' : 'Afficher plus'}
                     </Button>
                   )}
+                  <SourcesNote sources={questions.map((q) => q.source)}>
+                    La source exacte de chaque question figure dans l'éditeur, une fois le quiz créé.
+                  </SourcesNote>
                 </>
               )}
             </section>
@@ -550,6 +609,17 @@ export function Library() {
           </div>
         )}
       </main>
+
+      {previewId && (
+        <LibraryPreview
+          quizId={previewId}
+          busy={pending?.id === previewId ? pending.action : null}
+          error={actionError}
+          onClose={closePreview}
+          onCustomize={(quiz) => void handleCustomize(quiz.id)}
+          onPlay={(quiz) => void handlePlay(quiz.id)}
+        />
+      )}
     </div>
   )
 }

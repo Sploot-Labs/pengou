@@ -99,6 +99,11 @@ export async function drawLibraryQuestions(
   return res.items
 }
 
+/** Un quiz tout prêt et ses questions dans l'ordre (aperçu). */
+export function getLibraryQuiz(id: string): Promise<{ quiz: LibraryQuizSummary; questions: LibraryQuestion[] }> {
+  return apiGet(`/api/library/quizzes/${encodeURIComponent(id)}`)
+}
+
 export function duplicateLibraryQuiz(id: string): Promise<Quiz> {
   return apiPost<Quiz>(`/api/library/quizzes/${encodeURIComponent(id)}/duplicate`)
 }

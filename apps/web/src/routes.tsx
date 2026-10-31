@@ -113,6 +113,16 @@ export const router = createBrowserRouter([
             ),
           },
           {
+            // Bibliothèque de questions : sous HostRealtimeLayout pour « Jouer maintenant », qui
+            // crée la partie sur la socket partagée que `HostLive` reprend ensuite.
+            path: '/library',
+            element: (
+              <RequireAuth>
+                <Library />
+              </RequireAuth>
+            ),
+          },
+          {
             path: '/host/:sessionId',
             element: (
               <RequireAuth>
@@ -143,15 +153,6 @@ export const router = createBrowserRouter([
         element: (
           <RequireAuth>
             <WorkspaceSettings />
-          </RequireAuth>
-        ),
-      },
-      {
-        // Bibliothèque de questions — protégée, hors HostRealtimeLayout (REST uniquement).
-        path: '/library',
-        element: (
-          <RequireAuth>
-            <Library />
           </RequireAuth>
         ),
       },

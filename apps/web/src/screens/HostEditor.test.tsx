@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 /**
@@ -120,24 +120,23 @@ describe('HostEditor : attribution des sources', () => {
   })
   afterEach(cleanup)
 
-  it('affiche la source du quiz sous le titre', async () => {
+  it("regroupe les sources dans l'encadré « Sources et licences », avec la licence liée", async () => {
     fixtures.quizSource = { name: 'Open Trivia', license: 'CC BY-SA 4.0' }
+    fixtures.questionSource = { name: 'Open Trivia', license: 'CC BY-SA 4.0', url: 'https://example.org/q' }
     renderEditor()
-    await screen.findByLabelText('Titre du quiz')
-    expect(document.body).toHaveTextContent('Source : Open Trivia, licence CC BY-SA 4.0 (adapté)')
+    const panel = await screen.findByRole('region', { name: 'Sources et licences' })
+    expect(panel).toHaveTextContent('Toutes les questions : Open Trivia.')
+    expect(within(panel).getByRole('link', { name: 'Open Trivia' })).toHaveAttribute('href', 'https://example.org/q')
+    expect(within(panel).getByRole('link', { name: 'CC BY-SA 4.0' })).toHaveAttribute(
+      'href',
+      'https://creativecommons.org/licenses/by-sa/4.0/deed.fr',
+    )
+    expect(panel).toHaveTextContent('Vos modifications de ces contenus restent sous cette licence.')
   })
 
-  it("affiche la source d'une question dans sa carte", async () => {
-    fixtures.questionSource = { name: 'Wikiquiz', license: 'CC0', url: 'https://example.org/q' }
-    renderEditor()
-    const link = await screen.findByRole('link', { name: 'Wikiquiz' })
-    expect(link).toHaveAttribute('href', 'https://example.org/q')
-    expect(screen.getByText(/licence CC0 \(adapté\)/)).toBeInTheDocument()
-  })
-
-  it("n'affiche aucune mention de source sans attribution", async () => {
+  it("n'affiche aucun encadré de sources sans attribution", async () => {
     renderEditor()
     await screen.findByLabelText('Temps de lecture (s)')
-    expect(screen.queryByText(/Source :/)).toBeNull()
+    expect(screen.queryByRole('region', { name: 'Sources et licences' })).toBeNull()
   })
 })

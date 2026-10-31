@@ -82,6 +82,14 @@ export function registerLibraryRoutes(app: FastifyInstance, deps: Deps): void {
     return listLibraryQuizzes(appDb, parsed.filters)
   })
 
+  // Aperçu d'un quiz tout prêt : ses questions dans l'ordre, réponses comprises (le front choisit
+  // de les montrer ou non ; le catalogue est public pour tout utilisateur connecté).
+  app.get<{ Params: { id: string } }>('/api/library/quizzes/:id', { preHandler: requireUser }, async (request, reply) => {
+    const found = await getLibraryQuiz(appDb, request.params.id)
+    if (!found) return reply.code(404).send({ error: 'Quiz introuvable dans la bibliothèque.' })
+    return found
+  })
+
   app.get('/api/library/questions', { preHandler: requireUser }, async (request, reply) => {
     const query = request.query as Record<string, unknown>
     const parsed = parseFilters(query, true)

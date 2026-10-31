@@ -18,8 +18,14 @@ vi.mock('../api/library', () => ({
   drawLibraryQuestions: vi.fn(),
   duplicateLibraryQuiz: vi.fn(),
   composeQuiz: vi.fn(),
+  getLibraryQuiz: vi.fn(),
 }))
 vi.mock('../api/auth', () => ({ signOut: vi.fn(), useSession: () => ({ refresh: vi.fn() }) }))
+// « Jouer maintenant » lance la partie via le hook partagé, simulé ici (aucune vraie socket).
+const mockLaunch = vi.fn()
+vi.mock('../realtime/useLaunchGame', () => ({
+  useLaunchGame: () => ({ launch: mockLaunch, launching: false, error: null }),
+}))
 
 const mockNavigate = vi.fn()
 vi.mock('react-router-dom', async () => {
@@ -28,7 +34,7 @@ vi.mock('react-router-dom', async () => {
 })
 
 import * as lib from '../api/library'
-import { SourceCredit } from '../ui/SourceCredit'
+import { SourceCredit, SourcesNote, SourceShort } from '../ui/SourceCredit'
 import { Library } from './Library'
 
 const source = { name: 'Open Trivia', license: 'CC BY-SA 4.0', url: 'https://example.org' }
@@ -85,15 +91,67 @@ describe('Library', () => {
   })
   afterEach(cleanup)
 
-  it("affiche l'onglet quiz par défaut et « Dupliquer » ouvre le quiz renvoyé", async () => {
-    vi.mocked(lib.duplicateLibraryQuiz).mockResolvedValue({ id: 'copie' } as never)
+  it("affiche l'onglet quiz par défaut et « Personnaliser » ouvre la copie dans l'éditeur", async () => {
+    vi.mocked(lib.duplicateLibraryQuiz).mockResolvedValue({ id: 'copie', title: 'Quiz q1' } as never)
     renderLibrary()
     expect(screen.getByRole('tab', { name: 'Quiz tout prêts' })).toHaveAttribute('aria-selected', 'true')
     await waitFor(() => expect(screen.getByText('Quiz q1')).toBeInTheDocument())
-    expect(screen.getByText(/Source :/)).toBeInTheDocument()
-    fireEvent.click(screen.getByRole('button', { name: /Dupliquer/ }))
+    expect(screen.getByText("D'après Open Trivia")).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Personnaliser le quiz Quiz q1' }))
     await waitFor(() => expect(lib.duplicateLibraryQuiz).toHaveBeenCalledWith('q1'))
     await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/quizzes/copie'))
+    expect(mockLaunch).not.toHaveBeenCalled()
+  })
+
+  it('« Jouer maintenant » copie le quiz puis lance la partie sur la copie', async () => {
+    vi.mocked(lib.duplicateLibraryQuiz).mockResolvedValue({ id: 'copie', title: 'Quiz q1' } as never)
+    mockLaunch.mockResolvedValue(undefined)
+    renderLibrary()
+    fireEvent.click(await screen.findByRole('button', { name: 'Jouer maintenant au quiz Quiz q1' }))
+    await waitFor(() => expect(mockLaunch).toHaveBeenCalledWith('copie', 'Quiz q1'))
+    expect(lib.duplicateLibraryQuiz).toHaveBeenCalledWith('q1')
+  })
+
+  it('« Jouer maintenant » dit que la copie existe quand la partie ne démarre pas', async () => {
+    vi.mocked(lib.duplicateLibraryQuiz).mockResolvedValue({ id: 'copie', title: 'Quiz q1' } as never)
+    mockLaunch.mockRejectedValue(new Error('Serveur de jeu injoignable.'))
+    renderLibrary()
+    fireEvent.click(await screen.findByRole('button', { name: 'Jouer maintenant au quiz Quiz q1' }))
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      "Le quiz a été ajouté à vos quiz, mais la partie n'a pas pu démarrer. Serveur de jeu injoignable.",
+    )
+  })
+
+  it("l'aperçu liste les questions sans les réponses, puis les montre à la demande", async () => {
+    vi.mocked(lib.getLibraryQuiz).mockResolvedValue({
+      quiz: quiz('q1'),
+      questions: [
+        { ...question('a'), payload: { options: [{ label: 'Paris', correct: true }, { label: 'Lyon', correct: false }] } },
+        { ...question('b'), type: 'truefalse', payload: { correct: false } },
+      ],
+    } as never)
+    renderLibrary()
+    const opener = await screen.findByRole('button', { name: 'Aperçu du quiz Quiz q1' })
+    fireEvent.click(opener)
+    const dialog = await screen.findByRole('dialog', { name: 'Quiz q1' })
+    await within(dialog).findByText('Énoncé a')
+    expect(lib.getLibraryQuiz).toHaveBeenCalledWith('q1')
+    expect(within(dialog).queryByText('Réponse : Paris')).toBeNull()
+    expect(within(dialog).getByText(/Source :/)).toBeInTheDocument()
+
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Afficher les réponses' }))
+    expect(within(dialog).getByText('Réponse : Paris')).toBeInTheDocument()
+    expect(within(dialog).getByText('Réponse : faux')).toBeInTheDocument()
+
+    fireEvent.keyDown(dialog, { key: 'Escape' })
+    expect(screen.queryByRole('dialog')).toBeNull()
+    expect(opener).toHaveFocus()
+  })
+
+  it("n'affiche plus la source sous chaque question, mais une note unique sous la liste", async () => {
+    await openQuestions()
+    expect(screen.queryByText(/Source :/)).toBeNull()
+    expect(screen.getByText(/Questions issues d'Open Trivia, licence/)).toBeInTheDocument()
   })
 
   it('compose un quiz depuis deux questions cochées', async () => {
@@ -227,6 +285,27 @@ describe('Library', () => {
     expect(container).toHaveTextContent('Source : Autre, licence Licence maison (adapté)')
     expect(within(container).queryByRole('link')).toBeNull()
     rerender(<SourceCredit source={null} />)
+    expect(container).toBeEmptyDOMElement()
+  })
+
+  it('SourceShort ne garde que la base, SourcesNote regroupe bases et licences', () => {
+    const { container, rerender } = render(
+      <SourceShort source={{ name: 'OpenQuizzDB, Jean Martin', license: 'CC BY-SA 4.0' }} />,
+    )
+    expect(container).toHaveTextContent("D'après OpenQuizzDB")
+    rerender(
+      <SourcesNote
+        sources={[
+          { name: 'OpenQuizzDB, Jean Martin', license: 'CC BY-SA 4.0' },
+          { name: 'OpenQuizzDB, Marie Durand', license: 'CC BY-SA 4.0' },
+          { name: 'Wikiquiz', license: 'CC0' },
+        ]}
+      />,
+    )
+    expect(container).toHaveTextContent(
+      "Questions issues d'OpenQuizzDB et de Wikiquiz, licences CC BY-SA 4.0 et CC0, adaptées pour Pengou.",
+    )
+    rerender(<SourcesNote sources={[]} />)
     expect(container).toBeEmptyDOMElement()
   })
 })

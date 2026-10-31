@@ -78,7 +78,7 @@ describe('routes /api/library', () => {
   it('401 sans cookie sur chaque route', async () => {
     const app = await buildApp()
     const calls: Array<[string, string]> = [
-      ['GET', '/api/library/meta'], ['GET', '/api/library/quizzes'], ['GET', '/api/library/questions'],
+      ['GET', '/api/library/meta'], ['GET', '/api/library/quizzes'], ['GET', '/api/library/quizzes/z1'], ['GET', '/api/library/questions'],
       ['POST', '/api/library/draw'], ['POST', '/api/library/quizzes/z1/duplicate'], ['POST', '/api/library/compose'],
     ]
     for (const [method, url] of calls) {
@@ -159,6 +159,23 @@ describe('routes /api/library', () => {
     expect((await post({ filters: {}, count: 1.5 })).statusCode).toBe(400)
     expect((await post({ filters: { difficulty: 'extreme' }, count: 1 })).statusCode).toBe(400)
     expect((await post({ filters: {}, count: 1, excludeIds: Array.from({ length: 201 }, (_, i) => `x${i}`) })).statusCode).toBe(400)
+    await app.close()
+  })
+
+  it("l'aperçu d'un quiz renvoie ses questions dans l'ordre, 404 sur un id inconnu", async () => {
+    const app = await buildApp()
+    const cookie = await signUp(app, 'lib-preview@example.com')
+    const res = await app.inject({ method: 'GET', url: '/api/library/quizzes/z1', headers: { cookie } })
+    expect(res.statusCode).toBe(200)
+    const body = res.json() as { quiz: { id: string; source: unknown }; questions: { id: string; payload: unknown }[] }
+    expect(body.quiz.id).toBe('z1')
+    expect(body.quiz.source).toEqual(srcA)
+    expect(body.questions.map((x) => x.id)).toEqual(['q3', 'q1', 'q2'])
+    expect(body.questions[0].payload).toEqual({ answer: true })
+
+    const missing = await app.inject({ method: 'GET', url: '/api/library/quizzes/inconnu', headers: { cookie } })
+    expect(missing.statusCode).toBe(404)
+    expect(missing.json()).toEqual({ error: 'Quiz introuvable dans la bibliothèque.' })
     await app.close()
   })
 
