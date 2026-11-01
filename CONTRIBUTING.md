@@ -44,6 +44,7 @@ Pour lancer l'app en local (serveur + SPA), voir la section **Développement loc
 - **`pnpm typecheck` et `pnpm lint` sont verts** — la CI les rejoue de toute façon.
 - **Le code se lit** — un·e débutant·e doit pouvoir suivre. On garde le style du fichier voisin (single quotes, pas de semicolons).
 - **Un changement = une PR** — plus facile à accueillir et à merger.
+- Un titre de PR au format [Conventional Commits](https://www.conventionalcommits.org/fr/) : les PR sont fusionnées en squash et leur titre devient le message du commit sur `main`. Par exemple `fix(export): les accents ne sautent plus à l'export CSV`. Types acceptés : `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`. La CI vérifie le titre.
 
 On laisse des suggestions inline, jamais des ordres. Rien n'est bloquant sans qu'on explique pourquoi.
 
