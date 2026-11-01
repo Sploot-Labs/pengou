@@ -22,6 +22,17 @@ export function resumer(valeurs) {
   }
 }
 
+/**
+ * Résumé des échantillons de lag (un p99 par seconde) moins sensible à un pic isolé que le
+ * maximum : p95 des échantillons et nombre de secondes strictement au-dessus du seuil.
+ */
+export function resumerLag(echantillonsMs, seuilMs) {
+  return {
+    p95: auDixieme(percentile(echantillonsMs, 95)),
+    auDessus: echantillonsMs.filter((x) => x > seuilMs).length,
+  }
+}
+
 const HOTES_LOCAUX = new Set(['localhost', '127.0.0.1', '::1', '[::1]'])
 
 /** Vrai si l'URL désigne la boucle locale (localhost, 127.0.0.1 ou ::1). Une URL invalide est refusée. */

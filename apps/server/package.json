@@ -10,7 +10,8 @@
     "migrate": "node dist/migrate.js",
     "typecheck": "tsc --noEmit -p tsconfig.json --customConditions development",
     "test": "vitest run",
-    "charge": "node charge/charge.mjs"
+    "charge": "node charge/charge.mjs",
+    "charge:campagne": "node charge/campagne.mjs"
   },
   "dependencies": {
     "@fastify/helmet": "^13",

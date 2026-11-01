@@ -81,6 +81,15 @@ if (!estCibleLocale(opts.cible)) {
   process.exit(2)
 }
 
+const parametresPassage = () => ({
+  joueurs: opts.joueurs,
+  parties: opts.parties,
+  questions: opts.questions,
+  cadence: opts.cadence,
+  processus: opts.processus,
+  docker: opts.docker ?? null,
+})
+
 const horodatage = new Date().toISOString().replace(/[:.]/g, '-')
 
 /** fetch vers la cible avec l'en-tête Origin (protection CSRF de Better Auth). Un 429 arrête tout. */
@@ -280,20 +289,23 @@ async function main() {
     }
   }
   const diffusionMs = [...derniereReception].map(([cle, epochMs]) => epochMs - t0ParCle.get(cle))
+  // La première question part juste après les arrivées : c'est souvent la plus coûteuse.
+  const premieres = [...derniereReception]
+    .filter(([cle]) => cle.endsWith(':0'))
+    .map(([cle, epochMs]) => epochMs - t0ParCle.get(cle))
+  const diffusionPremiereMs = premieres.length > 0 ? Math.max(...premieres) : null
 
-  const latences = { join: resumer(joinMs), reponse: resumer(reponseMs), diffusion: resumer(diffusionMs) }
+  const latences = {
+    join: resumer(joinMs),
+    reponse: resumer(reponseMs),
+    diffusion: resumer(diffusionMs),
+    diffusionPremiereMs,
+  }
   const resume = {
     libelle: opts.libelle,
     horodatage,
     cible: opts.cible,
-    parametres: {
-      joueurs: opts.joueurs,
-      parties: opts.parties,
-      questions: opts.questions,
-      cadence: opts.cadence,
-      processus: opts.processus,
-      docker: opts.docker ?? null,
-    },
+    parametres: parametresPassage(),
     parties: parties.map((p) => ({
       pin: p.pin,
       sessionId: p.sessionId,
@@ -316,10 +328,13 @@ async function main() {
   const chemin = resolve(opts.json ?? `charge-${opts.libelle}-${horodatage}.json`)
   writeFileSync(chemin, `${JSON.stringify(resume, null, 2)}\n`)
 
-  console.table(latences)
+  console.table({ join: latences.join, reponse: latences.reponse, diffusion: latences.diffusion })
+  console.log(`Diffusion de la première question : ${latences.diffusionPremiereMs ?? 'n/d'} ms.`)
   const mesure = (x) => (Number.isFinite(x) ? x : 'n/d')
   console.table({
     'lag event loop p99 max (ms)': { valeur: mesure(serveur.lagP99MaxMs) },
+    'lag event loop p95 des secondes (ms)': { valeur: mesure(serveur.lagP95Ms) },
+    'secondes de lag au-dessus du seuil': { valeur: serveur.secondesLagAuDessus },
     'mémoire RSS max (Mo)': { valeur: mesure(serveur.rssMaxMo) },
     'heap max (Mo)': { valeur: mesure(serveur.heapMaxMo) },
     "CPU moyen (% d'un cœur)": { valeur: mesure(serveur.cpuMoyenPct) },
@@ -342,5 +357,18 @@ async function main() {
 
 main().catch((e) => {
   console.error(`Échec du test de charge : ${e.message}`)
+  // Un passage interrompu est un résultat : on le consigne si un chemin JSON est demandé.
+  if (opts.json) {
+    const partiel = {
+      libelle: opts.libelle,
+      horodatage,
+      cible: opts.cible,
+      parametres: parametresPassage(),
+      verdict: 'interrompu',
+      erreur: e.message,
+    }
+    writeFileSync(resolve(opts.json), `${JSON.stringify(partiel, null, 2)}
+`)
+  }
   process.exit(1)
 })
