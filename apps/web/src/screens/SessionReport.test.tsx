@@ -22,6 +22,7 @@ function question(over: Partial<SessionReportQuestion>): SessionReportQuestion {
     correctCount: null,
     avgTimeMs: null,
     wordcloud: null,
+    poll: null,
     ...over,
   }
 }
@@ -105,5 +106,52 @@ describe('SessionReport, questions nuage de mots', () => {
     expect(within(rowOf('QCM')).getByText('50 % (2/4)')).toBeTruthy()
     expect(within(rowOf('QCM')).getByText('Question la plus ratée')).toBeTruthy()
     expect(within(rowOf('Nuage')).queryByText('Question la plus ratée')).toBeNull()
+  })
+})
+
+describe('SessionReport, questions sondage', () => {
+  const poll = (voters: number, votes: number[]) => ({
+    voters,
+    multiple: false,
+    options: votes.map((v, i) => ({ label: ['Oui', 'Non', 'Peut-être'][i] as string, votes: v })),
+  })
+
+  it('affiche chaque choix avec ses votes et son pourcentage', async () => {
+    await renderReport([
+      question({ prompt: 'Sondé ?', type: 'poll', answerCount: 3, poll: poll(3, [2, 1, 0]) }),
+    ])
+    const row = within(rowOf('Sondé ?'))
+    expect(row.getByText('Sondage, 3 participants')).toBeTruthy()
+    expect(row.getByText(/Oui : 2 votes \(67 %\)/)).toBeTruthy()
+    expect(row.getByText(/Non : 1 vote \(33 %\)/)).toBeTruthy()
+    expect(row.getByText(/Peut-être : 0 vote \(0 %\)/)).toBeTruthy()
+    expect(row.getByText(/Oui : 2 votes/).textContent).toBe('Oui : 2 votes (67 %)')
+    expect(row.queryByText(/aucune réponse/)).toBeNull()
+  })
+
+  it('affiche « Aucun vote » sans votant', async () => {
+    await renderReport([
+      question({ prompt: 'Vide ?', type: 'poll', poll: poll(0, [0, 0]) }),
+    ])
+    const row = within(rowOf('Vide ?'))
+    expect(row.getByText('Sondage, 0 participant')).toBeTruthy()
+    expect(row.getByText('Aucun vote')).toBeTruthy()
+    expect(row.queryByText(/NaN/)).toBeNull()
+  })
+
+  it('ne marque jamais le sondage comme question la plus ratée', async () => {
+    await renderReport([
+      question({ questionId: 'a', prompt: 'QCM', answerCount: 4, correctCount: 2, avgTimeMs: 2000 }),
+      question({
+        questionId: 'p',
+        prompt: 'Sondage',
+        type: 'poll',
+        orderIndex: 1,
+        answerCount: 2,
+        poll: poll(2, [1, 1]),
+      }),
+    ])
+    expect(within(rowOf('QCM')).getByText('Question la plus ratée')).toBeTruthy()
+    expect(within(rowOf('Sondage')).queryByText('Question la plus ratée')).toBeNull()
   })
 })
