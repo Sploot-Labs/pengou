@@ -4,6 +4,7 @@ import rateLimit from '@fastify/rate-limit'
 import { collectDefaultMetrics, Registry } from 'prom-client'
 import type { AppConfig } from '@splootlabs/shared'
 import { registerOriginGuard } from './origin-guard.js'
+import { compileTrust, createForwardedForWarner } from './client-ip.js'
 
 declare module 'fastify' {
   interface FastifyContextConfig {
@@ -64,6 +65,14 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
       )
     })
   }
+
+  // TRUSTED_PROXIES faux (ex. reverse proxy sur l'hôte vu depuis le conteneur par la passerelle
+  // Docker) : X-Forwarded-For est ignoré en silence et tous les clients partagent une IP. Un
+  // avertissement unique le signale dès la première requête concernée.
+  const warnForwardedFor = createForwardedForWarner(compileTrust(config.trustedProxies), (msg) => app.log.warn(msg))
+  app.addHook('onRequest', async (request) => {
+    warnForwardedFor(request.raw)
+  })
 
   // Sécurité (P2) : en-têtes HTTP durcis (anti-clickjacking, anti-sniffing MIME, Referrer-Policy…).
   // CSP réglée pour rester compatible avec le SPA servi par le même serveur : styles inline

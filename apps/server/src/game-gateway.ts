@@ -1154,7 +1154,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // IP du client, vue à travers les seuls proxys de confiance (comme `request.ip` côté HTTP).
     // `clientIpFromRequest` peut ne rien renvoyer si la socket TCP n'a plus d'adresse : repli sur
     // l'adresse de la poignée de main, et sans adresse du tout, pas de budget pour cette socket.
-    const clientIp: string | undefined = clientIpFromRequest(socket.request, trustProxy)
+    const clientIp = clientIpFromRequest(socket.request, trustProxy)
     ;(socket.data as SocketData).pinFailureKey = clientIp || socket.handshake.address || undefined
 
     // Throttle par socket (P2, anti-DoS) : middleware exécuté avant CHAQUE handler d'event.
