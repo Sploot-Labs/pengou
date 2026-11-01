@@ -37,6 +37,8 @@ interface QuestionShowPayload {
   payload: unknown
   index?: number
   total?: number
+  /** Posé par le serveur sur le `question:show` rejoué à la reconnexion d'un joueur qui a déjà répondu. */
+  alreadyAnswered?: boolean
 }
 
 /** Projection « lecture seule » émise par `question:reading` (Task 3, moteur
@@ -93,7 +95,6 @@ interface ReconnectAck {
   playerId: string
   phase: 'lobby' | 'question' | 'reveal' | 'scoreboard' | 'podium'
   score: number
-  alreadyAnswered?: boolean
 }
 
 interface AnswerAck {
@@ -234,8 +235,6 @@ export function PlayerLive() {
   const [sliderValue, setSliderValue] = useState(0)
   const [sliderTouched, setSliderTouched] = useState(false)
   const [pollSelection, setPollSelection] = useState<number[]>([])
-  // Posé par l'acquittement de `player:reconnect`, consommé par le `question:show` rejoué juste après.
-  const alreadyAnsweredRef = useRef(false)
 
   // Vérité serveur sur LA réponse effectivement comptabilisée pour cette
   // manche — distincte des valeurs capturées ci-dessus, qui ne reflètent que
@@ -362,7 +361,6 @@ export function PlayerLive() {
         })
         if (cancelled) return
         scoreRef.current = ack.score
-        alreadyAnsweredRef.current = ack.phase === 'question' && ack.alreadyAnswered === true
         setScore(ack.score)
         // Le serveur ne renvoie une projection `question:show`/`timer` que si
         // la phase est 'question' (voir game-gateway.ts) — pour toute autre
@@ -438,14 +436,13 @@ export function PlayerLive() {
       setAnswerRejection(null)
       setAutoNextAt(null)
       resetAnswer(view)
-      if (view.type === 'poll' && alreadyAnsweredRef.current) {
+      if (view.type === 'poll' && view.alreadyAnswered === true) {
         // Vote déjà compté avant le rechargement : on ne rouvre pas la saisie.
         setAnswerAccepted(true)
         setPhase('answered')
       } else {
         setPhase('question')
       }
-      alreadyAnsweredRef.current = false
     })
 
     const offTimer = on<TimerPayload>('timer', (t) => {

@@ -19,10 +19,11 @@ const handlers = new Map<string, Handler[]>()
  * `game-gateway.ts`) — un simple `{}` par défaut laisserait `score` à
  * `undefined` et polluerait le rendu (« Score : undefined ») sans rapport
  * avec ce que ces tests vérifient. */
-let reconnectExtra: Record<string, unknown> = {}
+let reconnectGate: Promise<unknown> | null = null
 const mockEmitAck = vi.fn(async (event: string, _payload?: unknown) => {
   if (event === 'player:reconnect') {
-    return { playerId: 'p1', phase: 'lobby', score: 0, ...reconnectExtra }
+    if (reconnectGate) await reconnectGate
+    return { playerId: 'p1', phase: 'lobby', score: 0 }
   }
   if (event === 'player:answer') return nextAnswerAck()
   return {}
@@ -75,7 +76,7 @@ describe('PlayerLive sondage', () => {
     handlers.clear()
     mockEmitAck.mockClear()
     answerAcks = []
-    reconnectExtra = {}
+    reconnectGate = null
     savePlayerSession({ pin: '1234', playerId: 'p1', joinToken: 'tok1', nickname: 'Ana' })
   })
   afterEach(() => {
@@ -83,13 +84,14 @@ describe('PlayerLive sondage', () => {
     clearPlayerSession()
   })
 
-  function showPoll(multiple: boolean) {
+  function showPoll(multiple: boolean, alreadyAnswered?: boolean) {
     emitServerEvent('question:show', {
       id: 'q1',
       type: 'poll',
       prompt: 'Tu aimes la banquise ?',
       timeLimit: 30,
       payload: { options: [{ label: 'Oui' }, { label: 'Non' }, { label: 'Bof' }], multiple },
+      ...(alreadyAnswered ? { alreadyAnswered } : {}),
     })
   }
 
@@ -154,13 +156,35 @@ describe('PlayerLive sondage', () => {
   })
 
   it('reconnexion après un vote : Vote enregistré sans tuile active', async () => {
-    reconnectExtra = { alreadyAnswered: true, phase: 'question' }
     renderPlayerLive()
     await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:reconnect', expect.anything()))
-    await act(async () => {})
-    showPoll(false)
+    showPoll(false, true)
     expect(await screen.findByText('Vote enregistré')).toBeInTheDocument()
     for (const name of [/Oui/, /Non/, /Bof/]) expect(screen.getByRole('button', { name })).toBeDisabled()
+  })
+
+  it("question:show avec alreadyAnswered arrivant avant la fin de l'acquittement verrouille, sans contaminer le sondage suivant", async () => {
+    let release: (v: unknown) => void = () => {}
+    reconnectGate = new Promise((resolve) => {
+      release = resolve
+    })
+    renderPlayerLive()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:reconnect', expect.anything()))
+    showPoll(false, true)
+    expect(await screen.findByText('Vote enregistré')).toBeInTheDocument()
+    await act(async () => {
+      release(null)
+    })
+    emitServerEvent('question:show', {
+      id: 'q2',
+      type: 'poll',
+      prompt: 'Autre sondage ?',
+      timeLimit: 30,
+      payload: { options: [{ label: 'A' }, { label: 'B' }], multiple: false },
+    })
+    await screen.findByText('Autre sondage ?')
+    expect(screen.getByRole('button', { name: /^A/ })).toBeEnabled()
+    expect(screen.queryByText('Vote enregistré')).toBeNull()
   })
 
   it('sans reconnexion avec réponse, un sondage suivant est votable', async () => {

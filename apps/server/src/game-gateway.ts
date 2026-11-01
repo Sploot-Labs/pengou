@@ -909,10 +909,12 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
    * suivante. Anti-triche : utilise EXCLUSIVEMENT `engine.playerQuestionView` (jamais le payload
    * brut ni `questionResult`), exactement comme `host:start`/`host:next`. Émis à CE socket
    * seulement (pas à la room — les autres l'ont déjà reçu). */
-  function replayCurrentQuestionTo(socket: Socket, session: GameSession): void {
+  function replayCurrentQuestionTo(socket: Socket, session: GameSession, alreadyAnswered?: boolean): void {
     if (session.phase !== 'question') return
     const view = engine.playerQuestionView(session)
-    socket.emit('question:show', view)
+    // `alreadyAnswered` (reconnexion d'un joueur seulement, jamais diffusé) voyage DANS le
+    // `question:show` pour que le client n'ait aucune dépendance d'ordre avec l'acquittement.
+    socket.emit('question:show', alreadyAnswered === undefined ? view : { ...view, alreadyAnswered })
     const timer = timerPayload(session)
     if (timer) socket.emit('timer', timer)
   }
@@ -1524,7 +1526,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         // suite, pas seulement à partir de la question suivante : on lui renvoie, à LUI SEUL
         // (pas à la room — les autres l'ont déjà reçu), la même projection anti-triche que
         // host:start/host:next (`playerQuestionView`, jamais `questionResult`) + le `timer`.
-        replayCurrentQuestionTo(socket, session)
+        replayCurrentQuestionTo(socket, session, alreadyAnswered)
       } catch (e) {
         reply({ error: message(e) })
       }

@@ -405,4 +405,46 @@ describe('e2e : sondage', () => {
       await app.close()
     }
   }, 30_000)
+
+  it('player:reconnect rejoue question:show avec alreadyAnswered, jamais diffusé aux autres', async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const cookie = await signUp(app, 'sondage-reco@example.com')
+      const quizId = await createQuiz(app, cookie, 'Sondage reco')
+      await addQuestion(app, cookie, quizId, pollQuestion('Thé ou café ?', ['Thé', 'Café'], false))
+
+      const host = await connectClient(url, { cookie })
+      clients.push(host)
+      const created = await ack<{ sessionId: string; pin: string; error?: string }>(host, 'host:create', { quizId })
+      await ack(host, 'host:setAuto', { enabled: false })
+      const voter = await connectClient(url)
+      const idle = await connectClient(url)
+      clients.push(voter, idle)
+      const voterJoin = await ack<{ joinToken: string; error?: string }>(voter, 'player:join', { pin: created.pin, nickname: 'Alice' })
+      const idleJoin = await ack<{ joinToken: string; error?: string }>(idle, 'player:join', { pin: created.pin, nickname: 'Bob' })
+      expect(voterJoin.error).toBeUndefined()
+      await ack(host, 'host:start', {})
+      const vote = await ack<{ accepted?: boolean }>(voter, 'player:answer', { answer: { optionIndexes: [0] } })
+      expect(vote.accepted).toBe(true)
+
+      const idleShows = record<ShowPayload & { alreadyAnswered?: boolean }>(idle, 'question:show')
+      const voter2 = await connectClient(url)
+      const idle2 = await connectClient(url)
+      clients.push(voter2, idle2)
+      const voterShows = record<ShowPayload & { alreadyAnswered?: boolean }>(voter2, 'question:show')
+      const idle2Shows = record<ShowPayload & { alreadyAnswered?: boolean }>(idle2, 'question:show')
+      const r1 = await ack<{ alreadyAnswered?: boolean }>(voter2, 'player:reconnect', { pin: created.pin, joinToken: voterJoin.joinToken })
+      const r2 = await ack<{ alreadyAnswered?: boolean }>(idle2, 'player:reconnect', { pin: created.pin, joinToken: idleJoin.joinToken })
+      expect(r1.alreadyAnswered).toBe(true)
+      expect(r2.alreadyAnswered).toBe(false)
+      expect((await voterShows.until(() => true)).alreadyAnswered).toBe(true)
+      expect((await idle2Shows.until(() => true)).alreadyAnswered).toBe(false)
+      // Les autres joueurs n'ont rien reçu de plus que le question:show initial.
+      expect(idleShows.received.every((v) => v.alreadyAnswered === undefined)).toBe(true)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 30_000)
 })
