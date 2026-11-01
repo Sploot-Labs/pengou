@@ -456,7 +456,7 @@ export function createEngine(deps: EngineDeps): Engine {
 
     pollView(session) {
       const question = currentQuestion(session)
-      if (!question || question.type !== 'poll') return null
+      if (question?.type !== 'poll') return null
       const payload = question.payload as PollPayload
       const answers = Object.values(session.answers[session.currentIndex] ?? {}).map(
         (submitted) => submitted.answer as PollAnswer,
