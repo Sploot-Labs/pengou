@@ -37,6 +37,11 @@ type SessionMeta = {
    * (ou host:skip, qui crédite/persiste aussi — voir `doSkip`) est invoqué plusieurs fois sur
    * la même manche. */
   revealedRounds: Set<number>
+  /** Écritures en cours par index de manche (`persistRound`). Une manche entre dans
+   * `revealedRounds` dès le DÉBUT de son écriture : un second appelant (host:reveal après une
+   * auto-révélation) attend cette promesse au lieu de répondre avant que la base soit à jour, et
+   * le podium les attend toutes avant de clore la partie. */
+  roundWrites: Map<number, Promise<void>>
   /** Index de question déjà auto-révélés (voir `player:answer`) — garde d'émission unique :
    * évite un double `question:reveal`/`scoreboard` si les deux dernières réponses d'une manche
    * arrivent quasi simultanément (deux appels concurrents à `player:answer`). */
@@ -332,6 +337,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       return startQuestionFlow(sessionId, meta)
     }
     const session = await engine.podium(sessionId)
+    // Une auto-révélation (jamais attendue par l'hôte) peut encore écrire la dernière manche : le
+    // podium n'est annoncé qu'une fois les scores en base, cohérents avec le classement affiché.
+    await Promise.allSettled(meta.roundWrites.values())
     await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
       setSessionStatus(scope.db, meta.dbSessionId, 'ended'))
     // Nettoyage `engine_state` passé le podium — cohérent avec l'ancien host:next (le rapport final
@@ -472,6 +480,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       tenantId,
       playerDbIds: new Map(),
       revealedRounds: new Set(),
+      roundWrites: new Map(),
       autoRevealedRounds: new Set(),
       statusActiveSet: false,
       readingTimeout: null,
@@ -541,10 +550,21 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   async function persistRound(meta: SessionMeta, session: GameSession): Promise<void> {
     const idx = session.currentIndex
     const question = session.questions[idx]
-    if (!question || meta.revealedRounds.has(idx)) return
+    if (!question) return
+    const pending = meta.roundWrites.get(idx)
+    if (pending) return pending
+    if (meta.revealedRounds.has(idx)) return
     meta.revealedRounds.add(idx)
-    await persistRoundAnswers(meta, session, idx)
-    await persistPlayerScores(meta, session)
+    const write = (async () => {
+      await persistRoundAnswers(meta, session, idx)
+      await persistPlayerScores(meta, session)
+    })()
+    meta.roundWrites.set(idx, write)
+    try {
+      await write
+    } finally {
+      meta.roundWrites.delete(idx)
+    }
   }
 
   /** Corps commun de révélation (crédit + persistance + diffusion `question:reveal`/`scoreboard`),
@@ -862,6 +882,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           tenantId: session.tenantId,
           playerDbIds,
           revealedRounds,
+          roundWrites: new Map(),
           autoRevealedRounds: new Set(revealedRounds),
           statusActiveSet: session.phase !== 'lobby',
           readingTimeout: null,

@@ -34,10 +34,11 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
     }
     const description = isNonEmptyString(body?.description) ? body.description : undefined
 
-    return withTenantTx(appDb, context, async (scope) => {
-      const quiz = await createQuiz(scope, { ownerId: request.user.id, title: body.title as string, description })
-      return reply.code(201).send(quiz)
-    })
+    // Réponse envoyée APRÈS le COMMIT (hors du callback) : sinon le client peut enchaîner une
+    // requête qui ne voit pas encore le quiz.
+    const quiz = await withTenantTx(appDb, context, (scope) =>
+      createQuiz(scope, { ownerId: request.user.id, title: body.title as string, description }))
+    return reply.code(201).send(quiz)
   })
 
   // `?archived=1` liste les quiz archivés ; par défaut, seulement les actifs (« Mes quiz »).
