@@ -636,12 +636,28 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     const sessionId = data.sessionId
     const meta = sessionMetaByEngineId.get(sessionId)
     if (!meta) throw new Error('session introuvable')
-    const authSession = await auth.api.getSession({ headers: fromNodeHeaders(socket.handshake.headers) })
-    if (!authSession?.user) throw new Error(HOST_REVOKED_MESSAGE)
-    const session = await engine.getSession(sessionId)
-    if (session.hostId !== authSession.user.id) throw new Error(HOST_REVOKED_MESSAGE)
-    await assertHostMembership(authSession.user.id, meta.tenantId)
+    try {
+      const authSession = await auth.api.getSession({ headers: fromNodeHeaders(socket.handshake.headers) })
+      if (!authSession?.user) throw new Error(HOST_REVOKED_MESSAGE)
+      const session = await engine.getSession(sessionId)
+      if (session.hostId !== authSession.user.id) throw new Error(HOST_REVOKED_MESSAGE)
+      await assertHostMembership(authSession.user.id, meta.tenantId)
+    } catch (e) {
+      // Autorité révoquée : la socket perd aussi son rôle et ses rooms, sinon elle continuerait
+      // de recevoir les diffusions (lobby, progression) réservées à l'hôte.
+      if (message(e) === HOST_REVOKED_MESSAGE) await revokeHostSocket(socket, sessionId)
+      throw e
+    }
     return { sessionId, meta }
+  }
+
+  /** Retire à une socket hôte révoquée son rôle et ses rooms de session. */
+  async function revokeHostSocket(socket: Socket, sessionId: string): Promise<void> {
+    const data = socket.data as SocketData
+    data.role = undefined
+    data.sessionId = undefined
+    await socket.leave(roomName(sessionId))
+    await socket.leave(viewersRoomName(sessionId))
   }
 
   /** Écrit les answer_record d'UNE manche donnée (`idx`), sans garde `revealedRounds`. Idempotent
@@ -1169,6 +1185,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
 
         const { session } = await buildHostedSession(userId, context, quizId)
 
+        // Une socket qui devient hôte rend d'abord le siège joueur qu'elle occupait.
+        await releasePlayerSeat(socket)
         const data = socket.data as SocketData
         data.role = 'host'
         data.sessionId = session.id
@@ -1284,6 +1302,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         // Un hôte retiré de l'espace ne reprend pas la main sur ses parties en cours.
         await assertHostMembership(authSession.user.id, meta.tenantId)
 
+        // Une socket qui devient hôte rend d'abord le siège joueur qu'elle occupait.
+        await releasePlayerSeat(socket)
         const data = socket.data as SocketData
         data.role = 'host'
         data.sessionId = sessionId
@@ -1558,19 +1578,16 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         // évincée après le podium) épuiseraient le budget commun, bloquant le player:join suivant.
         const sessionId = pinToSessionId.get(pin)
         if (!sessionId || !sessionMetaByEngineId.has(sessionId)) throw new Error(RECONNECT_INVALID_MESSAGE)
-        // Siège courant libéré seulement une fois le PIN résolu, comme dans player:join.
-        await releasePlayerSeat(socket)
 
         const result = await engine.reconnect(sessionId, joinToken)
         if (!result) throw new Error(RECONNECT_INVALID_MESSAGE)
         const { session, player } = result
 
-        // Même garde que player:join contre une attribution concurrente sur la même socket. Pour
-        // une reconnexion séquentielle au même joueur, la libération précédente l'a déjà passé hors
-        // ligne et vidé `socket.data`, puis `engine.reconnect` l'a remis en ligne : cet appel ne
-        // fait alors rien. Le test d'identité ne sert qu'à deux `player:reconnect` concurrents du
-        // même joueur, où la libération repasserait hors ligne le joueur que l'autre vient de
-        // remettre en ligne.
+        // Le siège courant n'est libéré qu'après une reconnexion réussie : le libérer dès le PIN
+        // résolu (jeton encore inconnu) faisait d'un mauvais jeton un oracle d'existence du PIN,
+        // la socket ne perdant sa place que si le PIN existait. Rien à libérer quand la socket
+        // porte déjà ce joueur (reconnexion répétée ou concurrente) : la libération le
+        // repasserait hors ligne alors que `engine.reconnect` vient de le remettre en ligne.
         if ((socket.data as SocketData).playerId !== player.id) void releasePlayerSeat(socket)
         const data = socket.data as SocketData
         data.role = 'player'
@@ -1647,6 +1664,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         consumedScreenTokens.add(displayToken)
         if (!sessionMetaByEngineId.has(sessionId)) throw new Error('session introuvable')
 
+        // Une socket qui devient écran rend d'abord le siège joueur qu'elle occupait (sinon il
+        // resterait `connected: true` sans socket pour le porter).
+        await releasePlayerSeat(socket)
         const data = socket.data as SocketData
         data.role = 'screen'
         data.sessionId = sessionId
@@ -1683,6 +1703,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (!mappedSessionId || mappedSessionId !== sessionId) throw new Error('displayToken invalide')
         if (!sessionMetaByEngineId.has(sessionId)) throw new Error('session introuvable')
 
+        // Une socket qui devient écran rend d'abord le siège joueur qu'elle occupait (sinon il
+        // resterait `connected: true` sans socket pour le porter).
+        await releasePlayerSeat(socket)
         const data = socket.data as SocketData
         data.role = 'screen'
         data.sessionId = sessionId

@@ -1302,7 +1302,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
       expect(startAck.error).toBe(HOST_REVOKED)
       const tokenAck = await ack<{ error?: string; displayToken?: string }>(hostSocket, 'host:createScreenToken', {})
-      expect(tokenAck.error).toBe(HOST_REVOKED)
+      // Le premier refus a retiré son rôle à la socket : les commandes suivantes sont refusées
+      // comme pour toute socket non hôte.
+      expect(tokenAck.error).toBe("action réservée à l'hôte de la session")
       expect(tokenAck.displayToken).toBeUndefined()
     } finally {
       for (const c of clients) c.disconnect()
@@ -3160,6 +3162,89 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
         // La socket est toujours rattachée à son siège : sa réponse est acceptée.
         expect((await ack<{ accepted?: boolean }>(x, 'player:answer', { answer: { optionIndex: 0 } })).accepted).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+  })
+
+  describe('changements de rôle et révocation (revue finale)', () => {
+    type LobbyUpdate = { players: Array<{ nickname: string; connected: boolean }> }
+    const connectedOf = (u: LobbyUpdate, nickname: string) => u.players.find((p) => p.nickname === nickname)?.connected
+
+    it("player:reconnect avec un bon PIN et un mauvais jeton laisse la socket assise (pas d'oracle de PIN)", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-c1-keep-seat@example.com')
+        clients.push(hostSocket)
+        const x = await connectClient(url)
+        clients.push(x)
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'a' })).error).toBeUndefined()
+        expect(await ack(x, 'player:reconnect', { pin, joinToken: 'x' })).toEqual({ error: 'PIN ou jeton invalide' })
+        expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+        // Toujours rattachée : la réponse est acceptée.
+        expect((await ack<{ accepted?: boolean }>(x, 'player:answer', { answer: { optionIndex: 0 } })).accepted).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("screen:reconnect sur une socket assise libère sa place de joueur", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin, sessionId } = await setupHostedSession(app, url, 'gateway-i3-screen@example.com')
+        clients.push(hostSocket)
+        const lobby = collect<LobbyUpdate>(hostSocket, 'lobby:update')
+        const { displayToken } = await ack<{ displayToken: string }>(hostSocket, 'host:createScreenToken', {})
+        const x = await connectClient(url)
+        clients.push(x)
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'a' })).error).toBeUndefined()
+        await lobby.until((u) => connectedOf(u, 'a') === true)
+        expect((await ack<{ error?: string }>(x, 'screen:reconnect', { sessionId, displayToken })).error).toBeUndefined()
+        const update = await Promise.race([
+          lobby.until((u) => connectedOf(u, 'a') === false),
+          new Promise<never>((_, reject) => setTimeout(() => reject(new Error("a est resté connecté")), 3000)),
+        ])
+        expect(connectedOf(update, 'a')).toBe(false)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("un hôte révoqué (sign-out) ne reçoit plus les diffusions du lobby", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-m9-revoked@example.com')
+        clients.push(hostSocket)
+        const { displayToken } = await ack<{ displayToken: string }>(hostSocket, 'host:createScreenToken', {})
+        const screen = await connectClient(url)
+        clients.push(screen)
+        expect((await ack<{ error?: string }>(screen, 'screen:join', { displayToken })).error).toBeUndefined()
+
+        const cookie = (hostSocket.io.opts.extraHeaders as Record<string, string>).cookie
+        const signOut = await app.inject({
+          method: 'POST',
+          url: '/api/auth/sign-out',
+          payload: {},
+          headers: { 'content-type': 'application/json', cookie },
+        })
+        expect(signOut.statusCode).toBe(200)
+        expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBe(HOST_REVOKED)
+
+        const hostLobby = collect<LobbyUpdate>(hostSocket, 'lobby:update')
+        const screenLobby = collect<LobbyUpdate>(screen, 'lobby:update')
+        const p = await connectClient(url)
+        clients.push(p)
+        expect((await ack<{ error?: string }>(p, 'player:join', { pin, nickname: 'z' })).error).toBeUndefined()
+        await screenLobby.until((u) => connectedOf(u, 'z') === true)
+        await new Promise((resolve) => setTimeout(resolve, 300))
+        expect(hostLobby.count()).toBe(0)
       } finally {
         for (const c of clients) c.disconnect()
         await app.close()
