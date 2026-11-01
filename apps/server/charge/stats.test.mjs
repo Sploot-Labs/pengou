@@ -1,7 +1,7 @@
 import { createServer } from 'node:net'
 import { describe, expect, it } from 'vitest'
 import { echantillonnerServeur, lireMetriques } from './metriques.mjs'
-import { estCibleLocale, percentile, resumer, verdict } from './stats.mjs'
+import { estCibleLocale, percentile, resumer, resumerLag, verdict } from './stats.mjs'
 
 describe('percentile (rang le plus proche)', () => {
   it('renvoie NaN pour une liste vide', () => {
@@ -210,4 +210,17 @@ describe('echantillonnerServeur', () => {
       serveur.close()
     }
   }, 15_000)
+})
+
+describe('resumerLag', () => {
+  it('donne le p95 et le nombre de secondes au-dessus du seuil', () => {
+    const r = resumerLag([10, 20, 30, 250, 40, 50, 60, 70, 80, 300], 200)
+    expect(r).toEqual({ p95: 300, auDessus: 2 })
+  })
+
+  it('renvoie NaN et 0 sans échantillon', () => {
+    const r = resumerLag([], 200)
+    expect(r.p95).toBeNaN()
+    expect(r.auDessus).toBe(0)
+  })
 })
