@@ -1,6 +1,7 @@
 import {
   and, desc, eq, gte, inArray, isNotNull, lt,
 } from 'drizzle-orm'
+import { sql } from 'drizzle-orm'
 import { schema } from '../index.js'
 import type { Db } from '../client.js'
 import type { TenantScope } from '../tenant.js'
@@ -144,6 +145,24 @@ export async function saveEngineState(db: Db, sessionId: string, state: unknown)
   await db.update(schema.gameSession)
     .set({ engineState: state as never, lastActivityAt: new Date() })
     .where(eq(schema.gameSession.id, sessionId))
+}
+
+// Écrase la liste des clés retirées pour UNE question, sans toucher aux autres (écriture atomique).
+export async function setWordcloudRemoved(
+  db: Db, sessionId: string, questionId: string, keys: string[],
+): Promise<void> {
+  await db.update(schema.gameSession)
+    .set({
+      wordcloudRemoved: sql`jsonb_set(${schema.gameSession.wordcloudRemoved}, ARRAY[${questionId}]::text[], ${JSON.stringify(keys)}::jsonb)`,
+    })
+    .where(eq(schema.gameSession.id, sessionId))
+}
+
+export async function loadWordcloudRemoved(db: Db, sessionId: string): Promise<Record<string, string[]>> {
+  const [row] = await db.select({ removed: schema.gameSession.wordcloudRemoved })
+    .from(schema.gameSession)
+    .where(eq(schema.gameSession.id, sessionId))
+  return row?.removed ?? {}
 }
 
 export async function clearEngineState(db: Db, sessionId: string): Promise<void> {

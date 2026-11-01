@@ -10,6 +10,8 @@ const TYPE_LABEL: Record<string, string> = {
   truefalse: 'Vrai ou faux',
   text: 'Réponse libre',
   slider: 'Curseur',
+  wordcloud: 'Nuage de mots',
+  poll: 'Sondage',
 }
 
 /** Bonne réponse en une ligne, selon le type. Payload inattendu : rien plutôt qu'un plantage. */

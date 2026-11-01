@@ -202,3 +202,123 @@ describe('HostEditor : archivage', () => {
     expect(screen.getByRole('button', { name: 'Archiver ce quiz' })).toBeInTheDocument()
   })
 })
+
+describe('HostEditor : nuage de mots', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+    fixtures.quizSource = null
+    fixtures.questionSource = null
+    fixtures.archivedAt = null
+  })
+  afterEach(cleanup)
+
+  it('choisir « Nuage de mots » crée une question wordcloud et affiche le texte explicatif', async () => {
+    const { createQuestion, deleteQuestion } = await import('../api/quizzes')
+    vi.mocked(createQuestion).mockResolvedValueOnce({
+      ...baseQuestion,
+      id: 'quest2',
+      type: 'wordcloud',
+      payload: {},
+      source: null,
+    } as never)
+    vi.mocked(deleteQuestion).mockResolvedValueOnce(undefined as never)
+    renderEditor()
+
+    const select = (await screen.findByLabelText('Type de question')) as HTMLSelectElement
+    expect(within(select).getByRole('option', { name: 'Nuage de mots' })).toHaveValue('wordcloud')
+    // La question de départ (QCM) a des réponses : la confirmation s'ouvre d'abord.
+    fireEvent.change(select, { target: { value: 'wordcloud' } })
+    fireEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Changer de type' }))
+
+    await waitFor(() =>
+      expect(createQuestion).toHaveBeenCalledWith(
+        'quiz1',
+        expect.objectContaining({ type: 'wordcloud', payload: {} }),
+      ),
+    )
+    expect(
+      await screen.findByText('Les participants proposent leurs idées en direct. Pas de bonne réponse ni de points.'),
+    ).toBeInTheDocument()
+    expect(screen.queryByText('Incomplète')).toBeNull()
+  })
+})
+
+describe('HostEditor : sondage', () => {
+  const pollQuestion = (options: string[], multiple = false) => ({
+    ...baseQuestion,
+    id: 'quest2',
+    type: 'poll' as const,
+    payload: { options: options.map((label) => ({ label })), multiple },
+    source: null,
+  })
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+    fixtures.quizSource = null
+    fixtures.questionSource = null
+    fixtures.archivedAt = null
+  })
+  afterEach(cleanup)
+
+  async function openPoll(options: string[], multiple = false) {
+    const { createQuestion, deleteQuestion } = await import('../api/quizzes')
+    vi.mocked(createQuestion).mockResolvedValueOnce(pollQuestion(options, multiple) as never)
+    vi.mocked(deleteQuestion).mockResolvedValueOnce(undefined as never)
+    renderEditor()
+    const select = (await screen.findByLabelText('Type de question')) as HTMLSelectElement
+    fireEvent.change(select, { target: { value: 'poll' } })
+    fireEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Changer de type' }))
+    await screen.findByLabelText('Plusieurs réponses possibles')
+    return { createQuestion }
+  }
+
+  it('choisir « Sondage » crée un sondage à quatre choix sans bonne réponse', async () => {
+    const { createQuestion } = await openPoll(['Choix 1', 'Choix 2', 'Choix 3', 'Choix 4'])
+    const select = screen.getByLabelText('Type de question') as HTMLSelectElement
+    expect(within(select).getByRole('option', { name: 'Sondage' })).toHaveValue('poll')
+    expect(createQuestion).toHaveBeenCalledWith(
+      'quiz1',
+      expect.objectContaining({
+        type: 'poll',
+        payload: {
+          options: [{ label: 'Choix 1' }, { label: 'Choix 2' }, { label: 'Choix 3' }, { label: 'Choix 4' }],
+          multiple: false,
+        },
+      }),
+    )
+    expect(screen.queryByText('Correcte')).toBeNull()
+    expect(screen.queryByRole('radio')).toBeNull()
+    expect(screen.queryByText('Incomplète')).toBeNull()
+  })
+
+  it('cocher « Plusieurs réponses possibles » envoie un patch multiple: true', async () => {
+    await openPoll(['Choix 1', 'Choix 2', 'Choix 3', 'Choix 4'])
+    fireEvent.click(screen.getByLabelText('Plusieurs réponses possibles'))
+    await waitFor(
+      () =>
+        expect(mockUpdateQuestion).toHaveBeenCalledWith(
+          'quiz1',
+          'quest2',
+          expect.objectContaining({ payload: expect.objectContaining({ multiple: true }) }),
+        ),
+      { timeout: 2000 },
+    )
+  })
+
+  it('vider un libellé marque la question incomplète', async () => {
+    await openPoll(['Choix 1', 'Choix 2', 'Choix 3', 'Choix 4'])
+    fireEvent.change(screen.getByLabelText(/Libellé choix 2/), { target: { value: '' } })
+    expect(await screen.findByText('Chaque choix doit avoir un libellé.')).toBeInTheDocument()
+    expect(screen.getAllByText('Incomplète').length).toBeGreaterThan(0)
+  })
+
+  it("désactive l'ajout à six choix et le retrait à deux", async () => {
+    await openPoll(['A', 'B', 'C', 'D', 'E', 'F'])
+    expect(screen.getByRole('button', { name: 'Ajouter un choix' })).toBeDisabled()
+    for (let i = 0; i < 4; i++) {
+      fireEvent.click(screen.getAllByRole('button', { name: /^Retirer le choix/ })[0])
+    }
+    expect(screen.getAllByRole('button', { name: /^Retirer le choix/ })[0]).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Ajouter un choix' })).toBeEnabled()
+  })
+})

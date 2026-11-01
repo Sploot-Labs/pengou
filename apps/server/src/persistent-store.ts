@@ -41,14 +41,15 @@ export class PersistentSessionStore implements SessionStore {
   constructor(private readonly db: Db) {}
 
   /** Signature des champs dont un changement rend l'écriture CRITIQUE (durabilité immédiate) :
-   * phase, index de manche, ensemble des manches créditées, ensemble des joueurs. Un changement
+   * phase, index de manche, ensemble des manches créditées, ensemble des joueurs, mots retirés
+   * d'un nuage (un retrait de l'hôte doit survivre à un redémarrage). Un changement
    * « answers-only » (réponses accumulées d'une manche non révélée) ne modifie AUCUN de ces champs
    * → écriture coalescée. Le crédit (scoring) et les transitions de phase restent, eux, durables
    * immédiatement — condition de la cicatrisation P1-8 et de l'idempotence du reveal. */
   private signature(s: GameSession): string {
     const creditedRounds = Object.keys(s.credited ?? {}).filter((k) => s.credited[Number(k)]).sort()
     const players = Object.keys(s.players ?? {}).sort()
-    return JSON.stringify({ phase: s.phase, idx: s.currentIndex, creditedRounds, players })
+    return JSON.stringify({ phase: s.phase, idx: s.currentIndex, creditedRounds, players, removed: s.wordcloudRemoved ?? {} })
   }
 
   private scheduleFlush(id: string): void {

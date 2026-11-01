@@ -1,5 +1,6 @@
 import type { FastifyInstance } from 'fastify'
 import { listSessions, getSessionReport, withTenantTx, type SessionReport, type Db } from '@splootlabs/db'
+import { pollPercent } from '@splootlabs/quiz'
 import type { AppConfig } from '@splootlabs/shared'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
 import { toCsv } from '../csv.js'
@@ -51,7 +52,35 @@ function buildReportCsv(report: SessionReport): string {
   rows.push(['Questions'])
   rows.push(['# ', 'Énoncé', 'Réponses données', 'Réponses correctes', 'Temps moyen (ms)'])
   for (const q of report.questions) {
-    rows.push([q.orderIndex + 1, q.prompt, q.answerCount, q.correctCount, q.avgTimeMs])
+    if (q.wordcloud) {
+      rows.push([q.orderIndex + 1, q.prompt, q.wordcloud.participants, null, null])
+    } else if (q.poll) {
+      rows.push([q.orderIndex + 1, q.prompt, q.poll.voters, null, null])
+    } else {
+      rows.push([q.orderIndex + 1, q.prompt, q.answerCount, q.correctCount, q.avgTimeMs])
+    }
+  }
+
+  // Une section par nuage de mots : les mots dans l'ordre de l'agrégat.
+  for (const q of report.questions) {
+    if (!q.wordcloud) continue
+    rows.push([])
+    const { participants, totalWords } = q.wordcloud
+    rows.push([
+      `Nuage de mots : ${q.prompt} (${participants} participant${participants > 1 ? 's' : ''}, ${totalWords} mot${totalWords > 1 ? 's' : ''})`,
+    ])
+    rows.push(['Mot', 'Occurrences'])
+    for (const w of q.wordcloud.words) rows.push([w.text, w.count])
+  }
+
+  // Une section par sondage : une ligne par choix, dans l'ordre de création.
+  for (const q of report.questions) {
+    if (!q.poll) continue
+    rows.push([])
+    const { voters } = q.poll
+    rows.push([`Sondage : ${q.prompt} (${voters} participant${voters > 1 ? 's' : ''})`])
+    rows.push(['Choix', 'Votes', 'Pourcentage'])
+    for (const o of q.poll.options) rows.push([o.label, o.votes, pollPercent(o.votes, voters)])
   }
 
   return toCsv(rows, { bom: true })

@@ -16,7 +16,7 @@ export type SnapshotTheme = { id: string; label: string; hidden: boolean; origin
 
 export type SnapshotQuestion = {
   id: string
-  type: QuestionType
+  type: Exclude<QuestionType, 'poll'> // le catalogue n'accepte pas le sondage
   prompt: string
   payload: unknown
   theme: string

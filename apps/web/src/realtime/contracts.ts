@@ -18,6 +18,8 @@ import type { ContentSource } from '../api/quizzes'
 export interface PodiumPayload {
   top: RankingEntry[]
   sources: ContentSource[]
+  /** Faux quand le quiz ne contient aucune question notée (`top` est alors vide). */
+  hasScoredQuestions: boolean
 }
 
 /** Entrée de classement diffusée par `scoreboard` / `podium`. */
@@ -43,6 +45,26 @@ export interface ReadingView {
  * refléter). `nextAt: null` annule le compte à rebours (mode auto désactivé par l'hôte). */
 export interface AutoAdvanceView {
   nextAt: number | null
+}
+
+/** Payload de `wordcloud:update` (grand écran et hôte seulement, jamais les téléphones) : mots
+ * fusionnés par clé de normalisation, triés côté serveur. Copie de `WordcloudView` du moteur. */
+export interface WordcloudView {
+  questionId: string
+  words: { key: string; text: string; count: number }[]
+  participants: number
+  totalWords: number
+  truncated: boolean
+}
+
+/** Champ `poll` de `question:reveal` pour un sondage (grand écran et hôte) : votes par option,
+ * dans l'ordre des choix, et nombre de joueurs ayant voté (base du pourcentage). Copie de la
+ * `PollView` du moteur. */
+export interface PollView {
+  questionId: string
+  multiple: boolean
+  voters: number
+  options: { label: string; votes: number }[]
 }
 
 /** Diffusé quand l'hôte relance une partie depuis le podium (une variante par rôle). */

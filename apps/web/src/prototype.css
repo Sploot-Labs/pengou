@@ -3433,6 +3433,53 @@ p.source-credit {
   margin: 0;
 }
 
+/* Nuage de mots : flux centré, cinq paliers de taille (grand écran et écran hôte). */
+.wordcloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wordcloud__word {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--ink-strong);
+  font-weight: 700;
+  line-height: 1.1;
+}
+.wordcloud__word--t1 { font-size: var(--fs-body); color: var(--ink-dim); }
+.wordcloud__word--t2 { font-size: var(--fs-h3); }
+.wordcloud__word--t3 { font-size: var(--fs-h2); }
+.wordcloud__word--t4 { font-size: var(--fs-title); }
+.wordcloud__word--t5 { font-size: var(--fs-display); }
+.wordcloud__empty {
+  margin: 0;
+  text-align: center;
+  color: var(--ink-dim);
+  font-size: var(--fs-h3);
+}
+.wordcloud__remove {
+  min-width: 28px;
+  min-height: 28px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--ink-dim);
+  font-size: var(--fs-small);
+  line-height: 1;
+  cursor: pointer;
+}
+.wordcloud__remove:hover,
+.wordcloud__remove:focus-visible {
+  color: var(--ink-strong);
+  border-color: var(--warn);
+}
+
 /* Cartes de la bibliothèque : trois actions qui passent à la ligne sur mobile. */
 .library-card-actions {
   display: flex;

@@ -741,3 +741,278 @@ describe('game engine : chemin de réponse sans copie de la session', () => {
     expect(second.players[player.id]!.score).toBe(score)
   })
 })
+
+const wordcloudQuestion: EngineQuestion = {
+  id: 'wc1',
+  type: 'wordcloud',
+  prompt: 'Un mot sur le café',
+  timeLimit: 30,
+  readingTime: 0,
+  basePoints: 0,
+  payload: {},
+}
+
+describe('game engine : nuage de mots', () => {
+  async function setupWc(questions: EngineQuestion[] = [wordcloudQuestion]) {
+    const clock = makeClock(0)
+    const store = new MemorySessionStore()
+    const engine = createEngine({ store, now: clock.now, genPin: makePinGen(['123456']), genId: makeIdGen('id') })
+    const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions })
+    const { player: alice } = await engine.addPlayer(session.id, 'Alice')
+    const { player: bob } = await engine.addPlayer(session.id, 'Bob')
+    await engine.startQuestion(session.id)
+    return { engine, clock, session, alice, bob }
+  }
+
+  it('accepte des envois successifs, renvoie la liste complète et garde le timeMs du premier', async () => {
+    const { engine, clock, session, alice } = await setupWc()
+    clock.set(2000)
+    const r1 = await engine.submitAnswer(session.id, alice.id, { word: 'chat' })
+    clock.set(5000)
+    const r2 = await engine.submitAnswer(session.id, alice.id, { word: 'chien' })
+    const r3 = await engine.submitAnswer(session.id, alice.id, { word: 'oiseau' })
+    expect(r1).toEqual({ accepted: true, words: ['chat'] })
+    expect(r2.words).toEqual(['chat', 'chien'])
+    expect(r3.accepted).toBe(true)
+    expect(r3.words).toHaveLength(3)
+    const stored = (await engine.getSession(session.id)).answers[0]![alice.id]!
+    expect(stored.timeMs).toBe(2000)
+    expect(stored.correct).toBe(false)
+    expect(stored.points).toBe(0)
+    expect(stored.answer).toEqual({ words: ['chat', 'chien', 'oiseau'] })
+  })
+
+  it('refuse un doublon (clé identique)', async () => {
+    const { engine, session, alice } = await setupWc()
+    await engine.submitAnswer(session.id, alice.id, { word: 'cafe' })
+    const res = await engine.submitAnswer(session.id, alice.id, { word: 'Café' })
+    expect(res).toEqual({ accepted: false, reason: 'mot déjà envoyé' })
+  })
+
+  it('refuse un mot dont la clé est vide (diacritique seul)', async () => {
+    const { engine, session, alice } = await setupWc()
+    const res = await engine.submitAnswer(session.id, alice.id, { word: '́' })
+    expect(res).toEqual({ accepted: false, reason: 'mot invalide' })
+    expect((await engine.getSession(session.id)).answers[0]?.[alice.id]).toBeUndefined()
+  })
+
+  it('refuse le 21e mot', async () => {
+    const { engine, session, alice } = await setupWc()
+    for (let i = 0; i < 20; i++) {
+      const r = await engine.submitAnswer(session.id, alice.id, { word: `mot${i}` })
+      expect(r.accepted).toBe(true)
+    }
+    const res = await engine.submitAnswer(session.id, alice.id, { word: 'mot20' })
+    expect(res).toEqual({ accepted: false, reason: 'limite de 20 mots atteinte' })
+  })
+
+  it('allConnectedAnswered reste false même quand tous ont envoyé un mot', async () => {
+    const { engine, session, alice, bob } = await setupWc()
+    await engine.submitAnswer(session.id, alice.id, { word: 'a' })
+    await engine.submitAnswer(session.id, bob.id, { word: 'b' })
+    expect(engine.allConnectedAnswered(await engine.getSession(session.id))).toBe(false)
+  })
+
+  it('wordcloudView après removeWord : le mot disparaît et totalWords diminue', async () => {
+    const { engine, session, alice, bob } = await setupWc()
+    await engine.submitAnswer(session.id, alice.id, { word: 'cafe' })
+    await engine.submitAnswer(session.id, alice.id, { word: 'thé' })
+    await engine.submitAnswer(session.id, bob.id, { word: 'Café' })
+    const before = engine.wordcloudView(await engine.getSession(session.id))!
+    expect(before.totalWords).toBe(3)
+    expect(before.questionId).toBe('wc1')
+    expect(before.truncated).toBe(false)
+    const removed = await engine.removeWord(session.id, 'CAFÉ')
+    expect(removed.questionId).toBe('wc1')
+    expect(removed.removedKeys).toEqual(['cafe'])
+    const after = engine.wordcloudView(await engine.getSession(session.id))!
+    expect(after.words.map((w) => w.key)).toEqual(['the'])
+    expect(after.totalWords).toBe(1)
+  })
+
+  it('removeWord ne crée pas de doublon de clé', async () => {
+    const { engine, session } = await setupWc()
+    await engine.removeWord(session.id, 'cafe')
+    const r = await engine.removeWord(session.id, 'CAFÉ')
+    expect(r.removedKeys).toEqual(['cafe'])
+  })
+
+  it('un mot retiré renvoyé par un autre joueur reste absent', async () => {
+    const { engine, session, alice, bob } = await setupWc()
+    await engine.submitAnswer(session.id, alice.id, { word: 'cafe' })
+    await engine.removeWord(session.id, 'cafe')
+    const res = await engine.submitAnswer(session.id, bob.id, { word: 'cafe' })
+    expect(res.accepted).toBe(true)
+    const view = engine.wordcloudView(await engine.getSession(session.id))!
+    expect(view.words).toEqual([])
+    expect(view.totalWords).toBe(0)
+  })
+
+  it('removeWord fonctionne en phase reveal et lève en lobby', async () => {
+    const { engine, session, alice } = await setupWc()
+    await engine.submitAnswer(session.id, alice.id, { word: 'cafe' })
+    await engine.reveal(session.id)
+    await expect(engine.removeWord(session.id, 'cafe')).resolves.toBeTruthy()
+
+    const clock = makeClock(0)
+    const lobbyEngine = createEngine({
+      store: new MemorySessionStore(),
+      now: clock.now,
+      genPin: makePinGen(['654321']),
+      genId: makeIdGen('l'),
+    })
+    const lobby = await lobbyEngine.createSession({
+      quizId: 'q',
+      tenantId: 't',
+      hostId: 'h',
+      questions: [wordcloudQuestion],
+    })
+    await expect(lobbyEngine.removeWord(lobby.id, 'cafe')).rejects.toThrow(
+      'retrait impossible hors question nuage de mots',
+    )
+  })
+
+  it("removeWord lève si la question courante n'est pas un nuage", async () => {
+    const { engine, session } = await setupWc([mcqQuestion])
+    await expect(engine.removeWord(session.id, 'x')).rejects.toThrow('retrait impossible hors question nuage de mots')
+  })
+
+  it('wordcloudView vaut null pour une question non nuage', async () => {
+    const { engine, session } = await setupWc([mcqQuestion])
+    expect(engine.wordcloudView(await engine.getSession(session.id))).toBeNull()
+  })
+
+  it('questionResult vaut { correct: null, distribution: {} }', async () => {
+    const { engine, session, alice } = await setupWc()
+    await engine.submitAnswer(session.id, alice.id, { word: 'cafe' })
+    expect(engine.questionResult(await engine.getSession(session.id))).toEqual({ correct: null, distribution: {} })
+  })
+
+  it("150 mots distincts : 100 mots, truncated, totaux sur l'ensemble", async () => {
+    const { engine, session, alice, bob } = await setupWc()
+    const players = [alice, bob]
+    for (let i = 0; i < 6; i++) players.push((await engine.addPlayer(session.id, `P${i}`)).player)
+    let n = 0
+    for (const p of players) {
+      for (let j = 0; j < 20 && n < 150; j++, n++) {
+        await engine.submitAnswer(session.id, p.id, { word: `mot${n}` })
+      }
+    }
+    const view = engine.wordcloudView(await engine.getSession(session.id))!
+    expect(n).toBe(150)
+    expect(view.words).toHaveLength(100)
+    expect(view.truncated).toBe(true)
+    expect(view.totalWords).toBe(150)
+    expect(view.participants).toBe(8)
+  })
+
+  it('reveal ne change aucun score', async () => {
+    const { engine, session, alice } = await setupWc()
+    await engine.submitAnswer(session.id, alice.id, { word: 'cafe' })
+    const s = await engine.reveal(session.id)
+    expect(s.players[alice.id]!.score).toBe(0)
+  })
+
+  it('une question mcq refuse toujours une seconde réponse', async () => {
+    const { engine, session, alice } = await setupWc([mcqQuestion])
+    await engine.submitAnswer(session.id, alice.id, { optionIndex: 1 })
+    const res = await engine.submitAnswer(session.id, alice.id, { optionIndex: 0 })
+    expect(res.accepted).toBe(false)
+    expect(res.reason).toBe('réponse déjà soumise pour cette question')
+  })
+})
+
+const pollSingle: EngineQuestion = {
+  id: 'p1',
+  type: 'poll',
+  prompt: 'Thé ou café ?',
+  timeLimit: 30,
+  readingTime: 0,
+  basePoints: 0,
+  payload: { options: [{ label: 'Thé' }, { label: 'Café' }, { label: 'Eau' }], multiple: false },
+}
+const pollMulti: EngineQuestion = {
+  ...pollSingle,
+  id: 'p2',
+  payload: { options: [{ label: 'Thé' }, { label: 'Café' }, { label: 'Eau' }], multiple: true },
+}
+
+describe('game engine : sondage', () => {
+  const INVALID = 'réponse invalide pour ce type de question'
+  async function setupPoll(questions: EngineQuestion[]) {
+    const store = new MemorySessionStore()
+    const engine = createEngine({ store, now: makeClock(0).now, genPin: makePinGen(['123456']), genId: makeIdGen('id') })
+    const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions })
+    const { player: alice } = await engine.addPlayer(session.id, 'Alice')
+    const { player: bob } = await engine.addPlayer(session.id, 'Bob')
+    await engine.startQuestion(session.id)
+    return { engine, session, alice, bob }
+  }
+
+  it('accepte un vote puis refuse le second', async () => {
+    const { engine, session, alice } = await setupPoll([pollSingle])
+    expect((await engine.submitAnswer(session.id, alice.id, { optionIndexes: [1] })).accepted).toBe(true)
+    const again = await engine.submitAnswer(session.id, alice.id, { optionIndexes: [0] })
+    expect(again).toEqual({ accepted: false, reason: 'réponse déjà soumise pour cette question' })
+    const stored = (await engine.getSession(session.id)).answers[0]![alice.id]!
+    expect(stored.correct).toBe(false)
+    expect(stored.points).toBe(0)
+  })
+
+  it.each([[[0, 0]], [[5]], [[0, 1]]])('refuse %j en choix unique puis accepte un vote valide', async (optionIndexes) => {
+    const { engine, session, alice } = await setupPoll([pollSingle])
+    const bad = await engine.submitAnswer(session.id, alice.id, { optionIndexes })
+    expect(bad).toEqual({ accepted: false, reason: INVALID })
+    expect((await engine.submitAnswer(session.id, alice.id, { optionIndexes: [2] })).accepted).toBe(true)
+  })
+
+  it('allConnectedAnswered : true en choix unique, false en choix multiple', async () => {
+    const single = await setupPoll([pollSingle])
+    await single.engine.submitAnswer(single.session.id, single.alice.id, { optionIndexes: [0] })
+    await single.engine.submitAnswer(single.session.id, single.bob.id, { optionIndexes: [1] })
+    expect(single.engine.allConnectedAnswered(await single.engine.getSession(single.session.id))).toBe(true)
+    const multi = await setupPoll([pollMulti])
+    await multi.engine.submitAnswer(multi.session.id, multi.alice.id, { optionIndexes: [0] })
+    await multi.engine.submitAnswer(multi.session.id, multi.bob.id, { optionIndexes: [1] })
+    expect(multi.engine.allConnectedAnswered(await multi.engine.getSession(multi.session.id))).toBe(false)
+  })
+
+  it('pollView, questionResult et reveal', async () => {
+    const { engine, session, alice, bob } = await setupPoll([pollMulti])
+    await engine.submitAnswer(session.id, alice.id, { optionIndexes: [0, 2] })
+    await engine.submitAnswer(session.id, bob.id, { optionIndexes: [2] })
+    const current = await engine.getSession(session.id)
+    expect(engine.pollView(current)).toEqual({
+      questionId: 'p2',
+      multiple: true,
+      voters: 2,
+      options: [
+        { label: 'Thé', votes: 1 },
+        { label: 'Café', votes: 0 },
+        { label: 'Eau', votes: 2 },
+      ],
+    })
+    const result = engine.questionResult(current)
+    expect(result.correct).toBeNull()
+    expect(result.poll?.voters).toBe(2)
+    const revealed = await engine.reveal(session.id)
+    expect(revealed.players[alice.id]!.score).toBe(0)
+    expect(revealed.players[bob.id]!.score).toBe(0)
+  })
+
+  it('pollView est null hors sondage', async () => {
+    const { engine, session } = await setupPoll([mcqQuestion])
+    expect(engine.pollView(await engine.getSession(session.id))).toBeNull()
+  })
+
+  it('hasScoredQuestions et isCurrentQuestionScored', async () => {
+    const { engine, session } = await setupPoll([pollSingle, mcqQuestion])
+    const s = await engine.getSession(session.id)
+    expect(engine.isCurrentQuestionScored(s)).toBe(false)
+    expect(engine.hasScoredQuestions(s)).toBe(true)
+    s.currentIndex = 1
+    expect(engine.isCurrentQuestionScored(s)).toBe(true)
+    const none = await setupPoll([pollSingle, wordcloudQuestion])
+    expect(none.engine.hasScoredQuestions(await none.engine.getSession(none.session.id))).toBe(false)
+  })
+})

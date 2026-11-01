@@ -42,6 +42,8 @@ const TYPE_LABEL: Record<string, string> = {
   truefalse: 'Vrai ou faux',
   text: 'Réponse libre',
   slider: 'Curseur',
+  wordcloud: 'Nuage de mots',
+  poll: 'Sondage',
 }
 
 // Noms de langue en français (« fr » devient « français »), le code ISO en repli.
