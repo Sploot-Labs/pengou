@@ -8,8 +8,9 @@
  */
 
 import { normalizeText, sliderTolerance } from '@splootlabs/quiz'
+import type { PollView } from './contracts'
 
-export type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud'
+export type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud' | 'poll'
 
 export interface McqCorrect {
   options: { label: string; correct: boolean }[]
@@ -130,6 +131,19 @@ function textRows(correct: TextCorrect, distribution: Record<string, number>): D
     }))
 }
 
+/** Répartition d'un sondage, lue dans `question:reveal.poll` (et non dans `distribution`) : une
+ * ligne par choix, dans l'ordre, avec les formes du QCM. `correct` vaut toujours `false` : un
+ * sondage n'a pas de bonne réponse. */
+export function pollRows(poll: PollView): DistRow[] {
+  return poll.options.map((opt, i) => ({
+    key: String(i),
+    label: opt.label,
+    correct: false,
+    shape: MCQ_SHAPES[i % MCQ_SHAPES.length],
+    count: opt.votes,
+  }))
+}
+
 export function buildDistributionRows(
   type: QuestionKind,
   correct: unknown,
@@ -145,6 +159,8 @@ export function buildDistributionRows(
     case 'text':
       return textRows(correct as TextCorrect, distribution)
     case 'wordcloud':
+      return []
+    case 'poll':
       return []
   }
 }

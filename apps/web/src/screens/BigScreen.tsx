@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue, useFocusOnMount, useSound } from '../motion/index.js'
-import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
+import { isScoredType, pollPercent } from '@splootlabs/quiz'
+import { buildDistributionRows, pollRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { ContentSource } from '../api/quizzes'
-import type { PodiumPayload, RankingEntry, ReadingView, SessionRelaunchedView, WordcloudView } from '../realtime/contracts'
+import type { PodiumPayload, PollView, RankingEntry, ReadingView, SessionRelaunchedView, WordcloudView } from '../realtime/contracts'
 import { WordCloud, wordcloudSummary } from '../ui/WordCloud'
 import { hardReload } from '../realtime/hardReload'
 import { ThemeProvider } from '../theme/ThemeProvider.js'
@@ -38,6 +39,10 @@ interface QuestionShowPayload {
 interface McqShowPayload {
   options: { label: string }[]
 }
+/** Projection joueur d'un sondage : les choix du QCM, plus le mode de réponse. */
+interface PollShowPayload extends McqShowPayload {
+  multiple?: boolean
+}
 interface SliderShowPayload {
   min: number
   max: number
@@ -51,6 +56,8 @@ interface TimerPayload {
 interface RevealPayload {
   correct: unknown
   distribution: Record<string, number>
+  /** Présent pour un sondage seulement : sa répartition (pas de bonne réponse). */
+  poll?: PollView
 }
 
 
@@ -297,14 +304,18 @@ function BigScreenInner() {
   // Bascule auto révélation → classement (voir le commentaire de
   // REVEAL_HOLD_MS) : seulement une fois le VRAI `scoreboard` de cette manche
   // arrivé (jamais sur un `ranking` resté vide depuis le reset ci-dessus).
+  // Jamais après une question non notée (sondage, nuage de mots) : le serveur émet quand même
+  // `scoreboard`, mais l'écran reste sur la révélation jusqu'à la question suivante.
+  const revealedType = question?.type ?? null
   useEffect(() => {
     if (phase !== 'reveal' || ranking.length === 0) return
+    if (revealedType !== null && !isScoredType(revealedType)) return
     const t = window.setTimeout(() => {
       cue('phase.enter:scoreboard')
       setPhase('scoreboard')
     }, REVEAL_HOLD_MS)
     return () => window.clearTimeout(t)
-  }, [phase, ranking])
+  }, [phase, ranking, revealedType])
 
   // Décompte de lecture — même dérivation que le chrono de réponse ci-dessous
   // (`startedAt` + durée serveur, jamais un minuteur local indépendant) :
@@ -433,9 +444,17 @@ function BigScreenInner() {
     )
   }
 
+  // Répartition d'un sondage : seulement si elle porte sur la question affichée (course entre
+  // événements, comme pour le nuage).
+  const poll =
+    question?.type === 'poll' && revealPayload?.poll && revealPayload.poll.questionId === question.id
+      ? revealPayload.poll
+      : null
   const rows =
     phase === 'reveal' && question && revealPayload
-      ? buildDistributionRows(question.type, revealPayload.correct, revealPayload.distribution)
+      ? poll
+        ? pollRows(poll)
+        : buildDistributionRows(question.type, revealPayload.correct, revealPayload.distribution)
       : null
   const maxCount = rows && rows.length > 0 ? Math.max(1, ...rows.map((r) => r.count)) : 1
 
@@ -453,7 +472,7 @@ function BigScreenInner() {
   function renderLiveAnswers() {
     if (!question) return null
     if (question.type === 'wordcloud') return renderWordcloud()
-    if (question.type === 'mcq') {
+    if (question.type === 'mcq' || question.type === 'poll') {
       const shapes = ['triangle', 'diamond', 'circle', 'square'] as const
       return (
         <div className="big-answers">
@@ -503,6 +522,9 @@ function BigScreenInner() {
 
   function renderDistribution() {
     if (question?.type === 'wordcloud') return renderWordcloud()
+    if (poll && poll.voters === 0) {
+      return <p style={{ color: 'var(--ink-dim)' }}>Aucun vote</p>
+    }
     if (!rows || rows.length === 0) {
       return <p style={{ color: 'var(--ink-dim)' }}>Aucune réponse reçue pour cette question.</p>
     }
@@ -539,7 +561,16 @@ function BigScreenInner() {
               )}
               {row.correct && <span className="visually-hidden"> (bonne réponse)</span>}
             </span>
-            <span className="big-distribution__count">{row.count} réponse{row.count > 1 ? 's' : ''}</span>
+            {poll ? (
+              <>
+                <span className="big-distribution__count">
+                  {row.count} vote{row.count > 1 ? 's' : ''}
+                </span>
+                <span className="big-distribution__count">{pollPercent(row.count, poll.voters)} %</span>
+              </>
+            ) : (
+              <span className="big-distribution__count">{row.count} réponse{row.count > 1 ? 's' : ''}</span>
+            )}
           </div>
         ))}
       </div>
@@ -653,6 +684,10 @@ function BigScreenInner() {
           <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
             {question.prompt}
           </h1>
+
+          {question.type === 'poll' && (question.payload as PollShowPayload).multiple && (
+            <p className="big-live__answered">Plusieurs réponses possibles</p>
+          )}
 
           {renderLiveAnswers()}
 

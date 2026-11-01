@@ -55,6 +55,16 @@ export interface WordcloudView {
   truncated: boolean
 }
 
+/** Champ `poll` de `question:reveal` pour un sondage (grand écran et hôte) : votes par option,
+ * dans l'ordre des choix, et nombre de joueurs ayant voté (base du pourcentage). Copie de la
+ * `PollView` du moteur. */
+export interface PollView {
+  questionId: string
+  multiple: boolean
+  voters: number
+  options: { label: string; votes: number }[]
+}
+
 /** Diffusé quand l'hôte relance une partie depuis le podium (une variante par rôle). */
 export type SessionRelaunchedView =
   | { role: 'player'; pin: string; playerId: string; joinToken: string; nickname: string }
