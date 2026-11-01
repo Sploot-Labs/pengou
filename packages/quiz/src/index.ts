@@ -7,3 +7,17 @@ export type { TextPayload, TextAnswer } from './text.js'
 export { normalizeText } from './text.js'
 export type { SliderPayload, SliderAnswer } from './slider.js'
 export { sliderTolerance } from './slider.js'
+export type {
+  WordcloudPayload,
+  WordcloudSubmission,
+  WordcloudAnswer,
+  WordcloudWord,
+  WordcloudAggregate,
+} from './wordcloud.js'
+export {
+  WORDCLOUD_MAX_WORD_LENGTH,
+  WORDCLOUD_MAX_WORDS_PER_PLAYER,
+  wordKey,
+  aggregateWords,
+  wordcloud,
+} from './wordcloud.js'

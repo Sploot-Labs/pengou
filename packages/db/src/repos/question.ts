@@ -5,7 +5,7 @@ import { getQuiz } from './quiz.js'
 
 export type Question = typeof schema.question.$inferSelect
 
-type CreateInput = { type: 'mcq' | 'truefalse' | 'text' | 'slider'; prompt: string; timeLimit: number; readingTime?: number; payload: unknown; media?: string | null; orderIndex?: number }
+type CreateInput = { type: 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud'; prompt: string; timeLimit: number; readingTime?: number; payload: unknown; media?: string | null; orderIndex?: number }
 
 // Garde-fou multi-tenant : le quiz parent DOIT appartenir au tenant du scope.
 async function assertQuizInTenant(scope: TenantScope, quizId: string): Promise<boolean> {
