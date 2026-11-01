@@ -374,6 +374,40 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     if (view) socket.emit('wordcloud:update', view)
   }
 
+  /** Charge de `podium`, partagée par `doAdvance` et `emitReconnectSnapshot`. Un quiz sans aucune
+   * question notée (sondages, nuages de mots) finit sans classement : `top` vide, et
+   * `hasScoredQuestions` dit aux clients d'afficher « Merci pour vos réponses ». Un quiz mixte
+   * garde son podium, même si toutes les questions notées ont donné 0 point. */
+  function podiumPayload(session: GameSession, meta: SessionMeta | undefined): {
+    top: ReturnType<Engine['ranking']>
+    sources: ContentSource[]
+    hasScoredQuestions: boolean
+  } {
+    const hasScoredQuestions = engine.hasScoredQuestions(session)
+    return {
+      top: hasScoredQuestions ? engine.ranking(session).slice(0, 3) : [],
+      sources: meta?.sources ?? [],
+      hasScoredQuestions,
+    }
+  }
+
+  /** Rejoue la révélation d'une question NON notée (sondage, nuage) à UN SEUL socket d'affichage
+   * (grand écran) qui rejoint ou se reconnecte après la clôture : pour ces questions, l'écran reste
+   * sur la révélation (répartition, nuage) et n'affiche jamais le classement, alors que la session
+   * est déjà en phase 'scoreboard' côté serveur. Sans ce rejeu, il resterait vide jusqu'à la
+   * question suivante. No-op pour une question notée ou hors 'reveal'/'scoreboard'. Rend `true`
+   * quand le rejeu a eu lieu (le nuage y est déjà rejoué, l'appelant n'a pas à le refaire).
+   * Anti-triche : `questionResult` n'est lu qu'après `reveal()` (phases testées ici), comme ailleurs. */
+  function replayUnscoredRevealTo(socket: Socket, session: GameSession): boolean {
+    if (session.phase !== 'reveal' && session.phase !== 'scoreboard') return false
+    if (engine.isCurrentQuestionScored(session)) return false
+    const view = engine.playerQuestionView(session)
+    if (view) socket.emit('question:show', view)
+    replayWordcloudTo(socket, session)
+    socket.emit('question:reveal', engine.questionResult(session))
+    return true
+  }
+
   /** Planifie l'avance automatique de l'étape classement vers la suite (question suivante ou
    * podium) à l'échéance de `meta.autoAdvanceDelayMs`, puis diffuse `auto:advance { nextAt }` à
    * toute la room pour le compte à rebours CLIENT (même esprit que `timer` : le serveur est seul
@@ -426,8 +460,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // Nettoyage `engine_state` passé le podium — cohérent avec l'ancien host:next (le rapport final
     // reste lisible via session_player/answer_record).
     await clearEngineState(systemDb, meta.dbSessionId)
-    const top = engine.ranking(session).slice(0, 3)
-    io.to(roomName(sessionId)).emit('podium', { top, sources: meta.sources })
+    io.to(roomName(sessionId)).emit('podium', podiumPayload(session, meta))
     // Éviction mémoire différée (P1-6) : fenêtre de grâce pour une reconnexion au podium.
     setTimeout(() => { void evictSessionMemory(sessionId, meta) }, PODIUM_EVICTION_DELAY).unref()
     return session
@@ -775,6 +808,15 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       const revealed = await engine.reveal(sessionId) // crédite uniquement — PAS de question:reveal
       await persistRound(meta, revealed)
 
+      // Question non notée (sondage, nuage) : pas d'étape classement à montrer, « Passer » enchaîne
+      // directement sur la suite (question suivante, ou fin de partie). `doAdvance` re-nettoie tous
+      // les minuteurs et ne révèle rien : la phase n'est plus 'question' après `engine.reveal()`.
+      if (!engine.isCurrentQuestionScored(revealed)) {
+        await doAdvance(sessionId, meta)
+        reply({ ok: true })
+        return
+      }
+
       const scored = await engine.scoreboard(sessionId)
       const ranking = engine.ranking(scored)
       io.to(roomName(sessionId)).emit('scoreboard', { ranking })
@@ -924,15 +966,14 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         break
       }
       case 'scoreboard':
-        replayWordcloudTo(socket, session)
+        // Question non notée : l'hôte reste sur la révélation (répartition, nuage), jamais sur le
+        // classement. Même rejeu que le cas 'reveal' ; `host:reconnect` annonce alors 'reveal'.
+        if (!replayUnscoredRevealTo(socket, session)) replayWordcloudTo(socket, session)
         socket.emit('scoreboard', { ranking: engine.ranking(session) })
         break
       case 'podium':
         socket.emit('scoreboard', { ranking: engine.ranking(session) })
-        socket.emit('podium', {
-          top: engine.ranking(session).slice(0, 3),
-          sources: sessionMetaByEngineId.get(session.id)?.sources ?? [],
-        })
+        socket.emit('podium', podiumPayload(session, sessionMetaByEngineId.get(session.id)))
         break
       case 'lobby':
       default:
@@ -1208,10 +1249,15 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         // `sessionId` renvoyé ici est EXACTEMENT celui reçu en entrée (id unifié moteur↔DB,
         // Task 2) — c'est celui que la passerelle utilise partout ailleurs (room, tokens grand
         // écran…) ; le front s'en ressert pour le reste de la session (voir `HostLive.tsx`).
+        // Phase d'AFFICHAGE : après une question non notée, la session est en 'scoreboard' côté
+        // serveur mais l'hôte doit retrouver la révélation (et « Suivant »), pas le classement.
+        const displayPhase = session.phase === 'scoreboard' && !engine.isCurrentQuestionScored(session)
+          ? 'reveal'
+          : session.phase
         reply({
           sessionId,
           pin: session.pin,
-          phase: session.phase,
+          phase: displayPhase,
           autoAdvance: meta.autoAdvance,
           autoAdvanceDelaySeconds: meta.autoAdvanceDelayMs / 1000,
         })
@@ -1538,7 +1584,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         // afficher la question courante tout de suite, pas seulement à partir de la suivante.
         const session = await engine.getSession(sessionId)
         replayCurrentQuestionTo(socket, session)
-        replayWordcloudTo(socket, session)
+        // Clôture d'une question non notée : l'écran reste sur la révélation, rejouée ici (nuage
+        // compris) ; sinon, rejeu du nuage en cours comme avant.
+        if (!replayUnscoredRevealTo(socket, session)) replayWordcloudTo(socket, session)
       } catch (e) {
         reply({ error: message(e) })
       }
@@ -1572,7 +1620,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
 
         const session = await engine.getSession(sessionId)
         replayCurrentQuestionTo(socket, session)
-        replayWordcloudTo(socket, session)
+        if (!replayUnscoredRevealTo(socket, session)) replayWordcloudTo(socket, session)
       } catch (e) {
         reply({ error: message(e) })
       }
