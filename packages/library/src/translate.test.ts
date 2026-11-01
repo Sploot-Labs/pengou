@@ -114,7 +114,7 @@ describe('translatePack', () => {
     expect(out?.questions.map((q) => q.id)).toEqual(['q1-en'])
   })
 
-  it('renvoie pack null quand aucune question n’est traduite', () => {
+  it("renvoie pack null quand aucune question n'est traduite", () => {
     const pack: Pack = { source: SOURCE, questions: [mcq('q1')], quizzes: [] }
     expect(translatePack(pack, table({ q1: { skip: 'x' } }), 'en').pack).toBeNull()
   })
