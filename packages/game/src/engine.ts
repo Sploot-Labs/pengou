@@ -1,4 +1,11 @@
-import { questionTypes } from '@splootlabs/quiz'
+import {
+  questionTypes,
+  aggregateWords,
+  wordKey,
+  WORDCLOUD_MAX_WORDS_PER_PLAYER,
+  type WordcloudAnswer,
+  type WordcloudAggregate,
+} from '@splootlabs/quiz'
 import type { GameSession, Player, EngineQuestion, SubmittedAnswer } from './state.js'
 import type { SessionStore } from './store.js'
 
@@ -17,7 +24,12 @@ export type CreateSessionInput = {
   questions: EngineQuestion[]
 }
 
-export type SubmitAnswerResult = { accepted: boolean; reason?: string }
+export type SubmitAnswerResult = { accepted: boolean; reason?: string; words?: string[] }
+
+/** Nombre maximal de mots du nuage envoyés dans la projection (le reste est compté, pas listé). */
+export const WORDCLOUD_VIEW_LIMIT = 100
+
+export type WordcloudView = WordcloudAggregate & { questionId: string; truncated: boolean }
 
 export type RankingEntry = { playerId: string; nickname: string; score: number }
 
@@ -98,6 +110,15 @@ export interface Engine {
    * anti-triche, cohérent avec `playerQuestionView`). */
   readingView(session: GameSession): ReadingView
   questionResult(session: GameSession): QuestionResult
+  /** Projection agrégée du nuage de mots de la question courante (mots retirés exclus, 100 mots
+   * au plus). `null` si la question courante n'est pas un nuage de mots. */
+  wordcloudView(session: Readonly<GameSession>): WordcloudView | null
+  /** Retire un mot du nuage (par clé de fusion) pour la question courante. Phases question,
+   * reveal et scoreboard uniquement. */
+  removeWord(
+    sessionId: string,
+    word: string,
+  ): Promise<{ session: GameSession; questionId: string; removedKeys: string[] }>
   /** Marque un joueur (dé)connecté — n'affecte ni son score ni ses réponses. */
   setPlayerConnected(sessionId: string, playerId: string, connected: boolean): Promise<GameSession>
   /** Retrouve un joueur par joinToken (Task 5 : reconnexion) et le remarque `connected`. `null`
@@ -247,8 +268,9 @@ export function createEngine(deps: EngineDeps): Engine {
       if (!question) {
         return { accepted: false, reason: 'aucune question active' }
       }
+      const isWordcloud = question.type === 'wordcloud'
       const alreadyAnswered = session.answers[session.currentIndex]?.[playerId]
-      if (alreadyAnswered) {
+      if (alreadyAnswered && !isWordcloud) {
         return { accepted: false, reason: 'réponse déjà soumise pour cette question' }
       }
       // Invariant normalement garanti par startQuestion (phase 'question' ⟹ questionStartedAt
@@ -270,6 +292,28 @@ export function createEngine(deps: EngineDeps): Engine {
       const maxMs = question.timeLimit * 1000
       const rawTimeMs = now() - session.questionStartedAt
       const timeMs = Math.max(0, Math.min(rawTimeMs, maxMs))
+
+      if (isWordcloud) {
+        const { word } = answer as { word: string }
+        const previous = alreadyAnswered ? (alreadyAnswered.answer as WordcloudAnswer).words : []
+        const key = wordKey(word)
+        if (previous.some((w) => wordKey(w) === key)) {
+          return { accepted: false, reason: 'mot déjà envoyé' }
+        }
+        if (previous.length >= WORDCLOUD_MAX_WORDS_PER_PLAYER) {
+          return { accepted: false, reason: `limite de ${WORDCLOUD_MAX_WORDS_PER_PLAYER} mots atteinte` }
+        }
+        const words = [...previous, word]
+        // Le premier envoi fixe timeMs. Aucun await entre peek et recordAnswer (atomicité).
+        const accumulated: SubmittedAnswer = {
+          answer: { words } satisfies WordcloudAnswer,
+          timeMs: alreadyAnswered ? alreadyAnswered.timeMs : timeMs,
+          correct: false,
+          points: 0,
+        }
+        await store.recordAnswer(sessionId, session.currentIndex, playerId, accumulated)
+        return { accepted: true, words }
+      }
 
       const correct = def.isCorrect(question.payload, answer)
       const points = def.score(question.payload, answer, { timeMs, maxMs, basePoints: question.basePoints })
@@ -333,6 +377,7 @@ export function createEngine(deps: EngineDeps): Engine {
 
     allConnectedAnswered(session) {
       if (session.phase !== 'question') return false
+      if (currentQuestion(session)?.type === 'wordcloud') return false
       const connectedPlayers = Object.values(session.players).filter((p) => p.connected)
       if (connectedPlayers.length < 1) return false
       const roundAnswers = session.answers[session.currentIndex] ?? {}
@@ -371,6 +416,7 @@ export function createEngine(deps: EngineDeps): Engine {
     // pendant `question`.
     questionResult(session) {
       const question = currentQuestion(session)
+      if (question?.type === 'wordcloud') return { correct: null, distribution: {} }
       const roundAnswers = session.answers[session.currentIndex] ?? {}
       const distribution: Record<string, number> = {}
       for (const submitted of Object.values(roundAnswers)) {
@@ -378,6 +424,43 @@ export function createEngine(deps: EngineDeps): Engine {
         distribution[key] = (distribution[key] ?? 0) + 1
       }
       return { correct: question?.payload, distribution }
+    },
+
+    wordcloudView(session) {
+      const question = currentQuestion(session)
+      if (!question || question.type !== 'wordcloud') return null
+      const answers = Object.values(session.answers[session.currentIndex] ?? {}).map(
+        (submitted) => submitted.answer as WordcloudAnswer,
+      )
+      const removed = new Set(session.wordcloudRemoved?.[question.id] ?? [])
+      const aggregate = aggregateWords(answers, removed)
+      return {
+        questionId: question.id,
+        words: aggregate.words.slice(0, WORDCLOUD_VIEW_LIMIT),
+        participants: aggregate.participants,
+        totalWords: aggregate.totalWords,
+        truncated: aggregate.words.length > WORDCLOUD_VIEW_LIMIT,
+      }
+    },
+
+    async removeWord(sessionId, word) {
+      const session = await requireSession(sessionId)
+      const question = currentQuestion(session)
+      if (
+        !question ||
+        question.type !== 'wordcloud' ||
+        (session.phase !== 'question' && session.phase !== 'reveal' && session.phase !== 'scoreboard')
+      ) {
+        throw new Error('retrait impossible hors question nuage de mots')
+      }
+      const removedMap = session.wordcloudRemoved ?? {}
+      const removedKeys = removedMap[question.id] ?? []
+      const key = wordKey(word)
+      if (!removedKeys.includes(key)) removedKeys.push(key)
+      removedMap[question.id] = removedKeys
+      session.wordcloudRemoved = removedMap
+      await store.save(session)
+      return { session, questionId: question.id, removedKeys: [...removedKeys] }
     },
 
     async setPlayerConnected(sessionId, playerId, connected) {
