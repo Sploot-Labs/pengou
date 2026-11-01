@@ -1,6 +1,6 @@
 # Compose de production (VPS). L'image est publiée par .github/workflows/release.yml sur GHCR.
 # Le tag git v1.2.3 produit l'image 1.2.3 (sans le v) : IMAGE_TAG est donc obligatoire, il n'y a pas de tag latest.
-# Les secrets (BETTER_AUTH_SECRET, SESSION_SECRET, POSTGRES_PASSWORD) viennent du .env présent sur le VPS
+# Les secrets (BETTER_AUTH_SECRET, SESSION_SECRET, POSTGRES_PASSWORD, APP_DB_PASSWORD) viennent du .env présent sur le VPS
 # à côté de ce fichier, jamais du dépôt.
 services:
   db:
@@ -29,6 +29,8 @@ services:
       DATABASE_URL: postgres://pengou:${POSTGRES_PASSWORD}@db:5432/pengou
       SESSION_SECRET: ${SESSION_SECRET:?Définissez SESSION_SECRET (≥32 caractères) dans le .env du VPS}
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Définissez BETTER_AUTH_SECRET (≥32 caractères, ex. openssl rand -base64 32) dans le .env du VPS}
+      # Mot de passe du rôle app_role (soumis au RLS), posé au démarrage. Le défaut de dev est refusé.
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?Définissez APP_DB_PASSWORD dans le .env du VPS}
       # Origine publique HTTPS de l'app (origine de confiance Better Auth et CORS Socket.IO).
       BETTER_AUTH_URL: ${BETTER_AUTH_URL:?Définissez BETTER_AUTH_URL (URL publique HTTPS) dans le .env du VPS}
       # Reverse proxy dont le X-Forwarded-For est cru (limites de débit par IP client).

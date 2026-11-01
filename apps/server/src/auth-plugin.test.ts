@@ -124,7 +124,11 @@ describe('TRUSTED_PROXIES', () => {
   })
 
   it('avertit au démarrage en production quand la liste est vide', async () => {
-    const env = { NODE_ENV: 'production', BETTER_AUTH_SECRET: 'test-secret-at-least-32-chars-long!!' }
+    const env = {
+      NODE_ENV: 'production',
+      BETTER_AUTH_SECRET: 'test-secret-at-least-32-chars-long!!',
+      APP_DB_PASSWORD: 'mot-de-passe-de-test',
+    }
     const message =
       'TRUSTED_PROXIES est vide : derrière un reverse proxy, tous les clients partagent la même IP pour les limites de débit.'
 
