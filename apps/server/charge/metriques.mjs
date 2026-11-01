@@ -5,6 +5,7 @@
 // échantillon est donc le p99 de la seconde écoulée. Personne d'autre ne doit lire /metrics
 // pendant un palier, sinon les fenêtres rétrécissent.
 import { execFile } from 'node:child_process'
+import { LAG_SERVEUR_P99_MAX_MS, resumerLag } from './stats.mjs'
 
 /** Valeur numérique d'une métrique sans étiquette dans un texte Prometheus ; `NaN` si absente. */
 function valeurMetrique(texte, nom) {
@@ -82,8 +83,11 @@ export function echantillonnerServeur(cible, periodeMs = 1000) {
       clearInterval(minuteur)
       // Une lecture déjà en vol ferme la dernière fenêtre ; sinon on en fait une dernière.
       await planifier()
+      const { p95: lagP95Ms, auDessus: secondesLagAuDessus } = resumerLag(lag, LAG_SERVEUR_P99_MAX_MS)
       return {
         lagP99MaxMs: auDixieme(maxDe(lag)),
+        lagP95Ms,
+        secondesLagAuDessus,
         rssMaxMo: auDixieme(maxDe(rss)),
         heapMaxMo: auDixieme(maxDe(heap)),
         cpuMoyenPct: cpu.length ? auDixieme(cpu.reduce((a, b) => a + b, 0) / cpu.length) : Number.NaN,

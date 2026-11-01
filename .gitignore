@@ -16,3 +16,4 @@ historique-prompts.md
 
 # Sortie par défaut du générateur de charge (apps/server/charge.mjs)
 charge-*.json
+charge-resultats/
