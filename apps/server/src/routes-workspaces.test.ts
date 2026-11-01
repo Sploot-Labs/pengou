@@ -257,6 +257,53 @@ describe('invitations : auteur qui perd members:manage (multi)', () => {
     expect(acc.json()).toMatchObject({ tenantId, role: 'admin' })
     await app.close()
   })
+
+  it('la liste des invitations en attente ne renvoie aucun jeton', async () => {
+    const app = await buildApp('multi')
+    const { oCookie, tenantId, token } = await setup(app, 't8a')
+    const res = await app.inject({ method: 'GET', url: `/api/workspaces/${tenantId}/invitations`, headers: { cookie: oCookie } })
+    expect(res.statusCode).toBe(200)
+    const { invitations } = res.json() as { invitations: Array<Record<string, unknown>> }
+    expect(invitations.length).toBeGreaterThan(0)
+    for (const inv of invitations) expect(inv).not.toHaveProperty('token')
+    expect(res.body).not.toContain(token)
+    await app.close()
+  })
+
+  it("un admin qui régénère l'invitation du propriétaire puis est retiré ne peut pas l'accepter", async () => {
+    const app = await buildApp('multi')
+    const { oCookie, aCookie, aId, tenantId } = await setup(app, 't8b')
+    const ownerInv = await app.inject({
+      method: 'POST', url: `/api/workspaces/${tenantId}/invitations`,
+      payload: { email: 't8b-e@x.test', role: 'admin' }, headers: { ...json, cookie: oCookie },
+    })
+    expect(ownerInv.statusCode).toBe(201)
+    const invId = (ownerInv.json() as { invitation: { id: string } }).invitation.id
+    const resent = await app.inject({ method: 'POST', url: `/api/workspaces/${tenantId}/invitations/${invId}/resend`, headers: { cookie: aCookie } })
+    expect(resent.statusCode).toBe(200)
+    const token = (resent.json() as { invitation: { token: string } }).invitation.token
+    const del = await app.inject({ method: 'DELETE', url: `/api/workspaces/${tenantId}/members/${aId}`, headers: { cookie: oCookie } })
+    expect(del.statusCode).toBe(200)
+    const acc = await app.inject({ method: 'POST', url: `/api/invitations/${token}/accept`, headers: { cookie: aCookie } })
+    expect(acc.statusCode).toBe(409)
+    const rows = await ctx.db.select().from(schema.membership)
+      .where(and(eq(schema.membership.userId, aId), eq(schema.membership.tenantId, tenantId)))
+    expect(rows).toHaveLength(0)
+    await app.close()
+  })
+
+  it("une invitation dont l'auteur n'est plus membre (invitation restée en attente) est refusée", async () => {
+    const app = await buildApp('multi')
+    const { aId, tenantId, token } = await setup(app, 't19')
+    // Retrait direct en base : l'invitation reste `pending`, seule la branche inviter_revoked peut refuser.
+    await ctx.db.delete(schema.membership)
+      .where(and(eq(schema.membership.userId, aId), eq(schema.membership.tenantId, tenantId)))
+    const dCookie = await signUp(app, 't19-d@x.test', 'D')
+    const acc = await app.inject({ method: 'POST', url: `/api/invitations/${token}/accept`, headers: { cookie: dCookie } })
+    expect(acc.statusCode).toBe(409)
+    expect(acc.json()).toEqual({ error: "Cette invitation n'est plus valable." })
+    await app.close()
+  })
 })
 
 describe('mode single : retrait de membre', () => {

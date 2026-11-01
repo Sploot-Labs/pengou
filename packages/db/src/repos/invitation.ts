@@ -89,15 +89,17 @@ export async function revokePendingInvitationsBy(scope: TenantScope, userId: str
   return rows.length
 }
 
-/** Renvoie une invitation `pending` : régénère token + expiration. Renvoie la ligne mise à jour, ou
- * null si absente / non pending. */
+/** Renvoie une invitation `pending` : régénère token + expiration, et en fait l'invitation de
+ * `invitedBy` (celui qui la renvoie). Sans ce transfert, un admin pouvait régénérer l'invitation
+ * d'un autre, garder le jeton et l'accepter après son propre retrait, l'auteur d'origine étant
+ * toujours membre. Renvoie la ligne mise à jour, ou null si absente / non pending. */
 export async function resendInvitation(
   scope: TenantScope,
   id: string,
-  input: { token: string; expiresAt: Date },
+  input: { token: string; expiresAt: Date; invitedBy: string },
 ): Promise<Invitation | null> {
   const [row] = await scope.db.update(schema.invitation)
-    .set({ token: input.token, expiresAt: input.expiresAt })
+    .set({ token: input.token, expiresAt: input.expiresAt, invitedBy: input.invitedBy })
     .where(and(
       eq(schema.invitation.id, id),
       eq(schema.invitation.tenantId, scope.tenantId),
