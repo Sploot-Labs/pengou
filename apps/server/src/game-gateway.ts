@@ -10,7 +10,7 @@ import type { Auth } from '@splootlabs/auth'
 import { hasPermission, type AppConfig } from '@splootlabs/shared'
 import type { Engine, EngineQuestion, GameSession, SessionStore } from '@splootlabs/game'
 import { WORDCLOUD_MAX_WORD_LENGTH, wordKey } from '@splootlabs/quiz'
-import { clientIpFromRequest, compileTrust } from './client-ip.js'
+import { clientIpFromRequest, compileTrust, pinFailureKey } from './client-ip.js'
 import { FailureBudget } from './failure-budget.js'
 
 export type GameGatewayDeps = {
@@ -141,9 +141,9 @@ const SOCKET_RATE_MAX = 240
 /** Budget d'échecs de PIN par IP (audit) : le throttle par socket ne suffit pas, il suffit
  * d'ouvrir d'autres sockets pour deviner des PIN sans limite. Seuls les échecs de `player:join`
  * comptent (PIN inconnu, session introuvable) : une classe derrière une seule IP publique peut
- * se tromper de PIN plusieurs fois sans bloquer la salle. `player:reconnect` n'y est pas soumis
- * (voir son handler). */
-const PIN_FAILURE_MAX = 30
+ * se tromper de PIN plusieurs fois sans bloquer la salle. Le plafond vient de PIN_FAILURE_MAX
+ * (`config.pinFailureMax`, 100 par défaut). `player:reconnect` n'y est pas soumis (voir son
+ * handler). */
 const PIN_FAILURE_WINDOW_MS = 5 * 60_000
 /** Refus de `player:join` quand le budget d'échecs de PIN est épuisé. */
 const PIN_BLOCKED_MESSAGE = 'trop de tentatives, réessayez dans quelques minutes'
@@ -249,8 +249,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   // player:reconnect — sans cette Map, le `disconnect` tardif de l'ANCIEN socket écraserait
   // `connected:false` sur un joueur pourtant déjà reconnecté.
   const activeSocketIdByPlayerId = new Map<string, string>()
-  // Budget d'échecs de PIN, partagé par toutes les sockets d'une même IP (voir PIN_FAILURE_MAX).
-  const pinFailures = new FailureBudget({ max: PIN_FAILURE_MAX, windowMs: PIN_FAILURE_WINDOW_MS })
+  // Budget d'échecs de PIN, partagé par toutes les sockets d'une même IP, ou d'un même /64 en
+  // IPv6 (voir PIN_FAILURE_WINDOW_MS et pinFailureKey).
+  const pinFailures = new FailureBudget({ max: config.pinFailureMax, windowMs: PIN_FAILURE_WINDOW_MS })
   const trustProxy = compileTrust(config.trustedProxies)
 
   /** Refuse la tentative si l'IP de la socket a épuisé son budget d'échecs de PIN. */
@@ -1154,8 +1155,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // IP du client, vue à travers les seuls proxys de confiance (comme `request.ip` côté HTTP).
     // `clientIpFromRequest` peut ne rien renvoyer si la socket TCP n'a plus d'adresse : repli sur
     // l'adresse de la poignée de main, et sans adresse du tout, pas de budget pour cette socket.
-    const clientIp = clientIpFromRequest(socket.request, trustProxy)
-    ;(socket.data as SocketData).pinFailureKey = clientIp || socket.handshake.address || undefined
+    // Une IPv6 compte pour son /64 entier (un seul client en détient en général tout le préfixe).
+    const clientIp = clientIpFromRequest(socket.request, trustProxy) || socket.handshake.address || undefined
+    ;(socket.data as SocketData).pinFailureKey = clientIp ? pinFailureKey(clientIp) : undefined
 
     // Throttle par socket (P2, anti-DoS) : middleware exécuté avant CHAQUE handler d'event.
     // Au-delà de SOCKET_RATE_MAX events par fenêtre, l'event est rejeté (le handler n'est pas

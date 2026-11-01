@@ -3053,7 +3053,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
   describe("budget d'échecs de PIN par IP", () => {
     it("le budget d'échecs de PIN est partagé entre les sockets d'une même IP", async () => {
-      const { app, url } = await buildApp()
+      const { app, url } = await buildApp(new MemorySessionStore(), { PIN_FAILURE_MAX: '30' })
       const clients: ClientSocket[] = []
       try {
         const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-budget@example.com')
@@ -3079,7 +3079,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }, 30_000)
 
     it("une IP au budget épuisé peut encore reconnecter un joueur avec son jeton", async () => {
-      const { app, url } = await buildApp()
+      const { app, url } = await buildApp(new MemorySessionStore(), { PIN_FAILURE_MAX: '30' })
       const clients: ClientSocket[] = []
       try {
         const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-budget-reconnect@example.com')
@@ -3109,7 +3109,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }, 30_000)
 
     it("les reconnexions refusées ne consomment pas le budget de player:join", async () => {
-      const { app, url } = await buildApp()
+      const { app, url } = await buildApp(new MemorySessionStore(), { PIN_FAILURE_MAX: '30' })
       const clients: ClientSocket[] = []
       try {
         const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-budget-stale@example.com')

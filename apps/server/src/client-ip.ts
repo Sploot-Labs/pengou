@@ -1,5 +1,6 @@
 import type { IncomingMessage } from 'node:http'
 import proxyaddr from '@fastify/proxy-addr'
+import { isIP } from 'node:net'
 
 /**
  * Compile la liste TRUSTED_PROXIES (IP, CIDR, `loopback`, `linklocal`, `uniquelocal`) en
@@ -56,4 +57,45 @@ export function createForwardedForWarner(
       `X-Forwarded-For reçu d'un pair non approuvé (${peer}) : vérifiez TRUSTED_PROXIES, sinon tous les clients partagent la même IP pour les limites de débit.`,
     )
   }
+}
+
+/** Développe une IPv6 (sans zone) en ses 8 groupes de 16 bits, ou `undefined` si elle est mal formée. */
+function ipv6Groups(ip: string): number[] | undefined {
+  const halves = ip.split('::')
+  if (halves.length > 2) return undefined
+  const parse = (part: string): number[] => {
+    if (part === '') return []
+    const groups: number[] = []
+    for (const token of part.split(':')) {
+      if (token.includes('.')) {
+        const octets = token.split('.').map(Number)
+        groups.push(((octets[0] ?? 0) << 8) | (octets[1] ?? 0), ((octets[2] ?? 0) << 8) | (octets[3] ?? 0))
+      } else {
+        groups.push(Number.parseInt(token, 16))
+      }
+    }
+    return groups
+  }
+  const head = parse(halves[0] ?? '')
+  const tail = halves.length === 2 ? parse(halves[1] ?? '') : []
+  const fill = 8 - head.length - tail.length
+  if (fill < 0 || (halves.length === 1 && fill !== 0)) return undefined
+  return [...head, ...new Array<number>(fill).fill(0), ...tail]
+}
+
+/**
+ * Clé du budget d'échecs de PIN pour une IP de client. Une IPv4, y compris mappée en IPv6
+ * (`::ffff:a.b.c.d`), compte par adresse. Une IPv6 compte pour son préfixe /64 : un client en
+ * dispose en général tout entier et pourrait sinon changer d'adresse à chaque essai.
+ */
+export function pinFailureKey(ip: string): string {
+  const address = ip.split('%')[0] ?? ip
+  if (isIP(address) !== 6) return ip
+  const groups = ipv6Groups(address)
+  if (!groups) return ip
+  if (groups.slice(0, 5).every((g) => g === 0) && groups[5] === 0xffff) {
+    const [hi = 0, lo = 0] = groups.slice(6)
+    return `${hi >> 8}.${hi & 0xff}.${lo >> 8}.${lo & 0xff}`
+  }
+  return `${groups.slice(0, 4).map((g) => g.toString(16)).join(':')}::/64`
 }

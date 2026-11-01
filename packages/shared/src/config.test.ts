@@ -116,3 +116,17 @@ describe('loadConfig, plafond de joueurs par partie', () => {
     for (const v of ['0', '-5', '2.5']) expect(() => loadConfig({ MAX_PLAYERS_PER_SESSION: v })).toThrow()
   })
 })
+
+describe("loadConfig, budget d'échecs de PIN", () => {
+  it('PIN_FAILURE_MAX vaut 100 par défaut', () => {
+    expect(loadConfig({}).pinFailureMax).toBe(100)
+  })
+
+  it('PIN_FAILURE_MAX est lu et coercé en nombre', () => {
+    expect(loadConfig({ PIN_FAILURE_MAX: '250' }).pinFailureMax).toBe(250)
+  })
+
+  it('PIN_FAILURE_MAX refuse 0, un négatif et un décimal', () => {
+    for (const v of ['0', '-5', '2.5']) expect(() => loadConfig({ PIN_FAILURE_MAX: v })).toThrow()
+  })
+})

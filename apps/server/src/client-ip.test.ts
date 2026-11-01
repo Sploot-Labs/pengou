@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import type { IncomingMessage } from 'node:http'
-import { clientIpFromRequest, compileTrust, createForwardedForWarner, untrustedForwardingPeer } from './client-ip.js'
+import { clientIpFromRequest, compileTrust, createForwardedForWarner, pinFailureKey, untrustedForwardingPeer } from './client-ip.js'
 import { buildServer } from './app.js'
 import { loadConfig } from '@splootlabs/shared'
 
@@ -71,5 +71,33 @@ describe('avertissement X-Forwarded-For non approuvé', () => {
     expect(warn).toHaveBeenCalledTimes(1)
     expect(String(warn.mock.calls[0]?.[0])).toContain("X-Forwarded-For reçu d'un pair non approuvé (127.0.0.1)")
     await app.close()
+  })
+})
+
+describe('pinFailureKey', () => {
+  it('garde une IPv4 telle quelle', () => {
+    expect(pinFailureKey('203.0.113.9')).toBe('203.0.113.9')
+  })
+
+  it('normalise une IPv4 mappée en IPv6 vers son IPv4', () => {
+    expect(pinFailureKey('::ffff:203.0.113.9')).toBe('203.0.113.9')
+    expect(pinFailureKey('::FFFF:203.0.113.9')).toBe('203.0.113.9')
+    expect(pinFailureKey('0:0:0:0:0:ffff:cb00:7109')).toBe('203.0.113.9')
+  })
+
+  it('agrège deux IPv6 du même /64 sous la même clé', () => {
+    const a = pinFailureKey('2001:db8:1:2:aaaa:bbbb:cccc:dddd')
+    const b = pinFailureKey('2001:0db8:0001:0002::1')
+    expect(a).toBe(b)
+    expect(a).toBe('2001:db8:1:2::/64')
+  })
+
+  it('sépare deux IPv6 de /64 différents', () => {
+    expect(pinFailureKey('2001:db8:1:2::1')).not.toBe(pinFailureKey('2001:db8:1:3::1'))
+  })
+
+  it('agrège aussi les adresses à zone (fe80::1%eth0) et compressées en tête', () => {
+    expect(pinFailureKey('fe80::1%eth0')).toBe('fe80:0:0:0::/64')
+    expect(pinFailureKey('::1')).toBe('0:0:0:0::/64')
   })
 })
