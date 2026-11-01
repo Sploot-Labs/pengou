@@ -72,7 +72,7 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       // Réponse envoyée APRÈS le COMMIT (hors du callback) : voir POST /api/quizzes.
       const question = await withTenantTx(appDb, context, (scope) =>
         createQuestion(scope, request.params.quizId, {
-          type: body.type as QuestionType,
+          type: body.type as Exclude<QuestionType, 'poll'>, // l'enum base accepte 'poll' après la migration (tâche ultérieure)
           prompt: body.prompt as string,
           timeLimit: body.timeLimit as number,
           readingTime: isNonNegativeInt(body.readingTime) ? body.readingTime : undefined,

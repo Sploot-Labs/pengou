@@ -1,4 +1,4 @@
-export type QuestionType = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud'
+export type QuestionType = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud' | 'poll'
 
 export interface ScoreOpts {
   timeMs: number
@@ -14,6 +14,8 @@ export interface ScoreOpts {
 // (Task 2+) sans revoir cette assignabilité.
 export interface QuestionTypeDef<P = unknown, A = unknown> {
   key: QuestionType
+  /** Faux pour les types sans bonne réponse ni points (sondage, nuage de mots). */
+  readonly scored: boolean
   validatePayload(raw: unknown): P
   validateAnswer(raw: unknown): A
   /** Projection sans la bonne réponse, envoyable aux joueurs. */

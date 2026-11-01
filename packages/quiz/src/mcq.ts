@@ -15,6 +15,7 @@ export type McqAnswer = z.infer<typeof answerSchema>
 
 export const mcq: QuestionTypeDef<McqPayload, McqAnswer> = {
   key: 'mcq',
+  scored: true,
   validatePayload: (raw) => mcqSchema.parse(raw),
   validateAnswer: (raw) => answerSchema.parse(raw),
   playerView: (p) => ({ options: p.options.map((o) => ({ label: o.label })) }), // pas de `correct`
