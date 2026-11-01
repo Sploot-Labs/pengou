@@ -45,6 +45,7 @@ const TYPE_LABEL: Record<QuestionType, string> = {
   text: 'Réponse libre',
   slider: 'Curseur',
   wordcloud: 'Nuage de mots',
+  poll: 'Sondage',
 }
 
 /** Decorative only (color + glyph reinforcing the shape cue on mcq tiles) —
@@ -104,7 +105,21 @@ export interface SliderQuestion extends QuestionBase {
 export interface WordcloudQuestion extends QuestionBase {
   type: 'wordcloud'
 }
-export type Question = McqQuestion | TrueFalseQuestion | TextQuestion | SliderQuestion | WordcloudQuestion
+export interface PollQuestion extends QuestionBase {
+  type: 'poll'
+  options: { id: string; label: string }[]
+  multiple: boolean
+}
+export type Question =
+  | McqQuestion
+  | TrueFalseQuestion
+  | TextQuestion
+  | SliderQuestion
+  | WordcloudQuestion
+  | PollQuestion
+
+const POLL_MIN_OPTIONS = 2
+const POLL_MAX_OPTIONS = 6
 
 function fromApiQuestion(row: ApiQuestion): Question {
   const base = { id: row.id, prompt: row.prompt, timeLimit: row.timeLimit, readingTime: row.readingTime, source: row.source }
@@ -143,6 +158,15 @@ function fromApiQuestion(row: ApiQuestion): Question {
     }
     case 'wordcloud':
       return { ...base, type: 'wordcloud' }
+    case 'poll': {
+      const payload = row.payload as { options: { label: string }[]; multiple?: boolean }
+      return {
+        ...base,
+        type: 'poll',
+        options: payload.options.map((o, i) => ({ id: `opt-${i}`, label: o.label })),
+        multiple: payload.multiple ?? false,
+      }
+    }
   }
 }
 
@@ -187,6 +211,13 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
       }
     case 'wordcloud':
       return { prompt: q.prompt, timeLimit: q.timeLimit, readingTime: q.readingTime, payload: {} }
+    case 'poll':
+      return {
+        prompt: q.prompt,
+        timeLimit: q.timeLimit,
+        readingTime: q.readingTime,
+        payload: { options: q.options.map((o) => ({ label: o.label })), multiple: q.multiple },
+      }
   }
 }
 
@@ -230,6 +261,17 @@ function defaultCreateInput(type: QuestionType): CreateQuestionInput {
       return { type, prompt, timeLimit, readingTime, payload: { min: 0, max: 100, correct: 50, step: 1 } }
     case 'wordcloud':
       return { type, prompt, timeLimit, readingTime, payload: {} }
+    case 'poll':
+      return {
+        type,
+        prompt,
+        timeLimit,
+        readingTime,
+        payload: {
+          options: [{ label: 'Choix 1' }, { label: 'Choix 2' }, { label: 'Choix 3' }, { label: 'Choix 4' }],
+          multiple: false,
+        },
+      }
   }
 }
 
@@ -237,6 +279,7 @@ function defaultCreateInput(type: QuestionType): CreateQuestionInput {
 function hasTypeSpecificData(q: Question): boolean {
   switch (q.type) {
     case 'mcq':
+    case 'poll':
       return q.options.some((o) => o.label.trim().length > 0)
     case 'text':
       return q.acceptedAnswers.some((a) => a.trim().length > 0)
@@ -267,6 +310,10 @@ function validationError(q: Question): string | null {
       if (!q.options.some((o) => o.correct)) return 'Choisissez la bonne réponse.'
       return null
     }
+    case 'poll':
+      return q.options.some((o) => o.label.trim().length === 0)
+        ? 'Chaque choix doit avoir un libellé.'
+        : null
     case 'text':
       return q.acceptedAnswers.some((a) => a.trim().length > 0)
         ? null
@@ -302,6 +349,11 @@ function fieldErrors(q: Question): Record<string, string> {
           errs[`mcq-label-${o.id}`] = `Réponse ${i + 1} : libellé manquant.`
       })
       if (!q.options.some((o) => o.correct)) errs['mcq-correct'] = 'Choisissez la bonne réponse.'
+      break
+    case 'poll':
+      q.options.forEach((o) => {
+        if (o.label.trim().length === 0) errs[`poll-label-${o.id}`] = 'Chaque choix doit avoir un libellé.'
+      })
       break
     case 'text':
       if (!q.acceptedAnswers.some((a) => a.trim().length > 0))
@@ -1255,6 +1307,7 @@ export function HostEditor() {
                         <option value="text">Réponse libre</option>
                         <option value="slider">Curseur</option>
                         <option value="wordcloud">Nuage de mots</option>
+                        <option value="poll">Sondage</option>
                       </select>
                     </div>
                     <div className="host-field">
@@ -1299,10 +1352,12 @@ export function HostEditor() {
                     </div>
                   </div>
 
-                  {selected.type === 'mcq' && (
+                  {(selected.type === 'mcq' || selected.type === 'poll') && (
                     <fieldset className="host-field">
-                      <legend>Réponses (cochez la bonne réponse)</legend>
-                      {fErrors['mcq-correct'] && (
+                      <legend>
+                        {selected.type === 'poll' ? 'Choix' : 'Réponses (cochez la bonne réponse)'}
+                      </legend>
+                      {selected.type === 'mcq' && fErrors['mcq-correct'] && (
                         <p className="host-inline-error" id="mcq-correct-error">
                           {fErrors['mcq-correct']}
                         </p>
@@ -1310,57 +1365,115 @@ export function HostEditor() {
                       <div className="host-options-grid">
                         {selected.options.map((opt, index) => (
                           <div className="host-option-row" key={opt.id}>
-                            <label className="host-option-row__correct-label">
-                              <input
-                                type="radio"
-                                name="mcq-correct"
-                                checked={opt.correct}
-                                onChange={() => {
-                                  const options = selected.options.map((o, i) => ({
-                                    ...o,
-                                    correct: i === index,
-                                  }))
-                                  updateSelected({ options } as Partial<McqQuestion>)
-                                }}
-                              />
-                              <span className="visually-hidden">
-                                Marquer « {opt.label || `réponse ${index + 1}`} » comme correcte
-                              </span>
-                              <span aria-hidden="true">Correcte</span>
-                            </label>
+                            {selected.type === 'mcq' && 'correct' in opt && (
+                              <label className="host-option-row__correct-label">
+                                <input
+                                  type="radio"
+                                  name="mcq-correct"
+                                  checked={opt.correct}
+                                  onChange={() => {
+                                    const options = selected.options.map((o, i) => ({
+                                      ...o,
+                                      correct: i === index,
+                                    }))
+                                    updateSelected({ options } as Partial<McqQuestion>)
+                                  }}
+                                />
+                                <span className="visually-hidden">
+                                  Marquer « {opt.label || `réponse ${index + 1}`} » comme correcte
+                                </span>
+                                <span aria-hidden="true">Correcte</span>
+                              </label>
+                            )}
                             <span className="host-option-row__shape">
-                              <AnswerShape shape={opt.shape} size={20} />
+                              <AnswerShape shape={MCQ_SHAPES[index % MCQ_SHAPES.length]} size={20} />
                             </span>
-                            <label htmlFor={`mcq-label-${opt.id}`} className="visually-hidden">
-                              Libellé réponse {index + 1}, {SHAPE_NAME_FR[opt.shape]}
+                            <label htmlFor={`${selected.type}-label-${opt.id}`} className="visually-hidden">
+                              {selected.type === 'poll' ? 'Libellé choix' : 'Libellé réponse'} {index + 1},{' '}
+                              {SHAPE_NAME_FR[MCQ_SHAPES[index % MCQ_SHAPES.length]]}
                             </label>
                             <input
-                              id={`mcq-label-${opt.id}`}
+                              id={`${selected.type}-label-${opt.id}`}
                               type="text"
                               value={opt.label}
-                              placeholder={`Réponse ${index + 1}`}
+                              placeholder={`${selected.type === 'poll' ? 'Choix' : 'Réponse'} ${index + 1}`}
                               onChange={(e) => {
                                 const options = selected.options.map((o, i) =>
                                   i === index ? { ...o, label: e.target.value } : o,
                                 )
-                                updateSelected({ options } as Partial<McqQuestion>)
+                                updateSelected({ options } as Partial<McqQuestion | PollQuestion>)
                               }}
-                              aria-invalid={fErrors[`mcq-label-${opt.id}`] ? true : undefined}
+                              aria-invalid={fErrors[`${selected.type}-label-${opt.id}`] ? true : undefined}
                               aria-describedby={
-                                fErrors[`mcq-label-${opt.id}`]
-                                  ? `mcq-label-${opt.id}-error`
+                                fErrors[`${selected.type}-label-${opt.id}`]
+                                  ? `${selected.type}-label-${opt.id}-error`
                                   : undefined
                               }
                             />
-                            {fErrors[`mcq-label-${opt.id}`] && (
-                              <p className="host-inline-error" id={`mcq-label-${opt.id}-error`}>
-                                {fErrors[`mcq-label-${opt.id}`]}
+                            {selected.type === 'poll' && (
+                              <button
+                                type="button"
+                                className="host-variant-remove"
+                                aria-label={`Retirer le choix ${index + 1}`}
+                                disabled={selected.options.length <= POLL_MIN_OPTIONS}
+                                onClick={() => {
+                                  const options = selected.options.filter((_, i) => i !== index)
+                                  updateSelected({ options } as Partial<PollQuestion>)
+                                }}
+                              >
+                                ✕
+                              </button>
+                            )}
+                            {fErrors[`${selected.type}-label-${opt.id}`] && (
+                              <p
+                                className="host-inline-error"
+                                id={`${selected.type}-label-${opt.id}-error`}
+                              >
+                                {fErrors[`${selected.type}-label-${opt.id}`]}
                               </p>
                             )}
                           </div>
                         ))}
                       </div>
+                      {selected.type === 'poll' && (
+                        <div style={{ marginTop: 'var(--space-2)' }}>
+                          <Button
+                            variant="ghost"
+                            type="button"
+                            disabled={selected.options.length >= POLL_MAX_OPTIONS}
+                            onClick={() => {
+                              const nextId = selected.options.reduce(
+                                (max, o) => Math.max(max, Number(o.id.replace('opt-', '')) + 1),
+                                selected.options.length,
+                              )
+                              updateSelected({
+                                options: [...selected.options, { id: `opt-${nextId}`, label: '' }],
+                              } as Partial<PollQuestion>)
+                            }}
+                          >
+                            Ajouter un choix
+                          </Button>
+                        </div>
+                      )}
                     </fieldset>
+                  )}
+
+                  {selected.type === 'poll' && (
+                    <div className="host-field">
+                      <label className="host-option-row__correct-label">
+                        <input
+                          type="checkbox"
+                          checked={selected.multiple}
+                          onChange={(e) =>
+                            updateSelected({ multiple: e.target.checked } as Partial<PollQuestion>)
+                          }
+                        />
+                        Plusieurs réponses possibles
+                      </label>
+                      <p className="host-field__help">
+                        Les participants votent en direct. Pas de bonne réponse ni de points.
+                      </p>
+                    </div>
                   )}
 
                   {selected.type === 'truefalse' && (
