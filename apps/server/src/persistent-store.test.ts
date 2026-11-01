@@ -151,6 +151,20 @@ describe('PersistentSessionStore', () => {
     expect(fresh!.phase).toBe('reveal')
   })
 
+  it('nuage de mots : un retrait de mot survit à un redémarrage (store neuf), sans attendre flushAll', async () => {
+    const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900203' })
+    await setSessionStatus(ctx.db, dbSession!.id, 'active')
+    const s = makeSession(dbSession!.id, dbSession!.pin)
+    const store = new PersistentSessionStore(ctx.db)
+    await store.save(s)
+
+    // Seul `wordcloudRemoved` change : le retrait doit être durable tout de suite.
+    await store.save({ ...structuredClone(s), wordcloudRemoved: { q1: ['cafe'] } })
+
+    const fresh = await new PersistentSessionStore(ctx.db).get(s.id)
+    expect(fresh!.wordcloudRemoved).toEqual({ q1: ['cafe'] })
+  })
+
   it('save puis get renvoie des clones (mutation ultérieure de la référence sans effet)', async () => {
     const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900103' })
     await setSessionStatus(ctx.db, dbSession!.id, 'active')

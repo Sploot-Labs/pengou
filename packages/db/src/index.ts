@@ -27,6 +27,7 @@ export {
   listSessionPlayersByScore, listSessionPlayers,
   saveEngineState, clearEngineState, loadEngineState, loadEngineStateByPin,
   listResumableSessions, abandonStaleSessions, abandonInactiveSessions,
+  setWordcloudRemoved, loadWordcloudRemoved,
   type GameSession, type SessionPlayer, type AnswerRecord, type SessionStatus,
 } from './repos/session.js'
 export {
