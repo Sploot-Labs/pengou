@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { loadConfig } from './config'
+import { loadConfig, DEFAULT_APP_DB_PASSWORD } from './config'
 
 describe('loadConfig', () => {
   it('par défaut : single-tenant, Postgres local, scaling mémoire', () => {
@@ -60,7 +60,7 @@ describe('loadConfig', () => {
 
   it('accepte la production quand BETTER_AUTH_SECRET est fourni (32+ caractères)', () => {
     const secret = 'a'.repeat(32)
-    const cfg = loadConfig({ NODE_ENV: 'production', BETTER_AUTH_SECRET: secret })
+    const cfg = loadConfig({ NODE_ENV: 'production', BETTER_AUTH_SECRET: secret, APP_DB_PASSWORD: 'autre' })
     expect(cfg.authSecret).toBe(secret)
   })
 })
@@ -76,6 +76,30 @@ describe('loadConfig — inactivité/balayage', () => {
     const c = loadConfig({ NODE_ENV: 'test', SESSION_INACTIVITY_TIMEOUT_MINUTES: '10', SESSION_SWEEP_INTERVAL_MINUTES: '1' })
     expect(c.sessionInactivityTimeoutMs).toBe(10 * 60_000)
     expect(c.sessionSweepIntervalMs).toBe(1 * 60_000)
+  })
+})
+
+describe("loadConfig, mot de passe d'app_role en production", () => {
+  const prod = { NODE_ENV: 'production', BETTER_AUTH_SECRET: 'a'.repeat(32) }
+
+  it('refuse la production sans APP_DB_PASSWORD', () => {
+    expect(() => loadConfig(prod)).toThrow(/APP_DB_PASSWORD doit être défini en production/)
+  })
+
+  it('refuse la production avec le mot de passe par défaut', () => {
+    expect(() => loadConfig({ ...prod, APP_DB_PASSWORD: DEFAULT_APP_DB_PASSWORD })).toThrow(/APP_DB_PASSWORD/)
+  })
+
+  it('accepte la production avec un mot de passe personnalisé', () => {
+    expect(loadConfig({ ...prod, APP_DB_PASSWORD: 'autre' }).appDbPassword).toBe('autre')
+  })
+
+  it('accepte la production quand APP_DATABASE_URL est fourni', () => {
+    expect(() => loadConfig({ ...prod, APP_DATABASE_URL: 'postgres://app_role:x@db:5432/pengou' })).not.toThrow()
+  })
+
+  it('ne dit rien en développement sans APP_DB_PASSWORD', () => {
+    expect(loadConfig({}).appDbPassword).toBe(DEFAULT_APP_DB_PASSWORD)
   })
 })
 

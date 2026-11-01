@@ -62,6 +62,7 @@ Le fichier `docker-compose.prod.yml` permet de faire tourner Pengou sur n'import
 POSTGRES_PASSWORD=<mot de passe sans @ / :>
 SESSION_SECRET=<openssl rand -base64 32>
 BETTER_AUTH_SECRET=<openssl rand -base64 32>   # 32 caractères minimum
+APP_DB_PASSWORD=<openssl rand -base64 24>       # mot de passe du rôle app_role
 BETTER_AUTH_URL=https://pengou.example.com      # https obligatoire
 ```
 

@@ -4,7 +4,7 @@ Une campagne de charge se lance à la main, sur un poste sans autre charge. Elle
 
 ## Prérequis
 
-Docker doit être démarré et le port 3000 libre : arrêtez le serveur de dev (`pnpm dev`) avant de lancer, sinon une partie des requêtes peut arriver sur lui. Le `.env` à la racine du dépôt doit définir `SESSION_SECRET`, `BETTER_AUTH_SECRET` et les limites du VPS reproduites par les conteneurs : `PENGOU_CHARGE_CPUS=4`, `PENGOU_CHARGE_MEM=15360m` et `PENGOU_CHARGE_MEMSWAP=15360m`. Il ne faut pas lancer le générateur de charge seul (`pnpm ... charge`) en même temps, ni lire `/metrics` pendant une campagne.
+Docker doit être démarré et le port 3000 libre : arrêtez le serveur de dev (`pnpm dev`) avant de lancer, sinon une partie des requêtes peut arriver sur lui. Le `.env` à la racine du dépôt doit définir `SESSION_SECRET`, `BETTER_AUTH_SECRET`, `APP_DB_PASSWORD` et les limites du VPS reproduites par les conteneurs : `PENGOU_CHARGE_CPUS=4`, `PENGOU_CHARGE_MEM=15360m` et `PENGOU_CHARGE_MEMSWAP=15360m`. Il ne faut pas lancer le générateur de charge seul (`pnpm ... charge`) en même temps, ni lire `/metrics` pendant une campagne.
 
 ## Lancer une campagne
 

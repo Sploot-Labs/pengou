@@ -1,5 +1,8 @@
 import { z } from 'zod'
 
+/** Mot de passe de développement d'`app_role` : public, donc interdit en production. */
+export const DEFAULT_APP_DB_PASSWORD = 'app-dev-password-change-me'
+
 const EnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().positive().default(3000),
@@ -10,7 +13,7 @@ const EnvSchema = z.object({
   // à une seule URL). Fournir explicitement pour un rôle géré (cloud/managed).
   APP_DATABASE_URL: z.string().min(1).optional(),
   // Mot de passe du rôle `app_role` (posé au boot par la connexion privilégiée). Défaut dev.
-  APP_DB_PASSWORD: z.string().min(1).default('app-dev-password-change-me'),
+  APP_DB_PASSWORD: z.string().min(1).default(DEFAULT_APP_DB_PASSWORD),
   REDIS_URL: z.string().min(1).optional(),
   SESSION_SECRET: z.string().min(16).default('dev-secret-change-me-please!!'),
   BETTER_AUTH_SECRET: z.string().min(32).optional(),
@@ -85,6 +88,15 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
       "Configuration invalide : BETTER_AUTH_SECRET est requis en production (NODE_ENV=production). " +
         'Définissez une valeur secrète stable d\'au moins 32 caractères (ex. `openssl rand -base64 32`) ' +
         'pour signer les sessions Better Auth. En développement/test, une valeur par défaut est tolérée.',
+    )
+  }
+  if (
+    parsed.NODE_ENV === 'production' &&
+    !parsed.APP_DATABASE_URL &&
+    parsed.APP_DB_PASSWORD === DEFAULT_APP_DB_PASSWORD
+  ) {
+    throw new Error(
+      'Configuration invalide : APP_DB_PASSWORD doit être défini en production (mot de passe du rôle app_role).',
     )
   }
   return {
