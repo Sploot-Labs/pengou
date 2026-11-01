@@ -186,6 +186,10 @@ function distinctSources(rows: Array<{ source: ContentSource | null }>): Content
   return [...byKey.values()]
 }
 
+/** Refus d'une commande hôte quand l'autorité n'est plus valide (session Better Auth absente ou
+ * expirée, utilisateur qui n'est plus l'hôte, ou retiré de l'espace). */
+const HOST_REVOKED_MESSAGE = "votre session a expiré ou vous n'êtes plus membre de cet espace"
+
 function playersPayload(session: GameSession): Array<{ id: string; nickname: string; score: number; connected: boolean }> {
   return Object.values(session.players).map((p) => ({
     id: p.id,
@@ -582,12 +586,29 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     return { session }
   }
 
-  function requireHost(socket: Socket): { sessionId: string; meta: SessionMeta } {
+  /** Exige que `userId` soit encore membre de l'espace `tenantId`. Partagée par `requireLiveHost`
+   * et `host:reconnect` : un membre retiré de l'espace perd le contrôle de ses parties en cours. */
+  async function assertHostMembership(userId: string, tenantId: string): Promise<void> {
+    const role = await getMembershipRole(systemDb, userId, tenantId)
+    if (!role) throw new Error(HOST_REVOKED_MESSAGE)
+  }
+
+  /** Garde de toutes les commandes hôte. Le rôle posé sur `socket.data` ne suffit pas : la session
+   * Better Auth du handshake est relue à chaque action (un sign-out ou une expiration retire la
+   * main), elle doit appartenir à l'hôte de la partie, qui doit encore être membre de l'espace.
+   * Pas de cache : les événements d'hôte sont rares (quelques-uns par minute). */
+  async function requireLiveHost(socket: Socket): Promise<{ sessionId: string; meta: SessionMeta }> {
     const data = socket.data as SocketData
     if (data.role !== 'host' || !data.sessionId) throw new Error('action réservée à l\'hôte de la session')
-    const meta = sessionMetaByEngineId.get(data.sessionId)
+    const sessionId = data.sessionId
+    const meta = sessionMetaByEngineId.get(sessionId)
     if (!meta) throw new Error('session introuvable')
-    return { sessionId: data.sessionId, meta }
+    const authSession = await auth.api.getSession({ headers: fromNodeHeaders(socket.handshake.headers) })
+    if (!authSession?.user) throw new Error(HOST_REVOKED_MESSAGE)
+    const session = await engine.getSession(sessionId)
+    if (session.hostId !== authSession.user.id) throw new Error(HOST_REVOKED_MESSAGE)
+    await assertHostMembership(authSession.user.id, meta.tenantId)
+    return { sessionId, meta }
   }
 
   /** Écrit les answer_record d'UNE manche donnée (`idx`), sans garde `revealedRounds`. Idempotent
@@ -733,7 +754,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   async function doReveal(socket: Socket, ack?: (res: unknown) => void): Promise<void> {
     const reply = typeof ack === 'function' ? ack : () => {}
     try {
-      const { sessionId, meta } = requireHost(socket)
+      const { sessionId, meta } = await requireLiveHost(socket)
       await doRevealBySession(sessionId, meta)
       reply({ ok: true })
     } catch (e) {
@@ -755,7 +776,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   async function doSkip(socket: Socket, ack?: (res: unknown) => void): Promise<void> {
     const reply = typeof ack === 'function' ? ack : () => {}
     try {
-      const { sessionId, meta } = requireHost(socket)
+      const { sessionId, meta } = await requireLiveHost(socket)
       const current = await engine.getSession(sessionId)
       if (current.phase === 'lobby') {
         throw new Error('host:skip : aucune question active (session encore en lobby)')
@@ -1099,7 +1120,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     socket.on('host:relaunch', async (payload: { quizId?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId: oldId } = requireHost(socket)
+        const { sessionId: oldId } = await requireLiveHost(socket)
         const quizId = payload?.quizId
         if (typeof quizId !== 'string' || !quizId) throw new Error('quizId requis')
 
@@ -1191,6 +1212,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (!dbSession || dbSession.hostId !== authSession.user.id) {
           throw new Error("cet utilisateur n'est pas l'hôte de cette session")
         }
+        // Un hôte retiré de l'espace ne reprend pas la main sur ses parties en cours.
+        await assertHostMembership(authSession.user.id, meta.tenantId)
 
         const data = socket.data as SocketData
         data.role = 'host'
@@ -1223,7 +1246,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     socket.on('host:start', async (_payload: unknown, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId, meta } = requireHost(socket)
+        const { sessionId, meta } = await requireLiveHost(socket)
         if (!meta.statusActiveSet) {
           await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
             setSessionStatus(scope.db, meta.dbSessionId, 'active'))
@@ -1249,7 +1272,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     socket.on('host:reveal', async (_payload: unknown, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId } = requireHost(socket)
+        const { sessionId } = await requireLiveHost(socket)
         const current = await engine.getSession(sessionId)
         if (current.phase === 'lobby') {
           throw new Error('host:reveal : aucune question active (session encore en lobby)')
@@ -1269,7 +1292,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     socket.on('host:next', async (_payload: unknown, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId, meta } = requireHost(socket)
+        const { sessionId, meta } = await requireLiveHost(socket)
         // Geste manuel « Suivant » : même corps que l'avance automatique (`doAdvance`), qui gère
         // l'annulation de tous les minuteurs, la révélation de filet de sécurité d'une manche
         // encore en phase 'question' (host:next anticipé, sans reveal préalable), puis le routage
@@ -1282,14 +1305,14 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     })
 
     // Enchaînement automatique des étapes (demande produit) : l'hôte active/désactive le mode et
-    // règle le délai de pause sur le classement. Réservé à l'hôte (`requireHost`). Activer pendant
+    // règle le délai de pause sur le classement. Réservé à l'hôte (`requireLiveHost`). Activer pendant
     // une étape classement en cours planifie l'avance immédiatement ; désactiver annule toute
     // avance planifiée et notifie les clients d'effacer leur compte à rebours (`auto:advance`
     // `{ nextAt: null }`).
     socket.on('host:setAuto', async (payload: { enabled?: unknown; delaySeconds?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId, meta } = requireHost(socket)
+        const { sessionId, meta } = await requireLiveHost(socket)
         if (typeof payload?.enabled === 'boolean') meta.autoAdvance = payload.enabled
         if (typeof payload?.delaySeconds === 'number' && Number.isFinite(payload.delaySeconds)) {
           const clamped = Math.min(Math.max(payload.delaySeconds, MIN_AUTO_ADVANCE_DELAY_S), MAX_AUTO_ADVANCE_DELAY_S)
@@ -1315,7 +1338,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     socket.on('host:wordcloudRemove', async (payload: { word?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId, meta } = requireHost(socket)
+        const { sessionId, meta } = await requireLiveHost(socket)
         const word = payload?.word
         if (typeof word !== 'string' || !word.trim()) throw new Error('mot requis')
         if (word.trim().length > WORDCLOUD_MAX_WORD_LENGTH) throw new Error('mot trop long')
@@ -1500,10 +1523,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     })
 
     // Grand écran : token d'affichage à usage unique, obtenu par l'hôte via host:createScreenToken.
-    socket.on('host:createScreenToken', (_payload: unknown, ack?: (res: unknown) => void) => {
+    socket.on('host:createScreenToken', async (_payload: unknown, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId } = requireHost(socket)
+        const { sessionId } = await requireLiveHost(socket)
         const displayToken = crypto.randomUUID()
         screenTokenToSessionId.set(displayToken, sessionId)
         reply({ displayToken })

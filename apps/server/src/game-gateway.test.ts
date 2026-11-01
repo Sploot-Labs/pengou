@@ -88,8 +88,12 @@ async function buildApp(
   return { app, url: `http://127.0.0.1:${address.port}`, sweepAbandonedSessions }
 }
 
-function connectClient(url: string, extraHeaders?: Record<string, string>): Promise<ClientSocket> {
-  const client = ioClient(url, { reconnection: false, extraHeaders })
+function connectClient(
+  url: string,
+  extraHeaders?: Record<string, string>,
+  auth?: Record<string, string>,
+): Promise<ClientSocket> {
+  const client = ioClient(url, { reconnection: false, extraHeaders, auth })
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => reject(new Error('Connection timeout')), 5000)
     client.once('connect', () => {
@@ -1258,6 +1262,122 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const intruderAck = await ack<{ error?: string; sessionId?: string }>(intruder, 'host:reconnect', { sessionId })
       expect(intruderAck.error).toBeTruthy()
       expect(intruderAck.sessionId).toBeUndefined()
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  // Autorité d'hôte revalidée à chaque action (audit de sécurité, tâche 3) : la socket ouverte ne
+  // suffit plus, il faut une session Better Auth encore valide et une membership dans l'espace.
+  const HOST_REVOKED = "votre session a expiré ou vous n'êtes plus membre de cet espace"
+
+  it('refuse host:start après sign-out sur la socket déjà ouverte', async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket } = await setupHostedSession(app, url, 'gw-signout-host@example.com')
+      clients.push(hostSocket)
+      // Le cookie de la socket est celui de l'inscription : on le relit depuis le handshake côté
+      // client pour déconnecter EXACTEMENT cette session Better Auth.
+      const cookie = (hostSocket.io.opts.extraHeaders as Record<string, string>).cookie
+      const signOut = await app.inject({
+        method: 'POST',
+        url: '/api/auth/sign-out',
+        payload: {},
+        headers: { 'content-type': 'application/json', cookie },
+      })
+      expect(signOut.statusCode).toBe(200)
+
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBe(HOST_REVOKED)
+      const tokenAck = await ack<{ error?: string; displayToken?: string }>(hostSocket, 'host:createScreenToken', {})
+      expect(tokenAck.error).toBe(HOST_REVOKED)
+      expect(tokenAck.displayToken).toBeUndefined()
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it('refuse host:reconnect et host:start à un membre retiré (multi)', async () => {
+    const { app, url } = await buildApp(new MemorySessionStore(), { TENANCY_MODE: 'multi' })
+    const clients: ClientSocket[] = []
+    try {
+      const json = { 'content-type': 'application/json' }
+      const ownerCookie = await signUp(app, 'gw-removed-owner@example.com')
+      const wsList = (await app.inject({ method: 'GET', url: '/api/workspaces', headers: { cookie: ownerCookie } }))
+        .json() as { workspaces: Array<{ tenantId: string }> }
+      const tenantId = wsList.workspaces[0]!.tenantId
+
+      const inv = await app.inject({
+        method: 'POST', url: `/api/workspaces/${tenantId}/invitations`,
+        payload: { email: 'gw-removed-member@example.com', role: 'member' },
+        headers: { ...json, cookie: ownerCookie },
+      })
+      expect(inv.statusCode).toBe(201)
+      const token = (inv.json() as { invitation: { token: string } }).invitation.token
+      const memberCookie = await signUp(app, 'gw-removed-member@example.com')
+      const accept = await app.inject({ method: 'POST', url: `/api/invitations/${token}/accept`, headers: { cookie: memberCookie } })
+      expect(accept.statusCode).toBe(200)
+
+      // M crée son propre quiz dans W, puis lance la partie depuis une socket rattachée à W.
+      const memberHeaders = { ...json, cookie: memberCookie, 'x-tenant-id': tenantId }
+      const quizRes = await app.inject({ method: 'POST', url: '/api/quizzes', payload: { title: 'Quiz de M' }, headers: memberHeaders })
+      expect(quizRes.statusCode).toBe(201)
+      const quiz = quizRes.json() as { id: string }
+      const questionRes = await app.inject({
+        method: 'POST', url: `/api/quizzes/${quiz.id}/questions`,
+        payload: {
+          type: 'mcq', prompt: 'Q ?', timeLimit: 20, readingTime: 0,
+          payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+        },
+        headers: memberHeaders,
+      })
+      expect(questionRes.statusCode).toBe(201)
+
+      const hostSocket = await connectClient(url, { cookie: memberCookie }, { tenantId })
+      clients.push(hostSocket)
+      const created = await ack<{ sessionId?: string; error?: string }>(hostSocket, 'host:create', { quizId: quiz.id })
+      expect(created.error).toBeUndefined()
+      const sessionId = created.sessionId!
+
+      // O retire M de l'espace.
+      const members = (await app.inject({ method: 'GET', url: `/api/workspaces/${tenantId}/members`, headers: { cookie: ownerCookie } }))
+        .json() as { members: Array<{ email: string; userId: string }> }
+      const memberId = members.members.find((m) => m.email === 'gw-removed-member@example.com')!.userId
+      const removed = await app.inject({ method: 'DELETE', url: `/api/workspaces/${tenantId}/members/${memberId}`, headers: { cookie: ownerCookie } })
+      expect(removed.statusCode).toBe(200)
+
+      // La socket déjà ouverte perd la main.
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBe(HOST_REVOKED)
+
+      // Une nouvelle socket de M ne peut pas reprendre la partie.
+      const again = await connectClient(url, { cookie: memberCookie }, { tenantId })
+      clients.push(again)
+      const reconnectAck = await ack<{ error?: string; sessionId?: string }>(again, 'host:reconnect', { sessionId })
+      expect(reconnectAck.error).toBe(HOST_REVOKED)
+      expect(reconnectAck.sessionId).toBeUndefined()
+      const startAgain = await ack<{ error?: string }>(again, 'host:start', {})
+      expect(startAgain.error).toBeTruthy()
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it('un hôte toujours membre garde la main', async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket } = await setupHostedSession(app, url, 'gw-still-member@example.com')
+      clients.push(hostSocket)
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+      const nextAck = await ack<{ error?: string; phase?: string }>(hostSocket, 'host:next', {})
+      expect(nextAck.error).toBeUndefined()
+      expect(nextAck.phase).toBe('podium')
     } finally {
       for (const c of clients) c.disconnect()
       await app.close()
