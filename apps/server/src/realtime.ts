@@ -3,6 +3,7 @@ import { createAdapter } from '@socket.io/redis-adapter'
 import { Redis } from 'ioredis'
 import type { FastifyInstance } from 'fastify'
 import type { AppConfig } from '@splootlabs/shared'
+import { isOriginAllowed } from './origin-guard.js'
 
 /**
  * CORS Socket.IO : `origin: true` reflète N'IMPORTE QUELLE origine (équivalent à `*` mais avec
@@ -26,7 +27,12 @@ export function attachRealtime(
   app: FastifyInstance,
   config: Pick<AppConfig, 'authUrl' | 'nodeEnv' | 'redisUrl'>,
 ): Server {
-  const io = new Server(app.server, { cors: { origin: allowedOrigins(config), credentials: true } })
+  const io = new Server(app.server, {
+    cors: { origin: allowedOrigins(config), credentials: true },
+    // CORS ne couvre que le polling : l'upgrade WebSocket n'est pas soumis à la politique CORS du
+    // navigateur, on vérifie donc l'origine ici (absente = client non navigateur, accepté).
+    allowRequest: (req, cb) => cb(null, isOriginAllowed(req.headers.origin, allowedOrigins(config))),
+  })
 
   // Adaptateur Redis (P0-3) : quand `REDIS_URL` est défini, le pub/sub Socket.IO passe par Redis
   // → les `io.to(room).emit` se propagent à TOUTES les instances (broadcast cross-instance).

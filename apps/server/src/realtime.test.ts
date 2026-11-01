@@ -107,3 +107,43 @@ describe('Socket.IO CORS — origine restreinte à AppConfig.authUrl (hardening)
     }
   }, 10000)
 })
+
+describe('Socket.IO : origine contrôlée aussi sur l\'upgrade WebSocket', () => {
+  async function tenter(origin: string | undefined): Promise<'connecte' | 'refuse'> {
+    const config = loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'http://localhost:3000' })
+    const app = await buildServer(config)
+    const io = attachRealtime(app, config)
+    const url = await listenOn(app)
+    const client = ioClient(url, {
+      reconnection: false,
+      transports: ['websocket'],
+      ...(origin ? { extraHeaders: { origin } } : {}),
+    })
+    try {
+      return await new Promise<'connecte' | 'refuse'>((resolve, reject) => {
+        const timeout = setTimeout(() => reject(new Error('Connection timeout')), 3000)
+        client.once('connect', () => {
+          clearTimeout(timeout)
+          resolve('connecte')
+        })
+        client.once('connect_error', () => {
+          clearTimeout(timeout)
+          resolve('refuse')
+        })
+      })
+    } finally {
+      client.disconnect()
+      await io.close()
+      await app.close()
+    }
+  }
+
+  it("refuse le handshake WebSocket d'une origine étrangère", async () => {
+    expect(await tenter('https://evil.example')).toBe('refuse')
+  }, 10000)
+
+  it("accepte un client sans Origin et l'origine BETTER_AUTH_URL", async () => {
+    expect(await tenter(undefined)).toBe('connecte')
+    expect(await tenter('http://localhost:3000')).toBe('connecte')
+  }, 10000)
+})
