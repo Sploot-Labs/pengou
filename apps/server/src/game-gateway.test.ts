@@ -88,8 +88,12 @@ async function buildApp(
   return { app, url: `http://127.0.0.1:${address.port}`, sweepAbandonedSessions }
 }
 
-function connectClient(url: string, extraHeaders?: Record<string, string>): Promise<ClientSocket> {
-  const client = ioClient(url, { reconnection: false, extraHeaders })
+function connectClient(
+  url: string,
+  extraHeaders?: Record<string, string>,
+  auth?: Record<string, string>,
+): Promise<ClientSocket> {
+  const client = ioClient(url, { reconnection: false, extraHeaders, auth })
   return new Promise((resolve, reject) => {
     const timeout = setTimeout(() => reject(new Error('Connection timeout')), 5000)
     client.once('connect', () => {
@@ -135,7 +139,9 @@ function raceNoEvent(client: ClientSocket, event: string, ms: number): Promise<b
  * coup sur coup). `atLeast(n)` résout dès que le n-ième événement est arrivé. */
 function collect<T = unknown>(client: ClientSocket, event: string): {
   atLeast: (n: number) => Promise<T>
-  until: (predicate: (payload: T) => boolean) => Promise<T>
+  until: (predicate: (payload: T) => boolean, from?: number) => Promise<T>
+  count: () => number
+  last: () => T | undefined
 } {
   const received: T[] = []
   const waiters: Array<{ n: number; resolve: (v: T) => void }> = []
@@ -162,10 +168,18 @@ function collect<T = unknown>(client: ClientSocket, event: string): {
     },
     // Premier payload (déjà reçu ou à venir) qui satisfait `predicate` : la diffusion du lobby
     // étant coalescée, on attend un état (ex. « 3 joueurs ») plutôt qu'un nombre d'événements.
-    until(predicate: (payload: T) => boolean) {
-      const found = received.find(predicate)
+    // `from` (repère obtenu par `count()`) ignore l'historique antérieur : seul un payload reçu
+    // après ce repère peut satisfaire le prédicat.
+    until(predicate: (payload: T) => boolean, from = 0) {
+      const found = received.slice(from).find(predicate)
       if (found !== undefined) return Promise.resolve(found)
       return new Promise((resolve) => matchers.push({ predicate, resolve }))
+    },
+    count() {
+      return received.length
+    },
+    last() {
+      return received[received.length - 1]
     },
   }
 }
@@ -1258,6 +1272,122 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const intruderAck = await ack<{ error?: string; sessionId?: string }>(intruder, 'host:reconnect', { sessionId })
       expect(intruderAck.error).toBeTruthy()
       expect(intruderAck.sessionId).toBeUndefined()
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  // Autorité d'hôte revalidée à chaque action (audit de sécurité, tâche 3) : la socket ouverte ne
+  // suffit plus, il faut une session Better Auth encore valide et une membership dans l'espace.
+  const HOST_REVOKED = "votre session a expiré ou vous n'êtes plus membre de cet espace"
+
+  it('refuse host:start après sign-out sur la socket déjà ouverte', async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket } = await setupHostedSession(app, url, 'gw-signout-host@example.com')
+      clients.push(hostSocket)
+      // Le cookie de la socket est celui de l'inscription : on le relit depuis le handshake côté
+      // client pour déconnecter EXACTEMENT cette session Better Auth.
+      const cookie = (hostSocket.io.opts.extraHeaders as Record<string, string>).cookie
+      const signOut = await app.inject({
+        method: 'POST',
+        url: '/api/auth/sign-out',
+        payload: {},
+        headers: { 'content-type': 'application/json', cookie },
+      })
+      expect(signOut.statusCode).toBe(200)
+
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBe(HOST_REVOKED)
+      const tokenAck = await ack<{ error?: string; displayToken?: string }>(hostSocket, 'host:createScreenToken', {})
+      expect(tokenAck.error).toBe(HOST_REVOKED)
+      expect(tokenAck.displayToken).toBeUndefined()
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it('refuse host:reconnect et host:start à un membre retiré (multi)', async () => {
+    const { app, url } = await buildApp(new MemorySessionStore(), { TENANCY_MODE: 'multi' })
+    const clients: ClientSocket[] = []
+    try {
+      const json = { 'content-type': 'application/json' }
+      const ownerCookie = await signUp(app, 'gw-removed-owner@example.com')
+      const wsList = (await app.inject({ method: 'GET', url: '/api/workspaces', headers: { cookie: ownerCookie } }))
+        .json() as { workspaces: Array<{ tenantId: string }> }
+      const tenantId = wsList.workspaces[0]!.tenantId
+
+      const inv = await app.inject({
+        method: 'POST', url: `/api/workspaces/${tenantId}/invitations`,
+        payload: { email: 'gw-removed-member@example.com', role: 'member' },
+        headers: { ...json, cookie: ownerCookie },
+      })
+      expect(inv.statusCode).toBe(201)
+      const token = (inv.json() as { invitation: { token: string } }).invitation.token
+      const memberCookie = await signUp(app, 'gw-removed-member@example.com')
+      const accept = await app.inject({ method: 'POST', url: `/api/invitations/${token}/accept`, headers: { cookie: memberCookie } })
+      expect(accept.statusCode).toBe(200)
+
+      // M crée son propre quiz dans W, puis lance la partie depuis une socket rattachée à W.
+      const memberHeaders = { ...json, cookie: memberCookie, 'x-tenant-id': tenantId }
+      const quizRes = await app.inject({ method: 'POST', url: '/api/quizzes', payload: { title: 'Quiz de M' }, headers: memberHeaders })
+      expect(quizRes.statusCode).toBe(201)
+      const quiz = quizRes.json() as { id: string }
+      const questionRes = await app.inject({
+        method: 'POST', url: `/api/quizzes/${quiz.id}/questions`,
+        payload: {
+          type: 'mcq', prompt: 'Q ?', timeLimit: 20, readingTime: 0,
+          payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+        },
+        headers: memberHeaders,
+      })
+      expect(questionRes.statusCode).toBe(201)
+
+      const hostSocket = await connectClient(url, { cookie: memberCookie }, { tenantId })
+      clients.push(hostSocket)
+      const created = await ack<{ sessionId?: string; error?: string }>(hostSocket, 'host:create', { quizId: quiz.id })
+      expect(created.error).toBeUndefined()
+      const sessionId = created.sessionId!
+
+      // O retire M de l'espace.
+      const members = (await app.inject({ method: 'GET', url: `/api/workspaces/${tenantId}/members`, headers: { cookie: ownerCookie } }))
+        .json() as { members: Array<{ email: string; userId: string }> }
+      const memberId = members.members.find((m) => m.email === 'gw-removed-member@example.com')!.userId
+      const removed = await app.inject({ method: 'DELETE', url: `/api/workspaces/${tenantId}/members/${memberId}`, headers: { cookie: ownerCookie } })
+      expect(removed.statusCode).toBe(200)
+
+      // La socket déjà ouverte perd la main.
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBe(HOST_REVOKED)
+
+      // Une nouvelle socket de M ne peut pas reprendre la partie.
+      const again = await connectClient(url, { cookie: memberCookie }, { tenantId })
+      clients.push(again)
+      const reconnectAck = await ack<{ error?: string; sessionId?: string }>(again, 'host:reconnect', { sessionId })
+      expect(reconnectAck.error).toBe(HOST_REVOKED)
+      expect(reconnectAck.sessionId).toBeUndefined()
+      const startAgain = await ack<{ error?: string }>(again, 'host:start', {})
+      expect(startAgain.error).toBeTruthy()
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it('un hôte toujours membre garde la main', async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket } = await setupHostedSession(app, url, 'gw-still-member@example.com')
+      clients.push(hostSocket)
+      const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
+      expect(startAck.error).toBeUndefined()
+      const nextAck = await ack<{ error?: string; phase?: string }>(hostSocket, 'host:next', {})
+      expect(nextAck.error).toBeUndefined()
+      expect(nextAck.phase).toBe('podium')
     } finally {
       for (const c of clients) c.disconnect()
       await app.close()
@@ -2800,6 +2930,237 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         process.off('unhandledRejection', onUnhandled)
         setTimeoutSpy.mockRestore()
         clearTimeoutSpy.mockRestore()
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+  })
+
+  describe("une socket n'occupe qu'un siège joueur à la fois", () => {
+    type LobbyUpdate = { players: Array<{ nickname: string; connected: boolean }> }
+    const connectedOf = (u: LobbyUpdate, nickname: string) => u.players.find((p) => p.nickname === nickname)?.connected
+
+    it('un second player:join sur la même socket libère la première place', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-seat-double-join@example.com')
+        clients.push(hostSocket)
+        const lobby = collect<LobbyUpdate>(hostSocket, 'lobby:update')
+        const x = await connectClient(url)
+        clients.push(x)
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'a' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'b' })).error).toBeUndefined()
+
+        const update = await lobby.until((u) => connectedOf(u, 'a') === false && connectedOf(u, 'b') === true)
+        expect(connectedOf(update, 'a')).toBe(false)
+        expect(connectedOf(update, 'b')).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("les places libérées ne bloquent pas l'auto-révélation", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-seat-autoreveal@example.com')
+        clients.push(hostSocket)
+        const x = await connectClient(url)
+        const y = await connectClient(url)
+        clients.push(x, y)
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'a' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'b' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(y, 'player:join', { pin, nickname: 'c' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+
+        // Le timeLimit (20 s) dépasse le délai du test : seule l'auto-révélation peut émettre.
+        const revealPromise = waitFor<{ correct: unknown }>(hostSocket, 'question:reveal')
+        expect((await ack<{ accepted?: boolean }>(x, 'player:answer', { answer: { optionIndex: 0 } })).accepted).toBe(true)
+        expect((await ack<{ accepted?: boolean }>(y, 'player:answer', { answer: { optionIndex: 1 } })).accepted).toBe(true)
+        const reveal = await Promise.race([
+          revealPromise,
+          new Promise<never>((_, reject) => setTimeout(() => reject(new Error('aucun question:reveal en 3 s')), 3000)),
+        ])
+        expect(reveal.correct).toBeDefined()
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it('une socket qui rejoint une seconde partie libère sa place dans la première', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const first = await setupHostedSession(app, url, 'gateway-seat-next-game-1@example.com')
+        const second = await setupHostedSession(app, url, 'gateway-seat-next-game-2@example.com')
+        clients.push(first.hostSocket, second.hostSocket)
+        const lobby1 = collect<LobbyUpdate>(first.hostSocket, 'lobby:update')
+        const lobby2 = collect<LobbyUpdate>(second.hostSocket, 'lobby:update')
+        const x = await connectClient(url)
+        clients.push(x)
+
+        const joinedA = await ack<{ joinToken?: string; error?: string }>(x, 'player:join', { pin: first.pin, nickname: 'a' })
+        expect(joinedA.error).toBeUndefined()
+        await lobby1.until((u) => connectedOf(u, 'a') === true)
+
+        // player:join sur la seconde partie : la place de la première est libérée.
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin: second.pin, nickname: 'b' })).error).toBeUndefined()
+        expect(connectedOf(await lobby1.until((u) => connectedOf(u, 'a') === false), 'a')).toBe(false)
+        await lobby2.until((u) => connectedOf(u, 'b') === true)
+
+        // player:reconnect (remontage de PlayerLive) vers la première : la place de la seconde est
+        // libérée et `a` revient en ligne. Repère pris avant la reconnexion : l'historique de
+        // lobby1 contient déjà une diffusion où `a` était en ligne, qu'il ne faut pas compter.
+        const mark1 = lobby1.count()
+        const back = await ack<{ playerId?: string; error?: string }>(x, 'player:reconnect', { pin: first.pin, joinToken: joinedA.joinToken })
+        expect(back.error).toBeUndefined()
+        expect(connectedOf(await lobby2.until((u) => connectedOf(u, 'b') === false), 'b')).toBe(false)
+        const backOnline = await Promise.race([
+          lobby1.until((u) => connectedOf(u, 'a') === true, mark1),
+          new Promise<never>((_, reject) => setTimeout(() => reject(new Error("a n'est pas revenu en ligne en 3 s")), 3000)),
+        ])
+        expect(connectedOf(backOnline, 'a')).toBe(true)
+        // État stable : aucune diffusion ultérieure ne le repasse hors ligne.
+        await new Promise((resolve) => setTimeout(resolve, 600))
+        const latest = lobby1.last()
+        expect(latest && connectedOf(latest, 'a')).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("une socket d'hôte ne peut pas prendre de siège", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-seat-host-join@example.com')
+        clients.push(hostSocket)
+        const joined = await ack<{ playerId?: string; error?: string }>(hostSocket, 'player:join', { pin, nickname: 'intrus' })
+        expect(joined.playerId).toBeUndefined()
+        expect(joined.error).toBe('cette connexion est déjà utilisée par un hôte ou un écran')
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+  })
+
+  describe("budget d'échecs de PIN par IP", () => {
+    it("le budget d'échecs de PIN est partagé entre les sockets d'une même IP", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-budget@example.com')
+        clients.push(hostSocket)
+        const x = await connectClient(url)
+        const y = await connectClient(url)
+        clients.push(x, y)
+        // 30 échecs répartis sur deux sockets, chacune très en dessous du throttle par socket.
+        for (let i = 0; i < 15; i++) {
+          expect((await ack<{ error?: string }>(x, 'player:join', { pin: 'pin-inconnu', nickname: 'x' })).error).toBe('PIN invalide')
+          expect((await ack<{ error?: string }>(y, 'player:join', { pin: 'pin-inconnu', nickname: 'y' })).error).toBe('PIN invalide')
+        }
+        // Troisième socket, même IP, BON PIN : le budget est épuisé.
+        const z = await connectClient(url)
+        clients.push(z)
+        const joined = await ack<{ playerId?: string; error?: string }>(z, 'player:join', { pin, nickname: 'z' })
+        expect(joined.playerId).toBeUndefined()
+        expect(joined.error).toBe('trop de tentatives, réessayez dans quelques minutes')
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("une IP au budget épuisé peut encore reconnecter un joueur avec son jeton", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-budget-reconnect@example.com')
+        clients.push(hostSocket)
+        const a = await connectClient(url)
+        clients.push(a)
+        const joined = await ack<{ joinToken?: string; error?: string }>(a, 'player:join', { pin, nickname: 'a' })
+        expect(joined.error).toBeUndefined()
+        const x = await connectClient(url)
+        clients.push(x)
+        for (let i = 0; i < 30; i++) {
+          expect((await ack<{ error?: string }>(x, 'player:join', { pin: 'pin-inconnu', nickname: 'x' })).error).toBe('PIN invalide')
+        }
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'x' })).error)
+          .toBe('trop de tentatives, réessayez dans quelques minutes')
+        // Le joueur recharge la page : nouvelle socket, même IP, son jeton le ramène à sa place.
+        a.disconnect()
+        const a2 = await connectClient(url)
+        clients.push(a2)
+        const back = await ack<{ playerId?: string; error?: string }>(a2, 'player:reconnect', { pin, joinToken: joined.joinToken })
+        expect(back.error).toBeUndefined()
+        expect(back.playerId).toBeDefined()
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("les reconnexions refusées ne consomment pas le budget de player:join", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-budget-stale@example.com')
+        clients.push(hostSocket)
+        const x = await connectClient(url)
+        clients.push(x)
+        // Onglets périmés d'une classe entière (partie évincée, jeton d'une autre partie).
+        for (let i = 0; i < 16; i++) {
+          expect((await ack<{ error?: string }>(x, 'player:reconnect', { pin: 'pin-inconnu', joinToken: 'jeton' })).error).toBe('PIN ou jeton invalide')
+          expect((await ack<{ error?: string }>(x, 'player:reconnect', { pin, joinToken: 'jeton' })).error).toBe('PIN ou jeton invalide')
+        }
+        const joined = await ack<{ playerId?: string; error?: string }>(x, 'player:join', { pin, nickname: 'x' })
+        expect(joined.error).toBeUndefined()
+        expect(joined.playerId).toBeDefined()
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('player:reconnect ne distingue plus PIN inconnu et jeton faux', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-oracle@example.com')
+        clients.push(hostSocket)
+        const x = await connectClient(url)
+        clients.push(x)
+        const unknownPin = await ack<{ playerId?: string; error?: string }>(x, 'player:reconnect', { pin: 'pin-inconnu', joinToken: 'jeton' })
+        const wrongToken = await ack<{ playerId?: string; error?: string }>(x, 'player:reconnect', { pin, joinToken: 'jeton' })
+        expect(unknownPin).toEqual({ error: 'PIN ou jeton invalide' })
+        expect(wrongToken).toEqual({ error: 'PIN ou jeton invalide' })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("un PIN faux ne libère pas le siège que la socket occupe déjà", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-keep-seat@example.com')
+        clients.push(hostSocket)
+        const x = await connectClient(url)
+        clients.push(x)
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'a' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin: 'pin-inconnu', nickname: 'b' })).error).toBe('PIN invalide')
+        expect((await ack<{ error?: string }>(x, 'player:reconnect', { pin: 'pin-inconnu', joinToken: 'jeton' })).error).toBe('PIN ou jeton invalide')
+        expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+        // La socket est toujours rattachée à son siège : sa réponse est acceptée.
+        expect((await ack<{ accepted?: boolean }>(x, 'player:answer', { answer: { optionIndex: 0 } })).accepted).toBe(true)
+      } finally {
         for (const c of clients) c.disconnect()
         await app.close()
       }

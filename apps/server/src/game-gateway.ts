@@ -10,6 +10,8 @@ import type { Auth } from '@splootlabs/auth'
 import { hasPermission, type AppConfig } from '@splootlabs/shared'
 import type { Engine, EngineQuestion, GameSession, SessionStore } from '@splootlabs/game'
 import { WORDCLOUD_MAX_WORD_LENGTH, wordKey } from '@splootlabs/quiz'
+import { clientIpFromRequest, compileTrust } from './client-ip.js'
+import { FailureBudget } from './failure-budget.js'
 
 export type GameGatewayDeps = {
   engine: Engine
@@ -124,6 +126,9 @@ type SocketData = {
   /** Fenêtre de throttle par socket (anti-DoS d'events, P2). */
   rateWindowStart?: number
   rateCount?: number
+  /** Clé du budget d'échecs de PIN (IP du client), calculée une fois à la connexion. Absente si
+   * l'IP est inconnue : la socket échappe alors au budget plutôt que de partager une clé commune. */
+  pinFailureKey?: string
 }
 
 /** Throttle par socket (P2) : Socket.IO court-circuite le rate-limit HTTP (serveur brut), donc
@@ -132,6 +137,19 @@ type SocketData = {
  * légitime reste très en-dessous, un flood (milliers/s) est coupé net. */
 const SOCKET_RATE_WINDOW_MS = 10_000
 const SOCKET_RATE_MAX = 240
+
+/** Budget d'échecs de PIN par IP (audit) : le throttle par socket ne suffit pas, il suffit
+ * d'ouvrir d'autres sockets pour deviner des PIN sans limite. Seuls les échecs de `player:join`
+ * comptent (PIN inconnu, session introuvable) : une classe derrière une seule IP publique peut
+ * se tromper de PIN plusieurs fois sans bloquer la salle. `player:reconnect` n'y est pas soumis
+ * (voir son handler). */
+const PIN_FAILURE_MAX = 30
+const PIN_FAILURE_WINDOW_MS = 5 * 60_000
+/** Refus de `player:join` quand le budget d'échecs de PIN est épuisé. */
+const PIN_BLOCKED_MESSAGE = 'trop de tentatives, réessayez dans quelques minutes'
+/** Réponse unique de `player:reconnect` à tout échec de PIN ou de jeton : distinguer un PIN
+ * inconnu d'un jeton faux révélait quels PIN sont en cours de partie. */
+const RECONNECT_INVALID_MESSAGE = 'PIN ou jeton invalide'
 
 function roomName(sessionId: string): string {
   return `session:${sessionId}`
@@ -186,6 +204,10 @@ function distinctSources(rows: Array<{ source: ContentSource | null }>): Content
   return [...byKey.values()]
 }
 
+/** Refus d'une commande hôte quand l'autorité n'est plus valide (session Better Auth absente ou
+ * expirée, utilisateur qui n'est plus l'hôte, ou retiré de l'espace). */
+const HOST_REVOKED_MESSAGE = "votre session a expiré ou vous n'êtes plus membre de cet espace"
+
 function playersPayload(session: GameSession): Array<{ id: string; nickname: string; score: number; connected: boolean }> {
   return Object.values(session.players).map((p) => ({
     id: p.id,
@@ -227,6 +249,21 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   // player:reconnect — sans cette Map, le `disconnect` tardif de l'ANCIEN socket écraserait
   // `connected:false` sur un joueur pourtant déjà reconnecté.
   const activeSocketIdByPlayerId = new Map<string, string>()
+  // Budget d'échecs de PIN, partagé par toutes les sockets d'une même IP (voir PIN_FAILURE_MAX).
+  const pinFailures = new FailureBudget({ max: PIN_FAILURE_MAX, windowMs: PIN_FAILURE_WINDOW_MS })
+  const trustProxy = compileTrust(config.trustedProxies)
+
+  /** Refuse la tentative si l'IP de la socket a épuisé son budget d'échecs de PIN. */
+  function assertPinBudget(socket: Socket): void {
+    const key = (socket.data as SocketData).pinFailureKey
+    if (key !== undefined && pinFailures.isBlocked(key)) throw new Error(PIN_BLOCKED_MESSAGE)
+  }
+
+  /** Compte un échec de PIN de `player:join` pour l'IP de la socket. */
+  function recordPinFailure(socket: Socket): void {
+    const key = (socket.data as SocketData).pinFailureKey
+    if (key !== undefined) pinFailures.recordFailure(key)
+  }
 
   /** Annule le minuteur de fin de lecture planifié (voir `SessionMeta.readingTimeout`), s'il y en
    * a un en attente — sûr à appeler inconditionnellement (no-op si `null`). Appelé au tout début
@@ -582,12 +619,29 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     return { session }
   }
 
-  function requireHost(socket: Socket): { sessionId: string; meta: SessionMeta } {
+  /** Exige que `userId` soit encore membre de l'espace `tenantId`. Partagée par `requireLiveHost`
+   * et `host:reconnect` : un membre retiré de l'espace perd le contrôle de ses parties en cours. */
+  async function assertHostMembership(userId: string, tenantId: string): Promise<void> {
+    const role = await getMembershipRole(systemDb, userId, tenantId)
+    if (!role) throw new Error(HOST_REVOKED_MESSAGE)
+  }
+
+  /** Garde de toutes les commandes hôte. Le rôle posé sur `socket.data` ne suffit pas : la session
+   * Better Auth du handshake est relue à chaque action (un sign-out ou une expiration retire la
+   * main), elle doit appartenir à l'hôte de la partie, qui doit encore être membre de l'espace.
+   * Pas de cache : les événements d'hôte sont rares (quelques-uns par minute). */
+  async function requireLiveHost(socket: Socket): Promise<{ sessionId: string; meta: SessionMeta }> {
     const data = socket.data as SocketData
     if (data.role !== 'host' || !data.sessionId) throw new Error('action réservée à l\'hôte de la session')
-    const meta = sessionMetaByEngineId.get(data.sessionId)
+    const sessionId = data.sessionId
+    const meta = sessionMetaByEngineId.get(sessionId)
     if (!meta) throw new Error('session introuvable')
-    return { sessionId: data.sessionId, meta }
+    const authSession = await auth.api.getSession({ headers: fromNodeHeaders(socket.handshake.headers) })
+    if (!authSession?.user) throw new Error(HOST_REVOKED_MESSAGE)
+    const session = await engine.getSession(sessionId)
+    if (session.hostId !== authSession.user.id) throw new Error(HOST_REVOKED_MESSAGE)
+    await assertHostMembership(authSession.user.id, meta.tenantId)
+    return { sessionId, meta }
   }
 
   /** Écrit les answer_record d'UNE manche donnée (`idx`), sans garde `revealedRounds`. Idempotent
@@ -733,7 +787,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   async function doReveal(socket: Socket, ack?: (res: unknown) => void): Promise<void> {
     const reply = typeof ack === 'function' ? ack : () => {}
     try {
-      const { sessionId, meta } = requireHost(socket)
+      const { sessionId, meta } = await requireLiveHost(socket)
       await doRevealBySession(sessionId, meta)
       reply({ ok: true })
     } catch (e) {
@@ -755,7 +809,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   async function doSkip(socket: Socket, ack?: (res: unknown) => void): Promise<void> {
     const reply = typeof ack === 'function' ? ack : () => {}
     try {
-      const { sessionId, meta } = requireHost(socket)
+      const { sessionId, meta } = await requireLiveHost(socket)
       const current = await engine.getSession(sessionId)
       if (current.phase === 'lobby') {
         throw new Error('host:skip : aucune question active (session encore en lobby)')
@@ -859,6 +913,36 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     io.to(roomName(sessionId)).emit('question:show', view)
     emitTimer(sessionId, session)
     scheduleQuestionTimeout(sessionId, meta, session) // P1-7 : idem après la phase de lecture
+  }
+
+  /** Libère le siège joueur que porte déjà `socket` (audit : une socket anonyme pouvait occuper
+   * plusieurs sièges, et seul le dernier passait hors ligne au `disconnect` ; les autres restaient
+   * `connected: true` et bloquaient l'auto-révélation). Appelée avant d'attribuer un nouveau siège
+   * par `player:join` ou `player:reconnect`. La partie synchrone (rattachement de la socket, socket
+   * active du joueur) s'exécute avant tout `await`, si bien qu'un appel non attendu suffit à
+   * détacher la socket. Le joueur n'est marqué hors ligne que si cette socket est encore sa socket
+   * active : une reconnexion sur une autre socket garde la main. Il reste dans la partie (score et
+   * réponses conservés), récupérable par `player:reconnect`. */
+  async function releasePlayerSeat(socket: Socket): Promise<void> {
+    const data = socket.data as SocketData
+    if (data.role !== 'player' || !data.sessionId || !data.playerId) return
+    const { sessionId, playerId } = data
+    data.role = undefined
+    data.sessionId = undefined
+    data.playerId = undefined
+    const wasActive = activeSocketIdByPlayerId.get(playerId) === socket.id
+    if (wasActive) activeSocketIdByPlayerId.delete(playerId)
+    await socket.leave(roomName(sessionId))
+    if (wasActive) await engine.setPlayerConnected(sessionId, playerId, false).catch(() => {})
+    scheduleLobbyBroadcast(sessionId)
+  }
+
+  /** Refuse un siège joueur à une socket déjà hôte ou écran. */
+  function assertNotHostOrScreen(socket: Socket): void {
+    const role = (socket.data as SocketData).role
+    if (role === 'host' || role === 'screen') {
+      throw new Error('cette connexion est déjà utilisée par un hôte ou un écran')
+    }
   }
 
   /** Rejoue la question en cours à UN SEUL socket qui vient de rejoindre/rafraîchir EN PLEINE
@@ -1051,6 +1135,12 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   }
 
   io.on('connection', (socket: Socket) => {
+    // IP du client, vue à travers les seuls proxys de confiance (comme `request.ip` côté HTTP).
+    // `clientIpFromRequest` peut ne rien renvoyer si la socket TCP n'a plus d'adresse : repli sur
+    // l'adresse de la poignée de main, et sans adresse du tout, pas de budget pour cette socket.
+    const clientIp: string | undefined = clientIpFromRequest(socket.request, trustProxy)
+    ;(socket.data as SocketData).pinFailureKey = clientIp || socket.handshake.address || undefined
+
     // Throttle par socket (P2, anti-DoS) : middleware exécuté avant CHAQUE handler d'event.
     // Au-delà de SOCKET_RATE_MAX events par fenêtre, l'event est rejeté (le handler n'est pas
     // appelé). `Date.now()` ici (couche passerelle, pas le moteur pur) est acceptable.
@@ -1099,7 +1189,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     socket.on('host:relaunch', async (payload: { quizId?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId: oldId } = requireHost(socket)
+        const { sessionId: oldId } = await requireLiveHost(socket)
         const quizId = payload?.quizId
         if (typeof quizId !== 'string' || !quizId) throw new Error('quizId requis')
 
@@ -1191,6 +1281,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (!dbSession || dbSession.hostId !== authSession.user.id) {
           throw new Error("cet utilisateur n'est pas l'hôte de cette session")
         }
+        // Un hôte retiré de l'espace ne reprend pas la main sur ses parties en cours.
+        await assertHostMembership(authSession.user.id, meta.tenantId)
 
         const data = socket.data as SocketData
         data.role = 'host'
@@ -1223,7 +1315,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     socket.on('host:start', async (_payload: unknown, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId, meta } = requireHost(socket)
+        const { sessionId, meta } = await requireLiveHost(socket)
         if (!meta.statusActiveSet) {
           await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
             setSessionStatus(scope.db, meta.dbSessionId, 'active'))
@@ -1249,7 +1341,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     socket.on('host:reveal', async (_payload: unknown, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId } = requireHost(socket)
+        const { sessionId } = await requireLiveHost(socket)
         const current = await engine.getSession(sessionId)
         if (current.phase === 'lobby') {
           throw new Error('host:reveal : aucune question active (session encore en lobby)')
@@ -1269,7 +1361,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     socket.on('host:next', async (_payload: unknown, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId, meta } = requireHost(socket)
+        const { sessionId, meta } = await requireLiveHost(socket)
         // Geste manuel « Suivant » : même corps que l'avance automatique (`doAdvance`), qui gère
         // l'annulation de tous les minuteurs, la révélation de filet de sécurité d'une manche
         // encore en phase 'question' (host:next anticipé, sans reveal préalable), puis le routage
@@ -1282,14 +1374,14 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     })
 
     // Enchaînement automatique des étapes (demande produit) : l'hôte active/désactive le mode et
-    // règle le délai de pause sur le classement. Réservé à l'hôte (`requireHost`). Activer pendant
+    // règle le délai de pause sur le classement. Réservé à l'hôte (`requireLiveHost`). Activer pendant
     // une étape classement en cours planifie l'avance immédiatement ; désactiver annule toute
     // avance planifiée et notifie les clients d'effacer leur compte à rebours (`auto:advance`
     // `{ nextAt: null }`).
     socket.on('host:setAuto', async (payload: { enabled?: unknown; delaySeconds?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId, meta } = requireHost(socket)
+        const { sessionId, meta } = await requireLiveHost(socket)
         if (typeof payload?.enabled === 'boolean') meta.autoAdvance = payload.enabled
         if (typeof payload?.delaySeconds === 'number' && Number.isFinite(payload.delaySeconds)) {
           const clamped = Math.min(Math.max(payload.delaySeconds, MIN_AUTO_ADVANCE_DELAY_S), MAX_AUTO_ADVANCE_DELAY_S)
@@ -1315,7 +1407,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     socket.on('host:wordcloudRemove', async (payload: { word?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId, meta } = requireHost(socket)
+        const { sessionId, meta } = await requireLiveHost(socket)
         const word = payload?.word
         if (typeof word !== 'string' || !word.trim()) throw new Error('mot requis')
         if (word.trim().length > WORDCLOUD_MAX_WORD_LENGTH) throw new Error('mot trop long')
@@ -1340,11 +1432,22 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         const nickname = typeof payload?.nickname === 'string' ? payload.nickname.trim() : ''
         if (!nickname) throw new Error('nickname requis')
         if (nickname.length > 32) throw new Error('nickname trop long (32 caractères max)')
+        assertNotHostOrScreen(socket)
+        assertPinBudget(socket)
 
         const sessionId = pinToSessionId.get(pin)
-        if (!sessionId) throw new Error('PIN invalide')
+        if (!sessionId) {
+          recordPinFailure(socket)
+          throw new Error('PIN invalide')
+        }
         const meta = sessionMetaByEngineId.get(sessionId)
-        if (!meta) throw new Error('session introuvable')
+        if (!meta) {
+          recordPinFailure(socket)
+          throw new Error('session introuvable')
+        }
+        // Le siège courant n'est libéré qu'une fois le PIN résolu : un PIN faux ou bloqué laisse
+        // le joueur à sa place.
+        await releasePlayerSeat(socket)
 
         // Plafond : place réservée de façon synchrone (aucun `await` entre lecture et incrément),
         // rendue si le joueur n'a pas pu être ajouté au moteur. Une fois ajouté, il l'occupe même
@@ -1359,6 +1462,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
             addSessionPlayer(scope.db, meta.dbSessionId, { nickname, joinToken: player.joinToken }))
           meta.playerDbIds.set(player.id, dbPlayer.id)
 
+          // Un player:join concurrent sur la même socket a pu prendre un siège pendant les `await` :
+          // on le libère avant d'attribuer celui-ci (détachement synchrone, voir releasePlayerSeat).
+          void releasePlayerSeat(socket)
           const data = socket.data as SocketData
           data.role = 'player'
           data.sessionId = sessionId
@@ -1443,15 +1549,29 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         const joinToken = payload?.joinToken
         if (typeof pin !== 'string' || !pin) throw new Error('pin requis')
         if (typeof joinToken !== 'string' || !joinToken) throw new Error('joinToken requis')
-
+        assertNotHostOrScreen(socket)
+        // Pas de budget d'échecs de PIN ici, volontairement. La réponse uniforme ci-dessous retire
+        // déjà l'oracle d'existence du PIN, et le joinToken est un secret impossible à deviner :
+        // le budget n'apporterait rien. Il nuirait en revanche aux joueurs légitimes : PlayerLive
+        // traite toute erreur de reconnexion comme un jeton invalide et efface le jeton (le joueur
+        // perd sa place et son score), et les onglets périmés d'une classe derrière un NAT (partie
+        // évincée après le podium) épuiseraient le budget commun, bloquant le player:join suivant.
         const sessionId = pinToSessionId.get(pin)
-        if (!sessionId) throw new Error('PIN invalide')
-        if (!sessionMetaByEngineId.has(sessionId)) throw new Error('session introuvable')
+        if (!sessionId || !sessionMetaByEngineId.has(sessionId)) throw new Error(RECONNECT_INVALID_MESSAGE)
+        // Siège courant libéré seulement une fois le PIN résolu, comme dans player:join.
+        await releasePlayerSeat(socket)
 
         const result = await engine.reconnect(sessionId, joinToken)
-        if (!result) throw new Error('joinToken invalide')
+        if (!result) throw new Error(RECONNECT_INVALID_MESSAGE)
         const { session, player } = result
 
+        // Même garde que player:join contre une attribution concurrente sur la même socket. Pour
+        // une reconnexion séquentielle au même joueur, la libération précédente l'a déjà passé hors
+        // ligne et vidé `socket.data`, puis `engine.reconnect` l'a remis en ligne : cet appel ne
+        // fait alors rien. Le test d'identité ne sert qu'à deux `player:reconnect` concurrents du
+        // même joueur, où la libération repasserait hors ligne le joueur que l'autre vient de
+        // remettre en ligne.
+        if ((socket.data as SocketData).playerId !== player.id) void releasePlayerSeat(socket)
         const data = socket.data as SocketData
         data.role = 'player'
         data.sessionId = sessionId
@@ -1500,10 +1620,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     })
 
     // Grand écran : token d'affichage à usage unique, obtenu par l'hôte via host:createScreenToken.
-    socket.on('host:createScreenToken', (_payload: unknown, ack?: (res: unknown) => void) => {
+    socket.on('host:createScreenToken', async (_payload: unknown, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
-        const { sessionId } = requireHost(socket)
+        const { sessionId } = await requireLiveHost(socket)
         const displayToken = crypto.randomUUID()
         screenTokenToSessionId.set(displayToken, sessionId)
         reply({ displayToken })

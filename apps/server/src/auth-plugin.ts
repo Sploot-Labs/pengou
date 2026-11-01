@@ -23,6 +23,13 @@ export async function registerAuth(app: FastifyInstance, auth: Auth): Promise<vo
     })
 
     instance.all('/api/auth/*', async (request, reply) => {
+      // Constat d'audit `packages/auth/src/auth.ts:betterAuth-rateLimit-untrusted-client-ip` :
+      // le limiteur de Better Auth indexe ses compteurs sur X-Forwarded-For, que le client
+      // choisit librement (changer l'en-tête remet le compteur à zéro ; l'omettre range tout le
+      // monde dans un compteur commun). On le remplace par `request.ip`, que Fastify ne déduit
+      // de l'en-tête que derrière un proxy de TRUSTED_PROXIES. Better Auth accepte une IP
+      // unique, y compris IPv6 ou IPv4 mappée (`::ffff:a.b.c.d`, ramenée à `a.b.c.d`).
+      request.raw.headers['x-forwarded-for'] = request.ip
       await authHandler(request.raw, reply.raw)
     })
   })
