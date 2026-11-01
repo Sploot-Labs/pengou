@@ -10,6 +10,8 @@ import type { Auth } from '@splootlabs/auth'
 import { hasPermission, type AppConfig } from '@splootlabs/shared'
 import type { Engine, EngineQuestion, GameSession, SessionStore } from '@splootlabs/game'
 import { WORDCLOUD_MAX_WORD_LENGTH, wordKey } from '@splootlabs/quiz'
+import { clientIpFromRequest, compileTrust } from './client-ip.js'
+import { FailureBudget } from './failure-budget.js'
 
 export type GameGatewayDeps = {
   engine: Engine
@@ -124,6 +126,9 @@ type SocketData = {
   /** Fenêtre de throttle par socket (anti-DoS d'events, P2). */
   rateWindowStart?: number
   rateCount?: number
+  /** Clé du budget d'échecs de PIN (IP du client), calculée une fois à la connexion. Absente si
+   * l'IP est inconnue : la socket échappe alors au budget plutôt que de partager une clé commune. */
+  pinFailureKey?: string
 }
 
 /** Throttle par socket (P2) : Socket.IO court-circuite le rate-limit HTTP (serveur brut), donc
@@ -132,6 +137,18 @@ type SocketData = {
  * légitime reste très en-dessous, un flood (milliers/s) est coupé net. */
 const SOCKET_RATE_WINDOW_MS = 10_000
 const SOCKET_RATE_MAX = 240
+
+/** Budget d'échecs de PIN par IP (audit) : le throttle par socket ne suffit pas, il suffit
+ * d'ouvrir d'autres sockets pour deviner des PIN sans limite. Seuls les échecs comptent (PIN
+ * inconnu, session introuvable, jeton refusé) : une classe derrière une seule IP publique peut
+ * se tromper de PIN plusieurs fois sans bloquer la salle. */
+const PIN_FAILURE_MAX = 30
+const PIN_FAILURE_WINDOW_MS = 5 * 60_000
+/** Refus de `player:join`/`player:reconnect` quand le budget d'échecs de PIN est épuisé. */
+const PIN_BLOCKED_MESSAGE = 'trop de tentatives, réessayez dans quelques minutes'
+/** Réponse unique de `player:reconnect` à tout échec de PIN ou de jeton : distinguer un PIN
+ * inconnu d'un jeton faux révélait quels PIN sont en cours de partie. */
+const RECONNECT_INVALID_MESSAGE = 'PIN ou jeton invalide'
 
 function roomName(sessionId: string): string {
   return `session:${sessionId}`
@@ -231,6 +248,21 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   // player:reconnect — sans cette Map, le `disconnect` tardif de l'ANCIEN socket écraserait
   // `connected:false` sur un joueur pourtant déjà reconnecté.
   const activeSocketIdByPlayerId = new Map<string, string>()
+  // Budget d'échecs de PIN, partagé par toutes les sockets d'une même IP (voir PIN_FAILURE_MAX).
+  const pinFailures = new FailureBudget({ max: PIN_FAILURE_MAX, windowMs: PIN_FAILURE_WINDOW_MS })
+  const trustProxy = compileTrust(config.trustedProxies)
+
+  /** Refuse la tentative si l'IP de la socket a épuisé son budget d'échecs de PIN. */
+  function assertPinBudget(socket: Socket): void {
+    const key = (socket.data as SocketData).pinFailureKey
+    if (key !== undefined && pinFailures.isBlocked(key)) throw new Error(PIN_BLOCKED_MESSAGE)
+  }
+
+  /** Compte un échec de PIN ou de jeton pour l'IP de la socket. */
+  function recordPinFailure(socket: Socket): void {
+    const key = (socket.data as SocketData).pinFailureKey
+    if (key !== undefined) pinFailures.recordFailure(key)
+  }
 
   /** Annule le minuteur de fin de lecture planifié (voir `SessionMeta.readingTimeout`), s'il y en
    * a un en attente — sûr à appeler inconditionnellement (no-op si `null`). Appelé au tout début
@@ -1102,6 +1134,12 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   }
 
   io.on('connection', (socket: Socket) => {
+    // IP du client, vue à travers les seuls proxys de confiance (comme `request.ip` côté HTTP).
+    // `clientIpFromRequest` peut ne rien renvoyer si la socket TCP n'a plus d'adresse : repli sur
+    // l'adresse de la poignée de main, et sans adresse du tout, pas de budget pour cette socket.
+    const clientIp: string | undefined = clientIpFromRequest(socket.request, trustProxy)
+    ;(socket.data as SocketData).pinFailureKey = clientIp || socket.handshake.address || undefined
+
     // Throttle par socket (P2, anti-DoS) : middleware exécuté avant CHAQUE handler d'event.
     // Au-delà de SOCKET_RATE_MAX events par fenêtre, l'event est rejeté (le handler n'est pas
     // appelé). `Date.now()` ici (couche passerelle, pas le moteur pur) est acceptable.
@@ -1394,12 +1432,21 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (!nickname) throw new Error('nickname requis')
         if (nickname.length > 32) throw new Error('nickname trop long (32 caractères max)')
         assertNotHostOrScreen(socket)
-        await releasePlayerSeat(socket)
+        assertPinBudget(socket)
 
         const sessionId = pinToSessionId.get(pin)
-        if (!sessionId) throw new Error('PIN invalide')
+        if (!sessionId) {
+          recordPinFailure(socket)
+          throw new Error('PIN invalide')
+        }
         const meta = sessionMetaByEngineId.get(sessionId)
-        if (!meta) throw new Error('session introuvable')
+        if (!meta) {
+          recordPinFailure(socket)
+          throw new Error('session introuvable')
+        }
+        // Le siège courant n'est libéré qu'une fois le PIN résolu : un PIN faux ou bloqué laisse
+        // le joueur à sa place.
+        await releasePlayerSeat(socket)
 
         // Plafond : place réservée de façon synchrone (aucun `await` entre lecture et incrément),
         // rendue si le joueur n'a pas pu être ajouté au moteur. Une fois ajouté, il l'occupe même
@@ -1502,18 +1549,26 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (typeof pin !== 'string' || !pin) throw new Error('pin requis')
         if (typeof joinToken !== 'string' || !joinToken) throw new Error('joinToken requis')
         assertNotHostOrScreen(socket)
+        assertPinBudget(socket)
+
+        // Même réponse pour un PIN inconnu, une session introuvable et un jeton refusé.
+        const sessionId = pinToSessionId.get(pin)
+        if (!sessionId || !sessionMetaByEngineId.has(sessionId)) {
+          recordPinFailure(socket)
+          throw new Error(RECONNECT_INVALID_MESSAGE)
+        }
+        // Siège courant libéré seulement une fois le PIN résolu, comme dans player:join.
         await releasePlayerSeat(socket)
 
-        const sessionId = pinToSessionId.get(pin)
-        if (!sessionId) throw new Error('PIN invalide')
-        if (!sessionMetaByEngineId.has(sessionId)) throw new Error('session introuvable')
-
         const result = await engine.reconnect(sessionId, joinToken)
-        if (!result) throw new Error('joinToken invalide')
+        if (!result) {
+          recordPinFailure(socket)
+          throw new Error(RECONNECT_INVALID_MESSAGE)
+        }
         const { session, player } = result
 
         // Même garde que player:join contre une attribution concurrente sur la même socket. Pour
-        // une reconnexion séquentielle au même joueur, la libération de tête l'a déjà passé hors
+        // une reconnexion séquentielle au même joueur, la libération précédente l'a déjà passé hors
         // ligne et vidé `socket.data`, puis `engine.reconnect` l'a remis en ligne : cet appel ne
         // fait alors rien. Le test d'identité ne sert qu'à deux `player:reconnect` concurrents du
         // même joueur, où la libération repasserait hors ligne le joueur que l'autre vient de

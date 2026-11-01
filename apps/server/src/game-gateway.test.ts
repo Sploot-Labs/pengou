@@ -3048,4 +3048,72 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       }
     }, 20_000)
   })
+
+  describe("budget d'échecs de PIN par IP", () => {
+    it("le budget d'échecs de PIN est partagé entre les sockets d'une même IP", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-budget@example.com')
+        clients.push(hostSocket)
+        const x = await connectClient(url)
+        const y = await connectClient(url)
+        clients.push(x, y)
+        // 30 échecs répartis sur deux sockets, chacune très en dessous du throttle par socket.
+        for (let i = 0; i < 15; i++) {
+          expect((await ack<{ error?: string }>(x, 'player:join', { pin: 'pin-inconnu', nickname: 'x' })).error).toBe('PIN invalide')
+          expect((await ack<{ error?: string }>(y, 'player:join', { pin: 'pin-inconnu', nickname: 'y' })).error).toBe('PIN invalide')
+        }
+        // Troisième socket, même IP, BON PIN : le budget est épuisé.
+        const z = await connectClient(url)
+        clients.push(z)
+        const joined = await ack<{ playerId?: string; error?: string }>(z, 'player:join', { pin, nickname: 'z' })
+        expect(joined.playerId).toBeUndefined()
+        expect(joined.error).toBe('trop de tentatives, réessayez dans quelques minutes')
+        const back = await ack<{ playerId?: string; error?: string }>(z, 'player:reconnect', { pin, joinToken: 'jeton' })
+        expect(back.error).toBe('trop de tentatives, réessayez dans quelques minutes')
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('player:reconnect ne distingue plus PIN inconnu et jeton faux', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-oracle@example.com')
+        clients.push(hostSocket)
+        const x = await connectClient(url)
+        clients.push(x)
+        const unknownPin = await ack<{ playerId?: string; error?: string }>(x, 'player:reconnect', { pin: 'pin-inconnu', joinToken: 'jeton' })
+        const wrongToken = await ack<{ playerId?: string; error?: string }>(x, 'player:reconnect', { pin, joinToken: 'jeton' })
+        expect(unknownPin).toEqual({ error: 'PIN ou jeton invalide' })
+        expect(wrongToken).toEqual({ error: 'PIN ou jeton invalide' })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("un PIN faux ne libère pas le siège que la socket occupe déjà", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-keep-seat@example.com')
+        clients.push(hostSocket)
+        const x = await connectClient(url)
+        clients.push(x)
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'a' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin: 'pin-inconnu', nickname: 'b' })).error).toBe('PIN invalide')
+        expect((await ack<{ error?: string }>(x, 'player:reconnect', { pin: 'pin-inconnu', joinToken: 'jeton' })).error).toBe('PIN ou jeton invalide')
+        expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+        // La socket est toujours rattachée à son siège : sa réponse est acceptée.
+        expect((await ack<{ accepted?: boolean }>(x, 'player:answer', { answer: { optionIndex: 0 } })).accepted).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+  })
 })
