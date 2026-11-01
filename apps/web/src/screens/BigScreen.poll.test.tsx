@@ -130,9 +130,11 @@ describe('BigScreen, sondage', () => {
     expect(screen.getByText('Café')).toBeInTheDocument()
     expect(screen.getByText('Thé')).toBeInTheDocument()
     expect(screen.getByText('Chocolat')).toBeInTheDocument()
-    expect(screen.getByText('67 %')).toBeInTheDocument()
-    expect(screen.getByText('33 %')).toBeInTheDocument()
-    expect(screen.getByText('100 %')).toBeInTheDocument()
+    // Le normaliseur de Testing Library ramène l'espace insécable à une espace : on vérifie le
+    // texte brut pour garantir l'insécable avant « % ».
+    expect(screen.getByText('67 %').textContent).toBe('67\u00a0%')
+    expect(screen.getByText('33 %').textContent).toBe('33\u00a0%')
+    expect(screen.getByText('100 %').textContent).toBe('100\u00a0%')
     expect(screen.getByText('2 votes')).toBeInTheDocument()
     expect(screen.getByText('1 vote')).toBeInTheDocument()
     expect(screen.queryByText(/bonne réponse/)).toBeNull()
@@ -172,6 +174,38 @@ describe('BigScreen, sondage', () => {
     await holdElapsed()
     expect(screen.getByText('Un mot ?')).toBeInTheDocument()
     expect(screen.queryByText('Classement')).toBeNull()
+  })
+
+  it("affiche le compte à rebours d'enchaînement automatique sous la répartition", async () => {
+    await joined()
+    await showQuestion(pollQuestion)
+    emitServerEvent('question:reveal', pollReveal())
+    await screen.findByText('2 votes')
+    expect(document.querySelector('.big-auto-countdown')).toBeNull()
+    emitServerEvent('auto:advance', { nextAt: Date.now() + 8000 })
+    const countdown = await screen.findByText(/Question suivante dans \d+ s/)
+    expect(countdown).toHaveClass('big-auto-countdown')
+    expect(screen.getByText('Café')).toBeInTheDocument()
+  })
+
+  it("un QCM n'affiche pas le compte à rebours sur la révélation, seulement sur le classement", async () => {
+    await joined()
+    await showQuestion({
+      id: 'q4',
+      type: 'mcq',
+      prompt: 'Fleuve ?',
+      timeLimit: 20,
+      payload: { options: [{ label: 'Loire' }, { label: 'Rhône' }] },
+    })
+    emitServerEvent('question:reveal', {
+      correct: { options: [{ label: 'Loire', correct: true }, { label: 'Rhône', correct: false }] },
+      distribution: {},
+    })
+    emitServerEvent('auto:advance', { nextAt: Date.now() + 8000 })
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 300))
+    })
+    expect(screen.queryByText(/Question suivante dans/)).toBeNull()
   })
 
   it('un QCM bascule toujours sur le classement (non-régression)', async () => {

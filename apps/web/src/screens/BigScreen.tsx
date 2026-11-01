@@ -569,7 +569,7 @@ function BigScreenInner() {
                 <span className="big-distribution__count">
                   {row.count} vote{row.count > 1 ? 's' : ''}
                 </span>
-                <span className="big-distribution__count">{pollPercent(row.count, poll.voters)} %</span>
+                <span className="big-distribution__count">{pollPercent(row.count, poll.voters)}{' '}%</span>
               </>
             ) : (
               <span className="big-distribution__count">{row.count} réponse{row.count > 1 ? 's' : ''}</span>
@@ -715,6 +715,14 @@ function BigScreenInner() {
               </h1>
 
               {renderDistribution()}
+
+              {/* Question non notée (sondage, nuage) : l'écran reste sur la révélation, sans étape
+                  classement, donc le compte à rebours d'enchaînement s'affiche ici. */}
+              {!isScoredType(question.type) && autoRemaining !== null && (
+                <p className="big-auto-countdown" role="status" aria-live="polite">
+                  Question suivante dans {autoRemaining} s
+                </p>
+              )}
             </>
           ) : (
             // Repli DÉFENSIF (cas devenu rare depuis le lot hardening) : le serveur rejoue
