@@ -1,0 +1,55 @@
+# Compose réservé au test de charge local. Il n'est jamais déployé.
+# Il reprend docker-compose.prod.yml avec les seules différences voulues : build local de l'image,
+# plafond de joueurs relevé (MAX_PLAYERS_PER_SESSION) pour ne pas fausser les paliers, mot de passe
+# de base jetable, et limites de ressources à la taille du VPS (variables PENGOU_CHARGE_* du .env).
+# Biais optimiste à signaler dans le rapport : chacun des deux conteneurs reçoit ici la taille
+# complète du VPS, alors qu'en production ils la partagent.
+# La limite mémoire n'est pas atteignable sur un poste de 16 Go : deux conteneurs de 15 Go ne
+# peuvent pas tenir ensemble, la limite ne se déclenche donc que si un seul des deux la consomme.
+# Lancement : docker compose -p pengou-charge -f docker-compose.charge.yml up -d --build
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    cpus: ${PENGOU_CHARGE_CPUS:?Définissez PENGOU_CHARGE_CPUS dans le .env local (nproc du VPS)}
+    mem_limit: ${PENGOU_CHARGE_MEM:?Définissez PENGOU_CHARGE_MEM dans le .env local (ex. 15360m)}
+    memswap_limit: ${PENGOU_CHARGE_MEMSWAP:?Définissez PENGOU_CHARGE_MEMSWAP dans le .env local (mémoire plus swap du VPS)}
+    environment:
+      POSTGRES_USER: pengou
+      POSTGRES_PASSWORD: pengou
+      POSTGRES_DB: pengou
+    volumes:
+      - charge-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pengou"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: .
+    restart: unless-stopped
+    cpus: ${PENGOU_CHARGE_CPUS:?Définissez PENGOU_CHARGE_CPUS dans le .env local (nproc du VPS)}
+    mem_limit: ${PENGOU_CHARGE_MEM:?Définissez PENGOU_CHARGE_MEM dans le .env local (ex. 15360m)}
+    memswap_limit: ${PENGOU_CHARGE_MEMSWAP:?Définissez PENGOU_CHARGE_MEMSWAP dans le .env local (mémoire plus swap du VPS)}
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      TENANCY_MODE: single
+      DATABASE_URL: postgres://pengou:pengou@db:5432/pengou
+      SESSION_SECRET: ${SESSION_SECRET:?Définissez SESSION_SECRET (32 caractères minimum) dans le .env local}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Définissez BETTER_AUTH_SECRET (32 caractères minimum, ex. openssl rand -base64 32) dans le .env local}
+      BETTER_AUTH_URL: http://localhost:3000
+      MAX_PLAYERS_PER_SESSION: "5000"
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      FACEBOOK_CLIENT_ID: ${FACEBOOK_CLIENT_ID:-}
+      FACEBOOK_CLIENT_SECRET: ${FACEBOOK_CLIENT_SECRET:-}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  charge-db-data:

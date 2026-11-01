@@ -4,6 +4,13 @@ import rateLimit from '@fastify/rate-limit'
 import { collectDefaultMetrics, Registry } from 'prom-client'
 import type { AppConfig } from '@splootlabs/shared'
 
+declare module 'fastify' {
+  interface FastifyContextConfig {
+    /** Route d'un fichier du SPA (posé par registerStatic) : exemptée de la limite de débit. */
+    spaAsset?: boolean
+  }
+}
+
 export type ServerDeps = {
   dbStatus?: () => 'up' | 'down'
   /** Ping DB réel pour la readiness (P1-10) — distinct du `dbStatus` (drapeau statique). */
@@ -70,11 +77,19 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
   // Sécurité (P1) : limite de débit globale par IP (anti-DoS/abus, énumération de parties).
   // L'anti-brute-force spécifique de l'authentification est géré par Better Auth (voir
   // createAuth). Socket.IO s'attache au serveur HTTP brut (hors routage Fastify) et n'est
-  // donc pas plafonné ici — le throttle des events joueur est un durcissement à part.
+  // donc pas plafonné ici ; le throttle des events joueur est un durcissement à part.
+  // Les fichiers du SPA (index.html, bundles, styles, icônes) sont exemptés : une salle de
+  // 640 joueurs derrière la même IP publique (NAT d'établissement, wifi d'événement) charge
+  // la page des centaines de fois par minute et recevrait des 429 avant même d'ouvrir le
+  // socket. L'exemption repose sur le marqueur `spaAsset` que static.ts pose sur les routes de
+  // @fastify/static : elle dépend de la route trouvée, pas de l'URL, et le client ne peut donc
+  // pas s'en servir pour contourner la limite de l'API, de /health, /ready ou /metrics. Le
+  // fallback SPA (gestionnaire 404) n'est pas une route et n'a jamais été compté.
   await app.register(rateLimit, {
     global: true,
     max: config.rateLimitMax,
     timeWindow: '1 minute',
+    allowList: (req) => req.routeOptions.config.spaAsset === true,
   })
 
   // Liveness (P1-10) : le process répond. Volontairement SANS I/O — un /health qui pinguerait la

@@ -36,6 +36,9 @@ const EnvSchema = z.object({
   GITHUB_CLIENT_SECRET: z.string().optional(),
   SESSION_INACTIVITY_TIMEOUT_MINUTES: z.coerce.number().int().positive().default(30),
   SESSION_SWEEP_INTERVAL_MINUTES: z.coerce.number().int().positive().default(5),
+  // Plafond de joueurs inscrits par partie (déconnectés compris). Valeur provisoire, à ajuster
+  // d'après les mesures de charge (`docs/charge/`).
+  MAX_PLAYERS_PER_SESSION: z.coerce.number().int().positive().default(640),
 })
 
 export type OAuthProviderCreds = {
@@ -61,6 +64,7 @@ export type AppConfig = {
   libraryExtraDir?: string
   sessionInactivityTimeoutMs: number
   sessionSweepIntervalMs: number
+  maxPlayersPerSession: number
   oauth: {
     google: OAuthProviderCreds
     facebook: OAuthProviderCreds
@@ -95,6 +99,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     libraryExtraDir: parsed.LIBRARY_EXTRA_DIR,
     sessionInactivityTimeoutMs: parsed.SESSION_INACTIVITY_TIMEOUT_MINUTES * 60_000,
     sessionSweepIntervalMs: parsed.SESSION_SWEEP_INTERVAL_MINUTES * 60_000,
+    maxPlayersPerSession: parsed.MAX_PLAYERS_PER_SESSION,
     oauth: {
       google: { clientId: parsed.GOOGLE_CLIENT_ID, clientSecret: parsed.GOOGLE_CLIENT_SECRET },
       facebook: { clientId: parsed.FACEBOOK_CLIENT_ID, clientSecret: parsed.FACEBOOK_CLIENT_SECRET },

@@ -44,6 +44,8 @@ services:
       # FACEBOOK_CLIENT_SECRET:
       # GITHUB_CLIENT_ID:
       # GITHUB_CLIENT_SECRET:
+      # Plafond de joueurs par partie (voir docs/charge).
+      MAX_PLAYERS_PER_SESSION: ${MAX_PLAYERS_PER_SESSION:-640}
     depends_on:
       db:
         condition: service_healthy

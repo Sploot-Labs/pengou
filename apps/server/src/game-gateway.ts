@@ -21,6 +21,10 @@ export type GameGatewayDeps = {
   auth: Auth
   config: AppConfig
   store: SessionStore
+  /** Fenêtre de coalescence de la diffusion du lobby, `LOBBY_BROADCAST_INTERVAL_MS` par défaut.
+   * Réglable pour les tests seulement : une fenêtre très longue garantit qu'une diffusion différée
+   * est encore en attente au moment voulu, quelle que soit la charge de la machine. */
+  lobbyBroadcastIntervalMs?: number
 }
 
 /** Métadonnées côté passerelle reliant une session moteur (mémoire) à sa persistance en base. */
@@ -73,7 +77,25 @@ type SessionMeta = {
    * (`auto:advance`) pour le compte à rebours, et rejoué au snapshot de reconnexion hôte. `null`
    * quand aucune avance n'est planifiée. */
   advanceNextAt: number | null
+  /** Places prises (joueurs inscrits + arrivées en cours), lu et incrémenté sans await entre les deux.
+   * Compteur synchrone : `player:join` réserve sa place AVANT tout `await` (sinon des arrivées
+   * concurrentes dépasseraient `config.maxPlayersPerSession`) et la rend si l'ajout moteur échoue. */
+  seatsTaken: number
+  /** Diffusion différée du lobby (voir `scheduleLobbyBroadcast`) : au plus un minuteur en attente
+   * par session. `null` quand aucune diffusion n'est planifiée. Annulé à la fin de session
+   * (`clearLobbyBroadcastTimeout`) comme les autres minuteurs. */
+  lobbyBroadcastTimeout: ReturnType<typeof setTimeout> | null
+  /** Horodatage (ms epoch) de la dernière diffusion du lobby pour cette session, 0 si aucune. */
+  lastLobbyBroadcastAt: number
 }
+
+/** Refus de `player:join` quand la partie a atteint `config.maxPlayersPerSession`. */
+export const SESSION_FULL_MESSAGE = 'La partie est complète.'
+
+/** Fenêtre de coalescence de la diffusion du lobby : au plus une diffusion `lobby:update` /
+ * `lobby:count` par session et par fenêtre. Une rafale d'arrivées ne coûte donc plus une
+ * diffusion de la liste complète par joueur (coût quadratique en nombre de joueurs). */
+const LOBBY_BROADCAST_INTERVAL_MS = 250
 
 /** Valeurs par défaut de l'enchaînement automatique à la création d'une session. */
 const DEFAULT_AUTO_ADVANCE = true
@@ -100,6 +122,12 @@ const SOCKET_RATE_MAX = 240
 
 function roomName(sessionId: string): string {
   return `session:${sessionId}`
+}
+
+/** Room des seuls hôte et grand écran : `screen:progress` n'a pas à être envoyé aux joueurs
+ * (N réponses feraient N diffusions vers N sockets, soit un coût quadratique par question). */
+function viewersRoomName(sessionId: string): string {
+  return `viewers:${sessionId}`
 }
 
 function message(err: unknown): string {
@@ -146,7 +174,7 @@ function playersPayload(session: GameSession): Array<{ id: string; nickname: str
 }
 
 export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Promise<{ sweepAbandonedSessions: () => Promise<void> }> {
-  const { engine, systemDb, appDb, auth, config, store } = deps
+  const { engine, systemDb, appDb, auth, config, store, lobbyBroadcastIntervalMs = LOBBY_BROADCAST_INTERVAL_MS } = deps
 
   // État de la passerelle : local à CET appel de registerGameGateway (donc à CETTE instance
   // `io`) — pas de Map au niveau module, pour ne pas fuiter entre plusieurs serveurs
@@ -213,6 +241,56 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       meta.advanceTimeout = null
     }
     meta.advanceNextAt = null
+  }
+
+  /** Annule la diffusion différée du lobby (`SessionMeta.lobbyBroadcastTimeout`), s'il y en a une
+   * en attente. Sûr à appeler inconditionnellement (no-op si `null`). Appelé à la fin de session
+   * pour qu'aucun minuteur ne survive à sa session. */
+  function clearLobbyBroadcastTimeout(meta: SessionMeta): void {
+    if (meta.lobbyBroadcastTimeout) {
+      clearTimeout(meta.lobbyBroadcastTimeout)
+      meta.lobbyBroadcastTimeout = null
+    }
+  }
+
+  /** Diffuse l'état courant du lobby : la liste complète (`lobby:update`) à l'hôte et au grand
+   * écran seulement (room `viewers:<id>`), le seul nombre de joueurs connectés (`lobby:count`) à
+   * toute la room. Relit la session au moment de partir, pour que la dernière diffusion d'une
+   * rafale reflète l'état final. Session disparue entre-temps (fin de partie, balayage) : rien
+   * n'est émis, aucune erreur ne remonte. */
+  async function broadcastLobby(sessionId: string, meta: SessionMeta): Promise<void> {
+    meta.lastLobbyBroadcastAt = Date.now()
+    try {
+      if (sessionMetaByEngineId.get(sessionId) !== meta) return
+      const session = await engine.peekSession(sessionId)
+      const players = playersPayload(session)
+      io.to(viewersRoomName(sessionId)).emit('lobby:update', { players })
+      io.to(roomName(sessionId)).emit('lobby:count', { count: players.filter((p) => p.connected !== false).length })
+    } catch {
+      // Session évincée entre-temps : plus personne à prévenir.
+    }
+  }
+
+  /** Diffusion coalescée du lobby (limitation en tête et en queue, par session) : si rien n'est en
+   * attente et que la dernière diffusion date d'au moins `LOBBY_BROADCAST_INTERVAL_MS`, on diffuse
+   * tout de suite (une arrivée isolée se voit sans délai) ; sinon on planifie une seule diffusion à
+   * `lastLobbyBroadcastAt + LOBBY_BROADCAST_INTERVAL_MS`, qui relira la session à l'échéance. Jamais
+   * plus d'un minuteur en attente par session : les arrivées suivantes de la rafale s'y greffent. */
+  function scheduleLobbyBroadcast(sessionId: string): void {
+    const meta = sessionMetaByEngineId.get(sessionId)
+    if (!meta || meta.lobbyBroadcastTimeout) return
+    const delay = meta.lastLobbyBroadcastAt + lobbyBroadcastIntervalMs - Date.now()
+    if (delay <= 0) {
+      void broadcastLobby(sessionId, meta)
+      return
+    }
+    const timer = setTimeout(() => {
+      meta.lobbyBroadcastTimeout = null
+      void broadcastLobby(sessionId, meta)
+    }, delay)
+    // `.unref()` : cohérent avec les autres minuteurs de session.
+    timer.unref()
+    meta.lobbyBroadcastTimeout = timer
   }
 
   /** Planifie l'avance automatique de l'étape classement vers la suite (question suivante ou
@@ -316,6 +394,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     clearReadingTimeout(meta)
     clearQuestionTimeout(meta)
     clearAdvanceTimeout(meta)
+    clearLobbyBroadcastTimeout(meta)
     for (const playerId of meta.playerDbIds.keys()) activeSocketIdByPlayerId.delete(playerId)
     for (const [token, sid] of screenTokenToSessionId) {
       if (sid === sessionId) {
@@ -410,6 +489,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       autoAdvanceDelayMs: DEFAULT_AUTO_ADVANCE_DELAY_MS,
       advanceTimeout: null,
       advanceNextAt: null,
+      seatsTaken: 0,
+      lobbyBroadcastTimeout: null,
+      lastLobbyBroadcastAt: 0,
     })
     pinToSessionId.set(session.pin, session.id)
     return { session }
@@ -809,6 +891,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           autoAdvanceDelayMs: DEFAULT_AUTO_ADVANCE_DELAY_MS,
           advanceTimeout: null,
           advanceNextAt: null,
+          // Joueurs inscrits avant le redémarrage, déconnectés compris (ils peuvent revenir).
+          seatsTaken: Object.keys(session.players).length,
+          lobbyBroadcastTimeout: null,
+          lastLobbyBroadcastAt: 0,
         }
         sessionMetaByEngineId.set(session.id, meta)
         pinToSessionId.set(session.pin, row.id)
@@ -888,6 +974,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         data.role = 'host'
         data.sessionId = session.id
         await socket.join(roomName(session.id))
+        await socket.join(viewersRoomName(session.id))
 
         reply({ sessionId: session.id, pin: session.pin })
       } catch (e) {
@@ -925,7 +1012,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
               const oldPlayer = oldSession.players[sd.playerId]
               if (!oldPlayer) continue
               try {
+                // Pas de contrôle de plafond : la partie d'origine le respectait déjà.
                 const { player } = await engine.addPlayer(neu.id, oldPlayer.nickname)
+                newMeta.seatsTaken += 1
                 const dbPlayer = await withTenantTx(appDb, { tenantId: newMeta.tenantId }, (scope) =>
                   addSessionPlayer(scope.db, newMeta.dbSessionId, { nickname: oldPlayer.nickname, joinToken: player.joinToken }))
                 newMeta.playerDbIds.set(player.id, dbPlayer.id)
@@ -998,6 +1087,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         data.role = 'host'
         data.sessionId = sessionId
         await socket.join(roomName(sessionId))
+        await socket.join(viewersRoomName(sessionId))
         emitReconnectSnapshot(socket, session)
         // Enchaînement automatique : rejoue le compte à rebours en cours à l'hôte qui reprend en
         // pleine étape classement (le minuteur serveur, lui, continue de tourner sans être touché),
@@ -1116,7 +1206,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         const pin = payload?.pin
         if (typeof pin !== 'string' || !pin) throw new Error('pin requis')
         // Pseudo borné à 32 caractères (P2) et trimmé : sans borne, un joueur pouvait diffuser
-        // un pseudo géant re-broadcasté à toute la room (lobby:update) et persisté en base.
+        // un pseudo géant rediffusé à l'hôte et à l'écran (lobby:update) et persisté en base.
         const nickname = typeof payload?.nickname === 'string' ? payload.nickname.trim() : ''
         if (!nickname) throw new Error('nickname requis')
         if (nickname.length > 32) throw new Error('nickname trop long (32 caractères max)')
@@ -1126,25 +1216,39 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         const meta = sessionMetaByEngineId.get(sessionId)
         if (!meta) throw new Error('session introuvable')
 
-        const { session, player } = await engine.addPlayer(sessionId, nickname)
-        const dbPlayer = await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
-          addSessionPlayer(scope.db, meta.dbSessionId, { nickname, joinToken: player.joinToken }))
-        meta.playerDbIds.set(player.id, dbPlayer.id)
+        // Plafond : place réservée de façon synchrone (aucun `await` entre lecture et incrément),
+        // rendue si le joueur n'a pas pu être ajouté au moteur. Une fois ajouté, il l'occupe même
+        // si la suite échoue (il existe côté moteur et pourrait revenir).
+        if (meta.seatsTaken >= config.maxPlayersPerSession) throw new Error(SESSION_FULL_MESSAGE)
+        meta.seatsTaken += 1
+        let added = false
+        try {
+          const { session, player } = await engine.addPlayer(sessionId, nickname)
+          added = true
+          const dbPlayer = await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
+            addSessionPlayer(scope.db, meta.dbSessionId, { nickname, joinToken: player.joinToken }))
+          meta.playerDbIds.set(player.id, dbPlayer.id)
 
-        const data = socket.data as SocketData
-        data.role = 'player'
-        data.sessionId = sessionId
-        data.playerId = player.id
-        activeSocketIdByPlayerId.set(player.id, socket.id)
-        await socket.join(roomName(sessionId))
+          const data = socket.data as SocketData
+          data.role = 'player'
+          data.sessionId = sessionId
+          data.playerId = player.id
+          activeSocketIdByPlayerId.set(player.id, socket.id)
+          await socket.join(roomName(sessionId))
 
-        reply({ playerId: player.id, joinToken: player.joinToken })
-        io.to(roomName(sessionId)).emit('lobby:update', { players: playersPayload(session) })
+          reply({ playerId: player.id, joinToken: player.joinToken })
+          // Liste complète à l'hôte et à l'écran, nombre seul aux joueurs, diffusion coalescée :
+          // une rafale d'arrivées ne rediffuse plus toute la liste à chaque joueur.
+          scheduleLobbyBroadcast(sessionId)
 
-        // Latecomer (Task 3, hardening) : un joueur qui rejoint EN PLEINE QUESTION (ex. PIN
-        // partagé après le lancement) ne doit pas rester aveugle jusqu'à la question suivante —
-        // on lui rejoue, à LUI SEUL, la même projection anti-triche que host:start/host:next.
-        replayCurrentQuestionTo(socket, session)
+          // Latecomer (Task 3, hardening) : un joueur qui rejoint EN PLEINE QUESTION (ex. PIN
+          // partagé après le lancement) ne doit pas rester aveugle jusqu'à la question suivante —
+          // on lui rejoue, à LUI SEUL, la même projection anti-triche que host:start/host:next.
+          replayCurrentQuestionTo(socket, session)
+        } catch (e) {
+          if (!added) meta.seatsTaken -= 1
+          throw e
+        }
       } catch (e) {
         reply({ error: message(e) })
       }
@@ -1164,7 +1268,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           // Compteur grand écran : UNIQUEMENT answered/total, jamais le contenu de la réponse
           // ni la bonne réponse (anti-triche — voir engine.progress()).
           const progress = await engine.progress(data.sessionId)
-          io.to(roomName(data.sessionId)).emit('screen:progress', progress)
+          io.to(viewersRoomName(data.sessionId)).emit('screen:progress', progress)
         }
         reply(result)
 
@@ -1176,7 +1280,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (result.accepted) {
           try {
             const meta = sessionMetaByEngineId.get(data.sessionId)
-            const session = await engine.getSession(data.sessionId)
+            const session = await engine.peekSession(data.sessionId)
             if (meta && engine.allConnectedAnswered(session) && !meta.autoRevealedRounds.has(session.currentIndex)) {
               meta.autoRevealedRounds.add(session.currentIndex)
               await doRevealBySession(data.sessionId, meta)
@@ -1228,7 +1332,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         const alreadyAnswered = Boolean(session.answers[session.currentIndex]?.[player.id])
 
         reply({ playerId: player.id, phase: session.phase, score: player.score, alreadyAnswered })
-        io.to(roomName(sessionId)).emit('lobby:update', { players: playersPayload(session) })
+        // Même diffusion coalescée que player:join : le joueur reçoit un `lobby:count` à jour,
+        // l'hôte et l'écran le voient `connected: true` dans le `lobby:update` suivant.
+        scheduleLobbyBroadcast(sessionId)
 
         // Un joueur qui reconnecte EN PLEINE QUESTION doit pouvoir la voir/y répondre tout de
         // suite, pas seulement à partir de la question suivante : on lui renvoie, à LUI SEUL
@@ -1287,6 +1393,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         data.role = 'screen'
         data.sessionId = sessionId
         await socket.join(roomName(sessionId))
+        await socket.join(viewersRoomName(sessionId))
         reply({ ok: true })
 
         // Latecomer (Task 3, hardening) : le grand écran connecté en PLEINE QUESTION doit
@@ -1321,6 +1428,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         data.role = 'screen'
         data.sessionId = sessionId
         await socket.join(roomName(sessionId))
+        await socket.join(viewersRoomName(sessionId))
         reply({ ok: true })
 
         const session = await engine.getSession(sessionId)
@@ -1333,7 +1441,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
 
   /** Balayage d'abandon (mono-instance) : bascule en base les parties inactives (autoritatif via
    * `abandonInactiveSessions`), puis nettoie l'état mémoire LOCAL de CE process pour chacune —
-   * annule le minuteur de fin de lecture (sinon révélation fantôme), retire les entrées de
+   * annule le minuteur de fin de lecture (sinon révélation fantôme) et la diffusion différée du
+   * lobby, retire les entrées de
    * correspondance, et évince le cache du store (le PIN redevient réutilisable). Best-effort :
    * une session déjà absente de la mémoire (ex. jamais pilotée par ce process) est simplement
    * ignorée par les `get`/`delete` de Map. Appelé périodiquement par la composition root. */
@@ -1341,7 +1450,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     const ids = await abandonInactiveSessions(systemDb, config.sessionInactivityTimeoutMs)
     for (const id of ids) {
       const meta = sessionMetaByEngineId.get(id)
-      if (meta) clearReadingTimeout(meta)
+      if (meta) {
+        clearReadingTimeout(meta)
+        clearLobbyBroadcastTimeout(meta)
+      }
       sessionMetaByEngineId.delete(id)
       const pin = store.evict(id)
       if (pin) pinToSessionId.delete(pin)

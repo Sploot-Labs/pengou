@@ -12,7 +12,7 @@ import { buildServer } from './app.js'
 import { registerAuth } from './auth-plugin.js'
 import { registerEditor } from './editor.js'
 import { attachRealtime } from './realtime.js'
-import { registerGameGateway } from './game-gateway.js'
+import { registerGameGateway, type GameGatewayDeps } from './game-gateway.js'
 import { PersistentSessionStore } from './persistent-store.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
@@ -42,17 +42,25 @@ async function signUp(app: FastifyInstance, email: string): Promise<string> {
     : String(rawCookies).split(';')[0]
 }
 
-type BuiltApp = { app: FastifyInstance; url: string }
+type BuiltApp = { app: FastifyInstance; url: string; sweepAbandonedSessions: () => Promise<void> }
 
 // `store` : injectable (Task 4, réhydratation) — `MemorySessionStore` par défaut (comportement
 // historique, aucune écriture DB superflue pour les tests qui n'ont pas besoin de survivre à un
 // "redémarrage") ; le test « survit à un redémarrage » ci-dessous passe explicitement un
 // `PersistentSessionStore(ctx.db)` (deux instances successives, même base — simule un process
 // neuf) pour prouver que la réhydratation fonctionne à travers un VRAI aller-retour Postgres.
+// `env` : variables d'environnement supplémentaires fusionnées dans la config (ex.
+// `MAX_PLAYERS_PER_SESSION` pour les tests de plafond).
+// `gateway` : réglages de test de la passerelle (ex. `lobbyBroadcastIntervalMs`).
 // `gatewayAppDb` : base applicative vue par la passerelle seule (les routes HTTP gardent
 // `ctx.appDb`), pour ralentir ses écritures dans un test de course.
-async function buildApp(store: SessionStore = new MemorySessionStore(), gatewayAppDb = ctx.appDb): Promise<BuiltApp> {
-  const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'single' })
+async function buildApp(
+  store: SessionStore = new MemorySessionStore(),
+  env: Record<string, string> = {},
+  gateway: Pick<GameGatewayDeps, 'lobbyBroadcastIntervalMs'> = {},
+  gatewayAppDb = ctx.appDb,
+): Promise<BuiltApp> {
+  const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'single', ...env })
   const auth = createAuth(ctx.db, {
     secret: 'test-secret-at-least-32-chars-long!!',
     baseURL: 'http://localhost:3000',
@@ -72,12 +80,12 @@ async function buildApp(store: SessionStore = new MemorySessionStore(), gatewayA
   // Réhydratation (Task 4) : `registerGameGateway` réhydrate les sessions actives à son montage
   // — `await` ici garantit qu'elle est terminée avant que le test n'interagisse avec l'app (pas
   // de course entre la reprise et les premiers `player:join`/`host:reconnect` du test).
-  await registerGameGateway(io, { engine, systemDb: ctx.db, appDb: gatewayAppDb, auth, config, store })
+  const { sweepAbandonedSessions } = await registerGameGateway(io, { engine, systemDb: ctx.db, appDb: gatewayAppDb, auth, config, store, ...gateway })
 
   await app.listen({ port: 0, host: '127.0.0.1' })
   const address = app.server.address()
   if (!address || typeof address === 'string') throw new Error("pas d'adresse")
-  return { app, url: `http://127.0.0.1:${address.port}` }
+  return { app, url: `http://127.0.0.1:${address.port}`, sweepAbandonedSessions }
 }
 
 function connectClient(url: string, extraHeaders?: Record<string, string>): Promise<ClientSocket> {
@@ -125,9 +133,13 @@ function raceNoEvent(client: ClientSocket, event: string, ms: number): Promise<b
 /** Collecte tous les événements `event` reçus par `client` (au lieu de `.once`, qui rate un
  * événement émis avant l'enregistrement du listener — race inhérente à 2 joueurs qui rejoignent
  * coup sur coup). `atLeast(n)` résout dès que le n-ième événement est arrivé. */
-function collect<T = unknown>(client: ClientSocket, event: string): { atLeast: (n: number) => Promise<T> } {
+function collect<T = unknown>(client: ClientSocket, event: string): {
+  atLeast: (n: number) => Promise<T>
+  until: (predicate: (payload: T) => boolean) => Promise<T>
+} {
   const received: T[] = []
   const waiters: Array<{ n: number; resolve: (v: T) => void }> = []
+  const matchers: Array<{ predicate: (payload: T) => boolean; resolve: (v: T) => void }> = []
   client.on(event, (payload: T) => {
     received.push(payload)
     for (const w of [...waiters]) {
@@ -136,11 +148,24 @@ function collect<T = unknown>(client: ClientSocket, event: string): { atLeast: (
         w.resolve(received[w.n - 1])
       }
     }
+    for (const m of [...matchers]) {
+      if (m.predicate(payload)) {
+        matchers.splice(matchers.indexOf(m), 1)
+        m.resolve(payload)
+      }
+    }
   })
   return {
     atLeast(n: number) {
       if (received.length >= n) return Promise.resolve(received[n - 1])
       return new Promise((resolve) => waiters.push({ n, resolve }))
+    },
+    // Premier payload (déjà reçu ou à venir) qui satisfait `predicate` : la diffusion du lobby
+    // étant coalescée, on attend un état (ex. « 3 joueurs ») plutôt qu'un nombre d'événements.
+    until(predicate: (payload: T) => boolean) {
+      const found = received.find(predicate)
+      if (found !== undefined) return Promise.resolve(found)
+      return new Promise((resolve) => matchers.push({ predicate, resolve }))
     },
   }
 }
@@ -219,7 +244,8 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       expect(join2.error).toBeUndefined()
       expect(join2.playerId).toBeTruthy()
 
-      const lobbyAfterBoth = await lobbyUpdates.atLeast(2)
+      // Diffusion coalescée : on attend l'état final (2 joueurs), pas un événement par arrivée.
+      const lobbyAfterBoth = await lobbyUpdates.until((u) => u.players.length === 2)
       expect(lobbyAfterBoth.players).toHaveLength(2)
 
       // 4. host:start → les DEUX joueurs reçoivent question:show SANS la bonne réponse
@@ -718,7 +744,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       )
       expect(join1.error).toBeUndefined()
       const { playerId, joinToken } = join1 as { playerId: string; joinToken: string }
-      await lobbyUpdates.atLeast(1) // lobby:update du player:join
+      await lobbyUpdates.until((u) => u.players.length === 1) // lobby:update du player:join
 
       await ack<{ error?: string }>(hostSocket, 'host:start', {})
 
@@ -734,7 +760,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         { pin, joinToken },
       )
       expect(reconnectAck.error).toBeUndefined()
-      await lobbyUpdates.atLeast(2) // lobby:update du player:reconnect
+      // lobby:update du player:reconnect (immédiat ou différé, mais un seul : rien n'était en
+      // attente depuis celui du player:join, déjà reçu).
+      await lobbyUpdates.atLeast(2)
 
       // MAINTENANT l'ancien socket se déconnecte (le "disconnect tardif").
       player1.disconnect()
@@ -746,7 +774,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const player2 = await connectClient(url)
       clients.push(player2)
       await ack(player2, 'player:join', { pin, nickname: 'Bob' })
-      const lobbyAfter = await lobbyUpdates.atLeast(3)
+      const lobbyAfter = await lobbyUpdates.until((u) => u.players.length === 2)
       const alice = lobbyAfter.players.find((p) => p.id === playerId)
       expect(alice).toBeDefined()
       expect(alice!.connected).toBe(true)
@@ -879,6 +907,87 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       // Anti-triche : le compteur ne contient AUCUN contenu de réponse (ni options, ni `correct`).
       expect(JSON.stringify(progress)).not.toContain('correct')
       expect(JSON.stringify(progress)).not.toContain('Paris')
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("screen:progress : réservé à l'hôte et au grand écran, les joueurs ne le reçoivent jamais", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-progress-viewers@example.com')
+      clients.push(hostSocket)
+
+      const player1 = await connectClient(url)
+      const player2 = await connectClient(url)
+      clients.push(player1, player2)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+      await ack(player2, 'player:join', { pin, nickname: 'Bob' })
+
+      const tokenAck = await ack<{ displayToken?: string }>(hostSocket, 'host:createScreenToken', {})
+      const screen = await connectClient(url)
+      clients.push(screen)
+      await ack(screen, 'screen:join', { displayToken: tokenAck.displayToken })
+
+      await ack(hostSocket, 'host:start', {})
+
+      let playerReceived = 0
+      player1.on('screen:progress', () => { playerReceived += 1 })
+      player2.on('screen:progress', () => { playerReceived += 1 })
+
+      const hostProgress = waitFor<{ answered?: number; total?: number }>(hostSocket, 'screen:progress')
+      const screenProgress = waitFor<{ answered?: number; total?: number }>(screen, 'screen:progress')
+      const answerAck = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect(answerAck.accepted).toBe(true)
+      expect(await hostProgress).toEqual({ answered: 1, total: 2 })
+      expect(await screenProgress).toEqual({ answered: 1, total: 2 })
+
+      await new Promise((r) => setTimeout(r, 200))
+      expect(playerReceived).toBe(0)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it("screen:progress : l'hôte reconnecté et le grand écran reconnecté reçoivent toujours le compteur", async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket: hostA, sessionId, pin, cookie } = await setupHostedSessionWithReading(
+        app, url, 'gateway-progress-reconnect@example.com', 0,
+      )
+      clients.push(hostA)
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      await ack(player1, 'player:join', { pin, nickname: 'Alice' })
+
+      const tokenAck = await ack<{ displayToken?: string }>(hostA, 'host:createScreenToken', {})
+      const screenA = await connectClient(url)
+      clients.push(screenA)
+      await ack(screenA, 'screen:join', { displayToken: tokenAck.displayToken })
+
+      hostA.disconnect()
+      screenA.disconnect()
+      await new Promise((r) => setTimeout(r, 150))
+
+      const hostB = await connectClient(url, { cookie })
+      clients.push(hostB)
+      const reconnectAck = await ack<{ error?: string }>(hostB, 'host:reconnect', { sessionId })
+      expect(reconnectAck.error).toBeUndefined()
+      const screenB = await connectClient(url)
+      clients.push(screenB)
+      const rejoin = await ack<{ error?: string }>(screenB, 'screen:reconnect', { sessionId, displayToken: tokenAck.displayToken })
+      expect(rejoin.error).toBeUndefined()
+
+      await ack(hostB, 'host:start', {})
+      const hostProgress = waitFor<{ answered?: number }>(hostB, 'screen:progress')
+      const screenProgress = waitFor<{ answered?: number }>(screenB, 'screen:progress')
+      await ack(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect((await hostProgress).answered).toBe(1)
+      expect((await screenProgress).answered).toBe(1)
     } finally {
       for (const c of clients) c.disconnect()
       await app.close()
@@ -1498,7 +1607,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         }
       },
     })
-    const { app, url } = await buildApp(new MemorySessionStore(), slowAppDb)
+    const { app, url } = await buildApp(new MemorySessionStore(), {}, {}, slowAppDb)
     const clients: ClientSocket[] = []
     try {
       const { hostSocket, pin, sessionId } = await setupHostedSession(app, url, `gateway-await-write-${event.slice(5)}@example.com`)
@@ -1625,6 +1734,99 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       await app.close()
     }
   }, 20_000)
+
+  describe('plafond de joueurs par partie (MAX_PLAYERS_PER_SESSION)', () => {
+    it('player:join refuse le joueur de trop avec « La partie est complète. »', async () => {
+      const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '2' })
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-cap-full@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        const bob = await connectClient(url)
+        const carl = await connectClient(url)
+        clients.push(ana, bob, carl)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })).error).toBeUndefined()
+
+        const noLobby = raceNoEvent(carl, 'lobby:update', 400)
+        const res = await ack<{ error?: string; playerId?: string }>(carl, 'player:join', { pin, nickname: 'Carl' })
+        expect(res.error).toBe('La partie est complète.')
+        expect(res.playerId).toBeUndefined()
+        expect(await noLobby).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('player:join concurrents : exactement MAX_PLAYERS_PER_SESSION places accordées', async () => {
+      const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '3' })
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, sessionId, pin } = await setupHostedSession(app, url, 'gateway-cap-race@example.com')
+        clients.push(hostSocket)
+        const players = await Promise.all(Array.from({ length: 5 }, () => connectClient(url)))
+        clients.push(...players)
+        const results = await Promise.all(players.map((c, i) =>
+          ack<{ error?: string; playerId?: string }>(c, 'player:join', { pin, nickname: `J${i}` })))
+        expect(results.filter((r) => r.playerId).length).toBe(3)
+        expect(results.filter((r) => r.error === 'La partie est complète.').length).toBe(2)
+        const rows = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.sessionId, sessionId))
+        expect(rows).toHaveLength(3)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("player:reconnect d'un joueur inscrit passe même quand la partie est pleine", async () => {
+      const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '1' })
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-cap-reconnect@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        clients.push(ana)
+        const joined = await ack<{ error?: string; joinToken?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })
+        expect(joined.error).toBeUndefined()
+        ana.disconnect()
+        await new Promise((r) => setTimeout(r, 200))
+
+        const anaBis = await connectClient(url)
+        clients.push(anaBis)
+        const reconnected = await ack<{ error?: string }>(anaBis, 'player:reconnect', { pin, joinToken: joined.joinToken })
+        expect(reconnected.error).toBeUndefined()
+
+        const bob = await connectClient(url)
+        clients.push(bob)
+        const refused = await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })
+        expect(refused.error).toBe('La partie est complète.')
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('un player:join refusé pour une autre raison ne consomme pas de place', async () => {
+      const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '1' })
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-cap-invalid@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        clients.push(ana)
+        const tooLong = await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'x'.repeat(33) })
+        expect(tooLong.error).toBeDefined()
+        expect(tooLong.error).not.toBe('La partie est complète.')
+        const ok = await ack<{ error?: string; playerId?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })
+        expect(ok.playerId).toBeDefined()
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+  })
 
   describe('host:relaunch (relance depuis le podium)', () => {
     /** Hôte + quizA (session créée dessus) + quizB (non lancé), même cookie. */
@@ -1892,6 +2094,32 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         // État serveur : seule Ana a été recréée dans la nouvelle session (Bob, déconnecté, non migré).
         const rows = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.sessionId, res.sessionId!))
         expect(rows.map((r) => r.nickname)).toEqual(['Ana'])
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('les joueurs migrés par host:relaunch occupent leurs places dans la nouvelle partie', async () => {
+      const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '1' })
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pinA, quizB } = await setupRelaunch(app, url, 'gateway-relaunch-cap@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        clients.push(ana)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin: pinA, nickname: 'Ana' })).error).toBeUndefined()
+        await toPodium(hostSocket, ana)
+
+        const relaunched = waitFor<{ nickname: string }>(ana, 'session:relaunched')
+        const res = await ack<{ pin?: string; error?: string }>(hostSocket, 'host:relaunch', { quizId: quizB })
+        expect(res.error).toBeUndefined()
+        expect((await relaunched).nickname).toBe('Ana')
+
+        const bob = await connectClient(url)
+        clients.push(bob)
+        const refused = await ack<{ error?: string }>(bob, 'player:join', { pin: res.pin, nickname: 'Bob' })
+        expect(refused.error).toBe('La partie est complète.')
       } finally {
         for (const c of clients) c.disconnect()
         await app.close()
@@ -2344,5 +2572,232 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         await app2.close()
       }
     }, 30_000)
+
+    it('après redémarrage, les joueurs inscrits occupent toujours leurs places (plafond)', async () => {
+      const capEnv = { MAX_PLAYERS_PER_SESSION: '1' }
+      const store1 = new PersistentSessionStore(ctx.db)
+      const { app: app1, url: url1 } = await buildApp(store1, capEnv)
+      const clients1: ClientSocket[] = []
+      let pin = ''
+      try {
+        const hosted = await setupHostedSession(app1, url1, 'gateway-restart-cap@example.com')
+        clients1.push(hosted.hostSocket)
+        pin = hosted.pin
+        const ana = await connectClient(url1)
+        clients1.push(ana)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+      } finally {
+        for (const c of clients1) c.disconnect()
+        await app1.close()
+      }
+
+      const store2 = new PersistentSessionStore(ctx.db)
+      const { app: app2, url: url2 } = await buildApp(store2, capEnv)
+      const clients2: ClientSocket[] = []
+      try {
+        const bob = await connectClient(url2)
+        clients2.push(bob)
+        const refused = await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })
+        expect(refused.error).toBe('La partie est complète.')
+      } finally {
+        for (const c of clients2) c.disconnect()
+        await app2.close()
+      }
+    }, 30_000)
+  })
+
+  describe('diffusion du lobby coalescée (lobby:update réservé à l\'hôte et à l\'écran, lobby:count aux joueurs)', () => {
+    const sleepMs = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+    it('un joueur ne reçoit jamais lobby:update par diffusion, mais lobby:count avec le nombre de joueurs', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-lobby-count@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        const bob = await connectClient(url)
+        clients.push(ana, bob)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+
+        const anaCounts = collect<{ count: number }>(ana, 'lobby:count')
+        const noLobby = raceNoEvent(ana, 'lobby:update', 400)
+        expect((await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })).error).toBeUndefined()
+        expect(await noLobby).toBe(true)
+        const count = await anaCounts.until((c) => c.count === 2)
+        expect(count).toEqual({ count: 2 })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it('rafale de 30 arrivées : au plus 3 lobby:update dans les 600 ms après la dernière réponse, le dernier liste les 30 joueurs', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-lobby-burst@example.com')
+        clients.push(hostSocket)
+        const players = await Promise.all(Array.from({ length: 30 }, () => connectClient(url)))
+        clients.push(...players)
+
+        const received: Array<{ at: number; players: Array<{ id: string }> }> = []
+        let resolveFinal: (at: number) => void = () => {}
+        const finalPromise = new Promise<number>((resolve) => { resolveFinal = resolve })
+        hostSocket.on('lobby:update', (u: { players: Array<{ id: string }> }) => {
+          const at = Date.now()
+          received.push({ at, players: u.players })
+          if (u.players.length === 30) resolveFinal(at)
+        })
+
+        const burstStart = Date.now()
+        const results = await Promise.all(players.map((c, i) =>
+          ack<{ error?: string }>(c, 'player:join', { pin, nickname: `Joueur ${i}` })))
+        for (const r of results) expect(r.error).toBeUndefined()
+        const lastAckAt = Date.now()
+
+        // Attente bornée (3 s) de l'état final plutôt qu'un délai fixe : une boucle d'événements
+        // ralentie ne fait pas échouer le test, seule une diffusion finale absente le fait.
+        const finalAt = await Promise.race([
+          finalPromise,
+          sleepMs(3000).then(() => { throw new Error('aucun lobby:update à 30 joueurs en 3 s') }),
+        ])
+        // Courte période de calme : rien d'autre ne doit suivre que l'état final.
+        await sleepMs(300)
+
+        // Après la dernière réponse et jusqu'à l'état final : au plus 3 diffusions.
+        const afterLastAck = received.filter((r) => r.at >= lastAckAt && r.at <= finalAt)
+        expect(afterLastAck.length).toBeLessThanOrEqual(3)
+        // Coalescence sur toute la rafale : au plus une diffusion par fenêtre de 250 ms (plus une
+        // de marge pour le décalage réseau), et non une par arrivée.
+        const total = received.filter((r) => r.at <= finalAt)
+        expect(total.length).toBeLessThanOrEqual(2 + Math.floor((finalAt - burstStart) / 250))
+        expect(total.length).toBeLessThan(30)
+        for (const r of received.filter((x) => x.at > finalAt)) expect(r.players).toHaveLength(30)
+        expect(received[received.length - 1]?.players).toHaveLength(30)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('arrivée isolée après un calme : lobby:update reçu par l\'hôte en moins de 100 ms après l\'ack', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-lobby-leading@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        const bob = await connectClient(url)
+        clients.push(ana, bob)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+        await sleepMs(400)
+
+        let receivedAt = 0
+        const lobbyPromise = new Promise<{ players: Array<{ id: string }> }>((resolve) => {
+          hostSocket.once('lobby:update', (u: { players: Array<{ id: string }> }) => {
+            receivedAt = Date.now()
+            resolve(u)
+          })
+        })
+        expect((await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })).error).toBeUndefined()
+        const ackAt = Date.now()
+        const lobby = await lobbyPromise
+        expect(lobby.players).toHaveLength(2)
+        expect(receivedAt - ackAt).toBeLessThan(100)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it('reconnexion : l\'hôte voit le joueur connected:true au lobby:update suivant, et le joueur reçoit lobby:count', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-lobby-reconnect@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        clients.push(ana)
+        const join = await ack<{ playerId?: string; joinToken?: string; error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })
+        expect(join.error).toBeUndefined()
+        const { playerId, joinToken } = join as { playerId: string; joinToken: string }
+        ana.disconnect()
+        await sleepMs(400)
+
+        const ana2 = await connectClient(url)
+        clients.push(ana2)
+        const nextLobby = waitFor<{ players: Array<{ id: string; connected: boolean }> }>(hostSocket, 'lobby:update')
+        const countPromise = waitFor<{ count: number }>(ana2, 'lobby:count')
+        const res = await ack<{ error?: string }>(ana2, 'player:reconnect', { pin, joinToken })
+        expect(res.error).toBeUndefined()
+        const lobby = await nextLobby
+        expect(lobby.players.find((p) => p.id === playerId)?.connected).toBe(true)
+        expect(await countPromise).toEqual({ count: 1 })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it('session balayée pendant une diffusion différée : minuteur annulé, rien n\'est émis, aucune erreur', async () => {
+      // Fenêtre de coalescence de plus de deux heures, valeur propre au test : l'arrivée de Bob
+      // est forcément différée et sa diffusion forcément encore en attente au balayage, quelle
+      // que soit la lenteur de la machine. Le minuteur se repère à son délai, qu'aucun autre
+      // minuteur du serveur n'atteint (le plus long, la durée de vie d'une connexion Postgres,
+      // reste sous l'heure).
+      const intervalMs = 7_777_777
+      const { app, url, sweepAbandonedSessions } = await buildApp(undefined, {}, { lobbyBroadcastIntervalMs: intervalMs })
+      const clients: ClientSocket[] = []
+      const setTimeoutSpy = vi.spyOn(globalThis, 'setTimeout')
+      const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout')
+      const unhandled: unknown[] = []
+      const onUnhandled = (reason: unknown) => { unhandled.push(reason) }
+      process.on('unhandledRejection', onUnhandled)
+      try {
+        const { hostSocket, sessionId, pin } = await setupHostedSession(app, url, 'gateway-lobby-sweep@example.com')
+        clients.push(hostSocket)
+        // Partie « inactive » pour le balayage (même procédé que `sweep-e2e.test.ts`).
+        await ctx.db.update(schema.gameSession)
+          .set({ lastActivityAt: new Date('2020-01-01T00:00:00Z') })
+          .where(eq(schema.gameSession.id, sessionId))
+
+        const ana = await connectClient(url)
+        const bob = await connectClient(url)
+        clients.push(ana, bob)
+        const hostUpdates = collect<{ players: Array<{ id: string }> }>(hostSocket, 'lobby:update')
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+        await hostUpdates.until((u) => u.players.length === 1) // diffusion immédiate (en tête)
+
+        // Arrivée suivante dans la fenêtre : diffusion différée, un seul minuteur en attente.
+        setTimeoutSpy.mockClear()
+        expect((await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })).error).toBeUndefined()
+        const lobbyTimers = setTimeoutSpy.mock.calls
+          .map((call, i) => ({ fn: call[0], delay: Number(call[1]), handle: setTimeoutSpy.mock.results[i]?.value }))
+          .filter((t) => t.delay > intervalMs - 600_000 && t.delay <= intervalMs)
+        expect(lobbyTimers).toHaveLength(1)
+        const lobbyTimer = lobbyTimers[0]!
+
+        await sweepAbandonedSessions()
+        expect(clearTimeoutSpy).toHaveBeenCalledWith(lobbyTimer.handle)
+
+        // Échéance simulée après le balayage (comme si l'annulation avait été manquée) : la
+        // diffusion relit une session disparue, n'émet rien et ne laisse échapper aucune erreur.
+        const afterSweep: string[] = []
+        hostSocket.on('lobby:update', () => afterSweep.push('lobby:update'))
+        for (const c of [hostSocket, ana, bob]) c.on('lobby:count', () => afterSweep.push('lobby:count'))
+        expect(typeof lobbyTimer.fn).toBe('function')
+        ;(lobbyTimer.fn as () => void)()
+        await sleepMs(500)
+        expect(afterSweep).toEqual([])
+        expect(unhandled).toEqual([])
+      } finally {
+        process.off('unhandledRejection', onUnhandled)
+        setTimeoutSpy.mockRestore()
+        clearTimeoutSpy.mockRestore()
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
   })
 })
