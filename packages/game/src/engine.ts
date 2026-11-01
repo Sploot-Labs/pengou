@@ -3,6 +3,11 @@ import {
   aggregateWords,
   wordKey,
   WORDCLOUD_MAX_WORDS_PER_PLAYER,
+  pollAnswerError,
+  tallyPoll,
+  isScoredType,
+  type PollAnswer,
+  type PollPayload,
   type WordcloudAnswer,
   type WordcloudAggregate,
 } from '@splootlabs/quiz'
@@ -30,6 +35,13 @@ export type SubmitAnswerResult = { accepted: boolean; reason?: string; words?: s
 export const WORDCLOUD_VIEW_LIMIT = 100
 
 export type WordcloudView = WordcloudAggregate & { questionId: string; truncated: boolean }
+
+export type PollView = {
+  questionId: string
+  multiple: boolean
+  voters: number
+  options: { label: string; votes: number }[]
+}
 
 export type RankingEntry = { playerId: string; nickname: string; score: number }
 
@@ -59,6 +71,7 @@ export type ReadingView = {
 export type QuestionResult = {
   correct: unknown
   distribution: Record<string, number>
+  poll?: PollView
 }
 
 /** Compteur de réponses pour la question courante (destiné au grand écran) — jamais de contenu
@@ -113,6 +126,12 @@ export interface Engine {
   /** Projection agrégée du nuage de mots de la question courante (mots retirés exclus, 100 mots
    * au plus). `null` si la question courante n'est pas un nuage de mots. */
   wordcloudView(session: Readonly<GameSession>): WordcloudView | null
+  /** Projection du sondage de la question courante. `null` si ce n'est pas un sondage. */
+  pollView(session: Readonly<GameSession>): PollView | null
+  /** Faux pour un sondage ou un nuage de mots. */
+  isCurrentQuestionScored(session: Readonly<GameSession>): boolean
+  /** Au moins une question notée dans le quiz. */
+  hasScoredQuestions(session: Readonly<GameSession>): boolean
   /** Retire un mot du nuage (par clé de fusion) pour la question courante. Phases question,
    * reveal et scoreboard uniquement. */
   removeWord(
@@ -288,6 +307,11 @@ export function createEngine(deps: EngineDeps): Engine {
         return { accepted: false, reason: 'réponse invalide pour ce type de question' }
       }
 
+      if (question.type === 'poll') {
+        const pollError = pollAnswerError(question.payload as PollPayload, answer as PollAnswer)
+        if (pollError !== null) return { accepted: false, reason: 'réponse invalide pour ce type de question' }
+      }
+
       // Horodatage 100% serveur : jamais de confiance dans un timing fourni par le client.
       const maxMs = question.timeLimit * 1000
       const rawTimeMs = now() - session.questionStartedAt
@@ -378,7 +402,9 @@ export function createEngine(deps: EngineDeps): Engine {
 
     allConnectedAnswered(session) {
       if (session.phase !== 'question') return false
-      if (currentQuestion(session)?.type === 'wordcloud') return false
+      const currentType = currentQuestion(session)?.type
+      if (currentType === 'wordcloud') return false
+      if (currentType === 'poll' && (currentQuestion(session)!.payload as PollPayload).multiple) return false
       const connectedPlayers = Object.values(session.players).filter((p) => p.connected)
       if (connectedPlayers.length < 1) return false
       const roundAnswers = session.answers[session.currentIndex] ?? {}
@@ -418,6 +444,7 @@ export function createEngine(deps: EngineDeps): Engine {
     questionResult(session) {
       const question = currentQuestion(session)
       if (question?.type === 'wordcloud') return { correct: null, distribution: {} }
+      if (question?.type === 'poll') return { correct: null, distribution: {}, poll: engine.pollView(session)! }
       const roundAnswers = session.answers[session.currentIndex] ?? {}
       const distribution: Record<string, number> = {}
       for (const submitted of Object.values(roundAnswers)) {
@@ -425,6 +452,31 @@ export function createEngine(deps: EngineDeps): Engine {
         distribution[key] = (distribution[key] ?? 0) + 1
       }
       return { correct: question?.payload, distribution }
+    },
+
+    pollView(session) {
+      const question = currentQuestion(session)
+      if (!question || question.type !== 'poll') return null
+      const payload = question.payload as PollPayload
+      const answers = Object.values(session.answers[session.currentIndex] ?? {}).map(
+        (submitted) => submitted.answer as PollAnswer,
+      )
+      const { votes, voters } = tallyPoll(payload.options.length, answers)
+      return {
+        questionId: question.id,
+        multiple: payload.multiple,
+        voters,
+        options: payload.options.map((o, i) => ({ label: o.label, votes: votes[i]! })),
+      }
+    },
+
+    isCurrentQuestionScored(session) {
+      const question = currentQuestion(session)
+      return question ? isScoredType(question.type) : true
+    },
+
+    hasScoredQuestions(session) {
+      return session.questions.some((q) => isScoredType(q.type))
     },
 
     wordcloudView(session) {
