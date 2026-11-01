@@ -139,12 +139,13 @@ const SOCKET_RATE_WINDOW_MS = 10_000
 const SOCKET_RATE_MAX = 240
 
 /** Budget d'échecs de PIN par IP (audit) : le throttle par socket ne suffit pas, il suffit
- * d'ouvrir d'autres sockets pour deviner des PIN sans limite. Seuls les échecs comptent (PIN
- * inconnu, session introuvable, jeton refusé) : une classe derrière une seule IP publique peut
- * se tromper de PIN plusieurs fois sans bloquer la salle. */
+ * d'ouvrir d'autres sockets pour deviner des PIN sans limite. Seuls les échecs de `player:join`
+ * comptent (PIN inconnu, session introuvable) : une classe derrière une seule IP publique peut
+ * se tromper de PIN plusieurs fois sans bloquer la salle. `player:reconnect` n'y est pas soumis
+ * (voir son handler). */
 const PIN_FAILURE_MAX = 30
 const PIN_FAILURE_WINDOW_MS = 5 * 60_000
-/** Refus de `player:join`/`player:reconnect` quand le budget d'échecs de PIN est épuisé. */
+/** Refus de `player:join` quand le budget d'échecs de PIN est épuisé. */
 const PIN_BLOCKED_MESSAGE = 'trop de tentatives, réessayez dans quelques minutes'
 /** Réponse unique de `player:reconnect` à tout échec de PIN ou de jeton : distinguer un PIN
  * inconnu d'un jeton faux révélait quels PIN sont en cours de partie. */
@@ -258,7 +259,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     if (key !== undefined && pinFailures.isBlocked(key)) throw new Error(PIN_BLOCKED_MESSAGE)
   }
 
-  /** Compte un échec de PIN ou de jeton pour l'IP de la socket. */
+  /** Compte un échec de PIN de `player:join` pour l'IP de la socket. */
   function recordPinFailure(socket: Socket): void {
     const key = (socket.data as SocketData).pinFailureKey
     if (key !== undefined) pinFailures.recordFailure(key)
@@ -1549,22 +1550,19 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (typeof pin !== 'string' || !pin) throw new Error('pin requis')
         if (typeof joinToken !== 'string' || !joinToken) throw new Error('joinToken requis')
         assertNotHostOrScreen(socket)
-        assertPinBudget(socket)
-
-        // Même réponse pour un PIN inconnu, une session introuvable et un jeton refusé.
+        // Pas de budget d'échecs de PIN ici, volontairement. La réponse uniforme ci-dessous retire
+        // déjà l'oracle d'existence du PIN, et le joinToken est un secret impossible à deviner :
+        // le budget n'apporterait rien. Il nuirait en revanche aux joueurs légitimes : PlayerLive
+        // traite toute erreur de reconnexion comme un jeton invalide et efface le jeton (le joueur
+        // perd sa place et son score), et les onglets périmés d'une classe derrière un NAT (partie
+        // évincée après le podium) épuiseraient le budget commun, bloquant le player:join suivant.
         const sessionId = pinToSessionId.get(pin)
-        if (!sessionId || !sessionMetaByEngineId.has(sessionId)) {
-          recordPinFailure(socket)
-          throw new Error(RECONNECT_INVALID_MESSAGE)
-        }
+        if (!sessionId || !sessionMetaByEngineId.has(sessionId)) throw new Error(RECONNECT_INVALID_MESSAGE)
         // Siège courant libéré seulement une fois le PIN résolu, comme dans player:join.
         await releasePlayerSeat(socket)
 
         const result = await engine.reconnect(sessionId, joinToken)
-        if (!result) {
-          recordPinFailure(socket)
-          throw new Error(RECONNECT_INVALID_MESSAGE)
-        }
+        if (!result) throw new Error(RECONNECT_INVALID_MESSAGE)
         const { session, player } = result
 
         // Même garde que player:join contre une attribution concurrente sur la même socket. Pour

@@ -3070,8 +3070,58 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         const joined = await ack<{ playerId?: string; error?: string }>(z, 'player:join', { pin, nickname: 'z' })
         expect(joined.playerId).toBeUndefined()
         expect(joined.error).toBe('trop de tentatives, réessayez dans quelques minutes')
-        const back = await ack<{ playerId?: string; error?: string }>(z, 'player:reconnect', { pin, joinToken: 'jeton' })
-        expect(back.error).toBe('trop de tentatives, réessayez dans quelques minutes')
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("une IP au budget épuisé peut encore reconnecter un joueur avec son jeton", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-budget-reconnect@example.com')
+        clients.push(hostSocket)
+        const a = await connectClient(url)
+        clients.push(a)
+        const joined = await ack<{ joinToken?: string; error?: string }>(a, 'player:join', { pin, nickname: 'a' })
+        expect(joined.error).toBeUndefined()
+        const x = await connectClient(url)
+        clients.push(x)
+        for (let i = 0; i < 30; i++) {
+          expect((await ack<{ error?: string }>(x, 'player:join', { pin: 'pin-inconnu', nickname: 'x' })).error).toBe('PIN invalide')
+        }
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'x' })).error)
+          .toBe('trop de tentatives, réessayez dans quelques minutes')
+        // Le joueur recharge la page : nouvelle socket, même IP, son jeton le ramène à sa place.
+        a.disconnect()
+        const a2 = await connectClient(url)
+        clients.push(a2)
+        const back = await ack<{ playerId?: string; error?: string }>(a2, 'player:reconnect', { pin, joinToken: joined.joinToken })
+        expect(back.error).toBeUndefined()
+        expect(back.playerId).toBeDefined()
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("les reconnexions refusées ne consomment pas le budget de player:join", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-pin-budget-stale@example.com')
+        clients.push(hostSocket)
+        const x = await connectClient(url)
+        clients.push(x)
+        // Onglets périmés d'une classe entière (partie évincée, jeton d'une autre partie).
+        for (let i = 0; i < 16; i++) {
+          expect((await ack<{ error?: string }>(x, 'player:reconnect', { pin: 'pin-inconnu', joinToken: 'jeton' })).error).toBe('PIN ou jeton invalide')
+          expect((await ack<{ error?: string }>(x, 'player:reconnect', { pin, joinToken: 'jeton' })).error).toBe('PIN ou jeton invalide')
+        }
+        const joined = await ack<{ playerId?: string; error?: string }>(x, 'player:join', { pin, nickname: 'x' })
+        expect(joined.error).toBeUndefined()
+        expect(joined.playerId).toBeDefined()
       } finally {
         for (const c of clients) c.disconnect()
         await app.close()
