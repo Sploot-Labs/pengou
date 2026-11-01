@@ -18,6 +18,10 @@ const EnvSchema = z.object({
   // Sécurité : plafond de requêtes HTTP par IP et par minute (anti-DoS/abus). Volontairement
   // haut par défaut pour ne pas gêner un usage légitime ; à abaisser selon l'exposition.
   RATE_LIMIT_MAX: z.coerce.number().int().positive().default(1000),
+  // Proxys de confiance (reverse proxy devant Pengou), séparés par des virgules : IP, CIDR ou
+  // mots-clés de proxy-addr (`loopback`, `linklocal`, `uniquelocal`). Seul un pair de cette liste
+  // peut annoncer l'IP du client par X-Forwarded-For. Vide par défaut : l'en-tête est ignoré.
+  TRUSTED_PROXIES: z.string().default(''),
   // Self-host : fermer l'inscription publique une fois le(s) compte(s) créé(s). 'true' désactive
   // le sign-up e-mail/mot de passe (les comptes existants continuent de se connecter).
   DISABLE_SIGNUP: z.enum(['true', 'false']).default('false'),
@@ -59,6 +63,8 @@ export type AppConfig = {
   authSecret?: string
   authUrl: string
   rateLimitMax: number
+  /** Proxys dont le X-Forwarded-For est cru (format proxy-addr). Vide : en-tête ignoré. */
+  trustedProxies: string[]
   disableSignup: boolean
   migrateOnBoot: boolean
   libraryExtraDir?: string
@@ -94,6 +100,9 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     authSecret: parsed.BETTER_AUTH_SECRET,
     authUrl: parsed.BETTER_AUTH_URL,
     rateLimitMax: parsed.RATE_LIMIT_MAX,
+    trustedProxies: parsed.TRUSTED_PROXIES.split(',')
+      .map((entry) => entry.trim())
+      .filter((entry) => entry.length > 0),
     disableSignup: parsed.DISABLE_SIGNUP === 'true',
     migrateOnBoot: parsed.MIGRATE_ON_BOOT === 'true',
     libraryExtraDir: parsed.LIBRARY_EXTRA_DIR,
