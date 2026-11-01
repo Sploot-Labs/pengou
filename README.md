@@ -52,6 +52,8 @@ Prérequis : Docker et Docker Compose.
 ```bash
 # Un secret de signature de session est requis (jamais committé, voir .env.example).
 export BETTER_AUTH_SECRET=$(openssl rand -base64 32)
+# Mot de passe du rôle applicatif app_role (requis en production, donc dans le conteneur).
+export APP_DB_PASSWORD=$(openssl rand -base64 24)
 
 docker compose up
 ```

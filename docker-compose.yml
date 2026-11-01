@@ -30,6 +30,8 @@ services:
       # la variable n'est pas définie dans l'environnement du shell ou un fichier `.env` local
       # (non commité — voir `.env.example`) : `openssl rand -base64 32` puis
       # `export BETTER_AUTH_SECRET=...` (ou renseignez `.env`) avant `docker compose up`.
+      # Mot de passe du rôle app_role (soumis au RLS) ; le défaut de développement est refusé en production.
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?Définissez APP_DB_PASSWORD (ex. openssl rand -base64 24) dans votre environnement ou un fichier .env avant docker compose up — voir .env.example.}
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Définissez BETTER_AUTH_SECRET (≥32 caractères, ex. openssl rand -base64 32) dans votre environnement ou un fichier .env avant docker compose up — voir .env.example.}
       # Origine publique de l'app = seule origine de confiance Better Auth (validation Origin des
       # requêtes d'auth) ET seule origine autorisée par le CORS Socket.IO. Surchargeable par
