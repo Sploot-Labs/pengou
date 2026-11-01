@@ -1512,8 +1512,12 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (!result) throw new Error('joinToken invalide')
         const { session, player } = result
 
-        // Même garde que player:join contre une attribution concurrente sur la même socket, sauf
-        // si c'est déjà ce joueur (double émission) : le libérer le repasserait hors ligne.
+        // Même garde que player:join contre une attribution concurrente sur la même socket. Pour
+        // une reconnexion séquentielle au même joueur, la libération de tête l'a déjà passé hors
+        // ligne et vidé `socket.data`, puis `engine.reconnect` l'a remis en ligne : cet appel ne
+        // fait alors rien. Le test d'identité ne sert qu'à deux `player:reconnect` concurrents du
+        // même joueur, où la libération repasserait hors ligne le joueur que l'autre vient de
+        // remettre en ligne.
         if ((socket.data as SocketData).playerId !== player.id) void releasePlayerSeat(socket)
         const data = socket.data as SocketData
         data.role = 'player'

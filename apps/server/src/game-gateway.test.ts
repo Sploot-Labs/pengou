@@ -139,7 +139,9 @@ function raceNoEvent(client: ClientSocket, event: string, ms: number): Promise<b
  * coup sur coup). `atLeast(n)` résout dès que le n-ième événement est arrivé. */
 function collect<T = unknown>(client: ClientSocket, event: string): {
   atLeast: (n: number) => Promise<T>
-  until: (predicate: (payload: T) => boolean) => Promise<T>
+  until: (predicate: (payload: T) => boolean, from?: number) => Promise<T>
+  count: () => number
+  last: () => T | undefined
 } {
   const received: T[] = []
   const waiters: Array<{ n: number; resolve: (v: T) => void }> = []
@@ -166,10 +168,18 @@ function collect<T = unknown>(client: ClientSocket, event: string): {
     },
     // Premier payload (déjà reçu ou à venir) qui satisfait `predicate` : la diffusion du lobby
     // étant coalescée, on attend un état (ex. « 3 joueurs ») plutôt qu'un nombre d'événements.
-    until(predicate: (payload: T) => boolean) {
-      const found = received.find(predicate)
+    // `from` (repère obtenu par `count()`) ignore l'historique antérieur : seul un payload reçu
+    // après ce repère peut satisfaire le prédicat.
+    until(predicate: (payload: T) => boolean, from = 0) {
+      const found = received.slice(from).find(predicate)
       if (found !== undefined) return Promise.resolve(found)
       return new Promise((resolve) => matchers.push({ predicate, resolve }))
+    },
+    count() {
+      return received.length
+    },
+    last() {
+      return received[received.length - 1]
     },
   }
 }
@@ -3001,11 +3011,22 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         expect(connectedOf(await lobby1.until((u) => connectedOf(u, 'a') === false), 'a')).toBe(false)
         await lobby2.until((u) => connectedOf(u, 'b') === true)
 
-        // player:reconnect (remontage de PlayerLive) vers la première : la place de la seconde est libérée.
+        // player:reconnect (remontage de PlayerLive) vers la première : la place de la seconde est
+        // libérée et `a` revient en ligne. Repère pris avant la reconnexion : l'historique de
+        // lobby1 contient déjà une diffusion où `a` était en ligne, qu'il ne faut pas compter.
+        const mark1 = lobby1.count()
         const back = await ack<{ playerId?: string; error?: string }>(x, 'player:reconnect', { pin: first.pin, joinToken: joinedA.joinToken })
         expect(back.error).toBeUndefined()
         expect(connectedOf(await lobby2.until((u) => connectedOf(u, 'b') === false), 'b')).toBe(false)
-        expect(connectedOf(await lobby1.until((u) => connectedOf(u, 'a') === true), 'a')).toBe(true)
+        const backOnline = await Promise.race([
+          lobby1.until((u) => connectedOf(u, 'a') === true, mark1),
+          new Promise<never>((_, reject) => setTimeout(() => reject(new Error("a n'est pas revenu en ligne en 3 s")), 3000)),
+        ])
+        expect(connectedOf(backOnline, 'a')).toBe(true)
+        // État stable : aucune diffusion ultérieure ne le repasse hors ligne.
+        await new Promise((resolve) => setTimeout(resolve, 600))
+        const latest = lobby1.last()
+        expect(latest && connectedOf(latest, 'a')).toBe(true)
       } finally {
         for (const c of clients) c.disconnect()
         await app.close()
