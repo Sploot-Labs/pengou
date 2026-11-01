@@ -14,8 +14,9 @@ interface PlayerWordcloudProps {
 
 /**
  * Saisie des idées d'une question nuage de mots : plusieurs envois successifs,
- * la liste affichée est toujours celle de l'acquittement serveur (elle survit
- * donc à une reconnexion).
+ * la liste affichée est toujours celle de l'acquittement serveur. Après un
+ * rechargement, elle se reconstruit au prochain envoi accepté (l'acquittement
+ * renvoie la liste complète).
  */
 export function PlayerWordcloud({ disabled, submit }: PlayerWordcloudProps) {
   const [value, setValue] = useState('')

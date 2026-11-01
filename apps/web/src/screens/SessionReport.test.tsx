@@ -73,7 +73,7 @@ describe('SessionReport, questions nuage de mots', () => {
       }),
     ])
     const row = within(rowOf('Vos idées ?'))
-    expect(row.getByText(/Nuage de mots, 5 participants/)).toBeTruthy()
+    expect(row.getByText(/Nuage de mots, 5 participants, 21 mots : /)).toBeTruthy()
     expect(row.getByText(/café \(6\), thé \(5\), eau \(4\), jus \(3\)/)).toBeTruthy()
     expect(row.queryByText(/lait/)).toBeNull()
     expect(row.queryByText(/aucune réponse/)).toBeNull()
@@ -87,7 +87,7 @@ describe('SessionReport, questions nuage de mots', () => {
         wordcloud: { participants: 0, totalWords: 0, words: [] },
       }),
     ])
-    expect(within(rowOf('Vide ?')).getByText(/Aucune idée proposée/)).toBeTruthy()
+    expect(within(rowOf('Vide ?')).getByText('Nuage de mots, 0 participant, 0 mot. Aucune idée proposée')).toBeTruthy()
   })
 
   it('garde le taux des autres questions et ignore le nuage pour la plus ratée', async () => {
@@ -101,6 +101,7 @@ describe('SessionReport, questions nuage de mots', () => {
         wordcloud: { participants: 1, totalWords: 1, words: [{ text: 'a', count: 1 }] },
       }),
     ])
+    expect(within(rowOf('Nuage')).getByText('Nuage de mots, 1 participant, 1 mot : a (1)')).toBeTruthy()
     expect(within(rowOf('QCM')).getByText('50 % (2/4)')).toBeTruthy()
     expect(within(rowOf('QCM')).getByText('Question la plus ratée')).toBeTruthy()
     expect(within(rowOf('Nuage')).queryByText('Question la plus ratée')).toBeNull()

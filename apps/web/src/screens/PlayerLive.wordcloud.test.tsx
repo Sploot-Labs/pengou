@@ -120,6 +120,22 @@ describe('PlayerLive nuage de mots', () => {
     expect(screen.queryByText(/Réponse enregistrée/)).toBeNull()
   })
 
+  it("la liste ne survit pas d'une question nuage à la suivante", async () => {
+    const input = await startWordcloud()
+    answerAcks.push({ accepted: true, words: ['banquise'] })
+    await send(input, 'banquise')
+    await screen.findByText('banquise')
+    emitServerEvent('question:show', {
+      id: 'q2',
+      type: 'wordcloud',
+      prompt: 'Un autre mot ?',
+      timeLimit: 30,
+      payload: {},
+    })
+    await screen.findByText('Un autre mot ?')
+    expect(screen.queryByText('banquise')).toBeNull()
+  })
+
   it('un refus s’affiche en alerte et conserve le champ', async () => {
     const input = await startWordcloud()
     answerAcks.push({ accepted: false, reason: 'mot déjà envoyé' })

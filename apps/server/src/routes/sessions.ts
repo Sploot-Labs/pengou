@@ -62,7 +62,10 @@ function buildReportCsv(report: SessionReport): string {
   for (const q of report.questions) {
     if (!q.wordcloud) continue
     rows.push([])
-    rows.push([`Nuage de mots : ${q.prompt}`])
+    const { participants, totalWords } = q.wordcloud
+    rows.push([
+      `Nuage de mots : ${q.prompt} (${participants} participant${participants > 1 ? 's' : ''}, ${totalWords} mot${totalWords > 1 ? 's' : ''})`,
+    ])
     rows.push(['Mot', 'Occurrences'])
     for (const w of q.wordcloud.words) rows.push([w.text, w.count])
   }

@@ -213,12 +213,12 @@ describe('e2e : nuage de mots en direct', () => {
       await screenShows.until(() => true)
 
       // ---- Trois envois rapides du joueur A : au plus deux diffusions, la dernière complète. ----
-      const sent: Array<{ accepted?: boolean; words?: string[] }> = []
-      for (const word of ['café', 'Soleil', 'Plage']) {
-        sent.push(await ack(playerA, 'player:answer', { answer: { word } }))
-      }
+      const sent = await Promise.all(
+        ['café', 'Soleil', 'Plage'].map((word) =>
+          ack<{ accepted?: boolean; words?: string[] }>(playerA, 'player:answer', { answer: { word } })),
+      )
       expect(sent.map((s) => s.accepted)).toEqual([true, true, true])
-      expect(sent[2].words).toEqual(['café', 'Soleil', 'Plage'])
+      expect(sent.map((s) => s.words?.length).sort()).toEqual([1, 2, 3])
 
       await screenUpdates.until((v) => v.totalWords === 3, 3000)
       // Laisse passer largement toute émission différée encore en attente.
@@ -250,6 +250,11 @@ describe('e2e : nuage de mots en direct', () => {
       expect(blank.error).toBeTruthy()
       const notString = await ack<{ ok?: boolean; error?: string }>(host, 'host:wordcloudRemove', { word: 42 })
       expect(notString.error).toBeTruthy()
+
+      const tooLong = await ack<{ ok?: boolean; error?: string }>(host, 'host:wordcloudRemove', { word: 'x'.repeat(26) })
+      expect(tooLong.error).toBeTruthy()
+      const emptyKey = await ack<{ ok?: boolean; error?: string }>(host, 'host:wordcloudRemove', { word: '́' })
+      expect(emptyKey.error).toBeTruthy()
 
       const countBeforeRemove = screenUpdates.received.length
       const removed = await ack<{ ok?: boolean; error?: string }>(host, 'host:wordcloudRemove', { word: 'CAFE' })

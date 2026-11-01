@@ -9,6 +9,7 @@ import {
 import type { Auth } from '@splootlabs/auth'
 import { hasPermission, type AppConfig } from '@splootlabs/shared'
 import type { Engine, EngineQuestion, GameSession, SessionStore } from '@splootlabs/game'
+import { WORDCLOUD_MAX_WORD_LENGTH, wordKey } from '@splootlabs/quiz'
 
 export type GameGatewayDeps = {
   engine: Engine
@@ -1296,6 +1297,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         const { sessionId, meta } = requireHost(socket)
         const word = payload?.word
         if (typeof word !== 'string' || !word.trim()) throw new Error('mot requis')
+        if (word.trim().length > WORDCLOUD_MAX_WORD_LENGTH) throw new Error('mot trop long')
+        if (wordKey(word) === '') throw new Error('mot invalide')
         const { questionId, removedKeys } = await engine.removeWord(sessionId, word)
         await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
           setWordcloudRemoved(scope.db, meta.dbSessionId, questionId, removedKeys))

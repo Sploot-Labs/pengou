@@ -906,7 +906,7 @@ export function PlayerLive() {
           )}
 
           {question.type === 'wordcloud' && (
-            <PlayerWordcloud disabled={phase === 'answered'} submit={submitWord} />
+            <PlayerWordcloud key={question.id} disabled={phase === 'answered'} submit={submitWord} />
           )}
 
           {question.type === 'text' && (

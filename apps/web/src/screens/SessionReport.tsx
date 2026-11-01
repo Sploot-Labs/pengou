@@ -64,8 +64,12 @@ function successRate(correctCount: number | null, answerCount: number): number |
 
 /** Nuage de mots : pas de taux de réussite, on résume la participation et les
  * quatre idées les plus fréquentes (la liste complète reste dans le CSV). */
-function wordcloudSummary(cloud: { participants: number; words: { text: string; count: number }[] }): string {
-  const head = `Nuage de mots, ${cloud.participants} participant${cloud.participants > 1 ? 's' : ''}`
+function wordcloudSummary(cloud: {
+  participants: number
+  totalWords: number
+  words: { text: string; count: number }[]
+}): string {
+  const head = `Nuage de mots, ${cloud.participants} participant${cloud.participants > 1 ? 's' : ''}, ${cloud.totalWords} mot${cloud.totalWords > 1 ? 's' : ''}`
   if (cloud.words.length === 0) return `${head}. Aucune idée proposée`
   return `${head} : ${cloud.words
     .slice(0, 4)

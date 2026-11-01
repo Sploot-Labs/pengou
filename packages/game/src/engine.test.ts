@@ -789,6 +789,13 @@ describe('game engine : nuage de mots', () => {
     expect(res).toEqual({ accepted: false, reason: 'mot déjà envoyé' })
   })
 
+  it('refuse un mot dont la clé est vide (diacritique seul)', async () => {
+    const { engine, session, alice } = await setupWc()
+    const res = await engine.submitAnswer(session.id, alice.id, { word: '́' })
+    expect(res).toEqual({ accepted: false, reason: 'mot invalide' })
+    expect((await engine.getSession(session.id)).answers[0]?.[alice.id]).toBeUndefined()
+  })
+
   it('refuse le 21e mot', async () => {
     const { engine, session, alice } = await setupWc()
     for (let i = 0; i < 20; i++) {

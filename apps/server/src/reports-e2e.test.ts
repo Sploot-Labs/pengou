@@ -451,7 +451,7 @@ describe('export CSV avec un nuage de mots', () => {
       const csv = (await app.inject({ method: 'GET', url: `/api/sessions/${sessionId}/export.csv`, headers: { cookie } })).body
       const lines = csv.split('\r\n')
       expect(lines).toContain('1,Un mot sur le matin,2,,')
-      const i = lines.indexOf('Nuage de mots : Un mot sur le matin')
+      const i = lines.indexOf('"Nuage de mots : Un mot sur le matin (2 participants, 3 mots)"')
       expect(i).toBeGreaterThan(-1)
       expect(lines[i + 1]).toBe('Mot,Occurrences')
       expect(lines[i + 2]).toBe('café,2')

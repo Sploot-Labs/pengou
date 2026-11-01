@@ -653,9 +653,11 @@ function BigScreenInner() {
 
           {renderLiveAnswers()}
 
-          <p className="big-live__answered">
-            {progressAnswered} / {players.length} {progressAnswered <= 1 ? 'a' : 'ont'} répondu
-          </p>
+          {question.type !== 'wordcloud' && (
+            <p className="big-live__answered">
+              {progressAnswered} / {players.length} {progressAnswered <= 1 ? 'a' : 'ont'} répondu
+            </p>
+          )}
         </div>
       )}
 

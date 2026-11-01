@@ -297,6 +297,7 @@ export function createEngine(deps: EngineDeps): Engine {
         const { word } = answer as { word: string }
         const previous = alreadyAnswered ? (alreadyAnswered.answer as WordcloudAnswer).words : []
         const key = wordKey(word)
+        if (key === '') return { accepted: false, reason: 'mot invalide' }
         if (previous.some((w) => wordKey(w) === key)) {
           return { accepted: false, reason: 'mot déjà envoyé' }
         }

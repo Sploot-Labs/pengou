@@ -80,7 +80,7 @@ Un mot retiré par l'animateur puis renvoyé par un participant est accepté san
 
 Sur `HostLive`, l'animateur voit la liste des mots agrégés avec leurs occurrences et un bouton pour retirer chacun. Le retrait passe par un nouvel événement hôte (par exemple `host:wordcloudRemove`), réservé à la socket hôte, enregistré dans l'état du moteur pour survivre à un redémarrage et à une reconnexion, puis suivi d'une diffusion immédiate du nuage.
 
-À la révélation, le grand écran fige le nuage final (sans les mots retirés). La répartition envoyée par `questionResult` pour ce type est la liste agrégée des mots et de leurs occurrences, pas un regroupement par réponse brute. Le classement qui suit est inchangé puisqu'aucun point n'est attribué.
+À la révélation, le grand écran fige le nuage final (sans les mots retirés). Pour ce type, `questionResult` renvoie une répartition vide (`question:reveal` part aussi vers les téléphones) ; le nuage final est envoyé au grand écran et à l'hôte par `wordcloud:update` juste avant `question:reveal`. Le classement qui suit est inchangé puisqu'aucun point n'est attribué.
 
 À la reconnexion d'un grand écran ou de l'hôte pendant ou après la question, l'état courant du nuage lui est renvoyé, comme c'est déjà le cas pour `question:show` et `question:reveal`.
 

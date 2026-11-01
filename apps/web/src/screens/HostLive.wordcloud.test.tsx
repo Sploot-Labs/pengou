@@ -99,6 +99,22 @@ describe('HostLive, nuage de mots en direct', () => {
     expect(screen.queryByText('café')).toBeNull()
   })
 
+  it('masque la ligne de progression et intitule le bouton « Clore le nuage »', () => {
+    const { container } = renderHostLive()
+    emitServerEvent('question:show', cloudQuestion)
+    expect(container.querySelector('.hostlive-progress[aria-hidden="true"]')).toBeNull()
+    expect(screen.queryByText(/répondu/)).toBeNull()
+    expect(screen.getByRole('button', { name: 'Clore le nuage' })).toBeInTheDocument()
+    expect(screen.queryByText('Révéler la réponse')).toBeNull()
+  })
+
+  it('clore le nuage émet host:reveal', async () => {
+    renderHostLive()
+    emitServerEvent('question:show', cloudQuestion)
+    fireEvent.click(screen.getByRole('button', { name: 'Clore le nuage' }))
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('host:reveal', expect.anything()))
+  })
+
   it('une question mcq garde le rendu actuel', () => {
     renderHostLive()
     emitServerEvent('question:show', {
@@ -109,6 +125,7 @@ describe('HostLive, nuage de mots en direct', () => {
       payload: { options: [{ label: 'A' }, { label: 'B' }] },
     })
     expect(screen.getByText('Révéler la réponse')).toBeInTheDocument()
+    expect(screen.getByText(/répondu/)).toBeInTheDocument()
     expect(screen.queryByText('En attente des premières idées…')).toBeNull()
   })
 })

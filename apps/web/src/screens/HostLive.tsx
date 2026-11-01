@@ -931,9 +931,11 @@ export function HostLive() {
                   <TimerRing remainingSeconds={remaining ?? question.timeLimit} totalSeconds={question.timeLimit} size={72} />
                 </div>
 
-                <p className="hostlive-progress" aria-hidden="true">
-                  {progressAnswered} / {players.length} {progressAnswered > 1 ? 'ont' : 'a'} répondu
-                </p>
+                {question.type !== 'wordcloud' && (
+                  <p className="hostlive-progress" aria-hidden="true">
+                    {progressAnswered} / {players.length} {progressAnswered > 1 ? 'ont' : 'a'} répondu
+                  </p>
+                )}
                 <p className="visually-hidden" role="status" aria-live="polite">
                   {respondedAnnouncement}
                 </p>
@@ -942,7 +944,7 @@ export function HostLive() {
 
                 <div className="hostlive-controls">
                   <Button variant="primary" type="button" disabled={actionPending} onClick={revealAnswer}>
-                    Révéler la réponse
+                    {question.type === 'wordcloud' ? 'Clore le nuage' : 'Révéler la réponse'}
                   </Button>
                   <Button
                     variant="ghost"

@@ -106,6 +106,13 @@ describe('BigScreen, nuage de mots en direct', () => {
     expect(screen.getByText('En attente des premières idées…')).toBeInTheDocument()
   })
 
+  it("n'affiche pas la ligne « x / y ont répondu » pour un nuage", async () => {
+    await joined()
+    await showQuestion(cloudQuestion)
+    emitServerEvent('wordcloud:update', view())
+    expect(screen.queryByText(/répondu/)).toBeNull()
+  })
+
   it("un nouveau question:show d'une autre question efface l'ancien nuage", async () => {
     await joined()
     await showQuestion(cloudQuestion)
@@ -136,5 +143,6 @@ describe('BigScreen, nuage de mots en direct', () => {
     })
     expect(screen.getByText('Lisbonne')).toBeInTheDocument()
     expect(screen.queryByText('En attente des premières idées…')).toBeNull()
+    expect(screen.getByText(/répondu/)).toBeInTheDocument()
   })
 })

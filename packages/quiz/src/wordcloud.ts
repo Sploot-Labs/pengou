@@ -5,6 +5,8 @@ import { normalizeText } from './text.js'
 export const WORDCLOUD_MAX_WORD_LENGTH = 25
 export const WORDCLOUD_MAX_WORDS_PER_PLAYER = 20
 
+const collator = new Intl.Collator('fr')
+
 export type WordcloudPayload = Record<string, never>
 
 function cleanWord(value: string): string {
@@ -55,14 +57,14 @@ export function aggregateWords(
     let count = 0
     for (const [spelling, n] of spellings) {
       count += n
-      if (n > best || (n === best && spelling.localeCompare(text, 'fr') < 0)) {
+      if (n > best || (n === best && collator.compare(spelling, text) < 0)) {
         text = spelling
         best = n
       }
     }
     words.push({ key, text, count })
   }
-  words.sort((a, b) => b.count - a.count || a.text.localeCompare(b.text, 'fr'))
+  words.sort((a, b) => b.count - a.count || collator.compare(a.text, b.text))
   return { words, participants, totalWords }
 }
 
