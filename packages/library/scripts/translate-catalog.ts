@@ -32,7 +32,7 @@ const arg = (name: string) => {
 
 async function jsonFiles(dir: string): Promise<string[]> {
   const all = await readdir(dir, { recursive: true })
-  return all.filter((f) => f.endsWith('.json')).map((f) => f.replaceAll(String.fromCharCode(92), '/')).sort()
+  return all.filter((f) => f.endsWith('.json')).map((f) => f.replaceAll('\\', '/')).sort()
 }
 
 async function main() {
@@ -86,6 +86,7 @@ async function main() {
     await mkdir(dirname(`${outDir}/${file}`), { recursive: true })
     await writeFile(`${outDir}/${file}`, `${JSON.stringify(pack, null, 2)}\n`)
   }
+  await mkdir(outDir, { recursive: true })
   await writeFile(`${outDir}/LICENSE.md`, licenseFile(from, to))
 
   for (const id of skippedQuizzes) console.log(`quiz non reproduit (question écartée) : ${id}`)

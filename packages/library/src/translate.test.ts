@@ -100,7 +100,7 @@ describe('translatePack', () => {
     ])
   })
 
-  it("signale un quiz entièrement traduit mais sans entrée de quiz", () => {
+  it('signale un quiz entièrement traduit mais sans entrée de quiz', () => {
     const pack: Pack = { source: SOURCE, questions: [mcq('q1')], quizzes: [quiz('z1', ['q1'])] }
     const { pack: out, missing } = translatePack(pack, table({ q1: { prompt: 'P', options: ['a', 'b', 'c', 'd'] } }), 'en')
     expect(missing).toEqual(['z1'])

@@ -15,7 +15,7 @@ export function mergeTables(tables: TranslationTable[]): TranslationTable {
   for (const table of tables) {
     for (const kind of ['questions', 'quizzes'] as const) {
       for (const [key, value] of Object.entries(table[kind])) {
-        if (key in merged[kind]) throw new Error(`clé en double dans les tables (${kind}) : ${key}`)
+        if (Object.hasOwn(merged[kind], key)) throw new Error(`clé en double dans les tables (${kind}) : ${key}`)
         ;(merged[kind] as Record<string, unknown>)[key] = value
       }
     }
@@ -40,7 +40,7 @@ export function translatePack(pack: Pack, table: TranslationTable, lang: string)
   const translated = new Set<string>()
   const questions: Pack['questions'] = []
   for (const q of pack.questions) {
-    const entry = table.questions[q.id]
+    const entry = Object.hasOwn(table.questions, q.id) ? table.questions[q.id] : undefined
     if (!entry) {
       missing.push(q.id)
     } else if ('skip' in entry) {
@@ -65,8 +65,9 @@ export function translatePack(pack: Pack, table: TranslationTable, lang: string)
       skippedQuizzes.push(quiz.id)
       continue
     }
+    // Un quiz qui référence des questions hors de ce pack n'est pas reproduit.
     if (!quiz.questionIds.every((id) => translated.has(id))) continue
-    const entry = table.quizzes[quiz.id]
+    const entry = Object.hasOwn(table.quizzes, quiz.id) ? table.quizzes[quiz.id] : undefined
     if (!entry) {
       missing.push(quiz.id)
       continue
