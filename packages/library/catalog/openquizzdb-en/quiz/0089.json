@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=89"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0089-1-en",
+      "type": "mcq",
+      "prompt": "Which Clint Eastwood film is a biography of Charlie Parker?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dizzy",
+            "correct": false
+          },
+          {
+            "label": "Parker",
+            "correct": false
+          },
+          {
+            "label": "Charlie",
+            "correct": false
+          },
+          {
+            "label": "Bird",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0089-2-en",
+      "type": "mcq",
+      "prompt": "Who directed the 1993 film \"A Perfect World\", starring Clint Eastwood?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oliver Stone",
+            "correct": false
+          },
+          {
+            "label": "Clint Eastwood",
+            "correct": true
+          },
+          {
+            "label": "Martin Scorsese",
+            "correct": false
+          },
+          {
+            "label": "Brian De Palma",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0089-4-en",
+      "type": "mcq",
+      "prompt": "With which company did Clint Eastwood become a producer in 1968?",
+      "payload": {
+        "options": [
+          {
+            "label": "TriStar",
+            "correct": false
+          },
+          {
+            "label": "Brooksfilms",
+            "correct": false
+          },
+          {
+            "label": "Newsreel",
+            "correct": false
+          },
+          {
+            "label": "Malpaso",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=410"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0410-1-en",
+      "type": "mcq",
+      "prompt": "What is the name of the cowboy hero of the \"Toy Story\" saga?",
+      "payload": {
+        "options": [
+          {
+            "label": "Randy",
+            "correct": false
+          },
+          {
+            "label": "Bullseye",
+            "correct": false
+          },
+          {
+            "label": "Woody",
+            "correct": true
+          },
+          {
+            "label": "Jessie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0410-3-en",
+      "type": "mcq",
+      "prompt": "What does Lotso smell of in \"Toy Story 3\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Raspberry",
+            "correct": false
+          },
+          {
+            "label": "Strawberry",
+            "correct": true
+          },
+          {
+            "label": "Apple",
+            "correct": false
+          },
+          {
+            "label": "Banana",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0410-4-en",
+      "type": "mcq",
+      "prompt": "What picture is on Sid's black T-shirt in \"Toy Story\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Skull",
+            "correct": true
+          },
+          {
+            "label": "Number 95",
+            "correct": false
+          },
+          {
+            "label": "Lightning bolt",
+            "correct": false
+          },
+          {
+            "label": "Smiley",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

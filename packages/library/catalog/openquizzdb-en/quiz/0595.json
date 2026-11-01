@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=595"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0595-2-en",
+      "type": "mcq",
+      "prompt": "Which one is the odd one out among these films set at Christmas?",
+      "payload": {
+        "options": [
+          {
+            "label": "Groundhog Day",
+            "correct": true
+          },
+          {
+            "label": "Love Actually",
+            "correct": false
+          },
+          {
+            "label": "Gremlins",
+            "correct": false
+          },
+          {
+            "label": "It's a Wonderful Life",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

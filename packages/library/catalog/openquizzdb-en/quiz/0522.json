@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=522"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0522-3-en",
+      "type": "mcq",
+      "prompt": "Which character uses the Potara in \"Dragon Ball Z\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Arale",
+            "correct": false
+          },
+          {
+            "label": "Dr. Slump",
+            "correct": false
+          },
+          {
+            "label": "Lao",
+            "correct": false
+          },
+          {
+            "label": "Supreme Kai",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0522-4-en",
+      "type": "mcq",
+      "prompt": "In \"Dragon Ball\", which metal is said to be the hardest in the universe?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cooler",
+            "correct": false
+          },
+          {
+            "label": "Katchin",
+            "correct": true
+          },
+          {
+            "label": "Piccolo",
+            "correct": false
+          },
+          {
+            "label": "Dabra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

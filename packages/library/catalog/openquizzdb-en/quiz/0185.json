@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=185"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0185-2-en",
+      "type": "mcq",
+      "prompt": "In which comedy does Sandra Bullock play a crossword setter?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Heat",
+            "correct": false
+          },
+          {
+            "label": "The Proposal",
+            "correct": false
+          },
+          {
+            "label": "Gravity",
+            "correct": false
+          },
+          {
+            "label": "All About Steve",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0185-3-en",
+      "type": "mcq",
+      "prompt": "Who does Sandra Bullock make a \"proposal\" to in a comedy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jim Carrey",
+            "correct": false
+          },
+          {
+            "label": "Ryan Reynolds",
+            "correct": true
+          },
+          {
+            "label": "Michael J. Fox",
+            "correct": false
+          },
+          {
+            "label": "Simon Baker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

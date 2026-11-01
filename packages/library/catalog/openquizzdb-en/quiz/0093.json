@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=93"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0093-3-en",
+      "type": "mcq",
+      "prompt": "In which vehicle do Walter and Jesse cook at the start of the series?",
+      "payload": {
+        "options": [
+          {
+            "label": "Taxi",
+            "correct": false
+          },
+          {
+            "label": "RV",
+            "correct": true
+          },
+          {
+            "label": "Bus",
+            "correct": false
+          },
+          {
+            "label": "Truck",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0093-4-en",
+      "type": "mcq",
+      "prompt": "What cancer does Walter White have in \"Breaking Bad\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lung",
+            "correct": true
+          },
+          {
+            "label": "Throat",
+            "correct": false
+          },
+          {
+            "label": "Colon",
+            "correct": false
+          },
+          {
+            "label": "Skin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

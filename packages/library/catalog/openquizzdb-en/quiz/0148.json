@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=148"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0148-1-en",
+      "type": "mcq",
+      "prompt": "What name did Franquin give to his yellow animal with a long tail?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mowgli",
+            "correct": false
+          },
+          {
+            "label": "Molossus",
+            "correct": false
+          },
+          {
+            "label": "Marsupilami",
+            "correct": true
+          },
+          {
+            "label": "Maximus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0148-2-en",
+      "type": "mcq",
+      "prompt": "What is the name of Tintin's dog, who accompanies the young reporter?",
+      "payload": {
+        "options": [
+          {
+            "label": "Snowy",
+            "correct": true
+          },
+          {
+            "label": "Molossus",
+            "correct": false
+          },
+          {
+            "label": "Médor",
+            "correct": false
+          },
+          {
+            "label": "Minou",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0148-3-en",
+      "type": "mcq",
+      "prompt": "In fishing, which term designates a light artificial lure?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mosquito",
+            "correct": false
+          },
+          {
+            "label": "Monarch",
+            "correct": false
+          },
+          {
+            "label": "Fly",
+            "correct": true
+          },
+          {
+            "label": "Morio",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

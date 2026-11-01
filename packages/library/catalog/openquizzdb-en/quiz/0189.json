@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=189"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0189-1-en",
+      "type": "mcq",
+      "prompt": "Which Belgian beer is made by adding cherries to lambic?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kwak",
+            "correct": false
+          },
+          {
+            "label": "Kronenbourg",
+            "correct": false
+          },
+          {
+            "label": "Kriek",
+            "correct": true
+          },
+          {
+            "label": "Keystone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0189-2-en",
+      "type": "mcq",
+      "prompt": "Which Belgian beer, flagship of the Dubuisson brewery, is 12% ABV?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bush",
+            "correct": true
+          },
+          {
+            "label": "Chimay Blue",
+            "correct": false
+          },
+          {
+            "label": "Mort Subite",
+            "correct": false
+          },
+          {
+            "label": "Tongerlo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0189-4-en",
+      "type": "mcq",
+      "prompt": "Which Belgian beer is still the benchmark among witbiers?",
+      "payload": {
+        "options": [
+          {
+            "label": "Corsendonk",
+            "correct": false
+          },
+          {
+            "label": "Hoegaarden",
+            "correct": true
+          },
+          {
+            "label": "Bacchus",
+            "correct": false
+          },
+          {
+            "label": "Floreffe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,442 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, plusieurs auteurs (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0545-1-en",
+      "type": "mcq",
+      "prompt": "Which vital function can the fennec surprisingly do without?",
+      "payload": {
+        "options": [
+          {
+            "label": "Seeing",
+            "correct": false
+          },
+          {
+            "label": "Drinking",
+            "correct": true
+          },
+          {
+            "label": "Sleeping",
+            "correct": false
+          },
+          {
+            "label": "Eating",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0545-3-en",
+      "type": "mcq",
+      "prompt": "Built for speed, how fast can a cheetah run?",
+      "payload": {
+        "options": [
+          {
+            "label": "120 km/h",
+            "correct": true
+          },
+          {
+            "label": "90 km/h",
+            "correct": false
+          },
+          {
+            "label": "60 km/h",
+            "correct": false
+          },
+          {
+            "label": "150 km/h",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0545-4-en",
+      "type": "mcq",
+      "prompt": "At what age does a tiger cub start eating meat?",
+      "payload": {
+        "options": [
+          {
+            "label": "One year",
+            "correct": false
+          },
+          {
+            "label": "Two months",
+            "correct": true
+          },
+          {
+            "label": "Two years",
+            "correct": false
+          },
+          {
+            "label": "Six months",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0383-1-en",
+      "type": "mcq",
+      "prompt": "What is the diet of the elephant?",
+      "payload": {
+        "options": [
+          {
+            "label": "Carnivore",
+            "correct": false
+          },
+          {
+            "label": "Herbivore",
+            "correct": true
+          },
+          {
+            "label": "Insectivore",
+            "correct": false
+          },
+          {
+            "label": "Omnivore",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0383-2-en",
+      "type": "mcq",
+      "prompt": "About how long does an elephant's pregnancy last?",
+      "payload": {
+        "options": [
+          {
+            "label": "3 months",
+            "correct": false
+          },
+          {
+            "label": "12 months",
+            "correct": false
+          },
+          {
+            "label": "6 months",
+            "correct": false
+          },
+          {
+            "label": "22 months",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0383-3-en",
+      "type": "mcq",
+      "prompt": "What is the main threat to elephants?",
+      "payload": {
+        "options": [
+          {
+            "label": "Predation",
+            "correct": false
+          },
+          {
+            "label": "Poaching",
+            "correct": true
+          },
+          {
+            "label": "Storms",
+            "correct": false
+          },
+          {
+            "label": "Cold",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0383-4-en",
+      "type": "mcq",
+      "prompt": "What distinguishes Asian elephants from African elephants?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ears",
+            "correct": true
+          },
+          {
+            "label": "Color",
+            "correct": false
+          },
+          {
+            "label": "Trunk",
+            "correct": false
+          },
+          {
+            "label": "Tail",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0207-1-en",
+      "type": "mcq",
+      "prompt": "What do sharks, like rays, breathe with?",
+      "payload": {
+        "options": [
+          {
+            "label": "Skin",
+            "correct": false
+          },
+          {
+            "label": "Gills",
+            "correct": true
+          },
+          {
+            "label": "Fins",
+            "correct": false
+          },
+          {
+            "label": "Lungs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0207-2-en",
+      "type": "mcq",
+      "prompt": "Which part of a shark's silhouette makes us tremble?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tail",
+            "correct": false
+          },
+          {
+            "label": "Dorsal fin",
+            "correct": true
+          },
+          {
+            "label": "Snout",
+            "correct": false
+          },
+          {
+            "label": "Gills",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0207-3-en",
+      "type": "mcq",
+      "prompt": "What does the whale shark mainly feed on while moving?",
+      "payload": {
+        "options": [
+          {
+            "label": "Moss",
+            "correct": false
+          },
+          {
+            "label": "Crabs",
+            "correct": false
+          },
+          {
+            "label": "Seals",
+            "correct": false
+          },
+          {
+            "label": "Plankton",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0207-4-en",
+      "type": "mcq",
+      "prompt": "What percentage of a shark's weight can its liver represent?",
+      "payload": {
+        "options": [
+          {
+            "label": "Up to 12%",
+            "correct": false
+          },
+          {
+            "label": "Up to 25%",
+            "correct": true
+          },
+          {
+            "label": "Up to 2%",
+            "correct": false
+          },
+          {
+            "label": "Up to 6%",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0491-2-en",
+      "type": "mcq",
+      "prompt": "Which bird provides the down used to make eiderdowns?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eider",
+            "correct": true
+          },
+          {
+            "label": "Teal",
+            "correct": false
+          },
+          {
+            "label": "Parakeet",
+            "correct": false
+          },
+          {
+            "label": "Mallard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0491-3-en",
+      "type": "mcq",
+      "prompt": "Which bird lays its eggs in the nests of other species?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tit",
+            "correct": false
+          },
+          {
+            "label": "Cuckoo",
+            "correct": true
+          },
+          {
+            "label": "Blackbird",
+            "correct": false
+          },
+          {
+            "label": "Pheasant",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0491-4-en",
+      "type": "mcq",
+      "prompt": "Which bird does a marabou resemble?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sparrow",
+            "correct": false
+          },
+          {
+            "label": "Stork",
+            "correct": true
+          },
+          {
+            "label": "Herring gull",
+            "correct": false
+          },
+          {
+            "label": "Seagull",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-animaux-du-monde-en",
+      "title": "Animals of the world",
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0545-1-en",
+        "oqdb-0545-3-en",
+        "oqdb-0545-4-en",
+        "oqdb-0383-1-en",
+        "oqdb-0383-2-en",
+        "oqdb-0383-3-en",
+        "oqdb-0383-4-en",
+        "oqdb-0207-1-en",
+        "oqdb-0207-2-en",
+        "oqdb-0207-3-en",
+        "oqdb-0207-4-en",
+        "oqdb-0491-2-en",
+        "oqdb-0491-3-en",
+        "oqdb-0491-4-en"
+      ],
+      "description": "Based on OpenQuizzDB quizzes about savanna animals, giants of the Earth, sharks and birds."
+    }
+  ]
+}

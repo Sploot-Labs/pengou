@@ -1,0 +1,503 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0167-2-en",
+      "type": "mcq",
+      "prompt": "What was the name of George Clooney's pet pig?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fred",
+            "correct": false
+          },
+          {
+            "label": "Kyle",
+            "correct": false
+          },
+          {
+            "label": "Max",
+            "correct": true
+          },
+          {
+            "label": "Tom",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0209-3-en",
+      "type": "mcq",
+      "prompt": "Who is the mother of Johnny Depp's children?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kim Basinger",
+            "correct": false
+          },
+          {
+            "label": "Penélope Cruz",
+            "correct": false
+          },
+          {
+            "label": "Angelina Jolie",
+            "correct": false
+          },
+          {
+            "label": "Vanessa Paradis",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0529-1-en",
+      "type": "mcq",
+      "prompt": "Which former NSYNC singer was Cameron Diaz in a relationship with?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chris Kirkpatrick",
+            "correct": false
+          },
+          {
+            "label": "Joey Fatone",
+            "correct": false
+          },
+          {
+            "label": "Justin Timberlake",
+            "correct": true
+          },
+          {
+            "label": "Lance Bass",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0195-1-en",
+      "type": "mcq",
+      "prompt": "Which first name is on Marilyn Monroe's baptism certificate?",
+      "payload": {
+        "options": [
+          {
+            "label": "Norma Jeane",
+            "correct": true
+          },
+          {
+            "label": "Ruby Catherine",
+            "correct": false
+          },
+          {
+            "label": "Lucy Fay",
+            "correct": false
+          },
+          {
+            "label": "Louise Marie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0593-1-en",
+      "type": "mcq",
+      "prompt": "What was Meghan Markle's job before she became a duchess?",
+      "payload": {
+        "options": [
+          {
+            "label": "Actress",
+            "correct": true
+          },
+          {
+            "label": "Lawyer",
+            "correct": false
+          },
+          {
+            "label": "Tennis player",
+            "correct": false
+          },
+          {
+            "label": "TV host",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0306-2-en",
+      "type": "mcq",
+      "prompt": "In which country was Bruce Willis, son of David Willis, born?",
+      "payload": {
+        "options": [
+          {
+            "label": "Albania",
+            "correct": false
+          },
+          {
+            "label": "Germany",
+            "correct": true
+          },
+          {
+            "label": "Brazil",
+            "correct": false
+          },
+          {
+            "label": "Portugal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0089-3-en",
+      "type": "mcq",
+      "prompt": "Which director hired Clint Eastwood for the \"Dollars Trilogy\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sergio Corbucci",
+            "correct": false
+          },
+          {
+            "label": "Tonino Valerii",
+            "correct": false
+          },
+          {
+            "label": "Giorgio Ferroni",
+            "correct": false
+          },
+          {
+            "label": "Sergio Leone",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0579-1-en",
+      "type": "mcq",
+      "prompt": "Which singer is the mother of René-Charles, Nelson and Eddy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Katy Perry",
+            "correct": false
+          },
+          {
+            "label": "Whitney Houston",
+            "correct": false
+          },
+          {
+            "label": "Rihanna",
+            "correct": false
+          },
+          {
+            "label": "Céline Dion",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0529-2-en",
+      "type": "mcq",
+      "prompt": "Who sold a kiss for €350,000 for a good cause?",
+      "payload": {
+        "options": [
+          {
+            "label": "George Clooney",
+            "correct": true
+          },
+          {
+            "label": "Matt Damon",
+            "correct": false
+          },
+          {
+            "label": "Andy Garcia",
+            "correct": false
+          },
+          {
+            "label": "Brad Pitt",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0306-1-en",
+      "type": "mcq",
+      "prompt": "How many daughters did Bruce Willis have with actress Demi Moore?",
+      "payload": {
+        "options": [
+          {
+            "label": "Five",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": true
+          },
+          {
+            "label": "Four",
+            "correct": false
+          },
+          {
+            "label": "Two",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0593-2-en",
+      "type": "mcq",
+      "prompt": "At the end of which season did Meghan Markle leave the series \"Suits\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sixth",
+            "correct": false
+          },
+          {
+            "label": "Seventh",
+            "correct": true
+          },
+          {
+            "label": "Fifth",
+            "correct": false
+          },
+          {
+            "label": "Eighth",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0195-3-en",
+      "type": "mcq",
+      "prompt": "How many times was Marilyn Monroe married in her life?",
+      "payload": {
+        "options": [
+          {
+            "label": "Three times",
+            "correct": true
+          },
+          {
+            "label": "Once",
+            "correct": false
+          },
+          {
+            "label": "Twice",
+            "correct": false
+          },
+          {
+            "label": "Four times",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0209-1-en",
+      "type": "mcq",
+      "prompt": "Which actor introduced Johnny Depp, then unknown, to his agent?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nicolas Cage",
+            "correct": true
+          },
+          {
+            "label": "Clint Eastwood",
+            "correct": false
+          },
+          {
+            "label": "Tom Cruise",
+            "correct": false
+          },
+          {
+            "label": "Bruce Willis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0579-4-en",
+      "type": "mcq",
+      "prompt": "Which model is often nicknamed the tomboy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kate Moss",
+            "correct": false
+          },
+          {
+            "label": "Cara Delevingne",
+            "correct": true
+          },
+          {
+            "label": "Elizabeth Hurley",
+            "correct": false
+          },
+          {
+            "label": "Kelly Brook",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0412-4-en",
+      "type": "mcq",
+      "prompt": "Which American actress created a style of fitness workout?",
+      "payload": {
+        "options": [
+          {
+            "label": "Diane Keaton",
+            "correct": false
+          },
+          {
+            "label": "Jane Fonda",
+            "correct": true
+          },
+          {
+            "label": "Sally Field",
+            "correct": false
+          },
+          {
+            "label": "Faye Dunaway",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0167-3-en",
+      "type": "mcq",
+      "prompt": "Which region of Sudan is George Clooney strongly committed to?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kassala",
+            "correct": false
+          },
+          {
+            "label": "Darfur",
+            "correct": true
+          },
+          {
+            "label": "Sennar",
+            "correct": false
+          },
+          {
+            "label": "Atbara",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0593-4-en",
+      "type": "mcq",
+      "prompt": "In which crime series did Meghan Markle play Amy Jessup?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dark Angel",
+            "correct": false
+          },
+          {
+            "label": "The X-Files",
+            "correct": false
+          },
+          {
+            "label": "Fringe",
+            "correct": true
+          },
+          {
+            "label": "Beyond",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

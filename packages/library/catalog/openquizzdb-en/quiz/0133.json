@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=133"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0133-1-en",
+      "type": "mcq",
+      "prompt": "What is table tennis also called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ping-pong",
+            "correct": true
+          },
+          {
+            "label": "Padel",
+            "correct": false
+          },
+          {
+            "label": "Basque pelota",
+            "correct": false
+          },
+          {
+            "label": "Jokari",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0133-2-en",
+      "type": "mcq",
+      "prompt": "In which game is a chistera fixed to the player's hand with a glove?",
+      "payload": {
+        "options": [
+          {
+            "label": "Basque pelota",
+            "correct": true
+          },
+          {
+            "label": "Tennis",
+            "correct": false
+          },
+          {
+            "label": "Padel",
+            "correct": false
+          },
+          {
+            "label": "Jokari",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0133-3-en",
+      "type": "mcq",
+      "prompt": "Which racket sport is played on a court enclosed by walls?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tennis",
+            "correct": false
+          },
+          {
+            "label": "Lacrosse",
+            "correct": false
+          },
+          {
+            "label": "Badminton",
+            "correct": false
+          },
+          {
+            "label": "Squash",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0133-4-en",
+      "type": "mcq",
+      "prompt": "Which game uses a rubber ball attached to a base?",
+      "payload": {
+        "options": [
+          {
+            "label": "Footbag",
+            "correct": false
+          },
+          {
+            "label": "Jokari",
+            "correct": true
+          },
+          {
+            "label": "Smolball",
+            "correct": false
+          },
+          {
+            "label": "Chuiwan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

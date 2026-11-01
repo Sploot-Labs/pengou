@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=318"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0318-1-en",
+      "type": "mcq",
+      "prompt": "What is the average life expectancy of a giraffe?",
+      "payload": {
+        "options": [
+          {
+            "label": "25 years",
+            "correct": true
+          },
+          {
+            "label": "55 years",
+            "correct": false
+          },
+          {
+            "label": "75 years",
+            "correct": false
+          },
+          {
+            "label": "15 years",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

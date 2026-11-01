@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=41"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0041-1-en",
+      "type": "mcq",
+      "prompt": "In which film does John Travolta play an angel fallen from the sky?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michael",
+            "correct": true
+          },
+          {
+            "label": "Jerry",
+            "correct": false
+          },
+          {
+            "label": "Johnny",
+            "correct": false
+          },
+          {
+            "label": "Sam",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0041-2-en",
+      "type": "mcq",
+      "prompt": "Who stars opposite John Travolta in \"Face/Off\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nicolas Cage",
+            "correct": true
+          },
+          {
+            "label": "Wesley Snipes",
+            "correct": false
+          },
+          {
+            "label": "Sean Connery",
+            "correct": false
+          },
+          {
+            "label": "Mel Gibson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

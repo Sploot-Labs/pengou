@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=232"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0232-1-en",
+      "type": "mcq",
+      "prompt": "Who is levitating on the cover of \"The Seven Crystal Balls\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tintin",
+            "correct": false
+          },
+          {
+            "label": "Thorgal",
+            "correct": false
+          },
+          {
+            "label": "Calculus",
+            "correct": true
+          },
+          {
+            "label": "Chang",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0232-4-en",
+      "type": "mcq",
+      "prompt": "Which microblogging site was symbolized by a blue bird?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tinder",
+            "correct": false
+          },
+          {
+            "label": "Twitter",
+            "correct": true
+          },
+          {
+            "label": "Tumblr",
+            "correct": false
+          },
+          {
+            "label": "Telegram",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

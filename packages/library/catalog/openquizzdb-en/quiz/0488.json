@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=488"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0488-1-en",
+      "type": "mcq",
+      "prompt": "How long does a men's boxing round last?",
+      "payload": {
+        "options": [
+          {
+            "label": "Three minutes",
+            "correct": true
+          },
+          {
+            "label": "Five minutes",
+            "correct": false
+          },
+          {
+            "label": "Two minutes",
+            "correct": false
+          },
+          {
+            "label": "Four minutes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0488-3-en",
+      "type": "mcq",
+      "prompt": "How long is a boxer counted before being knocked out?",
+      "payload": {
+        "options": [
+          {
+            "label": "10 seconds",
+            "correct": true
+          },
+          {
+            "label": "5 seconds",
+            "correct": false
+          },
+          {
+            "label": "15 seconds",
+            "correct": false
+          },
+          {
+            "label": "20 seconds",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

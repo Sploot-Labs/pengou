@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=614"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0614-1-en",
+      "type": "mcq",
+      "prompt": "Which piece of furniture is the central element of every bedroom?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bed",
+            "correct": true
+          },
+          {
+            "label": "Table",
+            "correct": false
+          },
+          {
+            "label": "Desk",
+            "correct": false
+          },
+          {
+            "label": "Bathtub",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0614-2-en",
+      "type": "mcq",
+      "prompt": "Which set of rooms is reserved for the parents' private life?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shower room",
+            "correct": false
+          },
+          {
+            "label": "Master suite",
+            "correct": true
+          },
+          {
+            "label": "Walk-in closet",
+            "correct": false
+          },
+          {
+            "label": "Sauna",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0614-3-en",
+      "type": "mcq",
+      "prompt": "Which part of the house symbolizes relaxation and self-care?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wine cellar",
+            "correct": false
+          },
+          {
+            "label": "Walk-in closet",
+            "correct": false
+          },
+          {
+            "label": "Conservatory",
+            "correct": false
+          },
+          {
+            "label": "Bathroom",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0614-4-en",
+      "type": "mcq",
+      "prompt": "In which room do you take a dry heat bath?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hammam",
+            "correct": false
+          },
+          {
+            "label": "Attic",
+            "correct": false
+          },
+          {
+            "label": "Sauna",
+            "correct": true
+          },
+          {
+            "label": "Jacuzzi",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

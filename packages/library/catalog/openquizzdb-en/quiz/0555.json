@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=555"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0555-2-en",
+      "type": "mcq",
+      "prompt": "What is the name of the orca that must be saved in a popular film saga?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tom",
+            "correct": false
+          },
+          {
+            "label": "Jennifer",
+            "correct": false
+          },
+          {
+            "label": "Willy",
+            "correct": true
+          },
+          {
+            "label": "Monica",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0555-4-en",
+      "type": "mcq",
+      "prompt": "In the two \"Babe\" films, which animal plays the main character?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dog",
+            "correct": false
+          },
+          {
+            "label": "Sheep",
+            "correct": false
+          },
+          {
+            "label": "Goat",
+            "correct": false
+          },
+          {
+            "label": "Pig",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

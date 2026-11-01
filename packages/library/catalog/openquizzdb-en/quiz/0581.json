@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=581"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0581-3-en",
+      "type": "mcq",
+      "prompt": "Which color is generally associated with Snapchat?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yellow",
+            "correct": true
+          },
+          {
+            "label": "Blue",
+            "correct": false
+          },
+          {
+            "label": "Green",
+            "correct": false
+          },
+          {
+            "label": "Red",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

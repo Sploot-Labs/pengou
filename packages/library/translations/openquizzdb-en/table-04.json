@@ -1,0 +1,1082 @@
+{
+  "questions": {
+    "oqdb-0215-2": {
+      "prompt": "Which Caribbean pirate does Johnny Depp play?",
+      "options": [
+        "Jack Sparrow",
+        "Redbeard",
+        "Will Turner",
+        "Captain Flint"
+      ]
+    },
+    "oqdb-0215-3": {
+      "prompt": "Which hat does Johnny Depp wear in \"Charlie and the Chocolate Factory\"?",
+      "options": [
+        "Top hat",
+        "Beret",
+        "Bowler hat",
+        "Boater"
+      ]
+    },
+    "oqdb-0215-4": {
+      "prompt": "Which fantasy-loving director has often worked with Johnny Depp?",
+      "options": [
+        "Gus Van Sant",
+        "David Lynch",
+        "John Boorman",
+        "Tim Burton"
+      ]
+    },
+    "oqdb-0217-1": {
+      "prompt": "Which film saga features the Decepticons?",
+      "options": [
+        "Total Recall",
+        "Transformers",
+        "Real Steel",
+        "Blade Runner"
+      ]
+    },
+    "oqdb-0217-2": {
+      "prompt": "Which film features Arnold Schwarzenegger as a cyborg?",
+      "options": [
+        "Real Steel",
+        "Terminator",
+        "Sucker Punch",
+        "Robots"
+      ]
+    },
+    "oqdb-0217-3": {
+      "prompt": "In which film do we meet a scientist android named Ash?",
+      "options": [
+        "Robocop",
+        "Alien",
+        "Matrix",
+        "Total Recall"
+      ]
+    },
+    "oqdb-0217-4": {
+      "prompt": "In which 2003 film do we see Sentinels, insect-like robots?",
+      "options": [
+        "Attack of the Clones",
+        "Star Wars",
+        "H2G2",
+        "Matrix Revolutions"
+      ]
+    },
+    "oqdb-0219-1": {
+      "prompt": "Which Breton town is known for its alignments of standing stones?",
+      "options": [
+        "Quimper",
+        "Carnac",
+        "Brest",
+        "Lorient"
+      ]
+    },
+    "oqdb-0219-2": {
+      "prompt": "Which three-armed symbol is emblematic of Brittany?",
+      "options": [
+        "Celtic cross",
+        "Ermine",
+        "Arrow",
+        "Triskelion"
+      ]
+    },
+    "oqdb-0219-3": {
+      "prompt": "What is chouchen, similar to mead, made from?",
+      "options": [
+        "Barley malt",
+        "Mint syrup",
+        "Apple juice",
+        "Fermented honey"
+      ]
+    },
+    "oqdb-0219-4": {
+      "prompt": "In which French department does the Île Vierge lighthouse stand?",
+      "options": [
+        "Finistère",
+        "Ille-et-Vilaine",
+        "Morbihan",
+        "Côtes-d'Armor"
+      ]
+    },
+    "oqdb-0220-1": {
+      "skip": "série télévisée française sans écho à l'étranger"
+    },
+    "oqdb-0220-2": {
+      "skip": "animateur français peu connu hors de France"
+    },
+    "oqdb-0220-3": {
+      "prompt": "Which app can identify a song by listening to it?",
+      "options": [
+        "Shazam",
+        "Skype",
+        "Spotify",
+        "Snapchat"
+      ]
+    },
+    "oqdb-0220-4": {
+      "prompt": "What nationality is the famous band ABBA?",
+      "options": [
+        "Swedish",
+        "Serbian",
+        "Swiss",
+        "Slovak"
+      ]
+    },
+    "oqdb-0221-1": {
+      "prompt": "Which role brought Jennifer Lawrence international fame?",
+      "options": [
+        "Aurora Lane",
+        "Katniss Everdeen",
+        "Mystique",
+        "Bella Swan"
+      ]
+    },
+    "oqdb-0221-2": {
+      "prompt": "Who cast Jennifer Lawrence in \"The Beaver\"?",
+      "options": [
+        "Holly Hunter",
+        "Jodie Foster",
+        "Susan Sarandon",
+        "Meryl Streep"
+      ]
+    },
+    "oqdb-0221-3": {
+      "prompt": "Which actor plays Jennifer Lawrence's husband in \"Mother!\"?",
+      "options": [
+        "Michael Fassbender",
+        "Ed Harris",
+        "Robert De Niro",
+        "Javier Bardem"
+      ]
+    },
+    "oqdb-0221-4": {
+      "prompt": "Which Dior fragrance is Jennifer Lawrence the face of?",
+      "options": [
+        "Joy",
+        "J'adore",
+        "Jimmy Choo",
+        "Joop"
+      ]
+    },
+    "oqdb-0223-1": {
+      "prompt": "Who stars opposite Meryl Streep in \"The Bridges of Madison County\"?",
+      "options": [
+        "Robert Redford",
+        "Clint Eastwood",
+        "Colin Firth",
+        "Richard Gere"
+      ]
+    },
+    "oqdb-0223-2": {
+      "prompt": "Who is Andie MacDowell's love interest in \"Four Weddings and a Funeral\"?",
+      "options": [
+        "Hugh Grant",
+        "Colin Firth",
+        "Kevin Costner",
+        "Rowan Atkinson"
+      ]
+    },
+    "oqdb-0223-3": {
+      "prompt": "Which actor dances with Jennifer Grey in \"Dirty Dancing\"?",
+      "options": [
+        "Patrick Swayze",
+        "John Travolta",
+        "Kevin Costner",
+        "Michael Keaton"
+      ]
+    },
+    "oqdb-0223-4": {
+      "prompt": "Who is Whitney Houston's \"Bodyguard\" in the film of that name?",
+      "options": [
+        "Richard Gere",
+        "Kevin Costner",
+        "Mel Gibson",
+        "Bruce Willis"
+      ]
+    },
+    "oqdb-0225-1": {
+      "prompt": "Who is Steven Spielberg's regular film composer?",
+      "options": [
+        "Giorgio Moroder",
+        "James Horner",
+        "John Barry",
+        "John Williams"
+      ]
+    },
+    "oqdb-0225-2": {
+      "prompt": "Which actress from \"E.T.\" is Steven Spielberg the godfather of?",
+      "options": [
+        "Dee Wallace",
+        "Drew Barrymore",
+        "Téa Leoni",
+        "Dakota Fanning"
+      ]
+    },
+    "oqdb-0225-3": {
+      "prompt": "Which soldier must be saved in a Steven Spielberg film?",
+      "options": [
+        "Private Moore",
+        "Private Garner",
+        "Private Adams",
+        "Private Ryan"
+      ]
+    },
+    "oqdb-0225-4": {
+      "prompt": "Which Steven Spielberg film reinvents the story of Peter Pan?",
+      "options": [
+        "Hook",
+        "Amistad",
+        "Munich",
+        "Sugarland Express"
+      ]
+    },
+    "oqdb-0227-1": {
+      "prompt": "Which online payment company did Elon Musk play a key role in?",
+      "options": [
+        "PayPal",
+        "Tesla",
+        "Paccar",
+        "Micron"
+      ]
+    },
+    "oqdb-0227-2": {
+      "prompt": "Which space company is Elon Musk the founder and CEO of?",
+      "options": [
+        "SpaceX",
+        "Flagship",
+        "Landstat",
+        "New Millennium"
+      ]
+    },
+    "oqdb-0227-3": {
+      "prompt": "Which social network did Elon Musk buy for 44 billion dollars?",
+      "options": [
+        "Twitter",
+        "Snapchat",
+        "TikTok",
+        "Facebook"
+      ]
+    },
+    "oqdb-0227-4": {
+      "prompt": "Which US president did Elon Musk become an adviser to?",
+      "options": [
+        "Donald Trump",
+        "Barack Obama",
+        "Joe Biden",
+        "Bill Clinton"
+      ]
+    },
+    "oqdb-0229-1": {
+      "prompt": "Which chemical compound is sugar mainly made of?",
+      "options": [
+        "Sucrose",
+        "Fructose",
+        "Glucose",
+        "Maltose"
+      ]
+    },
+    "oqdb-0229-2": {
+      "prompt": "What is the natural sugar found in fruit called?",
+      "options": [
+        "Glucose",
+        "Fructose",
+        "Lactose",
+        "Sucrose"
+      ]
+    },
+    "oqdb-0229-3": {
+      "prompt": "How many sugar cubes are in a 33 cl can of cola?",
+      "options": [
+        "About seven",
+        "About three",
+        "About fifteen",
+        "About eleven"
+      ]
+    },
+    "oqdb-0229-4": {
+      "prompt": "In what year was the sugar cube invented, made by hand?",
+      "options": [
+        "1949",
+        "1843",
+        "1742",
+        "1644"
+      ]
+    },
+    "oqdb-0231-1": {
+      "prompt": "In \"Star Trek\", which fleet is tied to the United Federation of Planets?",
+      "options": [
+        "FedCon",
+        "Starfleet",
+        "Cardassia",
+        "Klingon"
+      ]
+    },
+    "oqdb-0231-2": {
+      "prompt": "In the \"Star Trek\" universe, which physicist is also a skilled helmsman?",
+      "options": [
+        "Sulu",
+        "Uhura",
+        "Chekov",
+        "McCoy"
+      ]
+    },
+    "oqdb-0231-3": {
+      "prompt": "Which technological device beams people around in \"Star Trek\"?",
+      "options": [
+        "Viewscreen",
+        "Cosmic cube",
+        "Transporter",
+        "Holodeck"
+      ]
+    },
+    "oqdb-0232-1": {
+      "prompt": "Who is levitating on the cover of \"The Seven Crystal Balls\"?",
+      "options": [
+        "Tintin",
+        "Thorgal",
+        "Calculus",
+        "Chang"
+      ]
+    },
+    "oqdb-0232-2": {
+      "skip": "gentilé d'une ville française peu connue hors de France"
+    },
+    "oqdb-0232-3": {
+      "prompt": "Which Looney Tunes character devours everything in his path?",
+      "options": [
+        "Tee",
+        "Tag",
+        "Taz",
+        "Tux"
+      ]
+    },
+    "oqdb-0232-4": {
+      "prompt": "Which microblogging site was symbolized by a blue bird?",
+      "options": [
+        "Tinder",
+        "Twitter",
+        "Tumblr",
+        "Telegram"
+      ]
+    },
+    "oqdb-0233-1": {
+      "prompt": "Which actor stars opposite Keanu Reeves in the film \"Speed\"?",
+      "options": [
+        "Dennis Hopper",
+        "Harvey Keitel",
+        "Nicolas Cage",
+        "Val Kilmer"
+      ]
+    },
+    "oqdb-0233-2": {
+      "prompt": "Which hacker does Keanu Reeves play in the \"Matrix\" trilogy?",
+      "options": [
+        "Morpheus",
+        "Neo",
+        "Trinity",
+        "Smith"
+      ]
+    },
+    "oqdb-0233-3": {
+      "prompt": "In which action franchise does he play a feared former assassin?",
+      "options": [
+        "John Wick",
+        "The Equalizer",
+        "Speed",
+        "Taken"
+      ]
+    },
+    "oqdb-0235-1": {
+      "prompt": "From the beans of which tree is chocolate made?",
+      "options": [
+        "Palm tree",
+        "Fig tree",
+        "Pecan tree",
+        "Cacao tree"
+      ]
+    },
+    "oqdb-0235-2": {
+      "prompt": "Which chocolate, rich in saturated fatty acids, is the most bitter?",
+      "options": [
+        "Milk",
+        "Dark",
+        "White",
+        "Praline"
+      ]
+    },
+    "oqdb-0235-3": {
+      "prompt": "Which is the top cocoa-producing country, far ahead of Ghana?",
+      "options": [
+        "Nigeria",
+        "Ivory Coast",
+        "Brazil",
+        "Mexico"
+      ]
+    },
+    "oqdb-0235-4": {
+      "prompt": "What is done to cocoa beans during roasting?",
+      "options": [
+        "They are crushed",
+        "They are peeled",
+        "They are toasted",
+        "They are twisted"
+      ]
+    },
+    "oqdb-0237-1": {
+      "prompt": "Which collaborative encyclopedia is the most used on the Internet?",
+      "options": [
+        "Framasoft",
+        "Pandocréon",
+        "Netalya",
+        "Wikipedia"
+      ]
+    },
+    "oqdb-0237-2": {
+      "prompt": "What are \"Google Chrome\", \"Internet Explorer\" and \"Mozilla Firefox\"?",
+      "options": [
+        "Browsers",
+        "Search engines",
+        "Encyclopedias",
+        "Routers"
+      ]
+    },
+    "oqdb-0237-3": {
+      "prompt": "What does the second w in www stand for?",
+      "options": [
+        "Wide",
+        "Web",
+        "Worse",
+        "World"
+      ]
+    },
+    "oqdb-0237-4": {
+      "prompt": "Which browser was replaced by \"Microsoft Edge\"?",
+      "options": [
+        "Firefox",
+        "Internet Explorer",
+        "Chrome",
+        "Safari"
+      ]
+    },
+    "oqdb-0239-1": {
+      "prompt": "Which alter ego does Eminem sometimes use in his songs?",
+      "options": [
+        "Posh",
+        "Slim Shady",
+        "Love Symbol",
+        "Fat Man"
+      ]
+    },
+    "oqdb-0239-2": {
+      "prompt": "In which film does Eminem play a young white rapper?",
+      "options": [
+        "Wonder Boys",
+        "Crazy Heart",
+        "8 Mile",
+        "Once"
+      ]
+    },
+    "oqdb-0239-3": {
+      "prompt": "Which male first name is the title of one of Eminem's songs?",
+      "options": [
+        "Bran",
+        "Sam",
+        "Stan",
+        "Dan"
+      ]
+    },
+    "oqdb-0241-1": {
+      "skip": "télé-réalité française sans écho à l'étranger"
+    },
+    "oqdb-0241-2": {
+      "skip": "télé-réalité française sans écho à l'étranger"
+    },
+    "oqdb-0241-3": {
+      "skip": "chanteurs et groupes français peu connus hors de France"
+    },
+    "oqdb-0241-4": {
+      "skip": "émission de télé-réalité française sans écho à l'étranger"
+    },
+    "oqdb-0243-1": {
+      "prompt": "In which country does the Statue of Liberty stand?",
+      "options": [
+        "France",
+        "United Kingdom",
+        "Canada",
+        "United States"
+      ]
+    },
+    "oqdb-0243-2": {
+      "prompt": "In which European country is the Sagrada Família?",
+      "options": [
+        "Cyprus",
+        "Portugal",
+        "Spain",
+        "Italy"
+      ]
+    },
+    "oqdb-0243-3": {
+      "prompt": "On which islands are the Moai, gigantic deified ancestors, found?",
+      "options": [
+        "Cook Islands",
+        "Easter Island",
+        "Christmas Island",
+        "Galapagos Islands"
+      ]
+    },
+    "oqdb-0243-4": {
+      "prompt": "Which large metal monument represents Brussels?",
+      "options": [
+        "Atomium",
+        "Tour & Taxis",
+        "Voortrekker",
+        "Luizenmolen"
+      ]
+    },
+    "oqdb-0244-1": {
+      "prompt": "Which Irish band is The Edge the lead guitarist of?",
+      "options": [
+        "U2",
+        "Ugly Kid Joe",
+        "Uriah Heep",
+        "UB40"
+      ]
+    },
+    "oqdb-0244-2": {
+      "prompt": "Which man devised the Trojan Horse?",
+      "options": [
+        "Urbanus",
+        "Uranus",
+        "Uther",
+        "Ulysses"
+      ]
+    },
+    "oqdb-0244-3": {
+      "skip": "émission de télévision française sans écho à l'étranger"
+    },
+    "oqdb-0244-4": {
+      "prompt": "Which musical instrument is nicknamed the \"Hawaiian guitar\"?",
+      "options": [
+        "Udu",
+        "Upa",
+        "Ukulele",
+        "Ugal"
+      ]
+    },
+    "oqdb-0245-1": {
+      "skip": "doublon de otdb-29510c243d0a"
+    },
+    "oqdb-0245-2": {
+      "prompt": "Which language is mainly spoken in Finland?",
+      "options": [
+        "Norwegian",
+        "Finnish",
+        "Russian",
+        "Swedish"
+      ]
+    },
+    "oqdb-0245-3": {
+      "prompt": "Which animal is often associated with Finland?",
+      "options": [
+        "Panda",
+        "Reindeer",
+        "Kangaroo",
+        "Lion"
+      ]
+    },
+    "oqdb-0245-4": {
+      "prompt": "Which country does Finland share its longest border with?",
+      "options": [
+        "Estonia",
+        "Sweden",
+        "Norway",
+        "Russia"
+      ]
+    },
+    "oqdb-0247-1": {
+      "prompt": "In tennis, what do you call when a ball lands outside the court?",
+      "options": [
+        "Fault",
+        "Null",
+        "White",
+        "Out"
+      ]
+    },
+    "oqdb-0247-2": {
+      "prompt": "What is the first shot played at the start of a tennis point?",
+      "options": [
+        "Serve",
+        "Topspin",
+        "Smash",
+        "Volley"
+      ]
+    },
+    "oqdb-0247-3": {
+      "prompt": "Which elbow pain is common among tennis players?",
+      "options": [
+        "Tennis middow",
+        "Tennis elbow",
+        "Tennis shadow",
+        "Tennis longbow"
+      ]
+    },
+    "oqdb-0247-4": {
+      "prompt": "In what year was Wimbledon, the oldest tennis tournament, founded?",
+      "options": [
+        "1877",
+        "1887",
+        "1897",
+        "1867"
+      ]
+    },
+    "oqdb-0249-1": {
+      "prompt": "What is the tallest tower of a medieval castle called?",
+      "options": [
+        "Keep",
+        "Bastille",
+        "Flanking tower",
+        "Lookout"
+      ]
+    },
+    "oqdb-0249-2": {
+      "prompt": "What is the water-filled ditch around a castle called?",
+      "options": [
+        "Counterscarp",
+        "Latrines",
+        "Moat",
+        "Chemise"
+      ]
+    },
+    "oqdb-0249-3": {
+      "skip": "jeu sur le mot meurtrière, distracteurs intraduisibles"
+    },
+    "oqdb-0249-4": {
+      "prompt": "What is usually found behind a castle's drawbridge?",
+      "options": [
+        "Arrow slits",
+        "Turret",
+        "Portcullis",
+        "Moat"
+      ]
+    },
+    "oqdb-0251-1": {
+      "prompt": "What is the capital of Bulgaria?",
+      "options": [
+        "Bucharest",
+        "Belgrade",
+        "Budapest",
+        "Sofia"
+      ]
+    },
+    "oqdb-0251-2": {
+      "prompt": "Which sea borders Bulgaria?",
+      "options": [
+        "Mediterranean Sea",
+        "Red Sea",
+        "Baltic Sea",
+        "Black Sea"
+      ]
+    },
+    "oqdb-0251-4": {
+      "prompt": "Which seaside resort is renowned in Bulgaria?",
+      "options": [
+        "Sofia",
+        "Plovdiv",
+        "Varna",
+        "Ruse"
+      ]
+    },
+    "oqdb-0253-1": {
+      "prompt": "What is the nationality of tennis great Roger Federer?",
+      "options": [
+        "French",
+        "Swiss",
+        "Belgian",
+        "German"
+      ]
+    },
+    "oqdb-0253-2": {
+      "prompt": "Which of these professional tennis players is the oldest?",
+      "options": [
+        "Rafael Nadal",
+        "Roger Federer",
+        "Marat Safin",
+        "Andre Agassi"
+      ]
+    },
+    "oqdb-0253-3": {
+      "prompt": "Who became the youngest US Open winner at 19?",
+      "options": [
+        "Andre Agassi",
+        "Boris Becker",
+        "Pete Sampras",
+        "Roger Federer"
+      ]
+    },
+    "oqdb-0253-4": {
+      "prompt": "Which former tennis player was nicknamed \"the Terrible\"?",
+      "options": [
+        "John McEnroe",
+        "Boris Becker",
+        "Pete Sampras",
+        "Ivan Lendl"
+      ]
+    },
+    "oqdb-0255-1": {
+      "prompt": "Which part of the castle held the lord's apartments?",
+      "options": [
+        "Parapet",
+        "Keep",
+        "Belfry",
+        "Hoarding"
+      ]
+    },
+    "oqdb-0255-3": {
+      "prompt": "Which château inspired Hergé to create Marlinspike Hall?",
+      "options": [
+        "Villandry",
+        "Chaumont",
+        "Cheverny",
+        "Langeais"
+      ]
+    },
+    "oqdb-0255-4": {
+      "prompt": "In which castle is Leonardo da Vinci believed to be buried?",
+      "options": [
+        "Amboise",
+        "Sully-sur-Loire",
+        "Saumur",
+        "Blois"
+      ]
+    },
+    "oqdb-0256-1": {
+      "prompt": "In which city can you admire the very touristy Bridge of Sighs?",
+      "options": [
+        "Valencia",
+        "Venice",
+        "Verona",
+        "Versailles"
+      ]
+    },
+    "oqdb-0256-2": {
+      "prompt": "Which violinist and composer wrote \"The Four Seasons\"?",
+      "options": [
+        "Vivaldi",
+        "Vassiliev",
+        "Vitali",
+        "Verdi"
+      ]
+    },
+    "oqdb-0256-3": {
+      "prompt": "Which city has been the capital of Poland since 1596?",
+      "options": [
+        "Vilnius",
+        "Vaduz",
+        "Vienna",
+        "Warsaw"
+      ]
+    },
+    "oqdb-0257-1": {
+      "prompt": "What is the capital of Germany?",
+      "options": [
+        "Hamburg",
+        "Frankfurt",
+        "Munich",
+        "Berlin"
+      ]
+    },
+    "oqdb-0257-2": {
+      "prompt": "Which major mountain range is located in Germany?",
+      "options": [
+        "Andes",
+        "Alps",
+        "Himalayas",
+        "Rockies"
+      ]
+    },
+    "oqdb-0257-3": {
+      "prompt": "Which festival attracts millions of visitors in Germany?",
+      "options": [
+        "Oktoberfest",
+        "Thanksgiving",
+        "Carnival",
+        "Halloween"
+      ]
+    },
+    "oqdb-0257-4": {
+      "prompt": "Which industry is highly developed in Germany?",
+      "options": [
+        "Coffee growing",
+        "Fishing",
+        "Petroleum",
+        "Automotive"
+      ]
+    },
+    "oqdb-0259-1": {
+      "skip": "présentateur français peu connu hors de France"
+    },
+    "oqdb-0259-2": {
+      "skip": "animateur français peu connu hors de France"
+    },
+    "oqdb-0259-4": {
+      "skip": "animateur d'émission française peu connu hors de France"
+    },
+    "oqdb-0261-1": {
+      "skip": "exactitude douteuse : 8 couloirs utilisés en compétition, 10 dans le bassin selon la norme"
+    },
+    "oqdb-0261-2": {
+      "prompt": "In which city were the 2016 Olympic Games held?",
+      "options": [
+        "Tokyo",
+        "London",
+        "Rio de Janeiro",
+        "Beijing"
+      ]
+    },
+    "oqdb-0261-3": {
+      "prompt": "Which Olympic event starts outside the stadium and ends inside it?",
+      "options": [
+        "Cross-country",
+        "Marathon",
+        "Trail running",
+        "10,000 m"
+      ]
+    },
+    "oqdb-0261-4": {
+      "prompt": "Which ring of the Olympic flag is closest to the pole?",
+      "options": [
+        "Blue",
+        "Green",
+        "Red",
+        "Yellow"
+      ]
+    },
+    "oqdb-0263-1": {
+      "skip": "doublon de otdb-48fee338470c"
+    },
+    "oqdb-0263-2": {
+      "prompt": "Which currency is used day to day in Denmark?",
+      "options": [
+        "Franc",
+        "Euro",
+        "Danish krone",
+        "Dollar"
+      ]
+    },
+    "oqdb-0263-3": {
+      "prompt": "Which region is Denmark part of?",
+      "options": [
+        "Balkans",
+        "Maghreb",
+        "Andes",
+        "Scandinavia"
+      ]
+    },
+    "oqdb-0263-4": {
+      "prompt": "Which symbol is regularly associated with Denmark?",
+      "options": [
+        "Big Ben",
+        "Statue of Liberty",
+        "Eiffel Tower",
+        "Little Mermaid"
+      ]
+    },
+    "oqdb-0265-1": {
+      "skip": "présentatrice du journal télévisé de TF1, peu connue hors de France"
+    },
+    "oqdb-0265-3": {
+      "skip": "journaliste de la télévision française peu connu hors de France"
+    },
+    "oqdb-0265-4": {
+      "skip": "journalistes de la télévision française peu connus hors de France"
+    },
+    "oqdb-0267-1": {
+      "skip": "pongiste belge peu connu hors de Belgique"
+    },
+    "oqdb-0267-2": {
+      "prompt": "Which gymnast scored the first perfect 10 at the Olympics?",
+      "options": [
+        "Diana Mocanu",
+        "Nadia Comaneci",
+        "Doina Ignat",
+        "Tatiana Gutsu"
+      ]
+    },
+    "oqdb-0267-3": {
+      "prompt": "Which Jamaican athlete made his mark on the 2008 Olympics?",
+      "options": [
+        "Dexter Lee",
+        "Lerone Clarke",
+        "Ray Stewart",
+        "Usain Bolt"
+      ]
+    },
+    "oqdb-0267-4": {
+      "prompt": "Who won the long jump in Atlanta in 1996?",
+      "options": [
+        "Michael Johnson",
+        "Dwight Phillips",
+        "Carl Lewis",
+        "Linford Christie"
+      ]
+    },
+    "oqdb-0268-1": {
+      "prompt": "Which Pixar hero does Tom Hanks voice?",
+      "options": [
+        "Woody",
+        "Wolverine",
+        "Wukong",
+        "Walter"
+      ]
+    },
+    "oqdb-0268-2": {
+      "skip": "exactitude douteuse : le mariage civil a eu lieu à la mairie de Windsor, pas au château"
+    },
+    "oqdb-0268-3": {
+      "prompt": "Who is Logan in the Marvel Comics series \"X-Men\"?",
+      "options": [
+        "Wyatt Earp",
+        "Wukong",
+        "Woody",
+        "Wolverine"
+      ]
+    },
+    "oqdb-0268-4": {
+      "prompt": "What is the capital of New Zealand?",
+      "options": [
+        "Winnipeg",
+        "Worcester",
+        "Wellington",
+        "Washington"
+      ]
+    },
+    "oqdb-0269-1": {
+      "prompt": "What is the capital of Cyprus?",
+      "options": [
+        "Ankara",
+        "Athens",
+        "Nicosia",
+        "Valletta"
+      ]
+    },
+    "oqdb-0269-2": {
+      "prompt": "Which sea surrounds Cyprus?",
+      "options": [
+        "Black Sea",
+        "Red Sea",
+        "North Sea",
+        "Mediterranean Sea"
+      ]
+    },
+    "oqdb-0269-3": {
+      "prompt": "Which language is officially spoken in the south of Cyprus?",
+      "options": [
+        "Greek",
+        "Italian",
+        "Arabic",
+        "Spanish"
+      ]
+    },
+    "oqdb-0269-4": {
+      "prompt": "Which ancient civilization is strongly linked to Cyprus?",
+      "options": [
+        "Greek",
+        "Maya",
+        "Viking",
+        "Inca"
+      ]
+    },
+    "oqdb-0273-1": {
+      "prompt": "Which plant made up the winners' crown in antiquity?",
+      "options": [
+        "Parsley",
+        "Basil",
+        "Laurel",
+        "Thyme"
+      ]
+    },
+    "oqdb-0273-2": {
+      "prompt": "Which plant is used to prepare tea in the Maghreb?",
+      "options": [
+        "Mint",
+        "Anise",
+        "Coriander",
+        "Cinnamon"
+      ]
+    },
+    "oqdb-0273-3": {
+      "prompt": "Which plant is called \"farigoule\" in Provence?",
+      "options": [
+        "Thyme",
+        "Marjoram",
+        "Bergamot",
+        "Basil"
+      ]
+    },
+    "oqdb-0273-4": {
+      "prompt": "Which plant goes into pistou, along with garlic and olive oil?",
+      "options": [
+        "Cumin",
+        "Mint",
+        "Marjoram",
+        "Basil"
+      ]
+    },
+    "oqdb-0275-1": {
+      "prompt": "Which city is the capital of the Republic of Ireland?",
+      "options": [
+        "Cork",
+        "Galway",
+        "Belfast",
+        "Dublin"
+      ]
+    },
+    "oqdb-0275-2": {
+      "prompt": "Which symbol is traditionally associated with Ireland?",
+      "options": [
+        "Lion",
+        "Star",
+        "Eagle",
+        "Shamrock"
+      ]
+    },
+    "oqdb-0275-3": {
+      "prompt": "Which iconic drink is consumed in Ireland?",
+      "options": [
+        "Guinness",
+        "Tequila",
+        "Champagne",
+        "Sake"
+      ]
+    },
+    "oqdb-0277-1": {
+      "prompt": "What color is the paprika used in cooking?",
+      "options": [
+        "Red",
+        "Yellow",
+        "White",
+        "Green"
+      ]
+    },
+    "oqdb-0277-2": {
+      "prompt": "Saffron is a spice taken from which kind of flower?",
+      "options": [
+        "Acacia",
+        "Crocus",
+        "Poppy",
+        "Tulip"
+      ]
+    },
+    "oqdb-0277-3": {
+      "prompt": "Which herb is essential in béarnaise sauce?",
+      "options": [
+        "Chervil",
+        "Tarragon",
+        "Sage",
+        "Rosemary"
+      ]
+    }
+  },
+  "quizzes": {}
+}

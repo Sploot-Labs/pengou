@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=547"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0547-1-en",
+      "type": "mcq",
+      "prompt": "What will you strap on to hike across soft snow?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ice skates",
+            "correct": false
+          },
+          {
+            "label": "Snowshoes",
+            "correct": true
+          },
+          {
+            "label": "Boots",
+            "correct": false
+          },
+          {
+            "label": "Fins",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0547-2-en",
+      "type": "mcq",
+      "prompt": "What is done on ski slopes between 5 pm and 9 am?",
+      "payload": {
+        "options": [
+          {
+            "label": "Drying",
+            "correct": false
+          },
+          {
+            "label": "Watering",
+            "correct": false
+          },
+          {
+            "label": "Grooming",
+            "correct": true
+          },
+          {
+            "label": "Wetting",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0547-4-en",
+      "type": "mcq",
+      "prompt": "In which country is the very popular ski town of Innsbruck?",
+      "payload": {
+        "options": [
+          {
+            "label": "Germany",
+            "correct": false
+          },
+          {
+            "label": "Austria",
+            "correct": true
+          },
+          {
+            "label": "Italy",
+            "correct": false
+          },
+          {
+            "label": "Switzerland",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

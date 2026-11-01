@@ -1,0 +1,416 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0028-1-en",
+      "type": "mcq",
+      "prompt": "Which African reptile has skin that takes on the color of its surroundings?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crocodile",
+            "correct": false
+          },
+          {
+            "label": "Chameleon",
+            "correct": true
+          },
+          {
+            "label": "Rattlesnake",
+            "correct": false
+          },
+          {
+            "label": "Cobra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0028-3-en",
+      "type": "mcq",
+      "prompt": "Founded on August 6, 1538, Bogota is the capital of which country?",
+      "payload": {
+        "options": [
+          {
+            "label": "Colombia",
+            "correct": true
+          },
+          {
+            "label": "Cuba",
+            "correct": false
+          },
+          {
+            "label": "Costa Rica",
+            "correct": false
+          },
+          {
+            "label": "Chile",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0028-4-en",
+      "type": "mcq",
+      "prompt": "Which white bird is a symbol of peace?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stork",
+            "correct": false
+          },
+          {
+            "label": "Dove",
+            "correct": true
+          },
+          {
+            "label": "Hummingbird",
+            "correct": false
+          },
+          {
+            "label": "Duck",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0040-1-en",
+      "type": "mcq",
+      "prompt": "Which French city is the capital of mustard?",
+      "payload": {
+        "options": [
+          {
+            "label": "Douai",
+            "correct": false
+          },
+          {
+            "label": "Dijon",
+            "correct": true
+          },
+          {
+            "label": "Dunkirk",
+            "correct": false
+          },
+          {
+            "label": "Drancy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0040-3-en",
+      "type": "mcq",
+      "prompt": "Which two letters are the symbol for the decimetre?",
+      "payload": {
+        "options": [
+          {
+            "label": "de",
+            "correct": false
+          },
+          {
+            "label": "dm",
+            "correct": true
+          },
+          {
+            "label": "dt",
+            "correct": false
+          },
+          {
+            "label": "dc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0040-4-en",
+      "type": "mcq",
+      "prompt": "Which was the first 128-bit console released by Sega?",
+      "payload": {
+        "options": [
+          {
+            "label": "DSi",
+            "correct": false
+          },
+          {
+            "label": "Dreamcast",
+            "correct": true
+          },
+          {
+            "label": "DS",
+            "correct": false
+          },
+          {
+            "label": "DS Lite",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0052-1-en",
+      "type": "mcq",
+      "prompt": "What is the nationality of the legendary Loch Ness monster?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eritrean",
+            "correct": false
+          },
+          {
+            "label": "Spanish",
+            "correct": false
+          },
+          {
+            "label": "Ethiopian",
+            "correct": false
+          },
+          {
+            "label": "Scottish",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0052-3-en",
+      "type": "mcq",
+      "prompt": "What is the name of the Romani girl in \"The Hunchback of Notre-Dame\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Evangelista",
+            "correct": false
+          },
+          {
+            "label": "Eleonora",
+            "correct": false
+          },
+          {
+            "label": "Esmeralda",
+            "correct": true
+          },
+          {
+            "label": "Erika",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0064-1-en",
+      "type": "mcq",
+      "prompt": "What is the chemical symbol for fluorine, atomic number 9?",
+      "payload": {
+        "options": [
+          {
+            "label": "FR",
+            "correct": false
+          },
+          {
+            "label": "FL",
+            "correct": false
+          },
+          {
+            "label": "FN",
+            "correct": false
+          },
+          {
+            "label": "F",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0064-2-en",
+      "type": "mcq",
+      "prompt": "Which flavor completes vanilla and chocolate in a banana split?",
+      "payload": {
+        "options": [
+          {
+            "label": "Passion fruit",
+            "correct": false
+          },
+          {
+            "label": "Fig",
+            "correct": false
+          },
+          {
+            "label": "Raspberry",
+            "correct": false
+          },
+          {
+            "label": "Strawberry",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0064-3-en",
+      "type": "mcq",
+      "prompt": "Which team did Michael Schumacher race for in 2003?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fisker",
+            "correct": false
+          },
+          {
+            "label": "Ferrari",
+            "correct": true
+          },
+          {
+            "label": "Ford",
+            "correct": false
+          },
+          {
+            "label": "Fiat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0064-4-en",
+      "type": "mcq",
+      "prompt": "Which mischievous black and white cat first appeared in \"Pinocchio\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Firmin",
+            "correct": false
+          },
+          {
+            "label": "Fidelio",
+            "correct": false
+          },
+          {
+            "label": "Felix",
+            "correct": false
+          },
+          {
+            "label": "Figaro",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0076-1-en",
+      "type": "mcq",
+      "prompt": "Which search engine remains the most popular on the internet?",
+      "payload": {
+        "options": [
+          {
+            "label": "GitHub",
+            "correct": false
+          },
+          {
+            "label": "Google",
+            "correct": true
+          },
+          {
+            "label": "Gibiru",
+            "correct": false
+          },
+          {
+            "label": "Giphy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0076-2-en",
+      "type": "mcq",
+      "prompt": "Among the Smurfs, who owns the cat Azrael?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gargantua",
+            "correct": false
+          },
+          {
+            "label": "Geronimo",
+            "correct": false
+          },
+          {
+            "label": "Gargamel",
+            "correct": true
+          },
+          {
+            "label": "Gideon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

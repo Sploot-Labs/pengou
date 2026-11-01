@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=59"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0059-1-en",
+      "type": "mcq",
+      "prompt": "In which film does Stallone play a sheriff deaf in his right ear?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cop Land",
+            "correct": true
+          },
+          {
+            "label": "Daylight",
+            "correct": false
+          },
+          {
+            "label": "Judge Dredd",
+            "correct": false
+          },
+          {
+            "label": "Spy Kids 3",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0059-4-en",
+      "type": "mcq",
+      "prompt": "Which film pits Sylvester Stallone against Antonio Banderas?",
+      "payload": {
+        "options": [
+          {
+            "label": "Assassins",
+            "correct": true
+          },
+          {
+            "label": "Cliffhanger",
+            "correct": false
+          },
+          {
+            "label": "Judge Dredd",
+            "correct": false
+          },
+          {
+            "label": "Demolition Man",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

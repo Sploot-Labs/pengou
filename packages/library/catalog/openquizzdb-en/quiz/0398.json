@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=398"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0398-2-en",
+      "type": "mcq",
+      "prompt": "The word \"Lusitanian\" refers to a people from which country?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spain",
+            "correct": false
+          },
+          {
+            "label": "Portugal",
+            "correct": true
+          },
+          {
+            "label": "Italy",
+            "correct": false
+          },
+          {
+            "label": "Morocco",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0398-3-en",
+      "type": "mcq",
+      "prompt": "What do the Roma call someone outside their community?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sind",
+            "correct": false
+          },
+          {
+            "label": "Djodjo",
+            "correct": false
+          },
+          {
+            "label": "Minouche",
+            "correct": false
+          },
+          {
+            "label": "Gadjo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0398-4-en",
+      "type": "mcq",
+      "prompt": "Which symbol is on the flag of the Acadian people?",
+      "payload": {
+        "options": [
+          {
+            "label": "Red circle",
+            "correct": false
+          },
+          {
+            "label": "Yellow star",
+            "correct": true
+          },
+          {
+            "label": "Blue lion",
+            "correct": false
+          },
+          {
+            "label": "Green dragon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=613"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0613-1-en",
+      "type": "mcq",
+      "prompt": "What shoes do you wear in judo?",
+      "payload": {
+        "options": [
+          {
+            "label": "Clogs",
+            "correct": false
+          },
+          {
+            "label": "Sneakers",
+            "correct": false
+          },
+          {
+            "label": "None",
+            "correct": true
+          },
+          {
+            "label": "Boots",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0613-2-en",
+      "type": "mcq",
+      "prompt": "How many leaves does a garden clover usually have?",
+      "payload": {
+        "options": [
+          {
+            "label": "Two",
+            "correct": false
+          },
+          {
+            "label": "Four",
+            "correct": false
+          },
+          {
+            "label": "Five",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0613-3-en",
+      "type": "mcq",
+      "prompt": "In a standard deck of cards, what color are the diamonds?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blue",
+            "correct": false
+          },
+          {
+            "label": "Black",
+            "correct": false
+          },
+          {
+            "label": "Green",
+            "correct": false
+          },
+          {
+            "label": "Red",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0613-4-en",
+      "type": "mcq",
+      "prompt": "What do you call the imaginary line that separates two countries?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tangent",
+            "correct": false
+          },
+          {
+            "label": "Section",
+            "correct": false
+          },
+          {
+            "label": "Median",
+            "correct": false
+          },
+          {
+            "label": "Border",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

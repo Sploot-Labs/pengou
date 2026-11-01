@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=460"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0460-2-en",
+      "type": "mcq",
+      "prompt": "What color is the aviation \"black box\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "White",
+            "correct": false
+          },
+          {
+            "label": "Orange",
+            "correct": true
+          },
+          {
+            "label": "Black",
+            "correct": false
+          },
+          {
+            "label": "Green",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0460-4-en",
+      "type": "mcq",
+      "prompt": "Which lifting device can be used to raise a car, among other things?",
+      "payload": {
+        "options": [
+          {
+            "label": "Delco",
+            "correct": false
+          },
+          {
+            "label": "Tire patch",
+            "correct": false
+          },
+          {
+            "label": "Tailgate",
+            "correct": false
+          },
+          {
+            "label": "Jack",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

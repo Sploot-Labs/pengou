@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=368"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0368-1-en",
+      "type": "mcq",
+      "prompt": "Which factor can influence the color of honey?",
+      "payload": {
+        "options": [
+          {
+            "label": "Moon",
+            "correct": false
+          },
+          {
+            "label": "Temperature",
+            "correct": false
+          },
+          {
+            "label": "Size of the bees",
+            "correct": false
+          },
+          {
+            "label": "Type of flowers",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0368-2-en",
+      "type": "mcq",
+      "prompt": "What is the main role of honey for bees?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coolant",
+            "correct": false
+          },
+          {
+            "label": "Material",
+            "correct": false
+          },
+          {
+            "label": "Trap",
+            "correct": false
+          },
+          {
+            "label": "Food",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0368-3-en",
+      "type": "mcq",
+      "prompt": "Which bee is responsible for making honey in the hive?",
+      "payload": {
+        "options": [
+          {
+            "label": "Drone",
+            "correct": false
+          },
+          {
+            "label": "Worker",
+            "correct": true
+          },
+          {
+            "label": "Bumblebee",
+            "correct": false
+          },
+          {
+            "label": "Queen",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0368-4-en",
+      "type": "mcq",
+      "prompt": "How much honey does a bee make in its lifetime on average?",
+      "payload": {
+        "options": [
+          {
+            "label": "1 kg",
+            "correct": false
+          },
+          {
+            "label": "10 kg",
+            "correct": false
+          },
+          {
+            "label": "1 g",
+            "correct": true
+          },
+          {
+            "label": "100 g",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

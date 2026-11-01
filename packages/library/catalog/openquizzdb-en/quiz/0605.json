@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=605"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0605-1-en",
+      "type": "mcq",
+      "prompt": "In which Belgian province is the town of Mouscron?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hainaut",
+            "correct": true
+          },
+          {
+            "label": "Limburg",
+            "correct": false
+          },
+          {
+            "label": "Liège",
+            "correct": false
+          },
+          {
+            "label": "Namur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

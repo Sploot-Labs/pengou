@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=530"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0530-2-en",
+      "type": "mcq",
+      "prompt": "Which product evens out skin tone and covers minor skin flaws?",
+      "payload": {
+        "options": [
+          {
+            "label": "Balm",
+            "correct": false
+          },
+          {
+            "label": "Foundation",
+            "correct": true
+          },
+          {
+            "label": "Concealer",
+            "correct": false
+          },
+          {
+            "label": "Kohl",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0530-3-en",
+      "type": "mcq",
+      "prompt": "Which makeup product is used to draw a line along the eyelids?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eyeliner",
+            "correct": true
+          },
+          {
+            "label": "Straightener",
+            "correct": false
+          },
+          {
+            "label": "Concealer",
+            "correct": false
+          },
+          {
+            "label": "Protector",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0530-4-en",
+      "type": "mcq",
+      "prompt": "What do you use to open up the eyes by curling and lengthening lashes?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mascara",
+            "correct": true
+          },
+          {
+            "label": "Eyeshadow",
+            "correct": false
+          },
+          {
+            "label": "Gloss",
+            "correct": false
+          },
+          {
+            "label": "Blush",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

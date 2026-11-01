@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=528"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0528-2-en",
+      "type": "mcq",
+      "prompt": "What term is given to the spouse of the head of state in monarchies?",
+      "payload": {
+        "options": [
+          {
+            "label": "Consort",
+            "correct": true
+          },
+          {
+            "label": "Dauphin",
+            "correct": false
+          },
+          {
+            "label": "Regent",
+            "correct": false
+          },
+          {
+            "label": "Archon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0528-3-en",
+      "type": "mcq",
+      "prompt": "Which monarchic title is held by the sovereign of an empire?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sultan",
+            "correct": false
+          },
+          {
+            "label": "Chancellor",
+            "correct": false
+          },
+          {
+            "label": "Prince",
+            "correct": false
+          },
+          {
+            "label": "Emperor",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

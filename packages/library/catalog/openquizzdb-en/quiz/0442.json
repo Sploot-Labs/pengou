@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=442"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0442-2-en",
+      "type": "mcq",
+      "prompt": "Which Belgian city is considered the world's diamond center?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brussels",
+            "correct": false
+          },
+          {
+            "label": "Antwerp",
+            "correct": true
+          },
+          {
+            "label": "Liège",
+            "correct": false
+          },
+          {
+            "label": "Mons",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0442-3-en",
+      "type": "mcq",
+      "prompt": "What is Turkish, born in Austria and eaten in France?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pistolet",
+            "correct": false
+          },
+          {
+            "label": "Waffle",
+            "correct": false
+          },
+          {
+            "label": "Crepe",
+            "correct": false
+          },
+          {
+            "label": "Croissant",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0442-4-en",
+      "type": "mcq",
+      "prompt": "What is the largest port in the Netherlands?",
+      "payload": {
+        "options": [
+          {
+            "label": "Utrecht",
+            "correct": false
+          },
+          {
+            "label": "Amsterdam",
+            "correct": false
+          },
+          {
+            "label": "The Hague",
+            "correct": false
+          },
+          {
+            "label": "Rotterdam",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

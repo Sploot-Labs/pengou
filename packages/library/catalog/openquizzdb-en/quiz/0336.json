@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=336"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0336-1-en",
+      "type": "mcq",
+      "prompt": "Which wacky radio host appears in \"The Fifth Element\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pacoli",
+            "correct": false
+          },
+          {
+            "label": "Ruby Rhod",
+            "correct": true
+          },
+          {
+            "label": "Vito Cornelius",
+            "correct": false
+          },
+          {
+            "label": "Mangalore",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0336-4-en",
+      "type": "mcq",
+      "prompt": "How many stones must be brought together in \"The Fifth Element\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Four",
+            "correct": true
+          },
+          {
+            "label": "Five",
+            "correct": false
+          },
+          {
+            "label": "Two",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

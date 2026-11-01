@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=97"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0097-1-en",
+      "type": "mcq",
+      "prompt": "What do you call a mineral water rich in iron?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sparkling",
+            "correct": false
+          },
+          {
+            "label": "Ferruginous",
+            "correct": true
+          },
+          {
+            "label": "Still",
+            "correct": false
+          },
+          {
+            "label": "Calcareous",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0097-2-en",
+      "type": "mcq",
+      "prompt": "Which water of underground origin is naturally safe to drink?",
+      "payload": {
+        "options": [
+          {
+            "label": "Demineralized water",
+            "correct": false
+          },
+          {
+            "label": "Wastewater",
+            "correct": false
+          },
+          {
+            "label": "Sparkling water",
+            "correct": false
+          },
+          {
+            "label": "Spring water",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

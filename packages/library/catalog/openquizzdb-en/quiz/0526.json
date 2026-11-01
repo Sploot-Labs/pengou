@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=526"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0526-3-en",
+      "type": "mcq",
+      "prompt": "What was the former name of planet Vegeta?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beerus",
+            "correct": false
+          },
+          {
+            "label": "Plant",
+            "correct": true
+          },
+          {
+            "label": "Namek",
+            "correct": false
+          },
+          {
+            "label": "Melmac",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0526-4-en",
+      "type": "mcq",
+      "prompt": "Who helped put out the fire at Chi-Chi's father's castle?",
+      "payload": {
+        "options": [
+          {
+            "label": "Master Roshi",
+            "correct": true
+          },
+          {
+            "label": "Goku",
+            "correct": false
+          },
+          {
+            "label": "Bulma",
+            "correct": false
+          },
+          {
+            "label": "Drum",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

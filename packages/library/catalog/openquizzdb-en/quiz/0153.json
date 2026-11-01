@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=153"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0153-1-en",
+      "type": "mcq",
+      "prompt": "Which part of an electric car stores its energy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Battery",
+            "correct": true
+          },
+          {
+            "label": "Starter motor",
+            "correct": false
+          },
+          {
+            "label": "Alternator",
+            "correct": false
+          },
+          {
+            "label": "Radiator",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0153-2-en",
+      "type": "mcq",
+      "prompt": "Which company runs a Supercharger network for cars?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shell",
+            "correct": false
+          },
+          {
+            "label": "ExxonMobil",
+            "correct": false
+          },
+          {
+            "label": "BP",
+            "correct": false
+          },
+          {
+            "label": "Tesla",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0153-3-en",
+      "type": "mcq",
+      "prompt": "Where is the battery usually placed in an electric vehicle?",
+      "payload": {
+        "options": [
+          {
+            "label": "Under the car",
+            "correct": true
+          },
+          {
+            "label": "In the trunk",
+            "correct": false
+          },
+          {
+            "label": "On the fenders",
+            "correct": false
+          },
+          {
+            "label": "At the front",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

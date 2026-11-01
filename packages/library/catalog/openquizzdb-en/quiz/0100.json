@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=100"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0100-1-en",
+      "type": "mcq",
+      "prompt": "Which white dog accompanies Asterix and Obelix on their adventures?",
+      "payload": {
+        "options": [
+          {
+            "label": "Imagix",
+            "correct": false
+          },
+          {
+            "label": "Dogmatix",
+            "correct": true
+          },
+          {
+            "label": "Itineris",
+            "correct": false
+          },
+          {
+            "label": "Isidore",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0100-2-en",
+      "type": "mcq",
+      "prompt": "Tiramisu is a pastry and dessert of which origin?",
+      "payload": {
+        "options": [
+          {
+            "label": "Indian",
+            "correct": false
+          },
+          {
+            "label": "Iranian",
+            "correct": false
+          },
+          {
+            "label": "Italian",
+            "correct": true
+          },
+          {
+            "label": "Ivorian",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

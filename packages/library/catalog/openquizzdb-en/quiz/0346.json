@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=346"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0346-1-en",
+      "type": "mcq",
+      "prompt": "Which French food group owns the Volvic brand?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sodebo",
+            "correct": false
+          },
+          {
+            "label": "Régilait",
+            "correct": false
+          },
+          {
+            "label": "Danone",
+            "correct": true
+          },
+          {
+            "label": "Lactalis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0346-3-en",
+      "type": "mcq",
+      "prompt": "Which European country is the biggest consumer of bottled water?",
+      "payload": {
+        "options": [
+          {
+            "label": "Germany",
+            "correct": false
+          },
+          {
+            "label": "Spain",
+            "correct": false
+          },
+          {
+            "label": "Belgium",
+            "correct": false
+          },
+          {
+            "label": "Italy",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0346-4-en",
+      "type": "mcq",
+      "prompt": "Vichy Célestins water is known for its high content of which metal?",
+      "payload": {
+        "options": [
+          {
+            "label": "Calcium",
+            "correct": false
+          },
+          {
+            "label": "Sodium",
+            "correct": true
+          },
+          {
+            "label": "Potassium",
+            "correct": false
+          },
+          {
+            "label": "Magnesium",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

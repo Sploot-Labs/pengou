@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=191"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0191-3-en",
+      "type": "mcq",
+      "prompt": "Which company did Steve Jobs start in his childhood home's garage?",
+      "payload": {
+        "options": [
+          {
+            "label": "Microsoft",
+            "correct": false
+          },
+          {
+            "label": "Apple",
+            "correct": true
+          },
+          {
+            "label": "IBM",
+            "correct": false
+          },
+          {
+            "label": "Google",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0191-4-en",
+      "type": "mcq",
+      "prompt": "Which symbol links New York City and Steve Jobs?",
+      "payload": {
+        "options": [
+          {
+            "label": "Apple",
+            "correct": true
+          },
+          {
+            "label": "Taxi",
+            "correct": false
+          },
+          {
+            "label": "Skyscraper",
+            "correct": false
+          },
+          {
+            "label": "Computer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

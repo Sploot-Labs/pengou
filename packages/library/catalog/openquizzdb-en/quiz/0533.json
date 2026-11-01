@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=533"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0533-1-en",
+      "type": "mcq",
+      "prompt": "Who was the Roland-Garros tournament director in 2022?",
+      "payload": {
+        "options": [
+          {
+            "label": "Julie Halard",
+            "correct": false
+          },
+          {
+            "label": "Mary Pierce",
+            "correct": false
+          },
+          {
+            "label": "Nathalie Tauziat",
+            "correct": false
+          },
+          {
+            "label": "Amélie Mauresmo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

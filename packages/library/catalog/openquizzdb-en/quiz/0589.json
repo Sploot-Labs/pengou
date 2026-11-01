@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=589"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0589-2-en",
+      "type": "mcq",
+      "prompt": "Which sandy hazard spices up the game of golf?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grip",
+            "correct": false
+          },
+          {
+            "label": "Bunker",
+            "correct": true
+          },
+          {
+            "label": "Fairway",
+            "correct": false
+          },
+          {
+            "label": "Rough",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0589-4-en",
+      "type": "mcq",
+      "prompt": "Who may advise a player on the golf course?",
+      "payload": {
+        "options": [
+          {
+            "label": "Caddie",
+            "correct": true
+          },
+          {
+            "label": "Referee",
+            "correct": false
+          },
+          {
+            "label": "Driving range",
+            "correct": false
+          },
+          {
+            "label": "Captain",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

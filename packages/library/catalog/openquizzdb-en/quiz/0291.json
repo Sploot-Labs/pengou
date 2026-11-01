@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=291"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0291-2-en",
+      "type": "mcq",
+      "prompt": "In which country is the dragon a symbol of life and power?",
+      "payload": {
+        "options": [
+          {
+            "label": "China",
+            "correct": true
+          },
+          {
+            "label": "Peru",
+            "correct": false
+          },
+          {
+            "label": "India",
+            "correct": false
+          },
+          {
+            "label": "Iceland",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=277"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0277-2-en",
+      "type": "mcq",
+      "prompt": "Saffron is a spice taken from which kind of flower?",
+      "payload": {
+        "options": [
+          {
+            "label": "Acacia",
+            "correct": false
+          },
+          {
+            "label": "Crocus",
+            "correct": true
+          },
+          {
+            "label": "Poppy",
+            "correct": false
+          },
+          {
+            "label": "Tulip",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0277-3-en",
+      "type": "mcq",
+      "prompt": "Which herb is essential in béarnaise sauce?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chervil",
+            "correct": false
+          },
+          {
+            "label": "Tarragon",
+            "correct": true
+          },
+          {
+            "label": "Sage",
+            "correct": false
+          },
+          {
+            "label": "Rosemary",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

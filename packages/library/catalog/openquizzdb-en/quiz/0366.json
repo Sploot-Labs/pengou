@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=366"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0366-2-en",
+      "type": "mcq",
+      "prompt": "In which US city is OpenAI headquartered?",
+      "payload": {
+        "options": [
+          {
+            "label": "San Francisco",
+            "correct": true
+          },
+          {
+            "label": "Miami",
+            "correct": false
+          },
+          {
+            "label": "Los Angeles",
+            "correct": false
+          },
+          {
+            "label": "Chicago",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0366-4-en",
+      "type": "mcq",
+      "prompt": "Which OpenAI tool can generate text on its own?",
+      "payload": {
+        "options": [
+          {
+            "label": "OpenChat",
+            "correct": false
+          },
+          {
+            "label": "AlphaGo",
+            "correct": false
+          },
+          {
+            "label": "DALL-E",
+            "correct": false
+          },
+          {
+            "label": "ChatGPT",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

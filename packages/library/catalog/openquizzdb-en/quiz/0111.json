@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=111"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0111-1-en",
+      "type": "mcq",
+      "prompt": "What is the total length of the Ironman multisport race?",
+      "payload": {
+        "options": [
+          {
+            "label": "184 km",
+            "correct": false
+          },
+          {
+            "label": "142 km",
+            "correct": false
+          },
+          {
+            "label": "226 km",
+            "correct": true
+          },
+          {
+            "label": "98 km",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0111-2-en",
+      "type": "mcq",
+      "prompt": "How long does it take to complete the Ironman race?",
+      "payload": {
+        "options": [
+          {
+            "label": "1 week",
+            "correct": false
+          },
+          {
+            "label": "3 days",
+            "correct": false
+          },
+          {
+            "label": "Under 1 day",
+            "correct": true
+          },
+          {
+            "label": "1 month",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=317"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0317-2-en",
+      "type": "mcq",
+      "prompt": "In which film does Marion Cotillard star opposite Brad Pitt?",
+      "payload": {
+        "options": [
+          {
+            "label": "Allied",
+            "correct": true
+          },
+          {
+            "label": "Troy",
+            "correct": false
+          },
+          {
+            "label": "Fury",
+            "correct": false
+          },
+          {
+            "label": "Seven",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

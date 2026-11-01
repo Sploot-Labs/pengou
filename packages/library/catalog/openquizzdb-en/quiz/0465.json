@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=465"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0465-1-en",
+      "type": "mcq",
+      "prompt": "Which device is used to measure the depth of the oceans?",
+      "payload": {
+        "options": [
+          {
+            "label": "Geiger counter",
+            "correct": false
+          },
+          {
+            "label": "Radar",
+            "correct": false
+          },
+          {
+            "label": "Sextant",
+            "correct": false
+          },
+          {
+            "label": "Sonar",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0465-2-en",
+      "type": "mcq",
+      "prompt": "What is another name for the lie detector?",
+      "payload": {
+        "options": [
+          {
+            "label": "Detectograph",
+            "correct": false
+          },
+          {
+            "label": "Tachograph",
+            "correct": false
+          },
+          {
+            "label": "Mesograph",
+            "correct": false
+          },
+          {
+            "label": "Polygraph",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0465-3-en",
+      "type": "mcq",
+      "prompt": "Which navigation instrument measures the speed of a ship?",
+      "payload": {
+        "options": [
+          {
+            "label": "Compass",
+            "correct": false
+          },
+          {
+            "label": "Log",
+            "correct": true
+          },
+          {
+            "label": "Sextant",
+            "correct": false
+          },
+          {
+            "label": "Sonar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0465-4-en",
+      "type": "mcq",
+      "prompt": "Which philatelic tool counts the perforations of a postage stamp?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dentometer",
+            "correct": false
+          },
+          {
+            "label": "Odontometer",
+            "correct": true
+          },
+          {
+            "label": "Odontoscope",
+            "correct": false
+          },
+          {
+            "label": "Dentoscope",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

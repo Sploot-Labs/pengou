@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=67"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0067-1-en",
+      "type": "mcq",
+      "prompt": "Which carmaker built the famous Dauphine?",
+      "payload": {
+        "options": [
+          {
+            "label": "Citroën",
+            "correct": false
+          },
+          {
+            "label": "Simca",
+            "correct": false
+          },
+          {
+            "label": "Peugeot",
+            "correct": false
+          },
+          {
+            "label": "Renault",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0067-2-en",
+      "type": "mcq",
+      "prompt": "What was the first name of Italian carmaker Ferrari?",
+      "payload": {
+        "options": [
+          {
+            "label": "Elio",
+            "correct": false
+          },
+          {
+            "label": "Ernesto",
+            "correct": false
+          },
+          {
+            "label": "Emilio",
+            "correct": false
+          },
+          {
+            "label": "Enzo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0067-4-en",
+      "type": "mcq",
+      "prompt": "What is the oldest Japanese carmaker?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mazda",
+            "correct": false
+          },
+          {
+            "label": "Daihatsu",
+            "correct": true
+          },
+          {
+            "label": "Honda",
+            "correct": false
+          },
+          {
+            "label": "Suzuki",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

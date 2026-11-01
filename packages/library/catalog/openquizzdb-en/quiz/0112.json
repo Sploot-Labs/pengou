@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=112"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0112-1-en",
+      "type": "mcq",
+      "prompt": "What do you call vegetables cut into thin strips?",
+      "payload": {
+        "options": [
+          {
+            "label": "Julienne",
+            "correct": true
+          },
+          {
+            "label": "Token",
+            "correct": false
+          },
+          {
+            "label": "Ham",
+            "correct": false
+          },
+          {
+            "label": "Juliet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0112-3-en",
+      "type": "mcq",
+      "prompt": "Friday the 13th is the favorite day of which famous killer?",
+      "payload": {
+        "options": [
+          {
+            "label": "Judas",
+            "correct": false
+          },
+          {
+            "label": "Jack",
+            "correct": false
+          },
+          {
+            "label": "Jason",
+            "correct": true
+          },
+          {
+            "label": "Jacob",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

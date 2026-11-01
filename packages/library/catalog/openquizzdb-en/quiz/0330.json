@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=330"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0330-1-en",
+      "type": "mcq",
+      "prompt": "What is Zorg's middle name in \"The Fifth Element\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Simon",
+            "correct": false
+          },
+          {
+            "label": "Emanuel",
+            "correct": true
+          },
+          {
+            "label": "Patrick",
+            "correct": false
+          },
+          {
+            "label": "Jean-Baptiste",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0330-2-en",
+      "type": "mcq",
+      "prompt": "Which weapon does the Zorg company make in \"The Fifth Element\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zag-1",
+            "correct": false
+          },
+          {
+            "label": "ZK-1",
+            "correct": false
+          },
+          {
+            "label": "ZZ-Top",
+            "correct": false
+          },
+          {
+            "label": "ZF-1",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0330-3-en",
+      "type": "mcq",
+      "prompt": "Which actor plays Zorg in \"The Fifth Element\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ian Holm",
+            "correct": false
+          },
+          {
+            "label": "Chris Tucker",
+            "correct": false
+          },
+          {
+            "label": "Gary Oldman",
+            "correct": true
+          },
+          {
+            "label": "Bruce Willis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,416 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0285-3-en",
+      "type": "mcq",
+      "prompt": "Which writer and producer created the series \"The X-Files\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "J.J. Abrams",
+            "correct": false
+          },
+          {
+            "label": "David Lynch",
+            "correct": false
+          },
+          {
+            "label": "Chris Carter",
+            "correct": true
+          },
+          {
+            "label": "Steven Spielberg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0369-1-en",
+      "type": "mcq",
+      "prompt": "Which basketball player won his sixth NBA title in 1998?",
+      "payload": {
+        "options": [
+          {
+            "label": "Karl Malone",
+            "correct": false
+          },
+          {
+            "label": "Michael Jordan",
+            "correct": true
+          },
+          {
+            "label": "Charles Barkley",
+            "correct": false
+          },
+          {
+            "label": "Patrick Ewing",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0041-4-en",
+      "type": "mcq",
+      "prompt": "Which Tarantino film marked John Travolta's return to the big screen?",
+      "payload": {
+        "options": [
+          {
+            "label": "Django Unchained",
+            "correct": false
+          },
+          {
+            "label": "Pulp Fiction",
+            "correct": true
+          },
+          {
+            "label": "Jackie Brown",
+            "correct": false
+          },
+          {
+            "label": "Kill Bill",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0187-1-en",
+      "type": "mcq",
+      "prompt": "What color are the lifeguards' swimsuits in \"Baywatch\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Red",
+            "correct": true
+          },
+          {
+            "label": "Blue",
+            "correct": false
+          },
+          {
+            "label": "Green",
+            "correct": false
+          },
+          {
+            "label": "Yellow",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0336-3-en",
+      "type": "mcq",
+      "prompt": "Who is actually the fifth element in the film of the same name?",
+      "payload": {
+        "options": [
+          {
+            "label": "Korben Dallas",
+            "correct": false
+          },
+          {
+            "label": "Ruby Rhod",
+            "correct": false
+          },
+          {
+            "label": "Leeloo",
+            "correct": true
+          },
+          {
+            "label": "Cornelius",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0160-3-en",
+      "type": "mcq",
+      "prompt": "Kurt Cobain was the frontman of which legendary band?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nickelback",
+            "correct": false
+          },
+          {
+            "label": "Nine Inch Nails",
+            "correct": false
+          },
+          {
+            "label": "New Order",
+            "correct": false
+          },
+          {
+            "label": "Nirvana",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0345-1-en",
+      "type": "mcq",
+      "prompt": "What is the hero of the animated film \"The Lion King\" called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rafiki",
+            "correct": false
+          },
+          {
+            "label": "Scar",
+            "correct": false
+          },
+          {
+            "label": "Timon",
+            "correct": false
+          },
+          {
+            "label": "Simba",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0197-2-en",
+      "type": "mcq",
+      "prompt": "Who plays Leonardo DiCaprio's love interest in \"Titanic\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Helen Hunt",
+            "correct": false
+          },
+          {
+            "label": "Cameron Diaz",
+            "correct": false
+          },
+          {
+            "label": "Kate Winslet",
+            "correct": true
+          },
+          {
+            "label": "Julia Roberts",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0297-1-en",
+      "type": "mcq",
+      "prompt": "On which Nintendo console did the first \"Pokémon\" games come out?",
+      "payload": {
+        "options": [
+          {
+            "label": "GameCube",
+            "correct": false
+          },
+          {
+            "label": "Game Boy",
+            "correct": true
+          },
+          {
+            "label": "Nintendo DS",
+            "correct": false
+          },
+          {
+            "label": "Super Nintendo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0391-1-en",
+      "type": "mcq",
+      "prompt": "Which model appears in \"Asterix and Obelix Take On Caesar\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Karine Ferri",
+            "correct": false
+          },
+          {
+            "label": "Bérénice Marlohe",
+            "correct": false
+          },
+          {
+            "label": "Chloé Mortaud",
+            "correct": false
+          },
+          {
+            "label": "Laetitia Casta",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0533-4-en",
+      "type": "mcq",
+      "prompt": "Who is the only French female athlete to be a three-time Olympic champion?",
+      "payload": {
+        "options": [
+          {
+            "label": "Marie-José Pérec",
+            "correct": true
+          },
+          {
+            "label": "Muriel Hurtis",
+            "correct": false
+          },
+          {
+            "label": "Marita Koch",
+            "correct": false
+          },
+          {
+            "label": "Sandra Myers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0602-1-en",
+      "type": "mcq",
+      "prompt": "Which high-school girl in a TV series fought vampires?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joyce",
+            "correct": false
+          },
+          {
+            "label": "Tara",
+            "correct": false
+          },
+          {
+            "label": "Buffy",
+            "correct": true
+          },
+          {
+            "label": "Angel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0327-2-en",
+      "type": "mcq",
+      "prompt": "Who played Rachel Green in the worldwide hit sitcom \"Friends\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Charlize Theron",
+            "correct": false
+          },
+          {
+            "label": "Eva Longoria",
+            "correct": false
+          },
+          {
+            "label": "Lisa Kudrow",
+            "correct": false
+          },
+          {
+            "label": "Jennifer Aniston",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0364-2-en",
+      "type": "mcq",
+      "prompt": "Who directed the first two films of the \"Jurassic Park\" saga?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joe Johnston",
+            "correct": false
+          },
+          {
+            "label": "Tim Burton",
+            "correct": false
+          },
+          {
+            "label": "Steven Spielberg",
+            "correct": true
+          },
+          {
+            "label": "George Lucas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

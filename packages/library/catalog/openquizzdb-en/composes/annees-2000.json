@@ -1,0 +1,387 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0369-4-en",
+      "type": "mcq",
+      "prompt": "What is the last NBA team Michael Jordan played for?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lakers",
+            "correct": false
+          },
+          {
+            "label": "Bulls",
+            "correct": false
+          },
+          {
+            "label": "Wizards",
+            "correct": true
+          },
+          {
+            "label": "Spurs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0215-2-en",
+      "type": "mcq",
+      "prompt": "Which Caribbean pirate does Johnny Depp play?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jack Sparrow",
+            "correct": true
+          },
+          {
+            "label": "Redbeard",
+            "correct": false
+          },
+          {
+            "label": "Will Turner",
+            "correct": false
+          },
+          {
+            "label": "Captain Flint",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0391-4-en",
+      "type": "mcq",
+      "prompt": "Which model played the Bond girl in \"Quantum of Solace\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Olga Kurylenko",
+            "correct": true
+          },
+          {
+            "label": "Naomie Harris",
+            "correct": false
+          },
+          {
+            "label": "Eva Green",
+            "correct": false
+          },
+          {
+            "label": "Naomi Watts",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0363-4-en",
+      "type": "mcq",
+      "prompt": "Which Jean-Michel Jarre album is a tribute to the wind?",
+      "payload": {
+        "options": [
+          {
+            "label": "Téo & Téa",
+            "correct": false
+          },
+          {
+            "label": "Aero",
+            "correct": true
+          },
+          {
+            "label": "Chronologie",
+            "correct": false
+          },
+          {
+            "label": "Geometry of Love",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0555-1-en",
+      "type": "mcq",
+      "prompt": "In \"Ice Age\", what slips away from Scrat the squirrel?",
+      "payload": {
+        "options": [
+          {
+            "label": "An acorn",
+            "correct": true
+          },
+          {
+            "label": "A marble",
+            "correct": false
+          },
+          {
+            "label": "A bone",
+            "correct": false
+          },
+          {
+            "label": "A stone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0327-1-en",
+      "type": "mcq",
+      "prompt": "Which actress of Mexican origin stars in \"Desperate Housewives\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emma Watson",
+            "correct": false
+          },
+          {
+            "label": "Eva Longoria",
+            "correct": true
+          },
+          {
+            "label": "Halle Berry",
+            "correct": false
+          },
+          {
+            "label": "Salma Hayek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0324-1-en",
+      "type": "mcq",
+      "prompt": "Which actress plays Mikaela Banes in \"Transformers\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kate Winslet",
+            "correct": false
+          },
+          {
+            "label": "Megan Fox",
+            "correct": true
+          },
+          {
+            "label": "Eva Mendes",
+            "correct": false
+          },
+          {
+            "label": "Jennifer Connelly",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0239-2-en",
+      "type": "mcq",
+      "prompt": "In which film does Eminem play a young white rapper?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wonder Boys",
+            "correct": false
+          },
+          {
+            "label": "Crazy Heart",
+            "correct": false
+          },
+          {
+            "label": "8 Mile",
+            "correct": true
+          },
+          {
+            "label": "Once",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0311-2-en",
+      "type": "mcq",
+      "prompt": "Which song made Stromae famous in 2009?",
+      "payload": {
+        "options": [
+          {
+            "label": "Formidable",
+            "correct": false
+          },
+          {
+            "label": "Papaoutai",
+            "correct": false
+          },
+          {
+            "label": "Tous les mêmes",
+            "correct": false
+          },
+          {
+            "label": "Alors on danse",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0281-4-en",
+      "type": "mcq",
+      "prompt": "In which film does Uma Thurman appear as an avenging heroine?",
+      "payload": {
+        "options": [
+          {
+            "label": "Be Cool",
+            "correct": false
+          },
+          {
+            "label": "Prime",
+            "correct": false
+          },
+          {
+            "label": "Tape",
+            "correct": false
+          },
+          {
+            "label": "Kill Bill",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0280-2-en",
+      "type": "mcq",
+      "prompt": "What is the name of the video game console designed by Microsoft?",
+      "payload": {
+        "options": [
+          {
+            "label": "X Window",
+            "correct": false
+          },
+          {
+            "label": "Xbox",
+            "correct": true
+          },
+          {
+            "label": "Xfinity",
+            "correct": false
+          },
+          {
+            "label": "Xerxes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0027-1-en",
+      "type": "mcq",
+      "prompt": "Who becomes Tom Hanks's companion in \"Cast Away\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "A shoe",
+            "correct": false
+          },
+          {
+            "label": "A ball",
+            "correct": true
+          },
+          {
+            "label": "A photo",
+            "correct": false
+          },
+          {
+            "label": "A cuddly toy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0267-3-en",
+      "type": "mcq",
+      "prompt": "Which Jamaican athlete made his mark on the 2008 Olympics?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dexter Lee",
+            "correct": false
+          },
+          {
+            "label": "Lerone Clarke",
+            "correct": false
+          },
+          {
+            "label": "Ray Stewart",
+            "correct": false
+          },
+          {
+            "label": "Usain Bolt",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

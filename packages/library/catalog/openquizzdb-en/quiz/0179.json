@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=179"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0179-1-en",
+      "type": "mcq",
+      "prompt": "Which Ron Howard film pays tribute to a firefighter brigade?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cocoon",
+            "correct": false
+          },
+          {
+            "label": "Copycat",
+            "correct": false
+          },
+          {
+            "label": "Backdraft",
+            "correct": true
+          },
+          {
+            "label": "Ransom",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=602"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0602-4-en",
+      "type": "mcq",
+      "prompt": "What is the first name of the father of the Simpson family?",
+      "payload": {
+        "options": [
+          {
+            "label": "Abraham",
+            "correct": false
+          },
+          {
+            "label": "Homer",
+            "correct": true
+          },
+          {
+            "label": "Bart",
+            "correct": false
+          },
+          {
+            "label": "Herbert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=487"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0487-3-en",
+      "type": "mcq",
+      "prompt": "What is the name of the famous Zorro's faithful servant?",
+      "payload": {
+        "options": [
+          {
+            "label": "Garcia",
+            "correct": false
+          },
+          {
+            "label": "Esteban",
+            "correct": false
+          },
+          {
+            "label": "Galindo",
+            "correct": false
+          },
+          {
+            "label": "Bernardo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

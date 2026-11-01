@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=280"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0280-1-en",
+      "type": "mcq",
+      "prompt": "What are the aliens called in the \"Alien\" saga?",
+      "payload": {
+        "options": [
+          {
+            "label": "Xenomorphs",
+            "correct": true
+          },
+          {
+            "label": "Xenelases",
+            "correct": false
+          },
+          {
+            "label": "Xiphoids",
+            "correct": false
+          },
+          {
+            "label": "Xiphophores",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0280-4-en",
+      "type": "mcq",
+      "prompt": "Which king won the Battle of Thermopylae?",
+      "payload": {
+        "options": [
+          {
+            "label": "Xerxes",
+            "correct": true
+          },
+          {
+            "label": "Ximenes",
+            "correct": false
+          },
+          {
+            "label": "Xin",
+            "correct": false
+          },
+          {
+            "label": "Xocolatl",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

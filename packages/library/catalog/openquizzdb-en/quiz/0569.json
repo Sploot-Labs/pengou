@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=569"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0569-1-en",
+      "type": "mcq",
+      "prompt": "Which Coca-Cola soda competes directly with 7 Up?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fanta",
+            "correct": false
+          },
+          {
+            "label": "Bonaqua",
+            "correct": false
+          },
+          {
+            "label": "Sprite",
+            "correct": true
+          },
+          {
+            "label": "Nalu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0569-4-en",
+      "type": "mcq",
+      "prompt": "In which city in Georgia is the Coca-Cola company headquartered?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dalton",
+            "correct": false
+          },
+          {
+            "label": "Atlanta",
+            "correct": true
+          },
+          {
+            "label": "Albany",
+            "correct": false
+          },
+          {
+            "label": "Brunswick",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

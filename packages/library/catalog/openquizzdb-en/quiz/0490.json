@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=490"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0490-2-en",
+      "type": "mcq",
+      "prompt": "Which material is mostly used to make windsurf boards?",
+      "payload": {
+        "options": [
+          {
+            "label": "Plastic",
+            "correct": false
+          },
+          {
+            "label": "Fiberglass",
+            "correct": true
+          },
+          {
+            "label": "Wood",
+            "correct": false
+          },
+          {
+            "label": "Aluminum",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0490-3-en",
+      "type": "mcq",
+      "prompt": "What is the standard basic position in windsurfing?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crouching",
+            "correct": false
+          },
+          {
+            "label": "Standing",
+            "correct": true
+          },
+          {
+            "label": "Sitting",
+            "correct": false
+          },
+          {
+            "label": "Lying down",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

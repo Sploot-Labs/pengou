@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=489"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0489-1-en",
+      "type": "mcq",
+      "prompt": "Which saint is the mother of the Virgin Mary?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saint Joan",
+            "correct": false
+          },
+          {
+            "label": "Saint Anne",
+            "correct": true
+          },
+          {
+            "label": "Saint Martha",
+            "correct": false
+          },
+          {
+            "label": "Saint Odile",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0489-2-en",
+      "type": "mcq",
+      "prompt": "In which month do the \"Ice Saints\" fall?",
+      "payload": {
+        "options": [
+          {
+            "label": "February",
+            "correct": false
+          },
+          {
+            "label": "March",
+            "correct": false
+          },
+          {
+            "label": "June",
+            "correct": false
+          },
+          {
+            "label": "May",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0489-4-en",
+      "type": "mcq",
+      "prompt": "Which saint keeps the keys to the salvation of souls and to Paradise?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saint Thomas",
+            "correct": false
+          },
+          {
+            "label": "Saint John",
+            "correct": false
+          },
+          {
+            "label": "Saint Peter",
+            "correct": true
+          },
+          {
+            "label": "Saint Luke",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

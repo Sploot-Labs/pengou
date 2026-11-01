@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=376"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0376-2-en",
+      "type": "mcq",
+      "prompt": "Which river, prone to violent floods, is crossed by the Pont du Gard?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bièvre",
+            "correct": false
+          },
+          {
+            "label": "Garonne",
+            "correct": false
+          },
+          {
+            "label": "Gardon",
+            "correct": true
+          },
+          {
+            "label": "Rhône",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0376-4-en",
+      "type": "mcq",
+      "prompt": "How many arches does Westminster Bridge have?",
+      "payload": {
+        "options": [
+          {
+            "label": "Seven",
+            "correct": true
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Nine",
+            "correct": false
+          },
+          {
+            "label": "Eight",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

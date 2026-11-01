@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=403"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0403-1-en",
+      "type": "mcq",
+      "prompt": "What is the job of Peeta's father in \"The Hunger Games\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hairdresser",
+            "correct": false
+          },
+          {
+            "label": "Lawyer",
+            "correct": false
+          },
+          {
+            "label": "Pharmacist",
+            "correct": false
+          },
+          {
+            "label": "Baker",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

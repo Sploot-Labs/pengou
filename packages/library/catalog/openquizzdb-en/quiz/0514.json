@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=514"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0514-1-en",
+      "type": "mcq",
+      "prompt": "Which Greek island produces a very well-known muscat?",
+      "payload": {
+        "options": [
+          {
+            "label": "Samos",
+            "correct": true
+          },
+          {
+            "label": "Ikaria",
+            "correct": false
+          },
+          {
+            "label": "Lesbos",
+            "correct": false
+          },
+          {
+            "label": "Rhodes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0514-2-en",
+      "type": "mcq",
+      "prompt": "From which fairly sunny country does Muscat of Patras come?",
+      "payload": {
+        "options": [
+          {
+            "label": "Greece",
+            "correct": true
+          },
+          {
+            "label": "Spain",
+            "correct": false
+          },
+          {
+            "label": "Cyprus",
+            "correct": false
+          },
+          {
+            "label": "Turkey",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0514-3-en",
+      "type": "mcq",
+      "prompt": "Which European country produces the white wine Aphrodite?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spain",
+            "correct": false
+          },
+          {
+            "label": "Greece",
+            "correct": false
+          },
+          {
+            "label": "Cyprus",
+            "correct": true
+          },
+          {
+            "label": "France",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

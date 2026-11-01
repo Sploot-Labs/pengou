@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=117"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0117-3-en",
+      "type": "mcq",
+      "prompt": "What did the Obamas turn the White House garden into?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gym",
+            "correct": false
+          },
+          {
+            "label": "Open-air theater",
+            "correct": false
+          },
+          {
+            "label": "Vegetable garden",
+            "correct": true
+          },
+          {
+            "label": "Parking lot",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

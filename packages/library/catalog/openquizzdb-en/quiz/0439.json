@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=439"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0439-1-en",
+      "type": "mcq",
+      "prompt": "In which year did Marcel Pagnol publish \"My Mother's Castle\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "1957",
+            "correct": true
+          },
+          {
+            "label": "1977",
+            "correct": false
+          },
+          {
+            "label": "1917",
+            "correct": false
+          },
+          {
+            "label": "1937",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

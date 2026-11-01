@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=506"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0506-1-en",
+      "type": "mcq",
+      "prompt": "Which ship carries passengers across the open sea?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monohull",
+            "correct": false
+          },
+          {
+            "label": "Galley",
+            "correct": false
+          },
+          {
+            "label": "Ocean liner",
+            "correct": true
+          },
+          {
+            "label": "Trimaran",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0506-2-en",
+      "type": "mcq",
+      "prompt": "Which vessel is able to travel underwater?",
+      "payload": {
+        "options": [
+          {
+            "label": "Submarine",
+            "correct": true
+          },
+          {
+            "label": "Bateau-mouche",
+            "correct": false
+          },
+          {
+            "label": "Ocean liner",
+            "correct": false
+          },
+          {
+            "label": "Ferry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0506-3-en",
+      "type": "mcq",
+      "prompt": "Which luxury pleasure boat is often seen in Saint-Tropez?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bateau-mouche",
+            "correct": false
+          },
+          {
+            "label": "Seaplane",
+            "correct": false
+          },
+          {
+            "label": "Aircraft carrier",
+            "correct": false
+          },
+          {
+            "label": "Yacht",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0506-4-en",
+      "type": "mcq",
+      "prompt": "Which boat is used for tourism on the Seine in Paris?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bateau-bus",
+            "correct": false
+          },
+          {
+            "label": "Bateau-mouche",
+            "correct": true
+          },
+          {
+            "label": "Ferry",
+            "correct": false
+          },
+          {
+            "label": "Ocean liner",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

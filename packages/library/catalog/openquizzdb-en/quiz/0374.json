@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=374"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0374-2-en",
+      "type": "mcq",
+      "prompt": "Which alcoholic apple-based drink is between 2% and 8% ABV?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lambig",
+            "correct": false
+          },
+          {
+            "label": "Pommeau",
+            "correct": false
+          },
+          {
+            "label": "Cider",
+            "correct": true
+          },
+          {
+            "label": "Calvados",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0374-3-en",
+      "type": "mcq",
+      "prompt": "Which fairy-tale princess was poisoned by an apple?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinderella",
+            "correct": false
+          },
+          {
+            "label": "Jasmine",
+            "correct": false
+          },
+          {
+            "label": "Aurora",
+            "correct": false
+          },
+          {
+            "label": "Snow White",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0374-4-en",
+      "type": "mcq",
+      "prompt": "Which American multinational has an apple as its logo?",
+      "payload": {
+        "options": [
+          {
+            "label": "Xerox",
+            "correct": false
+          },
+          {
+            "label": "IBM",
+            "correct": false
+          },
+          {
+            "label": "Microsoft",
+            "correct": false
+          },
+          {
+            "label": "Apple",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

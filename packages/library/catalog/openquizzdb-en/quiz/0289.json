@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=289"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0289-1-en",
+      "type": "mcq",
+      "prompt": "Which programs let you browse the Internet?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spreadsheets",
+            "correct": false
+          },
+          {
+            "label": "Emulators",
+            "correct": false
+          },
+          {
+            "label": "Browsers",
+            "correct": true
+          },
+          {
+            "label": "Editors",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

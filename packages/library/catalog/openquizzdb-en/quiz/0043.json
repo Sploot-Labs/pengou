@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=43"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0043-3-en",
+      "type": "mcq",
+      "prompt": "What do you call a fleshy stone fruit such as the cherry?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beechnut",
+            "correct": false
+          },
+          {
+            "label": "Nutlet",
+            "correct": false
+          },
+          {
+            "label": "Drupe",
+            "correct": true
+          },
+          {
+            "label": "Berry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0043-4-en",
+      "type": "mcq",
+      "prompt": "Which green covering around the shell is specific to the walnut?",
+      "payload": {
+        "options": [
+          {
+            "label": "Husk",
+            "correct": true
+          },
+          {
+            "label": "Peduncle",
+            "correct": false
+          },
+          {
+            "label": "Crimson",
+            "correct": false
+          },
+          {
+            "label": "Purple",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

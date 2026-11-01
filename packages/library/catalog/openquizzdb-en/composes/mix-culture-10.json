@@ -1,0 +1,474 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0415-3-en",
+      "type": "mcq",
+      "prompt": "Which city in the Kansai region was the imperial capital of Japan?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kamakura",
+            "correct": false
+          },
+          {
+            "label": "Noro",
+            "correct": false
+          },
+          {
+            "label": "Kyoto",
+            "correct": true
+          },
+          {
+            "label": "Tokyo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0531-1-en",
+      "type": "mcq",
+      "prompt": "Which title ranks below viscount and above knight?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lord",
+            "correct": false
+          },
+          {
+            "label": "Consort",
+            "correct": false
+          },
+          {
+            "label": "Count",
+            "correct": false
+          },
+          {
+            "label": "Baron",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0455-1-en",
+      "type": "mcq",
+      "prompt": "Which flower is traditionally placed on graves on All Saints' Day?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cosmos",
+            "correct": false
+          },
+          {
+            "label": "Chrysanthemum",
+            "correct": true
+          },
+          {
+            "label": "Crocus",
+            "correct": false
+          },
+          {
+            "label": "Camellia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0309-3-en",
+      "type": "mcq",
+      "prompt": "How many strings does a classical violin have?",
+      "payload": {
+        "options": [
+          {
+            "label": "Three",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Four",
+            "correct": true
+          },
+          {
+            "label": "Five",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0223-2-en",
+      "type": "mcq",
+      "prompt": "Who is Andie MacDowell's love interest in \"Four Weddings and a Funeral\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hugh Grant",
+            "correct": true
+          },
+          {
+            "label": "Colin Firth",
+            "correct": false
+          },
+          {
+            "label": "Kevin Costner",
+            "correct": false
+          },
+          {
+            "label": "Rowan Atkinson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0470-2-en",
+      "type": "mcq",
+      "prompt": "What color are London's famous LTI taxis?",
+      "payload": {
+        "options": [
+          {
+            "label": "Black",
+            "correct": true
+          },
+          {
+            "label": "Yellow",
+            "correct": false
+          },
+          {
+            "label": "Green",
+            "correct": false
+          },
+          {
+            "label": "Red",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0334-2-en",
+      "type": "mcq",
+      "prompt": "What is Bruce Willis's job in Tarantino's \"Pulp Fiction\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Boxer",
+            "correct": true
+          },
+          {
+            "label": "Footballer",
+            "correct": false
+          },
+          {
+            "label": "Veterinarian",
+            "correct": false
+          },
+          {
+            "label": "Lawyer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0169-4-en",
+      "type": "mcq",
+      "prompt": "Which half-baguette holds hot meat, fries and sauce?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mitraillette",
+            "correct": true
+          },
+          {
+            "label": "Truffade",
+            "correct": false
+          },
+          {
+            "label": "Rösti",
+            "correct": false
+          },
+          {
+            "label": "Frico",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0304-2-en",
+      "type": "mcq",
+      "prompt": "Which river plunges over Victoria Falls, which are 108 meters high?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zala",
+            "correct": false
+          },
+          {
+            "label": "Zambezi",
+            "correct": true
+          },
+          {
+            "label": "Zanskar",
+            "correct": false
+          },
+          {
+            "label": "Zaire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0423-3-en",
+      "type": "mcq",
+      "prompt": "Which energy drink has a logo with three green claw marks?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monster Energy",
+            "correct": true
+          },
+          {
+            "label": "Rockstar",
+            "correct": false
+          },
+          {
+            "label": "Red Bull",
+            "correct": false
+          },
+          {
+            "label": "Dark Dog",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0485-2-en",
+      "type": "mcq",
+      "prompt": "Which Grand Slam tournament has Sharapova won twice?",
+      "payload": {
+        "options": [
+          {
+            "label": "US Open",
+            "correct": false
+          },
+          {
+            "label": "Wimbledon",
+            "correct": false
+          },
+          {
+            "label": "Australian Open",
+            "correct": false
+          },
+          {
+            "label": "French Open",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0494-2-en",
+      "type": "mcq",
+      "prompt": "Which writer, who died in 1814, is sometimes nicknamed the \"Divine Marquis\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rimbaud",
+            "correct": false
+          },
+          {
+            "label": "Diderot",
+            "correct": false
+          },
+          {
+            "label": "Sade",
+            "correct": true
+          },
+          {
+            "label": "Montesquieu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0069-4-en",
+      "type": "mcq",
+      "prompt": "Which English physicist paid attention to falling apples?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tycho Brahe",
+            "correct": false
+          },
+          {
+            "label": "Isaac Newton",
+            "correct": true
+          },
+          {
+            "label": "Peter Higgs",
+            "correct": false
+          },
+          {
+            "label": "Nicolaus Copernicus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0451-3-en",
+      "type": "mcq",
+      "prompt": "Who runs the boating school in \"SpongeBob SquarePants\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mrs. Puff",
+            "correct": true
+          },
+          {
+            "label": "Krabs",
+            "correct": false
+          },
+          {
+            "label": "Sandy",
+            "correct": false
+          },
+          {
+            "label": "Potty",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0435-2-en",
+      "type": "mcq",
+      "prompt": "Which country do the Cyclades, made up of about 250 islands, belong to?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bulgaria",
+            "correct": false
+          },
+          {
+            "label": "Greece",
+            "correct": true
+          },
+          {
+            "label": "Libya",
+            "correct": false
+          },
+          {
+            "label": "Turkey",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0589-3-en",
+      "type": "mcq",
+      "prompt": "What is the grassy area around the hole called in golf?",
+      "payload": {
+        "options": [
+          {
+            "label": "Green",
+            "correct": true
+          },
+          {
+            "label": "Rough",
+            "correct": false
+          },
+          {
+            "label": "Fairway",
+            "correct": false
+          },
+          {
+            "label": "Bunker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

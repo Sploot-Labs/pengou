@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=534"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0534-1-en",
+      "type": "mcq",
+      "prompt": "Which treatment uses seawater to heal ailments of the body?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sophrology",
+            "correct": false
+          },
+          {
+            "label": "Reflexology",
+            "correct": false
+          },
+          {
+            "label": "Naturopathy",
+            "correct": false
+          },
+          {
+            "label": "Thalassotherapy",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0534-2-en",
+      "type": "mcq",
+      "prompt": "What can an athlete do to avoid sudden cramps?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sleep",
+            "correct": false
+          },
+          {
+            "label": "Smoke",
+            "correct": false
+          },
+          {
+            "label": "Stay hydrated",
+            "correct": true
+          },
+          {
+            "label": "Eat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0534-3-en",
+      "type": "mcq",
+      "prompt": "Which position is the most tiring for our spine?",
+      "payload": {
+        "options": [
+          {
+            "label": "Standing",
+            "correct": false
+          },
+          {
+            "label": "Sitting",
+            "correct": true
+          },
+          {
+            "label": "Balancing",
+            "correct": false
+          },
+          {
+            "label": "Lying down",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0534-4-en",
+      "type": "mcq",
+      "prompt": "What do sweat glands mainly secrete?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hair",
+            "correct": false
+          },
+          {
+            "label": "Sweat",
+            "correct": true
+          },
+          {
+            "label": "Body hair",
+            "correct": false
+          },
+          {
+            "label": "Nails",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

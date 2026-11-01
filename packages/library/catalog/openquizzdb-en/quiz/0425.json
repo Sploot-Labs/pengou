@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=425"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0425-2-en",
+      "type": "mcq",
+      "prompt": "In Victor Hugo's \"Les Misérables\", who is Fantine's daughter?",
+      "payload": {
+        "options": [
+          {
+            "label": "Enjolras",
+            "correct": false
+          },
+          {
+            "label": "Cosette",
+            "correct": true
+          },
+          {
+            "label": "Azelma",
+            "correct": false
+          },
+          {
+            "label": "Éponine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0425-3-en",
+      "type": "mcq",
+      "prompt": "Which singer is Lily-Rose Depp's mother?",
+      "payload": {
+        "options": [
+          {
+            "label": "Amber Heard",
+            "correct": false
+          },
+          {
+            "label": "Kate Moss",
+            "correct": false
+          },
+          {
+            "label": "Vanessa Paradis",
+            "correct": true
+          },
+          {
+            "label": "Winona Ryder",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

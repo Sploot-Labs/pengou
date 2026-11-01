@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=434"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0434-1-en",
+      "type": "mcq",
+      "prompt": "Which of these is the title of a Depeche Mode song?",
+      "payload": {
+        "options": [
+          {
+            "label": "Little 13",
+            "correct": false
+          },
+          {
+            "label": "Little 21",
+            "correct": false
+          },
+          {
+            "label": "Little 9",
+            "correct": false
+          },
+          {
+            "label": "Little 15",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0434-2-en",
+      "type": "mcq",
+      "prompt": "Which instrumental track appears on the album \"Sounds of the Universe\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Introspectre",
+            "correct": false
+          },
+          {
+            "label": "Jazz Thieves",
+            "correct": false
+          },
+          {
+            "label": "Easy Tiger",
+            "correct": false
+          },
+          {
+            "label": "Spacewalker",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

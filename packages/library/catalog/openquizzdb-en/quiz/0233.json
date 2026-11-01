@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=233"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0233-1-en",
+      "type": "mcq",
+      "prompt": "Which actor stars opposite Keanu Reeves in the film \"Speed\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dennis Hopper",
+            "correct": true
+          },
+          {
+            "label": "Harvey Keitel",
+            "correct": false
+          },
+          {
+            "label": "Nicolas Cage",
+            "correct": false
+          },
+          {
+            "label": "Val Kilmer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0233-3-en",
+      "type": "mcq",
+      "prompt": "In which action franchise does he play a feared former assassin?",
+      "payload": {
+        "options": [
+          {
+            "label": "John Wick",
+            "correct": true
+          },
+          {
+            "label": "The Equalizer",
+            "correct": false
+          },
+          {
+            "label": "Speed",
+            "correct": false
+          },
+          {
+            "label": "Taken",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

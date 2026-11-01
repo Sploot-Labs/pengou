@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=163"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0163-1-en",
+      "type": "mcq",
+      "prompt": "Which island housed a maximum-security federal prison until 1963?",
+      "payload": {
+        "options": [
+          {
+            "label": "Santa Cruz",
+            "correct": false
+          },
+          {
+            "label": "San Miguel",
+            "correct": false
+          },
+          {
+            "label": "Alcatraz",
+            "correct": true
+          },
+          {
+            "label": "Anacapa",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0163-2-en",
+      "type": "mcq",
+      "prompt": "Which American riviera has a TV series named after it?",
+      "payload": {
+        "options": [
+          {
+            "label": "Santa Monica",
+            "correct": false
+          },
+          {
+            "label": "Santa Barbara",
+            "correct": true
+          },
+          {
+            "label": "Santa Rosa",
+            "correct": false
+          },
+          {
+            "label": "Santa Clarita",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0163-4-en",
+      "type": "mcq",
+      "prompt": "Which marine-life theme park is in Orlando?",
+      "payload": {
+        "options": [
+          {
+            "label": "Epcot",
+            "correct": false
+          },
+          {
+            "label": "Magic Kingdom",
+            "correct": false
+          },
+          {
+            "label": "Everland",
+            "correct": false
+          },
+          {
+            "label": "SeaWorld",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

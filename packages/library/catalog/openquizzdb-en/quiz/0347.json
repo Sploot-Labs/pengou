@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=347"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0347-3-en",
+      "type": "mcq",
+      "prompt": "What is the title of Luxembourg's sovereign?",
+      "payload": {
+        "options": [
+          {
+            "label": "President",
+            "correct": false
+          },
+          {
+            "label": "Emperor",
+            "correct": false
+          },
+          {
+            "label": "King",
+            "correct": false
+          },
+          {
+            "label": "Grand Duke",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0347-4-en",
+      "type": "mcq",
+      "prompt": "Which river flows through Luxembourg?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rhine",
+            "correct": false
+          },
+          {
+            "label": "Moselle",
+            "correct": true
+          },
+          {
+            "label": "Danube",
+            "correct": false
+          },
+          {
+            "label": "Seine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

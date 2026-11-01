@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=593"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0593-3-en",
+      "type": "mcq",
+      "prompt": "By how many years is Meghan Markle older than Prince Harry?",
+      "payload": {
+        "options": [
+          {
+            "label": "Three years",
+            "correct": true
+          },
+          {
+            "label": "Seven years",
+            "correct": false
+          },
+          {
+            "label": "Nine years",
+            "correct": false
+          },
+          {
+            "label": "Five years",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

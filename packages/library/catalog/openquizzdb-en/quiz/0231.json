@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=231"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0231-2-en",
+      "type": "mcq",
+      "prompt": "In the \"Star Trek\" universe, which physicist is also a skilled helmsman?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sulu",
+            "correct": true
+          },
+          {
+            "label": "Uhura",
+            "correct": false
+          },
+          {
+            "label": "Chekov",
+            "correct": false
+          },
+          {
+            "label": "McCoy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0231-3-en",
+      "type": "mcq",
+      "prompt": "Which technological device beams people around in \"Star Trek\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Viewscreen",
+            "correct": false
+          },
+          {
+            "label": "Cosmic cube",
+            "correct": false
+          },
+          {
+            "label": "Transporter",
+            "correct": true
+          },
+          {
+            "label": "Holodeck",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

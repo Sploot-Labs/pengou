@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=53"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0053-1-en",
+      "type": "mcq",
+      "prompt": "Which character did Roger Moore and Sean Connery both play?",
+      "payload": {
+        "options": [
+          {
+            "label": "James Bond",
+            "correct": true
+          },
+          {
+            "label": "The Saint",
+            "correct": false
+          },
+          {
+            "label": "OSS 117",
+            "correct": false
+          },
+          {
+            "label": "Dick Tracy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0053-4-en",
+      "type": "mcq",
+      "prompt": "Which Vangelis single includes a text recited by Sean Connery?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mythodea",
+            "correct": false
+          },
+          {
+            "label": "Alexander",
+            "correct": false
+          },
+          {
+            "label": "Pulstar",
+            "correct": false
+          },
+          {
+            "label": "Ithaka",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=541"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0541-3-en",
+      "type": "mcq",
+      "prompt": "What do you need to use ski lifts?",
+      "payload": {
+        "options": [
+          {
+            "label": "A ski pass",
+            "correct": true
+          },
+          {
+            "label": "A beanie",
+            "correct": false
+          },
+          {
+            "label": "An ID card",
+            "correct": false
+          },
+          {
+            "label": "A fingerprint",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0541-4-en",
+      "type": "mcq",
+      "prompt": "What is the front part of a ski binding called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Telemark",
+            "correct": false
+          },
+          {
+            "label": "Toe piece",
+            "correct": true
+          },
+          {
+            "label": "Ski tip",
+            "correct": false
+          },
+          {
+            "label": "Heel piece",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

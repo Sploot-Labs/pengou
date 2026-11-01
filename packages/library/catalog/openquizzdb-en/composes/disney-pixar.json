@@ -1,0 +1,474 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0177-1-en",
+      "type": "mcq",
+      "prompt": "After midnight, what does Cinderella's carriage turn into?",
+      "payload": {
+        "options": [
+          {
+            "label": "A pumpkin",
+            "correct": true
+          },
+          {
+            "label": "A cake",
+            "correct": false
+          },
+          {
+            "label": "A mouse",
+            "correct": false
+          },
+          {
+            "label": "An apple",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0410-2-en",
+      "type": "mcq",
+      "prompt": "Who is Woody's rival at the start of \"Toy Story\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Buzz Lightyear",
+            "correct": true
+          },
+          {
+            "label": "Buster",
+            "correct": false
+          },
+          {
+            "label": "Rex",
+            "correct": false
+          },
+          {
+            "label": "Sid",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0345-3-en",
+      "type": "mcq",
+      "prompt": "Who is Timon's companion in the film \"The Lion King\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Scar",
+            "correct": false
+          },
+          {
+            "label": "Pumbaa",
+            "correct": true
+          },
+          {
+            "label": "Shenzi",
+            "correct": false
+          },
+          {
+            "label": "Zazu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0452-1-en",
+      "type": "mcq",
+      "prompt": "Which clumsy dog is a friend of Mickey and Pluto?",
+      "payload": {
+        "options": [
+          {
+            "label": "Felix",
+            "correct": false
+          },
+          {
+            "label": "Donald",
+            "correct": false
+          },
+          {
+            "label": "Mortimer",
+            "correct": false
+          },
+          {
+            "label": "Goofy",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0177-4-en",
+      "type": "mcq",
+      "prompt": "Which Disney princess is a mermaid living with King Triton?",
+      "payload": {
+        "options": [
+          {
+            "label": "Merida",
+            "correct": false
+          },
+          {
+            "label": "Tiana",
+            "correct": false
+          },
+          {
+            "label": "Jasmine",
+            "correct": false
+          },
+          {
+            "label": "Ariel",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0446-1-en",
+      "type": "mcq",
+      "prompt": "In which Pixar film does a rat turn out to be an excellent cook?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cars",
+            "correct": false
+          },
+          {
+            "label": "Toy Story",
+            "correct": false
+          },
+          {
+            "label": "Monsters, Inc.",
+            "correct": false
+          },
+          {
+            "label": "Ratatouille",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0291-3-en",
+      "type": "mcq",
+      "prompt": "What is the little dragon called in \"Mulan\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fitou",
+            "correct": false
+          },
+          {
+            "label": "Golu",
+            "correct": false
+          },
+          {
+            "label": "Toothless",
+            "correct": false
+          },
+          {
+            "label": "Mushu",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0452-3-en",
+      "type": "mcq",
+      "prompt": "Which breed of dog is Cruella de Vil fiercely interested in?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fox terrier",
+            "correct": false
+          },
+          {
+            "label": "Husky",
+            "correct": false
+          },
+          {
+            "label": "Jack Russell",
+            "correct": false
+          },
+          {
+            "label": "Dalmatian",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0345-2-en",
+      "type": "mcq",
+      "prompt": "What is Scar's distinctive physical feature in \"The Lion King\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "A scar",
+            "correct": true
+          },
+          {
+            "label": "Burned face",
+            "correct": false
+          },
+          {
+            "label": "White eye",
+            "correct": false
+          },
+          {
+            "label": "No whiskers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0177-2-en",
+      "type": "mcq",
+      "prompt": "Who sings \"Someday My Prince Will Come\" in a Disney cartoon?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jasmine",
+            "correct": false
+          },
+          {
+            "label": "Alice",
+            "correct": false
+          },
+          {
+            "label": "Snow White",
+            "correct": true
+          },
+          {
+            "label": "Cinderella",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0338-1-en",
+      "type": "mcq",
+      "prompt": "In which Pixar animated film is Flik a worker ant?",
+      "payload": {
+        "options": [
+          {
+            "label": "Toy Story",
+            "correct": false
+          },
+          {
+            "label": "Ratatouille",
+            "correct": false
+          },
+          {
+            "label": "A Bug's Life",
+            "correct": true
+          },
+          {
+            "label": "Monsters, Inc.",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0452-4-en",
+      "type": "mcq",
+      "prompt": "In Disney's \"Robin Hood\", what animal is Robin?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fox",
+            "correct": true
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          },
+          {
+            "label": "Tiger",
+            "correct": false
+          },
+          {
+            "label": "Bear",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0407-4-en",
+      "type": "mcq",
+      "prompt": "Who owns the toys that Woody and his friends belong to?",
+      "payload": {
+        "options": [
+          {
+            "label": "Andy",
+            "correct": true
+          },
+          {
+            "label": "Lisa",
+            "correct": false
+          },
+          {
+            "label": "Sid",
+            "correct": false
+          },
+          {
+            "label": "Daisy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0184-3-en",
+      "type": "mcq",
+      "prompt": "Which Disney character's nose grows bigger?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pinocchio",
+            "correct": true
+          },
+          {
+            "label": "Pluto",
+            "correct": false
+          },
+          {
+            "label": "Pumbaa",
+            "correct": false
+          },
+          {
+            "label": "Pocahontas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0103-2-en",
+      "type": "mcq",
+      "prompt": "Which fictional pizzeria chain appears in \"Toy Story\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pizza Hollywood",
+            "correct": false
+          },
+          {
+            "label": "Pizza Land",
+            "correct": false
+          },
+          {
+            "label": "Pizza Planet",
+            "correct": true
+          },
+          {
+            "label": "Pizza Toys",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0345-4-en",
+      "type": "mcq",
+      "prompt": "What does Timon, the little meerkat in \"The Lion King\", dress up as?",
+      "payload": {
+        "options": [
+          {
+            "label": "As a hula girl",
+            "correct": true
+          },
+          {
+            "label": "As a hyena",
+            "correct": false
+          },
+          {
+            "label": "As a lion cub",
+            "correct": false
+          },
+          {
+            "label": "As a twig",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

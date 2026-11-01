@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=463"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0463-4-en",
+      "type": "mcq",
+      "prompt": "What is the most popular sport in Belgium?",
+      "payload": {
+        "options": [
+          {
+            "label": "Football",
+            "correct": true
+          },
+          {
+            "label": "Hockey",
+            "correct": false
+          },
+          {
+            "label": "Tennis",
+            "correct": false
+          },
+          {
+            "label": "Cycling",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=71"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0071-3-en",
+      "type": "mcq",
+      "prompt": "What do Bourvil and De Funès throw onto the road in \"La Grande Vadrouille\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pumpkins",
+            "correct": true
+          },
+          {
+            "label": "Banknotes",
+            "correct": false
+          },
+          {
+            "label": "Wine barrels",
+            "correct": false
+          },
+          {
+            "label": "Tomatoes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

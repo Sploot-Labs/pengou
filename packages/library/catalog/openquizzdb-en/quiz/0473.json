@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=473"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0473-1-en",
+      "type": "mcq",
+      "prompt": "Which of these major cities is the most populous in Italy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rome",
+            "correct": true
+          },
+          {
+            "label": "Naples",
+            "correct": false
+          },
+          {
+            "label": "Milan",
+            "correct": false
+          },
+          {
+            "label": "Florence",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0473-3-en",
+      "type": "mcq",
+      "prompt": "What particularly mild climate does the city of Rome enjoy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tropical",
+            "correct": false
+          },
+          {
+            "label": "Temperate",
+            "correct": false
+          },
+          {
+            "label": "Oceanic",
+            "correct": false
+          },
+          {
+            "label": "Mediterranean",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0473-4-en",
+      "type": "mcq",
+      "prompt": "Which animal was chosen as the symbol of the city of Rome?",
+      "payload": {
+        "options": [
+          {
+            "label": "She-wolf",
+            "correct": true
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          },
+          {
+            "label": "Goat",
+            "correct": false
+          },
+          {
+            "label": "Deer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

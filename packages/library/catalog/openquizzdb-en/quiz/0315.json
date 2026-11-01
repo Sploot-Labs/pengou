@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=315"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0315-3-en",
+      "type": "mcq",
+      "prompt": "What is the minimum number of strings on a bass guitar?",
+      "payload": {
+        "options": [
+          {
+            "label": "Three",
+            "correct": false
+          },
+          {
+            "label": "Five",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Four",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0315-4-en",
+      "type": "mcq",
+      "prompt": "What shape is the balalaika, which comes from Russia?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rectangular",
+            "correct": false
+          },
+          {
+            "label": "Square",
+            "correct": false
+          },
+          {
+            "label": "Round",
+            "correct": false
+          },
+          {
+            "label": "Triangular",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

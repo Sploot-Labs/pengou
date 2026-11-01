@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=554"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0554-1-en",
+      "type": "mcq",
+      "prompt": "What is the largest city in the Grand Duchy of Luxembourg?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vianden",
+            "correct": false
+          },
+          {
+            "label": "Diekirch",
+            "correct": false
+          },
+          {
+            "label": "Luxembourg",
+            "correct": true
+          },
+          {
+            "label": "Wiltz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0554-4-en",
+      "type": "mcq",
+      "prompt": "Which sea has no fish or algae?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yellow Sea",
+            "correct": false
+          },
+          {
+            "label": "Red Sea",
+            "correct": false
+          },
+          {
+            "label": "White Sea",
+            "correct": false
+          },
+          {
+            "label": "Dead Sea",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

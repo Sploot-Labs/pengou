@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=169"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0169-1-en",
+      "type": "mcq",
+      "prompt": "Which carbonnade is made of meat stewed in beer?",
+      "payload": {
+        "options": [
+          {
+            "label": "Germanic",
+            "correct": false
+          },
+          {
+            "label": "Flemish",
+            "correct": true
+          },
+          {
+            "label": "Brussels",
+            "correct": false
+          },
+          {
+            "label": "Walloon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0169-3-en",
+      "type": "mcq",
+      "prompt": "Which breaded, spicy sausage is often served in friteries?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gandeuillot",
+            "correct": false
+          },
+          {
+            "label": "Fricadelle",
+            "correct": true
+          },
+          {
+            "label": "Rosette",
+            "correct": false
+          },
+          {
+            "label": "Longeole",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

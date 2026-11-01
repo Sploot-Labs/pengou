@@ -1,0 +1,358 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0217-2-en",
+      "type": "mcq",
+      "prompt": "Which film features Arnold Schwarzenegger as a cyborg?",
+      "payload": {
+        "options": [
+          {
+            "label": "Real Steel",
+            "correct": false
+          },
+          {
+            "label": "Terminator",
+            "correct": true
+          },
+          {
+            "label": "Sucker Punch",
+            "correct": false
+          },
+          {
+            "label": "Robots",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0071-1-en",
+      "type": "mcq",
+      "prompt": "Who is Louis de Funès's accomplice in \"La Soupe aux choux\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michel Galabru",
+            "correct": false
+          },
+          {
+            "label": "Bourvil",
+            "correct": false
+          },
+          {
+            "label": "Jean Carmet",
+            "correct": true
+          },
+          {
+            "label": "Jacques Villeret",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0053-2-en",
+      "type": "mcq",
+      "prompt": "Which film brought Sean Connery and Christopher Lambert together on screen?",
+      "payload": {
+        "options": [
+          {
+            "label": "Greystoke",
+            "correct": false
+          },
+          {
+            "label": "Highlander",
+            "correct": true
+          },
+          {
+            "label": "Mad Max",
+            "correct": false
+          },
+          {
+            "label": "Subway",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0055-1-en",
+      "type": "mcq",
+      "prompt": "Which famous car did David Hasselhoff drive in \"Knight Rider\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kytie",
+            "correct": false
+          },
+          {
+            "label": "Kate",
+            "correct": false
+          },
+          {
+            "label": "KITT",
+            "correct": true
+          },
+          {
+            "label": "Kiki",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-2-en",
+      "type": "mcq",
+      "prompt": "Which Swedish rock band sang \"The Final Countdown\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "AC/DC",
+            "correct": false
+          },
+          {
+            "label": "Trust",
+            "correct": false
+          },
+          {
+            "label": "Europe",
+            "correct": true
+          },
+          {
+            "label": "Scorpions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0073-2-en",
+      "type": "mcq",
+      "prompt": "Who was the first French Formula 1 world champion?",
+      "payload": {
+        "options": [
+          {
+            "label": "Didier Pironi",
+            "correct": false
+          },
+          {
+            "label": "Jean Alesi",
+            "correct": false
+          },
+          {
+            "label": "Alain Prost",
+            "correct": true
+          },
+          {
+            "label": "Guy Ligier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0316-1-en",
+      "type": "mcq",
+      "prompt": "Which drawing and guessing game was created in 1985 by Rob Angel?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mastermind",
+            "correct": false
+          },
+          {
+            "label": "Uno",
+            "correct": false
+          },
+          {
+            "label": "Blokus",
+            "correct": false
+          },
+          {
+            "label": "Pictionary",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0343-1-en",
+      "type": "mcq",
+      "prompt": "Who plays Jacques Mayol in the film \"The Big Blue\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jean-Marc Barr",
+            "correct": true
+          },
+          {
+            "label": "Paul Shenar",
+            "correct": false
+          },
+          {
+            "label": "Marc Duret",
+            "correct": false
+          },
+          {
+            "label": "Jean Reno",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0487-1-en",
+      "type": "mcq",
+      "prompt": "What is the family name of Bobby and JR in \"Dallas\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Krebbs",
+            "correct": false
+          },
+          {
+            "label": "Shepard",
+            "correct": false
+          },
+          {
+            "label": "Barnes",
+            "correct": false
+          },
+          {
+            "label": "Ewing",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0223-3-en",
+      "type": "mcq",
+      "prompt": "Which actor dances with Jennifer Grey in \"Dirty Dancing\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Patrick Swayze",
+            "correct": true
+          },
+          {
+            "label": "John Travolta",
+            "correct": false
+          },
+          {
+            "label": "Kevin Costner",
+            "correct": false
+          },
+          {
+            "label": "Michael Keaton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0493-1-en",
+      "type": "mcq",
+      "prompt": "What is Jessica Fletcher's job in \"Murder, She Wrote\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Writer",
+            "correct": true
+          },
+          {
+            "label": "Lawyer",
+            "correct": false
+          },
+          {
+            "label": "Journalist",
+            "correct": false
+          },
+          {
+            "label": "Painter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0449-2-en",
+      "type": "mcq",
+      "prompt": "Which colorful characters live underwater with a snorkel on their heads?",
+      "payload": {
+        "options": [
+          {
+            "label": "Teletubbies",
+            "correct": false
+          },
+          {
+            "label": "Care Bears",
+            "correct": false
+          },
+          {
+            "label": "Snorks",
+            "correct": true
+          },
+          {
+            "label": "Barbapapa",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=457"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0457-1-en",
+      "type": "mcq",
+      "prompt": "Which sweet Belgian candy is also called a \"priest's hat\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cuberdon",
+            "correct": true
+          },
+          {
+            "label": "Calisson",
+            "correct": false
+          },
+          {
+            "label": "Rigolette",
+            "correct": false
+          },
+          {
+            "label": "Speculoos",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0457-2-en",
+      "type": "mcq",
+      "prompt": "Which very hard honey biscuit is the pride of the town of Dinant?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tuile",
+            "correct": false
+          },
+          {
+            "label": "Rocher",
+            "correct": false
+          },
+          {
+            "label": "Couque",
+            "correct": true
+          },
+          {
+            "label": "Palette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0457-3-en",
+      "type": "mcq",
+      "prompt": "Which beer has a trout with a ring in its mouth as its symbol?",
+      "payload": {
+        "options": [
+          {
+            "label": "Omega",
+            "correct": false
+          },
+          {
+            "label": "Orval",
+            "correct": true
+          },
+          {
+            "label": "Orezza",
+            "correct": false
+          },
+          {
+            "label": "Omer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0457-4-en",
+      "type": "mcq",
+      "prompt": "Which Belgian dish can be made with poultry, fish or shellfish?",
+      "payload": {
+        "options": [
+          {
+            "label": "Godverdom",
+            "correct": false
+          },
+          {
+            "label": "Waterzooi",
+            "correct": true
+          },
+          {
+            "label": "Potferdeke",
+            "correct": false
+          },
+          {
+            "label": "Smerlap",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

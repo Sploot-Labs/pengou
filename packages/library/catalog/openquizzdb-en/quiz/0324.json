@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=324"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0324-3-en",
+      "type": "mcq",
+      "prompt": "Which actress became famous thanks to \"The Hunger Games\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jennifer Lawrence",
+            "correct": true
+          },
+          {
+            "label": "Nina Dobrev",
+            "correct": false
+          },
+          {
+            "label": "Halle Berry",
+            "correct": false
+          },
+          {
+            "label": "Emma Watson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0324-4-en",
+      "type": "mcq",
+      "prompt": "Who stars with Justin Timberlake in \"Friends with Benefits\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cameron Diaz",
+            "correct": false
+          },
+          {
+            "label": "Mila Kunis",
+            "correct": true
+          },
+          {
+            "label": "Emma Stone",
+            "correct": false
+          },
+          {
+            "label": "Rachel Weisz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

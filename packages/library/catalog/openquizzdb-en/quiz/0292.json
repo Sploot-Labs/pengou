@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=292"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0292-1-en",
+      "type": "mcq",
+      "prompt": "Which major online video platform belongs to Google?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yandex",
+            "correct": false
+          },
+          {
+            "label": "Yahoo!",
+            "correct": false
+          },
+          {
+            "label": "Yammer",
+            "correct": false
+          },
+          {
+            "label": "YouTube",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0292-3-en",
+      "type": "mcq",
+      "prompt": "In which manga does the high schooler Yugi Muto gain strange powers?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yamada",
+            "correct": false
+          },
+          {
+            "label": "YuYu Hakusho",
+            "correct": false
+          },
+          {
+            "label": "Yu-Gi-Oh!",
+            "correct": true
+          },
+          {
+            "label": "Yona",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}
