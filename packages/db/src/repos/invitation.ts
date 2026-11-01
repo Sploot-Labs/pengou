@@ -1,5 +1,5 @@
 import { and, eq } from 'drizzle-orm'
-import type { Role } from '@splootlabs/shared'
+import { hasPermission, type Role } from '@splootlabs/shared'
 import type { Db } from '../client.js'
 import type { TenantScope } from '../tenant.js'
 import { schema } from '../index.js'
@@ -75,6 +75,20 @@ export async function revokeInvitation(scope: TenantScope, id: string): Promise<
   return row ?? null
 }
 
+/** Révoque toutes les invitations `pending` créées par `userId` dans le tenant du scope (retrait ou
+ * rétrogradation de l'auteur). Renvoie le nombre de lignes touchées. */
+export async function revokePendingInvitationsBy(scope: TenantScope, userId: string): Promise<number> {
+  const rows = await scope.db.update(schema.invitation)
+    .set({ status: 'revoked' })
+    .where(and(
+      eq(schema.invitation.tenantId, scope.tenantId),
+      eq(schema.invitation.invitedBy, userId),
+      eq(schema.invitation.status, 'pending'),
+    ))
+    .returning({ id: schema.invitation.id })
+  return rows.length
+}
+
 /** Renvoie une invitation `pending` : régénère token + expiration. Renvoie la ligne mise à jour, ou
  * null si absente / non pending. */
 export async function resendInvitation(
@@ -117,7 +131,7 @@ export async function getInvitationByToken(db: Db, token: string): Promise<Invit
   return row ?? null
 }
 
-export type AcceptCode = 'not_found' | 'not_pending' | 'expired' | 'already_member'
+export type AcceptCode = 'not_found' | 'not_pending' | 'expired' | 'already_member' | 'inviter_revoked'
 
 /** Erreur typée d'acceptation, mappée en code HTTP par la route. */
 export class InvitationError extends Error {
@@ -146,15 +160,27 @@ export async function acceptInvitation(
     if (inv.status !== 'pending') throw new InvitationError('not_pending')
     if (inv.expiresAt.getTime() < nowMs) throw new InvitationError('expired')
 
+    // L'auteur doit encore pouvoir inviter (members:manage) : retiré ou rétrogradé, ses jetons
+    // en circulation ne valent plus rien.
+    const [inviter] = await tx.select({ role: schema.membership.role }).from(schema.membership)
+      .where(and(eq(schema.membership.userId, inv.invitedBy), eq(schema.membership.tenantId, inv.tenantId)))
+      .limit(1)
+    if (!inviter || !hasPermission(inviter.role as Role, 'members:manage')) {
+      throw new InvitationError('inviter_revoked')
+    }
+
     const [existing] = await tx.select({ id: schema.membership.id }).from(schema.membership)
       .where(and(eq(schema.membership.userId, input.userId), eq(schema.membership.tenantId, inv.tenantId)))
       .limit(1)
     if (existing) throw new InvitationError('already_member')
 
     await tx.insert(schema.membership).values({ userId: input.userId, tenantId: inv.tenantId, role: inv.role })
-    await tx.update(schema.invitation)
+    const consumed = await tx.update(schema.invitation)
       .set({ status: 'accepted', acceptedAt: new Date(nowMs) })
-      .where(eq(schema.invitation.id, inv.id))
+      .where(and(eq(schema.invitation.id, inv.id), eq(schema.invitation.status, 'pending')))
+      .returning({ id: schema.invitation.id })
+    // Course entre deux acceptations : l'autre a consommé le jeton entre la lecture et l'update.
+    if (consumed.length === 0) throw new InvitationError('not_pending')
     return { tenantId: inv.tenantId, role: inv.role as Role }
   })
 }
