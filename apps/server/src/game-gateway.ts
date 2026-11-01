@@ -4,7 +4,7 @@ import {
   resolveTenantId, getMembershipRole, withTenantTx, getQuiz, listQuestions,
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
   clearEngineState, listResumableSessions, abandonStaleSessions, abandonInactiveSessions, listSessionPlayers,
-  type Db,
+  type ContentSource, type Db,
 } from '@splootlabs/db'
 import type { Auth } from '@splootlabs/auth'
 import { hasPermission, type AppConfig } from '@splootlabs/shared'
@@ -31,6 +31,9 @@ export type GameGatewayDeps = {
 type SessionMeta = {
   dbSessionId: string
   tenantId: string
+  /** Sources distinctes des questions (copiées de la bibliothèque), jointes au `podium` pour que
+   * le grand écran crédite leurs auteurs en fin de partie. Vide pour un quiz écrit à la main. */
+  sources: ContentSource[]
   /** playerId moteur (genId()) → id de ligne `session_player` en base (ids indépendants). */
   playerDbIds: Map<string, string>
   /** Index de question déjà persistés (recordAnswer) — évite un double-insert si host:reveal
@@ -162,6 +165,15 @@ function toEngineQuestion(row: { id: string; type: string; prompt: string; timeL
     basePoints: DEFAULT_BASE_POINTS,
     payload: row.payload,
   }
+}
+
+/** Sources distinctes d'une liste de questions, dans leur ordre d'apparition. */
+function distinctSources(rows: Array<{ source: ContentSource | null }>): ContentSource[] {
+  const byKey = new Map<string, ContentSource>()
+  for (const { source } of rows) {
+    if (source) byKey.set(JSON.stringify([source.name, source.url ?? '', source.license]), source)
+  }
+  return [...byKey.values()]
 }
 
 function playersPayload(session: GameSession): Array<{ id: string; nickname: string; score: number; connected: boolean }> {
@@ -346,7 +358,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // reste lisible via session_player/answer_record).
     await clearEngineState(systemDb, meta.dbSessionId)
     const top = engine.ranking(session).slice(0, 3)
-    io.to(roomName(sessionId)).emit('podium', { top })
+    io.to(roomName(sessionId)).emit('podium', { top, sources: meta.sources })
     // Éviction mémoire différée (P1-6) : fenêtre de grâce pour une reconnexion au podium.
     setTimeout(() => { void evictSessionMemory(sessionId, meta) }, PODIUM_EVICTION_DELAY).unref()
     return session
@@ -478,6 +490,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     sessionMetaByEngineId.set(session.id, {
       dbSessionId: dbSession.id,
       tenantId,
+      sources: distinctSources(questionRows),
       playerDbIds: new Map(),
       revealedRounds: new Set(),
       roundWrites: new Map(),
@@ -830,7 +843,10 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         break
       case 'podium':
         socket.emit('scoreboard', { ranking: engine.ranking(session) })
-        socket.emit('podium', { top: engine.ranking(session).slice(0, 3) })
+        socket.emit('podium', {
+          top: engine.ranking(session).slice(0, 3),
+          sources: sessionMetaByEngineId.get(session.id)?.sources ?? [],
+        })
         break
       case 'lobby':
       default:
@@ -877,9 +893,14 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
             .map(([idx]) => Number(idx)),
         )
 
+        // Sources relues en base : elles ne font pas partie de l'état moteur persisté.
+        const questionRows = await withTenantTx(appDb, { tenantId: session.tenantId }, (scope) =>
+          listQuestions(scope, session.quizId))
+
         const meta: SessionMeta = {
           dbSessionId: row.id,
           tenantId: session.tenantId,
+          sources: distinctSources(questionRows ?? []),
           playerDbIds,
           revealedRounds,
           roundWrites: new Map(),

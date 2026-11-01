@@ -6,9 +6,46 @@ const LICENSE_URLS: Record<string, string> = {
   'CC BY-SA 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/deed.fr',
 }
 
-/** Nom de la base d'origine : « OpenQuizzDB, Jean Martin » devient « OpenQuizzDB ». */
+/** Page publique des crédits : auteurs, modifications et licence de chaque base. */
+export const CREDITS_PATH = '/credits'
+
+// Ancre de la page des crédits pour chaque base du catalogue, reconnue à son adresse.
+const CREDIT_ANCHORS: [RegExp, string][] = [
+  [/opentdb\.com/i, 'opentdb'],
+  [/openquizzdb\.org/i, 'openquizzdb'],
+]
+
+// Les packs traduits le signalent dans leur nom : « OpenQuizzDB, Jean Martin (traduction Sploot Labs) ».
+const TRANSLATION_SUFFIX = /\s*\(traduction ([^)]+)\)\s*$/
+
+/** Auteur de la traduction, ou `null` quand le contenu est dans sa langue d'origine. */
+export function sourceTranslator(source: ContentSource): string | null {
+  return TRANSLATION_SUFFIX.exec(source.name)?.[1].trim() ?? null
+}
+
+/** Nom complet sans la mention de traduction : « OpenQuizzDB, Jean Martin ». */
+function sourceAuthorName(source: ContentSource): string {
+  return source.name.replace(TRANSLATION_SUFFIX, '')
+}
+
+/** Nom de la base d'origine : « OpenQuizzDB, Jean Martin (traduction …) » devient « OpenQuizzDB ». */
 export function sourceBaseName(source: ContentSource): string {
-  return source.name.split(',')[0].trim()
+  return sourceAuthorName(source).split(',')[0].trim()
+}
+
+/** Lien vers la section de la page des crédits qui détaille cette source, ou vers la page entière. */
+export function creditsHref(source: ContentSource | null, section?: string): string {
+  const anchor = section ?? CREDIT_ANCHORS.find(([pattern]) => pattern.test(source?.url ?? ''))?.[1]
+  return anchor ? `${CREDITS_PATH}#${anchor}` : CREDITS_PATH
+}
+
+/** Lien vers la page des crédits, dans un nouvel onglet pour ne pas quitter l'écran en cours. */
+function CreditsLink({ href = CREDITS_PATH, children }: { href?: string; children: ReactNode }) {
+  return (
+    <a href={href} target="_blank" rel="noreferrer">
+      {children}
+    </a>
+  )
 }
 
 /** « d'OpenQuizzDB », « de Wikipédia » : élision devant une voyelle ou un h. */
@@ -33,13 +70,14 @@ function LicenseLink({ license }: { license: string }) {
   )
 }
 
-function SourceName({ source }: { source: ContentSource }) {
+function SourceName({ source, withTranslation = true }: { source: ContentSource; withTranslation?: boolean }) {
+  const name = withTranslation ? source.name : sourceAuthorName(source)
   return source.url ? (
     <a href={source.url} target="_blank" rel="noreferrer">
-      {source.name}
+      {name}
     </a>
   ) : (
-    source.name
+    name
   )
 }
 
@@ -48,40 +86,61 @@ function isShareAlike(license: string): boolean {
   return /\bBY-SA\b/i.test(license)
 }
 
-/** Mention discrète des cartes de quiz : « D'après OpenQuizzDB ». Le détail est dans l'aperçu. */
+/** Étiquettes des cartes de quiz : la base d'origine, et la traduction s'il y en a une. Chacune
+ * renvoie à sa section de la page des crédits, qui porte le détail (auteurs, licence). */
 export function SourceShort({ source }: { source: ContentSource | null }) {
   if (!source) return null
-  return <span className="source-credit">D'après {sourceBaseName(source)}</span>
-}
-
-/** Attribution complète : « Source : {nom}, licence {licence} (adapté) ».
- * La licence renvoie à son texte quand elle est connue (CC BY-SA 4.0 impose le lien et la mention
- * de modification, les contenus étant copiés puis modifiables). Rien sans source. */
-export function SourceCredit({ source }: { source: ContentSource | null }) {
-  if (!source) return null
+  const translator = sourceTranslator(source)
   return (
-    <span className="source-credit">
-      Source : <SourceName source={source} />, licence <LicenseLink license={source.license} /> (adapté)
+    <span className="source-tags">
+      <a className="source-tag" href={creditsHref(source)} target="_blank" rel="noreferrer">
+        <span className="visually-hidden">Crédits :</span> {sourceBaseName(source)}
+      </a>
+      {translator && (
+        <a className="source-tag" href={creditsHref(source, 'traductions')} target="_blank" rel="noreferrer">
+          Traduit par {translator}
+        </a>
+      )}
     </span>
   )
 }
 
-/** Note unique sous une liste de questions : bases d'origine et licences, sans répéter par question. */
-export function SourcesNote({ sources, children }: { sources: ContentSource[]; children?: ReactNode }) {
+/** Attribution d'un quiz : « D'après {nom et auteur}, traduit par {…}. Crédits et licence ».
+ * Le nom renvoie à l'original ; la licence et les modifications sont sur la page des crédits,
+ * ce que CC BY-SA 4.0 admet (attribution par un lien vers une page qui la contient). Rien sans source. */
+export function SourceCredit({ source }: { source: ContentSource | null }) {
+  if (!source) return null
+  const translator = sourceTranslator(source)
+  return (
+    <span className="source-credit">
+      D'après <SourceName source={source} withTranslation={false} />
+      {translator && `, traduit par ${translator}`}. <CreditsLink href={creditsHref(source)}>Crédits et licence</CreditsLink>
+    </span>
+  )
+}
+
+/** Note unique sous une liste de questions : bases d'origine, le détail étant sur la page des crédits. */
+export function SourcesNote({ sources }: { sources: ContentSource[] }) {
+  if (sources.length === 0) return null
+  const names = [...new Set(sources.map(sourceBaseName))]
+  return (
+    <p className="source-credit">
+      Questions issues {joinFr(names.map(deName))}. <CreditsLink>Crédits et licences</CreditsLink>
+    </p>
+  )
+}
+
+/** Crédit de fin de partie sur le grand écran : bases d'origine, licence et adresse de la page
+ * des crédits écrite en clair, un écran projeté ne se cliquant pas. Rien sans source. */
+export function PodiumCredits({ sources }: { sources: ContentSource[] }) {
   if (sources.length === 0) return null
   const names = [...new Set(sources.map(sourceBaseName))]
   const licenses = [...new Set(sources.map((s) => s.license))]
   return (
-    <p className="source-credit">
-      Questions issues {joinFr(names.map(deName))}, licence{licenses.length > 1 ? 's' : ''}{' '}
-      {licenses.map((l, i) => (
-        <span key={l}>
-          {i > 0 && (i === licenses.length - 1 ? ' et ' : ', ')}
-          <LicenseLink license={l} />
-        </span>
-      ))}
-      , adaptées pour Pengou.{children ? ' ' : ''}
-      {children}
+    <p className="source-credit podium-credits">
+      Questions issues {joinFr(names.map(deName))}, licence{licenses.length > 1 ? 's' : ''} {joinFr(licenses)}.
+      Crédits : {window.location.host}
+      {CREDITS_PATH}
     </p>
   )
 }
@@ -151,8 +210,8 @@ export function SourcesPanel({
             <LicenseLink license={l} />
           </span>
         ))}
-        , contenus adaptés.
-        {licenses.some(isShareAlike) && ' Vos modifications de ces contenus restent sous cette licence.'}
+        .{licenses.some(isShareAlike) && ' Vos modifications de ces contenus restent sous cette licence.'}{' '}
+        <CreditsLink>Crédits et licences</CreditsLink>
       </p>
     </section>
   )

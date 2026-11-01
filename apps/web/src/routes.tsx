@@ -4,6 +4,7 @@ import { AppShell } from './AppShell'
 import { GameSocketProvider } from './realtime/GameSocketProvider'
 import { RequireAuth } from './RequireAuth'
 import { BigScreen } from './screens/BigScreen'
+import { Credits } from './screens/Credits'
 import { Home } from './screens/Home'
 import { HostEditor } from './screens/HostEditor'
 import { HostLive } from './screens/HostLive'
@@ -61,7 +62,7 @@ function HostRealtimeLayout() {
  * `/`, `/quizzes/:quizId` et `/host/:sessionId` sont protégées par
  * <RequireAuth> (redirection vers /login sans session, écran de chargement
  * pendant la résolution — pas de flash du contenu protégé). `/login`,
- * `/signup`, `/join`, `/play` et `/screen/:sessionId` restent publiques :
+ * `/signup`, `/join`, `/play`, `/screen/:sessionId` et `/credits` restent publiques :
  * joueurs et grand écran sont anonymes, et il faut pouvoir atteindre
  * login/signup sans session.
  *
@@ -179,6 +180,8 @@ export const router = createBrowserRouter([
         ),
       },
       { path: '/screen/:sessionId', element: <BigScreen /> },
+      // Crédits des questions de la bibliothèque : publics, les mentions de l'interface y renvoient.
+      { path: '/credits', element: <Credits /> },
     ],
   },
 ])
