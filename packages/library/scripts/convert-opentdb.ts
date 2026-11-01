@@ -5,7 +5,10 @@
 // par curate-opentdb.ts (retraits, reclassements, quiz composés à la main).
 //
 // Usage (depuis la racine du dépôt) :
-//   pnpm dlx tsx packages/library/scripts/convert-opentdb.ts --cache <dossier>
+//   pnpm dlx tsx --conditions=development packages/library/scripts/convert-opentdb.ts --cache <dossier>
+//   (--conditions=development fait lire les sources de @splootlabs/quiz, qui n'a pas de dist/)
+//
+// Chaîne de production complète : voir l'en-tête de translate-catalog.ts.
 //
 // Le dossier de cache reçoit les réponses brutes de l'API (un fichier par catégorie) ; il doit
 // rester hors du dépôt. Une catégorie déjà en cache n'est pas redemandée : l'API renvoyant un tirage

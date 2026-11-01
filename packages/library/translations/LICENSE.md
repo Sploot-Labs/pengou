@@ -10,4 +10,5 @@ Elles sont diffusées sous la licence Creative Commons Attribution - Partage dan
 conditions 4.0 International (CC BY-SA 4.0), https://creativecommons.org/licenses/by-sa/4.0/deed.fr
 
 Elles ne relèvent pas de la licence Apache-2.0 du code de Pengou. L'attribution détaillée des
-sources d'origine figure dans le fichier LICENSE de chaque dossier traduit du catalogue.
+sources d'origine figure dans `packages/library/catalog/openquizzdb/LICENSE.md` et
+`packages/library/catalog/opentdb/LICENSE.md`, reprise dans le LICENSE.md de chaque dossier traduit.

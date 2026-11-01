@@ -1,7 +1,10 @@
 // Conversion d'OpenQuizzDB (https://www.openquizzdb.org, CC BY-SA 4.0) en packs du catalogue.
 //
 // Usage (depuis la racine du dépôt) :
-//   pnpm dlx tsx packages/library/scripts/convert-openquizzdb.ts --cache <dossier>
+//   pnpm dlx tsx --conditions=development packages/library/scripts/convert-openquizzdb.ts --cache <dossier>
+//   (--conditions=development fait lire les sources de @splootlabs/quiz, qui n'a pas de dist/)
+//
+// Chaîne de production complète : voir l'en-tête de translate-catalog.ts.
 //
 // Le dossier de cache reçoit les données brutes téléchargées (liste des quiz et un JSON par quiz) ;
 // il doit rester hors du dépôt. Un fichier déjà en cache n'est pas retéléchargé, ce qui rend la
@@ -224,11 +227,13 @@ async function main() {
   const authors = new Map<number, string>()
   const credits: Credit[] = []
   let duplicates = 0
+  const seenIds = new Set<string>()
   for (const entry of selected.sort((a, b) => a.id - b.id)) {
     const theme = THEME_OVERRIDES[entry.id] ?? CATEGORY_THEME[entry.category]
     const raw = await loadQuiz(cache, entry.id)
     const kept: OutQuestion[] = []
     for (const q of raw.quizz) {
+      seenIds.add(`${PREFIX}-${String(entry.id).padStart(4, '0')}-${q.id}`)
       const out = convertQuestion(entry, theme, q)
       if (typeof out === 'string') {
         console.warn(`quiz ${entry.id} question ${q.id} écartée : ${out}`)
@@ -251,6 +256,10 @@ async function main() {
     credits.push({ entry, author, theme, count: kept.length, composed: 0 })
   }
   console.log(`${duplicates} questions écartées comme doublons`)
+  const unmatched = [...Object.keys(EXCLUDED), ...Object.keys(QUESTION_THEME), ...ADULT_QUESTIONS].filter(
+    (id) => !seenIds.has(id),
+  ).length
+  console.log(`${unmatched} identifiants de EXCLUDED, QUESTION_THEME et ADULT_QUESTIONS sans question en ligne`)
 
   // Gel du livré : une question déjà livrée (hors EXCLUDED) doit exister en ligne à l'identique, et
   // son quiz source doit toujours figurer dans la liste.
@@ -286,10 +295,9 @@ async function main() {
 
   // Un pack par quiz composé (ses questions et le quiz) et un pack par quiz source restant : la source
   // d'un pack s'applique à toutes ses questions, ce qui permet de citer le rédacteur et la page du
-  // quiz source sur chaque question.
-  await rm(OUT_DIR, { recursive: true, force: true })
-  await mkdir(`${OUT_DIR}/composes`, { recursive: true })
-  await mkdir(`${OUT_DIR}/quiz`, { recursive: true })
+  // quiz source sur chaque question. Tout est construit et validé en mémoire (`files`) avant que le
+  // dossier ne soit vidé : une erreur de plan ne laisse pas de dossier à moitié écrit.
+  const files = new Map<string, string>()
   const used = new Set<number>()
   const usedQuestions = new Set<string>()
   let total = 0
@@ -317,6 +325,7 @@ async function main() {
       const q = converted.get(qid)
       const sourceId = sourceOf.get(qid)
       if (!q || sourceId === undefined) throw new Error(`quiz « ${plan.slug} » : question ${qid} indisponible`)
+      if (q.audience !== 'tous') throw new Error(`quiz « ${plan.slug} » : question ${qid} hors public « tous »`)
       questions.push(q)
       planAuthors.add(authors.get(sourceId) ?? '')
     }
@@ -345,7 +354,7 @@ async function main() {
     }
     const name = planAuthors.size === 1 ? `OpenQuizzDB, ${[...planAuthors][0]}` : 'OpenQuizzDB, plusieurs auteurs'
     const pack = { source: { name, license: LICENSE, url: SITE }, questions, quizzes: [quiz] }
-    await writeFile(`${OUT_DIR}/composes/${plan.slug}.json`, `${JSON.stringify(pack, null, 2)}
+    files.set(`composes/${plan.slug}.json`, `${JSON.stringify(pack, null, 2)}
 `)
     total += questions.length
   }
@@ -356,7 +365,7 @@ async function main() {
     rest++
     const source = { name: `OpenQuizzDB, ${authors.get(id)}`, license: LICENSE, url: quizPage(id) }
     const pack = { source, questions, quizzes: [] }
-    await writeFile(`${OUT_DIR}/quiz/${String(id).padStart(4, '0')}.json`, `${JSON.stringify(pack, null, 2)}
+    files.set(`quiz/${String(id).padStart(4, '0')}.json`, `${JSON.stringify(pack, null, 2)}
 `)
     total += questions.length
   }
@@ -364,7 +373,12 @@ async function main() {
   for (const c of credits) {
     c.composed = (questionsBySource.get(c.entry.id) ?? []).filter((q) => usedQuestions.has(q.id)).length
   }
-  await writeFile(`${OUT_DIR}/LICENSE.md`, licenseFile(credits))
+  files.set('LICENSE.md', licenseFile(credits))
+
+  await rm(OUT_DIR, { recursive: true, force: true })
+  await mkdir(`${OUT_DIR}/composes`, { recursive: true })
+  await mkdir(`${OUT_DIR}/quiz`, { recursive: true })
+  for (const [file, content] of files) await writeFile(`${OUT_DIR}/${file}`, content)
 
   // Vérification : le catalogue complet doit se lire sans erreur.
   const snap = await readCatalog({ builtinDir: CATALOG_DIR })

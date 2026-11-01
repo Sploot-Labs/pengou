@@ -4,6 +4,8 @@ Les questions de ce dossier sont une traduction (langue : en) du contenu du doss
 issu de OpenQuizzDB (https://www.openquizzdb.org). Voir le fichier LICENSE du dossier `openquizzdb` pour
 l'attribution détaillée des quiz d'origine.
 
+Attribution d'origine : « Questions issues d'OpenQuizzDB (https://www.openquizzdb.org), sous licence CC BY-SA 4.0 ».
+
 Licence : Creative Commons Attribution - Partage dans les mêmes conditions 4.0 International
 (CC BY-SA 4.0), https://creativecommons.org/licenses/by-sa/4.0/deed.fr
 

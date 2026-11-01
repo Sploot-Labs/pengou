@@ -4,6 +4,8 @@ Les questions de ce dossier sont une traduction (langue : fr) du contenu du doss
 issu de Open Trivia DB (https://opentdb.com). Voir le fichier LICENSE du dossier `opentdb` pour
 l'attribution détaillée des quiz d'origine.
 
+Attribution d'origine : « Questions from the Open Trivia Database (https://opentdb.com), by PIXELTAIL GAMES LLC and contributors, licensed under CC BY-SA 4.0 ».
+
 Licence : Creative Commons Attribution - Partage dans les mêmes conditions 4.0 International
 (CC BY-SA 4.0), https://creativecommons.org/licenses/by-sa/4.0/deed.fr
 

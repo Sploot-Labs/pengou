@@ -1,7 +1,10 @@
 // Retouche des packs Open Trivia DB (https://opentdb.com, CC BY-SA 4.0) à partir des fichiers livrés.
 //
 // Usage (depuis la racine du dépôt) :
-//   pnpm dlx tsx packages/library/scripts/curate-opentdb.ts
+//   pnpm dlx tsx --conditions=development packages/library/scripts/curate-opentdb.ts
+//   (--conditions=development fait lire les sources de @splootlabs/quiz, qui n'a pas de dist/)
+//
+// Chaîne de production complète : voir l'en-tête de translate-catalog.ts.
 //
 // La conversion d'origine (convert-opentdb.ts) n'est plus relancée : son cache est perdu et l'API
 // tire ses questions au hasard. Ce script part donc des packs livrés dans catalog/opentdb/, retire
@@ -113,6 +116,7 @@ async function main() {
     const qs = plan.questions.map((id) => {
       const q = questions.get(id)
       if (!q) throw new Error(`${where} : question ${id} absente du catalogue`)
+      if (q.audience !== 'tous') throw new Error(`${where} : question ${id} hors public « tous »`)
       if (used.has(id)) throw new Error(`${where} : question ${id} déjà dans un autre quiz`)
       used.add(id)
       return q

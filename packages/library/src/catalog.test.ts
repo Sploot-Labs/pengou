@@ -80,15 +80,25 @@ describe('catalogue livré', () => {
     }
   })
 
+  const TRANSLATED_PREFIXES = ['builtin:openquizzdb-en/', 'builtin:opentdb-fr/']
+  const isTranslated = (originFile: string) => TRANSLATED_PREFIXES.some((p) => originFile.startsWith(p))
+
   it('chaque traduction garde le type, le nombre de propositions et la bonne réponse de son original', async () => {
     const snap = await readCatalog({ builtinDir: BUILTIN_CATALOG_DIR })
     const byId = new Map(snap.questions.map((q) => [q.id, q]))
     const options = (p: unknown) => (p as { options?: { correct: boolean }[] }).options
+    let checked = 0
     for (const q of snap.questions) {
+      if (!isTranslated(q.originFile)) continue
       const m = q.id.match(/^(.+)-(en|fr)$/)
       const original = m ? byId.get(m[1]) : undefined
+      expect(original, `${q.id} sans original`).toBeDefined()
       if (!original) continue
+      checked++
       expect(q.type, q.id).toBe(original.type)
+      expect(q.theme, q.id).toBe(original.theme)
+      expect(q.difficulty, q.id).toBe(original.difficulty)
+      expect(q.audience, q.id).toBe(original.audience)
       expect(q.language, q.id).not.toBe(original.language)
       const mine = options(q.payload)
       const theirs = options(original.payload)
@@ -98,19 +108,22 @@ describe('catalogue livré', () => {
         expect((q.payload as { correct: boolean }).correct, q.id).toBe((original.payload as { correct: boolean }).correct)
       }
     }
+    expect(checked).toBeGreaterThan(0)
   })
-
-  const TRANSLATED_PREFIXES = ['builtin:openquizzdb-en/', 'builtin:opentdb-fr/']
-  const isTranslated = (originFile: string) => TRANSLATED_PREFIXES.some((p) => originFile.startsWith(p))
 
   it('les propositions tiennent dans une tuile', async () => {
     const snap = await readCatalog({ builtinDir: BUILTIN_CATALOG_DIR })
     const tooLong: string[] = []
+    let checked = 0
     for (const q of snap.questions) {
       if (q.language !== 'fr' && !isTranslated(q.originFile)) continue
       const options = (q.payload as { options?: { label: string }[] }).options ?? []
-      for (const o of options) if (o.label.length > 25) tooLong.push(`${q.id} : ${o.label}`)
+      for (const o of options) {
+        checked++
+        if (o.label.length > 25) tooLong.push(`${q.id} : ${o.label}`)
+      }
     }
+    expect(checked).toBeGreaterThan(0)
     expect(tooLong).toEqual([])
   })
 
@@ -148,6 +161,7 @@ describe('catalogue livré', () => {
       texts.push([z.id, z.title])
       if (z.description) texts.push([z.id, z.description])
     }
+    expect(texts.length).toBeGreaterThan(0)
     expect(texts.filter(([, t]) => /[—–]/.test(t)).map(([id, t]) => `${id} : ${t}`)).toEqual([])
   })
 })

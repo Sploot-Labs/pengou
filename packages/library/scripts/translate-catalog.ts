@@ -1,13 +1,23 @@
 // Traduction d'un dossier du catalogue à partir de tables de traduction versionnées.
 //
 // Usage (depuis la racine du dépôt) :
-//   pnpm dlx tsx packages/library/scripts/translate-catalog.ts --from <dossier source> --to <langue>
+//   pnpm dlx tsx --conditions=development packages/library/scripts/translate-catalog.ts --from <dossier source> --to <langue>
+//   (--conditions=development fait lire les sources de @splootlabs/quiz, qui n'a pas de dist/)
 //   (options : --catalog <dossier> et --translations <dossier> pour viser d'autres emplacements)
 //
 // Lit catalog/<from>/**.json, fusionne translations/<from>-<to>/*.json et écrit catalog/<from>-<to>/
 // (même arborescence que la source, dossier vidé d'abord) avec son LICENSE.md. Échoue si une question
 // n'a pas d'entrée dans les tables ou si une entrée ne correspond à aucune question de la source.
 // Les packs sans aucune question traduite ne sont pas écrits.
+//
+// Chaîne de production (à lancer dans cet ordre, depuis la racine du dépôt) :
+//   1. convert-openquizzdb.ts --cache <dossier>
+//   2. curate-opentdb.ts
+//   3. translate-catalog.ts --from opentdb --to fr
+//   4. translate-catalog.ts --from openquizzdb --to en
+// Toute modification d'un fichier de plans (openquizzdb-plans.ts, opentdb-plans.ts) impose de relancer
+// la traduction correspondante. Un identifiant ajouté à EXCLUDED laisse des entrées orphelines dans
+// les tables : la CLI échoue tant qu'elles ne sont pas retirées de translations/<from>-<to>/.
 
 import { existsSync } from 'node:fs'
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises'
@@ -20,9 +30,19 @@ import { type TranslationTable, mergeTables, translatePack } from '../src/transl
 const CATALOG_DIR = fileURLToPath(new URL('../catalog', import.meta.url))
 const TRANSLATIONS_DIR = fileURLToPath(new URL('../translations', import.meta.url))
 
-const ORIGINS: Record<string, { name: string; url: string }> = {
-  openquizzdb: { name: 'OpenQuizzDB', url: 'https://www.openquizzdb.org' },
-  opentdb: { name: 'Open Trivia DB', url: 'https://opentdb.com' },
+// `attribution` reprend la ligne « Attribution à reprendre » du LICENSE.md du dossier d'origine.
+const ORIGINS: Record<string, { name: string; url: string; attribution: string }> = {
+  openquizzdb: {
+    name: 'OpenQuizzDB',
+    url: 'https://www.openquizzdb.org',
+    attribution: "Questions issues d'OpenQuizzDB (https://www.openquizzdb.org), sous licence CC BY-SA 4.0",
+  },
+  opentdb: {
+    name: 'Open Trivia DB',
+    url: 'https://opentdb.com',
+    attribution:
+      'Questions from the Open Trivia Database (https://opentdb.com), by PIXELTAIL GAMES LLC and contributors, licensed under CC BY-SA 4.0',
+  },
 }
 
 const arg = (name: string) => {
@@ -63,6 +83,8 @@ async function main() {
   for (const file of await jsonFiles(srcDir)) {
     const pack = packSchema.parse(JSON.parse(await readFile(`${srcDir}/${file}`, 'utf8')))
     for (const q of pack.questions) used.add(q.id)
+    // Les titres de quiz non reproduits (question écartée) sont acceptés et ignorés : un titre périmé
+    // dans les tables n'est donc pas signalé.
     for (const z of pack.quizzes) used.add(z.id)
     const result = translatePack(pack, table, to)
     missing.push(...result.missing)
@@ -98,13 +120,13 @@ async function main() {
 }
 
 function licenseFile(from: string, to: string): string {
-  const origin = ORIGINS[from] ?? { name: from, url: '' }
+  const origin = ORIGINS[from] ?? { name: from, url: '', attribution: '' }
   return `# Traduction de données ${origin.name}
 
 Les questions de ce dossier sont une traduction (langue : ${to}) du contenu du dossier \`${from}\`,
 issu de ${origin.name}${origin.url ? ` (${origin.url})` : ''}. Voir le fichier LICENSE du dossier \`${from}\` pour
 l'attribution détaillée des quiz d'origine.
-
+${origin.attribution ? `\nAttribution d'origine : « ${origin.attribution} ».\n` : ''}
 Licence : Creative Commons Attribution - Partage dans les mêmes conditions 4.0 International
 (CC BY-SA 4.0), https://creativecommons.org/licenses/by-sa/4.0/deed.fr
 
