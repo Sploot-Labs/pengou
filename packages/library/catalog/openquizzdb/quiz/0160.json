@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0160-3",
-      "type": "mcq",
-      "prompt": "Kurt Cobain a été le leader de quel groupe musical mythique ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Nickelback",
-            "correct": false
-          },
-          {
-            "label": "Nine Inch Nails",
-            "correct": false
-          },
-          {
-            "label": "New Order",
-            "correct": false
-          },
-          {
-            "label": "Nirvana",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0160-4",
       "type": "mcq",
       "prompt": "De quel groupe musical Muriel Moreno est-elle la fondatrice ?",

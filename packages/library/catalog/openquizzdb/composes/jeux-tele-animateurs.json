@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0492-2",
+      "type": "mcq",
+      "prompt": "Qui a animé « Questions pour un champion » durant 28 ans ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Philippe Risoli",
+            "correct": false
+          },
+          {
+            "label": "Julien Lepers",
+            "correct": true
+          },
+          {
+            "label": "Vincent Perrot",
+            "correct": false
+          },
+          {
+            "label": "Samuel Étienne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0259-2",
+      "type": "mcq",
+      "prompt": "Quel animateur télé est incontestablement associé à « Koh-Lanta » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nikos Aliagas",
+            "correct": false
+          },
+          {
+            "label": "Stéphane Bern",
+            "correct": false
+          },
+          {
+            "label": "Denis Brogniart",
+            "correct": true
+          },
+          {
+            "label": "Michel Field",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0448-1",
+      "type": "mcq",
+      "prompt": "Quel célèbre animateur de TF1 est franco-grec ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nikos Aliagas",
+            "correct": true
+          },
+          {
+            "label": "Nagui",
+            "correct": false
+          },
+          {
+            "label": "Arthur",
+            "correct": false
+          },
+          {
+            "label": "Cauet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0499-2",
+      "type": "mcq",
+      "prompt": "Quel jeu présenté par Olivier Minne a remplacé le jeu « Pyramide » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Strike",
+            "correct": false
+          },
+          {
+            "label": "Slam",
+            "correct": false
+          },
+          {
+            "label": "La Cible",
+            "correct": true
+          },
+          {
+            "label": "Fear Factor",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0244-3",
+      "type": "mcq",
+      "prompt": "Quelle émission était surnommée « le magazine de l'extrême » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Unforgotten",
+            "correct": false
+          },
+          {
+            "label": "Ugly Betty",
+            "correct": false
+          },
+          {
+            "label": "Utopia",
+            "correct": false
+          },
+          {
+            "label": "Ushuaïa",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0143-1",
+      "type": "mcq",
+      "prompt": "Quelle est la ville natale de l'animateur Jean-Pierre Foucault ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Montpellier",
+            "correct": false
+          },
+          {
+            "label": "Metz",
+            "correct": false
+          },
+          {
+            "label": "Marseille",
+            "correct": true
+          },
+          {
+            "label": "Menton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0450-1",
+      "type": "mcq",
+      "prompt": "Sur quelle chaîne de télévision Les Nuls ont-ils débuté ?",
+      "payload": {
+        "options": [
+          {
+            "label": "TF1",
+            "correct": false
+          },
+          {
+            "label": "France 2",
+            "correct": false
+          },
+          {
+            "label": "M6",
+            "correct": false
+          },
+          {
+            "label": "Canal+",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0265-4",
+      "type": "mcq",
+      "prompt": "Quel journaliste a présenté le JT avant Anne-Sophie Lapix ?",
+      "payload": {
+        "options": [
+          {
+            "label": "David Pujadas",
+            "correct": true
+          },
+          {
+            "label": "Henri Sannier",
+            "correct": false
+          },
+          {
+            "label": "Michel Cymes",
+            "correct": false
+          },
+          {
+            "label": "Stéphane Bern",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0497-4",
+      "type": "mcq",
+      "prompt": "Sur quelle chaîne se déroule « Le Grand Concours des animateurs » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "France 2",
+            "correct": false
+          },
+          {
+            "label": "C8",
+            "correct": false
+          },
+          {
+            "label": "Canal+",
+            "correct": false
+          },
+          {
+            "label": "TF1",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0220-1",
+      "type": "mcq",
+      "prompt": "Où étaient tournées les scènes extérieures de « Sous le soleil » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saint-Nazaire",
+            "correct": false
+          },
+          {
+            "label": "Saint-Brieuc",
+            "correct": false
+          },
+          {
+            "label": "Saint-Tropez",
+            "correct": true
+          },
+          {
+            "label": "Saint-Malo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0259-1",
+      "type": "mcq",
+      "prompt": "Quel présentateur est un fin spécialiste des familles royales ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Denis Brogniart",
+            "correct": false
+          },
+          {
+            "label": "Michel Drucker",
+            "correct": false
+          },
+          {
+            "label": "Gérard Holtz",
+            "correct": false
+          },
+          {
+            "label": "Stéphane Bern",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0279-1",
+      "type": "mcq",
+      "prompt": "De quel sport Patrick Sébastien a-t-il été dirigeant de club ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tennis",
+            "correct": false
+          },
+          {
+            "label": "Football",
+            "correct": false
+          },
+          {
+            "label": "Squash",
+            "correct": false
+          },
+          {
+            "label": "Rugby",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0125-3",
+      "type": "mcq",
+      "prompt": "Quelle société de production appartient à Christophe Dechavanne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crotale",
+            "correct": false
+          },
+          {
+            "label": "Caméléon",
+            "correct": false
+          },
+          {
+            "label": "Coyote",
+            "correct": true
+          },
+          {
+            "label": "Cobra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0075-1",
+      "type": "mcq",
+      "prompt": "Quelle place est obtenue par la première dauphine de Miss France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Première",
+            "correct": false
+          },
+          {
+            "label": "Troisième",
+            "correct": false
+          },
+          {
+            "label": "Deuxième",
+            "correct": true
+          },
+          {
+            "label": "Quatrième",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0448-3",
+      "type": "mcq",
+      "prompt": "Quel célèbre magazine de la mer portait un nom grec ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Neptune>/I>",
+            "correct": false
+          },
+          {
+            "label": "Nereus",
+            "correct": false
+          },
+          {
+            "label": "Poseidon",
+            "correct": false
+          },
+          {
+            "label": "Thalassa",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0259-4",
+      "type": "mcq",
+      "prompt": "Qui a dirigé depuis 2003 les candidats de « Fort Boyard » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michel Field",
+            "correct": false
+          },
+          {
+            "label": "Florian Gazan",
+            "correct": false
+          },
+          {
+            "label": "Frédéric Lopez",
+            "correct": false
+          },
+          {
+            "label": "Olivier Minne",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0143-3",
+      "type": "mcq",
+      "prompt": "Quelle académie Jean-Pierre Foucault a-t-il présenté jusqu'en 1987 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Des onze",
+            "correct": false
+          },
+          {
+            "label": "Des douze",
+            "correct": false
+          },
+          {
+            "label": "Des neuf",
+            "correct": true
+          },
+          {
+            "label": "Des cinq",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0220-2",
+      "type": "mcq",
+      "prompt": "Quel est le prénom de l'animateur et chroniqueur français Cauet ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sébastien",
+            "correct": true
+          },
+          {
+            "label": "Simon",
+            "correct": false
+          },
+          {
+            "label": "Stan",
+            "correct": false
+          },
+          {
+            "label": "Stéphane",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0450-4",
+      "type": "mcq",
+      "prompt": "Quel membre des Nuls est décédé après la création du groupe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alain Chabat",
+            "correct": false
+          },
+          {
+            "label": "Coluche",
+            "correct": false
+          },
+          {
+            "label": "Bruno Carette",
+            "correct": true
+          },
+          {
+            "label": "Chantal Lauby",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0265-1",
+      "type": "mcq",
+      "prompt": "Qui présentait le journal de 20 heures de TF1 entre 2008 et 2012 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Marie Drucker",
+            "correct": false
+          },
+          {
+            "label": "Claire Chazal",
+            "correct": false
+          },
+          {
+            "label": "Florence Schaal",
+            "correct": false
+          },
+          {
+            "label": "Laurence Ferrari",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-jeux-tele-animateurs",
+      "title": "Jeux télé et animateurs",
+      "description": "D'après des questions OpenQuizzDB de Philippe Bresoux.",
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0492-2",
+        "oqdb-0259-2",
+        "oqdb-0448-1",
+        "oqdb-0499-2",
+        "oqdb-0244-3",
+        "oqdb-0143-1",
+        "oqdb-0450-1",
+        "oqdb-0265-4",
+        "oqdb-0497-4",
+        "oqdb-0220-1",
+        "oqdb-0259-1",
+        "oqdb-0279-1",
+        "oqdb-0125-3",
+        "oqdb-0075-1",
+        "oqdb-0448-3",
+        "oqdb-0259-4",
+        "oqdb-0143-3",
+        "oqdb-0220-2",
+        "oqdb-0450-4",
+        "oqdb-0265-1"
+      ]
+    }
+  ]
+}

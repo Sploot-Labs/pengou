@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0281-3",
-      "type": "mcq",
-      "prompt": "Quel film raconte l'histoire d'un esclave devenu chasseur de primes ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Kill Bill",
-            "correct": false
-          },
-          {
-            "label": "Django Unchained",
-            "correct": true
-          },
-          {
-            "label": "The Revenant",
-            "correct": false
-          },
-          {
-            "label": "Pulp Fiction",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0281-4",
-      "type": "mcq",
-      "prompt": "Dans quel film Uma Thurman apparaît-elle en héroïne vengeresse ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Be Cool",
-            "correct": false
-          },
-          {
-            "label": "Love Coach",
-            "correct": false
-          },
-          {
-            "label": "Tape",
-            "correct": false
-          },
-          {
-            "label": "Kill Bill",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

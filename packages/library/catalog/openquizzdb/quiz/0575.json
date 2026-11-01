@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "adultes"
-    },
-    {
-      "id": "oqdb-0575-3",
-      "type": "mcq",
-      "prompt": "Quel homme d'État britannique était un buveur de gin d'exception ?",
-      "payload": {
-        "options": [
-          {
-            "label": "W. Churchill",
-            "correct": true
-          },
-          {
-            "label": "A. Eden",
-            "correct": false
-          },
-          {
-            "label": "S. Baldwin",
-            "correct": false
-          },
-          {
-            "label": "H. Wilson",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "adultes"
-    },
-    {
-      "id": "oqdb-0575-4",
-      "type": "mcq",
-      "prompt": "Quelle grande marque de gin reste pionnière en la matière ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Bombay",
-            "correct": false
-          },
-          {
-            "label": "Tanqueray",
-            "correct": false
-          },
-          {
-            "label": "Hendrick's",
-            "correct": true
-          },
-          {
-            "label": "Gordon",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "adultes"
     }
   ],
   "quizzes": []

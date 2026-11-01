@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0310-3",
-      "type": "mcq",
-      "prompt": "Quel serpent accompagne le Prince Jean dans « Robin des Bois » de Disney ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Triste Sire",
-            "correct": true
-          },
-          {
-            "label": "Affreux Jojo",
-            "correct": false
-          },
-          {
-            "label": "Troube-Fête",
-            "correct": false
-          },
-          {
-            "label": "Rabat-Joie",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0310-4",
-      "type": "mcq",
-      "prompt": "Quelle langue est parlée par les serpents dans « Harry Potter » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Le cuillerlang",
-            "correct": false
-          },
-          {
-            "label": "Le fourchelang",
-            "correct": true
-          },
-          {
-            "label": "Le verrelang",
-            "correct": false
-          },
-          {
-            "label": "Le coutelang",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0335-2",
-      "type": "mcq",
-      "prompt": "Quel personnage emblématique joue-t-il dans « The Dark Knight Trilogy » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Harvey Dent",
-            "correct": false
-          },
-          {
-            "label": "Le Joker",
-            "correct": false
-          },
-          {
-            "label": "James Gordon",
-            "correct": true
-          },
-          {
-            "label": "Alfred",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0335-3",
       "type": "mcq",
       "prompt": "Quel rôle est incarné par Gary Oldman dans la saga « Harry Potter » ?",

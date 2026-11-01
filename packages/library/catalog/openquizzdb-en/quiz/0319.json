@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=319"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0319-1-en",
+      "type": "mcq",
+      "prompt": "How many cards does a deck for the game of War usually have?",
+      "payload": {
+        "options": [
+          {
+            "label": "65 cards",
+            "correct": false
+          },
+          {
+            "label": "36 cards",
+            "correct": false
+          },
+          {
+            "label": "52 cards",
+            "correct": true
+          },
+          {
+            "label": "43 cards",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0319-2-en",
+      "type": "mcq",
+      "prompt": "What is the best hand in poker?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pair",
+            "correct": false
+          },
+          {
+            "label": "Three of a kind",
+            "correct": false
+          },
+          {
+            "label": "Royal flush",
+            "correct": true
+          },
+          {
+            "label": "Four of a kind",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0319-4-en",
+      "type": "mcq",
+      "prompt": "How many suits are there in a standard deck of cards?",
+      "payload": {
+        "options": [
+          {
+            "label": "Four",
+            "correct": true
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Eight",
+            "correct": false
+          },
+          {
+            "label": "Two",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

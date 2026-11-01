@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0578-2",
-      "type": "mcq",
-      "prompt": "Dans quel alphabet le mot Golf est-il associé à la lettre G ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Phonétique",
-            "correct": false
-          },
-          {
-            "label": "Gotique",
-            "correct": false
-          },
-          {
-            "label": "Radio",
-            "correct": true
-          },
-          {
-            "label": "Sémaphore",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0578-3",
       "type": "mcq",
       "prompt": "Quel nombre de coups standard est fixé pour terminer un trou au golf ?",
@@ -83,35 +54,6 @@
           },
           {
             "label": "Eagle",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0578-4",
-      "type": "mcq",
-      "prompt": "Quelle est la langue officielle du golf, fixée en raison de ses origines ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Français",
-            "correct": false
-          },
-          {
-            "label": "Allemand",
-            "correct": false
-          },
-          {
-            "label": "Anglais",
-            "correct": true
-          },
-          {
-            "label": "Espagnol",
             "correct": false
           }
         ]

@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=416"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0416-1-en",
+      "type": "mcq",
+      "prompt": "How long is the wall around the Chambord forest park?",
+      "payload": {
+        "options": [
+          {
+            "label": "32 km",
+            "correct": true
+          },
+          {
+            "label": "16 km",
+            "correct": false
+          },
+          {
+            "label": "27 km",
+            "correct": false
+          },
+          {
+            "label": "9 km",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0416-3-en",
+      "type": "mcq",
+      "prompt": "In which French forest region is the Château de Chambord located?",
+      "payload": {
+        "options": [
+          {
+            "label": "Drouais",
+            "correct": false
+          },
+          {
+            "label": "Sologne",
+            "correct": true
+          },
+          {
+            "label": "Beauce",
+            "correct": false
+          },
+          {
+            "label": "Cévennes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0416-4-en",
+      "type": "mcq",
+      "prompt": "Of Chambord's 5,440 hectares, how many are open to the public?",
+      "payload": {
+        "options": [
+          {
+            "label": "4,000 ha",
+            "correct": false
+          },
+          {
+            "label": "2,000 ha",
+            "correct": false
+          },
+          {
+            "label": "3,000 ha",
+            "correct": false
+          },
+          {
+            "label": "1,000 ha",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

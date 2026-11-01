@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0597-3",
-      "type": "mcq",
-      "prompt": "Dans quel département le Périgord est-il inscrit ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Aveyron",
-            "correct": false
-          },
-          {
-            "label": "Vaucluse",
-            "correct": false
-          },
-          {
-            "label": "Calvados",
-            "correct": false
-          },
-          {
-            "label": "Dordogne",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0597-4",
       "type": "mcq",
       "prompt": "Quelle grotte ornée du Paléolithique se situe dans la Vézère ?",

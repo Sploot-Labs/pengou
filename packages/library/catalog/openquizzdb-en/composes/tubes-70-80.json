@@ -1,0 +1,358 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0612-2-en",
+      "type": "mcq",
+      "prompt": "Which worldwide ABBA disco hit came out in 1979?",
+      "payload": {
+        "options": [
+          {
+            "label": "SOS",
+            "correct": false
+          },
+          {
+            "label": "Mamma Mia",
+            "correct": false
+          },
+          {
+            "label": "Waterloo",
+            "correct": false
+          },
+          {
+            "label": "Voulez-Vous",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-1-en",
+      "type": "mcq",
+      "prompt": "Which British singer performed the hit \"Kids in America\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Madonna",
+            "correct": false
+          },
+          {
+            "label": "Bonnie Tyler",
+            "correct": false
+          },
+          {
+            "label": "Kim Carnes",
+            "correct": false
+          },
+          {
+            "label": "Kim Wilde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0617-1-en",
+      "type": "mcq",
+      "prompt": "What is the best-selling disco single on the Atlantic label?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ten Percent",
+            "correct": false
+          },
+          {
+            "label": "Dancin'",
+            "correct": false
+          },
+          {
+            "label": "Sweet Dynamite",
+            "correct": false
+          },
+          {
+            "label": "Le Freak",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0220-4-en",
+      "type": "mcq",
+      "prompt": "What nationality is the famous band ABBA?",
+      "payload": {
+        "options": [
+          {
+            "label": "Swedish",
+            "correct": true
+          },
+          {
+            "label": "Serbian",
+            "correct": false
+          },
+          {
+            "label": "Swiss",
+            "correct": false
+          },
+          {
+            "label": "Slovak",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0612-3-en",
+      "type": "mcq",
+      "prompt": "Which disco hit was originally written for Stacy Lattisaw?",
+      "payload": {
+        "options": [
+          {
+            "label": "Viva America",
+            "correct": false
+          },
+          {
+            "label": "Ring My Bell",
+            "correct": true
+          },
+          {
+            "label": "Shadow Dancing",
+            "correct": false
+          },
+          {
+            "label": "Copacabana",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0434-4-en",
+      "type": "mcq",
+      "prompt": "Who wrote the famous song \"Just Can't Get Enough\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alan Wilder",
+            "correct": false
+          },
+          {
+            "label": "Martin Gore",
+            "correct": false
+          },
+          {
+            "label": "Dave Gahan",
+            "correct": false
+          },
+          {
+            "label": "Vince Clarke",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0617-3-en",
+      "type": "mcq",
+      "prompt": "Who wonders whether he is sexy in a disco hit from 1978?",
+      "payload": {
+        "options": [
+          {
+            "label": "Elton John",
+            "correct": false
+          },
+          {
+            "label": "Rod Stewart",
+            "correct": true
+          },
+          {
+            "label": "Barry White",
+            "correct": false
+          },
+          {
+            "label": "Walter Murphy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-3-en",
+      "type": "mcq",
+      "prompt": "Who is behind the famous song \"Reggae Night\", released in 1983?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maxi Priest",
+            "correct": false
+          },
+          {
+            "label": "Jimmy Cliff",
+            "correct": true
+          },
+          {
+            "label": "Alpha Blondy",
+            "correct": false
+          },
+          {
+            "label": "Bob Marley",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-4-en",
+      "type": "mcq",
+      "prompt": "What is the title of Alphaville's third single?",
+      "payload": {
+        "options": [
+          {
+            "label": "Forever Young",
+            "correct": true
+          },
+          {
+            "label": "Forever Blue",
+            "correct": false
+          },
+          {
+            "label": "Forever Alive",
+            "correct": false
+          },
+          {
+            "label": "Forever Love",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0612-4-en",
+      "type": "mcq",
+      "prompt": "Which song earned the Gibson Brothers fourteen gold records?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oooh What a Life",
+            "correct": false
+          },
+          {
+            "label": "Que Sera Mi Vida",
+            "correct": false
+          },
+          {
+            "label": "Mariana",
+            "correct": false
+          },
+          {
+            "label": "Cuba",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0617-4-en",
+      "type": "mcq",
+      "prompt": "Who recorded \"You Make Me Feel\" before Jimmy Somerville?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sylvester",
+            "correct": true
+          },
+          {
+            "label": "Randy Jones",
+            "correct": false
+          },
+          {
+            "label": "Bobby Farrell",
+            "correct": false
+          },
+          {
+            "label": "Dan Hartman",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0617-2-en",
+      "type": "mcq",
+      "prompt": "Which Diana Ross hit was written by members of the group Chic?",
+      "payload": {
+        "options": [
+          {
+            "label": "Surrender",
+            "correct": false
+          },
+          {
+            "label": "Love Child",
+            "correct": false
+          },
+          {
+            "label": "Upside Down",
+            "correct": true
+          },
+          {
+            "label": "Remember Me",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0151-4",
-      "type": "mcq",
-      "prompt": "Comment Stephan Eicher souhaite-il prendre son déjeuner ?",
-      "payload": {
-        "options": [
-          {
-            "label": "En pyjama",
-            "correct": false
-          },
-          {
-            "label": "En lévitation",
-            "correct": false
-          },
-          {
-            "label": "En musique",
-            "correct": false
-          },
-          {
-            "label": "En paix",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

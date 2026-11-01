@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=273"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0273-4-en",
+      "type": "mcq",
+      "prompt": "Which plant goes into pistou, along with garlic and olive oil?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cumin",
+            "correct": false
+          },
+          {
+            "label": "Mint",
+            "correct": false
+          },
+          {
+            "label": "Marjoram",
+            "correct": false
+          },
+          {
+            "label": "Basil",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

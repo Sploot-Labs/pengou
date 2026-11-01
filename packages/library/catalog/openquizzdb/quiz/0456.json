@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0456-1",
-      "type": "mcq",
-      "prompt": "Laquelle de ces inventions ne porte pas le nom de son inventeur ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Poubelle",
-            "correct": false
-          },
-          {
-            "label": "Colt",
-            "correct": false
-          },
-          {
-            "label": "Macadam",
-            "correct": false
-          },
-          {
-            "label": "Laser",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0456-2",
       "type": "mcq",
       "prompt": "Quel concours prime les meilleures inventions françaises ?",
@@ -54,64 +25,6 @@
           },
           {
             "label": "Thomas",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0456-3",
-      "type": "mcq",
-      "prompt": "Quel mot a été inventé en 1955 par le philologue Jacques Perret ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Imprimante",
-            "correct": false
-          },
-          {
-            "label": "Transistor",
-            "correct": false
-          },
-          {
-            "label": "Ampoule",
-            "correct": false
-          },
-          {
-            "label": "Ordinateur",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0456-4",
-      "type": "mcq",
-      "prompt": "Quel savant italien a découvert le principe de la pile électrique ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Bugatti",
-            "correct": false
-          },
-          {
-            "label": "Volta",
-            "correct": true
-          },
-          {
-            "label": "Turriano",
-            "correct": false
-          },
-          {
-            "label": "Marconi",
             "correct": false
           }
         ]

@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0431-3",
-      "type": "mcq",
-      "prompt": "Quelle série télévisée française a pour quartier fictif principal « Le Mistral » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Plus belle la vie",
-            "correct": true
-          },
-          {
-            "label": "Braquo",
-            "correct": false
-          },
-          {
-            "label": "Julie Lescaut",
-            "correct": false
-          },
-          {
-            "label": "Nerdz",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0431-4",
       "type": "mcq",
       "prompt": "Comment s'appelle le littoral méditerranéen autour de Nice et Monaco ?",

@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0461-1",
-      "type": "mcq",
-      "prompt": "Le pétrole, le gaz et le charbon font partie de quelles énergies ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Renouvelables",
-            "correct": false
-          },
-          {
-            "label": "Propres",
-            "correct": false
-          },
-          {
-            "label": "Fossiles",
-            "correct": true
-          },
-          {
-            "label": "Solaires",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0461-2",
       "type": "mcq",
       "prompt": "Quel pays est le plus grand émetteur de gaz à effet de serre ?",
@@ -54,35 +25,6 @@
           },
           {
             "label": "Russie",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0461-3",
-      "type": "mcq",
-      "prompt": "Quelle température y aurait-il sur Terre sans l'effet de serre ?",
-      "payload": {
-        "options": [
-          {
-            "label": "98°C",
-            "correct": false
-          },
-          {
-            "label": "-18°C",
-            "correct": true
-          },
-          {
-            "label": "4°C",
-            "correct": false
-          },
-          {
-            "label": "47°C",
             "correct": false
           }
         ]

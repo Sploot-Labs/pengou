@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0171-2",
-      "type": "mcq",
-      "prompt": "Qu'apporte la crypto-monnaie par rapport à d'autres solutions ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Identification",
-            "correct": false
-          },
-          {
-            "label": "Anonymat",
-            "correct": true
-          },
-          {
-            "label": "Frais de dossier",
-            "correct": false
-          },
-          {
-            "label": "Traçabilité",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0171-3",
       "type": "mcq",
       "prompt": "Quelle monnaie native est utilisée par le protocole de paiement Ripple ?",

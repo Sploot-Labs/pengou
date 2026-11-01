@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=103"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0103-4-en",
+      "type": "mcq",
+      "prompt": "Which scary neighbor of Andy's tortures toys in \"Toy Story\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zurg",
+            "correct": false
+          },
+          {
+            "label": "Ted",
+            "correct": false
+          },
+          {
+            "label": "Sid",
+            "correct": true
+          },
+          {
+            "label": "Chuck",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=343"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0343-2-en",
+      "type": "mcq",
+      "prompt": "In which country is the first scene of \"The Big Blue\" set?",
+      "payload": {
+        "options": [
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "Greece",
+            "correct": true
+          },
+          {
+            "label": "Sicily",
+            "correct": false
+          },
+          {
+            "label": "Spain",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

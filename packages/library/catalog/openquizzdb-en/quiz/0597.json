@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=597"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0597-4-en",
+      "type": "mcq",
+      "prompt": "Which Paleolithic painted cave is located in the Vézère valley?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lascaux",
+            "correct": true
+          },
+          {
+            "label": "Razet",
+            "correct": false
+          },
+          {
+            "label": "Cussac",
+            "correct": false
+          },
+          {
+            "label": "Niaux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

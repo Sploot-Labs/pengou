@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0528-1",
+      "type": "mcq",
+      "prompt": "Quel gentilhomme est chargé du service de la chambre d'un monarque ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Auguste",
+            "correct": false
+          },
+          {
+            "label": "Grand veneur",
+            "correct": false
+          },
+          {
+            "label": "Chambellan",
+            "correct": true
+          },
+          {
+            "label": "Connétable",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0115-4",
+      "type": "mcq",
+      "prompt": "Quel animal est Capucin, le petit compagnon de Candy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lapin",
+            "correct": false
+          },
+          {
+            "label": "Raton laveur",
+            "correct": true
+          },
+          {
+            "label": "Chat",
+            "correct": false
+          },
+          {
+            "label": "Hamster",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0352-3",
+      "type": "mcq",
+      "prompt": "Quelle était la coupe de cheveux des premiers rockers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Banane",
+            "correct": true
+          },
+          {
+            "label": "Pomme",
+            "correct": false
+          },
+          {
+            "label": "Pêche",
+            "correct": false
+          },
+          {
+            "label": "Poire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0318-2",
+      "type": "mcq",
+      "prompt": "Quelle girafe en caoutchouc pour bébés est apparue en 1961 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Barbie",
+            "correct": false
+          },
+          {
+            "label": "Mimie",
+            "correct": false
+          },
+          {
+            "label": "Sophie",
+            "correct": true
+          },
+          {
+            "label": "Noémie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0456-4",
+      "type": "mcq",
+      "prompt": "Quel savant italien a découvert le principe de la pile électrique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bugatti",
+            "correct": false
+          },
+          {
+            "label": "Volta",
+            "correct": true
+          },
+          {
+            "label": "Turriano",
+            "correct": false
+          },
+          {
+            "label": "Marconi",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0287-3",
+      "type": "mcq",
+      "prompt": "Quelle ville est très associée à l'univers musical de Jul ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bordeaux",
+            "correct": false
+          },
+          {
+            "label": "Marseille",
+            "correct": true
+          },
+          {
+            "label": "Nice",
+            "correct": false
+          },
+          {
+            "label": "Toulouse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0463-3",
+      "type": "mcq",
+      "prompt": "En quelle année Eddy Merckx a-t-il remporté son premier Tour de France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1967",
+            "correct": false
+          },
+          {
+            "label": "1971",
+            "correct": false
+          },
+          {
+            "label": "1965",
+            "correct": false
+          },
+          {
+            "label": "1969",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0196-2",
+      "type": "mcq",
+      "prompt": "Quelle ville fut le berceau de la civilisation française en Amérique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quévy",
+            "correct": false
+          },
+          {
+            "label": "Quiberville",
+            "correct": false
+          },
+          {
+            "label": "Quito",
+            "correct": false
+          },
+          {
+            "label": "Québec",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0348-2",
+      "type": "mcq",
+      "prompt": "Quelles couleurs indiquent les chemins de grande randonnée (GR) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vert et gris",
+            "correct": false
+          },
+          {
+            "label": "Rouge et blanc",
+            "correct": true
+          },
+          {
+            "label": "Jaune et rouge",
+            "correct": false
+          },
+          {
+            "label": "Bleu et vert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0277-1",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur du paprika utilisé en cuisine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rouge",
+            "correct": true
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Blanche",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0268-3",
+      "type": "mcq",
+      "prompt": "Qui est Logan dans la bande dessinée de Marvel Comics « X-Men » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wyatt Earp",
+            "correct": false
+          },
+          {
+            "label": "Wukong",
+            "correct": false
+          },
+          {
+            "label": "Woody",
+            "correct": false
+          },
+          {
+            "label": "Wolverine",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0275-2",
+      "type": "mcq",
+      "prompt": "Quel symbole est traditionnellement associé à l'Irlande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lion",
+            "correct": false
+          },
+          {
+            "label": "Étoile",
+            "correct": false
+          },
+          {
+            "label": "Aigle",
+            "correct": false
+          },
+          {
+            "label": "Trèfle",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0309-4",
+      "type": "mcq",
+      "prompt": "De quel instrument jouait John Lennon au sein des Beatles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Batterie",
+            "correct": false
+          },
+          {
+            "label": "Guitare",
+            "correct": true
+          },
+          {
+            "label": "Clavier",
+            "correct": false
+          },
+          {
+            "label": "Saxophone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0231-1",
+      "type": "mcq",
+      "prompt": "Dans « Star Trek », quelle flotte est liée à la Fédération des planètes unies ?",
+      "payload": {
+        "options": [
+          {
+            "label": "FedCon",
+            "correct": false
+          },
+          {
+            "label": "Starfleet",
+            "correct": true
+          },
+          {
+            "label": "Cardassia",
+            "correct": false
+          },
+          {
+            "label": "Klingon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0357-2",
+      "type": "mcq",
+      "prompt": "En France, dans quel sport collectif gagne-t-on le Bouclier de Brennus ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Basket-ball",
+            "correct": false
+          },
+          {
+            "label": "Football",
+            "correct": false
+          },
+          {
+            "label": "Handball",
+            "correct": false
+          },
+          {
+            "label": "Rugby",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0100-4",
+      "type": "mcq",
+      "prompt": "À quel mot anglais correspond la lettre I du sigle CIA ?",
+      "payload": {
+        "options": [
+          {
+            "label": "International",
+            "correct": false
+          },
+          {
+            "label": "Institutional",
+            "correct": false
+          },
+          {
+            "label": "Intelligence",
+            "correct": true
+          },
+          {
+            "label": "Instrumental",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0179-4",
+      "type": "mcq",
+      "prompt": "Quel film est revenu sur la rivalité entre James Hunt et Niki Lauda ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Backdraft",
+            "correct": false
+          },
+          {
+            "label": "La Rançon",
+            "correct": false
+          },
+          {
+            "label": "Rush",
+            "correct": true
+          },
+          {
+            "label": "Made in America",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0053-3",
+      "type": "mcq",
+      "prompt": "De quel pays Sean Connery est-il originaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Etats-Unis",
+            "correct": false
+          },
+          {
+            "label": "Irlande",
+            "correct": false
+          },
+          {
+            "label": "Écosse",
+            "correct": true
+          },
+          {
+            "label": "Angleterre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0416-2",
+      "type": "mcq",
+      "prompt": "En plus du sanglier, quelle espèce est emblématique de Chambord ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lapin",
+            "correct": false
+          },
+          {
+            "label": "Autruche",
+            "correct": false
+          },
+          {
+            "label": "Cerf",
+            "correct": true
+          },
+          {
+            "label": "Lémurien",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0338-4",
+      "type": "mcq",
+      "prompt": "Quel écrivain français a publié une trilogie sur les fourmis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alain Grousset",
+            "correct": false
+          },
+          {
+            "label": "Robert Merle",
+            "correct": false
+          },
+          {
+            "label": "Gaston Boca",
+            "correct": false
+          },
+          {
+            "label": "Bernard Werber",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-mix-culture-8",
+      "title": "Mix culture #8",
+      "description": "Un peu de tout : cinéma, sport, géographie, nature, musique et culture générale.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0528-1",
+        "oqdb-0115-4",
+        "oqdb-0352-3",
+        "oqdb-0318-2",
+        "oqdb-0456-4",
+        "oqdb-0287-3",
+        "oqdb-0463-3",
+        "oqdb-0196-2",
+        "oqdb-0348-2",
+        "oqdb-0277-1",
+        "oqdb-0268-3",
+        "oqdb-0275-2",
+        "oqdb-0309-4",
+        "oqdb-0231-1",
+        "oqdb-0357-2",
+        "oqdb-0100-4",
+        "oqdb-0179-4",
+        "oqdb-0053-3",
+        "oqdb-0416-2",
+        "oqdb-0338-4"
+      ]
+    }
+  ]
+}

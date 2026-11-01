@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0395-1",
-      "type": "mcq",
-      "prompt": "Le curaçao est une liqueur d'orange présentée sous quelle couleur ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Bleue",
-            "correct": true
-          },
-          {
-            "label": "Rouge",
-            "correct": false
-          },
-          {
-            "label": "Orange",
-            "correct": false
-          },
-          {
-            "label": "Verte",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0395-2",
       "type": "mcq",
       "prompt": "Quelles couleurs faut-il associer pour obtenir du vert ?",
@@ -90,7 +61,7 @@
       "theme": "culture-generale",
       "difficulty": "moyen",
       "language": "fr",
-      "audience": "tous"
+      "audience": "adultes"
     },
     {
       "id": "oqdb-0395-4",

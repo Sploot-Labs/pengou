@@ -1,0 +1,554 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-02fb118da74a-fr",
+      "type": "mcq",
+      "prompt": "Dans les comics DC, où vit Green Arrow (Oliver Queen) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Central City",
+            "correct": false
+          },
+          {
+            "label": "Star City",
+            "correct": true
+          },
+          {
+            "label": "Metropolis",
+            "correct": false
+          },
+          {
+            "label": "Gotham City",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-16785d792b30-fr",
+      "type": "truefalse",
+      "prompt": "Il existe une île nommée « Java ».",
+      "payload": {
+        "correct": true
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2cf90c158733-fr",
+      "type": "mcq",
+      "prompt": "Quel nom courant désigne le syndrome de stress tibial médial (MTSS) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tennis elbow",
+            "correct": false
+          },
+          {
+            "label": "Périostite tibiale",
+            "correct": true
+          },
+          {
+            "label": "Syndrome du canal carpien",
+            "correct": false
+          },
+          {
+            "label": "Bursite prépatellaire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3016d2e64d33-fr",
+      "type": "mcq",
+      "prompt": "Quelle dose de rayonnement une banane émet-elle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "0,1 microsievert",
+            "correct": true
+          },
+          {
+            "label": "0,3 microsievert",
+            "correct": false
+          },
+          {
+            "label": "0,5 microsievert",
+            "correct": false
+          },
+          {
+            "label": "0,7 microsievert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4303d31b2723-fr",
+      "type": "mcq",
+      "prompt": "Quel est l'âge de l'univers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "13,8 milliards d'années",
+            "correct": true
+          },
+          {
+            "label": "4,5 milliards d'années",
+            "correct": false
+          },
+          {
+            "label": "16,2 milliards d'années",
+            "correct": false
+          },
+          {
+            "label": "7,9 milliards d'années",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5539e624a989-fr",
+      "type": "mcq",
+      "prompt": "Quelle équipe a été championne NBA en 2014-2015 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Golden State Warriors",
+            "correct": true
+          },
+          {
+            "label": "Atlanta Hawks",
+            "correct": false
+          },
+          {
+            "label": "Cleveland Cavaliers",
+            "correct": false
+          },
+          {
+            "label": "Houston Rockets",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6f3715529b1c-fr",
+      "type": "truefalse",
+      "prompt": "La quatrième cheminée du Titanic était factice, pour rendre le navire plus puissant et symétrique.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6f47d688ac0b-fr",
+      "type": "mcq",
+      "prompt": "Quel artiste a peint la fresque de la fin du XVe siècle « La Cène » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Léonard de Vinci",
+            "correct": true
+          },
+          {
+            "label": "Luca Pacioli",
+            "correct": false
+          },
+          {
+            "label": "Paolo Uccello",
+            "correct": false
+          },
+          {
+            "label": "Piero della Francesca",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8c9b9f2c9145-fr",
+      "type": "mcq",
+      "prompt": "Quel est le nom de domaine du Tuvalu ?",
+      "payload": {
+        "options": [
+          {
+            "label": ".tl",
+            "correct": false
+          },
+          {
+            "label": ".tv",
+            "correct": true
+          },
+          {
+            "label": ".tu",
+            "correct": false
+          },
+          {
+            "label": ".tt",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a65b7cf33a2b-fr",
+      "type": "mcq",
+      "prompt": "Quelle race de chien porte le nom d'une région de Croatie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chihuahua",
+            "correct": false
+          },
+          {
+            "label": "Pékinois",
+            "correct": false
+          },
+          {
+            "label": "Poméranien",
+            "correct": false
+          },
+          {
+            "label": "Dalmatien",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a8c1f13c4897-fr",
+      "type": "mcq",
+      "prompt": "En quelle année l'Empire byzantin s'est-il effondré ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1299",
+            "correct": false
+          },
+          {
+            "label": "1353",
+            "correct": false
+          },
+          {
+            "label": "1498",
+            "correct": false
+          },
+          {
+            "label": "1453",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b4e7e431a3df-fr",
+      "type": "truefalse",
+      "prompt": "La guerre froide s'est terminée avec la mort de Joseph Staline.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c7dc508c1114-fr",
+      "type": "mcq",
+      "prompt": "Quel pays est voisin du Belize ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Laos",
+            "correct": false
+          },
+          {
+            "label": "Kenya",
+            "correct": false
+          },
+          {
+            "label": "Guatemala",
+            "correct": true
+          },
+          {
+            "label": "Pérou",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-cebd9759c538-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit le roman d'horreur « Rosemary's Baby », paru en 1967 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mary Shelley",
+            "correct": false
+          },
+          {
+            "label": "Robert Bloch",
+            "correct": false
+          },
+          {
+            "label": "Stephen King",
+            "correct": false
+          },
+          {
+            "label": "Ira Levin",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dbaa3244600f-fr",
+      "type": "mcq",
+      "prompt": "Dans la série « ALF », quel est le vrai nom d'ALF ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gordon Shumway",
+            "correct": true
+          },
+          {
+            "label": "Gordon Foster",
+            "correct": false
+          },
+          {
+            "label": "Gordon Milipp",
+            "correct": false
+          },
+          {
+            "label": "Gordon von Gam",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e25c0f1fae41-fr",
+      "type": "mcq",
+      "prompt": "Combien y a-t-il de livres « Harry Potter » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "7",
+            "correct": true
+          },
+          {
+            "label": "8",
+            "correct": false
+          },
+          {
+            "label": "6",
+            "correct": false
+          },
+          {
+            "label": "5",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e7c00ba0d9e9-fr",
+      "type": "mcq",
+      "prompt": "Quel est le mot russe romanisé pour « hiver » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vesna",
+            "correct": false
+          },
+          {
+            "label": "Osen'",
+            "correct": false
+          },
+          {
+            "label": "Leto",
+            "correct": false
+          },
+          {
+            "label": "Zima",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f179a758be81-fr",
+      "type": "mcq",
+      "prompt": "Quel pays revendique le Kosovo, territoire contesté ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Albanie",
+            "correct": false
+          },
+          {
+            "label": "Croatie",
+            "correct": false
+          },
+          {
+            "label": "Macédoine du Nord",
+            "correct": false
+          },
+          {
+            "label": "Serbie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f70ac70311a1-fr",
+      "type": "mcq",
+      "prompt": "Quelle était la nationalité du célèbre artiste Van Gogh ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Français",
+            "correct": false
+          },
+          {
+            "label": "Néerlandais",
+            "correct": true
+          },
+          {
+            "label": "Polonais",
+            "correct": false
+          },
+          {
+            "label": "Russe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f7793d0c4e73-fr",
+      "type": "truefalse",
+      "prompt": "Les pandas mâles font le poirier pour uriner sur les arbres.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-culture-mix-4-fr",
+      "title": "Culture en vrac #4",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-dbaa3244600f-fr",
+        "otdb-e25c0f1fae41-fr",
+        "otdb-6f47d688ac0b-fr",
+        "otdb-f70ac70311a1-fr",
+        "otdb-f7793d0c4e73-fr",
+        "otdb-b4e7e431a3df-fr",
+        "otdb-16785d792b30-fr",
+        "otdb-f179a758be81-fr",
+        "otdb-a65b7cf33a2b-fr",
+        "otdb-8c9b9f2c9145-fr",
+        "otdb-c7dc508c1114-fr",
+        "otdb-a8c1f13c4897-fr",
+        "otdb-6f3715529b1c-fr",
+        "otdb-e7c00ba0d9e9-fr",
+        "otdb-4303d31b2723-fr",
+        "otdb-cebd9759c538-fr",
+        "otdb-3016d2e64d33-fr",
+        "otdb-5539e624a989-fr",
+        "otdb-2cf90c158733-fr",
+        "otdb-02fb118da74a-fr"
+      ],
+      "description": "Un mélange de questions de géographie, d'histoire, de sciences, de nature, de livres, d'art et de télévision."
+    }
+  ]
+}

@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0112-2",
-      "type": "mcq",
-      "prompt": "À la télévision, quel est le métier du fils du commissaire Cordier ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Jongleur",
-            "correct": false
-          },
-          {
-            "label": "Jardinier",
-            "correct": false
-          },
-          {
-            "label": "Juge",
-            "correct": true
-          },
-          {
-            "label": "Journaliste",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0112-3",
       "type": "mcq",
       "prompt": "Le vendredi 13 est le jour préféré de quel célèbre tueur en série ?",
@@ -87,36 +58,7 @@
           }
         ]
       },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0112-4",
-      "type": "mcq",
-      "prompt": "Comment se prénomme la benjamine de la famille Jackson ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Joyce",
-            "correct": false
-          },
-          {
-            "label": "Jasmine",
-            "correct": false
-          },
-          {
-            "label": "Jenifer",
-            "correct": false
-          },
-          {
-            "label": "Janet",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
+      "theme": "cinema",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"

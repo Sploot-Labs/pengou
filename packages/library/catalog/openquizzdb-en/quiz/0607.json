@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=607"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0607-1-en",
+      "type": "mcq",
+      "prompt": "What do you call the large sand hills along the coast?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lagoons",
+            "correct": false
+          },
+          {
+            "label": "Mounts",
+            "correct": false
+          },
+          {
+            "label": "Dunes",
+            "correct": true
+          },
+          {
+            "label": "Cliffs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

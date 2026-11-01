@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=331"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0331-3-en",
+      "type": "mcq",
+      "prompt": "Which defunct car brand is known for its roadsters?",
+      "payload": {
+        "options": [
+          {
+            "label": "Triumph",
+            "correct": true
+          },
+          {
+            "label": "Innocenti",
+            "correct": false
+          },
+          {
+            "label": "DeLorean",
+            "correct": false
+          },
+          {
+            "label": "Hotchkiss",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0331-4-en",
+      "type": "mcq",
+      "prompt": "Which manufacturer created the Firebird, the GTO and the LeMans?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pontiac",
+            "correct": true
+          },
+          {
+            "label": "AMC",
+            "correct": false
+          },
+          {
+            "label": "Oldsmobile",
+            "correct": false
+          },
+          {
+            "label": "Mercury",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

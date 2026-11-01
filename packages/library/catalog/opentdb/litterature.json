@@ -180,35 +180,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-15ef0171aa74",
-      "type": "mcq",
-      "prompt": "Which of these does Charlie NOT read in The Perks of Being a Wallflower?",
-      "payload": {
-        "options": [
-          {
-            "label": "The Great Gatsby",
-            "correct": false
-          },
-          {
-            "label": "Hamlet",
-            "correct": false
-          },
-          {
-            "label": "Peter Pan",
-            "correct": false
-          },
-          {
-            "label": "The Grapes of Wrath",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-169e387b1b51",
       "type": "mcq",
       "prompt": "J.K. Rowling completed \"Harry Potter and the Deathly Hallows\" in which hotel in Edinburgh, Scotland?",
@@ -321,35 +292,6 @@
       },
       "theme": "litterature",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-1bc335215609",
-      "type": "mcq",
-      "prompt": "What is the name of the author of book series 'Percy Jackson'?",
-      "payload": {
-        "options": [
-          {
-            "label": "Roald Dahl",
-            "correct": false
-          },
-          {
-            "label": "Sandra Bullock",
-            "correct": false
-          },
-          {
-            "label": "Rick Riordan",
-            "correct": true
-          },
-          {
-            "label": "J.K. Rowling",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -507,47 +449,6 @@
       },
       "theme": "litterature",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-279b44c104ad",
-      "type": "truefalse",
-      "prompt": "Stephen Chbosky wrote the book 'The Perks of Being A Wallflower'.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "litterature",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-27afe74a37fb",
-      "type": "mcq",
-      "prompt": "Which of the following is the world's best-selling book?",
-      "payload": {
-        "options": [
-          {
-            "label": "The Lord of the Rings",
-            "correct": true
-          },
-          {
-            "label": "The Little Prince",
-            "correct": false
-          },
-          {
-            "label": "Harry Potter and the Philosopher's Stone",
-            "correct": false
-          },
-          {
-            "label": "The Da Vinci Code",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -883,6 +784,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-581bc67061a6",
+      "type": "mcq",
+      "prompt": "Which of the following is NOT one of Aesop's fables?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Fox and the Grapes",
+            "correct": false
+          },
+          {
+            "label": "The Frog and the Ox",
+            "correct": false
+          },
+          {
+            "label": "The Fox and the Hound",
+            "correct": true
+          },
+          {
+            "label": "The Tortoise and the Hare",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-5eb44b56b155",
       "type": "mcq",
       "prompt": "By what nickname is Jack Dawkins known in the Charles Dickens novel, 'Oliver Twist'?",
@@ -995,18 +925,6 @@
       },
       "theme": "litterature",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-667fc853c9f7",
-      "type": "truefalse",
-      "prompt": "The book 1984 was published in 1949.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "litterature",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -1586,35 +1504,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-9a6358e21825",
-      "type": "mcq",
-      "prompt": "The novel \"Of Mice And Men\" was written by what author?",
-      "payload": {
-        "options": [
-          {
-            "label": "Mark Twain",
-            "correct": false
-          },
-          {
-            "label": "Harper Lee",
-            "correct": false
-          },
-          {
-            "label": "George Orwell",
-            "correct": false
-          },
-          {
-            "label": "John Steinbeck",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-9ad03ab46b21",
       "type": "mcq",
       "prompt": "What position does Harry Potter play in Quidditch?",
@@ -1876,35 +1765,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-ac65945bfb3e",
-      "type": "mcq",
-      "prompt": "In the Magic: The Gathering universe, the Fallen Empires expansion takes place on which continent?",
-      "payload": {
-        "options": [
-          {
-            "label": "Otaria",
-            "correct": false
-          },
-          {
-            "label": "Terisiare",
-            "correct": false
-          },
-          {
-            "label": "Sarpadia",
-            "correct": true
-          },
-          {
-            "label": "Shiv",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-b00da953a2eb",
       "type": "mcq",
       "prompt": "What was the last message of the Dolphins in \"The Hitchhiker's Guide to the Galaxy\"?",
@@ -2050,35 +1910,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-b8fa4b62076f",
-      "type": "mcq",
-      "prompt": "In The Lies Of Locke Lamora, what does \"Lamora\" mean in Throne Therin?",
-      "payload": {
-        "options": [
-          {
-            "label": "Shadow",
-            "correct": true
-          },
-          {
-            "label": "Thievery",
-            "correct": false
-          },
-          {
-            "label": "Chaos",
-            "correct": false
-          },
-          {
-            "label": "Justice",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-baf8309e802a",
       "type": "mcq",
       "prompt": "By what name was the author Eric Blair better known?",
@@ -2166,35 +1997,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-cebd9759c538",
-      "type": "mcq",
-      "prompt": "Who wrote the 1967 horror novel \"Rosemary's Baby\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Mary Shelley",
-            "correct": false
-          },
-          {
-            "label": "Robert Bloch",
-            "correct": false
-          },
-          {
-            "label": "Stephen King",
-            "correct": false
-          },
-          {
-            "label": "Ira Levin",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-d24b5688efdd",
       "type": "mcq",
       "prompt": "What is the name of the gang that Ponyboy is a part of in the book, The Outsiders?",
@@ -2249,35 +2051,6 @@
       },
       "theme": "litterature",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-d7aff140508b",
-      "type": "mcq",
-      "prompt": "Which famous book is sub-titled 'The Modern Prometheus'?",
-      "payload": {
-        "options": [
-          {
-            "label": "Dracula",
-            "correct": false
-          },
-          {
-            "label": "The Legend of Sleepy Hollow",
-            "correct": false
-          },
-          {
-            "label": "Frankenstein",
-            "correct": true
-          },
-          {
-            "label": "The Strange Case of Dr. Jekyll and Mr. Hyde",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -2381,35 +2154,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-e25c0f1fae41",
-      "type": "mcq",
-      "prompt": "How many Harry Potter books are there?",
-      "payload": {
-        "options": [
-          {
-            "label": "7",
-            "correct": true
-          },
-          {
-            "label": "8",
-            "correct": false
-          },
-          {
-            "label": "6",
-            "correct": false
-          },
-          {
-            "label": "5",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-e3e2514b4418",
       "type": "mcq",
       "prompt": "This play is generally considered to be the most adaptable of Shakespeare’s works, and follows two “star-crossed lovers”.",
@@ -2487,35 +2231,6 @@
           },
           {
             "label": "Bilbo Baggins",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-e6d85b2d35fa",
-      "type": "mcq",
-      "prompt": "Who wrote the children's story \"The Little Match Girl\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Hans Christian Andersen",
-            "correct": true
-          },
-          {
-            "label": "Lewis Carroll",
-            "correct": false
-          },
-          {
-            "label": "Charles Dickens",
-            "correct": false
-          },
-          {
-            "label": "Oscar Wilde",
             "correct": false
           }
         ]
@@ -2736,5 +2451,68 @@
       "audience": "tous"
     }
   ],
-  "quizzes": []
+  "quizzes": [
+    {
+      "id": "otdb-quiz-books",
+      "title": "Books",
+      "description": "Famous authors, novels and characters.",
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-19926196cd34",
+        "otdb-200487a8a502",
+        "otdb-20091fd561d0",
+        "otdb-3d5767d53e30",
+        "otdb-465651f04dc8",
+        "otdb-48d86b7ae2b9",
+        "otdb-520f03d31f1a",
+        "otdb-6e19074f2ff4",
+        "otdb-825fad4a4376",
+        "otdb-96a05205906a",
+        "otdb-a9a219e9cc53",
+        "otdb-aa91f7257840",
+        "otdb-b068a9db8eea",
+        "otdb-d81d656cf7e7",
+        "otdb-e3e2514b4418",
+        "otdb-eb2bb4827a0a",
+        "otdb-f2d10153e681",
+        "otdb-e6cf9491aa9d",
+        "otdb-18e2cb543939",
+        "otdb-61a32e8f4243"
+      ]
+    },
+    {
+      "id": "otdb-quiz-novels-and-characters",
+      "title": "Novels and characters",
+      "description": "Classic novels and the characters who live in them.",
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-02d87aa159d2",
+        "otdb-0cbf2c2b87d7",
+        "otdb-10d05362143c",
+        "otdb-19b5c2e0b2d1",
+        "otdb-22e8d24d5b1a",
+        "otdb-2d39d38f6074",
+        "otdb-347881364e88",
+        "otdb-5eb44b56b155",
+        "otdb-686026876e2c",
+        "otdb-68b8bb2236a7",
+        "otdb-6c5b974fa618",
+        "otdb-8848a1943da4",
+        "otdb-8bc5b6452899",
+        "otdb-9f04d7b75b3e",
+        "otdb-b00da953a2eb",
+        "otdb-baf8309e802a",
+        "otdb-ce7f1b6ca788",
+        "otdb-e0d70810ca13",
+        "otdb-e681ede2f911",
+        "otdb-e83482a97591"
+      ]
+    }
+  ]
 }

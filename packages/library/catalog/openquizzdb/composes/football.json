@@ -238,35 +238,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0502-1",
-      "type": "mcq",
-      "prompt": "Combien de pays sont à l'origine de la création de la FIFA en 1904 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Douze",
-            "correct": false
-          },
-          {
-            "label": "Huit",
-            "correct": false
-          },
-          {
-            "label": "Cinq",
-            "correct": true
-          },
-          {
-            "label": "Dix",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0502-2",
       "type": "mcq",
       "prompt": "Qui était le gardien de but du Benfica Lisbonne en 1981 ?",
@@ -488,7 +459,6 @@
         "oqdb-0099-2",
         "oqdb-0099-3",
         "oqdb-0099-4",
-        "oqdb-0502-1",
         "oqdb-0502-2",
         "oqdb-0502-3",
         "oqdb-0502-4",

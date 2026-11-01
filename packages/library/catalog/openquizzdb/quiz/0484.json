@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0484-1",
-      "type": "mcq",
-      "prompt": "Quelle manoeuvre permet de changer de direction en planche à voile ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tack",
-            "correct": false
-          },
-          {
-            "label": "Jibe",
-            "correct": true
-          },
-          {
-            "label": "Carve",
-            "correct": false
-          },
-          {
-            "label": "Loop",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0484-2",
       "type": "mcq",
       "prompt": "Quel virage coupé est pratiqué sur les vagues en planche à voile ?",
@@ -84,35 +55,6 @@
           {
             "label": "Upwind",
             "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0484-4",
-      "type": "mcq",
-      "prompt": "Quel système de fixation relie la voile à la planche à voile ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Wishbone",
-            "correct": true
-          },
-          {
-            "label": "Rudder",
-            "correct": false
-          },
-          {
-            "label": "Mast",
-            "correct": false
-          },
-          {
-            "label": "Boom",
-            "correct": false
           }
         ]
       },

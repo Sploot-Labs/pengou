@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=113"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0113-1",
+      "type": "mcq",
+      "prompt": "Quel spectacle de Florence Foresti parle de la maternité ?",
+      "payload": {
+        "options": [
+          {
+            "label": "C'est dimanche",
+            "correct": false
+          },
+          {
+            "label": "Mother Fucker",
+            "correct": true
+          },
+          {
+            "label": "Toute entière",
+            "correct": false
+          },
+          {
+            "label": "Baby Boom",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0113-4",
+      "type": "mcq",
+      "prompt": "Quel trio a-t-elle formé avec Céline Iannucci et Cécile Giroud ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les Luthiers",
+            "correct": false
+          },
+          {
+            "label": "Les Taupes Models",
+            "correct": true
+          },
+          {
+            "label": "Les 3 Jeanne",
+            "correct": false
+          },
+          {
+            "label": "Les Snuls",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

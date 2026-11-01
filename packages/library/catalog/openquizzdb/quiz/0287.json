@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0287-1",
-      "type": "mcq",
-      "prompt": "En plus des lunettes, que porte souvent Jul dans ses clips ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cravate",
-            "correct": false
-          },
-          {
-            "label": "Chapeau",
-            "correct": false
-          },
-          {
-            "label": "Casquette",
-            "correct": true
-          },
-          {
-            "label": "Masque",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0287-2",
       "type": "mcq",
       "prompt": "Quel est le véritable nom du rappeur Jul ?",
@@ -54,35 +25,6 @@
           },
           {
             "label": "Jules Martin",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0287-3",
-      "type": "mcq",
-      "prompt": "Quelle ville est très associée à l'univers musical de Jul ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Bordeaux",
-            "correct": false
-          },
-          {
-            "label": "Marseille",
-            "correct": true
-          },
-          {
-            "label": "Nice",
-            "correct": false
-          },
-          {
-            "label": "Toulouse",
             "correct": false
           }
         ]

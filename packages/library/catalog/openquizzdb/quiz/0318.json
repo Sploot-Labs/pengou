@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0318-2",
-      "type": "mcq",
-      "prompt": "Quelle girafe en caoutchouc pour bébés est apparue en 1961 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Barbie",
-            "correct": false
-          },
-          {
-            "label": "Mimie",
-            "correct": false
-          },
-          {
-            "label": "Sophie",
-            "correct": true
-          },
-          {
-            "label": "Noémie",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0318-3",
       "type": "mcq",
       "prompt": "Quel est le nom du petit de la girafe ?",
@@ -83,35 +54,6 @@
           },
           {
             "label": "Girafon",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0318-4",
-      "type": "mcq",
-      "prompt": "Quelle taille environ peut atteindre une girafe ?",
-      "payload": {
-        "options": [
-          {
-            "label": "4 mètres",
-            "correct": false
-          },
-          {
-            "label": "3 mètres",
-            "correct": false
-          },
-          {
-            "label": "8 mètres",
-            "correct": false
-          },
-          {
-            "label": "6 mètres",
             "correct": true
           }
         ]

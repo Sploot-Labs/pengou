@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0101-1",
-      "type": "mcq",
-      "prompt": "Quelle série retrace les aventures d'Assane Diop, interprété par Omar Sy ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Lupin",
-            "correct": true
-          },
-          {
-            "label": "Sweet Tooth",
-            "correct": false
-          },
-          {
-            "label": "The Circle",
-            "correct": false
-          },
-          {
-            "label": "You",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0101-2",
       "type": "mcq",
       "prompt": "Quel film met en scène Virginie Efira, Omar Sy et Grégory Gadebois ?",

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=167"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0167-4-en",
+      "type": "mcq",
+      "prompt": "Which vermouth brand did George Clooney advertise?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dubonnet",
+            "correct": false
+          },
+          {
+            "label": "Cinzano",
+            "correct": false
+          },
+          {
+            "label": "Martini",
+            "correct": true
+          },
+          {
+            "label": "Noilly Prat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0195-1",
-      "type": "mcq",
-      "prompt": "Quel prénom est inscrit sur le certificat de baptême de Marilyn Monroe ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Norma Jeane",
-            "correct": true
-          },
-          {
-            "label": "Ruby Catherine",
-            "correct": false
-          },
-          {
-            "label": "Lucy Fay",
-            "correct": false
-          },
-          {
-            "label": "Louise Marie",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0195-2",
       "type": "mcq",
       "prompt": "Quelle est la couleur de sa robe dans « Sept ans de réflexion » ?",
@@ -54,64 +25,6 @@
           },
           {
             "label": "Noire",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0195-3",
-      "type": "mcq",
-      "prompt": "Combien de fois Marilyn Monroe fut-elle mariée au cours de sa vie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Trois fois",
-            "correct": true
-          },
-          {
-            "label": "Une fois",
-            "correct": false
-          },
-          {
-            "label": "Deux fois",
-            "correct": false
-          },
-          {
-            "label": "Quatre fois",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0195-4",
-      "type": "mcq",
-      "prompt": "Qui a réalisé en 1964 une série de sérigraphies de Marilyn Monroe ?",
-      "payload": {
-        "options": [
-          {
-            "label": "James Rizzi",
-            "correct": false
-          },
-          {
-            "label": "Jasper Johns",
-            "correct": false
-          },
-          {
-            "label": "Andy Warhol",
-            "correct": true
-          },
-          {
-            "label": "Wayne Thiebaud",
             "correct": false
           }
         ]

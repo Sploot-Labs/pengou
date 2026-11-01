@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0185-1",
-      "type": "mcq",
-      "prompt": "Dans quel film Sandra Bullock est-elle astronaute avec George Clooney ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Minority Report",
-            "correct": false
-          },
-          {
-            "label": "The Warrior",
-            "correct": false
-          },
-          {
-            "label": "Gravity",
-            "correct": true
-          },
-          {
-            "label": "Skyfall",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0185-2",
       "type": "mcq",
       "prompt": "Dans quelle comédie Sandra Bullock joue-t-elle une cruciverbiste ?",
@@ -84,35 +55,6 @@
           {
             "label": "Simon Baker",
             "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0185-4",
-      "type": "mcq",
-      "prompt": "Quel a été le premier thriller dans lequel a participé Sandra Bullock ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Murder by Numbers",
-            "correct": false
-          },
-          {
-            "label": "<T>The Net",
-            "correct": false
-          },
-          {
-            "label": "Speed",
-            "correct": false
-          },
-          {
-            "label": "Demolition Man",
-            "correct": true
           }
         ]
       },

@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=531"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0531-2-en",
+      "type": "mcq",
+      "prompt": "Which title was given at birth to the eldest son of the king of France?",
+      "payload": {
+        "options": [
+          {
+            "label": "Whale",
+            "correct": false
+          },
+          {
+            "label": "Orca",
+            "correct": false
+          },
+          {
+            "label": "Dauphin",
+            "correct": true
+          },
+          {
+            "label": "Shark",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0531-3-en",
+      "type": "mcq",
+      "prompt": "Which term was used for the kings and queens of ancient Egypt?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emir",
+            "correct": false
+          },
+          {
+            "label": "Pasha",
+            "correct": false
+          },
+          {
+            "label": "Pharaoh",
+            "correct": true
+          },
+          {
+            "label": "Khan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0531-4-en",
+      "type": "mcq",
+      "prompt": "Which official title is given to the head of the German government?",
+      "payload": {
+        "options": [
+          {
+            "label": "Governor",
+            "correct": false
+          },
+          {
+            "label": "Rector",
+            "correct": false
+          },
+          {
+            "label": "Chamberlain",
+            "correct": false
+          },
+          {
+            "label": "Chancellor",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

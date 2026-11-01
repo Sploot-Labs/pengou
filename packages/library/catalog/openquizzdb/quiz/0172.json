@@ -35,64 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0172-2",
-      "type": "mcq",
-      "prompt": "Quel groupe de rock alternatif était composé des frères Gallagher ?",
-      "payload": {
-        "options": [
-          {
-            "label": "OMD",
-            "correct": false
-          },
-          {
-            "label": "Oasis",
-            "correct": true
-          },
-          {
-            "label": "Offspring",
-            "correct": false
-          },
-          {
-            "label": "Ottawan",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0172-3",
-      "type": "mcq",
-      "prompt": "Quelle capitale de la Norvège s'est appelée Christiania de 1624 à 1924 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Oulan Bator",
-            "correct": false
-          },
-          {
-            "label": "Oxford",
-            "correct": false
-          },
-          {
-            "label": "Oslo",
-            "correct": true
-          },
-          {
-            "label": "Ottawa",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0172-4",
       "type": "mcq",
       "prompt": "Dans le domaine financier, que signifie le « O » du sigle boursier OPA ?",

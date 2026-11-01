@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=395"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0395-2-en",
+      "type": "mcq",
+      "prompt": "Which colors must be mixed to get green?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yellow and blue",
+            "correct": true
+          },
+          {
+            "label": "Orange and gray",
+            "correct": false
+          },
+          {
+            "label": "Red and black",
+            "correct": false
+          },
+          {
+            "label": "Brown and beige",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,571 @@
+{
+  "source": {
+    "name": "Open Trivia Database",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-0c33419931d3",
+      "type": "truefalse",
+      "prompt": "In 1993, Prince changed his name to an unpronounceable symbol because he was unhappy with his contract with Warner Bros.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0f70818e0a07",
+      "type": "mcq",
+      "prompt": "In which movie does Robin Williams' character have to disguise themselves into a woman?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mrs. Doubtfire",
+            "correct": true
+          },
+          {
+            "label": "Awakenings",
+            "correct": false
+          },
+          {
+            "label": "Old Dogs",
+            "correct": false
+          },
+          {
+            "label": "Jumanji",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-342e650a0c31",
+      "type": "mcq",
+      "prompt": "What was Britney Spears' debut single?",
+      "payload": {
+        "options": [
+          {
+            "label": "(You Drive Me) Crazy",
+            "correct": false
+          },
+          {
+            "label": "...Baby One More Time",
+            "correct": true
+          },
+          {
+            "label": "Toxic",
+            "correct": false
+          },
+          {
+            "label": "Oops!... I Did It Again",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3649cb53ae5a",
+      "type": "mcq",
+      "prompt": "The F1 season of 1994 is remembered for what tragic event?",
+      "payload": {
+        "options": [
+          {
+            "label": "Death of Ayrton Senna (San Marino)",
+            "correct": true
+          },
+          {
+            "label": "Verstappen on Fire (Germany)",
+            "correct": false
+          },
+          {
+            "label": "Schumacher's Ban (Britain)",
+            "correct": false
+          },
+          {
+            "label": "The Showdown (Australia)",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-406be632d7c5",
+      "type": "mcq",
+      "prompt": "In which year was Nelson Mandela released from prison",
+      "payload": {
+        "options": [
+          {
+            "label": "1994",
+            "correct": false
+          },
+          {
+            "label": "1992",
+            "correct": false
+          },
+          {
+            "label": "1990",
+            "correct": true
+          },
+          {
+            "label": "1980",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4e9c7a24028f",
+      "type": "truefalse",
+      "prompt": "In the original script of \"The Matrix\", the machines used humans as additional computing power instead of batteries.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-50c861205b6a",
+      "type": "mcq",
+      "prompt": "In Spyro the Dragon, what is Spyro's dragonfly friend called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sparx",
+            "correct": true
+          },
+          {
+            "label": "Spinkles",
+            "correct": false
+          },
+          {
+            "label": "Sam",
+            "correct": false
+          },
+          {
+            "label": "Sparky",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-51d82f8ddafd",
+      "type": "mcq",
+      "prompt": "What was Daft Punk's first studio album?",
+      "payload": {
+        "options": [
+          {
+            "label": "Human After All",
+            "correct": false
+          },
+          {
+            "label": "Random Access Memories",
+            "correct": false
+          },
+          {
+            "label": "Homework",
+            "correct": true
+          },
+          {
+            "label": "Discovery",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-55b700aca9f5",
+      "type": "mcq",
+      "prompt": "When was Google founded?",
+      "payload": {
+        "options": [
+          {
+            "label": "October 9, 1997",
+            "correct": false
+          },
+          {
+            "label": "Feburary 7th, 2000",
+            "correct": false
+          },
+          {
+            "label": "September 4, 1998",
+            "correct": true
+          },
+          {
+            "label": "December 12, 1989",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-579588941b6f",
+      "type": "truefalse",
+      "prompt": "In Sonic the Hedgehog universe, Tails' real name is Miles Prower.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-62fba77d68d4",
+      "type": "mcq",
+      "prompt": "Which actress danced the twist with John Travolta in 'Pulp Fiction'?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kathy Griffin",
+            "correct": false
+          },
+          {
+            "label": "Bridget Fonda",
+            "correct": false
+          },
+          {
+            "label": "Uma Thurman",
+            "correct": true
+          },
+          {
+            "label": "Pam Grier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b2152bdb43cf",
+      "type": "mcq",
+      "prompt": "Which player \"kung-fu kicked\" a Crystal Palace fan in January 1995?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mark Hughes",
+            "correct": false
+          },
+          {
+            "label": "Ashley Cole",
+            "correct": false
+          },
+          {
+            "label": "David Seamen",
+            "correct": false
+          },
+          {
+            "label": "Eric Cantona",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b5723058621e",
+      "type": "mcq",
+      "prompt": "Which actor played the main character in the 1990 film \"Edward Scissorhands\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ben Stiller",
+            "correct": false
+          },
+          {
+            "label": "Clint Eastwood",
+            "correct": false
+          },
+          {
+            "label": "Leonardo DiCaprio",
+            "correct": false
+          },
+          {
+            "label": "Johnny Depp",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-be60f8adde97",
+      "type": "mcq",
+      "prompt": "Who is the lead singer of Pearl Jam?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eddie Vedder",
+            "correct": true
+          },
+          {
+            "label": "Stone Gossard",
+            "correct": false
+          },
+          {
+            "label": "Kurt Cobain",
+            "correct": false
+          },
+          {
+            "label": "Ozzy Osbourne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c6b537dc98a4",
+      "type": "mcq",
+      "prompt": "What year did the James Cameron film \"Titanic\" come out in theaters?",
+      "payload": {
+        "options": [
+          {
+            "label": "1998",
+            "correct": false
+          },
+          {
+            "label": "1997",
+            "correct": true
+          },
+          {
+            "label": "1999",
+            "correct": false
+          },
+          {
+            "label": "1996",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-cb3427e10e80",
+      "type": "mcq",
+      "prompt": "\"Doctor Jones\", \"Turn Back Time\" and \"Barbie Girl\" were UK number ones for which Eurodance group?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vengaboys",
+            "correct": false
+          },
+          {
+            "label": "Eiffel 65",
+            "correct": false
+          },
+          {
+            "label": "Sash!",
+            "correct": false
+          },
+          {
+            "label": "Aqua",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d84a3d66e4d4",
+      "type": "mcq",
+      "prompt": "What type of Pokémon is Charizard?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dragon",
+            "correct": false
+          },
+          {
+            "label": "Fire/Flying",
+            "correct": true
+          },
+          {
+            "label": "Fire",
+            "correct": false
+          },
+          {
+            "label": "Fire/Dragon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d8c4bd6dfb51",
+      "type": "mcq",
+      "prompt": "The collapse of the Soviet Union took place in which year?",
+      "payload": {
+        "options": [
+          {
+            "label": "1992",
+            "correct": false
+          },
+          {
+            "label": "1991",
+            "correct": true
+          },
+          {
+            "label": "1990",
+            "correct": false
+          },
+          {
+            "label": "1891",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e95168f0e52a",
+      "type": "mcq",
+      "prompt": "Which stand-up comedian voiced the talking parrot \"Iago\" in Disney's 1992 adaptation of Aladdin?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jonathan Freeman",
+            "correct": false
+          },
+          {
+            "label": "Robin Williams",
+            "correct": false
+          },
+          {
+            "label": "Gilbert Gottfried",
+            "correct": true
+          },
+          {
+            "label": "Pauly Shore",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-eb119c33312d",
+      "type": "mcq",
+      "prompt": "Which member of the British pop group \"The Spice Girls\" was known as Ginger Spice?",
+      "payload": {
+        "options": [
+          {
+            "label": "Melanie Brown",
+            "correct": false
+          },
+          {
+            "label": "Emma Bunton",
+            "correct": false
+          },
+          {
+            "label": "Geri Halliwell",
+            "correct": true
+          },
+          {
+            "label": "Victoria Beckham",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-the-90s",
+      "title": "The 90s",
+      "description": "Films, music, games and news from the 1990s.",
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-be60f8adde97",
+        "otdb-4e9c7a24028f",
+        "otdb-0c33419931d3",
+        "otdb-e95168f0e52a",
+        "otdb-b5723058621e",
+        "otdb-51d82f8ddafd",
+        "otdb-55b700aca9f5",
+        "otdb-cb3427e10e80",
+        "otdb-0f70818e0a07",
+        "otdb-342e650a0c31",
+        "otdb-62fba77d68d4",
+        "otdb-406be632d7c5",
+        "otdb-579588941b6f",
+        "otdb-50c861205b6a",
+        "otdb-d8c4bd6dfb51",
+        "otdb-b2152bdb43cf",
+        "otdb-d84a3d66e4d4",
+        "otdb-eb119c33312d",
+        "otdb-3649cb53ae5a",
+        "otdb-c6b537dc98a4"
+      ]
+    }
+  ]
+}

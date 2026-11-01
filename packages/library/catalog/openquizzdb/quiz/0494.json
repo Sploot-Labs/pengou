@@ -35,64 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0494-2",
-      "type": "mcq",
-      "prompt": "Quel écrivain, mort en 1814, est parfois surnommé « le Divin Marquis » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Rimbaud",
-            "correct": false
-          },
-          {
-            "label": "Diderot",
-            "correct": false
-          },
-          {
-            "label": "Sade",
-            "correct": true
-          },
-          {
-            "label": "Montesquieu",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0494-3",
-      "type": "mcq",
-      "prompt": "Quel romancier du XIXe siècle s'est baptisé « le Napoléon des lettres » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Montesquieu",
-            "correct": false
-          },
-          {
-            "label": "Dumas",
-            "correct": false
-          },
-          {
-            "label": "Verlaine",
-            "correct": false
-          },
-          {
-            "label": "Balzac",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0494-4",
       "type": "mcq",
       "prompt": "Quel poète français fut surnommé « l'homme aux semelles de vent » ?",

@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=151"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0151-2-en",
+      "type": "mcq",
+      "prompt": "Which kind of breakfast is sometimes blended with lunch?",
+      "payload": {
+        "options": [
+          {
+            "label": "Banquet",
+            "correct": false
+          },
+          {
+            "label": "Brunch",
+            "correct": true
+          },
+          {
+            "label": "Picnic",
+            "correct": false
+          },
+          {
+            "label": "Afternoon snack",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0151-3-en",
+      "type": "mcq",
+      "prompt": "In which establishment do you have breakfast with the other guests?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinema",
+            "correct": false
+          },
+          {
+            "label": "Sauna",
+            "correct": false
+          },
+          {
+            "label": "Bed and breakfast",
+            "correct": true
+          },
+          {
+            "label": "Elevator",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

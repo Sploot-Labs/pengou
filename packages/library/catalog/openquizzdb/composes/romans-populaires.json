@@ -325,35 +325,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0085-4",
-      "type": "mcq",
-      "prompt": "Quel célèbre auteur de science-fiction a été consultant pour OpenAI ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Isaac Asimov",
-            "correct": true
-          },
-          {
-            "label": "Arthur C. Clarke",
-            "correct": false
-          },
-          {
-            "label": "Philip K. Dick",
-            "correct": false
-          },
-          {
-            "label": "Ray Bradbury",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0397-1",
       "type": "mcq",
       "prompt": "Qui se porte volontaire pour remplacer Prim dans « Hunger Games » ?",
@@ -373,64 +344,6 @@
           },
           {
             "label": "Gale",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0397-2",
-      "type": "mcq",
-      "prompt": "Qui chasse et croit avoir tiré sur quelqu'un dans « Hunger Games » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cinna",
-            "correct": false
-          },
-          {
-            "label": "Gale",
-            "correct": false
-          },
-          {
-            "label": "Katniss",
-            "correct": true
-          },
-          {
-            "label": "Peeta",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0397-3",
-      "type": "mcq",
-      "prompt": "Qui donne à Katniss un instrument qui extrait du liquide des arbres ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Haymitch",
-            "correct": false
-          },
-          {
-            "label": "Johanna",
-            "correct": false
-          },
-          {
-            "label": "Gale",
-            "correct": true
-          },
-          {
-            "label": "Peeta",
             "correct": false
           }
         ]
@@ -491,10 +404,7 @@
         "oqdb-0085-1",
         "oqdb-0085-2",
         "oqdb-0085-3",
-        "oqdb-0085-4",
         "oqdb-0397-1",
-        "oqdb-0397-2",
-        "oqdb-0397-3",
         "oqdb-0397-4"
       ]
     }

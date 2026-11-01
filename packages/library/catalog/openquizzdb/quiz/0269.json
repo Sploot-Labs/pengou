@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0269-1",
-      "type": "mcq",
-      "prompt": "Quelle est la capitale de Chypre ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ankara",
-            "correct": false
-          },
-          {
-            "label": "Athènes",
-            "correct": false
-          },
-          {
-            "label": "Nicosie",
-            "correct": true
-          },
-          {
-            "label": "La Valette",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0269-2",
       "type": "mcq",
       "prompt": "Quelle mer entoure Chypre ?",

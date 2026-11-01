@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0386-3",
-      "type": "mcq",
-      "prompt": "Quel noeud d'arrêt est aussi appelé noeud entier ou noeud plein ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Noeud double",
-            "correct": true
-          },
-          {
-            "label": "Noeud de voleur",
-            "correct": false
-          },
-          {
-            "label": "Noeud de bois",
-            "correct": false
-          },
-          {
-            "label": "Noeud papillon",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0386-4",
-      "type": "mcq",
-      "prompt": "Quel noeud scout sert à attacher le foulard ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Noeud carré",
-            "correct": true
-          },
-          {
-            "label": "Noeud de fouet",
-            "correct": false
-          },
-          {
-            "label": "Noeud plat",
-            "correct": false
-          },
-          {
-            "label": "Noeud de lapin",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

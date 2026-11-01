@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0487-4",
+      "type": "mcq",
+      "prompt": "Quelle marque de voiture est conduite par Thomas Magnum ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ferrari",
+            "correct": true
+          },
+          {
+            "label": "Porsche",
+            "correct": false
+          },
+          {
+            "label": "Audi",
+            "correct": false
+          },
+          {
+            "label": "BMW",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-3",
+      "type": "mcq",
+      "prompt": "Quel groupe musical a interprété « Sweet Dreams (Are Made of This) » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sweet Sensation",
+            "correct": false
+          },
+          {
+            "label": "Sister Sledge",
+            "correct": false
+          },
+          {
+            "label": "Eurythmics",
+            "correct": true
+          },
+          {
+            "label": "Europe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0081-3",
+      "type": "mcq",
+      "prompt": "Quel est le prénom de Gérard Jugnot dans « Le Père Noël est une ordure » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pierre",
+            "correct": false
+          },
+          {
+            "label": "Félix",
+            "correct": true
+          },
+          {
+            "label": "Gérard",
+            "correct": false
+          },
+          {
+            "label": "Roger",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0196-1",
+      "type": "mcq",
+      "prompt": "À quel groupe doit-on la bande originale du film « Flash Gordon » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Queen",
+            "correct": true
+          },
+          {
+            "label": "Quantic",
+            "correct": false
+          },
+          {
+            "label": "Quiet Riot",
+            "correct": false
+          },
+          {
+            "label": "Quicksand",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0125-2",
+      "type": "mcq",
+      "prompt": "Quelle émission, avec Christophe Dechavanne, était diffusée le mardi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zone Interdite",
+            "correct": false
+          },
+          {
+            "label": "Quotidien",
+            "correct": false
+          },
+          {
+            "label": "Ciel mon mardi !",
+            "correct": true
+          },
+          {
+            "label": "The Voice",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0191-1",
+      "type": "mcq",
+      "prompt": "En quelle année Steve Jobs a-t-il racheté le studio d'animation Pixar ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1979",
+            "correct": false
+          },
+          {
+            "label": "1995",
+            "correct": false
+          },
+          {
+            "label": "2001",
+            "correct": false
+          },
+          {
+            "label": "1986",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0524-3",
+      "type": "mcq",
+      "prompt": "Quel groupe de gitans s'est imposé au Top 50 à partir de l'année 1987 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Las Ketchup",
+            "correct": false
+          },
+          {
+            "label": "Gipsy Kings",
+            "correct": true
+          },
+          {
+            "label": "Pata Negra",
+            "correct": false
+          },
+          {
+            "label": "Alabina",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0495-1",
+      "type": "mcq",
+      "prompt": "Quel est le seul et unique véritable tube du groupe Bandolero ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tchiki Boum",
+            "correct": false
+          },
+          {
+            "label": "Yakadansé",
+            "correct": false
+          },
+          {
+            "label": "La saga",
+            "correct": false
+          },
+          {
+            "label": "Paris Latino",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0499-3",
+      "type": "mcq",
+      "prompt": "Pour quel jeu télévisé Philippe Risoli a-t-il remplacé Patrick Roy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Maillon faible",
+            "correct": false
+          },
+          {
+            "label": "Le Juste Prix",
+            "correct": true
+          },
+          {
+            "label": "Le Bigdil",
+            "correct": false
+          },
+          {
+            "label": "L'Or à l'appel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0039-1",
+      "type": "mcq",
+      "prompt": "Qui a réalisé le film de guerre « Platoon », inspiré par sa propre vie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brian De Palma",
+            "correct": false
+          },
+          {
+            "label": "Clint Eastwood",
+            "correct": false
+          },
+          {
+            "label": "John Woo",
+            "correct": false
+          },
+          {
+            "label": "Oliver Stone",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0549-2",
+      "type": "mcq",
+      "prompt": "Quelle jeune artiste a chanté « Jour de neige » à la télévision en 1988 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Patricia Kaas",
+            "correct": false
+          },
+          {
+            "label": "Elsa",
+            "correct": true
+          },
+          {
+            "label": "Jakie Quartz",
+            "correct": false
+          },
+          {
+            "label": "Lio",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0343-4",
+      "type": "mcq",
+      "prompt": "Dans quelle langue le film « Le Grand Bleu » a-t-il été tourné ?",
+      "payload": {
+        "options": [
+          {
+            "label": "En anglais",
+            "correct": true
+          },
+          {
+            "label": "En grec",
+            "correct": false
+          },
+          {
+            "label": "En français",
+            "correct": false
+          },
+          {
+            "label": "En espagnol",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0187-4",
+      "type": "mcq",
+      "prompt": "Qui est le plus costaud des héros de l' « Agence tous risques » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Looping",
+            "correct": false
+          },
+          {
+            "label": "Futé",
+            "correct": false
+          },
+          {
+            "label": "Hannibal",
+            "correct": false
+          },
+          {
+            "label": "Barracuda",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0095-2",
+      "type": "mcq",
+      "prompt": "Quelle est la profession de Jack Nicholson dans le film « Shining » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Explorateur",
+            "correct": false
+          },
+          {
+            "label": "Écrivain",
+            "correct": true
+          },
+          {
+            "label": "Ensorceleur",
+            "correct": false
+          },
+          {
+            "label": "Escrimeur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0476-3",
+      "type": "mcq",
+      "prompt": "Quel titre des Avions sera d'abord un flop avant de devenir un tube ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Loin",
+            "correct": false
+          },
+          {
+            "label": "Cargo de nuit",
+            "correct": false
+          },
+          {
+            "label": "Fanfare",
+            "correct": false
+          },
+          {
+            "label": "Nuit Sauvage",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0493-2",
+      "type": "mcq",
+      "prompt": "Quel policier est le chevalier servant de Dee Dee Mc Call à la télévision ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Matt Helm",
+            "correct": false
+          },
+          {
+            "label": "Sam Spade",
+            "correct": false
+          },
+          {
+            "label": "Jim Phelps",
+            "correct": false
+          },
+          {
+            "label": "Rick Hunter",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0493-4",
+      "type": "mcq",
+      "prompt": "Quelle est la profession de « l'Homme qui tombe à pic » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vendeur de voitures",
+            "correct": false
+          },
+          {
+            "label": "Astronaute",
+            "correct": false
+          },
+          {
+            "label": "Cascadeur",
+            "correct": true
+          },
+          {
+            "label": "Banquier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0225-2",
+      "type": "mcq",
+      "prompt": "De quelle actrice du film « E.T. », Steven Spielberg est-il le parrain ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dee Wallace",
+            "correct": false
+          },
+          {
+            "label": "Drew Barrymore",
+            "correct": true
+          },
+          {
+            "label": "Téa Leoni",
+            "correct": false
+          },
+          {
+            "label": "Dakota Fanning",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0179-3",
+      "type": "mcq",
+      "prompt": "Quelle créature est l'héroïne du film « Splash », de Ron Howard ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Une pieuvre",
+            "correct": false
+          },
+          {
+            "label": "Une tortue",
+            "correct": false
+          },
+          {
+            "label": "Une sirène",
+            "correct": true
+          },
+          {
+            "label": "Une méduse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0509-1",
+      "type": "mcq",
+      "prompt": "Qui interpréta le tube « Macumba », chanson sortie en février 1985 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dave",
+            "correct": false
+          },
+          {
+            "label": "Renaud",
+            "correct": false
+          },
+          {
+            "label": "Jean-Pierre Mader",
+            "correct": true
+          },
+          {
+            "label": "Marc Lavoine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-annees-80-2",
+      "title": "Les années 80 #2",
+      "description": "Télévision, musique et cinéma des années 80.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0487-4",
+        "oqdb-0511-3",
+        "oqdb-0081-3",
+        "oqdb-0196-1",
+        "oqdb-0125-2",
+        "oqdb-0191-1",
+        "oqdb-0524-3",
+        "oqdb-0495-1",
+        "oqdb-0499-3",
+        "oqdb-0039-1",
+        "oqdb-0549-2",
+        "oqdb-0343-4",
+        "oqdb-0187-4",
+        "oqdb-0095-2",
+        "oqdb-0476-3",
+        "oqdb-0493-2",
+        "oqdb-0493-4",
+        "oqdb-0225-2",
+        "oqdb-0179-3",
+        "oqdb-0509-1"
+      ]
+    }
+  ]
+}

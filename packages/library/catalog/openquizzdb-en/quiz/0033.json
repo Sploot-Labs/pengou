@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=33"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0033-1-en",
+      "type": "mcq",
+      "prompt": "Which Lewis Carroll heroine sees a late white rabbit go by?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alice",
+            "correct": true
+          },
+          {
+            "label": "Aurora",
+            "correct": false
+          },
+          {
+            "label": "Camille",
+            "correct": false
+          },
+          {
+            "label": "Cinderella",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0033-4-en",
+      "type": "mcq",
+      "prompt": "What color is the Duracell bunny, with its endless energy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blue",
+            "correct": false
+          },
+          {
+            "label": "Pink",
+            "correct": true
+          },
+          {
+            "label": "Yellow",
+            "correct": false
+          },
+          {
+            "label": "Green",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0244-3",
-      "type": "mcq",
-      "prompt": "Quelle émission était surnommée « le magazine de l'extrême » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Unforgotten",
-            "correct": false
-          },
-          {
-            "label": "Ugly Betty",
-            "correct": false
-          },
-          {
-            "label": "Utopia",
-            "correct": false
-          },
-          {
-            "label": "Ushuaïa",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0244-4",
       "type": "mcq",
       "prompt": "Quel instrument de musique est surnommé la « guitare hawaïenne » ?",

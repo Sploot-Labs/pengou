@@ -1,0 +1,300 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0035-1-en",
+      "type": "mcq",
+      "prompt": "Gabin, Ventura and Delon star together in a film about which clan?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poles",
+            "correct": false
+          },
+          {
+            "label": "Sicilians",
+            "correct": true
+          },
+          {
+            "label": "Indians",
+            "correct": false
+          },
+          {
+            "label": "Scots",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0035-2-en",
+      "type": "mcq",
+      "prompt": "Which film starring Alain Delon is named after a hat?",
+      "payload": {
+        "options": [
+          {
+            "label": "Borsalino",
+            "correct": true
+          },
+          {
+            "label": "Cap",
+            "correct": false
+          },
+          {
+            "label": "Bicorne",
+            "correct": false
+          },
+          {
+            "label": "Balaclava",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0035-4-en",
+      "type": "mcq",
+      "prompt": "Who played Alain Delon's partner in \"La Piscine\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Romy Schneider",
+            "correct": true
+          },
+          {
+            "label": "Brigitte Bardot",
+            "correct": false
+          },
+          {
+            "label": "Mireille Darc",
+            "correct": false
+          },
+          {
+            "label": "Sylvie Vartan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0047-1-en",
+      "type": "mcq",
+      "prompt": "In which Moroccan city was Jean Reno born?",
+      "payload": {
+        "options": [
+          {
+            "label": "Agadir",
+            "correct": false
+          },
+          {
+            "label": "Marrakesh",
+            "correct": false
+          },
+          {
+            "label": "Casablanca",
+            "correct": true
+          },
+          {
+            "label": "Tangier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0047-2-en",
+      "type": "mcq",
+      "prompt": "Who stars opposite Jean Reno in \"The Crimson Rivers\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Samy Naceri",
+            "correct": false
+          },
+          {
+            "label": "Vincent Cassel",
+            "correct": true
+          },
+          {
+            "label": "Alain Delon",
+            "correct": false
+          },
+          {
+            "label": "François Cluzet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0047-4-en",
+      "type": "mcq",
+      "prompt": "In which Luc Besson film does Jean Reno play Enzo?",
+      "payload": {
+        "options": [
+          {
+            "label": "Léon",
+            "correct": false
+          },
+          {
+            "label": "The Big Blue",
+            "correct": true
+          },
+          {
+            "label": "Nikita",
+            "correct": false
+          },
+          {
+            "label": "The Last Battle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0107-2-en",
+      "type": "mcq",
+      "prompt": "In which northern French town was Dany Boon born in 1966?",
+      "payload": {
+        "options": [
+          {
+            "label": "Armentières",
+            "correct": true
+          },
+          {
+            "label": "Ronchin",
+            "correct": false
+          },
+          {
+            "label": "Comines",
+            "correct": false
+          },
+          {
+            "label": "Warneton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0107-3-en",
+      "type": "mcq",
+      "prompt": "Which cheese had its moment of fame after a Dany Boon film?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maroilles",
+            "correct": true
+          },
+          {
+            "label": "Gruyère",
+            "correct": false
+          },
+          {
+            "label": "Brie",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0107-4-en",
+      "type": "mcq",
+      "prompt": "Dany Boon's real first name is Daniel, but what is his surname?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nodier",
+            "correct": false
+          },
+          {
+            "label": "Hamidou",
+            "correct": true
+          },
+          {
+            "label": "Boonval",
+            "correct": false
+          },
+          {
+            "label": "Boonaers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0065-2-en",
+      "type": "mcq",
+      "prompt": "Which film brought Isabelle Adjani and Sharon Stone together on screen?",
+      "payload": {
+        "options": [
+          {
+            "label": "Diabolique",
+            "correct": true
+          },
+          {
+            "label": "Angels & Demons",
+            "correct": false
+          },
+          {
+            "label": "The Witches",
+            "correct": false
+          },
+          {
+            "label": "Practical Magic",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0351-2",
-      "type": "mcq",
-      "prompt": "Dans lequel de ses films se fait-elle passer pour un garçon ?",
-      "payload": {
-        "options": [
-          {
-            "label": "100% cachemire",
-            "correct": false
-          },
-          {
-            "label": "Le Derrière",
-            "correct": true
-          },
-          {
-            "label": "Palais Royal",
-            "correct": false
-          },
-          {
-            "label": "Quadrille",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0351-3",
       "type": "mcq",
       "prompt": "À qui doit-on le film « Je vous trouve très beau », avec Michel Blanc ?",

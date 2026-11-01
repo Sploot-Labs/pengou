@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0041-3",
-      "type": "mcq",
-      "prompt": "Quel est le prénom de John Travolta dans le film « Grease » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tony",
-            "correct": false
-          },
-          {
-            "label": "Johnny",
-            "correct": false
-          },
-          {
-            "label": "Billy",
-            "correct": false
-          },
-          {
-            "label": "Danny",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0041-4",
-      "type": "mcq",
-      "prompt": "Quel film de Tarantino a signé le retour de John Travolta au cinéma ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Django Unchained",
-            "correct": false
-          },
-          {
-            "label": "Pulp Fiction",
-            "correct": true
-          },
-          {
-            "label": "Jackie Brown",
-            "correct": false
-          },
-          {
-            "label": "Kill Bill",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

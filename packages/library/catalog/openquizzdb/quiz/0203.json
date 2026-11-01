@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0203-1",
-      "type": "mcq",
-      "prompt": "Que voit-on au verso de la pochette l'album « Laundry Service », de Shakira ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Machine à laver",
-            "correct": true
-          },
-          {
-            "label": "Téléphone",
-            "correct": false
-          },
-          {
-            "label": "Menottes",
-            "correct": false
-          },
-          {
-            "label": "Radio",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0203-2",
-      "type": "mcq",
-      "prompt": "De quel pays est originaire Shakira, la reine de la musique latine ?",
-      "payload": {
-        "options": [
-          {
-            "label": "États-Unis",
-            "correct": false
-          },
-          {
-            "label": "Colombie",
-            "correct": true
-          },
-          {
-            "label": "Mexique",
-            "correct": false
-          },
-          {
-            "label": "Bolivie",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0203-3",
       "type": "mcq",
       "prompt": "Comment se prénomme le premier fils de Shakira et de Gerard Piqué ?",
@@ -84,35 +26,6 @@
           {
             "label": "Milan",
             "correct": true
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0203-4",
-      "type": "mcq",
-      "prompt": "Quel est le titre du premier album où Shakira a écrit en anglais ?",
-      "payload": {
-        "options": [
-          {
-            "label": "You And Me",
-            "correct": false
-          },
-          {
-            "label": "Oral Fixation",
-            "correct": false
-          },
-          {
-            "label": "Laundry Service",
-            "correct": true
-          },
-          {
-            "label": "She Wolf",
-            "correct": false
           }
         ]
       },

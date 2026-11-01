@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=407"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0407-1-en",
+      "type": "mcq",
+      "prompt": "How many eyes do the aliens of Pizza Planet have in \"Toy Story\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Four",
+            "correct": false
+          },
+          {
+            "label": "Two",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": true
+          },
+          {
+            "label": "Only one",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

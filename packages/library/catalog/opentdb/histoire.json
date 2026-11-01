@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-0708a3698519",
-      "type": "mcq",
-      "prompt": "What was the Canada's first capital?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ottawa",
-            "correct": false
-          },
-          {
-            "label": "Toronto",
-            "correct": false
-          },
-          {
-            "label": "Montreal",
-            "correct": false
-          },
-          {
-            "label": "Kingston",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-0a1879139f41",
       "type": "truefalse",
       "prompt": "There are 13 months in the Ethiopian calendar.",
@@ -96,35 +67,6 @@
           {
             "label": "Maximilien Robespierre",
             "correct": true
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-0eb4303f71c7",
-      "type": "mcq",
-      "prompt": "Which of these founding fathers of the United States of America later became president?",
-      "payload": {
-        "options": [
-          {
-            "label": "James Monroe",
-            "correct": true
-          },
-          {
-            "label": "Samuel Adams",
-            "correct": false
-          },
-          {
-            "label": "Roger Sherman",
-            "correct": false
-          },
-          {
-            "label": "Alexander Hamilton",
-            "correct": false
           }
         ]
       },
@@ -204,35 +146,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-1acbb7d874b4",
-      "type": "mcq",
-      "prompt": "In which year did the Invasion of Kuwait by Iraq occur?",
-      "payload": {
-        "options": [
-          {
-            "label": "1992",
-            "correct": false
-          },
-          {
-            "label": "1990",
-            "correct": true
-          },
-          {
-            "label": "1986",
-            "correct": false
-          },
-          {
-            "label": "1988",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-1bd8709562c9",
       "type": "mcq",
       "prompt": "In what year did the First World War end?",
@@ -287,35 +200,6 @@
       },
       "theme": "histoire",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-1fd50ff6f75d",
-      "type": "mcq",
-      "prompt": "When did the United States formally declare war on Japan, entering World War II?",
-      "payload": {
-        "options": [
-          {
-            "label": "September 1, 1939",
-            "correct": false
-          },
-          {
-            "label": "June 22, 1941",
-            "correct": false
-          },
-          {
-            "label": "December 8, 1941",
-            "correct": true
-          },
-          {
-            "label": "June 6, 1944",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -564,35 +448,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-406be632d7c5",
-      "type": "mcq",
-      "prompt": "In which year was Nelson Mandela released from prison",
-      "payload": {
-        "options": [
-          {
-            "label": "1994",
-            "correct": false
-          },
-          {
-            "label": "1992",
-            "correct": false
-          },
-          {
-            "label": "1990",
-            "correct": true
-          },
-          {
-            "label": "1980",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-475176886ac9",
       "type": "mcq",
       "prompt": "Who was a military strategist in the Eastern Zhou period?",
@@ -779,35 +634,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-55b700aca9f5",
-      "type": "mcq",
-      "prompt": "When was Google founded?",
-      "payload": {
-        "options": [
-          {
-            "label": "October 9, 1997",
-            "correct": false
-          },
-          {
-            "label": "Feburary 7th, 2000",
-            "correct": false
-          },
-          {
-            "label": "September 4, 1998",
-            "correct": true
-          },
-          {
-            "label": "December 12, 1989",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-57942d56a141",
       "type": "mcq",
       "prompt": "What was the bloodiest single-day battle during the American Civil War?",
@@ -827,35 +653,6 @@
           },
           {
             "label": "The Siege of Vicksburg",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-5f7859cc2457",
-      "type": "mcq",
-      "prompt": "When was the Grand Patriotic War in the USSR concluded?",
-      "payload": {
-        "options": [
-          {
-            "label": "December 11th, 1945",
-            "correct": false
-          },
-          {
-            "label": "May 9th, 1945",
-            "correct": true
-          },
-          {
-            "label": "August 9th, 1945",
-            "correct": false
-          },
-          {
-            "label": "September 2nd, 1945",
             "correct": false
           }
         ]
@@ -1011,18 +808,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-6f3715529b1c",
-      "type": "truefalse",
-      "prompt": "The fourth funnel of the RMS Titanic was fake designed to make the ship look more powerful and symmetrical.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "histoire",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-6fa907dc807a",
       "type": "mcq",
       "prompt": "Who was the Prime Minister of the United Kingdom for most of World War II?",
@@ -1168,18 +953,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-77e10724f080",
-      "type": "truefalse",
-      "prompt": "Sir Issac Newton served as a Member of Parliament, but the only recorded time he spoke was to complain about a draft in the chambers.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-79fb25fda650",
       "type": "truefalse",
       "prompt": "The USS Missouri (BB-63) last served in the Korean War.",
@@ -1188,35 +961,6 @@
       },
       "theme": "histoire",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-7f2b15d123a3",
-      "type": "mcq",
-      "prompt": "America's Strategic Defense System during the Cold War was nicknamed after this famous movie.",
-      "payload": {
-        "options": [
-          {
-            "label": "Blade Runner",
-            "correct": false
-          },
-          {
-            "label": "Alien",
-            "correct": false
-          },
-          {
-            "label": "Jaws",
-            "correct": false
-          },
-          {
-            "label": "Star Wars",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -1345,35 +1089,6 @@
       },
       "theme": "histoire",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-8d62f2070dca",
-      "type": "mcq",
-      "prompt": "When did construction of the Suez Canal finish?",
-      "payload": {
-        "options": [
-          {
-            "label": "1869",
-            "correct": true
-          },
-          {
-            "label": "1859",
-            "correct": false
-          },
-          {
-            "label": "1850",
-            "correct": false
-          },
-          {
-            "label": "1860",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -1518,35 +1233,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-a8c1f13c4897",
-      "type": "mcq",
-      "prompt": "When did the Byzantine Empire collapse?",
-      "payload": {
-        "options": [
-          {
-            "label": "1299",
-            "correct": false
-          },
-          {
-            "label": "1353",
-            "correct": false
-          },
-          {
-            "label": "1498",
-            "correct": false
-          },
-          {
-            "label": "1453",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-a8e85dab834e",
       "type": "mcq",
       "prompt": "What was the capital of South Vietnam before the Vietnam War?",
@@ -1567,35 +1253,6 @@
           {
             "label": "Ho Chi Minh City",
             "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-a93e0fc1da45",
-      "type": "mcq",
-      "prompt": "What was the name of the first permanent English settlement in America?",
-      "payload": {
-        "options": [
-          {
-            "label": "New York",
-            "correct": false
-          },
-          {
-            "label": "Plymouth",
-            "correct": false
-          },
-          {
-            "label": "St. John's",
-            "correct": false
-          },
-          {
-            "label": "Jamestown",
-            "correct": true
           }
         ]
       },
@@ -1729,18 +1386,6 @@
       },
       "theme": "histoire",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-b4e7e431a3df",
-      "type": "truefalse",
-      "prompt": "The Cold War ended with Joseph Stalin's death.",
-      "payload": {
-        "correct": false
-      },
-      "theme": "histoire",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -1948,35 +1593,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-bd2128f8d4af",
-      "type": "mcq",
-      "prompt": "The ontological argument for the proof of God's existence is first attributed to whom?",
-      "payload": {
-        "options": [
-          {
-            "label": "Immanuel Kant",
-            "correct": false
-          },
-          {
-            "label": "René Descartes",
-            "correct": false
-          },
-          {
-            "label": "Anselm of Canterbury",
-            "correct": true
-          },
-          {
-            "label": "Aristotle",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-c14561bdb39f",
       "type": "mcq",
       "prompt": "Where was Abraham Lincoln when he was assassinated by John Wilkes Booth in 1865?",
@@ -2002,6 +1618,35 @@
       },
       "theme": "histoire",
       "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c522ca61af73",
+      "type": "mcq",
+      "prompt": "Which country developed the AK-47 assault rifle?",
+      "payload": {
+        "options": [
+          {
+            "label": "Soviet Union",
+            "correct": true
+          },
+          {
+            "label": "Iran",
+            "correct": false
+          },
+          {
+            "label": "Poland",
+            "correct": false
+          },
+          {
+            "label": "Israel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -2060,122 +1705,6 @@
       },
       "theme": "histoire",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-c9c9a363bbfd",
-      "type": "mcq",
-      "prompt": "In what year did the North American Video Game Crash occur?",
-      "payload": {
-        "options": [
-          {
-            "label": "1982",
-            "correct": false
-          },
-          {
-            "label": "1993",
-            "correct": false
-          },
-          {
-            "label": "1983",
-            "correct": true
-          },
-          {
-            "label": "1970",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-cb638e5b5d6a",
-      "type": "mcq",
-      "prompt": "The idea of Socialism was articulated and advanced by whom?",
-      "payload": {
-        "options": [
-          {
-            "label": "Joseph Stalin",
-            "correct": false
-          },
-          {
-            "label": "Karl Marx",
-            "correct": true
-          },
-          {
-            "label": "Vladimir Lenin",
-            "correct": false
-          },
-          {
-            "label": "Vladimir Putin",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-d070b3da4984",
-      "type": "mcq",
-      "prompt": "What did Albert Einstein win the Nobel Prize for in 1921?",
-      "payload": {
-        "options": [
-          {
-            "label": "Zero-Point Energy",
-            "correct": false
-          },
-          {
-            "label": "Relativity",
-            "correct": false
-          },
-          {
-            "label": "Wave-Particle Duality",
-            "correct": false
-          },
-          {
-            "label": "Photoelectric Effect",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-d3ec6541d5d2",
-      "type": "mcq",
-      "prompt": "Who was the Prime Minister of Japan when Japan declared war on the US?",
-      "payload": {
-        "options": [
-          {
-            "label": "Isoroku Yamamoto",
-            "correct": false
-          },
-          {
-            "label": "Hideki Tojo",
-            "correct": true
-          },
-          {
-            "label": "Fumimaro Konoe",
-            "correct": false
-          },
-          {
-            "label": "Michinomiya Hirohito",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -2267,35 +1796,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-d8c4bd6dfb51",
-      "type": "mcq",
-      "prompt": "The collapse of the Soviet Union took place in which year?",
-      "payload": {
-        "options": [
-          {
-            "label": "1992",
-            "correct": false
-          },
-          {
-            "label": "1991",
-            "correct": true
-          },
-          {
-            "label": "1990",
-            "correct": false
-          },
-          {
-            "label": "1891",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-d9856a43f1c5",
       "type": "mcq",
       "prompt": "King Henry VIII was the second monarch of which European royal house?",
@@ -2373,64 +1873,6 @@
           },
           {
             "label": "Gettysburg Campagin",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-e348980379e9",
-      "type": "mcq",
-      "prompt": "When did the British hand-over sovereignty of Hong Kong back to China?",
-      "payload": {
-        "options": [
-          {
-            "label": "1999",
-            "correct": false
-          },
-          {
-            "label": "1841",
-            "correct": false
-          },
-          {
-            "label": "1997",
-            "correct": true
-          },
-          {
-            "label": "1900",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-e389165a9499",
-      "type": "mcq",
-      "prompt": "Which building was set aflame on August 24th, 1812?",
-      "payload": {
-        "options": [
-          {
-            "label": "Parliament Building",
-            "correct": false
-          },
-          {
-            "label": "The White House",
-            "correct": true
-          },
-          {
-            "label": "Grand National Assembly Building",
-            "correct": false
-          },
-          {
-            "label": "Palace of the Nation",
             "correct": false
           }
         ]
@@ -2598,35 +2040,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-f7eacc61f395",
-      "type": "mcq",
-      "prompt": "What year was the first Pizza Hut restaurant opened?",
-      "payload": {
-        "options": [
-          {
-            "label": "1965",
-            "correct": false
-          },
-          {
-            "label": "1958",
-            "correct": true
-          },
-          {
-            "label": "1976",
-            "correct": false
-          },
-          {
-            "label": "1942",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-facbee9c0666",
       "type": "mcq",
       "prompt": "Which U.S. President was in office when the Gulf War began?",
@@ -2689,7 +2102,38 @@
     {
       "id": "otdb-quiz-history",
       "title": "History",
-      "description": "Questions from the Open Trivia Database (opentdb.com), licensed under CC BY-SA 4.0.",
+      "description": "Key dates, battles and figures of world history.",
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-0dee9264fb43",
+        "otdb-0f296a474252",
+        "otdb-12064ee25495",
+        "otdb-1bd8709562c9",
+        "otdb-2c9a5dbf426e",
+        "otdb-362fb3ebc531",
+        "otdb-60919da3e1b2",
+        "otdb-650cc9c6c34f",
+        "otdb-6fa907dc807a",
+        "otdb-735502f5eea4",
+        "otdb-7371e6dc4c82",
+        "otdb-84f0b8a3d2e6",
+        "otdb-b6ee33ab848f",
+        "otdb-b74fe3e23939",
+        "otdb-ac577bb281e8",
+        "otdb-c14561bdb39f",
+        "otdb-f7875f9c719b",
+        "otdb-2ac21a16d90a",
+        "otdb-948960cba94b",
+        "otdb-713cf859de85"
+      ]
+    },
+    {
+      "id": "otdb-quiz-through-the-ages",
+      "title": "Through the ages",
+      "description": "From ancient empires to the 20th century.",
       "theme": "histoire",
       "difficulty": "moyen",
       "language": "en",
@@ -2697,19 +2141,24 @@
       "questionIds": [
         "otdb-0129a7f88a98",
         "otdb-0a1879139f41",
-        "otdb-0dee9264fb43",
-        "otdb-0eb4303f71c7",
-        "otdb-1bd8709562c9",
-        "otdb-1fd50ff6f75d",
-        "otdb-2c9a5dbf426e",
-        "otdb-362fb3ebc531",
+        "otdb-1eef60fbe546",
+        "otdb-27dc100367c8",
+        "otdb-283fdb329c50",
         "otdb-389189040353",
-        "otdb-38b13b044b55",
+        "otdb-3c4e4a1620b0",
         "otdb-475176886ac9",
-        "otdb-476a72fd04dd",
-        "otdb-47de9d4760f0",
         "otdb-482a7f8e6a15",
-        "otdb-57942d56a141"
+        "otdb-4ccfce05edfd",
+        "otdb-4e263388396a",
+        "otdb-6532da3c258d",
+        "otdb-68057e9d8869",
+        "otdb-72288eb09c8a",
+        "otdb-8ccfeb49468d",
+        "otdb-9619b06bd02f",
+        "otdb-a6536abb4cce",
+        "otdb-afa5e027b172",
+        "otdb-b02679bdc44b",
+        "otdb-f43cfe1fa0f6"
       ]
     }
   ]

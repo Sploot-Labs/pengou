@@ -35,64 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0393-2",
-      "type": "mcq",
-      "prompt": "Que représente la broche de Katniss dans « Hunger Games » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Globe",
-            "correct": false
-          },
-          {
-            "label": "Pioche",
-            "correct": false
-          },
-          {
-            "label": "Geai moqueur",
-            "correct": true
-          },
-          {
-            "label": "Arc",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0393-3",
-      "type": "mcq",
-      "prompt": "Quelles baies sont empoisonnées dans « Hunger Games » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Baies de sureau",
-            "correct": true
-          },
-          {
-            "label": "Baies de goji",
-            "correct": false
-          },
-          {
-            "label": "Myrtilles",
-            "correct": false
-          },
-          {
-            "label": "Baies de la nuit",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0393-4",
       "type": "mcq",
       "prompt": "Quel est le nom de famille de Haymitch dans « Hunger Game » ?",

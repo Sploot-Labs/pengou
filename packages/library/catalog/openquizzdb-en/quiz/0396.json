@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=396"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0396-1-en",
+      "type": "mcq",
+      "prompt": "Around which Italian city is Asti Spumante made?",
+      "payload": {
+        "options": [
+          {
+            "label": "Turin",
+            "correct": false
+          },
+          {
+            "label": "Asti",
+            "correct": true
+          },
+          {
+            "label": "Rivoli",
+            "correct": false
+          },
+          {
+            "label": "Biella",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0396-2-en",
+      "type": "mcq",
+      "prompt": "The leaves of which plant are put in tea in Morocco?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eucalyptus",
+            "correct": false
+          },
+          {
+            "label": "Mint",
+            "correct": true
+          },
+          {
+            "label": "Sage",
+            "correct": false
+          },
+          {
+            "label": "Cornflower",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0396-3-en",
+      "type": "mcq",
+      "prompt": "What is your Chinese host offering when he offers you \"cha\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coffee",
+            "correct": false
+          },
+          {
+            "label": "Chocolate",
+            "correct": false
+          },
+          {
+            "label": "Whisky",
+            "correct": false
+          },
+          {
+            "label": "Tea",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0396-4-en",
+      "type": "mcq",
+      "prompt": "What is a bombilla slipped into the tea in Argentina?",
+      "payload": {
+        "options": [
+          {
+            "label": "Flat spoon",
+            "correct": false
+          },
+          {
+            "label": "Fruit jelly",
+            "correct": false
+          },
+          {
+            "label": "Filter straw",
+            "correct": true
+          },
+          {
+            "label": "Candied cherry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

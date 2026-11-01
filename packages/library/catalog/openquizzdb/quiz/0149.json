@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0149-1",
-      "type": "mcq",
-      "prompt": "Quel rôle Scarlett Johansson tient-elle dans le film « Iron Man 2 » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Rebecca",
-            "correct": false
-          },
-          {
-            "label": "Veuve noire",
-            "correct": true
-          },
-          {
-            "label": "Christine Everhart",
-            "correct": false
-          },
-          {
-            "label": "Pepper Potts",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0149-2",
-      "type": "mcq",
-      "prompt": "Dans quel pays les parents de Scarlett Johansson se sont-ils rencontrés ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sénégal",
-            "correct": false
-          },
-          {
-            "label": "Danemark",
-            "correct": true
-          },
-          {
-            "label": "Inde",
-            "correct": false
-          },
-          {
-            "label": "Suède",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0149-3",
       "type": "mcq",
       "prompt": "Dans quel film avec Ewan McGregor retrouve-t-on Scarlett Johansson ?",
@@ -84,35 +26,6 @@
           {
             "label": "Young Adam",
             "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0149-4",
-      "type": "mcq",
-      "prompt": "Quel film a une nouvelle fois réuni Scarlett Johansson et Hugh Jackman ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Scoop",
-            "correct": false
-          },
-          {
-            "label": "Real Steel",
-            "correct": false
-          },
-          {
-            "label": "Australia",
-            "correct": false
-          },
-          {
-            "label": "Le Prestige",
-            "correct": true
           }
         ]
       },

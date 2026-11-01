@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0366-1",
-      "type": "mcq",
-      "prompt": "En quelle année fut fondée l'entreprise à but lucratif plafonné OpenAI ?",
-      "payload": {
-        "options": [
-          {
-            "label": "2019",
-            "correct": false
-          },
-          {
-            "label": "2017",
-            "correct": false
-          },
-          {
-            "label": "2021",
-            "correct": false
-          },
-          {
-            "label": "2015",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0366-2",
       "type": "mcq",
       "prompt": "Dans quelle ville des États-Unis se situe le siège social d'OpenAI ?",
@@ -54,35 +25,6 @@
           },
           {
             "label": "Chicago",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0366-3",
-      "type": "mcq",
-      "prompt": "Qui a quitté OpenAI en 2018 à la suite d'un conflit de direction ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ilya Sutskever",
-            "correct": false
-          },
-          {
-            "label": "Elon Musk",
-            "correct": true
-          },
-          {
-            "label": "Greg Brockman",
-            "correct": false
-          },
-          {
-            "label": "Sam Altman",
             "correct": false
           }
         ]

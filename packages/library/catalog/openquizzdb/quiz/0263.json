@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0263-1",
-      "type": "mcq",
-      "prompt": "Quelle est la capitale du Danemark ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Helsinki",
-            "correct": false
-          },
-          {
-            "label": "Copenhague",
-            "correct": true
-          },
-          {
-            "label": "Oslo",
-            "correct": false
-          },
-          {
-            "label": "Stockholm",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0263-2",
       "type": "mcq",
       "prompt": "Quelle monnaie est utilisée quotidiennement au Danemark ?",
@@ -55,35 +26,6 @@
           {
             "label": "Dollar",
             "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0263-3",
-      "type": "mcq",
-      "prompt": "De quelle région le Danemark fait-il partie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Balkans",
-            "correct": false
-          },
-          {
-            "label": "Maghreb",
-            "correct": false
-          },
-          {
-            "label": "Andes",
-            "correct": false
-          },
-          {
-            "label": "Scandinavie",
-            "correct": true
           }
         ]
       },

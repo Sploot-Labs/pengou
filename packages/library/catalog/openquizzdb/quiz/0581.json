@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0581-1",
-      "type": "mcq",
-      "prompt": "Que représente le logo de l'application mobile Snapchat ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ours",
-            "correct": false
-          },
-          {
-            "label": "Appareil photo",
-            "correct": false
-          },
-          {
-            "label": "Singe",
-            "correct": false
-          },
-          {
-            "label": "Fantôme",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0581-2",
-      "type": "mcq",
-      "prompt": "Qui est devenu milliardaire à l'âge de 24 ans grâce à Snapchat ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Jeff Bezos",
-            "correct": false
-          },
-          {
-            "label": "Tom Golisano",
-            "correct": false
-          },
-          {
-            "label": "Evan Spiegel",
-            "correct": true
-          },
-          {
-            "label": "Paul Allen",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0581-3",
       "type": "mcq",
       "prompt": "Quelle couleur est généralement associée à Snapchat ?",
@@ -84,35 +26,6 @@
           {
             "label": "Rouge",
             "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0581-4",
-      "type": "mcq",
-      "prompt": "Combien d'utilisateurs quotidiens Snapchat comptait-il en 2017 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "106 millions",
-            "correct": false
-          },
-          {
-            "label": "146 millions",
-            "correct": false
-          },
-          {
-            "label": "126 millions",
-            "correct": false
-          },
-          {
-            "label": "178 millions",
-            "correct": true
           }
         ]
       },

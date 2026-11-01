@@ -1,0 +1,571 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-06cb1f4d13f1-fr",
+      "type": "mcq",
+      "prompt": "Qui a remporté la Ligue des champions en 1999 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Manchester United",
+            "correct": true
+          },
+          {
+            "label": "Liverpool",
+            "correct": false
+          },
+          {
+            "label": "Barcelone",
+            "correct": false
+          },
+          {
+            "label": "Bayern Munich",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0774fc6fff7b-fr",
+      "type": "mcq",
+      "prompt": "Quel rappeur est plus connu sous le nom d'Artis Leon Ivey Jr. ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dr. Dre",
+            "correct": false
+          },
+          {
+            "label": "Snoop Dogg",
+            "correct": false
+          },
+          {
+            "label": "Ice-T",
+            "correct": false
+          },
+          {
+            "label": "Coolio",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-196cb65435bb-fr",
+      "type": "mcq",
+      "prompt": "Dans « Mulan » (1998), qui est le chef des Huns ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shan Yu",
+            "correct": true
+          },
+          {
+            "label": "Chien-Po",
+            "correct": false
+          },
+          {
+            "label": "Fa Zhou",
+            "correct": false
+          },
+          {
+            "label": "Li Shang",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1acbb7d874b4-fr",
+      "type": "mcq",
+      "prompt": "En quelle année l'Irak a-t-il envahi le Koweït ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1992",
+            "correct": false
+          },
+          {
+            "label": "1990",
+            "correct": true
+          },
+          {
+            "label": "1986",
+            "correct": false
+          },
+          {
+            "label": "1988",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-279b44c104ad-fr",
+      "type": "truefalse",
+      "prompt": "Stephen Chbosky a écrit « Le Monde de Charlie ».",
+      "payload": {
+        "correct": true
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-409d3c197d33-fr",
+      "type": "mcq",
+      "prompt": "Qui jouait le U.S. Marshal adjoint Samuel Gerard dans le film « Le Fugitif » (1993) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Harrison Ford",
+            "correct": false
+          },
+          {
+            "label": "Harvey Keitel",
+            "correct": false
+          },
+          {
+            "label": "Tommy Lee Jones",
+            "correct": true
+          },
+          {
+            "label": "Martin Landau",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-410c224a0e1e-fr",
+      "type": "mcq",
+      "prompt": "Quel est le vrai nom du rappeur The Notorious B.I.G. ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eric Lynn Wright",
+            "correct": false
+          },
+          {
+            "label": "O'Shea Jackson",
+            "correct": false
+          },
+          {
+            "label": "Christopher Wallace",
+            "correct": true
+          },
+          {
+            "label": "Calvin Broadus Jr.",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-47823dde3a68-fr",
+      "type": "mcq",
+      "prompt": "Qui est le chanteur des Smashing Pumpkins ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eddie Vedder",
+            "correct": false
+          },
+          {
+            "label": "Brett Scallions",
+            "correct": false
+          },
+          {
+            "label": "Billy Corgan",
+            "correct": true
+          },
+          {
+            "label": "Chino Moreno",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4f6489da3a2a-fr",
+      "type": "mcq",
+      "prompt": "Avec quelle écurie Michael Schumacher a-t-il fait ses débuts en Formule 1 au Grand Prix de Belgique 1991 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mercedes",
+            "correct": false
+          },
+          {
+            "label": "Ferrari",
+            "correct": false
+          },
+          {
+            "label": "Benetton",
+            "correct": false
+          },
+          {
+            "label": "Jordan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-65fb1590968e-fr",
+      "type": "truefalse",
+      "prompt": "Dave Grohl a enregistré seul le premier album des Foo Fighters, « Foo Fighters ».",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-82d5560445f5-fr",
+      "type": "mcq",
+      "prompt": "Quand la société Valve a-t-elle été fondée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "26 décembre 1994",
+            "correct": false
+          },
+          {
+            "label": "13 mars 1997",
+            "correct": false
+          },
+          {
+            "label": "24 août 1996",
+            "correct": true
+          },
+          {
+            "label": "22 mars 1997",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-906acd1642bc-fr",
+      "type": "mcq",
+      "prompt": "Quelle comédie culte des années 90 compte des apparitions de Meat Loaf, Alice Cooper et Chris Farley ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Austin Powers",
+            "correct": false
+          },
+          {
+            "label": "Bill et Ted",
+            "correct": false
+          },
+          {
+            "label": "Dumb et Dumber",
+            "correct": false
+          },
+          {
+            "label": "Wayne's World",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-994dcdd1b321-fr",
+      "type": "mcq",
+      "prompt": "Qui est congelé à la fin du film « GoldenEye » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Natalya Simonova",
+            "correct": false
+          },
+          {
+            "label": "Alec Trevelyan",
+            "correct": false
+          },
+          {
+            "label": "Boris Grishenko",
+            "correct": true
+          },
+          {
+            "label": "James Bond",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9b258da8c009-fr",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on les minuscules Thwomps dans Super Mario World ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Petit Thwomp",
+            "correct": false
+          },
+          {
+            "label": "Tiny Tims",
+            "correct": false
+          },
+          {
+            "label": "Mini Thwomp",
+            "correct": false
+          },
+          {
+            "label": "Thwimps",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a91bbd0fa473-fr",
+      "type": "truefalse",
+      "prompt": "La chanson « Scatman's World » est sortie après « Scatman (Ski-Ba-Bop-Ba-Dop-Bop) ».",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ba07af7295c5-fr",
+      "type": "mcq",
+      "prompt": "« La première règle : on n'en parle pas » fait référence à quel film ?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Island",
+            "correct": false
+          },
+          {
+            "label": "American Pie",
+            "correct": false
+          },
+          {
+            "label": "Fight Club",
+            "correct": true
+          },
+          {
+            "label": "Unthinkable",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c1a5b9c48f1d-fr",
+      "type": "mcq",
+      "prompt": "Sous quel nom Final Fantasy VI est-il d'abord sorti hors du Japon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Final Fantasy V",
+            "correct": false
+          },
+          {
+            "label": "Final Fantasy VI",
+            "correct": false
+          },
+          {
+            "label": "Final Fantasy III",
+            "correct": true
+          },
+          {
+            "label": "Final Fantasy II",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dd8f1cda33e2-fr",
+      "type": "mcq",
+      "prompt": "Dans le film « Le Géant de fer », quel personnage est le héros ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dean McCoppin",
+            "correct": false
+          },
+          {
+            "label": "Annie Hughes",
+            "correct": false
+          },
+          {
+            "label": "Kent Mansley",
+            "correct": false
+          },
+          {
+            "label": "Hogarth Hughes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e348980379e9-fr",
+      "type": "mcq",
+      "prompt": "Quand les Britanniques ont-ils rendu la souveraineté de Hong Kong à la Chine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1999",
+            "correct": false
+          },
+          {
+            "label": "1841",
+            "correct": false
+          },
+          {
+            "label": "1997",
+            "correct": true
+          },
+          {
+            "label": "1900",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f778f9af905a-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces rappeurs n'est PAS membre du groupe de rap Wu-Tang Clan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ol' Dirty Bastard",
+            "correct": false
+          },
+          {
+            "label": "GZA",
+            "correct": false
+          },
+          {
+            "label": "Method Man",
+            "correct": false
+          },
+          {
+            "label": "Dr. Dre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-the-90s-2-fr",
+      "title": "Années 90, culture pop #2",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-196cb65435bb-fr",
+        "otdb-409d3c197d33-fr",
+        "otdb-dd8f1cda33e2-fr",
+        "otdb-410c224a0e1e-fr",
+        "otdb-994dcdd1b321-fr",
+        "otdb-0774fc6fff7b-fr",
+        "otdb-279b44c104ad-fr",
+        "otdb-82d5560445f5-fr",
+        "otdb-906acd1642bc-fr",
+        "otdb-1acbb7d874b4-fr",
+        "otdb-ba07af7295c5-fr",
+        "otdb-47823dde3a68-fr",
+        "otdb-e348980379e9-fr",
+        "otdb-4f6489da3a2a-fr",
+        "otdb-a91bbd0fa473-fr",
+        "otdb-06cb1f4d13f1-fr",
+        "otdb-c1a5b9c48f1d-fr",
+        "otdb-9b258da8c009-fr",
+        "otdb-f778f9af905a-fr",
+        "otdb-65fb1590968e-fr"
+      ],
+      "description": "Encore des films, de la musique, des jeux et de l'actualité des années 1990."
+    }
+  ]
+}

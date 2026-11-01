@@ -35,64 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0053-2",
-      "type": "mcq",
-      "prompt": "Quel film a réuni sur les écrans Sean Connery et Christophe Lambert ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Greystoke",
-            "correct": false
-          },
-          {
-            "label": "Highlander",
-            "correct": true
-          },
-          {
-            "label": "Mad Max",
-            "correct": false
-          },
-          {
-            "label": "Subway",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0053-3",
-      "type": "mcq",
-      "prompt": "De quel pays Sean Connery est-il originaire ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Etats-Unis",
-            "correct": false
-          },
-          {
-            "label": "Irlande",
-            "correct": false
-          },
-          {
-            "label": "Écosse",
-            "correct": true
-          },
-          {
-            "label": "Angleterre",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0053-4",
       "type": "mcq",
       "prompt": "Quel single de Vangelis comprend un texte récité par Sean Connery ?",

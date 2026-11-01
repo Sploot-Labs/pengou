@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=507"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0507-1-en",
+      "type": "mcq",
+      "prompt": "Which small object does a golfer use to set the ball on?",
+      "payload": {
+        "options": [
+          {
+            "label": "Caddie",
+            "correct": false
+          },
+          {
+            "label": "Pitch",
+            "correct": false
+          },
+          {
+            "label": "Tee",
+            "correct": true
+          },
+          {
+            "label": "Putter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0507-3-en",
+      "type": "mcq",
+      "prompt": "How many jumps is an athlete allowed in long jump qualification?",
+      "payload": {
+        "options": [
+          {
+            "label": "Five",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": true
+          },
+          {
+            "label": "Four",
+            "correct": false
+          },
+          {
+            "label": "Two",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0512-2",
-      "type": "mcq",
-      "prompt": "Quel modèle de SUV fut commercialisé en 2007 par la marque Nissan ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Quantum",
-            "correct": false
-          },
-          {
-            "label": "Quoris",
-            "correct": false
-          },
-          {
-            "label": "Qashqai",
-            "correct": true
-          },
-          {
-            "label": "Quattro",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0512-3",
       "type": "mcq",
       "prompt": "Quel constructeur automobile a créé le modèle Cayenne ?",
@@ -83,35 +54,6 @@
           },
           {
             "label": "Porsche",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0512-4",
-      "type": "mcq",
-      "prompt": "Dacia est un constructeur automobile originaire de quel pays ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Bulgarie",
-            "correct": false
-          },
-          {
-            "label": "Grèce",
-            "correct": false
-          },
-          {
-            "label": "Pologne",
-            "correct": false
-          },
-          {
-            "label": "Roumanie",
             "correct": true
           }
         ]

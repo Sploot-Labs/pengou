@@ -33,64 +33,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0289-2",
-      "type": "mcq",
-      "prompt": "Quel logiciel protège un ordinateur des menaces en ligne ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Chat",
-            "correct": false
-          },
-          {
-            "label": "Antivirus",
-            "correct": true
-          },
-          {
-            "label": "Messagerie",
-            "correct": false
-          },
-          {
-            "label": "Navigateur",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0289-3",
-      "type": "mcq",
-      "prompt": "Quelle start-up a été rachetée pour un milliard par Facebook en 2012 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Backelite",
-            "correct": false
-          },
-          {
-            "label": "Instagram",
-            "correct": true
-          },
-          {
-            "label": "Valve",
-            "correct": false
-          },
-          {
-            "label": "Globalnet",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

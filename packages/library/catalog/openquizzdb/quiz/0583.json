@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0583-1",
-      "type": "mcq",
-      "prompt": "Quel sportif a dominé le golf masculin dans les années 2000 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Payne Stewart",
-            "correct": false
-          },
-          {
-            "label": "Curtis Strange",
-            "correct": false
-          },
-          {
-            "label": "Tiger Woods",
-            "correct": true
-          },
-          {
-            "label": "Raymond Floyd",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0583-2",
       "type": "mcq",
       "prompt": "Quel joueur surnommé « The King » a rendu le golf très populaire ?",

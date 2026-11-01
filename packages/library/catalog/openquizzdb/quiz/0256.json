@@ -62,35 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0256-3",
-      "type": "mcq",
-      "prompt": "Quelle ville est depuis 1596 la capitale de la Pologne ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Vilnius",
-            "correct": false
-          },
-          {
-            "label": "Vaduz",
-            "correct": false
-          },
-          {
-            "label": "Vienne",
-            "correct": false
-          },
-          {
-            "label": "Varsovie",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

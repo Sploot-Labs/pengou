@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0601-1",
-      "type": "mcq",
-      "prompt": "Quel intrus se cache parmi ces chanteuses n'ayant pas eu le bac ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Chimène Badi",
-            "correct": false
-          },
-          {
-            "label": "Jenifer",
-            "correct": false
-          },
-          {
-            "label": "Ève Angeli",
-            "correct": true
-          },
-          {
-            "label": "Vanessa Paradis",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0601-2",
-      "type": "mcq",
-      "prompt": "Quel intrus se cache parmi ces inventions créées par des femmes ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Soutien-gorge",
-            "correct": false
-          },
-          {
-            "label": "Lave-vaisselle",
-            "correct": false
-          },
-          {
-            "label": "Scie circulaire",
-            "correct": false
-          },
-          {
-            "label": "Bas nylon",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0601-3",
       "type": "mcq",
       "prompt": "Quel intrus se cache parmi ces variétés de pomme de terre ?",
@@ -83,35 +25,6 @@
           },
           {
             "label": "Roseval",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0601-4",
-      "type": "mcq",
-      "prompt": "Quel intrus se cache parmi ces mots provenant de la langue arabe ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Girafe",
-            "correct": false
-          },
-          {
-            "label": "Magasin",
-            "correct": false
-          },
-          {
-            "label": "Panoplie",
-            "correct": true
-          },
-          {
-            "label": "Gazelle",
             "correct": false
           }
         ]

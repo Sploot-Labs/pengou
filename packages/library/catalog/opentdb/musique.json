@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-0774fc6fff7b",
-      "type": "mcq",
-      "prompt": "Artis Leon Ivey Jr. is better known as which rap artist?",
-      "payload": {
-        "options": [
-          {
-            "label": "Dr Dre",
-            "correct": false
-          },
-          {
-            "label": "Snoop Dogg",
-            "correct": false
-          },
-          {
-            "label": "Ice T",
-            "correct": false
-          },
-          {
-            "label": "Coolio",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-0806098edbef",
       "type": "mcq",
       "prompt": "What is the real name of American rapper Pitbull?",
@@ -89,18 +60,6 @@
       },
       "theme": "musique",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-0c33419931d3",
-      "type": "truefalse",
-      "prompt": "In 1993, Prince changed his name to an unpronounceable symbol because he was unhappy with his contract with Warner Bros.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "musique",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -200,18 +159,6 @@
       },
       "theme": "musique",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-1124ddcc9d2f",
-      "type": "truefalse",
-      "prompt": "Green Day's album 'American Idiot' is considered a \"punk rock opera.\"",
-      "payload": {
-        "correct": true
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -477,35 +424,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-2ab6c55e5477",
-      "type": "mcq",
-      "prompt": "Which of these are NOT a Men at Work song?",
-      "payload": {
-        "options": [
-          {
-            "label": "Basket Case",
-            "correct": true
-          },
-          {
-            "label": "Be Good Johnny",
-            "correct": false
-          },
-          {
-            "label": "Who Can It Be Now?",
-            "correct": false
-          },
-          {
-            "label": "Dr. Heckyll and Mr. Jive",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-2c7d780fec20",
       "type": "mcq",
       "prompt": "How many members are in the Japanese rock band SCANDAL?",
@@ -564,35 +482,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-342e650a0c31",
-      "type": "mcq",
-      "prompt": "What was Britney Spears' debut single?",
-      "payload": {
-        "options": [
-          {
-            "label": "(You Drive Me) Crazy",
-            "correct": false
-          },
-          {
-            "label": "...Baby One More Time",
-            "correct": true
-          },
-          {
-            "label": "Toxic",
-            "correct": false
-          },
-          {
-            "label": "Oops!... I Did It Again",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-35b6c876eade",
       "type": "mcq",
       "prompt": "According to a Beatles song, who kept her face in a jar by the door?",
@@ -627,64 +516,6 @@
       "prompt": "\"The Division Bell\" is the final album of the progressive rock band Pink Floyd.",
       "payload": {
         "correct": false
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-410c224a0e1e",
-      "type": "mcq",
-      "prompt": "What is the real name of rapper, The Notorious B.I.G?",
-      "payload": {
-        "options": [
-          {
-            "label": "Eric Lynn Wright",
-            "correct": false
-          },
-          {
-            "label": "O'Shea Jackson",
-            "correct": false
-          },
-          {
-            "label": "Christopher Wallace",
-            "correct": true
-          },
-          {
-            "label": "Calvin Cordozar Broadus Jr.",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-4160e88de68a",
-      "type": "mcq",
-      "prompt": "Which of the following is NOT a song in BROCKHAMPTON's SATURATION album series?",
-      "payload": {
-        "options": [
-          {
-            "label": "HOTTIE",
-            "correct": false
-          },
-          {
-            "label": "BUMP",
-            "correct": false
-          },
-          {
-            "label": "SWAMP",
-            "correct": false
-          },
-          {
-            "label": "LAMB",
-            "correct": true
-          }
-        ]
       },
       "theme": "musique",
       "difficulty": "moyen",
@@ -750,89 +581,31 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-44be3c326674",
+      "id": "otdb-4aca7400693c",
       "type": "mcq",
-      "prompt": "What song includes the words \"Numa Numa\" which was subject to a Viral Video in 2004?",
+      "prompt": "What company developed the vocaloid Hatsune Miku?",
       "payload": {
         "options": [
           {
-            "label": "Despacito",
+            "label": "Sony",
             "correct": false
           },
           {
-            "label": "Asereje",
+            "label": "Sega",
             "correct": false
           },
           {
-            "label": "Dragostea Din Tei",
+            "label": "Yamaha Corporation",
+            "correct": false
+          },
+          {
+            "label": "Crypton Future Media",
             "correct": true
-          },
-          {
-            "label": "Gangnam Style",
-            "correct": false
           }
         ]
       },
       "theme": "musique",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-47823dde3a68",
-      "type": "mcq",
-      "prompt": "Who is the lead singer of the Smashing Pumpkins?",
-      "payload": {
-        "options": [
-          {
-            "label": "Eddie Vedder",
-            "correct": false
-          },
-          {
-            "label": "Brett Scallions",
-            "correct": false
-          },
-          {
-            "label": "Billy Corgan",
-            "correct": true
-          },
-          {
-            "label": "Chino Moreno",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-47f852b32b4a",
-      "type": "mcq",
-      "prompt": "Who recorded the album called \"Down to the Moon\" in 1986?",
-      "payload": {
-        "options": [
-          {
-            "label": "Andreas Vollenweider",
-            "correct": true
-          },
-          {
-            "label": "Jean-Michel Jarre",
-            "correct": false
-          },
-          {
-            "label": "Enya",
-            "correct": false
-          },
-          {
-            "label": "Bing Crosby",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
+      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -907,47 +680,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-51d82f8ddafd",
-      "type": "mcq",
-      "prompt": "What was Daft Punk's first studio album?",
-      "payload": {
-        "options": [
-          {
-            "label": "Human After All",
-            "correct": false
-          },
-          {
-            "label": "Random Access Memories",
-            "correct": false
-          },
-          {
-            "label": "Homework",
-            "correct": true
-          },
-          {
-            "label": "Discovery",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-5b7dd27c8663",
-      "type": "truefalse",
-      "prompt": "\"Friday,\" the single by Rebecca Black, was released in February 10th, 2011.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "musique",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-5ecf956e01a0",
       "type": "truefalse",
       "prompt": "Daft Punk originated in France.",
@@ -982,18 +714,6 @@
             "correct": false
           }
         ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-65fb1590968e",
-      "type": "truefalse",
-      "prompt": "Dave Grohl recorded the Foo Fighters' debut, \"Foo Fighters,\" by himself.",
-      "payload": {
-        "correct": true
       },
       "theme": "musique",
       "difficulty": "moyen",
@@ -1107,35 +827,6 @@
           },
           {
             "label": "George Costanza",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-756a635e73dc",
-      "type": "mcq",
-      "prompt": "Which famous 90's rap album is commonly referred to as \"The Bible of Hip Hop\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "The Low End Theory",
-            "correct": false
-          },
-          {
-            "label": "The Chronic",
-            "correct": false
-          },
-          {
-            "label": "Illmatic",
-            "correct": true
-          },
-          {
-            "label": "Enter The Wu-Tang (36 Chambers)",
             "correct": false
           }
         ]
@@ -1262,35 +953,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-7cbe050cd412",
-      "type": "mcq",
-      "prompt": "Which Daft Punk album is the song \"Harder, Better, Faster, Stronger\" from?",
-      "payload": {
-        "options": [
-          {
-            "label": "Homework",
-            "correct": false
-          },
-          {
-            "label": "Random Access Memories",
-            "correct": false
-          },
-          {
-            "label": "Human After All",
-            "correct": false
-          },
-          {
-            "label": "Discovery",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-7cc0ff4e4afb",
       "type": "mcq",
       "prompt": "Which of these aliases has NOT been used by electronic musician Aphex Twin?",
@@ -1354,64 +1016,6 @@
       "prompt": "Pink Guy's debut album was \"Pink Season\".",
       "payload": {
         "correct": false
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-86fe248ae6cf",
-      "type": "mcq",
-      "prompt": "Who was the original drummer for The Beatles?",
-      "payload": {
-        "options": [
-          {
-            "label": "Stuart Sutcliffe",
-            "correct": false
-          },
-          {
-            "label": "Pete Best",
-            "correct": false
-          },
-          {
-            "label": "Ringo Starr",
-            "correct": false
-          },
-          {
-            "label": "Tommy Moore",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-8abfed286a97",
-      "type": "mcq",
-      "prompt": "What is the opening track on Lorde's Pure Heroine?",
-      "payload": {
-        "options": [
-          {
-            "label": "Team",
-            "correct": false
-          },
-          {
-            "label": "400 Lux",
-            "correct": false
-          },
-          {
-            "label": "Tennis Court",
-            "correct": true
-          },
-          {
-            "label": "Royals",
-            "correct": false
-          }
-        ]
       },
       "theme": "musique",
       "difficulty": "moyen",
@@ -1501,64 +1105,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-9e9575dbaa06",
-      "type": "mcq",
-      "prompt": "Which company did the animation for Peter Gabriel's Video Sledgehammer (1986)?",
-      "payload": {
-        "options": [
-          {
-            "label": "Aardman Animations",
-            "correct": true
-          },
-          {
-            "label": "VIZ Media",
-            "correct": false
-          },
-          {
-            "label": "HIT Entertainment",
-            "correct": false
-          },
-          {
-            "label": "Illumination Entertainment",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-a558a0b9675f",
-      "type": "mcq",
-      "prompt": "Which artist released the 2012 single \"Harlem Shake\", which was used in numerous YouTube videos in 2013?",
-      "payload": {
-        "options": [
-          {
-            "label": "RL Grime",
-            "correct": false
-          },
-          {
-            "label": "Flosstradamus",
-            "correct": false
-          },
-          {
-            "label": "NGHTMRE",
-            "correct": false
-          },
-          {
-            "label": "Baauer",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-a7661b4e9865",
       "type": "mcq",
       "prompt": "According to the American rapper Nelly, what should you do when its hot in here?",
@@ -1588,14 +1134,31 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-a91bbd0fa473",
-      "type": "truefalse",
-      "prompt": "The song Scatman's World was released after Scatman (Ski-Ba-Bop-Ba-Dop-Bop).",
+      "id": "otdb-a90d3842b2e9",
+      "type": "mcq",
+      "prompt": "Which time signature is commonly known as “Cut Time?”",
       "payload": {
-        "correct": true
+        "options": [
+          {
+            "label": "3/4",
+            "correct": false
+          },
+          {
+            "label": "2/2",
+            "correct": true
+          },
+          {
+            "label": "6/8",
+            "correct": false
+          },
+          {
+            "label": "4/4",
+            "correct": false
+          }
+        ]
       },
       "theme": "musique",
-      "difficulty": "difficile",
+      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -1786,93 +1349,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-b9a2a03f0d27",
-      "type": "mcq",
-      "prompt": "Who is the lead singer of The Lumineers?",
-      "payload": {
-        "options": [
-          {
-            "label": "Jeremiah Fraites",
-            "correct": false
-          },
-          {
-            "label": "Neyla Pekarek",
-            "correct": false
-          },
-          {
-            "label": "Wesley Schultz",
-            "correct": true
-          },
-          {
-            "label": "Jay Van Dyke",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-bd63aadc24fc",
-      "type": "mcq",
-      "prompt": "Which rapper had an album that went double platinum with no features?",
-      "payload": {
-        "options": [
-          {
-            "label": "Kendrick Lamar",
-            "correct": false
-          },
-          {
-            "label": "Drake",
-            "correct": false
-          },
-          {
-            "label": "J. Cole",
-            "correct": true
-          },
-          {
-            "label": "Big Sean",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-be60f8adde97",
-      "type": "mcq",
-      "prompt": "Who is the lead singer of Pearl Jam?",
-      "payload": {
-        "options": [
-          {
-            "label": "Eddie Vedder",
-            "correct": true
-          },
-          {
-            "label": "Stone Gossard",
-            "correct": false
-          },
-          {
-            "label": "Kurt Cobain",
-            "correct": false
-          },
-          {
-            "label": "Ozzy Osbourne",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-bec5a267156f",
       "type": "truefalse",
       "prompt": "Lead Singer Rivers Cuomo of American rock band Weezer attended Harvard.",
@@ -1881,35 +1357,6 @@
       },
       "theme": "musique",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-c370d266e29a",
-      "type": "mcq",
-      "prompt": "What was Taylor Swift's 5th album called?",
-      "payload": {
-        "options": [
-          {
-            "label": "Red",
-            "correct": false
-          },
-          {
-            "label": "1989",
-            "correct": true
-          },
-          {
-            "label": "Fearless",
-            "correct": false
-          },
-          {
-            "label": "Speak Now",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -2059,35 +1506,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-cb3427e10e80",
-      "type": "mcq",
-      "prompt": "\"Doctor Jones\", \"Turn Back Time\" and \"Barbie Girl\" were UK number ones for which Eurodance group?",
-      "payload": {
-        "options": [
-          {
-            "label": "Vengaboys",
-            "correct": false
-          },
-          {
-            "label": "Eiffel 65",
-            "correct": false
-          },
-          {
-            "label": "Sash!",
-            "correct": false
-          },
-          {
-            "label": "Aqua",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-cb77bea37983",
       "type": "mcq",
       "prompt": "The Proclaimers - I'm Gonna Be (500 Miles) reached what position on the US Hot 100 Charts in 1993?",
@@ -2117,81 +1535,11 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-d04c9a991725",
-      "type": "mcq",
-      "prompt": "Where does \"Gasolina\" rapper Daddy Yankee originate from?",
-      "payload": {
-        "options": [
-          {
-            "label": "Mexico",
-            "correct": false
-          },
-          {
-            "label": "Cuba",
-            "correct": false
-          },
-          {
-            "label": "Puerto Rico",
-            "correct": true
-          },
-          {
-            "label": "Spain",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-d0b8b0fb504b",
       "type": "truefalse",
       "prompt": "Myoui Mina, member of Korean girl group TWICE, was born in South Korea, despite being Japanese.",
       "payload": {
         "correct": false
-      },
-      "theme": "musique",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-d313e78be9e3",
-      "type": "truefalse",
-      "prompt": "The album reputation by Taylor Swift has 15 songs",
-      "payload": {
-        "correct": true
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-d6aafd2eb6fe",
-      "type": "mcq",
-      "prompt": "Which band is the longest active band in the world with no breaks or line-up changes?",
-      "payload": {
-        "options": [
-          {
-            "label": "U2",
-            "correct": true
-          },
-          {
-            "label": "Rush",
-            "correct": false
-          },
-          {
-            "label": "Radiohead",
-            "correct": false
-          },
-          {
-            "label": "Rolling Stones",
-            "correct": false
-          }
-        ]
       },
       "theme": "musique",
       "difficulty": "difficile",
@@ -2228,35 +1576,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-dfecaaefe540",
-      "type": "mcq",
-      "prompt": "What album did Gorillaz release in 2017?",
-      "payload": {
-        "options": [
-          {
-            "label": "The Fall",
-            "correct": false
-          },
-          {
-            "label": "Demon Days",
-            "correct": false
-          },
-          {
-            "label": "Plastic Beach",
-            "correct": false
-          },
-          {
-            "label": "Humanz",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-e0d39b666c82",
       "type": "mcq",
       "prompt": "Which country does the band Rammstein hail from?",
@@ -2282,18 +1601,6 @@
       },
       "theme": "musique",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-e40e26a5706d",
-      "type": "truefalse",
-      "prompt": "Arcade Fire's 'The Suburbs' won the Album of the Year award in the 2011 Grammys.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -2335,35 +1642,6 @@
       },
       "theme": "musique",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-eb119c33312d",
-      "type": "mcq",
-      "prompt": "Which member of the British pop group \"The Spice Girls\" was known as Ginger Spice?",
-      "payload": {
-        "options": [
-          {
-            "label": "Melanie Brown",
-            "correct": false
-          },
-          {
-            "label": "Emma Bunton",
-            "correct": false
-          },
-          {
-            "label": "Geri Halliwell",
-            "correct": true
-          },
-          {
-            "label": "Victoria Beckham",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -2542,35 +1820,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-f778f9af905a",
-      "type": "mcq",
-      "prompt": "Which one of these rappers is NOT a member of the rap group Wu-Tang Clan?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ol' Dirty Bastard",
-            "correct": false
-          },
-          {
-            "label": "GZA",
-            "correct": false
-          },
-          {
-            "label": "Method Man",
-            "correct": false
-          },
-          {
-            "label": "Dr.Dre",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-fa32b2fa1b5b",
       "type": "mcq",
       "prompt": "Who had hits in the 70s with the songs \"Lonely Boy\" and \"Never Let Her Slip Away\"?",
@@ -2600,5 +1849,64 @@
       "audience": "tous"
     }
   ],
-  "quizzes": []
+  "quizzes": [
+    {
+      "id": "otdb-quiz-music",
+      "title": "Music",
+      "description": "Rock and pop bands, singers and songs.",
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-11009659847f",
+        "otdb-152ff8ddf565",
+        "otdb-2268e6c88869",
+        "otdb-2499893a8ca4",
+        "otdb-25a2498a9b38",
+        "otdb-27961f63be43",
+        "otdb-35b6c876eade",
+        "otdb-7b8a87820a79",
+        "otdb-7baa79c65a3d",
+        "otdb-94c20dcce170",
+        "otdb-3e27619bc27c",
+        "otdb-e0d39b666c82",
+        "otdb-7dc8f10d186c",
+        "otdb-d9608f84014c",
+        "otdb-f6bbbabeef2d",
+        "otdb-eda226e36f6e",
+        "otdb-5ecf956e01a0",
+        "otdb-22a9112ede8d",
+        "otdb-b4b03ae9fbd9",
+        "otdb-edb9bf4cb67a"
+      ]
+    },
+    {
+      "id": "otdb-quiz-music-trivia",
+      "title": "Music trivia",
+      "description": "Bands, rappers and albums, from rock to hip hop.",
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-0f5def660039",
+        "otdb-72c7001a4c86",
+        "otdb-b97c0a3a4653",
+        "otdb-f58e42cac2ce",
+        "otdb-a7661b4e9865",
+        "otdb-c8db40a80c0b",
+        "otdb-f06671b0f7d5",
+        "otdb-c86c65a64b44",
+        "otdb-0806098edbef",
+        "otdb-0d36e1790a65",
+        "otdb-0f05cba52747",
+        "otdb-282e7961545e",
+        "otdb-2e9618b6e757",
+        "otdb-965552a44be8",
+        "otdb-bec5a267156f",
+        "otdb-e5707637bd8b"
+      ]
+    }
+  ]
 }

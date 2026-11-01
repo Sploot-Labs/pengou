@@ -441,64 +441,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0567-2",
-      "type": "mcq",
-      "prompt": "Quelle super-héroïne peut se téléporter sur de grandes distances ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Nocturne",
-            "correct": false
-          },
-          {
-            "label": "Cléa",
-            "correct": false
-          },
-          {
-            "label": "Thundra",
-            "correct": false
-          },
-          {
-            "label": "Blink",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0567-3",
-      "type": "mcq",
-      "prompt": "Quelle super-héroïne possède un esprit inaccessible aux télépathes ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Emma Frost",
-            "correct": false
-          },
-          {
-            "label": "Cipher",
-            "correct": true
-          },
-          {
-            "label": "Mantis",
-            "correct": false
-          },
-          {
-            "label": "Andromeda",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "litterature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0567-4",
       "type": "mcq",
       "prompt": "Quelle super-héroïne possède une peau bleue recouverte d'un fin duvet ?",
@@ -553,8 +495,6 @@
         "oqdb-0105-3",
         "oqdb-0105-4",
         "oqdb-0567-1",
-        "oqdb-0567-2",
-        "oqdb-0567-3",
         "oqdb-0567-4"
       ]
     }

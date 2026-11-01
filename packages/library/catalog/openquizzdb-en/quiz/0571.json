@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=571"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0571-2-en",
+      "type": "mcq",
+      "prompt": "Which second album by The Cure is darker than the first?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pornography",
+            "correct": false
+          },
+          {
+            "label": "The Top",
+            "correct": false
+          },
+          {
+            "label": "Seventeen Seconds",
+            "correct": true
+          },
+          {
+            "label": "Faith",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0571-3-en",
+      "type": "mcq",
+      "prompt": "Which of these is not a live album by The Cure?",
+      "payload": {
+        "options": [
+          {
+            "label": "Entreat",
+            "correct": false
+          },
+          {
+            "label": "Dublin",
+            "correct": true
+          },
+          {
+            "label": "Paris",
+            "correct": false
+          },
+          {
+            "label": "Concert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0571-4-en",
+      "type": "mcq",
+      "prompt": "How many albums had The Cure sold worldwide by the end of 2018?",
+      "payload": {
+        "options": [
+          {
+            "label": "20 million",
+            "correct": false
+          },
+          {
+            "label": "30 million",
+            "correct": true
+          },
+          {
+            "label": "10 million",
+            "correct": false
+          },
+          {
+            "label": "40 million",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0268-3",
-      "type": "mcq",
-      "prompt": "Qui est Logan dans la bande dessinée de Marvel Comics « X-Men » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Wyatt Earp",
-            "correct": false
-          },
-          {
-            "label": "Wukong",
-            "correct": false
-          },
-          {
-            "label": "Woody",
-            "correct": false
-          },
-          {
-            "label": "Wolverine",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0268-4",
-      "type": "mcq",
-      "prompt": "Quelle est la capitale de la Nouvelle-Zélande ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Winnipeg",
-            "correct": false
-          },
-          {
-            "label": "Worcester",
-            "correct": false
-          },
-          {
-            "label": "Wellington",
-            "correct": true
-          },
-          {
-            "label": "Washington",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

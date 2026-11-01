@@ -134,47 +134,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-13441e05cea3",
-      "type": "mcq",
-      "prompt": "What's the first National Park designated in the United States?",
-      "payload": {
-        "options": [
-          {
-            "label": "Rocky Mountain",
-            "correct": false
-          },
-          {
-            "label": "Yellowstone",
-            "correct": true
-          },
-          {
-            "label": "Sequoia",
-            "correct": false
-          },
-          {
-            "label": "Yosemite",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-16785d792b30",
-      "type": "truefalse",
-      "prompt": "There exists an island named \"Java\".",
-      "payload": {
-        "correct": true
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-1cd4172ba8c3",
       "type": "mcq",
       "prompt": "The Space Needle is located in which city?",
@@ -374,35 +333,6 @@
       },
       "theme": "geographie",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-2a67a99cd84b",
-      "type": "mcq",
-      "prompt": "Where is the \"Sonoran Desert\" located?",
-      "payload": {
-        "options": [
-          {
-            "label": "Asia",
-            "correct": false
-          },
-          {
-            "label": "South America",
-            "correct": false
-          },
-          {
-            "label": "Africa",
-            "correct": false
-          },
-          {
-            "label": "North America",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -745,6 +675,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-5066a9e5567c",
+      "type": "mcq",
+      "prompt": "Out of these four buildings, which one is the tallest, with a height of 1,250 ft (381 m)?",
+      "payload": {
+        "options": [
+          {
+            "label": "Empire State Building, United States",
+            "correct": true
+          },
+          {
+            "label": "Federation Tower, Russia",
+            "correct": false
+          },
+          {
+            "label": "Bank of China Tower, Hong Kong",
+            "correct": false
+          },
+          {
+            "label": "Gevora Hotal, United Arab Emirates",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-508bfa1c5079",
       "type": "mcq",
       "prompt": "The towns of Brugelette, Arlon and Ath are located in which country?",
@@ -799,35 +758,6 @@
       },
       "theme": "geographie",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-574cc369cf42",
-      "type": "mcq",
-      "prompt": "If soccer is called football in England, what is American football called in England?",
-      "payload": {
-        "options": [
-          {
-            "label": "American football",
-            "correct": true
-          },
-          {
-            "label": "Combball",
-            "correct": false
-          },
-          {
-            "label": "Handball",
-            "correct": false
-          },
-          {
-            "label": "Touchdown",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -898,35 +828,6 @@
       },
       "theme": "geographie",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-5ef7614b707e",
-      "type": "mcq",
-      "prompt": "Which of these countries is not a United Nations member state?",
-      "payload": {
-        "options": [
-          {
-            "label": "Montenegro",
-            "correct": false
-          },
-          {
-            "label": "Tuvalu",
-            "correct": false
-          },
-          {
-            "label": "South Sudan",
-            "correct": false
-          },
-          {
-            "label": "Niue",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -1233,35 +1134,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-7dd44ebccdca",
-      "type": "mcq",
-      "prompt": "Which country was NOT part of the Soviet Union?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tajikistan",
-            "correct": false
-          },
-          {
-            "label": "Belarus",
-            "correct": false
-          },
-          {
-            "label": "Turkmenistan",
-            "correct": false
-          },
-          {
-            "label": "Romania",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-7f2344b71db9",
       "type": "mcq",
       "prompt": "Which of the following is the longest river in Europe?",
@@ -1448,35 +1320,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-931fac5360c5",
-      "type": "mcq",
-      "prompt": "Which European city has the highest mileage of canals in the world?",
-      "payload": {
-        "options": [
-          {
-            "label": "Berlin",
-            "correct": false
-          },
-          {
-            "label": "Venice",
-            "correct": false
-          },
-          {
-            "label": "Birmingham",
-            "correct": true
-          },
-          {
-            "label": "Amsterdam",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-947491dd00ce",
       "type": "mcq",
       "prompt": "Which of these country's capitals starts with the letter B?",
@@ -1502,6 +1345,35 @@
       },
       "theme": "geographie",
       "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9618c355b1f9",
+      "type": "mcq",
+      "prompt": "Which canal connects the Mediterranean Sea with the Red Sea?",
+      "payload": {
+        "options": [
+          {
+            "label": "Qaraqum Canal",
+            "correct": false
+          },
+          {
+            "label": "Suez Canal",
+            "correct": true
+          },
+          {
+            "label": "Sinai Canal",
+            "correct": false
+          },
+          {
+            "label": "Panama Canal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -1547,35 +1419,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-98b2c9745ea5",
-      "type": "mcq",
-      "prompt": "Which state of the United States is the smallest?",
-      "payload": {
-        "options": [
-          {
-            "label": "Rhode Island",
-            "correct": true
-          },
-          {
-            "label": "Vermont",
-            "correct": false
-          },
-          {
-            "label": "Massachusetts",
-            "correct": false
-          },
-          {
-            "label": "Maine",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-992db0e428bf",
       "type": "mcq",
       "prompt": "What is the world's smallest country by population?",
@@ -1601,35 +1444,6 @@
       },
       "theme": "geographie",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-9a434d9626bb",
-      "type": "mcq",
-      "prompt": "Which US state is nicknamed \"The Golden State\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Alaska",
-            "correct": false
-          },
-          {
-            "label": "New Mexico",
-            "correct": false
-          },
-          {
-            "label": "Florida",
-            "correct": false
-          },
-          {
-            "label": "California",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -1750,35 +1564,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-aa8f23a28a4e",
-      "type": "mcq",
-      "prompt": "What country is not a part of Scandinavia?",
-      "payload": {
-        "options": [
-          {
-            "label": "Denmark",
-            "correct": false
-          },
-          {
-            "label": "Sweden",
-            "correct": false
-          },
-          {
-            "label": "Finland",
-            "correct": true
-          },
-          {
-            "label": "Norway",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-b07f826a3c31",
       "type": "mcq",
       "prompt": "Which of the following former Yugoslavian states is landlocked?",
@@ -1837,35 +1622,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-bd49c696a981",
-      "type": "mcq",
-      "prompt": "Which is the largest of these 4 islands?",
-      "payload": {
-        "options": [
-          {
-            "label": "Madagascar",
-            "correct": false
-          },
-          {
-            "label": "Borneo",
-            "correct": true
-          },
-          {
-            "label": "Great Britain",
-            "correct": false
-          },
-          {
-            "label": "Cuba",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-c046e9323d8c",
       "type": "truefalse",
       "prompt": "Greenland is covered with grass and Iceland covered with ice.",
@@ -1903,18 +1659,6 @@
       },
       "theme": "geographie",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-c23251c14237",
-      "type": "truefalse",
-      "prompt": "Miami is Florida's largest city.",
-      "payload": {
-        "correct": false
-      },
-      "theme": "geographie",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -1973,35 +1717,6 @@
       },
       "theme": "geographie",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-c7dc508c1114",
-      "type": "mcq",
-      "prompt": "The country of Belize borders which country?",
-      "payload": {
-        "options": [
-          {
-            "label": "Laos",
-            "correct": false
-          },
-          {
-            "label": "Kenya",
-            "correct": false
-          },
-          {
-            "label": "Guatemala",
-            "correct": true
-          },
-          {
-            "label": "Perú",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -2180,6 +1895,47 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-d53a0113a6d9",
+      "type": "mcq",
+      "prompt": "Where did the Great Storm of 1987 make landfall at, first?",
+      "payload": {
+        "options": [
+          {
+            "label": "Surrey",
+            "correct": false
+          },
+          {
+            "label": "Wales",
+            "correct": false
+          },
+          {
+            "label": "The Midlands",
+            "correct": false
+          },
+          {
+            "label": "Cornwall",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d565cb3cfb18",
+      "type": "truefalse",
+      "prompt": "The shape of the Earth is a perfect sphere.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-d69fae85c81a",
       "type": "mcq",
       "prompt": "What is the Polish city known to Germans as Danzig?",
@@ -2349,64 +2105,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-e16d466e2294",
-      "type": "mcq",
-      "prompt": "Llanfair­pwllgwyngyll­gogery­chwyrn­drobwll­llan­tysilio­gogo­goch is located on which Welsh island?",
-      "payload": {
-        "options": [
-          {
-            "label": "Barry",
-            "correct": false
-          },
-          {
-            "label": "Bardsey",
-            "correct": false
-          },
-          {
-            "label": "Caldey",
-            "correct": false
-          },
-          {
-            "label": "Anglesey",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-e2905073c722",
-      "type": "mcq",
-      "prompt": "How many sovereign states are members of the United Nations?",
-      "payload": {
-        "options": [
-          {
-            "label": "201",
-            "correct": false
-          },
-          {
-            "label": "153",
-            "correct": false
-          },
-          {
-            "label": "178",
-            "correct": false
-          },
-          {
-            "label": "195",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-e53e4ce34812",
       "type": "mcq",
       "prompt": "Which stretch of water connects the Atlantic Ocean to the Mediterranean Sea?",
@@ -2461,6 +2159,35 @@
       },
       "theme": "geographie",
       "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e7b48de788da",
+      "type": "mcq",
+      "prompt": ".at is the top-level domain for what country?",
+      "payload": {
+        "options": [
+          {
+            "label": "Austria",
+            "correct": true
+          },
+          {
+            "label": "Argentina",
+            "correct": false
+          },
+          {
+            "label": "Angola",
+            "correct": false
+          },
+          {
+            "label": "Australia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -2523,43 +2250,31 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-f179a758be81",
+      "id": "otdb-f0bf2d93021c",
       "type": "mcq",
-      "prompt": "Which country claims ownership of the disputed state Kosovo?",
+      "prompt": "What is the name of the currency used in Ethiopia?",
       "payload": {
         "options": [
           {
-            "label": "Albania",
+            "label": "Dirham",
             "correct": false
           },
           {
-            "label": "Croatia",
-            "correct": false
-          },
-          {
-            "label": "Macedonia",
-            "correct": false
-          },
-          {
-            "label": "Serbia",
+            "label": "Birr",
             "correct": true
+          },
+          {
+            "label": "U.S. Dollar",
+            "correct": false
+          },
+          {
+            "label": "Rand",
+            "correct": false
           }
         ]
       },
       "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-f27242c209fc",
-      "type": "truefalse",
-      "prompt": "There are no deserts in Europe.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "geographie",
-      "difficulty": "facile",
+      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -2649,33 +2364,98 @@
       "difficulty": "facile",
       "language": "en",
       "audience": "tous"
+    },
+    {
+      "id": "otdb-fd4c3f667f1c",
+      "type": "mcq",
+      "prompt": "Which is the second largest native language spoken in Spain by numbers of speakers?",
+      "payload": {
+        "options": [
+          {
+            "label": "French",
+            "correct": false
+          },
+          {
+            "label": "Portuguese",
+            "correct": false
+          },
+          {
+            "label": "Catalan",
+            "correct": true
+          },
+          {
+            "label": "Spanish",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
     }
   ],
   "quizzes": [
     {
       "id": "otdb-quiz-geography",
       "title": "Geography",
-      "description": "Questions from the Open Trivia Database (opentdb.com), licensed under CC BY-SA 4.0.",
+      "description": "Capitals, landmarks, seas and mountains.",
       "theme": "geographie",
       "difficulty": "facile",
       "language": "en",
       "audience": "tous",
       "questionIds": [
         "otdb-093fc816e5eb",
-        "otdb-09c4b49e009e",
-        "otdb-12a70e3ce22e",
-        "otdb-1cd4172ba8c3",
         "otdb-1d737639c45f",
-        "otdb-2946a2afd207",
-        "otdb-29510c243d0a",
         "otdb-346b2f4a8147",
-        "otdb-36d17a8a52f4",
-        "otdb-3feaf4c1b52f",
-        "otdb-48fee338470c",
-        "otdb-4d3dd54cd182",
-        "otdb-574cc369cf42",
+        "otdb-85106bbe4fca",
+        "otdb-7f2344b71db9",
+        "otdb-572b001645d7",
         "otdb-5edeb288d9cf",
-        "otdb-647c3a3c5fe5"
+        "otdb-708ca8904460",
+        "otdb-7824bcace715",
+        "otdb-915ae24c6e90",
+        "otdb-9618c355b1f9",
+        "otdb-a64abeb66e74",
+        "otdb-c233f2c2e7dd",
+        "otdb-da02934a343b",
+        "otdb-f925d2e7fb0d",
+        "otdb-e53e4ce34812",
+        "otdb-df994f5cfa0f",
+        "otdb-376eace346da",
+        "otdb-1cd4172ba8c3",
+        "otdb-970c51eb946c"
+      ]
+    },
+    {
+      "id": "otdb-quiz-around-the-world",
+      "title": "Around the world",
+      "description": "Countries, cities and borders around the globe.",
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-06e72217a34e",
+        "otdb-09c4b49e009e",
+        "otdb-232a098b7803",
+        "otdb-2946a2afd207",
+        "otdb-36d17a8a52f4",
+        "otdb-3e9d6566d631",
+        "otdb-43f26954c3d1",
+        "otdb-4d3dd54cd182",
+        "otdb-5c831f731398",
+        "otdb-60ffb01b4b7b",
+        "otdb-78f8a4d9c51e",
+        "otdb-87d40d274509",
+        "otdb-89cf9c825cb7",
+        "otdb-c2dc0fd0b811",
+        "otdb-ca116bab287a",
+        "otdb-d15a71a9b7b4",
+        "otdb-d2caefd849e2",
+        "otdb-d69fae85c81a",
+        "otdb-db047052b22e",
+        "otdb-f860ef14255f"
       ]
     }
   ]

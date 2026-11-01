@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=484"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0484-2-en",
+      "type": "mcq",
+      "prompt": "Which cutting turn is performed on waves in windsurfing?",
+      "payload": {
+        "options": [
+          {
+            "label": "Slide",
+            "correct": false
+          },
+          {
+            "label": "Spin",
+            "correct": false
+          },
+          {
+            "label": "Jump",
+            "correct": false
+          },
+          {
+            "label": "Carve",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0484-3-en",
+      "type": "mcq",
+      "prompt": "Which windsurfing term describes sailing against the wind?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crosswind",
+            "correct": false
+          },
+          {
+            "label": "Downwind",
+            "correct": false
+          },
+          {
+            "label": "Sidewind",
+            "correct": false
+          },
+          {
+            "label": "Upwind",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

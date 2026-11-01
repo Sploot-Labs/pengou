@@ -1,7 +1,14 @@
 // Conversion d'Open Trivia DB (https://opentdb.com, CC BY-SA 4.0) en packs du catalogue (anglais).
 //
+// Ne plus relancer : le cache des réponses de l'API est perdu et l'API tire ses questions au hasard,
+// une nouvelle conversion changerait les questions livrées. Les packs livrés sont désormais retouchés
+// par curate-opentdb.ts (retraits, reclassements, quiz composés à la main).
+//
 // Usage (depuis la racine du dépôt) :
-//   pnpm dlx tsx packages/library/scripts/convert-opentdb.ts --cache <dossier>
+//   pnpm dlx tsx --conditions=development packages/library/scripts/convert-opentdb.ts --cache <dossier>
+//   (--conditions=development fait lire les sources de @splootlabs/quiz, qui n'a pas de dist/)
+//
+// Chaîne de production complète : voir l'en-tête de translate-catalog.ts.
 //
 // Le dossier de cache reçoit les réponses brutes de l'API (un fichier par catégorie) ; il doit
 // rester hors du dépôt. Une catégorie déjà en cache n'est pas redemandée : l'API renvoyant un tirage

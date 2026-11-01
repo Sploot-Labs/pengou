@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0292-2",
-      "type": "mcq",
-      "prompt": "Quel constructeur de motos japonais fabrique également des pianos ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Yamaha",
-            "correct": true
-          },
-          {
-            "label": "Yema",
-            "correct": false
-          },
-          {
-            "label": "Yulon",
-            "correct": false
-          },
-          {
-            "label": "Yutong",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0292-3",
       "type": "mcq",
       "prompt": "Dans quel manga le lycéen Yugi Muto acquiert-il d'étranges pouvoirs ?",
@@ -84,35 +55,6 @@
           {
             "label": "Yona",
             "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0292-4",
-      "type": "mcq",
-      "prompt": "Quel petit bonhomme vert a enseigné à Luke comment utiliser la Force ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Youk",
-            "correct": false
-          },
-          {
-            "label": "Yoni",
-            "correct": false
-          },
-          {
-            "label": "Yazoo",
-            "correct": false
-          },
-          {
-            "label": "Yoda",
-            "correct": true
           }
         ]
       },

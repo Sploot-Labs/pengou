@@ -1,0 +1,445 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0618-3-en",
+      "type": "mcq",
+      "prompt": "Which more aggressive insect is the bee often confused with?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bumblebee",
+            "correct": false
+          },
+          {
+            "label": "Horsefly",
+            "correct": false
+          },
+          {
+            "label": "Wasp",
+            "correct": true
+          },
+          {
+            "label": "Hornet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0243-1-en",
+      "type": "mcq",
+      "prompt": "In which country does the Statue of Liberty stand?",
+      "payload": {
+        "options": [
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "United Kingdom",
+            "correct": false
+          },
+          {
+            "label": "Canada",
+            "correct": false
+          },
+          {
+            "label": "United States",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0073-3-en",
+      "type": "mcq",
+      "prompt": "How many world titles did Michael Schumacher win?",
+      "payload": {
+        "options": [
+          {
+            "label": "Seven",
+            "correct": true
+          },
+          {
+            "label": "Eight",
+            "correct": false
+          },
+          {
+            "label": "Nine",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0596-1-en",
+      "type": "mcq",
+      "prompt": "Which first name do the Canadian actors Gosling and Reynolds share?",
+      "payload": {
+        "options": [
+          {
+            "label": "Evan",
+            "correct": false
+          },
+          {
+            "label": "Alan",
+            "correct": false
+          },
+          {
+            "label": "Brian",
+            "correct": false
+          },
+          {
+            "label": "Ryan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0237-4-en",
+      "type": "mcq",
+      "prompt": "Which browser was replaced by \"Microsoft Edge\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Firefox",
+            "correct": false
+          },
+          {
+            "label": "Internet Explorer",
+            "correct": true
+          },
+          {
+            "label": "Chrome",
+            "correct": false
+          },
+          {
+            "label": "Safari",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0430-1-en",
+      "type": "mcq",
+      "prompt": "What are the two colors of the Quebec flag, unveiled in 1948?",
+      "payload": {
+        "options": [
+          {
+            "label": "Red and blue",
+            "correct": false
+          },
+          {
+            "label": "Blue and white",
+            "correct": true
+          },
+          {
+            "label": "Blue and red",
+            "correct": false
+          },
+          {
+            "label": "Red and white",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0607-4-en",
+      "type": "mcq",
+      "prompt": "Which medal does the runner-up in an Olympic event receive?",
+      "payload": {
+        "options": [
+          {
+            "label": "Silver",
+            "correct": true
+          },
+          {
+            "label": "Copper",
+            "correct": false
+          },
+          {
+            "label": "Gold",
+            "correct": false
+          },
+          {
+            "label": "Bronze",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0277-4-en",
+      "type": "mcq",
+      "prompt": "Which spice flavors risotto alla milanese?",
+      "payload": {
+        "options": [
+          {
+            "label": "Turmeric",
+            "correct": false
+          },
+          {
+            "label": "Saffron",
+            "correct": true
+          },
+          {
+            "label": "Oregano",
+            "correct": false
+          },
+          {
+            "label": "Curry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0208-3-en",
+      "type": "mcq",
+      "prompt": "Which cheese is tartiflette made with?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ricotta",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": false
+          },
+          {
+            "label": "Reblochon",
+            "correct": true
+          },
+          {
+            "label": "Romano",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0027-4-en",
+      "type": "mcq",
+      "prompt": "What is the name of Don Quixote's faithful companion?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sancho Panza",
+            "correct": true
+          },
+          {
+            "label": "Sancho Taka",
+            "correct": false
+          },
+          {
+            "label": "Sancho Nifroid",
+            "correct": false
+          },
+          {
+            "label": "Sancho Mancha",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0315-1-en",
+      "type": "mcq",
+      "prompt": "Which plucked string instrument is used in India?",
+      "payload": {
+        "options": [
+          {
+            "label": "Theorbo",
+            "correct": false
+          },
+          {
+            "label": "Banjo",
+            "correct": false
+          },
+          {
+            "label": "Sitar",
+            "correct": true
+          },
+          {
+            "label": "Gling",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0586-4-en",
+      "type": "mcq",
+      "prompt": "Which hero, created by an inventor, has scissors for hands?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dylan",
+            "correct": false
+          },
+          {
+            "label": "Edward",
+            "correct": true
+          },
+          {
+            "label": "Kevin",
+            "correct": false
+          },
+          {
+            "label": "Robert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0049-3-en",
+      "type": "mcq",
+      "prompt": "How many times at most can someone be elected US president?",
+      "payload": {
+        "options": [
+          {
+            "label": "Twice",
+            "correct": true
+          },
+          {
+            "label": "Four times",
+            "correct": false
+          },
+          {
+            "label": "Three times",
+            "correct": false
+          },
+          {
+            "label": "Once",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0183-2-en",
+      "type": "mcq",
+      "prompt": "Which substance makes up Wolverine's main skeleton?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vibranium",
+            "correct": false
+          },
+          {
+            "label": "Cavorite",
+            "correct": false
+          },
+          {
+            "label": "Adamantium",
+            "correct": true
+          },
+          {
+            "label": "Neutronium",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0342-1-en",
+      "type": "mcq",
+      "prompt": "How many toes does a cat have on its front paws?",
+      "payload": {
+        "options": [
+          {
+            "label": "Five",
+            "correct": true
+          },
+          {
+            "label": "Four",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0340-4",
-      "type": "mcq",
-      "prompt": "Quelle cage de grande taille est destinée à contenir des oiseaux ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Volière",
-            "correct": true
-          },
-          {
-            "label": "Valise",
-            "correct": false
-          },
-          {
-            "label": "Volute",
-            "correct": false
-          },
-          {
-            "label": "Vitrine",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

@@ -1,0 +1,474 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0596-3-en",
+      "type": "mcq",
+      "prompt": "What is the first name of the hero of the \"Mission: Impossible\" saga?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ethan",
+            "correct": true
+          },
+          {
+            "label": "Jim",
+            "correct": false
+          },
+          {
+            "label": "Luther",
+            "correct": false
+          },
+          {
+            "label": "Owen",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0225-1-en",
+      "type": "mcq",
+      "prompt": "Who is Steven Spielberg's regular film composer?",
+      "payload": {
+        "options": [
+          {
+            "label": "Giorgio Moroder",
+            "correct": false
+          },
+          {
+            "label": "James Horner",
+            "correct": false
+          },
+          {
+            "label": "John Barry",
+            "correct": false
+          },
+          {
+            "label": "John Williams",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0309-2-en",
+      "type": "mcq",
+      "prompt": "What is the hair of a violin bow made of?",
+      "payload": {
+        "options": [
+          {
+            "label": "Horsehair",
+            "correct": true
+          },
+          {
+            "label": "Cotton",
+            "correct": false
+          },
+          {
+            "label": "Angora",
+            "correct": false
+          },
+          {
+            "label": "Mohair",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0611-3-en",
+      "type": "mcq",
+      "prompt": "How do you identify a person in an online photo?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cloud",
+            "correct": false
+          },
+          {
+            "label": "Rank",
+            "correct": false
+          },
+          {
+            "label": "ActiveX",
+            "correct": false
+          },
+          {
+            "label": "Tag",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0049-1-en",
+      "type": "mcq",
+      "prompt": "How long is the term of the President of the United States?",
+      "payload": {
+        "options": [
+          {
+            "label": "6 years",
+            "correct": false
+          },
+          {
+            "label": "4 years",
+            "correct": true
+          },
+          {
+            "label": "7 years",
+            "correct": false
+          },
+          {
+            "label": "5 years",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0358-4-en",
+      "type": "mcq",
+      "prompt": "Which famous Greek site is on Mount Parnassus?",
+      "payload": {
+        "options": [
+          {
+            "label": "Delphi",
+            "correct": true
+          },
+          {
+            "label": "Olympia",
+            "correct": false
+          },
+          {
+            "label": "Amphipolis",
+            "correct": false
+          },
+          {
+            "label": "Lindos",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0401-1-en",
+      "type": "mcq",
+      "prompt": "Which English band is led by the singer Jay Kay?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jamiroquai",
+            "correct": true
+          },
+          {
+            "label": "Jethro Tull",
+            "correct": false
+          },
+          {
+            "label": "Joy Division",
+            "correct": false
+          },
+          {
+            "label": "Judas Priest",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0494-3-en",
+      "type": "mcq",
+      "prompt": "Which 19th-century novelist called himself the \"Napoleon of letters\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Montesquieu",
+            "correct": false
+          },
+          {
+            "label": "Dumas",
+            "correct": false
+          },
+          {
+            "label": "Verlaine",
+            "correct": false
+          },
+          {
+            "label": "Balzac",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0323-2-en",
+      "type": "mcq",
+      "prompt": "At which professional club did Kylian Mbappé start his career?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lille OSC",
+            "correct": false
+          },
+          {
+            "label": "AS Monaco",
+            "correct": true
+          },
+          {
+            "label": "PSG",
+            "correct": false
+          },
+          {
+            "label": "Marseille",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0342-4-en",
+      "type": "mcq",
+      "prompt": "Which cat is almost hairless?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sphynx",
+            "correct": true
+          },
+          {
+            "label": "Persian",
+            "correct": false
+          },
+          {
+            "label": "Maine Coon",
+            "correct": false
+          },
+          {
+            "label": "Siamese",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0255-4-en",
+      "type": "mcq",
+      "prompt": "In which castle is Leonardo da Vinci believed to be buried?",
+      "payload": {
+        "options": [
+          {
+            "label": "Amboise",
+            "correct": true
+          },
+          {
+            "label": "Sully-sur-Loire",
+            "correct": false
+          },
+          {
+            "label": "Saumur",
+            "correct": false
+          },
+          {
+            "label": "Blois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0500-3-en",
+      "type": "mcq",
+      "prompt": "Which aircraft can land on or take off from water?",
+      "payload": {
+        "options": [
+          {
+            "label": "Seaplane",
+            "correct": true
+          },
+          {
+            "label": "Hang glider",
+            "correct": false
+          },
+          {
+            "label": "Glider",
+            "correct": false
+          },
+          {
+            "label": "Microlight",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0219-4-en",
+      "type": "mcq",
+      "prompt": "In which French department does the Île Vierge lighthouse stand?",
+      "payload": {
+        "options": [
+          {
+            "label": "Finistère",
+            "correct": true
+          },
+          {
+            "label": "Ille-et-Vilaine",
+            "correct": false
+          },
+          {
+            "label": "Morbihan",
+            "correct": false
+          },
+          {
+            "label": "Côtes-d'Armor",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0273-1-en",
+      "type": "mcq",
+      "prompt": "Which plant made up the winners' crown in antiquity?",
+      "payload": {
+        "options": [
+          {
+            "label": "Parsley",
+            "correct": false
+          },
+          {
+            "label": "Basil",
+            "correct": false
+          },
+          {
+            "label": "Laurel",
+            "correct": true
+          },
+          {
+            "label": "Thyme",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0175-2-en",
+      "type": "mcq",
+      "prompt": "Which world-famous jeans brand makes the iconic 501?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lee Cooper",
+            "correct": false
+          },
+          {
+            "label": "Levi's",
+            "correct": true
+          },
+          {
+            "label": "Lacoste",
+            "correct": false
+          },
+          {
+            "label": "Lindex",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0433-3-en",
+      "type": "mcq",
+      "prompt": "Of which fictional hero is Lily, killed by Lord Voldemort, the mother?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mowgli",
+            "correct": false
+          },
+          {
+            "label": "Harry Potter",
+            "correct": true
+          },
+          {
+            "label": "Luke Skywalker",
+            "correct": false
+          },
+          {
+            "label": "Frodo Baggins",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0392-4",
-      "type": "mcq",
-      "prompt": "Quel est le seul vaisseau spatial à revenir sur Terre dans « Alien » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Betty",
-            "correct": false
-          },
-          {
-            "label": "Nostromo",
-            "correct": true
-          },
-          {
-            "label": "Artemis",
-            "correct": false
-          },
-          {
-            "label": "Boops",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

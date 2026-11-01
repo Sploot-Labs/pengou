@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "adultes"
-    },
-    {
-      "id": "oqdb-0514-4",
-      "type": "mcq",
-      "prompt": "Quel est le cépage de cuve blanc le plus répandu en Allemagne ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sylvaner",
-            "correct": false
-          },
-          {
-            "label": "Riesling",
-            "correct": false
-          },
-          {
-            "label": "Müller-Thurgau",
-            "correct": true
-          },
-          {
-            "label": "Mauzac",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "adultes"
     }
   ],
   "quizzes": []

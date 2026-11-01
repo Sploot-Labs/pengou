@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0077-2",
-      "type": "mcq",
-      "prompt": "Quelle saison est citée dans « La Bohème » de Charles Aznavour ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Hiver",
-            "correct": true
-          },
-          {
-            "label": "Été",
-            "correct": false
-          },
-          {
-            "label": "Printemps",
-            "correct": false
-          },
-          {
-            "label": "Automne",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0077-3",
       "type": "mcq",
       "prompt": "Quel était le véritable nom du chanteur français Charles Aznavour ?",
@@ -325,35 +296,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0417-1",
-      "type": "mcq",
-      "prompt": "Quel gagnant de le « Nouvelle Star » est surnommé « la Tortue » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Julien Doré",
-            "correct": false
-          },
-          {
-            "label": "Steeve Estatof",
-            "correct": false
-          },
-          {
-            "label": "Christophe Willem",
-            "correct": true
-          },
-          {
-            "label": "Amel Bent",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0417-2",
       "type": "mcq",
       "prompt": "En 1991, quel tube Yannick Noah a-t-il associé à la coupe Davis ?",
@@ -410,35 +352,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0417-4",
-      "type": "mcq",
-      "prompt": "Quel est le style musical de l'album de Rohff, « La fierté des années » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tango",
-            "correct": false
-          },
-          {
-            "label": "Disco",
-            "correct": false
-          },
-          {
-            "label": "Rap",
-            "correct": true
-          },
-          {
-            "label": "Techno",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": [
@@ -452,7 +365,6 @@
       "audience": "tous",
       "questionIds": [
         "oqdb-0077-1",
-        "oqdb-0077-2",
         "oqdb-0077-3",
         "oqdb-0077-4",
         "oqdb-0029-1",
@@ -462,10 +374,8 @@
         "oqdb-0083-2",
         "oqdb-0083-3",
         "oqdb-0083-4",
-        "oqdb-0417-1",
         "oqdb-0417-2",
-        "oqdb-0417-3",
-        "oqdb-0417-4"
+        "oqdb-0417-3"
       ]
     }
   ]

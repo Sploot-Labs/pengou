@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=281"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0281-1-en",
+      "type": "mcq",
+      "prompt": "Which film made Quentin Tarantino's name early in his career?",
+      "payload": {
+        "options": [
+          {
+            "label": "Django Unchained",
+            "correct": false
+          },
+          {
+            "label": "Reservoir Dogs",
+            "correct": true
+          },
+          {
+            "label": "Kill Bill",
+            "correct": false
+          },
+          {
+            "label": "Pulp Fiction",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0281-2-en",
+      "type": "mcq",
+      "prompt": "Which film won the Palme d'Or at Cannes in 1994?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kill Bill",
+            "correct": false
+          },
+          {
+            "label": "Jackie Brown",
+            "correct": false
+          },
+          {
+            "label": "Sleep with Me",
+            "correct": false
+          },
+          {
+            "label": "Pulp Fiction",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

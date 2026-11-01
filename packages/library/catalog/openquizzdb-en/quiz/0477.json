@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=477"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0477-1-en",
+      "type": "mcq",
+      "prompt": "Which All Saints' Day flower is drunk as a tea in China?",
+      "payload": {
+        "options": [
+          {
+            "label": "Forget-me-not",
+            "correct": false
+          },
+          {
+            "label": "Jasmine",
+            "correct": false
+          },
+          {
+            "label": "Gerbera",
+            "correct": false
+          },
+          {
+            "label": "Chrysanthemum",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0477-2-en",
+      "type": "mcq",
+      "prompt": "The root of which plant is reputed to be an aphrodisiac as an infusion?",
+      "payload": {
+        "options": [
+          {
+            "label": "Burdock",
+            "correct": false
+          },
+          {
+            "label": "Ginger",
+            "correct": true
+          },
+          {
+            "label": "Jerusalem artichoke",
+            "correct": false
+          },
+          {
+            "label": "Radish",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0477-3-en",
+      "type": "mcq",
+      "prompt": "Which garden plant has digestive and respiratory benefits?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tarragon",
+            "correct": false
+          },
+          {
+            "label": "Thyme",
+            "correct": true
+          },
+          {
+            "label": "Parsley",
+            "correct": false
+          },
+          {
+            "label": "Chives",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

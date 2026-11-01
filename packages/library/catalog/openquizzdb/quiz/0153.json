@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0153-4",
-      "type": "mcq",
-      "prompt": "Qui fut numéro un mondial de la voiture électrique en 2022 ?",
-      "payload": {
-        "options": [
-          {
-            "label": "BYD",
-            "correct": true
-          },
-          {
-            "label": "Tesla",
-            "correct": false
-          },
-          {
-            "label": "Honda",
-            "correct": false
-          },
-          {
-            "label": "Volvo",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

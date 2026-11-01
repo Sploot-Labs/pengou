@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0081-3",
-      "type": "mcq",
-      "prompt": "Quel est le prénom de Gérard Jugnot dans « Le Père Noël est une ordure » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Pierre",
-            "correct": false
-          },
-          {
-            "label": "Félix",
-            "correct": true
-          },
-          {
-            "label": "Gérard",
-            "correct": false
-          },
-          {
-            "label": "Roger",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0081-4",
-      "type": "mcq",
-      "prompt": "À quel réalisateur français doit-on le film « Le père Noël est une ordure » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Alain Terzian",
-            "correct": false
-          },
-          {
-            "label": "Claude Zidi",
-            "correct": false
-          },
-          {
-            "label": "Patrice Ledoux",
-            "correct": false
-          },
-          {
-            "label": "Jean-Marie Poiré",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

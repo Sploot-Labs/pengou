@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=455"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0455-2-en",
+      "type": "mcq",
+      "prompt": "Which object is often considered a lucky charm?",
+      "payload": {
+        "options": [
+          {
+            "label": "Clothes iron",
+            "correct": false
+          },
+          {
+            "label": "Curling iron",
+            "correct": false
+          },
+          {
+            "label": "Horseshoe",
+            "correct": true
+          },
+          {
+            "label": "Gilding tool",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0455-3-en",
+      "type": "mcq",
+      "prompt": "Which character wears a multicolored diamond-patterned costume?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beltrame",
+            "correct": false
+          },
+          {
+            "label": "Pierrot",
+            "correct": false
+          },
+          {
+            "label": "Harlequin",
+            "correct": true
+          },
+          {
+            "label": "Columbine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

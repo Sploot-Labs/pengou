@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0382-2",
-      "type": "mcq",
-      "prompt": "Quel dunk Dominique Wilkins a popularisé en NBA ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tomahawk",
-            "correct": false
-          },
-          {
-            "label": "Poster dunk",
-            "correct": false
-          },
-          {
-            "label": "Rider",
-            "correct": false
-          },
-          {
-            "label": "Windmill dunk",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0382-3",
       "type": "mcq",
       "prompt": "Quelle franchise fut en 2012 la pire équipe NBA en victoires ?",

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=590"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0590-1-en",
+      "type": "mcq",
+      "prompt": "Which one is the odd one out among these Madonna albums?",
+      "payload": {
+        "options": [
+          {
+            "label": "In the Zone",
+            "correct": true
+          },
+          {
+            "label": "Erotica",
+            "correct": false
+          },
+          {
+            "label": "Like a Virgin",
+            "correct": false
+          },
+          {
+            "label": "True Blue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0590-2-en",
+      "type": "mcq",
+      "prompt": "Which one is the odd one out among these famous pipe smokers?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sherlock Holmes",
+            "correct": false
+          },
+          {
+            "label": "Kojak",
+            "correct": true
+          },
+          {
+            "label": "Maigret",
+            "correct": false
+          },
+          {
+            "label": "Popeye",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0590-3-en",
+      "type": "mcq",
+      "prompt": "Which one is the odd one out among these natural disaster films?",
+      "payload": {
+        "options": [
+          {
+            "label": "Volcano",
+            "correct": false
+          },
+          {
+            "label": "Twister",
+            "correct": false
+          },
+          {
+            "label": "2012",
+            "correct": false
+          },
+          {
+            "label": "Independence Day",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0590-4-en",
+      "type": "mcq",
+      "prompt": "Which one is the odd one out among these countries with a blue, white and red flag?",
+      "payload": {
+        "options": [
+          {
+            "label": "Netherlands",
+            "correct": false
+          },
+          {
+            "label": "Australia",
+            "correct": false
+          },
+          {
+            "label": "Estonia",
+            "correct": true
+          },
+          {
+            "label": "Iceland",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

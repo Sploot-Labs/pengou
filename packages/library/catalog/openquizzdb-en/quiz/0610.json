@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=610"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0610-3-en",
+      "type": "mcq",
+      "prompt": "Who said: \"A life is worth nothing, but nothing is worth a life\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Albert Camus",
+            "correct": false
+          },
+          {
+            "label": "Oscar Wilde",
+            "correct": false
+          },
+          {
+            "label": "André Malraux",
+            "correct": true
+          },
+          {
+            "label": "Jules Renard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0376-1",
-      "type": "mcq",
-      "prompt": "Dans quelle ville américaine se dresse le Golden Gate Bridge ?",
-      "payload": {
-        "options": [
-          {
-            "label": "San Diego",
-            "correct": false
-          },
-          {
-            "label": "New York",
-            "correct": false
-          },
-          {
-            "label": "San Francisco",
-            "correct": true
-          },
-          {
-            "label": "Los Angeles",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0376-2",
       "type": "mcq",
       "prompt": "Quelle rivière aux crues redoutables est enjambée par le pont du Gard ?",
@@ -54,35 +25,6 @@
           },
           {
             "label": "Rhône",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0376-3",
-      "type": "mcq",
-      "prompt": "Quel est, malgré son nom, le plus ancien pont de Paris ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Pont du Roi",
-            "correct": false
-          },
-          {
-            "label": "Pont Neuf",
-            "correct": true
-          },
-          {
-            "label": "Pont Marie",
-            "correct": false
-          },
-          {
-            "label": "Pont du Diable",
             "correct": false
           }
         ]

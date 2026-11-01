@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0411-2",
-      "type": "mcq",
-      "prompt": "Comment s'appelle le jeu « pierre-feuille-ciseaux » en japonais ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Maki",
-            "correct": false
-          },
-          {
-            "label": "Josei",
-            "correct": false
-          },
-          {
-            "label": "Shifumi",
-            "correct": true
-          },
-          {
-            "label": "Hokaku",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0411-3",
       "type": "mcq",
       "prompt": "Quelle cithare japonaise possède des cordes en fil de soie ?",
@@ -83,35 +54,6 @@
           },
           {
             "label": "Taïko",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0411-4",
-      "type": "mcq",
-      "prompt": "Quel phénomène naturel vient du japonais signifiant « vague de port » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Séisme",
-            "correct": false
-          },
-          {
-            "label": "Tsunami",
-            "correct": true
-          },
-          {
-            "label": "Kendo",
-            "correct": false
-          },
-          {
-            "label": "Sakura",
             "correct": false
           }
         ]

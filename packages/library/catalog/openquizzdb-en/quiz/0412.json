@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=412"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0412-1-en",
+      "type": "mcq",
+      "prompt": "What is it called when you search for a film's shooting locations?",
+      "payload": {
+        "options": [
+          {
+            "label": "Storyboard",
+            "correct": false
+          },
+          {
+            "label": "Scouting",
+            "correct": true
+          },
+          {
+            "label": "Editing",
+            "correct": false
+          },
+          {
+            "label": "Casting",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0412-2-en",
+      "type": "mcq",
+      "prompt": "Roughly how many people voted on the Oscars in 2026?",
+      "payload": {
+        "options": [
+          {
+            "label": "About 3,000",
+            "correct": false
+          },
+          {
+            "label": "About 10,000",
+            "correct": true
+          },
+          {
+            "label": "About 2,000",
+            "correct": false
+          },
+          {
+            "label": "About 1,000",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0412-3-en",
+      "type": "mcq",
+      "prompt": "Which country did the film \"The Gods Must Be Crazy\" make famous?",
+      "payload": {
+        "options": [
+          {
+            "label": "Botswana",
+            "correct": true
+          },
+          {
+            "label": "Gabon",
+            "correct": false
+          },
+          {
+            "label": "Zambia",
+            "correct": false
+          },
+          {
+            "label": "Rwanda",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=124"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0124-3-en",
+      "type": "mcq",
+      "prompt": "What is it called when you sing along to lyrics shown on a screen?",
+      "payload": {
+        "options": [
+          {
+            "label": "Krusty",
+            "correct": false
+          },
+          {
+            "label": "Kaoma",
+            "correct": false
+          },
+          {
+            "label": "Kojiki",
+            "correct": false
+          },
+          {
+            "label": "Karaoke",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

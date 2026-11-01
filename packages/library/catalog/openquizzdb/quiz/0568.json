@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0568-1",
-      "type": "mcq",
-      "prompt": "Quelle est la troisième forêt domaniale de France métropolitaine ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cranou",
-            "correct": false
-          },
-          {
-            "label": "Creuse",
-            "correct": false
-          },
-          {
-            "label": "Compiègne",
-            "correct": true
-          },
-          {
-            "label": "Tusson",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0568-2",
       "type": "mcq",
       "prompt": "Quelle forêt a inspiré Victor Hugo pour sa ferme des Thénardier ?",

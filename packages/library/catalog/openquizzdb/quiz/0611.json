@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0611-3",
-      "type": "mcq",
-      "prompt": "Comment identifier une personne sur une photo en ligne ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cloud",
-            "correct": false
-          },
-          {
-            "label": "Rank",
-            "correct": false
-          },
-          {
-            "label": "ActiveX",
-            "correct": false
-          },
-          {
-            "label": "Tag",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0611-4",
       "type": "mcq",
       "prompt": "Quel courrier indésirable est souvent utilisé à des fins publicitaires ?",

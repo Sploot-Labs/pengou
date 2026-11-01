@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0028-2",
-      "type": "mcq",
-      "prompt": "Quel grade est usurpé par Pithivier dans « La 7ème compagnie » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Commandant",
-            "correct": true
-          },
-          {
-            "label": "Caporal",
-            "correct": false
-          },
-          {
-            "label": "Colonel",
-            "correct": false
-          },
-          {
-            "label": "Capitaine",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0028-3",
       "type": "mcq",
       "prompt": "Fondée le 6 août 1538, de quel pays Bogota est-elle la capitale ?",
@@ -141,35 +112,6 @@
           },
           {
             "label": "Drancy",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0040-2",
-      "type": "mcq",
-      "prompt": "Quel peintre excentrique a été élu homme le plus élégant de France ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Degas",
-            "correct": false
-          },
-          {
-            "label": "Dali",
-            "correct": true
-          },
-          {
-            "label": "Delacroix",
-            "correct": false
-          },
-          {
-            "label": "David",
             "correct": false
           }
         ]
@@ -258,35 +200,6 @@
           {
             "label": "Écossaise",
             "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0052-2",
-      "type": "mcq",
-      "prompt": "Qui propose de la revoir « à la même heure dans deux ans » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Emmanuelle",
-            "correct": false
-          },
-          {
-            "label": "Elsa",
-            "correct": true
-          },
-          {
-            "label": "Enzo Enzo",
-            "correct": false
-          },
-          {
-            "label": "Élisa",
-            "correct": false
           }
         ]
       },
@@ -597,15 +510,12 @@
       "audience": "tous",
       "questionIds": [
         "oqdb-0028-1",
-        "oqdb-0028-2",
         "oqdb-0028-3",
         "oqdb-0028-4",
         "oqdb-0040-1",
-        "oqdb-0040-2",
         "oqdb-0040-3",
         "oqdb-0040-4",
         "oqdb-0052-1",
-        "oqdb-0052-2",
         "oqdb-0052-3",
         "oqdb-0052-4",
         "oqdb-0064-1",

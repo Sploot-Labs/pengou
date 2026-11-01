@@ -1,0 +1,875 @@
+{
+  "questions": {
+    "otdb-94c20dcce170": {
+      "prompt": "Nick Mason est le seul membre à apparaître sur tous les albums de Pink Floyd."
+    },
+    "otdb-965552a44be8": {
+      "prompt": "Muse est un groupe de rock britannique (anglais)."
+    },
+    "otdb-9e9575dbaa06": {
+      "prompt": "Quelle société a réalisé l'animation du clip « Sledgehammer » (1986) de Peter Gabriel ?",
+      "options": [
+        "Aardman Animations",
+        "VIZ Media",
+        "HIT Entertainment",
+        "Illumination"
+      ]
+    },
+    "otdb-a558a0b9675f": {
+      "prompt": "Quel artiste a sorti en 2012 le single « Harlem Shake », repris dans de nombreuses vidéos YouTube en 2013 ?",
+      "options": [
+        "RL Grime",
+        "Flosstradamus",
+        "NGHTMRE",
+        "Baauer"
+      ]
+    },
+    "otdb-a7661b4e9865": {
+      "prompt": "Selon le rappeur américain Nelly, que faut-il faire quand il fait chaud ici ?",
+      "options": [
+        "Enlever tous ses habits",
+        "Prendre une douche froide",
+        "Boire de l'eau",
+        "Se baigner nu"
+      ]
+    },
+    "otdb-a91bbd0fa473": {
+      "prompt": "La chanson « Scatman's World » est sortie après « Scatman (Ski-Ba-Bop-Ba-Dop-Bop) »."
+    },
+    "otdb-ac0d58244138": {
+      "prompt": "« Neutral Milk Hotel » est un vrai groupe."
+    },
+    "otdb-ad39e1340c9f": {
+      "skip": "proposition trop longue"
+    },
+    "otdb-b4b03ae9fbd9": {
+      "prompt": "Qui a chanté le générique d'ouverture du film de James Bond « GoldenEye » (1995) ?",
+      "options": [
+        "Sheryl Crow",
+        "Shirley Bassey",
+        "Madonna",
+        "Tina Turner"
+      ]
+    },
+    "otdb-b97c0a3a4653": {
+      "prompt": "Qui était le chanteur et leader du groupe de rock R.E.M. ?",
+      "options": [
+        "Thom Yorke",
+        "Chris Martin",
+        "Michael Stipe",
+        "George Michael"
+      ]
+    },
+    "otdb-b9a2a03f0d27": {
+      "prompt": "Qui est le chanteur des Lumineers ?",
+      "options": [
+        "Jeremiah Fraites",
+        "Neyla Pekarek",
+        "Wesley Schultz",
+        "Jay Van Dyke"
+      ]
+    },
+    "otdb-bd63aadc24fc": {
+      "prompt": "Quel rappeur a sorti un album double disque de platine sans aucun featuring ?",
+      "options": [
+        "Kendrick Lamar",
+        "Drake",
+        "J. Cole",
+        "Big Sean"
+      ]
+    },
+    "otdb-be60f8adde97": {
+      "prompt": "Qui est le chanteur de Pearl Jam ?",
+      "options": [
+        "Eddie Vedder",
+        "Stone Gossard",
+        "Kurt Cobain",
+        "Ozzy Osbourne"
+      ]
+    },
+    "otdb-bec5a267156f": {
+      "prompt": "Rivers Cuomo, chanteur du groupe de rock américain Weezer, a étudié à Harvard."
+    },
+    "otdb-c370d266e29a": {
+      "prompt": "Comment s'appelle le cinquième album de Taylor Swift ?",
+      "options": [
+        "Red",
+        "1989",
+        "Fearless",
+        "Speak Now"
+      ]
+    },
+    "otdb-c6b429336dad": {
+      "prompt": "En août 1964, qui a fait découvrir le cannabis aux Beatles ?",
+      "options": [
+        "Brian Epstein",
+        "Bob Dylan",
+        "Jerry Garcia",
+        "Jim Morrison"
+      ]
+    },
+    "otdb-c86c65a64b44": {
+      "prompt": "Quel artiste ou groupe français est connu pour jouer sur l'instrument MIDI « Launchpad » ?",
+      "options": [
+        "David Guetta",
+        "Disclosure",
+        "Daft Punk",
+        "Madeon"
+      ]
+    },
+    "otdb-c8db40a80c0b": {
+      "prompt": "Qui est le chanteur de Fall Out Boy ?",
+      "options": [
+        "Patrick Stump",
+        "Gary Lee Weinrib",
+        "Pete Wentz",
+        "Brendon Urie"
+      ]
+    },
+    "otdb-cb3427e10e80": {
+      "prompt": "« Doctor Jones », « Turn Back Time » et « Barbie Girl » ont été numéros un au Royaume-Uni pour quel groupe d'eurodance ?",
+      "options": [
+        "Vengaboys",
+        "Eiffel 65",
+        "Sash!",
+        "Aqua"
+      ]
+    },
+    "otdb-d04c9a991725": {
+      "prompt": "D'où vient le rappeur de « Gasolina », Daddy Yankee ?",
+      "options": [
+        "Mexique",
+        "Cuba",
+        "Porto Rico",
+        "Espagne"
+      ]
+    },
+    "otdb-d313e78be9e3": {
+      "prompt": "L'album « reputation » de Taylor Swift compte 15 chansons."
+    },
+    "otdb-d9608f84014c": {
+      "prompt": "Quel terme décrit le mieux la liaison de deux sections d'un morceau par un passage de transition ?",
+      "options": [
+        "Pont",
+        "Forme binaire",
+        "Capodastre",
+        "Coda"
+      ]
+    },
+    "otdb-dfecaaefe540": {
+      "prompt": "Quel album Gorillaz a-t-il sorti en 2017 ?",
+      "options": [
+        "The Fall",
+        "Demon Days",
+        "Plastic Beach",
+        "Humanz"
+      ]
+    },
+    "otdb-e0d39b666c82": {
+      "prompt": "De quel pays vient le groupe Rammstein ?",
+      "options": [
+        "Allemagne",
+        "Arménie",
+        "Autriche",
+        "Belgique"
+      ]
+    },
+    "otdb-e40e26a5706d": {
+      "prompt": "« The Suburbs », d'Arcade Fire, a remporté le Grammy de l'album de l'année en 2011."
+    },
+    "otdb-e5707637bd8b": {
+      "prompt": "Le groupe « Panic! at the Disco » a sorti 4 albums au total."
+    },
+    "otdb-eb119c33312d": {
+      "prompt": "Laquelle des Spice Girls, groupe pop britannique, était surnommée Ginger Spice ?",
+      "options": [
+        "Melanie Brown",
+        "Emma Bunton",
+        "Geri Halliwell",
+        "Victoria Beckham"
+      ]
+    },
+    "otdb-eda226e36f6e": {
+      "prompt": "Quel artiste a enregistré en premier la chanson « The Tide Is High » ?",
+      "options": [
+        "Kardinal Offishall",
+        "Blondie",
+        "Atomic Kitten",
+        "The Paragons"
+      ]
+    },
+    "otdb-edb9bf4cb67a": {
+      "prompt": "Qui est le chanteur de Muse ?",
+      "options": [
+        "Dominic Howard",
+        "Jonny Greenwood",
+        "Matt Bellamy",
+        "Thom Yorke"
+      ]
+    },
+    "otdb-f06671b0f7d5": {
+      "prompt": "Lequel de ces noms est celui d'un groupe de rock psychédélique américain formé en 2002 par Benjamin Goldwasser et Andrew VanWyngarden ?",
+      "options": [
+        "STRFKR",
+        "SBTRKT",
+        "MGMT",
+        "MSTRKRFT"
+      ]
+    },
+    "otdb-f58e42cac2ce": {
+      "prompt": "Qui est le fondateur et leader du groupe de rock industriel Nine Inch Nails ?",
+      "options": [
+        "Trent Reznor",
+        "Marilyn Manson",
+        "Josh Homme",
+        "Robin Finck"
+      ]
+    },
+    "otdb-f6bbbabeef2d": {
+      "prompt": "La composition de 1952 « 4'33\" », du compositeur américain John Cage, est surtout faite de quel son ?",
+      "options": [
+        "Le silence",
+        "Des gens qui parlent",
+        "Des chants de grillons",
+        "Des pets"
+      ]
+    },
+    "otdb-f778f9af905a": {
+      "prompt": "Lequel de ces rappeurs n'est PAS membre du groupe de rap Wu-Tang Clan ?",
+      "options": [
+        "Ol' Dirty Bastard",
+        "GZA",
+        "Method Man",
+        "Dr. Dre"
+      ]
+    },
+    "otdb-01cb121594d2": {
+      "prompt": "Quel est le nom scientifique du pygargue à tête blanche ?",
+      "options": [
+        "Cyanocitta cristata",
+        "Haliaeetus leucocephalus",
+        "Aquila chrysaetos",
+        "Tyto alba"
+      ]
+    },
+    "otdb-01edffe301a4": {
+      "prompt": "Quelle race de chien est traditionnellement associée aux pompiers ?",
+      "options": [
+        "Dalmatien",
+        "Berger allemand",
+        "Dogue allemand",
+        "Mastiff"
+      ]
+    },
+    "otdb-0d87d634590a": {
+      "prompt": "De quoi sont faites les écailles de tous les serpents et de la plupart des lézards ?",
+      "options": [
+        "Ankyloglossie",
+        "Kératine",
+        "Épiderme",
+        "Mue"
+      ]
+    },
+    "otdb-172a31fabd90": {
+      "prompt": "À quelle classe d'animaux appartiennent les tritons ?",
+      "options": [
+        "Amphibiens",
+        "Poissons",
+        "Mammifères",
+        "Reptiles"
+      ]
+    },
+    "otdb-3f4b9425fc98": {
+      "prompt": "Quel est le nom scientifique du loup gris ?",
+      "options": [
+        "Canis latrans",
+        "Canis lupus",
+        "Canis lupus lycaon",
+        "Canis aureus"
+      ]
+    },
+    "otdb-444000f6fdff": {
+      "prompt": "Contrairement à la plupart des salamandres, quelle partie du triton est aplatie ?",
+      "options": [
+        "Tête",
+        "Pattes",
+        "Dents",
+        "Queue"
+      ]
+    },
+    "otdb-447dd0cd845d": {
+      "prompt": "Comment appelle-t-on l'habitat d'un lapin ?",
+      "options": [
+        "Nid",
+        "Nid d'écureuil",
+        "Tanière",
+        "Terrier"
+      ]
+    },
+    "otdb-4af4e403bb98": {
+      "prompt": "Quel type de créature est un bonobo ?",
+      "options": [
+        "Chat sauvage",
+        "Grand singe",
+        "Perroquet",
+        "Lion"
+      ]
+    },
+    "otdb-4cf7b8f25b07": {
+      "prompt": "Lequel de ces animaux n'est PAS un lézard ?",
+      "options": [
+        "Iguane vert",
+        "Tuatara",
+        "Dragon de Komodo",
+        "Monstre de Gila"
+      ]
+    },
+    "otdb-53cd9ec15134": {
+      "skip": "nom collectif propre à l'anglais"
+    },
+    "otdb-55980ed8d8c7": {
+      "prompt": "L'axolotl est un amphibien qui peut passer toute sa vie à l'état larvaire."
+    },
+    "otdb-57d1aee55981": {
+      "prompt": "Quel est l'animal le plus rapide ?",
+      "options": [
+        "Taon",
+        "Guépard",
+        "Aigle royal",
+        "Faucon pèlerin"
+      ]
+    },
+    "otdb-5bd1a69d0896": {
+      "prompt": "Quelle sous-espèce d'ours brun n'est pas éteinte ?",
+      "options": [
+        "Grizzly de Californie",
+        "Ours de l'Atlas",
+        "Grizzly du Mexique",
+        "Ours brun de Syrie"
+      ]
+    },
+    "otdb-6a01995826c7": {
+      "prompt": "Quelle race de chien est l'une des plus anciennes et prospère depuis avant 400 av. J.-C. ?",
+      "options": [
+        "Boxers",
+        "Carlins",
+        "Bouledogues",
+        "Chihuahua"
+      ]
+    },
+    "otdb-7813e2c100b4": {
+      "prompt": "De quelle couleur est la peau d'un ours polaire ?",
+      "options": [
+        "Verte",
+        "Noire",
+        "Rose",
+        "Blanche"
+      ]
+    },
+    "otdb-7fba7be7a147": {
+      "prompt": "Les lapins sont des rongeurs."
+    },
+    "otdb-837d0dc0f5d4": {
+      "prompt": "Comment appelle-t-on l'abeille mâle issue d'un œuf non fécondé ?",
+      "options": [
+        "Soldat",
+        "Mâle",
+        "Faux-bourdon",
+        "Ouvrière"
+      ]
+    },
+    "otdb-86005f1a7d88": {
+      "prompt": "On peut connaître l'âge d'une coccinelle en comptant les points sur son dos."
+    },
+    "otdb-8a407d3c5d7a": {
+      "prompt": "En 2016, l'UICN a fait passer le statut du panda géant de « en danger » à « vulnérable »."
+    },
+    "otdb-8bcef5e2194b": {
+      "prompt": "Les kangourous gardent de la nourriture dans leur poche, à côté de leurs petits."
+    },
+    "otdb-91ac768ab36b": {
+      "prompt": "Lequel de ces animaux n'existe pas ?",
+      "options": [
+        "Calmar géant",
+        "Diable de Tasmanie",
+        "Dragon de mer",
+        "Lion de Némée"
+      ]
+    },
+    "otdb-9704a17e4f77": {
+      "prompt": "Lequel de ces serpents n'est PAS venimeux ?",
+      "options": [
+        "Mamba noir",
+        "Pélamide",
+        "Krait de Malaisie",
+        "Python réticulé"
+      ]
+    },
+    "otdb-9b7f77cffa4d": {
+      "prompt": "L'ornithorynque est un mammifère."
+    },
+    "otdb-a368cba3bd4b": {
+      "prompt": "De quoi est faite la corne du rhinocéros ?",
+      "options": [
+        "Ivoire",
+        "Kératine",
+        "Os",
+        "Peau"
+      ]
+    },
+    "otdb-a393c86ff55b": {
+      "prompt": "Laquelle de ces espèces n'est pas éteinte ?",
+      "options": [
+        "Dragon de Komodo",
+        "Tigre de Tasmanie",
+        "Lion de mer du Japon",
+        "Gazelle saoudienne"
+      ]
+    },
+    "otdb-a4a032f5500e": {
+      "prompt": "Le navigateur Internet Firefox tire son nom du panda roux."
+    },
+    "otdb-a65b7cf33a2b": {
+      "prompt": "Quelle race de chien porte le nom d'une région de Croatie ?",
+      "options": [
+        "Chihuahua",
+        "Pékinois",
+        "Poméranien",
+        "Dalmatien"
+      ]
+    },
+    "otdb-ae920814f32b": {
+      "prompt": "Quel est l'animal national de l'Inde ?",
+      "options": [
+        "Cheval",
+        "Lion",
+        "Tigre",
+        "Chameau"
+      ]
+    },
+    "otdb-afd3209f0a9d": {
+      "prompt": "Quel est le nom scientifique du guépard ?",
+      "options": [
+        "Felis catus",
+        "Panthera onca",
+        "Lynx rufus",
+        "Acinonyx jubatus"
+      ]
+    },
+    "otdb-b6a1dfd2658a": {
+      "prompt": "Combien d'espèces vivantes de hyènes connaît-on ?",
+      "options": [
+        "2",
+        "4",
+        "6",
+        "8"
+      ]
+    },
+    "otdb-b787a8cd14fa": {
+      "prompt": "Quel est le vrai nom de Grumpy Cat ?",
+      "options": [
+        "Brocoli",
+        "Sauce",
+        "Tardar Sauce",
+        "Minnie"
+      ]
+    },
+    "otdb-bf93070e011b": {
+      "prompt": "À quel embranchement biologique appartiennent tous les mammifères, oiseaux et reptiles ?",
+      "options": [
+        "Chordés",
+        "Annélides",
+        "Placozoaires",
+        "Échinodermes"
+      ]
+    },
+    "otdb-c01f7758852d": {
+      "prompt": "Une chenille a plus de muscles qu'un humain."
+    },
+    "otdb-c1d3f32f2486": {
+      "prompt": "Le lapphund finlandais servait à garder les rennes."
+    },
+    "otdb-c49d471ae4d9": {
+      "prompt": "L'orque est considérée comme un type de dauphin."
+    },
+    "otdb-d1096c0c5122": {
+      "prompt": "Les éponges de mer peuvent avoir un cœur."
+    },
+    "otdb-d6595968333b": {
+      "prompt": "De quel pays les wombats sont-ils originaires ?",
+      "options": [
+        "Palaos",
+        "Nouvelle-Zélande",
+        "Papouasie-Nouvelle-Guinée",
+        "Australie"
+      ]
+    },
+    "otdb-dc9019beb624": {
+      "prompt": "Les serpents et les lézards dardent la langue. Dans quel but ?",
+      "options": [
+        "Capter des odeurs",
+        "Goûter l'air sucré",
+        "Attirer des femelles",
+        "Menacer d'autres espèces"
+      ]
+    },
+    "otdb-dcd9fbea4409": {
+      "prompt": "Par définition, où vit un animal abyssopélagique ?",
+      "options": [
+        "Dans un arbre",
+        "Au fond de l'océan",
+        "Dans le désert",
+        "Au sommet d'une montagne"
+      ]
+    },
+    "otdb-e3c4111e567d": {
+      "prompt": "De quelle famille de poissons est fait le plat fugu ?",
+      "options": [
+        "Maquereau",
+        "Saumon",
+        "Bar",
+        "Poisson-globe"
+      ]
+    },
+    "otdb-e6dbf4038025": {
+      "prompt": "Quel est le nom scientifique de la perruche ondulée ?",
+      "options": [
+        "Ara macao",
+        "Nymphicus hollandicus",
+        "Melopsittacus undulatus",
+        "Pyrrhura molinae"
+      ]
+    },
+    "otdb-ee7b1ec71000": {
+      "prompt": "De quelle couleur est le merle femelle ?",
+      "options": [
+        "Brune",
+        "Blanche",
+        "Jaune",
+        "Noire"
+      ]
+    },
+    "otdb-eea4c972a91f": {
+      "prompt": "À quel sous-ordre scientifique appartient la famille des Hyaenidae ?",
+      "options": [
+        "Ciconiiformes",
+        "Feliformia",
+        "Caniformia",
+        "Haplorhini"
+      ]
+    },
+    "otdb-f0f63deca756": {
+      "prompt": "« Hippocampus » est le nom latin de quelle créature marine ?",
+      "options": [
+        "Pieuvre",
+        "Baleine",
+        "Dauphin",
+        "Hippocampe"
+      ]
+    },
+    "otdb-f3ae89984271": {
+      "prompt": "Un animal carnivore mange de la chair. Que mange un animal nucivore ?",
+      "options": [
+        "Rien",
+        "Des fruits",
+        "Des noix",
+        "Des algues"
+      ]
+    },
+    "otdb-f76b0767fb8b": {
+      "prompt": "Les lapins sont des carnivores."
+    },
+    "otdb-f825a9889424": {
+      "prompt": "À quelle famille scientifique appartient le protèle ?",
+      "options": [
+        "Eupleridae",
+        "Hyaenidae",
+        "Felidae",
+        "Canidae"
+      ]
+    },
+    "otdb-0264fb9c9f30": {
+      "prompt": "On peut prendre la racine carrée d'un nombre négatif grâce au nombre imaginaire « i »."
+    },
+    "otdb-031386517d1c": {
+      "prompt": "La NVidia GTX 1080 porte ce nom parce qu'elle ne peut afficher qu'en résolution 1920x1080."
+    },
+    "otdb-0690a66d546c": {
+      "prompt": "Lequel de ces composants électriques n'est PAS passif ?",
+      "options": [
+        "Résistance",
+        "Inductance",
+        "Transistor",
+        "Condensateur"
+      ]
+    },
+    "otdb-06bc3dd1886a": {
+      "prompt": "Que signifie le « S » dans l'algorithme de chiffrement RSA ?",
+      "options": [
+        "Shamir",
+        "Secure",
+        "Stable",
+        "Schottky"
+      ]
+    },
+    "otdb-0b8188cd9489": {
+      "prompt": "Combien de kilooctets y a-t-il dans un gigaoctet (en décimal) ?",
+      "options": [
+        "1024",
+        "1048576",
+        "1000000",
+        "1000"
+      ]
+    },
+    "otdb-0e270a89b6c0": {
+      "prompt": "Tetsuya Fujita est un scientifique qui a mis au point l'échelle de quelle catastrophe naturelle ?",
+      "options": [
+        "Ouragans",
+        "Séismes",
+        "Tornades",
+        "Volcans"
+      ]
+    },
+    "otdb-0e94490cdc8d": {
+      "prompt": "Selon le Système international d'unités, combien d'octets y a-t-il dans un kilooctet de RAM ?",
+      "options": [
+        "1000",
+        "500",
+        "512",
+        "1024"
+      ]
+    },
+    "otdb-0f0c4d005568": {
+      "prompt": "Ada Lovelace est souvent considérée comme la première programmeuse informatique."
+    },
+    "otdb-1130a683be71": {
+      "prompt": "Quelle unité scientifique porte le nom d'un noble italien ?",
+      "options": [
+        "Volt",
+        "Hertz",
+        "Ohm",
+        "Pascal"
+      ]
+    },
+    "otdb-1267013fd3dc": {
+      "prompt": "Linux a d'abord été créé comme une alternative à Windows XP."
+    },
+    "otdb-1315cfbe8c19": {
+      "prompt": "Une plante dont le cycle de vie dure plus d'un an est appelée annuelle."
+    },
+    "otdb-18041f7ef90d": {
+      "prompt": "Lequel de ces codons est un codon stop dans l'ADN ?",
+      "options": [
+        "ACT",
+        "TAA",
+        "GTA",
+        "ACA"
+      ]
+    },
+    "otdb-193c690740c9": {
+      "prompt": "De quelle couleur est le sang non oxygéné ?",
+      "options": [
+        "Vert",
+        "Rouge",
+        "Bleu",
+        "Violet"
+      ]
+    },
+    "otdb-19ed50bb4941": {
+      "prompt": "Quelle est la centrale énergétique de la cellule ?",
+      "options": [
+        "Red Bull",
+        "Mitochondrie",
+        "Noyau",
+        "Ribosome"
+      ]
+    },
+    "otdb-1d421123ef8c": {
+      "prompt": "Le mot « science » vient du latin « scire », qui signifie quoi ?",
+      "options": [
+        "Savoir",
+        "Vivre",
+        "Compter",
+        "Mesurer"
+      ]
+    },
+    "otdb-218eae918f1d": {
+      "prompt": "Que signifiait à l'origine le nom du réseau d'anonymat Tor ?",
+      "options": [
+        "Le routeur orange",
+        "Le seul routeur",
+        "Le routeur oignon",
+        "Le routeur sinistre"
+      ]
+    },
+    "otdb-25616c8ef8b6": {
+      "prompt": "À quelle structure de données s'applique le principe FILO ?",
+      "options": [
+        "Tas",
+        "File",
+        "Arbre",
+        "Pile"
+      ]
+    },
+    "otdb-2599d598ad3e": {
+      "prompt": "La coulrophobie est la peur irrationnelle de quoi ?",
+      "options": [
+        "Cimetières",
+        "Tunnels",
+        "Clowns",
+        "Aiguilles"
+      ]
+    },
+    "otdb-26c5aceb5872": {
+      "prompt": "Quelle est l'unité SI standard de l'intensité du courant électrique ?",
+      "options": [
+        "Ohm",
+        "Volt",
+        "Watt",
+        "Ampère"
+      ]
+    },
+    "otdb-27ff243b75c0": {
+      "prompt": "Lequel de ces célèbres mathématiciens est mort en duel à l'âge de 20 ans ?",
+      "options": [
+        "Abel",
+        "Galois",
+        "Euler",
+        "Gauss"
+      ]
+    },
+    "otdb-29ac4a588976": {
+      "prompt": "En chiffres romains, à quoi correspond XL ?",
+      "options": [
+        "40",
+        "15",
+        "90",
+        "60"
+      ]
+    },
+    "otdb-2a6fe49831be": {
+      "prompt": "Pour contourner la loi américaine sur l'exportation d'armes, le créateur de PGP a publié tout le code source sous forme de livre."
+    },
+    "otdb-2ab8e02b9cf2": {
+      "prompt": "La somme de deux entiers impairs est impaire."
+    },
+    "otdb-2bc28a27a797": {
+      "prompt": "Dans quelle phase la majorité des cellules eucaryotes restent-elles la plus grande partie de leur vie ?",
+      "options": [
+        "Prophase",
+        "Télophase",
+        "Interphase",
+        "Stase"
+      ]
+    },
+    "otdb-2be87c4e4d4d": {
+      "prompt": "Qui a mis au point le premier vaccin efficace contre la polio dans les années 1950 ?",
+      "options": [
+        "Frederick Robbins",
+        "Thomas Weller",
+        "John F. Enders",
+        "Jonas Salk"
+      ]
+    },
+    "otdb-2cf90c158733": {
+      "prompt": "Quel nom courant désigne le syndrome de stress tibial médial (MTSS) ?",
+      "options": [
+        "Tennis elbow",
+        "Périostite tibiale",
+        "Syndrome du canal carpien",
+        "Bursite prépatellaire"
+      ]
+    },
+    "otdb-2daf4206ea7a": {
+      "prompt": "Quelle était la limite de caractères d'origine d'un tweet sur Twitter ?",
+      "options": [
+        "100",
+        "120",
+        "140",
+        "160"
+      ]
+    },
+    "otdb-2e5998bbdefa": {
+      "prompt": "L'intégration est l'opération inverse de quelle opération mathématique ?",
+      "options": [
+        "Dérivation",
+        "Multiplication",
+        "Division",
+        "Écart type"
+      ]
+    },
+    "otdb-3016d2e64d33": {
+      "prompt": "Quelle dose de rayonnement une banane émet-elle ?",
+      "options": [
+        "0,1 microsievert",
+        "0,3 microsievert",
+        "0,5 microsievert",
+        "0,7 microsievert"
+      ]
+    },
+    "otdb-3482702ddbab": {
+      "prompt": "Quelle est la cause de la maladie de Lyme ?",
+      "options": [
+        "Un virus",
+        "Un ver parasite",
+        "Une bactérie",
+        "Une amibe"
+      ]
+    },
+    "otdb-35d2d35bd692": {
+      "prompt": "Lequel de ces vaisseaux spatiaux n'a jamais touché la Lune ?",
+      "options": [
+        "Mariner 4",
+        "SMART-1",
+        "Apollo 11",
+        "Luna 2"
+      ]
+    },
+    "otdb-3636c413fe96": {
+      "prompt": "La Terre et la Lune ont à peu près la même masse."
+    },
+    "otdb-36999ace4184": {
+      "prompt": "En aéronautique, que servent à contrôler les volets et les becs de bord d'attaque d'un avion ?",
+      "options": [
+        "La portance",
+        "La poussée",
+        "Le poids",
+        "La traînée"
+      ]
+    },
+    "otdb-377ddc0340f0": {
+      "prompt": "Quel est le nom courant de l'acide isobutylphénylpropanoïque ?",
+      "options": [
+        "Aspirine",
+        "Morphine",
+        "Ibuprofène",
+        "Kétamine"
+      ]
+    },
+    "otdb-37f810b39ceb": {
+      "prompt": "Combien de cœurs compte l'Intel i7-6950X ?",
+      "options": [
+        "4",
+        "12",
+        "10",
+        "8"
+      ]
+    },
+    "otdb-391d21415def": {
+      "prompt": "Lors de quelle mission la navette spatiale Columbia s'est-elle désintégrée à la rentrée dans l'atmosphère ?",
+      "options": [
+        "STS-61-C",
+        "STS-107",
+        "STS-109",
+        "STS-51-L"
+      ]
+    },
+    "otdb-3b4102fea417": {
+      "prompt": "Si l'on pouvait plier une feuille de papier en deux 50 fois, son épaisseur atteindrait les trois quarts de la distance entre la Terre et le Soleil."
+    },
+    "otdb-3be0ae73898c": {
+      "prompt": "On a cru un temps que l'injection de cartilage de requin empêcherait les gens d'avoir un cancer."
+    }
+  },
+  "quizzes": {}
+}

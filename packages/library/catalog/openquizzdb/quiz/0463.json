@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0463-3",
-      "type": "mcq",
-      "prompt": "En quelle année Eddy Merckx a-t-il remporté son premier Tour de France ?",
-      "payload": {
-        "options": [
-          {
-            "label": "1967",
-            "correct": false
-          },
-          {
-            "label": "1971",
-            "correct": false
-          },
-          {
-            "label": "1965",
-            "correct": false
-          },
-          {
-            "label": "1969",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0463-4",
       "type": "mcq",
       "prompt": "Quel est le sport le plus populaire en Belgique ?",

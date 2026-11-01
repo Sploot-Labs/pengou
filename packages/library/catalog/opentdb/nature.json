@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-0d87d634590a",
-      "type": "mcq",
-      "prompt": "What are the scales on all snakes and most lizards are made of?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ankyloglossia",
-            "correct": false
-          },
-          {
-            "label": "Keratin",
-            "correct": true
-          },
-          {
-            "label": "Epidermis",
-            "correct": false
-          },
-          {
-            "label": "Ecdysis",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-172a31fabd90",
       "type": "mcq",
       "prompt": "Which class of animals are newts members of?",
@@ -118,18 +89,6 @@
       },
       "theme": "nature",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-3b876b70f89f",
-      "type": "truefalse",
-      "prompt": "The average lifespan of a wildcat is only around 5-6 years.",
-      "payload": {
-        "correct": false
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -217,35 +176,6 @@
       },
       "theme": "nature",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-4af4e403bb98",
-      "type": "mcq",
-      "prompt": "What type of creature is a Bonobo?",
-      "payload": {
-        "options": [
-          {
-            "label": "Wildcat",
-            "correct": false
-          },
-          {
-            "label": "Ape",
-            "correct": true
-          },
-          {
-            "label": "Parrot",
-            "correct": false
-          },
-          {
-            "label": "Lion",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -378,6 +308,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-5ea0f55201b5",
+      "type": "mcq",
+      "prompt": "Which continent do sweet potatoes originally come from?",
+      "payload": {
+        "options": [
+          {
+            "label": "South America",
+            "correct": true
+          },
+          {
+            "label": "Asia",
+            "correct": false
+          },
+          {
+            "label": "Africa",
+            "correct": false
+          },
+          {
+            "label": "Europe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-6a01995826c7",
       "type": "mcq",
       "prompt": "What dog breed is one of the oldest breeds of dog and has flourished since before 400 BCE.",
@@ -489,6 +448,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-89099f00bba7",
+      "type": "mcq",
+      "prompt": "Where did the pineapple plant originate?",
+      "payload": {
+        "options": [
+          {
+            "label": "South America",
+            "correct": true
+          },
+          {
+            "label": "Hawaii",
+            "correct": false
+          },
+          {
+            "label": "Asia",
+            "correct": false
+          },
+          {
+            "label": "Europe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-8a407d3c5d7a",
       "type": "truefalse",
       "prompt": "In 2016, the IUCN reclassified the status of Giant Pandas from endangered to vulnerable.",
@@ -513,57 +501,11 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-91ac768ab36b",
-      "type": "mcq",
-      "prompt": "Which of these animals are not real?",
+      "id": "otdb-9b7f77cffa4d",
+      "type": "truefalse",
+      "prompt": "The Platypus is a mammal.",
       "payload": {
-        "options": [
-          {
-            "label": "Giant Squid",
-            "correct": false
-          },
-          {
-            "label": "Tasmanian Devil",
-            "correct": false
-          },
-          {
-            "label": "Sea Dragon",
-            "correct": false
-          },
-          {
-            "label": "Nemean Lion",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-9704a17e4f77",
-      "type": "mcq",
-      "prompt": "Which of the following is NOT a venomous snake?",
-      "payload": {
-        "options": [
-          {
-            "label": "Black mamba",
-            "correct": false
-          },
-          {
-            "label": "Yellow bellied sea snake",
-            "correct": false
-          },
-          {
-            "label": "Malayan Krait",
-            "correct": false
-          },
-          {
-            "label": "Reticulated python",
-            "correct": true
-          }
-        ]
+        "correct": true
       },
       "theme": "nature",
       "difficulty": "moyen",
@@ -571,9 +513,9 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-9b7f77cffa4d",
+      "id": "otdb-9e82e246c793",
       "type": "truefalse",
-      "prompt": "The Platypus is a mammal.",
+      "prompt": "Scientists accidentally killed the once known world's oldest living creature, a mollusc, known to be aged as 507 years old.",
       "payload": {
         "correct": true
       },
@@ -649,35 +591,6 @@
       },
       "theme": "nature",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-a65b7cf33a2b",
-      "type": "mcq",
-      "prompt": "Which dog breed is named after a region in Croatia",
-      "payload": {
-        "options": [
-          {
-            "label": "Chihuahua",
-            "correct": false
-          },
-          {
-            "label": "Pekingnese",
-            "correct": false
-          },
-          {
-            "label": "Pomeranian",
-            "correct": false
-          },
-          {
-            "label": "Dalmatian",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -769,31 +682,31 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-b787a8cd14fa",
+      "id": "otdb-bf8d1be8ff4e",
       "type": "mcq",
-      "prompt": "What is Grumpy Cat's real name?",
+      "prompt": "If you planted the seeds of Quercus robur, what would grow?",
       "payload": {
         "options": [
           {
-            "label": "Broccoli",
+            "label": "Flowers",
             "correct": false
           },
           {
-            "label": "Sauce",
-            "correct": false
-          },
-          {
-            "label": "Tardar Sauce",
+            "label": "Trees",
             "correct": true
           },
           {
-            "label": "Minnie",
+            "label": "Grains",
+            "correct": false
+          },
+          {
+            "label": "Vegetables",
             "correct": false
           }
         ]
       },
       "theme": "nature",
-      "difficulty": "facile",
+      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -851,6 +764,35 @@
       "audience": "tous"
     },
     {
+      "id": "otdb-c35cd3600f10",
+      "type": "mcq",
+      "prompt": "\"Gum arabic\" is a natural gum consisting of the hardened sap of which tree species?",
+      "payload": {
+        "options": [
+          {
+            "label": "Palm",
+            "correct": false
+          },
+          {
+            "label": "Ficus",
+            "correct": false
+          },
+          {
+            "label": "Acacia",
+            "correct": true
+          },
+          {
+            "label": "Eucalyptus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
       "id": "otdb-c49d471ae4d9",
       "type": "truefalse",
       "prompt": "The Killer Whale is considered a type of dolphin.",
@@ -859,35 +801,6 @@
       },
       "theme": "nature",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-ce5580ee3490",
-      "type": "mcq",
-      "prompt": "For what reason would a spotted hyena \"laugh\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Exhaustion",
-            "correct": false
-          },
-          {
-            "label": "Nervousness",
-            "correct": true
-          },
-          {
-            "label": "Excitement",
-            "correct": false
-          },
-          {
-            "label": "Aggression",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -1020,31 +933,14 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-e3c4111e567d",
-      "type": "mcq",
-      "prompt": "The dish Fugu, is made from what family of fish?",
+      "id": "otdb-e10828935ccf",
+      "type": "truefalse",
+      "prompt": "Bulls are attracted to the color red.",
       "payload": {
-        "options": [
-          {
-            "label": "Mackerel",
-            "correct": false
-          },
-          {
-            "label": "Salmon",
-            "correct": false
-          },
-          {
-            "label": "Bass",
-            "correct": false
-          },
-          {
-            "label": "Pufferfish",
-            "correct": true
-          }
-        ]
+        "correct": false
       },
       "theme": "nature",
-      "difficulty": "moyen",
+      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -1235,5 +1131,37 @@
       "audience": "tous"
     }
   ],
-  "quizzes": []
+  "quizzes": [
+    {
+      "id": "otdb-quiz-animals",
+      "title": "Animals",
+      "description": "Mammals, birds, reptiles and other creatures.",
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-01edffe301a4",
+        "otdb-172a31fabd90",
+        "otdb-447dd0cd845d",
+        "otdb-55980ed8d8c7",
+        "otdb-57d1aee55981",
+        "otdb-7813e2c100b4",
+        "otdb-7fba7be7a147",
+        "otdb-837d0dc0f5d4",
+        "otdb-8a407d3c5d7a",
+        "otdb-8bcef5e2194b",
+        "otdb-9b7f77cffa4d",
+        "otdb-a368cba3bd4b",
+        "otdb-a4a032f5500e",
+        "otdb-ae920814f32b",
+        "otdb-c01f7758852d",
+        "otdb-c49d471ae4d9",
+        "otdb-d6595968333b",
+        "otdb-dc9019beb624",
+        "otdb-e10828935ccf",
+        "otdb-f0f63deca756"
+      ]
+    }
+  ]
 }

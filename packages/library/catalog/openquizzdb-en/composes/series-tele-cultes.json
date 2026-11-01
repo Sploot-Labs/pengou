@@ -1,0 +1,532 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0093-1-en",
+      "type": "mcq",
+      "prompt": "Who is the main character of the TV series \"Breaking Bad\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saul Goodman",
+            "correct": false
+          },
+          {
+            "label": "Jesse Pinkman",
+            "correct": false
+          },
+          {
+            "label": "Walter White",
+            "correct": true
+          },
+          {
+            "label": "Hank Schrader",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0487-2-en",
+      "type": "mcq",
+      "prompt": "Which friend of Captain Kirk has pointed ears?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sulu",
+            "correct": false
+          },
+          {
+            "label": "Spock",
+            "correct": true
+          },
+          {
+            "label": "Sanders",
+            "correct": false
+          },
+          {
+            "label": "Scotty",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0193-1-en",
+      "type": "mcq",
+      "prompt": "What is the hair color of Miranda in \"Sex and the City\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blonde",
+            "correct": false
+          },
+          {
+            "label": "Black",
+            "correct": false
+          },
+          {
+            "label": "Red",
+            "correct": true
+          },
+          {
+            "label": "Brown",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0481-1-en",
+      "type": "mcq",
+      "prompt": "Which animal is Flipper, in the series of the same name?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bear",
+            "correct": false
+          },
+          {
+            "label": "Dolphin",
+            "correct": true
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          },
+          {
+            "label": "Dog",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0101-1-en",
+      "type": "mcq",
+      "prompt": "Which series follows the adventures of Assane Diop, played by Omar Sy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lupin",
+            "correct": true
+          },
+          {
+            "label": "Sweet Tooth",
+            "correct": false
+          },
+          {
+            "label": "The Circle",
+            "correct": false
+          },
+          {
+            "label": "You",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0475-2-en",
+      "type": "mcq",
+      "prompt": "How can you recognize the aliens in the series \"The Invaders\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "By their little finger",
+            "correct": true
+          },
+          {
+            "label": "By their feet",
+            "correct": false
+          },
+          {
+            "label": "By their speech",
+            "correct": false
+          },
+          {
+            "label": "By their eyes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0285-1-en",
+      "type": "mcq",
+      "prompt": "How many seasons does the TV series \"The X-Files\" have?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ten",
+            "correct": false
+          },
+          {
+            "label": "Nine",
+            "correct": false
+          },
+          {
+            "label": "Eleven",
+            "correct": true
+          },
+          {
+            "label": "Eight",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0027-2-en",
+      "type": "mcq",
+      "prompt": "What is the name of Zorro's sidekick on TV?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bonifacio",
+            "correct": false
+          },
+          {
+            "label": "Bruno",
+            "correct": false
+          },
+          {
+            "label": "Bartolo",
+            "correct": false
+          },
+          {
+            "label": "Bernardo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0093-2-en",
+      "type": "mcq",
+      "prompt": "Which drug does Walter White make and sell?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cocaine",
+            "correct": false
+          },
+          {
+            "label": "Methamphetamine",
+            "correct": true
+          },
+          {
+            "label": "Ketamine",
+            "correct": false
+          },
+          {
+            "label": "Heroin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0187-2-en",
+      "type": "mcq",
+      "prompt": "Which \"Bewitched\" heroine is married to Darrin?",
+      "payload": {
+        "options": [
+          {
+            "label": "Endora",
+            "correct": false
+          },
+          {
+            "label": "Serena",
+            "correct": false
+          },
+          {
+            "label": "Tabitha",
+            "correct": false
+          },
+          {
+            "label": "Samantha",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0481-2-en",
+      "type": "mcq",
+      "prompt": "What breed is Lassie, the famous dog of the TV series?",
+      "payload": {
+        "options": [
+          {
+            "label": "Labrador",
+            "correct": false
+          },
+          {
+            "label": "Collie",
+            "correct": true
+          },
+          {
+            "label": "Golden Retriever",
+            "correct": false
+          },
+          {
+            "label": "German Shepherd",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0193-3-en",
+      "type": "mcq",
+      "prompt": "What is Buffy's family name in \"Buffy the Vampire Slayer\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Summers",
+            "correct": true
+          },
+          {
+            "label": "Sanders",
+            "correct": false
+          },
+          {
+            "label": "Bouwers",
+            "correct": false
+          },
+          {
+            "label": "Rogers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0475-3-en",
+      "type": "mcq",
+      "prompt": "What is the first name of Kojak, the stylish bald police detective?",
+      "payload": {
+        "options": [
+          {
+            "label": "Walter",
+            "correct": false
+          },
+          {
+            "label": "Roger",
+            "correct": false
+          },
+          {
+            "label": "Theo",
+            "correct": true
+          },
+          {
+            "label": "Denis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0327-4-en",
+      "type": "mcq",
+      "prompt": "Who played \"Thirteen\" in the series \"House\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Keira Knightley",
+            "correct": false
+          },
+          {
+            "label": "Olivia Wilde",
+            "correct": true
+          },
+          {
+            "label": "Kaley Cuoco",
+            "correct": false
+          },
+          {
+            "label": "Salma Hayek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0193-2-en",
+      "type": "mcq",
+      "prompt": "For which species was a constructed language created in \"Star Trek\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sylvidres",
+            "correct": false
+          },
+          {
+            "label": "Vulcans",
+            "correct": false
+          },
+          {
+            "label": "Klingons",
+            "correct": true
+          },
+          {
+            "label": "Romulans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0475-1-en",
+      "type": "mcq",
+      "prompt": "Which series tells the adventures of an animal clinic in Africa?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lassie",
+            "correct": false
+          },
+          {
+            "label": "Gentle Ben",
+            "correct": false
+          },
+          {
+            "label": "Woobinda",
+            "correct": false
+          },
+          {
+            "label": "Daktari",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0301-4-en",
+      "type": "mcq",
+      "prompt": "What alter ego did Walter White create for his criminal activities?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gutenberg",
+            "correct": false
+          },
+          {
+            "label": "Heisenberg",
+            "correct": true
+          },
+          {
+            "label": "Einstein",
+            "correct": false
+          },
+          {
+            "label": "Iceberg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0481-3-en",
+      "type": "mcq",
+      "prompt": "What kind of animal is Ben, the hero of \"Gentle Ben\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bear",
+            "correct": true
+          },
+          {
+            "label": "Elephant",
+            "correct": false
+          },
+          {
+            "label": "Panther",
+            "correct": false
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

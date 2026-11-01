@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=382"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0382-3-en",
+      "type": "mcq",
+      "prompt": "Which franchise had the worst win record in the NBA in 2012?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pistons",
+            "correct": false
+          },
+          {
+            "label": "Pacers",
+            "correct": false
+          },
+          {
+            "label": "Bobcats",
+            "correct": true
+          },
+          {
+            "label": "Heat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0382-4-en",
+      "type": "mcq",
+      "prompt": "How much did the Rockets offer Jeremy Lin for 3 years in the NBA?",
+      "payload": {
+        "options": [
+          {
+            "label": "$5 million",
+            "correct": false
+          },
+          {
+            "label": "$15 million",
+            "correct": false
+          },
+          {
+            "label": "$25 million",
+            "correct": true
+          },
+          {
+            "label": "$20 million",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

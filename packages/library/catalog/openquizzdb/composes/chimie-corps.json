@@ -296,35 +296,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0557-3",
-      "type": "mcq",
-      "prompt": "À combien a été mesurée la vitesse record d'un éternuement ?",
-      "payload": {
-        "options": [
-          {
-            "label": "105 km/h",
-            "correct": false
-          },
-          {
-            "label": "145 km/h",
-            "correct": false
-          },
-          {
-            "label": "125 km/h",
-            "correct": false
-          },
-          {
-            "label": "165 km/h",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0557-4",
       "type": "mcq",
       "prompt": "Quelle quantité d'eau peut-on perdre environ par jour en respirant ?",
@@ -490,7 +461,6 @@
         "oqdb-0375-4",
         "oqdb-0557-1",
         "oqdb-0557-2",
-        "oqdb-0557-3",
         "oqdb-0557-4",
         "oqdb-0419-1",
         "oqdb-0419-2",

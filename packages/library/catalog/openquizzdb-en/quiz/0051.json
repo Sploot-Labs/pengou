@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=51"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0051-3-en",
+      "type": "mcq",
+      "prompt": "Which Belgian actress became known to the general public with the film \"Rosetta\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Émilie Dequenne",
+            "correct": true
+          },
+          {
+            "label": "Yolande Moreau",
+            "correct": false
+          },
+          {
+            "label": "Marie Gillain",
+            "correct": false
+          },
+          {
+            "label": "Lubna Azabal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

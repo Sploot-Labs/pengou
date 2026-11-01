@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0315-1",
-      "type": "mcq",
-      "prompt": "Quel instrument à cordes pincées est utilisé en Inde ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Théorbe",
-            "correct": false
-          },
-          {
-            "label": "Banjo",
-            "correct": false
-          },
-          {
-            "label": "Sitar",
-            "correct": true
-          },
-          {
-            "label": "Gling",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0315-2",
-      "type": "mcq",
-      "prompt": "Quel instrument à cordes pincées est souvent utilisé en country ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Balalaïka",
-            "correct": false
-          },
-          {
-            "label": "Bouzouki",
-            "correct": false
-          },
-          {
-            "label": "Basson",
-            "correct": false
-          },
-          {
-            "label": "Banjo",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0315-3",
       "type": "mcq",
       "prompt": "Combien de cordes au minimum dénombre-t-on sur une guitare basse ?",

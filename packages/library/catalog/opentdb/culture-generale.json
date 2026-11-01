@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "otdb-02fb118da74a",
-      "type": "mcq",
-      "prompt": "In DC comics where does the Green Arrow (Oliver Queen) live?",
-      "payload": {
-        "options": [
-          {
-            "label": "Central City",
-            "correct": false
-          },
-          {
-            "label": "Star City",
-            "correct": true
-          },
-          {
-            "label": "Metropolis",
-            "correct": false
-          },
-          {
-            "label": "Gotham City",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-052707e1b8a6",
       "type": "mcq",
       "prompt": "Rolex is a company that specializes in what type of product?",
@@ -60,64 +31,6 @@
       },
       "theme": "culture-generale",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-062e53ea5c98",
-      "type": "mcq",
-      "prompt": "Which iconic Disneyland attraction was closed in 2017 to be remodeled as a \"Guardians of the Galaxy\" themed ride?",
-      "payload": {
-        "options": [
-          {
-            "label": "Peter Pan's Flight",
-            "correct": false
-          },
-          {
-            "label": "Pirates of the Caribbean",
-            "correct": false
-          },
-          {
-            "label": "Twilight Zone Tower of Terror",
-            "correct": true
-          },
-          {
-            "label": "The Haunted Mansion",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-08084f9a24ed",
-      "type": "mcq",
-      "prompt": "What was the name of the WWF professional wrestling tag team made up of the wrestlers Ax and Smash?",
-      "payload": {
-        "options": [
-          {
-            "label": "The British Bulldogs",
-            "correct": false
-          },
-          {
-            "label": "The Bushwhackers",
-            "correct": false
-          },
-          {
-            "label": "The Dream Team",
-            "correct": false
-          },
-          {
-            "label": "Demolition",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -192,35 +105,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-156bcc53194d",
-      "type": "mcq",
-      "prompt": "What fruit is a traditional ingredient of a Black Forest Gateau?",
-      "payload": {
-        "options": [
-          {
-            "label": "Apricots",
-            "correct": false
-          },
-          {
-            "label": "Raisins",
-            "correct": false
-          },
-          {
-            "label": "Cherries",
-            "correct": true
-          },
-          {
-            "label": "Apples",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-168a9d46e217",
       "type": "mcq",
       "prompt": "Who was the 1st President of Mexico?",
@@ -250,18 +134,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-16c5ebcfb938",
-      "type": "truefalse",
-      "prompt": "Only a small percentage of the world's population is lactose intolerant.",
-      "payload": {
-        "correct": false
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-1abcbd8e8ab9",
       "type": "mcq",
       "prompt": "What is the most frequently used letter in the english alphabet?",
@@ -287,76 +159,6 @@
       },
       "theme": "culture-generale",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-1e0d6a4763b8",
-      "type": "truefalse",
-      "prompt": "Dihydrogen Monoxide was banned due to health risks after being discovered in 1983 inside swimming pools and drinking water.",
-      "payload": {
-        "correct": false
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-1e69970acf18",
-      "type": "mcq",
-      "prompt": "When did the website \"Facebook\" launch?",
-      "payload": {
-        "options": [
-          {
-            "label": "2006",
-            "correct": false
-          },
-          {
-            "label": "2005",
-            "correct": false
-          },
-          {
-            "label": "2004",
-            "correct": true
-          },
-          {
-            "label": "2003",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-20357285a49a",
-      "type": "mcq",
-      "prompt": "Which famed architect, who died in 2019 aged 102, designed the glass pyramid at the Louvre museum in Paris?",
-      "payload": {
-        "options": [
-          {
-            "label": "Wang Shu",
-            "correct": false
-          },
-          {
-            "label": "Pascale Guédot",
-            "correct": false
-          },
-          {
-            "label": "I. M. Pei",
-            "correct": true
-          },
-          {
-            "label": "Frank Gehry",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -402,35 +204,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-290493c71112",
-      "type": "mcq",
-      "prompt": "In Half-Life, what is the name of the alien that attaches to heads?",
-      "payload": {
-        "options": [
-          {
-            "label": "Vortigaunt",
-            "correct": false
-          },
-          {
-            "label": "Bullsquid",
-            "correct": false
-          },
-          {
-            "label": "Facehugger",
-            "correct": false
-          },
-          {
-            "label": "Headcrab",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-2ad26c2bcad9",
       "type": "mcq",
       "prompt": "Five dollars is worth how many nickels?",
@@ -456,59 +229,6 @@
       },
       "theme": "culture-generale",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-2d49b96a34f1",
-      "type": "mcq",
-      "prompt": "In \"Resident Evil 3\", how many inventory slots does Jill have at the start of the game?",
-      "payload": {
-        "options": [
-          {
-            "label": "8",
-            "correct": true
-          },
-          {
-            "label": "12",
-            "correct": false
-          },
-          {
-            "label": "10",
-            "correct": false
-          },
-          {
-            "label": "6",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-31a3c42d587e",
-      "type": "truefalse",
-      "prompt": "Cucumbers are usually more than 90% water.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-32080e238f7a",
-      "type": "truefalse",
-      "prompt": "The scientific name for the Southern Lights is Aurora Australis?",
-      "payload": {
-        "correct": true
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -542,64 +262,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-32dfe9ed2fef",
-      "type": "mcq",
-      "prompt": "What nation produces roughly 40% of the world’s vanilla?",
-      "payload": {
-        "options": [
-          {
-            "label": "China",
-            "correct": false
-          },
-          {
-            "label": "Mexico",
-            "correct": false
-          },
-          {
-            "label": "Madagascar",
-            "correct": true
-          },
-          {
-            "label": "Indonesia",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-3404f5b69fbd",
-      "type": "mcq",
-      "prompt": "What is the name of Poland in Polish?",
-      "payload": {
-        "options": [
-          {
-            "label": "Pupcia",
-            "correct": false
-          },
-          {
-            "label": "Póland",
-            "correct": false
-          },
-          {
-            "label": "Polszka",
-            "correct": false
-          },
-          {
-            "label": "Polska",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-343661d9214f",
       "type": "truefalse",
       "prompt": "The term \"Spam\" came before the food product \"Spam\".",
@@ -608,35 +270,6 @@
       },
       "theme": "culture-generale",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-35a8f0d39774",
-      "type": "mcq",
-      "prompt": "Which company did Valve cooperate with in the creation of the Vive?",
-      "payload": {
-        "options": [
-          {
-            "label": "Razer",
-            "correct": false
-          },
-          {
-            "label": "HTC",
-            "correct": true
-          },
-          {
-            "label": "Oculus",
-            "correct": false
-          },
-          {
-            "label": "Google",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -689,64 +322,6 @@
           },
           {
             "label": "Turkic",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-3e245f8a76ed",
-      "type": "mcq",
-      "prompt": "Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?",
-      "payload": {
-        "options": [
-          {
-            "label": "Bill Gates",
-            "correct": false
-          },
-          {
-            "label": "Richard Branson",
-            "correct": true
-          },
-          {
-            "label": "Alan Sugar",
-            "correct": false
-          },
-          {
-            "label": "Donald Trump",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-4465e986ff44",
-      "type": "mcq",
-      "prompt": "In \"Battle Cats\", what is Moneko / MISS Moneko's critical percentage rate?",
-      "payload": {
-        "options": [
-          {
-            "label": "25%",
-            "correct": false
-          },
-          {
-            "label": "20%",
-            "correct": false
-          },
-          {
-            "label": "10%",
-            "correct": false
-          },
-          {
-            "label": "15%",
             "correct": true
           }
         ]
@@ -815,151 +390,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-4aca7400693c",
-      "type": "mcq",
-      "prompt": "What company developed the vocaloid Hatsune Miku?",
-      "payload": {
-        "options": [
-          {
-            "label": "Sony",
-            "correct": false
-          },
-          {
-            "label": "Sega",
-            "correct": false
-          },
-          {
-            "label": "Yamaha Corporation",
-            "correct": false
-          },
-          {
-            "label": "Crypton Future Media",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-4f33b3195ec7",
-      "type": "mcq",
-      "prompt": "In which fast food chain can you order a Jamocha Shake?",
-      "payload": {
-        "options": [
-          {
-            "label": "McDonald's",
-            "correct": false
-          },
-          {
-            "label": "Wendy's",
-            "correct": false
-          },
-          {
-            "label": "Arby's",
-            "correct": true
-          },
-          {
-            "label": "Burger King",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-4faaa6a3d415",
-      "type": "mcq",
-      "prompt": "What is the Spanish word for \"donkey\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Caballo",
-            "correct": false
-          },
-          {
-            "label": "Perro",
-            "correct": false
-          },
-          {
-            "label": "Toro",
-            "correct": false
-          },
-          {
-            "label": "Burro",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-4fab33f38e71",
-      "type": "mcq",
-      "prompt": "In the MMO RPG \"Realm of the Mad God\", what dungeon is widely considered to be the most difficult?",
-      "payload": {
-        "options": [
-          {
-            "label": "Snake Pit",
-            "correct": false
-          },
-          {
-            "label": "The Tomb of the Acient's",
-            "correct": false
-          },
-          {
-            "label": "The Puppet Master's Theater",
-            "correct": false
-          },
-          {
-            "label": "The Shatter's",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-5066a9e5567c",
-      "type": "mcq",
-      "prompt": "Out of these four buildings, which one is the tallest, with a height of 1,250 ft (381 m)?",
-      "payload": {
-        "options": [
-          {
-            "label": "Empire State Building, United States",
-            "correct": true
-          },
-          {
-            "label": "Federation Tower, Russia",
-            "correct": false
-          },
-          {
-            "label": "Bank of China Tower, Hong Kong",
-            "correct": false
-          },
-          {
-            "label": "Gevora Hotal, United Arab Emirates",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-50988c1d35c8",
       "type": "mcq",
       "prompt": "What was the destination of the missing flight MH370?",
@@ -1018,18 +448,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-530f585afb05",
-      "type": "truefalse",
-      "prompt": "The disease cancer in itself is not contagious.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-54be1d55d00d",
       "type": "mcq",
       "prompt": "What is the French word for \"fish\"?",
@@ -1055,35 +473,6 @@
       },
       "theme": "culture-generale",
       "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-581bc67061a6",
-      "type": "mcq",
-      "prompt": "Which of the following is NOT one of Aesop's fables?",
-      "payload": {
-        "options": [
-          {
-            "label": "The Fox and the Grapes",
-            "correct": false
-          },
-          {
-            "label": "The Frog and the Ox",
-            "correct": false
-          },
-          {
-            "label": "The Fox and the Hound",
-            "correct": true
-          },
-          {
-            "label": "The Tortoise and the Hare",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -1142,35 +531,6 @@
       },
       "theme": "culture-generale",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-5bd29c83b392",
-      "type": "mcq",
-      "prompt": "Which of these Marvel games was released on the Playstation 2?",
-      "payload": {
-        "options": [
-          {
-            "label": "Silver Surfer",
-            "correct": false
-          },
-          {
-            "label": "Wolverine: Adamantium Rage",
-            "correct": false
-          },
-          {
-            "label": "Howard the Duck",
-            "correct": false
-          },
-          {
-            "label": "Spider-Man 2",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -1320,35 +680,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-7c50e0e0f244",
-      "type": "mcq",
-      "prompt": "What is the name given to Indian food cooked over charcoal in a clay oven?",
-      "payload": {
-        "options": [
-          {
-            "label": "Biryani",
-            "correct": false
-          },
-          {
-            "label": "Pani puri",
-            "correct": false
-          },
-          {
-            "label": "Tandoori",
-            "correct": true
-          },
-          {
-            "label": "Tiki masala",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-8845bc35f544",
       "type": "mcq",
       "prompt": "In a 1994 CBS interview, Microsoft co-founder Bill Gates performed what unusual trick on camera?",
@@ -1368,64 +699,6 @@
           },
           {
             "label": "Standing on his head",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-884950d93345",
-      "type": "mcq",
-      "prompt": "In \"Katamari Damacy\", you control a character known as:",
-      "payload": {
-        "options": [
-          {
-            "label": "The Prince",
-            "correct": true
-          },
-          {
-            "label": "Foomin",
-            "correct": false
-          },
-          {
-            "label": "Fujio",
-            "correct": false
-          },
-          {
-            "label": "Ichigo",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-89099f00bba7",
-      "type": "mcq",
-      "prompt": "Where did the pineapple plant originate?",
-      "payload": {
-        "options": [
-          {
-            "label": "South America",
-            "correct": true
-          },
-          {
-            "label": "Hawaii",
-            "correct": false
-          },
-          {
-            "label": "Asia",
-            "correct": false
-          },
-          {
-            "label": "Europe",
             "correct": false
           }
         ]
@@ -1465,93 +738,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-89a263bb2a6a",
-      "type": "mcq",
-      "prompt": "On a dartboard, what number is directly opposite No. 1?",
-      "payload": {
-        "options": [
-          {
-            "label": "15",
-            "correct": false
-          },
-          {
-            "label": "20",
-            "correct": false
-          },
-          {
-            "label": "12",
-            "correct": false
-          },
-          {
-            "label": "19",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-8e3d4fd4fbee",
-      "type": "mcq",
-      "prompt": "The Fields Medal, one of the most sought after awards in mathematics, is awarded every how many years?",
-      "payload": {
-        "options": [
-          {
-            "label": "3",
-            "correct": false
-          },
-          {
-            "label": "6",
-            "correct": false
-          },
-          {
-            "label": "5",
-            "correct": false
-          },
-          {
-            "label": "4",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-92eb5125f007",
-      "type": "mcq",
-      "prompt": "What style of beer will typically have a higher than average hop content?",
-      "payload": {
-        "options": [
-          {
-            "label": "India Pale Ale",
-            "correct": true
-          },
-          {
-            "label": "Stout",
-            "correct": false
-          },
-          {
-            "label": "Extra Special Bitter",
-            "correct": false
-          },
-          {
-            "label": "Scotch Ale",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-94f99d7b3982",
       "type": "mcq",
       "prompt": "All Souls and Merton are constituent colleges of what university?",
@@ -1577,93 +763,6 @@
       },
       "theme": "culture-generale",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-9618c355b1f9",
-      "type": "mcq",
-      "prompt": "Which canal connects the Mediterranean Sea with the Red Sea?",
-      "payload": {
-        "options": [
-          {
-            "label": "Qaraqum Canal",
-            "correct": false
-          },
-          {
-            "label": "Suez Canal",
-            "correct": true
-          },
-          {
-            "label": "Sinai Canal",
-            "correct": false
-          },
-          {
-            "label": "Panama Canal",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-973b51a3c544",
-      "type": "mcq",
-      "prompt": "Which church's interior in Vatican City was designed in 1503 by renaissance architects including Bramante, Michelangelo and Bernini?",
-      "payload": {
-        "options": [
-          {
-            "label": "The Duomo of Florence",
-            "correct": false
-          },
-          {
-            "label": "Catania Cathedral",
-            "correct": false
-          },
-          {
-            "label": "St. Mark’s Basilica",
-            "correct": false
-          },
-          {
-            "label": "St. Peter's Basilica",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-9c4e2c92d1b4",
-      "type": "mcq",
-      "prompt": "Trypophobia is the fear of",
-      "payload": {
-        "options": [
-          {
-            "label": "groups of holes",
-            "correct": true
-          },
-          {
-            "label": "eating too much",
-            "correct": false
-          },
-          {
-            "label": "public speaking",
-            "correct": false
-          },
-          {
-            "label": "swimming in deep water",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
       "language": "en",
       "audience": "tous"
     },
@@ -1697,72 +796,31 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-a64dba54c749",
+      "id": "otdb-ac65945bfb3e",
       "type": "mcq",
-      "prompt": "What nuts are used in the production of marzipan?",
+      "prompt": "In the Magic: The Gathering universe, the Fallen Empires expansion takes place on which continent?",
       "payload": {
         "options": [
           {
-            "label": "Peanuts",
+            "label": "Otaria",
             "correct": false
           },
           {
-            "label": "Walnuts",
+            "label": "Terisiare",
             "correct": false
           },
           {
-            "label": "Pistachios",
-            "correct": false
-          },
-          {
-            "label": "Almonds",
+            "label": "Sarpadia",
             "correct": true
+          },
+          {
+            "label": "Shiv",
+            "correct": false
           }
         ]
       },
       "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-abcd50db1083",
-      "type": "mcq",
-      "prompt": "What is the largest living species of penguin?",
-      "payload": {
-        "options": [
-          {
-            "label": "King",
-            "correct": false
-          },
-          {
-            "label": "Gentoo",
-            "correct": false
-          },
-          {
-            "label": "Adele",
-            "correct": false
-          },
-          {
-            "label": "Emperor",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-ac174548f3b6",
-      "type": "truefalse",
-      "prompt": "An eggplant is a vegetable.",
-      "payload": {
-        "correct": false
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
+      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -1789,59 +847,6 @@
             "correct": true
           }
         ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-af9b61f11602",
-      "type": "truefalse",
-      "prompt": "Instant mashed potatoes were invented by Canadian Edward Asselbergs in 1962.",
-      "payload": {
-        "correct": true
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-b495fe142388",
-      "type": "mcq",
-      "prompt": "The likeness of which president is featured on the rare $2 bill of USA currency?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ulysses Grant",
-            "correct": false
-          },
-          {
-            "label": "Martin Van Buren",
-            "correct": false
-          },
-          {
-            "label": "Thomas Jefferson",
-            "correct": true
-          },
-          {
-            "label": "John Quincy Adams",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-b50bd693139c",
-      "type": "truefalse",
-      "prompt": "The Sun rises from the North.",
-      "payload": {
-        "correct": false
       },
       "theme": "culture-generale",
       "difficulty": "facile",
@@ -1907,31 +912,31 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-bc1879be96bc",
+      "id": "otdb-bd2128f8d4af",
       "type": "mcq",
-      "prompt": "Who invented the first ever chocolate bar, in 1847?",
+      "prompt": "The ontological argument for the proof of God's existence is first attributed to whom?",
       "payload": {
         "options": [
           {
-            "label": "John Cadbury",
+            "label": "Immanuel Kant",
             "correct": false
           },
           {
-            "label": "Joseph Fry",
+            "label": "René Descartes",
+            "correct": false
+          },
+          {
+            "label": "Anselm of Canterbury",
             "correct": true
           },
           {
-            "label": "John Tyler",
-            "correct": false
-          },
-          {
-            "label": "Andrew Johnson",
+            "label": "Aristotle",
             "correct": false
           }
         ]
       },
       "theme": "culture-generale",
-      "difficulty": "facile",
+      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -1941,35 +946,6 @@
       "prompt": "Stagecoach owned \"South West Trains\" before losing the rights to FirstGroup and MTR in March of 2017.",
       "payload": {
         "correct": true
-      },
-      "theme": "culture-generale",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-bf8d1be8ff4e",
-      "type": "mcq",
-      "prompt": "If you planted the seeds of Quercus robur, what would grow?",
-      "payload": {
-        "options": [
-          {
-            "label": "Flowers",
-            "correct": false
-          },
-          {
-            "label": "Trees",
-            "correct": true
-          },
-          {
-            "label": "Grains",
-            "correct": false
-          },
-          {
-            "label": "Vegetables",
-            "correct": false
-          }
-        ]
       },
       "theme": "culture-generale",
       "difficulty": "difficile",
@@ -2018,105 +994,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-c35cd3600f10",
-      "type": "mcq",
-      "prompt": "\"Gum arabic\" is a natural gum consisting of the hardened sap of which tree species?",
-      "payload": {
-        "options": [
-          {
-            "label": "Palm",
-            "correct": false
-          },
-          {
-            "label": "Ficus",
-            "correct": false
-          },
-          {
-            "label": "Acacia",
-            "correct": true
-          },
-          {
-            "label": "Eucalyptus",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-c522ca61af73",
-      "type": "mcq",
-      "prompt": "Which country developed the AK-47 assault rifle?",
-      "payload": {
-        "options": [
-          {
-            "label": "Soviet Union",
-            "correct": true
-          },
-          {
-            "label": "Iran",
-            "correct": false
-          },
-          {
-            "label": "Poland",
-            "correct": false
-          },
-          {
-            "label": "Israel",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-ca2ff98c40ab",
-      "type": "truefalse",
-      "prompt": "Nutella is produced by the German company Ferrero.",
-      "payload": {
-        "correct": false
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-ca9bec94ddd3",
-      "type": "mcq",
-      "prompt": "How would one say goodbye in Spanish?",
-      "payload": {
-        "options": [
-          {
-            "label": "Adiós",
-            "correct": true
-          },
-          {
-            "label": "Salir",
-            "correct": false
-          },
-          {
-            "label": "Au Revoir",
-            "correct": false
-          },
-          {
-            "label": "Hola",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-cfd2d4d720d5",
       "type": "mcq",
       "prompt": "What is the currency of Poland?",
@@ -2142,64 +1019,6 @@
       },
       "theme": "culture-generale",
       "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-d14e44231eac",
-      "type": "mcq",
-      "prompt": "What was the nickname given to the Hughes H-4 Hercules, a heavy transport flying boat which achieved flight in 1947?",
-      "payload": {
-        "options": [
-          {
-            "label": "Trojan Horse",
-            "correct": false
-          },
-          {
-            "label": "Spruce Goose",
-            "correct": true
-          },
-          {
-            "label": "Fat Man",
-            "correct": false
-          },
-          {
-            "label": "Noah's Ark",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-d582c04bf2cc",
-      "type": "mcq",
-      "prompt": "Which of these anatomical terms refers to the tail end of the creature?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ventral",
-            "correct": false
-          },
-          {
-            "label": "Caudal",
-            "correct": true
-          },
-          {
-            "label": "Proximal",
-            "correct": false
-          },
-          {
-            "label": "Coronal",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "difficile",
       "language": "en",
       "audience": "tous"
     },
@@ -2233,47 +1052,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-df5eef8b4ccc",
-      "type": "mcq",
-      "prompt": "What step in cellular respiration forms ATP?",
-      "payload": {
-        "options": [
-          {
-            "label": "Glycolysis",
-            "correct": false
-          },
-          {
-            "label": "Oxidative Phosphorylation",
-            "correct": true
-          },
-          {
-            "label": "Pyruvate Oxidation",
-            "correct": false
-          },
-          {
-            "label": "Calvin Cycle",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-e10828935ccf",
-      "type": "truefalse",
-      "prompt": "Bulls are attracted to the color red.",
-      "payload": {
-        "correct": false
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-e3dafe0ae306",
       "type": "mcq",
       "prompt": "How many letters are there in the English alphabet?",
@@ -2303,64 +1081,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-e7c00ba0d9e9",
-      "type": "mcq",
-      "prompt": "What is the romanized Russian word for \"winter\"?",
-      "payload": {
-        "options": [
-          {
-            "label": "Vesna",
-            "correct": false
-          },
-          {
-            "label": "Osen'",
-            "correct": false
-          },
-          {
-            "label": "Leto",
-            "correct": false
-          },
-          {
-            "label": "Zima",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-e8d26e093a84",
-      "type": "mcq",
-      "prompt": "When was the Declaration of Independence approved by the Second Continental Congress?",
-      "payload": {
-        "options": [
-          {
-            "label": "June 4, 1776",
-            "correct": false
-          },
-          {
-            "label": "July 2, 1776",
-            "correct": false
-          },
-          {
-            "label": "July 4, 1776",
-            "correct": true
-          },
-          {
-            "label": "May 4, 1776",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-eae72d4f6e65",
       "type": "mcq",
       "prompt": "Nephelococcygia is the practice of doing what?",
@@ -2386,64 +1106,6 @@
       },
       "theme": "culture-generale",
       "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-eb03cda2a252",
-      "type": "mcq",
-      "prompt": "Bob and Mike Bryan were well known brothers in which sport?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tennis",
-            "correct": true
-          },
-          {
-            "label": "Baseball",
-            "correct": false
-          },
-          {
-            "label": "Basketball",
-            "correct": false
-          },
-          {
-            "label": "Football",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-eb53a1e7d8c6",
-      "type": "mcq",
-      "prompt": "What alcoholic drink is mainly made from juniper berries?",
-      "payload": {
-        "options": [
-          {
-            "label": "Vodka",
-            "correct": false
-          },
-          {
-            "label": "Tequila",
-            "correct": false
-          },
-          {
-            "label": "Rum",
-            "correct": false
-          },
-          {
-            "label": "Gin",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
       "language": "en",
       "audience": "tous"
     },
@@ -2489,93 +1151,6 @@
       "audience": "tous"
     },
     {
-      "id": "otdb-f0534ac3f64b",
-      "type": "mcq",
-      "prompt": "What machine element is located in the center of fidget spinners?",
-      "payload": {
-        "options": [
-          {
-            "label": "Axles",
-            "correct": false
-          },
-          {
-            "label": "Gears",
-            "correct": false
-          },
-          {
-            "label": "Bearings",
-            "correct": true
-          },
-          {
-            "label": "Belts",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-f076937531c5",
-      "type": "mcq",
-      "prompt": "What are the three starter Pokemon available in Pokemon Black and White?",
-      "payload": {
-        "options": [
-          {
-            "label": "Chespin, Tepig, Froakie",
-            "correct": false
-          },
-          {
-            "label": "Snivy, Fennekin, Froakie",
-            "correct": false
-          },
-          {
-            "label": "Snivy, Tepig, Oshawott",
-            "correct": true
-          },
-          {
-            "label": "Chespin, Fennekin, Oshawott",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
-      "id": "otdb-f0bf2d93021c",
-      "type": "mcq",
-      "prompt": "What is the name of the currency used in Ethiopia?",
-      "payload": {
-        "options": [
-          {
-            "label": "Dirham",
-            "correct": false
-          },
-          {
-            "label": "Birr",
-            "correct": true
-          },
-          {
-            "label": "U.S. Dollar",
-            "correct": false
-          },
-          {
-            "label": "Rand",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "difficile",
-      "language": "en",
-      "audience": "tous"
-    },
-    {
       "id": "otdb-fcfe7eb0a77e",
       "type": "mcq",
       "prompt": "What is the shape of the toy invented by Hungarian professor Ernő Rubik?",
@@ -2603,62 +1178,38 @@
       "difficulty": "facile",
       "language": "en",
       "audience": "tous"
-    },
-    {
-      "id": "otdb-fd4c3f667f1c",
-      "type": "mcq",
-      "prompt": "Which is the second largest native language spoken in Spain by numbers of speakers?",
-      "payload": {
-        "options": [
-          {
-            "label": "French",
-            "correct": false
-          },
-          {
-            "label": "Portuguese",
-            "correct": false
-          },
-          {
-            "label": "Catalan",
-            "correct": true
-          },
-          {
-            "label": "Spanish",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "facile",
-      "language": "en",
-      "audience": "tous"
     }
   ],
   "quizzes": [
     {
       "id": "otdb-quiz-general-knowledge",
       "title": "General knowledge",
-      "description": "Questions from the Open Trivia Database (opentdb.com), licensed under CC BY-SA 4.0.",
+      "description": "Everyday facts, languages and currencies.",
       "theme": "culture-generale",
-      "difficulty": "facile",
+      "difficulty": "moyen",
       "language": "en",
       "audience": "tous",
       "questionIds": [
-        "otdb-02fb118da74a",
-        "otdb-08084f9a24ed",
+        "otdb-052707e1b8a6",
         "otdb-0e4e4043cb3c",
-        "otdb-156bcc53194d",
-        "otdb-168a9d46e217",
-        "otdb-1abcbd8e8ab9",
-        "otdb-1e0d6a4763b8",
+        "otdb-0ff39d4f19b6",
+        "otdb-20d9976c9f51",
         "otdb-230b8ef58364",
-        "otdb-290493c71112",
         "otdb-2ad26c2bcad9",
         "otdb-3291e904c108",
-        "otdb-3404f5b69fbd",
-        "otdb-35a8f0d39774",
-        "otdb-3e245f8a76ed",
-        "otdb-45be09803d4e"
+        "otdb-343661d9214f",
+        "otdb-45be09803d4e",
+        "otdb-463875432d3a",
+        "otdb-52f1cb662555",
+        "otdb-6b98a9b2b279",
+        "otdb-76e3b6a86b9a",
+        "otdb-94f99d7b3982",
+        "otdb-aed2f8b8e80f",
+        "otdb-b59ce2c960ab",
+        "otdb-c0de5e707233",
+        "otdb-cfd2d4d720d5",
+        "otdb-db863aa53f9b",
+        "otdb-fcfe7eb0a77e"
       ]
     }
   ]

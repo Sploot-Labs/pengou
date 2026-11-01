@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0545-2",
-      "type": "mcq",
-      "prompt": "De quelle manière le lynx a-t-il l'habitude de marquer son territoire ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Excréments",
-            "correct": false
-          },
-          {
-            "label": "Éraflures",
-            "correct": true
-          },
-          {
-            "label": "Souris mortes",
-            "correct": false
-          },
-          {
-            "label": "Poils",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0545-3",
       "type": "mcq",
       "prompt": "Taillé pour la course, jusqu'à quelle vitesse un guépard peut-il courir ?",
@@ -452,7 +423,6 @@
       "audience": "tous",
       "questionIds": [
         "oqdb-0545-1",
-        "oqdb-0545-2",
         "oqdb-0545-3",
         "oqdb-0545-4",
         "oqdb-0383-1",

@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0555-1",
-      "type": "mcq",
-      "prompt": "Dans « L'Âge de glace », qu'est-ce qui échappe à l'écureuil Scrat ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Un gland",
-            "correct": true
-          },
-          {
-            "label": "Une bille",
-            "correct": false
-          },
-          {
-            "label": "Un os",
-            "correct": false
-          },
-          {
-            "label": "Une pierre",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0555-2",
       "type": "mcq",
       "prompt": "Comment se nomme l'orque à sauver dans une saga populaire ?",
@@ -58,36 +29,7 @@
           }
         ]
       },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0555-3",
-      "type": "mcq",
-      "prompt": "Qui le chat prénommé Tom poursuit-il sans cesse ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Joshua",
-            "correct": false
-          },
-          {
-            "label": "Jason",
-            "correct": false
-          },
-          {
-            "label": "James",
-            "correct": false
-          },
-          {
-            "label": "Jerry",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "nature",
+      "theme": "cinema",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -116,7 +58,7 @@
           }
         ]
       },
-      "theme": "nature",
+      "theme": "cinema",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"

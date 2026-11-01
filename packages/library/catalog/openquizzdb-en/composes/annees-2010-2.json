@@ -1,0 +1,474 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, plusieurs auteurs (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0485-1-en",
+      "type": "mcq",
+      "prompt": "Which medal did Maria Sharapova win at the 2012 Olympics?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bronze",
+            "correct": false
+          },
+          {
+            "label": "None",
+            "correct": false
+          },
+          {
+            "label": "Gold",
+            "correct": false
+          },
+          {
+            "label": "Silver",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0366-3-en",
+      "type": "mcq",
+      "prompt": "Who left OpenAI in 2018 after a leadership dispute?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ilya Sutskever",
+            "correct": false
+          },
+          {
+            "label": "Elon Musk",
+            "correct": true
+          },
+          {
+            "label": "Greg Brockman",
+            "correct": false
+          },
+          {
+            "label": "Sam Altman",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0327-3-en",
+      "type": "mcq",
+      "prompt": "Which dark-haired actress stars in \"The Vampire Diaries\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nina Dobrev",
+            "correct": true
+          },
+          {
+            "label": "Eva Green",
+            "correct": false
+          },
+          {
+            "label": "Julianne Moore",
+            "correct": false
+          },
+          {
+            "label": "Kristen Stewart",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0291-1-en",
+      "type": "mcq",
+      "prompt": "Which young Viking is the hero of \"How to Train Your Dragon\" (2010)?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hiccup",
+            "correct": true
+          },
+          {
+            "label": "Hector",
+            "correct": false
+          },
+          {
+            "label": "Harry",
+            "correct": false
+          },
+          {
+            "label": "Victor",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0129-2-en",
+      "type": "mcq",
+      "prompt": "Which weapon does Michonne fight with in \"The Walking Dead\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Axe",
+            "correct": false
+          },
+          {
+            "label": "Crossbow",
+            "correct": false
+          },
+          {
+            "label": "Machete",
+            "correct": false
+          },
+          {
+            "label": "Katana",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0103-3-en",
+      "type": "mcq",
+      "prompt": "Despite his mean look, what is the big bear in \"Toy Story 3\" scented with?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chocolate",
+            "correct": false
+          },
+          {
+            "label": "Honey",
+            "correct": false
+          },
+          {
+            "label": "Strawberry",
+            "correct": true
+          },
+          {
+            "label": "Vanilla",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0322-3-en",
+      "type": "mcq",
+      "prompt": "Who was named \"Sexiest Man Alive\" for 2014 by \"People\" magazine?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hugh Jackman",
+            "correct": false
+          },
+          {
+            "label": "Brad Pitt",
+            "correct": false
+          },
+          {
+            "label": "Tom Cruise",
+            "correct": false
+          },
+          {
+            "label": "Chris Hemsworth",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0325-2-en",
+      "type": "mcq",
+      "prompt": "How does Ned Stark die in \"Game of Thrones\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Burned alive",
+            "correct": false
+          },
+          {
+            "label": "Stabbed",
+            "correct": false
+          },
+          {
+            "label": "Hanged",
+            "correct": false
+          },
+          {
+            "label": "Beheaded",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0485-4-en",
+      "type": "mcq",
+      "prompt": "How much did Maria Sharapova sign with Nike for in 2010?",
+      "payload": {
+        "options": [
+          {
+            "label": "$10 million",
+            "correct": false
+          },
+          {
+            "label": "$50 million",
+            "correct": false
+          },
+          {
+            "label": "$30 million",
+            "correct": false
+          },
+          {
+            "label": "$70 million",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0299-1-en",
+      "type": "mcq",
+      "prompt": "In which James Bond film did Léa Seydoux appear?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spectre",
+            "correct": true
+          },
+          {
+            "label": "Licence to Kill",
+            "correct": false
+          },
+          {
+            "label": "Casino Royale",
+            "correct": false
+          },
+          {
+            "label": "Skyfall",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0306-4-en",
+      "type": "mcq",
+      "prompt": "For which band did Bruce Willis appear in the \"Stylo\" video?",
+      "payload": {
+        "options": [
+          {
+            "label": "Terranova",
+            "correct": false
+          },
+          {
+            "label": "Gorillaz",
+            "correct": true
+          },
+          {
+            "label": "Morcheeba",
+            "correct": false
+          },
+          {
+            "label": "Dubphonic",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0281-3-en",
+      "type": "mcq",
+      "prompt": "Which film tells the story of a slave turned bounty hunter?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kill Bill",
+            "correct": false
+          },
+          {
+            "label": "Django Unchained",
+            "correct": true
+          },
+          {
+            "label": "The Revenant",
+            "correct": false
+          },
+          {
+            "label": "Pulp Fiction",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0321-3-en",
+      "type": "mcq",
+      "prompt": "What does the Night's Watch protect in \"Game of Thrones\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "The garden",
+            "correct": false
+          },
+          {
+            "label": "The border",
+            "correct": false
+          },
+          {
+            "label": "The Wall",
+            "correct": true
+          },
+          {
+            "label": "The queen",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0325-3-en",
+      "type": "mcq",
+      "prompt": "What is the name of Joffrey's fiancée in \"Game of Thrones\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Daenerys",
+            "correct": false
+          },
+          {
+            "label": "Arya",
+            "correct": false
+          },
+          {
+            "label": "Catelyn",
+            "correct": false
+          },
+          {
+            "label": "Sansa",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0197-3-en",
+      "type": "mcq",
+      "prompt": "In which Scorsese film does DiCaprio play Edward Daniels?",
+      "payload": {
+        "options": [
+          {
+            "label": "Casino",
+            "correct": false
+          },
+          {
+            "label": "Shutter Island",
+            "correct": true
+          },
+          {
+            "label": "The Aviator",
+            "correct": false
+          },
+          {
+            "label": "Hugo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0333-4-en",
+      "type": "mcq",
+      "prompt": "How much did Facebook pay to buy WhatsApp?",
+      "payload": {
+        "options": [
+          {
+            "label": "$650,000",
+            "correct": false
+          },
+          {
+            "label": "$19 billion",
+            "correct": true
+          },
+          {
+            "label": "$220 million",
+            "correct": false
+          },
+          {
+            "label": "$850 million",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

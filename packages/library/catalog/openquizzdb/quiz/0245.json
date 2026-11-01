@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0245-1",
-      "type": "mcq",
-      "prompt": "Quelle est la capitale de la Finlande ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Copenhague",
-            "correct": false
-          },
-          {
-            "label": "Oslo",
-            "correct": false
-          },
-          {
-            "label": "Helsinki",
-            "correct": true
-          },
-          {
-            "label": "Stockholm",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0245-2",
       "type": "mcq",
       "prompt": "Quelle langue est principalement parlée en Finlande ?",
@@ -84,35 +55,6 @@
           {
             "label": "Lion",
             "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0245-4",
-      "type": "mcq",
-      "prompt": "Avec quel pays la Finlande partage-t-elle sa plus grande frontière ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Estonie",
-            "correct": false
-          },
-          {
-            "label": "Suède",
-            "correct": false
-          },
-          {
-            "label": "Norvège",
-            "correct": false
-          },
-          {
-            "label": "Russie",
-            "correct": true
           }
         ]
       },

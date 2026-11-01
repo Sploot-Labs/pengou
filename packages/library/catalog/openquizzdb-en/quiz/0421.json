@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=421"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0421-1-en",
+      "type": "mcq",
+      "prompt": "In which vast ocean is Japan located?",
+      "payload": {
+        "options": [
+          {
+            "label": "Arctic",
+            "correct": false
+          },
+          {
+            "label": "Indian",
+            "correct": false
+          },
+          {
+            "label": "Pacific",
+            "correct": true
+          },
+          {
+            "label": "Atlantic",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0421-3-en",
+      "type": "mcq",
+      "prompt": "What percentage of the world's active volcanoes is in Japan?",
+      "payload": {
+        "options": [
+          {
+            "label": "20%",
+            "correct": false
+          },
+          {
+            "label": "10%",
+            "correct": true
+          },
+          {
+            "label": "30%",
+            "correct": false
+          },
+          {
+            "label": "40%",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0421-4-en",
+      "type": "mcq",
+      "prompt": "Which is the largest of Japan's islands, home to Tokyo?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shikoku",
+            "correct": false
+          },
+          {
+            "label": "Hokkaido",
+            "correct": false
+          },
+          {
+            "label": "Honshu",
+            "correct": true
+          },
+          {
+            "label": "Kyushu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0163-3",
-      "type": "mcq",
-      "prompt": "Quel conifère géant est recensé en Californie, dans la Sierra Nevada ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Séquoia géant",
-            "correct": true
-          },
-          {
-            "label": "Noyer noir",
-            "correct": false
-          },
-          {
-            "label": "Frêne blanc",
-            "correct": false
-          },
-          {
-            "label": "Sapin gracieux",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0163-4",
       "type": "mcq",
       "prompt": "Quel parc à thème spécialisé dans le monde marin se situe à Orlando ?",

@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=402"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0402-2-en",
+      "type": "mcq",
+      "prompt": "How was the Louvre used when it was built in 1190?",
+      "payload": {
+        "options": [
+          {
+            "label": "As a farm",
+            "correct": false
+          },
+          {
+            "label": "As a fortress",
+            "correct": true
+          },
+          {
+            "label": "As a museum",
+            "correct": false
+          },
+          {
+            "label": "As an office",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0402-3-en",
+      "type": "mcq",
+      "prompt": "Which annual exhibition at the Louvre showcased the official artists?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Nativity",
+            "correct": false
+          },
+          {
+            "label": "The Sale",
+            "correct": false
+          },
+          {
+            "label": "The Biennale",
+            "correct": false
+          },
+          {
+            "label": "The Salon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0402-4-en",
+      "type": "mcq",
+      "prompt": "When did the Louvre become a museum, the largest in Paris?",
+      "payload": {
+        "options": [
+          {
+            "label": "Under Mitterrand",
+            "correct": false
+          },
+          {
+            "label": "During the Revolution",
+            "correct": true
+          },
+          {
+            "label": "In Antiquity",
+            "correct": false
+          },
+          {
+            "label": "In the Middle Ages",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

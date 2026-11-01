@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, François Vandergucht (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=129"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0129-4-en",
+      "type": "mcq",
+      "prompt": "In which building do the heroes of \"Dawn of the Dead\" barricade themselves?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shopping mall",
+            "correct": true
+          },
+          {
+            "label": "Farm",
+            "correct": false
+          },
+          {
+            "label": "Bar",
+            "correct": false
+          },
+          {
+            "label": "Church",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

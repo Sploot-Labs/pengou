@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0097-3",
-      "type": "mcq",
-      "prompt": "Quelle eau minérale vous a prodigué ces conseils : « Buvez, éliminez » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Perrier",
-            "correct": false
-          },
-          {
-            "label": "Badoit",
-            "correct": false
-          },
-          {
-            "label": "Vittel",
-            "correct": true
-          },
-          {
-            "label": "Evian",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0097-4",
       "type": "mcq",
       "prompt": "Quelle marque d'eau minérale belge appartient au groupe Coca-Cola ?",

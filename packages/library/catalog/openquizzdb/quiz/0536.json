@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0536-1",
-      "type": "mcq",
-      "prompt": "Que mangent surtout les coccinelles ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Chenilles",
-            "correct": false
-          },
-          {
-            "label": "Fourmis",
-            "correct": false
-          },
-          {
-            "label": "Pucerons",
-            "correct": true
-          },
-          {
-            "label": "Moustiques",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0536-2",
       "type": "mcq",
       "prompt": "Quel environnement favorise les acariens ?",

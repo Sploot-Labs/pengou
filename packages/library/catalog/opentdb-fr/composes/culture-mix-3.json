@@ -1,0 +1,571 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-0eb4303f71c7-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces Pères fondateurs des États-Unis est devenu président ?",
+      "payload": {
+        "options": [
+          {
+            "label": "James Monroe",
+            "correct": true
+          },
+          {
+            "label": "Samuel Adams",
+            "correct": false
+          },
+          {
+            "label": "Roger Sherman",
+            "correct": false
+          },
+          {
+            "label": "Alexander Hamilton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2a67a99cd84b-fr",
+      "type": "mcq",
+      "prompt": "Où se situe le désert de Sonora ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Asie",
+            "correct": false
+          },
+          {
+            "label": "Amérique du Sud",
+            "correct": false
+          },
+          {
+            "label": "Afrique",
+            "correct": false
+          },
+          {
+            "label": "Amérique du Nord",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-31a3c42d587e-fr",
+      "type": "truefalse",
+      "prompt": "Les concombres sont généralement composés de plus de 90 % d'eau.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3fb33d531d0f-fr",
+      "type": "mcq",
+      "prompt": "Quel artiste est célèbre pour s'être coupé l'oreille ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vincent van Gogh",
+            "correct": true
+          },
+          {
+            "label": "Rembrandt",
+            "correct": false
+          },
+          {
+            "label": "Michel-Ange",
+            "correct": false
+          },
+          {
+            "label": "Salvador Dalí",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4af4e403bb98-fr",
+      "type": "mcq",
+      "prompt": "Quel type de créature est un bonobo ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chat sauvage",
+            "correct": false
+          },
+          {
+            "label": "Grand singe",
+            "correct": true
+          },
+          {
+            "label": "Perroquet",
+            "correct": false
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4faaa6a3d415-fr",
+      "type": "mcq",
+      "prompt": "Quel est le mot espagnol pour « âne » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Caballo",
+            "correct": false
+          },
+          {
+            "label": "Perro",
+            "correct": false
+          },
+          {
+            "label": "Toro",
+            "correct": false
+          },
+          {
+            "label": "Burro",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5ef7614b707e-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces pays n'est pas membre de l'ONU ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monténégro",
+            "correct": false
+          },
+          {
+            "label": "Tuvalu",
+            "correct": false
+          },
+          {
+            "label": "Soudan du Sud",
+            "correct": false
+          },
+          {
+            "label": "Niue",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5f7859cc2457-fr",
+      "type": "mcq",
+      "prompt": "Quand la Grande Guerre patriotique s'est-elle terminée en URSS ?",
+      "payload": {
+        "options": [
+          {
+            "label": "11 décembre 1945",
+            "correct": false
+          },
+          {
+            "label": "9 mai 1945",
+            "correct": true
+          },
+          {
+            "label": "9 août 1945",
+            "correct": false
+          },
+          {
+            "label": "2 septembre 1945",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-667fc853c9f7-fr",
+      "type": "truefalse",
+      "prompt": "Le roman « 1984 » a été publié en 1949.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-81ae91b33b7a-fr",
+      "type": "mcq",
+      "prompt": "Combien de lunes Pluton possède-t-elle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinq",
+            "correct": true
+          },
+          {
+            "label": "Deux",
+            "correct": false
+          },
+          {
+            "label": "Une",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8288be0d6510-fr",
+      "type": "mcq",
+      "prompt": "Qui a peint la chapelle Sixtine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michel-Ange",
+            "correct": true
+          },
+          {
+            "label": "Léonard de Vinci",
+            "correct": false
+          },
+          {
+            "label": "Raphaël",
+            "correct": false
+          },
+          {
+            "label": "Pablo Picasso",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-909701a9bf7a-fr",
+      "type": "mcq",
+      "prompt": "Quelle partie du cerveau doit son nom au mot grec désignant l'hippocampe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hippocampe",
+            "correct": true
+          },
+          {
+            "label": "Cervelet",
+            "correct": false
+          },
+          {
+            "label": "Thalamus",
+            "correct": false
+          },
+          {
+            "label": "Amygdale",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a70c06b7e390-fr",
+      "type": "mcq",
+      "prompt": "Quel élément chimique a le point d'ébullition le plus bas ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hydrogène",
+            "correct": false
+          },
+          {
+            "label": "Néon",
+            "correct": false
+          },
+          {
+            "label": "Azote",
+            "correct": false
+          },
+          {
+            "label": "Hélium",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-bd49c696a981-fr",
+      "type": "mcq",
+      "prompt": "Quelle est la plus grande de ces 4 îles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Madagascar",
+            "correct": false
+          },
+          {
+            "label": "Bornéo",
+            "correct": true
+          },
+          {
+            "label": "Grande-Bretagne",
+            "correct": false
+          },
+          {
+            "label": "Cuba",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c23251c14237-fr",
+      "type": "truefalse",
+      "prompt": "Miami est la plus grande ville de Floride.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d3ec6541d5d2-fr",
+      "type": "mcq",
+      "prompt": "Qui était Premier ministre du Japon quand le Japon a déclaré la guerre aux États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Isoroku Yamamoto",
+            "correct": false
+          },
+          {
+            "label": "Hideki Tojo",
+            "correct": true
+          },
+          {
+            "label": "Fumimaro Konoe",
+            "correct": false
+          },
+          {
+            "label": "Michinomiya Hirohito",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d44bbc8f1fe6-fr",
+      "type": "mcq",
+      "prompt": "Avant 2018, quel est le seul constructeur japonais à avoir remporté les 24 Heures du Mans ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Subaru",
+            "correct": false
+          },
+          {
+            "label": "Nissan",
+            "correct": false
+          },
+          {
+            "label": "Mazda",
+            "correct": true
+          },
+          {
+            "label": "Toyota",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d7aff140508b-fr",
+      "type": "mcq",
+      "prompt": "Quel célèbre livre a pour sous-titre « Le Prométhée moderne » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dracula",
+            "correct": false
+          },
+          {
+            "label": "Légende de Sleepy Hollow",
+            "correct": false
+          },
+          {
+            "label": "Frankenstein",
+            "correct": true
+          },
+          {
+            "label": "Dr Jekyll et Mr Hyde",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e4d2d9edfdc3-fr",
+      "type": "mcq",
+      "prompt": "Combien de copies de chaque gène les cellules humaines possèdent-elles généralement ?",
+      "payload": {
+        "options": [
+          {
+            "label": "3",
+            "correct": false
+          },
+          {
+            "label": "4",
+            "correct": false
+          },
+          {
+            "label": "1",
+            "correct": false
+          },
+          {
+            "label": "2",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f7eacc61f395-fr",
+      "type": "mcq",
+      "prompt": "En quelle année le premier restaurant Pizza Hut a-t-il ouvert ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1965",
+            "correct": false
+          },
+          {
+            "label": "1958",
+            "correct": true
+          },
+          {
+            "label": "1976",
+            "correct": false
+          },
+          {
+            "label": "1942",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-culture-mix-3-fr",
+      "title": "Culture en vrac #3",
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-bd49c696a981-fr",
+        "otdb-8288be0d6510-fr",
+        "otdb-d44bbc8f1fe6-fr",
+        "otdb-3fb33d531d0f-fr",
+        "otdb-f7eacc61f395-fr",
+        "otdb-667fc853c9f7-fr",
+        "otdb-a70c06b7e390-fr",
+        "otdb-5f7859cc2457-fr",
+        "otdb-e4d2d9edfdc3-fr",
+        "otdb-5ef7614b707e-fr",
+        "otdb-c23251c14237-fr",
+        "otdb-2a67a99cd84b-fr",
+        "otdb-81ae91b33b7a-fr",
+        "otdb-d3ec6541d5d2-fr",
+        "otdb-31a3c42d587e-fr",
+        "otdb-909701a9bf7a-fr",
+        "otdb-4faaa6a3d415-fr",
+        "otdb-4af4e403bb98-fr",
+        "otdb-0eb4303f71c7-fr",
+        "otdb-d7aff140508b-fr"
+      ],
+      "description": "Un mélange de questions de géographie, d'histoire, de sciences, de nature, de livres et d'art."
+    }
+  ]
+}

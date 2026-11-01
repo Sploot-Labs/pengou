@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0358-4",
-      "type": "mcq",
-      "prompt": "Quel site grec célèbre se trouve sur le Mont Parnasse ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Delphes",
-            "correct": true
-          },
-          {
-            "label": "Olympie",
-            "correct": false
-          },
-          {
-            "label": "Amphipolis",
-            "correct": false
-          },
-          {
-            "label": "Lindos",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

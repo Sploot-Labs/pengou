@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=373"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0373-1-en",
+      "type": "mcq",
+      "prompt": "Of which country is Istanbul the largest city?",
+      "payload": {
+        "options": [
+          {
+            "label": "Syria",
+            "correct": false
+          },
+          {
+            "label": "Yemen",
+            "correct": false
+          },
+          {
+            "label": "Jordan",
+            "correct": false
+          },
+          {
+            "label": "Turkey",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0373-2-en",
+      "type": "mcq",
+      "prompt": "What was Istanbul called when it was founded?",
+      "payload": {
+        "options": [
+          {
+            "label": "Daulis",
+            "correct": false
+          },
+          {
+            "label": "Byzantium",
+            "correct": true
+          },
+          {
+            "label": "Paestum",
+            "correct": false
+          },
+          {
+            "label": "Messene",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

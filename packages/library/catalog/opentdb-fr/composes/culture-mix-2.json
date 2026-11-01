@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-0d87d634590a-fr",
+      "type": "mcq",
+      "prompt": "De quoi sont faites les écailles de tous les serpents et de la plupart des lézards ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ankyloglossie",
+            "correct": false
+          },
+          {
+            "label": "Kératine",
+            "correct": true
+          },
+          {
+            "label": "Épiderme",
+            "correct": false
+          },
+          {
+            "label": "Mue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0e270a89b6c0-fr",
+      "type": "mcq",
+      "prompt": "Tetsuya Fujita est un scientifique qui a mis au point l'échelle de quelle catastrophe naturelle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ouragans",
+            "correct": false
+          },
+          {
+            "label": "Séismes",
+            "correct": false
+          },
+          {
+            "label": "Tornades",
+            "correct": true
+          },
+          {
+            "label": "Volcans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1bc335215609-fr",
+      "type": "mcq",
+      "prompt": "Qui est l'auteur de la série « Percy Jackson » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roald Dahl",
+            "correct": false
+          },
+          {
+            "label": "Sandra Bullock",
+            "correct": false
+          },
+          {
+            "label": "Rick Riordan",
+            "correct": true
+          },
+          {
+            "label": "J.K. Rowling",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1fd50ff6f75d-fr",
+      "type": "mcq",
+      "prompt": "Quand les États-Unis ont-ils déclaré la guerre au Japon, entrant dans la Seconde Guerre mondiale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1er septembre 1939",
+            "correct": false
+          },
+          {
+            "label": "22 juin 1941",
+            "correct": false
+          },
+          {
+            "label": "8 décembre 1941",
+            "correct": true
+          },
+          {
+            "label": "6 juin 1944",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2bb62115b3fc-fr",
+      "type": "mcq",
+      "prompt": "Quelle était la nationalité du célèbre artiste Pablo Picasso ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Français",
+            "correct": false
+          },
+          {
+            "label": "Allemand",
+            "correct": false
+          },
+          {
+            "label": "Italien",
+            "correct": false
+          },
+          {
+            "label": "Espagnol",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-35a8f0d39774-fr",
+      "type": "mcq",
+      "prompt": "Avec quelle entreprise Valve a-t-elle collaboré pour créer le Vive ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Razer",
+            "correct": false
+          },
+          {
+            "label": "HTC",
+            "correct": true
+          },
+          {
+            "label": "Oculus",
+            "correct": false
+          },
+          {
+            "label": "Google",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4cdc0208eb4b-fr",
+      "type": "mcq",
+      "prompt": "Quelle partie du corps le glaucome touche-t-il ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le sang",
+            "correct": false
+          },
+          {
+            "label": "L'estomac",
+            "correct": false
+          },
+          {
+            "label": "Les yeux",
+            "correct": true
+          },
+          {
+            "label": "La gorge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6b4b8f8667e1-fr",
+      "type": "mcq",
+      "prompt": "Quelle couleur obtient-on en mélangeant du noir et du blanc ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gris",
+            "correct": true
+          },
+          {
+            "label": "Blanc",
+            "correct": false
+          },
+          {
+            "label": "Noir",
+            "correct": false
+          },
+          {
+            "label": "Marron",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-732b211f8643-fr",
+      "type": "mcq",
+      "prompt": "Quelle sélection nationale a remporté la première Ligue des nations de l'UEFA ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pays-Bas",
+            "correct": false
+          },
+          {
+            "label": "Portugal",
+            "correct": true
+          },
+          {
+            "label": "Angleterre",
+            "correct": false
+          },
+          {
+            "label": "Suisse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7591f4c26fcd-fr",
+      "type": "mcq",
+      "prompt": "Un organisme dit « héliotrope » a tendance à se diriger vers quoi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le pollen",
+            "correct": false
+          },
+          {
+            "label": "La lumière",
+            "correct": true
+          },
+          {
+            "label": "L'eau",
+            "correct": false
+          },
+          {
+            "label": "Les arbres",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-91ac768ab36b-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces animaux n'existe pas ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Calmar géant",
+            "correct": false
+          },
+          {
+            "label": "Diable de Tasmanie",
+            "correct": false
+          },
+          {
+            "label": "Dragon de mer",
+            "correct": false
+          },
+          {
+            "label": "Lion de Némée",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-98b2c9745ea5-fr",
+      "type": "mcq",
+      "prompt": "Quel est le plus petit État des États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rhode Island",
+            "correct": true
+          },
+          {
+            "label": "Vermont",
+            "correct": false
+          },
+          {
+            "label": "Massachusetts",
+            "correct": false
+          },
+          {
+            "label": "Maine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9a6358e21825-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit le roman « Des souris et des hommes » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mark Twain",
+            "correct": false
+          },
+          {
+            "label": "Harper Lee",
+            "correct": false
+          },
+          {
+            "label": "George Orwell",
+            "correct": false
+          },
+          {
+            "label": "John Steinbeck",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a93e0fc1da45-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelait la première colonie anglaise permanente en Amérique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "New York",
+            "correct": false
+          },
+          {
+            "label": "Plymouth",
+            "correct": false
+          },
+          {
+            "label": "St. John's",
+            "correct": false
+          },
+          {
+            "label": "Jamestown",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-aa8f23a28a4e-fr",
+      "type": "mcq",
+      "prompt": "Quel pays ne fait pas partie de la Scandinavie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Danemark",
+            "correct": false
+          },
+          {
+            "label": "Suède",
+            "correct": false
+          },
+          {
+            "label": "Finlande",
+            "correct": true
+          },
+          {
+            "label": "Norvège",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b495fe142388-fr",
+      "type": "mcq",
+      "prompt": "Le portrait de quel président figure sur le rare billet de 2 dollars américain ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ulysses Grant",
+            "correct": false
+          },
+          {
+            "label": "Martin Van Buren",
+            "correct": false
+          },
+          {
+            "label": "Thomas Jefferson",
+            "correct": true
+          },
+          {
+            "label": "John Quincy Adams",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ba22c6e0fa70-fr",
+      "type": "mcq",
+      "prompt": "Dans « Kung Pow: Enter the Fist » (2002), pourquoi Wimp Lo a-t-il été volontairement mal entraîné ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pour rire",
+            "correct": true
+          },
+          {
+            "label": "Pour le tester",
+            "correct": false
+          },
+          {
+            "label": "Pour avoir triché",
+            "correct": false
+          },
+          {
+            "label": "Par vengeance",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d14e44231eac-fr",
+      "type": "mcq",
+      "prompt": "Quel surnom portait le Hughes H-4 Hercules, un hydravion de transport lourd qui a volé en 1947 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cheval de Troie",
+            "correct": false
+          },
+          {
+            "label": "Spruce Goose",
+            "correct": true
+          },
+          {
+            "label": "Fat Man",
+            "correct": false
+          },
+          {
+            "label": "Arche de Noé",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e16d466e2294-fr",
+      "type": "mcq",
+      "prompt": "Sur quelle île galloise se trouve le village de Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Barry",
+            "correct": false
+          },
+          {
+            "label": "Bardsey",
+            "correct": false
+          },
+          {
+            "label": "Caldey",
+            "correct": false
+          },
+          {
+            "label": "Anglesey",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e2f77f14a879-fr",
+      "type": "mcq",
+      "prompt": "Dans quel jeu vidéo Michael Fassbender a-t-il joué ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Assassin's Creed III",
+            "correct": false
+          },
+          {
+            "label": "Red Dead Redemption",
+            "correct": false
+          },
+          {
+            "label": "Fable III",
+            "correct": true
+          },
+          {
+            "label": "CoD: Modern Warfare",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-culture-mix-2-fr",
+      "title": "Culture en vrac #2",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-35a8f0d39774-fr",
+        "otdb-e16d466e2294-fr",
+        "otdb-e2f77f14a879-fr",
+        "otdb-9a6358e21825-fr",
+        "otdb-0e270a89b6c0-fr",
+        "otdb-a93e0fc1da45-fr",
+        "otdb-4cdc0208eb4b-fr",
+        "otdb-2bb62115b3fc-fr",
+        "otdb-91ac768ab36b-fr",
+        "otdb-1bc335215609-fr",
+        "otdb-732b211f8643-fr",
+        "otdb-aa8f23a28a4e-fr",
+        "otdb-0d87d634590a-fr",
+        "otdb-ba22c6e0fa70-fr",
+        "otdb-98b2c9745ea5-fr",
+        "otdb-7591f4c26fcd-fr",
+        "otdb-6b4b8f8667e1-fr",
+        "otdb-d14e44231eac-fr",
+        "otdb-b495fe142388-fr",
+        "otdb-1fd50ff6f75d-fr"
+      ],
+      "description": "Un mélange de questions de géographie, d'histoire, de sciences, de livres, d'art et de sport."
+    }
+  ]
+}

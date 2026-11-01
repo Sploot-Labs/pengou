@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0067-3",
-      "type": "mcq",
-      "prompt": "Quel constructeur allemand a repris en 1991 la marque Skoda ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Opel",
-            "correct": false
-          },
-          {
-            "label": "Volkswagen",
-            "correct": true
-          },
-          {
-            "label": "Audi",
-            "correct": false
-          },
-          {
-            "label": "Porsche",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0067-4",
       "type": "mcq",
       "prompt": "Quel est le plus vieux constructeur automobile nippon ?",

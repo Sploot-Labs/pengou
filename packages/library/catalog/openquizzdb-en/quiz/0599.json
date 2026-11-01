@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=599"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0599-1-en",
+      "type": "mcq",
+      "prompt": "In which kind of book do you mainly find geographical maps?",
+      "payload": {
+        "options": [
+          {
+            "label": "Atlas",
+            "correct": true
+          },
+          {
+            "label": "Novel",
+            "correct": false
+          },
+          {
+            "label": "Planner",
+            "correct": false
+          },
+          {
+            "label": "Dictionary",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0599-2-en",
+      "type": "mcq",
+      "prompt": "What very hard material is pack ice mainly made of?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ice",
+            "correct": true
+          },
+          {
+            "label": "Earth",
+            "correct": false
+          },
+          {
+            "label": "Metal",
+            "correct": false
+          },
+          {
+            "label": "Rock",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0599-3-en",
+      "type": "mcq",
+      "prompt": "Which arithmetic operation calculates the product of two numbers?",
+      "payload": {
+        "options": [
+          {
+            "label": "Subtraction",
+            "correct": false
+          },
+          {
+            "label": "Multiplication",
+            "correct": true
+          },
+          {
+            "label": "Simplification",
+            "correct": false
+          },
+          {
+            "label": "Division",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0599-4-en",
+      "type": "mcq",
+      "prompt": "In which animated film can you hear the phrase \"Hakuna Matata\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Toy Story",
+            "correct": false
+          },
+          {
+            "label": "Cars",
+            "correct": false
+          },
+          {
+            "label": "The Lion King",
+            "correct": true
+          },
+          {
+            "label": "Dinosaur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

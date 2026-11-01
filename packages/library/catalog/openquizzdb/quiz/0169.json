@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0169-4",
-      "type": "mcq",
-      "prompt": "Quelle demi-baguette contient viande chaude, frites et sauce ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Mitraillette",
-            "correct": true
-          },
-          {
-            "label": "Truffade",
-            "correct": false
-          },
-          {
-            "label": "Rosti",
-            "correct": false
-          },
-          {
-            "label": "Frico",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "gastronomie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

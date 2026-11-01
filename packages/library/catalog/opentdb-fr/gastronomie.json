@@ -1,0 +1,288 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-156bcc53194d-fr",
+      "type": "mcq",
+      "prompt": "Quel fruit entre traditionnellement dans la composition d'une forêt-noire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Abricots",
+            "correct": false
+          },
+          {
+            "label": "Raisins secs",
+            "correct": false
+          },
+          {
+            "label": "Cerises",
+            "correct": true
+          },
+          {
+            "label": "Pommes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-32dfe9ed2fef-fr",
+      "type": "mcq",
+      "prompt": "Quel pays produit environ 40 % de la vanille mondiale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chine",
+            "correct": false
+          },
+          {
+            "label": "Mexique",
+            "correct": false
+          },
+          {
+            "label": "Madagascar",
+            "correct": true
+          },
+          {
+            "label": "Indonésie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7c50e0e0f244-fr",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on la cuisine indienne cuite sur du charbon dans un four en argile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Biryani",
+            "correct": false
+          },
+          {
+            "label": "Pani puri",
+            "correct": false
+          },
+          {
+            "label": "Tandoori",
+            "correct": true
+          },
+          {
+            "label": "Tiki masala",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-92eb5125f007-fr",
+      "type": "mcq",
+      "prompt": "Quel style de bière contient généralement plus de houblon que la moyenne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "India Pale Ale",
+            "correct": true
+          },
+          {
+            "label": "Stout",
+            "correct": false
+          },
+          {
+            "label": "Extra Special Bitter",
+            "correct": false
+          },
+          {
+            "label": "Scotch Ale",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a64dba54c749-fr",
+      "type": "mcq",
+      "prompt": "Avec quels fruits à coque fabrique-t-on le massepain ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cacahuètes",
+            "correct": false
+          },
+          {
+            "label": "Noix",
+            "correct": false
+          },
+          {
+            "label": "Pistaches",
+            "correct": false
+          },
+          {
+            "label": "Amandes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-af9b61f11602-fr",
+      "type": "truefalse",
+      "prompt": "La purée de pommes de terre instantanée a été inventée par le Canadien Edward Asselbergs en 1962.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-bc1879be96bc-fr",
+      "type": "mcq",
+      "prompt": "Qui a inventé la toute première tablette de chocolat, en 1847 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "John Cadbury",
+            "correct": false
+          },
+          {
+            "label": "Joseph Fry",
+            "correct": true
+          },
+          {
+            "label": "John Tyler",
+            "correct": false
+          },
+          {
+            "label": "Andrew Johnson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ca2ff98c40ab-fr",
+      "type": "truefalse",
+      "prompt": "Le Nutella est produit par l'entreprise allemande Ferrero.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "gastronomie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e3c4111e567d-fr",
+      "type": "mcq",
+      "prompt": "De quelle famille de poissons est fait le plat fugu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maquereau",
+            "correct": false
+          },
+          {
+            "label": "Saumon",
+            "correct": false
+          },
+          {
+            "label": "Bar",
+            "correct": false
+          },
+          {
+            "label": "Poisson-globe",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-eb53a1e7d8c6-fr",
+      "type": "mcq",
+      "prompt": "Quelle boisson alcoolisée est principalement faite à partir de baies de genévrier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vodka",
+            "correct": false
+          },
+          {
+            "label": "Tequila",
+            "correct": false
+          },
+          {
+            "label": "Rhum",
+            "correct": false
+          },
+          {
+            "label": "Gin",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-food-and-drink-fr",
+      "title": "Plats et boissons",
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-156bcc53194d-fr",
+        "otdb-32dfe9ed2fef-fr",
+        "otdb-7c50e0e0f244-fr",
+        "otdb-92eb5125f007-fr",
+        "otdb-a64dba54c749-fr",
+        "otdb-af9b61f11602-fr",
+        "otdb-bc1879be96bc-fr",
+        "otdb-ca2ff98c40ab-fr",
+        "otdb-e3c4111e567d-fr",
+        "otdb-eb53a1e7d8c6-fr"
+      ],
+      "description": "Plats, ingrédients et boissons du monde entier."
+    }
+  ]
+}

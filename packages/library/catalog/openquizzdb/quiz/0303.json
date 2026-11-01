@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0303-1",
-      "type": "mcq",
-      "prompt": "Qui a créé et dirige encore le noyau Linux ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Bill Gates",
-            "correct": false
-          },
-          {
-            "label": "Larry Ellison",
-            "correct": false
-          },
-          {
-            "label": "Linus Torvalds",
-            "correct": true
-          },
-          {
-            "label": "Steeve Jobs",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0303-2",
-      "type": "mcq",
-      "prompt": "En quelle année le noyau Linux a-t-il été publié pour la première fois ?",
-      "payload": {
-        "options": [
-          {
-            "label": "1993",
-            "correct": false
-          },
-          {
-            "label": "1997",
-            "correct": false
-          },
-          {
-            "label": "1995",
-            "correct": false
-          },
-          {
-            "label": "1991",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0303-3",
       "type": "mcq",
       "prompt": "Quel système mobile majeur repose sur le noyau Linux ?",

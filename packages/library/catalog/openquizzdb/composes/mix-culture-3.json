@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0430-3",
+      "type": "mcq",
+      "prompt": "Quelle artiste célèbre, née à Nieppe, a chanté « Ma cabane au Canada » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sheila",
+            "correct": false
+          },
+          {
+            "label": "Line Renaud",
+            "correct": true
+          },
+          {
+            "label": "Régine",
+            "correct": false
+          },
+          {
+            "label": "Juliette Greco",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0321-2",
+      "type": "mcq",
+      "prompt": "Combien de couronnes composent le royaume de « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sept",
+            "correct": true
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Dix",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0456-3",
+      "type": "mcq",
+      "prompt": "Quel mot a été inventé en 1955 par le philologue Jacques Perret ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Imprimante",
+            "correct": false
+          },
+          {
+            "label": "Transistor",
+            "correct": false
+          },
+          {
+            "label": "Ampoule",
+            "correct": false
+          },
+          {
+            "label": "Ordinateur",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0055-2",
+      "type": "mcq",
+      "prompt": "Que conduit soeur Clotilde dans « Le Gendarme de Saint-Tropez » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Une 2CV",
+            "correct": true
+          },
+          {
+            "label": "Une A8",
+            "correct": false
+          },
+          {
+            "label": "Une R4",
+            "correct": false
+          },
+          {
+            "label": "Une C3",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0220-3",
+      "type": "mcq",
+      "prompt": "Quelle application permet d'identifier une chanson en l'écoutant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shazam",
+            "correct": true
+          },
+          {
+            "label": "Skype",
+            "correct": false
+          },
+          {
+            "label": "Spotify",
+            "correct": false
+          },
+          {
+            "label": "Snapchat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0273-2",
+      "type": "mcq",
+      "prompt": "Quelle plante sert à préparer le thé au Maghreb ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Menthe",
+            "correct": true
+          },
+          {
+            "label": "Anis",
+            "correct": false
+          },
+          {
+            "label": "Coriandre",
+            "correct": false
+          },
+          {
+            "label": "Cannelle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0404-1",
+      "type": "mcq",
+      "prompt": "Quel peuple germanique s'installa au Ve siècle dans l'actuelle Espagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wisigoths",
+            "correct": true
+          },
+          {
+            "label": "Ostrogoths",
+            "correct": false
+          },
+          {
+            "label": "Burgondes",
+            "correct": false
+          },
+          {
+            "label": "Jutes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0340-4",
+      "type": "mcq",
+      "prompt": "Quelle cage de grande taille est destinée à contenir des oiseaux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Volière",
+            "correct": true
+          },
+          {
+            "label": "Valise",
+            "correct": false
+          },
+          {
+            "label": "Volute",
+            "correct": false
+          },
+          {
+            "label": "Vitrine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0239-1",
+      "type": "mcq",
+      "prompt": "Quel alter ego Eminem utilise-t-il parfois dans ses chansons ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Posh",
+            "correct": false
+          },
+          {
+            "label": "Slim Shady",
+            "correct": true
+          },
+          {
+            "label": "Love symbol",
+            "correct": false
+          },
+          {
+            "label": "Fat Man",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0357-1",
+      "type": "mcq",
+      "prompt": "Combien de temps a-t-on pour tirer au basket-ball ?",
+      "payload": {
+        "options": [
+          {
+            "label": "30 secondes",
+            "correct": false
+          },
+          {
+            "label": "10 secondes",
+            "correct": false
+          },
+          {
+            "label": "45 secondes",
+            "correct": false
+          },
+          {
+            "label": "24 secondes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0601-2",
+      "type": "mcq",
+      "prompt": "Quel intrus se cache parmi ces inventions créées par des femmes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Soutien-gorge",
+            "correct": false
+          },
+          {
+            "label": "Lave-vaisselle",
+            "correct": false
+          },
+          {
+            "label": "Scie circulaire",
+            "correct": false
+          },
+          {
+            "label": "Bas nylon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0069-1",
+      "type": "mcq",
+      "prompt": "Quelle ville des États-Unis est surnommée la « grosse pomme » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Miami",
+            "correct": false
+          },
+          {
+            "label": "Las Vegas",
+            "correct": false
+          },
+          {
+            "label": "Los Angeles",
+            "correct": false
+          },
+          {
+            "label": "New York",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0342-2",
+      "type": "mcq",
+      "prompt": "Comment s'appellent les « moustaches » du chat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vibrisses",
+            "correct": true
+          },
+          {
+            "label": "Bréchets",
+            "correct": false
+          },
+          {
+            "label": "Tectrices",
+            "correct": false
+          },
+          {
+            "label": "Barbules",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0136-1",
+      "type": "mcq",
+      "prompt": "Dans quelle ville Bernadette Soubirous aurait-elle vu la Vierge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lyon",
+            "correct": false
+          },
+          {
+            "label": "Lille",
+            "correct": false
+          },
+          {
+            "label": "Lourdes",
+            "correct": true
+          },
+          {
+            "label": "Lisieux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0425-4",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on une femme qui porte un enfant pour un couple ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mère-porteuse",
+            "correct": true
+          },
+          {
+            "label": "Fille-mère",
+            "correct": false
+          },
+          {
+            "label": "Mère-donneuse",
+            "correct": false
+          },
+          {
+            "label": "Enfanteresse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0449-3",
+      "type": "mcq",
+      "prompt": "De quel sous-marin Sean Connery a-t-il été le commandant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "K-19",
+            "correct": false
+          },
+          {
+            "label": "Octobre Rouge",
+            "correct": true
+          },
+          {
+            "label": "USS Dallas",
+            "correct": false
+          },
+          {
+            "label": "HMS Vanguard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0490-1",
+      "type": "mcq",
+      "prompt": "Quel sport nautique combine à la fois glisse et voile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Voile",
+            "correct": false
+          },
+          {
+            "label": "Windsurf",
+            "correct": true
+          },
+          {
+            "label": "Surf",
+            "correct": false
+          },
+          {
+            "label": "Kitesurf",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0433-2",
+      "type": "mcq",
+      "prompt": "Comment se prénomme la mère de la Famille Addams ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aurora",
+            "correct": false
+          },
+          {
+            "label": "Eva",
+            "correct": false
+          },
+          {
+            "label": "Elvira",
+            "correct": false
+          },
+          {
+            "label": "Morticia",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0315-2",
+      "type": "mcq",
+      "prompt": "Quel instrument à cordes pincées est souvent utilisé en country ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Balalaïka",
+            "correct": false
+          },
+          {
+            "label": "Bouzouki",
+            "correct": false
+          },
+          {
+            "label": "Basson",
+            "correct": false
+          },
+          {
+            "label": "Banjo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0479-1",
+      "type": "mcq",
+      "prompt": "Quel écrivain et mathématicien a dit : « Je pense, donc je suis » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Descartes",
+            "correct": true
+          },
+          {
+            "label": "Newton",
+            "correct": false
+          },
+          {
+            "label": "Harriot",
+            "correct": false
+          },
+          {
+            "label": "Mercator",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-mix-culture-3",
+      "title": "Mix culture #3",
+      "description": "Un peu de tout : cinéma, sport, géographie, nature, musique et culture générale.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0430-3",
+        "oqdb-0321-2",
+        "oqdb-0456-3",
+        "oqdb-0055-2",
+        "oqdb-0220-3",
+        "oqdb-0273-2",
+        "oqdb-0404-1",
+        "oqdb-0340-4",
+        "oqdb-0239-1",
+        "oqdb-0357-1",
+        "oqdb-0601-2",
+        "oqdb-0069-1",
+        "oqdb-0342-2",
+        "oqdb-0136-1",
+        "oqdb-0425-4",
+        "oqdb-0449-3",
+        "oqdb-0490-1",
+        "oqdb-0433-2",
+        "oqdb-0315-2",
+        "oqdb-0479-1"
+      ]
+    }
+  ]
+}

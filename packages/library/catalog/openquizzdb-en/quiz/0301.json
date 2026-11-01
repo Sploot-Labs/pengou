@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=301"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0301-1-en",
+      "type": "mcq",
+      "prompt": "What does Hector Salamanca use to communicate in \"Breaking Bad\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Keyboard",
+            "correct": false
+          },
+          {
+            "label": "Bell",
+            "correct": true
+          },
+          {
+            "label": "Marker",
+            "correct": false
+          },
+          {
+            "label": "Trumpet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0301-2-en",
+      "type": "mcq",
+      "prompt": "Who is the last person to die in \"Breaking Bad\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wilfried",
+            "correct": false
+          },
+          {
+            "label": "William",
+            "correct": false
+          },
+          {
+            "label": "Walter",
+            "correct": true
+          },
+          {
+            "label": "Wade",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

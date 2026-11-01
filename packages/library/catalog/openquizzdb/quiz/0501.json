@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0501-2",
-      "type": "mcq",
-      "prompt": "Quel nombre est à la base de nombreuses superstitions ?",
-      "payload": {
-        "options": [
-          {
-            "label": "13",
-            "correct": true
-          },
-          {
-            "label": "666",
-            "correct": false
-          },
-          {
-            "label": "101",
-            "correct": false
-          },
-          {
-            "label": "27",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0501-3",
       "type": "mcq",
       "prompt": "Sur quoi faut-il marcher du pied gauche pour favoriser la chance ?",

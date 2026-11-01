@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=471"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0471-3-en",
+      "type": "mcq",
+      "prompt": "For which sport did Donald Trump buy land in Balmedie?",
+      "payload": {
+        "options": [
+          {
+            "label": "Skiing",
+            "correct": false
+          },
+          {
+            "label": "Golf",
+            "correct": true
+          },
+          {
+            "label": "Rugby",
+            "correct": false
+          },
+          {
+            "label": "Squash",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

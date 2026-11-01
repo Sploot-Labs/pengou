@@ -1,0 +1,923 @@
+{
+  "questions": {
+    "otdb-3d53b1ba9367": {
+      "prompt": "Le langage de programmation C a été créé par cet informaticien américain.",
+      "options": [
+        "Tim Berners-Lee",
+        "Willis Ware",
+        "Dennis Ritchie",
+        "al-Khwârizmî"
+      ]
+    },
+    "otdb-3fb521b40558": {
+      "prompt": "Quelle lettre représente l'unité imaginaire ?",
+      "options": [
+        "i",
+        "x",
+        "n",
+        "e"
+      ]
+    },
+    "otdb-404e42b2344f": {
+      "prompt": "En informatique, combien de bits contient un quartet (nibble) ?",
+      "options": [
+        "4",
+        "16",
+        "2",
+        "32"
+      ]
+    },
+    "otdb-40601db94553": {
+      "prompt": "Pour la création de quel type d'algorithme Ron Rivest n'est-il pas connu ?",
+      "options": [
+        "Hachage",
+        "Chiffrement asymétrique",
+        "Chiffrement de flux",
+        "Partage de secret"
+      ]
+    },
+    "otdb-40be6f5756d1": {
+      "prompt": "Comment appelle-t-on l'enveloppe gazeuse d'une comète (qui forme la queue) ?",
+      "options": [
+        "L'ablation",
+        "Le reflux",
+        "La chevelure",
+        "Le sillage"
+      ]
+    },
+    "otdb-40cd6afdc693": {
+      "prompt": "Environ quel pourcentage de l'atmosphère terrestre est composé d'oxygène ?",
+      "options": [
+        "54 %",
+        "78 %",
+        "21 %",
+        "7 %"
+      ]
+    },
+    "otdb-4285431e55ce": {
+      "prompt": "Dans quel langage ne peut-on taper que des 0 et des 1 ?",
+      "options": [
+        "JavaScript",
+        "C++",
+        "Binaire",
+        "Python"
+      ]
+    },
+    "otdb-4303d31b2723": {
+      "prompt": "Quel est l'âge de l'univers ?",
+      "options": [
+        "13,8 milliards d'années",
+        "4,5 milliards d'années",
+        "16,2 milliards d'années",
+        "7,9 milliards d'années"
+      ]
+    },
+    "otdb-43bb0835c1a1": {
+      "prompt": "Lequel de ces os est le plus difficile à casser ?",
+      "options": [
+        "Humérus",
+        "Tibia",
+        "Crâne",
+        "Fémur"
+      ]
+    },
+    "otdb-449cc58e0e5e": {
+      "prompt": "Comment appelle-t-on le « cerveau » de l'ordinateur ?",
+      "options": [
+        "Processeur (CPU)",
+        "Clavier",
+        "Processeur graphique",
+        "Carte mère"
+      ]
+    },
+    "otdb-45927e82c1c6": {
+      "prompt": "Les Néandertaliens sont des ancêtres directs de l'homme moderne."
+    },
+    "otdb-464a7a98ebc5": {
+      "prompt": "Quelle est la longueur d'une adresse IPv6 ?",
+      "options": [
+        "64 bits",
+        "128 bits",
+        "128 octets",
+        "32 bits"
+      ]
+    },
+    "otdb-46afbe386b36": {
+      "prompt": "Quel nombre premier vient juste après 19 ?",
+      "options": [
+        "27",
+        "23",
+        "21",
+        "25"
+      ]
+    },
+    "otdb-47e69a0b5bb9": {
+      "prompt": "En physique, la conservation de l'énergie et celle de la quantité de mouvement découlent toutes deux de quel théorème ?",
+      "options": [
+        "Théorème de Carnot",
+        "Théorème de Wick",
+        "Théorème de Bell",
+        "Théorème de Noether"
+      ]
+    },
+    "otdb-48028082ffc9": {
+      "prompt": "Un triangle scalène a deux côtés de même longueur."
+    },
+    "otdb-483b3ed79236": {
+      "prompt": "Comment s'appelle l'image du fond d'écran par défaut de Windows XP ?",
+      "options": [
+        "Red moon desert",
+        "Azul",
+        "Tulips",
+        "Bliss"
+      ]
+    },
+    "otdb-49dc2086068e": {
+      "prompt": "Quelle est l'unité SI de l'intensité lumineuse ?",
+      "options": [
+        "Faraday",
+        "Candela",
+        "Coulomb",
+        "Lumen"
+      ]
+    },
+    "otdb-4a32f8e5563f": {
+      "prompt": "Le tout premier bug informatique était causé par des fils défectueux."
+    },
+    "otdb-4b8f92de6649": {
+      "prompt": "Sur l'échelle de Beaufort, quel nom porte la force 8 ?",
+      "options": [
+        "Brise",
+        "Ouragan",
+        "Tempête",
+        "Coup de vent"
+      ]
+    },
+    "otdb-4cdc0208eb4b": {
+      "prompt": "Quelle partie du corps le glaucome touche-t-il ?",
+      "options": [
+        "Le sang",
+        "L'estomac",
+        "Les yeux",
+        "La gorge"
+      ]
+    },
+    "otdb-4e9dbe9c6b6e": {
+      "prompt": "Laquelle de ces couches n'existe pas dans le modèle OSI ?",
+      "options": [
+        "Couche application",
+        "Couche transport",
+        "Couche physique",
+        "Couche connexion"
+      ]
+    },
+    "otdb-4efc1085b451": {
+      "prompt": "Apple a été fondée en Californie. Dans quel État de l'Ouest Microsoft a-t-elle été fondée ?",
+      "options": [
+        "Arizona",
+        "Nouveau-Mexique",
+        "Colorado",
+        "Washington"
+      ]
+    },
+    "otdb-4f2ba2c2c5f0": {
+      "prompt": "Comment s'appelle la dérivée de l'accélération par rapport au temps ?",
+      "options": [
+        "Glissement",
+        "Bosse",
+        "Décalage",
+        "Secousse"
+      ]
+    },
+    "otdb-5454b6a3a5a2": {
+      "prompt": "Quel est le raccourci clavier courant pour « Copier » sous Windows ?",
+      "options": [
+        "Alt + X",
+        "Ctrl + C",
+        "Alt + C",
+        "Ctrl + X"
+      ]
+    },
+    "otdb-563a9a53de95": {
+      "prompt": "Combien de lunes la Terre possède-t-elle ?",
+      "options": [
+        "2",
+        "1",
+        "3",
+        "0"
+      ]
+    },
+    "otdb-566743fdf56d": {
+      "prompt": "Les ordinateurs monocartes de la série « Raspberry Pi » ont été créés aux États-Unis."
+    },
+    "otdb-5a23377dc814": {
+      "prompt": "Quel polymère sert à fabriquer les CD, les lunettes de protection et les boucliers antiémeute ?",
+      "options": [
+        "Bakélite",
+        "Polycarbonate",
+        "Caoutchouc",
+        "Nylon"
+      ]
+    },
+    "otdb-5a268344bf97": {
+      "prompt": "Quel élément a pour symbole chimique « Fe » ?",
+      "options": [
+        "Étain",
+        "Argent",
+        "Fer",
+        "Or"
+      ]
+    },
+    "otdb-5a8e62500b76": {
+      "prompt": "Quel gaz forme environ 78 % de l'atmosphère terrestre ?",
+      "options": [
+        "Dioxyde de carbone",
+        "Argon",
+        "Oxygène",
+        "Azote"
+      ]
+    },
+    "otdb-5ce7eae9fdd7": {
+      "prompt": "Le lithium doit son nom à la Lituanie."
+    },
+    "otdb-5d2dabb81b77": {
+      "prompt": "Combien de degrés compte un tour complet ?",
+      "options": [
+        "360",
+        "720",
+        "180",
+        "90"
+      ]
+    },
+    "otdb-5ea0f55201b5": {
+      "prompt": "De quel continent la patate douce est-elle originaire ?",
+      "options": [
+        "Amérique du Sud",
+        "Asie",
+        "Afrique",
+        "Europe"
+      ]
+    },
+    "otdb-6116183bdfe2": {
+      "prompt": "Dans la plupart des langages de programmation, l'opérateur ++ équivaut à l'instruction « += 1 »."
+    },
+    "otdb-619af21d83c5": {
+      "prompt": "Combien de zeptomètres y a-t-il dans un femtomètre ?",
+      "options": [
+        "1 000 000",
+        "1 000 000 000",
+        "10",
+        "1 000"
+      ]
+    },
+    "otdb-61b7debaed65": {
+      "prompt": "Tous ces noms d'haplogroupes humains existent à la fois pour l'ADN du chromosome Y et l'ADN mitochondrial, SAUF :",
+      "options": [
+        "Haplogroupe J",
+        "Haplogroupe L",
+        "Haplogroupe U",
+        "Haplogroupe T"
+      ]
+    },
+    "otdb-651dedf12b33": {
+      "prompt": "Quel est le seul problème du prix du Millénaire résolu à ce jour ?",
+      "options": [
+        "Hypothèse de Riemann",
+        "P contre NP",
+        "Conjecture de Fermat",
+        "Conjecture de Poincaré"
+      ]
+    },
+    "otdb-653e3bb88997": {
+      "prompt": "Le HTML est quel type de langage ?",
+      "options": [
+        "Langage de script",
+        "Langage de programmation",
+        "Langage de macros",
+        "Langage de balisage"
+      ]
+    },
+    "otdb-665022b3bd60": {
+      "prompt": "Quel grand langage de programmation Unreal Engine 4 utilise-t-il ?",
+      "options": [
+        "ECMAScript",
+        "C++",
+        "C#",
+        "Assembleur"
+      ]
+    },
+    "otdb-6698b66fff98": {
+      "prompt": "Quel est le débit théorique de l'USB 3.1 Gen 2 ?",
+      "options": [
+        "1 Gb/s",
+        "10 Gb/s",
+        "8 Gb/s",
+        "5 Gb/s"
+      ]
+    },
+    "otdb-66ae940a8a18": {
+      "prompt": "En programmation, l'opérateur ternaire s'écrit le plus souvent avec quel(s) symbole(s) ?",
+      "options": [
+        "??",
+        "?:",
+        "if then",
+        "?"
+      ]
+    },
+    "otdb-66f1b796d49e": {
+      "prompt": "Le premier processeur à double cœur était l'Intel Pentium D."
+    },
+    "otdb-672e127abec0": {
+      "prompt": "La psychologie est la science du comportement et de l'esprit."
+    },
+    "otdb-674d98f4789d": {
+      "prompt": "Selon le théorème de De Morgan, l'expression booléenne (AB)' équivaut à :",
+      "options": [
+        "A' + B'",
+        "A'B'",
+        "A'B + B'A",
+        "AB' + AB"
+      ]
+    },
+    "otdb-68776374ef49": {
+      "prompt": "Quel horizon d'un profil de sol correspond à la roche mère ?",
+      "options": [
+        "O",
+        "R",
+        "D",
+        "B"
+      ]
+    },
+    "otdb-6afed64befe7": {
+      "prompt": "Comment s'appelle l'étude des cellules et des tissus des plantes et des animaux ?",
+      "options": [
+        "Histologie",
+        "Biochimie",
+        "Microbiologie",
+        "Anatomie"
+      ]
+    },
+    "otdb-6d3dbd5ac333": {
+      "prompt": "Les imprimantes laser et à jet d'encre sont toutes deux de quel type ?",
+      "options": [
+        "Imprimante à marguerite",
+        "Imprimante sans impact",
+        "Imprimante à impact",
+        "Imprimante matricielle"
+      ]
+    },
+    "otdb-6de635fa70a9": {
+      "prompt": "L'ensemble des nombres algébriques est dénombrable."
+    },
+    "otdb-70512097d47a": {
+      "prompt": "Lequel de ces composés chimiques n'est PAS présent dans le suc gastrique ?",
+      "options": [
+        "Chlorure de sodium",
+        "Acide chlorhydrique",
+        "Chlorure de potassium",
+        "Acide sulfurique"
+      ]
+    },
+    "otdb-709e34b4f03d": {
+      "prompt": "Quel est le terme médical pour désigner le nombril ?",
+      "options": [
+        "Nares",
+        "Paxillus",
+        "Ombilic",
+        "Naevus"
+      ]
+    },
+    "otdb-73f38dc1bbff": {
+      "prompt": "Quel satellite Landsat n'a pas atteint son orbite ?",
+      "options": [
+        "Landsat 4",
+        "Landsat 3",
+        "Landsat 5",
+        "Landsat 6"
+      ]
+    },
+    "otdb-740e65fc9cff": {
+      "prompt": "Quel type de roche est créé par une chaleur ET une pression intenses ?",
+      "options": [
+        "Sédimentaire",
+        "Magmatique",
+        "Diamant",
+        "Métamorphique"
+      ]
+    },
+    "otdb-748db2a32f97": {
+      "prompt": "L'hippopotomonstrosesquippedaliophobie est la peur irrationnelle des mots longs."
+    },
+    "otdb-7591f4c26fcd": {
+      "prompt": "Un organisme dit « héliotrope » a tendance à se diriger vers quoi ?",
+      "options": [
+        "Le pollen",
+        "La lumière",
+        "L'eau",
+        "Les arbres"
+      ]
+    },
+    "otdb-7ebf5b5a49a1": {
+      "prompt": "Comment s'appelait le premier satellite artificiel de la Terre, lancé par l'Union soviétique en 1957 ?",
+      "options": [
+        "Zenit-2",
+        "Voskhod 3KV",
+        "Soyouz 7K-OK",
+        "Spoutnik 1"
+      ]
+    },
+    "otdb-8002b0f11808": {
+      "prompt": "Le nombre binaire « 101001101 » équivaut au nombre décimal « 334 »."
+    },
+    "otdb-800cae3df639": {
+      "prompt": "Quelle est la masse atomique du carbone ?",
+      "options": [
+        "14",
+        "10",
+        "16",
+        "12"
+      ]
+    },
+    "otdb-81ae91b33b7a": {
+      "prompt": "Combien de lunes Pluton possède-t-elle ?",
+      "options": [
+        "Cinq",
+        "Deux",
+        "Une",
+        "Trois"
+      ]
+    },
+    "otdb-83c07c05111f": {
+      "prompt": "Combien de livres compte « Les Éléments » d'Euclide ?",
+      "options": [
+        "13",
+        "10",
+        "17",
+        "8"
+      ]
+    },
+    "otdb-840e6e4c747c": {
+      "prompt": "Combien de cavités le cœur humain possède-t-il ?",
+      "options": [
+        "6",
+        "4",
+        "3",
+        "2"
+      ]
+    },
+    "otdb-85796cd1042e": {
+      "prompt": "« Whistler » était le nom de code de quel système d'exploitation de Microsoft ?",
+      "options": [
+        "Windows XP",
+        "Windows 2000",
+        "Windows 95",
+        "Windows 7"
+      ]
+    },
+    "otdb-8624353db6ec": {
+      "prompt": "Quelle lettre grecque représente le plus souvent la constante mathématique appelée « nombre d'or » ?",
+      "options": [
+        "Ψ (psi)",
+        "Φ (phi)",
+        "Τ (tau)",
+        "π (pi)"
+      ]
+    },
+    "otdb-87ba4c74db62": {
+      "prompt": "La puce informatique ARM a été développée à l'origine par Acorn Computers."
+    },
+    "otdb-88915fd28fbb": {
+      "prompt": "Quelle est la longueur d'une année-lumière ?",
+      "options": [
+        "105,4 années terrestres",
+        "1 UA",
+        "9 461 milliards de km",
+        "806,6 millions de km"
+      ]
+    },
+    "otdb-8a48657e3f15": {
+      "prompt": "Que Gregor Mendel a-t-il utilisé pour étudier les croisements génétiques ?",
+      "options": [
+        "Des pois",
+        "Des perroquets",
+        "Des chats",
+        "Des fleurs"
+      ]
+    },
+    "otdb-8be12f3ff33e": {
+      "prompt": "Quel mathématicien grec a couru nu dans les rues de Syracuse en criant « Eurêka » après avoir découvert le principe de la poussée ?",
+      "options": [
+        "Archimède",
+        "Homère",
+        "Ératosthène",
+        "Euclide"
+      ]
+    },
+    "otdb-8c9b9f2c9145": {
+      "prompt": "Quel est le nom de domaine du Tuvalu ?",
+      "options": [
+        ".tl",
+        ".tv",
+        ".tu",
+        ".tt"
+      ]
+    },
+    "otdb-8d40cbb05977": {
+      "prompt": "Quelle entreprise a développé le système d'exploitation Windows ?",
+      "options": [
+        "Apple",
+        "Nokia",
+        "Microsoft",
+        "IBM"
+      ]
+    },
+    "otdb-8de0145ceea9": {
+      "prompt": "La valeur d'une Calorie n'est pas la même que celle d'une calorie."
+    },
+    "otdb-8e2cb701bbba": {
+      "prompt": "Quel était le nom d'une faille découverte en avril 2014 dans la bibliothèque de cryptographie OpenSSL ?",
+      "options": [
+        "Shellscript",
+        "Heartbleed",
+        "Corrupted Blood",
+        "Shellshock"
+      ]
+    },
+    "otdb-909701a9bf7a": {
+      "prompt": "Quelle partie du cerveau doit son nom au mot grec désignant l'hippocampe ?",
+      "options": [
+        "Hippocampe",
+        "Cervelet",
+        "Thalamus",
+        "Amygdale"
+      ]
+    },
+    "otdb-955ff0f53474": {
+      "prompt": "Comment s'appelle un polygone à neuf côtés ?",
+      "options": [
+        "Octogone",
+        "Ennéagone",
+        "Hexagone",
+        "Heptagone"
+      ]
+    },
+    "otdb-9994d1fb8edf": {
+      "prompt": "FLAC signifie « Free Lossless Audio Condenser »."
+    },
+    "otdb-99b529fba2ca": {
+      "prompt": "Qu'y a-t-il au centre de notre galaxie ?",
+      "options": [
+        "Un quasar",
+        "Un trou de ver",
+        "Une supernova",
+        "Un trou noir"
+      ]
+    },
+    "otdb-9b0adb0a220b": {
+      "prompt": "Tout comme avec les Néandertaliens, Homo sapiens sapiens s'est aussi croisé avec les Dénisoviens."
+    },
+    "otdb-9bcdb370f50b": {
+      "prompt": "Comment s'appelait la faille de sécurité découverte dans Bash en 2014 ?",
+      "options": [
+        "Bashbug",
+        "Stagefright",
+        "Shellshock",
+        "Heartbleed"
+      ]
+    },
+    "otdb-9df83564342e": {
+      "prompt": "Quel nom portait Android 4.3 ?",
+      "options": [
+        "Nutella",
+        "Lollipop",
+        "Froyo",
+        "Jelly Bean"
+      ]
+    },
+    "otdb-9e019c8899a8": {
+      "prompt": "Quelle a été la première version d'Android optimisée pour les tablettes ?",
+      "options": [
+        "Marshmallow",
+        "Eclair",
+        "Froyo",
+        "Honeycomb"
+      ]
+    },
+    "otdb-9e82e246c793": {
+      "prompt": "Des scientifiques ont tué par accident un mollusque de 507 ans, alors la plus vieille créature vivante connue."
+    },
+    "otdb-9ee4a9a12815": {
+      "prompt": "Combien de planètes compte le système solaire ?",
+      "options": [
+        "10",
+        "11",
+        "9",
+        "8"
+      ]
+    },
+    "otdb-9f375917cbb3": {
+      "prompt": "Le nom du langage AWK vient des initiales de ses concepteurs : Aho, Weinberger et Kernighan."
+    },
+    "otdb-9f7e98efc089": {
+      "prompt": "Tout code doit être compilé en un fichier exécutable pour être lancé, et ce fichier peut ensuite s'exécuter sur n'importe quelle machine."
+    },
+    "otdb-a114f70d6449": {
+      "prompt": "Quelle est l'unité de résistance électrique ?",
+      "options": [
+        "Tesla",
+        "Ohm",
+        "Joule",
+        "Mho"
+      ]
+    },
+    "otdb-a11ae66d1b9b": {
+      "prompt": "Dans le système hexadécimal, quel symbole vient après 9 ?",
+      "options": [
+        "Le chiffre 0",
+        "La lettre A",
+        "10",
+        "16"
+      ]
+    },
+    "otdb-a1d75027d41f": {
+      "prompt": "L'anatomie étudie les formes des structures macroscopiques comme les organes et les systèmes d'organes."
+    },
+    "otdb-a37ac651f268": {
+      "prompt": "À l'entier le plus proche, combien de radians compte un cercle complet ?",
+      "options": [
+        "3",
+        "6",
+        "4",
+        "5"
+      ]
+    },
+    "otdb-a38206ed393f": {
+      "prompt": "L'eau bout toujours à 100 °C, 212 °F, 373,15 K, où que l'on soit."
+    },
+    "otdb-a447ed5a5aee": {
+      "prompt": "Quel est le symbole chimique de l'hélium ?",
+      "options": [
+        "H",
+        "Hg",
+        "He",
+        "Hs"
+      ]
+    },
+    "otdb-a4adcd6ba6a7": {
+      "prompt": "Quel type de fonction est x²+2x+1 ?",
+      "options": [
+        "Quadratique",
+        "Linéaire",
+        "Rationnelle",
+        "Exponentielle"
+      ]
+    },
+    "otdb-a5649270c36f": {
+      "prompt": "Que signifie AD dans les systèmes d'exploitation Windows ?",
+      "options": [
+        "Automated Database",
+        "Active Department",
+        "Active Directory",
+        "Alternative Drive"
+      ]
+    },
+    "otdb-a5bb63acb57e": {
+      "prompt": "Combien de côtés un heptagone a-t-il ?",
+      "options": [
+        "7",
+        "5",
+        "4",
+        "9"
+      ]
+    },
+    "otdb-a70c06b7e390": {
+      "prompt": "Quel élément chimique a le point d'ébullition le plus bas ?",
+      "options": [
+        "Hydrogène",
+        "Néon",
+        "Azote",
+        "Hélium"
+      ]
+    },
+    "otdb-a7927b209da9": {
+      "prompt": "Laquelle de ces propositions n'est pas une valeur clé du développement logiciel agile ?",
+      "options": [
+        "Collaboration client",
+        "Documentation exhaustive",
+        "Individus et interactions",
+        "S'adapter au changement"
+      ]
+    },
+    "otdb-a9c4cea33b8a": {
+      "prompt": "L'Australie, le Japon et l'Asie du Sud-Est appartiennent à quelle région de l'UIT ?",
+      "options": [
+        "Région 3",
+        "Région 4",
+        "Région 1",
+        "Région 2"
+      ]
+    },
+    "otdb-ac81bc2dd0ac": {
+      "prompt": "Quel plastique sert couramment à fabriquer les cadres de fenêtres, les gouttières et les tuyaux d'évacuation ?",
+      "options": [
+        "Polystyrène",
+        "Polychlorure de vinyle",
+        "Polyéthylène",
+        "Polypropylène"
+      ]
+    },
+    "otdb-ad5941b21fc6": {
+      "prompt": "Quelle planète du système solaire est la plus proche du Soleil ?",
+      "options": [
+        "Mars",
+        "Terre",
+        "Vénus",
+        "Mercure"
+      ]
+    },
+    "otdb-ae53ef4e4326": {
+      "prompt": "Quel est le nom scientifique de l'homininé disparu surnommé « Lucy » ?",
+      "options": [
+        "A. afarensis",
+        "A. africanus",
+        "A. antaris",
+        "A. architeuthis"
+      ]
+    },
+    "otdb-aeb0433124d1": {
+      "prompt": "Quelle partie du corps humain la maladie d'Alzheimer touche-t-elle principalement ?",
+      "options": [
+        "Le cerveau",
+        "Le cœur",
+        "Les poumons",
+        "La peau"
+      ]
+    },
+    "otdb-b052e1ff8e31": {
+      "prompt": "Quel niveau de RAID est associé à la mise en miroir des données ?",
+      "options": [
+        "RAID 5",
+        "RAID 1",
+        "RAID 0",
+        "RAID 10"
+      ]
+    },
+    "otdb-b36a521a5971": {
+      "prompt": "Lequel de ces algorithmes n'existe pas en informatique ?",
+      "options": [
+        "Tri rapide",
+        "Tri fusion",
+        "Tri flottant",
+        "Tri à bulles"
+      ]
+    },
+    "otdb-b39997e8ab63": {
+      "prompt": "En Java, quel mot-clé place-t-on sur une variable pour s'assurer qu'elle ne sera pas modifiée ?",
+      "options": [
+        "Static",
+        "Private",
+        "Public",
+        "Final"
+      ]
+    },
+    "otdb-b493dae2e67b": {
+      "prompt": "Combien de faces carrées un cube possède-t-il ?",
+      "options": [
+        "4",
+        "10",
+        "8",
+        "6"
+      ]
+    },
+    "otdb-b5e6e0aa6ddb": {
+      "prompt": "Tous ces logiciels sont des éditeurs d'images matricielles, SAUF :",
+      "options": [
+        "Paint.NET",
+        "GIMP",
+        "Adobe Photoshop",
+        "Inkscape"
+      ]
+    },
+    "otdb-b6d6874ef248": {
+      "prompt": "Le « millinillion » est un vrai nombre."
+    },
+    "otdb-b6e94325bd51": {
+      "prompt": "Quel est le plus petit nombre qui s'écrit de deux façons différentes comme somme de deux cubes positifs ?",
+      "options": [
+        "1729",
+        "4104",
+        "91",
+        "561"
+      ]
+    },
+    "otdb-b811c0a585b5": {
+      "prompt": "Quelle est la formule moléculaire du glucose ?",
+      "options": [
+        "CH4",
+        "K+",
+        "C2H4O2",
+        "C6H12O6"
+      ]
+    },
+    "otdb-b9a5f1ae497e": {
+      "prompt": "Lequel de ces langages de programmation est un langage de bas niveau ?",
+      "options": [
+        "C#",
+        "Pascal",
+        "Assembleur",
+        "Python"
+      ]
+    },
+    "otdb-ba453f1ef9ee": {
+      "prompt": "Un composé organique est un alcool s'il possède quel groupe fonctionnel ?",
+      "options": [
+        "Aldéhyde",
+        "Carbonyle",
+        "Alkyle",
+        "Hydroxyle"
+      ]
+    },
+    "otdb-bc22e5e20211": {
+      "prompt": "Dans le plan complexe, multiplier une fonction par i la fait tourner dans le sens antihoraire de combien de degrés ?",
+      "options": [
+        "0",
+        "270",
+        "180",
+        "90"
+      ]
+    },
+    "otdb-bde6fd8b3fd1": {
+      "prompt": "Comment s'appelle le procédé qui transmet un qubit à l'aide de deux bits classiques ?",
+      "options": [
+        "Téléportation quantique",
+        "Codage superdense",
+        "Programmation quantique",
+        "Intrication quantique"
+      ]
+    },
+    "otdb-beb7fd4d0373": {
+      "prompt": "L'Hôpital est le mathématicien qui a créé la règle qui porte son nom et qui utilise les dérivées pour lever les indéterminations des limites."
+    },
+    "otdb-bfb15a9c125e": {
+      "prompt": "Que signifie le sigle USB ?",
+      "options": [
+        "Unified Signal Bus",
+        "Unityped Semtex Backer",
+        "Universal Simtex Blot",
+        "Universal Serial Bus"
+      ]
+    },
+    "otdb-c06721937acc": {
+      "prompt": "Quelle est la valeur approchée de la constante mathématique e ?",
+      "options": [
+        "3,14",
+        "1,62",
+        "2,72",
+        "1,41"
+      ]
+    },
+    "otdb-c36b25a0ac42": {
+      "prompt": "Quel protocole internet est décrit dans la RFC 1459 ?",
+      "options": [
+        "IRC",
+        "HTTP",
+        "FTP",
+        "HTTPS"
+      ]
+    },
+    "otdb-c3e8918d88be": {
+      "prompt": "Qui a découvert la loi de la gravitation ?",
+      "options": [
+        "Albert Einstein",
+        "Isaac Newton",
+        "Galilée",
+        "Charles Darwin"
+      ]
+    },
+    "otdb-c708f35b9d1d": {
+      "prompt": "RAM signifie « Random Access Memory » (mémoire vive)."
+    },
+    "otdb-c7c4ef049759": {
+      "prompt": "Dans un langage de programmation, quelle est la façon la plus courante de parcourir un tableau ?",
+      "options": [
+        "Boucles « while »",
+        "Instructions « if »",
+        "Boucles « for »",
+        "Boucles « do-while »"
+      ]
+    },
+    "otdb-c7ef1776cf3a": {
+      "prompt": "Quel moteur de développement de jeux l'informaticien néerlandais Mark Overmars a-t-il créé ?",
+      "options": [
+        "Stencyl",
+        "Construct",
+        "Torque 2D",
+        "Game Maker"
+      ]
+    },
+    "otdb-c832b33c59a6": {
+      "prompt": "En topologie, le complémentaire d'un ouvert est un fermé."
+    }
+  },
+  "quizzes": {}
+}

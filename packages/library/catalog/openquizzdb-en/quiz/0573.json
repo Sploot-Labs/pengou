@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=573"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0573-2-en",
+      "type": "mcq",
+      "prompt": "Which of these disorders can be linked to a magnesium deficiency?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cramps",
+            "correct": true
+          },
+          {
+            "label": "Anorexia",
+            "correct": false
+          },
+          {
+            "label": "Asthma",
+            "correct": false
+          },
+          {
+            "label": "Bulimia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0573-3-en",
+      "type": "mcq",
+      "prompt": "Which of these fruits is by far the richest in magnesium?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pear",
+            "correct": false
+          },
+          {
+            "label": "Grapes",
+            "correct": false
+          },
+          {
+            "label": "Banana",
+            "correct": true
+          },
+          {
+            "label": "Apple",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0573-4-en",
+      "type": "mcq",
+      "prompt": "What effect is caused by an excess of magnesium?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stimulating",
+            "correct": false
+          },
+          {
+            "label": "Anabolic",
+            "correct": false
+          },
+          {
+            "label": "Sedating",
+            "correct": false
+          },
+          {
+            "label": "Laxative",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

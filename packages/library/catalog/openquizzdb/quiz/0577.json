@@ -64,35 +64,6 @@
       "audience": "adultes"
     },
     {
-      "id": "oqdb-0577-3",
-      "type": "mcq",
-      "prompt": "Quel classique des bars se compose de Grand Marnier et de gin ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Negroni",
-            "correct": false
-          },
-          {
-            "label": "Baltimore",
-            "correct": true
-          },
-          {
-            "label": "Singapore sling",
-            "correct": false
-          },
-          {
-            "label": "Perroquet",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "adultes"
-    },
-    {
       "id": "oqdb-0577-4",
       "type": "mcq",
       "prompt": "Quel cocktail à base de liqueur de cerise contient du gin ?",

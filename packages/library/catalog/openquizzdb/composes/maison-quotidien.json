@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0604-3",
-      "type": "mcq",
-      "prompt": "Quel passage en surplomb dessert les pièces du niveau supérieur ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Balcon",
-            "correct": false
-          },
-          {
-            "label": "Mezzanine",
-            "correct": true
-          },
-          {
-            "label": "Carport",
-            "correct": false
-          },
-          {
-            "label": "Véranda",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0604-4",
       "type": "mcq",
       "prompt": "Quelle alternative au garage classique est ouverte sur les côtés ?",
@@ -354,35 +325,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0472-1",
-      "type": "mcq",
-      "prompt": "Quel moyen de transport est utilisé par les médecins en Australie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Train",
-            "correct": false
-          },
-          {
-            "label": "Montgolfière",
-            "correct": false
-          },
-          {
-            "label": "Hélicoptère",
-            "correct": true
-          },
-          {
-            "label": "Voiture",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0472-2",
       "type": "mcq",
       "prompt": "Que portent aux mains de nombreux conducteurs de taxi au Japon ?",
@@ -482,7 +424,6 @@
       "questionIds": [
         "oqdb-0604-1",
         "oqdb-0604-2",
-        "oqdb-0604-3",
         "oqdb-0604-4",
         "oqdb-0608-1",
         "oqdb-0608-2",
@@ -492,7 +433,6 @@
         "oqdb-0467-2",
         "oqdb-0467-3",
         "oqdb-0467-4",
-        "oqdb-0472-1",
         "oqdb-0472-2",
         "oqdb-0472-3",
         "oqdb-0472-4"

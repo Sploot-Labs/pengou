@@ -47,8 +47,15 @@ source (nom, licence, lien) et diffuser les questions modifiées sous la même l
 cette attribution sur chaque question copiée depuis la bibliothèque et l'affiche dans la
 bibliothèque et l'éditeur.
 
-La liste des thèmes (`catalog/themes.json`) et les scripts de conversion
-(`packages/library/scripts/`) relèvent d'Apache-2.0, comme le reste du code.
+Les dossiers `catalog/opentdb-fr/` (Open Trivia Database traduit en français) et
+`catalog/openquizzdb-en/` (OpenQuizzDB traduit en anglais) sont des adaptations : des traductions
+assistées par IA, produites par Sploot Labs, sous la même licence Creative Commons BY-SA 4.0. Chacun
+a son fichier `LICENSE.md`. Les tables de traduction (`packages/library/translations/`) sont aussi
+sous CC BY-SA 4.0 et n'entrent pas dans la licence Apache-2.0.
+
+La liste des thèmes (`catalog/themes.json`) et les scripts de conversion, de sélection et de
+traduction (`packages/library/scripts/`, dont `curate-opentdb.ts` et `translate-catalog.ts`)
+relèvent d'Apache-2.0, comme le reste du code.
 
 ## Communication de marque
 

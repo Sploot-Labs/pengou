@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0069-1",
-      "type": "mcq",
-      "prompt": "Quelle ville des États-Unis est surnommée la « grosse pomme » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Miami",
-            "correct": false
-          },
-          {
-            "label": "Las Vegas",
-            "correct": false
-          },
-          {
-            "label": "Los Angeles",
-            "correct": false
-          },
-          {
-            "label": "New York",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0069-2",
       "type": "mcq",
       "prompt": "Dans quel verger poussent presque exclusivement des pommiers ?",
@@ -83,35 +54,6 @@
           },
           {
             "label": "La Jonagold",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0069-4",
-      "type": "mcq",
-      "prompt": "Quel physicien anglais a été attentif à la chute des pommes ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tycho Brahe",
-            "correct": false
-          },
-          {
-            "label": "Isaac Newton",
-            "correct": true
-          },
-          {
-            "label": "Peter Higgs",
-            "correct": false
-          },
-          {
-            "label": "Nicolas Copernic",
             "correct": false
           }
         ]

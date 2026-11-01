@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=510"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0510-1-en",
+      "type": "mcq",
+      "prompt": "Which carmaker has the slogan \"Sheer Driving Pleasure\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lotus",
+            "correct": false
+          },
+          {
+            "label": "Lexus",
+            "correct": false
+          },
+          {
+            "label": "BMW",
+            "correct": true
+          },
+          {
+            "label": "Mercedes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

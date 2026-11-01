@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0450-3",
+      "type": "mcq",
+      "prompt": "Dans quelle émission Les Nuls présentaient-ils un faux JT ?",
+      "payload": {
+        "options": [
+          {
+            "label": "NPA",
+            "correct": false
+          },
+          {
+            "label": "Ici Paris",
+            "correct": false
+          },
+          {
+            "label": "Groland",
+            "correct": false
+          },
+          {
+            "label": "Les Nuls, l'émission",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0393-2",
+      "type": "mcq",
+      "prompt": "Que représente la broche de Katniss dans « Hunger Games » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Globe",
+            "correct": false
+          },
+          {
+            "label": "Pioche",
+            "correct": false
+          },
+          {
+            "label": "Geai moqueur",
+            "correct": true
+          },
+          {
+            "label": "Arc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0135-4",
+      "type": "mcq",
+      "prompt": "En quelle année Charlemagne a-t-il été couronné empereur à Rome ?",
+      "payload": {
+        "options": [
+          {
+            "label": "700",
+            "correct": false
+          },
+          {
+            "label": "800",
+            "correct": true
+          },
+          {
+            "label": "900",
+            "correct": false
+          },
+          {
+            "label": "600",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0536-1",
+      "type": "mcq",
+      "prompt": "Que mangent surtout les coccinelles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chenilles",
+            "correct": false
+          },
+          {
+            "label": "Fourmis",
+            "correct": false
+          },
+          {
+            "label": "Pucerons",
+            "correct": true
+          },
+          {
+            "label": "Moustiques",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0354-4",
+      "type": "mcq",
+      "prompt": "De qui Jacquouille tombe-t-il amoureux dans « Les Visiteurs » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dame Janette",
+            "correct": false
+          },
+          {
+            "label": "Dame Josette",
+            "correct": false
+          },
+          {
+            "label": "Dame Gilberte",
+            "correct": false
+          },
+          {
+            "label": "Dame Ginette",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0372-4",
+      "type": "mcq",
+      "prompt": "Dans quelle tarte les pommes renversée sont-elles caramélisées ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tarte Tatin",
+            "correct": true
+          },
+          {
+            "label": "Tarte au riz",
+            "correct": false
+          },
+          {
+            "label": "Tarte normande",
+            "correct": false
+          },
+          {
+            "label": "Tarte au maton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0225-4",
+      "type": "mcq",
+      "prompt": "Quel film de Steven Spielberg réinvente l'histoire de Peter Pan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hook",
+            "correct": true
+          },
+          {
+            "label": "Amistad",
+            "correct": false
+          },
+          {
+            "label": "Munich",
+            "correct": false
+          },
+          {
+            "label": "Sugarland Express",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0561-1",
+      "type": "mcq",
+      "prompt": "Quel titre de France Gall est célèbre pour ses deux niveaux de lecture ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Cloche",
+            "correct": false
+          },
+          {
+            "label": "La Petite",
+            "correct": false
+          },
+          {
+            "label": "Les Sucettes",
+            "correct": true
+          },
+          {
+            "label": "Il neige",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0323-3",
+      "type": "mcq",
+      "prompt": "Quel rôle tactique Kylian Mbappé occupe-t-il principalement ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Attaquant",
+            "correct": true
+          },
+          {
+            "label": "Gardien de but",
+            "correct": false
+          },
+          {
+            "label": "Milieu de terrain",
+            "correct": false
+          },
+          {
+            "label": "Défenseur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0500-2",
+      "type": "mcq",
+      "prompt": "Quel mot d'usage courant en France désigne un véhicule habitable ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monocycle",
+            "correct": false
+          },
+          {
+            "label": "Camping-car",
+            "correct": true
+          },
+          {
+            "label": "Diligence",
+            "correct": false
+          },
+          {
+            "label": "Caravane",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0318-4",
+      "type": "mcq",
+      "prompt": "Quelle taille environ peut atteindre une girafe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "4 mètres",
+            "correct": false
+          },
+          {
+            "label": "3 mètres",
+            "correct": false
+          },
+          {
+            "label": "8 mètres",
+            "correct": false
+          },
+          {
+            "label": "6 mètres",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0538-2",
+      "type": "mcq",
+      "prompt": "Qui a écrit la nouvelle intitulée « Les neiges du Kilimandjaro » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Steinbeck",
+            "correct": false
+          },
+          {
+            "label": "Camus",
+            "correct": false
+          },
+          {
+            "label": "Mauriac",
+            "correct": false
+          },
+          {
+            "label": "Hemingway",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0589-1",
+      "type": "mcq",
+      "prompt": "Combien de trous compte généralement un parcours de golf ?",
+      "payload": {
+        "options": [
+          {
+            "label": "16",
+            "correct": false
+          },
+          {
+            "label": "12",
+            "correct": false
+          },
+          {
+            "label": "14",
+            "correct": false
+          },
+          {
+            "label": "18",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0435-4",
+      "type": "mcq",
+      "prompt": "Quel océan est relié à la mer Méditerranée par le détroit de Gibraltar ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Arctique",
+            "correct": false
+          },
+          {
+            "label": "Pacifique",
+            "correct": false
+          },
+          {
+            "label": "Atlantique",
+            "correct": true
+          },
+          {
+            "label": "Indien",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0249-3",
+      "type": "mcq",
+      "prompt": "Quelle ouverture permettait d'observer l'ennemi dans un château fort ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Meurtrière",
+            "correct": true
+          },
+          {
+            "label": "Criminelle",
+            "correct": false
+          },
+          {
+            "label": "Bouchère",
+            "correct": false
+          },
+          {
+            "label": "Egorgeuse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0363-3",
+      "type": "mcq",
+      "prompt": "Quel album de Jean-Michel Jarre est sorti en 1976 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rendez-vous",
+            "correct": false
+          },
+          {
+            "label": "Equinoxe",
+            "correct": false
+          },
+          {
+            "label": "Oxygène",
+            "correct": true
+          },
+          {
+            "label": "Chronologie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0512-4",
+      "type": "mcq",
+      "prompt": "Dacia est un constructeur automobile originaire de quel pays ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bulgarie",
+            "correct": false
+          },
+          {
+            "label": "Grèce",
+            "correct": false
+          },
+          {
+            "label": "Pologne",
+            "correct": false
+          },
+          {
+            "label": "Roumanie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0255-3",
+      "type": "mcq",
+      "prompt": "De quel château Hergé s'est-il inspiré pour créer Moulinsart ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Villandry",
+            "correct": false
+          },
+          {
+            "label": "Chaumont",
+            "correct": false
+          },
+          {
+            "label": "Cheverny",
+            "correct": true
+          },
+          {
+            "label": "Langeais",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0470-4",
+      "type": "mcq",
+      "prompt": "À Londres, quel grand édifice porte le nom de Sir Benjamin Hall ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Big Ben",
+            "correct": true
+          },
+          {
+            "label": "Kew Palace",
+            "correct": false
+          },
+          {
+            "label": "Old Bailey",
+            "correct": false
+          },
+          {
+            "label": "Syon House",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0333-2",
+      "type": "mcq",
+      "prompt": "Quel est le principal réseau social professionnel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Friendster",
+            "correct": false
+          },
+          {
+            "label": "LinkedIn",
+            "correct": true
+          },
+          {
+            "label": "Heeloo",
+            "correct": false
+          },
+          {
+            "label": "Movim",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-mix-culture-6",
+      "title": "Mix culture #6",
+      "description": "Un peu de tout : cinéma, sport, géographie, nature, musique et culture générale.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0450-3",
+        "oqdb-0393-2",
+        "oqdb-0135-4",
+        "oqdb-0536-1",
+        "oqdb-0354-4",
+        "oqdb-0372-4",
+        "oqdb-0225-4",
+        "oqdb-0561-1",
+        "oqdb-0323-3",
+        "oqdb-0500-2",
+        "oqdb-0318-4",
+        "oqdb-0538-2",
+        "oqdb-0589-1",
+        "oqdb-0435-4",
+        "oqdb-0249-3",
+        "oqdb-0363-3",
+        "oqdb-0512-4",
+        "oqdb-0255-3",
+        "oqdb-0470-4",
+        "oqdb-0333-2"
+      ]
+    }
+  ]
+}

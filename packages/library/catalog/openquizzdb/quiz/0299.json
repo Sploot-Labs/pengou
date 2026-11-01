@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0299-1",
-      "type": "mcq",
-      "prompt": "Dans quel film de la série James Bond Léa Seydoux a-t-elle joué ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Spectre",
-            "correct": true
-          },
-          {
-            "label": "Licence to Kill",
-            "correct": false
-          },
-          {
-            "label": "Casino Royale",
-            "correct": false
-          },
-          {
-            "label": "Skyfall",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0299-2",
       "type": "mcq",
       "prompt": "Quel film a révélé Léa Seydoux au grand public ?",
@@ -54,64 +25,6 @@
           },
           {
             "label": "Kill Bill",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0299-3",
-      "type": "mcq",
-      "prompt": "Dans quel film de Quentin Tarantino Léa Seydoux a-t-elle joué ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Django Unchained",
-            "correct": true
-          },
-          {
-            "label": "Pulp Fiction",
-            "correct": false
-          },
-          {
-            "label": "Kill Bill",
-            "correct": false
-          },
-          {
-            "label": "Jackie Brown",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0299-4",
-      "type": "mcq",
-      "prompt": "Dans quel pays a-t-elle une forte carrière internationale ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Chine",
-            "correct": false
-          },
-          {
-            "label": "États-Unis",
-            "correct": true
-          },
-          {
-            "label": "Brésil",
-            "correct": false
-          },
-          {
-            "label": "Inde",
             "correct": false
           }
         ]

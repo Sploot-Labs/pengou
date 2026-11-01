@@ -1,0 +1,571 @@
+{
+  "source": {
+    "name": "Open Trivia Database",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-0eb4303f71c7",
+      "type": "mcq",
+      "prompt": "Which of these founding fathers of the United States of America later became president?",
+      "payload": {
+        "options": [
+          {
+            "label": "James Monroe",
+            "correct": true
+          },
+          {
+            "label": "Samuel Adams",
+            "correct": false
+          },
+          {
+            "label": "Roger Sherman",
+            "correct": false
+          },
+          {
+            "label": "Alexander Hamilton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2a67a99cd84b",
+      "type": "mcq",
+      "prompt": "Where is the \"Sonoran Desert\" located?",
+      "payload": {
+        "options": [
+          {
+            "label": "Asia",
+            "correct": false
+          },
+          {
+            "label": "South America",
+            "correct": false
+          },
+          {
+            "label": "Africa",
+            "correct": false
+          },
+          {
+            "label": "North America",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-31a3c42d587e",
+      "type": "truefalse",
+      "prompt": "Cucumbers are usually more than 90% water.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3fb33d531d0f",
+      "type": "mcq",
+      "prompt": "Which artist is famous for cutting off his ear?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vincent van Gogh",
+            "correct": true
+          },
+          {
+            "label": "Rembrandt",
+            "correct": false
+          },
+          {
+            "label": "Michelangelo",
+            "correct": false
+          },
+          {
+            "label": "Salvador Dali",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4af4e403bb98",
+      "type": "mcq",
+      "prompt": "What type of creature is a Bonobo?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wildcat",
+            "correct": false
+          },
+          {
+            "label": "Ape",
+            "correct": true
+          },
+          {
+            "label": "Parrot",
+            "correct": false
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4faaa6a3d415",
+      "type": "mcq",
+      "prompt": "What is the Spanish word for \"donkey\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Caballo",
+            "correct": false
+          },
+          {
+            "label": "Perro",
+            "correct": false
+          },
+          {
+            "label": "Toro",
+            "correct": false
+          },
+          {
+            "label": "Burro",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5ef7614b707e",
+      "type": "mcq",
+      "prompt": "Which of these countries is not a United Nations member state?",
+      "payload": {
+        "options": [
+          {
+            "label": "Montenegro",
+            "correct": false
+          },
+          {
+            "label": "Tuvalu",
+            "correct": false
+          },
+          {
+            "label": "South Sudan",
+            "correct": false
+          },
+          {
+            "label": "Niue",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5f7859cc2457",
+      "type": "mcq",
+      "prompt": "When was the Grand Patriotic War in the USSR concluded?",
+      "payload": {
+        "options": [
+          {
+            "label": "December 11th, 1945",
+            "correct": false
+          },
+          {
+            "label": "May 9th, 1945",
+            "correct": true
+          },
+          {
+            "label": "August 9th, 1945",
+            "correct": false
+          },
+          {
+            "label": "September 2nd, 1945",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-667fc853c9f7",
+      "type": "truefalse",
+      "prompt": "The book 1984 was published in 1949.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-81ae91b33b7a",
+      "type": "mcq",
+      "prompt": "How many moons does Pluto have?",
+      "payload": {
+        "options": [
+          {
+            "label": "Five",
+            "correct": true
+          },
+          {
+            "label": "Two",
+            "correct": false
+          },
+          {
+            "label": "One",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8288be0d6510",
+      "type": "mcq",
+      "prompt": "Who painted the Sistine Chapel?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michelangelo",
+            "correct": true
+          },
+          {
+            "label": "Leonardo da Vinci",
+            "correct": false
+          },
+          {
+            "label": "Raphael",
+            "correct": false
+          },
+          {
+            "label": "Pablo Picasso",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-909701a9bf7a",
+      "type": "mcq",
+      "prompt": "What part of the brain takes its name from the Greek for seahorse?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hippocampus",
+            "correct": true
+          },
+          {
+            "label": "Cerebellum",
+            "correct": false
+          },
+          {
+            "label": "Thalamus",
+            "correct": false
+          },
+          {
+            "label": "Amygdala",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a70c06b7e390",
+      "type": "mcq",
+      "prompt": "Which chemical element has the lowest boiling point?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hydrogen",
+            "correct": false
+          },
+          {
+            "label": "Neon",
+            "correct": false
+          },
+          {
+            "label": "Nitrogen",
+            "correct": false
+          },
+          {
+            "label": "Helium",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-bd49c696a981",
+      "type": "mcq",
+      "prompt": "Which is the largest of these 4 islands?",
+      "payload": {
+        "options": [
+          {
+            "label": "Madagascar",
+            "correct": false
+          },
+          {
+            "label": "Borneo",
+            "correct": true
+          },
+          {
+            "label": "Great Britain",
+            "correct": false
+          },
+          {
+            "label": "Cuba",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c23251c14237",
+      "type": "truefalse",
+      "prompt": "Miami is Florida's largest city.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d3ec6541d5d2",
+      "type": "mcq",
+      "prompt": "Who was the Prime Minister of Japan when Japan declared war on the US?",
+      "payload": {
+        "options": [
+          {
+            "label": "Isoroku Yamamoto",
+            "correct": false
+          },
+          {
+            "label": "Hideki Tojo",
+            "correct": true
+          },
+          {
+            "label": "Fumimaro Konoe",
+            "correct": false
+          },
+          {
+            "label": "Michinomiya Hirohito",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d44bbc8f1fe6",
+      "type": "mcq",
+      "prompt": "Prior to 2018, which car company is the only Japanese company which won the 24 Hours of Le Mans?",
+      "payload": {
+        "options": [
+          {
+            "label": "Subaru",
+            "correct": false
+          },
+          {
+            "label": "Nissan",
+            "correct": false
+          },
+          {
+            "label": "Mazda",
+            "correct": true
+          },
+          {
+            "label": "Toyota",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d7aff140508b",
+      "type": "mcq",
+      "prompt": "Which famous book is sub-titled 'The Modern Prometheus'?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dracula",
+            "correct": false
+          },
+          {
+            "label": "The Legend of Sleepy Hollow",
+            "correct": false
+          },
+          {
+            "label": "Frankenstein",
+            "correct": true
+          },
+          {
+            "label": "The Strange Case of Dr. Jekyll and Mr. Hyde",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e4d2d9edfdc3",
+      "type": "mcq",
+      "prompt": "Human cells typically have how many copies of each gene?",
+      "payload": {
+        "options": [
+          {
+            "label": "3",
+            "correct": false
+          },
+          {
+            "label": "4",
+            "correct": false
+          },
+          {
+            "label": "1",
+            "correct": false
+          },
+          {
+            "label": "2",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f7eacc61f395",
+      "type": "mcq",
+      "prompt": "What year was the first Pizza Hut restaurant opened?",
+      "payload": {
+        "options": [
+          {
+            "label": "1965",
+            "correct": false
+          },
+          {
+            "label": "1958",
+            "correct": true
+          },
+          {
+            "label": "1976",
+            "correct": false
+          },
+          {
+            "label": "1942",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-culture-mix-3",
+      "title": "Culture mix #3",
+      "description": "A mix of geography, history, science, nature, books and art questions.",
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-bd49c696a981",
+        "otdb-8288be0d6510",
+        "otdb-d44bbc8f1fe6",
+        "otdb-3fb33d531d0f",
+        "otdb-f7eacc61f395",
+        "otdb-667fc853c9f7",
+        "otdb-a70c06b7e390",
+        "otdb-5f7859cc2457",
+        "otdb-e4d2d9edfdc3",
+        "otdb-5ef7614b707e",
+        "otdb-c23251c14237",
+        "otdb-2a67a99cd84b",
+        "otdb-81ae91b33b7a",
+        "otdb-d3ec6541d5d2",
+        "otdb-31a3c42d587e",
+        "otdb-909701a9bf7a",
+        "otdb-4faaa6a3d415",
+        "otdb-4af4e403bb98",
+        "otdb-0eb4303f71c7",
+        "otdb-d7aff140508b"
+      ]
+    }
+  ]
+}

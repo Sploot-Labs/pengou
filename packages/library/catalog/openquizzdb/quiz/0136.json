@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0136-1",
-      "type": "mcq",
-      "prompt": "Dans quelle ville Bernadette Soubirous aurait-elle vu la Vierge ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Lyon",
-            "correct": false
-          },
-          {
-            "label": "Lille",
-            "correct": false
-          },
-          {
-            "label": "Lourdes",
-            "correct": true
-          },
-          {
-            "label": "Lisieux",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0136-2",
       "type": "mcq",
       "prompt": "Quel est le plus utilisé des systèmes informatiques dits libres ?",

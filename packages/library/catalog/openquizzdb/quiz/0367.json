@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0367-4",
-      "type": "mcq",
-      "prompt": "Quel pays est aujourd'hui le plus grand producteur d'amandes ?",
-      "payload": {
-        "options": [
-          {
-            "label": "États-Unis",
-            "correct": true
-          },
-          {
-            "label": "Espagne",
-            "correct": false
-          },
-          {
-            "label": "Maroc",
-            "correct": false
-          },
-          {
-            "label": "Italie",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

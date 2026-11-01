@@ -1,0 +1,383 @@
+{
+  "questions": {
+    "otdb-a90d3842b2e9": {
+      "skip": "repose sur le terme anglais « cut time »"
+    },
+    "otdb-1cd233626269": {
+      "skip": "téléfilm de Noël américain inconnu en France"
+    },
+    "otdb-2d8e952da508": {
+      "skip": "longueur : une proposition dépasse 25 caractères en français"
+    },
+    "otdb-612f5bb4477e": {
+      "skip": "longueur : une proposition dépasse 25 caractères en français"
+    },
+    "otdb-6761cc2f4dd1": {
+      "skip": "longueur : une proposition dépasse 25 caractères en français"
+    },
+    "otdb-821330856edc": {
+      "skip": "longueur : une proposition dépasse 25 caractères en français"
+    },
+    "otdb-85ea478a6995": {
+      "skip": "politique locale de New York sans écho en France"
+    },
+    "otdb-bc87ad2012ae": {
+      "skip": "longueur : une proposition dépasse 25 caractères en français"
+    },
+    "otdb-bcb2f01f00c4": {
+      "skip": "longueur : une proposition dépasse 25 caractères en français"
+    },
+    "otdb-c3d38c612156": {
+      "skip": "promotion d'une chaîne de magasins américaine sans écho en France"
+    },
+    "otdb-08084f9a24ed": {
+      "skip": "catch américain inconnu du public français"
+    },
+    "otdb-0dbc6142ca15": {
+      "skip": "repose sur la langue anglaise"
+    },
+    "otdb-4f33b3195ec7": {
+      "skip": "chaîne de restauration américaine sans écho en France"
+    },
+    "otdb-4fab33f38e71": {
+      "skip": "jeu en ligne obscur"
+    },
+    "otdb-5066a9e5567c": {
+      "skip": "longueur : une proposition dépasse 25 caractères en français"
+    },
+    "otdb-54be1d55d00d": {
+      "skip": "repose sur la langue française vue de l'anglais"
+    },
+    "otdb-5bd29c83b392": {
+      "skip": "longueur : une proposition dépasse 25 caractères en français"
+    },
+    "otdb-5e3f011f1494": {
+      "skip": "vocabulaire anglais"
+    },
+    "otdb-6a51800434c0": {
+      "skip": "célébration américaine sans écho en France"
+    },
+    "otdb-796a7378f313": {
+      "skip": "abréviation anglaise"
+    },
+    "otdb-8845bc35f544": {
+      "skip": "longueur : une proposition dépasse 25 caractères en français"
+    },
+    "otdb-9d9f8326e862": {
+      "skip": "expression anglaise intraduisible"
+    },
+    "otdb-b65219f4bcfa": {
+      "skip": "longueur : une proposition dépasse 25 caractères en français"
+    },
+    "otdb-bf0d88003cec": {
+      "skip": "franchise ferroviaire britannique locale"
+    },
+    "otdb-eb6051153e5d": {
+      "skip": "proverbe anglais reposant sur la formulation"
+    },
+    "otdb-eb72fd03bce9": {
+      "skip": "chaînes de restauration américaines sans écho en France"
+    },
+    "otdb-f076937531c5": {
+      "skip": "longueur : une proposition dépasse 25 caractères en français"
+    },
+    "otdb-12a70e3ce22e": {
+      "skip": "longueur : une proposition dépasse 25 caractères en français"
+    },
+    "otdb-371d8d4df00a": {
+      "skip": "ville américaine locale sans écho en France"
+    },
+    "otdb-699d3c37bb7a": {
+      "skip": "nom allemand et propositions de plus de 25 caractères"
+    },
+    "otdb-70c68a3c6359": {
+      "skip": "une proposition dépasse 25 caractères en français"
+    },
+    "otdb-9f1bd526606f": {
+      "skip": "capitale d'un État américain sans écho en France"
+    },
+    "otdb-a92133d4e11a": {
+      "skip": "géographie locale australienne sans écho en France"
+    },
+    "otdb-b4f8878a0346": {
+      "skip": "capitale d'un État américain sans écho en France"
+    },
+    "otdb-e5f2c76ed182": {
+      "skip": "géographie locale américaine sans écho en France"
+    },
+    "otdb-ebe3e50ff495": {
+      "skip": "géographie locale américaine sans écho en France"
+    },
+    "otdb-6677bf729742": {
+      "skip": "repose sur l'alphabet anglais et les lettres de la langue"
+    },
+    "otdb-b9f569ce0ddc": {
+      "skip": "propositions bien plus longues que 25 caractères"
+    },
+    "otdb-c9ace0b969d0": {
+      "skip": "abréviation anglaise (RMS)"
+    },
+    "otdb-015c9d383c7f": {
+      "skip": "jeu trop confidentiel pour un public français"
+    },
+    "otdb-1463919bf16c": {
+      "skip": "jeu et personnage peu connus en France"
+    },
+    "otdb-176d0a553785": {
+      "skip": "jeu et affaire trop pointus"
+    },
+    "otdb-3a022d700a5a": {
+      "skip": "jeu indépendant et blague trop confidentiels"
+    },
+    "otdb-5004bd33958a": {
+      "skip": "classe d'un jeu peu connu en France"
+    },
+    "otdb-739d63873aa9": {
+      "skip": "une proposition dépasse 25 caractères"
+    },
+    "otdb-77cdd5e38c17": {
+      "skip": "mème et propositions trop longues"
+    },
+    "otdb-79d8bc6017ef": {
+      "skip": "jeu disparu et peu connu en France"
+    },
+    "otdb-956420e388ea": {
+      "skip": "jeu confidentiel pour un public français"
+    },
+    "otdb-995b1edd2e40": {
+      "skip": "jeu confidentiel pour un public français"
+    },
+    "otdb-a71e30036307": {
+      "skip": "événement d'e-sport trop pointu"
+    },
+    "otdb-d7d5e009efb8": {
+      "skip": "événement d'e-sport trop pointu"
+    },
+    "otdb-08987994f4ea": {
+      "skip": "saga de fantasy peu connue du public français"
+    },
+    "otdb-0d07d4bb57c7": {
+      "skip": "propositions bien plus longues que 25 caractères"
+    },
+    "otdb-169e387b1b51": {
+      "skip": "une proposition dépasse 25 caractères"
+    },
+    "otdb-26343f0f3a8a": {
+      "skip": "univers de jeu de cartes trop pointu"
+    },
+    "otdb-7b3d1dffc1d0": {
+      "skip": "série américaine peu connue du public français, propositions fantaisistes"
+    },
+    "otdb-9390c40a29bf": {
+      "skip": "livre d'un youtubeur britannique inconnu en France"
+    },
+    "otdb-a071e3cc441c": {
+      "skip": "proposition de plus de 25 caractères en français"
+    },
+    "otdb-dc091752b24c": {
+      "skip": "repose sur l'orthographe anglaise d'un titre inconnu en France"
+    },
+    "otdb-ffbeeb0a8c0d": {
+      "skip": "repose sur le décompte de mots de la version anglaise"
+    },
+    "otdb-2c7d780fec20": {
+      "skip": "groupe de rock japonais peu connu en France"
+    },
+    "otdb-435dc516ed8a": {
+      "skip": "chanteur de country américain peu connu en France"
+    },
+    "otdb-4381e71fb72c": {
+      "skip": "proposition de plus de 25 caractères en français"
+    },
+    "otdb-5ed74ae81ee9": {
+      "skip": "générique d'un anime peu connu du grand public"
+    },
+    "otdb-7930f7c08f60": {
+      "skip": "proposition de plus de 25 caractères en français"
+    },
+    "otdb-79c403bcd279": {
+      "skip": "proposition de plus de 25 caractères en français"
+    },
+    "otdb-7e4e1e60cdf9": {
+      "skip": "personnage internet américain inconnu en France"
+    },
+    "otdb-95ab965e16c2": {
+      "skip": "proposition de plus de 25 caractères en français"
+    },
+    "otdb-99ccdd57d685": {
+      "skip": "proposition de plus de 25 caractères en français"
+    },
+    "otdb-af20b37fad52": {
+      "skip": "proposition de plus de 25 caractères en français"
+    },
+    "otdb-b7e1333db6a6": {
+      "skip": "proposition de plus de 25 caractères en français"
+    },
+    "otdb-b8d846c885bd": {
+      "skip": "groupe américain peu connu en France, date de sortie très pointue"
+    },
+    "otdb-c8db83a4e836": {
+      "skip": "proposition de plus de 25 caractères en français"
+    },
+    "otdb-ca12f54079d0": {
+      "skip": "membres d'un groupe de K-pop trop pointus pour le public français"
+    },
+    "otdb-cb77bea37983": {
+      "skip": "classement du Billboard américain très pointu"
+    },
+    "otdb-d0b8b0fb504b": {
+      "skip": "membre d'un groupe de K-pop trop pointue pour le public français"
+    },
+    "otdb-e57d0e9d1a5f": {
+      "skip": "paroles en anglais"
+    },
+    "otdb-f129dd53b18f": {
+      "skip": "proposition de plus de 25 caractères en français"
+    },
+    "otdb-fa32b2fa1b5b": {
+      "skip": "chanteur américain des années 70 peu connu en France"
+    },
+    "otdb-dba7bdeb73ed": {
+      "skip": "repose sur un nom vernaculaire anglais"
+    },
+    "otdb-0a392b489235": {
+      "skip": "repose sur un mot anglais"
+    },
+    "otdb-11226c9ecabf": {
+      "skip": "échelles courte et longue différentes en français (billion, trillion)"
+    },
+    "otdb-14d23ee35b97": {
+      "skip": "abréviation anglaise"
+    },
+    "otdb-2f961156e8c5": {
+      "skip": "abréviation anglaise"
+    },
+    "otdb-642dd61cc444": {
+      "skip": "repose sur des abréviations ou termes anglais, propositions trop longues"
+    },
+    "otdb-65668594f4bf": {
+      "skip": "repose sur des mots anglais rares (jentacular, gongoozler)"
+    },
+    "otdb-662014276322": {
+      "skip": "repose sur des nuances de l'abréviation anglaise CPU"
+    },
+    "otdb-673be552c309": {
+      "skip": "histoire des services en ligne américains sans écho en France"
+    },
+    "otdb-925362e337d2": {
+      "skip": "repose sur des abréviations ou termes anglais, propositions trop longues"
+    },
+    "otdb-a2584d43c646": {
+      "skip": "repose sur des abréviations ou termes anglais, propositions trop longues"
+    },
+    "otdb-a92b7e5f0221": {
+      "skip": "repose sur des abréviations ou termes anglais, propositions trop longues"
+    },
+    "otdb-bb700700db80": {
+      "skip": "histoire de la NSA américaine, sans écho en France"
+    },
+    "otdb-bc191941aeeb": {
+      "skip": "nomenclature de processeurs graphiques trop pointue"
+    },
+    "otdb-bdb1a26c66fa": {
+      "skip": "échelles courte et longue des grands nombres différentes en français"
+    },
+    "otdb-be5d545d0314": {
+      "skip": "repose sur les degrés Fahrenheit, peu parlants en France"
+    },
+    "otdb-ce317a3ee58e": {
+      "skip": "norme américaine NFPA 704 sans écho en France"
+    },
+    "otdb-d53a0113a6d9": {
+      "skip": "événement météo britannique local"
+    },
+    "otdb-d5b9d45b3fc0": {
+      "skip": "mnémonique anglo-saxon, propositions trop longues"
+    },
+    "otdb-d6823341a1de": {
+      "skip": "repose sur les pouces de mercure, unité américaine"
+    },
+    "otdb-f64adfc90663": {
+      "skip": "propositions trop longues et sujet technique pointu"
+    },
+    "otdb-098f7c4b9d1b": {
+      "skip": "sport nord-américain (NHL, ligue mineure) sans écho en France"
+    },
+    "otdb-0ed0954dd7d4": {
+      "skip": "commentateur canadien de hockey inconnu en France"
+    },
+    "otdb-10891cee2bac": {
+      "skip": "terme de bowling anglais (« turkey ») sans équivalent"
+    },
+    "otdb-120431bcaa03": {
+      "skip": "baseball sans écho en France"
+    },
+    "otdb-15f962184583": {
+      "skip": "football américain sans écho en France"
+    },
+    "otdb-26d6ba6d1f3c": {
+      "skip": "propositions trop longues (noms complets)"
+    },
+    "otdb-2b256496ad46": {
+      "skip": "football américain sans écho en France"
+    },
+    "otdb-485d1e542b73": {
+      "skip": "sport nord-américain (NHL, ligue mineure) sans écho en France"
+    },
+    "otdb-4be698b809d1": {
+      "skip": "catch américain sans écho en France"
+    },
+    "otdb-4f507e021c7d": {
+      "skip": "course britannique locale"
+    },
+    "otdb-6dc2b0007808": {
+      "skip": "football américain sans écho en France"
+    },
+    "otdb-6e32e0518e36": {
+      "skip": "sport nord-américain (NHL, ligue mineure) sans écho en France"
+    },
+    "otdb-84d7dd76e278": {
+      "skip": "catch américain sans écho en France"
+    },
+    "otdb-910b470451fc": {
+      "skip": "sport nord-américain (NHL, ligue mineure) sans écho en France"
+    },
+    "otdb-9e5488bc46aa": {
+      "skip": "sport nord-américain (NHL, ligue mineure) sans écho en France"
+    },
+    "otdb-a5b1d988413c": {
+      "skip": "sport nord-américain (NHL, ligue mineure) sans écho en France"
+    },
+    "otdb-aef583eff66f": {
+      "skip": "sport nord-américain (NHL, ligue mineure) sans écho en France"
+    },
+    "otdb-b2b22e964a53": {
+      "skip": "basket NBA de niche sans écho en France"
+    },
+    "otdb-cfeb19c5f81f": {
+      "skip": "équipes sportives américaines locales"
+    },
+    "otdb-d26bb3f08f02": {
+      "skip": "baseball sans écho en France"
+    },
+    "otdb-de3a56f83383": {
+      "skip": "baseball sans écho en France"
+    },
+    "otdb-df01fabddc75": {
+      "skip": "sport nord-américain (NHL, ligue mineure) sans écho en France"
+    },
+    "otdb-f37d3da1f43e": {
+      "skip": "basket NBA de niche sans écho en France"
+    },
+    "otdb-fcc35ab47e63": {
+      "skip": "cricket peu connu en France"
+    },
+    "otdb-fe1c782d53c2": {
+      "skip": "catch britannique local"
+    },
+    "otdb-fe726ca52a64": {
+      "skip": "basket NBA de niche sans écho en France"
+    }
+  },
+  "quizzes": {}
+}

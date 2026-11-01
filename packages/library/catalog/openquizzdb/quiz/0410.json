@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0410-2",
-      "type": "mcq",
-      "prompt": "Qui est l'ennemi de Woody au début de « Toy Story » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Buzz l'Éclair",
-            "correct": true
-          },
-          {
-            "label": "Razmotte",
-            "correct": false
-          },
-          {
-            "label": "Rex",
-            "correct": false
-          },
-          {
-            "label": "Sid",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0410-3",
       "type": "mcq",
       "prompt": "Quelle est la senteur de Lotso dans « Toy Story 3 » ?",

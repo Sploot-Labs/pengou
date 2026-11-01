@@ -35,64 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0500-2",
-      "type": "mcq",
-      "prompt": "Quel mot d'usage courant en France désigne un véhicule habitable ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Monocycle",
-            "correct": false
-          },
-          {
-            "label": "Camping-car",
-            "correct": true
-          },
-          {
-            "label": "Diligence",
-            "correct": false
-          },
-          {
-            "label": "Caravane",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0500-3",
-      "type": "mcq",
-      "prompt": "Quel avion possède la capacité de se poser ou de décoller sur l'eau ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Hydravion",
-            "correct": true
-          },
-          {
-            "label": "Deltaplane",
-            "correct": false
-          },
-          {
-            "label": "Planeur",
-            "correct": false
-          },
-          {
-            "label": "ULM",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0500-4",
       "type": "mcq",
       "prompt": "Quelle motocyclette est pourvue d'une troisième roue et d'un panier ?",

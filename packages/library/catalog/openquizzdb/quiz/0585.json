@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0585-3",
-      "type": "mcq",
-      "prompt": "Quel intrus se cache parmi ces adeptes du noeud papillon ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Charlot",
-            "correct": true
-          },
-          {
-            "label": "James Bond",
-            "correct": false
-          },
-          {
-            "label": "Hercule Poirot",
-            "correct": false
-          },
-          {
-            "label": "Donald Duck",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0585-4",
       "type": "mcq",
       "prompt": "Quel intrus se cache parmi ces mots qui peuvent être vapeur ?",

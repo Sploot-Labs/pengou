@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0354-3",
+      "type": "mcq",
+      "prompt": "Où se dresse le château de Godefroy dans le film « Les Visiteurs » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mont-de-Marsan",
+            "correct": false
+          },
+          {
+            "label": "Montmirail",
+            "correct": true
+          },
+          {
+            "label": "Mont-Dore",
+            "correct": false
+          },
+          {
+            "label": "Montargis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0219-1",
+      "type": "mcq",
+      "prompt": "Quelle ville bretonne est connue pour ses alignements de menhirs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quimper",
+            "correct": false
+          },
+          {
+            "label": "Carnac",
+            "correct": true
+          },
+          {
+            "label": "Brest",
+            "correct": false
+          },
+          {
+            "label": "Lorient",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0289-2",
+      "type": "mcq",
+      "prompt": "Quel logiciel protège un ordinateur des menaces en ligne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chat",
+            "correct": false
+          },
+          {
+            "label": "Antivirus",
+            "correct": true
+          },
+          {
+            "label": "Messagerie",
+            "correct": false
+          },
+          {
+            "label": "Navigateur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0287-1",
+      "type": "mcq",
+      "prompt": "En plus des lunettes, que porte souvent Jul dans ses clips ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cravate",
+            "correct": false
+          },
+          {
+            "label": "Chapeau",
+            "correct": false
+          },
+          {
+            "label": "Casquette",
+            "correct": true
+          },
+          {
+            "label": "Masque",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0479-3",
+      "type": "mcq",
+      "prompt": "Dans quel livre Rabelais a-t-il écrit la devise « Fais ce que tu voudras » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Quart Livre",
+            "correct": false
+          },
+          {
+            "label": "Pantagruel",
+            "correct": false
+          },
+          {
+            "label": "Tiers Livre",
+            "correct": false
+          },
+          {
+            "label": "Gargantua",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0458-3",
+      "type": "mcq",
+      "prompt": "Maman est en haut, qui fait des gâteaux, papa est en bas, qui fait...",
+      "payload": {
+        "options": [
+          {
+            "label": "Des dégâts",
+            "correct": false
+          },
+          {
+            "label": "Du nougat",
+            "correct": true
+          },
+          {
+            "label": "Du cinéma",
+            "correct": false
+          },
+          {
+            "label": "Des rasta",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0124-1",
+      "type": "mcq",
+      "prompt": "De quelle planète fictive sont originaires Superman et Supergirl ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Krusty",
+            "correct": false
+          },
+          {
+            "label": "Krypton",
+            "correct": true
+          },
+          {
+            "label": "Kamini",
+            "correct": false
+          },
+          {
+            "label": "Kirby",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0336-2",
+      "type": "mcq",
+      "prompt": "Quel est le métier de Korben Dallas dans « Le Cinquième Élément » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tueur à gages",
+            "correct": false
+          },
+          {
+            "label": "Militaire",
+            "correct": false
+          },
+          {
+            "label": "Chauffeur de taxi",
+            "correct": true
+          },
+          {
+            "label": "Policier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0157-2",
+      "type": "mcq",
+      "prompt": "Quelle île grecque affiche maisons blanches et dômes bleus ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mykonos",
+            "correct": false
+          },
+          {
+            "label": "Santorin",
+            "correct": true
+          },
+          {
+            "label": "Rhodes",
+            "correct": false
+          },
+          {
+            "label": "Crète",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0100-3",
+      "type": "mcq",
+      "prompt": "Que sont devenues Byzance et Constantinople ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Istanbul",
+            "correct": true
+          },
+          {
+            "label": "Islamabad",
+            "correct": false
+          },
+          {
+            "label": "Isparta",
+            "correct": false
+          },
+          {
+            "label": "Izmir",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0488-2",
+      "type": "mcq",
+      "prompt": "En boxe, quel coup touche le boxeur adverse en passant sous sa garde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Direct",
+            "correct": false
+          },
+          {
+            "label": "Esquive",
+            "correct": false
+          },
+          {
+            "label": "Crochet",
+            "correct": false
+          },
+          {
+            "label": "Uppercut",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0451-4",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le perroquet de Patchy le pirate ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Looney",
+            "correct": false
+          },
+          {
+            "label": "Potty",
+            "correct": true
+          },
+          {
+            "label": "Nutty",
+            "correct": false
+          },
+          {
+            "label": "Marbles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0117-1",
+      "type": "mcq",
+      "prompt": "Qui a perdu deux fois au second tour face à Emmanuel Macron ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Édith Cresson",
+            "correct": false
+          },
+          {
+            "label": "Marine Le Pen",
+            "correct": true
+          },
+          {
+            "label": "Anne Hidalgo",
+            "correct": false
+          },
+          {
+            "label": "Rachida Dati",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0367-4",
+      "type": "mcq",
+      "prompt": "Quel pays est aujourd'hui le plus grand producteur d'amandes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "États-Unis",
+            "correct": true
+          },
+          {
+            "label": "Espagne",
+            "correct": false
+          },
+          {
+            "label": "Maroc",
+            "correct": false
+          },
+          {
+            "label": "Italie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0352-2",
+      "type": "mcq",
+      "prompt": "Quel insecte parasite vit parfois dans les cheveux humains ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La mite",
+            "correct": false
+          },
+          {
+            "label": "La teigne",
+            "correct": false
+          },
+          {
+            "label": "La punaise",
+            "correct": false
+          },
+          {
+            "label": "Le pou",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0111-4",
+      "type": "mcq",
+      "prompt": "Par quelle discipline débute le championnat du monde Ironman ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Course",
+            "correct": false
+          },
+          {
+            "label": "Marathon",
+            "correct": false
+          },
+          {
+            "label": "Cyclisme",
+            "correct": false
+          },
+          {
+            "label": "Natation",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0304-4",
+      "type": "mcq",
+      "prompt": "Quel groupe de blues-rock est composé de trois Texans barbus ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zed Yago",
+            "correct": false
+          },
+          {
+            "label": "Zella Day",
+            "correct": false
+          },
+          {
+            "label": "ZZ Top",
+            "correct": true
+          },
+          {
+            "label": "Zwan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0460-1",
+      "type": "mcq",
+      "prompt": "Quel petit objet sert à maintenir ensemble des feuilles de papier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trombone",
+            "correct": true
+          },
+          {
+            "label": "Rolodex",
+            "correct": false
+          },
+          {
+            "label": "Post-it",
+            "correct": false
+          },
+          {
+            "label": "Stencil",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0618-1",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on une personne qui élève des abeilles à miel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Raniculteur",
+            "correct": false
+          },
+          {
+            "label": "Apiculteur",
+            "correct": true
+          },
+          {
+            "label": "Aviculteur",
+            "correct": false
+          },
+          {
+            "label": "Ostréiculteur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0334-1",
+      "type": "mcq",
+      "prompt": "Quel rôle joue Bruce Willis dans la saga à succès « Die Hard » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peter Fallow",
+            "correct": false
+          },
+          {
+            "label": "John McClane",
+            "correct": true
+          },
+          {
+            "label": "Tom Mix",
+            "correct": false
+          },
+          {
+            "label": "Walter Davis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-mix-culture-7",
+      "title": "Mix culture #7",
+      "description": "Un peu de tout : cinéma, sport, géographie, nature, musique et culture générale.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0354-3",
+        "oqdb-0219-1",
+        "oqdb-0289-2",
+        "oqdb-0287-1",
+        "oqdb-0479-3",
+        "oqdb-0458-3",
+        "oqdb-0124-1",
+        "oqdb-0336-2",
+        "oqdb-0157-2",
+        "oqdb-0100-3",
+        "oqdb-0488-2",
+        "oqdb-0451-4",
+        "oqdb-0117-1",
+        "oqdb-0367-4",
+        "oqdb-0352-2",
+        "oqdb-0111-4",
+        "oqdb-0304-4",
+        "oqdb-0460-1",
+        "oqdb-0618-1",
+        "oqdb-0334-1"
+      ]
+    }
+  ]
+}

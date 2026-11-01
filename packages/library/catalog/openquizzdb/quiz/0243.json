@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0243-1",
-      "type": "mcq",
-      "prompt": "Dans quel pays se dresse la Liberté éclairant le monde ?",
-      "payload": {
-        "options": [
-          {
-            "label": "France",
-            "correct": false
-          },
-          {
-            "label": "Royaume-Uni",
-            "correct": false
-          },
-          {
-            "label": "Canada",
-            "correct": false
-          },
-          {
-            "label": "États-Unis",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0243-2",
       "type": "mcq",
       "prompt": "Dans quel État européen se situe la Sagrada Familia ?",

@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0615-1",
-      "type": "mcq",
-      "prompt": "Quel marqueur Internet utilise un croisillon ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Backup",
-            "correct": false
-          },
-          {
-            "label": "Asset",
-            "correct": false
-          },
-          {
-            "label": "Hashtag",
-            "correct": true
-          },
-          {
-            "label": "Counter",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "sciences",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0615-2",
       "type": "mcq",
       "prompt": "Quel outil permet de suivre une commande en temps réel ?",

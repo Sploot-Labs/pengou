@@ -1,0 +1,980 @@
+{
+  "questions": {
+    "oqdb-0575-2": {
+      "prompt": "What does the tonic water poured into your gin and tonic contain?",
+      "options": [
+        "Sulfadoxine",
+        "Nivaquine",
+        "Quinine",
+        "Ferroquine"
+      ]
+    },
+    "oqdb-0577-1": {
+      "prompt": "Which cocktail combines gin with crème de cacao?",
+      "options": [
+        "Stinger",
+        "Bandista",
+        "Pink Love",
+        "Alexander"
+      ]
+    },
+    "oqdb-0577-2": {
+      "prompt": "Which alcoholic drink contains gin and apricot liqueur?",
+      "options": [
+        "Angel Face",
+        "Manhattan",
+        "Black Hole",
+        "Cosmopolitan"
+      ]
+    },
+    "oqdb-0577-4": {
+      "prompt": "Which cherry liqueur cocktail contains gin?",
+      "options": [
+        "Casino",
+        "Vesper",
+        "Macca",
+        "Baltimore"
+      ]
+    },
+    "oqdb-0578-1": {
+      "prompt": "In golf, what do you use to send the ball into the hole?",
+      "options": [
+        "Club",
+        "Racket",
+        "Hockey stick",
+        "Stick"
+      ]
+    },
+    "oqdb-0578-3": {
+      "prompt": "What is the standard number of strokes set to complete a hole in golf?",
+      "options": [
+        "Birdie",
+        "Par",
+        "Bogey",
+        "Eagle"
+      ]
+    },
+    "oqdb-0579-1": {
+      "prompt": "Which singer is the mother of René-Charles, Nelson and Eddy?",
+      "options": [
+        "Katy Perry",
+        "Whitney Houston",
+        "Rihanna",
+        "Céline Dion"
+      ]
+    },
+    "oqdb-0579-2": {
+      "prompt": "Which actor lost his life in a car crash in Santa Clarita?",
+      "options": [
+        "Will Smith",
+        "Chris Pratt",
+        "Hugh Jackman",
+        "Paul Walker"
+      ]
+    },
+    "oqdb-0579-3": {
+      "prompt": "Which provocative singer is nicknamed the \"Black Barbie\" of rap?",
+      "options": [
+        "Foxy Brown",
+        "Nicki Minaj",
+        "Christina Milian",
+        "Lauryn Hill"
+      ]
+    },
+    "oqdb-0579-4": {
+      "prompt": "Which model is often nicknamed the tomboy?",
+      "options": [
+        "Kate Moss",
+        "Cara Delevingne",
+        "Elizabeth Hurley",
+        "Kelly Brook"
+      ]
+    },
+    "oqdb-0580-1": {
+      "skip": "cérémonie française des César sans écho à l'étranger"
+    },
+    "oqdb-0580-2": {
+      "skip": "cérémonie française des César sans écho à l'étranger"
+    },
+    "oqdb-0580-3": {
+      "skip": "cérémonie française des César sans écho à l'étranger"
+    },
+    "oqdb-0580-4": {
+      "skip": "cérémonie française des César sans écho à l'étranger"
+    },
+    "oqdb-0581-1": {
+      "prompt": "What does the logo of the Snapchat mobile app show?",
+      "options": [
+        "Bear",
+        "Camera",
+        "Monkey",
+        "Ghost"
+      ]
+    },
+    "oqdb-0581-2": {
+      "prompt": "Who became a billionaire at the age of 24 thanks to Snapchat?",
+      "options": [
+        "Jeff Bezos",
+        "Tom Golisano",
+        "Evan Spiegel",
+        "Paul Allen"
+      ]
+    },
+    "oqdb-0581-3": {
+      "prompt": "Which color is generally associated with Snapchat?",
+      "options": [
+        "Yellow",
+        "Blue",
+        "Green",
+        "Red"
+      ]
+    },
+    "oqdb-0583-1": {
+      "prompt": "Which athlete dominated men's golf in the 2000s?",
+      "options": [
+        "Payne Stewart",
+        "Curtis Strange",
+        "Tiger Woods",
+        "Raymond Floyd"
+      ]
+    },
+    "oqdb-0583-2": {
+      "prompt": "Which player nicknamed \"The King\" made golf very popular?",
+      "options": [
+        "Jordan Spieth",
+        "Martin Kaymer",
+        "Justin Rose",
+        "Arnold Palmer"
+      ]
+    },
+    "oqdb-0583-3": {
+      "prompt": "Which pioneer of modern golf is nicknamed \"The Golden Bear\"?",
+      "options": [
+        "Lucas Glover",
+        "Gary Player",
+        "Jack Nicklaus",
+        "Webb Simpson"
+      ]
+    },
+    "oqdb-0583-4": {
+      "prompt": "Which Spaniard popularized golf outside its traditional countries?",
+      "options": [
+        "Casper",
+        "Coody",
+        "Aaron",
+        "Ballesteros"
+      ]
+    },
+    "oqdb-0584-1": {
+      "skip": "cérémonie française des César sans écho à l'étranger"
+    },
+    "oqdb-0584-2": {
+      "skip": "cérémonie française des César, The Artist n'est pas une comédie musicale"
+    },
+    "oqdb-0584-3": {
+      "skip": "cérémonie française des César sans écho à l'étranger"
+    },
+    "oqdb-0585-1": {
+      "prompt": "Which of these is not one of the seven deadly sins?",
+      "options": [
+        "Lying",
+        "Envy",
+        "Sloth",
+        "Wrath"
+      ]
+    },
+    "oqdb-0585-2": {
+      "prompt": "Which plant is the odd one out among those whose root is eaten?",
+      "options": [
+        "Turnip",
+        "Asparagus",
+        "Beetroot",
+        "Carrot"
+      ]
+    },
+    "oqdb-0585-4": {
+      "skip": "jeu sur la langue française (mots composés avec vapeur)"
+    },
+    "oqdb-0586-2": {
+      "prompt": "Who does Orlando Bloom play in \"The Lord of the Rings\"?",
+      "options": [
+        "Faramir",
+        "Boromir",
+        "Legolas",
+        "Aragorn"
+      ]
+    },
+    "oqdb-0586-3": {
+      "prompt": "Who is Thelma's companion in a Ridley Scott film?",
+      "options": [
+        "Geena",
+        "Louise",
+        "Susan",
+        "Bethy"
+      ]
+    },
+    "oqdb-0586-4": {
+      "prompt": "Which hero, created by an inventor, has scissors for hands?",
+      "options": [
+        "Dylan",
+        "Edward",
+        "Kevin",
+        "Robert"
+      ]
+    },
+    "oqdb-0587-2": {
+      "skip": "exactitude douteuse : surnom partagé par plusieurs chanteuses latines"
+    },
+    "oqdb-0589-1": {
+      "prompt": "How many holes does a golf course generally have?",
+      "options": [
+        "16",
+        "12",
+        "14",
+        "18"
+      ]
+    },
+    "oqdb-0589-2": {
+      "prompt": "Which sandy hazard spices up the game of golf?",
+      "options": [
+        "Grip",
+        "Bunker",
+        "Fairway",
+        "Rough"
+      ]
+    },
+    "oqdb-0589-3": {
+      "prompt": "What is the grassy area around the hole called in golf?",
+      "options": [
+        "Green",
+        "Rough",
+        "Fairway",
+        "Bunker"
+      ]
+    },
+    "oqdb-0589-4": {
+      "prompt": "Who may advise a player on the golf course?",
+      "options": [
+        "Caddie",
+        "Referee",
+        "Driving range",
+        "Captain"
+      ]
+    },
+    "oqdb-0590-1": {
+      "prompt": "Which one is the odd one out among these Madonna albums?",
+      "options": [
+        "In the Zone",
+        "Erotica",
+        "Like a Virgin",
+        "True Blue"
+      ]
+    },
+    "oqdb-0590-2": {
+      "prompt": "Which one is the odd one out among these famous pipe smokers?",
+      "options": [
+        "Sherlock Holmes",
+        "Kojak",
+        "Maigret",
+        "Popeye"
+      ]
+    },
+    "oqdb-0590-3": {
+      "prompt": "Which one is the odd one out among these natural disaster films?",
+      "options": [
+        "Volcano",
+        "Twister",
+        "2012",
+        "Independence Day"
+      ]
+    },
+    "oqdb-0590-4": {
+      "prompt": "Which one is the odd one out among these countries with a blue, white and red flag?",
+      "options": [
+        "Netherlands",
+        "Australia",
+        "Estonia",
+        "Iceland"
+      ]
+    },
+    "oqdb-0591-1": {
+      "skip": "propositions en jeux de mots intraduisibles"
+    },
+    "oqdb-0591-2": {
+      "prompt": "Which confit often accompanies Sarladaise potatoes?",
+      "options": [
+        "Wine",
+        "Flowers",
+        "Onion",
+        "Duck"
+      ]
+    },
+    "oqdb-0591-3": {
+      "prompt": "What do 612 communes of Périgord produce under the AOC classification?",
+      "options": [
+        "Walnuts",
+        "Apples",
+        "Beans",
+        "Lemons"
+      ]
+    },
+    "oqdb-0591-4": {
+      "skip": "château local peu connu hors de France"
+    },
+    "oqdb-0592-1": {
+      "skip": "ambiguïté : 'suc' sans équivalent clair en anglais"
+    },
+    "oqdb-0592-4": {
+      "prompt": "In which regions of the world do cacti grow best?",
+      "options": [
+        "Deserts",
+        "Prairies",
+        "Plains",
+        "Mountains"
+      ]
+    },
+    "oqdb-0593-1": {
+      "prompt": "What was Meghan Markle's job before she became a duchess?",
+      "options": [
+        "Actress",
+        "Lawyer",
+        "Tennis player",
+        "TV host"
+      ]
+    },
+    "oqdb-0593-2": {
+      "prompt": "At the end of which season did Meghan Markle leave the series \"Suits\"?",
+      "options": [
+        "Sixth",
+        "Seventh",
+        "Fifth",
+        "Eighth"
+      ]
+    },
+    "oqdb-0593-3": {
+      "prompt": "By how many years is Meghan Markle older than Prince Harry?",
+      "options": [
+        "Three years",
+        "Seven years",
+        "Nine years",
+        "Five years"
+      ]
+    },
+    "oqdb-0593-4": {
+      "prompt": "In which crime series did Meghan Markle play Amy Jessup?",
+      "options": [
+        "Dark Angel",
+        "The X-Files",
+        "Fringe",
+        "Beyond"
+      ]
+    },
+    "oqdb-0595-2": {
+      "prompt": "Which one is the odd one out among these films set at Christmas?",
+      "options": [
+        "Groundhog Day",
+        "Love Actually",
+        "Gremlins",
+        "It's a Wonderful Life"
+      ]
+    },
+    "oqdb-0595-3": {
+      "skip": "titre de film français parmi des prix, sans écho à l'étranger"
+    },
+    "oqdb-0595-4": {
+      "prompt": "Which one is the odd one out among these capitals south of Paris?",
+      "options": [
+        "Beijing",
+        "Vienna",
+        "Budapest",
+        "Kyiv"
+      ]
+    },
+    "oqdb-0596-1": {
+      "prompt": "Which first name do the Canadian actors Gosling and Reynolds share?",
+      "options": [
+        "Evan",
+        "Alan",
+        "Brian",
+        "Ryan"
+      ]
+    },
+    "oqdb-0596-2": {
+      "prompt": "What is the first name of the owner of Bubba Gump Shrimp?",
+      "options": [
+        "Winston",
+        "Forrest",
+        "Benjamin",
+        "Dan"
+      ]
+    },
+    "oqdb-0596-3": {
+      "prompt": "What is the first name of the hero of the \"Mission: Impossible\" saga?",
+      "options": [
+        "Ethan",
+        "Jim",
+        "Luther",
+        "Owen"
+      ]
+    },
+    "oqdb-0596-4": {
+      "prompt": "Which lone hitman was played in film by Jean Reno?",
+      "options": [
+        "Simon",
+        "Odilon",
+        "Léon",
+        "Gaston"
+      ]
+    },
+    "oqdb-0597-1": {
+      "skip": "géographie locale française (couleurs du Périgord)"
+    },
+    "oqdb-0597-2": {
+      "skip": "jeu sur la langue française (gentilé)"
+    },
+    "oqdb-0597-3": {
+      "prompt": "In which French département is the Périgord located?",
+      "options": [
+        "Aveyron",
+        "Vaucluse",
+        "Calvados",
+        "Dordogne"
+      ]
+    },
+    "oqdb-0597-4": {
+      "prompt": "Which Paleolithic painted cave is located in the Vézère valley?",
+      "options": [
+        "Lascaux",
+        "Razet",
+        "Cussac",
+        "Niaux"
+      ]
+    },
+    "oqdb-0598-4": {
+      "prompt": "Which First Lady celebrated her 50th birthday in April 2020?",
+      "options": [
+        "Melania Trump",
+        "Beatrix",
+        "Angela Merkel",
+        "Brigitte Macron"
+      ]
+    },
+    "oqdb-0599-1": {
+      "prompt": "In which kind of book do you mainly find geographical maps?",
+      "options": [
+        "Atlas",
+        "Novel",
+        "Planner",
+        "Dictionary"
+      ]
+    },
+    "oqdb-0599-2": {
+      "prompt": "What very hard material is pack ice mainly made of?",
+      "options": [
+        "Ice",
+        "Earth",
+        "Metal",
+        "Rock"
+      ]
+    },
+    "oqdb-0599-3": {
+      "prompt": "Which arithmetic operation calculates the product of two numbers?",
+      "options": [
+        "Subtraction",
+        "Multiplication",
+        "Simplification",
+        "Division"
+      ]
+    },
+    "oqdb-0599-4": {
+      "prompt": "In which animated film can you hear the phrase \"Hakuna Matata\"?",
+      "options": [
+        "Toy Story",
+        "Cars",
+        "The Lion King",
+        "Dinosaur"
+      ]
+    },
+    "oqdb-0601-2": {
+      "prompt": "Which one is the odd one out among these inventions created by women?",
+      "options": [
+        "Bra",
+        "Dishwasher",
+        "Circular saw",
+        "Nylon stockings"
+      ]
+    },
+    "oqdb-0601-3": {
+      "skip": "variétés de pomme de terre françaises peu connues hors de France"
+    },
+    "oqdb-0601-4": {
+      "skip": "jeu sur la langue française (étymologie)"
+    },
+    "oqdb-0602-1": {
+      "prompt": "Which high-school girl in a TV series fought vampires?",
+      "options": [
+        "Joyce",
+        "Tara",
+        "Buffy",
+        "Angel"
+      ]
+    },
+    "oqdb-0602-2": {
+      "prompt": "Which character is the villain in \"Little House on the Prairie\"?",
+      "options": [
+        "Stella",
+        "Nellie",
+        "Marie",
+        "Laura"
+      ]
+    },
+    "oqdb-0602-3": {
+      "prompt": "What is the first name of the French captain in \"Star Trek: The Next Generation\"?",
+      "options": [
+        "Jean-Luc",
+        "Jean-Marc",
+        "Jean-Pierre",
+        "Jean-Charles"
+      ]
+    },
+    "oqdb-0602-4": {
+      "prompt": "What is the first name of the father of the Simpson family?",
+      "options": [
+        "Abraham",
+        "Homer",
+        "Bart",
+        "Herbert"
+      ]
+    },
+    "oqdb-0603-1": {
+      "prompt": "Which sport involves hitting a small white ball into a hole?",
+      "options": [
+        "Cricket",
+        "Pelota",
+        "Croquet",
+        "Golf"
+      ]
+    },
+    "oqdb-0603-2": {
+      "prompt": "What does Captain Haddock, Tintin's best friend, wear on his head?",
+      "options": [
+        "Helmet",
+        "Cap",
+        "Turban",
+        "Hat"
+      ]
+    },
+    "oqdb-0603-3": {
+      "prompt": "From which mountain can burning matter sometimes erupt?",
+      "options": [
+        "Talus",
+        "Rock",
+        "Dune",
+        "Volcano"
+      ]
+    },
+    "oqdb-0604-1": {
+      "prompt": "Which imposing appliance is a must in a modern kitchen?",
+      "options": [
+        "Radiator",
+        "Refrigerator",
+        "Vacuum cleaner",
+        "Blast freezer"
+      ]
+    },
+    "oqdb-0604-2": {
+      "prompt": "Which piece of furniture, also called a sofa or divan, belongs in the living room?",
+      "options": [
+        "Chair",
+        "Armchair",
+        "Stool",
+        "Couch"
+      ]
+    },
+    "oqdb-0604-4": {
+      "prompt": "Which alternative to a classic garage is open on the sides?",
+      "options": [
+        "Sunroom",
+        "Pantry",
+        "Attic",
+        "Carport"
+      ]
+    },
+    "oqdb-0605-1": {
+      "prompt": "In which Belgian province is the town of Mouscron?",
+      "options": [
+        "Hainaut",
+        "Limburg",
+        "Liège",
+        "Namur"
+      ]
+    },
+    "oqdb-0607-1": {
+      "prompt": "What do you call the large sand hills along the coast?",
+      "options": [
+        "Lagoons",
+        "Mounts",
+        "Dunes",
+        "Cliffs"
+      ]
+    },
+    "oqdb-0607-2": {
+      "prompt": "In which season do most trees blossom in Europe?",
+      "options": [
+        "Summer",
+        "Autumn",
+        "Winter",
+        "Spring"
+      ]
+    },
+    "oqdb-0607-3": {
+      "prompt": "What do you call a young male sheep under one year old?",
+      "options": [
+        "Lamb",
+        "Kid",
+        "Ram",
+        "Billy goat"
+      ]
+    },
+    "oqdb-0607-4": {
+      "prompt": "Which medal does the runner-up in an Olympic event receive?",
+      "options": [
+        "Silver",
+        "Copper",
+        "Gold",
+        "Bronze"
+      ]
+    },
+    "oqdb-0608-1": {
+      "prompt": "In which room of the house is a washing machine usually placed?",
+      "options": [
+        "Vestibule",
+        "Laundry room",
+        "Sunroom",
+        "Mezzanine"
+      ]
+    },
+    "oqdb-0608-2": {
+      "prompt": "Which extra room in the house has glass walls?",
+      "options": [
+        "Laundry room",
+        "Smoking room",
+        "Pantry",
+        "Sunroom"
+      ]
+    },
+    "oqdb-0608-3": {
+      "prompt": "Which room is used to store provisions and vegetables?",
+      "options": [
+        "Pantry",
+        "Garage",
+        "Laundry room",
+        "Walk-in closet"
+      ]
+    },
+    "oqdb-0608-4": {
+      "prompt": "Which room usually has a shower but no bathtub?",
+      "options": [
+        "Master suite",
+        "Bathroom",
+        "Boudoir",
+        "Shower room"
+      ]
+    },
+    "oqdb-0609-1": {
+      "prompt": "In how many CVS repositories is the OpenBSD kernel developed?",
+      "options": [
+        "Four",
+        "Two",
+        "Three",
+        "Just one"
+      ]
+    },
+    "oqdb-0609-2": {
+      "prompt": "Which OpenBSD firewall now equips macOS?",
+      "options": [
+        "Firestarter",
+        "ClearOS",
+        "Packet Filter",
+        "Comodo"
+      ]
+    },
+    "oqdb-0609-3": {
+      "prompt": "Which open source license is used by OpenBSD for its own code?",
+      "options": [
+        "GPL license",
+        "LPPL license",
+        "MIT license",
+        "ISC license"
+      ]
+    },
+    "oqdb-0609-4": {
+      "prompt": "Which algorithm was added to OpenBSD to hash passwords?",
+      "options": [
+        "Camellia",
+        "Blowfish",
+        "Skipjack",
+        "Square"
+      ]
+    },
+    "oqdb-0610-3": {
+      "prompt": "Who said: \"A life is worth nothing, but nothing is worth a life\"?",
+      "options": [
+        "Albert Camus",
+        "Oscar Wilde",
+        "André Malraux",
+        "Jules Renard"
+      ]
+    },
+    "oqdb-0610-4": {
+      "prompt": "Who said: \"Imagination is more important than knowledge\"?",
+      "options": [
+        "Guy de Maupassant",
+        "Albert Einstein",
+        "Oscar Wilde",
+        "Confucius"
+      ]
+    },
+    "oqdb-0611-1": {
+      "prompt": "What are you doing if you watch your family videos online?",
+      "options": [
+        "Hacking",
+        "Phishing",
+        "Streaming",
+        "Spamming"
+      ]
+    },
+    "oqdb-0611-2": {
+      "prompt": "How do you show that you like something on Facebook?",
+      "options": [
+        "Fake",
+        "Push",
+        "Geek",
+        "Like"
+      ]
+    },
+    "oqdb-0611-3": {
+      "prompt": "How do you identify a person in an online photo?",
+      "options": [
+        "Cloud",
+        "Rank",
+        "ActiveX",
+        "Tag"
+      ]
+    },
+    "oqdb-0611-4": {
+      "prompt": "Which unwanted mail is often used for advertising?",
+      "options": [
+        "Spam",
+        "Baud",
+        "Bump",
+        "Favicon"
+      ]
+    },
+    "oqdb-0612-1": {
+      "prompt": "Which Village People hit refers to a youth organization?",
+      "options": [
+        "Go West",
+        "In the Navy",
+        "Y.M.C.A.",
+        "Macho Man"
+      ]
+    },
+    "oqdb-0612-2": {
+      "prompt": "Which worldwide ABBA disco hit came out in 1979?",
+      "options": [
+        "SOS",
+        "Mamma Mia",
+        "Waterloo",
+        "Voulez-Vous"
+      ]
+    },
+    "oqdb-0612-3": {
+      "prompt": "Which disco hit was originally written for Stacy Lattisaw?",
+      "options": [
+        "Viva America",
+        "Ring My Bell",
+        "Shadow Dancing",
+        "Copacabana"
+      ]
+    },
+    "oqdb-0612-4": {
+      "prompt": "Which song earned the Gibson Brothers fourteen gold records?",
+      "options": [
+        "Oooh What a Life",
+        "Que Sera Mi Vida",
+        "Mariana",
+        "Cuba"
+      ]
+    },
+    "oqdb-0613-1": {
+      "prompt": "What shoes do you wear in judo?",
+      "options": [
+        "Clogs",
+        "Sneakers",
+        "None",
+        "Boots"
+      ]
+    },
+    "oqdb-0613-2": {
+      "prompt": "How many leaves does a garden clover usually have?",
+      "options": [
+        "Two",
+        "Four",
+        "Five",
+        "Three"
+      ]
+    },
+    "oqdb-0613-3": {
+      "prompt": "In a standard deck of cards, what color are the diamonds?",
+      "options": [
+        "Blue",
+        "Black",
+        "Green",
+        "Red"
+      ]
+    },
+    "oqdb-0613-4": {
+      "prompt": "What do you call the imaginary line that separates two countries?",
+      "options": [
+        "Tangent",
+        "Section",
+        "Median",
+        "Border"
+      ]
+    },
+    "oqdb-0614-1": {
+      "prompt": "Which piece of furniture is the central element of every bedroom?",
+      "options": [
+        "Bed",
+        "Table",
+        "Desk",
+        "Bathtub"
+      ]
+    },
+    "oqdb-0614-2": {
+      "prompt": "Which set of rooms is reserved for the parents' private life?",
+      "options": [
+        "Shower room",
+        "Master suite",
+        "Walk-in closet",
+        "Sauna"
+      ]
+    },
+    "oqdb-0614-3": {
+      "prompt": "Which part of the house symbolizes relaxation and self-care?",
+      "options": [
+        "Wine cellar",
+        "Walk-in closet",
+        "Conservatory",
+        "Bathroom"
+      ]
+    },
+    "oqdb-0614-4": {
+      "prompt": "In which room do you take a dry heat bath?",
+      "options": [
+        "Hammam",
+        "Attic",
+        "Sauna",
+        "Jacuzzi"
+      ]
+    },
+    "oqdb-0615-1": {
+      "prompt": "Which online marker uses the hash sign?",
+      "options": [
+        "Backup",
+        "Asset",
+        "Hashtag",
+        "Counter"
+      ]
+    },
+    "oqdb-0615-2": {
+      "prompt": "Which tool lets you follow an order in real time?",
+      "options": [
+        "Tracking",
+        "Permalink",
+        "Backlink",
+        "Cookie"
+      ]
+    },
+    "oqdb-0615-3": {
+      "prompt": "Which computer defect can cause a malfunction?",
+      "options": [
+        "Alias",
+        "Bug",
+        "Java",
+        "Blacklist"
+      ]
+    },
+    "oqdb-0615-4": {
+      "skip": "option en français informatique intraduisible (facticiel)"
+    },
+    "oqdb-0617-1": {
+      "prompt": "What is the best-selling disco single on the Atlantic label?",
+      "options": [
+        "Ten Percent",
+        "Dancin'",
+        "Sweet Dynamite",
+        "Le Freak"
+      ]
+    },
+    "oqdb-0617-2": {
+      "prompt": "Which Diana Ross hit was written by members of the group Chic?",
+      "options": [
+        "Surrender",
+        "Love Child",
+        "Upside Down",
+        "Remember Me"
+      ]
+    },
+    "oqdb-0617-3": {
+      "prompt": "Who wonders whether he is sexy in a disco hit from 1978?",
+      "options": [
+        "Elton John",
+        "Rod Stewart",
+        "Barry White",
+        "Walter Murphy"
+      ]
+    },
+    "oqdb-0617-4": {
+      "prompt": "Who recorded \"You Make Me Feel\" before Jimmy Somerville?",
+      "options": [
+        "Sylvester",
+        "Randy Jones",
+        "Bobby Farrell",
+        "Dan Hartman"
+      ]
+    },
+    "oqdb-0618-1": {
+      "prompt": "What do you call a person who keeps honeybees?",
+      "options": [
+        "Frog farmer",
+        "Beekeeper",
+        "Poultry farmer",
+        "Oyster farmer"
+      ]
+    },
+    "oqdb-0618-2": {
+      "skip": "ambiguïté : grappe (cluster) est aussi une réponse valable"
+    },
+    "oqdb-0618-3": {
+      "prompt": "Which more aggressive insect is the bee often confused with?",
+      "options": [
+        "Bumblebee",
+        "Horsefly",
+        "Wasp",
+        "Hornet"
+      ]
+    },
+    "oqdb-0618-4": {
+      "prompt": "Which important process do bees carry out when foraging?",
+      "options": [
+        "Sporulation",
+        "Pollination",
+        "Germination",
+        "Introgression"
+      ]
+    }
+  },
+  "quizzes": {}
+}

@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=392"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0392-1-en",
+      "type": "mcq",
+      "prompt": "In the Alien saga, who directed \"Aliens\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ridley Scott",
+            "correct": false
+          },
+          {
+            "label": "Paul Anderson",
+            "correct": false
+          },
+          {
+            "label": "David Fincher",
+            "correct": false
+          },
+          {
+            "label": "James Cameron",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0392-2-en",
+      "type": "mcq",
+      "prompt": "What is the main creature of the film \"Alien\" called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trilobite",
+            "correct": false
+          },
+          {
+            "label": "Facehugger",
+            "correct": false
+          },
+          {
+            "label": "Mala'kak",
+            "correct": false
+          },
+          {
+            "label": "Xenomorph",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0392-3-en",
+      "type": "mcq",
+      "prompt": "In \"Alien\", which company organizes and funds the space voyage?",
+      "payload": {
+        "options": [
+          {
+            "label": "Requiem",
+            "correct": false
+          },
+          {
+            "label": "Cobb",
+            "correct": false
+          },
+          {
+            "label": "Fiorina",
+            "correct": false
+          },
+          {
+            "label": "Weyland",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

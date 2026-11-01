@@ -412,35 +412,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0127-3",
-      "type": "mcq",
-      "prompt": "Quel événement a provoqué l'effondrement de Teotihuacan ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Séisme",
-            "correct": false
-          },
-          {
-            "label": "Incendie",
-            "correct": true
-          },
-          {
-            "label": "Éclipse",
-            "correct": false
-          },
-          {
-            "label": "Invasion",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0127-4",
       "type": "mcq",
       "prompt": "Combien d'habitants vivaient dans la cité de Teotihuacan à son apogée ?",
@@ -610,7 +581,6 @@
         "oqdb-0550-4",
         "oqdb-0127-1",
         "oqdb-0127-2",
-        "oqdb-0127-3",
         "oqdb-0127-4",
         "oqdb-0513-1",
         "oqdb-0513-2",

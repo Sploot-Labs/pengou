@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0596-1",
-      "type": "mcq",
-      "prompt": "Quel prénom se partagent les acteurs canadiens Gosling et Reynolds ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Evan",
-            "correct": false
-          },
-          {
-            "label": "Alan",
-            "correct": false
-          },
-          {
-            "label": "Brian",
-            "correct": false
-          },
-          {
-            "label": "Ryan",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0596-2",
       "type": "mcq",
       "prompt": "Comment se prénomme le propriétaire des crevettes Bubba Gump ?",
@@ -54,64 +25,6 @@
           },
           {
             "label": "Dan",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0596-3",
-      "type": "mcq",
-      "prompt": "Comment se prénomme le héros de la saga « Mission Impossible » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Ethan",
-            "correct": true
-          },
-          {
-            "label": "Jim",
-            "correct": false
-          },
-          {
-            "label": "Luther",
-            "correct": false
-          },
-          {
-            "label": "Owen",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0596-4",
-      "type": "mcq",
-      "prompt": "Quel tueur solitaire a été incarné au cinéma par Jean Reno ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Simon",
-            "correct": false
-          },
-          {
-            "label": "Odilon",
-            "correct": false
-          },
-          {
-            "label": "Léon",
-            "correct": true
-          },
-          {
-            "label": "Gaston",
             "correct": false
           }
         ]

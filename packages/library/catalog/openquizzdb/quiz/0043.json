@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0043-2",
-      "type": "mcq",
-      "prompt": "Dans quelle enveloppe se cachent les graines de petits-pois ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Gousse",
-            "correct": true
-          },
-          {
-            "label": "Capsule",
-            "correct": false
-          },
-          {
-            "label": "Drupe",
-            "correct": false
-          },
-          {
-            "label": "Follicule",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "nature",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0043-3",
       "type": "mcq",
       "prompt": "Comment appelle-t-on un fruit charnu à noyau tel que la cerise ?",

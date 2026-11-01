@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=470"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0470-1-en",
+      "type": "mcq",
+      "prompt": "Big Ben is the name of the great bell of which British palace?",
+      "payload": {
+        "options": [
+          {
+            "label": "Warrington",
+            "correct": false
+          },
+          {
+            "label": "Winchester",
+            "correct": false
+          },
+          {
+            "label": "Westminster",
+            "correct": true
+          },
+          {
+            "label": "Worcester",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0470-3-en",
+      "type": "mcq",
+      "prompt": "In London, where are you if you ride the \"Tube\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "On the Underground",
+            "correct": true
+          },
+          {
+            "label": "In a taxi",
+            "correct": false
+          },
+          {
+            "label": "On a train",
+            "correct": false
+          },
+          {
+            "label": "On a bus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=609"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0609-1-en",
+      "type": "mcq",
+      "prompt": "In how many CVS repositories is the OpenBSD kernel developed?",
+      "payload": {
+        "options": [
+          {
+            "label": "Four",
+            "correct": false
+          },
+          {
+            "label": "Two",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": false
+          },
+          {
+            "label": "Just one",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0609-2-en",
+      "type": "mcq",
+      "prompt": "Which OpenBSD firewall now equips macOS?",
+      "payload": {
+        "options": [
+          {
+            "label": "Firestarter",
+            "correct": false
+          },
+          {
+            "label": "ClearOS",
+            "correct": false
+          },
+          {
+            "label": "Packet Filter",
+            "correct": true
+          },
+          {
+            "label": "Comodo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0609-3-en",
+      "type": "mcq",
+      "prompt": "Which open source license is used by OpenBSD for its own code?",
+      "payload": {
+        "options": [
+          {
+            "label": "GPL license",
+            "correct": false
+          },
+          {
+            "label": "LPPL license",
+            "correct": false
+          },
+          {
+            "label": "MIT license",
+            "correct": false
+          },
+          {
+            "label": "ISC license",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0609-4-en",
+      "type": "mcq",
+      "prompt": "Which algorithm was added to OpenBSD to hash passwords?",
+      "payload": {
+        "options": [
+          {
+            "label": "Camellia",
+            "correct": false
+          },
+          {
+            "label": "Blowfish",
+            "correct": true
+          },
+          {
+            "label": "Skipjack",
+            "correct": false
+          },
+          {
+            "label": "Square",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=295"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0295-1-en",
+      "type": "mcq",
+      "prompt": "Who stars opposite Clint Eastwood in \"The Bridges of Madison County\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jane Fonda",
+            "correct": false
+          },
+          {
+            "label": "Sondra Locke",
+            "correct": false
+          },
+          {
+            "label": "Meryl Streep",
+            "correct": true
+          },
+          {
+            "label": "Jodie Foster",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0295-3-en",
+      "type": "mcq",
+      "prompt": "Which Clint Eastwood film was made with NASA's cooperation?",
+      "payload": {
+        "options": [
+          {
+            "label": "Space Cowboys",
+            "correct": true
+          },
+          {
+            "label": "Invictus",
+            "correct": false
+          },
+          {
+            "label": "The Rookie",
+            "correct": false
+          },
+          {
+            "label": "Hereafter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0124-1",
-      "type": "mcq",
-      "prompt": "De quelle planète fictive sont originaires Superman et Supergirl ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Krusty",
-            "correct": false
-          },
-          {
-            "label": "Krypton",
-            "correct": true
-          },
-          {
-            "label": "Kamini",
-            "correct": false
-          },
-          {
-            "label": "Kirby",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0124-2",
-      "type": "mcq",
-      "prompt": "Quel groupe interpréta le titre à succès « I was made for loving you » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Kodaline",
-            "correct": false
-          },
-          {
-            "label": "Kiss",
-            "correct": true
-          },
-          {
-            "label": "Korn",
-            "correct": false
-          },
-          {
-            "label": "Kraftwerk",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0124-3",
       "type": "mcq",
       "prompt": "Que fait-on en chantant et en suivant les paroles sur un écran ?",

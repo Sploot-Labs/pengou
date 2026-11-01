@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0157-2",
-      "type": "mcq",
-      "prompt": "Quelle île grecque affiche maisons blanches et dômes bleus ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Mykonos",
-            "correct": false
-          },
-          {
-            "label": "Santorin",
-            "correct": true
-          },
-          {
-            "label": "Rhodes",
-            "correct": false
-          },
-          {
-            "label": "Crète",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0157-3",
       "type": "mcq",
       "prompt": "Dans quelles îles caribéennes marchez-vous sur du sable rose ?",

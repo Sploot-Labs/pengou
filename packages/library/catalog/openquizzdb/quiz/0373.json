@@ -91,35 +91,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0373-4",
-      "type": "mcq",
-      "prompt": "De quelle mosquée d'Istanbul partent les pèlerins vers La Mecque ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Verte",
-            "correct": false
-          },
-          {
-            "label": "Bleue",
-            "correct": true
-          },
-          {
-            "label": "Blanche",
-            "correct": false
-          },
-          {
-            "label": "Rouge",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "geographie",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

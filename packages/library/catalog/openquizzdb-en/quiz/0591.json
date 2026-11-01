@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=591"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0591-2-en",
+      "type": "mcq",
+      "prompt": "Which confit often accompanies Sarladaise potatoes?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wine",
+            "correct": false
+          },
+          {
+            "label": "Flowers",
+            "correct": false
+          },
+          {
+            "label": "Onion",
+            "correct": false
+          },
+          {
+            "label": "Duck",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0591-3-en",
+      "type": "mcq",
+      "prompt": "What do 612 communes of Périgord produce under the AOC classification?",
+      "payload": {
+        "options": [
+          {
+            "label": "Walnuts",
+            "correct": true
+          },
+          {
+            "label": "Apples",
+            "correct": false
+          },
+          {
+            "label": "Beans",
+            "correct": false
+          },
+          {
+            "label": "Lemons",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

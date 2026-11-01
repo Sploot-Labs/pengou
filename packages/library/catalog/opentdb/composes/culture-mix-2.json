@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "Open Trivia Database",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-0d87d634590a",
+      "type": "mcq",
+      "prompt": "What are the scales on all snakes and most lizards are made of?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ankyloglossia",
+            "correct": false
+          },
+          {
+            "label": "Keratin",
+            "correct": true
+          },
+          {
+            "label": "Epidermis",
+            "correct": false
+          },
+          {
+            "label": "Ecdysis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0e270a89b6c0",
+      "type": "mcq",
+      "prompt": "Tetsuya Fujita was a scientist that developed the scale for which natural disaster?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hurricanes",
+            "correct": false
+          },
+          {
+            "label": "Earthquakes",
+            "correct": false
+          },
+          {
+            "label": "Tornadoes",
+            "correct": true
+          },
+          {
+            "label": "Volcanoes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1bc335215609",
+      "type": "mcq",
+      "prompt": "What is the name of the author of book series 'Percy Jackson'?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roald Dahl",
+            "correct": false
+          },
+          {
+            "label": "Sandra Bullock",
+            "correct": false
+          },
+          {
+            "label": "Rick Riordan",
+            "correct": true
+          },
+          {
+            "label": "J.K. Rowling",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1fd50ff6f75d",
+      "type": "mcq",
+      "prompt": "When did the United States formally declare war on Japan, entering World War II?",
+      "payload": {
+        "options": [
+          {
+            "label": "September 1, 1939",
+            "correct": false
+          },
+          {
+            "label": "June 22, 1941",
+            "correct": false
+          },
+          {
+            "label": "December 8, 1941",
+            "correct": true
+          },
+          {
+            "label": "June 6, 1944",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2bb62115b3fc",
+      "type": "mcq",
+      "prompt": "What nationality was the famous artist Pablo Picasso?",
+      "payload": {
+        "options": [
+          {
+            "label": "French",
+            "correct": false
+          },
+          {
+            "label": "German",
+            "correct": false
+          },
+          {
+            "label": "Italian",
+            "correct": false
+          },
+          {
+            "label": "Spanish",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-35a8f0d39774",
+      "type": "mcq",
+      "prompt": "Which company did Valve cooperate with in the creation of the Vive?",
+      "payload": {
+        "options": [
+          {
+            "label": "Razer",
+            "correct": false
+          },
+          {
+            "label": "HTC",
+            "correct": true
+          },
+          {
+            "label": "Oculus",
+            "correct": false
+          },
+          {
+            "label": "Google",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4cdc0208eb4b",
+      "type": "mcq",
+      "prompt": "Which part of the body does glaucoma affect?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blood",
+            "correct": false
+          },
+          {
+            "label": "Stomach",
+            "correct": false
+          },
+          {
+            "label": "Eyes",
+            "correct": true
+          },
+          {
+            "label": "Throat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6b4b8f8667e1",
+      "type": "mcq",
+      "prompt": "What color is produced by mixing black and white?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grey",
+            "correct": true
+          },
+          {
+            "label": "White",
+            "correct": false
+          },
+          {
+            "label": "Black",
+            "correct": false
+          },
+          {
+            "label": "Brown",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-732b211f8643",
+      "type": "mcq",
+      "prompt": "What national team won the first UEFA Nations League?",
+      "payload": {
+        "options": [
+          {
+            "label": "Netherlands",
+            "correct": false
+          },
+          {
+            "label": "Portugal",
+            "correct": true
+          },
+          {
+            "label": "England",
+            "correct": false
+          },
+          {
+            "label": "Switzerland",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7591f4c26fcd",
+      "type": "mcq",
+      "prompt": "An organism described as \"heliotropic\" has a tendancy to move towards which of these things?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pollen",
+            "correct": false
+          },
+          {
+            "label": "Light",
+            "correct": true
+          },
+          {
+            "label": "Water",
+            "correct": false
+          },
+          {
+            "label": "Trees",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-91ac768ab36b",
+      "type": "mcq",
+      "prompt": "Which of these animals are not real?",
+      "payload": {
+        "options": [
+          {
+            "label": "Giant Squid",
+            "correct": false
+          },
+          {
+            "label": "Tasmanian Devil",
+            "correct": false
+          },
+          {
+            "label": "Sea Dragon",
+            "correct": false
+          },
+          {
+            "label": "Nemean Lion",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-98b2c9745ea5",
+      "type": "mcq",
+      "prompt": "Which state of the United States is the smallest?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rhode Island",
+            "correct": true
+          },
+          {
+            "label": "Vermont",
+            "correct": false
+          },
+          {
+            "label": "Massachusetts",
+            "correct": false
+          },
+          {
+            "label": "Maine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9a6358e21825",
+      "type": "mcq",
+      "prompt": "The novel \"Of Mice And Men\" was written by what author?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mark Twain",
+            "correct": false
+          },
+          {
+            "label": "Harper Lee",
+            "correct": false
+          },
+          {
+            "label": "George Orwell",
+            "correct": false
+          },
+          {
+            "label": "John Steinbeck",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a93e0fc1da45",
+      "type": "mcq",
+      "prompt": "What was the name of the first permanent English settlement in America?",
+      "payload": {
+        "options": [
+          {
+            "label": "New York",
+            "correct": false
+          },
+          {
+            "label": "Plymouth",
+            "correct": false
+          },
+          {
+            "label": "St. John's",
+            "correct": false
+          },
+          {
+            "label": "Jamestown",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-aa8f23a28a4e",
+      "type": "mcq",
+      "prompt": "What country is not a part of Scandinavia?",
+      "payload": {
+        "options": [
+          {
+            "label": "Denmark",
+            "correct": false
+          },
+          {
+            "label": "Sweden",
+            "correct": false
+          },
+          {
+            "label": "Finland",
+            "correct": true
+          },
+          {
+            "label": "Norway",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b495fe142388",
+      "type": "mcq",
+      "prompt": "The likeness of which president is featured on the rare $2 bill of USA currency?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ulysses Grant",
+            "correct": false
+          },
+          {
+            "label": "Martin Van Buren",
+            "correct": false
+          },
+          {
+            "label": "Thomas Jefferson",
+            "correct": true
+          },
+          {
+            "label": "John Quincy Adams",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ba22c6e0fa70",
+      "type": "mcq",
+      "prompt": "In the 2002 film \"Kung Pow! Enter the Fist\", why was Wimp Lo purposely trained wrong?",
+      "payload": {
+        "options": [
+          {
+            "label": "As a joke",
+            "correct": true
+          },
+          {
+            "label": "To test him",
+            "correct": false
+          },
+          {
+            "label": "For cheating",
+            "correct": false
+          },
+          {
+            "label": "Revenge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d14e44231eac",
+      "type": "mcq",
+      "prompt": "What was the nickname given to the Hughes H-4 Hercules, a heavy transport flying boat which achieved flight in 1947?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trojan Horse",
+            "correct": false
+          },
+          {
+            "label": "Spruce Goose",
+            "correct": true
+          },
+          {
+            "label": "Fat Man",
+            "correct": false
+          },
+          {
+            "label": "Noah's Ark",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e16d466e2294",
+      "type": "mcq",
+      "prompt": "Llanfair­pwllgwyngyll­gogery­chwyrn­drobwll­llan­tysilio­gogo­goch is located on which Welsh island?",
+      "payload": {
+        "options": [
+          {
+            "label": "Barry",
+            "correct": false
+          },
+          {
+            "label": "Bardsey",
+            "correct": false
+          },
+          {
+            "label": "Caldey",
+            "correct": false
+          },
+          {
+            "label": "Anglesey",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e2f77f14a879",
+      "type": "mcq",
+      "prompt": "In which video game did Michael Fassbender star?",
+      "payload": {
+        "options": [
+          {
+            "label": "Assassin's Creed 3",
+            "correct": false
+          },
+          {
+            "label": "Red Dead Redemption",
+            "correct": false
+          },
+          {
+            "label": "Fable 3",
+            "correct": true
+          },
+          {
+            "label": "Call of Duty: Modern Warfare",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-culture-mix-2",
+      "title": "Culture mix #2",
+      "description": "A mix of geography, history, science, books, art and sport questions.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-35a8f0d39774",
+        "otdb-e16d466e2294",
+        "otdb-e2f77f14a879",
+        "otdb-9a6358e21825",
+        "otdb-0e270a89b6c0",
+        "otdb-a93e0fc1da45",
+        "otdb-4cdc0208eb4b",
+        "otdb-2bb62115b3fc",
+        "otdb-91ac768ab36b",
+        "otdb-1bc335215609",
+        "otdb-732b211f8643",
+        "otdb-aa8f23a28a4e",
+        "otdb-0d87d634590a",
+        "otdb-ba22c6e0fa70",
+        "otdb-98b2c9745ea5",
+        "otdb-7591f4c26fcd",
+        "otdb-6b4b8f8667e1",
+        "otdb-d14e44231eac",
+        "otdb-b495fe142388",
+        "otdb-1fd50ff6f75d"
+      ]
+    }
+  ]
+}

@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0404-1",
-      "type": "mcq",
-      "prompt": "Quel peuple germanique s'installa au Ve siècle dans l'actuelle Espagne ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Wisigoths",
-            "correct": true
-          },
-          {
-            "label": "Ostrogoths",
-            "correct": false
-          },
-          {
-            "label": "Burgondes",
-            "correct": false
-          },
-          {
-            "label": "Jutes",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0404-2",
       "type": "mcq",
       "prompt": "Lequel de ces termes faisait autrefois référence aux Vikings ?",
@@ -83,35 +54,6 @@
           },
           {
             "label": "Scythes",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "histoire",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0404-4",
-      "type": "mcq",
-      "prompt": "Dans quel pays les Parses se sont-ils installés au XIIIe siècle ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Inde",
-            "correct": true
-          },
-          {
-            "label": "Égypte",
-            "correct": false
-          },
-          {
-            "label": "Afghanistan",
-            "correct": false
-          },
-          {
-            "label": "Chine",
             "correct": false
           }
         ]

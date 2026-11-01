@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=119"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0119-2-en",
+      "type": "mcq",
+      "prompt": "How much did Kanye West spend to propose to Kim?",
+      "payload": {
+        "options": [
+          {
+            "label": "$2 million",
+            "correct": false
+          },
+          {
+            "label": "$3 million",
+            "correct": true
+          },
+          {
+            "label": "$4 million",
+            "correct": false
+          },
+          {
+            "label": "$5 million",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0119-3-en",
+      "type": "mcq",
+      "prompt": "In which magazine did Kim Kardashian pose nude in 2014?",
+      "payload": {
+        "options": [
+          {
+            "label": "Glamour",
+            "correct": false
+          },
+          {
+            "label": "Vogue",
+            "correct": false
+          },
+          {
+            "label": "Paper",
+            "correct": true
+          },
+          {
+            "label": "Cosmopolitan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

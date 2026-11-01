@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=305"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0305-3-en",
+      "type": "mcq",
+      "prompt": "What role does François Damiens play in \"La Famille Bélier\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "The mayor",
+            "correct": false
+          },
+          {
+            "label": "The teacher",
+            "correct": false
+          },
+          {
+            "label": "The neighbor",
+            "correct": false
+          },
+          {
+            "label": "The father",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0305-4-en",
+      "type": "mcq",
+      "prompt": "Which film was directed by François Damiens himself?",
+      "payload": {
+        "options": [
+          {
+            "label": "JCVD",
+            "correct": false
+          },
+          {
+            "label": "Bullhead",
+            "correct": false
+          },
+          {
+            "label": "Mon Ket",
+            "correct": true
+          },
+          {
+            "label": "Dikkenek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

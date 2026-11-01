@@ -64,35 +64,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0232-3",
-      "type": "mcq",
-      "prompt": "Quel personnage des Looney Tunes dévore tout sur son passage ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Tee",
-            "correct": false
-          },
-          {
-            "label": "Tag",
-            "correct": false
-          },
-          {
-            "label": "Taz",
-            "correct": true
-          },
-          {
-            "label": "Tux",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0232-4",
       "type": "mcq",
       "prompt": "Quel site de micro blogging fut symbolisé par un oiseau bleu ?",

@@ -1,0 +1,2049 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-0129a7f88a98-fr",
+      "type": "mcq",
+      "prompt": "De quelle origine était le sultan Saladin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Arabe",
+            "correct": false
+          },
+          {
+            "label": "Égyptienne",
+            "correct": false
+          },
+          {
+            "label": "Syrienne",
+            "correct": false
+          },
+          {
+            "label": "Kurde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0a1879139f41-fr",
+      "type": "truefalse",
+      "prompt": "Le calendrier éthiopien compte 13 mois.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0dee9264fb43-fr",
+      "type": "mcq",
+      "prompt": "Qui dirigeait la France pendant la Terreur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Louis XVI",
+            "correct": false
+          },
+          {
+            "label": "Napoléon Bonaparte",
+            "correct": false
+          },
+          {
+            "label": "Jean-Paul Marat",
+            "correct": false
+          },
+          {
+            "label": "Maximilien Robespierre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0f296a474252-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelait le B-29 qui a largué la bombe « Little Boy » sur Hiroshima ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Necessary Evil",
+            "correct": false
+          },
+          {
+            "label": "Full House",
+            "correct": false
+          },
+          {
+            "label": "Enola Gay",
+            "correct": true
+          },
+          {
+            "label": "The Great Artiste",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-12064ee25495-fr",
+      "type": "mcq",
+      "prompt": "Le Titanic a coulé lors de son voyage inaugural de Southampton vers quelle ville américaine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "New York",
+            "correct": true
+          },
+          {
+            "label": "Boston",
+            "correct": false
+          },
+          {
+            "label": "Philadelphie",
+            "correct": false
+          },
+          {
+            "label": "Washington",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-131ff08644fc-fr",
+      "type": "truefalse",
+      "prompt": "Pendant la guerre d'Hiver, l'URSS a eu cinq fois plus de morts et de disparus que la Finlande.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1bd8709562c9-fr",
+      "type": "mcq",
+      "prompt": "En quelle année la Première Guerre mondiale a-t-elle pris fin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1916",
+            "correct": false
+          },
+          {
+            "label": "1912",
+            "correct": false
+          },
+          {
+            "label": "1918",
+            "correct": true
+          },
+          {
+            "label": "1914",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1eef60fbe546-fr",
+      "type": "mcq",
+      "prompt": "Les Védas, recueil d'hymnes sanskrits, sont des textes sacrés de quelle religion ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hindouisme",
+            "correct": true
+          },
+          {
+            "label": "Judaïsme",
+            "correct": false
+          },
+          {
+            "label": "Islam",
+            "correct": false
+          },
+          {
+            "label": "Bouddhisme",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-275a30a565df-fr",
+      "type": "mcq",
+      "prompt": "Le terme « luddite » désignait à l'origine des ouvriers mécontents de quelle industrie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Céramique",
+            "correct": false
+          },
+          {
+            "label": "Textile",
+            "correct": true
+          },
+          {
+            "label": "Mines",
+            "correct": false
+          },
+          {
+            "label": "Agriculture",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-27dc100367c8-fr",
+      "type": "mcq",
+      "prompt": "Quel roi d'Angleterre a épousé Aliénor d'Aquitaine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Henri V",
+            "correct": false
+          },
+          {
+            "label": "Henri Ier",
+            "correct": false
+          },
+          {
+            "label": "Richard Ier",
+            "correct": false
+          },
+          {
+            "label": "Henri II",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-283fdb329c50-fr",
+      "type": "truefalse",
+      "prompt": "Les émeus ont gagné la guerre des émeus de 1932.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2ac21a16d90a-fr",
+      "type": "mcq",
+      "prompt": "Pol Pot a été dictateur de quel pays ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vietnam",
+            "correct": false
+          },
+          {
+            "label": "Cambodge",
+            "correct": true
+          },
+          {
+            "label": "Corée du Nord",
+            "correct": false
+          },
+          {
+            "label": "Laos",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2c9a5dbf426e-fr",
+      "type": "mcq",
+      "prompt": "Que s'est-il passé le 6 juin 1944 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Libération de Paris",
+            "correct": false
+          },
+          {
+            "label": "Hiroshima et Nagasaki",
+            "correct": false
+          },
+          {
+            "label": "Pearl Harbor",
+            "correct": false
+          },
+          {
+            "label": "Le Jour J",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-362fb3ebc531-fr",
+      "type": "mcq",
+      "prompt": "En quelle année a eu lieu la bataille d'Azincourt ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1463",
+            "correct": false
+          },
+          {
+            "label": "1401",
+            "correct": false
+          },
+          {
+            "label": "1415",
+            "correct": true
+          },
+          {
+            "label": "1422",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-389189040353-fr",
+      "type": "mcq",
+      "prompt": "Quel roi a été tué à la bataille de Bosworth en 1485 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Richard III",
+            "correct": true
+          },
+          {
+            "label": "Édouard V",
+            "correct": false
+          },
+          {
+            "label": "Henri VII",
+            "correct": false
+          },
+          {
+            "label": "Jacques Ier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-38b13b044b55-fr",
+      "type": "mcq",
+      "prompt": "Quel fabricant a conçu le minigun en 1960 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "General Electric",
+            "correct": true
+          },
+          {
+            "label": "Heckler & Koch",
+            "correct": false
+          },
+          {
+            "label": "Colt",
+            "correct": false
+          },
+          {
+            "label": "Sig Sauer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3c4e4a1620b0-fr",
+      "type": "mcq",
+      "prompt": "Quel micro-État a la plus ancienne constitution encore en vigueur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saint-Marin",
+            "correct": true
+          },
+          {
+            "label": "Monaco",
+            "correct": false
+          },
+          {
+            "label": "Saint-Kitts-et-Nevis",
+            "correct": false
+          },
+          {
+            "label": "Andorre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-475176886ac9-fr",
+      "type": "mcq",
+      "prompt": "Qui était un stratège militaire de la période des Zhou orientaux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vlad l'Empaleur",
+            "correct": false
+          },
+          {
+            "label": "Sun Tzu",
+            "correct": true
+          },
+          {
+            "label": "Gengis Khan",
+            "correct": false
+          },
+          {
+            "label": "Lü Bu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-476a72fd04dd-fr",
+      "type": "mcq",
+      "prompt": "Quand la Jamaïque a-t-elle obtenu son indépendance du Royaume-Uni ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1963",
+            "correct": false
+          },
+          {
+            "label": "1492",
+            "correct": false
+          },
+          {
+            "label": "1962",
+            "correct": true
+          },
+          {
+            "label": "1987",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-47de9d4760f0-fr",
+      "type": "mcq",
+      "prompt": "Quand a pris fin la bataille des Ardennes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "6 août 1945",
+            "correct": false
+          },
+          {
+            "label": "16 décembre 1944",
+            "correct": false
+          },
+          {
+            "label": "25 janvier 1945",
+            "correct": true
+          },
+          {
+            "label": "7 décembre 1941",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-482a7f8e6a15-fr",
+      "type": "mcq",
+      "prompt": "Lors des invasions mongoles du Japon, qu'est-ce qui a surtout arrêté les navires mongols ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Des typhons",
+            "correct": true
+          },
+          {
+            "label": "Des tornades",
+            "correct": false
+          },
+          {
+            "label": "Des samouraïs",
+            "correct": false
+          },
+          {
+            "label": "Une crise économique",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4ccfce05edfd-fr",
+      "type": "truefalse",
+      "prompt": "Le président John F. Kennedy a été assassiné lors de son cortège à Atlanta, en Géorgie, le 22 novembre 1963.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4e263388396a-fr",
+      "type": "mcq",
+      "prompt": "Quand le calendrier grégorien a-t-il été adopté pour la première fois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1582",
+            "correct": true
+          },
+          {
+            "label": "1623",
+            "correct": false
+          },
+          {
+            "label": "1555",
+            "correct": false
+          },
+          {
+            "label": "1501",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-517ad0b849b9-fr",
+      "type": "mcq",
+      "prompt": "Après la bataille de Marj Dabiq (1516), les Ottomans ont pris Jérusalem à quel sultanat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mamelouk",
+            "correct": true
+          },
+          {
+            "label": "Omeyyade",
+            "correct": false
+          },
+          {
+            "label": "Ayyoubide",
+            "correct": false
+          },
+          {
+            "label": "Seldjoukide",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-57942d56a141-fr",
+      "type": "mcq",
+      "prompt": "Quelle a été la bataille la plus meurtrière en une journée de la guerre de Sécession ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Antietam",
+            "correct": true
+          },
+          {
+            "label": "Chancellorsville",
+            "correct": false
+          },
+          {
+            "label": "Gettysburg",
+            "correct": false
+          },
+          {
+            "label": "Siège de Vicksburg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-60919da3e1b2-fr",
+      "type": "mcq",
+      "prompt": "Qui a couronné Charlemagne empereur le jour de Noël 800 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pape Étienne V",
+            "correct": false
+          },
+          {
+            "label": "Pape Léon III",
+            "correct": true
+          },
+          {
+            "label": "Pape Urbain IV",
+            "correct": false
+          },
+          {
+            "label": "Pape Valentin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-650cc9c6c34f-fr",
+      "type": "mcq",
+      "prompt": "Quel personnage historique est célèbre pour la phrase « Qu'ils mangent de la brioche », sans doute jamais prononcée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Élisabeth Ire",
+            "correct": false
+          },
+          {
+            "label": "Tsar Nicolas II",
+            "correct": false
+          },
+          {
+            "label": "Marie-Antoinette",
+            "correct": true
+          },
+          {
+            "label": "Henri VIII",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6532da3c258d-fr",
+      "type": "mcq",
+      "prompt": "L'Empire ottoman a été dissous après sa défaite dans quelle guerre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Guerre de Crimée",
+            "correct": false
+          },
+          {
+            "label": "Révolution serbe",
+            "correct": false
+          },
+          {
+            "label": "Première Guerre mondiale",
+            "correct": true
+          },
+          {
+            "label": "Seconde guerre balkanique",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-68057e9d8869-fr",
+      "type": "mcq",
+      "prompt": "Pendant la guerre du Pacifique (1879-1883), la Bolivie a perdu son accès à la mer face à quel pays ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chili",
+            "correct": true
+          },
+          {
+            "label": "Pérou",
+            "correct": false
+          },
+          {
+            "label": "Brésil",
+            "correct": false
+          },
+          {
+            "label": "Argentine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6fa907dc807a-fr",
+      "type": "mcq",
+      "prompt": "Qui a été Premier ministre du Royaume-Uni pendant la majeure partie de la Seconde Guerre mondiale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Edward Heath",
+            "correct": false
+          },
+          {
+            "label": "Harold Macmillan",
+            "correct": false
+          },
+          {
+            "label": "Winston Churchill",
+            "correct": true
+          },
+          {
+            "label": "Neville Chamberlain",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-713cf859de85-fr",
+      "type": "mcq",
+      "prompt": "Combien y a-t-il eu d'alunissages habités ?",
+      "payload": {
+        "options": [
+          {
+            "label": "7",
+            "correct": false
+          },
+          {
+            "label": "1",
+            "correct": false
+          },
+          {
+            "label": "6",
+            "correct": true
+          },
+          {
+            "label": "3",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-72288eb09c8a-fr",
+      "type": "mcq",
+      "prompt": "Qui a été le premier dirigeant d'Haïti après son indépendance ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Toussaint Louverture",
+            "correct": false
+          },
+          {
+            "label": "Alexandre Pétion",
+            "correct": false
+          },
+          {
+            "label": "Henri Christophe",
+            "correct": false
+          },
+          {
+            "label": "Jean-Jacques Dessalines",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-735502f5eea4-fr",
+      "type": "mcq",
+      "prompt": "En quelle année a eu lieu le krach de Wall Street ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1925",
+            "correct": false
+          },
+          {
+            "label": "1932",
+            "correct": false
+          },
+          {
+            "label": "1930",
+            "correct": false
+          },
+          {
+            "label": "1929",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7371e6dc4c82-fr",
+      "type": "mcq",
+      "prompt": "Quel produit chimique a été déversé sur le Vietnam pendant la guerre du Vietnam ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cyanure d'hydrogène",
+            "correct": false
+          },
+          {
+            "label": "Phosgène",
+            "correct": false
+          },
+          {
+            "label": "Gaz moutarde",
+            "correct": false
+          },
+          {
+            "label": "Agent orange",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-79fb25fda650-fr",
+      "type": "truefalse",
+      "prompt": "Le cuirassé USS Missouri (BB-63) a servi pour la dernière fois pendant la guerre de Corée.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-82fdd7353184-fr",
+      "type": "mcq",
+      "prompt": "Quel pays ne faisait PAS partie des Empires centraux pendant la Première Guerre mondiale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Empire ottoman",
+            "correct": false
+          },
+          {
+            "label": "Espagne",
+            "correct": true
+          },
+          {
+            "label": "Allemagne",
+            "correct": false
+          },
+          {
+            "label": "Autriche-Hongrie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-84f0b8a3d2e6-fr",
+      "type": "mcq",
+      "prompt": "En quelle année Constantinople a-t-elle été conquise par les Turcs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1440",
+            "correct": false
+          },
+          {
+            "label": "1435",
+            "correct": false
+          },
+          {
+            "label": "1454",
+            "correct": false
+          },
+          {
+            "label": "1453",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-882eaba17c92-fr",
+      "type": "mcq",
+      "prompt": "Qui a été le premier Premier ministre du Canada ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Robert Borden",
+            "correct": false
+          },
+          {
+            "label": "John Abbott",
+            "correct": false
+          },
+          {
+            "label": "Alexander Mackenzie",
+            "correct": false
+          },
+          {
+            "label": "John Macdonald",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8c68a13ce8c0-fr",
+      "type": "mcq",
+      "prompt": "Où et quand a été fabriquée la première boîte en carton à usage industriel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Angleterre, 1917",
+            "correct": false
+          },
+          {
+            "label": "États-Unis, 1817",
+            "correct": false
+          },
+          {
+            "label": "Angleterre, 1817",
+            "correct": true
+          },
+          {
+            "label": "États-Unis, 1917",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8ccfeb49468d-fr",
+      "type": "truefalse",
+      "prompt": "Adolf Hitler a été jugé au procès de Nuremberg.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8e9ad1e15b82-fr",
+      "type": "mcq",
+      "prompt": "Quand la NSA américaine a-t-elle été créée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1er juillet 1973",
+            "correct": false
+          },
+          {
+            "label": "26 juillet 1908",
+            "correct": false
+          },
+          {
+            "label": "25 novembre 2002",
+            "correct": false
+          },
+          {
+            "label": "4 novembre 1952",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-92fb4282abe7-fr",
+      "type": "mcq",
+      "prompt": "Quel palais d'Henri VIII, près de Richmond (Londres), existe encore ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Buckingham Palace",
+            "correct": false
+          },
+          {
+            "label": "Coughton Court",
+            "correct": false
+          },
+          {
+            "label": "St James's Palace",
+            "correct": false
+          },
+          {
+            "label": "Hampton Court",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-948960cba94b-fr",
+      "type": "mcq",
+      "prompt": "Quand la République populaire de Chine a-t-elle été fondée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "7 mai 1945",
+            "correct": false
+          },
+          {
+            "label": "6 décembre 1950",
+            "correct": false
+          },
+          {
+            "label": "3 avril 1947",
+            "correct": false
+          },
+          {
+            "label": "1er octobre 1949",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9619b06bd02f-fr",
+      "type": "truefalse",
+      "prompt": "L'université d'Oxford est plus ancienne que l'Empire aztèque.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-98dd43ae5ec0-fr",
+      "type": "mcq",
+      "prompt": "En quelle année la Norvège a-t-elle adopté sa constitution ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1854",
+            "correct": false
+          },
+          {
+            "label": "1814",
+            "correct": true
+          },
+          {
+            "label": "1905",
+            "correct": false
+          },
+          {
+            "label": "1932",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a6536abb4cce-fr",
+      "type": "truefalse",
+      "prompt": "La majorité des habitants de l'Empire byzantin se disaient Romains.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ac577bb281e8-fr",
+      "type": "mcq",
+      "prompt": "Quel était le nom de code de l'invasion allemande de l'URSS pendant la Seconde Guerre mondiale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Opération Unthinkable",
+            "correct": false
+          },
+          {
+            "label": "Opération Barbarossa",
+            "correct": true
+          },
+          {
+            "label": "Opération Kaiserschlacht",
+            "correct": false
+          },
+          {
+            "label": "Opération Molotov",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ad673bb031c7-fr",
+      "type": "mcq",
+      "prompt": "Quelle a été la dernière colonie cédée par le Royaume-Uni, marquant la fin de l'Empire britannique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hong Kong",
+            "correct": true
+          },
+          {
+            "label": "Inde",
+            "correct": false
+          },
+          {
+            "label": "Irlande",
+            "correct": false
+          },
+          {
+            "label": "Australie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-afa5e027b172-fr",
+      "type": "mcq",
+      "prompt": "Contre quel pays la République des Provinces-Unies a-t-elle mené la guerre de Quatre-Vingts Ans ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Espagne",
+            "correct": true
+          },
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "Portugal",
+            "correct": false
+          },
+          {
+            "label": "Angleterre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b02679bdc44b-fr",
+      "type": "truefalse",
+      "prompt": "Martin Luther King Jr. et Anne Frank sont nés la même année.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b47baf627836-fr",
+      "type": "mcq",
+      "prompt": "Parmi ces chars du XXe siècle, lequel a été conçu et construit AVANT les autres ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cromwell",
+            "correct": false
+          },
+          {
+            "label": "Renault FT",
+            "correct": true
+          },
+          {
+            "label": "M4 Sherman",
+            "correct": false
+          },
+          {
+            "label": "Panzer IV",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b6ee33ab848f-fr",
+      "type": "mcq",
+      "prompt": "Après sa défaite à Waterloo, Napoléon Bonaparte a été exilé sur quelle île ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Corse",
+            "correct": false
+          },
+          {
+            "label": "Sainte-Hélène",
+            "correct": true
+          },
+          {
+            "label": "Elbe",
+            "correct": false
+          },
+          {
+            "label": "Îles Canaries",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b74fe3e23939-fr",
+      "type": "mcq",
+      "prompt": "Quel pays a offert la statue de la Liberté aux États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Angleterre",
+            "correct": false
+          },
+          {
+            "label": "Espagne",
+            "correct": false
+          },
+          {
+            "label": "Allemagne",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b85b5b28f64b-fr",
+      "type": "mcq",
+      "prompt": "Quelle année est considérée comme celle de la fin de l'Empire britannique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1971",
+            "correct": false
+          },
+          {
+            "label": "1997",
+            "correct": true
+          },
+          {
+            "label": "1986",
+            "correct": false
+          },
+          {
+            "label": "1981",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b862607e98be-fr",
+      "type": "mcq",
+      "prompt": "Qui a été le premier Américain dans l'espace ?",
+      "payload": {
+        "options": [
+          {
+            "label": "John Glenn",
+            "correct": false
+          },
+          {
+            "label": "Jim Lovell",
+            "correct": false
+          },
+          {
+            "label": "Alan Shepard",
+            "correct": true
+          },
+          {
+            "label": "Neil Armstrong",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b8c3a48ed3c0-fr",
+      "type": "mcq",
+      "prompt": "Qui a été le dernier empereur du Mexique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "López Obrador",
+            "correct": false
+          },
+          {
+            "label": "Maximilien d'Autriche",
+            "correct": true
+          },
+          {
+            "label": "Napoléon III",
+            "correct": false
+          },
+          {
+            "label": "Agustín de Iturbide",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-baec903a5ed7-fr",
+      "type": "mcq",
+      "prompt": "Dans quelle prison Adolf Hitler était-il détenu en 1924 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Abbaye d'Ebrach",
+            "correct": false
+          },
+          {
+            "label": "Prison de Landsberg",
+            "correct": true
+          },
+          {
+            "label": "Prison de Spandau",
+            "correct": false
+          },
+          {
+            "label": "Hohenasperg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c14561bdb39f-fr",
+      "type": "mcq",
+      "prompt": "Où se trouvait Abraham Lincoln quand John Wilkes Booth l'a assassiné en 1865 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "À cheval",
+            "correct": false
+          },
+          {
+            "label": "En bateau",
+            "correct": false
+          },
+          {
+            "label": "Au lit",
+            "correct": false
+          },
+          {
+            "label": "Au théâtre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c522ca61af73-fr",
+      "type": "mcq",
+      "prompt": "Quel pays a développé le fusil d'assaut AK-47 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Union soviétique",
+            "correct": true
+          },
+          {
+            "label": "Iran",
+            "correct": false
+          },
+          {
+            "label": "Pologne",
+            "correct": false
+          },
+          {
+            "label": "Israël",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c5366446d8ae-fr",
+      "type": "mcq",
+      "prompt": "Pendant quelle guerre a eu lieu la « crise des missiles de Cuba » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Seconde Guerre mondiale",
+            "correct": false
+          },
+          {
+            "label": "Première Guerre mondiale",
+            "correct": false
+          },
+          {
+            "label": "Révolution américaine",
+            "correct": false
+          },
+          {
+            "label": "Guerre froide",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d40c28b32885-fr",
+      "type": "mcq",
+      "prompt": "En quelle année a été fondé le fabricant d'armes italien Beretta ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1998",
+            "correct": false
+          },
+          {
+            "label": "1776",
+            "correct": false
+          },
+          {
+            "label": "1526",
+            "correct": true
+          },
+          {
+            "label": "1923",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d6db9b22f54c-fr",
+      "type": "mcq",
+      "prompt": "Quelle était la longueur totale du Titanic ?",
+      "payload": {
+        "options": [
+          {
+            "label": "268,8 m",
+            "correct": true
+          },
+          {
+            "label": "251,5 m",
+            "correct": false
+          },
+          {
+            "label": "317,6 m",
+            "correct": false
+          },
+          {
+            "label": "231,3 m",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d859e34d6b81-fr",
+      "type": "mcq",
+      "prompt": "En quelle année le dernier cas naturel de variole a-t-il été recensé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1977",
+            "correct": true
+          },
+          {
+            "label": "1982",
+            "correct": false
+          },
+          {
+            "label": "1980",
+            "correct": false
+          },
+          {
+            "label": "1990",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d9856a43f1c5-fr",
+      "type": "mcq",
+      "prompt": "Henri VIII fut le deuxième monarque de quelle maison royale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lancastre",
+            "correct": false
+          },
+          {
+            "label": "Stuart",
+            "correct": false
+          },
+          {
+            "label": "York",
+            "correct": false
+          },
+          {
+            "label": "Tudor",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dc1803bc38eb-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces anciens peuples du Proche-Orient existe encore comme groupe ethnique moderne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Assyriens",
+            "correct": true
+          },
+          {
+            "label": "Élamites",
+            "correct": false
+          },
+          {
+            "label": "Babyloniens",
+            "correct": false
+          },
+          {
+            "label": "Hittites",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dc59e6718641-fr",
+      "type": "mcq",
+      "prompt": "Dans quelle campagne de la guerre de Sécession l'Union a-t-elle creusé un tunnel sous les lignes confédérées pour y faire sauter des explosifs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Siège de Vicksburg",
+            "correct": false
+          },
+          {
+            "label": "Siège de Petersburg",
+            "correct": true
+          },
+          {
+            "label": "Campagne d'Antietam",
+            "correct": false
+          },
+          {
+            "label": "Campagne de Gettysburg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e45c6e21c82a-fr",
+      "type": "mcq",
+      "prompt": "Quel était le vrai nom du chef national albanais Skanderbeg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mirash Krasniki",
+            "correct": false
+          },
+          {
+            "label": "Diturak Zhulati",
+            "correct": false
+          },
+          {
+            "label": "Iskander Bejko",
+            "correct": false
+          },
+          {
+            "label": "Gjergj Kastrioti",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e74d7d71b765-fr",
+      "type": "mcq",
+      "prompt": "Combien de navires jumeaux le Titanic avait-il ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2",
+            "correct": true
+          },
+          {
+            "label": "4",
+            "correct": false
+          },
+          {
+            "label": "3",
+            "correct": false
+          },
+          {
+            "label": "1",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e7bb6497be03-fr",
+      "type": "truefalse",
+      "prompt": "Adolf Hitler a été admis à l'Académie des beaux-arts de Vienne.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ed860d07f0a1-fr",
+      "type": "mcq",
+      "prompt": "Quand la Lituanie a-t-elle déclaré son indépendance de l'Union soviétique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "5 décembre 1991",
+            "correct": false
+          },
+          {
+            "label": "20 avril 1989",
+            "correct": false
+          },
+          {
+            "label": "25 décembre 1991",
+            "correct": false
+          },
+          {
+            "label": "11 mars 1990",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f43cfe1fa0f6-fr",
+      "type": "mcq",
+      "prompt": "La révolte de Bohême (1618-1620) a commencé quand des protestants de Prague ont fait quoi à des régents catholiques ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les ont pendus",
+            "correct": false
+          },
+          {
+            "label": "Ont insulté leurs mères",
+            "correct": false
+          },
+          {
+            "label": "Les ont mis au pilori",
+            "correct": false
+          },
+          {
+            "label": "Les ont défenestrés",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f7875f9c719b-fr",
+      "type": "mcq",
+      "prompt": "Comment Socrate a-t-il été exécuté ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crucifixion",
+            "correct": false
+          },
+          {
+            "label": "Poison",
+            "correct": true
+          },
+          {
+            "label": "Peloton d'exécution",
+            "correct": false
+          },
+          {
+            "label": "Décapitation",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-facbee9c0666-fr",
+      "type": "mcq",
+      "prompt": "Quel président américain était en fonction au début de la guerre du Golfe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "George W. Bush",
+            "correct": false
+          },
+          {
+            "label": "Richard Nixon",
+            "correct": false
+          },
+          {
+            "label": "George H. W. Bush",
+            "correct": true
+          },
+          {
+            "label": "Ronald Reagan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-fdd16f155d1f-fr",
+      "type": "mcq",
+      "prompt": "Quel était à l'origine l'objectif principal de l'opération allemande « Fall Blau » (Case Blue) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crimée",
+            "correct": false
+          },
+          {
+            "label": "Caucase",
+            "correct": true
+          },
+          {
+            "label": "Stalingrad",
+            "correct": false
+          },
+          {
+            "label": "Voronej",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-history-fr",
+      "title": "Histoire du monde",
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-0dee9264fb43-fr",
+        "otdb-0f296a474252-fr",
+        "otdb-12064ee25495-fr",
+        "otdb-1bd8709562c9-fr",
+        "otdb-2c9a5dbf426e-fr",
+        "otdb-362fb3ebc531-fr",
+        "otdb-60919da3e1b2-fr",
+        "otdb-650cc9c6c34f-fr",
+        "otdb-6fa907dc807a-fr",
+        "otdb-735502f5eea4-fr",
+        "otdb-7371e6dc4c82-fr",
+        "otdb-84f0b8a3d2e6-fr",
+        "otdb-b6ee33ab848f-fr",
+        "otdb-b74fe3e23939-fr",
+        "otdb-ac577bb281e8-fr",
+        "otdb-c14561bdb39f-fr",
+        "otdb-f7875f9c719b-fr",
+        "otdb-2ac21a16d90a-fr",
+        "otdb-948960cba94b-fr",
+        "otdb-713cf859de85-fr"
+      ],
+      "description": "Dates clés, batailles et grandes figures de l'histoire mondiale."
+    },
+    {
+      "id": "otdb-quiz-through-the-ages-fr",
+      "title": "À travers les siècles",
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-0129a7f88a98-fr",
+        "otdb-0a1879139f41-fr",
+        "otdb-1eef60fbe546-fr",
+        "otdb-27dc100367c8-fr",
+        "otdb-283fdb329c50-fr",
+        "otdb-389189040353-fr",
+        "otdb-3c4e4a1620b0-fr",
+        "otdb-475176886ac9-fr",
+        "otdb-482a7f8e6a15-fr",
+        "otdb-4ccfce05edfd-fr",
+        "otdb-4e263388396a-fr",
+        "otdb-6532da3c258d-fr",
+        "otdb-68057e9d8869-fr",
+        "otdb-72288eb09c8a-fr",
+        "otdb-8ccfeb49468d-fr",
+        "otdb-9619b06bd02f-fr",
+        "otdb-a6536abb4cce-fr",
+        "otdb-afa5e027b172-fr",
+        "otdb-b02679bdc44b-fr",
+        "otdb-f43cfe1fa0f6-fr"
+      ],
+      "description": "Des empires de l'Antiquité au XXe siècle."
+    }
+  ]
+}

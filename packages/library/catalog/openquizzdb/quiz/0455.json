@@ -6,35 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0455-1",
-      "type": "mcq",
-      "prompt": "Quelle plante fleurit traditionnellement les tombes à la Toussaint ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Cosmos",
-            "correct": false
-          },
-          {
-            "label": "Chrysanthème",
-            "correct": true
-          },
-          {
-            "label": "Crocus",
-            "correct": false
-          },
-          {
-            "label": "Camélia",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0455-2",
       "type": "mcq",
       "prompt": "Quel objet est souvent considéré comme porte-bonheur ?",
@@ -84,35 +55,6 @@
           {
             "label": "Colombine",
             "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0455-4",
-      "type": "mcq",
-      "prompt": "Quel animal est symbole de malheur pour les marins superstitieux ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Castor brun",
-            "correct": false
-          },
-          {
-            "label": "Dauphin bleu",
-            "correct": false
-          },
-          {
-            "label": "Lapin blanc",
-            "correct": false
-          },
-          {
-            "label": "Chat noir",
-            "correct": true
           }
         ]
       },

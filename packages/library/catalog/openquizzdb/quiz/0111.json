@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0111-3",
-      "type": "mcq",
-      "prompt": "Combien de participants courent chaque année la finale de l'Ironman ?",
-      "payload": {
-        "options": [
-          {
-            "label": "3 000",
-            "correct": false
-          },
-          {
-            "label": "4 000",
-            "correct": false
-          },
-          {
-            "label": "5 000",
-            "correct": false
-          },
-          {
-            "label": "2 000",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0111-4",
-      "type": "mcq",
-      "prompt": "Par quelle discipline débute le championnat du monde Ironman ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Course",
-            "correct": false
-          },
-          {
-            "label": "Marathon",
-            "correct": false
-          },
-          {
-            "label": "Cyclisme",
-            "correct": false
-          },
-          {
-            "label": "Natation",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "sport",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

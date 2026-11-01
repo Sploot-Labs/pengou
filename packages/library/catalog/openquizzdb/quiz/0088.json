@@ -35,35 +35,6 @@
       "audience": "tous"
     },
     {
-      "id": "oqdb-0088-2",
-      "type": "mcq",
-      "prompt": "Dans la série « Les Simpson », quel est le prénom du mari de Marge ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Harvey",
-            "correct": false
-          },
-          {
-            "label": "Horace",
-            "correct": false
-          },
-          {
-            "label": "Homer",
-            "correct": true
-          },
-          {
-            "label": "Herbert",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0088-3",
       "type": "mcq",
       "prompt": "Quelle ville est également la capitale de la Finlande ?",
@@ -83,35 +54,6 @@
           },
           {
             "label": "Halifax",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "culture-generale",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0088-4",
-      "type": "mcq",
-      "prompt": "Qui a réalisé le film « La Mort aux trousses », inspiré d'une histoire vraie ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Hitchcock",
-            "correct": true
-          },
-          {
-            "label": "Hamer",
-            "correct": false
-          },
-          {
-            "label": "Hicks",
-            "correct": false
-          },
-          {
-            "label": "Hawkins",
             "correct": false
           }
         ]

@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0173-1",
+      "type": "mcq",
+      "prompt": "Dans quel État des États-Unis est né Barack Obama ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hawaï",
+            "correct": true
+          },
+          {
+            "label": "Colorado",
+            "correct": false
+          },
+          {
+            "label": "Arkansas",
+            "correct": false
+          },
+          {
+            "label": "Californie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0227-2",
+      "type": "mcq",
+      "prompt": "De quelle société astronautique Elon Musk est-il cofondateur et PDG ?",
+      "payload": {
+        "options": [
+          {
+            "label": "SpaceX",
+            "correct": true
+          },
+          {
+            "label": "Flagship",
+            "correct": false
+          },
+          {
+            "label": "Landstat",
+            "correct": false
+          },
+          {
+            "label": "New Millennium",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0117-2",
+      "type": "mcq",
+      "prompt": "Quelle actrice de la saga Harry Potter est devenue une voix féministe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gal Gadot",
+            "correct": false
+          },
+          {
+            "label": "Margot Robbie",
+            "correct": false
+          },
+          {
+            "label": "Jennifer Lawrence",
+            "correct": false
+          },
+          {
+            "label": "Emma Watson",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0471-1",
+      "type": "mcq",
+      "prompt": "De quelle émission télévisée Donald Trump a-t-il été l'animateur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spin City",
+            "correct": false
+          },
+          {
+            "label": "The Apprentice",
+            "correct": true
+          },
+          {
+            "label": "WWE Raw",
+            "correct": false
+          },
+          {
+            "label": "The Job",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0529-4",
+      "type": "mcq",
+      "prompt": "Quel champion de la terre battue est né sur l'île de Majorque ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Marcelo Melo",
+            "correct": false
+          },
+          {
+            "label": "Andy Murray",
+            "correct": false
+          },
+          {
+            "label": "Rafael Nadal",
+            "correct": true
+          },
+          {
+            "label": "Roger Federer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0137-3",
+      "type": "mcq",
+      "prompt": "Quel surnom est utilisé pour désigner la joueuse Maria Sharapova ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Guêpe",
+            "correct": false
+          },
+          {
+            "label": "Masha",
+            "correct": true
+          },
+          {
+            "label": "Opa",
+            "correct": false
+          },
+          {
+            "label": "Boum-Boum",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0173-3",
+      "type": "mcq",
+      "prompt": "Qui a chanté l'hymne national pour l'investiture de Barack Obama ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beyoncé",
+            "correct": true
+          },
+          {
+            "label": "Rihanna",
+            "correct": false
+          },
+          {
+            "label": "Madonna",
+            "correct": false
+          },
+          {
+            "label": "Britney Spears",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0227-1",
+      "type": "mcq",
+      "prompt": "Pour quel paiement en ligne Elon Musk a-t-il joué un rôlé clé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "PayPal",
+            "correct": true
+          },
+          {
+            "label": "Tesla",
+            "correct": false
+          },
+          {
+            "label": "Paccar",
+            "correct": false
+          },
+          {
+            "label": "Micron",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0579-3",
+      "type": "mcq",
+      "prompt": "Quelle sulfureuse chanteuse est surnommée la « Black Barbie » du rap ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Foy Brown",
+            "correct": false
+          },
+          {
+            "label": "Nicki Minaj",
+            "correct": true
+          },
+          {
+            "label": "Christina Milian",
+            "correct": false
+          },
+          {
+            "label": "Lauryn Hill",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0471-4",
+      "type": "mcq",
+      "prompt": "Pour quel personnage fictif Bob Gale s'est-il inspiré de Donald Trump ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Biff Tannen",
+            "correct": true
+          },
+          {
+            "label": "Sam Baines",
+            "correct": false
+          },
+          {
+            "label": "Emmett Brown",
+            "correct": false
+          },
+          {
+            "label": "Marty McFly",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0117-4",
+      "type": "mcq",
+      "prompt": "Quelle jeune militante écologiste suédoise engagée est très médiatisée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hedy Epstein",
+            "correct": false
+          },
+          {
+            "label": "Greta Thunberg",
+            "correct": true
+          },
+          {
+            "label": "Rachel Corrie",
+            "correct": false
+          },
+          {
+            "label": "Mary Dreier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0559-1",
+      "type": "mcq",
+      "prompt": "Quel nom Mike Horn a-t-il donné à son tour du monde par l'équateur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cap Zero",
+            "correct": false
+          },
+          {
+            "label": "Latitude Zéro",
+            "correct": true
+          },
+          {
+            "label": "Land Zero",
+            "correct": false
+          },
+          {
+            "label": "Ground Zero",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0119-4",
+      "type": "mcq",
+      "prompt": "Quel français avait dessiné la robe de Kim Kardashian au Met Gala ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pierre Balmain",
+            "correct": false
+          },
+          {
+            "label": "Christian Dior",
+            "correct": false
+          },
+          {
+            "label": "Thierry Mugler",
+            "correct": true
+          },
+          {
+            "label": "Guy Laroche",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0529-3",
+      "type": "mcq",
+      "prompt": "Quel tennisman américain a été marié à Brooke Shields ?",
+      "payload": {
+        "options": [
+          {
+            "label": "John McEnroe",
+            "correct": false
+          },
+          {
+            "label": "Björn Borg",
+            "correct": false
+          },
+          {
+            "label": "André Agassi",
+            "correct": true
+          },
+          {
+            "label": "Jimmy Connors",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0112-4",
+      "type": "mcq",
+      "prompt": "Comment se prénomme la benjamine de la famille Jackson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joyce",
+            "correct": false
+          },
+          {
+            "label": "Jasmine",
+            "correct": false
+          },
+          {
+            "label": "Jenifer",
+            "correct": false
+          },
+          {
+            "label": "Janet",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0369-2",
+      "type": "mcq",
+      "prompt": "Dans quelle pays est né le joueur de basket-ball Tony Parker ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pologne",
+            "correct": false
+          },
+          {
+            "label": "Belgique",
+            "correct": true
+          },
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "États-Unis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0533-3",
+      "type": "mcq",
+      "prompt": "Quelle spécialiste de l'épée est devenue femme politique française ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Laura Flessel",
+            "correct": true
+          },
+          {
+            "label": "Timea Nagy",
+            "correct": false
+          },
+          {
+            "label": "Britta Heidemann",
+            "correct": false
+          },
+          {
+            "label": "Valérie Barlois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0137-2",
+      "type": "mcq",
+      "prompt": "Comme quelle joueuse Sharapova crie-t-elle à chaque frappe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coco Gauff",
+            "correct": false
+          },
+          {
+            "label": "Monica Seles",
+            "correct": true
+          },
+          {
+            "label": "Ana Ivanovic",
+            "correct": false
+          },
+          {
+            "label": "Nathalie Dechy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0444-3",
+      "type": "mcq",
+      "prompt": "Qui est l'auteur du « Da Vinci Code » publié à des millions d'exemplaires ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Robert Bloch",
+            "correct": false
+          },
+          {
+            "label": "Kent Anderson",
+            "correct": false
+          },
+          {
+            "label": "Dan Brown",
+            "correct": true
+          },
+          {
+            "label": "David Baldacci",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0610-4",
+      "type": "mcq",
+      "prompt": "Qui a dit : « L'imagination est plus importante que le savoir » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Guy de Maupassant",
+            "correct": false
+          },
+          {
+            "label": "Albert Einstein",
+            "correct": true
+          },
+          {
+            "label": "Oscar Wilde",
+            "correct": false
+          },
+          {
+            "label": "Confucius",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-personnalites-du-monde",
+      "title": "Personnalités du monde",
+      "description": "D'après des questions OpenQuizzDB de Philippe Bresoux.",
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0173-1",
+        "oqdb-0227-2",
+        "oqdb-0117-2",
+        "oqdb-0471-1",
+        "oqdb-0529-4",
+        "oqdb-0137-3",
+        "oqdb-0173-3",
+        "oqdb-0227-1",
+        "oqdb-0579-3",
+        "oqdb-0471-4",
+        "oqdb-0117-4",
+        "oqdb-0559-1",
+        "oqdb-0119-4",
+        "oqdb-0529-3",
+        "oqdb-0112-4",
+        "oqdb-0369-2",
+        "oqdb-0533-3",
+        "oqdb-0137-2",
+        "oqdb-0444-3",
+        "oqdb-0610-4"
+      ]
+    }
+  ]
+}

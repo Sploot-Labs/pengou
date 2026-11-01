@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0369-4",
+      "type": "mcq",
+      "prompt": "Quel est le dernier club NBA dans lequel a joué Michael Jordan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lakers",
+            "correct": false
+          },
+          {
+            "label": "Bulls",
+            "correct": false
+          },
+          {
+            "label": "Wizards",
+            "correct": true
+          },
+          {
+            "label": "Spurs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0499-4",
+      "type": "mcq",
+      "prompt": "Quel jeu télévisé a été inventé par Alain Chabat et Kader Aoun ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kamoulox",
+            "correct": false
+          },
+          {
+            "label": "Fear Factor",
+            "correct": false
+          },
+          {
+            "label": "Burger Quiz",
+            "correct": true
+          },
+          {
+            "label": "Slam",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0215-2",
+      "type": "mcq",
+      "prompt": "Quel pirate des Caraïbes est interprété par Johnny Depp ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jack Sparrow",
+            "correct": true
+          },
+          {
+            "label": "Barbe-Rouge",
+            "correct": false
+          },
+          {
+            "label": "Will Turner",
+            "correct": false
+          },
+          {
+            "label": "Capitaine Flint",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0391-4",
+      "type": "mcq",
+      "prompt": "Quelle mannequin a incarné la James Bond girl de « Quantum of Solace » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Olga Kurylenko",
+            "correct": true
+          },
+          {
+            "label": "Naomie Harris",
+            "correct": false
+          },
+          {
+            "label": "Eva Green",
+            "correct": false
+          },
+          {
+            "label": "Naomi Watts",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0363-4",
+      "type": "mcq",
+      "prompt": "Quel album de Jean-Michel Jarre est un hommage au vent ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Téo et Téa",
+            "correct": false
+          },
+          {
+            "label": "Aero",
+            "correct": true
+          },
+          {
+            "label": "Chronologie",
+            "correct": false
+          },
+          {
+            "label": "Geometry of Love",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0555-1",
+      "type": "mcq",
+      "prompt": "Dans « L'Âge de glace », qu'est-ce qui échappe à l'écureuil Scrat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Un gland",
+            "correct": true
+          },
+          {
+            "label": "Une bille",
+            "correct": false
+          },
+          {
+            "label": "Un os",
+            "correct": false
+          },
+          {
+            "label": "Une pierre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0113-2",
+      "type": "mcq",
+      "prompt": "Dans quel film d'Olivier Van Hoofstadt Florence Foresti a-t-elle tourné ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sketté",
+            "correct": false
+          },
+          {
+            "label": "Dikkenek",
+            "correct": true
+          },
+          {
+            "label": "Go Fast",
+            "correct": false
+          },
+          {
+            "label": "Parabellum",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0327-1",
+      "type": "mcq",
+      "prompt": "Quelle actrice d'origine mexicaine joue dans « Desperate Housewives » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emma Watson",
+            "correct": false
+          },
+          {
+            "label": "Eva Longoria",
+            "correct": true
+          },
+          {
+            "label": "Halle Berry",
+            "correct": false
+          },
+          {
+            "label": "Salma Hayek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0324-1",
+      "type": "mcq",
+      "prompt": "Quelle actrice joue Mikaela Banes dans « Transformers » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kate Winslet",
+            "correct": false
+          },
+          {
+            "label": "Megan Fox",
+            "correct": true
+          },
+          {
+            "label": "Eva Mendes",
+            "correct": false
+          },
+          {
+            "label": "Jennifer Connelly",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0241-3",
+      "type": "mcq",
+      "prompt": "Quel est le point commun entre les L5, M. Pokora et Sheryfa Luna ?",
+      "payload": {
+        "options": [
+          {
+            "label": "X-Factor",
+            "correct": false
+          },
+          {
+            "label": "Popstars",
+            "correct": true
+          },
+          {
+            "label": "Star Academy",
+            "correct": false
+          },
+          {
+            "label": "Nouvelle Star",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0521-3",
+      "type": "mcq",
+      "prompt": "Dans quel film Jean Dujardin est-il surfeur blond à planche jaune ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brice de Nice",
+            "correct": true
+          },
+          {
+            "label": "OSS 117",
+            "correct": false
+          },
+          {
+            "label": "99 francs",
+            "correct": false
+          },
+          {
+            "label": "Cash",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0551-2",
+      "type": "mcq",
+      "prompt": "Quel personnage invisible de « Secret Story » s'adresse aux candidats ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Voix",
+            "correct": true
+          },
+          {
+            "label": "Le Maître",
+            "correct": false
+          },
+          {
+            "label": "Le Gardien",
+            "correct": false
+          },
+          {
+            "label": "Le Producteur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0239-2",
+      "type": "mcq",
+      "prompt": "Dans quel film Eminem interprète-t-il un jeune rappeur blanc ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wonder Boys",
+            "correct": false
+          },
+          {
+            "label": "Crazy Heart",
+            "correct": false
+          },
+          {
+            "label": "8 Mile",
+            "correct": true
+          },
+          {
+            "label": "Once",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0311-2",
+      "type": "mcq",
+      "prompt": "Quelle chanson a rendu Stromae célèbre en 2009 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Formidable",
+            "correct": false
+          },
+          {
+            "label": "Papaoutai",
+            "correct": false
+          },
+          {
+            "label": "Tous les mêmes",
+            "correct": false
+          },
+          {
+            "label": "Alors on danse",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0281-4",
+      "type": "mcq",
+      "prompt": "Dans quel film Uma Thurman apparaît-elle en héroïne vengeresse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Be Cool",
+            "correct": false
+          },
+          {
+            "label": "Love Coach",
+            "correct": false
+          },
+          {
+            "label": "Tape",
+            "correct": false
+          },
+          {
+            "label": "Kill Bill",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0280-2",
+      "type": "mcq",
+      "prompt": "Quel nom porte la console de jeux vidéo conçue par Microsoft ?",
+      "payload": {
+        "options": [
+          {
+            "label": "X Window",
+            "correct": false
+          },
+          {
+            "label": "Xbox",
+            "correct": true
+          },
+          {
+            "label": "Xfinity",
+            "correct": false
+          },
+          {
+            "label": "Xerxès",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0027-1",
+      "type": "mcq",
+      "prompt": "Qui devient le compagnon de Tom Hanks dans le film « Seul au monde » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Une chaussure",
+            "correct": false
+          },
+          {
+            "label": "Un ballon",
+            "correct": true
+          },
+          {
+            "label": "Une photo",
+            "correct": false
+          },
+          {
+            "label": "Une peluche",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0497-2",
+      "type": "mcq",
+      "prompt": "Dans quel jeu d'aventure plusieurs binômes voyagent-ils en auto-stop ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Intervilles",
+            "correct": false
+          },
+          {
+            "label": "Ninja Warrior",
+            "correct": false
+          },
+          {
+            "label": "Fear Factor",
+            "correct": false
+          },
+          {
+            "label": "Pékin Express",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0241-1",
+      "type": "mcq",
+      "prompt": "De quelle télé-réalité Loana est-elle sortie gagnante en 2001 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nice People",
+            "correct": false
+          },
+          {
+            "label": "Bachelor",
+            "correct": false
+          },
+          {
+            "label": "Secret Story",
+            "correct": false
+          },
+          {
+            "label": "Loft Story",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0267-3",
+      "type": "mcq",
+      "prompt": "Quel athlète Jamaïcain a marqué les Jeux olympiques de 2008 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dexter Lee",
+            "correct": false
+          },
+          {
+            "label": "Lerone Clarke",
+            "correct": false
+          },
+          {
+            "label": "Ray Stewart",
+            "correct": false
+          },
+          {
+            "label": "Usain Bolt",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-annees-2000",
+      "title": "Les années 2000",
+      "description": "Télévision, musique, cinéma et célébrités des années 2000.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0369-4",
+        "oqdb-0499-4",
+        "oqdb-0215-2",
+        "oqdb-0391-4",
+        "oqdb-0363-4",
+        "oqdb-0555-1",
+        "oqdb-0113-2",
+        "oqdb-0327-1",
+        "oqdb-0324-1",
+        "oqdb-0241-3",
+        "oqdb-0521-3",
+        "oqdb-0551-2",
+        "oqdb-0239-2",
+        "oqdb-0311-2",
+        "oqdb-0281-4",
+        "oqdb-0280-2",
+        "oqdb-0027-1",
+        "oqdb-0497-2",
+        "oqdb-0241-1",
+        "oqdb-0267-3"
+      ]
+    }
+  ]
+}

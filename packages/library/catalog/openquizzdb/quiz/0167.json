@@ -6,93 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0167-1",
-      "type": "mcq",
-      "prompt": "Quel médecin Georges Clooney incarnait-il dans la série « Urgences » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "John Carter",
-            "correct": false
-          },
-          {
-            "label": "Douglas Ross",
-            "correct": true
-          },
-          {
-            "label": "Mark Green",
-            "correct": false
-          },
-          {
-            "label": "Dylan Creed",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0167-2",
-      "type": "mcq",
-      "prompt": "Quel était le nom du cochon de compagnie de George Clooney ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Fred",
-            "correct": false
-          },
-          {
-            "label": "Kyle",
-            "correct": false
-          },
-          {
-            "label": "Max",
-            "correct": true
-          },
-          {
-            "label": "Tom",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0167-3",
-      "type": "mcq",
-      "prompt": "Pour quelle région du Soudan George Clooney est-il fortement mobilisé ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Kassala",
-            "correct": false
-          },
-          {
-            "label": "Darfour",
-            "correct": true
-          },
-          {
-            "label": "Sannar",
-            "correct": false
-          },
-          {
-            "label": "Atbara",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0167-4",
       "type": "mcq",
       "prompt": "Pour quelle marque de vermouth George Clooney a-t-il fait de la pub ?",
@@ -116,10 +29,10 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "people",
       "difficulty": "moyen",
       "language": "fr",
-      "audience": "tous"
+      "audience": "adultes"
     }
   ],
   "quizzes": []

@@ -62,64 +62,6 @@
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
-    },
-    {
-      "id": "oqdb-0434-3",
-      "type": "mcq",
-      "prompt": "Quel est le premier morceau écrit par Martin Gore pour Depeche Mode ?",
-      "payload": {
-        "options": [
-          {
-            "label": "See You",
-            "correct": true
-          },
-          {
-            "label": "Shout",
-            "correct": false
-          },
-          {
-            "label": "Leave in Silence",
-            "correct": false
-          },
-          {
-            "label": "New Life",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0434-4",
-      "type": "mcq",
-      "prompt": "Qui a écrit le célébrissime morceau « Just Can't Get Enough » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Alan Wilder",
-            "correct": false
-          },
-          {
-            "label": "Martin Gore",
-            "correct": false
-          },
-          {
-            "label": "Dave Gahan",
-            "correct": false
-          },
-          {
-            "label": "Vince Clarke",
-            "correct": true
-          }
-        ]
-      },
-      "theme": "musique",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
     }
   ],
   "quizzes": []

@@ -1,0 +1,329 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0464-2-en",
+      "type": "mcq",
+      "prompt": "In which city is Tintin kidnapped in \"Tintin in America\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Charlotte",
+            "correct": false
+          },
+          {
+            "label": "Cleveland",
+            "correct": false
+          },
+          {
+            "label": "Chicago",
+            "correct": true
+          },
+          {
+            "label": "Columbus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0464-3-en",
+      "type": "mcq",
+      "prompt": "Which phenomenon saves Tintin and his friends in \"Prisoners of the Sun\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hurricane",
+            "correct": false
+          },
+          {
+            "label": "Solar eclipse",
+            "correct": true
+          },
+          {
+            "label": "Earthquake",
+            "correct": false
+          },
+          {
+            "label": "Avalanche",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0469-1-en",
+      "type": "mcq",
+      "prompt": "What is the first name of Haddock, the merchant navy captain?",
+      "payload": {
+        "options": [
+          {
+            "label": "Anatole",
+            "correct": false
+          },
+          {
+            "label": "Auguste",
+            "correct": false
+          },
+          {
+            "label": "Archibald",
+            "correct": true
+          },
+          {
+            "label": "Ambroise",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0469-2-en",
+      "type": "mcq",
+      "prompt": "What is the job of Séraphin Lampion (Jolyon Wagg) in Tintin?",
+      "payload": {
+        "options": [
+          {
+            "label": "Journalist",
+            "correct": false
+          },
+          {
+            "label": "Banker",
+            "correct": false
+          },
+          {
+            "label": "Police officer",
+            "correct": false
+          },
+          {
+            "label": "Insurance salesman",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0469-3-en",
+      "type": "mcq",
+      "prompt": "In Tintin, what is the visual difference between Thomson and Thompson?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hat",
+            "correct": false
+          },
+          {
+            "label": "Nose",
+            "correct": false
+          },
+          {
+            "label": "Suit",
+            "correct": false
+          },
+          {
+            "label": "Moustache",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0459-1-en",
+      "type": "mcq",
+      "prompt": "Who is the Italian opera singer Bianca Castafiore in love with?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nestor",
+            "correct": false
+          },
+          {
+            "label": "Haddock",
+            "correct": true
+          },
+          {
+            "label": "Calculus",
+            "correct": false
+          },
+          {
+            "label": "Tintin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0459-3-en",
+      "type": "mcq",
+      "prompt": "Who stole Castafiore's jewels?",
+      "payload": {
+        "options": [
+          {
+            "label": "A magpie",
+            "correct": true
+          },
+          {
+            "label": "Nestor",
+            "correct": false
+          },
+          {
+            "label": "Calculus",
+            "correct": false
+          },
+          {
+            "label": "Romani travelers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0459-4-en",
+      "type": "mcq",
+      "prompt": "Which whisky is Captain Haddock's favorite brand?",
+      "payload": {
+        "options": [
+          {
+            "label": "Loch Fields",
+            "correct": false
+          },
+          {
+            "label": "Loch Lomond",
+            "correct": true
+          },
+          {
+            "label": "Loch Ness",
+            "correct": false
+          },
+          {
+            "label": "Loch Mahouss",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0105-3-en",
+      "type": "mcq",
+      "prompt": "Which design is tattooed on Hefty Smurf's arm?",
+      "payload": {
+        "options": [
+          {
+            "label": "Anchor",
+            "correct": false
+          },
+          {
+            "label": "Dumbbells",
+            "correct": false
+          },
+          {
+            "label": "Smurf head",
+            "correct": false
+          },
+          {
+            "label": "Heart",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0105-4-en",
+      "type": "mcq",
+      "prompt": "Which plant is known as the Smurfs' favorite food?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hops",
+            "correct": false
+          },
+          {
+            "label": "Granadilla",
+            "correct": false
+          },
+          {
+            "label": "Sarsaparilla",
+            "correct": true
+          },
+          {
+            "label": "Knotweed",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0567-1-en",
+      "type": "mcq",
+      "prompt": "Who is Princess Diana, who comes from a tribe of Amazons?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mega Mindy",
+            "correct": false
+          },
+          {
+            "label": "Gwen Tennyson",
+            "correct": false
+          },
+          {
+            "label": "Cipher",
+            "correct": false
+          },
+          {
+            "label": "Wonder Woman",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

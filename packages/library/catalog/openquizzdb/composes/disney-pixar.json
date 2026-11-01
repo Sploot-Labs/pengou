@@ -1,0 +1,532 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0177-1",
+      "type": "mcq",
+      "prompt": "Passé minuit, en quoi le carrosse de Cendrillon se transforme-t-il ?",
+      "payload": {
+        "options": [
+          {
+            "label": "En citrouille",
+            "correct": true
+          },
+          {
+            "label": "En gâteau",
+            "correct": false
+          },
+          {
+            "label": "En souris",
+            "correct": false
+          },
+          {
+            "label": "En pomme",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0410-2",
+      "type": "mcq",
+      "prompt": "Qui est l'ennemi de Woody au début de « Toy Story » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Buzz l'Éclair",
+            "correct": true
+          },
+          {
+            "label": "Razmotte",
+            "correct": false
+          },
+          {
+            "label": "Rex",
+            "correct": false
+          },
+          {
+            "label": "Sid",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0345-3",
+      "type": "mcq",
+      "prompt": "Qui est le compagnon de Timon dans le film « Le Roi Lion » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Scar",
+            "correct": false
+          },
+          {
+            "label": "Pumbaa",
+            "correct": true
+          },
+          {
+            "label": "Shenzi",
+            "correct": false
+          },
+          {
+            "label": "Zazu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0452-1",
+      "type": "mcq",
+      "prompt": "Quel chien maladroit est un ami de Mickey et Pluto ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Félix",
+            "correct": false
+          },
+          {
+            "label": "Donald",
+            "correct": false
+          },
+          {
+            "label": "Mortimer",
+            "correct": false
+          },
+          {
+            "label": "Dingo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0177-4",
+      "type": "mcq",
+      "prompt": "Quelle princesse Disney est une sirène vivant auprès du roi Triton ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Merida",
+            "correct": false
+          },
+          {
+            "label": "Tiana",
+            "correct": false
+          },
+          {
+            "label": "Jasmine",
+            "correct": false
+          },
+          {
+            "label": "Ariel",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0446-1",
+      "type": "mcq",
+      "prompt": "Dans quel film de Pixar un rat se révèle-t-il excellent cuisinier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cars",
+            "correct": false
+          },
+          {
+            "label": "Toy Story",
+            "correct": false
+          },
+          {
+            "label": "Monstres et Cie",
+            "correct": false
+          },
+          {
+            "label": "Ratatouille",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0291-3",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le petit dragon dans « Mulan » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fitou",
+            "correct": false
+          },
+          {
+            "label": "Golu",
+            "correct": false
+          },
+          {
+            "label": "Krokmou",
+            "correct": false
+          },
+          {
+            "label": "Mushu",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0452-3",
+      "type": "mcq",
+      "prompt": "Quelle race de chiens intéresse fortement Cruella d'Enfer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fox-terrier",
+            "correct": false
+          },
+          {
+            "label": "Husky",
+            "correct": false
+          },
+          {
+            "label": "Jack Russel",
+            "correct": false
+          },
+          {
+            "label": "Dalmatien",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0345-2",
+      "type": "mcq",
+      "prompt": "Quelle est la particularité physique de Scar dans « Le Roi Lion » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cicatrice",
+            "correct": true
+          },
+          {
+            "label": "Visage brûlé",
+            "correct": false
+          },
+          {
+            "label": "Œil blanc",
+            "correct": false
+          },
+          {
+            "label": "Pas de moustaches",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0177-2",
+      "type": "mcq",
+      "prompt": "Qui chante « Un jour, mon prince viendra » dans un dessin animé Disney ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jasmine",
+            "correct": false
+          },
+          {
+            "label": "Alice",
+            "correct": false
+          },
+          {
+            "label": "Blanche-Neige",
+            "correct": true
+          },
+          {
+            "label": "Cendrillon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0338-1",
+      "type": "mcq",
+      "prompt": "Dans quel film d'animation Pixar, Tilt est-il un ouvrier fourmi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Toy Story",
+            "correct": false
+          },
+          {
+            "label": "Ratatouille",
+            "correct": false
+          },
+          {
+            "label": "1001 pattes",
+            "correct": true
+          },
+          {
+            "label": "Monstres et Cie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0452-4",
+      "type": "mcq",
+      "prompt": "Dans « Robin des Bois », de Disney, quel animal est Robin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Renard",
+            "correct": true
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          },
+          {
+            "label": "Tigre",
+            "correct": false
+          },
+          {
+            "label": "Ours",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0407-4",
+      "type": "mcq",
+      "prompt": "À qui appartiennent les jouets dont font partie Woody et ses amis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Andy",
+            "correct": true
+          },
+          {
+            "label": "Lisa",
+            "correct": false
+          },
+          {
+            "label": "Sid",
+            "correct": false
+          },
+          {
+            "label": "Daisy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0184-3",
+      "type": "mcq",
+      "prompt": "Quel personnage de Disney voit son nez augmenter de volume ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pinocchio",
+            "correct": true
+          },
+          {
+            "label": "Pluto",
+            "correct": false
+          },
+          {
+            "label": "Pumbaa",
+            "correct": false
+          },
+          {
+            "label": "Pocahontas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0452-2",
+      "type": "mcq",
+      "prompt": "Quel renardeau est l'ami d'un chien de chasse dans un film Disney ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Simba",
+            "correct": false
+          },
+          {
+            "label": "Figaro",
+            "correct": false
+          },
+          {
+            "label": "Alex",
+            "correct": false
+          },
+          {
+            "label": "Rox",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0103-2",
+      "type": "mcq",
+      "prompt": "Quelle chaîne fictive de pizzerias est présente dans le film « Toy Story » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pizza Hollywood",
+            "correct": false
+          },
+          {
+            "label": "Pizza Land",
+            "correct": false
+          },
+          {
+            "label": "Pizza Planet",
+            "correct": true
+          },
+          {
+            "label": "Pizza Toys",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0345-4",
+      "type": "mcq",
+      "prompt": "En quoi se déguise Timon, le petit suricate du célèbre film « Le Roi Lion » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "En vahiné",
+            "correct": true
+          },
+          {
+            "label": "En hyène",
+            "correct": false
+          },
+          {
+            "label": "En lionceau",
+            "correct": false
+          },
+          {
+            "label": "En brindille",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-disney-pixar",
+      "title": "Disney et Pixar",
+      "description": "D'après des questions OpenQuizzDB de Philippe Bresoux.",
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0177-1",
+        "oqdb-0410-2",
+        "oqdb-0345-3",
+        "oqdb-0452-1",
+        "oqdb-0177-4",
+        "oqdb-0446-1",
+        "oqdb-0291-3",
+        "oqdb-0452-3",
+        "oqdb-0345-2",
+        "oqdb-0177-2",
+        "oqdb-0338-1",
+        "oqdb-0452-4",
+        "oqdb-0407-4",
+        "oqdb-0184-3",
+        "oqdb-0452-2",
+        "oqdb-0103-2",
+        "oqdb-0345-4"
+      ]
+    }
+  ]
+}

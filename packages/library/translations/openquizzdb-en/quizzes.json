@@ -1,0 +1,205 @@
+{
+  "questions": {},
+  "quizzes": {
+    "oqdb-quiz-alphaquizz": {
+      "title": "General knowledge from C to G",
+      "description": "Based on OpenQuizzDB quizzes Alphaquizz #C to #G."
+    },
+    "oqdb-quiz-animaux-du-monde": {
+      "title": "Animals of the world",
+      "description": "Based on OpenQuizzDB quizzes about savanna animals, giants of the Earth, sharks and birds."
+    },
+    "oqdb-quiz-annees-2000-2": {
+      "title": "Back to the 2000s #2",
+      "description": "Television, music, film and sport from the 2000s."
+    },
+    "oqdb-quiz-annees-2000": {
+      "title": "Back to the 2000s",
+      "description": "Television, music, film and celebrities from the 2000s."
+    },
+    "oqdb-quiz-annees-2010-2": {
+      "title": "Flashback to the 2010s #2",
+      "description": "TV series, film, celebrities and sport from the 2010s."
+    },
+    "oqdb-quiz-annees-2010": {
+      "title": "Flashback to the 2010s",
+      "description": "TV series, film, celebrities and social media from the 2010s."
+    },
+    "oqdb-quiz-annees-70": {
+      "title": "Back to the 70s",
+      "description": "Television, music, film and sport from the 1970s."
+    },
+    "oqdb-quiz-annees-80-2": {
+      "title": "Back to the 80s #2",
+      "description": "Television, music and film from the 1980s."
+    },
+    "oqdb-quiz-annees-80": {
+      "title": "Back to the 80s",
+      "description": "Television, music, film and games from the 1980s."
+    },
+    "oqdb-quiz-annees-90-2": {
+      "title": "Back to the 90s #2",
+      "description": "Television, music, film and sport from the 1990s."
+    },
+    "oqdb-quiz-annees-90": {
+      "title": "Back to the 90s",
+      "description": "Television, music, film and sport from the 1990s."
+    },
+    "oqdb-quiz-arbres-fleurs-volcans": {
+      "title": "Trees, flowers and volcanoes",
+      "description": "Based on OpenQuizzDB quizzes about fruit trees, garden flowers and volcanoes."
+    },
+    "oqdb-quiz-art-musees": {
+      "title": "Art and museums",
+      "description": "Based on OpenQuizzDB quizzes about the Louvre, sculpture, Romanticism, ceramics and artistic trades."
+    },
+    "oqdb-quiz-bande-dessinee": {
+      "title": "Comics",
+      "description": "Based on OpenQuizzDB quizzes about Tintin, the Smurfs and female superheroes."
+    },
+    "oqdb-quiz-capitales-et-pays": {
+      "title": "Capitals and countries",
+      "description": "Based on OpenQuizzDB questions by Philippe Bresoux."
+    },
+    "oqdb-quiz-chanson-francaise": {
+      "title": "French songs",
+      "description": "Based on OpenQuizzDB quizzes about Charles Aznavour, Francis Cabrel, Serge Gainsbourg and French singers."
+    },
+    "oqdb-quiz-chimie-corps": {
+      "title": "Chemistry, the human body and units",
+      "description": "Based on OpenQuizzDB quizzes about chemistry, chemical symbols, the human body and units of measurement."
+    },
+    "oqdb-quiz-cinema-francais": {
+      "title": "French film stars",
+      "description": "Based on OpenQuizzDB quizzes about Alain Delon, Jean Reno, Dany Boon and Isabelle Adjani."
+    },
+    "oqdb-quiz-civilisations-anciennes": {
+      "title": "Ancient civilizations",
+      "description": "Based on OpenQuizzDB quizzes about ancient Egypt, Tutankhamun, gladiators, Teotihuacan and Machu Picchu."
+    },
+    "oqdb-quiz-consoles-jeux-video": {
+      "title": "Consoles and video games",
+      "description": "Based on OpenQuizzDB questions by Philippe Bresoux and François Vandergucht."
+    },
+    "oqdb-quiz-cuisines-ailleurs": {
+      "title": "Cuisines from elsewhere",
+      "description": "Based on OpenQuizzDB quizzes about Italian cuisine, pasta and foreign food."
+    },
+    "oqdb-quiz-dessins-animes": {
+      "title": "Cartoons",
+      "description": "Based on OpenQuizzDB questions by Philippe Bresoux."
+    },
+    "oqdb-quiz-disney-pixar": {
+      "title": "Disney and Pixar",
+      "description": "Based on OpenQuizzDB questions by Philippe Bresoux."
+    },
+    "oqdb-quiz-football": {
+      "title": "Football",
+      "description": "Based on OpenQuizzDB quizzes about the World Cup, goalkeepers, football history and FC Barcelona."
+    },
+    "oqdb-quiz-fromages-desserts": {
+      "title": "Cheese and desserts",
+      "description": "Based on OpenQuizzDB quizzes about French cheeses, desserts and chocolate."
+    },
+    "oqdb-quiz-guerres-et-dates": {
+      "title": "Battles and key dates",
+      "description": "Based on OpenQuizzDB quizzes about battles, wars, 20th-century dates and French history."
+    },
+    "oqdb-quiz-jeux-tele-animateurs": {
+      "title": "TV game shows and hosts",
+      "description": "Based on OpenQuizzDB questions by Philippe Bresoux."
+    },
+    "oqdb-quiz-maison-quotidien": {
+      "title": "Home and everyday life",
+      "description": "Based on OpenQuizzDB quizzes about the house, its rooms, colors and means of transport."
+    },
+    "oqdb-quiz-mode-monuments-oeuvres": {
+      "title": "Fashion, monuments and masterpieces",
+      "description": "Based on OpenQuizzDB questions by Philippe Bresoux."
+    },
+    "oqdb-quiz-new-wave": {
+      "title": "The new wave years",
+      "description": "Based on OpenQuizzDB quizzes about new wave bands and songs, Depeche Mode and The Cure."
+    },
+    "oqdb-quiz-olympisme-tennis": {
+      "title": "Olympics and tennis",
+      "description": "Based on OpenQuizzDB quizzes about the Olympic Games, Rio 2016 and tennis players."
+    },
+    "oqdb-quiz-personnalites-du-monde": {
+      "title": "People of the world",
+      "description": "Based on OpenQuizzDB questions by Philippe Bresoux."
+    },
+    "oqdb-quiz-planetes-inventeurs": {
+      "title": "Planets and inventors",
+      "description": "Based on OpenQuizzDB quizzes about the Earth, moons, Alan Turing and Nikola Tesla."
+    },
+    "oqdb-quiz-romans-populaires": {
+      "title": "Popular novels",
+      "description": "Based on OpenQuizzDB quizzes about Harry Potter, Stephen King, science fiction novels and Hunger Games."
+    },
+    "oqdb-quiz-sagas-sf": {
+      "title": "Science fiction sagas",
+      "description": "Based on OpenQuizzDB quizzes about Star Wars and the Alien saga."
+    },
+    "oqdb-quiz-series-tele-cultes": {
+      "title": "Cult TV series",
+      "description": "Based on OpenQuizzDB questions by Philippe Bresoux."
+    },
+    "oqdb-quiz-tour-europe": {
+      "title": "A tour of Europe",
+      "description": "Based on OpenQuizzDB quizzes about Germany, Austria, Belgium, Greece and Portugal."
+    },
+    "oqdb-quiz-tubes-70-80": {
+      "title": "Hits of the 70s and 80s",
+      "description": "Based on OpenQuizzDB questions by Philippe Bresoux."
+    },
+    "oqdb-quiz-vies-de-stars": {
+      "title": "Star biographies",
+      "description": "Based on OpenQuizzDB questions by Philippe Bresoux."
+    },
+    "oqdb-quiz-villes-iles-lacs": {
+      "title": "Cities, islands and lakes",
+      "description": "Based on OpenQuizzDB quizzes about cities of the world, islands and great lakes."
+    },
+    "oqdb-quiz-mix-culture-1": {
+      "title": "Trivia medley #1",
+      "description": "A bit of everything: film, sport, geography, nature, music and general knowledge."
+    },
+    "oqdb-quiz-mix-culture-2": {
+      "title": "Trivia medley #2",
+      "description": "A bit of everything: film, sport, geography, nature, music and general knowledge."
+    },
+    "oqdb-quiz-mix-culture-3": {
+      "title": "Trivia medley #3",
+      "description": "A bit of everything: film, sport, geography, nature, music and general knowledge."
+    },
+    "oqdb-quiz-mix-culture-4": {
+      "title": "Trivia medley #4",
+      "description": "A bit of everything: film, sport, geography, nature, music and general knowledge."
+    },
+    "oqdb-quiz-mix-culture-5": {
+      "title": "Trivia medley #5",
+      "description": "A bit of everything: film, sport, geography, nature, music and general knowledge."
+    },
+    "oqdb-quiz-mix-culture-6": {
+      "title": "Trivia medley #6",
+      "description": "A bit of everything: film, sport, geography, nature, music and general knowledge."
+    },
+    "oqdb-quiz-mix-culture-7": {
+      "title": "Trivia medley #7",
+      "description": "A bit of everything: film, sport, geography, nature, music and general knowledge."
+    },
+    "oqdb-quiz-mix-culture-8": {
+      "title": "Trivia medley #8",
+      "description": "A bit of everything: film, sport, geography, nature, music and general knowledge."
+    },
+    "oqdb-quiz-mix-culture-9": {
+      "title": "Trivia medley #9",
+      "description": "A bit of everything: film, sport, geography, nature, music and general knowledge."
+    },
+    "oqdb-quiz-mix-culture-10": {
+      "title": "Trivia medley #10",
+      "description": "A bit of everything: film, sport, geography, nature, music and general knowledge."
+    }
+  }
+}

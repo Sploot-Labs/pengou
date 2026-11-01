@@ -6,64 +6,6 @@
   },
   "questions": [
     {
-      "id": "oqdb-0071-1",
-      "type": "mcq",
-      "prompt": "Qui est le complice de Louis de Funès dans « La Soupe aux choux » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Michel Galabru",
-            "correct": false
-          },
-          {
-            "label": "Bourvil",
-            "correct": false
-          },
-          {
-            "label": "Jean Carmet",
-            "correct": true
-          },
-          {
-            "label": "Jacques Villeret",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0071-2",
-      "type": "mcq",
-      "prompt": "Qui incarne le serviteur de Louis de Funès dans « La Folie des grandeurs » ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Bourvil",
-            "correct": false
-          },
-          {
-            "label": "Yves Montand",
-            "correct": true
-          },
-          {
-            "label": "Coluche",
-            "correct": false
-          },
-          {
-            "label": "Michel Galabru",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
       "id": "oqdb-0071-3",
       "type": "mcq",
       "prompt": "Que lancent Bourvil et De Funès sur la route dans « La Grande Vadrouille » ?",

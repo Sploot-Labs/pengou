@@ -1,0 +1,329 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, plusieurs auteurs (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0027-3-en",
+      "type": "mcq",
+      "prompt": "On consoles, who is Mario's mushroom companion?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peach",
+            "correct": false
+          },
+          {
+            "label": "Toop",
+            "correct": false
+          },
+          {
+            "label": "Luigi",
+            "correct": false
+          },
+          {
+            "label": "Toad",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0147-1-en",
+      "type": "mcq",
+      "prompt": "Which company released the PlayStation 2 game console?",
+      "payload": {
+        "options": [
+          {
+            "label": "Microsoft",
+            "correct": false
+          },
+          {
+            "label": "Nintendo",
+            "correct": false
+          },
+          {
+            "label": "Sega",
+            "correct": false
+          },
+          {
+            "label": "Sony",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0297-2-en",
+      "type": "mcq",
+      "prompt": "Which gorilla is one of Nintendo's first famous characters?",
+      "payload": {
+        "options": [
+          {
+            "label": "Abu",
+            "correct": false
+          },
+          {
+            "label": "Donkey Kong",
+            "correct": true
+          },
+          {
+            "label": "Mookie",
+            "correct": false
+          },
+          {
+            "label": "King Kong",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0426-1-en",
+      "type": "mcq",
+      "prompt": "How many Pokémon can a trainer carry?",
+      "payload": {
+        "options": [
+          {
+            "label": "Six",
+            "correct": true
+          },
+          {
+            "label": "Ten",
+            "correct": false
+          },
+          {
+            "label": "Four",
+            "correct": false
+          },
+          {
+            "label": "Only one",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0129-3-en",
+      "type": "mcq",
+      "prompt": "Which research company developed the T-virus in \"Resident Evil\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vault-Tec",
+            "correct": false
+          },
+          {
+            "label": "Umbrella",
+            "correct": true
+          },
+          {
+            "label": "Biotechnica",
+            "correct": false
+          },
+          {
+            "label": "Aperture Science",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0297-4-en",
+      "type": "mcq",
+      "prompt": "Which pink Nintendo character lives in Dream Land?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kirby",
+            "correct": true
+          },
+          {
+            "label": "Kirin",
+            "correct": false
+          },
+          {
+            "label": "Kulfi",
+            "correct": false
+          },
+          {
+            "label": "Kheer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0426-3-en",
+      "type": "mcq",
+      "prompt": "Which family of Pokémon do Pikachu and Raticate belong to?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eggs",
+            "correct": false
+          },
+          {
+            "label": "Sheep",
+            "correct": false
+          },
+          {
+            "label": "Mice",
+            "correct": true
+          },
+          {
+            "label": "Puppies",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0297-3-en",
+      "type": "mcq",
+      "prompt": "What does DS stand for in Nintendo DS?",
+      "payload": {
+        "options": [
+          {
+            "label": "Detect System",
+            "correct": false
+          },
+          {
+            "label": "Data Super",
+            "correct": false
+          },
+          {
+            "label": "Direct Shot",
+            "correct": false
+          },
+          {
+            "label": "Dual Screen",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0147-4-en",
+      "type": "mcq",
+      "prompt": "What was the PS2 called, as it accepted PlayStation games?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ascensional",
+            "correct": false
+          },
+          {
+            "label": "Backward compatible",
+            "correct": true
+          },
+          {
+            "label": "Autopiloted",
+            "correct": false
+          },
+          {
+            "label": "Admissive",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0426-4-en",
+      "type": "mcq",
+      "prompt": "What can be seen on the belly of Poliwag and its evolutions?",
+      "payload": {
+        "options": [
+          {
+            "label": "A circle",
+            "correct": false
+          },
+          {
+            "label": "A star",
+            "correct": false
+          },
+          {
+            "label": "A square",
+            "correct": false
+          },
+          {
+            "label": "A spiral",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0147-3-en",
+      "type": "mcq",
+      "prompt": "Which cosmetic variant of the PlayStation 2 came out in 2004?",
+      "payload": {
+        "options": [
+          {
+            "label": "PS2 Boy",
+            "correct": false
+          },
+          {
+            "label": "PS2 Slim",
+            "correct": true
+          },
+          {
+            "label": "PS2 Grid",
+            "correct": false
+          },
+          {
+            "label": "PS2 Fat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

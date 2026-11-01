@@ -29,36 +29,7 @@
           }
         ]
       },
-      "theme": "cinema",
-      "difficulty": "moyen",
-      "language": "fr",
-      "audience": "tous"
-    },
-    {
-      "id": "oqdb-0033-2",
-      "type": "mcq",
-      "prompt": "Quel lapin est célèbre dans le monde des dessins animés ?",
-      "payload": {
-        "options": [
-          {
-            "label": "Porky Pig",
-            "correct": false
-          },
-          {
-            "label": "Elmer Fudd",
-            "correct": false
-          },
-          {
-            "label": "Bugs Bunny",
-            "correct": true
-          },
-          {
-            "label": "Speedy Gonzales",
-            "correct": false
-          }
-        ]
-      },
-      "theme": "cinema",
+      "theme": "litterature",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -87,7 +58,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "culture-generale",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
@@ -116,7 +87,7 @@
           }
         ]
       },
-      "theme": "cinema",
+      "theme": "culture-generale",
       "difficulty": "moyen",
       "language": "fr",
       "audience": "tous"
