@@ -115,6 +115,52 @@ describe("garde d'origine des requêtes mutantes", () => {
     await app.close()
   })
 
+  it('BETTER_AUTH_URL avec barre finale : son origine reste acceptée', async () => {
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'http://localhost:3000/' }))
+    app.post('/api/invitations/:token/accept', async (_req, reply) => reply.code(401).send({ error: 'Non authentifié.' }))
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { origin: 'http://localhost:3000', host: 'pengou.example' },
+    })
+    expect(res.statusCode).toBe(401)
+    await app.close()
+  })
+
+  it("une Origin dont l'hôte est celui de l'en-tête Host passe la garde (démarrage rapide en LAN)", async () => {
+    const app = await serveur()
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { origin: 'http://192.168.1.20:3000', host: '192.168.1.20:3000' },
+    })
+    expect(res.statusCode).toBe(401)
+    await app.close()
+  })
+
+  it("un sous-domaine frère reste refusé, même avec le Host de l'app", async () => {
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'https://app.example.com' }))
+    app.post('/api/invitations/:token/accept', async (_req, reply) => reply.code(401).send({ error: 'Non authentifié.' }))
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { origin: 'https://evil.example.com', host: 'app.example.com' },
+    })
+    expect(res.statusCode).toBe(403)
+    await app.close()
+  })
+
+  it.each(['none', 'same-origin'])('POST sans Origin avec Sec-Fetch-Site: %s passe la garde', async (site) => {
+    const app = await serveur()
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { 'sec-fetch-site': site },
+    })
+    expect(res.statusCode).toBe(401)
+    await app.close()
+  })
+
   it("un GET avec Origin étrangère n'est pas bloqué par la garde", async () => {
     const app = await serveur()
     const res = await app.inject({ method: 'GET', url: '/health', headers: { origin: 'https://evil.example' } })

@@ -1,15 +1,39 @@
 import type { FastifyInstance } from 'fastify'
 import type { AppConfig } from '@splootlabs/shared'
-import { allowedOrigins } from './realtime.js'
 
 /**
- * Vrai si `origin` est absent (clients non navigateurs : outil de charge, tests, curl) ou figure
- * dans la liste. Un navigateur envoie toujours `Origin` sur un upgrade WebSocket et sur un POST
+ * Origines autorisées pour les requêtes navigateur (CORS et upgrade Socket.IO, garde des requêtes
+ * mutantes) : l'origine PUBLIQUE de l'app (`AppConfig.authUrl`, déjà la source de vérité pour les
+ * callbacks OAuth et cookies Better Auth), plus localhost en dev (Vite sert le SPA sur un autre
+ * port que l'API). `authUrl` est réduite à son origine : une barre finale, un chemin ou un port
+ * par défaut dans BETTER_AUTH_URL ne doivent pas faire refuser l'app elle-même.
+ */
+export function allowedOrigins(config: Pick<AppConfig, 'authUrl' | 'nodeEnv'>): string[] {
+  const origins = new Set<string>([new URL(config.authUrl).origin])
+  if (config.nodeEnv !== 'production') {
+    origins.add('http://localhost:5173') // port par défaut du serveur de dev Vite (apps/web)
+    origins.add('http://127.0.0.1:5173')
+  }
+  return [...origins]
+}
+
+/**
+ * Vrai si `origin` est absent (clients non navigateurs : outil de charge, tests, curl), figure
+ * dans la liste, ou désigne le même hôte que l'en-tête `Host` de la requête (contrôle même
+ * origine : démarrage rapide en LAN, où les élèves ouvrent `http://<IP-du-portable>:3000` alors
+ * que BETTER_AUTH_URL vaut localhost). Un sous-domaine frère n'a pas le même hôte et reste
+ * refusé. Un navigateur envoie toujours `Origin` sur un upgrade WebSocket et sur un POST
  * inter-origine, donc l'absence ne contourne rien côté navigateur.
  */
-export function isOriginAllowed(origin: string | undefined, allowed: string[]): boolean {
+export function isOriginAllowed(origin: string | undefined, allowed: string[], host?: string): boolean {
   if (origin === undefined || origin === '') return true
-  return allowed.includes(origin)
+  if (allowed.includes(origin)) return true
+  if (!host) return false
+  try {
+    return new URL(origin).host === host.toLowerCase()
+  } catch {
+    return false
+  }
 }
 
 const METHODES_MUTANTES = new Set(['POST', 'PUT', 'PATCH', 'DELETE'])
@@ -30,7 +54,7 @@ export function registerOriginGuard(app: FastifyInstance, config: Pick<AppConfig
 
     const origin = request.headers.origin
     const refuse = origin
-      ? !isOriginAllowed(origin, allowed)
+      ? !isOriginAllowed(origin, allowed, request.headers.host)
       : ['cross-site', 'same-site'].includes(String(request.headers['sec-fetch-site']))
     if (refuse) return reply.code(403).send({ error: 'Origine non autorisée.' })
   })

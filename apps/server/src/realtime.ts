@@ -3,26 +3,13 @@ import { createAdapter } from '@socket.io/redis-adapter'
 import { Redis } from 'ioredis'
 import type { FastifyInstance } from 'fastify'
 import type { AppConfig } from '@splootlabs/shared'
-import { isOriginAllowed } from './origin-guard.js'
+import { allowedOrigins, isOriginAllowed } from './origin-guard.js'
 
 /**
- * CORS Socket.IO : `origin: true` reflète N'IMPORTE QUELLE origine (équivalent à `*` mais avec
- * les credentials autorisés en plus — pire que `*` seul). N'importe quel site tiers pouvait donc
- * ouvrir une connexion Socket.IO authentifiée (cookie de session envoyé au handshake) vers ce
- * serveur. On restreint à l'origine PUBLIQUE de l'app (`AppConfig.authUrl`, déjà la source de
- * vérité pour les callbacks OAuth/cookies Better Auth — donc déjà l'origine attendue des clients
- * légitimes), plus localhost en dev pour ne pas casser le poste de développement (Vite sert le
- * SPA sur un port différent de celui de l'API en dev).
+ * CORS Socket.IO : `origin: true` reflétait N'IMPORTE QUELLE origine, credentials compris : un
+ * site tiers pouvait ouvrir une connexion authentifiée (cookie envoyé au handshake). On restreint
+ * aux origines de `allowedOrigins` (voir origin-guard.ts).
  */
-export function allowedOrigins(config: Pick<AppConfig, 'authUrl' | 'nodeEnv'>): string[] {
-  const origins = new Set<string>([config.authUrl])
-  if (config.nodeEnv !== 'production') {
-    origins.add('http://localhost:5173') // port par défaut du serveur de dev Vite (apps/web)
-    origins.add('http://127.0.0.1:5173')
-  }
-  return [...origins]
-}
-
 export function attachRealtime(
   app: FastifyInstance,
   config: Pick<AppConfig, 'authUrl' | 'nodeEnv' | 'redisUrl'>,
@@ -31,7 +18,8 @@ export function attachRealtime(
     cors: { origin: allowedOrigins(config), credentials: true },
     // CORS ne couvre que le polling : l'upgrade WebSocket n'est pas soumis à la politique CORS du
     // navigateur, on vérifie donc l'origine ici (absente = client non navigateur, accepté).
-    allowRequest: (req, cb) => cb(null, isOriginAllowed(req.headers.origin, allowedOrigins(config))),
+    // Une origine de même hôte que `Host` est acceptée (même origine, voir isOriginAllowed).
+    allowRequest: (req, cb) => cb(null, isOriginAllowed(req.headers.origin, allowedOrigins(config), req.headers.host)),
   })
 
   // Adaptateur Redis (P0-3) : quand `REDIS_URL` est défini, le pub/sub Socket.IO passe par Redis
