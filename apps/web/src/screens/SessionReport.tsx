@@ -57,8 +57,8 @@ function formatAvgTime(avgTimeMs: number | null): string {
 
 /** `null` (no answers yet) is distinct from `0` (answered, all wrong) — both
  * render as text, never a bare percentage bar or colour swatch. */
-function successRate(correctCount: number, answerCount: number): number | null {
-  if (answerCount === 0) return null
+function successRate(correctCount: number | null, answerCount: number): number | null {
+  if (correctCount === null || answerCount === 0) return null
   return correctCount / answerCount
 }
 

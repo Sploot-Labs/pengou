@@ -9,7 +9,7 @@
 
 import { normalizeText, sliderTolerance } from '@splootlabs/quiz'
 
-export type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider'
+export type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud'
 
 export interface McqCorrect {
   options: { label: string; correct: boolean }[]
@@ -144,5 +144,7 @@ export function buildDistributionRows(
       return sliderRows(correct as SliderCorrect, distribution)
     case 'text':
       return textRows(correct as TextCorrect, distribution)
+    case 'wordcloud':
+      return []
   }
 }

@@ -36,6 +36,16 @@ export interface AutoAdvanceView {
   nextAt: number | null
 }
 
+/** Payload de `wordcloud:update` (grand écran et hôte seulement, jamais les téléphones) : mots
+ * fusionnés par clé de normalisation, triés côté serveur. Copie de `WordcloudView` du moteur. */
+export interface WordcloudView {
+  questionId: string
+  words: { key: string; text: string; count: number }[]
+  participants: number
+  totalWords: number
+  truncated: boolean
+}
+
 /** Diffusé quand l'hôte relance une partie depuis le podium (une variante par rôle). */
 export type SessionRelaunchedView =
   | { role: 'player'; pin: string; playerId: string; joinToken: string; nickname: string }
