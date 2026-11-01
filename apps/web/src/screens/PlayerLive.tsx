@@ -6,6 +6,7 @@ import { clearPlayerSession, loadPlayerSession, savePlayerSession } from '../rea
 import { hardReload } from '../realtime/hardReload'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
+import { ClosingView } from './Podium'
 import { PlayerPoll } from './PlayerPoll'
 import { PlayerWordcloud, type WordcloudAck } from './PlayerWordcloud'
 import { AnswerShape, AnswerTile, Logo, SoundToggle, TimerPill } from '../ui'
@@ -211,6 +212,7 @@ export function PlayerLive() {
   const [lastAward, setLastAward] = useState<number | null>(null)
   const [lastRanking, setLastRanking] = useState<RankingEntry[]>([])
   const [podiumTop, setPodiumTop] = useState<RankingEntry[]>([])
+  const [hasScoredQuestions, setHasScoredQuestions] = useState(true)
 
   // Enchaînement automatique : horodatage serveur de la prochaine bascule (diffusé par
   // `auto:advance`), reflété en compte à rebours — jamais un minuteur local indépendant.
@@ -464,8 +466,9 @@ export function PlayerLive() {
       }
     })
 
-    const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
+    const offPodium = on<{ top: RankingEntry[]; hasScoredQuestions?: boolean }>('podium', ({ top, hasScoredQuestions: scored }) => {
       setPodiumTop(top)
+      setHasScoredQuestions(scored !== false)
       setAutoNextAt(null)
       setPhase('podium')
     })
@@ -1207,28 +1210,34 @@ export function PlayerLive() {
 
       {phase === 'podium' && (
         <div className="player-result" role="status">
-          <h1 ref={podiumHeadingRef} tabIndex={-1}>
-            Partie terminée !
-          </h1>
-          <p className="player-result__points">Score final : {score.toLocaleString('fr-FR')}</p>
-          {myRank !== null ? (
-            <p>
-              Tu termines à la {placeOrdinal(myRank)} place sur {lastRanking.length || podiumTop.length}.
-            </p>
+          {hasScoredQuestions ? (
+            <>
+              <h1 ref={podiumHeadingRef} tabIndex={-1}>
+                Partie terminée !
+              </h1>
+              <p className="player-result__points">Score final : {score.toLocaleString('fr-FR')}</p>
+              {myRank !== null ? (
+                <p>
+                  Tu termines à la {placeOrdinal(myRank)} place sur {lastRanking.length || podiumTop.length}.
+                </p>
+              ) : (
+                <p>Merci d'avoir joué !</p>
+              )}
+              {podiumTop.length > 0 && (
+                <ol className="player-result__recap">
+                  {podiumTop.map((entry, index) => (
+                    <li key={entry.playerId} className="player-result__recap-line">
+                      <span>
+                        {index + 1}. {entry.nickname} : {entry.score} points
+                        {entry.playerId === stored.playerId ? ' (toi)' : ''}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </>
           ) : (
-            <p>Merci d'avoir joué !</p>
-          )}
-          {podiumTop.length > 0 && (
-            <ol className="player-result__recap">
-              {podiumTop.map((entry, index) => (
-                <li key={entry.playerId} className="player-result__recap-line">
-                  <span>
-                    {index + 1}. {entry.nickname} : {entry.score} points
-                    {entry.playerId === stored.playerId ? ' (toi)' : ''}
-                  </span>
-                </li>
-              ))}
-            </ol>
+            <ClosingView headingRef={podiumHeadingRef} audience="player" />
           )}
 
           {/* Enchaîner une autre partie : on oublie l'identité de CETTE partie

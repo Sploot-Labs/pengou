@@ -18,6 +18,8 @@ import type { ContentSource } from '../api/quizzes'
 export interface PodiumPayload {
   top: RankingEntry[]
   sources: ContentSource[]
+  /** Faux quand le quiz ne contient aucune question notée (`top` est alors vide). */
+  hasScoredQuestions: boolean
 }
 
 /** Entrée de classement diffusée par `scoreboard` / `podium`. */

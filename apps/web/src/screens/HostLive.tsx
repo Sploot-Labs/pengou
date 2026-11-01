@@ -8,7 +8,7 @@ import { listQuizzes, type QuizListItem } from '../api/quizzes'
 import { hardReload } from '../realtime/hardReload'
 import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import { Button, Logo, PinDisplay, TimerRing } from '../ui'
-import { PodiumView } from './Podium'
+import { ClosingView, PodiumView } from './Podium'
 
 /**
  * Contrôleur hôte réel, câblé sur `apps/server/src/game-gateway.ts` via la
@@ -187,6 +187,7 @@ export function HostLive() {
   const [revealPayload, setRevealPayload] = useState<RevealPayload | null>(null)
   const [ranking, setRanking] = useState<RankingEntry[]>([])
   const [podiumTop, setPodiumTop] = useState<RankingEntry[]>([])
+  const [hasScoredQuestions, setHasScoredQuestions] = useState(true)
 
   // Enchaînement automatique des étapes (demande produit) : l'hôte bascule le mode, le serveur
   // planifie l'avance vers la question suivante après une pause sur le classement. Activé par
@@ -314,8 +315,9 @@ export function HostLive() {
       }
     })
 
-    const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
+    const offPodium = on<{ top: RankingEntry[]; hasScoredQuestions?: boolean }>('podium', ({ top, hasScoredQuestions: scored }) => {
       setPodiumTop(top)
+      setHasScoredQuestions(scored !== false)
       setAutoNextAt(null)
       setPhase('podium')
     })
@@ -1072,7 +1074,11 @@ export function HostLive() {
 
             {phase === 'podium' && (
               <>
-                <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={podiumHeadingRef} />
+                {hasScoredQuestions ? (
+                  <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={podiumHeadingRef} />
+                ) : (
+                  <ClosingView quizTitle={quizTitle} headingRef={podiumHeadingRef} audience="room" />
+                )}
                 <div className="hostlive-relaunch">
                   {relaunchLoadError ? (
                     <p className="join-error" role="alert">

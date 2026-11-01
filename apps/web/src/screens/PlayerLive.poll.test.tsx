@@ -192,3 +192,37 @@ describe('PlayerLive sondage', () => {
     expect(screen.getByRole('button', { name: /Oui/ })).toBeEnabled()
   })
 })
+
+describe('PlayerLive, fin de partie sans question notée', () => {
+  beforeEach(() => {
+    handlers.clear()
+    mockEmitAck.mockClear()
+    answerAcks = []
+    reconnectGate = null
+    savePlayerSession({ pin: '1234', playerId: 'p1', joinToken: 'tok1', nickname: 'Ana' })
+  })
+  afterEach(() => {
+    cleanup()
+    clearPlayerSession()
+  })
+
+  async function start() {
+    renderPlayerLive()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:reconnect', expect.anything()))
+  }
+
+  it('hasScoredQuestions faux : « Merci pour tes réponses », ni score ni rang', async () => {
+    await start()
+    emitServerEvent('podium', { top: [], sources: [], hasScoredQuestions: false })
+    expect(await screen.findByRole('heading', { name: 'Merci pour tes réponses' })).toBeInTheDocument()
+    expect(screen.queryByText(/Score final/)).toBeNull()
+    expect(screen.queryByText('Partie terminée !')).toBeNull()
+  })
+
+  it('hasScoredQuestions vrai avec un score à 0 : « Partie terminée ! » et le score', async () => {
+    await start()
+    emitServerEvent('podium', { top: [], sources: [], hasScoredQuestions: true })
+    expect(await screen.findByText('Partie terminée !')).toBeInTheDocument()
+    expect(screen.getByText(/Score final/)).toBeInTheDocument()
+  })
+})

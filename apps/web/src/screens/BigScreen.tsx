@@ -10,7 +10,8 @@ import { WordCloud, wordcloudSummary } from '../ui/WordCloud'
 import { hardReload } from '../realtime/hardReload'
 import { ThemeProvider } from '../theme/ThemeProvider.js'
 import { AnswerShape, JoinInvite, Logo, PinDisplay, SoundToggle, TimerRing } from '../ui'
-import { PodiumView } from './Podium'
+import { PodiumCredits } from '../ui/SourceCredit'
+import { ClosingView, ConversionFooter, PodiumView } from './Podium'
 
 /**
  * Grand écran réel, lecture seule — câblé sur `apps/server/src/game-gateway.ts`
@@ -127,6 +128,7 @@ function BigScreenInner() {
   const [ranking, setRanking] = useState<RankingEntry[]>([])
   const [podiumTop, setPodiumTop] = useState<RankingEntry[]>([])
   const [podiumSources, setPodiumSources] = useState<ContentSource[]>([])
+  const [hasScoredQuestions, setHasScoredQuestions] = useState(true)
 
   // Enchaînement automatique : horodatage serveur de la prochaine bascule (diffusé par
   // `auto:advance`), reflété en compte à rebours — jamais un minuteur local indépendant.
@@ -262,8 +264,9 @@ function BigScreenInner() {
       setRanking(r)
     })
 
-    const offPodium = on<PodiumPayload>('podium', ({ top, sources }) => {
+    const offPodium = on<PodiumPayload>('podium', ({ top, sources, hasScoredQuestions: scored }) => {
       setPodiumTop(top)
+      setHasScoredQuestions(scored !== false)
       setPodiumSources(sources ?? [])
       setAutoNextAt(null)
       cue('phase.enter:podium')
@@ -759,10 +762,18 @@ function BigScreenInner() {
       )}
 
       {phase === 'podium' && (
-        <div style={{ position: 'relative' }}>
-          <Confetti active />
-          <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={focusPhaseHeading} sources={podiumSources} showConversionFooter />
-        </div>
+        hasScoredQuestions ? (
+          <div style={{ position: 'relative' }}>
+            <Confetti active />
+            <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={focusPhaseHeading} sources={podiumSources} showConversionFooter />
+          </div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-5)' }}>
+            <ClosingView quizTitle={quizTitle} headingRef={focusPhaseHeading} audience="room" />
+            <PodiumCredits sources={podiumSources} />
+            <ConversionFooter />
+          </div>
+        )
       )}
       </PhaseTransition>
     </main>

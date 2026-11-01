@@ -182,3 +182,31 @@ describe('HostLive, sondage', () => {
     expect(screen.getByRole('button', { name: 'Afficher le classement' })).toBeInTheDocument()
   })
 })
+
+describe('HostLive, fin de partie sans question notée', () => {
+  beforeEach(() => {
+    handlers.clear()
+    mockEmitAck.mockReset()
+    mockEmitAck.mockImplementation(async () => ({}))
+  })
+  afterEach(cleanup)
+
+  it('hasScoredQuestions faux : « Merci pour vos réponses » et le bloc de relance', () => {
+    renderHostLive()
+    emitServerEvent('podium', { top: [], sources: [], hasScoredQuestions: false })
+    expect(screen.getByRole('heading', { name: 'Merci pour vos réponses' })).toBeInTheDocument()
+    expect(screen.queryByText('Classement final')).toBeNull()
+    expect(document.querySelector('.hostlive-relaunch')).not.toBeNull()
+  })
+
+  it('hasScoredQuestions vrai avec des scores à 0 : le podium reste', () => {
+    renderHostLive()
+    emitServerEvent('podium', {
+      top: [{ playerId: 'a', nickname: 'Alice', score: 0 }],
+      sources: [],
+      hasScoredQuestions: true,
+    })
+    expect(screen.getByText('Classement final')).toBeInTheDocument()
+    expect(screen.queryByText('Merci pour vos réponses')).toBeNull()
+  })
+})

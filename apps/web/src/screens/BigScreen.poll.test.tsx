@@ -194,3 +194,35 @@ describe('BigScreen, sondage', () => {
     expect(screen.getByText('Alice')).toBeInTheDocument()
   })
 })
+
+describe('BigScreen, fin de partie sans question notée', () => {
+  beforeEach(() => {
+    handlers.clear()
+    mockEmitAck.mockClear()
+  })
+  afterEach(cleanup)
+
+  async function joined() {
+    renderBigScreen()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('screen:join', { displayToken: 'tok-abc' }))
+  }
+
+  it('hasScoredQuestions faux : « Merci pour vos réponses », sans classement, avec le pied de conversion', async () => {
+    await joined()
+    emitServerEvent('podium', { top: [], sources: [], hasScoredQuestions: false })
+    expect(await screen.findByRole('heading', { name: 'Merci pour vos réponses' })).toBeInTheDocument()
+    expect(screen.queryByText('Classement final')).toBeNull()
+    expect(screen.getByText(/Créez votre quiz gratuitement/)).toBeInTheDocument()
+  })
+
+  it('hasScoredQuestions vrai avec des scores à 0 : le podium reste', async () => {
+    await joined()
+    emitServerEvent('podium', {
+      top: [{ playerId: 'a', nickname: 'Alice', score: 0 }],
+      sources: [],
+      hasScoredQuestions: true,
+    })
+    expect(await screen.findByText('Classement final')).toBeInTheDocument()
+    expect(screen.queryByText('Merci pour vos réponses')).toBeNull()
+  })
+})
