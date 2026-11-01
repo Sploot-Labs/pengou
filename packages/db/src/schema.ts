@@ -118,6 +118,8 @@ export const gameSession = pgTable('game_session', {
   // État moteur sérialisé (résumé après crash serveur) : nul tant que la session
   // n'a pas été checkpointée par le moteur (@splootlabs/game, Task 2/3).
   engineState: jsonb('engine_state'),
+  // Mots retirés du nuage par l'animateur : { questionId: [clé normalisée, ...] }.
+  wordcloudRemoved: jsonb('wordcloud_removed').$type<Record<string, string[]>>().notNull().default({}),
 }, (t) => ({
   // PIN unique PARMI les sessions actives (index partiel Postgres)
   activePinUnique: uniqueIndex('game_session_active_pin_uidx').on(t.pin).where(sql`${t.status} in ('lobby', 'active')`),
