@@ -551,9 +551,7 @@ export function Library() {
                       {moreLoading ? 'Chargement…' : 'Afficher plus'}
                     </Button>
                   )}
-                  <SourcesNote sources={questions.map((q) => q.source)}>
-                    La source exacte de chaque question figure dans l'éditeur, une fois le quiz créé.
-                  </SourcesNote>
+                  <SourcesNote sources={questions.map((q) => q.source)} />
                 </>
               )}
             </section>

@@ -3,7 +3,8 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue, useFocusOnMount, useSound } from '../motion/index.js'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
-import type { RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
+import type { ContentSource } from '../api/quizzes'
+import type { PodiumPayload, RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
 import { hardReload } from '../realtime/hardReload'
 import { ThemeProvider } from '../theme/ThemeProvider.js'
 import { AnswerShape, JoinInvite, Logo, PinDisplay, SoundToggle, TimerRing } from '../ui'
@@ -116,6 +117,7 @@ function BigScreenInner() {
   const [revealPayload, setRevealPayload] = useState<RevealPayload | null>(null)
   const [ranking, setRanking] = useState<RankingEntry[]>([])
   const [podiumTop, setPodiumTop] = useState<RankingEntry[]>([])
+  const [podiumSources, setPodiumSources] = useState<ContentSource[]>([])
 
   // Enchaînement automatique : horodatage serveur de la prochaine bascule (diffusé par
   // `auto:advance`), reflété en compte à rebours — jamais un minuteur local indépendant.
@@ -244,8 +246,9 @@ function BigScreenInner() {
       setRanking(r)
     })
 
-    const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
+    const offPodium = on<PodiumPayload>('podium', ({ top, sources }) => {
       setPodiumTop(top)
+      setPodiumSources(sources ?? [])
       setAutoNextAt(null)
       cue('phase.enter:podium')
       setPhase('podium')
@@ -698,7 +701,7 @@ function BigScreenInner() {
       {phase === 'podium' && (
         <div style={{ position: 'relative' }}>
           <Confetti active />
-          <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={focusPhaseHeading} showConversionFooter />
+          <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={focusPhaseHeading} sources={podiumSources} showConversionFooter />
         </div>
       )}
       </PhaseTransition>

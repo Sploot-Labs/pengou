@@ -1,4 +1,6 @@
 import type { Ref } from 'react'
+import type { ContentSource } from '../api/quizzes'
+import { PodiumCredits } from '../ui/SourceCredit'
 
 /**
  * `PodiumView` — composant de PRÉSENTATION pur, alimenté par l'événement
@@ -45,6 +47,8 @@ export interface PodiumViewProps {
   /** Pitch de conversion en bas d'écran (grand écran / audience) — absent sur
    * le contrôleur hôte, qui est déjà un utilisateur inscrit. */
   showConversionFooter?: boolean
+  /** Sources des questions, créditées en bas du podium (grand écran). */
+  sources?: ContentSource[]
 }
 
 export function PodiumView({
@@ -53,6 +57,7 @@ export function PodiumView({
   fullRanking,
   headingRef,
   showConversionFooter = false,
+  sources = [],
 }: PodiumViewProps) {
   const [gold, silver, bronze] = top
   // Le reste du classement complet, au-delà des 3 déjà montrés sur le podium.
@@ -118,6 +123,8 @@ export function PodiumView({
           </div>
         </section>
       )}
+
+      <PodiumCredits sources={sources} />
 
       {showConversionFooter && (
         <p className="podium-convert">

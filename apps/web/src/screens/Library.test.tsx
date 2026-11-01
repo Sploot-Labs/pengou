@@ -96,7 +96,7 @@ describe('Library', () => {
     renderLibrary()
     expect(screen.getByRole('tab', { name: 'Quiz tout prêts' })).toHaveAttribute('aria-selected', 'true')
     await waitFor(() => expect(screen.getByText('Quiz q1')).toBeInTheDocument())
-    expect(screen.getByText("D'après Open Trivia")).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Crédits : Open Trivia' })).toHaveAttribute('href', '/credits')
     fireEvent.click(screen.getByRole('button', { name: 'Personnaliser le quiz Quiz q1' }))
     await waitFor(() => expect(lib.duplicateLibraryQuiz).toHaveBeenCalledWith('q1'))
     await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/quizzes/copie'))
@@ -137,7 +137,7 @@ describe('Library', () => {
     await within(dialog).findByText('Énoncé a')
     expect(lib.getLibraryQuiz).toHaveBeenCalledWith('q1')
     expect(within(dialog).queryByText('Réponse : Paris')).toBeNull()
-    expect(within(dialog).getByText(/Source :/)).toBeInTheDocument()
+    expect(within(dialog).getByRole('link', { name: 'Crédits et licence' })).toHaveAttribute('href', '/credits')
 
     fireEvent.click(within(dialog).getByRole('button', { name: 'Afficher les réponses' }))
     expect(within(dialog).getByText('Réponse : Paris')).toBeInTheDocument()
@@ -150,8 +150,8 @@ describe('Library', () => {
 
   it("n'affiche plus la source sous chaque question, mais une note unique sous la liste", async () => {
     await openQuestions()
-    expect(screen.queryByText(/Source :/)).toBeNull()
-    expect(screen.getByText(/Questions issues d'Open Trivia, licence/)).toBeInTheDocument()
+    expect(screen.queryByText(/D'après/)).toBeNull()
+    expect(screen.getByText(/Questions issues d'Open Trivia\./)).toBeInTheDocument()
   })
 
   it('compose un quiz depuis deux questions cochées', async () => {
@@ -273,38 +273,64 @@ describe('Library', () => {
     await waitFor(() => expect(screen.getByText('Énoncé a')).toBeInTheDocument())
   })
 
-  it('SourceCredit affiche nom et licence, rien sans source', () => {
+  it("SourceCredit nomme la source, sa traduction et renvoie aux crédits, rien sans source", () => {
     const { container, rerender } = render(<SourceCredit source={source} />)
-    expect(container).toHaveTextContent('Source : Open Trivia, licence CC BY-SA 4.0 (adapté)')
+    expect(container).toHaveTextContent("D'après Open Trivia. Crédits et licence")
     expect(within(container).getByRole('link', { name: 'Open Trivia' })).toHaveAttribute('href', 'https://example.org')
-    expect(within(container).getByRole('link', { name: 'CC BY-SA 4.0' })).toHaveAttribute(
+    expect(within(container).getByRole('link', { name: 'Crédits et licence' })).toHaveAttribute('href', '/credits')
+    rerender(
+      <SourceCredit
+        source={{
+          name: 'OpenQuizzDB, Jean Martin (traduction Sploot Labs)',
+          license: 'CC BY-SA 4.0',
+          url: 'https://www.openquizzdb.org/download.php?id=31',
+        }}
+      />,
+    )
+    expect(container).toHaveTextContent("D'après OpenQuizzDB, Jean Martin, traduit par Sploot Labs. Crédits et licence")
+    expect(within(container).getByRole('link', { name: 'Crédits et licence' })).toHaveAttribute(
       'href',
-      'https://creativecommons.org/licenses/by-sa/4.0/deed.fr',
+      '/credits#openquizzdb',
     )
     rerender(<SourceCredit source={{ name: 'Autre', license: 'Licence maison' }} />)
-    expect(container).toHaveTextContent('Source : Autre, licence Licence maison (adapté)')
-    expect(within(container).queryByRole('link')).toBeNull()
+    expect(container).toHaveTextContent("D'après Autre. Crédits et licence")
+    expect(within(container).queryByRole('link', { name: 'Autre' })).toBeNull()
     rerender(<SourceCredit source={null} />)
     expect(container).toBeEmptyDOMElement()
   })
 
-  it('SourceShort ne garde que la base, SourcesNote regroupe bases et licences', () => {
+  it('SourceShort étiquette la base et la traduction, SourcesNote regroupe les bases', () => {
     const { container, rerender } = render(
-      <SourceShort source={{ name: 'OpenQuizzDB, Jean Martin', license: 'CC BY-SA 4.0' }} />,
+      <SourceShort
+        source={{
+          name: 'Open Trivia Database (traduction Sploot Labs)',
+          license: 'CC BY-SA 4.0',
+          url: 'https://opentdb.com',
+        }}
+      />,
     )
-    expect(container).toHaveTextContent("D'après OpenQuizzDB")
+    expect(within(container).getByRole('link', { name: 'Crédits : Open Trivia Database' })).toHaveAttribute(
+      'href',
+      '/credits#opentdb',
+    )
+    expect(within(container).getByRole('link', { name: 'Traduit par Sploot Labs' })).toHaveAttribute(
+      'href',
+      '/credits#traductions',
+    )
+    rerender(<SourceShort source={{ name: 'OpenQuizzDB, Jean Martin', license: 'CC BY-SA 4.0' }} />)
+    expect(within(container).getAllByRole('link')).toHaveLength(1)
+    expect(container).toHaveTextContent('OpenQuizzDB')
     rerender(
       <SourcesNote
         sources={[
           { name: 'OpenQuizzDB, Jean Martin', license: 'CC BY-SA 4.0' },
-          { name: 'OpenQuizzDB, Marie Durand', license: 'CC BY-SA 4.0' },
+          { name: 'OpenQuizzDB, Marie Durand (traduction Sploot Labs)', license: 'CC BY-SA 4.0' },
           { name: 'Wikiquiz', license: 'CC0' },
         ]}
       />,
     )
-    expect(container).toHaveTextContent(
-      "Questions issues d'OpenQuizzDB et de Wikiquiz, licences CC BY-SA 4.0 et CC0, adaptées pour Pengou.",
-    )
+    expect(container).toHaveTextContent("Questions issues d'OpenQuizzDB et de Wikiquiz. Crédits et licences")
+    expect(within(container).getByRole('link', { name: 'Crédits et licences' })).toHaveAttribute('href', '/credits')
     rerender(<SourcesNote sources={[]} />)
     expect(container).toBeEmptyDOMElement()
   })

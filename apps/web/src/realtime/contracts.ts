@@ -11,6 +11,15 @@
  * (typage complet des events Socket.IO) reste un durcissement de suivi (P1-4).
  */
 
+import type { ContentSource } from '../api/quizzes'
+
+/** Payload de `podium` : les trois premiers, et les sources des questions pour le crédit de fin
+ * de partie (vide pour un quiz écrit à la main). */
+export interface PodiumPayload {
+  top: RankingEntry[]
+  sources: ContentSource[]
+}
+
 /** Entrée de classement diffusée par `scoreboard` / `podium`. */
 export interface RankingEntry {
   playerId: string

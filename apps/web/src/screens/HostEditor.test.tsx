@@ -136,6 +136,7 @@ describe('HostEditor : attribution des sources', () => {
       'https://creativecommons.org/licenses/by-sa/4.0/deed.fr',
     )
     expect(panel).toHaveTextContent('Vos modifications de ces contenus restent sous cette licence.')
+    expect(within(panel).getByRole('link', { name: 'Crédits et licences' })).toHaveAttribute('href', '/credits')
   })
 
   it("n'affiche aucun encadré de sources sans attribution", async () => {

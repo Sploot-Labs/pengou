@@ -3371,6 +3371,45 @@ p.source-credit {
   line-height: 1.5;
 }
 
+/* Étiquettes de source des cartes de la bibliothèque : discrètes, chacune renvoie à sa section
+   de la page des crédits. */
+.source-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+.source-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: var(--surface-2);
+  color: var(--ink-dim);
+  text-decoration: none;
+}
+.source-tag:hover {
+  color: var(--ink-strong);
+  text-decoration: underline;
+}
+
+/* Page des crédits : texte courant, largeur de lecture. */
+.credits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 42rem;
+  line-height: 1.6;
+}
+.credits section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.credits p {
+  margin: 0;
+}
+
 /* Encadré « Sources et licences » en bas de l'éditeur : une seule mention pour tout le quiz,
    plutôt qu'une ligne sous chaque question. */
 .sources-panel {
@@ -3440,4 +3479,10 @@ p.source-credit {
   color: var(--ink-strong);
   font-size: var(--fs-small);
   font-weight: 700;
+}
+
+/* Crédit des questions en bas du podium du grand écran : lisible de loin, sans voler la vedette. */
+.podium-credits {
+  max-width: 48rem;
+  text-align: center;
 }

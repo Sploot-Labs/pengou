@@ -205,6 +205,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         headers: { 'content-type': 'application/json', cookie },
       })
       expect(questionRes.statusCode).toBe(201)
+      // Question copiée de la bibliothèque : sa source doit accompagner le podium (crédit du grand écran).
+      const source = { name: 'OpenQuizzDB, Jean Martin', license: 'CC BY-SA 4.0', url: 'https://www.openquizzdb.org' }
+      const question = questionRes.json() as { id: string }
+      await ctx.db.update(schema.question).set({ source }).where(eq(schema.question.id, question.id))
 
       // 2. Socket hôte authentifié (cookie passé au handshake).
       const hostSocket = await connectClient(url, { cookie })
@@ -290,12 +294,13 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       expect(Object.values(reveal.distribution).reduce((a, b) => a + b, 0)).toBeGreaterThanOrEqual(1)
 
       // 7. host:next : plus de questions → podium.
-      const podiumPromise = waitFor<{ top: Array<{ playerId: string; score: number }> }>(player2, 'podium')
+      const podiumPromise = waitFor<{ top: Array<{ playerId: string; score: number }>; sources: unknown[] }>(player2, 'podium')
       const nextAck = await ack<{ phase?: string; error?: string }>(hostSocket, 'host:next', {})
       expect(nextAck.error).toBeUndefined()
       const podium = await podiumPromise
       expect(podium.top.length).toBeGreaterThanOrEqual(1)
       expect(podium.top[0].score).toBeGreaterThan(0)
+      expect(podium.sources).toEqual([source])
     } finally {
       // Déconnecter les sockets AVANT de fermer le serveur : sinon `app.close()` attend la
       // fin de connexions socket.io encore ouvertes (transport keep-alive) et bloque jusqu'au
