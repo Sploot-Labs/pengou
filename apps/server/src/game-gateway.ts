@@ -782,9 +782,11 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
    * faute si l'hôte écourte la manche — seule la RÉVÉLATION de la bonne réponse est sautée.
    * Réutilise `engine.reveal()` pour le crédit (idempotent via `credited[]`) et `persistRound`
    * pour la persistance (idempotent via `revealedRounds`), mais s'arrête là : aucun
-   * `questionResult`/`question:reveal` n'est jamais calculé ni émis dans ce chemin. Émet quand
-   * même `scoreboard` (classement cumulé, sans contenu de réponse — pas une fuite anti-triche)
-   * pour que l'hôte/l'écran voient la partie avancer. */
+   * `questionResult`/`question:reveal` n'est jamais calculé ni émis dans ce chemin. Sur une
+   * question notée, émet ensuite `scoreboard` (classement cumulé, sans contenu de réponse — pas
+   * une fuite anti-triche) pour que l'hôte/l'écran voient la partie avancer. Sur une question non
+   * notée (sondage, nuage), il n'y a pas d'étape classement : enchaîne directement via
+   * `doAdvance` (question suivante ou podium). Refusé en lobby et au podium (rien à passer). */
   async function doSkip(socket: Socket, ack?: (res: unknown) => void): Promise<void> {
     const reply = typeof ack === 'function' ? ack : () => {}
     try {
@@ -792,6 +794,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       const current = await engine.getSession(sessionId)
       if (current.phase === 'lobby') {
         throw new Error('host:skip : aucune question active (session encore en lobby)')
+      }
+      if (current.phase === 'podium') {
+        throw new Error('host:skip : aucune question active (partie terminée, podium)')
       }
       // Annulation : voir le commentaire équivalent dans `doRevealBySession` — un host:skip
       // anticipé pendant 'reading'/'question' ne doit jamais laisser un minuteur planifié se
@@ -804,9 +809,22 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       meta.autoRevealedRounds.add(current.currentIndex)
       clearReadingTimeout(meta)
       clearQuestionTimeout(meta)
+      // Une avance automatique planifiée (par une auto-révélation concurrente) ne doit pas se
+      // déclencher pendant les `await` ci-dessous et faire avancer la session sous nos pieds.
+      clearAdvanceTimeout(meta)
 
       const revealed = await engine.reveal(sessionId) // crédite uniquement — PAS de question:reveal
       await persistRound(meta, revealed)
+
+      // Course : pendant les `await` ci-dessus, une transition concurrente (avance automatique
+      // planifiée juste avant notre `clearAdvanceTimeout`, host:next) a pu déjà quitter la manche
+      // lue au départ. Dans ce cas le skip est sans objet : on n'avance PAS une seconde fois (ce
+      // qui révélerait ou sauterait la question N+1).
+      const after = await engine.getSession(sessionId)
+      if (after.currentIndex !== current.currentIndex || after.phase === 'podium') {
+        reply({ ok: true })
+        return
+      }
 
       // Question non notée (sondage, nuage) : pas d'étape classement à montrer, « Passer » enchaîne
       // directement sur la suite (question suivante, ou fin de partie). `doAdvance` re-nettoie tous

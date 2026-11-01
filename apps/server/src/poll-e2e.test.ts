@@ -406,6 +406,60 @@ describe('e2e : sondage', () => {
     }
   }, 30_000)
 
+  it('« Passer » sur un dernier sondage mène au podium, et host:skip au podium est refusé', async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const cookie = await signUp(app, 'sondage-skip-fin@example.com')
+      const quizId = await createQuiz(app, cookie, 'Sondage passé en fin')
+      await addQuestion(app, cookie, quizId, {
+        type: 'mcq',
+        prompt: 'Capitale de la France ?',
+        payload: { options: [{ label: 'Paris', correct: true }, { label: 'Lyon', correct: false }] },
+      })
+      const lastPollId = await addQuestion(app, cookie, quizId, pollQuestion('Thé ou café ?', ['Thé', 'Café'], false))
+
+      const host = await connectClient(url, { cookie })
+      clients.push(host)
+      const created = await ack<{ sessionId: string; pin: string; error?: string }>(host, 'host:create', { quizId })
+      expect(created.error).toBeUndefined()
+      await ack(host, 'host:setAuto', { enabled: false })
+      const player = await connectClient(url)
+      clients.push(player)
+      const joined = await ack<{ error?: string }>(player, 'player:join', { pin: created.pin, nickname: 'Alice' })
+      expect(joined.error).toBeUndefined()
+
+      const hostShows = record<ShowPayload>(host, 'question:show')
+      const hostReveals = record<RevealPayload>(host, 'question:reveal')
+      const hostPodium = record<PodiumPayload>(host, 'podium')
+      await ack(host, 'host:start', {})
+      const answered = await ack<{ accepted?: boolean }>(player, 'player:answer', { answer: { optionIndex: 0 } })
+      expect(answered.accepted).toBe(true)
+      await hostReveals.until(() => true, 3000)
+      await ack(host, 'host:next', {})
+      await hostShows.until((v) => v.id === lastPollId, 3000)
+      const revealsBeforeSkip = hostReveals.received.length
+
+      const skipAck = await ack<{ ok?: boolean; error?: string }>(host, 'host:skip', {})
+      expect(skipAck.error).toBeUndefined()
+      expect(skipAck.ok).toBe(true)
+      const podium = await hostPodium.until(() => true, 3000)
+      expect(podium.hasScoredQuestions).toBe(true)
+      expect(podium.top).toHaveLength(1)
+      expect(hostReveals.received.length).toBe(revealsBeforeSkip)
+
+      const lateSkip = await ack<{ ok?: boolean; error?: string }>(host, 'host:skip', {})
+      expect(lateSkip.ok).toBeUndefined()
+      expect(lateSkip.error).toMatch(/podium/)
+      await sleep(300)
+      expect(hostPodium.received).toHaveLength(1)
+      expect(hostReveals.received.length).toBe(revealsBeforeSkip)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 30_000)
+
   it('player:reconnect rejoue question:show avec alreadyAnswered, jamais diffusé aux autres', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
