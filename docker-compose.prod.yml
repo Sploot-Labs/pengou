@@ -31,6 +31,8 @@ services:
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Définissez BETTER_AUTH_SECRET (≥32 caractères, ex. openssl rand -base64 32) dans le .env du VPS}
       # Origine publique HTTPS de l'app (origine de confiance Better Auth et CORS Socket.IO).
       BETTER_AUTH_URL: ${BETTER_AUTH_URL:?Définissez BETTER_AUTH_URL (URL publique HTTPS) dans le .env du VPS}
+      # Reverse proxy dont le X-Forwarded-For est cru (limites de débit par IP client).
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:?Définissez TRUSTED_PROXIES (IP ou CIDR du reverse proxy vu depuis le conteneur) dans le .env du VPS}
       # Providers OAuth sociaux (optionnels), transmis depuis le .env s'ils sont définis.
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
