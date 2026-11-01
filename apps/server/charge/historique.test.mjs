@@ -126,6 +126,15 @@ describe('comparer', () => {
     expect(r.regressions).toEqual(['verdict reussi -> interrompu'])
   })
 
+  it("ignore d'autres limites de conteneur", () => {
+    const limites4 = { ...MACHINE, limites: { cpus: 4, memMo: 15360 } }
+    const limites16 = { ...MACHINE, limites: { cpus: 16, memMo: 15360 } }
+    const [r] = comparer([ligne('c2', {}, limites16)], [ligne('c1', {}, limites4)])
+    expect(r.reference).toBeNull()
+    const [r2] = comparer([ligne('c2', {}, limites4)], [ligne('c1', {}, { ...limites4 })])
+    expect(r2.reference).toBe('c1')
+  })
+
   it('comparer ignore une autre machine', () => {
     const autre = { ...MACHINE, cpu: 'Intel Xeon' }
     const [r] = comparer([ligne('c2')], [ligne('c1', {}, autre)])
@@ -147,6 +156,14 @@ describe('lireHistorique et ajouterHistorique', () => {
     const chemin = join(mkdtempSync(join(tmpdir(), 'hist-')), 'h.jsonl')
     writeFileSync(chemin, `${JSON.stringify(ligne('c1'))}\n{tronq\n\n`)
     expect(lireHistorique(chemin)).toHaveLength(1)
+  })
+
+  it("ajoute le saut de ligne final manquant avant d'ajouter", () => {
+    const chemin = join(mkdtempSync(join(tmpdir(), 'hist-')), 'h.jsonl')
+    writeFileSync(chemin, `${JSON.stringify(ligne('c0'))}
+${JSON.stringify(ligne('c1'))}`)
+    ajouterHistorique(chemin, [ligne('c2')])
+    expect(lireHistorique(chemin).map((l) => l.campagne)).toEqual(['c0', 'c1', 'c2'])
   })
 
   it('ajoute une ligne par entrée sans réécrire', () => {

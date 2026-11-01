@@ -69,11 +69,21 @@ function afficher(commande, args) {
   })
 }
 
+/** La pile `pengou-charge` n'a pas pu être démarrée ou arrêtée : code de sortie 2. */
+class ArretPile extends Error {}
+
 async function compose(...args) {
   const code = await afficher('docker', [...COMPOSE, ...args])
-  if (code !== 0) {
-    console.error(`docker compose ${args.join(' ')} a échoué (code ${code}) : pile ${PROJET} non démarrée.`)
-    process.exit(2)
+  if (code !== 0) throw new ArretPile(`docker compose ${args.join(' ')} a échoué (code ${code})`)
+}
+
+/** Limites appliquées au conteneur de l'application (variables PENGOU_CHARGE_*), lues dans la config Compose. */
+async function limitesConteneur() {
+  try {
+    const app = JSON.parse((await capturer('docker', [...COMPOSE, 'config', '--format', 'json'])).sortie).services.app
+    return { cpus: Number(app.cpus) || null, memMo: Number(app.mem_limit) ? Math.round(Number(app.mem_limit) / 1024 ** 2) : null }
+  } catch {
+    return { cpus: null, memMo: null }
   }
 }
 
@@ -94,6 +104,8 @@ async function contexteCampagne(scenario) {
       memGo: auDixieme(totalmem() / GO),
       dockerCpus: Number(ncpu) || null,
       dockerMemGo: Number(memoire) ? auDixieme(Number(memoire) / GO) : null,
+      // Ce sont ces limites, et non la taille de la VM Docker, qui conditionnent les résultats.
+      limites: await limitesConteneur(),
     },
   }
 }
@@ -109,8 +121,7 @@ async function attendreSante() {
     }
     await sleep(1000)
   }
-  console.error(`/health n'a pas répondu en ${SANTE_MAX_MS / 1000} s : pile ${PROJET} non démarrée.`)
-  process.exit(2)
+  throw new ArretPile(`/health n'a pas répondu en ${SANTE_MAX_MS / 1000} s`)
 }
 
 /** Lance charge.mjs pour un passage et renvoie son résumé, ou un résumé interrompu s'il n'en a pas écrit. */
@@ -128,7 +139,11 @@ function lancerCharge(passage, libelle, cheminJson) {
   return new Promise((ok) => {
     const enfant = fork(fileURLToPath(new URL('./charge.mjs', import.meta.url)), args, { stdio: 'inherit' })
     enfant.on('exit', (code) => {
-      if (existsSync(cheminJson)) return ok(JSON.parse(readFileSync(cheminJson, 'utf8')))
+      try {
+        if (existsSync(cheminJson)) return ok(JSON.parse(readFileSync(cheminJson, 'utf8')))
+      } catch {
+        // JSON tronqué (enfant tué pendant l'écriture) : traité comme un passage interrompu.
+      }
       ok({
         libelle,
         parametres: { joueurs: passage.joueurs, parties: passage.parties, questions: QUESTIONS, cadence: passage.cadence },
@@ -188,14 +203,16 @@ function phraseComparaison({ cle, reference, regressions }) {
   return `${cle} : régression par rapport à ${reference} (${regressions.join(', ')}).`
 }
 
-function ecrireResume(dossier, contexte, lignes, comparaison) {
+function ecrireResume(dossier, contexte, lignes, comparaison, arret) {
   const { machine } = contexte
   const texte = [
     `# Campagne de charge ${contexte.campagne}`,
     '',
     `Scénario ${contexte.scenario}, commit ${contexte.commit}${contexte.modifie ? ' avec des modifications non commitées' : ''}. ` +
       `Machine : ${machine.cpu}, ${machine.coeurs} threads, ${machine.memGo} Go ; Docker ${valeur(machine.dockerCpus, '')} CPU, ` +
-      `${valeur(machine.dockerMemGo, ' Go')}.`,
+      `${valeur(machine.dockerMemGo, ' Go')}. Limites du conteneur : ${valeur(machine.limites?.cpus, '')} CPU, ` +
+      `${valeur(machine.limites?.memMo, ' Mo')}.`,
+    ...(arret ? ['', `Campagne arrêtée avant la fin : ${arret.message}.`] : []),
     '',
     '## Passages',
     '',
@@ -219,28 +236,41 @@ async function main() {
   mkdirSync(dossier, { recursive: true })
   console.log(`Campagne ${contexte.campagne}, scénario ${opts.scenario}. Résultats dans ${relative(RACINE, dossier)}.`)
 
-  if (opts.build) await compose('build')
   const lignes = []
-  for (const passage of SCENARIOS[opts.scenario]) {
-    for (let essai = 1; essai <= passage.essais; essai++) {
-      const libelle = `${passage.libelle}-${essai}`
-      console.log(`\n=== ${libelle} : remise à zéro de la pile ===`)
-      await compose('down', '-v')
-      await compose('up', '-d')
-      await attendreSante()
-      await sleep(opts.pauseMs)
-      const resume = await lancerCharge(passage, libelle, join(dossier, `${libelle}.json`))
-      const coherence = resume.verdict === 'interrompu' ? null : await verifierCoherence(resume)
-      lignes.push(ligneHistorique(resume, contexte, essai, coherence))
+  // Un arrêt en cours de route ne doit pas faire perdre les passages déjà mesurés : on sort de la
+  // boucle et on passe par la même fin (historique, résumé) avant de rendre le code d'erreur.
+  let arret = null
+  try {
+    if (opts.build) await compose('build')
+    for (const passage of SCENARIOS[opts.scenario]) {
+      for (let essai = 1; essai <= passage.essais; essai++) {
+        const libelle = `${passage.libelle}-${essai}`
+        console.log(`\n=== ${libelle} : remise à zéro de la pile ===`)
+        await compose('down', '-v')
+        await compose('up', '-d')
+        await attendreSante()
+        await sleep(opts.pauseMs)
+        const resume = await lancerCharge(passage, libelle, join(dossier, `${libelle}.json`))
+        const coherence = resume.verdict === 'interrompu' ? null : await verifierCoherence(resume)
+        lignes.push(ligneHistorique(resume, contexte, essai, coherence))
+      }
     }
+  } catch (e) {
+    arret = e
+    console.error(`Campagne arrêtée : ${e.message}.`)
   }
-  await compose('down', '-v')
+  try {
+    await compose('down', '-v')
+  } catch (e) {
+    console.error(`Avertissement : ${e.message}, la pile ${PROJET} tourne peut-être encore.`)
+  }
 
   const comparaison = comparer(lignes, lireHistorique(HISTORIQUE))
-  ajouterHistorique(HISTORIQUE, lignes)
-  console.log(`\n${ecrireResume(dossier, contexte, lignes, comparaison)}`)
+  if (lignes.length > 0) ajouterHistorique(HISTORIQUE, lignes)
+  console.log(`\n${ecrireResume(dossier, contexte, lignes, comparaison, arret)}`)
   console.log(`${lignes.length} ligne(s) ajoutée(s) à ${relative(RACINE, HISTORIQUE)} : à committer pour garder cette campagne.`)
 
+  if (arret) process.exit(arret instanceof ArretPile ? 2 : 1)
   const enEchec = lignes.some((l) => l.verdict !== 'reussi' || l.coherence !== true)
   const regression = comparaison.some((c) => c.regressions.length > 0)
   process.exit(enEchec || regression ? 1 : 0)
@@ -248,5 +278,5 @@ async function main() {
 
 main().catch((e) => {
   console.error(`Échec de la campagne : ${e.message}`)
-  process.exit(1)
+  process.exit(e instanceof ArretPile ? 2 : 1)
 })

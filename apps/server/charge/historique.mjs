@@ -1,6 +1,6 @@
 // Historique compact des passages de charge : une ligne JSON par passage dans un fichier en ajout
 // seul (docs/charge/historique.jsonl), et comparaison d'une campagne à la précédente comparable.
-import { appendFileSync, existsSync, readFileSync } from 'node:fs'
+import { appendFileSync, existsSync, readFileSync, statSync } from 'node:fs'
 
 // Une mesure dégradée signale une régression si elle dépasse à la fois ce facteur et cet écart.
 const FACTEUR_REGRESSION = 1.5
@@ -67,7 +67,10 @@ export function lireHistorique(chemin) {
 }
 
 export function ajouterHistorique(chemin, lignes) {
-  appendFileSync(chemin, lignes.map((l) => `${JSON.stringify(l)}\n`).join(''))
+  // Une édition à la main peut retirer le saut de ligne final : sans lui, la première ligne
+  // ajoutée se collerait à la dernière et les deux deviendraient illisibles.
+  const sautManquant = existsSync(chemin) && statSync(chemin).size > 0 && !readFileSync(chemin, 'utf8').endsWith('\n')
+  appendFileSync(chemin, (sautManquant ? '\n' : '') + lignes.map((l) => `${JSON.stringify(l)}\n`).join(''))
 }
 
 /** Moyenne des valeurs non nulles d'une mesure, arrondie au dixième ; null s'il n'y en a aucune. */
@@ -79,7 +82,7 @@ function moyenne(lignes, mesure) {
 
 /**
  * Compare chaque clé de passage de la campagne en cours à la campagne la plus récente de
- * l'historique (ordre du fichier) ayant la même clé et le même CPU. Les essais d'une même clé
+ * l'historique (ordre du fichier) ayant la même clé, le même CPU et les mêmes limites de conteneur. Les essais d'une même clé
  * sont moyennés de part et d'autre.
  */
 export function comparer(nouvelles, historique) {
@@ -87,8 +90,10 @@ export function comparer(nouvelles, historique) {
   const cles = [...new Set(nouvelles.map((l) => l.cle))]
   return cles.map((cle) => {
     const actuelles = nouvelles.filter((l) => l.cle === cle)
-    const cpu = actuelles[0].machine?.cpu
-    const candidates = historique.filter((l) => l.cle === cle && l.campagne !== campagne && l.machine?.cpu === cpu)
+    const { cpu, limites } = actuelles[0].machine ?? {}
+    // Même processeur et mêmes limites de conteneur : sinon les chiffres ne se comparent pas.
+    const comparable = (l) => l.machine?.cpu === cpu && JSON.stringify(l.machine?.limites) === JSON.stringify(limites)
+    const candidates = historique.filter((l) => l.cle === cle && l.campagne !== campagne && comparable(l))
     if (candidates.length === 0) return { cle, reference: null, regressions: [] }
     const reference = candidates[candidates.length - 1].campagne
     const anciennes = candidates.filter((l) => l.campagne === reference)

@@ -20,7 +20,7 @@ L'option `--pause` règle l'attente après le démarrage du serveur (30 secondes
 
 Chaque campagne écrit ses fichiers dans `charge-resultats/<date>-<commit>/` (ignoré par git) : le JSON complet de chaque passage et un `resume.md`, aussi affiché en fin de campagne. Elle ajoute une ligne par passage à `docs/charge/historique.jsonl`, avec le commit, la machine et les chiffres clés.
 
-Chaque passage est comparé à la dernière campagne de l'historique jouée sur le même processeur avec les mêmes paramètres. Une régression est signalée quand un passage qui réussissait ne réussit plus, ou quand la réponse p95, la diffusion p95, le lag p95 ou le join p95 dépasse 1,5 fois la référence avec au moins 20 ms d'écart. Le lag p95 (sur les mesures seconde par seconde) est plus stable que le maximum retenu par le verdict, qui peut échouer sur un seul pic.
+Chaque passage est comparé à la dernière campagne de l'historique jouée sur le même processeur, avec les mêmes limites de conteneur et les mêmes paramètres. Une régression est signalée quand un passage qui réussissait ne réussit plus, ou quand la réponse p95, la diffusion p95, le lag p95 ou le join p95 dépasse 1,5 fois la référence avec au moins 20 ms d'écart. Le lag p95 (sur les mesures seconde par seconde) est plus stable que le maximum retenu par le verdict, qui peut échouer sur un seul pic.
 
 La commande sort en code 0 si tout a réussi sans régression, 1 si un passage échoue ou régresse, 2 si la pile n'a pas pu démarrer.
 
