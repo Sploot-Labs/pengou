@@ -6,6 +6,7 @@ import { clearPlayerSession, loadPlayerSession, savePlayerSession } from '../rea
 import { hardReload } from '../realtime/hardReload'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
+import { PlayerPoll } from './PlayerPoll'
 import { PlayerWordcloud, type WordcloudAck } from './PlayerWordcloud'
 import { AnswerShape, AnswerTile, Logo, SoundToggle, TimerPill } from '../ui'
 
@@ -21,7 +22,7 @@ import { AnswerShape, AnswerTile, Logo, SoundToggle, TimerPill } from '../ui'
 /* Contrat serveur (types locaux — pas de mock)                        */
 /* ------------------------------------------------------------------ */
 
-type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud'
+type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud' | 'poll'
 
 /** `question:show` — projection anti-triche : jamais de bonne réponse.
  * `index`/`total` sont positionnels (numéro de question), ajoutés à la
@@ -46,6 +47,10 @@ interface QuestionShowPayload {
 
 interface McqShowPayload {
   options: { label: string }[]
+}
+interface PollShowPayload {
+  options: { label: string }[]
+  multiple: boolean
 }
 interface SliderShowPayload {
   min: number
@@ -88,6 +93,7 @@ interface ReconnectAck {
   playerId: string
   phase: 'lobby' | 'question' | 'reveal' | 'scoreboard' | 'podium'
   score: number
+  alreadyAnswered?: boolean
 }
 
 interface AnswerAck {
@@ -227,6 +233,9 @@ export function PlayerLive() {
   const [textValue, setTextValue] = useState('')
   const [sliderValue, setSliderValue] = useState(0)
   const [sliderTouched, setSliderTouched] = useState(false)
+  const [pollSelection, setPollSelection] = useState<number[]>([])
+  // Posé par l'acquittement de `player:reconnect`, consommé par le `question:show` rejoué juste après.
+  const alreadyAnsweredRef = useRef(false)
 
   // Vérité serveur sur LA réponse effectivement comptabilisée pour cette
   // manche — distincte des valeurs capturées ci-dessus, qui ne reflètent que
@@ -248,6 +257,7 @@ export function PlayerLive() {
     setBoolChoice(null)
     setTextValue('')
     setSliderTouched(false)
+    setPollSelection([])
     setSliderValue(q.type === 'slider' ? (q.payload as SliderShowPayload).min : 0)
   }
 
@@ -264,6 +274,8 @@ export function PlayerLive() {
         return sliderTouched
       case 'wordcloud':
         return true
+      case 'poll':
+        return answerAccepted
     }
   }
 
@@ -350,6 +362,7 @@ export function PlayerLive() {
         })
         if (cancelled) return
         scoreRef.current = ack.score
+        alreadyAnsweredRef.current = ack.phase === 'question' && ack.alreadyAnswered === true
         setScore(ack.score)
         // Le serveur ne renvoie une projection `question:show`/`timer` que si
         // la phase est 'question' (voir game-gateway.ts) — pour toute autre
@@ -425,7 +438,14 @@ export function PlayerLive() {
       setAnswerRejection(null)
       setAutoNextAt(null)
       resetAnswer(view)
-      setPhase('question')
+      if (view.type === 'poll' && alreadyAnsweredRef.current) {
+        // Vote déjà compté avant le rechargement : on ne rouvre pas la saisie.
+        setAnswerAccepted(true)
+        setPhase('answered')
+      } else {
+        setPhase('question')
+      }
+      alreadyAnsweredRef.current = false
     })
 
     const offTimer = on<TimerPayload>('timer', (t) => {
@@ -591,6 +611,10 @@ export function PlayerLive() {
 
   const answeredMessage = question?.type === 'wordcloud'
     ? 'Temps écoulé, merci pour tes idées'
+    : question?.type === 'poll'
+    ? answerAccepted
+      ? 'Vote enregistré'
+      : 'Temps écoulé. En attente de la suite…'
     : hasSubmission()
     ? 'Réponse enregistrée. En attente de la suite…'
     : 'Temps écoulé. En attente de la suite…'
@@ -619,6 +643,7 @@ export function PlayerLive() {
       case 'slider':
         return evaluateSlider(revealPayload.correct as SliderCorrect, effectiveSliderValue)
       case 'wordcloud':
+      case 'poll':
         return null
     }
   }
@@ -711,6 +736,7 @@ export function PlayerLive() {
         )
       }
       case 'wordcloud':
+      case 'poll':
         return null
     }
   }
@@ -763,7 +789,9 @@ export function PlayerLive() {
         ? 'Curseur'
         : question?.type === 'text'
           ? 'Réponse libre'
-          : null
+          : question?.type === 'poll'
+            ? 'Sondage'
+            : null
 
   return (
     <main className="player-screen" id="contenu-principal" tabIndex={-1}>
@@ -863,7 +891,9 @@ export function PlayerLive() {
 
           <div className="player-question__spacer" />
 
-          {phase === 'question' && (question.type === 'mcq' || question.type === 'truefalse') && (
+          {phase === 'question' && (question.type === 'mcq' ||
+              question.type === 'truefalse' ||
+              (question.type === 'poll' && !(question.payload as PollShowPayload).multiple)) && (
             <p className="player-commit-hint">Le premier appui valide ta réponse.</p>
           )}
 
@@ -907,6 +937,20 @@ export function PlayerLive() {
 
           {question.type === 'wordcloud' && (
             <PlayerWordcloud key={question.id} disabled={phase === 'answered'} submit={submitWord} />
+          )}
+
+          {question.type === 'poll' && (
+            <PlayerPoll
+              key={question.id}
+              options={(question.payload as PollShowPayload).options}
+              multiple={(question.payload as PollShowPayload).multiple}
+              disabled={phase === 'answered'}
+              selected={pollSelection}
+              onSubmit={(optionIndexes) => {
+                setPollSelection(optionIndexes)
+                submitAnswer({ optionIndexes })
+              }}
+            />
           )}
 
           {question.type === 'text' && (
@@ -1040,7 +1084,18 @@ export function PlayerLive() {
         </div>
       )}
 
-      {phase === 'result' && !evalResult && question?.type !== 'wordcloud' && (
+      {phase === 'result' && question?.type === 'poll' && (
+        <div className="player-verdict player-verdict--timeout" role="status">
+          <div className="player-verdict__spacer" />
+          <h1 className="player-verdict__title" ref={resultHeadingRef} tabIndex={-1}>
+            Sondage clos
+          </h1>
+          <p className="player-verdict__sub">Regarde l'écran pour voir les résultats.</p>
+          <div className="player-verdict__spacer" />
+        </div>
+      )}
+
+      {phase === 'result' && !evalResult && question?.type !== 'wordcloud' && question?.type !== 'poll' && (
         // Rejoindre en pleine question (Plan 06 review, finding #2) : le serveur ne rejoue
         // `question:show` que sur `player:reconnect`, jamais sur `player:join` — un joueur qui
         // rejoint APRÈS le début d'une question a donc `question === null` quand
