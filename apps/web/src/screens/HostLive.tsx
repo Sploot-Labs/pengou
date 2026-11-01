@@ -741,7 +741,7 @@ export function HostLive() {
             </span>
             {poll ? (
               <span className="hostlive-answer-row__count">
-                {row.count} vote{row.count > 1 ? 's' : ''}, <span>{pollPercent(row.count, poll.voters)} %</span>
+                {row.count} vote{row.count > 1 ? 's' : ''}, <span>{pollPercent(row.count, poll.voters)}{' '}%</span>
               </span>
             ) : (
               <span className="hostlive-answer-row__count">{row.count}</span>
@@ -1117,7 +1117,8 @@ export function HostLive() {
             )}
           </section>
 
-          {(phase === 'question' || phase === 'reveal') && (
+          {/* Question non notée (sondage, nuage) : pas de rappel du classement, hors sujet ici. */}
+          {(phase === 'question' || phase === 'reveal') && scored && (
             <aside className="hostlive-aside" aria-label="Dernier classement connu">
               {renderLeaderboard(5, false)}
             </aside>

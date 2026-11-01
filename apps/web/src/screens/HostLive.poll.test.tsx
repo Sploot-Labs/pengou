@@ -109,8 +109,10 @@ describe('HostLive, sondage', () => {
     renderHostLive()
     emitServerEvent('question:show', pollQuestion)
     emitServerEvent('question:reveal', pollReveal)
-    expect(screen.getByText('67 %')).toBeInTheDocument()
-    expect(screen.getByText('33 %')).toBeInTheDocument()
+    // Le normaliseur de Testing Library ramène l'espace insécable à une espace : on vérifie le
+    // texte brut pour garantir l'insécable avant « % ».
+    expect(screen.getByText('67 %').textContent).toBe('67\u00a0%')
+    expect(screen.getByText('33 %').textContent).toBe('33\u00a0%')
     expect(screen.queryByText(/Bonne réponse/)).toBeNull()
     expect(screen.getByText('Sondage clos.')).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'Afficher le classement' })).toBeNull()
@@ -164,6 +166,26 @@ describe('HostLive, sondage', () => {
     expect(screen.queryByRole('button', { name: 'Afficher le classement' })).toBeNull()
     fireEvent.click(screen.getByRole('button', { name: 'Suivant' }))
     await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('host:next', expect.anything()))
+  })
+
+  it('le dernier classement connu est masqué pendant un sondage, affiché pendant un QCM', () => {
+    renderHostLive()
+    emitServerEvent('scoreboard', ranking)
+    emitServerEvent('question:show', pollQuestion)
+    expect(screen.queryByRole('complementary', { name: 'Dernier classement connu' })).toBeNull()
+    emitServerEvent('question:reveal', pollReveal)
+    expect(screen.queryByRole('complementary', { name: 'Dernier classement connu' })).toBeNull()
+    expect(screen.queryByText('Top joueurs')).toBeNull()
+
+    emitServerEvent('question:show', {
+      id: 'q2',
+      type: 'mcq',
+      prompt: 'Capitale ?',
+      timeLimit: 20,
+      payload: { options: [{ label: 'A' }, { label: 'B' }] },
+    })
+    expect(screen.getByRole('complementary', { name: 'Dernier classement connu' })).toBeInTheDocument()
+    expect(screen.getByText('Top joueurs')).toBeInTheDocument()
   })
 
   it('un QCM garde « Afficher le classement » (non-régression)', () => {
