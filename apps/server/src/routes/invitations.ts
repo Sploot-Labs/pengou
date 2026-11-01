@@ -29,6 +29,7 @@ function mapAcceptError(code: string): { status: number; error: string } {
     case 'not_pending': return { status: 409, error: 'Cette invitation a déjà été utilisée ou révoquée.' }
     case 'expired': return { status: 410, error: 'Cette invitation a expiré.' }
     case 'already_member': return { status: 409, error: 'Vous êtes déjà membre de ce workspace.' }
+    case 'inviter_revoked': return { status: 409, error: "Cette invitation n'est plus valable." }
     default: return { status: 400, error: 'Invitation invalide.' }
   }
 }

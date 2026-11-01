@@ -1,6 +1,7 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import type { FastifyInstance } from 'fastify'
-import { startTestDb, runMigrations } from '@splootlabs/db'
+import { and, eq } from 'drizzle-orm'
+import { startTestDb, runMigrations, schema } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { loadConfig } from '@splootlabs/shared'
 import { buildServer } from './app.js'
@@ -177,6 +178,83 @@ describe('Slice 3 — invitations & membres (multi)', () => {
     const aTenant = aWs.workspaces[0].tenantId
     const res = await app.inject({ method: 'GET', url: `/api/workspaces/${aTenant}/members`, headers: { cookie: bCookie } })
     expect(res.statusCode).toBe(403)
+    await app.close()
+  })
+})
+
+describe('invitations : auteur qui perd members:manage (multi)', () => {
+  const json = { 'content-type': 'application/json' }
+
+  /** O crée W, invite A en admin, A accepte ; A crée une invitation admin et en garde le jeton. */
+  async function setup(app: FastifyInstance, tag: string) {
+    const oCookie = await signUp(app, `${tag}-o@x.test`, 'Owner')
+    const tenantId = ((await app.inject({ method: 'GET', url: '/api/workspaces', headers: { cookie: oCookie } })).json() as WorkspacesResp).workspaces[0].tenantId
+    const inv = await app.inject({
+      method: 'POST', url: `/api/workspaces/${tenantId}/invitations`,
+      payload: { email: `${tag}-a@x.test`, role: 'admin' }, headers: { ...json, cookie: oCookie },
+    })
+    const aCookie = await signUp(app, `${tag}-a@x.test`, 'Admin')
+    const acc = await app.inject({ method: 'POST', url: `/api/invitations/${(inv.json() as { invitation: { token: string } }).invitation.token}/accept`, headers: { cookie: aCookie } })
+    expect(acc.statusCode).toBe(200)
+    const members = (await app.inject({ method: 'GET', url: `/api/workspaces/${tenantId}/members`, headers: { cookie: oCookie } })).json() as { members: Array<{ email: string; userId: string }> }
+    const aId = members.members.find((m) => m.email === `${tag}-a@x.test`)!.userId
+    const aInv = await app.inject({
+      method: 'POST', url: `/api/workspaces/${tenantId}/invitations`,
+      payload: { email: `${tag}-d@x.test`, role: 'admin' }, headers: { ...json, cookie: aCookie },
+    })
+    expect(aInv.statusCode).toBe(201)
+    const token = (aInv.json() as { invitation: { token: string } }).invitation.token
+    return { oCookie, aCookie, aId, tenantId, token }
+  }
+
+  it('un admin retiré ne peut pas accepter une invitation qu\'il a créée', async () => {
+    const app = await buildApp('multi')
+    const { oCookie, aCookie, aId, tenantId, token } = await setup(app, 't1a')
+    const del = await app.inject({ method: 'DELETE', url: `/api/workspaces/${tenantId}/members/${aId}`, headers: { cookie: oCookie } })
+    expect(del.statusCode).toBe(200)
+    const acc = await app.inject({ method: 'POST', url: `/api/invitations/${token}/accept`, headers: { cookie: aCookie } })
+    expect(acc.statusCode).toBe(409)
+    const list = await app.inject({ method: 'GET', url: `/api/workspaces/${tenantId}/members`, headers: { cookie: aCookie } })
+    expect(list.statusCode).toBe(403)
+    const rows = await ctx.db.select().from(schema.membership)
+      .where(and(eq(schema.membership.userId, aId), eq(schema.membership.tenantId, tenantId)))
+    expect(rows).toHaveLength(0)
+    await app.close()
+  })
+
+  it('le retrait d\'un admin révoque ses invitations en attente', async () => {
+    const app = await buildApp('multi')
+    const { oCookie, aId, tenantId, token } = await setup(app, 't1b')
+    await app.inject({ method: 'DELETE', url: `/api/workspaces/${tenantId}/members/${aId}`, headers: { cookie: oCookie } })
+    const res = await app.inject({ method: 'GET', url: `/api/workspaces/${tenantId}/invitations`, headers: { cookie: oCookie } })
+    expect(res.statusCode).toBe(200)
+    expect(JSON.stringify(res.json())).not.toContain(token)
+    await app.close()
+  })
+
+  it('rétrograder un admin en member révoque ses invitations en attente', async () => {
+    const app = await buildApp('multi')
+    const { oCookie, aId, tenantId, token } = await setup(app, 't1c')
+    const patch = await app.inject({
+      method: 'PATCH', url: `/api/workspaces/${tenantId}/members/${aId}`,
+      payload: { role: 'member' }, headers: { ...json, cookie: oCookie },
+    })
+    expect(patch.statusCode).toBe(200)
+    const d2Cookie = await signUp(app, 't1c-d@x.test', 'D2')
+    const acc = await app.inject({ method: 'POST', url: `/api/invitations/${token}/accept`, headers: { cookie: d2Cookie } })
+    expect(acc.statusCode).toBe(409)
+    const rows = await ctx.db.select().from(schema.membership).where(eq(schema.membership.tenantId, tenantId))
+    expect(rows).toHaveLength(2)
+    await app.close()
+  })
+
+  it('une invitation d\'un admin toujours en place reste acceptable', async () => {
+    const app = await buildApp('multi')
+    const { tenantId, token } = await setup(app, 't1d')
+    const dCookie = await signUp(app, 't1d-d@x.test', 'D')
+    const acc = await app.inject({ method: 'POST', url: `/api/invitations/${token}/accept`, headers: { cookie: dCookie } })
+    expect(acc.statusCode).toBe(200)
+    expect(acc.json()).toMatchObject({ tenantId, role: 'admin' })
     await app.close()
   })
 })
