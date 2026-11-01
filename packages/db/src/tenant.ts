@@ -74,7 +74,8 @@ export async function ensureMembership(
 
 /**
  * Résout le tenant applicable à la requête courante.
- * - mode single : ignore `opts`, renvoie (et crée si besoin) le tenant par défaut.
+ * - mode single : renvoie (et crée si besoin) le tenant par défaut ; si `userId` est fourni,
+ *   exige une membership sur ce tenant (sinon « accès refusé »).
  * - mode multi : exige `explicitTenantId` ET `userId`, et vérifie qu'une
  *   `membership(userId, explicitTenantId)` existe (sinon lève « accès refusé »).
  *
@@ -88,8 +89,14 @@ export async function resolveTenantId(
   config: Pick<AppConfig, 'tenancyMode'>,
   opts: { userId?: string; explicitTenantId?: string } = {},
 ): Promise<string> {
-  if (config.tenancyMode === 'single') return ensureDefaultTenant(db)
   const { userId, explicitTenantId } = opts
+  if (config.tenancyMode === 'single') {
+    const defaultTenantId = await ensureDefaultTenant(db)
+    // Appel technique sans utilisateur : inchangé. Avec un utilisateur, la membership est exigée
+    // pour que le retrait d'un membre prenne effet aussi en mode single.
+    if (userId && !(await getMembershipRole(db, userId, defaultTenantId))) throw new TenantAccessDeniedError()
+    return defaultTenantId
+  }
   if (!explicitTenantId) throw new Error('mode multi : un tenant explicite est requis')
   if (!userId) throw new Error('mode multi : utilisateur requis')
   const [m] = await db.select({ id: schema.membership.id }).from(schema.membership)

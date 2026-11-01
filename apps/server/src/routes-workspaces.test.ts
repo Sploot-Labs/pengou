@@ -258,3 +258,28 @@ describe('invitations : auteur qui perd members:manage (multi)', () => {
     await app.close()
   })
 })
+
+describe('mode single : retrait de membre', () => {
+  it('un membre retiré reçoit 403 sur POST /api/quizzes', async () => {
+    const app = await buildApp('single')
+    const ownerCookie = await signUp(app, 'single-owner@example.com', 'Owner')
+    const memberCookie = await signUp(app, 'single-member@example.com', 'Member')
+    // La base est partagée entre les tests du fichier : le premier inscrit en mode single est déjà
+    // owner, donc on promeut explicitement celui-ci pour piloter les membres.
+    const [ownerUser] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'single-owner@example.com'))
+    await ctx.db.update(schema.membership).set({ role: 'owner' }).where(eq(schema.membership.userId, ownerUser.id))
+    const tenantId = ((await app.inject({ method: 'GET', url: '/api/workspaces', headers: { cookie: ownerCookie } })).json() as WorkspacesResp).workspaces[0].tenantId
+    const members = (await app.inject({ method: 'GET', url: `/api/workspaces/${tenantId}/members`, headers: { cookie: ownerCookie } }))
+      .json() as { members: Array<{ email: string; userId: string }> }
+    const memberId = members.members.find((m) => m.email === 'single-member@example.com')!.userId
+    const post = () => app.inject({
+      method: 'POST', url: '/api/quizzes', payload: { title: 'Q' },
+      headers: { 'content-type': 'application/json', cookie: memberCookie },
+    })
+    expect((await post()).statusCode).toBe(201)
+    const remove = await app.inject({ method: 'DELETE', url: `/api/workspaces/${tenantId}/members/${memberId}`, headers: { cookie: ownerCookie } })
+    expect(remove.statusCode).toBe(200)
+    expect((await post()).statusCode).toBe(403)
+    await app.close()
+  })
+})
