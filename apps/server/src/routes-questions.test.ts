@@ -82,6 +82,25 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
     await app.close()
   })
 
+  it('POST avec un sondage valide → 201, le type et le payload sont conservés', async () => {
+    const app = await buildApp()
+    const { cookie, quizId } = await createQuizAndCookie(app, 'qpoll@example.com')
+    const pollPayload = { options: [{ label: 'Oui' }, { label: 'Non' }], multiple: true }
+
+    const res = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/questions`,
+      payload: { type: 'poll', prompt: 'On fait une pause ?', timeLimit: 20, payload: pollPayload },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(res.statusCode).toBe(201)
+    const body = res.json() as { type: string; payload: unknown }
+    expect(body.type).toBe('poll')
+    expect(body.payload).toEqual(pollPayload)
+
+    await app.close()
+  })
+
   it('POST avec un mcq invalide (0 option correcte) → 400', async () => {
     const app = await buildApp()
     const { cookie, quizId } = await createQuizAndCookie(app, 'q2@example.com')
