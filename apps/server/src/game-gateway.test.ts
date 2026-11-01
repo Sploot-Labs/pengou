@@ -2925,4 +2925,106 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       }
     }, 20_000)
   })
+
+  describe("une socket n'occupe qu'un siège joueur à la fois", () => {
+    type LobbyUpdate = { players: Array<{ nickname: string; connected: boolean }> }
+    const connectedOf = (u: LobbyUpdate, nickname: string) => u.players.find((p) => p.nickname === nickname)?.connected
+
+    it('un second player:join sur la même socket libère la première place', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-seat-double-join@example.com')
+        clients.push(hostSocket)
+        const lobby = collect<LobbyUpdate>(hostSocket, 'lobby:update')
+        const x = await connectClient(url)
+        clients.push(x)
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'a' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'b' })).error).toBeUndefined()
+
+        const update = await lobby.until((u) => connectedOf(u, 'a') === false && connectedOf(u, 'b') === true)
+        expect(connectedOf(update, 'a')).toBe(false)
+        expect(connectedOf(update, 'b')).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("les places libérées ne bloquent pas l'auto-révélation", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-seat-autoreveal@example.com')
+        clients.push(hostSocket)
+        const x = await connectClient(url)
+        const y = await connectClient(url)
+        clients.push(x, y)
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'a' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin, nickname: 'b' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(y, 'player:join', { pin, nickname: 'c' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+
+        // Le timeLimit (20 s) dépasse le délai du test : seule l'auto-révélation peut émettre.
+        const revealPromise = waitFor<{ correct: unknown }>(hostSocket, 'question:reveal')
+        expect((await ack<{ accepted?: boolean }>(x, 'player:answer', { answer: { optionIndex: 0 } })).accepted).toBe(true)
+        expect((await ack<{ accepted?: boolean }>(y, 'player:answer', { answer: { optionIndex: 1 } })).accepted).toBe(true)
+        const reveal = await Promise.race([
+          revealPromise,
+          new Promise<never>((_, reject) => setTimeout(() => reject(new Error('aucun question:reveal en 3 s')), 3000)),
+        ])
+        expect(reveal.correct).toBeDefined()
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it('une socket qui rejoint une seconde partie libère sa place dans la première', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const first = await setupHostedSession(app, url, 'gateway-seat-next-game-1@example.com')
+        const second = await setupHostedSession(app, url, 'gateway-seat-next-game-2@example.com')
+        clients.push(first.hostSocket, second.hostSocket)
+        const lobby1 = collect<LobbyUpdate>(first.hostSocket, 'lobby:update')
+        const lobby2 = collect<LobbyUpdate>(second.hostSocket, 'lobby:update')
+        const x = await connectClient(url)
+        clients.push(x)
+
+        const joinedA = await ack<{ joinToken?: string; error?: string }>(x, 'player:join', { pin: first.pin, nickname: 'a' })
+        expect(joinedA.error).toBeUndefined()
+        await lobby1.until((u) => connectedOf(u, 'a') === true)
+
+        // player:join sur la seconde partie : la place de la première est libérée.
+        expect((await ack<{ error?: string }>(x, 'player:join', { pin: second.pin, nickname: 'b' })).error).toBeUndefined()
+        expect(connectedOf(await lobby1.until((u) => connectedOf(u, 'a') === false), 'a')).toBe(false)
+        await lobby2.until((u) => connectedOf(u, 'b') === true)
+
+        // player:reconnect (remontage de PlayerLive) vers la première : la place de la seconde est libérée.
+        const back = await ack<{ playerId?: string; error?: string }>(x, 'player:reconnect', { pin: first.pin, joinToken: joinedA.joinToken })
+        expect(back.error).toBeUndefined()
+        expect(connectedOf(await lobby2.until((u) => connectedOf(u, 'b') === false), 'b')).toBe(false)
+        expect(connectedOf(await lobby1.until((u) => connectedOf(u, 'a') === true), 'a')).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("une socket d'hôte ne peut pas prendre de siège", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gateway-seat-host-join@example.com')
+        clients.push(hostSocket)
+        const joined = await ack<{ playerId?: string; error?: string }>(hostSocket, 'player:join', { pin, nickname: 'intrus' })
+        expect(joined.playerId).toBeUndefined()
+        expect(joined.error).toBe('cette connexion est déjà utilisée par un hôte ou un écran')
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+  })
 })

@@ -882,6 +882,36 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     scheduleQuestionTimeout(sessionId, meta, session) // P1-7 : idem après la phase de lecture
   }
 
+  /** Libère le siège joueur que porte déjà `socket` (audit : une socket anonyme pouvait occuper
+   * plusieurs sièges, et seul le dernier passait hors ligne au `disconnect` ; les autres restaient
+   * `connected: true` et bloquaient l'auto-révélation). Appelée avant d'attribuer un nouveau siège
+   * par `player:join` ou `player:reconnect`. La partie synchrone (rattachement de la socket, socket
+   * active du joueur) s'exécute avant tout `await`, si bien qu'un appel non attendu suffit à
+   * détacher la socket. Le joueur n'est marqué hors ligne que si cette socket est encore sa socket
+   * active : une reconnexion sur une autre socket garde la main. Il reste dans la partie (score et
+   * réponses conservés), récupérable par `player:reconnect`. */
+  async function releasePlayerSeat(socket: Socket): Promise<void> {
+    const data = socket.data as SocketData
+    if (data.role !== 'player' || !data.sessionId || !data.playerId) return
+    const { sessionId, playerId } = data
+    data.role = undefined
+    data.sessionId = undefined
+    data.playerId = undefined
+    const wasActive = activeSocketIdByPlayerId.get(playerId) === socket.id
+    if (wasActive) activeSocketIdByPlayerId.delete(playerId)
+    await socket.leave(roomName(sessionId))
+    if (wasActive) await engine.setPlayerConnected(sessionId, playerId, false).catch(() => {})
+    scheduleLobbyBroadcast(sessionId)
+  }
+
+  /** Refuse un siège joueur à une socket déjà hôte ou écran. */
+  function assertNotHostOrScreen(socket: Socket): void {
+    const role = (socket.data as SocketData).role
+    if (role === 'host' || role === 'screen') {
+      throw new Error('cette connexion est déjà utilisée par un hôte ou un écran')
+    }
+  }
+
   /** Rejoue la question en cours à UN SEUL socket qui vient de rejoindre/rafraîchir EN PLEINE
    * QUESTION (`player:join`/`screen:join` arrivant mid-question, symétrique du traitement déjà
    * fait par `player:reconnect`) — sans ça, un tel arrivant reste aveugle jusqu'à la question
@@ -1363,6 +1393,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         const nickname = typeof payload?.nickname === 'string' ? payload.nickname.trim() : ''
         if (!nickname) throw new Error('nickname requis')
         if (nickname.length > 32) throw new Error('nickname trop long (32 caractères max)')
+        assertNotHostOrScreen(socket)
+        await releasePlayerSeat(socket)
 
         const sessionId = pinToSessionId.get(pin)
         if (!sessionId) throw new Error('PIN invalide')
@@ -1382,6 +1414,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
             addSessionPlayer(scope.db, meta.dbSessionId, { nickname, joinToken: player.joinToken }))
           meta.playerDbIds.set(player.id, dbPlayer.id)
 
+          // Un player:join concurrent sur la même socket a pu prendre un siège pendant les `await` :
+          // on le libère avant d'attribuer celui-ci (détachement synchrone, voir releasePlayerSeat).
+          void releasePlayerSeat(socket)
           const data = socket.data as SocketData
           data.role = 'player'
           data.sessionId = sessionId
@@ -1466,6 +1501,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         const joinToken = payload?.joinToken
         if (typeof pin !== 'string' || !pin) throw new Error('pin requis')
         if (typeof joinToken !== 'string' || !joinToken) throw new Error('joinToken requis')
+        assertNotHostOrScreen(socket)
+        await releasePlayerSeat(socket)
 
         const sessionId = pinToSessionId.get(pin)
         if (!sessionId) throw new Error('PIN invalide')
@@ -1475,6 +1512,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (!result) throw new Error('joinToken invalide')
         const { session, player } = result
 
+        // Même garde que player:join contre une attribution concurrente sur la même socket, sauf
+        // si c'est déjà ce joueur (double émission) : le libérer le repasserait hors ligne.
+        if ((socket.data as SocketData).playerId !== player.id) void releasePlayerSeat(socket)
         const data = socket.data as SocketData
         data.role = 'player'
         data.sessionId = sessionId
