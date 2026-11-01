@@ -4,7 +4,8 @@ import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue, useFocusOnMoun
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { ContentSource } from '../api/quizzes'
-import type { PodiumPayload, RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
+import type { PodiumPayload, RankingEntry, ReadingView, SessionRelaunchedView, WordcloudView } from '../realtime/contracts'
+import { WordCloud, wordcloudSummary } from '../ui/WordCloud'
 import { hardReload } from '../realtime/hardReload'
 import { ThemeProvider } from '../theme/ThemeProvider.js'
 import { AnswerShape, JoinInvite, Logo, PinDisplay, SoundToggle, TimerRing } from '../ui'
@@ -113,6 +114,7 @@ function BigScreenInner() {
   const [timer, setTimer] = useState<TimerPayload | null>(null)
   const [remaining, setRemaining] = useState<number | null>(null)
   const [progressAnswered, setProgressAnswered] = useState(0)
+  const [wordcloud, setWordcloud] = useState<WordcloudView | null>(null)
 
   const [revealPayload, setRevealPayload] = useState<RevealPayload | null>(null)
   const [ranking, setRanking] = useState<RankingEntry[]>([])
@@ -218,6 +220,9 @@ function BigScreenInner() {
       setRemaining(null)
       setRevealPayload(null)
       setProgressAnswered(0)
+      // Le nuage n'est effacé que si la question change (le serveur rejoue `question:show`
+      // puis `wordcloud:update` à la reconnexion de la même question).
+      setWordcloud((prev) => (prev && prev.questionId === view.id ? prev : null))
       // Reset volontaire (contrairement à HostLive, qui garde le dernier
       // classement connu pour son aside) : sert de garde pour l'effet de
       // bascule auto reveal→scoreboard ci-dessous (voir REVEAL_HOLD_MS) — il
@@ -234,6 +239,10 @@ function BigScreenInner() {
 
     const offProgress = on<{ answered: number; total: number }>('screen:progress', ({ answered }) => {
       setProgressAnswered(answered)
+    })
+
+    const offWordcloud = on<WordcloudView>('wordcloud:update', (v) => {
+      setWordcloud(v)
     })
 
     const offReveal = on<RevealPayload>('question:reveal', (r) => {
@@ -276,6 +285,7 @@ function BigScreenInner() {
       offShow()
       offTimer()
       offProgress()
+      offWordcloud()
       offReveal()
       offScoreboard()
       offPodium()
@@ -429,8 +439,20 @@ function BigScreenInner() {
       : null
   const maxCount = rows && rows.length > 0 ? Math.max(1, ...rows.map((r) => r.count)) : 1
 
+  function renderWordcloud() {
+    // Un nuage d'une autre question (course entre événements) n'est jamais affiché.
+    const current = wordcloud && question && wordcloud.questionId === question.id ? wordcloud : null
+    return (
+      <div className="big-wordcloud">
+        <WordCloud words={current?.words ?? []} />
+        {current && <p className="big-live__answered">{wordcloudSummary(current)}</p>}
+      </div>
+    )
+  }
+
   function renderLiveAnswers() {
     if (!question) return null
+    if (question.type === 'wordcloud') return renderWordcloud()
     if (question.type === 'mcq') {
       const shapes = ['triangle', 'diamond', 'circle', 'square'] as const
       return (
@@ -480,6 +502,7 @@ function BigScreenInner() {
   }
 
   function renderDistribution() {
+    if (question?.type === 'wordcloud') return renderWordcloud()
     if (!rows || rows.length === 0) {
       return <p style={{ color: 'var(--ink-dim)' }}>Aucune réponse reçue pour cette question.</p>
     }
@@ -633,9 +656,11 @@ function BigScreenInner() {
 
           {renderLiveAnswers()}
 
-          <p className="big-live__answered">
-            {progressAnswered} / {players.length} {progressAnswered <= 1 ? 'a' : 'ont'} répondu
-          </p>
+          {question.type !== 'wordcloud' && (
+            <p className="big-live__answered">
+              {progressAnswered} / {players.length} {progressAnswered <= 1 ? 'a' : 'ont'} répondu
+            </p>
+          )}
         </div>
       )}
 

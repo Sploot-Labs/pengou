@@ -1,4 +1,4 @@
-export type QuestionType = 'mcq' | 'truefalse' | 'text' | 'slider'
+export type QuestionType = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud'
 
 export interface ScoreOpts {
   timeMs: number

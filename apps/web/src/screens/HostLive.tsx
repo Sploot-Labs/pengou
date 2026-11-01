@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
-import type { RankingEntry, ReadingView } from '../realtime/contracts'
+import type { RankingEntry, ReadingView, WordcloudView } from '../realtime/contracts'
+import { WordCloud, wordcloudSummary } from '../ui/WordCloud'
 import { listQuizzes, type QuizListItem } from '../api/quizzes'
 import { hardReload } from '../realtime/hardReload'
 import { useSharedGameSocket } from '../realtime/GameSocketProvider'
@@ -178,6 +179,7 @@ export function HostLive() {
   const [remaining, setRemaining] = useState<number | null>(null)
   const [progressAnswered, setProgressAnswered] = useState(0)
   const [respondedAnnouncement, setRespondedAnnouncement] = useState('')
+  const [wordcloud, setWordcloud] = useState<WordcloudView | null>(null)
 
   const [revealPayload, setRevealPayload] = useState<RevealPayload | null>(null)
   const [ranking, setRanking] = useState<RankingEntry[]>([])
@@ -276,8 +278,14 @@ export function HostLive() {
       setRemaining(null)
       setRevealPayload(null)
       setProgressAnswered(0)
+      // Effacé seulement si la question change (rejeu de `question:show` à la reconnexion).
+      setWordcloud((prev) => (prev && prev.questionId === view.id ? prev : null))
       setAutoNextAt(null)
       setPhase('question')
+    })
+
+    const offWordcloud = on<WordcloudView>('wordcloud:update', (v) => {
+      setWordcloud(v)
     })
 
     const offTimer = on<TimerPayload>('timer', (t) => {
@@ -356,6 +364,7 @@ export function HostLive() {
       offShow()
       offTimer()
       offProgress()
+      offWordcloud()
       offReveal()
       offScoreboard()
       offPodium()
@@ -538,7 +547,7 @@ export function HostLive() {
   /* Actions hôte                                                       */
   /* ---------------------------------------------------------------- */
 
-  async function runHostAction(event: string): Promise<void> {
+  async function runHostAction(event: string, payload: unknown = {}): Promise<void> {
     setActionPending(true)
     setActionError(null)
     // Autorité déjà connue perdue (voir ConnectionState) : inutile d'attendre
@@ -550,7 +559,7 @@ export function HostLive() {
       return
     }
     try {
-      await emitAck(event, {})
+      await emitAck(event, payload)
     } catch (err) {
       setActionError(friendlyActionError(err, connection))
     } finally {
@@ -657,7 +666,22 @@ export function HostLive() {
   const maxRowCount = rows && rows.length > 0 ? Math.max(1, ...rows.map((r) => r.count)) : 1
   const revealedAnswerText = rows ? (rows.find((r) => r.correct)?.label ?? '') : ''
 
+  function renderWordcloud() {
+    // Un nuage d'une autre question (course entre événements) n'est jamais affiché.
+    const current = wordcloud && question && wordcloud.questionId === question.id ? wordcloud : null
+    return (
+      <div className="hostlive-wordcloud">
+        <WordCloud
+          words={current?.words ?? []}
+          onRemove={(w) => void runHostAction('host:wordcloudRemove', { word: w.text })}
+        />
+        {current && <p className="hostlive-progress">{wordcloudSummary(current)}</p>}
+      </div>
+    )
+  }
+
   function renderDistribution() {
+    if (question?.type === 'wordcloud') return renderWordcloud()
     if (!rows) return null
     if (rows.length === 0) {
       return <p style={{ color: 'var(--ink-dim)' }}>Aucune réponse reçue pour cette question.</p>
@@ -907,16 +931,20 @@ export function HostLive() {
                   <TimerRing remainingSeconds={remaining ?? question.timeLimit} totalSeconds={question.timeLimit} size={72} />
                 </div>
 
-                <p className="hostlive-progress" aria-hidden="true">
-                  {progressAnswered} / {players.length} {progressAnswered > 1 ? 'ont' : 'a'} répondu
-                </p>
+                {question.type !== 'wordcloud' && (
+                  <p className="hostlive-progress" aria-hidden="true">
+                    {progressAnswered} / {players.length} {progressAnswered > 1 ? 'ont' : 'a'} répondu
+                  </p>
+                )}
                 <p className="visually-hidden" role="status" aria-live="polite">
                   {respondedAnnouncement}
                 </p>
 
+                {question.type === 'wordcloud' && renderWordcloud()}
+
                 <div className="hostlive-controls">
                   <Button variant="primary" type="button" disabled={actionPending} onClick={revealAnswer}>
-                    Révéler la réponse
+                    {question.type === 'wordcloud' ? 'Clore le nuage' : 'Révéler la réponse'}
                   </Button>
                   <Button
                     variant="ghost"
@@ -951,7 +979,7 @@ export function HostLive() {
                   Révélation : {question.prompt}
                 </h2>
                 <p className="visually-hidden" role="status" aria-live="polite">
-                  Réponse révélée : {revealedAnswerText}
+                  {question.type === 'wordcloud' ? 'Nuage de mots figé.' : `Réponse révélée : ${revealedAnswerText}`}
                 </p>
 
                 {renderDistribution()}

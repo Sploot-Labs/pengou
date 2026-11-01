@@ -1,5 +1,7 @@
 import { and, desc, eq, inArray, sql } from 'drizzle-orm'
+import { aggregateWords } from '@splootlabs/quiz'
 import { schema } from '../index.js'
+import { loadWordcloudRemoved } from './session.js'
 import type { TenantScope } from '../tenant.js'
 
 export type SessionSummary = {
@@ -29,8 +31,12 @@ export type SessionReport = {
     type: (typeof schema.question.$inferSelect)['type']
     orderIndex: number
     answerCount: number
-    correctCount: number
+    /** null pour un nuage de mots (pas de bonne réponse). */
+    correctCount: number | null
+    /** null pour un nuage de mots, ou sans réponse. */
     avgTimeMs: number | null
+    /** Agrégat des mots pour un nuage, null pour les autres types. */
+    wordcloud: { participants: number; totalWords: number; words: { text: string; count: number }[] } | null
   }[]
   players: {
     playerId: string
@@ -114,7 +120,7 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
   // answer_record filtré par CETTE session -- une question sans réponse
   // ressort avec answerCount/correctCount à 0 et avgTimeMs à null (pas 0 :
   // une moyenne sur zéro valeur n'existe pas, on ne l'invente pas).
-  const questions = await scope.db
+  const questionRows = await scope.db
     .select({
       questionId: schema.question.id,
       prompt: schema.question.prompt,
@@ -137,6 +143,44 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
     .groupBy(schema.question.id)
     .orderBy(schema.question.orderIndex)
 
+  // Nuages de mots : réponses de la session lues une fois, retraits depuis la colonne dédiée
+  // (engine_state est vidé au podium, ce n'est pas une source pour les rapports).
+  const cloudIds = questionRows.filter((q) => q.type === 'wordcloud').map((q) => q.questionId)
+  const wordsByQuestion = new Map<string, { words: string[] }[]>()
+  let removed: Record<string, string[]> = {}
+  if (cloudIds.length > 0) {
+    removed = await loadWordcloudRemoved(scope.db, sessionId)
+    const rows = await scope.db
+      .select({ questionId: schema.answerRecord.questionId, answer: schema.answerRecord.answer })
+      .from(schema.answerRecord)
+      .where(and(
+        eq(schema.answerRecord.sessionId, sessionId),
+        eq(schema.answerRecord.tenantId, scope.tenantId),
+        inArray(schema.answerRecord.questionId, cloudIds),
+      ))
+    for (const r of rows) {
+      const words = (r.answer as { words?: unknown } | null)?.words
+      if (!Array.isArray(words)) continue
+      const list = wordsByQuestion.get(r.questionId) ?? []
+      list.push({ words: words.filter((w): w is string => typeof w === 'string') })
+      wordsByQuestion.set(r.questionId, list)
+    }
+  }
+  const questions: SessionReport['questions'] = questionRows.map((q) => {
+    if (q.type !== 'wordcloud') return { ...q, wordcloud: null }
+    const agg = aggregateWords(wordsByQuestion.get(q.questionId) ?? [], new Set(removed[q.questionId] ?? []))
+    return {
+      ...q,
+      correctCount: null,
+      avgTimeMs: null,
+      wordcloud: {
+        participants: agg.participants,
+        totalWords: agg.totalWords,
+        words: agg.words.map((w) => ({ text: w.text, count: w.count })),
+      },
+    }
+  })
+
   // Tous les joueurs de la session, triés par score desc (podium). `totalScore`
   // vient de session_player (déjà tenu à jour par le moteur), correctCount/
   // answerCount agrègent leurs answer_record.
@@ -152,6 +196,8 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
     .leftJoin(schema.answerRecord, and(
       eq(schema.answerRecord.playerId, schema.sessionPlayer.id),
       eq(schema.answerRecord.tenantId, scope.tenantId),
+      // Les nuages de mots ne comptent ni comme réponse donnée ni comme réponse correcte.
+      sql`${schema.answerRecord.questionId} in (select id from question where type <> 'wordcloud')`,
     ))
     .where(and(eq(schema.sessionPlayer.sessionId, sessionId), eq(schema.sessionPlayer.tenantId, scope.tenantId)))
     .groupBy(schema.sessionPlayer.id)

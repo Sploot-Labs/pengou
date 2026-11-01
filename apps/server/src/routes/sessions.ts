@@ -51,7 +51,23 @@ function buildReportCsv(report: SessionReport): string {
   rows.push(['Questions'])
   rows.push(['# ', 'Énoncé', 'Réponses données', 'Réponses correctes', 'Temps moyen (ms)'])
   for (const q of report.questions) {
-    rows.push([q.orderIndex + 1, q.prompt, q.answerCount, q.correctCount, q.avgTimeMs])
+    if (q.wordcloud) {
+      rows.push([q.orderIndex + 1, q.prompt, q.wordcloud.participants, null, null])
+    } else {
+      rows.push([q.orderIndex + 1, q.prompt, q.answerCount, q.correctCount, q.avgTimeMs])
+    }
+  }
+
+  // Une section par nuage de mots : les mots dans l'ordre de l'agrégat.
+  for (const q of report.questions) {
+    if (!q.wordcloud) continue
+    rows.push([])
+    const { participants, totalWords } = q.wordcloud
+    rows.push([
+      `Nuage de mots : ${q.prompt} (${participants} participant${participants > 1 ? 's' : ''}, ${totalWords} mot${totalWords > 1 ? 's' : ''})`,
+    ])
+    rows.push(['Mot', 'Occurrences'])
+    for (const w of q.wordcloud.words) rows.push([w.text, w.count])
   }
 
   return toCsv(rows, { bom: true })

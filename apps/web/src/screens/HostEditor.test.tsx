@@ -202,3 +202,43 @@ describe('HostEditor : archivage', () => {
     expect(screen.getByRole('button', { name: 'Archiver ce quiz' })).toBeInTheDocument()
   })
 })
+
+describe('HostEditor : nuage de mots', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+    fixtures.quizSource = null
+    fixtures.questionSource = null
+    fixtures.archivedAt = null
+  })
+  afterEach(cleanup)
+
+  it('choisir « Nuage de mots » crée une question wordcloud et affiche le texte explicatif', async () => {
+    const { createQuestion, deleteQuestion } = await import('../api/quizzes')
+    vi.mocked(createQuestion).mockResolvedValueOnce({
+      ...baseQuestion,
+      id: 'quest2',
+      type: 'wordcloud',
+      payload: {},
+      source: null,
+    } as never)
+    vi.mocked(deleteQuestion).mockResolvedValueOnce(undefined as never)
+    renderEditor()
+
+    const select = (await screen.findByLabelText('Type de question')) as HTMLSelectElement
+    expect(within(select).getByRole('option', { name: 'Nuage de mots' })).toHaveValue('wordcloud')
+    // La question de départ (QCM) a des réponses : la confirmation s'ouvre d'abord.
+    fireEvent.change(select, { target: { value: 'wordcloud' } })
+    fireEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Changer de type' }))
+
+    await waitFor(() =>
+      expect(createQuestion).toHaveBeenCalledWith(
+        'quiz1',
+        expect.objectContaining({ type: 'wordcloud', payload: {} }),
+      ),
+    )
+    expect(
+      await screen.findByText('Les participants proposent leurs idées en direct. Pas de bonne réponse ni de points.'),
+    ).toBeInTheDocument()
+    expect(screen.queryByText('Incomplète')).toBeNull()
+  })
+})

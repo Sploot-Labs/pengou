@@ -8,7 +8,7 @@ import { user } from './auth-schema.js'
 export const planEnum = pgEnum('plan', ['free', 'pro'])
 export const roleEnum = pgEnum('role', ['owner', 'admin', 'member'])
 export const invitationStatusEnum = pgEnum('invitation_status', ['pending', 'accepted', 'revoked'])
-export const questionTypeEnum = pgEnum('question_type', ['mcq', 'truefalse', 'text', 'slider'])
+export const questionTypeEnum = pgEnum('question_type', ['mcq', 'truefalse', 'text', 'slider', 'wordcloud'])
 export const libraryDifficultyEnum = pgEnum('library_difficulty', ['facile', 'moyen', 'difficile'])
 export const libraryAudienceEnum = pgEnum('library_audience', ['enfants', 'adultes', 'tous'])
 export const libraryOriginEnum = pgEnum('library_origin', ['builtin', 'instance'])
@@ -118,6 +118,8 @@ export const gameSession = pgTable('game_session', {
   // État moteur sérialisé (résumé après crash serveur) : nul tant que la session
   // n'a pas été checkpointée par le moteur (@splootlabs/game, Task 2/3).
   engineState: jsonb('engine_state'),
+  // Mots retirés du nuage par l'animateur : { questionId: [clé normalisée, ...] }.
+  wordcloudRemoved: jsonb('wordcloud_removed').$type<Record<string, string[]>>().notNull().default({}),
 }, (t) => ({
   // PIN unique PARMI les sessions actives (index partiel Postgres)
   activePinUnique: uniqueIndex('game_session_active_pin_uidx').on(t.pin).where(sql`${t.status} in ('lobby', 'active')`),

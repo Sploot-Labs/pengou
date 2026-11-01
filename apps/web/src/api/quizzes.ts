@@ -18,7 +18,7 @@ export interface ContentSource {
   url?: string
 }
 
-export type QuestionType = 'mcq' | 'truefalse' | 'text' | 'slider'
+export type QuestionType = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud'
 
 export interface Quiz {
   id: string
@@ -61,7 +61,10 @@ export interface SliderPayload {
   step?: number
 }
 
-export type QuestionPayload = McqPayload | TrueFalsePayload | TextPayload | SliderPayload
+/** Nuage de mots : aucune donnée propre au type. */
+export type WordcloudPayload = Record<string, never>
+
+export type QuestionPayload = McqPayload | TrueFalsePayload | TextPayload | SliderPayload | WordcloudPayload
 
 export interface Question {
   id: string

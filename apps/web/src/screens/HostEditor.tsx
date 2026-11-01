@@ -44,6 +44,7 @@ const TYPE_LABEL: Record<QuestionType, string> = {
   truefalse: 'Vrai / Faux',
   text: 'Réponse libre',
   slider: 'Curseur',
+  wordcloud: 'Nuage de mots',
 }
 
 /** Decorative only (color + glyph reinforcing the shape cue on mcq tiles) —
@@ -100,7 +101,10 @@ export interface SliderQuestion extends QuestionBase {
   step: number
   correctValue: number
 }
-export type Question = McqQuestion | TrueFalseQuestion | TextQuestion | SliderQuestion
+export interface WordcloudQuestion extends QuestionBase {
+  type: 'wordcloud'
+}
+export type Question = McqQuestion | TrueFalseQuestion | TextQuestion | SliderQuestion | WordcloudQuestion
 
 function fromApiQuestion(row: ApiQuestion): Question {
   const base = { id: row.id, prompt: row.prompt, timeLimit: row.timeLimit, readingTime: row.readingTime, source: row.source }
@@ -137,6 +141,8 @@ function fromApiQuestion(row: ApiQuestion): Question {
         correctValue: payload.correct,
       }
     }
+    case 'wordcloud':
+      return { ...base, type: 'wordcloud' }
   }
 }
 
@@ -179,6 +185,8 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
         readingTime: q.readingTime,
         payload: { min: q.min, max: q.max, correct: q.correctValue, step: q.step > 0 ? q.step : undefined },
       }
+    case 'wordcloud':
+      return { prompt: q.prompt, timeLimit: q.timeLimit, readingTime: q.readingTime, payload: {} }
   }
 }
 
@@ -220,6 +228,8 @@ function defaultCreateInput(type: QuestionType): CreateQuestionInput {
       return { type, prompt, timeLimit, readingTime, payload: { answers: ['Réponse'], caseSensitive: false } }
     case 'slider':
       return { type, prompt, timeLimit, readingTime, payload: { min: 0, max: 100, correct: 50, step: 1 } }
+    case 'wordcloud':
+      return { type, prompt, timeLimit, readingTime, payload: {} }
   }
 }
 
@@ -232,6 +242,7 @@ function hasTypeSpecificData(q: Question): boolean {
       return q.acceptedAnswers.some((a) => a.trim().length > 0)
     case 'truefalse':
     case 'slider':
+    case 'wordcloud':
       return false
   }
 }
@@ -267,6 +278,7 @@ function validationError(q: Question): string | null {
       if (!(q.step > 0)) return 'Le pas doit être positif.'
       return null
     case 'truefalse':
+    case 'wordcloud':
       return null
   }
 }
@@ -306,6 +318,7 @@ function fieldErrors(q: Question): Record<string, string> {
       if (!(q.step > 0)) errs['q-slider-step'] = 'Le pas doit être positif.'
       break
     case 'truefalse':
+    case 'wordcloud':
       break
   }
   return errs
@@ -1241,6 +1254,7 @@ export function HostEditor() {
                         <option value="truefalse">Vrai / Faux</option>
                         <option value="text">Réponse libre</option>
                         <option value="slider">Curseur</option>
+                        <option value="wordcloud">Nuage de mots</option>
                       </select>
                     </div>
                     <div className="host-field">
@@ -1439,6 +1453,12 @@ export function HostEditor() {
                         </Button>
                       </div>
                     </fieldset>
+                  )}
+
+                  {selected.type === 'wordcloud' && (
+                    <p className="host-field__help">
+                      Les participants proposent leurs idées en direct. Pas de bonne réponse ni de points.
+                    </p>
                   )}
 
                   {selected.type === 'slider' && (

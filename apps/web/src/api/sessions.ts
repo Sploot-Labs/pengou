@@ -29,8 +29,9 @@ export interface SessionReportQuestion {
   type: QuestionType
   orderIndex: number
   answerCount: number
-  correctCount: number
+  correctCount: number | null
   avgTimeMs: number | null
+  wordcloud: { participants: number; totalWords: number; words: { text: string; count: number }[] } | null
 }
 
 export interface SessionReportPlayer {

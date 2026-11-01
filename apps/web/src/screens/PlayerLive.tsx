@@ -6,6 +6,7 @@ import { clearPlayerSession, loadPlayerSession, savePlayerSession } from '../rea
 import { hardReload } from '../realtime/hardReload'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
+import { PlayerWordcloud, type WordcloudAck } from './PlayerWordcloud'
 import { AnswerShape, AnswerTile, Logo, SoundToggle, TimerPill } from '../ui'
 
 /**
@@ -20,7 +21,7 @@ import { AnswerShape, AnswerTile, Logo, SoundToggle, TimerPill } from '../ui'
 /* Contrat serveur (types locaux — pas de mock)                        */
 /* ------------------------------------------------------------------ */
 
-type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider'
+type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud'
 
 /** `question:show` — projection anti-triche : jamais de bonne réponse.
  * `index`/`total` sont positionnels (numéro de question), ajoutés à la
@@ -261,7 +262,18 @@ export function PlayerLive() {
         return textValue.trim().length > 0
       case 'slider':
         return sliderTouched
+      case 'wordcloud':
+        return true
     }
+  }
+
+  /** Nuage de mots : chaque idée est envoyée seule, la phase reste 'question'
+   * (le moteur accepte plusieurs envois) ; le refus est rendu par le composant. */
+  async function submitWord(word: string): Promise<WordcloudAck> {
+    if (phase !== 'question') return { accepted: false, reason: 'hors phase question' }
+    sound.unlock()
+    cue('answer.submit')
+    return emitAck<WordcloudAck>('player:answer', { answer: { word } })
   }
 
   /**
@@ -577,7 +589,9 @@ export function PlayerLive() {
     return index === -1 ? null : index + 1
   })()
 
-  const answeredMessage = hasSubmission()
+  const answeredMessage = question?.type === 'wordcloud'
+    ? 'Temps écoulé, merci pour tes idées'
+    : hasSubmission()
     ? 'Réponse enregistrée. En attente de la suite…'
     : 'Temps écoulé. En attente de la suite…'
 
@@ -604,6 +618,8 @@ export function PlayerLive() {
         return { kind: evaluateText(revealPayload.correct as TextCorrect, effectiveTextValue), diff: null }
       case 'slider':
         return evaluateSlider(revealPayload.correct as SliderCorrect, effectiveSliderValue)
+      case 'wordcloud':
+        return null
     }
   }
 
@@ -694,6 +710,8 @@ export function PlayerLive() {
           </div>
         )
       }
+      case 'wordcloud':
+        return null
     }
   }
 
@@ -887,6 +905,10 @@ export function PlayerLive() {
             </div>
           )}
 
+          {question.type === 'wordcloud' && (
+            <PlayerWordcloud key={question.id} disabled={phase === 'answered'} submit={submitWord} />
+          )}
+
           {question.type === 'text' && (
             <form
               className="player-text"
@@ -1007,7 +1029,18 @@ export function PlayerLive() {
         </div>
       )}
 
-      {phase === 'result' && !evalResult && (
+      {phase === 'result' && question?.type === 'wordcloud' && (
+        <div className="player-verdict player-verdict--timeout" role="status">
+          <div className="player-verdict__spacer" />
+          <h1 className="player-verdict__title" ref={resultHeadingRef} tabIndex={-1}>
+            Merci pour tes idées
+          </h1>
+          <p className="player-verdict__sub">La question suivante arrive…</p>
+          <div className="player-verdict__spacer" />
+        </div>
+      )}
+
+      {phase === 'result' && !evalResult && question?.type !== 'wordcloud' && (
         // Rejoindre en pleine question (Plan 06 review, finding #2) : le serveur ne rejoue
         // `question:show` que sur `player:reconnect`, jamais sur `player:join` — un joueur qui
         // rejoint APRÈS le début d'une question a donc `question === null` quand

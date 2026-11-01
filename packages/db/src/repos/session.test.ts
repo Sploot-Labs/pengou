@@ -3,7 +3,9 @@ import { eq, sql } from 'drizzle-orm'
 import { startTestDb, runMigrations, schema } from '../index.js'
 import { tenantScope } from '../tenant.js'
 import { createQuiz } from './quiz.js'
+import { createQuestion } from './question.js'
 import {
+  setWordcloudRemoved, loadWordcloudRemoved,
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
   listSessionPlayersByScore, saveEngineState, clearEngineState, loadEngineState, loadEngineStateByPin,
   listResumableSessions, abandonStaleSessions, abandonInactiveSessions,
@@ -273,5 +275,25 @@ describe('repo session scopé au tenant du quiz', () => {
         answer: { choice: 0 } as never, timeMs: 1, isCorrect: false, points: 0,
       }).returning(),
     ).rejects.toThrow()
+  })
+})
+
+describe('nuage de mots', () => {
+  it('stocke les mots retirés par question, de façon atomique', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '909090' })
+    const id = session!.id
+    expect(await loadWordcloudRemoved(ctx.db, id)).toEqual({})
+    await setWordcloudRemoved(ctx.db, id, 'q1', ['cafe'])
+    await setWordcloudRemoved(ctx.db, id, 'q2', ['x'])
+    expect(await loadWordcloudRemoved(ctx.db, id)).toEqual({ q1: ['cafe'], q2: ['x'] })
+    await setWordcloudRemoved(ctx.db, id, 'q1', ['cafe', 'rush'])
+    expect(await loadWordcloudRemoved(ctx.db, id)).toEqual({ q1: ['cafe', 'rush'], q2: ['x'] })
+  })
+
+  it('accepte une question de type wordcloud', async () => {
+    const q = await createQuestion(tenantScope(ctx.db, tenantA), quizA, {
+      type: 'wordcloud', prompt: 'Un mot ?', timeLimit: 30, payload: {},
+    })
+    expect(q?.type).toBe('wordcloud')
   })
 })

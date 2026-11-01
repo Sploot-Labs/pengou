@@ -57,9 +57,24 @@ function formatAvgTime(avgTimeMs: number | null): string {
 
 /** `null` (no answers yet) is distinct from `0` (answered, all wrong) — both
  * render as text, never a bare percentage bar or colour swatch. */
-function successRate(correctCount: number, answerCount: number): number | null {
-  if (answerCount === 0) return null
+function successRate(correctCount: number | null, answerCount: number): number | null {
+  if (correctCount === null || answerCount === 0) return null
   return correctCount / answerCount
+}
+
+/** Nuage de mots : pas de taux de réussite, on résume la participation et les
+ * quatre idées les plus fréquentes (la liste complète reste dans le CSV). */
+function wordcloudSummary(cloud: {
+  participants: number
+  totalWords: number
+  words: { text: string; count: number }[]
+}): string {
+  const head = `Nuage de mots, ${cloud.participants} participant${cloud.participants > 1 ? 's' : ''}, ${cloud.totalWords} mot${cloud.totalWords > 1 ? 's' : ''}`
+  if (cloud.words.length === 0) return `${head}. Aucune idée proposée`
+  return `${head} : ${cloud.words
+    .slice(0, 4)
+    .map((w) => `${w.text} (${w.count})`)
+    .join(', ')}`
 }
 
 export function SessionReport() {
@@ -141,6 +156,7 @@ export function SessionReport() {
   // "most missed" would be inventing a problem that doesn't exist. Ties (two
   // questions sharing the worst rate) are ALL flagged, not an arbitrary one.
   const answeredRates = questions
+    .filter((q) => q.wordcloud === null)
     .map((q) => successRate(q.correctCount, q.answerCount))
     .filter((rate): rate is number => rate !== null)
   const worstRate = answeredRates.length > 0 ? Math.min(...answeredRates) : null
@@ -261,7 +277,7 @@ export function SessionReport() {
                 <tbody>
                   {questions.map((q) => {
                     const rate = successRate(q.correctCount, q.answerCount)
-                    const isWorst = highlightWorst && rate === worstRate
+                    const isWorst = highlightWorst && q.wordcloud === null && rate === worstRate
                     return (
                       <tr key={q.questionId}>
                         <td>{q.orderIndex + 1}</td>
@@ -274,9 +290,11 @@ export function SessionReport() {
                           )}
                         </td>
                         <td>
-                          {rate === null
-                            ? '(aucune réponse)'
-                            : `${Math.round(rate * 100)} % (${q.correctCount}/${q.answerCount})`}
+                          {q.wordcloud !== null
+                            ? wordcloudSummary(q.wordcloud)
+                            : rate === null
+                              ? '(aucune réponse)'
+                              : `${Math.round(rate * 100)} % (${q.correctCount}/${q.answerCount})`}
                         </td>
                         <td>{formatAvgTime(q.avgTimeMs)}</td>
                       </tr>

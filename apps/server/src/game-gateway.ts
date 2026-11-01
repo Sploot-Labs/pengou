@@ -4,11 +4,12 @@ import {
   resolveTenantId, getMembershipRole, withTenantTx, getQuiz, listQuestions,
   createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
   clearEngineState, listResumableSessions, abandonStaleSessions, abandonInactiveSessions, listSessionPlayers,
-  type ContentSource, type Db,
+  setWordcloudRemoved, type ContentSource, type Db,
 } from '@splootlabs/db'
 import type { Auth } from '@splootlabs/auth'
 import { hasPermission, type AppConfig } from '@splootlabs/shared'
 import type { Engine, EngineQuestion, GameSession, SessionStore } from '@splootlabs/game'
+import { WORDCLOUD_MAX_WORD_LENGTH, wordKey } from '@splootlabs/quiz'
 
 export type GameGatewayDeps = {
   engine: Engine
@@ -90,6 +91,11 @@ type SessionMeta = {
   lobbyBroadcastTimeout: ReturnType<typeof setTimeout> | null
   /** Horodatage (ms epoch) de la dernière diffusion du lobby pour cette session, 0 si aucune. */
   lastLobbyBroadcastAt: number
+  /** Diffusion différée du nuage de mots (voir `scheduleWordcloudBroadcast`) : au plus un minuteur
+   * en attente par session, `null` sinon. Annulé à chaque nouvelle question et en fin de session. */
+  wordcloudBroadcastTimeout: ReturnType<typeof setTimeout> | null
+  /** Horodatage (ms epoch) de la dernière diffusion `wordcloud:update`, 0 si aucune. */
+  lastWordcloudBroadcastAt: number
 }
 
 /** Refus de `player:join` quand la partie a atteint `config.maxPlayersPerSession`. */
@@ -99,6 +105,10 @@ export const SESSION_FULL_MESSAGE = 'La partie est complète.'
  * `lobby:count` par session et par fenêtre. Une rafale d'arrivées ne coûte donc plus une
  * diffusion de la liste complète par joueur (coût quadratique en nombre de joueurs). */
 const LOBBY_BROADCAST_INTERVAL_MS = 250
+
+/** Cadence du nuage de mots : au plus une diffusion `wordcloud:update` par session et par fenêtre,
+ * et seulement après un changement (nouveau mot ou retrait). */
+const WORDCLOUD_BROADCAST_INTERVAL_MS = 500
 
 /** Valeurs par défaut de l'enchaînement automatique à la création d'une session. */
 const DEFAULT_AUTO_ADVANCE = true
@@ -305,6 +315,65 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     meta.lobbyBroadcastTimeout = timer
   }
 
+  /** Annule la diffusion différée du nuage (`SessionMeta.wordcloudBroadcastTimeout`), s'il y en a
+   * une en attente. Sûr à appeler inconditionnellement (no-op si `null`). */
+  function clearWordcloudBroadcastTimeout(meta: SessionMeta): void {
+    if (meta.wordcloudBroadcastTimeout) {
+      clearTimeout(meta.wordcloudBroadcastTimeout)
+      meta.wordcloudBroadcastTimeout = null
+    }
+  }
+
+  /** Diffuse le nuage agrégé de la question courante à l'hôte et au grand écran seulement (room
+   * `viewers:<id>`), jamais aux téléphones. Relit la session au moment de partir pour refléter
+   * l'état final d'une rafale. Rien n'est émis si la session a disparu ou si la question courante
+   * n'est plus un nuage (question suivante démarrée entre-temps). */
+  async function broadcastWordcloud(sessionId: string, meta: SessionMeta): Promise<void> {
+    meta.lastWordcloudBroadcastAt = Date.now()
+    try {
+      if (sessionMetaByEngineId.get(sessionId) !== meta) return
+      const session = await engine.peekSession(sessionId)
+      const view = engine.wordcloudView(session)
+      if (view) io.to(viewersRoomName(sessionId)).emit('wordcloud:update', view)
+    } catch {
+      // Session évincée entre-temps : plus personne à prévenir.
+    }
+  }
+
+  /** Diffusion cadencée du nuage (même principe que `scheduleLobbyBroadcast`) : émission immédiate
+   * si la dernière date d'au moins `WORDCLOUD_BROADCAST_INTERVAL_MS`, sinon une seule émission
+   * planifiée à l'échéance. Les envois suivants de la rafale se greffent sur ce minuteur. */
+  function scheduleWordcloudBroadcast(sessionId: string, meta: SessionMeta): void {
+    if (meta.wordcloudBroadcastTimeout) return
+    const delay = meta.lastWordcloudBroadcastAt + WORDCLOUD_BROADCAST_INTERVAL_MS - Date.now()
+    if (delay <= 0) {
+      void broadcastWordcloud(sessionId, meta)
+      return
+    }
+    const timer = setTimeout(() => {
+      meta.wordcloudBroadcastTimeout = null
+      void broadcastWordcloud(sessionId, meta)
+    }, delay)
+    timer.unref()
+    meta.wordcloudBroadcastTimeout = timer
+  }
+
+  /** Annule toute diffusion du nuage en attente et diffuse tout de suite (retrait d'un mot par
+   * l'hôte, révélation). L'émission est partie quand la promesse se résout. */
+  async function flushWordcloudBroadcast(sessionId: string, meta: SessionMeta): Promise<void> {
+    clearWordcloudBroadcastTimeout(meta)
+    await broadcastWordcloud(sessionId, meta)
+  }
+
+  /** Rejoue le nuage courant à UN SEUL socket hôte ou grand écran (reconnexion). Jamais appelé pour
+   * un joueur : les téléphones ne reçoivent pas le nuage (d'où son absence de
+   * `replayCurrentQuestionTo`, partagé avec eux). */
+  function replayWordcloudTo(socket: Socket, session: GameSession): void {
+    if (session.phase !== 'question' && session.phase !== 'reveal' && session.phase !== 'scoreboard') return
+    const view = engine.wordcloudView(session)
+    if (view) socket.emit('wordcloud:update', view)
+  }
+
   /** Planifie l'avance automatique de l'étape classement vers la suite (question suivante ou
    * podium) à l'échéance de `meta.autoAdvanceDelayMs`, puis diffuse `auto:advance { nextAt }` à
    * toute la room pour le compte à rebours CLIENT (même esprit que `timer` : le serveur est seul
@@ -407,6 +476,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     clearQuestionTimeout(meta)
     clearAdvanceTimeout(meta)
     clearLobbyBroadcastTimeout(meta)
+    clearWordcloudBroadcastTimeout(meta)
     for (const playerId of meta.playerDbIds.keys()) activeSocketIdByPlayerId.delete(playerId)
     for (const [token, sid] of screenTokenToSessionId) {
       if (sid === sessionId) {
@@ -505,6 +575,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       seatsTaken: 0,
       lobbyBroadcastTimeout: null,
       lastLobbyBroadcastAt: 0,
+      wordcloudBroadcastTimeout: null,
+      lastWordcloudBroadcastAt: 0,
     })
     pinToSessionId.set(session.pin, session.id)
     return { session }
@@ -632,6 +704,15 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // Anti-triche : `questionResult` (qui contient la bonne réponse) n'est calculé qu'ICI,
     // strictement après engine.reveal() — jamais avant, jamais pour `question:show`.
     const result = engine.questionResult(revealed)
+    // Nuage : l'écran et l'hôte reçoivent l'état final juste avant de le figer. Émission
+    // synchrone depuis l'instantané `revealed` (équivalent de `flushWordcloudBroadcast`, sans
+    // relecture) : aucun `await` ne s'intercale entre `engine.reveal()` et `engine.scoreboard()`.
+    const finalCloud = engine.wordcloudView(revealed)
+    if (finalCloud) {
+      clearWordcloudBroadcastTimeout(meta)
+      meta.lastWordcloudBroadcastAt = Date.now()
+      io.to(viewersRoomName(sessionId)).emit('wordcloud:update', finalCloud)
+    }
     io.to(roomName(sessionId)).emit('question:reveal', result)
 
     const scored = await engine.scoreboard(sessionId)
@@ -740,6 +821,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // l'étape classement qu'on quitte (geste manuel « Suivant », ou avance déjà déclenchée) — sinon
     // elle se rejouerait plus tard sur une manche déjà avancée.
     clearAdvanceTimeout(meta)
+    // Une diffusion du nuage encore en attente concerne la question qu'on quitte.
+    clearWordcloudBroadcastTimeout(meta)
     const session = await engine.startQuestion(sessionId)
     if (session.phase === 'reading') {
       const view = engine.readingView(session)
@@ -830,15 +913,18 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         break
       case 'question':
         replayCurrentQuestionTo(socket, session)
+        replayWordcloudTo(socket, session)
         break
       case 'reveal': {
         const view = engine.playerQuestionView(session)
         if (view) socket.emit('question:show', view)
+        replayWordcloudTo(socket, session)
         socket.emit('question:reveal', engine.questionResult(session))
         socket.emit('scoreboard', { ranking: engine.ranking(session) })
         break
       }
       case 'scoreboard':
+        replayWordcloudTo(socket, session)
         socket.emit('scoreboard', { ranking: engine.ranking(session) })
         break
       case 'podium':
@@ -916,6 +1002,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           seatsTaken: Object.keys(session.players).length,
           lobbyBroadcastTimeout: null,
           lastLobbyBroadcastAt: 0,
+          wordcloudBroadcastTimeout: null,
+          lastWordcloudBroadcastAt: 0,
         }
         sessionMetaByEngineId.set(session.id, meta)
         pinToSessionId.set(session.pin, row.id)
@@ -1221,6 +1309,27 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       }
     })
 
+    // Modération du nuage : l'hôte retire un mot (toutes ses graphies fusionnées). Le retrait est
+    // enregistré dans l'état moteur et dans `game_session.wordcloud_removed`, puis le nuage est
+    // rediffusé aussitôt à l'hôte et au grand écran.
+    socket.on('host:wordcloudRemove', async (payload: { word?: unknown } | undefined, ack?: (res: unknown) => void) => {
+      const reply = typeof ack === 'function' ? ack : () => {}
+      try {
+        const { sessionId, meta } = requireHost(socket)
+        const word = payload?.word
+        if (typeof word !== 'string' || !word.trim()) throw new Error('mot requis')
+        if (word.trim().length > WORDCLOUD_MAX_WORD_LENGTH) throw new Error('mot trop long')
+        if (wordKey(word) === '') throw new Error('mot invalide')
+        const { questionId, removedKeys } = await engine.removeWord(sessionId, word)
+        await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
+          setWordcloudRemoved(scope.db, meta.dbSessionId, questionId, removedKeys))
+        await flushWordcloudBroadcast(sessionId, meta)
+        reply({ ok: true })
+      } catch (e) {
+        reply({ error: message(e) })
+      }
+    })
+
     socket.on('player:join', async (payload: { pin?: unknown; nickname?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
@@ -1286,10 +1395,18 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         // timing fourni par le client.
         const result = await engine.submitAnswer(data.sessionId, data.playerId, payload?.answer)
         if (result.accepted) {
-          // Compteur grand écran : UNIQUEMENT answered/total, jamais le contenu de la réponse
-          // ni la bonne réponse (anti-triche — voir engine.progress()).
-          const progress = await engine.progress(data.sessionId)
-          io.to(viewersRoomName(data.sessionId)).emit('screen:progress', progress)
+          // Nuage : un joueur ne compte qu'une fois dans le compteur, à son premier mot.
+          const words = result.words
+          if (!words || words.length === 1) {
+            // Compteur grand écran : UNIQUEMENT answered/total, jamais le contenu de la réponse
+            // ni la bonne réponse (anti-triche, voir engine.progress()).
+            const progress = await engine.progress(data.sessionId)
+            io.to(viewersRoomName(data.sessionId)).emit('screen:progress', progress)
+          }
+          if (words) {
+            const meta = sessionMetaByEngineId.get(data.sessionId)
+            if (meta) scheduleWordcloudBroadcast(data.sessionId, meta)
+          }
         }
         reply(result)
 
@@ -1421,6 +1538,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         // afficher la question courante tout de suite, pas seulement à partir de la suivante.
         const session = await engine.getSession(sessionId)
         replayCurrentQuestionTo(socket, session)
+        replayWordcloudTo(socket, session)
       } catch (e) {
         reply({ error: message(e) })
       }
@@ -1454,6 +1572,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
 
         const session = await engine.getSession(sessionId)
         replayCurrentQuestionTo(socket, session)
+        replayWordcloudTo(socket, session)
       } catch (e) {
         reply({ error: message(e) })
       }
@@ -1474,6 +1593,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
       if (meta) {
         clearReadingTimeout(meta)
         clearLobbyBroadcastTimeout(meta)
+        clearWordcloudBroadcastTimeout(meta)
       }
       sessionMetaByEngineId.delete(id)
       const pin = store.evict(id)
