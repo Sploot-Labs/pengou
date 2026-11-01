@@ -131,16 +131,16 @@ export function registerLibraryRoutes(app: FastifyInstance, deps: Deps): void {
     const found = await getLibraryQuiz(appDb, request.params.id)
     if (!found) return reply.code(404).send({ error: 'Quiz introuvable dans la bibliothèque.' })
 
-    return withTenantTx(appDb, context, async (scope) => {
-      const created = await importQuiz(scope, {
+    // Réponse envoyée APRÈS le COMMIT (hors du callback) : l'éditeur ouvre aussitôt la copie.
+    const created = await withTenantTx(appDb, context, (scope) =>
+      importQuiz(scope, {
         ownerId: request.user.id,
         title: found.quiz.title,
         description: found.quiz.description,
         source: found.quiz.source,
         questions: found.questions.map(toImported),
-      })
-      return reply.code(201).send(created)
-    })
+      }))
+    return reply.code(201).send(created)
   })
 
   app.post('/api/library/compose', { preHandler: requireUser }, async (request, reply) => {
@@ -167,11 +167,8 @@ export function registerLibraryRoutes(app: FastifyInstance, deps: Deps): void {
     if (!questions) return reply.code(404).send({ error: 'Question introuvable dans la bibliothèque.' })
 
     const title = body.title
-    return withTenantTx(appDb, context, async (scope) => {
-      const created = await importQuiz(scope, {
-        ownerId: request.user.id, title, source: null, questions: questions.map(toImported),
-      })
-      return reply.code(201).send(created)
-    })
+    const created = await withTenantTx(appDb, context, (scope) =>
+      importQuiz(scope, { ownerId: request.user.id, title, source: null, questions: questions.map(toImported) }))
+    return reply.code(201).send(created)
   })
 }

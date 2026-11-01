@@ -35,7 +35,7 @@ async function signUp(app: FastifyInstance, email: string): Promise<string> {
     : String(rawCookies).split(';')[0]
 }
 
-async function buildApp(): Promise<FastifyInstance> {
+async function buildApp(appDb = ctx.appDb): Promise<FastifyInstance> {
   const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'single' })
   const auth = createAuth(ctx.db, {
     secret: 'test-secret-at-least-32-chars-long!!',
@@ -44,9 +44,50 @@ async function buildApp(): Promise<FastifyInstance> {
   })
   const app = await buildServer(config, { dbStatus: () => 'up' })
   await registerAuth(app, auth)
-  registerEditor(app, { systemDb: ctx.db, appDb: ctx.appDb, auth, config })
+  registerEditor(app, { systemDb: ctx.db, appDb, auth, config })
   return app
 }
+
+describe('réponses envoyées après le COMMIT', () => {
+  it("création de quiz, ajout et suppression de question : l'écriture est visible dès la réponse reçue", async () => {
+    // COMMIT retardé : une réponse envoyée depuis la transaction arriverait avant que l'écriture
+    // soit visible des autres connexions (la requête suivante du client répondait alors 404).
+    const slowCommitDb = new Proxy(ctx.appDb, {
+      get(target, key, receiver) {
+        if (key !== 'transaction') return Reflect.get(target, key, receiver)
+        return (fn: Parameters<typeof target.transaction>[0]) =>
+          target.transaction(async (tx) => {
+            const result = await fn(tx)
+            await new Promise((resolve) => setTimeout(resolve, 300))
+            return result
+          })
+      },
+    })
+    const app = await buildApp(slowCommitDb)
+    const cookie = await signUp(app, 'commit-avant-reponse@example.com')
+    const headers = { 'content-type': 'application/json', cookie }
+
+    const quizRes = await app.inject({ method: 'POST', url: '/api/quizzes', payload: { title: 'Course' }, headers })
+    expect(quizRes.statusCode).toBe(201)
+    const quizId = (quizRes.json() as { id: string }).id
+    expect(await ctx.db.select().from(schema.quiz).where(eq(schema.quiz.id, quizId))).toHaveLength(1)
+
+    const questionRes = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/questions`,
+      payload: { type: 'truefalse', prompt: 'Vrai ?', timeLimit: 20, payload: { correct: true } },
+      headers,
+    })
+    expect(questionRes.statusCode).toBe(201)
+    const questionId = (questionRes.json() as { id: string }).id
+    expect(await ctx.db.select().from(schema.question).where(eq(schema.question.id, questionId))).toHaveLength(1)
+
+    const deleteRes = await app.inject({ method: 'DELETE', url: `/api/quizzes/${quizId}/questions/${questionId}`, headers: { cookie } })
+    expect(deleteRes.statusCode).toBe(204)
+    expect(await ctx.db.select().from(schema.question).where(eq(schema.question.id, questionId))).toHaveLength(0)
+    await app.close()
+  })
+})
 
 describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
   it('POST sans cookie → 401', async () => {

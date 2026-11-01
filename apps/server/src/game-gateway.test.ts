@@ -49,7 +49,9 @@ type BuiltApp = { app: FastifyInstance; url: string }
 // "redémarrage") ; le test « survit à un redémarrage » ci-dessous passe explicitement un
 // `PersistentSessionStore(ctx.db)` (deux instances successives, même base — simule un process
 // neuf) pour prouver que la réhydratation fonctionne à travers un VRAI aller-retour Postgres.
-async function buildApp(store: SessionStore = new MemorySessionStore()): Promise<BuiltApp> {
+// `gatewayAppDb` : base applicative vue par la passerelle seule (les routes HTTP gardent
+// `ctx.appDb`), pour ralentir ses écritures dans un test de course.
+async function buildApp(store: SessionStore = new MemorySessionStore(), gatewayAppDb = ctx.appDb): Promise<BuiltApp> {
   const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'single' })
   const auth = createAuth(ctx.db, {
     secret: 'test-secret-at-least-32-chars-long!!',
@@ -70,7 +72,7 @@ async function buildApp(store: SessionStore = new MemorySessionStore()): Promise
   // Réhydratation (Task 4) : `registerGameGateway` réhydrate les sessions actives à son montage
   // — `await` ici garantit qu'elle est terminée avant que le test n'interagisse avec l'app (pas
   // de course entre la reprise et les premiers `player:join`/`host:reconnect` du test).
-  await registerGameGateway(io, { engine, systemDb: ctx.db, appDb: ctx.appDb, auth, config, store })
+  await registerGameGateway(io, { engine, systemDb: ctx.db, appDb: gatewayAppDb, auth, config, store })
 
   await app.listen({ port: 0, host: '127.0.0.1' })
   const address = app.server.address()
@@ -1475,6 +1477,49 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const scoreboard = await scoreboardPromise
       expect(scoreboard.ranking).toHaveLength(2)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it.each(['host:reveal', 'host:next'])("%s après une auto-révélation attend que les scores soient en base", async (event) => {
+    // Écritures de la passerelle ralenties à la demande : l'auto-révélation (que personne
+    // n'attend) écrit encore la manche quand l'hôte enchaîne. Avant correction, host:reveal
+    // répondait aussitôt (manche déjà marquée) et le podium (host:next sur la dernière question)
+    // était annoncé avant l'écriture : la base gardait total_score = 0.
+    let slow = false
+    const slowAppDb = new Proxy(ctx.appDb, {
+      get(target, key, receiver) {
+        if (key !== 'transaction') return Reflect.get(target, key, receiver)
+        return async (...args: Parameters<typeof target.transaction>) => {
+          if (slow) await new Promise((resolve) => setTimeout(resolve, 300))
+          return target.transaction(...args)
+        }
+      },
+    })
+    const { app, url } = await buildApp(new MemorySessionStore(), slowAppDb)
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin, sessionId } = await setupHostedSession(app, url, `gateway-await-write-${event.slice(5)}@example.com`)
+      clients.push(hostSocket)
+      const player1 = await connectClient(url)
+      clients.push(player1)
+      expect((await ack<{ error?: string }>(player1, 'player:join', { pin, nickname: 'Alice' })).error).toBeUndefined()
+      expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+
+      const scoreboardPromise = waitFor<{ ranking: Array<{ playerId: string; score: number }> }>(hostSocket, 'scoreboard')
+      slow = true
+      const answer = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
+      expect(answer.accepted).toBe(true)
+      const scoreboard = await scoreboardPromise
+      const score = scoreboard.ranking[0].score
+      expect(score).toBeGreaterThan(0)
+
+      expect((await ack<{ error?: string }>(hostSocket, event, {})).error).toBeUndefined()
+      const [dbSession] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.id, sessionId))
+      const players = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.sessionId, dbSession.id))
+      expect(players.map((p) => p.totalScore)).toEqual([score])
     } finally {
       for (const c of clients) c.disconnect()
       await app.close()
