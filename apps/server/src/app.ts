@@ -3,6 +3,7 @@ import helmet from '@fastify/helmet'
 import rateLimit from '@fastify/rate-limit'
 import { collectDefaultMetrics, Registry } from 'prom-client'
 import type { AppConfig } from '@splootlabs/shared'
+import { registerOriginGuard } from './origin-guard.js'
 
 declare module 'fastify' {
   interface FastifyContextConfig {
@@ -84,6 +85,9 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
     // Même origine SPA↔API : COEP casserait le chargement des polices tierces sans bénéfice ici.
     crossOriginEmbedderPolicy: false,
   })
+
+  // Contrôle d'origine des requêtes mutantes de l'API (Better Auth gère déjà /api/auth/*).
+  registerOriginGuard(app, config)
 
   // Sécurité (P1) : limite de débit globale par IP (anti-DoS/abus, énumération de parties).
   // L'anti-brute-force spécifique de l'authentification est géré par Better Auth (voir

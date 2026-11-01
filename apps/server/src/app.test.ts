@@ -71,3 +71,54 @@ describe('durcissement sécurité (helmet + rate-limit)', () => {
     await app.close()
   })
 })
+
+describe("garde d'origine des requêtes mutantes", () => {
+  const config = () => loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'http://localhost:3000' })
+  // Route factice : l'éditeur (base de données) n'est pas monté par buildServer seul.
+  async function serveur() {
+    const app = await buildServer(config())
+    app.post('/api/invitations/:token/accept', async (_req, reply) => reply.code(401).send({ error: 'Non authentifié.' }))
+    return app
+  }
+
+  it('POST /api/invitations/x/accept avec Origin étrangère renvoie 403', async () => {
+    const app = await serveur()
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { origin: 'https://evil.example' },
+    })
+    expect(res.statusCode).toBe(403)
+    expect(res.json()).toEqual({ error: 'Origine non autorisée.' })
+    await app.close()
+  })
+
+  it('POST sans corps avec Sec-Fetch-Site: same-site renvoie 403', async () => {
+    const app = await serveur()
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { 'sec-fetch-site': 'same-site' },
+    })
+    expect(res.statusCode).toBe(403)
+    await app.close()
+  })
+
+  it('POST même origine passe la garde (401 sans cookie)', async () => {
+    const app = await serveur()
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { origin: 'http://localhost:3000', 'sec-fetch-site': 'same-origin' },
+    })
+    expect(res.statusCode).toBe(401)
+    await app.close()
+  })
+
+  it("un GET avec Origin étrangère n'est pas bloqué par la garde", async () => {
+    const app = await serveur()
+    const res = await app.inject({ method: 'GET', url: '/health', headers: { origin: 'https://evil.example' } })
+    expect(res.statusCode).toBe(200)
+    await app.close()
+  })
+})
