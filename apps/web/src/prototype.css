@@ -3689,6 +3689,8 @@ p.source-credit {
 }
 .bigcloud--revealed .bigcloud__word[data-lit="true"] .bigcloud__text {
   text-shadow: 0 0 calc(42px / var(--word-scale, 1)) var(--wc-text);
+  /* Un mot allumé de la traîne (data-small) n'est plus atténué. */
+  opacity: 1;
 }
 /* Agrandissement porté par le texte, dont l'origine est le centre du mot. `--lit-scale` vient de
    `litScales` (layout.ts) : au plus 1,1, réduit si deux mots allumés se toucheraient. */
