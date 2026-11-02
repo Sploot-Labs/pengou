@@ -118,8 +118,10 @@ describe('BigScreen, nuage de mots en direct', () => {
     await showQuestion(cloudQuestion)
     emitServerEvent('wordcloud:update', view())
     emitServerEvent('question:show', { ...cloudQuestion, id: 'q2' })
-    expect(screen.queryByText('café')).toBeNull()
-    expect(screen.getByText('En attente des premières idées…')).toBeInTheDocument()
+    // Deux questions nuage successives ont des clés de transition distinctes : l'ancienne couche
+    // sort en fondu avant que la nouvelle n'entre.
+    await waitFor(() => expect(screen.queryByText('café')).toBeNull())
+    expect(await screen.findByText('En attente des premières idées…')).toBeInTheDocument()
   })
 
   it('garde le nuage à la révélation, sans tableau de répartition', async () => {
@@ -130,6 +132,18 @@ describe('BigScreen, nuage de mots en direct', () => {
     expect(screen.getByText('café')).toBeInTheDocument()
     expect(screen.getByText('3 participants ont proposé, 4 mots reçus')).toBeInTheDocument()
     expect(screen.queryByText('Aucune réponse reçue pour cette question.')).toBeNull()
+  })
+
+  it('garde le même nœud de nuage de la question à la révélation (pas de remontage)', async () => {
+    const { container } = renderBigScreen()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('screen:join', { displayToken: 'tok-abc' }))
+    await showQuestion(cloudQuestion)
+    emitServerEvent('wordcloud:update', view())
+    const before = container.querySelector('.bigcloud')
+    expect(before).not.toBeNull()
+    emitServerEvent('question:reveal', { correct: null, distribution: {} })
+    await waitFor(() => expect(container.querySelector('.bigcloud--revealed')).not.toBeNull())
+    expect(container.querySelector('.bigcloud')).toBe(before)
   })
 
   it('une question mcq garde le rendu actuel', async () => {

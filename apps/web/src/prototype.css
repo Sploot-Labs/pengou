@@ -3480,20 +3480,81 @@ p.source-credit {
   border-color: var(--warn);
 }
 
-/* Nuage du grand écran : le cadre 2 / 1 est dimensionné par la hauteur disponible autant que par
-   la largeur (viewport moins l'en-tête, la question, le récapitulatif et les marges), pour ne
-   jamais provoquer de défilement, du 720p à la 4K, y compris sur un écran très large. */
+/* Nuage du grand écran : l'écran prend exactement la hauteur du viewport et ne défile pas ; le
+   cadre `.big-wordcloud__frame` reçoit la hauteur restante (en-tête et récapitulatif déduits) et
+   le nuage 2 / 1 s'y inscrit, borné par la largeur comme par la hauteur, du 720p à la 4K. */
+.big-screen:has(.big-wordcloud) {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+.big-screen:has(.big-wordcloud) .big-live {
+  min-height: 0;
+  gap: var(--space-3);
+}
 .big-wordcloud {
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
   width: 100%;
 }
-.big-wordcloud .bigcloud {
-  width: min(100%, calc((100vh - 24rem) * 2));
-  width: min(100%, calc((100dvh - 24rem) * 2));
-  min-width: 16rem;
+.big-wordcloud__frame {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  container-type: size;
+  display: grid;
+  place-items: center;
+}
+.big-wordcloud__frame > .bigcloud {
+  width: min(100cqw, 200cqh);
+}
+/* Récapitulatif et compte à rebours sur une seule ligne de hauteur fixe : le cadre ne change pas
+   de taille quand le premier mot arrive ou quand le compte à rebours apparaît à la révélation. */
+.big-wordcloud__foot {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  font-size: var(--fs-h2);
+  min-height: 1.5em;
+}
+.big-wordcloud__foot > p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* En-tête compact des phases nuage : badge, question et chrono sur une ligne. Les colonnes
+   latérales ont une largeur fixe et la place du chrono est réservée à la révélation, pour que
+   la question ne se recompose pas et que le nuage ne bouge pas entre question et révélation. */
+.big-live--cloud .big-live__header {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr) 12rem;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 112px;
+}
+.big-live--cloud .big-live__header > .host-badge {
+  justify-self: start;
+}
+.big-live--cloud .big-live__header > .ab-timer,
+.big-live--cloud .big-live__ring-slot {
+  justify-self: end;
+  width: 112px;
+  height: 112px;
+}
+.big-live--cloud .big-live__prompt {
+  font-size: var(--fs-title);
+  max-width: none;
+  margin: 0;
+  padding: var(--space-2);
+}
+.big-live--cloud .ab-timer__value {
+  font-size: 2.25rem;
 }
 
 /* Nuage de mots du grand écran : scène 1600x800 mise à l'échelle dans un cadre 2 / 1. */
@@ -3554,7 +3615,7 @@ p.source-credit {
   position: absolute;
   left: 0;
   top: 0;
-  transition: transform 800ms var(--ease-out), scale 600ms var(--ease-spring);
+  transition: transform 800ms var(--ease-out);
 }
 .bigcloud__text {
   display: inline-block;
@@ -3562,7 +3623,7 @@ p.source-credit {
   line-height: 1;
   font-weight: 600;
   color: var(--wc-text);
-  transition: font-size 700ms var(--ease-out);
+  transition: font-size 700ms var(--ease-out), scale 600ms var(--ease-spring);
 }
 .bigcloud__word[data-top="true"] .bigcloud__text {
   text-shadow: 0 0 42px var(--wc-text);
@@ -3618,14 +3679,17 @@ p.source-credit {
 .bigcloud--revealed .bigcloud__word[data-lit="true"] .bigcloud__text {
   text-shadow: 0 0 42px var(--wc-text);
 }
-.bigcloud--revealed .bigcloud__word[data-lit="true"] .bigcloud__rot {
-  scale: 1.1;
+/* Agrandissement porté par le texte, dont l'origine est le centre du mot. `--lit-scale` vient de
+   `litScales` (layout.ts) : au plus 1,1, réduit si deux mots allumés se toucheraient. */
+.bigcloud--revealed .bigcloud__word[data-lit="true"] .bigcloud__text {
+  scale: var(--lit-scale, 1.1);
 }
 .bigcloud--revealed .bigcloud__word.is-leaving {
   opacity: 0;
   transition: transform 800ms var(--ease-out), opacity 400ms ease, filter 400ms ease;
 }
-/* Pastille : posée au-dessus du coin haut droit du mot pour ne pas le recouvrir. */
+/* Pastille : coin supérieur gauche calculé par `badgePosition` (layout.ts), au-dessus ou au-dessous
+   d'un coin du mot, entière dans la scène et sans recouvrir un autre mot allumé. */
 .bigcloud__badge {
   position: absolute;
   z-index: 3;
@@ -3641,7 +3705,6 @@ p.source-credit {
   font-size: 26px;
   white-space: nowrap;
   box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
-  transform: translate(-30%, -100%);
   animation: bigcloud-badge 550ms var(--ease-spring) both;
 }
 .bigcloud__rank {
@@ -3657,8 +3720,8 @@ p.source-credit {
   font-size: 28px;
 }
 @keyframes bigcloud-badge {
-  0% { opacity: 0; transform: translate(-30%, -100%) scale(0.3); }
-  100% { opacity: 1; transform: translate(-30%, -100%) scale(1); }
+  0% { opacity: 0; transform: scale(0.3); }
+  100% { opacity: 1; transform: scale(1); }
 }
 .bigcloud--still *,
 .bigcloud--still *::before {

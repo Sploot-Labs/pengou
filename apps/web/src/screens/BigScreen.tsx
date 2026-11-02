@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { type ReactNode, useEffect, useRef, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import {
   AnimatedBar,
@@ -474,18 +474,24 @@ function BigScreenInner() {
   const cloudLive = question?.type === 'wordcloud' && (phase === 'question' || phase === 'reveal')
   const maxCount = rows && rows.length > 0 ? Math.max(1, ...rows.map((r) => r.count)) : 1
 
-  function renderWordcloud() {
+  function renderWordcloud(foot?: ReactNode) {
     // Un nuage d'une autre question (course entre événements) n'est jamais affiché.
     const current = wordcloud && question && wordcloud.questionId === question.id ? wordcloud : null
     return (
       <div className="big-wordcloud">
-        <BigWordCloud
-          key={question?.id}
-          words={current?.words ?? []}
-          revealed={phase === 'reveal'}
-          reducedMotion={reducedMotion}
-        />
-        {current && <p className="big-live__answered">{wordcloudSummary(current)}</p>}
+        {/* Cadre qui prend toute la hauteur restante : le nuage 2 / 1 s'y inscrit sans défilement. */}
+        <div className="big-wordcloud__frame">
+          <BigWordCloud
+            key={question?.id}
+            words={current?.words ?? []}
+            revealed={phase === 'reveal'}
+            reducedMotion={reducedMotion}
+          />
+        </div>
+        <div className="big-wordcloud__foot">
+          {current && <p className="big-live__answered">{wordcloudSummary(current)}</p>}
+          {foot}
+        </div>
       </div>
     )
   }
@@ -623,7 +629,7 @@ function BigScreenInner() {
         </div>
       )}
 
-      <PhaseTransition phaseKey={cloudLive ? 'cloud-live' : phase} className="big-phase-layer">
+      <PhaseTransition phaseKey={cloudLive ? `cloud-live-${question?.id}` : phase} className="big-phase-layer">
       {phase === 'lobby' && (
         <div className="big-lobby">
           <Logo />
@@ -698,24 +704,27 @@ function BigScreenInner() {
       {/* Nuage : question et révélation partagent le même sous-arbre (et la même clé de transition),
           pour que le nuage reste monté et que sa disposition en direct soit figée à la révélation. */}
       {cloudLive && question && (
-        <div className="big-live">
+        <div className="big-live big-live--cloud">
+          {/* En-tête compact sur une ligne. À la révélation, la place du chrono reste réservée :
+              la question et le nuage gardent leur taille et leur position (la salle garde ses repères). */}
           <div className="big-live__header">
             <span className="host-badge">{phase === 'reveal' ? 'Révélation' : 'Question en cours'}</span>
-            {phase === 'question' && (
-              <TimerRing remainingSeconds={remaining ?? question.timeLimit} totalSeconds={question.timeLimit} size={180} large />
+            <h1 className="big-live__prompt" key={phase} ref={focusPhaseHeading} tabIndex={-1}>
+              {question.prompt}
+            </h1>
+            {phase === 'question' ? (
+              <TimerRing remainingSeconds={remaining ?? question.timeLimit} totalSeconds={question.timeLimit} size={112} large />
+            ) : (
+              <span className="big-live__ring-slot" aria-hidden="true" />
             )}
           </div>
 
-          <h1 className="big-live__prompt" key={phase} ref={focusPhaseHeading} tabIndex={-1}>
-            {question.prompt}
-          </h1>
-
-          {renderWordcloud()}
-
-          {phase === 'reveal' && autoRemaining !== null && (
-            <p className="big-auto-countdown" role="status" aria-live="polite">
-              Question suivante dans {autoRemaining} s
-            </p>
+          {renderWordcloud(
+            phase === 'reveal' && autoRemaining !== null && (
+              <p className="big-auto-countdown" role="status" aria-live="polite">
+                Question suivante dans {autoRemaining} s
+              </p>
+            ),
           )}
         </div>
       )}

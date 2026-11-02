@@ -59,7 +59,8 @@ export function sortWords<T extends CloudWordInput>(words: readonly T[]): T[] {
   return [...words].sort((a, b) => b.count - a.count || a.text.localeCompare(b.text, 'fr'))
 }
 
-interface Box {
+/** Boîte repérée par son centre, en px de scène. */
+export interface Box {
   x: number
   y: number
   w: number
@@ -168,4 +169,87 @@ export function layoutCloud(
   })
 
   return { placed, hidden }
+}
+
+/** Agrandissement visé d'un mot allumé à la révélation. */
+export const LIT_SCALE = 1.1
+
+/**
+ * Échelle de chaque mot allumé : la plus grande, au plus `LIT_SCALE`, telle que sa boîte agrandie
+ * autour de son centre ne touche aucune autre boîte (allumée et agrandie, ou éteinte à taille 1)
+ * et reste dans la scène. Deux allumés voisins sont bornés par une même échelle commune, ce qui
+ * garantit l'absence de chevauchement quelle que soit l'échelle finale de chacun.
+ */
+export function litScales(placed: readonly PlacedWord[], litKeys: readonly string[]): Map<string, number> {
+  const lit = new Set(litKeys)
+  const scales = new Map<string, number>()
+  for (const w of placed) {
+    if (!lit.has(w.key)) continue
+    let s = Math.min(
+      LIT_SCALE,
+      (2 * Math.min(w.x, STAGE_W - w.x)) / w.boxW,
+      (2 * Math.min(w.y, STAGE_H - w.y)) / w.boxH,
+    )
+    for (const o of placed) {
+      if (o === w) continue
+      const dx = Math.abs(o.x - w.x)
+      const dy = Math.abs(o.y - w.y)
+      // Séparé dès qu'un des deux axes l'est : on garde l'axe le plus favorable.
+      const bound = lit.has(o.key)
+        ? Math.max((2 * dx) / (w.boxW + o.boxW), (2 * dy) / (w.boxH + o.boxH))
+        : Math.max((2 * dx - o.boxW) / w.boxW, (2 * dy - o.boxH) / w.boxH)
+      s = Math.min(s, bound)
+    }
+    // Jamais de réduction sous la taille d'origine (le placement garantit déjà l'absence de contact).
+    scales.set(w.key, Math.max(1, s))
+  }
+  return scales
+}
+
+function boxesIntersect(a: Box, b: Box): boolean {
+  return Math.abs(a.x - b.x) < (a.w + b.w) / 2 && Math.abs(a.y - b.y) < (a.h + b.h) / 2
+}
+
+/** Part de la pastille qui déborde sur le mot, côté du coin choisi. */
+const BADGE_OVERLAP = 0.3
+
+/**
+ * Coin supérieur gauche de la pastille d'un mot allumé, en px de scène. Essaie dans l'ordre les
+ * coins haut droit, haut gauche, bas droit, bas gauche (pastille juste au-dessus ou au-dessous du
+ * mot), puis les côtés du mot, et retient la première place qui tient dans la scène sans toucher
+ * d'obstacle (autres mots allumés, pastilles déjà posées). À défaut : haut droit, ramené dans la scène.
+ */
+export function badgePosition(
+  word: PlacedWord,
+  obstacles: readonly Box[],
+  badge: { w: number; h: number } = { w: 170, h: 56 },
+): { x: number; y: number } {
+  const left = word.x - word.boxW / 2
+  const right = word.x + word.boxW / 2
+  const top = word.y - word.boxH / 2
+  const bottom = word.y + word.boxH / 2
+  const onRight = right - BADGE_OVERLAP * badge.w
+  const onLeft = left - (1 - BADGE_OVERLAP) * badge.w
+  const corners = [
+    { x: onRight, y: top - badge.h },
+    { x: onLeft, y: top - badge.h },
+    { x: onRight, y: bottom },
+    { x: onLeft, y: bottom },
+    // Au cœur d'un nuage dense, les quatre coins peuvent être pris par d'autres mots allumés :
+    // la pastille se pose alors sur le côté du mot, en haut puis en bas, à droite puis à gauche.
+    { x: right, y: top },
+    { x: left - badge.w, y: top },
+    { x: right, y: bottom - badge.h },
+    { x: left - badge.w, y: bottom - badge.h },
+  ]
+  for (const c of corners) {
+    if (c.x < 0 || c.y < 0 || c.x + badge.w > STAGE_W || c.y + badge.h > STAGE_H) continue
+    const box = { x: c.x + badge.w / 2, y: c.y + badge.h / 2, w: badge.w, h: badge.h }
+    if (!obstacles.some((o) => boxesIntersect(o, box))) return c
+  }
+  const first = corners[0] as { x: number; y: number }
+  return {
+    x: Math.min(Math.max(0, first.x), STAGE_W - badge.w),
+    y: Math.min(Math.max(0, first.y), STAGE_H - badge.h),
+  }
 }

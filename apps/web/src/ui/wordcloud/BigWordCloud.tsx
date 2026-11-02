@@ -1,5 +1,14 @@
 import { type CSSProperties, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import { type CloudWordInput, layoutCloud, type PlacedWord, sortWords, STAGE_W } from './layout'
+import {
+  badgePosition,
+  type Box,
+  type CloudWordInput,
+  layoutCloud,
+  litScales,
+  type PlacedWord,
+  sortWords,
+  STAGE_W,
+} from './layout'
 import { useWordMeasure } from './useWordMeasure'
 
 export { useWordMeasure } from './useWordMeasure'
@@ -19,6 +28,9 @@ const BADGE_FIRST_DELAY = 900
 const BADGE_STEP = 550
 const RECONNECT_WINDOW = 1000
 const LEAVE_DELAY = 400
+/** Largeur estimée d'une pastille en px de scène : marges, rond du rang, puis le texte « n fois ». */
+const badgeWidth = (label: string) => 76 + 15 * label.length
+const BADGE_H = 56
 
 export function BigWordCloud({
   words,
@@ -84,6 +96,27 @@ export function BigWordCloud({
         })
   const top = revealed ? sortWords(placed.filter((f) => present.has(f.key))).slice(0, TOP_COUNT) : []
   const lit = new Set(top.map((t) => t.key))
+  // Agrandissement des mots allumés, borné pour qu'ils ne se chevauchent pas.
+  const scales = litScales(placed, [...lit])
+  // Pastilles : posées dans l'ordre du rang, chacune évite les autres mots allumés et les pastilles
+  // déjà posées.
+  const badges: { word: PlacedWord; label: string; x: number; y: number }[] = []
+  for (const w of top) {
+    const s = scales.get(w.key) ?? 1
+    const label = `${w.count} fois`
+    const size = { w: badgeWidth(label), h: BADGE_H }
+    const obstacles: Box[] = [
+      ...top
+        .filter((o) => o.key !== w.key)
+        .map((o) => {
+          const k = scales.get(o.key) ?? 1
+          return { x: o.x, y: o.y, w: o.boxW * k, h: o.boxH * k }
+        }),
+      ...badges.map((b) => ({ x: b.x + badgeWidth(b.label) / 2, y: b.y + BADGE_H / 2, w: badgeWidth(b.label), h: BADGE_H })),
+    ]
+    const p = badgePosition({ ...w, boxW: w.boxW * s, boxH: w.boxH * s }, obstacles, size)
+    badges.push({ word: w, label, x: p.x, y: p.y })
+  }
 
   useEffect(() => {
     if (!live) return
@@ -163,7 +196,8 @@ export function BigWordCloud({
     }
   }, [placed, reducedMotion])
 
-  useEffect(() => {
+  // Mise à l'échelle avant le premier affichage : pas d'image à taille 1600 px.
+  useLayoutEffect(() => {
     const frame = frameRef.current
     if (!frame || typeof ResizeObserver === 'undefined') return
     const fit = () => {
@@ -187,6 +221,7 @@ export function BigWordCloud({
             key={w.key}
             word={w}
             lit={lit.has(w.key)}
+            litScale={scales.get(w.key)}
             leaving={revealed && !present.has(w.key)}
             register={(el) => {
               if (el) textRefs.current.set(w.key, el)
@@ -194,18 +229,18 @@ export function BigWordCloud({
             }}
           />
         ))}
-        {top.map((w, i) => {
+        {badges.map((b, i) => {
           const rank = i + 1
-          if (!instantRef.current && step < top.length - rank + 1) return null
+          if (!instantRef.current && step < badges.length - rank + 1) return null
           return (
             <div
               key={`badge-${rank}`}
-              className={`bigcloud__badge bigcloud__word--c${w.colorIndex}`}
-              style={{ left: `${w.x + w.boxW / 2}px`, top: `${w.y - w.boxH / 2}px` }}
+              className={`bigcloud__badge bigcloud__word--c${b.word.colorIndex}`}
+              style={{ left: `${b.x}px`, top: `${b.y}px` }}
               aria-hidden="true"
             >
               <span className="bigcloud__rank">{rank}</span>
-              {`${w.count} fois`}
+              {b.label}
             </div>
           )
         })}
@@ -230,15 +265,20 @@ export function BigWordCloud({
 function CloudWord({
   word,
   lit,
+  litScale,
   leaving,
   register,
 }: {
   word: PlacedWord
   lit: boolean
+  litScale?: number
   leaving: boolean
   register: (el: HTMLSpanElement | null) => void
 }) {
-  const style: CSSProperties = { transform: `translate(${word.x}px, ${word.y}px)` }
+  const style = {
+    transform: `translate(${word.x}px, ${word.y}px)`,
+    ...(lit && litScale !== undefined ? { '--lit-scale': litScale } : {}),
+  } as CSSProperties
   const rot: CSSProperties = {
     transform: `translate(-50%, -50%) rotate(${word.vertical ? -90 : 0}deg)`,
   }
