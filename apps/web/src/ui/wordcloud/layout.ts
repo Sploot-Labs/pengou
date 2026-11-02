@@ -27,7 +27,14 @@ export interface CloudWordInput {
   count: number
 }
 
-/** Dimensions d'un mot mesuré à 100 px de police, sans rotation. */
+/**
+ * Taille de police à laquelle les mots sont mesurés et rendus. La taille affichée passe par une
+ * mise à l'échelle (`fontSize / BASE_FONT_SIZE`) : changer la taille d'un mot ne relance ni la
+ * mise en page ni la mise en forme du texte.
+ */
+export const BASE_FONT_SIZE = 100
+
+/** Dimensions d'un mot mesuré à `BASE_FONT_SIZE` px de police, sans rotation. */
 export type Measure = (text: string) => { w: number; h: number }
 
 export interface PlacedWord extends CloudWordInput {
@@ -86,8 +93,8 @@ export function layoutCloud(
     const m = opts.measure(word.text)
     const vertical = word.key !== opts.firstKey && hash % 10 < 3
     let size = 34 + 122 * Math.sqrt(ratio)
-    let w = (m.w * size) / 100
-    let h = (m.h * size) / 100
+    let w = (m.w * size) / BASE_FONT_SIZE
+    let h = (m.h * size) / BASE_FONT_SIZE
     const cap = vertical ? MAX_VERTICAL_LENGTH : MAX_WORD_W
     if (w > cap) {
       const f = cap / w
