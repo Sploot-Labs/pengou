@@ -62,6 +62,56 @@ describe('BigWordCloud', () => {
     expect(screen.getByText(key).closest('.bigcloud__word')).toHaveAttribute('data-vertical', 'false')
   })
 
+  describe('coût du rendu', () => {
+    const rot = (text: string) => screen.getByText(text).closest('.bigcloud__rot') as HTMLElement
+
+    it("garde l'ordre des nœuds quand le classement change", () => {
+      const words = [
+        { key: 'a', text: 'a', count: 3 },
+        { key: 'b', text: 'b', count: 1 },
+        { key: 'c', text: 'c', count: 2 },
+      ]
+      const { container, rerender } = render(<BigWordCloud {...base} words={words} />)
+      const before = [...container.querySelectorAll('.bigcloud__word')]
+      rerender(<BigWordCloud {...base} words={[words[0], { ...words[1], count: 10 }, words[2]]} />)
+      const after = [...container.querySelectorAll('.bigcloud__word')]
+      expect(after).toHaveLength(3)
+      for (const [i, node] of after.entries()) expect(node).toBe(before[i])
+    })
+
+    it('relance la pulsation sans lire la géométrie', () => {
+      const { rerender } = render(<BigWordCloud {...base} words={[cafe, the]} />)
+      const offsetWidth = vi.spyOn(HTMLElement.prototype, 'offsetWidth', 'get')
+      rerender(<BigWordCloud {...base} words={[cafe, { ...the, count: 2 }]} />)
+      const text = screen.getByText('thé')
+      expect(text).toHaveClass('is-bump')
+      expect(text).not.toHaveClass('is-new')
+      rerender(<BigWordCloud {...base} words={[cafe, { ...the, count: 3 }]} />)
+      expect(text).toHaveClass('is-bump-alt')
+      expect(text).not.toHaveClass('is-bump')
+      expect(offsetWidth).not.toHaveBeenCalled()
+      offsetWidth.mockRestore()
+    })
+
+    it("porte la taille par une mise à l'échelle, police fixe", () => {
+      render(<BigWordCloud {...base} words={[cafe]} />)
+      expect(rot('café').style.transform).toMatch(/scale\(1\.56\)$/)
+      expect(screen.getByText('café').style.fontSize).toBe('')
+    })
+
+    it("n'anime que les variations de taille d'au moins 5 %", () => {
+      const lead = { key: 'lead', text: 'lead', count: 100 }
+      const other = { key: 'other', text: 'other', count: 50 }
+      const { rerender } = render(<BigWordCloud {...base} words={[lead, other]} />)
+      // Le maximum passe de 100 à 101 : « other » varie de moins de 1 %, appliqué directement.
+      rerender(<BigWordCloud {...base} words={[{ ...lead, count: 101 }, other]} />)
+      expect(rot('other').style.transition).toBe('none')
+      // « other » passe de 50 à 90 voix : plus de 20 %, la transition CSS joue.
+      rerender(<BigWordCloud {...base} words={[{ ...lead, count: 101 }, { ...other, count: 90 }]} />)
+      expect(rot('other').style.transition).toBe('')
+    })
+  })
+
   describe('moment de fin', () => {
     const five = [
       { key: 'a', text: 'a', count: 9 },

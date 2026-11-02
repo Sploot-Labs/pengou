@@ -3623,10 +3623,12 @@ p.source-credit {
   line-height: 1;
   font-weight: 600;
   color: var(--wc-text);
-  transition: font-size 700ms var(--ease-out), scale 600ms var(--ease-spring);
+  /* Taille fixe : la taille affichée vient de la mise à l'échelle de .bigcloud__rot (BASE_FONT_SIZE). */
+  font-size: 100px;
+  transition: scale 600ms var(--ease-spring);
 }
 .bigcloud__word[data-top="true"] .bigcloud__text {
-  text-shadow: 0 0 42px var(--wc-text);
+  text-shadow: 0 0 calc(42px / var(--word-scale, 1)) var(--wc-text);
 }
 .bigcloud__word[data-small="true"] .bigcloud__text {
   opacity: 0.62;
@@ -3637,12 +3639,21 @@ p.source-credit {
 .bigcloud__text.is-bump {
   animation: bigcloud-bump 450ms var(--ease-spring);
 }
+.bigcloud__text.is-bump-alt {
+  animation: bigcloud-bump-alt 450ms var(--ease-spring);
+}
 @keyframes bigcloud-pop {
   0% { transform: scale(0); opacity: 0; }
   60% { transform: scale(1.18); opacity: 1; }
   100% { transform: scale(1); }
 }
 @keyframes bigcloud-bump {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.14); filter: brightness(1.35); }
+  100% { transform: scale(1); }
+}
+/* Copie de bigcloud-bump : un autre nom relance l'animation sans reflow forcé. */
+@keyframes bigcloud-bump-alt {
   0% { transform: scale(1); }
   35% { transform: scale(1.14); filter: brightness(1.35); }
   100% { transform: scale(1); }
@@ -3677,7 +3688,9 @@ p.source-credit {
   filter: none;
 }
 .bigcloud--revealed .bigcloud__word[data-lit="true"] .bigcloud__text {
-  text-shadow: 0 0 42px var(--wc-text);
+  text-shadow: 0 0 calc(42px / var(--word-scale, 1)) var(--wc-text);
+  /* Un mot allumé de la traîne (data-small) n'est plus atténué. */
+  opacity: 1;
 }
 /* Agrandissement porté par le texte, dont l'origine est le centre du mot. `--lit-scale` vient de
    `litScales` (layout.ts) : au plus 1,1, réduit si deux mots allumés se toucheraient. */

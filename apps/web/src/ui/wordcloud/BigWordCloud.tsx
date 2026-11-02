@@ -1,5 +1,6 @@
 import { type CSSProperties, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import {
+  BASE_FONT_SIZE,
   badgePosition,
   type Box,
   type CloudWordInput,
@@ -28,6 +29,10 @@ const BADGE_FIRST_DELAY = 900
 const BADGE_STEP = 550
 const RECONNECT_WINDOW = 1000
 const LEAVE_DELAY = 400
+/** Variation relative de taille à partir de laquelle le changement est animé. */
+export const SIZE_ANIMATION_THRESHOLD = 0.05
+/** Durée de la transition de taille (`.bigcloud__rot` dans prototype.css). */
+const SIZE_ANIMATION_MS = 800
 /** Largeur estimée d'une pastille en px de scène : marges, rond du rang, puis le texte « n fois ». */
 const badgeWidth = (label: string) => 76 + 15 * label.length
 const BADGE_H = 56
@@ -48,6 +53,9 @@ export function BigWordCloud({
   // Dernier compteur connu de chaque mot (pour la pulsation).
   const countsRef = useRef(new Map<string, number>())
   const textRefs = useRef(new Map<string, HTMLSpanElement>())
+  // Rang d'arrivée de chaque mot : l'ordre des nœuds ne suit pas le classement, sinon React
+  // déplacerait des dizaines de mots à chaque vote (recalcul complet et animations relancées).
+  const arrivalRef = useRef(new Map<string, number>())
 
   const sorted = useMemo(() => sortWords(words), [words])
   if (firstKeyRef.current === undefined && sorted[0]) firstKeyRef.current = sorted[0].key
@@ -178,7 +186,8 @@ export function BigWordCloud({
   }, [revealed])
 
   // Éclosion : la classe `is-new` est posée au montage du mot (l'animation ne joue qu'une fois).
-  // Pulsation : la classe est retirée, un reflow est forcé, puis elle est reposée.
+  // Pulsation : alternance entre deux classes aux animations identiques. Changer de nom d'animation
+  // la relance sans lire la géométrie (une lecture forcerait le recalcul de tout le nuage).
   useLayoutEffect(() => {
     if (reducedMotion) {
       for (const w of placed) countsRef.current.set(w.key, w.count)
@@ -190,9 +199,9 @@ export function BigWordCloud({
       if (before === undefined || w.count <= before) continue
       const el = textRefs.current.get(w.key)
       if (!el) continue
-      el.classList.remove('is-new', 'is-bump')
-      void el.offsetWidth
-      el.classList.add('is-bump')
+      const next = el.classList.contains('is-bump') ? 'is-bump-alt' : 'is-bump'
+      el.classList.remove('is-new', 'is-bump', 'is-bump-alt')
+      el.classList.add(next)
     }
   }, [placed, reducedMotion])
 
@@ -216,7 +225,7 @@ export function BigWordCloud({
   return (
     <div className={cls} ref={frameRef}>
       <div className="bigcloud__stage" aria-hidden="true" style={{ transform: `scale(${scale})` }}>
-        {placed.map((w) => (
+        {inArrivalOrder(placed, arrivalRef.current).map((w) => (
           <CloudWord
             key={w.key}
             word={w}
@@ -262,6 +271,11 @@ export function BigWordCloud({
   )
 }
 
+function inArrivalOrder(words: PlacedWord[], arrival: Map<string, number>): PlacedWord[] {
+  for (const w of words) if (!arrival.has(w.key)) arrival.set(w.key, arrival.size)
+  return [...words].sort((a, b) => (arrival.get(a.key) ?? 0) - (arrival.get(b.key) ?? 0))
+}
+
 function CloudWord({
   word,
   lit,
@@ -279,9 +293,26 @@ function CloudWord({
     transform: `translate(${word.x}px, ${word.y}px)`,
     ...(lit && litScale !== undefined ? { '--lit-scale': litScale } : {}),
   } as CSSProperties
-  const rot: CSSProperties = {
-    transform: `translate(-50%, -50%) rotate(${word.vertical ? -90 : 0}deg)`,
-  }
+  // Taille portée par la mise à l'échelle : le texte reste rendu à BASE_FONT_SIZE px.
+  // `--word-scale` sert aux halos, exprimés en px affichés.
+  const k = word.fontSize / BASE_FONT_SIZE
+  // À chaque mise à jour, presque tous les mots varient de quelques pour cent (nouveau maximum,
+  // densité) : ces variations sont appliquées directement, seule une vraie variation est animée.
+  // Une animation en cours n'est pas coupée.
+  const sizeRef = useRef<{ k: number; until: number } | null>(null)
+  const prev = sizeRef.current
+  const big = prev !== null && Math.abs(k - prev.k) / prev.k >= SIZE_ANIMATION_THRESHOLD
+  const animate = big || (prev !== null && Date.now() < prev.until)
+  useLayoutEffect(() => {
+    const p = sizeRef.current
+    if (p && p.k === k) return
+    sizeRef.current = { k, until: big ? Date.now() + SIZE_ANIMATION_MS : (p?.until ?? 0) }
+  })
+  const rot = {
+    transform: `translate(-50%, -50%) rotate(${word.vertical ? -90 : 0}deg) scale(${k})`,
+    ...(animate ? {} : { transition: 'none' }),
+    '--word-scale': k,
+  } as CSSProperties
   return (
     <div
       className={`bigcloud__word bigcloud__word--c${word.colorIndex}${leaving ? ' is-leaving' : ''}`}
@@ -293,11 +324,7 @@ function CloudWord({
       data-vertical={word.vertical}
     >
       <div className="bigcloud__rot" style={rot}>
-        <span
-          className="bigcloud__text is-new"
-          style={{ fontSize: `${word.fontSize}px` }}
-          ref={register}
-        >
+        <span className="bigcloud__text is-new" ref={register}>
           {word.text}
         </span>
       </div>
