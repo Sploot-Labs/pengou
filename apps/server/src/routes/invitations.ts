@@ -29,6 +29,7 @@ function mapAcceptError(code: string): { status: number; error: string } {
     case 'not_pending': return { status: 409, error: 'Cette invitation a déjà été utilisée ou révoquée.' }
     case 'expired': return { status: 410, error: 'Cette invitation a expiré.' }
     case 'already_member': return { status: 409, error: 'Vous êtes déjà membre de ce workspace.' }
+    case 'inviter_revoked': return { status: 409, error: "Cette invitation n'est plus valable." }
     default: return { status: 400, error: 'Invitation invalide.' }
   }
 }
@@ -61,7 +62,9 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: Deps): void
   app.get<{ Params: { tenantId: string } }>('/api/workspaces/:tenantId/invitations', guard, async (request) => {
     const { tenantId } = request.workspace!
     const invitations = await withTenantTx(appDb, { tenantId }, (scope) => listInvitations(scope, { status: 'pending' }))
-    return { invitations }
+    // Jamais de jeton dans la liste : il n'est remis qu'à la création et au renvoi, à celui qui en
+    // devient l'auteur. Sinon tout gestionnaire lirait les jetons des invitations des autres.
+    return { invitations: invitations.map(({ token: _token, ...rest }) => rest) }
   })
 
   app.post<{ Params: { tenantId: string } }>('/api/workspaces/:tenantId/invitations', guard, async (request, reply) => {
@@ -83,7 +86,7 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: Deps): void
       const token = newInvitationToken()
       const expiresAt = invitationExpiry()
       const invitation = await withTenantTx(appDb, { tenantId }, (scope) =>
-        resendInvitation(scope, request.params.id, { token, expiresAt }))
+        resendInvitation(scope, request.params.id, { token, expiresAt, invitedBy: request.user.id }))
       if (!invitation) return reply.code(404).send({ error: 'Invitation en attente introuvable.' })
       return { invitation }
     })

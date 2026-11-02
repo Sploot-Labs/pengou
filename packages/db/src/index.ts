@@ -13,7 +13,7 @@ export {
 } from './workspace.js'
 export {
   createInvitation, listInvitations, getInvitationById, revokeInvitation, resendInvitation,
-  getInvitationByToken, acceptInvitation, newInvitationToken, invitationExpiry, InvitationError,
+  revokePendingInvitationsBy, getInvitationByToken, acceptInvitation, newInvitationToken, invitationExpiry, InvitationError,
   INVITATION_TTL_MS, type Invitation, type InvitationWithWorkspace, type AcceptCode,
 } from './repos/invitation.js'
 export {

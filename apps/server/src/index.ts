@@ -8,6 +8,7 @@ import { readCatalog } from '@splootlabs/library'
 import { createAuth, enabledSocialProviders } from '@splootlabs/auth'
 import { createEngine, generatePin } from '@splootlabs/game'
 import { buildServer } from './app.js'
+import { applyAppRolePassword } from './app-role.js'
 import { registerAuth } from './auth-plugin.js'
 import { registerEditor } from './editor.js'
 import { attachRealtime } from './realtime.js'
@@ -23,7 +24,9 @@ const { db: systemDb, client } = createDb(config.databaseUrl)
 // ses GRANTs) et construire le handle `appDb` (soumis au RLS, GUC par transaction via withTenantTx).
 const APP_ROLE = 'app_role'
 await ensureAppRole(client, APP_ROLE)
-await setAppRolePassword(client, APP_ROLE, config.appDbPassword)
+// Mot de passe posé seulement si la connexion app_role est dérivée de DATABASE_URL : avec
+// APP_DATABASE_URL, le rôle et son mot de passe sont gérés par l'exploitant (voir app-role.ts).
+await applyAppRolePassword(config, (password) => setAppRolePassword(client, APP_ROLE, password))
 
 // Migration au boot (P1-9) : pratique en mono-instance ; désactivable (MIGRATE_ON_BOOT=false)
 // au profit d'une étape dédiée (`pnpm --filter @splootlabs/server migrate`) en multi-instance.

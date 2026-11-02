@@ -1,4 +1,4 @@
-import { and, count, eq, like, or } from 'drizzle-orm'
+import { and, eq, like, or } from 'drizzle-orm'
 import type { Role } from '@splootlabs/shared'
 import type { Db } from './client.js'
 import type { TenantScope } from './tenant.js'
@@ -131,11 +131,17 @@ export async function getMemberRole(scope: TenantScope, userId: string): Promise
   return m ? (m.role as Role) : null
 }
 
-/** Nombre d'owners du workspace — base de la garde « au moins un owner ». */
+/**
+ * Nombre d'owners du workspace, base de la garde « au moins un owner ».
+ * Verrouille les lignes owner (`FOR UPDATE`) : en READ COMMITTED, une seconde transaction
+ * attend la première puis relit les lignes, et ne compte plus un owner déjà rétrogradé.
+ * (Postgres refuse `FOR UPDATE` avec un agrégat, d'où le décompte côté JS.)
+ */
 export async function countOwners(scope: TenantScope): Promise<number> {
-  const [row] = await scope.db.select({ n: count() }).from(schema.membership)
+  const rows = await scope.db.select({ id: schema.membership.id }).from(schema.membership)
     .where(and(eq(schema.membership.tenantId, scope.tenantId), eq(schema.membership.role, 'owner')))
-  return Number(row?.n ?? 0)
+    .for('update')
+  return rows.length
 }
 
 /** Change le rôle d'un membre. Renvoie le membership mis à jour, ou null s'il n'existe pas. */

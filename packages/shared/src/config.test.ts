@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { loadConfig } from './config'
+import { loadConfig, DEFAULT_APP_DB_PASSWORD } from './config'
 
 describe('loadConfig', () => {
   it('par défaut : single-tenant, Postgres local, scaling mémoire', () => {
@@ -60,7 +60,7 @@ describe('loadConfig', () => {
 
   it('accepte la production quand BETTER_AUTH_SECRET est fourni (32+ caractères)', () => {
     const secret = 'a'.repeat(32)
-    const cfg = loadConfig({ NODE_ENV: 'production', BETTER_AUTH_SECRET: secret })
+    const cfg = loadConfig({ NODE_ENV: 'production', BETTER_AUTH_SECRET: secret, APP_DB_PASSWORD: 'autre' })
     expect(cfg.authSecret).toBe(secret)
   })
 })
@@ -79,6 +79,30 @@ describe('loadConfig — inactivité/balayage', () => {
   })
 })
 
+describe("loadConfig, mot de passe d'app_role en production", () => {
+  const prod = { NODE_ENV: 'production', BETTER_AUTH_SECRET: 'a'.repeat(32) }
+
+  it('refuse la production sans APP_DB_PASSWORD', () => {
+    expect(() => loadConfig(prod)).toThrow(/APP_DB_PASSWORD doit être défini en production/)
+  })
+
+  it('refuse la production avec le mot de passe par défaut', () => {
+    expect(() => loadConfig({ ...prod, APP_DB_PASSWORD: DEFAULT_APP_DB_PASSWORD })).toThrow(/APP_DB_PASSWORD/)
+  })
+
+  it('accepte la production avec un mot de passe personnalisé', () => {
+    expect(loadConfig({ ...prod, APP_DB_PASSWORD: 'autre' }).appDbPassword).toBe('autre')
+  })
+
+  it('accepte la production quand APP_DATABASE_URL est fourni', () => {
+    expect(() => loadConfig({ ...prod, APP_DATABASE_URL: 'postgres://app_role:x@db:5432/pengou' })).not.toThrow()
+  })
+
+  it('ne dit rien en développement sans APP_DB_PASSWORD', () => {
+    expect(loadConfig({}).appDbPassword).toBe(DEFAULT_APP_DB_PASSWORD)
+  })
+})
+
 describe('loadConfig, plafond de joueurs par partie', () => {
   it('MAX_PLAYERS_PER_SESSION vaut 640 par défaut', () => {
     expect(loadConfig({}).maxPlayersPerSession).toBe(640)
@@ -90,5 +114,19 @@ describe('loadConfig, plafond de joueurs par partie', () => {
 
   it('MAX_PLAYERS_PER_SESSION refuse 0, un négatif et un décimal', () => {
     for (const v of ['0', '-5', '2.5']) expect(() => loadConfig({ MAX_PLAYERS_PER_SESSION: v })).toThrow()
+  })
+})
+
+describe("loadConfig, budget d'échecs de PIN", () => {
+  it('PIN_FAILURE_MAX vaut 100 par défaut', () => {
+    expect(loadConfig({}).pinFailureMax).toBe(100)
+  })
+
+  it('PIN_FAILURE_MAX est lu et coercé en nombre', () => {
+    expect(loadConfig({ PIN_FAILURE_MAX: '250' }).pinFailureMax).toBe(250)
+  })
+
+  it('PIN_FAILURE_MAX refuse 0, un négatif et un décimal', () => {
+    for (const v of ['0', '-5', '2.5']) expect(() => loadConfig({ PIN_FAILURE_MAX: v })).toThrow()
   })
 })
