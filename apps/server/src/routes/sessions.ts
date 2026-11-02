@@ -1,5 +1,6 @@
 import type { FastifyInstance } from 'fastify'
 import { listSessions, getSessionReport, withTenantTx, type SessionReport, type Db } from '@splootlabs/db'
+import { pollPercent } from '@splootlabs/quiz'
 import type { AppConfig } from '@splootlabs/shared'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
 import { toCsv } from '../csv.js'
@@ -53,6 +54,8 @@ function buildReportCsv(report: SessionReport): string {
   for (const q of report.questions) {
     if (q.wordcloud) {
       rows.push([q.orderIndex + 1, q.prompt, q.wordcloud.participants, null, null])
+    } else if (q.poll) {
+      rows.push([q.orderIndex + 1, q.prompt, q.poll.voters, null, null])
     } else {
       rows.push([q.orderIndex + 1, q.prompt, q.answerCount, q.correctCount, q.avgTimeMs])
     }
@@ -68,6 +71,16 @@ function buildReportCsv(report: SessionReport): string {
     ])
     rows.push(['Mot', 'Occurrences'])
     for (const w of q.wordcloud.words) rows.push([w.text, w.count])
+  }
+
+  // Une section par sondage : une ligne par choix, dans l'ordre de création.
+  for (const q of report.questions) {
+    if (!q.poll) continue
+    rows.push([])
+    const { voters } = q.poll
+    rows.push([`Sondage : ${q.prompt} (${voters} participant${voters > 1 ? 's' : ''})`])
+    rows.push(['Choix', 'Votes', 'Pourcentage'])
+    for (const o of q.poll.options) rows.push([o.label, o.votes, pollPercent(o.votes, voters)])
   }
 
   return toCsv(rows, { bom: true })

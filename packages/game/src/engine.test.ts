@@ -921,3 +921,98 @@ describe('game engine : nuage de mots', () => {
     expect(res.reason).toBe('réponse déjà soumise pour cette question')
   })
 })
+
+const pollSingle: EngineQuestion = {
+  id: 'p1',
+  type: 'poll',
+  prompt: 'Thé ou café ?',
+  timeLimit: 30,
+  readingTime: 0,
+  basePoints: 0,
+  payload: { options: [{ label: 'Thé' }, { label: 'Café' }, { label: 'Eau' }], multiple: false },
+}
+const pollMulti: EngineQuestion = {
+  ...pollSingle,
+  id: 'p2',
+  payload: { options: [{ label: 'Thé' }, { label: 'Café' }, { label: 'Eau' }], multiple: true },
+}
+
+describe('game engine : sondage', () => {
+  const INVALID = 'réponse invalide pour ce type de question'
+  async function setupPoll(questions: EngineQuestion[]) {
+    const store = new MemorySessionStore()
+    const engine = createEngine({ store, now: makeClock(0).now, genPin: makePinGen(['123456']), genId: makeIdGen('id') })
+    const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions })
+    const { player: alice } = await engine.addPlayer(session.id, 'Alice')
+    const { player: bob } = await engine.addPlayer(session.id, 'Bob')
+    await engine.startQuestion(session.id)
+    return { engine, session, alice, bob }
+  }
+
+  it('accepte un vote puis refuse le second', async () => {
+    const { engine, session, alice } = await setupPoll([pollSingle])
+    expect((await engine.submitAnswer(session.id, alice.id, { optionIndexes: [1] })).accepted).toBe(true)
+    const again = await engine.submitAnswer(session.id, alice.id, { optionIndexes: [0] })
+    expect(again).toEqual({ accepted: false, reason: 'réponse déjà soumise pour cette question' })
+    const stored = (await engine.getSession(session.id)).answers[0]![alice.id]!
+    expect(stored.correct).toBe(false)
+    expect(stored.points).toBe(0)
+  })
+
+  it.each([[[0, 0]], [[5]], [[0, 1]]])('refuse %j en choix unique puis accepte un vote valide', async (optionIndexes) => {
+    const { engine, session, alice } = await setupPoll([pollSingle])
+    const bad = await engine.submitAnswer(session.id, alice.id, { optionIndexes })
+    expect(bad).toEqual({ accepted: false, reason: INVALID })
+    expect((await engine.submitAnswer(session.id, alice.id, { optionIndexes: [2] })).accepted).toBe(true)
+  })
+
+  it('allConnectedAnswered : true en choix unique, false en choix multiple', async () => {
+    const single = await setupPoll([pollSingle])
+    await single.engine.submitAnswer(single.session.id, single.alice.id, { optionIndexes: [0] })
+    await single.engine.submitAnswer(single.session.id, single.bob.id, { optionIndexes: [1] })
+    expect(single.engine.allConnectedAnswered(await single.engine.getSession(single.session.id))).toBe(true)
+    const multi = await setupPoll([pollMulti])
+    await multi.engine.submitAnswer(multi.session.id, multi.alice.id, { optionIndexes: [0] })
+    await multi.engine.submitAnswer(multi.session.id, multi.bob.id, { optionIndexes: [1] })
+    expect(multi.engine.allConnectedAnswered(await multi.engine.getSession(multi.session.id))).toBe(false)
+  })
+
+  it('pollView, questionResult et reveal', async () => {
+    const { engine, session, alice, bob } = await setupPoll([pollMulti])
+    await engine.submitAnswer(session.id, alice.id, { optionIndexes: [0, 2] })
+    await engine.submitAnswer(session.id, bob.id, { optionIndexes: [2] })
+    const current = await engine.getSession(session.id)
+    expect(engine.pollView(current)).toEqual({
+      questionId: 'p2',
+      multiple: true,
+      voters: 2,
+      options: [
+        { label: 'Thé', votes: 1 },
+        { label: 'Café', votes: 0 },
+        { label: 'Eau', votes: 2 },
+      ],
+    })
+    const result = engine.questionResult(current)
+    expect(result.correct).toBeNull()
+    expect(result.poll?.voters).toBe(2)
+    const revealed = await engine.reveal(session.id)
+    expect(revealed.players[alice.id]!.score).toBe(0)
+    expect(revealed.players[bob.id]!.score).toBe(0)
+  })
+
+  it('pollView est null hors sondage', async () => {
+    const { engine, session } = await setupPoll([mcqQuestion])
+    expect(engine.pollView(await engine.getSession(session.id))).toBeNull()
+  })
+
+  it('hasScoredQuestions et isCurrentQuestionScored', async () => {
+    const { engine, session } = await setupPoll([pollSingle, mcqQuestion])
+    const s = await engine.getSession(session.id)
+    expect(engine.isCurrentQuestionScored(s)).toBe(false)
+    expect(engine.hasScoredQuestions(s)).toBe(true)
+    s.currentIndex = 1
+    expect(engine.isCurrentQuestionScored(s)).toBe(true)
+    const none = await setupPoll([pollSingle, wordcloudQuestion])
+    expect(none.engine.hasScoredQuestions(await none.engine.getSession(none.session.id))).toBe(false)
+  })
+})

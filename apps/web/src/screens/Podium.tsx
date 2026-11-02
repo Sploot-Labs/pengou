@@ -51,6 +51,44 @@ export interface PodiumViewProps {
   sources?: ContentSource[]
 }
 
+/** Pitch de conversion en bas d'écran du grand écran. */
+export function ConversionFooter() {
+  return (
+    <p className="podium-convert">
+      <a href="#cloud" onClick={(e) => e.preventDefault()}>
+        Créez votre quiz gratuitement, aucune installation
+      </a>
+      , ou{' '}
+      <a href="#host" onClick={(e) => e.preventDefault()}>
+        hébergez votre propre instance
+      </a>
+      , c'est open-source.{' '}
+      <a href="#source" onClick={(e) => e.preventDefault()}>
+        Voir le code
+      </a>
+    </p>
+  )
+}
+
+export interface ClosingViewProps {
+  quizTitle?: string
+  headingRef?: Ref<HTMLHeadingElement>
+  /** `room` : grand écran et hôte (vouvoiement) ; `player` : téléphone (tutoiement). */
+  audience: 'room' | 'player'
+}
+
+/** Fin de partie d'un quiz sans aucune question notée : un remerciement, ni podium ni score. */
+export function ClosingView({ quizTitle, headingRef, audience }: ClosingViewProps) {
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <h1 className="ab-hero-title" ref={headingRef} tabIndex={-1}>
+        {audience === 'room' ? 'Merci pour vos réponses' : 'Merci pour tes réponses'}
+      </h1>
+      {quizTitle && <p style={{ color: 'var(--ink-dim)' }}>{quizTitle}</p>}
+    </div>
+  )
+}
+
 export function PodiumView({
   quizTitle,
   top,
@@ -126,21 +164,7 @@ export function PodiumView({
 
       <PodiumCredits sources={sources} />
 
-      {showConversionFooter && (
-        <p className="podium-convert">
-          <a href="#cloud" onClick={(e) => e.preventDefault()}>
-            Créez votre quiz gratuitement, aucune installation
-          </a>
-          , ou{' '}
-          <a href="#host" onClick={(e) => e.preventDefault()}>
-            hébergez votre propre instance
-          </a>
-          , c'est open-source.{' '}
-          <a href="#source" onClick={(e) => e.preventDefault()}>
-            Voir le code
-          </a>
-        </p>
-      )}
+      {showConversionFooter && <ConversionFooter />}
     </div>
   )
 }

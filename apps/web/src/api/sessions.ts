@@ -32,6 +32,7 @@ export interface SessionReportQuestion {
   correctCount: number | null
   avgTimeMs: number | null
   wordcloud: { participants: number; totalWords: number; words: { text: string; count: number }[] } | null
+  poll: { voters: number; multiple: boolean; options: { label: string; votes: number }[] } | null
 }
 
 export interface SessionReportPlayer {

@@ -18,6 +18,8 @@ import type { ContentSource } from '../api/quizzes'
 export interface PodiumPayload {
   top: RankingEntry[]
   sources: ContentSource[]
+  /** Faux quand le quiz ne contient aucune question notée (`top` est alors vide). */
+  hasScoredQuestions: boolean
 }
 
 /** Entrée de classement diffusée par `scoreboard` / `podium`. */
@@ -53,6 +55,16 @@ export interface WordcloudView {
   participants: number
   totalWords: number
   truncated: boolean
+}
+
+/** Champ `poll` de `question:reveal` pour un sondage (grand écran et hôte) : votes par option,
+ * dans l'ordre des choix, et nombre de joueurs ayant voté (base du pourcentage). Copie de la
+ * `PollView` du moteur. */
+export interface PollView {
+  questionId: string
+  multiple: boolean
+  voters: number
+  options: { label: string; votes: number }[]
 }
 
 /** Diffusé quand l'hôte relance une partie depuis le podium (une variante par rôle). */

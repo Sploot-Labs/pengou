@@ -8,7 +8,7 @@ import { user } from './auth-schema.js'
 export const planEnum = pgEnum('plan', ['free', 'pro'])
 export const roleEnum = pgEnum('role', ['owner', 'admin', 'member'])
 export const invitationStatusEnum = pgEnum('invitation_status', ['pending', 'accepted', 'revoked'])
-export const questionTypeEnum = pgEnum('question_type', ['mcq', 'truefalse', 'text', 'slider', 'wordcloud'])
+export const questionTypeEnum = pgEnum('question_type', ['mcq', 'truefalse', 'text', 'slider', 'wordcloud', 'poll'])
 export const libraryDifficultyEnum = pgEnum('library_difficulty', ['facile', 'moyen', 'difficile'])
 export const libraryAudienceEnum = pgEnum('library_audience', ['enfants', 'adultes', 'tous'])
 export const libraryOriginEnum = pgEnum('library_origin', ['builtin', 'instance'])

@@ -252,3 +252,65 @@ describe('getSessionReport avec un nuage de mots', () => {
     expect(cloud.wordcloud).toEqual({ participants: 0, totalWords: 0, words: [] })
   })
 })
+
+describe('getSessionReport avec un sondage', () => {
+  let scopeP: ReturnType<typeof tenantScope>
+  let sessionP: string
+  let qMcq: string, qPoll: string, qEmpty: string
+
+  beforeAll(async () => {
+    const [t] = await ctx.db.insert(schema.tenant).values({ name: 'P' }).returning()
+    const [u] = await ctx.db.insert(schema.user)
+      .values({ id: crypto.randomUUID(), email: 'host@p.fr', name: 'Host P', emailVerified: false }).returning()
+    scopeP = tenantScope(ctx.db, t.id)
+    const quiz = await createQuiz(scopeP, { ownerId: u.id, title: 'Quiz P' })
+    const [m] = await ctx.db.insert(schema.question).values({
+      quizId: quiz.id, tenantId: t.id, type: 'mcq', prompt: 'QCM', timeLimit: 20, orderIndex: 0,
+      payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+    }).returning()
+    qMcq = m.id
+    const [p] = await ctx.db.insert(schema.question).values({
+      quizId: quiz.id, tenantId: t.id, type: 'poll', prompt: 'Votre humeur', timeLimit: 20, orderIndex: 1,
+      payload: { options: [{ label: 'Oui' }, { label: 'Non' }, { label: 'Peut-être' }], multiple: true },
+    }).returning()
+    qPoll = p.id
+    const [e] = await ctx.db.insert(schema.question).values({
+      quizId: quiz.id, tenantId: t.id, type: 'poll', prompt: 'Sondage vide', timeLimit: 20, orderIndex: 2,
+      payload: { options: [{ label: 'X' }, { label: 'Y' }], multiple: false },
+    }).returning()
+    qEmpty = e.id
+
+    const s = await createGameSession(scopeP, { quizId: quiz.id, hostId: u.id, pin: '400001' })
+    sessionP = s!.id
+    const pa = (await addSessionPlayer(ctx.db, sessionP, { nickname: 'A', joinToken: 'tok-pa' })).id
+    const pb = (await addSessionPlayer(ctx.db, sessionP, { nickname: 'B', joinToken: 'tok-pb' })).id
+    await recordAnswer(ctx.db, { sessionId: sessionP, questionId: qMcq, playerId: pa, answer: { choice: 0 }, timeMs: 2000, isCorrect: true, points: 900 })
+    await recordAnswer(ctx.db, { sessionId: sessionP, questionId: qPoll, playerId: pa, answer: { optionIndexes: [0, 1] }, timeMs: 1000, isCorrect: false, points: 0 })
+    await recordAnswer(ctx.db, { sessionId: sessionP, questionId: qPoll, playerId: pb, answer: { optionIndexes: [0] }, timeMs: 1500, isCorrect: false, points: 0 })
+    await setSessionStatus(ctx.db, sessionP, 'ended')
+  }, 60_000)
+
+  it('exclut le sondage des compteurs joueurs', async () => {
+    const report = await getSessionReport(scopeP, sessionP)
+    expect(report!.players.find((p) => p.nickname === 'A')).toMatchObject({ answerCount: 1, correctCount: 1 })
+    expect(report!.players.find((p) => p.nickname === 'B')).toMatchObject({ answerCount: 0, correctCount: 0 })
+  })
+
+  it('répartit les votes du sondage', async () => {
+    const report = await getSessionReport(scopeP, sessionP)
+    const poll = report!.questions.find((q) => q.questionId === qPoll)!
+    expect(poll).toMatchObject({ correctCount: null, avgTimeMs: null, answerCount: 2, wordcloud: null })
+    expect(poll.poll).toEqual({
+      voters: 2, multiple: true,
+      options: [{ label: 'Oui', votes: 2 }, { label: 'Non', votes: 1 }, { label: 'Peut-être', votes: 0 }],
+    })
+    expect(report!.questions.find((q) => q.questionId === qMcq)!.poll).toBeNull()
+  })
+
+  it('un sondage sans vote a zéro votant et toutes les options à 0', async () => {
+    const report = await getSessionReport(scopeP, sessionP)
+    const empty = report!.questions.find((q) => q.questionId === qEmpty)!
+    expect(empty.poll).toEqual({ voters: 0, multiple: false, options: [{ label: 'X', votes: 0 }, { label: 'Y', votes: 0 }] })
+    expect(empty.answerCount).toBe(0)
+  })
+})

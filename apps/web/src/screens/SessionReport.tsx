@@ -1,3 +1,4 @@
+import { pollPercent } from '@splootlabs/quiz'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ApiError } from '../api/client'
@@ -5,6 +6,7 @@ import {
   getSessionReport,
   sessionCsvUrl,
   type SessionReport as SessionReportData,
+  type SessionReportQuestion,
   type SessionStatus,
 } from '../api/sessions'
 import { Button, Logo, PinDisplay } from '../ui'
@@ -75,6 +77,26 @@ function wordcloudSummary(cloud: {
     .slice(0, 4)
     .map((w) => `${w.text} (${w.count})`)
     .join(', ')}`
+}
+
+/** Sondage : participation puis une ligne par choix, dans l'ordre du quiz. */
+function PollSummary({ poll }: { poll: NonNullable<SessionReportQuestion['poll']> }) {
+  return (
+    <>
+      <span>{`Sondage, ${poll.voters} participant${poll.voters > 1 ? 's' : ''}`}</span>
+      {poll.voters === 0 ? (
+        <p style={{ margin: 0 }}>Aucun vote</p>
+      ) : (
+        <ul style={{ margin: 0, paddingLeft: 'var(--space-4)' }}>
+          {poll.options.map((o, i) => (
+            <li key={`${i}-${o.label}`}>
+              {`${o.label} : ${o.votes} vote${o.votes > 1 ? 's' : ''} (${pollPercent(o.votes, poll.voters)} %)`}
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  )
 }
 
 export function SessionReport() {
@@ -156,7 +178,7 @@ export function SessionReport() {
   // "most missed" would be inventing a problem that doesn't exist. Ties (two
   // questions sharing the worst rate) are ALL flagged, not an arbitrary one.
   const answeredRates = questions
-    .filter((q) => q.wordcloud === null)
+    .filter((q) => q.wordcloud === null && q.poll === null)
     .map((q) => successRate(q.correctCount, q.answerCount))
     .filter((rate): rate is number => rate !== null)
   const worstRate = answeredRates.length > 0 ? Math.min(...answeredRates) : null
@@ -277,7 +299,7 @@ export function SessionReport() {
                 <tbody>
                   {questions.map((q) => {
                     const rate = successRate(q.correctCount, q.answerCount)
-                    const isWorst = highlightWorst && q.wordcloud === null && rate === worstRate
+                    const isWorst = highlightWorst && q.wordcloud === null && q.poll === null && rate === worstRate
                     return (
                       <tr key={q.questionId}>
                         <td>{q.orderIndex + 1}</td>
@@ -292,7 +314,9 @@ export function SessionReport() {
                         <td>
                           {q.wordcloud !== null
                             ? wordcloudSummary(q.wordcloud)
-                            : rate === null
+                            : q.poll !== null
+                              ? <PollSummary poll={q.poll} />
+                              : rate === null
                               ? '(aucune réponse)'
                               : `${Math.round(rate * 100)} % (${q.correctCount}/${q.answerCount})`}
                         </td>

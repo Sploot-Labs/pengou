@@ -70,6 +70,7 @@ export function aggregateWords(
 
 export const wordcloud: QuestionTypeDef<WordcloudPayload, WordcloudSubmission> = {
   key: 'wordcloud',
+  scored: false,
   validatePayload: () => ({}),
   validateAnswer: (raw) => submissionSchema.parse(raw),
   playerView: () => ({}),

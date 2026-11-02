@@ -11,6 +11,7 @@ export type {
   PlayerQuestionView,
   ReadingView,
   QuestionResult,
+  PollView,
   ProgressInfo,
   ReconnectResult,
 } from './engine.js'

@@ -1,5 +1,5 @@
 import { and, desc, eq, inArray, sql } from 'drizzle-orm'
-import { aggregateWords } from '@splootlabs/quiz'
+import { aggregateWords, tallyPoll, type PollAnswer, type PollPayload } from '@splootlabs/quiz'
 import { schema } from '../index.js'
 import { loadWordcloudRemoved } from './session.js'
 import type { TenantScope } from '../tenant.js'
@@ -31,12 +31,14 @@ export type SessionReport = {
     type: (typeof schema.question.$inferSelect)['type']
     orderIndex: number
     answerCount: number
-    /** null pour un nuage de mots (pas de bonne réponse). */
+    /** null pour un nuage de mots et un sondage (pas de bonne réponse). */
     correctCount: number | null
-    /** null pour un nuage de mots, ou sans réponse. */
+    /** null pour un nuage de mots et un sondage, ou sans réponse. */
     avgTimeMs: number | null
     /** Agrégat des mots pour un nuage, null pour les autres types. */
     wordcloud: { participants: number; totalWords: number; words: { text: string; count: number }[] } | null
+    /** Répartition des votes pour un sondage, null pour les autres types. */
+    poll: { voters: number; multiple: boolean; options: { label: string; votes: number }[] } | null
   }[]
   players: {
     playerId: string
@@ -126,6 +128,7 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
       prompt: schema.question.prompt,
       type: schema.question.type,
       orderIndex: schema.question.orderIndex,
+      payload: schema.question.payload,
       answerCount: sql<number>`count(${schema.answerRecord.id})`.mapWith(Number),
       correctCount: sql<number>`count(${schema.answerRecord.id}) filter (where ${schema.answerRecord.isCorrect})`.mapWith(Number),
       avgTimeMs: sql<number | null>`avg(${schema.answerRecord.timeMs})`.mapWith((v) => (v === null ? null : Number(v))),
@@ -166,13 +169,51 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
       wordsByQuestion.set(r.questionId, list)
     }
   }
-  const questions: SessionReport['questions'] = questionRows.map((q) => {
-    if (q.type !== 'wordcloud') return { ...q, wordcloud: null }
+
+  // Sondages : indices de vote lus une fois pour la session, dépouillés par tallyPoll.
+  const pollIds = questionRows.filter((q) => q.type === 'poll').map((q) => q.questionId)
+  const pollAnswers = new Map<string, PollAnswer[]>()
+  if (pollIds.length > 0) {
+    const rows = await scope.db
+      .select({ questionId: schema.answerRecord.questionId, answer: schema.answerRecord.answer })
+      .from(schema.answerRecord)
+      .where(and(
+        eq(schema.answerRecord.sessionId, sessionId),
+        eq(schema.answerRecord.tenantId, scope.tenantId),
+        inArray(schema.answerRecord.questionId, pollIds),
+      ))
+    for (const r of rows) {
+      const idx = (r.answer as { optionIndexes?: unknown } | null)?.optionIndexes
+      if (!Array.isArray(idx)) continue
+      const list = pollAnswers.get(r.questionId) ?? []
+      list.push({ optionIndexes: idx.filter((i): i is number => typeof i === 'number') })
+      pollAnswers.set(r.questionId, list)
+    }
+  }
+  const questions: SessionReport['questions'] = questionRows.map(({ payload, ...q }) => {
+    if (q.type === 'poll') {
+      const p = payload as PollPayload
+      const tally = tallyPoll(p.options.length, pollAnswers.get(q.questionId) ?? [])
+      return {
+        ...q,
+        answerCount: tally.voters,
+        correctCount: null,
+        avgTimeMs: null,
+        wordcloud: null,
+        poll: {
+          voters: tally.voters,
+          multiple: p.multiple === true,
+          options: p.options.map((o, i) => ({ label: o.label, votes: tally.votes[i] ?? 0 })),
+        },
+      }
+    }
+    if (q.type !== 'wordcloud') return { ...q, wordcloud: null, poll: null }
     const agg = aggregateWords(wordsByQuestion.get(q.questionId) ?? [], new Set(removed[q.questionId] ?? []))
     return {
       ...q,
       correctCount: null,
       avgTimeMs: null,
+      poll: null,
       wordcloud: {
         participants: agg.participants,
         totalWords: agg.totalWords,
@@ -196,8 +237,8 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
     .leftJoin(schema.answerRecord, and(
       eq(schema.answerRecord.playerId, schema.sessionPlayer.id),
       eq(schema.answerRecord.tenantId, scope.tenantId),
-      // Les nuages de mots ne comptent ni comme réponse donnée ni comme réponse correcte.
-      sql`${schema.answerRecord.questionId} in (select id from question where type <> 'wordcloud')`,
+      // Les nuages de mots et les sondages ne comptent ni comme réponse donnée ni comme réponse correcte.
+      sql`${schema.answerRecord.questionId} in (select id from question where type not in ('wordcloud', 'poll'))`,
     ))
     .where(and(eq(schema.sessionPlayer.sessionId, sessionId), eq(schema.sessionPlayer.tenantId, scope.tenantId)))
     .groupBy(schema.sessionPlayer.id)

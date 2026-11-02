@@ -1,5 +1,7 @@
 export type { QuestionType, QuestionTypeDef, ScoreOpts } from './types.js'
-export { questionTypes, validateQuestionPayload } from './registry.js'
+export { questionTypes, validateQuestionPayload, isScoredType } from './registry.js'
+export type { PollPayload, PollAnswer, PollTally } from './poll.js'
+export { pollAnswerError, tallyPoll, pollPercent, poll } from './poll.js'
 export { speedBonus } from './scoring.js'
 export type { McqPayload, McqAnswer } from './mcq.js'
 export type { TrueFalsePayload, TrueFalseAnswer } from './truefalse.js'
