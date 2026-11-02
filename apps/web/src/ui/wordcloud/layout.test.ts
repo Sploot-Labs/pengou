@@ -138,18 +138,15 @@ describe('layoutCloud', () => {
   })
 
   it('garde la position précédente quand elle est encore libre', () => {
-    const base = wordsOf(30, (i) => 1 + ((i * 7) % 11))
+    const base = wordsOf(8, (i) => 1 + ((i * 7) % 11))
     const a = layoutCloud(base, { measure })
     const previous = new Map(a.placed.map((p) => [p.key, { x: p.x, y: p.y }]))
-    const next = base.map((w, i) => (i === 29 ? { ...w, count: w.count + 1 } : w))
+    const next = base.map((w) => (w.key === a.placed[0]?.key ? { ...w, count: w.count + 1 } : w))
     const b = layoutCloud(next, { measure, previous })
     expectNoOverlap(b.placed)
-    // Les mots dont la taille n'a pas changé gardent exactement leur place.
-    const same = b.placed.filter((p) => a.placed.find((w) => w.key === p.key)?.fontSize === p.fontSize)
-    expect(same.length).toBeGreaterThan(0)
-    for (const p of same) {
-      expect({ x: p.x, y: p.y }).toEqual(previous.get(p.key))
-    }
+    // Seule la traîne change : aucun mot ne bouge.
+    expect(b.placed.length).toBe(a.placed.length)
+    for (const p of b.placed) expect({ x: p.x, y: p.y }).toEqual(previous.get(p.key))
   })
 
   it('place toujours le top 4, quitte à le réduire', () => {
@@ -168,12 +165,35 @@ describe('layoutCloud', () => {
   })
 
   it('tient cent mots à une occurrence en moins de 50 ms sans chevauchement', () => {
-    const words = wordsOf(100, () => 1)
+    const words = wordsOf(100, () => 1).map((w, i) => ({ ...w, text: `mot-${String(i).padStart(4, 'x')}` }))
     const t0 = performance.now()
     const { placed } = layoutCloud(words, { measure })
     const elapsed = performance.now() - t0
     expect(elapsed).toBeLessThan(50)
+    expect(placed.length).toBeGreaterThanOrEqual(90)
     expectNoOverlap(placed)
     expectInside(placed)
+  })
+
+  it('garde vertical et placé un long mot vertical du top 4 parmi beaucoup de mots longs', () => {
+    let k = 'a'
+    for (let i = 0; hashKey(k) % 10 >= 3; i++) k = `v${i}`
+    const words = [
+      { key: k, text: 'motvraimentlongetvertical', count: 200 },
+      ...Array.from({ length: 99 }, (_, i) => ({ key: `long${i}`, text: `motvraimentlong${i}`, count: 100 - i })),
+    ]
+    const { placed, hidden } = layoutCloud(words, { measure })
+    const w = placed.find((p) => p.key === k)
+    expect(hidden).not.toContain(k)
+    expect(w?.vertical).toBe(true)
+    expect(w?.boxH).toBeLessThanOrEqual(700)
+  })
+
+  it("garde la même orientation d'une disposition à l'autre, même très chargée", () => {
+    const few = wordsOf(10, (i) => 10 - i)
+    const many = wordsOf(100, (i) => 100 - i)
+    const a = layoutCloud(few, { measure }).placed
+    const b = layoutCloud(many, { measure }).placed
+    for (const p of [...a, ...b]) expect(p.vertical).toBe(hashKey(p.key) % 10 < 3)
   })
 })

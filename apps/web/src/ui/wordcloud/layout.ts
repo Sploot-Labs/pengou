@@ -11,6 +11,11 @@ export const PALETTE_SIZE = 7
 const MARGIN = 24
 const PAD = 7
 const MAX_WORD_W = 1250
+/** Longueur maximale d'un mot vertical : sa boîte doit tenir dans la hauteur utile de la scène. */
+const MAX_VERTICAL_LENGTH = 700
+/** Part de l'aire utile que les boîtes nominales peuvent occuper avant réduction globale. */
+const DENSITY_FILL = 0.45
+const MIN_FONT_SIZE = 28
 const MAX_STEPS = 4000
 const MAX_RADIUS = 1000
 const TOP_PROTECTED = 4
@@ -73,35 +78,50 @@ export function layoutCloud(
   const max = first.count
   const boxes: Box[] = []
 
-  sorted.forEach((word, i) => {
+  // Tailles nominales (échelle de fréquence, plafonds de largeur et de longueur verticale).
+  const nominal = sorted.map((word) => {
     const hash = hashKey(word.key)
     const ratio = word.count / max
-    const baseSize = 34 + 122 * Math.sqrt(ratio)
     const m = opts.measure(word.text)
-    const derivedVertical = word.key !== opts.firstKey && hash % 10 < 3
+    const vertical = word.key !== opts.firstKey && hash % 10 < 3
+    let size = 34 + 122 * Math.sqrt(ratio)
+    let w = (m.w * size) / 100
+    let h = (m.h * size) / 100
+    const cap = vertical ? MAX_VERTICAL_LENGTH : MAX_WORD_W
+    if (w > cap) {
+      const f = cap / w
+      size *= f
+      w *= f
+      h *= f
+    }
+    return { hash, ratio, vertical, size, w, h }
+  })
+  // Facteur de densité global : une grande salle (beaucoup de mots) réduit toutes les tailles.
+  const sumArea = nominal.reduce((acc, n) => acc + n.w * n.h, 0)
+  const usableArea = (STAGE_W - 2 * MARGIN) * (STAGE_H - 2 * MARGIN)
+  const density = Math.min(1, Math.sqrt((DENSITY_FILL * usableArea) / sumArea))
+
+  sorted.forEach((word, i) => {
+    const {
+      hash,
+      ratio,
+      vertical,
+      size: nominalSize,
+      w: nominalW,
+      h: nominalH,
+    } = nominal[i] as (typeof nominal)[number]
     const phase = (hash % 628) / 100
     const prev = opts.previous?.get(word.key)
+    const scaled = Math.max(MIN_FONT_SIZE, nominalSize * density)
+    const base = scaled / nominalSize
 
-    // Le top 4 est toujours placé : réductions successives, puis en dernier recours à
-    // l'horizontale (un mot vertical de 1250 px de haut ne tient plus quand le haut est occupé).
-    const protectedWord = i < TOP_PROTECTED
-    const tries = protectedWord ? (MAX_SHRINKS + 1) * (derivedVertical ? 2 : 1) : 1
+    // Le top 4 est toujours placé : réductions successives de 15 % si besoin.
+    const tries = i < TOP_PROTECTED ? MAX_SHRINKS + 1 : 1
     for (let attempt = 0; attempt < tries; attempt++) {
-      const vertical = derivedVertical && attempt <= MAX_SHRINKS
-      const shrink = 0.85 ** (attempt % (MAX_SHRINKS + 1))
-      let size = baseSize
-      let w = (m.w * size) / 100
-      let h = (m.h * size) / 100
-      if (w > MAX_WORD_W) {
-        const f = MAX_WORD_W / w
-        size *= f
-        w *= f
-        h *= f
-      }
-      // Réduction progressive après le plafond de largeur, sinon elle serait sans effet.
-      size *= shrink
-      w *= shrink
-      h *= shrink
+      const shrink = 0.85 ** attempt
+      const size = nominalSize * base * shrink
+      const w = nominalW * base * shrink
+      const h = nominalH * base * shrink
       const bw = vertical ? h : w
       const bh = vertical ? w : h
       const fits = (x: number, y: number): boolean =>
