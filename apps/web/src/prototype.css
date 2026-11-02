@@ -3488,6 +3488,7 @@ p.source-credit {
   overflow: hidden;
   border-radius: 12px;
   background: #0b2545;
+  container-type: inline-size;
 }
 .bigcloud__stage {
   position: absolute;
@@ -3520,9 +3521,12 @@ p.source-credit {
   display: grid;
   place-items: center;
   margin: 0;
-  font-size: 44px;
+  /* Hors de la scène (lisible par les lecteurs d'écran) : 44 px de scène = 2,75 % de la largeur. */
+  font-family: var(--font-display);
+  font-size: 2.75cqw;
   font-weight: 600;
   color: #a9c3dd;
+  pointer-events: none;
 }
 .bigcloud__word {
   position: absolute;
@@ -3534,7 +3538,7 @@ p.source-credit {
   position: absolute;
   left: 0;
   top: 0;
-  transition: transform 800ms var(--ease-out);
+  transition: transform 800ms var(--ease-out), scale 600ms var(--ease-spring);
 }
 .bigcloud__text {
   display: inline-block;
@@ -3585,6 +3589,60 @@ p.source-credit {
   line-height: 1;
   transition: none;
   animation: none;
+}
+.bigcloud--revealed .bigcloud__word {
+  opacity: 0.16;
+  filter: saturate(0.3);
+  transition: transform 800ms var(--ease-out), opacity 600ms ease, filter 600ms ease;
+}
+.bigcloud--revealed .bigcloud__word[data-lit="true"] {
+  opacity: 1;
+  filter: none;
+}
+.bigcloud--revealed .bigcloud__word[data-lit="true"] .bigcloud__text {
+  text-shadow: 0 0 42px var(--wc-text);
+}
+.bigcloud--revealed .bigcloud__word[data-lit="true"] .bigcloud__rot {
+  scale: 1.1;
+}
+.bigcloud--revealed .bigcloud__word.is-leaving {
+  opacity: 0;
+  transition: transform 800ms var(--ease-out), opacity 400ms ease, filter 400ms ease;
+}
+/* Pastille : posée au-dessus du coin haut droit du mot pour ne pas le recouvrir. */
+.bigcloud__badge {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px 6px 6px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0b2545;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 26px;
+  white-space: nowrap;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
+  transform: translate(-30%, -100%);
+  animation: bigcloud-badge 550ms var(--ease-spring) both;
+}
+.bigcloud__rank {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--wc-fill);
+  color: var(--wc-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+}
+@keyframes bigcloud-badge {
+  0% { opacity: 0; transform: translate(-30%, -100%) scale(0.3); }
+  100% { opacity: 1; transform: translate(-30%, -100%) scale(1); }
 }
 .bigcloud--still *,
 .bigcloud--still *::before {
