@@ -38,6 +38,7 @@ services:
       TENANCY_MODE: single
       DATABASE_URL: postgres://pengou:pengou@db:5432/pengou
       SESSION_SECRET: ${SESSION_SECRET:?Définissez SESSION_SECRET (32 caractères minimum) dans le .env local}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?Définissez APP_DB_PASSWORD (ex. openssl rand -base64 24) dans le .env local}
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Définissez BETTER_AUTH_SECRET (32 caractères minimum, ex. openssl rand -base64 32) dans le .env local}
       BETTER_AUTH_URL: http://localhost:3000
       MAX_PLAYERS_PER_SESSION: "5000"

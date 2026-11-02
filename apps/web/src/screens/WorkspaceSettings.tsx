@@ -6,7 +6,7 @@ import { ApiError } from '../api/client'
 import {
   fetchMembers, setMemberRole, removeMember, fetchInvitations, createInvitation,
   revokeInvitation, resendInvitation, createWorkspace,
-  type Member, type Invitation, type Role,
+  type Member, type PendingInvitation, type Role,
 } from '../api/workspaces'
 import { AppHeader } from '../ui/AppHeader'
 import { WorkspaceSwitcher } from '../ui/WorkspaceSwitcher'
@@ -183,7 +183,7 @@ function MembersSection({ tenantId, actorRole }: { tenantId: string; actorRole: 
 }
 
 function InvitationsSection({ tenantId }: { tenantId: string }) {
-  const [invitations, setInvitations] = useState<Invitation[]>([])
+  const [invitations, setInvitations] = useState<PendingInvitation[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [email, setEmail] = useState('')

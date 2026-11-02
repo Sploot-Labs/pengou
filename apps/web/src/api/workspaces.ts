@@ -34,6 +34,9 @@ export interface Invitation {
   createdAt: string
 }
 
+/** Invitation telle que listée : le jeton n'est renvoyé qu'à la création et au renvoi. */
+export type PendingInvitation = Omit<Invitation, 'token'>
+
 export interface InvitationPreview {
   email: string
   role: Role
@@ -64,7 +67,7 @@ export function removeMember(tenantId: string, userId: string): Promise<{ ok: tr
   return apiDelete(`/api/workspaces/${tenantId}/members/${userId}`)
 }
 
-export function fetchInvitations(tenantId: string): Promise<{ invitations: Invitation[] }> {
+export function fetchInvitations(tenantId: string): Promise<{ invitations: PendingInvitation[] }> {
   return apiGet(`/api/workspaces/${tenantId}/invitations`)
 }
 

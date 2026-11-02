@@ -72,6 +72,28 @@ describe('toCsv — neutralisation de l\'injection de formule', () => {
   })
 })
 
+describe('toCsv — séparateur « ; » ou tabulation suivi d\'un déclencheur (contournement)', () => {
+  it('neutralise une formule placée après un « ; » (saisie de pseudo en français)', () => {
+    expect(toCsv([['a;=1+1;', 0]])).toBe('"a;\'=1+1;",0\r\n')
+  })
+
+  it('neutralise un déclencheur précédé d\'un « ; » puis d\'un espace', () => {
+    expect(toCsv([['x; @SUM(A1)']])).toBe('"x; \'@SUM(A1)"\r\n')
+  })
+
+  it('neutralise un déclencheur placé après une tabulation', () => {
+    expect(toCsv([['a\t-2']])).toBe('"a\t\'-2"\r\n')
+  })
+
+  it('un « ; » sans déclencheur ne provoque que le guillemetage', () => {
+    expect(toCsv([['Léa;Paul']])).toBe('"Léa;Paul"\r\n')
+  })
+
+  it('un nombre n\'est jamais neutralisé, même après ce correctif', () => {
+    expect(toCsv([[-5]])).toBe('-5\r\n')
+  })
+})
+
 describe('toCsv — contournement par espaces de tête (régression adversariale)', () => {
   it('neutralise "=1+1" précédé d\'un espace normal', () => {
     expect(toCsv([[' =1+1']])).toBe(`"' =1+1"${CRLF}`)
