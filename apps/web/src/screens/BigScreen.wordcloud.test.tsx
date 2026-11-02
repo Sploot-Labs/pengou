@@ -118,8 +118,10 @@ describe('BigScreen, nuage de mots en direct', () => {
     await showQuestion(cloudQuestion)
     emitServerEvent('wordcloud:update', view())
     emitServerEvent('question:show', { ...cloudQuestion, id: 'q2' })
-    expect(screen.queryByText('café')).toBeNull()
-    expect(screen.getByText('En attente des premières idées…')).toBeInTheDocument()
+    // Deux questions nuage successives ont des clés de transition distinctes : l'ancienne couche
+    // sort en fondu avant que la nouvelle n'entre.
+    await waitFor(() => expect(screen.queryByText('café')).toBeNull())
+    expect(await screen.findByText('En attente des premières idées…')).toBeInTheDocument()
   })
 
   it('garde le nuage à la révélation, sans tableau de répartition', async () => {
@@ -130,6 +132,18 @@ describe('BigScreen, nuage de mots en direct', () => {
     expect(screen.getByText('café')).toBeInTheDocument()
     expect(screen.getByText('3 participants ont proposé, 4 mots reçus')).toBeInTheDocument()
     expect(screen.queryByText('Aucune réponse reçue pour cette question.')).toBeNull()
+  })
+
+  it('garde le même nœud de nuage de la question à la révélation (pas de remontage)', async () => {
+    const { container } = renderBigScreen()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('screen:join', { displayToken: 'tok-abc' }))
+    await showQuestion(cloudQuestion)
+    emitServerEvent('wordcloud:update', view())
+    const before = container.querySelector('.bigcloud')
+    expect(before).not.toBeNull()
+    emitServerEvent('question:reveal', { correct: null, distribution: {} })
+    await waitFor(() => expect(container.querySelector('.bigcloud--revealed')).not.toBeNull())
+    expect(container.querySelector('.bigcloud')).toBe(before)
   })
 
   it('une question mcq garde le rendu actuel', async () => {
@@ -144,5 +158,56 @@ describe('BigScreen, nuage de mots en direct', () => {
     expect(screen.getByText('Lisbonne')).toBeInTheDocument()
     expect(screen.queryByText('En attente des premières idées…')).toBeNull()
     expect(screen.getByText(/répondu/)).toBeInTheDocument()
+  })
+})
+
+describe('BigScreen, nuage de mots à la révélation', () => {
+  beforeEach(() => {
+    handlers.clear()
+    mockEmitAck.mockClear()
+  })
+  afterEach(() => {
+    cleanup()
+    vi.useRealTimers()
+  })
+
+  const five = [
+    { key: 'a', text: 'alpha', count: 9 },
+    { key: 'b', text: 'bravo', count: 7 },
+    { key: 'c', text: 'charlie', count: 5 },
+    { key: 'd', text: 'delta', count: 3 },
+    { key: 'e', text: 'echo', count: 2 },
+  ]
+
+  async function toReveal() {
+    renderBigScreen()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('screen:join', { displayToken: 'tok-abc' }))
+    emitServerEvent('question:show', cloudQuestion)
+    await screen.findByText(cloudQuestion.prompt)
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+    emitServerEvent('wordcloud:update', view({ words: five }))
+    emitServerEvent('question:reveal', { correct: null, distribution: {} })
+    act(() => {
+      vi.advanceTimersByTime(3000)
+    })
+  }
+
+  it('affiche le top 4 à la révélation', async () => {
+    await toReveal()
+    const list = screen.getByRole('list', { name: 'Mots les plus proposés' })
+    expect(list.textContent).toContain('alpha')
+    expect(list.textContent).toContain('delta')
+    expect(list.textContent).not.toContain('echo')
+  })
+
+  it('retire un mot du top 4 pendant la révélation', async () => {
+    await toReveal()
+    emitServerEvent('wordcloud:update', view({ words: five.slice(1) }))
+    act(() => {
+      vi.advanceTimersByTime(3000)
+    })
+    const list = screen.getByRole('list', { name: 'Mots les plus proposés' })
+    expect(list.textContent).not.toContain('alpha')
+    expect(list.textContent).toContain('echo')
   })
 })

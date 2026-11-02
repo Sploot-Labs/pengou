@@ -1,12 +1,22 @@
-import { useEffect, useRef, useState } from 'react'
+import { type ReactNode, useEffect, useRef, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { AnimatedBar, Confetti, CountUp, PhaseTransition, useCue, useFocusOnMount, useSound } from '../motion/index.js'
+import {
+  AnimatedBar,
+  Confetti,
+  CountUp,
+  PhaseTransition,
+  useCue,
+  useFocusOnMount,
+  useReducedMotion,
+  useSound,
+} from '../motion/index.js'
 import { isScoredType, pollPercent } from '@splootlabs/quiz'
 import { buildDistributionRows, pollRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { ContentSource } from '../api/quizzes'
 import type { PodiumPayload, PollView, RankingEntry, ReadingView, SessionRelaunchedView, WordcloudView } from '../realtime/contracts'
-import { WordCloud, wordcloudSummary } from '../ui/WordCloud'
+import { BigWordCloud } from '../ui/wordcloud/BigWordCloud'
+import { wordcloudSummary } from '../ui/WordCloud'
 import { hardReload } from '../realtime/hardReload'
 import { ThemeProvider } from '../theme/ThemeProvider.js'
 import { AnswerShape, JoinInvite, Logo, PinDisplay, SoundToggle, TimerRing } from '../ui'
@@ -93,6 +103,7 @@ function BigScreenInner() {
   const { socket, emitAck, on } = useGameSocket()
   const cue = useCue()
   const sound = useSound()
+  const reducedMotion = useReducedMotion()
 
   const [joinState, setJoinState] = useState<JoinState>(token ? 'connecting' : 'error')
   const [joinError, setJoinError] = useState<string | null>(
@@ -459,15 +470,28 @@ function BigScreenInner() {
         ? pollRows(poll)
         : buildDistributionRows(question.type, revealPayload.correct, revealPayload.distribution)
       : null
+  // Question nuage en cours ou en révélation : rendue par un sous-arbre unique (voir plus bas).
+  const cloudLive = question?.type === 'wordcloud' && (phase === 'question' || phase === 'reveal')
   const maxCount = rows && rows.length > 0 ? Math.max(1, ...rows.map((r) => r.count)) : 1
 
-  function renderWordcloud() {
+  function renderWordcloud(foot?: ReactNode) {
     // Un nuage d'une autre question (course entre événements) n'est jamais affiché.
     const current = wordcloud && question && wordcloud.questionId === question.id ? wordcloud : null
     return (
       <div className="big-wordcloud">
-        <WordCloud words={current?.words ?? []} />
-        {current && <p className="big-live__answered">{wordcloudSummary(current)}</p>}
+        {/* Cadre qui prend toute la hauteur restante : le nuage 2 / 1 s'y inscrit sans défilement. */}
+        <div className="big-wordcloud__frame">
+          <BigWordCloud
+            key={question?.id}
+            words={current?.words ?? []}
+            revealed={phase === 'reveal'}
+            reducedMotion={reducedMotion}
+          />
+        </div>
+        <div className="big-wordcloud__foot">
+          {current && <p className="big-live__answered">{wordcloudSummary(current)}</p>}
+          {foot}
+        </div>
       </div>
     )
   }
@@ -605,7 +629,7 @@ function BigScreenInner() {
         </div>
       )}
 
-      <PhaseTransition phaseKey={phase} className="big-phase-layer">
+      <PhaseTransition phaseKey={cloudLive ? `cloud-live-${question?.id}` : phase} className="big-phase-layer">
       {phase === 'lobby' && (
         <div className="big-lobby">
           <Logo />
@@ -677,7 +701,35 @@ function BigScreenInner() {
         </div>
       )}
 
-      {phase === 'question' && question && (
+      {/* Nuage : question et révélation partagent le même sous-arbre (et la même clé de transition),
+          pour que le nuage reste monté et que sa disposition en direct soit figée à la révélation. */}
+      {cloudLive && question && (
+        <div className="big-live big-live--cloud">
+          {/* En-tête compact sur une ligne. À la révélation, la place du chrono reste réservée :
+              la question et le nuage gardent leur taille et leur position (la salle garde ses repères). */}
+          <div className="big-live__header">
+            <span className="host-badge">{phase === 'reveal' ? 'Révélation' : 'Question en cours'}</span>
+            <h1 className="big-live__prompt" key={phase} ref={focusPhaseHeading} tabIndex={-1}>
+              {question.prompt}
+            </h1>
+            {phase === 'question' ? (
+              <TimerRing remainingSeconds={remaining ?? question.timeLimit} totalSeconds={question.timeLimit} size={112} large />
+            ) : (
+              <span className="big-live__ring-slot" aria-hidden="true" />
+            )}
+          </div>
+
+          {renderWordcloud(
+            phase === 'reveal' && autoRemaining !== null && (
+              <p className="big-auto-countdown" role="status" aria-live="polite">
+                Question suivante dans {autoRemaining} s
+              </p>
+            ),
+          )}
+        </div>
+      )}
+
+      {phase === 'question' && question && !cloudLive && (
         <div className="big-live">
           <div className="big-live__header">
             <span className="host-badge">Question en cours</span>
@@ -702,7 +754,7 @@ function BigScreenInner() {
         </div>
       )}
 
-      {phase === 'reveal' && (
+      {phase === 'reveal' && !cloudLive && (
         <div className="big-live">
           {question ? (
             <>
