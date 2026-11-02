@@ -62,10 +62,16 @@ Le fichier `docker-compose.prod.yml` permet de faire tourner Pengou sur n'import
 POSTGRES_PASSWORD=<mot de passe sans @ / :>
 SESSION_SECRET=<openssl rand -base64 32>
 BETTER_AUTH_SECRET=<openssl rand -base64 32>   # 32 caractères minimum
+APP_DB_PASSWORD=<openssl rand -base64 24>       # mot de passe du rôle app_role
 BETTER_AUTH_URL=https://pengou.example.com      # https obligatoire
+TRUSTED_PROXIES=172.16.0.0/12                   # IP ou CIDR du reverse proxy vu depuis le conteneur
 ```
 
+Avant le prochain déploiement : `APP_DB_PASSWORD` et `TRUSTED_PROXIES` sont désormais obligatoires. Le compose de production refuse de démarrer tant qu'elles ne figurent pas dans le `.env`.
+
 Points d'attention :
+
+`TRUSTED_PROXIES` liste les proxys dont le serveur croit l'en-tête `X-Forwarded-For` (IP, CIDR ou mots-clés `loopback`, `uniquelocal`). Il sert à retrouver l'IP réelle des clients pour les limites de débit. Derrière un reverse proxy installé sur l'hôte, qui joint l'app par `127.0.0.1:3000`, le conteneur ne voit pas `127.0.0.1` mais la passerelle du réseau Docker : relever son adresse avec `docker network inspect <réseau>` (champ `Gateway`), ou indiquer la plage `172.16.0.0/12` qui couvre les réseaux Docker par défaut. Avec une valeur fausse, tous les clients partagent la même IP pour les limites de débit, et le serveur le signale une fois dans ses journaux.
 
 Le service app n'écoute que sur `127.0.0.1:3000`. Un reverse proxy TLS (Caddy, nginx ou Traefik) doit donc être installé devant, et c'est lui qui porte le nom de domaine de `BETTER_AUTH_URL`.
 

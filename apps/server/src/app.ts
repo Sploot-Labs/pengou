@@ -3,6 +3,8 @@ import helmet from '@fastify/helmet'
 import rateLimit from '@fastify/rate-limit'
 import { collectDefaultMetrics, Registry } from 'prom-client'
 import type { AppConfig } from '@splootlabs/shared'
+import { registerOriginGuard } from './origin-guard.js'
+import { compileTrust, createForwardedForWarner } from './client-ip.js'
 
 declare module 'fastify' {
   interface FastifyContextConfig {
@@ -33,11 +35,13 @@ function buildMetricsRegistry(): Registry {
 // `await app.register(...)` amorce le plugin immédiatement (les instances Fastify sont
 // thenables) → les hooks sont posés avant toute route, protégeant l'ensemble de l'app.
 export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Promise<FastifyInstance> {
-  // `trustProxy` (P2) : en production Pengou tourne derrière un reverse-proxy/load-balancer
-  // (Docker, Caddy/Traefik…). Sans ça, `req.ip` = IP du proxy pour TOUS les clients → le
-  // rate-limit partage un seul bucket (auto-DoS + anti-brute-force ciblé défait). Avec
-  // trustProxy, Fastify lit X-Forwarded-For → `req.ip` = vraie IP client. En dev/test, aucun
-  // proxy : neutre.
+  // `trustProxy` : Fastify ne lit X-Forwarded-For que si le pair TCP figure dans
+  // TRUSTED_PROXIES (IP ou CIDR du reverse proxy). `request.ip` vaut alors le dernier saut non
+  // fiable de la chaîne, que le client ne peut pas forger. Liste vide (défaut) : l'en-tête est
+  // ignoré et `request.ip` est l'adresse du pair. Auparavant `trustProxy: true` croyait
+  // n'importe quel client, ce qui permettait de contourner les limites de débit (constat
+  // d'audit `betterAuth-rateLimit-untrusted-client-ip`). Derrière un proxy sans TRUSTED_PROXIES,
+  // tous les clients partagent l'IP du proxy : un avertissement est journalisé au démarrage.
   // Logger pino (P1-10) : niveau via LOG_LEVEL (défaut info), et REDACTION des secrets/cookies
   // dans les logs de requêtes (Authorization, Cookie, Set-Cookie) — sans ça, un cookie de session
   // ou un header d'auth se retrouverait en clair dans les logs. Coupé en test.
@@ -50,7 +54,24 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
   }
   const app = Fastify({
     logger: config.nodeEnv !== 'test' ? loggerOptions : false,
-    trustProxy: true,
+    trustProxy: config.trustedProxies.length ? config.trustedProxies : false,
+  })
+
+  if (config.nodeEnv === 'production' && config.trustedProxies.length === 0) {
+    // Journalisé une fois, au `ready()` déclenché par `listen` au démarrage.
+    app.addHook('onReady', async () => {
+      app.log.warn(
+        'TRUSTED_PROXIES est vide : derrière un reverse proxy, tous les clients partagent la même IP pour les limites de débit.',
+      )
+    })
+  }
+
+  // TRUSTED_PROXIES faux (ex. reverse proxy sur l'hôte vu depuis le conteneur par la passerelle
+  // Docker) : X-Forwarded-For est ignoré en silence et tous les clients partagent une IP. Un
+  // avertissement unique le signale dès la première requête concernée.
+  const warnForwardedFor = createForwardedForWarner(compileTrust(config.trustedProxies), (msg) => app.log.warn(msg))
+  app.addHook('onRequest', async (request) => {
+    warnForwardedFor(request.raw)
   })
 
   // Sécurité (P2) : en-têtes HTTP durcis (anti-clickjacking, anti-sniffing MIME, Referrer-Policy…).
@@ -73,6 +94,9 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
     // Même origine SPA↔API : COEP casserait le chargement des polices tierces sans bénéfice ici.
     crossOriginEmbedderPolicy: false,
   })
+
+  // Contrôle d'origine des requêtes mutantes de l'API (Better Auth gère déjà /api/auth/*).
+  registerOriginGuard(app, config)
 
   // Sécurité (P1) : limite de débit globale par IP (anti-DoS/abus, énumération de parties).
   // L'anti-brute-force spécifique de l'authentification est géré par Better Auth (voir

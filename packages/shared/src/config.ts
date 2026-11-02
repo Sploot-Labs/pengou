@@ -1,5 +1,8 @@
 import { z } from 'zod'
 
+/** Mot de passe de développement d'`app_role` : public, donc interdit en production. */
+export const DEFAULT_APP_DB_PASSWORD = 'app-dev-password-change-me'
+
 const EnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().positive().default(3000),
@@ -10,7 +13,7 @@ const EnvSchema = z.object({
   // à une seule URL). Fournir explicitement pour un rôle géré (cloud/managed).
   APP_DATABASE_URL: z.string().min(1).optional(),
   // Mot de passe du rôle `app_role` (posé au boot par la connexion privilégiée). Défaut dev.
-  APP_DB_PASSWORD: z.string().min(1).default('app-dev-password-change-me'),
+  APP_DB_PASSWORD: z.string().min(1).default(DEFAULT_APP_DB_PASSWORD),
   REDIS_URL: z.string().min(1).optional(),
   SESSION_SECRET: z.string().min(16).default('dev-secret-change-me-please!!'),
   BETTER_AUTH_SECRET: z.string().min(32).optional(),
@@ -18,6 +21,10 @@ const EnvSchema = z.object({
   // Sécurité : plafond de requêtes HTTP par IP et par minute (anti-DoS/abus). Volontairement
   // haut par défaut pour ne pas gêner un usage légitime ; à abaisser selon l'exposition.
   RATE_LIMIT_MAX: z.coerce.number().int().positive().default(1000),
+  // Proxys de confiance (reverse proxy devant Pengou), séparés par des virgules : IP, CIDR ou
+  // mots-clés de proxy-addr (`loopback`, `linklocal`, `uniquelocal`). Seul un pair de cette liste
+  // peut annoncer l'IP du client par X-Forwarded-For. Vide par défaut : l'en-tête est ignoré.
+  TRUSTED_PROXIES: z.string().default(''),
   // Self-host : fermer l'inscription publique une fois le(s) compte(s) créé(s). 'true' désactive
   // le sign-up e-mail/mot de passe (les comptes existants continuent de se connecter).
   DISABLE_SIGNUP: z.enum(['true', 'false']).default('false'),
@@ -39,6 +46,9 @@ const EnvSchema = z.object({
   // Plafond de joueurs inscrits par partie (déconnectés compris). Valeur provisoire, à ajuster
   // d'après les mesures de charge (`docs/charge/`).
   MAX_PLAYERS_PER_SESSION: z.coerce.number().int().positive().default(640),
+  // Échecs de PIN (player:join) tolérés par IP, ou par préfixe /64 en IPv6, sur 5 minutes. Haut
+  // par défaut : une salle entière derrière une seule IP publique se trompe souvent de PIN.
+  PIN_FAILURE_MAX: z.coerce.number().int().positive().default(100),
 })
 
 export type OAuthProviderCreds = {
@@ -59,12 +69,16 @@ export type AppConfig = {
   authSecret?: string
   authUrl: string
   rateLimitMax: number
+  /** Proxys dont le X-Forwarded-For est cru (format proxy-addr). Vide : en-tête ignoré. */
+  trustedProxies: string[]
   disableSignup: boolean
   migrateOnBoot: boolean
   libraryExtraDir?: string
   sessionInactivityTimeoutMs: number
   sessionSweepIntervalMs: number
   maxPlayersPerSession: number
+  /** Échecs de PIN tolérés par IP (préfixe /64 en IPv6) sur la fenêtre du budget. */
+  pinFailureMax: number
   oauth: {
     google: OAuthProviderCreds
     facebook: OAuthProviderCreds
@@ -81,6 +95,15 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
         'pour signer les sessions Better Auth. En développement/test, une valeur par défaut est tolérée.',
     )
   }
+  if (
+    parsed.NODE_ENV === 'production' &&
+    !parsed.APP_DATABASE_URL &&
+    parsed.APP_DB_PASSWORD === DEFAULT_APP_DB_PASSWORD
+  ) {
+    throw new Error(
+      'Configuration invalide : APP_DB_PASSWORD doit être défini en production (mot de passe du rôle app_role).',
+    )
+  }
   return {
     nodeEnv: parsed.NODE_ENV,
     port: parsed.PORT,
@@ -94,12 +117,16 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     authSecret: parsed.BETTER_AUTH_SECRET,
     authUrl: parsed.BETTER_AUTH_URL,
     rateLimitMax: parsed.RATE_LIMIT_MAX,
+    trustedProxies: parsed.TRUSTED_PROXIES.split(',')
+      .map((entry) => entry.trim())
+      .filter((entry) => entry.length > 0),
     disableSignup: parsed.DISABLE_SIGNUP === 'true',
     migrateOnBoot: parsed.MIGRATE_ON_BOOT === 'true',
     libraryExtraDir: parsed.LIBRARY_EXTRA_DIR,
     sessionInactivityTimeoutMs: parsed.SESSION_INACTIVITY_TIMEOUT_MINUTES * 60_000,
     sessionSweepIntervalMs: parsed.SESSION_SWEEP_INTERVAL_MINUTES * 60_000,
     maxPlayersPerSession: parsed.MAX_PLAYERS_PER_SESSION,
+    pinFailureMax: parsed.PIN_FAILURE_MAX,
     oauth: {
       google: { clientId: parsed.GOOGLE_CLIENT_ID, clientSecret: parsed.GOOGLE_CLIENT_SECRET },
       facebook: { clientId: parsed.FACEBOOK_CLIENT_ID, clientSecret: parsed.FACEBOOK_CLIENT_SECRET },

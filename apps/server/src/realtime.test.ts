@@ -2,7 +2,8 @@ import { describe, it, expect } from 'vitest'
 import { io as ioClient } from 'socket.io-client'
 import type { FastifyInstance } from 'fastify'
 import { buildServer } from './app'
-import { attachRealtime, allowedOrigins } from './realtime'
+import { attachRealtime } from './realtime'
+import { allowedOrigins } from './origin-guard'
 import { loadConfig } from '@splootlabs/shared'
 
 async function listenOn(app: FastifyInstance): Promise<string> {
@@ -64,6 +65,11 @@ describe('Socket.IO CORS — origine restreinte à AppConfig.authUrl (hardening)
     expect(prod).toEqual(['https://app.example.com']) // aucun repli localhost en production
   })
 
+  it("allowedOrigins() : réduit BETTER_AUTH_URL à son origine (barre finale, chemin, port par défaut)", () => {
+    expect(allowedOrigins({ authUrl: 'https://app.example.com/', nodeEnv: 'production' })).toEqual(['https://app.example.com'])
+    expect(allowedOrigins({ authUrl: 'https://app.example.com:443/pengou', nodeEnv: 'production' })).toEqual(['https://app.example.com'])
+  })
+
   // NB : un client Socket.IO Node (comme celui utilisé dans les autres tests de ce fichier)
   // n'applique PAS la same-origin policy — CORS est une restriction appliquée par le NAVIGATEUR
   // (il bloque la lecture de la réponse par le JS de la page, pas la requête elle-même), donc un
@@ -105,5 +111,56 @@ describe('Socket.IO CORS — origine restreinte à AppConfig.authUrl (hardening)
       await io.close()
       await app.close()
     }
+  }, 10000)
+})
+
+describe('Socket.IO : origine contrôlée aussi sur l\'upgrade WebSocket', () => {
+  // `origin` peut dépendre de l'URL d'écoute (port aléatoire) : fonction de l'URL dans ce cas.
+  async function tenter(origin: string | undefined | ((url: string) => string)): Promise<'connecte' | 'refuse'> {
+    const config = loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'http://localhost:3000' })
+    const app = await buildServer(config)
+    const io = attachRealtime(app, config)
+    const url = await listenOn(app)
+    if (typeof origin === 'function') origin = origin(url)
+    const client = ioClient(url, {
+      reconnection: false,
+      transports: ['websocket'],
+      ...(origin ? { extraHeaders: { origin } } : {}),
+    })
+    try {
+      return await new Promise<'connecte' | 'refuse'>((resolve, reject) => {
+        const timeout = setTimeout(() => reject(new Error('Connection timeout')), 3000)
+        client.once('connect', () => {
+          clearTimeout(timeout)
+          resolve('connecte')
+        })
+        client.once('connect_error', () => {
+          clearTimeout(timeout)
+          resolve('refuse')
+        })
+      })
+    } finally {
+      client.disconnect()
+      await io.close()
+      await app.close()
+    }
+  }
+
+  it("refuse le handshake WebSocket d'une origine étrangère", async () => {
+    expect(await tenter('https://evil.example')).toBe('refuse')
+  }, 10000)
+
+  it("accepte un client sans Origin et l'origine BETTER_AUTH_URL", async () => {
+    expect(await tenter(undefined)).toBe('connecte')
+    expect(await tenter('http://localhost:3000')).toBe('connecte')
+  }, 10000)
+
+  it("accepte une Origin dont l'hôte est celui de l'en-tête Host (démarrage rapide en LAN)", async () => {
+    // Le client se connecte à http://127.0.0.1:<port> : Host vaut 127.0.0.1:<port>.
+    expect(await tenter((url) => url)).toBe('connecte')
+  }, 10000)
+
+  it("refuse une Origin d'un autre hôte que celui de Host", async () => {
+    expect(await tenter((url) => url.replace('127.0.0.1', 'evil.127.0.0.1.nip.io'))).toBe('refuse')
   }, 10000)
 })
