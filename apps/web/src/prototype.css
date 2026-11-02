@@ -3480,6 +3480,22 @@ p.source-credit {
   border-color: var(--warn);
 }
 
+/* Nuage du grand écran : le cadre 2 / 1 est dimensionné par la hauteur disponible autant que par
+   la largeur (viewport moins l'en-tête, la question, le récapitulatif et les marges), pour ne
+   jamais provoquer de défilement, du 720p à la 4K, y compris sur un écran très large. */
+.big-wordcloud {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+.big-wordcloud .bigcloud {
+  width: min(100%, calc((100vh - 24rem) * 2));
+  width: min(100%, calc((100dvh - 24rem) * 2));
+  min-width: 16rem;
+}
+
 /* Nuage de mots du grand écran : scène 1600x800 mise à l'échelle dans un cadre 2 / 1. */
 .bigcloud {
   position: relative;

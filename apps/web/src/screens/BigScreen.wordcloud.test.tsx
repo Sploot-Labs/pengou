@@ -146,3 +146,54 @@ describe('BigScreen, nuage de mots en direct', () => {
     expect(screen.getByText(/répondu/)).toBeInTheDocument()
   })
 })
+
+describe('BigScreen, nuage de mots à la révélation', () => {
+  beforeEach(() => {
+    handlers.clear()
+    mockEmitAck.mockClear()
+  })
+  afterEach(() => {
+    cleanup()
+    vi.useRealTimers()
+  })
+
+  const five = [
+    { key: 'a', text: 'alpha', count: 9 },
+    { key: 'b', text: 'bravo', count: 7 },
+    { key: 'c', text: 'charlie', count: 5 },
+    { key: 'd', text: 'delta', count: 3 },
+    { key: 'e', text: 'echo', count: 2 },
+  ]
+
+  async function toReveal() {
+    renderBigScreen()
+    await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('screen:join', { displayToken: 'tok-abc' }))
+    emitServerEvent('question:show', cloudQuestion)
+    await screen.findByText(cloudQuestion.prompt)
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+    emitServerEvent('wordcloud:update', view({ words: five }))
+    emitServerEvent('question:reveal', { correct: null, distribution: {} })
+    act(() => {
+      vi.advanceTimersByTime(3000)
+    })
+  }
+
+  it('affiche le top 4 à la révélation', async () => {
+    await toReveal()
+    const list = screen.getByRole('list', { name: 'Mots les plus proposés' })
+    expect(list.textContent).toContain('alpha')
+    expect(list.textContent).toContain('delta')
+    expect(list.textContent).not.toContain('echo')
+  })
+
+  it('retire un mot du top 4 pendant la révélation', async () => {
+    await toReveal()
+    emitServerEvent('wordcloud:update', view({ words: five.slice(1) }))
+    act(() => {
+      vi.advanceTimersByTime(3000)
+    })
+    const list = screen.getByRole('list', { name: 'Mots les plus proposés' })
+    expect(list.textContent).not.toContain('alpha')
+    expect(list.textContent).toContain('echo')
+  })
+})
