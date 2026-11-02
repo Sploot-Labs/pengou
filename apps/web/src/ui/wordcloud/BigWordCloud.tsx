@@ -63,8 +63,10 @@ export function BigWordCloud({
     frozenRef.current = lastLiveRef.current.length
       ? lastLiveRef.current
       : layoutCloud(sorted, { measure, previous: previousRef.current, firstKey: firstKeyRef.current }).placed
-    const since = firstWordsAtRef.current === null ? Number.POSITIVE_INFINITY : Date.now() - firstWordsAtRef.current
-    instantRef.current = reducedMotion || since < RECONNECT_WINDOW
+    // Échelonné seulement si des mots ont été vus en direct depuis au moins 1000 ms ; sinon (aucun mot
+    // vu, ou révélation quasi simultanée) c'est une reconnexion : état final d'un coup.
+    const seenAt = firstWordsAtRef.current
+    instantRef.current = reducedMotion || seenAt === null || Date.now() - seenAt < RECONNECT_WINDOW
   }
 
   const [gone, setGone] = useState<ReadonlySet<string>>(() => new Set())

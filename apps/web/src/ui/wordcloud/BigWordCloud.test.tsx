@@ -130,6 +130,20 @@ describe('BigWordCloud', () => {
       expect(badges(container)).toHaveLength(4)
     })
 
+    it("affiche tout d'un coup quand le composant monte déjà révélé", () => {
+      vi.useFakeTimers()
+      const { container } = render(<BigWordCloud {...base} revealed words={five} />)
+      expect(badges(container)).toHaveLength(4)
+    })
+
+    it("affiche tout d'un coup quand les mots et la révélation arrivent ensemble", () => {
+      vi.useFakeTimers()
+      const { container, rerender } = render(<BigWordCloud {...base} words={[]} />)
+      advance(3000)
+      rerender(<BigWordCloud {...base} revealed words={five} />)
+      expect(badges(container)).toHaveLength(4)
+    })
+
     it('remplace un mot du top 4 retiré par le suivant, sans déplacer les autres', () => {
       vi.useFakeTimers()
       const { container, rerender } = render(<BigWordCloud {...base} words={five} />)
