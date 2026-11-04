@@ -165,7 +165,12 @@ describe('messagerie', () => {
   it("les erreurs ne contiennent jamais la valeur d'un secret", () => {
     let message = ''
     try {
-      loadConfig({ MAIL_TRANSPORT: 'smtp', SMTP_PASSWORD: 's3cr3t-valeur' })
+      loadConfig({
+        MAIL_TRANSPORT: 'smtp',
+        SMTP_HOST: 'h',
+        MAIL_FROM: 'a@b.fr',
+        SMTP_PASSWORD: 's3cr3t-valeur',
+      })
     } catch (e) {
       message = String(e)
     }
@@ -179,6 +184,20 @@ describe('messagerie', () => {
     }
     expect(message).not.toBe('')
     expect(message).not.toContain('s3cr3t-valeur')
+  })
+  it('variables vides traitées comme absentes', () => {
+    expect(loadConfig({ MAIL_TRANSPORT: '' }).mail.transport).toBe('none')
+    const c = loadConfig({
+      MAIL_TRANSPORT: 'smtp', SMTP_HOST: 'h', MAIL_FROM: 'a@b.fr', SMTP_USER: '', SMTP_PASSWORD: ' ', SMTP_PORT: '',
+    })
+    if (c.mail.transport === 'smtp') {
+      expect(c.mail.smtp.user).toBeUndefined()
+      expect(c.mail.smtp.password).toBeUndefined()
+      expect(c.mail.smtp.port).toBe(587)
+    }
+    expect(() =>
+      loadConfig({ MAIL_TRANSPORT: 'brevo', MAIL_FROM: 'a@b.fr', BREVO_API_KEY: '' }),
+    ).toThrow(/BREVO_API_KEY/)
   })
   it('production sans transport : ne lève pas', () => {
     expect(() =>

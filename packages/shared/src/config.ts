@@ -3,6 +3,10 @@ import { z } from 'zod'
 /** Mot de passe de développement d'`app_role` : public, donc interdit en production. */
 export const DEFAULT_APP_DB_PASSWORD = 'app-dev-password-change-me'
 
+/** Une variable vide ou blanche (ex. `BREVO_API_KEY=` dans un compose) équivaut à une variable absente. */
+const blankAsUndefined = (v: unknown) => (typeof v === 'string' && v.trim() === '' ? undefined : v)
+const optionalMail = <T extends z.ZodTypeAny>(schema: T) => z.preprocess(blankAsUndefined, schema.optional())
+
 const EnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().positive().default(3000),
@@ -51,20 +55,20 @@ const EnvSchema = z.object({
   PIN_FAILURE_MAX: z.coerce.number().int().positive().default(100),
   // Envoi d'e-mails transactionnels. Sans MAIL_TRANSPORT, aucun e-mail n'est envoyé (les
   // fonctions qui en dépendent restent désactivées). 'smtp' ou 'brevo' (API HTTP).
-  MAIL_TRANSPORT: z.enum(['smtp', 'brevo']).optional(),
+  MAIL_TRANSPORT: optionalMail(z.enum(['smtp', 'brevo'])),
   // Adresse d'expédition, requise dès qu'un transport est choisi (ex. `Pengou <noreply@pengou.fr>`).
-  MAIL_FROM: z.string().min(1).optional(),
+  MAIL_FROM: optionalMail(z.string().min(1)),
   // Adresse de réponse, optionnelle.
-  MAIL_REPLY_TO: z.string().min(1).optional(),
+  MAIL_REPLY_TO: optionalMail(z.string().min(1)),
   // Transport smtp : serveur, port (587 par défaut) et identifiants (les deux ou aucun).
-  SMTP_HOST: z.string().min(1).optional(),
-  SMTP_PORT: z.coerce.number().int().positive().default(587),
-  SMTP_USER: z.string().min(1).optional(),
-  SMTP_PASSWORD: z.string().min(1).optional(),
+  SMTP_HOST: optionalMail(z.string().min(1)),
+  SMTP_PORT: z.preprocess(blankAsUndefined, z.coerce.number().int().positive().default(587)),
+  SMTP_USER: optionalMail(z.string().min(1)),
+  SMTP_PASSWORD: optionalMail(z.string().min(1)),
   // Transport brevo : clé d'API (secrète).
-  BREVO_API_KEY: z.string().min(1).optional(),
+  BREVO_API_KEY: optionalMail(z.string().min(1)),
   // Contrôle DNS du domaine des adresses saisies. 'auto' : actif si un transport est configuré.
-  EMAIL_DOMAIN_CHECK: z.enum(['auto', 'true', 'false']).default('auto'),
+  EMAIL_DOMAIN_CHECK: z.preprocess(blankAsUndefined, z.enum(['auto', 'true', 'false']).default('auto')),
 })
 
 export type OAuthProviderCreds = {
