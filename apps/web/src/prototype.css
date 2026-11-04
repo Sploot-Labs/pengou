@@ -1029,7 +1029,9 @@ fieldset.host-field > legend {
   border-radius: 12px;
   background: color-mix(in srgb, var(--danger) 22%, transparent);
   border: 1px solid var(--danger);
-  color: #ffffff;
+  /* Encre forte du thème sur la teinte danger à 22 % : clair 10,5:1 sur le fond, 11,3:1 sur une
+     surface ; sombre 9,9:1 et 8,7:1 ; scène (encre blanche) 11,6:1 et 10,1:1. */
+  color: var(--ink-strong);
   font-size: 14px;
 }
 
@@ -3850,12 +3852,10 @@ p.source-credit {
   cursor: pointer;
 }
 
-/* Refus de création de quiz : encre forte du thème (le blanc de .join-error est illisible en clair, 1,5:1).
-   Contrastes calculés : clair #0B2545 sur #E8CFD0 = 10,5:1 ; sombre #BFE4F2 sur #3E2A32 = 9,9:1. */
+/* Refus de création de quiz : message empilé (l'encre vient de .join-error). */
 .ab-quiz-limit {
   flex-direction: column;
   align-items: flex-start;
-  color: var(--ink-strong);
 }
 
 .ab-quiz-limit p {
