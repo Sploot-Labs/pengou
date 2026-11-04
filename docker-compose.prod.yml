@@ -42,6 +42,13 @@ services:
       FACEBOOK_CLIENT_SECRET: ${FACEBOOK_CLIENT_SECRET:-}
       GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
       GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+      # Conditions d'utilisation (voir README, section « Conditions d'utilisation »). Vides : aucune
+      # acceptation demandée. pengou.fr : LEGAL_TERMS_URL=https://pengou.fr/cgu/,
+      # LEGAL_PRIVACY_URL=https://pengou.fr/politique-de-confidentialite/ et LEGAL_TERMS_VERSION à la
+      # date de « Dernière mise à jour » des CGU, à monter à chaque changement de cette date.
+      LEGAL_TERMS_URL: ${LEGAL_TERMS_URL:-}
+      LEGAL_PRIVACY_URL: ${LEGAL_PRIVACY_URL:-}
+      LEGAL_TERMS_VERSION: ${LEGAL_TERMS_VERSION:-}
       # Plafond de joueurs par partie (voir docs/charge).
       MAX_PLAYERS_PER_SESSION: ${MAX_PLAYERS_PER_SESSION:-640}
       # Contenu de bibliothèque propre à l'instance (optionnel, voir docs/devops.md) :

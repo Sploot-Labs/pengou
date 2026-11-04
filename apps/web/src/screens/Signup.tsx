@@ -1,15 +1,22 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { signUp, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
+import { fetchLegal, isLegalActive, type ActiveLegalInfo } from '../api/legal'
 import { Button, Logo } from '../ui'
+import { ExternalLink } from '../ui/ExternalLink'
 
 interface FieldErrors {
   name?: string
   email?: string
   password?: string
   confirmPassword?: string
+  age?: string
+  terms?: string
 }
+
+/** CGU de l'instance : en cours de chargement, actives, désactivées (null) ou injoignables. */
+type LegalState = { status: 'loading' } | { status: 'ready'; legal: ActiveLegalInfo | null } | { status: 'error' }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 // Matches the server's Better Auth default (verified by hand: a 7-char
@@ -23,6 +30,9 @@ export function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [ageConfirmed, setAgeConfirmed] = useState(false)
+  const [termsAccepted, setTermsAccepted] = useState(false)
+  const [legalState, setLegalState] = useState<LegalState>({ status: 'loading' })
   const [errors, setErrors] = useState<FieldErrors>({})
   const [formError, setFormError] = useState<string | null>(null)
   const [pending, setPending] = useState(false)
@@ -31,11 +41,32 @@ export function Signup() {
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
+  const ageRef = useRef<HTMLInputElement>(null)
+  const termsRef = useRef<HTMLInputElement>(null)
   const formErrorRef = useRef<HTMLParagraphElement>(null)
 
   useEffect(() => {
     if (formError) formErrorRef.current?.focus()
   }, [formError])
+
+  // Les CGU dépendent de l'instance : sans version configurée, le formulaire reste sans case.
+  // Tant que la configuration n'est pas connue, l'envoi est bloqué (le serveur refuserait de
+  // toute façon une inscription sans acceptation sur une instance qui l'exige).
+  const loadLegal = useCallback(async () => {
+    setLegalState({ status: 'loading' })
+    try {
+      const info = await fetchLegal()
+      setLegalState({ status: 'ready', legal: isLegalActive(info) ? info : null })
+    } catch {
+      setLegalState({ status: 'error' })
+    }
+  }, [])
+
+  useEffect(() => {
+    void loadLegal()
+  }, [loadLegal])
+
+  const legal = legalState.status === 'ready' ? legalState.legal : null
 
   function validate(): FieldErrors {
     const next: FieldErrors = {}
@@ -50,6 +81,12 @@ export function Signup() {
     }
     if (confirmPassword !== password) {
       next.confirmPassword = 'Les mots de passe ne correspondent pas.'
+    }
+    if (legal && !ageConfirmed) {
+      next.age = 'Confirmez que vous avez 15 ans ou plus.'
+    }
+    if (legal && !termsAccepted) {
+      next.terms = "Acceptez les conditions d'utilisation pour créer votre compte."
     }
     return next
   }
@@ -76,10 +113,23 @@ export function Signup() {
       confirmPasswordRef.current?.focus()
       return
     }
+    if (next.age) {
+      ageRef.current?.focus()
+      return
+    }
+    if (next.terms) {
+      termsRef.current?.focus()
+      return
+    }
 
     setPending(true)
     try {
-      await signUp({ email: email.trim(), password, name: name.trim() })
+      await signUp({
+        email: email.trim(),
+        password,
+        name: name.trim(),
+        ...(legal ? { acceptedTermsVersion: legal.termsVersion, ageConfirmed: true } : {}),
+      })
       // Same reasoning as Login: refresh the shared context before
       // navigating so <RequireAuth> on `/` sees the new session immediately.
       await refresh()
@@ -198,7 +248,75 @@ export function Signup() {
           )}
         </div>
 
-        <Button variant="primary" type="submit" disabled={pending}>
+        {legalState.status === 'error' && (
+          <>
+            <p className="join-error" role="alert">
+              Impossible de charger les conditions d'utilisation. Vérifiez votre connexion et réessayez.
+            </p>
+            <Button variant="ghost" type="button" onClick={() => void loadLegal()}>
+              Réessayer
+            </Button>
+          </>
+        )}
+
+        {legal && (
+          <>
+            <div className="join-field">
+              <div className="join-check">
+                <input
+                  id="signup-age"
+                  ref={ageRef}
+                  type="checkbox"
+                  checked={ageConfirmed}
+                  onChange={(e) => {
+                    setAgeConfirmed(e.target.checked)
+                    if (e.target.checked && errors.age) setErrors((prev) => ({ ...prev, age: undefined }))
+                  }}
+                  aria-invalid={errors.age ? true : undefined}
+                  aria-describedby={errors.age ? 'signup-age-error' : undefined}
+                />
+                <label htmlFor="signup-age">J'ai 15 ans ou plus</label>
+              </div>
+              {errors.age && (
+                <p className="join-error" id="signup-age-error" role="alert">
+                  {errors.age}
+                </p>
+              )}
+            </div>
+
+            <div className="join-field">
+              <div className="join-check">
+                <input
+                  id="signup-terms"
+                  ref={termsRef}
+                  type="checkbox"
+                  checked={termsAccepted}
+                  onChange={(e) => {
+                    setTermsAccepted(e.target.checked)
+                    if (e.target.checked && errors.terms) setErrors((prev) => ({ ...prev, terms: undefined }))
+                  }}
+                  aria-invalid={errors.terms ? true : undefined}
+                  aria-describedby={errors.terms ? 'signup-terms-error' : undefined}
+                />
+                <label htmlFor="signup-terms">
+                  J'accepte les <ExternalLink href={legal.termsUrl}>conditions d'utilisation</ExternalLink>
+                </label>
+              </div>
+              {errors.terms && (
+                <p className="join-error" id="signup-terms-error" role="alert">
+                  {errors.terms}
+                </p>
+              )}
+            </div>
+
+            <p className="join-legal">
+              La <ExternalLink href={legal.privacyUrl}>politique de confidentialité</ExternalLink> explique comment
+              vos données sont traitées.
+            </p>
+          </>
+        )}
+
+        <Button variant="primary" type="submit" disabled={pending || legalState.status !== 'ready'}>
           {pending ? 'Inscription…' : "S'inscrire"}
         </Button>
 

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { apiDelete, apiGet, apiPatch, apiPost } from './client.js'
+import { apiDelete, apiGet, apiPatch, apiPost, onTermsAcceptanceRequired } from './client.js'
 import { setActiveTenantId } from './activeTenant.js'
 
 function mockFetchOnce(status: number, body: unknown, ok = status >= 200 && status < 300) {
@@ -124,5 +124,33 @@ describe('client API typé', () => {
   it('gère un corps vide (ex. 204) sans lever une erreur de parsing', async () => {
     mockFetchOnce(204, undefined)
     await expect(apiDelete('/api/x')).resolves.toBeUndefined()
+  })
+})
+
+describe('client API, revalidation des CGU', () => {
+  it("expose le code d'erreur du serveur sur l'ApiError", async () => {
+    mockFetchOnce(400, { message: 'Acceptez les CGU.', code: 'TERMS_ACCEPTANCE_REQUIRED' })
+    await expect(apiPost('/api/auth/sign-up/email', {})).rejects.toMatchObject({ status: 400, code: 'TERMS_ACCEPTANCE_REQUIRED' })
+  })
+
+  it('signale un 403 TERMS_ACCEPTANCE_REQUIRED aux abonnés, une fois par réponse', async () => {
+    const listener = vi.fn()
+    const unsubscribe = onTermsAcceptanceRequired(listener)
+    mockFetchOnce(403, { error: 'Les CGU ont changé.', code: 'TERMS_ACCEPTANCE_REQUIRED' })
+    await expect(apiGet('/api/quizzes')).rejects.toMatchObject({ status: 403 })
+    expect(listener).toHaveBeenCalledTimes(1)
+    unsubscribe()
+    mockFetchOnce(403, { error: 'Les CGU ont changé.', code: 'TERMS_ACCEPTANCE_REQUIRED' })
+    await expect(apiGet('/api/quizzes')).rejects.toMatchObject({ status: 403 })
+    expect(listener).toHaveBeenCalledTimes(1)
+  })
+
+  it("ne signale rien pour un autre 403 (droits d'accès)", async () => {
+    const listener = vi.fn()
+    const unsubscribe = onTermsAcceptanceRequired(listener)
+    mockFetchOnce(403, { error: 'Accès refusé à ce workspace.' })
+    await expect(apiGet('/api/workspaces')).rejects.toMatchObject({ status: 403 })
+    expect(listener).not.toHaveBeenCalled()
+    unsubscribe()
   })
 })

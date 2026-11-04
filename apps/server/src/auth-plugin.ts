@@ -1,6 +1,8 @@
 import type { FastifyInstance } from 'fastify'
 import { toNodeHandler, fromNodeHeaders } from 'better-auth/node'
 import type { Auth } from '@splootlabs/auth'
+import type { LegalConfig } from '@splootlabs/shared'
+import { termsAcceptanceRequired } from './legal.js'
 
 // NOTE(déviation) : le brief prévoyait `fastify-better-auth` (`FastifyBetterAuth` +
 // `getAuthDecorator`). Ce paquet (v1.2.0) déclare `peerDependencies: { fastify: '5.x' }`
@@ -11,7 +13,7 @@ import type { Auth } from '@splootlabs/auth'
 // Fallback documenté dans le brief : on monte le handler Better Auth directement sur
 // une route Fastify, en réutilisant `toNodeHandler`/`fromNodeHeaders` de `better-auth/node`
 // (ce sont exactement les mêmes primitives que `fastify-better-auth` utilise en interne).
-export async function registerAuth(app: FastifyInstance, auth: Auth): Promise<void> {
+export async function registerAuth(app: FastifyInstance, auth: Auth, legal: LegalConfig | null = null): Promise<void> {
   const authHandler = toNodeHandler(auth)
 
   // Encapsulé dans un sous-contexte Fastify pour que la désactivation du parsing JSON
@@ -34,10 +36,14 @@ export async function registerAuth(app: FastifyInstance, auth: Auth): Promise<vo
     })
   })
 
-  // Route d'exemple protégée : renvoie l'utilisateur courant, ou 401.
+  // Sonde de session : renvoie l'utilisateur courant, ou 401. Reste ouverte pendant la
+  // revalidation des CGU et indique au client s'il doit afficher l'écran d'acceptation.
   app.get('/api/me', async (request, reply) => {
     const session = await auth.api.getSession({ headers: fromNodeHeaders(request.headers) })
     if (!session?.user) return reply.code(401).send({ error: 'Non authentifié.' })
-    return { user: session.user }
+    return {
+      user: session.user,
+      termsAcceptanceRequired: termsAcceptanceRequired(session.user, legal?.termsVersion),
+    }
   })
 }

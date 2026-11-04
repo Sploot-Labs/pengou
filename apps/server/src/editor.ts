@@ -15,7 +15,7 @@ export function registerEditor(
   app: FastifyInstance,
   deps: { systemDb: Db; appDb: Db; auth: Auth; config: AppConfig },
 ): void {
-  registerRequireUser(app, deps.auth)
+  registerRequireUser(app, deps.auth, deps.config.legal?.termsVersion ?? null)
   const routeDeps = { systemDb: deps.systemDb, appDb: deps.appDb, config: deps.config }
   registerQuizRoutes(app, routeDeps)
   registerQuestionRoutes(app, routeDeps) // Task 5
