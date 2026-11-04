@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { useSession } from '../api/auth'
 import { useWorkspaces } from '../api/workspace-context'
 import { ApiError } from '../api/client'
@@ -17,6 +17,9 @@ const ROLE_LABEL: Record<string, string> = { owner: 'propriétaire', admin: 'adm
  */
 export function AcceptInvitation() {
   const { token = '' } = useParams()
+  // Preuve du lien e-mailé : la renvoyer à l'acceptation confirme l'adresse.
+  const [searchParams] = useSearchParams()
+  const proof = searchParams.get('v')
   const { user } = useSession()
   const { setActive } = useWorkspaces()
 
@@ -43,7 +46,7 @@ export function AcceptInvitation() {
     setAccepting(true)
     setAcceptError(null)
     try {
-      const { tenantId } = await acceptInvitation(token)
+      const { tenantId } = await acceptInvitation(token, proof)
       setActive(tenantId)
       // Rechargement dur : la nouvelle membership + le nouveau contexte tenant sont pris en compte.
       window.location.assign('/')

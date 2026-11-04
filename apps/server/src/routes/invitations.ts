@@ -12,6 +12,7 @@ import {
 import type { AppConfig, Role } from '@splootlabs/shared'
 import { requireUser } from '../require-user.js'
 import { requirePermission } from '../require-permission.js'
+import { invitationEmailProof, isInvitationEmailProofValid } from '../invitation-proof.js'
 
 export type InvitationDeps = {
   systemDb: Db
@@ -85,6 +86,8 @@ function publicInvitation(inv: Awaited<ReturnType<typeof getInvitationByToken>>,
 export function registerInvitationRoutes(app: FastifyInstance, deps: InvitationDeps): void {
   const { systemDb, appDb, config, mailer } = deps
   const mailLogger: MailLogger = deps.mailLogger ?? app.log
+  // Même secret que Better Auth (cf. index.ts) : la preuve du lien e-mailé en dépend.
+  const proofSecret = config.authSecret ?? config.sessionSecret
   const guard = { preHandler: [requireUser, requirePermission(systemDb, 'members:manage')] }
 
   // Limite propre à la création et au renvoi, en plus de la limite globale par IP. Un seul
@@ -97,9 +100,10 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: InvitationD
   if (rateLimitEnabled) {
     const check = app.createRateLimit({
       ...INVITATION_RATE_LIMIT,
-      keyGenerator: (req: FastifyRequest) => `invitation:${req.user.id}`,
+      keyGenerator: (req: FastifyRequest) => `invitation:${req.user?.id ?? req.ip}`,
     })
     const limitInvitations: preHandlerHookHandler = async (request, reply) => {
+      if (reply.sent) return
       const result = await check(request)
       if (result.isAllowed || !result.isExceeded) return
       reply.header('retry-after', result.ttlInSeconds)
@@ -119,13 +123,16 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: InvitationD
     try {
       const rendered = invitationMail({
         baseUrl: config.authUrl,
-        url: `${config.authUrl}/invitations/${invitation.token}`,
+        // Seul le lien e-mailé porte la preuve `v` ; l'API ne renvoie que le token nu.
+        url: `${config.authUrl}/invitations/${invitation.token}?v=${invitationEmailProof(proofSecret, invitation.token)}`,
         inviterName: request.user.name?.trim() || request.user.email,
         workspaceName: await workspaceName(systemDb, tenantId),
         role: invitation.role === 'admin' ? 'admin' : 'member',
         expiresAt: invitation.expiresAt,
       })
       const mail = { ...rendered, to: invitation.email, kind: 'invitation' as const }
+      // Libellé du transport configuré (un mailer de test injecté garde ce libellé) ; un mailer
+      // désactivé n'arrive jamais ici.
       sent = await sendAndLog(mailer, mail, mailLogger, config.mail.transport)
       if (!sent) return { invitation, emailSent: false }
       const emailedAt = new Date()
@@ -205,7 +212,13 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: InvitationD
 
   app.post<{ Params: { token: string } }>('/api/invitations/:token/accept', { preHandler: requireUser }, async (request, reply) => {
     try {
-      const result = await acceptInvitation(systemDb, { token: request.params.token, userId: request.user.id })
+      // `v` : preuve du lien e-mailé. Absente (lien copié) ou fausse, l'acceptation réussit mais ne
+      // confirme pas l'adresse.
+      const { token } = request.params
+      const proof = (request.body as { v?: unknown } | undefined)?.v
+      const result = await acceptInvitation(systemDb, {
+        token, userId: request.user.id, emailProofValid: isInvitationEmailProofValid(proofSecret, token, proof),
+      })
       return reply.code(200).send(result)
     } catch (e) {
       if (e instanceof InvitationError) {

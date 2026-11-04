@@ -3,7 +3,9 @@ import type { FastifyInstance } from 'fastify'
 import { eq } from 'drizzle-orm'
 import { startTestDb, runMigrations, schema } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
-import { createMailer, DELIVERABILITY_MESSAGES, MemoryMailer, type Mailer } from '@splootlabs/mail'
+import {
+  createMailer, DELIVERABILITY_MESSAGES, MemoryMailer, type DnsResolver, type Mailer, type OutgoingMail,
+} from '@splootlabs/mail'
 import { loadConfig } from '@splootlabs/shared'
 import { buildServer } from './app.js'
 import { registerAuth } from './auth-plugin.js'
@@ -26,10 +28,18 @@ function captureLogger() {
   return { info: vi.fn(), warn: vi.fn(), error: vi.fn() }
 }
 
-type BuildOpts = { logger?: ReturnType<typeof captureLogger>; invitationRateLimit?: boolean }
+type BuildOpts = {
+  logger?: ReturnType<typeof captureLogger>
+  invitationRateLimit?: boolean
+  /** Force le contrôle DNS (sinon désactivé en test, faute de transport configuré). */
+  domainCheck?: boolean
+  resolver?: DnsResolver
+}
 
 async function buildApp(mailer: Mailer, opts: BuildOpts = {}): Promise<FastifyInstance> {
-  const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'multi' })
+  const config = loadConfig({
+    NODE_ENV: 'test', TENANCY_MODE: 'multi', ...(opts.domainCheck ? { EMAIL_DOMAIN_CHECK: 'true' } : {}),
+  })
   // L'auth n'a pas de mailer : l'inscription n'envoie rien, seul l'envoi d'invitation est observé.
   const auth = createAuth(ctx.db, {
     secret: 'test-secret-at-least-32-chars-long!!', baseURL: BASE_URL, tenancyMode: config.tenancyMode,
@@ -40,6 +50,7 @@ async function buildApp(mailer: Mailer, opts: BuildOpts = {}): Promise<FastifyIn
     systemDb: ctx.db, appDb: ctx.appDb, auth, config, mailer,
     mailLogger: opts.logger ?? captureLogger(),
     invitationRateLimit: opts.invitationRateLimit,
+    resolver: opts.resolver,
   })
   return app
 }
@@ -80,6 +91,21 @@ function invite(app: FastifyInstance, tenantId: string, cookie: string, email: s
   })
 }
 
+/** Preuve `v` portée par le lien de l'e-mail d'invitation. */
+function proofFrom(mail: OutgoingMail): string {
+  const v = /\/invitations\/[0-9a-f]+\?v=([A-Za-z0-9_-]+)/.exec(mail.text)?.[1]
+  expect(v).toBeTruthy()
+  return v!
+}
+
+function accept(app: FastifyInstance, token: string, cookie: string, v?: string) {
+  if (v === undefined) return app.inject({ method: 'POST', url: `/api/invitations/${token}/accept`, headers: { cookie } })
+  return app.inject({
+    method: 'POST', url: `/api/invitations/${token}/accept`, payload: { v },
+    headers: { 'content-type': 'application/json', cookie },
+  })
+}
+
 async function emailedAt(id: string): Promise<Date | null> {
   const [row] = await ctx.db.select({ emailedAt: schema.invitation.emailedAt }).from(schema.invitation)
     .where(eq(schema.invitation.id, id))
@@ -106,7 +132,9 @@ describe('e2e : invitation envoyée par e-mail', () => {
     const [mail] = mailer.sent
     expect(mail.kind).toBe('invitation')
     expect(mail.to).toBe('invite1@example.com')
-    expect(mail.text).toContain(`${BASE_URL}/invitations/${body.invitation.token}`)
+    expect(mail.text).toContain(`${BASE_URL}/invitations/${body.invitation.token}?v=`)
+    // La preuve n'est que dans l'e-mail : la réponse de l'API ne porte que le token nu.
+    expect(res.body).not.toContain(proofFrom(mail))
     expect(mail.text).toContain('Camille Martin')
     expect(mail.text).toContain('Classe de CM2')
     expect(await emailedAt(body.invitation.id)).not.toBeNull()
@@ -133,6 +161,7 @@ describe('e2e : invitation envoyée par e-mail', () => {
     expect(mailer.sent).toHaveLength(2)
     expect(mailer.sent[1].text).toContain(`${BASE_URL}/invitations/${body.invitation.token}`)
     expect(mailer.sent[1].text).not.toContain(created.invitation.token)
+    expect(res.body).not.toContain(proofFrom(mailer.sent[1]))
     expect(await emailedAt(created.invitation.id)).not.toBeNull()
 
     mailer.failNext()
@@ -199,22 +228,74 @@ describe('e2e : invitation envoyée par e-mail', () => {
     expect(mailer.sent).toHaveLength(0)
     await app.close()
   })
+
+  it('domaine sans MX ni adresse refusé en 400 (contrôle DNS actif, résolveur injecté)', async () => {
+    const notFound = async (): Promise<never> => { throw Object.assign(new Error('ENOTFOUND'), { code: 'ENOTFOUND' }) }
+    const resolver: DnsResolver = {
+      resolveMx: async (d) => {
+        if (d === 'domaine-mort.example') return notFound()
+        return [{ exchange: `mx.${d}`, priority: 10 }]
+      },
+      resolve4: notFound,
+      resolve6: notFound,
+    }
+    const mailer = new MemoryMailer()
+    const app = await buildApp(mailer, { domainCheck: true, resolver })
+    const { cookie, tenantId } = await setupOwner(app, 'inv-mail-dns@example.com')
+
+    const res = await invite(app, tenantId, cookie, 'personne@domaine-mort.example')
+    expect(res.statusCode).toBe(400)
+    expect(res.json()).toEqual({ error: DELIVERABILITY_MESSAGES.undeliverable })
+    expect((await invite(app, tenantId, cookie, 'quelquun@example.com')).statusCode).toBe(201)
+    expect(mailer.sent).toHaveLength(1)
+    await app.close()
+  })
 })
 
 describe("e2e : l'acceptation d'une invitation e-mailée confirme l'adresse", () => {
-  it('même adresse (casse et espaces près) : emailVerified devient vrai', async () => {
-    const app = await buildApp(new MemoryMailer())
+  it('lien e-mailé, même adresse (casse et espaces près) : emailVerified devient vrai', async () => {
+    const mailer = new MemoryMailer()
+    const app = await buildApp(mailer)
     const { cookie, tenantId } = await setupOwner(app, 'inv-verif-owner@example.com')
     const { invitation } = (await invite(app, tenantId, cookie, 'camille@example.com')).json() as InvitationResp
+    const v = proofFrom(mailer.sent[0])
 
     const guestCookie = await signUp(app, 'camille@example.com', 'Camille')
     // Adresse du compte écrite autrement que celle de l'invitation.
     await ctx.db.update(schema.user).set({ email: 'Camille@Example.com ' }).where(eq(schema.user.email, 'camille@example.com'))
     expect(await isVerified('Camille@Example.com ')).toBe(false)
 
-    const acc = await app.inject({ method: 'POST', url: `/api/invitations/${invitation.token}/accept`, headers: { cookie: guestCookie } })
+    const acc = await accept(app, invitation.token, guestCookie, v)
     expect(acc.statusCode).toBe(200)
     expect(await isVerified('Camille@Example.com ')).toBe(true)
+    await app.close()
+  })
+
+  it("lien copié sans preuve (l'auteur connaît le token) : emailVerified reste faux", async () => {
+    const app = await buildApp(new MemoryMailer())
+    const { cookie, tenantId } = await setupOwner(app, 'inv-verif-owner4@example.com')
+    const { invitation } = (await invite(app, tenantId, cookie, 'copie@example.com')).json() as InvitationResp
+    expect(await emailedAt(invitation.id)).not.toBeNull()
+
+    const guestCookie = await signUp(app, 'copie@example.com', 'Copie')
+    const acc = await accept(app, invitation.token, guestCookie)
+    expect(acc.statusCode).toBe(200)
+    expect(await isVerified('copie@example.com')).toBe(false)
+    await app.close()
+  })
+
+  it('preuve fausse : acceptation réussie, emailVerified reste faux', async () => {
+    const mailer = new MemoryMailer()
+    const app = await buildApp(mailer)
+    const { cookie, tenantId } = await setupOwner(app, 'inv-verif-owner5@example.com')
+    const { invitation } = (await invite(app, tenantId, cookie, 'faux@example.com')).json() as InvitationResp
+    const v = proofFrom(mailer.sent[0])
+    const wrong = (v[0] === 'A' ? 'B' : 'A') + v.slice(1)
+
+    const guestCookie = await signUp(app, 'faux@example.com', 'Faux')
+    const acc = await accept(app, invitation.token, guestCookie, wrong)
+    expect(acc.statusCode).toBe(200)
+    expect(await isVerified('faux@example.com')).toBe(false)
     await app.close()
   })
 
@@ -233,13 +314,14 @@ describe("e2e : l'acceptation d'une invitation e-mailée confirme l'adresse", ()
     await app.close()
   })
 
-  it('autre adresse : emailVerified reste faux', async () => {
-    const app = await buildApp(new MemoryMailer())
+  it('lien e-mailé, autre adresse : emailVerified reste faux', async () => {
+    const mailer = new MemoryMailer()
+    const app = await buildApp(mailer)
     const { cookie, tenantId } = await setupOwner(app, 'inv-verif-owner3@example.com')
     const { invitation } = (await invite(app, tenantId, cookie, 'prevu@example.com')).json() as InvitationResp
 
     const otherCookie = await signUp(app, 'autre@example.com', 'Autre')
-    const acc = await app.inject({ method: 'POST', url: `/api/invitations/${invitation.token}/accept`, headers: { cookie: otherCookie } })
+    const acc = await accept(app, invitation.token, otherCookie, proofFrom(mailer.sent[0]))
     expect(acc.statusCode).toBe(200)
     expect(await isVerified('autre@example.com')).toBe(false)
     await app.close()

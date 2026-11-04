@@ -158,13 +158,14 @@ export class InvitationError extends Error {
  * Accepte une invitation par token pour `userId` (systemDb, pré-contexte, transaction). Valide
  * l'état (pending, non expirée), refuse si l'utilisateur est déjà membre, crée la membership avec
  * le rôle invité et marque l'invitation `accepted`. Si l'invitation est réellement partie par
- * e-mail (`emailedAt`) et que l'adresse du compte est celle de l'invitation (casse et espaces de
- * bord ignorés, pas de normalisation des alias), l'adresse est confirmée dans la même transaction.
+ * e-mail (`emailedAt`), que l'acceptation vient du lien e-mailé (`emailProofValid`, vérifié par
+ * l'appelant) et que l'adresse du compte est celle de l'invitation (casse et espaces de bord
+ * ignorés, pas de normalisation des alias), l'adresse est confirmée dans la même transaction.
  * Renvoie le tenant rejoint + le rôle.
  */
 export async function acceptInvitation(
   db: Db,
-  input: { token: string; userId: string; nowMs?: number },
+  input: { token: string; userId: string; nowMs?: number; emailProofValid?: boolean },
 ): Promise<{ tenantId: string; role: Role }> {
   const nowMs = input.nowMs ?? Date.now()
   return db.transaction(async (tx) => {
@@ -196,8 +197,9 @@ export async function acceptInvitation(
     // Course entre deux acceptations : l'autre a consommé le jeton entre la lecture et l'update.
     if (consumed.length === 0) throw new InvitationError('not_pending')
 
-    // Un lien copié à la main ne prouve rien : seule une invitation e-mailée confirme l'adresse.
-    if (inv.emailedAt) {
+    // Un lien copié à la main ne prouve rien : seul le lien e-mailé (avec sa preuve) confirme
+    // l'adresse. L'auteur connaît le token, pas la preuve.
+    if (input.emailProofValid && inv.emailedAt) {
       await tx.update(schema.user)
         .set({ emailVerified: true })
         .where(and(

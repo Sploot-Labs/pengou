@@ -87,6 +87,7 @@ export function fetchInvitationPreview(token: string): Promise<InvitationPreview
   return apiGet(`/api/invitations/${token}`)
 }
 
-export function acceptInvitation(token: string): Promise<{ tenantId: string; role: Role }> {
-  return apiPost(`/api/invitations/${token}/accept`)
+/** `v` : preuve portée par le lien reçu par e-mail ; elle permet de confirmer l'adresse. */
+export function acceptInvitation(token: string, v?: string | null): Promise<{ tenantId: string; role: Role }> {
+  return apiPost(`/api/invitations/${token}/accept`, v ? { v } : undefined)
 }
