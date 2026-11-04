@@ -58,6 +58,16 @@ describe('durcissement sécurité (helmet + rate-limit)', () => {
     await app.close()
   })
 
+  it("la CSP n'autorise aucun domaine de Google Fonts (polices auto-hébergées)", async () => {
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
+    const res = await app.inject({ method: 'GET', url: '/health' })
+    const csp = String(res.headers['content-security-policy'])
+    expect(csp).not.toMatch(/fonts\.googleapis\.com|fonts\.gstatic\.com/)
+    expect(csp).toContain("font-src 'self'")
+    expect(csp).toMatch(/style-src 'self' 'unsafe-inline'(;|$)/)
+    await app.close()
+  })
+
   it('rate-limit renvoie 429 une fois le plafond dépassé', async () => {
     // Plafond bas via RATE_LIMIT_MAX pour prouver le 429 sans marteler.
     const app = await buildServer(loadConfig({ NODE_ENV: 'test', RATE_LIMIT_MAX: '3' }))

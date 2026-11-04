@@ -84,6 +84,15 @@ importers:
 
   apps/web:
     dependencies:
+      '@fontsource-variable/nunito-sans':
+        specifier: 5.3.0
+        version: 5.3.0
+      '@fontsource/dm-mono':
+        specifier: 5.3.0
+        version: 5.3.0
+      '@fontsource/fredoka':
+        specifier: 5.3.0
+        version: 5.3.0
       '@splootlabs/quiz':
         specifier: workspace:*
         version: link:../../packages/quiz
@@ -1264,6 +1273,15 @@ packages:
 
   '@fastify/static@10.1.7':
     resolution: {integrity: sha512-7+lUiPRraENCiULgjhcqZyWSW6qnwIT87Is0u3c2Z3iGEEEGB45wJhYxzrSdzu12gHM4qcviEYcPEiCe4J6MCQ==}
+
+  '@fontsource-variable/nunito-sans@5.3.0':
+    resolution: {integrity: sha512-Vk1PSfckNDwgw2yGcsvJP3o/0zEW8Rp6KzbD8Ql/6iRHQshnhhAjt+cSIfAUyp5vQuSlleGHFW2LfYaaex0diw==}
+
+  '@fontsource/dm-mono@5.3.0':
+    resolution: {integrity: sha512-OINjI8C1S/wpchhQxl7njZdMn4+hnDCpQ4YtvvOpKNARo+0J8O1x1IcrChxNjHOhfVv1by8C/FQoy3hXK+C1Ug==}
+
+  '@fontsource/fredoka@5.3.0':
+    resolution: {integrity: sha512-s2IhjQ50wDnKkkaKmjhtL0rxQg6ITsVusiipM3m7zUwVZZbbCKsscNDkngwp28xVzfIt7neWrkgU1qKqyTycQg==}
 
   '@grpc/grpc-js@1.14.4':
     resolution: {integrity: sha512-k9Dj3DV/itK9D06Y8f190Qgop7/Ui+D0njFV3LHMPwPT75DpXLQohE9Wmz0QElrJnzsjB7KPWiKJbOl7IPDArQ==}
@@ -4729,6 +4747,12 @@ snapshots:
       fastify-plugin: 6.0.1
       fastq: 1.20.1
       glob: 13.0.6
+
+  '@fontsource-variable/nunito-sans@5.3.0': {}
+
+  '@fontsource/dm-mono@5.3.0': {}
+
+  '@fontsource/fredoka@5.3.0': {}
 
   '@grpc/grpc-js@1.14.4':
     dependencies:
