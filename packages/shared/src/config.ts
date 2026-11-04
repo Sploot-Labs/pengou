@@ -3,6 +3,21 @@ import { z } from 'zod'
 /** Mot de passe de développement d'`app_role` : public, donc interdit en production. */
 export const DEFAULT_APP_DB_PASSWORD = 'app-dev-password-change-me'
 
+function emptyAsUndefined<T extends z.ZodTypeAny>(schema: T) {
+  return z.preprocess((v) => (v === '' ? undefined : v), schema.optional())
+}
+
+function httpUrl(name: string) {
+  return z.string().url().refine((v) => /^https?:\/\//.test(v), `${name} doit être une URL http(s).`)
+}
+
+/** Date calendaire réelle au format AAAA-MM-JJ (refuse 2026-02-30). */
+function isIsoDate(value: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false
+  const date = new Date(`${value}T00:00:00Z`)
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value
+}
+
 const EnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().positive().default(3000),
@@ -49,7 +64,23 @@ const EnvSchema = z.object({
   // Échecs de PIN (player:join) tolérés par IP, ou par préfixe /64 en IPv6, sur 5 minutes. Haut
   // par défaut : une salle entière derrière une seule IP publique se trompe souvent de PIN.
   PIN_FAILURE_MAX: z.coerce.number().int().positive().default(100),
+  // Conditions d'utilisation (CGU) propres à l'instance. Sans LEGAL_TERMS_VERSION, aucune
+  // acceptation n'est demandée (self-host par défaut). Une valeur vide vaut une variable absente,
+  // ce qui permet le relais `${VAR:-}` de docker compose.
+  LEGAL_TERMS_URL: emptyAsUndefined(httpUrl('LEGAL_TERMS_URL')),
+  LEGAL_PRIVACY_URL: emptyAsUndefined(httpUrl('LEGAL_PRIVACY_URL')),
+  LEGAL_TERMS_VERSION: emptyAsUndefined(
+    z.string().refine(isIsoDate, 'LEGAL_TERMS_VERSION doit être une date valide au format AAAA-MM-JJ.'),
+  ),
 })
+
+/** Version des CGU et liens affichés à l'inscription. `null` : fonction désactivée. */
+export type LegalConfig = {
+  /** Date des CGU en vigueur (AAAA-MM-JJ), comparée à `user.terms_version`. */
+  termsVersion: string
+  termsUrl: string
+  privacyUrl: string
+}
 
 export type OAuthProviderCreds = {
   clientId?: string
@@ -79,6 +110,8 @@ export type AppConfig = {
   maxPlayersPerSession: number
   /** Échecs de PIN tolérés par IP (préfixe /64 en IPv6) sur la fenêtre du budget. */
   pinFailureMax: number
+  /** Acceptation des CGU à l'inscription et revalidation à chaque nouvelle version. */
+  legal: LegalConfig | null
   oauth: {
     google: OAuthProviderCreds
     facebook: OAuthProviderCreds
@@ -104,6 +137,20 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
       'Configuration invalide : APP_DB_PASSWORD doit être défini en production (mot de passe du rôle app_role).',
     )
   }
+  let legal: LegalConfig | null = null
+  if (parsed.LEGAL_TERMS_VERSION) {
+    if (!parsed.LEGAL_TERMS_URL) {
+      throw new Error('Configuration invalide : LEGAL_TERMS_URL est requis quand LEGAL_TERMS_VERSION est défini.')
+    }
+    if (!parsed.LEGAL_PRIVACY_URL) {
+      throw new Error('Configuration invalide : LEGAL_PRIVACY_URL est requis quand LEGAL_TERMS_VERSION est défini.')
+    }
+    legal = {
+      termsVersion: parsed.LEGAL_TERMS_VERSION,
+      termsUrl: parsed.LEGAL_TERMS_URL,
+      privacyUrl: parsed.LEGAL_PRIVACY_URL,
+    }
+  }
   return {
     nodeEnv: parsed.NODE_ENV,
     port: parsed.PORT,
@@ -127,6 +174,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     sessionSweepIntervalMs: parsed.SESSION_SWEEP_INTERVAL_MINUTES * 60_000,
     maxPlayersPerSession: parsed.MAX_PLAYERS_PER_SESSION,
     pinFailureMax: parsed.PIN_FAILURE_MAX,
+    legal,
     oauth: {
       google: { clientId: parsed.GOOGLE_CLIENT_ID, clientSecret: parsed.GOOGLE_CLIENT_SECRET },
       facebook: { clientId: parsed.FACEBOOK_CLIENT_ID, clientSecret: parsed.FACEBOOK_CLIENT_SECRET },
