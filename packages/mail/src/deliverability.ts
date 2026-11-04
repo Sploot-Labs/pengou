@@ -83,8 +83,9 @@ export async function checkEmailDeliverable(
   email: string,
   opts: { dns: boolean; resolver?: DnsResolver; timeoutMs?: number; logger?: MailLogger },
 ): Promise<Deliverability> {
-  const domain = recipientDomain(email.trim())
-  if (domain === 'inconnu') return 'ok'
+  // Point final retiré : `yopmail.com.` (nom absolu) désigne le même domaine que `yopmail.com`.
+  const domain = recipientDomain(email.trim()).replace(/\.+$/, '')
+  if (domain === 'inconnu' || domain === '') return 'ok'
   if (isDisposable(domain)) return 'disposable'
   if (!opts.dns) return 'ok'
 

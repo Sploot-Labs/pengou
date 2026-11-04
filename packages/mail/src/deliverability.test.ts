@@ -28,6 +28,14 @@ describe('checkEmailDeliverable', () => {
     expect(await checkEmailDeliverable('x@sub.yopmail.com', { dns: false })).toBe('disposable')
   })
 
+  it('ignore le point final du domaine (nom absolu) pour la liste et le DNS', async () => {
+    expect(await checkEmailDeliverable('x@yopmail.com.', { dns: false })).toBe('disposable')
+    expect(await checkEmailDeliverable('x@sub.yopmail.com..', { dns: false })).toBe('disposable')
+    const resolveMx = vi.fn(async () => [{ exchange: 'mx.example.org', priority: 10 }])
+    expect(await checkEmailDeliverable('a@example.org.', { dns: true, resolver: resolver({ resolveMx }) })).toBe('ok')
+    expect(resolveMx).toHaveBeenCalledWith('example.org')
+  })
+
   it('accepte quand un MX existe', async () => {
     expect(await checkEmailDeliverable('a@example.org', { dns: true, resolver: resolver() })).toBe('ok')
   })

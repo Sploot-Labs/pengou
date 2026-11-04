@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { requestPasswordReset } from '../api/auth'
 import { ApiError } from '../api/client'
+import { useAuthFeatures } from '../api/features'
 import { Button, Logo } from '../ui'
 import { EmailSuggestion } from '../ui/EmailSuggestion'
 
@@ -12,6 +13,7 @@ const NEUTRAL_MESSAGE =
   'Si un compte existe pour cette adresse, un e-mail vient de partir. Pensez à vérifier les indésirables.'
 
 export function ForgotPassword() {
+  const { mailEnabled, loading: featuresLoading } = useAuthFeatures()
   const [email, setEmail] = useState('')
   // Valeur sur laquelle la suggestion est calculée : mise à jour à la perte de focus seulement.
   const [checkedEmail, setCheckedEmail] = useState('')
@@ -53,6 +55,25 @@ export function ForgotPassword() {
     }
     setPending(false)
     setSent(true)
+  }
+
+  // Écran atteint par son URL sur une instance sans envoi : le serveur refuserait la demande, on le
+  // dit au lieu d'afficher la confirmation neutre. Pendant le chargement, le formulaire reste.
+  if (!featuresLoading && !mailEnabled) {
+    return (
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+        <Logo />
+        <div className="join-card">
+          <h1>Mot de passe oublié</h1>
+          <p className="join-subtitle">
+            La réinitialisation par e-mail n'est pas disponible sur cette instance. Contactez l'administrateur.
+          </p>
+          <p className="join-reassure">
+            <Link to="/login">Retour à la connexion</Link>
+          </p>
+        </div>
+      </main>
+    )
   }
 
   return (

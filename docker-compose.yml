@@ -59,6 +59,7 @@ services:
       SMTP_HOST: ${SMTP_HOST:-mailpit}
       SMTP_PORT: ${SMTP_PORT:-1025}
       # Mailpit n'offre pas STARTTLS : on lève l'exigence de TLS pour ce relais local seulement.
+      # Si SMTP_HOST pointe vers un vrai relais, mettre SMTP_REQUIRE_TLS=true.
       SMTP_REQUIRE_TLS: ${SMTP_REQUIRE_TLS:-false}
       MAIL_FROM: ${MAIL_FROM:-Pengou <contact@pengou.fr>}
       BREVO_API_KEY: ${BREVO_API_KEY:-}

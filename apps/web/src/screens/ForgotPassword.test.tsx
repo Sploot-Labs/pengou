@@ -4,6 +4,9 @@ import { MemoryRouter } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ForgotPassword } from './ForgotPassword'
 
+let features = { mailEnabled: true, loading: false }
+vi.mock('../api/features', () => ({ useAuthFeatures: () => features }))
+
 const NEUTRE =
   'Si un compte existe pour cette adresse, un e-mail vient de partir. Pensez à vérifier les indésirables.'
 
@@ -31,12 +34,30 @@ function submit() {
 
 describe('ForgotPassword', () => {
   beforeEach(() => {
+    features = { mailEnabled: true, loading: false }
     fetchMock.mockReset()
     vi.stubGlobal('fetch', fetchMock)
   })
   afterEach(() => {
     cleanup()
     vi.unstubAllGlobals()
+  })
+
+  it("sans envoi d'e-mails sur l'instance : explique et renvoie vers la connexion, sans formulaire", () => {
+    features = { mailEnabled: false, loading: false }
+    renderScreen()
+    expect(screen.getByText(
+      "La réinitialisation par e-mail n'est pas disponible sur cette instance. Contactez l'administrateur.",
+    )).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Retour à la connexion' })).toHaveAttribute('href', '/login')
+    expect(screen.queryByLabelText('E-mail')).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Envoyer le lien' })).not.toBeInTheDocument()
+  })
+
+  it('pendant le chargement des fonctionnalités : le formulaire reste affiché', () => {
+    features = { mailEnabled: false, loading: true }
+    renderScreen()
+    expect(screen.getByLabelText('E-mail')).toBeInTheDocument()
   })
 
   it("propose la correction du domaine à la perte de focus, et l'applique au clic", () => {
