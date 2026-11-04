@@ -8,6 +8,7 @@ import { Reveal } from '../motion/index.js'
 import { useLaunchGame } from '../realtime/useLaunchGame'
 import { AppHeader } from '../ui/AppHeader.js'
 import { ConfirmDialog } from '../ui/ConfirmDialog.js'
+import { isQuizLimitError, QuizLimitNotice } from '../ui/QuizLimitNotice.js'
 import { WorkspaceSwitcher } from '../ui/WorkspaceSwitcher.js'
 import { AnswerShape, Button } from '../ui'
 import { ANSWER_SHAPES } from '../constants'
@@ -119,6 +120,7 @@ export function Home() {
   const [creatingQuiz, setCreatingQuiz] = useState(false)
   const [newQuizTitle, setNewQuizTitle] = useState('')
   const [newQuizError, setNewQuizError] = useState<string | null>(null)
+  const [quizLimit, setQuizLimit] = useState(false)
   const [newQuizPending, setNewQuizPending] = useState(false)
   const newQuizTitleRef = useRef<HTMLInputElement>(null)
 
@@ -153,13 +155,15 @@ export function Home() {
       return
     }
     setNewQuizPending(true)
+    setQuizLimit(false)
     try {
       const created = await createQuiz({ title: trimmed })
       // Navigate straight into the new quiz's editor — the whole point of
       // "Nouveau quiz" is to start editing it, not to admire it in a list.
       navigate(`/quizzes/${created.id}`)
     } catch (err) {
-      setNewQuizError(errorMessage(err))
+      if (isQuizLimitError(err)) setQuizLimit(true)
+      else setNewQuizError(errorMessage(err))
       setNewQuizPending(false)
     }
   }
@@ -179,6 +183,7 @@ export function Home() {
   const [archivedError, setArchivedError] = useState<string | null>(null)
   const [restoringId, setRestoringId] = useState<string | null>(null)
   const [restoreError, setRestoreError] = useState<string | null>(null)
+  const [restoreLimit, setRestoreLimit] = useState(false)
 
   function loadArchived() {
     setArchivedLoading(true)
@@ -218,13 +223,15 @@ export function Home() {
   async function handleRestore(target: QuizListItem) {
     setRestoringId(target.id)
     setRestoreError(null)
+    setRestoreLimit(false)
     try {
       await restoreQuiz(target.id)
       setArchived((prev) => prev.filter((q) => q.id !== target.id))
       setQuizzes((prev) => [...prev, { ...target, archivedAt: null }])
       setAnnouncement(`Quiz « ${target.title} » restauré.`)
     } catch (err) {
-      setRestoreError(errorMessage(err))
+      if (isQuizLimitError(err)) setRestoreLimit(true)
+      else setRestoreError(errorMessage(err))
     } finally {
       setRestoringId(null)
     }
@@ -315,6 +322,7 @@ export function Home() {
 
           {creatingQuiz && (
             <form className="home-inline-form" onSubmit={(e) => void handleCreateQuiz(e)} noValidate>
+              {quizLimit && <QuizLimitNotice />}
               {newQuizError && (
                 <p className="join-error" role="alert" id="new-quiz-title-error">
                   {newQuizError}
@@ -459,6 +467,7 @@ export function Home() {
               <p className="ab-empty-state">Aucun quiz archivé.</p>
             ) : (
               <>
+                {restoreLimit && <QuizLimitNotice />}
                 {restoreError && (
                   <p className="join-error" role="alert">
                     {restoreError}

@@ -20,6 +20,7 @@ import { Button } from '../ui'
 import { SourceShort, SourcesNote } from '../ui/SourceCredit'
 import { WorkspaceSwitcher } from '../ui/WorkspaceSwitcher'
 import { useLaunchGame } from '../realtime/useLaunchGame'
+import { isQuizLimitError, QuizLimitNotice } from '../ui/QuizLimitNotice'
 import { LibraryPreview } from './LibraryPreview'
 
 /**
@@ -138,6 +139,7 @@ export function Library() {
   // Une seule action à la fois sur les quiz tout prêts (copie, ou copie puis lancement).
   const [pending, setPending] = useState<{ id: string; action: 'customize' | 'play' } | null>(null)
   const [actionError, setActionError] = useState<string | null>(null)
+  const [actionLimit, setActionLimit] = useState(false)
   const [previewId, setPreviewId] = useState<string | null>(null)
   const { launch } = useLaunchGame()
 
@@ -166,11 +168,13 @@ export function Library() {
   async function handleCustomize(id: string) {
     setPending({ id, action: 'customize' })
     setActionError(null)
+    setActionLimit(false)
     try {
       const copy = await duplicateLibraryQuiz(id)
       navigate(`/quizzes/${copy.id}`)
     } catch (err) {
       setActionError(errorMessage(err))
+      setActionLimit(isQuizLimitError(err))
       setPending(null)
     }
   }
@@ -179,11 +183,13 @@ export function Library() {
   async function handlePlay(id: string) {
     setPending({ id, action: 'play' })
     setActionError(null)
+    setActionLimit(false)
     let copy: { id: string; title: string }
     try {
       copy = await duplicateLibraryQuiz(id)
     } catch (err) {
       setActionError(errorMessage(err))
+      setActionLimit(isQuizLimitError(err))
       setPending(null)
       return
     }
@@ -260,6 +266,7 @@ export function Library() {
   const [title, setTitle] = useState('')
   const [composePending, setComposePending] = useState(false)
   const [composeError, setComposeError] = useState<string | null>(null)
+  const [composeLimit, setComposeLimit] = useState(false)
 
   function toggleQuestion(q: LibraryQuestion) {
     setSelection((prev) => (prev.some((p) => p.id === q.id) ? prev.filter((p) => p.id !== q.id) : [...prev, q]))
@@ -294,11 +301,13 @@ export function Library() {
     if (selection.length === 0 || selection.length > SELECTION_MAX || trimmed === '') return
     setComposePending(true)
     setComposeError(null)
+    setComposeLimit(false)
     try {
       const created = await composeQuiz(trimmed, selection.map((q) => q.id))
       navigate(`/quizzes/${created.id}`)
     } catch (err) {
-      setComposeError(errorMessage(err))
+      if (isQuizLimitError(err)) setComposeLimit(true)
+      else setComposeError(errorMessage(err))
       setComposePending(false)
     }
   }
@@ -406,11 +415,11 @@ export function Library() {
 
         {tab === 'quizzes' && (
           <section role="tabpanel" id="library-panel-quizzes" aria-labelledby="library-tab-quizzes">
-            {actionError && !previewId && (
+            {actionError && !previewId && (actionLimit ? <QuizLimitNotice /> : (
               <p className="join-error" role="alert">
                 {actionError}
               </p>
-            )}
+            ))}
             {quizzesLoading ? (
               <p role="status">Chargement des quiz…</p>
             ) : quizzesError ? (
@@ -585,6 +594,7 @@ export function Library() {
                 </ol>
               )}
               <form className="home-inline-form" onSubmit={(e) => void handleCompose(e)} noValidate>
+                {composeLimit && <QuizLimitNotice />}
                 {composeError && (
                   <p className="join-error" role="alert">
                     {composeError}

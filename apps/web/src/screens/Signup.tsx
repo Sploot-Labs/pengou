@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { signUp, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
+import { safeNextPath, nextQuery } from '../nextPath'
 import { Button, Logo } from '../ui'
+import { EmailSuggestion } from '../ui/EmailSuggestion'
 
 interface FieldErrors {
   name?: string
@@ -19,8 +21,10 @@ const MIN_PASSWORD_LENGTH = 8
 export function Signup() {
   const navigate = useNavigate()
   const { refresh } = useSession()
+  const returnTo = safeNextPath(useSearchParams()[0].get('next'))
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [emailChecked, setEmailChecked] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [errors, setErrors] = useState<FieldErrors>({})
@@ -83,7 +87,7 @@ export function Signup() {
       // Same reasoning as Login: refresh the shared context before
       // navigating so <RequireAuth> on `/` sees the new session immediately.
       await refresh()
-      navigate('/', { replace: true })
+      navigate(returnTo ?? '/', { replace: true })
     } catch (err) {
       setPending(false)
       setFormError(
@@ -142,8 +146,16 @@ export function Signup() {
               setEmail(e.target.value)
               if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }))
             }}
+            onBlur={() => setEmailChecked(email)}
             aria-invalid={errors.email ? true : undefined}
             aria-describedby={errors.email ? 'signup-email-error' : undefined}
+          />
+          <EmailSuggestion
+            value={emailChecked}
+            onApply={(fixed) => {
+              setEmail(fixed)
+              setEmailChecked(fixed)
+            }}
           />
           {errors.email && (
             <p className="join-error" id="signup-email-error" role="alert">
@@ -203,7 +215,7 @@ export function Signup() {
         </Button>
 
         <p className="join-reassure">
-          Déjà un compte ? <Link to="/login">Se connecter</Link>
+          Déjà un compte ? <Link to={`/login${nextQuery(returnTo)}`}>Se connecter</Link>
         </p>
       </form>
     </main>

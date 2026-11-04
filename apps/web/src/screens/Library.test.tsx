@@ -20,7 +20,12 @@ vi.mock('../api/library', () => ({
   composeQuiz: vi.fn(),
   getLibraryQuiz: vi.fn(),
 }))
-vi.mock('../api/auth', () => ({ signOut: vi.fn(), useSession: () => ({ refresh: vi.fn() }) }))
+const mockSendVerificationEmail = vi.fn()
+vi.mock('../api/auth', () => ({
+  signOut: vi.fn(),
+  useSession: () => ({ refresh: vi.fn(), user: { email: 'camille@example.com', emailVerified: false } }),
+  sendVerificationEmail: (...args: unknown[]) => mockSendVerificationEmail(...args),
+}))
 // « Jouer maintenant » lance la partie via le hook partagé, simulé ici (aucune vraie socket).
 const mockLaunch = vi.fn()
 vi.mock('../realtime/useLaunchGame', () => ({
@@ -164,6 +169,23 @@ describe('Library', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Créer le quiz' }))
     await waitFor(() => expect(lib.composeQuiz).toHaveBeenCalledWith('Mon quiz', ['a', 'b']))
     await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/quizzes/nouveau'))
+  })
+
+  it("composition refusée faute d'adresse confirmée : message dédié et renvoi sur place", async () => {
+    const { ApiError } = await import('../api/client')
+    vi.mocked(lib.composeQuiz).mockRejectedValue(
+      new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'),
+    )
+    mockSendVerificationEmail.mockResolvedValue(undefined)
+    await openQuestions()
+    fireEvent.click(screen.getByRole('checkbox', { name: /Énoncé a/ }))
+    fireEvent.change(screen.getByLabelText('Titre du quiz'), { target: { value: 'Mon quiz' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Créer le quiz' }))
+    const alert = await screen.findByRole('alert')
+    expect(alert).toHaveTextContent("Confirmez votre adresse e-mail pour créer d'autres quiz.")
+    fireEvent.click(within(alert).getByRole('button', { name: "Renvoyer l'e-mail" }))
+    await waitFor(() => expect(screen.getByText('E-mail envoyé')).toBeInTheDocument())
+    expect(mockNavigate).not.toHaveBeenCalled()
   })
 
   it('désactive « Créer le quiz » quand la sélection est vide', async () => {

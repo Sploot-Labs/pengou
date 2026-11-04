@@ -3818,3 +3818,34 @@ p.source-credit {
   border: 1px solid currentColor;
   font-size: 14px;
 }
+
+/* Rappel de confirmation d'adresse : fond clair, texte ink-strong, bouton texte souligné. */
+.ab-verify-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-5);
+  background: var(--surface-2);
+  color: var(--ink-strong);
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.ab-verify-banner--ok {
+  padding: var(--space-2) var(--space-5);
+}
+
+.ab-verify-banner p {
+  margin: 0;
+}
+
+.ab-verify-banner__action {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}

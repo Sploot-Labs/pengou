@@ -37,6 +37,12 @@ export interface Invitation {
 /** Invitation telle que listée : le jeton n'est renvoyé qu'à la création et au renvoi. */
 export type PendingInvitation = Omit<Invitation, 'token'>
 
+/** Réponse de création et de renvoi : `emailSent` dit si l'e-mail est réellement parti. */
+export interface InvitationResult {
+  invitation: Invitation
+  emailSent: boolean
+}
+
 export interface InvitationPreview {
   email: string
   role: Role
@@ -71,11 +77,11 @@ export function fetchInvitations(tenantId: string): Promise<{ invitations: Pendi
   return apiGet(`/api/workspaces/${tenantId}/invitations`)
 }
 
-export function createInvitation(tenantId: string, email: string, role: Role): Promise<{ invitation: Invitation }> {
+export function createInvitation(tenantId: string, email: string, role: Role): Promise<InvitationResult> {
   return apiPost(`/api/workspaces/${tenantId}/invitations`, { email, role })
 }
 
-export function resendInvitation(tenantId: string, id: string): Promise<{ invitation: Invitation }> {
+export function resendInvitation(tenantId: string, id: string): Promise<InvitationResult> {
   return apiPost(`/api/workspaces/${tenantId}/invitations/${id}/resend`)
 }
 

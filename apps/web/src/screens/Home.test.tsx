@@ -16,9 +16,11 @@ vi.mock('../api/quizzes', () => ({
   restoreQuiz: vi.fn(),
 }))
 vi.mock('../api/sessions', () => ({ listSessions: vi.fn(() => Promise.resolve([])) }))
+const mockSendVerificationEmail = vi.fn()
 vi.mock('../api/auth', () => ({
   signOut: vi.fn(),
-  useSession: () => ({ refresh: vi.fn() }),
+  useSession: () => ({ refresh: vi.fn(), user: { email: 'camille@example.com', emailVerified: false } }),
+  sendVerificationEmail: (...args: unknown[]) => mockSendVerificationEmail(...args),
 }))
 
 // `Home` now calls `useLaunchGame` (Task 7), which itself calls `useSharedGameSocket` — mocked
@@ -113,6 +115,30 @@ describe('Home', () => {
     const glyph = (card as Element).querySelector('.home-card__glyph')
     expect(glyph).not.toBeNull()
     expect(glyph).toHaveAttribute('aria-hidden', 'true')
+  })
+
+  it("refus de création faute d'adresse confirmée : message dédié et renvoi sur place", async () => {
+    const { createQuiz } = await import('../api/quizzes')
+    const { ApiError } = await import('../api/client')
+    vi.mocked(createQuiz).mockRejectedValueOnce(
+      new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'),
+    )
+    mockSendVerificationEmail.mockResolvedValue(undefined)
+    render(
+      <MotionProvider>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </MotionProvider>,
+    )
+    fireEvent.click(screen.getByRole('button', { name: /nouveau quiz/i }))
+    fireEvent.change(screen.getByLabelText('Titre du nouveau quiz'), { target: { value: 'Second' } })
+    fireEvent.submit(screen.getByLabelText('Titre du nouveau quiz').closest('form') as HTMLFormElement)
+    const alert = await screen.findByRole('alert')
+    expect(alert).toHaveTextContent("Confirmez votre adresse e-mail pour créer d'autres quiz.")
+    fireEvent.click(within(alert).getByRole('button', { name: "Renvoyer l'e-mail" }))
+    await waitFor(() => expect(screen.getByText('E-mail envoyé')).toBeInTheDocument())
+    expect(mockSendVerificationEmail).toHaveBeenCalledWith('camille@example.com')
   })
 
   it("affiche un état vide chaleureux quand il n'y a pas de quiz", async () => {

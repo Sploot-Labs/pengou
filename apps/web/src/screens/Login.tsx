@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { signIn, useSession } from '../api/auth'
 import { useAuthFeatures } from '../api/features'
 import { ApiError } from '../api/client'
+import { safeNextPath, nextQuery } from '../nextPath'
 import { Button, Logo } from '../ui'
 
 interface FieldErrors {
@@ -18,6 +19,7 @@ export function Login() {
   const { mailEnabled } = useAuthFeatures()
   const passwordReset = (location.state as { passwordReset?: boolean } | null)?.passwordReset === true
   const { refresh } = useSession()
+  const returnTo = safeNextPath(useSearchParams()[0].get('next'))
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<FieldErrors>({})
@@ -71,7 +73,7 @@ export function Login() {
       // still see the pre-login (logged-out) state and bounce straight
       // back to /login.
       await refresh()
-      navigate('/', { replace: true })
+      navigate(returnTo ?? '/', { replace: true })
     } catch (err) {
       setPending(false)
       setFormError(
@@ -157,7 +159,7 @@ export function Login() {
         </Button>
 
         <p className="join-reassure">
-          Pas encore de compte ? <Link to="/signup">Créer un compte</Link>
+          Pas encore de compte ? <Link to={`/signup${nextQuery(returnTo)}`}>Créer un compte</Link>
         </p>
       </form>
     </main>
