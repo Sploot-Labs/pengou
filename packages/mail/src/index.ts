@@ -1,6 +1,7 @@
 export { createMailer, MailError, MemoryMailer, parseAddress } from './mailer.js'
 export type { MailKind, Mailer, MailLogger, OutgoingMail } from './mailer.js'
 export { maskTokens, recipientDomain } from './mask.js'
+export { sendAndLog } from './send-and-log.js'
 export { escapeHtml } from './templates/escape.js'
 export type { RenderedMail } from './templates/layout.js'
 export { invitationMail } from './templates/invitation.js'

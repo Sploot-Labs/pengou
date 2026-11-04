@@ -11,7 +11,11 @@ import type { Auth } from '@splootlabs/auth'
 // Fallback documenté dans le brief : on monte le handler Better Auth directement sur
 // une route Fastify, en réutilisant `toNodeHandler`/`fromNodeHeaders` de `better-auth/node`
 // (ce sont exactement les mêmes primitives que `fastify-better-auth` utilise en interne).
-export async function registerAuth(app: FastifyInstance, auth: Auth): Promise<void> {
+export async function registerAuth(
+  app: FastifyInstance,
+  auth: Auth,
+  features: { mailEnabled?: boolean } = {},
+): Promise<void> {
   const authHandler = toNodeHandler(auth)
 
   // Encapsulé dans un sous-contexte Fastify pour que la désactivation du parsing JSON
@@ -33,6 +37,11 @@ export async function registerAuth(app: FastifyInstance, auth: Auth): Promise<vo
       await authHandler(request.raw, reply.raw)
     })
   })
+
+  // Publique : ce que le web peut proposer (mot de passe oublié, bandeau de confirmation).
+  // Aucun détail sur le transport.
+  const mailEnabled = features.mailEnabled ?? false
+  app.get('/api/auth-features', async () => ({ mailEnabled }))
 
   // Route d'exemple protégée : renvoie l'utilisateur courant, ou 401.
   app.get('/api/me', async (request, reply) => {

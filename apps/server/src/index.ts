@@ -6,6 +6,7 @@ import {
 } from '@splootlabs/db'
 import { readCatalog } from '@splootlabs/library'
 import { createAuth, enabledSocialProviders } from '@splootlabs/auth'
+import { createMailer } from '@splootlabs/mail'
 import { createEngine, generatePin } from '@splootlabs/game'
 import { buildServer } from './app.js'
 import { applyAppRolePassword } from './app-role.js'
@@ -42,6 +43,15 @@ const app = await buildServer(config, {
   dbPing: () => pingDb(client),
 })
 
+// Envoi d'e-mails : sans transport, repli journal (désactivé). Jamais une erreur de démarrage.
+const mailer = createMailer(config.mail, app.log, { nodeEnv: config.nodeEnv })
+if (!mailer.enabled && config.nodeEnv === 'production') {
+  app.log.warn(
+    "Aucun transport d'e-mail configuré (MAIL_TRANSPORT) : la réinitialisation de mot de passe, " +
+      "l'envoi d'invitations et la confirmation d'adresse sont désactivés.",
+  )
+}
+
 const auth = createAuth(systemDb, {
   // En dev, `BETTER_AUTH_SECRET` peut être absent : on retombe sur `SESSION_SECRET`
   // (déjà requis, min 16 caractères) plutôt que d'échouer au démarrage.
@@ -51,15 +61,19 @@ const auth = createAuth(systemDb, {
   nodeEnv: config.nodeEnv,
   disableSignup: config.disableSignup,
   socialProviders: enabledSocialProviders(config),
+  mailer,
+  mailTransport: config.mail.transport,
+  emailDomainCheck: config.emailDomainCheck,
+  logger: app.log,
 })
-await registerAuth(app, auth)
+await registerAuth(app, auth, { mailEnabled: mailer.enabled })
 // Bibliothèque de questions : lecture du catalogue (livré + dossier d'instance) puis synchronisation
 // en base. Une erreur sur le catalogue livré lève ici et fait échouer le démarrage, comme une
 // migration en échec ; un fichier d'instance invalide est seulement journalisé et écarté.
 const snapshot = await readCatalog({ extraDir: config.libraryExtraDir, log: (m) => app.log.error(m) })
 const libraryCounts = await syncLibrary(systemDb, snapshot)
 app.log.info(libraryCounts, 'catalogue de la bibliothèque synchronisé')
-registerEditor(app, { systemDb, appDb, auth, config })
+registerEditor(app, { systemDb, appDb, auth, config, mailer })
 
 const io = attachRealtime(app, config)
 
