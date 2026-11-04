@@ -3,6 +3,7 @@ import { ApiError } from '../api/client'
 import { getLibraryQuiz, type LibraryQuestion, type LibraryQuizSummary } from '../api/library'
 import type { McqPayload, SliderPayload, TextPayload, TrueFalsePayload } from '../api/quizzes'
 import { Button } from '../ui'
+import { QuizLimitNotice } from '../ui/QuizLimitNotice'
 import { SourceCredit } from '../ui/SourceCredit'
 
 const TYPE_LABEL: Record<string, string> = {
@@ -48,6 +49,7 @@ export function LibraryPreview({
   quizId,
   busy,
   error: actionError,
+  quizLimit = false,
   onClose,
   onCustomize,
   onPlay,
@@ -56,6 +58,8 @@ export function LibraryPreview({
   busy: 'customize' | 'play' | null
   /** Échec de « Personnaliser » ou « Jouer maintenant », affiché dans la boîte plutôt que derrière. */
   error: string | null
+  /** L'échec est le refus de création faute d'adresse confirmée : on propose le renvoi de l'e-mail. */
+  quizLimit?: boolean
   onClose: () => void
   onCustomize: (quiz: LibraryQuizSummary) => void
   onPlay: (quiz: LibraryQuizSummary) => void
@@ -168,11 +172,11 @@ export function LibraryPreview({
           </>
         )}
 
-        {actionError && (
+        {actionError && (quizLimit ? <QuizLimitNotice /> : (
           <p className="join-error" role="alert">
             {actionError}
           </p>
-        )}
+        ))}
         <div className="host-dialog__actions">
           <Button
             variant="ghost"

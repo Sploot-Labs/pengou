@@ -14,7 +14,7 @@ export function QuizLimitNotice() {
   const { user } = useSession()
   const { state, error, resend } = useResendVerification(user?.email)
   return (
-    <div className="join-error" role="alert">
+    <div className="join-error ab-quiz-limit" role="alert">
       <p>Confirmez votre adresse e-mail pour créer d'autres quiz.</p>
       <button
         type="button"

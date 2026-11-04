@@ -625,6 +625,7 @@ export function Library() {
           quizId={previewId}
           busy={pending?.id === previewId ? pending.action : null}
           error={actionError}
+          quizLimit={actionLimit}
           onClose={closePreview}
           onCustomize={(quiz) => void handleCustomize(quiz.id)}
           onPlay={(quiz) => void handlePlay(quiz.id)}

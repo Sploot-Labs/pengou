@@ -3849,3 +3849,15 @@ p.source-credit {
   text-decoration: underline;
   cursor: pointer;
 }
+
+/* Refus de création de quiz : encre forte du thème (le blanc de .join-error est illisible en clair, 1,5:1).
+   Contrastes calculés : clair #0B2545 sur #E8CFD0 = 10,5:1 ; sombre #BFE4F2 sur #3E2A32 = 9,9:1. */
+.ab-quiz-limit {
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--ink-strong);
+}
+
+.ab-quiz-limit p {
+  margin: 0;
+}

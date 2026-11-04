@@ -62,9 +62,11 @@ vi.mock('../api/quizzes', () => ({
   restoreQuiz: vi.fn(),
 }))
 
+const mockSendVerificationEmail = vi.fn()
 vi.mock('../api/auth', () => ({
   signOut: vi.fn(),
-  useSession: () => ({ refresh: vi.fn() }),
+  useSession: () => ({ refresh: vi.fn(), user: { email: 'camille@example.com', emailVerified: false } }),
+  sendVerificationEmail: (...args: unknown[]) => mockSendVerificationEmail(...args),
 }))
 
 vi.mock('../realtime/GameSocketProvider', () => ({
@@ -320,5 +322,18 @@ describe('HostEditor : sondage', () => {
     }
     expect(screen.getAllByRole('button', { name: /^Retirer le choix/ })[0]).toBeDisabled()
     expect(screen.getByRole('button', { name: 'Ajouter un choix' })).toBeEnabled()
+  })
+
+  it("« Restaurer » refusé faute d'adresse confirmée : message dédié et renvoi sur place", async () => {
+    fixtures.archivedAt = '2026-08-01T10:00:00Z'
+    const { restoreQuiz } = await import('../api/quizzes')
+    const { ApiError } = await import('../api/client')
+    vi.mocked(restoreQuiz).mockRejectedValueOnce(new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'))
+    mockSendVerificationEmail.mockResolvedValue(undefined)
+    renderEditor()
+    fireEvent.click(await screen.findByRole('button', { name: 'Restaurer' }))
+    const notice = (await screen.findByText("Confirmez votre adresse e-mail pour créer d'autres quiz.")).closest('[role="alert"]') as HTMLElement
+    fireEvent.click(within(notice).getByRole('button', { name: "Renvoyer l'e-mail" }))
+    await waitFor(() => expect(within(notice).getByText('E-mail envoyé')).toBeInTheDocument())
   })
 })

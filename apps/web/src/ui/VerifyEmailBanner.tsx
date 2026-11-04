@@ -31,6 +31,7 @@ export function VerifyEmailBanner() {
   const { state, error, resend } = useResendVerification(user?.email)
 
   const justVerified = params.get('email-verifie') === '1'
+  // Une fois le paramètre retiré, `justVerified` repasse à faux : l'effet ne rejoue pas.
   useEffect(() => {
     if (!justVerified) return
     setConfirmed(true)
@@ -38,8 +39,7 @@ export function VerifyEmailBanner() {
     const next = new URLSearchParams(params)
     next.delete('email-verifie')
     setParams(next, { replace: true })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [justVerified])
+  }, [justVerified, params, refresh, setParams])
 
   function dismiss() {
     setDismissed(true)

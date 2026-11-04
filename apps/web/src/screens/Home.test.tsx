@@ -529,5 +529,24 @@ describe('Home', () => {
       expect(screen.getByText('Aucun quiz archivé.')).toBeInTheDocument()
       expect(screen.getByText('Quiz « Vieux quiz » restauré.')).toBeInTheDocument()
     })
+
+    it("« Restaurer » refusé faute d'adresse confirmée : message dédié et renvoi sur place", async () => {
+      const { listQuizzes, restoreQuiz } = await import('../api/quizzes')
+      const { ApiError } = await import('../api/client')
+      vi.mocked(restoreQuiz).mockRejectedValueOnce(new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'))
+      mockSendVerificationEmail.mockResolvedValue(undefined)
+      renderHome()
+      await waitFor(() => expect(screen.getByText('Culture G')).toBeInTheDocument())
+      vi.mocked(listQuizzes).mockResolvedValueOnce([archivedQuiz])
+      const details = screen.getByText('Archivés').closest('details') as HTMLDetailsElement
+      details.open = true
+      fireEvent(details, new Event('toggle'))
+      await waitFor(() => expect(screen.getByText('Vieux quiz')).toBeInTheDocument())
+      fireEvent.click(screen.getByRole('button', { name: 'Restaurer le quiz Vieux quiz' }))
+      const alert = await screen.findByRole('alert')
+      expect(alert).toHaveTextContent("Confirmez votre adresse e-mail pour créer d'autres quiz.")
+      fireEvent.click(within(alert).getByRole('button', { name: "Renvoyer l'e-mail" }))
+      await waitFor(() => expect(screen.getByText('E-mail envoyé')).toBeInTheDocument())
+    })
   })
 })

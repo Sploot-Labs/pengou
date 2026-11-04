@@ -127,6 +127,33 @@ describe('Library', () => {
     )
   })
 
+  it("« Personnaliser » refusé faute d'adresse confirmée : message dédié et renvoi sur place", async () => {
+    const { ApiError } = await import('../api/client')
+    vi.mocked(lib.duplicateLibraryQuiz).mockRejectedValue(new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'))
+    mockSendVerificationEmail.mockResolvedValue(undefined)
+    renderLibrary()
+    fireEvent.click(await screen.findByRole('button', { name: 'Personnaliser le quiz Quiz q1' }))
+    const alert = await screen.findByRole('alert')
+    expect(alert).toHaveTextContent("Confirmez votre adresse e-mail pour créer d'autres quiz.")
+    fireEvent.click(within(alert).getByRole('button', { name: "Renvoyer l'e-mail" }))
+    await waitFor(() => expect(screen.getByText('E-mail envoyé')).toBeInTheDocument())
+  })
+
+  it("« Jouer maintenant » refusé depuis l'aperçu : le renvoi est proposé dans la boîte de dialogue", async () => {
+    const { ApiError } = await import('../api/client')
+    vi.mocked(lib.getLibraryQuiz).mockResolvedValue({ quiz: quiz('q1'), questions: [question('a')] } as never)
+    vi.mocked(lib.duplicateLibraryQuiz).mockRejectedValue(new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'))
+    mockSendVerificationEmail.mockResolvedValue(undefined)
+    renderLibrary()
+    fireEvent.click(await screen.findByRole('button', { name: 'Aperçu du quiz Quiz q1' }))
+    const dialog = await screen.findByRole('dialog', { name: 'Quiz q1' })
+    await within(dialog).findByText('Énoncé a')
+    fireEvent.click(within(dialog).getByRole('button', { name: /Jouer maintenant/ }))
+    const resend = await within(dialog).findByRole('button', { name: "Renvoyer l'e-mail" })
+    fireEvent.click(resend)
+    await waitFor(() => expect(within(dialog).getByText('E-mail envoyé')).toBeInTheDocument())
+  })
+
   it("l'aperçu liste les questions sans les réponses, puis les montre à la demande", async () => {
     vi.mocked(lib.getLibraryQuiz).mockResolvedValue({
       quiz: quiz('q1'),

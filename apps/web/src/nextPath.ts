@@ -4,10 +4,12 @@
  * (URL relative au protocole), aucun caractère de contrôle. Tout le reste est ignoré (anti redirection ouverte).
  */
 export function safeNextPath(raw: string | null | undefined): string | null {
-  if (!raw || !raw.startsWith('/')) return null
+  if (!raw?.startsWith('/')) return null
   if (raw.startsWith('//') || raw.startsWith('/\\')) return null
-  // eslint-disable-next-line no-control-regex
-  if (/[\u0000-\u001f\u007f]/.test(raw)) return null
+  for (let i = 0; i < raw.length; i++) {
+    const code = raw.charCodeAt(i)
+    if (code < 0x20 || code === 0x7f) return null
+  }
   return raw
 }
 
