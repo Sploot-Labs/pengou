@@ -81,6 +81,66 @@ Le volume `db-data` fige le mot de passe de la base au premier démarrage. Chang
 
 Tant que le paquet GHCR est privé, l'hôte doit s'authentifier (`docker login ghcr.io`) avec un jeton disposant du scope `read:packages` pour tirer l'image.
 
+### Envoi d'e-mails
+
+Pengou envoie des e-mails transactionnels : réinitialisation du mot de passe, confirmation d'adresse à l'inscription et invitations à un espace de travail. Tout est optionnel. Sans transport configuré, l'application reste complète, simplement sans envoi.
+
+Les variables, lues par `packages/shared/src/config.ts`, sont les suivantes. Une valeur vide compte comme une valeur absente.
+
+`MAIL_TRANSPORT` vaut `smtp` ou `brevo`, ou reste absente. `MAIL_FROM` est obligatoire dès qu'un transport est choisi, au format `Nom <adresse>` ou adresse seule. `MAIL_REPLY_TO` est facultative. Pour `smtp`, `SMTP_HOST` est obligatoire, `SMTP_PORT` vaut 587 par défaut, et `SMTP_USER` et `SMTP_PASSWORD` vont ensemble (les deux ou aucun). Pour `brevo`, `BREVO_API_KEY` est obligatoire. Une combinaison incohérente fait échouer le démarrage avec un message qui nomme la variable fautive, jamais sa valeur.
+
+`EMAIL_DOMAIN_CHECK` pilote le contrôle DNS du domaine des adresses saisies à l'inscription et à l'invitation : `auto` (défaut) l'active seulement si un transport est configuré, `true` le force, `false` le coupe. Le coupe-circuit sert derrière un DNS d'intranet qui ne résout pas l'extérieur, sinon toutes les inscriptions seraient refusées. La liste des domaines jetables reste active dans tous les cas, et un DNS lent ou en panne ne bloque jamais une inscription.
+
+Avec `docker-compose.prod.yml`, ces variables sont transmises depuis le `.env` du serveur.
+
+#### Transport SMTP
+
+Le port 465 utilise TLS implicite, tout autre port exige STARTTLS. Les délais de connexion et d'envoi sont de 10 secondes. C'est le transport à privilégier pour un auto-hébergement :
+
+```sh
+MAIL_TRANSPORT=smtp
+MAIL_FROM=Pengou <noreply@exemple.org>
+SMTP_HOST=smtp.exemple.org
+SMTP_PORT=587
+SMTP_USER=noreply@exemple.org
+SMTP_PASSWORD=<mot de passe SMTP>
+```
+
+#### Brevo
+
+L'instance officielle utilise l'API transactionnelle de Brevo : le serveur appelle `POST https://api.brevo.com/v3/smtp/email` avec l'en-tête `api-key`, sans SDK, avec un délai de 10 secondes.
+
+```sh
+MAIL_TRANSPORT=brevo
+MAIL_FROM=Pengou <contact@pengou.fr>
+MAIL_REPLY_TO=contact@pengou.fr
+BREVO_API_KEY=<clé API Brevo>
+```
+
+La clé se génère dans Brevo, Paramètres, SMTP et API, onglet Clés API, « Générer une nouvelle clé ». Brevo propose aussi un relais SMTP, utilisable avec le transport `smtp` : `SMTP_HOST=smtp-relay.brevo.com`, `SMTP_PORT=587`, `SMTP_USER` égal à l'identifiant SMTP Brevo (de la forme `…@smtp-brevo.com`) et `SMTP_PASSWORD` égal à la clé SMTP (distincte de la clé API).
+
+Le réglage de sécurité « IP autorisées » de Brevo (Sécurité, Adresses IP autorisées) peut bloquer les appels API venant d'une IP inconnue : si les envois échouent avec une erreur d'autorisation, ajouter l'IP sortante du serveur ou désactiver la restriction.
+
+Le domaine `pengou.fr` est authentifié dans Brevo (DKIM, DMARC) et l'expéditeur est `Pengou <contact@pengou.fr>`. Ne jamais utiliser `mail.pengou.fr` comme expéditeur : ce sous-domaine de marque est réservé aux liens de suivi et au return-path de Brevo. Après un changement de configuration, envoyer une invitation vers une adresse Gmail et vérifier dans « Afficher l'original » que SPF, DKIM et DMARC sont à PASS.
+
+#### Sans transport
+
+Si `MAIL_TRANSPORT` est absente, le serveur démarre normalement et journalise un avertissement unique en production. La réinitialisation du mot de passe, la confirmation d'adresse et l'envoi des invitations sont désactivés : le lien « Mot de passe oublié » est masqué, le lien d'invitation reste copiable depuis l'écran de l'espace de travail, et aucune limite de quiz ne s'applique. Hors production, les messages qui auraient été envoyés sont écrits dans le journal, avec les tokens tronqués.
+
+#### Comportements à connaître
+
+En mode `TENANCY_MODE=multi` et seulement si l'envoi est configuré, un compte dont l'adresse n'est pas confirmée ne peut posséder qu'un seul quiz actif (non archivé) ; désarchiver est soumis à la même règle. En mode `single`, ou sans envoi, aucune limite ne s'applique.
+
+Accepter une invitation par le lien reçu dans l'e-mail confirme l'adresse du compte, à condition que ce soit celle de l'invitation. Le lien copié à la main, qui ne porte pas la preuve `?v=` ajoutée à l'e-mail, ne confirme rien.
+
+Les limites de débit sont de 3 requêtes par 10 minutes et par IP sur `/api/auth/request-password-reset` et `/api/auth/send-verification-email`, et de 20 créations ou renvois d'invitation par heure et par utilisateur. Elles dépendent de `TRUSTED_PROXIES` pour retrouver l'IP réelle des clients.
+
+Les liens des e-mails sont bâtis sur `BETTER_AUTH_URL`, jamais sur l'en-tête `Host`. Le logo des e-mails est servi par l'application à `/email/logo.png`. Les journaux contiennent le type de message, le transport, le domaine du destinataire et le résultat, jamais un token, un lien d'action, une clé ou un mot de passe.
+
+#### Mailpit en développement
+
+`docker compose up` démarre aussi Mailpit et configure l'app pour lui envoyer tous les e-mails. Ouvrir http://localhost:8025 pour les lire : rien ne quitte la machine. Pour `pnpm dev` hors conteneur, lancer `docker compose up mailpit` puis `MAIL_TRANSPORT=smtp`, `SMTP_HOST=localhost` et `SMTP_PORT=1025` dans le `.env` (le SMTP de Mailpit est interne à Compose : ajouter `ports: ["1025:1025"]` au service `mailpit` dans un `docker-compose.override.yml` local).
+
 ### Contenu de bibliothèque propre à l'instance
 
 La bibliothèque de questions contient un catalogue livré avec l'image. Un auto-hébergeur peut y ajouter ses propres quiz et questions, sans reconstruire l'image, en pointant la variable `LIBRARY_EXTRA_DIR` vers un dossier. Le serveur lit ce dossier à chaque démarrage, en plus du catalogue livré, et synchronise la base.
