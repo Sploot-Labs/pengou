@@ -2,6 +2,7 @@ import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import type { Db } from '@splootlabs/db'
 import { schema, ensureDefaultTenant, ensureMembership, firstMembershipRole, createWorkspace } from '@splootlabs/db'
+import { applyTermsOnUserCreate } from './terms.js'
 
 export type AuthConfig = {
   secret: string
@@ -11,6 +12,8 @@ export type AuthConfig = {
   /** Self-host : coupe l'inscription publique (les comptes existants se connectent toujours). */
   disableSignup?: boolean
   socialProviders?: Record<string, { clientId: string; clientSecret: string }>
+  /** Version courante des CGU (LEGAL_TERMS_VERSION). Absente : aucune acceptation demandée. */
+  termsVersion?: string
 }
 
 /** Nom du workspace personnel créé au signup multi : nom d'affichage s'il est non vide, sinon la
@@ -49,9 +52,19 @@ export function createAuth(db: Db, config: AuthConfig) {
       max: 20,
     },
     socialProviders: config.socialProviders ?? {},
+    user: {
+      // Acceptation des CGU : renseignée uniquement par le serveur (hook `before` ci-dessous et
+      // POST /api/legal/accept). `input: false` fait refuser par Better Auth toute valeur envoyée
+      // par le client, à l'inscription comme sur /update-user.
+      additionalFields: {
+        termsVersion: { type: 'string', required: false, input: false },
+        termsAcceptedAt: { type: 'date', required: false, input: false },
+      },
+    },
     databaseHooks: {
       user: {
         create: {
+          before: async (user, context) => applyTermsOnUserCreate(config.termsVersion, user, context),
           // Better Auth v1.6.24 (@better-auth/core init-options.ts) : la signature réelle
           // est `after?: (user, context: GenericEndpointContext | null) => Promise<void>`
           // (un 2e paramètre contexte, non utilisé ici) — conforme au brief.
