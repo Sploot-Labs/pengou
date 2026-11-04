@@ -49,12 +49,39 @@ const EnvSchema = z.object({
   // Échecs de PIN (player:join) tolérés par IP, ou par préfixe /64 en IPv6, sur 5 minutes. Haut
   // par défaut : une salle entière derrière une seule IP publique se trompe souvent de PIN.
   PIN_FAILURE_MAX: z.coerce.number().int().positive().default(100),
+  // Envoi d'e-mails transactionnels. Sans MAIL_TRANSPORT, aucun e-mail n'est envoyé (les
+  // fonctions qui en dépendent restent désactivées). 'smtp' ou 'brevo' (API HTTP).
+  MAIL_TRANSPORT: z.enum(['smtp', 'brevo']).optional(),
+  // Adresse d'expédition, requise dès qu'un transport est choisi (ex. `Pengou <noreply@pengou.fr>`).
+  MAIL_FROM: z.string().min(1).optional(),
+  // Adresse de réponse, optionnelle.
+  MAIL_REPLY_TO: z.string().min(1).optional(),
+  // Transport smtp : serveur, port (587 par défaut) et identifiants (les deux ou aucun).
+  SMTP_HOST: z.string().min(1).optional(),
+  SMTP_PORT: z.coerce.number().int().positive().default(587),
+  SMTP_USER: z.string().min(1).optional(),
+  SMTP_PASSWORD: z.string().min(1).optional(),
+  // Transport brevo : clé d'API (secrète).
+  BREVO_API_KEY: z.string().min(1).optional(),
+  // Contrôle DNS du domaine des adresses saisies. 'auto' : actif si un transport est configuré.
+  EMAIL_DOMAIN_CHECK: z.enum(['auto', 'true', 'false']).default('auto'),
 })
 
 export type OAuthProviderCreds = {
   clientId?: string
   clientSecret?: string
 }
+
+/** Messagerie résolue. Les secrets ne sont jamais repris dans les messages d'erreur. */
+export type MailConfig =
+  | { transport: 'none'; from?: string; replyTo?: string }
+  | {
+      transport: 'smtp'
+      from: string
+      replyTo?: string
+      smtp: { host: string; port: number; user?: string; password?: string }
+    }
+  | { transport: 'brevo'; from: string; replyTo?: string; brevoApiKey: string }
 
 export type AppConfig = {
   nodeEnv: 'development' | 'test' | 'production'
@@ -79,10 +106,48 @@ export type AppConfig = {
   maxPlayersPerSession: number
   /** Échecs de PIN tolérés par IP (préfixe /64 en IPv6) sur la fenêtre du budget. */
   pinFailureMax: number
+  mail: MailConfig
+  /** Contrôle DNS du domaine des e-mails ('auto' résolu : vrai si un transport est configuré). */
+  emailDomainCheck: boolean
   oauth: {
     google: OAuthProviderCreds
     facebook: OAuthProviderCreds
     github: OAuthProviderCreds
+  }
+}
+
+/** Contrôles croisés de la messagerie : nomment la variable fautive, jamais sa valeur. */
+function resolveMail(parsed: z.infer<typeof EnvSchema>): MailConfig {
+  const { MAIL_TRANSPORT: transport, MAIL_FROM: from, MAIL_REPLY_TO: replyTo } = parsed
+  if (!transport) return { transport: 'none', from, replyTo }
+  if (!from) {
+    throw new Error(`Configuration invalide : MAIL_FROM est requis quand MAIL_TRANSPORT=${transport}.`)
+  }
+  if (transport === 'brevo') {
+    if (!parsed.BREVO_API_KEY) {
+      throw new Error('Configuration invalide : BREVO_API_KEY est requis quand MAIL_TRANSPORT=brevo.')
+    }
+    return { transport, from, replyTo, brevoApiKey: parsed.BREVO_API_KEY }
+  }
+  if (!parsed.SMTP_HOST) {
+    throw new Error('Configuration invalide : SMTP_HOST est requis quand MAIL_TRANSPORT=smtp.')
+  }
+  if (parsed.SMTP_USER && !parsed.SMTP_PASSWORD) {
+    throw new Error('Configuration invalide : SMTP_PASSWORD est requis quand SMTP_USER est défini.')
+  }
+  if (parsed.SMTP_PASSWORD && !parsed.SMTP_USER) {
+    throw new Error('Configuration invalide : SMTP_USER est requis quand SMTP_PASSWORD est défini.')
+  }
+  return {
+    transport,
+    from,
+    replyTo,
+    smtp: {
+      host: parsed.SMTP_HOST,
+      port: parsed.SMTP_PORT,
+      user: parsed.SMTP_USER,
+      password: parsed.SMTP_PASSWORD,
+    },
   }
 }
 
@@ -104,6 +169,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
       'Configuration invalide : APP_DB_PASSWORD doit être défini en production (mot de passe du rôle app_role).',
     )
   }
+  const mail = resolveMail(parsed)
   return {
     nodeEnv: parsed.NODE_ENV,
     port: parsed.PORT,
@@ -127,6 +193,9 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     sessionSweepIntervalMs: parsed.SESSION_SWEEP_INTERVAL_MINUTES * 60_000,
     maxPlayersPerSession: parsed.MAX_PLAYERS_PER_SESSION,
     pinFailureMax: parsed.PIN_FAILURE_MAX,
+    mail,
+    emailDomainCheck:
+      parsed.EMAIL_DOMAIN_CHECK === 'auto' ? mail.transport !== 'none' : parsed.EMAIL_DOMAIN_CHECK === 'true',
     oauth: {
       google: { clientId: parsed.GOOGLE_CLIENT_ID, clientSecret: parsed.GOOGLE_CLIENT_SECRET },
       facebook: { clientId: parsed.FACEBOOK_CLIENT_ID, clientSecret: parsed.FACEBOOK_CLIENT_SECRET },
