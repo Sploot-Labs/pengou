@@ -1,6 +1,6 @@
 import { escapeHtml } from './escape.js'
 import type { RenderedMail } from './layout.js'
-import { assertUrlUnderBase, P_STYLE, renderLayout, renderText, SMALL_STYLE } from './layout.js'
+import { assertUrlUnderBase, FONT, P_STYLE, renderLayout, renderText, SMALL_STYLE } from './layout.js'
 
 export type InvitationData = {
   baseUrl: string
@@ -12,7 +12,6 @@ export type InvitationData = {
 }
 
 const ROLE_LABEL = { admin: 'administrateur', member: 'membre' } as const
-const FONT = "-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
 
 function formatDate(date: Date): string {
   return new Intl.DateTimeFormat('fr-FR', {
@@ -39,7 +38,7 @@ export function invitationMail(d: InvitationData): RenderedMail {
 </tr></table>`
 
   return {
-    subject: `${d.inviterName} vous invite sur Pengou`,
+    subject: `${d.inviterName} vous invite sur Pengou`.replace(/[\r\n]+/g, ' '),
     text: renderText({
       title,
       body: [intro, `Espace : ${d.workspaceName}`, `Rôle : ${role}`],
