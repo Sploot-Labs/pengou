@@ -81,7 +81,8 @@ function publicInvitation(inv: Awaited<ReturnType<typeof getInvitationByToken>>,
  * TOKEN (preview/accept) gardés par `requireUser` seulement, sur systemDb (pré-contexte, le
  * destinataire n'est pas encore membre). La création et le renvoi envoient l'e-mail d'invitation
  * une fois l'invitation enregistrée (si un mailer est actif) et répondent `emailSent` ; la réponse
- * porte toujours le token, le client garde le lien copiable.
+ * porte toujours le token, le client garde le lien copiable. En mode multi, un invitant à l'adresse
+ * non confirmée n'envoie rien : `emailSkipped: 'inviter_unverified'`.
  */
 export function registerInvitationRoutes(app: FastifyInstance, deps: InvitationDeps): void {
   const { systemDb, appDb, config, mailer } = deps
@@ -117,8 +118,14 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: InvitationD
     request: FastifyRequest,
     tenantId: string,
     invitation: Invitation,
-  ): Promise<{ invitation: Invitation; emailSent: boolean }> {
+  ): Promise<{ invitation: Invitation; emailSent: boolean; emailSkipped?: 'inviter_unverified' }> {
     if (!mailer?.enabled) return { invitation, emailSent: false }
+    // Inscription ouverte (mode multi) : un compte à l'adresse non confirmée ne fait pas envoyer
+    // d'e-mail par Pengou à une adresse de son choix (réputation de l'expéditeur). L'invitation
+    // existe, le lien reste copiable.
+    if (config.tenancyMode === 'multi' && !request.user.emailVerified) {
+      return { invitation, emailSent: false, emailSkipped: 'inviter_unverified' }
+    }
     let sent = false
     try {
       const rendered = invitationMail({

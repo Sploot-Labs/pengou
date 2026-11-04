@@ -66,9 +66,11 @@ async function signUp(app: FastifyInstance, email: string, name: string): Promis
   return Array.isArray(raw) ? raw.map((c) => c.split(';')[0]).join('; ') : String(raw).split(';')[0]
 }
 
-/** Inscrit l'administrateur et lui crée un espace « Classe de CM2 » ; renvoie cookie et tenant. */
-async function setupOwner(app: FastifyInstance, email: string, name = 'Camille Martin') {
+/** Inscrit l'administrateur et lui crée un espace « Classe de CM2 » ; renvoie cookie et tenant.
+ * Adresse confirmée par défaut : un invitant non confirmé n'envoie pas d'e-mail en mode multi. */
+async function setupOwner(app: FastifyInstance, email: string, name = 'Camille Martin', verified = true) {
   const cookie = await signUp(app, email, name)
+  if (verified) await ctx.db.update(schema.user).set({ emailVerified: true }).where(eq(schema.user.email, email))
   const created = await app.inject({
     method: 'POST', url: '/api/workspaces', payload: { name: 'Classe de CM2' },
     headers: { 'content-type': 'application/json', cookie },
@@ -81,7 +83,7 @@ async function setupOwner(app: FastifyInstance, email: string, name = 'Camille M
   return { cookie, tenantId }
 }
 
-type InvitationResp = { invitation: { id: string; token: string }; emailSent: boolean }
+type InvitationResp = { invitation: { id: string; token: string }; emailSent: boolean; emailSkipped?: string }
 
 function invite(app: FastifyInstance, tenantId: string, cookie: string, email: string) {
   return app.inject({
@@ -214,6 +216,36 @@ describe('e2e : invitation envoyée par e-mail', () => {
     expect(body.invitation.token).toBeTruthy()
     expect(send).not.toHaveBeenCalled()
     expect(await emailedAt(body.invitation.id)).toBeNull()
+    await app.close()
+  })
+
+  it("invitant non confirmé : invitation créée et renvoyée sans e-mail, emailSkipped posé", async () => {
+    const mailer = new MemoryMailer()
+    const app = await buildApp(mailer)
+    const { cookie, tenantId } = await setupOwner(app, 'inv-mail-unverified@example.com', 'Camille Martin', false)
+
+    const res = await invite(app, tenantId, cookie, 'invite5@example.com')
+    expect(res.statusCode).toBe(201)
+    const body = res.json() as InvitationResp
+    expect(body.emailSent).toBe(false)
+    expect(body.emailSkipped).toBe('inviter_unverified')
+    expect(body.invitation.token).toBeTruthy()
+    expect(await emailedAt(body.invitation.id)).toBeNull()
+
+    const resend = await app.inject({
+      method: 'POST', url: `/api/workspaces/${tenantId}/invitations/${body.invitation.id}/resend`, headers: { cookie },
+    })
+    expect(resend.statusCode).toBe(200)
+    expect(resend.json()).toMatchObject({ emailSent: false, emailSkipped: 'inviter_unverified' })
+    expect(mailer.sent).toHaveLength(0)
+    expect(await emailedAt(body.invitation.id)).toBeNull()
+
+    // Adresse confirmée ensuite : l'envoi reprend, sans emailSkipped.
+    await ctx.db.update(schema.user).set({ emailVerified: true }).where(eq(schema.user.email, 'inv-mail-unverified@example.com'))
+    const after = await invite(app, tenantId, cookie, 'invite6@example.com')
+    expect(after.json()).toMatchObject({ emailSent: true })
+    expect((after.json() as InvitationResp).emailSkipped).toBeUndefined()
+    expect(mailer.sent).toHaveLength(1)
     await app.close()
   })
 

@@ -37,10 +37,12 @@ export interface Invitation {
 /** Invitation telle que listée : le jeton n'est renvoyé qu'à la création et au renvoi. */
 export type PendingInvitation = Omit<Invitation, 'token'>
 
-/** Réponse de création et de renvoi : `emailSent` dit si l'e-mail est réellement parti. */
+/** Réponse de création et de renvoi : `emailSent` dit si l'e-mail est réellement parti,
+ * `emailSkipped` pourquoi il n'a pas été tenté (invitant à l'adresse non confirmée, mode multi). */
 export interface InvitationResult {
   invitation: Invitation
   emailSent: boolean
+  emailSkipped?: 'inviter_unverified'
 }
 
 export interface InvitationPreview {

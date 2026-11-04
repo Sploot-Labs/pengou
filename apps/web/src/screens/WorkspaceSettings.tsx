@@ -7,7 +7,7 @@ import { ApiError } from '../api/client'
 import {
   fetchMembers, setMemberRole, removeMember, fetchInvitations, createInvitation,
   revokeInvitation, resendInvitation, createWorkspace,
-  type Member, type PendingInvitation, type Role,
+  type InvitationResult, type Member, type PendingInvitation, type Role,
 } from '../api/workspaces'
 import { AppHeader } from '../ui/AppHeader'
 import { EmailSuggestion } from '../ui/EmailSuggestion'
@@ -213,9 +213,9 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
     if (!trimmed) { setFormError('E-mail requis.'); return }
     setPending(true); setFormError(null)
     try {
-      const { invitation, emailSent } = await createInvitation(tenantId, trimmed, role)
-      setLastLink(invitationLink(invitation.token))
-      setSentNote(sendNote(emailSent, invitation.email))
+      const result = await createInvitation(tenantId, trimmed, role)
+      setLastLink(invitationLink(result.invitation.token))
+      setSentNote(sendNote(result))
       setEmail('')
       load()
     } catch (err) {
@@ -225,18 +225,22 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
     }
   }
   /** Sans envoi configuré l'écran reste celui d'avant : aucune note. */
-  function sendNote(emailSent: boolean, to: string): string | null {
+  function sendNote({ invitation, emailSent, emailSkipped }: InvitationResult): string | null {
     if (!mailEnabled) return null
-    return emailSent ? `Invitation envoyée à ${to}` : "L'e-mail n'a pas pu partir, copiez le lien ci-dessous"
+    if (emailSent) return `Invitation envoyée à ${invitation.email}`
+    if (emailSkipped === 'inviter_unverified') {
+      return 'Confirmez votre adresse pour envoyer les invitations par e-mail. En attendant, copiez le lien ci-dessous.'
+    }
+    return "L'e-mail n'a pas pu partir, copiez le lien ci-dessous"
   }
   async function handleRevoke(id: string) {
     try { await revokeInvitation(tenantId, id); load() } catch (err) { setError(errorMessage(err)) }
   }
   async function handleResend(id: string) {
     try {
-      const { invitation, emailSent } = await resendInvitation(tenantId, id)
-      setLastLink(invitationLink(invitation.token))
-      setSentNote(sendNote(emailSent, invitation.email))
+      const result = await resendInvitation(tenantId, id)
+      setLastLink(invitationLink(result.invitation.token))
+      setSentNote(sendNote(result))
       load()
     } catch (err) { setError(errorMessage(err)) }
   }
