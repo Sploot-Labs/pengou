@@ -21,7 +21,9 @@ export function registerEditor(
 ): void {
   registerRequireUser(app, deps.auth)
   const routeDeps = { systemDb: deps.systemDb, appDb: deps.appDb, config: deps.config }
-  registerQuizRoutes(app, routeDeps)
+  // Limite d'un quiz sans adresse confirmée : active seulement si l'envoi d'e-mails l'est.
+  const quotaDeps = { ...routeDeps, mailEnabled: deps.mailer?.enabled === true }
+  registerQuizRoutes(app, quotaDeps)
   registerQuestionRoutes(app, routeDeps) // Task 5
   registerReportRoutes(app, routeDeps)
   registerWorkspaceRoutes(app, routeDeps) // Slice 3a : gestion des workspaces
@@ -33,7 +35,7 @@ export function registerEditor(
     resolver: deps.resolver,
     invitationRateLimit: deps.invitationRateLimit,
   }) // Slice 3b : invitations, envoyées par e-mail
-  registerLibraryRoutes(app, routeDeps) // Bibliothèque de questions
+  registerLibraryRoutes(app, quotaDeps) // Bibliothèque de questions
 }
 // NOTE : les routes 3b (membres/invitations) sont enregistrées ci-dessus ; leurs fichiers sont
 // livrés dans le même chantier. Voir routes/members.ts, routes/invitations.ts, require-permission.ts.

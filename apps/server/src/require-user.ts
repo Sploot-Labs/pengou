@@ -5,7 +5,7 @@ import { hasPermission, type AppConfig } from '@splootlabs/shared'
 import type { Auth } from '@splootlabs/auth'
 
 declare module 'fastify' {
-  interface FastifyRequest { user: { id: string; email: string; name: string } }
+  interface FastifyRequest { user: { id: string; email: string; name: string; emailVerified: boolean } }
   interface FastifyInstance { auth: Auth }
 }
 
@@ -21,7 +21,7 @@ export function registerRequireUser(app: FastifyInstance, auth: Auth): void {
 export async function requireUser(request: FastifyRequest, reply: FastifyReply): Promise<void> {
   const session = await request.server.auth.api.getSession({ headers: fromNodeHeaders(request.headers) })
   if (!session?.user) { reply.code(401).send({ error: 'Non authentifié.' }); return }
-  request.user = { id: session.user.id, email: session.user.email, name: session.user.name }
+  request.user = { id: session.user.id, email: session.user.email, name: session.user.name, emailVerified: session.user.emailVerified === true }
 }
 
 /**

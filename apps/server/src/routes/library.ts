@@ -7,9 +7,10 @@ import {
 import type { Audience, Difficulty } from '@splootlabs/library'
 import type { AppConfig } from '@splootlabs/shared'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
+import { assertCanOwnAnotherQuiz } from '../quiz-quota.js'
 import { LIMITS, tooLong } from '../validation.js'
 
-type Deps = { systemDb: Db; appDb: Db; config: AppConfig }
+type Deps = { systemDb: Db; appDb: Db; config: AppConfig; mailEnabled?: boolean }
 
 const DIFFICULTIES: Difficulty[] = ['facile', 'moyen', 'difficile']
 const AUDIENCES: Audience[] = ['enfants', 'adultes', 'tous']
@@ -69,6 +70,7 @@ function toImported(q: LibraryQuestion) {
 
 export function registerLibraryRoutes(app: FastifyInstance, deps: Deps): void {
   const { systemDb, appDb, config } = deps
+  const quotaOpts = { mailEnabled: deps.mailEnabled === true, tenancyMode: config.tenancyMode }
 
   // Lectures : tables du catalogue sans tenant ni RLS, donc `appDb` directement.
   app.get('/api/library/meta', { preHandler: requireUser }, async () => {
@@ -127,6 +129,8 @@ export function registerLibraryRoutes(app: FastifyInstance, deps: Deps): void {
   app.post<{ Params: { id: string } }>('/api/library/quizzes/:id/duplicate', { preHandler: requireUser }, async (request, reply) => {
     const context = await resolveContextOr403(request, reply, systemDb, config)
     if (!context) return
+    const refused = await assertCanOwnAnotherQuiz(systemDb, request.user, quotaOpts)
+    if (refused) return reply.code(refused.status).send(refused.body)
 
     const found = await getLibraryQuiz(appDb, request.params.id)
     if (!found) return reply.code(404).send({ error: 'Quiz introuvable dans la bibliothèque.' })
@@ -146,6 +150,8 @@ export function registerLibraryRoutes(app: FastifyInstance, deps: Deps): void {
   app.post('/api/library/compose', { preHandler: requireUser }, async (request, reply) => {
     const context = await resolveContextOr403(request, reply, systemDb, config)
     if (!context) return
+    const refused = await assertCanOwnAnotherQuiz(systemDb, request.user, quotaOpts)
+    if (refused) return reply.code(refused.status).send(refused.body)
 
     const body = request.body as { title?: unknown; questionIds?: unknown } | undefined
     if (!isNonEmptyString(body?.title)) return reply.code(400).send({ error: 'Le titre est requis.' })
