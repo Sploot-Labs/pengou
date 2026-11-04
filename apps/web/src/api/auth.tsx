@@ -30,6 +30,7 @@ export interface User {
   id: string
   email: string
   name?: string | null
+  emailVerified: boolean
   [key: string]: unknown
 }
 
@@ -62,6 +63,17 @@ export async function signUp(input: SignUpInput): Promise<User> {
 export async function signIn(input: SignInInput): Promise<User> {
   const response = await apiPost<AuthEmailResponse>('/api/auth/sign-in/email', input)
   return response.user
+}
+
+/** Demande l'e-mail de réinitialisation. Better Auth redirige ensuite le lien reçu vers
+ * `/reset-password?token=…` (ou `?error=INVALID_TOKEN`). */
+export async function requestPasswordReset(email: string): Promise<void> {
+  await apiPost('/api/auth/request-password-reset', { email, redirectTo: '/reset-password' })
+}
+
+/** Pose le nouveau mot de passe. 400 si le token est invalide ou expiré. */
+export async function resetPassword(token: string, newPassword: string): Promise<void> {
+  await apiPost('/api/auth/reset-password', { newPassword, token })
 }
 
 export async function signOut(): Promise<void> {

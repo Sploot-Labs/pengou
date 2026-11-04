@@ -16,11 +16,14 @@ import { getActiveTenantId } from './activeTenant'
  * use `{error}` — both are checked), else a generic fallback. */
 export class ApiError extends Error {
   readonly status: number
+  /** Code machine du corps d'erreur (`body.code`, ex. `RESET_PASSWORD_DISABLED`), s'il y en a un. */
+  readonly code?: string
 
-  constructor(status: number, message: string) {
+  constructor(status: number, message: string, code?: string) {
     super(message)
     this.name = 'ApiError'
     this.status = status
+    this.code = code
   }
 }
 
@@ -33,6 +36,14 @@ function extractErrorMessage(body: unknown): string | undefined {
     if (typeof record.statusCode === 'number') return undefined
     if (typeof record.error === 'string' && record.error.length > 0) return record.error
     if (typeof record.message === 'string' && record.message.length > 0) return record.message
+  }
+  return undefined
+}
+
+function extractErrorCode(body: unknown): string | undefined {
+  if (body && typeof body === 'object') {
+    const code = (body as Record<string, unknown>).code
+    if (typeof code === 'string' && code.length > 0) return code
   }
   return undefined
 }
@@ -98,7 +109,7 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
 
   if (!response.ok) {
     const message = extractErrorMessage(data) ?? fallbackMessage(response.status)
-    throw new ApiError(response.status, message)
+    throw new ApiError(response.status, message, extractErrorCode(data))
   }
 
   return data as T

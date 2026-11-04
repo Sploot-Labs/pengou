@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@splootlabs/quiz": "workspace:*",
+    "@splootlabs/shared": "workspace:*",
     "framer-motion": "^14.6.0",
     "qrcode.react": "^4.2.0",
     "react": "^19.3.0",

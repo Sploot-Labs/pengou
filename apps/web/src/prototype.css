@@ -3795,3 +3795,26 @@ p.source-credit {
   max-width: 48rem;
   text-align: center;
 }
+
+/* Aide à la saisie de l'e-mail et message de statut des écrans d'authentification. */
+.join-suggestion {
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+
+.join-suggestion__apply {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.join-status {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid currentColor;
+  font-size: 14px;
+}

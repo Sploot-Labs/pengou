@@ -90,6 +90,9 @@ importers:
       '@splootlabs/quiz':
         specifier: workspace:*
         version: link:../../packages/quiz
+      '@splootlabs/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       framer-motion:
         specifier: ^14.6.0
         version: 14.6.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)

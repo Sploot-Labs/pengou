@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { signIn, useSession } from '../api/auth'
+import { useAuthFeatures } from '../api/features'
 import { ApiError } from '../api/client'
 import { Button, Logo } from '../ui'
 
@@ -13,6 +14,9 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function Login() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const { mailEnabled } = useAuthFeatures()
+  const passwordReset = (location.state as { passwordReset?: boolean } | null)?.passwordReset === true
   const { refresh } = useSession()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -86,6 +90,12 @@ export function Login() {
         <h1>Connexion</h1>
         <p className="join-subtitle">Content de vous revoir : vos parties vous attendent.</p>
 
+        {passwordReset && (
+          <p className="join-status" role="status">
+            Mot de passe modifié. Vous pouvez vous connecter.
+          </p>
+        )}
+
         {formError && (
           <p className="join-error" role="alert" tabIndex={-1} ref={formErrorRef}>
             {formError}
@@ -135,6 +145,12 @@ export function Login() {
             </p>
           )}
         </div>
+
+        {mailEnabled && (
+          <p className="join-reassure">
+            <Link to="/forgot-password">Mot de passe oublié ?</Link>
+          </p>
+        )}
 
         <Button variant="primary" type="submit" disabled={pending}>
           {pending ? 'Connexion…' : 'Se connecter'}
