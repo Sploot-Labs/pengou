@@ -8,15 +8,15 @@ type SmtpConfig = Extract<MailConfig, { transport: 'smtp' }>
 
 const TIMEOUT_MS = 10_000
 
-/** 465 : TLS implicite ; autres ports : STARTTLS obligatoire (jamais d'envoi en clair). */
+/** 465 : TLS implicite ; autres ports : STARTTLS obligatoire sauf si SMTP_REQUIRE_TLS=false (relais local). */
 export function smtpTransportOptions(config: SmtpConfig): SMTPTransport.Options {
-  const { host, port, user, password } = config.smtp
+  const { host, port, user, password, requireTls } = config.smtp
   const implicitTls = port === 465
   return {
     host,
     port,
     secure: implicitTls,
-    ...(implicitTls ? {} : { requireTLS: true }),
+    ...(implicitTls ? {} : { requireTLS: requireTls }),
     ...(user !== undefined ? { auth: { user, pass: password ?? '' } } : {}),
     connectionTimeout: TIMEOUT_MS,
     greetingTimeout: TIMEOUT_MS,

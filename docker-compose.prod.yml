@@ -53,6 +53,7 @@ services:
       SMTP_PORT: ${SMTP_PORT:-}
       SMTP_USER: ${SMTP_USER:-}
       SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_REQUIRE_TLS: ${SMTP_REQUIRE_TLS:-}
       BREVO_API_KEY: ${BREVO_API_KEY:-}
       EMAIL_DOMAIN_CHECK: ${EMAIL_DOMAIN_CHECK:-}
       # Contenu de bibliothèque propre à l'instance (optionnel, voir docs/devops.md) :

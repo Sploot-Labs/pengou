@@ -6,23 +6,32 @@ const base = { transport: 'smtp' as const, from: 'Pengou <contact@pengou.fr>', r
 
 describe('smtpTransportOptions', () => {
   it('port 465 : TLS implicite', () => {
-    const o = smtpTransportOptions({ ...base, smtp: { host: 'h', port: 465, user: 'u', password: 'p' } })
+    const o = smtpTransportOptions({ ...base, smtp: { host: 'h', port: 465, user: 'u', password: 'p', requireTls: true } })
     expect(o).toMatchObject({ host: 'h', port: 465, secure: true, auth: { user: 'u', pass: 'p' } })
     expect(o.connectionTimeout).toBe(10_000)
     expect(o.greetingTimeout).toBe(10_000)
     expect(o.socketTimeout).toBe(10_000)
   })
   it('port 587 : STARTTLS obligatoire', () => {
-    const o = smtpTransportOptions({ ...base, smtp: { host: 'h', port: 587 } })
+    const o = smtpTransportOptions({ ...base, smtp: { host: 'h', port: 587, requireTls: true } })
     expect(o).toMatchObject({ secure: false, requireTLS: true })
     expect(o.auth).toBeUndefined()
+  })
+  it('requireTls false : STARTTLS non exigé (relais local)', () => {
+    const o = smtpTransportOptions({ ...base, smtp: { host: 'mailpit', port: 1025, requireTls: false } })
+    expect(o).toMatchObject({ secure: false, requireTLS: false })
+  })
+  it('port 465 reste en TLS implicite même avec requireTls false', () => {
+    const o = smtpTransportOptions({ ...base, smtp: { host: 'h', port: 465, requireTls: false } })
+    expect(o).toMatchObject({ secure: true })
+    expect(o.requireTLS).toBeUndefined()
   })
 })
 
 describe('SmtpMailer', () => {
   it("compose l'enveloppe", async () => {
     const transport = nodemailer.createTransport({ jsonTransport: true })
-    const mailer = new SmtpMailer({ ...base, smtp: { host: 'h', port: 587 } }, transport)
+    const mailer = new SmtpMailer({ ...base, smtp: { host: 'h', port: 587, requireTls: true } }, transport)
     expect(mailer.enabled).toBe(true)
     let message: Record<string, unknown> = {}
     const orig = transport.sendMail.bind(transport)

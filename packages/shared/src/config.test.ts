@@ -142,6 +142,16 @@ describe('messagerie', () => {
     expect(c.mail.transport).toBe('smtp')
     if (c.mail.transport === 'smtp') expect(c.mail.smtp.port).toBe(587)
   })
+  it('smtp : SMTP_REQUIRE_TLS vaut true par défaut, false si demandé, vide = défaut', () => {
+    const e = { MAIL_TRANSPORT: 'smtp', SMTP_HOST: 'h', MAIL_FROM: 'a@b.fr' }
+    const tls = (extra: Record<string, string>) => {
+      const c = loadConfig({ ...e, ...extra })
+      return c.mail.transport === 'smtp' ? c.mail.smtp.requireTls : undefined
+    }
+    expect(tls({})).toBe(true)
+    expect(tls({ SMTP_REQUIRE_TLS: 'false' })).toBe(false)
+    expect(tls({ SMTP_REQUIRE_TLS: '' })).toBe(true)
+  })
   it('smtp sans SMTP_HOST : erreur', () => {
     expect(() => loadConfig({ MAIL_TRANSPORT: 'smtp', MAIL_FROM: 'a@b.fr' })).toThrow(/SMTP_HOST/)
   })

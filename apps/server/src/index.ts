@@ -52,6 +52,10 @@ if (!mailer.enabled && config.nodeEnv === 'production') {
   )
 }
 
+if (config.nodeEnv === 'production' && config.mail.transport === 'smtp' && !config.mail.smtp.requireTls) {
+  app.log.warn("SMTP_REQUIRE_TLS=false : les e-mails sont envoyés en SMTP sans TLS obligatoire.")
+}
+
 const auth = createAuth(systemDb, {
   // En dev, `BETTER_AUTH_SECRET` peut être absent : on retombe sur `SESSION_SECRET`
   // (déjà requis, min 16 caractères) plutôt que d'échouer au démarrage.

@@ -65,6 +65,8 @@ const EnvSchema = z.object({
   SMTP_PORT: z.preprocess(blankAsUndefined, z.coerce.number().int().positive().default(587)),
   SMTP_USER: optionalMail(z.string().min(1)),
   SMTP_PASSWORD: optionalMail(z.string().min(1)),
+  // STARTTLS obligatoire hors port 465 (défaut). 'false' seulement pour un relais local (Mailpit).
+  SMTP_REQUIRE_TLS: z.preprocess(blankAsUndefined, z.enum(['true', 'false']).default('true')),
   // Transport brevo : clé d'API (secrète).
   BREVO_API_KEY: optionalMail(z.string().min(1)),
   // Contrôle DNS du domaine des adresses saisies. 'auto' : actif si un transport est configuré.
@@ -83,7 +85,7 @@ export type MailConfig =
       transport: 'smtp'
       from: string
       replyTo?: string
-      smtp: { host: string; port: number; user?: string; password?: string }
+      smtp: { host: string; port: number; user?: string; password?: string; requireTls: boolean }
     }
   | { transport: 'brevo'; from: string; replyTo?: string; brevoApiKey: string }
 
@@ -151,6 +153,7 @@ function resolveMail(parsed: z.infer<typeof EnvSchema>): MailConfig {
       port: parsed.SMTP_PORT,
       user: parsed.SMTP_USER,
       password: parsed.SMTP_PASSWORD,
+      requireTls: parsed.SMTP_REQUIRE_TLS === 'true',
     },
   }
 }

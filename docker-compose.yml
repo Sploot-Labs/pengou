@@ -58,6 +58,8 @@ services:
       MAIL_TRANSPORT: ${MAIL_TRANSPORT:-smtp}
       SMTP_HOST: ${SMTP_HOST:-mailpit}
       SMTP_PORT: ${SMTP_PORT:-1025}
+      # Mailpit n'offre pas STARTTLS : on lève l'exigence de TLS pour ce relais local seulement.
+      SMTP_REQUIRE_TLS: ${SMTP_REQUIRE_TLS:-false}
       MAIL_FROM: ${MAIL_FROM:-Pengou <contact@pengou.fr>}
       BREVO_API_KEY: ${BREVO_API_KEY:-}
     depends_on:

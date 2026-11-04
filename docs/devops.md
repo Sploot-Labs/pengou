@@ -95,7 +95,7 @@ Avec `docker-compose.prod.yml`, ces variables sont transmises depuis le `.env` d
 
 #### Transport SMTP
 
-Le port 465 utilise TLS implicite, tout autre port exige STARTTLS. Les délais de connexion et d'envoi sont de 10 secondes. C'est le transport à privilégier pour un auto-hébergement :
+Le port 465 utilise TLS implicite, tout autre port exige STARTTLS (`SMTP_REQUIRE_TLS`, `true` par défaut ; ne mettre `false` que pour un relais local comme Mailpit, le serveur journalise un avertissement en production). Les délais de connexion et d'envoi sont de 10 secondes. C'est le transport à privilégier pour un auto-hébergement :
 
 ```sh
 MAIL_TRANSPORT=smtp
@@ -139,7 +139,7 @@ Les liens des e-mails sont bâtis sur `BETTER_AUTH_URL`, jamais sur l'en-tête `
 
 #### Mailpit en développement
 
-`docker compose up` démarre aussi Mailpit et configure l'app pour lui envoyer tous les e-mails. Ouvrir http://localhost:8025 pour les lire : rien ne quitte la machine. Pour `pnpm dev` hors conteneur, lancer `docker compose up mailpit` puis `MAIL_TRANSPORT=smtp`, `SMTP_HOST=localhost` et `SMTP_PORT=1025` dans le `.env` (le SMTP de Mailpit est interne à Compose : ajouter `ports: ["1025:1025"]` au service `mailpit` dans un `docker-compose.override.yml` local).
+`docker compose up` démarre aussi Mailpit et configure l'app pour lui envoyer tous les e-mails. Ouvrir http://localhost:8025 pour les lire : rien ne quitte la machine. Pour `pnpm dev` hors conteneur, lancer `docker compose up mailpit` puis `MAIL_TRANSPORT=smtp`, `SMTP_HOST=localhost`, `SMTP_PORT=1025` et `SMTP_REQUIRE_TLS=false` dans le `.env` (le SMTP de Mailpit est interne à Compose : ajouter `ports: ["1025:1025"]` au service `mailpit` dans un `docker-compose.override.yml` local).
 
 ### Contenu de bibliothèque propre à l'instance
 
