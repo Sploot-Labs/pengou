@@ -9,13 +9,15 @@ import { registerQuestionRoutes } from './routes/questions.js' // Task 5
 import { registerReportRoutes } from './routes/sessions.js'
 import { registerWorkspaceRoutes } from './routes/workspaces.js' // Slice 3a
 import { registerMemberRoutes } from './routes/members.js' // Slice 3b
-import { registerInvitationRoutes } from './routes/invitations.js' // Slice 3b
+import { registerInvitationRoutes, type InvitationDeps } from './routes/invitations.js' // Slice 3b
 import { registerLibraryRoutes } from './routes/library.js' // Bibliothèque de questions
 
 export function registerEditor(
   app: FastifyInstance,
-  // `mailer` : réservé à l'envoi des invitations (branché par les routes d'invitation).
-  deps: { systemDb: Db; appDb: Db; auth: Auth; config: AppConfig; mailer: Mailer },
+  // `mailer` et les options d'envoi servent aux routes d'invitation ; sans mailer, l'envoi est
+  // désactivé (routes de test qui n'en ont pas besoin).
+  deps: { systemDb: Db; appDb: Db; auth: Auth; config: AppConfig; mailer?: Mailer }
+    & Pick<InvitationDeps, 'mailLogger' | 'resolver' | 'invitationRateLimit'>,
 ): void {
   registerRequireUser(app, deps.auth)
   const routeDeps = { systemDb: deps.systemDb, appDb: deps.appDb, config: deps.config }
@@ -24,7 +26,13 @@ export function registerEditor(
   registerReportRoutes(app, routeDeps)
   registerWorkspaceRoutes(app, routeDeps) // Slice 3a : gestion des workspaces
   registerMemberRoutes(app, routeDeps) // Slice 3b : gestion des membres
-  registerInvitationRoutes(app, routeDeps) // Slice 3b : invitations
+  registerInvitationRoutes(app, {
+    ...routeDeps,
+    mailer: deps.mailer,
+    mailLogger: deps.mailLogger,
+    resolver: deps.resolver,
+    invitationRateLimit: deps.invitationRateLimit,
+  }) // Slice 3b : invitations, envoyées par e-mail
   registerLibraryRoutes(app, routeDeps) // Bibliothèque de questions
 }
 // NOTE : les routes 3b (membres/invitations) sont enregistrées ci-dessus ; leurs fichiers sont

@@ -55,6 +55,9 @@ export const invitation = pgTable('invitation', {
   status: invitationStatusEnum('status').notNull().default('pending'),
   expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
   acceptedAt: timestamp('accepted_at', { withTimezone: true }),
+  // Posé quand l'e-mail d'invitation est réellement parti (création ou renvoi), remis à nul au
+  // renvoi. Seule une invitation e-mailée confirme l'adresse de celui qui l'accepte.
+  emailedAt: timestamp('emailed_at', { withTimezone: true }),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 }, (t) => ({
   tenantIdx: index('invitation_tenant_idx').on(t.tenantId),

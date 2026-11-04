@@ -14,6 +14,7 @@ export {
 export {
   createInvitation, listInvitations, getInvitationById, revokeInvitation, resendInvitation,
   revokePendingInvitationsBy, getInvitationByToken, acceptInvitation, newInvitationToken, invitationExpiry, InvitationError,
+  markInvitationEmailed,
   INVITATION_TTL_MS, type Invitation, type InvitationWithWorkspace, type AcceptCode,
 } from './repos/invitation.js'
 export {
