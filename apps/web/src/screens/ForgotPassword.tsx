@@ -31,6 +31,7 @@ export function ForgotPassword() {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
     setFormError(null)
+    setSent(false)
 
     if (!EMAIL_RE.test(email.trim())) {
       setEmailError('Adresse e-mail invalide.')

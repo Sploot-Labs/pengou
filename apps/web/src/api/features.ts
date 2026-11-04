@@ -20,11 +20,6 @@ function loadFeatures(): Promise<AuthFeatures> {
   return cached
 }
 
-/** Vide le cache (tests uniquement). */
-export function resetAuthFeaturesCache(): void {
-  cached = null
-}
-
 export function useAuthFeatures(): { mailEnabled: boolean; loading: boolean } {
   const [state, setState] = useState<{ mailEnabled: boolean; loading: boolean }>({
     mailEnabled: false,

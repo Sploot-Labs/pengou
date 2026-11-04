@@ -10,6 +10,11 @@
       "development": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./email-suggest": {
+      "development": "./src/email-suggest.ts",
+      "types": "./dist/email-suggest.d.ts",
+      "default": "./dist/email-suggest.js"
     }
   },
   "scripts": {

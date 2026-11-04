@@ -77,6 +77,17 @@ describe('ResetPassword', () => {
     expect(JSON.parse(init.body)).toEqual({ newPassword: 'motdepasse1', token: 'abc' })
   })
 
+  it('garde le focus dans le champ pendant la frappe après une erreur serveur', async () => {
+    fetchMock.mockResolvedValueOnce(new Response(JSON.stringify({ message: 'Oups' }), { status: 500 }))
+    renderAt('/reset-password?token=abc')
+    fill('motdepasse1', 'motdepasse1')
+    expect(await screen.findByText('Oups')).toHaveFocus()
+    const input = screen.getByLabelText('Nouveau mot de passe')
+    input.focus()
+    fireEvent.change(input, { target: { value: 'motdepasse12' } })
+    expect(document.activeElement).toBe(input)
+  })
+
   it('traite un refus 400 comme un lien expiré', async () => {
     fetchMock.mockResolvedValueOnce(
       new Response(JSON.stringify({ message: 'Invalid token' }), { status: 400 }),

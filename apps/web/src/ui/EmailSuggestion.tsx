@@ -1,4 +1,4 @@
-import { suggestEmailDomain } from '@splootlabs/shared'
+import { suggestEmailDomain } from '@splootlabs/shared/email-suggest'
 
 interface EmailSuggestionProps {
   /** Valeur courante du champ e-mail (la suggestion se calcule dessus). */

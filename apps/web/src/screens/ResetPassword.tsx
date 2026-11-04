@@ -1,4 +1,4 @@
-import { useRef, useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { resetPassword } from '../api/auth'
 import { ApiError } from '../api/client'
@@ -27,6 +27,12 @@ export function ResetPassword() {
 
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmRef = useRef<HTMLInputElement>(null)
+  const formErrorRef = useRef<HTMLParagraphElement>(null)
+
+  // Focus sur le résumé d'erreur uniquement quand il apparaît (pas à chaque frappe).
+  useEffect(() => {
+    if (formError) formErrorRef.current?.focus()
+  }, [formError])
 
   if (!token || linkError || expired) {
     return (
@@ -93,7 +99,7 @@ export function ResetPassword() {
         <p className="join-subtitle">Choisissez un mot de passe d'au moins {MIN_PASSWORD_LENGTH} caractères.</p>
 
         {formError && (
-          <p className="join-error" role="alert" tabIndex={-1} ref={(el) => el?.focus()}>
+          <p className="join-error" role="alert" tabIndex={-1} ref={formErrorRef}>
             {formError}
           </p>
         )}

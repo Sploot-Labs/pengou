@@ -85,6 +85,18 @@ describe('ForgotPassword', () => {
     expect(screen.queryByText(NEUTRE)).not.toBeInTheDocument()
   })
 
+  it('retire le message neutre quand une demande suivante reçoit un 429', async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse(200, { status: true }))
+    fetchMock.mockResolvedValueOnce(jsonResponse(429, {}))
+    renderScreen()
+    typeEmail('camille@gmail.com')
+    submit()
+    await screen.findByRole('status')
+    submit()
+    expect(await screen.findByRole('alert')).toBeInTheDocument()
+    expect(screen.queryByRole('status')).not.toBeInTheDocument()
+  })
+
   it("refuse une adresse invalide sans appeler l'API", () => {
     renderScreen()
     typeEmail('pas-un-email')
