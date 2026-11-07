@@ -26,9 +26,9 @@
     "@splootlabs/mail": "workspace:*",
     "@splootlabs/quiz": "workspace:*",
     "@splootlabs/shared": "workspace:*",
-    "better-auth": "^1.7.12",
+    "better-auth": "^1.7.16",
     "drizzle-orm": "^0.45.4",
-    "fastify": "^5.12.0",
+    "fastify": "^5.12.8",
     "ioredis": "^6",
     "prom-client": "^15",
     "socket.io": "^4.8.4"
