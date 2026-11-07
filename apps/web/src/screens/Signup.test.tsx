@@ -31,9 +31,9 @@ const LEGAL: LegalInfo = {
   privacyUrl: 'https://pengou.fr/politique-de-confidentialite/',
 }
 
-function renderSignup() {
+function renderSignup(path = '/signup') {
   return render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={[path]}>
       <Signup />
     </MemoryRouter>,
   )
@@ -184,5 +184,41 @@ describe('Signup quand la configuration légale ne se charge pas', () => {
     expect(screen.getByRole('button', { name: "S'inscrire" })).toBeDisabled()
     fireEvent.click(screen.getByRole('button', { name: 'Réessayer' }))
     expect(await screen.findByRole('checkbox', { name: "J'ai 15 ans ou plus" })).toBeInTheDocument()
+  })
+})
+
+describe("Signup, aide à la saisie de l'e-mail et destination ?next=", () => {
+  beforeEach(() => mockFetchLegal.mockResolvedValue({ termsVersion: null, termsUrl: null, privacyUrl: null }))
+
+  async function fillAndSubmit() {
+    await waitFor(() => expect(screen.getByRole('button', { name: "S'inscrire" })).toBeEnabled())
+    fillValidFields()
+    submit()
+  }
+
+  it("propose la correction du domaine à la perte de focus et l'applique", () => {
+    renderSignup()
+    const email = screen.getByLabelText('E-mail')
+    fireEvent.change(email, { target: { value: 'camille@gmial.com' } })
+    expect(screen.queryByRole('button', { name: 'camille@gmail.com' })).not.toBeInTheDocument()
+    fireEvent.blur(email)
+    fireEvent.click(screen.getByRole('button', { name: 'camille@gmail.com' }))
+    expect(email).toHaveValue('camille@gmail.com')
+  })
+
+  it("revient sur la destination ?next= après l'inscription et la propage au lien de connexion", async () => {
+    renderSignup('/signup?next=%2Finvitations%2Fabc%3Fv%3Dxyz')
+    expect(screen.getByRole('link', { name: 'Se connecter' })).toHaveAttribute(
+      'href',
+      '/login?next=%2Finvitations%2Fabc%3Fv%3Dxyz',
+    )
+    await fillAndSubmit()
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/invitations/abc?v=xyz', { replace: true }))
+  })
+
+  it('ignore une destination ?next= externe', async () => {
+    renderSignup('/signup?next=%2F%2Fevil.example')
+    await fillAndSubmit()
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true }))
   })
 })

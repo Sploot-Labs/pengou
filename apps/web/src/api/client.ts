@@ -16,7 +16,7 @@ import { getActiveTenantId } from './activeTenant'
  * use `{error}` — both are checked), else a generic fallback. */
 export class ApiError extends Error {
   readonly status: number
-  /** Code machine du serveur quand il en envoie un (`{code}`), ex. `TERMS_ACCEPTANCE_REQUIRED`. */
+  /** Code machine du serveur quand il en envoie un (`{code}`), ex. `TERMS_ACCEPTANCE_REQUIRED` ou `RESET_PASSWORD_DISABLED`. */
   readonly code?: string
 
   constructor(status: number, message: string, code?: string) {

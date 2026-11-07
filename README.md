@@ -61,6 +61,10 @@ docker compose up
 Ouvrez ensuite http://localhost:3000. Compose lève Postgres et l'app, applique les migrations
 au démarrage, et sert le SPA depuis le serveur. C'est tout.
 
+Les e-mails (réinitialisation du mot de passe, invitations) sont capturés par Mailpit, visible sur
+http://localhost:8025. Pour envoyer de vrais e-mails, voir la section « Envoi d'e-mails » de
+[`docs/devops.md`](docs/devops.md).
+
 ## Développement local
 
 Monorepo pnpm (Node ≥ 20). Le serveur (Fastify et Socket.IO) tourne sur `:3000`, le SPA (Vite)

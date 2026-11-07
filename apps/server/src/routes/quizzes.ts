@@ -2,9 +2,10 @@ import type { FastifyInstance } from 'fastify'
 import { createQuiz, listQuizzes, getQuiz, updateQuiz, archiveQuiz, restoreQuiz, deleteQuiz, withTenantTx, type Db } from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
+import { assertCanOwnAnotherQuiz } from '../quiz-quota.js'
 import { LIMITS, tooLong, isSafeMedia } from '../validation.js'
 
-type Deps = { systemDb: Db; appDb: Db; config: AppConfig }
+type Deps = { systemDb: Db; appDb: Db; config: AppConfig; mailEnabled?: boolean }
 
 /** `title` non vide requis à la création ; à la modification, s'il est fourni, il doit rester non vide. */
 function isNonEmptyString(value: unknown): value is string {
@@ -17,10 +18,13 @@ const MAX_DESCRIPTION = LIMITS.description
 
 export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
   const { systemDb, appDb, config } = deps
+  const quotaOpts = { mailEnabled: deps.mailEnabled === true, tenancyMode: config.tenancyMode }
 
   app.post('/api/quizzes', { preHandler: requireUser }, async (request, reply) => {
     const context = await resolveContextOr403(request, reply, systemDb, config)
     if (!context) return
+    const refused = await assertCanOwnAnotherQuiz(systemDb, request.user, quotaOpts)
+    if (refused) return reply.code(refused.status).send(refused.body)
 
     const body = request.body as { title?: unknown; description?: unknown } | undefined
     if (!isNonEmptyString(body?.title)) {
@@ -102,6 +106,11 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
     app.post<{ Params: { id: string } }>(`/api/quizzes/:id/${action}`, { preHandler: requireUser }, async (request, reply) => {
       const context = await resolveContextOr403(request, reply, systemDb, config)
       if (!context) return
+      // Désarchiver crée un quiz actif de plus : même limite que la création.
+      if (action === 'restore') {
+        const refused = await assertCanOwnAnotherQuiz(systemDb, request.user, quotaOpts)
+        if (refused) return reply.code(refused.status).send(refused.body)
+      }
       return withTenantTx(appDb, context, async (scope) => {
         const quiz = await apply(scope, request.params.id)
         if (!quiz) return reply.code(404).send({ error: 'Quiz introuvable.' })

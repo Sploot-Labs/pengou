@@ -24,6 +24,7 @@ import { ANSWER_SHAPES, type AnswerShapeKind } from '../constants'
 import { AnswerShape, Button, Logo, SHAPE_NAME_FR } from '../ui'
 import { AppHeader } from '../ui/AppHeader.js'
 import { ConfirmDialog } from '../ui/ConfirmDialog.js'
+import { isQuizLimitError, QuizLimitNotice } from '../ui/QuizLimitNotice.js'
 import { SourcesPanel } from '../ui/SourceCredit.js'
 
 /**
@@ -465,6 +466,7 @@ export function HostEditor() {
   const [archivePending, setArchivePending] = useState(false)
   const [archiveError, setArchiveError] = useState<string | null>(null)
   const [restorePending, setRestorePending] = useState(false)
+  const [restoreLimit, setRestoreLimit] = useState(false)
 
   const itemRefs = useRef<Map<string, HTMLButtonElement>>(new Map())
   const addRef = useRef<HTMLButtonElement>(null)
@@ -834,12 +836,14 @@ export function HostEditor() {
     if (!quizId) return
     setRestorePending(true)
     setActionError(null)
+    setRestoreLimit(false)
     try {
       const row = await restoreQuiz(quizId)
       setQuiz(row)
       setAnnouncement('Quiz restauré, il peut de nouveau être lancé.')
     } catch (err) {
-      setActionError(errorMessage(err))
+      if (isQuizLimitError(err)) setRestoreLimit(true)
+      else setActionError(errorMessage(err))
     } finally {
       setRestorePending(false)
     }
@@ -1121,6 +1125,7 @@ export function HostEditor() {
           </p>
         )}
 
+        {restoreLimit && <QuizLimitNotice />}
         {actionError && (
           <p className="join-error" role="alert">
             {actionError}

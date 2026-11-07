@@ -51,9 +51,30 @@ services:
       # GITHUB_CLIENT_SECRET:
       # Plafond de joueurs par partie (voir docs/charge).
       MAX_PLAYERS_PER_SESSION: ${MAX_PLAYERS_PER_SESSION:-640}
+      # Envoi d'e-mails : en développement, tout part vers Mailpit (interface sur
+      # http://localhost:8025, aucun message ne quitte la machine). Pour un vrai transport,
+      # surchargez ces variables dans l'environnement ou un `.env` local (voir docs/devops.md,
+      # section « Envoi d'e-mails »).
+      MAIL_TRANSPORT: ${MAIL_TRANSPORT:-smtp}
+      SMTP_HOST: ${SMTP_HOST:-mailpit}
+      SMTP_PORT: ${SMTP_PORT:-1025}
+      # Mailpit n'offre pas STARTTLS : on lève l'exigence de TLS pour ce relais local seulement.
+      # Si SMTP_HOST pointe vers un vrai relais, mettre SMTP_REQUIRE_TLS=true.
+      SMTP_REQUIRE_TLS: ${SMTP_REQUIRE_TLS:-false}
+      MAIL_FROM: ${MAIL_FROM:-Pengou <contact@pengou.fr>}
+      BREVO_API_KEY: ${BREVO_API_KEY:-}
     depends_on:
       db:
         condition: service_healthy
+      mailpit:
+        condition: service_started
+
+  # Serveur SMTP de développement : capture les e-mails envoyés par l'app. Interface web sur
+  # http://localhost:8025 ; le port SMTP 1025 reste interne au réseau Compose (non publié).
+  mailpit:
+    image: axllent/mailpit:v1.33
+    ports:
+      - "8025:8025"
 
 volumes:
   db-data:

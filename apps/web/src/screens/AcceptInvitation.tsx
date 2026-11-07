@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { useSession } from '../api/auth'
 import { useWorkspaces } from '../api/workspace-context'
 import { ApiError } from '../api/client'
 import { fetchInvitationPreview, acceptInvitation, type InvitationPreview } from '../api/workspaces'
+import { nextQuery } from '../nextPath'
 import { AppHeader } from '../ui/AppHeader'
 import { Button } from '../ui'
 
@@ -17,7 +18,12 @@ const ROLE_LABEL: Record<string, string> = { owner: 'propriétaire', admin: 'adm
  */
 export function AcceptInvitation() {
   const { token = '' } = useParams()
+  // Preuve du lien e-mailé : la renvoyer à l'acceptation confirme l'adresse.
+  const [searchParams] = useSearchParams()
+  const proof = searchParams.get('v')
   const { user } = useSession()
+  // Retour sur ce lien (preuve `v` comprise) après connexion ou inscription.
+  const returnQuery = nextQuery(`/invitations/${encodeURIComponent(token)}${proof ? `?v=${encodeURIComponent(proof)}` : ''}`)
   const { setActive } = useWorkspaces()
 
   const [preview, setPreview] = useState<InvitationPreview | null>(null)
@@ -43,7 +49,7 @@ export function AcceptInvitation() {
     setAccepting(true)
     setAcceptError(null)
     try {
-      const { tenantId } = await acceptInvitation(token)
+      const { tenantId } = await acceptInvitation(token, proof)
       setActive(tenantId)
       // Rechargement dur : la nouvelle membership + le nouveau contexte tenant sont pris en compte.
       window.location.assign('/')
@@ -101,8 +107,8 @@ export function AcceptInvitation() {
               <>
                 <p>Connectez-vous ou créez un compte pour rejoindre ce workspace.</p>
                 <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
-                  <Link className="ab-button ab-button--primary" to="/login">Se connecter</Link>
-                  <Link className="ab-button ab-button--ghost" to="/signup">Créer un compte</Link>
+                  <Link className="ab-button ab-button--primary" to={`/login${returnQuery}`}>Se connecter</Link>
+                  <Link className="ab-button ab-button--ghost" to={`/signup${returnQuery}`}>Créer un compte</Link>
                 </div>
                 <p className="home-card__meta" style={{ marginTop: 'var(--space-3)' }}>
                   Revenez sur ce lien une fois connecté·e pour finaliser.

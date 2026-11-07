@@ -1,14 +1,16 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useSession } from '../api/auth'
+import { useAuthFeatures } from '../api/features'
 import { useWorkspaces } from '../api/workspace-context'
 import { ApiError } from '../api/client'
 import {
   fetchMembers, setMemberRole, removeMember, fetchInvitations, createInvitation,
   revokeInvitation, resendInvitation, createWorkspace,
-  type Member, type PendingInvitation, type Role,
+  type InvitationResult, type Member, type PendingInvitation, type Role,
 } from '../api/workspaces'
 import { AppHeader } from '../ui/AppHeader'
+import { EmailSuggestion } from '../ui/EmailSuggestion'
 import { WorkspaceSwitcher } from '../ui/WorkspaceSwitcher'
 import { Button } from '../ui'
 
@@ -191,6 +193,9 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
   const [pending, setPending] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
   const [lastLink, setLastLink] = useState<string | null>(null)
+  const [sentNote, setSentNote] = useState<string | null>(null)
+  const [emailChecked, setEmailChecked] = useState('')
+  const { mailEnabled } = useAuthFeatures()
 
   const load = useCallback(() => {
     setLoading(true); setError(null)
@@ -208,8 +213,9 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
     if (!trimmed) { setFormError('E-mail requis.'); return }
     setPending(true); setFormError(null)
     try {
-      const { invitation } = await createInvitation(tenantId, trimmed, role)
-      setLastLink(invitationLink(invitation.token))
+      const result = await createInvitation(tenantId, trimmed, role)
+      setLastLink(invitationLink(result.invitation.token))
+      setSentNote(sendNote(result))
       setEmail('')
       load()
     } catch (err) {
@@ -218,13 +224,23 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
       setPending(false)
     }
   }
+  /** Sans envoi configuré l'écran reste celui d'avant : aucune note. */
+  function sendNote({ invitation, emailSent, emailSkipped }: InvitationResult): string | null {
+    if (!mailEnabled) return null
+    if (emailSent) return `Invitation envoyée à ${invitation.email}`
+    if (emailSkipped === 'inviter_unverified') {
+      return 'Confirmez votre adresse pour envoyer les invitations par e-mail. En attendant, copiez le lien ci-dessous.'
+    }
+    return "L'e-mail n'a pas pu partir, copiez le lien ci-dessous"
+  }
   async function handleRevoke(id: string) {
     try { await revokeInvitation(tenantId, id); load() } catch (err) { setError(errorMessage(err)) }
   }
   async function handleResend(id: string) {
     try {
-      const { invitation } = await resendInvitation(tenantId, id)
-      setLastLink(invitationLink(invitation.token))
+      const result = await resendInvitation(tenantId, id)
+      setLastLink(invitationLink(result.invitation.token))
+      setSentNote(sendNote(result))
       load()
     } catch (err) { setError(errorMessage(err)) }
   }
@@ -237,7 +253,8 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
         {formError && <p className="join-error" role="alert">{formError}</p>}
         <div className="host-field">
           <label htmlFor="invite-email">E-mail à inviter</label>
-          <input id="invite-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="collegue@exemple.fr" />
+          <input id="invite-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} onBlur={() => setEmailChecked(email)} placeholder="collegue@exemple.fr" />
+          <EmailSuggestion value={emailChecked} onApply={(fixed) => { setEmail(fixed); setEmailChecked(fixed) }} />
         </div>
         <div className="host-field">
           <label htmlFor="invite-role">Rôle</label>
@@ -249,6 +266,7 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
         <Button variant="primary" type="submit" disabled={pending}>{pending ? 'Envoi…' : 'Inviter'}</Button>
       </form>
 
+      {sentNote && <p className="join-status" role="status">{sentNote}</p>}
       {lastLink && (
         <p className="ab-invite-link" role="status">
           Lien d'invitation (à transmettre) : <code>{lastLink}</code>

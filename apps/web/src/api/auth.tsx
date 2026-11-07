@@ -30,6 +30,7 @@ export interface User {
   id: string
   email: string
   name?: string | null
+  emailVerified: boolean
   [key: string]: unknown
 }
 
@@ -59,14 +60,42 @@ interface AuthEmailResponse {
   token?: string
 }
 
+const VERIFIED_CALLBACK_URL = '/?email-verifie=1'
+
 export async function signUp(input: SignUpInput): Promise<User> {
-  const response = await apiPost<AuthEmailResponse>('/api/auth/sign-up/email', input)
+  // `callbackURL` : après clic sur le lien de confirmation, Better Auth ramène ici (et connecte).
+  const response = await apiPost<AuthEmailResponse>('/api/auth/sign-up/email', {
+    ...input,
+    callbackURL: VERIFIED_CALLBACK_URL,
+  })
   return response.user
 }
 
 export async function signIn(input: SignInInput): Promise<User> {
   const response = await apiPost<AuthEmailResponse>('/api/auth/sign-in/email', input)
   return response.user
+}
+
+/** Demande l'e-mail de réinitialisation. Better Auth redirige ensuite le lien reçu vers
+ * `/reset-password?token=…` (ou `?error=INVALID_TOKEN`). */
+export async function requestPasswordReset(email: string): Promise<void> {
+  await apiPost('/api/auth/request-password-reset', { email, redirectTo: '/reset-password' })
+}
+
+/** Pose le nouveau mot de passe. 400 si le token est invalide ou expiré. */
+export async function resetPassword(token: string, newPassword: string): Promise<void> {
+  await apiPost('/api/auth/reset-password', { newPassword, token })
+}
+
+/** Renvoie l'e-mail de confirmation du compte connecté. `email` évite un aller-retour vers `/api/me`. */
+export async function sendVerificationEmail(email?: string): Promise<void> {
+  let address = email
+  if (!address) {
+    const probe = await fetchSession()
+    if (!probe) throw new ApiError(401, 'Votre session a expiré. Reconnectez-vous.')
+    address = probe.user.email
+  }
+  await apiPost('/api/auth/send-verification-email', { email: address, callbackURL: VERIFIED_CALLBACK_URL })
 }
 
 export async function signOut(): Promise<void> {

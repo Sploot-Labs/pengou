@@ -5,6 +5,7 @@ import { collectDefaultMetrics, Registry } from 'prom-client'
 import type { AppConfig } from '@splootlabs/shared'
 import { registerOriginGuard } from './origin-guard.js'
 import { compileTrust, createForwardedForWarner } from './client-ip.js'
+import { SanitizedLogController, serializeRequest } from './request-log.js'
 
 declare module 'fastify' {
   interface FastifyContextConfig {
@@ -17,6 +18,8 @@ export type ServerDeps = {
   dbStatus?: () => 'up' | 'down'
   /** Ping DB réel pour la readiness (P1-10) — distinct du `dbStatus` (drapeau statique). */
   dbPing?: () => Promise<boolean>
+  /** Destination des journaux (tests) : active le logger même en NODE_ENV=test. */
+  logStream?: { write(line: string): void }
 }
 
 // Observabilité (P1-10) : métriques process/Node (CPU, heap, event-loop lag, GC…) exposées au
@@ -45,15 +48,23 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
   // Logger pino (P1-10) : niveau via LOG_LEVEL (défaut info), et REDACTION des secrets/cookies
   // dans les logs de requêtes (Authorization, Cookie, Set-Cookie) — sans ça, un cookie de session
   // ou un header d'auth se retrouverait en clair dans les logs. Coupé en test.
+  // `serializers.req` remplace celui de Fastify, utilisé par « incoming request » et par les
+  // journaux d'erreur : l'URL y perd sa query string et ses segments à allure de jeton (liens de
+  // réinitialisation, de confirmation et d'invitation, cf. request-log.ts).
   const loggerOptions = {
     level: process.env.LOG_LEVEL ?? 'info',
+    serializers: { req: serializeRequest },
     redact: {
       paths: ['req.headers.authorization', 'req.headers.cookie', 'res.headers["set-cookie"]'],
       censor: '[redacted]',
     },
   }
+  const logger = deps.logStream
+    ? { ...loggerOptions, stream: deps.logStream }
+    : config.nodeEnv !== 'test' ? loggerOptions : false
   const app = Fastify({
-    logger: config.nodeEnv !== 'test' ? loggerOptions : false,
+    logger,
+    logController: new SanitizedLogController(),
     trustProxy: config.trustedProxies.length ? config.trustedProxies : false,
   })
 

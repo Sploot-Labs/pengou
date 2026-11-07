@@ -13,7 +13,12 @@ import { termsAcceptanceRequired } from './legal.js'
 // Fallback documenté dans le brief : on monte le handler Better Auth directement sur
 // une route Fastify, en réutilisant `toNodeHandler`/`fromNodeHeaders` de `better-auth/node`
 // (ce sont exactement les mêmes primitives que `fastify-better-auth` utilise en interne).
-export async function registerAuth(app: FastifyInstance, auth: Auth, legal: LegalConfig | null = null): Promise<void> {
+export async function registerAuth(
+  app: FastifyInstance,
+  auth: Auth,
+  options: { legal?: LegalConfig | null; mailEnabled?: boolean } = {},
+): Promise<void> {
+  const legal = options.legal ?? null
   const authHandler = toNodeHandler(auth)
 
   // Encapsulé dans un sous-contexte Fastify pour que la désactivation du parsing JSON
@@ -35,6 +40,11 @@ export async function registerAuth(app: FastifyInstance, auth: Auth, legal: Lega
       await authHandler(request.raw, reply.raw)
     })
   })
+
+  // Publique : ce que le web peut proposer (mot de passe oublié, bandeau de confirmation).
+  // Aucun détail sur le transport.
+  const mailEnabled = options.mailEnabled ?? false
+  app.get('/api/auth-features', async () => ({ mailEnabled }))
 
   // Sonde de session : renvoie l'utilisateur courant, ou 401. Reste ouverte pendant la
   // revalidation des CGU et indique au client s'il doit afficher l'écran d'acceptation.

@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@splootlabs/db": "workspace:*",
+    "@splootlabs/mail": "workspace:*",
     "@splootlabs/shared": "workspace:*",
     "better-auth": "^1.7.12"
   },

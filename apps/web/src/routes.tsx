@@ -5,6 +5,7 @@ import { GameSocketProvider } from './realtime/GameSocketProvider'
 import { RequireAuth } from './RequireAuth'
 import { BigScreen } from './screens/BigScreen'
 import { Credits } from './screens/Credits'
+import { ForgotPassword } from './screens/ForgotPassword'
 import { Home } from './screens/Home'
 import { HostEditor } from './screens/HostEditor'
 import { HostLive } from './screens/HostLive'
@@ -12,6 +13,7 @@ import { Join } from './screens/Join'
 import { Library } from './screens/Library'
 import { Login } from './screens/Login'
 import { PlayerLive } from './screens/PlayerLive'
+import { ResetPassword } from './screens/ResetPassword'
 import { RouteError } from './screens/RouteError'
 import { SessionReport } from './screens/SessionReport'
 import { Signup } from './screens/Signup'
@@ -94,6 +96,8 @@ export const router = createBrowserRouter([
     children: [
       { path: '/login', element: <Login /> },
       { path: '/signup', element: <Signup /> },
+      { path: '/forgot-password', element: <ForgotPassword /> },
+      { path: '/reset-password', element: <ResetPassword /> },
       {
         element: <HostRealtimeLayout />,
         children: [

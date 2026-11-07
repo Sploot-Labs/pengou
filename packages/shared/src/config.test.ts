@@ -131,6 +131,91 @@ describe("loadConfig, budget d'échecs de PIN", () => {
   })
 })
 
+describe('messagerie', () => {
+  it('sans MAIL_TRANSPORT : transport none et contrôle de domaine désactivé', () => {
+    const c = loadConfig({})
+    expect(c.mail.transport).toBe('none')
+    expect(c.emailDomainCheck).toBe(false)
+  })
+  it('smtp : port 587 par défaut', () => {
+    const c = loadConfig({ MAIL_TRANSPORT: 'smtp', SMTP_HOST: 'mailpit', MAIL_FROM: 'Pengou <a@b.fr>' })
+    expect(c.mail.transport).toBe('smtp')
+    if (c.mail.transport === 'smtp') expect(c.mail.smtp.port).toBe(587)
+  })
+  it('smtp : SMTP_REQUIRE_TLS vaut true par défaut, false si demandé, vide = défaut', () => {
+    const e = { MAIL_TRANSPORT: 'smtp', SMTP_HOST: 'h', MAIL_FROM: 'a@b.fr' }
+    const tls = (extra: Record<string, string>) => {
+      const c = loadConfig({ ...e, ...extra })
+      return c.mail.transport === 'smtp' ? c.mail.smtp.requireTls : undefined
+    }
+    expect(tls({})).toBe(true)
+    expect(tls({ SMTP_REQUIRE_TLS: 'false' })).toBe(false)
+    expect(tls({ SMTP_REQUIRE_TLS: '' })).toBe(true)
+  })
+  it('smtp sans SMTP_HOST : erreur', () => {
+    expect(() => loadConfig({ MAIL_TRANSPORT: 'smtp', MAIL_FROM: 'a@b.fr' })).toThrow(/SMTP_HOST/)
+  })
+  it('brevo sans BREVO_API_KEY : erreur', () => {
+    expect(() => loadConfig({ MAIL_TRANSPORT: 'brevo', MAIL_FROM: 'a@b.fr' })).toThrow(/BREVO_API_KEY/)
+  })
+  it('transport choisi sans MAIL_FROM : erreur', () => {
+    expect(() => loadConfig({ MAIL_TRANSPORT: 'smtp', SMTP_HOST: 'h' })).toThrow(/MAIL_FROM/)
+  })
+  it('SMTP_USER sans SMTP_PASSWORD et inversement : erreur', () => {
+    const base = { MAIL_TRANSPORT: 'smtp', SMTP_HOST: 'h', MAIL_FROM: 'a@b.fr' }
+    expect(() => loadConfig({ ...base, SMTP_USER: 'u' })).toThrow(/SMTP_PASSWORD/)
+    expect(() => loadConfig({ ...base, SMTP_PASSWORD: 'p' })).toThrow(/SMTP_USER/)
+  })
+  it('EMAIL_DOMAIN_CHECK : auto suit le transport, false et true forcent', () => {
+    const brevo = { MAIL_TRANSPORT: 'brevo', BREVO_API_KEY: 'k', MAIL_FROM: 'a@b.fr' }
+    expect(loadConfig({ ...brevo }).emailDomainCheck).toBe(true)
+    expect(loadConfig({ ...brevo, EMAIL_DOMAIN_CHECK: 'false' }).emailDomainCheck).toBe(false)
+    expect(loadConfig({ EMAIL_DOMAIN_CHECK: 'true' }).emailDomainCheck).toBe(true)
+  })
+  it("les erreurs ne contiennent jamais la valeur d'un secret", () => {
+    let message = ''
+    try {
+      loadConfig({
+        MAIL_TRANSPORT: 'smtp',
+        SMTP_HOST: 'h',
+        MAIL_FROM: 'a@b.fr',
+        SMTP_PASSWORD: 's3cr3t-valeur',
+      })
+    } catch (e) {
+      message = String(e)
+    }
+    expect(message).not.toBe('')
+    expect(message).not.toContain('s3cr3t-valeur')
+    message = ''
+    try {
+      loadConfig({ MAIL_TRANSPORT: 'brevo', BREVO_API_KEY: 's3cr3t-valeur' })
+    } catch (e) {
+      message = String(e)
+    }
+    expect(message).not.toBe('')
+    expect(message).not.toContain('s3cr3t-valeur')
+  })
+  it('variables vides traitées comme absentes', () => {
+    expect(loadConfig({ MAIL_TRANSPORT: '' }).mail.transport).toBe('none')
+    const c = loadConfig({
+      MAIL_TRANSPORT: 'smtp', SMTP_HOST: 'h', MAIL_FROM: 'a@b.fr', SMTP_USER: '', SMTP_PASSWORD: ' ', SMTP_PORT: '',
+    })
+    if (c.mail.transport === 'smtp') {
+      expect(c.mail.smtp.user).toBeUndefined()
+      expect(c.mail.smtp.password).toBeUndefined()
+      expect(c.mail.smtp.port).toBe(587)
+    }
+    expect(() =>
+      loadConfig({ MAIL_TRANSPORT: 'brevo', MAIL_FROM: 'a@b.fr', BREVO_API_KEY: '' }),
+    ).toThrow(/BREVO_API_KEY/)
+  })
+  it('production sans transport : ne lève pas', () => {
+    expect(() =>
+      loadConfig({ NODE_ENV: 'production', BETTER_AUTH_SECRET: 'x'.repeat(32), APP_DB_PASSWORD: 'custom' }),
+    ).not.toThrow()
+  })
+})
+
 describe('loadConfig, conditions d\'utilisation (CGU)', () => {
   const LEGAL = {
     LEGAL_TERMS_URL: 'https://pengou.fr/cgu/',

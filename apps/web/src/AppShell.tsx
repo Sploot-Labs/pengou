@@ -3,6 +3,7 @@ import { SessionProvider } from './api/auth'
 import { WorkspaceProvider } from './api/workspace-context'
 import { MotionProvider } from './motion/index.js'
 import { ThemeProvider } from './theme/ThemeProvider'
+import { VerifyEmailBanner } from './ui/VerifyEmailBanner'
 import './tokens.css'
 import './prototype.css'
 
@@ -31,6 +32,7 @@ export function AppShell() {
               <a className="ab-skip-link" href="#contenu-principal">
                 Aller au contenu
               </a>
+              <VerifyEmailBanner />
               <Outlet />
             </div>
           </ThemeProvider>

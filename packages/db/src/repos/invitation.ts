@@ -1,4 +1,4 @@
-import { and, eq } from 'drizzle-orm'
+import { and, eq, sql } from 'drizzle-orm'
 import { hasPermission, type Role } from '@splootlabs/shared'
 import type { Db } from '../client.js'
 import type { TenantScope } from '../tenant.js'
@@ -92,14 +92,15 @@ export async function revokePendingInvitationsBy(scope: TenantScope, userId: str
 /** Renvoie une invitation `pending` : régénère token + expiration, et en fait l'invitation de
  * `invitedBy` (celui qui la renvoie). Sans ce transfert, un admin pouvait régénérer l'invitation
  * d'un autre, garder le jeton et l'accepter après son propre retrait, l'auteur d'origine étant
- * toujours membre. Renvoie la ligne mise à jour, ou null si absente / non pending. */
+ * toujours membre. `emailedAt` repart à nul : le nouveau token n'a encore été envoyé à personne.
+ * Renvoie la ligne mise à jour, ou null si absente / non pending. */
 export async function resendInvitation(
   scope: TenantScope,
   id: string,
   input: { token: string; expiresAt: Date; invitedBy: string },
 ): Promise<Invitation | null> {
   const [row] = await scope.db.update(schema.invitation)
-    .set({ token: input.token, expiresAt: input.expiresAt, invitedBy: input.invitedBy })
+    .set({ token: input.token, expiresAt: input.expiresAt, invitedBy: input.invitedBy, emailedAt: null })
     .where(and(
       eq(schema.invitation.id, id),
       eq(schema.invitation.tenantId, scope.tenantId),
@@ -107,6 +108,13 @@ export async function resendInvitation(
     ))
     .returning()
   return row ?? null
+}
+
+/** Note que l'e-mail d'invitation est bien parti (après un envoi réussi seulement). */
+export async function markInvitationEmailed(scope: TenantScope, id: string, at: Date): Promise<void> {
+  await scope.db.update(schema.invitation)
+    .set({ emailedAt: at })
+    .where(and(eq(schema.invitation.id, id), eq(schema.invitation.tenantId, scope.tenantId)))
 }
 
 export type InvitationWithWorkspace = Invitation & { workspaceName: string; workspaceSlug: string }
@@ -124,6 +132,7 @@ export async function getInvitationByToken(db: Db, token: string): Promise<Invit
     status: schema.invitation.status,
     expiresAt: schema.invitation.expiresAt,
     acceptedAt: schema.invitation.acceptedAt,
+    emailedAt: schema.invitation.emailedAt,
     createdAt: schema.invitation.createdAt,
     workspaceName: schema.tenant.name,
     workspaceSlug: schema.tenant.slug,
@@ -148,11 +157,15 @@ export class InvitationError extends Error {
 /**
  * Accepte une invitation par token pour `userId` (systemDb, pré-contexte, transaction). Valide
  * l'état (pending, non expirée), refuse si l'utilisateur est déjà membre, crée la membership avec
- * le rôle invité et marque l'invitation `accepted`. Renvoie le tenant rejoint + le rôle.
+ * le rôle invité et marque l'invitation `accepted`. Si l'invitation est réellement partie par
+ * e-mail (`emailedAt`), que l'acceptation vient du lien e-mailé (`emailProofValid`, vérifié par
+ * l'appelant) et que l'adresse du compte est celle de l'invitation (casse et espaces de bord
+ * ignorés, pas de normalisation des alias), l'adresse est confirmée dans la même transaction.
+ * Renvoie le tenant rejoint + le rôle.
  */
 export async function acceptInvitation(
   db: Db,
-  input: { token: string; userId: string; nowMs?: number },
+  input: { token: string; userId: string; nowMs?: number; emailProofValid?: boolean },
 ): Promise<{ tenantId: string; role: Role }> {
   const nowMs = input.nowMs ?? Date.now()
   return db.transaction(async (tx) => {
@@ -183,6 +196,17 @@ export async function acceptInvitation(
       .returning({ id: schema.invitation.id })
     // Course entre deux acceptations : l'autre a consommé le jeton entre la lecture et l'update.
     if (consumed.length === 0) throw new InvitationError('not_pending')
+
+    // Un lien copié à la main ne prouve rien : seul le lien e-mailé (avec sa preuve) confirme
+    // l'adresse. L'auteur connaît le token, pas la preuve.
+    if (input.emailProofValid && inv.emailedAt) {
+      await tx.update(schema.user)
+        .set({ emailVerified: true })
+        .where(and(
+          eq(schema.user.id, input.userId),
+          sql`lower(trim(${schema.user.email})) = lower(trim(${inv.email}))`,
+        ))
+    }
     return { tenantId: inv.tenantId, role: inv.role as Role }
   })
 }

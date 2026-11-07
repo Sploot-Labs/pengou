@@ -1,5 +1,6 @@
 export const PACKAGE_NAME = '@splootlabs/shared'
 export { loadConfig } from './config.js'
-export type { AppConfig, LegalConfig } from './config.js'
+export type { AppConfig, LegalConfig, MailConfig } from './config.js'
 export { hasPermission, ROLE_CAPABILITIES } from './authz.js'
 export type { Role, Capability } from './authz.js'
+export { suggestEmailDomain } from './email-suggest.js'

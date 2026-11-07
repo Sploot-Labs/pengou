@@ -1029,7 +1029,9 @@ fieldset.host-field > legend {
   border-radius: 12px;
   background: color-mix(in srgb, var(--danger) 22%, transparent);
   border: 1px solid var(--danger);
-  color: #ffffff;
+  /* Encre forte du thème sur la teinte danger à 22 % : clair 10,5:1 sur le fond, 11,3:1 sur une
+     surface ; sombre 9,9:1 et 8,7:1 ; scène (encre blanche) 11,6:1 et 10,1:1. */
+  color: var(--ink-strong);
   font-size: 14px;
 }
 
@@ -3818,4 +3820,68 @@ p.source-credit {
 .podium-credits {
   max-width: 48rem;
   text-align: center;
+}
+
+/* Aide à la saisie de l'e-mail et message de statut des écrans d'authentification. */
+.join-suggestion {
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+
+.join-suggestion__apply {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.join-status {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid currentColor;
+  font-size: 14px;
+}
+
+/* Rappel de confirmation d'adresse : fond clair, texte ink-strong, bouton texte souligné. */
+.ab-verify-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-5);
+  background: var(--surface-2);
+  color: var(--ink-strong);
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.ab-verify-banner--ok {
+  padding: var(--space-2) var(--space-5);
+}
+
+.ab-verify-banner p {
+  margin: 0;
+}
+
+.ab-verify-banner__action {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Refus de création de quiz : message empilé (l'encre vient de .join-error). */
+.ab-quiz-limit {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ab-quiz-limit p {
+  margin: 0;
 }

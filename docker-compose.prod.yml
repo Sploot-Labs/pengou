@@ -51,6 +51,18 @@ services:
       LEGAL_TERMS_VERSION: ${LEGAL_TERMS_VERSION:-}
       # Plafond de joueurs par partie (voir docs/charge).
       MAX_PLAYERS_PER_SESSION: ${MAX_PLAYERS_PER_SESSION:-640}
+      # Envoi d'e-mails (optionnel, voir docs/devops.md, section « Envoi d'e-mails ») : sans
+      # MAIL_TRANSPORT, aucun e-mail n'est envoyé. Une valeur vide équivaut à une valeur absente.
+      MAIL_TRANSPORT: ${MAIL_TRANSPORT:-}
+      MAIL_FROM: ${MAIL_FROM:-}
+      MAIL_REPLY_TO: ${MAIL_REPLY_TO:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_REQUIRE_TLS: ${SMTP_REQUIRE_TLS:-}
+      BREVO_API_KEY: ${BREVO_API_KEY:-}
+      EMAIL_DOMAIN_CHECK: ${EMAIL_DOMAIN_CHECK:-}
       # Contenu de bibliothèque propre à l'instance (optionnel, voir docs/devops.md) :
       # décommenter cette ligne et le volume ci-dessous.
       # LIBRARY_EXTRA_DIR: /data/library

@@ -49,7 +49,7 @@ async function buildApp(env: Record<string, string> = LEGAL_ENV): Promise<BuiltA
     termsVersion: config.legal?.termsVersion,
   })
   const app = await buildServer(config, { dbStatus: () => 'up' })
-  await registerAuth(app, auth, config.legal)
+  await registerAuth(app, auth, { legal: config.legal })
   registerLegal(app, { db: ctx.db, auth, legal: config.legal })
   registerEditor(app, { systemDb: ctx.db, appDb: ctx.appDb, auth, config })
   const io = attachRealtime(app, config)
