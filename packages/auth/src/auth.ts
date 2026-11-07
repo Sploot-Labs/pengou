@@ -7,6 +7,7 @@ import {
 } from '@splootlabs/mail'
 import type { Db } from '@splootlabs/db'
 import { schema, ensureDefaultTenant, ensureMembership, firstMembershipRole, createWorkspace } from '@splootlabs/db'
+import { applyTermsOnUserCreate } from './terms.js'
 
 export type AuthConfig = {
   secret: string
@@ -27,6 +28,8 @@ export type AuthConfig = {
   /** Force l'activation du limiteur de débit (tests dédiés). */
   rateLimitEnabled?: boolean
   logger?: MailLogger
+  /** Version courante des CGU (LEGAL_TERMS_VERSION). Absente : aucune acceptation demandée. */
+  termsVersion?: string
 }
 
 const silentLogger: MailLogger = { info() {}, warn() {}, error() {} }
@@ -132,9 +135,19 @@ export function createAuth(db: Db, config: AuthConfig) {
       },
     },
     socialProviders: config.socialProviders ?? {},
+    user: {
+      // Acceptation des CGU : renseignée uniquement par le serveur (hook `before` ci-dessous et
+      // POST /api/legal/accept). `input: false` fait refuser par Better Auth toute valeur envoyée
+      // par le client, à l'inscription comme sur /update-user.
+      additionalFields: {
+        termsVersion: { type: 'string', required: false, input: false },
+        termsAcceptedAt: { type: 'date', required: false, input: false },
+      },
+    },
     databaseHooks: {
       user: {
         create: {
+          before: async (user, context) => applyTermsOnUserCreate(config.termsVersion, user, context),
           // Better Auth v1.6.24 (@better-auth/core init-options.ts) : la signature réelle
           // est `after?: (user, context: GenericEndpointContext | null) => Promise<void>`
           // (un 2e paramètre contexte, non utilisé ici) — conforme au brief.

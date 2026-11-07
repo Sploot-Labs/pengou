@@ -16,7 +16,7 @@ import { getActiveTenantId } from './activeTenant'
  * use `{error}` — both are checked), else a generic fallback. */
 export class ApiError extends Error {
   readonly status: number
-  /** Code machine du corps d'erreur (`body.code`, ex. `RESET_PASSWORD_DISABLED`), s'il y en a un. */
+  /** Code machine du serveur quand il en envoie un (`{code}`), ex. `TERMS_ACCEPTANCE_REQUIRED` ou `RESET_PASSWORD_DISABLED`. */
   readonly code?: string
 
   constructor(status: number, message: string, code?: string) {
@@ -25,6 +25,29 @@ export class ApiError extends Error {
     this.status = status
     this.code = code
   }
+}
+
+/** Code des réponses 403 des routes protégées tant que l'hôte n'a pas accepté les CGU courantes. */
+export const TERMS_ACCEPTANCE_REQUIRED = 'TERMS_ACCEPTANCE_REQUIRED'
+
+const termsListeners = new Set<() => void>()
+
+/** S'abonne aux refus « CGU à revalider » de n'importe quelle requête (une notification par
+ * réponse). Utilisé par `SessionProvider` pour afficher l'écran de revalidation même quand le
+ * changement de version survient après la sonde de session. Renvoie la fonction de désabonnement. */
+export function onTermsAcceptanceRequired(listener: () => void): () => void {
+  termsListeners.add(listener)
+  return () => {
+    termsListeners.delete(listener)
+  }
+}
+
+function extractErrorCode(body: unknown): string | undefined {
+  if (body && typeof body === 'object') {
+    const code = (body as Record<string, unknown>).code
+    if (typeof code === 'string' && code.length > 0) return code
+  }
+  return undefined
 }
 
 function extractErrorMessage(body: unknown): string | undefined {
@@ -36,14 +59,6 @@ function extractErrorMessage(body: unknown): string | undefined {
     if (typeof record.statusCode === 'number') return undefined
     if (typeof record.error === 'string' && record.error.length > 0) return record.error
     if (typeof record.message === 'string' && record.message.length > 0) return record.message
-  }
-  return undefined
-}
-
-function extractErrorCode(body: unknown): string | undefined {
-  if (body && typeof body === 'object') {
-    const code = (body as Record<string, unknown>).code
-    if (typeof code === 'string' && code.length > 0) return code
   }
   return undefined
 }
@@ -109,7 +124,11 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
 
   if (!response.ok) {
     const message = extractErrorMessage(data) ?? fallbackMessage(response.status)
-    throw new ApiError(response.status, message, extractErrorCode(data))
+    const code = extractErrorCode(data)
+    if (response.status === 403 && code === TERMS_ACCEPTANCE_REQUIRED) {
+      for (const listener of termsListeners) listener()
+    }
+    throw new ApiError(response.status, message, code)
   }
 
   return data as T

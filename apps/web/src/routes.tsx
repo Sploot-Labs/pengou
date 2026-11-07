@@ -130,7 +130,8 @@ export const router = createBrowserRouter([
           {
             path: '/host/:sessionId',
             element: (
-              <RequireAuth>
+              // Partie en cours : une nouvelle version des CGU ne la coupe pas (voir RequireAuth).
+              <RequireAuth allowPendingTerms>
                 <SceneRoute>
                   <HostLive />
                 </SceneRoute>

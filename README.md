@@ -125,6 +125,35 @@ par construction. Voir les specs de conception dans [`docs/superpowers/`](docs/s
 - Multi-instance : le passage à l'échelle horizontale (Redis, état de jeu partagé) est en cours.
   Le déploiement actuel est mono-instance. Voir [`docs/audit/`](docs/audit/).
 
+### Conditions d'utilisation
+
+Les conditions d'utilisation (CGU) dépendent de l'instance : une instance auto-hébergée n'a pas
+à imposer celles de pengou.fr. Trois variables les configurent.
+
+`LEGAL_TERMS_VERSION` est la date des CGU en vigueur, au format AAAA-MM-JJ (celle de leur mention
+« Dernière mise à jour »). Sans elle, la fonction est désactivée : l'inscription ne demande rien
+et aucun compte n'est bloqué. Avec elle, l'hôte coche à l'inscription « J'ai 15 ans ou plus » et
+« J'accepte les conditions d'utilisation » ; le serveur refuse tout compte créé sans cette
+acceptation et enregistre la version et l'heure d'acceptation (colonnes `terms_version` et
+`terms_accepted_at` de la table `user`). `LEGAL_TERMS_URL` est l'adresse des CGU et
+`LEGAL_PRIVACY_URL` celle de la politique de confidentialité, affichée à titre d'information ;
+toutes deux sont requises dès que la version est définie.
+
+Quand la version change, chaque hôte dont la version acceptée diffère (ou qui n'en a jamais
+accepté, comme un compte antérieur à la fonction ou créé par un fournisseur OAuth) doit accepter
+la nouvelle version avant de continuer : l'API répond `403` avec le code
+`TERMS_ACCEPTANCE_REQUIRED` sur les routes protégées, et l'app affiche un écran bloquant. La
+lecture de session, la déconnexion et l'acceptation (`POST /api/legal/accept`) restent ouvertes.
+Les joueurs ne sont jamais concernés, et une partie en cours n'est pas coupée : l'écran apparaît
+à la navigation suivante.
+
+Règle de mise à jour pour pengou.fr : changer la date des CGU sur pengou.fr impose de monter
+`LEGAL_TERMS_VERSION` à cette même date dans la configuration de production (dépôt
+`splootlabs-ops`), ce qui déclenche la revalidation par tous les hôtes. Le site pengou.fr a déjà
+un test qui oblige à changer la date des pages légales quand leur texte change. En production,
+pengou.fr utilise `LEGAL_TERMS_URL=https://pengou.fr/cgu/` et
+`LEGAL_PRIVACY_URL=https://pengou.fr/politique-de-confidentialite/`.
+
 ## Contribuer
 
 Les contributions, surtout les premières, sont célébrées ici. Voir

@@ -12,6 +12,7 @@ import { buildServer } from './app.js'
 import { applyAppRolePassword } from './app-role.js'
 import { registerAuth } from './auth-plugin.js'
 import { registerEditor } from './editor.js'
+import { registerLegal } from './legal.js'
 import { attachRealtime } from './realtime.js'
 import { registerGameGateway } from './game-gateway.js'
 import { PersistentSessionStore } from './persistent-store.js'
@@ -69,8 +70,10 @@ const auth = createAuth(systemDb, {
   mailTransport: config.mail.transport,
   emailDomainCheck: config.emailDomainCheck,
   logger: app.log,
+  termsVersion: config.legal?.termsVersion,
 })
-await registerAuth(app, auth, { mailEnabled: mailer.enabled })
+await registerAuth(app, auth, { legal: config.legal, mailEnabled: mailer.enabled })
+registerLegal(app, { db: systemDb, auth, legal: config.legal })
 // Bibliothèque de questions : lecture du catalogue (livré + dossier d'instance) puis synchronisation
 // en base. Une erreur sur le catalogue livré lève ici et fait échouer le démarrage, comme une
 // migration en échec ; un fichier d'instance invalide est seulement journalisé et écarté.

@@ -87,15 +87,16 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
 
   // Sécurité (P2) : en-têtes HTTP durcis (anti-clickjacking, anti-sniffing MIME, Referrer-Policy…).
   // CSP réglée pour rester compatible avec le SPA servi par le même serveur : styles inline
-  // (framer-motion), polices Google (voir index.html), images data:/blob:, et connexions
-  // websocket (Socket.IO). À resserrer si les polices sont self-hostées (cf. DEV-HANDOFF).
+  // (framer-motion), images data:/blob:, et connexions websocket (Socket.IO). Les polices sont
+  // auto-hébergées (Fontsource, voir apps/web/src/theme/fonts.css) : styles et polices ne
+  // viennent que de 'self', aucune requête ne part vers un domaine tiers.
   await app.register(helmet, {
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-        fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        fontSrc: ["'self'"],
         // `https:` autorisé pour couvertures/médias externes en http(s) (cohérent avec la
         // validation isSafeMedia côté serveur, qui accepte les URLs http(s)).
         imgSrc: ["'self'", 'data:', 'blob:', 'https:'],

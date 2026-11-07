@@ -10,6 +10,9 @@
     "typecheck": "tsc --noEmit -p tsconfig.json --customConditions development"
   },
   "dependencies": {
+    "@fontsource-variable/nunito-sans": "5.3.0",
+    "@fontsource/dm-mono": "5.3.0",
+    "@fontsource/fredoka": "5.3.0",
     "@splootlabs/quiz": "workspace:*",
     "@splootlabs/shared": "workspace:*",
     "framer-motion": "^14.6.0",

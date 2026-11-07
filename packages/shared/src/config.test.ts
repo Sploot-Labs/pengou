@@ -215,3 +215,42 @@ describe('messagerie', () => {
     ).not.toThrow()
   })
 })
+
+describe('loadConfig, conditions d\'utilisation (CGU)', () => {
+  const LEGAL = {
+    LEGAL_TERMS_URL: 'https://pengou.fr/cgu/',
+    LEGAL_PRIVACY_URL: 'https://pengou.fr/politique-de-confidentialite/',
+    LEGAL_TERMS_VERSION: '2026-10-31',
+  }
+
+  it('sans LEGAL_TERMS_VERSION, la fonction est désactivée', () => {
+    expect(loadConfig({}).legal).toBeNull()
+  })
+
+  it("une valeur vide (relais compose d'une variable non définie) équivaut à une variable absente", () => {
+    expect(loadConfig({ LEGAL_TERMS_URL: '', LEGAL_PRIVACY_URL: '', LEGAL_TERMS_VERSION: '' }).legal).toBeNull()
+  })
+
+  it('expose la version et les deux liens quand tout est défini', () => {
+    expect(loadConfig(LEGAL).legal).toEqual({
+      termsVersion: '2026-10-31',
+      termsUrl: 'https://pengou.fr/cgu/',
+      privacyUrl: 'https://pengou.fr/politique-de-confidentialite/',
+    })
+  })
+
+  it('refuse une version qui n\'est pas une date AAAA-MM-JJ valide', () => {
+    for (const v of ['v2', '2026-13-01', '2026-02-30', '31/10/2026']) {
+      expect(() => loadConfig({ ...LEGAL, LEGAL_TERMS_VERSION: v })).toThrow(/LEGAL_TERMS_VERSION/)
+    }
+  })
+
+  it('exige les deux liens quand la version est définie', () => {
+    expect(() => loadConfig({ ...LEGAL, LEGAL_TERMS_URL: '' })).toThrow(/LEGAL_TERMS_URL/)
+    expect(() => loadConfig({ ...LEGAL, LEGAL_PRIVACY_URL: undefined })).toThrow(/LEGAL_PRIVACY_URL/)
+  })
+
+  it('refuse un lien qui n\'est pas une URL http(s)', () => {
+    expect(() => loadConfig({ ...LEGAL, LEGAL_TERMS_URL: 'javascript:alert(1)' })).toThrow()
+  })
+})

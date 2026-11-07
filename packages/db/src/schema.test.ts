@@ -16,6 +16,21 @@ afterAll(async () => {
 })
 
 describe('schéma', () => {
+  it("ajoute à user la version et la date d'acceptation des CGU, nullables (comptes existants à null)", async () => {
+    const rows = await ctx.db.execute(sql`
+      select column_name, data_type, is_nullable from information_schema.columns
+      where table_name = 'user' and column_name in ('terms_version', 'terms_accepted_at') order by column_name
+    `)
+    expect(rows).toEqual([
+      { column_name: 'terms_accepted_at', data_type: 'timestamp with time zone', is_nullable: 'YES' },
+      { column_name: 'terms_version', data_type: 'text', is_nullable: 'YES' },
+    ])
+    const [u] = await ctx.db.insert(schema.user)
+      .values({ id: 'cgu-null', name: 'Ancien compte', email: 'ancien-cgu@example.com' }).returning()
+    expect(u.termsVersion).toBeNull()
+    expect(u.termsAcceptedAt).toBeNull()
+  })
+
   it('crée les 11 tables attendues (dont user/session/account/verification de Better Auth)', async () => {
     const rows = await ctx.db.execute(sql`
       select table_name from information_schema.tables where table_schema = 'public' order by table_name

@@ -19,7 +19,7 @@ export function registerEditor(
   deps: { systemDb: Db; appDb: Db; auth: Auth; config: AppConfig; mailer?: Mailer }
     & Pick<InvitationDeps, 'mailLogger' | 'resolver' | 'invitationRateLimit'>,
 ): void {
-  registerRequireUser(app, deps.auth)
+  registerRequireUser(app, deps.auth, deps.config.legal?.termsVersion ?? null)
   const routeDeps = { systemDb: deps.systemDb, appDb: deps.appDb, config: deps.config }
   // Limite d'un quiz sans adresse confirmée : active seulement si l'envoi d'e-mails l'est.
   const quotaDeps = { ...routeDeps, mailEnabled: deps.mailer?.enabled === true }

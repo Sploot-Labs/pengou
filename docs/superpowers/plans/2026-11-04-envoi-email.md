@@ -185,7 +185,7 @@ logger?: MailLogger
 ### Task 6: Invitations envoyées par e-mail
 
 **Files:**
-- Modify: `packages/db/src/schema.ts` (colonne `emailedAt: timestamp('emailed_at', { withTimezone: true })`), migration générée par `pnpm --filter @splootlabs/db db:generate` (`packages/db/drizzle/0022_*.sql`, renommer en `0022_invitation_emailed_at.sql` si l'outil le permet via `--name`)
+- Modify: `packages/db/src/schema.ts` (colonne `emailedAt: timestamp('emailed_at', { withTimezone: true })`), migration générée par `pnpm --filter @splootlabs/db db:generate` (`packages/db/drizzle/0022_*.sql`, renommer en `0023_invitation_emailed_at.sql` si l'outil le permet via `--name`)
 - Modify: `packages/db/src/repos/invitation.ts`, `apps/server/src/routes/invitations.ts`
 - Test: `apps/server/src/invitations-email-e2e.test.ts`, test repo existant de `invitation` si présent
 

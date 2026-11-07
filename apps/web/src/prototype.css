@@ -947,7 +947,7 @@ fieldset.host-field > legend {
 
 /* Champs texte des formulaires d'authentification : hauteur tactile et
    padding réel, au lieu du padding navigateur (1px 2px, 25px de haut). */
-.join-card .join-field input {
+.join-card .join-field input:not([type="checkbox"]) {
   min-height: 48px;
   padding: 0 var(--space-3);
 }
@@ -1037,6 +1037,30 @@ fieldset.host-field > legend {
 
 .join-spacer {
   flex: 1;
+}
+
+/* Cases à cocher des CGU (inscription, revalidation) : case native agrandie, label en casse de
+   phrase cliquable sur toute sa largeur, alignés sur la première ligne du texte. */
+.join-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+.join-check input[type="checkbox"] {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 1px 0 0;
+  cursor: pointer;
+}
+.join-check label {
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.join-legal {
+  color: var(--ink-dim);
+  font-size: 14px;
 }
 
 .join-reassure {

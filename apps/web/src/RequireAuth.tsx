@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useSession } from './api/auth'
 import { useWorkspaces } from './api/workspace-context'
+import { TermsRevalidation } from './screens/TermsRevalidation'
 import { Button, Logo } from './ui'
 
 /**
@@ -19,10 +20,15 @@ import { Button, Logo } from './ui'
  *  - resolved, no error, no user: redirect to `/login` (`replace` so the
  *    guarded route doesn't linger in history — no back-button bounce into a
  *    redirect loop).
+ *  - resolved, user present, current terms of use not accepted: the blocking
+ *    revalidation screen (`TermsRevalidation`), unless `allowPendingTerms`.
  *  - resolved, user present: render the children.
+ *
+ * `allowPendingTerms` : réservé à l'écran hôte d'une partie en cours. Un passage de version des
+ * CGU ne doit jamais couper une partie ; l'écran de revalidation apparaît à la navigation suivante.
  */
-export function RequireAuth({ children }: { children: ReactNode }) {
-  const { user, loading, error, refresh } = useSession()
+export function RequireAuth({ children, allowPendingTerms = false }: { children: ReactNode; allowPendingTerms?: boolean }) {
+  const { user, loading, error, refresh, termsAcceptanceRequired } = useSession()
 
   if (loading) {
     return (
@@ -50,6 +56,10 @@ export function RequireAuth({ children }: { children: ReactNode }) {
 
   if (!user) {
     return <Navigate to="/login" replace />
+  }
+
+  if (termsAcceptanceRequired && !allowPendingTerms) {
+    return <TermsRevalidation />
   }
 
   return <WorkspaceGate>{children}</WorkspaceGate>
