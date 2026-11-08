@@ -34,8 +34,9 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Lint (Biome)
-        run: pnpm lint
+      # `biome check` = lint + formatage : un fichier mal formaté fait échouer la CI.
+      - name: Lint et formatage (Biome)
+        run: pnpm check
 
       - name: Typecheck
         run: pnpm typecheck
