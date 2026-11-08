@@ -2,7 +2,10 @@ import { z } from 'zod'
 import type { QuestionTypeDef } from './types.js'
 
 const payloadSchema = z.object({
-  options: z.array(z.object({ label: z.string().min(1).max(200) })).min(2).max(6),
+  options: z
+    .array(z.object({ label: z.string().min(1).max(200) }))
+    .min(2)
+    .max(6),
   multiple: z.boolean().default(false),
 })
 export type PollPayload = { options: { label: string }[]; multiple: boolean }

@@ -61,7 +61,10 @@ const audienceSchema = z.enum(['enfants', 'adultes', 'tous'])
 const languageSchema = z.string().regex(/^[a-z]{2}$/)
 
 export const themeSchema = z.strictObject({
-  id: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/).max(60),
+  id: z
+    .string()
+    .regex(/^[a-z0-9]+(-[a-z0-9]+)*$/)
+    .max(60),
   label: z.string().min(1).max(100),
 })
 

@@ -23,7 +23,10 @@ function captureLogger() {
   return { info: vi.fn(), warn: vi.fn(), error: vi.fn() }
 }
 
-async function buildApp(mailer: Mailer, opts: { rateLimitEnabled?: boolean; logger?: ReturnType<typeof captureLogger> } = {}) {
+async function buildApp(
+  mailer: Mailer,
+  opts: { rateLimitEnabled?: boolean; logger?: ReturnType<typeof captureLogger> } = {},
+) {
   const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'multi' })
   const auth = createAuth(ctx.db, {
     secret: 'test-secret-at-least-32-chars-long!!',
@@ -99,7 +102,8 @@ describe('e2e : réinitialisation du mot de passe', () => {
     const known = await post(app, '/api/auth/request-password-reset', { email, redirectTo: '/reset-password' })
     await vi.waitFor(() => expect(mailer.sent).toHaveLength(1))
     const unknown = await post(app, '/api/auth/request-password-reset', {
-      email: 'inconnu@example.com', redirectTo: '/reset-password',
+      email: 'inconnu@example.com',
+      redirectTo: '/reset-password',
     })
     expect(unknown.statusCode).toBe(known.statusCode)
     expect(unknown.json()).toEqual(known.json())
@@ -112,9 +116,11 @@ describe('e2e : réinitialisation du mot de passe', () => {
 
   it('limite à 3 demandes par 10 minutes et par IP', async () => {
     const app = await buildApp(new MemoryMailer(), { rateLimitEnabled: true })
-    const ask = () => post(app, '/api/auth/request-password-reset', {
-      email: 'limite@example.com', redirectTo: '/reset-password',
-    })
+    const ask = () =>
+      post(app, '/api/auth/request-password-reset', {
+        email: 'limite@example.com',
+        redirectTo: '/reset-password',
+      })
     for (let i = 0; i < 3; i++) expect((await ask()).statusCode).toBe(200)
 
     // Deux minutes plus tard : la règle intégrée (3 par 60 s) laisserait passer, la nôtre non.
@@ -148,11 +154,14 @@ describe('GET /api/auth-features', () => {
     expect(res.json()).toEqual({ mailEnabled: false })
 
     const signUp = await post(app, '/api/auth/sign-up/email', {
-      email: 'sans-envoi@example.com', password: 'motdepasse-123456', name: 'Sans envoi',
+      email: 'sans-envoi@example.com',
+      password: 'motdepasse-123456',
+      name: 'Sans envoi',
     })
     expect(signUp.statusCode).toBe(200)
     const request = await post(app, '/api/auth/request-password-reset', {
-      email: 'sans-envoi@example.com', redirectTo: '/reset-password',
+      email: 'sans-envoi@example.com',
+      redirectTo: '/reset-password',
     })
     expect(request.statusCode).toBeLessThan(500)
     expect(send).not.toHaveBeenCalled()

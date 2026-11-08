@@ -3,7 +3,13 @@
   "version": "0.0.0",
   "type": "module",
   "license": "Apache-2.0",
-  "exports": { ".": { "development": "./src/index.ts", "types": "./dist/index.d.ts", "default": "./dist/index.js" } },
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -17,7 +23,7 @@
     "@splootlabs/quiz": "workspace:*",
     "@splootlabs/shared": "workspace:*",
     "drizzle-orm": "^0.45.4",
-    "postgres": "^3.4.0"
+    "postgres": "^4.0.0"
   },
   "devDependencies": {
     "drizzle-kit": "^0.31.11",

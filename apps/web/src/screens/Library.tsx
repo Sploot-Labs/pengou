@@ -96,7 +96,12 @@ function FilterSelect({
   return (
     <div className="host-field">
       <label htmlFor={id}>{label}</label>
-      <select id={id} className="ab-workspace-switcher__select" value={value} onChange={(e) => onChange(e.target.value)}>
+      <select
+        id={id}
+        className="ab-workspace-switcher__select"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      >
         <option value="">Tous</option>
         {options.map((o) => (
           <option key={o.value} value={o.value}>
@@ -283,9 +288,16 @@ export function Library() {
     try {
       const f: LibraryFilters = { ...(JSON.parse(filterKey) as LibraryFilters) }
       if (searchTerm) f.search = searchTerm
-      const drawn = await drawLibraryQuestions(f, n, selection.map((q) => q.id))
+      const drawn = await drawLibraryQuestions(
+        f,
+        n,
+        selection.map((q) => q.id),
+      )
       setSelection((prev) =>
-        [...prev, ...drawn.filter((q) => !prev.some((p) => p.id === q.id))].slice(0, Math.max(prev.length, SELECTION_MAX)),
+        [...prev, ...drawn.filter((q) => !prev.some((p) => p.id === q.id))].slice(
+          0,
+          Math.max(prev.length, SELECTION_MAX),
+        ),
       )
       setDrawNote(drawn.length < n ? drawMessage(drawn.length) : null)
     } catch (err) {
@@ -303,7 +315,10 @@ export function Library() {
     setComposeError(null)
     setComposeLimit(false)
     try {
-      const created = await composeQuiz(trimmed, selection.map((q) => q.id))
+      const created = await composeQuiz(
+        trimmed,
+        selection.map((q) => q.id),
+      )
       navigate(`/quizzes/${created.id}`)
     } catch (err) {
       if (isQuizLimitError(err)) setComposeLimit(true)
@@ -415,11 +430,15 @@ export function Library() {
 
         {tab === 'quizzes' && (
           <section role="tabpanel" id="library-panel-quizzes" aria-labelledby="library-tab-quizzes">
-            {actionError && !previewId && (actionLimit ? <QuizLimitNotice /> : (
-              <p className="join-error" role="alert">
-                {actionError}
-              </p>
-            ))}
+            {actionError &&
+              !previewId &&
+              (actionLimit ? (
+                <QuizLimitNotice />
+              ) : (
+                <p className="join-error" role="alert">
+                  {actionError}
+                </p>
+              ))}
             {quizzesLoading ? (
               <p role="status">Chargement des quiz…</p>
             ) : quizzesError ? (
@@ -490,12 +509,7 @@ export function Library() {
             <section aria-label="Questions">
               <div className="host-field">
                 <label htmlFor="library-search">Rechercher une question</label>
-                <input
-                  id="library-search"
-                  type="search"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
+                <input id="library-search" type="search" value={search} onChange={(e) => setSearch(e.target.value)} />
               </div>
 
               <div className="home-inline-form">
@@ -510,7 +524,12 @@ export function Library() {
                     onChange={(e) => setDrawCount(e.target.value)}
                   />
                 </div>
-                <Button variant="primary" type="button" disabled={drawPending || selectionFull} onClick={() => void handleDraw()}>
+                <Button
+                  variant="primary"
+                  type="button"
+                  disabled={drawPending || selectionFull}
+                  onClick={() => void handleDraw()}
+                >
                   {drawPending ? 'Tirage…' : 'Tirer'}
                 </Button>
                 {drawError && (
@@ -568,7 +587,9 @@ export function Library() {
             </section>
 
             <aside aria-labelledby="library-selection-heading" className="library-selection">
-              <h2 id="library-selection-heading">Ma sélection ({selection.length}/{SELECTION_MAX})</h2>
+              <h2 id="library-selection-heading">
+                Ma sélection ({selection.length}/{SELECTION_MAX})
+              </h2>
               {selection.length > SELECTION_MAX && (
                 <p className="join-error" role="status">
                   Un quiz contient au plus {SELECTION_MAX} questions : retirez-en {selection.length - SELECTION_MAX}.

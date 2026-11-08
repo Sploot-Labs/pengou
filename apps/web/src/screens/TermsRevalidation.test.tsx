@@ -68,7 +68,7 @@ describe('TermsRevalidation', () => {
     expect(link).toHaveAttribute('target', '_blank')
   })
 
-  it("refuse sans case cochée : erreur reliée par aria-describedby, focus sur la case", async () => {
+  it('refuse sans case cochée : erreur reliée par aria-describedby, focus sur la case', async () => {
     renderScreen()
     const box = await screen.findByRole('checkbox', { name: "J'accepte les conditions d'utilisation" })
     expect(box).not.toBeChecked()
@@ -89,7 +89,11 @@ describe('TermsRevalidation', () => {
 
   it('recharge la version si les CGU ont encore changé (409) et demande une nouvelle lecture', async () => {
     mockAcceptTerms.mockRejectedValueOnce(
-      new ApiError(409, "Les conditions d'utilisation ont encore changé. Rechargez la page pour lire la dernière version.", 'TERMS_VERSION_MISMATCH'),
+      new ApiError(
+        409,
+        "Les conditions d'utilisation ont encore changé. Rechargez la page pour lire la dernière version.",
+        'TERMS_VERSION_MISMATCH',
+      ),
     )
     mockFetchLegal.mockResolvedValueOnce(LEGAL).mockResolvedValueOnce({ ...LEGAL, termsVersion: '2026-12-01' })
     renderScreen()

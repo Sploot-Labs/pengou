@@ -1,5 +1,15 @@
 import type { FastifyInstance } from 'fastify'
-import { createQuiz, listQuizzes, getQuiz, updateQuiz, archiveQuiz, restoreQuiz, deleteQuiz, withTenantTx, type Db } from '@splootlabs/db'
+import {
+  createQuiz,
+  listQuizzes,
+  getQuiz,
+  updateQuiz,
+  archiveQuiz,
+  restoreQuiz,
+  deleteQuiz,
+  withTenantTx,
+  type Db,
+} from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
 import { assertCanOwnAnotherQuiz } from '../quiz-quota.js'
@@ -41,17 +51,22 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
     // Réponse envoyée APRÈS le COMMIT (hors du callback) : sinon le client peut enchaîner une
     // requête qui ne voit pas encore le quiz.
     const quiz = await withTenantTx(appDb, context, (scope) =>
-      createQuiz(scope, { ownerId: request.user.id, title: body.title as string, description }))
+      createQuiz(scope, { ownerId: request.user.id, title: body.title as string, description }),
+    )
     return reply.code(201).send(quiz)
   })
 
   // `?archived=1` liste les quiz archivés ; par défaut, seulement les actifs (« Mes quiz »).
-  app.get<{ Querystring: { archived?: string } }>('/api/quizzes', { preHandler: requireUser }, async (request, reply) => {
-    const context = await resolveContextOr403(request, reply, systemDb, config)
-    if (!context) return
-    const archived = request.query.archived === '1' || request.query.archived === 'true'
-    return withTenantTx(appDb, context, (scope) => listQuizzes(scope, { archived }))
-  })
+  app.get<{ Querystring: { archived?: string } }>(
+    '/api/quizzes',
+    { preHandler: requireUser },
+    async (request, reply) => {
+      const context = await resolveContextOr403(request, reply, systemDb, config)
+      if (!context) return
+      const archived = request.query.archived === '1' || request.query.archived === 'true'
+      return withTenantTx(appDb, context, (scope) => listQuizzes(scope, { archived }))
+    },
+  )
 
   app.get<{ Params: { id: string } }>('/api/quizzes/:id', { preHandler: requireUser }, async (request, reply) => {
     const context = await resolveContextOr403(request, reply, systemDb, config)
@@ -71,14 +86,16 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
     const patch: Partial<{ title: string; description: string | null; cover: string | null }> = {}
     if (body?.title !== undefined) {
       if (!isNonEmptyString(body.title)) return reply.code(400).send({ error: 'Le titre ne peut pas être vide.' })
-      if (tooLong(body.title, MAX_TITLE)) return reply.code(400).send({ error: `Le titre est trop long (${MAX_TITLE} caractères max).` })
+      if (tooLong(body.title, MAX_TITLE))
+        return reply.code(400).send({ error: `Le titre est trop long (${MAX_TITLE} caractères max).` })
       patch.title = body.title
     }
     if (body?.description !== undefined) {
       if (body.description !== null && typeof body.description !== 'string') {
         return reply.code(400).send({ error: 'La description doit être une chaîne ou null.' })
       }
-      if (tooLong(body.description, MAX_DESCRIPTION)) return reply.code(400).send({ error: `La description est trop longue (${MAX_DESCRIPTION} caractères max).` })
+      if (tooLong(body.description, MAX_DESCRIPTION))
+        return reply.code(400).send({ error: `La description est trop longue (${MAX_DESCRIPTION} caractères max).` })
       patch.description = body.description
     }
     if (body?.cover !== undefined) {
@@ -102,21 +119,28 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
 
   // Archivage / restauration : mêmes droits que la modification (auteur, ou propriétaire/admin
   // du workspace via `content:access-all`). Un quiz hors de portée répond 404 comme ailleurs.
-  for (const [action, apply] of [['archive', archiveQuiz], ['restore', restoreQuiz]] as const) {
-    app.post<{ Params: { id: string } }>(`/api/quizzes/:id/${action}`, { preHandler: requireUser }, async (request, reply) => {
-      const context = await resolveContextOr403(request, reply, systemDb, config)
-      if (!context) return
-      // Désarchiver crée un quiz actif de plus : même limite que la création.
-      if (action === 'restore') {
-        const refused = await assertCanOwnAnotherQuiz(systemDb, request.user, quotaOpts)
-        if (refused) return reply.code(refused.status).send(refused.body)
-      }
-      return withTenantTx(appDb, context, async (scope) => {
-        const quiz = await apply(scope, request.params.id)
-        if (!quiz) return reply.code(404).send({ error: 'Quiz introuvable.' })
-        return quiz
-      })
-    })
+  for (const [action, apply] of [
+    ['archive', archiveQuiz],
+    ['restore', restoreQuiz],
+  ] as const) {
+    app.post<{ Params: { id: string } }>(
+      `/api/quizzes/:id/${action}`,
+      { preHandler: requireUser },
+      async (request, reply) => {
+        const context = await resolveContextOr403(request, reply, systemDb, config)
+        if (!context) return
+        // Désarchiver crée un quiz actif de plus : même limite que la création.
+        if (action === 'restore') {
+          const refused = await assertCanOwnAnotherQuiz(systemDb, request.user, quotaOpts)
+          if (refused) return reply.code(refused.status).send(refused.body)
+        }
+        return withTenantTx(appDb, context, async (scope) => {
+          const quiz = await apply(scope, request.params.id)
+          if (!quiz) return reply.code(404).send({ error: 'Quiz introuvable.' })
+          return quiz
+        })
+      },
+    )
   }
 
   app.delete<{ Params: { id: string } }>('/api/quizzes/:id', { preHandler: requireUser }, async (request, reply) => {

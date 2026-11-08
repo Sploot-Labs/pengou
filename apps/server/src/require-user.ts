@@ -6,7 +6,9 @@ import type { Auth } from '@splootlabs/auth'
 import { termsAcceptanceRequired, TERMS_REQUIRED_BODY } from './legal.js'
 
 declare module 'fastify' {
-  interface FastifyRequest { user: { id: string; email: string; name: string; emailVerified: boolean } }
+  interface FastifyRequest {
+    user: { id: string; email: string; name: string; emailVerified: boolean }
+  }
   interface FastifyInstance {
     auth: Auth
     /** Version courante des CGU (LEGAL_TERMS_VERSION), `null` si la fonction est désactivée. */
@@ -32,10 +34,21 @@ export function registerRequireUser(app: FastifyInstance, auth: Auth, termsVersi
  */
 export async function requireUser(request: FastifyRequest, reply: FastifyReply): Promise<void> {
   const session = await request.server.auth.api.getSession({ headers: fromNodeHeaders(request.headers) })
-  if (!session?.user) { reply.code(401).send({ error: 'Non authentifié.' }); return }
+  if (!session?.user) {
+    reply.code(401).send({ error: 'Non authentifié.' })
+    return
+  }
   const currentVersion = request.server.hasDecorator('legalTermsVersion') ? request.server.legalTermsVersion : null
-  if (termsAcceptanceRequired(session.user, currentVersion)) { reply.code(403).send(TERMS_REQUIRED_BODY); return }
-  request.user = { id: session.user.id, email: session.user.email, name: session.user.name, emailVerified: session.user.emailVerified === true }
+  if (termsAcceptanceRequired(session.user, currentVersion)) {
+    reply.code(403).send(TERMS_REQUIRED_BODY)
+    return
+  }
+  request.user = {
+    id: session.user.id,
+    email: session.user.email,
+    name: session.user.name,
+    emailVerified: session.user.emailVerified === true,
+  }
 }
 
 /**
@@ -52,7 +65,8 @@ export async function resolveTenantContext(
   config: AppConfig,
 ): Promise<TenantContext> {
   if (!request.user?.id) throw new Error('resolveTenantContext requires requireUser preHandler')
-  const explicitTenantId = typeof request.headers['x-tenant-id'] === 'string' ? (request.headers['x-tenant-id'] as string) : undefined
+  const explicitTenantId =
+    typeof request.headers['x-tenant-id'] === 'string' ? (request.headers['x-tenant-id'] as string) : undefined
   const tenantId = await resolveTenantId(systemDb, config, { userId: request.user.id, explicitTenantId })
   const role = (await getMembershipRole(systemDb, request.user.id, tenantId)) ?? 'member'
   const ownerId = hasPermission(role, 'content:access-all') ? undefined : request.user.id

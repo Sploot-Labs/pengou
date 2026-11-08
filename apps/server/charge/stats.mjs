@@ -65,7 +65,8 @@ export function verdict(resume) {
     zeroErreur: Object.values(resume.erreurs ?? {}).reduce((a, b) => a + b, 0) === 0 && resume.erreurs !== undefined,
     // Chaque joueur rejoint a vu accepter une réponse à chaque question.
     toutesReponses:
-      (resume.parties ?? []).reduce((a, p) => a + p.reponsesAcceptees, 0) === resume.joueurs.rejoints * resume.parametres?.questions,
+      (resume.parties ?? []).reduce((a, p) => a + p.reponsesAcceptees, 0) ===
+      resume.joueurs.rejoints * resume.parametres?.questions,
     reponseP95: resume.latences.reponse.p95 <= REPONSE_P95_MAX_MS,
     diffusionP95: resume.latences.diffusion.p95 <= DIFFUSION_P95_MAX_MS,
     // Sans aucun échantillon /metrics, le critère ne peut pas être tenu.

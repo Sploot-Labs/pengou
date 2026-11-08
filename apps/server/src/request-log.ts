@@ -18,7 +18,8 @@ export function sanitizeLogUrl(url: string | undefined): string {
     .map((segment) =>
       TOKEN_LIKE.test(segment) && !KEBAB_ROUTE.test(segment) && !UUID.test(segment)
         ? `${segment.slice(0, 6)}…`
-        : segment)
+        : segment,
+    )
     .join('/')
 }
 

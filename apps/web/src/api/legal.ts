@@ -33,5 +33,7 @@ export function acceptTerms(version: string): Promise<{ termsVersion: string; te
 export function formatTermsDate(version: string): string {
   const date = new Date(`${version}T00:00:00Z`)
   if (Number.isNaN(date.getTime())) return version
-  return new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(date)
+  return new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(
+    date,
+  )
 }

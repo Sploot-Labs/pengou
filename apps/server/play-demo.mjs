@@ -17,8 +17,7 @@ const ask = (sock, ev, payload) =>
       resolve(ack)
     })
   })
-const once = (sock, ev) =>
-  new Promise((resolve) => sock.once(ev, resolve))
+const once = (sock, ev) => new Promise((resolve) => sock.once(ev, resolve))
 
 // fetch qui échoue bruyamment
 async function api(path, init) {
@@ -34,36 +33,51 @@ async function main() {
   hr('1. Inscription de l’hôte + création du quiz (API REST)')
   const email = `hote-${Date.now()}@pengou.app`
   const { res: signUp } = await api('/api/auth/sign-up/email', {
-    method: 'POST', headers: { 'content-type': 'application/json' },
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ email, password: 'motdepasse-demo-123', name: 'Hôte Démo' }),
   })
-  const rawCookies = signUp.headers.getSetCookie
-    ? signUp.headers.getSetCookie()
-    : [signUp.headers.get('set-cookie')]
-  const cookie = rawCookies.filter(Boolean).map((c) => c.split(';')[0]).join('; ')
+  const rawCookies = signUp.headers.getSetCookie ? signUp.headers.getSetCookie() : [signUp.headers.get('set-cookie')]
+  const cookie = rawCookies
+    .filter(Boolean)
+    .map((c) => c.split(';')[0])
+    .join('; ')
   if (!cookie) throw new Error('aucun cookie de session reçu à l’inscription')
   log(`   ✔ hôte inscrit : ${email}`)
 
   const H = { 'content-type': 'application/json', cookie }
   const { json: quiz } = await api('/api/quizzes', {
-    method: 'POST', headers: H, body: JSON.stringify({ title: 'Culture générale — démo' }),
+    method: 'POST',
+    headers: H,
+    body: JSON.stringify({ title: 'Culture générale — démo' }),
   })
   log(`   ✔ quiz créé : « ${quiz.title} »`)
 
-  const mkQ = (body) => api(`/api/quizzes/${quiz.id}/questions`, {
-    method: 'POST', headers: H, body: JSON.stringify(body),
-  }).then((r) => r.json)
+  const mkQ = (body) =>
+    api(`/api/quizzes/${quiz.id}/questions`, {
+      method: 'POST',
+      headers: H,
+      body: JSON.stringify(body),
+    }).then((r) => r.json)
 
   await mkQ({
-    type: 'mcq', prompt: 'Quelle planète est surnommée la « planète rouge » ?', timeLimit: 20,
-    payload: { options: [
-      { label: 'Vénus', correct: false }, { label: 'Mars', correct: true },
-      { label: 'Jupiter', correct: false }, { label: 'Saturne', correct: false },
-    ] },
+    type: 'mcq',
+    prompt: 'Quelle planète est surnommée la « planète rouge » ?',
+    timeLimit: 20,
+    payload: {
+      options: [
+        { label: 'Vénus', correct: false },
+        { label: 'Mars', correct: true },
+        { label: 'Jupiter', correct: false },
+        { label: 'Saturne', correct: false },
+      ],
+    },
   })
   await mkQ({
-    type: 'truefalse', prompt: 'Le Mont Blanc est le plus haut sommet d’Europe occidentale.',
-    timeLimit: 15, payload: { correct: true },
+    type: 'truefalse',
+    prompt: 'Le Mont Blanc est le plus haut sommet d’Europe occidentale.',
+    timeLimit: 15,
+    payload: { correct: true },
   })
   log('   ✔ 2 questions ajoutées (QCM + Vrai/Faux)')
 
@@ -86,10 +100,8 @@ async function main() {
   }
 
   // Observateurs
-  players[0].sock.on('question:show', (q) =>
-    log(`\n   👀 CE QUE VOIT LE JOUEUR :\n      ${JSON.stringify(q)}`))
-  host.on('question:reveal', (r) =>
-    log(`\n   🔓 RÉVÉLATION (hôte/écran) :\n      ${JSON.stringify(r)}`))
+  players[0].sock.on('question:show', (q) => log(`\n   👀 CE QUE VOIT LE JOUEUR :\n      ${JSON.stringify(q)}`))
+  host.on('question:reveal', (r) => log(`\n   🔓 RÉVÉLATION (hôte/écran) :\n      ${JSON.stringify(r)}`))
   host.on('scoreboard', (s) => log(`\n   🏆 Classement : ${JSON.stringify(s)}`))
   host.on('podium', (p) => log(`\n   🥇 PODIUM : ${JSON.stringify(p)}`))
 
@@ -111,12 +123,20 @@ async function main() {
     await sleep(400)
   }
 
-  await playRound('4. Question 1 — QCM', {
-    fast: { optionIndex: 1 }, slow: { optionIndex: 1 }, wrong: { optionIndex: 0 },
-  }, { start: true })
+  await playRound(
+    '4. Question 1 — QCM',
+    {
+      fast: { optionIndex: 1 },
+      slow: { optionIndex: 1 },
+      wrong: { optionIndex: 0 },
+    },
+    { start: true },
+  )
   await ask(host, 'host:next', {}) // enchaîne ET démarre la Q2
   await playRound('5. Question 2 — Vrai / Faux', {
-    fast: { value: true }, slow: { value: true }, wrong: { value: false },
+    fast: { value: true },
+    slow: { value: true },
+    wrong: { value: false },
   })
   hr('6. Fin de partie')
   await ask(host, 'host:next', {})
@@ -128,4 +148,7 @@ async function main() {
   process.exit(0)
 }
 
-main().catch((e) => { console.error('ERREUR:', e); process.exit(1) })
+main().catch((e) => {
+  console.error('ERREUR:', e)
+  process.exit(1)
+})

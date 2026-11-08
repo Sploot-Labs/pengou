@@ -43,9 +43,24 @@ describe('VerifyEmailBanner', () => {
   })
 
   it.each([
-    ['envoi désactivé', () => { mailEnabled = false }],
-    ['compte confirmé', () => { user = { email: 'a@b.fr', emailVerified: true } }],
-    ['sans session', () => { user = null }],
+    [
+      'envoi désactivé',
+      () => {
+        mailEnabled = false
+      },
+    ],
+    [
+      'compte confirmé',
+      () => {
+        user = { email: 'a@b.fr', emailVerified: true }
+      },
+    ],
+    [
+      'sans session',
+      () => {
+        user = null
+      },
+    ],
   ])('est absent : %s', (_label, setup) => {
     setup()
     renderBanner()

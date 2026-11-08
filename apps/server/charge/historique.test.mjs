@@ -4,9 +4,21 @@ import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { ajouterHistorique, comparer, ligneHistorique, lireHistorique } from './historique.mjs'
 
-const MACHINE = { cpu: 'AMD Ryzen 9 4900HS with Radeon Graphics', coeurs: 16, memGo: 31.4, dockerCpus: 16, dockerMemGo: 15.3 }
+const MACHINE = {
+  cpu: 'AMD Ryzen 9 4900HS with Radeon Graphics',
+  coeurs: 16,
+  memGo: 31.4,
+  dockerCpus: 16,
+  dockerMemGo: 15.3,
+}
 
-const contexte = (campagne, machine = MACHINE) => ({ campagne, scenario: 'rapide', commit: 'abc1234', modifie: false, machine })
+const contexte = (campagne, machine = MACHINE) => ({
+  campagne,
+  scenario: 'rapide',
+  commit: 'abc1234',
+  modifie: false,
+  machine,
+})
 
 const resumeReussi = {
   libelle: 'p800-1',
@@ -63,7 +75,12 @@ describe('ligneHistorique', () => {
   })
 
   it('liste les critères en échec', () => {
-    const l = ligneHistorique({ ...resumeReussi, criteres: { rejointTous: true, lagServeurP99: false }, verdict: 'echoue' }, contexte('c1'), 1, true)
+    const l = ligneHistorique(
+      { ...resumeReussi, criteres: { rejointTous: true, lagServeurP99: false }, verdict: 'echoue' },
+      contexte('c1'),
+      1,
+      true,
+    )
     expect(l.criteresEchoues).toEqual(['lagServeurP99'])
   })
 
@@ -160,8 +177,11 @@ describe('lireHistorique et ajouterHistorique', () => {
 
   it("ajoute le saut de ligne final manquant avant d'ajouter", () => {
     const chemin = join(mkdtempSync(join(tmpdir(), 'hist-')), 'h.jsonl')
-    writeFileSync(chemin, `${JSON.stringify(ligne('c0'))}
-${JSON.stringify(ligne('c1'))}`)
+    writeFileSync(
+      chemin,
+      `${JSON.stringify(ligne('c0'))}
+${JSON.stringify(ligne('c1'))}`,
+    )
     ajouterHistorique(chemin, [ligne('c2')])
     expect(lireHistorique(chemin).map((l) => l.campagne)).toEqual(['c0', 'c1', 'c2'])
   })

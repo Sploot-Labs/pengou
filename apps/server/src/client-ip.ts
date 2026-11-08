@@ -31,7 +31,10 @@ const PAIR_PRIVE = proxyaddr.compile(['loopback', 'linklocal', 'uniquelocal'])
  * alors ignoré et tous les clients partagent son IP). `undefined` sinon. Un pair public qui envoie
  * l'en-tête est un client ordinaire et n'est pas signalé.
  */
-export function untrustedForwardingPeer(req: IncomingMessage, trust: ReturnType<typeof compileTrust>): string | undefined {
+export function untrustedForwardingPeer(
+  req: IncomingMessage,
+  trust: ReturnType<typeof compileTrust>,
+): string | undefined {
   if (req.headers['x-forwarded-for'] === undefined) return undefined
   const peer = req.socket?.remoteAddress
   if (!peer) return undefined
@@ -97,5 +100,8 @@ export function pinFailureKey(ip: string): string {
     const [hi = 0, lo = 0] = groups.slice(6)
     return `${hi >> 8}.${hi & 0xff}.${lo >> 8}.${lo & 0xff}`
   }
-  return `${groups.slice(0, 4).map((g) => g.toString(16)).join(':')}::/64`
+  return `${groups
+    .slice(0, 4)
+    .map((g) => g.toString(16))
+    .join(':')}::/64`
 }

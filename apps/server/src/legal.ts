@@ -32,10 +32,7 @@ export const TERMS_REQUIRED_BODY = {
  *    serveur. Le client renvoie la version qu'il a affichée ; une autre version que la courante
  *    (CGU changées pendant la lecture) est refusée en 409 pour qu'il recharge le texte.
  */
-export function registerLegal(
-  app: FastifyInstance,
-  deps: { db: Db; auth: Auth; legal: LegalConfig | null },
-): void {
+export function registerLegal(app: FastifyInstance, deps: { db: Db; auth: Auth; legal: LegalConfig | null }): void {
   const { db, auth, legal } = deps
 
   app.get('/api/legal', async () => ({

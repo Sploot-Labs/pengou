@@ -83,12 +83,16 @@ describe('WorkspaceSettings, invitations', () => {
 
   it("invitant à l'adresse non confirmée : demande de confirmer, lien copiable", async () => {
     vi.mocked(ws.createInvitation).mockResolvedValue({
-      invitation: invitation(), emailSent: false, emailSkipped: 'inviter_unverified',
+      invitation: invitation(),
+      emailSent: false,
+      emailSkipped: 'inviter_unverified',
     } as never)
     await invite()
-    expect(await screen.findByText(
-      'Confirmez votre adresse pour envoyer les invitations par e-mail. En attendant, copiez le lien ci-dessous.',
-    )).toBeInTheDocument()
+    expect(
+      await screen.findByText(
+        'Confirmez votre adresse pour envoyer les invitations par e-mail. En attendant, copiez le lien ci-dessous.',
+      ),
+    ).toBeInTheDocument()
     expect(screen.queryByText(/n'a pas pu partir/)).not.toBeInTheDocument()
     expect(screen.getByText(/\/invitations\/tok/)).toBeInTheDocument()
   })

@@ -13,7 +13,7 @@ export type Deliverability = 'ok' | 'disposable' | 'undeliverable'
 
 export const DELIVERABILITY_MESSAGES: Record<'disposable' | 'undeliverable', string> = {
   disposable: 'Les adresses e-mail jetables ne sont pas acceptées.',
-  undeliverable: 'Ce domaine ne semble pas pouvoir recevoir d\'e-mails. Vérifiez l\'adresse.',
+  undeliverable: "Ce domaine ne semble pas pouvoir recevoir d'e-mails. Vérifiez l'adresse.",
 }
 
 const DEFAULT_TIMEOUT_MS = 3000

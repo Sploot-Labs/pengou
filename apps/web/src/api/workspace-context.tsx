@@ -42,7 +42,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     // le premier. En single, on laisse `null` (le serveur retombe sur `default`).
     const stored = getActiveTenantId()
     const validStored = stored && list.some((w) => w.tenantId === stored) ? stored : null
-    const next = mode === 'multi' ? validStored ?? list[0]?.tenantId ?? null : null
+    const next = mode === 'multi' ? (validStored ?? list[0]?.tenantId ?? null) : null
     setActiveTenantId(next)
     setActiveState(next)
   }, [])
@@ -78,7 +78,13 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
 
   const active = workspaces.find((w) => w.tenantId === activeTenantId) ?? null
   const value: WorkspaceContextValue = {
-    tenancyMode, workspaces, activeTenantId, active, ready, setActive, refresh,
+    tenancyMode,
+    workspaces,
+    activeTenantId,
+    active,
+    ready,
+    setActive,
+    refresh,
   }
   return <WorkspaceContext.Provider value={value}>{children}</WorkspaceContext.Provider>
 }

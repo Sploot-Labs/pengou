@@ -129,7 +129,9 @@ describe('Library', () => {
 
   it("« Personnaliser » refusé faute d'adresse confirmée : message dédié et renvoi sur place", async () => {
     const { ApiError } = await import('../api/client')
-    vi.mocked(lib.duplicateLibraryQuiz).mockRejectedValue(new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'))
+    vi.mocked(lib.duplicateLibraryQuiz).mockRejectedValue(
+      new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'),
+    )
     mockSendVerificationEmail.mockResolvedValue(undefined)
     renderLibrary()
     fireEvent.click(await screen.findByRole('button', { name: 'Personnaliser le quiz Quiz q1' }))
@@ -142,7 +144,9 @@ describe('Library', () => {
   it("« Jouer maintenant » refusé depuis l'aperçu : le renvoi est proposé dans la boîte de dialogue", async () => {
     const { ApiError } = await import('../api/client')
     vi.mocked(lib.getLibraryQuiz).mockResolvedValue({ quiz: quiz('q1'), questions: [question('a')] } as never)
-    vi.mocked(lib.duplicateLibraryQuiz).mockRejectedValue(new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'))
+    vi.mocked(lib.duplicateLibraryQuiz).mockRejectedValue(
+      new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'),
+    )
     mockSendVerificationEmail.mockResolvedValue(undefined)
     renderLibrary()
     fireEvent.click(await screen.findByRole('button', { name: 'Aperçu du quiz Quiz q1' }))
@@ -158,7 +162,15 @@ describe('Library', () => {
     vi.mocked(lib.getLibraryQuiz).mockResolvedValue({
       quiz: quiz('q1'),
       questions: [
-        { ...question('a'), payload: { options: [{ label: 'Paris', correct: true }, { label: 'Lyon', correct: false }] } },
+        {
+          ...question('a'),
+          payload: {
+            options: [
+              { label: 'Paris', correct: true },
+              { label: 'Lyon', correct: false },
+            ],
+          },
+        },
         { ...question('b'), type: 'truefalse', payload: { correct: false } },
       ],
     } as never)
@@ -223,9 +235,7 @@ describe('Library', () => {
 
   it('plafonne la sélection à 100 : tirage borné, « Tirer » et « Créer le quiz » désactivés', async () => {
     const batch = (prefix: string, n: number) => Array.from({ length: n }, (_, i) => question(`${prefix}${i}`))
-    vi.mocked(lib.drawLibraryQuestions)
-      .mockResolvedValueOnce(batch('d', 50))
-      .mockResolvedValueOnce(batch('e', 48))
+    vi.mocked(lib.drawLibraryQuestions).mockResolvedValueOnce(batch('d', 50)).mockResolvedValueOnce(batch('e', 48))
     await openQuestions()
     fireEvent.click(screen.getByRole('checkbox', { name: /Énoncé a/ }))
     fireEvent.click(screen.getByRole('checkbox', { name: /Énoncé b/ }))
@@ -285,19 +295,17 @@ describe('Library', () => {
     vi.mocked(lib.drawLibraryQuestions).mockResolvedValue([])
     await openQuestions()
     fireEvent.click(screen.getByRole('button', { name: 'Tirer' }))
-    await waitFor(() =>
-      expect(screen.getByText('Aucune question disponible avec ces filtres.')).toBeInTheDocument(),
-    )
+    await waitFor(() => expect(screen.getByText('Aucune question disponible avec ces filtres.')).toBeInTheDocument())
   })
 
   it('relance listLibraryQuestions quand un filtre change', async () => {
     await openQuestions()
     fireEvent.change(screen.getByLabelText('Difficulté'), { target: { value: 'facile' } })
     await waitFor(() =>
-      expect(lib.listLibraryQuestions).toHaveBeenLastCalledWith(
-        expect.objectContaining({ difficulty: 'facile' }),
-        { offset: 0, limit: 20 },
-      ),
+      expect(lib.listLibraryQuestions).toHaveBeenLastCalledWith(expect.objectContaining({ difficulty: 'facile' }), {
+        offset: 0,
+        limit: 20,
+      }),
     )
   })
 
@@ -322,7 +330,7 @@ describe('Library', () => {
     await waitFor(() => expect(screen.getByText('Énoncé a')).toBeInTheDocument())
   })
 
-  it("SourceCredit nomme la source, sa traduction et renvoie aux crédits, rien sans source", () => {
+  it('SourceCredit nomme la source, sa traduction et renvoie aux crédits, rien sans source', () => {
     const { container, rerender } = render(<SourceCredit source={source} />)
     expect(container).toHaveTextContent("D'après Open Trivia. Crédits et licence")
     expect(within(container).getByRole('link', { name: 'Open Trivia' })).toHaveAttribute('href', 'https://example.org')

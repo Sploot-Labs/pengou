@@ -16,8 +16,10 @@ export function registerEditor(
   app: FastifyInstance,
   // `mailer` et les options d'envoi servent aux routes d'invitation ; sans mailer, l'envoi est
   // désactivé (routes de test qui n'en ont pas besoin).
-  deps: { systemDb: Db; appDb: Db; auth: Auth; config: AppConfig; mailer?: Mailer }
-    & Pick<InvitationDeps, 'mailLogger' | 'resolver' | 'invitationRateLimit'>,
+  deps: { systemDb: Db; appDb: Db; auth: Auth; config: AppConfig; mailer?: Mailer } & Pick<
+    InvitationDeps,
+    'mailLogger' | 'resolver' | 'invitationRateLimit'
+  >,
 ): void {
   registerRequireUser(app, deps.auth, deps.config.legal?.termsVersion ?? null)
   const routeDeps = { systemDb: deps.systemDb, appDb: deps.appDb, config: deps.config }

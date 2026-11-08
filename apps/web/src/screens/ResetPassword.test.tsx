@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ResetPassword } from './ResetPassword'
@@ -44,10 +44,7 @@ describe('ResetPassword', () => {
     (url) => {
       renderAt(url)
       expect(screen.getByText('Ce lien a expiré ou a déjà servi.')).toBeInTheDocument()
-      expect(screen.getByRole('link', { name: /nouvelle demande/i })).toHaveAttribute(
-        'href',
-        '/forgot-password',
-      )
+      expect(screen.getByRole('link', { name: /nouvelle demande/i })).toHaveAttribute('href', '/forgot-password')
       expect(screen.queryByLabelText('Nouveau mot de passe')).not.toBeInTheDocument()
     },
   )
@@ -81,7 +78,10 @@ describe('ResetPassword', () => {
     fetchMock.mockResolvedValueOnce(new Response(JSON.stringify({ message: 'Oups' }), { status: 500 }))
     renderAt('/reset-password?token=abc')
     fill('motdepasse1', 'motdepasse1')
-    expect(await screen.findByText('Oups')).toHaveFocus()
+    // Le focus est posé par un useEffect, après le rendu du message : findByText peut
+    // résoudre entre les deux, d'où l'attente explicite du focus.
+    const alert = await screen.findByText('Oups')
+    await waitFor(() => expect(alert).toHaveFocus())
     const input = screen.getByLabelText('Nouveau mot de passe')
     input.focus()
     fireEvent.change(input, { target: { value: 'motdepasse12' } })
@@ -89,15 +89,10 @@ describe('ResetPassword', () => {
   })
 
   it('traite un refus 400 comme un lien expiré', async () => {
-    fetchMock.mockResolvedValueOnce(
-      new Response(JSON.stringify({ message: 'Invalid token' }), { status: 400 }),
-    )
+    fetchMock.mockResolvedValueOnce(new Response(JSON.stringify({ message: 'Invalid token' }), { status: 400 }))
     renderAt('/reset-password?token=abc')
     fill('motdepasse1', 'motdepasse1')
     expect(await screen.findByText('Ce lien a expiré ou a déjà servi.')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /nouvelle demande/i })).toHaveAttribute(
-      'href',
-      '/forgot-password',
-    )
+    expect(screen.getByRole('link', { name: /nouvelle demande/i })).toHaveAttribute('href', '/forgot-password')
   })
 })

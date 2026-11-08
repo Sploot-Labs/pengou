@@ -57,11 +57,13 @@ export async function listQuizzes(scope: TenantScope, options: { archived?: bool
     })
     .from(schema.quiz)
     .leftJoin(schema.question, eq(schema.question.quizId, schema.quiz.id))
-    .where(and(
-      eq(schema.quiz.tenantId, scope.tenantId),
-      ownerPredicate(scope),
-      archived ? isNotNull(schema.quiz.archivedAt) : isNull(schema.quiz.archivedAt),
-    ))
+    .where(
+      and(
+        eq(schema.quiz.tenantId, scope.tenantId),
+        ownerPredicate(scope),
+        archived ? isNotNull(schema.quiz.archivedAt) : isNull(schema.quiz.archivedAt),
+      ),
+    )
     .groupBy(schema.quiz.id)
 }
 
@@ -74,8 +76,13 @@ export async function getQuiz(scope: TenantScope, id: string): Promise<Quiz | nu
   return row ?? null
 }
 
-export async function updateQuiz(scope: TenantScope, id: string, patch: Partial<{ title: string; description: string | null; cover: string | null }>): Promise<Quiz | null> {
-  const [row] = await scope.db.update(schema.quiz)
+export async function updateQuiz(
+  scope: TenantScope,
+  id: string,
+  patch: Partial<{ title: string; description: string | null; cover: string | null }>,
+): Promise<Quiz | null> {
+  const [row] = await scope.db
+    .update(schema.quiz)
     .set({ ...patch, updatedAt: new Date() })
     .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
     .returning()
@@ -85,7 +92,8 @@ export async function updateQuiz(scope: TenantScope, id: string, patch: Partial<
 /** Archive (`archived: true`) ou restaure un quiz, sous les mêmes gardes tenant + propriétaire
  * que `updateQuiz` : l'auteur, ou un rôle `content:access-all` (scope sans `ownerId`). */
 async function setArchived(scope: TenantScope, id: string, archived: boolean): Promise<Quiz | null> {
-  const [row] = await scope.db.update(schema.quiz)
+  const [row] = await scope.db
+    .update(schema.quiz)
     .set({ archivedAt: archived ? new Date() : null })
     .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
     .returning()
@@ -101,14 +109,15 @@ export function restoreQuiz(scope: TenantScope, id: string): Promise<Quiz | null
 }
 
 export async function deleteQuiz(scope: TenantScope, id: string): Promise<boolean> {
-  const rows = await scope.db.delete(schema.quiz)
+  const rows = await scope.db
+    .delete(schema.quiz)
     .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
     .returning({ id: schema.quiz.id })
   return rows.length > 0
 }
 
 export type ImportedQuestion = {
-  type: typeof schema.question.$inferSelect['type']
+  type: (typeof schema.question.$inferSelect)['type']
   prompt: string
   payload: unknown
   timeLimit: number
@@ -139,18 +148,20 @@ export async function importQuiz(
     })
     .returning()
   if (input.questions.length > 0) {
-    await scope.db.insert(schema.question).values(input.questions.map((q, orderIndex) => ({
-      quizId: row.id,
-      tenantId: scope.tenantId,
-      type: q.type,
-      prompt: q.prompt,
-      timeLimit: q.timeLimit,
-      readingTime: q.readingTime,
-      payload: q.payload as never,
-      media: null,
-      source: q.source,
-      orderIndex,
-    })))
+    await scope.db.insert(schema.question).values(
+      input.questions.map((q, orderIndex) => ({
+        quizId: row.id,
+        tenantId: scope.tenantId,
+        type: q.type,
+        prompt: q.prompt,
+        timeLimit: q.timeLimit,
+        readingTime: q.readingTime,
+        payload: q.payload as never,
+        media: null,
+        source: q.source,
+        orderIndex,
+      })),
+    )
   }
   return row
 }

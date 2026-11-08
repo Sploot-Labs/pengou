@@ -5,8 +5,13 @@ import { runMigrations } from './migrate.js'
 import { withTenantTx, deriveAppUrl } from './index.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
-beforeAll(async () => { ctx = await startTestDb(); await runMigrations(ctx.db) }, 120_000)
-afterAll(async () => { await ctx?.stop() })
+beforeAll(async () => {
+  ctx = await startTestDb()
+  await runMigrations(ctx.db)
+}, 120_000)
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 describe('RLS infra', () => {
   it('deriveAppUrl substitue user/password en gardant host/port/db', () => {

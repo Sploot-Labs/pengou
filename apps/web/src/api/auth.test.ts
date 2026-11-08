@@ -14,7 +14,7 @@ describe('auth e-mail', () => {
   })
   afterEach(() => vi.unstubAllGlobals())
 
-  it("signUp envoie le callbackURL du retour de confirmation", async () => {
+  it('signUp envoie le callbackURL du retour de confirmation', async () => {
     fetchMock.mockResolvedValue(new Response(JSON.stringify({ user: { id: 'u' } }), { status: 200 }))
     await signUp({ email: 'a@b.fr', password: 'motdepasse', name: 'A' })
     expect(fetchMock.mock.calls[0][0]).toBe('/api/auth/sign-up/email')

@@ -28,11 +28,14 @@ export const EXCLUDED: Record<string, string> = {
   'otdb-4bae7f65e789': 'bonne réponse ambiguë : noyau NT dit hybride ou monolithique selon les sources',
   'otdb-501457e7a6bc': 'exactitude douteuse : anecdote non vérifiable',
   'otdb-574cc369cf42': 'question incompréhensible : réponse tautologique et ambiguë',
-  'otdb-5a384ea00442': "bonne réponse ambiguë : NovodeX et Ageia (qui l'a racheté) peuvent tous deux être cités comme auteur de PhysX",
+  'otdb-5a384ea00442':
+    "bonne réponse ambiguë : NovodeX et Ageia (qui l'a racheté) peuvent tous deux être cités comme auteur de PhysX",
   'otdb-621d59541424': 'exactitude douteuse : audition de Kurt Russell pour le rôle de Luke non établie',
   'otdb-62b1bfb4d866': 'exactitude douteuse : rôle de producteur exécutif non vérifiable',
-  'otdb-666dedbcc9d1': 'bonne réponse ambiguë : la distinction entre gothique anglais et français ne se réduit pas à la voûte en éventail',
-  'otdb-68d4208c9dd2': 'bonne réponse ambiguë : la numérotation des rangées du triangle de Pascal varie (1 4 6 4 1 ou 1 5 10 10 5 1)',
+  'otdb-666dedbcc9d1':
+    'bonne réponse ambiguë : la distinction entre gothique anglais et français ne se réduit pas à la voûte en éventail',
+  'otdb-68d4208c9dd2':
+    'bonne réponse ambiguë : la numérotation des rangées du triangle de Pascal varie (1 4 6 4 1 ou 1 5 10 10 5 1)',
   'otdb-6c2003d0c5ef': "question incompréhensible : formulation confuse sur l'auteur de la preuve et sur « Sun Tzu »",
   'otdb-71320469cb32': 'exactitude douteuse : fait de développement non confirmé',
   'otdb-72acfccb19c3': 'exactitude douteuse : pas de niveau maximal fixe dans Oblivion',
@@ -42,24 +45,31 @@ export const EXCLUDED: Record<string, string> = {
   'otdb-77e10724f080': 'exactitude douteuse : anecdote probablement apocryphe',
   'otdb-7f006f228618': 'exactitude douteuse : C# a été annoncé en 2000 mais publié en 2002 avec .NET',
   'otdb-86fe248ae6cf': 'bonne réponse ambiguë : plusieurs batteurs avant Pete Best (Norman Chapman, Tommy Moore)',
-  'otdb-8782ad8fc243': "bonne réponse ambiguë : question reposant sur une faute d'orthographe (« Cartillary » pour capillarité)",
-  'otdb-88e3f06bf68c': 'bonne réponse ambiguë : un Mac est un ordinateur personnel, mais « PC » désigne souvent un ordinateur Windows',
+  'otdb-8782ad8fc243':
+    "bonne réponse ambiguë : question reposant sur une faute d'orthographe (« Cartillary » pour capillarité)",
+  'otdb-88e3f06bf68c':
+    'bonne réponse ambiguë : un Mac est un ordinateur personnel, mais « PC » désigne souvent un ordinateur Windows',
   'otdb-89de4d427e42': 'exactitude douteuse : fin du personnage non vérifiable',
   'otdb-8b839ed68653': 'question incompréhensible : énoncé de QCM présenté comme un vrai/faux',
   'otdb-9209cec03f62': 'exactitude douteuse : dégâts modifiés par les mises à jour',
-  'otdb-931fac5360c5': "exactitude douteuse : Venise ou d'autres villes sont souvent citées, le classement est contesté",
+  'otdb-931fac5360c5':
+    "exactitude douteuse : Venise ou d'autres villes sont souvent citées, le classement est contesté",
   'otdb-93d6ebf6d590': "fait dépassé en 2026 : Harry Kane a dépassé Wayne Rooney comme meilleur buteur de l'Angleterre",
   'otdb-93ea0239785d': 'exactitude douteuse : créature des Dieux Très Anciens incertaine',
   'otdb-93f8c6e95485': 'exactitude douteuse : réponse non vérifiable',
-  'otdb-a32cf9d333b3': 'bonne réponse ambiguë : le comportement de la touche Impr écran dépend de la version de Windows',
-  'otdb-aa56bcf97574': 'exactitude douteuse : le nom accepté du pommier domestique est Malus domestica, Malus pumila en est un synonyme',
+  'otdb-a32cf9d333b3':
+    'bonne réponse ambiguë : le comportement de la touche Impr écran dépend de la version de Windows',
+  'otdb-aa56bcf97574':
+    'exactitude douteuse : le nom accepté du pommier domestique est Malus domestica, Malus pumila en est un synonyme',
   'otdb-ac174548f3b6': "bonne réponse ambiguë : l'aubergine est un légume en cuisine mais un fruit en botanique",
   'otdb-adedb34c9a4c': "fait faux : les ribosomes synthétisent les protéines, pas l'ADN",
-  'otdb-af526f7c67a6': "bonne réponse ambiguë : on parle de trois ou quatre lois selon que l'on compte le principe zéro",
+  'otdb-af526f7c67a6':
+    "bonne réponse ambiguë : on parle de trois ou quatre lois selon que l'on compte le principe zéro",
   'otdb-afa9d4771193': 'exactitude douteuse : liste des formes incertaine',
   'otdb-b2198ff06df6': 'fait faux : les cellules du corps humain ont 46 chromosomes (23 paires)',
   'otdb-b33f22361aec': 'bonne réponse ambiguë : victoire en février 2010 pour la saison 2009',
-  'otdb-b410db6c9f14': "exactitude douteuse : le nombre de pattes des chilopodes dépend de l'espèce, plusieurs propositions sont impossibles",
+  'otdb-b410db6c9f14':
+    "exactitude douteuse : le nombre de pattes des chilopodes dépend de l'espèce, plusieurs propositions sont impossibles",
   'otdb-b6f59084cac6': 'doublon de otdb-8ea0e8bf1026',
   'otdb-b8fa4b62076f': 'exactitude douteuse : sens de « Lamora » en throne therin non vérifiable',
   'otdb-b92cff471f0a': 'bonne réponse ambiguë : SSD se développe en Solid State Drive ou Solid State Disk',

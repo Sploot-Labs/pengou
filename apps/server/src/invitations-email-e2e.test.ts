@@ -4,7 +4,12 @@ import { eq } from 'drizzle-orm'
 import { startTestDb, runMigrations, schema } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import {
-  createMailer, DELIVERABILITY_MESSAGES, MemoryMailer, type DnsResolver, type Mailer, type OutgoingMail,
+  createMailer,
+  DELIVERABILITY_MESSAGES,
+  MemoryMailer,
+  type DnsResolver,
+  type Mailer,
+  type OutgoingMail,
 } from '@splootlabs/mail'
 import { loadConfig } from '@splootlabs/shared'
 import { buildServer } from './app.js'
@@ -38,16 +43,24 @@ type BuildOpts = {
 
 async function buildApp(mailer: Mailer, opts: BuildOpts = {}): Promise<FastifyInstance> {
   const config = loadConfig({
-    NODE_ENV: 'test', TENANCY_MODE: 'multi', ...(opts.domainCheck ? { EMAIL_DOMAIN_CHECK: 'true' } : {}),
+    NODE_ENV: 'test',
+    TENANCY_MODE: 'multi',
+    ...(opts.domainCheck ? { EMAIL_DOMAIN_CHECK: 'true' } : {}),
   })
   // L'auth n'a pas de mailer : l'inscription n'envoie rien, seul l'envoi d'invitation est observé.
   const auth = createAuth(ctx.db, {
-    secret: 'test-secret-at-least-32-chars-long!!', baseURL: BASE_URL, tenancyMode: config.tenancyMode,
+    secret: 'test-secret-at-least-32-chars-long!!',
+    baseURL: BASE_URL,
+    tenancyMode: config.tenancyMode,
   })
   const app = await buildServer(config, { dbStatus: () => 'up' })
   await registerAuth(app, auth)
   registerEditor(app, {
-    systemDb: ctx.db, appDb: ctx.appDb, auth, config, mailer,
+    systemDb: ctx.db,
+    appDb: ctx.appDb,
+    auth,
+    config,
+    mailer,
     mailLogger: opts.logger ?? captureLogger(),
     invitationRateLimit: opts.invitationRateLimit,
     resolver: opts.resolver,
@@ -57,7 +70,8 @@ async function buildApp(mailer: Mailer, opts: BuildOpts = {}): Promise<FastifyIn
 
 async function signUp(app: FastifyInstance, email: string, name: string): Promise<string> {
   const res = await app.inject({
-    method: 'POST', url: '/api/auth/sign-up/email',
+    method: 'POST',
+    url: '/api/auth/sign-up/email',
     payload: { email, password: 'motdepasse-123456', name },
     headers: { 'content-type': 'application/json' },
   })
@@ -72,7 +86,9 @@ async function setupOwner(app: FastifyInstance, email: string, name = 'Camille M
   const cookie = await signUp(app, email, name)
   if (verified) await ctx.db.update(schema.user).set({ emailVerified: true }).where(eq(schema.user.email, email))
   const created = await app.inject({
-    method: 'POST', url: '/api/workspaces', payload: { name: 'Classe de CM2' },
+    method: 'POST',
+    url: '/api/workspaces',
+    payload: { name: 'Classe de CM2' },
     headers: { 'content-type': 'application/json', cookie },
   })
   expect(created.statusCode).toBe(201)
@@ -87,7 +103,8 @@ type InvitationResp = { invitation: { id: string; token: string }; emailSent: bo
 
 function invite(app: FastifyInstance, tenantId: string, cookie: string, email: string) {
   return app.inject({
-    method: 'POST', url: `/api/workspaces/${tenantId}/invitations`,
+    method: 'POST',
+    url: `/api/workspaces/${tenantId}/invitations`,
     payload: { email, role: 'member' },
     headers: { 'content-type': 'application/json', cookie },
   })
@@ -101,21 +118,29 @@ function proofFrom(mail: OutgoingMail): string {
 }
 
 function accept(app: FastifyInstance, token: string, cookie: string, v?: string) {
-  if (v === undefined) return app.inject({ method: 'POST', url: `/api/invitations/${token}/accept`, headers: { cookie } })
+  if (v === undefined)
+    return app.inject({ method: 'POST', url: `/api/invitations/${token}/accept`, headers: { cookie } })
   return app.inject({
-    method: 'POST', url: `/api/invitations/${token}/accept`, payload: { v },
+    method: 'POST',
+    url: `/api/invitations/${token}/accept`,
+    payload: { v },
     headers: { 'content-type': 'application/json', cookie },
   })
 }
 
 async function emailedAt(id: string): Promise<Date | null> {
-  const [row] = await ctx.db.select({ emailedAt: schema.invitation.emailedAt }).from(schema.invitation)
+  const [row] = await ctx.db
+    .select({ emailedAt: schema.invitation.emailedAt })
+    .from(schema.invitation)
     .where(eq(schema.invitation.id, id))
   return row.emailedAt
 }
 
 async function isVerified(email: string): Promise<boolean> {
-  const [row] = await ctx.db.select({ v: schema.user.emailVerified }).from(schema.user).where(eq(schema.user.email, email))
+  const [row] = await ctx.db
+    .select({ v: schema.user.emailVerified })
+    .from(schema.user)
+    .where(eq(schema.user.email, email))
   return row.v
 }
 
@@ -141,7 +166,8 @@ describe('e2e : invitation envoyée par e-mail', () => {
     expect(mail.text).toContain('Classe de CM2')
     expect(await emailedAt(body.invitation.id)).not.toBeNull()
     expect(logger.info).toHaveBeenCalledWith(
-      expect.objectContaining({ kind: 'invitation', domain: 'example.com', ok: true }), expect.any(String),
+      expect.objectContaining({ kind: 'invitation', domain: 'example.com', ok: true }),
+      expect.any(String),
     )
     await app.close()
   })
@@ -152,9 +178,12 @@ describe('e2e : invitation envoyée par e-mail', () => {
     const { cookie, tenantId } = await setupOwner(app, 'inv-mail-resend@example.com')
     const created = (await invite(app, tenantId, cookie, 'invite2@example.com')).json() as InvitationResp
 
-    const resend = () => app.inject({
-      method: 'POST', url: `/api/workspaces/${tenantId}/invitations/${created.invitation.id}/resend`, headers: { cookie },
-    })
+    const resend = () =>
+      app.inject({
+        method: 'POST',
+        url: `/api/workspaces/${tenantId}/invitations/${created.invitation.id}/resend`,
+        headers: { cookie },
+      })
     const res = await resend()
     expect(res.statusCode).toBe(200)
     const body = res.json() as InvitationResp
@@ -188,13 +217,16 @@ describe('e2e : invitation envoyée par e-mail', () => {
     expect(body.invitation.token).toBeTruthy()
     expect(await emailedAt(body.invitation.id)).toBeNull()
 
-    const list = (await app.inject({ method: 'GET', url: `/api/workspaces/${tenantId}/invitations`, headers: { cookie } })).json() as {
+    const list = (
+      await app.inject({ method: 'GET', url: `/api/workspaces/${tenantId}/invitations`, headers: { cookie } })
+    ).json() as {
       invitations: Array<{ id: string }>
     }
     expect(list.invitations.map((i) => i.id)).toContain(body.invitation.id)
 
     expect(logger.error).toHaveBeenCalledWith(
-      expect.objectContaining({ kind: 'invitation', domain: 'example.com' }), expect.any(String),
+      expect.objectContaining({ kind: 'invitation', domain: 'example.com' }),
+      expect.any(String),
     )
     const dump = JSON.stringify([logger.info.mock.calls, logger.warn.mock.calls, logger.error.mock.calls])
     expect(dump).not.toContain(body.invitation.token)
@@ -219,7 +251,7 @@ describe('e2e : invitation envoyée par e-mail', () => {
     await app.close()
   })
 
-  it("invitant non confirmé : invitation créée et renvoyée sans e-mail, emailSkipped posé", async () => {
+  it('invitant non confirmé : invitation créée et renvoyée sans e-mail, emailSkipped posé', async () => {
     const mailer = new MemoryMailer()
     const app = await buildApp(mailer)
     const { cookie, tenantId } = await setupOwner(app, 'inv-mail-unverified@example.com', 'Camille Martin', false)
@@ -233,7 +265,9 @@ describe('e2e : invitation envoyée par e-mail', () => {
     expect(await emailedAt(body.invitation.id)).toBeNull()
 
     const resend = await app.inject({
-      method: 'POST', url: `/api/workspaces/${tenantId}/invitations/${body.invitation.id}/resend`, headers: { cookie },
+      method: 'POST',
+      url: `/api/workspaces/${tenantId}/invitations/${body.invitation.id}/resend`,
+      headers: { cookie },
     })
     expect(resend.statusCode).toBe(200)
     expect(resend.json()).toMatchObject({ emailSent: false, emailSkipped: 'inviter_unverified' })
@@ -241,7 +275,10 @@ describe('e2e : invitation envoyée par e-mail', () => {
     expect(await emailedAt(body.invitation.id)).toBeNull()
 
     // Adresse confirmée ensuite : l'envoi reprend, sans emailSkipped.
-    await ctx.db.update(schema.user).set({ emailVerified: true }).where(eq(schema.user.email, 'inv-mail-unverified@example.com'))
+    await ctx.db
+      .update(schema.user)
+      .set({ emailVerified: true })
+      .where(eq(schema.user.email, 'inv-mail-unverified@example.com'))
     const after = await invite(app, tenantId, cookie, 'invite6@example.com')
     expect(after.json()).toMatchObject({ emailSent: true })
     expect((after.json() as InvitationResp).emailSkipped).toBeUndefined()
@@ -262,7 +299,9 @@ describe('e2e : invitation envoyée par e-mail', () => {
   })
 
   it('domaine sans MX ni adresse refusé en 400 (contrôle DNS actif, résolveur injecté)', async () => {
-    const notFound = async (): Promise<never> => { throw Object.assign(new Error('ENOTFOUND'), { code: 'ENOTFOUND' }) }
+    const notFound = async (): Promise<never> => {
+      throw Object.assign(new Error('ENOTFOUND'), { code: 'ENOTFOUND' })
+    }
     const resolver: DnsResolver = {
       resolveMx: async (d) => {
         if (d === 'domaine-mort.example') return notFound()
@@ -294,7 +333,10 @@ describe("e2e : l'acceptation d'une invitation e-mailée confirme l'adresse", ()
 
     const guestCookie = await signUp(app, 'camille@example.com', 'Camille')
     // Adresse du compte écrite autrement que celle de l'invitation.
-    await ctx.db.update(schema.user).set({ email: 'Camille@Example.com ' }).where(eq(schema.user.email, 'camille@example.com'))
+    await ctx.db
+      .update(schema.user)
+      .set({ email: 'Camille@Example.com ' })
+      .where(eq(schema.user.email, 'camille@example.com'))
     expect(await isVerified('Camille@Example.com ')).toBe(false)
 
     const acc = await accept(app, invitation.token, guestCookie, v)
@@ -336,11 +378,17 @@ describe("e2e : l'acceptation d'une invitation e-mailée confirme l'adresse", ()
     const app = await buildApp(mailer)
     const { cookie, tenantId } = await setupOwner(app, 'inv-verif-owner2@example.com')
     mailer.failNext()
-    const { invitation, emailSent } = (await invite(app, tenantId, cookie, 'jamais@example.com')).json() as InvitationResp
+    const { invitation, emailSent } = (
+      await invite(app, tenantId, cookie, 'jamais@example.com')
+    ).json() as InvitationResp
     expect(emailSent).toBe(false)
 
     const guestCookie = await signUp(app, 'jamais@example.com', 'Jamais')
-    const acc = await app.inject({ method: 'POST', url: `/api/invitations/${invitation.token}/accept`, headers: { cookie: guestCookie } })
+    const acc = await app.inject({
+      method: 'POST',
+      url: `/api/invitations/${invitation.token}/accept`,
+      headers: { cookie: guestCookie },
+    })
     expect(acc.statusCode).toBe(200)
     expect(await isVerified('jamais@example.com')).toBe(false)
     await app.close()
@@ -361,7 +409,7 @@ describe("e2e : l'acceptation d'une invitation e-mailée confirme l'adresse", ()
 })
 
 describe('e2e : limite de débit des invitations', () => {
-  it('la 21e création ou renvoi dans l\'heure est refusée en 429', async () => {
+  it("la 21e création ou renvoi dans l'heure est refusée en 429", async () => {
     const app = await buildApp(new MemoryMailer(), { invitationRateLimit: true })
     const { cookie, tenantId } = await setupOwner(app, 'inv-limite@example.com')
 
@@ -373,7 +421,9 @@ describe('e2e : limite de débit des invitations', () => {
       first ??= res.json() as InvitationResp
     }
     const resend = await app.inject({
-      method: 'POST', url: `/api/workspaces/${tenantId}/invitations/${first!.invitation.id}/resend`, headers: { cookie },
+      method: 'POST',
+      url: `/api/workspaces/${tenantId}/invitations/${first!.invitation.id}/resend`,
+      headers: { cookie },
     })
     expect(resend.statusCode).toBe(200)
 

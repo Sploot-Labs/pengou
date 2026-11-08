@@ -88,10 +88,10 @@ export async function listSessions(
     })
     .from(schema.gameSession)
     .innerJoin(schema.quiz, eq(schema.quiz.id, schema.gameSession.quizId))
-    .leftJoin(schema.sessionPlayer, and(
-      eq(schema.sessionPlayer.sessionId, schema.gameSession.id),
-      eq(schema.sessionPlayer.tenantId, scope.tenantId),
-    ))
+    .leftJoin(
+      schema.sessionPlayer,
+      and(eq(schema.sessionPlayer.sessionId, schema.gameSession.id), eq(schema.sessionPlayer.tenantId, scope.tenantId)),
+    )
     .where(and(...conditions))
     .groupBy(schema.gameSession.id, schema.quiz.title)
     .orderBy(desc(schema.gameSession.createdAt))
@@ -114,7 +114,9 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
     })
     .from(schema.gameSession)
     .innerJoin(schema.quiz, eq(schema.quiz.id, schema.gameSession.quizId))
-    .where(and(eq(schema.gameSession.id, sessionId), eq(schema.gameSession.tenantId, scope.tenantId), hostPredicate(scope)))
+    .where(
+      and(eq(schema.gameSession.id, sessionId), eq(schema.gameSession.tenantId, scope.tenantId), hostPredicate(scope)),
+    )
     .limit(1)
   if (!session) return null
 
@@ -130,7 +132,8 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
       orderIndex: schema.question.orderIndex,
       payload: schema.question.payload,
       answerCount: sql<number>`count(${schema.answerRecord.id})`.mapWith(Number),
-      correctCount: sql<number>`count(${schema.answerRecord.id}) filter (where ${schema.answerRecord.isCorrect})`.mapWith(Number),
+      correctCount:
+        sql<number>`count(${schema.answerRecord.id}) filter (where ${schema.answerRecord.isCorrect})`.mapWith(Number),
       avgTimeMs: sql<number | null>`avg(${schema.answerRecord.timeMs})`.mapWith((v) => (v === null ? null : Number(v))),
     })
     .from(schema.question)
@@ -156,11 +159,13 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
     const rows = await scope.db
       .select({ questionId: schema.answerRecord.questionId, answer: schema.answerRecord.answer })
       .from(schema.answerRecord)
-      .where(and(
-        eq(schema.answerRecord.sessionId, sessionId),
-        eq(schema.answerRecord.tenantId, scope.tenantId),
-        inArray(schema.answerRecord.questionId, cloudIds),
-      ))
+      .where(
+        and(
+          eq(schema.answerRecord.sessionId, sessionId),
+          eq(schema.answerRecord.tenantId, scope.tenantId),
+          inArray(schema.answerRecord.questionId, cloudIds),
+        ),
+      )
     for (const r of rows) {
       const words = (r.answer as { words?: unknown } | null)?.words
       if (!Array.isArray(words)) continue
@@ -177,11 +182,13 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
     const rows = await scope.db
       .select({ questionId: schema.answerRecord.questionId, answer: schema.answerRecord.answer })
       .from(schema.answerRecord)
-      .where(and(
-        eq(schema.answerRecord.sessionId, sessionId),
-        eq(schema.answerRecord.tenantId, scope.tenantId),
-        inArray(schema.answerRecord.questionId, pollIds),
-      ))
+      .where(
+        and(
+          eq(schema.answerRecord.sessionId, sessionId),
+          eq(schema.answerRecord.tenantId, scope.tenantId),
+          inArray(schema.answerRecord.questionId, pollIds),
+        ),
+      )
     for (const r of rows) {
       const idx = (r.answer as { optionIndexes?: unknown } | null)?.optionIndexes
       if (!Array.isArray(idx)) continue
@@ -230,16 +237,20 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
       playerId: schema.sessionPlayer.id,
       nickname: schema.sessionPlayer.nickname,
       totalScore: schema.sessionPlayer.totalScore,
-      correctCount: sql<number>`count(${schema.answerRecord.id}) filter (where ${schema.answerRecord.isCorrect})`.mapWith(Number),
+      correctCount:
+        sql<number>`count(${schema.answerRecord.id}) filter (where ${schema.answerRecord.isCorrect})`.mapWith(Number),
       answerCount: sql<number>`count(${schema.answerRecord.id})`.mapWith(Number),
     })
     .from(schema.sessionPlayer)
-    .leftJoin(schema.answerRecord, and(
-      eq(schema.answerRecord.playerId, schema.sessionPlayer.id),
-      eq(schema.answerRecord.tenantId, scope.tenantId),
-      // Les nuages de mots et les sondages ne comptent ni comme réponse donnée ni comme réponse correcte.
-      sql`${schema.answerRecord.questionId} in (select id from question where type not in ('wordcloud', 'poll'))`,
-    ))
+    .leftJoin(
+      schema.answerRecord,
+      and(
+        eq(schema.answerRecord.playerId, schema.sessionPlayer.id),
+        eq(schema.answerRecord.tenantId, scope.tenantId),
+        // Les nuages de mots et les sondages ne comptent ni comme réponse donnée ni comme réponse correcte.
+        sql`${schema.answerRecord.questionId} in (select id from question where type not in ('wordcloud', 'poll'))`,
+      ),
+    )
     .where(and(eq(schema.sessionPlayer.sessionId, sessionId), eq(schema.sessionPlayer.tenantId, scope.tenantId)))
     .groupBy(schema.sessionPlayer.id)
     .orderBy(desc(schema.sessionPlayer.totalScore))

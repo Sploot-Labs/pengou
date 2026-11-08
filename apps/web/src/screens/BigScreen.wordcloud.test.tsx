@@ -96,7 +96,10 @@ describe('BigScreen, nuage de mots en direct', () => {
   it('accorde au singulier', async () => {
     await joined()
     await showQuestion(cloudQuestion)
-    emitServerEvent('wordcloud:update', view({ participants: 1, totalWords: 1, words: [{ key: 'a', text: 'a', count: 1 }] }))
+    emitServerEvent(
+      'wordcloud:update',
+      view({ participants: 1, totalWords: 1, words: [{ key: 'a', text: 'a', count: 1 }] }),
+    )
     expect(screen.getByText('1 participant a proposé, 1 mot reçu')).toBeInTheDocument()
   })
 

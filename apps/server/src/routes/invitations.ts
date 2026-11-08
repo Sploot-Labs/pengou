@@ -1,13 +1,30 @@
 import type { FastifyInstance, FastifyRequest, preHandlerHookHandler } from 'fastify'
 import { eq } from 'drizzle-orm'
 import {
-  withTenantTx, createInvitation, listInvitations, getInvitationById, revokeInvitation,
-  resendInvitation, getInvitationByToken, acceptInvitation, newInvitationToken, invitationExpiry,
-  markInvitationEmailed, InvitationError, schema, type Db, type Invitation,
+  withTenantTx,
+  createInvitation,
+  listInvitations,
+  getInvitationById,
+  revokeInvitation,
+  resendInvitation,
+  getInvitationByToken,
+  acceptInvitation,
+  newInvitationToken,
+  invitationExpiry,
+  markInvitationEmailed,
+  InvitationError,
+  schema,
+  type Db,
+  type Invitation,
 } from '@splootlabs/db'
 import {
-  checkEmailDeliverable, DELIVERABILITY_MESSAGES, invitationMail, sendAndLog,
-  type DnsResolver, type Mailer, type MailLogger,
+  checkEmailDeliverable,
+  DELIVERABILITY_MESSAGES,
+  invitationMail,
+  sendAndLog,
+  type DnsResolver,
+  type Mailer,
+  type MailLogger,
 } from '@splootlabs/mail'
 import type { AppConfig, Role } from '@splootlabs/shared'
 import { requireUser } from '../require-user.js'
@@ -32,8 +49,11 @@ export type InvitationDeps = {
 const INVITATION_RATE_LIMIT = { max: 20, timeWindow: '1 hour' } as const
 
 async function workspaceName(systemDb: Db, tenantId: string): Promise<string> {
-  const [row] = await systemDb.select({ name: schema.tenant.name }).from(schema.tenant)
-    .where(eq(schema.tenant.id, tenantId)).limit(1)
+  const [row] = await systemDb
+    .select({ name: schema.tenant.name })
+    .from(schema.tenant)
+    .where(eq(schema.tenant.id, tenantId))
+    .limit(1)
   return row?.name ?? ''
 }
 
@@ -45,19 +65,26 @@ function isInvitableRole(value: unknown): value is Role {
 }
 
 // Validation e-mail volontairement permissive (présence d'un `@` encadré) — la vérité, c'est
-// l'acceptation authentifiée ; on borne surtout la longueur.
+// l'acceptation authentifiée ; on borne surtout la longueur. La longueur est vérifiée avant la
+// regex, et les libellés du domaine excluent le point : aucun retour arrière polynomial (ReDoS).
 function isEmail(value: unknown): value is string {
-  return typeof value === 'string' && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value) && value.length <= 254
+  return typeof value === 'string' && value.length <= 254 && /^[^@\s]+@[^@\s.]+(?:\.[^@\s.]+)+$/.test(value)
 }
 
 function mapAcceptError(code: string): { status: number; error: string } {
   switch (code) {
-    case 'not_found': return { status: 404, error: 'Invitation introuvable.' }
-    case 'not_pending': return { status: 409, error: 'Cette invitation a déjà été utilisée ou révoquée.' }
-    case 'expired': return { status: 410, error: 'Cette invitation a expiré.' }
-    case 'already_member': return { status: 409, error: 'Vous êtes déjà membre de ce workspace.' }
-    case 'inviter_revoked': return { status: 409, error: "Cette invitation n'est plus valable." }
-    default: return { status: 400, error: 'Invitation invalide.' }
+    case 'not_found':
+      return { status: 404, error: 'Invitation introuvable.' }
+    case 'not_pending':
+      return { status: 409, error: 'Cette invitation a déjà été utilisée ou révoquée.' }
+    case 'expired':
+      return { status: 410, error: 'Cette invitation a expiré.' }
+    case 'already_member':
+      return { status: 409, error: 'Vous êtes déjà membre de ce workspace.' }
+    case 'inviter_revoked':
+      return { status: 409, error: "Cette invitation n'est plus valable." }
+    default:
+      return { status: 400, error: 'Invitation invalide.' }
   }
 }
 
@@ -159,42 +186,57 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: InvitationD
 
   app.get<{ Params: { tenantId: string } }>('/api/workspaces/:tenantId/invitations', guard, async (request) => {
     const { tenantId } = request.workspace!
-    const invitations = await withTenantTx(appDb, { tenantId }, (scope) => listInvitations(scope, { status: 'pending' }))
+    const invitations = await withTenantTx(appDb, { tenantId }, (scope) =>
+      listInvitations(scope, { status: 'pending' }),
+    )
     // Jamais de jeton dans la liste : il n'est remis qu'à la création et au renvoi, à celui qui en
     // devient l'auteur. Sinon tout gestionnaire lirait les jetons des invitations des autres.
     return { invitations: invitations.map(({ token: _token, ...rest }) => rest) }
   })
 
-  app.post<{ Params: { tenantId: string } }>('/api/workspaces/:tenantId/invitations', sendGuard, async (request, reply) => {
-    const { tenantId } = request.workspace!
-    const body = request.body as { email?: unknown; role?: unknown } | undefined
-    if (!isEmail(body?.email)) return reply.code(400).send({ error: 'E-mail invalide.' })
-    const role: Role = isInvitableRole(body?.role) ? body.role : 'member'
-    const deliverability = await checkEmailDeliverable(body.email as string, {
-      dns: config.emailDomainCheck, resolver: deps.resolver, logger: mailLogger,
-    })
-    if (deliverability !== 'ok') return reply.code(400).send({ error: DELIVERABILITY_MESSAGES[deliverability] })
+  app.post<{ Params: { tenantId: string } }>(
+    '/api/workspaces/:tenantId/invitations',
+    sendGuard,
+    async (request, reply) => {
+      const { tenantId } = request.workspace!
+      const body = request.body as { email?: unknown; role?: unknown } | undefined
+      if (!isEmail(body?.email)) return reply.code(400).send({ error: 'E-mail invalide.' })
+      const role: Role = isInvitableRole(body?.role) ? body.role : 'member'
+      const deliverability = await checkEmailDeliverable(body.email as string, {
+        dns: config.emailDomainCheck,
+        resolver: deps.resolver,
+        logger: mailLogger,
+      })
+      if (deliverability !== 'ok') return reply.code(400).send({ error: DELIVERABILITY_MESSAGES[deliverability] })
 
-    const token = newInvitationToken()
-    const expiresAt = invitationExpiry()
-    const invitation = await withTenantTx(appDb, { tenantId }, (scope) =>
-      createInvitation(scope, { email: body.email as string, role, invitedBy: request.user.id, token, expiresAt }))
-    return reply.code(201).send(await sendInvitation(request, tenantId, invitation))
-  })
+      const token = newInvitationToken()
+      const expiresAt = invitationExpiry()
+      const invitation = await withTenantTx(appDb, { tenantId }, (scope) =>
+        createInvitation(scope, { email: body.email as string, role, invitedBy: request.user.id, token, expiresAt }),
+      )
+      return reply.code(201).send(await sendInvitation(request, tenantId, invitation))
+    },
+  )
 
   app.post<{ Params: { tenantId: string; id: string } }>(
-    '/api/workspaces/:tenantId/invitations/:id/resend', sendGuard, async (request, reply) => {
+    '/api/workspaces/:tenantId/invitations/:id/resend',
+    sendGuard,
+    async (request, reply) => {
       const { tenantId } = request.workspace!
       const token = newInvitationToken()
       const expiresAt = invitationExpiry()
       const invitation = await withTenantTx(appDb, { tenantId }, (scope) =>
-        resendInvitation(scope, request.params.id, { token, expiresAt, invitedBy: request.user.id }))
+        resendInvitation(scope, request.params.id, { token, expiresAt, invitedBy: request.user.id }),
+      )
       if (!invitation) return reply.code(404).send({ error: 'Invitation en attente introuvable.' })
       return sendInvitation(request, tenantId, invitation)
-    })
+    },
+  )
 
   app.delete<{ Params: { tenantId: string; id: string } }>(
-    '/api/workspaces/:tenantId/invitations/:id', guard, async (request, reply) => {
+    '/api/workspaces/:tenantId/invitations/:id',
+    guard,
+    async (request, reply) => {
       const { tenantId } = request.workspace!
       const invitation = await withTenantTx(appDb, { tenantId }, async (scope) => {
         const existing = await getInvitationById(scope, request.params.id)
@@ -203,7 +245,8 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: InvitationD
       })
       if (!invitation) return reply.code(404).send({ error: 'Invitation en attente introuvable.' })
       return { ok: true }
-    })
+    },
+  )
 
   // --- Endpoints par token (pré-contexte, systemDb) ---
 
@@ -217,22 +260,28 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: InvitationD
     return view
   })
 
-  app.post<{ Params: { token: string } }>('/api/invitations/:token/accept', { preHandler: requireUser }, async (request, reply) => {
-    try {
-      // `v` : preuve du lien e-mailé. Absente (lien copié) ou fausse, l'acceptation réussit mais ne
-      // confirme pas l'adresse.
-      const { token } = request.params
-      const proof = (request.body as { v?: unknown } | undefined)?.v
-      const result = await acceptInvitation(systemDb, {
-        token, userId: request.user.id, emailProofValid: isInvitationEmailProofValid(proofSecret, token, proof),
-      })
-      return reply.code(200).send(result)
-    } catch (e) {
-      if (e instanceof InvitationError) {
-        const { status, error } = mapAcceptError(e.code)
-        return reply.code(status).send({ error })
+  app.post<{ Params: { token: string } }>(
+    '/api/invitations/:token/accept',
+    { preHandler: requireUser },
+    async (request, reply) => {
+      try {
+        // `v` : preuve du lien e-mailé. Absente (lien copié) ou fausse, l'acceptation réussit mais ne
+        // confirme pas l'adresse.
+        const { token } = request.params
+        const proof = (request.body as { v?: unknown } | undefined)?.v
+        const result = await acceptInvitation(systemDb, {
+          token,
+          userId: request.user.id,
+          emailProofValid: isInvitationEmailProofValid(proofSecret, token, proof),
+        })
+        return reply.code(200).send(result)
+      } catch (e) {
+        if (e instanceof InvitationError) {
+          const { status, error } = mapAcceptError(e.code)
+          return reply.code(status).send({ error })
+        }
+        throw e
       }
-      throw e
-    }
-  })
+    },
+  )
 }

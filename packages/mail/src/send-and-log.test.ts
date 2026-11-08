@@ -20,7 +20,12 @@ describe('sendAndLog', () => {
     await expect(sendAndLog(mailer, mail, log, 'smtp')).resolves.toBe(true)
     expect(mailer.sent).toHaveLength(1)
     expect(log.info).toHaveBeenCalledTimes(1)
-    expect(log.info.mock.calls[0][0]).toEqual({ kind: 'invitation', transport: 'smtp', domain: 'example.org', ok: true })
+    expect(log.info.mock.calls[0][0]).toEqual({
+      kind: 'invitation',
+      transport: 'smtp',
+      domain: 'example.org',
+      ok: true,
+    })
     const dump = JSON.stringify(log.info.mock.calls)
     expect(dump).not.toContain('alice@')
     expect(dump).not.toContain('AbCdEf')
@@ -33,7 +38,10 @@ describe('sendAndLog', () => {
     await expect(sendAndLog(mailer, mail, log, 'brevo')).resolves.toBe(false)
     expect(log.error).toHaveBeenCalledTimes(1)
     expect(log.error.mock.calls[0][0]).toEqual({
-      kind: 'invitation', transport: 'brevo', domain: 'example.org', err: 'Brevo a refusé',
+      kind: 'invitation',
+      transport: 'brevo',
+      domain: 'example.org',
+      err: 'Brevo a refusé',
     })
     const dump = JSON.stringify(log.error.mock.calls)
     expect(dump).not.toContain('alice@')

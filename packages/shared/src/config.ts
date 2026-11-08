@@ -11,7 +11,10 @@ function emptyAsUndefined<T extends z.ZodTypeAny>(schema: T) {
 }
 
 function httpUrl(name: string) {
-  return z.string().url().refine((v) => /^https?:\/\//.test(v), `${name} doit être une URL http(s).`)
+  return z
+    .string()
+    .url()
+    .refine((v) => /^https?:\/\//.test(v), `${name} doit être une URL http(s).`)
 }
 
 /** Date calendaire réelle au format AAAA-MM-JJ (refuse 2026-02-30). */
@@ -194,8 +197,8 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
   const parsed = EnvSchema.parse(env)
   if (parsed.NODE_ENV === 'production' && !parsed.BETTER_AUTH_SECRET) {
     throw new Error(
-      "Configuration invalide : BETTER_AUTH_SECRET est requis en production (NODE_ENV=production). " +
-        'Définissez une valeur secrète stable d\'au moins 32 caractères (ex. `openssl rand -base64 32`) ' +
+      'Configuration invalide : BETTER_AUTH_SECRET est requis en production (NODE_ENV=production). ' +
+        "Définissez une valeur secrète stable d'au moins 32 caractères (ex. `openssl rand -base64 32`) " +
         'pour signer les sessions Better Auth. En développement/test, une valeur par défaut est tolérée.',
     )
   }

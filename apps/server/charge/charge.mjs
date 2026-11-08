@@ -236,7 +236,11 @@ async function main() {
   for (let k = 0; k < total; k++) {
     const p = k % opts.parties
     const n = Math.floor(k / opts.parties) + 1
-    lots[k % opts.processus].push({ pin: parties[p].pin, pseudo: `J${p + 1}-${n}`, decalageMs: (k * 1000) / opts.cadence })
+    lots[k % opts.processus].push({
+      pin: parties[p].pin,
+      pseudo: `J${p + 1}-${n}`,
+      decalageMs: (k * 1000) / opts.cadence,
+    })
   }
 
   const enfants = lots.map(() => fork(new URL('./joueurs.mjs', import.meta.url)))
@@ -349,7 +353,11 @@ async function main() {
       `Lag p99 du générateur : ${resume.generateur.lagP99MaxMs} ms.`,
   )
   if (Object.keys(refus).length > 0) console.log(`Refus au join : ${JSON.stringify(refus)}.`)
-  console.log(`Critères : ${Object.entries(criteres).map(([nom, ok]) => `${nom} ${ok ? 'ok' : 'NON'}`).join(', ')}.`)
+  console.log(
+    `Critères : ${Object.entries(criteres)
+      .map(([nom, ok]) => `${nom} ${ok ? 'ok' : 'NON'}`)
+      .join(', ')}.`,
+  )
   console.log(`Verdict : ${issue}.`)
   console.log(`Résumé écrit dans ${chemin}.`)
   process.exit(0)
@@ -367,8 +375,11 @@ main().catch((e) => {
       verdict: 'interrompu',
       erreur: e.message,
     }
-    writeFileSync(resolve(opts.json), `${JSON.stringify(partiel, null, 2)}
-`)
+    writeFileSync(
+      resolve(opts.json),
+      `${JSON.stringify(partiel, null, 2)}
+`,
+    )
   }
   process.exit(1)
 })

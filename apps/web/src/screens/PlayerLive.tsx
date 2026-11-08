@@ -466,12 +466,15 @@ export function PlayerLive() {
       }
     })
 
-    const offPodium = on<{ top: RankingEntry[]; hasScoredQuestions?: boolean }>('podium', ({ top, hasScoredQuestions: scored }) => {
-      setPodiumTop(top)
-      setHasScoredQuestions(scored !== false)
-      setAutoNextAt(null)
-      setPhase('podium')
-    })
+    const offPodium = on<{ top: RankingEntry[]; hasScoredQuestions?: boolean }>(
+      'podium',
+      ({ top, hasScoredQuestions: scored }) => {
+        setPodiumTop(top)
+        setHasScoredQuestions(scored !== false)
+        setAutoNextAt(null)
+        setPhase('podium')
+      },
+    )
 
     const offAuto = on<{ nextAt: number | null }>('auto:advance', ({ nextAt }) => {
       setAutoNextAt(nextAt)
@@ -609,15 +612,16 @@ export function PlayerLive() {
     return index === -1 ? null : index + 1
   })()
 
-  const answeredMessage = question?.type === 'wordcloud'
-    ? 'Temps écoulé, merci pour tes idées'
-    : question?.type === 'poll'
-    ? answerAccepted
-      ? 'Vote enregistré'
-      : 'Temps écoulé. En attente de la suite…'
-    : hasSubmission()
-    ? 'Réponse enregistrée. En attente de la suite…'
-    : 'Temps écoulé. En attente de la suite…'
+  const answeredMessage =
+    question?.type === 'wordcloud'
+      ? 'Temps écoulé, merci pour tes idées'
+      : question?.type === 'poll'
+        ? answerAccepted
+          ? 'Vote enregistré'
+          : 'Temps écoulé. En attente de la suite…'
+        : hasSubmission()
+          ? 'Réponse enregistrée. En attente de la suite…'
+          : 'Temps écoulé. En attente de la suite…'
 
   // Ce que le serveur a réellement compté pour cette manche — `null`/vide si
   // la réponse n'a jamais été acceptée (rejetée, jamais soumise, temps
@@ -891,11 +895,12 @@ export function PlayerLive() {
 
           <div className="player-question__spacer" />
 
-          {phase === 'question' && (question.type === 'mcq' ||
+          {phase === 'question' &&
+            (question.type === 'mcq' ||
               question.type === 'truefalse' ||
               (question.type === 'poll' && !(question.payload as PollShowPayload).multiple)) && (
-            <p className="player-commit-hint">Le premier appui valide ta réponse.</p>
-          )}
+              <p className="player-commit-hint">Le premier appui valide ta réponse.</p>
+            )}
 
           {question.type === 'mcq' && (
             <div className="player-tiles" role="group" aria-label="Réponses">

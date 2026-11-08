@@ -55,7 +55,7 @@ function withReducedMotion(matches: boolean) {
   // framer-motion lit sa propre préférence reduced-motion via l'API DEPRECATED
   // `addListener`/`removeListener` (pas seulement `addEventListener`, utilisée
   // par MotionProvider) — les deux doivent être présentes ou son montage lève.
-  window.matchMedia = ((q: string) =>
+  window.matchMedia = (q: string) =>
     ({
       matches,
       media: q,
@@ -63,7 +63,7 @@ function withReducedMotion(matches: boolean) {
       removeEventListener() {},
       addListener() {},
       removeListener() {},
-    }) as unknown as MediaQueryList)
+    }) as unknown as MediaQueryList
 }
 
 describe('PhaseTransition + useFocusOnMount (intégration, mode="wait")', () => {
@@ -115,7 +115,7 @@ describe('PhaseTransition + useFocusOnMount (intégration, mode="wait")', () => 
     await waitFor(() => expect(document.activeElement).toBe(screen.getByText('titre question')))
   })
 
-  it("un re-rendu à `phaseKey` INCHANGÉE ne refocalise pas (callback memoïsée)", async () => {
+  it('un re-rendu à `phaseKey` INCHANGÉE ne refocalise pas (callback memoïsée)', async () => {
     withReducedMotion(false)
     const { rerender } = render(
       <MotionProvider>

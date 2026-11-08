@@ -7,18 +7,24 @@ let tenantId: string
 let userId: string
 
 beforeAll(async () => {
-  ctx = await startTestDb(); await runMigrations(ctx.db)
+  ctx = await startTestDb()
+  await runMigrations(ctx.db)
   tenantId = await ensureDefaultTenant(ctx.db)
-  const [u] = await ctx.db.insert(schema.user)
+  const [u] = await ctx.db
+    .insert(schema.user)
     .values({ id: crypto.randomUUID(), email: 'm@pengou.app', name: 'M', emailVerified: false })
     .returning()
   userId = u.id
 }, 120_000)
-afterAll(async () => { await ctx?.stop() })
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 describe('résolution multi via membership', () => {
   it('multi sans membership → accès refusé', async () => {
-    await expect(resolveTenantId(ctx.db, { tenancyMode: 'multi' }, { userId, explicitTenantId: tenantId })).rejects.toThrow()
+    await expect(
+      resolveTenantId(ctx.db, { tenancyMode: 'multi' }, { userId, explicitTenantId: tenantId }),
+    ).rejects.toThrow()
   })
   it('multi avec membership → renvoie le tenant', async () => {
     await ensureMembership(ctx.db, userId, tenantId)
@@ -30,8 +36,9 @@ describe('résolution multi via membership', () => {
     expect(r).toBe(tenantId)
   })
   it('mode single : un utilisateur sans membership est refusé', async () => {
-    await expect(resolveTenantId(ctx.db, { tenancyMode: 'single' }, { userId: 'sans-membership' }))
-      .rejects.toBeInstanceOf(TenantAccessDeniedError)
+    await expect(
+      resolveTenantId(ctx.db, { tenancyMode: 'single' }, { userId: 'sans-membership' }),
+    ).rejects.toBeInstanceOf(TenantAccessDeniedError)
   })
   it('mode single : un utilisateur membre est accepté', async () => {
     await ensureMembership(ctx.db, userId, tenantId)

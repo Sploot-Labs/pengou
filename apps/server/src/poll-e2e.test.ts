@@ -95,7 +95,10 @@ function ack<T = unknown>(client: ClientSocket, event: string, payload: unknown)
 
 /** Enregistre tous les événements `event` reçus par `client`, dans l'ordre. `until` résout au
  * premier payload (déjà reçu ou à venir) qui satisfait le prédicat. */
-function record<T = unknown>(client: ClientSocket, event: string): {
+function record<T = unknown>(
+  client: ClientSocket,
+  event: string,
+): {
   received: T[]
   until: (predicate: (payload: T) => boolean, timeoutMs?: number) => Promise<T>
 } {
@@ -165,7 +168,12 @@ async function createQuiz(app: FastifyInstance, cookie: string, title: string): 
   return (res.json() as { id: string }).id
 }
 
-async function addQuestion(app: FastifyInstance, cookie: string, quizId: string, question: Record<string, unknown>): Promise<string> {
+async function addQuestion(
+  app: FastifyInstance,
+  cookie: string,
+  quizId: string,
+  question: Record<string, unknown>,
+): Promise<string> {
   const res = await app.inject({
     method: 'POST',
     url: `/api/quizzes/${quizId}/questions`,
@@ -192,13 +200,28 @@ describe('e2e : sondage', () => {
     try {
       const cookie = await signUp(app, 'sondage-host@example.com')
       const quizId = await createQuiz(app, cookie, 'Quiz sondage')
-      const pollMultiId = await addQuestion(app, cookie, quizId, pollQuestion('Vos fruits préférés ?', ['Pomme', 'Poire', 'Kiwi'], true))
+      const pollMultiId = await addQuestion(
+        app,
+        cookie,
+        quizId,
+        pollQuestion('Vos fruits préférés ?', ['Pomme', 'Poire', 'Kiwi'], true),
+      )
       const pollSingleId = await addQuestion(app, cookie, quizId, pollQuestion('Thé ou café ?', ['Thé', 'Café'], false))
-      const pollSkipId = await addQuestion(app, cookie, quizId, pollQuestion('Mer ou montagne ?', ['Mer', 'Montagne'], true))
+      const pollSkipId = await addQuestion(
+        app,
+        cookie,
+        quizId,
+        pollQuestion('Mer ou montagne ?', ['Mer', 'Montagne'], true),
+      )
       await addQuestion(app, cookie, quizId, {
         type: 'mcq',
         prompt: 'Capitale de la France ?',
-        payload: { options: [{ label: 'Paris', correct: true }, { label: 'Lyon', correct: false }] },
+        payload: {
+          options: [
+            { label: 'Paris', correct: true },
+            { label: 'Lyon', correct: false },
+          ],
+        },
       })
 
       const host = await connectClient(url, { cookie })
@@ -219,7 +242,10 @@ describe('e2e : sondage', () => {
       const playerA = await connectClient(url)
       const playerB = await connectClient(url)
       clients.push(playerA, playerB)
-      for (const [p, nickname] of [[playerA, 'Alice'], [playerB, 'Bob']] as const) {
+      for (const [p, nickname] of [
+        [playerA, 'Alice'],
+        [playerB, 'Bob'],
+      ] as const) {
         const joined = await ack<{ playerId?: string; error?: string }>(p, 'player:join', { pin, nickname })
         expect(joined.error).toBeUndefined()
       }
@@ -251,15 +277,22 @@ describe('e2e : sondage', () => {
         questionId: pollMultiId,
         multiple: true,
         voters: 2,
-        options: [{ label: 'Pomme', votes: 1 }, { label: 'Poire', votes: 0 }, { label: 'Kiwi', votes: 2 }],
+        options: [
+          { label: 'Pomme', votes: 1 },
+          { label: 'Poire', votes: 0 },
+          { label: 'Kiwi', votes: 2 },
+        ],
       })
       await hostScoreboards.until(() => true)
       expect(hostLog.indexOf('scoreboard')).toBeGreaterThan(hostLog.indexOf('question:reveal'))
 
       const multiRows = await rowsFor(pollMultiId)
       expect(multiRows).toHaveLength(2)
-      expect(multiRows.map((r) => (r.answer as { optionIndexes: number[] }).optionIndexes).sort((a, b) => b.length - a.length))
-        .toEqual([[0, 2], [2]])
+      expect(
+        multiRows
+          .map((r) => (r.answer as { optionIndexes: number[] }).optionIndexes)
+          .sort((a, b) => b.length - a.length),
+      ).toEqual([[0, 2], [2]])
       for (const row of multiRows) {
         expect(row.isCorrect).toBe(false)
         expect(row.points).toBe(0)
@@ -272,7 +305,10 @@ describe('e2e : sondage', () => {
       const screen2Log = eventLog(screen2)
       const screen2Reveals = record<RevealPayload>(screen2, 'question:reveal')
       const screen2Shows = record<ShowPayload>(screen2, 'question:show')
-      const screenReco = await ack<{ ok?: boolean }>(screen2, 'screen:reconnect', { sessionId, displayToken: tokenAck.displayToken })
+      const screenReco = await ack<{ ok?: boolean }>(screen2, 'screen:reconnect', {
+        sessionId,
+        displayToken: tokenAck.displayToken,
+      })
       expect(screenReco.ok).toBe(true)
       const replayedShow = await screen2Shows.until(() => true, 2000)
       expect(replayedShow.id).toBe(pollMultiId)
@@ -298,7 +334,9 @@ describe('e2e : sondage', () => {
       await screenShows.until((v) => v.id === pollSingleId, 3000)
       const revealsBeforeSingle = hostReveals.received.length
 
-      const bad = await ack<{ accepted?: boolean; reason?: string }>(playerA, 'player:answer', { answer: { optionIndexes: [0, 1] } })
+      const bad = await ack<{ accepted?: boolean; reason?: string }>(playerA, 'player:answer', {
+        answer: { optionIndexes: [0, 1] },
+      })
       expect(bad.accepted).toBe(false)
       expect(bad.reason).toBe('réponse invalide pour ce type de question')
       const goodA = await ack<{ accepted?: boolean }>(playerA, 'player:answer', { answer: { optionIndexes: [1] } })
@@ -311,7 +349,10 @@ describe('e2e : sondage', () => {
       expect(singleReveal.poll?.voters).toBe(2)
       expect(singleReveal.poll?.options.map((o) => o.votes)).toEqual([1, 1])
       const revealPos = hostLog.lastIndexOf('question:reveal')
-      const autoAfterReveal = await hostAuto.until((v) => v.nextAt !== null && hostLog.lastIndexOf('auto:advance') > revealPos, 3000)
+      const autoAfterReveal = await hostAuto.until(
+        (v) => v.nextAt !== null && hostLog.lastIndexOf('auto:advance') > revealPos,
+        3000,
+      )
       expect(autoAfterReveal.nextAt).not.toBeNull()
       await screenShows.until((v) => v.id === pollSkipId, 4000)
       const autoOff2 = await ack<{ ok?: boolean }>(host, 'host:setAuto', { enabled: false })
@@ -361,7 +402,7 @@ describe('e2e : sondage', () => {
     }
   }, 30_000)
 
-  it('quiz sans question notée : podium sans classement, rejoué tel quel à la reconnexion de l\'hôte', async () => {
+  it("quiz sans question notée : podium sans classement, rejoué tel quel à la reconnexion de l'hôte", async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -395,7 +436,9 @@ describe('e2e : sondage', () => {
       const host2 = await connectClient(url, { cookie })
       clients.push(host2)
       const host2Podium = record<PodiumPayload>(host2, 'podium')
-      const reco = await ack<{ phase?: string; error?: string }>(host2, 'host:reconnect', { sessionId: created.sessionId })
+      const reco = await ack<{ phase?: string; error?: string }>(host2, 'host:reconnect', {
+        sessionId: created.sessionId,
+      })
       expect(reco.error).toBeUndefined()
       expect(reco.phase).toBe('podium')
       const replayed = await host2Podium.until(() => true, 2000)
@@ -415,7 +458,12 @@ describe('e2e : sondage', () => {
       await addQuestion(app, cookie, quizId, {
         type: 'mcq',
         prompt: 'Capitale de la France ?',
-        payload: { options: [{ label: 'Paris', correct: true }, { label: 'Lyon', correct: false }] },
+        payload: {
+          options: [
+            { label: 'Paris', correct: true },
+            { label: 'Lyon', correct: false },
+          ],
+        },
       })
       const lastPollId = await addQuestion(app, cookie, quizId, pollQuestion('Thé ou café ?', ['Thé', 'Café'], false))
 
@@ -475,8 +523,14 @@ describe('e2e : sondage', () => {
       const voter = await connectClient(url)
       const idle = await connectClient(url)
       clients.push(voter, idle)
-      const voterJoin = await ack<{ joinToken: string; error?: string }>(voter, 'player:join', { pin: created.pin, nickname: 'Alice' })
-      const idleJoin = await ack<{ joinToken: string; error?: string }>(idle, 'player:join', { pin: created.pin, nickname: 'Bob' })
+      const voterJoin = await ack<{ joinToken: string; error?: string }>(voter, 'player:join', {
+        pin: created.pin,
+        nickname: 'Alice',
+      })
+      const idleJoin = await ack<{ joinToken: string; error?: string }>(idle, 'player:join', {
+        pin: created.pin,
+        nickname: 'Bob',
+      })
       expect(voterJoin.error).toBeUndefined()
       await ack(host, 'host:start', {})
       const vote = await ack<{ accepted?: boolean }>(voter, 'player:answer', { answer: { optionIndexes: [0] } })
@@ -488,8 +542,14 @@ describe('e2e : sondage', () => {
       clients.push(voter2, idle2)
       const voterShows = record<ShowPayload & { alreadyAnswered?: boolean }>(voter2, 'question:show')
       const idle2Shows = record<ShowPayload & { alreadyAnswered?: boolean }>(idle2, 'question:show')
-      const r1 = await ack<{ alreadyAnswered?: boolean }>(voter2, 'player:reconnect', { pin: created.pin, joinToken: voterJoin.joinToken })
-      const r2 = await ack<{ alreadyAnswered?: boolean }>(idle2, 'player:reconnect', { pin: created.pin, joinToken: idleJoin.joinToken })
+      const r1 = await ack<{ alreadyAnswered?: boolean }>(voter2, 'player:reconnect', {
+        pin: created.pin,
+        joinToken: voterJoin.joinToken,
+      })
+      const r2 = await ack<{ alreadyAnswered?: boolean }>(idle2, 'player:reconnect', {
+        pin: created.pin,
+        joinToken: idleJoin.joinToken,
+      })
       expect(r1.alreadyAnswered).toBe(true)
       expect(r2.alreadyAnswered).toBe(false)
       expect((await voterShows.until(() => true)).alreadyAnswered).toBe(true)

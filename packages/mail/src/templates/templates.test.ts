@@ -84,14 +84,12 @@ describe('invitation', () => {
 })
 
 describe("garde d'URL et sujet", () => {
-  it("refuse les hôtes qui ressemblent à la base", () => {
+  it('refuse les hôtes qui ressemblent à la base', () => {
     expect(() => inv({ url: 'https://app.pengou.fr.evil.com/x' })).toThrow()
     expect(() => inv({ url: 'https://app.pengou.frevil.com/x' })).toThrow()
   })
   it('accepte une base avec barre finale', () => {
-    expect(() =>
-      inv({ baseUrl: 'https://app.pengou.fr/', url: 'https://app.pengou.fr/invitations/abc' }),
-    ).not.toThrow()
+    expect(() => inv({ baseUrl: 'https://app.pengou.fr/', url: 'https://app.pengou.fr/invitations/abc' })).not.toThrow()
   })
   it('retire les sauts de ligne du sujet', () => {
     const mail = inv({ inviterName: 'Camille\r\nBcc: x@y' })

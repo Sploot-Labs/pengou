@@ -83,9 +83,7 @@ export function ResetPassword() {
         return
       }
       setFormError(
-        err instanceof ApiError
-          ? err.message
-          : 'Enregistrement impossible. Vérifiez votre connexion et réessayez.',
+        err instanceof ApiError ? err.message : 'Enregistrement impossible. Vérifiez votre connexion et réessayez.',
       )
     }
   }

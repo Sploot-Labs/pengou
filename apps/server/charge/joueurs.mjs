@@ -25,10 +25,13 @@ const incrementer = (compteur, cle) => {
 }
 
 const planifier = (fn, delaiMs) => {
-  const t = setTimeout(() => {
-    minuteurs.delete(t)
-    fn()
-  }, Math.max(0, delaiMs))
+  const t = setTimeout(
+    () => {
+      minuteurs.delete(t)
+      fn()
+    },
+    Math.max(0, delaiMs),
+  )
   minuteurs.add(t)
 }
 
@@ -62,18 +65,20 @@ function lancerJoueur({ pin, pseudo }, cible, plageReponseMs, fini) {
     planifier(() => {
       if (termine) return
       const debut = performance.now()
-      socket.timeout(ACK_MAX_MS).emit('player:answer', { answer: { optionIndex: Math.floor(Math.random() * 4) } }, (err, ack) => {
-        if (err) {
-          erreurs.ackTimeout += 1
-          return
-        }
-        if (!ack?.accepted) {
-          erreurs.reponseRefusee += 1
-          return
-        }
-        reponseMs.push(performance.now() - debut)
-        incrementer(acceptesParPin, pin)
-      })
+      socket
+        .timeout(ACK_MAX_MS)
+        .emit('player:answer', { answer: { optionIndex: Math.floor(Math.random() * 4) } }, (err, ack) => {
+          if (err) {
+            erreurs.ackTimeout += 1
+            return
+          }
+          if (!ack?.accepted) {
+            erreurs.reponseRefusee += 1
+            return
+          }
+          reponseMs.push(performance.now() - debut)
+          incrementer(acceptesParPin, pin)
+        })
     }, tirer(plageReponseMs))
   })
   socket.once('connect', () => {
@@ -102,7 +107,10 @@ function demarrer({ cible, debutEpochMs, joueurs, reponseMs: plageReponseMs }) {
     return
   }
   for (const joueur of joueurs) {
-    planifier(() => lancerJoueur(joueur, cible, plageReponseMs, unDeMoins), debutEpochMs + joueur.decalageMs - Date.now())
+    planifier(
+      () => lancerJoueur(joueur, cible, plageReponseMs, unDeMoins),
+      debutEpochMs + joueur.decalageMs - Date.now(),
+    )
   }
 }
 

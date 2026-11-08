@@ -87,7 +87,9 @@ describe("garde d'origine des requêtes mutantes", () => {
   // Route factice : l'éditeur (base de données) n'est pas monté par buildServer seul.
   async function serveur() {
     const app = await buildServer(config())
-    app.post('/api/invitations/:token/accept', async (_req, reply) => reply.code(401).send({ error: 'Non authentifié.' }))
+    app.post('/api/invitations/:token/accept', async (_req, reply) =>
+      reply.code(401).send({ error: 'Non authentifié.' }),
+    )
     return app
   }
 
@@ -127,7 +129,9 @@ describe("garde d'origine des requêtes mutantes", () => {
 
   it('BETTER_AUTH_URL avec barre finale : son origine reste acceptée', async () => {
     const app = await buildServer(loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'http://localhost:3000/' }))
-    app.post('/api/invitations/:token/accept', async (_req, reply) => reply.code(401).send({ error: 'Non authentifié.' }))
+    app.post('/api/invitations/:token/accept', async (_req, reply) =>
+      reply.code(401).send({ error: 'Non authentifié.' }),
+    )
     const res = await app.inject({
       method: 'POST',
       url: '/api/invitations/x/accept',
@@ -150,7 +154,9 @@ describe("garde d'origine des requêtes mutantes", () => {
 
   it("un sous-domaine frère reste refusé, même avec le Host de l'app", async () => {
     const app = await buildServer(loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'https://app.example.com' }))
-    app.post('/api/invitations/:token/accept', async (_req, reply) => reply.code(401).send({ error: 'Non authentifié.' }))
+    app.post('/api/invitations/:token/accept', async (_req, reply) =>
+      reply.code(401).send({ error: 'Non authentifié.' }),
+    )
     const res = await app.inject({
       method: 'POST',
       url: '/api/invitations/x/accept',

@@ -122,18 +122,29 @@ describe('verdict', () => {
     expect(v.verdict).toBe('echoue')
     expect(v.criteres.rejointTous).toBe(false)
     expect(verdict(resumeType({ deconnexions: 1 })).criteres.zeroDeconnexion).toBe(false)
-    expect(verdict(resumeType({ latences: { reponse: { p95: 301 }, diffusion: { p95: 200 } } })).criteres.reponseP95).toBe(false)
-    expect(verdict(resumeType({ latences: { reponse: { p95: 50 }, diffusion: { p95: 1001 } } })).criteres.diffusionP95).toBe(false)
+    expect(
+      verdict(resumeType({ latences: { reponse: { p95: 301 }, diffusion: { p95: 200 } } })).criteres.reponseP95,
+    ).toBe(false)
+    expect(
+      verdict(resumeType({ latences: { reponse: { p95: 50 }, diffusion: { p95: 1001 } } })).criteres.diffusionP95,
+    ).toBe(false)
     expect(verdict(resumeType({ serveur: { lagP99MaxMs: 201, echantillons: 5 } })).criteres.lagServeurP99).toBe(false)
   })
 
   it('accepte les valeurs exactement égales aux seuils', () => {
-    const v = verdict(resumeType({ latences: { reponse: { p95: 300 }, diffusion: { p95: 1000 } }, serveur: { lagP99MaxMs: 200, echantillons: 5 } }))
+    const v = verdict(
+      resumeType({
+        latences: { reponse: { p95: 300 }, diffusion: { p95: 1000 } },
+        serveur: { lagP99MaxMs: 200, echantillons: 5 },
+      }),
+    )
     expect(v.verdict).toBe('reussi')
   })
 
   it('une latence absente (NaN) fait échouer son critère', () => {
-    expect(verdict(resumeType({ latences: { reponse: { p95: Number.NaN }, diffusion: { p95: 1 } } })).verdict).toBe('echoue')
+    expect(verdict(resumeType({ latences: { reponse: { p95: Number.NaN }, diffusion: { p95: 1 } } })).verdict).toBe(
+      'echoue',
+    )
   })
 
   it('invalide si le générateur sature, même avec des critères en échec', () => {

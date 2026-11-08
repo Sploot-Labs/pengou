@@ -123,7 +123,13 @@ const POLL_MIN_OPTIONS = 2
 const POLL_MAX_OPTIONS = 6
 
 function fromApiQuestion(row: ApiQuestion): Question {
-  const base = { id: row.id, prompt: row.prompt, timeLimit: row.timeLimit, readingTime: row.readingTime, source: row.source }
+  const base = {
+    id: row.id,
+    prompt: row.prompt,
+    timeLimit: row.timeLimit,
+    readingTime: row.readingTime,
+    source: row.source,
+  }
   switch (row.type) {
     case 'mcq': {
       const payload = row.payload as { options: { label: string; correct: boolean }[] }
@@ -298,27 +304,20 @@ function validationError(q: Question): string | null {
   // an invalid duration can never reach the timer, nor an invalid launch. The
   // server itself only requires a positive integer — [5, 120] is a client-side
   // product guardrail, kept from the prototype.
-  if (!Number.isInteger(q.timeLimit) || q.timeLimit < 5 || q.timeLimit > 120)
-    return 'Durée entre 5 et 120 s.'
+  if (!Number.isInteger(q.timeLimit) || q.timeLimit < 5 || q.timeLimit > 120) return 'Durée entre 5 et 120 s.'
   // 0 = pas de temps de lecture (valeur légitime), donc seul le signe/l'intégrité est vérifié —
   // pas de borne haute produit comme pour `timeLimit`.
-  if (!Number.isInteger(q.readingTime) || q.readingTime < 0)
-    return 'Le temps de lecture doit être un entier ≥ 0.'
+  if (!Number.isInteger(q.readingTime) || q.readingTime < 0) return 'Le temps de lecture doit être un entier ≥ 0.'
   switch (q.type) {
     case 'mcq': {
-      if (q.options.some((o) => o.label.trim().length === 0))
-        return 'Chaque réponse doit avoir un libellé.'
+      if (q.options.some((o) => o.label.trim().length === 0)) return 'Chaque réponse doit avoir un libellé.'
       if (!q.options.some((o) => o.correct)) return 'Choisissez la bonne réponse.'
       return null
     }
     case 'poll':
-      return q.options.some((o) => o.label.trim().length === 0)
-        ? 'Chaque choix doit avoir un libellé.'
-        : null
+      return q.options.some((o) => o.label.trim().length === 0) ? 'Chaque choix doit avoir un libellé.' : null
     case 'text':
-      return q.acceptedAnswers.some((a) => a.trim().length > 0)
-        ? null
-        : 'Ajoutez au moins une réponse acceptée.'
+      return q.acceptedAnswers.some((a) => a.trim().length > 0) ? null : 'Ajoutez au moins une réponse acceptée.'
     case 'slider':
       if (q.min >= q.max) return 'Le minimum doit être inférieur au maximum.'
       if (q.correctValue < q.min || q.correctValue > q.max)
@@ -346,8 +345,7 @@ function fieldErrors(q: Question): Record<string, string> {
   switch (q.type) {
     case 'mcq':
       q.options.forEach((o, i) => {
-        if (o.label.trim().length === 0)
-          errs[`mcq-label-${o.id}`] = `Réponse ${i + 1} : libellé manquant.`
+        if (o.label.trim().length === 0) errs[`mcq-label-${o.id}`] = `Réponse ${i + 1} : libellé manquant.`
       })
       if (!q.options.some((o) => o.correct)) errs['mcq-correct'] = 'Choisissez la bonne réponse.'
       break
@@ -366,8 +364,7 @@ function fieldErrors(q: Question): Record<string, string> {
         errs['q-slider-max'] = 'Le minimum doit être inférieur au maximum.'
       }
       if (q.correctValue < q.min || q.correctValue > q.max)
-        errs['q-slider-correct'] =
-          'La valeur correcte doit être comprise entre le minimum et le maximum.'
+        errs['q-slider-correct'] = 'La valeur correcte doit être comprise entre le minimum et le maximum.'
       if (!(q.step > 0)) errs['q-slider-step'] = 'Le pas doit être positif.'
       break
     case 'truefalse':
@@ -704,9 +701,7 @@ export function HostEditor() {
 
   function updateSelected(patch: Partial<Question>) {
     if (!selected) return
-    setQuestions((prev) =>
-      prev.map((q) => (q.id === selected.id ? ({ ...q, ...patch } as Question) : q)),
-    )
+    setQuestions((prev) => prev.map((q) => (q.id === selected.id ? ({ ...q, ...patch } as Question) : q)))
   }
 
   /** Applies a new type LOCALLY only — used to build the create-input for the
@@ -892,9 +887,7 @@ export function HostEditor() {
       // (back at its original position) and correct the record for
       // screen-reader users, who otherwise never learn the move didn't stick.
       pendingFocus.current = { kind: 'item', id: moved.id }
-      setAnnouncement(
-        `Déplacement annulé, la question est revenue en position ${index + 1}.`,
-      )
+      setAnnouncement(`Déplacement annulé, la question est revenue en position ${index + 1}.`)
     }
   }
 
@@ -1098,21 +1091,14 @@ export function HostEditor() {
         />
       </div>
 
-      <main
-        className="ab-shell__main"
-        id="contenu-principal"
-        tabIndex={-1}
-        aria-hidden={modalOpen ? true : undefined}
-      >
+      <main className="ab-shell__main" id="contenu-principal" tabIndex={-1} aria-hidden={modalOpen ? true : undefined}>
         <h1 style={{ marginBottom: 'var(--space-4)' }}>Éditeur de quiz</h1>
 
         {/* Quiz archivé : l'id `host-launch-reason` porte ici la raison du blocage du lancement
             (référencée par l'`aria-describedby` du bouton « Lancer la partie »). */}
         {isArchived && (
           <div className="host-archived">
-            <p id="host-launch-reason">
-              Ce quiz est archivé. Restaurez-le pour pouvoir lancer une partie.
-            </p>
+            <p id="host-launch-reason">Ce quiz est archivé. Restaurez-le pour pouvoir lancer une partie.</p>
             <Button variant="primary" type="button" disabled={restorePending} onClick={() => void handleRestore()}>
               {restorePending ? 'Restauration…' : 'Restaurer'}
             </Button>
@@ -1213,9 +1199,7 @@ export function HostEditor() {
                           aria-current={q.id === selectedId ? 'true' : undefined}
                         >
                           <span className="host-list__index">{index + 1}</span>
-                          <span className="host-list__prompt">
-                            {q.prompt.trim() || 'Question sans intitulé'}
-                          </span>
+                          <span className="host-list__prompt">{q.prompt.trim() || 'Question sans intitulé'}</span>
                           {error && (
                             <span
                               className="host-badge host-badge--warn"
@@ -1261,14 +1245,15 @@ export function HostEditor() {
                   Ajouter une question
                 </Button>
               </div>
-              <SourcesPanel quizSource={quiz?.source ?? null} questionSources={questions.map((q) => q.source ?? null)} />
+              <SourcesPanel
+                quizSource={quiz?.source ?? null}
+                questionSources={questions.map((q) => q.source ?? null)}
+              />
             </section>
 
             <section className="host-panel" aria-label="Formulaire de question">
               {!selected ? (
-                <p className="ab-empty-state">
-                  Aucune question sélectionnée. Ajoutez une question pour commencer.
-                </p>
+                <p className="ab-empty-state">Aucune question sélectionnée. Ajoutez une question pour commencer.</p>
               ) : (
                 <form className="host-form" onSubmit={(e) => e.preventDefault()}>
                   {(() => {
@@ -1359,9 +1344,7 @@ export function HostEditor() {
 
                   {(selected.type === 'mcq' || selected.type === 'poll') && (
                     <fieldset className="host-field">
-                      <legend>
-                        {selected.type === 'poll' ? 'Choix' : 'Réponses (cochez la bonne réponse)'}
-                      </legend>
+                      <legend>{selected.type === 'poll' ? 'Choix' : 'Réponses (cochez la bonne réponse)'}</legend>
                       {selected.type === 'mcq' && fErrors['mcq-correct'] && (
                         <p className="host-inline-error" id="mcq-correct-error">
                           {fErrors['mcq-correct']}
@@ -1430,10 +1413,7 @@ export function HostEditor() {
                               </button>
                             )}
                             {fErrors[`${selected.type}-label-${opt.id}`] && (
-                              <p
-                                className="host-inline-error"
-                                id={`${selected.type}-label-${opt.id}-error`}
-                              >
+                              <p className="host-inline-error" id={`${selected.type}-label-${opt.id}-error`}>
                                 {fErrors[`${selected.type}-label-${opt.id}`]}
                               </p>
                             )}
@@ -1469,9 +1449,7 @@ export function HostEditor() {
                         <input
                           type="checkbox"
                           checked={selected.multiple}
-                          onChange={(e) =>
-                            updateSelected({ multiple: e.target.checked } as Partial<PollQuestion>)
-                          }
+                          onChange={(e) => updateSelected({ multiple: e.target.checked } as Partial<PollQuestion>)}
                         />
                         Plusieurs réponses possibles
                       </label>
@@ -1530,9 +1508,7 @@ export function HostEditor() {
                               }}
                               aria-invalid={fErrors[`text-answer-${index}`] ? true : undefined}
                               aria-describedby={
-                                fErrors[`text-answer-${index}`]
-                                  ? `text-answer-${index}-error`
-                                  : undefined
+                                fErrors[`text-answer-${index}`] ? `text-answer-${index}-error` : undefined
                               }
                             />
                             <button
@@ -1541,9 +1517,7 @@ export function HostEditor() {
                               aria-label={`Supprimer la variante ${index + 1}`}
                               disabled={selected.acceptedAnswers.length <= 1}
                               onClick={() => {
-                                const acceptedAnswers = selected.acceptedAnswers.filter(
-                                  (_, i) => i !== index,
-                                )
+                                const acceptedAnswers = selected.acceptedAnswers.filter((_, i) => i !== index)
                                 updateSelected({ acceptedAnswers } as Partial<TextQuestion>)
                               }}
                             >
@@ -1638,9 +1612,7 @@ export function HostEditor() {
                           value={selected.correctValue}
                           onChange={(e) => updateSelected({ correctValue: Number(e.target.value) })}
                           aria-invalid={fErrors['q-slider-correct'] ? true : undefined}
-                          aria-describedby={
-                            fErrors['q-slider-correct'] ? 'q-slider-correct-error' : undefined
-                          }
+                          aria-describedby={fErrors['q-slider-correct'] ? 'q-slider-correct-error' : undefined}
                         />
                         {fErrors['q-slider-correct'] && (
                           <p className="host-inline-error" id="q-slider-correct-error">
@@ -1727,19 +1699,13 @@ export function HostEditor() {
           >
             <h2 id="host-dialog-title">Changer le type de question ?</h2>
             <p id="host-dialog-desc" style={{ color: 'var(--ink-dim)' }}>
-              Les réponses saisies pour cette question seront effacées. Le reste (intitulé,
-              durée) est conservé.
+              Les réponses saisies pour cette question seront effacées. Le reste (intitulé, durée) est conservé.
             </p>
             <div className="host-dialog__actions">
               <Button variant="ghost" type="button" onClick={cancelTypeChange}>
                 Annuler
               </Button>
-              <Button
-                variant="danger"
-                type="button"
-                onClick={confirmTypeChange}
-                ref={dialogConfirmRef}
-              >
+              <Button variant="danger" type="button" onClick={confirmTypeChange} ref={dialogConfirmRef}>
                 Changer de type
               </Button>
             </div>

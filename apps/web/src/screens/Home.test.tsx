@@ -49,9 +49,18 @@ import { Home } from './Home'
  * data. */
 function makeSessions(): SessionSummary[] {
   const statuses: SessionStatus[] = [
-    'ended', 'ended', 'ended', 'ended', 'ended',
-    'active', 'active', 'active',
-    'lobby', 'lobby', 'lobby', 'lobby',
+    'ended',
+    'ended',
+    'ended',
+    'ended',
+    'ended',
+    'active',
+    'active',
+    'active',
+    'lobby',
+    'lobby',
+    'lobby',
+    'lobby',
   ]
   return statuses.map((status, i) => ({
     id: `s${i}`,
@@ -162,7 +171,7 @@ describe('Home', () => {
     expect(motif).toHaveAttribute('aria-hidden', 'true')
   })
 
-  it('limite l\'historique à 8 lignes avec un bouton « Voir tout l\'historique »', async () => {
+  it("limite l'historique à 8 lignes avec un bouton « Voir tout l'historique »", async () => {
     const { listSessions } = await import('../api/sessions')
     // Home (Task 9) issues two independent listSessions() calls in this
     // order: En cours (lobby/active) first, Historique (ended/abandoned)
@@ -197,22 +206,46 @@ describe('Home', () => {
     vi.mocked(listSessions)
       .mockResolvedValueOnce([
         {
-          id: 'live-1', pin: '111111', status: 'active', startedAt: '2026-07-20T10:00:00.000Z',
-          endedAt: null, quizId: 'q1', quizTitle: 'Partie en cours', playerCount: 2,
+          id: 'live-1',
+          pin: '111111',
+          status: 'active',
+          startedAt: '2026-07-20T10:00:00.000Z',
+          endedAt: null,
+          quizId: 'q1',
+          quizTitle: 'Partie en cours',
+          playerCount: 2,
         },
         {
-          id: 'lobby-1', pin: '222222', status: 'lobby', startedAt: null,
-          endedAt: null, quizId: 'q1', quizTitle: 'Partie en attente', playerCount: 0,
+          id: 'lobby-1',
+          pin: '222222',
+          status: 'lobby',
+          startedAt: null,
+          endedAt: null,
+          quizId: 'q1',
+          quizTitle: 'Partie en attente',
+          playerCount: 0,
         },
       ])
       .mockResolvedValueOnce([
         {
-          id: 'ended-1', pin: '333333', status: 'ended', startedAt: '2026-07-20T10:00:00.000Z',
-          endedAt: '2026-07-20T10:30:00.000Z', quizId: 'q1', quizTitle: 'Partie terminée', playerCount: 4,
+          id: 'ended-1',
+          pin: '333333',
+          status: 'ended',
+          startedAt: '2026-07-20T10:00:00.000Z',
+          endedAt: '2026-07-20T10:30:00.000Z',
+          quizId: 'q1',
+          quizTitle: 'Partie terminée',
+          playerCount: 4,
         },
         {
-          id: 'abandoned-1', pin: '444444', status: 'abandoned', startedAt: '2026-07-20T10:00:00.000Z',
-          endedAt: '2026-07-20T10:20:00.000Z', quizId: 'q1', quizTitle: 'Partie abandonnée', playerCount: 1,
+          id: 'abandoned-1',
+          pin: '444444',
+          status: 'abandoned',
+          startedAt: '2026-07-20T10:00:00.000Z',
+          endedAt: '2026-07-20T10:20:00.000Z',
+          quizId: 'q1',
+          quizTitle: 'Partie abandonnée',
+          playerCount: 1,
         },
       ])
 
@@ -296,7 +329,7 @@ describe('Home', () => {
     expect(within(card as HTMLElement).getByText('Ouvrir →')).toBeInTheDocument()
   })
 
-  it('le bouton « Lancer » d\'une carte lance la partie sur la socket partagée et navigue vers /host/:id', async () => {
+  it("le bouton « Lancer » d'une carte lance la partie sur la socket partagée et navigue vers /host/:id", async () => {
     mockEmitAck.mockResolvedValueOnce({ sessionId: 's1', pin: '123456' })
 
     render(
@@ -330,18 +363,36 @@ describe('Home', () => {
     vi.mocked(listSessions)
       .mockResolvedValueOnce([
         {
-          id: 'live-1', pin: '111111', status: 'active', startedAt: '2026-07-20T10:00:00.000Z',
-          endedAt: null, quizId: 'q1', quizTitle: 'Partie en cours', playerCount: 2,
+          id: 'live-1',
+          pin: '111111',
+          status: 'active',
+          startedAt: '2026-07-20T10:00:00.000Z',
+          endedAt: null,
+          quizId: 'q1',
+          quizTitle: 'Partie en cours',
+          playerCount: 2,
         },
         {
-          id: 'lobby-1', pin: '222222', status: 'lobby', startedAt: null,
-          endedAt: null, quizId: 'q1', quizTitle: 'Partie en attente', playerCount: 0,
+          id: 'lobby-1',
+          pin: '222222',
+          status: 'lobby',
+          startedAt: null,
+          endedAt: null,
+          quizId: 'q1',
+          quizTitle: 'Partie en attente',
+          playerCount: 0,
         },
       ])
       .mockResolvedValueOnce([
         {
-          id: 'ended-1', pin: '333333', status: 'ended', startedAt: '2026-07-20T10:00:00.000Z',
-          endedAt: '2026-07-20T10:30:00.000Z', quizId: 'q1', quizTitle: 'Partie terminée', playerCount: 4,
+          id: 'ended-1',
+          pin: '333333',
+          status: 'ended',
+          startedAt: '2026-07-20T10:00:00.000Z',
+          endedAt: '2026-07-20T10:30:00.000Z',
+          quizId: 'q1',
+          quizTitle: 'Partie terminée',
+          playerCount: 4,
         },
       ])
 
@@ -465,7 +516,7 @@ describe('Home', () => {
       )
     }
 
-    it('« Archiver » ouvre une confirmation ; Annuler ne fait rien, confirmer retire la carte et l\'annonce', async () => {
+    it("« Archiver » ouvre une confirmation ; Annuler ne fait rien, confirmer retire la carte et l'annonce", async () => {
       const { archiveQuiz } = await import('../api/quizzes')
       vi.mocked(archiveQuiz).mockResolvedValueOnce({ ...archivedQuiz, id: 'q1', title: 'Culture G' })
       renderHome()
@@ -499,7 +550,7 @@ describe('Home', () => {
       expect(screen.getByRole('heading', { name: 'Mes quiz' })).toHaveFocus()
     })
 
-    it('la section « Archivés » charge les quiz archivés à l\'ouverture et « Restaurer » les remet dans « Mes quiz »', async () => {
+    it("la section « Archivés » charge les quiz archivés à l'ouverture et « Restaurer » les remet dans « Mes quiz »", async () => {
       const { listQuizzes, restoreQuiz } = await import('../api/quizzes')
       vi.mocked(restoreQuiz).mockResolvedValueOnce({ ...archivedQuiz, archivedAt: null })
       renderHome()
@@ -533,7 +584,9 @@ describe('Home', () => {
     it("« Restaurer » refusé faute d'adresse confirmée : message dédié et renvoi sur place", async () => {
       const { listQuizzes, restoreQuiz } = await import('../api/quizzes')
       const { ApiError } = await import('../api/client')
-      vi.mocked(restoreQuiz).mockRejectedValueOnce(new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'))
+      vi.mocked(restoreQuiz).mockRejectedValueOnce(
+        new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'),
+      )
       mockSendVerificationEmail.mockResolvedValue(undefined)
       renderHome()
       await waitFor(() => expect(screen.getByText('Culture G')).toBeInTheDocument())

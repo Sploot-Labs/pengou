@@ -39,7 +39,7 @@ export function applyTermsOnUserCreate<U extends Record<string, unknown>>(
   if (body.ageConfirmed !== true) {
     throw new APIError('BAD_REQUEST', {
       code: TERMS_ACCEPTANCE_REQUIRED,
-      message: "Confirmez que vous avez 15 ans ou plus pour créer un compte.",
+      message: 'Confirmez que vous avez 15 ans ou plus pour créer un compte.',
     })
   }
   if (body.acceptedTermsVersion !== termsVersion) {

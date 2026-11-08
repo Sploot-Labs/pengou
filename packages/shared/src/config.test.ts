@@ -66,14 +66,18 @@ describe('loadConfig', () => {
 })
 
 describe('loadConfig — inactivité/balayage', () => {
-  it('défauts : 30 min d\'inactivité, 5 min de balayage (en ms)', () => {
+  it("défauts : 30 min d'inactivité, 5 min de balayage (en ms)", () => {
     const c = loadConfig({ NODE_ENV: 'test' })
     expect(c.sessionInactivityTimeoutMs).toBe(30 * 60_000)
     expect(c.sessionSweepIntervalMs).toBe(5 * 60_000)
   })
 
   it('surcharge via env (minutes → ms)', () => {
-    const c = loadConfig({ NODE_ENV: 'test', SESSION_INACTIVITY_TIMEOUT_MINUTES: '10', SESSION_SWEEP_INTERVAL_MINUTES: '1' })
+    const c = loadConfig({
+      NODE_ENV: 'test',
+      SESSION_INACTIVITY_TIMEOUT_MINUTES: '10',
+      SESSION_SWEEP_INTERVAL_MINUTES: '1',
+    })
     expect(c.sessionInactivityTimeoutMs).toBe(10 * 60_000)
     expect(c.sessionSweepIntervalMs).toBe(1 * 60_000)
   })
@@ -198,16 +202,21 @@ describe('messagerie', () => {
   it('variables vides traitées comme absentes', () => {
     expect(loadConfig({ MAIL_TRANSPORT: '' }).mail.transport).toBe('none')
     const c = loadConfig({
-      MAIL_TRANSPORT: 'smtp', SMTP_HOST: 'h', MAIL_FROM: 'a@b.fr', SMTP_USER: '', SMTP_PASSWORD: ' ', SMTP_PORT: '',
+      MAIL_TRANSPORT: 'smtp',
+      SMTP_HOST: 'h',
+      MAIL_FROM: 'a@b.fr',
+      SMTP_USER: '',
+      SMTP_PASSWORD: ' ',
+      SMTP_PORT: '',
     })
     if (c.mail.transport === 'smtp') {
       expect(c.mail.smtp.user).toBeUndefined()
       expect(c.mail.smtp.password).toBeUndefined()
       expect(c.mail.smtp.port).toBe(587)
     }
-    expect(() =>
-      loadConfig({ MAIL_TRANSPORT: 'brevo', MAIL_FROM: 'a@b.fr', BREVO_API_KEY: '' }),
-    ).toThrow(/BREVO_API_KEY/)
+    expect(() => loadConfig({ MAIL_TRANSPORT: 'brevo', MAIL_FROM: 'a@b.fr', BREVO_API_KEY: '' })).toThrow(
+      /BREVO_API_KEY/,
+    )
   })
   it('production sans transport : ne lève pas', () => {
     expect(() =>
@@ -216,7 +225,7 @@ describe('messagerie', () => {
   })
 })
 
-describe('loadConfig, conditions d\'utilisation (CGU)', () => {
+describe("loadConfig, conditions d'utilisation (CGU)", () => {
   const LEGAL = {
     LEGAL_TERMS_URL: 'https://pengou.fr/cgu/',
     LEGAL_PRIVACY_URL: 'https://pengou.fr/politique-de-confidentialite/',
@@ -239,7 +248,7 @@ describe('loadConfig, conditions d\'utilisation (CGU)', () => {
     })
   })
 
-  it('refuse une version qui n\'est pas une date AAAA-MM-JJ valide', () => {
+  it("refuse une version qui n'est pas une date AAAA-MM-JJ valide", () => {
     for (const v of ['v2', '2026-13-01', '2026-02-30', '31/10/2026']) {
       expect(() => loadConfig({ ...LEGAL, LEGAL_TERMS_VERSION: v })).toThrow(/LEGAL_TERMS_VERSION/)
     }
@@ -250,7 +259,7 @@ describe('loadConfig, conditions d\'utilisation (CGU)', () => {
     expect(() => loadConfig({ ...LEGAL, LEGAL_PRIVACY_URL: undefined })).toThrow(/LEGAL_PRIVACY_URL/)
   })
 
-  it('refuse un lien qui n\'est pas une URL http(s)', () => {
+  it("refuse un lien qui n'est pas une URL http(s)", () => {
     expect(() => loadConfig({ ...LEGAL, LEGAL_TERMS_URL: 'javascript:alert(1)' })).toThrow()
   })
 })

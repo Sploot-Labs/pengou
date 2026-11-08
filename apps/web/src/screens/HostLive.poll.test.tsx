@@ -125,7 +125,14 @@ describe('HostLive, sondage', () => {
     emitServerEvent('question:show', pollQuestion)
     emitServerEvent('question:reveal', {
       ...pollReveal,
-      poll: { ...pollReveal.poll, voters: 0, options: [{ label: 'Café', votes: 0 }, { label: 'Thé', votes: 0 }] },
+      poll: {
+        ...pollReveal.poll,
+        voters: 0,
+        options: [
+          { label: 'Café', votes: 0 },
+          { label: 'Thé', votes: 0 },
+        ],
+      },
     })
     expect(screen.getByText('Aucun vote')).toBeInTheDocument()
     expect(screen.queryByText(/NaN/)).toBeNull()
@@ -141,7 +148,7 @@ describe('HostLive, sondage', () => {
     expect(screen.getByRole('button', { name: 'Suivant' })).toBeInTheDocument()
   })
 
-  it('après un host:reconnect en phase reveal, la répartition s\'affiche (jamais le classement)', async () => {
+  it("après un host:reconnect en phase reveal, la répartition s'affiche (jamais le classement)", async () => {
     mockEmitAck.mockImplementation(async (event?: string): Promise<Record<string, unknown>> => {
       if (event === 'host:reconnect') return { sessionId: 's1', pin: '1234', phase: 'reveal' }
       return {}
@@ -158,7 +165,7 @@ describe('HostLive, sondage', () => {
     expect(screen.queryByRole('heading', { name: 'Classement' })).toBeNull()
   })
 
-  it('la révélation d\'un nuage de mots offre aussi « Suivant »', async () => {
+  it("la révélation d'un nuage de mots offre aussi « Suivant »", async () => {
     renderHostLive()
     emitServerEvent('question:show', { id: 'w1', type: 'wordcloud', prompt: 'Un mot ?', timeLimit: 30, payload: {} })
     emitServerEvent('question:reveal', { correct: null, distribution: {} })
@@ -198,7 +205,12 @@ describe('HostLive, sondage', () => {
       payload: { options: [{ label: 'A' }, { label: 'B' }] },
     })
     emitServerEvent('question:reveal', {
-      correct: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+      correct: {
+        options: [
+          { label: 'A', correct: true },
+          { label: 'B', correct: false },
+        ],
+      },
       distribution: {},
     })
     expect(screen.getByRole('button', { name: 'Afficher le classement' })).toBeInTheDocument()

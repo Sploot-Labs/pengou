@@ -1,7 +1,13 @@
 import type { FastifyInstance } from 'fastify'
 import {
-  withTenantTx, listMembers, getMemberRole, countOwners, setMemberRole, removeMember,
-  revokePendingInvitationsBy, type Db,
+  withTenantTx,
+  listMembers,
+  getMemberRole,
+  countOwners,
+  setMemberRole,
+  removeMember,
+  revokePendingInvitationsBy,
+  type Db,
 } from '@splootlabs/db'
 import { hasPermission, type AppConfig, type Role } from '@splootlabs/shared'
 import { requireUser } from '../require-user.js'
@@ -34,7 +40,9 @@ export function registerMemberRoutes(app: FastifyInstance, deps: Deps): void {
   })
 
   app.patch<{ Params: { tenantId: string; userId: string } }>(
-    '/api/workspaces/:tenantId/members/:userId', guard, async (request, reply) => {
+    '/api/workspaces/:tenantId/members/:userId',
+    guard,
+    async (request, reply) => {
       const actor = request.workspace!
       const targetUserId = request.params.userId
       const body = request.body as { role?: unknown } | undefined
@@ -63,10 +71,13 @@ export function registerMemberRoutes(app: FastifyInstance, deps: Deps): void {
         if (!hasPermission(nextRole, 'members:manage')) await revokePendingInvitationsBy(scope, targetUserId)
         return updated
       })
-    })
+    },
+  )
 
   app.delete<{ Params: { tenantId: string; userId: string } }>(
-    '/api/workspaces/:tenantId/members/:userId', guard, async (request, reply) => {
+    '/api/workspaces/:tenantId/members/:userId',
+    guard,
+    async (request, reply) => {
       const actor = request.workspace!
       const targetUserId = request.params.userId
 
@@ -84,5 +95,6 @@ export function registerMemberRoutes(app: FastifyInstance, deps: Deps): void {
         await revokePendingInvitationsBy(scope, targetUserId)
         return { ok: true }
       })
-    })
+    },
+  )
 }

@@ -198,7 +198,12 @@ describe('BigScreen, sondage', () => {
       payload: { options: [{ label: 'Loire' }, { label: 'Rhône' }] },
     })
     emitServerEvent('question:reveal', {
-      correct: { options: [{ label: 'Loire', correct: true }, { label: 'Rhône', correct: false }] },
+      correct: {
+        options: [
+          { label: 'Loire', correct: true },
+          { label: 'Rhône', correct: false },
+        ],
+      },
       distribution: {},
     })
     emitServerEvent('auto:advance', { nextAt: Date.now() + 8000 })
@@ -219,7 +224,12 @@ describe('BigScreen, sondage', () => {
     })
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
     emitServerEvent('question:reveal', {
-      correct: { options: [{ label: 'Lisbonne', correct: true }, { label: 'Madrid', correct: false }] },
+      correct: {
+        options: [
+          { label: 'Lisbonne', correct: true },
+          { label: 'Madrid', correct: false },
+        ],
+      },
       distribution: {},
     })
     emitServerEvent('scoreboard', ranking)

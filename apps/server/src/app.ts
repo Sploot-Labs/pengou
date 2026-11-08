@@ -61,7 +61,9 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
   }
   const logger = deps.logStream
     ? { ...loggerOptions, stream: deps.logStream }
-    : config.nodeEnv !== 'test' ? loggerOptions : false
+    : config.nodeEnv !== 'test'
+      ? loggerOptions
+      : false
   const app = Fastify({
     logger,
     logController: new SanitizedLogController(),

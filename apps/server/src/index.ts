@@ -1,8 +1,15 @@
 import { join } from 'node:path'
 import { loadConfig } from '@splootlabs/shared'
 import {
-  createDb, createAppDb, deriveAppUrl, ensureAppRole, setAppRolePassword,
-  runMigrations, ensureDefaultTenant, pingDb, syncLibrary,
+  createDb,
+  createAppDb,
+  deriveAppUrl,
+  ensureAppRole,
+  setAppRolePassword,
+  runMigrations,
+  ensureDefaultTenant,
+  pingDb,
+  syncLibrary,
 } from '@splootlabs/db'
 import { readCatalog } from '@splootlabs/library'
 import { createAuth, enabledSocialProviders } from '@splootlabs/auth'
@@ -35,7 +42,8 @@ await applyAppRolePassword(config, (password) => setAppRolePassword(client, APP_
 if (config.migrateOnBoot) await runMigrations(systemDb)
 if (config.tenancyMode === 'single') await ensureDefaultTenant(systemDb)
 
-const appUrl = config.appDatabaseUrl ?? deriveAppUrl(config.databaseUrl, { user: APP_ROLE, password: config.appDbPassword })
+const appUrl =
+  config.appDatabaseUrl ?? deriveAppUrl(config.databaseUrl, { user: APP_ROLE, password: config.appDbPassword })
 const { db: appDb, client: appClient } = createAppDb(appUrl)
 
 let dbUp = true
@@ -54,7 +62,7 @@ if (!mailer.enabled && config.nodeEnv === 'production') {
 }
 
 if (config.nodeEnv === 'production' && config.mail.transport === 'smtp' && !config.mail.smtp.requireTls) {
-  app.log.warn("SMTP_REQUIRE_TLS=false : les e-mails sont envoyés en SMTP sans TLS obligatoire.")
+  app.log.warn('SMTP_REQUIRE_TLS=false : les e-mails sont envoyés en SMTP sans TLS obligatoire.')
 }
 
 const auth = createAuth(systemDb, {

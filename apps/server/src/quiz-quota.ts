@@ -20,7 +20,9 @@ export async function assertCanOwnAnotherQuiz(
   opts: QuotaOpts,
 ): Promise<null | { status: 403; body: { error: string; code: typeof QUIZ_LIMIT_CODE } }> {
   if (!quizQuotaApplies({ ...opts, emailVerified: user.emailVerified })) return null
-  const [row] = await systemDb.select({ n: sql<number>`count(*)::int` }).from(schema.quiz)
+  const [row] = await systemDb
+    .select({ n: sql<number>`count(*)::int` })
+    .from(schema.quiz)
     .where(and(eq(schema.quiz.ownerId, user.id), isNull(schema.quiz.archivedAt)))
   if ((row?.n ?? 0) < 1) return null
   return { status: 403, body: { error: QUIZ_LIMIT_MESSAGE, code: QUIZ_LIMIT_CODE } }

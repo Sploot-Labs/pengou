@@ -354,8 +354,11 @@ async function main() {
     }
     const name = planAuthors.size === 1 ? `OpenQuizzDB, ${[...planAuthors][0]}` : 'OpenQuizzDB, plusieurs auteurs'
     const pack = { source: { name, license: LICENSE, url: SITE }, questions, quizzes: [quiz] }
-    files.set(`composes/${plan.slug}.json`, `${JSON.stringify(pack, null, 2)}
-`)
+    files.set(
+      `composes/${plan.slug}.json`,
+      `${JSON.stringify(pack, null, 2)}
+`,
+    )
     total += questions.length
   }
   let rest = 0
@@ -365,8 +368,11 @@ async function main() {
     rest++
     const source = { name: `OpenQuizzDB, ${authors.get(id)}`, license: LICENSE, url: quizPage(id) }
     const pack = { source, questions, quizzes: [] }
-    files.set(`quiz/${String(id).padStart(4, '0')}.json`, `${JSON.stringify(pack, null, 2)}
-`)
+    files.set(
+      `quiz/${String(id).padStart(4, '0')}.json`,
+      `${JSON.stringify(pack, null, 2)}
+`,
+    )
     total += questions.length
   }
   console.log(`${total} questions, ${QUIZZES.length} quiz composés, ${rest} packs de quiz source`)

@@ -14,7 +14,9 @@ describe('SourcesPanel', () => {
     const panel = screen.getByRole('region', { name: 'Sources et licences' })
     expect(panel).toHaveTextContent('Questions 1 à 3 et 6 : OpenQuizzDB, Jean Martin.')
     expect(panel).toHaveTextContent('Question 5 : Wikiquiz.')
-    expect(panel).toHaveTextContent('Licences CC BY-SA 4.0 et CC0. Vos modifications de ces contenus restent sous cette licence. Crédits et licences')
+    expect(panel).toHaveTextContent(
+      'Licences CC BY-SA 4.0 et CC0. Vos modifications de ces contenus restent sous cette licence. Crédits et licences',
+    )
   })
 
   it("cite le quiz d'origine quand aucune question n'a de source", () => {

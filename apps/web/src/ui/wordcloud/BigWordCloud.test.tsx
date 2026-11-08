@@ -107,7 +107,15 @@ describe('BigWordCloud', () => {
       rerender(<BigWordCloud {...base} words={[{ ...lead, count: 101 }, other]} />)
       expect(rot('other').style.transition).toBe('none')
       // « other » passe de 50 à 90 voix : plus de 20 %, la transition CSS joue.
-      rerender(<BigWordCloud {...base} words={[{ ...lead, count: 101 }, { ...other, count: 90 }]} />)
+      rerender(
+        <BigWordCloud
+          {...base}
+          words={[
+            { ...lead, count: 101 },
+            { ...other, count: 90 },
+          ]}
+        />,
+      )
       expect(rot('other').style.transition).toBe('')
     })
   })

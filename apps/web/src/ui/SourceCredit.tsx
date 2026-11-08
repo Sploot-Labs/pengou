@@ -114,7 +114,8 @@ export function SourceCredit({ source }: { source: ContentSource | null }) {
   return (
     <span className="source-credit">
       D'après <SourceName source={source} withTranslation={false} />
-      {translator && `, traduit par ${translator}`}. <CreditsLink href={creditsHref(source)}>Crédits et licence</CreditsLink>
+      {translator && `, traduit par ${translator}`}.{' '}
+      <CreditsLink href={creditsHref(source)}>Crédits et licence</CreditsLink>
     </span>
   )
 }
@@ -138,8 +139,8 @@ export function PodiumCredits({ sources }: { sources: ContentSource[] }) {
   const licenses = [...new Set(sources.map((s) => s.license))]
   return (
     <p className="source-credit podium-credits">
-      Questions issues {joinFr(names.map(deName))}, licence{licenses.length > 1 ? 's' : ''} {joinFr(licenses)}.
-      Crédits : {window.location.host}
+      Questions issues {joinFr(names.map(deName))}, licence{licenses.length > 1 ? 's' : ''} {joinFr(licenses)}. Crédits
+      : {window.location.host}
       {CREDITS_PATH}
     </p>
   )
@@ -183,7 +184,9 @@ export function SourcesPanel({
   })
   const sourced = [...groups.values()]
   if (!quizSource && sourced.length === 0) return null
-  const licenses = [...new Set([quizSource, ...sourced.map((g) => g.source)].filter((s) => s !== null).map((s) => s.license))]
+  const licenses = [
+    ...new Set([quizSource, ...sourced.map((g) => g.source)].filter((s) => s !== null).map((s) => s.license)),
+  ]
   const total = questionSources.length
 
   return (

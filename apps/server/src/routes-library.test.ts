@@ -15,16 +15,37 @@ const srcB = { name: 'Source B', license: 'CC-BY-4.0', url: 'https://example.org
 
 function q(id: string, over: Partial<SnapshotQuestion> = {}): SnapshotQuestion {
   return {
-    id, type: 'truefalse', prompt: `Énoncé ${id} ?`, payload: { answer: true }, theme: 'sciences',
-    difficulty: 'facile', language: 'fr', audience: 'tous', timeLimit: 20, readingTime: 6,
-    source: srcA, origin: 'builtin', originFile: 'builtin/a.json', ...over,
+    id,
+    type: 'truefalse',
+    prompt: `Énoncé ${id} ?`,
+    payload: { answer: true },
+    theme: 'sciences',
+    difficulty: 'facile',
+    language: 'fr',
+    audience: 'tous',
+    timeLimit: 20,
+    readingTime: 6,
+    source: srcA,
+    origin: 'builtin',
+    originFile: 'builtin/a.json',
+    ...over,
   }
 }
 
 function quiz(id: string, questionIds: string[], over: Partial<SnapshotQuiz> = {}): SnapshotQuiz {
   return {
-    id, title: `Quiz ${id}`, description: 'Une description', theme: 'sciences', difficulty: 'facile', language: 'fr',
-    audience: 'tous', questionIds, source: srcA, origin: 'builtin', originFile: 'builtin/a.json', ...over,
+    id,
+    title: `Quiz ${id}`,
+    description: 'Une description',
+    theme: 'sciences',
+    difficulty: 'facile',
+    language: 'fr',
+    audience: 'tous',
+    questionIds,
+    source: srcA,
+    origin: 'builtin',
+    originFile: 'builtin/a.json',
+    ...over,
   }
 }
 
@@ -35,7 +56,9 @@ const snapshot: CatalogSnapshot = {
     { id: 'secret', label: 'Secret', hidden: true, origin: 'instance' },
   ],
   questions: [
-    q('q1'), q('q2'), q('q3', { difficulty: 'difficile' }),
+    q('q1'),
+    q('q2'),
+    q('q3', { difficulty: 'difficile' }),
     q('h1', { theme: 'histoire', source: srcB, language: 'en' }),
     q('s1', { theme: 'secret' }),
   ],
@@ -48,11 +71,14 @@ beforeAll(async () => {
   await runMigrations(ctx.db)
   await syncLibrary(ctx.db, snapshot)
 }, 120_000)
-afterAll(async () => { await ctx?.stop() })
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 async function signUp(app: FastifyInstance, email: string): Promise<string> {
   const res = await app.inject({
-    method: 'POST', url: '/api/auth/sign-up/email',
+    method: 'POST',
+    url: '/api/auth/sign-up/email',
     payload: { email, password: 'motdepasse-123456', name: 'Test' },
     headers: { 'content-type': 'application/json' },
   })
@@ -64,7 +90,9 @@ async function signUp(app: FastifyInstance, email: string): Promise<string> {
 async function buildApp(mode: 'single' | 'multi' = 'single'): Promise<FastifyInstance> {
   const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: mode })
   const auth = createAuth(ctx.db, {
-    secret: 'test-secret-at-least-32-chars-long!!', baseURL: 'http://localhost:3000', tenancyMode: config.tenancyMode,
+    secret: 'test-secret-at-least-32-chars-long!!',
+    baseURL: 'http://localhost:3000',
+    tenancyMode: config.tenancyMode,
   })
   const app = await buildServer(config, { dbStatus: () => 'up' })
   await registerAuth(app, auth)
@@ -78,11 +106,21 @@ describe('routes /api/library', () => {
   it('401 sans cookie sur chaque route', async () => {
     const app = await buildApp()
     const calls: Array<[string, string]> = [
-      ['GET', '/api/library/meta'], ['GET', '/api/library/quizzes'], ['GET', '/api/library/quizzes/z1'], ['GET', '/api/library/questions'],
-      ['POST', '/api/library/draw'], ['POST', '/api/library/quizzes/z1/duplicate'], ['POST', '/api/library/compose'],
+      ['GET', '/api/library/meta'],
+      ['GET', '/api/library/quizzes'],
+      ['GET', '/api/library/quizzes/z1'],
+      ['GET', '/api/library/questions'],
+      ['POST', '/api/library/draw'],
+      ['POST', '/api/library/quizzes/z1/duplicate'],
+      ['POST', '/api/library/compose'],
     ]
     for (const [method, url] of calls) {
-      const res = await app.inject({ method: method as 'GET' | 'POST', url, payload: method === 'POST' ? {} : undefined, headers: json })
+      const res = await app.inject({
+        method: method as 'GET' | 'POST',
+        url,
+        payload: method === 'POST' ? {} : undefined,
+        headers: json,
+      })
       expect(res.statusCode, url).toBe(401)
     }
     await app.close()
@@ -93,7 +131,12 @@ describe('routes /api/library', () => {
     const cookie = await signUp(app, 'lib-meta@example.com')
     const res = await app.inject({ method: 'GET', url: '/api/library/meta', headers: { cookie } })
     expect(res.statusCode).toBe(200)
-    const body = res.json() as { themes: { id: string }[]; difficulties: string[]; audiences: string[]; languages: string[] }
+    const body = res.json() as {
+      themes: { id: string }[]
+      difficulties: string[]
+      audiences: string[]
+      languages: string[]
+    }
     expect(body.themes.map((t) => t.id).sort()).toEqual(['histoire', 'sciences'])
     expect(body.difficulties).toEqual(['facile', 'moyen', 'difficile'])
     expect(body.audiences).toEqual(['enfants', 'adultes', 'tous'])
@@ -105,7 +148,9 @@ describe('routes /api/library', () => {
     const app = await buildApp()
     const cookie = await signUp(app, 'lib-quizzes@example.com')
     const all = await app.inject({ method: 'GET', url: '/api/library/quizzes', headers: { cookie } })
-    expect((all.json() as { id: string; questionCount: number }[]).map((z) => [z.id, z.questionCount])).toEqual([['z1', 3]])
+    expect((all.json() as { id: string; questionCount: number }[]).map((z) => [z.id, z.questionCount])).toEqual([
+      ['z1', 3],
+    ])
     const none = await app.inject({ method: 'GET', url: '/api/library/quizzes?theme=histoire', headers: { cookie } })
     expect(none.json()).toEqual([])
     const bad = await app.inject({ method: 'GET', url: '/api/library/quizzes?audience=martiens', headers: { cookie } })
@@ -147,7 +192,8 @@ describe('routes /api/library', () => {
   it('draw renvoie au plus le disponible et refuse un count invalide', async () => {
     const app = await buildApp()
     const cookie = await signUp(app, 'lib-draw@example.com')
-    const post = (payload: unknown) => app.inject({ method: 'POST', url: '/api/library/draw', payload: payload as object, headers: { ...json, cookie } })
+    const post = (payload: unknown) =>
+      app.inject({ method: 'POST', url: '/api/library/draw', payload: payload as object, headers: { ...json, cookie } })
 
     const res = await post({ filters: { theme: 'sciences' }, count: 10, excludeIds: ['q1'] })
     expect(res.statusCode).toBe(200)
@@ -158,7 +204,9 @@ describe('routes /api/library', () => {
     expect((await post({ filters: {}, count: 51 })).statusCode).toBe(400)
     expect((await post({ filters: {}, count: 1.5 })).statusCode).toBe(400)
     expect((await post({ filters: { difficulty: 'extreme' }, count: 1 })).statusCode).toBe(400)
-    expect((await post({ filters: {}, count: 1, excludeIds: Array.from({ length: 201 }, (_, i) => `x${i}`) })).statusCode).toBe(400)
+    expect(
+      (await post({ filters: {}, count: 1, excludeIds: Array.from({ length: 201 }, (_, i) => `x${i}`) })).statusCode,
+    ).toBe(400)
     await app.close()
   })
 
@@ -188,9 +236,13 @@ describe('routes /api/library', () => {
     expect(created.title).toBe('Quiz z1')
     expect(created.source).toEqual(srcA)
 
-    const list = (await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie } })).json() as { id: string }[]
+    const list = (await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie } })).json() as {
+      id: string
+    }[]
     expect(list.map((z) => z.id)).toContain(created.id)
-    const qs = (await app.inject({ method: 'GET', url: `/api/quizzes/${created.id}/questions`, headers: { cookie } })).json() as { prompt: string; source: unknown }[]
+    const qs = (
+      await app.inject({ method: 'GET', url: `/api/quizzes/${created.id}/questions`, headers: { cookie } })
+    ).json() as { prompt: string; source: unknown }[]
     expect(qs.map((x) => x.prompt)).toEqual(['Énoncé q3 ?', 'Énoncé q1 ?', 'Énoncé q2 ?'])
     expect(qs[0].source).toEqual(srcA)
     await app.close()
@@ -211,14 +263,18 @@ describe('routes /api/library', () => {
     const app = await buildApp()
     const cookie = await signUp(app, 'lib-compose@example.com')
     const res = await app.inject({
-      method: 'POST', url: '/api/library/compose',
-      payload: { title: 'Mon mélange', questionIds: ['h1', 'q2'] }, headers: { ...json, cookie },
+      method: 'POST',
+      url: '/api/library/compose',
+      payload: { title: 'Mon mélange', questionIds: ['h1', 'q2'] },
+      headers: { ...json, cookie },
     })
     expect(res.statusCode).toBe(201)
     const created = res.json() as { id: string; title: string; source: unknown }
     expect(created.title).toBe('Mon mélange')
     expect(created.source).toBeNull()
-    const qs = (await app.inject({ method: 'GET', url: `/api/quizzes/${created.id}/questions`, headers: { cookie } })).json() as { prompt: string; source: unknown }[]
+    const qs = (
+      await app.inject({ method: 'GET', url: `/api/quizzes/${created.id}/questions`, headers: { cookie } })
+    ).json() as { prompt: string; source: unknown }[]
     expect(qs.map((x) => x.prompt)).toEqual(['Énoncé h1 ?', 'Énoncé q2 ?'])
     expect(qs.map((x) => x.source)).toEqual([srcB, srcA])
     await app.close()
@@ -227,9 +283,18 @@ describe('routes /api/library', () => {
   it('compose : 404 sur id inconnu ou masqué sans créer de quiz, 400 sur entrées invalides', async () => {
     const app = await buildApp()
     const cookie = await signUp(app, 'lib-compose-bad@example.com')
-    const post = (payload: unknown) => app.inject({ method: 'POST', url: '/api/library/compose', payload: payload as object, headers: { ...json, cookie } })
+    const post = (payload: unknown) =>
+      app.inject({
+        method: 'POST',
+        url: '/api/library/compose',
+        payload: payload as object,
+        headers: { ...json, cookie },
+      })
 
-    for (const ids of [['q1', 'inconnu'], ['q1', 's1']]) {
+    for (const ids of [
+      ['q1', 'inconnu'],
+      ['q1', 's1'],
+    ]) {
       const res = await post({ title: 'X', questionIds: ids })
       expect(res.statusCode).toBe(404)
       expect(res.json()).toEqual({ error: 'Question introuvable dans la bibliothèque.' })
@@ -241,30 +306,49 @@ describe('routes /api/library', () => {
     expect((await post({ title: 'x'.repeat(201), questionIds: ['q1'] })).statusCode).toBe(400)
     expect((await post({ title: 'X', questionIds: [] })).statusCode).toBe(400)
     expect((await post({ title: 'X', questionIds: ['q1', 'q1'] })).statusCode).toBe(400)
-    expect((await post({ title: 'X', questionIds: Array.from({ length: 101 }, (_, i) => `x${i}`) })).statusCode).toBe(400)
+    expect((await post({ title: 'X', questionIds: Array.from({ length: 101 }, (_, i) => `x${i}`) })).statusCode).toBe(
+      400,
+    )
     await app.close()
   })
 
   it("un member d'un workspace qui compose voit et peut modifier son quiz", async () => {
     const app = await buildApp('multi')
     const ownerCookie = await signUp(app, 'lib-ws-owner@example.com')
-    const ws = (await app.inject({ method: 'GET', url: '/api/workspaces', headers: { cookie: ownerCookie } })).json() as { workspaces: { tenantId: string }[] }
+    const ws = (
+      await app.inject({ method: 'GET', url: '/api/workspaces', headers: { cookie: ownerCookie } })
+    ).json() as { workspaces: { tenantId: string }[] }
     const tenantId = ws.workspaces[0].tenantId
     const inv = await app.inject({
-      method: 'POST', url: `/api/workspaces/${tenantId}/invitations`,
-      payload: { email: 'lib-ws-member@example.com', role: 'member' }, headers: { ...json, cookie: ownerCookie },
+      method: 'POST',
+      url: `/api/workspaces/${tenantId}/invitations`,
+      payload: { email: 'lib-ws-member@example.com', role: 'member' },
+      headers: { ...json, cookie: ownerCookie },
     })
     const token = (inv.json() as { invitation: { token: string } }).invitation.token
     const memberCookie = await signUp(app, 'lib-ws-member@example.com')
-    expect((await app.inject({ method: 'POST', url: `/api/invitations/${token}/accept`, headers: { cookie: memberCookie } })).statusCode).toBe(200)
+    expect(
+      (await app.inject({ method: 'POST', url: `/api/invitations/${token}/accept`, headers: { cookie: memberCookie } }))
+        .statusCode,
+    ).toBe(200)
 
     const headers = { ...json, cookie: memberCookie, 'x-tenant-id': tenantId }
-    const res = await app.inject({ method: 'POST', url: '/api/library/compose', payload: { title: 'Équipe', questionIds: ['q1'] }, headers })
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/library/compose',
+      payload: { title: 'Équipe', questionIds: ['q1'] },
+      headers,
+    })
     expect(res.statusCode).toBe(201)
     const created = res.json() as { id: string }
     const list = (await app.inject({ method: 'GET', url: '/api/quizzes', headers })).json() as { id: string }[]
     expect(list.map((z) => z.id)).toContain(created.id)
-    const patch = await app.inject({ method: 'PATCH', url: `/api/quizzes/${created.id}`, payload: { title: 'Renommé' }, headers })
+    const patch = await app.inject({
+      method: 'PATCH',
+      url: `/api/quizzes/${created.id}`,
+      payload: { title: 'Renommé' },
+      headers,
+    })
     expect(patch.statusCode).toBe(200)
     await app.close()
   })
