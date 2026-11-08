@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=269"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0269-2-en",
+      "type": "mcq",
+      "prompt": "Which sea surrounds Cyprus?",
+      "payload": {
+        "options": [
+          {
+            "label": "Black Sea",
+            "correct": false
+          },
+          {
+            "label": "Red Sea",
+            "correct": false
+          },
+          {
+            "label": "North Sea",
+            "correct": false
+          },
+          {
+            "label": "Mediterranean Sea",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0269-3-en",
+      "type": "mcq",
+      "prompt": "Which language is officially spoken in the south of Cyprus?",
+      "payload": {
+        "options": [
+          {
+            "label": "Greek",
+            "correct": true
+          },
+          {
+            "label": "Italian",
+            "correct": false
+          },
+          {
+            "label": "Arabic",
+            "correct": false
+          },
+          {
+            "label": "Spanish",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0269-4-en",
+      "type": "mcq",
+      "prompt": "Which ancient civilization is strongly linked to Cyprus?",
+      "payload": {
+        "options": [
+          {
+            "label": "Greek",
+            "correct": true
+          },
+          {
+            "label": "Maya",
+            "correct": false
+          },
+          {
+            "label": "Viking",
+            "correct": false
+          },
+          {
+            "label": "Inca",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

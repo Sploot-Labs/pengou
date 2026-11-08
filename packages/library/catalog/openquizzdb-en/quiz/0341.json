@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=341"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0341-2-en",
+      "type": "mcq",
+      "prompt": "Which mountain range runs through Romania?",
+      "payload": {
+        "options": [
+          {
+            "label": "Himalayas",
+            "correct": false
+          },
+          {
+            "label": "Alps",
+            "correct": false
+          },
+          {
+            "label": "Carpathians",
+            "correct": true
+          },
+          {
+            "label": "Andes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0341-4-en",
+      "type": "mcq",
+      "prompt": "Which large historic region is found in Romania?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tuscany",
+            "correct": false
+          },
+          {
+            "label": "Bavaria",
+            "correct": false
+          },
+          {
+            "label": "Catalonia",
+            "correct": false
+          },
+          {
+            "label": "Transylvania",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=435"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0435-3-en",
+      "type": "mcq",
+      "prompt": "Which country do the Gulfs of Messinia and Corinth belong to?",
+      "payload": {
+        "options": [
+          {
+            "label": "Turkey",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "Italy",
+            "correct": false
+          },
+          {
+            "label": "Greece",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

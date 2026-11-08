@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0566-1",
+      "type": "mcq",
+      "prompt": "Quelle couleur peut être associée à une fièvre, un nain ou un rire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jaune",
+            "correct": true
+          },
+          {
+            "label": "Bleue",
+            "correct": false
+          },
+          {
+            "label": "Orange",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0596-3",
+      "type": "mcq",
+      "prompt": "Comment se prénomme le héros de la saga « Mission Impossible » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ethan",
+            "correct": true
+          },
+          {
+            "label": "Jim",
+            "correct": false
+          },
+          {
+            "label": "Luther",
+            "correct": false
+          },
+          {
+            "label": "Owen",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0225-1",
+      "type": "mcq",
+      "prompt": "Qui est le compositeur attitré des films de Steven Spielberg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Giorgio Moroder",
+            "correct": false
+          },
+          {
+            "label": "James Horner",
+            "correct": false
+          },
+          {
+            "label": "John Barry",
+            "correct": false
+          },
+          {
+            "label": "John Williams",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0309-2",
+      "type": "mcq",
+      "prompt": "De quoi est faite la mèche d'un archet de violon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crin de cheval",
+            "correct": true
+          },
+          {
+            "label": "Coton",
+            "correct": false
+          },
+          {
+            "label": "Angora",
+            "correct": false
+          },
+          {
+            "label": "Mohair",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0611-3",
+      "type": "mcq",
+      "prompt": "Comment identifier une personne sur une photo en ligne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cloud",
+            "correct": false
+          },
+          {
+            "label": "Rank",
+            "correct": false
+          },
+          {
+            "label": "ActiveX",
+            "correct": false
+          },
+          {
+            "label": "Tag",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0049-1",
+      "type": "mcq",
+      "prompt": "Combien de temps dure le mandat du président des États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "6 ans",
+            "correct": false
+          },
+          {
+            "label": "4 ans",
+            "correct": true
+          },
+          {
+            "label": "7 ans",
+            "correct": false
+          },
+          {
+            "label": "5 ans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0121-4",
+      "type": "mcq",
+      "prompt": "Quel est le surnom du stade Geoffroy-Guichard, situé à Saint-Étienne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Marmite",
+            "correct": false
+          },
+          {
+            "label": "La Cuvette",
+            "correct": false
+          },
+          {
+            "label": "Le Puits",
+            "correct": false
+          },
+          {
+            "label": "Le Chaudron",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0358-4",
+      "type": "mcq",
+      "prompt": "Quel site grec célèbre se trouve sur le Mont Parnasse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Delphes",
+            "correct": true
+          },
+          {
+            "label": "Olympie",
+            "correct": false
+          },
+          {
+            "label": "Amphipolis",
+            "correct": false
+          },
+          {
+            "label": "Lindos",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0401-1",
+      "type": "mcq",
+      "prompt": "Quel groupe de musique anglais est mené par le chanteur Jay Kay ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jamiroquai",
+            "correct": true
+          },
+          {
+            "label": "Jethro Tull",
+            "correct": false
+          },
+          {
+            "label": "Joy Division",
+            "correct": false
+          },
+          {
+            "label": "Judas Priest",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0494-3",
+      "type": "mcq",
+      "prompt": "Quel romancier du XIXe siècle s'est baptisé « le Napoléon des lettres » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Montesquieu",
+            "correct": false
+          },
+          {
+            "label": "Dumas",
+            "correct": false
+          },
+          {
+            "label": "Verlaine",
+            "correct": false
+          },
+          {
+            "label": "Balzac",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0618-2",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on un rassemblement important d'abeilles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Essaim",
+            "correct": true
+          },
+          {
+            "label": "Sac",
+            "correct": false
+          },
+          {
+            "label": "Manteau",
+            "correct": false
+          },
+          {
+            "label": "Grappe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0323-2",
+      "type": "mcq",
+      "prompt": "Dans quel club professionnel Kylian Mbappé a-t-il débuté ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lille OSC",
+            "correct": false
+          },
+          {
+            "label": "AS Monaco",
+            "correct": true
+          },
+          {
+            "label": "PSG",
+            "correct": false
+          },
+          {
+            "label": "OM",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0342-4",
+      "type": "mcq",
+      "prompt": "Quel chat est presque sans poils ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sphynx",
+            "correct": true
+          },
+          {
+            "label": "Persan",
+            "correct": false
+          },
+          {
+            "label": "Maine coon",
+            "correct": false
+          },
+          {
+            "label": "Siamois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0241-4",
+      "type": "mcq",
+      "prompt": "Quelle société française a produit l'émission « Secret Story » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sofina",
+            "correct": false
+          },
+          {
+            "label": "Tele Atlas",
+            "correct": false
+          },
+          {
+            "label": "Arcadis",
+            "correct": false
+          },
+          {
+            "label": "Endemol",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0255-4",
+      "type": "mcq",
+      "prompt": "Dans quel château est présumé être enterré Léonard de Vinci ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Amboise",
+            "correct": true
+          },
+          {
+            "label": "Sully-Sur-Loire",
+            "correct": false
+          },
+          {
+            "label": "Saumur",
+            "correct": false
+          },
+          {
+            "label": "Blois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0500-3",
+      "type": "mcq",
+      "prompt": "Quel avion possède la capacité de se poser ou de décoller sur l'eau ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hydravion",
+            "correct": true
+          },
+          {
+            "label": "Deltaplane",
+            "correct": false
+          },
+          {
+            "label": "Planeur",
+            "correct": false
+          },
+          {
+            "label": "ULM",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0219-4",
+      "type": "mcq",
+      "prompt": "Dans quel département français se dresse le phare de l'Île Vierge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Finistère",
+            "correct": true
+          },
+          {
+            "label": "Ille-et-Vilaine",
+            "correct": false
+          },
+          {
+            "label": "Morbihan",
+            "correct": false
+          },
+          {
+            "label": "Côtes-d'Armor",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0273-1",
+      "type": "mcq",
+      "prompt": "Quelle plante composait la couronne des vainqueurs dans l'Antiquité ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Persil",
+            "correct": false
+          },
+          {
+            "label": "Basilic",
+            "correct": false
+          },
+          {
+            "label": "Laurier",
+            "correct": true
+          },
+          {
+            "label": "Thym",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0175-2",
+      "type": "mcq",
+      "prompt": "Quelle marque de jeans mondialement connue fabrique le célèbre 501 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lee Cooper",
+            "correct": false
+          },
+          {
+            "label": "Levis",
+            "correct": true
+          },
+          {
+            "label": "Lacoste",
+            "correct": false
+          },
+          {
+            "label": "Lindex",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0433-3",
+      "type": "mcq",
+      "prompt": "De quel héros de fiction Lily, tuée par Lord Voldemort, est-elle la mère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mowgli",
+            "correct": false
+          },
+          {
+            "label": "Harry Potter",
+            "correct": true
+          },
+          {
+            "label": "Luke Skywalker",
+            "correct": false
+          },
+          {
+            "label": "Frodon Sacquet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-mix-culture-1",
+      "title": "Mix culture #1",
+      "description": "Un peu de tout : cinéma, sport, géographie, nature, musique et culture générale.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0566-1",
+        "oqdb-0596-3",
+        "oqdb-0225-1",
+        "oqdb-0309-2",
+        "oqdb-0611-3",
+        "oqdb-0049-1",
+        "oqdb-0121-4",
+        "oqdb-0358-4",
+        "oqdb-0401-1",
+        "oqdb-0494-3",
+        "oqdb-0618-2",
+        "oqdb-0323-2",
+        "oqdb-0342-4",
+        "oqdb-0241-4",
+        "oqdb-0255-4",
+        "oqdb-0500-3",
+        "oqdb-0219-4",
+        "oqdb-0273-1",
+        "oqdb-0175-2",
+        "oqdb-0433-3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=73"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0073-4-en",
+      "type": "mcq",
+      "prompt": "What was the first name of the father of F1 driver Jacques Villeneuve?",
+      "payload": {
+        "options": [
+          {
+            "label": "Steve",
+            "correct": false
+          },
+          {
+            "label": "Charles",
+            "correct": false
+          },
+          {
+            "label": "Gilles",
+            "correct": true
+          },
+          {
+            "label": "Christian",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

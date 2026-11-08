@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=505"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0505-2-en",
+      "type": "mcq",
+      "prompt": "Which fruit juice is sold in a sturdy pouch?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tropicana",
+            "correct": false
+          },
+          {
+            "label": "Casino",
+            "correct": false
+          },
+          {
+            "label": "Capri-Sun",
+            "correct": true
+          },
+          {
+            "label": "Andros",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0505-3-en",
+      "type": "mcq",
+      "prompt": "Which drink contains a lot of orange juice and pulp?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pressade",
+            "correct": false
+          },
+          {
+            "label": "Orangina",
+            "correct": true
+          },
+          {
+            "label": "Joker",
+            "correct": false
+          },
+          {
+            "label": "Jafaden",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

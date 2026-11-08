@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=229"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0229-1-en",
+      "type": "mcq",
+      "prompt": "Which chemical compound is sugar mainly made of?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sucrose",
+            "correct": true
+          },
+          {
+            "label": "Fructose",
+            "correct": false
+          },
+          {
+            "label": "Glucose",
+            "correct": false
+          },
+          {
+            "label": "Maltose",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0229-2-en",
+      "type": "mcq",
+      "prompt": "What is the natural sugar found in fruit called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Glucose",
+            "correct": false
+          },
+          {
+            "label": "Fructose",
+            "correct": true
+          },
+          {
+            "label": "Lactose",
+            "correct": false
+          },
+          {
+            "label": "Sucrose",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0229-3-en",
+      "type": "mcq",
+      "prompt": "How many sugar cubes are in a 33 cl can of cola?",
+      "payload": {
+        "options": [
+          {
+            "label": "About seven",
+            "correct": true
+          },
+          {
+            "label": "About three",
+            "correct": false
+          },
+          {
+            "label": "About fifteen",
+            "correct": false
+          },
+          {
+            "label": "About eleven",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0229-4-en",
+      "type": "mcq",
+      "prompt": "In what year was the sugar cube invented, made by hand?",
+      "payload": {
+        "options": [
+          {
+            "label": "1949",
+            "correct": false
+          },
+          {
+            "label": "1843",
+            "correct": true
+          },
+          {
+            "label": "1742",
+            "correct": false
+          },
+          {
+            "label": "1644",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

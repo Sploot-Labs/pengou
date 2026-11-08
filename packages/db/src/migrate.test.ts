@@ -5,8 +5,12 @@ import { runMigrations } from './migrate.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
 
-beforeAll(async () => { ctx = await startTestDb() }, 120_000)
-afterAll(async () => { await ctx?.stop() })
+beforeAll(async () => {
+  ctx = await startTestDb()
+}, 120_000)
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 describe('runMigrations', () => {
   it('applique les migrations sur une base vierge (table tenant présente)', async () => {

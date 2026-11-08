@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=79"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0079-2",
+      "type": "mcq",
+      "prompt": "Quelle bière belge a pour slogan : « Les hommes savent pourquoi » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jupiler",
+            "correct": true
+          },
+          {
+            "label": "Jopen",
+            "correct": false
+          },
+          {
+            "label": "Jacobin",
+            "correct": false
+          },
+          {
+            "label": "Judas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0079-3",
+      "type": "mcq",
+      "prompt": "« Secouez-moi, secouez-moi » a été le slogan de quelle marque ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coca-Cola",
+            "correct": false
+          },
+          {
+            "label": "Pepsi",
+            "correct": false
+          },
+          {
+            "label": "Orangina",
+            "correct": true
+          },
+          {
+            "label": "Schweppes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0079-4",
+      "type": "mcq",
+      "prompt": "Quelle marque automobile a pour slogan « Le plaisir de conduire » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "BMW",
+            "correct": true
+          },
+          {
+            "label": "Renault",
+            "correct": false
+          },
+          {
+            "label": "Mercedes-Benz",
+            "correct": false
+          },
+          {
+            "label": "Kia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

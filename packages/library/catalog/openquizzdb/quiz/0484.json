@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=484"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0484-2",
+      "type": "mcq",
+      "prompt": "Quel virage coupé est pratiqué sur les vagues en planche à voile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Slide",
+            "correct": false
+          },
+          {
+            "label": "Spin",
+            "correct": false
+          },
+          {
+            "label": "Jump",
+            "correct": false
+          },
+          {
+            "label": "Carve",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0484-3",
+      "type": "mcq",
+      "prompt": "Quelle technique permet de remonter le vent en planche à voile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crosswind",
+            "correct": false
+          },
+          {
+            "label": "Downwind",
+            "correct": false
+          },
+          {
+            "label": "Sidewind",
+            "correct": false
+          },
+          {
+            "label": "Upwind",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

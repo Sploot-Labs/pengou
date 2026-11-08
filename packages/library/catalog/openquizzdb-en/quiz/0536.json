@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=536"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0536-2-en",
+      "type": "mcq",
+      "prompt": "Which environment favors dust mites?",
+      "payload": {
+        "options": [
+          {
+            "label": "Warm and humid",
+            "correct": true
+          },
+          {
+            "label": "Windy",
+            "correct": false
+          },
+          {
+            "label": "Icy",
+            "correct": false
+          },
+          {
+            "label": "Dry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0536-3-en",
+      "type": "mcq",
+      "prompt": "About how much does the smallest known species of shrew weigh?",
+      "payload": {
+        "options": [
+          {
+            "label": "130 grams",
+            "correct": false
+          },
+          {
+            "label": "70 grams",
+            "correct": false
+          },
+          {
+            "label": "2 grams",
+            "correct": true
+          },
+          {
+            "label": "20 grams",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0536-4-en",
+      "type": "mcq",
+      "prompt": "How do millipedes protect themselves from predators?",
+      "payload": {
+        "options": [
+          {
+            "label": "With secretions",
+            "correct": true
+          },
+          {
+            "label": "By biting",
+            "correct": false
+          },
+          {
+            "label": "By camouflage",
+            "correct": false
+          },
+          {
+            "label": "By screaming",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=123"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0123-3-en",
+      "type": "mcq",
+      "prompt": "On what date do the Three Kings appear in the nativity scene?",
+      "payload": {
+        "options": [
+          {
+            "label": "January 6",
+            "correct": true
+          },
+          {
+            "label": "December 25",
+            "correct": false
+          },
+          {
+            "label": "January 1",
+            "correct": false
+          },
+          {
+            "label": "December 24",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0123-4-en",
+      "type": "mcq",
+      "prompt": "What is the scene shown by the Christmas crib called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Santon",
+            "correct": false
+          },
+          {
+            "label": "Arlésienne",
+            "correct": false
+          },
+          {
+            "label": "Nativity",
+            "correct": true
+          },
+          {
+            "label": "Jourdan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=401"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0401-2-en",
+      "type": "mcq",
+      "prompt": "What is the nickname of Jean-Paul Maunick, founder of Incognito?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bluey",
+            "correct": true
+          },
+          {
+            "label": "Greeny",
+            "correct": false
+          },
+          {
+            "label": "Redest",
+            "correct": false
+          },
+          {
+            "label": "Yellow",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0401-3-en",
+      "type": "mcq",
+      "prompt": "Which acid jazz quartet is renowned for its live performances?",
+      "payload": {
+        "options": [
+          {
+            "label": "MJQ",
+            "correct": false
+          },
+          {
+            "label": "DSQ",
+            "correct": false
+          },
+          {
+            "label": "JTQ",
+            "correct": true
+          },
+          {
+            "label": "FJQ",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0401-4-en",
+      "type": "mcq",
+      "prompt": "Which emblem appears on all albums by The Brand New Heavies?",
+      "payload": {
+        "options": [
+          {
+            "label": "A giraffe",
+            "correct": false
+          },
+          {
+            "label": "A turtle",
+            "correct": false
+          },
+          {
+            "label": "A lion",
+            "correct": false
+          },
+          {
+            "label": "An elephant",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

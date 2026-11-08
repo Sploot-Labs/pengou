@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=533"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0533-1",
+      "type": "mcq",
+      "prompt": "En 2022, qui était directrice du tournoi de Roland-Garros ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Julie Halard",
+            "correct": false
+          },
+          {
+            "label": "Mary Pierce",
+            "correct": false
+          },
+          {
+            "label": "Nathalie Tauziat",
+            "correct": false
+          },
+          {
+            "label": "Amélie Mauresmo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

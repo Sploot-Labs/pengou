@@ -1,0 +1,412 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0057-1-en",
+      "type": "mcq",
+      "prompt": "How long does the Earth take to orbit the Sun?",
+      "payload": {
+        "options": [
+          {
+            "label": "6 months",
+            "correct": false
+          },
+          {
+            "label": "365 days",
+            "correct": true
+          },
+          {
+            "label": "1 month",
+            "correct": false
+          },
+          {
+            "label": "24 hours",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0057-2-en",
+      "type": "mcq",
+      "prompt": "What is the approximate distance between the Earth and the Moon?",
+      "payload": {
+        "options": [
+          {
+            "label": "420,000 km",
+            "correct": false
+          },
+          {
+            "label": "380,000 km",
+            "correct": true
+          },
+          {
+            "label": "460,000 km",
+            "correct": false
+          },
+          {
+            "label": "340,000 km",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0057-3-en",
+      "type": "mcq",
+      "prompt": "Which star is the brightest as seen from Earth?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sirius",
+            "correct": false
+          },
+          {
+            "label": "Canopus",
+            "correct": false
+          },
+          {
+            "label": "Vega",
+            "correct": false
+          },
+          {
+            "label": "The Sun",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0057-4-en",
+      "type": "mcq",
+      "prompt": "Who made the first measurement of the Earth's circumference?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eurydice",
+            "correct": false
+          },
+          {
+            "label": "Eratosthenes",
+            "correct": true
+          },
+          {
+            "label": "Euripides",
+            "correct": false
+          },
+          {
+            "label": "Epicurus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0063-1-en",
+      "type": "mcq",
+      "prompt": "Which natural satellite is mainly responsible for the tides?",
+      "payload": {
+        "options": [
+          {
+            "label": "Neptune",
+            "correct": false
+          },
+          {
+            "label": "Mars",
+            "correct": false
+          },
+          {
+            "label": "Mercury",
+            "correct": false
+          },
+          {
+            "label": "The Moon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0063-2-en",
+      "type": "mcq",
+      "prompt": "Which natural satellite is closest to its parent planet?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deimos",
+            "correct": false
+          },
+          {
+            "label": "Titan",
+            "correct": false
+          },
+          {
+            "label": "Charon",
+            "correct": false
+          },
+          {
+            "label": "Phobos",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0063-3-en",
+      "type": "mcq",
+      "prompt": "What is the largest natural satellite in our solar system?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Moon",
+            "correct": false
+          },
+          {
+            "label": "Ganymede",
+            "correct": true
+          },
+          {
+            "label": "Umbriel",
+            "correct": false
+          },
+          {
+            "label": "Titan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0139-1-en",
+      "type": "mcq",
+      "prompt": "What is a machine taking the Turing test supposed to imitate?",
+      "payload": {
+        "options": [
+          {
+            "label": "Movement",
+            "correct": false
+          },
+          {
+            "label": "Silhouette",
+            "correct": false
+          },
+          {
+            "label": "Conversation",
+            "correct": true
+          },
+          {
+            "label": "Drawing",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0139-2-en",
+      "type": "mcq",
+      "prompt": "Which encryption machine did Alan Turing help break during the war?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deep Blue",
+            "correct": false
+          },
+          {
+            "label": "Delilah",
+            "correct": false
+          },
+          {
+            "label": "Enigma",
+            "correct": true
+          },
+          {
+            "label": "ENIAC",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0503-1-en",
+      "type": "mcq",
+      "prompt": "Who did Nikola Tesla work with after emigrating to the United States?",
+      "payload": {
+        "options": [
+          {
+            "label": "James Cash Jr.",
+            "correct": false
+          },
+          {
+            "label": "Nela Park",
+            "correct": false
+          },
+          {
+            "label": "Thomas Edison",
+            "correct": true
+          },
+          {
+            "label": "Bob Wright",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0503-2-en",
+      "type": "mcq",
+      "prompt": "How many patents did Nikola Tesla file during his life?",
+      "payload": {
+        "options": [
+          {
+            "label": "About 100",
+            "correct": false
+          },
+          {
+            "label": "About 300",
+            "correct": true
+          },
+          {
+            "label": "About 200",
+            "correct": false
+          },
+          {
+            "label": "About 400",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0503-3-en",
+      "type": "mcq",
+      "prompt": "How many languages did the polyglot Nikola Tesla speak?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eight",
+            "correct": true
+          },
+          {
+            "label": "Five",
+            "correct": false
+          },
+          {
+            "label": "Seven",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0503-4-en",
+      "type": "mcq",
+      "prompt": "With which type of current did Nikola Tesla revolutionize electricity?",
+      "payload": {
+        "options": [
+          {
+            "label": "Direct",
+            "correct": false
+          },
+          {
+            "label": "Alternating",
+            "correct": true
+          },
+          {
+            "label": "Static",
+            "correct": false
+          },
+          {
+            "label": "Inductive",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-planetes-inventeurs-en",
+      "title": "Planets and inventors",
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0057-1-en",
+        "oqdb-0057-2-en",
+        "oqdb-0057-3-en",
+        "oqdb-0057-4-en",
+        "oqdb-0063-1-en",
+        "oqdb-0063-2-en",
+        "oqdb-0063-3-en",
+        "oqdb-0139-1-en",
+        "oqdb-0139-2-en",
+        "oqdb-0503-1-en",
+        "oqdb-0503-2-en",
+        "oqdb-0503-3-en",
+        "oqdb-0503-4-en"
+      ],
+      "description": "Based on OpenQuizzDB quizzes about the Earth, moons, Alan Turing and Nikola Tesla."
+    }
+  ]
+}

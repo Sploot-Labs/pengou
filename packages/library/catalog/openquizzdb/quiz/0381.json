@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=381"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0381-1",
+      "type": "mcq",
+      "prompt": "Comment sont appelées les larves du hanneton qui sont radicivores ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vers blancs",
+            "correct": true
+          },
+          {
+            "label": "Nymphes",
+            "correct": false
+          },
+          {
+            "label": "Chenilles",
+            "correct": false
+          },
+          {
+            "label": "Coques",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0381-3",
+      "type": "mcq",
+      "prompt": "Combien de points visibles a la coccinelle des légumineuses ?",
+      "payload": {
+        "options": [
+          {
+            "label": "24",
+            "correct": true
+          },
+          {
+            "label": "14",
+            "correct": false
+          },
+          {
+            "label": "44",
+            "correct": false
+          },
+          {
+            "label": "34",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

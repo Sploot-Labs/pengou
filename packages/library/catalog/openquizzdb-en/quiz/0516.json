@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=516"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0516-1-en",
+      "type": "mcq",
+      "prompt": "Which Italian lemon liqueur is notably produced on Capri?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grappa",
+            "correct": false
+          },
+          {
+            "label": "Sambuca",
+            "correct": false
+          },
+          {
+            "label": "Amaretto",
+            "correct": false
+          },
+          {
+            "label": "Limoncello",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0516-2-en",
+      "type": "mcq",
+      "prompt": "Which sweet liqueur has a bitter almond flavor?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sambuca",
+            "correct": false
+          },
+          {
+            "label": "Grappa",
+            "correct": false
+          },
+          {
+            "label": "Amaretto",
+            "correct": true
+          },
+          {
+            "label": "Negroni",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0516-3-en",
+      "type": "mcq",
+      "prompt": "Which alcoholic long drink is made of prosecco and soda water?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hippocras",
+            "correct": false
+          },
+          {
+            "label": "Grappa",
+            "correct": false
+          },
+          {
+            "label": "Spritz",
+            "correct": true
+          },
+          {
+            "label": "Aguardiente",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0516-4-en",
+      "type": "mcq",
+      "prompt": "Which grape pomace brandy is produced in San Marino?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sambuca",
+            "correct": false
+          },
+          {
+            "label": "Negroni",
+            "correct": false
+          },
+          {
+            "label": "Grappa",
+            "correct": true
+          },
+          {
+            "label": "Amaretto",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

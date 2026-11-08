@@ -1,0 +1,1037 @@
+{
+  "questions": {
+    "oqdb-0333-1": {
+      "prompt": "Which American computer scientist and businessman created Facebook?",
+      "options": [
+        "Steve Ballmer",
+        "Paul Allen",
+        "Larry Page",
+        "Mark Zuckerberg"
+      ]
+    },
+    "oqdb-0333-2": {
+      "prompt": "What is the main professional social network?",
+      "options": [
+        "Friendster",
+        "LinkedIn",
+        "Heeloo",
+        "Movim"
+      ]
+    },
+    "oqdb-0333-3": {
+      "skip": "pratique d'influenceuses (swap) ambiguë et peu claire en anglais"
+    },
+    "oqdb-0333-4": {
+      "prompt": "How much did Facebook pay to buy WhatsApp?",
+      "options": [
+        "$650,000",
+        "$19 billion",
+        "$220 million",
+        "$850 million"
+      ]
+    },
+    "oqdb-0334-1": {
+      "prompt": "Which role does Bruce Willis play in the hit \"Die Hard\" franchise?",
+      "options": [
+        "Peter Fallow",
+        "John McClane",
+        "Tom Mix",
+        "Walter Davis"
+      ]
+    },
+    "oqdb-0334-2": {
+      "prompt": "What is Bruce Willis's job in Tarantino's \"Pulp Fiction\"?",
+      "options": [
+        "Boxer",
+        "Footballer",
+        "Veterinarian",
+        "Lawyer"
+      ]
+    },
+    "oqdb-0334-3": {
+      "prompt": "In which film does Bruce Willis play a child psychologist?",
+      "options": [
+        "The Sixth Sense",
+        "The Kid",
+        "The Story of Us",
+        "Hostage"
+      ]
+    },
+    "oqdb-0334-4": {
+      "prompt": "In which film does Bruce Willis lead a team of astronauts?",
+      "options": [
+        "Armageddon",
+        "Looper",
+        "Sin City",
+        "The Sixth Sense"
+      ]
+    },
+    "oqdb-0335-1": {
+      "prompt": "In which country was Gary Oldman born?",
+      "options": [
+        "United States",
+        "United Kingdom",
+        "Australia",
+        "Canada"
+      ]
+    },
+    "oqdb-0335-3": {
+      "prompt": "Which role does Gary Oldman play in the \"Harry Potter\" saga?",
+      "options": [
+        "Ron Weasley",
+        "Severus Snape",
+        "Lucius Malfoy",
+        "Sirius Black"
+      ]
+    },
+    "oqdb-0335-4": {
+      "prompt": "In which film does Gary Oldman play Winston Churchill?",
+      "options": [
+        "Léon",
+        "Darkest Hour",
+        "Dunkirk",
+        "Churchill"
+      ]
+    },
+    "oqdb-0336-1": {
+      "prompt": "Which wacky radio host appears in \"The Fifth Element\"?",
+      "options": [
+        "Pacoli",
+        "Ruby Rhod",
+        "Vito Cornelius",
+        "Mangalore"
+      ]
+    },
+    "oqdb-0336-2": {
+      "prompt": "What is Korben Dallas's job in \"The Fifth Element\"?",
+      "options": [
+        "Hitman",
+        "Soldier",
+        "Taxi driver",
+        "Police officer"
+      ]
+    },
+    "oqdb-0336-3": {
+      "prompt": "Who is actually the fifth element in the film of the same name?",
+      "options": [
+        "Korben Dallas",
+        "Ruby Rhod",
+        "Leeloo",
+        "Cornelius"
+      ]
+    },
+    "oqdb-0336-4": {
+      "prompt": "How many stones must be brought together in \"The Fifth Element\"?",
+      "options": [
+        "Four",
+        "Five",
+        "Two",
+        "Three"
+      ]
+    },
+    "oqdb-0337-2": {
+      "prompt": "What does a Medjool date generally taste like?",
+      "options": [
+        "Salty",
+        "Sweet",
+        "Bitter",
+        "Sour"
+      ]
+    },
+    "oqdb-0337-3": {
+      "prompt": "What sets the Medjool date apart from other varieties?",
+      "options": [
+        "Sugar-free",
+        "Crunchy",
+        "Always green",
+        "Fleshier"
+      ]
+    },
+    "oqdb-0337-4": {
+      "prompt": "What is the typical color of a ripe Medjool date?",
+      "options": [
+        "Dark brown",
+        "Purplish blue",
+        "Bright green",
+        "Lemon yellow"
+      ]
+    },
+    "oqdb-0338-1": {
+      "prompt": "In which Pixar animated film is Flik a worker ant?",
+      "options": [
+        "Toy Story",
+        "Ratatouille",
+        "A Bug's Life",
+        "Monsters, Inc."
+      ]
+    },
+    "oqdb-0338-2": {
+      "skip": "trois propositions synonymes (cafards) en anglais"
+    },
+    "oqdb-0338-3": {
+      "skip": "fable de La Fontaine, la cigale devient une sauterelle en anglais"
+    },
+    "oqdb-0338-4": {
+      "skip": "écrivain français peu connu hors de la francophonie"
+    },
+    "oqdb-0340-1": {
+      "prompt": "Which building is meant to house donkeys and horses?",
+      "options": [
+        "Stable",
+        "Arena",
+        "Ranch",
+        "Racecourse"
+      ]
+    },
+    "oqdb-0340-2": {
+      "skip": "l'énoncé donnerait la réponse une fois traduit (birdhouse)"
+    },
+    "oqdb-0340-3": {
+      "prompt": "What are rabbits usually kept in at the bottom of gardens?",
+      "options": [
+        "Hutch",
+        "Hatchery",
+        "Nest box",
+        "Aviary"
+      ]
+    },
+    "oqdb-0340-4": {
+      "prompt": "Which large cage is meant to hold birds?",
+      "options": [
+        "Aviary",
+        "Suitcase",
+        "Scroll",
+        "Display case"
+      ]
+    },
+    "oqdb-0341-1": {
+      "prompt": "What is the capital of Romania?",
+      "options": [
+        "Belgrade",
+        "Budapest",
+        "Sofia",
+        "Bucharest"
+      ]
+    },
+    "oqdb-0341-2": {
+      "prompt": "Which mountain range runs through Romania?",
+      "options": [
+        "Himalayas",
+        "Alps",
+        "Carpathians",
+        "Andes"
+      ]
+    },
+    "oqdb-0341-3": {
+      "prompt": "Which famous character is associated with Romania?",
+      "options": [
+        "Dracula",
+        "Tarzan",
+        "Sherlock Holmes",
+        "Harry Potter"
+      ]
+    },
+    "oqdb-0341-4": {
+      "prompt": "Which large historic region is found in Romania?",
+      "options": [
+        "Tuscany",
+        "Bavaria",
+        "Catalonia",
+        "Transylvania"
+      ]
+    },
+    "oqdb-0342-1": {
+      "prompt": "How many toes does a cat have on its front paws?",
+      "options": [
+        "Five",
+        "Four",
+        "Three",
+        "Six"
+      ]
+    },
+    "oqdb-0342-2": {
+      "prompt": "What are a cat's whiskers technically called?",
+      "options": [
+        "Vibrissae",
+        "Keels",
+        "Coverts",
+        "Barbules"
+      ]
+    },
+    "oqdb-0342-3": {
+      "prompt": "On average, how many times per second does a cat lap?",
+      "options": [
+        "Four",
+        "Two",
+        "Five",
+        "Three"
+      ]
+    },
+    "oqdb-0342-4": {
+      "prompt": "Which cat is almost hairless?",
+      "options": [
+        "Sphynx",
+        "Persian",
+        "Maine Coon",
+        "Siamese"
+      ]
+    },
+    "oqdb-0343-1": {
+      "prompt": "Who plays Jacques Mayol in the film \"The Big Blue\"?",
+      "options": [
+        "Jean-Marc Barr",
+        "Paul Shenar",
+        "Marc Duret",
+        "Jean Reno"
+      ]
+    },
+    "oqdb-0343-2": {
+      "prompt": "In which country is the first scene of \"The Big Blue\" set?",
+      "options": [
+        "France",
+        "Greece",
+        "Sicily",
+        "Spain"
+      ]
+    },
+    "oqdb-0343-4": {
+      "prompt": "In which language was the film \"The Big Blue\" shot?",
+      "options": [
+        "In English",
+        "In Greek",
+        "In French",
+        "In Spanish"
+      ]
+    },
+    "oqdb-0345-1": {
+      "prompt": "What is the hero of the animated film \"The Lion King\" called?",
+      "options": [
+        "Rafiki",
+        "Scar",
+        "Timon",
+        "Simba"
+      ]
+    },
+    "oqdb-0345-2": {
+      "prompt": "What is Scar's distinctive physical feature in \"The Lion King\"?",
+      "options": [
+        "A scar",
+        "Burned face",
+        "White eye",
+        "No whiskers"
+      ]
+    },
+    "oqdb-0345-3": {
+      "prompt": "Who is Timon's companion in the film \"The Lion King\"?",
+      "options": [
+        "Scar",
+        "Pumbaa",
+        "Shenzi",
+        "Zazu"
+      ]
+    },
+    "oqdb-0345-4": {
+      "prompt": "What does Timon, the little meerkat in \"The Lion King\", dress up as?",
+      "options": [
+        "As a hula girl",
+        "As a hyena",
+        "As a lion cub",
+        "As a twig"
+      ]
+    },
+    "oqdb-0346-1": {
+      "prompt": "Which French food group owns the Volvic brand?",
+      "options": [
+        "Sodebo",
+        "Régilait",
+        "Danone",
+        "Lactalis"
+      ]
+    },
+    "oqdb-0346-2": {
+      "skip": "eau minérale régionale française sans écho à l'étranger"
+    },
+    "oqdb-0346-3": {
+      "prompt": "Which European country is the biggest consumer of bottled water?",
+      "options": [
+        "Germany",
+        "Spain",
+        "Belgium",
+        "Italy"
+      ]
+    },
+    "oqdb-0346-4": {
+      "prompt": "Vichy Célestins water is known for its high content of which metal?",
+      "options": [
+        "Calcium",
+        "Sodium",
+        "Potassium",
+        "Magnesium"
+      ]
+    },
+    "oqdb-0347-1": {
+      "prompt": "What is the capital of Luxembourg?",
+      "options": [
+        "Metz",
+        "Brussels",
+        "Luxembourg",
+        "Strasbourg"
+      ]
+    },
+    "oqdb-0347-3": {
+      "prompt": "What is the title of Luxembourg's sovereign?",
+      "options": [
+        "President",
+        "Emperor",
+        "King",
+        "Grand Duke"
+      ]
+    },
+    "oqdb-0347-4": {
+      "prompt": "Which river flows through Luxembourg?",
+      "options": [
+        "Rhine",
+        "Moselle",
+        "Danube",
+        "Seine"
+      ]
+    },
+    "oqdb-0348-1": {
+      "prompt": "Which mountain building welcomes hikers?",
+      "options": [
+        "Barracks",
+        "Bunker",
+        "Pincers",
+        "Mountain hut"
+      ]
+    },
+    "oqdb-0348-2": {
+      "prompt": "Which colors mark the long-distance hiking trails (GR)?",
+      "options": [
+        "Green and gray",
+        "Red and white",
+        "Yellow and red",
+        "Blue and green"
+      ]
+    },
+    "oqdb-0348-3": {
+      "skip": "propositions sans équivalent anglais précis (guitoune, gîte)"
+    },
+    "oqdb-0349-1": {
+      "prompt": "Which reggae singer made his name with the hit \"Boombastic\"?",
+      "options": [
+        "Bob Marley",
+        "Alpha Blondy",
+        "Ziggy Marley",
+        "Shaggy"
+      ]
+    },
+    "oqdb-0349-2": {
+      "prompt": "Who is the most famous and influential reggae musician?",
+      "options": [
+        "King Sporty",
+        "Dobby Dobson",
+        "Bob Marley",
+        "Dawn Penn"
+      ]
+    },
+    "oqdb-0349-3": {
+      "prompt": "Who is behind the famous song \"Reggae Night\", released in 1983?",
+      "options": [
+        "Maxi Priest",
+        "Jimmy Cliff",
+        "Alpha Blondy",
+        "Bob Marley"
+      ]
+    },
+    "oqdb-0349-4": {
+      "skip": "chanteur français peu connu hors de la francophonie"
+    },
+    "oqdb-0351-1": {
+      "skip": "cinéma français peu connu hors de France"
+    },
+    "oqdb-0351-3": {
+      "skip": "cinéma français peu connu hors de France"
+    },
+    "oqdb-0351-4": {
+      "skip": "cinéma français peu connu hors de France"
+    },
+    "oqdb-0352-2": {
+      "prompt": "Which parasitic insect sometimes lives in human hair?",
+      "options": [
+        "Moth",
+        "Tineid",
+        "Bedbug",
+        "Louse"
+      ]
+    },
+    "oqdb-0352-3": {
+      "skip": "expression française (coupe banane) et jeu sur les fruits"
+    },
+    "oqdb-0352-4": {
+      "prompt": "What is the hidden, living part of the hair called?",
+      "options": [
+        "Follicle",
+        "Tip",
+        "Root",
+        "Shaft"
+      ]
+    },
+    "oqdb-0353-1": {
+      "prompt": "What is the capital of Greece?",
+      "options": [
+        "Patras",
+        "Thessaloniki",
+        "Heraklion",
+        "Athens"
+      ]
+    },
+    "oqdb-0353-2": {
+      "prompt": "Which sea touches the coasts of Greece?",
+      "options": [
+        "Black Sea",
+        "North Sea",
+        "Red Sea",
+        "Aegean Sea"
+      ]
+    },
+    "oqdb-0353-3": {
+      "prompt": "What is the sacred mountain of the Greek gods?",
+      "options": [
+        "Atlas Mountains",
+        "Mount Etna",
+        "Mount Olympus",
+        "Mount Fuji"
+      ]
+    },
+    "oqdb-0353-4": {
+      "prompt": "Which Greek city is famous for its Acropolis?",
+      "options": [
+        "Corinth",
+        "Delphi",
+        "Athens",
+        "Sparta"
+      ]
+    },
+    "oqdb-0354-1": {
+      "skip": "comédie française dont les répliques ne passent pas en anglais"
+    },
+    "oqdb-0354-2": {
+      "skip": "comédie française dont les répliques ne passent pas en anglais"
+    },
+    "oqdb-0354-3": {
+      "skip": "comédie française dont les répliques ne passent pas en anglais"
+    },
+    "oqdb-0354-4": {
+      "skip": "comédie française dont les répliques ne passent pas en anglais"
+    },
+    "oqdb-0355-1": {
+      "skip": "comédie française dont les actrices sont peu connues hors de France"
+    },
+    "oqdb-0357-1": {
+      "prompt": "How much time do you have to take a shot in basketball?",
+      "options": [
+        "30 seconds",
+        "10 seconds",
+        "45 seconds",
+        "24 seconds"
+      ]
+    },
+    "oqdb-0357-2": {
+      "prompt": "In France, in which team sport do you win the Bouclier de Brennus?",
+      "options": [
+        "Basketball",
+        "Football",
+        "Handball",
+        "Rugby"
+      ]
+    },
+    "oqdb-0357-3": {
+      "prompt": "How many players are there in a field hockey team?",
+      "options": [
+        "Eleven players",
+        "Eight players",
+        "Five players",
+        "Six players"
+      ]
+    },
+    "oqdb-0358-1": {
+      "prompt": "In which city can you admire the Little Mermaid on her rock?",
+      "options": [
+        "Bucharest",
+        "Amsterdam",
+        "Copenhagen",
+        "Budapest"
+      ]
+    },
+    "oqdb-0358-2": {
+      "prompt": "Which famous white marble mausoleum can you visit in Agra, India?",
+      "options": [
+        "Yantra Mandir",
+        "Raj Ghat",
+        "Bombay House",
+        "Taj Mahal"
+      ]
+    },
+    "oqdb-0358-3": {
+      "prompt": "In which Spanish city is the Alhambra?",
+      "options": [
+        "Granada",
+        "Bilbao",
+        "Seville",
+        "Malaga"
+      ]
+    },
+    "oqdb-0358-4": {
+      "prompt": "Which famous Greek site is on Mount Parnassus?",
+      "options": [
+        "Delphi",
+        "Olympia",
+        "Amphipolis",
+        "Lindos"
+      ]
+    },
+    "oqdb-0359-1": {
+      "prompt": "Which currency did Austria use before the euro?",
+      "options": [
+        "Franc",
+        "Pound",
+        "Schilling",
+        "Mark"
+      ]
+    },
+    "oqdb-0359-2": {
+      "prompt": "Which language is official in Austria?",
+      "options": [
+        "Austrian",
+        "German",
+        "Hungarian",
+        "French"
+      ]
+    },
+    "oqdb-0359-3": {
+      "prompt": "Which river flows through Vienna?",
+      "options": [
+        "Rhine",
+        "Loire",
+        "Seine",
+        "Danube"
+      ]
+    },
+    "oqdb-0360-1": {
+      "prompt": "What is the capital of Cuba, famous for its cigars?",
+      "options": [
+        "Santa Clara",
+        "Guantanamo",
+        "Havana",
+        "Santiago de Cuba"
+      ]
+    },
+    "oqdb-0360-2": {
+      "prompt": "Both a city and a province, of which country is Bangkok the capital?",
+      "options": [
+        "Laos",
+        "Thailand",
+        "Malaysia",
+        "Myanmar"
+      ]
+    },
+    "oqdb-0360-3": {
+      "prompt": "In which city are there the most taxis in the world?",
+      "options": [
+        "Mexico City",
+        "New York",
+        "London",
+        "Tokyo"
+      ]
+    },
+    "oqdb-0360-4": {
+      "prompt": "In which densely populated country is Calcutta located?",
+      "options": [
+        "Myanmar",
+        "Brazil",
+        "Bangladesh",
+        "India"
+      ]
+    },
+    "oqdb-0361-1": {
+      "prompt": "Which country is home to the royal Shalimar Gardens?",
+      "options": [
+        "Bangladesh",
+        "Bhutan",
+        "Afghanistan",
+        "Pakistan"
+      ]
+    },
+    "oqdb-0361-2": {
+      "prompt": "Which country do you head to for a tan in Rimini?",
+      "options": [
+        "Spain",
+        "Greece",
+        "Portugal",
+        "Italy"
+      ]
+    },
+    "oqdb-0361-4": {
+      "prompt": "In which country will you visit the ruins of Carthage?",
+      "options": [
+        "Hungary",
+        "Tunisia",
+        "Turkey",
+        "Egypt"
+      ]
+    },
+    "oqdb-0363-1": {
+      "prompt": "In which city was Jean-Michel Jarre's \"Rendez-Vous\" concert held?",
+      "options": [
+        "Los Angeles",
+        "Houston",
+        "Miami",
+        "Chicago"
+      ]
+    },
+    "oqdb-0363-2": {
+      "skip": "chanteur français peu connu hors de la francophonie"
+    },
+    "oqdb-0363-3": {
+      "prompt": "Which Jean-Michel Jarre album came out in 1976?",
+      "options": [
+        "Rendez-vous",
+        "Equinoxe",
+        "Oxygène",
+        "Chronologie"
+      ]
+    },
+    "oqdb-0363-4": {
+      "prompt": "Which Jean-Michel Jarre album is a tribute to the wind?",
+      "options": [
+        "Téo & Téa",
+        "Aero",
+        "Chronologie",
+        "Geometry of Love"
+      ]
+    },
+    "oqdb-0364-1": {
+      "prompt": "What is the name of the CEO of InGen in \"Jurassic Park\"?",
+      "options": [
+        "John Hammond",
+        "Alan Grant",
+        "Ian Malcolm",
+        "Robert Muldoon"
+      ]
+    },
+    "oqdb-0364-2": {
+      "prompt": "Who directed the first two films of the \"Jurassic Park\" saga?",
+      "options": [
+        "Joe Johnston",
+        "Tim Burton",
+        "Steven Spielberg",
+        "George Lucas"
+      ]
+    },
+    "oqdb-0364-3": {
+      "prompt": "Who wrote the novel \"Jurassic Park\" that inspired the film?",
+      "options": [
+        "J. K. Rowling",
+        "Michael Crichton",
+        "Isaac Asimov",
+        "Stephen King"
+      ]
+    },
+    "oqdb-0364-4": {
+      "prompt": "How many Oscars did the film \"Jurassic Park\" win?",
+      "options": [
+        "Two",
+        "One",
+        "None",
+        "Three"
+      ]
+    },
+    "oqdb-0365-1": {
+      "prompt": "What is the capital of Portugal?",
+      "options": [
+        "Lisbon",
+        "Faro",
+        "Porto",
+        "Coimbra"
+      ]
+    },
+    "oqdb-0365-2": {
+      "prompt": "Which Portuguese city is famous for its wine cellars?",
+      "options": [
+        "Lisbon",
+        "Porto",
+        "Faro",
+        "Braga"
+      ]
+    },
+    "oqdb-0365-4": {
+      "prompt": "Which country is Portugal's only land neighbor?",
+      "options": [
+        "Spain",
+        "Italy",
+        "Morocco",
+        "France"
+      ]
+    },
+    "oqdb-0366-2": {
+      "prompt": "In which US city is OpenAI headquartered?",
+      "options": [
+        "San Francisco",
+        "Miami",
+        "Los Angeles",
+        "Chicago"
+      ]
+    },
+    "oqdb-0366-3": {
+      "prompt": "Who left OpenAI in 2018 after a leadership dispute?",
+      "options": [
+        "Ilya Sutskever",
+        "Elon Musk",
+        "Greg Brockman",
+        "Sam Altman"
+      ]
+    },
+    "oqdb-0366-4": {
+      "prompt": "Which OpenAI tool can generate text on its own?",
+      "options": [
+        "OpenChat",
+        "AlphaGo",
+        "DALL-E",
+        "ChatGPT"
+      ]
+    },
+    "oqdb-0367-1": {
+      "prompt": "Which nutrient is particularly abundant in almonds?",
+      "options": [
+        "Iron",
+        "Vitamin C",
+        "Vitamin E",
+        "Protein"
+      ]
+    },
+    "oqdb-0367-2": {
+      "prompt": "What is the most common color of the almond tree's flower?",
+      "options": [
+        "Blue",
+        "Red",
+        "White",
+        "Lemon yellow"
+      ]
+    },
+    "oqdb-0367-3": {
+      "prompt": "What is a common culinary use for almonds?",
+      "options": [
+        "Flourless bread",
+        "Cheese",
+        "Vinegar",
+        "Plant-based milk"
+      ]
+    },
+    "oqdb-0367-4": {
+      "prompt": "Which country is the biggest almond producer today?",
+      "options": [
+        "United States",
+        "Spain",
+        "Morocco",
+        "Italy"
+      ]
+    },
+    "oqdb-0368-1": {
+      "prompt": "Which factor can influence the color of honey?",
+      "options": [
+        "Moon",
+        "Temperature",
+        "Size of the bees",
+        "Type of flowers"
+      ]
+    },
+    "oqdb-0368-2": {
+      "prompt": "What is the main role of honey for bees?",
+      "options": [
+        "Coolant",
+        "Material",
+        "Trap",
+        "Food"
+      ]
+    },
+    "oqdb-0368-3": {
+      "prompt": "Which bee is responsible for making honey in the hive?",
+      "options": [
+        "Drone",
+        "Worker",
+        "Bumblebee",
+        "Queen"
+      ]
+    },
+    "oqdb-0368-4": {
+      "prompt": "How much honey does a bee make in its lifetime on average?",
+      "options": [
+        "1 kg",
+        "10 kg",
+        "1 g",
+        "100 g"
+      ]
+    },
+    "oqdb-0369-1": {
+      "prompt": "Which basketball player won his sixth NBA title in 1998?",
+      "options": [
+        "Karl Malone",
+        "Michael Jordan",
+        "Charles Barkley",
+        "Patrick Ewing"
+      ]
+    },
+    "oqdb-0369-2": {
+      "prompt": "In which country was basketball player Tony Parker born?",
+      "options": [
+        "Poland",
+        "Belgium",
+        "France",
+        "United States"
+      ]
+    },
+    "oqdb-0369-4": {
+      "prompt": "What is the last NBA team Michael Jordan played for?",
+      "options": [
+        "Lakers",
+        "Bulls",
+        "Wizards",
+        "Spurs"
+      ]
+    },
+    "oqdb-0370-1": {
+      "prompt": "What color is the poppy that grows on freshly turned soil?",
+      "options": [
+        "Purple",
+        "Red",
+        "Yellow",
+        "Green"
+      ]
+    },
+    "oqdb-0370-2": {
+      "skip": "nom populaire français de la primevère sans équivalent anglais"
+    },
+    "oqdb-0370-3": {
+      "prompt": "Which plant can be mistaken for wild garlic?",
+      "options": [
+        "Lily of the valley",
+        "Oregano",
+        "Primrose",
+        "Basil"
+      ]
+    },
+    "oqdb-0370-4": {
+      "prompt": "When does wild chamomile, or German chamomile, bloom?",
+      "options": [
+        "Autumn",
+        "Winter",
+        "Summer",
+        "Spring only"
+      ]
+    },
+    "oqdb-0371-1": {
+      "skip": "question de vocabulaire français (féminin de renard)"
+    },
+    "oqdb-0371-2": {
+      "prompt": "What top speed can a hare reach?",
+      "options": [
+        "110 km/h",
+        "90 km/h",
+        "50 km/h",
+        "70 km/h"
+      ]
+    },
+    "oqdb-0371-3": {
+      "skip": "jeu sur des mots français (mulot, mulet, muscardin)"
+    },
+    "oqdb-0372-1": {
+      "prompt": "Which confection is an apple coated in cooked sugar?",
+      "options": [
+        "Candy apple",
+        "Tarte Tatin",
+        "Crumble",
+        "Apfelstrudel"
+      ]
+    },
+    "oqdb-0372-2": {
+      "prompt": "Which dessert consists of apples in batter fried in oil?",
+      "options": [
+        "Clafoutis",
+        "Apple fritter",
+        "Tarte Tatin",
+        "Crumble"
+      ]
+    },
+    "oqdb-0372-3": {
+      "prompt": "Which traditional Austrian pastry is made with apples?",
+      "options": [
+        "Tarte Tatin",
+        "Croustade",
+        "Crumble",
+        "Apfelstrudel"
+      ]
+    },
+    "oqdb-0372-4": {
+      "prompt": "In which tart are the upside-down apples caramelized?",
+      "options": [
+        "Tarte Tatin",
+        "Rice tart",
+        "Normandy tart",
+        "Tarte au maton"
+      ]
+    },
+    "oqdb-0373-1": {
+      "prompt": "Of which country is Istanbul the largest city?",
+      "options": [
+        "Syria",
+        "Yemen",
+        "Jordan",
+        "Turkey"
+      ]
+    },
+    "oqdb-0373-2": {
+      "prompt": "What was Istanbul called when it was founded?",
+      "options": [
+        "Daulis",
+        "Byzantium",
+        "Paestum",
+        "Messene"
+      ]
+    },
+    "oqdb-0373-3": {
+      "skip": "question de vocabulaire français (gentilé stambouliote)"
+    },
+    "oqdb-0374-1": {
+      "skip": "argot français (pomme pour visage)"
+    },
+    "oqdb-0374-2": {
+      "prompt": "Which alcoholic apple-based drink is between 2% and 8% ABV?",
+      "options": [
+        "Lambig",
+        "Pommeau",
+        "Cider",
+        "Calvados"
+      ]
+    },
+    "oqdb-0374-3": {
+      "prompt": "Which fairy-tale princess was poisoned by an apple?",
+      "options": [
+        "Cinderella",
+        "Jasmine",
+        "Aurora",
+        "Snow White"
+      ]
+    },
+    "oqdb-0374-4": {
+      "prompt": "Which American multinational has an apple as its logo?",
+      "options": [
+        "Xerox",
+        "IBM",
+        "Microsoft",
+        "Apple"
+      ]
+    }
+  },
+  "quizzes": {}
+}

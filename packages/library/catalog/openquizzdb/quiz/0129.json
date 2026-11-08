@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, François Vandergucht",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=129"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0129-4",
+      "type": "mcq",
+      "prompt": "Dans quel bâtiment les héros de « L'Armée des morts » se barricadent-ils ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Centre commercial",
+            "correct": true
+          },
+          {
+            "label": "Ferme",
+            "correct": false
+          },
+          {
+            "label": "Bar",
+            "correct": false
+          },
+          {
+            "label": "Église",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

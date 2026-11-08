@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=141"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0141-2-en",
+      "type": "mcq",
+      "prompt": "Which cocktail is made with crème de cassis and white wine?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tequila sunrise",
+            "correct": false
+          },
+          {
+            "label": "Kir",
+            "correct": true
+          },
+          {
+            "label": "Cuba libre",
+            "correct": false
+          },
+          {
+            "label": "Mojito",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0141-3-en",
+      "type": "mcq",
+      "prompt": "Which alcoholic drink is made from fermented apples?",
+      "payload": {
+        "options": [
+          {
+            "label": "Armagnac",
+            "correct": false
+          },
+          {
+            "label": "Elderberry",
+            "correct": false
+          },
+          {
+            "label": "Cider",
+            "correct": true
+          },
+          {
+            "label": "Frênette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0141-4-en",
+      "type": "mcq",
+      "prompt": "Which Italian sparkling white wine is sweeter than Prosecco?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vouvray",
+            "correct": false
+          },
+          {
+            "label": "Friuli",
+            "correct": false
+          },
+          {
+            "label": "Asti",
+            "correct": true
+          },
+          {
+            "label": "Alghero",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

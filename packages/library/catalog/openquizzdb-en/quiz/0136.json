@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=136"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0136-2-en",
+      "type": "mcq",
+      "prompt": "What is the most widely used of the so-called free operating systems?",
+      "payload": {
+        "options": [
+          {
+            "label": "Links",
+            "correct": false
+          },
+          {
+            "label": "Llama",
+            "correct": false
+          },
+          {
+            "label": "Lamento",
+            "correct": false
+          },
+          {
+            "label": "Linux",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0136-3-en",
+      "type": "mcq",
+      "prompt": "Which animal supposedly nursed Romulus and Remus in the legend of Rome?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lioness",
+            "correct": false
+          },
+          {
+            "label": "Lynx",
+            "correct": false
+          },
+          {
+            "label": "Llama",
+            "correct": false
+          },
+          {
+            "label": "She-wolf",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

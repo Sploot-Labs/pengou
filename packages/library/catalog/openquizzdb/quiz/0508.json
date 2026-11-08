@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=508"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0508-1",
+      "type": "mcq",
+      "prompt": "Dans quelle région naturelle se trouve le Château Latour Premier Cru ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Libournais",
+            "correct": false
+          },
+          {
+            "label": "Fronsac",
+            "correct": false
+          },
+          {
+            "label": "Médoc",
+            "correct": true
+          },
+          {
+            "label": "Graves",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0508-2",
+      "type": "mcq",
+      "prompt": "Dans quelle région viticole est produit le Monbazillac AOC ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Champagne",
+            "correct": false
+          },
+          {
+            "label": "Bergerac",
+            "correct": true
+          },
+          {
+            "label": "Cahors",
+            "correct": false
+          },
+          {
+            "label": "Béarn",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0508-3",
+      "type": "mcq",
+      "prompt": "La Clairette de Die est produite le long de quelle rivière ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vienne",
+            "correct": false
+          },
+          {
+            "label": "Ardèche",
+            "correct": false
+          },
+          {
+            "label": "Drôme",
+            "correct": true
+          },
+          {
+            "label": "Isère",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

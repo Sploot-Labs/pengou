@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=427"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0427-1-en",
+      "type": "mcq",
+      "prompt": "Which star popularized Nespresso's \"What Else?\" slogan?",
+      "payload": {
+        "options": [
+          {
+            "label": "George Clooney",
+            "correct": true
+          },
+          {
+            "label": "Brad Pitt",
+            "correct": false
+          },
+          {
+            "label": "John Travolta",
+            "correct": false
+          },
+          {
+            "label": "Tom Hanks",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

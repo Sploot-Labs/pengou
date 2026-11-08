@@ -47,8 +47,18 @@ async function buildApp(): Promise<FastifyInstance> {
   return app
 }
 
-const validMcq = { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] }
-const invalidMcq = { options: [{ label: 'A', correct: false }, { label: 'B', correct: false }] }
+const validMcq = {
+  options: [
+    { label: 'A', correct: true },
+    { label: 'B', correct: false },
+  ],
+}
+const invalidMcq = {
+  options: [
+    { label: 'A', correct: false },
+    { label: 'B', correct: false },
+  ],
+}
 
 async function createQuizAndCookie(app: FastifyInstance, email: string): Promise<{ cookie: string; quizId: string }> {
   const cookie = await signUp(app, email)
@@ -78,6 +88,25 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
     const body = res.json() as { id: string; quizId: string; type: string }
     expect(body.quizId).toBe(quizId)
     expect(body.type).toBe('mcq')
+
+    await app.close()
+  })
+
+  it('POST avec un sondage valide → 201, le type et le payload sont conservés', async () => {
+    const app = await buildApp()
+    const { cookie, quizId } = await createQuizAndCookie(app, 'qpoll@example.com')
+    const pollPayload = { options: [{ label: 'Oui' }, { label: 'Non' }], multiple: true }
+
+    const res = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/questions`,
+      payload: { type: 'poll', prompt: 'On fait une pause ?', timeLimit: 20, payload: pollPayload },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(res.statusCode).toBe(201)
+    const body = res.json() as { type: string; payload: unknown }
+    expect(body.type).toBe('poll')
+    expect(body.payload).toEqual(pollPayload)
 
     await app.close()
   })
@@ -233,7 +262,14 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
     const validUpdate = await app.inject({
       method: 'PATCH',
       url: `/api/quizzes/${quizId}/questions/${created.id}`,
-      payload: { payload: { options: [{ label: 'X', correct: true }, { label: 'Y', correct: false }] } },
+      payload: {
+        payload: {
+          options: [
+            { label: 'X', correct: true },
+            { label: 'Y', correct: false },
+          ],
+        },
+      },
       headers: { 'content-type': 'application/json', cookie },
     })
     expect(validUpdate.statusCode).toBe(200)

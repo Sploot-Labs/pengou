@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=73"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0073-4",
+      "type": "mcq",
+      "prompt": "Quel était le prénom du père de Jacques Villeneuve, pilote de F1 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Steve",
+            "correct": false
+          },
+          {
+            "label": "Charles",
+            "correct": false
+          },
+          {
+            "label": "Gilles",
+            "correct": true
+          },
+          {
+            "label": "Christian",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -8,8 +8,9 @@
  */
 
 import { normalizeText, sliderTolerance } from '@splootlabs/quiz'
+import type { PollView } from './contracts'
 
-export type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider'
+export type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud' | 'poll'
 
 export interface McqCorrect {
   options: { label: string; correct: boolean }[]
@@ -87,9 +88,7 @@ function sliderRows(correct: SliderCorrect, distribution: Record<string, number>
     .map(([key, count]) => {
       const parsed = parseAnswerKey(key)
       const value =
-        typeof parsed === 'object' && parsed !== null && 'value' in parsed
-          ? (parsed as { value: unknown }).value
-          : null
+        typeof parsed === 'object' && parsed !== null && 'value' in parsed ? (parsed as { value: unknown }).value : null
       return typeof value === 'number' ? { value, count } : null
     })
     .filter((e): e is { value: number; count: number } => e !== null)
@@ -112,9 +111,7 @@ function textRows(correct: TextCorrect, distribution: Record<string, number>): D
     .map(([key, count]) => {
       const parsed = parseAnswerKey(key)
       const value =
-        typeof parsed === 'object' && parsed !== null && 'text' in parsed
-          ? (parsed as { text: unknown }).text
-          : null
+        typeof parsed === 'object' && parsed !== null && 'text' in parsed ? (parsed as { text: unknown }).text : null
       return typeof value === 'string' ? { value, count } : null
     })
     .filter((e): e is { value: string; count: number } => e !== null)
@@ -128,6 +125,19 @@ function textRows(correct: TextCorrect, distribution: Record<string, number>): D
       shape: null,
       count: e.count,
     }))
+}
+
+/** Répartition d'un sondage, lue dans `question:reveal.poll` (et non dans `distribution`) : une
+ * ligne par choix, dans l'ordre, avec les formes du QCM. `correct` vaut toujours `false` : un
+ * sondage n'a pas de bonne réponse. */
+export function pollRows(poll: PollView): DistRow[] {
+  return poll.options.map((opt, i) => ({
+    key: String(i),
+    label: opt.label,
+    correct: false,
+    shape: MCQ_SHAPES[i % MCQ_SHAPES.length],
+    count: opt.votes,
+  }))
 }
 
 export function buildDistributionRows(
@@ -144,5 +154,9 @@ export function buildDistributionRows(
       return sliderRows(correct as SliderCorrect, distribution)
     case 'text':
       return textRows(correct as TextCorrect, distribution)
+    case 'wordcloud':
+      return []
+    case 'poll':
+      return []
   }
 }

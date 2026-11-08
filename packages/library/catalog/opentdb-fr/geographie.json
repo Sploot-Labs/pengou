@@ -1,0 +1,2085 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-06e72217a34e-fr",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale du Sénégal ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nouakchott",
+            "correct": false
+          },
+          {
+            "label": "Monrovia",
+            "correct": false
+          },
+          {
+            "label": "Conakry",
+            "correct": false
+          },
+          {
+            "label": "Dakar",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-093fc816e5eb-fr",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de l'Inde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "New Delhi",
+            "correct": true
+          },
+          {
+            "label": "Tithi",
+            "correct": false
+          },
+          {
+            "label": "Montréal",
+            "correct": false
+          },
+          {
+            "label": "Pékin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-09c4b49e009e-fr",
+      "type": "mcq",
+      "prompt": "Quelle est la deuxième plus grande ville de Russie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nijni Novgorod",
+            "correct": false
+          },
+          {
+            "label": "Saint-Pétersbourg",
+            "correct": true
+          },
+          {
+            "label": "Vladivostok",
+            "correct": false
+          },
+          {
+            "label": "Minsk",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0b69dea88ca7-fr",
+      "type": "truefalse",
+      "prompt": "Le drapeau de la Biélorussie comporte un motif de broderie rouge et blanc du côté de la hampe.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1cd4172ba8c3-fr",
+      "type": "mcq",
+      "prompt": "Dans quelle ville se trouve la Space Needle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Toronto",
+            "correct": false
+          },
+          {
+            "label": "Seattle",
+            "correct": true
+          },
+          {
+            "label": "Vancouver",
+            "correct": false
+          },
+          {
+            "label": "Los Angeles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1d737639c45f-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle la péninsule qui contient l'Espagne et le Portugal ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Péninsule européenne",
+            "correct": false
+          },
+          {
+            "label": "Péninsule du Péloponnèse",
+            "correct": false
+          },
+          {
+            "label": "Péninsule scandinave",
+            "correct": false
+          },
+          {
+            "label": "Péninsule ibérique",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2327aa8212b8-fr",
+      "type": "mcq",
+      "prompt": "En 2012, la principauté germanophone du Liechtenstein, en Europe centrale, comptait combien d'habitants ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2 400",
+            "correct": false
+          },
+          {
+            "label": "90 000",
+            "correct": false
+          },
+          {
+            "label": "36 600",
+            "correct": true
+          },
+          {
+            "label": "323 400",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-232a098b7803-fr",
+      "type": "mcq",
+      "prompt": "Quel est le nom actuel de la ville russe de Königsberg, autrefois en Prusse-Orientale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kazan",
+            "correct": false
+          },
+          {
+            "label": "Kaliningrad",
+            "correct": true
+          },
+          {
+            "label": "Koursk",
+            "correct": false
+          },
+          {
+            "label": "Krasnodar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-28eb3d9fb6e5-fr",
+      "type": "mcq",
+      "prompt": "Quel fleuve a été barré pour créer le lac Gatún et le canal de Panama ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Río Chepo",
+            "correct": false
+          },
+          {
+            "label": "Río Chucunaque",
+            "correct": false
+          },
+          {
+            "label": "Río Tuira",
+            "correct": false
+          },
+          {
+            "label": "Río Chagres",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2946a2afd207-fr",
+      "type": "mcq",
+      "prompt": "Avec combien de pays les États-Unis partagent-ils une frontière terrestre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1",
+            "correct": false
+          },
+          {
+            "label": "3",
+            "correct": false
+          },
+          {
+            "label": "2",
+            "correct": true
+          },
+          {
+            "label": "4",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2b20e09b3cde-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces noms de pays n'est pas écrit dans sa propre langue ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Elláda",
+            "correct": false
+          },
+          {
+            "label": "Suomi",
+            "correct": false
+          },
+          {
+            "label": "Schweiz",
+            "correct": false
+          },
+          {
+            "label": "Slovaško",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3191a00b0650-fr",
+      "type": "truefalse",
+      "prompt": "Le troisième plus grand pays d'Amérique du Sud (en kilomètres carrés) est la Colombie.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-346b2f4a8147-fr",
+      "type": "mcq",
+      "prompt": "Quel est le plus grand pays du monde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Russie",
+            "correct": true
+          },
+          {
+            "label": "Canada",
+            "correct": false
+          },
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Chine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-36d17a8a52f4-fr",
+      "type": "truefalse",
+      "prompt": "Le Groenland est presque aussi grand que l'Afrique.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-376eace346da-fr",
+      "type": "mcq",
+      "prompt": "Dans quelle ville se trouve l'armée de terre cuite ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hong Kong",
+            "correct": false
+          },
+          {
+            "label": "Shanghai",
+            "correct": false
+          },
+          {
+            "label": "Xi'an",
+            "correct": true
+          },
+          {
+            "label": "Pékin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3e9d6566d631-fr",
+      "type": "truefalse",
+      "prompt": "L'île de Bornéo, en Asie du Sud-Est, est politiquement partagée entre 3 pays.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3feaf4c1b52f-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces pays arabes n'a pas un drapeau composé uniquement de couleurs panarabes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Émirats arabes unis",
+            "correct": false
+          },
+          {
+            "label": "Qatar",
+            "correct": true
+          },
+          {
+            "label": "Jordanie",
+            "correct": false
+          },
+          {
+            "label": "Koweït",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-43f26954c3d1-fr",
+      "type": "mcq",
+      "prompt": "Les falaises blanches de Douvres se trouvent dans quel pays ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pays-Bas",
+            "correct": false
+          },
+          {
+            "label": "Suède",
+            "correct": false
+          },
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Royaume-Uni",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-47a87c3b3675-fr",
+      "type": "mcq",
+      "prompt": "Dans quel comté anglais se trouve l'université d'East Anglia ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Essex",
+            "correct": false
+          },
+          {
+            "label": "Norfolk",
+            "correct": true
+          },
+          {
+            "label": "Cambridgeshire",
+            "correct": false
+          },
+          {
+            "label": "Suffolk",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-47d0be6d9b10-fr",
+      "type": "truefalse",
+      "prompt": "La route 66 traverse tout le continent américain, de la Californie à New York.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4d3dd54cd182-fr",
+      "type": "mcq",
+      "prompt": "Quel est le deuxième plus grand pays du monde par la superficie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Russie",
+            "correct": false
+          },
+          {
+            "label": "Canada",
+            "correct": true
+          },
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Chine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4f0f4ef13ab7-fr",
+      "type": "mcq",
+      "prompt": "Quelle est la superficie de la Cité du Vatican ?",
+      "payload": {
+        "options": [
+          {
+            "label": "0,86 km²",
+            "correct": false
+          },
+          {
+            "label": "0,10 km²",
+            "correct": false
+          },
+          {
+            "label": "12,00 km²",
+            "correct": false
+          },
+          {
+            "label": "0,44 km²",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-508bfa1c5079-fr",
+      "type": "mcq",
+      "prompt": "Brugelette, Arlon et Ath sont des villes de quel pays ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Andorre",
+            "correct": false
+          },
+          {
+            "label": "Belgique",
+            "correct": true
+          },
+          {
+            "label": "Luxembourg",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-572b001645d7-fr",
+      "type": "mcq",
+      "prompt": "Quel est le plus petit pays du monde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cité du Vatican",
+            "correct": true
+          },
+          {
+            "label": "Monaco",
+            "correct": false
+          },
+          {
+            "label": "Titania",
+            "correct": false
+          },
+          {
+            "label": "Lesotho",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5b4ed7b06d27-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces villes n'est PAS en Inde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ghaziabad",
+            "correct": false
+          },
+          {
+            "label": "Islamabad",
+            "correct": true
+          },
+          {
+            "label": "Ahmedabad",
+            "correct": false
+          },
+          {
+            "label": "Hyderabad",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5c831f731398-fr",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de l'Estonie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tartu",
+            "correct": false
+          },
+          {
+            "label": "Tallinn",
+            "correct": true
+          },
+          {
+            "label": "Helsinki",
+            "correct": false
+          },
+          {
+            "label": "Riga",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5edeb288d9cf-fr",
+      "type": "truefalse",
+      "prompt": "La Nouvelle-Écosse se trouve sur la côte est du Canada.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-60ffb01b4b7b-fr",
+      "type": "mcq",
+      "prompt": "Quel pays a pour code « CH » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aucun pays",
+            "correct": false
+          },
+          {
+            "label": "Canada",
+            "correct": false
+          },
+          {
+            "label": "Suisse",
+            "correct": true
+          },
+          {
+            "label": "Chine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-630a29873c61-fr",
+      "type": "mcq",
+      "prompt": "Sur quel(s) continent(s) se trouve l'Espagne, tous territoires compris ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Europe et Asie",
+            "correct": false
+          },
+          {
+            "label": "Europe",
+            "correct": false
+          },
+          {
+            "label": "Europe, Afrique et Asie",
+            "correct": false
+          },
+          {
+            "label": "Europe et Afrique",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-63217852959e-fr",
+      "type": "mcq",
+      "prompt": "Les îles Andaman-et-Nicobar, en Asie du Sud-Est, dépendent de quel pays ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vietnam",
+            "correct": false
+          },
+          {
+            "label": "Thaïlande",
+            "correct": false
+          },
+          {
+            "label": "Indonésie",
+            "correct": false
+          },
+          {
+            "label": "Inde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-647c3a3c5fe5-fr",
+      "type": "truefalse",
+      "prompt": "New Haven est la capitale de l'État du Connecticut, aux États-Unis.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6d5a454af844-fr",
+      "type": "mcq",
+      "prompt": "Quel est le pays à majorité musulmane le plus peuplé en 2010 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Arabie saoudite",
+            "correct": false
+          },
+          {
+            "label": "Soudan",
+            "correct": false
+          },
+          {
+            "label": "Iran",
+            "correct": false
+          },
+          {
+            "label": "Indonésie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-708ca8904460-fr",
+      "type": "mcq",
+      "prompt": "Dans quelle ville indienne se trouve le Taj Mahal ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Faridabad",
+            "correct": false
+          },
+          {
+            "label": "Agra",
+            "correct": true
+          },
+          {
+            "label": "Thane",
+            "correct": false
+          },
+          {
+            "label": "Mumbai",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7824bcace715-fr",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de l'Espagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Barcelone",
+            "correct": false
+          },
+          {
+            "label": "Madrid",
+            "correct": true
+          },
+          {
+            "label": "Tolède",
+            "correct": false
+          },
+          {
+            "label": "Séville",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-78f8a4d9c51e-fr",
+      "type": "mcq",
+      "prompt": "Quel est le plus petit pays d'Amérique du Sud par la superficie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Uruguay",
+            "correct": false
+          },
+          {
+            "label": "Suriname",
+            "correct": true
+          },
+          {
+            "label": "Chili",
+            "correct": false
+          },
+          {
+            "label": "Brésil",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7a21699f7885-fr",
+      "type": "mcq",
+      "prompt": "Quel pays est entièrement enclavé dans l'Afrique du Sud ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Botswana",
+            "correct": false
+          },
+          {
+            "label": "Swaziland",
+            "correct": false
+          },
+          {
+            "label": "Zimbabwe",
+            "correct": false
+          },
+          {
+            "label": "Lesotho",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7f2344b71db9-fr",
+      "type": "mcq",
+      "prompt": "Quel est le plus long fleuve d'Europe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Volga",
+            "correct": true
+          },
+          {
+            "label": "Danube",
+            "correct": false
+          },
+          {
+            "label": "Dniepr",
+            "correct": false
+          },
+          {
+            "label": "Oural",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-833db0ee6dd2-fr",
+      "type": "mcq",
+      "prompt": "Quand la Finlande fête-t-elle son indépendance ?",
+      "payload": {
+        "options": [
+          {
+            "label": "8 février",
+            "correct": false
+          },
+          {
+            "label": "2 janvier",
+            "correct": false
+          },
+          {
+            "label": "6 décembre",
+            "correct": true
+          },
+          {
+            "label": "12 novembre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-85106bbe4fca-fr",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale des Bermudes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Havane",
+            "correct": false
+          },
+          {
+            "label": "San Juan",
+            "correct": false
+          },
+          {
+            "label": "Hamilton",
+            "correct": true
+          },
+          {
+            "label": "Saint-Domingue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-87d40d274509-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces îles méditerranéennes est sous souveraineté française ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Corse",
+            "correct": true
+          },
+          {
+            "label": "Sardaigne",
+            "correct": false
+          },
+          {
+            "label": "Malte",
+            "correct": false
+          },
+          {
+            "label": "Majorque",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-89cf9c825cb7-fr",
+      "type": "truefalse",
+      "prompt": "La Hongrie est le seul pays du monde dont le nom commence par H.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8e8e6c35cf8a-fr",
+      "type": "mcq",
+      "prompt": "Combien de provinces y a-t-il aux Pays-Bas ?",
+      "payload": {
+        "options": [
+          {
+            "label": "14",
+            "correct": false
+          },
+          {
+            "label": "12",
+            "correct": true
+          },
+          {
+            "label": "10",
+            "correct": false
+          },
+          {
+            "label": "13",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-915ae24c6e90-fr",
+      "type": "mcq",
+      "prompt": "Quel océan borde la côte ouest des États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Arctique",
+            "correct": false
+          },
+          {
+            "label": "Pacifique",
+            "correct": true
+          },
+          {
+            "label": "Atlantique",
+            "correct": false
+          },
+          {
+            "label": "Indien",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-947491dd00ce-fr",
+      "type": "mcq",
+      "prompt": "La capitale de lequel de ces pays commence par un B ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Koweït",
+            "correct": false
+          },
+          {
+            "label": "Qatar",
+            "correct": false
+          },
+          {
+            "label": "Liban",
+            "correct": true
+          },
+          {
+            "label": "Jordanie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9618c355b1f9-fr",
+      "type": "mcq",
+      "prompt": "Quel canal relie la Méditerranée à la mer Rouge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Canal du Karakoum",
+            "correct": false
+          },
+          {
+            "label": "Canal de Suez",
+            "correct": true
+          },
+          {
+            "label": "Canal du Sinaï",
+            "correct": false
+          },
+          {
+            "label": "Canal de Panama",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-970c51eb946c-fr",
+      "type": "truefalse",
+      "prompt": "Tokyo est la capitale du Japon.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-98812fc6b5cf-fr",
+      "type": "mcq",
+      "prompt": "Combien de pays ont une frontière terrestre avec le Luxembourg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "3",
+            "correct": true
+          },
+          {
+            "label": "5",
+            "correct": false
+          },
+          {
+            "label": "2",
+            "correct": false
+          },
+          {
+            "label": "4",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-992db0e428bf-fr",
+      "type": "mcq",
+      "prompt": "Quel est le pays le moins peuplé du monde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cité du Vatican",
+            "correct": true
+          },
+          {
+            "label": "Îles Marshall",
+            "correct": false
+          },
+          {
+            "label": "Nauru",
+            "correct": false
+          },
+          {
+            "label": "Liechtenstein",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9d1cd6a1f239-fr",
+      "type": "mcq",
+      "prompt": "Dans quelle mer le Jourdain se jette-t-il ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mer d'Aral",
+            "correct": false
+          },
+          {
+            "label": "Mer Morte",
+            "correct": true
+          },
+          {
+            "label": "Mer Caspienne",
+            "correct": false
+          },
+          {
+            "label": "Mer de Salton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a64abeb66e74-fr",
+      "type": "mcq",
+      "prompt": "Où se trouve l'escalier de la Trinité-des-Monts (« Spanish Steps ») ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Barcelone, Espagne",
+            "correct": false
+          },
+          {
+            "label": "Berlin, Allemagne",
+            "correct": false
+          },
+          {
+            "label": "Rome, Italie",
+            "correct": true
+          },
+          {
+            "label": "Londres, Angleterre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b07f826a3c31-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces anciens États yougoslaves est sans accès à la mer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bosnie-Herzégovine",
+            "correct": false
+          },
+          {
+            "label": "Serbie",
+            "correct": true
+          },
+          {
+            "label": "Monténégro",
+            "correct": false
+          },
+          {
+            "label": "Croatie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c046e9323d8c-fr",
+      "type": "truefalse",
+      "prompt": "Le Groenland est couvert d'herbe et l'Islande de glace.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c0c793c1b6e5-fr",
+      "type": "mcq",
+      "prompt": "Dans quel pays coule le Taedong ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Corée du Nord",
+            "correct": true
+          },
+          {
+            "label": "Japon",
+            "correct": false
+          },
+          {
+            "label": "Chine",
+            "correct": false
+          },
+          {
+            "label": "Corée du Sud",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c233f2c2e7dd-fr",
+      "type": "mcq",
+      "prompt": "Quelle région d'Europe de l'Est est célèbre pour ses vampires ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Transylvanie",
+            "correct": true
+          },
+          {
+            "label": "Macédoine",
+            "correct": false
+          },
+          {
+            "label": "Silésie",
+            "correct": false
+          },
+          {
+            "label": "Slovaquie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c2dc0fd0b811-fr",
+      "type": "mcq",
+      "prompt": "Bridgetown est la capitale de quel pays insulaire des Caraïbes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jamaïque",
+            "correct": false
+          },
+          {
+            "label": "Cuba",
+            "correct": false
+          },
+          {
+            "label": "Dominique",
+            "correct": false
+          },
+          {
+            "label": "Barbade",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ca116bab287a-fr",
+      "type": "mcq",
+      "prompt": "Dans quel pays d'Afrique de l'Ouest se trouve la cité historique de Tombouctou ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Niger",
+            "correct": false
+          },
+          {
+            "label": "Mali",
+            "correct": true
+          },
+          {
+            "label": "Sénégal",
+            "correct": false
+          },
+          {
+            "label": "Burkina Faso",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-cc95c8db6e84-fr",
+      "type": "mcq",
+      "prompt": "Quelle langue inuite a été la première à utiliser une écriture non latine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Iñupiaq",
+            "correct": false
+          },
+          {
+            "label": "Inuktitut",
+            "correct": true
+          },
+          {
+            "label": "Inuinnaqtun",
+            "correct": false
+          },
+          {
+            "label": "Groenlandais",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-cd0a813b003f-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces pays est doublement enclavé (entouré uniquement de pays sans littoral) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ouzbékistan",
+            "correct": true
+          },
+          {
+            "label": "Éthiopie",
+            "correct": false
+          },
+          {
+            "label": "Bolivie",
+            "correct": false
+          },
+          {
+            "label": "Suisse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d15a71a9b7b4-fr",
+      "type": "mcq",
+      "prompt": "Quel pays a trois capitales ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Royaume-Uni",
+            "correct": false
+          },
+          {
+            "label": "Somalie",
+            "correct": false
+          },
+          {
+            "label": "Chine",
+            "correct": false
+          },
+          {
+            "label": "Afrique du Sud",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d2caefd849e2-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelait l'ancien pays dont sont issues la Serbie, la Croatie et la Slovénie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ossétie du Sud",
+            "correct": false
+          },
+          {
+            "label": "Abkhazie",
+            "correct": false
+          },
+          {
+            "label": "Yougoslavie",
+            "correct": true
+          },
+          {
+            "label": "Tchécoslovaquie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d51d30bc31f9-fr",
+      "type": "mcq",
+      "prompt": "Quel est le cinquième plus grand pays par la superficie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Australie",
+            "correct": false
+          },
+          {
+            "label": "Brésil",
+            "correct": true
+          },
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Inde",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d565cb3cfb18-fr",
+      "type": "truefalse",
+      "prompt": "La Terre a la forme d'une sphère parfaite.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d69fae85c81a-fr",
+      "type": "mcq",
+      "prompt": "Quelle ville polonaise les Allemands appellent-ils Danzig ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gdańsk",
+            "correct": true
+          },
+          {
+            "label": "Zakopane",
+            "correct": false
+          },
+          {
+            "label": "Poznań",
+            "correct": false
+          },
+          {
+            "label": "Varsovie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d76ead9b448e-fr",
+      "type": "mcq",
+      "prompt": "Dans quel pays se trouvent les monts Hunua ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nouvelle-Zélande",
+            "correct": true
+          },
+          {
+            "label": "Népal",
+            "correct": false
+          },
+          {
+            "label": "Mexique",
+            "correct": false
+          },
+          {
+            "label": "Chine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-da02934a343b-fr",
+      "type": "truefalse",
+      "prompt": "Ottawa est la capitale du Canada.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-db047052b22e-fr",
+      "type": "truefalse",
+      "prompt": "La capitale du Brésil est Rio de Janeiro.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dcc60577faae-fr",
+      "type": "mcq",
+      "prompt": "La principauté de Sealand, micronation non reconnue, se trouve au large de quel pays ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Japon",
+            "correct": false
+          },
+          {
+            "label": "Argentine",
+            "correct": false
+          },
+          {
+            "label": "Australie",
+            "correct": false
+          },
+          {
+            "label": "Royaume-Uni",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dd8fafdf61c2-fr",
+      "type": "mcq",
+      "prompt": "Où se trouve la ville de Haarlem ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Suisse",
+            "correct": false
+          },
+          {
+            "label": "Allemagne",
+            "correct": false
+          },
+          {
+            "label": "Pays-Bas",
+            "correct": true
+          },
+          {
+            "label": "États-Unis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-df994f5cfa0f-fr",
+      "type": "mcq",
+      "prompt": "Quel est le plus grand lac d'Afrique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lac Tanganyika",
+            "correct": false
+          },
+          {
+            "label": "Lac Turkana",
+            "correct": false
+          },
+          {
+            "label": "Lac Malawi",
+            "correct": false
+          },
+          {
+            "label": "Lac Victoria",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e53e4ce34812-fr",
+      "type": "mcq",
+      "prompt": "Quel passage relie l'océan Atlantique à la Méditerranée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Détroit de Gibraltar",
+            "correct": true
+          },
+          {
+            "label": "Chenal de Tanger",
+            "correct": false
+          },
+          {
+            "label": "Passage de Gibraltar",
+            "correct": false
+          },
+          {
+            "label": "Détroits espagnols",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e7b48de788da-fr",
+      "type": "mcq",
+      "prompt": "Le .at est le domaine de premier niveau de quel pays ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Autriche",
+            "correct": true
+          },
+          {
+            "label": "Argentine",
+            "correct": false
+          },
+          {
+            "label": "Angola",
+            "correct": false
+          },
+          {
+            "label": "Australie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-eb825afba97e-fr",
+      "type": "mcq",
+      "prompt": "Combien de pays indépendants compte l'Amérique du Sud ?",
+      "payload": {
+        "options": [
+          {
+            "label": "12",
+            "correct": true
+          },
+          {
+            "label": "9",
+            "correct": false
+          },
+          {
+            "label": "8",
+            "correct": false
+          },
+          {
+            "label": "10",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f0bf2d93021c-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle la monnaie utilisée en Éthiopie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dirham",
+            "correct": false
+          },
+          {
+            "label": "Birr",
+            "correct": true
+          },
+          {
+            "label": "Dollar américain",
+            "correct": false
+          },
+          {
+            "label": "Rand",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f2cf053285aa-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces archipels ne fait PAS partie du Royaume-Uni ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Îles Shetland",
+            "correct": false
+          },
+          {
+            "label": "Orcades",
+            "correct": false
+          },
+          {
+            "label": "Îles Anglo-Normandes",
+            "correct": true
+          },
+          {
+            "label": "Îles Sorlingues",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f860ef14255f-fr",
+      "type": "mcq",
+      "prompt": "Quelle ville allemande est traversée par l'Isar ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hambourg",
+            "correct": false
+          },
+          {
+            "label": "Berlin",
+            "correct": false
+          },
+          {
+            "label": "Dortmund",
+            "correct": false
+          },
+          {
+            "label": "Munich",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f925d2e7fb0d-fr",
+      "type": "mcq",
+      "prompt": "Sur quel continent se trouve la cordillère des Andes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Afrique",
+            "correct": false
+          },
+          {
+            "label": "Amérique du Sud",
+            "correct": true
+          },
+          {
+            "label": "Europe",
+            "correct": false
+          },
+          {
+            "label": "Asie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-fd4c3f667f1c-fr",
+      "type": "mcq",
+      "prompt": "Quelle est la deuxième langue maternelle la plus parlée en Espagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Français",
+            "correct": false
+          },
+          {
+            "label": "Portugais",
+            "correct": false
+          },
+          {
+            "label": "Catalan",
+            "correct": true
+          },
+          {
+            "label": "Espagnol",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-geography-fr",
+      "title": "Repères géographiques",
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-093fc816e5eb-fr",
+        "otdb-1d737639c45f-fr",
+        "otdb-346b2f4a8147-fr",
+        "otdb-85106bbe4fca-fr",
+        "otdb-7f2344b71db9-fr",
+        "otdb-572b001645d7-fr",
+        "otdb-5edeb288d9cf-fr",
+        "otdb-708ca8904460-fr",
+        "otdb-7824bcace715-fr",
+        "otdb-915ae24c6e90-fr",
+        "otdb-9618c355b1f9-fr",
+        "otdb-a64abeb66e74-fr",
+        "otdb-c233f2c2e7dd-fr",
+        "otdb-da02934a343b-fr",
+        "otdb-f925d2e7fb0d-fr",
+        "otdb-e53e4ce34812-fr",
+        "otdb-df994f5cfa0f-fr",
+        "otdb-376eace346da-fr",
+        "otdb-1cd4172ba8c3-fr",
+        "otdb-970c51eb946c-fr"
+      ],
+      "description": "Capitales, monuments, mers et montagnes."
+    },
+    {
+      "id": "otdb-quiz-around-the-world-fr",
+      "title": "Autour du monde",
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-06e72217a34e-fr",
+        "otdb-09c4b49e009e-fr",
+        "otdb-232a098b7803-fr",
+        "otdb-2946a2afd207-fr",
+        "otdb-36d17a8a52f4-fr",
+        "otdb-3e9d6566d631-fr",
+        "otdb-43f26954c3d1-fr",
+        "otdb-4d3dd54cd182-fr",
+        "otdb-5c831f731398-fr",
+        "otdb-60ffb01b4b7b-fr",
+        "otdb-78f8a4d9c51e-fr",
+        "otdb-87d40d274509-fr",
+        "otdb-89cf9c825cb7-fr",
+        "otdb-c2dc0fd0b811-fr",
+        "otdb-ca116bab287a-fr",
+        "otdb-d15a71a9b7b4-fr",
+        "otdb-d2caefd849e2-fr",
+        "otdb-d69fae85c81a-fr",
+        "otdb-db047052b22e-fr",
+        "otdb-f860ef14255f-fr"
+      ],
+      "description": "Pays, villes et frontières aux quatre coins du globe."
+    }
+  ]
+}

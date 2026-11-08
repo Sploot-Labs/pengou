@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=521"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0521-1",
+      "type": "mcq",
+      "prompt": "Quel acteur joue avec Christian Clavier dans le film « Les anges gardiens » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gérard Depardieu",
+            "correct": true
+          },
+          {
+            "label": "Gérard Jugnot",
+            "correct": false
+          },
+          {
+            "label": "Jean Reno",
+            "correct": false
+          },
+          {
+            "label": "Pierre Richard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

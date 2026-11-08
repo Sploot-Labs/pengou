@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=396"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0396-1",
+      "type": "mcq",
+      "prompt": "Autour de quelle ville italienne fabrique-t-on l'Asti Spumante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Turin",
+            "correct": false
+          },
+          {
+            "label": "Asti",
+            "correct": true
+          },
+          {
+            "label": "Rivoli",
+            "correct": false
+          },
+          {
+            "label": "Biella",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0396-2",
+      "type": "mcq",
+      "prompt": "Les feuilles de quelle plante met-on dans le thé au Maroc ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eucalyptus",
+            "correct": false
+          },
+          {
+            "label": "Menthe",
+            "correct": true
+          },
+          {
+            "label": "Sauge",
+            "correct": false
+          },
+          {
+            "label": "Bleuet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0396-3",
+      "type": "mcq",
+      "prompt": "Que vous offre votre hôte Chinois quand il vous propose du « cha » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Du café",
+            "correct": false
+          },
+          {
+            "label": "Du chocolat",
+            "correct": false
+          },
+          {
+            "label": "Du whisky",
+            "correct": false
+          },
+          {
+            "label": "Du thé",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0396-4",
+      "type": "mcq",
+      "prompt": "Qu'est-ce qu'une bombilla glissée dans le thé en Argentine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cuillère plate",
+            "correct": false
+          },
+          {
+            "label": "Pâte de fruit",
+            "correct": false
+          },
+          {
+            "label": "Paille filtrante",
+            "correct": true
+          },
+          {
+            "label": "Cerise confite",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

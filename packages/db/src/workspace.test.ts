@@ -1,12 +1,23 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import { and, eq } from 'drizzle-orm'
 import { startTestDb, runMigrations, schema } from './index.js'
-import { slugify, generateUniqueSlug, createWorkspace, listUserWorkspaces, getWorkspaceBySlug } from './workspace.js'
+import {
+  slugify,
+  generateUniqueSlug,
+  createWorkspace,
+  listUserWorkspaces,
+  getWorkspaceBySlug,
+  countOwners,
+  setMemberRole,
+} from './workspace.js'
+import { tenantScope } from './tenant.js'
+import type { Db } from './client.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
 
 async function makeUser(email: string): Promise<string> {
-  const [u] = await ctx.db.insert(schema.user)
+  const [u] = await ctx.db
+    .insert(schema.user)
     .values({ id: crypto.randomUUID(), email, name: email, emailVerified: false })
     .returning()
   return u.id
@@ -16,7 +27,9 @@ beforeAll(async () => {
   ctx = await startTestDb()
   await runMigrations(ctx.db)
 }, 120_000)
-afterAll(async () => { await ctx?.stop() })
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 describe('slugify', () => {
   it('normalise en minuscules, tirets, sans bords', () => {
@@ -44,7 +57,9 @@ describe('createWorkspace', () => {
     const ws = await createWorkspace(ctx.db, { name: 'Mon Espace', ownerId: uid })
     expect(ws.name).toBe('Mon Espace')
     expect(ws.slug).toBe('mon-espace')
-    const [m] = await ctx.db.select().from(schema.membership)
+    const [m] = await ctx.db
+      .select()
+      .from(schema.membership)
       .where(and(eq(schema.membership.userId, uid), eq(schema.membership.tenantId, ws.id)))
     expect(m.role).toBe('owner')
   })
@@ -78,5 +93,45 @@ describe('getWorkspaceBySlug', () => {
     const ws = await createWorkspace(ctx.db, { name: 'Par Slug', ownerId: uid })
     expect((await getWorkspaceBySlug(ctx.db, 'par-slug'))?.id).toBe(ws.id)
     expect(await getWorkspaceBySlug(ctx.db, 'inexistant-xyz')).toBeNull()
+  })
+})
+
+describe('countOwners', () => {
+  it('sérialise deux rétrogradations concurrentes', async () => {
+    const a = await makeUser('race-a@pengou.app')
+    const b = await makeUser('race-b@pengou.app')
+    const ws = await createWorkspace(ctx.db, { name: 'Course owners', ownerId: a })
+    await ctx.db.insert(schema.membership).values({ userId: b, tenantId: ws.id, role: 'owner' })
+
+    let release!: () => void
+    const gate = new Promise<void>((r) => {
+      release = r
+    })
+    let tx1Demoted!: () => void
+    const demoted = new Promise<void>((r) => {
+      tx1Demoted = r
+    })
+
+    const tx1 = ctx.db.transaction(async (tx) => {
+      const scope = tenantScope(tx as unknown as Db, ws.id)
+      expect(await countOwners(scope)).toBe(2)
+      await setMemberRole(scope, a, 'admin')
+      tx1Demoted()
+      await gate
+    })
+    await demoted
+
+    let tx2Done = false
+    const tx2 = ctx.db.transaction(async (tx) => {
+      const n = await countOwners(tenantScope(tx as unknown as Db, ws.id))
+      tx2Done = true
+      return n
+    })
+    await new Promise((r) => setTimeout(r, 100))
+    const pendingAfterWait = !tx2Done
+    release()
+    expect(pendingAfterWait).toBe(true)
+    await tx1
+    expect(await tx2).toBe(1)
   })
 })

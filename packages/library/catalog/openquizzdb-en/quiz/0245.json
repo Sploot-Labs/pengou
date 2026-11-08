@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=245"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0245-2-en",
+      "type": "mcq",
+      "prompt": "Which language is mainly spoken in Finland?",
+      "payload": {
+        "options": [
+          {
+            "label": "Norwegian",
+            "correct": false
+          },
+          {
+            "label": "Finnish",
+            "correct": true
+          },
+          {
+            "label": "Russian",
+            "correct": false
+          },
+          {
+            "label": "Swedish",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0245-3-en",
+      "type": "mcq",
+      "prompt": "Which animal is often associated with Finland?",
+      "payload": {
+        "options": [
+          {
+            "label": "Panda",
+            "correct": false
+          },
+          {
+            "label": "Reindeer",
+            "correct": true
+          },
+          {
+            "label": "Kangaroo",
+            "correct": false
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

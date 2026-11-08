@@ -1,0 +1,129 @@
+{
+  "questions": {},
+  "quizzes": {
+    "otdb-quiz-painters-and-masterpieces": {
+      "title": "Peintres et chefs-d'œuvre",
+      "description": "Peintres, sculpteurs et œuvres d'art célèbres."
+    },
+    "otdb-quiz-film": {
+      "title": "Le grand écran",
+      "description": "Films classiques, réalisateurs et vedettes."
+    },
+    "otdb-quiz-movie-trivia": {
+      "title": "Anecdotes de cinéma",
+      "description": "Faits peu connus sur les films cultes et populaires."
+    },
+    "otdb-quiz-culture-mix-1": {
+      "title": "Culture en vrac #1",
+      "description": "Un mélange de questions de géographie, d'histoire, de sciences, de nature, de livres et d'art."
+    },
+    "otdb-quiz-culture-mix-2": {
+      "title": "Culture en vrac #2",
+      "description": "Un mélange de questions de géographie, d'histoire, de sciences, de livres, d'art et de sport."
+    },
+    "otdb-quiz-culture-mix-3": {
+      "title": "Culture en vrac #3",
+      "description": "Un mélange de questions de géographie, d'histoire, de sciences, de nature, de livres et d'art."
+    },
+    "otdb-quiz-culture-mix-4": {
+      "title": "Culture en vrac #4",
+      "description": "Un mélange de questions de géographie, d'histoire, de sciences, de nature, de livres, d'art et de télévision."
+    },
+    "otdb-quiz-the-2000s": {
+      "title": "Années 2000, culture pop",
+      "description": "Films, jeux, musique et sport des années 2000."
+    },
+    "otdb-quiz-the-2010s-2": {
+      "title": "Années 2010, culture pop #2",
+      "description": "Encore du sport, de la musique, des jeux et des films des années 2010."
+    },
+    "otdb-quiz-the-2010s": {
+      "title": "Années 2010, culture pop",
+      "description": "Sport, musique, jeux et films des années 2010."
+    },
+    "otdb-quiz-the-80s": {
+      "title": "Années 80, culture pop",
+      "description": "Films, jeux, musique et sport des années 1980."
+    },
+    "otdb-quiz-the-90s-2": {
+      "title": "Années 90, culture pop #2",
+      "description": "Encore des films, de la musique, des jeux et de l'actualité des années 1990."
+    },
+    "otdb-quiz-the-90s": {
+      "title": "Années 90, culture pop",
+      "description": "Films, musique, jeux et actualité des années 1990."
+    },
+    "otdb-quiz-general-knowledge": {
+      "title": "Culture générale du quotidien",
+      "description": "Faits de tous les jours, langues et monnaies."
+    },
+    "otdb-quiz-food-and-drink": {
+      "title": "Plats et boissons",
+      "description": "Plats, ingrédients et boissons du monde entier."
+    },
+    "otdb-quiz-geography": {
+      "title": "Repères géographiques",
+      "description": "Capitales, monuments, mers et montagnes."
+    },
+    "otdb-quiz-around-the-world": {
+      "title": "Autour du monde",
+      "description": "Pays, villes et frontières aux quatre coins du globe."
+    },
+    "otdb-quiz-history": {
+      "title": "Histoire du monde",
+      "description": "Dates clés, batailles et grandes figures de l'histoire mondiale."
+    },
+    "otdb-quiz-through-the-ages": {
+      "title": "À travers les siècles",
+      "description": "Des empires de l'Antiquité au XXe siècle."
+    },
+    "otdb-quiz-video-games": {
+      "title": "Jeux vidéo",
+      "description": "Jeux vidéo classiques et modernes."
+    },
+    "otdb-quiz-gaming-trivia": {
+      "title": "Anecdotes de gamer",
+      "description": "Personnages, studios et détails de jeux populaires."
+    },
+    "otdb-quiz-books": {
+      "title": "Livres et auteurs",
+      "description": "Auteurs célèbres, romans et personnages."
+    },
+    "otdb-quiz-novels-and-characters": {
+      "title": "Romans et personnages",
+      "description": "Grands romans et les personnages qui les habitent."
+    },
+    "otdb-quiz-music": {
+      "title": "Groupes et chansons",
+      "description": "Groupes de rock et de pop, chanteurs et chansons."
+    },
+    "otdb-quiz-music-trivia": {
+      "title": "Rock, rap et albums",
+      "description": "Groupes, rappeurs et albums, du rock au hip-hop."
+    },
+    "otdb-quiz-animals": {
+      "title": "Le règne animal",
+      "description": "Mammifères, oiseaux, reptiles et autres créatures."
+    },
+    "otdb-quiz-science": {
+      "title": "Sciences pour tous",
+      "description": "Chimie, biologie, physique et espace."
+    },
+    "otdb-quiz-computers-and-internet": {
+      "title": "Informatique et internet",
+      "description": "Bases de l'informatique, programmation et histoire des technologies."
+    },
+    "otdb-quiz-maths-and-numbers": {
+      "title": "Maths et nombres",
+      "description": "Nombres, formes et mathématiciens célèbres."
+    },
+    "otdb-quiz-sports": {
+      "title": "Sport, règles et records",
+      "description": "Règles, records et champions de nombreux sports."
+    },
+    "otdb-quiz-sports-trivia": {
+      "title": "Anecdotes sportives",
+      "description": "Clubs de football, sport automobile et autres faits sportifs."
+    }
+  }
+}

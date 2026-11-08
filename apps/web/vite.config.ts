@@ -1,6 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+// Serveur Pengou vers lequel le dev server proxifie `/api` et `/socket.io`. Surchargeable quand
+// `localhost:3000` est déjà pris par autre chose (ex. `PENGOU_API_TARGET=http://127.0.0.2:3000`,
+// le serveur écoutant sur toutes les interfaces).
+const apiTarget = process.env.PENGOU_API_TARGET ?? 'http://localhost:3000'
+
 export default defineConfig({
   plugins: [react()],
   build: { outDir: 'dist' },
@@ -12,7 +17,7 @@ export default defineConfig({
     allowedHosts: ['.ngrok-free.app', '.ngrok-free.dev', '.ngrok.app', '.ngrok.io', '.ngrok.dev'],
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: apiTarget,
         // changeOrigin ne réécrit QUE le header Host, jamais Origin (vérifié
         // à la main : avec changeOrigin:false, le navigateur envoie tel quel
         // son origine réelle, ex. http://localhost:5173/5174/5175 selon le
@@ -31,7 +36,7 @@ export default defineConfig({
         },
       },
       '/socket.io': {
-        target: 'http://localhost:3000',
+        target: apiTarget,
         ws: true,
         changeOrigin: false,
         // Même raison que /api : le CORS Socket.IO (resserré au lot hardening)

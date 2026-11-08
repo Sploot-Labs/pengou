@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=575"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0575-1",
+      "type": "mcq",
+      "prompt": "Le gin est une boisson spiritueuse proche de quel ancêtre alcoolisé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chartreuse",
+            "correct": false
+          },
+          {
+            "label": "Triple sec",
+            "correct": false
+          },
+          {
+            "label": "Schnaps",
+            "correct": false
+          },
+          {
+            "label": "Genièvre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0575-2",
+      "type": "mcq",
+      "prompt": "Que contient l'eau tonique qui est versée dans votre gin tonic ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sulfadoxine",
+            "correct": false
+          },
+          {
+            "label": "Nivaquine",
+            "correct": false
+          },
+          {
+            "label": "Quinine",
+            "correct": true
+          },
+          {
+            "label": "Ferroquine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

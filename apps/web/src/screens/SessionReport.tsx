@@ -1,3 +1,4 @@
+import { pollPercent } from '@splootlabs/quiz'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ApiError } from '../api/client'
@@ -5,6 +6,7 @@ import {
   getSessionReport,
   sessionCsvUrl,
   type SessionReport as SessionReportData,
+  type SessionReportQuestion,
   type SessionStatus,
 } from '../api/sessions'
 import { Button, Logo, PinDisplay } from '../ui'
@@ -57,9 +59,44 @@ function formatAvgTime(avgTimeMs: number | null): string {
 
 /** `null` (no answers yet) is distinct from `0` (answered, all wrong) — both
  * render as text, never a bare percentage bar or colour swatch. */
-function successRate(correctCount: number, answerCount: number): number | null {
-  if (answerCount === 0) return null
+function successRate(correctCount: number | null, answerCount: number): number | null {
+  if (correctCount === null || answerCount === 0) return null
   return correctCount / answerCount
+}
+
+/** Nuage de mots : pas de taux de réussite, on résume la participation et les
+ * quatre idées les plus fréquentes (la liste complète reste dans le CSV). */
+function wordcloudSummary(cloud: {
+  participants: number
+  totalWords: number
+  words: { text: string; count: number }[]
+}): string {
+  const head = `Nuage de mots, ${cloud.participants} participant${cloud.participants > 1 ? 's' : ''}, ${cloud.totalWords} mot${cloud.totalWords > 1 ? 's' : ''}`
+  if (cloud.words.length === 0) return `${head}. Aucune idée proposée`
+  return `${head} : ${cloud.words
+    .slice(0, 4)
+    .map((w) => `${w.text} (${w.count})`)
+    .join(', ')}`
+}
+
+/** Sondage : participation puis une ligne par choix, dans l'ordre du quiz. */
+function PollSummary({ poll }: { poll: NonNullable<SessionReportQuestion['poll']> }) {
+  return (
+    <>
+      <span>{`Sondage, ${poll.voters} participant${poll.voters > 1 ? 's' : ''}`}</span>
+      {poll.voters === 0 ? (
+        <p style={{ margin: 0 }}>Aucun vote</p>
+      ) : (
+        <ul style={{ margin: 0, paddingLeft: 'var(--space-4)' }}>
+          {poll.options.map((o, i) => (
+            <li key={`${i}-${o.label}`}>
+              {`${o.label} : ${o.votes} vote${o.votes > 1 ? 's' : ''} (${pollPercent(o.votes, poll.voters)} %)`}
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  )
 }
 
 export function SessionReport() {
@@ -141,6 +178,7 @@ export function SessionReport() {
   // "most missed" would be inventing a problem that doesn't exist. Ties (two
   // questions sharing the worst rate) are ALL flagged, not an arbitrary one.
   const answeredRates = questions
+    .filter((q) => q.wordcloud === null && q.poll === null)
     .map((q) => successRate(q.correctCount, q.answerCount))
     .filter((rate): rate is number => rate !== null)
   const worstRate = answeredRates.length > 0 ? Math.min(...answeredRates) : null
@@ -152,7 +190,9 @@ export function SessionReport() {
         <Logo to="/" />
         <div style={{ flex: 1, minWidth: 0 }}>
           <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
-            <Link to="/">← Retour à l'accueil</Link>
+            <Link className="host-link-button" to="/">
+              ← Retour à l'accueil
+            </Link>
           </span>
         </div>
         <a className="ab-button ab-button--primary" href={sessionCsvUrl(session.id)} download>
@@ -166,9 +206,7 @@ export function SessionReport() {
         <div className="report-summary">
           <PinDisplay pin={session.pin} compact />
           <div className="report-summary__facts">
-            <span className={`host-badge host-badge--${session.status}`}>
-              {STATUS_LABEL[session.status]}
-            </span>
+            <span className={`host-badge host-badge--${session.status}`}>{STATUS_LABEL[session.status]}</span>
             <span>{formatDate(session.startedAt)}</span>
             {session.startedAt && session.endedAt && (
               <span>Durée : {formatDuration(session.startedAt, session.endedAt)}</span>
@@ -179,21 +217,15 @@ export function SessionReport() {
         <div className="report-stats">
           <div className="report-stat">
             <span className="report-stat__value">{players.length}</span>
-            <span className="report-stat__label">
-              joueur{players.length > 1 ? 's' : ''}
-            </span>
+            <span className="report-stat__label">joueur{players.length > 1 ? 's' : ''}</span>
           </div>
           <div className="report-stat">
             <span className="report-stat__value">{questions.length}</span>
-            <span className="report-stat__label">
-              question{questions.length > 1 ? 's' : ''}
-            </span>
+            <span className="report-stat__label">question{questions.length > 1 ? 's' : ''}</span>
           </div>
           {session.startedAt && session.endedAt && (
             <div className="report-stat">
-              <span className="report-stat__value">
-                {formatDuration(session.startedAt, session.endedAt)}
-              </span>
+              <span className="report-stat__value">{formatDuration(session.startedAt, session.endedAt)}</span>
               <span className="report-stat__label">durée</span>
             </div>
           )}
@@ -206,9 +238,7 @@ export function SessionReport() {
           ) : (
             <div className="report-table-wrap">
               <table className="report-table">
-                <caption className="visually-hidden">
-                  Classement des joueurs, du meilleur score au moins bon.
-                </caption>
+                <caption className="visually-hidden">Classement des joueurs, du meilleur score au moins bon.</caption>
                 <thead>
                   <tr>
                     <th scope="col">Pseudo</th>
@@ -236,9 +266,8 @@ export function SessionReport() {
         <section aria-labelledby="report-questions-heading" style={{ marginTop: 'var(--space-6)' }}>
           <h2 id="report-questions-heading">Questions</h2>
           <p style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
-            Cette liste reflète la version actuelle du quiz : si une question a été modifiée ou
-            supprimée depuis cette partie, son contenu ci-dessous peut différer de ce qui a
-            réellement été joué.
+            Cette liste reflète la version actuelle du quiz : si une question a été modifiée ou supprimée depuis cette
+            partie, son contenu ci-dessous peut différer de ce qui a réellement été joué.
           </p>
           {questions.length === 0 ? (
             <p className="ab-empty-state">Ce quiz n'a aucune question.</p>
@@ -259,7 +288,7 @@ export function SessionReport() {
                 <tbody>
                   {questions.map((q) => {
                     const rate = successRate(q.correctCount, q.answerCount)
-                    const isWorst = highlightWorst && rate === worstRate
+                    const isWorst = highlightWorst && q.wordcloud === null && q.poll === null && rate === worstRate
                     return (
                       <tr key={q.questionId}>
                         <td>{q.orderIndex + 1}</td>
@@ -272,9 +301,15 @@ export function SessionReport() {
                           )}
                         </td>
                         <td>
-                          {rate === null
-                            ? '(aucune réponse)'
-                            : `${Math.round(rate * 100)} % (${q.correctCount}/${q.answerCount})`}
+                          {q.wordcloud !== null ? (
+                            wordcloudSummary(q.wordcloud)
+                          ) : q.poll !== null ? (
+                            <PollSummary poll={q.poll} />
+                          ) : rate === null ? (
+                            '(aucune réponse)'
+                          ) : (
+                            `${Math.round(rate * 100)} % (${q.correctCount}/${q.answerCount})`
+                          )}
                         </td>
                         <td>{formatAvgTime(q.avgTimeMs)}</td>
                       </tr>

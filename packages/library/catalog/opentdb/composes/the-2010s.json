@@ -1,0 +1,571 @@
+{
+  "source": {
+    "name": "Open Trivia Database",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-01d846ce5610",
+      "type": "mcq",
+      "prompt": "Which soccer player is featured on the cover of EA Sport's FIFA 18?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lionel Messi",
+            "correct": false
+          },
+          {
+            "label": "Cristiano Ronaldo",
+            "correct": true
+          },
+          {
+            "label": "Neymar",
+            "correct": false
+          },
+          {
+            "label": "Harry Kane",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-200dd2abeda2",
+      "type": "mcq",
+      "prompt": "In Big Hero 6, what were Baymax's motions modeled after?",
+      "payload": {
+        "options": [
+          {
+            "label": "Baby ostriches",
+            "correct": false
+          },
+          {
+            "label": "Baby bears",
+            "correct": false
+          },
+          {
+            "label": "Baby penguins",
+            "correct": true
+          },
+          {
+            "label": "Baby monkeys",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2c38e1fb3339",
+      "type": "mcq",
+      "prompt": "What was the final score of the Germany vs. Brazil 2014 FIFA World Cup match?",
+      "payload": {
+        "options": [
+          {
+            "label": "16 - 0",
+            "correct": false
+          },
+          {
+            "label": "7 - 1",
+            "correct": true
+          },
+          {
+            "label": "3 - 4",
+            "correct": false
+          },
+          {
+            "label": "0 - 1",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3377f3cc932d",
+      "type": "mcq",
+      "prompt": "In Avengers: Infinity War, where was the Soul Stone located?",
+      "payload": {
+        "options": [
+          {
+            "label": "Xandar",
+            "correct": false
+          },
+          {
+            "label": "Knowhere",
+            "correct": false
+          },
+          {
+            "label": "Vormir",
+            "correct": true
+          },
+          {
+            "label": "Asgard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-39838a0aae8d",
+      "type": "mcq",
+      "prompt": "What national team won the 2016 edition of UEFA European Championship?",
+      "payload": {
+        "options": [
+          {
+            "label": "Portugal",
+            "correct": true
+          },
+          {
+            "label": "Germany",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "England",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3ec6a9506bf4",
+      "type": "mcq",
+      "prompt": "What is the name of the main character in \"Life is Strange\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Victoria Chase",
+            "correct": false
+          },
+          {
+            "label": "Maxine Caulfield",
+            "correct": true
+          },
+          {
+            "label": "Chloe Price",
+            "correct": false
+          },
+          {
+            "label": "Stella Hill",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5b7dd27c8663",
+      "type": "truefalse",
+      "prompt": "\"Friday,\" the single by Rebecca Black, was released in February 10th, 2011.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-782dabd95012",
+      "type": "mcq",
+      "prompt": "Who is the villain company in \"Stardew Valley\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ronin",
+            "correct": false
+          },
+          {
+            "label": "Joja Co",
+            "correct": true
+          },
+          {
+            "label": "Robotnik Industry's",
+            "correct": false
+          },
+          {
+            "label": "Empire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8abfed286a97",
+      "type": "mcq",
+      "prompt": "What is the opening track on Lorde's Pure Heroine?",
+      "payload": {
+        "options": [
+          {
+            "label": "Team",
+            "correct": false
+          },
+          {
+            "label": "400 Lux",
+            "correct": false
+          },
+          {
+            "label": "Tennis Court",
+            "correct": true
+          },
+          {
+            "label": "Royals",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9df83564342e",
+      "type": "mcq",
+      "prompt": "What was the name given to Android 4.3?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nutella",
+            "correct": false
+          },
+          {
+            "label": "Lollipop",
+            "correct": false
+          },
+          {
+            "label": "Froyo",
+            "correct": false
+          },
+          {
+            "label": "Jelly Bean",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a558a0b9675f",
+      "type": "mcq",
+      "prompt": "Which artist released the 2012 single \"Harlem Shake\", which was used in numerous YouTube videos in 2013?",
+      "payload": {
+        "options": [
+          {
+            "label": "RL Grime",
+            "correct": false
+          },
+          {
+            "label": "Flosstradamus",
+            "correct": false
+          },
+          {
+            "label": "NGHTMRE",
+            "correct": false
+          },
+          {
+            "label": "Baauer",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-acf39f60b7b9",
+      "type": "mcq",
+      "prompt": "Which team won the 2015-16 English Premier League?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cheslea",
+            "correct": false
+          },
+          {
+            "label": "Manchester United",
+            "correct": false
+          },
+          {
+            "label": "Leicester City",
+            "correct": true
+          },
+          {
+            "label": "Liverpool",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b2121206577b",
+      "type": "mcq",
+      "prompt": "Which country won the 2018 FIFA World Cup hosted in Russia?",
+      "payload": {
+        "options": [
+          {
+            "label": "Belgium",
+            "correct": false
+          },
+          {
+            "label": "England",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": true
+          },
+          {
+            "label": "Croatia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b787a8cd14fa",
+      "type": "mcq",
+      "prompt": "What is Grumpy Cat's real name?",
+      "payload": {
+        "options": [
+          {
+            "label": "Broccoli",
+            "correct": false
+          },
+          {
+            "label": "Sauce",
+            "correct": false
+          },
+          {
+            "label": "Tardar Sauce",
+            "correct": true
+          },
+          {
+            "label": "Minnie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b9ee7a555007",
+      "type": "mcq",
+      "prompt": "Who won the 2015 Formula 1 World Championship?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sebastian Vettel",
+            "correct": false
+          },
+          {
+            "label": "Jenson Button",
+            "correct": false
+          },
+          {
+            "label": "Nico Rosberg",
+            "correct": false
+          },
+          {
+            "label": "Lewis Hamilton",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c370d266e29a",
+      "type": "mcq",
+      "prompt": "What was Taylor Swift's 5th album called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Red",
+            "correct": false
+          },
+          {
+            "label": "1989",
+            "correct": true
+          },
+          {
+            "label": "Fearless",
+            "correct": false
+          },
+          {
+            "label": "Speak Now",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d9c5e03ae397",
+      "type": "mcq",
+      "prompt": "In the film \"John Wick\" why does John Wick get out of retirement?",
+      "payload": {
+        "options": [
+          {
+            "label": "He was punched in the face",
+            "correct": false
+          },
+          {
+            "label": "His puppy is killed and his car was stolen",
+            "correct": true
+          },
+          {
+            "label": "He needed money",
+            "correct": false
+          },
+          {
+            "label": "He got mugged",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e40e26a5706d",
+      "type": "truefalse",
+      "prompt": "Arcade Fire's 'The Suburbs' won the Album of the Year award in the 2011 Grammys.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e700e20a2042",
+      "type": "truefalse",
+      "prompt": "Amazon acquired Twitch in August 2014 for $970 million dollars.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f4998a7d9f8d",
+      "type": "mcq",
+      "prompt": "What is the orange and white bot's name in \"Star Wars: The Force Awakens\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "AA-A",
+            "correct": false
+          },
+          {
+            "label": "BB-3",
+            "correct": false
+          },
+          {
+            "label": "BB-8",
+            "correct": true
+          },
+          {
+            "label": "R2-D2",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-the-2010s",
+      "title": "The 2010s",
+      "description": "Sport, music, games and films from the 2010s.",
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-01d846ce5610",
+        "otdb-5b7dd27c8663",
+        "otdb-200dd2abeda2",
+        "otdb-2c38e1fb3339",
+        "otdb-3377f3cc932d",
+        "otdb-b9ee7a555007",
+        "otdb-acf39f60b7b9",
+        "otdb-c370d266e29a",
+        "otdb-f4998a7d9f8d",
+        "otdb-e40e26a5706d",
+        "otdb-8abfed286a97",
+        "otdb-b2121206577b",
+        "otdb-39838a0aae8d",
+        "otdb-9df83564342e",
+        "otdb-782dabd95012",
+        "otdb-a558a0b9675f",
+        "otdb-d9c5e03ae397",
+        "otdb-b787a8cd14fa",
+        "otdb-3ec6a9506bf4",
+        "otdb-e700e20a2042"
+      ]
+    }
+  ]
+}

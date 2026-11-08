@@ -1,0 +1,445 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0393-2-en",
+      "type": "mcq",
+      "prompt": "What does Katniss's brooch depict in \"The Hunger Games\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Globe",
+            "correct": false
+          },
+          {
+            "label": "Pickaxe",
+            "correct": false
+          },
+          {
+            "label": "Mockingjay",
+            "correct": true
+          },
+          {
+            "label": "Bow",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0135-4-en",
+      "type": "mcq",
+      "prompt": "In what year was Charlemagne crowned emperor in Rome?",
+      "payload": {
+        "options": [
+          {
+            "label": "700",
+            "correct": false
+          },
+          {
+            "label": "800",
+            "correct": true
+          },
+          {
+            "label": "900",
+            "correct": false
+          },
+          {
+            "label": "600",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0536-1-en",
+      "type": "mcq",
+      "prompt": "What do ladybugs mainly eat?",
+      "payload": {
+        "options": [
+          {
+            "label": "Caterpillars",
+            "correct": false
+          },
+          {
+            "label": "Ants",
+            "correct": false
+          },
+          {
+            "label": "Aphids",
+            "correct": true
+          },
+          {
+            "label": "Mosquitoes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0372-4-en",
+      "type": "mcq",
+      "prompt": "In which tart are the upside-down apples caramelized?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tarte Tatin",
+            "correct": true
+          },
+          {
+            "label": "Rice tart",
+            "correct": false
+          },
+          {
+            "label": "Normandy tart",
+            "correct": false
+          },
+          {
+            "label": "Tarte au maton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0225-4-en",
+      "type": "mcq",
+      "prompt": "Which Steven Spielberg film reinvents the story of Peter Pan?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hook",
+            "correct": true
+          },
+          {
+            "label": "Amistad",
+            "correct": false
+          },
+          {
+            "label": "Munich",
+            "correct": false
+          },
+          {
+            "label": "Sugarland Express",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0323-3-en",
+      "type": "mcq",
+      "prompt": "What tactical role does Kylian Mbappé mainly play?",
+      "payload": {
+        "options": [
+          {
+            "label": "Striker",
+            "correct": true
+          },
+          {
+            "label": "Goalkeeper",
+            "correct": false
+          },
+          {
+            "label": "Midfielder",
+            "correct": false
+          },
+          {
+            "label": "Defender",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0318-4-en",
+      "type": "mcq",
+      "prompt": "About how tall can a giraffe grow?",
+      "payload": {
+        "options": [
+          {
+            "label": "4 meters",
+            "correct": false
+          },
+          {
+            "label": "3 meters",
+            "correct": false
+          },
+          {
+            "label": "8 meters",
+            "correct": false
+          },
+          {
+            "label": "6 meters",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0538-2-en",
+      "type": "mcq",
+      "prompt": "Who wrote the short story \"The Snows of Kilimanjaro\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Steinbeck",
+            "correct": false
+          },
+          {
+            "label": "Camus",
+            "correct": false
+          },
+          {
+            "label": "Mauriac",
+            "correct": false
+          },
+          {
+            "label": "Hemingway",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0589-1-en",
+      "type": "mcq",
+      "prompt": "How many holes does a golf course generally have?",
+      "payload": {
+        "options": [
+          {
+            "label": "16",
+            "correct": false
+          },
+          {
+            "label": "12",
+            "correct": false
+          },
+          {
+            "label": "14",
+            "correct": false
+          },
+          {
+            "label": "18",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0435-4-en",
+      "type": "mcq",
+      "prompt": "Which ocean is linked to the Mediterranean by the Strait of Gibraltar?",
+      "payload": {
+        "options": [
+          {
+            "label": "Arctic",
+            "correct": false
+          },
+          {
+            "label": "Pacific",
+            "correct": false
+          },
+          {
+            "label": "Atlantic",
+            "correct": true
+          },
+          {
+            "label": "Indian",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0363-3-en",
+      "type": "mcq",
+      "prompt": "Which Jean-Michel Jarre album came out in 1976?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rendez-vous",
+            "correct": false
+          },
+          {
+            "label": "Equinoxe",
+            "correct": false
+          },
+          {
+            "label": "Oxygène",
+            "correct": true
+          },
+          {
+            "label": "Chronologie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0512-4-en",
+      "type": "mcq",
+      "prompt": "Dacia is a carmaker originally from which country?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bulgaria",
+            "correct": false
+          },
+          {
+            "label": "Greece",
+            "correct": false
+          },
+          {
+            "label": "Poland",
+            "correct": false
+          },
+          {
+            "label": "Romania",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0255-3-en",
+      "type": "mcq",
+      "prompt": "Which château inspired Hergé to create Marlinspike Hall?",
+      "payload": {
+        "options": [
+          {
+            "label": "Villandry",
+            "correct": false
+          },
+          {
+            "label": "Chaumont",
+            "correct": false
+          },
+          {
+            "label": "Cheverny",
+            "correct": true
+          },
+          {
+            "label": "Langeais",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0470-4-en",
+      "type": "mcq",
+      "prompt": "In London, which famous structure is named after Sir Benjamin Hall?",
+      "payload": {
+        "options": [
+          {
+            "label": "Big Ben",
+            "correct": true
+          },
+          {
+            "label": "Kew Palace",
+            "correct": false
+          },
+          {
+            "label": "Old Bailey",
+            "correct": false
+          },
+          {
+            "label": "Syon House",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0333-2-en",
+      "type": "mcq",
+      "prompt": "What is the main professional social network?",
+      "payload": {
+        "options": [
+          {
+            "label": "Friendster",
+            "correct": false
+          },
+          {
+            "label": "LinkedIn",
+            "correct": true
+          },
+          {
+            "label": "Heeloo",
+            "correct": false
+          },
+          {
+            "label": "Movim",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

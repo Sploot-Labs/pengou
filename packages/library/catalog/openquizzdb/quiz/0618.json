@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=618"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0618-4",
+      "type": "mcq",
+      "prompt": "Quel phénomène important l'abeille assure-t-elle en butinant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sporulation",
+            "correct": false
+          },
+          {
+            "label": "Pollinisation",
+            "correct": true
+          },
+          {
+            "label": "Germination",
+            "correct": false
+          },
+          {
+            "label": "Introgression",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

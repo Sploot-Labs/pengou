@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=376"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0376-2",
+      "type": "mcq",
+      "prompt": "Quelle rivière aux crues redoutables est enjambée par le pont du Gard ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bièvre",
+            "correct": false
+          },
+          {
+            "label": "Garonne",
+            "correct": false
+          },
+          {
+            "label": "Gardon",
+            "correct": true
+          },
+          {
+            "label": "Rhône",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0376-4",
+      "type": "mcq",
+      "prompt": "De combien d'arches est constitué le pont de Westminster ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sept",
+            "correct": true
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Neuf",
+            "correct": false
+          },
+          {
+            "label": "Huit",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

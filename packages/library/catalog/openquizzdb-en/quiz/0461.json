@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=461"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0461-2-en",
+      "type": "mcq",
+      "prompt": "Which country is the biggest emitter of greenhouse gases?",
+      "payload": {
+        "options": [
+          {
+            "label": "United States",
+            "correct": false
+          },
+          {
+            "label": "India",
+            "correct": false
+          },
+          {
+            "label": "China",
+            "correct": true
+          },
+          {
+            "label": "Russia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0461-4-en",
+      "type": "mcq",
+      "prompt": "In what year did the term \"greenhouse effect\" first appear?",
+      "payload": {
+        "options": [
+          {
+            "label": "1824",
+            "correct": true
+          },
+          {
+            "label": "1934",
+            "correct": false
+          },
+          {
+            "label": "1989",
+            "correct": false
+          },
+          {
+            "label": "1956",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

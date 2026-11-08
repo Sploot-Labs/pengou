@@ -3,37 +3,76 @@ import { eq, sql } from 'drizzle-orm'
 import { startTestDb, runMigrations, schema, withTenantTx } from '../index.js'
 import { tenantScope } from '../tenant.js'
 import { createQuiz } from './quiz.js'
+import { createQuestion } from './question.js'
 import {
-  createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
-  listSessionPlayersByScore, saveEngineState, clearEngineState, loadEngineState, loadEngineStateByPin,
-  listResumableSessions, abandonStaleSessions, abandonInactiveSessions, deleteSessionPlayer,
+  setWordcloudRemoved,
+  loadWordcloudRemoved,
+  createGameSession,
+  getGameSessionById,
+  addSessionPlayer,
+  recordAnswer,
+  setSessionStatus,
+  setPlayerScore,
+  listSessionPlayersByScore,
+  saveEngineState,
+  clearEngineState,
+  loadEngineState,
+  loadEngineStateByPin,
+  listResumableSessions,
+  abandonStaleSessions,
+  abandonInactiveSessions,
+  deleteSessionPlayer,
 } from './session.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
 let tenantA: string, tenantB: string, ownerA: string, quizA: string, quizB: string, questionA: string
 
 beforeAll(async () => {
-  ctx = await startTestDb(); await runMigrations(ctx.db)
+  ctx = await startTestDb()
+  await runMigrations(ctx.db)
   const [tA] = await ctx.db.insert(schema.tenant).values({ name: 'A' }).returning()
   const [tB] = await ctx.db.insert(schema.tenant).values({ name: 'B' }).returning()
-  const [uA] = await ctx.db.insert(schema.user)
-    .values({ id: crypto.randomUUID(), email: 'a@x.fr', name: 'A', emailVerified: false }).returning()
-  tenantA = tA.id; tenantB = tB.id; ownerA = uA.id
+  const [uA] = await ctx.db
+    .insert(schema.user)
+    .values({ id: crypto.randomUUID(), email: 'a@x.fr', name: 'A', emailVerified: false })
+    .returning()
+  tenantA = tA.id
+  tenantB = tB.id
+  ownerA = uA.id
   const q = await createQuiz(tenantScope(ctx.db, tenantA), { ownerId: ownerA, title: 'Quiz A' })
   quizA = q.id
   const qb = await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerA, title: 'Quiz B' })
   quizB = qb.id
-  const [question] = await ctx.db.insert(schema.question).values({
-    quizId: quizA, tenantId: tenantA, type: 'mcq', prompt: 'Q1', timeLimit: 20, orderIndex: 0,
-    payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
-  }).returning()
+  const [question] = await ctx.db
+    .insert(schema.question)
+    .values({
+      quizId: quizA,
+      tenantId: tenantA,
+      type: 'mcq',
+      prompt: 'Q1',
+      timeLimit: 20,
+      orderIndex: 0,
+      payload: {
+        options: [
+          { label: 'A', correct: true },
+          { label: 'B', correct: false },
+        ],
+      },
+    })
+    .returning()
   questionA = question.id
 }, 120_000)
-afterAll(async () => { await ctx?.stop() })
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 describe('repo session scopé au tenant du quiz', () => {
   it('createGameSession crée une session lobby sous le tenant du quiz', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '111111' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '111111',
+    })
     expect(session).not.toBeNull()
     expect(session?.tenantId).toBe(tenantA)
     expect(session?.quizId).toBe(quizA)
@@ -41,17 +80,29 @@ describe('repo session scopé au tenant du quiz', () => {
   })
 
   it('createGameSession renvoie null si le quiz appartient à un autre tenant (pas de fuite)', async () => {
-    const leaked = await createGameSession(tenantScope(ctx.db, tenantB), { quizId: quizA, hostId: ownerA, pin: '222222' })
+    const leaked = await createGameSession(tenantScope(ctx.db, tenantB), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '222222',
+    })
     expect(leaked).toBeNull()
   })
 
   it('createGameSession sur un quiz de son propre tenant B fonctionne', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantB), { quizId: quizB, hostId: ownerA, pin: '333333' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantB), {
+      quizId: quizB,
+      hostId: ownerA,
+      pin: '333333',
+    })
     expect(session?.tenantId).toBe(tenantB)
   })
 
   it('addSessionPlayer ajoute un joueur à la session', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '444444' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '444444',
+    })
     const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Alice', joinToken: 'tok-alice' })
     expect(player.sessionId).toBe(session!.id)
     expect(player.nickname).toBe('Alice')
@@ -59,14 +110,22 @@ describe('repo session scopé au tenant du quiz', () => {
   })
 
   it('recordAnswer insère un enregistrement de réponse (jsonb)', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '555555' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '555555',
+    })
     const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Bob', joinToken: 'tok-bob' })
     await recordAnswer(ctx.db, {
-      sessionId: session!.id, questionId: questionA, playerId: player.id,
-      answer: { choice: 0 }, timeMs: 3200, isCorrect: true, points: 850,
+      sessionId: session!.id,
+      questionId: questionA,
+      playerId: player.id,
+      answer: { choice: 0 },
+      timeMs: 3200,
+      isCorrect: true,
+      points: 850,
     })
-    const [row] = await ctx.db.select().from(schema.answerRecord)
-      .where(eq(schema.answerRecord.playerId, player.id))
+    const [row] = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.playerId, player.id))
     expect(row).toBeDefined()
     expect(row.answer).toEqual({ choice: 0 })
     expect(row.timeMs).toBe(3200)
@@ -75,17 +134,25 @@ describe('repo session scopé au tenant du quiz', () => {
   })
 
   it('recordAnswer est IDEMPOTENT (P1-8) : un 2e appel (session,question,joueur) est un no-op', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '556677' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '556677',
+    })
     const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Idem', joinToken: 'tok-idem' })
     const args = {
-      sessionId: session!.id, questionId: questionA, playerId: player.id,
-      answer: { choice: 1 }, timeMs: 1000, isCorrect: false, points: 0,
+      sessionId: session!.id,
+      questionId: questionA,
+      playerId: player.id,
+      answer: { choice: 1 },
+      timeMs: 1000,
+      isCorrect: false,
+      points: 0,
     }
     await recordAnswer(ctx.db, args)
     // Ré-écriture (ex. cicatrisation au redémarrage) : ne doit PAS créer de doublon ni lever.
     await recordAnswer(ctx.db, { ...args, points: 999, answer: { choice: 9 } })
-    const rows = await ctx.db.select().from(schema.answerRecord)
-      .where(eq(schema.answerRecord.playerId, player.id))
+    const rows = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.playerId, player.id))
     expect(rows).toHaveLength(1)
     // La 1re écriture gagne (ON CONFLICT DO NOTHING) : la valeur d'origine est conservée.
     expect(rows[0].points).toBe(0)
@@ -93,7 +160,11 @@ describe('repo session scopé au tenant du quiz', () => {
   })
 
   it('setSessionStatus met à jour le statut (et startedAt/endedAt)', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '666666' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '666666',
+    })
     await setSessionStatus(ctx.db, session!.id, 'active')
     const [afterStart] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.id, session!.id))
     expect(afterStart.status).toBe('active')
@@ -107,7 +178,11 @@ describe('repo session scopé au tenant du quiz', () => {
   })
 
   it('setPlayerScore met à jour total_score', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '777777' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '777777',
+    })
     const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Carol', joinToken: 'tok-carol' })
     await setPlayerScore(ctx.db, player.id, 900)
     const [row] = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.id, player.id))
@@ -115,7 +190,11 @@ describe('repo session scopé au tenant du quiz', () => {
   })
 
   it('listSessionPlayersByScore renvoie le classement trié desc par total_score', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '888888' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '888888',
+    })
     const p1 = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Low', joinToken: 't1' })
     const p2 = await addSessionPlayer(ctx.db, session!.id, { nickname: 'High', joinToken: 't2' })
     await setPlayerScore(ctx.db, p1.id, 100)
@@ -132,7 +211,11 @@ describe('repo session scopé au tenant du quiz', () => {
   })
 
   it('getGameSessionById renvoie la session par id, hostId inclus', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '112233' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '112233',
+    })
     const found = await getGameSessionById(ctx.db, session!.id)
     expect(found?.id).toBe(session!.id)
     expect(found?.hostId).toBe(ownerA)
@@ -144,9 +227,17 @@ describe('repo session scopé au tenant du quiz', () => {
   })
 
   it('createGameSession réutilise un PIN déjà pris par une session ended (index partiel)', async () => {
-    const ended = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '000001' })
+    const ended = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '000001',
+    })
     await setSessionStatus(ctx.db, ended!.id, 'ended')
-    const reused = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '000001' })
+    const reused = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '000001',
+    })
     expect(reused).not.toBeNull()
   })
 
@@ -178,13 +269,20 @@ describe('repo session scopé au tenant du quiz', () => {
   })
 
   it('saveEngineState rafraîchit last_activity_at', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '717171' })
-    await ctx.db.update(schema.gameSession)
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '717171',
+    })
+    await ctx.db
+      .update(schema.gameSession)
       .set({ lastActivityAt: new Date('2020-01-01T00:00:00Z') })
       .where(eq(schema.gameSession.id, session!.id))
     await saveEngineState(ctx.db, session!.id, { phase: 'question' })
-    const [row] = await ctx.db.select({ last: schema.gameSession.lastActivityAt })
-      .from(schema.gameSession).where(eq(schema.gameSession.id, session!.id))
+    const [row] = await ctx.db
+      .select({ last: schema.gameSession.lastActivityAt })
+      .from(schema.gameSession)
+      .where(eq(schema.gameSession.id, session!.id))
     expect(row.last.getTime()).toBeGreaterThan(new Date('2021-01-01T00:00:00Z').getTime())
   })
 
@@ -192,7 +290,8 @@ describe('repo session scopé au tenant du quiz', () => {
     const s = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '818181' })
     await setSessionStatus(ctx.db, s!.id, 'active')
     await saveEngineState(ctx.db, s!.id, { phase: 'question' })
-    await ctx.db.update(schema.gameSession)
+    await ctx.db
+      .update(schema.gameSession)
       .set({ lastActivityAt: new Date('2020-01-01T00:00:00Z') })
       .where(eq(schema.gameSession.id, s!.id))
 
@@ -205,12 +304,20 @@ describe('repo session scopé au tenant du quiz', () => {
     expect(row.engineState).toBeNull()
 
     // PIN réutilisable : une nouvelle session peut reprendre le même PIN sans violer l'index partiel.
-    const reuse = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '818181' })
+    const reuse = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '818181',
+    })
     expect(reuse).not.toBeNull()
   })
 
   it('abandonInactiveSessions ignore les parties récentes et déjà terminées', async () => {
-    const fresh = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '828282' })
+    const fresh = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '828282',
+    })
     await setSessionStatus(ctx.db, fresh!.id, 'active') // last_activity_at = now (défaut/insert récent)
     const ids = await abandonInactiveSessions(ctx.db, 30 * 60_000)
     expect(ids).not.toContain(fresh!.id)
@@ -221,7 +328,8 @@ describe('repo session scopé au tenant du quiz', () => {
     const old = await createGameSession(scope, { quizId: quizA, hostId: ownerA, pin: '838383' })
     await setSessionStatus(ctx.db, old!.id, 'active')
     await saveEngineState(ctx.db, old!.id, { phase: 'question', who: 'old' })
-    await ctx.db.update(schema.gameSession)
+    await ctx.db
+      .update(schema.gameSession)
       .set({ lastActivityAt: new Date('2020-01-01T00:00:00Z') })
       .where(eq(schema.gameSession.id, old!.id))
     const abandonedIds = await abandonInactiveSessions(ctx.db, 30 * 60_000)
@@ -239,60 +347,144 @@ describe('repo session scopé au tenant du quiz', () => {
   })
 
   it('addSessionPlayer pose le tenant_id de la session parente (signature inchangée)', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '242424' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '242424',
+    })
     const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Tenanted', joinToken: 'tok-tenanted' })
     expect(player.tenantId).toBe(tenantA)
   })
 
   it('la FK composite rejette un session_player dont le tenant_id ne colle pas à la session', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '252525' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '252525',
+    })
     await expect(
-      ctx.db.insert(schema.sessionPlayer).values({
-        sessionId: session!.id, tenantId: tenantB, nickname: 'Cross', joinToken: 'tok-cross',
-      }).returning(),
+      ctx.db
+        .insert(schema.sessionPlayer)
+        .values({
+          sessionId: session!.id,
+          tenantId: tenantB,
+          nickname: 'Cross',
+          joinToken: 'tok-cross',
+        })
+        .returning(),
     ).rejects.toThrow()
   })
 
   it('recordAnswer pose le tenant_id de la session parente (signature inchangée)', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '262626' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '262626',
+    })
     const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Ans', joinToken: 'tok-ans' })
     await recordAnswer(ctx.db, {
-      sessionId: session!.id, questionId: questionA, playerId: player.id,
-      answer: { choice: 0 }, timeMs: 1000, isCorrect: true, points: 500,
+      sessionId: session!.id,
+      questionId: questionA,
+      playerId: player.id,
+      answer: { choice: 0 },
+      timeMs: 1000,
+      isCorrect: true,
+      points: 500,
     })
     const [row] = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.playerId, player.id))
     expect(row.tenantId).toBe(tenantA)
   })
 
   it('la FK composite rejette un answer_record dont le tenant_id ne colle pas à la session', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '272727' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '272727',
+    })
     const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'X', joinToken: 'tok-x2' })
     await expect(
-      ctx.db.insert(schema.answerRecord).values({
-        sessionId: session!.id, tenantId: tenantB, questionId: questionA, playerId: player.id,
-        answer: { choice: 0 } as never, timeMs: 1, isCorrect: false, points: 0,
-      }).returning(),
+      ctx.db
+        .insert(schema.answerRecord)
+        .values({
+          sessionId: session!.id,
+          tenantId: tenantB,
+          questionId: questionA,
+          playerId: player.id,
+          answer: { choice: 0 } as never,
+          timeMs: 1,
+          isCorrect: false,
+          points: 0,
+        })
+        .returning(),
     ).rejects.toThrow()
   })
 
   it('deleteSessionPlayer supprime le joueur et, en cascade, ses answer_record', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '777001' })
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '777001',
+    })
     const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Injure', joinToken: 'tok-kick' })
     await recordAnswer(ctx.db, {
-      sessionId: session!.id, questionId: questionA, playerId: player.id,
-      answer: { choice: 0 }, timeMs: 1000, isCorrect: true, points: 900,
+      sessionId: session!.id,
+      questionId: questionA,
+      playerId: player.id,
+      answer: { choice: 0 },
+      timeMs: 1000,
+      isCorrect: true,
+      points: 900,
     })
     expect(await deleteSessionPlayer(ctx.db, player.id)).toBe(true)
-    expect(await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.id, player.id))).toHaveLength(0)
-    expect(await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.playerId, player.id))).toHaveLength(0)
+    expect(await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.id, player.id))).toHaveLength(
+      0,
+    )
+    expect(
+      await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.playerId, player.id)),
+    ).toHaveLength(0)
     expect(await deleteSessionPlayer(ctx.db, player.id)).toBe(false)
   })
 
-  it('deleteSessionPlayer sous RLS ne supprime rien dans le contexte d\'un autre tenant', async () => {
-    const session = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '777002' })
+  it("deleteSessionPlayer sous RLS ne supprime rien dans le contexte d'un autre tenant", async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '777002',
+    })
     const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Hors champ', joinToken: 'tok-kick-rls' })
-    expect(await withTenantTx(ctx.appDb, { tenantId: tenantB }, (s) => deleteSessionPlayer(s.db, player.id))).toBe(false)
-    expect(await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.id, player.id))).toHaveLength(1)
+    expect(await withTenantTx(ctx.appDb, { tenantId: tenantB }, (s) => deleteSessionPlayer(s.db, player.id))).toBe(
+      false,
+    )
+    expect(await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.id, player.id))).toHaveLength(
+      1,
+    )
     expect(await withTenantTx(ctx.appDb, { tenantId: tenantA }, (s) => deleteSessionPlayer(s.db, player.id))).toBe(true)
+  })
+})
+
+describe('nuage de mots', () => {
+  it('stocke les mots retirés par question, de façon atomique', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '909090',
+    })
+    const id = session!.id
+    expect(await loadWordcloudRemoved(ctx.db, id)).toEqual({})
+    await setWordcloudRemoved(ctx.db, id, 'q1', ['cafe'])
+    await setWordcloudRemoved(ctx.db, id, 'q2', ['x'])
+    expect(await loadWordcloudRemoved(ctx.db, id)).toEqual({ q1: ['cafe'], q2: ['x'] })
+    await setWordcloudRemoved(ctx.db, id, 'q1', ['cafe', 'rush'])
+    expect(await loadWordcloudRemoved(ctx.db, id)).toEqual({ q1: ['cafe', 'rush'], q2: ['x'] })
+  })
+
+  it('accepte une question de type wordcloud', async () => {
+    const q = await createQuestion(tenantScope(ctx.db, tenantA), quizA, {
+      type: 'wordcloud',
+      prompt: 'Un mot ?',
+      timeLimit: 30,
+      payload: {},
+    })
+    expect(q?.type).toBe('wordcloud')
   })
 })

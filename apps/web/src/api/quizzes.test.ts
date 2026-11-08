@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
+  archiveQuiz,
   createQuestion,
   createQuiz,
   deleteQuestion,
@@ -8,6 +9,7 @@ import {
   listQuestions,
   listQuizzes,
   reorderQuestions,
+  restoreQuiz,
   updateQuestion,
   updateQuiz,
 } from './quizzes.js'
@@ -40,6 +42,29 @@ describe('api/quizzes — routes et méthodes HTTP', () => {
     expect(path).toBe('/api/quizzes')
     expect(init.method).toBe('GET')
     expect(result).toEqual([{ id: 'q1' }])
+  })
+
+  it('listQuizzes({ archived: true }) → GET /api/quizzes?archived=1', async () => {
+    mockFetchOnce(200, [])
+    await listQuizzes({ archived: true })
+    const [path, init] = lastCall()
+    expect(path).toBe('/api/quizzes?archived=1')
+    expect(init.method).toBe('GET')
+  })
+
+  it('archiveQuiz / restoreQuiz → POST /api/quizzes/:id/archive|restore sans body', async () => {
+    mockFetchOnce(200, { id: 'q1' })
+    await archiveQuiz('q1')
+    let [path, init] = lastCall()
+    expect(path).toBe('/api/quizzes/q1/archive')
+    expect(init.method).toBe('POST')
+    expect(init.body).toBeUndefined()
+
+    mockFetchOnce(200, { id: 'q1' })
+    await restoreQuiz('q1')
+    ;[path, init] = lastCall()
+    expect(path).toBe('/api/quizzes/q1/restore')
+    expect(init.method).toBe('POST')
   })
 
   it('createQuiz → POST /api/quizzes avec le body', async () => {
@@ -89,7 +114,12 @@ describe('api/quizzes — routes et méthodes HTTP', () => {
       type: 'mcq',
       prompt: 'Question ?',
       timeLimit: 20,
-      payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+      payload: {
+        options: [
+          { label: 'A', correct: true },
+          { label: 'B', correct: false },
+        ],
+      },
     })
     const [path, init] = lastCall()
     expect(path).toBe('/api/quizzes/q1/questions')

@@ -1,0 +1,1043 @@
+{
+  "questions": {
+    "oqdb-0375-1": {
+      "prompt": "Among the alkali metals, what is the chemical symbol for sodium?",
+      "options": [
+        "Na",
+        "So",
+        "Sd",
+        "Um"
+      ]
+    },
+    "oqdb-0375-2": {
+      "prompt": "Which element has the symbol Na and atomic number 11?",
+      "options": [
+        "Sodium",
+        "Selenium",
+        "Sulfur",
+        "Silicon"
+      ]
+    },
+    "oqdb-0375-3": {
+      "prompt": "What is the chemical symbol for potassium, a silvery-white metal?",
+      "options": [
+        "T",
+        "K",
+        "P",
+        "O"
+      ]
+    },
+    "oqdb-0375-4": {
+      "prompt": "Which chemical element is represented by the symbol B?",
+      "options": [
+        "Bismuth",
+        "Boron",
+        "Benzene",
+        "Bromine"
+      ]
+    },
+    "oqdb-0376-1": {
+      "prompt": "In which American city does the Golden Gate Bridge stand?",
+      "options": [
+        "San Diego",
+        "New York",
+        "San Francisco",
+        "Los Angeles"
+      ]
+    },
+    "oqdb-0376-2": {
+      "prompt": "Which river, prone to violent floods, is crossed by the Pont du Gard?",
+      "options": [
+        "Bièvre",
+        "Garonne",
+        "Gardon",
+        "Rhône"
+      ]
+    },
+    "oqdb-0376-3": {
+      "prompt": "Despite its name, which is the oldest bridge in Paris?",
+      "options": [
+        "Pont du Roi",
+        "Pont Neuf",
+        "Pont Marie",
+        "Pont du Diable"
+      ]
+    },
+    "oqdb-0376-4": {
+      "prompt": "How many arches does Westminster Bridge have?",
+      "options": [
+        "Seven",
+        "Six",
+        "Nine",
+        "Eight"
+      ]
+    },
+    "oqdb-0377-1": {
+      "prompt": "What does Marcel Duchamp's sculpture \"Fountain\" depict?",
+      "options": [
+        "Uterus",
+        "Ulcer",
+        "Urinal",
+        "Urn"
+      ]
+    },
+    "oqdb-0377-2": {
+      "prompt": "What was the nationality of the sculptor and painter Alberto Giacometti?",
+      "options": [
+        "Portuguese",
+        "Argentine",
+        "Swiss",
+        "Italian"
+      ]
+    },
+    "oqdb-0377-3": {
+      "prompt": "Which sculptor created the now famous \"Kiss\"?",
+      "options": [
+        "Choppin",
+        "Rodin",
+        "Lenoir",
+        "Moreau"
+      ]
+    },
+    "oqdb-0377-4": {
+      "skip": "sculpteur français très peu connu hors de France"
+    },
+    "oqdb-0378-2": {
+      "skip": "organisation du basket professionnel français sans écho à l'étranger"
+    },
+    "oqdb-0379-1": {
+      "prompt": "Which war is the British-American film \"Full Metal Jacket\" about?",
+      "options": [
+        "Kuwait",
+        "Korea",
+        "Vietnam",
+        "Iraq"
+      ]
+    },
+    "oqdb-0379-3": {
+      "prompt": "Which director made \"Apocalypse Now\"?",
+      "options": [
+        "Oliver Stone",
+        "Francis Ford Coppola",
+        "David Lynch",
+        "Ridley Scott"
+      ]
+    },
+    "oqdb-0379-4": {
+      "prompt": "Which Sam Mendes film appears to be shot in a single take?",
+      "options": [
+        "Fury",
+        "1917",
+        "Platoon",
+        "War Machine"
+      ]
+    },
+    "oqdb-0380-1": {
+      "prompt": "What is a spherical vessel called in chemistry?",
+      "options": [
+        "Beaker",
+        "Burette",
+        "Round-bottom flask",
+        "Jar"
+      ]
+    },
+    "oqdb-0380-2": {
+      "prompt": "Which metal burns with a blinding white flame?",
+      "options": [
+        "Radium",
+        "Barium",
+        "Calcium",
+        "Magnesium"
+      ]
+    },
+    "oqdb-0380-3": {
+      "prompt": "Which parameter tells whether a solution is acidic, neutral or basic?",
+      "options": [
+        "The pH",
+        "The constant",
+        "The base",
+        "The power"
+      ]
+    },
+    "oqdb-0380-4": {
+      "skip": "exactitude douteuse : le mercure est liquide et toxique, pas un métal en fusion à tenir en main"
+    },
+    "oqdb-0381-1": {
+      "prompt": "What are the root-eating larvae of the cockchafer called?",
+      "options": [
+        "White grubs",
+        "Nymphs",
+        "Caterpillars",
+        "Cocoons"
+      ]
+    },
+    "oqdb-0381-2": {
+      "prompt": "Which part of the blue bottle fly's body lets it eat?",
+      "options": [
+        "Legs",
+        "Wings",
+        "Proboscis",
+        "Jaw"
+      ]
+    },
+    "oqdb-0381-3": {
+      "prompt": "How many visible spots does the alfalfa ladybird have?",
+      "options": [
+        "24",
+        "14",
+        "44",
+        "34"
+      ]
+    },
+    "oqdb-0382-1": {
+      "skip": "énoncé flou (bourse de joueurs) et option Ballotage sans sens traduite"
+    },
+    "oqdb-0382-3": {
+      "prompt": "Which franchise had the worst win record in the NBA in 2012?",
+      "options": [
+        "Pistons",
+        "Pacers",
+        "Bobcats",
+        "Heat"
+      ]
+    },
+    "oqdb-0382-4": {
+      "prompt": "How much did the Rockets offer Jeremy Lin for 3 years in the NBA?",
+      "options": [
+        "$5 million",
+        "$15 million",
+        "$25 million",
+        "$20 million"
+      ]
+    },
+    "oqdb-0383-1": {
+      "prompt": "What is the diet of the elephant?",
+      "options": [
+        "Carnivore",
+        "Herbivore",
+        "Insectivore",
+        "Omnivore"
+      ]
+    },
+    "oqdb-0383-2": {
+      "prompt": "About how long does an elephant's pregnancy last?",
+      "options": [
+        "3 months",
+        "12 months",
+        "6 months",
+        "22 months"
+      ]
+    },
+    "oqdb-0383-3": {
+      "prompt": "What is the main threat to elephants?",
+      "options": [
+        "Predation",
+        "Poaching",
+        "Storms",
+        "Cold"
+      ]
+    },
+    "oqdb-0383-4": {
+      "prompt": "What distinguishes Asian elephants from African elephants?",
+      "options": [
+        "Ears",
+        "Color",
+        "Trunk",
+        "Tail"
+      ]
+    },
+    "oqdb-0384-1": {
+      "prompt": "Which actress plays the iconic Ellen Ripley in the \"Alien\" saga?",
+      "options": [
+        "Julianne Moore",
+        "Sigourney Weaver",
+        "Meryl Streep",
+        "Brie Larson"
+      ]
+    },
+    "oqdb-0384-2": {
+      "prompt": "Which actress plays Weyland's daughter in \"Prometheus\"?",
+      "options": [
+        "Charlize Theron",
+        "Winona Ryder",
+        "Jodie Foster",
+        "Emily Watson"
+      ]
+    },
+    "oqdb-0384-3": {
+      "prompt": "Which actress plays the role of Call in the \"Alien\" saga?",
+      "options": [
+        "Geena Davis",
+        "Winona Ryder",
+        "Natalia Dyer",
+        "Natalie Portman"
+      ]
+    },
+    "oqdb-0384-4": {
+      "prompt": "Which actress plays Daniels in \"Alien: Covenant\"?",
+      "options": [
+        "Mila Kunis",
+        "Noomi Rapace",
+        "Winona Ryder",
+        "Katherine Waterston"
+      ]
+    },
+    "oqdb-0385-3": {
+      "prompt": "What is a stoppage of play called in basketball?",
+      "options": [
+        "Timeout",
+        "Jump ball",
+        "Dribble",
+        "Zone press"
+      ]
+    },
+    "oqdb-0385-4": {
+      "prompt": "How many points is a regular basket worth in basketball?",
+      "options": [
+        "One point",
+        "Two points",
+        "Four points",
+        "Three points"
+      ]
+    },
+    "oqdb-0386-1": {
+      "prompt": "Which nautical knot forms a ball and serves as a weight?",
+      "options": [
+        "Monkey's fist",
+        "Tackle knot",
+        "Blood knot",
+        "Reef knot"
+      ]
+    },
+    "oqdb-0386-2": {
+      "skip": "termes de noeuds marins incertains (noeud de ride, de lestage)"
+    },
+    "oqdb-0388-1": {
+      "skip": "élection de Miss France, lauréate peu connue hors de France"
+    },
+    "oqdb-0388-2": {
+      "skip": "élection de Miss France, candidate peu connue hors de France"
+    },
+    "oqdb-0388-3": {
+      "skip": "mannequin et chanteur français peu connus hors de France"
+    },
+    "oqdb-0389-2": {
+      "prompt": "Which android does Weyland consider the son he will never have?",
+      "options": [
+        "Call",
+        "David",
+        "Walter",
+        "Bishop"
+      ]
+    },
+    "oqdb-0389-4": {
+      "prompt": "Which actor plays both David and Walter in the \"Alien\" saga?",
+      "options": [
+        "Idris Elba",
+        "Tom Hardy",
+        "Michael Fassbender",
+        "Ryan Gosling"
+      ]
+    },
+    "oqdb-0390-1": {
+      "prompt": "What is a blini, whose Slavic name means \"to grind\"?",
+      "options": [
+        "Fruit tart",
+        "Thick pancake",
+        "Dry cake",
+        "Flat waffle"
+      ]
+    },
+    "oqdb-0390-2": {
+      "prompt": "What is the traditional shape of samosas?",
+      "options": [
+        "Square",
+        "Oval",
+        "Triangular",
+        "Round"
+      ]
+    },
+    "oqdb-0390-3": {
+      "prompt": "Which ingredient is found in sushi and in plain Japanese gohan?",
+      "options": [
+        "Duck",
+        "Salmon",
+        "Rice",
+        "Beef"
+      ]
+    },
+    "oqdb-0390-4": {
+      "prompt": "Which town, east of Milan, gave its name to a blue cheese?",
+      "options": [
+        "Gorgonzola",
+        "Corbetta",
+        "Dresano",
+        "Bresso"
+      ]
+    },
+    "oqdb-0391-1": {
+      "prompt": "Which model appears in \"Asterix and Obelix Take On Caesar\"?",
+      "options": [
+        "Karine Ferri",
+        "Bérénice Marlohe",
+        "Chloé Mortaud",
+        "Laetitia Casta"
+      ]
+    },
+    "oqdb-0391-2": {
+      "skip": "feuilleton télévisé français peu connu hors de France"
+    },
+    "oqdb-0391-3": {
+      "skip": "émission française (Classe Mannequin) et comédienne peu connues hors de France"
+    },
+    "oqdb-0391-4": {
+      "prompt": "Which model played the Bond girl in \"Quantum of Solace\"?",
+      "options": [
+        "Olga Kurylenko",
+        "Naomie Harris",
+        "Eva Green",
+        "Naomi Watts"
+      ]
+    },
+    "oqdb-0392-1": {
+      "prompt": "In the Alien saga, who directed \"Aliens\"?",
+      "options": [
+        "Ridley Scott",
+        "Paul Anderson",
+        "David Fincher",
+        "James Cameron"
+      ]
+    },
+    "oqdb-0392-2": {
+      "prompt": "What is the main creature of the film \"Alien\" called?",
+      "options": [
+        "Trilobite",
+        "Facehugger",
+        "Mala'kak",
+        "Xenomorph"
+      ]
+    },
+    "oqdb-0392-3": {
+      "prompt": "In \"Alien\", which company organizes and funds the space voyage?",
+      "options": [
+        "Requiem",
+        "Cobb",
+        "Fiorina",
+        "Weyland"
+      ]
+    },
+    "oqdb-0393-1": {
+      "prompt": "In \"The Hunger Games\", what is an Avox unable to do?",
+      "options": [
+        "Speak",
+        "Smell",
+        "See",
+        "Chew"
+      ]
+    },
+    "oqdb-0393-2": {
+      "prompt": "What does Katniss's brooch depict in \"The Hunger Games\"?",
+      "options": [
+        "Globe",
+        "Pickaxe",
+        "Mockingjay",
+        "Bow"
+      ]
+    },
+    "oqdb-0393-4": {
+      "prompt": "What is Haymitch's surname in \"The Hunger Games\"?",
+      "options": [
+        "Everdeen",
+        "Trinket",
+        "Abernathy",
+        "Mellark"
+      ]
+    },
+    "oqdb-0394-1": {
+      "prompt": "On the plains of which battlefield does the Lion's Mound stand?",
+      "options": [
+        "Warburg",
+        "Wagram",
+        "White Mountain",
+        "Waterloo"
+      ]
+    },
+    "oqdb-0394-2": {
+      "prompt": "Where was the major trial of the Nazi war criminals held?",
+      "options": [
+        "Munich",
+        "Nuremberg",
+        "Hamburg",
+        "Berlin"
+      ]
+    },
+    "oqdb-0394-3": {
+      "skip": "exactitude douteuse : la bataille de Marignan a duré deux jours, pas seize heures"
+    },
+    "oqdb-0394-4": {
+      "prompt": "In which city was the treaty ending World War I signed?",
+      "options": [
+        "Lyon",
+        "Bordeaux",
+        "Paris",
+        "Versailles"
+      ]
+    },
+    "oqdb-0395-2": {
+      "prompt": "Which colors must be mixed to get green?",
+      "options": [
+        "Yellow and blue",
+        "Orange and gray",
+        "Red and black",
+        "Brown and beige"
+      ]
+    },
+    "oqdb-0395-3": {
+      "skip": "référence à une chanson populaire française (guinguettes de Nogent)"
+    },
+    "oqdb-0395-4": {
+      "skip": "comptine française (Une souris verte)"
+    },
+    "oqdb-0396-1": {
+      "prompt": "Around which Italian city is Asti Spumante made?",
+      "options": [
+        "Turin",
+        "Asti",
+        "Rivoli",
+        "Biella"
+      ]
+    },
+    "oqdb-0396-2": {
+      "prompt": "The leaves of which plant are put in tea in Morocco?",
+      "options": [
+        "Eucalyptus",
+        "Mint",
+        "Sage",
+        "Cornflower"
+      ]
+    },
+    "oqdb-0396-3": {
+      "prompt": "What is your Chinese host offering when he offers you \"cha\"?",
+      "options": [
+        "Coffee",
+        "Chocolate",
+        "Whisky",
+        "Tea"
+      ]
+    },
+    "oqdb-0396-4": {
+      "prompt": "What is a bombilla slipped into the tea in Argentina?",
+      "options": [
+        "Flat spoon",
+        "Fruit jelly",
+        "Filter straw",
+        "Candied cherry"
+      ]
+    },
+    "oqdb-0397-1": {
+      "prompt": "Who volunteers to take Prim's place in \"The Hunger Games\"?",
+      "options": [
+        "Katniss",
+        "Primrose",
+        "Peeta",
+        "Gale"
+      ]
+    },
+    "oqdb-0397-4": {
+      "prompt": "Which important character usually wears a white rose?",
+      "options": [
+        "Peeta",
+        "Cinna",
+        "Katniss",
+        "Snow"
+      ]
+    },
+    "oqdb-0398-1": {
+      "prompt": "In which country do the Kabyle people mainly live?",
+      "options": [
+        "Tunisia",
+        "Algeria",
+        "Libya",
+        "Morocco"
+      ]
+    },
+    "oqdb-0398-2": {
+      "prompt": "The word \"Lusitanian\" refers to a people from which country?",
+      "options": [
+        "Spain",
+        "Portugal",
+        "Italy",
+        "Morocco"
+      ]
+    },
+    "oqdb-0398-3": {
+      "prompt": "What do the Roma call someone outside their community?",
+      "options": [
+        "Sind",
+        "Djodjo",
+        "Minouche",
+        "Gadjo"
+      ]
+    },
+    "oqdb-0398-4": {
+      "prompt": "Which symbol is on the flag of the Acadian people?",
+      "options": [
+        "Red circle",
+        "Yellow star",
+        "Blue lion",
+        "Green dragon"
+      ]
+    },
+    "oqdb-0399-1": {
+      "skip": "métiers d'art français obscurs (archetier, moireur, canneur)"
+    },
+    "oqdb-0399-2": {
+      "prompt": "Which craftsman works wood to make decorative furniture?",
+      "options": [
+        "Basket maker",
+        "Varnisher",
+        "Cabinetmaker",
+        "Brassworker"
+      ]
+    },
+    "oqdb-0399-3": {
+      "skip": "métiers d'art français obscurs (laqueur, campaniste)"
+    },
+    "oqdb-0399-4": {
+      "prompt": "Who is in charge of advising customers on headwear?",
+      "options": [
+        "Glover",
+        "Hatter",
+        "Cutler",
+        "Chandler"
+      ]
+    },
+    "oqdb-0400-1": {
+      "prompt": "In which stadium does FC Barcelona play its home matches?",
+      "options": [
+        "Maracanã",
+        "Camp Nou",
+        "Wembley",
+        "Bernabéu"
+      ]
+    },
+    "oqdb-0400-2": {
+      "prompt": "From which club did Barça buy Zlatan Ibrahimovic in 2009?",
+      "options": [
+        "Göteborg",
+        "Leeds United",
+        "Bayern Munich",
+        "Inter Milan"
+      ]
+    },
+    "oqdb-0400-3": {
+      "prompt": "Who succeeded Pep Guardiola at Barça B in 2008?",
+      "options": [
+        "Luis Figo",
+        "Patrick Kluivert",
+        "Luis Enrique",
+        "Andoni Zubizarreta"
+      ]
+    },
+    "oqdb-0400-4": {
+      "prompt": "Which cross appears on the FC Barcelona crest?",
+      "options": [
+        "St Patrick's Cross",
+        "St Simon's Cross",
+        "St George's Cross",
+        "St Andrew's Cross"
+      ]
+    },
+    "oqdb-0401-1": {
+      "prompt": "Which English band is led by the singer Jay Kay?",
+      "options": [
+        "Jamiroquai",
+        "Jethro Tull",
+        "Joy Division",
+        "Judas Priest"
+      ]
+    },
+    "oqdb-0401-2": {
+      "prompt": "What is the nickname of Jean-Paul Maunick, founder of Incognito?",
+      "options": [
+        "Bluey",
+        "Greeny",
+        "Redest",
+        "Yellow"
+      ]
+    },
+    "oqdb-0401-3": {
+      "prompt": "Which acid jazz quartet is renowned for its live performances?",
+      "options": [
+        "MJQ",
+        "DSQ",
+        "JTQ",
+        "FJQ"
+      ]
+    },
+    "oqdb-0401-4": {
+      "prompt": "Which emblem appears on all albums by The Brand New Heavies?",
+      "options": [
+        "A giraffe",
+        "A turtle",
+        "A lion",
+        "An elephant"
+      ]
+    },
+    "oqdb-0402-1": {
+      "prompt": "What job did Jean-François Champollion hold at the Louvre?",
+      "options": [
+        "Curator",
+        "Architect",
+        "Archaeologist",
+        "Guard"
+      ]
+    },
+    "oqdb-0402-2": {
+      "prompt": "How was the Louvre used when it was built in 1190?",
+      "options": [
+        "As a farm",
+        "As a fortress",
+        "As a museum",
+        "As an office"
+      ]
+    },
+    "oqdb-0402-3": {
+      "prompt": "Which annual exhibition at the Louvre showcased the official artists?",
+      "options": [
+        "The Nativity",
+        "The Sale",
+        "The Biennale",
+        "The Salon"
+      ]
+    },
+    "oqdb-0402-4": {
+      "prompt": "When did the Louvre become a museum, the largest in Paris?",
+      "options": [
+        "Under Mitterrand",
+        "During the Revolution",
+        "In Antiquity",
+        "In the Middle Ages"
+      ]
+    },
+    "oqdb-0403-1": {
+      "prompt": "What is the job of Peeta's father in \"The Hunger Games\"?",
+      "options": [
+        "Hairdresser",
+        "Lawyer",
+        "Pharmacist",
+        "Baker"
+      ]
+    },
+    "oqdb-0404-1": {
+      "prompt": "Which Germanic people settled in present-day Spain in the 5th century?",
+      "options": [
+        "Visigoths",
+        "Ostrogoths",
+        "Burgundians",
+        "Jutes"
+      ]
+    },
+    "oqdb-0404-2": {
+      "prompt": "Which of these terms once referred to the Vikings?",
+      "options": [
+        "Welsh",
+        "Normans",
+        "Germans",
+        "Bretons"
+      ]
+    },
+    "oqdb-0404-3": {
+      "prompt": "Which ancient people occupied the lands of present-day Bulgaria?",
+      "options": [
+        "Alans",
+        "Visigoths",
+        "Thracians",
+        "Scythians"
+      ]
+    },
+    "oqdb-0405-1": {
+      "prompt": "What material is the Louvre Pyramid made of?",
+      "options": [
+        "Stone",
+        "Wood",
+        "Glass",
+        "Cardboard"
+      ]
+    },
+    "oqdb-0405-2": {
+      "prompt": "Which works are displayed in the Cour Marly and Cour Puget?",
+      "options": [
+        "Mummies",
+        "Sculptures",
+        "Paintings",
+        "Sketches"
+      ]
+    },
+    "oqdb-0406-1": {
+      "skip": "romancier français peu connu hors de France"
+    },
+    "oqdb-0406-2": {
+      "skip": "romancier français peu connu hors de France"
+    },
+    "oqdb-0406-3": {
+      "skip": "romancier et éditeur français peu connus hors de France"
+    },
+    "oqdb-0406-4": {
+      "skip": "romancier et animatrice de télévision français peu connus hors de France"
+    },
+    "oqdb-0407-1": {
+      "prompt": "How many eyes do the aliens of Pizza Planet have in \"Toy Story\"?",
+      "options": [
+        "Four",
+        "Two",
+        "Three",
+        "Only one"
+      ]
+    },
+    "oqdb-0407-3": {
+      "skip": "ambiguïté : Slinky est aussi un chien d'Andy, une seule bonne réponse impossible"
+    },
+    "oqdb-0407-4": {
+      "prompt": "Who owns the toys that Woody and his friends belong to?",
+      "options": [
+        "Andy",
+        "Lisa",
+        "Sid",
+        "Daisy"
+      ]
+    },
+    "oqdb-0408-2": {
+      "prompt": "Which Wookiee warrior is Han Solo's companion?",
+      "options": [
+        "Jar Jar Binks",
+        "Palpatine",
+        "Watto",
+        "Chewbacca"
+      ]
+    },
+    "oqdb-0408-3": {
+      "prompt": "What is the name of the spaceship of the smuggler Han Solo?",
+      "options": [
+        "Millennium Falcon",
+        "B-Wing",
+        "Speeder",
+        "Lone Eagle"
+      ]
+    },
+    "oqdb-0408-4": {
+      "prompt": "Which \"Star Wars\" character looks like a giant slug?",
+      "options": [
+        "Jabba the Hutt",
+        "Lando Calrissian",
+        "Darth Maul",
+        "Mace Windu"
+      ]
+    },
+    "oqdb-0409-1": {
+      "skip": "roman peu connu, titre français sans équivalent anglais établi"
+    },
+    "oqdb-0410-1": {
+      "prompt": "What is the name of the cowboy hero of the \"Toy Story\" saga?",
+      "options": [
+        "Randy",
+        "Bullseye",
+        "Woody",
+        "Jessie"
+      ]
+    },
+    "oqdb-0410-2": {
+      "prompt": "Who is Woody's rival at the start of \"Toy Story\"?",
+      "options": [
+        "Buzz Lightyear",
+        "Buster",
+        "Rex",
+        "Sid"
+      ]
+    },
+    "oqdb-0410-3": {
+      "prompt": "What does Lotso smell of in \"Toy Story 3\"?",
+      "options": [
+        "Raspberry",
+        "Strawberry",
+        "Apple",
+        "Banana"
+      ]
+    },
+    "oqdb-0410-4": {
+      "prompt": "What picture is on Sid's black T-shirt in \"Toy Story\"?",
+      "options": [
+        "Skull",
+        "Number 95",
+        "Lightning bolt",
+        "Smiley"
+      ]
+    },
+    "oqdb-0411-1": {
+      "prompt": "Which very popular activity in Japan means \"empty orchestra\"?",
+      "options": [
+        "Karaoke",
+        "Temari",
+        "Origami",
+        "Karate"
+      ]
+    },
+    "oqdb-0411-3": {
+      "prompt": "Which Japanese zither has silk strings?",
+      "options": [
+        "Shakuhachi",
+        "Biwa",
+        "Koto",
+        "Taiko"
+      ]
+    },
+    "oqdb-0411-4": {
+      "prompt": "Which natural phenomenon's name comes from the Japanese for \"harbor wave\"?",
+      "options": [
+        "Earthquake",
+        "Tsunami",
+        "Kendo",
+        "Sakura"
+      ]
+    },
+    "oqdb-0412-1": {
+      "prompt": "What is it called when you search for a film's shooting locations?",
+      "options": [
+        "Storyboard",
+        "Scouting",
+        "Editing",
+        "Casting"
+      ]
+    },
+    "oqdb-0412-2": {
+      "prompt": "Roughly how many people voted on the Oscars in 2026?",
+      "options": [
+        "About 3,000",
+        "About 10,000",
+        "About 2,000",
+        "About 1,000"
+      ]
+    },
+    "oqdb-0412-3": {
+      "prompt": "Which country did the film \"The Gods Must Be Crazy\" make famous?",
+      "options": [
+        "Botswana",
+        "Gabon",
+        "Zambia",
+        "Rwanda"
+      ]
+    },
+    "oqdb-0412-4": {
+      "prompt": "Which American actress created a style of fitness workout?",
+      "options": [
+        "Diane Keaton",
+        "Jane Fonda",
+        "Sally Field",
+        "Faye Dunaway"
+      ]
+    },
+    "oqdb-0413-1": {
+      "skip": "personnages de bande dessinée franco-belge peu connus (Spirou)"
+    },
+    "oqdb-0413-2": {
+      "prompt": "Which fictional sailor gets his strength from canned spinach?",
+      "options": [
+        "Sappo",
+        "Grimmy",
+        "Popeye",
+        "Barnaby"
+      ]
+    },
+    "oqdb-0413-3": {
+      "prompt": "Which wooden puppet once turned into a real boy?",
+      "options": [
+        "Gnafron",
+        "Malvira",
+        "Pinocchio",
+        "Harlequin"
+      ]
+    },
+    "oqdb-0413-4": {
+      "prompt": "Which friend of Tintin invented a shark-shaped submarine?",
+      "options": [
+        "Haddock",
+        "Professor Calculus",
+        "Arumbayas",
+        "Nestor"
+      ]
+    },
+    "oqdb-0414-1": {
+      "prompt": "In which French département can you visit the Château de Chambord?",
+      "options": [
+        "Haute-Garonne",
+        "Drôme",
+        "Loir-et-Cher",
+        "Aveyron"
+      ]
+    },
+    "oqdb-0414-2": {
+      "prompt": "What was Chambord turned into during the Franco-Prussian War?",
+      "options": [
+        "Barracks",
+        "Museum",
+        "Military hospital",
+        "Prison"
+      ]
+    },
+    "oqdb-0414-3": {
+      "prompt": "How many rooms does the Château de Chambord have?",
+      "options": [
+        "282",
+        "372",
+        "198",
+        "426"
+      ]
+    },
+    "oqdb-0414-4": {
+      "prompt": "How many habitable levels does the keep of Chambord have?",
+      "options": [
+        "Five",
+        "Three",
+        "Six",
+        "Four"
+      ]
+    },
+    "oqdb-0415-1": {
+      "prompt": "In 1941, which country imposed a total embargo on Japan?",
+      "options": [
+        "Germany",
+        "USSR",
+        "France",
+        "United States"
+      ]
+    },
+    "oqdb-0415-2": {
+      "prompt": "Which suicide pilots marked World War II?",
+      "options": [
+        "Kazoku",
+        "Shinobi",
+        "Kamikazes",
+        "Samurai"
+      ]
+    },
+    "oqdb-0415-3": {
+      "prompt": "Which city in the Kansai region was the imperial capital of Japan?",
+      "options": [
+        "Kamakura",
+        "Noro",
+        "Kyoto",
+        "Tokyo"
+      ]
+    },
+    "oqdb-0415-4": {
+      "prompt": "Which Japanese city hosted the 1972 Winter Olympics?",
+      "options": [
+        "Sapporo",
+        "Nagano",
+        "Yokohama",
+        "Kumamoto"
+      ]
+    }
+  },
+  "quizzes": {}
+}

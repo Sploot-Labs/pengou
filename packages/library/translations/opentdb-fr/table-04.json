@@ -1,0 +1,953 @@
+{
+  "questions": {
+    "otdb-a8c1f13c4897": {
+      "prompt": "En quelle année l'Empire byzantin s'est-il effondré ?",
+      "options": [
+        "1299",
+        "1353",
+        "1498",
+        "1453"
+      ]
+    },
+    "otdb-a8e85dab834e": {
+      "skip": "exactitude douteuse : Hô Chi Minh-Ville est la même ville que Saïgon"
+    },
+    "otdb-a93e0fc1da45": {
+      "prompt": "Comment s'appelait la première colonie anglaise permanente en Amérique ?",
+      "options": [
+        "New York",
+        "Plymouth",
+        "St. John's",
+        "Jamestown"
+      ]
+    },
+    "otdb-ac577bb281e8": {
+      "prompt": "Quel était le nom de code de l'invasion allemande de l'URSS pendant la Seconde Guerre mondiale ?",
+      "options": [
+        "Opération Unthinkable",
+        "Opération Barbarossa",
+        "Opération Kaiserschlacht",
+        "Opération Molotov"
+      ]
+    },
+    "otdb-ad673bb031c7": {
+      "prompt": "Quelle a été la dernière colonie cédée par le Royaume-Uni, marquant la fin de l'Empire britannique ?",
+      "options": [
+        "Hong Kong",
+        "Inde",
+        "Irlande",
+        "Australie"
+      ]
+    },
+    "otdb-afa5e027b172": {
+      "prompt": "Contre quel pays la République des Provinces-Unies a-t-elle mené la guerre de Quatre-Vingts Ans ?",
+      "options": [
+        "Espagne",
+        "France",
+        "Portugal",
+        "Angleterre"
+      ]
+    },
+    "otdb-b02679bdc44b": {
+      "prompt": "Martin Luther King Jr. et Anne Frank sont nés la même année."
+    },
+    "otdb-b47baf627836": {
+      "prompt": "Parmi ces chars du XXe siècle, lequel a été conçu et construit AVANT les autres ?",
+      "options": [
+        "Cromwell",
+        "Renault FT",
+        "M4 Sherman",
+        "Panzer IV"
+      ]
+    },
+    "otdb-b4e7e431a3df": {
+      "prompt": "La guerre froide s'est terminée avec la mort de Joseph Staline."
+    },
+    "otdb-b6ee33ab848f": {
+      "prompt": "Après sa défaite à Waterloo, Napoléon Bonaparte a été exilé sur quelle île ?",
+      "options": [
+        "Corse",
+        "Sainte-Hélène",
+        "Elbe",
+        "Îles Canaries"
+      ]
+    },
+    "otdb-b74fe3e23939": {
+      "prompt": "Quel pays a offert la statue de la Liberté aux États-Unis ?",
+      "options": [
+        "Angleterre",
+        "Espagne",
+        "Allemagne",
+        "France"
+      ]
+    },
+    "otdb-b85b5b28f64b": {
+      "prompt": "Quelle année est considérée comme celle de la fin de l'Empire britannique ?",
+      "options": [
+        "1971",
+        "1997",
+        "1986",
+        "1981"
+      ]
+    },
+    "otdb-b862607e98be": {
+      "prompt": "Qui a été le premier Américain dans l'espace ?",
+      "options": [
+        "John Glenn",
+        "Jim Lovell",
+        "Alan Shepard",
+        "Neil Armstrong"
+      ]
+    },
+    "otdb-b8c3a48ed3c0": {
+      "prompt": "Qui a été le dernier empereur du Mexique ?",
+      "options": [
+        "López Obrador",
+        "Maximilien d'Autriche",
+        "Napoléon III",
+        "Agustín de Iturbide"
+      ]
+    },
+    "otdb-baec903a5ed7": {
+      "prompt": "Dans quelle prison Adolf Hitler était-il détenu en 1924 ?",
+      "options": [
+        "Abbaye d'Ebrach",
+        "Prison de Landsberg",
+        "Prison de Spandau",
+        "Hohenasperg"
+      ]
+    },
+    "otdb-bd2128f8d4af": {
+      "prompt": "À qui attribue-t-on d'abord l'argument ontologique de l'existence de Dieu ?",
+      "options": [
+        "Emmanuel Kant",
+        "René Descartes",
+        "Anselme de Cantorbéry",
+        "Aristote"
+      ]
+    },
+    "otdb-c14561bdb39f": {
+      "prompt": "Où se trouvait Abraham Lincoln quand John Wilkes Booth l'a assassiné en 1865 ?",
+      "options": [
+        "À cheval",
+        "En bateau",
+        "Au lit",
+        "Au théâtre"
+      ]
+    },
+    "otdb-c5366446d8ae": {
+      "prompt": "Pendant quelle guerre a eu lieu la « crise des missiles de Cuba » ?",
+      "options": [
+        "Seconde Guerre mondiale",
+        "Première Guerre mondiale",
+        "Révolution américaine",
+        "Guerre froide"
+      ]
+    },
+    "otdb-c9c9a363bbfd": {
+      "prompt": "En quelle année a eu lieu le krach du jeu vidéo en Amérique du Nord ?",
+      "options": [
+        "1982",
+        "1993",
+        "1983",
+        "1970"
+      ]
+    },
+    "otdb-cb638e5b5d6a": {
+      "prompt": "Qui a formulé et développé l'idée de socialisme ?",
+      "options": [
+        "Joseph Staline",
+        "Karl Marx",
+        "Vladimir Lénine",
+        "Vladimir Poutine"
+      ]
+    },
+    "otdb-d070b3da4984": {
+      "prompt": "Pour quelle découverte Albert Einstein a-t-il reçu le prix Nobel en 1921 ?",
+      "options": [
+        "Énergie du point zéro",
+        "Relativité",
+        "Dualité onde-corpuscule",
+        "Effet photoélectrique"
+      ]
+    },
+    "otdb-d3ec6541d5d2": {
+      "prompt": "Qui était Premier ministre du Japon quand le Japon a déclaré la guerre aux États-Unis ?",
+      "options": [
+        "Isoroku Yamamoto",
+        "Hideki Tojo",
+        "Fumimaro Konoe",
+        "Michinomiya Hirohito"
+      ]
+    },
+    "otdb-d40c28b32885": {
+      "prompt": "En quelle année a été fondé le fabricant d'armes italien Beretta ?",
+      "options": [
+        "1998",
+        "1776",
+        "1526",
+        "1923"
+      ]
+    },
+    "otdb-d6db9b22f54c": {
+      "prompt": "Quelle était la longueur totale du Titanic ?",
+      "options": [
+        "268,8 m",
+        "251,5 m",
+        "317,6 m",
+        "231,3 m"
+      ]
+    },
+    "otdb-d859e34d6b81": {
+      "prompt": "En quelle année le dernier cas naturel de variole a-t-il été recensé ?",
+      "options": [
+        "1977",
+        "1982",
+        "1980",
+        "1990"
+      ]
+    },
+    "otdb-d8c4bd6dfb51": {
+      "prompt": "En quelle année l'Union soviétique s'est-elle effondrée ?",
+      "options": [
+        "1992",
+        "1991",
+        "1990",
+        "1891"
+      ]
+    },
+    "otdb-d9856a43f1c5": {
+      "prompt": "Henri VIII fut le deuxième monarque de quelle maison royale ?",
+      "options": [
+        "Lancastre",
+        "Stuart",
+        "York",
+        "Tudor"
+      ]
+    },
+    "otdb-dc1803bc38eb": {
+      "prompt": "Lequel de ces anciens peuples du Proche-Orient existe encore comme groupe ethnique moderne ?",
+      "options": [
+        "Assyriens",
+        "Élamites",
+        "Babyloniens",
+        "Hittites"
+      ]
+    },
+    "otdb-dc59e6718641": {
+      "prompt": "Dans quelle campagne de la guerre de Sécession l'Union a-t-elle creusé un tunnel sous les lignes confédérées pour y faire sauter des explosifs ?",
+      "options": [
+        "Siège de Vicksburg",
+        "Siège de Petersburg",
+        "Campagne d'Antietam",
+        "Campagne de Gettysburg"
+      ]
+    },
+    "otdb-e348980379e9": {
+      "prompt": "Quand les Britanniques ont-ils rendu la souveraineté de Hong Kong à la Chine ?",
+      "options": [
+        "1999",
+        "1841",
+        "1997",
+        "1900"
+      ]
+    },
+    "otdb-e45c6e21c82a": {
+      "prompt": "Quel était le vrai nom du chef national albanais Skanderbeg ?",
+      "options": [
+        "Mirash Krasniki",
+        "Diturak Zhulati",
+        "Iskander Bejko",
+        "Gjergj Kastrioti"
+      ]
+    },
+    "otdb-e74d7d71b765": {
+      "prompt": "Combien de navires jumeaux le Titanic avait-il ?",
+      "options": [
+        "2",
+        "4",
+        "3",
+        "1"
+      ]
+    },
+    "otdb-e7bb6497be03": {
+      "prompt": "Adolf Hitler a été admis à l'Académie des beaux-arts de Vienne."
+    },
+    "otdb-ed860d07f0a1": {
+      "prompt": "Quand la Lituanie a-t-elle déclaré son indépendance de l'Union soviétique ?",
+      "options": [
+        "5 décembre 1991",
+        "20 avril 1989",
+        "25 décembre 1991",
+        "11 mars 1990"
+      ]
+    },
+    "otdb-f43cfe1fa0f6": {
+      "prompt": "La révolte de Bohême (1618-1620) a commencé quand des protestants de Prague ont fait quoi à des régents catholiques ?",
+      "options": [
+        "Les ont pendus",
+        "Ont insulté leurs mères",
+        "Les ont mis au pilori",
+        "Les ont défenestrés"
+      ]
+    },
+    "otdb-f7875f9c719b": {
+      "prompt": "Comment Socrate a-t-il été exécuté ?",
+      "options": [
+        "Crucifixion",
+        "Poison",
+        "Peloton d'exécution",
+        "Décapitation"
+      ]
+    },
+    "otdb-f7eacc61f395": {
+      "prompt": "En quelle année le premier restaurant Pizza Hut a-t-il ouvert ?",
+      "options": [
+        "1965",
+        "1958",
+        "1976",
+        "1942"
+      ]
+    },
+    "otdb-facbee9c0666": {
+      "prompt": "Quel président américain était en fonction au début de la guerre du Golfe ?",
+      "options": [
+        "George W. Bush",
+        "Richard Nixon",
+        "George H. W. Bush",
+        "Ronald Reagan"
+      ]
+    },
+    "otdb-fdd16f155d1f": {
+      "prompt": "Quel était à l'origine l'objectif principal de l'opération allemande « Fall Blau » (Case Blue) ?",
+      "options": [
+        "Crimée",
+        "Caucase",
+        "Stalingrad",
+        "Voronej"
+      ]
+    },
+    "otdb-01d846ce5610": {
+      "prompt": "Quel footballeur figure sur la jaquette de FIFA 18 d'EA Sports ?",
+      "options": [
+        "Lionel Messi",
+        "Cristiano Ronaldo",
+        "Neymar",
+        "Harry Kane"
+      ]
+    },
+    "otdb-037289554678": {
+      "prompt": "Dans l'univers de World of Warcraft, combien de frères et sœurs Sylvanas Coursevent a-t-elle ?",
+      "options": [
+        "4",
+        "3",
+        "1",
+        "2"
+      ]
+    },
+    "otdb-065c869609e0": {
+      "prompt": "Quel est le plan d'existence dans le « Magic: The Gathering » de MicroProse (1997) ?",
+      "options": [
+        "Shandalar",
+        "Ravnica",
+        "Theros",
+        "Amonkhet"
+      ]
+    },
+    "otdb-0afdda8e4d96": {
+      "prompt": "Dans Overwatch, Coalescence est l'ultime de quel héros ?",
+      "options": [
+        "Torbjörn",
+        "Moira",
+        "Zenyatta",
+        "Symmetra"
+      ]
+    },
+    "otdb-0d55543d8a8f": {
+      "prompt": "Quel a été le premier jeu sorti sur le moteur Source ?",
+      "options": [
+        "Garry's Mod",
+        "Half-Life 2",
+        "Counter-Strike: Source",
+        "Team Fortress 2"
+      ]
+    },
+    "otdb-1ae05d211545": {
+      "prompt": "Comment s'appelait la petite amie humaine d'origine de Sonic le hérisson ?",
+      "options": [
+        "Nina",
+        "Celeste",
+        "Madonna",
+        "Sierra"
+      ]
+    },
+    "otdb-1c87cc67d261": {
+      "prompt": "Dans Rainbow Six Siege, lequel de ces opérateurs ne peut pas percer les murs renforcés ?",
+      "options": [
+        "Buck",
+        "Hibana",
+        "Thermite",
+        "Maverick"
+      ]
+    },
+    "otdb-2245fb23476d": {
+      "prompt": "Quel jeu « Kingdom Hearts » mettait en scène les personnages de « The World Ends With You » ?",
+      "options": [
+        "Birth by Sleep",
+        "365/2 Days",
+        "Dream Drop Distance",
+        "Re:Chain of Memories"
+      ]
+    },
+    "otdb-2bcf0e7abc68": {
+      "prompt": "Dans Half-Life, quel plat Gordon Freeman aurait-il brûlé dans le micro-ondes de la salle de pause ?",
+      "options": [
+        "Gratin",
+        "Pizza au pepperoni",
+        "Sandwich sous-marin",
+        "Soupe au poulet"
+      ]
+    },
+    "otdb-332adacd6a36": {
+      "prompt": "Dans « Paper Mario : La Porte millénaire », quel est le point faible de Hooktail ?",
+      "options": [
+        "Le marteau",
+        "Les attaques de Koopas",
+        "Le bruit des grillons",
+        "L'objet « Ice Storm »"
+      ]
+    },
+    "otdb-38b691991828": {
+      "prompt": "Combien y a-t-il de classes dans Team Fortress 2 ?",
+      "options": [
+        "8",
+        "9",
+        "10",
+        "7"
+      ]
+    },
+    "otdb-3d869528a1de": {
+      "prompt": "Qui est le compagnon de Sonic ?",
+      "options": [
+        "Shadow",
+        "Tails",
+        "Amy",
+        "Knuckles"
+      ]
+    },
+    "otdb-3e0e689540be": {
+      "prompt": "Le « Potato Sack », lot de jeux indépendants sorti sur Steam en 2011, promouvait quel jeu ?",
+      "options": [
+        "Half-Life 3",
+        "Left 4 Dead 2",
+        "Dota 2",
+        "Portal 2"
+      ]
+    },
+    "otdb-3e78c8622b56": {
+      "prompt": "Dans Pokémon, de quel type est Simularbre, le Pokémon Imitation ?",
+      "options": [
+        "Sol",
+        "Plante",
+        "Insecte",
+        "Roche"
+      ]
+    },
+    "otdb-3ec6a9506bf4": {
+      "prompt": "Comment s'appelle le personnage principal de « Life is Strange » ?",
+      "options": [
+        "Victoria Chase",
+        "Maxine Caulfield",
+        "Chloe Price",
+        "Stella Hill"
+      ]
+    },
+    "otdb-41f4dfb20591": {
+      "prompt": "Dans « Les Sims », combien de simflouz reçoit chaque famille au départ ?",
+      "options": [
+        "15 000",
+        "20 000",
+        "25 000",
+        "10 000"
+      ]
+    },
+    "otdb-422c354909ed": {
+      "prompt": "Quel jeu de la série « Monster Hunter » a introduit l'Insectoglaive ?",
+      "options": [
+        "Monster Hunter 2",
+        "Monster Hunter 4",
+        "Monster Hunter Freedom",
+        "Monster Hunter Stories"
+      ]
+    },
+    "otdb-48b962eb81ed": {
+      "prompt": "Dans Resident Evil 2, quel est le deuxième prénom de Leon Kennedy ?",
+      "options": [
+        "Scott",
+        "Sam",
+        "Shaun",
+        "Simon"
+      ]
+    },
+    "otdb-49e43603aa1c": {
+      "prompt": "En quelle année a eu lieu la première compétition d'e-sport ?",
+      "options": [
+        "1989",
+        "2000",
+        "1990",
+        "1972"
+      ]
+    },
+    "otdb-5065cbef75a0": {
+      "prompt": "Dans Kingdom Hearts, les Keyblades de Roxas s'appellent « Oathkeeper » et « Oblivion »."
+    },
+    "otdb-50c861205b6a": {
+      "prompt": "Comment s'appelle la libellule amie de Spyro dans Spyro the Dragon ?",
+      "options": [
+        "Sparx",
+        "Spinkles",
+        "Sam",
+        "Sparky"
+      ]
+    },
+    "otdb-555c2354cc82": {
+      "prompt": "Dans Need for Speed Most Wanted (2005), quelle voiture conduit-on au début du mode carrière ?",
+      "options": [
+        "Nissan 240SX",
+        "Porsche 911 Turbo",
+        "Ford Mustang",
+        "BMW M3 GTR"
+      ]
+    },
+    "otdb-579588941b6f": {
+      "prompt": "Dans l'univers de Sonic the Hedgehog, le vrai nom de Tails est Miles Prower."
+    },
+    "otdb-5d5097eb5f11": {
+      "prompt": "Dans la série PAYDAY, qui est le chef emblématique du gang ?",
+      "options": [
+        "Hoxton",
+        "Chains",
+        "Dallas",
+        "Wolf"
+      ]
+    },
+    "otdb-5fb3198c378a": {
+      "prompt": "M.U.G.E.N est un moteur de jeu pour quel type de jeu ?",
+      "options": [
+        "Jeu de combat",
+        "Jeu de tir",
+        "Jeu de plateforme",
+        "Jeu de puzzle"
+      ]
+    },
+    "otdb-619097af447d": {
+      "prompt": "La trilogie « Phoenix Wright : Ace Attorney » devait s'achever avec « Trials and Tribulations »."
+    },
+    "otdb-67928a134d79": {
+      "prompt": "L'antagoniste principal du jeu Saints Row IV est une entité appelée « The Mastermind »."
+    },
+    "otdb-698a6aeaa8f1": {
+      "skip": "exactitude douteuse : RollerCoaster Tycoon 2 a été développé par Frontier"
+    },
+    "otdb-6de6314240c9": {
+      "prompt": "Dans « Sonic the Hedgehog » (1991), combien d'émeraudes du chaos pouvait-on collecter ?",
+      "options": [
+        "6",
+        "7",
+        "9",
+        "8"
+      ]
+    },
+    "otdb-6fe3c0843a63": {
+      "prompt": "Lequel de ces symboles figure sur le t-shirt de Bubsy T. Bobcat, héros du jeu de 1993 ?",
+      "options": [
+        "Un point d'interrogation",
+        "Un point d'exclamation",
+        "La lettre B",
+        "Rien"
+      ]
+    },
+    "otdb-782dabd95012": {
+      "prompt": "Quelle entreprise est l'antagoniste de « Stardew Valley » ?",
+      "options": [
+        "Ronin",
+        "Joja Co",
+        "Robotnik Industries",
+        "Empire"
+      ]
+    },
+    "otdb-7b2d7af370c7": {
+      "prompt": "Laquelle de ces reliques de Dracula n'est PAS dans « Castlevania II : Simon's Quest » ?",
+      "options": [
+        "Le Clou",
+        "La Dent",
+        "L'Œil",
+        "La Côte"
+      ]
+    },
+    "otdb-7d0ad2427301": {
+      "prompt": "Le jeu « Jetpack Joyride » a été créé par « Redbrick Studios »."
+    },
+    "otdb-82d5560445f5": {
+      "prompt": "Quand la société Valve a-t-elle été fondée ?",
+      "options": [
+        "26 décembre 1994",
+        "13 mars 1997",
+        "24 août 1996",
+        "22 mars 1997"
+      ]
+    },
+    "otdb-8900afe44478": {
+      "prompt": "Dans Kingdom Hearts, combien de membres compte l'Organisation XIII au total ?",
+      "options": [
+        "13",
+        "14",
+        "12",
+        "10"
+      ]
+    },
+    "otdb-92639a891983": {
+      "prompt": "Dans Overwatch, quel est le nom complet de Lúcio ?",
+      "options": [
+        "Lúcio João Lucas",
+        "Lúcio Correia dos Santos",
+        "Lúcio Chupar Prima",
+        "Lúcio Luiz Lós Guilherme"
+      ]
+    },
+    "otdb-9b258da8c009": {
+      "prompt": "Comment appelle-t-on les minuscules Thwomps dans Super Mario World ?",
+      "options": [
+        "Petit Thwomp",
+        "Tiny Tims",
+        "Mini Thwomp",
+        "Thwimps"
+      ]
+    },
+    "otdb-9e3ac5d63bb6": {
+      "prompt": "Dans « Star Wars: Republic Commando » (2005), comment s'appelle l'escouade que l'on incarne ?",
+      "options": [
+        "Escouade Delta",
+        "Escouade Alpha",
+        "Escouade Oméga",
+        "Escouade Écho"
+      ]
+    },
+    "otdb-a14540462533": {
+      "prompt": "Lequel de ces personnages est apparu pour la première fois dans « Sonic Boom : L'Ascension de Lyric » ?",
+      "options": [
+        "Sticks le blaireau",
+        "Mighty le tatou",
+        "Espio le caméléon",
+        "Rouge la chauve-souris"
+      ]
+    },
+    "otdb-b34547a50b7c": {
+      "prompt": "En quelle année Team Fortress 2 est-il sorti ?",
+      "options": [
+        "2005",
+        "2007",
+        "2009",
+        "2010"
+      ]
+    },
+    "otdb-b7a3dd191d17": {
+      "prompt": "Cette arme de Counter-Strike: Global Offensive n'existe pas dans la vraie vie.",
+      "options": [
+        "M4A1",
+        "M4A4",
+        "MP9",
+        "AWP"
+      ]
+    },
+    "otdb-c1a5b9c48f1d": {
+      "prompt": "Sous quel nom Final Fantasy VI est-il d'abord sorti hors du Japon ?",
+      "options": [
+        "Final Fantasy V",
+        "Final Fantasy VI",
+        "Final Fantasy III",
+        "Final Fantasy II"
+      ]
+    },
+    "otdb-c3ba6d3cad5b": {
+      "prompt": "Dans Left 4 Dead, quelle campagne emmène les héros dans le métro jusqu'à un hôpital pour l'évacuation ?",
+      "options": [
+        "Blood Harvest",
+        "No Mercy",
+        "Subway Sprint",
+        "Hospital Havoc"
+      ]
+    },
+    "otdb-c507d052effe": {
+      "prompt": "« Through the Fire and Flames » de DragonForce est considérée comme le morceau le plus difficile de la série « Guitar Hero »."
+    },
+    "otdb-c9ed4aa6c2a8": {
+      "prompt": "Quelle entreprise a créé le jeu de stratégie « Stellaris » ?",
+      "options": [
+        "Tripwire Interactive LLC",
+        "Paradox Development",
+        "Ensemble Studios",
+        "Overkill Software"
+      ]
+    },
+    "otdb-ca8475c4225f": {
+      "prompt": "Le jeu « Stellaris » de Paradox Interactive est sorti en 2016."
+    },
+    "otdb-ccee541f9f9b": {
+      "prompt": "Quel genre est souvent associé à la série de jeux « Touhou Project » ?",
+      "options": [
+        "Jeu occasionnel",
+        "FPS",
+        "Shoot 'em up",
+        "Stratégie"
+      ]
+    },
+    "otdb-cf994fe859c4": {
+      "prompt": "Quel Pokémon de départ de type Eau a été introduit à la 4e génération ?",
+      "options": [
+        "Tiplouf",
+        "Moustillon",
+        "Gobou",
+        "Kaiminus"
+      ]
+    },
+    "otdb-d3c7ac697452": {
+      "prompt": "Quel est le nom du premier niveau de « Call of Duty : World at War » ?",
+      "options": [
+        "Vendetta",
+        "Semper Fi",
+        "Eviction",
+        "Ring of Steel"
+      ]
+    },
+    "otdb-d40fc3644665": {
+      "prompt": "Quel ingrédient n'entre PAS dans la recette du gâteau dans Minecraft ?",
+      "options": [
+        "Lait",
+        "Œuf",
+        "Pain",
+        "Blé"
+      ]
+    },
+    "otdb-d5a5faf50d36": {
+      "prompt": "Comment s'appelle l'AK-47 dans Counter-Strike: Source ?",
+      "options": [
+        "AK",
+        "CZ-75",
+        "AK-74",
+        "CV-47"
+      ]
+    },
+    "otdb-d685c89034e7": {
+      "prompt": "Dans le jeu Bully, quel est le nom de famille du héros ?",
+      "options": [
+        "Hopkins",
+        "Crabblesnitch",
+        "Kowalski",
+        "Smith"
+      ]
+    },
+    "otdb-d717907049f4": {
+      "prompt": "Comment appelle-t-on une pièce de Tetris ?",
+      "options": [
+        "Tetris",
+        "Tetromino",
+        "Tetratile",
+        "Tetripiece"
+      ]
+    },
+    "otdb-d84a3d66e4d4": {
+      "prompt": "De quel type est Dracaufeu ?",
+      "options": [
+        "Dragon",
+        "Feu/Vol",
+        "Feu",
+        "Feu/Dragon"
+      ]
+    },
+    "otdb-e01f9734eccc": {
+      "prompt": "Dans le mode carrière de « Need for Speed: Underground 2 », la première voiture disponible est la BMW M3 GTR."
+    },
+    "otdb-e23ee4ccf3c9": {
+      "prompt": "Qui, parmi ces personnes, est cofondateur de Valve ?",
+      "options": [
+        "Gabe Newell",
+        "Ray Ueno",
+        "Robin Walker",
+        "Marc Laidlaw"
+      ]
+    },
+    "otdb-e2f77f14a879": {
+      "prompt": "Dans quel jeu vidéo Michael Fassbender a-t-il joué ?",
+      "options": [
+        "Assassin's Creed III",
+        "Red Dead Redemption",
+        "Fable III",
+        "CoD: Modern Warfare"
+      ]
+    },
+    "otdb-e48de694186e": {
+      "prompt": "Super Mario Bros. a été le tout premier jeu vidéo jamais créé."
+    },
+    "otdb-e700e20a2042": {
+      "prompt": "Amazon a racheté Twitch en août 2014 pour 970 millions de dollars."
+    },
+    "otdb-e7712a23ce87": {
+      "prompt": "Blinky, Pinky, Inky et Clyde sont des personnages de quel jeu classique ?",
+      "options": [
+        "Street Fighter",
+        "Gauntlet",
+        "Space Invaders",
+        "Pac-Man"
+      ]
+    },
+    "otdb-eac186e3f158": {
+      "prompt": "Dans « Undertale », le personnage principal du jeu est Sans."
+    },
+    "otdb-f270083bbe29": {
+      "prompt": "Dans « Fire Emblem: Shadow Dragon », comment s'appelle le héros central ?",
+      "options": [
+        "Marth",
+        "Robin",
+        "Roy",
+        "Eliwood"
+      ]
+    },
+    "otdb-f630bc6dd5a0": {
+      "prompt": "Dans la série Resident Evil, Leon S. Kennedy est membre des S.T.A.R.S."
+    },
+    "otdb-f9299759d428": {
+      "prompt": "Dans World of Warcraft, quelle est la couleur d'interface par défaut des druides ?",
+      "options": [
+        "Marron",
+        "Bleu",
+        "Orange",
+        "Vert"
+      ]
+    },
+    "otdb-fcdc1c1d51bc": {
+      "prompt": "Où est né le Sniper dans Team Fortress 2 ?",
+      "options": [
+        "Afrique du Sud",
+        "Nouvelle-Zélande",
+        "Antarctique",
+        "Australie"
+      ]
+    },
+    "otdb-02d87aa159d2": {
+      "prompt": "Quel auteur américain a aussi écrit des récits de voyage avec son chien Charley ?",
+      "options": [
+        "Ernest Hemingway",
+        "William Faulkner",
+        "John Steinbeck",
+        "F. Scott Fitzgerald"
+      ]
+    },
+    "otdb-082e816448cd": {
+      "prompt": "Qui a écrit le roman « Las Vegas Parano » (« Fear and Loathing in Las Vegas ») ?",
+      "options": [
+        "F. Scott Fitzgerald",
+        "Henry Miller",
+        "Hunter S. Thompson",
+        "William S. Burroughs"
+      ]
+    },
+    "otdb-0cbf2c2b87d7": {
+      "prompt": "Comment s'appelle l'île mystérieuse dans « L'Île mystérieuse » de Jules Verne ?",
+      "options": [
+        "Île Neptune",
+        "Île Lincoln",
+        "Île Prométhée",
+        "Île Vulcania"
+      ]
+    },
+    "otdb-10d05362143c": {
+      "prompt": "Abel Magwitch est un personnage de quel roman de Charles Dickens ?",
+      "options": [
+        "Le Club Pickwick",
+        "De grandes espérances",
+        "Nicolas Nickleby",
+        "Oliver Twist"
+      ]
+    },
+    "otdb-18e2cb543939": {
+      "prompt": "Selon « Le Guide du voyageur galactique », la réponse à la vie, l'univers et le reste est...",
+      "options": [
+        "42",
+        "La mort",
+        "Aimer son prochain",
+        "Le chocolat"
+      ]
+    },
+    "otdb-19926196cd34": {
+      "prompt": "George Orwell a écrit ce livre, souvent vu comme une critique de la surveillance d'État.",
+      "options": [
+        "1984",
+        "Le Vieil Homme et la Mer",
+        "Du silence et des ombres",
+        "L'Attrape-cœurs"
+      ]
+    },
+    "otdb-19b5c2e0b2d1": {
+      "prompt": "Quel personnage classique d'horreur a tué Elizabeth Lavenza ?",
+      "options": [
+        "La Créature du lac noir",
+        "Monstre de Frankenstein",
+        "Loup-garou",
+        "Comte Dracula"
+      ]
+    },
+    "otdb-1bc335215609": {
+      "prompt": "Qui est l'auteur de la série « Percy Jackson » ?",
+      "options": [
+        "Roald Dahl",
+        "Sandra Bullock",
+        "Rick Riordan",
+        "J.K. Rowling"
+      ]
+    },
+    "otdb-1d1602b8cec9": {
+      "prompt": "Quel auteur et poète a écrit : « La femelle de l'espèce est plus mortelle que le mâle » ?",
+      "options": [
+        "William Shakespeare",
+        "William Wordsworth",
+        "Rudyard Kipling",
+        "Edgar Allan Poe"
+      ]
+    },
+    "otdb-200487a8a502": {
+      "prompt": "Qui a écrit « Frankenstein » ?",
+      "options": [
+        "Bram Stoker",
+        "H. P. Lovecraft",
+        "Mary Shelley",
+        "Edgar Allan Poe"
+      ]
+    },
+    "otdb-20091fd561d0": {
+      "prompt": "Comment s'appelle le frère de Sherlock Holmes ?",
+      "options": [
+        "Mederi Holmes",
+        "Martin Holmes",
+        "Herbie Hancock Holmes",
+        "Mycroft Holmes"
+      ]
+    },
+    "otdb-22bd93d65cfb": {
+      "skip": "exactitude douteuse : faux dans le roman, vrai dans la culture populaire"
+    },
+    "otdb-22e8d24d5b1a": {
+      "prompt": "Selon le roman de Bram Stoker, dans quelle ville côtière britannique Dracula a-t-il débarqué ?",
+      "options": [
+        "Whitby",
+        "Portsmouth",
+        "Scarborough",
+        "Brighton"
+      ]
+    },
+    "otdb-279b44c104ad": {
+      "prompt": "Stephen Chbosky a écrit « Le Monde de Charlie »."
+    }
+  },
+  "quizzes": {}
+}

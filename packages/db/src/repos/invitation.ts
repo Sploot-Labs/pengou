@@ -1,5 +1,5 @@
-import { and, eq } from 'drizzle-orm'
-import type { Role } from '@splootlabs/shared'
+import { and, eq, sql } from 'drizzle-orm'
+import { hasPermission, type Role } from '@splootlabs/shared'
 import type { Db } from '../client.js'
 import type { TenantScope } from '../tenant.js'
 import { schema } from '../index.js'
@@ -31,14 +31,17 @@ export async function createInvitation(
   scope: TenantScope,
   input: { email: string; role: Role; invitedBy: string; token: string; expiresAt: Date },
 ): Promise<Invitation> {
-  const [row] = await scope.db.insert(schema.invitation).values({
-    tenantId: scope.tenantId, // toujours le tenant du scope, jamais depuis l'input
-    email: input.email,
-    role: input.role,
-    invitedBy: input.invitedBy,
-    token: input.token,
-    expiresAt: input.expiresAt,
-  }).returning()
+  const [row] = await scope.db
+    .insert(schema.invitation)
+    .values({
+      tenantId: scope.tenantId, // toujours le tenant du scope, jamais depuis l'input
+      email: input.email,
+      role: input.role,
+      invitedBy: input.invitedBy,
+      token: input.token,
+      expiresAt: input.expiresAt,
+    })
+    .returning()
   return row
 }
 
@@ -48,49 +51,90 @@ export async function listInvitations(
   opts: { status?: 'pending' | 'accepted' | 'revoked' } = { status: 'pending' },
 ): Promise<Invitation[]> {
   const status = opts.status
-  return scope.db.select().from(schema.invitation).where(
-    status
-      ? and(eq(schema.invitation.tenantId, scope.tenantId), eq(schema.invitation.status, status))
-      : eq(schema.invitation.tenantId, scope.tenantId),
-  ).orderBy(schema.invitation.createdAt)
+  return scope.db
+    .select()
+    .from(schema.invitation)
+    .where(
+      status
+        ? and(eq(schema.invitation.tenantId, scope.tenantId), eq(schema.invitation.status, status))
+        : eq(schema.invitation.tenantId, scope.tenantId),
+    )
+    .orderBy(schema.invitation.createdAt)
 }
 
 export async function getInvitationById(scope: TenantScope, id: string): Promise<Invitation | null> {
-  const [row] = await scope.db.select().from(schema.invitation)
-    .where(and(eq(schema.invitation.id, id), eq(schema.invitation.tenantId, scope.tenantId))).limit(1)
+  const [row] = await scope.db
+    .select()
+    .from(schema.invitation)
+    .where(and(eq(schema.invitation.id, id), eq(schema.invitation.tenantId, scope.tenantId)))
+    .limit(1)
   return row ?? null
 }
 
 /** Révoque une invitation `pending` → `revoked`. Renvoie la ligne, ou null si absente / déjà
  * consommée (statut ≠ pending). */
 export async function revokeInvitation(scope: TenantScope, id: string): Promise<Invitation | null> {
-  const [row] = await scope.db.update(schema.invitation)
+  const [row] = await scope.db
+    .update(schema.invitation)
     .set({ status: 'revoked' })
-    .where(and(
-      eq(schema.invitation.id, id),
-      eq(schema.invitation.tenantId, scope.tenantId),
-      eq(schema.invitation.status, 'pending'),
-    ))
+    .where(
+      and(
+        eq(schema.invitation.id, id),
+        eq(schema.invitation.tenantId, scope.tenantId),
+        eq(schema.invitation.status, 'pending'),
+      ),
+    )
     .returning()
   return row ?? null
 }
 
-/** Renvoie une invitation `pending` : régénère token + expiration. Renvoie la ligne mise à jour, ou
- * null si absente / non pending. */
+/** Révoque toutes les invitations `pending` créées par `userId` dans le tenant du scope (retrait ou
+ * rétrogradation de l'auteur). Renvoie le nombre de lignes touchées. */
+export async function revokePendingInvitationsBy(scope: TenantScope, userId: string): Promise<number> {
+  const rows = await scope.db
+    .update(schema.invitation)
+    .set({ status: 'revoked' })
+    .where(
+      and(
+        eq(schema.invitation.tenantId, scope.tenantId),
+        eq(schema.invitation.invitedBy, userId),
+        eq(schema.invitation.status, 'pending'),
+      ),
+    )
+    .returning({ id: schema.invitation.id })
+  return rows.length
+}
+
+/** Renvoie une invitation `pending` : régénère token + expiration, et en fait l'invitation de
+ * `invitedBy` (celui qui la renvoie). Sans ce transfert, un admin pouvait régénérer l'invitation
+ * d'un autre, garder le jeton et l'accepter après son propre retrait, l'auteur d'origine étant
+ * toujours membre. `emailedAt` repart à nul : le nouveau token n'a encore été envoyé à personne.
+ * Renvoie la ligne mise à jour, ou null si absente / non pending. */
 export async function resendInvitation(
   scope: TenantScope,
   id: string,
-  input: { token: string; expiresAt: Date },
+  input: { token: string; expiresAt: Date; invitedBy: string },
 ): Promise<Invitation | null> {
-  const [row] = await scope.db.update(schema.invitation)
-    .set({ token: input.token, expiresAt: input.expiresAt })
-    .where(and(
-      eq(schema.invitation.id, id),
-      eq(schema.invitation.tenantId, scope.tenantId),
-      eq(schema.invitation.status, 'pending'),
-    ))
+  const [row] = await scope.db
+    .update(schema.invitation)
+    .set({ token: input.token, expiresAt: input.expiresAt, invitedBy: input.invitedBy, emailedAt: null })
+    .where(
+      and(
+        eq(schema.invitation.id, id),
+        eq(schema.invitation.tenantId, scope.tenantId),
+        eq(schema.invitation.status, 'pending'),
+      ),
+    )
     .returning()
   return row ?? null
+}
+
+/** Note que l'e-mail d'invitation est bien parti (après un envoi réussi seulement). */
+export async function markInvitationEmailed(scope: TenantScope, id: string, at: Date): Promise<void> {
+  await scope.db
+    .update(schema.invitation)
+    .set({ emailedAt: at })
+    .where(and(eq(schema.invitation.id, id), eq(schema.invitation.tenantId, scope.tenantId)))
 }
 
 export type InvitationWithWorkspace = Invitation & { workspaceName: string; workspaceSlug: string }
@@ -98,26 +142,30 @@ export type InvitationWithWorkspace = Invitation & { workspaceName: string; work
 /** Résout une invitation par son token (systemDb, pré-contexte), avec le nom/slug du workspace
  * pour l'écran d'aperçu. Null si le token est inconnu. */
 export async function getInvitationByToken(db: Db, token: string): Promise<InvitationWithWorkspace | null> {
-  const [row] = await db.select({
-    id: schema.invitation.id,
-    tenantId: schema.invitation.tenantId,
-    email: schema.invitation.email,
-    role: schema.invitation.role,
-    token: schema.invitation.token,
-    invitedBy: schema.invitation.invitedBy,
-    status: schema.invitation.status,
-    expiresAt: schema.invitation.expiresAt,
-    acceptedAt: schema.invitation.acceptedAt,
-    createdAt: schema.invitation.createdAt,
-    workspaceName: schema.tenant.name,
-    workspaceSlug: schema.tenant.slug,
-  }).from(schema.invitation)
+  const [row] = await db
+    .select({
+      id: schema.invitation.id,
+      tenantId: schema.invitation.tenantId,
+      email: schema.invitation.email,
+      role: schema.invitation.role,
+      token: schema.invitation.token,
+      invitedBy: schema.invitation.invitedBy,
+      status: schema.invitation.status,
+      expiresAt: schema.invitation.expiresAt,
+      acceptedAt: schema.invitation.acceptedAt,
+      emailedAt: schema.invitation.emailedAt,
+      createdAt: schema.invitation.createdAt,
+      workspaceName: schema.tenant.name,
+      workspaceSlug: schema.tenant.slug,
+    })
+    .from(schema.invitation)
     .innerJoin(schema.tenant, eq(schema.tenant.id, schema.invitation.tenantId))
-    .where(eq(schema.invitation.token, token)).limit(1)
+    .where(eq(schema.invitation.token, token))
+    .limit(1)
   return row ?? null
 }
 
-export type AcceptCode = 'not_found' | 'not_pending' | 'expired' | 'already_member'
+export type AcceptCode = 'not_found' | 'not_pending' | 'expired' | 'already_member' | 'inviter_revoked'
 
 /** Erreur typée d'acceptation, mappée en code HTTP par la route. */
 export class InvitationError extends Error {
@@ -132,29 +180,60 @@ export class InvitationError extends Error {
 /**
  * Accepte une invitation par token pour `userId` (systemDb, pré-contexte, transaction). Valide
  * l'état (pending, non expirée), refuse si l'utilisateur est déjà membre, crée la membership avec
- * le rôle invité et marque l'invitation `accepted`. Renvoie le tenant rejoint + le rôle.
+ * le rôle invité et marque l'invitation `accepted`. Si l'invitation est réellement partie par
+ * e-mail (`emailedAt`), que l'acceptation vient du lien e-mailé (`emailProofValid`, vérifié par
+ * l'appelant) et que l'adresse du compte est celle de l'invitation (casse et espaces de bord
+ * ignorés, pas de normalisation des alias), l'adresse est confirmée dans la même transaction.
+ * Renvoie le tenant rejoint + le rôle.
  */
 export async function acceptInvitation(
   db: Db,
-  input: { token: string; userId: string; nowMs?: number },
+  input: { token: string; userId: string; nowMs?: number; emailProofValid?: boolean },
 ): Promise<{ tenantId: string; role: Role }> {
   const nowMs = input.nowMs ?? Date.now()
   return db.transaction(async (tx) => {
-    const [inv] = await tx.select().from(schema.invitation)
-      .where(eq(schema.invitation.token, input.token)).limit(1)
+    const [inv] = await tx.select().from(schema.invitation).where(eq(schema.invitation.token, input.token)).limit(1)
     if (!inv) throw new InvitationError('not_found')
     if (inv.status !== 'pending') throw new InvitationError('not_pending')
     if (inv.expiresAt.getTime() < nowMs) throw new InvitationError('expired')
 
-    const [existing] = await tx.select({ id: schema.membership.id }).from(schema.membership)
+    // L'auteur doit encore pouvoir inviter (members:manage) : retiré ou rétrogradé, ses jetons
+    // en circulation ne valent plus rien.
+    const [inviter] = await tx
+      .select({ role: schema.membership.role })
+      .from(schema.membership)
+      .where(and(eq(schema.membership.userId, inv.invitedBy), eq(schema.membership.tenantId, inv.tenantId)))
+      .limit(1)
+    if (!inviter || !hasPermission(inviter.role as Role, 'members:manage')) {
+      throw new InvitationError('inviter_revoked')
+    }
+
+    const [existing] = await tx
+      .select({ id: schema.membership.id })
+      .from(schema.membership)
       .where(and(eq(schema.membership.userId, input.userId), eq(schema.membership.tenantId, inv.tenantId)))
       .limit(1)
     if (existing) throw new InvitationError('already_member')
 
     await tx.insert(schema.membership).values({ userId: input.userId, tenantId: inv.tenantId, role: inv.role })
-    await tx.update(schema.invitation)
+    const consumed = await tx
+      .update(schema.invitation)
       .set({ status: 'accepted', acceptedAt: new Date(nowMs) })
-      .where(eq(schema.invitation.id, inv.id))
+      .where(and(eq(schema.invitation.id, inv.id), eq(schema.invitation.status, 'pending')))
+      .returning({ id: schema.invitation.id })
+    // Course entre deux acceptations : l'autre a consommé le jeton entre la lecture et l'update.
+    if (consumed.length === 0) throw new InvitationError('not_pending')
+
+    // Un lien copié à la main ne prouve rien : seul le lien e-mailé (avec sa preuve) confirme
+    // l'adresse. L'auteur connaît le token, pas la preuve.
+    if (input.emailProofValid && inv.emailedAt) {
+      await tx
+        .update(schema.user)
+        .set({ emailVerified: true })
+        .where(
+          and(eq(schema.user.id, input.userId), sql`lower(trim(${schema.user.email})) = lower(trim(${inv.email}))`),
+        )
+    }
     return { tenantId: inv.tenantId, role: inv.role as Role }
   })
 }

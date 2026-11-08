@@ -61,20 +61,17 @@ export async function ensureDefaultTenant(db: Db): Promise<string> {
   return row.id
 }
 
-export async function ensureMembership(
-  db: Db,
-  userId: string,
-  tenantId: string,
-  role: Role = 'owner',
-): Promise<void> {
-  await db.insert(schema.membership)
+export async function ensureMembership(db: Db, userId: string, tenantId: string, role: Role = 'owner'): Promise<void> {
+  await db
+    .insert(schema.membership)
     .values({ userId, tenantId, role })
     .onConflictDoNothing({ target: [schema.membership.userId, schema.membership.tenantId] })
 }
 
 /**
  * Résout le tenant applicable à la requête courante.
- * - mode single : ignore `opts`, renvoie (et crée si besoin) le tenant par défaut.
+ * - mode single : renvoie (et crée si besoin) le tenant par défaut ; si `userId` est fourni,
+ *   exige une membership sur ce tenant (sinon « accès refusé »).
  * - mode multi : exige `explicitTenantId` ET `userId`, et vérifie qu'une
  *   `membership(userId, explicitTenantId)` existe (sinon lève « accès refusé »).
  *
@@ -88,20 +85,32 @@ export async function resolveTenantId(
   config: Pick<AppConfig, 'tenancyMode'>,
   opts: { userId?: string; explicitTenantId?: string } = {},
 ): Promise<string> {
-  if (config.tenancyMode === 'single') return ensureDefaultTenant(db)
   const { userId, explicitTenantId } = opts
+  if (config.tenancyMode === 'single') {
+    const defaultTenantId = await ensureDefaultTenant(db)
+    // Appel technique sans utilisateur : inchangé. Avec un utilisateur, la membership est exigée
+    // pour que le retrait d'un membre prenne effet aussi en mode single.
+    if (userId && !(await getMembershipRole(db, userId, defaultTenantId))) throw new TenantAccessDeniedError()
+    return defaultTenantId
+  }
   if (!explicitTenantId) throw new Error('mode multi : un tenant explicite est requis')
   if (!userId) throw new Error('mode multi : utilisateur requis')
-  const [m] = await db.select({ id: schema.membership.id }).from(schema.membership)
-    .where(and(eq(schema.membership.userId, userId), eq(schema.membership.tenantId, explicitTenantId))).limit(1)
+  const [m] = await db
+    .select({ id: schema.membership.id })
+    .from(schema.membership)
+    .where(and(eq(schema.membership.userId, userId), eq(schema.membership.tenantId, explicitTenantId)))
+    .limit(1)
   if (!m) throw new TenantAccessDeniedError()
   return explicitTenantId
 }
 
 /** Rôle du membership (userId, tenantId), ou null si l'utilisateur n'est pas membre. */
 export async function getMembershipRole(db: Db, userId: string, tenantId: string): Promise<Role | null> {
-  const [m] = await db.select({ role: schema.membership.role }).from(schema.membership)
-    .where(and(eq(schema.membership.userId, userId), eq(schema.membership.tenantId, tenantId))).limit(1)
+  const [m] = await db
+    .select({ role: schema.membership.role })
+    .from(schema.membership)
+    .where(and(eq(schema.membership.userId, userId), eq(schema.membership.tenantId, tenantId)))
+    .limit(1)
   return m ? (m.role as Role) : null
 }
 
@@ -118,8 +127,11 @@ export async function scopeForUser(db: Db, tenantId: string, userId: string): Pr
 
 /** Rôle à attribuer à une nouvelle inscription : owner si le tenant n'a encore aucun membre, member sinon. */
 export async function firstMembershipRole(db: Db, tenantId: string): Promise<Role> {
-  const [m] = await db.select({ id: schema.membership.id }).from(schema.membership)
-    .where(eq(schema.membership.tenantId, tenantId)).limit(1)
+  const [m] = await db
+    .select({ id: schema.membership.id })
+    .from(schema.membership)
+    .where(eq(schema.membership.tenantId, tenantId))
+    .limit(1)
   return m ? 'member' : 'owner'
 }
 

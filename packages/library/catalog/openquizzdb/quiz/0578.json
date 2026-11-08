@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=578"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0578-1",
+      "type": "mcq",
+      "prompt": "Au golf, quel objet utilise-t-on pour envoyer la balle dans le trou ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Club",
+            "correct": true
+          },
+          {
+            "label": "Raquette",
+            "correct": false
+          },
+          {
+            "label": "Crosse",
+            "correct": false
+          },
+          {
+            "label": "Bâton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0578-3",
+      "type": "mcq",
+      "prompt": "Quel nombre de coups standard est fixé pour terminer un trou au golf ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Birdie",
+            "correct": false
+          },
+          {
+            "label": "Par",
+            "correct": true
+          },
+          {
+            "label": "Bogey",
+            "correct": false
+          },
+          {
+            "label": "Eagle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

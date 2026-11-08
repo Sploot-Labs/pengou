@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=386"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0386-1-en",
+      "type": "mcq",
+      "prompt": "Which nautical knot forms a ball and serves as a weight?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monkey's fist",
+            "correct": true
+          },
+          {
+            "label": "Tackle knot",
+            "correct": false
+          },
+          {
+            "label": "Blood knot",
+            "correct": false
+          },
+          {
+            "label": "Reef knot",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

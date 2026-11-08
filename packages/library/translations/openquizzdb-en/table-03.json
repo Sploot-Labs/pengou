@@ -1,0 +1,1106 @@
+{
+  "questions": {
+    "oqdb-0151-4": {
+      "skip": "chanteur suisse francophone peu connu hors de la francophonie"
+    },
+    "oqdb-0153-1": {
+      "prompt": "Which part of an electric car stores its energy?",
+      "options": [
+        "Battery",
+        "Starter motor",
+        "Alternator",
+        "Radiator"
+      ]
+    },
+    "oqdb-0153-2": {
+      "prompt": "Which company runs a Supercharger network for cars?",
+      "options": [
+        "Shell",
+        "ExxonMobil",
+        "BP",
+        "Tesla"
+      ]
+    },
+    "oqdb-0153-3": {
+      "prompt": "Where is the battery usually placed in an electric vehicle?",
+      "options": [
+        "Under the car",
+        "In the trunk",
+        "On the fenders",
+        "At the front"
+      ]
+    },
+    "oqdb-0155-1": {
+      "skip": "actrice française peu connue hors de France"
+    },
+    "oqdb-0155-2": {
+      "skip": "actrice française peu connue hors de France"
+    },
+    "oqdb-0155-3": {
+      "skip": "actrice française peu connue hors de France"
+    },
+    "oqdb-0155-4": {
+      "skip": "actrice française peu connue hors de France"
+    },
+    "oqdb-0157-1": {
+      "prompt": "Which summer destination is best known for its leaning tower?",
+      "options": [
+        "Athens",
+        "Pisa",
+        "Barcelona",
+        "Paris"
+      ]
+    },
+    "oqdb-0157-2": {
+      "prompt": "Which Greek island is famous for white houses and blue domes?",
+      "options": [
+        "Mykonos",
+        "Santorini",
+        "Rhodes",
+        "Crete"
+      ]
+    },
+    "oqdb-0157-3": {
+      "prompt": "On which Caribbean islands can you walk on pink sand?",
+      "options": [
+        "Grenada",
+        "The Bahamas",
+        "Barbados",
+        "Saint Lucia"
+      ]
+    },
+    "oqdb-0157-4": {
+      "prompt": "Which European island is famous for its fjords and northern lights?",
+      "options": [
+        "Norway",
+        "Finland",
+        "Sweden",
+        "Iceland"
+      ]
+    },
+    "oqdb-0159-2": {
+      "prompt": "In \"One Piece\", what other name is Marshall D. Teach known by?",
+      "options": [
+        "Shanks",
+        "Blackbeard",
+        "Whitebeard",
+        "Big Mom"
+      ]
+    },
+    "oqdb-0159-3": {
+      "prompt": "In \"One Piece\", who is the captain of the Heart Pirates?",
+      "options": [
+        "Law",
+        "Big Mom",
+        "Buggy",
+        "Kid"
+      ]
+    },
+    "oqdb-0159-4": {
+      "prompt": "Which race do Dorry and Broggy, met on Little Garden, belong to?",
+      "options": [
+        "Giants",
+        "Shandias",
+        "Fish-Men",
+        "Minks"
+      ]
+    },
+    "oqdb-0160-1": {
+      "prompt": "What is the name of Captain Haddock's butler?",
+      "options": [
+        "Narcissus",
+        "Nestor",
+        "Nelson",
+        "Napoleon"
+      ]
+    },
+    "oqdb-0160-2": {
+      "prompt": "In which French city can you stroll along the Promenade des Anglais?",
+      "options": [
+        "Nancy",
+        "Nanterre",
+        "Nantes",
+        "Nice"
+      ]
+    },
+    "oqdb-0160-3": {
+      "prompt": "Kurt Cobain was the frontman of which legendary band?",
+      "options": [
+        "Nickelback",
+        "Nine Inch Nails",
+        "New Order",
+        "Nirvana"
+      ]
+    },
+    "oqdb-0160-4": {
+      "skip": "groupe pop français peu connu hors de France"
+    },
+    "oqdb-0163-1": {
+      "prompt": "Which island housed a maximum-security federal prison until 1963?",
+      "options": [
+        "Santa Cruz",
+        "San Miguel",
+        "Alcatraz",
+        "Anacapa"
+      ]
+    },
+    "oqdb-0163-2": {
+      "prompt": "Which American riviera has a TV series named after it?",
+      "options": [
+        "Santa Monica",
+        "Santa Barbara",
+        "Santa Rosa",
+        "Santa Clarita"
+      ]
+    },
+    "oqdb-0163-3": {
+      "prompt": "Which giant conifer is found in California's Sierra Nevada?",
+      "options": [
+        "Giant sequoia",
+        "Black walnut",
+        "White ash",
+        "Graceful fir"
+      ]
+    },
+    "oqdb-0163-4": {
+      "prompt": "Which marine-life theme park is in Orlando?",
+      "options": [
+        "Epcot",
+        "Magic Kingdom",
+        "Everland",
+        "SeaWorld"
+      ]
+    },
+    "oqdb-0165-1": {
+      "prompt": "How many players make up each rugby union team?",
+      "options": [
+        "Fifteen",
+        "Eleven",
+        "Ten",
+        "Twelve"
+      ]
+    },
+    "oqdb-0165-2": {
+      "prompt": "In rugby union, how many points is a converted try worth?",
+      "options": [
+        "Six",
+        "Seven",
+        "Four",
+        "Five"
+      ]
+    },
+    "oqdb-0165-3": {
+      "prompt": "What is the nickname of South Africa's rugby union team?",
+      "options": [
+        "Thistle",
+        "All Blacks",
+        "Springboks",
+        "Red Devils"
+      ]
+    },
+    "oqdb-0165-4": {
+      "prompt": "What follows an incorrect lineout throw?",
+      "options": [
+        "Conversion",
+        "Drop goal",
+        "Scrum",
+        "Try"
+      ]
+    },
+    "oqdb-0167-1": {
+      "prompt": "Which doctor did George Clooney play in \"ER\"?",
+      "options": [
+        "John Carter",
+        "Douglas Ross",
+        "Mark Green",
+        "Dylan Creed"
+      ]
+    },
+    "oqdb-0167-2": {
+      "prompt": "What was the name of George Clooney's pet pig?",
+      "options": [
+        "Fred",
+        "Kyle",
+        "Max",
+        "Tom"
+      ]
+    },
+    "oqdb-0167-3": {
+      "prompt": "Which region of Sudan is George Clooney strongly committed to?",
+      "options": [
+        "Kassala",
+        "Darfur",
+        "Sennar",
+        "Atbara"
+      ]
+    },
+    "oqdb-0167-4": {
+      "prompt": "Which vermouth brand did George Clooney advertise?",
+      "options": [
+        "Dubonnet",
+        "Cinzano",
+        "Martini",
+        "Noilly Prat"
+      ]
+    },
+    "oqdb-0169-1": {
+      "prompt": "Which carbonnade is made of meat stewed in beer?",
+      "options": [
+        "Germanic",
+        "Flemish",
+        "Brussels",
+        "Walloon"
+      ]
+    },
+    "oqdb-0169-2": {
+      "skip": "spécialité belge très locale, sans écho à l'étranger"
+    },
+    "oqdb-0169-3": {
+      "prompt": "Which breaded, spicy sausage is often served in friteries?",
+      "options": [
+        "Gandeuillot",
+        "Fricadelle",
+        "Rosette",
+        "Longeole"
+      ]
+    },
+    "oqdb-0169-4": {
+      "prompt": "Which half-baguette holds hot meat, fries and sauce?",
+      "options": [
+        "Mitraillette",
+        "Truffade",
+        "Rösti",
+        "Frico"
+      ]
+    },
+    "oqdb-0171-1": {
+      "prompt": "What can Ether be stored in?",
+      "options": [
+        "Disket",
+        "Wallet",
+        "Magnet",
+        "Basket"
+      ]
+    },
+    "oqdb-0171-3": {
+      "prompt": "Which native currency does the Ripple payment protocol use?",
+      "options": [
+        "XPP",
+        "XRP",
+        "XLE",
+        "XPL"
+      ]
+    },
+    "oqdb-0171-4": {
+      "prompt": "Which investor also created the website bitcoin.com?",
+      "options": [
+        "Roger Ver",
+        "Charlie Lee",
+        "Sunny King",
+        "Gavin Wood"
+      ]
+    },
+    "oqdb-0172-1": {
+      "prompt": "What is the name of Popeye the Sailor's girlfriend?",
+      "options": [
+        "Odile",
+        "Olive",
+        "Octavia",
+        "Oceane"
+      ]
+    },
+    "oqdb-0172-2": {
+      "prompt": "Which alternative rock band was made up of the Gallagher brothers?",
+      "options": [
+        "OMD",
+        "Oasis",
+        "Offspring",
+        "Ottawan"
+      ]
+    },
+    "oqdb-0172-3": {
+      "prompt": "Which capital of Norway was called Christiania from 1624 to 1924?",
+      "options": [
+        "Ulaanbaatar",
+        "Oxford",
+        "Oslo",
+        "Ottawa"
+      ]
+    },
+    "oqdb-0172-4": {
+      "skip": "sigle boursier français (OPA), jeu sur la langue"
+    },
+    "oqdb-0173-1": {
+      "prompt": "In which US state was Barack Obama born?",
+      "options": [
+        "Hawaii",
+        "Colorado",
+        "Arkansas",
+        "California"
+      ]
+    },
+    "oqdb-0173-3": {
+      "prompt": "Who sang the national anthem at Barack Obama's inauguration?",
+      "options": [
+        "Beyoncé",
+        "Rihanna",
+        "Madonna",
+        "Britney Spears"
+      ]
+    },
+    "oqdb-0173-4": {
+      "prompt": "Which country was Barack Obama's father from?",
+      "options": [
+        "South Africa",
+        "Mozambique",
+        "Congo",
+        "Kenya"
+      ]
+    },
+    "oqdb-0175-1": {
+      "prompt": "Which Nestlé brand is George Clooney an ambassador for?",
+      "options": [
+        "Nespresso",
+        "Ricoré",
+        "Carte Noire",
+        "Jacques Vabre"
+      ]
+    },
+    "oqdb-0175-2": {
+      "prompt": "Which world-famous jeans brand makes the iconic 501?",
+      "options": [
+        "Lee Cooper",
+        "Levi's",
+        "Lacoste",
+        "Lindex"
+      ]
+    },
+    "oqdb-0175-3": {
+      "skip": "slogan publicitaire français"
+    },
+    "oqdb-0175-4": {
+      "skip": "slogan publicitaire français"
+    },
+    "oqdb-0177-1": {
+      "prompt": "After midnight, what does Cinderella's carriage turn into?",
+      "options": [
+        "A pumpkin",
+        "A cake",
+        "A mouse",
+        "An apple"
+      ]
+    },
+    "oqdb-0177-2": {
+      "prompt": "Who sings \"Someday My Prince Will Come\" in a Disney cartoon?",
+      "options": [
+        "Jasmine",
+        "Alice",
+        "Snow White",
+        "Cinderella"
+      ]
+    },
+    "oqdb-0177-4": {
+      "prompt": "Which Disney princess is a mermaid living with King Triton?",
+      "options": [
+        "Merida",
+        "Tiana",
+        "Jasmine",
+        "Ariel"
+      ]
+    },
+    "oqdb-0179-1": {
+      "prompt": "Which Ron Howard film pays tribute to a firefighter brigade?",
+      "options": [
+        "Cocoon",
+        "Copycat",
+        "Backdraft",
+        "Ransom"
+      ]
+    },
+    "oqdb-0179-2": {
+      "prompt": "Which character did Ron Howard play in \"Happy Days\"?",
+      "options": [
+        "Charles",
+        "Howard",
+        "Arthur",
+        "Richie"
+      ]
+    },
+    "oqdb-0179-3": {
+      "prompt": "What kind of creature is the heroine of Ron Howard's \"Splash\"?",
+      "options": [
+        "An octopus",
+        "A turtle",
+        "A mermaid",
+        "A jellyfish"
+      ]
+    },
+    "oqdb-0179-4": {
+      "prompt": "Which film revisits the rivalry between James Hunt and Niki Lauda?",
+      "options": [
+        "Backdraft",
+        "Ransom",
+        "Rush",
+        "Made in America"
+      ]
+    },
+    "oqdb-0181-1": {
+      "prompt": "Which position does Harry Potter play on his Quidditch team?",
+      "options": [
+        "Seeker",
+        "Beater",
+        "Keeper",
+        "Chaser"
+      ]
+    },
+    "oqdb-0181-2": {
+      "prompt": "What is Hermione's surname in the \"Harry Potter\" saga?",
+      "options": [
+        "Gaunt",
+        "Greengrass",
+        "Granger",
+        "Grindelwald"
+      ]
+    },
+    "oqdb-0181-3": {
+      "prompt": "In \"Harry Potter\", which title did Voldemort decide to take?",
+      "options": [
+        "Count",
+        "Baron",
+        "Duke",
+        "Lord"
+      ]
+    },
+    "oqdb-0181-4": {
+      "prompt": "What shape does Ron's boggart take in the \"Harry Potter\" saga?",
+      "options": [
+        "A spider",
+        "A wolf",
+        "A dragon",
+        "A scorpion"
+      ]
+    },
+    "oqdb-0183-1": {
+      "prompt": "In which adventures do the characters Lois and Clark appear?",
+      "options": [
+        "Superman",
+        "Spider-Man",
+        "Batman",
+        "Hulk"
+      ]
+    },
+    "oqdb-0183-2": {
+      "prompt": "Which substance makes up Wolverine's main skeleton?",
+      "options": [
+        "Vibranium",
+        "Cavorite",
+        "Adamantium",
+        "Neutronium"
+      ]
+    },
+    "oqdb-0183-4": {
+      "prompt": "Which superhero never parts with his hammer?",
+      "options": [
+        "Thunderbird",
+        "Storm",
+        "Thor",
+        "Tempest"
+      ]
+    },
+    "oqdb-0184-1": {
+      "prompt": "What do we call all numbers divisible by two?",
+      "options": [
+        "Parallel",
+        "Prime",
+        "Even",
+        "Perfect"
+      ]
+    },
+    "oqdb-0184-2": {
+      "prompt": "Before becoming a knight, what is a Jedi apprentice called?",
+      "options": [
+        "Poltergeist",
+        "Padawan",
+        "Paddington",
+        "Palikir"
+      ]
+    },
+    "oqdb-0184-3": {
+      "prompt": "Which Disney character's nose grows bigger?",
+      "options": [
+        "Pinocchio",
+        "Pluto",
+        "Pumbaa",
+        "Pocahontas"
+      ]
+    },
+    "oqdb-0185-1": {
+      "prompt": "In which film is Sandra Bullock an astronaut alongside George Clooney?",
+      "options": [
+        "Minority Report",
+        "The Warrior",
+        "Gravity",
+        "Skyfall"
+      ]
+    },
+    "oqdb-0185-2": {
+      "prompt": "In which comedy does Sandra Bullock play a crossword setter?",
+      "options": [
+        "The Heat",
+        "The Proposal",
+        "Gravity",
+        "All About Steve"
+      ]
+    },
+    "oqdb-0185-3": {
+      "prompt": "Who does Sandra Bullock make a \"proposal\" to in a comedy?",
+      "options": [
+        "Jim Carrey",
+        "Ryan Reynolds",
+        "Michael J. Fox",
+        "Simon Baker"
+      ]
+    },
+    "oqdb-0187-1": {
+      "prompt": "What color are the lifeguards' swimsuits in \"Baywatch\"?",
+      "options": [
+        "Red",
+        "Blue",
+        "Green",
+        "Yellow"
+      ]
+    },
+    "oqdb-0187-2": {
+      "prompt": "Which \"Bewitched\" heroine is married to Darrin?",
+      "options": [
+        "Endora",
+        "Serena",
+        "Tabitha",
+        "Samantha"
+      ]
+    },
+    "oqdb-0187-3": {
+      "prompt": "Who do \"Charlie's Angels\" work for?",
+      "options": [
+        "Charlie",
+        "Clayton",
+        "Calvin",
+        "Chester"
+      ]
+    },
+    "oqdb-0187-4": {
+      "prompt": "Who is the strongest member of \"The A-Team\"?",
+      "options": [
+        "Murdock",
+        "Face",
+        "Hannibal",
+        "B.A. Baracus"
+      ]
+    },
+    "oqdb-0189-1": {
+      "prompt": "Which Belgian beer is made by adding cherries to lambic?",
+      "options": [
+        "Kwak",
+        "Kronenbourg",
+        "Kriek",
+        "Keystone"
+      ]
+    },
+    "oqdb-0189-2": {
+      "prompt": "Which Belgian beer, flagship of the Dubuisson brewery, is 12% ABV?",
+      "options": [
+        "Bush",
+        "Chimay Blue",
+        "Mort Subite",
+        "Tongerlo"
+      ]
+    },
+    "oqdb-0189-4": {
+      "prompt": "Which Belgian beer is still the benchmark among witbiers?",
+      "options": [
+        "Corsendonk",
+        "Hoegaarden",
+        "Bacchus",
+        "Floreffe"
+      ]
+    },
+    "oqdb-0191-1": {
+      "prompt": "In what year did Steve Jobs buy the animation studio Pixar?",
+      "options": [
+        "1979",
+        "1995",
+        "2001",
+        "1986"
+      ]
+    },
+    "oqdb-0191-2": {
+      "prompt": "Who officially became Steve Jobs's successor in 2011?",
+      "options": [
+        "Jony Ive",
+        "Elon Musk",
+        "Tim Cook",
+        "Steve Wozniak"
+      ]
+    },
+    "oqdb-0191-3": {
+      "prompt": "Which company did Steve Jobs start in his childhood home's garage?",
+      "options": [
+        "Microsoft",
+        "Apple",
+        "IBM",
+        "Google"
+      ]
+    },
+    "oqdb-0191-4": {
+      "prompt": "Which symbol links New York City and Steve Jobs?",
+      "options": [
+        "Apple",
+        "Taxi",
+        "Skyscraper",
+        "Computer"
+      ]
+    },
+    "oqdb-0193-1": {
+      "prompt": "What is the hair color of Miranda in \"Sex and the City\"?",
+      "options": [
+        "Blonde",
+        "Black",
+        "Red",
+        "Brown"
+      ]
+    },
+    "oqdb-0193-2": {
+      "prompt": "For which species was a constructed language created in \"Star Trek\"?",
+      "options": [
+        "Sylvidres",
+        "Vulcans",
+        "Klingons",
+        "Romulans"
+      ]
+    },
+    "oqdb-0193-3": {
+      "prompt": "What is Buffy's family name in \"Buffy the Vampire Slayer\"?",
+      "options": [
+        "Summers",
+        "Sanders",
+        "Bouwers",
+        "Rogers"
+      ]
+    },
+    "oqdb-0193-4": {
+      "prompt": "Who created the hit American TV series \"Alias\"?",
+      "options": [
+        "J.J. Williams",
+        "J.J. Abrams",
+        "J.J. Lionel",
+        "J.J. Morgan"
+      ]
+    },
+    "oqdb-0195-1": {
+      "prompt": "Which first name is on Marilyn Monroe's baptism certificate?",
+      "options": [
+        "Norma Jeane",
+        "Ruby Catherine",
+        "Lucy Fay",
+        "Louise Marie"
+      ]
+    },
+    "oqdb-0195-2": {
+      "prompt": "What color is Marilyn Monroe's dress in \"The Seven Year Itch\"?",
+      "options": [
+        "Red",
+        "Blue",
+        "White",
+        "Black"
+      ]
+    },
+    "oqdb-0195-3": {
+      "prompt": "How many times was Marilyn Monroe married in her life?",
+      "options": [
+        "Three times",
+        "Once",
+        "Twice",
+        "Four times"
+      ]
+    },
+    "oqdb-0195-4": {
+      "prompt": "Who made a series of silkscreens of Marilyn Monroe in 1964?",
+      "options": [
+        "James Rizzi",
+        "Jasper Johns",
+        "Andy Warhol",
+        "Wayne Thiebaud"
+      ]
+    },
+    "oqdb-0196-1": {
+      "prompt": "Which band made the soundtrack of the film \"Flash Gordon\"?",
+      "options": [
+        "Queen",
+        "Quantic",
+        "Quiet Riot",
+        "Quicksand"
+      ]
+    },
+    "oqdb-0196-2": {
+      "prompt": "Which city was the cradle of French civilization in America?",
+      "options": [
+        "Quévy",
+        "Quiberville",
+        "Quito",
+        "Quebec City"
+      ]
+    },
+    "oqdb-0196-3": {
+      "skip": "chaîne de restauration rapide française, jeu télévisé français"
+    },
+    "oqdb-0196-4": {
+      "prompt": "Which fictional character, deformed and deaf, is a bell ringer?",
+      "options": [
+        "Quark",
+        "Quasimodo",
+        "Q*bert",
+        "Quorra"
+      ]
+    },
+    "oqdb-0197-1": {
+      "prompt": "In which film does Leonardo DiCaprio seek out a paradise island?",
+      "options": [
+        "The Aviator",
+        "Celebrity",
+        "The Beach",
+        "Blood Diamond"
+      ]
+    },
+    "oqdb-0197-2": {
+      "prompt": "Who plays Leonardo DiCaprio's love interest in \"Titanic\"?",
+      "options": [
+        "Helen Hunt",
+        "Cameron Diaz",
+        "Kate Winslet",
+        "Julia Roberts"
+      ]
+    },
+    "oqdb-0197-3": {
+      "prompt": "In which Scorsese film does DiCaprio play Edward Daniels?",
+      "options": [
+        "Casino",
+        "Shutter Island",
+        "The Aviator",
+        "Hugo"
+      ]
+    },
+    "oqdb-0197-4": {
+      "prompt": "Which actress shares the screen with DiCaprio in \"Inception\"?",
+      "options": [
+        "Marion Cotillard",
+        "Léa Seydoux",
+        "Mélanie Laurent",
+        "Camille Cottin"
+      ]
+    },
+    "oqdb-0199-1": {
+      "prompt": "In which city is Tutankhamun's golden mask on display?",
+      "options": [
+        "Luxor",
+        "Boulaq",
+        "Cairo",
+        "Alexandria"
+      ]
+    },
+    "oqdb-0199-2": {
+      "prompt": "How many coffins protected Tutankhamun's mummy?",
+      "options": [
+        "Four",
+        "Five",
+        "Three",
+        "Two"
+      ]
+    },
+    "oqdb-0199-3": {
+      "prompt": "What is Tutankhamun's funerary mask made of?",
+      "options": [
+        "Gold",
+        "Bronze",
+        "Plaster",
+        "Silver"
+      ]
+    },
+    "oqdb-0199-4": {
+      "prompt": "In ancient Egypt, which practice opened the underworld to the soul?",
+      "options": [
+        "Cremation",
+        "Hanging",
+        "Embalming",
+        "Dissection"
+      ]
+    },
+    "oqdb-0201-1": {
+      "prompt": "Which mass-produced cheese is coated in red-dyed wax?",
+      "options": [
+        "Époisses",
+        "Babybel",
+        "Chavroux",
+        "Saint-Paulin"
+      ]
+    },
+    "oqdb-0201-2": {
+      "skip": "exactitude douteuse : le roquefort est aussi vendu dans une feuille d'aluminium gaufré"
+    },
+    "oqdb-0201-3": {
+      "prompt": "Which of these French cheeses is sold in a wooden box?",
+      "options": [
+        "Roquefort",
+        "Cabécou",
+        "Petit-suisse",
+        "Époisses"
+      ]
+    },
+    "oqdb-0201-4": {
+      "prompt": "Which cheese is bound with three to five plant strips?",
+      "options": [
+        "Montbriac",
+        "Fédou",
+        "Livernon",
+        "Livarot"
+      ]
+    },
+    "oqdb-0203-2": {
+      "prompt": "Which country is Shakira, the queen of Latin music, from?",
+      "options": [
+        "United States",
+        "Colombia",
+        "Mexico",
+        "Bolivia"
+      ]
+    },
+    "oqdb-0203-3": {
+      "prompt": "What is the name of Shakira and Gerard Piqué's first son?",
+      "options": [
+        "Donovan",
+        "Esteban",
+        "Ivan",
+        "Milan"
+      ]
+    },
+    "oqdb-0203-4": {
+      "prompt": "What is the title of the first album Shakira wrote in English?",
+      "options": [
+        "You and Me",
+        "Oral Fixation",
+        "Laundry Service",
+        "She Wolf"
+      ]
+    },
+    "oqdb-0205-1": {
+      "prompt": "Which cheese is associated with the French town of Meaux?",
+      "options": [
+        "Cantal",
+        "Roquefort",
+        "Gruyère",
+        "Brie"
+      ]
+    },
+    "oqdb-0205-2": {
+      "prompt": "Which French cheese is known for its paste full of holes?",
+      "options": [
+        "Emmental",
+        "Camembert",
+        "Brie",
+        "Beaufort"
+      ]
+    },
+    "oqdb-0205-3": {
+      "prompt": "Which cheese has a name that means \"to milk a second time\"?",
+      "options": [
+        "Gruyère",
+        "Reblochon",
+        "Emmental",
+        "Roquefort"
+      ]
+    },
+    "oqdb-0205-4": {
+      "prompt": "Which blue cheese is made from raw sheep's milk?",
+      "options": [
+        "Beaufort",
+        "Munster",
+        "Roquefort",
+        "Brie"
+      ]
+    },
+    "oqdb-0207-1": {
+      "prompt": "What do sharks, like rays, breathe with?",
+      "options": [
+        "Skin",
+        "Gills",
+        "Fins",
+        "Lungs"
+      ]
+    },
+    "oqdb-0207-2": {
+      "prompt": "Which part of a shark's silhouette makes us tremble?",
+      "options": [
+        "Tail",
+        "Dorsal fin",
+        "Snout",
+        "Gills"
+      ]
+    },
+    "oqdb-0207-3": {
+      "prompt": "What does the whale shark mainly feed on while moving?",
+      "options": [
+        "Moss",
+        "Crabs",
+        "Seals",
+        "Plankton"
+      ]
+    },
+    "oqdb-0207-4": {
+      "prompt": "What percentage of a shark's weight can its liver represent?",
+      "options": [
+        "Up to 12%",
+        "Up to 25%",
+        "Up to 2%",
+        "Up to 6%"
+      ]
+    },
+    "oqdb-0208-1": {
+      "prompt": "What is the first name of Kate Winslet's character in \"Titanic\"?",
+      "options": [
+        "Rebecca",
+        "Rose",
+        "Rosalie",
+        "Rachel"
+      ]
+    },
+    "oqdb-0208-2": {
+      "prompt": "Which watch brand has a five-pointed crown as its logo?",
+      "options": [
+        "Rolls-Royce",
+        "Rozana",
+        "Rolex",
+        "Revlon"
+      ]
+    },
+    "oqdb-0208-3": {
+      "prompt": "Which cheese is tartiflette made with?",
+      "options": [
+        "Ricotta",
+        "Roquefort",
+        "Reblochon",
+        "Romano"
+      ]
+    },
+    "oqdb-0208-4": {
+      "prompt": "What is the name of the dim-witted dog in the \"Lucky Luke\" comics?",
+      "options": [
+        "Rocky",
+        "Rubeus",
+        "Rambo",
+        "Rin Tin Can"
+      ]
+    },
+    "oqdb-0209-1": {
+      "prompt": "Which actor introduced Johnny Depp, then unknown, to his agent?",
+      "options": [
+        "Nicolas Cage",
+        "Clint Eastwood",
+        "Tom Cruise",
+        "Bruce Willis"
+      ]
+    },
+    "oqdb-0209-3": {
+      "prompt": "Who is the mother of Johnny Depp's children?",
+      "options": [
+        "Kim Basinger",
+        "Penélope Cruz",
+        "Angelina Jolie",
+        "Vanessa Paradis"
+      ]
+    },
+    "oqdb-0209-4": {
+      "prompt": "Which ex-partner of Johnny Depp declared her bisexuality in 2010?",
+      "options": [
+        "Vanessa Paradis",
+        "Jennifer Grey",
+        "Sherilyn Fenn",
+        "Amber Heard"
+      ]
+    },
+    "oqdb-0211-1": {
+      "prompt": "Which Italian cheese is used in tiramisu?",
+      "options": [
+        "Ricotta",
+        "Gorgonzola",
+        "Mascarpone",
+        "Grana Padano"
+      ]
+    },
+    "oqdb-0211-2": {
+      "skip": "jeu de mots sur le nom français du gâteau, distracteurs inventés intraduisibles"
+    },
+    "oqdb-0211-3": {
+      "prompt": "Which sponge-based dessert balances coffee and chocolate flavors?",
+      "options": [
+        "Diplomate",
+        "Bavarois",
+        "Religieuse",
+        "Opéra"
+      ]
+    },
+    "oqdb-0211-4": {
+      "prompt": "Which red fruit goes into clafoutis?",
+      "options": [
+        "Raspberries",
+        "Redcurrants",
+        "Cherries",
+        "Strawberries"
+      ]
+    },
+    "oqdb-0213-1": {
+      "prompt": "What does the fruit of our fruit trees come from?",
+      "options": [
+        "Root",
+        "Flower",
+        "Seed",
+        "Leaf"
+      ]
+    },
+    "oqdb-0213-2": {
+      "prompt": "What is a plot of land devoted to growing fruit trees called?",
+      "options": [
+        "Planter box",
+        "Vegetable garden",
+        "Orchard",
+        "Fallow land"
+      ]
+    },
+    "oqdb-0213-3": {
+      "prompt": "Which fruit tree has a spectacular bloom in Japan?",
+      "options": [
+        "Pomegranate tree",
+        "Peach tree",
+        "Chestnut tree",
+        "Cherry tree"
+      ]
+    },
+    "oqdb-0213-4": {
+      "prompt": "Which fruit tree produces greengages or the mirabelle plum of Nancy?",
+      "options": [
+        "Cherry tree",
+        "Chestnut tree",
+        "Fig tree",
+        "Plum tree"
+      ]
+    },
+    "oqdb-0215-1": {
+      "prompt": "In which film does Johnny Depp upload his consciousness after death?",
+      "options": [
+        "Renaissance",
+        "Transcendence",
+        "Aeon Flux",
+        "The Island"
+      ]
+    }
+  },
+  "quizzes": {}
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=436"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0436-1",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on la « boîte » recharchée en geocaching ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mega",
+            "correct": false
+          },
+          {
+            "label": "Surprise",
+            "correct": false
+          },
+          {
+            "label": "Casse-tête",
+            "correct": false
+          },
+          {
+            "label": "Cache",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0436-2",
+      "type": "mcq",
+      "prompt": "Quel objet sert à trouver des caches en geocaching ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crayon",
+            "correct": false
+          },
+          {
+            "label": "GPS",
+            "correct": true
+          },
+          {
+            "label": "Lampe de poche",
+            "correct": false
+          },
+          {
+            "label": "Parapluie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0436-3",
+      "type": "mcq",
+      "prompt": "Comment doit être une geocache pour mieux résister dans le temps ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cartonnée",
+            "correct": false
+          },
+          {
+            "label": "Colorée",
+            "correct": false
+          },
+          {
+            "label": "Ouverte",
+            "correct": false
+          },
+          {
+            "label": "Étanche",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0436-4",
+      "type": "mcq",
+      "prompt": "Comment les non-initiés au geocaching sont-ils appelés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rapetous",
+            "correct": false
+          },
+          {
+            "label": "Gobelins",
+            "correct": false
+          },
+          {
+            "label": "Moldus",
+            "correct": true
+          },
+          {
+            "label": "Cracmous",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

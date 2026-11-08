@@ -1,18 +1,27 @@
 import { describe, it, expect } from 'vitest'
-import { validateQuestionPayload } from './index.js'
+import { validateQuestionPayload, isScoredType } from './index.js'
 
 describe('validateQuestionPayload', () => {
   it('mcq : accepte 4 options avec ≥1 correcte', () => {
-    const p = validateQuestionPayload('mcq', { options: [
-      { label: 'A', correct: true }, { label: 'B', correct: false },
-      { label: 'C', correct: false }, { label: 'D', correct: false },
-    ] })
+    const p = validateQuestionPayload('mcq', {
+      options: [
+        { label: 'A', correct: true },
+        { label: 'B', correct: false },
+        { label: 'C', correct: false },
+        { label: 'D', correct: false },
+      ],
+    })
     expect(p).toBeTruthy()
   })
   it('mcq : rejette 0 correcte', () => {
-    expect(() => validateQuestionPayload('mcq', { options: [
-      { label: 'A', correct: false }, { label: 'B', correct: false },
-    ] })).toThrow()
+    expect(() =>
+      validateQuestionPayload('mcq', {
+        options: [
+          { label: 'A', correct: false },
+          { label: 'B', correct: false },
+        ],
+      }),
+    ).toThrow()
   })
   it('mcq : rejette <2 options', () => {
     expect(() => validateQuestionPayload('mcq', { options: [{ label: 'A', correct: true }] })).toThrow()
@@ -31,5 +40,10 @@ describe('validateQuestionPayload', () => {
   })
   it('type inconnu : lève', () => {
     expect(() => validateQuestionPayload('nope' as never, {})).toThrow()
+  })
+  it('isScoredType : sondage et nuage de mots non notés', () => {
+    expect(isScoredType('poll')).toBe(false)
+    expect(isScoredType('wordcloud')).toBe(false)
+    for (const t of ['mcq', 'truefalse', 'text', 'slider'] as const) expect(isScoredType(t)).toBe(true)
   })
 })

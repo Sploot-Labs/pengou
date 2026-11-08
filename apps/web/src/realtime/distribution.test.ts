@@ -1,6 +1,6 @@
 import { sliderTolerance } from '@splootlabs/quiz'
 import { describe, expect, it } from 'vitest'
-import { buildDistributionRows } from './distribution.js'
+import { buildDistributionRows, pollRows } from './distribution.js'
 
 /**
  * `buildDistributionRows` décode `question:reveal.distribution`, indexée par
@@ -92,11 +92,7 @@ describe('buildDistributionRows — text', () => {
   })
 
   it('réponse vide affichée avec un libellé explicite, pas une chaîne vide brute', () => {
-    const rows = buildDistributionRows(
-      'text',
-      { answers: ['x'] },
-      { [JSON.stringify({ text: '' })]: 2 },
-    )
+    const rows = buildDistributionRows('text', { answers: ['x'] }, { [JSON.stringify({ text: '' })]: 2 })
     expect(rows).toEqual([{ key: '', label: '(réponse vide)', correct: false, shape: null, count: 2 }])
   })
 })
@@ -111,13 +107,9 @@ describe('buildDistributionRows — clés inattendues (jamais de crash)', () => 
 
   it('un JSON valide mais de forme inattendue (ni {value}, ni {text}) est ignoré sans planter', () => {
     const distribution = { [JSON.stringify({ surprise: 42 })]: 1 }
-    expect(() =>
-      buildDistributionRows('slider', { min: 0, max: 10, correct: 5 }, distribution),
-    ).not.toThrow()
+    expect(() => buildDistributionRows('slider', { min: 0, max: 10, correct: 5 }, distribution)).not.toThrow()
     expect(buildDistributionRows('slider', { min: 0, max: 10, correct: 5 }, distribution)).toEqual([])
-    expect(() =>
-      buildDistributionRows('text', { answers: ['x'] }, distribution),
-    ).not.toThrow()
+    expect(() => buildDistributionRows('text', { answers: ['x'] }, distribution)).not.toThrow()
     expect(buildDistributionRows('text', { answers: ['x'] }, distribution)).toEqual([])
   })
 
@@ -128,5 +120,29 @@ describe('buildDistributionRows — clés inattendues (jamais de crash)', () => 
     expect(buildDistributionRows('truefalse', { correct: false }, {})).toHaveLength(2)
     expect(buildDistributionRows('slider', { min: 0, max: 10, correct: 5 }, {})).toEqual([])
     expect(buildDistributionRows('text', { answers: ['x'] }, {})).toEqual([])
+  })
+})
+
+describe('pollRows', () => {
+  it("donne une ligne par option, dans l'ordre, sans jamais marquer de bonne réponse", () => {
+    const rows = pollRows({
+      questionId: 'q1',
+      multiple: true,
+      voters: 3,
+      options: [
+        { label: 'Café', votes: 2 },
+        { label: 'Thé', votes: 0 },
+        { label: 'Chocolat', votes: 3 },
+      ],
+    })
+    expect(rows).toEqual([
+      { key: '0', label: 'Café', correct: false, shape: 'triangle', count: 2 },
+      { key: '1', label: 'Thé', correct: false, shape: 'diamond', count: 0 },
+      { key: '2', label: 'Chocolat', correct: false, shape: 'circle', count: 3 },
+    ])
+  })
+
+  it('buildDistributionRows ne produit aucune ligne pour un sondage (la répartition vient de poll)', () => {
+    expect(buildDistributionRows('poll', null, {})).toEqual([])
   })
 })

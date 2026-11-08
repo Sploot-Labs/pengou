@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=515"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0515-1-en",
+      "type": "mcq",
+      "prompt": "Which material are bulletproof vests generally made of?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ivory",
+            "correct": false
+          },
+          {
+            "label": "Kevlar",
+            "correct": true
+          },
+          {
+            "label": "Latex",
+            "correct": false
+          },
+          {
+            "label": "Metal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0515-2-en",
+      "type": "mcq",
+      "prompt": "What is the main advantage of using a stick grenade?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cost",
+            "correct": false
+          },
+          {
+            "label": "Easier to carry",
+            "correct": false
+          },
+          {
+            "label": "Watertightness",
+            "correct": false
+          },
+          {
+            "label": "Throwing distance",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0515-3-en",
+      "type": "mcq",
+      "prompt": "About how many tonnes does the American M1A1 Abrams tank weigh?",
+      "payload": {
+        "options": [
+          {
+            "label": "75 tonnes",
+            "correct": false
+          },
+          {
+            "label": "12 tonnes",
+            "correct": false
+          },
+          {
+            "label": "36 tonnes",
+            "correct": false
+          },
+          {
+            "label": "54 tonnes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0515-4-en",
+      "type": "mcq",
+      "prompt": "During the Vietnam War, which weapon was nicknamed the \"Mattel Gun\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "M14",
+            "correct": false
+          },
+          {
+            "label": "M16",
+            "correct": true
+          },
+          {
+            "label": "AK47",
+            "correct": false
+          },
+          {
+            "label": "L1A1",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

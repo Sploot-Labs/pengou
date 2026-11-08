@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=157"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0157-1-en",
+      "type": "mcq",
+      "prompt": "Which summer destination is best known for its leaning tower?",
+      "payload": {
+        "options": [
+          {
+            "label": "Athens",
+            "correct": false
+          },
+          {
+            "label": "Pisa",
+            "correct": true
+          },
+          {
+            "label": "Barcelona",
+            "correct": false
+          },
+          {
+            "label": "Paris",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0157-3-en",
+      "type": "mcq",
+      "prompt": "On which Caribbean islands can you walk on pink sand?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grenada",
+            "correct": false
+          },
+          {
+            "label": "The Bahamas",
+            "correct": true
+          },
+          {
+            "label": "Barbados",
+            "correct": false
+          },
+          {
+            "label": "Saint Lucia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0157-4-en",
+      "type": "mcq",
+      "prompt": "Which European island is famous for its fjords and northern lights?",
+      "payload": {
+        "options": [
+          {
+            "label": "Norway",
+            "correct": false
+          },
+          {
+            "label": "Finland",
+            "correct": false
+          },
+          {
+            "label": "Sweden",
+            "correct": false
+          },
+          {
+            "label": "Iceland",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

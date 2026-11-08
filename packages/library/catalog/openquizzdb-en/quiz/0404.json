@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=404"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0404-2-en",
+      "type": "mcq",
+      "prompt": "Which of these terms once referred to the Vikings?",
+      "payload": {
+        "options": [
+          {
+            "label": "Welsh",
+            "correct": false
+          },
+          {
+            "label": "Normans",
+            "correct": true
+          },
+          {
+            "label": "Germans",
+            "correct": false
+          },
+          {
+            "label": "Bretons",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0404-3-en",
+      "type": "mcq",
+      "prompt": "Which ancient people occupied the lands of present-day Bulgaria?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alans",
+            "correct": false
+          },
+          {
+            "label": "Visigoths",
+            "correct": false
+          },
+          {
+            "label": "Thracians",
+            "correct": true
+          },
+          {
+            "label": "Scythians",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

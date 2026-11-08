@@ -1,0 +1,571 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-1124ddcc9d2f-fr",
+      "type": "truefalse",
+      "prompt": "L'album « American Idiot » de Green Day est considéré comme un « opéra punk rock ».",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1e69970acf18-fr",
+      "type": "mcq",
+      "prompt": "Quand le site « Facebook » a-t-il été lancé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2006",
+            "correct": false
+          },
+          {
+            "label": "2005",
+            "correct": false
+          },
+          {
+            "label": "2004",
+            "correct": true
+          },
+          {
+            "label": "2003",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-41f4dfb20591-fr",
+      "type": "mcq",
+      "prompt": "Dans « Les Sims », combien de simflouz reçoit chaque famille au départ ?",
+      "payload": {
+        "options": [
+          {
+            "label": "15 000",
+            "correct": false
+          },
+          {
+            "label": "20 000",
+            "correct": true
+          },
+          {
+            "label": "25 000",
+            "correct": false
+          },
+          {
+            "label": "10 000",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-44be3c326674-fr",
+      "type": "mcq",
+      "prompt": "Quelle chanson contient les mots « Numa Numa » et a fait l'objet d'une vidéo virale en 2004 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Despacito",
+            "correct": false
+          },
+          {
+            "label": "Asereje",
+            "correct": false
+          },
+          {
+            "label": "Dragostea Din Tei",
+            "correct": true
+          },
+          {
+            "label": "Gangnam Style",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-483b3ed79236-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle l'image du fond d'écran par défaut de Windows XP ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Red moon desert",
+            "correct": false
+          },
+          {
+            "label": "Azul",
+            "correct": false
+          },
+          {
+            "label": "Tulips",
+            "correct": false
+          },
+          {
+            "label": "Bliss",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-555c2354cc82-fr",
+      "type": "mcq",
+      "prompt": "Dans Need for Speed Most Wanted (2005), quelle voiture conduit-on au début du mode carrière ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nissan 240SX",
+            "correct": false
+          },
+          {
+            "label": "Porsche 911 Turbo",
+            "correct": false
+          },
+          {
+            "label": "Ford Mustang",
+            "correct": false
+          },
+          {
+            "label": "BMW M3 GTR",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5b19cee0ac10-fr",
+      "type": "mcq",
+      "prompt": "En quelle année Jenson Button a-t-il remporté son premier championnat du monde de Formule 1 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2007",
+            "correct": false
+          },
+          {
+            "label": "2006",
+            "correct": false
+          },
+          {
+            "label": "2010",
+            "correct": false
+          },
+          {
+            "label": "2009",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-61cd94809b8e-fr",
+      "type": "mcq",
+      "prompt": "Dans « Le Seigneur des anneaux : Les Deux Tours », où la troupe d'orques emmène-t-elle les hobbits ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Isengard",
+            "correct": true
+          },
+          {
+            "label": "Fondcombe",
+            "correct": false
+          },
+          {
+            "label": "Moria",
+            "correct": false
+          },
+          {
+            "label": "Mordor",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-67f54a87afb5-fr",
+      "type": "mcq",
+      "prompt": "Dans quel pays d'Afrique se déroule principalement le film « Blood Diamond » (2006) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sierra Leone",
+            "correct": true
+          },
+          {
+            "label": "Burkina Faso",
+            "correct": false
+          },
+          {
+            "label": "République centrafricaine",
+            "correct": false
+          },
+          {
+            "label": "Liberia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7cbe050cd412-fr",
+      "type": "mcq",
+      "prompt": "De quel album de Daft Punk est tirée la chanson « Harder, Better, Faster, Stronger » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Homework",
+            "correct": false
+          },
+          {
+            "label": "Random Access Memories",
+            "correct": false
+          },
+          {
+            "label": "Human After All",
+            "correct": false
+          },
+          {
+            "label": "Discovery",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-87fa5e4002cc-fr",
+      "type": "mcq",
+      "prompt": "Quel nom Tom Hanks donne-t-il à son compagnon, un ballon de volley, dans « Seul au monde » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Billy",
+            "correct": false
+          },
+          {
+            "label": "Jones",
+            "correct": false
+          },
+          {
+            "label": "Vendredi",
+            "correct": false
+          },
+          {
+            "label": "Wilson",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8992bd6147fb-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le personnage de Nicolas Cage dans « Benjamin Gates et le Trésor des Templiers » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Benjamin Franklin Gates",
+            "correct": true
+          },
+          {
+            "label": "John Quincy Beckett",
+            "correct": false
+          },
+          {
+            "label": "George Washington Swanson",
+            "correct": false
+          },
+          {
+            "label": "Thomas Jefferson Walker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-916ad59df8f2-fr",
+      "type": "mcq",
+      "prompt": "Dans « Le Monde de Nemo », comment s'appelle la mère de Nemo ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Perle",
+            "correct": false
+          },
+          {
+            "label": "Corail",
+            "correct": true
+          },
+          {
+            "label": "Sandy",
+            "correct": false
+          },
+          {
+            "label": "Shelly",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9a034edb9924-fr",
+      "type": "mcq",
+      "prompt": "Qui est révélé comme le méchant à la fin du premier film « Scooby-Doo » en prises de vues réelles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Scrappy-Doo",
+            "correct": true
+          },
+          {
+            "label": "Le vieux Mason",
+            "correct": false
+          },
+          {
+            "label": "Fred",
+            "correct": false
+          },
+          {
+            "label": "L'équipe de journalistes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a61f33b3ecbe-fr",
+      "type": "truefalse",
+      "prompt": "En 2008, Usain Bolt a battu le record du monde du 100 mètres avec un lacet défait.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-afbdf6f07334-fr",
+      "type": "mcq",
+      "prompt": "Quelle nation a accueilli la Coupe du monde de football en 2006 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Royaume-Uni",
+            "correct": false
+          },
+          {
+            "label": "Afrique du Sud",
+            "correct": false
+          },
+          {
+            "label": "Brésil",
+            "correct": false
+          },
+          {
+            "label": "Allemagne",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b34547a50b7c-fr",
+      "type": "mcq",
+      "prompt": "En quelle année Team Fortress 2 est-il sorti ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2005",
+            "correct": false
+          },
+          {
+            "label": "2007",
+            "correct": true
+          },
+          {
+            "label": "2009",
+            "correct": false
+          },
+          {
+            "label": "2010",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c507d052effe-fr",
+      "type": "truefalse",
+      "prompt": "« Through the Fire and Flames » de DragonForce est considérée comme le morceau le plus difficile de la série « Guitar Hero ».",
+      "payload": {
+        "correct": true
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-cf994fe859c4-fr",
+      "type": "mcq",
+      "prompt": "Quel Pokémon de départ de type Eau a été introduit à la 4e génération ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tiplouf",
+            "correct": true
+          },
+          {
+            "label": "Moustillon",
+            "correct": false
+          },
+          {
+            "label": "Gobou",
+            "correct": false
+          },
+          {
+            "label": "Kaiminus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d04c9a991725-fr",
+      "type": "mcq",
+      "prompt": "D'où vient le rappeur de « Gasolina », Daddy Yankee ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mexique",
+            "correct": false
+          },
+          {
+            "label": "Cuba",
+            "correct": false
+          },
+          {
+            "label": "Porto Rico",
+            "correct": true
+          },
+          {
+            "label": "Espagne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-the-2000s-fr",
+      "title": "Années 2000, culture pop",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-87fa5e4002cc-fr",
+        "otdb-7cbe050cd412-fr",
+        "otdb-61cd94809b8e-fr",
+        "otdb-8992bd6147fb-fr",
+        "otdb-9a034edb9924-fr",
+        "otdb-41f4dfb20591-fr",
+        "otdb-1124ddcc9d2f-fr",
+        "otdb-483b3ed79236-fr",
+        "otdb-555c2354cc82-fr",
+        "otdb-a61f33b3ecbe-fr",
+        "otdb-cf994fe859c4-fr",
+        "otdb-5b19cee0ac10-fr",
+        "otdb-d04c9a991725-fr",
+        "otdb-44be3c326674-fr",
+        "otdb-c507d052effe-fr",
+        "otdb-67f54a87afb5-fr",
+        "otdb-1e69970acf18-fr",
+        "otdb-916ad59df8f2-fr",
+        "otdb-b34547a50b7c-fr",
+        "otdb-afbdf6f07334-fr"
+      ],
+      "description": "Films, jeux, musique et sport des années 2000."
+    }
+  ]
+}

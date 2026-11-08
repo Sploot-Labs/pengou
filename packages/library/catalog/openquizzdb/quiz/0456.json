@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=456"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0456-2",
+      "type": "mcq",
+      "prompt": "Quel concours prime les meilleures inventions françaises ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lépine",
+            "correct": true
+          },
+          {
+            "label": "Novastar",
+            "correct": false
+          },
+          {
+            "label": "Edison",
+            "correct": false
+          },
+          {
+            "label": "Thomas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=596"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0596-2-en",
+      "type": "mcq",
+      "prompt": "What is the first name of the owner of Bubba Gump Shrimp?",
+      "payload": {
+        "options": [
+          {
+            "label": "Winston",
+            "correct": false
+          },
+          {
+            "label": "Forrest",
+            "correct": true
+          },
+          {
+            "label": "Benjamin",
+            "correct": false
+          },
+          {
+            "label": "Dan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

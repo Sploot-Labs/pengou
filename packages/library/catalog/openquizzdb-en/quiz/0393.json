@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=393"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0393-1-en",
+      "type": "mcq",
+      "prompt": "In \"The Hunger Games\", what is an Avox unable to do?",
+      "payload": {
+        "options": [
+          {
+            "label": "Speak",
+            "correct": true
+          },
+          {
+            "label": "Smell",
+            "correct": false
+          },
+          {
+            "label": "See",
+            "correct": false
+          },
+          {
+            "label": "Chew",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0393-4-en",
+      "type": "mcq",
+      "prompt": "What is Haymitch's surname in \"The Hunger Games\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Everdeen",
+            "correct": false
+          },
+          {
+            "label": "Trinket",
+            "correct": false
+          },
+          {
+            "label": "Abernathy",
+            "correct": true
+          },
+          {
+            "label": "Mellark",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=436"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0436-1-en",
+      "type": "mcq",
+      "prompt": "What is the \"box\" searched for in geocaching called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mega",
+            "correct": false
+          },
+          {
+            "label": "Surprise",
+            "correct": false
+          },
+          {
+            "label": "Puzzle",
+            "correct": false
+          },
+          {
+            "label": "Cache",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0436-2-en",
+      "type": "mcq",
+      "prompt": "Which device is used to find caches in geocaching?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pencil",
+            "correct": false
+          },
+          {
+            "label": "GPS",
+            "correct": true
+          },
+          {
+            "label": "Flashlight",
+            "correct": false
+          },
+          {
+            "label": "Umbrella",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0436-3-en",
+      "type": "mcq",
+      "prompt": "What should a geocache be to last better over time?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cardboard",
+            "correct": false
+          },
+          {
+            "label": "Colorful",
+            "correct": false
+          },
+          {
+            "label": "Open",
+            "correct": false
+          },
+          {
+            "label": "Waterproof",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0436-4-en",
+      "type": "mcq",
+      "prompt": "What are people unfamiliar with geocaching called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beagle Boys",
+            "correct": false
+          },
+          {
+            "label": "Goblins",
+            "correct": false
+          },
+          {
+            "label": "Muggles",
+            "correct": true
+          },
+          {
+            "label": "Squibs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

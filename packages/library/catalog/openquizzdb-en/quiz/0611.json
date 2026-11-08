@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=611"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0611-1-en",
+      "type": "mcq",
+      "prompt": "What are you doing if you watch your family videos online?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hacking",
+            "correct": false
+          },
+          {
+            "label": "Phishing",
+            "correct": false
+          },
+          {
+            "label": "Streaming",
+            "correct": true
+          },
+          {
+            "label": "Spamming",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0611-2-en",
+      "type": "mcq",
+      "prompt": "How do you show that you like something on Facebook?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fake",
+            "correct": false
+          },
+          {
+            "label": "Push",
+            "correct": false
+          },
+          {
+            "label": "Geek",
+            "correct": false
+          },
+          {
+            "label": "Like",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0611-4-en",
+      "type": "mcq",
+      "prompt": "Which unwanted mail is often used for advertising?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spam",
+            "correct": true
+          },
+          {
+            "label": "Baud",
+            "correct": false
+          },
+          {
+            "label": "Bump",
+            "correct": false
+          },
+          {
+            "label": "Favicon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=496"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0496-1-en",
+      "type": "mcq",
+      "prompt": "Which fountain in Rome is one of the most famous in the world?",
+      "payload": {
+        "options": [
+          {
+            "label": "Neptune",
+            "correct": false
+          },
+          {
+            "label": "Barcaccia",
+            "correct": false
+          },
+          {
+            "label": "Trevi",
+            "correct": true
+          },
+          {
+            "label": "Triton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0496-2-en",
+      "type": "mcq",
+      "prompt": "Rome lies near the coast of which sea?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tyrrhenian",
+            "correct": true
+          },
+          {
+            "label": "Aegean",
+            "correct": false
+          },
+          {
+            "label": "Adriatic",
+            "correct": false
+          },
+          {
+            "label": "Ionian",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0496-3-en",
+      "type": "mcq",
+      "prompt": "How many main airports serve the city of Rome?",
+      "payload": {
+        "options": [
+          {
+            "label": "Two",
+            "correct": true
+          },
+          {
+            "label": "Three",
+            "correct": false
+          },
+          {
+            "label": "Five",
+            "correct": false
+          },
+          {
+            "label": "Four",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0496-4-en",
+      "type": "mcq",
+      "prompt": "On which Italian coin is the Colosseum depicted?",
+      "payload": {
+        "options": [
+          {
+            "label": "20 euro cents",
+            "correct": false
+          },
+          {
+            "label": "1 euro",
+            "correct": false
+          },
+          {
+            "label": "2 euros",
+            "correct": false
+          },
+          {
+            "label": "5 euro cents",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

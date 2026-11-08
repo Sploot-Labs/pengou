@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=196"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0196-4-en",
+      "type": "mcq",
+      "prompt": "Which fictional character, deformed and deaf, is a bell ringer?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quark",
+            "correct": false
+          },
+          {
+            "label": "Quasimodo",
+            "correct": true
+          },
+          {
+            "label": "Q*bert",
+            "correct": false
+          },
+          {
+            "label": "Quorra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

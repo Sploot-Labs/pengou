@@ -1,0 +1,1016 @@
+{
+  "questions": {
+    "oqdb-0088-3": {
+      "prompt": "Which city is the capital of Finland?",
+      "options": [
+        "Helsinki",
+        "Hanover",
+        "Huelva",
+        "Halifax"
+      ]
+    },
+    "oqdb-0089-1": {
+      "prompt": "Which Clint Eastwood film is a biography of Charlie Parker?",
+      "options": [
+        "Dizzy",
+        "Parker",
+        "Charlie",
+        "Bird"
+      ]
+    },
+    "oqdb-0089-2": {
+      "prompt": "Who directed the 1993 film \"A Perfect World\", starring Clint Eastwood?",
+      "options": [
+        "Oliver Stone",
+        "Clint Eastwood",
+        "Martin Scorsese",
+        "Brian De Palma"
+      ]
+    },
+    "oqdb-0089-3": {
+      "prompt": "Which director hired Clint Eastwood for the \"Dollars Trilogy\"?",
+      "options": [
+        "Sergio Corbucci",
+        "Tonino Valerii",
+        "Giorgio Ferroni",
+        "Sergio Leone"
+      ]
+    },
+    "oqdb-0089-4": {
+      "prompt": "With which company did Clint Eastwood become a producer in 1968?",
+      "options": [
+        "TriStar",
+        "Brooksfilms",
+        "Newsreel",
+        "Malpaso"
+      ]
+    },
+    "oqdb-0091-1": {
+      "prompt": "What is another name for Lake Geneva?",
+      "options": [
+        "Lake Como",
+        "Lake Lugano",
+        "Lake Léman",
+        "Lake Maggiore"
+      ]
+    },
+    "oqdb-0091-2": {
+      "prompt": "Which lake holds the largest freshwater reserve in the world?",
+      "options": [
+        "Lake Titicaca",
+        "Lake Baikal",
+        "Lake Erie",
+        "Lake Michigan"
+      ]
+    },
+    "oqdb-0091-3": {
+      "prompt": "Toronto lies on the north shore of which lake?",
+      "options": [
+        "Lake Ontario",
+        "Lake Huron",
+        "Lake Erie",
+        "Lake Michigan"
+      ]
+    },
+    "oqdb-0091-4": {
+      "prompt": "Lake Titicaca forms a border between which countries?",
+      "options": [
+        "Peru and Chile",
+        "Bolivia and Peru",
+        "Brazil and Bolivia",
+        "Chile and Bolivia"
+      ]
+    },
+    "oqdb-0093-1": {
+      "prompt": "Who is the main character of the TV series \"Breaking Bad\"?",
+      "options": [
+        "Saul Goodman",
+        "Jesse Pinkman",
+        "Walter White",
+        "Hank Schrader"
+      ]
+    },
+    "oqdb-0093-2": {
+      "prompt": "Which drug does Walter White make and sell?",
+      "options": [
+        "Cocaine",
+        "Methamphetamine",
+        "Ketamine",
+        "Heroin"
+      ]
+    },
+    "oqdb-0093-3": {
+      "prompt": "In which vehicle do Walter and Jesse cook at the start of the series?",
+      "options": [
+        "Taxi",
+        "RV",
+        "Bus",
+        "Truck"
+      ]
+    },
+    "oqdb-0093-4": {
+      "prompt": "What cancer does Walter White have in \"Breaking Bad\"?",
+      "options": [
+        "Lung",
+        "Throat",
+        "Colon",
+        "Skin"
+      ]
+    },
+    "oqdb-0095-1": {
+      "prompt": "Who directed \"The Pledge\", with Jack Nicholson and Robin Wright Penn?",
+      "options": [
+        "Tom Hanks",
+        "Sean Penn",
+        "Sam Mendes",
+        "John Astin"
+      ]
+    },
+    "oqdb-0095-2": {
+      "prompt": "What is Jack Nicholson's profession in \"The Shining\"?",
+      "options": [
+        "Explorer",
+        "Writer",
+        "Sorcerer",
+        "Fencer"
+      ]
+    },
+    "oqdb-0095-4": {
+      "prompt": "Which film brought together Leonardo DiCaprio, Matt Damon and Jack Nicholson?",
+      "options": [
+        "The Aviator",
+        "Celebrity",
+        "Blood Diamond",
+        "The Departed"
+      ]
+    },
+    "oqdb-0097-1": {
+      "prompt": "What do you call a mineral water rich in iron?",
+      "options": [
+        "Sparkling",
+        "Ferruginous",
+        "Still",
+        "Calcareous"
+      ]
+    },
+    "oqdb-0097-2": {
+      "prompt": "Which water of underground origin is naturally safe to drink?",
+      "options": [
+        "Demineralized water",
+        "Wastewater",
+        "Sparkling water",
+        "Spring water"
+      ]
+    },
+    "oqdb-0097-3": {
+      "skip": "slogan publicitaire français sans équivalent anglais"
+    },
+    "oqdb-0097-4": {
+      "skip": "marques d'eau belges peu connues hors de Belgique"
+    },
+    "oqdb-0099-1": {
+      "prompt": "Which French goalkeeper became a Porsche racing driver in 2008?",
+      "options": [
+        "Fabien Barthez",
+        "Roland Amar",
+        "Jean Castaneda",
+        "Rudy Riou"
+      ]
+    },
+    "oqdb-0099-2": {
+      "prompt": "Which goalkeeper played seventeen years for Juventus?",
+      "options": [
+        "Gianluigi Buffon",
+        "Dino Zoff",
+        "Luciano Bodini",
+        "Mattia Perin"
+      ]
+    },
+    "oqdb-0099-3": {
+      "prompt": "Which goalkeeper played his last Bundesliga match in May 2008?",
+      "options": [
+        "Jens Lehmann",
+        "Sepp Maier",
+        "Oliver Kahn",
+        "Robert Enke"
+      ]
+    },
+    "oqdb-0099-4": {
+      "prompt": "Who plays the goalkeeper in John Huston's \"Escape to Victory\"?",
+      "options": [
+        "Jason Statham",
+        "Bruce Willis",
+        "Sylvester Stallone",
+        "Tom Cruise"
+      ]
+    },
+    "oqdb-0100-1": {
+      "prompt": "Which white dog accompanies Asterix and Obelix on their adventures?",
+      "options": [
+        "Imagix",
+        "Dogmatix",
+        "Itineris",
+        "Isidore"
+      ]
+    },
+    "oqdb-0100-2": {
+      "prompt": "Tiramisu is a pastry and dessert of which origin?",
+      "options": [
+        "Indian",
+        "Iranian",
+        "Italian",
+        "Ivorian"
+      ]
+    },
+    "oqdb-0100-3": {
+      "prompt": "What did Byzantium and Constantinople become?",
+      "options": [
+        "Istanbul",
+        "Islamabad",
+        "Isparta",
+        "Izmir"
+      ]
+    },
+    "oqdb-0100-4": {
+      "prompt": "Which English word does the letter I in the acronym CIA stand for?",
+      "options": [
+        "International",
+        "Institutional",
+        "Intelligence",
+        "Instrumental"
+      ]
+    },
+    "oqdb-0101-1": {
+      "prompt": "Which series follows the adventures of Assane Diop, played by Omar Sy?",
+      "options": [
+        "Lupin",
+        "Sweet Tooth",
+        "The Circle",
+        "You"
+      ]
+    },
+    "oqdb-0101-2": {
+      "skip": "film français peu connu hors de France"
+    },
+    "oqdb-0101-3": {
+      "prompt": "Where does Omar Sy ply his talent in \"The Wolf's Call\"?",
+      "options": [
+        "Forest",
+        "Church",
+        "Theater",
+        "Submarine"
+      ]
+    },
+    "oqdb-0101-4": {
+      "skip": "publicités et marque de boisson françaises peu connues"
+    },
+    "oqdb-0103-1": {
+      "prompt": "Which cowboy doll plays the lead in \"Toy Story\"?",
+      "options": [
+        "Buzz",
+        "Woody",
+        "Bayonne",
+        "Rex"
+      ]
+    },
+    "oqdb-0103-2": {
+      "prompt": "Which fictional pizzeria chain appears in \"Toy Story\"?",
+      "options": [
+        "Pizza Hollywood",
+        "Pizza Land",
+        "Pizza Planet",
+        "Pizza Toys"
+      ]
+    },
+    "oqdb-0103-3": {
+      "prompt": "Despite his mean look, what is the big bear in \"Toy Story 3\" scented with?",
+      "options": [
+        "Chocolate",
+        "Honey",
+        "Strawberry",
+        "Vanilla"
+      ]
+    },
+    "oqdb-0103-4": {
+      "prompt": "Which scary neighbor of Andy's tortures toys in \"Toy Story\"?",
+      "options": [
+        "Zurg",
+        "Ted",
+        "Sid",
+        "Chuck"
+      ]
+    },
+    "oqdb-0105-1": {
+      "skip": "option verlan propre au français, question peu traduisible"
+    },
+    "oqdb-0105-3": {
+      "prompt": "Which design is tattooed on Hefty Smurf's arm?",
+      "options": [
+        "Anchor",
+        "Dumbbells",
+        "Smurf head",
+        "Heart"
+      ]
+    },
+    "oqdb-0105-4": {
+      "prompt": "Which plant is known as the Smurfs' favorite food?",
+      "options": [
+        "Hops",
+        "Granadilla",
+        "Sarsaparilla",
+        "Knotweed"
+      ]
+    },
+    "oqdb-0107-1": {
+      "skip": "comédies françaises peu connues hors de France"
+    },
+    "oqdb-0107-2": {
+      "prompt": "In which northern French town was Dany Boon born in 1966?",
+      "options": [
+        "Armentières",
+        "Ronchin",
+        "Comines",
+        "Warneton"
+      ]
+    },
+    "oqdb-0107-3": {
+      "prompt": "Which cheese had its moment of fame after a Dany Boon film?",
+      "options": [
+        "Maroilles",
+        "Gruyère",
+        "Brie",
+        "Roquefort"
+      ]
+    },
+    "oqdb-0107-4": {
+      "prompt": "Dany Boon's real first name is Daniel, but what is his surname?",
+      "options": [
+        "Nodier",
+        "Hamidou",
+        "Boonval",
+        "Boonaers"
+      ]
+    },
+    "oqdb-0109-1": {
+      "prompt": "How long is an elephant's pregnancy on average?",
+      "options": [
+        "17 months",
+        "21 months",
+        "13 months",
+        "9 months"
+      ]
+    },
+    "oqdb-0109-2": {
+      "prompt": "How many beats per minute does a hibernating hedgehog's heart make?",
+      "options": [
+        "18 per minute",
+        "38 per minute",
+        "28 per minute",
+        "8 per minute"
+      ]
+    },
+    "oqdb-0109-3": {
+      "prompt": "Up to what altitude do Alpine ibex usually live?",
+      "options": [
+        "3,500 m",
+        "4,600 m",
+        "1,900 m",
+        "2,300 m"
+      ]
+    },
+    "oqdb-0111-1": {
+      "prompt": "What is the total length of the Ironman multisport race?",
+      "options": [
+        "184 km",
+        "142 km",
+        "226 km",
+        "98 km"
+      ]
+    },
+    "oqdb-0111-2": {
+      "prompt": "How long does it take to complete the Ironman race?",
+      "options": [
+        "1 week",
+        "3 days",
+        "Under 1 day",
+        "1 month"
+      ]
+    },
+    "oqdb-0111-4": {
+      "prompt": "Which discipline starts the Ironman World Championship?",
+      "options": [
+        "Running",
+        "Marathon",
+        "Cycling",
+        "Swimming"
+      ]
+    },
+    "oqdb-0112-1": {
+      "prompt": "What do you call vegetables cut into thin strips?",
+      "options": [
+        "Julienne",
+        "Token",
+        "Ham",
+        "Juliet"
+      ]
+    },
+    "oqdb-0112-2": {
+      "skip": "série télévisée française peu connue hors de France"
+    },
+    "oqdb-0112-3": {
+      "prompt": "Friday the 13th is the favorite day of which famous killer?",
+      "options": [
+        "Judas",
+        "Jack",
+        "Jason",
+        "Jacob"
+      ]
+    },
+    "oqdb-0112-4": {
+      "prompt": "What is the first name of the youngest of the Jackson family?",
+      "options": [
+        "Joyce",
+        "Jasmine",
+        "Jenifer",
+        "Janet"
+      ]
+    },
+    "oqdb-0113-1": {
+      "skip": "humoriste française peu connue hors de France"
+    },
+    "oqdb-0113-2": {
+      "skip": "humoriste française et film belge peu connus"
+    },
+    "oqdb-0113-3": {
+      "skip": "humoristes français peu connus hors de France"
+    },
+    "oqdb-0113-4": {
+      "skip": "trio d'humoristes français peu connu"
+    },
+    "oqdb-0115-1": {
+      "prompt": "Who keeps dying in the first seasons of \"South Park\"?",
+      "options": [
+        "Stan",
+        "Kenny",
+        "Eric",
+        "Kyle"
+      ]
+    },
+    "oqdb-0115-2": {
+      "prompt": "Which of the boys in his gang does Scooby-Doo often team up with?",
+      "options": [
+        "Logan",
+        "Shaggy",
+        "Fred",
+        "Roger"
+      ]
+    },
+    "oqdb-0115-3": {
+      "prompt": "Who is the oldest of the Simpson children?",
+      "options": [
+        "Maggie",
+        "Lisa",
+        "Marge",
+        "Bart"
+      ]
+    },
+    "oqdb-0115-4": {
+      "skip": "nom français d'un personnage de dessin animé"
+    },
+    "oqdb-0117-1": {
+      "prompt": "Who lost twice in the runoff against Emmanuel Macron?",
+      "options": [
+        "Édith Cresson",
+        "Marine Le Pen",
+        "Anne Hidalgo",
+        "Rachida Dati"
+      ]
+    },
+    "oqdb-0117-2": {
+      "prompt": "Which actress from the Harry Potter films became a feminist voice?",
+      "options": [
+        "Gal Gadot",
+        "Margot Robbie",
+        "Jennifer Lawrence",
+        "Emma Watson"
+      ]
+    },
+    "oqdb-0117-3": {
+      "prompt": "What did the Obamas turn the White House garden into?",
+      "options": [
+        "Gym",
+        "Open-air theater",
+        "Vegetable garden",
+        "Parking lot"
+      ]
+    },
+    "oqdb-0117-4": {
+      "prompt": "Which young Swedish environmental activist gets heavy media coverage?",
+      "options": [
+        "Hedy Epstein",
+        "Greta Thunberg",
+        "Rachel Corrie",
+        "Mary Dreier"
+      ]
+    },
+    "oqdb-0119-2": {
+      "prompt": "How much did Kanye West spend to propose to Kim?",
+      "options": [
+        "$2 million",
+        "$3 million",
+        "$4 million",
+        "$5 million"
+      ]
+    },
+    "oqdb-0119-3": {
+      "prompt": "In which magazine did Kim Kardashian pose nude in 2014?",
+      "options": [
+        "Glamour",
+        "Vogue",
+        "Paper",
+        "Cosmopolitan"
+      ]
+    },
+    "oqdb-0119-4": {
+      "prompt": "Which French designer made Kim Kardashian's dress at the Met Gala?",
+      "options": [
+        "Pierre Balmain",
+        "Christian Dior",
+        "Thierry Mugler",
+        "Guy Laroche"
+      ]
+    },
+    "oqdb-0121-1": {
+      "skip": "stades et clubs de football français peu connus hors de France"
+    },
+    "oqdb-0121-2": {
+      "skip": "stades et clubs de football français peu connus hors de France"
+    },
+    "oqdb-0121-3": {
+      "skip": "stades et clubs de football français peu connus hors de France"
+    },
+    "oqdb-0121-4": {
+      "skip": "stades et clubs de football français peu connus hors de France"
+    },
+    "oqdb-0123-1": {
+      "skip": "exactitude douteuse : le père Noël était déjà représenté en rouge avant Sundblom"
+    },
+    "oqdb-0123-3": {
+      "prompt": "On what date do the Three Kings appear in the nativity scene?",
+      "options": [
+        "January 6",
+        "December 25",
+        "January 1",
+        "December 24"
+      ]
+    },
+    "oqdb-0123-4": {
+      "prompt": "What is the scene shown by the Christmas crib called?",
+      "options": [
+        "Santon",
+        "Arlésienne",
+        "Nativity",
+        "Jourdan"
+      ]
+    },
+    "oqdb-0124-1": {
+      "prompt": "Which fictional planet are Superman and Supergirl from?",
+      "options": [
+        "Krusty",
+        "Krypton",
+        "Kamini",
+        "Kirby"
+      ]
+    },
+    "oqdb-0124-2": {
+      "prompt": "Which band performed the hit \"I Was Made for Lovin' You\"?",
+      "options": [
+        "Kodaline",
+        "Kiss",
+        "Korn",
+        "Kraftwerk"
+      ]
+    },
+    "oqdb-0124-3": {
+      "prompt": "What is it called when you sing along to lyrics shown on a screen?",
+      "options": [
+        "Krusty",
+        "Kaoma",
+        "Kojiki",
+        "Karaoke"
+      ]
+    },
+    "oqdb-0124-4": {
+      "skip": "jeu sur la lettre K autour du mot français klaxon"
+    },
+    "oqdb-0125-2": {
+      "skip": "émission de télévision française sans écho à l'étranger"
+    },
+    "oqdb-0125-3": {
+      "skip": "animateur et société de production français peu connus"
+    },
+    "oqdb-0127-1": {
+      "prompt": "In which country was the pre-Hispanic city of Teotihuacan found?",
+      "options": [
+        "El Salvador",
+        "Costa Rica",
+        "Nicaragua",
+        "Mexico"
+      ]
+    },
+    "oqdb-0127-2": {
+      "prompt": "What shape are the structures at the Teotihuacan archaeological site?",
+      "options": [
+        "Square",
+        "Round",
+        "Pyramidal",
+        "Oval"
+      ]
+    },
+    "oqdb-0127-4": {
+      "prompt": "How many people lived in the city of Teotihuacan at its peak?",
+      "options": [
+        "200,000",
+        "300,000",
+        "500,000",
+        "400,000"
+      ]
+    },
+    "oqdb-0129-2": {
+      "prompt": "Which weapon does Michonne fight with in \"The Walking Dead\"?",
+      "options": [
+        "Axe",
+        "Crossbow",
+        "Machete",
+        "Katana"
+      ]
+    },
+    "oqdb-0129-3": {
+      "prompt": "Which research company developed the T-virus in \"Resident Evil\"?",
+      "options": [
+        "Vault-Tec",
+        "Umbrella",
+        "Biotechnica",
+        "Aperture Science"
+      ]
+    },
+    "oqdb-0129-4": {
+      "prompt": "In which building do the heroes of \"Dawn of the Dead\" barricade themselves?",
+      "options": [
+        "Shopping mall",
+        "Farm",
+        "Bar",
+        "Church"
+      ]
+    },
+    "oqdb-0131-1": {
+      "prompt": "In which film does Sharon Stone play a novelist tied to ice-pick murders?",
+      "options": [
+        "Basic Instinct",
+        "Sliver",
+        "The Quick and the Dead",
+        "Diabolique"
+      ]
+    },
+    "oqdb-0131-2": {
+      "skip": "titre de film français non identifiable avec certitude"
+    },
+    "oqdb-0131-3": {
+      "prompt": "Whom did Sharon Stone have to give way to for \"Fatal Attraction\"?",
+      "options": [
+        "Meryl Streep",
+        "Candice Bergen",
+        "Helen Hunt",
+        "Glenn Close"
+      ]
+    },
+    "oqdb-0131-4": {
+      "prompt": "In which film does Sharon Stone play an assassin opposite Arnold Schwarzenegger?",
+      "options": [
+        "Total Recall",
+        "The Contract",
+        "Last Action Hero",
+        "End of Days"
+      ]
+    },
+    "oqdb-0133-1": {
+      "prompt": "What is table tennis also called?",
+      "options": [
+        "Ping-pong",
+        "Padel",
+        "Basque pelota",
+        "Jokari"
+      ]
+    },
+    "oqdb-0133-2": {
+      "prompt": "In which game is a chistera fixed to the player's hand with a glove?",
+      "options": [
+        "Basque pelota",
+        "Tennis",
+        "Padel",
+        "Jokari"
+      ]
+    },
+    "oqdb-0133-3": {
+      "prompt": "Which racket sport is played on a court enclosed by walls?",
+      "options": [
+        "Tennis",
+        "Lacrosse",
+        "Badminton",
+        "Squash"
+      ]
+    },
+    "oqdb-0133-4": {
+      "prompt": "Which game uses a rubber ball attached to a base?",
+      "options": [
+        "Footbag",
+        "Jokari",
+        "Smolball",
+        "Chuiwan"
+      ]
+    },
+    "oqdb-0135-1": {
+      "prompt": "Roughly how many millimeters is one English inch?",
+      "options": [
+        "25 mm",
+        "32 mm",
+        "16 mm",
+        "45 mm"
+      ]
+    },
+    "oqdb-0135-2": {
+      "prompt": "How many labors did Hercules have to perform for Eurystheus?",
+      "options": [
+        "Ten",
+        "One hundred",
+        "Forty",
+        "Twelve"
+      ]
+    },
+    "oqdb-0135-3": {
+      "prompt": "At what age did Nadia Comaneci score a 10 at the Olympics?",
+      "options": [
+        "13",
+        "15",
+        "14",
+        "16"
+      ]
+    },
+    "oqdb-0135-4": {
+      "prompt": "In what year was Charlemagne crowned emperor in Rome?",
+      "options": [
+        "700",
+        "800",
+        "900",
+        "600"
+      ]
+    },
+    "oqdb-0136-1": {
+      "prompt": "In which town is Bernadette Soubirous said to have seen the Virgin?",
+      "options": [
+        "Lyon",
+        "Lille",
+        "Lourdes",
+        "Lisieux"
+      ]
+    },
+    "oqdb-0136-2": {
+      "prompt": "What is the most widely used of the so-called free operating systems?",
+      "options": [
+        "Links",
+        "Llama",
+        "Lamento",
+        "Linux"
+      ]
+    },
+    "oqdb-0136-3": {
+      "prompt": "Which animal supposedly nursed Romulus and Remus in the legend of Rome?",
+      "options": [
+        "Lioness",
+        "Lynx",
+        "Llama",
+        "She-wolf"
+      ]
+    },
+    "oqdb-0137-2": {
+      "prompt": "Sharapova shrieks on every shot, like which player?",
+      "options": [
+        "Coco Gauff",
+        "Monica Seles",
+        "Ana Ivanovic",
+        "Nathalie Dechy"
+      ]
+    },
+    "oqdb-0137-3": {
+      "prompt": "Which nickname is used for tennis player Maria Sharapova?",
+      "options": [
+        "The Wasp",
+        "Masha",
+        "Opa",
+        "Boom-Boom"
+      ]
+    },
+    "oqdb-0137-4": {
+      "prompt": "In what year did Sharapova become world number one?",
+      "options": [
+        "2005",
+        "2002",
+        "2011",
+        "2008"
+      ]
+    },
+    "oqdb-0139-1": {
+      "prompt": "What is a machine taking the Turing test supposed to imitate?",
+      "options": [
+        "Movement",
+        "Silhouette",
+        "Conversation",
+        "Drawing"
+      ]
+    },
+    "oqdb-0139-2": {
+      "prompt": "Which encryption machine did Alan Turing help break during the war?",
+      "options": [
+        "Deep Blue",
+        "Delilah",
+        "Enigma",
+        "ENIAC"
+      ]
+    },
+    "oqdb-0141-1": {
+      "skip": "exactitude douteuse : ouzo et raki sont aussi aromatisés à l'anis"
+    },
+    "oqdb-0141-2": {
+      "prompt": "Which cocktail is made with crème de cassis and white wine?",
+      "options": [
+        "Tequila sunrise",
+        "Kir",
+        "Cuba libre",
+        "Mojito"
+      ]
+    },
+    "oqdb-0141-3": {
+      "prompt": "Which alcoholic drink is made from fermented apples?",
+      "options": [
+        "Armagnac",
+        "Elderberry",
+        "Cider",
+        "Frênette"
+      ]
+    },
+    "oqdb-0141-4": {
+      "prompt": "Which Italian sparkling white wine is sweeter than Prosecco?",
+      "options": [
+        "Vouvray",
+        "Friuli",
+        "Asti",
+        "Alghero"
+      ]
+    },
+    "oqdb-0143-1": {
+      "skip": "animateur français peu connu hors de France"
+    },
+    "oqdb-0143-2": {
+      "skip": "émission de télévision française sans écho à l'étranger"
+    },
+    "oqdb-0143-3": {
+      "skip": "émission de télévision française sans écho à l'étranger"
+    },
+    "oqdb-0145-1": {
+      "prompt": "Which silicate-based material is widely used in ceramics?",
+      "options": [
+        "Clay",
+        "Ceruse",
+        "Sand",
+        "Silt"
+      ]
+    },
+    "oqdb-0145-2": {
+      "prompt": "Which vitrifiable coating hardens ceramics?",
+      "options": [
+        "Pige",
+        "Bisque",
+        "Glaze",
+        "Openwork"
+      ]
+    },
+    "oqdb-0145-3": {
+      "prompt": "Which civilization is universally known for its porcelain?",
+      "options": [
+        "Greek",
+        "Chinese",
+        "Egyptian",
+        "Peruvian"
+      ]
+    },
+    "oqdb-0145-4": {
+      "prompt": "Which glaze color do you get with cobalt oxide?",
+      "options": [
+        "Red",
+        "Green",
+        "Yellow",
+        "Blue"
+      ]
+    },
+    "oqdb-0147-1": {
+      "prompt": "Which company released the PlayStation 2 game console?",
+      "options": [
+        "Microsoft",
+        "Nintendo",
+        "Sega",
+        "Sony"
+      ]
+    },
+    "oqdb-0147-2": {
+      "skip": "exactitude douteuse : le DVD est aussi un disque optique"
+    },
+    "oqdb-0147-3": {
+      "prompt": "Which cosmetic variant of the PlayStation 2 came out in 2004?",
+      "options": [
+        "PS2 Boy",
+        "PS2 Slim",
+        "PS2 Grid",
+        "PS2 Fat"
+      ]
+    },
+    "oqdb-0147-4": {
+      "prompt": "What was the PS2 called, as it accepted PlayStation games?",
+      "options": [
+        "Ascensional",
+        "Backward compatible",
+        "Autopiloted",
+        "Admissive"
+      ]
+    },
+    "oqdb-0148-1": {
+      "prompt": "What name did Franquin give to his yellow animal with a long tail?",
+      "options": [
+        "Mowgli",
+        "Molossus",
+        "Marsupilami",
+        "Maximus"
+      ]
+    },
+    "oqdb-0148-2": {
+      "prompt": "What is the name of Tintin's dog, who accompanies the young reporter?",
+      "options": [
+        "Snowy",
+        "Molossus",
+        "Médor",
+        "Minou"
+      ]
+    },
+    "oqdb-0148-3": {
+      "prompt": "In fishing, which term designates a light artificial lure?",
+      "options": [
+        "Mosquito",
+        "Monarch",
+        "Fly",
+        "Morio"
+      ]
+    },
+    "oqdb-0148-4": {
+      "skip": "chanson française peu connue hors de France"
+    },
+    "oqdb-0149-1": {
+      "prompt": "Which role does Scarlett Johansson play in \"Iron Man 2\"?",
+      "options": [
+        "Rebecca",
+        "Black Widow",
+        "Christine Everhart",
+        "Pepper Potts"
+      ]
+    },
+    "oqdb-0149-3": {
+      "prompt": "In which film with Ewan McGregor does Scarlett Johansson also appear?",
+      "options": [
+        "Big Fish",
+        "The Island",
+        "Stay",
+        "Young Adam"
+      ]
+    },
+    "oqdb-0151-1": {
+      "skip": "exactitude douteuse : les petits déjeuners norvégien ou russe sont aussi copieux"
+    },
+    "oqdb-0151-2": {
+      "prompt": "Which kind of breakfast is sometimes blended with lunch?",
+      "options": [
+        "Banquet",
+        "Brunch",
+        "Picnic",
+        "Afternoon snack"
+      ]
+    },
+    "oqdb-0151-3": {
+      "prompt": "In which establishment do you have breakfast with the other guests?",
+      "options": [
+        "Cinema",
+        "Sauna",
+        "Bed and breakfast",
+        "Elevator"
+      ]
+    }
+  },
+  "quizzes": {}
+}

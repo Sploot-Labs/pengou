@@ -1,0 +1,416 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0205-1-en",
+      "type": "mcq",
+      "prompt": "Which cheese is associated with the French town of Meaux?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cantal",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": false
+          },
+          {
+            "label": "Gruyère",
+            "correct": false
+          },
+          {
+            "label": "Brie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0205-2-en",
+      "type": "mcq",
+      "prompt": "Which French cheese is known for its paste full of holes?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emmental",
+            "correct": true
+          },
+          {
+            "label": "Camembert",
+            "correct": false
+          },
+          {
+            "label": "Brie",
+            "correct": false
+          },
+          {
+            "label": "Beaufort",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0205-3-en",
+      "type": "mcq",
+      "prompt": "Which cheese has a name that means \"to milk a second time\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gruyère",
+            "correct": false
+          },
+          {
+            "label": "Reblochon",
+            "correct": true
+          },
+          {
+            "label": "Emmental",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0205-4-en",
+      "type": "mcq",
+      "prompt": "Which blue cheese is made from raw sheep's milk?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beaufort",
+            "correct": false
+          },
+          {
+            "label": "Munster",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": true
+          },
+          {
+            "label": "Brie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0201-1-en",
+      "type": "mcq",
+      "prompt": "Which mass-produced cheese is coated in red-dyed wax?",
+      "payload": {
+        "options": [
+          {
+            "label": "Époisses",
+            "correct": false
+          },
+          {
+            "label": "Babybel",
+            "correct": true
+          },
+          {
+            "label": "Chavroux",
+            "correct": false
+          },
+          {
+            "label": "Saint-Paulin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0201-3-en",
+      "type": "mcq",
+      "prompt": "Which of these French cheeses is sold in a wooden box?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roquefort",
+            "correct": false
+          },
+          {
+            "label": "Cabécou",
+            "correct": false
+          },
+          {
+            "label": "Petit-suisse",
+            "correct": false
+          },
+          {
+            "label": "Époisses",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0201-4-en",
+      "type": "mcq",
+      "prompt": "Which cheese is bound with three to five plant strips?",
+      "payload": {
+        "options": [
+          {
+            "label": "Montbriac",
+            "correct": false
+          },
+          {
+            "label": "Fédou",
+            "correct": false
+          },
+          {
+            "label": "Livernon",
+            "correct": false
+          },
+          {
+            "label": "Livarot",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0211-1-en",
+      "type": "mcq",
+      "prompt": "Which Italian cheese is used in tiramisu?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ricotta",
+            "correct": false
+          },
+          {
+            "label": "Gorgonzola",
+            "correct": false
+          },
+          {
+            "label": "Mascarpone",
+            "correct": true
+          },
+          {
+            "label": "Grana Padano",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0211-3-en",
+      "type": "mcq",
+      "prompt": "Which sponge-based dessert balances coffee and chocolate flavors?",
+      "payload": {
+        "options": [
+          {
+            "label": "Diplomate",
+            "correct": false
+          },
+          {
+            "label": "Bavarois",
+            "correct": false
+          },
+          {
+            "label": "Religieuse",
+            "correct": false
+          },
+          {
+            "label": "Opéra",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0211-4-en",
+      "type": "mcq",
+      "prompt": "Which red fruit goes into clafoutis?",
+      "payload": {
+        "options": [
+          {
+            "label": "Raspberries",
+            "correct": false
+          },
+          {
+            "label": "Redcurrants",
+            "correct": false
+          },
+          {
+            "label": "Cherries",
+            "correct": true
+          },
+          {
+            "label": "Strawberries",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0235-1-en",
+      "type": "mcq",
+      "prompt": "From the beans of which tree is chocolate made?",
+      "payload": {
+        "options": [
+          {
+            "label": "Palm tree",
+            "correct": false
+          },
+          {
+            "label": "Fig tree",
+            "correct": false
+          },
+          {
+            "label": "Pecan tree",
+            "correct": false
+          },
+          {
+            "label": "Cacao tree",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0235-2-en",
+      "type": "mcq",
+      "prompt": "Which chocolate, rich in saturated fatty acids, is the most bitter?",
+      "payload": {
+        "options": [
+          {
+            "label": "Milk",
+            "correct": false
+          },
+          {
+            "label": "Dark",
+            "correct": true
+          },
+          {
+            "label": "White",
+            "correct": false
+          },
+          {
+            "label": "Praline",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0235-3-en",
+      "type": "mcq",
+      "prompt": "Which is the top cocoa-producing country, far ahead of Ghana?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nigeria",
+            "correct": false
+          },
+          {
+            "label": "Ivory Coast",
+            "correct": true
+          },
+          {
+            "label": "Brazil",
+            "correct": false
+          },
+          {
+            "label": "Mexico",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0235-4-en",
+      "type": "mcq",
+      "prompt": "What is done to cocoa beans during roasting?",
+      "payload": {
+        "options": [
+          {
+            "label": "They are crushed",
+            "correct": false
+          },
+          {
+            "label": "They are peeled",
+            "correct": false
+          },
+          {
+            "label": "They are toasted",
+            "correct": true
+          },
+          {
+            "label": "They are twisted",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

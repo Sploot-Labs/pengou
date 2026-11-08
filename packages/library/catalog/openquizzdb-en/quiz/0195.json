@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=195"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0195-2-en",
+      "type": "mcq",
+      "prompt": "What color is Marilyn Monroe's dress in \"The Seven Year Itch\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Red",
+            "correct": false
+          },
+          {
+            "label": "Blue",
+            "correct": false
+          },
+          {
+            "label": "White",
+            "correct": true
+          },
+          {
+            "label": "Black",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

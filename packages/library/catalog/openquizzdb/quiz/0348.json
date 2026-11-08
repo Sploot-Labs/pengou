@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=348"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0348-1",
+      "type": "mcq",
+      "prompt": "Quel bâtiment situé en montagne acceuille les randonneurs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Caserne",
+            "correct": false
+          },
+          {
+            "label": "Bunker",
+            "correct": false
+          },
+          {
+            "label": "Tenaille",
+            "correct": false
+          },
+          {
+            "label": "Refuge",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0348-3",
+      "type": "mcq",
+      "prompt": "Quel campement rudimentaire permet de dormir en pleine nature ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Guitoune",
+            "correct": false
+          },
+          {
+            "label": "Gîte",
+            "correct": false
+          },
+          {
+            "label": "Colonie",
+            "correct": false
+          },
+          {
+            "label": "Bivouac",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

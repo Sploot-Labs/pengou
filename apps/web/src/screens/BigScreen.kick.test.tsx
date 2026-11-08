@@ -49,7 +49,7 @@ function renderBigScreen(search: string) {
 const ana = { id: 'p-ana', nickname: 'Ana', score: 0, connected: true }
 const bob = { id: 'p-bob', nickname: 'Bob', score: 0, connected: true }
 
-describe('BigScreen, exclusion d\'un joueur', () => {
+describe("BigScreen, exclusion d'un joueur", () => {
   beforeEach(() => {
     handlers.clear()
     mockEmitAck.mockClear()
@@ -69,13 +69,27 @@ describe('BigScreen, exclusion d\'un joueur', () => {
     expect(container.textContent).not.toMatch(/exclu|retiré/i)
   })
 
-  it('classement : le joueur exclu n\'apparaît plus après le lobby:update suivant', async () => {
+  it("classement : le joueur exclu n'apparaît plus après le lobby:update suivant", async () => {
     const { container } = renderBigScreen('token=tok-abc&pin=1234')
     await waitFor(() => expect(mockEmitAck).toHaveBeenCalled())
 
     emitServerEvent('lobby:update', { players: [ana, bob] })
-    emitServerEvent('question:show', { id: 'q1', type: 'mcq', prompt: 'Q ?', timeLimit: 20, payload: { options: [{ label: 'A' }, { label: 'B' }] } })
-    emitServerEvent('question:reveal', { correct: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] }, distribution: { '0': 1 } })
+    emitServerEvent('question:show', {
+      id: 'q1',
+      type: 'mcq',
+      prompt: 'Q ?',
+      timeLimit: 20,
+      payload: { options: [{ label: 'A' }, { label: 'B' }] },
+    })
+    emitServerEvent('question:reveal', {
+      correct: {
+        options: [
+          { label: 'A', correct: true },
+          { label: 'B', correct: false },
+        ],
+      },
+      distribution: { '0': 1 },
+    })
     emitServerEvent('scoreboard', {
       ranking: [
         { playerId: 'p-bob', nickname: 'Bob', score: 200 },

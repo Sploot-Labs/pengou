@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=423"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0423-2-en",
+      "type": "mcq",
+      "prompt": "In which sector is Tropicana a world leader?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tea",
+            "correct": false
+          },
+          {
+            "label": "Lemonade",
+            "correct": false
+          },
+          {
+            "label": "Fruit juice",
+            "correct": true
+          },
+          {
+            "label": "Non-alcoholic beers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0423-4-en",
+      "type": "mcq",
+      "prompt": "Which drink is known to contain ginger ale?",
+      "payload": {
+        "options": [
+          {
+            "label": "Canada Dry",
+            "correct": true
+          },
+          {
+            "label": "7 Up",
+            "correct": false
+          },
+          {
+            "label": "Gini",
+            "correct": false
+          },
+          {
+            "label": "Fanta",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

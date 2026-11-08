@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=184"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0184-1",
+      "type": "mcq",
+      "prompt": "Comment peut-on qualifier tous les nombres divisibles par deux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Parallèles",
+            "correct": false
+          },
+          {
+            "label": "Premiers",
+            "correct": false
+          },
+          {
+            "label": "Pairs",
+            "correct": true
+          },
+          {
+            "label": "Parfaits",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0184-2",
+      "type": "mcq",
+      "prompt": "Avant de devenir chevalier, quel est le rang pour un apprenti Jedi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poltergeist",
+            "correct": false
+          },
+          {
+            "label": "Padawan",
+            "correct": true
+          },
+          {
+            "label": "Paddington",
+            "correct": false
+          },
+          {
+            "label": "Palikir",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

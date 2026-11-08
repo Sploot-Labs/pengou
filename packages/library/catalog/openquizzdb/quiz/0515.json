@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=515"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0515-1",
+      "type": "mcq",
+      "prompt": "En quelle matière sont généralement fabriqués nos gilets par balles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ivoire",
+            "correct": false
+          },
+          {
+            "label": "Kevlar",
+            "correct": true
+          },
+          {
+            "label": "Latex",
+            "correct": false
+          },
+          {
+            "label": "Métal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0515-2",
+      "type": "mcq",
+      "prompt": "Quel est le principal avantage d'utilisation d'une grenade à manche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coût",
+            "correct": false
+          },
+          {
+            "label": "Meilleur emport",
+            "correct": false
+          },
+          {
+            "label": "Étanchéité",
+            "correct": false
+          },
+          {
+            "label": "Distance de jet",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0515-3",
+      "type": "mcq",
+      "prompt": "Combien de tonnes pèse environ le char Américain M1A1 Abrams ?",
+      "payload": {
+        "options": [
+          {
+            "label": "75 tonnes",
+            "correct": false
+          },
+          {
+            "label": "12 tonnes",
+            "correct": false
+          },
+          {
+            "label": "36 tonnes",
+            "correct": false
+          },
+          {
+            "label": "54 tonnes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0515-4",
+      "type": "mcq",
+      "prompt": "Durant la guerre du Vietnam, quelle arme fut surnommée « Mattel Gun » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "M14",
+            "correct": false
+          },
+          {
+            "label": "M16",
+            "correct": true
+          },
+          {
+            "label": "AK47",
+            "correct": false
+          },
+          {
+            "label": "L1A1",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

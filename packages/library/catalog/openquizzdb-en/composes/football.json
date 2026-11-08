@@ -1,0 +1,472 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0087-1-en",
+      "type": "mcq",
+      "prompt": "What do the figures on the World Cup trophy hold up?",
+      "payload": {
+        "options": [
+          {
+            "label": "Flame",
+            "correct": false
+          },
+          {
+            "label": "Whistle",
+            "correct": false
+          },
+          {
+            "label": "Shoe",
+            "correct": false
+          },
+          {
+            "label": "Globe",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0087-2-en",
+      "type": "mcq",
+      "prompt": "Who was sent off in the 1998 football World Cup final?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thierry Henry",
+            "correct": false
+          },
+          {
+            "label": "Marcel Desailly",
+            "correct": true
+          },
+          {
+            "label": "Laurent Blanc",
+            "correct": false
+          },
+          {
+            "label": "Franck Leboeuf",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0087-3-en",
+      "type": "mcq",
+      "prompt": "Which brand made the ball of the 2002 football World Cup?",
+      "payload": {
+        "options": [
+          {
+            "label": "Adidas",
+            "correct": true
+          },
+          {
+            "label": "Reebok",
+            "correct": false
+          },
+          {
+            "label": "Nike",
+            "correct": false
+          },
+          {
+            "label": "Puma",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0087-4-en",
+      "type": "mcq",
+      "prompt": "Which horns did fans use in 2010?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vovomelas",
+            "correct": false
+          },
+          {
+            "label": "Vivigalas",
+            "correct": false
+          },
+          {
+            "label": "Vavadolas",
+            "correct": false
+          },
+          {
+            "label": "Vuvuzelas",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0099-1-en",
+      "type": "mcq",
+      "prompt": "Which French goalkeeper became a Porsche racing driver in 2008?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fabien Barthez",
+            "correct": true
+          },
+          {
+            "label": "Roland Amar",
+            "correct": false
+          },
+          {
+            "label": "Jean Castaneda",
+            "correct": false
+          },
+          {
+            "label": "Rudy Riou",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0099-2-en",
+      "type": "mcq",
+      "prompt": "Which goalkeeper played seventeen years for Juventus?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gianluigi Buffon",
+            "correct": true
+          },
+          {
+            "label": "Dino Zoff",
+            "correct": false
+          },
+          {
+            "label": "Luciano Bodini",
+            "correct": false
+          },
+          {
+            "label": "Mattia Perin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0099-3-en",
+      "type": "mcq",
+      "prompt": "Which goalkeeper played his last Bundesliga match in May 2008?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jens Lehmann",
+            "correct": false
+          },
+          {
+            "label": "Sepp Maier",
+            "correct": false
+          },
+          {
+            "label": "Oliver Kahn",
+            "correct": true
+          },
+          {
+            "label": "Robert Enke",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0099-4-en",
+      "type": "mcq",
+      "prompt": "Who plays the goalkeeper in John Huston's \"Escape to Victory\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jason Statham",
+            "correct": false
+          },
+          {
+            "label": "Bruce Willis",
+            "correct": false
+          },
+          {
+            "label": "Sylvester Stallone",
+            "correct": true
+          },
+          {
+            "label": "Tom Cruise",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0502-2-en",
+      "type": "mcq",
+      "prompt": "Who was Benfica Lisbon's goalkeeper in 1981?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pedro Estrems",
+            "correct": false
+          },
+          {
+            "label": "Manuel Bento",
+            "correct": true
+          },
+          {
+            "label": "José Valero",
+            "correct": false
+          },
+          {
+            "label": "Carlos Medrano",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0502-3-en",
+      "type": "mcq",
+      "prompt": "Which Portuguese footballer was often compared to Pelé?",
+      "payload": {
+        "options": [
+          {
+            "label": "Figo",
+            "correct": false
+          },
+          {
+            "label": "Manecas",
+            "correct": false
+          },
+          {
+            "label": "Eusébio",
+            "correct": true
+          },
+          {
+            "label": "Nani",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0502-4-en",
+      "type": "mcq",
+      "prompt": "Which footballer was voted French Player of the Year in 1989?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jean-Pierre Papin",
+            "correct": true
+          },
+          {
+            "label": "Michel Platini",
+            "correct": false
+          },
+          {
+            "label": "Alain Giresse",
+            "correct": false
+          },
+          {
+            "label": "Eric Cantona",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0400-1-en",
+      "type": "mcq",
+      "prompt": "In which stadium does FC Barcelona play its home matches?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maracanã",
+            "correct": false
+          },
+          {
+            "label": "Camp Nou",
+            "correct": true
+          },
+          {
+            "label": "Wembley",
+            "correct": false
+          },
+          {
+            "label": "Bernabéu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0400-2-en",
+      "type": "mcq",
+      "prompt": "From which club did Barça buy Zlatan Ibrahimovic in 2009?",
+      "payload": {
+        "options": [
+          {
+            "label": "Göteborg",
+            "correct": false
+          },
+          {
+            "label": "Leeds United",
+            "correct": false
+          },
+          {
+            "label": "Bayern Munich",
+            "correct": false
+          },
+          {
+            "label": "Inter Milan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0400-3-en",
+      "type": "mcq",
+      "prompt": "Who succeeded Pep Guardiola at Barça B in 2008?",
+      "payload": {
+        "options": [
+          {
+            "label": "Luis Figo",
+            "correct": false
+          },
+          {
+            "label": "Patrick Kluivert",
+            "correct": false
+          },
+          {
+            "label": "Luis Enrique",
+            "correct": true
+          },
+          {
+            "label": "Andoni Zubizarreta",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0400-4-en",
+      "type": "mcq",
+      "prompt": "Which cross appears on the FC Barcelona crest?",
+      "payload": {
+        "options": [
+          {
+            "label": "St Patrick's Cross",
+            "correct": false
+          },
+          {
+            "label": "St Simon's Cross",
+            "correct": false
+          },
+          {
+            "label": "St George's Cross",
+            "correct": true
+          },
+          {
+            "label": "St Andrew's Cross",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-football-en",
+      "title": "Football",
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0087-1-en",
+        "oqdb-0087-2-en",
+        "oqdb-0087-3-en",
+        "oqdb-0087-4-en",
+        "oqdb-0099-1-en",
+        "oqdb-0099-2-en",
+        "oqdb-0099-3-en",
+        "oqdb-0099-4-en",
+        "oqdb-0502-2-en",
+        "oqdb-0502-3-en",
+        "oqdb-0502-4-en",
+        "oqdb-0400-1-en",
+        "oqdb-0400-2-en",
+        "oqdb-0400-3-en",
+        "oqdb-0400-4-en"
+      ],
+      "description": "Based on OpenQuizzDB quizzes about the World Cup, goalkeepers, football history and FC Barcelona."
+    }
+  ]
+}

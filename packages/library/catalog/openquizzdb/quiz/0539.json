@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=539"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0539-1",
+      "type": "mcq",
+      "prompt": "Dans quelle boisson caféinée froide ajoute-t-on de la crème glacée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Café liégeois",
+            "correct": true
+          },
+          {
+            "label": "Café bruxellois",
+            "correct": false
+          },
+          {
+            "label": "Café tournaisien",
+            "correct": false
+          },
+          {
+            "label": "Café montois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0539-2",
+      "type": "mcq",
+      "prompt": "Quelle boisson alcoolisée est préparée avec du whisky et du café ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Irish coffee",
+            "correct": true
+          },
+          {
+            "label": "French coffee",
+            "correct": false
+          },
+          {
+            "label": "Café viennois",
+            "correct": false
+          },
+          {
+            "label": "Café normand",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0539-3",
+      "type": "mcq",
+      "prompt": "Avec quoi les cafetières de la marque Senseo fonctionnent-elles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sachets",
+            "correct": false
+          },
+          {
+            "label": "Capsules",
+            "correct": false
+          },
+          {
+            "label": "Filtres",
+            "correct": false
+          },
+          {
+            "label": "Dosettes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0539-4",
+      "type": "mcq",
+      "prompt": "Quelle variété de café est généralement la plus corsée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Robusta",
+            "correct": true
+          },
+          {
+            "label": "Arabica",
+            "correct": false
+          },
+          {
+            "label": "Manille",
+            "correct": false
+          },
+          {
+            "label": "Liberica",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

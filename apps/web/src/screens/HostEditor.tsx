@@ -4,13 +4,16 @@ import { signOut, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
 import { useLaunchGame } from '../realtime/useLaunchGame'
 import {
+  archiveQuiz,
   createQuestion,
   deleteQuestion,
   getQuiz,
   listQuestions,
   reorderQuestions,
+  restoreQuiz,
   updateQuestion,
   updateQuiz,
+  type ContentSource,
   type CreateQuestionInput,
   type Question as ApiQuestion,
   type QuestionType,
@@ -20,6 +23,9 @@ import {
 import { ANSWER_SHAPES, type AnswerShapeKind } from '../constants'
 import { AnswerShape, Button, Logo, SHAPE_NAME_FR } from '../ui'
 import { AppHeader } from '../ui/AppHeader.js'
+import { ConfirmDialog } from '../ui/ConfirmDialog.js'
+import { isQuizLimitError, QuizLimitNotice } from '../ui/QuizLimitNotice.js'
+import { SourcesPanel } from '../ui/SourceCredit.js'
 
 /**
  * HostEditor — wired to the real quiz/question REST API (Plan 06 Task 3),
@@ -39,6 +45,8 @@ const TYPE_LABEL: Record<QuestionType, string> = {
   truefalse: 'Vrai / Faux',
   text: 'Réponse libre',
   slider: 'Curseur',
+  wordcloud: 'Nuage de mots',
+  poll: 'Sondage',
 }
 
 /** Decorative only (color + glyph reinforcing the shape cue on mcq tiles) —
@@ -67,6 +75,8 @@ interface QuestionBase {
   prompt: string
   timeLimit: number
   readingTime: number
+  /** Attribution héritée de la bibliothèque (absente pour une question créée ici). */
+  source?: ContentSource | null
 }
 interface McqOption {
   id: string
@@ -93,10 +103,33 @@ export interface SliderQuestion extends QuestionBase {
   step: number
   correctValue: number
 }
-export type Question = McqQuestion | TrueFalseQuestion | TextQuestion | SliderQuestion
+export interface WordcloudQuestion extends QuestionBase {
+  type: 'wordcloud'
+}
+export interface PollQuestion extends QuestionBase {
+  type: 'poll'
+  options: { id: string; label: string }[]
+  multiple: boolean
+}
+export type Question =
+  | McqQuestion
+  | TrueFalseQuestion
+  | TextQuestion
+  | SliderQuestion
+  | WordcloudQuestion
+  | PollQuestion
+
+const POLL_MIN_OPTIONS = 2
+const POLL_MAX_OPTIONS = 6
 
 function fromApiQuestion(row: ApiQuestion): Question {
-  const base = { id: row.id, prompt: row.prompt, timeLimit: row.timeLimit, readingTime: row.readingTime }
+  const base = {
+    id: row.id,
+    prompt: row.prompt,
+    timeLimit: row.timeLimit,
+    readingTime: row.readingTime,
+    source: row.source,
+  }
   switch (row.type) {
     case 'mcq': {
       const payload = row.payload as { options: { label: string; correct: boolean }[] }
@@ -128,6 +161,17 @@ function fromApiQuestion(row: ApiQuestion): Question {
         max: payload.max,
         step: payload.step ?? 1,
         correctValue: payload.correct,
+      }
+    }
+    case 'wordcloud':
+      return { ...base, type: 'wordcloud' }
+    case 'poll': {
+      const payload = row.payload as { options: { label: string }[]; multiple?: boolean }
+      return {
+        ...base,
+        type: 'poll',
+        options: payload.options.map((o, i) => ({ id: `opt-${i}`, label: o.label })),
+        multiple: payload.multiple ?? false,
       }
     }
   }
@@ -172,6 +216,15 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
         readingTime: q.readingTime,
         payload: { min: q.min, max: q.max, correct: q.correctValue, step: q.step > 0 ? q.step : undefined },
       }
+    case 'wordcloud':
+      return { prompt: q.prompt, timeLimit: q.timeLimit, readingTime: q.readingTime, payload: {} }
+    case 'poll':
+      return {
+        prompt: q.prompt,
+        timeLimit: q.timeLimit,
+        readingTime: q.readingTime,
+        payload: { options: q.options.map((o) => ({ label: o.label })), multiple: q.multiple },
+      }
   }
 }
 
@@ -213,6 +266,19 @@ function defaultCreateInput(type: QuestionType): CreateQuestionInput {
       return { type, prompt, timeLimit, readingTime, payload: { answers: ['Réponse'], caseSensitive: false } }
     case 'slider':
       return { type, prompt, timeLimit, readingTime, payload: { min: 0, max: 100, correct: 50, step: 1 } }
+    case 'wordcloud':
+      return { type, prompt, timeLimit, readingTime, payload: {} }
+    case 'poll':
+      return {
+        type,
+        prompt,
+        timeLimit,
+        readingTime,
+        payload: {
+          options: [{ label: 'Choix 1' }, { label: 'Choix 2' }, { label: 'Choix 3' }, { label: 'Choix 4' }],
+          multiple: false,
+        },
+      }
   }
 }
 
@@ -220,11 +286,13 @@ function defaultCreateInput(type: QuestionType): CreateQuestionInput {
 function hasTypeSpecificData(q: Question): boolean {
   switch (q.type) {
     case 'mcq':
+    case 'poll':
       return q.options.some((o) => o.label.trim().length > 0)
     case 'text':
       return q.acceptedAnswers.some((a) => a.trim().length > 0)
     case 'truefalse':
     case 'slider':
+    case 'wordcloud':
       return false
   }
 }
@@ -236,23 +304,20 @@ function validationError(q: Question): string | null {
   // an invalid duration can never reach the timer, nor an invalid launch. The
   // server itself only requires a positive integer — [5, 120] is a client-side
   // product guardrail, kept from the prototype.
-  if (!Number.isInteger(q.timeLimit) || q.timeLimit < 5 || q.timeLimit > 120)
-    return 'Durée entre 5 et 120 s.'
+  if (!Number.isInteger(q.timeLimit) || q.timeLimit < 5 || q.timeLimit > 120) return 'Durée entre 5 et 120 s.'
   // 0 = pas de temps de lecture (valeur légitime), donc seul le signe/l'intégrité est vérifié —
   // pas de borne haute produit comme pour `timeLimit`.
-  if (!Number.isInteger(q.readingTime) || q.readingTime < 0)
-    return 'Le temps de lecture doit être un entier ≥ 0.'
+  if (!Number.isInteger(q.readingTime) || q.readingTime < 0) return 'Le temps de lecture doit être un entier ≥ 0.'
   switch (q.type) {
     case 'mcq': {
-      if (q.options.some((o) => o.label.trim().length === 0))
-        return 'Chaque réponse doit avoir un libellé.'
+      if (q.options.some((o) => o.label.trim().length === 0)) return 'Chaque réponse doit avoir un libellé.'
       if (!q.options.some((o) => o.correct)) return 'Choisissez la bonne réponse.'
       return null
     }
+    case 'poll':
+      return q.options.some((o) => o.label.trim().length === 0) ? 'Chaque choix doit avoir un libellé.' : null
     case 'text':
-      return q.acceptedAnswers.some((a) => a.trim().length > 0)
-        ? null
-        : 'Ajoutez au moins une réponse acceptée.'
+      return q.acceptedAnswers.some((a) => a.trim().length > 0) ? null : 'Ajoutez au moins une réponse acceptée.'
     case 'slider':
       if (q.min >= q.max) return 'Le minimum doit être inférieur au maximum.'
       if (q.correctValue < q.min || q.correctValue > q.max)
@@ -260,6 +325,7 @@ function validationError(q: Question): string | null {
       if (!(q.step > 0)) return 'Le pas doit être positif.'
       return null
     case 'truefalse':
+    case 'wordcloud':
       return null
   }
 }
@@ -279,10 +345,14 @@ function fieldErrors(q: Question): Record<string, string> {
   switch (q.type) {
     case 'mcq':
       q.options.forEach((o, i) => {
-        if (o.label.trim().length === 0)
-          errs[`mcq-label-${o.id}`] = `Réponse ${i + 1} : libellé manquant.`
+        if (o.label.trim().length === 0) errs[`mcq-label-${o.id}`] = `Réponse ${i + 1} : libellé manquant.`
       })
       if (!q.options.some((o) => o.correct)) errs['mcq-correct'] = 'Choisissez la bonne réponse.'
+      break
+    case 'poll':
+      q.options.forEach((o) => {
+        if (o.label.trim().length === 0) errs[`poll-label-${o.id}`] = 'Chaque choix doit avoir un libellé.'
+      })
       break
     case 'text':
       if (!q.acceptedAnswers.some((a) => a.trim().length > 0))
@@ -294,11 +364,11 @@ function fieldErrors(q: Question): Record<string, string> {
         errs['q-slider-max'] = 'Le minimum doit être inférieur au maximum.'
       }
       if (q.correctValue < q.min || q.correctValue > q.max)
-        errs['q-slider-correct'] =
-          'La valeur correcte doit être comprise entre le minimum et le maximum.'
+        errs['q-slider-correct'] = 'La valeur correcte doit être comprise entre le minimum et le maximum.'
       if (!(q.step > 0)) errs['q-slider-step'] = 'Le pas doit être positif.'
       break
     case 'truefalse':
+    case 'wordcloud':
       break
   }
   return errs
@@ -387,6 +457,13 @@ export function HostEditor() {
   // and an undo affordance for deletion.
   const [pendingType, setPendingType] = useState<QuestionType | null>(null)
   const [lastDeleted, setLastDeleted] = useState<{ question: Question; index: number } | null>(null)
+  // Archivage (suppression douce) : confirmation modale, puis retour à l'accueil. Un quiz archivé
+  // reste modifiable ici mais n'est plus lançable tant qu'il n'est pas restauré.
+  const [archiveDialogOpen, setArchiveDialogOpen] = useState(false)
+  const [archivePending, setArchivePending] = useState(false)
+  const [archiveError, setArchiveError] = useState<string | null>(null)
+  const [restorePending, setRestorePending] = useState(false)
+  const [restoreLimit, setRestoreLimit] = useState(false)
 
   const itemRefs = useRef<Map<string, HTMLButtonElement>>(new Map())
   const addRef = useRef<HTMLButtonElement>(null)
@@ -500,8 +577,10 @@ export function HostEditor() {
   const fErrors = selected ? fieldErrors(selected) : {}
 
   const invalidCount = questions.filter((q) => validationError(q) !== null).length
-  const launchReason =
-    questions.length === 0
+  const isArchived = quiz?.archivedAt != null
+  const launchReason = isArchived
+    ? 'Ce quiz est archivé : restaurez-le pour lancer une partie.'
+    : questions.length === 0
       ? 'Ajoutez au moins une question pour lancer la partie.'
       : invalidCount > 0
         ? `${invalidCount} question${invalidCount > 1 ? 's' : ''} à compléter avant de lancer la partie.`
@@ -622,9 +701,7 @@ export function HostEditor() {
 
   function updateSelected(patch: Partial<Question>) {
     if (!selected) return
-    setQuestions((prev) =>
-      prev.map((q) => (q.id === selected.id ? ({ ...q, ...patch } as Question) : q)),
-    )
+    setQuestions((prev) => prev.map((q) => (q.id === selected.id ? ({ ...q, ...patch } as Question) : q)))
   }
 
   /** Applies a new type LOCALLY only — used to build the create-input for the
@@ -645,6 +722,7 @@ export function HostEditor() {
       readingTime: input.readingTime ?? 0,
       orderIndex: 0,
       payload: input.payload,
+      source: null,
       createdAt: '',
     })
   }
@@ -734,6 +812,38 @@ export function HostEditor() {
     }
   }
 
+  async function confirmArchive() {
+    if (!quizId) return
+    setArchivePending(true)
+    setArchiveError(null)
+    try {
+      // Même logique que « Retour à l'accueil » : on n'abandonne pas une édition en attente.
+      await flushPendingSave().catch(() => {})
+      await archiveQuiz(quizId)
+      navigate('/')
+    } catch (err) {
+      setArchivePending(false)
+      setArchiveError(errorMessage(err))
+    }
+  }
+
+  async function handleRestore() {
+    if (!quizId) return
+    setRestorePending(true)
+    setActionError(null)
+    setRestoreLimit(false)
+    try {
+      const row = await restoreQuiz(quizId)
+      setQuiz(row)
+      setAnnouncement('Quiz restauré, il peut de nouveau être lancé.')
+    } catch (err) {
+      if (isQuizLimitError(err)) setRestoreLimit(true)
+      else setActionError(errorMessage(err))
+    } finally {
+      setRestorePending(false)
+    }
+  }
+
   function confirmTypeChange() {
     if (pendingType) void applyTypeChangeImmediate(pendingType)
     setPendingType(null)
@@ -777,9 +887,7 @@ export function HostEditor() {
       // (back at its original position) and correct the record for
       // screen-reader users, who otherwise never learn the move didn't stick.
       pendingFocus.current = { kind: 'item', id: moved.id }
-      setAnnouncement(
-        `Déplacement annulé, la question est revenue en position ${index + 1}.`,
-      )
+      setAnnouncement(`Déplacement annulé, la question est revenue en position ${index + 1}.`)
     }
   }
 
@@ -942,9 +1050,11 @@ export function HostEditor() {
     )
   }
 
+  const modalOpen = pendingType !== null || archiveDialogOpen
+
   return (
     <div className="ab-shell">
-      <div aria-hidden={pendingType ? true : undefined}>
+      <div aria-hidden={modalOpen ? true : undefined}>
         <AppHeader
           brandline={
             <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
@@ -959,34 +1069,41 @@ export function HostEditor() {
               <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
                 {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
               </Button>
-              <div className="host-launch">
-                <Button
-                  variant="primary"
-                  type="button"
-                  aria-disabled={!canLaunch || launching}
-                  aria-describedby={!canLaunch ? 'host-launch-reason' : undefined}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    if (!canLaunch || launching) return
-                    void launchGame()
-                  }}
-                >
-                  {launching ? 'Lancement…' : 'Lancer la partie'}
-                </Button>
-                {launchReason && <p className="host-launch__hint">{launchReason}</p>}
-              </div>
+              {/* La raison du blocage n'est affichée qu'une fois, dans le
+                  bandeau #host-launch-reason sous le titre : la répéter ici
+                  faisait changer la hauteur de l'en-tête et désalignait
+                  « Se déconnecter ». */}
+              <Button
+                variant="primary"
+                type="button"
+                aria-disabled={!canLaunch || launching}
+                aria-describedby={!canLaunch ? 'host-launch-reason' : undefined}
+                onClick={(e) => {
+                  e.preventDefault()
+                  if (!canLaunch || launching) return
+                  void launchGame()
+                }}
+              >
+                {launching ? 'Lancement…' : 'Lancer la partie'}
+              </Button>
             </>
           }
         />
       </div>
 
-      <main
-        className="ab-shell__main"
-        id="contenu-principal"
-        tabIndex={-1}
-        aria-hidden={pendingType ? true : undefined}
-      >
+      <main className="ab-shell__main" id="contenu-principal" tabIndex={-1} aria-hidden={modalOpen ? true : undefined}>
         <h1 style={{ marginBottom: 'var(--space-4)' }}>Éditeur de quiz</h1>
+
+        {/* Quiz archivé : l'id `host-launch-reason` porte ici la raison du blocage du lancement
+            (référencée par l'`aria-describedby` du bouton « Lancer la partie »). */}
+        {isArchived && (
+          <div className="host-archived">
+            <p id="host-launch-reason">Ce quiz est archivé. Restaurez-le pour pouvoir lancer une partie.</p>
+            <Button variant="primary" type="button" disabled={restorePending} onClick={() => void handleRestore()}>
+              {restorePending ? 'Restauration…' : 'Restaurer'}
+            </Button>
+          </div>
+        )}
 
         {launchError && (
           <p className="join-error" role="alert">
@@ -994,6 +1111,7 @@ export function HostEditor() {
           </p>
         )}
 
+        {restoreLimit && <QuizLimitNotice />}
         {actionError && (
           <p className="join-error" role="alert">
             {actionError}
@@ -1032,7 +1150,7 @@ export function HostEditor() {
           </div>
         </div>
 
-        {launchReason && (
+        {launchReason && !isArchived && (
           <p className="host-launch__warning" role="status" id="host-launch-reason">
             {launchReason}
           </p>
@@ -1063,7 +1181,7 @@ export function HostEditor() {
             <section aria-label="Liste des questions">
               <h2 style={{ marginBottom: 'var(--space-3)' }}>Questions</h2>
               {questions.length === 0 ? (
-                <p className="ab-empty-state">Aucune question pour l'instant, ajoutez-en une pour commencer. 🐾</p>
+                <p className="ab-empty-state">Aucune question pour l'instant, ajoutez-en une pour commencer.</p>
               ) : (
                 <ul className="host-list">
                   {questions.map((q, index) => {
@@ -1081,9 +1199,7 @@ export function HostEditor() {
                           aria-current={q.id === selectedId ? 'true' : undefined}
                         >
                           <span className="host-list__index">{index + 1}</span>
-                          <span className="host-list__prompt">
-                            {q.prompt.trim() || 'Question sans intitulé'}
-                          </span>
+                          <span className="host-list__prompt">{q.prompt.trim() || 'Question sans intitulé'}</span>
                           {error && (
                             <span
                               className="host-badge host-badge--warn"
@@ -1129,13 +1245,15 @@ export function HostEditor() {
                   Ajouter une question
                 </Button>
               </div>
+              <SourcesPanel
+                quizSource={quiz?.source ?? null}
+                questionSources={questions.map((q) => q.source ?? null)}
+              />
             </section>
 
             <section className="host-panel" aria-label="Formulaire de question">
               {!selected ? (
-                <p className="ab-empty-state">
-                  Aucune question sélectionnée. Ajoutez une question pour commencer.
-                </p>
+                <p className="ab-empty-state">Aucune question sélectionnée. Ajoutez une question pour commencer.</p>
               ) : (
                 <form className="host-form" onSubmit={(e) => e.preventDefault()}>
                   {(() => {
@@ -1178,6 +1296,8 @@ export function HostEditor() {
                         <option value="truefalse">Vrai / Faux</option>
                         <option value="text">Réponse libre</option>
                         <option value="slider">Curseur</option>
+                        <option value="wordcloud">Nuage de mots</option>
+                        <option value="poll">Sondage</option>
                       </select>
                     </div>
                     <div className="host-field">
@@ -1222,10 +1342,10 @@ export function HostEditor() {
                     </div>
                   </div>
 
-                  {selected.type === 'mcq' && (
+                  {(selected.type === 'mcq' || selected.type === 'poll') && (
                     <fieldset className="host-field">
-                      <legend>Réponses (cochez la bonne réponse)</legend>
-                      {fErrors['mcq-correct'] && (
+                      <legend>{selected.type === 'poll' ? 'Choix' : 'Réponses (cochez la bonne réponse)'}</legend>
+                      {selected.type === 'mcq' && fErrors['mcq-correct'] && (
                         <p className="host-inline-error" id="mcq-correct-error">
                           {fErrors['mcq-correct']}
                         </p>
@@ -1233,55 +1353,110 @@ export function HostEditor() {
                       <div className="host-options-grid">
                         {selected.options.map((opt, index) => (
                           <div className="host-option-row" key={opt.id}>
-                            <label className="host-option-row__correct-label">
-                              <input
-                                type="radio"
-                                name="mcq-correct"
-                                checked={opt.correct}
-                                onChange={() => {
-                                  const options = selected.options.map((o, i) => ({
-                                    ...o,
-                                    correct: i === index,
-                                  }))
-                                  updateSelected({ options } as Partial<McqQuestion>)
-                                }}
-                              />
-                              <span className="visually-hidden">
-                                Marquer « {opt.label || `réponse ${index + 1}`} » comme correcte
-                              </span>
-                              <span aria-hidden="true">Correcte</span>
-                            </label>
-                            <AnswerShape shape={opt.shape} size={20} />
-                            <label htmlFor={`mcq-label-${opt.id}`} className="visually-hidden">
-                              Libellé réponse {index + 1}, {SHAPE_NAME_FR[opt.shape]}
+                            {selected.type === 'mcq' && 'correct' in opt && (
+                              <label className="host-option-row__correct-label">
+                                <input
+                                  type="radio"
+                                  name="mcq-correct"
+                                  checked={opt.correct}
+                                  onChange={() => {
+                                    const options = selected.options.map((o, i) => ({
+                                      ...o,
+                                      correct: i === index,
+                                    }))
+                                    updateSelected({ options } as Partial<McqQuestion>)
+                                  }}
+                                />
+                                <span className="visually-hidden">
+                                  Marquer « {opt.label || `réponse ${index + 1}`} » comme correcte
+                                </span>
+                                <span aria-hidden="true">Correcte</span>
+                              </label>
+                            )}
+                            <span className="host-option-row__shape">
+                              <AnswerShape shape={MCQ_SHAPES[index % MCQ_SHAPES.length]} size={20} />
+                            </span>
+                            <label htmlFor={`${selected.type}-label-${opt.id}`} className="visually-hidden">
+                              {selected.type === 'poll' ? 'Libellé choix' : 'Libellé réponse'} {index + 1},{' '}
+                              {SHAPE_NAME_FR[MCQ_SHAPES[index % MCQ_SHAPES.length]]}
                             </label>
                             <input
-                              id={`mcq-label-${opt.id}`}
+                              id={`${selected.type}-label-${opt.id}`}
                               type="text"
                               value={opt.label}
-                              placeholder={`Réponse ${index + 1}`}
+                              placeholder={`${selected.type === 'poll' ? 'Choix' : 'Réponse'} ${index + 1}`}
                               onChange={(e) => {
                                 const options = selected.options.map((o, i) =>
                                   i === index ? { ...o, label: e.target.value } : o,
                                 )
-                                updateSelected({ options } as Partial<McqQuestion>)
+                                updateSelected({ options } as Partial<McqQuestion | PollQuestion>)
                               }}
-                              aria-invalid={fErrors[`mcq-label-${opt.id}`] ? true : undefined}
+                              aria-invalid={fErrors[`${selected.type}-label-${opt.id}`] ? true : undefined}
                               aria-describedby={
-                                fErrors[`mcq-label-${opt.id}`]
-                                  ? `mcq-label-${opt.id}-error`
+                                fErrors[`${selected.type}-label-${opt.id}`]
+                                  ? `${selected.type}-label-${opt.id}-error`
                                   : undefined
                               }
                             />
-                            {fErrors[`mcq-label-${opt.id}`] && (
-                              <p className="host-inline-error" id={`mcq-label-${opt.id}-error`}>
-                                {fErrors[`mcq-label-${opt.id}`]}
+                            {selected.type === 'poll' && (
+                              <button
+                                type="button"
+                                className="host-variant-remove"
+                                aria-label={`Retirer le choix ${index + 1}`}
+                                disabled={selected.options.length <= POLL_MIN_OPTIONS}
+                                onClick={() => {
+                                  const options = selected.options.filter((_, i) => i !== index)
+                                  updateSelected({ options } as Partial<PollQuestion>)
+                                }}
+                              >
+                                ✕
+                              </button>
+                            )}
+                            {fErrors[`${selected.type}-label-${opt.id}`] && (
+                              <p className="host-inline-error" id={`${selected.type}-label-${opt.id}-error`}>
+                                {fErrors[`${selected.type}-label-${opt.id}`]}
                               </p>
                             )}
                           </div>
                         ))}
                       </div>
+                      {selected.type === 'poll' && (
+                        <div style={{ marginTop: 'var(--space-2)' }}>
+                          <Button
+                            variant="ghost"
+                            type="button"
+                            disabled={selected.options.length >= POLL_MAX_OPTIONS}
+                            onClick={() => {
+                              const nextId = selected.options.reduce(
+                                (max, o) => Math.max(max, Number(o.id.replace('opt-', '')) + 1),
+                                selected.options.length,
+                              )
+                              updateSelected({
+                                options: [...selected.options, { id: `opt-${nextId}`, label: '' }],
+                              } as Partial<PollQuestion>)
+                            }}
+                          >
+                            Ajouter un choix
+                          </Button>
+                        </div>
+                      )}
                     </fieldset>
+                  )}
+
+                  {selected.type === 'poll' && (
+                    <div className="host-field">
+                      <label className="host-option-row__correct-label">
+                        <input
+                          type="checkbox"
+                          checked={selected.multiple}
+                          onChange={(e) => updateSelected({ multiple: e.target.checked } as Partial<PollQuestion>)}
+                        />
+                        Plusieurs réponses possibles
+                      </label>
+                      <p className="host-field__help">
+                        Les participants votent en direct. Pas de bonne réponse ni de points.
+                      </p>
+                    </div>
                   )}
 
                   {selected.type === 'truefalse' && (
@@ -1333,9 +1508,7 @@ export function HostEditor() {
                               }}
                               aria-invalid={fErrors[`text-answer-${index}`] ? true : undefined}
                               aria-describedby={
-                                fErrors[`text-answer-${index}`]
-                                  ? `text-answer-${index}-error`
-                                  : undefined
+                                fErrors[`text-answer-${index}`] ? `text-answer-${index}-error` : undefined
                               }
                             />
                             <button
@@ -1344,9 +1517,7 @@ export function HostEditor() {
                               aria-label={`Supprimer la variante ${index + 1}`}
                               disabled={selected.acceptedAnswers.length <= 1}
                               onClick={() => {
-                                const acceptedAnswers = selected.acceptedAnswers.filter(
-                                  (_, i) => i !== index,
-                                )
+                                const acceptedAnswers = selected.acceptedAnswers.filter((_, i) => i !== index)
                                 updateSelected({ acceptedAnswers } as Partial<TextQuestion>)
                               }}
                             >
@@ -1374,6 +1545,12 @@ export function HostEditor() {
                         </Button>
                       </div>
                     </fieldset>
+                  )}
+
+                  {selected.type === 'wordcloud' && (
+                    <p className="host-field__help">
+                      Les participants proposent leurs idées en direct. Pas de bonne réponse ni de points.
+                    </p>
                   )}
 
                   {selected.type === 'slider' && (
@@ -1435,9 +1612,7 @@ export function HostEditor() {
                           value={selected.correctValue}
                           onChange={(e) => updateSelected({ correctValue: Number(e.target.value) })}
                           aria-invalid={fErrors['q-slider-correct'] ? true : undefined}
-                          aria-describedby={
-                            fErrors['q-slider-correct'] ? 'q-slider-correct-error' : undefined
-                          }
+                          aria-describedby={fErrors['q-slider-correct'] ? 'q-slider-correct-error' : undefined}
                         />
                         {fErrors['q-slider-correct'] && (
                           <p className="host-inline-error" id="q-slider-correct-error">
@@ -1458,11 +1633,40 @@ export function HostEditor() {
             </section>
           </div>
         )}
+
+        {!isArchived && (
+          <div className="host-archive-zone">
+            <Button
+              variant="ghost"
+              type="button"
+              onClick={() => {
+                setArchiveError(null)
+                setArchiveDialogOpen(true)
+              }}
+            >
+              Archiver ce quiz
+            </Button>
+          </div>
+        )}
       </main>
 
       <p className="visually-hidden" role="status" aria-live="polite">
         {announcement}
       </p>
+
+      {archiveDialogOpen && (
+        <ConfirmDialog
+          id="host-archive-dialog"
+          title="Archiver ce quiz ?"
+          description="Il quittera « Mes quiz » et ne pourra plus être lancé. Ses parties passées et leurs rapports restent consultables, et vous pourrez le restaurer depuis la section « Archivés » de l'accueil."
+          confirmLabel="Archiver"
+          pendingLabel="Archivage…"
+          pending={archivePending}
+          error={archiveError}
+          onConfirm={() => void confirmArchive()}
+          onCancel={() => setArchiveDialogOpen(false)}
+        />
+      )}
 
       {pendingType && (
         <div className="host-dialog__backdrop">
@@ -1495,19 +1699,13 @@ export function HostEditor() {
           >
             <h2 id="host-dialog-title">Changer le type de question ?</h2>
             <p id="host-dialog-desc" style={{ color: 'var(--ink-dim)' }}>
-              Les réponses saisies pour cette question seront effacées. Le reste (intitulé,
-              durée) est conservé.
+              Les réponses saisies pour cette question seront effacées. Le reste (intitulé, durée) est conservé.
             </p>
             <div className="host-dialog__actions">
               <Button variant="ghost" type="button" onClick={cancelTypeChange}>
                 Annuler
               </Button>
-              <Button
-                variant="danger"
-                type="button"
-                onClick={confirmTypeChange}
-                ref={dialogConfirmRef}
-              >
+              <Button variant="danger" type="button" onClick={confirmTypeChange} ref={dialogConfirmRef}>
                 Changer de type
               </Button>
             </div>

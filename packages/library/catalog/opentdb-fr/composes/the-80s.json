@@ -1,0 +1,515 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-0a1b5569601d-fr",
+      "type": "mcq",
+      "prompt": "Qui a composé la musique du « Blade Runner » original ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kitaro",
+            "correct": false
+          },
+          {
+            "label": "Yanni",
+            "correct": false
+          },
+          {
+            "label": "Enya",
+            "correct": false
+          },
+          {
+            "label": "Vangelis",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2ab6c55e5477-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces chansons n'est PAS de Men at Work ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Basket Case",
+            "correct": true
+          },
+          {
+            "label": "Be Good Johnny",
+            "correct": false
+          },
+          {
+            "label": "Who Can It Be Now?",
+            "correct": false
+          },
+          {
+            "label": "Dr. Heckyll and Mr. Jive",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-47f852b32b4a-fr",
+      "type": "mcq",
+      "prompt": "Qui a enregistré l'album « Down to the Moon » en 1986 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Andreas Vollenweider",
+            "correct": true
+          },
+          {
+            "label": "Jean-Michel Jarre",
+            "correct": false
+          },
+          {
+            "label": "Enya",
+            "correct": false
+          },
+          {
+            "label": "Bing Crosby",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-55ea15c94a79-fr",
+      "type": "mcq",
+      "prompt": "Qui incarnait Bruce Wayne et Batman dans le « Batman » de Tim Burton (1989) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "George Clooney",
+            "correct": false
+          },
+          {
+            "label": "Adam West",
+            "correct": false
+          },
+          {
+            "label": "Val Kilmer",
+            "correct": false
+          },
+          {
+            "label": "Michael Keaton",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5f3aef6e11c6-fr",
+      "type": "mcq",
+      "prompt": "Qui est le héros principal du film « Retour vers le futur » (1985) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emmett « Doc » Brown",
+            "correct": false
+          },
+          {
+            "label": "Biff Tannen",
+            "correct": false
+          },
+          {
+            "label": "George McFly",
+            "correct": false
+          },
+          {
+            "label": "Marty McFly",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6b0457c3fa4f-fr",
+      "type": "mcq",
+      "prompt": "Dans le film « La Folle Histoire de l'espace », que tentent de voler les Spaceballs sur la planète Druidia ?",
+      "payload": {
+        "options": [
+          {
+            "label": "L'air",
+            "correct": true
+          },
+          {
+            "label": "La princesse Lonestar",
+            "correct": false
+          },
+          {
+            "label": "Des boulettes",
+            "correct": false
+          },
+          {
+            "label": "Le Schwartz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7b2d7af370c7-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces reliques de Dracula n'est PAS dans « Castlevania II : Simon's Quest » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Clou",
+            "correct": false
+          },
+          {
+            "label": "La Dent",
+            "correct": true
+          },
+          {
+            "label": "L'Œil",
+            "correct": false
+          },
+          {
+            "label": "La Côte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7f2b15d123a3-fr",
+      "type": "mcq",
+      "prompt": "Le système américain de défense stratégique de la guerre froide portait le nom de quel film ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blade Runner",
+            "correct": false
+          },
+          {
+            "label": "Alien",
+            "correct": false
+          },
+          {
+            "label": "Les Dents de la mer",
+            "correct": false
+          },
+          {
+            "label": "Star Wars",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9043f57f959b-fr",
+      "type": "mcq",
+      "prompt": "Lors de la saison 1988 de Formule 1, McLaren a gagné toutes les courses sauf une. Laquelle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grand Prix du Brésil",
+            "correct": false
+          },
+          {
+            "label": "Grand Prix de Monaco",
+            "correct": false
+          },
+          {
+            "label": "Grand Prix du Japon",
+            "correct": false
+          },
+          {
+            "label": "Grand Prix d'Italie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9e9575dbaa06-fr",
+      "type": "mcq",
+      "prompt": "Quelle société a réalisé l'animation du clip « Sledgehammer » (1986) de Peter Gabriel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aardman Animations",
+            "correct": true
+          },
+          {
+            "label": "VIZ Media",
+            "correct": false
+          },
+          {
+            "label": "HIT Entertainment",
+            "correct": false
+          },
+          {
+            "label": "Illumination",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a6a86237d176-fr",
+      "type": "mcq",
+      "prompt": "Quel pilote de Formule 1 était surnommé « le Professeur » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emerson Fittipaldi",
+            "correct": false
+          },
+          {
+            "label": "Ayrton Senna",
+            "correct": false
+          },
+          {
+            "label": "Alain Prost",
+            "correct": true
+          },
+          {
+            "label": "Niki Lauda",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a6fbb06b1612-fr",
+      "type": "mcq",
+      "prompt": "Qui a réalisé « E.T. l'extra-terrestre » (1982) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stanley Kubrick",
+            "correct": false
+          },
+          {
+            "label": "Steven Spielberg",
+            "correct": true
+          },
+          {
+            "label": "James Cameron",
+            "correct": false
+          },
+          {
+            "label": "Tim Burton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c9c9a363bbfd-fr",
+      "type": "mcq",
+      "prompt": "En quelle année a eu lieu le krach du jeu vidéo en Amérique du Nord ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1982",
+            "correct": false
+          },
+          {
+            "label": "1993",
+            "correct": false
+          },
+          {
+            "label": "1983",
+            "correct": true
+          },
+          {
+            "label": "1970",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c9edc97b7bd8-fr",
+      "type": "mcq",
+      "prompt": "Dans quel film trouve-t-on la réplique « Personne ne met Bébé dans un coin » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ferris Bueller",
+            "correct": false
+          },
+          {
+            "label": "Rose bonbon",
+            "correct": false
+          },
+          {
+            "label": "Dirty Dancing",
+            "correct": true
+          },
+          {
+            "label": "Trois hommes et un bébé",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d50785021ee7-fr",
+      "type": "truefalse",
+      "prompt": "Le PC d'IBM utilisait un microprocesseur Intel 8008 cadencé à 4,77 MHz et 8 kilo-octets de mémoire.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "sciences",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d7ca02b8e7a7-fr",
+      "type": "mcq",
+      "prompt": "Avec quel partenaire de double John McEnroe a-t-il connu le plus de succès ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mary Carillo",
+            "correct": false
+          },
+          {
+            "label": "Peter Fleming",
+            "correct": true
+          },
+          {
+            "label": "Mark Woodforde",
+            "correct": false
+          },
+          {
+            "label": "Michael Stich",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e7712a23ce87-fr",
+      "type": "mcq",
+      "prompt": "Blinky, Pinky, Inky et Clyde sont des personnages de quel jeu classique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Street Fighter",
+            "correct": false
+          },
+          {
+            "label": "Gauntlet",
+            "correct": false
+          },
+          {
+            "label": "Space Invaders",
+            "correct": false
+          },
+          {
+            "label": "Pac-Man",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-the-80s-fr",
+      "title": "Années 80, culture pop",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-55ea15c94a79-fr",
+        "otdb-7b2d7af370c7-fr",
+        "otdb-9e9575dbaa06-fr",
+        "otdb-6b0457c3fa4f-fr",
+        "otdb-a6fbb06b1612-fr",
+        "otdb-c9c9a363bbfd-fr",
+        "otdb-5f3aef6e11c6-fr",
+        "otdb-0a1b5569601d-fr",
+        "otdb-e7712a23ce87-fr",
+        "otdb-47f852b32b4a-fr",
+        "otdb-d7ca02b8e7a7-fr",
+        "otdb-c9edc97b7bd8-fr",
+        "otdb-a6a86237d176-fr",
+        "otdb-d50785021ee7-fr",
+        "otdb-2ab6c55e5477-fr",
+        "otdb-7f2b15d123a3-fr",
+        "otdb-9043f57f959b-fr"
+      ],
+      "description": "Films, jeux, musique et sport des années 1980."
+    }
+  ]
+}

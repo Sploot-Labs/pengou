@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=355"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0355-1",
+      "type": "mcq",
+      "prompt": "Qui interprète Frénégonde de Pouille dans « Les Visiteurs 2 » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Muriel Robin",
+            "correct": true
+          },
+          {
+            "label": "Marie-Anne Chazel",
+            "correct": false
+          },
+          {
+            "label": "Josiane Balasko",
+            "correct": false
+          },
+          {
+            "label": "Miou-Miou",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

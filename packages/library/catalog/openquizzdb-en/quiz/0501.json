@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=501"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0501-1-en",
+      "type": "mcq",
+      "prompt": "What should you never open inside your house?",
+      "payload": {
+        "options": [
+          {
+            "label": "Window",
+            "correct": false
+          },
+          {
+            "label": "Jewelry box",
+            "correct": false
+          },
+          {
+            "label": "Wall hanging",
+            "correct": false
+          },
+          {
+            "label": "Umbrella",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0501-4-en",
+      "type": "mcq",
+      "prompt": "Which plant is said to protect against evil spirits and vampires?",
+      "payload": {
+        "options": [
+          {
+            "label": "Garlic",
+            "correct": true
+          },
+          {
+            "label": "Tarragon",
+            "correct": false
+          },
+          {
+            "label": "Oregano",
+            "correct": false
+          },
+          {
+            "label": "Rosemary",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

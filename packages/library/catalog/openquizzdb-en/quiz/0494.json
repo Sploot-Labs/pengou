@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=494"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0494-1-en",
+      "type": "mcq",
+      "prompt": "Which French writer was nicknamed the \"pope\" of Surrealism?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alain Jouffroy",
+            "correct": false
+          },
+          {
+            "label": "Paul Éluard",
+            "correct": false
+          },
+          {
+            "label": "André Breton",
+            "correct": true
+          },
+          {
+            "label": "Louis Aragon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0494-4-en",
+      "type": "mcq",
+      "prompt": "Which French poet was nicknamed \"the man with soles of wind\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rimbaud",
+            "correct": true
+          },
+          {
+            "label": "Mallarmé",
+            "correct": false
+          },
+          {
+            "label": "Verlaine",
+            "correct": false
+          },
+          {
+            "label": "Baudelaire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

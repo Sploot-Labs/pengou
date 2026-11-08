@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=31"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0031-1-en",
+      "type": "mcq",
+      "prompt": "What will you be given to put on your fries in the United States?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pickles",
+            "correct": false
+          },
+          {
+            "label": "Ketchup",
+            "correct": true
+          },
+          {
+            "label": "Mayonnaise",
+            "correct": false
+          },
+          {
+            "label": "Tartar sauce",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0031-2-en",
+      "type": "mcq",
+      "prompt": "What will you be given with salt for your fries in England?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vinegar",
+            "correct": true
+          },
+          {
+            "label": "Milk",
+            "correct": false
+          },
+          {
+            "label": "Sugar",
+            "correct": false
+          },
+          {
+            "label": "Syrup",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

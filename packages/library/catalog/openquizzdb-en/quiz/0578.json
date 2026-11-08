@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=578"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0578-1-en",
+      "type": "mcq",
+      "prompt": "In golf, what do you use to send the ball into the hole?",
+      "payload": {
+        "options": [
+          {
+            "label": "Club",
+            "correct": true
+          },
+          {
+            "label": "Racket",
+            "correct": false
+          },
+          {
+            "label": "Hockey stick",
+            "correct": false
+          },
+          {
+            "label": "Stick",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0578-3-en",
+      "type": "mcq",
+      "prompt": "What is the standard number of strokes set to complete a hole in golf?",
+      "payload": {
+        "options": [
+          {
+            "label": "Birdie",
+            "correct": false
+          },
+          {
+            "label": "Par",
+            "correct": true
+          },
+          {
+            "label": "Bogey",
+            "correct": false
+          },
+          {
+            "label": "Eagle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

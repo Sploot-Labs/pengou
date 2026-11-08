@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=427"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0427-1",
+      "type": "mcq",
+      "prompt": "Quelle star a popularisé le slogan Nespresso « What esle » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "George Clooney",
+            "correct": true
+          },
+          {
+            "label": "Bard Pitt",
+            "correct": false
+          },
+          {
+            "label": "John Travolta",
+            "correct": false
+          },
+          {
+            "label": "Tom Hanks",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0427-2",
+      "type": "mcq",
+      "prompt": "Qelle marque de café utilise dans ses pubs un expert nommé Gringo ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Necafé",
+            "correct": false
+          },
+          {
+            "label": "Jacques Vabre",
+            "correct": true
+          },
+          {
+            "label": "Senseo",
+            "correct": false
+          },
+          {
+            "label": "Café Grand'Mère",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0427-4",
+      "type": "mcq",
+      "prompt": "Quelle société a créé la marque de café soluble Ricoré ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Starbucks",
+            "correct": false
+          },
+          {
+            "label": "Carrefour",
+            "correct": false
+          },
+          {
+            "label": "Nestlé",
+            "correct": true
+          },
+          {
+            "label": "Danone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

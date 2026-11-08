@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=219"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0219-2-en",
+      "type": "mcq",
+      "prompt": "Which three-armed symbol is emblematic of Brittany?",
+      "payload": {
+        "options": [
+          {
+            "label": "Celtic cross",
+            "correct": false
+          },
+          {
+            "label": "Ermine",
+            "correct": false
+          },
+          {
+            "label": "Arrow",
+            "correct": false
+          },
+          {
+            "label": "Triskelion",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0219-3-en",
+      "type": "mcq",
+      "prompt": "What is chouchen, similar to mead, made from?",
+      "payload": {
+        "options": [
+          {
+            "label": "Barley malt",
+            "correct": false
+          },
+          {
+            "label": "Mint syrup",
+            "correct": false
+          },
+          {
+            "label": "Apple juice",
+            "correct": false
+          },
+          {
+            "label": "Fermented honey",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

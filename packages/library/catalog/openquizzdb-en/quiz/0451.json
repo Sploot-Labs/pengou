@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=451"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0451-2-en",
+      "type": "mcq",
+      "prompt": "What is the name of the lifeguard at Goo Lagoon in \"SpongeBob SquarePants\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thomas",
+            "correct": false
+          },
+          {
+            "label": "Larry",
+            "correct": true
+          },
+          {
+            "label": "Ian",
+            "correct": false
+          },
+          {
+            "label": "Benny",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

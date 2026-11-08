@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0245-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de la Finlande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Copenhague",
+            "correct": false
+          },
+          {
+            "label": "Oslo",
+            "correct": false
+          },
+          {
+            "label": "Helsinki",
+            "correct": true
+          },
+          {
+            "label": "Stockholm",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0251-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de la Bulgarie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bucarest",
+            "correct": false
+          },
+          {
+            "label": "Belgrade",
+            "correct": false
+          },
+          {
+            "label": "Budapest",
+            "correct": false
+          },
+          {
+            "label": "Sofia",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0263-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale du Danemark ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Helsinki",
+            "correct": false
+          },
+          {
+            "label": "Copenhague",
+            "correct": true
+          },
+          {
+            "label": "Oslo",
+            "correct": false
+          },
+          {
+            "label": "Stockholm",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0269-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de Chypre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ankara",
+            "correct": false
+          },
+          {
+            "label": "Athènes",
+            "correct": false
+          },
+          {
+            "label": "Nicosie",
+            "correct": true
+          },
+          {
+            "label": "La Valette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0275-1",
+      "type": "mcq",
+      "prompt": "Quelle ville est la capitale de la République d'Irlande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cork",
+            "correct": false
+          },
+          {
+            "label": "Galway",
+            "correct": false
+          },
+          {
+            "label": "Belfast",
+            "correct": false
+          },
+          {
+            "label": "Dublin",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0341-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de la Roumanie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Belgrade",
+            "correct": false
+          },
+          {
+            "label": "Budapest",
+            "correct": false
+          },
+          {
+            "label": "Sofia",
+            "correct": false
+          },
+          {
+            "label": "Bucarest",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0347-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale du Luxembourg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Metz",
+            "correct": false
+          },
+          {
+            "label": "Bruxelles",
+            "correct": false
+          },
+          {
+            "label": "Luxembourg",
+            "correct": true
+          },
+          {
+            "label": "Strasbourg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0421-2",
+      "type": "mcq",
+      "prompt": "Quelle ville est la capitale et la plus grande ville du Japon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Séoul",
+            "correct": false
+          },
+          {
+            "label": "Tokyo",
+            "correct": true
+          },
+          {
+            "label": "Pékin",
+            "correct": false
+          },
+          {
+            "label": "Bangkok",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0268-4",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de la Nouvelle-Zélande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Winnipeg",
+            "correct": false
+          },
+          {
+            "label": "Worcester",
+            "correct": false
+          },
+          {
+            "label": "Wellington",
+            "correct": true
+          },
+          {
+            "label": "Washington",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0304-1",
+      "type": "mcq",
+      "prompt": "Quelle capitale de la Croatie compte près de 700 000 habitants ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zaria",
+            "correct": false
+          },
+          {
+            "label": "Zaporijia",
+            "correct": false
+          },
+          {
+            "label": "Zagreb",
+            "correct": true
+          },
+          {
+            "label": "Zaragoza",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0256-3",
+      "type": "mcq",
+      "prompt": "Quelle ville est depuis 1596 la capitale de la Pologne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vilnius",
+            "correct": false
+          },
+          {
+            "label": "Vaduz",
+            "correct": false
+          },
+          {
+            "label": "Vienne",
+            "correct": false
+          },
+          {
+            "label": "Varsovie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0172-3",
+      "type": "mcq",
+      "prompt": "Quelle capitale de la Norvège s'est appelée Christiania de 1624 à 1924 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oulan Bator",
+            "correct": false
+          },
+          {
+            "label": "Oxford",
+            "correct": false
+          },
+          {
+            "label": "Oslo",
+            "correct": true
+          },
+          {
+            "label": "Ottawa",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0554-2",
+      "type": "mcq",
+      "prompt": "Dans quel pays se trouve Ankara, aux origines très anciennes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Turquie",
+            "correct": true
+          },
+          {
+            "label": "Inde",
+            "correct": false
+          },
+          {
+            "label": "Birmanie",
+            "correct": false
+          },
+          {
+            "label": "Pakistan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0435-1",
+      "type": "mcq",
+      "prompt": "Dans quel pays se situe le canal de Suez ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tunisie",
+            "correct": false
+          },
+          {
+            "label": "Algérie",
+            "correct": false
+          },
+          {
+            "label": "Égypte",
+            "correct": true
+          },
+          {
+            "label": "Libye",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0424-1",
+      "type": "mcq",
+      "prompt": "Quel était l'ancien nom du Sri Lanka ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ceylan",
+            "correct": true
+          },
+          {
+            "label": "Formose",
+            "correct": false
+          },
+          {
+            "label": "Batavia",
+            "correct": false
+          },
+          {
+            "label": "Cipango",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0424-2",
+      "type": "mcq",
+      "prompt": "À quel pays est rattachée la Tasmanie et ses mille petites îles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Royaume-Uni",
+            "correct": false
+          },
+          {
+            "label": "Nouvelle-Zélande",
+            "correct": false
+          },
+          {
+            "label": "Australie",
+            "correct": true
+          },
+          {
+            "label": "France",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0424-3",
+      "type": "mcq",
+      "prompt": "Avec quel pays la France partage-t-elle l'île de Saint-Martin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Danemark",
+            "correct": false
+          },
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Pays-Bas",
+            "correct": true
+          },
+          {
+            "label": "Royaume-Uni",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0341-3",
+      "type": "mcq",
+      "prompt": "Quel célèbre personnage est associé à la Roumanie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dracula",
+            "correct": true
+          },
+          {
+            "label": "Tarzan",
+            "correct": false
+          },
+          {
+            "label": "Sherlock Holmes",
+            "correct": false
+          },
+          {
+            "label": "Harry Potter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0245-4",
+      "type": "mcq",
+      "prompt": "Avec quel pays la Finlande partage-t-elle sa plus grande frontière ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Estonie",
+            "correct": false
+          },
+          {
+            "label": "Suède",
+            "correct": false
+          },
+          {
+            "label": "Norvège",
+            "correct": false
+          },
+          {
+            "label": "Russie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0263-3",
+      "type": "mcq",
+      "prompt": "De quelle région le Danemark fait-il partie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Balkans",
+            "correct": false
+          },
+          {
+            "label": "Maghreb",
+            "correct": false
+          },
+          {
+            "label": "Andes",
+            "correct": false
+          },
+          {
+            "label": "Scandinavie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-capitales-et-pays",
+      "title": "Capitales et pays",
+      "description": "D'après des questions OpenQuizzDB de Philippe Bresoux.",
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0245-1",
+        "oqdb-0251-1",
+        "oqdb-0263-1",
+        "oqdb-0269-1",
+        "oqdb-0275-1",
+        "oqdb-0341-1",
+        "oqdb-0347-1",
+        "oqdb-0421-2",
+        "oqdb-0268-4",
+        "oqdb-0304-1",
+        "oqdb-0256-3",
+        "oqdb-0172-3",
+        "oqdb-0554-2",
+        "oqdb-0435-1",
+        "oqdb-0424-1",
+        "oqdb-0424-2",
+        "oqdb-0424-3",
+        "oqdb-0341-3",
+        "oqdb-0245-4",
+        "oqdb-0263-3"
+      ]
+    }
+  ]
+}

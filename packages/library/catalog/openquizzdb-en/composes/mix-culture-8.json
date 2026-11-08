@@ -1,0 +1,474 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0528-1-en",
+      "type": "mcq",
+      "prompt": "Which gentleman is in charge of a monarch's bedchamber service?",
+      "payload": {
+        "options": [
+          {
+            "label": "Auguste",
+            "correct": false
+          },
+          {
+            "label": "Master of the Hunt",
+            "correct": false
+          },
+          {
+            "label": "Chamberlain",
+            "correct": true
+          },
+          {
+            "label": "Constable",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0318-2-en",
+      "type": "mcq",
+      "prompt": "Which rubber giraffe toy for babies appeared in 1961?",
+      "payload": {
+        "options": [
+          {
+            "label": "Barbie",
+            "correct": false
+          },
+          {
+            "label": "Mimie",
+            "correct": false
+          },
+          {
+            "label": "Sophie",
+            "correct": true
+          },
+          {
+            "label": "Noémie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0456-4-en",
+      "type": "mcq",
+      "prompt": "Which Italian scientist discovered the principle of the electric battery?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bugatti",
+            "correct": false
+          },
+          {
+            "label": "Volta",
+            "correct": true
+          },
+          {
+            "label": "Turriano",
+            "correct": false
+          },
+          {
+            "label": "Marconi",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0463-3-en",
+      "type": "mcq",
+      "prompt": "In what year did Eddy Merckx win his first Tour de France?",
+      "payload": {
+        "options": [
+          {
+            "label": "1967",
+            "correct": false
+          },
+          {
+            "label": "1971",
+            "correct": false
+          },
+          {
+            "label": "1965",
+            "correct": false
+          },
+          {
+            "label": "1969",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0196-2-en",
+      "type": "mcq",
+      "prompt": "Which city was the cradle of French civilization in America?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quévy",
+            "correct": false
+          },
+          {
+            "label": "Quiberville",
+            "correct": false
+          },
+          {
+            "label": "Quito",
+            "correct": false
+          },
+          {
+            "label": "Quebec City",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0348-2-en",
+      "type": "mcq",
+      "prompt": "Which colors mark the long-distance hiking trails (GR)?",
+      "payload": {
+        "options": [
+          {
+            "label": "Green and gray",
+            "correct": false
+          },
+          {
+            "label": "Red and white",
+            "correct": true
+          },
+          {
+            "label": "Yellow and red",
+            "correct": false
+          },
+          {
+            "label": "Blue and green",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0277-1-en",
+      "type": "mcq",
+      "prompt": "What color is the paprika used in cooking?",
+      "payload": {
+        "options": [
+          {
+            "label": "Red",
+            "correct": true
+          },
+          {
+            "label": "Yellow",
+            "correct": false
+          },
+          {
+            "label": "White",
+            "correct": false
+          },
+          {
+            "label": "Green",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0268-3-en",
+      "type": "mcq",
+      "prompt": "Who is Logan in the Marvel Comics series \"X-Men\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wyatt Earp",
+            "correct": false
+          },
+          {
+            "label": "Wukong",
+            "correct": false
+          },
+          {
+            "label": "Woody",
+            "correct": false
+          },
+          {
+            "label": "Wolverine",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0275-2-en",
+      "type": "mcq",
+      "prompt": "Which symbol is traditionally associated with Ireland?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lion",
+            "correct": false
+          },
+          {
+            "label": "Star",
+            "correct": false
+          },
+          {
+            "label": "Eagle",
+            "correct": false
+          },
+          {
+            "label": "Shamrock",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0309-4-en",
+      "type": "mcq",
+      "prompt": "Which instrument did John Lennon play in the Beatles?",
+      "payload": {
+        "options": [
+          {
+            "label": "Drums",
+            "correct": false
+          },
+          {
+            "label": "Guitar",
+            "correct": true
+          },
+          {
+            "label": "Keyboard",
+            "correct": false
+          },
+          {
+            "label": "Saxophone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0231-1-en",
+      "type": "mcq",
+      "prompt": "In \"Star Trek\", which fleet is tied to the United Federation of Planets?",
+      "payload": {
+        "options": [
+          {
+            "label": "FedCon",
+            "correct": false
+          },
+          {
+            "label": "Starfleet",
+            "correct": true
+          },
+          {
+            "label": "Cardassia",
+            "correct": false
+          },
+          {
+            "label": "Klingon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0357-2-en",
+      "type": "mcq",
+      "prompt": "In France, in which team sport do you win the Bouclier de Brennus?",
+      "payload": {
+        "options": [
+          {
+            "label": "Basketball",
+            "correct": false
+          },
+          {
+            "label": "Football",
+            "correct": false
+          },
+          {
+            "label": "Handball",
+            "correct": false
+          },
+          {
+            "label": "Rugby",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0100-4-en",
+      "type": "mcq",
+      "prompt": "Which English word does the letter I in the acronym CIA stand for?",
+      "payload": {
+        "options": [
+          {
+            "label": "International",
+            "correct": false
+          },
+          {
+            "label": "Institutional",
+            "correct": false
+          },
+          {
+            "label": "Intelligence",
+            "correct": true
+          },
+          {
+            "label": "Instrumental",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0179-4-en",
+      "type": "mcq",
+      "prompt": "Which film revisits the rivalry between James Hunt and Niki Lauda?",
+      "payload": {
+        "options": [
+          {
+            "label": "Backdraft",
+            "correct": false
+          },
+          {
+            "label": "Ransom",
+            "correct": false
+          },
+          {
+            "label": "Rush",
+            "correct": true
+          },
+          {
+            "label": "Made in America",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0053-3-en",
+      "type": "mcq",
+      "prompt": "Which country is Sean Connery from?",
+      "payload": {
+        "options": [
+          {
+            "label": "United States",
+            "correct": false
+          },
+          {
+            "label": "Ireland",
+            "correct": false
+          },
+          {
+            "label": "Scotland",
+            "correct": true
+          },
+          {
+            "label": "England",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0416-2-en",
+      "type": "mcq",
+      "prompt": "Besides the wild boar, which species is emblematic of Chambord?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rabbit",
+            "correct": false
+          },
+          {
+            "label": "Ostrich",
+            "correct": false
+          },
+          {
+            "label": "Deer",
+            "correct": true
+          },
+          {
+            "label": "Lemur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=215"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0215-1-en",
+      "type": "mcq",
+      "prompt": "In which film does Johnny Depp upload his consciousness after death?",
+      "payload": {
+        "options": [
+          {
+            "label": "Renaissance",
+            "correct": false
+          },
+          {
+            "label": "Transcendence",
+            "correct": true
+          },
+          {
+            "label": "Aeon Flux",
+            "correct": false
+          },
+          {
+            "label": "The Island",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0215-4-en",
+      "type": "mcq",
+      "prompt": "Which fantasy-loving director has often worked with Johnny Depp?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gus Van Sant",
+            "correct": false
+          },
+          {
+            "label": "David Lynch",
+            "correct": false
+          },
+          {
+            "label": "John Boorman",
+            "correct": false
+          },
+          {
+            "label": "Tim Burton",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

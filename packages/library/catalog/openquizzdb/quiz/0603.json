@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=603"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0603-1",
+      "type": "mcq",
+      "prompt": "Quel sport consiste à envoyer une petite balle blanche dans un trou ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cricket",
+            "correct": false
+          },
+          {
+            "label": "Chistera",
+            "correct": false
+          },
+          {
+            "label": "Croquet",
+            "correct": false
+          },
+          {
+            "label": "Golf",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0603-2",
+      "type": "mcq",
+      "prompt": "Que porte sur la tête le capitaine Haddock, meilleur ami de Tintin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Casque",
+            "correct": false
+          },
+          {
+            "label": "Casquette",
+            "correct": true
+          },
+          {
+            "label": "Turban",
+            "correct": false
+          },
+          {
+            "label": "Chapeau",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0603-3",
+      "type": "mcq",
+      "prompt": "De quelle montagne peuvent parfois sortir des matières brûlantes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Talus",
+            "correct": false
+          },
+          {
+            "label": "Rocher",
+            "correct": false
+          },
+          {
+            "label": "Dune",
+            "correct": false
+          },
+          {
+            "label": "Volcan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

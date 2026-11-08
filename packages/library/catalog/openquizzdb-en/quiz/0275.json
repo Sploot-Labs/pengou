@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=275"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0275-3-en",
+      "type": "mcq",
+      "prompt": "Which iconic drink is consumed in Ireland?",
+      "payload": {
+        "options": [
+          {
+            "label": "Guinness",
+            "correct": true
+          },
+          {
+            "label": "Tequila",
+            "correct": false
+          },
+          {
+            "label": "Champagne",
+            "correct": false
+          },
+          {
+            "label": "Sake",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

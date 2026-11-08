@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=267"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0267-2-en",
+      "type": "mcq",
+      "prompt": "Which gymnast scored the first perfect 10 at the Olympics?",
+      "payload": {
+        "options": [
+          {
+            "label": "Diana Mocanu",
+            "correct": false
+          },
+          {
+            "label": "Nadia Comaneci",
+            "correct": true
+          },
+          {
+            "label": "Doina Ignat",
+            "correct": false
+          },
+          {
+            "label": "Tatiana Gutsu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

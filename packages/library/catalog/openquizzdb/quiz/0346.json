@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=346"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0346-1",
+      "type": "mcq",
+      "prompt": "À quel groupe agroalimentaire français appartient la marque Volvic ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sodebo",
+            "correct": false
+          },
+          {
+            "label": "Régilait",
+            "correct": false
+          },
+          {
+            "label": "Danone",
+            "correct": true
+          },
+          {
+            "label": "Lactalis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0346-2",
+      "type": "mcq",
+      "prompt": "Quelle est l'eau minérale naturelle des Côtes-d'Armor, en Bretagne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aproz",
+            "correct": false
+          },
+          {
+            "label": "Asperjoc",
+            "correct": false
+          },
+          {
+            "label": "Edelvia",
+            "correct": false
+          },
+          {
+            "label": "Plancoët",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0346-3",
+      "type": "mcq",
+      "prompt": "Quel pays européen est le plus gros consommateur d'eau en bouteille ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Allemagne",
+            "correct": false
+          },
+          {
+            "label": "Espagne",
+            "correct": false
+          },
+          {
+            "label": "Belgique",
+            "correct": false
+          },
+          {
+            "label": "Italie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0346-4",
+      "type": "mcq",
+      "prompt": "L'eau Vichy Célestins est réputée pour sa forte teneur en quel métal ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Calcium",
+            "correct": false
+          },
+          {
+            "label": "Sodium",
+            "correct": true
+          },
+          {
+            "label": "Potassium",
+            "correct": false
+          },
+          {
+            "label": "Magnésium",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

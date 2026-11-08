@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=310"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0310-1",
+      "type": "mcq",
+      "prompt": "Où se trouvent les « lunettes » du serpent à lunettes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sur le ventre",
+            "correct": false
+          },
+          {
+            "label": "Sur le cou",
+            "correct": true
+          },
+          {
+            "label": "Sur la queue",
+            "correct": false
+          },
+          {
+            "label": "Sur la langue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0310-2",
+      "type": "mcq",
+      "prompt": "Quel est le plus grand serpent venimeux du monde de par sa longueur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Python réticulé",
+            "correct": false
+          },
+          {
+            "label": "Grand anaconda",
+            "correct": false
+          },
+          {
+            "label": "Mamba noir",
+            "correct": false
+          },
+          {
+            "label": "Cobra royal",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

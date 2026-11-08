@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=367"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0367-1",
+      "type": "mcq",
+      "prompt": "Quel nutriment est particulièrement présent dans les amandes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fer",
+            "correct": false
+          },
+          {
+            "label": "Vitamine C",
+            "correct": false
+          },
+          {
+            "label": "Vitamine E",
+            "correct": true
+          },
+          {
+            "label": "Protéines",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0367-2",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur la plus fréquente de la fleur de l'amandier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bleue",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          },
+          {
+            "label": "Blanche",
+            "correct": true
+          },
+          {
+            "label": "Jaune citron",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0367-3",
+      "type": "mcq",
+      "prompt": "Quelle utilisation culinaire est courante pour les amandes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pain sans farine",
+            "correct": false
+          },
+          {
+            "label": "Fromage",
+            "correct": false
+          },
+          {
+            "label": "Vinaigre",
+            "correct": false
+          },
+          {
+            "label": "Lait végétal",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

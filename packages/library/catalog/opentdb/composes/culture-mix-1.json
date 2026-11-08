@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "Open Trivia Database",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-0741d591f209",
+      "type": "mcq",
+      "prompt": "The painting \"Guernica\" by Pablo Picasso expressed emotions of dread in response to which war?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spanish Civil War",
+            "correct": true
+          },
+          {
+            "label": "The Crimean War",
+            "correct": false
+          },
+          {
+            "label": "Spanish-American War",
+            "correct": false
+          },
+          {
+            "label": "World War I",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-13441e05cea3",
+      "type": "mcq",
+      "prompt": "What's the first National Park designated in the United States?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rocky Mountain",
+            "correct": false
+          },
+          {
+            "label": "Yellowstone",
+            "correct": true
+          },
+          {
+            "label": "Sequoia",
+            "correct": false
+          },
+          {
+            "label": "Yosemite",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-193c690740c9",
+      "type": "mcq",
+      "prompt": "What is the colour of unoxidized blood?",
+      "payload": {
+        "options": [
+          {
+            "label": "Green",
+            "correct": false
+          },
+          {
+            "label": "Red",
+            "correct": true
+          },
+          {
+            "label": "Blue",
+            "correct": false
+          },
+          {
+            "label": "Purple",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2599d598ad3e",
+      "type": "mcq",
+      "prompt": "Coulrophobia is the irrational fear of what?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cemeteries",
+            "correct": false
+          },
+          {
+            "label": "Tunnels",
+            "correct": false
+          },
+          {
+            "label": "Clowns",
+            "correct": true
+          },
+          {
+            "label": "Needles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3404f5b69fbd",
+      "type": "mcq",
+      "prompt": "What is the name of Poland in Polish?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pupcia",
+            "correct": false
+          },
+          {
+            "label": "Póland",
+            "correct": false
+          },
+          {
+            "label": "Polszka",
+            "correct": false
+          },
+          {
+            "label": "Polska",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4178f636400b",
+      "type": "mcq",
+      "prompt": "In the Super Mario Bros. Movie (2023), who plays Toad?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jack Black",
+            "correct": false
+          },
+          {
+            "label": "Keegan-Michael Key",
+            "correct": true
+          },
+          {
+            "label": "Charlie Day",
+            "correct": false
+          },
+          {
+            "label": "Seth Rogan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-42ca7eb8bb08",
+      "type": "mcq",
+      "prompt": "What is another name for La Gioconda / La Joconde?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Starry Night",
+            "correct": false
+          },
+          {
+            "label": "The Girl with a Pearl Earring",
+            "correct": false
+          },
+          {
+            "label": "Sunflowers",
+            "correct": false
+          },
+          {
+            "label": "The Mona Lisa",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-563a9a53de95",
+      "type": "mcq",
+      "prompt": "How many moons does the Earth have?",
+      "payload": {
+        "options": [
+          {
+            "label": "2",
+            "correct": false
+          },
+          {
+            "label": "1",
+            "correct": true
+          },
+          {
+            "label": "3",
+            "correct": false
+          },
+          {
+            "label": "0",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5a5fd49201a7",
+      "type": "mcq",
+      "prompt": "How many soccer players should be on the field at the same time?",
+      "payload": {
+        "options": [
+          {
+            "label": "22",
+            "correct": true
+          },
+          {
+            "label": "26",
+            "correct": false
+          },
+          {
+            "label": "20",
+            "correct": false
+          },
+          {
+            "label": "24",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7dd44ebccdca",
+      "type": "mcq",
+      "prompt": "Which country was NOT part of the Soviet Union?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tajikistan",
+            "correct": false
+          },
+          {
+            "label": "Belarus",
+            "correct": false
+          },
+          {
+            "label": "Turkmenistan",
+            "correct": false
+          },
+          {
+            "label": "Romania",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-862aa8926bd9",
+      "type": "mcq",
+      "prompt": "What is the world's oldest known piece of fiction?",
+      "payload": {
+        "options": [
+          {
+            "label": "Papyrus of Ani",
+            "correct": false
+          },
+          {
+            "label": "Code of Hammurabi",
+            "correct": false
+          },
+          {
+            "label": "Epic of Gilgamesh",
+            "correct": true
+          },
+          {
+            "label": "Rosetta Stone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8d62f2070dca",
+      "type": "mcq",
+      "prompt": "When did construction of the Suez Canal finish?",
+      "payload": {
+        "options": [
+          {
+            "label": "1869",
+            "correct": true
+          },
+          {
+            "label": "1859",
+            "correct": false
+          },
+          {
+            "label": "1850",
+            "correct": false
+          },
+          {
+            "label": "1860",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9704a17e4f77",
+      "type": "mcq",
+      "prompt": "Which of the following is NOT a venomous snake?",
+      "payload": {
+        "options": [
+          {
+            "label": "Black mamba",
+            "correct": false
+          },
+          {
+            "label": "Yellow bellied sea snake",
+            "correct": false
+          },
+          {
+            "label": "Malayan Krait",
+            "correct": false
+          },
+          {
+            "label": "Reticulated python",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9a434d9626bb",
+      "type": "mcq",
+      "prompt": "Which US state is nicknamed \"The Golden State\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alaska",
+            "correct": false
+          },
+          {
+            "label": "New Mexico",
+            "correct": false
+          },
+          {
+            "label": "Florida",
+            "correct": false
+          },
+          {
+            "label": "California",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-abcd50db1083",
+      "type": "mcq",
+      "prompt": "What is the largest living species of penguin?",
+      "payload": {
+        "options": [
+          {
+            "label": "King",
+            "correct": false
+          },
+          {
+            "label": "Gentoo",
+            "correct": false
+          },
+          {
+            "label": "Adele",
+            "correct": false
+          },
+          {
+            "label": "Emperor",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ca9bec94ddd3",
+      "type": "mcq",
+      "prompt": "How would one say goodbye in Spanish?",
+      "payload": {
+        "options": [
+          {
+            "label": "Adiós",
+            "correct": true
+          },
+          {
+            "label": "Salir",
+            "correct": false
+          },
+          {
+            "label": "Au Revoir",
+            "correct": false
+          },
+          {
+            "label": "Hola",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-cb638e5b5d6a",
+      "type": "mcq",
+      "prompt": "The idea of Socialism was articulated and advanced by whom?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joseph Stalin",
+            "correct": false
+          },
+          {
+            "label": "Karl Marx",
+            "correct": true
+          },
+          {
+            "label": "Vladimir Lenin",
+            "correct": false
+          },
+          {
+            "label": "Vladimir Putin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e6d85b2d35fa",
+      "type": "mcq",
+      "prompt": "Who wrote the children's story \"The Little Match Girl\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hans Christian Andersen",
+            "correct": true
+          },
+          {
+            "label": "Lewis Carroll",
+            "correct": false
+          },
+          {
+            "label": "Charles Dickens",
+            "correct": false
+          },
+          {
+            "label": "Oscar Wilde",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e846d67ed6c1",
+      "type": "mcq",
+      "prompt": "What mineral has the lowest number on the Mohs scale?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quartz",
+            "correct": false
+          },
+          {
+            "label": "Diamond",
+            "correct": false
+          },
+          {
+            "label": "Gypsum",
+            "correct": false
+          },
+          {
+            "label": "Talc",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e8d26e093a84",
+      "type": "mcq",
+      "prompt": "When was the Declaration of Independence approved by the Second Continental Congress?",
+      "payload": {
+        "options": [
+          {
+            "label": "June 4, 1776",
+            "correct": false
+          },
+          {
+            "label": "July 2, 1776",
+            "correct": false
+          },
+          {
+            "label": "July 4, 1776",
+            "correct": true
+          },
+          {
+            "label": "May 4, 1776",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-culture-mix-1",
+      "title": "Culture mix #1",
+      "description": "A mix of geography, history, science, nature, books and art questions.",
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-862aa8926bd9",
+        "otdb-5a5fd49201a7",
+        "otdb-42ca7eb8bb08",
+        "otdb-abcd50db1083",
+        "otdb-0741d591f209",
+        "otdb-2599d598ad3e",
+        "otdb-e8d26e093a84",
+        "otdb-9704a17e4f77",
+        "otdb-4178f636400b",
+        "otdb-e6d85b2d35fa",
+        "otdb-193c690740c9",
+        "otdb-13441e05cea3",
+        "otdb-7dd44ebccdca",
+        "otdb-3404f5b69fbd",
+        "otdb-8d62f2070dca",
+        "otdb-9a434d9626bb",
+        "otdb-563a9a53de95",
+        "otdb-ca9bec94ddd3",
+        "otdb-cb638e5b5d6a",
+        "otdb-e846d67ed6c1"
+      ]
+    }
+  ]
+}

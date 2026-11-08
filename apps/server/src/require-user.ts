@@ -3,10 +3,17 @@ import { fromNodeHeaders } from 'better-auth/node'
 import { resolveTenantId, getMembershipRole, TenantAccessDeniedError, type Db } from '@splootlabs/db'
 import { hasPermission, type AppConfig } from '@splootlabs/shared'
 import type { Auth } from '@splootlabs/auth'
+import { termsAcceptanceRequired, TERMS_REQUIRED_BODY } from './legal.js'
 
 declare module 'fastify' {
-  interface FastifyRequest { user: { id: string; email: string } }
-  interface FastifyInstance { auth: Auth }
+  interface FastifyRequest {
+    user: { id: string; email: string; name: string; emailVerified: boolean }
+  }
+  interface FastifyInstance {
+    auth: Auth
+    /** Version courante des CGU (LEGAL_TERMS_VERSION), `null` si la fonction est désactivée. */
+    legalTermsVersion: string | null
+  }
 }
 
 /** Contexte tenant résolu pour une requête : le tenant applicable + `ownerId` role-aware
@@ -14,14 +21,34 @@ declare module 'fastify' {
  * un scope RLS via `withTenantTx(appDb, context, …)`. */
 export type TenantContext = { tenantId: string; ownerId?: string }
 
-export function registerRequireUser(app: FastifyInstance, auth: Auth): void {
+export function registerRequireUser(app: FastifyInstance, auth: Auth, termsVersion: string | null = null): void {
   if (!app.hasDecorator('auth')) app.decorate('auth', auth)
+  if (!app.hasDecorator('legalTermsVersion')) app.decorate('legalTermsVersion', termsVersion)
 }
 
+/**
+ * preHandler de toutes les routes protégées : session requise (401), puis CGU courantes acceptées
+ * (403 `TERMS_ACCEPTANCE_REQUIRED`). Restent hors de ce garde la lecture de session (`/api/me`,
+ * `/api/auth/*`), la déconnexion et `POST /api/legal/accept`. Les sockets de jeu n'y passent pas
+ * non plus : un hôte en pleine partie n'est jamais coupé, et les joueurs n'ont pas de compte.
+ */
 export async function requireUser(request: FastifyRequest, reply: FastifyReply): Promise<void> {
   const session = await request.server.auth.api.getSession({ headers: fromNodeHeaders(request.headers) })
-  if (!session?.user) { reply.code(401).send({ error: 'Non authentifié.' }); return }
-  request.user = { id: session.user.id, email: session.user.email }
+  if (!session?.user) {
+    reply.code(401).send({ error: 'Non authentifié.' })
+    return
+  }
+  const currentVersion = request.server.hasDecorator('legalTermsVersion') ? request.server.legalTermsVersion : null
+  if (termsAcceptanceRequired(session.user, currentVersion)) {
+    reply.code(403).send(TERMS_REQUIRED_BODY)
+    return
+  }
+  request.user = {
+    id: session.user.id,
+    email: session.user.email,
+    name: session.user.name,
+    emailVerified: session.user.emailVerified === true,
+  }
 }
 
 /**
@@ -38,7 +65,8 @@ export async function resolveTenantContext(
   config: AppConfig,
 ): Promise<TenantContext> {
   if (!request.user?.id) throw new Error('resolveTenantContext requires requireUser preHandler')
-  const explicitTenantId = typeof request.headers['x-tenant-id'] === 'string' ? (request.headers['x-tenant-id'] as string) : undefined
+  const explicitTenantId =
+    typeof request.headers['x-tenant-id'] === 'string' ? (request.headers['x-tenant-id'] as string) : undefined
   const tenantId = await resolveTenantId(systemDb, config, { userId: request.user.id, explicitTenantId })
   const role = (await getMembershipRole(systemDb, request.user.id, tenantId)) ?? 'member'
   const ownerId = hasPermission(role, 'content:access-all') ? undefined : request.user.id

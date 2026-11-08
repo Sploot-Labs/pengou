@@ -184,6 +184,10 @@ Trois briques (le **suivi longitudinal inter-parties est explicitement hors pér
 
 ## 10. Plans & facturation
 
+> Mise à jour du 2026-10-30 : abandonné. Le service hébergé est gratuit pour tout le monde, sans
+> offre payante, et financé par des dons (voir `LICENSING.md`). La colonne `tenant.plan` reste en
+> base mais ne porte aucune limite commerciale. Ce qui suit est conservé pour l'historique.
+
 - **Plans modélisés** (`tenant.plan`, ex. `free` / `pro`) avec des **limites** (ex. nb de quiz, joueurs/partie) et des **garde-fous appliqués** dans le module Web/API.
 - **Facturation Stripe NON branchée** au départ (choix produit). Le module paiement se connectera plus tard sur des plans **déjà modélisés** — connexion triviale, sans refactor.
 

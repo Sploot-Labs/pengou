@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=175"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0175-1-en",
+      "type": "mcq",
+      "prompt": "Which Nestlé brand is George Clooney an ambassador for?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nespresso",
+            "correct": true
+          },
+          {
+            "label": "Ricoré",
+            "correct": false
+          },
+          {
+            "label": "Carte Noire",
+            "correct": false
+          },
+          {
+            "label": "Jacques Vabre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -46,6 +46,7 @@ export function normalizeText(value: string, caseSensitive: boolean): string {
 
 export const text: QuestionTypeDef<TextPayload, TextAnswer> = {
   key: 'text',
+  scored: true,
   validatePayload: (raw) => textSchema.parse(raw),
   validateAnswer: (raw) => answerSchema.parse(raw),
   playerView: () => ({}), // pas de `answers`

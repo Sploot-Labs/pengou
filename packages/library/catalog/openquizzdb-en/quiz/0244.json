@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=244"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0244-1-en",
+      "type": "mcq",
+      "prompt": "Which Irish band is The Edge the lead guitarist of?",
+      "payload": {
+        "options": [
+          {
+            "label": "U2",
+            "correct": true
+          },
+          {
+            "label": "Ugly Kid Joe",
+            "correct": false
+          },
+          {
+            "label": "Uriah Heep",
+            "correct": false
+          },
+          {
+            "label": "UB40",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0244-2-en",
+      "type": "mcq",
+      "prompt": "Which man devised the Trojan Horse?",
+      "payload": {
+        "options": [
+          {
+            "label": "Urbanus",
+            "correct": false
+          },
+          {
+            "label": "Uranus",
+            "correct": false
+          },
+          {
+            "label": "Uther",
+            "correct": false
+          },
+          {
+            "label": "Ulysses",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0244-4-en",
+      "type": "mcq",
+      "prompt": "Which musical instrument is nicknamed the \"Hawaiian guitar\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Udu",
+            "correct": false
+          },
+          {
+            "label": "Upa",
+            "correct": false
+          },
+          {
+            "label": "Ukulele",
+            "correct": true
+          },
+          {
+            "label": "Ugal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

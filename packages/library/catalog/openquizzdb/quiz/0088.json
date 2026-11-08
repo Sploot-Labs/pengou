@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=88"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0088-1",
+      "type": "mcq",
+      "prompt": "Quel format de codage est couramment utilisé dans les pages internet ?",
+      "payload": {
+        "options": [
+          {
+            "label": "HDMI",
+            "correct": false
+          },
+          {
+            "label": "HERTZ",
+            "correct": false
+          },
+          {
+            "label": "HTML",
+            "correct": true
+          },
+          {
+            "label": "HTTP",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0088-3",
+      "type": "mcq",
+      "prompt": "Quelle ville est également la capitale de la Finlande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Helsinki",
+            "correct": true
+          },
+          {
+            "label": "Hanovre",
+            "correct": false
+          },
+          {
+            "label": "Huelva",
+            "correct": false
+          },
+          {
+            "label": "Halifax",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

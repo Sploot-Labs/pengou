@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=372"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0372-1-en",
+      "type": "mcq",
+      "prompt": "Which confection is an apple coated in cooked sugar?",
+      "payload": {
+        "options": [
+          {
+            "label": "Candy apple",
+            "correct": true
+          },
+          {
+            "label": "Tarte Tatin",
+            "correct": false
+          },
+          {
+            "label": "Crumble",
+            "correct": false
+          },
+          {
+            "label": "Apfelstrudel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0372-2-en",
+      "type": "mcq",
+      "prompt": "Which dessert consists of apples in batter fried in oil?",
+      "payload": {
+        "options": [
+          {
+            "label": "Clafoutis",
+            "correct": false
+          },
+          {
+            "label": "Apple fritter",
+            "correct": true
+          },
+          {
+            "label": "Tarte Tatin",
+            "correct": false
+          },
+          {
+            "label": "Crumble",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0372-3-en",
+      "type": "mcq",
+      "prompt": "Which traditional Austrian pastry is made with apples?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tarte Tatin",
+            "correct": false
+          },
+          {
+            "label": "Croustade",
+            "correct": false
+          },
+          {
+            "label": "Crumble",
+            "correct": false
+          },
+          {
+            "label": "Apfelstrudel",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

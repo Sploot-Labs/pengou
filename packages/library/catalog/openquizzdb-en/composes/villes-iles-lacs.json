@@ -1,0 +1,416 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0360-1-en",
+      "type": "mcq",
+      "prompt": "What is the capital of Cuba, famous for its cigars?",
+      "payload": {
+        "options": [
+          {
+            "label": "Santa Clara",
+            "correct": false
+          },
+          {
+            "label": "Guantanamo",
+            "correct": false
+          },
+          {
+            "label": "Havana",
+            "correct": true
+          },
+          {
+            "label": "Santiago de Cuba",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0360-2-en",
+      "type": "mcq",
+      "prompt": "Both a city and a province, of which country is Bangkok the capital?",
+      "payload": {
+        "options": [
+          {
+            "label": "Laos",
+            "correct": false
+          },
+          {
+            "label": "Thailand",
+            "correct": true
+          },
+          {
+            "label": "Malaysia",
+            "correct": false
+          },
+          {
+            "label": "Myanmar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0360-3-en",
+      "type": "mcq",
+      "prompt": "In which city are there the most taxis in the world?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mexico City",
+            "correct": true
+          },
+          {
+            "label": "New York",
+            "correct": false
+          },
+          {
+            "label": "London",
+            "correct": false
+          },
+          {
+            "label": "Tokyo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0360-4-en",
+      "type": "mcq",
+      "prompt": "In which densely populated country is Calcutta located?",
+      "payload": {
+        "options": [
+          {
+            "label": "Myanmar",
+            "correct": false
+          },
+          {
+            "label": "Brazil",
+            "correct": false
+          },
+          {
+            "label": "Bangladesh",
+            "correct": false
+          },
+          {
+            "label": "India",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0542-2-en",
+      "type": "mcq",
+      "prompt": "Which city in southwestern France is known for its famous prunes?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pau",
+            "correct": false
+          },
+          {
+            "label": "Bergerac",
+            "correct": false
+          },
+          {
+            "label": "Agen",
+            "correct": true
+          },
+          {
+            "label": "Bayonne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0542-4-en",
+      "type": "mcq",
+      "prompt": "Which French city is nicknamed \"the Phocaean City\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nantes",
+            "correct": false
+          },
+          {
+            "label": "Bordeaux",
+            "correct": false
+          },
+          {
+            "label": "Nice",
+            "correct": false
+          },
+          {
+            "label": "Marseille",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0428-1-en",
+      "type": "mcq",
+      "prompt": "Located in the Ionian Sea, which country does the island of Corfu belong to?",
+      "payload": {
+        "options": [
+          {
+            "label": "Greece",
+            "correct": true
+          },
+          {
+            "label": "Italy",
+            "correct": false
+          },
+          {
+            "label": "Croatia",
+            "correct": false
+          },
+          {
+            "label": "Albania",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0428-2-en",
+      "type": "mcq",
+      "prompt": "On which island did the mutineers of the Royal Navy's Bounty take refuge?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pitcairn",
+            "correct": true
+          },
+          {
+            "label": "Nauru",
+            "correct": false
+          },
+          {
+            "label": "Cook",
+            "correct": false
+          },
+          {
+            "label": "Moorea",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0428-3-en",
+      "type": "mcq",
+      "prompt": "In which ocean is the island of Mayotte, in the Comoros archipelago?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pacific",
+            "correct": false
+          },
+          {
+            "label": "Atlantic",
+            "correct": false
+          },
+          {
+            "label": "Arctic",
+            "correct": false
+          },
+          {
+            "label": "Indian",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0428-4-en",
+      "type": "mcq",
+      "prompt": "Which country do the Galapagos Islands, in the Pacific, belong to?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peru",
+            "correct": false
+          },
+          {
+            "label": "Colombia",
+            "correct": false
+          },
+          {
+            "label": "Ecuador",
+            "correct": true
+          },
+          {
+            "label": "Venezuela",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0091-1-en",
+      "type": "mcq",
+      "prompt": "What is another name for Lake Geneva?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lake Como",
+            "correct": false
+          },
+          {
+            "label": "Lake Lugano",
+            "correct": false
+          },
+          {
+            "label": "Lake Léman",
+            "correct": true
+          },
+          {
+            "label": "Lake Maggiore",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0091-2-en",
+      "type": "mcq",
+      "prompt": "Which lake holds the largest freshwater reserve in the world?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lake Titicaca",
+            "correct": false
+          },
+          {
+            "label": "Lake Baikal",
+            "correct": true
+          },
+          {
+            "label": "Lake Erie",
+            "correct": false
+          },
+          {
+            "label": "Lake Michigan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0091-3-en",
+      "type": "mcq",
+      "prompt": "Toronto lies on the north shore of which lake?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lake Ontario",
+            "correct": true
+          },
+          {
+            "label": "Lake Huron",
+            "correct": false
+          },
+          {
+            "label": "Lake Erie",
+            "correct": false
+          },
+          {
+            "label": "Lake Michigan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0091-4-en",
+      "type": "mcq",
+      "prompt": "Lake Titicaca forms a border between which countries?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peru and Chile",
+            "correct": false
+          },
+          {
+            "label": "Bolivia and Peru",
+            "correct": true
+          },
+          {
+            "label": "Brazil and Bolivia",
+            "correct": false
+          },
+          {
+            "label": "Chile and Bolivia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

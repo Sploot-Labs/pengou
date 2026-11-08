@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=494"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0494-1",
+      "type": "mcq",
+      "prompt": "Quel écrivain français était surnommé « le pape » du surréalisme ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alain Jouffroy",
+            "correct": false
+          },
+          {
+            "label": "Paul Éluard",
+            "correct": false
+          },
+          {
+            "label": "André Breton",
+            "correct": true
+          },
+          {
+            "label": "Louis Aragon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0494-4",
+      "type": "mcq",
+      "prompt": "Quel poète français fut surnommé « l'homme aux semelles de vent » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rimbaud",
+            "correct": true
+          },
+          {
+            "label": "Mallarmé",
+            "correct": false
+          },
+          {
+            "label": "Verlaine",
+            "correct": false
+          },
+          {
+            "label": "Baudelaire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

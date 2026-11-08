@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=245"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0245-2",
+      "type": "mcq",
+      "prompt": "Quelle langue est principalement parlée en Finlande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Norvégien",
+            "correct": false
+          },
+          {
+            "label": "Finnois",
+            "correct": true
+          },
+          {
+            "label": "Russe",
+            "correct": false
+          },
+          {
+            "label": "Suédois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0245-3",
+      "type": "mcq",
+      "prompt": "Quel animal est souvent associé à la Finlande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Panda",
+            "correct": false
+          },
+          {
+            "label": "Renne",
+            "correct": true
+          },
+          {
+            "label": "Kangourou",
+            "correct": false
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

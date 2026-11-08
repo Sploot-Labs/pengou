@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=500"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0500-1",
+      "type": "mcq",
+      "prompt": "Quel véhicule à cabine circule sur les routes enneigées ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Autoneige",
+            "correct": true
+          },
+          {
+            "label": "Téléphérique",
+            "correct": false
+          },
+          {
+            "label": "Aéroglisseur",
+            "correct": false
+          },
+          {
+            "label": "Chasse-neige",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0500-4",
+      "type": "mcq",
+      "prompt": "Quelle motocyclette est pourvue d'une troisième roue et d'un panier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Solex",
+            "correct": false
+          },
+          {
+            "label": "Coccinelle",
+            "correct": false
+          },
+          {
+            "label": "Tandem",
+            "correct": false
+          },
+          {
+            "label": "Side-car",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

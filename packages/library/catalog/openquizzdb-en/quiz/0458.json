@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=458"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0458-2-en",
+      "type": "mcq",
+      "prompt": "Which cake is decorated with little fir trees and figurines?",
+      "payload": {
+        "options": [
+          {
+            "label": "Palet de dame",
+            "correct": false
+          },
+          {
+            "label": "Black Forest cake",
+            "correct": false
+          },
+          {
+            "label": "Galette des Rois",
+            "correct": false
+          },
+          {
+            "label": "Yule log",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0458-4-en",
+      "type": "mcq",
+      "prompt": "In which region of France are the thirteen Christmas desserts eaten?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alsace",
+            "correct": false
+          },
+          {
+            "label": "Auvergne",
+            "correct": false
+          },
+          {
+            "label": "Brittany",
+            "correct": false
+          },
+          {
+            "label": "Provence",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

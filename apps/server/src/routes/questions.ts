@@ -1,5 +1,14 @@
 import type { FastifyInstance } from 'fastify'
-import { createQuestion, listQuestions, getQuestion, updateQuestion, deleteQuestion, reorderQuestions, withTenantTx, type Db } from '@splootlabs/db'
+import {
+  createQuestion,
+  listQuestions,
+  getQuestion,
+  updateQuestion,
+  deleteQuestion,
+  reorderQuestions,
+  withTenantTx,
+  type Db,
+} from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
 import { validateQuestionPayload, questionTypes, type QuestionType } from '@splootlabs/quiz'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
@@ -36,7 +45,14 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       if (!context) return
 
       const body = request.body as
-        | { type?: unknown; prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown }
+        | {
+            type?: unknown
+            prompt?: unknown
+            timeLimit?: unknown
+            readingTime?: unknown
+            payload?: unknown
+            media?: unknown
+          }
         | undefined
 
       if (!isQuestionType(body?.type)) {
@@ -69,18 +85,19 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
         return reply.code(400).send({ error: 'media invalide (URL http(s) ou référence relative attendue).' })
       }
 
-      return withTenantTx(appDb, context, async (scope) => {
-        const question = await createQuestion(scope, request.params.quizId, {
+      // Réponse envoyée APRÈS le COMMIT (hors du callback) : voir POST /api/quizzes.
+      const question = await withTenantTx(appDb, context, (scope) =>
+        createQuestion(scope, request.params.quizId, {
           type: body.type as QuestionType,
           prompt: body.prompt as string,
           timeLimit: body.timeLimit as number,
           readingTime: isNonNegativeInt(body.readingTime) ? body.readingTime : undefined,
           payload: validatedPayload,
           media,
-        })
-        if (!question) return reply.code(404).send({ error: 'Quiz introuvable.' })
-        return reply.code(201).send(question)
-      })
+        }),
+      )
+      if (!question) return reply.code(404).send({ error: 'Quiz introuvable.' })
+      return reply.code(201).send(question)
     },
   )
 
@@ -115,19 +132,29 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
         | { prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown }
         | undefined
 
-      const patch: Partial<{ prompt: string; timeLimit: number; readingTime: number; payload: unknown; media: string | null }> = {}
+      const patch: Partial<{
+        prompt: string
+        timeLimit: number
+        readingTime: number
+        payload: unknown
+        media: string | null
+      }> = {}
 
       if (body?.prompt !== undefined) {
-        if (!isNonEmptyString(body.prompt)) return reply.code(400).send({ error: "L'énoncé (prompt) ne peut pas être vide." })
-        if (tooLong(body.prompt, MAX_PROMPT)) return reply.code(400).send({ error: `L'énoncé est trop long (${MAX_PROMPT} caractères max).` })
+        if (!isNonEmptyString(body.prompt))
+          return reply.code(400).send({ error: "L'énoncé (prompt) ne peut pas être vide." })
+        if (tooLong(body.prompt, MAX_PROMPT))
+          return reply.code(400).send({ error: `L'énoncé est trop long (${MAX_PROMPT} caractères max).` })
         patch.prompt = body.prompt
       }
       if (body?.timeLimit !== undefined) {
-        if (!isPositiveInt(body.timeLimit)) return reply.code(400).send({ error: 'timeLimit doit être un entier positif.' })
+        if (!isPositiveInt(body.timeLimit))
+          return reply.code(400).send({ error: 'timeLimit doit être un entier positif.' })
         patch.timeLimit = body.timeLimit
       }
       if (body?.readingTime !== undefined) {
-        if (!isNonNegativeInt(body.readingTime)) return reply.code(400).send({ error: 'readingTime doit être un entier positif ou nul.' })
+        if (!isNonNegativeInt(body.readingTime))
+          return reply.code(400).send({ error: 'readingTime doit être un entier positif ou nul.' })
         patch.readingTime = body.readingTime
       }
       if (body?.media !== undefined) {
@@ -164,11 +191,11 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
     async (request, reply) => {
       const context = await resolveContextOr403(request, reply, systemDb, config)
       if (!context) return
-      return withTenantTx(appDb, context, async (scope) => {
-        const ok = await deleteQuestion(scope, request.params.quizId, request.params.questionId)
-        if (!ok) return reply.code(404).send({ error: 'Question ou quiz introuvable.' })
-        return reply.code(204).send()
-      })
+      const ok = await withTenantTx(appDb, context, (scope) =>
+        deleteQuestion(scope, request.params.quizId, request.params.questionId),
+      )
+      if (!ok) return reply.code(404).send({ error: 'Question ou quiz introuvable.' })
+      return reply.code(204).send()
     },
   )
 

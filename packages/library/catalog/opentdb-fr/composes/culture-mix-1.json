@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-0741d591f209-fr",
+      "type": "mcq",
+      "prompt": "Le tableau « Guernica » de Pablo Picasso exprime l'effroi suscité par quelle guerre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Guerre civile espagnole",
+            "correct": true
+          },
+          {
+            "label": "Guerre de Crimée",
+            "correct": false
+          },
+          {
+            "label": "Guerre hispano-américaine",
+            "correct": false
+          },
+          {
+            "label": "Première Guerre mondiale",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-13441e05cea3-fr",
+      "type": "mcq",
+      "prompt": "Quel est le premier parc national créé aux États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rocky Mountain",
+            "correct": false
+          },
+          {
+            "label": "Yellowstone",
+            "correct": true
+          },
+          {
+            "label": "Sequoia",
+            "correct": false
+          },
+          {
+            "label": "Yosemite",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-193c690740c9-fr",
+      "type": "mcq",
+      "prompt": "De quelle couleur est le sang non oxygéné ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vert",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": true
+          },
+          {
+            "label": "Bleu",
+            "correct": false
+          },
+          {
+            "label": "Violet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2599d598ad3e-fr",
+      "type": "mcq",
+      "prompt": "La coulrophobie est la peur irrationnelle de quoi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cimetières",
+            "correct": false
+          },
+          {
+            "label": "Tunnels",
+            "correct": false
+          },
+          {
+            "label": "Clowns",
+            "correct": true
+          },
+          {
+            "label": "Aiguilles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3404f5b69fbd-fr",
+      "type": "mcq",
+      "prompt": "Comment la Pologne s'appelle-t-elle en polonais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pupcia",
+            "correct": false
+          },
+          {
+            "label": "Póland",
+            "correct": false
+          },
+          {
+            "label": "Polszka",
+            "correct": false
+          },
+          {
+            "label": "Polska",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4178f636400b-fr",
+      "type": "mcq",
+      "prompt": "Dans « Super Mario Bros., le film » (2023), qui est la voix originale de Toad ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jack Black",
+            "correct": false
+          },
+          {
+            "label": "Keegan-Michael Key",
+            "correct": true
+          },
+          {
+            "label": "Charlie Day",
+            "correct": false
+          },
+          {
+            "label": "Seth Rogen",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-42ca7eb8bb08-fr",
+      "type": "mcq",
+      "prompt": "Quel autre nom porte « La Joconde » (La Gioconda) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Nuit étoilée",
+            "correct": false
+          },
+          {
+            "label": "La Jeune Fille à la perle",
+            "correct": false
+          },
+          {
+            "label": "Les Tournesols",
+            "correct": false
+          },
+          {
+            "label": "Mona Lisa",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-563a9a53de95-fr",
+      "type": "mcq",
+      "prompt": "Combien de lunes la Terre possède-t-elle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2",
+            "correct": false
+          },
+          {
+            "label": "1",
+            "correct": true
+          },
+          {
+            "label": "3",
+            "correct": false
+          },
+          {
+            "label": "0",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5a5fd49201a7-fr",
+      "type": "mcq",
+      "prompt": "Combien de joueurs de football doivent être sur le terrain en même temps ?",
+      "payload": {
+        "options": [
+          {
+            "label": "22",
+            "correct": true
+          },
+          {
+            "label": "26",
+            "correct": false
+          },
+          {
+            "label": "20",
+            "correct": false
+          },
+          {
+            "label": "24",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7dd44ebccdca-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces pays ne faisait pas partie de l'Union soviétique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tadjikistan",
+            "correct": false
+          },
+          {
+            "label": "Biélorussie",
+            "correct": false
+          },
+          {
+            "label": "Turkménistan",
+            "correct": false
+          },
+          {
+            "label": "Roumanie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-862aa8926bd9-fr",
+      "type": "mcq",
+      "prompt": "Quelle est la plus ancienne œuvre de fiction connue au monde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Papyrus d'Ani",
+            "correct": false
+          },
+          {
+            "label": "Code d'Hammurabi",
+            "correct": false
+          },
+          {
+            "label": "Épopée de Gilgamesh",
+            "correct": true
+          },
+          {
+            "label": "Pierre de Rosette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8d62f2070dca-fr",
+      "type": "mcq",
+      "prompt": "Quand la construction du canal de Suez s'est-elle achevée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1869",
+            "correct": true
+          },
+          {
+            "label": "1859",
+            "correct": false
+          },
+          {
+            "label": "1850",
+            "correct": false
+          },
+          {
+            "label": "1860",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9704a17e4f77-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces serpents n'est PAS venimeux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mamba noir",
+            "correct": false
+          },
+          {
+            "label": "Pélamide",
+            "correct": false
+          },
+          {
+            "label": "Krait de Malaisie",
+            "correct": false
+          },
+          {
+            "label": "Python réticulé",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9a434d9626bb-fr",
+      "type": "mcq",
+      "prompt": "Quel État américain est surnommé « The Golden State » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alaska",
+            "correct": false
+          },
+          {
+            "label": "Nouveau-Mexique",
+            "correct": false
+          },
+          {
+            "label": "Floride",
+            "correct": false
+          },
+          {
+            "label": "Californie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-abcd50db1083-fr",
+      "type": "mcq",
+      "prompt": "Quelle est la plus grande espèce vivante de manchot ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Manchot royal",
+            "correct": false
+          },
+          {
+            "label": "Manchot papou",
+            "correct": false
+          },
+          {
+            "label": "Manchot d'Adélie",
+            "correct": false
+          },
+          {
+            "label": "Manchot empereur",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ca9bec94ddd3-fr",
+      "type": "mcq",
+      "prompt": "Comment dit-on au revoir en espagnol ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Adiós",
+            "correct": true
+          },
+          {
+            "label": "Salir",
+            "correct": false
+          },
+          {
+            "label": "Au revoir",
+            "correct": false
+          },
+          {
+            "label": "Hola",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-cb638e5b5d6a-fr",
+      "type": "mcq",
+      "prompt": "Qui a formulé et développé l'idée de socialisme ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joseph Staline",
+            "correct": false
+          },
+          {
+            "label": "Karl Marx",
+            "correct": true
+          },
+          {
+            "label": "Vladimir Lénine",
+            "correct": false
+          },
+          {
+            "label": "Vladimir Poutine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e6d85b2d35fa-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit le conte « La Petite Fille aux allumettes » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hans Christian Andersen",
+            "correct": true
+          },
+          {
+            "label": "Lewis Carroll",
+            "correct": false
+          },
+          {
+            "label": "Charles Dickens",
+            "correct": false
+          },
+          {
+            "label": "Oscar Wilde",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e846d67ed6c1-fr",
+      "type": "mcq",
+      "prompt": "Quel minéral a le plus petit numéro sur l'échelle de Mohs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quartz",
+            "correct": false
+          },
+          {
+            "label": "Diamant",
+            "correct": false
+          },
+          {
+            "label": "Gypse",
+            "correct": false
+          },
+          {
+            "label": "Talc",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e8d26e093a84-fr",
+      "type": "mcq",
+      "prompt": "Quand la Déclaration d'indépendance a-t-elle été approuvée par le Second Congrès continental ?",
+      "payload": {
+        "options": [
+          {
+            "label": "4 juin 1776",
+            "correct": false
+          },
+          {
+            "label": "2 juillet 1776",
+            "correct": false
+          },
+          {
+            "label": "4 juillet 1776",
+            "correct": true
+          },
+          {
+            "label": "4 mai 1776",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-culture-mix-1-fr",
+      "title": "Culture en vrac #1",
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-862aa8926bd9-fr",
+        "otdb-5a5fd49201a7-fr",
+        "otdb-42ca7eb8bb08-fr",
+        "otdb-abcd50db1083-fr",
+        "otdb-0741d591f209-fr",
+        "otdb-2599d598ad3e-fr",
+        "otdb-e8d26e093a84-fr",
+        "otdb-9704a17e4f77-fr",
+        "otdb-4178f636400b-fr",
+        "otdb-e6d85b2d35fa-fr",
+        "otdb-193c690740c9-fr",
+        "otdb-13441e05cea3-fr",
+        "otdb-7dd44ebccdca-fr",
+        "otdb-3404f5b69fbd-fr",
+        "otdb-8d62f2070dca-fr",
+        "otdb-9a434d9626bb-fr",
+        "otdb-563a9a53de95-fr",
+        "otdb-ca9bec94ddd3-fr",
+        "otdb-cb638e5b5d6a-fr",
+        "otdb-e846d67ed6c1-fr"
+      ],
+      "description": "Un mélange de questions de géographie, d'histoire, de sciences, de nature, de livres et d'art."
+    }
+  ]
+}

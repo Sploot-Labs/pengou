@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=69"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0069-3-en",
+      "type": "mcq",
+      "prompt": "Which apple variety is mainly produced in France?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pink Lady",
+            "correct": false
+          },
+          {
+            "label": "Golden Delicious",
+            "correct": true
+          },
+          {
+            "label": "Gala",
+            "correct": false
+          },
+          {
+            "label": "Jonagold",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

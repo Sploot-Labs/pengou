@@ -34,6 +34,17 @@ export interface Invitation {
   createdAt: string
 }
 
+/** Invitation telle que listée : le jeton n'est renvoyé qu'à la création et au renvoi. */
+export type PendingInvitation = Omit<Invitation, 'token'>
+
+/** Réponse de création et de renvoi : `emailSent` dit si l'e-mail est réellement parti,
+ * `emailSkipped` pourquoi il n'a pas été tenté (invitant à l'adresse non confirmée, mode multi). */
+export interface InvitationResult {
+  invitation: Invitation
+  emailSent: boolean
+  emailSkipped?: 'inviter_unverified'
+}
+
 export interface InvitationPreview {
   email: string
   role: Role
@@ -64,15 +75,15 @@ export function removeMember(tenantId: string, userId: string): Promise<{ ok: tr
   return apiDelete(`/api/workspaces/${tenantId}/members/${userId}`)
 }
 
-export function fetchInvitations(tenantId: string): Promise<{ invitations: Invitation[] }> {
+export function fetchInvitations(tenantId: string): Promise<{ invitations: PendingInvitation[] }> {
   return apiGet(`/api/workspaces/${tenantId}/invitations`)
 }
 
-export function createInvitation(tenantId: string, email: string, role: Role): Promise<{ invitation: Invitation }> {
+export function createInvitation(tenantId: string, email: string, role: Role): Promise<InvitationResult> {
   return apiPost(`/api/workspaces/${tenantId}/invitations`, { email, role })
 }
 
-export function resendInvitation(tenantId: string, id: string): Promise<{ invitation: Invitation }> {
+export function resendInvitation(tenantId: string, id: string): Promise<InvitationResult> {
   return apiPost(`/api/workspaces/${tenantId}/invitations/${id}/resend`)
 }
 
@@ -84,6 +95,7 @@ export function fetchInvitationPreview(token: string): Promise<InvitationPreview
   return apiGet(`/api/invitations/${token}`)
 }
 
-export function acceptInvitation(token: string): Promise<{ tenantId: string; role: Role }> {
-  return apiPost(`/api/invitations/${token}/accept`)
+/** `v` : preuve portée par le lien reçu par e-mail ; elle permet de confirmer l'adresse. */
+export function acceptInvitation(token: string, v?: string | null): Promise<{ tenantId: string; role: Role }> {
+  return apiPost(`/api/invitations/${token}/accept`, v ? { v } : undefined)
 }

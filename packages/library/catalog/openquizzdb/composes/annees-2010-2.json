@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, plusieurs auteurs",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0485-1",
+      "type": "mcq",
+      "prompt": "Quelle médaille Maria Sharapova a-t-elle remportée aux JO de 2012 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bronze",
+            "correct": false
+          },
+          {
+            "label": "Aucune",
+            "correct": false
+          },
+          {
+            "label": "Or",
+            "correct": false
+          },
+          {
+            "label": "Argent",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0075-3",
+      "type": "mcq",
+      "prompt": "Qui est devenu en 2011 président à vie du jury de Miss France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jacques Dutronc",
+            "correct": false
+          },
+          {
+            "label": "Daniel Auteuil",
+            "correct": false
+          },
+          {
+            "label": "Pierre Arditi",
+            "correct": false
+          },
+          {
+            "label": "Alain Delon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0366-3",
+      "type": "mcq",
+      "prompt": "Qui a quitté OpenAI en 2018 à la suite d'un conflit de direction ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ilya Sutskever",
+            "correct": false
+          },
+          {
+            "label": "Elon Musk",
+            "correct": true
+          },
+          {
+            "label": "Greg Brockman",
+            "correct": false
+          },
+          {
+            "label": "Sam Altman",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0329-2",
+      "type": "mcq",
+      "prompt": "Quel titre a révélé Aya Nakamura au grand public en 2018 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Copines",
+            "correct": false
+          },
+          {
+            "label": "La dot",
+            "correct": false
+          },
+          {
+            "label": "Djadja",
+            "correct": true
+          },
+          {
+            "label": "Pookie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0327-3",
+      "type": "mcq",
+      "prompt": "Quelle actrice brune joue dans « Vampire Diaries » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nina Dobrev",
+            "correct": true
+          },
+          {
+            "label": "Eva Green",
+            "correct": false
+          },
+          {
+            "label": "Julianne Moore",
+            "correct": false
+          },
+          {
+            "label": "Kristen Stewart",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0291-1",
+      "type": "mcq",
+      "prompt": "Quel jeune Viking est le héros de « Dragons » (2010) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Harold",
+            "correct": true
+          },
+          {
+            "label": "Hector",
+            "correct": false
+          },
+          {
+            "label": "Harry",
+            "correct": false
+          },
+          {
+            "label": "Victor",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0129-2",
+      "type": "mcq",
+      "prompt": "Avec quelle arme Michonne se bat-t-elle dans « The Walking Dead » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hache",
+            "correct": false
+          },
+          {
+            "label": "Arbalète",
+            "correct": false
+          },
+          {
+            "label": "Machette",
+            "correct": false
+          },
+          {
+            "label": "Katana",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0155-3",
+      "type": "mcq",
+      "prompt": "Dans quel film Louise Bourgoin joue-t-elle avec Romain Duris ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Intouchables",
+            "correct": false
+          },
+          {
+            "label": "Populaire",
+            "correct": false
+          },
+          {
+            "label": "L'Arnacoeur",
+            "correct": true
+          },
+          {
+            "label": "De rouille et d'os",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0103-3",
+      "type": "mcq",
+      "prompt": "Malgré son air méchant, à quoi est parfumé le gros ours de « Toy Story 3 » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chocolat",
+            "correct": false
+          },
+          {
+            "label": "Miel",
+            "correct": false
+          },
+          {
+            "label": "Fraise",
+            "correct": true
+          },
+          {
+            "label": "Vanille",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0322-3",
+      "type": "mcq",
+      "prompt": "Qui a été sacré « homme le plus sexy de 2014 » par le magazine « People » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hugh Jackman",
+            "correct": false
+          },
+          {
+            "label": "Brad Pitt",
+            "correct": false
+          },
+          {
+            "label": "Tom Cruise",
+            "correct": false
+          },
+          {
+            "label": "Chris Hemsworth",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0325-2",
+      "type": "mcq",
+      "prompt": "Comment meurt Ned Stark dans « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brûlé vif",
+            "correct": false
+          },
+          {
+            "label": "Poignardé",
+            "correct": false
+          },
+          {
+            "label": "Pendu",
+            "correct": false
+          },
+          {
+            "label": "Décapité",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0485-4",
+      "type": "mcq",
+      "prompt": "Pour quel montant Maria Sharapova a-t-elle signé avec Nike en 2010 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "10 millions",
+            "correct": false
+          },
+          {
+            "label": "50 millions",
+            "correct": false
+          },
+          {
+            "label": "30 millions",
+            "correct": false
+          },
+          {
+            "label": "70 millions",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0113-3",
+      "type": "mcq",
+      "prompt": "Dans quel film Florence Foresti joue-t-elle avec Jamel Debbouze ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hollywoo",
+            "correct": true
+          },
+          {
+            "label": "Human Zoo",
+            "correct": false
+          },
+          {
+            "label": "Hold-up",
+            "correct": false
+          },
+          {
+            "label": "Le Hérisson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0299-1",
+      "type": "mcq",
+      "prompt": "Dans quel film de la série James Bond Léa Seydoux a-t-elle joué ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spectre",
+            "correct": true
+          },
+          {
+            "label": "Licence to Kill",
+            "correct": false
+          },
+          {
+            "label": "Casino Royale",
+            "correct": false
+          },
+          {
+            "label": "Skyfall",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0306-4",
+      "type": "mcq",
+      "prompt": "Pour quel groupe musical Bruce Willis est-il apparu dans le clip « Stylo » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Terranova",
+            "correct": false
+          },
+          {
+            "label": "Gorillaz",
+            "correct": true
+          },
+          {
+            "label": "Morcheeba",
+            "correct": false
+          },
+          {
+            "label": "Dubphonic",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0281-3",
+      "type": "mcq",
+      "prompt": "Quel film raconte l'histoire d'un esclave devenu chasseur de primes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kill Bill",
+            "correct": false
+          },
+          {
+            "label": "Django Unchained",
+            "correct": true
+          },
+          {
+            "label": "The Revenant",
+            "correct": false
+          },
+          {
+            "label": "Pulp Fiction",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0321-3",
+      "type": "mcq",
+      "prompt": "Que protège la Garde de Nuit dans « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le jardin",
+            "correct": false
+          },
+          {
+            "label": "La frontière",
+            "correct": false
+          },
+          {
+            "label": "Le Mur",
+            "correct": true
+          },
+          {
+            "label": "La reine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0325-3",
+      "type": "mcq",
+      "prompt": "Comment s'appelle la fiancée de Joffrey dans « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Daenerys",
+            "correct": false
+          },
+          {
+            "label": "Arya",
+            "correct": false
+          },
+          {
+            "label": "Catelyn",
+            "correct": false
+          },
+          {
+            "label": "Sansa",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0197-3",
+      "type": "mcq",
+      "prompt": "Dans quel film de Scorsese DiCaprio incarne-t-il Edward Daniels ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Casino",
+            "correct": false
+          },
+          {
+            "label": "Shutter Island",
+            "correct": true
+          },
+          {
+            "label": "Aviator",
+            "correct": false
+          },
+          {
+            "label": "Hugo Cabret",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0333-4",
+      "type": "mcq",
+      "prompt": "Combien « Facebook » a-t-il payé pour acheter « Whatsapp » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "650 000",
+            "correct": false
+          },
+          {
+            "label": "19 milliards",
+            "correct": true
+          },
+          {
+            "label": "220 millions",
+            "correct": false
+          },
+          {
+            "label": "850 millions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-annees-2010-2",
+      "title": "Les années 2010 #2",
+      "description": "Séries, cinéma, célébrités et sport des années 2010.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0485-1",
+        "oqdb-0075-3",
+        "oqdb-0366-3",
+        "oqdb-0329-2",
+        "oqdb-0327-3",
+        "oqdb-0291-1",
+        "oqdb-0129-2",
+        "oqdb-0155-3",
+        "oqdb-0103-3",
+        "oqdb-0322-3",
+        "oqdb-0325-2",
+        "oqdb-0485-4",
+        "oqdb-0113-3",
+        "oqdb-0299-1",
+        "oqdb-0306-4",
+        "oqdb-0281-3",
+        "oqdb-0321-3",
+        "oqdb-0325-3",
+        "oqdb-0197-3",
+        "oqdb-0333-4"
+      ]
+    }
+  ]
+}

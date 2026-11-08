@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=135"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0135-1-en",
+      "type": "mcq",
+      "prompt": "Roughly how many millimeters is one English inch?",
+      "payload": {
+        "options": [
+          {
+            "label": "25 mm",
+            "correct": true
+          },
+          {
+            "label": "32 mm",
+            "correct": false
+          },
+          {
+            "label": "16 mm",
+            "correct": false
+          },
+          {
+            "label": "45 mm",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0135-2-en",
+      "type": "mcq",
+      "prompt": "How many labors did Hercules have to perform for Eurystheus?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ten",
+            "correct": false
+          },
+          {
+            "label": "One hundred",
+            "correct": false
+          },
+          {
+            "label": "Forty",
+            "correct": false
+          },
+          {
+            "label": "Twelve",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

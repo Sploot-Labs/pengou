@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=283"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0283-1-en",
+      "type": "mcq",
+      "prompt": "Where in Belgium is the city of Brussels located?",
+      "payload": {
+        "options": [
+          {
+            "label": "South",
+            "correct": false
+          },
+          {
+            "label": "West",
+            "correct": false
+          },
+          {
+            "label": "Center",
+            "correct": true
+          },
+          {
+            "label": "North",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0283-2-en",
+      "type": "mcq",
+      "prompt": "The Bois de la Cambre is an extension of which historic forest?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chaux Forest",
+            "correct": false
+          },
+          {
+            "label": "Sonian Forest",
+            "correct": true
+          },
+          {
+            "label": "Retz Forest",
+            "correct": false
+          },
+          {
+            "label": "Brotonne Forest",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0283-3-en",
+      "type": "mcq",
+      "prompt": "What is Brussels Airport commonly called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zwevegem",
+            "correct": false
+          },
+          {
+            "label": "Zandhoven",
+            "correct": false
+          },
+          {
+            "label": "Zottegem",
+            "correct": false
+          },
+          {
+            "label": "Zaventem",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0283-4-en",
+      "type": "mcq",
+      "prompt": "Which architectural style is linked to Victor Horta and Henry Van de Velde?",
+      "payload": {
+        "options": [
+          {
+            "label": "Art Deco",
+            "correct": false
+          },
+          {
+            "label": "Baroque",
+            "correct": false
+          },
+          {
+            "label": "Art Moderne",
+            "correct": false
+          },
+          {
+            "label": "Art Nouveau",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

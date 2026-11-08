@@ -18,11 +18,7 @@ export interface SoundHandle {
   stop: () => void
 }
 
-export type SoundRecipe = (
-  ctx: AudioContext,
-  destination: AudioNode,
-  opts: { loop?: boolean },
-) => SoundHandle
+export type SoundRecipe = (ctx: AudioContext, destination: AudioNode, opts: { loop?: boolean }) => SoundHandle
 
 /** Fréquence d'une note tempérée, en demi-tons depuis le La3 (220 Hz). */
 function hz(semitonesFromA3: number): number {

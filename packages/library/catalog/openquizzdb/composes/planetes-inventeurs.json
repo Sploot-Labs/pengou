@@ -1,0 +1,412 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0057-1",
+      "type": "mcq",
+      "prompt": "Combien de temps met la Terre pour faire le tour du Soleil ?",
+      "payload": {
+        "options": [
+          {
+            "label": "6 mois",
+            "correct": false
+          },
+          {
+            "label": "365 jours",
+            "correct": true
+          },
+          {
+            "label": "1 mois",
+            "correct": false
+          },
+          {
+            "label": "24 heures",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0057-2",
+      "type": "mcq",
+      "prompt": "Quelle distance approximative sépare la Terre de la Lune ?",
+      "payload": {
+        "options": [
+          {
+            "label": "420 000 km",
+            "correct": false
+          },
+          {
+            "label": "380 000 km",
+            "correct": true
+          },
+          {
+            "label": "460 000 km",
+            "correct": false
+          },
+          {
+            "label": "340 000 km",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0057-3",
+      "type": "mcq",
+      "prompt": "Quelle étoile, vue de la Terre, est la plus brillante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sirius",
+            "correct": false
+          },
+          {
+            "label": "Canopus",
+            "correct": false
+          },
+          {
+            "label": "Véga",
+            "correct": false
+          },
+          {
+            "label": "Le Soleil",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0057-4",
+      "type": "mcq",
+      "prompt": "Qui a effectué la première mesure de la circonférence de la Terre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eurydice",
+            "correct": false
+          },
+          {
+            "label": "Ératosthène",
+            "correct": true
+          },
+          {
+            "label": "Euripide",
+            "correct": false
+          },
+          {
+            "label": "Épicure",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0063-1",
+      "type": "mcq",
+      "prompt": "Quel satellite naturel est le principal responsable des marées ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Neptune",
+            "correct": false
+          },
+          {
+            "label": "Mars",
+            "correct": false
+          },
+          {
+            "label": "Mercure",
+            "correct": false
+          },
+          {
+            "label": "La Lune",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0063-2",
+      "type": "mcq",
+      "prompt": "Quel est le satellite naturel le plus proche de sa planète-mère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deimos",
+            "correct": false
+          },
+          {
+            "label": "Titan",
+            "correct": false
+          },
+          {
+            "label": "Charon",
+            "correct": false
+          },
+          {
+            "label": "Phobos",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0063-3",
+      "type": "mcq",
+      "prompt": "Quel est le plus grand satellite naturel de notre système solaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Lune",
+            "correct": false
+          },
+          {
+            "label": "Ganymède",
+            "correct": true
+          },
+          {
+            "label": "Umbriel",
+            "correct": false
+          },
+          {
+            "label": "Titan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0139-1",
+      "type": "mcq",
+      "prompt": "Qu'est censée imiter une machine faisant le test de Turing ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mouvement",
+            "correct": false
+          },
+          {
+            "label": "Silhouette",
+            "correct": false
+          },
+          {
+            "label": "Conversation",
+            "correct": true
+          },
+          {
+            "label": "Dessin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0139-2",
+      "type": "mcq",
+      "prompt": "Quelle machine Alan Turing a-t-il décryptée pendant la guerre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deep Blue",
+            "correct": false
+          },
+          {
+            "label": "Delilah",
+            "correct": false
+          },
+          {
+            "label": "Enigma",
+            "correct": true
+          },
+          {
+            "label": "ENIAC",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0503-1",
+      "type": "mcq",
+      "prompt": "Avec qui Nikola Tesla a-t-il travaillé après avoir émigré aux États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "James Cash Jr.",
+            "correct": false
+          },
+          {
+            "label": "Nela Park",
+            "correct": false
+          },
+          {
+            "label": "Thomas Edison",
+            "correct": true
+          },
+          {
+            "label": "Bob Wright",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0503-2",
+      "type": "mcq",
+      "prompt": "Combien de brevets Nikola Tesla a-t-il déposé au cours de sa vie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Environ 100",
+            "correct": false
+          },
+          {
+            "label": "Environ 300",
+            "correct": true
+          },
+          {
+            "label": "Environ 200",
+            "correct": false
+          },
+          {
+            "label": "Environ 400",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0503-3",
+      "type": "mcq",
+      "prompt": "Devenu polyglotte, combien de langues parlait Nikola Tesla ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Huit",
+            "correct": true
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Sept",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0503-4",
+      "type": "mcq",
+      "prompt": "Grâce à quel type de courant Nikola Tesla a-t-il révolutionné l'électricité ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Continu",
+            "correct": false
+          },
+          {
+            "label": "Alternatif",
+            "correct": true
+          },
+          {
+            "label": "Statique",
+            "correct": false
+          },
+          {
+            "label": "Inductif",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-planetes-inventeurs",
+      "title": "Planètes et inventeurs",
+      "description": "D'après les quiz OpenQuizzDB « Planète bleue », « Satellites naturels », « Alan Turing » et « Nikola Tesla ».",
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0057-1",
+        "oqdb-0057-2",
+        "oqdb-0057-3",
+        "oqdb-0057-4",
+        "oqdb-0063-1",
+        "oqdb-0063-2",
+        "oqdb-0063-3",
+        "oqdb-0139-1",
+        "oqdb-0139-2",
+        "oqdb-0503-1",
+        "oqdb-0503-2",
+        "oqdb-0503-3",
+        "oqdb-0503-4"
+      ]
+    }
+  ]
+}

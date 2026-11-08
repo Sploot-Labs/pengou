@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=438"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0438-1",
+      "type": "mcq",
+      "prompt": "À quoi compare-t-on souvent la forme de l'Italie vue du ciel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Botte",
+            "correct": true
+          },
+          {
+            "label": "Chariot",
+            "correct": false
+          },
+          {
+            "label": "Fleur",
+            "correct": false
+          },
+          {
+            "label": "Hexagone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0438-2",
+      "type": "mcq",
+      "prompt": "Quelle est la vitesse maximale autorisée sur les autoroutes en Italie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "130 km/h",
+            "correct": true
+          },
+          {
+            "label": "110 km/h",
+            "correct": false
+          },
+          {
+            "label": "100 km/h",
+            "correct": false
+          },
+          {
+            "label": "120 km/h",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

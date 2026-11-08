@@ -1,8 +1,16 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import type { FastifyInstance } from 'fastify'
 import {
-  startTestDb, runMigrations, schema, tenantScope, createQuiz,
-  createGameSession, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
+  startTestDb,
+  runMigrations,
+  schema,
+  tenantScope,
+  createQuiz,
+  createGameSession,
+  addSessionPlayer,
+  recordAnswer,
+  setSessionStatus,
+  setPlayerScore,
 } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { loadConfig } from '@splootlabs/shared'
@@ -52,13 +60,30 @@ async function buildApp(): Promise<FastifyInstance> {
 
 /** Seed direct en base d'une session terminée avec joueurs + réponses, pour le tenant PAR DÉFAUT
  * (mode single) — c'est le tenant que `signUp` résoudra toujours. */
-async function seedFinishedSession(ownerId: string, tenantId: string, pin: string): Promise<{ sessionId: string; quizId: string }> {
+async function seedFinishedSession(
+  ownerId: string,
+  tenantId: string,
+  pin: string,
+): Promise<{ sessionId: string; quizId: string }> {
   const scope = tenantScope(ctx.db, tenantId)
   const quiz = await createQuiz(scope, { ownerId, title: 'Quiz rapport' })
-  const [question] = await ctx.db.insert(schema.question).values({
-    quizId: quiz.id, tenantId, type: 'mcq', prompt: 'Question 1', timeLimit: 20, orderIndex: 0,
-    payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
-  }).returning()
+  const [question] = await ctx.db
+    .insert(schema.question)
+    .values({
+      quizId: quiz.id,
+      tenantId,
+      type: 'mcq',
+      prompt: 'Question 1',
+      timeLimit: 20,
+      orderIndex: 0,
+      payload: {
+        options: [
+          { label: 'A', correct: true },
+          { label: 'B', correct: false },
+        ],
+      },
+    })
+    .returning()
 
   const session = await createGameSession(scope, { quizId: quiz.id, hostId: ownerId, pin })
   const sessionId = session!.id
@@ -66,8 +91,24 @@ async function seedFinishedSession(ownerId: string, tenantId: string, pin: strin
   const alice = await addSessionPlayer(ctx.db, sessionId, { nickname: 'Alice', joinToken: 'tok-alice' })
   const bob = await addSessionPlayer(ctx.db, sessionId, { nickname: 'Bob', joinToken: 'tok-bob' })
 
-  await recordAnswer(ctx.db, { sessionId, questionId: question.id, playerId: alice.id, answer: { choice: 0 }, timeMs: 3000, isCorrect: true, points: 900 })
-  await recordAnswer(ctx.db, { sessionId, questionId: question.id, playerId: bob.id, answer: { choice: 1 }, timeMs: 5000, isCorrect: false, points: 0 })
+  await recordAnswer(ctx.db, {
+    sessionId,
+    questionId: question.id,
+    playerId: alice.id,
+    answer: { choice: 0 },
+    timeMs: 3000,
+    isCorrect: true,
+    points: 900,
+  })
+  await recordAnswer(ctx.db, {
+    sessionId,
+    questionId: question.id,
+    playerId: bob.id,
+    answer: { choice: 1 },
+    timeMs: 5000,
+    isCorrect: false,
+    points: 0,
+  })
 
   await setPlayerScore(ctx.db, alice.id, 900)
   await setPlayerScore(ctx.db, bob.id, 0)
@@ -93,7 +134,10 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
 
   it('GET /api/sessions/:id/export.csv sans cookie → 401', async () => {
     const app = await buildApp()
-    const res = await app.inject({ method: 'GET', url: '/api/sessions/00000000-0000-0000-0000-000000000000/export.csv' })
+    const res = await app.inject({
+      method: 'GET',
+      url: '/api/sessions/00000000-0000-0000-0000-000000000000/export.csv',
+    })
     expect(res.statusCode).toBe(401)
     await app.close()
   })
@@ -107,7 +151,9 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
     // Résout le tenant par défaut via une création de quiz par API (le tenant assigné
     // est celui que retourne createQuiz, garanti être le tenant par défaut en mode single).
     const created = await app.inject({
-      method: 'POST', url: '/api/quizzes', payload: { title: 'x' },
+      method: 'POST',
+      url: '/api/quizzes',
+      payload: { title: 'x' },
       headers: { 'content-type': 'application/json', cookie },
     })
     const tenantId = (created.json() as { tenantId: string }).tenantId
@@ -137,7 +183,9 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
     const userId = (me.json() as { user: { id: string } }).user.id
 
     const created = await app.inject({
-      method: 'POST', url: '/api/quizzes', payload: { title: 'x' },
+      method: 'POST',
+      url: '/api/quizzes',
+      payload: { title: 'x' },
       headers: { 'content-type': 'application/json', cookie },
     })
     const tenantId = (created.json() as { tenantId: string }).tenantId
@@ -163,7 +211,9 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
     const me = await app.inject({ method: 'GET', url: '/api/me', headers: { cookie } })
     const userId = (me.json() as { user: { id: string } }).user.id
     const created = await app.inject({
-      method: 'POST', url: '/api/quizzes', payload: { title: 'x' },
+      method: 'POST',
+      url: '/api/quizzes',
+      payload: { title: 'x' },
       headers: { 'content-type': 'application/json', cookie },
     })
     const tenantId = (created.json() as { tenantId: string }).tenantId
@@ -188,11 +238,46 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
     await app.close()
   })
 
+  it('un quiz archivé garde ses questions, sa liste de parties et ses rapports lisibles', async () => {
+    const app = await buildApp()
+    const cookie = await signUp(app, 'hote-archive@example.com')
+    const me = await app.inject({ method: 'GET', url: '/api/me', headers: { cookie } })
+    const userId = (me.json() as { user: { id: string } }).user.id
+    const created = await app.inject({
+      method: 'POST',
+      url: '/api/quizzes',
+      payload: { title: 'x' },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    const tenantId = (created.json() as { tenantId: string }).tenantId
+
+    const { sessionId, quizId } = await seedFinishedSession(userId, tenantId, '919191')
+    const archived = await app.inject({ method: 'POST', url: `/api/quizzes/${quizId}/archive`, headers: { cookie } })
+    expect(archived.statusCode).toBe(200)
+
+    const questions = await app.inject({ method: 'GET', url: `/api/quizzes/${quizId}/questions`, headers: { cookie } })
+    expect(questions.statusCode).toBe(200)
+    expect((questions.json() as unknown[]).length).toBe(1)
+
+    const list = await app.inject({ method: 'GET', url: '/api/sessions', headers: { cookie } })
+    expect((list.json() as Array<{ id: string }>).some((r) => r.id === sessionId)).toBe(true)
+
+    const report = await app.inject({ method: 'GET', url: `/api/sessions/${sessionId}`, headers: { cookie } })
+    expect(report.statusCode).toBe(200)
+    const body = report.json() as { players: unknown[]; questions: Array<{ answerCount: number }> }
+    expect(body.players).toHaveLength(2)
+    expect(body.questions[0].answerCount).toBe(2)
+
+    await app.close()
+  })
+
   it('GET /api/sessions/:id inexistant → 404', async () => {
     const app = await buildApp()
     const cookie = await signUp(app, 'hote3@example.com')
     const res = await app.inject({
-      method: 'GET', url: '/api/sessions/00000000-0000-0000-0000-000000000000', headers: { cookie },
+      method: 'GET',
+      url: '/api/sessions/00000000-0000-0000-0000-000000000000',
+      headers: { cookie },
     })
     expect(res.statusCode).toBe(404)
     await app.close()
@@ -204,7 +289,9 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
     const me = await app.inject({ method: 'GET', url: '/api/me', headers: { cookie } })
     const userId = (me.json() as { user: { id: string } }).user.id
     const created = await app.inject({
-      method: 'POST', url: '/api/quizzes', payload: { title: 'x' },
+      method: 'POST',
+      url: '/api/quizzes',
+      payload: { title: 'x' },
       headers: { 'content-type': 'application/json', cookie },
     })
     const tenantId = (created.json() as { tenantId: string }).tenantId
@@ -223,12 +310,13 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
     await app.close()
   })
 
-  it('session/rapport/csv d\'un AUTRE tenant → 404 sur les trois, pas de fuite', async () => {
+  it("session/rapport/csv d'un AUTRE tenant → 404 sur les trois, pas de fuite", async () => {
     const app = await buildApp()
 
     // Tenant étranger + session seedée directement, hors du tenant par défaut résolu par signUp.
     const [foreignTenant] = await ctx.db.insert(schema.tenant).values({ name: 'Étranger' }).returning()
-    const [foreignOwner] = await ctx.db.insert(schema.user)
+    const [foreignOwner] = await ctx.db
+      .insert(schema.user)
       .values({ id: crypto.randomUUID(), email: 'etranger-sess@x.fr', name: 'Étranger', emailVerified: false })
       .returning()
     const { sessionId: foreignSessionId } = await seedFinishedSession(foreignOwner.id, foreignTenant.id, '999999')
@@ -242,7 +330,11 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
     const detail = await app.inject({ method: 'GET', url: `/api/sessions/${foreignSessionId}`, headers: { cookie } })
     expect(detail.statusCode).toBe(404)
 
-    const csv = await app.inject({ method: 'GET', url: `/api/sessions/${foreignSessionId}/export.csv`, headers: { cookie } })
+    const csv = await app.inject({
+      method: 'GET',
+      url: `/api/sessions/${foreignSessionId}/export.csv`,
+      headers: { cookie },
+    })
     expect(csv.statusCode).toBe(404)
 
     await app.close()

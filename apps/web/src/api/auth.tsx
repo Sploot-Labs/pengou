@@ -1,12 +1,5 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from 'react'
-import { apiGet, apiPost, ApiError } from './client'
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react'
+import { apiGet, apiPost, ApiError, onTermsAcceptanceRequired } from './client'
 
 /**
  * Auth layer — plain fetch against the documented Better Auth REST routes
@@ -30,6 +23,7 @@ export interface User {
   id: string
   email: string
   name?: string | null
+  emailVerified: boolean
   [key: string]: unknown
 }
 
@@ -37,6 +31,11 @@ export interface SignUpInput {
   email: string
   password: string
   name: string
+  /** Version des CGU affichée et acceptée (instance avec CGU). Le serveur la compare à la sienne
+   * et horodate lui-même l'acceptation. */
+  acceptedTermsVersion?: string
+  /** Case « J'ai 15 ans ou plus », exigée par le serveur avec les CGU. */
+  ageConfirmed?: boolean
 }
 
 export interface SignInInput {
@@ -54,8 +53,14 @@ interface AuthEmailResponse {
   token?: string
 }
 
+const VERIFIED_CALLBACK_URL = '/?email-verifie=1'
+
 export async function signUp(input: SignUpInput): Promise<User> {
-  const response = await apiPost<AuthEmailResponse>('/api/auth/sign-up/email', input)
+  // `callbackURL` : après clic sur le lien de confirmation, Better Auth ramène ici (et connecte).
+  const response = await apiPost<AuthEmailResponse>('/api/auth/sign-up/email', {
+    ...input,
+    callbackURL: VERIFIED_CALLBACK_URL,
+  })
   return response.user
 }
 
@@ -64,20 +69,48 @@ export async function signIn(input: SignInInput): Promise<User> {
   return response.user
 }
 
+/** Demande l'e-mail de réinitialisation. Better Auth redirige ensuite le lien reçu vers
+ * `/reset-password?token=…` (ou `?error=INVALID_TOKEN`). */
+export async function requestPasswordReset(email: string): Promise<void> {
+  await apiPost('/api/auth/request-password-reset', { email, redirectTo: '/reset-password' })
+}
+
+/** Pose le nouveau mot de passe. 400 si le token est invalide ou expiré. */
+export async function resetPassword(token: string, newPassword: string): Promise<void> {
+  await apiPost('/api/auth/reset-password', { newPassword, token })
+}
+
+/** Renvoie l'e-mail de confirmation du compte connecté. `email` évite un aller-retour vers `/api/me`. */
+export async function sendVerificationEmail(email?: string): Promise<void> {
+  let address = email
+  if (!address) {
+    const probe = await fetchSession()
+    if (!probe) throw new ApiError(401, 'Votre session a expiré. Reconnectez-vous.')
+    address = probe.user.email
+  }
+  await apiPost('/api/auth/send-verification-email', { email: address, callbackURL: VERIFIED_CALLBACK_URL })
+}
+
 export async function signOut(): Promise<void> {
   await apiPost('/api/auth/sign-out')
 }
 
-/** Session probe: `GET /api/me` → `{user}` when a session cookie is present,
+export interface SessionProbe {
+  user: User
+  /** Vrai si l'hôte doit accepter la version courante des CGU avant de continuer. */
+  termsAcceptanceRequired: boolean
+}
+
+/** Session probe: `GET /api/me` → `{user, termsAcceptanceRequired}` when a session cookie is present,
  * `401 {error}` otherwise — the 401 case is expected (logged-out is normal),
  * so it resolves to `null` instead of throwing. Any other failure (5xx,
  * network blip, proxy hiccup) propagates to the caller, which MUST handle it
  * (see `SessionProvider.refresh` below) rather than let it surface as an
  * unhandled rejection. */
-export async function fetchSession(): Promise<User | null> {
+export async function fetchSession(): Promise<SessionProbe | null> {
   try {
-    const response = await apiGet<{ user: User }>('/api/me')
-    return response.user
+    const response = await apiGet<{ user: User; termsAcceptanceRequired?: boolean }>('/api/me')
+    return { user: response.user, termsAcceptanceRequired: response.termsAcceptanceRequired === true }
   } catch (err) {
     if (err instanceof ApiError && err.status === 401) return null
     throw err
@@ -95,6 +128,10 @@ export interface UseSessionResult {
   error: unknown
   /** Re-runs the session probe (e.g. after sign-in/sign-out) without a full reload. */
   refresh: () => Promise<void>
+  /** Vrai quand l'hôte doit accepter les CGU courantes : signalé par `GET /api/me` ou par un 403
+   * `TERMS_ACCEPTANCE_REQUIRED` sur une autre route. `<RequireAuth>` affiche alors l'écran de
+   * revalidation à la place de l'écran protégé. */
+  termsAcceptanceRequired: boolean
 }
 
 /**
@@ -115,12 +152,14 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<unknown>(null)
+  const [termsAcceptanceRequired, setTermsAcceptanceRequired] = useState(false)
 
   const refresh = useCallback(async () => {
     setLoading(true)
     try {
-      const nextUser = await fetchSession()
-      setUser(nextUser)
+      const probe = await fetchSession()
+      setUser(probe?.user ?? null)
+      setTermsAcceptanceRequired(probe?.termsAcceptanceRequired ?? false)
       setError(null)
     } catch (err) {
       // Transient failure, NOT the same as "logged out" (401 is already
@@ -141,7 +180,11 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     void refresh()
   }, [refresh])
 
-  const value: UseSessionResult = { user, loading, error, refresh }
+  // Version des CGU montée pendant la navigation : une route protégée répond 403, l'écran de
+  // revalidation prend le relais sans attendre une nouvelle sonde.
+  useEffect(() => onTermsAcceptanceRequired(() => setTermsAcceptanceRequired(true)), [])
+
+  const value: UseSessionResult = { user, loading, error, refresh, termsAcceptanceRequired }
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>
 }
 

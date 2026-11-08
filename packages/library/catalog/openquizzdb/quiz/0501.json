@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=501"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0501-1",
+      "type": "mcq",
+      "prompt": "Que ne faut-il pas ouvrir à l'intérieur de sa maison ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fenêtre",
+            "correct": false
+          },
+          {
+            "label": "Coffre à bijoux",
+            "correct": false
+          },
+          {
+            "label": "Tenture",
+            "correct": false
+          },
+          {
+            "label": "Parapluie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0501-3",
+      "type": "mcq",
+      "prompt": "Sur quoi faut-il marcher du pied gauche pour favoriser la chance ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crotte de chien",
+            "correct": true
+          },
+          {
+            "label": "Caillou blanc",
+            "correct": false
+          },
+          {
+            "label": "Chewing-gum",
+            "correct": false
+          },
+          {
+            "label": "Fourmi rouge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0501-4",
+      "type": "mcq",
+      "prompt": "Quelle plante protégerait contre les esprits maléfiques et les vampires ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ail",
+            "correct": true
+          },
+          {
+            "label": "Estragon",
+            "correct": false
+          },
+          {
+            "label": "Origan",
+            "correct": false
+          },
+          {
+            "label": "Romarin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

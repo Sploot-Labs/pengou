@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=609"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0609-1",
+      "type": "mcq",
+      "prompt": "Dans combien de dépôts CVS le noyau d'OpenBSD est-il développé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Deux",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Un seul",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0609-2",
+      "type": "mcq",
+      "prompt": "Quel pare-feu d'OpenBSD équipe désormais macOS ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Firestarter",
+            "correct": false
+          },
+          {
+            "label": "ClearOS",
+            "correct": false
+          },
+          {
+            "label": "Packet Filter",
+            "correct": true
+          },
+          {
+            "label": "Comodo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0609-3",
+      "type": "mcq",
+      "prompt": "Quelle licence open source propre est utilisée par OpenBSD ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Licence GPL",
+            "correct": false
+          },
+          {
+            "label": "Licence LPPL",
+            "correct": false
+          },
+          {
+            "label": "Licence MIT",
+            "correct": false
+          },
+          {
+            "label": "Licence ISC",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0609-4",
+      "type": "mcq",
+      "prompt": "Quel algorithme a été ajouté à OpenBSD pour hacher les mots de passe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Camellia",
+            "correct": false
+          },
+          {
+            "label": "Blowfish",
+            "correct": true
+          },
+          {
+            "label": "Skipjack",
+            "correct": false
+          },
+          {
+            "label": "Square",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

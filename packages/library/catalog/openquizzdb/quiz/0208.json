@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=208"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0208-1",
+      "type": "mcq",
+      "prompt": "Quel est le prénom du personnage de Kate Winslet dans le film « Titanic » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rebecca",
+            "correct": false
+          },
+          {
+            "label": "Rose",
+            "correct": true
+          },
+          {
+            "label": "Rosalie",
+            "correct": false
+          },
+          {
+            "label": "Rachel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0208-2",
+      "type": "mcq",
+      "prompt": "Quelle marque de montres a pour logo une couronne à cinq branches ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rolls-Royce",
+            "correct": false
+          },
+          {
+            "label": "Rozana",
+            "correct": false
+          },
+          {
+            "label": "Rolex",
+            "correct": true
+          },
+          {
+            "label": "Revlon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0208-4",
+      "type": "mcq",
+      "prompt": "Quel est le nom du chien peu malin dans les albums de « Lucky Luke » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rocky",
+            "correct": false
+          },
+          {
+            "label": "Rubeus",
+            "correct": false
+          },
+          {
+            "label": "Rambo",
+            "correct": false
+          },
+          {
+            "label": "Rantanplan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

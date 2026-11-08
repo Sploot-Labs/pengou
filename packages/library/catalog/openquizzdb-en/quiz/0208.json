@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=208"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0208-1-en",
+      "type": "mcq",
+      "prompt": "What is the first name of Kate Winslet's character in \"Titanic\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rebecca",
+            "correct": false
+          },
+          {
+            "label": "Rose",
+            "correct": true
+          },
+          {
+            "label": "Rosalie",
+            "correct": false
+          },
+          {
+            "label": "Rachel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0208-2-en",
+      "type": "mcq",
+      "prompt": "Which watch brand has a five-pointed crown as its logo?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rolls-Royce",
+            "correct": false
+          },
+          {
+            "label": "Rozana",
+            "correct": false
+          },
+          {
+            "label": "Rolex",
+            "correct": true
+          },
+          {
+            "label": "Revlon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0208-4-en",
+      "type": "mcq",
+      "prompt": "What is the name of the dim-witted dog in the \"Lucky Luke\" comics?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rocky",
+            "correct": false
+          },
+          {
+            "label": "Rubeus",
+            "correct": false
+          },
+          {
+            "label": "Rambo",
+            "correct": false
+          },
+          {
+            "label": "Rin Tin Can",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

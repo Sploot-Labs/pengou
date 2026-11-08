@@ -1,0 +1,571 @@
+{
+  "source": {
+    "name": "Open Trivia Database",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-1124ddcc9d2f",
+      "type": "truefalse",
+      "prompt": "Green Day's album 'American Idiot' is considered a \"punk rock opera.\"",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1e69970acf18",
+      "type": "mcq",
+      "prompt": "When did the website \"Facebook\" launch?",
+      "payload": {
+        "options": [
+          {
+            "label": "2006",
+            "correct": false
+          },
+          {
+            "label": "2005",
+            "correct": false
+          },
+          {
+            "label": "2004",
+            "correct": true
+          },
+          {
+            "label": "2003",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-41f4dfb20591",
+      "type": "mcq",
+      "prompt": "In the game \"The Sims\", how many Simoleons does each family start with?",
+      "payload": {
+        "options": [
+          {
+            "label": "15,000",
+            "correct": false
+          },
+          {
+            "label": "20,000",
+            "correct": true
+          },
+          {
+            "label": "25,000",
+            "correct": false
+          },
+          {
+            "label": "10,000",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-44be3c326674",
+      "type": "mcq",
+      "prompt": "What song includes the words \"Numa Numa\" which was subject to a Viral Video in 2004?",
+      "payload": {
+        "options": [
+          {
+            "label": "Despacito",
+            "correct": false
+          },
+          {
+            "label": "Asereje",
+            "correct": false
+          },
+          {
+            "label": "Dragostea Din Tei",
+            "correct": true
+          },
+          {
+            "label": "Gangnam Style",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-483b3ed79236",
+      "type": "mcq",
+      "prompt": "What was the name of the image that features as the default background wallpaper for Windows XP?",
+      "payload": {
+        "options": [
+          {
+            "label": "Red moon desert",
+            "correct": false
+          },
+          {
+            "label": "Azul",
+            "correct": false
+          },
+          {
+            "label": "Tulips",
+            "correct": false
+          },
+          {
+            "label": "Bliss",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-555c2354cc82",
+      "type": "mcq",
+      "prompt": "In Need For Speed Most Wanted (2005), what do you drive at the beginning of the career mode?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nissan 240SX",
+            "correct": false
+          },
+          {
+            "label": "Porsche 911 Turbo",
+            "correct": false
+          },
+          {
+            "label": "Ford Mustang",
+            "correct": false
+          },
+          {
+            "label": "BMW M3 GTR",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5b19cee0ac10",
+      "type": "mcq",
+      "prompt": "Which year did Jenson Button won his first ever Formula One World Drivers' Championship?",
+      "payload": {
+        "options": [
+          {
+            "label": "2007",
+            "correct": false
+          },
+          {
+            "label": "2006",
+            "correct": false
+          },
+          {
+            "label": "2010",
+            "correct": false
+          },
+          {
+            "label": "2009",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-61cd94809b8e",
+      "type": "mcq",
+      "prompt": "In the Lord of the Rings: The Two Towers, where are the party of orcs taking the hobbits?",
+      "payload": {
+        "options": [
+          {
+            "label": "Isengard",
+            "correct": true
+          },
+          {
+            "label": "Rivendell",
+            "correct": false
+          },
+          {
+            "label": "Moria",
+            "correct": false
+          },
+          {
+            "label": "Mordor",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-67f54a87afb5",
+      "type": "mcq",
+      "prompt": "In which African country was the 2006 film 'Blood Diamond' mostly set in?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sierra Leone",
+            "correct": true
+          },
+          {
+            "label": "Burkina Faso",
+            "correct": false
+          },
+          {
+            "label": "Central African Republic",
+            "correct": false
+          },
+          {
+            "label": "Liberia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7cbe050cd412",
+      "type": "mcq",
+      "prompt": "Which Daft Punk album is the song \"Harder, Better, Faster, Stronger\" from?",
+      "payload": {
+        "options": [
+          {
+            "label": "Homework",
+            "correct": false
+          },
+          {
+            "label": "Random Access Memories",
+            "correct": false
+          },
+          {
+            "label": "Human After All",
+            "correct": false
+          },
+          {
+            "label": "Discovery",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-87fa5e4002cc",
+      "type": "mcq",
+      "prompt": "What name did Tom Hanks give to his volleyball companion in the film `Cast Away`?",
+      "payload": {
+        "options": [
+          {
+            "label": "Billy",
+            "correct": false
+          },
+          {
+            "label": "Jones",
+            "correct": false
+          },
+          {
+            "label": "Friday",
+            "correct": false
+          },
+          {
+            "label": "Wilson",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8992bd6147fb",
+      "type": "mcq",
+      "prompt": "What is the name of the character Nicolas Cage plays in the movie \"National Treasure?\"",
+      "payload": {
+        "options": [
+          {
+            "label": "Benjamin Franklin Gates",
+            "correct": true
+          },
+          {
+            "label": "John Quincy Beckett",
+            "correct": false
+          },
+          {
+            "label": "George Washington Swanson",
+            "correct": false
+          },
+          {
+            "label": "Thomas Jefferson Walker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-916ad59df8f2",
+      "type": "mcq",
+      "prompt": "In Finding Nemo, what was the name of Nemo's mom?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pearl",
+            "correct": false
+          },
+          {
+            "label": "Coral",
+            "correct": true
+          },
+          {
+            "label": "Sandy",
+            "correct": false
+          },
+          {
+            "label": "Shelly",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9a034edb9924",
+      "type": "mcq",
+      "prompt": "Who is revealed to be the villain at the end of the first live action Scooby Doo movie?",
+      "payload": {
+        "options": [
+          {
+            "label": "Scrappy Doo",
+            "correct": true
+          },
+          {
+            "label": "Old Man Mason",
+            "correct": false
+          },
+          {
+            "label": "Fred",
+            "correct": false
+          },
+          {
+            "label": "The Local News Team",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a61f33b3ecbe",
+      "type": "truefalse",
+      "prompt": "In 2008, Usain Bolt set the world record for the 100 meters with one shoelace untied.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-afbdf6f07334",
+      "type": "mcq",
+      "prompt": "Which nation hosted the FIFA World Cup in 2006?",
+      "payload": {
+        "options": [
+          {
+            "label": "United Kingdom",
+            "correct": false
+          },
+          {
+            "label": "South Africa",
+            "correct": false
+          },
+          {
+            "label": "Brazil",
+            "correct": false
+          },
+          {
+            "label": "Germany",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b34547a50b7c",
+      "type": "mcq",
+      "prompt": "What year was the game Team Fortress 2 released?",
+      "payload": {
+        "options": [
+          {
+            "label": "2005",
+            "correct": false
+          },
+          {
+            "label": "2007",
+            "correct": true
+          },
+          {
+            "label": "2009",
+            "correct": false
+          },
+          {
+            "label": "2010",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c507d052effe",
+      "type": "truefalse",
+      "prompt": "DragonForce's 'Through the Fire and Flames' is widely considered to be the hardest song in the Guitar Hero series.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-cf994fe859c4",
+      "type": "mcq",
+      "prompt": "Which water-type Pokémon starter was introduced in the 4th generation of the series?",
+      "payload": {
+        "options": [
+          {
+            "label": "Piplup",
+            "correct": true
+          },
+          {
+            "label": "Oshawott",
+            "correct": false
+          },
+          {
+            "label": "Mudkip",
+            "correct": false
+          },
+          {
+            "label": "Totodile",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d04c9a991725",
+      "type": "mcq",
+      "prompt": "Where does \"Gasolina\" rapper Daddy Yankee originate from?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mexico",
+            "correct": false
+          },
+          {
+            "label": "Cuba",
+            "correct": false
+          },
+          {
+            "label": "Puerto Rico",
+            "correct": true
+          },
+          {
+            "label": "Spain",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-the-2000s",
+      "title": "The 2000s",
+      "description": "Films, games, music and sport from the 2000s.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-87fa5e4002cc",
+        "otdb-7cbe050cd412",
+        "otdb-61cd94809b8e",
+        "otdb-8992bd6147fb",
+        "otdb-9a034edb9924",
+        "otdb-41f4dfb20591",
+        "otdb-1124ddcc9d2f",
+        "otdb-483b3ed79236",
+        "otdb-555c2354cc82",
+        "otdb-a61f33b3ecbe",
+        "otdb-cf994fe859c4",
+        "otdb-5b19cee0ac10",
+        "otdb-d04c9a991725",
+        "otdb-44be3c326674",
+        "otdb-c507d052effe",
+        "otdb-67f54a87afb5",
+        "otdb-1e69970acf18",
+        "otdb-916ad59df8f2",
+        "otdb-b34547a50b7c",
+        "otdb-afbdf6f07334"
+      ]
+    }
+  ]
+}

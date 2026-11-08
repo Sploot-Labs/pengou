@@ -2,12 +2,14 @@ import { z } from 'zod'
 import type { QuestionTypeDef } from './types.js'
 import { speedBonus } from './scoring.js'
 
-const sliderSchema = z.object({
-  min: z.number(),
-  max: z.number(),
-  correct: z.number(),
-  step: z.number().positive().optional(),
-}).refine((p) => p.min < p.max, { message: 'min doit être < max' })
+const sliderSchema = z
+  .object({
+    min: z.number(),
+    max: z.number(),
+    correct: z.number(),
+    step: z.number().positive().optional(),
+  })
+  .refine((p) => p.min < p.max, { message: 'min doit être < max' })
   .refine((p) => p.correct >= p.min && p.correct <= p.max, { message: 'correct doit être dans [min, max]' })
 
 export type SliderPayload = z.infer<typeof sliderSchema>
@@ -31,6 +33,7 @@ function tolerance(p: SliderPayload): number {
 
 export const slider: QuestionTypeDef<SliderPayload, SliderAnswer> = {
   key: 'slider',
+  scored: true,
   validatePayload: (raw) => sliderSchema.parse(raw),
   validateAnswer: (raw) => answerSchema.parse(raw),
   // `step` (granularité de drag) n'a aucune valeur de triche : il ne révèle ni `correct` ni la

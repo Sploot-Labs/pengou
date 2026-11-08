@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=111"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0111-1",
+      "type": "mcq",
+      "prompt": "Quelle est la longueur totale de la course multi-disciplinaire Ironman ?",
+      "payload": {
+        "options": [
+          {
+            "label": "184 km",
+            "correct": false
+          },
+          {
+            "label": "142 km",
+            "correct": false
+          },
+          {
+            "label": "226 km",
+            "correct": true
+          },
+          {
+            "label": "98 km",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0111-2",
+      "type": "mcq",
+      "prompt": "En combien de temps la course Ironman est-elle réalisée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1 semaine",
+            "correct": false
+          },
+          {
+            "label": "3 jours",
+            "correct": false
+          },
+          {
+            "label": "Moins d'1 jour",
+            "correct": true
+          },
+          {
+            "label": "1 mois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

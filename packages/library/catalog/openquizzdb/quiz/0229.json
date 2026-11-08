@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=229"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0229-1",
+      "type": "mcq",
+      "prompt": "De quel composé chimique est principalement constitué le sucre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saccharose",
+            "correct": true
+          },
+          {
+            "label": "Fructose",
+            "correct": false
+          },
+          {
+            "label": "Glucose",
+            "correct": false
+          },
+          {
+            "label": "Maltose",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0229-2",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on le sucre naturel présent dans les fruits ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Glucose",
+            "correct": false
+          },
+          {
+            "label": "Fructose",
+            "correct": true
+          },
+          {
+            "label": "Lactose",
+            "correct": false
+          },
+          {
+            "label": "Saccharose",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0229-3",
+      "type": "mcq",
+      "prompt": "Combien de morceaux de sucre contient une canette de cola 33 cl ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Environ sept",
+            "correct": true
+          },
+          {
+            "label": "Environ trois",
+            "correct": false
+          },
+          {
+            "label": "Environ quinze",
+            "correct": false
+          },
+          {
+            "label": "Environ onze",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0229-4",
+      "type": "mcq",
+      "prompt": "En quelle année est né le sucre en morceaux, par procédé artisanal ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1949",
+            "correct": false
+          },
+          {
+            "label": "1843",
+            "correct": true
+          },
+          {
+            "label": "1742",
+            "correct": false
+          },
+          {
+            "label": "1644",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

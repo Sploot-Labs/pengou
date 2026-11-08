@@ -52,7 +52,7 @@ const questionShow = {
   payload: { options: [{ label: 'Lisbonne' }, { label: 'Madrid' }, { label: 'Porto' }, { label: 'Séville' }] },
 }
 
-describe('HostLive, exclusion d\'un joueur', () => {
+describe("HostLive, exclusion d'un joueur", () => {
   beforeEach(() => {
     handlers.clear()
     mockEmitAck.mockReset()
@@ -72,7 +72,7 @@ describe('HostLive, exclusion d\'un joueur', () => {
     await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('host:kick', { playerId: 'p1' }))
   })
 
-  it('annuler la confirmation n\'émet rien', async () => {
+  it("annuler la confirmation n'émet rien", async () => {
     renderHostLive()
     emitServerEvent('lobby:update', { players: [ana] })
     vi.spyOn(window, 'confirm').mockReturnValue(false)
@@ -91,7 +91,7 @@ describe('HostLive, exclusion d\'un joueur', () => {
     expect(within(topBoard).getByRole('button', { name: 'Exclure Ana' })).toBeInTheDocument()
   })
 
-  it('le joueur exclu disparaît du tableau au lobby:update suivant, même s\'il reste dans le dernier scoreboard', async () => {
+  it("le joueur exclu disparaît du tableau au lobby:update suivant, même s'il reste dans le dernier scoreboard", async () => {
     renderHostLive()
     emitServerEvent('lobby:update', { players: [ana, bob] })
     emitServerEvent('question:show', questionShow)
@@ -108,7 +108,12 @@ describe('HostLive, exclusion d\'un joueur', () => {
   })
 
   it('en jeu avec 10 joueurs : le 10e, hors du top, est excluable depuis « Tous les joueurs (10) »', async () => {
-    const ten = Array.from({ length: 10 }, (_, i) => ({ id: `p${i + 1}`, nickname: `Joueur${i + 1}`, score: 0, connected: true }))
+    const ten = Array.from({ length: 10 }, (_, i) => ({
+      id: `p${i + 1}`,
+      nickname: `Joueur${i + 1}`,
+      score: 0,
+      connected: true,
+    }))
     renderHostLive()
     emitServerEvent('lobby:update', { players: ten })
     emitServerEvent('question:show', questionShow)
@@ -129,7 +134,10 @@ describe('HostLive, exclusion d\'un joueur', () => {
     renderHostLive()
     emitServerEvent('lobby:update', { players: [ana, bob] })
     emitServerEvent('question:show', questionShow)
-    emitServerEvent('question:reveal', { correct: { options: [{ label: 'Lisbonne', correct: true }] }, distribution: {} })
+    emitServerEvent('question:reveal', {
+      correct: { options: [{ label: 'Lisbonne', correct: true }] },
+      distribution: {},
+    })
     fireEvent.click(await screen.findByRole('button', { name: 'Afficher le classement' }))
     emitServerEvent('scoreboard', { ranking: [{ playerId: 'p1', nickname: 'Ana', score: 800 }] })
     const aside = await screen.findByRole('complementary', { name: 'Joueurs de la partie' })
@@ -178,7 +186,7 @@ describe('HostLive, exclusion d\'un joueur', () => {
     expect(container.textContent).not.toContain('Zoe')
   })
 
-  it('une erreur d\'ack est affichée', async () => {
+  it("une erreur d'ack est affichée", async () => {
     mockEmitAck.mockImplementation(async (event?: string) => {
       if (event === 'host:kick') throw new Error('exclusion impossible au podium')
       return {}

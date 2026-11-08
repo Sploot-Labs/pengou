@@ -1,4 +1,4 @@
-import { and, count, eq, like, or } from 'drizzle-orm'
+import { and, eq, like, or } from 'drizzle-orm'
 import type { Role } from '@splootlabs/shared'
 import type { Db } from './client.js'
 import type { TenantScope } from './tenant.js'
@@ -111,36 +111,60 @@ export type Member = { userId: string; email: string; name: string; role: Role; 
 
 /** Membres du workspace (jointure user), du plus ancien au plus récent. */
 export async function listMembers(scope: TenantScope): Promise<Member[]> {
-  const rows = await scope.db.select({
-    userId: schema.membership.userId,
-    email: schema.user.email,
-    name: schema.user.name,
-    role: schema.membership.role,
-    createdAt: schema.membership.createdAt,
-  }).from(schema.membership)
+  const rows = await scope.db
+    .select({
+      userId: schema.membership.userId,
+      email: schema.user.email,
+      name: schema.user.name,
+      role: schema.membership.role,
+      createdAt: schema.membership.createdAt,
+    })
+    .from(schema.membership)
     .innerJoin(schema.user, eq(schema.user.id, schema.membership.userId))
     .where(eq(schema.membership.tenantId, scope.tenantId))
     .orderBy(schema.membership.createdAt)
-  return rows.map((r) => ({ userId: r.userId, email: r.email, name: r.name, role: r.role as Role, createdAt: r.createdAt }))
+  return rows.map((r) => ({
+    userId: r.userId,
+    email: r.email,
+    name: r.name,
+    role: r.role as Role,
+    createdAt: r.createdAt,
+  }))
 }
 
 /** Rôle d'un membre dans le workspace, ou null s'il n'en est pas membre. */
 export async function getMemberRole(scope: TenantScope, userId: string): Promise<Role | null> {
-  const [m] = await scope.db.select({ role: schema.membership.role }).from(schema.membership)
-    .where(and(eq(schema.membership.userId, userId), eq(schema.membership.tenantId, scope.tenantId))).limit(1)
+  const [m] = await scope.db
+    .select({ role: schema.membership.role })
+    .from(schema.membership)
+    .where(and(eq(schema.membership.userId, userId), eq(schema.membership.tenantId, scope.tenantId)))
+    .limit(1)
   return m ? (m.role as Role) : null
 }
 
-/** Nombre d'owners du workspace — base de la garde « au moins un owner ». */
+/**
+ * Nombre d'owners du workspace, base de la garde « au moins un owner ».
+ * Verrouille les lignes owner (`FOR UPDATE`) : en READ COMMITTED, une seconde transaction
+ * attend la première puis relit les lignes, et ne compte plus un owner déjà rétrogradé.
+ * (Postgres refuse `FOR UPDATE` avec un agrégat, d'où le décompte côté JS.)
+ */
 export async function countOwners(scope: TenantScope): Promise<number> {
-  const [row] = await scope.db.select({ n: count() }).from(schema.membership)
+  const rows = await scope.db
+    .select({ id: schema.membership.id })
+    .from(schema.membership)
     .where(and(eq(schema.membership.tenantId, scope.tenantId), eq(schema.membership.role, 'owner')))
-  return Number(row?.n ?? 0)
+    .for('update')
+  return rows.length
 }
 
 /** Change le rôle d'un membre. Renvoie le membership mis à jour, ou null s'il n'existe pas. */
-export async function setMemberRole(scope: TenantScope, userId: string, role: Role): Promise<{ userId: string; role: Role } | null> {
-  const [row] = await scope.db.update(schema.membership)
+export async function setMemberRole(
+  scope: TenantScope,
+  userId: string,
+  role: Role,
+): Promise<{ userId: string; role: Role } | null> {
+  const [row] = await scope.db
+    .update(schema.membership)
     .set({ role })
     .where(and(eq(schema.membership.userId, userId), eq(schema.membership.tenantId, scope.tenantId)))
     .returning({ userId: schema.membership.userId, role: schema.membership.role })
@@ -149,7 +173,8 @@ export async function setMemberRole(scope: TenantScope, userId: string, role: Ro
 
 /** Retire un membre du workspace. Renvoie true si une ligne a été supprimée. */
 export async function removeMember(scope: TenantScope, userId: string): Promise<boolean> {
-  const rows = await scope.db.delete(schema.membership)
+  const rows = await scope.db
+    .delete(schema.membership)
     .where(and(eq(schema.membership.userId, userId), eq(schema.membership.tenantId, scope.tenantId)))
     .returning({ id: schema.membership.id })
   return rows.length > 0

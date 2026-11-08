@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=543"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0543-4-en",
+      "type": "mcq",
+      "prompt": "Which espresso drink has milk and a third of milk foam?",
+      "payload": {
+        "options": [
+          {
+            "label": "Irish coffee",
+            "correct": false
+          },
+          {
+            "label": "Mocha",
+            "correct": false
+          },
+          {
+            "label": "Viennese coffee",
+            "correct": false
+          },
+          {
+            "label": "Cappuccino",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

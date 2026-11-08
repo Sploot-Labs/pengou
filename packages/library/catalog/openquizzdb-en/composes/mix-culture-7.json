@@ -1,0 +1,503 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0219-1-en",
+      "type": "mcq",
+      "prompt": "Which Breton town is known for its alignments of standing stones?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quimper",
+            "correct": false
+          },
+          {
+            "label": "Carnac",
+            "correct": true
+          },
+          {
+            "label": "Brest",
+            "correct": false
+          },
+          {
+            "label": "Lorient",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0289-2-en",
+      "type": "mcq",
+      "prompt": "Which software protects a computer from online threats?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chat",
+            "correct": false
+          },
+          {
+            "label": "Antivirus",
+            "correct": true
+          },
+          {
+            "label": "Messaging",
+            "correct": false
+          },
+          {
+            "label": "Browser",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0479-3-en",
+      "type": "mcq",
+      "prompt": "In which book did Rabelais write the motto \"Do what thou wilt\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Fourth Book",
+            "correct": false
+          },
+          {
+            "label": "Pantagruel",
+            "correct": false
+          },
+          {
+            "label": "The Third Book",
+            "correct": false
+          },
+          {
+            "label": "Gargantua",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0124-1-en",
+      "type": "mcq",
+      "prompt": "Which fictional planet are Superman and Supergirl from?",
+      "payload": {
+        "options": [
+          {
+            "label": "Krusty",
+            "correct": false
+          },
+          {
+            "label": "Krypton",
+            "correct": true
+          },
+          {
+            "label": "Kamini",
+            "correct": false
+          },
+          {
+            "label": "Kirby",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0336-2-en",
+      "type": "mcq",
+      "prompt": "What is Korben Dallas's job in \"The Fifth Element\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hitman",
+            "correct": false
+          },
+          {
+            "label": "Soldier",
+            "correct": false
+          },
+          {
+            "label": "Taxi driver",
+            "correct": true
+          },
+          {
+            "label": "Police officer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0157-2-en",
+      "type": "mcq",
+      "prompt": "Which Greek island is famous for white houses and blue domes?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mykonos",
+            "correct": false
+          },
+          {
+            "label": "Santorini",
+            "correct": true
+          },
+          {
+            "label": "Rhodes",
+            "correct": false
+          },
+          {
+            "label": "Crete",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0100-3-en",
+      "type": "mcq",
+      "prompt": "What did Byzantium and Constantinople become?",
+      "payload": {
+        "options": [
+          {
+            "label": "Istanbul",
+            "correct": true
+          },
+          {
+            "label": "Islamabad",
+            "correct": false
+          },
+          {
+            "label": "Isparta",
+            "correct": false
+          },
+          {
+            "label": "Izmir",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0488-2-en",
+      "type": "mcq",
+      "prompt": "In boxing, which punch hits the opponent by going under his guard?",
+      "payload": {
+        "options": [
+          {
+            "label": "Straight",
+            "correct": false
+          },
+          {
+            "label": "Slip",
+            "correct": false
+          },
+          {
+            "label": "Hook",
+            "correct": false
+          },
+          {
+            "label": "Uppercut",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0451-4-en",
+      "type": "mcq",
+      "prompt": "What is the name of Patchy the Pirate's parrot?",
+      "payload": {
+        "options": [
+          {
+            "label": "Looney",
+            "correct": false
+          },
+          {
+            "label": "Potty",
+            "correct": true
+          },
+          {
+            "label": "Nutty",
+            "correct": false
+          },
+          {
+            "label": "Marbles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0117-1-en",
+      "type": "mcq",
+      "prompt": "Who lost twice in the runoff against Emmanuel Macron?",
+      "payload": {
+        "options": [
+          {
+            "label": "Édith Cresson",
+            "correct": false
+          },
+          {
+            "label": "Marine Le Pen",
+            "correct": true
+          },
+          {
+            "label": "Anne Hidalgo",
+            "correct": false
+          },
+          {
+            "label": "Rachida Dati",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0367-4-en",
+      "type": "mcq",
+      "prompt": "Which country is the biggest almond producer today?",
+      "payload": {
+        "options": [
+          {
+            "label": "United States",
+            "correct": true
+          },
+          {
+            "label": "Spain",
+            "correct": false
+          },
+          {
+            "label": "Morocco",
+            "correct": false
+          },
+          {
+            "label": "Italy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0352-2-en",
+      "type": "mcq",
+      "prompt": "Which parasitic insect sometimes lives in human hair?",
+      "payload": {
+        "options": [
+          {
+            "label": "Moth",
+            "correct": false
+          },
+          {
+            "label": "Tineid",
+            "correct": false
+          },
+          {
+            "label": "Bedbug",
+            "correct": false
+          },
+          {
+            "label": "Louse",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0111-4-en",
+      "type": "mcq",
+      "prompt": "Which discipline starts the Ironman World Championship?",
+      "payload": {
+        "options": [
+          {
+            "label": "Running",
+            "correct": false
+          },
+          {
+            "label": "Marathon",
+            "correct": false
+          },
+          {
+            "label": "Cycling",
+            "correct": false
+          },
+          {
+            "label": "Swimming",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0304-4-en",
+      "type": "mcq",
+      "prompt": "Which blues-rock band is made up of three Texans, two of them bearded?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zed Yago",
+            "correct": false
+          },
+          {
+            "label": "Zella Day",
+            "correct": false
+          },
+          {
+            "label": "ZZ Top",
+            "correct": true
+          },
+          {
+            "label": "Zwan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0460-1-en",
+      "type": "mcq",
+      "prompt": "Which small object is used to hold sheets of paper together?",
+      "payload": {
+        "options": [
+          {
+            "label": "Paper clip",
+            "correct": true
+          },
+          {
+            "label": "Rolodex",
+            "correct": false
+          },
+          {
+            "label": "Post-it",
+            "correct": false
+          },
+          {
+            "label": "Stencil",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0618-1-en",
+      "type": "mcq",
+      "prompt": "What do you call a person who keeps honeybees?",
+      "payload": {
+        "options": [
+          {
+            "label": "Frog farmer",
+            "correct": false
+          },
+          {
+            "label": "Beekeeper",
+            "correct": true
+          },
+          {
+            "label": "Poultry farmer",
+            "correct": false
+          },
+          {
+            "label": "Oyster farmer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0334-1-en",
+      "type": "mcq",
+      "prompt": "Which role does Bruce Willis play in the hit \"Die Hard\" franchise?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peter Fallow",
+            "correct": false
+          },
+          {
+            "label": "John McClane",
+            "correct": true
+          },
+          {
+            "label": "Tom Mix",
+            "correct": false
+          },
+          {
+            "label": "Walter Davis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

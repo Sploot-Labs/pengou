@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0618-3",
+      "type": "mcq",
+      "prompt": "Avec quel autre insecte plus agressif confond-on souvent l'abeille ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bourdon",
+            "correct": false
+          },
+          {
+            "label": "Taon",
+            "correct": false
+          },
+          {
+            "label": "Guêpe",
+            "correct": true
+          },
+          {
+            "label": "Frelon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0243-1",
+      "type": "mcq",
+      "prompt": "Dans quel pays se dresse la Liberté éclairant le monde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "Royaume-Uni",
+            "correct": false
+          },
+          {
+            "label": "Canada",
+            "correct": false
+          },
+          {
+            "label": "États-Unis",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0073-3",
+      "type": "mcq",
+      "prompt": "Combien de titres mondiaux Michael Schumacher a-t-il décrochés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sept",
+            "correct": true
+          },
+          {
+            "label": "Huit",
+            "correct": false
+          },
+          {
+            "label": "Neuf",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0596-1",
+      "type": "mcq",
+      "prompt": "Quel prénom se partagent les acteurs canadiens Gosling et Reynolds ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Evan",
+            "correct": false
+          },
+          {
+            "label": "Alan",
+            "correct": false
+          },
+          {
+            "label": "Brian",
+            "correct": false
+          },
+          {
+            "label": "Ryan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0237-4",
+      "type": "mcq",
+      "prompt": "Quel nom portait le navigateur Internet devenu « Microsoft Edge » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Firefox",
+            "correct": false
+          },
+          {
+            "label": "Internet Explorer",
+            "correct": true
+          },
+          {
+            "label": "Chrome",
+            "correct": false
+          },
+          {
+            "label": "Safari",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0601-4",
+      "type": "mcq",
+      "prompt": "Quel intrus se cache parmi ces mots provenant de la langue arabe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Girafe",
+            "correct": false
+          },
+          {
+            "label": "Magasin",
+            "correct": false
+          },
+          {
+            "label": "Panoplie",
+            "correct": true
+          },
+          {
+            "label": "Gazelle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0551-4",
+      "type": "mcq",
+      "prompt": "Sur les principes de quelle autre émission est basée « Secret Story » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Golden Show",
+            "correct": false
+          },
+          {
+            "label": "Bachelor",
+            "correct": false
+          },
+          {
+            "label": "Dilemme",
+            "correct": false
+          },
+          {
+            "label": "Big Brother",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0544-3",
+      "type": "mcq",
+      "prompt": "Quel artiste a écrit, composé et réalisé l'album « Rock'n'Roll Attitude » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yodelice",
+            "correct": false
+          },
+          {
+            "label": "Michel Berger",
+            "correct": true
+          },
+          {
+            "label": "Matthieu Chedid",
+            "correct": false
+          },
+          {
+            "label": "Pascal Obispo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0430-1",
+      "type": "mcq",
+      "prompt": "Quelles sont les deux couleurs du drapeau du Québec, révélé en 1948 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rouge et bleu",
+            "correct": false
+          },
+          {
+            "label": "Bleu et blanc",
+            "correct": true
+          },
+          {
+            "label": "Bleu et rouge",
+            "correct": false
+          },
+          {
+            "label": "Rouge et blanc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0607-4",
+      "type": "mcq",
+      "prompt": "Quelle médaille reçoit le deuxième d'une épreuve aux JO ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Argent",
+            "correct": true
+          },
+          {
+            "label": "Cuivre",
+            "correct": false
+          },
+          {
+            "label": "Or",
+            "correct": false
+          },
+          {
+            "label": "Bronze",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0277-4",
+      "type": "mcq",
+      "prompt": "Quelle épice parfume le risotto à la milanaise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Curcuma",
+            "correct": false
+          },
+          {
+            "label": "Safran",
+            "correct": true
+          },
+          {
+            "label": "Origan",
+            "correct": false
+          },
+          {
+            "label": "Curry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0208-3",
+      "type": "mcq",
+      "prompt": "La tartiflette est faite avec quel fromage ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ricotta",
+            "correct": false
+          },
+          {
+            "label": "Roquefort",
+            "correct": false
+          },
+          {
+            "label": "Reblochon",
+            "correct": true
+          },
+          {
+            "label": "Romano",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0121-1",
+      "type": "mcq",
+      "prompt": "Quel club évolue au stade Pierre-Mauroy de Villeneuve-d'Ascq ?",
+      "payload": {
+        "options": [
+          {
+            "label": "RC Lens",
+            "correct": false
+          },
+          {
+            "label": "LOSC Lille",
+            "correct": true
+          },
+          {
+            "label": "Amiens SC",
+            "correct": false
+          },
+          {
+            "label": "Valenciennes FC",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0027-4",
+      "type": "mcq",
+      "prompt": "Quel est le nom du fidèle compagnon de Don Quichotte ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sancho Pança",
+            "correct": true
+          },
+          {
+            "label": "Sancho Taka",
+            "correct": false
+          },
+          {
+            "label": "Sancho Nifroid",
+            "correct": false
+          },
+          {
+            "label": "Sancho Mancha",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0315-1",
+      "type": "mcq",
+      "prompt": "Quel instrument à cordes pincées est utilisé en Inde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Théorbe",
+            "correct": false
+          },
+          {
+            "label": "Banjo",
+            "correct": false
+          },
+          {
+            "label": "Sitar",
+            "correct": true
+          },
+          {
+            "label": "Gling",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0586-4",
+      "type": "mcq",
+      "prompt": "Quel héros, créé par un inventeur, possède des mains d'argent ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dylan",
+            "correct": false
+          },
+          {
+            "label": "Edward",
+            "correct": true
+          },
+          {
+            "label": "Kevin",
+            "correct": false
+          },
+          {
+            "label": "Robert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0049-3",
+      "type": "mcq",
+      "prompt": "Combien de fois au maximum peut-on être élu président des États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deux fois",
+            "correct": true
+          },
+          {
+            "label": "Quatre fois",
+            "correct": false
+          },
+          {
+            "label": "Trois fois",
+            "correct": false
+          },
+          {
+            "label": "Une fois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0183-2",
+      "type": "mcq",
+      "prompt": "Quelle substance constitue le squelette principal de Wolverine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vibranium",
+            "correct": false
+          },
+          {
+            "label": "Cavorite",
+            "correct": false
+          },
+          {
+            "label": "Adamantium",
+            "correct": true
+          },
+          {
+            "label": "Neutronium",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0505-1",
+      "type": "mcq",
+      "prompt": "Quelle marque est identifiée par une ribambelle de fruits déjantés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Capri-Sun",
+            "correct": false
+          },
+          {
+            "label": "Oasis",
+            "correct": true
+          },
+          {
+            "label": "Calypso",
+            "correct": false
+          },
+          {
+            "label": "Lemonade",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0342-1",
+      "type": "mcq",
+      "prompt": "Combien le chat possède-t-il de doigts aux pattes antérieures ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinq",
+            "correct": true
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-mix-culture-2",
+      "title": "Mix culture #2",
+      "description": "Un peu de tout : cinéma, sport, géographie, nature, musique et culture générale.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0618-3",
+        "oqdb-0243-1",
+        "oqdb-0073-3",
+        "oqdb-0596-1",
+        "oqdb-0237-4",
+        "oqdb-0601-4",
+        "oqdb-0551-4",
+        "oqdb-0544-3",
+        "oqdb-0430-1",
+        "oqdb-0607-4",
+        "oqdb-0277-4",
+        "oqdb-0208-3",
+        "oqdb-0121-1",
+        "oqdb-0027-4",
+        "oqdb-0315-1",
+        "oqdb-0586-4",
+        "oqdb-0049-3",
+        "oqdb-0183-2",
+        "oqdb-0505-1",
+        "oqdb-0342-1"
+      ]
+    }
+  ]
+}

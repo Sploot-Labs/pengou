@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=173"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0173-4-en",
+      "type": "mcq",
+      "prompt": "Which country was Barack Obama's father from?",
+      "payload": {
+        "options": [
+          {
+            "label": "South Africa",
+            "correct": false
+          },
+          {
+            "label": "Mozambique",
+            "correct": false
+          },
+          {
+            "label": "Congo",
+            "correct": false
+          },
+          {
+            "label": "Kenya",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

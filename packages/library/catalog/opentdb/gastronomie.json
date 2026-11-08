@@ -1,0 +1,317 @@
+{
+  "source": {
+    "name": "Open Trivia Database",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-156bcc53194d",
+      "type": "mcq",
+      "prompt": "What fruit is a traditional ingredient of a Black Forest Gateau?",
+      "payload": {
+        "options": [
+          {
+            "label": "Apricots",
+            "correct": false
+          },
+          {
+            "label": "Raisins",
+            "correct": false
+          },
+          {
+            "label": "Cherries",
+            "correct": true
+          },
+          {
+            "label": "Apples",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-32dfe9ed2fef",
+      "type": "mcq",
+      "prompt": "What nation produces roughly 40% of the world’s vanilla?",
+      "payload": {
+        "options": [
+          {
+            "label": "China",
+            "correct": false
+          },
+          {
+            "label": "Mexico",
+            "correct": false
+          },
+          {
+            "label": "Madagascar",
+            "correct": true
+          },
+          {
+            "label": "Indonesia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4f33b3195ec7",
+      "type": "mcq",
+      "prompt": "In which fast food chain can you order a Jamocha Shake?",
+      "payload": {
+        "options": [
+          {
+            "label": "McDonald's",
+            "correct": false
+          },
+          {
+            "label": "Wendy's",
+            "correct": false
+          },
+          {
+            "label": "Arby's",
+            "correct": true
+          },
+          {
+            "label": "Burger King",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7c50e0e0f244",
+      "type": "mcq",
+      "prompt": "What is the name given to Indian food cooked over charcoal in a clay oven?",
+      "payload": {
+        "options": [
+          {
+            "label": "Biryani",
+            "correct": false
+          },
+          {
+            "label": "Pani puri",
+            "correct": false
+          },
+          {
+            "label": "Tandoori",
+            "correct": true
+          },
+          {
+            "label": "Tiki masala",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-92eb5125f007",
+      "type": "mcq",
+      "prompt": "What style of beer will typically have a higher than average hop content?",
+      "payload": {
+        "options": [
+          {
+            "label": "India Pale Ale",
+            "correct": true
+          },
+          {
+            "label": "Stout",
+            "correct": false
+          },
+          {
+            "label": "Extra Special Bitter",
+            "correct": false
+          },
+          {
+            "label": "Scotch Ale",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a64dba54c749",
+      "type": "mcq",
+      "prompt": "What nuts are used in the production of marzipan?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peanuts",
+            "correct": false
+          },
+          {
+            "label": "Walnuts",
+            "correct": false
+          },
+          {
+            "label": "Pistachios",
+            "correct": false
+          },
+          {
+            "label": "Almonds",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-af9b61f11602",
+      "type": "truefalse",
+      "prompt": "Instant mashed potatoes were invented by Canadian Edward Asselbergs in 1962.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-bc1879be96bc",
+      "type": "mcq",
+      "prompt": "Who invented the first ever chocolate bar, in 1847?",
+      "payload": {
+        "options": [
+          {
+            "label": "John Cadbury",
+            "correct": false
+          },
+          {
+            "label": "Joseph Fry",
+            "correct": true
+          },
+          {
+            "label": "John Tyler",
+            "correct": false
+          },
+          {
+            "label": "Andrew Johnson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ca2ff98c40ab",
+      "type": "truefalse",
+      "prompt": "Nutella is produced by the German company Ferrero.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "gastronomie",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e3c4111e567d",
+      "type": "mcq",
+      "prompt": "The dish Fugu, is made from what family of fish?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mackerel",
+            "correct": false
+          },
+          {
+            "label": "Salmon",
+            "correct": false
+          },
+          {
+            "label": "Bass",
+            "correct": false
+          },
+          {
+            "label": "Pufferfish",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-eb53a1e7d8c6",
+      "type": "mcq",
+      "prompt": "What alcoholic drink is mainly made from juniper berries?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vodka",
+            "correct": false
+          },
+          {
+            "label": "Tequila",
+            "correct": false
+          },
+          {
+            "label": "Rum",
+            "correct": false
+          },
+          {
+            "label": "Gin",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-food-and-drink",
+      "title": "Food and drink",
+      "description": "Dishes, ingredients and drinks from around the world.",
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-156bcc53194d",
+        "otdb-32dfe9ed2fef",
+        "otdb-7c50e0e0f244",
+        "otdb-92eb5125f007",
+        "otdb-a64dba54c749",
+        "otdb-af9b61f11602",
+        "otdb-bc1879be96bc",
+        "otdb-ca2ff98c40ab",
+        "otdb-e3c4111e567d",
+        "otdb-eb53a1e7d8c6"
+      ]
+    }
+  ]
+}

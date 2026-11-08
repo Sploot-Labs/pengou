@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=471"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0471-3",
+      "type": "mcq",
+      "prompt": "Pour quel sport Donald Trump a-t-il acheté un terrain à Balmedie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ski",
+            "correct": false
+          },
+          {
+            "label": "Golf",
+            "correct": true
+          },
+          {
+            "label": "Rugby",
+            "correct": false
+          },
+          {
+            "label": "Squash",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=335"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0335-1",
+      "type": "mcq",
+      "prompt": "Dans quel pays Gary Oldman a-t-il vu le jour ?",
+      "payload": {
+        "options": [
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Royaume-Uni",
+            "correct": true
+          },
+          {
+            "label": "Australie",
+            "correct": false
+          },
+          {
+            "label": "Canada",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0335-3",
+      "type": "mcq",
+      "prompt": "Quel rôle est incarné par Gary Oldman dans la saga « Harry Potter » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ron Weasley",
+            "correct": false
+          },
+          {
+            "label": "Severus Rogue",
+            "correct": false
+          },
+          {
+            "label": "Lucius Malefoy",
+            "correct": false
+          },
+          {
+            "label": "Sirius Black",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0335-4",
+      "type": "mcq",
+      "prompt": "Dans quel film Gary Oldman incarne-t-il Winston Churchill ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Léon",
+            "correct": false
+          },
+          {
+            "label": "Darkest Hour",
+            "correct": true
+          },
+          {
+            "label": "Dunkerque",
+            "correct": false
+          },
+          {
+            "label": "Churchill",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

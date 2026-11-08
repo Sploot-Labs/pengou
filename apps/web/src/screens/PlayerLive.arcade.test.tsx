@@ -8,7 +8,7 @@ import { PlayerLive } from './PlayerLive'
 
 /**
  * Câblage « Arcade polaire » (données réelles) : compteur du lobby via
- * `lobby:update`, « n / N » via les champs positionnels de `question:show`, et
+ * `lobby:count`, « n / N » via les champs positionnels de `question:show`, et
  * série de bonnes réponses calculée côté client sur les verdicts successifs.
  * Même stratégie de mock socket que `PlayerLive.reading.test.tsx`, mais
  * `player:answer` répond `{accepted:true}` pour pouvoir atteindre le verdict.
@@ -23,7 +23,14 @@ vi.mock('../motion/index.js', async (importOriginal) => {
   return {
     ...actual,
     useCue: () => () => {},
-    useSound: () => ({ unlock: () => {}, play: () => {}, loop: () => {}, stop: () => {}, setMuted: () => {}, muted: false }),
+    useSound: () => ({
+      unlock: () => {},
+      play: () => {},
+      loop: () => {},
+      stop: () => {},
+      setMuted: () => {},
+      muted: false,
+    }),
   }
 })
 
@@ -83,7 +90,12 @@ const MCQ_SHOW = {
   payload: { options: [{ label: 'Empereur' }, { label: 'Adélie' }] },
 }
 const MCQ_REVEAL = {
-  correct: { options: [{ label: 'Empereur', correct: true }, { label: 'Adélie', correct: false }] },
+  correct: {
+    options: [
+      { label: 'Empereur', correct: true },
+      { label: 'Adélie', correct: false },
+    ],
+  },
   distribution: {},
 }
 
@@ -94,9 +106,7 @@ async function playCorrectRound(index: number, score: number) {
   const tile = await screen.findByRole('button', { name: /Empereur/ })
   fireEvent.click(tile)
   // La réponse est verrouillée (phase 'answered') puis acceptée par le serveur.
-  await waitFor(() =>
-    expect(mockEmitAck).toHaveBeenCalledWith('player:answer', { answer: { optionIndex: 0 } }),
-  )
+  await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:answer', { answer: { optionIndex: 0 } }))
   await screen.findByText(/Réponse enregistrée/)
   emitServerEvent('question:reveal', MCQ_REVEAL)
   emitServerEvent('scoreboard', { ranking: [{ playerId: 'p1', nickname: 'Ana', score }] })
@@ -114,20 +124,14 @@ describe('PlayerLive — arcade polaire (données réelles)', () => {
     clearPlayerSession()
   })
 
-  it('lobby : affiche le compteur « manchots sur la glace » depuis lobby:update', async () => {
+  it('lobby : affiche le compteur « manchots sur la glace » depuis lobby:count', async () => {
     renderPlayerLive()
     await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:reconnect', expect.anything()))
 
-    // Aucun nombre inventé tant que la liste n'est pas arrivée.
+    // Aucun nombre inventé tant que le compteur n'est pas arrivé.
     expect(screen.queryByText(/sur la glace/)).toBeNull()
 
-    emitServerEvent('lobby:update', {
-      players: [
-        { id: 'p1', nickname: 'Ana', connected: true },
-        { id: 'p2', nickname: 'Bo', connected: true },
-        { id: 'p3', nickname: 'Cy' },
-      ],
-    })
+    emitServerEvent('lobby:count', { count: 3 })
 
     expect(await screen.findByText('3')).toBeInTheDocument()
     expect(screen.getByText('manchots sur la glace')).toBeInTheDocument()

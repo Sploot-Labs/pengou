@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=39"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0039-2-en",
+      "type": "mcq",
+      "prompt": "In which war film does Clint Eastwood play Tom Highway?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Eiger Sanction",
+            "correct": false
+          },
+          {
+            "label": "Platoon",
+            "correct": false
+          },
+          {
+            "label": "Thunderbolt and Lightfoot",
+            "correct": false
+          },
+          {
+            "label": "Heartbreak Ridge",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0039-3-en",
+      "type": "mcq",
+      "prompt": "In which American war film does Jean Reno play a captain?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Premier Cercle",
+            "correct": false
+          },
+          {
+            "label": "Armored",
+            "correct": false
+          },
+          {
+            "label": "Flyboys",
+            "correct": true
+          },
+          {
+            "label": "Ronin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0039-4-en",
+      "type": "mcq",
+      "prompt": "Which war film opens with a speech by General Patton?",
+      "payload": {
+        "options": [
+          {
+            "label": "Full Metal Jacket",
+            "correct": false
+          },
+          {
+            "label": "Platoon",
+            "correct": false
+          },
+          {
+            "label": "Casualties of War",
+            "correct": false
+          },
+          {
+            "label": "Patton",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

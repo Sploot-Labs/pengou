@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=342"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0342-3-en",
+      "type": "mcq",
+      "prompt": "On average, how many times per second does a cat lap?",
+      "payload": {
+        "options": [
+          {
+            "label": "Four",
+            "correct": true
+          },
+          {
+            "label": "Two",
+            "correct": false
+          },
+          {
+            "label": "Five",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

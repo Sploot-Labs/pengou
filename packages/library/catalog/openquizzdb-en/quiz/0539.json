@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=539"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0539-2-en",
+      "type": "mcq",
+      "prompt": "Which alcoholic drink is made with whisky and coffee?",
+      "payload": {
+        "options": [
+          {
+            "label": "Irish coffee",
+            "correct": true
+          },
+          {
+            "label": "French coffee",
+            "correct": false
+          },
+          {
+            "label": "Viennese coffee",
+            "correct": false
+          },
+          {
+            "label": "Café normand",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0539-4-en",
+      "type": "mcq",
+      "prompt": "Which coffee variety is generally the strongest?",
+      "payload": {
+        "options": [
+          {
+            "label": "Robusta",
+            "correct": true
+          },
+          {
+            "label": "Arabica",
+            "correct": false
+          },
+          {
+            "label": "Manila",
+            "correct": false
+          },
+          {
+            "label": "Liberica",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

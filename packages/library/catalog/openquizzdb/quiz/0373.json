@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=373"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0373-1",
+      "type": "mcq",
+      "prompt": "De quel pays Istanbul est-elle la plus grande ville et métropole ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Syrie",
+            "correct": false
+          },
+          {
+            "label": "Yémen",
+            "correct": false
+          },
+          {
+            "label": "Jordanie",
+            "correct": false
+          },
+          {
+            "label": "Turquie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0373-2",
+      "type": "mcq",
+      "prompt": "Quel nom la ville d'Istanbul a-t-elle porté au moment de sa fondation ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Daulis",
+            "correct": false
+          },
+          {
+            "label": "Byzance",
+            "correct": true
+          },
+          {
+            "label": "Paestum",
+            "correct": false
+          },
+          {
+            "label": "Messène",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0373-3",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on les habitants d'Istanbul ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stambouliotes",
+            "correct": true
+          },
+          {
+            "label": "Banbulistes",
+            "correct": false
+          },
+          {
+            "label": "Stambulois",
+            "correct": false
+          },
+          {
+            "label": "Istanbuliens",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

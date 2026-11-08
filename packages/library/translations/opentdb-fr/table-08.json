@@ -1,0 +1,938 @@
+{
+  "questions": {
+    "otdb-cac2672a0e1b": {
+      "prompt": "Le dernier système Windows basé sur le noyau Windows 9x était Windows 98."
+    },
+    "otdb-d1874ab812be": {
+      "prompt": "Quel langage de programmation porte le même nom qu'une île d'Indonésie ?",
+      "options": [
+        "Python",
+        "C",
+        "Jakarta",
+        "Java"
+      ]
+    },
+    "otdb-d39f28408c40": {
+      "prompt": "Quelle partie du plant de cannabis produit la substance psychoactive appelée THC ?",
+      "options": [
+        "Fleur mâle",
+        "Fleur femelle",
+        "Racines",
+        "Feuilles"
+      ]
+    },
+    "otdb-d50785021ee7": {
+      "prompt": "Le PC d'IBM utilisait un microprocesseur Intel 8008 cadencé à 4,77 MHz et 8 kilo-octets de mémoire."
+    },
+    "otdb-d565cb3cfb18": {
+      "prompt": "La Terre a la forme d'une sphère parfaite."
+    },
+    "otdb-d5de9c4722b9": {
+      "prompt": "Quels sont les 6 premiers chiffres du nombre « pi » ?",
+      "options": [
+        "3,25812",
+        "3,14159",
+        "3,12423",
+        "3,14169"
+      ]
+    },
+    "otdb-d7a09ef24d71": {
+      "prompt": "Lequel de ces ensembles n'est pas une famille du tableau périodique ?",
+      "options": [
+        "Métaux alcalins",
+        "Fluorines",
+        "Gaz nobles",
+        "Halogènes"
+      ]
+    },
+    "otdb-d81602e4df0f": {
+      "prompt": "Aleph zéro est le cardinal de l'ensemble des entiers naturels."
+    },
+    "otdb-d86dda745c8f": {
+      "prompt": "La factorielle de zéro est égale à zéro."
+    },
+    "otdb-da13d164f2f9": {
+      "prompt": "Quel nom porte la couche 4 du modèle OSI (ISO) ?",
+      "options": [
+        "Réseau",
+        "Session",
+        "Transport",
+        "Liaison de données"
+      ]
+    },
+    "otdb-dab335bde415": {
+      "prompt": "Quelle est la racine carrée de 49 ?",
+      "options": [
+        "7",
+        "4",
+        "12",
+        "9"
+      ]
+    },
+    "otdb-db52410020e1": {
+      "prompt": "Linus Torvalds a créé Linux et Git."
+    },
+    "otdb-e1249494ce84": {
+      "prompt": "Linus Torvalds a créé lequel de ces éléments ?",
+      "options": [
+        "Wikipédia",
+        "Python",
+        "Linux",
+        "Microsoft Windows"
+      ]
+    },
+    "otdb-e20c9dbdfb11": {
+      "prompt": "Quel langage de programmation était le plus utilisé sur GitHub en 2015 ?",
+      "options": [
+        "PHP",
+        "Python",
+        "C#",
+        "JavaScript"
+      ]
+    },
+    "otdb-e2e0dfccb33e": {
+      "prompt": "« HTML » signifie Hypertext Markup Language."
+    },
+    "otdb-e4ce76d7ba37": {
+      "prompt": "Lequel de ces éléments sert habituellement à doper le silicium semi-conducteur ?",
+      "options": [
+        "Bore",
+        "Oxygène",
+        "Fer",
+        "Carbone"
+      ]
+    },
+    "otdb-e4d2d9edfdc3": {
+      "prompt": "Combien de copies de chaque gène les cellules humaines possèdent-elles généralement ?",
+      "options": [
+        "3",
+        "4",
+        "1",
+        "2"
+      ]
+    },
+    "otdb-e572ba485a98": {
+      "prompt": "Quelle est la planète la plus chaude du système solaire ?",
+      "options": [
+        "Vénus",
+        "Jupiter",
+        "Mars",
+        "Mercure"
+      ]
+    },
+    "otdb-e6346bc183c4": {
+      "prompt": "Toutes les planètes du système solaire tournent autour du Soleil."
+    },
+    "otdb-e72ccd25f3a3": {
+      "prompt": "Quelle constellation contient le centre de la Voie lactée ?",
+      "options": [
+        "Ophiuchus",
+        "Sagittaire",
+        "Capricorne",
+        "Scorpion"
+      ]
+    },
+    "otdb-e7b48de788da": {
+      "prompt": "Le .at est le domaine de premier niveau de quel pays ?",
+      "options": [
+        "Autriche",
+        "Argentine",
+        "Angola",
+        "Australie"
+      ]
+    },
+    "otdb-e80865b0912d": {
+      "prompt": "Quel format d'image est le plus recommandé pour les logos dans la base de données de Wikimédia ?",
+      "options": [
+        ".jpeg",
+        ".png",
+        ".gif",
+        ".svg"
+      ]
+    },
+    "otdb-e846d67ed6c1": {
+      "prompt": "Quel minéral a le plus petit numéro sur l'échelle de Mohs ?",
+      "options": [
+        "Quartz",
+        "Diamant",
+        "Gypse",
+        "Talc"
+      ]
+    },
+    "otdb-e933c14310de": {
+      "prompt": "Quel est le numéro atomique du strontium ?",
+      "options": [
+        "38",
+        "11",
+        "73",
+        "47"
+      ]
+    },
+    "otdb-ea0323bae64f": {
+      "prompt": "Quelle est l'unité SI de distance ?",
+      "options": [
+        "Mètre",
+        "Pied",
+        "Ångström",
+        "Brasse"
+      ]
+    },
+    "otdb-ead7ee657063": {
+      "prompt": "Quelle est la dérivée de sin(x) ?",
+      "options": [
+        "-cos(x)",
+        "-sin(x)",
+        "csc(x)",
+        "cos(x)"
+      ]
+    },
+    "otdb-ebb12224194b": {
+      "prompt": "Lequel de ces dés n'est pas un solide de Platon ?",
+      "options": [
+        "Dé à 8 faces",
+        "Dé à 10 faces",
+        "Dé à 12 faces",
+        "Dé à 20 faces"
+      ]
+    },
+    "otdb-ed6c9f8255eb": {
+      "prompt": "Lequel de ces systèmes d'exploitation est sorti en premier ?",
+      "options": [
+        "OS/2",
+        "Mac OS",
+        "Windows",
+        "Linux"
+      ]
+    },
+    "otdb-eed96b0bf04c": {
+      "prompt": "Selon l'énoncé d'origine de la loi de Moore, le nombre de transistors d'une puce double tous les combien de temps ?",
+      "options": [
+        "Huit ans",
+        "Deux ans",
+        "Quatre ans",
+        "Un an"
+      ]
+    },
+    "otdb-efe3361faa44": {
+      "prompt": "E = MC3"
+    },
+    "otdb-f1df9341f72c": {
+      "prompt": "Quelle forme dessine sin(x) ou cos(x) sur un graphique ?",
+      "options": [
+        "Des ondes",
+        "Une droite",
+        "Des zigzags",
+        "Une parabole"
+      ]
+    },
+    "otdb-f23586733b4d": {
+      "prompt": "Comment appelle-t-on l'objet métallique placé entre le processeur et son ventilateur ?",
+      "options": [
+        "Évent de chaleur",
+        "Régulateur de température",
+        "Évent du processeur",
+        "Dissipateur thermique"
+      ]
+    },
+    "otdb-f2ea734fa875": {
+      "prompt": "Combien de bits équivalent couramment à un octet ?",
+      "options": [
+        "1",
+        "8",
+        "64",
+        "2"
+      ]
+    },
+    "otdb-f3a52928a44f": {
+      "prompt": "Combien de valeurs un seul octet peut-il représenter ?",
+      "options": [
+        "256",
+        "8",
+        "1",
+        "1024"
+      ]
+    },
+    "otdb-f585f23f6645": {
+      "prompt": "Comment s'appelle la théière que l'on voit dans de nombreux logiciels de modélisation 3D ?",
+      "options": [
+        "Théière du Tennessee",
+        "Théière de Pixar",
+        "Théière 3D",
+        "Théière de l'Utah"
+      ]
+    },
+    "otdb-f5a558a88c93": {
+      "prompt": "Combien de côtés un trapèze possède-t-il ?",
+      "options": [
+        "5",
+        "3",
+        "4",
+        "6"
+      ]
+    },
+    "otdb-f681167c0207": {
+      "prompt": "Combien de faces un ruban de Möbius possède-t-il ?",
+      "options": [
+        "3",
+        "4",
+        "2",
+        "1"
+      ]
+    },
+    "otdb-f6d42804182d": {
+      "prompt": "Sur quel composant de l'ordinateur se trouve la puce du BIOS ?",
+      "options": [
+        "Processeur graphique",
+        "Disque dur",
+        "Carte mère",
+        "Processeur"
+      ]
+    },
+    "otdb-f7793d0c4e73": {
+      "prompt": "Les pandas mâles font le poirier pour uriner sur les arbres."
+    },
+    "otdb-f96f5ee99802": {
+      "prompt": "Lequel de ces ordinateurs est le plus ancien selon sa date de sortie ?",
+      "options": [
+        "TRS-80",
+        "Commodore 64",
+        "Apple III",
+        "ZX Spectrum"
+      ]
+    },
+    "otdb-fa25d908fa36": {
+      "prompt": "Comment s'appelle l'illusion auditive d'une note qui semble monter à l'infini ?",
+      "options": [
+        "Effet Franssen",
+        "Effet McGurk",
+        "Son de Shepard",
+        "Illusion Glissandro"
+      ]
+    },
+    "otdb-fa42d73b88a4": {
+      "prompt": "Quel est le prénom du mathématicien Euler ?",
+      "options": [
+        "Leonhard",
+        "Lionel",
+        "Ajan",
+        "Andrin"
+      ]
+    },
+    "otdb-fb6cefe7dd4c": {
+      "prompt": "Quelle entreprise a été fondée le 1er avril 1976 par Steve Jobs, Steve Wozniak et Ronald Wayne ?",
+      "options": [
+        "Apple",
+        "Atari",
+        "Commodore",
+        "Microsoft"
+      ]
+    },
+    "otdb-fd288ec84610": {
+      "prompt": "DHCP signifie « Dynamic Host Configuration Port »."
+    },
+    "otdb-ffd68164ae3c": {
+      "prompt": "Environ quel pourcentage de la surface de la Terre est couvert d'eau ?",
+      "options": [
+        "90 %",
+        "70 %",
+        "30 %",
+        "50 %"
+      ]
+    },
+    "otdb-06cb1f4d13f1": {
+      "prompt": "Qui a remporté la Ligue des champions en 1999 ?",
+      "options": [
+        "Manchester United",
+        "Liverpool",
+        "Barcelone",
+        "Bayern Munich"
+      ]
+    },
+    "otdb-1c00951c9376": {
+      "prompt": "Qui est considéré comme le meilleur footballeur roumain de tous les temps ?",
+      "options": [
+        "Nicolae Dobrin",
+        "Gheorghe Hagi",
+        "Gheorghe Popescu",
+        "Cristian Chivu"
+      ]
+    },
+    "otdb-2230d0d158b7": {
+      "prompt": "Lequel de ces sports ne fait pas partie du triathlon ?",
+      "options": [
+        "Natation",
+        "Cyclisme",
+        "Course à pied",
+        "Équitation"
+      ]
+    },
+    "otdb-22a874e1cfab": {
+      "prompt": "En quelle année la Mazda 787B a-t-elle remporté les 24 Heures du Mans ?",
+      "options": [
+        "1991",
+        "1987",
+        "1990",
+        "2000"
+      ]
+    },
+    "otdb-24ceef66ff94": {
+      "prompt": "Le « Stadium of Light » est le stade de quelle équipe de football ?",
+      "options": [
+        "FC Barcelone",
+        "Sunderland AFC",
+        "Manchester United",
+        "Paris Saint-Germain"
+      ]
+    },
+    "otdb-2619bd2894fb": {
+      "prompt": "Combien de zones de score compte une cible de fléchettes classique ?",
+      "options": [
+        "42",
+        "62",
+        "82",
+        "102"
+      ]
+    },
+    "otdb-28832b7ed7e6": {
+      "prompt": "Au snooker, quelle couleur de bille vaut 3 points ?",
+      "options": [
+        "Bleue",
+        "Jaune",
+        "Verte",
+        "Marron"
+      ]
+    },
+    "otdb-2af5adaa4ea2": {
+      "prompt": "Comment s'appelle l'« outil » qui sert à frapper la bille blanche au snooker ou au billard ?",
+      "options": [
+        "Maillet",
+        "Queue",
+        "Raquette",
+        "Batte"
+      ]
+    },
+    "otdb-2c0402a02b33": {
+      "prompt": "La chanson « Three Lions » des Lightning Seeds a été composée pour quel grand événement de football en 1996 ?",
+      "options": [
+        "Coupe des Confédérations",
+        "Ligue des champions",
+        "Coupe du monde",
+        "Championnat d'Europe"
+      ]
+    },
+    "otdb-2c38e1fb3339": {
+      "prompt": "Quel a été le score final du match Allemagne-Brésil de la Coupe du monde 2014 ?",
+      "options": [
+        "16 - 0",
+        "7 - 1",
+        "3 - 4",
+        "0 - 1"
+      ]
+    },
+    "otdb-30d5462475b2": {
+      "prompt": "Le footballeur Cristiano Ronaldo a ouvert un musée consacré à sa propre personne."
+    },
+    "otdb-346c10b9e771": {
+      "prompt": "Au football, un corner est la reprise du jeu après un but."
+    },
+    "otdb-3561a5c3f7c4": {
+      "prompt": "En 2016, qui a remporté le championnat du monde des constructeurs de Formule 1 pour la troisième fois de suite ?",
+      "options": [
+        "Red Bull Racing Renault",
+        "Mercedes-AMG Petronas",
+        "McLaren Honda",
+        "Scuderia Ferrari"
+      ]
+    },
+    "otdb-3649cb53ae5a": {
+      "prompt": "La saison 1994 de Formule 1 reste dans les mémoires pour quel événement tragique ?",
+      "options": [
+        "Mort d'Ayrton Senna",
+        "Verstappen en flammes",
+        "Suspension de Schumacher",
+        "Le duel d'Adélaïde"
+      ]
+    },
+    "otdb-39838a0aae8d": {
+      "prompt": "Quelle sélection nationale a remporté le Championnat d'Europe de l'UEFA en 2016 ?",
+      "options": [
+        "Portugal",
+        "Allemagne",
+        "France",
+        "Angleterre"
+      ]
+    },
+    "otdb-42d5a18688d5": {
+      "prompt": "L'Etihad Stadium est le stade de quelle équipe ?",
+      "options": [
+        "Manchester City",
+        "Arsenal",
+        "Blackpool",
+        "Manchester United"
+      ]
+    },
+    "otdb-4f6489da3a2a": {
+      "prompt": "Avec quelle écurie Michael Schumacher a-t-il fait ses débuts en Formule 1 au Grand Prix de Belgique 1991 ?",
+      "options": [
+        "Mercedes",
+        "Ferrari",
+        "Benetton",
+        "Jordan"
+      ]
+    },
+    "otdb-5539e624a989": {
+      "prompt": "Quelle équipe a été championne NBA en 2014-2015 ?",
+      "options": [
+        "Golden State Warriors",
+        "Atlanta Hawks",
+        "Cleveland Cavaliers",
+        "Houston Rockets"
+      ]
+    },
+    "otdb-5734b39a9423": {
+      "prompt": "En Formule 1, la voiture de sécurité virtuelle a été introduite après l'accident mortel de quel pilote ?",
+      "options": [
+        "Roland Ratzenberger",
+        "Gilles Villeneuve",
+        "Jules Bianchi",
+        "Ayrton Senna"
+      ]
+    },
+    "otdb-5a2c1541cdec": {
+      "prompt": "Qui surnomme-t-on souvent « le Maestro » sur le circuit masculin de tennis ?",
+      "options": [
+        "Pete Sampras",
+        "Bill Tilden",
+        "Roger Federer",
+        "Boris Becker"
+      ]
+    },
+    "otdb-5a5fd49201a7": {
+      "prompt": "Combien de joueurs de football doivent être sur le terrain en même temps ?",
+      "options": [
+        "22",
+        "26",
+        "20",
+        "24"
+      ]
+    },
+    "otdb-5b19cee0ac10": {
+      "prompt": "En quelle année Jenson Button a-t-il remporté son premier championnat du monde de Formule 1 ?",
+      "options": [
+        "2007",
+        "2006",
+        "2010",
+        "2009"
+      ]
+    },
+    "otdb-62278e6a1218": {
+      "prompt": "Quelle joueuse a remporté la médaille d'or en simple dames de tennis de table aux Jeux olympiques de 2016 ?",
+      "options": [
+        "Ai FUKUHARA (Japon)",
+        "Song KIM (Corée du Nord)",
+        "DING Ning (Chine)",
+        "LI Xiaoxia (Chine)"
+      ]
+    },
+    "otdb-64752dea0c4b": {
+      "prompt": "Quel joueur de fléchettes a remporté le plus de titres de champion du monde ?",
+      "options": [
+        "Michael van Gerwen",
+        "Raymond van Barneveld",
+        "Eric Bristow",
+        "Phil Taylor"
+      ]
+    },
+    "otdb-6a4d965e4d61": {
+      "prompt": "Qui a été le premier footballeur à marquer 200 buts en Premier League anglaise ?",
+      "options": [
+        "Alan Shearer",
+        "Wayne Rooney",
+        "Robbie Fowler",
+        "Thierry Henry"
+      ]
+    },
+    "otdb-732b211f8643": {
+      "prompt": "Quelle sélection nationale a remporté la première Ligue des nations de l'UEFA ?",
+      "options": [
+        "Pays-Bas",
+        "Portugal",
+        "Angleterre",
+        "Suisse"
+      ]
+    },
+    "otdb-739bdef0978c": {
+      "prompt": "Combien de titres de Premier League Sir Alex Ferguson a-t-il remportés à Manchester United ?",
+      "options": [
+        "20",
+        "11",
+        "22",
+        "13"
+      ]
+    },
+    "otdb-779db15646ec": {
+      "prompt": "De quel pays le kabaddi, un sport de contact où l'on plaque l'adversaire, est-il originaire ?",
+      "options": [
+        "Turquie",
+        "Australie",
+        "Cambodge",
+        "Inde"
+      ]
+    },
+    "otdb-7bea892b6275": {
+      "prompt": "Dans quel sport utilise-t-on un « volant » ?",
+      "options": [
+        "Rugby",
+        "Cricket",
+        "Badminton",
+        "Tennis de table"
+      ]
+    },
+    "otdb-82adace5f362": {
+      "prompt": "La Formule E est une série de course automobile qui utilise des voitures de course électriques hybrides."
+    },
+    "otdb-8a8feca898f6": {
+      "prompt": "Combien de joueurs compte une équipe de football ?",
+      "options": [
+        "8",
+        "11",
+        "9",
+        "10"
+      ]
+    },
+    "otdb-8e12836b92da": {
+      "prompt": "Avec quel club Steven Gerrard a-t-il remporté la Ligue des champions ?",
+      "options": [
+        "Chelsea",
+        "Real Madrid",
+        "Man City",
+        "Liverpool"
+      ]
+    },
+    "otdb-8e55ce07f09b": {
+      "prompt": "Qui a remporté le Grand Prix de Monaco 2018 ?",
+      "options": [
+        "Kimi Räikkönen",
+        "Lewis Hamilton",
+        "Daniel Ricciardo",
+        "Sebastian Vettel"
+      ]
+    },
+    "otdb-9043f57f959b": {
+      "prompt": "Lors de la saison 1988 de Formule 1, McLaren a gagné toutes les courses sauf une. Laquelle ?",
+      "options": [
+        "Grand Prix du Brésil",
+        "Grand Prix de Monaco",
+        "Grand Prix du Japon",
+        "Grand Prix d'Italie"
+      ]
+    },
+    "otdb-993af82a781c": {
+      "prompt": "Qui a participé au plus grand nombre de tournois avec la sélection brésilienne de football ?",
+      "options": [
+        "Kaká",
+        "Ronaldo",
+        "Cafu",
+        "Roberto Carlos"
+      ]
+    },
+    "otdb-9d9c33228194": {
+      "prompt": "Laquelle de ces villes russes n'a PAS accueilli de stade de la Coupe du monde 2018 ?",
+      "options": [
+        "Vladivostok",
+        "Ekaterinbourg",
+        "Kaliningrad",
+        "Rostov-sur-le-Don"
+      ]
+    },
+    "otdb-9fdc2e1148ed": {
+      "prompt": "Quel pays a accueilli la Coupe du monde 2018 ?",
+      "options": [
+        "Allemagne",
+        "Russie",
+        "États-Unis",
+        "Arabie saoudite"
+      ]
+    },
+    "otdb-a1afa7f2770c": {
+      "prompt": "Qui a remporté le championnat du monde de Formule 1 pilotes en 2016 ?",
+      "options": [
+        "Lewis Hamilton",
+        "Kimi Räikkönen",
+        "Nico Rosberg",
+        "Max Verstappen"
+      ]
+    },
+    "otdb-a4e668e23f2a": {
+      "prompt": "Quelle équipe de football a remporté la Copa América 2015 ?",
+      "options": [
+        "Argentine",
+        "Brésil",
+        "Chili",
+        "Paraguay"
+      ]
+    },
+    "otdb-a61f33b3ecbe": {
+      "prompt": "En 2008, Usain Bolt a battu le record du monde du 100 mètres avec un lacet défait."
+    },
+    "otdb-a6a86237d176": {
+      "prompt": "Quel pilote de Formule 1 était surnommé « le Professeur » ?",
+      "options": [
+        "Emerson Fittipaldi",
+        "Ayrton Senna",
+        "Alain Prost",
+        "Niki Lauda"
+      ]
+    },
+    "otdb-a7e745e12837": {
+      "prompt": "Quel Italien a annoncé à Neuer où il allait tirer, avant de rater son tir, lors d'Italie-Allemagne à l'Euro 2016 ?",
+      "options": [
+        "Giaccherini",
+        "Barzagli",
+        "Pellè",
+        "Insigne"
+      ]
+    },
+    "otdb-a91911924f38": {
+      "prompt": "Quel club de football anglais est surnommé « The Tigers » ?",
+      "options": [
+        "Bristol City",
+        "Cardiff City",
+        "Manchester City",
+        "Hull City"
+      ]
+    },
+    "otdb-a9462bece906": {
+      "prompt": "Quelle est la ceinture la plus élevée que l'on peut obtenir en taekwondo ?",
+      "options": [
+        "Verte",
+        "Blanche",
+        "Rouge",
+        "Noire"
+      ]
+    },
+    "otdb-acf39f60b7b9": {
+      "prompt": "Quelle équipe a remporté la Premier League 2015-2016 ?",
+      "options": [
+        "Chelsea",
+        "Manchester United",
+        "Leicester City",
+        "Liverpool"
+      ]
+    },
+    "otdb-af703675cbef": {
+      "prompt": "Quel constructeur automobile a remporté les 24 Heures du Mans 2017 ?",
+      "options": [
+        "Audi",
+        "Porsche",
+        "Toyota",
+        "Chevrolet"
+      ]
+    },
+    "otdb-afbdf6f07334": {
+      "prompt": "Quelle nation a accueilli la Coupe du monde de football en 2006 ?",
+      "options": [
+        "Royaume-Uni",
+        "Afrique du Sud",
+        "Brésil",
+        "Allemagne"
+      ]
+    },
+    "otdb-b2121206577b": {
+      "prompt": "Quel pays a remporté la Coupe du monde 2018 organisée en Russie ?",
+      "options": [
+        "Belgique",
+        "Angleterre",
+        "France",
+        "Croatie"
+      ]
+    },
+    "otdb-b2152bdb43cf": {
+      "prompt": "Quel joueur a donné un coup de pied de kung-fu à un supporter de Crystal Palace en janvier 1995 ?",
+      "options": [
+        "Mark Hughes",
+        "Ashley Cole",
+        "David Seaman",
+        "Eric Cantona"
+      ]
+    },
+    "otdb-b79df42b6ba8": {
+      "prompt": "Quel est le meilleur score de Tiger Woods en carrière au golf ?",
+      "options": [
+        "67",
+        "65",
+        "63",
+        "61"
+      ]
+    },
+    "otdb-b9ee7a555007": {
+      "prompt": "Qui a remporté le championnat du monde de Formule 1 en 2015 ?",
+      "options": [
+        "Sebastian Vettel",
+        "Jenson Button",
+        "Nico Rosberg",
+        "Lewis Hamilton"
+      ]
+    },
+    "otdb-c07181f61f06": {
+      "prompt": "Qui a été le meilleur buteur de la Coupe du monde 2014 ?",
+      "options": [
+        "Lionel Messi",
+        "Neymar",
+        "Thomas Müller",
+        "James Rodríguez"
+      ]
+    },
+    "otdb-c0fd6d3a093a": {
+      "prompt": "Qui a remporté la Ligue des champions de l'UEFA en 2017 ?",
+      "options": [
+        "Atlético de Madrid",
+        "Juventus",
+        "AS Monaco",
+        "Real Madrid"
+      ]
+    },
+    "otdb-c46857157256": {
+      "prompt": "Quelle équipe l'Angleterre a-t-elle battue en demi-finale lors de sa victoire en Coupe du monde 1966 ?",
+      "options": [
+        "Allemagne de l'Ouest",
+        "Union soviétique",
+        "Brésil",
+        "Portugal"
+      ]
+    },
+    "otdb-c4ab3dceeb40": {
+      "prompt": "Laquelle de ces villes européennes a été la première à accueillir trois fois les Jeux olympiques d'été modernes ?",
+      "options": [
+        "Paris",
+        "Rome",
+        "Athènes",
+        "Londres"
+      ]
+    },
+    "otdb-c81573588995": {
+      "prompt": "Laquelle de ces épreuves d'athlétisme ne fait PAS partie du décathlon masculin olympique ?",
+      "options": [
+        "Saut à la perche",
+        "Lancer du poids",
+        "Saut en longueur",
+        "Lancer du marteau"
+      ]
+    },
+    "otdb-ca3337610100": {
+      "prompt": "Quel constructeur automobile a remporté les 24 Heures du Mans 2016 ?",
+      "options": [
+        "Ferrari",
+        "Porsche",
+        "Toyota",
+        "Audi"
+      ]
+    },
+    "otdb-cab269c89fa1": {
+      "prompt": "Le tennis a autrefois été appelé « racquetball »."
+    },
+    "otdb-cd8ceab17f1b": {
+      "prompt": "Qui a participé au plus grand nombre de tournois avec la sélection allemande de football ?",
+      "options": [
+        "Oliver Kahn",
+        "Miroslav Klose",
+        "Philipp Lahm",
+        "Lothar Matthäus"
+      ]
+    },
+    "otdb-d4338137e99c": {
+      "prompt": "Laquelle de ces sélections s'est qualifiée pour la Coupe du monde 2018 en Russie ?",
+      "options": [
+        "Italie",
+        "États-Unis",
+        "Pays-Bas",
+        "Tunisie"
+      ]
+    },
+    "otdb-d44bbc8f1fe6": {
+      "prompt": "Avant 2018, quel est le seul constructeur japonais à avoir remporté les 24 Heures du Mans ?",
+      "options": [
+        "Subaru",
+        "Nissan",
+        "Mazda",
+        "Toyota"
+      ]
+    },
+    "otdb-d6e431b2503c": {
+      "prompt": "Quel pays a accueilli les Jeux olympiques d'été de 2020 ?",
+      "options": [
+        "Japon",
+        "Australie",
+        "Allemagne",
+        "Chine"
+      ]
+    },
+    "otdb-d7ca02b8e7a7": {
+      "prompt": "Avec quel partenaire de double John McEnroe a-t-il connu le plus de succès ?",
+      "options": [
+        "Mary Carillo",
+        "Peter Fleming",
+        "Mark Woodforde",
+        "Michael Stich"
+      ]
+    },
+    "otdb-df7b2e8fcf25": {
+      "prompt": "Lequel de ces clubs de football anglais est basé à Liverpool ?",
+      "options": [
+        "Everton",
+        "Arsenal",
+        "West Ham United",
+        "Crystal Palace"
+      ]
+    },
+    "otdb-e8e1a671b76c": {
+      "prompt": "La saison 2016 de Formule 1 compte un total de 20 courses."
+    },
+    "otdb-ebdfbb9e20ae": {
+      "prompt": "Combien de Roland-Garros Björn Borg a-t-il remportés ?",
+      "options": [
+        "6",
+        "4",
+        "2",
+        "9"
+      ]
+    },
+    "otdb-efd512e378e5": {
+      "prompt": "Quel pilote a été champion du monde de Formule 1 un record de 7 fois ?",
+      "options": [
+        "Ayrton Senna",
+        "Michael Schumacher",
+        "Fernando Alonso",
+        "Jim Clark"
+      ]
+    },
+    "otdb-f15d30c70259": {
+      "prompt": "Quelle équipe de football a remporté la Copa América Centenario 2016 ?",
+      "options": [
+        "Colombie",
+        "Brésil",
+        "Chili",
+        "Argentine"
+      ]
+    },
+    "otdb-f44781c6f16d": {
+      "prompt": "Quel joueur a marqué le plus de buts en Premier League anglaise ?",
+      "options": [
+        "Wayne Rooney",
+        "Lionel Messi",
+        "Didier Drogba",
+        "Alan Shearer"
+      ]
+    },
+    "otdb-f4734870c4a9": {
+      "prompt": "Quel pays a produit des footballeurs comme Cafu, Roberto Carlos et Pelé ?",
+      "options": [
+        "Brésil",
+        "Argentine",
+        "Portugal",
+        "Espagne"
+      ]
+    }
+  },
+  "quizzes": {}
+}

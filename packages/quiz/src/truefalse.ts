@@ -10,6 +10,7 @@ export type TrueFalseAnswer = z.infer<typeof answerSchema>
 
 export const truefalse: QuestionTypeDef<TrueFalsePayload, TrueFalseAnswer> = {
   key: 'truefalse',
+  scored: true,
   validatePayload: (raw) => tfSchema.parse(raw),
   validateAnswer: (raw) => answerSchema.parse(raw),
   playerView: () => ({}), // pas de `correct`

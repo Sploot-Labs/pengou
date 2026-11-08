@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=249"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0249-1-en",
+      "type": "mcq",
+      "prompt": "What is the tallest tower of a medieval castle called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Keep",
+            "correct": true
+          },
+          {
+            "label": "Bastille",
+            "correct": false
+          },
+          {
+            "label": "Flanking tower",
+            "correct": false
+          },
+          {
+            "label": "Lookout",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0249-2-en",
+      "type": "mcq",
+      "prompt": "What is the water-filled ditch around a castle called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Counterscarp",
+            "correct": false
+          },
+          {
+            "label": "Latrines",
+            "correct": false
+          },
+          {
+            "label": "Moat",
+            "correct": true
+          },
+          {
+            "label": "Chemise",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0249-4-en",
+      "type": "mcq",
+      "prompt": "What is usually found behind a castle's drawbridge?",
+      "payload": {
+        "options": [
+          {
+            "label": "Arrow slits",
+            "correct": false
+          },
+          {
+            "label": "Turret",
+            "correct": false
+          },
+          {
+            "label": "Portcullis",
+            "correct": true
+          },
+          {
+            "label": "Moat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

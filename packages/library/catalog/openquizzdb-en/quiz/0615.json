@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=615"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0615-2-en",
+      "type": "mcq",
+      "prompt": "Which tool lets you follow an order in real time?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tracking",
+            "correct": true
+          },
+          {
+            "label": "Permalink",
+            "correct": false
+          },
+          {
+            "label": "Backlink",
+            "correct": false
+          },
+          {
+            "label": "Cookie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0615-3-en",
+      "type": "mcq",
+      "prompt": "Which computer defect can cause a malfunction?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alias",
+            "correct": false
+          },
+          {
+            "label": "Bug",
+            "correct": true
+          },
+          {
+            "label": "Java",
+            "correct": false
+          },
+          {
+            "label": "Blacklist",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

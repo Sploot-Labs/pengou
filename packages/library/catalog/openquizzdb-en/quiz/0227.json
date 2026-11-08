@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=227"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0227-3-en",
+      "type": "mcq",
+      "prompt": "Which social network did Elon Musk buy for 44 billion dollars?",
+      "payload": {
+        "options": [
+          {
+            "label": "Twitter",
+            "correct": true
+          },
+          {
+            "label": "Snapchat",
+            "correct": false
+          },
+          {
+            "label": "TikTok",
+            "correct": false
+          },
+          {
+            "label": "Facebook",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0227-4-en",
+      "type": "mcq",
+      "prompt": "Which US president did Elon Musk become an adviser to?",
+      "payload": {
+        "options": [
+          {
+            "label": "Donald Trump",
+            "correct": true
+          },
+          {
+            "label": "Barack Obama",
+            "correct": false
+          },
+          {
+            "label": "Joe Biden",
+            "correct": false
+          },
+          {
+            "label": "Bill Clinton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

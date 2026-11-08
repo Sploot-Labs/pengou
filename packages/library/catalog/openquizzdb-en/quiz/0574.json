@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=574"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0574-1-en",
+      "type": "mcq",
+      "prompt": "In which country is the experimental city of Auroville located?",
+      "payload": {
+        "options": [
+          {
+            "label": "India",
+            "correct": true
+          },
+          {
+            "label": "Bangladesh",
+            "correct": false
+          },
+          {
+            "label": "Canada",
+            "correct": false
+          },
+          {
+            "label": "Pakistan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0574-2-en",
+      "type": "mcq",
+      "prompt": "Which Frenchwoman was behind the creation of the city of Auroville?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ellam Onru",
+            "correct": false
+          },
+          {
+            "label": "Mirra Alfassa",
+            "correct": true
+          },
+          {
+            "label": "Julie Dreyfus",
+            "correct": false
+          },
+          {
+            "label": "Maïna Kataki",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0574-4-en",
+      "type": "mcq",
+      "prompt": "Which building is considered the soul of Auroville?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pooram",
+            "correct": false
+          },
+          {
+            "label": "Bharat Niwas",
+            "correct": false
+          },
+          {
+            "label": "Charaka",
+            "correct": false
+          },
+          {
+            "label": "Matrimandir",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

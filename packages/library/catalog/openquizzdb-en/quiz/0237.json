@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=237"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0237-1-en",
+      "type": "mcq",
+      "prompt": "Which collaborative encyclopedia is the most used on the Internet?",
+      "payload": {
+        "options": [
+          {
+            "label": "Framasoft",
+            "correct": false
+          },
+          {
+            "label": "Pandocréon",
+            "correct": false
+          },
+          {
+            "label": "Netalya",
+            "correct": false
+          },
+          {
+            "label": "Wikipedia",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0237-2-en",
+      "type": "mcq",
+      "prompt": "What are \"Google Chrome\", \"Internet Explorer\" and \"Mozilla Firefox\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Browsers",
+            "correct": true
+          },
+          {
+            "label": "Search engines",
+            "correct": false
+          },
+          {
+            "label": "Encyclopedias",
+            "correct": false
+          },
+          {
+            "label": "Routers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0237-3-en",
+      "type": "mcq",
+      "prompt": "What does the second w in www stand for?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wide",
+            "correct": true
+          },
+          {
+            "label": "Web",
+            "correct": false
+          },
+          {
+            "label": "Worse",
+            "correct": false
+          },
+          {
+            "label": "World",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

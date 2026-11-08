@@ -10,71 +10,108 @@
   /* Cyan banquise — couleur d'identité. --pengou-cyan : version vive
      (dégradés, grands aplats décoratifs) ; --pengou-brand : version profonde,
      sûre comme texte sur fond clair ET comme aplat sous texte clair (≥4.5:1). */
-  --pengou-cyan:      #00A6CC;
-  --pengou-brand:     #0A7188;
-  --pengou-cyan-soft: #D6F2F9;
+  --pengou-cyan: #00a6cc;
+  --pengou-brand: #0a7188;
+  --pengou-cyan-soft: #d6f2f9;
 
-  --pengou-ink:    #0B2545; /* bleu nuit polaire — texte fort */
-  --pengou-coral:  #FF7A3C; /* bec & pattes — accent décoratif */
-  --pengou-yellow: #FFC43D; /* soleil */
-  --pengou-violet: #7C6BF0; /* glacier — 2nd accent, dégradé live */
+  --pengou-ink: #0b2545; /* bleu nuit polaire — texte fort */
+  --pengou-coral: #ff7a3c; /* bec & pattes — accent décoratif */
+  --pengou-yellow: #ffc43d; /* soleil */
+  --pengou-violet: #7c6bf0; /* glacier — 2nd accent, dégradé live */
 
   /* Neutres (biais bleuté neige) */
-  --pengou-bg:        #EEF6FB;
-  --pengou-surface:   #FFFFFF;
-  --pengou-surface-2: #F0F7FC;
-  --pengou-text:      #12222F;
-  --pengou-muted:     #566B7A;
-  --pengou-line:      #D6E6EF;
+  --pengou-bg: #eef6fb;
+  --pengou-surface: #ffffff;
+  --pengou-surface-2: #f0f7fc;
+  --pengou-text: #12222f;
+  --pengou-muted: #566b7a;
+  --pengou-line: #d6e6ef;
 
   /* Sémantique (séparée de l'accent) */
-  --pengou-ok:   #25A873;
-  --pengou-warn: #B8860B;
-  --pengou-bad:  #D14336;
+  --pengou-ok: #25a873;
+  --pengou-warn: #b8860b;
+  --pengou-bad: #d14336;
   /* Encre du bouton danger : blanche en clair (sur rouge soutenu), bleu nuit en
      sombre (sur corail-rouge vif). Le bouton succès garde une encre bleu nuit
      dans les deux schémas (voir --success-ink dans themes.css). */
-  --pengou-on-danger: #FFFFFF;
+  --pengou-on-danger: #ffffff;
 
   /* Focus visible — cyan profond, contrasté sur fonds clairs */
-  --pengou-focus: #0C7A99;
+  --pengou-focus: #0c7a99;
+
+  /* Bouton secondaire (ghost) : neutre en clair ; en sombre, contour et encre cyan, sinon le
+     contour (--pengou-line) se fond dans le fond et le bouton paraît gris. */
+  --pengou-ghost-line: #d6e6ef;
+  --pengou-ghost-ink: #12222f;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --pengou-cyan:      #2CC7E8;
-    --pengou-brand:     #35CBEC;
-    --pengou-cyan-soft: #0E3647;
-    --pengou-ink:       #BFE4F2;
-    --pengou-coral:     #FF8A52;
-    --pengou-yellow:    #FFD15E;
-    --pengou-violet:    #9A8BFF;
-    --pengou-bg:        #071826;
-    --pengou-surface:   #0D2435;
-    --pengou-surface-2: #0A1E2D;
-    --pengou-text:      #E8F4FB;
-    --pengou-muted:     #9DB4C4;
-    --pengou-line:      #1C3A52;
-    --pengou-ok:        #53D6A6;
-    --pengou-warn:      #FFD15E;
-    --pengou-bad:       #FF6B5C;
-    --pengou-on-danger: #0B2545;
-    --pengou-focus:     #6FD3EE;
+    --pengou-cyan: #2cc7e8;
+    --pengou-brand: #35cbec;
+    --pengou-cyan-soft: #0e3647;
+    --pengou-ink: #bfe4f2;
+    --pengou-coral: #ff8a52;
+    --pengou-yellow: #ffd15e;
+    --pengou-violet: #9a8bff;
+    --pengou-bg: #071826;
+    --pengou-surface: #0d2435;
+    --pengou-surface-2: #0a1e2d;
+    --pengou-text: #e8f4fb;
+    --pengou-muted: #9db4c4;
+    --pengou-line: #1c3a52;
+    --pengou-ok: #53d6a6;
+    --pengou-warn: #ffd15e;
+    --pengou-bad: #ff6b5c;
+    --pengou-on-danger: #0b2545;
+    --pengou-focus: #6fd3ee;
+    --pengou-ghost-line: #2b7f99;
+    --pengou-ghost-ink: #6fd3ee;
   }
 }
 
 /* Toggle manuel — gagne dans les deux sens (parité brand-primitives) */
 :root[data-theme="light"] {
-  --pengou-cyan:#00A6CC; --pengou-brand:#0A7188; --pengou-cyan-soft:#D6F2F9;
-  --pengou-ink:#0B2545; --pengou-coral:#FF7A3C; --pengou-yellow:#FFC43D; --pengou-violet:#7C6BF0;
-  --pengou-bg:#EEF6FB; --pengou-surface:#FFFFFF; --pengou-surface-2:#F0F7FC;
-  --pengou-text:#12222F; --pengou-muted:#566B7A; --pengou-line:#D6E6EF;
-  --pengou-ok:#25A873; --pengou-warn:#B8860B; --pengou-bad:#D14336; --pengou-on-danger:#FFFFFF; --pengou-focus:#0C7A99;
+  --pengou-cyan: #00a6cc;
+  --pengou-brand: #0a7188;
+  --pengou-cyan-soft: #d6f2f9;
+  --pengou-ink: #0b2545;
+  --pengou-coral: #ff7a3c;
+  --pengou-yellow: #ffc43d;
+  --pengou-violet: #7c6bf0;
+  --pengou-bg: #eef6fb;
+  --pengou-surface: #ffffff;
+  --pengou-surface-2: #f0f7fc;
+  --pengou-text: #12222f;
+  --pengou-muted: #566b7a;
+  --pengou-line: #d6e6ef;
+  --pengou-ok: #25a873;
+  --pengou-warn: #b8860b;
+  --pengou-bad: #d14336;
+  --pengou-on-danger: #ffffff;
+  --pengou-focus: #0c7a99;
+  --pengou-ghost-line: #d6e6ef;
+  --pengou-ghost-ink: #12222f;
 }
 :root[data-theme="dark"] {
-  --pengou-cyan:#2CC7E8; --pengou-brand:#35CBEC; --pengou-cyan-soft:#0E3647;
-  --pengou-ink:#BFE4F2; --pengou-coral:#FF8A52; --pengou-yellow:#FFD15E; --pengou-violet:#9A8BFF;
-  --pengou-bg:#071826; --pengou-surface:#0D2435; --pengou-surface-2:#0A1E2D;
-  --pengou-text:#E8F4FB; --pengou-muted:#9DB4C4; --pengou-line:#1C3A52;
-  --pengou-ok:#53D6A6; --pengou-warn:#FFD15E; --pengou-bad:#FF6B5C; --pengou-on-danger:#0B2545; --pengou-focus:#6FD3EE;
+  --pengou-cyan: #2cc7e8;
+  --pengou-brand: #35cbec;
+  --pengou-cyan-soft: #0e3647;
+  --pengou-ink: #bfe4f2;
+  --pengou-coral: #ff8a52;
+  --pengou-yellow: #ffd15e;
+  --pengou-violet: #9a8bff;
+  --pengou-bg: #071826;
+  --pengou-surface: #0d2435;
+  --pengou-surface-2: #0a1e2d;
+  --pengou-text: #e8f4fb;
+  --pengou-muted: #9db4c4;
+  --pengou-line: #1c3a52;
+  --pengou-ok: #53d6a6;
+  --pengou-warn: #ffd15e;
+  --pengou-bad: #ff6b5c;
+  --pengou-on-danger: #0b2545;
+  --pengou-focus: #6fd3ee;
+  --pengou-ghost-line: #2b7f99;
+  --pengou-ghost-ink: #6fd3ee;
 }

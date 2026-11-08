@@ -1,0 +1,622 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0273-3",
+      "type": "mcq",
+      "prompt": "Quelle plante est appelée « farigoule » en Provence ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thym",
+            "correct": true
+          },
+          {
+            "label": "Marjolaine",
+            "correct": false
+          },
+          {
+            "label": "Bergamote",
+            "correct": false
+          },
+          {
+            "label": "Basilic",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0328-1",
+      "type": "mcq",
+      "prompt": "Dans quel pays se situe le circuit de course automobile du Mans ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Suisse",
+            "correct": false
+          },
+          {
+            "label": "Belgique",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": true
+          },
+          {
+            "label": "Pays-Bas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0325-4",
+      "type": "mcq",
+      "prompt": "Qui est poussé dans le vide par Jaime Lannister dans « Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Craster",
+            "correct": false
+          },
+          {
+            "label": "Ned",
+            "correct": false
+          },
+          {
+            "label": "Bran",
+            "correct": true
+          },
+          {
+            "label": "Jon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0461-1",
+      "type": "mcq",
+      "prompt": "Le pétrole, le gaz et le charbon font partie de quelles énergies ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Renouvelables",
+            "correct": false
+          },
+          {
+            "label": "Propres",
+            "correct": false
+          },
+          {
+            "label": "Fossiles",
+            "correct": true
+          },
+          {
+            "label": "Solaires",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0607-2",
+      "type": "mcq",
+      "prompt": "À quelle saison la plupart des arbres fleurissent-ils en Europe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Été",
+            "correct": false
+          },
+          {
+            "label": "Automne",
+            "correct": false
+          },
+          {
+            "label": "Hiver",
+            "correct": false
+          },
+          {
+            "label": "Printemps",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0225-3",
+      "type": "mcq",
+      "prompt": "Quel soldat faut-il sauver dans un film de Steven Spielberg ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Soldat Moore",
+            "correct": false
+          },
+          {
+            "label": "Soldat Garner",
+            "correct": false
+          },
+          {
+            "label": "Soldat Adams",
+            "correct": false
+          },
+          {
+            "label": "Soldat Ryan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0615-1",
+      "type": "mcq",
+      "prompt": "Quel marqueur Internet utilise un croisillon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Backup",
+            "correct": false
+          },
+          {
+            "label": "Asset",
+            "correct": false
+          },
+          {
+            "label": "Hashtag",
+            "correct": true
+          },
+          {
+            "label": "Counter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0203-2",
+      "type": "mcq",
+      "prompt": "De quel pays est originaire Shakira, la reine de la musique latine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Colombie",
+            "correct": true
+          },
+          {
+            "label": "Mexique",
+            "correct": false
+          },
+          {
+            "label": "Bolivie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-2",
+      "type": "mcq",
+      "prompt": "Qui est le musicien de reggae le plus célèbre et le plus influent ?",
+      "payload": {
+        "options": [
+          {
+            "label": "King Sporty",
+            "correct": false
+          },
+          {
+            "label": "Dobby Dobson",
+            "correct": false
+          },
+          {
+            "label": "Bob Marley",
+            "correct": true
+          },
+          {
+            "label": "Dawn Penn",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0323-1",
+      "type": "mcq",
+      "prompt": "En quelle année le footballeur Kylian Mbappé a-t-il vu le jour ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1998",
+            "correct": true
+          },
+          {
+            "label": "1999",
+            "correct": false
+          },
+          {
+            "label": "1996",
+            "correct": false
+          },
+          {
+            "label": "1997",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0163-3",
+      "type": "mcq",
+      "prompt": "Quel conifère géant est recensé en Californie, dans la Sierra Nevada ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Séquoia géant",
+            "correct": true
+          },
+          {
+            "label": "Noyer noir",
+            "correct": false
+          },
+          {
+            "label": "Frêne blanc",
+            "correct": false
+          },
+          {
+            "label": "Sapin gracieux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0580-2",
+      "type": "mcq",
+      "prompt": "Avec quel équivalent américain les César sont-ils souvent cités ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oscars",
+            "correct": true
+          },
+          {
+            "label": "Owens",
+            "correct": false
+          },
+          {
+            "label": "Ocatves",
+            "correct": false
+          },
+          {
+            "label": "Oliviers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0398-1",
+      "type": "mcq",
+      "prompt": "Dans quel pays vit principalement le peuple kabyle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tunisie",
+            "correct": false
+          },
+          {
+            "label": "Algérie",
+            "correct": true
+          },
+          {
+            "label": "Libye",
+            "correct": false
+          },
+          {
+            "label": "Maroc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0479-2",
+      "type": "mcq",
+      "prompt": "Qu'est-ce que La Fontaine appelle « la machine ronde » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La royauté",
+            "correct": false
+          },
+          {
+            "label": "La Terre",
+            "correct": true
+          },
+          {
+            "label": "L'argent",
+            "correct": false
+          },
+          {
+            "label": "La supercherie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0411-4",
+      "type": "mcq",
+      "prompt": "Quel phénomène naturel vient du japonais signifiant « vague de port » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Séisme",
+            "correct": false
+          },
+          {
+            "label": "Tsunami",
+            "correct": true
+          },
+          {
+            "label": "Kendo",
+            "correct": false
+          },
+          {
+            "label": "Sakura",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0292-2",
+      "type": "mcq",
+      "prompt": "Quel constructeur de motos japonais fabrique également des pianos ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yamaha",
+            "correct": true
+          },
+          {
+            "label": "Yema",
+            "correct": false
+          },
+          {
+            "label": "Yulon",
+            "correct": false
+          },
+          {
+            "label": "Yutong",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0607-3",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on un jeune mouton mâle de moins d'un an ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Agneau",
+            "correct": true
+          },
+          {
+            "label": "Biquette",
+            "correct": false
+          },
+          {
+            "label": "Bélier",
+            "correct": false
+          },
+          {
+            "label": "Bouc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0442-1",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur du passeport de l'union européenne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bleue",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          },
+          {
+            "label": "Bordeaux",
+            "correct": true
+          },
+          {
+            "label": "Grise",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0049-4",
+      "type": "mcq",
+      "prompt": "Quel est le lieu de villégiature officiel du président des États-Unis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Camp David",
+            "correct": true
+          },
+          {
+            "label": "Camp Devon",
+            "correct": false
+          },
+          {
+            "label": "Camp Damon",
+            "correct": false
+          },
+          {
+            "label": "Camp Donald",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0379-1",
+      "type": "mcq",
+      "prompt": "De quelle guerre le film britanno-américain « Full Metal Jacket » traite-t-il ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Koweit",
+            "correct": false
+          },
+          {
+            "label": "Corée",
+            "correct": false
+          },
+          {
+            "label": "Viêt Nam",
+            "correct": true
+          },
+          {
+            "label": "Irak",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-mix-culture-9",
+      "title": "Mix culture #9",
+      "description": "Un peu de tout : cinéma, sport, géographie, nature, musique et culture générale.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0273-3",
+        "oqdb-0328-1",
+        "oqdb-0325-4",
+        "oqdb-0461-1",
+        "oqdb-0607-2",
+        "oqdb-0225-3",
+        "oqdb-0615-1",
+        "oqdb-0203-2",
+        "oqdb-0349-2",
+        "oqdb-0323-1",
+        "oqdb-0163-3",
+        "oqdb-0580-2",
+        "oqdb-0398-1",
+        "oqdb-0479-2",
+        "oqdb-0411-4",
+        "oqdb-0292-2",
+        "oqdb-0607-3",
+        "oqdb-0442-1",
+        "oqdb-0049-4",
+        "oqdb-0379-1"
+      ]
+    }
+  ]
+}

@@ -3,19 +3,26 @@
   "version": "0.0.0",
   "type": "module",
   "license": "Apache-2.0",
-  "exports": { ".": { "development": "./src/index.ts", "types": "./dist/index.d.ts", "default": "./dist/index.js" } },
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json --customConditions development",
     "test": "vitest run",
     "auth:generate": "npx @better-auth/cli@latest generate --config better-auth.config.ts --output ../db/src/auth-schema.ts -y"
   },
   "dependencies": {
     "@splootlabs/db": "workspace:*",
+    "@splootlabs/mail": "workspace:*",
     "@splootlabs/shared": "workspace:*",
-    "better-auth": "^1.7.12"
+    "better-auth": "^1.7.17"
   },
   "devDependencies": {
     "@better-auth/cli": "^1.4.21",

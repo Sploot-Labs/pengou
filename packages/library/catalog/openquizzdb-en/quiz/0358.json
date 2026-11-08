@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=358"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0358-1-en",
+      "type": "mcq",
+      "prompt": "In which city can you admire the Little Mermaid on her rock?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bucharest",
+            "correct": false
+          },
+          {
+            "label": "Amsterdam",
+            "correct": false
+          },
+          {
+            "label": "Copenhagen",
+            "correct": true
+          },
+          {
+            "label": "Budapest",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0358-2-en",
+      "type": "mcq",
+      "prompt": "Which famous white marble mausoleum can you visit in Agra, India?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yantra Mandir",
+            "correct": false
+          },
+          {
+            "label": "Raj Ghat",
+            "correct": false
+          },
+          {
+            "label": "Bombay House",
+            "correct": false
+          },
+          {
+            "label": "Taj Mahal",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0358-3-en",
+      "type": "mcq",
+      "prompt": "In which Spanish city is the Alhambra?",
+      "payload": {
+        "options": [
+          {
+            "label": "Granada",
+            "correct": true
+          },
+          {
+            "label": "Bilbao",
+            "correct": false
+          },
+          {
+            "label": "Seville",
+            "correct": false
+          },
+          {
+            "label": "Malaga",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

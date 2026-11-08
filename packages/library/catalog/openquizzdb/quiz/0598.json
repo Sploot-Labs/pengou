@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=598"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0598-4",
+      "type": "mcq",
+      "prompt": "Quelle Première dame a fêté ses 50 ans en avril 2020 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Melania Trump",
+            "correct": true
+          },
+          {
+            "label": "Beatrix",
+            "correct": false
+          },
+          {
+            "label": "Angela Merkel",
+            "correct": false
+          },
+          {
+            "label": "Brigitte Macron",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

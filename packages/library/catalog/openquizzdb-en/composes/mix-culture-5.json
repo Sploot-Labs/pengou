@@ -1,0 +1,532 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0602-3-en",
+      "type": "mcq",
+      "prompt": "What is the first name of the French captain in \"Star Trek: The Next Generation\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jean-Luc",
+            "correct": true
+          },
+          {
+            "label": "Jean-Marc",
+            "correct": false
+          },
+          {
+            "label": "Jean-Pierre",
+            "correct": false
+          },
+          {
+            "label": "Jean-Charles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0597-3-en",
+      "type": "mcq",
+      "prompt": "In which French département is the Périgord located?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aveyron",
+            "correct": false
+          },
+          {
+            "label": "Vaucluse",
+            "correct": false
+          },
+          {
+            "label": "Calvados",
+            "correct": false
+          },
+          {
+            "label": "Dordogne",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0292-4-en",
+      "type": "mcq",
+      "prompt": "Which little green man taught Luke how to use the Force?",
+      "payload": {
+        "options": [
+          {
+            "label": "Youk",
+            "correct": false
+          },
+          {
+            "label": "Yoni",
+            "correct": false
+          },
+          {
+            "label": "Yazoo",
+            "correct": false
+          },
+          {
+            "label": "Yoda",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0438-4-en",
+      "type": "mcq",
+      "prompt": "Which Italian city does the \"T\" in the carmaker Fiat's name stand for?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trieste",
+            "correct": false
+          },
+          {
+            "label": "Turin",
+            "correct": true
+          },
+          {
+            "label": "Treviso",
+            "correct": false
+          },
+          {
+            "label": "Tivoli",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0501-2-en",
+      "type": "mcq",
+      "prompt": "Which number is the basis of many superstitions?",
+      "payload": {
+        "options": [
+          {
+            "label": "13",
+            "correct": true
+          },
+          {
+            "label": "666",
+            "correct": false
+          },
+          {
+            "label": "101",
+            "correct": false
+          },
+          {
+            "label": "27",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0458-1-en",
+      "type": "mcq",
+      "prompt": "What is traditionally eaten on Candlemas?",
+      "payload": {
+        "options": [
+          {
+            "label": "Croissants",
+            "correct": false
+          },
+          {
+            "label": "Crêpes",
+            "correct": true
+          },
+          {
+            "label": "Brioches",
+            "correct": false
+          },
+          {
+            "label": "Tarts",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0371-2-en",
+      "type": "mcq",
+      "prompt": "What top speed can a hare reach?",
+      "payload": {
+        "options": [
+          {
+            "label": "110 km/h",
+            "correct": false
+          },
+          {
+            "label": "90 km/h",
+            "correct": false
+          },
+          {
+            "label": "50 km/h",
+            "correct": false
+          },
+          {
+            "label": "70 km/h",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0483-4-en",
+      "type": "mcq",
+      "prompt": "Which writer had the works of his friend La Boétie published?",
+      "payload": {
+        "options": [
+          {
+            "label": "Montesquieu",
+            "correct": false
+          },
+          {
+            "label": "Mallarmé",
+            "correct": false
+          },
+          {
+            "label": "Montaigne",
+            "correct": true
+          },
+          {
+            "label": "Mirabeau",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0195-4-en",
+      "type": "mcq",
+      "prompt": "Who made a series of silkscreens of Marilyn Monroe in 1964?",
+      "payload": {
+        "options": [
+          {
+            "label": "James Rizzi",
+            "correct": false
+          },
+          {
+            "label": "Jasper Johns",
+            "correct": false
+          },
+          {
+            "label": "Andy Warhol",
+            "correct": true
+          },
+          {
+            "label": "Wayne Thiebaud",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0197-1-en",
+      "type": "mcq",
+      "prompt": "In which film does Leonardo DiCaprio seek out a paradise island?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Aviator",
+            "correct": false
+          },
+          {
+            "label": "Celebrity",
+            "correct": false
+          },
+          {
+            "label": "The Beach",
+            "correct": true
+          },
+          {
+            "label": "Blood Diamond",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0352-4-en",
+      "type": "mcq",
+      "prompt": "What is the hidden, living part of the hair called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Follicle",
+            "correct": false
+          },
+          {
+            "label": "Tip",
+            "correct": false
+          },
+          {
+            "label": "Root",
+            "correct": true
+          },
+          {
+            "label": "Shaft",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0581-1-en",
+      "type": "mcq",
+      "prompt": "What does the logo of the Snapchat mobile app show?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bear",
+            "correct": false
+          },
+          {
+            "label": "Camera",
+            "correct": false
+          },
+          {
+            "label": "Monkey",
+            "correct": false
+          },
+          {
+            "label": "Ghost",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0357-3-en",
+      "type": "mcq",
+      "prompt": "How many players are there in a field hockey team?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eleven players",
+            "correct": true
+          },
+          {
+            "label": "Eight players",
+            "correct": false
+          },
+          {
+            "label": "Five players",
+            "correct": false
+          },
+          {
+            "label": "Six players",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0541-1-en",
+      "type": "mcq",
+      "prompt": "In skiing, what difficulty level does a green run indicate?",
+      "payload": {
+        "options": [
+          {
+            "label": "Very easy",
+            "correct": true
+          },
+          {
+            "label": "Medium",
+            "correct": false
+          },
+          {
+            "label": "Very difficult",
+            "correct": false
+          },
+          {
+            "label": "Difficult",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0461-3-en",
+      "type": "mcq",
+      "prompt": "What would the temperature on Earth be without the greenhouse effect?",
+      "payload": {
+        "options": [
+          {
+            "label": "98°C",
+            "correct": false
+          },
+          {
+            "label": "-18°C",
+            "correct": true
+          },
+          {
+            "label": "4°C",
+            "correct": false
+          },
+          {
+            "label": "47°C",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0049-2-en",
+      "type": "mcq",
+      "prompt": "What is the residence of the US president in Washington?",
+      "payload": {
+        "options": [
+          {
+            "label": "White House",
+            "correct": true
+          },
+          {
+            "label": "Blue House",
+            "correct": false
+          },
+          {
+            "label": "Red House",
+            "correct": false
+          },
+          {
+            "label": "Green House",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0376-3-en",
+      "type": "mcq",
+      "prompt": "Despite its name, which is the oldest bridge in Paris?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pont du Roi",
+            "correct": false
+          },
+          {
+            "label": "Pont Neuf",
+            "correct": true
+          },
+          {
+            "label": "Pont Marie",
+            "correct": false
+          },
+          {
+            "label": "Pont du Diable",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0311-1-en",
+      "type": "mcq",
+      "prompt": "Which musical style characterizes Stromae's universe?",
+      "payload": {
+        "options": [
+          {
+            "label": "Metal",
+            "correct": false
+          },
+          {
+            "label": "Electro-pop",
+            "correct": true
+          },
+          {
+            "label": "Rock",
+            "correct": false
+          },
+          {
+            "label": "Jazz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

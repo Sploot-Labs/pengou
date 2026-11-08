@@ -16,17 +16,47 @@ import { getActiveTenantId } from './activeTenant'
  * use `{error}` — both are checked), else a generic fallback. */
 export class ApiError extends Error {
   readonly status: number
+  /** Code machine du serveur quand il en envoie un (`{code}`), ex. `TERMS_ACCEPTANCE_REQUIRED` ou `RESET_PASSWORD_DISABLED`. */
+  readonly code?: string
 
-  constructor(status: number, message: string) {
+  constructor(status: number, message: string, code?: string) {
     super(message)
     this.name = 'ApiError'
     this.status = status
+    this.code = code
   }
+}
+
+/** Code des réponses 403 des routes protégées tant que l'hôte n'a pas accepté les CGU courantes. */
+export const TERMS_ACCEPTANCE_REQUIRED = 'TERMS_ACCEPTANCE_REQUIRED'
+
+const termsListeners = new Set<() => void>()
+
+/** S'abonne aux refus « CGU à revalider » de n'importe quelle requête (une notification par
+ * réponse). Utilisé par `SessionProvider` pour afficher l'écran de revalidation même quand le
+ * changement de version survient après la sonde de session. Renvoie la fonction de désabonnement. */
+export function onTermsAcceptanceRequired(listener: () => void): () => void {
+  termsListeners.add(listener)
+  return () => {
+    termsListeners.delete(listener)
+  }
+}
+
+function extractErrorCode(body: unknown): string | undefined {
+  if (body && typeof body === 'object') {
+    const code = (body as Record<string, unknown>).code
+    if (typeof code === 'string' && code.length > 0) return code
+  }
+  return undefined
 }
 
 function extractErrorMessage(body: unknown): string | undefined {
   if (body && typeof body === 'object') {
     const record = body as Record<string, unknown>
+    // Corps d'erreur par défaut de Fastify (`{statusCode, error: 'Not Found', message: 'Route GET:…'}`) :
+    // libellés techniques en anglais, jamais destinés à l'utilisateur. Nos routes n'envoient pas
+    // `statusCode`, Better Auth non plus.
+    if (typeof record.statusCode === 'number') return undefined
     if (typeof record.error === 'string' && record.error.length > 0) return record.error
     if (typeof record.message === 'string' && record.message.length > 0) return record.message
   }
@@ -41,6 +71,32 @@ function safeJsonParse(text: string): unknown {
     // "no structured error" rather than crashing the caller.
     return undefined
   }
+}
+
+/** Message de repli quand la réponse ne porte aucun texte exploitable (proxy, page HTML, corps vide). */
+function fallbackMessage(status: number): string {
+  switch (status) {
+    case 400:
+      return 'La demande est invalide.'
+    case 401:
+      return 'Votre session a expiré. Reconnectez-vous.'
+    case 403:
+      return "Vous n'avez pas les droits pour cette action."
+    case 404:
+      return 'Élément introuvable.'
+    case 409:
+      return 'Conflit avec une modification récente. Rechargez la page.'
+    case 413:
+      return 'Envoi trop volumineux.'
+    case 429:
+      return 'Trop de demandes. Patientez un instant puis réessayez.'
+    case 502:
+    case 503:
+    case 504:
+      return 'Le serveur ne répond pas. Réessayez dans un instant.'
+  }
+  if (status >= 500) return 'Le serveur a rencontré une erreur. Réessayez dans un instant.'
+  return `Erreur ${status}`
 }
 
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
@@ -67,8 +123,12 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
   const data = text.length > 0 ? safeJsonParse(text) : undefined
 
   if (!response.ok) {
-    const message = extractErrorMessage(data) ?? `Erreur ${response.status}`
-    throw new ApiError(response.status, message)
+    const message = extractErrorMessage(data) ?? fallbackMessage(response.status)
+    const code = extractErrorCode(data)
+    if (response.status === 403 && code === TERMS_ACCEPTANCE_REQUIRED) {
+      for (const listener of termsListeners) listener()
+    }
+    throw new ApiError(response.status, message, code)
   }
 
   return data as T

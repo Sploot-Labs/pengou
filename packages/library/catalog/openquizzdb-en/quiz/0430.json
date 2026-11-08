@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=430"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0430-2-en",
+      "type": "mcq",
+      "prompt": "What is the reindeer of Canada's Arctic regions called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Woodland",
+            "correct": false
+          },
+          {
+            "label": "Big deer",
+            "correct": false
+          },
+          {
+            "label": "Caribou",
+            "correct": true
+          },
+          {
+            "label": "Canadian reindeer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

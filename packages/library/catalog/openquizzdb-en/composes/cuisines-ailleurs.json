@@ -1,0 +1,412 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0519-1-en",
+      "type": "mcq",
+      "prompt": "Which sauce is made with ground beef, tomato sauce and onions?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bolognese",
+            "correct": true
+          },
+          {
+            "label": "Genoese",
+            "correct": false
+          },
+          {
+            "label": "Béchamel",
+            "correct": false
+          },
+          {
+            "label": "Tartare",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0519-2-en",
+      "type": "mcq",
+      "prompt": "Which dish consists of raw beef cut into very thin slices?",
+      "payload": {
+        "options": [
+          {
+            "label": "Risotto",
+            "correct": false
+          },
+          {
+            "label": "Crostino",
+            "correct": false
+          },
+          {
+            "label": "Frico",
+            "correct": false
+          },
+          {
+            "label": "Carpaccio",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0523-1-en",
+      "type": "mcq",
+      "prompt": "Which pasta comes in rectangular sheets?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lasagne",
+            "correct": true
+          },
+          {
+            "label": "Tortellini",
+            "correct": false
+          },
+          {
+            "label": "Cannelloni",
+            "correct": false
+          },
+          {
+            "label": "Fusilli",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0523-2-en",
+      "type": "mcq",
+      "prompt": "Which folded stuffed pasta comes from northwestern Italy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Macaroni",
+            "correct": false
+          },
+          {
+            "label": "Fusilli",
+            "correct": false
+          },
+          {
+            "label": "Spaghetti",
+            "correct": false
+          },
+          {
+            "label": "Ravioli",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0523-4-en",
+      "type": "mcq",
+      "prompt": "Which pasta dish is tossed in a pan with eggs and bacon?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lasagne",
+            "correct": false
+          },
+          {
+            "label": "Tortellini",
+            "correct": false
+          },
+          {
+            "label": "Carbonara",
+            "correct": true
+          },
+          {
+            "label": "Ravioli",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0445-1-en",
+      "type": "mcq",
+      "prompt": "Which stuffed Italian pasta is shaped like little crowns?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fusilli",
+            "correct": false
+          },
+          {
+            "label": "Tortellini",
+            "correct": true
+          },
+          {
+            "label": "Gnocchi",
+            "correct": false
+          },
+          {
+            "label": "Capellini",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0445-2-en",
+      "type": "mcq",
+      "prompt": "What will you eat if you order \"grana padano\", protected by a PDO?",
+      "payload": {
+        "options": [
+          {
+            "label": "Soup",
+            "correct": false
+          },
+          {
+            "label": "Stew",
+            "correct": false
+          },
+          {
+            "label": "Cake",
+            "correct": false
+          },
+          {
+            "label": "Cheese",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0445-3-en",
+      "type": "mcq",
+      "prompt": "Which Italian dish is made from boiled cornmeal?",
+      "payload": {
+        "options": [
+          {
+            "label": "Padano",
+            "correct": false
+          },
+          {
+            "label": "Pecorino",
+            "correct": false
+          },
+          {
+            "label": "Polenta",
+            "correct": true
+          },
+          {
+            "label": "Panzerotti",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0445-4-en",
+      "type": "mcq",
+      "prompt": "What color are the truffles of Piedmont?",
+      "payload": {
+        "options": [
+          {
+            "label": "Green",
+            "correct": false
+          },
+          {
+            "label": "Black",
+            "correct": false
+          },
+          {
+            "label": "White",
+            "correct": true
+          },
+          {
+            "label": "Red",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0390-1-en",
+      "type": "mcq",
+      "prompt": "What is a blini, whose Slavic name means \"to grind\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fruit tart",
+            "correct": false
+          },
+          {
+            "label": "Thick pancake",
+            "correct": true
+          },
+          {
+            "label": "Dry cake",
+            "correct": false
+          },
+          {
+            "label": "Flat waffle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0390-2-en",
+      "type": "mcq",
+      "prompt": "What is the traditional shape of samosas?",
+      "payload": {
+        "options": [
+          {
+            "label": "Square",
+            "correct": false
+          },
+          {
+            "label": "Oval",
+            "correct": false
+          },
+          {
+            "label": "Triangular",
+            "correct": true
+          },
+          {
+            "label": "Round",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0390-3-en",
+      "type": "mcq",
+      "prompt": "Which ingredient is found in sushi and in plain Japanese gohan?",
+      "payload": {
+        "options": [
+          {
+            "label": "Duck",
+            "correct": false
+          },
+          {
+            "label": "Salmon",
+            "correct": false
+          },
+          {
+            "label": "Rice",
+            "correct": true
+          },
+          {
+            "label": "Beef",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0390-4-en",
+      "type": "mcq",
+      "prompt": "Which town, east of Milan, gave its name to a blue cheese?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gorgonzola",
+            "correct": true
+          },
+          {
+            "label": "Corbetta",
+            "correct": false
+          },
+          {
+            "label": "Dresano",
+            "correct": false
+          },
+          {
+            "label": "Bresso",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-cuisines-ailleurs-en",
+      "title": "Cuisines from elsewhere",
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0519-1-en",
+        "oqdb-0519-2-en",
+        "oqdb-0523-1-en",
+        "oqdb-0523-2-en",
+        "oqdb-0523-4-en",
+        "oqdb-0445-1-en",
+        "oqdb-0445-2-en",
+        "oqdb-0445-3-en",
+        "oqdb-0445-4-en",
+        "oqdb-0390-1-en",
+        "oqdb-0390-2-en",
+        "oqdb-0390-3-en",
+        "oqdb-0390-4-en"
+      ],
+      "description": "Based on OpenQuizzDB quizzes about Italian cuisine, pasta and foreign food."
+    }
+  ]
+}

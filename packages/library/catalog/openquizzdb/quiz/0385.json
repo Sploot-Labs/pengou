@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=385"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0385-3",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on un arrêt de jeu au basket-ball ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Temps mort",
+            "correct": true
+          },
+          {
+            "label": "Entre-deux",
+            "correct": false
+          },
+          {
+            "label": "Dribble",
+            "correct": false
+          },
+          {
+            "label": "Zone press",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0385-4",
+      "type": "mcq",
+      "prompt": "Combien de points vaut un panier normal au basket-ball ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Un points",
+            "correct": false
+          },
+          {
+            "label": "Deux points",
+            "correct": true
+          },
+          {
+            "label": "Quatre points",
+            "correct": false
+          },
+          {
+            "label": "Trois points",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

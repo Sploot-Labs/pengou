@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=618"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0618-4-en",
+      "type": "mcq",
+      "prompt": "Which important process do bees carry out when foraging?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sporulation",
+            "correct": false
+          },
+          {
+            "label": "Pollination",
+            "correct": true
+          },
+          {
+            "label": "Germination",
+            "correct": false
+          },
+          {
+            "label": "Introgression",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

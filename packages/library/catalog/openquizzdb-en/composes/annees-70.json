@@ -1,0 +1,503 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0612-1-en",
+      "type": "mcq",
+      "prompt": "Which Village People hit refers to a youth organization?",
+      "payload": {
+        "options": [
+          {
+            "label": "Go West",
+            "correct": false
+          },
+          {
+            "label": "In the Navy",
+            "correct": false
+          },
+          {
+            "label": "Y.M.C.A.",
+            "correct": true
+          },
+          {
+            "label": "Macho Man",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0135-3-en",
+      "type": "mcq",
+      "prompt": "At what age did Nadia Comaneci score a 10 at the Olympics?",
+      "payload": {
+        "options": [
+          {
+            "label": "13",
+            "correct": false
+          },
+          {
+            "label": "15",
+            "correct": false
+          },
+          {
+            "label": "14",
+            "correct": true
+          },
+          {
+            "label": "16",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0448-2-en",
+      "type": "mcq",
+      "prompt": "In which TV series did Telly Savalas play a police officer?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kojak",
+            "correct": true
+          },
+          {
+            "label": "Columbo",
+            "correct": false
+          },
+          {
+            "label": "Starsky & Hutch",
+            "correct": false
+          },
+          {
+            "label": "Magnum",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0179-2-en",
+      "type": "mcq",
+      "prompt": "Which character did Ron Howard play in \"Happy Days\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Charles",
+            "correct": false
+          },
+          {
+            "label": "Howard",
+            "correct": false
+          },
+          {
+            "label": "Arthur",
+            "correct": false
+          },
+          {
+            "label": "Richie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0602-2-en",
+      "type": "mcq",
+      "prompt": "Which character is the villain in \"Little House on the Prairie\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stella",
+            "correct": false
+          },
+          {
+            "label": "Nellie",
+            "correct": true
+          },
+          {
+            "label": "Marie",
+            "correct": false
+          },
+          {
+            "label": "Laura",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0493-3-en",
+      "type": "mcq",
+      "prompt": "Which TV series character drives a yellow Aston Martin?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brett Sinclair",
+            "correct": true
+          },
+          {
+            "label": "Jessica Fletcher",
+            "correct": false
+          },
+          {
+            "label": "Arsène Lupin",
+            "correct": false
+          },
+          {
+            "label": "Kojak",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0310-3-en",
+      "type": "mcq",
+      "prompt": "Which snake accompanies Prince John in Disney's \"Robin Hood\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sir Hiss",
+            "correct": true
+          },
+          {
+            "label": "Ugly Joe",
+            "correct": false
+          },
+          {
+            "label": "Spoilsport",
+            "correct": false
+          },
+          {
+            "label": "Killjoy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0449-4-en",
+      "type": "mcq",
+      "prompt": "Which actor played \"The Man from Atlantis\" on screen?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lee Majors",
+            "correct": false
+          },
+          {
+            "label": "Patrick Duffy",
+            "correct": true
+          },
+          {
+            "label": "Mark Harmon",
+            "correct": false
+          },
+          {
+            "label": "Mark Harris",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0071-2-en",
+      "type": "mcq",
+      "prompt": "Who plays Louis de Funès's servant in \"La Folie des grandeurs\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bourvil",
+            "correct": false
+          },
+          {
+            "label": "Yves Montand",
+            "correct": true
+          },
+          {
+            "label": "Coluche",
+            "correct": false
+          },
+          {
+            "label": "Michel Galabru",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0124-2-en",
+      "type": "mcq",
+      "prompt": "Which band performed the hit \"I Was Made for Lovin' You\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kodaline",
+            "correct": false
+          },
+          {
+            "label": "Kiss",
+            "correct": true
+          },
+          {
+            "label": "Korn",
+            "correct": false
+          },
+          {
+            "label": "Kraftwerk",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0187-3-en",
+      "type": "mcq",
+      "prompt": "Who do \"Charlie's Angels\" work for?",
+      "payload": {
+        "options": [
+          {
+            "label": "Charlie",
+            "correct": true
+          },
+          {
+            "label": "Clayton",
+            "correct": false
+          },
+          {
+            "label": "Calvin",
+            "correct": false
+          },
+          {
+            "label": "Chester",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0319-3-en",
+      "type": "mcq",
+      "prompt": "Which card game, created in 1971 by Merle Robbins, is published by Mattel?",
+      "payload": {
+        "options": [
+          {
+            "label": "Korsar",
+            "correct": false
+          },
+          {
+            "label": "Dobble",
+            "correct": false
+          },
+          {
+            "label": "Uno",
+            "correct": true
+          },
+          {
+            "label": "Mille Bornes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0217-3-en",
+      "type": "mcq",
+      "prompt": "In which film do we meet a scientist android named Ash?",
+      "payload": {
+        "options": [
+          {
+            "label": "Robocop",
+            "correct": false
+          },
+          {
+            "label": "Alien",
+            "correct": true
+          },
+          {
+            "label": "Matrix",
+            "correct": false
+          },
+          {
+            "label": "Total Recall",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0379-3-en",
+      "type": "mcq",
+      "prompt": "Which director made \"Apocalypse Now\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oliver Stone",
+            "correct": false
+          },
+          {
+            "label": "Francis Ford Coppola",
+            "correct": true
+          },
+          {
+            "label": "David Lynch",
+            "correct": false
+          },
+          {
+            "label": "Ridley Scott",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0415-4-en",
+      "type": "mcq",
+      "prompt": "Which Japanese city hosted the 1972 Winter Olympics?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sapporo",
+            "correct": true
+          },
+          {
+            "label": "Nagano",
+            "correct": false
+          },
+          {
+            "label": "Yokohama",
+            "correct": false
+          },
+          {
+            "label": "Kumamoto",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0041-3-en",
+      "type": "mcq",
+      "prompt": "What is John Travolta's character's first name in \"Grease\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tony",
+            "correct": false
+          },
+          {
+            "label": "Johnny",
+            "correct": false
+          },
+          {
+            "label": "Billy",
+            "correct": false
+          },
+          {
+            "label": "Danny",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0509-4-en",
+      "type": "mcq",
+      "prompt": "Which worldwide hit made Patrick Hernandez financially set for life?",
+      "payload": {
+        "options": [
+          {
+            "label": "Born to Somebody",
+            "correct": false
+          },
+          {
+            "label": "Born to Be Alive",
+            "correct": true
+          },
+          {
+            "label": "Born to Sing",
+            "correct": false
+          },
+          {
+            "label": "To be Three",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

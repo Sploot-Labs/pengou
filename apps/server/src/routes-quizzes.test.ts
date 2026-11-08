@@ -35,7 +35,7 @@ async function signUp(app: FastifyInstance, email: string): Promise<string> {
     : String(rawCookies).split(';')[0]
 }
 
-async function buildApp(): Promise<FastifyInstance> {
+async function buildApp(appDb = ctx.appDb): Promise<FastifyInstance> {
   const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'single' })
   const auth = createAuth(ctx.db, {
     secret: 'test-secret-at-least-32-chars-long!!',
@@ -44,9 +44,54 @@ async function buildApp(): Promise<FastifyInstance> {
   })
   const app = await buildServer(config, { dbStatus: () => 'up' })
   await registerAuth(app, auth)
-  registerEditor(app, { systemDb: ctx.db, appDb: ctx.appDb, auth, config })
+  registerEditor(app, { systemDb: ctx.db, appDb, auth, config })
   return app
 }
+
+describe('réponses envoyées après le COMMIT', () => {
+  it("création de quiz, ajout et suppression de question : l'écriture est visible dès la réponse reçue", async () => {
+    // COMMIT retardé : une réponse envoyée depuis la transaction arriverait avant que l'écriture
+    // soit visible des autres connexions (la requête suivante du client répondait alors 404).
+    const slowCommitDb = new Proxy(ctx.appDb, {
+      get(target, key, receiver) {
+        if (key !== 'transaction') return Reflect.get(target, key, receiver)
+        return (fn: Parameters<typeof target.transaction>[0]) =>
+          target.transaction(async (tx) => {
+            const result = await fn(tx)
+            await new Promise((resolve) => setTimeout(resolve, 300))
+            return result
+          })
+      },
+    })
+    const app = await buildApp(slowCommitDb)
+    const cookie = await signUp(app, 'commit-avant-reponse@example.com')
+    const headers = { 'content-type': 'application/json', cookie }
+
+    const quizRes = await app.inject({ method: 'POST', url: '/api/quizzes', payload: { title: 'Course' }, headers })
+    expect(quizRes.statusCode).toBe(201)
+    const quizId = (quizRes.json() as { id: string }).id
+    expect(await ctx.db.select().from(schema.quiz).where(eq(schema.quiz.id, quizId))).toHaveLength(1)
+
+    const questionRes = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/questions`,
+      payload: { type: 'truefalse', prompt: 'Vrai ?', timeLimit: 20, payload: { correct: true } },
+      headers,
+    })
+    expect(questionRes.statusCode).toBe(201)
+    const questionId = (questionRes.json() as { id: string }).id
+    expect(await ctx.db.select().from(schema.question).where(eq(schema.question.id, questionId))).toHaveLength(1)
+
+    const deleteRes = await app.inject({
+      method: 'DELETE',
+      url: `/api/quizzes/${quizId}/questions/${questionId}`,
+      headers: { cookie },
+    })
+    expect(deleteRes.statusCode).toBe(204)
+    expect(await ctx.db.select().from(schema.question).where(eq(schema.question.id, questionId))).toHaveLength(0)
+    await app.close()
+  })
+})
 
 describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
   it('POST sans cookie → 401', async () => {
@@ -197,7 +242,7 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await app.close()
   })
 
-  it('intra-tenant (member) : le quiz d\'un autre MEMBER du même tenant est invisible (404) et non modifiable/supprimable', async () => {
+  it("intra-tenant (member) : le quiz d'un autre MEMBER du même tenant est invisible (404) et non modifiable/supprimable", async () => {
     const app = await buildApp()
 
     // Deux utilisateurs distincts qui, en mode single, résolvent vers LE MÊME tenant par défaut.
@@ -244,7 +289,7 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await app.close()
   })
 
-  it('un quiz d\'un AUTRE tenant est invisible (404, pas juste un id manquant) et absent de la liste', async () => {
+  it("un quiz d'un AUTRE tenant est invisible (404, pas juste un id manquant) et absent de la liste", async () => {
     const app = await buildApp()
 
     // Seed direct en base : un second tenant, un owner qui lui appartient, et un quiz
@@ -252,7 +297,8 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     // single, résout toujours vers le tenant par défaut ; on simule ainsi un tenant
     // "étranger" que l'utilisateur de test ne pourra jamais atteindre via l'API).
     const [foreignTenant] = await ctx.db.insert(schema.tenant).values({ name: 'Autre' }).returning()
-    const [foreignOwner] = await ctx.db.insert(schema.user)
+    const [foreignOwner] = await ctx.db
+      .insert(schema.user)
       .values({ id: crypto.randomUUID(), email: 'etranger@x.fr', name: 'Étranger', emailVerified: false })
       .returning()
     const foreignQuiz = await createQuiz(tenantScope(ctx.db, foreignTenant.id), {
@@ -289,7 +335,7 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await app.close()
   })
 
-  it('un admin voit et modifie le quiz d\'un autre membre du même tenant (accès croisé par rôle)', async () => {
+  it("un admin voit et modifie le quiz d'un autre membre du même tenant (accès croisé par rôle)", async () => {
     const app = await buildApp()
     const adminCookie = await signUp(app, 'admin-x@example.com')
     const memberCookie = await signUp(app, 'member-x@example.com')
@@ -302,7 +348,8 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
 
     // member-x crée un quiz.
     const created = await app.inject({
-      method: 'POST', url: '/api/quizzes',
+      method: 'POST',
+      url: '/api/quizzes',
       payload: { title: 'Quiz du membre' },
       headers: { 'content-type': 'application/json', cookie: memberCookie },
     })
@@ -312,7 +359,8 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     const listAdmin = await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie: adminCookie } })
     expect((listAdmin.json() as { id: string }[]).some((q) => q.id === quizId)).toBe(true)
     const patch = await app.inject({
-      method: 'PATCH', url: `/api/quizzes/${quizId}`,
+      method: 'PATCH',
+      url: `/api/quizzes/${quizId}`,
       payload: { title: 'Modifié par admin' },
       headers: { 'content-type': 'application/json', cookie: adminCookie },
     })
@@ -321,7 +369,7 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await app.close()
   })
 
-  it('un member ne voit pas le quiz d\'un autre (owner-scoping maintenu)', async () => {
+  it("un member ne voit pas le quiz d'un autre (owner-scoping maintenu)", async () => {
     const app = await buildApp()
     const ownerCookie = await signUp(app, 'owner-y@example.com')
     const memberCookie = await signUp(app, 'member-y@example.com')
@@ -329,7 +377,8 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await ctx.db.update(schema.membership).set({ role: 'member' }).where(eq(schema.membership.userId, memberU.id))
 
     const created = await app.inject({
-      method: 'POST', url: '/api/quizzes',
+      method: 'POST',
+      url: '/api/quizzes',
       payload: { title: 'Quiz owner-y' },
       headers: { 'content-type': 'application/json', cookie: ownerCookie },
     })
@@ -340,6 +389,129 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     const getOne = await app.inject({ method: 'GET', url: `/api/quizzes/${quizId}`, headers: { cookie: memberCookie } })
     expect(getOne.statusCode).toBe(404)
 
+    await app.close()
+  })
+})
+
+describe('archivage /api/quizzes/:id/archive et /restore', () => {
+  /** Inscrit un utilisateur, fixe son rôle dans le tenant par défaut et renvoie son cookie. */
+  async function signUpAs(app: FastifyInstance, email: string, role: 'owner' | 'admin' | 'member'): Promise<string> {
+    const cookie = await signUp(app, email)
+    const [u] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, email))
+    await ctx.db.update(schema.membership).set({ role }).where(eq(schema.membership.userId, u.id))
+    return cookie
+  }
+
+  async function createVia(app: FastifyInstance, cookie: string, title: string): Promise<string> {
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/quizzes',
+      payload: { title },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    expect(res.statusCode).toBe(201)
+    return (res.json() as { id: string }).id
+  }
+
+  const ids = (res: { json: () => unknown }) => (res.json() as Array<{ id: string }>).map((q) => q.id)
+
+  it('archive masque le quiz de la liste par défaut et le montre avec ?archived=1 ; restore le ramène', async () => {
+    const app = await buildApp()
+    const cookie = await signUpAs(app, 'archive-auteur@example.com', 'member')
+    const quizId = await createVia(app, cookie, 'Quiz à archiver')
+
+    const archive = await app.inject({ method: 'POST', url: `/api/quizzes/${quizId}/archive`, headers: { cookie } })
+    expect(archive.statusCode).toBe(200)
+    expect((archive.json() as { archivedAt: string | null }).archivedAt).not.toBeNull()
+
+    const active = await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie } })
+    expect(ids(active)).not.toContain(quizId)
+    const archived = await app.inject({ method: 'GET', url: '/api/quizzes?archived=1', headers: { cookie } })
+    expect(ids(archived)).toContain(quizId)
+    expect(
+      (archived.json() as Array<{ id: string; archivedAt: string | null }>).find((q) => q.id === quizId)!.archivedAt,
+    ).not.toBeNull()
+
+    // Toujours lisible dans l'éditeur, avec sa date d'archivage.
+    const get = await app.inject({ method: 'GET', url: `/api/quizzes/${quizId}`, headers: { cookie } })
+    expect(get.statusCode).toBe(200)
+    expect((get.json() as { archivedAt: string | null }).archivedAt).not.toBeNull()
+
+    const restore = await app.inject({ method: 'POST', url: `/api/quizzes/${quizId}/restore`, headers: { cookie } })
+    expect(restore.statusCode).toBe(200)
+    expect((restore.json() as { archivedAt: string | null }).archivedAt).toBeNull()
+
+    const activeAgain = await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie } })
+    expect(ids(activeAgain)).toContain(quizId)
+    const archivedAgain = await app.inject({ method: 'GET', url: '/api/quizzes?archived=1', headers: { cookie } })
+    expect(ids(archivedAgain)).not.toContain(quizId)
+
+    await app.close()
+  })
+
+  it("un member ne peut ni archiver ni restaurer le quiz d'un autre member (404) ; un admin et un owner le peuvent", async () => {
+    const app = await buildApp()
+    const authorCookie = await signUpAs(app, 'archive-a@example.com', 'member')
+    const otherCookie = await signUpAs(app, 'archive-b@example.com', 'member')
+    const adminCookie = await signUpAs(app, 'archive-admin@example.com', 'admin')
+    const ownerCookie = await signUpAs(app, 'archive-owner@example.com', 'owner')
+    const quizId = await createVia(app, authorCookie, 'Quiz de A')
+
+    const denied = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/archive`,
+      headers: { cookie: otherCookie },
+    })
+    expect(denied.statusCode).toBe(404)
+    expect((denied.json() as { error: string }).error).toBe('Quiz introuvable.')
+    const stillActive = await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie: authorCookie } })
+    expect(ids(stillActive)).toContain(quizId)
+
+    const byAdmin = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/archive`,
+      headers: { cookie: adminCookie },
+    })
+    expect(byAdmin.statusCode).toBe(200)
+
+    const restoreDenied = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/restore`,
+      headers: { cookie: otherCookie },
+    })
+    expect(restoreDenied.statusCode).toBe(404)
+    const otherArchived = await app.inject({
+      method: 'GET',
+      url: '/api/quizzes?archived=1',
+      headers: { cookie: otherCookie },
+    })
+    expect(ids(otherArchived)).not.toContain(quizId)
+
+    const byOwner = await app.inject({
+      method: 'POST',
+      url: `/api/quizzes/${quizId}/restore`,
+      headers: { cookie: ownerCookie },
+    })
+    expect(byOwner.statusCode).toBe(200)
+    expect((byOwner.json() as { archivedAt: string | null }).archivedAt).toBeNull()
+
+    await app.close()
+  })
+
+  it('archive sans cookie → 401, quiz inexistant → 404', async () => {
+    const app = await buildApp()
+    const noCookie = await app.inject({
+      method: 'POST',
+      url: '/api/quizzes/00000000-0000-0000-0000-000000000000/archive',
+    })
+    expect(noCookie.statusCode).toBe(401)
+    const cookie = await signUp(app, 'archive-404@example.com')
+    const missing = await app.inject({
+      method: 'POST',
+      url: '/api/quizzes/00000000-0000-0000-0000-000000000000/archive',
+      headers: { cookie },
+    })
+    expect(missing.statusCode).toBe(404)
     await app.close()
   })
 })

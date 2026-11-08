@@ -48,4 +48,7 @@ export type GameSession = {
   // joinTokens des joueurs exclus par l'animateur : refusés à la reconnexion. Optionnel pour
   // tolérer un `engine_state` antérieur à l'exclusion (lu `?? []`, absent tant qu'aucune exclusion).
   kickedJoinTokens?: string[]
+  // nuage de mots : clés de fusion retirées par l'hôte, par id de question (et non par index :
+  // clés string, donc intactes à la désérialisation). Optionnel pour lire les états d'avant migration.
+  wordcloudRemoved?: Record<string, string[]>
 }

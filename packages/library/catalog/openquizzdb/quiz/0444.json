@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=444"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0444-4",
+      "type": "mcq",
+      "prompt": "Qui a découvert Brel et Dalida et organisait des soirées à Saint-Tropez ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tristan Duval",
+            "correct": false
+          },
+          {
+            "label": "Eddie Barclay",
+            "correct": true
+          },
+          {
+            "label": "Valéry Zeitoun",
+            "correct": false
+          },
+          {
+            "label": "Johnny Stark",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=97"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0097-1",
+      "type": "mcq",
+      "prompt": "Comment qualifie-t-on une eau minérale riche en fer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gazeuse",
+            "correct": false
+          },
+          {
+            "label": "Ferrugineuse",
+            "correct": true
+          },
+          {
+            "label": "Plate",
+            "correct": false
+          },
+          {
+            "label": "Calcaire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0097-2",
+      "type": "mcq",
+      "prompt": "Quelle eau d'origine souterraine est naturellement conforme ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eau déminéralisée",
+            "correct": false
+          },
+          {
+            "label": "Eau usée",
+            "correct": false
+          },
+          {
+            "label": "Eau gazeuse",
+            "correct": false
+          },
+          {
+            "label": "Eau de source",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0097-4",
+      "type": "mcq",
+      "prompt": "Quelle marque d'eau minérale belge appartient au groupe Coca-Cola ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spa",
+            "correct": false
+          },
+          {
+            "label": "Chaudfontaine",
+            "correct": true
+          },
+          {
+            "label": "Bru",
+            "correct": false
+          },
+          {
+            "label": "Valvert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

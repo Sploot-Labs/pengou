@@ -1,0 +1,387 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0380-1-en",
+      "type": "mcq",
+      "prompt": "What is a spherical vessel called in chemistry?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beaker",
+            "correct": false
+          },
+          {
+            "label": "Burette",
+            "correct": false
+          },
+          {
+            "label": "Round-bottom flask",
+            "correct": true
+          },
+          {
+            "label": "Jar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0380-2-en",
+      "type": "mcq",
+      "prompt": "Which metal burns with a blinding white flame?",
+      "payload": {
+        "options": [
+          {
+            "label": "Radium",
+            "correct": false
+          },
+          {
+            "label": "Barium",
+            "correct": false
+          },
+          {
+            "label": "Calcium",
+            "correct": false
+          },
+          {
+            "label": "Magnesium",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0380-3-en",
+      "type": "mcq",
+      "prompt": "Which parameter tells whether a solution is acidic, neutral or basic?",
+      "payload": {
+        "options": [
+          {
+            "label": "The pH",
+            "correct": true
+          },
+          {
+            "label": "The constant",
+            "correct": false
+          },
+          {
+            "label": "The base",
+            "correct": false
+          },
+          {
+            "label": "The power",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0375-1-en",
+      "type": "mcq",
+      "prompt": "Among the alkali metals, what is the chemical symbol for sodium?",
+      "payload": {
+        "options": [
+          {
+            "label": "Na",
+            "correct": true
+          },
+          {
+            "label": "So",
+            "correct": false
+          },
+          {
+            "label": "Sd",
+            "correct": false
+          },
+          {
+            "label": "Um",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0375-2-en",
+      "type": "mcq",
+      "prompt": "Which element has the symbol Na and atomic number 11?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sodium",
+            "correct": true
+          },
+          {
+            "label": "Selenium",
+            "correct": false
+          },
+          {
+            "label": "Sulfur",
+            "correct": false
+          },
+          {
+            "label": "Silicon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0375-3-en",
+      "type": "mcq",
+      "prompt": "What is the chemical symbol for potassium, a silvery-white metal?",
+      "payload": {
+        "options": [
+          {
+            "label": "T",
+            "correct": false
+          },
+          {
+            "label": "K",
+            "correct": true
+          },
+          {
+            "label": "P",
+            "correct": false
+          },
+          {
+            "label": "O",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0375-4-en",
+      "type": "mcq",
+      "prompt": "Which chemical element is represented by the symbol B?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bismuth",
+            "correct": false
+          },
+          {
+            "label": "Boron",
+            "correct": true
+          },
+          {
+            "label": "Benzene",
+            "correct": false
+          },
+          {
+            "label": "Bromine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0557-1-en",
+      "type": "mcq",
+      "prompt": "How many pairs of ribs does the human skeleton have?",
+      "payload": {
+        "options": [
+          {
+            "label": "32",
+            "correct": false
+          },
+          {
+            "label": "24",
+            "correct": false
+          },
+          {
+            "label": "12",
+            "correct": true
+          },
+          {
+            "label": "6",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0557-2-en",
+      "type": "mcq",
+      "prompt": "What is the average lifespan of a red blood cell?",
+      "payload": {
+        "options": [
+          {
+            "label": "3 weeks",
+            "correct": false
+          },
+          {
+            "label": "4 months",
+            "correct": true
+          },
+          {
+            "label": "1 hour",
+            "correct": false
+          },
+          {
+            "label": "2 days",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0419-1-en",
+      "type": "mcq",
+      "prompt": "What does the Kelvin scale, named after Lord Kelvin, measure?",
+      "payload": {
+        "options": [
+          {
+            "label": "Distance",
+            "correct": false
+          },
+          {
+            "label": "Weight",
+            "correct": false
+          },
+          {
+            "label": "Speed",
+            "correct": false
+          },
+          {
+            "label": "Temperature",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0419-2-en",
+      "type": "mcq",
+      "prompt": "Who developed the earthquake magnitude scale in 1935?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pauling",
+            "correct": false
+          },
+          {
+            "label": "Rankine",
+            "correct": false
+          },
+          {
+            "label": "Richter",
+            "correct": true
+          },
+          {
+            "label": "Monoyer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0419-3-en",
+      "type": "mcq",
+      "prompt": "Which of these countries does not use degrees Celsius?",
+      "payload": {
+        "options": [
+          {
+            "label": "Canada",
+            "correct": false
+          },
+          {
+            "label": "Italy",
+            "correct": false
+          },
+          {
+            "label": "United States",
+            "correct": true
+          },
+          {
+            "label": "Australia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0419-4-en",
+      "type": "mcq",
+      "prompt": "Which SI unit is used to measure frequency?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joule",
+            "correct": false
+          },
+          {
+            "label": "Becquerel",
+            "correct": false
+          },
+          {
+            "label": "Katal",
+            "correct": false
+          },
+          {
+            "label": "Hertz",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

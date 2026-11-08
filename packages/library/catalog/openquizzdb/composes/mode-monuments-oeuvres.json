@@ -1,0 +1,352 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0532-1",
+      "type": "mcq",
+      "prompt": "Quelle icône de la mode portait un catogan et des lunettes noires ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thierry Mugler",
+            "correct": false
+          },
+          {
+            "label": "Karl Lagerfeld",
+            "correct": true
+          },
+          {
+            "label": "Paco Rabanne",
+            "correct": false
+          },
+          {
+            "label": "Pierre Cardin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0440-1",
+      "type": "mcq",
+      "prompt": "Le Colisée de Rome représente quel type de bâtiment ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Temple",
+            "correct": false
+          },
+          {
+            "label": "Musée",
+            "correct": false
+          },
+          {
+            "label": "Amphithéâtre",
+            "correct": true
+          },
+          {
+            "label": "Cinéma",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0439-4",
+      "type": "mcq",
+      "prompt": "Qui a peint « La Madone à la prairie » représentant Jésus et sa mère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Auguste Renoir",
+            "correct": false
+          },
+          {
+            "label": "Rembrandt",
+            "correct": false
+          },
+          {
+            "label": "Michel-Ange",
+            "correct": false
+          },
+          {
+            "label": "Raphaël",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0532-2",
+      "type": "mcq",
+      "prompt": "Quel prénom monsieur Takada a-t-il su faire rayonner dans la mode ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kyrio",
+            "correct": false
+          },
+          {
+            "label": "Kalvin",
+            "correct": false
+          },
+          {
+            "label": "Karl",
+            "correct": false
+          },
+          {
+            "label": "Kenzo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0440-2",
+      "type": "mcq",
+      "prompt": "Dans quelle ville italienne peut-on admirer le palais des Doges ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Milan",
+            "correct": false
+          },
+          {
+            "label": "Venise",
+            "correct": true
+          },
+          {
+            "label": "Rome",
+            "correct": false
+          },
+          {
+            "label": "Florence",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0439-2",
+      "type": "mcq",
+      "prompt": "Quel film de Jane Campion met en scène une mère muette pianiste ?",
+      "payload": {
+        "options": [
+          {
+            "label": "In the cut",
+            "correct": false
+          },
+          {
+            "label": "Bright Star",
+            "correct": false
+          },
+          {
+            "label": "La leçon de piano",
+            "correct": true
+          },
+          {
+            "label": "Sweetie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0532-3",
+      "type": "mcq",
+      "prompt": "Quelle fleur est devenue un symbole de la maison Coco Chanel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coquelicot",
+            "correct": false
+          },
+          {
+            "label": "Rose",
+            "correct": false
+          },
+          {
+            "label": "Camélia",
+            "correct": true
+          },
+          {
+            "label": "Marguerite",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0440-3",
+      "type": "mcq",
+      "prompt": "Dans quelle ville se trouve l'incontournable fontaine de Trevi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Milan",
+            "correct": false
+          },
+          {
+            "label": "Turin",
+            "correct": false
+          },
+          {
+            "label": "Naples",
+            "correct": false
+          },
+          {
+            "label": "Rome",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0439-3",
+      "type": "mcq",
+      "prompt": "Dans quel roman de Jules Renard le héros affronte la haine de sa mère ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Maîtresse",
+            "correct": false
+          },
+          {
+            "label": "L'Écornifleur",
+            "correct": false
+          },
+          {
+            "label": "Poil de Carotte",
+            "correct": true
+          },
+          {
+            "label": "Bucoliques",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0532-4",
+      "type": "mcq",
+      "prompt": "Quelle couleur signe les semelles des chaussures Louboutin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rouge",
+            "correct": true
+          },
+          {
+            "label": "Doré",
+            "correct": false
+          },
+          {
+            "label": "Mauve",
+            "correct": false
+          },
+          {
+            "label": "Bleu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0440-4",
+      "type": "mcq",
+      "prompt": "Dans quelle ville italienne se trouve le Palazzo Vecchio ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Milan",
+            "correct": false
+          },
+          {
+            "label": "Venise",
+            "correct": false
+          },
+          {
+            "label": "Turin",
+            "correct": false
+          },
+          {
+            "label": "Florence",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-mode-monuments-oeuvres",
+      "title": "Mode, monuments et chefs-d'œuvre",
+      "description": "D'après des questions OpenQuizzDB de Philippe Bresoux.",
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0532-1",
+        "oqdb-0440-1",
+        "oqdb-0439-4",
+        "oqdb-0532-2",
+        "oqdb-0440-2",
+        "oqdb-0439-2",
+        "oqdb-0532-3",
+        "oqdb-0440-3",
+        "oqdb-0439-3",
+        "oqdb-0532-4",
+        "oqdb-0440-4"
+      ]
+    }
+  ]
+}

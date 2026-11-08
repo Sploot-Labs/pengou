@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=363"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0363-1",
+      "type": "mcq",
+      "prompt": "Dans quelle ville a eu lieu le concert « Rendez-Vous », de Jean-Michel Jarre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Los Angeles",
+            "correct": false
+          },
+          {
+            "label": "Houston",
+            "correct": true
+          },
+          {
+            "label": "Miami",
+            "correct": false
+          },
+          {
+            "label": "Chicago",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

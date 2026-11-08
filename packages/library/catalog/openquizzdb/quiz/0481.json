@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=481"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0481-4",
+      "type": "mcq",
+      "prompt": "Comme s'appelait le poney héros d'un ancien feuilleton télévisé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Suzy",
+            "correct": false
+          },
+          {
+            "label": "Doly",
+            "correct": false
+          },
+          {
+            "label": "Poly",
+            "correct": true
+          },
+          {
+            "label": "Harry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

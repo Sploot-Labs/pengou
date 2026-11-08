@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=549"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0549-1-en",
+      "type": "mcq",
+      "prompt": "What substance is used to melt snow on roads?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pepper",
+            "correct": false
+          },
+          {
+            "label": "Sugar",
+            "correct": false
+          },
+          {
+            "label": "Salt",
+            "correct": true
+          },
+          {
+            "label": "Flour",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0549-3-en",
+      "type": "mcq",
+      "prompt": "Which vehicle is used to clear snow from our roads?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spreader",
+            "correct": false
+          },
+          {
+            "label": "Excavator",
+            "correct": false
+          },
+          {
+            "label": "Snow groomer",
+            "correct": false
+          },
+          {
+            "label": "Snowplow",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0549-4-en",
+      "type": "mcq",
+      "prompt": "Which African general crossed the Alps with elephants?",
+      "payload": {
+        "options": [
+          {
+            "label": "Scipio",
+            "correct": false
+          },
+          {
+            "label": "Hanno",
+            "correct": false
+          },
+          {
+            "label": "Hannibal",
+            "correct": true
+          },
+          {
+            "label": "Hasdrubal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

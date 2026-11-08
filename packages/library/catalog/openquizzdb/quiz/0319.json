@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=319"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0319-1",
+      "type": "mcq",
+      "prompt": "De combien de cartes est généralement constitué un jeu de bataille ?",
+      "payload": {
+        "options": [
+          {
+            "label": "65 cartes",
+            "correct": false
+          },
+          {
+            "label": "36 cartes",
+            "correct": false
+          },
+          {
+            "label": "52 cartes",
+            "correct": true
+          },
+          {
+            "label": "43 cartes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0319-2",
+      "type": "mcq",
+      "prompt": "Quelle est la meilleure main au poker ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Paire",
+            "correct": false
+          },
+          {
+            "label": "Brelan",
+            "correct": false
+          },
+          {
+            "label": "Quinte flush royale",
+            "correct": true
+          },
+          {
+            "label": "Carré",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0319-4",
+      "type": "mcq",
+      "prompt": "Combien y a-t-il de couleurs dans un jeu de cartes standard ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quatre",
+            "correct": true
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Huit",
+            "correct": false
+          },
+          {
+            "label": "Deux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

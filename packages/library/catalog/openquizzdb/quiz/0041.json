@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=41"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0041-1",
+      "type": "mcq",
+      "prompt": "Dans quel film John Travolta incarne-t-il un ange tombé du ciel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michael",
+            "correct": true
+          },
+          {
+            "label": "Jerry",
+            "correct": false
+          },
+          {
+            "label": "Johnny",
+            "correct": false
+          },
+          {
+            "label": "Sam",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0041-2",
+      "type": "mcq",
+      "prompt": "Qui donne la réplique à John Travolta dans le film « Volte-face » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nicolas Cage",
+            "correct": true
+          },
+          {
+            "label": "Wesley Snipes",
+            "correct": false
+          },
+          {
+            "label": "Sean Connery",
+            "correct": false
+          },
+          {
+            "label": "Mel Gibson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

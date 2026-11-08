@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=69"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0069-2",
+      "type": "mcq",
+      "prompt": "Dans quel verger poussent presque exclusivement des pommiers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pommeraie",
+            "correct": true
+          },
+          {
+            "label": "Pommiseau",
+            "correct": false
+          },
+          {
+            "label": "Vergepommes",
+            "correct": false
+          },
+          {
+            "label": "Vergeture",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0069-3",
+      "type": "mcq",
+      "prompt": "Quelle variété de pommes est principalement produite en France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Pink Lady",
+            "correct": false
+          },
+          {
+            "label": "La Golden",
+            "correct": true
+          },
+          {
+            "label": "La Gala",
+            "correct": false
+          },
+          {
+            "label": "La Jonagold",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

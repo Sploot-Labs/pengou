@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=585"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0585-1",
+      "type": "mcq",
+      "prompt": "Quel intrus se cache parmi ces vices des sept péchés capitaux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mensonge",
+            "correct": true
+          },
+          {
+            "label": "Envie",
+            "correct": false
+          },
+          {
+            "label": "Paresse",
+            "correct": false
+          },
+          {
+            "label": "Colère",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0585-2",
+      "type": "mcq",
+      "prompt": "Quelle plante est l'intruse parmi celles dont on mange la racine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Navet",
+            "correct": false
+          },
+          {
+            "label": "Asperge",
+            "correct": true
+          },
+          {
+            "label": "Betterave",
+            "correct": false
+          },
+          {
+            "label": "Carotte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0585-4",
+      "type": "mcq",
+      "prompt": "Quel intrus se cache parmi ces mots qui peuvent être vapeur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Friteuse",
+            "correct": true
+          },
+          {
+            "label": "Centrale",
+            "correct": false
+          },
+          {
+            "label": "Pomme",
+            "correct": false
+          },
+          {
+            "label": "Cheval",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

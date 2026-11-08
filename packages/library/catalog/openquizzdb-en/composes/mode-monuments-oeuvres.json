@@ -1,0 +1,300 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0532-1-en",
+      "type": "mcq",
+      "prompt": "Which fashion icon wore a ponytail and dark sunglasses?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thierry Mugler",
+            "correct": false
+          },
+          {
+            "label": "Karl Lagerfeld",
+            "correct": true
+          },
+          {
+            "label": "Paco Rabanne",
+            "correct": false
+          },
+          {
+            "label": "Pierre Cardin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0440-1-en",
+      "type": "mcq",
+      "prompt": "What type of building is the Colosseum in Rome?",
+      "payload": {
+        "options": [
+          {
+            "label": "Temple",
+            "correct": false
+          },
+          {
+            "label": "Museum",
+            "correct": false
+          },
+          {
+            "label": "Amphitheater",
+            "correct": true
+          },
+          {
+            "label": "Cinema",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0439-4-en",
+      "type": "mcq",
+      "prompt": "Who painted \"The Madonna of the Meadow\", showing Jesus and his mother?",
+      "payload": {
+        "options": [
+          {
+            "label": "Auguste Renoir",
+            "correct": false
+          },
+          {
+            "label": "Rembrandt",
+            "correct": false
+          },
+          {
+            "label": "Michelangelo",
+            "correct": false
+          },
+          {
+            "label": "Raphael",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0532-2-en",
+      "type": "mcq",
+      "prompt": "Which first name did Mr. Takada make shine in fashion?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kyrio",
+            "correct": false
+          },
+          {
+            "label": "Kalvin",
+            "correct": false
+          },
+          {
+            "label": "Karl",
+            "correct": false
+          },
+          {
+            "label": "Kenzo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0440-2-en",
+      "type": "mcq",
+      "prompt": "In which Italian city can you admire the Doge's Palace?",
+      "payload": {
+        "options": [
+          {
+            "label": "Milan",
+            "correct": false
+          },
+          {
+            "label": "Venice",
+            "correct": true
+          },
+          {
+            "label": "Rome",
+            "correct": false
+          },
+          {
+            "label": "Florence",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0439-2-en",
+      "type": "mcq",
+      "prompt": "Which Jane Campion film features a mute mother who plays the piano?",
+      "payload": {
+        "options": [
+          {
+            "label": "In the Cut",
+            "correct": false
+          },
+          {
+            "label": "Bright Star",
+            "correct": false
+          },
+          {
+            "label": "The Piano",
+            "correct": true
+          },
+          {
+            "label": "Sweetie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0532-3-en",
+      "type": "mcq",
+      "prompt": "Which flower became a symbol of the Coco Chanel fashion house?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poppy",
+            "correct": false
+          },
+          {
+            "label": "Rose",
+            "correct": false
+          },
+          {
+            "label": "Camellia",
+            "correct": true
+          },
+          {
+            "label": "Daisy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0440-3-en",
+      "type": "mcq",
+      "prompt": "In which city is the unmissable Trevi Fountain?",
+      "payload": {
+        "options": [
+          {
+            "label": "Milan",
+            "correct": false
+          },
+          {
+            "label": "Turin",
+            "correct": false
+          },
+          {
+            "label": "Naples",
+            "correct": false
+          },
+          {
+            "label": "Rome",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0532-4-en",
+      "type": "mcq",
+      "prompt": "What color are the soles of Louboutin shoes?",
+      "payload": {
+        "options": [
+          {
+            "label": "Red",
+            "correct": true
+          },
+          {
+            "label": "Gold",
+            "correct": false
+          },
+          {
+            "label": "Mauve",
+            "correct": false
+          },
+          {
+            "label": "Blue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0440-4-en",
+      "type": "mcq",
+      "prompt": "In which Italian city is the Palazzo Vecchio?",
+      "payload": {
+        "options": [
+          {
+            "label": "Milan",
+            "correct": false
+          },
+          {
+            "label": "Venice",
+            "correct": false
+          },
+          {
+            "label": "Turin",
+            "correct": false
+          },
+          {
+            "label": "Florence",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

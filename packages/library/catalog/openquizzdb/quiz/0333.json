@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=333"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0333-1",
+      "type": "mcq",
+      "prompt": "Quel informaticien et chef d'entreprise américain a inventé « Facebook » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Steve Ballmer",
+            "correct": false
+          },
+          {
+            "label": "Paul Allen",
+            "correct": false
+          },
+          {
+            "label": "Larry Page",
+            "correct": false
+          },
+          {
+            "label": "Mark Zuckeberg",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0333-3",
+      "type": "mcq",
+      "prompt": "Que fait-on lors d'un « swap » avec une youtubeuse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Des vidéos",
+            "correct": false
+          },
+          {
+            "label": "Des messages",
+            "correct": false
+          },
+          {
+            "label": "Des cadeaux",
+            "correct": true
+          },
+          {
+            "label": "Des blagues",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

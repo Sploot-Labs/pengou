@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=149"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0149-3",
+      "type": "mcq",
+      "prompt": "Dans quel film avec Ewan McGregor retrouve-t-on Scarlett Johansson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Big Fish",
+            "correct": false
+          },
+          {
+            "label": "The Island",
+            "correct": true
+          },
+          {
+            "label": "Stay",
+            "correct": false
+          },
+          {
+            "label": "Young Adam",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

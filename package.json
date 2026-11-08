@@ -18,9 +18,9 @@
     "dev": "pnpm --filter @splootlabs/server dev"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.6.0",
-    "typescript": "^5.9.0",
-    "vitest": "^5.0.0"
+    "@biomejs/biome": "^2.6.5",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
   },
   "pnpm": {
     "overrides": {

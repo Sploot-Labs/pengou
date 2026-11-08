@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=598"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0598-4-en",
+      "type": "mcq",
+      "prompt": "Which First Lady celebrated her 50th birthday in April 2020?",
+      "payload": {
+        "options": [
+          {
+            "label": "Melania Trump",
+            "correct": true
+          },
+          {
+            "label": "Beatrix",
+            "correct": false
+          },
+          {
+            "label": "Angela Merkel",
+            "correct": false
+          },
+          {
+            "label": "Brigitte Macron",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,4 +1,6 @@
 import type { Ref } from 'react'
+import type { ContentSource } from '../api/quizzes'
+import { PodiumCredits } from '../ui/SourceCredit'
 
 /**
  * `PodiumView` — composant de PRÉSENTATION pur, alimenté par l'événement
@@ -46,6 +48,46 @@ export interface PodiumViewProps {
   /** Pitch de conversion en bas d'écran (grand écran / audience) — absent sur
    * le contrôleur hôte, qui est déjà un utilisateur inscrit. */
   showConversionFooter?: boolean
+  /** Sources des questions, créditées en bas du podium (grand écran). */
+  sources?: ContentSource[]
+}
+
+/** Pitch de conversion en bas d'écran du grand écran. */
+export function ConversionFooter() {
+  return (
+    <p className="podium-convert">
+      <a href="#cloud" onClick={(e) => e.preventDefault()}>
+        Créez votre quiz gratuitement, aucune installation
+      </a>
+      , ou{' '}
+      <a href="#host" onClick={(e) => e.preventDefault()}>
+        hébergez votre propre instance
+      </a>
+      , c'est open-source.{' '}
+      <a href="#source" onClick={(e) => e.preventDefault()}>
+        Voir le code
+      </a>
+    </p>
+  )
+}
+
+export interface ClosingViewProps {
+  quizTitle?: string
+  headingRef?: Ref<HTMLHeadingElement>
+  /** `room` : grand écran et hôte (vouvoiement) ; `player` : téléphone (tutoiement). */
+  audience: 'room' | 'player'
+}
+
+/** Fin de partie d'un quiz sans aucune question notée : un remerciement, ni podium ni score. */
+export function ClosingView({ quizTitle, headingRef, audience }: ClosingViewProps) {
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <h1 className="ab-hero-title" ref={headingRef} tabIndex={-1}>
+        {audience === 'room' ? 'Merci pour vos réponses' : 'Merci pour tes réponses'}
+      </h1>
+      {quizTitle && <p style={{ color: 'var(--ink-dim)' }}>{quizTitle}</p>}
+    </div>
+  )
 }
 
 export function PodiumView({
@@ -54,6 +96,7 @@ export function PodiumView({
   fullRanking,
   headingRef,
   showConversionFooter = false,
+  sources = [],
 }: PodiumViewProps) {
   const [gold, silver, bronze] = top
   // Le reste du classement complet : les joueurs absents du podium (et non `slice(3)`, qui
@@ -122,21 +165,9 @@ export function PodiumView({
         </section>
       )}
 
-      {showConversionFooter && (
-        <p className="podium-convert">
-          <a href="#cloud" onClick={(e) => e.preventDefault()}>
-            Créez votre quiz gratuitement, aucune installation
-          </a>
-          , ou{' '}
-          <a href="#host" onClick={(e) => e.preventDefault()}>
-            hébergez votre propre instance
-          </a>
-          , c'est open-source.{' '}
-          <a href="#source" onClick={(e) => e.preventDefault()}>
-            Voir le code
-          </a>
-        </p>
-      )}
+      <PodiumCredits sources={sources} />
+
+      {showConversionFooter && <ConversionFooter />}
     </div>
   )
 }

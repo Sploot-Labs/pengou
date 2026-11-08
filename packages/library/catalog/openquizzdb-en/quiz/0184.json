@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=184"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0184-1-en",
+      "type": "mcq",
+      "prompt": "What do we call all numbers divisible by two?",
+      "payload": {
+        "options": [
+          {
+            "label": "Parallel",
+            "correct": false
+          },
+          {
+            "label": "Prime",
+            "correct": false
+          },
+          {
+            "label": "Even",
+            "correct": true
+          },
+          {
+            "label": "Perfect",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0184-2-en",
+      "type": "mcq",
+      "prompt": "Before becoming a knight, what is a Jedi apprentice called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poltergeist",
+            "correct": false
+          },
+          {
+            "label": "Padawan",
+            "correct": true
+          },
+          {
+            "label": "Paddington",
+            "correct": false
+          },
+          {
+            "label": "Palikir",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

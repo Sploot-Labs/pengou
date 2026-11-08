@@ -9,16 +9,25 @@ beforeAll(async () => {
   await runMigrations(ctx.db)
   const [tA] = await ctx.db.insert(schema.tenant).values({ name: 'A' }).returning()
   const [tB] = await ctx.db.insert(schema.tenant).values({ name: 'B' }).returning()
-  const [uA] = await ctx.db.insert(schema.user)
-    .values({ id: crypto.randomUUID(), email: 'a@x.fr', name: 'A', emailVerified: false }).returning()
-  const [uB] = await ctx.db.insert(schema.user)
-    .values({ id: crypto.randomUUID(), email: 'b@x.fr', name: 'B', emailVerified: false }).returning()
-  tenantA = tA.id; tenantB = tB.id; ownerA = uA.id; ownerB = uB.id
+  const [uA] = await ctx.db
+    .insert(schema.user)
+    .values({ id: crypto.randomUUID(), email: 'a@x.fr', name: 'A', emailVerified: false })
+    .returning()
+  const [uB] = await ctx.db
+    .insert(schema.user)
+    .values({ id: crypto.randomUUID(), email: 'b@x.fr', name: 'B', emailVerified: false })
+    .returning()
+  tenantA = tA.id
+  tenantB = tB.id
+  ownerA = uA.id
+  ownerB = uB.id
   // systemDb (propriétaire, bypass RLS) crée du contenu dans A et B.
   await createQuiz(tenantScope(ctx.db, tenantA), { ownerId: ownerA, title: 'Quiz A' })
   await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerB, title: 'Quiz B' })
 }, 120_000)
-afterAll(async () => { await ctx?.stop() })
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 describe('RLS Postgres', () => {
   it('appDb SANS contexte tenant → erreur (fail-loud)', async () => {
@@ -35,7 +44,8 @@ describe('RLS Postgres', () => {
   it('appDb : INSERT avec un tenant_id ≠ contexte est rejeté (WITH CHECK)', async () => {
     await expect(
       withTenantTx(ctx.appDb, { tenantId: tenantA }, (s) =>
-        s.db.insert(schema.quiz).values({ tenantId: tenantB, ownerId: ownerA, title: 'X' }).returning()),
+        s.db.insert(schema.quiz).values({ tenantId: tenantB, ownerId: ownerA, title: 'X' }).returning(),
+      ),
     ).rejects.toThrow()
   })
 

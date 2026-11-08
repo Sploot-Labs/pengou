@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=382"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0382-1",
+      "type": "mcq",
+      "prompt": "Quel événement majeur en NBA est comparable à une bourse de joueurs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Playoffs",
+            "correct": false
+          },
+          {
+            "label": "Franchise",
+            "correct": false
+          },
+          {
+            "label": "Ballotage",
+            "correct": false
+          },
+          {
+            "label": "Draft",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0382-3",
+      "type": "mcq",
+      "prompt": "Quelle franchise fut en 2012 la pire équipe NBA en victoires ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pistons",
+            "correct": false
+          },
+          {
+            "label": "Pacers",
+            "correct": false
+          },
+          {
+            "label": "Bobcats",
+            "correct": true
+          },
+          {
+            "label": "Heat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0382-4",
+      "type": "mcq",
+      "prompt": "Combien les Rockets ont-ils proposé à Jeremy Lin pour 3 ans en NBA ?",
+      "payload": {
+        "options": [
+          {
+            "label": "5 millions",
+            "correct": false
+          },
+          {
+            "label": "15 millions",
+            "correct": false
+          },
+          {
+            "label": "25 millions",
+            "correct": true
+          },
+          {
+            "label": "20 millions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

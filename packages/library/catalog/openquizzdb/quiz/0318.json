@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=318"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0318-1",
+      "type": "mcq",
+      "prompt": "Quelle est l'espérance de vie moyenne d'une girafe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "25 ans",
+            "correct": true
+          },
+          {
+            "label": "55 ans",
+            "correct": false
+          },
+          {
+            "label": "75 ans",
+            "correct": false
+          },
+          {
+            "label": "15 ans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0318-3",
+      "type": "mcq",
+      "prompt": "Quel est le nom du petit de la girafe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Girofet",
+            "correct": false
+          },
+          {
+            "label": "Giraflet",
+            "correct": false
+          },
+          {
+            "label": "Girafau",
+            "correct": false
+          },
+          {
+            "label": "Girafon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

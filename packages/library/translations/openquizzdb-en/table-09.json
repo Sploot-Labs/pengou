@@ -1,0 +1,1064 @@
+{
+  "questions": {
+    "oqdb-0453-2": {
+      "prompt": "How many great pyramids are there on the Giza plateau?",
+      "options": [
+        "Just one",
+        "Three",
+        "Ten",
+        "None"
+      ]
+    },
+    "oqdb-0453-3": {
+      "prompt": "Which part of the Great Sphinx of Giza's face is missing?",
+      "options": [
+        "Corner of the mouth",
+        "Ear",
+        "Arm",
+        "Nose"
+      ]
+    },
+    "oqdb-0453-4": {
+      "prompt": "Near which modern city is the Valley of the Kings?",
+      "options": [
+        "Asyut",
+        "Giza",
+        "El Minya",
+        "Luxor"
+      ]
+    },
+    "oqdb-0454-1": {
+      "skip": "vocabulaire belge francophone (kot), jeu de mots sans équivalent"
+    },
+    "oqdb-0454-2": {
+      "prompt": "How many official languages are spoken in Belgium?",
+      "options": [
+        "Two",
+        "Four",
+        "One",
+        "Three"
+      ]
+    },
+    "oqdb-0454-3": {
+      "prompt": "How many digits does a Belgian postal code have?",
+      "options": [
+        "Six",
+        "Three",
+        "Five",
+        "Four"
+      ]
+    },
+    "oqdb-0454-4": {
+      "prompt": "On what date is Belgium's national day celebrated each year?",
+      "options": [
+        "11 September",
+        "14 July",
+        "4 October",
+        "21 July"
+      ]
+    },
+    "oqdb-0455-1": {
+      "prompt": "Which flower is traditionally placed on graves on All Saints' Day?",
+      "options": [
+        "Cosmos",
+        "Chrysanthemum",
+        "Crocus",
+        "Camellia"
+      ]
+    },
+    "oqdb-0455-2": {
+      "prompt": "Which object is often considered a lucky charm?",
+      "options": [
+        "Clothes iron",
+        "Curling iron",
+        "Horseshoe",
+        "Gilding tool"
+      ]
+    },
+    "oqdb-0455-3": {
+      "prompt": "Which character wears a multicolored diamond-patterned costume?",
+      "options": [
+        "Beltrame",
+        "Pierrot",
+        "Harlequin",
+        "Columbine"
+      ]
+    },
+    "oqdb-0456-1": {
+      "skip": "repose sur le mot français poubelle et la notion de nom d'inventeur"
+    },
+    "oqdb-0456-2": {
+      "skip": "concours Lépine, spécifique à la France"
+    },
+    "oqdb-0456-3": {
+      "skip": "jeu sur le mot français ordinateur"
+    },
+    "oqdb-0456-4": {
+      "prompt": "Which Italian scientist discovered the principle of the electric battery?",
+      "options": [
+        "Bugatti",
+        "Volta",
+        "Turriano",
+        "Marconi"
+      ]
+    },
+    "oqdb-0457-1": {
+      "prompt": "Which sweet Belgian candy is also called a \"priest's hat\"?",
+      "options": [
+        "Cuberdon",
+        "Calisson",
+        "Rigolette",
+        "Speculoos"
+      ]
+    },
+    "oqdb-0457-2": {
+      "prompt": "Which very hard honey biscuit is the pride of the town of Dinant?",
+      "options": [
+        "Tuile",
+        "Rocher",
+        "Couque",
+        "Palette"
+      ]
+    },
+    "oqdb-0457-3": {
+      "prompt": "Which beer has a trout with a ring in its mouth as its symbol?",
+      "options": [
+        "Omega",
+        "Orval",
+        "Orezza",
+        "Omer"
+      ]
+    },
+    "oqdb-0457-4": {
+      "prompt": "Which Belgian dish can be made with poultry, fish or shellfish?",
+      "options": [
+        "Godverdom",
+        "Waterzooi",
+        "Potferdeke",
+        "Smerlap"
+      ]
+    },
+    "oqdb-0458-1": {
+      "prompt": "What is traditionally eaten on Candlemas?",
+      "options": [
+        "Croissants",
+        "Crêpes",
+        "Brioches",
+        "Tarts"
+      ]
+    },
+    "oqdb-0458-2": {
+      "prompt": "Which cake is decorated with little fir trees and figurines?",
+      "options": [
+        "Palet de dame",
+        "Black Forest cake",
+        "Galette des Rois",
+        "Yule log"
+      ]
+    },
+    "oqdb-0458-3": {
+      "skip": "comptine française à compléter, intraduisible"
+    },
+    "oqdb-0458-4": {
+      "prompt": "In which region of France are the thirteen Christmas desserts eaten?",
+      "options": [
+        "Alsace",
+        "Auvergne",
+        "Brittany",
+        "Provence"
+      ]
+    },
+    "oqdb-0459-1": {
+      "prompt": "Who is the Italian opera singer Bianca Castafiore in love with?",
+      "options": [
+        "Nestor",
+        "Haddock",
+        "Calculus",
+        "Tintin"
+      ]
+    },
+    "oqdb-0459-2": {
+      "skip": "le prénom Tryphon devient Cuthbert en anglais, la question perd son sens"
+    },
+    "oqdb-0459-3": {
+      "prompt": "Who stole Castafiore's jewels?",
+      "options": [
+        "A magpie",
+        "Nestor",
+        "Calculus",
+        "Romani travelers"
+      ]
+    },
+    "oqdb-0459-4": {
+      "prompt": "Which whisky is Captain Haddock's favorite brand?",
+      "options": [
+        "Loch Fields",
+        "Loch Lomond",
+        "Loch Ness",
+        "Loch Mahouss"
+      ]
+    },
+    "oqdb-0460-1": {
+      "prompt": "Which small object is used to hold sheets of paper together?",
+      "options": [
+        "Paper clip",
+        "Rolodex",
+        "Post-it",
+        "Stencil"
+      ]
+    },
+    "oqdb-0460-2": {
+      "prompt": "What color is the aviation \"black box\"?",
+      "options": [
+        "White",
+        "Orange",
+        "Black",
+        "Green"
+      ]
+    },
+    "oqdb-0460-3": {
+      "skip": "jeu sur le mot français blaireau"
+    },
+    "oqdb-0460-4": {
+      "prompt": "Which lifting device can be used to raise a car, among other things?",
+      "options": [
+        "Delco",
+        "Tire patch",
+        "Tailgate",
+        "Jack"
+      ]
+    },
+    "oqdb-0461-1": {
+      "prompt": "Oil, gas and coal are which kind of energy?",
+      "options": [
+        "Renewable",
+        "Clean",
+        "Fossil",
+        "Solar"
+      ]
+    },
+    "oqdb-0461-2": {
+      "prompt": "Which country is the biggest emitter of greenhouse gases?",
+      "options": [
+        "United States",
+        "India",
+        "China",
+        "Russia"
+      ]
+    },
+    "oqdb-0461-3": {
+      "prompt": "What would the temperature on Earth be without the greenhouse effect?",
+      "options": [
+        "98°C",
+        "-18°C",
+        "4°C",
+        "47°C"
+      ]
+    },
+    "oqdb-0461-4": {
+      "prompt": "In what year did the term \"greenhouse effect\" first appear?",
+      "options": [
+        "1824",
+        "1934",
+        "1989",
+        "1956"
+      ]
+    },
+    "oqdb-0463-1": {
+      "skip": "surnom du Standard de Liège, jeu de mots belge francophone"
+    },
+    "oqdb-0463-3": {
+      "prompt": "In what year did Eddy Merckx win his first Tour de France?",
+      "options": [
+        "1967",
+        "1971",
+        "1965",
+        "1969"
+      ]
+    },
+    "oqdb-0463-4": {
+      "prompt": "What is the most popular sport in Belgium?",
+      "options": [
+        "Football",
+        "Hockey",
+        "Tennis",
+        "Cycling"
+      ]
+    },
+    "oqdb-0464-2": {
+      "prompt": "In which city is Tintin kidnapped in \"Tintin in America\"?",
+      "options": [
+        "Charlotte",
+        "Cleveland",
+        "Chicago",
+        "Columbus"
+      ]
+    },
+    "oqdb-0464-3": {
+      "prompt": "Which phenomenon saves Tintin and his friends in \"Prisoners of the Sun\"?",
+      "options": [
+        "Hurricane",
+        "Solar eclipse",
+        "Earthquake",
+        "Avalanche"
+      ]
+    },
+    "oqdb-0464-4": {
+      "skip": "jeu de mots sur le titre français Coke en stock, absent de la version anglaise"
+    },
+    "oqdb-0465-1": {
+      "prompt": "Which device is used to measure the depth of the oceans?",
+      "options": [
+        "Geiger counter",
+        "Radar",
+        "Sextant",
+        "Sonar"
+      ]
+    },
+    "oqdb-0465-2": {
+      "prompt": "What is another name for the lie detector?",
+      "options": [
+        "Detectograph",
+        "Tachograph",
+        "Mesograph",
+        "Polygraph"
+      ]
+    },
+    "oqdb-0465-3": {
+      "prompt": "Which navigation instrument measures the speed of a ship?",
+      "options": [
+        "Compass",
+        "Log",
+        "Sextant",
+        "Sonar"
+      ]
+    },
+    "oqdb-0465-4": {
+      "prompt": "Which philatelic tool counts the perforations of a postage stamp?",
+      "options": [
+        "Dentometer",
+        "Odontometer",
+        "Odontoscope",
+        "Dentoscope"
+      ]
+    },
+    "oqdb-0466-1": {
+      "prompt": "Which artist painted the famous Romantic painting \"The Barque of Dante\"?",
+      "options": [
+        "Girodet",
+        "Goya",
+        "Delacroix",
+        "Turner"
+      ]
+    },
+    "oqdb-0466-2": {
+      "prompt": "Which painter is famous for his disturbing \"Black Paintings\" series?",
+      "options": [
+        "Corot",
+        "Gros",
+        "Fuseli",
+        "Goya"
+      ]
+    },
+    "oqdb-0466-3": {
+      "prompt": "Which Danish artist painted \"A Group of Danish Artists in Rome\"?",
+      "options": [
+        "Hansen",
+        "Malmström",
+        "Bierstadt",
+        "Delacroix"
+      ]
+    },
+    "oqdb-0466-4": {
+      "prompt": "Which German artist painted \"Moonrise over the Sea\"?",
+      "options": [
+        "Quidor",
+        "Raeburn",
+        "Friedrich",
+        "Runge"
+      ]
+    },
+    "oqdb-0467-1": {
+      "prompt": "Which color is associated with money in the United States?",
+      "options": [
+        "White",
+        "Green",
+        "Blue",
+        "Brown"
+      ]
+    },
+    "oqdb-0467-2": {
+      "prompt": "What color is a basketball usually?",
+      "options": [
+        "Orange",
+        "Black",
+        "Gray",
+        "Yellow"
+      ]
+    },
+    "oqdb-0467-3": {
+      "prompt": "What color is Super Mario's cap?",
+      "options": [
+        "Yellow",
+        "Red",
+        "Green",
+        "Blue"
+      ]
+    },
+    "oqdb-0467-4": {
+      "prompt": "What color is the \"b\" in the eBay logo?",
+      "options": [
+        "Black",
+        "Yellow",
+        "Green",
+        "Blue"
+      ]
+    },
+    "oqdb-0469-1": {
+      "prompt": "What is the first name of Haddock, the merchant navy captain?",
+      "options": [
+        "Anatole",
+        "Auguste",
+        "Archibald",
+        "Ambroise"
+      ]
+    },
+    "oqdb-0469-2": {
+      "prompt": "What is the job of Séraphin Lampion (Jolyon Wagg) in Tintin?",
+      "options": [
+        "Journalist",
+        "Banker",
+        "Police officer",
+        "Insurance salesman"
+      ]
+    },
+    "oqdb-0469-3": {
+      "prompt": "In Tintin, what is the visual difference between Thomson and Thompson?",
+      "options": [
+        "Hat",
+        "Nose",
+        "Suit",
+        "Moustache"
+      ]
+    },
+    "oqdb-0469-4": {
+      "skip": "les jurons de Haddock diffèrent en anglais, la question n'a plus de sens"
+    },
+    "oqdb-0470-1": {
+      "prompt": "Big Ben is the name of the great bell of which British palace?",
+      "options": [
+        "Warrington",
+        "Winchester",
+        "Westminster",
+        "Worcester"
+      ]
+    },
+    "oqdb-0470-2": {
+      "prompt": "What color are London's famous LTI taxis?",
+      "options": [
+        "Black",
+        "Yellow",
+        "Green",
+        "Red"
+      ]
+    },
+    "oqdb-0470-3": {
+      "prompt": "In London, where are you if you ride the \"Tube\"?",
+      "options": [
+        "On the Underground",
+        "In a taxi",
+        "On a train",
+        "On a bus"
+      ]
+    },
+    "oqdb-0470-4": {
+      "prompt": "In London, which famous structure is named after Sir Benjamin Hall?",
+      "options": [
+        "Big Ben",
+        "Kew Palace",
+        "Old Bailey",
+        "Syon House"
+      ]
+    },
+    "oqdb-0471-1": {
+      "prompt": "Which TV show did Donald Trump host?",
+      "options": [
+        "Spin City",
+        "The Apprentice",
+        "WWE Raw",
+        "The Job"
+      ]
+    },
+    "oqdb-0471-2": {
+      "prompt": "Who did Donald Trump beat in the 2016 presidential election?",
+      "options": [
+        "Barack Obama",
+        "Hillary Clinton",
+        "George W. Bush",
+        "Bill Clinton"
+      ]
+    },
+    "oqdb-0471-3": {
+      "prompt": "For which sport did Donald Trump buy land in Balmedie?",
+      "options": [
+        "Skiing",
+        "Golf",
+        "Rugby",
+        "Squash"
+      ]
+    },
+    "oqdb-0471-4": {
+      "prompt": "Which fictional character did Bob Gale base on Donald Trump?",
+      "options": [
+        "Biff Tannen",
+        "Sam Baines",
+        "Emmett Brown",
+        "Marty McFly"
+      ]
+    },
+    "oqdb-0472-2": {
+      "prompt": "What do many taxi drivers in Japan wear on their hands?",
+      "options": [
+        "Rings",
+        "Chopsticks",
+        "White gloves",
+        "Blows"
+      ]
+    },
+    "oqdb-0472-3": {
+      "prompt": "What is the cruising altitude of an Airbus A320?",
+      "options": [
+        "13,000 m",
+        "10,000 m",
+        "7,000 m",
+        "4,000 m"
+      ]
+    },
+    "oqdb-0472-4": {
+      "prompt": "Which letters appear on the back of cars in Switzerland?",
+      "options": [
+        "DK",
+        "SU",
+        "SE",
+        "CH"
+      ]
+    },
+    "oqdb-0473-1": {
+      "prompt": "Which of these major cities is the most populous in Italy?",
+      "options": [
+        "Rome",
+        "Naples",
+        "Milan",
+        "Florence"
+      ]
+    },
+    "oqdb-0473-2": {
+      "prompt": "Which enclave state lies within the city of Rome?",
+      "options": [
+        "Vatican City",
+        "Liechtenstein",
+        "Monaco",
+        "San Marino"
+      ]
+    },
+    "oqdb-0473-3": {
+      "prompt": "What particularly mild climate does the city of Rome enjoy?",
+      "options": [
+        "Tropical",
+        "Temperate",
+        "Oceanic",
+        "Mediterranean"
+      ]
+    },
+    "oqdb-0473-4": {
+      "prompt": "Which animal was chosen as the symbol of the city of Rome?",
+      "options": [
+        "She-wolf",
+        "Lion",
+        "Goat",
+        "Deer"
+      ]
+    },
+    "oqdb-0475-1": {
+      "prompt": "Which series tells the adventures of an animal clinic in Africa?",
+      "options": [
+        "Lassie",
+        "Gentle Ben",
+        "Woobinda",
+        "Daktari"
+      ]
+    },
+    "oqdb-0475-2": {
+      "prompt": "How can you recognize the aliens in the series \"The Invaders\"?",
+      "options": [
+        "By their little finger",
+        "By their feet",
+        "By their speech",
+        "By their eyes"
+      ]
+    },
+    "oqdb-0475-3": {
+      "prompt": "What is the first name of Kojak, the stylish bald police detective?",
+      "options": [
+        "Walter",
+        "Roger",
+        "Theo",
+        "Denis"
+      ]
+    },
+    "oqdb-0475-4": {
+      "prompt": "What is the rank of Steve Austin, \"The Six Million Dollar Man\"?",
+      "options": [
+        "Commander",
+        "Colonel",
+        "Lieutenant",
+        "Captain"
+      ]
+    },
+    "oqdb-0476-1": {
+      "skip": "groupe français (Début de Soirée) peu connu hors de France"
+    },
+    "oqdb-0476-2": {
+      "prompt": "Which Mano Negra member is also known as Oscar Tramor?",
+      "options": [
+        "Pierre Gauthé",
+        "Joseph Dahan",
+        "Daniel Jamet",
+        "Manu Chao"
+      ]
+    },
+    "oqdb-0476-3": {
+      "skip": "groupe français (Les Avions) peu connu hors de France"
+    },
+    "oqdb-0476-4": {
+      "skip": "groupe français (Kazero) peu connu hors de France"
+    },
+    "oqdb-0477-1": {
+      "prompt": "Which All Saints' Day flower is drunk as a tea in China?",
+      "options": [
+        "Forget-me-not",
+        "Jasmine",
+        "Gerbera",
+        "Chrysanthemum"
+      ]
+    },
+    "oqdb-0477-2": {
+      "prompt": "The root of which plant is reputed to be an aphrodisiac as an infusion?",
+      "options": [
+        "Burdock",
+        "Ginger",
+        "Jerusalem artichoke",
+        "Radish"
+      ]
+    },
+    "oqdb-0477-3": {
+      "prompt": "Which garden plant has digestive and respiratory benefits?",
+      "options": [
+        "Tarragon",
+        "Thyme",
+        "Parsley",
+        "Chives"
+      ]
+    },
+    "oqdb-0477-4": {
+      "skip": "repose sur l'usage français du mot citronnelle pour la mélisse"
+    },
+    "oqdb-0478-1": {
+      "prompt": "How many attempts do you get for each lift in weightlifting?",
+      "options": [
+        "Four",
+        "Three",
+        "Six",
+        "Five"
+      ]
+    },
+    "oqdb-0478-3": {
+      "prompt": "How much does the bar used by women in weightlifting weigh?",
+      "options": [
+        "45 kg",
+        "25 kg",
+        "35 kg",
+        "15 kg"
+      ]
+    },
+    "oqdb-0478-4": {
+      "prompt": "In weightlifting, how much does a large red plate weigh?",
+      "options": [
+        "45 kg",
+        "25 kg",
+        "35 kg",
+        "15 kg"
+      ]
+    },
+    "oqdb-0479-1": {
+      "prompt": "Which writer and mathematician said \"I think, therefore I am\"?",
+      "options": [
+        "Descartes",
+        "Newton",
+        "Harriot",
+        "Mercator"
+      ]
+    },
+    "oqdb-0479-2": {
+      "skip": "citation de La Fontaine propre à la littérature française"
+    },
+    "oqdb-0479-3": {
+      "prompt": "In which book did Rabelais write the motto \"Do what thou wilt\"?",
+      "options": [
+        "The Fourth Book",
+        "Pantagruel",
+        "The Third Book",
+        "Gargantua"
+      ]
+    },
+    "oqdb-0479-4": {
+      "prompt": "Who told Las Cases: \"A man should have several wives\"?",
+      "options": [
+        "Napoleon",
+        "Louis XVI",
+        "Henry III",
+        "Charles X"
+      ]
+    },
+    "oqdb-0481-1": {
+      "prompt": "Which animal is Flipper, in the series of the same name?",
+      "options": [
+        "Bear",
+        "Dolphin",
+        "Lion",
+        "Dog"
+      ]
+    },
+    "oqdb-0481-2": {
+      "prompt": "What breed is Lassie, the famous dog of the TV series?",
+      "options": [
+        "Labrador",
+        "Collie",
+        "Golden Retriever",
+        "German Shepherd"
+      ]
+    },
+    "oqdb-0481-3": {
+      "prompt": "What kind of animal is Ben, the hero of \"Gentle Ben\"?",
+      "options": [
+        "Bear",
+        "Elephant",
+        "Panther",
+        "Lion"
+      ]
+    },
+    "oqdb-0481-4": {
+      "skip": "feuilleton français (Poly) peu connu hors de France"
+    },
+    "oqdb-0482-1": {
+      "prompt": "Which herbal tea is useful for inflammation of the mucous membranes?",
+      "options": [
+        "Basil",
+        "Rosemary",
+        "Savory",
+        "Sage"
+      ]
+    },
+    "oqdb-0482-2": {
+      "prompt": "Which herbal tea with a great flavor brings soothing and calm?",
+      "options": [
+        "Pine",
+        "Cedar",
+        "Linden",
+        "Ash"
+      ]
+    },
+    "oqdb-0482-3": {
+      "prompt": "Which chamomile is mostly prized for its digestive benefits?",
+      "options": [
+        "Greek",
+        "Roman",
+        "Egyptian",
+        "Gallic"
+      ]
+    },
+    "oqdb-0482-4": {
+      "prompt": "Which herbal tea is known for its anti-anemic properties?",
+      "options": [
+        "Coriander",
+        "Nettle",
+        "Belladonna",
+        "Jasmine"
+      ]
+    },
+    "oqdb-0483-1": {
+      "prompt": "Which German writer worked nearly 60 years on his work \"Faust\"?",
+      "options": [
+        "Becker",
+        "Goethe",
+        "Lingg",
+        "Jacoby"
+      ]
+    },
+    "oqdb-0483-2": {
+      "prompt": "Which Russian writer was excommunicated by the Orthodox Church?",
+      "options": [
+        "Roman Gul",
+        "Leonid Andreyev",
+        "Vladimir Sharov",
+        "Leo Tolstoy"
+      ]
+    },
+    "oqdb-0483-3": {
+      "prompt": "What was the nationality of novelist and essayist Aldous Huxley?",
+      "options": [
+        "Greek",
+        "British",
+        "Russian",
+        "Hungarian"
+      ]
+    },
+    "oqdb-0483-4": {
+      "prompt": "Which writer had the works of his friend La Boétie published?",
+      "options": [
+        "Montesquieu",
+        "Mallarmé",
+        "Montaigne",
+        "Mirabeau"
+      ]
+    },
+    "oqdb-0484-2": {
+      "prompt": "Which cutting turn is performed on waves in windsurfing?",
+      "options": [
+        "Slide",
+        "Spin",
+        "Jump",
+        "Carve"
+      ]
+    },
+    "oqdb-0484-3": {
+      "prompt": "Which windsurfing term describes sailing against the wind?",
+      "options": [
+        "Crosswind",
+        "Downwind",
+        "Sidewind",
+        "Upwind"
+      ]
+    },
+    "oqdb-0485-1": {
+      "prompt": "Which medal did Maria Sharapova win at the 2012 Olympics?",
+      "options": [
+        "Bronze",
+        "None",
+        "Gold",
+        "Silver"
+      ]
+    },
+    "oqdb-0485-2": {
+      "prompt": "Which Grand Slam tournament has Sharapova won twice?",
+      "options": [
+        "US Open",
+        "Wimbledon",
+        "Australian Open",
+        "French Open"
+      ]
+    },
+    "oqdb-0485-4": {
+      "prompt": "How much did Maria Sharapova sign with Nike for in 2010?",
+      "options": [
+        "$10 million",
+        "$50 million",
+        "$30 million",
+        "$70 million"
+      ]
+    },
+    "oqdb-0487-1": {
+      "prompt": "What is the family name of Bobby and JR in \"Dallas\"?",
+      "options": [
+        "Krebbs",
+        "Shepard",
+        "Barnes",
+        "Ewing"
+      ]
+    },
+    "oqdb-0487-2": {
+      "prompt": "Which friend of Captain Kirk has pointed ears?",
+      "options": [
+        "Sulu",
+        "Spock",
+        "Sanders",
+        "Scotty"
+      ]
+    },
+    "oqdb-0487-3": {
+      "prompt": "What is the name of the famous Zorro's faithful servant?",
+      "options": [
+        "Garcia",
+        "Esteban",
+        "Galindo",
+        "Bernardo"
+      ]
+    },
+    "oqdb-0487-4": {
+      "prompt": "Which car brand does Thomas Magnum drive?",
+      "options": [
+        "Ferrari",
+        "Porsche",
+        "Audi",
+        "BMW"
+      ]
+    },
+    "oqdb-0488-1": {
+      "prompt": "How long does a men's boxing round last?",
+      "options": [
+        "Three minutes",
+        "Five minutes",
+        "Two minutes",
+        "Four minutes"
+      ]
+    },
+    "oqdb-0488-2": {
+      "prompt": "In boxing, which punch hits the opponent by going under his guard?",
+      "options": [
+        "Straight",
+        "Slip",
+        "Hook",
+        "Uppercut"
+      ]
+    },
+    "oqdb-0488-3": {
+      "prompt": "How long is a boxer counted before being knocked out?",
+      "options": [
+        "10 seconds",
+        "5 seconds",
+        "15 seconds",
+        "20 seconds"
+      ]
+    },
+    "oqdb-0489-1": {
+      "prompt": "Which saint is the mother of the Virgin Mary?",
+      "options": [
+        "Saint Joan",
+        "Saint Anne",
+        "Saint Martha",
+        "Saint Odile"
+      ]
+    },
+    "oqdb-0489-2": {
+      "prompt": "In which month do the \"Ice Saints\" fall?",
+      "options": [
+        "February",
+        "March",
+        "June",
+        "May"
+      ]
+    },
+    "oqdb-0489-3": {
+      "skip": "jeu de mots sur Saint-Honoré (honorer), intraduisible"
+    },
+    "oqdb-0489-4": {
+      "prompt": "Which saint keeps the keys to the salvation of souls and to Paradise?",
+      "options": [
+        "Saint Thomas",
+        "Saint John",
+        "Saint Peter",
+        "Saint Luke"
+      ]
+    },
+    "oqdb-0490-1": {
+      "prompt": "Which water sport combines both gliding and sailing?",
+      "options": [
+        "Sailing",
+        "Windsurfing",
+        "Surfing",
+        "Kitesurfing"
+      ]
+    },
+    "oqdb-0490-2": {
+      "prompt": "Which material is mostly used to make windsurf boards?",
+      "options": [
+        "Plastic",
+        "Fiberglass",
+        "Wood",
+        "Aluminum"
+      ]
+    },
+    "oqdb-0490-3": {
+      "prompt": "What is the standard basic position in windsurfing?",
+      "options": [
+        "Crouching",
+        "Standing",
+        "Sitting",
+        "Lying down"
+      ]
+    },
+    "oqdb-0490-4": {
+      "skip": "terme français véliplanchiste, sans équivalent"
+    },
+    "oqdb-0491-2": {
+      "prompt": "Which bird provides the down used to make eiderdowns?",
+      "options": [
+        "Eider",
+        "Teal",
+        "Parakeet",
+        "Mallard"
+      ]
+    },
+    "oqdb-0491-3": {
+      "prompt": "Which bird lays its eggs in the nests of other species?",
+      "options": [
+        "Tit",
+        "Cuckoo",
+        "Blackbird",
+        "Pheasant"
+      ]
+    },
+    "oqdb-0491-4": {
+      "prompt": "Which bird does a marabou resemble?",
+      "options": [
+        "Sparrow",
+        "Stork",
+        "Herring gull",
+        "Seagull"
+      ]
+    },
+    "oqdb-0492-1": {
+      "skip": "jeu télévisé français (La Chasse aux trésors) peu connu hors de France"
+    },
+    "oqdb-0492-2": {
+      "skip": "animateur et émission français peu connus hors de France"
+    },
+    "oqdb-0492-3": {
+      "prompt": "Which game show features a quest for keys and a treasure room?",
+      "options": [
+        "Koh-Lanta",
+        "Ninja Warrior",
+        "Money Drop",
+        "Fort Boyard"
+      ]
+    },
+    "oqdb-0492-4": {
+      "prompt": "Which game offered €250,000 split into 50 indivisible bundles?",
+      "options": [
+        "The Wall",
+        "Boom",
+        "Money Drop",
+        "Le Bigdil"
+      ]
+    },
+    "oqdb-0493-1": {
+      "prompt": "What is Jessica Fletcher's job in \"Murder, She Wrote\"?",
+      "options": [
+        "Writer",
+        "Lawyer",
+        "Journalist",
+        "Painter"
+      ]
+    },
+    "oqdb-0493-2": {
+      "prompt": "Which police officer is Dee Dee McCall's partner on TV?",
+      "options": [
+        "Matt Helm",
+        "Sam Spade",
+        "Jim Phelps",
+        "Rick Hunter"
+      ]
+    }
+  },
+  "quizzes": {}
+}

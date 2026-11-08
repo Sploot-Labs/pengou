@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=489"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0489-1",
+      "type": "mcq",
+      "prompt": "Quelle sainte est la mère de la Vierge Marie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sainte Jeanne",
+            "correct": false
+          },
+          {
+            "label": "Sainte Anne",
+            "correct": true
+          },
+          {
+            "label": "Sainte Marthe",
+            "correct": false
+          },
+          {
+            "label": "Sainte Odile",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0489-2",
+      "type": "mcq",
+      "prompt": "Durant quel mois ont lieu les « Saints de glace » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mois de février",
+            "correct": false
+          },
+          {
+            "label": "Mois de mars",
+            "correct": false
+          },
+          {
+            "label": "Mois de juin",
+            "correct": false
+          },
+          {
+            "label": "Mois de mai",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0489-3",
+      "type": "mcq",
+      "prompt": "Quel saint ne faut-il pas trop honorer quand on surveille sa ligne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saint-Germain",
+            "correct": false
+          },
+          {
+            "label": "Saint-Charles",
+            "correct": false
+          },
+          {
+            "label": "Saint-Pierre",
+            "correct": false
+          },
+          {
+            "label": "Saint-Honoré",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0489-4",
+      "type": "mcq",
+      "prompt": "Quel saint garde les clefs du salut des âmes et du Paradis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saint Thomas",
+            "correct": false
+          },
+          {
+            "label": "Saint Jean",
+            "correct": false
+          },
+          {
+            "label": "Saint Pierre",
+            "correct": true
+          },
+          {
+            "label": "Saint Luc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

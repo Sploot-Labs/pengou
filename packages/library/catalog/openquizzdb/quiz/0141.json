@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=141"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0141-1",
+      "type": "mcq",
+      "prompt": "Quelle boisson spiritueuse est aromatisée à l'anis et à la réglisse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ouzo",
+            "correct": false
+          },
+          {
+            "label": "Peket",
+            "correct": false
+          },
+          {
+            "label": "Raki",
+            "correct": false
+          },
+          {
+            "label": "Pastis",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0141-2",
+      "type": "mcq",
+      "prompt": "Quel cocktail est fait à base de crème de cassis et de vin blanc ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tequila sunrise",
+            "correct": false
+          },
+          {
+            "label": "Kir",
+            "correct": true
+          },
+          {
+            "label": "Cuba libre",
+            "correct": false
+          },
+          {
+            "label": "Mojito",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0141-3",
+      "type": "mcq",
+      "prompt": "Quelle boisson alcoolisée est faite à partir de pommes fermentées ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Armagnac",
+            "correct": false
+          },
+          {
+            "label": "Sureau",
+            "correct": false
+          },
+          {
+            "label": "Cidre",
+            "correct": true
+          },
+          {
+            "label": "Frênette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0141-4",
+      "type": "mcq",
+      "prompt": "Quel vin blanc effervescent italien est plus doux que le Prosecco ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vouvray",
+            "correct": false
+          },
+          {
+            "label": "Friuli",
+            "correct": false
+          },
+          {
+            "label": "Asti",
+            "correct": true
+          },
+          {
+            "label": "Alghero",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

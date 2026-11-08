@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=583"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0583-2-en",
+      "type": "mcq",
+      "prompt": "Which player nicknamed \"The King\" made golf very popular?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jordan Spieth",
+            "correct": false
+          },
+          {
+            "label": "Martin Kaymer",
+            "correct": false
+          },
+          {
+            "label": "Justin Rose",
+            "correct": false
+          },
+          {
+            "label": "Arnold Palmer",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0583-3-en",
+      "type": "mcq",
+      "prompt": "Which pioneer of modern golf is nicknamed \"The Golden Bear\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lucas Glover",
+            "correct": false
+          },
+          {
+            "label": "Gary Player",
+            "correct": false
+          },
+          {
+            "label": "Jack Nicklaus",
+            "correct": true
+          },
+          {
+            "label": "Webb Simpson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0583-4-en",
+      "type": "mcq",
+      "prompt": "Which Spaniard popularized golf outside its traditional countries?",
+      "payload": {
+        "options": [
+          {
+            "label": "Casper",
+            "correct": false
+          },
+          {
+            "label": "Coody",
+            "correct": false
+          },
+          {
+            "label": "Aaron",
+            "correct": false
+          },
+          {
+            "label": "Ballesteros",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -5,3 +5,26 @@ This product is licensed under the Apache License, Version 2.0 (see LICENSE).
 
 Pengou is an open-source live quiz / live gameplay platform, self-hostable and
 built by Sploot Labs (https://github.com/Sploot-Labs).
+
+Question catalogue data
+-----------------------
+The question catalogue shipped in packages/library/catalog/ contains third-party
+data that is not covered by the Apache License. Each source folder has its own
+LICENSE.md file with the applicable licence and attribution:
+
+packages/library/catalog/openquizzdb/: questions from OpenQuizzDB
+(https://www.openquizzdb.org), licensed under CC BY-SA 4.0.
+
+packages/library/catalog/opentdb/: questions from the Open Trivia Database
+(https://opentdb.com), by PIXELTAIL GAMES LLC and contributors, licensed under
+CC BY-SA 4.0.
+
+packages/library/catalog/opentdb-fr/: French translation of the Open Trivia Database
+questions above, made by Sploot Labs with AI assistance, licensed under CC BY-SA 4.0.
+
+packages/library/catalog/openquizzdb-en/: English translation of the OpenQuizzDB questions
+above, made by Sploot Labs with AI assistance, licensed under CC BY-SA 4.0.
+
+packages/library/translations/: the translation tables from which these two folders are
+generated, made by Sploot Labs with AI assistance, licensed under CC BY-SA 4.0. They are not
+covered by the Apache License.
