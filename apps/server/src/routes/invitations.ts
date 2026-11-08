@@ -65,9 +65,10 @@ function isInvitableRole(value: unknown): value is Role {
 }
 
 // Validation e-mail volontairement permissive (présence d'un `@` encadré) — la vérité, c'est
-// l'acceptation authentifiée ; on borne surtout la longueur.
+// l'acceptation authentifiée ; on borne surtout la longueur. La longueur est vérifiée avant la
+// regex, et les libellés du domaine excluent le point : aucun retour arrière polynomial (ReDoS).
 function isEmail(value: unknown): value is string {
-  return typeof value === 'string' && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value) && value.length <= 254
+  return typeof value === 'string' && value.length <= 254 && /^[^@\s]+@[^@\s.]+(?:\.[^@\s.]+)+$/.test(value)
 }
 
 function mapAcceptError(code: string): { status: number; error: string } {
