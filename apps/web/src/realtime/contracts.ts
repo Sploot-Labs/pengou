@@ -17,6 +17,10 @@ import type { ContentSource } from '../api/quizzes'
  * de partie (vide pour un quiz écrit à la main). */
 export interface PodiumPayload {
   top: RankingEntry[]
+  /** Classement complet calculé par le moteur, donc sans joueur exclu (contrairement au dernier
+   * `scoreboard`, qui peut en contenir un). Absent sur un serveur antérieur : les écrans retombent
+   * alors sur le dernier `scoreboard`. */
+  ranking?: RankingEntry[]
   sources: ContentSource[]
   /** Faux quand le quiz ne contient aucune question notée (`top` est alors vide). */
   hasScoredQuestions: boolean
@@ -71,3 +75,6 @@ export interface PollView {
 export type SessionRelaunchedView =
   | { role: 'player'; pin: string; playerId: string; joinToken: string; nickname: string }
   | { role: 'screen'; pin: string; sessionId: string; displayToken: string }
+
+/** Code d'ack renvoyé par `player:reconnect` quand le joueur a été exclu. */
+export const KICKED_ACK_CODE = 'kicked'

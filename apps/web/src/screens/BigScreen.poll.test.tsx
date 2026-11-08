@@ -232,6 +232,9 @@ describe('BigScreen, sondage', () => {
       },
       distribution: {},
     })
+    emitServerEvent('lobby:update', {
+      players: ranking.ranking.map((r) => ({ id: r.playerId, nickname: r.nickname, score: r.score, connected: true })),
+    })
     emitServerEvent('scoreboard', ranking)
     await holdElapsed()
     expect(screen.getByText('Classement')).toBeInTheDocument()

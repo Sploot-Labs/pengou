@@ -1,7 +1,7 @@
 import { describe, it, expect, afterAll, beforeAll, vi } from 'vitest'
 import type { FastifyInstance } from 'fastify'
 import { io as ioClient, type Socket as ClientSocket } from 'socket.io-client'
-import { eq } from 'drizzle-orm'
+import { and, eq, sql } from 'drizzle-orm'
 import {
   startTestDb,
   runMigrations,
@@ -548,7 +548,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     email: string,
     timeLimit = 20,
     readingTime = 0,
-  ): Promise<{ hostSocket: ClientSocket; sessionId: string; pin: string; quizId: string }> {
+  ): Promise<{ hostSocket: ClientSocket; sessionId: string; pin: string; quizId: string; cookie: string }> {
     const cookie = await signUp(app, email)
     const quizRes = await app.inject({
       method: 'POST',
@@ -583,7 +583,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       quizId: quiz.id,
     })
     expect(created.error).toBeUndefined()
-    return { hostSocket, sessionId: created.sessionId!, pin: created.pin!, quizId: quiz.id }
+    return { hostSocket, sessionId: created.sessionId!, pin: created.pin!, quizId: quiz.id, cookie }
   }
 
   /** Variante de `setupHostedSession` avec un `readingTime > 0` (Task 3, phase 'reading') — la
@@ -2100,56 +2100,56 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }, 30_000)
   })
 
-  describe('host:relaunch (relance depuis le podium)', () => {
-    /** Hôte + quizA (session créée dessus) + quizB (non lancé), même cookie. */
-    async function setupRelaunch(app: FastifyInstance, url: string, email: string) {
-      const cookie = await signUp(app, email)
-      const mkQuiz = async (title: string) => {
-        const quizRes = await app.inject({
-          method: 'POST',
-          url: '/api/quizzes',
-          payload: { title },
-          headers: { 'content-type': 'application/json', cookie },
-        })
-        expect(quizRes.statusCode).toBe(201)
-        const quiz = quizRes.json() as { id: string }
-        const qRes = await app.inject({
-          method: 'POST',
-          url: `/api/quizzes/${quiz.id}/questions`,
-          payload: {
-            type: 'mcq',
-            prompt: 'Capitale de la France ?',
-            timeLimit: 20,
-            readingTime: 0,
-            payload: {
-              options: [
-                { label: 'Paris', correct: true },
-                { label: 'Lyon', correct: false },
-              ],
-            },
-          },
-          headers: { 'content-type': 'application/json', cookie },
-        })
-        expect(qRes.statusCode).toBe(201)
-        return quiz.id
-      }
-      const quizA = await mkQuiz('Quiz A')
-      const quizB = await mkQuiz('Quiz B')
-      const hostSocket = await connectClient(url, { cookie })
-      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
-        quizId: quizA,
+  /** Hôte + quizA (session créée dessus) + quizB (non lancé), même cookie. */
+  async function setupRelaunch(app: FastifyInstance, url: string, email: string) {
+    const cookie = await signUp(app, email)
+    const mkQuiz = async (title: string) => {
+      const quizRes = await app.inject({
+        method: 'POST',
+        url: '/api/quizzes',
+        payload: { title },
+        headers: { 'content-type': 'application/json', cookie },
       })
-      expect(created.error).toBeUndefined()
-      return { hostSocket, pinA: created.pin!, sessionIdA: created.sessionId!, quizA, quizB, cookie }
+      expect(quizRes.statusCode).toBe(201)
+      const quiz = quizRes.json() as { id: string }
+      const qRes = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quiz.id}/questions`,
+        payload: {
+          type: 'mcq',
+          prompt: 'Capitale de la France ?',
+          timeLimit: 20,
+          readingTime: 0,
+          payload: {
+            options: [
+              { label: 'Paris', correct: true },
+              { label: 'Lyon', correct: false },
+            ],
+          },
+        },
+        headers: { 'content-type': 'application/json', cookie },
+      })
+      expect(qRes.statusCode).toBe(201)
+      return quiz.id
     }
+    const quizA = await mkQuiz('Quiz A')
+    const quizB = await mkQuiz('Quiz B')
+    const hostSocket = await connectClient(url, { cookie })
+    const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
+      quizId: quizA,
+    })
+    expect(created.error).toBeUndefined()
+    return { hostSocket, pinA: created.pin!, sessionIdA: created.sessionId!, quizA, quizB, cookie }
+  }
 
-    async function toPodium(hostSocket: ClientSocket, observer: ClientSocket) {
-      const podium = waitFor(observer, 'podium')
-      expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
-      expect((await ack<{ error?: string }>(hostSocket, 'host:next', {})).error).toBeUndefined()
-      await podium
-    }
+  async function toPodium(hostSocket: ClientSocket, observer: ClientSocket) {
+    const podium = waitFor(observer, 'podium')
+    expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+    expect((await ack<{ error?: string }>(hostSocket, 'host:next', {})).error).toBeUndefined()
+    await podium
+  }
 
+  describe('host:relaunch (relance depuis le podium)', () => {
     it('host:relaunch au podium crée une nouvelle partie et migre le joueur connecté', async () => {
       const { app, url } = await buildApp()
       const clients: ClientSocket[] = []
@@ -2475,6 +2475,412 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         clients.push(bob)
         const refused = await ack<{ error?: string }>(bob, 'player:join', { pin: res.pin, nickname: 'Bob' })
         expect(refused.error).toBe('La partie est complète.')
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+  })
+
+  describe("host:kick (exclusion d'un joueur)", () => {
+    it('une exclusion libère la place pour le plafond MAX_PLAYERS_PER_SESSION', async () => {
+      const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '1' })
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gw-kick-cap@example.com')
+        clients.push(hostSocket)
+        const ana = await connectClient(url)
+        const bob = await connectClient(url)
+        clients.push(ana, bob)
+        const anaJoin = await ack<{ playerId?: string; error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })
+        expect(anaJoin.error).toBeUndefined()
+        const refused = await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })
+        expect(refused.error).toBe('La partie est complète.')
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaJoin.playerId })).toEqual({ ok: true })
+        const admitted = await ack<{ error?: string }>(bob, 'player:join', { pin, nickname: 'Bob' })
+        expect(admitted.error).toBeUndefined()
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    /** Premier `event` reçu par `client` dont le payload satisfait `pred` : évite de capter une
+     * diffusion antérieure (ex. le `lobby:update` du dernier join) arrivée après l'abonnement. */
+    function waitMatch<T>(client: ClientSocket, event: string, pred: (payload: T) => boolean): Promise<T> {
+      return new Promise((resolve) => {
+        const handler = (payload: T) => {
+          if (!pred(payload)) return
+          client.off(event, handler)
+          resolve(payload)
+        }
+        client.on(event, handler)
+      })
+    }
+
+    type Lobby = { players: Array<{ id: string; nickname: string }> }
+
+    /** Ana et Bob rejoignent `pin` ; résout une fois que l'hôte a vu les deux joueurs dans la liste
+     * (plus aucun `lobby:update` de join en vol). */
+    async function joinAnaAndBob(url: string, hostSocket: ClientSocket, pin: string, clients: ClientSocket[]) {
+      const ana = await connectClient(url)
+      const bob = await connectClient(url)
+      clients.push(ana, bob)
+      const both = waitMatch<Lobby>(hostSocket, 'lobby:update', (l) => l.players.length === 2)
+      const anaJoin = await ack<{ playerId?: string; joinToken?: string; error?: string }>(ana, 'player:join', {
+        pin,
+        nickname: 'Ana',
+      })
+      expect(anaJoin.error).toBeUndefined()
+      const bobJoin = await ack<{ playerId?: string; joinToken?: string; error?: string }>(bob, 'player:join', {
+        pin,
+        nickname: 'Bob',
+      })
+      expect(bobJoin.error).toBeUndefined()
+      await both
+      return {
+        ana,
+        bob,
+        anaId: anaJoin.playerId!,
+        bobId: bobJoin.playerId!,
+        anaToken: anaJoin.joinToken!,
+        bobToken: bobJoin.joinToken!,
+      }
+    }
+
+    async function playerRows(sessionId: string, nickname: string) {
+      return ctx.db
+        .select()
+        .from(schema.sessionPlayer)
+        .where(and(eq(schema.sessionPlayer.sessionId, sessionId), eq(schema.sessionPlayer.nickname, nickname)))
+    }
+
+    it('au lobby : retire le joueur, prévient son seul socket, met à jour la liste et supprime la ligne en base', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, sessionId, pin } = await setupHostedSession(app, url, 'gw-kick-lobby@example.com')
+        clients.push(hostSocket)
+        const { ana, bob, anaId, bobId } = await joinAnaAndBob(url, hostSocket, pin, clients)
+        expect(await playerRows(sessionId, 'Ana')).toHaveLength(1)
+
+        const kickedAna = waitFor(ana, 'player:kicked')
+        const noKickBob = raceNoEvent(bob, 'player:kicked', 400)
+        const lobby = waitFor<Lobby>(hostSocket, 'lobby:update')
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+        await kickedAna
+        expect(await noKickBob).toBe(true)
+        expect((await lobby).players.map((p) => p.id)).toEqual([bobId])
+        expect(await playerRows(sessionId, 'Ana')).toHaveLength(0)
+
+        // Le socket d'Ana a quitté la room : il ne reçoit plus les diffusions de la partie.
+        const noLobbyAna = raceNoEvent(ana, 'lobby:update', 400)
+        const carl = await connectClient(url)
+        clients.push(carl)
+        expect((await ack<{ error?: string }>(carl, 'player:join', { pin, nickname: 'Carl' })).error).toBeUndefined()
+        expect(await noLobbyAna).toBe(true)
+
+        // Et il n'est plus rattaché à aucun joueur.
+        expect(await ack(ana, 'player:answer', { answer: { optionIndex: 0 } })).toEqual({
+          accepted: false,
+          error: 'joueur non rattaché à une session',
+        })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("échec de la suppression en base : l'exclusion est quand même notifiée et diffusée", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      // Échec base réel et déterministe : un trigger BEFORE DELETE lève une exception pour les
+      // seules lignes de CETTE session (l'import ESM de `deleteSessionPlayer` n'est pas espionnable).
+      let triggerSessionId = ''
+      const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+      try {
+        const { hostSocket, sessionId, pin } = await setupHostedSession(app, url, 'gw-kick-dbfail@example.com')
+        clients.push(hostSocket)
+        const { ana, anaId, bobId } = await joinAnaAndBob(url, hostSocket, pin, clients)
+        triggerSessionId = sessionId
+        await ctx.db.execute(
+          sql.raw(`
+          CREATE OR REPLACE FUNCTION kick_test_fail_delete() RETURNS trigger AS $$
+          BEGIN
+            IF OLD.session_id = '${sessionId}' THEN RAISE EXCEPTION 'suppression refusée (test)'; END IF;
+            RETURN OLD;
+          END $$ LANGUAGE plpgsql;
+          CREATE TRIGGER kick_test_fail_delete BEFORE DELETE ON session_player
+            FOR EACH ROW EXECUTE FUNCTION kick_test_fail_delete();
+        `),
+        )
+
+        const kickedAna = waitFor(ana, 'player:kicked')
+        const lobby = waitFor<Lobby>(hostSocket, 'lobby:update')
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+        await kickedAna
+        expect((await lobby).players.map((p) => p.id)).toEqual([bobId])
+        // La ligne est restée (la suppression a bien échoué) et l'échec a été journalisé.
+        expect(await playerRows(sessionId, 'Ana')).toHaveLength(1)
+        expect(consoleError).toHaveBeenCalledWith(expect.stringContaining('host:kick'), expect.anything())
+        expect(await ack(ana, 'player:answer', { answer: { optionIndex: 0 } })).toEqual({
+          accepted: false,
+          error: 'joueur non rattaché à une session',
+        })
+      } finally {
+        if (triggerSessionId) {
+          await ctx.db.execute(
+            sql.raw(
+              'DROP TRIGGER IF EXISTS kick_test_fail_delete ON session_player; DROP FUNCTION IF EXISTS kick_test_fail_delete();',
+            ),
+          )
+        }
+        consoleError.mockRestore()
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('reconnexion avec le jeton exclu refusée avec code kicked ; nouveau player:join accepté', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gw-kick-reconnect@example.com')
+        clients.push(hostSocket)
+        const { anaId, anaToken } = await joinAnaAndBob(url, hostSocket, pin, clients)
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+
+        const ana2 = await connectClient(url)
+        clients.push(ana2)
+        expect(await ack(ana2, 'player:reconnect', { pin, joinToken: anaToken })).toEqual({
+          error: 'joueur exclu de la partie',
+          code: 'kicked',
+        })
+        expect((await ack<{ error?: string }>(ana2, 'player:join', { pin, nickname: 'Anaïs' })).error).toBeUndefined()
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('double host:kick : le second répond ok sans nouvelle diffusion', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gw-kick-twice@example.com')
+        clients.push(hostSocket)
+        const { anaId, bobId } = await joinAnaAndBob(url, hostSocket, pin, clients)
+        const afterFirst = waitMatch<Lobby>(hostSocket, 'lobby:update', (l) => l.players.length === 1)
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+        expect((await afterFirst).players.map((p) => p.id)).toEqual([bobId])
+
+        const noLobby = raceNoEvent(hostSocket, 'lobby:update', 400)
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+        expect(await noLobby).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('refusé pour un socket non hôte et au podium', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, sessionId, pin } = await setupHostedSession(app, url, 'gw-kick-refused@example.com')
+        clients.push(hostSocket)
+        const { ana, bob, anaId } = await joinAnaAndBob(url, hostSocket, pin, clients)
+
+        const noKickAna = raceNoEvent(ana, 'player:kicked', 400)
+        expect((await ack<{ error?: string }>(bob, 'host:kick', { playerId: anaId })).error).toBeDefined()
+        expect(await noKickAna).toBe(true)
+        // Ana toujours dans la liste (vue au prochain lobby:update) et en base.
+        const withCarl = waitMatch<Lobby>(hostSocket, 'lobby:update', (l) => l.players.length === 3)
+        const carl = await connectClient(url)
+        clients.push(carl)
+        await ack(carl, 'player:join', { pin, nickname: 'Carl' })
+        expect((await withCarl).players.map((p) => p.id)).toContain(anaId)
+        expect(await playerRows(sessionId, 'Ana')).toHaveLength(1)
+
+        // Quiz mono-question : host:start puis host:next mènent au podium.
+        await toPodium(hostSocket, bob)
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({
+          error: 'exclusion impossible au podium',
+        })
+        expect(await playerRows(sessionId, 'Ana')).toHaveLength(1)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('en phase question : exclure le seul joueur sans réponse déclenche une seule révélation et met à jour le compteur', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gw-kick-question@example.com')
+        clients.push(hostSocket)
+        const { bob, anaId } = await joinAnaAndBob(url, hostSocket, pin, clients)
+        expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+        const bobProgress = waitMatch<{ answered: number; total: number }>(
+          hostSocket,
+          'screen:progress',
+          (p) => p.answered === 1 && p.total === 2,
+        )
+        expect((await ack<{ accepted?: boolean }>(bob, 'player:answer', { answer: { optionIndex: 0 } })).accepted).toBe(
+          true,
+        )
+        await bobProgress
+
+        const progress = waitFor<{ answered: number; total: number }>(hostSocket, 'screen:progress')
+        const reveal = waitFor(hostSocket, 'question:reveal')
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+        expect(await progress).toEqual({ answered: 1, total: 1 })
+        await reveal
+        expect(await raceNoEvent(hostSocket, 'question:reveal', 400)).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('en phase lecture : exclusion acceptée, aucune révélation', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gw-kick-reading@example.com', 20, 2)
+        clients.push(hostSocket)
+        const { anaId } = await joinAnaAndBob(url, hostSocket, pin, clients)
+        const reading = waitFor(hostSocket, 'question:reading')
+        expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+        await reading
+
+        const noReveal = raceNoEvent(hostSocket, 'question:reveal', 400)
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+        expect(await noReveal).toBe(true)
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("exclusion d'un joueur déconnecté : retiré de la liste et de la base, reconnexion refusée", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, sessionId, pin } = await setupHostedSession(app, url, 'gw-kick-offline@example.com')
+        clients.push(hostSocket)
+        const { ana, anaId, bobId, anaToken } = await joinAnaAndBob(url, hostSocket, pin, clients)
+        ana.disconnect()
+        // Le handler `disconnect` ne diffuse rien : court délai pour que le serveur l'ait traité.
+        await new Promise((r) => setTimeout(r, 200))
+
+        const lobby = waitFor<Lobby>(hostSocket, 'lobby:update')
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+        expect((await lobby).players.map((p) => p.id)).toEqual([bobId])
+        expect(await playerRows(sessionId, 'Ana')).toHaveLength(0)
+
+        const ana2 = await connectClient(url)
+        clients.push(ana2)
+        expect(await ack<{ code?: string }>(ana2, 'player:reconnect', { pin, joinToken: anaToken })).toEqual({
+          error: 'joueur exclu de la partie',
+          code: 'kicked',
+        })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it('un hôte reconnecté après rechargement peut exclure', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, sessionId, pin, cookie } = await setupHostedSession(
+          app,
+          url,
+          'gw-kick-host-reload@example.com',
+        )
+        clients.push(hostSocket)
+        const { ana, anaId } = await joinAnaAndBob(url, hostSocket, pin, clients)
+        hostSocket.disconnect()
+
+        const host2 = await connectClient(url, { cookie })
+        clients.push(host2)
+        expect((await ack<{ error?: string }>(host2, 'host:reconnect', { sessionId })).error).toBeUndefined()
+        const kickedAna = waitFor(ana, 'player:kicked')
+        expect(await ack(host2, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+        await kickedAna
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("exclusion pendant le dernier scoreboard puis podium : ranking du podium sans l'exclu", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, sessionId, pin, cookie } = await setupHostedSession(
+          app,
+          url,
+          'gw-kick-last-scoreboard@example.com',
+        )
+        clients.push(hostSocket)
+        const { anaId, bobId } = await joinAnaAndBob(url, hostSocket, pin, clients)
+        expect((await ack<{ error?: string }>(hostSocket, 'host:setAuto', { enabled: false })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+
+        // host:reveal enchaîne le classement : Ana y figure encore.
+        const scoreboard = waitFor<{ ranking: Array<{ playerId: string }> }>(hostSocket, 'scoreboard')
+        expect((await ack<{ error?: string }>(hostSocket, 'host:reveal', {})).error).toBeUndefined()
+        expect((await scoreboard).ranking.map((r) => r.playerId)).toContain(anaId)
+
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+
+        type PodiumPayload = { top: Array<{ playerId: string }>; ranking: Array<{ playerId: string }> }
+        const podium = waitFor<PodiumPayload>(hostSocket, 'podium')
+        expect((await ack<{ error?: string }>(hostSocket, 'host:next', {})).error).toBeUndefined()
+        const live = await podium
+        expect(live.ranking.map((r) => r.playerId)).toEqual([bobId])
+        expect(live.top.map((r) => r.playerId)).toEqual([bobId])
+
+        // Snapshot de reprise au podium : même classement complet, toujours sans l'exclue.
+        hostSocket.disconnect()
+        const host2 = await connectClient(url, { cookie })
+        clients.push(host2)
+        const resumed = waitFor<PodiumPayload>(host2, 'podium')
+        expect((await ack<{ error?: string }>(host2, 'host:reconnect', { sessionId })).error).toBeUndefined()
+        const snapshot = await resumed
+        expect(snapshot.ranking.map((r) => r.playerId)).toEqual([bobId])
+        expect(snapshot.top.map((r) => r.playerId)).toEqual([bobId])
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 30_000)
+
+    it("après exclusion, host:relaunch au podium ne migre pas l'exclu", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pinA, quizB } = await setupRelaunch(app, url, 'gw-kick-relaunch@example.com')
+        clients.push(hostSocket)
+        const { ana, bob, anaId } = await joinAnaAndBob(url, hostSocket, pinA, clients)
+        expect(await ack(hostSocket, 'host:kick', { playerId: anaId })).toEqual({ ok: true })
+        await toPodium(hostSocket, bob)
+
+        const noRelaunch = raceNoEvent(ana, 'session:relaunched', 400)
+        const bobRelaunched = waitFor<{ nickname: string }>(bob, 'session:relaunched')
+        const res = await ack<{ sessionId?: string; error?: string }>(hostSocket, 'host:relaunch', { quizId: quizB })
+        expect(res.error).toBeUndefined()
+        expect((await bobRelaunched).nickname).toBe('Bob')
+        expect(await noRelaunch).toBe(true)
+        const rows = await ctx.db
+          .select()
+          .from(schema.sessionPlayer)
+          .where(eq(schema.sessionPlayer.sessionId, res.sessionId!))
+        expect(rows.map((r) => r.nickname)).toEqual(['Bob'])
       } finally {
         for (const c of clients) c.disconnect()
         await app.close()
@@ -2978,6 +3384,61 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         // par arriver (readingTime complet, 2 s, depuis le redémarrage) — sans reprogrammation,
         // plus aucun minuteur ne courrait jamais pour cette session dans le nouveau process.
         await showPromise
+      } finally {
+        for (const c of clients2) c.disconnect()
+        await app2.close()
+      }
+    }, 30_000)
+
+    it('un jeton exclu reste refusé après redémarrage serveur', async () => {
+      const store1 = new PersistentSessionStore(ctx.db)
+      const { app: app1, url: url1 } = await buildApp(store1)
+      const clients1: ClientSocket[] = []
+      let pin = ''
+      let anaToken = ''
+      let bobToken = ''
+      try {
+        const setup = await setupHostedSession(app1, url1, 'gw-kick-restart@example.com')
+        clients1.push(setup.hostSocket)
+        pin = setup.pin
+        const ana = await connectClient(url1)
+        const bob = await connectClient(url1)
+        clients1.push(ana, bob)
+        const anaJoin = await ack<{ playerId?: string; joinToken?: string; error?: string }>(ana, 'player:join', {
+          pin,
+          nickname: 'Ana',
+        })
+        const bobJoin = await ack<{ playerId?: string; joinToken?: string; error?: string }>(bob, 'player:join', {
+          pin,
+          nickname: 'Bob',
+        })
+        expect(anaJoin.error).toBeUndefined()
+        expect(bobJoin.error).toBeUndefined()
+        anaToken = anaJoin.joinToken!
+        bobToken = bobJoin.joinToken!
+        expect(await ack(setup.hostSocket, 'host:kick', { playerId: anaJoin.playerId })).toEqual({ ok: true })
+      } finally {
+        for (const c of clients1) c.disconnect()
+        await app1.close()
+      }
+
+      const store2 = new PersistentSessionStore(ctx.db)
+      const { app: app2, url: url2 } = await buildApp(store2)
+      const clients2: ClientSocket[] = []
+      try {
+        const ana2 = await connectClient(url2)
+        const bob2 = await connectClient(url2)
+        clients2.push(ana2, bob2)
+        expect(await ack(ana2, 'player:reconnect', { pin, joinToken: anaToken })).toEqual({
+          error: 'joueur exclu de la partie',
+          code: 'kicked',
+        })
+        const bobBack = await ack<{ playerId?: string; error?: string }>(bob2, 'player:reconnect', {
+          pin,
+          joinToken: bobToken,
+        })
+        expect(bobBack.error).toBeUndefined()
+        expect(bobBack.playerId).toBeTruthy()
       } finally {
         for (const c of clients2) c.disconnect()
         await app2.close()

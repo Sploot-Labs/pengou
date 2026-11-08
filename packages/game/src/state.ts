@@ -45,6 +45,9 @@ export type GameSession = {
   // par index de question : true une fois que ses points ont été crédités aux joueurs (reveal()
   // idempotent, découplé de `phase` — voir engine.ts:reveal).
   credited: Record<number, boolean>
+  // joinTokens des joueurs exclus par l'animateur : refusés à la reconnexion. Optionnel pour
+  // tolérer un `engine_state` antérieur à l'exclusion (lu `?? []`, absent tant qu'aucune exclusion).
+  kickedJoinTokens?: string[]
   // nuage de mots : clés de fusion retirées par l'hôte, par id de question (et non par index :
   // clés string, donc intactes à la désérialisation). Optionnel pour lire les états d'avant migration.
   wordcloudRemoved?: Record<string, string[]>

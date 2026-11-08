@@ -177,6 +177,9 @@ describe('HostLive, sondage', () => {
 
   it('le dernier classement connu est masqué pendant un sondage, affiché pendant un QCM', () => {
     renderHostLive()
+    emitServerEvent('lobby:update', {
+      players: ranking.ranking.map((r) => ({ id: r.playerId, nickname: r.nickname, score: r.score, connected: true })),
+    })
     emitServerEvent('scoreboard', ranking)
     emitServerEvent('question:show', pollQuestion)
     expect(screen.queryByRole('complementary', { name: 'Dernier classement connu' })).toBeNull()

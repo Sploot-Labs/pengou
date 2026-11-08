@@ -2735,6 +2735,19 @@ fieldset.host-field > legend {
   border: 1px solid var(--line);
 }
 
+.hostlive-players__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.hostlive-kick {
+  flex-shrink: 0;
+  min-height: 32px;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--fs-small, 0.875rem);
+}
+
 .hostlive-controls {
   display: flex;
   align-items: center;
@@ -2859,6 +2872,16 @@ fieldset.host-field > legend {
 
 .hostlive-aside .hostlive-board__row {
   background: var(--surface);
+}
+
+.hostlive-all-players {
+  margin-top: var(--space-4);
+}
+
+.hostlive-all-players > summary {
+  cursor: pointer;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
 }
 
 .hostlive-board__rank {

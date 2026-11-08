@@ -80,6 +80,7 @@ export {
   setPlayerScore,
   listSessionPlayersByScore,
   listSessionPlayers,
+  deleteSessionPlayer,
   saveEngineState,
   clearEngineState,
   loadEngineState,

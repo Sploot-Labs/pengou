@@ -11,6 +11,7 @@ import {
   useSound,
 } from '../motion/index.js'
 import { isScoredType, pollPercent } from '@splootlabs/quiz'
+import { boardEntries } from '../realtime/board'
 import { buildDistributionRows, pollRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { ContentSource } from '../api/quizzes'
@@ -281,8 +282,9 @@ function BigScreenInner() {
       setRanking(r)
     })
 
-    const offPodium = on<PodiumPayload>('podium', ({ top, sources, hasScoredQuestions: scored }) => {
+    const offPodium = on<PodiumPayload>('podium', ({ top, ranking: full, sources, hasScoredQuestions: scored }) => {
       setPodiumTop(top)
+      if (full) setRanking(full)
       setHasScoredQuestions(scored !== false)
       setPodiumSources(sources ?? [])
       setAutoNextAt(null)
@@ -821,17 +823,19 @@ function BigScreenInner() {
               <p style={{ color: 'var(--ink-dim)' }}>Le classement s'affichera après la première question.</p>
             ) : (
               <ol className="big-scoreboard__list">
-                {ranking.slice(0, 5).map((p, index) => (
-                  <li key={p.playerId} className="big-scoreboard__row">
-                    <span className={`big-scoreboard__rank${index === 0 ? ' big-scoreboard__rank--first' : ''}`}>
-                      {index + 1}
-                    </span>
-                    <span className="big-scoreboard__name">{p.nickname}</span>
-                    <span className="big-scoreboard__score">
-                      <CountUp value={p.score} format={(n) => `${n} pts`} />
-                    </span>
-                  </li>
-                ))}
+                {boardEntries(ranking, players)
+                  .slice(0, 5)
+                  .map((p, index) => (
+                    <li key={p.playerId} className="big-scoreboard__row">
+                      <span className={`big-scoreboard__rank${index === 0 ? ' big-scoreboard__rank--first' : ''}`}>
+                        {index + 1}
+                      </span>
+                      <span className="big-scoreboard__name">{p.nickname}</span>
+                      <span className="big-scoreboard__score">
+                        <CountUp value={p.score} format={(n) => `${n} pts`} />
+                      </span>
+                    </li>
+                  ))}
               </ol>
             )}
           </div>

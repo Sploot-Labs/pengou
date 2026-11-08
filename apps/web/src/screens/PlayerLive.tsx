@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { normalizeText, sliderTolerance } from '@splootlabs/quiz'
 import { useCue, useSound } from '../motion/index.js'
 import { clearPlayerSession, loadPlayerSession, savePlayerSession } from '../realtime/playerSession'
 import { hardReload } from '../realtime/hardReload'
+import { isKickedError } from '../realtime/ackError'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
 import { ClosingView } from './Podium'
@@ -198,6 +199,8 @@ export function PlayerLive() {
   const storedRef = useRef(loadPlayerSession())
   const stored = storedRef.current
 
+  const [kicked, setKicked] = useState(false)
+  const kickedHeadingRef = useRef<HTMLHeadingElement>(null)
   const [phase, setPhase] = useState<PlayerPhase>('waiting')
   const [connection, setConnection] = useState<Connection>('online')
   const [score, setScore] = useState(0)
@@ -371,11 +374,15 @@ export function PlayerLive() {
         // podium) reprendront le fil normalement.
         if (ack.phase !== 'question') setPhase('waiting')
         if (showReconnectedBanner) setConnection('reconnected')
-      } catch {
+      } catch (err) {
         // joinToken invalide/périmé (ou PIN inconnu) : impossible de
         // continuer sans identité de joueur valide.
         if (cancelled) return
         clearPlayerSession()
+        if (isKickedError(err)) {
+          setKicked(true)
+          return
+        }
         navigate('/join', { replace: true })
       }
     }
@@ -408,6 +415,13 @@ export function PlayerLive() {
       if (v.role !== 'player') return
       savePlayerSession({ pin: v.pin, playerId: v.playerId, joinToken: v.joinToken, nickname: v.nickname })
       hardReload('/play')
+    })
+
+    // Exclusion par l'animateur : l'identité locale est oubliée et l'écran
+    // d'exclusion prend le pas sur tout le reste.
+    const offKicked = on('player:kicked', () => {
+      clearPlayerSession()
+      setKicked(true)
     })
 
     const offReading = on<ReadingView>('question:reading', (view) => {
@@ -493,6 +507,7 @@ export function PlayerLive() {
       offConnect()
       offDisconnect()
       offRelaunch()
+      offKicked()
       offReading()
       offShow()
       offTimer()
@@ -602,6 +617,11 @@ export function PlayerLive() {
     const timeout = window.setTimeout(() => setConnection('online'), 3000)
     return () => window.clearTimeout(timeout)
   }, [connection])
+
+  // Focus sur le titre de l'écran d'exclusion (rendu plus bas, après le dernier hook).
+  useEffect(() => {
+    if (kicked) kickedHeadingRef.current?.focus()
+  }, [kicked])
 
   if (!stored) {
     return <Navigate to="/join" replace />
@@ -796,6 +816,23 @@ export function PlayerLive() {
           : question?.type === 'poll'
             ? 'Sondage'
             : null
+
+  // Rendu prioritaire sur tout le reste (la session locale est déjà effacée).
+  if (kicked) {
+    return (
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+        <div className="join-head">
+          <Logo />
+          <h1 ref={kickedHeadingRef} tabIndex={-1}>
+            L'animateur t'a retiré de la partie.
+          </h1>
+        </div>
+        <Link className="ab-button ab-button--primary" to="/join">
+          Rejoindre une partie
+        </Link>
+      </main>
+    )
+  }
 
   return (
     <main className="player-screen" id="contenu-principal" tabIndex={-1}>

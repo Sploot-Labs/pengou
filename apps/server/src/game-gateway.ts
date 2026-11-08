@@ -17,13 +17,20 @@ import {
   abandonStaleSessions,
   abandonInactiveSessions,
   listSessionPlayers,
+  deleteSessionPlayer,
   setWordcloudRemoved,
   type ContentSource,
   type Db,
 } from '@splootlabs/db'
 import type { Auth } from '@splootlabs/auth'
 import { hasPermission, type AppConfig } from '@splootlabs/shared'
-import type { Engine, EngineQuestion, GameSession, SessionStore } from '@splootlabs/game'
+import {
+  PlayerKickedError,
+  type Engine,
+  type EngineQuestion,
+  type GameSession,
+  type SessionStore,
+} from '@splootlabs/game'
 import { WORDCLOUD_MAX_WORD_LENGTH, wordKey } from '@splootlabs/quiz'
 import { clientIpFromRequest, compileTrust, pinFailureKey } from './client-ip.js'
 import { FailureBudget } from './failure-budget.js'
@@ -448,12 +455,17 @@ export async function registerGameGateway(
     meta: SessionMeta | undefined,
   ): {
     top: ReturnType<Engine['ranking']>
+    ranking?: ReturnType<Engine['ranking']>
     sources: ContentSource[]
     hasScoredQuestions: boolean
   } {
     const hasScoredQuestions = engine.hasScoredQuestions(session)
+    // `ranking` complet (moteur, donc sans joueur exclu) : les écrans s'en servent pour le
+    // « Classement complet » au lieu du dernier `scoreboard`, qui peut contenir un exclu.
+    const ranking = hasScoredQuestions ? engine.ranking(session) : undefined
     return {
-      top: hasScoredQuestions ? engine.ranking(session).slice(0, 3) : [],
+      top: ranking?.slice(0, 3) ?? [],
+      ranking,
       sources: meta?.sources ?? [],
       hasScoredQuestions,
     }
@@ -864,6 +876,20 @@ export async function registerGameGateway(
     if (scheduleAuto) scheduleAutoAdvance(sessionId, meta, scored)
 
     await persistRound(meta, revealed)
+  }
+
+  /** Auto-révélation serveur « tous les joueurs connectés ont répondu » : révèle sans attendre
+   * l'hôte ni le timer. Appelée après une réponse acceptée (`player:answer`) ET après une exclusion
+   * en phase 'question' (`host:kick` : retirer le dernier joueur sans réponse complète la manche).
+   * Idempotente via `meta.autoRevealedRounds` (garde posée AVANT l'`await` de révélation : deux
+   * appels concurrents sur la même manche n'émettent qu'un seul `question:reveal`/`scoreboard`).
+   * Les appelants la traitent en best-effort (erreur avalée, l'hôte peut toujours révéler). */
+  async function maybeAutoReveal(sessionId: string, meta: SessionMeta): Promise<void> {
+    const session = await engine.peekSession(sessionId)
+    if (engine.allConnectedAnswered(session) && !meta.autoRevealedRounds.has(session.currentIndex)) {
+      meta.autoRevealedRounds.add(session.currentIndex)
+      await doRevealBySession(sessionId, meta)
+    }
   }
 
   /** `host:reveal` : révèle la bonne réponse (`question:reveal`) puis le classement cumulé
@@ -1566,6 +1592,82 @@ export async function registerGameGateway(
       }
     })
 
+    // Exclusion d'un joueur par l'hôte (lobby comme en cours de partie, refusée au podium par le
+    // moteur). Ordre IMPORTANT : 1) moteur (`kickPlayer` retire le joueur, sa réponse à une manche
+    // non créditée, et mémorise son joinToken dans `kickedJoinTokens`, persisté avec l'état : un
+    // `player:reconnect` sur ce jeton est refusé, même après redémarrage) ; 2) `meta.playerDbIds`
+    // purgé AVANT toute I/O, pour qu'un `persistRound`/`persistPlayerScores` lancé ensuite ne vise
+    // plus la ligne ; 3) suppression de la ligne `session_player` (RLS, tenant de la session), en
+    // best-effort : un échec est journalisé et n'empêche jamais les notifications, diffusions et
+    // l'auto-révélation qui suivent (sans quoi le kick resterait à moitié appliqué). Risque connu (non couvert) : un `persistRound` DÉJÀ en vol pour la manche courante a pu lire
+    // l'id de ligne avant l'étape 2 ; son `recordAnswer` échoue alors sur la FK (ligne supprimée)
+    // et annule la transaction de la manche, sans cicatrisation au boot. La fenêtre se réduit au
+    // trajet aller-retour d'une transaction déjà commencée. Idempotent : un joueur déjà absent
+    // (double clic, double onglet hôte) répond `ok` sans aucune diffusion. Aucune annonce publique :
+    // seul le(s) socket(s) du joueur exclu reçoit `player:kicked`, les autres ne voient que la
+    // liste mise à jour.
+    socket.on('host:kick', async (payload: { playerId?: unknown } | undefined, ack?: (res: unknown) => void) => {
+      const reply = typeof ack === 'function' ? ack : () => {}
+      try {
+        const { sessionId, meta } = await requireLiveHost(socket)
+        const playerId = payload?.playerId
+        if (typeof playerId !== 'string' || !playerId) throw new Error('playerId requis')
+
+        const { session, kicked } = await engine.kickPlayer(sessionId, playerId)
+        if (kicked === null) {
+          reply({ ok: true })
+          return
+        }
+
+        // Le joueur quitte la session : sa place se libère pour le plafond MAX_PLAYERS_PER_SESSION.
+        meta.seatsTaken -= 1
+        const dbPlayerId = meta.playerDbIds.get(playerId)
+        meta.playerDbIds.delete(playerId)
+        if (dbPlayerId) {
+          // Best-effort : l'exclusion est déjà actée côté moteur (et persistée). Un échec base ici
+          // ne doit PAS interrompre la suite, sinon le kick resterait à moitié appliqué sans
+          // rattrapage possible (un nouveau `host:kick` répond `kicked: null`, donc rien n'est
+          // diffusé) : socket de l'exclu toujours dans la room, listes périmées, manche bloquée.
+          // La ligne orpheline n'est plus visée par aucune écriture (`playerDbIds` déjà purgé).
+          try {
+            await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) => deleteSessionPlayer(scope.db, dbPlayerId))
+          } catch (err) {
+            console.error(
+              `host:kick : suppression de la ligne session_player ${dbPlayerId} échouée (exclusion maintenue)`,
+              err,
+            )
+          }
+        }
+
+        // Tous les sockets locaux encore rattachés à ce joueur (y compris un ancien socket resté
+        // ouvert après une reconnexion ailleurs) : prévenus, sortis de la room et détachés (plus
+        // de `player:answer` possible). Les champs de throttle sont conservés.
+        const room = roomName(sessionId)
+        for (const s of io.of('/').sockets.values()) {
+          const data = s.data as SocketData
+          if (data.sessionId !== sessionId || data.playerId !== playerId) continue
+          s.emit('player:kicked', {})
+          s.leave(room)
+          data.role = undefined
+          data.sessionId = undefined
+          data.playerId = undefined
+        }
+        activeSocketIdByPlayerId.delete(playerId)
+
+        scheduleLobbyBroadcast(sessionId)
+
+        // En pleine question : le total du compteur baisse, et exclure le dernier joueur sans
+        // réponse complète la manche (auto-révélation best-effort, comme après `player:answer`).
+        if (session.phase === 'question') {
+          io.to(viewersRoomName(sessionId)).emit('screen:progress', await engine.progress(sessionId))
+          await maybeAutoReveal(sessionId, meta).catch(() => {})
+        }
+        reply({ ok: true })
+      } catch (e) {
+        reply({ error: message(e) })
+      }
+    })
+
     socket.on(
       'player:join',
       async (payload: { pin?: unknown; nickname?: unknown } | undefined, ack?: (res: unknown) => void) => {
@@ -1664,19 +1766,14 @@ export async function registerGameGateway(
         }
         reply(result)
 
-        // Auto-révélation serveur : dès que TOUS les joueurs connectés ont répondu, on révèle
-        // sans attendre l'hôte ni le timer (le chrono s'arrête côté clients au passage en 'reveal').
-        // Best-effort et isolé : une erreur ici ne doit jamais affecter la réponse déjà acquittée au
-        // joueur. Idempotent via meta.autoRevealedRounds (évite un double question:reveal/scoreboard si
-        // deux dernières réponses arrivent quasi simultanément).
+        // Auto-révélation serveur (voir `maybeAutoReveal`) : dès que TOUS les joueurs connectés ont
+        // répondu, on révèle sans attendre l'hôte ni le timer (le chrono s'arrête côté clients au
+        // passage en 'reveal'). Best-effort et isolé : une erreur ici ne doit jamais affecter la
+        // réponse déjà acquittée au joueur.
         if (result.accepted) {
           try {
             const meta = sessionMetaByEngineId.get(data.sessionId)
-            const session = await engine.peekSession(data.sessionId)
-            if (meta && engine.allConnectedAnswered(session) && !meta.autoRevealedRounds.has(session.currentIndex)) {
-              meta.autoRevealedRounds.add(session.currentIndex)
-              await doRevealBySession(data.sessionId, meta)
-            }
+            if (meta) await maybeAutoReveal(data.sessionId, meta)
           } catch {
             // best-effort — l'hôte peut toujours révéler manuellement
           }
@@ -1747,7 +1844,9 @@ export async function registerGameGateway(
           // host:start/host:next (`playerQuestionView`, jamais `questionResult`) + le `timer`.
           replayCurrentQuestionTo(socket, session, alreadyAnswered)
         } catch (e) {
-          reply({ error: message(e) })
+          // Jeton exclu par l'hôte (`host:kick`) : code dédié pour que le client affiche l'écran
+          // « retiré de la partie » et oublie le jeton, au lieu de retenter une reconnexion.
+          reply(e instanceof PlayerKickedError ? { error: e.message, code: e.code } : { error: message(e) })
         }
       },
     )

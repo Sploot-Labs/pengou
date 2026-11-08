@@ -143,6 +143,11 @@ export interface Engine {
   /** Retrouve un joueur par joinToken (Task 5 : reconnexion) et le remarque `connected`. `null`
    * si aucun joueur de la session ne porte ce token. */
   reconnect(sessionId: string, joinToken: string): Promise<ReconnectResult>
+  /** Exclut un joueur : le retire de `players`, efface ses réponses de la manche courante tant
+   * que ses points ne sont pas crédités (sinon elles restent, le score déjà distribué ne bouge
+   * pas) et mémorise son joinToken pour refuser sa reconnexion. `kicked` vaut `null` (sans
+   * `store.save`) si le joueur est absent : idempotent. Refusé au podium. */
+  kickPlayer(sessionId: string, playerId: string): Promise<{ session: GameSession; kicked: Player | null }>
   /** Compteur de réponses pour la question courante — pour le grand écran (jamais de contenu
    * de réponse, uniquement `answered`/`total`). */
   progress(sessionId: string): Promise<ProgressInfo>
@@ -169,6 +174,15 @@ export interface Engine {
    * colonne est déjà à null, la 2ᵉ passe est donc idempotente/inoffensive. Sans cette éviction,
    * toute partie jouée resterait indéfiniment dans le cache du store → fuite mémoire. */
   evictSession(sessionId: string): Promise<void>
+}
+
+/** Levée par `reconnect` quand le joinToken appartient à un joueur exclu par l'animateur. */
+export class PlayerKickedError extends Error {
+  readonly code = 'kicked'
+  constructor() {
+    super('joueur exclu de la partie')
+    this.name = 'PlayerKickedError'
+  }
 }
 
 export function createEngine(deps: EngineDeps): Engine {
@@ -528,11 +542,25 @@ export function createEngine(deps: EngineDeps): Engine {
 
     async reconnect(sessionId, joinToken) {
       const session = await requireSession(sessionId)
+      if (session.kickedJoinTokens?.includes(joinToken)) throw new PlayerKickedError()
       const player = Object.values(session.players).find((p) => p.joinToken === joinToken)
       if (!player) return null
       player.connected = true
       await store.save(session)
       return { session, player }
+    },
+
+    async kickPlayer(sessionId, playerId) {
+      const session = await requireSession(sessionId)
+      if (session.phase === 'podium') throw new Error('exclusion impossible au podium')
+      const player = session.players[playerId]
+      if (!player) return { session, kicked: null }
+      delete session.players[playerId]
+      // Manche non créditée : sa réponse ne doit plus compter (progress, auto-révélation, crédit).
+      if (!session.credited[session.currentIndex]) delete session.answers[session.currentIndex]?.[playerId]
+      session.kickedJoinTokens = [...(session.kickedJoinTokens ?? []), player.joinToken]
+      await store.save(session)
+      return { session, kicked: player }
     },
 
     async progress(sessionId) {

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { createEngine, type Engine } from './engine.js'
+import { createEngine, PlayerKickedError, type Engine } from './engine.js'
 import { MemorySessionStore } from './store.js'
 import type { EngineQuestion } from './state.js'
 
@@ -688,6 +688,84 @@ describe('game engine — cycle déterministe complet', () => {
       await engine.submitAnswer(session.id, bob.id, { optionIndex: 0 })
       const afterBoth = await engine.progress(session.id)
       expect(afterBoth).toEqual({ answered: 2, total: 2 })
+    })
+  })
+
+  describe('exclusion (kickPlayer)', () => {
+    async function twoPlayers() {
+      const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+      const { player: ana } = await engine.addPlayer(session.id, 'Ana')
+      const { player: bob } = await engine.addPlayer(session.id, 'Bob')
+      return { id: session.id, ana, bob }
+    }
+
+    it('retire le joueur, ses réponses de la manche non créditée, et mémorise son jeton', async () => {
+      const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+      const { player: ana } = await engine.addPlayer(session.id, 'Ana')
+      const { player: bob } = await engine.addPlayer(session.id, 'Bob')
+      await engine.startQuestion(session.id)
+      await engine.submitAnswer(session.id, ana.id, { optionIndex: 1 })
+      const { session: after, kicked } = await engine.kickPlayer(session.id, ana.id)
+      expect(kicked?.id).toBe(ana.id)
+      expect(after.players[ana.id]).toBeUndefined()
+      expect(after.players[bob.id]).toBeDefined()
+      expect(after.answers[0]?.[ana.id]).toBeUndefined()
+      expect(after.kickedJoinTokens).toEqual([ana.joinToken])
+      expect(await engine.progress(session.id)).toEqual({ answered: 0, total: 1 })
+    })
+
+    it("ne touche pas aux réponses d'une manche déjà créditée", async () => {
+      const { id, ana, bob } = await twoPlayers()
+      await engine.startQuestion(id)
+      clock.set(1000)
+      await engine.submitAnswer(id, ana.id, { optionIndex: 1 })
+      await engine.submitAnswer(id, bob.id, { optionIndex: 1 })
+      const revealed = await engine.reveal(id)
+      const bobScore = revealed.players[bob.id]!.score
+      const { session: after } = await engine.kickPlayer(id, ana.id)
+      expect(after.answers[0]?.[ana.id]).toBeDefined()
+      expect(after.players[bob.id]!.score).toBe(bobScore)
+    })
+
+    it('est idempotent : un second appel renvoie kicked=null sans dupliquer le jeton', async () => {
+      const { id, ana } = await twoPlayers()
+      await engine.kickPlayer(id, ana.id)
+      const second = await engine.kickPlayer(id, ana.id)
+      expect(second.kicked).toBeNull()
+      expect(second.session.kickedJoinTokens).toEqual([ana.joinToken])
+    })
+
+    it('refuse au podium', async () => {
+      const { id, ana } = await twoPlayers()
+      await engine.startQuestion(id)
+      await engine.podium(id)
+      await expect(engine.kickPlayer(id, ana.id)).rejects.toThrow('exclusion impossible au podium')
+    })
+
+    it('reconnect avec un jeton exclu lève PlayerKickedError (code kicked)', async () => {
+      const { id, ana } = await twoPlayers()
+      await engine.kickPlayer(id, ana.id)
+      await expect(engine.reconnect(id, ana.joinToken)).rejects.toBeInstanceOf(PlayerKickedError)
+      await expect(engine.reconnect(id, ana.joinToken)).rejects.toMatchObject({ code: 'kicked' })
+    })
+
+    it('tolère un état ancien sans kickedJoinTokens', async () => {
+      const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+      const { player: ana } = await engine.addPlayer(session.id, 'Ana')
+      // `createSession` ne pose pas le champ : l'état stocké ressemble déjà à un état ancien.
+      expect((await store.get(session.id))!.kickedJoinTokens).toBeUndefined()
+      expect(await engine.reconnect(session.id, 'jeton-inexistant')).toBeNull()
+      const { kicked } = await engine.kickPlayer(session.id, ana.id)
+      expect(kicked).not.toBeNull()
+    })
+
+    it('allConnectedAnswered devient vrai quand le seul joueur sans réponse est exclu', async () => {
+      const { id, ana, bob } = await twoPlayers()
+      await engine.startQuestion(id)
+      await engine.submitAnswer(id, bob.id, { optionIndex: 1 })
+      expect(engine.allConnectedAnswered(await engine.getSession(id))).toBe(false)
+      const { session: after } = await engine.kickPlayer(id, ana.id)
+      expect(engine.allConnectedAnswered(after)).toBe(true)
     })
   })
 })
