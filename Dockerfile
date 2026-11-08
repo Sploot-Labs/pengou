@@ -1,5 +1,5 @@
 # --- Stage build ---
-FROM node:24-slim AS build
+FROM node:25-slim AS build
 RUN corepack enable
 # Outils de compilation requis pour les dépendances natives optionnelles résolues
 # transitivement par drizzle-orm/drizzle-kit (ex. better-sqlite3, non utilisé au runtime
@@ -19,7 +19,7 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm -r build
 
 # --- Stage runtime ---
-FROM node:24-slim AS runtime
+FROM node:25-slim AS runtime
 RUN corepack enable
 WORKDIR /app
 ENV NODE_ENV=production
