@@ -3,7 +3,14 @@ import { eq } from 'drizzle-orm'
 import { startTestDb, runMigrations, schema } from '../index.js'
 import { tenantScope } from '../tenant.js'
 import { createQuiz } from './quiz.js'
-import { createGameSession, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore, setWordcloudRemoved } from './session.js'
+import {
+  createGameSession,
+  addSessionPlayer,
+  recordAnswer,
+  setSessionStatus,
+  setPlayerScore,
+  setWordcloudRemoved,
+} from './session.js'
 import { listSessions, getSessionReport } from './reports.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
@@ -19,59 +26,141 @@ beforeAll(async () => {
 
   const [tA] = await ctx.db.insert(schema.tenant).values({ name: 'A' }).returning()
   const [tB] = await ctx.db.insert(schema.tenant).values({ name: 'B' }).returning()
-  const [uA] = await ctx.db.insert(schema.user)
-    .values({ id: crypto.randomUUID(), email: 'host@a.fr', name: 'Host A', emailVerified: false }).returning()
-  tenantA = tA.id; tenantB = tB.id; ownerA = uA.id
+  const [uA] = await ctx.db
+    .insert(schema.user)
+    .values({ id: crypto.randomUUID(), email: 'host@a.fr', name: 'Host A', emailVerified: false })
+    .returning()
+  tenantA = tA.id
+  tenantB = tB.id
+  ownerA = uA.id
 
   const quiz = await createQuiz(tenantScope(ctx.db, tenantA), { ownerId: ownerA, title: 'Quiz A' })
   quizA = quiz.id
   const quizBRow = await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerA, title: 'Quiz B' })
   quizB = quizBRow.id
 
-  const [question1] = await ctx.db.insert(schema.question).values({
-    quizId: quizA, tenantId: tenantA, type: 'mcq', prompt: 'Question 1', timeLimit: 20, orderIndex: 0,
-    payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
-  }).returning()
+  const [question1] = await ctx.db
+    .insert(schema.question)
+    .values({
+      quizId: quizA,
+      tenantId: tenantA,
+      type: 'mcq',
+      prompt: 'Question 1',
+      timeLimit: 20,
+      orderIndex: 0,
+      payload: {
+        options: [
+          { label: 'A', correct: true },
+          { label: 'B', correct: false },
+        ],
+      },
+    })
+    .returning()
   q1 = question1.id
-  const [question2] = await ctx.db.insert(schema.question).values({
-    quizId: quizA, tenantId: tenantA, type: 'mcq', prompt: 'Question 2', timeLimit: 20, orderIndex: 1,
-    payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
-  }).returning()
+  const [question2] = await ctx.db
+    .insert(schema.question)
+    .values({
+      quizId: quizA,
+      tenantId: tenantA,
+      type: 'mcq',
+      prompt: 'Question 2',
+      timeLimit: 20,
+      orderIndex: 1,
+      payload: {
+        options: [
+          { label: 'A', correct: true },
+          { label: 'B', correct: false },
+        ],
+      },
+    })
+    .returning()
   q2 = question2.id
-  const [questionB] = await ctx.db.insert(schema.question).values({
-    quizId: quizB, tenantId: tenantB, type: 'mcq', prompt: 'Question B', timeLimit: 20, orderIndex: 0,
-    payload: { options: [{ label: 'A', correct: true }] },
-  }).returning()
+  const [questionB] = await ctx.db
+    .insert(schema.question)
+    .values({
+      quizId: quizB,
+      tenantId: tenantB,
+      type: 'mcq',
+      prompt: 'Question B',
+      timeLimit: 20,
+      orderIndex: 0,
+      payload: { options: [{ label: 'A', correct: true }] },
+    })
+    .returning()
   qB = questionB.id
 
   // Session ancienne, vide (tenant A) -- teste playerCount = 0 et avgTimeMs = null sans réponses.
   const old = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '100001' })
   sessionOld = old!.id
   await setSessionStatus(ctx.db, sessionOld, 'ended')
-  await ctx.db.update(schema.gameSession)
+  await ctx.db
+    .update(schema.gameSession)
     .set({ createdAt: new Date('2020-01-01T00:00:00Z') })
     .where(eq(schema.gameSession.id, sessionOld))
 
   // Session récente, peuplée (tenant A).
   const recent = await createGameSession(tenantScope(ctx.db, tenantA), { quizId: quizA, hostId: ownerA, pin: '100002' })
   sessionRecent = recent!.id
-  await ctx.db.update(schema.gameSession)
+  await ctx.db
+    .update(schema.gameSession)
     .set({ createdAt: new Date('2024-01-01T00:00:00Z') })
     .where(eq(schema.gameSession.id, sessionRecent))
 
   const alicePlayer = await addSessionPlayer(ctx.db, sessionRecent, { nickname: 'Alice', joinToken: 'tok-alice' })
   const bobPlayer = await addSessionPlayer(ctx.db, sessionRecent, { nickname: 'Bob', joinToken: 'tok-bob' })
   const carolPlayer = await addSessionPlayer(ctx.db, sessionRecent, { nickname: 'Carol', joinToken: 'tok-carol' })
-  alice = alicePlayer.id; bob = bobPlayer.id; carol = carolPlayer.id
+  alice = alicePlayer.id
+  bob = bobPlayer.id
+  carol = carolPlayer.id
 
   // Q1 : 3 réponses, 2 correctes -- temps 3000/5000/8000 -> avg 16000/3 = 5333.33...
-  await recordAnswer(ctx.db, { sessionId: sessionRecent, questionId: q1, playerId: alice, answer: { choice: 0 }, timeMs: 3000, isCorrect: true, points: 850 })
-  await recordAnswer(ctx.db, { sessionId: sessionRecent, questionId: q1, playerId: bob, answer: { choice: 0 }, timeMs: 5000, isCorrect: true, points: 700 })
-  await recordAnswer(ctx.db, { sessionId: sessionRecent, questionId: q1, playerId: carol, answer: { choice: 1 }, timeMs: 8000, isCorrect: false, points: 0 })
+  await recordAnswer(ctx.db, {
+    sessionId: sessionRecent,
+    questionId: q1,
+    playerId: alice,
+    answer: { choice: 0 },
+    timeMs: 3000,
+    isCorrect: true,
+    points: 850,
+  })
+  await recordAnswer(ctx.db, {
+    sessionId: sessionRecent,
+    questionId: q1,
+    playerId: bob,
+    answer: { choice: 0 },
+    timeMs: 5000,
+    isCorrect: true,
+    points: 700,
+  })
+  await recordAnswer(ctx.db, {
+    sessionId: sessionRecent,
+    questionId: q1,
+    playerId: carol,
+    answer: { choice: 1 },
+    timeMs: 8000,
+    isCorrect: false,
+    points: 0,
+  })
 
   // Q2 : 2 réponses, 1 correcte -- Carol ne répond pas -> avg (2000+6000)/2 = 4000.
-  await recordAnswer(ctx.db, { sessionId: sessionRecent, questionId: q2, playerId: alice, answer: { choice: 0 }, timeMs: 2000, isCorrect: true, points: 900 })
-  await recordAnswer(ctx.db, { sessionId: sessionRecent, questionId: q2, playerId: bob, answer: { choice: 1 }, timeMs: 6000, isCorrect: false, points: 0 })
+  await recordAnswer(ctx.db, {
+    sessionId: sessionRecent,
+    questionId: q2,
+    playerId: alice,
+    answer: { choice: 0 },
+    timeMs: 2000,
+    isCorrect: true,
+    points: 900,
+  })
+  await recordAnswer(ctx.db, {
+    sessionId: sessionRecent,
+    questionId: q2,
+    playerId: bob,
+    answer: { choice: 1 },
+    timeMs: 6000,
+    isCorrect: false,
+    points: 0,
+  })
 
   await setPlayerScore(ctx.db, alice, 1750)
   await setPlayerScore(ctx.db, bob, 700)
@@ -79,15 +168,29 @@ beforeAll(async () => {
   await setSessionStatus(ctx.db, sessionRecent, 'ended')
 
   // Tenant B : sa propre session peuplée, doit rester invisible au scope A.
-  const bSession = await createGameSession(tenantScope(ctx.db, tenantB), { quizId: quizB, hostId: ownerA, pin: '200001' })
+  const bSession = await createGameSession(tenantScope(ctx.db, tenantB), {
+    quizId: quizB,
+    hostId: ownerA,
+    pin: '200001',
+  })
   sessionB = bSession!.id
   const bobB = await addSessionPlayer(ctx.db, sessionB, { nickname: 'BobB', joinToken: 'tok-bobb' })
-  await recordAnswer(ctx.db, { sessionId: sessionB, questionId: qB, playerId: bobB.id, answer: { choice: 0 }, timeMs: 1000, isCorrect: true, points: 1000 })
+  await recordAnswer(ctx.db, {
+    sessionId: sessionB,
+    questionId: qB,
+    playerId: bobB.id,
+    answer: { choice: 0 },
+    timeMs: 1000,
+    isCorrect: true,
+    points: 1000,
+  })
   await setPlayerScore(ctx.db, bobB.id, 1000)
   await setSessionStatus(ctx.db, sessionB, 'ended')
 }, 120_000)
 
-afterAll(async () => { await ctx?.stop() })
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 describe('listSessions', () => {
   it('ne renvoie que les sessions du tenant du scope, plus recentes d’abord', async () => {
@@ -138,7 +241,11 @@ describe('getSessionReport', () => {
     const report = await getSessionReport(tenantScope(ctx.db, tenantA), sessionRecent)
     expect(report).not.toBeNull()
     expect(report!.session).toMatchObject({
-      id: sessionRecent, pin: '100002', status: 'ended', quizId: quizA, quizTitle: 'Quiz A',
+      id: sessionRecent,
+      pin: '100002',
+      status: 'ended',
+      quizId: quizA,
+      quizTitle: 'Quiz A',
     })
 
     const byId = (id: string) => report!.questions.find((q) => q.questionId === id)!
@@ -192,29 +299,76 @@ describe('getSessionReport avec un nuage de mots', () => {
 
   beforeAll(async () => {
     const [t] = await ctx.db.insert(schema.tenant).values({ name: 'W' }).returning()
-    const [u] = await ctx.db.insert(schema.user)
-      .values({ id: crypto.randomUUID(), email: 'host@w.fr', name: 'Host W', emailVerified: false }).returning()
+    const [u] = await ctx.db
+      .insert(schema.user)
+      .values({ id: crypto.randomUUID(), email: 'host@w.fr', name: 'Host W', emailVerified: false })
+      .returning()
     tenantW = t.id
     scopeW = tenantScope(ctx.db, tenantW)
     const quiz = await createQuiz(scopeW, { ownerId: u.id, title: 'Quiz W' })
-    const [m] = await ctx.db.insert(schema.question).values({
-      quizId: quiz.id, tenantId: tenantW, type: 'mcq', prompt: 'QCM', timeLimit: 20, orderIndex: 0,
-      payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
-    }).returning()
+    const [m] = await ctx.db
+      .insert(schema.question)
+      .values({
+        quizId: quiz.id,
+        tenantId: tenantW,
+        type: 'mcq',
+        prompt: 'QCM',
+        timeLimit: 20,
+        orderIndex: 0,
+        payload: {
+          options: [
+            { label: 'A', correct: true },
+            { label: 'B', correct: false },
+          ],
+        },
+      })
+      .returning()
     qMcq = m.id
-    const [c] = await ctx.db.insert(schema.question).values({
-      quizId: quiz.id, tenantId: tenantW, type: 'wordcloud', prompt: 'Un mot sur le matin', timeLimit: 20, orderIndex: 1,
-      payload: {},
-    }).returning()
+    const [c] = await ctx.db
+      .insert(schema.question)
+      .values({
+        quizId: quiz.id,
+        tenantId: tenantW,
+        type: 'wordcloud',
+        prompt: 'Un mot sur le matin',
+        timeLimit: 20,
+        orderIndex: 1,
+        payload: {},
+      })
+      .returning()
     qCloud = c.id
 
     const s = await createGameSession(scopeW, { quizId: quiz.id, hostId: u.id, pin: '300001' })
     sessionW = s!.id
     pa = (await addSessionPlayer(ctx.db, sessionW, { nickname: 'A', joinToken: 'tok-wa' })).id
     pb = (await addSessionPlayer(ctx.db, sessionW, { nickname: 'B', joinToken: 'tok-wb' })).id
-    await recordAnswer(ctx.db, { sessionId: sessionW, questionId: qMcq, playerId: pa, answer: { choice: 0 }, timeMs: 2000, isCorrect: true, points: 900 })
-    await recordAnswer(ctx.db, { sessionId: sessionW, questionId: qCloud, playerId: pa, answer: { words: ['café', 'rush'] }, timeMs: 1000, isCorrect: false, points: 0 })
-    await recordAnswer(ctx.db, { sessionId: sessionW, questionId: qCloud, playerId: pb, answer: { words: ['Café'] }, timeMs: 1500, isCorrect: false, points: 0 })
+    await recordAnswer(ctx.db, {
+      sessionId: sessionW,
+      questionId: qMcq,
+      playerId: pa,
+      answer: { choice: 0 },
+      timeMs: 2000,
+      isCorrect: true,
+      points: 900,
+    })
+    await recordAnswer(ctx.db, {
+      sessionId: sessionW,
+      questionId: qCloud,
+      playerId: pa,
+      answer: { words: ['café', 'rush'] },
+      timeMs: 1000,
+      isCorrect: false,
+      points: 0,
+    })
+    await recordAnswer(ctx.db, {
+      sessionId: sessionW,
+      questionId: qCloud,
+      playerId: pb,
+      answer: { words: ['Café'] },
+      timeMs: 1500,
+      isCorrect: false,
+      points: 0,
+    })
     await setSessionStatus(ctx.db, sessionW, 'ended')
 
     const e = await createGameSession(scopeW, { quizId: quiz.id, hostId: u.id, pin: '300002' })
@@ -260,33 +414,88 @@ describe('getSessionReport avec un sondage', () => {
 
   beforeAll(async () => {
     const [t] = await ctx.db.insert(schema.tenant).values({ name: 'P' }).returning()
-    const [u] = await ctx.db.insert(schema.user)
-      .values({ id: crypto.randomUUID(), email: 'host@p.fr', name: 'Host P', emailVerified: false }).returning()
+    const [u] = await ctx.db
+      .insert(schema.user)
+      .values({ id: crypto.randomUUID(), email: 'host@p.fr', name: 'Host P', emailVerified: false })
+      .returning()
     scopeP = tenantScope(ctx.db, t.id)
     const quiz = await createQuiz(scopeP, { ownerId: u.id, title: 'Quiz P' })
-    const [m] = await ctx.db.insert(schema.question).values({
-      quizId: quiz.id, tenantId: t.id, type: 'mcq', prompt: 'QCM', timeLimit: 20, orderIndex: 0,
-      payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
-    }).returning()
+    const [m] = await ctx.db
+      .insert(schema.question)
+      .values({
+        quizId: quiz.id,
+        tenantId: t.id,
+        type: 'mcq',
+        prompt: 'QCM',
+        timeLimit: 20,
+        orderIndex: 0,
+        payload: {
+          options: [
+            { label: 'A', correct: true },
+            { label: 'B', correct: false },
+          ],
+        },
+      })
+      .returning()
     qMcq = m.id
-    const [p] = await ctx.db.insert(schema.question).values({
-      quizId: quiz.id, tenantId: t.id, type: 'poll', prompt: 'Votre humeur', timeLimit: 20, orderIndex: 1,
-      payload: { options: [{ label: 'Oui' }, { label: 'Non' }, { label: 'Peut-être' }], multiple: true },
-    }).returning()
+    const [p] = await ctx.db
+      .insert(schema.question)
+      .values({
+        quizId: quiz.id,
+        tenantId: t.id,
+        type: 'poll',
+        prompt: 'Votre humeur',
+        timeLimit: 20,
+        orderIndex: 1,
+        payload: { options: [{ label: 'Oui' }, { label: 'Non' }, { label: 'Peut-être' }], multiple: true },
+      })
+      .returning()
     qPoll = p.id
-    const [e] = await ctx.db.insert(schema.question).values({
-      quizId: quiz.id, tenantId: t.id, type: 'poll', prompt: 'Sondage vide', timeLimit: 20, orderIndex: 2,
-      payload: { options: [{ label: 'X' }, { label: 'Y' }], multiple: false },
-    }).returning()
+    const [e] = await ctx.db
+      .insert(schema.question)
+      .values({
+        quizId: quiz.id,
+        tenantId: t.id,
+        type: 'poll',
+        prompt: 'Sondage vide',
+        timeLimit: 20,
+        orderIndex: 2,
+        payload: { options: [{ label: 'X' }, { label: 'Y' }], multiple: false },
+      })
+      .returning()
     qEmpty = e.id
 
     const s = await createGameSession(scopeP, { quizId: quiz.id, hostId: u.id, pin: '400001' })
     sessionP = s!.id
     const pa = (await addSessionPlayer(ctx.db, sessionP, { nickname: 'A', joinToken: 'tok-pa' })).id
     const pb = (await addSessionPlayer(ctx.db, sessionP, { nickname: 'B', joinToken: 'tok-pb' })).id
-    await recordAnswer(ctx.db, { sessionId: sessionP, questionId: qMcq, playerId: pa, answer: { choice: 0 }, timeMs: 2000, isCorrect: true, points: 900 })
-    await recordAnswer(ctx.db, { sessionId: sessionP, questionId: qPoll, playerId: pa, answer: { optionIndexes: [0, 1] }, timeMs: 1000, isCorrect: false, points: 0 })
-    await recordAnswer(ctx.db, { sessionId: sessionP, questionId: qPoll, playerId: pb, answer: { optionIndexes: [0] }, timeMs: 1500, isCorrect: false, points: 0 })
+    await recordAnswer(ctx.db, {
+      sessionId: sessionP,
+      questionId: qMcq,
+      playerId: pa,
+      answer: { choice: 0 },
+      timeMs: 2000,
+      isCorrect: true,
+      points: 900,
+    })
+    await recordAnswer(ctx.db, {
+      sessionId: sessionP,
+      questionId: qPoll,
+      playerId: pa,
+      answer: { optionIndexes: [0, 1] },
+      timeMs: 1000,
+      isCorrect: false,
+      points: 0,
+    })
+    await recordAnswer(ctx.db, {
+      sessionId: sessionP,
+      questionId: qPoll,
+      playerId: pb,
+      answer: { optionIndexes: [0] },
+      timeMs: 1500,
+      isCorrect: false,
+      points: 0,
+    })
     await setSessionStatus(ctx.db, sessionP, 'ended')
   }, 60_000)
 
@@ -301,8 +510,13 @@ describe('getSessionReport avec un sondage', () => {
     const poll = report!.questions.find((q) => q.questionId === qPoll)!
     expect(poll).toMatchObject({ correctCount: null, avgTimeMs: null, answerCount: 2, wordcloud: null })
     expect(poll.poll).toEqual({
-      voters: 2, multiple: true,
-      options: [{ label: 'Oui', votes: 2 }, { label: 'Non', votes: 1 }, { label: 'Peut-être', votes: 0 }],
+      voters: 2,
+      multiple: true,
+      options: [
+        { label: 'Oui', votes: 2 },
+        { label: 'Non', votes: 1 },
+        { label: 'Peut-être', votes: 0 },
+      ],
     })
     expect(report!.questions.find((q) => q.questionId === qMcq)!.poll).toBeNull()
   })
@@ -310,7 +524,14 @@ describe('getSessionReport avec un sondage', () => {
   it('un sondage sans vote a zéro votant et toutes les options à 0', async () => {
     const report = await getSessionReport(scopeP, sessionP)
     const empty = report!.questions.find((q) => q.questionId === qEmpty)!
-    expect(empty.poll).toEqual({ voters: 0, multiple: false, options: [{ label: 'X', votes: 0 }, { label: 'Y', votes: 0 }] })
+    expect(empty.poll).toEqual({
+      voters: 0,
+      multiple: false,
+      options: [
+        { label: 'X', votes: 0 },
+        { label: 'Y', votes: 0 },
+      ],
+    })
     expect(empty.answerCount).toBe(0)
   })
 })

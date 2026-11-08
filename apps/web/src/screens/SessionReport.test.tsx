@@ -117,9 +117,7 @@ describe('SessionReport, questions sondage', () => {
   })
 
   it('affiche chaque choix avec ses votes et son pourcentage', async () => {
-    await renderReport([
-      question({ prompt: 'Sondé ?', type: 'poll', answerCount: 3, poll: poll(3, [2, 1, 0]) }),
-    ])
+    await renderReport([question({ prompt: 'Sondé ?', type: 'poll', answerCount: 3, poll: poll(3, [2, 1, 0]) })])
     const row = within(rowOf('Sondé ?'))
     expect(row.getByText('Sondage, 3 participants')).toBeTruthy()
     expect(row.getByText(/Oui : 2 votes \(67 %\)/)).toBeTruthy()
@@ -130,9 +128,7 @@ describe('SessionReport, questions sondage', () => {
   })
 
   it('affiche « Aucun vote » sans votant', async () => {
-    await renderReport([
-      question({ prompt: 'Vide ?', type: 'poll', poll: poll(0, [0, 0]) }),
-    ])
+    await renderReport([question({ prompt: 'Vide ?', type: 'poll', poll: poll(0, [0, 0]) })])
     const row = within(rowOf('Vide ?'))
     expect(row.getByText('Sondage, 0 participant')).toBeTruthy()
     expect(row.getByText('Aucun vote')).toBeTruthy()

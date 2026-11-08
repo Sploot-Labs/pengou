@@ -81,7 +81,10 @@ async function compose(...args) {
 async function limitesConteneur() {
   try {
     const app = JSON.parse((await capturer('docker', [...COMPOSE, 'config', '--format', 'json'])).sortie).services.app
-    return { cpus: Number(app.cpus) || null, memMo: Number(app.mem_limit) ? Math.round(Number(app.mem_limit) / 1024 ** 2) : null }
+    return {
+      cpus: Number(app.cpus) || null,
+      memMo: Number(app.mem_limit) ? Math.round(Number(app.mem_limit) / 1024 ** 2) : null,
+    }
   } catch {
     return { cpus: null, memMo: null }
   }
@@ -90,7 +93,9 @@ async function limitesConteneur() {
 async function contexteCampagne(scenario) {
   const commit = (await capturer('git', ['rev-parse', '--short', 'HEAD'])).sortie.trim() || 'inconnu'
   const modifie = (await capturer('git', ['status', '--porcelain'])).sortie.trim() !== ''
-  const [ncpu, memoire] = (await capturer('docker', ['info', '--format', '{{.NCPU}} {{.MemTotal}}'])).sortie.trim().split(' ')
+  const [ncpu, memoire] = (await capturer('docker', ['info', '--format', '{{.NCPU}} {{.MemTotal}}'])).sortie
+    .trim()
+    .split(' ')
   const horodatage = new Date().toISOString().slice(0, 19).replace(/:/g, '-')
   return {
     campagne: `${horodatage}-${commit}`,
@@ -127,14 +132,22 @@ async function attendreSante() {
 /** Lance charge.mjs pour un passage et renvoie son résumé, ou un résumé interrompu s'il n'en a pas écrit. */
 function lancerCharge(passage, libelle, cheminJson) {
   const args = [
-    '--cible', CIBLE,
-    '--joueurs', String(passage.joueurs),
-    '--parties', String(passage.parties),
-    '--cadence', String(passage.cadence),
-    '--questions', String(QUESTIONS),
-    '--libelle', libelle,
-    '--json', cheminJson,
-    '--docker', PROJET,
+    '--cible',
+    CIBLE,
+    '--joueurs',
+    String(passage.joueurs),
+    '--parties',
+    String(passage.parties),
+    '--cadence',
+    String(passage.cadence),
+    '--questions',
+    String(QUESTIONS),
+    '--libelle',
+    libelle,
+    '--json',
+    cheminJson,
+    '--docker',
+    PROJET,
   ]
   return new Promise((ok) => {
     const enfant = fork(fileURLToPath(new URL('./charge.mjs', import.meta.url)), args, { stdio: 'inherit' })
@@ -146,7 +159,12 @@ function lancerCharge(passage, libelle, cheminJson) {
       }
       ok({
         libelle,
-        parametres: { joueurs: passage.joueurs, parties: passage.parties, questions: QUESTIONS, cadence: passage.cadence },
+        parametres: {
+          joueurs: passage.joueurs,
+          parties: passage.parties,
+          questions: QUESTIONS,
+          cadence: passage.cadence,
+        },
         verdict: 'interrompu',
         erreur: `charge.mjs arrêté sans résumé (code ${code})`,
       })
@@ -158,7 +176,19 @@ async function comptesBase(sessionId) {
   const requete =
     `select (select count(*) from session_player where session_id = '${sessionId}'), ` +
     `(select count(*) from answer_record where session_id = '${sessionId}')`
-  const { code, sortie } = await capturer('docker', [...COMPOSE, 'exec', '-T', 'db', 'psql', '-U', 'pengou', '-d', 'pengou', '-tAc', requete])
+  const { code, sortie } = await capturer('docker', [
+    ...COMPOSE,
+    'exec',
+    '-T',
+    'db',
+    'psql',
+    '-U',
+    'pengou',
+    '-d',
+    'pengou',
+    '-tAc',
+    requete,
+  ])
   if (code !== 0) return null
   const [joueurs, reponses] = sortie.trim().split('|').map(Number)
   return { joueurs, reponses }
@@ -175,7 +205,8 @@ async function verifierCoherence(resume) {
     let concorde = true
     for (const partie of resume.parties) {
       const comptes = await comptesBase(partie.sessionId)
-      if (!comptes || comptes.joueurs !== partie.rejoints || comptes.reponses !== partie.reponsesAcceptees) concorde = false
+      if (!comptes || comptes.joueurs !== partie.rejoints || comptes.reponses !== partie.reponsesAcceptees)
+        concorde = false
     }
     if (concorde) return true
     if (Date.now() >= fin) return false
@@ -268,7 +299,9 @@ async function main() {
   const comparaison = comparer(lignes, lireHistorique(HISTORIQUE))
   if (lignes.length > 0) ajouterHistorique(HISTORIQUE, lignes)
   console.log(`\n${ecrireResume(dossier, contexte, lignes, comparaison, arret)}`)
-  console.log(`${lignes.length} ligne(s) ajoutée(s) à ${relative(RACINE, HISTORIQUE)} : à committer pour garder cette campagne.`)
+  console.log(
+    `${lignes.length} ligne(s) ajoutée(s) à ${relative(RACINE, HISTORIQUE)} : à committer pour garder cette campagne.`,
+  )
 
   if (arret) process.exit(arret instanceof ArretPile ? 2 : 1)
   const enEchec = lignes.some((l) => l.verdict !== 'reussi' || l.coherence !== true)

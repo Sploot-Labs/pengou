@@ -7,8 +7,7 @@ import { ForgotPassword } from './ForgotPassword'
 let features = { mailEnabled: true, loading: false }
 vi.mock('../api/features', () => ({ useAuthFeatures: () => features }))
 
-const NEUTRE =
-  'Si un compte existe pour cette adresse, un e-mail vient de partir. Pensez à vérifier les indésirables.'
+const NEUTRE = 'Si un compte existe pour cette adresse, un e-mail vient de partir. Pensez à vérifier les indésirables.'
 
 const fetchMock = vi.fn()
 
@@ -46,9 +45,11 @@ describe('ForgotPassword', () => {
   it("sans envoi d'e-mails sur l'instance : explique et renvoie vers la connexion, sans formulaire", () => {
     features = { mailEnabled: false, loading: false }
     renderScreen()
-    expect(screen.getByText(
-      "La réinitialisation par e-mail n'est pas disponible sur cette instance. Contactez l'administrateur.",
-    )).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        "La réinitialisation par e-mail n'est pas disponible sur cette instance. Contactez l'administrateur.",
+      ),
+    ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Retour à la connexion' })).toHaveAttribute('href', '/login')
     expect(screen.queryByLabelText('E-mail')).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'Envoyer le lien' })).not.toBeInTheDocument()
@@ -67,9 +68,7 @@ describe('ForgotPassword', () => {
     expect(screen.queryByText(/Vouliez-vous dire/)).not.toBeInTheDocument()
     fireEvent.blur(input)
     const suggestion = screen.getByRole('button', { name: 'camille@gmail.com' })
-    expect(suggestion.closest('[aria-live="polite"]')).toHaveTextContent(
-      'Vouliez-vous dire camille@gmail.com ?',
-    )
+    expect(suggestion.closest('[aria-live="polite"]')).toHaveTextContent('Vouliez-vous dire camille@gmail.com ?')
     fireEvent.click(suggestion)
     expect(input).toHaveValue('camille@gmail.com')
     expect(screen.queryByText(/Vouliez-vous dire/)).not.toBeInTheDocument()
@@ -100,9 +99,7 @@ describe('ForgotPassword', () => {
     renderScreen()
     typeEmail('camille@gmail.com')
     submit()
-    expect(await screen.findByRole('alert')).toHaveTextContent(
-      'Trop de demandes, réessayez dans quelques minutes.',
-    )
+    expect(await screen.findByRole('alert')).toHaveTextContent('Trop de demandes, réessayez dans quelques minutes.')
     expect(screen.queryByText(NEUTRE)).not.toBeInTheDocument()
   })
 

@@ -7,10 +7,10 @@ const themesCss = readFileSync(themesCssPath, 'utf-8')
 
 describe('themes.css', () => {
   it("scope les rôles produit sur l'attribut du wrapper, pas sur :root", () => {
-    expect(themesCss).toContain("[data-theme='app']")
-    expect(themesCss).toContain("[data-theme='scene']")
-    expect(themesCss).toContain("[data-scheme='dark']")
-    expect(themesCss).toContain("[data-scheme='light']")
+    expect(themesCss).toContain('[data-theme="app"]')
+    expect(themesCss).toContain('[data-theme="scene"]')
+    expect(themesCss).toContain('[data-scheme="dark"]')
+    expect(themesCss).toContain('[data-scheme="light"]')
   })
 
   it('ne réintroduit pas le sélecteur cassé :root[data-…] (ne matche jamais un wrapper imbriqué)', () => {
@@ -19,10 +19,18 @@ describe('themes.css', () => {
 
   it('définit les rôles réponse, podium, focus et bouton secondaire dans les deux blocs (source unique)', () => {
     const roles = [
-      '--ans-triangle', '--ans-diamond', '--ans-circle', '--ans-square',
-      '--gold', '--silver', '--bronze', '--focus', '--ghost-line', '--ghost-ink',
+      '--ans-triangle',
+      '--ans-diamond',
+      '--ans-circle',
+      '--ans-square',
+      '--gold',
+      '--silver',
+      '--bronze',
+      '--focus',
+      '--ghost-line',
+      '--ghost-ink',
     ]
-    for (const selector of ["[data-theme='app']", "[data-theme='scene']"]) {
+    for (const selector of ['[data-theme="app"]', '[data-theme="scene"]']) {
       const start = themesCss.indexOf(selector)
       expect(start, `bloc ${selector} introuvable`).toBeGreaterThanOrEqual(0)
       const block = themesCss.slice(start, themesCss.indexOf('}', start))
@@ -44,10 +52,7 @@ describe('themes.css', () => {
 })
 
 it("tokens.css ne définit plus de primitive couleur de l'ancienne palette", () => {
-  const tokensCss = readFileSync(
-    fileURLToPath(new URL('../tokens.css', import.meta.url)),
-    'utf-8',
-  ).toLowerCase()
+  const tokensCss = readFileSync(fileURLToPath(new URL('../tokens.css', import.meta.url)), 'utf-8').toLowerCase()
   expect(tokensCss).not.toContain('#ff3d7f') // ancien rose
   expect(tokensCss).not.toContain('#7a5cff') // ancien violet
   expect(tokensCss).not.toContain('#0e1230') // ancien midnight bleuté
@@ -56,18 +61,12 @@ it("tokens.css ne définit plus de primitive couleur de l'ancienne palette", () 
 })
 
 it("prototype.css ne réintroduit pas l'ancien rose (hex ni rgba)", () => {
-  const prototypeCss = readFileSync(
-    fileURLToPath(new URL('../prototype.css', import.meta.url)),
-    'utf-8',
-  ).toLowerCase()
+  const prototypeCss = readFileSync(fileURLToPath(new URL('../prototype.css', import.meta.url)), 'utf-8').toLowerCase()
   expect(prototypeCss).not.toContain('#ff3d7f')
   expect(prototypeCss).not.toMatch(/rgba\(\s*255\s*,\s*61\s*,\s*127/)
 })
 
 it("la règle de couleur de lien de base ne s'applique qu'aux liens textuels (pas aux liens à classe)", () => {
-  const tokensCss = readFileSync(
-    fileURLToPath(new URL('../tokens.css', import.meta.url)),
-    'utf-8',
-  )
+  const tokensCss = readFileSync(fileURLToPath(new URL('../tokens.css', import.meta.url)), 'utf-8')
   expect(tokensCss).toContain('.prototype-root a:not([class])')
 })

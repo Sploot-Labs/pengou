@@ -68,9 +68,7 @@ describe('checkEmailDeliverable', () => {
         throw dnsError('ETIMEOUT')
       },
     })
-    expect(
-      await checkEmailDeliverable('camille.secret@example.org', { dns: true, resolver: r, logger }),
-    ).toBe('ok')
+    expect(await checkEmailDeliverable('camille.secret@example.org', { dns: true, resolver: r, logger })).toBe('ok')
     expect(warn).toHaveBeenCalledTimes(1)
     expect(JSON.stringify(warn.mock.calls)).not.toContain('camille')
   })
@@ -78,17 +76,13 @@ describe('checkEmailDeliverable', () => {
   it('laisse passer quand le résolveur ne répond jamais, après timeoutMs', async () => {
     const never = () => new Promise<never>(() => {})
     const r = { resolveMx: never, resolve4: never, resolve6: never }
-    expect(
-      await checkEmailDeliverable('a@example.org', { dns: true, resolver: r, timeoutMs: 10 }),
-    ).toBe('ok')
+    expect(await checkEmailDeliverable('a@example.org', { dns: true, resolver: r, timeoutMs: 10 })).toBe('ok')
   })
 
   it('normalise la casse et les espaces avant la recherche', async () => {
     const resolveMx = vi.fn(async () => [{ exchange: 'mx.gmail.com', priority: 5 }])
     const r = resolver({ resolveMx })
-    expect(
-      await checkEmailDeliverable('  Camille+pengou@Gmail.COM ', { dns: true, resolver: r }),
-    ).toBe('ok')
+    expect(await checkEmailDeliverable('  Camille+pengou@Gmail.COM ', { dns: true, resolver: r })).toBe('ok')
     expect(resolveMx).toHaveBeenCalledWith('gmail.com')
   })
 })

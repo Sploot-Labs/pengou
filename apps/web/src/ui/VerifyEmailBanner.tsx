@@ -72,11 +72,7 @@ export function VerifyEmailBanner() {
           </button>
           <span role="status">{state === 'sent' ? 'E-mail envoyé' : ''}</span>
           {error && <span role="alert">{error}</span>}
-          <button
-            type="button"
-            className="ab-verify-banner__action"
-            onClick={dismiss}
-          >
+          <button type="button" className="ab-verify-banner__action" onClick={dismiss}>
             Fermer
           </button>
         </section>

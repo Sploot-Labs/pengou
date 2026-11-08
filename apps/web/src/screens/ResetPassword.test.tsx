@@ -44,10 +44,7 @@ describe('ResetPassword', () => {
     (url) => {
       renderAt(url)
       expect(screen.getByText('Ce lien a expiré ou a déjà servi.')).toBeInTheDocument()
-      expect(screen.getByRole('link', { name: /nouvelle demande/i })).toHaveAttribute(
-        'href',
-        '/forgot-password',
-      )
+      expect(screen.getByRole('link', { name: /nouvelle demande/i })).toHaveAttribute('href', '/forgot-password')
       expect(screen.queryByLabelText('Nouveau mot de passe')).not.toBeInTheDocument()
     },
   )
@@ -92,15 +89,10 @@ describe('ResetPassword', () => {
   })
 
   it('traite un refus 400 comme un lien expiré', async () => {
-    fetchMock.mockResolvedValueOnce(
-      new Response(JSON.stringify({ message: 'Invalid token' }), { status: 400 }),
-    )
+    fetchMock.mockResolvedValueOnce(new Response(JSON.stringify({ message: 'Invalid token' }), { status: 400 }))
     renderAt('/reset-password?token=abc')
     fill('motdepasse1', 'motdepasse1')
     expect(await screen.findByText('Ce lien a expiré ou a déjà servi.')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /nouvelle demande/i })).toHaveAttribute(
-      'href',
-      '/forgot-password',
-    )
+    expect(screen.getByRole('link', { name: /nouvelle demande/i })).toHaveAttribute('href', '/forgot-password')
   })
 })

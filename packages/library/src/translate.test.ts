@@ -47,7 +47,11 @@ const table = (questions: Record<string, unknown>, quizzes: Record<string, unkno
 describe('translatePack', () => {
   it('traduit un QCM en gardant la place de la bonne réponse', () => {
     const pack: Pack = { source: SOURCE, questions: [mcq('q1')], quizzes: [] }
-    const { pack: out, missing } = translatePack(pack, table({ q1: { prompt: 'P', options: ['a', 'b', 'c', 'd'] } }), 'en')
+    const { pack: out, missing } = translatePack(
+      pack,
+      table({ q1: { prompt: 'P', options: ['a', 'b', 'c', 'd'] } }),
+      'en',
+    )
     expect(missing).toEqual([])
     expect(out?.source).toEqual({ ...SOURCE, name: 'X (traduction Sploot Labs)' })
     const q = out?.questions[0]
@@ -102,14 +106,22 @@ describe('translatePack', () => {
 
   it('signale un quiz entièrement traduit mais sans entrée de quiz', () => {
     const pack: Pack = { source: SOURCE, questions: [mcq('q1')], quizzes: [quiz('z1', ['q1'])] }
-    const { pack: out, missing } = translatePack(pack, table({ q1: { prompt: 'P', options: ['a', 'b', 'c', 'd'] } }), 'en')
+    const { pack: out, missing } = translatePack(
+      pack,
+      table({ q1: { prompt: 'P', options: ['a', 'b', 'c', 'd'] } }),
+      'en',
+    )
     expect(missing).toEqual(['z1'])
     expect(out?.quizzes).toEqual([])
   })
 
   it('liste les questions sans entrée dans missing', () => {
     const pack: Pack = { source: SOURCE, questions: [mcq('q1'), mcq('q2')], quizzes: [] }
-    const { pack: out, missing } = translatePack(pack, table({ q1: { prompt: 'P', options: ['a', 'b', 'c', 'd'] } }), 'en')
+    const { pack: out, missing } = translatePack(
+      pack,
+      table({ q1: { prompt: 'P', options: ['a', 'b', 'c', 'd'] } }),
+      'en',
+    )
     expect(missing).toEqual(['q2'])
     expect(out?.questions.map((q) => q.id)).toEqual(['q1-en'])
   })

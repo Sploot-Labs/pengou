@@ -8,12 +8,20 @@ import { loadConfig } from '@splootlabs/shared'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
 
-beforeAll(async () => { ctx = await startTestDb(); await runMigrations(ctx.db) }, 120_000)
-afterAll(async () => { await ctx?.stop() })
+beforeAll(async () => {
+  ctx = await startTestDb()
+  await runMigrations(ctx.db)
+}, 120_000)
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 describe('requireUser', () => {
   it('protège une route : 401 sans session', async () => {
-    const auth = createAuth(ctx.db, { secret: 'test-secret-at-least-32-chars-long!!', baseURL: 'http://localhost:3000' })
+    const auth = createAuth(ctx.db, {
+      secret: 'test-secret-at-least-32-chars-long!!',
+      baseURL: 'http://localhost:3000',
+    })
     const app = await buildServer(loadConfig({ NODE_ENV: 'test' }), { dbStatus: () => 'up' })
     await registerAuth(app, auth)
     registerRequireUser(app, auth)
@@ -27,7 +35,11 @@ describe('requireUser', () => {
 describe('resolveContextOr403 : ne masque QUE le refus de membership en 403', () => {
   it('mode multi, sans membership sur le tenant demandé → 403 (pas 500)', async () => {
     const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'multi' })
-    const auth = createAuth(ctx.db, { secret: 'test-secret-at-least-32-chars-long!!', baseURL: 'http://localhost:3000', tenancyMode: config.tenancyMode })
+    const auth = createAuth(ctx.db, {
+      secret: 'test-secret-at-least-32-chars-long!!',
+      baseURL: 'http://localhost:3000',
+      tenancyMode: config.tenancyMode,
+    })
     const app = await buildServer(config, { dbStatus: () => 'up' })
     await registerAuth(app, auth)
     registerRequireUser(app, auth)
@@ -62,7 +74,11 @@ describe('resolveContextOr403 : ne masque QUE le refus de membership en 403', ()
 
   it('mode multi, erreur NON liée au membership (tenant explicite manquant) → 500, pas 403', async () => {
     const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'multi' })
-    const auth = createAuth(ctx.db, { secret: 'test-secret-at-least-32-chars-long!!', baseURL: 'http://localhost:3000', tenancyMode: config.tenancyMode })
+    const auth = createAuth(ctx.db, {
+      secret: 'test-secret-at-least-32-chars-long!!',
+      baseURL: 'http://localhost:3000',
+      tenancyMode: config.tenancyMode,
+    })
     const app = await buildServer(config, { dbStatus: () => 'up' })
     await registerAuth(app, auth)
     registerRequireUser(app, auth)

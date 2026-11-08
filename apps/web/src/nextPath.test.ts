@@ -5,12 +5,18 @@ describe('safeNextPath', () => {
   it('accepte un chemin relatif avec sa requête', () => {
     expect(safeNextPath('/invitations/abc?v=xyz')).toBe('/invitations/abc?v=xyz')
   })
-  it.each([null, undefined, '', 'https://evil.example', '//evil.example', String.raw`/\evil.example`, 'invitations/abc', '/a\nb'])(
-    'refuse %j',
-    (raw) => {
-      expect(safeNextPath(raw)).toBeNull()
-    },
-  )
+  it.each([
+    null,
+    undefined,
+    '',
+    'https://evil.example',
+    '//evil.example',
+    String.raw`/\evil.example`,
+    'invitations/abc',
+    '/a\nb',
+  ])('refuse %j', (raw) => {
+    expect(safeNextPath(raw)).toBeNull()
+  })
 })
 
 describe('nextQuery', () => {

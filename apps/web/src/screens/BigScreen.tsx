@@ -14,7 +14,14 @@ import { isScoredType, pollPercent } from '@splootlabs/quiz'
 import { buildDistributionRows, pollRows, type QuestionKind } from '../realtime/distribution'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { ContentSource } from '../api/quizzes'
-import type { PodiumPayload, PollView, RankingEntry, ReadingView, SessionRelaunchedView, WordcloudView } from '../realtime/contracts'
+import type {
+  PodiumPayload,
+  PollView,
+  RankingEntry,
+  ReadingView,
+  SessionRelaunchedView,
+  WordcloudView,
+} from '../realtime/contracts'
 import { BigWordCloud } from '../ui/wordcloud/BigWordCloud'
 import { wordcloudSummary } from '../ui/WordCloud'
 import { hardReload } from '../realtime/hardReload'
@@ -70,7 +77,6 @@ interface RevealPayload {
   /** Présent pour un sondage seulement : sa répartition (pas de bonne réponse). */
   poll?: PollView
 }
-
 
 interface LobbyPlayer {
   id: string
@@ -442,9 +448,7 @@ function BigScreenInner() {
         <p className="join-error" role="alert">
           {joinError}
         </p>
-        <p style={{ color: 'var(--ink-dim)' }}>
-          Générez un nouveau lien depuis le contrôleur hôte (« Grand écran »).
-        </p>
+        <p style={{ color: 'var(--ink-dim)' }}>Générez un nouveau lien depuis le contrôleur hôte (« Grand écran »).</p>
       </main>
     )
   }
@@ -558,10 +562,7 @@ function BigScreenInner() {
     return (
       <div className="big-distribution" style={{ ['--dist-cols' as string]: String(rows.length) }}>
         {rows.map((row) => (
-          <div
-            className={`big-distribution__col${row.correct ? ' big-distribution__col--correct' : ''}`}
-            key={row.key}
-          >
+          <div className={`big-distribution__col${row.correct ? ' big-distribution__col--correct' : ''}`} key={row.key}>
             <div className="big-distribution__bar-track">
               <div
                 // La proportion (row.count / maxCount) est encodée UNE SEULE fois, par le
@@ -593,10 +594,15 @@ function BigScreenInner() {
                 <span className="big-distribution__count">
                   {row.count} vote{row.count > 1 ? 's' : ''}
                 </span>
-                <span className="big-distribution__count">{pollPercent(row.count, poll.voters)}{' '}%</span>
+                <span className="big-distribution__count">
+                  {pollPercent(row.count, poll.voters)}
+                  {' '}%
+                </span>
               </>
             ) : (
-              <span className="big-distribution__count">{row.count} réponse{row.count > 1 ? 's' : ''}</span>
+              <span className="big-distribution__count">
+                {row.count} réponse{row.count > 1 ? 's' : ''}
+              </span>
             )}
           </div>
         ))}
@@ -630,211 +636,227 @@ function BigScreenInner() {
       )}
 
       <PhaseTransition phaseKey={cloudLive ? `cloud-live-${question?.id}` : phase} className="big-phase-layer">
-      {phase === 'lobby' && (
-        <div className="big-lobby">
-          <Logo />
-          <div>
-            <h1 className="ab-hero-title" ref={focusPhaseHeading} tabIndex={-1}>
-              {quizTitle}
-            </h1>
-            <p className="big-lobby__tagline">Le quiz en direct, open-source.</p>
-            <p className="big-lobby__proof">
-              Rejoignez en 5 secondes, aucune appli à installer. Vos données restent chez vous.
+        {phase === 'lobby' && (
+          <div className="big-lobby">
+            <Logo />
+            <div>
+              <h1 className="ab-hero-title" ref={focusPhaseHeading} tabIndex={-1}>
+                {quizTitle}
+              </h1>
+              <p className="big-lobby__tagline">Le quiz en direct, open-source.</p>
+              <p className="big-lobby__proof">
+                Rejoignez en 5 secondes, aucune appli à installer. Vos données restent chez vous.
+              </p>
+            </div>
+            {pin ? (
+              <div className="big-lobby__join">
+                <PinDisplay pin={pin} />
+                <JoinInvite pin={pin} />
+              </div>
+            ) : (
+              <p style={{ color: 'var(--ink-dim)' }}>PIN indisponible, demandez-le à l'hôte.</p>
+            )}
+
+            {players.length === 0 ? (
+              <p className="big-lobby__empty">En attente de la colonie… Saisissez le code banquise pour rejoindre.</p>
+            ) : (
+              <ul className="big-players" aria-label="Joueurs ayant rejoint la partie">
+                {players.map((p) => (
+                  <li key={p.id} className={`big-players__chip${!p.connected ? ' big-players__chip--off' : ''}`}>
+                    {p.nickname}
+                    {!p.connected && (
+                      <span className="big-players__badge">
+                        <span aria-hidden="true">⚠</span> déconnecté
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <p role="status" aria-live="polite">
+              {announcement}
             </p>
           </div>
-          {pin ? (
-            <div className="big-lobby__join">
-              <PinDisplay pin={pin} />
-              <JoinInvite pin={pin} />
+        )}
+
+        {phase === 'reading' && reading && (
+          <div className="big-live big-live--reading">
+            <div className="big-live__header">
+              <span className="host-badge">Lecture en cours</span>
+              <span className="big-live__reading-count" aria-hidden="true">
+                {readingRemaining ?? reading.readingTime} s
+              </span>
             </div>
-          ) : (
-            <p style={{ color: 'var(--ink-dim)' }}>PIN indisponible, demandez-le à l'hôte.</p>
-          )}
 
-          {players.length === 0 ? (
-            <p className="big-lobby__empty">En attente de la colonie… Saisissez le code banquise pour rejoindre.</p>
-          ) : (
-            <ul className="big-players" aria-label="Joueurs ayant rejoint la partie">
-              {players.map((p) => (
-                <li key={p.id} className={`big-players__chip${!p.connected ? ' big-players__chip--off' : ''}`}>
-                  {p.nickname}
-                  {!p.connected && (
-                    <span className="big-players__badge">
-                      <span aria-hidden="true">⚠</span> déconnecté
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          )}
-          <p role="status" aria-live="polite">
-            {announcement}
-          </p>
-        </div>
-      )}
-
-      {phase === 'reading' && reading && (
-        <div className="big-live big-live--reading">
-          <div className="big-live__header">
-            <span className="host-badge">Lecture en cours</span>
-            <span className="big-live__reading-count" aria-hidden="true">
-              {readingRemaining ?? reading.readingTime} s
-            </span>
-          </div>
-
-          {/* L'énoncé SEUL — aucune option/réponse : le payload `question:reading`
+            {/* L'énoncé SEUL — aucune option/réponse : le payload `question:reading`
               n'en contient d'ailleurs pas (voir `ReadingView` ci-dessus, anti-triche). */}
-          <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
-            {reading.prompt}
-          </h1>
+            <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
+              {reading.prompt}
+            </h1>
 
-          {/* Décompte textuel (pas seulement le badge décoratif aria-hidden
+            {/* Décompte textuel (pas seulement le badge décoratif aria-hidden
               ci-dessus) — RGAA : la valeur doit toujours être lisible, pas
               seulement visible/animée. `role="status"`/`aria-live="polite"`
               annonce la lecture en cours sans re-annoncer chaque tick (le
               texte du nœud change, mais son rôle status ne relit pas à
               chaque frame chez tous les lecteurs d'écran — cohérent avec le
               chrono de réponse, non annoncé en continu lui non plus). */}
-          <p className="big-live__answered" role="status" aria-live="polite">
-            Lecture : {readingRemaining ?? reading.readingTime} s restantes
-          </p>
-        </div>
-      )}
-
-      {/* Nuage : question et révélation partagent le même sous-arbre (et la même clé de transition),
-          pour que le nuage reste monté et que sa disposition en direct soit figée à la révélation. */}
-      {cloudLive && question && (
-        <div className="big-live big-live--cloud">
-          {/* En-tête compact sur une ligne. À la révélation, la place du chrono reste réservée :
-              la question et le nuage gardent leur taille et leur position (la salle garde ses repères). */}
-          <div className="big-live__header">
-            <span className="host-badge">{phase === 'reveal' ? 'Révélation' : 'Question en cours'}</span>
-            <h1 className="big-live__prompt" key={phase} ref={focusPhaseHeading} tabIndex={-1}>
-              {question.prompt}
-            </h1>
-            {phase === 'question' ? (
-              <TimerRing remainingSeconds={remaining ?? question.timeLimit} totalSeconds={question.timeLimit} size={112} large />
-            ) : (
-              <span className="big-live__ring-slot" aria-hidden="true" />
-            )}
-          </div>
-
-          {renderWordcloud(
-            phase === 'reveal' && autoRemaining !== null && (
-              <p className="big-auto-countdown" role="status" aria-live="polite">
-                Question suivante dans {autoRemaining} s
-              </p>
-            ),
-          )}
-        </div>
-      )}
-
-      {phase === 'question' && question && !cloudLive && (
-        <div className="big-live">
-          <div className="big-live__header">
-            <span className="host-badge">Question en cours</span>
-            <TimerRing remainingSeconds={remaining ?? question.timeLimit} totalSeconds={question.timeLimit} size={180} large />
-          </div>
-
-          <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
-            {question.prompt}
-          </h1>
-
-          {question.type === 'poll' && (question.payload as PollShowPayload).multiple && (
-            <p className="big-live__answered">Plusieurs réponses possibles</p>
-          )}
-
-          {renderLiveAnswers()}
-
-          {question.type !== 'wordcloud' && (
-            <p className="big-live__answered">
-              {progressAnswered} / {players.length} {progressAnswered <= 1 ? 'a' : 'ont'} répondu
+            <p className="big-live__answered" role="status" aria-live="polite">
+              Lecture : {readingRemaining ?? reading.readingTime} s restantes
             </p>
-          )}
-        </div>
-      )}
+          </div>
+        )}
 
-      {phase === 'reveal' && !cloudLive && (
-        <div className="big-live">
-          {question ? (
-            <>
-              <div className="big-live__header">
-                <span className="host-badge">Révélation</span>
-              </div>
-
-              <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
+        {/* Nuage : question et révélation partagent le même sous-arbre (et la même clé de transition),
+          pour que le nuage reste monté et que sa disposition en direct soit figée à la révélation. */}
+        {cloudLive && question && (
+          <div className="big-live big-live--cloud">
+            {/* En-tête compact sur une ligne. À la révélation, la place du chrono reste réservée :
+              la question et le nuage gardent leur taille et leur position (la salle garde ses repères). */}
+            <div className="big-live__header">
+              <span className="host-badge">{phase === 'reveal' ? 'Révélation' : 'Question en cours'}</span>
+              <h1 className="big-live__prompt" key={phase} ref={focusPhaseHeading} tabIndex={-1}>
                 {question.prompt}
               </h1>
+              {phase === 'question' ? (
+                <TimerRing
+                  remainingSeconds={remaining ?? question.timeLimit}
+                  totalSeconds={question.timeLimit}
+                  size={112}
+                  large
+                />
+              ) : (
+                <span className="big-live__ring-slot" aria-hidden="true" />
+              )}
+            </div>
 
-              {renderDistribution()}
-
-              {/* Question non notée (sondage, nuage) : l'écran reste sur la révélation, sans étape
-                  classement, donc le compte à rebours d'enchaînement s'affiche ici. */}
-              {!isScoredType(question.type) && autoRemaining !== null && (
+            {renderWordcloud(
+              phase === 'reveal' && autoRemaining !== null && (
                 <p className="big-auto-countdown" role="status" aria-live="polite">
                   Question suivante dans {autoRemaining} s
                 </p>
-              )}
-            </>
-          ) : (
-            // Repli DÉFENSIF (cas devenu rare depuis le lot hardening) : le serveur rejoue
-            // désormais `question:show` à un écran qui rejoint en pleine question
-            // (`replayCurrentQuestionTo`, appelé sur `screen:join` ET `screen:reconnect`,
-            // game-gateway.ts) — l'écran a donc normalement la question. Ce repli ne subsiste
-            // que pour la fenêtre de course résiduelle (ex. `question:reveal` traité avant le
-            // `question:show` rejoué) : mieux vaut ce message honnête qu'un écran vide. La
-            // bascule auto reveal→scoreboard ci-dessus ne dépend pas de `question`.
+              ),
+            )}
+          </div>
+        )}
+
+        {phase === 'question' && question && !cloudLive && (
+          <div className="big-live">
+            <div className="big-live__header">
+              <span className="host-badge">Question en cours</span>
+              <TimerRing
+                remainingSeconds={remaining ?? question.timeLimit}
+                totalSeconds={question.timeLimit}
+                size={180}
+                large
+              />
+            </div>
+
             <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
-              Résultat indisponible pour cette question, la suivante arrive.
+              {question.prompt}
             </h1>
-          )}
-        </div>
-      )}
 
-      {phase === 'scoreboard' && (
-        <div className="big-scoreboard">
-          <h1 className="ab-hero-title" ref={focusPhaseHeading} tabIndex={-1}>
-            Classement
-          </h1>
-          {autoRemaining !== null && (
-            <p className="big-auto-countdown" role="status" aria-live="polite">
-              Question suivante dans {autoRemaining} s
-            </p>
-          )}
-          {ranking.length === 0 ? (
-            <p style={{ color: 'var(--ink-dim)' }}>Le classement s'affichera après la première question.</p>
+            {question.type === 'poll' && (question.payload as PollShowPayload).multiple && (
+              <p className="big-live__answered">Plusieurs réponses possibles</p>
+            )}
+
+            {renderLiveAnswers()}
+
+            {question.type !== 'wordcloud' && (
+              <p className="big-live__answered">
+                {progressAnswered} / {players.length} {progressAnswered <= 1 ? 'a' : 'ont'} répondu
+              </p>
+            )}
+          </div>
+        )}
+
+        {phase === 'reveal' && !cloudLive && (
+          <div className="big-live">
+            {question ? (
+              <>
+                <div className="big-live__header">
+                  <span className="host-badge">Révélation</span>
+                </div>
+
+                <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
+                  {question.prompt}
+                </h1>
+
+                {renderDistribution()}
+
+                {/* Question non notée (sondage, nuage) : l'écran reste sur la révélation, sans étape
+                  classement, donc le compte à rebours d'enchaînement s'affiche ici. */}
+                {!isScoredType(question.type) && autoRemaining !== null && (
+                  <p className="big-auto-countdown" role="status" aria-live="polite">
+                    Question suivante dans {autoRemaining} s
+                  </p>
+                )}
+              </>
+            ) : (
+              // Repli DÉFENSIF (cas devenu rare depuis le lot hardening) : le serveur rejoue
+              // désormais `question:show` à un écran qui rejoint en pleine question
+              // (`replayCurrentQuestionTo`, appelé sur `screen:join` ET `screen:reconnect`,
+              // game-gateway.ts) — l'écran a donc normalement la question. Ce repli ne subsiste
+              // que pour la fenêtre de course résiduelle (ex. `question:reveal` traité avant le
+              // `question:show` rejoué) : mieux vaut ce message honnête qu'un écran vide. La
+              // bascule auto reveal→scoreboard ci-dessus ne dépend pas de `question`.
+              <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
+                Résultat indisponible pour cette question, la suivante arrive.
+              </h1>
+            )}
+          </div>
+        )}
+
+        {phase === 'scoreboard' && (
+          <div className="big-scoreboard">
+            <h1 className="ab-hero-title" ref={focusPhaseHeading} tabIndex={-1}>
+              Classement
+            </h1>
+            {autoRemaining !== null && (
+              <p className="big-auto-countdown" role="status" aria-live="polite">
+                Question suivante dans {autoRemaining} s
+              </p>
+            )}
+            {ranking.length === 0 ? (
+              <p style={{ color: 'var(--ink-dim)' }}>Le classement s'affichera après la première question.</p>
+            ) : (
+              <ol className="big-scoreboard__list">
+                {ranking.slice(0, 5).map((p, index) => (
+                  <li key={p.playerId} className="big-scoreboard__row">
+                    <span className={`big-scoreboard__rank${index === 0 ? ' big-scoreboard__rank--first' : ''}`}>
+                      {index + 1}
+                    </span>
+                    <span className="big-scoreboard__name">{p.nickname}</span>
+                    <span className="big-scoreboard__score">
+                      <CountUp value={p.score} format={(n) => `${n} pts`} />
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </div>
+        )}
+
+        {phase === 'podium' &&
+          (hasScoredQuestions ? (
+            <div style={{ position: 'relative' }}>
+              <Confetti active />
+              <PodiumView
+                quizTitle={quizTitle}
+                top={podiumTop}
+                fullRanking={ranking}
+                headingRef={focusPhaseHeading}
+                sources={podiumSources}
+                showConversionFooter
+              />
+            </div>
           ) : (
-            <ol className="big-scoreboard__list">
-              {ranking.slice(0, 5).map((p, index) => (
-                <li key={p.playerId} className="big-scoreboard__row">
-                  <span className={`big-scoreboard__rank${index === 0 ? ' big-scoreboard__rank--first' : ''}`}>
-                    {index + 1}
-                  </span>
-                  <span className="big-scoreboard__name">{p.nickname}</span>
-                  <span className="big-scoreboard__score">
-                    <CountUp value={p.score} format={(n) => `${n} pts`} />
-                  </span>
-                </li>
-              ))}
-            </ol>
-          )}
-        </div>
-      )}
-
-      {phase === 'podium' && (
-        hasScoredQuestions ? (
-          <div style={{ position: 'relative' }}>
-            <Confetti active />
-            <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={focusPhaseHeading} sources={podiumSources} showConversionFooter />
-          </div>
-        ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-5)' }}>
-            <ClosingView quizTitle={quizTitle} headingRef={focusPhaseHeading} audience="room" />
-            <PodiumCredits sources={podiumSources} />
-            <ConversionFooter />
-          </div>
-        )
-      )}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-5)' }}>
+              <ClosingView quizTitle={quizTitle} headingRef={focusPhaseHeading} audience="room" />
+              <PodiumCredits sources={podiumSources} />
+              <ConversionFooter />
+            </div>
+          ))}
       </PhaseTransition>
     </main>
   )

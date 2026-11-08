@@ -16,7 +16,7 @@ export type LibraryFilters = {
 
 export type LibraryQuestion = {
   id: string
-  type: typeof libraryQuestion.$inferSelect['type']
+  type: (typeof libraryQuestion.$inferSelect)['type']
   prompt: string
   payload: unknown
   theme: string
@@ -56,7 +56,10 @@ const questionColumns = {
 }
 
 // Compte des questions d'un quiz dans la jointure de liaison.
-const questionCount = sql<number>`(select count(*) from ${libraryQuizQuestion} inner join ${libraryQuestion} on ${libraryQuestion.id} = ${libraryQuizQuestion.questionId} inner join ${libraryTheme} on ${libraryTheme.id} = ${libraryQuestion.themeId} where ${libraryQuizQuestion.quizId} = ${libraryQuiz.id} and ${libraryTheme.hidden} = false)`.mapWith(Number)
+const questionCount =
+  sql<number>`(select count(*) from ${libraryQuizQuestion} inner join ${libraryQuestion} on ${libraryQuestion.id} = ${libraryQuizQuestion.questionId} inner join ${libraryTheme} on ${libraryTheme.id} = ${libraryQuestion.themeId} where ${libraryQuizQuestion.quizId} = ${libraryQuiz.id} and ${libraryTheme.hidden} = false)`.mapWith(
+    Number,
+  )
 
 const quizColumns = {
   id: libraryQuiz.id,
@@ -76,7 +79,10 @@ function escapeLike(text: string): string {
 }
 
 // `enfants` et `adultes` incluent aussi `tous`.
-function audienceFilter(column: typeof libraryQuestion.audience | typeof libraryQuiz.audience, audience: Audience): SQL | undefined {
+function audienceFilter(
+  column: typeof libraryQuestion.audience | typeof libraryQuiz.audience,
+  audience: Audience,
+): SQL | undefined {
   return audience === 'tous' ? eq(column, 'tous') : or(eq(column, audience), eq(column, 'tous'))
 }
 
@@ -106,13 +112,17 @@ function quizWhere(filters: Omit<LibraryFilters, 'search'>, extra: (SQL | undefi
 
 /** Thèmes visibles, triés par libellé. */
 export async function listLibraryThemes(db: Db): Promise<{ id: string; label: string }[]> {
-  return db.select({ id: libraryTheme.id, label: libraryTheme.label })
-    .from(libraryTheme).where(eq(libraryTheme.hidden, false)).orderBy(asc(libraryTheme.label))
+  return db
+    .select({ id: libraryTheme.id, label: libraryTheme.label })
+    .from(libraryTheme)
+    .where(eq(libraryTheme.hidden, false))
+    .orderBy(asc(libraryTheme.label))
 }
 
 /** Langues présentes dans les questions des thèmes visibles. */
 export async function listLibraryLanguages(db: Db): Promise<string[]> {
-  const rows = await db.selectDistinct({ language: libraryQuestion.language })
+  const rows = await db
+    .selectDistinct({ language: libraryQuestion.language })
     .from(libraryQuestion)
     .innerJoin(libraryTheme, eq(libraryTheme.id, libraryQuestion.themeId))
     .where(eq(libraryTheme.hidden, false))
@@ -127,10 +137,17 @@ export async function searchLibraryQuestions(
 ): Promise<{ items: LibraryQuestion[]; total: number }> {
   const where = questionWhere(filters)
   const [items, [{ total }]] = await Promise.all([
-    db.select(questionColumns).from(libraryQuestion)
+    db
+      .select(questionColumns)
+      .from(libraryQuestion)
       .innerJoin(libraryTheme, eq(libraryTheme.id, libraryQuestion.themeId))
-      .where(where).orderBy(asc(libraryQuestion.id)).limit(page.limit).offset(page.offset),
-    db.select({ total: sql<number>`count(*)`.mapWith(Number) }).from(libraryQuestion)
+      .where(where)
+      .orderBy(asc(libraryQuestion.id))
+      .limit(page.limit)
+      .offset(page.offset),
+    db
+      .select({ total: sql<number>`count(*)`.mapWith(Number) })
+      .from(libraryQuestion)
       .innerJoin(libraryTheme, eq(libraryTheme.id, libraryQuestion.themeId))
       .where(where),
   ])
@@ -141,10 +158,15 @@ export async function listLibraryQuizzes(
   db: Db,
   filters: Omit<LibraryFilters, 'search'>,
 ): Promise<LibraryQuizSummary[]> {
-  return db.select(quizColumns).from(libraryQuiz)
-    .innerJoin(libraryTheme, eq(libraryTheme.id, libraryQuiz.themeId))
-    // Un quiz dont toutes les questions sont dans des thèmes masqués n'est pas listé.
-    .where(quizWhere(filters, [sql`${questionCount} > 0`])).orderBy(asc(libraryQuiz.title), asc(libraryQuiz.id))
+  return (
+    db
+      .select(quizColumns)
+      .from(libraryQuiz)
+      .innerJoin(libraryTheme, eq(libraryTheme.id, libraryQuiz.themeId))
+      // Un quiz dont toutes les questions sont dans des thèmes masqués n'est pas listé.
+      .where(quizWhere(filters, [sql`${questionCount} > 0`]))
+      .orderBy(asc(libraryQuiz.title), asc(libraryQuiz.id))
+  )
 }
 
 /** Tirage aléatoire sans doublon, hors `excludeIds`. Renvoie moins de `count` si le catalogue
@@ -155,16 +177,21 @@ export async function drawLibraryQuestions(
   count: number,
   excludeIds: string[],
 ): Promise<LibraryQuestion[]> {
-  return db.select(questionColumns).from(libraryQuestion)
+  return db
+    .select(questionColumns)
+    .from(libraryQuestion)
     .innerJoin(libraryTheme, eq(libraryTheme.id, libraryQuestion.themeId))
     .where(questionWhere(filters, [excludeIds.length ? notInArray(libraryQuestion.id, excludeIds) : undefined]))
-    .orderBy(sql`random()`).limit(count)
+    .orderBy(sql`random()`)
+    .limit(count)
 }
 
 /** Questions dans l'ordre de `ids`, ou `null` si l'une est inconnue ou masquée. */
 export async function getLibraryQuestions(db: Db, ids: string[]): Promise<LibraryQuestion[] | null> {
   if (ids.length === 0) return []
-  const rows = await db.select(questionColumns).from(libraryQuestion)
+  const rows = await db
+    .select(questionColumns)
+    .from(libraryQuestion)
     .innerJoin(libraryTheme, eq(libraryTheme.id, libraryQuestion.themeId))
     .where(and(eq(libraryTheme.hidden, false), inArray(libraryQuestion.id, ids)))
   const byId = new Map(rows.map((r) => [r.id, r]))
@@ -181,11 +208,15 @@ export async function getLibraryQuiz(
   db: Db,
   id: string,
 ): Promise<{ quiz: LibraryQuizSummary; questions: LibraryQuestion[] } | null> {
-  const [quiz] = await db.select(quizColumns).from(libraryQuiz)
+  const [quiz] = await db
+    .select(quizColumns)
+    .from(libraryQuiz)
     .innerJoin(libraryTheme, eq(libraryTheme.id, libraryQuiz.themeId))
     .where(quizWhere({}, [eq(libraryQuiz.id, id)]))
   if (!quiz) return null
-  const questions = await db.select(questionColumns).from(libraryQuizQuestion)
+  const questions = await db
+    .select(questionColumns)
+    .from(libraryQuizQuestion)
     .innerJoin(libraryQuestion, eq(libraryQuestion.id, libraryQuizQuestion.questionId))
     .innerJoin(libraryTheme, eq(libraryTheme.id, libraryQuestion.themeId))
     .where(and(eq(libraryQuizQuestion.quizId, id), eq(libraryTheme.hidden, false)))

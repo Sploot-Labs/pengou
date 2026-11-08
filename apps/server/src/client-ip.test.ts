@@ -1,6 +1,12 @@
 import { describe, it, expect, vi } from 'vitest'
 import type { IncomingMessage } from 'node:http'
-import { clientIpFromRequest, compileTrust, createForwardedForWarner, pinFailureKey, untrustedForwardingPeer } from './client-ip.js'
+import {
+  clientIpFromRequest,
+  compileTrust,
+  createForwardedForWarner,
+  pinFailureKey,
+  untrustedForwardingPeer,
+} from './client-ip.js'
 import { buildServer } from './app.js'
 import { loadConfig } from '@splootlabs/shared'
 
@@ -33,15 +39,21 @@ describe('clientIpFromRequest', () => {
 })
 
 describe('untrustedForwardingPeer', () => {
-  it("signale un pair loopback ou privé non approuvé qui envoie X-Forwarded-For", () => {
+  it('signale un pair loopback ou privé non approuvé qui envoie X-Forwarded-For', () => {
     expect(untrustedForwardingPeer(fakeRequest('127.0.0.1', '198.51.100.7'), compileTrust([]))).toBe('127.0.0.1')
-    expect(untrustedForwardingPeer(fakeRequest('172.18.0.1', '198.51.100.7'), compileTrust(['127.0.0.1']))).toBe('172.18.0.1')
-    expect(untrustedForwardingPeer(fakeRequest('::ffff:10.0.0.2', '198.51.100.7'), compileTrust([]))).toBe('::ffff:10.0.0.2')
+    expect(untrustedForwardingPeer(fakeRequest('172.18.0.1', '198.51.100.7'), compileTrust(['127.0.0.1']))).toBe(
+      '172.18.0.1',
+    )
+    expect(untrustedForwardingPeer(fakeRequest('::ffff:10.0.0.2', '198.51.100.7'), compileTrust([]))).toBe(
+      '::ffff:10.0.0.2',
+    )
   })
 
   it('ne signale rien sans X-Forwarded-For, pour un pair approuvé ou pour un pair public', () => {
     expect(untrustedForwardingPeer(fakeRequest('127.0.0.1'), compileTrust([]))).toBeUndefined()
-    expect(untrustedForwardingPeer(fakeRequest('172.18.0.1', '198.51.100.7'), compileTrust(['172.16.0.0/12']))).toBeUndefined()
+    expect(
+      untrustedForwardingPeer(fakeRequest('172.18.0.1', '198.51.100.7'), compileTrust(['172.16.0.0/12'])),
+    ).toBeUndefined()
     expect(untrustedForwardingPeer(fakeRequest('203.0.113.9', '198.51.100.7'), compileTrust([]))).toBeUndefined()
   })
 })

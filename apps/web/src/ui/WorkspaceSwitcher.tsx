@@ -25,7 +25,9 @@ export function WorkspaceSwitcher() {
 
   return (
     <div className="ab-workspace-switcher" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-      <label htmlFor="ws-switch" className="visually-hidden">Workspace actif</label>
+      <label htmlFor="ws-switch" className="visually-hidden">
+        Workspace actif
+      </label>
       <select
         id="ws-switch"
         className="ab-workspace-switcher__select"
@@ -46,7 +48,9 @@ export function WorkspaceSwitcher() {
           </option>
         ))}
       </select>
-      <Link className="ab-button ab-button--ghost" to="/workspace">Gérer</Link>
+      <Link className="ab-button ab-button--ghost" to="/workspace">
+        Gérer
+      </Link>
     </div>
   )
 }

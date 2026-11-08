@@ -1,8 +1,17 @@
 import type { FastifyInstance } from 'fastify'
 import {
-  importQuiz, withTenantTx, listLibraryThemes, listLibraryLanguages, searchLibraryQuestions,
-  listLibraryQuizzes, drawLibraryQuestions, getLibraryQuestions, getLibraryQuiz,
-  type Db, type LibraryFilters, type LibraryQuestion,
+  importQuiz,
+  withTenantTx,
+  listLibraryThemes,
+  listLibraryLanguages,
+  searchLibraryQuestions,
+  listLibraryQuizzes,
+  drawLibraryQuestions,
+  getLibraryQuestions,
+  getLibraryQuiz,
+  type Db,
+  type LibraryFilters,
+  type LibraryQuestion,
 } from '@splootlabs/db'
 import type { Audience, Difficulty } from '@splootlabs/library'
 import type { AppConfig } from '@splootlabs/shared'
@@ -63,8 +72,12 @@ function parseIntParam(value: unknown): number | undefined | null {
 /** Question du catalogue vers la forme attendue par `importQuiz` (copie dans le tenant). */
 function toImported(q: LibraryQuestion) {
   return {
-    type: q.type, prompt: q.prompt, payload: q.payload,
-    timeLimit: q.timeLimit, readingTime: q.readingTime, source: q.source,
+    type: q.type,
+    prompt: q.prompt,
+    payload: q.payload,
+    timeLimit: q.timeLimit,
+    readingTime: q.readingTime,
+    source: q.source,
   }
 }
 
@@ -86,11 +99,15 @@ export function registerLibraryRoutes(app: FastifyInstance, deps: Deps): void {
 
   // Aperçu d'un quiz tout prêt : ses questions dans l'ordre, réponses comprises (le front choisit
   // de les montrer ou non ; le catalogue est public pour tout utilisateur connecté).
-  app.get<{ Params: { id: string } }>('/api/library/quizzes/:id', { preHandler: requireUser }, async (request, reply) => {
-    const found = await getLibraryQuiz(appDb, request.params.id)
-    if (!found) return reply.code(404).send({ error: 'Quiz introuvable dans la bibliothèque.' })
-    return found
-  })
+  app.get<{ Params: { id: string } }>(
+    '/api/library/quizzes/:id',
+    { preHandler: requireUser },
+    async (request, reply) => {
+      const found = await getLibraryQuiz(appDb, request.params.id)
+      if (!found) return reply.code(404).send({ error: 'Quiz introuvable dans la bibliothèque.' })
+      return found
+    },
+  )
 
   app.get('/api/library/questions', { preHandler: requireUser }, async (request, reply) => {
     const query = request.query as Record<string, unknown>
@@ -109,7 +126,10 @@ export function registerLibraryRoutes(app: FastifyInstance, deps: Deps): void {
   app.post('/api/library/draw', { preHandler: requireUser }, async (request, reply) => {
     const body = request.body as { filters?: unknown; count?: unknown; excludeIds?: unknown } | undefined
     const rawFilters = body?.filters
-    if (rawFilters !== undefined && (typeof rawFilters !== 'object' || rawFilters === null || Array.isArray(rawFilters))) {
+    if (
+      rawFilters !== undefined &&
+      (typeof rawFilters !== 'object' || rawFilters === null || Array.isArray(rawFilters))
+    ) {
       return reply.code(400).send({ error: 'Critères invalides.' })
     }
     const parsed = parseFilters(rawFilters as Record<string, unknown> | undefined, true)
@@ -120,32 +140,39 @@ export function registerLibraryRoutes(app: FastifyInstance, deps: Deps): void {
     }
     const excludeIds = body?.excludeIds ?? []
     if (!Array.isArray(excludeIds) || excludeIds.length > MAX_EXCLUDE_IDS || !excludeIds.every(isNonEmptyString)) {
-      return reply.code(400).send({ error: `Les questions à exclure doivent être au plus ${MAX_EXCLUDE_IDS} identifiants.` })
+      return reply
+        .code(400)
+        .send({ error: `Les questions à exclure doivent être au plus ${MAX_EXCLUDE_IDS} identifiants.` })
     }
     return { items: await drawLibraryQuestions(appDb, parsed.filters, count, excludeIds as string[]) }
   })
 
   // Écritures : le catalogue est lu d'abord, puis la copie est écrite dans le tenant de l'utilisateur.
-  app.post<{ Params: { id: string } }>('/api/library/quizzes/:id/duplicate', { preHandler: requireUser }, async (request, reply) => {
-    const context = await resolveContextOr403(request, reply, systemDb, config)
-    if (!context) return
-    const refused = await assertCanOwnAnotherQuiz(systemDb, request.user, quotaOpts)
-    if (refused) return reply.code(refused.status).send(refused.body)
+  app.post<{ Params: { id: string } }>(
+    '/api/library/quizzes/:id/duplicate',
+    { preHandler: requireUser },
+    async (request, reply) => {
+      const context = await resolveContextOr403(request, reply, systemDb, config)
+      if (!context) return
+      const refused = await assertCanOwnAnotherQuiz(systemDb, request.user, quotaOpts)
+      if (refused) return reply.code(refused.status).send(refused.body)
 
-    const found = await getLibraryQuiz(appDb, request.params.id)
-    if (!found) return reply.code(404).send({ error: 'Quiz introuvable dans la bibliothèque.' })
+      const found = await getLibraryQuiz(appDb, request.params.id)
+      if (!found) return reply.code(404).send({ error: 'Quiz introuvable dans la bibliothèque.' })
 
-    // Réponse envoyée APRÈS le COMMIT (hors du callback) : l'éditeur ouvre aussitôt la copie.
-    const created = await withTenantTx(appDb, context, (scope) =>
-      importQuiz(scope, {
-        ownerId: request.user.id,
-        title: found.quiz.title,
-        description: found.quiz.description,
-        source: found.quiz.source,
-        questions: found.questions.map(toImported),
-      }))
-    return reply.code(201).send(created)
-  })
+      // Réponse envoyée APRÈS le COMMIT (hors du callback) : l'éditeur ouvre aussitôt la copie.
+      const created = await withTenantTx(appDb, context, (scope) =>
+        importQuiz(scope, {
+          ownerId: request.user.id,
+          title: found.quiz.title,
+          description: found.quiz.description,
+          source: found.quiz.source,
+          questions: found.questions.map(toImported),
+        }),
+      )
+      return reply.code(201).send(created)
+    },
+  )
 
   app.post('/api/library/compose', { preHandler: requireUser }, async (request, reply) => {
     const context = await resolveContextOr403(request, reply, systemDb, config)
@@ -174,7 +201,8 @@ export function registerLibraryRoutes(app: FastifyInstance, deps: Deps): void {
 
     const title = body.title
     const created = await withTenantTx(appDb, context, (scope) =>
-      importQuiz(scope, { ownerId: request.user.id, title, source: null, questions: questions.map(toImported) }))
+      importQuiz(scope, { ownerId: request.user.id, title, source: null, questions: questions.map(toImported) }),
+    )
     return reply.code(201).send(created)
   })
 }

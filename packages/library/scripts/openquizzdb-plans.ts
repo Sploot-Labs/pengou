@@ -852,7 +852,8 @@ export const EXCLUDED: Record<string, string> = {
   'oqdb-0055-3': 'exactitude douteuse : Gran Torino est un film de 2008, sorti en France en 2009',
   'oqdb-0055-4': "exactitude douteuse : le modèle de voiture d'Enzo n'est pas certain",
   // Quiz source 63 (Satellites naturels)
-  'oqdb-0063-4': 'fait dépassé : de nombreux satellites découverts depuis sont plus éloignés de leur planète que Sinopé',
+  'oqdb-0063-4':
+    'fait dépassé : de nombreux satellites découverts depuis sont plus éloignés de leur planète que Sinopé',
   // Quiz source 65 (Isabelle Adjani)
   'oqdb-0065-1': 'exactitude douteuse : les interprètes de Mademoiselle Julie sont incertains',
   'oqdb-0065-3': 'exactitude douteuse : année du clip de Pull marine incertaine',
@@ -867,7 +868,8 @@ export const EXCLUDED: Record<string, string> = {
   // Quiz source 95 (Jack Nicholson)
   'oqdb-0095-3': "Incompréhensible sans contexte : « sa partenaire » ne nomme pas l'acteur.",
   // Quiz source 109 (Animaux en chiffres)
-  'oqdb-0109-4': "Exactitude douteuse : une otarie peut rester sous l'eau bien plus de 5 minutes, plusieurs propositions sont plausibles.",
+  'oqdb-0109-4':
+    "Exactitude douteuse : une otarie peut rester sous l'eau bien plus de 5 minutes, plusieurs propositions sont plausibles.",
   // Quiz source 111 (Les héros de l’Ironman)
   'oqdb-0111-3': "Exactitude douteuse : le nombre de finalistes à Kona varie selon les années et n'est pas de 2 000.",
   // Quiz source 119 (Kim Kardashian)
@@ -876,9 +878,11 @@ export const EXCLUDED: Record<string, string> = {
   'oqdb-0123-2': "Exactitude douteuse : l'attribution de la coutume de la dinde à Charles VII est une légende.",
   // Quiz source 125 (Christophe Dechavanne)
   'oqdb-0125-1': "Incompréhensible sans contexte : « à ses côtés » ne nomme pas l'animateur.",
-  'oqdb-0125-4': "Incompréhensible sans contexte : la personne n'est pas nommée, et contenu moqueur envers une personne réelle.",
+  'oqdb-0125-4':
+    "Incompréhensible sans contexte : la personne n'est pas nommée, et contenu moqueur envers une personne réelle.",
   // Quiz source 127 (Teotihuacan)
-  'oqdb-0127-3': "Exactitude douteuse : la cause de la chute de Teotihuacan est débattue, l'incendie n'est pas établi comme seule cause.",
+  'oqdb-0127-3':
+    "Exactitude douteuse : la cause de la chute de Teotihuacan est débattue, l'incendie n'est pas établi comme seule cause.",
   // Quiz source 129 (Zombies)
   'oqdb-0129-1': 'Bonne réponse ambiguë : brûler un zombie en vient aussi à bout dans la plupart des fictions.',
   // Quiz source 137 (Maria Sharapova)
@@ -892,18 +896,21 @@ export const EXCLUDED: Record<string, string> = {
   'oqdb-0149-2': "exactitude douteuse : le lieu de rencontre des parents de Scarlett Johansson n'est pas établi",
   'oqdb-0149-4': 'Bonne réponse ambiguë : Scoop réunit aussi Scarlett Johansson et Hugh Jackman.',
   // Quiz source 153 (Voiture électrique)
-  'oqdb-0153-4': 'Fait faux ou ambigu : Tesla était le premier vendeur de voitures 100 % électriques en 2022, BYD le premier en véhicules électrifiés.',
+  'oqdb-0153-4':
+    'Fait faux ou ambigu : Tesla était le premier vendeur de voitures 100 % électriques en 2022, BYD le premier en véhicules électrifiés.',
   // Quiz source 159 (One Piece)
   'oqdb-0159-1': "question incompréhensible sans le contexte du quiz d'origine",
   // Quiz source 161 (Valérie Lemercier)
   'oqdb-0161-1': 'exactitude douteuse : titre de la chanson et édition des Césars non vérifiables',
   'oqdb-0161-2': "question incompréhensible sans le contexte du quiz d'origine",
-  'oqdb-0161-3': "exactitude douteuse : la participation de Lemercier au film de Podalydès n'est pas certaine pour les autres titres",
+  'oqdb-0161-3':
+    "exactitude douteuse : la participation de Lemercier au film de Podalydès n'est pas certaine pour les autres titres",
   'oqdb-0161-4': "question incompréhensible sans le contexte du quiz d'origine",
   // Quiz source 171 (Crypto-monnaies)
   'oqdb-0171-2': "fait faux : les cryptomonnaies offrent surtout le pseudonymat, pas l'anonymat",
   // Quiz source 173 (Barack Obama)
-  'oqdb-0173-2': "exactitude douteuse : les vraies professions d'Obama (juriste, militant) ne figurent pas parmi les choix",
+  'oqdb-0173-2':
+    "exactitude douteuse : les vraies professions d'Obama (juriste, militant) ne figurent pas parmi les choix",
   // Quiz source 177 (Princesses Disney)
   'oqdb-0177-3': 'bonne réponse ambiguë : Aurore est associée au rose comme au bleu',
   // Quiz source 183 (Super-héros)
@@ -946,7 +953,8 @@ export const EXCLUDED: Record<string, string> = {
   // Quiz source 280 (Alphaquizz #X)
   'oqdb-0280-3': "fait faux : la souris a été inventée par Douglas Engelbart (SRI), Xerox l'a développée",
   // Quiz source 293 (Antoine Griezmann)
-  'oqdb-0293-1': 'question incompréhensible sans le nom du joueur, et exactitude douteuse (débuts espagnols à la Real Sociedad).',
+  'oqdb-0293-1':
+    'question incompréhensible sans le nom du joueur, et exactitude douteuse (débuts espagnols à la Real Sociedad).',
   'oqdb-0293-2': "question incompréhensible sans le contexte du quiz d'origine (pas de nom dans l'énoncé).",
   'oqdb-0293-4': "question incompréhensible sans le contexte du quiz d'origine, et numéro susceptible d'avoir changé.",
   // Quiz source 299 (Léa Seydoux)

@@ -103,9 +103,14 @@ describe('catalogue livré', () => {
       const mine = options(q.payload)
       const theirs = options(original.payload)
       expect(mine?.length, q.id).toBe(theirs?.length)
-      expect(mine?.findIndex((o) => o.correct), q.id).toBe(theirs?.findIndex((o) => o.correct))
+      expect(
+        mine?.findIndex((o) => o.correct),
+        q.id,
+      ).toBe(theirs?.findIndex((o) => o.correct))
       if (q.type === 'truefalse') {
-        expect((q.payload as { correct: boolean }).correct, q.id).toBe((original.payload as { correct: boolean }).correct)
+        expect((q.payload as { correct: boolean }).correct, q.id).toBe(
+          (original.payload as { correct: boolean }).correct,
+        )
       }
     }
     expect(checked).toBeGreaterThan(0)

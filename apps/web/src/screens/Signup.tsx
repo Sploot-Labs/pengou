@@ -141,9 +141,7 @@ export function Signup() {
     } catch (err) {
       setPending(false)
       setFormError(
-        err instanceof ApiError
-          ? err.message
-          : 'Inscription impossible. Vérifiez votre connexion et réessayez.',
+        err instanceof ApiError ? err.message : 'Inscription impossible. Vérifiez votre connexion et réessayez.',
       )
     }
   }
@@ -322,8 +320,8 @@ export function Signup() {
             </div>
 
             <p className="join-legal">
-              La <ExternalLink href={legal.privacyUrl}>politique de confidentialité</ExternalLink> explique comment
-              vos données sont traitées.
+              La <ExternalLink href={legal.privacyUrl}>politique de confidentialité</ExternalLink> explique comment vos
+              données sont traitées.
             </p>
           </>
         )}

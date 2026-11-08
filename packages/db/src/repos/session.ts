@@ -1,6 +1,4 @@
-import {
-  and, desc, eq, gte, inArray, isNotNull, lt,
-} from 'drizzle-orm'
+import { and, desc, eq, gte, inArray, isNotNull, lt } from 'drizzle-orm'
 import { sql } from 'drizzle-orm'
 import { schema } from '../index.js'
 import type { Db } from '../client.js'
@@ -26,12 +24,15 @@ export async function createGameSession(
   // d'appeler ce repo, donc une violation ici ne peut venir que d'une course ou
   // d'un bug appelant — elle doit remonter comme une erreur franche plutôt que
   // d'être avalée silencieusement (le repo ne sait pas régénérer un PIN).
-  const [row] = await scope.db.insert(schema.gameSession).values({
-    tenantId: scope.tenantId,
-    quizId: input.quizId,
-    hostId: input.hostId,
-    pin: input.pin,
-  }).returning()
+  const [row] = await scope.db
+    .insert(schema.gameSession)
+    .values({
+      tenantId: scope.tenantId,
+      quizId: input.quizId,
+      hostId: input.hostId,
+      pin: input.pin,
+    })
+    .returning()
   return row
 }
 
@@ -49,15 +50,20 @@ export async function addSessionPlayer(
   input: { nickname: string; joinToken: string },
 ): Promise<SessionPlayer> {
   // Pas de scope tenant dans la couche temps réel : on dérive le tenant_id de la session parente.
-  const [parent] = await db.select({ tenantId: schema.gameSession.tenantId })
-    .from(schema.gameSession).where(eq(schema.gameSession.id, sessionId))
+  const [parent] = await db
+    .select({ tenantId: schema.gameSession.tenantId })
+    .from(schema.gameSession)
+    .where(eq(schema.gameSession.id, sessionId))
   if (!parent) throw new Error(`addSessionPlayer: session introuvable (${sessionId})`)
-  const [row] = await db.insert(schema.sessionPlayer).values({
-    sessionId,
-    tenantId: parent.tenantId,
-    nickname: input.nickname,
-    joinToken: input.joinToken,
-  }).returning()
+  const [row] = await db
+    .insert(schema.sessionPlayer)
+    .values({
+      sessionId,
+      tenantId: parent.tenantId,
+      nickname: input.nickname,
+      joinToken: input.joinToken,
+    })
+    .returning()
   return row
 }
 
@@ -77,32 +83,32 @@ export async function recordAnswer(
   // ré-écrire un answer_record déjà présent est un no-op (persistRound rejouable / cicatrisation
   // au redémarrage). Pas de scope tenant dans la couche temps réel : on dérive le tenant_id de la
   // session parente (multi-tenancy Slice 0).
-  const [parent] = await db.select({ tenantId: schema.gameSession.tenantId })
-    .from(schema.gameSession).where(eq(schema.gameSession.id, input.sessionId))
+  const [parent] = await db
+    .select({ tenantId: schema.gameSession.tenantId })
+    .from(schema.gameSession)
+    .where(eq(schema.gameSession.id, input.sessionId))
   if (!parent) throw new Error(`recordAnswer: session introuvable (${input.sessionId})`)
-  await db.insert(schema.answerRecord).values({
-    sessionId: input.sessionId,
-    tenantId: parent.tenantId,
-    questionId: input.questionId,
-    playerId: input.playerId,
-    answer: input.answer as never,
-    timeMs: input.timeMs,
-    isCorrect: input.isCorrect,
-    points: input.points,
-  }).onConflictDoNothing({
-    target: [schema.answerRecord.sessionId, schema.answerRecord.questionId, schema.answerRecord.playerId],
-  })
+  await db
+    .insert(schema.answerRecord)
+    .values({
+      sessionId: input.sessionId,
+      tenantId: parent.tenantId,
+      questionId: input.questionId,
+      playerId: input.playerId,
+      answer: input.answer as never,
+      timeMs: input.timeMs,
+      isCorrect: input.isCorrect,
+      points: input.points,
+    })
+    .onConflictDoNothing({
+      target: [schema.answerRecord.sessionId, schema.answerRecord.questionId, schema.answerRecord.playerId],
+    })
 }
 
 // `at` renseigne l'horodatage correspondant à la transition :
 // - status 'active' → startedAt (défaut : maintenant)
 // - status 'ended'  → endedAt   (défaut : maintenant)
-export async function setSessionStatus(
-  db: Db,
-  sessionId: string,
-  status: SessionStatus,
-  at?: Date,
-): Promise<void> {
+export async function setSessionStatus(db: Db, sessionId: string, status: SessionStatus, at?: Date): Promise<void> {
   const patch: Partial<typeof schema.gameSession.$inferInsert> = { status }
   if (status === 'active') patch.startedAt = at ?? new Date()
   if (status === 'ended') patch.endedAt = at ?? new Date()
@@ -115,7 +121,9 @@ export async function setPlayerScore(db: Db, playerId: string, totalScore: numbe
 
 // Classement d'une session : joueurs triés par total_score desc (podium/scoreboard).
 export async function listSessionPlayersByScore(db: Db, sessionId: string): Promise<SessionPlayer[]> {
-  return db.select().from(schema.sessionPlayer)
+  return db
+    .select()
+    .from(schema.sessionPlayer)
     .where(eq(schema.sessionPlayer.sessionId, sessionId))
     .orderBy(desc(schema.sessionPlayer.totalScore))
 }
@@ -127,11 +135,13 @@ export async function listSessionPlayers(
   db: Db,
   sessionId: string,
 ): Promise<Array<{ id: string; joinToken: string; nickname: string }>> {
-  return db.select({
-    id: schema.sessionPlayer.id,
-    joinToken: schema.sessionPlayer.joinToken,
-    nickname: schema.sessionPlayer.nickname,
-  }).from(schema.sessionPlayer)
+  return db
+    .select({
+      id: schema.sessionPlayer.id,
+      joinToken: schema.sessionPlayer.joinToken,
+      nickname: schema.sessionPlayer.nickname,
+    })
+    .from(schema.sessionPlayer)
     .where(eq(schema.sessionPlayer.sessionId, sessionId))
 }
 
@@ -142,16 +152,21 @@ export async function listSessionPlayers(
 // Ces helpers ne connaissent rien de la forme de l'état : `unknown` de bout en bout.
 
 export async function saveEngineState(db: Db, sessionId: string, state: unknown): Promise<void> {
-  await db.update(schema.gameSession)
+  await db
+    .update(schema.gameSession)
     .set({ engineState: state as never, lastActivityAt: new Date() })
     .where(eq(schema.gameSession.id, sessionId))
 }
 
 // Écrase la liste des clés retirées pour UNE question, sans toucher aux autres (écriture atomique).
 export async function setWordcloudRemoved(
-  db: Db, sessionId: string, questionId: string, keys: string[],
+  db: Db,
+  sessionId: string,
+  questionId: string,
+  keys: string[],
 ): Promise<void> {
-  await db.update(schema.gameSession)
+  await db
+    .update(schema.gameSession)
     .set({
       wordcloudRemoved: sql`jsonb_set(${schema.gameSession.wordcloudRemoved}, ARRAY[${questionId}]::text[], ${JSON.stringify(keys)}::jsonb)`,
     })
@@ -159,20 +174,20 @@ export async function setWordcloudRemoved(
 }
 
 export async function loadWordcloudRemoved(db: Db, sessionId: string): Promise<Record<string, string[]>> {
-  const [row] = await db.select({ removed: schema.gameSession.wordcloudRemoved })
+  const [row] = await db
+    .select({ removed: schema.gameSession.wordcloudRemoved })
     .from(schema.gameSession)
     .where(eq(schema.gameSession.id, sessionId))
   return row?.removed ?? {}
 }
 
 export async function clearEngineState(db: Db, sessionId: string): Promise<void> {
-  await db.update(schema.gameSession)
-    .set({ engineState: null })
-    .where(eq(schema.gameSession.id, sessionId))
+  await db.update(schema.gameSession).set({ engineState: null }).where(eq(schema.gameSession.id, sessionId))
 }
 
 export async function loadEngineState(db: Db, sessionId: string): Promise<unknown | null> {
-  const [row] = await db.select({ engineState: schema.gameSession.engineState })
+  const [row] = await db
+    .select({ engineState: schema.gameSession.engineState })
     .from(schema.gameSession)
     .where(eq(schema.gameSession.id, sessionId))
   return row?.engineState ?? null
@@ -184,7 +199,8 @@ export async function loadEngineState(db: Db, sessionId: string): Promise<unknow
 // `abandoned` (engine_state=null) pourrait alors être retournée à la place de la session live
 // qui a repris le même PIN — on doit filtrer strictement sur les statuts vivants.
 export async function loadEngineStateByPin(db: Db, pin: string): Promise<unknown | null> {
-  const [row] = await db.select({ engineState: schema.gameSession.engineState })
+  const [row] = await db
+    .select({ engineState: schema.gameSession.engineState })
     .from(schema.gameSession)
     .where(and(eq(schema.gameSession.pin, pin), inArray(schema.gameSession.status, ['lobby', 'active'])))
   return row?.engineState ?? null
@@ -197,13 +213,16 @@ export async function listResumableSessions(
   maxAgeMs: number,
 ): Promise<Array<{ id: string; engineState: unknown }>> {
   const cutoff = new Date(Date.now() - maxAgeMs)
-  return db.select({ id: schema.gameSession.id, engineState: schema.gameSession.engineState })
+  return db
+    .select({ id: schema.gameSession.id, engineState: schema.gameSession.engineState })
     .from(schema.gameSession)
-    .where(and(
-      inArray(schema.gameSession.status, ['active', 'lobby']),
-      isNotNull(schema.gameSession.engineState),
-      gte(schema.gameSession.createdAt, cutoff),
-    ))
+    .where(
+      and(
+        inArray(schema.gameSession.status, ['active', 'lobby']),
+        isNotNull(schema.gameSession.engineState),
+        gte(schema.gameSession.createdAt, cutoff),
+      ),
+    )
 }
 
 // Bascule vers le statut terminal `abandoned` les parties encore vivantes (lobby/active) TRAITÉES
@@ -213,12 +232,10 @@ export async function listResumableSessions(
 // (passerelle) de nettoyer son état mémoire (timers/caches).
 export async function abandonInactiveSessions(db: Db, inactivityMs: number): Promise<string[]> {
   const cutoff = new Date(Date.now() - inactivityMs)
-  const rows = await db.update(schema.gameSession)
+  const rows = await db
+    .update(schema.gameSession)
     .set({ status: 'abandoned', endedAt: new Date(), engineState: null })
-    .where(and(
-      inArray(schema.gameSession.status, ['active', 'lobby']),
-      lt(schema.gameSession.lastActivityAt, cutoff),
-    ))
+    .where(and(inArray(schema.gameSession.status, ['active', 'lobby']), lt(schema.gameSession.lastActivityAt, cutoff)))
     .returning({ id: schema.gameSession.id })
   return rows.map((r) => r.id)
 }
@@ -228,12 +245,10 @@ export async function abandonInactiveSessions(db: Db, inactivityMs: number): Pro
 // jamais atteint son podium) et leur checkpoint effacé.
 export async function abandonStaleSessions(db: Db, maxAgeMs: number): Promise<string[]> {
   const cutoff = new Date(Date.now() - maxAgeMs)
-  const rows = await db.update(schema.gameSession)
+  const rows = await db
+    .update(schema.gameSession)
     .set({ status: 'abandoned', endedAt: new Date(), engineState: null })
-    .where(and(
-      inArray(schema.gameSession.status, ['active', 'lobby']),
-      lt(schema.gameSession.createdAt, cutoff),
-    ))
+    .where(and(inArray(schema.gameSession.status, ['active', 'lobby']), lt(schema.gameSession.createdAt, cutoff)))
     .returning({ id: schema.gameSession.id })
   return rows.map((r) => r.id)
 }

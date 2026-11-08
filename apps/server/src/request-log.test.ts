@@ -23,7 +23,9 @@ describe('journal des requêtes sans token', () => {
     const { stream, lines } = captureStream()
     const app = await buildServer(loadConfig({ NODE_ENV: 'test' }), { logStream: stream })
     app.get('/api/auth/reset-password/:token', async () => ({ ok: true }))
-    app.get('/boom/:token', async () => { throw new Error('échec') })
+    app.get('/boom/:token', async () => {
+      throw new Error('échec')
+    })
     await app.inject({ method: 'GET', url: `/api/auth/reset-password/${TOKEN}?callbackURL=/x` })
     await app.inject({ method: 'GET', url: `/reset-password?token=${TOKEN}` })
     await app.inject({ method: 'GET', url: `/api/auth/verify-email?token=${TOKEN}&callbackURL=%2F` })
@@ -31,7 +33,10 @@ describe('journal des requêtes sans token', () => {
     await app.close()
 
     expect(lines.length).toBeGreaterThan(0)
-    const urls = lines.map((l) => JSON.parse(l)).filter((e) => e.req?.url).map((e) => e.req.url)
+    const urls = lines
+      .map((l) => JSON.parse(l))
+      .filter((e) => e.req?.url)
+      .map((e) => e.req.url)
     expect(urls).toContain('/api/auth/reset-password/AbCdEf…')
     expect(urls).toContain('/reset-password')
     expect(urls).toContain('/api/auth/verify-email')

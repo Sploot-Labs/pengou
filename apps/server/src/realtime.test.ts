@@ -9,7 +9,7 @@ import { loadConfig } from '@splootlabs/shared'
 async function listenOn(app: FastifyInstance): Promise<string> {
   await app.listen({ port: 0, host: '127.0.0.1' })
   const address = app.server.address()
-  if (!address || typeof address === 'string') throw new Error('pas d\'adresse')
+  if (!address || typeof address === 'string') throw new Error("pas d'adresse")
   return `http://127.0.0.1:${address.port}`
 }
 
@@ -20,10 +20,10 @@ describe('Socket.IO ping/pong', () => {
     const io = attachRealtime(app, config)
     await app.listen({ port: 0, host: '127.0.0.1' })
     const address = app.server.address()
-    if (!address || typeof address === 'string') throw new Error('pas d\'adresse')
+    if (!address || typeof address === 'string') throw new Error("pas d'adresse")
 
     const client = ioClient(`http://127.0.0.1:${address.port}`, {
-      reconnection: false
+      reconnection: false,
     })
 
     try {
@@ -65,9 +65,13 @@ describe('Socket.IO CORS — origine restreinte à AppConfig.authUrl (hardening)
     expect(prod).toEqual(['https://app.example.com']) // aucun repli localhost en production
   })
 
-  it("allowedOrigins() : réduit BETTER_AUTH_URL à son origine (barre finale, chemin, port par défaut)", () => {
-    expect(allowedOrigins({ authUrl: 'https://app.example.com/', nodeEnv: 'production' })).toEqual(['https://app.example.com'])
-    expect(allowedOrigins({ authUrl: 'https://app.example.com:443/pengou', nodeEnv: 'production' })).toEqual(['https://app.example.com'])
+  it('allowedOrigins() : réduit BETTER_AUTH_URL à son origine (barre finale, chemin, port par défaut)', () => {
+    expect(allowedOrigins({ authUrl: 'https://app.example.com/', nodeEnv: 'production' })).toEqual([
+      'https://app.example.com',
+    ])
+    expect(allowedOrigins({ authUrl: 'https://app.example.com:443/pengou', nodeEnv: 'production' })).toEqual([
+      'https://app.example.com',
+    ])
   })
 
   // NB : un client Socket.IO Node (comme celui utilisé dans les autres tests de ce fichier)
@@ -114,7 +118,7 @@ describe('Socket.IO CORS — origine restreinte à AppConfig.authUrl (hardening)
   }, 10000)
 })
 
-describe('Socket.IO : origine contrôlée aussi sur l\'upgrade WebSocket', () => {
+describe("Socket.IO : origine contrôlée aussi sur l'upgrade WebSocket", () => {
   // `origin` peut dépendre de l'URL d'écoute (port aléatoire) : fonction de l'URL dans ce cas.
   async function tenter(origin: string | undefined | ((url: string) => string)): Promise<'connecte' | 'refuse'> {
     const config = loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'http://localhost:3000' })

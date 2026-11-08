@@ -52,7 +52,10 @@ const arg = (name: string) => {
 
 async function jsonFiles(dir: string): Promise<string[]> {
   const all = await readdir(dir, { recursive: true })
-  return all.filter((f) => f.endsWith('.json')).map((f) => f.replaceAll('\\', '/')).sort()
+  return all
+    .filter((f) => f.endsWith('.json'))
+    .map((f) => f.replaceAll('\\', '/'))
+    .sort()
 }
 
 async function main() {

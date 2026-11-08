@@ -29,7 +29,12 @@ afterEach(() => {
 
 describe('api/library', () => {
   it('getLibraryMeta → GET /api/library/meta', async () => {
-    const meta = { themes: [{ id: 'cinema', label: 'Cinéma' }], difficulties: ['facile'], audiences: ['tous'], languages: ['fr'] }
+    const meta = {
+      themes: [{ id: 'cinema', label: 'Cinéma' }],
+      difficulties: ['facile'],
+      audiences: ['tous'],
+      languages: ['fr'],
+    }
     mockFetchOnce(200, meta)
     expect(await getLibraryMeta()).toEqual(meta)
     const [path, init] = lastCall()

@@ -21,7 +21,16 @@ function question(id: string, extra: Record<string, unknown> = {}) {
 }
 
 function quiz(id: string, questionIds: string[], extra: Record<string, unknown> = {}) {
-  return { id, title: `Quiz ${id}`, theme: 'cinema', difficulty: 'facile', language: 'fr', audience: 'tous', questionIds, ...extra }
+  return {
+    id,
+    title: `Quiz ${id}`,
+    theme: 'cinema',
+    difficulty: 'facile',
+    language: 'fr',
+    audience: 'tous',
+    questionIds,
+    ...extra,
+  }
 }
 
 let root: string
@@ -60,7 +69,14 @@ describe('readCatalog', () => {
     expect(snap.themes.map((t) => t.id)).toEqual(['cinema', 'sport'])
     expect(snap.themes[0]).toEqual({ id: 'cinema', label: 'Cinéma', hidden: false, origin: 'builtin' })
     const [q1, q2] = snap.questions
-    expect(q1).toMatchObject({ id: 'b-1', timeLimit: 20, readingTime: 6, source: SOURCE, origin: 'builtin', originFile: 'builtin:a/pack.json' })
+    expect(q1).toMatchObject({
+      id: 'b-1',
+      timeLimit: 20,
+      readingTime: 6,
+      source: SOURCE,
+      origin: 'builtin',
+      originFile: 'builtin:a/pack.json',
+    })
     expect(q2).toMatchObject({ timeLimit: 30, readingTime: 3 })
     expect(snap.quizzes[0]).toMatchObject({
       id: 'b-quiz',
@@ -73,7 +89,11 @@ describe('readCatalog', () => {
   })
 
   it('lève si un pack livré est invalide', async () => {
-    await put(builtinDir, 'b/pack.json', { source: SOURCE, questions: [question('x', { payload: { nope: 1 } })], quizzes: [] })
+    await put(builtinDir, 'b/pack.json', {
+      source: SOURCE,
+      questions: [question('x', { payload: { nope: 1 } })],
+      quizzes: [],
+    })
     await expect(readCatalog({ builtinDir })).rejects.toThrow(/pack\.json/)
   })
 
@@ -102,7 +122,11 @@ describe('readCatalog', () => {
   })
 
   it('écarte un pack dont un quiz référence une question absente du pack', async () => {
-    await put(extraDir, 'ref.json', { source: SOURCE, questions: [question('i-1')], quizzes: [quiz('i-quiz', ['b-1'])] })
+    await put(extraDir, 'ref.json', {
+      source: SOURCE,
+      questions: [question('i-1')],
+      quizzes: [quiz('i-quiz', ['b-1'])],
+    })
     const log = vi.fn()
     const snap = await readCatalog({ builtinDir, extraDir, log })
     expect(snap.rejectedFiles).toEqual(['instance:ref.json'])
@@ -111,7 +135,11 @@ describe('readCatalog', () => {
   })
 
   it("thèmes d'instance : add, relabel, hide", async () => {
-    await put(extraDir, 'themes.json', { add: [{ id: 'cuisine', label: 'Cuisine' }], relabel: { cinema: 'Ciné' }, hide: ['sport'] })
+    await put(extraDir, 'themes.json', {
+      add: [{ id: 'cuisine', label: 'Cuisine' }],
+      relabel: { cinema: 'Ciné' },
+      hide: ['sport'],
+    })
     await put(extraDir, 'p.json', { source: SOURCE, questions: [question('i-1', { theme: 'cuisine' })], quizzes: [] })
     const snap = await readCatalog({ builtinDir, extraDir })
     expect(snap.rejectedFiles).toEqual([])

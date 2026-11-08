@@ -2,8 +2,17 @@ import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { APIError, createAuthMiddleware } from 'better-auth/api'
 import {
-  checkEmailDeliverable, DELIVERABILITY_MESSAGES, maskTokens, recipientDomain, resetPasswordMail, sendAndLog,
-  verifyEmailMail, type DnsResolver, type Mailer, type MailKind, type MailLogger,
+  checkEmailDeliverable,
+  DELIVERABILITY_MESSAGES,
+  maskTokens,
+  recipientDomain,
+  resetPasswordMail,
+  sendAndLog,
+  verifyEmailMail,
+  type DnsResolver,
+  type Mailer,
+  type MailKind,
+  type MailLogger,
 } from '@splootlabs/mail'
 import type { Db } from '@splootlabs/db'
 import { schema, ensureDefaultTenant, ensureMembership, firstMembershipRole, createWorkspace } from '@splootlabs/db'

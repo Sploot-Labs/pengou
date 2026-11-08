@@ -134,7 +134,10 @@ export function echantillonnerDocker(projet, periodeMs = 5000) {
       const cpuPct = Number.parseFloat(c.CPUPerc) || 0
       const memMo = enMo(String(c.MemUsage ?? '').split('/')[0])
       const actuel = maxima[nom] ?? { cpuMaxPct: 0, memMaxMo: 0 }
-      maxima[nom] = { cpuMaxPct: Math.max(actuel.cpuMaxPct, cpuPct), memMaxMo: Math.max(actuel.memMaxMo, auDixieme(memMo)) }
+      maxima[nom] = {
+        cpuMaxPct: Math.max(actuel.cpuMaxPct, cpuPct),
+        memMaxMo: Math.max(actuel.memMaxMo, auDixieme(memMo)),
+      }
     }
   }
   // Une seule lecture `docker stats` à la fois : un tick qui en trouve une en cours est sauté.

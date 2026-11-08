@@ -90,7 +90,7 @@ describe('HostEditor — champ Temps de lecture', () => {
   beforeEach(() => vi.clearAllMocks())
   afterEach(cleanup)
 
-  it('affiche le temps de lecture de la question sélectionnée, avec l\'aide contextuelle', async () => {
+  it("affiche le temps de lecture de la question sélectionnée, avec l'aide contextuelle", async () => {
     renderEditor()
 
     const input = (await screen.findByLabelText('Temps de lecture (s)')) as HTMLInputElement
@@ -107,11 +107,7 @@ describe('HostEditor — champ Temps de lecture', () => {
 
     await waitFor(
       () => {
-        expect(mockUpdateQuestion).toHaveBeenCalledWith(
-          'quiz1',
-          'quest1',
-          expect.objectContaining({ readingTime: 10 }),
-        )
+        expect(mockUpdateQuestion).toHaveBeenCalledWith('quiz1', 'quest1', expect.objectContaining({ readingTime: 10 }))
       },
       { timeout: 2000 },
     )
@@ -157,7 +153,7 @@ describe('HostEditor : archivage', () => {
   })
   afterEach(cleanup)
 
-  it('« Archiver ce quiz » demande confirmation, archive puis revient à l\'accueil', async () => {
+  it("« Archiver ce quiz » demande confirmation, archive puis revient à l'accueil", async () => {
     const { archiveQuiz } = await import('../api/quizzes')
     vi.mocked(archiveQuiz).mockResolvedValueOnce({} as never)
     renderEditor()
@@ -184,8 +180,16 @@ describe('HostEditor : archivage', () => {
     fixtures.archivedAt = '2026-08-01T10:00:00Z'
     const { restoreQuiz } = await import('../api/quizzes')
     vi.mocked(restoreQuiz).mockResolvedValueOnce({
-      id: 'quiz1', tenantId: 't1', ownerId: 'u1', title: 'Mon quiz', description: null, cover: null,
-      source: null, createdAt: '2026-07-20T15:30:00Z', updatedAt: '2026-07-20T15:30:00Z', archivedAt: null,
+      id: 'quiz1',
+      tenantId: 't1',
+      ownerId: 'u1',
+      title: 'Mon quiz',
+      description: null,
+      cover: null,
+      source: null,
+      createdAt: '2026-07-20T15:30:00Z',
+      updatedAt: '2026-07-20T15:30:00Z',
+      archivedAt: null,
     })
     renderEditor()
 
@@ -233,10 +237,7 @@ describe('HostEditor : nuage de mots', () => {
     fireEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Changer de type' }))
 
     await waitFor(() =>
-      expect(createQuestion).toHaveBeenCalledWith(
-        'quiz1',
-        expect.objectContaining({ type: 'wordcloud', payload: {} }),
-      ),
+      expect(createQuestion).toHaveBeenCalledWith('quiz1', expect.objectContaining({ type: 'wordcloud', payload: {} })),
     )
     expect(
       await screen.findByText('Les participants proposent leurs idées en direct. Pas de bonne réponse ni de points.'),
@@ -328,11 +329,15 @@ describe('HostEditor : sondage', () => {
     fixtures.archivedAt = '2026-08-01T10:00:00Z'
     const { restoreQuiz } = await import('../api/quizzes')
     const { ApiError } = await import('../api/client')
-    vi.mocked(restoreQuiz).mockRejectedValueOnce(new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'))
+    vi.mocked(restoreQuiz).mockRejectedValueOnce(
+      new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'),
+    )
     mockSendVerificationEmail.mockResolvedValue(undefined)
     renderEditor()
     fireEvent.click(await screen.findByRole('button', { name: 'Restaurer' }))
-    const notice = (await screen.findByText("Confirmez votre adresse e-mail pour créer d'autres quiz.")).closest('[role="alert"]') as HTMLElement
+    const notice = (await screen.findByText("Confirmez votre adresse e-mail pour créer d'autres quiz.")).closest(
+      '[role="alert"]',
+    ) as HTMLElement
     fireEvent.click(within(notice).getByRole('button', { name: "Renvoyer l'e-mail" }))
     await waitFor(() => expect(within(notice).getByText('E-mail envoyé')).toBeInTheDocument())
   })

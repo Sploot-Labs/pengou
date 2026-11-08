@@ -4,8 +4,13 @@ import { startTestDb } from '../test-helpers.js'
 import { runMigrations } from '../migrate.js'
 import { syncLibrary } from './library-sync.js'
 import {
-  listLibraryThemes, listLibraryLanguages, searchLibraryQuestions, listLibraryQuizzes,
-  drawLibraryQuestions, getLibraryQuestions, getLibraryQuiz,
+  listLibraryThemes,
+  listLibraryLanguages,
+  searchLibraryQuestions,
+  listLibraryQuizzes,
+  drawLibraryQuestions,
+  getLibraryQuestions,
+  getLibraryQuiz,
 } from './library.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
@@ -14,16 +19,37 @@ const source = { name: 'Test', license: 'CC0' }
 
 function q(id: string, over: Partial<SnapshotQuestion> = {}): SnapshotQuestion {
   return {
-    id, type: 'truefalse', prompt: `Énoncé ${id} ?`, payload: { answer: true }, theme: 'sciences',
-    difficulty: 'facile', language: 'fr', audience: 'tous', timeLimit: 20, readingTime: 6,
-    source, origin: 'builtin', originFile: 'builtin/a.json', ...over,
+    id,
+    type: 'truefalse',
+    prompt: `Énoncé ${id} ?`,
+    payload: { answer: true },
+    theme: 'sciences',
+    difficulty: 'facile',
+    language: 'fr',
+    audience: 'tous',
+    timeLimit: 20,
+    readingTime: 6,
+    source,
+    origin: 'builtin',
+    originFile: 'builtin/a.json',
+    ...over,
   }
 }
 
 function quiz(id: string, questionIds: string[], over: Partial<SnapshotQuiz> = {}): SnapshotQuiz {
   return {
-    id, title: `Quiz ${id}`, description: null, theme: 'sciences', difficulty: 'facile', language: 'fr',
-    audience: 'tous', questionIds, source, origin: 'builtin', originFile: 'builtin/a.json', ...over,
+    id,
+    title: `Quiz ${id}`,
+    description: null,
+    theme: 'sciences',
+    difficulty: 'facile',
+    language: 'fr',
+    audience: 'tous',
+    questionIds,
+    source,
+    origin: 'builtin',
+    originFile: 'builtin/a.json',
+    ...over,
   }
 }
 
@@ -56,14 +82,17 @@ beforeAll(async () => {
   await syncLibrary(ctx.db, snapshot)
 }, 120_000)
 
-afterAll(async () => { await ctx?.stop() })
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 const page = { offset: 0, limit: 50 }
 
 describe('lecture du catalogue', () => {
   it('liste les thèmes visibles triés par libellé et les langues', async () => {
     expect(await listLibraryThemes(ctx.db)).toEqual([
-      { id: 'arts', label: 'Arts' }, { id: 'sciences', label: 'Sciences' },
+      { id: 'arts', label: 'Arts' },
+      { id: 'sciences', label: 'Sciences' },
     ])
     expect(await listLibraryLanguages(ctx.db)).toEqual(['en', 'fr'])
   })
@@ -112,7 +141,10 @@ describe('lecture du catalogue', () => {
 
   it('liste les quiz triés par titre avec leur nombre de questions', async () => {
     const list = await listLibraryQuizzes(ctx.db, {})
-    expect(list.map((z) => [z.title, z.questionCount])).toEqual([['Abeille', 1], ['Zèbre', 3]])
+    expect(list.map((z) => [z.title, z.questionCount])).toEqual([
+      ['Abeille', 1],
+      ['Zèbre', 3],
+    ])
     expect((await listLibraryQuizzes(ctx.db, { audience: 'adultes' })).map((z) => z.id)).toEqual(['z2', 'z1'])
   })
 
@@ -123,13 +155,13 @@ describe('lecture du catalogue', () => {
     expect(new Set(ids).size).toBe(ids.length)
   })
 
-  it('getLibraryQuestions conserve l\'ordre demandé et renvoie null si un id est inconnu', async () => {
+  it("getLibraryQuestions conserve l'ordre demandé et renvoie null si un id est inconnu", async () => {
     expect((await getLibraryQuestions(ctx.db, ['q3', 'q1']))?.map((i) => i.id)).toEqual(['q3', 'q1'])
     expect(await getLibraryQuestions(ctx.db, ['q1', 'nope'])).toBeNull()
     expect(await getLibraryQuestions(ctx.db, [])).toEqual([])
   })
 
-  it('getLibraryQuiz renvoie les questions dans l\'ordre de position', async () => {
+  it("getLibraryQuiz renvoie les questions dans l'ordre de position", async () => {
     const res = await getLibraryQuiz(ctx.db, 'z1')
     expect(res?.quiz).toMatchObject({ id: 'z1', title: 'Zèbre', questionCount: 3 })
     expect(res?.questions.map((i) => i.id)).toEqual(['q3', 'q1', 'q2'])

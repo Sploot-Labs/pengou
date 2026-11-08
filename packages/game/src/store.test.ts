@@ -93,7 +93,7 @@ describe('MemorySessionStore', () => {
     expect(await store.peek('nope')).toBeUndefined()
   })
 
-  it('recordAnswer rend la réponse visible par get et peek, sans lien avec l\'objet passé', async () => {
+  it("recordAnswer rend la réponse visible par get et peek, sans lien avec l'objet passé", async () => {
     const store = new MemorySessionStore()
     await store.save(makeSession({ phase: 'question', currentIndex: 0, answers: { 0: {} } }))
     const submitted = { answer: { choice: 1 }, timeMs: 1200, correct: true, points: 800 }

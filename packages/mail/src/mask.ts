@@ -7,5 +7,8 @@ export function maskTokens(text: string): string {
 export function recipientDomain(email: string): string {
   const at = email.lastIndexOf('@')
   if (at < 0 || at === email.length - 1) return 'inconnu'
-  return email.slice(at + 1).trim().toLowerCase()
+  return email
+    .slice(at + 1)
+    .trim()
+    .toLowerCase()
 }

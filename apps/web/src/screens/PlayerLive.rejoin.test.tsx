@@ -18,7 +18,14 @@ vi.mock('../motion/index.js', async (importOriginal) => {
   return {
     ...actual,
     useCue: () => () => {},
-    useSound: () => ({ unlock: () => {}, play: () => {}, loop: () => {}, stop: () => {}, setMuted: () => {}, muted: false }),
+    useSound: () => ({
+      unlock: () => {},
+      play: () => {},
+      loop: () => {},
+      stop: () => {},
+      setMuted: () => {},
+      muted: false,
+    }),
   }
 })
 
@@ -123,7 +130,13 @@ describe('PlayerLive : adoption de la partie relancée', () => {
   it('session:relaunched (joueur) : enregistre la nouvelle identité et recharge /play', async () => {
     renderPlayerLive()
     await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:reconnect', expect.anything()))
-    emitServerEvent('session:relaunched', { role: 'player', pin: '777777', playerId: 'p9', joinToken: 'tok9', nickname: 'Ana' })
+    emitServerEvent('session:relaunched', {
+      role: 'player',
+      pin: '777777',
+      playerId: 'p9',
+      joinToken: 'tok9',
+      nickname: 'Ana',
+    })
     expect(loadPlayerSession()).toMatchObject({ pin: '777777', playerId: 'p9', joinToken: 'tok9', nickname: 'Ana' })
     expect(hardReload).toHaveBeenCalledWith('/play')
   })

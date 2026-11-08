@@ -33,10 +33,7 @@ describe('Login', () => {
   it("affiche « Mot de passe oublié ? » quand l'envoi d'e-mail est activé", () => {
     mailEnabled = true
     renderLogin()
-    expect(screen.getByRole('link', { name: 'Mot de passe oublié ?' })).toHaveAttribute(
-      'href',
-      '/forgot-password',
-    )
+    expect(screen.getByRole('link', { name: 'Mot de passe oublié ?' })).toHaveAttribute('href', '/forgot-password')
   })
 
   it("masque le lien quand l'envoi d'e-mail est désactivé", () => {
@@ -48,9 +45,7 @@ describe('Login', () => {
   it('confirme le changement de mot de passe après une réinitialisation', () => {
     mailEnabled = false
     renderLogin({ passwordReset: true })
-    expect(screen.getByRole('status')).toHaveTextContent(
-      'Mot de passe modifié. Vous pouvez vous connecter.',
-    )
+    expect(screen.getByRole('status')).toHaveTextContent('Mot de passe modifié. Vous pouvez vous connecter.')
   })
 
   function connecter() {

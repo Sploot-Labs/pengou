@@ -16,7 +16,13 @@ vi.mock('./screens/TermsRevalidation', () => ({
 import { RequireAuth } from './RequireAuth'
 
 function session(termsAcceptanceRequired: boolean) {
-  return { user: { id: 'u1', email: 'hote@example.com' }, loading: false, error: null, refresh: vi.fn(), termsAcceptanceRequired }
+  return {
+    user: { id: 'u1', email: 'hote@example.com' },
+    loading: false,
+    error: null,
+    refresh: vi.fn(),
+    termsAcceptanceRequired,
+  }
 }
 
 afterEach(() => {
@@ -27,20 +33,38 @@ afterEach(() => {
 describe('RequireAuth et revalidation des CGU', () => {
   it("affiche l'écran bloquant à la place de l'écran protégé", () => {
     mockSession.mockReturnValue(session(true))
-    render(<MemoryRouter><RequireAuth><p>Contenu protégé</p></RequireAuth></MemoryRouter>)
+    render(
+      <MemoryRouter>
+        <RequireAuth>
+          <p>Contenu protégé</p>
+        </RequireAuth>
+      </MemoryRouter>,
+    )
     expect(screen.getByText('Écran de revalidation')).toBeInTheDocument()
     expect(screen.queryByText('Contenu protégé')).not.toBeInTheDocument()
   })
 
   it('rend le contenu quand les CGU courantes sont acceptées', () => {
     mockSession.mockReturnValue(session(false))
-    render(<MemoryRouter><RequireAuth><p>Contenu protégé</p></RequireAuth></MemoryRouter>)
+    render(
+      <MemoryRouter>
+        <RequireAuth>
+          <p>Contenu protégé</p>
+        </RequireAuth>
+      </MemoryRouter>,
+    )
     expect(screen.getByText('Contenu protégé')).toBeInTheDocument()
   })
 
   it("ne coupe pas une partie en cours (écran hôte live) : l'écran viendra à la navigation suivante", () => {
     mockSession.mockReturnValue(session(true))
-    render(<MemoryRouter><RequireAuth allowPendingTerms><p>Partie en cours</p></RequireAuth></MemoryRouter>)
+    render(
+      <MemoryRouter>
+        <RequireAuth allowPendingTerms>
+          <p>Partie en cours</p>
+        </RequireAuth>
+      </MemoryRouter>,
+    )
     expect(screen.getByText('Partie en cours')).toBeInTheDocument()
   })
 })

@@ -120,7 +120,12 @@ export function BigWordCloud({
           const k = scales.get(o.key) ?? 1
           return { x: o.x, y: o.y, w: o.boxW * k, h: o.boxH * k }
         }),
-      ...badges.map((b) => ({ x: b.x + badgeWidth(b.label) / 2, y: b.y + BADGE_H / 2, w: badgeWidth(b.label), h: BADGE_H })),
+      ...badges.map((b) => ({
+        x: b.x + badgeWidth(b.label) / 2,
+        y: b.y + BADGE_H / 2,
+        w: badgeWidth(b.label),
+        h: BADGE_H,
+      })),
     ]
     const p = badgePosition({ ...w, boxW: w.boxW * s, boxH: w.boxH * s }, obstacles, size)
     badges.push({ word: w, label, x: p.x, y: p.y })

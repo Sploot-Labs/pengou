@@ -156,11 +156,7 @@ export function createQuestion(quizId: string, input: CreateQuestionInput): Prom
   return apiPost<Question>(`/api/quizzes/${quizId}/questions`, input)
 }
 
-export function updateQuestion(
-  quizId: string,
-  questionId: string,
-  patch: UpdateQuestionInput,
-): Promise<Question> {
+export function updateQuestion(quizId: string, questionId: string, patch: UpdateQuestionInput): Promise<Question> {
   return apiPatch<Question>(`/api/quizzes/${quizId}/questions/${questionId}`, patch)
 }
 

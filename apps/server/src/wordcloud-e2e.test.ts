@@ -94,7 +94,10 @@ function ack<T = unknown>(client: ClientSocket, event: string, payload: unknown)
 
 /** Enregistre tous les événements `event` reçus par `client`, dans l'ordre. `until` résout au
  * premier payload (déjà reçu ou à venir) qui satisfait le prédicat. */
-function record<T = unknown>(client: ClientSocket, event: string): {
+function record<T = unknown>(
+  client: ClientSocket,
+  event: string,
+): {
   received: T[]
   until: (predicate: (payload: T) => boolean, timeoutMs?: number) => Promise<T>
 } {
@@ -173,7 +176,12 @@ describe('e2e : nuage de mots en direct', () => {
           prompt: 'Capitale de la France ?',
           timeLimit: 60,
           readingTime: 0,
-          payload: { options: [{ label: 'Paris', correct: true }, { label: 'Lyon', correct: false }] },
+          payload: {
+            options: [
+              { label: 'Paris', correct: true },
+              { label: 'Lyon', correct: false },
+            ],
+          },
         },
         headers: { 'content-type': 'application/json', cookie },
       })
@@ -182,20 +190,27 @@ describe('e2e : nuage de mots en direct', () => {
       // ---- Hôte, grand écran, deux joueurs. ----
       const host = await connectClient(url, { cookie })
       clients.push(host)
-      const created = await ack<{ sessionId: string; pin: string; error?: string }>(host, 'host:create', { quizId: quiz.id })
+      const created = await ack<{ sessionId: string; pin: string; error?: string }>(host, 'host:create', {
+        quizId: quiz.id,
+      })
       expect(created.error).toBeUndefined()
       const { sessionId, pin } = created
 
       const tokenAck = await ack<{ displayToken: string }>(host, 'host:createScreenToken', {})
       const screen = await connectClient(url)
       clients.push(screen)
-      const screenJoin = await ack<{ ok?: boolean; error?: string }>(screen, 'screen:join', { displayToken: tokenAck.displayToken })
+      const screenJoin = await ack<{ ok?: boolean; error?: string }>(screen, 'screen:join', {
+        displayToken: tokenAck.displayToken,
+      })
       expect(screenJoin.ok).toBe(true)
 
       const playerA = await connectClient(url)
       const playerB = await connectClient(url)
       clients.push(playerA, playerB)
-      for (const [p, nickname] of [[playerA, 'Alice'], [playerB, 'Bob']] as const) {
+      for (const [p, nickname] of [
+        [playerA, 'Alice'],
+        [playerB, 'Bob'],
+      ] as const) {
         const joined = await ack<{ playerId?: string; error?: string }>(p, 'player:join', { pin, nickname })
         expect(joined.error).toBeUndefined()
       }
@@ -215,7 +230,8 @@ describe('e2e : nuage de mots en direct', () => {
       // ---- Trois envois rapides du joueur A : au plus deux diffusions, la dernière complète. ----
       const sent = await Promise.all(
         ['café', 'Soleil', 'Plage'].map((word) =>
-          ack<{ accepted?: boolean; words?: string[] }>(playerA, 'player:answer', { answer: { word } })),
+          ack<{ accepted?: boolean; words?: string[] }>(playerA, 'player:answer', { answer: { word } }),
+        ),
       )
       expect(sent.map((s) => s.accepted)).toEqual([true, true, true])
       expect(sent.map((s) => s.words?.length).sort()).toEqual([1, 2, 3])
@@ -231,7 +247,9 @@ describe('e2e : nuage de mots en direct', () => {
       expect(hostUpdates.received.length).toBeGreaterThanOrEqual(1)
 
       // ---- Joueur B : un mot. Pas d'auto-révélation pour un nuage. ----
-      const bSent = await ack<{ accepted?: boolean; words?: string[] }>(playerB, 'player:answer', { answer: { word: 'CAFE' } })
+      const bSent = await ack<{ accepted?: boolean; words?: string[] }>(playerB, 'player:answer', {
+        answer: { word: 'CAFE' },
+      })
       expect(bSent).toEqual({ accepted: true, words: ['CAFE'] })
       const withB = await screenUpdates.until((v) => v.totalWords === 4, 3000)
       expect(withB.words.find((w) => w.key === 'cafe')?.count).toBe(2)
@@ -251,7 +269,9 @@ describe('e2e : nuage de mots en direct', () => {
       const notString = await ack<{ ok?: boolean; error?: string }>(host, 'host:wordcloudRemove', { word: 42 })
       expect(notString.error).toBeTruthy()
 
-      const tooLong = await ack<{ ok?: boolean; error?: string }>(host, 'host:wordcloudRemove', { word: 'x'.repeat(26) })
+      const tooLong = await ack<{ ok?: boolean; error?: string }>(host, 'host:wordcloudRemove', {
+        word: 'x'.repeat(26),
+      })
       expect(tooLong.error).toBeTruthy()
       const emptyKey = await ack<{ ok?: boolean; error?: string }>(host, 'host:wordcloudRemove', { word: '́' })
       expect(emptyKey.error).toBeTruthy()
@@ -272,9 +292,10 @@ describe('e2e : nuage de mots en direct', () => {
       const screen2 = await connectClient(url)
       clients.push(screen2)
       const screen2Updates = record<WordcloudView>(screen2, 'wordcloud:update')
-      const reconnected = await ack<{ ok?: boolean; error?: string }>(
-        screen2, 'screen:reconnect', { sessionId, displayToken: tokenAck.displayToken },
-      )
+      const reconnected = await ack<{ ok?: boolean; error?: string }>(screen2, 'screen:reconnect', {
+        sessionId,
+        displayToken: tokenAck.displayToken,
+      })
       expect(reconnected.ok).toBe(true)
       const replayed = await screen2Updates.until(() => true, 2000)
       expect(replayed.questionId).toBe(q1.id)

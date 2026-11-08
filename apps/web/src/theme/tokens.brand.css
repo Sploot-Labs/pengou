@@ -2,8 +2,8 @@
    Copie vendorée depuis le dépôt de marque SplootLabs (D:/Source/SplootLabs,
    futur github.com/splootlabs → design-tokens.css).
    Resynchroniser ce fichier si la palette de marque change. */
-@import './brand-primitives.css';
+@import "./brand-primitives.css";
 
 /* Primitives PRODUIT Pengou (palette banquise) — identité propre au produit,
    distincte de la marque éditeur Sploot Labs ci-dessus. */
-@import './pengou-primitives.css';
+@import "./pengou-primitives.css";

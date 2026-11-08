@@ -6,7 +6,10 @@ const base = { transport: 'smtp' as const, from: 'Pengou <contact@pengou.fr>', r
 
 describe('smtpTransportOptions', () => {
   it('port 465 : TLS implicite', () => {
-    const o = smtpTransportOptions({ ...base, smtp: { host: 'h', port: 465, user: 'u', password: 'p', requireTls: true } })
+    const o = smtpTransportOptions({
+      ...base,
+      smtp: { host: 'h', port: 465, user: 'u', password: 'p', requireTls: true },
+    })
     expect(o).toMatchObject({ host: 'h', port: 465, secure: true, auth: { user: 'u', pass: 'p' } })
     expect(o.connectionTimeout).toBe(10_000)
     expect(o.greetingTimeout).toBe(10_000)

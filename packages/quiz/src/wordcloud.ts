@@ -28,10 +28,7 @@ export function wordKey(word: string): string {
   return normalizeText(word.replace(/\s+/g, ' '), false)
 }
 
-export function aggregateWords(
-  answers: WordcloudAnswer[],
-  removedKeys: ReadonlySet<string>,
-): WordcloudAggregate {
+export function aggregateWords(answers: WordcloudAnswer[], removedKeys: ReadonlySet<string>): WordcloudAggregate {
   // clé -> graphie affichée -> effectif
   const byKey = new Map<string, Map<string, number>>()
   let participants = 0

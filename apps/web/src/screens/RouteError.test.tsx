@@ -10,7 +10,15 @@ function Boom(): never {
 
 function renderAt(path: string) {
   const router = createMemoryRouter(
-    [{ errorElement: <RouteError />, children: [{ path: '/', element: <p>Accueil</p> }, { path: '/boom', element: <Boom /> }] }],
+    [
+      {
+        errorElement: <RouteError />,
+        children: [
+          { path: '/', element: <p>Accueil</p> },
+          { path: '/boom', element: <Boom /> },
+        ],
+      },
+    ],
     { initialEntries: [path] },
   )
   render(<RouterProvider router={router} />)

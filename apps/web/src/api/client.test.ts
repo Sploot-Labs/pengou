@@ -76,7 +76,7 @@ describe('client API typé', () => {
     expect(init.headers).toEqual({ 'Content-Type': 'application/json', 'x-tenant-id': 'tenant-abc' })
   })
 
-  it("lève une ApiError avec le message du champ `error` du serveur (routes maison)", async () => {
+  it('lève une ApiError avec le message du champ `error` du serveur (routes maison)', async () => {
     mockFetchOnce(401, { error: 'Non authentifié.' })
     await expect(apiGet('/api/me')).rejects.toMatchObject({
       status: 401,
@@ -84,7 +84,7 @@ describe('client API typé', () => {
     })
   })
 
-  it("lève une ApiError avec le message du champ `message` du serveur (Better Auth)", async () => {
+  it('lève une ApiError avec le message du champ `message` du serveur (Better Auth)', async () => {
     mockFetchOnce(400, { message: 'Password too short', code: 'PASSWORD_TOO_SHORT' })
     await expect(apiPost('/api/auth/sign-up/email', {})).rejects.toMatchObject({
       status: 400,
@@ -130,7 +130,10 @@ describe('client API typé', () => {
 describe('client API, revalidation des CGU', () => {
   it("expose le code d'erreur du serveur sur l'ApiError", async () => {
     mockFetchOnce(400, { message: 'Acceptez les CGU.', code: 'TERMS_ACCEPTANCE_REQUIRED' })
-    await expect(apiPost('/api/auth/sign-up/email', {})).rejects.toMatchObject({ status: 400, code: 'TERMS_ACCEPTANCE_REQUIRED' })
+    await expect(apiPost('/api/auth/sign-up/email', {})).rejects.toMatchObject({
+      status: 400,
+      code: 'TERMS_ACCEPTANCE_REQUIRED',
+    })
   })
 
   it('signale un 403 TERMS_ACCEPTANCE_REQUIRED aux abonnés, une fois par réponse', async () => {

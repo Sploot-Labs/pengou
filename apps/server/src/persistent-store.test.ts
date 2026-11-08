@@ -1,6 +1,12 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import {
-  startTestDb, runMigrations, schema, tenantScope, createQuiz, createGameSession, setSessionStatus,
+  startTestDb,
+  runMigrations,
+  schema,
+  tenantScope,
+  createQuiz,
+  createGameSession,
+  setSessionStatus,
 } from '@splootlabs/db'
 import type { GameSession } from '@splootlabs/game'
 import { PersistentSessionStore } from './persistent-store.js'
@@ -14,7 +20,8 @@ beforeAll(async () => {
   ctx = await startTestDb()
   await runMigrations(ctx.db)
   const [tenant] = await ctx.db.insert(schema.tenant).values({ name: 'Persist' }).returning()
-  const [owner] = await ctx.db.insert(schema.user)
+  const [owner] = await ctx.db
+    .insert(schema.user)
     .values({ id: crypto.randomUUID(), email: 'persist@x.fr', name: 'Persist', emailVerified: false })
     .returning()
   tenantId = tenant.id
@@ -37,8 +44,18 @@ function makeSession(id: string, pin: string): GameSession {
     phase: 'question',
     questions: [
       {
-        id: 'q1', type: 'mcq', prompt: 'Q1', timeLimit: 20, readingTime: 0, basePoints: 1000,
-        payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+        id: 'q1',
+        type: 'mcq',
+        prompt: 'Q1',
+        timeLimit: 20,
+        readingTime: 0,
+        basePoints: 1000,
+        payload: {
+          options: [
+            { label: 'A', correct: true },
+            { label: 'B', correct: false },
+          ],
+        },
       },
     ],
     currentIndex: 0,

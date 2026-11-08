@@ -144,7 +144,12 @@ async function main() {
       const difficulty = DIFFICULTY[q.difficulty]
       // Énoncé déjà vu (comparaison sans casse, diacritiques ni écarts d'espaces) : seule la première
       // occurrence est gardée, dans l'ordre des catégories puis du cache.
-      const key = clean(prompt.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase())
+      const key = clean(
+        prompt
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase(),
+      )
       if (seen.has(key)) {
         console.warn(`${id} écartée : énoncé en double`)
         continue

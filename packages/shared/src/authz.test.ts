@@ -16,15 +16,16 @@ describe('authz — catalogue de capacités', () => {
     expect(hasPermission('member', 'members:manage')).toBe(false)
   })
 
-  it('member n\'a aucune capacité', () => {
+  it("member n'a aucune capacité", () => {
     expect(ROLE_CAPABILITIES.member).toEqual([])
   })
 
   it('couverture exhaustive rôles × capacités', () => {
     const roles: Role[] = ['owner', 'admin', 'member']
     const caps: Capability[] = ['content:access-all', 'members:manage', 'workspace:manage']
-    for (const r of roles) for (const c of caps) {
-      expect(typeof hasPermission(r, c)).toBe('boolean')
-    }
+    for (const r of roles)
+      for (const c of caps) {
+        expect(typeof hasPermission(r, c)).toBe('boolean')
+      }
   })
 })

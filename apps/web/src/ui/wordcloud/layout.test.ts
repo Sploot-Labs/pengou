@@ -285,7 +285,7 @@ describe('badgePosition', () => {
     expect(p.x + badge.w).toBeGreaterThan(w.x + w.boxW / 2)
   })
 
-  it("garde la pastille entière dans la scène pour un mot près du coin haut droit", () => {
+  it('garde la pastille entière dans la scène pour un mot près du coin haut droit', () => {
     const w = word('a', 1500, 60, 160, 60)
     const p = badgePosition(w, [], badge)
     expect(p.x).toBeGreaterThanOrEqual(0)
@@ -304,14 +304,14 @@ describe('badgePosition', () => {
     expect(p.y).toBeGreaterThanOrEqual(w.y + w.boxH / 2)
   })
 
-  it("évite une pastille déjà posée", () => {
+  it('évite une pastille déjà posée', () => {
     const w = word('a', 800, 400, 200, 80)
     const first = badgePosition(w, [], badge)
     const second = badgePosition(w, [box(first)], badge)
     expect(intersects(box(first), box(second))).toBe(false)
   })
 
-  it("se place sur le côté du mot quand les quatre coins sont pris", () => {
+  it('se place sur le côté du mot quand les quatre coins sont pris', () => {
     // Cas relevé sur le grand écran : mot allumé coincé entre un allumé au-dessus et un au-dessous.
     const w = word('a', 800, 400, 400, 120)
     const obstacles: Rect[] = [

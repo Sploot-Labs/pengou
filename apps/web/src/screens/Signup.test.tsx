@@ -74,16 +74,20 @@ describe('Signup avec CGU activées', () => {
 
   it("ouvre les CGU et la politique dans un nouvel onglet, signalé dans l'intitulé accessible", async () => {
     renderSignup()
-    const termsLink = await screen.findByRole('link', { name: "conditions d'utilisation (s'ouvre dans un nouvel onglet)" })
+    const termsLink = await screen.findByRole('link', {
+      name: "conditions d'utilisation (s'ouvre dans un nouvel onglet)",
+    })
     expect(termsLink).toHaveAttribute('href', LEGAL.termsUrl)
     expect(termsLink).toHaveAttribute('target', '_blank')
     expect(termsLink).toHaveAttribute('rel', expect.stringContaining('noopener'))
-    const privacyLink = screen.getByRole('link', { name: "politique de confidentialité (s'ouvre dans un nouvel onglet)" })
+    const privacyLink = screen.getByRole('link', {
+      name: "politique de confidentialité (s'ouvre dans un nouvel onglet)",
+    })
     expect(privacyLink).toHaveAttribute('href', LEGAL.privacyUrl)
     expect(privacyLink).toHaveAttribute('target', '_blank')
   })
 
-  it("informe sur la politique de confidentialité sans case à cocher", async () => {
+  it('informe sur la politique de confidentialité sans case à cocher', async () => {
     renderSignup()
     const sentence = await screen.findByText(/explique comment vos données sont traitées/)
     expect(sentence.closest('p')).toHaveTextContent(
@@ -136,7 +140,7 @@ describe('Signup avec CGU activées', () => {
     expect(screen.queryByText('Confirmez que vous avez 15 ans ou plus.')).not.toBeInTheDocument()
   })
 
-  it('les cases se cochent au clavier (barre d\'espace sur une case native)', async () => {
+  it("les cases se cochent au clavier (barre d'espace sur une case native)", async () => {
     renderSignup()
     const age = await screen.findByRole('checkbox', { name: "J'ai 15 ans ou plus" })
     expect(age.tagName).toBe('INPUT')
@@ -144,7 +148,7 @@ describe('Signup avec CGU activées', () => {
     expect(age).not.toHaveAttribute('tabindex', '-1')
   })
 
-  it('envoie la version affichée et la confirmation d\'âge quand tout est coché', async () => {
+  it("envoie la version affichée et la confirmation d'âge quand tout est coché", async () => {
     renderSignup()
     fireEvent.click(await screen.findByRole('checkbox', { name: "J'ai 15 ans ou plus" }))
     fireEvent.click(screen.getByRole('checkbox', { name: /J'accepte les conditions/ }))
@@ -172,7 +176,9 @@ describe('Signup avec CGU désactivées (instance auto-hébergée)', () => {
     expect(screen.queryByText(/politique de confidentialité/)).not.toBeInTheDocument()
     fillValidFields()
     submit()
-    await waitFor(() => expect(mockSignUp).toHaveBeenCalledWith({ email: 'ada@example.com', password: 'motdepasse-1', name: 'Ada' }))
+    await waitFor(() =>
+      expect(mockSignUp).toHaveBeenCalledWith({ email: 'ada@example.com', password: 'motdepasse-1', name: 'Ada' }),
+    )
   })
 })
 

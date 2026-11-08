@@ -30,8 +30,12 @@ const resolver: DnsResolver = {
     if (d === DEAD_DOMAIN) throw dnsError('ENOTFOUND')
     return [{ exchange: `mx.${d}`, priority: 10 }]
   },
-  resolve4: async () => { throw dnsError('ENOTFOUND') },
-  resolve6: async () => { throw dnsError('ENOTFOUND') },
+  resolve4: async () => {
+    throw dnsError('ENOTFOUND')
+  },
+  resolve6: async () => {
+    throw dnsError('ENOTFOUND')
+  },
 }
 
 async function buildApp(mailer: MemoryMailer) {
@@ -66,7 +70,7 @@ function cookiesOf(res: { headers: Record<string, unknown> }): string {
   return list.map((c: string) => c.split(';')[0]).join('; ')
 }
 
-describe('e2e : confirmation d\'adresse', () => {
+describe("e2e : confirmation d'adresse", () => {
   it("l'inscription envoie le lien, qui confirme l'adresse et ramène sur l'app", async () => {
     const mailer = new MemoryMailer()
     const app = await buildApp(mailer)

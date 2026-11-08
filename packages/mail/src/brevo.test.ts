@@ -38,9 +38,7 @@ describe('BrevoMailer', () => {
   })
 
   it('transforme une réponse 401 en MailError sans la clé', async () => {
-    const fetch = vi.fn(
-      async () => new Response('{"code":"unauthorized","message":"Key not found"}', { status: 401 }),
-    )
+    const fetch = vi.fn(async () => new Response('{"code":"unauthorized","message":"Key not found"}', { status: 401 }))
     const mailer = createMailer(config, log(), { fetch: asFetch(fetch) })
     const err = await mailer.send(mail).catch((e) => e)
     expect(err).toBeInstanceOf(MailError)

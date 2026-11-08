@@ -47,8 +47,18 @@ async function buildApp(): Promise<FastifyInstance> {
   return app
 }
 
-const validMcq = { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] }
-const invalidMcq = { options: [{ label: 'A', correct: false }, { label: 'B', correct: false }] }
+const validMcq = {
+  options: [
+    { label: 'A', correct: true },
+    { label: 'B', correct: false },
+  ],
+}
+const invalidMcq = {
+  options: [
+    { label: 'A', correct: false },
+    { label: 'B', correct: false },
+  ],
+}
 
 async function createQuizAndCookie(app: FastifyInstance, email: string): Promise<{ cookie: string; quizId: string }> {
   const cookie = await signUp(app, email)
@@ -252,7 +262,14 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
     const validUpdate = await app.inject({
       method: 'PATCH',
       url: `/api/quizzes/${quizId}/questions/${created.id}`,
-      payload: { payload: { options: [{ label: 'X', correct: true }, { label: 'Y', correct: false }] } },
+      payload: {
+        payload: {
+          options: [
+            { label: 'X', correct: true },
+            { label: 'Y', correct: false },
+          ],
+        },
+      },
       headers: { 'content-type': 'application/json', cookie },
     })
     expect(validUpdate.statusCode).toBe(200)

@@ -29,7 +29,9 @@ export type ReadCatalogOptions = {
 function reason(err: unknown): string {
   if (err && typeof err === 'object' && 'issues' in err && Array.isArray(err.issues)) {
     return err.issues
-      .map((i: { path: PropertyKey[]; message: string }) => `${i.path.map(String).join('.') || '(racine)'} : ${i.message}`)
+      .map(
+        (i: { path: PropertyKey[]; message: string }) => `${i.path.map(String).join('.') || '(racine)'} : ${i.message}`,
+      )
       .join(' ; ')
   }
   return err instanceof Error ? err.message : String(err)

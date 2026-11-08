@@ -48,9 +48,9 @@ export class BrevoMailer implements Mailer {
     } catch {
       // Corps absent ou non JSON : seul le statut est conservé.
     }
-    throw new MailError(
-      `Brevo a refusé l'envoi (HTTP ${response.status}${code ? `, ${code}` : ''})`,
-      { status: response.status, ...(code ? { code } : {}) },
-    )
+    throw new MailError(`Brevo a refusé l'envoi (HTTP ${response.status}${code ? `, ${code}` : ''})`, {
+      status: response.status,
+      ...(code ? { code } : {}),
+    })
   }
 }

@@ -144,12 +144,7 @@ export function LibraryPreview({
           <p role="status">Chargement des questions…</p>
         ) : (
           <>
-            <Button
-              variant="ghost"
-              type="button"
-              aria-pressed={showAnswers}
-              onClick={() => setShowAnswers((v) => !v)}
-            >
+            <Button variant="ghost" type="button" aria-pressed={showAnswers} onClick={() => setShowAnswers((v) => !v)}>
               {showAnswers ? 'Masquer les réponses' : 'Afficher les réponses'}
             </Button>
             <ol className="library-preview__list">
@@ -172,11 +167,14 @@ export function LibraryPreview({
           </>
         )}
 
-        {actionError && (quizLimit ? <QuizLimitNotice /> : (
-          <p className="join-error" role="alert">
-            {actionError}
-          </p>
-        ))}
+        {actionError &&
+          (quizLimit ? (
+            <QuizLimitNotice />
+          ) : (
+            <p className="join-error" role="alert">
+              {actionError}
+            </p>
+          ))}
         <div className="host-dialog__actions">
           <Button
             variant="ghost"
@@ -186,7 +184,12 @@ export function LibraryPreview({
           >
             {busy === 'customize' ? 'Création…' : 'Personnaliser'}
           </Button>
-          <Button variant="primary" type="button" disabled={!quiz || busy !== null} onClick={() => quiz && onPlay(quiz)}>
+          <Button
+            variant="primary"
+            type="button"
+            disabled={!quiz || busy !== null}
+            onClick={() => quiz && onPlay(quiz)}
+          >
             {busy === 'play' ? 'Lancement…' : 'Jouer maintenant'}
           </Button>
         </div>

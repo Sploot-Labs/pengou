@@ -92,11 +92,7 @@ describe('buildDistributionRows — text', () => {
   })
 
   it('réponse vide affichée avec un libellé explicite, pas une chaîne vide brute', () => {
-    const rows = buildDistributionRows(
-      'text',
-      { answers: ['x'] },
-      { [JSON.stringify({ text: '' })]: 2 },
-    )
+    const rows = buildDistributionRows('text', { answers: ['x'] }, { [JSON.stringify({ text: '' })]: 2 })
     expect(rows).toEqual([{ key: '', label: '(réponse vide)', correct: false, shape: null, count: 2 }])
   })
 })
@@ -111,13 +107,9 @@ describe('buildDistributionRows — clés inattendues (jamais de crash)', () => 
 
   it('un JSON valide mais de forme inattendue (ni {value}, ni {text}) est ignoré sans planter', () => {
     const distribution = { [JSON.stringify({ surprise: 42 })]: 1 }
-    expect(() =>
-      buildDistributionRows('slider', { min: 0, max: 10, correct: 5 }, distribution),
-    ).not.toThrow()
+    expect(() => buildDistributionRows('slider', { min: 0, max: 10, correct: 5 }, distribution)).not.toThrow()
     expect(buildDistributionRows('slider', { min: 0, max: 10, correct: 5 }, distribution)).toEqual([])
-    expect(() =>
-      buildDistributionRows('text', { answers: ['x'] }, distribution),
-    ).not.toThrow()
+    expect(() => buildDistributionRows('text', { answers: ['x'] }, distribution)).not.toThrow()
     expect(buildDistributionRows('text', { answers: ['x'] }, distribution)).toEqual([])
   })
 
