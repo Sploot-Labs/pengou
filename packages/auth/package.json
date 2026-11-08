@@ -16,7 +16,7 @@
     "@splootlabs/db": "workspace:*",
     "@splootlabs/mail": "workspace:*",
     "@splootlabs/shared": "workspace:*",
-    "better-auth": "^1.7.16"
+    "better-auth": "^1.7.17"
   },
   "devDependencies": {
     "@better-auth/cli": "^1.4.21",
