@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=124"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0124-3",
+      "type": "mcq",
+      "prompt": "Que fait-on en chantant et en suivant les paroles sur un écran ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Krusty",
+            "correct": false
+          },
+          {
+            "label": "Kaoma",
+            "correct": false
+          },
+          {
+            "label": "Kojiki",
+            "correct": false
+          },
+          {
+            "label": "Karaoké",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0124-4",
+      "type": "mcq",
+      "prompt": "Quel avertisseur sonore retrouve-t-on dans la plupart des voitures ?",
+      "payload": {
+        "options": [
+          {
+            "label": "K-way",
+            "correct": false
+          },
+          {
+            "label": "Kilt",
+            "correct": false
+          },
+          {
+            "label": "Kalachnikov",
+            "correct": false
+          },
+          {
+            "label": "Klaxon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

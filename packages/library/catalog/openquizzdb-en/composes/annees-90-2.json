@@ -1,0 +1,358 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0223-4-en",
+      "type": "mcq",
+      "prompt": "Who is Whitney Houston's \"Bodyguard\" in the film of that name?",
+      "payload": {
+        "options": [
+          {
+            "label": "Richard Gere",
+            "correct": false
+          },
+          {
+            "label": "Kevin Costner",
+            "correct": true
+          },
+          {
+            "label": "Mel Gibson",
+            "correct": false
+          },
+          {
+            "label": "Bruce Willis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0303-2-en",
+      "type": "mcq",
+      "prompt": "In what year was the Linux kernel first released?",
+      "payload": {
+        "options": [
+          {
+            "label": "1993",
+            "correct": false
+          },
+          {
+            "label": "1997",
+            "correct": false
+          },
+          {
+            "label": "1995",
+            "correct": false
+          },
+          {
+            "label": "1991",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0067-3-en",
+      "type": "mcq",
+      "prompt": "Which German carmaker took over the Skoda brand in 1991?",
+      "payload": {
+        "options": [
+          {
+            "label": "Opel",
+            "correct": false
+          },
+          {
+            "label": "Volkswagen",
+            "correct": true
+          },
+          {
+            "label": "Audi",
+            "correct": false
+          },
+          {
+            "label": "Porsche",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0334-3-en",
+      "type": "mcq",
+      "prompt": "In which film does Bruce Willis play a child psychologist?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Sixth Sense",
+            "correct": true
+          },
+          {
+            "label": "The Kid",
+            "correct": false
+          },
+          {
+            "label": "The Story of Us",
+            "correct": false
+          },
+          {
+            "label": "Hostage",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0267-4-en",
+      "type": "mcq",
+      "prompt": "Who won the long jump in Atlanta in 1996?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michael Johnson",
+            "correct": false
+          },
+          {
+            "label": "Dwight Phillips",
+            "correct": false
+          },
+          {
+            "label": "Carl Lewis",
+            "correct": true
+          },
+          {
+            "label": "Linford Christie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0172-2-en",
+      "type": "mcq",
+      "prompt": "Which alternative rock band was made up of the Gallagher brothers?",
+      "payload": {
+        "options": [
+          {
+            "label": "OMD",
+            "correct": false
+          },
+          {
+            "label": "Oasis",
+            "correct": true
+          },
+          {
+            "label": "Offspring",
+            "correct": false
+          },
+          {
+            "label": "Ottawan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0103-1-en",
+      "type": "mcq",
+      "prompt": "Which cowboy doll plays the lead in \"Toy Story\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Buzz",
+            "correct": false
+          },
+          {
+            "label": "Woody",
+            "correct": true
+          },
+          {
+            "label": "Bayonne",
+            "correct": false
+          },
+          {
+            "label": "Rex",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0492-3-en",
+      "type": "mcq",
+      "prompt": "Which game show features a quest for keys and a treasure room?",
+      "payload": {
+        "options": [
+          {
+            "label": "Koh-Lanta",
+            "correct": false
+          },
+          {
+            "label": "Ninja Warrior",
+            "correct": false
+          },
+          {
+            "label": "Money Drop",
+            "correct": false
+          },
+          {
+            "label": "Fort Boyard",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-1-en",
+      "type": "mcq",
+      "prompt": "Which reggae singer made his name with the hit \"Boombastic\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bob Marley",
+            "correct": false
+          },
+          {
+            "label": "Alpha Blondy",
+            "correct": false
+          },
+          {
+            "label": "Ziggy Marley",
+            "correct": false
+          },
+          {
+            "label": "Shaggy",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0596-4-en",
+      "type": "mcq",
+      "prompt": "Which lone hitman was played in film by Jean Reno?",
+      "payload": {
+        "options": [
+          {
+            "label": "Simon",
+            "correct": false
+          },
+          {
+            "label": "Odilon",
+            "correct": false
+          },
+          {
+            "label": "Léon",
+            "correct": true
+          },
+          {
+            "label": "Gaston",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0167-1-en",
+      "type": "mcq",
+      "prompt": "Which doctor did George Clooney play in \"ER\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "John Carter",
+            "correct": false
+          },
+          {
+            "label": "Douglas Ross",
+            "correct": true
+          },
+          {
+            "label": "Mark Green",
+            "correct": false
+          },
+          {
+            "label": "Dylan Creed",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0061-1-en",
+      "type": "mcq",
+      "prompt": "Who played Donna Martin in the series \"Beverly Hills, 90210\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tori Spelling",
+            "correct": true
+          },
+          {
+            "label": "Carol Potter",
+            "correct": false
+          },
+          {
+            "label": "Jennie Garth",
+            "correct": false
+          },
+          {
+            "label": "Hilary Swank",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

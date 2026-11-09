@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=442"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0442-2",
+      "type": "mcq",
+      "prompt": "Quelle ville belge est considérée comme le centre diamantaire mondial ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bruxelles",
+            "correct": false
+          },
+          {
+            "label": "Anvers",
+            "correct": true
+          },
+          {
+            "label": "Liège",
+            "correct": false
+          },
+          {
+            "label": "Mons",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0442-3",
+      "type": "mcq",
+      "prompt": "Qu'est-ce qui est turc, né en Autriche et mangé en France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pistolet",
+            "correct": false
+          },
+          {
+            "label": "Gaufre",
+            "correct": false
+          },
+          {
+            "label": "Crêpe",
+            "correct": false
+          },
+          {
+            "label": "Croissant",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0442-4",
+      "type": "mcq",
+      "prompt": "Quel est le premier port des Pays-Bas ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Utrecht",
+            "correct": false
+          },
+          {
+            "label": "Amsterdam",
+            "correct": false
+          },
+          {
+            "label": "La Haye",
+            "correct": false
+          },
+          {
+            "label": "Rotterdam",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

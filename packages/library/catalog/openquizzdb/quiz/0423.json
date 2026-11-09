@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=423"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0423-1",
+      "type": "mcq",
+      "prompt": "Quelle est la saveur du Champomy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ananas",
+            "correct": false
+          },
+          {
+            "label": "Citron",
+            "correct": false
+          },
+          {
+            "label": "Orange",
+            "correct": false
+          },
+          {
+            "label": "Pomme",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0423-2",
+      "type": "mcq",
+      "prompt": "Dans quel secteur Tropicana est-elle un leader mondial ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thé",
+            "correct": false
+          },
+          {
+            "label": "Limonade",
+            "correct": false
+          },
+          {
+            "label": "Jus de fruits",
+            "correct": true
+          },
+          {
+            "label": "Bières sans alcool",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0423-4",
+      "type": "mcq",
+      "prompt": "Quelle boisson est connue pour contenir du ginger ale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Canada Dry",
+            "correct": true
+          },
+          {
+            "label": "7 Up",
+            "correct": false
+          },
+          {
+            "label": "Gini",
+            "correct": false
+          },
+          {
+            "label": "Fanta",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

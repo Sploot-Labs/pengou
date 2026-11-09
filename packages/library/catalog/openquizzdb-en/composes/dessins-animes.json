@@ -1,0 +1,561 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0553-1-en",
+      "type": "mcq",
+      "prompt": "What color is SpongeBob's body?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yellow",
+            "correct": true
+          },
+          {
+            "label": "White",
+            "correct": false
+          },
+          {
+            "label": "Pink",
+            "correct": false
+          },
+          {
+            "label": "Gray",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0088-2-en",
+      "type": "mcq",
+      "prompt": "In \"The Simpsons\", what is the first name of Marge's husband?",
+      "payload": {
+        "options": [
+          {
+            "label": "Harvey",
+            "correct": false
+          },
+          {
+            "label": "Horace",
+            "correct": false
+          },
+          {
+            "label": "Homer",
+            "correct": true
+          },
+          {
+            "label": "Herbert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0115-1-en",
+      "type": "mcq",
+      "prompt": "Who keeps dying in the first seasons of \"South Park\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stan",
+            "correct": false
+          },
+          {
+            "label": "Kenny",
+            "correct": true
+          },
+          {
+            "label": "Eric",
+            "correct": false
+          },
+          {
+            "label": "Kyle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0159-3-en",
+      "type": "mcq",
+      "prompt": "In \"One Piece\", who is the captain of the Heart Pirates?",
+      "payload": {
+        "options": [
+          {
+            "label": "Law",
+            "correct": true
+          },
+          {
+            "label": "Big Mom",
+            "correct": false
+          },
+          {
+            "label": "Buggy",
+            "correct": false
+          },
+          {
+            "label": "Kid",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0446-2-en",
+      "type": "mcq",
+      "prompt": "Which cartoon mouse is the fastest in all of Mexico?",
+      "payload": {
+        "options": [
+          {
+            "label": "Speedy Gonzales",
+            "correct": true
+          },
+          {
+            "label": "Stuart Little",
+            "correct": false
+          },
+          {
+            "label": "Mickey Mouse",
+            "correct": false
+          },
+          {
+            "label": "Jerry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0451-1-en",
+      "type": "mcq",
+      "prompt": "Which character and friend of SpongeBob lives under a rock?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sandy",
+            "correct": false
+          },
+          {
+            "label": "Patrick",
+            "correct": true
+          },
+          {
+            "label": "Eugene",
+            "correct": false
+          },
+          {
+            "label": "Squidward",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0115-3-en",
+      "type": "mcq",
+      "prompt": "Who is the oldest of the Simpson children?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maggie",
+            "correct": false
+          },
+          {
+            "label": "Lisa",
+            "correct": false
+          },
+          {
+            "label": "Marge",
+            "correct": false
+          },
+          {
+            "label": "Bart",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0033-2-en",
+      "type": "mcq",
+      "prompt": "Which rabbit is famous in the world of cartoons?",
+      "payload": {
+        "options": [
+          {
+            "label": "Porky Pig",
+            "correct": false
+          },
+          {
+            "label": "Elmer Fudd",
+            "correct": false
+          },
+          {
+            "label": "Bugs Bunny",
+            "correct": true
+          },
+          {
+            "label": "Speedy Gonzales",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0426-2-en",
+      "type": "mcq",
+      "prompt": "What is the name of the young hero of the \"Pokémon\" cartoon?",
+      "payload": {
+        "options": [
+          {
+            "label": "Florent",
+            "correct": false
+          },
+          {
+            "label": "Ash",
+            "correct": true
+          },
+          {
+            "label": "Brock",
+            "correct": false
+          },
+          {
+            "label": "Jacky",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0449-1-en",
+      "type": "mcq",
+      "prompt": "Who owns the Krusty Krab in \"SpongeBob SquarePants\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mr. Krabs",
+            "correct": true
+          },
+          {
+            "label": "Squidward",
+            "correct": false
+          },
+          {
+            "label": "Sandy",
+            "correct": false
+          },
+          {
+            "label": "SpongeBob",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0309-1-en",
+      "type": "mcq",
+      "prompt": "Which instrument does Lisa Simpson, created by Matt Groening, play?",
+      "payload": {
+        "options": [
+          {
+            "label": "Flute",
+            "correct": false
+          },
+          {
+            "label": "Trumpet",
+            "correct": false
+          },
+          {
+            "label": "Saxophone",
+            "correct": true
+          },
+          {
+            "label": "Piano",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0115-2-en",
+      "type": "mcq",
+      "prompt": "Which of the boys in his gang does Scooby-Doo often team up with?",
+      "payload": {
+        "options": [
+          {
+            "label": "Logan",
+            "correct": false
+          },
+          {
+            "label": "Shaggy",
+            "correct": true
+          },
+          {
+            "label": "Fred",
+            "correct": false
+          },
+          {
+            "label": "Roger",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0159-2-en",
+      "type": "mcq",
+      "prompt": "In \"One Piece\", what other name is Marshall D. Teach known by?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shanks",
+            "correct": false
+          },
+          {
+            "label": "Blackbeard",
+            "correct": true
+          },
+          {
+            "label": "Whitebeard",
+            "correct": false
+          },
+          {
+            "label": "Big Mom",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0526-2-en",
+      "type": "mcq",
+      "prompt": "What does young Son Gohan turn into during the full moon?",
+      "payload": {
+        "options": [
+          {
+            "label": "Werewolf",
+            "correct": false
+          },
+          {
+            "label": "Ghost",
+            "correct": false
+          },
+          {
+            "label": "Dragon",
+            "correct": false
+          },
+          {
+            "label": "Giant ape",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0555-3-en",
+      "type": "mcq",
+      "prompt": "Who does Tom the cat chase endlessly?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joshua",
+            "correct": false
+          },
+          {
+            "label": "Jason",
+            "correct": false
+          },
+          {
+            "label": "James",
+            "correct": false
+          },
+          {
+            "label": "Jerry",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0553-3-en",
+      "type": "mcq",
+      "prompt": "What does SpongeBob like to do with Sandy to pass the time?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tennis",
+            "correct": false
+          },
+          {
+            "label": "Rugby",
+            "correct": false
+          },
+          {
+            "label": "Karate",
+            "correct": true
+          },
+          {
+            "label": "Soccer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0433-1-en",
+      "type": "mcq",
+      "prompt": "Which of these characters is not one of Marge Simpson's children?",
+      "payload": {
+        "options": [
+          {
+            "label": "Abe",
+            "correct": true
+          },
+          {
+            "label": "Lisa",
+            "correct": false
+          },
+          {
+            "label": "Bart",
+            "correct": false
+          },
+          {
+            "label": "Maggie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0232-3-en",
+      "type": "mcq",
+      "prompt": "Which Looney Tunes character devours everything in his path?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tee",
+            "correct": false
+          },
+          {
+            "label": "Tag",
+            "correct": false
+          },
+          {
+            "label": "Taz",
+            "correct": true
+          },
+          {
+            "label": "Tux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0522-2-en",
+      "type": "mcq",
+      "prompt": "Which hero of the \"Dragon Ball Z\" saga managed to kill Frieza?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vegeta",
+            "correct": false
+          },
+          {
+            "label": "Piccolo",
+            "correct": false
+          },
+          {
+            "label": "Goku",
+            "correct": false
+          },
+          {
+            "label": "Trunks",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

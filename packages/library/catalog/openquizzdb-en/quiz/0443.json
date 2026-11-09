@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=443"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0443-2-en",
+      "type": "mcq",
+      "prompt": "How many tram lines did Nice have in 2007?",
+      "payload": {
+        "options": [
+          {
+            "label": "Five",
+            "correct": false
+          },
+          {
+            "label": "Seven",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": false
+          },
+          {
+            "label": "Only one",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0443-3-en",
+      "type": "mcq",
+      "prompt": "On which bay in France is the Promenade des Anglais located?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bay of Ducks",
+            "correct": false
+          },
+          {
+            "label": "Bay of Angels",
+            "correct": true
+          },
+          {
+            "label": "Bay of Gods",
+            "correct": false
+          },
+          {
+            "label": "Bay of Sharks",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

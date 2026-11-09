@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=411"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0411-1-en",
+      "type": "mcq",
+      "prompt": "Which very popular activity in Japan means \"empty orchestra\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Karaoke",
+            "correct": true
+          },
+          {
+            "label": "Temari",
+            "correct": false
+          },
+          {
+            "label": "Origami",
+            "correct": false
+          },
+          {
+            "label": "Karate",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0411-3-en",
+      "type": "mcq",
+      "prompt": "Which Japanese zither has silk strings?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shakuhachi",
+            "correct": false
+          },
+          {
+            "label": "Biwa",
+            "correct": false
+          },
+          {
+            "label": "Koto",
+            "correct": true
+          },
+          {
+            "label": "Taiko",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

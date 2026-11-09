@@ -1,0 +1,532 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0321-2-en",
+      "type": "mcq",
+      "prompt": "How many kingdoms make up the realm of \"Game of Thrones\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Seven",
+            "correct": true
+          },
+          {
+            "label": "Three",
+            "correct": false
+          },
+          {
+            "label": "Ten",
+            "correct": false
+          },
+          {
+            "label": "Five",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0055-2-en",
+      "type": "mcq",
+      "prompt": "What does Sister Clotilde drive in \"The Gendarme of Saint-Tropez\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "A 2CV",
+            "correct": true
+          },
+          {
+            "label": "An A8",
+            "correct": false
+          },
+          {
+            "label": "An R4",
+            "correct": false
+          },
+          {
+            "label": "A C3",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0220-3-en",
+      "type": "mcq",
+      "prompt": "Which app can identify a song by listening to it?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shazam",
+            "correct": true
+          },
+          {
+            "label": "Skype",
+            "correct": false
+          },
+          {
+            "label": "Spotify",
+            "correct": false
+          },
+          {
+            "label": "Snapchat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0273-2-en",
+      "type": "mcq",
+      "prompt": "Which plant is used to prepare tea in the Maghreb?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mint",
+            "correct": true
+          },
+          {
+            "label": "Anise",
+            "correct": false
+          },
+          {
+            "label": "Coriander",
+            "correct": false
+          },
+          {
+            "label": "Cinnamon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0404-1-en",
+      "type": "mcq",
+      "prompt": "Which Germanic people settled in present-day Spain in the 5th century?",
+      "payload": {
+        "options": [
+          {
+            "label": "Visigoths",
+            "correct": true
+          },
+          {
+            "label": "Ostrogoths",
+            "correct": false
+          },
+          {
+            "label": "Burgundians",
+            "correct": false
+          },
+          {
+            "label": "Jutes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0340-4-en",
+      "type": "mcq",
+      "prompt": "Which large cage is meant to hold birds?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aviary",
+            "correct": true
+          },
+          {
+            "label": "Suitcase",
+            "correct": false
+          },
+          {
+            "label": "Scroll",
+            "correct": false
+          },
+          {
+            "label": "Display case",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0239-1-en",
+      "type": "mcq",
+      "prompt": "Which alter ego does Eminem sometimes use in his songs?",
+      "payload": {
+        "options": [
+          {
+            "label": "Posh",
+            "correct": false
+          },
+          {
+            "label": "Slim Shady",
+            "correct": true
+          },
+          {
+            "label": "Love Symbol",
+            "correct": false
+          },
+          {
+            "label": "Fat Man",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0357-1-en",
+      "type": "mcq",
+      "prompt": "How much time do you have to take a shot in basketball?",
+      "payload": {
+        "options": [
+          {
+            "label": "30 seconds",
+            "correct": false
+          },
+          {
+            "label": "10 seconds",
+            "correct": false
+          },
+          {
+            "label": "45 seconds",
+            "correct": false
+          },
+          {
+            "label": "24 seconds",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0601-2-en",
+      "type": "mcq",
+      "prompt": "Which one is the odd one out among these inventions created by women?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bra",
+            "correct": false
+          },
+          {
+            "label": "Dishwasher",
+            "correct": false
+          },
+          {
+            "label": "Circular saw",
+            "correct": false
+          },
+          {
+            "label": "Nylon stockings",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0069-1-en",
+      "type": "mcq",
+      "prompt": "Which US city is nicknamed the \"Big Apple\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Miami",
+            "correct": false
+          },
+          {
+            "label": "Las Vegas",
+            "correct": false
+          },
+          {
+            "label": "Los Angeles",
+            "correct": false
+          },
+          {
+            "label": "New York",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0342-2-en",
+      "type": "mcq",
+      "prompt": "What are a cat's whiskers technically called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vibrissae",
+            "correct": true
+          },
+          {
+            "label": "Keels",
+            "correct": false
+          },
+          {
+            "label": "Coverts",
+            "correct": false
+          },
+          {
+            "label": "Barbules",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0136-1-en",
+      "type": "mcq",
+      "prompt": "In which town is Bernadette Soubirous said to have seen the Virgin?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lyon",
+            "correct": false
+          },
+          {
+            "label": "Lille",
+            "correct": false
+          },
+          {
+            "label": "Lourdes",
+            "correct": true
+          },
+          {
+            "label": "Lisieux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0425-4-en",
+      "type": "mcq",
+      "prompt": "What is a woman who carries a child for a couple called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Surrogate mother",
+            "correct": true
+          },
+          {
+            "label": "Unwed mother",
+            "correct": false
+          },
+          {
+            "label": "Donor mother",
+            "correct": false
+          },
+          {
+            "label": "Childbearer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0449-3-en",
+      "type": "mcq",
+      "prompt": "Which submarine did Sean Connery command on screen?",
+      "payload": {
+        "options": [
+          {
+            "label": "K-19",
+            "correct": false
+          },
+          {
+            "label": "Red October",
+            "correct": true
+          },
+          {
+            "label": "USS Dallas",
+            "correct": false
+          },
+          {
+            "label": "HMS Vanguard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0490-1-en",
+      "type": "mcq",
+      "prompt": "Which water sport combines both gliding and sailing?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sailing",
+            "correct": false
+          },
+          {
+            "label": "Windsurfing",
+            "correct": true
+          },
+          {
+            "label": "Surfing",
+            "correct": false
+          },
+          {
+            "label": "Kitesurfing",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0433-2-en",
+      "type": "mcq",
+      "prompt": "What is the name of the mother in the Addams Family?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aurora",
+            "correct": false
+          },
+          {
+            "label": "Eva",
+            "correct": false
+          },
+          {
+            "label": "Elvira",
+            "correct": false
+          },
+          {
+            "label": "Morticia",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0315-2-en",
+      "type": "mcq",
+      "prompt": "Which plucked string instrument is often used in country music?",
+      "payload": {
+        "options": [
+          {
+            "label": "Balalaika",
+            "correct": false
+          },
+          {
+            "label": "Bouzouki",
+            "correct": false
+          },
+          {
+            "label": "Bassoon",
+            "correct": false
+          },
+          {
+            "label": "Banjo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0479-1-en",
+      "type": "mcq",
+      "prompt": "Which writer and mathematician said \"I think, therefore I am\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Descartes",
+            "correct": true
+          },
+          {
+            "label": "Newton",
+            "correct": false
+          },
+          {
+            "label": "Harriot",
+            "correct": false
+          },
+          {
+            "label": "Mercator",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

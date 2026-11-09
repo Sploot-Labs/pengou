@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=447"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0447-1",
+      "type": "mcq",
+      "prompt": "Qui concluait ses émissions télés par un « Vive le sport » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roger Couderc",
+            "correct": false
+          },
+          {
+            "label": "Gérard Holtz",
+            "correct": true
+          },
+          {
+            "label": "Thierry Roland",
+            "correct": false
+          },
+          {
+            "label": "Léon Zitrone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0447-2",
+      "type": "mcq",
+      "prompt": "Avec qui Jean-Michel Larqué a-t-il formé un duo inoubliable ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gérard Holtz",
+            "correct": false
+          },
+          {
+            "label": "Thierry Rolland",
+            "correct": true
+          },
+          {
+            "label": "Roger Zabel",
+            "correct": false
+          },
+          {
+            "label": "Charles Biétry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0447-3",
+      "type": "mcq",
+      "prompt": "Quel commentateur sportif est à l'aise dans quatre langues ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nelson Montfort",
+            "correct": true
+          },
+          {
+            "label": "Gérard Holtz",
+            "correct": false
+          },
+          {
+            "label": "Roger Couderc",
+            "correct": false
+          },
+          {
+            "label": "Thierry Roland",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0447-4",
+      "type": "mcq",
+      "prompt": "Qui encourageait les rugbymans avec un « Allez les petits » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roger Couderc",
+            "correct": true
+          },
+          {
+            "label": "Thierry Roland",
+            "correct": false
+          },
+          {
+            "label": "Gérard Holtz",
+            "correct": false
+          },
+          {
+            "label": "Nelson Monfort",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

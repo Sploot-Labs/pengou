@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=165"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0165-1-en",
+      "type": "mcq",
+      "prompt": "How many players make up each rugby union team?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fifteen",
+            "correct": true
+          },
+          {
+            "label": "Eleven",
+            "correct": false
+          },
+          {
+            "label": "Ten",
+            "correct": false
+          },
+          {
+            "label": "Twelve",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0165-2-en",
+      "type": "mcq",
+      "prompt": "In rugby union, how many points is a converted try worth?",
+      "payload": {
+        "options": [
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Seven",
+            "correct": true
+          },
+          {
+            "label": "Four",
+            "correct": false
+          },
+          {
+            "label": "Five",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0165-3-en",
+      "type": "mcq",
+      "prompt": "What is the nickname of South Africa's rugby union team?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thistle",
+            "correct": false
+          },
+          {
+            "label": "All Blacks",
+            "correct": false
+          },
+          {
+            "label": "Springboks",
+            "correct": true
+          },
+          {
+            "label": "Red Devils",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0165-4-en",
+      "type": "mcq",
+      "prompt": "What follows an incorrect lineout throw?",
+      "payload": {
+        "options": [
+          {
+            "label": "Conversion",
+            "correct": false
+          },
+          {
+            "label": "Drop goal",
+            "correct": false
+          },
+          {
+            "label": "Scrum",
+            "correct": true
+          },
+          {
+            "label": "Try",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

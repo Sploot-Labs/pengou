@@ -132,7 +132,49 @@
 			"idx": 18,
 			"version": "7",
 			"when": 1785419370313,
-			"tag": "0018_question_media_alt",
+			"tag": "0018_library",
+			"breakpoints": true
+		},
+		{
+			"idx": 19,
+			"version": "7",
+			"when": 1785419470313,
+			"tag": "0019_quiz_archive",
+			"breakpoints": true
+		},
+		{
+			"idx": 20,
+			"version": "7",
+			"when": 1785419570313,
+			"tag": "0020_wordcloud",
+			"breakpoints": true
+		},
+		{
+			"idx": 21,
+			"version": "7",
+			"when": 1785592370313,
+			"tag": "0021_poll",
+			"breakpoints": true
+		},
+		{
+			"idx": 22,
+			"version": "7",
+			"when": 1793433600000,
+			"tag": "0022_terms_acceptance",
+			"breakpoints": true
+		},
+		{
+			"idx": 23,
+			"version": "7",
+			"when": 1793781079493,
+			"tag": "0023_invitation_emailed_at",
+			"breakpoints": true
+		},
+		{
+			"idx": 24,
+			"version": "7",
+			"when": 1794225600000,
+			"tag": "0024_question_media_alt",
 			"breakpoints": true
 		}
 	]

@@ -1,10 +1,21 @@
 import type { FastifyInstance } from 'fastify'
-import { createQuiz, listQuizzes, getQuiz, updateQuiz, deleteQuiz, withTenantTx, type Db } from '@splootlabs/db'
+import {
+  createQuiz,
+  listQuizzes,
+  getQuiz,
+  updateQuiz,
+  archiveQuiz,
+  restoreQuiz,
+  deleteQuiz,
+  withTenantTx,
+  type Db,
+} from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
+import { assertCanOwnAnotherQuiz } from '../quiz-quota.js'
 import { LIMITS, tooLong, isSafeMedia } from '../validation.js'
 
-type Deps = { systemDb: Db; appDb: Db; config: AppConfig }
+type Deps = { systemDb: Db; appDb: Db; config: AppConfig; mailEnabled?: boolean }
 
 /** `title` non vide requis à la création ; à la modification, s'il est fourni, il doit rester non vide. */
 function isNonEmptyString(value: unknown): value is string {
@@ -17,10 +28,13 @@ const MAX_DESCRIPTION = LIMITS.description
 
 export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
   const { systemDb, appDb, config } = deps
+  const quotaOpts = { mailEnabled: deps.mailEnabled === true, tenancyMode: config.tenancyMode }
 
   app.post('/api/quizzes', { preHandler: requireUser }, async (request, reply) => {
     const context = await resolveContextOr403(request, reply, systemDb, config)
     if (!context) return
+    const refused = await assertCanOwnAnotherQuiz(systemDb, request.user, quotaOpts)
+    if (refused) return reply.code(refused.status).send(refused.body)
 
     const body = request.body as { title?: unknown; description?: unknown } | undefined
     if (!isNonEmptyString(body?.title)) {
@@ -34,17 +48,25 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
     }
     const description = isNonEmptyString(body?.description) ? body.description : undefined
 
-    return withTenantTx(appDb, context, async (scope) => {
-      const quiz = await createQuiz(scope, { ownerId: request.user.id, title: body.title as string, description })
-      return reply.code(201).send(quiz)
-    })
+    // Réponse envoyée APRÈS le COMMIT (hors du callback) : sinon le client peut enchaîner une
+    // requête qui ne voit pas encore le quiz.
+    const quiz = await withTenantTx(appDb, context, (scope) =>
+      createQuiz(scope, { ownerId: request.user.id, title: body.title as string, description }),
+    )
+    return reply.code(201).send(quiz)
   })
 
-  app.get('/api/quizzes', { preHandler: requireUser }, async (request, reply) => {
-    const context = await resolveContextOr403(request, reply, systemDb, config)
-    if (!context) return
-    return withTenantTx(appDb, context, (scope) => listQuizzes(scope))
-  })
+  // `?archived=1` liste les quiz archivés ; par défaut, seulement les actifs (« Mes quiz »).
+  app.get<{ Querystring: { archived?: string } }>(
+    '/api/quizzes',
+    { preHandler: requireUser },
+    async (request, reply) => {
+      const context = await resolveContextOr403(request, reply, systemDb, config)
+      if (!context) return
+      const archived = request.query.archived === '1' || request.query.archived === 'true'
+      return withTenantTx(appDb, context, (scope) => listQuizzes(scope, { archived }))
+    },
+  )
 
   app.get<{ Params: { id: string } }>('/api/quizzes/:id', { preHandler: requireUser }, async (request, reply) => {
     const context = await resolveContextOr403(request, reply, systemDb, config)
@@ -94,6 +116,32 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
       return quiz
     })
   })
+
+  // Archivage / restauration : mêmes droits que la modification (auteur, ou propriétaire/admin
+  // du workspace via `content:access-all`). Un quiz hors de portée répond 404 comme ailleurs.
+  for (const [action, apply] of [
+    ['archive', archiveQuiz],
+    ['restore', restoreQuiz],
+  ] as const) {
+    app.post<{ Params: { id: string } }>(
+      `/api/quizzes/:id/${action}`,
+      { preHandler: requireUser },
+      async (request, reply) => {
+        const context = await resolveContextOr403(request, reply, systemDb, config)
+        if (!context) return
+        // Désarchiver crée un quiz actif de plus : même limite que la création.
+        if (action === 'restore') {
+          const refused = await assertCanOwnAnotherQuiz(systemDb, request.user, quotaOpts)
+          if (refused) return reply.code(refused.status).send(refused.body)
+        }
+        return withTenantTx(appDb, context, async (scope) => {
+          const quiz = await apply(scope, request.params.id)
+          if (!quiz) return reply.code(404).send({ error: 'Quiz introuvable.' })
+          return quiz
+        })
+      },
+    )
+  }
 
   app.delete<{ Params: { id: string } }>('/api/quizzes/:id', { preHandler: requireUser }, async (request, reply) => {
     const context = await resolveContextOr403(request, reply, systemDb, config)

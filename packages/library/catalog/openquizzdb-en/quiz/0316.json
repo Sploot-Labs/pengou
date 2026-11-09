@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=316"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0316-2-en",
+      "type": "mcq",
+      "prompt": "Which game of skill involves removing sticks one by one?",
+      "payload": {
+        "options": [
+          {
+            "label": "Samurai",
+            "correct": false
+          },
+          {
+            "label": "Mandarin",
+            "correct": false
+          },
+          {
+            "label": "Mahjong",
+            "correct": false
+          },
+          {
+            "label": "Mikado",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0316-3-en",
+      "type": "mcq",
+      "prompt": "Which board game involves guessing a color combination?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monopoly",
+            "correct": false
+          },
+          {
+            "label": "Memory",
+            "correct": false
+          },
+          {
+            "label": "Mastermind",
+            "correct": true
+          },
+          {
+            "label": "Brain",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0316-4-en",
+      "type": "mcq",
+      "prompt": "What do you play \"Boggle\" with?",
+      "payload": {
+        "options": [
+          {
+            "label": "Letter dice",
+            "correct": true
+          },
+          {
+            "label": "Cards",
+            "correct": false
+          },
+          {
+            "label": "Pawns",
+            "correct": false
+          },
+          {
+            "label": "Marbles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

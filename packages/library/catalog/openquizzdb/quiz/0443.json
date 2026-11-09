@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=443"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0443-1",
+      "type": "mcq",
+      "prompt": "Quel surfeur fut incarné sur les écrans par Jean Dujardin en 2005 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mathis",
+            "correct": false
+          },
+          {
+            "label": "Brice",
+            "correct": true
+          },
+          {
+            "label": "Loris",
+            "correct": false
+          },
+          {
+            "label": "Joris",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0443-2",
+      "type": "mcq",
+      "prompt": "Combien de lignes de tramway Nice comptait-elle en 2007 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Sept",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Une seule",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0443-3",
+      "type": "mcq",
+      "prompt": "Sur quelle baie de France se trouve la Promenade des Anglais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Des Canards",
+            "correct": false
+          },
+          {
+            "label": "Des Anges",
+            "correct": true
+          },
+          {
+            "label": "Des Dieux",
+            "correct": false
+          },
+          {
+            "label": "Des Requins",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0443-4",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur de la façade du Château de l'Anglais de Nice ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bleue",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          },
+          {
+            "label": "Rose",
+            "correct": true
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

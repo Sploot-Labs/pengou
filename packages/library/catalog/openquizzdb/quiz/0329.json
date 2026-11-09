@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=329"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0329-1",
+      "type": "mcq",
+      "prompt": "Quelle est l'identité civile de la chanteuse Aya Nakamura ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Anna Diop",
+            "correct": false
+          },
+          {
+            "label": "Aïcha Nakamura",
+            "correct": false
+          },
+          {
+            "label": "Amel Nakamura",
+            "correct": false
+          },
+          {
+            "label": "Aya Danioko",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0329-3",
+      "type": "mcq",
+      "prompt": "Quel est le titre du tout premier album d'Aya Nakamura ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aya",
+            "correct": false
+          },
+          {
+            "label": "Nakamura",
+            "correct": false
+          },
+          {
+            "label": "Journal intime",
+            "correct": true
+          },
+          {
+            "label": "DNK",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

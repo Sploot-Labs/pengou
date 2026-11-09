@@ -1,0 +1,382 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, plusieurs auteurs",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0027-3",
+      "type": "mcq",
+      "prompt": "Sur console, qui est le compagnon champignon de Mario ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peach",
+            "correct": false
+          },
+          {
+            "label": "Toop",
+            "correct": false
+          },
+          {
+            "label": "Luigi",
+            "correct": false
+          },
+          {
+            "label": "Toad",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0147-1",
+      "type": "mcq",
+      "prompt": "Quelle société a commercialisé la console de jeux PlayStation 2 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Microsoft",
+            "correct": false
+          },
+          {
+            "label": "Nintendo",
+            "correct": false
+          },
+          {
+            "label": "Sega",
+            "correct": false
+          },
+          {
+            "label": "Sony",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0297-2",
+      "type": "mcq",
+      "prompt": "Quel gorille est un des premiers personnages célèbres de Nintendo ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Abu",
+            "correct": false
+          },
+          {
+            "label": "Donkey Kong",
+            "correct": true
+          },
+          {
+            "label": "Mookie",
+            "correct": false
+          },
+          {
+            "label": "King Kong",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0426-1",
+      "type": "mcq",
+      "prompt": "Combien de Pokémon un dresseur peut-il transporter ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Six",
+            "correct": true
+          },
+          {
+            "label": "Dix",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Un seul",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0129-3",
+      "type": "mcq",
+      "prompt": "Quelle société de recherches a mis au point le virus T dans « Resident Evil » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vault-Tec",
+            "correct": false
+          },
+          {
+            "label": "Umbrella",
+            "correct": true
+          },
+          {
+            "label": "Biotechnica",
+            "correct": false
+          },
+          {
+            "label": "Aperture Science",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0147-2",
+      "type": "mcq",
+      "prompt": "Quel média la PlayStation 2 pouvait-elle lire de manière innovante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blue-ray",
+            "correct": false
+          },
+          {
+            "label": "Midi Disc",
+            "correct": false
+          },
+          {
+            "label": "DVD",
+            "correct": true
+          },
+          {
+            "label": "Optical disc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0297-4",
+      "type": "mcq",
+      "prompt": "Quel personnage rose de Nintendo vit à Dream Land ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kirby",
+            "correct": true
+          },
+          {
+            "label": "Kirin",
+            "correct": false
+          },
+          {
+            "label": "Kulfi",
+            "correct": false
+          },
+          {
+            "label": "Kheer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0426-3",
+      "type": "mcq",
+      "prompt": "De quelle famille de Pokémon Pikachu et Rattatac font-ils partie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oeufs",
+            "correct": false
+          },
+          {
+            "label": "Brebis",
+            "correct": false
+          },
+          {
+            "label": "Souris",
+            "correct": true
+          },
+          {
+            "label": "Chiots",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0297-3",
+      "type": "mcq",
+      "prompt": "Que signifie le sigle DS de la Nintendo DS ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Detect System",
+            "correct": false
+          },
+          {
+            "label": "Data Super",
+            "correct": false
+          },
+          {
+            "label": "Direct Shot",
+            "correct": false
+          },
+          {
+            "label": "Dual Screen",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0147-4",
+      "type": "mcq",
+      "prompt": "Comment était qualifiée la PS2, acceptant les jeux PlayStation ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ascensionnelle",
+            "correct": false
+          },
+          {
+            "label": "Rétrocompatible",
+            "correct": true
+          },
+          {
+            "label": "Autopilotée",
+            "correct": false
+          },
+          {
+            "label": "Admissive",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0426-4",
+      "type": "mcq",
+      "prompt": "Que peut-on voir sur le ventre de Ptitard et de ses évolutions ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Un cercle",
+            "correct": false
+          },
+          {
+            "label": "Une étoile",
+            "correct": false
+          },
+          {
+            "label": "Un carré",
+            "correct": false
+          },
+          {
+            "label": "Une spirale",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0147-3",
+      "type": "mcq",
+      "prompt": "Quelle variante esthétique de la PlayStation 2 est sortie en 2004 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "PS2 Boy",
+            "correct": false
+          },
+          {
+            "label": "PS2 Slim",
+            "correct": true
+          },
+          {
+            "label": "PS2 Grid",
+            "correct": false
+          },
+          {
+            "label": "PS2 Fat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-consoles-jeux-video",
+      "title": "Consoles et jeux vidéo",
+      "description": "D'après des questions OpenQuizzDB de Philippe Bresoux, François Vandergucht.",
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0027-3",
+        "oqdb-0147-1",
+        "oqdb-0297-2",
+        "oqdb-0426-1",
+        "oqdb-0129-3",
+        "oqdb-0147-2",
+        "oqdb-0297-4",
+        "oqdb-0426-3",
+        "oqdb-0297-3",
+        "oqdb-0147-4",
+        "oqdb-0426-4",
+        "oqdb-0147-3"
+      ]
+    }
+  ]
+}

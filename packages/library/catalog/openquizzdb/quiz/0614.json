@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=614"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0614-1",
+      "type": "mcq",
+      "prompt": "Quel dispositif est l'élément central de toute chambre à coucher ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lit",
+            "correct": true
+          },
+          {
+            "label": "Table",
+            "correct": false
+          },
+          {
+            "label": "Bureau",
+            "correct": false
+          },
+          {
+            "label": "Baignoire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0614-2",
+      "type": "mcq",
+      "prompt": "Quel ensemble de pièces sont réservées à la vie intime des parents ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Salle d'eau",
+            "correct": false
+          },
+          {
+            "label": "Suite parentale",
+            "correct": true
+          },
+          {
+            "label": "Dressing",
+            "correct": false
+          },
+          {
+            "label": "Sauna",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0614-3",
+      "type": "mcq",
+      "prompt": "Quel élément de la maison symbolise détente et soins personnels ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cave à vin",
+            "correct": false
+          },
+          {
+            "label": "Dressing",
+            "correct": false
+          },
+          {
+            "label": "Jardin d'hiver",
+            "correct": false
+          },
+          {
+            "label": "Salle de bain",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0614-4",
+      "type": "mcq",
+      "prompt": "Dans quelle pièce prend-on un bain de chaleur sèche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hammam",
+            "correct": false
+          },
+          {
+            "label": "Comble",
+            "correct": false
+          },
+          {
+            "label": "Sauna",
+            "correct": true
+          },
+          {
+            "label": "Jacuzzi",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

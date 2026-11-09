@@ -58,7 +58,7 @@ Non-objectifs : ramasse-miettes des fichiers orphelins (une image remplacée ou 
 
 **Files:**
 - Modify: `packages/db/src/schema.ts` (table `question`, après `media`)
-- Create: `packages/db/drizzle/0018_question_media_alt.sql` et son entrée dans `packages/db/drizzle/meta/` (générés)
+- Create: `packages/db/drizzle/0024_question_media_alt.sql` et son entrée dans `packages/db/drizzle/meta/` (générés)
 - Modify: `packages/db/src/repos/question.ts` (`CreateInput`, `createQuestion`, `updateQuestion`)
 - Test: `packages/db/src/repos/question.test.ts`
 
@@ -99,7 +99,7 @@ Expected: FAIL (erreur de type ou `mediaAlt` undefined).
 - [ ] **Step 3: Ajouter `mediaAlt: text('media_alt')` au schéma puis générer la migration**
 
 Run: `pnpm --filter @splootlabs/db db:generate --name question_media_alt`
-Expected: un fichier `0018_question_media_alt.sql` contenant uniquement `ALTER TABLE "question" ADD COLUMN "media_alt" text;`. Les GRANT de `0015_rls.sql` sont posés au niveau table, aucune policy RLS n'est à modifier.
+Expected: un fichier `0024_question_media_alt.sql` contenant uniquement `ALTER TABLE "question" ADD COLUMN "media_alt" text;`. Les GRANT de `0015_rls.sql` sont posés au niveau table, aucune policy RLS n'est à modifier.
 
 - [ ] **Step 4: Étendre `CreateInput` et le type de `patch` de `updateQuestion`** avec `mediaAlt`, insertion `mediaAlt: input.mediaAlt ?? null`.
 

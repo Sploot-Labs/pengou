@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=322"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0322-1",
+      "type": "mcq",
+      "prompt": "Quelle rappeuse australienne a été révélation rap en 2014 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Iggy Azalea",
+            "correct": true
+          },
+          {
+            "label": "Minzy",
+            "correct": false
+          },
+          {
+            "label": "Amber Liu",
+            "correct": false
+          },
+          {
+            "label": "Leslie Hall",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

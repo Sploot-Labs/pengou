@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=217"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0217-1-en",
+      "type": "mcq",
+      "prompt": "Which film saga features the Decepticons?",
+      "payload": {
+        "options": [
+          {
+            "label": "Total Recall",
+            "correct": false
+          },
+          {
+            "label": "Transformers",
+            "correct": true
+          },
+          {
+            "label": "Real Steel",
+            "correct": false
+          },
+          {
+            "label": "Blade Runner",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0217-4-en",
+      "type": "mcq",
+      "prompt": "In which 2003 film do we see Sentinels, insect-like robots?",
+      "payload": {
+        "options": [
+          {
+            "label": "Attack of the Clones",
+            "correct": false
+          },
+          {
+            "label": "Star Wars",
+            "correct": false
+          },
+          {
+            "label": "H2G2",
+            "correct": false
+          },
+          {
+            "label": "Matrix Revolutions",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

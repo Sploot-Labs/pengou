@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=549"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0549-1",
+      "type": "mcq",
+      "prompt": "Quelle substance utilise-t-on pour faire fondre la neige sur les routes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poivre",
+            "correct": false
+          },
+          {
+            "label": "Sucre",
+            "correct": false
+          },
+          {
+            "label": "Sel",
+            "correct": true
+          },
+          {
+            "label": "Farine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0549-3",
+      "type": "mcq",
+      "prompt": "Quel engin est utilisé pour dégager la neige de nos chaussées ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Épandeuse",
+            "correct": false
+          },
+          {
+            "label": "Pelleteuse",
+            "correct": false
+          },
+          {
+            "label": "Dameuse",
+            "correct": false
+          },
+          {
+            "label": "Chasse-neige",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0549-4",
+      "type": "mcq",
+      "prompt": "Quel général africain traversa les Alpes avec des éléphants ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Scipion",
+            "correct": false
+          },
+          {
+            "label": "Hannon",
+            "correct": false
+          },
+          {
+            "label": "Hannibal",
+            "correct": true
+          },
+          {
+            "label": "Hasdrubal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

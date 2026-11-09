@@ -1,0 +1,28 @@
+{
+  "name": "@splootlabs/mail",
+  "version": "0.0.0",
+  "type": "module",
+  "license": "Apache-2.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json --customConditions development"
+  },
+  "dependencies": {
+    "@splootlabs/shared": "workspace:*",
+    "disposable-email-domains": "^1.0.62",
+    "nodemailer": "^10.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0 || >=20.0.0",
+    "@types/nodemailer": "^8.0.2"
+  }
+}

@@ -37,11 +37,13 @@ export {
   getInvitationById,
   revokeInvitation,
   resendInvitation,
+  revokePendingInvitationsBy,
   getInvitationByToken,
   acceptInvitation,
   newInvitationToken,
   invitationExpiry,
   InvitationError,
+  markInvitationEmailed,
   INVITATION_TTL_MS,
   type Invitation,
   type InvitationWithWorkspace,
@@ -52,9 +54,13 @@ export {
   listQuizzes,
   getQuiz,
   updateQuiz,
+  archiveQuiz,
+  restoreQuiz,
   deleteQuiz,
+  importQuiz,
   type Quiz,
   type QuizListItem,
+  type ImportedQuestion,
 } from './repos/quiz.js'
 export {
   createQuestion,
@@ -74,6 +80,7 @@ export {
   setPlayerScore,
   listSessionPlayersByScore,
   listSessionPlayers,
+  deleteSessionPlayer,
   saveEngineState,
   clearEngineState,
   loadEngineState,
@@ -81,6 +88,8 @@ export {
   listResumableSessions,
   abandonStaleSessions,
   abandonInactiveSessions,
+  setWordcloudRemoved,
+  loadWordcloudRemoved,
   type GameSession,
   type SessionPlayer,
   type AnswerRecord,
@@ -92,4 +101,18 @@ export {
   type SessionSummary,
   type SessionReport,
 } from './repos/reports.js'
+export { syncLibrary, normalizeSearch } from './repos/library-sync.js'
+export {
+  listLibraryThemes,
+  listLibraryLanguages,
+  searchLibraryQuestions,
+  listLibraryQuizzes,
+  drawLibraryQuestions,
+  getLibraryQuestions,
+  getLibraryQuiz,
+  type LibraryFilters,
+  type LibraryQuestion,
+  type LibraryQuizSummary,
+} from './repos/library.js'
+export type { ContentSource } from '@splootlabs/library'
 export * as schema from './schema.js'

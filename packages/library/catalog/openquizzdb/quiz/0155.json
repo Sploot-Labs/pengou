@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=155"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0155-1",
+      "type": "mcq",
+      "prompt": "Avec quel réalisateur Louise Bourgoin a-t-elle tourné « Adèle Blanc-Sec » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Claude Sautet",
+            "correct": false
+          },
+          {
+            "label": "Luc Besson",
+            "correct": true
+          },
+          {
+            "label": "Abel Gance",
+            "correct": false
+          },
+          {
+            "label": "François Ozon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0155-2",
+      "type": "mcq",
+      "prompt": "Dans quel domaine artistique Louise Bourgoin a-t-elle étudié ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Journalisme",
+            "correct": false
+          },
+          {
+            "label": "Musique",
+            "correct": false
+          },
+          {
+            "label": "Beaux-Arts",
+            "correct": true
+          },
+          {
+            "label": "Cinéma",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0155-4",
+      "type": "mcq",
+      "prompt": "Avant le cinéma, où Louise Bourgoin travaillait-elle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sur Canal+",
+            "correct": true
+          },
+          {
+            "label": "Dans la mode",
+            "correct": false
+          },
+          {
+            "label": "À RTL",
+            "correct": false
+          },
+          {
+            "label": "Au théâtre national",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

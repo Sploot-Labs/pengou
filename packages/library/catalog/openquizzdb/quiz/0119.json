@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=119"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0119-2",
+      "type": "mcq",
+      "prompt": "Combien Kanye West a-t-il dépensé pour demander Kim en mariage ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2 millions",
+            "correct": false
+          },
+          {
+            "label": "3 millions",
+            "correct": true
+          },
+          {
+            "label": "4 millions",
+            "correct": false
+          },
+          {
+            "label": "5 millions",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0119-3",
+      "type": "mcq",
+      "prompt": "Dans quel magazine Kim Kardashian a-t-elle posé nue en 2014 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Glamour",
+            "correct": false
+          },
+          {
+            "label": "Vogue",
+            "correct": false
+          },
+          {
+            "label": "Paper",
+            "correct": true
+          },
+          {
+            "label": "Cosmopolitan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

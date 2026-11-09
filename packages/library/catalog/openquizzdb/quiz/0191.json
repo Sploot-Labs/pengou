@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=191"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0191-3",
+      "type": "mcq",
+      "prompt": "Quelle entreprise a-t-il créé dans le garage de sa maison d'enfance ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Microsoft",
+            "correct": false
+          },
+          {
+            "label": "Apple",
+            "correct": true
+          },
+          {
+            "label": "IBM",
+            "correct": false
+          },
+          {
+            "label": "Google",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0191-4",
+      "type": "mcq",
+      "prompt": "Quel symbole commun relie la ville de New York et Steve Jobs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pomme",
+            "correct": true
+          },
+          {
+            "label": "Taxi",
+            "correct": false
+          },
+          {
+            "label": "Gratte-ciel",
+            "correct": false
+          },
+          {
+            "label": "Ordinateur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

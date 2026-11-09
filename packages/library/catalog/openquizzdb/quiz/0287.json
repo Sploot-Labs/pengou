@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=287"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0287-2",
+      "type": "mcq",
+      "prompt": "Quel est le véritable nom du rappeur Jul ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Julien Dupont",
+            "correct": false
+          },
+          {
+            "label": "Jean-Marie Lopez",
+            "correct": false
+          },
+          {
+            "label": "Julien Mari",
+            "correct": true
+          },
+          {
+            "label": "Jules Martin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0287-4",
+      "type": "mcq",
+      "prompt": "Quelle caractéristique décrit le mieux Jul ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peu de sorties",
+            "correct": false
+          },
+          {
+            "label": "Instrumentaux",
+            "correct": false
+          },
+          {
+            "label": "Très productif",
+            "correct": true
+          },
+          {
+            "label": "Pas d'albums",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

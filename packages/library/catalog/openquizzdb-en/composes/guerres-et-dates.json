@@ -1,0 +1,445 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0422-1-en",
+      "type": "mcq",
+      "prompt": "In which year did the Battle of Verdun take place?",
+      "payload": {
+        "options": [
+          {
+            "label": "1926",
+            "correct": false
+          },
+          {
+            "label": "1916",
+            "correct": true
+          },
+          {
+            "label": "1936",
+            "correct": false
+          },
+          {
+            "label": "1946",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0422-2-en",
+      "type": "mcq",
+      "prompt": "When did the First Battle of the Marne take place?",
+      "payload": {
+        "options": [
+          {
+            "label": "April 1940",
+            "correct": false
+          },
+          {
+            "label": "May 1942",
+            "correct": false
+          },
+          {
+            "label": "June 1916",
+            "correct": false
+          },
+          {
+            "label": "September 1914",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0422-3-en",
+      "type": "mcq",
+      "prompt": "Which battle marks the final defeat of Napoleon I?",
+      "payload": {
+        "options": [
+          {
+            "label": "Waterloo",
+            "correct": true
+          },
+          {
+            "label": "Leipzig",
+            "correct": false
+          },
+          {
+            "label": "Trafalgar",
+            "correct": false
+          },
+          {
+            "label": "Austerlitz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0422-4-en",
+      "type": "mcq",
+      "prompt": "Which battle made William the Conqueror king of England?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crécy",
+            "correct": false
+          },
+          {
+            "label": "Agincourt",
+            "correct": false
+          },
+          {
+            "label": "Stamford Bridge",
+            "correct": false
+          },
+          {
+            "label": "Hastings",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0394-1-en",
+      "type": "mcq",
+      "prompt": "On the plains of which battlefield does the Lion's Mound stand?",
+      "payload": {
+        "options": [
+          {
+            "label": "Warburg",
+            "correct": false
+          },
+          {
+            "label": "Wagram",
+            "correct": false
+          },
+          {
+            "label": "White Mountain",
+            "correct": false
+          },
+          {
+            "label": "Waterloo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0394-2-en",
+      "type": "mcq",
+      "prompt": "Where was the major trial of the Nazi war criminals held?",
+      "payload": {
+        "options": [
+          {
+            "label": "Munich",
+            "correct": false
+          },
+          {
+            "label": "Nuremberg",
+            "correct": true
+          },
+          {
+            "label": "Hamburg",
+            "correct": false
+          },
+          {
+            "label": "Berlin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0394-4-en",
+      "type": "mcq",
+      "prompt": "In which city was the treaty ending World War I signed?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lyon",
+            "correct": false
+          },
+          {
+            "label": "Bordeaux",
+            "correct": false
+          },
+          {
+            "label": "Paris",
+            "correct": false
+          },
+          {
+            "label": "Versailles",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0420-1-en",
+      "type": "mcq",
+      "prompt": "In which year were paid holidays introduced in France?",
+      "payload": {
+        "options": [
+          {
+            "label": "1936",
+            "correct": true
+          },
+          {
+            "label": "1956",
+            "correct": false
+          },
+          {
+            "label": "1946",
+            "correct": false
+          },
+          {
+            "label": "1926",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0420-2-en",
+      "type": "mcq",
+      "prompt": "In which year was JFK (John F. Kennedy) assassinated?",
+      "payload": {
+        "options": [
+          {
+            "label": "1953",
+            "correct": false
+          },
+          {
+            "label": "1973",
+            "correct": false
+          },
+          {
+            "label": "1983",
+            "correct": false
+          },
+          {
+            "label": "1963",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0420-3-en",
+      "type": "mcq",
+      "prompt": "In which year was Charles de Gaulle elected by direct popular vote?",
+      "payload": {
+        "options": [
+          {
+            "label": "1965",
+            "correct": true
+          },
+          {
+            "label": "1955",
+            "correct": false
+          },
+          {
+            "label": "1945",
+            "correct": false
+          },
+          {
+            "label": "1975",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0420-4-en",
+      "type": "mcq",
+      "prompt": "In which year did the Great Depression begin?",
+      "payload": {
+        "options": [
+          {
+            "label": "1939",
+            "correct": false
+          },
+          {
+            "label": "1929",
+            "correct": true
+          },
+          {
+            "label": "1949",
+            "correct": false
+          },
+          {
+            "label": "1919",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0518-1-en",
+      "type": "mcq",
+      "prompt": "Which French city was called the city of the popes in the Middle Ages?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tours",
+            "correct": false
+          },
+          {
+            "label": "Avignon",
+            "correct": true
+          },
+          {
+            "label": "Metz",
+            "correct": false
+          },
+          {
+            "label": "Nantes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0518-2-en",
+      "type": "mcq",
+      "prompt": "Which French statesman succeeded Cardinal Richelieu?",
+      "payload": {
+        "options": [
+          {
+            "label": "Colbert",
+            "correct": false
+          },
+          {
+            "label": "Mazarin",
+            "correct": true
+          },
+          {
+            "label": "Sully",
+            "correct": false
+          },
+          {
+            "label": "Talleyrand",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0518-3-en",
+      "type": "mcq",
+      "prompt": "Which city did Joan of Arc heroically free from the English?",
+      "payload": {
+        "options": [
+          {
+            "label": "Angers",
+            "correct": false
+          },
+          {
+            "label": "Orléans",
+            "correct": true
+          },
+          {
+            "label": "Tours",
+            "correct": false
+          },
+          {
+            "label": "Le Mans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0518-4-en",
+      "type": "mcq",
+      "prompt": "How old was Clovis when he was elected king of the Franks in 481?",
+      "payload": {
+        "options": [
+          {
+            "label": "26 years old",
+            "correct": false
+          },
+          {
+            "label": "46 years old",
+            "correct": false
+          },
+          {
+            "label": "16 years old",
+            "correct": true
+          },
+          {
+            "label": "36 years old",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

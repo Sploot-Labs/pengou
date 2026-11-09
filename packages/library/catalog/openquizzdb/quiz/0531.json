@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=531"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0531-2",
+      "type": "mcq",
+      "prompt": "Quel titre était attribué à sa naissance au fils aîné du roi de France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Baleine",
+            "correct": false
+          },
+          {
+            "label": "Orque",
+            "correct": false
+          },
+          {
+            "label": "Dauphin",
+            "correct": true
+          },
+          {
+            "label": "Requin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0531-3",
+      "type": "mcq",
+      "prompt": "Quel terme a servi à désigner les rois et reines de l'Égypte antique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Émir",
+            "correct": false
+          },
+          {
+            "label": "Pacha",
+            "correct": false
+          },
+          {
+            "label": "Pharaon",
+            "correct": true
+          },
+          {
+            "label": "Khan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0531-4",
+      "type": "mcq",
+      "prompt": "Quel titre officiel est décerné au chef du gouvernement allemand ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gouverneur",
+            "correct": false
+          },
+          {
+            "label": "Recteur",
+            "correct": false
+          },
+          {
+            "label": "Chambellan",
+            "correct": false
+          },
+          {
+            "label": "Chancelier",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

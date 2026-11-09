@@ -1,4 +1,6 @@
 import type { Ref } from 'react'
+import type { ContentSource } from '../api/quizzes'
+import { PodiumCredits } from '../ui/SourceCredit'
 
 /**
  * `PodiumView` — composant de PRÉSENTATION pur, alimenté par l'événement
@@ -10,8 +12,8 @@ import type { Ref } from 'react'
  * et `BigScreen`, qui sont déjà dans la room de session au moment où
  * `podium` arrive.
  *
- * `fullRanking`, s'il est fourni (le dernier `scoreboard` connu, reçu juste
- * avant `podium`), étend la liste au-delà du top 3 — sinon seul le podium
+ * `fullRanking`, s'il est fourni (le `ranking` de l'événement `podium`, à
+ * défaut le dernier `scoreboard` connu), étend la liste au-delà du top 3 — sinon seul le podium
  * est affiché. Aucun classement n'est recalculé côté client : les deux
  * proviennent tels quels d'événements serveur.
  *
@@ -32,8 +34,9 @@ export interface PodiumViewProps {
   quizTitle?: string
   /** Les 3 premiers, tels que reçus dans l'événement `podium`. */
   top: PodiumEntry[]
-  /** Classement complet le plus récent connu (dernier `scoreboard`), pour la
-   * section « Classement complet » au-delà du podium. Omis si indisponible
+  /** Classement complet le plus récent connu (`ranking` de `podium`, à défaut
+   * le dernier `scoreboard`), pour la section « Classement complet » au-delà
+   * du podium ; les joueurs déjà dans `top` n'y sont pas répétés. Omis si indisponible
    * (ex. un grand écran qui aurait rejoint juste avant `podium` sans avoir
    * vu le `scoreboard` précédent). */
   fullRanking?: PodiumEntry[]
@@ -45,12 +48,61 @@ export interface PodiumViewProps {
   /** Pitch de conversion en bas d'écran (grand écran / audience) — absent sur
    * le contrôleur hôte, qui est déjà un utilisateur inscrit. */
   showConversionFooter?: boolean
+  /** Sources des questions, créditées en bas du podium (grand écran). */
+  sources?: ContentSource[]
 }
 
-export function PodiumView({ quizTitle, top, fullRanking, headingRef, showConversionFooter = false }: PodiumViewProps) {
+/** Pitch de conversion en bas d'écran du grand écran. */
+export function ConversionFooter() {
+  return (
+    <p className="podium-convert">
+      <a href="#cloud" onClick={(e) => e.preventDefault()}>
+        Créez votre quiz gratuitement, aucune installation
+      </a>
+      , ou{' '}
+      <a href="#host" onClick={(e) => e.preventDefault()}>
+        hébergez votre propre instance
+      </a>
+      , c'est open-source.{' '}
+      <a href="#source" onClick={(e) => e.preventDefault()}>
+        Voir le code
+      </a>
+    </p>
+  )
+}
+
+export interface ClosingViewProps {
+  quizTitle?: string
+  headingRef?: Ref<HTMLHeadingElement>
+  /** `room` : grand écran et hôte (vouvoiement) ; `player` : téléphone (tutoiement). */
+  audience: 'room' | 'player'
+}
+
+/** Fin de partie d'un quiz sans aucune question notée : un remerciement, ni podium ni score. */
+export function ClosingView({ quizTitle, headingRef, audience }: ClosingViewProps) {
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <h1 className="ab-hero-title" ref={headingRef} tabIndex={-1}>
+        {audience === 'room' ? 'Merci pour vos réponses' : 'Merci pour tes réponses'}
+      </h1>
+      {quizTitle && <p style={{ color: 'var(--ink-dim)' }}>{quizTitle}</p>}
+    </div>
+  )
+}
+
+export function PodiumView({
+  quizTitle,
+  top,
+  fullRanking,
+  headingRef,
+  showConversionFooter = false,
+  sources = [],
+}: PodiumViewProps) {
   const [gold, silver, bronze] = top
-  // Le reste du classement complet, au-delà des 3 déjà montrés sur le podium.
-  const rest = (fullRanking ?? top).slice(3)
+  // Le reste du classement complet : les joueurs absents du podium (et non `slice(3)`, qui
+  // doublonnerait ou montrerait un exclu si `fullRanking` et `top` divergent).
+  const onPodium = new Set(top.map((p) => p.playerId))
+  const rest = (fullRanking ?? top).filter((p) => !onPodium.has(p.playerId))
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-5)' }}>
@@ -103,7 +155,7 @@ export function PodiumView({ quizTitle, top, fullRanking, headingRef, showConver
             <ol className="podium-list">
               {rest.map((p, index) => (
                 <li key={p.playerId} className="podium-list__item">
-                  <span className="podium-list__rank">{index + 4}</span>
+                  <span className="podium-list__rank">{top.length + index + 1}</span>
                   <span>{p.nickname}</span>
                   <span className="podium-list__score">{p.score} pts</span>
                 </li>
@@ -113,21 +165,9 @@ export function PodiumView({ quizTitle, top, fullRanking, headingRef, showConver
         </section>
       )}
 
-      {showConversionFooter && (
-        <p className="podium-convert">
-          <a href="#cloud" onClick={(e) => e.preventDefault()}>
-            Créez votre quiz gratuitement, aucune installation
-          </a>
-          , ou{' '}
-          <a href="#host" onClick={(e) => e.preventDefault()}>
-            hébergez votre propre instance
-          </a>
-          , c'est open-source.{' '}
-          <a href="#source" onClick={(e) => e.preventDefault()}>
-            Voir le code
-          </a>
-        </p>
-      )}
+      <PodiumCredits sources={sources} />
+
+      {showConversionFooter && <ConversionFooter />}
     </div>
   )
 }

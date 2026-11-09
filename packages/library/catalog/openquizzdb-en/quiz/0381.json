@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=381"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0381-1-en",
+      "type": "mcq",
+      "prompt": "What are the root-eating larvae of the cockchafer called?",
+      "payload": {
+        "options": [
+          {
+            "label": "White grubs",
+            "correct": true
+          },
+          {
+            "label": "Nymphs",
+            "correct": false
+          },
+          {
+            "label": "Caterpillars",
+            "correct": false
+          },
+          {
+            "label": "Cocoons",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0381-3-en",
+      "type": "mcq",
+      "prompt": "How many visible spots does the alfalfa ladybird have?",
+      "payload": {
+        "options": [
+          {
+            "label": "24",
+            "correct": true
+          },
+          {
+            "label": "14",
+            "correct": false
+          },
+          {
+            "label": "44",
+            "correct": false
+          },
+          {
+            "label": "34",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

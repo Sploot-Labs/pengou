@@ -1,6 +1,6 @@
 import type { Db } from '@splootlabs/db'
 import { saveEngineState, loadEngineState, loadEngineStateByPin, clearEngineState } from '@splootlabs/db'
-import type { GameSession, SessionStore } from '@splootlabs/game'
+import type { GameSession, SessionStore, SubmittedAnswer } from '@splootlabs/game'
 
 /** Voir `packages/game/src/store.ts` (MemorySessionStore) : même décision — un PIN reste
  * associable jusqu'à ce que la session atteigne la phase terminale `podium`. */
@@ -37,7 +37,8 @@ export class PersistentSessionStore implements SessionStore {
   constructor(private readonly db: Db) {}
 
   /** Signature des champs dont un changement rend l'écriture CRITIQUE (durabilité immédiate) :
-   * phase, index de manche, ensemble des manches créditées, ensemble des joueurs. Un changement
+   * phase, index de manche, ensemble des manches créditées, ensemble des joueurs, mots retirés
+   * d'un nuage (un retrait de l'hôte doit survivre à un redémarrage). Un changement
    * « answers-only » (réponses accumulées d'une manche non révélée) ne modifie AUCUN de ces champs
    * → écriture coalescée. Le crédit (scoring) et les transitions de phase restent, eux, durables
    * immédiatement — condition de la cicatrisation P1-8 et de l'idempotence du reveal. */
@@ -46,7 +47,13 @@ export class PersistentSessionStore implements SessionStore {
       .filter((k) => s.credited[Number(k)])
       .sort()
     const players = Object.keys(s.players ?? {}).sort()
-    return JSON.stringify({ phase: s.phase, idx: s.currentIndex, creditedRounds, players })
+    return JSON.stringify({
+      phase: s.phase,
+      idx: s.currentIndex,
+      creditedRounds,
+      players,
+      removed: s.wordcloudRemoved ?? {},
+    })
   }
 
   private scheduleFlush(id: string): void {
@@ -83,9 +90,38 @@ export class PersistentSessionStore implements SessionStore {
 
     const raw = await loadEngineState(this.db, id)
     if (!raw) return undefined
+    // Un appel concurrent a pu charger la session pendant l'attente : on garde son objet, qui a
+    // peut-être déjà reçu des réponses, plutôt que de le remplacer par une version relue en base.
+    const loaded = this.byId.get(id)
+    if (loaded) return structuredClone(loaded)
     const session = deserialize(raw)
     this.index(session)
     return structuredClone(session)
+  }
+
+  /** Lecture sans copie (lecture seule) : renvoie l'objet du cache, chargé depuis la base si absent. */
+  async peek(id: string): Promise<Readonly<GameSession> | undefined> {
+    const cached = this.byId.get(id)
+    if (cached) return cached
+
+    const raw = await loadEngineState(this.db, id)
+    if (!raw) return undefined
+    // Même garde que `get` : ne pas remplacer l'objet qu'un appel concurrent a déjà mis en cache.
+    const loaded = this.byId.get(id)
+    if (loaded) return loaded
+    this.index(deserialize(raw))
+    return this.byId.get(id)
+  }
+
+  /** Enregistre une réponse dans le cache sans copier la session. Une réponse ne change ni la phase,
+   * ni la manche, ni les crédits, ni les joueurs : la signature est inchangée, donc écriture coalescée. */
+  async recordAnswer(id: string, round: number, playerId: string, submitted: SubmittedAnswer): Promise<void> {
+    const session = this.byId.get(id)
+    if (!session) throw new Error(`recordAnswer: session ${id} absente du cache`)
+    const forRound = session.answers[round] ?? {}
+    forRound[playerId] = structuredClone(submitted)
+    session.answers[round] = forRound
+    this.scheduleFlush(id)
   }
 
   async getByPin(pin: string): Promise<GameSession | undefined> {

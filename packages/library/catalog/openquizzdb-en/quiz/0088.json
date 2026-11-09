@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=88"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0088-1-en",
+      "type": "mcq",
+      "prompt": "Which coding format is commonly used in web pages?",
+      "payload": {
+        "options": [
+          {
+            "label": "HDMI",
+            "correct": false
+          },
+          {
+            "label": "Hertz",
+            "correct": false
+          },
+          {
+            "label": "HTML",
+            "correct": true
+          },
+          {
+            "label": "HTTP",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0088-3-en",
+      "type": "mcq",
+      "prompt": "Which city is the capital of Finland?",
+      "payload": {
+        "options": [
+          {
+            "label": "Helsinki",
+            "correct": true
+          },
+          {
+            "label": "Hanover",
+            "correct": false
+          },
+          {
+            "label": "Huelva",
+            "correct": false
+          },
+          {
+            "label": "Halifax",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

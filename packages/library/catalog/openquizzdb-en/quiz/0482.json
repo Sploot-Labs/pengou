@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=482"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0482-1-en",
+      "type": "mcq",
+      "prompt": "Which herbal tea is useful for inflammation of the mucous membranes?",
+      "payload": {
+        "options": [
+          {
+            "label": "Basil",
+            "correct": false
+          },
+          {
+            "label": "Rosemary",
+            "correct": false
+          },
+          {
+            "label": "Savory",
+            "correct": false
+          },
+          {
+            "label": "Sage",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0482-2-en",
+      "type": "mcq",
+      "prompt": "Which herbal tea with a great flavor brings soothing and calm?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pine",
+            "correct": false
+          },
+          {
+            "label": "Cedar",
+            "correct": false
+          },
+          {
+            "label": "Linden",
+            "correct": true
+          },
+          {
+            "label": "Ash",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0482-3-en",
+      "type": "mcq",
+      "prompt": "Which chamomile is mostly prized for its digestive benefits?",
+      "payload": {
+        "options": [
+          {
+            "label": "Greek",
+            "correct": false
+          },
+          {
+            "label": "Roman",
+            "correct": true
+          },
+          {
+            "label": "Egyptian",
+            "correct": false
+          },
+          {
+            "label": "Gallic",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0482-4-en",
+      "type": "mcq",
+      "prompt": "Which herbal tea is known for its anti-anemic properties?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coriander",
+            "correct": false
+          },
+          {
+            "label": "Nettle",
+            "correct": true
+          },
+          {
+            "label": "Belladonna",
+            "correct": false
+          },
+          {
+            "label": "Jasmine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

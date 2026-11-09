@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=137"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0137-4-en",
+      "type": "mcq",
+      "prompt": "In what year did Sharapova become world number one?",
+      "payload": {
+        "options": [
+          {
+            "label": "2005",
+            "correct": true
+          },
+          {
+            "label": "2002",
+            "correct": false
+          },
+          {
+            "label": "2011",
+            "correct": false
+          },
+          {
+            "label": "2008",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=299"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0299-2-en",
+      "type": "mcq",
+      "prompt": "Which film brought Léa Seydoux to the wider public?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Intouchables",
+            "correct": false
+          },
+          {
+            "label": "Blue Is the Warmest Color",
+            "correct": true
+          },
+          {
+            "label": "Amélie",
+            "correct": false
+          },
+          {
+            "label": "Kill Bill",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

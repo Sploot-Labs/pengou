@@ -9,12 +9,17 @@ import {
   runMigrations,
   ensureDefaultTenant,
   pingDb,
+  syncLibrary,
 } from '@splootlabs/db'
+import { readCatalog } from '@splootlabs/library'
 import { createAuth, enabledSocialProviders } from '@splootlabs/auth'
+import { createMailer } from '@splootlabs/mail'
 import { createEngine, generatePin } from '@splootlabs/game'
 import { buildServer } from './app.js'
+import { applyAppRolePassword } from './app-role.js'
 import { registerAuth } from './auth-plugin.js'
 import { registerEditor } from './editor.js'
+import { registerLegal } from './legal.js'
 import { attachRealtime } from './realtime.js'
 import { registerGameGateway } from './game-gateway.js'
 import { PersistentSessionStore } from './persistent-store.js'
@@ -28,7 +33,9 @@ const { db: systemDb, client } = createDb(config.databaseUrl)
 // ses GRANTs) et construire le handle `appDb` (soumis au RLS, GUC par transaction via withTenantTx).
 const APP_ROLE = 'app_role'
 await ensureAppRole(client, APP_ROLE)
-await setAppRolePassword(client, APP_ROLE, config.appDbPassword)
+// Mot de passe posé seulement si la connexion app_role est dérivée de DATABASE_URL : avec
+// APP_DATABASE_URL, le rôle et son mot de passe sont gérés par l'exploitant (voir app-role.ts).
+await applyAppRolePassword(config, (password) => setAppRolePassword(client, APP_ROLE, password))
 
 // Migration au boot (P1-9) : pratique en mono-instance ; désactivable (MIGRATE_ON_BOOT=false)
 // au profit d'une étape dédiée (`pnpm --filter @splootlabs/server migrate`) en multi-instance.
@@ -45,6 +52,19 @@ const app = await buildServer(config, {
   dbPing: () => pingDb(client),
 })
 
+// Envoi d'e-mails : sans transport, repli journal (désactivé). Jamais une erreur de démarrage.
+const mailer = createMailer(config.mail, app.log, { nodeEnv: config.nodeEnv })
+if (!mailer.enabled && config.nodeEnv === 'production') {
+  app.log.warn(
+    "Aucun transport d'e-mail configuré (MAIL_TRANSPORT) : la réinitialisation de mot de passe, " +
+      "l'envoi d'invitations et la confirmation d'adresse sont désactivés.",
+  )
+}
+
+if (config.nodeEnv === 'production' && config.mail.transport === 'smtp' && !config.mail.smtp.requireTls) {
+  app.log.warn('SMTP_REQUIRE_TLS=false : les e-mails sont envoyés en SMTP sans TLS obligatoire.')
+}
+
 const auth = createAuth(systemDb, {
   // En dev, `BETTER_AUTH_SECRET` peut être absent : on retombe sur `SESSION_SECRET`
   // (déjà requis, min 16 caractères) plutôt que d'échouer au démarrage.
@@ -54,9 +74,21 @@ const auth = createAuth(systemDb, {
   nodeEnv: config.nodeEnv,
   disableSignup: config.disableSignup,
   socialProviders: enabledSocialProviders(config),
+  mailer,
+  mailTransport: config.mail.transport,
+  emailDomainCheck: config.emailDomainCheck,
+  logger: app.log,
+  termsVersion: config.legal?.termsVersion,
 })
-await registerAuth(app, auth)
-registerEditor(app, { systemDb, appDb, auth, config })
+await registerAuth(app, auth, { legal: config.legal, mailEnabled: mailer.enabled })
+registerLegal(app, { db: systemDb, auth, legal: config.legal })
+// Bibliothèque de questions : lecture du catalogue (livré + dossier d'instance) puis synchronisation
+// en base. Une erreur sur le catalogue livré lève ici et fait échouer le démarrage, comme une
+// migration en échec ; un fichier d'instance invalide est seulement journalisé et écarté.
+const snapshot = await readCatalog({ extraDir: config.libraryExtraDir, log: (m) => app.log.error(m) })
+const libraryCounts = await syncLibrary(systemDb, snapshot)
+app.log.info(libraryCounts, 'catalogue de la bibliothèque synchronisé')
+registerEditor(app, { systemDb, appDb, auth, config, mailer })
 
 const io = attachRealtime(app, config)
 

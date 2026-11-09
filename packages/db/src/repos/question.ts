@@ -6,7 +6,7 @@ import { getQuiz } from './quiz.js'
 export type Question = typeof schema.question.$inferSelect
 
 type CreateInput = {
-  type: 'mcq' | 'truefalse' | 'text' | 'slider'
+  type: 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud' | 'poll'
   prompt: string
   timeLimit: number
   readingTime?: number

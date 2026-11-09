@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=537"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0537-1",
+      "type": "mcq",
+      "prompt": "Qu'observe-t-on pour estimer l'âge approximatif d'un cheval ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Queue",
+            "correct": false
+          },
+          {
+            "label": "Dents",
+            "correct": true
+          },
+          {
+            "label": "Sabots",
+            "correct": false
+          },
+          {
+            "label": "Crinière",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0537-2",
+      "type": "mcq",
+      "prompt": "Après combien de temps un poulain peut-il marcher ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Une heure",
+            "correct": true
+          },
+          {
+            "label": "Deux semaines",
+            "correct": false
+          },
+          {
+            "label": "Un mois",
+            "correct": false
+          },
+          {
+            "label": "Quatre semaines",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0537-3",
+      "type": "mcq",
+      "prompt": "À quelle fréquence faut-il idéalement curer les sabots du cheval ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chaque jour",
+            "correct": true
+          },
+          {
+            "label": "Chaque semaine",
+            "correct": false
+          },
+          {
+            "label": "Chaque mois",
+            "correct": false
+          },
+          {
+            "label": "Chaque année",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0537-4",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur de Stewball dans la chanson d'Hugues Aufray ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alezan",
+            "correct": false
+          },
+          {
+            "label": "Gris",
+            "correct": false
+          },
+          {
+            "label": "Noir",
+            "correct": false
+          },
+          {
+            "label": "Blanc",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

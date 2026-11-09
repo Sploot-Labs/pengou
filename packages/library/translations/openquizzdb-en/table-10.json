@@ -1,0 +1,980 @@
+{
+  "questions": {
+    "oqdb-0493-3": {
+      "prompt": "Which TV series character drives a yellow Aston Martin?",
+      "options": [
+        "Brett Sinclair",
+        "Jessica Fletcher",
+        "Arsène Lupin",
+        "Kojak"
+      ]
+    },
+    "oqdb-0493-4": {
+      "prompt": "What is the profession of \"The Fall Guy\"?",
+      "options": [
+        "Car salesman",
+        "Astronaut",
+        "Stuntman",
+        "Banker"
+      ]
+    },
+    "oqdb-0494-1": {
+      "prompt": "Which French writer was nicknamed the \"pope\" of Surrealism?",
+      "options": [
+        "Alain Jouffroy",
+        "Paul Éluard",
+        "André Breton",
+        "Louis Aragon"
+      ]
+    },
+    "oqdb-0494-2": {
+      "prompt": "Which writer, who died in 1814, is sometimes nicknamed the \"Divine Marquis\"?",
+      "options": [
+        "Rimbaud",
+        "Diderot",
+        "Sade",
+        "Montesquieu"
+      ]
+    },
+    "oqdb-0494-3": {
+      "prompt": "Which 19th-century novelist called himself the \"Napoleon of letters\"?",
+      "options": [
+        "Montesquieu",
+        "Dumas",
+        "Verlaine",
+        "Balzac"
+      ]
+    },
+    "oqdb-0494-4": {
+      "prompt": "Which French poet was nicknamed \"the man with soles of wind\"?",
+      "options": [
+        "Rimbaud",
+        "Mallarmé",
+        "Verlaine",
+        "Baudelaire"
+      ]
+    },
+    "oqdb-0495-1": {
+      "skip": "groupe français (Bandolero) peu connu hors de France"
+    },
+    "oqdb-0495-2": {
+      "skip": "groupe français (Les Forbans) peu connu hors de France"
+    },
+    "oqdb-0495-3": {
+      "skip": "référence à la radio française et titres français"
+    },
+    "oqdb-0495-4": {
+      "skip": "groupe français (Taxi Girl) peu connu hors de France"
+    },
+    "oqdb-0496-1": {
+      "prompt": "Which fountain in Rome is one of the most famous in the world?",
+      "options": [
+        "Neptune",
+        "Barcaccia",
+        "Trevi",
+        "Triton"
+      ]
+    },
+    "oqdb-0496-2": {
+      "prompt": "Rome lies near the coast of which sea?",
+      "options": [
+        "Tyrrhenian",
+        "Aegean",
+        "Adriatic",
+        "Ionian"
+      ]
+    },
+    "oqdb-0496-3": {
+      "prompt": "How many main airports serve the city of Rome?",
+      "options": [
+        "Two",
+        "Three",
+        "Five",
+        "Four"
+      ]
+    },
+    "oqdb-0496-4": {
+      "prompt": "On which Italian coin is the Colosseum depicted?",
+      "options": [
+        "20 euro cents",
+        "1 euro",
+        "2 euros",
+        "5 euro cents"
+      ]
+    },
+    "oqdb-0497-1": {
+      "prompt": "Which objects are the basis of the game show \"Deal or No Deal\"?",
+      "options": [
+        "Gifts",
+        "Tokens",
+        "Balls",
+        "Boxes"
+      ]
+    },
+    "oqdb-0497-2": {
+      "skip": "jeu télévisé français (Pékin Express) peu connu hors de France"
+    },
+    "oqdb-0497-3": {
+      "skip": "jeu télévisé français (Motus) peu connu hors de France"
+    },
+    "oqdb-0497-4": {
+      "skip": "émission et chaîne françaises peu connues hors de France"
+    },
+    "oqdb-0498-1": {
+      "skip": "publicité française, marques peu connues hors de France"
+    },
+    "oqdb-0498-3": {
+      "skip": "marionnette des Guignols et marques françaises"
+    },
+    "oqdb-0499-1": {
+      "skip": "jeu télévisé et animateurs français peu connus hors de France"
+    },
+    "oqdb-0499-2": {
+      "skip": "jeu télévisé et animateurs français peu connus hors de France"
+    },
+    "oqdb-0499-3": {
+      "skip": "jeu télévisé et animateurs français peu connus hors de France"
+    },
+    "oqdb-0499-4": {
+      "skip": "jeu télévisé français (Burger Quiz) peu connu hors de France"
+    },
+    "oqdb-0500-1": {
+      "skip": "terme français autoneige sans équivalent courant"
+    },
+    "oqdb-0500-2": {
+      "skip": "usage du mot camping-car propre au français"
+    },
+    "oqdb-0500-3": {
+      "prompt": "Which aircraft can land on or take off from water?",
+      "options": [
+        "Seaplane",
+        "Hang glider",
+        "Glider",
+        "Microlight"
+      ]
+    },
+    "oqdb-0500-4": {
+      "skip": "formulation peu naturelle et option Solex peu connue hors de France"
+    },
+    "oqdb-0501-1": {
+      "prompt": "What should you never open inside your house?",
+      "options": [
+        "Window",
+        "Jewelry box",
+        "Wall hanging",
+        "Umbrella"
+      ]
+    },
+    "oqdb-0501-2": {
+      "prompt": "Which number is the basis of many superstitions?",
+      "options": [
+        "13",
+        "666",
+        "101",
+        "27"
+      ]
+    },
+    "oqdb-0501-3": {
+      "skip": "superstition spécifiquement française"
+    },
+    "oqdb-0501-4": {
+      "prompt": "Which plant is said to protect against evil spirits and vampires?",
+      "options": [
+        "Garlic",
+        "Tarragon",
+        "Oregano",
+        "Rosemary"
+      ]
+    },
+    "oqdb-0502-2": {
+      "prompt": "Who was Benfica Lisbon's goalkeeper in 1981?",
+      "options": [
+        "Pedro Estrems",
+        "Manuel Bento",
+        "José Valero",
+        "Carlos Medrano"
+      ]
+    },
+    "oqdb-0502-3": {
+      "prompt": "Which Portuguese footballer was often compared to Pelé?",
+      "options": [
+        "Figo",
+        "Manecas",
+        "Eusébio",
+        "Nani"
+      ]
+    },
+    "oqdb-0502-4": {
+      "prompt": "Which footballer was voted French Player of the Year in 1989?",
+      "options": [
+        "Jean-Pierre Papin",
+        "Michel Platini",
+        "Alain Giresse",
+        "Eric Cantona"
+      ]
+    },
+    "oqdb-0503-1": {
+      "prompt": "Who did Nikola Tesla work with after emigrating to the United States?",
+      "options": [
+        "James Cash Jr.",
+        "Nela Park",
+        "Thomas Edison",
+        "Bob Wright"
+      ]
+    },
+    "oqdb-0503-2": {
+      "prompt": "How many patents did Nikola Tesla file during his life?",
+      "options": [
+        "About 100",
+        "About 300",
+        "About 200",
+        "About 400"
+      ]
+    },
+    "oqdb-0503-3": {
+      "prompt": "How many languages did the polyglot Nikola Tesla speak?",
+      "options": [
+        "Eight",
+        "Five",
+        "Seven",
+        "Six"
+      ]
+    },
+    "oqdb-0503-4": {
+      "prompt": "With which type of current did Nikola Tesla revolutionize electricity?",
+      "options": [
+        "Direct",
+        "Alternating",
+        "Static",
+        "Inductive"
+      ]
+    },
+    "oqdb-0504-1": {
+      "prompt": "Which famous British tea brand sells \"Yellow Label\"?",
+      "options": [
+        "Twinings",
+        "Lipton",
+        "Nestea",
+        "Éléphant"
+      ]
+    },
+    "oqdb-0504-2": {
+      "prompt": "Which drinkable yogurt is sold by the Yoplait group?",
+      "options": [
+        "Yop",
+        "Chobani",
+        "Yakult",
+        "Sik"
+      ]
+    },
+    "oqdb-0504-3": {
+      "skip": "marque française (Champomy) peu connue hors de France"
+    },
+    "oqdb-0504-4": {
+      "prompt": "What is the oldest American soda brand?",
+      "options": [
+        "Dr Pepper",
+        "Red Bull",
+        "Pepsi",
+        "Coca-Cola"
+      ]
+    },
+    "oqdb-0505-1": {
+      "skip": "publicité et marque françaises (Oasis)"
+    },
+    "oqdb-0505-2": {
+      "prompt": "Which fruit juice is sold in a sturdy pouch?",
+      "options": [
+        "Tropicana",
+        "Casino",
+        "Capri-Sun",
+        "Andros"
+      ]
+    },
+    "oqdb-0505-3": {
+      "prompt": "Which drink contains a lot of orange juice and pulp?",
+      "options": [
+        "Pressade",
+        "Orangina",
+        "Joker",
+        "Jafaden"
+      ]
+    },
+    "oqdb-0506-1": {
+      "prompt": "Which ship carries passengers across the open sea?",
+      "options": [
+        "Monohull",
+        "Galley",
+        "Ocean liner",
+        "Trimaran"
+      ]
+    },
+    "oqdb-0506-2": {
+      "prompt": "Which vessel is able to travel underwater?",
+      "options": [
+        "Submarine",
+        "Bateau-mouche",
+        "Ocean liner",
+        "Ferry"
+      ]
+    },
+    "oqdb-0506-3": {
+      "prompt": "Which luxury pleasure boat is often seen in Saint-Tropez?",
+      "options": [
+        "Bateau-mouche",
+        "Seaplane",
+        "Aircraft carrier",
+        "Yacht"
+      ]
+    },
+    "oqdb-0506-4": {
+      "prompt": "Which boat is used for tourism on the Seine in Paris?",
+      "options": [
+        "Bateau-bus",
+        "Bateau-mouche",
+        "Ferry",
+        "Ocean liner"
+      ]
+    },
+    "oqdb-0507-1": {
+      "prompt": "Which small object does a golfer use to set the ball on?",
+      "options": [
+        "Caddie",
+        "Pitch",
+        "Tee",
+        "Putter"
+      ]
+    },
+    "oqdb-0507-2": {
+      "prompt": "Which racket sport is named after a place in England?",
+      "options": [
+        "Squash",
+        "Badminton",
+        "Padel",
+        "Tennis"
+      ]
+    },
+    "oqdb-0507-3": {
+      "prompt": "How many jumps is an athlete allowed in long jump qualification?",
+      "options": [
+        "Five",
+        "Three",
+        "Four",
+        "Two"
+      ]
+    },
+    "oqdb-0507-4": {
+      "skip": "jargon d'alpinisme français (dévisser)"
+    },
+    "oqdb-0508-1": {
+      "prompt": "In which natural region is Château Latour, a Premier Cru, located?",
+      "options": [
+        "Libournais",
+        "Fronsac",
+        "Médoc",
+        "Graves"
+      ]
+    },
+    "oqdb-0508-2": {
+      "prompt": "In which wine region is Monbazillac AOC produced?",
+      "options": [
+        "Champagne",
+        "Bergerac",
+        "Cahors",
+        "Béarn"
+      ]
+    },
+    "oqdb-0508-3": {
+      "prompt": "Along which river is Clairette de Die produced?",
+      "options": [
+        "Vienne",
+        "Ardèche",
+        "Drôme",
+        "Isère"
+      ]
+    },
+    "oqdb-0509-1": {
+      "skip": "chanteur et chanson français peu connus hors de France"
+    },
+    "oqdb-0509-2": {
+      "skip": "chanteuse française (Rose Laurens) peu connue hors de France"
+    },
+    "oqdb-0509-3": {
+      "skip": "groupe français (Images) peu connu hors de France"
+    },
+    "oqdb-0509-4": {
+      "prompt": "Which worldwide hit made Patrick Hernandez financially set for life?",
+      "options": [
+        "Born to Somebody",
+        "Born to Be Alive",
+        "Born to Sing",
+        "To be Three"
+      ]
+    },
+    "oqdb-0510-1": {
+      "prompt": "Which carmaker has the slogan \"Sheer Driving Pleasure\"?",
+      "options": [
+        "Lotus",
+        "Lexus",
+        "BMW",
+        "Mercedes"
+      ]
+    },
+    "oqdb-0511-1": {
+      "prompt": "Which British singer performed the hit \"Kids in America\"?",
+      "options": [
+        "Madonna",
+        "Bonnie Tyler",
+        "Kim Carnes",
+        "Kim Wilde"
+      ]
+    },
+    "oqdb-0511-2": {
+      "prompt": "Which Swedish rock band sang \"The Final Countdown\"?",
+      "options": [
+        "AC/DC",
+        "Trust",
+        "Europe",
+        "Scorpions"
+      ]
+    },
+    "oqdb-0511-3": {
+      "prompt": "Which band performed \"Sweet Dreams (Are Made of This)\"?",
+      "options": [
+        "Sweet Sensation",
+        "Sister Sledge",
+        "Eurythmics",
+        "Europe"
+      ]
+    },
+    "oqdb-0511-4": {
+      "prompt": "What is the title of Alphaville's third single?",
+      "options": [
+        "Forever Young",
+        "Forever Blue",
+        "Forever Alive",
+        "Forever Love"
+      ]
+    },
+    "oqdb-0512-1": {
+      "prompt": "Which carmaker produced the Diablo and Countach models?",
+      "options": [
+        "Ferrari",
+        "Porsche",
+        "Lamborghini",
+        "Maserati"
+      ]
+    },
+    "oqdb-0512-2": {
+      "prompt": "Which SUV model did Nissan launch in 2007?",
+      "options": [
+        "Quantum",
+        "Quoris",
+        "Qashqai",
+        "Quattro"
+      ]
+    },
+    "oqdb-0512-3": {
+      "prompt": "Which carmaker created the Cayenne model?",
+      "options": [
+        "Ferrari",
+        "Maserati",
+        "Lamborghini",
+        "Porsche"
+      ]
+    },
+    "oqdb-0512-4": {
+      "prompt": "Dacia is a carmaker originally from which country?",
+      "options": [
+        "Bulgaria",
+        "Greece",
+        "Poland",
+        "Romania"
+      ]
+    },
+    "oqdb-0513-1": {
+      "prompt": "Machu Picchu was abandoned after the fall of which empire?",
+      "options": [
+        "Inca",
+        "Corsair",
+        "Iroquois",
+        "Aztec"
+      ]
+    },
+    "oqdb-0513-2": {
+      "prompt": "At the edge of which forest does Machu Picchu stand?",
+      "options": [
+        "Atlantic Forest",
+        "Gola Forest",
+        "Boreal Forest",
+        "Amazon Rainforest"
+      ]
+    },
+    "oqdb-0513-3": {
+      "prompt": "Which structures make up Machu Picchu's farming area?",
+      "options": [
+        "Mulch",
+        "Moldboards",
+        "Terraces",
+        "Slash-and-burn"
+      ]
+    },
+    "oqdb-0513-4": {
+      "prompt": "Which animal can the shape of the Machu Picchu site be linked to?",
+      "options": [
+        "Bear",
+        "Puma",
+        "Snake",
+        "Dolphin"
+      ]
+    },
+    "oqdb-0514-1": {
+      "prompt": "Which Greek island produces a very well-known muscat?",
+      "options": [
+        "Samos",
+        "Ikaria",
+        "Lesbos",
+        "Rhodes"
+      ]
+    },
+    "oqdb-0514-2": {
+      "prompt": "From which fairly sunny country does Muscat of Patras come?",
+      "options": [
+        "Greece",
+        "Spain",
+        "Cyprus",
+        "Turkey"
+      ]
+    },
+    "oqdb-0514-3": {
+      "prompt": "Which European country produces the white wine Aphrodite?",
+      "options": [
+        "Spain",
+        "Greece",
+        "Cyprus",
+        "France"
+      ]
+    },
+    "oqdb-0515-1": {
+      "prompt": "Which material are bulletproof vests generally made of?",
+      "options": [
+        "Ivory",
+        "Kevlar",
+        "Latex",
+        "Metal"
+      ]
+    },
+    "oqdb-0515-2": {
+      "prompt": "What is the main advantage of using a stick grenade?",
+      "options": [
+        "Cost",
+        "Easier to carry",
+        "Watertightness",
+        "Throwing distance"
+      ]
+    },
+    "oqdb-0515-3": {
+      "prompt": "About how many tonnes does the American M1A1 Abrams tank weigh?",
+      "options": [
+        "75 tonnes",
+        "12 tonnes",
+        "36 tonnes",
+        "54 tonnes"
+      ]
+    },
+    "oqdb-0515-4": {
+      "prompt": "During the Vietnam War, which weapon was nicknamed the \"Mattel Gun\"?",
+      "options": [
+        "M14",
+        "M16",
+        "AK47",
+        "L1A1"
+      ]
+    },
+    "oqdb-0516-1": {
+      "prompt": "Which Italian lemon liqueur is notably produced on Capri?",
+      "options": [
+        "Grappa",
+        "Sambuca",
+        "Amaretto",
+        "Limoncello"
+      ]
+    },
+    "oqdb-0516-2": {
+      "prompt": "Which sweet liqueur has a bitter almond flavor?",
+      "options": [
+        "Sambuca",
+        "Grappa",
+        "Amaretto",
+        "Negroni"
+      ]
+    },
+    "oqdb-0516-3": {
+      "prompt": "Which alcoholic long drink is made of prosecco and soda water?",
+      "options": [
+        "Hippocras",
+        "Grappa",
+        "Spritz",
+        "Aguardiente"
+      ]
+    },
+    "oqdb-0516-4": {
+      "prompt": "Which grape pomace brandy is produced in San Marino?",
+      "options": [
+        "Sambuca",
+        "Negroni",
+        "Grappa",
+        "Amaretto"
+      ]
+    },
+    "oqdb-0517-1": {
+      "skip": "chanteur (Julien Clerc) et chanson peu connus hors de France"
+    },
+    "oqdb-0517-2": {
+      "prompt": "In which city does \"Nathalie\" guide Gilbert Bécaud in the song?",
+      "options": [
+        "Belgrade",
+        "Paris",
+        "Madrid",
+        "Moscow"
+      ]
+    },
+    "oqdb-0517-3": {
+      "skip": "chanteuse française (Caroline Loeb) peu connue hors de France"
+    },
+    "oqdb-0517-4": {
+      "skip": "chanteur français (Herbert Léonard) peu connu hors de France"
+    },
+    "oqdb-0518-1": {
+      "prompt": "Which French city was called the city of the popes in the Middle Ages?",
+      "options": [
+        "Tours",
+        "Avignon",
+        "Metz",
+        "Nantes"
+      ]
+    },
+    "oqdb-0518-2": {
+      "prompt": "Which French statesman succeeded Cardinal Richelieu?",
+      "options": [
+        "Colbert",
+        "Mazarin",
+        "Sully",
+        "Talleyrand"
+      ]
+    },
+    "oqdb-0518-3": {
+      "prompt": "Which city did Joan of Arc heroically free from the English?",
+      "options": [
+        "Angers",
+        "Orléans",
+        "Tours",
+        "Le Mans"
+      ]
+    },
+    "oqdb-0518-4": {
+      "prompt": "How old was Clovis when he was elected king of the Franks in 481?",
+      "options": [
+        "26 years old",
+        "46 years old",
+        "16 years old",
+        "36 years old"
+      ]
+    },
+    "oqdb-0519-1": {
+      "prompt": "Which sauce is made with ground beef, tomato sauce and onions?",
+      "options": [
+        "Bolognese",
+        "Genoese",
+        "Béchamel",
+        "Tartare"
+      ]
+    },
+    "oqdb-0519-2": {
+      "prompt": "Which dish consists of raw beef cut into very thin slices?",
+      "options": [
+        "Risotto",
+        "Crostino",
+        "Frico",
+        "Carpaccio"
+      ]
+    },
+    "oqdb-0521-1": {
+      "skip": "film français (Les Anges gardiens) peu connu hors de France"
+    },
+    "oqdb-0521-2": {
+      "skip": "argot français (patates pour francs) intraduisible"
+    },
+    "oqdb-0521-3": {
+      "skip": "film français (Brice de Nice) peu connu hors de France"
+    },
+    "oqdb-0522-2": {
+      "prompt": "Which hero of the \"Dragon Ball Z\" saga managed to kill Frieza?",
+      "options": [
+        "Vegeta",
+        "Piccolo",
+        "Goku",
+        "Trunks"
+      ]
+    },
+    "oqdb-0522-3": {
+      "prompt": "Which character uses the Potara in \"Dragon Ball Z\"?",
+      "options": [
+        "Arale",
+        "Dr. Slump",
+        "Lao",
+        "Supreme Kai"
+      ]
+    },
+    "oqdb-0522-4": {
+      "prompt": "In \"Dragon Ball\", which metal is said to be the hardest in the universe?",
+      "options": [
+        "Cooler",
+        "Katchin",
+        "Piccolo",
+        "Dabra"
+      ]
+    },
+    "oqdb-0523-1": {
+      "prompt": "Which pasta comes in rectangular sheets?",
+      "options": [
+        "Lasagne",
+        "Tortellini",
+        "Cannelloni",
+        "Fusilli"
+      ]
+    },
+    "oqdb-0523-2": {
+      "prompt": "Which folded stuffed pasta comes from northwestern Italy?",
+      "options": [
+        "Macaroni",
+        "Fusilli",
+        "Spaghetti",
+        "Ravioli"
+      ]
+    },
+    "oqdb-0523-4": {
+      "prompt": "Which pasta dish is tossed in a pan with eggs and bacon?",
+      "options": [
+        "Lasagne",
+        "Tortellini",
+        "Carbonara",
+        "Ravioli"
+      ]
+    },
+    "oqdb-0524-1": {
+      "skip": "chanteur français (Étienne Daho) peu connu hors de France"
+    },
+    "oqdb-0524-2": {
+      "skip": "chanson de Balavoine peu connue hors de France"
+    },
+    "oqdb-0524-3": {
+      "skip": "référence au Top 50, classement français"
+    },
+    "oqdb-0524-4": {
+      "skip": "chanteuse (Lio) et chanson peu connues hors de la francophonie"
+    },
+    "oqdb-0526-2": {
+      "prompt": "What does young Son Gohan turn into during the full moon?",
+      "options": [
+        "Werewolf",
+        "Ghost",
+        "Dragon",
+        "Giant ape"
+      ]
+    },
+    "oqdb-0526-3": {
+      "prompt": "What was the former name of planet Vegeta?",
+      "options": [
+        "Beerus",
+        "Plant",
+        "Namek",
+        "Melmac"
+      ]
+    },
+    "oqdb-0526-4": {
+      "prompt": "Who helped put out the fire at Chi-Chi's father's castle?",
+      "options": [
+        "Master Roshi",
+        "Goku",
+        "Bulma",
+        "Drum"
+      ]
+    },
+    "oqdb-0527-1": {
+      "prompt": "Who was the first Russian woman tennis player to win Wimbledon?",
+      "options": [
+        "Sharapova",
+        "Bovina",
+        "Kirilenko",
+        "Panova"
+      ]
+    },
+    "oqdb-0527-2": {
+      "prompt": "Which Romanian gymnast scored a perfect 10 at the Olympics?",
+      "options": [
+        "Oana Ban",
+        "Nadia Comaneci",
+        "Catalina Ponor",
+        "Olga Korbut"
+      ]
+    },
+    "oqdb-0527-4": {
+      "prompt": "Who was the first woman officially registered to run the Boston Marathon?",
+      "options": [
+        "Mary Decker",
+        "Shalane Flanagan",
+        "Kathrine Switzer",
+        "Molly Huddle"
+      ]
+    },
+    "oqdb-0528-1": {
+      "prompt": "Which gentleman is in charge of a monarch's bedchamber service?",
+      "options": [
+        "Auguste",
+        "Master of the Hunt",
+        "Chamberlain",
+        "Constable"
+      ]
+    },
+    "oqdb-0528-2": {
+      "prompt": "What term is given to the spouse of the head of state in monarchies?",
+      "options": [
+        "Consort",
+        "Dauphin",
+        "Regent",
+        "Archon"
+      ]
+    },
+    "oqdb-0528-3": {
+      "prompt": "Which monarchic title is held by the sovereign of an empire?",
+      "options": [
+        "Sultan",
+        "Chancellor",
+        "Prince",
+        "Emperor"
+      ]
+    },
+    "oqdb-0529-1": {
+      "prompt": "Which former NSYNC singer was Cameron Diaz in a relationship with?",
+      "options": [
+        "Chris Kirkpatrick",
+        "Joey Fatone",
+        "Justin Timberlake",
+        "Lance Bass"
+      ]
+    },
+    "oqdb-0529-2": {
+      "prompt": "Who sold a kiss for €350,000 for a good cause?",
+      "options": [
+        "George Clooney",
+        "Matt Damon",
+        "Andy Garcia",
+        "Brad Pitt"
+      ]
+    },
+    "oqdb-0529-3": {
+      "prompt": "Which American tennis player was married to Brooke Shields?",
+      "options": [
+        "John McEnroe",
+        "Björn Borg",
+        "Andre Agassi",
+        "Jimmy Connors"
+      ]
+    },
+    "oqdb-0529-4": {
+      "prompt": "Which clay-court champion was born on the island of Majorca?",
+      "options": [
+        "Marcelo Melo",
+        "Andy Murray",
+        "Rafael Nadal",
+        "Roger Federer"
+      ]
+    },
+    "oqdb-0530-1": {
+      "skip": "jeu sur le vocabulaire français (anglicisme gloss pour brillant à lèvres)"
+    },
+    "oqdb-0530-2": {
+      "prompt": "Which product evens out skin tone and covers minor skin flaws?",
+      "options": [
+        "Balm",
+        "Foundation",
+        "Concealer",
+        "Kohl"
+      ]
+    },
+    "oqdb-0530-3": {
+      "prompt": "Which makeup product is used to draw a line along the eyelids?",
+      "options": [
+        "Eyeliner",
+        "Straightener",
+        "Concealer",
+        "Protector"
+      ]
+    },
+    "oqdb-0530-4": {
+      "prompt": "What do you use to open up the eyes by curling and lengthening lashes?",
+      "options": [
+        "Mascara",
+        "Eyeshadow",
+        "Gloss",
+        "Blush"
+      ]
+    },
+    "oqdb-0531-1": {
+      "prompt": "Which title ranks below viscount and above knight?",
+      "options": [
+        "Lord",
+        "Consort",
+        "Count",
+        "Baron"
+      ]
+    },
+    "oqdb-0531-2": {
+      "prompt": "Which title was given at birth to the eldest son of the king of France?",
+      "options": [
+        "Whale",
+        "Orca",
+        "Dauphin",
+        "Shark"
+      ]
+    },
+    "oqdb-0531-3": {
+      "prompt": "Which term was used for the kings and queens of ancient Egypt?",
+      "options": [
+        "Emir",
+        "Pasha",
+        "Pharaoh",
+        "Khan"
+      ]
+    },
+    "oqdb-0531-4": {
+      "prompt": "Which official title is given to the head of the German government?",
+      "options": [
+        "Governor",
+        "Rector",
+        "Chamberlain",
+        "Chancellor"
+      ]
+    },
+    "oqdb-0532-1": {
+      "prompt": "Which fashion icon wore a ponytail and dark sunglasses?",
+      "options": [
+        "Thierry Mugler",
+        "Karl Lagerfeld",
+        "Paco Rabanne",
+        "Pierre Cardin"
+      ]
+    },
+    "oqdb-0532-2": {
+      "prompt": "Which first name did Mr. Takada make shine in fashion?",
+      "options": [
+        "Kyrio",
+        "Kalvin",
+        "Karl",
+        "Kenzo"
+      ]
+    }
+  },
+  "quizzes": {}
+}

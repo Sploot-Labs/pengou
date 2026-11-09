@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=203"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0203-3",
+      "type": "mcq",
+      "prompt": "Comment se prénomme le premier fils de Shakira et de Gerard Piqué ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Donovan",
+            "correct": false
+          },
+          {
+            "label": "Esteban",
+            "correct": false
+          },
+          {
+            "label": "Ivan",
+            "correct": false
+          },
+          {
+            "label": "Milan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

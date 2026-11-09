@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=398"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0398-2",
+      "type": "mcq",
+      "prompt": "Le mot « lusitanien » désigne un peuple originaire de quel pays ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Espagne",
+            "correct": false
+          },
+          {
+            "label": "Portugal",
+            "correct": true
+          },
+          {
+            "label": "Italie",
+            "correct": false
+          },
+          {
+            "label": "Maroc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0398-3",
+      "type": "mcq",
+      "prompt": "Comment les Roms nomment-ils un étranger à leur population ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sind",
+            "correct": false
+          },
+          {
+            "label": "Djodjo",
+            "correct": false
+          },
+          {
+            "label": "Minouche",
+            "correct": false
+          },
+          {
+            "label": "Gadjo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0398-4",
+      "type": "mcq",
+      "prompt": "Quel signe trouve-t-on sur le drapeau du peuple Acadien ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cercle rouge",
+            "correct": false
+          },
+          {
+            "label": "Étoile jaune",
+            "correct": true
+          },
+          {
+            "label": "Lion bleu",
+            "correct": false
+          },
+          {
+            "label": "Dragon vert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

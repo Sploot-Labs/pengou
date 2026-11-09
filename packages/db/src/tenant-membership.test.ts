@@ -1,6 +1,6 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import { startTestDb, runMigrations, schema } from './index.js'
-import { ensureMembership, resolveTenantId, ensureDefaultTenant } from './tenant.js'
+import { ensureMembership, resolveTenantId, ensureDefaultTenant, TenantAccessDeniedError } from './tenant.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
 let tenantId: string
@@ -34,5 +34,14 @@ describe('résolution multi via membership', () => {
   it('single → tenant par défaut (sans exiger de membership)', async () => {
     const r = await resolveTenantId(ctx.db, { tenancyMode: 'single' }, {})
     expect(r).toBe(tenantId)
+  })
+  it('mode single : un utilisateur sans membership est refusé', async () => {
+    await expect(
+      resolveTenantId(ctx.db, { tenancyMode: 'single' }, { userId: 'sans-membership' }),
+    ).rejects.toBeInstanceOf(TenantAccessDeniedError)
+  })
+  it('mode single : un utilisateur membre est accepté', async () => {
+    await ensureMembership(ctx.db, userId, tenantId)
+    expect(await resolveTenantId(ctx.db, { tenancyMode: 'single' }, { userId })).toBe(tenantId)
   })
 })

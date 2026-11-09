@@ -1,0 +1,588 @@
+{
+  "source": {
+    "name": "Open Trivia Database",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-062e53ea5c98",
+      "type": "mcq",
+      "prompt": "Which iconic Disneyland attraction was closed in 2017 to be remodeled as a \"Guardians of the Galaxy\" themed ride?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peter Pan's Flight",
+            "correct": false
+          },
+          {
+            "label": "Pirates of the Caribbean",
+            "correct": false
+          },
+          {
+            "label": "Twilight Zone Tower of Terror",
+            "correct": true
+          },
+          {
+            "label": "The Haunted Mansion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0afdda8e4d96",
+      "type": "mcq",
+      "prompt": "In \"Overwatch\", Coalescence is the name for the ultimate of which hero?",
+      "payload": {
+        "options": [
+          {
+            "label": "Torbjorn",
+            "correct": false
+          },
+          {
+            "label": "Moira",
+            "correct": true
+          },
+          {
+            "label": "Zenyatta",
+            "correct": false
+          },
+          {
+            "label": "Symmetra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3a45dfced3e5",
+      "type": "mcq",
+      "prompt": "In the 2012 film, \"The Lorax\", who is the antagonist?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ted Wiggins",
+            "correct": false
+          },
+          {
+            "label": "The Once-Ler",
+            "correct": false
+          },
+          {
+            "label": "Grammy Norma",
+            "correct": false
+          },
+          {
+            "label": "Aloysius O'Hare",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3e0e689540be",
+      "type": "mcq",
+      "prompt": "\"The Potato Sack\" was a collection of indie games released on Steam in 2011 as a promotion for which game?",
+      "payload": {
+        "options": [
+          {
+            "label": "Half-Life 3",
+            "correct": false
+          },
+          {
+            "label": "Left 4 Dead 2",
+            "correct": false
+          },
+          {
+            "label": "Dota 2",
+            "correct": false
+          },
+          {
+            "label": "Portal 2",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5b05a12ae810",
+      "type": "mcq",
+      "prompt": "The film Mad Max: Fury Road features the Dies Irae from which composer's requiem?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mozart",
+            "correct": false
+          },
+          {
+            "label": "Verdi",
+            "correct": true
+          },
+          {
+            "label": "Berlioz",
+            "correct": false
+          },
+          {
+            "label": "Brahms",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-725ce6f7bfa5",
+      "type": "mcq",
+      "prompt": "Leonardo Di Caprio won his first Best Actor Oscar for his performance in which film?",
+      "payload": {
+        "options": [
+          {
+            "label": "Inception",
+            "correct": false
+          },
+          {
+            "label": "The Revenant",
+            "correct": true
+          },
+          {
+            "label": "Shutter Island",
+            "correct": false
+          },
+          {
+            "label": "The Wolf Of Wall Street",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8e2cb701bbba",
+      "type": "mcq",
+      "prompt": "Which of these was the name of a bug found in April 2014 in the publicly available OpenSSL cryptography library?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shellscript",
+            "correct": false
+          },
+          {
+            "label": "Heartbleed",
+            "correct": true
+          },
+          {
+            "label": "Corrupted Blood",
+            "correct": false
+          },
+          {
+            "label": "Shellshock",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9a6e0a051bfb",
+      "type": "mcq",
+      "prompt": "What was the wifi password given to Stephen Strange in Doctor Strange?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ancient",
+            "correct": false
+          },
+          {
+            "label": "Chakra",
+            "correct": false
+          },
+          {
+            "label": "Shambala",
+            "correct": true
+          },
+          {
+            "label": "Peace",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a14540462533",
+      "type": "mcq",
+      "prompt": "Which one of these characters was first introduced in Sonic Boom: Rise of Lyric?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sticks the Badger",
+            "correct": true
+          },
+          {
+            "label": "Mighty the Armadillo",
+            "correct": false
+          },
+          {
+            "label": "Espio the Chameleon",
+            "correct": false
+          },
+          {
+            "label": "Rouge the Bat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a1afa7f2770c",
+      "type": "mcq",
+      "prompt": "Who won the 2016 Formula 1 World Driver's Championship?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lewis Hamilton",
+            "correct": false
+          },
+          {
+            "label": "Kimi Raikkonen",
+            "correct": false
+          },
+          {
+            "label": "Nico Rosberg",
+            "correct": true
+          },
+          {
+            "label": "Max Verstappen",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a4e668e23f2a",
+      "type": "mcq",
+      "prompt": "Which soccer team won the Copa América 2015 Championship ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Argentina",
+            "correct": false
+          },
+          {
+            "label": "Brazil",
+            "correct": false
+          },
+          {
+            "label": "Chile",
+            "correct": true
+          },
+          {
+            "label": "Paraguay",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b9a2a03f0d27",
+      "type": "mcq",
+      "prompt": "Who is the lead singer of The Lumineers?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jeremiah Fraites",
+            "correct": false
+          },
+          {
+            "label": "Neyla Pekarek",
+            "correct": false
+          },
+          {
+            "label": "Wesley Schultz",
+            "correct": true
+          },
+          {
+            "label": "Jay Van Dyke",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-bd63aadc24fc",
+      "type": "mcq",
+      "prompt": "Which rapper had an album that went double platinum with no features?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kendrick Lamar",
+            "correct": false
+          },
+          {
+            "label": "Drake",
+            "correct": false
+          },
+          {
+            "label": "J. Cole",
+            "correct": true
+          },
+          {
+            "label": "Big Sean",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c07181f61f06",
+      "type": "mcq",
+      "prompt": "Who was the top scorer of the 2014 FIFA World Cup?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lionel Messi",
+            "correct": false
+          },
+          {
+            "label": "Neymar",
+            "correct": false
+          },
+          {
+            "label": "Thomas Müller",
+            "correct": false
+          },
+          {
+            "label": "James Rodríguez",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c0fd6d3a093a",
+      "type": "mcq",
+      "prompt": "Who won the UEFA Champions League in 2017?",
+      "payload": {
+        "options": [
+          {
+            "label": "Atletico Madrid",
+            "correct": false
+          },
+          {
+            "label": "Juventus F.C.",
+            "correct": false
+          },
+          {
+            "label": "AS Monaco FC",
+            "correct": false
+          },
+          {
+            "label": "Real Madrid C.F.",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ca3337610100",
+      "type": "mcq",
+      "prompt": "Which car manufacturer won the 2016 24 Hours of Le Mans?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ferrari",
+            "correct": false
+          },
+          {
+            "label": "Porsche",
+            "correct": true
+          },
+          {
+            "label": "Toyota",
+            "correct": false
+          },
+          {
+            "label": "Audi",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d313e78be9e3",
+      "type": "truefalse",
+      "prompt": "The album reputation by Taylor Swift has 15 songs",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dfecaaefe540",
+      "type": "mcq",
+      "prompt": "What album did Gorillaz release in 2017?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Fall",
+            "correct": false
+          },
+          {
+            "label": "Demon Days",
+            "correct": false
+          },
+          {
+            "label": "Plastic Beach",
+            "correct": false
+          },
+          {
+            "label": "Humanz",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-eac186e3f158",
+      "type": "truefalse",
+      "prompt": "In \"Undertale\", the main character of the game is Sans.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f0534ac3f64b",
+      "type": "mcq",
+      "prompt": "What machine element is located in the center of fidget spinners?",
+      "payload": {
+        "options": [
+          {
+            "label": "Axles",
+            "correct": false
+          },
+          {
+            "label": "Gears",
+            "correct": false
+          },
+          {
+            "label": "Bearings",
+            "correct": true
+          },
+          {
+            "label": "Belts",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-the-2010s-2",
+      "title": "The 2010s #2",
+      "description": "More sport, music, games and films from the 2010s.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-f0534ac3f64b",
+        "otdb-3a45dfced3e5",
+        "otdb-dfecaaefe540",
+        "otdb-725ce6f7bfa5",
+        "otdb-a1afa7f2770c",
+        "otdb-a4e668e23f2a",
+        "otdb-0afdda8e4d96",
+        "otdb-9a6e0a051bfb",
+        "otdb-b9a2a03f0d27",
+        "otdb-c07181f61f06",
+        "otdb-8e2cb701bbba",
+        "otdb-d313e78be9e3",
+        "otdb-a14540462533",
+        "otdb-bd63aadc24fc",
+        "otdb-eac186e3f158",
+        "otdb-5b05a12ae810",
+        "otdb-ca3337610100",
+        "otdb-062e53ea5c98",
+        "otdb-3e0e689540be",
+        "otdb-c0fd6d3a093a"
+      ]
+    }
+  ]
+}

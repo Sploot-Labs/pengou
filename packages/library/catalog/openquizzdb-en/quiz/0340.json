@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=340"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0340-1-en",
+      "type": "mcq",
+      "prompt": "Which building is meant to house donkeys and horses?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stable",
+            "correct": true
+          },
+          {
+            "label": "Arena",
+            "correct": false
+          },
+          {
+            "label": "Ranch",
+            "correct": false
+          },
+          {
+            "label": "Racecourse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0340-3-en",
+      "type": "mcq",
+      "prompt": "What are rabbits usually kept in at the bottom of gardens?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hutch",
+            "correct": true
+          },
+          {
+            "label": "Hatchery",
+            "correct": false
+          },
+          {
+            "label": "Nest box",
+            "correct": false
+          },
+          {
+            "label": "Aviary",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

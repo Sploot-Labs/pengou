@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=487"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0487-3",
+      "type": "mcq",
+      "prompt": "Comment se prénomme le fidèle serviteur du célèbre Zorro ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Garcia",
+            "correct": false
+          },
+          {
+            "label": "Esteban",
+            "correct": false
+          },
+          {
+            "label": "Galindo",
+            "correct": false
+          },
+          {
+            "label": "Bernardo",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=537"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0537-1-en",
+      "type": "mcq",
+      "prompt": "What do you check to estimate a horse's approximate age?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tail",
+            "correct": false
+          },
+          {
+            "label": "Teeth",
+            "correct": true
+          },
+          {
+            "label": "Hooves",
+            "correct": false
+          },
+          {
+            "label": "Mane",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0537-2-en",
+      "type": "mcq",
+      "prompt": "How soon after birth can a foal walk?",
+      "payload": {
+        "options": [
+          {
+            "label": "One hour",
+            "correct": true
+          },
+          {
+            "label": "Two weeks",
+            "correct": false
+          },
+          {
+            "label": "One month",
+            "correct": false
+          },
+          {
+            "label": "Four weeks",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0537-3-en",
+      "type": "mcq",
+      "prompt": "How often should a horse's hooves ideally be picked out?",
+      "payload": {
+        "options": [
+          {
+            "label": "Every day",
+            "correct": true
+          },
+          {
+            "label": "Every week",
+            "correct": false
+          },
+          {
+            "label": "Every month",
+            "correct": false
+          },
+          {
+            "label": "Every year",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

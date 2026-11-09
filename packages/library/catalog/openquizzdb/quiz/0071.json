@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=71"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0071-3",
+      "type": "mcq",
+      "prompt": "Que lancent Bourvil et De Funès sur la route dans « La Grande Vadrouille » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Citrouilles",
+            "correct": true
+          },
+          {
+            "label": "Billets",
+            "correct": false
+          },
+          {
+            "label": "Barriques de vin",
+            "correct": false
+          },
+          {
+            "label": "Tomates",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0071-4",
+      "type": "mcq",
+      "prompt": "Qui était la femme de Louis de Funès dans la série des « Gendarme » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Annie Girardot",
+            "correct": false
+          },
+          {
+            "label": "Maria Pacôme",
+            "correct": false
+          },
+          {
+            "label": "Claude Gensac",
+            "correct": true
+          },
+          {
+            "label": "Micheline Dax",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

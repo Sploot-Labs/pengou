@@ -1,0 +1,445 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0405-1-en",
+      "type": "mcq",
+      "prompt": "What material is the Louvre Pyramid made of?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stone",
+            "correct": false
+          },
+          {
+            "label": "Wood",
+            "correct": false
+          },
+          {
+            "label": "Glass",
+            "correct": true
+          },
+          {
+            "label": "Cardboard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0405-2-en",
+      "type": "mcq",
+      "prompt": "Which works are displayed in the Cour Marly and Cour Puget?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mummies",
+            "correct": false
+          },
+          {
+            "label": "Sculptures",
+            "correct": true
+          },
+          {
+            "label": "Paintings",
+            "correct": false
+          },
+          {
+            "label": "Sketches",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0377-1-en",
+      "type": "mcq",
+      "prompt": "What does Marcel Duchamp's sculpture \"Fountain\" depict?",
+      "payload": {
+        "options": [
+          {
+            "label": "Uterus",
+            "correct": false
+          },
+          {
+            "label": "Ulcer",
+            "correct": false
+          },
+          {
+            "label": "Urinal",
+            "correct": true
+          },
+          {
+            "label": "Urn",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0377-2-en",
+      "type": "mcq",
+      "prompt": "What was the nationality of the sculptor and painter Alberto Giacometti?",
+      "payload": {
+        "options": [
+          {
+            "label": "Portuguese",
+            "correct": false
+          },
+          {
+            "label": "Argentine",
+            "correct": false
+          },
+          {
+            "label": "Swiss",
+            "correct": true
+          },
+          {
+            "label": "Italian",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0377-3-en",
+      "type": "mcq",
+      "prompt": "Which sculptor created the now famous \"Kiss\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Choppin",
+            "correct": false
+          },
+          {
+            "label": "Rodin",
+            "correct": true
+          },
+          {
+            "label": "Lenoir",
+            "correct": false
+          },
+          {
+            "label": "Moreau",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0466-1-en",
+      "type": "mcq",
+      "prompt": "Which artist painted the famous Romantic painting \"The Barque of Dante\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Girodet",
+            "correct": false
+          },
+          {
+            "label": "Goya",
+            "correct": false
+          },
+          {
+            "label": "Delacroix",
+            "correct": true
+          },
+          {
+            "label": "Turner",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0466-2-en",
+      "type": "mcq",
+      "prompt": "Which painter is famous for his disturbing \"Black Paintings\" series?",
+      "payload": {
+        "options": [
+          {
+            "label": "Corot",
+            "correct": false
+          },
+          {
+            "label": "Gros",
+            "correct": false
+          },
+          {
+            "label": "Fuseli",
+            "correct": false
+          },
+          {
+            "label": "Goya",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0466-3-en",
+      "type": "mcq",
+      "prompt": "Which Danish artist painted \"A Group of Danish Artists in Rome\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hansen",
+            "correct": true
+          },
+          {
+            "label": "Malmström",
+            "correct": false
+          },
+          {
+            "label": "Bierstadt",
+            "correct": false
+          },
+          {
+            "label": "Delacroix",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0466-4-en",
+      "type": "mcq",
+      "prompt": "Which German artist painted \"Moonrise over the Sea\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quidor",
+            "correct": false
+          },
+          {
+            "label": "Raeburn",
+            "correct": false
+          },
+          {
+            "label": "Friedrich",
+            "correct": true
+          },
+          {
+            "label": "Runge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0145-1-en",
+      "type": "mcq",
+      "prompt": "Which silicate-based material is widely used in ceramics?",
+      "payload": {
+        "options": [
+          {
+            "label": "Clay",
+            "correct": true
+          },
+          {
+            "label": "Ceruse",
+            "correct": false
+          },
+          {
+            "label": "Sand",
+            "correct": false
+          },
+          {
+            "label": "Silt",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0145-2-en",
+      "type": "mcq",
+      "prompt": "Which vitrifiable coating hardens ceramics?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pige",
+            "correct": false
+          },
+          {
+            "label": "Bisque",
+            "correct": false
+          },
+          {
+            "label": "Glaze",
+            "correct": true
+          },
+          {
+            "label": "Openwork",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0145-3-en",
+      "type": "mcq",
+      "prompt": "Which civilization is universally known for its porcelain?",
+      "payload": {
+        "options": [
+          {
+            "label": "Greek",
+            "correct": false
+          },
+          {
+            "label": "Chinese",
+            "correct": true
+          },
+          {
+            "label": "Egyptian",
+            "correct": false
+          },
+          {
+            "label": "Peruvian",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0145-4-en",
+      "type": "mcq",
+      "prompt": "Which glaze color do you get with cobalt oxide?",
+      "payload": {
+        "options": [
+          {
+            "label": "Red",
+            "correct": false
+          },
+          {
+            "label": "Green",
+            "correct": false
+          },
+          {
+            "label": "Yellow",
+            "correct": false
+          },
+          {
+            "label": "Blue",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0399-2-en",
+      "type": "mcq",
+      "prompt": "Which craftsman works wood to make decorative furniture?",
+      "payload": {
+        "options": [
+          {
+            "label": "Basket maker",
+            "correct": false
+          },
+          {
+            "label": "Varnisher",
+            "correct": false
+          },
+          {
+            "label": "Cabinetmaker",
+            "correct": true
+          },
+          {
+            "label": "Brassworker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0399-4-en",
+      "type": "mcq",
+      "prompt": "Who is in charge of advising customers on headwear?",
+      "payload": {
+        "options": [
+          {
+            "label": "Glover",
+            "correct": false
+          },
+          {
+            "label": "Hatter",
+            "correct": true
+          },
+          {
+            "label": "Cutler",
+            "correct": false
+          },
+          {
+            "label": "Chandler",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

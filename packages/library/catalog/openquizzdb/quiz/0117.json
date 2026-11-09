@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=117"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0117-3",
+      "type": "mcq",
+      "prompt": "En quoi les Obama ont-ils transformé le jardin de la Maison Blanche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Salle de sport",
+            "correct": false
+          },
+          {
+            "label": "Théâtre ouvert",
+            "correct": false
+          },
+          {
+            "label": "Potager",
+            "correct": true
+          },
+          {
+            "label": "Parking",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

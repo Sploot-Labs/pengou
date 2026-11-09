@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=249"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0249-1",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on la plus haute tour d'un château fort ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Donjon",
+            "correct": true
+          },
+          {
+            "label": "Bastille",
+            "correct": false
+          },
+          {
+            "label": "Tour flanquante",
+            "correct": false
+          },
+          {
+            "label": "Guette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0249-2",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le fossé rempli d'eau autour d'un château fort ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Contrescarpe",
+            "correct": false
+          },
+          {
+            "label": "Latrines",
+            "correct": false
+          },
+          {
+            "label": "Douves",
+            "correct": true
+          },
+          {
+            "label": "Chemise",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0249-4",
+      "type": "mcq",
+      "prompt": "Que trouve-t-on en général derrière le pont-levis d'un château ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Meurtrières",
+            "correct": false
+          },
+          {
+            "label": "Tourelle",
+            "correct": false
+          },
+          {
+            "label": "Herse",
+            "correct": true
+          },
+          {
+            "label": "Douves",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

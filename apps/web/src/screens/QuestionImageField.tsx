@@ -88,7 +88,7 @@ export function QuestionImageField({ media, mediaAlt, onChange, upload = default
     }
   }
 
-  function useUrl() {
+  function applyUrl() {
     const result = parseImageUrl(urlInput)
     if (!result.ok) {
       setUrlError(result.error)
@@ -150,7 +150,7 @@ export function QuestionImageField({ media, mediaAlt, onChange, upload = default
             aria-invalid={urlError ? true : undefined}
             aria-describedby={urlError ? urlErrorId : undefined}
           />
-          <Button variant="ghost" type="button" onClick={useUrl}>
+          <Button variant="ghost" type="button" onClick={applyUrl}>
             Utiliser
           </Button>
         </div>

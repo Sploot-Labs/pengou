@@ -84,6 +84,9 @@
   border: 2px solid transparent;
   font-weight: 700;
   font-size: var(--fs-body);
+  /* Un <Link> habillé en bouton (« Bibliothèque », « Retour ») ne doit pas
+     garder le soulignement par défaut des liens. */
+  text-decoration: none;
   cursor: pointer;
   transition:
     transform var(--transition-fast),
@@ -115,27 +118,39 @@
   cursor: not-allowed;
 }
 
-/* Les variantes portent `.prototype-root` pour passer devant le reset
-   `.prototype-root button { color: inherit }` de tokens.css (spécificité
-   (0,1,1)) qui, sinon, écrase la couleur de texte de chaque variante et
-   ramène tout à --ink (contraste cassé sur les aplats de marque). */
-.prototype-root .ab-button--primary {
+/* Les variantes n'ont plus besoin du préfixe `.prototype-root` : le reset
+   `button { color: inherit }` de tokens.css passe par `:where()` et ne pèse
+   que (0,0,1). Rester à une seule classe (0,1,0) laisse surtout l'état
+   `.ab-button[aria-disabled="true"]` (0,2,0) l'emporter : avec le préfixe,
+   un bouton primaire désactivé gardait son aplat cyan d'actif. */
+.ab-button--primary {
   background: var(--brand);
   color: var(--stage);
 }
 
-.prototype-root .ab-button--ghost {
+/* Boutons, variantes du système de design (composant `Button` de ui.tsx) :
+   - primary : action principale, aplat --brand ;
+   - ghost : action secondaire, contour --ghost-line et encre --ghost-ink (neutres en clair,
+     cyan en sombre pour ne pas paraître gris sur le fond nuit) ;
+   - success / danger : actions sémantiques.
+   Tout contrôle bouton maison qui n'utilise pas `.ab-button` (flèches de tri, etc.) reprend
+   ces mêmes rôles plutôt que --line / --ink, pour rester cohérent dans les deux schémas. */
+.ab-button--ghost {
   background: transparent;
-  border-color: var(--line);
-  color: var(--ink);
+  border-color: var(--ghost-line, var(--line));
+  color: var(--ghost-ink, var(--ink));
+}
+/* Sur fond transparent, l'éclaircissement générique du survol ne se voit pas : léger voile teinté. */
+.ab-button--ghost:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: color-mix(in srgb, var(--ghost-ink, var(--ink)) 10%, transparent);
 }
 
-.prototype-root .ab-button--success {
+.ab-button--success {
   background: var(--success);
   color: var(--success-ink);
 }
 
-.prototype-root .ab-button--danger {
+.ab-button--danger {
   background: var(--danger);
   color: var(--danger-ink);
 }
@@ -369,6 +384,14 @@
   padding: var(--space-5);
 }
 
+/* Bandeau d'erreur ou état vide posé directement dans la page (bibliothèque,
+   réglages d'espace) : sans marge, le bloc suivant venait le toucher. Les
+   marges verticales fusionnent, donc pas d'espace doublé si le voisin en a
+   déjà une. */
+.ab-shell__main > :is(.join-error, .ab-empty-state):not(:last-child) {
+  margin-bottom: var(--space-4);
+}
+
 .ab-shell__actions {
   display: flex;
   align-items: center;
@@ -464,9 +487,9 @@
   min-height: 44px;
   padding: 0;
   background: transparent;
-  border: 1px solid var(--line);
+  border: 1px solid var(--ghost-line, var(--line));
   border-radius: var(--radius-sm);
-  color: var(--ink-dim);
+  color: var(--ghost-ink, var(--ink-dim));
   cursor: pointer;
   font-size: 0.9rem;
   line-height: 1;
@@ -483,12 +506,18 @@
   font-size: var(--fs-small);
 }
 
+/* Deux lignes avant l'ellipse : sur une seule, la colonne étroite (badge de
+   type + flèches de réordonnancement) ne laissait que quelques lettres. */
 .host-list__prompt {
   flex: 1;
+  min-width: 0;
   font-weight: 600;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow-wrap: anywhere;
 }
 
 .host-badge {
@@ -583,33 +612,20 @@
   margin-bottom: var(--space-4);
 }
 
-.host-launch {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--space-1);
-}
-
-.host-launch__hint {
-  font-size: var(--fs-small);
-  color: var(--ink-dim);
-  max-width: 32ch;
-  text-align: right;
-}
-
-.host-launch__confirm {
-  font-size: var(--fs-small);
-  color: var(--ink);
-  max-width: 40ch;
-  text-align: right;
-}
-
 /* Permanent, lightweight brand/positioning line in the host shell header. */
 .host-brandline {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--fs-small);
   color: var(--ink);
+}
+
+/* Sur téléphone, le slogan se tassait sur trois lignes entre le logo et
+   « Se déconnecter » : le logo suffit à identifier l'app. */
+@media (max-width: 600px) {
+  .host-brandline__tagline {
+    display: none;
+  }
 }
 
 .host-brandline strong {
@@ -621,6 +637,11 @@
    `flushPendingSave()` before navigating instead of an inert <Link>'s
    direct-to-navigation. */
 .host-link-button {
+  /* Zone cliquable de 44px de haut (cible tactile) sans changer l'aspect
+     de lien en ligne. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   background: none;
   border: none;
   padding: 0;
@@ -745,7 +766,7 @@
   color: var(--ink-dim);
 }
 
-.host-field input,
+.host-field input:not([type="radio"]):not([type="checkbox"]),
 .host-field select,
 .host-field textarea {
   min-height: 44px;
@@ -758,9 +779,30 @@
   gap: var(--space-3);
 }
 
+/* Fieldsets de l'éditeur (réponses, bonne réponse, variantes) : on retire
+   le cadre « groove » du navigateur et on aligne la légende sur les labels
+   de .host-field. */
+fieldset.host-field {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+fieldset.host-field > legend {
+  padding: 0;
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--ink-dim);
+}
+
+/* Une ligne par réponse : pictogramme, libellé, puis la pastille
+   « Correcte ». 320px de large minimum pour que la ligne ne se casse pas
+   (deux colonnes dans le panneau desktop, une seule en mobile). */
 .host-options-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: var(--space-3);
 }
 
@@ -771,6 +813,12 @@
   gap: var(--space-2);
 }
 
+.host-option-row__shape {
+  order: -1;
+  display: inline-flex;
+  color: var(--ink-dim);
+}
+
 /* Per-answer validation message drops onto its own line under the row. */
 .host-option-row .host-inline-error {
   flex-basis: 100%;
@@ -779,26 +827,37 @@
 
 .host-option-row input[type="text"] {
   flex: 1;
+  min-width: 0;
 }
 
-.host-option-row input[type="radio"] {
+/* Même taille de bouton radio et de case à cocher partout côté animateur
+   (QCM, Vrai/Faux, enchaînement automatique). */
+.host-field input:is([type="radio"], [type="checkbox"]) {
   width: 20px;
   height: 20px;
+  margin: 0;
   flex-shrink: 0;
 }
 
 .host-option-row__correct-label {
+  order: 1;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: var(--space-2);
   min-height: 44px;
-  padding: var(--space-2);
+  padding: var(--space-2) var(--space-3);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   font-size: var(--fs-small);
   color: var(--ink-dim);
   cursor: pointer;
   flex-shrink: 0;
+}
+
+/* La bonne réponse se repère sans lire le bouton radio. */
+.host-option-row__correct-label:has(input:checked) {
+  border-color: var(--success);
+  color: var(--ink-strong);
 }
 
 .host-actions {
@@ -820,7 +879,13 @@
   padding: var(--space-2) var(--space-3);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
+  color: var(--ink-dim);
   cursor: pointer;
+}
+
+.host-truefalse label:has(input:checked) {
+  border-color: var(--success);
+  color: var(--ink-strong);
 }
 
 /* ====================================================================== */
@@ -857,12 +922,46 @@
   gap: 22px;
 }
 
+/* Formulaires Connexion / Inscription : même rythme vertical que .join-form
+   (22px entre blocs), sinon le bouton vient toucher le dernier champ. */
+.join-card {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Le sous-titre se rattache au titre : on rattrape une partie du gap. */
+.join-card > h1 + .join-subtitle {
+  margin-top: -14px;
+}
+
+.join-subtitle {
+  color: var(--ink-dim);
+}
+
+.join-card > .ab-button {
+  width: 100%;
+  min-height: 52px;
+  margin-top: var(--space-1);
+}
+
 .join-field {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
+/* Champs texte des formulaires d'authentification : hauteur tactile et
+   padding réel, au lieu du padding navigateur (1px 2px, 25px de haut). */
+.join-card .join-field input:not([type="checkbox"]) {
+  min-height: 48px;
+  padding: 0 var(--space-3);
+}
+
+/* Deux styles de label, volontairement : mono majuscule espacée sur les
+   écrans d'entrée (Join, Connexion, Inscription), sobre en casse de phrase
+   dans l'app animateur (.host-field label). Ne pas mélanger sur un même
+   écran. */
 .join-field > label {
   font-family: var(--font-mono);
   font-size: 14px;
@@ -938,12 +1037,38 @@
   border-radius: 12px;
   background: color-mix(in srgb, var(--danger) 22%, transparent);
   border: 1px solid var(--danger);
-  color: #ffffff;
+  /* Encre forte du thème sur la teinte danger à 22 % : clair 10,5:1 sur le fond, 11,3:1 sur une
+     surface ; sombre 9,9:1 et 8,7:1 ; scène (encre blanche) 11,6:1 et 10,1:1. */
+  color: var(--ink-strong);
   font-size: 14px;
 }
 
 .join-spacer {
   flex: 1;
+}
+
+/* Cases à cocher des CGU (inscription, revalidation) : case native agrandie, label en casse de
+   phrase cliquable sur toute sa largeur, alignés sur la première ligne du texte. */
+.join-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+.join-check input[type="checkbox"] {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 1px 0 0;
+  cursor: pointer;
+}
+.join-check label {
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.join-legal {
+  color: var(--ink-dim);
+  font-size: 14px;
 }
 
 .join-reassure {
@@ -1004,6 +1129,17 @@
   font-family: var(--font-mono);
   font-size: 15px;
   color: var(--ink-dim);
+}
+
+/* Le bouton son (.ab-soundtoggle--fixed, 44px à 12px du bord) se pose sur
+   la droite des barres du haut dès que l'écran fait moins de ~520px : il
+   masquait le PIN du lobby et le chrono des questions. On lui réserve sa
+   place. */
+@media (max-width: 540px) {
+  .player-lobby__top,
+  .player-qhead {
+    padding-right: 52px;
+  }
 }
 
 .player-lobby__hero {
@@ -1161,6 +1297,27 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+/* Chrono de la vue joueur (TimerPill) : jusqu'ici sans aucun style, l'état
+   urgent des 5 dernières secondes ne se voyait pas. */
+.ab-timerpill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 2px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--stage-2);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+  color: #ffffff;
+}
+.ab-timerpill--urgent {
+  border-color: var(--danger);
+  background: var(--danger);
+  color: var(--danger-ink);
 }
 .player-qnum {
   font-family: var(--font-mono);
@@ -1769,6 +1926,20 @@
   gap: var(--space-5);
 }
 
+/* Pendant la partie, le rappel « Rejoignez sur… » occupe le haut de
+   l'écran : on descend le contenu pour que le chrono ne vienne pas le
+   toucher. */
+.big-screen:has(.big-join-reminder) {
+  padding-top: 76px;
+}
+
+/* Le focus posé au montage de chaque phase sert à l'annonce lecteur
+   d'écran. Sur un écran projeté, que personne ne pilote au clavier, son
+   cadre cyan autour du titre n'apporte rien et parasite l'affichage. */
+.big-screen [tabindex="-1"]:focus {
+  outline: none;
+}
+
 /* Couche de transition de phase : le wrapper de <PhaseTransition> remplace le
    bloc de phase comme enfant flex de .big-screen — il doit donc porter le même
    comportement (flex:1 + colonne) pour que le `flex:1` du bloc interne opère. */
@@ -1787,6 +1958,17 @@
   justify-content: center;
   gap: var(--space-5);
   text-align: center;
+}
+
+/* PIN et QR côte à côte : empilés, le lobby dépassait 720px de haut et
+   défilait sur un projecteur 1280×720. Ils repassent l'un sous l'autre
+   quand la largeur manque. */
+.big-lobby__join {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
 }
 
 .big-players {
@@ -1958,10 +2140,12 @@
 
 /* Compact, persistent join reminder pinned to a corner during the active
    phases so latecomers can still enter (PIN + URL). */
+/* Décalé à gauche du bouton son (lui aussi fixé en haut à droite, 44px) :
+   au même endroit, il masquait le code banquise. */
 .big-join-reminder {
   position: fixed;
   top: var(--space-3);
-  right: var(--space-3);
+  right: calc(var(--space-3) + 44px + var(--space-2));
   z-index: 40;
   display: flex;
   align-items: center;
@@ -2551,6 +2735,19 @@
   border: 1px solid var(--line);
 }
 
+.hostlive-players__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.hostlive-kick {
+  flex-shrink: 0;
+  min-height: 32px;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--fs-small, 0.875rem);
+}
+
 .hostlive-controls {
   display: flex;
   align-items: center;
@@ -2677,6 +2874,16 @@
   background: var(--surface);
 }
 
+.hostlive-all-players {
+  margin-top: var(--space-4);
+}
+
+.hostlive-all-players > summary {
+  cursor: pointer;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
 .hostlive-board__rank {
   font-family: var(--font-mono);
   font-size: var(--fs-h2);
@@ -2785,6 +2992,69 @@
   width: 100%;
   min-height: 44px;
 }
+/* « Lancer » (prioritaire, prend la place) et « Archiver » côte à côte sous la carte. */
+.home-card__actions {
+  display: flex;
+  gap: var(--space-2);
+}
+.home-card__actions .home-card__launch {
+  flex: 1;
+  width: auto;
+}
+.home-card__archive {
+  min-height: 44px;
+}
+
+/* Section repliable des quiz archivés (`<details>` natif), sous les cartes de « Mes quiz ». */
+.home-archived {
+  margin-top: var(--space-5);
+}
+.home-archived__summary {
+  display: list-item;
+  min-height: 44px;
+  padding: var(--space-2) 0;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--ink-strong);
+}
+.home-archived[open] .home-archived__summary {
+  margin-bottom: var(--space-3);
+}
+.home-archived__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.home-archived__item .home-list__item {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Éditeur : bandeau d'un quiz archivé (non lançable) et zone « Archiver » en pied de page. */
+.host-archived {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  margin-bottom: var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--warn);
+  border-radius: var(--radius-sm);
+  color: var(--ink-strong);
+}
+.host-archived p {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+.host-archive-zone {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
 
 /* Signature accent — one of the 4 brand answer shapes (Task 5), cycled per
    card index. Purely decorative (aria-hidden): small, low-opacity, tucked
@@ -2891,7 +3161,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-4);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
 }
 
 .report-summary__facts {
@@ -2975,12 +3245,15 @@
 /* Workspaces (Slice 3c) — switcher, panneau, lignes membres/invites   */
 /* ------------------------------------------------------------------ */
 
+/* Tokens réels du thème (--text, --border et --radius-2 n'existent pas) :
+   la règle était masquée par le reset des champs tant que celui-ci pesait
+   plus lourd qu'une classe. */
 .ab-workspace-switcher__select {
   font: inherit;
-  color: var(--text);
-  background: var(--surface);
-  border: 1px solid var(--border, var(--surface-2));
-  border-radius: var(--radius-2, 8px);
+  color: var(--ink-strong);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
   padding: 0.4rem 0.6rem;
   max-width: 16rem;
 }
@@ -3083,6 +3356,652 @@
   align-items: center;
   gap: 12px;
   margin-top: 24px;
+}
+
+/* Même gabarit que les autres menus déroulants côté animateur (44px). */
+.hostlive-relaunch select {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+}
+
+/* Bibliothèque de questions */
+.library-filters {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.library-filters .host-field {
+  width: auto;
+  min-width: 10rem;
+}
+.library-tabs {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.library-card {
+  flex: 1;
+}
+.library-questions {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .library-questions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* Les deux colonnes de l'onglet Questions empilent des blocs (recherche,
+   tirage, liste ; titre, sélection, formulaire) : sans gap, ils se
+   touchaient. La marge basse de .home-inline-form ferait doublon. */
+.library-questions > section,
+.library-selection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.library-questions .home-inline-form {
+  margin-bottom: 0;
+}
+/* La zone d'annonce du tirage reste dans le DOM (live region), mais vide
+   elle ne doit pas ajouter un gap sous le bouton « Tirer ». */
+.library-questions .home-inline-form > [role="status"]:empty {
+  margin-top: calc(-1 * var(--space-3));
+}
+.library-question input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+}
+.library-question {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.library-question__body {
+  display: flex;
+  flex: 1 1 14rem;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.source-credit {
+  color: var(--ink-dim);
+  font-size: 0.85em;
+}
+p.source-credit {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Étiquettes de source des cartes de la bibliothèque : discrètes, chacune renvoie à sa section
+   de la page des crédits. */
+.source-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+.source-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: var(--surface-2);
+  color: var(--ink-dim);
+  text-decoration: none;
+}
+.source-tag:hover {
+  color: var(--ink-strong);
+  text-decoration: underline;
+}
+
+/* Page des crédits : texte courant, largeur de lecture. */
+.credits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 42rem;
+  line-height: 1.6;
+}
+.credits section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.credits p {
+  margin: 0;
+}
+
+/* Encadré « Sources et licences » en bas de l'éditeur : une seule mention pour tout le quiz,
+   plutôt qu'une ligne sous chaque question. */
+.sources-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+  color: var(--ink-dim);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+.sources-panel h2 {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--ink-strong);
+}
+.sources-panel p {
+  margin: 0;
+}
+
+/* Nuage de mots : flux centré, cinq paliers de taille (grand écran et écran hôte). */
+.wordcloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wordcloud__word {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--ink-strong);
+  font-weight: 700;
+  line-height: 1.1;
+}
+.wordcloud__word--t1 {
+  font-size: var(--fs-body);
+  color: var(--ink-dim);
+}
+.wordcloud__word--t2 {
+  font-size: var(--fs-h3);
+}
+.wordcloud__word--t3 {
+  font-size: var(--fs-h2);
+}
+.wordcloud__word--t4 {
+  font-size: var(--fs-title);
+}
+.wordcloud__word--t5 {
+  font-size: var(--fs-display);
+}
+.wordcloud__empty {
+  margin: 0;
+  text-align: center;
+  color: var(--ink-dim);
+  font-size: var(--fs-h3);
+}
+.wordcloud__remove {
+  min-width: 28px;
+  min-height: 28px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--ink-dim);
+  font-size: var(--fs-small);
+  line-height: 1;
+  cursor: pointer;
+}
+.wordcloud__remove:hover,
+.wordcloud__remove:focus-visible {
+  color: var(--ink-strong);
+  border-color: var(--warn);
+}
+
+/* Nuage du grand écran : l'écran prend exactement la hauteur du viewport et ne défile pas ; le
+   cadre `.big-wordcloud__frame` reçoit la hauteur restante (en-tête et récapitulatif déduits) et
+   le nuage 2 / 1 s'y inscrit, borné par la largeur comme par la hauteur, du 720p à la 4K. */
+.big-screen:has(.big-wordcloud) {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+.big-screen:has(.big-wordcloud) .big-live {
+  min-height: 0;
+  gap: var(--space-3);
+}
+.big-wordcloud {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+.big-wordcloud__frame {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  container-type: size;
+  display: grid;
+  place-items: center;
+}
+.big-wordcloud__frame > .bigcloud {
+  width: min(100cqw, 200cqh);
+}
+/* Récapitulatif et compte à rebours sur une seule ligne de hauteur fixe : le cadre ne change pas
+   de taille quand le premier mot arrive ou quand le compte à rebours apparaît à la révélation. */
+.big-wordcloud__foot {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  font-size: var(--fs-h2);
+  min-height: 1.5em;
+}
+.big-wordcloud__foot > p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* En-tête compact des phases nuage : badge, question et chrono sur une ligne. Les colonnes
+   latérales ont une largeur fixe et la place du chrono est réservée à la révélation, pour que
+   la question ne se recompose pas et que le nuage ne bouge pas entre question et révélation. */
+.big-live--cloud .big-live__header {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr) 12rem;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 112px;
+}
+.big-live--cloud .big-live__header > .host-badge {
+  justify-self: start;
+}
+.big-live--cloud .big-live__header > .ab-timer,
+.big-live--cloud .big-live__ring-slot {
+  justify-self: end;
+  width: 112px;
+  height: 112px;
+}
+.big-live--cloud .big-live__prompt {
+  font-size: var(--fs-title);
+  max-width: none;
+  margin: 0;
+  padding: var(--space-2);
+}
+.big-live--cloud .ab-timer__value {
+  font-size: 2.25rem;
+}
+
+/* Nuage de mots du grand écran : scène 1600x800 mise à l'échelle dans un cadre 2 / 1. */
+.bigcloud {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #0b2545;
+  container-type: inline-size;
+}
+.bigcloud__stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1600px;
+  height: 800px;
+  transform-origin: 0 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  color: #fff;
+  background: radial-gradient(ellipse at 50% 55%, #12305a 0%, #0b2545 55%, #06162b 100%);
+}
+.bigcloud__stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#ffffff 1.2px, transparent 1.6px), radial-gradient(#7fd6f0 1px, transparent 1.4px);
+  background-size:
+    140px 120px,
+    210px 170px;
+  background-position:
+    0 0,
+    60px 40px;
+  opacity: 0.18;
+  animation: bigcloud-twinkle 5s ease-in-out infinite alternate;
+}
+@keyframes bigcloud-twinkle {
+  to {
+    opacity: 0.38;
+  }
+}
+.bigcloud__empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  /* Hors de la scène (lisible par les lecteurs d'écran) : 44 px de scène = 2,75 % de la largeur. */
+  font-family: var(--font-display);
+  font-size: 2.75cqw;
+  font-weight: 600;
+  color: #a9c3dd;
+  pointer-events: none;
+}
+.bigcloud__word {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: transform 800ms var(--ease-out);
+}
+.bigcloud__rot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: transform 800ms var(--ease-out);
+}
+.bigcloud__text {
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1;
+  font-weight: 600;
+  color: var(--wc-text);
+  /* Taille fixe : la taille affichée vient de la mise à l'échelle de .bigcloud__rot (BASE_FONT_SIZE). */
+  font-size: 100px;
+  transition: scale 600ms var(--ease-spring);
+}
+.bigcloud__word[data-top="true"] .bigcloud__text {
+  text-shadow: 0 0 calc(42px / var(--word-scale, 1)) var(--wc-text);
+}
+.bigcloud__word[data-small="true"] .bigcloud__text {
+  opacity: 0.62;
+}
+.bigcloud__text.is-new {
+  animation: bigcloud-pop 650ms var(--ease-spring) both;
+}
+.bigcloud__text.is-bump {
+  animation: bigcloud-bump 450ms var(--ease-spring);
+}
+.bigcloud__text.is-bump-alt {
+  animation: bigcloud-bump-alt 450ms var(--ease-spring);
+}
+@keyframes bigcloud-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bigcloud-bump {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.14);
+    filter: brightness(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* Copie de bigcloud-bump : un autre nom relance l'animation sans reflow forcé. */
+@keyframes bigcloud-bump-alt {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.14);
+    filter: brightness(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.bigcloud__word--c0 {
+  --wc-text: #35cbec;
+  --wc-fill: #00a6cc;
+  --wc-ink: #06162b;
+}
+.bigcloud__word--c1 {
+  --wc-text: #a89bff;
+  --wc-fill: #7c6bf0;
+  --wc-ink: #ffffff;
+}
+.bigcloud__word--c2 {
+  --wc-text: #ff8a52;
+  --wc-fill: #ff7a3c;
+  --wc-ink: #0b2545;
+}
+.bigcloud__word--c3 {
+  --wc-text: #ffd15e;
+  --wc-fill: #ffd15e;
+  --wc-ink: #0b2545;
+}
+.bigcloud__word--c4 {
+  --wc-text: #4fd6a6;
+  --wc-fill: #4fd6a6;
+  --wc-ink: #0b2545;
+}
+.bigcloud__word--c5 {
+  --wc-text: #ff9ec4;
+  --wc-fill: #ff9ec4;
+  --wc-ink: #0b2545;
+}
+.bigcloud__word--c6 {
+  --wc-text: #bdebf7;
+  --wc-fill: #bdebf7;
+  --wc-ink: #0b2545;
+}
+.bigcloud__measure {
+  position: absolute;
+  visibility: hidden;
+  left: -9999px;
+  top: 0;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 100px;
+  line-height: 1;
+  transition: none;
+  animation: none;
+}
+.bigcloud--revealed .bigcloud__word {
+  opacity: 0.16;
+  filter: saturate(0.3);
+  transition:
+    transform 800ms var(--ease-out),
+    opacity 600ms ease,
+    filter 600ms ease;
+}
+.bigcloud--revealed .bigcloud__word[data-lit="true"] {
+  opacity: 1;
+  filter: none;
+}
+.bigcloud--revealed .bigcloud__word[data-lit="true"] .bigcloud__text {
+  text-shadow: 0 0 calc(42px / var(--word-scale, 1)) var(--wc-text);
+  /* Un mot allumé de la traîne (data-small) n'est plus atténué. */
+  opacity: 1;
+}
+/* Agrandissement porté par le texte, dont l'origine est le centre du mot. `--lit-scale` vient de
+   `litScales` (layout.ts) : au plus 1,1, réduit si deux mots allumés se toucheraient. */
+.bigcloud--revealed .bigcloud__word[data-lit="true"] .bigcloud__text {
+  scale: var(--lit-scale, 1.1);
+}
+.bigcloud--revealed .bigcloud__word.is-leaving {
+  opacity: 0;
+  transition:
+    transform 800ms var(--ease-out),
+    opacity 400ms ease,
+    filter 400ms ease;
+}
+/* Pastille : coin supérieur gauche calculé par `badgePosition` (layout.ts), au-dessus ou au-dessous
+   d'un coin du mot, entière dans la scène et sans recouvrir un autre mot allumé. */
+.bigcloud__badge {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px 6px 6px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0b2545;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 26px;
+  white-space: nowrap;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
+  animation: bigcloud-badge 550ms var(--ease-spring) both;
+}
+.bigcloud__rank {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--wc-fill);
+  color: var(--wc-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+}
+@keyframes bigcloud-badge {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.bigcloud--still *,
+.bigcloud--still *::before {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Cartes de la bibliothèque : trois actions qui passent à la ligne sur mobile. */
+.library-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.library-card-actions .ab-button {
+  flex: 1 1 auto;
+  min-height: 44px;
+}
+
+/* Aperçu d'un quiz tout prêt : plus large que la boîte de confirmation, liste défilante. */
+.library-preview {
+  width: min(720px, 100%);
+  max-height: calc(100vh - 2 * var(--space-4));
+  gap: var(--space-3);
+}
+.library-preview__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.library-preview__list {
+  margin: 0;
+  padding-left: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.library-preview__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.library-preview__prompt {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.library-preview__answer {
+  color: var(--ink-strong);
+  font-size: var(--fs-small);
+  font-weight: 700;
+}
+
+/* Crédit des questions en bas du podium du grand écran : lisible de loin, sans voler la vedette. */
+.podium-credits {
+  max-width: 48rem;
+  text-align: center;
+}
+
+/* Aide à la saisie de l'e-mail et message de statut des écrans d'authentification. */
+.join-suggestion {
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+
+.join-suggestion__apply {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.join-status {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid currentColor;
+  font-size: 14px;
+}
+
+/* Rappel de confirmation d'adresse : fond clair, texte ink-strong, bouton texte souligné. */
+.ab-verify-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-5);
+  background: var(--surface-2);
+  color: var(--ink-strong);
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.ab-verify-banner--ok {
+  padding: var(--space-2) var(--space-5);
+}
+
+.ab-verify-banner p {
+  margin: 0;
+}
+
+.ab-verify-banner__action {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Refus de création de quiz : message empilé (l'encre vient de .join-error). */
+.ab-quiz-limit {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ab-quiz-limit p {
+  margin: 0;
 }
 
 /* Champ image d'une question (QuestionImageField). */

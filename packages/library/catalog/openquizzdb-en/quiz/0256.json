@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=256"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0256-1-en",
+      "type": "mcq",
+      "prompt": "In which city can you admire the very touristy Bridge of Sighs?",
+      "payload": {
+        "options": [
+          {
+            "label": "Valencia",
+            "correct": false
+          },
+          {
+            "label": "Venice",
+            "correct": true
+          },
+          {
+            "label": "Verona",
+            "correct": false
+          },
+          {
+            "label": "Versailles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0256-2-en",
+      "type": "mcq",
+      "prompt": "Which violinist and composer wrote \"The Four Seasons\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vivaldi",
+            "correct": true
+          },
+          {
+            "label": "Vassiliev",
+            "correct": false
+          },
+          {
+            "label": "Vitali",
+            "correct": false
+          },
+          {
+            "label": "Verdi",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

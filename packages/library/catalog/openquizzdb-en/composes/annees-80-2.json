@@ -1,0 +1,358 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0487-4-en",
+      "type": "mcq",
+      "prompt": "Which car brand does Thomas Magnum drive?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ferrari",
+            "correct": true
+          },
+          {
+            "label": "Porsche",
+            "correct": false
+          },
+          {
+            "label": "Audi",
+            "correct": false
+          },
+          {
+            "label": "BMW",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0511-3-en",
+      "type": "mcq",
+      "prompt": "Which band performed \"Sweet Dreams (Are Made of This)\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sweet Sensation",
+            "correct": false
+          },
+          {
+            "label": "Sister Sledge",
+            "correct": false
+          },
+          {
+            "label": "Eurythmics",
+            "correct": true
+          },
+          {
+            "label": "Europe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0196-1-en",
+      "type": "mcq",
+      "prompt": "Which band made the soundtrack of the film \"Flash Gordon\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Queen",
+            "correct": true
+          },
+          {
+            "label": "Quantic",
+            "correct": false
+          },
+          {
+            "label": "Quiet Riot",
+            "correct": false
+          },
+          {
+            "label": "Quicksand",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0191-1-en",
+      "type": "mcq",
+      "prompt": "In what year did Steve Jobs buy the animation studio Pixar?",
+      "payload": {
+        "options": [
+          {
+            "label": "1979",
+            "correct": false
+          },
+          {
+            "label": "1995",
+            "correct": false
+          },
+          {
+            "label": "2001",
+            "correct": false
+          },
+          {
+            "label": "1986",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0039-1-en",
+      "type": "mcq",
+      "prompt": "Who directed the war film \"Platoon\", inspired by his own life?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brian De Palma",
+            "correct": false
+          },
+          {
+            "label": "Clint Eastwood",
+            "correct": false
+          },
+          {
+            "label": "John Woo",
+            "correct": false
+          },
+          {
+            "label": "Oliver Stone",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0343-4-en",
+      "type": "mcq",
+      "prompt": "In which language was the film \"The Big Blue\" shot?",
+      "payload": {
+        "options": [
+          {
+            "label": "In English",
+            "correct": true
+          },
+          {
+            "label": "In Greek",
+            "correct": false
+          },
+          {
+            "label": "In French",
+            "correct": false
+          },
+          {
+            "label": "In Spanish",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0187-4-en",
+      "type": "mcq",
+      "prompt": "Who is the strongest member of \"The A-Team\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Murdock",
+            "correct": false
+          },
+          {
+            "label": "Face",
+            "correct": false
+          },
+          {
+            "label": "Hannibal",
+            "correct": false
+          },
+          {
+            "label": "B.A. Baracus",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0095-2-en",
+      "type": "mcq",
+      "prompt": "What is Jack Nicholson's profession in \"The Shining\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Explorer",
+            "correct": false
+          },
+          {
+            "label": "Writer",
+            "correct": true
+          },
+          {
+            "label": "Sorcerer",
+            "correct": false
+          },
+          {
+            "label": "Fencer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0493-2-en",
+      "type": "mcq",
+      "prompt": "Which police officer is Dee Dee McCall's partner on TV?",
+      "payload": {
+        "options": [
+          {
+            "label": "Matt Helm",
+            "correct": false
+          },
+          {
+            "label": "Sam Spade",
+            "correct": false
+          },
+          {
+            "label": "Jim Phelps",
+            "correct": false
+          },
+          {
+            "label": "Rick Hunter",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0493-4-en",
+      "type": "mcq",
+      "prompt": "What is the profession of \"The Fall Guy\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Car salesman",
+            "correct": false
+          },
+          {
+            "label": "Astronaut",
+            "correct": false
+          },
+          {
+            "label": "Stuntman",
+            "correct": true
+          },
+          {
+            "label": "Banker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0225-2-en",
+      "type": "mcq",
+      "prompt": "Which actress from \"E.T.\" is Steven Spielberg the godfather of?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dee Wallace",
+            "correct": false
+          },
+          {
+            "label": "Drew Barrymore",
+            "correct": true
+          },
+          {
+            "label": "Téa Leoni",
+            "correct": false
+          },
+          {
+            "label": "Dakota Fanning",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0179-3-en",
+      "type": "mcq",
+      "prompt": "What kind of creature is the heroine of Ron Howard's \"Splash\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "An octopus",
+            "correct": false
+          },
+          {
+            "label": "A turtle",
+            "correct": false
+          },
+          {
+            "label": "A mermaid",
+            "correct": true
+          },
+          {
+            "label": "A jellyfish",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

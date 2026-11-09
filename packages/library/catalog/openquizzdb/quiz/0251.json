@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=251"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0251-2",
+      "type": "mcq",
+      "prompt": "Quelle mer borde la Bulgarie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mer Méditerranée",
+            "correct": false
+          },
+          {
+            "label": "Mer Rouge",
+            "correct": false
+          },
+          {
+            "label": "Mer Baltique",
+            "correct": false
+          },
+          {
+            "label": "Mer Noire",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0251-4",
+      "type": "mcq",
+      "prompt": "Quelle station balnéaire est réputée en Bulgarie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sofia",
+            "correct": false
+          },
+          {
+            "label": "Plovdiv",
+            "correct": false
+          },
+          {
+            "label": "Varna",
+            "correct": true
+          },
+          {
+            "label": "Ruse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

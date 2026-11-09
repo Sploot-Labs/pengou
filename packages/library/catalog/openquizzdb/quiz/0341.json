@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=341"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0341-2",
+      "type": "mcq",
+      "prompt": "Quelle chaîne de montagnes traverse la Roumanie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Himalaya",
+            "correct": false
+          },
+          {
+            "label": "Alpes",
+            "correct": false
+          },
+          {
+            "label": "Carpates",
+            "correct": true
+          },
+          {
+            "label": "Andes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0341-4",
+      "type": "mcq",
+      "prompt": "Quelle grande région historique se trouve en Roumanie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Toscane",
+            "correct": false
+          },
+          {
+            "label": "Bavière",
+            "correct": false
+          },
+          {
+            "label": "Catalogne",
+            "correct": false
+          },
+          {
+            "label": "Transylvanie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=331"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0331-3",
+      "type": "mcq",
+      "prompt": "Quelle marque automobile disparue est connue pour ses roadsters ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Triumph",
+            "correct": true
+          },
+          {
+            "label": "Innocenti",
+            "correct": false
+          },
+          {
+            "label": "DeLorean",
+            "correct": false
+          },
+          {
+            "label": "Hotchkiss",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0331-4",
+      "type": "mcq",
+      "prompt": "Quel constructeur a créé la Firebird, la GTO et la LeMans ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pontiac",
+            "correct": true
+          },
+          {
+            "label": "AMC",
+            "correct": false
+          },
+          {
+            "label": "Oldsmobile",
+            "correct": false
+          },
+          {
+            "label": "Mercury",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

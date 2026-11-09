@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=160"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0160-1-en",
+      "type": "mcq",
+      "prompt": "What is the name of Captain Haddock's butler?",
+      "payload": {
+        "options": [
+          {
+            "label": "Narcissus",
+            "correct": false
+          },
+          {
+            "label": "Nestor",
+            "correct": true
+          },
+          {
+            "label": "Nelson",
+            "correct": false
+          },
+          {
+            "label": "Napoleon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0160-2-en",
+      "type": "mcq",
+      "prompt": "In which French city can you stroll along the Promenade des Anglais?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nancy",
+            "correct": false
+          },
+          {
+            "label": "Nanterre",
+            "correct": false
+          },
+          {
+            "label": "Nantes",
+            "correct": false
+          },
+          {
+            "label": "Nice",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

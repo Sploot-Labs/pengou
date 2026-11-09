@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useSession } from '../api/auth'
+import { useAuthFeatures } from '../api/features'
 import { useWorkspaces } from '../api/workspace-context'
 import { ApiError } from '../api/client'
 import {
@@ -12,11 +13,13 @@ import {
   revokeInvitation,
   resendInvitation,
   createWorkspace,
+  type InvitationResult,
   type Member,
-  type Invitation,
+  type PendingInvitation,
   type Role,
 } from '../api/workspaces'
 import { AppHeader } from '../ui/AppHeader'
+import { EmailSuggestion } from '../ui/EmailSuggestion'
 import { WorkspaceSwitcher } from '../ui/WorkspaceSwitcher'
 import { Button } from '../ui'
 
@@ -54,7 +57,7 @@ export function WorkspaceSettings() {
             a qu'un seul workspace.
           </p>
           <Link className="ab-button ab-button--ghost" to="/">
-            ← Retour
+            Retour à l'accueil
           </Link>
         </main>
       </div>
@@ -259,7 +262,7 @@ function MembersSection({ tenantId, actorRole }: { tenantId: string; actorRole: 
 }
 
 function InvitationsSection({ tenantId }: { tenantId: string }) {
-  const [invitations, setInvitations] = useState<Invitation[]>([])
+  const [invitations, setInvitations] = useState<PendingInvitation[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [email, setEmail] = useState('')
@@ -267,6 +270,9 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
   const [pending, setPending] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
   const [lastLink, setLastLink] = useState<string | null>(null)
+  const [sentNote, setSentNote] = useState<string | null>(null)
+  const [emailChecked, setEmailChecked] = useState('')
+  const { mailEnabled } = useAuthFeatures()
 
   const load = useCallback(() => {
     setLoading(true)
@@ -291,8 +297,9 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
     setPending(true)
     setFormError(null)
     try {
-      const { invitation } = await createInvitation(tenantId, trimmed, role)
-      setLastLink(invitationLink(invitation.token))
+      const result = await createInvitation(tenantId, trimmed, role)
+      setLastLink(invitationLink(result.invitation.token))
+      setSentNote(sendNote(result))
       setEmail('')
       load()
     } catch (err) {
@@ -300,6 +307,15 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
     } finally {
       setPending(false)
     }
+  }
+  /** Sans envoi configuré l'écran reste celui d'avant : aucune note. */
+  function sendNote({ invitation, emailSent, emailSkipped }: InvitationResult): string | null {
+    if (!mailEnabled) return null
+    if (emailSent) return `Invitation envoyée à ${invitation.email}`
+    if (emailSkipped === 'inviter_unverified') {
+      return 'Confirmez votre adresse pour envoyer les invitations par e-mail. En attendant, copiez le lien ci-dessous.'
+    }
+    return "L'e-mail n'a pas pu partir, copiez le lien ci-dessous"
   }
   async function handleRevoke(id: string) {
     try {
@@ -311,8 +327,9 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
   }
   async function handleResend(id: string) {
     try {
-      const { invitation } = await resendInvitation(tenantId, id)
-      setLastLink(invitationLink(invitation.token))
+      const result = await resendInvitation(tenantId, id)
+      setLastLink(invitationLink(result.invitation.token))
+      setSentNote(sendNote(result))
       load()
     } catch (err) {
       setError(errorMessage(err))
@@ -338,7 +355,15 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onBlur={() => setEmailChecked(email)}
             placeholder="collegue@exemple.fr"
+          />
+          <EmailSuggestion
+            value={emailChecked}
+            onApply={(fixed) => {
+              setEmail(fixed)
+              setEmailChecked(fixed)
+            }}
           />
         </div>
         <div className="host-field">
@@ -358,6 +383,11 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
         </Button>
       </form>
 
+      {sentNote && (
+        <p className="join-status" role="status">
+          {sentNote}
+        </p>
+      )}
       {lastLink && (
         <p className="ab-invite-link" role="status">
           Lien d'invitation (à transmettre) : <code>{lastLink}</code>

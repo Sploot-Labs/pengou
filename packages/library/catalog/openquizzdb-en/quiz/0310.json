@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=310"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0310-1-en",
+      "type": "mcq",
+      "prompt": "Where are the \"spectacles\" of the spectacled cobra?",
+      "payload": {
+        "options": [
+          {
+            "label": "On the belly",
+            "correct": false
+          },
+          {
+            "label": "On the neck",
+            "correct": true
+          },
+          {
+            "label": "On the tail",
+            "correct": false
+          },
+          {
+            "label": "On the tongue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0310-2-en",
+      "type": "mcq",
+      "prompt": "What is the longest venomous snake in the world?",
+      "payload": {
+        "options": [
+          {
+            "label": "Reticulated python",
+            "correct": false
+          },
+          {
+            "label": "Green anaconda",
+            "correct": false
+          },
+          {
+            "label": "Black mamba",
+            "correct": false
+          },
+          {
+            "label": "King cobra",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

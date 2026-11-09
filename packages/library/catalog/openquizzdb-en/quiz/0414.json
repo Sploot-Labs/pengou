@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=414"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0414-1-en",
+      "type": "mcq",
+      "prompt": "In which French département can you visit the Château de Chambord?",
+      "payload": {
+        "options": [
+          {
+            "label": "Haute-Garonne",
+            "correct": false
+          },
+          {
+            "label": "Drôme",
+            "correct": false
+          },
+          {
+            "label": "Loir-et-Cher",
+            "correct": true
+          },
+          {
+            "label": "Aveyron",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0414-2-en",
+      "type": "mcq",
+      "prompt": "What was Chambord turned into during the Franco-Prussian War?",
+      "payload": {
+        "options": [
+          {
+            "label": "Barracks",
+            "correct": false
+          },
+          {
+            "label": "Museum",
+            "correct": false
+          },
+          {
+            "label": "Military hospital",
+            "correct": true
+          },
+          {
+            "label": "Prison",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0414-3-en",
+      "type": "mcq",
+      "prompt": "How many rooms does the Château de Chambord have?",
+      "payload": {
+        "options": [
+          {
+            "label": "282",
+            "correct": false
+          },
+          {
+            "label": "372",
+            "correct": false
+          },
+          {
+            "label": "198",
+            "correct": false
+          },
+          {
+            "label": "426",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0414-4-en",
+      "type": "mcq",
+      "prompt": "How many habitable levels does the keep of Chambord have?",
+      "payload": {
+        "options": [
+          {
+            "label": "Five",
+            "correct": true
+          },
+          {
+            "label": "Three",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Four",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

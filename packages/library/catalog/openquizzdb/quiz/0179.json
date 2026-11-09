@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=179"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0179-1",
+      "type": "mcq",
+      "prompt": "Quel film de Ron Howard rend hommage à une brigade de pompiers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cocoon",
+            "correct": false
+          },
+          {
+            "label": "Copycat",
+            "correct": false
+          },
+          {
+            "label": "Backdraft",
+            "correct": true
+          },
+          {
+            "label": "La Rançon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

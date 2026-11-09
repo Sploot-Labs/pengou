@@ -11,7 +11,8 @@ export type {
   PlayerQuestionView,
   ReadingView,
   QuestionResult,
+  PollView,
   ProgressInfo,
   ReconnectResult,
 } from './engine.js'
-export { createEngine } from './engine.js'
+export { createEngine, PlayerKickedError } from './engine.js'

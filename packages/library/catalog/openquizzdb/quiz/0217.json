@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=217"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0217-1",
+      "type": "mcq",
+      "prompt": "Quelle saga cinématographique met en avant les Decepticons ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Total Recall",
+            "correct": false
+          },
+          {
+            "label": "Transformers",
+            "correct": true
+          },
+          {
+            "label": "Real Steel",
+            "correct": false
+          },
+          {
+            "label": "Blade Runner",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0217-4",
+      "type": "mcq",
+      "prompt": "Dans quel film de 2003 voit-on des Sentinelles, robots insectoïdes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Clones",
+            "correct": false
+          },
+          {
+            "label": "Star Wars",
+            "correct": false
+          },
+          {
+            "label": "H2G2",
+            "correct": false
+          },
+          {
+            "label": "Matrix Revolutions",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -62,10 +62,16 @@ Le fichier `docker-compose.prod.yml` permet de faire tourner Pengou sur n'import
 POSTGRES_PASSWORD=<mot de passe sans @ / :>
 SESSION_SECRET=<openssl rand -base64 32>
 BETTER_AUTH_SECRET=<openssl rand -base64 32>   # 32 caractères minimum
+APP_DB_PASSWORD=<openssl rand -base64 24>       # mot de passe du rôle app_role
 BETTER_AUTH_URL=https://pengou.example.com      # https obligatoire
+TRUSTED_PROXIES=172.16.0.0/12                   # IP ou CIDR du reverse proxy vu depuis le conteneur
 ```
 
+Avant le prochain déploiement : `APP_DB_PASSWORD` et `TRUSTED_PROXIES` sont désormais obligatoires. Le compose de production refuse de démarrer tant qu'elles ne figurent pas dans le `.env`.
+
 Points d'attention :
+
+`TRUSTED_PROXIES` liste les proxys dont le serveur croit l'en-tête `X-Forwarded-For` (IP, CIDR ou mots-clés `loopback`, `uniquelocal`). Il sert à retrouver l'IP réelle des clients pour les limites de débit. Derrière un reverse proxy installé sur l'hôte, qui joint l'app par `127.0.0.1:3000`, le conteneur ne voit pas `127.0.0.1` mais la passerelle du réseau Docker : relever son adresse avec `docker network inspect <réseau>` (champ `Gateway`), ou indiquer la plage `172.16.0.0/12` qui couvre les réseaux Docker par défaut. Avec une valeur fausse, tous les clients partagent la même IP pour les limites de débit, et le serveur le signale une fois dans ses journaux.
 
 Le service app n'écoute que sur `127.0.0.1:3000`. Un reverse proxy TLS (Caddy, nginx ou Traefik) doit donc être installé devant, et c'est lui qui porte le nom de domaine de `BETTER_AUTH_URL`.
 
@@ -76,6 +82,133 @@ Le volume `db-data` fige le mot de passe de la base au premier démarrage. Chang
 Le volume `media-data` contient les images envoyées depuis l'éditeur (montées dans `/app/data/media`). Il est à sauvegarder avec la base, par exemple : `docker run --rm -v <projet>_media-data:/data -v "$PWD":/backup alpine tar czf /backup/media.tgz -C /data .`. Les fichiers orphelins (image remplacée, question ou quiz supprimé) ne sont pas nettoyés automatiquement.
 
 Tant que le paquet GHCR est privé, l'hôte doit s'authentifier (`docker login ghcr.io`) avec un jeton disposant du scope `read:packages` pour tirer l'image.
+
+### Envoi d'e-mails
+
+Pengou envoie des e-mails transactionnels : réinitialisation du mot de passe, confirmation d'adresse à l'inscription et invitations à un espace de travail. Tout est optionnel. Sans transport configuré, l'application reste complète, simplement sans envoi.
+
+Les variables, lues par `packages/shared/src/config.ts`, sont les suivantes. Une valeur vide compte comme une valeur absente.
+
+`MAIL_TRANSPORT` vaut `smtp` ou `brevo`, ou reste absente. `MAIL_FROM` est obligatoire dès qu'un transport est choisi, au format `Nom <adresse>` ou adresse seule. `MAIL_REPLY_TO` est facultative. Pour `smtp`, `SMTP_HOST` est obligatoire, `SMTP_PORT` vaut 587 par défaut, et `SMTP_USER` et `SMTP_PASSWORD` vont ensemble (les deux ou aucun). Pour `brevo`, `BREVO_API_KEY` est obligatoire. Une combinaison incohérente fait échouer le démarrage avec un message qui nomme la variable fautive, jamais sa valeur.
+
+`EMAIL_DOMAIN_CHECK` pilote le contrôle DNS du domaine des adresses saisies à l'inscription et à l'invitation : `auto` (défaut) l'active seulement si un transport est configuré, `true` le force, `false` le coupe. Le coupe-circuit sert derrière un DNS d'intranet qui ne résout pas l'extérieur, sinon toutes les inscriptions seraient refusées. La liste des domaines jetables reste active dans tous les cas, et un DNS lent ou en panne ne bloque jamais une inscription.
+
+Avec `docker-compose.prod.yml`, ces variables sont transmises depuis le `.env` du serveur.
+
+#### Transport SMTP
+
+Le port 465 utilise TLS implicite, tout autre port exige STARTTLS (`SMTP_REQUIRE_TLS`, `true` par défaut ; ne mettre `false` que pour un relais local comme Mailpit, le serveur journalise un avertissement en production). Les délais de connexion et d'envoi sont de 10 secondes. C'est le transport à privilégier pour un auto-hébergement :
+
+```sh
+MAIL_TRANSPORT=smtp
+MAIL_FROM=Pengou <noreply@exemple.org>
+SMTP_HOST=smtp.exemple.org
+SMTP_PORT=587
+SMTP_USER=noreply@exemple.org
+SMTP_PASSWORD=<mot de passe SMTP>
+```
+
+#### Brevo
+
+L'instance officielle utilise l'API transactionnelle de Brevo : le serveur appelle `POST https://api.brevo.com/v3/smtp/email` avec l'en-tête `api-key`, sans SDK, avec un délai de 10 secondes.
+
+```sh
+MAIL_TRANSPORT=brevo
+MAIL_FROM=Pengou <contact@pengou.fr>
+MAIL_REPLY_TO=contact@pengou.fr
+BREVO_API_KEY=<clé API Brevo>
+```
+
+La clé se génère dans Brevo, Paramètres, SMTP et API, onglet Clés API, « Générer une nouvelle clé ». Brevo propose aussi un relais SMTP, utilisable avec le transport `smtp` : `SMTP_HOST=smtp-relay.brevo.com`, `SMTP_PORT=587`, `SMTP_USER` égal à l'identifiant SMTP Brevo (de la forme `…@smtp-brevo.com`) et `SMTP_PASSWORD` égal à la clé SMTP (distincte de la clé API).
+
+Le réglage de sécurité « IP autorisées » de Brevo (Sécurité, Adresses IP autorisées) peut bloquer les appels API venant d'une IP inconnue : si les envois échouent avec une erreur d'autorisation, ajouter l'IP sortante du serveur ou désactiver la restriction.
+
+Le domaine `pengou.fr` est authentifié dans Brevo (DKIM, DMARC) et l'expéditeur est `Pengou <contact@pengou.fr>`. Ne jamais utiliser `mail.pengou.fr` comme expéditeur : ce sous-domaine de marque est réservé aux liens de suivi et au return-path de Brevo. Après un changement de configuration, envoyer une invitation vers une adresse Gmail et vérifier dans « Afficher l'original » que SPF, DKIM et DMARC sont à PASS.
+
+#### Sans transport
+
+Si `MAIL_TRANSPORT` est absente, le serveur démarre normalement et journalise un avertissement unique en production. La réinitialisation du mot de passe, la confirmation d'adresse et l'envoi des invitations sont désactivés : le lien « Mot de passe oublié » est masqué, le lien d'invitation reste copiable depuis l'écran de l'espace de travail, et aucune limite de quiz ne s'applique. Hors production, les messages qui auraient été envoyés sont écrits dans le journal, avec les tokens tronqués.
+
+#### Comportements à connaître
+
+En mode `TENANCY_MODE=multi` et seulement si l'envoi est configuré, un compte dont l'adresse n'est pas confirmée ne peut posséder qu'un seul quiz actif (non archivé) ; désarchiver est soumis à la même règle. En mode `single`, ou sans envoi, aucune limite ne s'applique.
+
+Accepter une invitation par le lien reçu dans l'e-mail confirme l'adresse du compte, à condition que ce soit celle de l'invitation. Le lien copié à la main, qui ne porte pas la preuve `?v=` ajoutée à l'e-mail, ne confirme rien.
+
+Les limites de débit sont de 3 requêtes par 10 minutes et par IP sur `/api/auth/request-password-reset` et `/api/auth/send-verification-email`, et de 20 créations ou renvois d'invitation par heure et par utilisateur. Elles dépendent de `TRUSTED_PROXIES` pour retrouver l'IP réelle des clients.
+
+Les liens des e-mails sont bâtis sur `BETTER_AUTH_URL`, jamais sur l'en-tête `Host`. Le logo des e-mails est servi par l'application à `/email/logo.png`. Les journaux contiennent le type de message, le transport, le domaine du destinataire et le résultat, jamais un token, un lien d'action, une clé ou un mot de passe.
+
+#### Mailpit en développement
+
+`docker compose up` démarre aussi Mailpit et configure l'app pour lui envoyer tous les e-mails. Ouvrir http://localhost:8025 pour les lire : rien ne quitte la machine. Pour `pnpm dev` hors conteneur, lancer `docker compose up mailpit` puis `MAIL_TRANSPORT=smtp`, `SMTP_HOST=localhost`, `SMTP_PORT=1025` et `SMTP_REQUIRE_TLS=false` dans le `.env` (le SMTP de Mailpit est interne à Compose : ajouter `ports: ["1025:1025"]` au service `mailpit` dans un `docker-compose.override.yml` local).
+
+### Contenu de bibliothèque propre à l'instance
+
+La bibliothèque de questions contient un catalogue livré avec l'image. Un auto-hébergeur peut y ajouter ses propres quiz et questions, sans reconstruire l'image, en pointant la variable `LIBRARY_EXTRA_DIR` vers un dossier. Le serveur lit ce dossier à chaque démarrage, en plus du catalogue livré, et synchronise la base.
+
+Chaque fichier `*.json` du dossier (sous-dossiers compris, hors `themes.json`) est un pack :
+
+```json
+{
+  "source": { "name": "Mon club", "license": "CC0", "url": "https://example.org" },
+  "questions": [
+    {
+      "id": "club-001",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de la France ?",
+      "payload": { "options": [{ "label": "Paris", "correct": true }, { "label": "Lyon", "correct": false }] },
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous",
+      "timeLimit": 20,
+      "readingTime": 6
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "club-quiz-1",
+      "title": "Géographie pour débuter",
+      "description": "Optionnel.",
+      "theme": "geographie",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": ["club-001"]
+    }
+  ]
+}
+```
+
+Les champs `source`, `questions` et `quizzes` sont obligatoires (les deux listes peuvent être vides). La source (`name`, `license`, `url` facultatif) s'applique à tout le pack et s'affiche dans la bibliothèque et l'éditeur. Les identifiants de questions et de quiz doivent être uniques dans tout le catalogue, livré compris : préfixer les siens évite les collisions. Le `payload` suit le format de l'éditeur pour le type choisi (`mcq`, `truefalse`, `text` ou `slider`) et il est validé comme pour une question créée à la main. `timeLimit` (20 par défaut) et `readingTime` (6 par défaut) sont facultatifs, ainsi que `description`. Les critères prennent leurs valeurs dans des listes fixes : `difficulty` vaut `facile`, `moyen` ou `difficile`, `audience` vaut `enfants`, `adultes` ou `tous`, `language` est un code ISO 639-1 en minuscules (`fr`, `en`) et `theme` est l'identifiant d'un thème existant. Un quiz ne référence que des questions du même pack. Il n'y a pas de média dans le catalogue.
+
+Un fichier `themes.json` à la racine du dossier ajuste la liste des thèmes :
+
+```json
+{
+  "add": [{ "id": "geographie", "label": "Géographie" }],
+  "relabel": { "cinema": "Cinéma et séries" },
+  "hide": ["sport"]
+}
+```
+
+`add` crée des thèmes (identifiant en minuscules, chiffres et tirets), `relabel` change le libellé d'un thème existant et `hide` le masque. Un thème masqué retire ses questions et ses quiz de toutes les réponses de l'API. Un thème ne se supprime pas : pour le retirer, on le masque. Les entrées de `relabel` ou `hide` qui visent un thème inconnu sont ignorées et journalisées.
+
+Un fichier invalide (JSON mal formé, champ hors format, payload refusé, identifiant déjà pris, thème ou question inconnus) est écarté en entier : l'erreur est journalisée au démarrage avec le nom du fichier et la raison, les lignes que ce fichier avait déjà fournies restent en base dans leur version précédente, et le serveur démarre normalement. C'est valable aussi pour un `themes.json` invalide. Un dossier absent ou illisible est journalisé et ignoré : seul le catalogue livré est utilisé. Une question ou un quiz qui disparaît d'un fichier valide est supprimé de la base au démarrage suivant.
+
+Le contenu ajouté relève de la responsabilité de l'hébergeur : il doit avoir le droit de le diffuser et indiquer la licence exacte dans `source.license`. Les copies faites par les utilisateurs conservent cette attribution. La licence `CC BY-SA 4.0` est reconnue par l'interface, qui y ajoute un lien vers son texte.
+
+Avec Docker, monter le dossier en lecture seule dans le conteneur et le rendre lisible par l'utilisateur `node` (l'image ne tourne pas en root). Dans `docker-compose.prod.yml`, décommenter le volume et la variable d'environnement du service `app` :
+
+```yaml
+    environment:
+      LIBRARY_EXTRA_DIR: /data/library
+    volumes:
+      - ./library:/data/library:ro
+```
+
+Sur l'hôte, `chmod -R a+rX ./library` suffit si le dossier n'appartient pas à l'utilisateur d'uid 1000 (celui de `node`).
 
 ## 7. Fonctions de sécurité
 

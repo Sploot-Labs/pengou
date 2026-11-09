@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=490"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0490-2",
+      "type": "mcq",
+      "prompt": "Quel matériau est surtout utilisé pour fabriquer des planches à voile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Plastique",
+            "correct": false
+          },
+          {
+            "label": "Fibre de verre",
+            "correct": true
+          },
+          {
+            "label": "Bois",
+            "correct": false
+          },
+          {
+            "label": "Aluminium",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0490-3",
+      "type": "mcq",
+      "prompt": "Quelle est la position de base standard en planche à voile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Accroupi",
+            "correct": false
+          },
+          {
+            "label": "Debout",
+            "correct": true
+          },
+          {
+            "label": "Assis",
+            "correct": false
+          },
+          {
+            "label": "Allongé",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0490-4",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on une personne pratiquant la planche à voile ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Voiliste",
+            "correct": false
+          },
+          {
+            "label": "Véliplanchiste",
+            "correct": true
+          },
+          {
+            "label": "Planiste",
+            "correct": false
+          },
+          {
+            "label": "Plancheur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

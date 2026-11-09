@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=414"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0414-1",
+      "type": "mcq",
+      "prompt": "Dans quel département peut-on visiter le château de Chambord ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Haute-Garonne",
+            "correct": false
+          },
+          {
+            "label": "Drôme",
+            "correct": false
+          },
+          {
+            "label": "Loir-et-Cher",
+            "correct": true
+          },
+          {
+            "label": "Aveyron",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0414-2",
+      "type": "mcq",
+      "prompt": "En quoi Chambord fut-il transformé durant la guerre franco-prussienne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Caserne",
+            "correct": false
+          },
+          {
+            "label": "Musée",
+            "correct": false
+          },
+          {
+            "label": "Hôpital militaire",
+            "correct": true
+          },
+          {
+            "label": "Prison",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0414-3",
+      "type": "mcq",
+      "prompt": "Combien de pièces dénombre-t-on dans le château de Chambord ?",
+      "payload": {
+        "options": [
+          {
+            "label": "282",
+            "correct": false
+          },
+          {
+            "label": "372",
+            "correct": false
+          },
+          {
+            "label": "198",
+            "correct": false
+          },
+          {
+            "label": "426",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0414-4",
+      "type": "mcq",
+      "prompt": "Combien de niveaux habitables possède le donjon de Chambord ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinq",
+            "correct": true
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

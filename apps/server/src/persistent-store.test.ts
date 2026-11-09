@@ -168,6 +168,20 @@ describe('PersistentSessionStore', () => {
     expect(fresh!.phase).toBe('reveal')
   })
 
+  it('nuage de mots : un retrait de mot survit à un redémarrage (store neuf), sans attendre flushAll', async () => {
+    const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900203' })
+    await setSessionStatus(ctx.db, dbSession!.id, 'active')
+    const s = makeSession(dbSession!.id, dbSession!.pin)
+    const store = new PersistentSessionStore(ctx.db)
+    await store.save(s)
+
+    // Seul `wordcloudRemoved` change : le retrait doit être durable tout de suite.
+    await store.save({ ...structuredClone(s), wordcloudRemoved: { q1: ['cafe'] } })
+
+    const fresh = await new PersistentSessionStore(ctx.db).get(s.id)
+    expect(fresh!.wordcloudRemoved).toEqual({ q1: ['cafe'] })
+  })
+
   it('save puis get renvoie des clones (mutation ultérieure de la référence sans effet)', async () => {
     const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900103' })
     await setSessionStatus(ctx.db, dbSession!.id, 'active')
@@ -194,5 +208,72 @@ describe('PersistentSessionStore', () => {
     // en base ici, mais getByPin exclut les sessions non vivantes — la ligne est toujours 'lobby',
     // donc on vérifie plutôt via un second evict qui ne retrouve rien en cache).
     expect(store.evict(s!.id)).toBeUndefined()
+  })
+
+  it('peek renvoie le même objet, charge depuis la base sur un store neuf et reflète une save', async () => {
+    const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900301' })
+    await setSessionStatus(ctx.db, dbSession!.id, 'active')
+    const s = makeSession(dbSession!.id, dbSession!.pin)
+    await new PersistentSessionStore(ctx.db).save(s)
+
+    const fresh = new PersistentSessionStore(ctx.db)
+    const a = await fresh.peek(s.id)
+    expect(a?.answers[0]['player-1'].points).toBe(900)
+    expect(await fresh.peek(s.id)).toBe(a)
+    await fresh.save({ ...s, phase: 'reveal' })
+    expect((await fresh.peek(s.id))?.phase).toBe('reveal')
+    expect(await fresh.peek(crypto.randomUUID())).toBeUndefined()
+  })
+
+  it('deux peek concurrents sur un store neuf renvoient le même objet', async () => {
+    const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900303' })
+    await setSessionStatus(ctx.db, dbSession!.id, 'active')
+    const s = makeSession(dbSession!.id, dbSession!.pin)
+    await new PersistentSessionStore(ctx.db).save(s)
+
+    const fresh = new PersistentSessionStore(ctx.db)
+    const [a, b] = await Promise.all([fresh.peek(s.id), fresh.peek(s.id)])
+    expect(a).toBeDefined()
+    expect(a).toBe(b)
+  })
+
+  it('un peek concurrent qui résout après un recordAnswer ne fait pas disparaître la réponse', async () => {
+    const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900304' })
+    await setSessionStatus(ctx.db, dbSession!.id, 'active')
+    const s = makeSession(dbSession!.id, dbSession!.pin)
+    await new PersistentSessionStore(ctx.db).save(s)
+
+    const fresh = new PersistentSessionStore(ctx.db)
+    const first = fresh.peek(s.id).then(async () => {
+      await fresh.recordAnswer(s.id, 0, 'player-2', { answer: { choice: 1 }, timeMs: 4000, correct: false, points: 0 })
+    })
+    const second = fresh.peek(s.id)
+    await Promise.all([first, second])
+    expect((await fresh.get(s.id))!.answers[0]['player-2']?.timeMs).toBe(4000)
+  })
+
+  it('recordAnswer : visible tout de suite, écrit en base seulement après flushAll, copie de la réponse', async () => {
+    const dbSession = await createGameSession(tenantScope(ctx.db, tenantId), { quizId, hostId: ownerId, pin: '900302' })
+    await setSessionStatus(ctx.db, dbSession!.id, 'active')
+    const s = makeSession(dbSession!.id, dbSession!.pin)
+    const store = new PersistentSessionStore(ctx.db)
+    await store.save(s)
+
+    const submitted = { answer: { choice: 1 }, timeMs: 4000, correct: false, points: 0 }
+    await store.recordAnswer(s.id, 0, 'player-2', submitted)
+    submitted.timeMs = 1
+    expect((await store.get(s.id))!.answers[0]['player-2'].timeMs).toBe(4000)
+    expect((await store.peek(s.id))!.answers[0]['player-2'].timeMs).toBe(4000)
+
+    expect((await new PersistentSessionStore(ctx.db).get(s.id))!.answers[0]['player-2']).toBeUndefined()
+    await store.flushAll()
+    expect((await new PersistentSessionStore(ctx.db).get(s.id))!.answers[0]['player-2'].timeMs).toBe(4000)
+  })
+
+  it('recordAnswer rejette pour une session absente du cache', async () => {
+    const store = new PersistentSessionStore(ctx.db)
+    await expect(
+      store.recordAnswer(crypto.randomUUID(), 0, 'p', { answer: null, timeMs: 1, correct: false, points: 0 }),
+    ).rejects.toThrow()
   })
 })

@@ -1,0 +1,1379 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-1c00951c9376-fr",
+      "type": "mcq",
+      "prompt": "Qui est considéré comme le meilleur footballeur roumain de tous les temps ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nicolae Dobrin",
+            "correct": false
+          },
+          {
+            "label": "Gheorghe Hagi",
+            "correct": true
+          },
+          {
+            "label": "Gheorghe Popescu",
+            "correct": false
+          },
+          {
+            "label": "Cristian Chivu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2230d0d158b7-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces sports ne fait pas partie du triathlon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Natation",
+            "correct": false
+          },
+          {
+            "label": "Cyclisme",
+            "correct": false
+          },
+          {
+            "label": "Course à pied",
+            "correct": false
+          },
+          {
+            "label": "Équitation",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-22a874e1cfab-fr",
+      "type": "mcq",
+      "prompt": "En quelle année la Mazda 787B a-t-elle remporté les 24 Heures du Mans ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1991",
+            "correct": true
+          },
+          {
+            "label": "1987",
+            "correct": false
+          },
+          {
+            "label": "1990",
+            "correct": false
+          },
+          {
+            "label": "2000",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-24ceef66ff94-fr",
+      "type": "mcq",
+      "prompt": "Le « Stadium of Light » est le stade de quelle équipe de football ?",
+      "payload": {
+        "options": [
+          {
+            "label": "FC Barcelone",
+            "correct": false
+          },
+          {
+            "label": "Sunderland AFC",
+            "correct": true
+          },
+          {
+            "label": "Manchester United",
+            "correct": false
+          },
+          {
+            "label": "Paris Saint-Germain",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2619bd2894fb-fr",
+      "type": "mcq",
+      "prompt": "Combien de zones de score compte une cible de fléchettes classique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "42",
+            "correct": false
+          },
+          {
+            "label": "62",
+            "correct": false
+          },
+          {
+            "label": "82",
+            "correct": true
+          },
+          {
+            "label": "102",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-28832b7ed7e6-fr",
+      "type": "mcq",
+      "prompt": "Au snooker, quelle couleur de bille vaut 3 points ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bleue",
+            "correct": false
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": true
+          },
+          {
+            "label": "Marron",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2af5adaa4ea2-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle l'« outil » qui sert à frapper la bille blanche au snooker ou au billard ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Maillet",
+            "correct": false
+          },
+          {
+            "label": "Queue",
+            "correct": true
+          },
+          {
+            "label": "Raquette",
+            "correct": false
+          },
+          {
+            "label": "Batte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2c0402a02b33-fr",
+      "type": "mcq",
+      "prompt": "La chanson « Three Lions » des Lightning Seeds a été composée pour quel grand événement de football en 1996 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coupe des Confédérations",
+            "correct": false
+          },
+          {
+            "label": "Ligue des champions",
+            "correct": false
+          },
+          {
+            "label": "Coupe du monde",
+            "correct": false
+          },
+          {
+            "label": "Championnat d'Europe",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-30d5462475b2-fr",
+      "type": "truefalse",
+      "prompt": "Le footballeur Cristiano Ronaldo a ouvert un musée consacré à sa propre personne.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-346c10b9e771-fr",
+      "type": "truefalse",
+      "prompt": "Au football, un corner est la reprise du jeu après un but.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3561a5c3f7c4-fr",
+      "type": "mcq",
+      "prompt": "En 2016, qui a remporté le championnat du monde des constructeurs de Formule 1 pour la troisième fois de suite ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Red Bull Racing Renault",
+            "correct": false
+          },
+          {
+            "label": "Mercedes-AMG Petronas",
+            "correct": true
+          },
+          {
+            "label": "McLaren Honda",
+            "correct": false
+          },
+          {
+            "label": "Scuderia Ferrari",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-42d5a18688d5-fr",
+      "type": "mcq",
+      "prompt": "L'Etihad Stadium est le stade de quelle équipe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Manchester City",
+            "correct": true
+          },
+          {
+            "label": "Arsenal",
+            "correct": false
+          },
+          {
+            "label": "Blackpool",
+            "correct": false
+          },
+          {
+            "label": "Manchester United",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5734b39a9423-fr",
+      "type": "mcq",
+      "prompt": "En Formule 1, la voiture de sécurité virtuelle a été introduite après l'accident mortel de quel pilote ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roland Ratzenberger",
+            "correct": false
+          },
+          {
+            "label": "Gilles Villeneuve",
+            "correct": false
+          },
+          {
+            "label": "Jules Bianchi",
+            "correct": true
+          },
+          {
+            "label": "Ayrton Senna",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5a2c1541cdec-fr",
+      "type": "mcq",
+      "prompt": "Qui surnomme-t-on souvent « le Maestro » sur le circuit masculin de tennis ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pete Sampras",
+            "correct": false
+          },
+          {
+            "label": "Bill Tilden",
+            "correct": false
+          },
+          {
+            "label": "Roger Federer",
+            "correct": true
+          },
+          {
+            "label": "Boris Becker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-62278e6a1218-fr",
+      "type": "mcq",
+      "prompt": "Quelle joueuse a remporté la médaille d'or en simple dames de tennis de table aux Jeux olympiques de 2016 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ai FUKUHARA (Japon)",
+            "correct": false
+          },
+          {
+            "label": "Song KIM (Corée du Nord)",
+            "correct": false
+          },
+          {
+            "label": "DING Ning (Chine)",
+            "correct": true
+          },
+          {
+            "label": "LI Xiaoxia (Chine)",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-64752dea0c4b-fr",
+      "type": "mcq",
+      "prompt": "Quel joueur de fléchettes a remporté le plus de titres de champion du monde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Michael van Gerwen",
+            "correct": false
+          },
+          {
+            "label": "Raymond van Barneveld",
+            "correct": false
+          },
+          {
+            "label": "Eric Bristow",
+            "correct": false
+          },
+          {
+            "label": "Phil Taylor",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6a4d965e4d61-fr",
+      "type": "mcq",
+      "prompt": "Qui a été le premier footballeur à marquer 200 buts en Premier League anglaise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alan Shearer",
+            "correct": true
+          },
+          {
+            "label": "Wayne Rooney",
+            "correct": false
+          },
+          {
+            "label": "Robbie Fowler",
+            "correct": false
+          },
+          {
+            "label": "Thierry Henry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-739bdef0978c-fr",
+      "type": "mcq",
+      "prompt": "Combien de titres de Premier League Sir Alex Ferguson a-t-il remportés à Manchester United ?",
+      "payload": {
+        "options": [
+          {
+            "label": "20",
+            "correct": false
+          },
+          {
+            "label": "11",
+            "correct": false
+          },
+          {
+            "label": "22",
+            "correct": false
+          },
+          {
+            "label": "13",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-779db15646ec-fr",
+      "type": "mcq",
+      "prompt": "De quel pays le kabaddi, un sport de contact où l'on plaque l'adversaire, est-il originaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Turquie",
+            "correct": false
+          },
+          {
+            "label": "Australie",
+            "correct": false
+          },
+          {
+            "label": "Cambodge",
+            "correct": false
+          },
+          {
+            "label": "Inde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7bea892b6275-fr",
+      "type": "mcq",
+      "prompt": "Dans quel sport utilise-t-on un « volant » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rugby",
+            "correct": false
+          },
+          {
+            "label": "Cricket",
+            "correct": false
+          },
+          {
+            "label": "Badminton",
+            "correct": true
+          },
+          {
+            "label": "Tennis de table",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-82adace5f362-fr",
+      "type": "truefalse",
+      "prompt": "La Formule E est une série de course automobile qui utilise des voitures de course électriques hybrides.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-89a263bb2a6a-fr",
+      "type": "mcq",
+      "prompt": "Sur une cible de fléchettes, quel numéro est directement opposé au 1 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "15",
+            "correct": false
+          },
+          {
+            "label": "20",
+            "correct": false
+          },
+          {
+            "label": "12",
+            "correct": false
+          },
+          {
+            "label": "19",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8a8feca898f6-fr",
+      "type": "mcq",
+      "prompt": "Combien de joueurs compte une équipe de football ?",
+      "payload": {
+        "options": [
+          {
+            "label": "8",
+            "correct": false
+          },
+          {
+            "label": "11",
+            "correct": true
+          },
+          {
+            "label": "9",
+            "correct": false
+          },
+          {
+            "label": "10",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8e12836b92da-fr",
+      "type": "mcq",
+      "prompt": "Avec quel club Steven Gerrard a-t-il remporté la Ligue des champions ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chelsea",
+            "correct": false
+          },
+          {
+            "label": "Real Madrid",
+            "correct": false
+          },
+          {
+            "label": "Man City",
+            "correct": false
+          },
+          {
+            "label": "Liverpool",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8e55ce07f09b-fr",
+      "type": "mcq",
+      "prompt": "Qui a remporté le Grand Prix de Monaco 2018 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kimi Räikkönen",
+            "correct": false
+          },
+          {
+            "label": "Lewis Hamilton",
+            "correct": false
+          },
+          {
+            "label": "Daniel Ricciardo",
+            "correct": true
+          },
+          {
+            "label": "Sebastian Vettel",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-993af82a781c-fr",
+      "type": "mcq",
+      "prompt": "Qui a participé au plus grand nombre de tournois avec la sélection brésilienne de football ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kaká",
+            "correct": false
+          },
+          {
+            "label": "Ronaldo",
+            "correct": false
+          },
+          {
+            "label": "Cafu",
+            "correct": true
+          },
+          {
+            "label": "Roberto Carlos",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9d9c33228194-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces villes russes n'a PAS accueilli de stade de la Coupe du monde 2018 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vladivostok",
+            "correct": true
+          },
+          {
+            "label": "Ekaterinbourg",
+            "correct": false
+          },
+          {
+            "label": "Kaliningrad",
+            "correct": false
+          },
+          {
+            "label": "Rostov-sur-le-Don",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9fdc2e1148ed-fr",
+      "type": "mcq",
+      "prompt": "Quel pays a accueilli la Coupe du monde 2018 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Allemagne",
+            "correct": false
+          },
+          {
+            "label": "Russie",
+            "correct": true
+          },
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Arabie saoudite",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a7e745e12837-fr",
+      "type": "mcq",
+      "prompt": "Quel Italien a annoncé à Neuer où il allait tirer, avant de rater son tir, lors d'Italie-Allemagne à l'Euro 2016 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Giaccherini",
+            "correct": false
+          },
+          {
+            "label": "Barzagli",
+            "correct": false
+          },
+          {
+            "label": "Pellè",
+            "correct": true
+          },
+          {
+            "label": "Insigne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a91911924f38-fr",
+      "type": "mcq",
+      "prompt": "Quel club de football anglais est surnommé « The Tigers » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bristol City",
+            "correct": false
+          },
+          {
+            "label": "Cardiff City",
+            "correct": false
+          },
+          {
+            "label": "Manchester City",
+            "correct": false
+          },
+          {
+            "label": "Hull City",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a9462bece906-fr",
+      "type": "mcq",
+      "prompt": "Quelle est la ceinture la plus élevée que l'on peut obtenir en taekwondo ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Verte",
+            "correct": false
+          },
+          {
+            "label": "Blanche",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": false
+          },
+          {
+            "label": "Noire",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-af703675cbef-fr",
+      "type": "mcq",
+      "prompt": "Quel constructeur automobile a remporté les 24 Heures du Mans 2017 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Audi",
+            "correct": false
+          },
+          {
+            "label": "Porsche",
+            "correct": true
+          },
+          {
+            "label": "Toyota",
+            "correct": false
+          },
+          {
+            "label": "Chevrolet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b79df42b6ba8-fr",
+      "type": "mcq",
+      "prompt": "Quel est le meilleur score de Tiger Woods en carrière au golf ?",
+      "payload": {
+        "options": [
+          {
+            "label": "67",
+            "correct": false
+          },
+          {
+            "label": "65",
+            "correct": false
+          },
+          {
+            "label": "63",
+            "correct": false
+          },
+          {
+            "label": "61",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c46857157256-fr",
+      "type": "mcq",
+      "prompt": "Quelle équipe l'Angleterre a-t-elle battue en demi-finale lors de sa victoire en Coupe du monde 1966 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Allemagne de l'Ouest",
+            "correct": false
+          },
+          {
+            "label": "Union soviétique",
+            "correct": false
+          },
+          {
+            "label": "Brésil",
+            "correct": false
+          },
+          {
+            "label": "Portugal",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c4ab3dceeb40-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces villes européennes a été la première à accueillir trois fois les Jeux olympiques d'été modernes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Paris",
+            "correct": false
+          },
+          {
+            "label": "Rome",
+            "correct": false
+          },
+          {
+            "label": "Athènes",
+            "correct": false
+          },
+          {
+            "label": "Londres",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c81573588995-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces épreuves d'athlétisme ne fait PAS partie du décathlon masculin olympique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Saut à la perche",
+            "correct": false
+          },
+          {
+            "label": "Lancer du poids",
+            "correct": false
+          },
+          {
+            "label": "Saut en longueur",
+            "correct": false
+          },
+          {
+            "label": "Lancer du marteau",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-cab269c89fa1-fr",
+      "type": "truefalse",
+      "prompt": "Le tennis a autrefois été appelé « racquetball ».",
+      "payload": {
+        "correct": false
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-cd8ceab17f1b-fr",
+      "type": "mcq",
+      "prompt": "Qui a participé au plus grand nombre de tournois avec la sélection allemande de football ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oliver Kahn",
+            "correct": false
+          },
+          {
+            "label": "Miroslav Klose",
+            "correct": false
+          },
+          {
+            "label": "Philipp Lahm",
+            "correct": false
+          },
+          {
+            "label": "Lothar Matthäus",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d4338137e99c-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces sélections s'est qualifiée pour la Coupe du monde 2018 en Russie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Italie",
+            "correct": false
+          },
+          {
+            "label": "États-Unis",
+            "correct": false
+          },
+          {
+            "label": "Pays-Bas",
+            "correct": false
+          },
+          {
+            "label": "Tunisie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d6e431b2503c-fr",
+      "type": "mcq",
+      "prompt": "Quel pays a accueilli les Jeux olympiques d'été de 2020 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Japon",
+            "correct": true
+          },
+          {
+            "label": "Australie",
+            "correct": false
+          },
+          {
+            "label": "Allemagne",
+            "correct": false
+          },
+          {
+            "label": "Chine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-df7b2e8fcf25-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces clubs de football anglais est basé à Liverpool ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Everton",
+            "correct": true
+          },
+          {
+            "label": "Arsenal",
+            "correct": false
+          },
+          {
+            "label": "West Ham United",
+            "correct": false
+          },
+          {
+            "label": "Crystal Palace",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e8e1a671b76c-fr",
+      "type": "truefalse",
+      "prompt": "La saison 2016 de Formule 1 compte un total de 20 courses.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-eb03cda2a252-fr",
+      "type": "mcq",
+      "prompt": "Bob et Mike Bryan, deux frères célèbres, pratiquaient quel sport ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tennis",
+            "correct": true
+          },
+          {
+            "label": "Baseball",
+            "correct": false
+          },
+          {
+            "label": "Basket-ball",
+            "correct": false
+          },
+          {
+            "label": "Football",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ebdfbb9e20ae-fr",
+      "type": "mcq",
+      "prompt": "Combien de Roland-Garros Björn Borg a-t-il remportés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "6",
+            "correct": true
+          },
+          {
+            "label": "4",
+            "correct": false
+          },
+          {
+            "label": "2",
+            "correct": false
+          },
+          {
+            "label": "9",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-efd512e378e5-fr",
+      "type": "mcq",
+      "prompt": "Quel pilote a été champion du monde de Formule 1 un record de 7 fois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ayrton Senna",
+            "correct": false
+          },
+          {
+            "label": "Michael Schumacher",
+            "correct": true
+          },
+          {
+            "label": "Fernando Alonso",
+            "correct": false
+          },
+          {
+            "label": "Jim Clark",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f15d30c70259-fr",
+      "type": "mcq",
+      "prompt": "Quelle équipe de football a remporté la Copa América Centenario 2016 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Colombie",
+            "correct": false
+          },
+          {
+            "label": "Brésil",
+            "correct": false
+          },
+          {
+            "label": "Chili",
+            "correct": true
+          },
+          {
+            "label": "Argentine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f44781c6f16d-fr",
+      "type": "mcq",
+      "prompt": "Quel joueur a marqué le plus de buts en Premier League anglaise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Wayne Rooney",
+            "correct": false
+          },
+          {
+            "label": "Lionel Messi",
+            "correct": false
+          },
+          {
+            "label": "Didier Drogba",
+            "correct": false
+          },
+          {
+            "label": "Alan Shearer",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f4734870c4a9-fr",
+      "type": "mcq",
+      "prompt": "Quel pays a produit des footballeurs comme Cafu, Roberto Carlos et Pelé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brésil",
+            "correct": true
+          },
+          {
+            "label": "Argentine",
+            "correct": false
+          },
+          {
+            "label": "Portugal",
+            "correct": false
+          },
+          {
+            "label": "Espagne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-sports-fr",
+      "title": "Sport, règles et records",
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-2230d0d158b7-fr",
+        "otdb-28832b7ed7e6-fr",
+        "otdb-2af5adaa4ea2-fr",
+        "otdb-7bea892b6275-fr",
+        "otdb-5a2c1541cdec-fr",
+        "otdb-64752dea0c4b-fr",
+        "otdb-6a4d965e4d61-fr",
+        "otdb-739bdef0978c-fr",
+        "otdb-779db15646ec-fr",
+        "otdb-8a8feca898f6-fr",
+        "otdb-993af82a781c-fr",
+        "otdb-a9462bece906-fr",
+        "otdb-c46857157256-fr",
+        "otdb-c4ab3dceeb40-fr",
+        "otdb-c81573588995-fr",
+        "otdb-cab269c89fa1-fr",
+        "otdb-cd8ceab17f1b-fr",
+        "otdb-d6e431b2503c-fr",
+        "otdb-eb03cda2a252-fr",
+        "otdb-5734b39a9423-fr"
+      ],
+      "description": "Règles, records et champions de nombreux sports."
+    },
+    {
+      "id": "otdb-quiz-sports-trivia-fr",
+      "title": "Anecdotes sportives",
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-1c00951c9376-fr",
+        "otdb-24ceef66ff94-fr",
+        "otdb-2619bd2894fb-fr",
+        "otdb-30d5462475b2-fr",
+        "otdb-346c10b9e771-fr",
+        "otdb-42d5a18688d5-fr",
+        "otdb-82adace5f362-fr",
+        "otdb-89a263bb2a6a-fr",
+        "otdb-9d9c33228194-fr",
+        "otdb-a91911924f38-fr",
+        "otdb-b79df42b6ba8-fr",
+        "otdb-df7b2e8fcf25-fr",
+        "otdb-e8e1a671b76c-fr",
+        "otdb-f44781c6f16d-fr",
+        "otdb-f4734870c4a9-fr",
+        "otdb-8e12836b92da-fr",
+        "otdb-3561a5c3f7c4-fr",
+        "otdb-8e55ce07f09b-fr",
+        "otdb-22a874e1cfab-fr"
+      ],
+      "description": "Clubs de football, sport automobile et autres faits sportifs."
+    }
+  ]
+}

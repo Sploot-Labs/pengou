@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=411"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0411-1",
+      "type": "mcq",
+      "prompt": "Quelle activité très populaire au Japon signifie « orchestre vide » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Karaoké",
+            "correct": true
+          },
+          {
+            "label": "Temari",
+            "correct": false
+          },
+          {
+            "label": "Origami",
+            "correct": false
+          },
+          {
+            "label": "Karaté",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0411-3",
+      "type": "mcq",
+      "prompt": "Quelle cithare japonaise possède des cordes en fil de soie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Shakuhachi",
+            "correct": false
+          },
+          {
+            "label": "Biwa",
+            "correct": false
+          },
+          {
+            "label": "Koto",
+            "correct": true
+          },
+          {
+            "label": "Taïko",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

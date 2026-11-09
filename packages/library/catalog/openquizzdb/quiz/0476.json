@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=476"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0476-2",
+      "type": "mcq",
+      "prompt": "Quel membre du groupe Mano Negra est aussi appelé Oscar Tramor ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pierre Gauthé",
+            "correct": false
+          },
+          {
+            "label": "Joseph Dahan",
+            "correct": false
+          },
+          {
+            "label": "Daniel Jamet",
+            "correct": false
+          },
+          {
+            "label": "Manu Chao",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

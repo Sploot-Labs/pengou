@@ -1,0 +1,416 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0213-1-en",
+      "type": "mcq",
+      "prompt": "What does the fruit of our fruit trees come from?",
+      "payload": {
+        "options": [
+          {
+            "label": "Root",
+            "correct": false
+          },
+          {
+            "label": "Flower",
+            "correct": true
+          },
+          {
+            "label": "Seed",
+            "correct": false
+          },
+          {
+            "label": "Leaf",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0213-2-en",
+      "type": "mcq",
+      "prompt": "What is a plot of land devoted to growing fruit trees called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Planter box",
+            "correct": false
+          },
+          {
+            "label": "Vegetable garden",
+            "correct": false
+          },
+          {
+            "label": "Orchard",
+            "correct": true
+          },
+          {
+            "label": "Fallow land",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0213-3-en",
+      "type": "mcq",
+      "prompt": "Which fruit tree has a spectacular bloom in Japan?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pomegranate tree",
+            "correct": false
+          },
+          {
+            "label": "Peach tree",
+            "correct": false
+          },
+          {
+            "label": "Chestnut tree",
+            "correct": false
+          },
+          {
+            "label": "Cherry tree",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0213-4-en",
+      "type": "mcq",
+      "prompt": "Which fruit tree produces greengages or the mirabelle plum of Nancy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cherry tree",
+            "correct": false
+          },
+          {
+            "label": "Chestnut tree",
+            "correct": false
+          },
+          {
+            "label": "Fig tree",
+            "correct": false
+          },
+          {
+            "label": "Plum tree",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0370-1-en",
+      "type": "mcq",
+      "prompt": "What color is the poppy that grows on freshly turned soil?",
+      "payload": {
+        "options": [
+          {
+            "label": "Purple",
+            "correct": false
+          },
+          {
+            "label": "Red",
+            "correct": true
+          },
+          {
+            "label": "Yellow",
+            "correct": false
+          },
+          {
+            "label": "Green",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0370-3-en",
+      "type": "mcq",
+      "prompt": "Which plant can be mistaken for wild garlic?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lily of the valley",
+            "correct": true
+          },
+          {
+            "label": "Oregano",
+            "correct": false
+          },
+          {
+            "label": "Primrose",
+            "correct": false
+          },
+          {
+            "label": "Basil",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0370-4-en",
+      "type": "mcq",
+      "prompt": "When does wild chamomile, or German chamomile, bloom?",
+      "payload": {
+        "options": [
+          {
+            "label": "Autumn",
+            "correct": false
+          },
+          {
+            "label": "Winter",
+            "correct": false
+          },
+          {
+            "label": "Summer",
+            "correct": true
+          },
+          {
+            "label": "Spring only",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0563-2-en",
+      "type": "mcq",
+      "prompt": "Which active volcano is the highest in Europe, at 3,330 meters?",
+      "payload": {
+        "options": [
+          {
+            "label": "Etna",
+            "correct": true
+          },
+          {
+            "label": "Mount Fuji",
+            "correct": false
+          },
+          {
+            "label": "Olca",
+            "correct": false
+          },
+          {
+            "label": "Ebeko",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0563-3-en",
+      "type": "mcq",
+      "prompt": "Which volcano, well known to tourists, is the highest point in Japan?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mount Longonot",
+            "correct": false
+          },
+          {
+            "label": "Mount Ontake",
+            "correct": false
+          },
+          {
+            "label": "Mount Spurr",
+            "correct": false
+          },
+          {
+            "label": "Mount Fuji",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0563-4-en",
+      "type": "mcq",
+      "prompt": "Which volcano caused a global cooling of 0.6°C?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pinatubo",
+            "correct": true
+          },
+          {
+            "label": "Misti",
+            "correct": false
+          },
+          {
+            "label": "Rasshua",
+            "correct": false
+          },
+          {
+            "label": "Kurub",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0045-1-en",
+      "type": "mcq",
+      "prompt": "On which island does Mount Pelée, a volcano, rise in the north?",
+      "payload": {
+        "options": [
+          {
+            "label": "Guadeloupe",
+            "correct": false
+          },
+          {
+            "label": "Martinique",
+            "correct": true
+          },
+          {
+            "label": "New Caledonia",
+            "correct": false
+          },
+          {
+            "label": "Réunion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0045-2-en",
+      "type": "mcq",
+      "prompt": "In which country is Kilimanjaro, with its three volcanic cones?",
+      "payload": {
+        "options": [
+          {
+            "label": "Japan",
+            "correct": false
+          },
+          {
+            "label": "Tanzania",
+            "correct": true
+          },
+          {
+            "label": "Tibet",
+            "correct": false
+          },
+          {
+            "label": "Nepal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0045-3-en",
+      "type": "mcq",
+      "prompt": "Which volcano of the Aeolian Islands lies north of Sicily?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pinatubo",
+            "correct": false
+          },
+          {
+            "label": "Stromboli",
+            "correct": true
+          },
+          {
+            "label": "Villarrica",
+            "correct": false
+          },
+          {
+            "label": "Vesuvius",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0045-4-en",
+      "type": "mcq",
+      "prompt": "Which mineral water brand has a green volcano as its logo?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vittel",
+            "correct": false
+          },
+          {
+            "label": "Vichy",
+            "correct": false
+          },
+          {
+            "label": "Volvic",
+            "correct": true
+          },
+          {
+            "label": "Valvert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=305"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0305-3",
+      "type": "mcq",
+      "prompt": "Quel rôle est tenu par François Damiens dans « La Famille Bélier » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le maire",
+            "correct": false
+          },
+          {
+            "label": "Le prof",
+            "correct": false
+          },
+          {
+            "label": "Le voisin",
+            "correct": false
+          },
+          {
+            "label": "La père",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0305-4",
+      "type": "mcq",
+      "prompt": "Quel film a été réalisé par François Damiens lui-même ?",
+      "payload": {
+        "options": [
+          {
+            "label": "JCVD",
+            "correct": false
+          },
+          {
+            "label": "Rundskop",
+            "correct": false
+          },
+          {
+            "label": "Mon Ket",
+            "correct": true
+          },
+          {
+            "label": "Dikkenek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

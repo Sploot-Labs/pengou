@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { validateQuestionPayload } from './index.js'
+import { validateQuestionPayload, isScoredType } from './index.js'
 
 describe('validateQuestionPayload', () => {
   it('mcq : accepte 4 options avec ≥1 correcte', () => {
@@ -40,5 +40,10 @@ describe('validateQuestionPayload', () => {
   })
   it('type inconnu : lève', () => {
     expect(() => validateQuestionPayload('nope' as never, {})).toThrow()
+  })
+  it('isScoredType : sondage et nuage de mots non notés', () => {
+    expect(isScoredType('poll')).toBe(false)
+    expect(isScoredType('wordcloud')).toBe(false)
+    for (const t of ['mcq', 'truefalse', 'text', 'slider'] as const) expect(isScoredType(t)).toBe(true)
   })
 })

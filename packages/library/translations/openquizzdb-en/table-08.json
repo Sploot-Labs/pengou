@@ -1,0 +1,1046 @@
+{
+  "questions": {
+    "oqdb-0416-1": {
+      "prompt": "How long is the wall around the Chambord forest park?",
+      "options": [
+        "32 km",
+        "16 km",
+        "27 km",
+        "9 km"
+      ]
+    },
+    "oqdb-0416-2": {
+      "prompt": "Besides the wild boar, which species is emblematic of Chambord?",
+      "options": [
+        "Rabbit",
+        "Ostrich",
+        "Deer",
+        "Lemur"
+      ]
+    },
+    "oqdb-0416-3": {
+      "prompt": "In which French forest region is the Château de Chambord located?",
+      "options": [
+        "Drouais",
+        "Sologne",
+        "Beauce",
+        "Cévennes"
+      ]
+    },
+    "oqdb-0416-4": {
+      "prompt": "Of Chambord's 5,440 hectares, how many are open to the public?",
+      "options": [
+        "4,000 ha",
+        "2,000 ha",
+        "3,000 ha",
+        "1,000 ha"
+      ]
+    },
+    "oqdb-0417-2": {
+      "skip": "chanteur français et chansons peu connus hors de France"
+    },
+    "oqdb-0417-3": {
+      "skip": "chanteur et groupe français peu connus hors de France"
+    },
+    "oqdb-0418-2": {
+      "skip": "jeu sur le vocabulaire français du vin (frapper)"
+    },
+    "oqdb-0418-3": {
+      "prompt": "What is a wine that can be kept for a long time and age called?",
+      "options": [
+        "Cupbearer",
+        "Graves",
+        "Elixir",
+        "Vin de garde"
+      ]
+    },
+    "oqdb-0418-4": {
+      "prompt": "Which instrument gives a direct measure of a wine's alcohol content?",
+      "options": [
+        "Oenolitre",
+        "Ebullioscope",
+        "Alcoholmeter",
+        "Barrica"
+      ]
+    },
+    "oqdb-0419-1": {
+      "prompt": "What does the Kelvin scale, named after Lord Kelvin, measure?",
+      "options": [
+        "Distance",
+        "Weight",
+        "Speed",
+        "Temperature"
+      ]
+    },
+    "oqdb-0419-2": {
+      "prompt": "Who developed the earthquake magnitude scale in 1935?",
+      "options": [
+        "Pauling",
+        "Rankine",
+        "Richter",
+        "Monoyer"
+      ]
+    },
+    "oqdb-0419-3": {
+      "prompt": "Which of these countries does not use degrees Celsius?",
+      "options": [
+        "Canada",
+        "Italy",
+        "United States",
+        "Australia"
+      ]
+    },
+    "oqdb-0419-4": {
+      "prompt": "Which SI unit is used to measure frequency?",
+      "options": [
+        "Joule",
+        "Becquerel",
+        "Katal",
+        "Hertz"
+      ]
+    },
+    "oqdb-0420-1": {
+      "prompt": "In which year were paid holidays introduced in France?",
+      "options": [
+        "1936",
+        "1956",
+        "1946",
+        "1926"
+      ]
+    },
+    "oqdb-0420-2": {
+      "prompt": "In which year was JFK (John F. Kennedy) assassinated?",
+      "options": [
+        "1953",
+        "1973",
+        "1983",
+        "1963"
+      ]
+    },
+    "oqdb-0420-3": {
+      "prompt": "In which year was Charles de Gaulle elected by direct popular vote?",
+      "options": [
+        "1965",
+        "1955",
+        "1945",
+        "1975"
+      ]
+    },
+    "oqdb-0420-4": {
+      "prompt": "In which year did the Great Depression begin?",
+      "options": [
+        "1939",
+        "1929",
+        "1949",
+        "1919"
+      ]
+    },
+    "oqdb-0421-1": {
+      "prompt": "In which vast ocean is Japan located?",
+      "options": [
+        "Arctic",
+        "Indian",
+        "Pacific",
+        "Atlantic"
+      ]
+    },
+    "oqdb-0421-2": {
+      "prompt": "Which city is the capital and largest city of Japan?",
+      "options": [
+        "Seoul",
+        "Tokyo",
+        "Beijing",
+        "Bangkok"
+      ]
+    },
+    "oqdb-0421-3": {
+      "prompt": "What percentage of the world's active volcanoes is in Japan?",
+      "options": [
+        "20%",
+        "10%",
+        "30%",
+        "40%"
+      ]
+    },
+    "oqdb-0421-4": {
+      "prompt": "Which is the largest of Japan's islands, home to Tokyo?",
+      "options": [
+        "Shikoku",
+        "Hokkaido",
+        "Honshu",
+        "Kyushu"
+      ]
+    },
+    "oqdb-0422-1": {
+      "prompt": "In which year did the Battle of Verdun take place?",
+      "options": [
+        "1926",
+        "1916",
+        "1936",
+        "1946"
+      ]
+    },
+    "oqdb-0422-2": {
+      "prompt": "When did the First Battle of the Marne take place?",
+      "options": [
+        "April 1940",
+        "May 1942",
+        "June 1916",
+        "September 1914"
+      ]
+    },
+    "oqdb-0422-3": {
+      "prompt": "Which battle marks the final defeat of Napoleon I?",
+      "options": [
+        "Waterloo",
+        "Leipzig",
+        "Trafalgar",
+        "Austerlitz"
+      ]
+    },
+    "oqdb-0422-4": {
+      "prompt": "Which battle made William the Conqueror king of England?",
+      "options": [
+        "Crécy",
+        "Agincourt",
+        "Stamford Bridge",
+        "Hastings"
+      ]
+    },
+    "oqdb-0423-1": {
+      "skip": "boisson de marque française peu connue hors de France (Champomy)"
+    },
+    "oqdb-0423-2": {
+      "prompt": "In which sector is Tropicana a world leader?",
+      "options": [
+        "Tea",
+        "Lemonade",
+        "Fruit juice",
+        "Non-alcoholic beers"
+      ]
+    },
+    "oqdb-0423-3": {
+      "prompt": "Which energy drink has a logo with three green claw marks?",
+      "options": [
+        "Monster Energy",
+        "Rockstar",
+        "Red Bull",
+        "Dark Dog"
+      ]
+    },
+    "oqdb-0423-4": {
+      "prompt": "Which drink is known to contain ginger ale?",
+      "options": [
+        "Canada Dry",
+        "7 Up",
+        "Gini",
+        "Fanta"
+      ]
+    },
+    "oqdb-0424-1": {
+      "prompt": "What was the former name of Sri Lanka?",
+      "options": [
+        "Ceylon",
+        "Formosa",
+        "Batavia",
+        "Cipango"
+      ]
+    },
+    "oqdb-0424-2": {
+      "prompt": "Which country do Tasmania and its thousand small islands belong to?",
+      "options": [
+        "United Kingdom",
+        "New Zealand",
+        "Australia",
+        "France"
+      ]
+    },
+    "oqdb-0424-3": {
+      "prompt": "Which country does France share the island of Saint-Martin with?",
+      "options": [
+        "Denmark",
+        "United States",
+        "Netherlands",
+        "United Kingdom"
+      ]
+    },
+    "oqdb-0424-4": {
+      "prompt": "In Hawaiian, what does Honolulu, the capital of the state of Hawaii, mean?",
+      "options": [
+        "Two seas",
+        "Cruel sun",
+        "Sheltered bay",
+        "Great harbor"
+      ]
+    },
+    "oqdb-0425-1": {
+      "skip": "comptine française (La mère Michel)"
+    },
+    "oqdb-0425-2": {
+      "prompt": "In Victor Hugo's \"Les Misérables\", who is Fantine's daughter?",
+      "options": [
+        "Enjolras",
+        "Cosette",
+        "Azelma",
+        "Éponine"
+      ]
+    },
+    "oqdb-0425-3": {
+      "prompt": "Which singer is Lily-Rose Depp's mother?",
+      "options": [
+        "Amber Heard",
+        "Kate Moss",
+        "Vanessa Paradis",
+        "Winona Ryder"
+      ]
+    },
+    "oqdb-0425-4": {
+      "prompt": "What is a woman who carries a child for a couple called?",
+      "options": [
+        "Surrogate mother",
+        "Unwed mother",
+        "Donor mother",
+        "Childbearer"
+      ]
+    },
+    "oqdb-0426-1": {
+      "prompt": "How many Pokémon can a trainer carry?",
+      "options": [
+        "Six",
+        "Ten",
+        "Four",
+        "Only one"
+      ]
+    },
+    "oqdb-0426-2": {
+      "prompt": "What is the name of the young hero of the \"Pokémon\" cartoon?",
+      "options": [
+        "Florent",
+        "Ash",
+        "Brock",
+        "Jacky"
+      ]
+    },
+    "oqdb-0426-3": {
+      "prompt": "Which family of Pokémon do Pikachu and Raticate belong to?",
+      "options": [
+        "Eggs",
+        "Sheep",
+        "Mice",
+        "Puppies"
+      ]
+    },
+    "oqdb-0426-4": {
+      "prompt": "What can be seen on the belly of Poliwag and its evolutions?",
+      "options": [
+        "A circle",
+        "A star",
+        "A square",
+        "A spiral"
+      ]
+    },
+    "oqdb-0427-1": {
+      "prompt": "Which star popularized Nespresso's \"What Else?\" slogan?",
+      "options": [
+        "George Clooney",
+        "Brad Pitt",
+        "John Travolta",
+        "Tom Hanks"
+      ]
+    },
+    "oqdb-0427-2": {
+      "skip": "marque de café et publicité françaises peu connues hors de France"
+    },
+    "oqdb-0427-4": {
+      "skip": "marque de café soluble française (Ricoré) peu connue hors de France"
+    },
+    "oqdb-0428-1": {
+      "prompt": "Located in the Ionian Sea, which country does the island of Corfu belong to?",
+      "options": [
+        "Greece",
+        "Italy",
+        "Croatia",
+        "Albania"
+      ]
+    },
+    "oqdb-0428-2": {
+      "prompt": "On which island did the mutineers of the Royal Navy's Bounty take refuge?",
+      "options": [
+        "Pitcairn",
+        "Nauru",
+        "Cook",
+        "Moorea"
+      ]
+    },
+    "oqdb-0428-3": {
+      "prompt": "In which ocean is the island of Mayotte, in the Comoros archipelago?",
+      "options": [
+        "Pacific",
+        "Atlantic",
+        "Arctic",
+        "Indian"
+      ]
+    },
+    "oqdb-0428-4": {
+      "prompt": "Which country do the Galapagos Islands, in the Pacific, belong to?",
+      "options": [
+        "Peru",
+        "Colombia",
+        "Ecuador",
+        "Venezuela"
+      ]
+    },
+    "oqdb-0429-1": {
+      "prompt": "Which Depeche Mode album has a red rose on its cover?",
+      "options": [
+        "Violator",
+        "A Broken Frame",
+        "Ultra",
+        "Exciter"
+      ]
+    },
+    "oqdb-0429-2": {
+      "prompt": "Who directed most of Depeche Mode's music videos?",
+      "options": [
+        "Clive Richardson",
+        "Anton Corbijn",
+        "Julien Temple",
+        "John Hillcoat"
+      ]
+    },
+    "oqdb-0429-3": {
+      "prompt": "Which English label did Depeche Mode build its career with?",
+      "options": [
+        "Warner",
+        "EMI",
+        "Mute Records",
+        "Mercury"
+      ]
+    },
+    "oqdb-0429-4": {
+      "prompt": "Who is the lead singer of Depeche Mode?",
+      "options": [
+        "Vince Clarke",
+        "Andrew Fletcher",
+        "Dave Gahan",
+        "Alan Wilder"
+      ]
+    },
+    "oqdb-0430-1": {
+      "prompt": "What are the two colors of the Quebec flag, unveiled in 1948?",
+      "options": [
+        "Red and blue",
+        "Blue and white",
+        "Blue and red",
+        "Red and white"
+      ]
+    },
+    "oqdb-0430-2": {
+      "prompt": "What is the reindeer of Canada's Arctic regions called?",
+      "options": [
+        "Woodland",
+        "Big deer",
+        "Caribou",
+        "Canadian reindeer"
+      ]
+    },
+    "oqdb-0430-3": {
+      "skip": "chanteuse française et chanson peu connues hors de France"
+    },
+    "oqdb-0431-1": {
+      "prompt": "Which Mediterranean city has hosted a Grand Prix since 1929?",
+      "options": [
+        "Split",
+        "Monaco",
+        "Marseille",
+        "Venice"
+      ]
+    },
+    "oqdb-0431-2": {
+      "prompt": "In which city can you walk along the Promenade des Anglais?",
+      "options": [
+        "Monaco",
+        "Nice",
+        "Marseille",
+        "Cannes"
+      ]
+    },
+    "oqdb-0431-3": {
+      "skip": "feuilleton télévisé français peu connu hors de France"
+    },
+    "oqdb-0431-4": {
+      "prompt": "What is the Mediterranean coastline around Nice and Monaco called?",
+      "options": [
+        "Côte Camarguaise",
+        "Côte d'Azur",
+        "Côte Vermeille",
+        "Côte Bleue"
+      ]
+    },
+    "oqdb-0433-1": {
+      "prompt": "Which of these characters is not one of Marge Simpson's children?",
+      "options": [
+        "Abe",
+        "Lisa",
+        "Bart",
+        "Maggie"
+      ]
+    },
+    "oqdb-0433-2": {
+      "prompt": "What is the name of the mother in the Addams Family?",
+      "options": [
+        "Aurora",
+        "Eva",
+        "Elvira",
+        "Morticia"
+      ]
+    },
+    "oqdb-0433-3": {
+      "prompt": "Of which fictional hero is Lily, killed by Lord Voldemort, the mother?",
+      "options": [
+        "Mowgli",
+        "Harry Potter",
+        "Luke Skywalker",
+        "Frodo Baggins"
+      ]
+    },
+    "oqdb-0433-4": {
+      "prompt": "In \"Breaking Bad\", what is the first name of the White family's mother?",
+      "options": [
+        "Jayne",
+        "Angela",
+        "Rhona",
+        "Skyler"
+      ]
+    },
+    "oqdb-0434-1": {
+      "prompt": "Which of these is the title of a Depeche Mode song?",
+      "options": [
+        "Little 13",
+        "Little 21",
+        "Little 9",
+        "Little 15"
+      ]
+    },
+    "oqdb-0434-2": {
+      "prompt": "Which instrumental track appears on the album \"Sounds of the Universe\"?",
+      "options": [
+        "Introspectre",
+        "Jazz Thieves",
+        "Easy Tiger",
+        "Spacewalker"
+      ]
+    },
+    "oqdb-0434-4": {
+      "prompt": "Who wrote the famous song \"Just Can't Get Enough\"?",
+      "options": [
+        "Alan Wilder",
+        "Martin Gore",
+        "Dave Gahan",
+        "Vince Clarke"
+      ]
+    },
+    "oqdb-0435-1": {
+      "prompt": "In which country is the Suez Canal located?",
+      "options": [
+        "Tunisia",
+        "Algeria",
+        "Egypt",
+        "Libya"
+      ]
+    },
+    "oqdb-0435-2": {
+      "prompt": "Which country do the Cyclades, made up of about 250 islands, belong to?",
+      "options": [
+        "Bulgaria",
+        "Greece",
+        "Libya",
+        "Turkey"
+      ]
+    },
+    "oqdb-0435-3": {
+      "prompt": "Which country do the Gulfs of Messinia and Corinth belong to?",
+      "options": [
+        "Turkey",
+        "France",
+        "Italy",
+        "Greece"
+      ]
+    },
+    "oqdb-0435-4": {
+      "prompt": "Which ocean is linked to the Mediterranean by the Strait of Gibraltar?",
+      "options": [
+        "Arctic",
+        "Pacific",
+        "Atlantic",
+        "Indian"
+      ]
+    },
+    "oqdb-0436-1": {
+      "prompt": "What is the \"box\" searched for in geocaching called?",
+      "options": [
+        "Mega",
+        "Surprise",
+        "Puzzle",
+        "Cache"
+      ]
+    },
+    "oqdb-0436-2": {
+      "prompt": "Which device is used to find caches in geocaching?",
+      "options": [
+        "Pencil",
+        "GPS",
+        "Flashlight",
+        "Umbrella"
+      ]
+    },
+    "oqdb-0436-3": {
+      "prompt": "What should a geocache be to last better over time?",
+      "options": [
+        "Cardboard",
+        "Colorful",
+        "Open",
+        "Waterproof"
+      ]
+    },
+    "oqdb-0436-4": {
+      "prompt": "What are people unfamiliar with geocaching called?",
+      "options": [
+        "Beagle Boys",
+        "Goblins",
+        "Muggles",
+        "Squibs"
+      ]
+    },
+    "oqdb-0437-1": {
+      "prompt": "What was the name of the 2016 Summer Olympics mascot?",
+      "options": [
+        "Vinicius",
+        "Smiley",
+        "Youppi",
+        "Blaze"
+      ]
+    },
+    "oqdb-0437-3": {
+      "prompt": "Which country was suspended from athletics at the 2016 Olympics?",
+      "options": [
+        "Austria",
+        "Russia",
+        "Haiti",
+        "Canada"
+      ]
+    },
+    "oqdb-0437-4": {
+      "prompt": "How many volunteers helped at the Rio 2016 Olympics?",
+      "options": [
+        "30,000",
+        "90,000",
+        "70,000",
+        "50,000"
+      ]
+    },
+    "oqdb-0438-1": {
+      "prompt": "What is the shape of Italy seen from the sky often compared to?",
+      "options": [
+        "Boot",
+        "Cart",
+        "Flower",
+        "Hexagon"
+      ]
+    },
+    "oqdb-0438-2": {
+      "prompt": "What is the maximum speed allowed on motorways in Italy?",
+      "options": [
+        "130 km/h",
+        "110 km/h",
+        "100 km/h",
+        "120 km/h"
+      ]
+    },
+    "oqdb-0438-3": {
+      "prompt": "What are the members of the Sicilian mafia called?",
+      "options": [
+        "Mafiosi",
+        "Marvoli",
+        "Tifosi",
+        "Barzotti"
+      ]
+    },
+    "oqdb-0438-4": {
+      "prompt": "Which Italian city does the \"T\" in the carmaker Fiat's name stand for?",
+      "options": [
+        "Trieste",
+        "Turin",
+        "Treviso",
+        "Tivoli"
+      ]
+    },
+    "oqdb-0439-1": {
+      "prompt": "In which year did Marcel Pagnol publish \"My Mother's Castle\"?",
+      "options": [
+        "1957",
+        "1977",
+        "1917",
+        "1937"
+      ]
+    },
+    "oqdb-0439-2": {
+      "prompt": "Which Jane Campion film features a mute mother who plays the piano?",
+      "options": [
+        "In the Cut",
+        "Bright Star",
+        "The Piano",
+        "Sweetie"
+      ]
+    },
+    "oqdb-0439-3": {
+      "skip": "littérature française peu connue hors de France (Jules Renard)"
+    },
+    "oqdb-0439-4": {
+      "prompt": "Who painted \"The Madonna of the Meadow\", showing Jesus and his mother?",
+      "options": [
+        "Auguste Renoir",
+        "Rembrandt",
+        "Michelangelo",
+        "Raphael"
+      ]
+    },
+    "oqdb-0440-1": {
+      "prompt": "What type of building is the Colosseum in Rome?",
+      "options": [
+        "Temple",
+        "Museum",
+        "Amphitheater",
+        "Cinema"
+      ]
+    },
+    "oqdb-0440-2": {
+      "prompt": "In which Italian city can you admire the Doge's Palace?",
+      "options": [
+        "Milan",
+        "Venice",
+        "Rome",
+        "Florence"
+      ]
+    },
+    "oqdb-0440-3": {
+      "prompt": "In which city is the unmissable Trevi Fountain?",
+      "options": [
+        "Milan",
+        "Turin",
+        "Naples",
+        "Rome"
+      ]
+    },
+    "oqdb-0440-4": {
+      "prompt": "In which Italian city is the Palazzo Vecchio?",
+      "options": [
+        "Milan",
+        "Venice",
+        "Turin",
+        "Florence"
+      ]
+    },
+    "oqdb-0442-1": {
+      "prompt": "What color is the European Union passport?",
+      "options": [
+        "Blue",
+        "Green",
+        "Burgundy",
+        "Gray"
+      ]
+    },
+    "oqdb-0442-2": {
+      "prompt": "Which Belgian city is considered the world's diamond center?",
+      "options": [
+        "Brussels",
+        "Antwerp",
+        "Liège",
+        "Mons"
+      ]
+    },
+    "oqdb-0442-3": {
+      "prompt": "What is Turkish, born in Austria and eaten in France?",
+      "options": [
+        "Pistolet",
+        "Waffle",
+        "Crepe",
+        "Croissant"
+      ]
+    },
+    "oqdb-0442-4": {
+      "prompt": "What is the largest port in the Netherlands?",
+      "options": [
+        "Utrecht",
+        "Amsterdam",
+        "The Hague",
+        "Rotterdam"
+      ]
+    },
+    "oqdb-0443-1": {
+      "skip": "film comique français (Brice de Nice) peu connu hors de France"
+    },
+    "oqdb-0443-2": {
+      "prompt": "How many tram lines did Nice have in 2007?",
+      "options": [
+        "Five",
+        "Seven",
+        "Three",
+        "Only one"
+      ]
+    },
+    "oqdb-0443-3": {
+      "prompt": "On which bay in France is the Promenade des Anglais located?",
+      "options": [
+        "Bay of Ducks",
+        "Bay of Angels",
+        "Bay of Gods",
+        "Bay of Sharks"
+      ]
+    },
+    "oqdb-0443-4": {
+      "skip": "monument local niçois peu connu hors de France"
+    },
+    "oqdb-0444-2": {
+      "prompt": "Which ex-Beatle played in Red Square on May 24, 2003?",
+      "options": [
+        "George Harrison",
+        "Paul McCartney",
+        "Ringo Starr",
+        "John Lennon"
+      ]
+    },
+    "oqdb-0444-3": {
+      "prompt": "Who wrote \"The Da Vinci Code\", published in millions of copies?",
+      "options": [
+        "Robert Bloch",
+        "Kent Anderson",
+        "Dan Brown",
+        "David Baldacci"
+      ]
+    },
+    "oqdb-0444-4": {
+      "skip": "producteur de disques français peu connu hors de France"
+    },
+    "oqdb-0445-1": {
+      "prompt": "Which stuffed Italian pasta is shaped like little crowns?",
+      "options": [
+        "Fusilli",
+        "Tortellini",
+        "Gnocchi",
+        "Capellini"
+      ]
+    },
+    "oqdb-0445-2": {
+      "prompt": "What will you eat if you order \"grana padano\", protected by a PDO?",
+      "options": [
+        "Soup",
+        "Stew",
+        "Cake",
+        "Cheese"
+      ]
+    },
+    "oqdb-0445-3": {
+      "prompt": "Which Italian dish is made from boiled cornmeal?",
+      "options": [
+        "Padano",
+        "Pecorino",
+        "Polenta",
+        "Panzerotti"
+      ]
+    },
+    "oqdb-0445-4": {
+      "prompt": "What color are the truffles of Piedmont?",
+      "options": [
+        "Green",
+        "Black",
+        "White",
+        "Red"
+      ]
+    },
+    "oqdb-0446-1": {
+      "prompt": "In which Pixar film does a rat turn out to be an excellent cook?",
+      "options": [
+        "Cars",
+        "Toy Story",
+        "Monsters, Inc.",
+        "Ratatouille"
+      ]
+    },
+    "oqdb-0446-2": {
+      "prompt": "Which cartoon mouse is the fastest in all of Mexico?",
+      "options": [
+        "Speedy Gonzales",
+        "Stuart Little",
+        "Mickey Mouse",
+        "Jerry"
+      ]
+    },
+    "oqdb-0446-3": {
+      "prompt": "Which rodents are the heroes of the 2009 film \"G-Force\"?",
+      "options": [
+        "Mice",
+        "Hamsters",
+        "Guinea pigs",
+        "Rats"
+      ]
+    },
+    "oqdb-0446-4": {
+      "skip": "humoristes français et série d'animation peu connus hors de France"
+    },
+    "oqdb-0447-1": {
+      "skip": "commentateur sportif français peu connu hors de France"
+    },
+    "oqdb-0447-2": {
+      "skip": "commentateurs sportifs français peu connus hors de France"
+    },
+    "oqdb-0447-3": {
+      "skip": "commentateur sportif français peu connu hors de France"
+    },
+    "oqdb-0447-4": {
+      "skip": "commentateurs sportifs français peu connus hors de France"
+    },
+    "oqdb-0448-1": {
+      "skip": "animateur de télévision français peu connu hors de France"
+    },
+    "oqdb-0448-2": {
+      "prompt": "In which TV series did Telly Savalas play a police officer?",
+      "options": [
+        "Kojak",
+        "Columbo",
+        "Starsky & Hutch",
+        "Magnum"
+      ]
+    },
+    "oqdb-0448-3": {
+      "skip": "magazine télévisé français (Thalassa), option corrompue"
+    },
+    "oqdb-0448-4": {
+      "skip": "émission de téléréalité française sans écho à l'étranger"
+    },
+    "oqdb-0449-1": {
+      "prompt": "Who owns the Krusty Krab in \"SpongeBob SquarePants\"?",
+      "options": [
+        "Mr. Krabs",
+        "Squidward",
+        "Sandy",
+        "SpongeBob"
+      ]
+    },
+    "oqdb-0449-2": {
+      "prompt": "Which colorful characters live underwater with a snorkel on their heads?",
+      "options": [
+        "Teletubbies",
+        "Care Bears",
+        "Snorks",
+        "Barbapapa"
+      ]
+    },
+    "oqdb-0449-3": {
+      "prompt": "Which submarine did Sean Connery command on screen?",
+      "options": [
+        "K-19",
+        "Red October",
+        "USS Dallas",
+        "HMS Vanguard"
+      ]
+    },
+    "oqdb-0449-4": {
+      "prompt": "Which actor played \"The Man from Atlantis\" on screen?",
+      "options": [
+        "Lee Majors",
+        "Patrick Duffy",
+        "Mark Harmon",
+        "Mark Harris"
+      ]
+    },
+    "oqdb-0450-1": {
+      "skip": "troupe comique française (Les Nuls) peu connue hors de France"
+    },
+    "oqdb-0450-2": {
+      "skip": "troupe comique et film français peu connus hors de France"
+    },
+    "oqdb-0450-3": {
+      "skip": "troupe comique et émission françaises peu connues hors de France"
+    },
+    "oqdb-0450-4": {
+      "skip": "troupe comique française (Les Nuls) peu connue hors de France"
+    },
+    "oqdb-0451-1": {
+      "prompt": "Which character and friend of SpongeBob lives under a rock?",
+      "options": [
+        "Sandy",
+        "Patrick",
+        "Eugene",
+        "Squidward"
+      ]
+    },
+    "oqdb-0451-2": {
+      "prompt": "What is the name of the lifeguard at Goo Lagoon in \"SpongeBob SquarePants\"?",
+      "options": [
+        "Thomas",
+        "Larry",
+        "Ian",
+        "Benny"
+      ]
+    },
+    "oqdb-0451-3": {
+      "prompt": "Who runs the boating school in \"SpongeBob SquarePants\"?",
+      "options": [
+        "Mrs. Puff",
+        "Krabs",
+        "Sandy",
+        "Potty"
+      ]
+    },
+    "oqdb-0451-4": {
+      "prompt": "What is the name of Patchy the Pirate's parrot?",
+      "options": [
+        "Looney",
+        "Potty",
+        "Nutty",
+        "Marbles"
+      ]
+    },
+    "oqdb-0452-1": {
+      "prompt": "Which clumsy dog is a friend of Mickey and Pluto?",
+      "options": [
+        "Felix",
+        "Donald",
+        "Mortimer",
+        "Goofy"
+      ]
+    },
+    "oqdb-0452-2": {
+      "skip": "exactitude douteuse : Rox est le chien de chasse (Copper), le renardeau est Rouky (Tod)"
+    },
+    "oqdb-0452-3": {
+      "prompt": "Which breed of dog is Cruella de Vil fiercely interested in?",
+      "options": [
+        "Fox terrier",
+        "Husky",
+        "Jack Russell",
+        "Dalmatian"
+      ]
+    },
+    "oqdb-0452-4": {
+      "prompt": "In Disney's \"Robin Hood\", what animal is Robin?",
+      "options": [
+        "Fox",
+        "Lion",
+        "Tiger",
+        "Bear"
+      ]
+    },
+    "oqdb-0453-1": {
+      "prompt": "In which museum is the Rosetta Stone kept?",
+      "options": [
+        "Cairo Museum",
+        "British Museum",
+        "MET",
+        "The Louvre"
+      ]
+    }
+  },
+  "quizzes": {}
+}

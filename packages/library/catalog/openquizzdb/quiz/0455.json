@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=455"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0455-2",
+      "type": "mcq",
+      "prompt": "Quel objet est souvent considéré comme porte-bonheur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fer à repasser",
+            "correct": false
+          },
+          {
+            "label": "Fer à friser",
+            "correct": false
+          },
+          {
+            "label": "Fer à cheval",
+            "correct": true
+          },
+          {
+            "label": "Fer à dorer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0455-3",
+      "type": "mcq",
+      "prompt": "Quel personnage porte un costume à losanges multicolores ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beltrame",
+            "correct": false
+          },
+          {
+            "label": "Pierrot",
+            "correct": false
+          },
+          {
+            "label": "Arlequin",
+            "correct": true
+          },
+          {
+            "label": "Colombine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

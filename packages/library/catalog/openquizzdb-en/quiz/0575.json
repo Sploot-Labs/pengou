@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=575"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0575-1-en",
+      "type": "mcq",
+      "prompt": "Gin is a spirit close to which alcoholic ancestor?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chartreuse",
+            "correct": false
+          },
+          {
+            "label": "Triple sec",
+            "correct": false
+          },
+          {
+            "label": "Schnapps",
+            "correct": false
+          },
+          {
+            "label": "Genever",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0575-2-en",
+      "type": "mcq",
+      "prompt": "What does the tonic water poured into your gin and tonic contain?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sulfadoxine",
+            "correct": false
+          },
+          {
+            "label": "Nivaquine",
+            "correct": false
+          },
+          {
+            "label": "Quinine",
+            "correct": true
+          },
+          {
+            "label": "Ferroquine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=592"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0592-4-en",
+      "type": "mcq",
+      "prompt": "In which regions of the world do cacti grow best?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deserts",
+            "correct": true
+          },
+          {
+            "label": "Prairies",
+            "correct": false
+          },
+          {
+            "label": "Plains",
+            "correct": false
+          },
+          {
+            "label": "Mountains",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

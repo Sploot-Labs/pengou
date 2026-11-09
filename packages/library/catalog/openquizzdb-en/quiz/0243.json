@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=243"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0243-2-en",
+      "type": "mcq",
+      "prompt": "In which European country is the Sagrada Família?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cyprus",
+            "correct": false
+          },
+          {
+            "label": "Portugal",
+            "correct": false
+          },
+          {
+            "label": "Spain",
+            "correct": true
+          },
+          {
+            "label": "Italy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0243-3-en",
+      "type": "mcq",
+      "prompt": "On which islands are the Moai, gigantic deified ancestors, found?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cook Islands",
+            "correct": false
+          },
+          {
+            "label": "Easter Island",
+            "correct": true
+          },
+          {
+            "label": "Christmas Island",
+            "correct": false
+          },
+          {
+            "label": "Galapagos Islands",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0243-4-en",
+      "type": "mcq",
+      "prompt": "Which large metal monument represents Brussels?",
+      "payload": {
+        "options": [
+          {
+            "label": "Atomium",
+            "correct": true
+          },
+          {
+            "label": "Tour & Taxis",
+            "correct": false
+          },
+          {
+            "label": "Voortrekker",
+            "correct": false
+          },
+          {
+            "label": "Luizenmolen",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

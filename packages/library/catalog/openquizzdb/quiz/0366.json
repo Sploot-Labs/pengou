@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=366"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0366-2",
+      "type": "mcq",
+      "prompt": "Dans quelle ville des États-Unis se situe le siège social d'OpenAI ?",
+      "payload": {
+        "options": [
+          {
+            "label": "San Francisco",
+            "correct": true
+          },
+          {
+            "label": "Miami",
+            "correct": false
+          },
+          {
+            "label": "Los Angeles",
+            "correct": false
+          },
+          {
+            "label": "Chicago",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0366-4",
+      "type": "mcq",
+      "prompt": "Quel outil d'OpenAI peut générer du texte de manière autonome ?",
+      "payload": {
+        "options": [
+          {
+            "label": "OpenChat",
+            "correct": false
+          },
+          {
+            "label": "AlphaGo",
+            "correct": false
+          },
+          {
+            "label": "DALL-E",
+            "correct": false
+          },
+          {
+            "label": "ChatGPT",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

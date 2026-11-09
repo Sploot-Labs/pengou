@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { io, type Socket } from 'socket.io-client'
 import { getActiveTenantId } from '../api/activeTenant'
+import { AckError } from './ackError'
 
 /**
  * Hook socket temps réel partagé par les écrans joueur/hôte/grand écran.
@@ -24,6 +25,7 @@ const ACK_TIMEOUT_MS = 8000
  * sur succès (chaque event a sa propre forme de succès — voir game-gateway.ts). */
 interface ErrorAck {
   error: string
+  code?: unknown
 }
 
 function isErrorAck(value: unknown): value is ErrorAck {
@@ -113,7 +115,7 @@ export function useGameSocket(): UseGameSocket {
           settled = true
           window.clearTimeout(timer)
           if (isErrorAck(ack)) {
-            reject(new Error(ack.error))
+            reject(new AckError(ack.error, typeof ack.code === 'string' ? ack.code : undefined))
             return
           }
           resolve(ack as T)

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=183"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0183-4-en",
+      "type": "mcq",
+      "prompt": "Which superhero never parts with his hammer?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thunderbird",
+            "correct": false
+          },
+          {
+            "label": "Storm",
+            "correct": false
+          },
+          {
+            "label": "Thor",
+            "correct": true
+          },
+          {
+            "label": "Tempest",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

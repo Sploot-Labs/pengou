@@ -1,0 +1,592 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0453-1",
+      "type": "mcq",
+      "prompt": "Dans quel musée est conservée la pierre de Rosette ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Musée du Caire",
+            "correct": false
+          },
+          {
+            "label": "British Museum",
+            "correct": true
+          },
+          {
+            "label": "MET",
+            "correct": false
+          },
+          {
+            "label": "Le Louvre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0453-2",
+      "type": "mcq",
+      "prompt": "Combien de grandes pyramides y a-t-il sur le plateau de Gizeh ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Une seule",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": true
+          },
+          {
+            "label": "Dix",
+            "correct": false
+          },
+          {
+            "label": "Aucune",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0453-3",
+      "type": "mcq",
+      "prompt": "Quelle partie du visage manque au Sphinx de Gizeh ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coin de bouche",
+            "correct": false
+          },
+          {
+            "label": "Oreille",
+            "correct": false
+          },
+          {
+            "label": "Bras",
+            "correct": false
+          },
+          {
+            "label": "Nez",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0453-4",
+      "type": "mcq",
+      "prompt": "Près de quelle grande ville actuelle se situe la Vallée des Rois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Assiout",
+            "correct": false
+          },
+          {
+            "label": "Gizeh",
+            "correct": false
+          },
+          {
+            "label": "El-Minia",
+            "correct": false
+          },
+          {
+            "label": "Louxor",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0199-1",
+      "type": "mcq",
+      "prompt": "Dans quelle ville est exposé le masque doré de Toutânkhamon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Louxor",
+            "correct": false
+          },
+          {
+            "label": "Boulaq",
+            "correct": false
+          },
+          {
+            "label": "Le Caire",
+            "correct": true
+          },
+          {
+            "label": "Alexandrie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0199-2",
+      "type": "mcq",
+      "prompt": "Combien de sarcophages protégeaient la momie de Toutânkhamon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": true
+          },
+          {
+            "label": "Deux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0199-3",
+      "type": "mcq",
+      "prompt": "De quelle matière est fait le masque mortuaire de Toutânkhamon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Or",
+            "correct": true
+          },
+          {
+            "label": "Bronze",
+            "correct": false
+          },
+          {
+            "label": "Plâtre",
+            "correct": false
+          },
+          {
+            "label": "Argent",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0199-4",
+      "type": "mcq",
+      "prompt": "Comment les Égyptiens ouvraient-ils à l'âme le monde souterrain ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crémation",
+            "correct": false
+          },
+          {
+            "label": "Pendaison",
+            "correct": false
+          },
+          {
+            "label": "Embaumement",
+            "correct": true
+          },
+          {
+            "label": "Dissection",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0550-1",
+      "type": "mcq",
+      "prompt": "Dans quel type d'édifice se déroulaient les combats de gladiateurs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Temple",
+            "correct": false
+          },
+          {
+            "label": "Gallodrome",
+            "correct": false
+          },
+          {
+            "label": "Forum",
+            "correct": false
+          },
+          {
+            "label": "Amphithéâtre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0550-2",
+      "type": "mcq",
+      "prompt": "Quel marchand était entraîneur et propriétaire de gladiateurs ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Laniste",
+            "correct": true
+          },
+          {
+            "label": "Étaleur",
+            "correct": false
+          },
+          {
+            "label": "Gargotier",
+            "correct": false
+          },
+          {
+            "label": "Centurion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0550-3",
+      "type": "mcq",
+      "prompt": "Qui est le plus populaire des gladiateurs d'origine thrace ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crixus",
+            "correct": false
+          },
+          {
+            "label": "Jugurtha",
+            "correct": false
+          },
+          {
+            "label": "Spartacus",
+            "correct": true
+          },
+          {
+            "label": "Maximus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0550-4",
+      "type": "mcq",
+      "prompt": "Comment un gladiateur signalait-il qu'il abandonnait le combat ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Il hurle",
+            "correct": false
+          },
+          {
+            "label": "Il lève le doigt",
+            "correct": true
+          },
+          {
+            "label": "Il retire son casque",
+            "correct": false
+          },
+          {
+            "label": "Il jette son épée",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0127-1",
+      "type": "mcq",
+      "prompt": "Dans quel pays fut découverte la cité préhispanique de Teotihuacan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Salvador",
+            "correct": false
+          },
+          {
+            "label": "Costa Rica",
+            "correct": false
+          },
+          {
+            "label": "Nicaragua",
+            "correct": false
+          },
+          {
+            "label": "Mexique",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0127-2",
+      "type": "mcq",
+      "prompt": "Quelle est la forme des structures du site archéologique de Teotihuacan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Carrée",
+            "correct": false
+          },
+          {
+            "label": "Ronde",
+            "correct": false
+          },
+          {
+            "label": "Pyramidale",
+            "correct": true
+          },
+          {
+            "label": "Ovale",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0127-4",
+      "type": "mcq",
+      "prompt": "Combien d'habitants vivaient dans la cité de Teotihuacan à son apogée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "200 000",
+            "correct": true
+          },
+          {
+            "label": "300 000",
+            "correct": false
+          },
+          {
+            "label": "500 000",
+            "correct": false
+          },
+          {
+            "label": "400 000",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0513-1",
+      "type": "mcq",
+      "prompt": "Le Machu Picchu a été abandonné après la chute de quel empire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Inca",
+            "correct": true
+          },
+          {
+            "label": "Corsaire",
+            "correct": false
+          },
+          {
+            "label": "Iroquois",
+            "correct": false
+          },
+          {
+            "label": "Aztèque",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0513-2",
+      "type": "mcq",
+      "prompt": "Aux limites de quelle forêt se dresse le Machu Picchu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Atlantique",
+            "correct": false
+          },
+          {
+            "label": "De Gola",
+            "correct": false
+          },
+          {
+            "label": "Boréale",
+            "correct": false
+          },
+          {
+            "label": "Amazonienne",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0513-3",
+      "type": "mcq",
+      "prompt": "Quelles constructions composent la zone agricole du Machu Picchu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Paillis",
+            "correct": false
+          },
+          {
+            "label": "Versoirs",
+            "correct": false
+          },
+          {
+            "label": "Terrasses",
+            "correct": true
+          },
+          {
+            "label": "Brûlis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0513-4",
+      "type": "mcq",
+      "prompt": "À quel animal peut-on associer la forme du site du Machu Picchu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ours",
+            "correct": false
+          },
+          {
+            "label": "Puma",
+            "correct": true
+          },
+          {
+            "label": "Serpent",
+            "correct": false
+          },
+          {
+            "label": "Dauphin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-civilisations-anciennes",
+      "title": "Civilisations anciennes",
+      "description": "D'après les quiz OpenQuizzDB « Égypte ancienne », « Toutânkhamon », « Gladiateurs », « Teotihuacan » et « Machu Picchu ».",
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0453-1",
+        "oqdb-0453-2",
+        "oqdb-0453-3",
+        "oqdb-0453-4",
+        "oqdb-0199-1",
+        "oqdb-0199-2",
+        "oqdb-0199-3",
+        "oqdb-0199-4",
+        "oqdb-0550-1",
+        "oqdb-0550-2",
+        "oqdb-0550-3",
+        "oqdb-0550-4",
+        "oqdb-0127-1",
+        "oqdb-0127-2",
+        "oqdb-0127-4",
+        "oqdb-0513-1",
+        "oqdb-0513-2",
+        "oqdb-0513-3",
+        "oqdb-0513-4"
+      ]
+    }
+  ]
+}

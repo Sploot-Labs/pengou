@@ -1,0 +1,592 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0291-4",
+      "type": "mcq",
+      "prompt": "Dans quel film Dragon est un vaisseau militaire du colonel Quaritch ?",
+      "payload": {
+        "options": [
+          {
+            "label": "X-Men",
+            "correct": false
+          },
+          {
+            "label": "Avatar",
+            "correct": true
+          },
+          {
+            "label": "Cloverfield",
+            "correct": false
+          },
+          {
+            "label": "Avengers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0388-1",
+      "type": "mcq",
+      "prompt": "Qui a été élue Miss Albigeois Midi-Pyrénées 2008 puis Miss France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Valérie Bègue",
+            "correct": false
+          },
+          {
+            "label": "Diane Leyre",
+            "correct": false
+          },
+          {
+            "label": "Chloé Mortaud",
+            "correct": true
+          },
+          {
+            "label": "Malika Ménard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0527-1",
+      "type": "mcq",
+      "prompt": "Qui fut la première joueuse de tennis Russe à remporter Wimbledon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sharapova",
+            "correct": true
+          },
+          {
+            "label": "Bovina",
+            "correct": false
+          },
+          {
+            "label": "Kirilenko",
+            "correct": false
+          },
+          {
+            "label": "Panova",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0203-4",
+      "type": "mcq",
+      "prompt": "Quel est le titre du premier album où Shakira a écrit en anglais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "You And Me",
+            "correct": false
+          },
+          {
+            "label": "Oral Fixation",
+            "correct": false
+          },
+          {
+            "label": "Laundry Service",
+            "correct": true
+          },
+          {
+            "label": "She Wolf",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0551-1",
+      "type": "mcq",
+      "prompt": "En quelle année fut diffusée pour la première fois « Secret Story » sur TF1 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "En 2010",
+            "correct": false
+          },
+          {
+            "label": "En 2008",
+            "correct": false
+          },
+          {
+            "label": "En 2009",
+            "correct": false
+          },
+          {
+            "label": "En 2007",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0444-2",
+      "type": "mcq",
+      "prompt": "Quel ex-Beatle a joué sur la place Rouge le 24 mai 2003 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "George Harrison",
+            "correct": false
+          },
+          {
+            "label": "Paul McCartney",
+            "correct": true
+          },
+          {
+            "label": "Ringo Starr",
+            "correct": false
+          },
+          {
+            "label": "John Lennon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0215-3",
+      "type": "mcq",
+      "prompt": "Quel chapeau porte Johnny Depp dans « Charlie et la chocolaterie » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Haut-de-forme",
+            "correct": true
+          },
+          {
+            "label": "Béret",
+            "correct": false
+          },
+          {
+            "label": "Chapeau melon",
+            "correct": false
+          },
+          {
+            "label": "Canotier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0239-3",
+      "type": "mcq",
+      "prompt": "Quel prénom masculin est l'un des titres du rappeur Eminem ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bran",
+            "correct": false
+          },
+          {
+            "label": "Sam",
+            "correct": false
+          },
+          {
+            "label": "Stan",
+            "correct": true
+          },
+          {
+            "label": "Dan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0584-3",
+      "type": "mcq",
+      "prompt": "Quel film de Roman Polanski a été couronné de sept César ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Pianiste",
+            "correct": true
+          },
+          {
+            "label": "Frantic",
+            "correct": false
+          },
+          {
+            "label": "Tess",
+            "correct": false
+          },
+          {
+            "label": "Oliver Twist",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0497-1",
+      "type": "mcq",
+      "prompt": "Quels objets sont à la base du jeu télévisé « À prendre ou à laisser » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cadeaux",
+            "correct": false
+          },
+          {
+            "label": "Jetons",
+            "correct": false
+          },
+          {
+            "label": "Boules",
+            "correct": false
+          },
+          {
+            "label": "Boîtes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0512-2",
+      "type": "mcq",
+      "prompt": "Quel modèle de SUV fut commercialisé en 2007 par la marque Nissan ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quantum",
+            "correct": false
+          },
+          {
+            "label": "Quoris",
+            "correct": false
+          },
+          {
+            "label": "Qashqai",
+            "correct": true
+          },
+          {
+            "label": "Quattro",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0193-4",
+      "type": "mcq",
+      "prompt": "Qui est le créateur de la série télévisée américaine à succès « Alias » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "J.J. Williams",
+            "correct": false
+          },
+          {
+            "label": "J.J. Abrams",
+            "correct": true
+          },
+          {
+            "label": "J.J. Lionel",
+            "correct": false
+          },
+          {
+            "label": "J.J. Morgan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0583-1",
+      "type": "mcq",
+      "prompt": "Quel sportif a dominé le golf masculin dans les années 2000 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Payne Stewart",
+            "correct": false
+          },
+          {
+            "label": "Curtis Strange",
+            "correct": false
+          },
+          {
+            "label": "Tiger Woods",
+            "correct": true
+          },
+          {
+            "label": "Raymond Floyd",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0241-2",
+      "type": "mcq",
+      "prompt": "Qui a remporté la toute première édition de la « Star Academy » sur TF1 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jenifer",
+            "correct": true
+          },
+          {
+            "label": "Mario",
+            "correct": false
+          },
+          {
+            "label": "Nolwenn",
+            "correct": false
+          },
+          {
+            "label": "Emma",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0431-3",
+      "type": "mcq",
+      "prompt": "Quelle série télévisée française a pour quartier fictif principal « Le Mistral » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Plus belle la vie",
+            "correct": true
+          },
+          {
+            "label": "Braquo",
+            "correct": false
+          },
+          {
+            "label": "Julie Lescaut",
+            "correct": false
+          },
+          {
+            "label": "Nerdz",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0324-2",
+      "type": "mcq",
+      "prompt": "Quelle actrice a joué Catwoman et Tornade dans « X-Men » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Amber Heard",
+            "correct": false
+          },
+          {
+            "label": "Halle Berry",
+            "correct": true
+          },
+          {
+            "label": "Eva Mendes",
+            "correct": false
+          },
+          {
+            "label": "Kristen Stewart",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0095-4",
+      "type": "mcq",
+      "prompt": "Quel film a réuni Leonardo Di Caprio, Matt Damon et Jack Nicholson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aviator",
+            "correct": false
+          },
+          {
+            "label": "Celebrity",
+            "correct": false
+          },
+          {
+            "label": "Blood Diamond",
+            "correct": false
+          },
+          {
+            "label": "Les Infiltrés",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0075-2",
+      "type": "mcq",
+      "prompt": "Quelle ancienne Miss France a participé à « La Ferme célébrités » sur TF1 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Valérie Bègue",
+            "correct": false
+          },
+          {
+            "label": "Élodie Gossuin",
+            "correct": true
+          },
+          {
+            "label": "Chloé Mortaud",
+            "correct": false
+          },
+          {
+            "label": "Malika Ménard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0586-2",
+      "type": "mcq",
+      "prompt": "Qui est incarné par Orlando Bloom dans « Le Seigneur des Anneaux » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Faramir",
+            "correct": false
+          },
+          {
+            "label": "Boromir",
+            "correct": false
+          },
+          {
+            "label": "Legolas",
+            "correct": true
+          },
+          {
+            "label": "Aragorn",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-annees-2000-2",
+      "title": "Les années 2000 #2",
+      "description": "Télévision, musique, cinéma et sport des années 2000.",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0291-4",
+        "oqdb-0388-1",
+        "oqdb-0527-1",
+        "oqdb-0203-4",
+        "oqdb-0551-1",
+        "oqdb-0444-2",
+        "oqdb-0215-3",
+        "oqdb-0239-3",
+        "oqdb-0584-3",
+        "oqdb-0497-1",
+        "oqdb-0512-2",
+        "oqdb-0193-4",
+        "oqdb-0583-1",
+        "oqdb-0241-2",
+        "oqdb-0431-3",
+        "oqdb-0324-2",
+        "oqdb-0095-4",
+        "oqdb-0075-2",
+        "oqdb-0586-2"
+      ]
+    }
+  ]
+}

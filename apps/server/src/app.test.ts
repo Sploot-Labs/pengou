@@ -58,6 +58,16 @@ describe('durcissement sécurité (helmet + rate-limit)', () => {
     await app.close()
   })
 
+  it("la CSP n'autorise aucun domaine de Google Fonts (polices auto-hébergées)", async () => {
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
+    const res = await app.inject({ method: 'GET', url: '/health' })
+    const csp = String(res.headers['content-security-policy'])
+    expect(csp).not.toMatch(/fonts\.googleapis\.com|fonts\.gstatic\.com/)
+    expect(csp).toContain("font-src 'self'")
+    expect(csp).toMatch(/style-src 'self' 'unsafe-inline'(;|$)/)
+    await app.close()
+  })
+
   it('rate-limit renvoie 429 une fois le plafond dépassé', async () => {
     // Plafond bas via RATE_LIMIT_MAX pour prouver le 429 sans marteler.
     const app = await buildServer(loadConfig({ NODE_ENV: 'test', RATE_LIMIT_MAX: '3' }))
@@ -68,6 +78,109 @@ describe('durcissement sécurité (helmet + rate-limit)', () => {
     }
     expect(codes.filter((c) => c === 200).length).toBe(3)
     expect(codes.filter((c) => c === 429).length).toBe(2)
+    await app.close()
+  })
+})
+
+describe("garde d'origine des requêtes mutantes", () => {
+  const config = () => loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'http://localhost:3000' })
+  // Route factice : l'éditeur (base de données) n'est pas monté par buildServer seul.
+  async function serveur() {
+    const app = await buildServer(config())
+    app.post('/api/invitations/:token/accept', async (_req, reply) =>
+      reply.code(401).send({ error: 'Non authentifié.' }),
+    )
+    return app
+  }
+
+  it('POST /api/invitations/x/accept avec Origin étrangère renvoie 403', async () => {
+    const app = await serveur()
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { origin: 'https://evil.example' },
+    })
+    expect(res.statusCode).toBe(403)
+    expect(res.json()).toEqual({ error: 'Origine non autorisée.' })
+    await app.close()
+  })
+
+  it('POST sans corps avec Sec-Fetch-Site: same-site renvoie 403', async () => {
+    const app = await serveur()
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { 'sec-fetch-site': 'same-site' },
+    })
+    expect(res.statusCode).toBe(403)
+    await app.close()
+  })
+
+  it('POST même origine passe la garde (401 sans cookie)', async () => {
+    const app = await serveur()
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { origin: 'http://localhost:3000', 'sec-fetch-site': 'same-origin' },
+    })
+    expect(res.statusCode).toBe(401)
+    await app.close()
+  })
+
+  it('BETTER_AUTH_URL avec barre finale : son origine reste acceptée', async () => {
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'http://localhost:3000/' }))
+    app.post('/api/invitations/:token/accept', async (_req, reply) =>
+      reply.code(401).send({ error: 'Non authentifié.' }),
+    )
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { origin: 'http://localhost:3000', host: 'pengou.example' },
+    })
+    expect(res.statusCode).toBe(401)
+    await app.close()
+  })
+
+  it("une Origin dont l'hôte est celui de l'en-tête Host passe la garde (démarrage rapide en LAN)", async () => {
+    const app = await serveur()
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { origin: 'http://192.168.1.20:3000', host: '192.168.1.20:3000' },
+    })
+    expect(res.statusCode).toBe(401)
+    await app.close()
+  })
+
+  it("un sous-domaine frère reste refusé, même avec le Host de l'app", async () => {
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test', BETTER_AUTH_URL: 'https://app.example.com' }))
+    app.post('/api/invitations/:token/accept', async (_req, reply) =>
+      reply.code(401).send({ error: 'Non authentifié.' }),
+    )
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { origin: 'https://evil.example.com', host: 'app.example.com' },
+    })
+    expect(res.statusCode).toBe(403)
+    await app.close()
+  })
+
+  it.each(['none', 'same-origin'])('POST sans Origin avec Sec-Fetch-Site: %s passe la garde', async (site) => {
+    const app = await serveur()
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/invitations/x/accept',
+      headers: { 'sec-fetch-site': site },
+    })
+    expect(res.statusCode).toBe(401)
+    await app.close()
+  })
+
+  it("un GET avec Origin étrangère n'est pas bloqué par la garde", async () => {
+    const app = await serveur()
+    const res = await app.inject({ method: 'GET', url: '/health', headers: { origin: 'https://evil.example' } })
+    expect(res.statusCode).toBe(200)
     await app.close()
   })
 })

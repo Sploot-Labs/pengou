@@ -10,6 +10,11 @@ import fastifyStatic from '@fastify/static'
 export function registerUploads(app: FastifyInstance, mediaDir: string): void {
   mkdirSync(mediaDir, { recursive: true })
   app.register(async (scope) => {
+    // Même exemption de la limite de débit que les fichiers du SPA (voir app.ts) : une salle derrière
+    // une même IP publique charge chaque image autant de fois qu'il y a de joueurs.
+    scope.addHook('onRoute', (routeOptions) => {
+      routeOptions.config = { ...routeOptions.config, spaAsset: true }
+    })
     // Un dossier ou un dotfile donne 403 côté @fastify/static : on répond 404 partout, pour ne
     // pas révéler ce qui existe sur le disque.
     scope.setErrorHandler((err, _req, reply) => {

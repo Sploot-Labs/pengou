@@ -56,6 +56,14 @@ describe('repo question scopé par jointure sur quiz', () => {
     })
     expect(q?.quizId).toBe(quizA)
   })
+  it('createQuestion persiste une question de type poll avec son payload', async () => {
+    const scope = tenantScope(ctx.db, tenantA)
+    const payload = { options: [{ label: 'Oui' }, { label: 'Non' }], multiple: true }
+    const created = await createQuestion(scope, quizA, { type: 'poll', prompt: 'Sondage', timeLimit: 20, payload })
+    const fetched = await getQuestion(scope, quizA, created!.id)
+    expect(fetched?.type).toBe('poll')
+    expect(fetched?.payload).toEqual(payload)
+  })
   it('createQuestion renvoie null si le quiz appartient à un autre tenant (pas de fuite)', async () => {
     const leaked = await createQuestion(tenantScope(ctx.db, tenantB), quizA, {
       type: 'mcq',

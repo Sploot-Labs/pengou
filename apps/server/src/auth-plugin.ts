@@ -1,6 +1,8 @@
 import type { FastifyInstance } from 'fastify'
 import { toNodeHandler, fromNodeHeaders } from 'better-auth/node'
 import type { Auth } from '@splootlabs/auth'
+import type { LegalConfig } from '@splootlabs/shared'
+import { termsAcceptanceRequired } from './legal.js'
 
 // NOTE(déviation) : le brief prévoyait `fastify-better-auth` (`FastifyBetterAuth` +
 // `getAuthDecorator`). Ce paquet (v1.2.0) déclare `peerDependencies: { fastify: '5.x' }`
@@ -11,7 +13,12 @@ import type { Auth } from '@splootlabs/auth'
 // Fallback documenté dans le brief : on monte le handler Better Auth directement sur
 // une route Fastify, en réutilisant `toNodeHandler`/`fromNodeHeaders` de `better-auth/node`
 // (ce sont exactement les mêmes primitives que `fastify-better-auth` utilise en interne).
-export async function registerAuth(app: FastifyInstance, auth: Auth): Promise<void> {
+export async function registerAuth(
+  app: FastifyInstance,
+  auth: Auth,
+  options: { legal?: LegalConfig | null; mailEnabled?: boolean } = {},
+): Promise<void> {
+  const legal = options.legal ?? null
   const authHandler = toNodeHandler(auth)
 
   // Encapsulé dans un sous-contexte Fastify pour que la désactivation du parsing JSON
@@ -23,14 +30,30 @@ export async function registerAuth(app: FastifyInstance, auth: Auth): Promise<vo
     })
 
     instance.all('/api/auth/*', async (request, reply) => {
+      // Constat d'audit `packages/auth/src/auth.ts:betterAuth-rateLimit-untrusted-client-ip` :
+      // le limiteur de Better Auth indexe ses compteurs sur X-Forwarded-For, que le client
+      // choisit librement (changer l'en-tête remet le compteur à zéro ; l'omettre range tout le
+      // monde dans un compteur commun). On le remplace par `request.ip`, que Fastify ne déduit
+      // de l'en-tête que derrière un proxy de TRUSTED_PROXIES. Better Auth accepte une IP
+      // unique, y compris IPv6 ou IPv4 mappée (`::ffff:a.b.c.d`, ramenée à `a.b.c.d`).
+      request.raw.headers['x-forwarded-for'] = request.ip
       await authHandler(request.raw, reply.raw)
     })
   })
 
-  // Route d'exemple protégée : renvoie l'utilisateur courant, ou 401.
+  // Publique : ce que le web peut proposer (mot de passe oublié, bandeau de confirmation).
+  // Aucun détail sur le transport.
+  const mailEnabled = options.mailEnabled ?? false
+  app.get('/api/auth-features', async () => ({ mailEnabled }))
+
+  // Sonde de session : renvoie l'utilisateur courant, ou 401. Reste ouverte pendant la
+  // revalidation des CGU et indique au client s'il doit afficher l'écran d'acceptation.
   app.get('/api/me', async (request, reply) => {
     const session = await auth.api.getSession({ headers: fromNodeHeaders(request.headers) })
     if (!session?.user) return reply.code(401).send({ error: 'Non authentifié.' })
-    return { user: session.user }
+    return {
+      user: session.user,
+      termsAcceptanceRequired: termsAcceptanceRequired(session.user, legal?.termsVersion),
+    }
   })
 }

@@ -1,0 +1,532 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0251-1-en",
+      "type": "mcq",
+      "prompt": "What is the capital of Bulgaria?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bucharest",
+            "correct": false
+          },
+          {
+            "label": "Belgrade",
+            "correct": false
+          },
+          {
+            "label": "Budapest",
+            "correct": false
+          },
+          {
+            "label": "Sofia",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0269-1-en",
+      "type": "mcq",
+      "prompt": "What is the capital of Cyprus?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ankara",
+            "correct": false
+          },
+          {
+            "label": "Athens",
+            "correct": false
+          },
+          {
+            "label": "Nicosia",
+            "correct": true
+          },
+          {
+            "label": "Valletta",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0275-1-en",
+      "type": "mcq",
+      "prompt": "Which city is the capital of the Republic of Ireland?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cork",
+            "correct": false
+          },
+          {
+            "label": "Galway",
+            "correct": false
+          },
+          {
+            "label": "Belfast",
+            "correct": false
+          },
+          {
+            "label": "Dublin",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0341-1-en",
+      "type": "mcq",
+      "prompt": "What is the capital of Romania?",
+      "payload": {
+        "options": [
+          {
+            "label": "Belgrade",
+            "correct": false
+          },
+          {
+            "label": "Budapest",
+            "correct": false
+          },
+          {
+            "label": "Sofia",
+            "correct": false
+          },
+          {
+            "label": "Bucharest",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0347-1-en",
+      "type": "mcq",
+      "prompt": "What is the capital of Luxembourg?",
+      "payload": {
+        "options": [
+          {
+            "label": "Metz",
+            "correct": false
+          },
+          {
+            "label": "Brussels",
+            "correct": false
+          },
+          {
+            "label": "Luxembourg",
+            "correct": true
+          },
+          {
+            "label": "Strasbourg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0421-2-en",
+      "type": "mcq",
+      "prompt": "Which city is the capital and largest city of Japan?",
+      "payload": {
+        "options": [
+          {
+            "label": "Seoul",
+            "correct": false
+          },
+          {
+            "label": "Tokyo",
+            "correct": true
+          },
+          {
+            "label": "Beijing",
+            "correct": false
+          },
+          {
+            "label": "Bangkok",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0268-4-en",
+      "type": "mcq",
+      "prompt": "What is the capital of New Zealand?",
+      "payload": {
+        "options": [
+          {
+            "label": "Winnipeg",
+            "correct": false
+          },
+          {
+            "label": "Worcester",
+            "correct": false
+          },
+          {
+            "label": "Wellington",
+            "correct": true
+          },
+          {
+            "label": "Washington",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0304-1-en",
+      "type": "mcq",
+      "prompt": "Which capital of Croatia has around 700,000 inhabitants?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zaria",
+            "correct": false
+          },
+          {
+            "label": "Zaporizhzhia",
+            "correct": false
+          },
+          {
+            "label": "Zagreb",
+            "correct": true
+          },
+          {
+            "label": "Zaragoza",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0256-3-en",
+      "type": "mcq",
+      "prompt": "Which city has been the capital of Poland since 1596?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vilnius",
+            "correct": false
+          },
+          {
+            "label": "Vaduz",
+            "correct": false
+          },
+          {
+            "label": "Vienna",
+            "correct": false
+          },
+          {
+            "label": "Warsaw",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0172-3-en",
+      "type": "mcq",
+      "prompt": "Which capital of Norway was called Christiania from 1624 to 1924?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ulaanbaatar",
+            "correct": false
+          },
+          {
+            "label": "Oxford",
+            "correct": false
+          },
+          {
+            "label": "Oslo",
+            "correct": true
+          },
+          {
+            "label": "Ottawa",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0554-2-en",
+      "type": "mcq",
+      "prompt": "In which country is Ankara, a city of very ancient origins?",
+      "payload": {
+        "options": [
+          {
+            "label": "Turkey",
+            "correct": true
+          },
+          {
+            "label": "India",
+            "correct": false
+          },
+          {
+            "label": "Burma",
+            "correct": false
+          },
+          {
+            "label": "Pakistan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0435-1-en",
+      "type": "mcq",
+      "prompt": "In which country is the Suez Canal located?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tunisia",
+            "correct": false
+          },
+          {
+            "label": "Algeria",
+            "correct": false
+          },
+          {
+            "label": "Egypt",
+            "correct": true
+          },
+          {
+            "label": "Libya",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0424-1-en",
+      "type": "mcq",
+      "prompt": "What was the former name of Sri Lanka?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ceylon",
+            "correct": true
+          },
+          {
+            "label": "Formosa",
+            "correct": false
+          },
+          {
+            "label": "Batavia",
+            "correct": false
+          },
+          {
+            "label": "Cipango",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0424-2-en",
+      "type": "mcq",
+      "prompt": "Which country do Tasmania and its thousand small islands belong to?",
+      "payload": {
+        "options": [
+          {
+            "label": "United Kingdom",
+            "correct": false
+          },
+          {
+            "label": "New Zealand",
+            "correct": false
+          },
+          {
+            "label": "Australia",
+            "correct": true
+          },
+          {
+            "label": "France",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0424-3-en",
+      "type": "mcq",
+      "prompt": "Which country does France share the island of Saint-Martin with?",
+      "payload": {
+        "options": [
+          {
+            "label": "Denmark",
+            "correct": false
+          },
+          {
+            "label": "United States",
+            "correct": false
+          },
+          {
+            "label": "Netherlands",
+            "correct": true
+          },
+          {
+            "label": "United Kingdom",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0341-3-en",
+      "type": "mcq",
+      "prompt": "Which famous character is associated with Romania?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dracula",
+            "correct": true
+          },
+          {
+            "label": "Tarzan",
+            "correct": false
+          },
+          {
+            "label": "Sherlock Holmes",
+            "correct": false
+          },
+          {
+            "label": "Harry Potter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0245-4-en",
+      "type": "mcq",
+      "prompt": "Which country does Finland share its longest border with?",
+      "payload": {
+        "options": [
+          {
+            "label": "Estonia",
+            "correct": false
+          },
+          {
+            "label": "Sweden",
+            "correct": false
+          },
+          {
+            "label": "Norway",
+            "correct": false
+          },
+          {
+            "label": "Russia",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0263-3-en",
+      "type": "mcq",
+      "prompt": "Which region is Denmark part of?",
+      "payload": {
+        "options": [
+          {
+            "label": "Balkans",
+            "correct": false
+          },
+          {
+            "label": "Maghreb",
+            "correct": false
+          },
+          {
+            "label": "Andes",
+            "correct": false
+          },
+          {
+            "label": "Scandinavia",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

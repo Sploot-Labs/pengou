@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=112"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0112-1",
+      "type": "mcq",
+      "prompt": "Comment qualifie-t-on des légumes coupés en fines lanières ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Julienne",
+            "correct": true
+          },
+          {
+            "label": "Jeton",
+            "correct": false
+          },
+          {
+            "label": "Jambon",
+            "correct": false
+          },
+          {
+            "label": "Juliette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0112-3",
+      "type": "mcq",
+      "prompt": "Le vendredi 13 est le jour préféré de quel célèbre tueur en série ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Judas",
+            "correct": false
+          },
+          {
+            "label": "Jack",
+            "correct": false
+          },
+          {
+            "label": "Jason",
+            "correct": true
+          },
+          {
+            "label": "Jacob",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

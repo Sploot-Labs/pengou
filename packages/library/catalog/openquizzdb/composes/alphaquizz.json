@@ -1,0 +1,532 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0028-1",
+      "type": "mcq",
+      "prompt": "La peau de quel reptile africain prend la couleur du milieu où il évolue ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crocodile",
+            "correct": false
+          },
+          {
+            "label": "Caméléon",
+            "correct": true
+          },
+          {
+            "label": "Crotale",
+            "correct": false
+          },
+          {
+            "label": "Cobra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0028-3",
+      "type": "mcq",
+      "prompt": "Fondée le 6 août 1538, de quel pays Bogota est-elle la capitale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Colombie",
+            "correct": true
+          },
+          {
+            "label": "Cuba",
+            "correct": false
+          },
+          {
+            "label": "Costa Rica",
+            "correct": false
+          },
+          {
+            "label": "Chili",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0028-4",
+      "type": "mcq",
+      "prompt": "Quel oiseau de couleur blanche est un des symboles de la paix ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cigogne",
+            "correct": false
+          },
+          {
+            "label": "Colombe",
+            "correct": true
+          },
+          {
+            "label": "Colibri",
+            "correct": false
+          },
+          {
+            "label": "Canard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0040-1",
+      "type": "mcq",
+      "prompt": "Quelle ville française est la capitale de la moutarde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Douai",
+            "correct": false
+          },
+          {
+            "label": "Dijon",
+            "correct": true
+          },
+          {
+            "label": "Dunkerque",
+            "correct": false
+          },
+          {
+            "label": "Drancy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0040-3",
+      "type": "mcq",
+      "prompt": "Quelles sont les deux lettres qui symbolisent le mot décimètre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "de",
+            "correct": false
+          },
+          {
+            "label": "dm",
+            "correct": true
+          },
+          {
+            "label": "dt",
+            "correct": false
+          },
+          {
+            "label": "dc",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0040-4",
+      "type": "mcq",
+      "prompt": "Quelle première console 128 bits fut commercialisée par Sega ?",
+      "payload": {
+        "options": [
+          {
+            "label": "DSi",
+            "correct": false
+          },
+          {
+            "label": "Dreamcast",
+            "correct": true
+          },
+          {
+            "label": "DS",
+            "correct": false
+          },
+          {
+            "label": "DS Lite",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0052-1",
+      "type": "mcq",
+      "prompt": "Quelle est la nationalité du légendaire monstre du Loch Ness ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Érythréenne",
+            "correct": false
+          },
+          {
+            "label": "Espagnole",
+            "correct": false
+          },
+          {
+            "label": "Éthiopienne",
+            "correct": false
+          },
+          {
+            "label": "Écossaise",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0052-3",
+      "type": "mcq",
+      "prompt": "Quel nom porte la bohémienne de « Notre-Dame de Paris » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Evangelista",
+            "correct": false
+          },
+          {
+            "label": "Eleonora",
+            "correct": false
+          },
+          {
+            "label": "Esmeralda",
+            "correct": true
+          },
+          {
+            "label": "Erika",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0052-4",
+      "type": "mcq",
+      "prompt": "Qui cherchait des poux à Serge Gainsbourg dans une de ses chansons ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Émilie",
+            "correct": false
+          },
+          {
+            "label": "Élodie",
+            "correct": false
+          },
+          {
+            "label": "Emma",
+            "correct": false
+          },
+          {
+            "label": "Élisa",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0064-1",
+      "type": "mcq",
+      "prompt": "Quel est le symbole chimique du fluor, de numéro atomique 9 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "FR",
+            "correct": false
+          },
+          {
+            "label": "FL",
+            "correct": false
+          },
+          {
+            "label": "FN",
+            "correct": false
+          },
+          {
+            "label": "F",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0064-2",
+      "type": "mcq",
+      "prompt": "Quel parfum complète la vanille et le chocolat dans un banana split ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fruit de la passion",
+            "correct": false
+          },
+          {
+            "label": "Figue",
+            "correct": false
+          },
+          {
+            "label": "Framboise",
+            "correct": false
+          },
+          {
+            "label": "Fraise",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0064-3",
+      "type": "mcq",
+      "prompt": "Avec quelle écurie courait Michael Schumacher en 2003 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fisker",
+            "correct": false
+          },
+          {
+            "label": "Ferrari",
+            "correct": true
+          },
+          {
+            "label": "Ford",
+            "correct": false
+          },
+          {
+            "label": "Fiat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0064-4",
+      "type": "mcq",
+      "prompt": "Quel chat noir et blanc turbulent a fait son apparition dans « Pinocchio » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Firmin",
+            "correct": false
+          },
+          {
+            "label": "Fidélio",
+            "correct": false
+          },
+          {
+            "label": "Félix",
+            "correct": false
+          },
+          {
+            "label": "Figaro",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0076-1",
+      "type": "mcq",
+      "prompt": "Quel moteur de recherche demeure le plus populaire sur internet ?",
+      "payload": {
+        "options": [
+          {
+            "label": "GitHub",
+            "correct": false
+          },
+          {
+            "label": "Google",
+            "correct": true
+          },
+          {
+            "label": "Gibiru",
+            "correct": false
+          },
+          {
+            "label": "Giphy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0076-2",
+      "type": "mcq",
+      "prompt": "Chez les Schtroumpfs, à qui appartient le chat Azraël ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gargantua",
+            "correct": false
+          },
+          {
+            "label": "Geronimo",
+            "correct": false
+          },
+          {
+            "label": "Gargamel",
+            "correct": true
+          },
+          {
+            "label": "Gédéon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0076-3",
+      "type": "mcq",
+      "prompt": "Quel petit animal porte parfois le nom vernaculaire de rainette ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grenouille",
+            "correct": true
+          },
+          {
+            "label": "Grillon",
+            "correct": false
+          },
+          {
+            "label": "Gerbille",
+            "correct": false
+          },
+          {
+            "label": "Gecko",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0076-4",
+      "type": "mcq",
+      "prompt": "Qui est devenu le premier artiste produit par des internautes en France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gabriel",
+            "correct": false
+          },
+          {
+            "label": "Grégoire",
+            "correct": true
+          },
+          {
+            "label": "Gaspard",
+            "correct": false
+          },
+          {
+            "label": "Gautier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-alphaquizz",
+      "title": "Culture générale de C à G",
+      "description": "D'après les quiz OpenQuizzDB « Alphaquizz #C », « Alphaquizz #D », « Alphaquizz #E », « Alphaquizz #F » et « Alphaquizz #G ».",
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0028-1",
+        "oqdb-0028-3",
+        "oqdb-0028-4",
+        "oqdb-0040-1",
+        "oqdb-0040-3",
+        "oqdb-0040-4",
+        "oqdb-0052-1",
+        "oqdb-0052-3",
+        "oqdb-0052-4",
+        "oqdb-0064-1",
+        "oqdb-0064-2",
+        "oqdb-0064-3",
+        "oqdb-0064-4",
+        "oqdb-0076-1",
+        "oqdb-0076-2",
+        "oqdb-0076-3",
+        "oqdb-0076-4"
+      ]
+    }
+  ]
+}

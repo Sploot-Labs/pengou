@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=438"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0438-1-en",
+      "type": "mcq",
+      "prompt": "What is the shape of Italy seen from the sky often compared to?",
+      "payload": {
+        "options": [
+          {
+            "label": "Boot",
+            "correct": true
+          },
+          {
+            "label": "Cart",
+            "correct": false
+          },
+          {
+            "label": "Flower",
+            "correct": false
+          },
+          {
+            "label": "Hexagon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0438-2-en",
+      "type": "mcq",
+      "prompt": "What is the maximum speed allowed on motorways in Italy?",
+      "payload": {
+        "options": [
+          {
+            "label": "130 km/h",
+            "correct": true
+          },
+          {
+            "label": "110 km/h",
+            "correct": false
+          },
+          {
+            "label": "100 km/h",
+            "correct": false
+          },
+          {
+            "label": "120 km/h",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

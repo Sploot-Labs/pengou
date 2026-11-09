@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=478"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0478-1",
+      "type": "mcq",
+      "prompt": "De combien d'essais dispose-t-on pour chaque mouvement ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": true
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0478-3",
+      "type": "mcq",
+      "prompt": "Combien pèse la barre utilisée par les femmes en haltérophilie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "45 kg",
+            "correct": false
+          },
+          {
+            "label": "25 kg",
+            "correct": false
+          },
+          {
+            "label": "35 kg",
+            "correct": false
+          },
+          {
+            "label": "15 kg",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0478-4",
+      "type": "mcq",
+      "prompt": "En haltérophilie, quel est le poids d'un grand disque rouge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "45 kg",
+            "correct": false
+          },
+          {
+            "label": "25 kg",
+            "correct": true
+          },
+          {
+            "label": "35 kg",
+            "correct": false
+          },
+          {
+            "label": "15 kg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

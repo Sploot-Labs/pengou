@@ -5,6 +5,11 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    ignore:
+      # Les types Node suivent la version majeure du runtime (Node 24 LTS, cf. .nvmrc et
+      # l'override pnpm). On les monte à la main en même temps que Node.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
     groups:
       minor-and-patch:
         update-types:
@@ -22,3 +27,9 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 3
+    ignore:
+      # Changer de version majeure de Node se décide à la main (Dockerfile, CI, .nvmrc,
+      # engines) et uniquement vers une LTS : Dependabot propose aussi les versions
+      # impaires (25, 27…), qui ne sont jamais LTS.
+      - dependency-name: node
+        update-types: ['version-update:semver-major']

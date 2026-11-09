@@ -238,6 +238,39 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
     await app.close()
   })
 
+  it('un quiz archivé garde ses questions, sa liste de parties et ses rapports lisibles', async () => {
+    const app = await buildApp()
+    const cookie = await signUp(app, 'hote-archive@example.com')
+    const me = await app.inject({ method: 'GET', url: '/api/me', headers: { cookie } })
+    const userId = (me.json() as { user: { id: string } }).user.id
+    const created = await app.inject({
+      method: 'POST',
+      url: '/api/quizzes',
+      payload: { title: 'x' },
+      headers: { 'content-type': 'application/json', cookie },
+    })
+    const tenantId = (created.json() as { tenantId: string }).tenantId
+
+    const { sessionId, quizId } = await seedFinishedSession(userId, tenantId, '919191')
+    const archived = await app.inject({ method: 'POST', url: `/api/quizzes/${quizId}/archive`, headers: { cookie } })
+    expect(archived.statusCode).toBe(200)
+
+    const questions = await app.inject({ method: 'GET', url: `/api/quizzes/${quizId}/questions`, headers: { cookie } })
+    expect(questions.statusCode).toBe(200)
+    expect((questions.json() as unknown[]).length).toBe(1)
+
+    const list = await app.inject({ method: 'GET', url: '/api/sessions', headers: { cookie } })
+    expect((list.json() as Array<{ id: string }>).some((r) => r.id === sessionId)).toBe(true)
+
+    const report = await app.inject({ method: 'GET', url: `/api/sessions/${sessionId}`, headers: { cookie } })
+    expect(report.statusCode).toBe(200)
+    const body = report.json() as { players: unknown[]; questions: Array<{ answerCount: number }> }
+    expect(body.players).toHaveLength(2)
+    expect(body.questions[0].answerCount).toBe(2)
+
+    await app.close()
+  })
+
   it('GET /api/sessions/:id inexistant → 404', async () => {
     const app = await buildApp()
     const cookie = await signUp(app, 'hote3@example.com')

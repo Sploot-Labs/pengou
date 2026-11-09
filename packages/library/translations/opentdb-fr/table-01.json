@@ -1,0 +1,938 @@
+{
+  "questions": {
+    "otdb-000fa1bbbf23": {
+      "prompt": "Pablo Picasso est l'un des pères fondateurs du « cubisme »."
+    },
+    "otdb-053cd2db94e2": {
+      "prompt": "Le nom « impressionnisme » a été donné à ce mouvement artistique par la critique ironique d'un tableau de Monet."
+    },
+    "otdb-0741d591f209": {
+      "prompt": "Le tableau « Guernica » de Pablo Picasso exprime l'effroi suscité par quelle guerre ?",
+      "options": [
+        "Guerre civile espagnole",
+        "Guerre de Crimée",
+        "Guerre hispano-américaine",
+        "Première Guerre mondiale"
+      ]
+    },
+    "otdb-088c9981548a": {
+      "prompt": "Le tableau « La Nuit étoilée » de Vincent van Gogh relève de quel mouvement artistique ?",
+      "options": [
+        "Impressionnisme",
+        "Néoclassicisme",
+        "Romantisme",
+        "Post-impressionnisme"
+      ]
+    },
+    "otdb-0ad9d1a215aa": {
+      "prompt": "Qui a sculpté la statue du David ?",
+      "options": [
+        "Donatello",
+        "Michel-Ange",
+        "Le Bernin",
+        "Auguste Rodin"
+      ]
+    },
+    "otdb-0ed981a61b6f": {
+      "prompt": "Lequel de ces tableaux n'est pas de Caspar David Friedrich ?",
+      "options": [
+        "Voyageur, mer de nuages",
+        "Mer de glace",
+        "Mer Noire",
+        "Moine au bord de la mer"
+      ]
+    },
+    "otdb-12357890cb45": {
+      "prompt": "Quel artiste a peint « La Trahison des images », une pipe accompagnée de la mention « Ceci n'est pas une pipe » ?",
+      "options": [
+        "Modigliani",
+        "Magritte",
+        "Munch",
+        "Matisse"
+      ]
+    },
+    "otdb-1a6cb452276f": {
+      "prompt": "En quelle année Albrecht Dürer a-t-il peint « Le Jeune Lièvre » ?",
+      "options": [
+        "1702",
+        "1602",
+        "1402",
+        "1502"
+      ]
+    },
+    "otdb-1f02cb2cb2a7": {
+      "prompt": "Le peintre Piet Mondrian (1872-1944) appartenait à quel mouvement ?",
+      "options": [
+        "Précisionnisme",
+        "Cubisme",
+        "Impressionnisme",
+        "Néoplasticisme"
+      ]
+    },
+    "otdb-211fff2b02a5": {
+      "prompt": "Qui a peint la fresque monumentale « Guernica » ?",
+      "options": [
+        "Henri Matisse",
+        "Francisco Goya",
+        "Léonard de Vinci",
+        "Pablo Picasso"
+      ]
+    },
+    "otdb-2b81c25354c1": {
+      "prompt": "Quelle était la nationalité du peintre surréaliste Salvador Dalí ?",
+      "options": [
+        "Italien",
+        "Espagnol",
+        "Portugais",
+        "Français"
+      ]
+    },
+    "otdb-2bb62115b3fc": {
+      "prompt": "Quelle était la nationalité du célèbre artiste Pablo Picasso ?",
+      "options": [
+        "Français",
+        "Allemand",
+        "Italien",
+        "Espagnol"
+      ]
+    },
+    "otdb-2f79d0e72345": {
+      "skip": "propositions trop longues"
+    },
+    "otdb-3d4f755cea13": {
+      "prompt": "Quel artiste avait pour style de créer une image avec de petits points de couleurs différentes ?",
+      "options": [
+        "Georges Seurat",
+        "Paul Cézanne",
+        "Henri Rousseau",
+        "Vincent Van Gogh"
+      ]
+    },
+    "otdb-3fb33d531d0f": {
+      "prompt": "Quel artiste est célèbre pour s'être coupé l'oreille ?",
+      "options": [
+        "Vincent van Gogh",
+        "Rembrandt",
+        "Michel-Ange",
+        "Salvador Dalí"
+      ]
+    },
+    "otdb-42ca7eb8bb08": {
+      "prompt": "Quel autre nom porte « La Joconde » (La Gioconda) ?",
+      "options": [
+        "La Nuit étoilée",
+        "La Jeune Fille à la perle",
+        "Les Tournesols",
+        "Mona Lisa"
+      ]
+    },
+    "otdb-461d78ca93be": {
+      "prompt": "Quel tableau de Van Gogh représente la vue depuis l'asile de Saint-Rémy-de-Provence, dans le sud de la France ?",
+      "options": [
+        "Champ de blé aux corbeaux",
+        "La Nuit étoilée",
+        "Semeur au soleil couchant",
+        "L'Église d'Auvers"
+      ]
+    },
+    "otdb-50b1da5d06bb": {
+      "prompt": "Léonard de Vinci n'est pas l'auteur de « La Joconde »."
+    },
+    "otdb-5dddaff2f2cd": {
+      "prompt": "Combien de versions à la peinture et au pastel du « Cri » le peintre norvégien Edvard Munch aurait-il réalisées ?",
+      "options": [
+        "4",
+        "1",
+        "3",
+        "2"
+      ]
+    },
+    "otdb-6b4b8f8667e1": {
+      "prompt": "Quelle couleur obtient-on en mélangeant du noir et du blanc ?",
+      "options": [
+        "Gris",
+        "Blanc",
+        "Noir",
+        "Marron"
+      ]
+    },
+    "otdb-6f47d688ac0b": {
+      "prompt": "Quel artiste a peint la fresque de la fin du XVe siècle « La Cène » ?",
+      "options": [
+        "Léonard de Vinci",
+        "Luca Pacioli",
+        "Paolo Uccello",
+        "Piero della Francesca"
+      ]
+    },
+    "otdb-7eb9f808bbd9": {
+      "prompt": "Laquelle de ces couleurs n'apparaît pas dans « Broadway Boogie Woogie » de Mondrian ?",
+      "options": [
+        "Vert",
+        "Bleu",
+        "Jaune",
+        "Rouge"
+      ]
+    },
+    "otdb-8288be0d6510": {
+      "prompt": "Qui a peint la chapelle Sixtine ?",
+      "options": [
+        "Michel-Ange",
+        "Léonard de Vinci",
+        "Raphaël",
+        "Pablo Picasso"
+      ]
+    },
+    "otdb-844a42cb0220": {
+      "prompt": "Quel mouvement artistique Pablo Picasso a-t-il contribué à fonder ?",
+      "options": [
+        "Expressionnisme",
+        "Impressionnisme",
+        "Cubisme",
+        "Futurisme"
+      ]
+    },
+    "otdb-862aa8926bd9": {
+      "prompt": "Quelle est la plus ancienne œuvre de fiction connue au monde ?",
+      "options": [
+        "Papyrus d'Ani",
+        "Code d'Hammurabi",
+        "Épopée de Gilgamesh",
+        "Pierre de Rosette"
+      ]
+    },
+    "otdb-8b5359cb9525": {
+      "prompt": "Où Paul Gauguin s'installe-t-il en 1895 ?",
+      "options": [
+        "Lituanie",
+        "France",
+        "Atuona",
+        "Tahiti"
+      ]
+    },
+    "otdb-8ea0e8bf1026": {
+      "prompt": "Qui a peint « La Nuit étoilée » ?",
+      "options": [
+        "Pablo Picasso",
+        "Léonard de Vinci",
+        "Michel-Ange",
+        "Vincent van Gogh"
+      ]
+    },
+    "otdb-925ab2fe5863": {
+      "prompt": "Qui a peint « Le Cri » ?",
+      "options": [
+        "Edvard Munch",
+        "Picasso",
+        "Henri Matisse",
+        "Vincent Van Gogh"
+      ]
+    },
+    "otdb-9273219f83e4": {
+      "prompt": "Lequel de ces tableaux n'a pas été peint par Vincent Van Gogh ?",
+      "options": [
+        "Terrasse de café le soir",
+        "La Nuit étoilée",
+        "La Chambre à Arles",
+        "La Neuvième Vague"
+      ]
+    },
+    "otdb-995b9a0421c9": {
+      "prompt": "Albrecht Dürer est né et mort à...",
+      "options": [
+        "Berlin",
+        "Nuremberg",
+        "Augsbourg",
+        "Bamberg"
+      ]
+    },
+    "otdb-9dbb4e24ea14": {
+      "prompt": "Dans « La Cène » de Léonard de Vinci, de quelles deux couleurs sont les vêtements de Jésus ?",
+      "options": [
+        "Rouge et blanc",
+        "Rouge et bleu",
+        "Rouge et noir",
+        "Rouge et jaune"
+      ]
+    },
+    "otdb-a1c9c58aed62": {
+      "prompt": "Quel sculpteur français a conçu la statue de la Liberté ?",
+      "options": [
+        "Auguste Bartholdi",
+        "Jean-Léon Gérôme",
+        "Auguste Rodin",
+        "Henri Matisse"
+      ]
+    },
+    "otdb-a3412c0f9437": {
+      "prompt": "Les sculpteurs de la Grèce et de la Rome antiques coloraient souvent leurs statues."
+    },
+    "otdb-bc7fa06e1513": {
+      "prompt": "Qui a peint la fresque biblique « La Création d'Adam » ?",
+      "options": [
+        "Rembrandt",
+        "Léonard de Vinci",
+        "Le Caravage",
+        "Michel-Ange"
+      ]
+    },
+    "otdb-c1686c62d3cc": {
+      "prompt": "Qui a peint « Cygnes se reflétant en éléphants », « Le Sommeil » et « La Persistance de la mémoire » ?",
+      "options": [
+        "Jackson Pollock",
+        "Edgar Degas",
+        "Salvador Dalí",
+        "Vincent van Gogh"
+      ]
+    },
+    "otdb-d9f8add86523": {
+      "prompt": "Quand « La Persistance de la mémoire » de Salvador Dalí a-t-elle été achevée ?",
+      "options": [
+        "1932",
+        "1934",
+        "1929",
+        "1931"
+      ]
+    },
+    "otdb-da8f7cbf7a36": {
+      "prompt": "Quel sculpteur grec a réalisé la statue d'Athéna Parthénos à l'intérieur du Parthénon ?",
+      "options": [
+        "Scopas",
+        "Phidias",
+        "Hésiode",
+        "Praxitèle"
+      ]
+    },
+    "otdb-dd159d16cad4": {
+      "prompt": "Qui a peint « La Joconde » ?",
+      "options": [
+        "Léonard de Vinci",
+        "Michel-Ange",
+        "Vincent van Gogh",
+        "Pablo Picasso"
+      ]
+    },
+    "otdb-dd6a1dd8ae03": {
+      "prompt": "Quel est un élément fondamental du style architectural gothique ?",
+      "options": [
+        "Plafonds à caissons",
+        "Arc brisé",
+        "Fresques intérieures",
+        "Façades à fronton"
+      ]
+    },
+    "otdb-ded97cb4eda3": {
+      "prompt": "Vincent van Gogh s'est coupé une oreille."
+    },
+    "otdb-e3bad7278823": {
+      "prompt": "Comment s'appelle l'art japonais du pliage du papier en formes et figures décoratives ?",
+      "options": [
+        "Sumi-e",
+        "Ukiyo-e",
+        "Origami",
+        "Haïku"
+      ]
+    },
+    "otdb-e3eee6b7d997": {
+      "prompt": "Lequel de ces tableaux n'a pas été peint par Johannes Vermeer ?",
+      "options": [
+        "La Jeune Fille à la perle",
+        "Bacchus",
+        "La Laitière",
+        "La Dentellière"
+      ]
+    },
+    "otdb-ed3d318e0ffd": {
+      "prompt": "Quel a été le premier procédé photographique réussi et rentable commercialement ?",
+      "options": [
+        "Pellicule Kodachrome",
+        "Le daguerréotype",
+        "Le suaire de Turin",
+        "Procédé au collodion"
+      ]
+    },
+    "otdb-ef19d9693cd0": {
+      "prompt": "Lequel de ces noms est celui d'une célèbre marque de marqueurs ?",
+      "options": [
+        "Copic",
+        "Marx",
+        "Dopix",
+        "Cofix"
+      ]
+    },
+    "otdb-f70ac70311a1": {
+      "prompt": "Quelle était la nationalité du célèbre artiste Van Gogh ?",
+      "options": [
+        "Français",
+        "Néerlandais",
+        "Polonais",
+        "Russe"
+      ]
+    },
+    "otdb-ffc71b129bf3": {
+      "prompt": "La Vénus de Willendorf est l'une des plus anciennes œuvres d'art et représente les planètes Mars et Vénus s'embrassant dans le ciel nocturne."
+    },
+    "otdb-01ee9af0f4df": {
+      "prompt": "Le film « 2001 : l'Odyssée de l'espace » est sorti le 31 décembre 2000."
+    },
+    "otdb-0a1b5569601d": {
+      "prompt": "Qui a composé la musique du « Blade Runner » original ?",
+      "options": [
+        "Kitaro",
+        "Yanni",
+        "Enya",
+        "Vangelis"
+      ]
+    },
+    "otdb-0cbf5ab82786": {
+      "prompt": "Quel film l'« Avatar » de James Cameron a-t-il détrôné au sommet du box-office mondial ?",
+      "options": [
+        "Les Dents de la mer",
+        "Autant en emporte le vent",
+        "Titanic",
+        "Star Wars"
+      ]
+    },
+    "otdb-0cfdbf597489": {
+      "prompt": "Chewbacca, le copilote et meilleur ami de Han Solo, est un Ewok."
+    },
+    "otdb-0f70818e0a07": {
+      "prompt": "Dans quel film le personnage de Robin Williams doit-il se déguiser en femme ?",
+      "options": [
+        "Madame Doubtfire",
+        "L'Éveil",
+        "Old Dogs",
+        "Jumanji"
+      ]
+    },
+    "otdb-10d7ee9f7658": {
+      "prompt": "Quel fromage, adoré de Wallace et Gromit, a vu ses prix grimper après le succès de leurs courts métrages ?",
+      "options": [
+        "Edam",
+        "Wensleydale",
+        "Fromage de lune",
+        "Cheddar"
+      ]
+    },
+    "otdb-13a2fc0467a4": {
+      "prompt": "Quel acteur joue le principal antagoniste du film « Braquage à New York » (2011) ?",
+      "options": [
+        "Eddie Murphy",
+        "Alec Baldwin",
+        "Kevin Nealon",
+        "Alan Alda"
+      ]
+    },
+    "otdb-196cb65435bb": {
+      "prompt": "Dans « Mulan » (1998), qui est le chef des Huns ?",
+      "options": [
+        "Shan Yu",
+        "Chien-Po",
+        "Fa Zhou",
+        "Li Shang"
+      ]
+    },
+    "otdb-200dd2abeda2": {
+      "prompt": "Dans « Les Nouveaux Héros », sur quoi les mouvements de Baymax ont-ils été modélisés ?",
+      "options": [
+        "Bébés autruches",
+        "Bébés ours",
+        "Bébés manchots",
+        "Bébés singes"
+      ]
+    },
+    "otdb-21bf82c94f48": {
+      "prompt": "Quel acteur jouait Leatherface dans le film d'horreur de 1974 « Massacre à la tronçonneuse » ?",
+      "options": [
+        "Joe Bill Hogan",
+        "Gunnar Hansen",
+        "John Dugan",
+        "Edwin Neal"
+      ]
+    },
+    "otdb-263226f6aa90": {
+      "prompt": "Qui jouait le baron Victor Frankenstein dans le film d'horreur de la Hammer de 1957 « Frankenstein s'est échappé » ?",
+      "options": [
+        "Peter Cushing",
+        "Vincent Price",
+        "Lon Chaney Jr.",
+        "Boris Karloff"
+      ]
+    },
+    "otdb-2a8bcf9f6ab1": {
+      "skip": "repose sur l'unité impériale (50 mph)"
+    },
+    "otdb-2e0223c61a14": {
+      "prompt": "Lequel des films d'Alfred Hitchcock a été le premier tourné en couleur ?",
+      "options": [
+        "Sueurs froides",
+        "Psychose",
+        "La Corde",
+        "Rebecca"
+      ]
+    },
+    "otdb-2ef605496ff2": {
+      "prompt": "Quel célèbre chanteur est interprété par Kevin Spacey dans le film biographique « Beyond the Sea » (2004) ?",
+      "options": [
+        "Louis Armstrong",
+        "Dean Martin",
+        "Frank Sinatra",
+        "Bobby Darin"
+      ]
+    },
+    "otdb-2f1b18b9cb21": {
+      "prompt": "En quelle année le premier film indien a-t-il été présenté aux Oscars ?",
+      "options": [
+        "1962",
+        "1938",
+        "1954",
+        "1957"
+      ]
+    },
+    "otdb-30728241f068": {
+      "prompt": "Le film « Tron » a été nommé à l'Oscar des meilleurs effets visuels."
+    },
+    "otdb-3377f3cc932d": {
+      "prompt": "Dans « Avengers : Infinity War », où se trouvait la Pierre d'âme ?",
+      "options": [
+        "Xandar",
+        "Knowhere",
+        "Vormir",
+        "Asgard"
+      ]
+    },
+    "otdb-3a45dfced3e5": {
+      "prompt": "Dans le film « Le Lorax » (2012), qui est l'antagoniste ?",
+      "options": [
+        "Ted Wiggins",
+        "Le Once-ler",
+        "Mamie Norma",
+        "Aloysius O'Hare"
+      ]
+    },
+    "otdb-3c441a5ab9e5": {
+      "prompt": "Quel film d'animation Steven Lisberger a-t-il réalisé en 1980, avant « Tron » ?",
+      "options": [
+        "Taram et le Chaudron",
+        "Basil, détective privé",
+        "Rox et Rouky",
+        "Animalympics"
+      ]
+    },
+    "otdb-409d3c197d33": {
+      "prompt": "Qui jouait le U.S. Marshal adjoint Samuel Gerard dans le film « Le Fugitif » (1993) ?",
+      "options": [
+        "Harrison Ford",
+        "Harvey Keitel",
+        "Tommy Lee Jones",
+        "Martin Landau"
+      ]
+    },
+    "otdb-4178f636400b": {
+      "prompt": "Dans « Super Mario Bros., le film » (2023), qui est la voix originale de Toad ?",
+      "options": [
+        "Jack Black",
+        "Keegan-Michael Key",
+        "Charlie Day",
+        "Seth Rogen"
+      ]
+    },
+    "otdb-448bd9b4f3ab": {
+      "prompt": "Velma Kelly et Roxie Hart sont les héroïnes de quel film oscarisé ?",
+      "options": [
+        "All That Jazz",
+        "Chicago",
+        "Cabaret",
+        "Dreamgirls"
+      ]
+    },
+    "otdb-4c001279307e": {
+      "prompt": "Lequel de ces films d'action est tourné entièrement en un seul plan-séquence ?",
+      "options": [
+        "Victoria",
+        "Léon",
+        "Ip Man 2",
+        "Jason Bourne : L'Héritage"
+      ]
+    },
+    "otdb-4e9c7a24028f": {
+      "prompt": "Dans le scénario original de « Matrix », les machines utilisaient les humains comme puissance de calcul supplémentaire plutôt que comme batteries."
+    },
+    "otdb-4ef95c765de0": {
+      "prompt": "Le film « Fargo » (1996) se déroule principalement dans quel État américain ?",
+      "options": [
+        "Minnesota",
+        "Dakota du Nord",
+        "Wisconsin",
+        "Dakota du Sud"
+      ]
+    },
+    "otdb-55ea15c94a79": {
+      "prompt": "Qui incarnait Bruce Wayne et Batman dans le « Batman » de Tim Burton (1989) ?",
+      "options": [
+        "George Clooney",
+        "Adam West",
+        "Val Kilmer",
+        "Michael Keaton"
+      ]
+    },
+    "otdb-56f8ffdc7dce": {
+      "prompt": "Dans la série « Vendredi 13 », en quelle année Jason s'est-il noyé ?",
+      "options": [
+        "1957",
+        "1953",
+        "1959",
+        "1955"
+      ]
+    },
+    "otdb-5b05a12ae810": {
+      "prompt": "Le film « Mad Max: Fury Road » utilise le Dies irae du requiem de quel compositeur ?",
+      "options": [
+        "Mozart",
+        "Verdi",
+        "Berlioz",
+        "Brahms"
+      ]
+    },
+    "otdb-5f3aef6e11c6": {
+      "prompt": "Qui est le héros principal du film « Retour vers le futur » (1985) ?",
+      "options": [
+        "Emmett « Doc » Brown",
+        "Biff Tannen",
+        "George McFly",
+        "Marty McFly"
+      ]
+    },
+    "otdb-61cd94809b8e": {
+      "prompt": "Dans « Le Seigneur des anneaux : Les Deux Tours », où la troupe d'orques emmène-t-elle les hobbits ?",
+      "options": [
+        "Isengard",
+        "Fondcombe",
+        "Moria",
+        "Mordor"
+      ]
+    },
+    "otdb-6267b7f0adec": {
+      "prompt": "Quel est le prénom du personnage de Marilyn Monroe dans « Certains l'aiment chaud » ?",
+      "options": [
+        "Candy",
+        "Sugar",
+        "Honey",
+        "Caramel"
+      ]
+    },
+    "otdb-62fba77d68d4": {
+      "prompt": "Quelle actrice danse le twist avec John Travolta dans « Pulp Fiction » ?",
+      "options": [
+        "Kathy Griffin",
+        "Bridget Fonda",
+        "Uma Thurman",
+        "Pam Grier"
+      ]
+    },
+    "otdb-670751cfc8b6": {
+      "skip": "repose sur l'unité impériale (88 mph)"
+    },
+    "otdb-67f54a87afb5": {
+      "prompt": "Dans quel pays d'Afrique se déroule principalement le film « Blood Diamond » (2006) ?",
+      "options": [
+        "Sierra Leone",
+        "Burkina Faso",
+        "République centrafricaine",
+        "Liberia"
+      ]
+    },
+    "otdb-68b5cab9a7a2": {
+      "prompt": "Dans la fin originale de « La Petite Boutique des horreurs », les plantes prennent le contrôle du monde."
+    },
+    "otdb-68fa4b76fb60": {
+      "prompt": "George Lucas a réalisé toute la trilogie originale de « Star Wars »."
+    },
+    "otdb-6b0457c3fa4f": {
+      "prompt": "Dans le film « La Folle Histoire de l'espace », que tentent de voler les Spaceballs sur la planète Druidia ?",
+      "options": [
+        "L'air",
+        "La princesse Lonestar",
+        "Des boulettes",
+        "Le Schwartz"
+      ]
+    },
+    "otdb-6d581851331a": {
+      "prompt": "Qui a réalisé « Pulp Fiction », « Reservoir Dogs » et « Django Unchained » ?",
+      "options": [
+        "Steven Spielberg",
+        "Quentin Tarantino",
+        "James Cameron",
+        "Martin Scorsese"
+      ]
+    },
+    "otdb-725079512abb": {
+      "prompt": "Dans le film britannique « Quadrophenia » (1979), comment s'appelle la ville balnéaire que visitent les mods ?",
+      "options": [
+        "Mousehole",
+        "Bridlington",
+        "Brighton",
+        "Eastbourne"
+      ]
+    },
+    "otdb-725ce6f7bfa5": {
+      "prompt": "Pour quel film Leonardo DiCaprio a-t-il remporté son premier Oscar du meilleur acteur ?",
+      "options": [
+        "Inception",
+        "The Revenant",
+        "Shutter Island",
+        "Le Loup de Wall Street"
+      ]
+    },
+    "otdb-7dd3384fefcc": {
+      "prompt": "Quelle ville sert de cadre au film Disney « Un amour de Coccinelle » (1968) ?",
+      "options": [
+        "San José",
+        "San Francisco",
+        "Los Angeles",
+        "Sacramento"
+      ]
+    },
+    "otdb-7ebf96f29c7b": {
+      "prompt": "Pour réduire les coûts, avec quoi la plupart des figurants de « Mad Max » (1979) ont-ils été payés ?",
+      "options": [
+        "Ils n'étaient pas payés",
+        "Bons alimentaires",
+        "De la bière",
+        "Du fast-food"
+      ]
+    },
+    "otdb-83ef3137274d": {
+      "prompt": "Le film « The Rocky Horror Picture Show » (1975) s'ouvre sur des lèvres géantes flottantes qui chantent le premier morceau."
+    },
+    "otdb-83fb611e799f": {
+      "prompt": "Dans « Le Hobbit », qui dirige le Conseil blanc ?",
+      "options": [
+        "Dame Galadriel",
+        "Elrond",
+        "Saroumane",
+        "Gandalf"
+      ]
+    },
+    "otdb-85692f147efa": {
+      "prompt": "Quel chanteur est incarné par Bruce Campbell dans le film « Bubba Ho-Tep » (2002) ?",
+      "options": [
+        "Buddy Holly",
+        "Hank Williams Sr.",
+        "Elvis Presley",
+        "Johnny Cash"
+      ]
+    },
+    "otdb-87fa5e4002cc": {
+      "prompt": "Quel nom Tom Hanks donne-t-il à son compagnon, un ballon de volley, dans « Seul au monde » ?",
+      "options": [
+        "Billy",
+        "Jones",
+        "Vendredi",
+        "Wilson"
+      ]
+    },
+    "otdb-88ba3faade98": {
+      "prompt": "En quelle année le film « Police Academy » est-il sorti ?",
+      "options": [
+        "1985",
+        "1986",
+        "1983",
+        "1984"
+      ]
+    },
+    "otdb-8992bd6147fb": {
+      "prompt": "Comment s'appelle le personnage de Nicolas Cage dans « Benjamin Gates et le Trésor des Templiers » ?",
+      "options": [
+        "Benjamin Franklin Gates",
+        "John Quincy Beckett",
+        "George Washington Swanson",
+        "Thomas Jefferson Walker"
+      ]
+    },
+    "otdb-906acd1642bc": {
+      "prompt": "Quelle comédie culte des années 90 compte des apparitions de Meat Loaf, Alice Cooper et Chris Farley ?",
+      "options": [
+        "Austin Powers",
+        "Bill et Ted",
+        "Dumb et Dumber",
+        "Wayne's World"
+      ]
+    },
+    "otdb-90b23e3c233f": {
+      "prompt": "Quel était le nom de famille de Dorothy dans « Le Magicien d'Oz » ?",
+      "options": [
+        "Perkins",
+        "Gale",
+        "Parker",
+        "Day"
+      ]
+    },
+    "otdb-916ad59df8f2": {
+      "prompt": "Dans « Le Monde de Nemo », comment s'appelle la mère de Nemo ?",
+      "options": [
+        "Perle",
+        "Corail",
+        "Sandy",
+        "Shelly"
+      ]
+    },
+    "otdb-9637a79fe8e6": {
+      "prompt": "Quel était le deuxième prénom d'Humphrey Bogart ?",
+      "options": [
+        "DeForest",
+        "DeWinter",
+        "Steven",
+        "Bryce"
+      ]
+    },
+    "otdb-983e97b69788": {
+      "prompt": "Dans « L'Armée des ténèbres » (1992), quel nom Ash donne-t-il à son fusil à deux canons ?",
+      "options": [
+        "Boomstick",
+        "2-Pump Chump",
+        "Bloomstick",
+        "Blastbranch"
+      ]
+    },
+    "otdb-994dcdd1b321": {
+      "prompt": "Qui est congelé à la fin du film « GoldenEye » ?",
+      "options": [
+        "Natalya Simonova",
+        "Alec Trevelyan",
+        "Boris Grishenko",
+        "James Bond"
+      ]
+    },
+    "otdb-9a034edb9924": {
+      "prompt": "Qui est révélé comme le méchant à la fin du premier film « Scooby-Doo » en prises de vues réelles ?",
+      "options": [
+        "Scrappy-Doo",
+        "Le vieux Mason",
+        "Fred",
+        "L'équipe de journalistes"
+      ]
+    },
+    "otdb-9a6e0a051bfb": {
+      "prompt": "Quel mot de passe wifi donne-t-on à Stephen Strange dans « Doctor Strange » ?",
+      "options": [
+        "Ancient",
+        "Chakra",
+        "Shambala",
+        "Peace"
+      ]
+    },
+    "otdb-9cbbfb110614": {
+      "prompt": "Dans le film « Kung Pow: Enter the Fist » (2002), quel nom Maître Pain adopte-t-il ?",
+      "options": [
+        "Sally",
+        "Amy",
+        "Betty",
+        "Kitty"
+      ]
+    },
+    "otdb-a00ae8570a82": {
+      "prompt": "Samuel L. Jackson avait fait graver les mots « Bad Motherf*cker » sur son sabre laser pendant le tournage de « Star Wars »."
+    },
+    "otdb-a296303d80ea": {
+      "prompt": "Dans « Le Seigneur des anneaux : La Communauté de l'anneau », lequel de ces personnages du livre a été supprimé du film ?",
+      "options": [
+        "Celeborn",
+        "Grand-Pas",
+        "Tom Bombadil",
+        "Prosper Poiredebeurré"
+      ]
+    },
+    "otdb-a2e941f44288": {
+      "prompt": "Dans la trilogie originale de « Star Wars », David Prowse est l'acteur qui incarnait physiquement Dark Vador."
+    },
+    "otdb-a565849aa019": {
+      "prompt": "Dans quel film de 1955 Frank Sinatra joue-t-il Nathan Detroit ?",
+      "options": [
+        "Guys and Dolls",
+        "High Society",
+        "From Here to Eternity",
+        "Anchors Aweigh"
+      ]
+    },
+    "otdb-a6fbb06b1612": {
+      "prompt": "Qui a réalisé « E.T. l'extra-terrestre » (1982) ?",
+      "options": [
+        "Stanley Kubrick",
+        "Steven Spielberg",
+        "James Cameron",
+        "Tim Burton"
+      ]
+    },
+    "otdb-b5723058621e": {
+      "prompt": "Quel acteur a joué le rôle principal dans « Edward aux mains d'argent » (1990) ?",
+      "options": [
+        "Ben Stiller",
+        "Clint Eastwood",
+        "Leonardo DiCaprio",
+        "Johnny Depp"
+      ]
+    },
+    "otdb-b726441a7e1a": {
+      "prompt": "Quel a été le premier film de super-héros auquel James Gunn a participé ?",
+      "options": [
+        "Gardiens de la Galaxie",
+        "Super",
+        "The Specials",
+        "Brightburn"
+      ]
+    },
+    "otdb-ba07af7295c5": {
+      "prompt": "« La première règle : on n'en parle pas » fait référence à quel film ?",
+      "options": [
+        "The Island",
+        "American Pie",
+        "Fight Club",
+        "Unthinkable"
+      ]
+    },
+    "otdb-ba22c6e0fa70": {
+      "prompt": "Dans « Kung Pow: Enter the Fist » (2002), pourquoi Wimp Lo a-t-il été volontairement mal entraîné ?",
+      "options": [
+        "Pour rire",
+        "Pour le tester",
+        "Pour avoir triché",
+        "Par vengeance"
+      ]
+    },
+    "otdb-bace1a9676a0": {
+      "prompt": "Shaquille O'Neal apparaît dans le film « Space Jam » (1997)."
+    },
+    "otdb-bfa1ad4e00e8": {
+      "prompt": "Dans la trilogie originale de « Star Wars », Alec Guinness prêtait sa voix à Dark Vador."
+    },
+    "otdb-c55e946d5c85": {
+      "prompt": "Dans « Requiem for a Dream », à quelle drogue le personnage de Jared Leto devient-il dépendant ?",
+      "options": [
+        "Cocaïne",
+        "Oxycodone",
+        "Marijuana",
+        "Héroïne"
+      ]
+    },
+    "otdb-c6b537dc98a4": {
+      "prompt": "En quelle année le « Titanic » de James Cameron est-il sorti en salles ?",
+      "options": [
+        "1998",
+        "1997",
+        "1999",
+        "1996"
+      ]
+    },
+    "otdb-c9edc97b7bd8": {
+      "prompt": "Dans quel film trouve-t-on la réplique « Personne ne met Bébé dans un coin » ?",
+      "options": [
+        "Ferris Bueller",
+        "Rose bonbon",
+        "Dirty Dancing",
+        "Trois hommes et un bébé"
+      ]
+    }
+  },
+  "quizzes": {}
+}

@@ -4,9 +4,13 @@ import { savePlayerSession } from '../realtime/playerSession'
 import { useGameSocket } from '../realtime/useGameSocket'
 import { Logo, Mascot } from '../ui'
 
+// Message exact renvoyé par le serveur quand la session a atteint son plafond.
+const PARTIE_COMPLETE = 'La partie est complète.'
+
 interface FieldErrors {
   pin?: string
   pseudo?: string
+  form?: string
 }
 
 interface JoinAck {
@@ -32,6 +36,7 @@ export function Join() {
   const [status, setStatus] = useState<Status>('idle')
   const pinRef = useRef<HTMLInputElement>(null)
   const pseudoRef = useRef<HTMLInputElement>(null)
+  const formErrorRef = useRef<HTMLParagraphElement>(null)
 
   // Arrivée via QR (PIN déjà valide) : le seul geste restant est le pseudo — on
   // y place le focus au montage. Sinon (saisie manuelle), on ne vole pas le
@@ -81,6 +86,14 @@ export function Join() {
       navigate('/play')
     } catch (err) {
       setStatus('idle')
+      // Partie pleine : le PIN est correct, l'erreur concerne le formulaire et
+      // non le champ. On l'annonce et on y place le focus sans toucher au PIN.
+      if (err instanceof Error && err.message === PARTIE_COMPLETE) {
+        setErrors({ form: PARTIE_COMPLETE })
+        // Le paragraphe n'existe qu'après le rendu : focus au prochain tick.
+        setTimeout(() => formErrorRef.current?.focus(), 0)
+        return
+      }
       // The server's own message (e.g. "PIN invalide") — surfaced through the
       // existing textual error UI, on the PIN field since an unknown PIN is
       // by far the most common cause.
@@ -172,6 +185,12 @@ export function Join() {
         </div>
 
         <div className="join-spacer" />
+
+        {errors.form && (
+          <p className="join-error" role="alert" tabIndex={-1} ref={formErrorRef}>
+            {errors.form}
+          </p>
+        )}
 
         <button type="submit" className="player-cta" disabled={status === 'pending'}>
           {status === 'pending' ? 'Connexion…' : 'Rejoindre la colonie'}

@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=470"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0470-1",
+      "type": "mcq",
+      "prompt": "De quel palais britannique Big Ben est-elle désignée la grande cloche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Warrington",
+            "correct": false
+          },
+          {
+            "label": "Winchester",
+            "correct": false
+          },
+          {
+            "label": "Westminster",
+            "correct": true
+          },
+          {
+            "label": "Worcester",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0470-3",
+      "type": "mcq",
+      "prompt": "À Londres, où êtes-vous si vous circulez dans le « Tube » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dans le métro",
+            "correct": true
+          },
+          {
+            "label": "Dans le taxi",
+            "correct": false
+          },
+          {
+            "label": "Dans le train",
+            "correct": false
+          },
+          {
+            "label": "Dans le bus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

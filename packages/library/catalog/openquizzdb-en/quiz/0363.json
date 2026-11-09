@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=363"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0363-1-en",
+      "type": "mcq",
+      "prompt": "In which city was Jean-Michel Jarre's \"Rendez-Vous\" concert held?",
+      "payload": {
+        "options": [
+          {
+            "label": "Los Angeles",
+            "correct": false
+          },
+          {
+            "label": "Houston",
+            "correct": true
+          },
+          {
+            "label": "Miami",
+            "correct": false
+          },
+          {
+            "label": "Chicago",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

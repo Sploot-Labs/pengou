@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=603"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0603-1-en",
+      "type": "mcq",
+      "prompt": "Which sport involves hitting a small white ball into a hole?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cricket",
+            "correct": false
+          },
+          {
+            "label": "Pelota",
+            "correct": false
+          },
+          {
+            "label": "Croquet",
+            "correct": false
+          },
+          {
+            "label": "Golf",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0603-2-en",
+      "type": "mcq",
+      "prompt": "What does Captain Haddock, Tintin's best friend, wear on his head?",
+      "payload": {
+        "options": [
+          {
+            "label": "Helmet",
+            "correct": false
+          },
+          {
+            "label": "Cap",
+            "correct": true
+          },
+          {
+            "label": "Turban",
+            "correct": false
+          },
+          {
+            "label": "Hat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0603-3-en",
+      "type": "mcq",
+      "prompt": "From which mountain can burning matter sometimes erupt?",
+      "payload": {
+        "options": [
+          {
+            "label": "Talus",
+            "correct": false
+          },
+          {
+            "label": "Rock",
+            "correct": false
+          },
+          {
+            "label": "Dune",
+            "correct": false
+          },
+          {
+            "label": "Volcano",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

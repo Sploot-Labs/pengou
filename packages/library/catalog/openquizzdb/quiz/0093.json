@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=93"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0093-3",
+      "type": "mcq",
+      "prompt": "Dans quel véhicule cuisinent Walter et Jesse au début de la série ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Taxi",
+            "correct": false
+          },
+          {
+            "label": "Camping-car",
+            "correct": true
+          },
+          {
+            "label": "Bus",
+            "correct": false
+          },
+          {
+            "label": "Camion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0093-4",
+      "type": "mcq",
+      "prompt": "De quel cancer est atteint Walter White dans la série « Breaking Bad » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Du poumon",
+            "correct": true
+          },
+          {
+            "label": "De la gorge",
+            "correct": false
+          },
+          {
+            "label": "Du colon",
+            "correct": false
+          },
+          {
+            "label": "De la peau",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

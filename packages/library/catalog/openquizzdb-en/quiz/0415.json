@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=415"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0415-1-en",
+      "type": "mcq",
+      "prompt": "In 1941, which country imposed a total embargo on Japan?",
+      "payload": {
+        "options": [
+          {
+            "label": "Germany",
+            "correct": false
+          },
+          {
+            "label": "USSR",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          },
+          {
+            "label": "United States",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0415-2-en",
+      "type": "mcq",
+      "prompt": "Which suicide pilots marked World War II?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kazoku",
+            "correct": false
+          },
+          {
+            "label": "Shinobi",
+            "correct": false
+          },
+          {
+            "label": "Kamikazes",
+            "correct": true
+          },
+          {
+            "label": "Samurai",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

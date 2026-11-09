@@ -1,0 +1,592 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0453-1-en",
+      "type": "mcq",
+      "prompt": "In which museum is the Rosetta Stone kept?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cairo Museum",
+            "correct": false
+          },
+          {
+            "label": "British Museum",
+            "correct": true
+          },
+          {
+            "label": "MET",
+            "correct": false
+          },
+          {
+            "label": "The Louvre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0453-2-en",
+      "type": "mcq",
+      "prompt": "How many great pyramids are there on the Giza plateau?",
+      "payload": {
+        "options": [
+          {
+            "label": "Just one",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": true
+          },
+          {
+            "label": "Ten",
+            "correct": false
+          },
+          {
+            "label": "None",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0453-3-en",
+      "type": "mcq",
+      "prompt": "Which part of the Great Sphinx of Giza's face is missing?",
+      "payload": {
+        "options": [
+          {
+            "label": "Corner of the mouth",
+            "correct": false
+          },
+          {
+            "label": "Ear",
+            "correct": false
+          },
+          {
+            "label": "Arm",
+            "correct": false
+          },
+          {
+            "label": "Nose",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0453-4-en",
+      "type": "mcq",
+      "prompt": "Near which modern city is the Valley of the Kings?",
+      "payload": {
+        "options": [
+          {
+            "label": "Asyut",
+            "correct": false
+          },
+          {
+            "label": "Giza",
+            "correct": false
+          },
+          {
+            "label": "El Minya",
+            "correct": false
+          },
+          {
+            "label": "Luxor",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0199-1-en",
+      "type": "mcq",
+      "prompt": "In which city is Tutankhamun's golden mask on display?",
+      "payload": {
+        "options": [
+          {
+            "label": "Luxor",
+            "correct": false
+          },
+          {
+            "label": "Boulaq",
+            "correct": false
+          },
+          {
+            "label": "Cairo",
+            "correct": true
+          },
+          {
+            "label": "Alexandria",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0199-2-en",
+      "type": "mcq",
+      "prompt": "How many coffins protected Tutankhamun's mummy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Four",
+            "correct": false
+          },
+          {
+            "label": "Five",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": true
+          },
+          {
+            "label": "Two",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0199-3-en",
+      "type": "mcq",
+      "prompt": "What is Tutankhamun's funerary mask made of?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gold",
+            "correct": true
+          },
+          {
+            "label": "Bronze",
+            "correct": false
+          },
+          {
+            "label": "Plaster",
+            "correct": false
+          },
+          {
+            "label": "Silver",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0199-4-en",
+      "type": "mcq",
+      "prompt": "In ancient Egypt, which practice opened the underworld to the soul?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cremation",
+            "correct": false
+          },
+          {
+            "label": "Hanging",
+            "correct": false
+          },
+          {
+            "label": "Embalming",
+            "correct": true
+          },
+          {
+            "label": "Dissection",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0550-1-en",
+      "type": "mcq",
+      "prompt": "In what type of building did gladiator fights take place?",
+      "payload": {
+        "options": [
+          {
+            "label": "Temple",
+            "correct": false
+          },
+          {
+            "label": "Gallodrome",
+            "correct": false
+          },
+          {
+            "label": "Forum",
+            "correct": false
+          },
+          {
+            "label": "Amphitheater",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0550-2-en",
+      "type": "mcq",
+      "prompt": "Which tradesman trained and owned gladiators?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lanista",
+            "correct": true
+          },
+          {
+            "label": "Market stallholder",
+            "correct": false
+          },
+          {
+            "label": "Cheap eatery owner",
+            "correct": false
+          },
+          {
+            "label": "Centurion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0550-3-en",
+      "type": "mcq",
+      "prompt": "Who is the most popular gladiator of Thracian origin?",
+      "payload": {
+        "options": [
+          {
+            "label": "Crixus",
+            "correct": false
+          },
+          {
+            "label": "Jugurtha",
+            "correct": false
+          },
+          {
+            "label": "Spartacus",
+            "correct": true
+          },
+          {
+            "label": "Maximus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0550-4-en",
+      "type": "mcq",
+      "prompt": "How did a gladiator signal that he was giving up the fight?",
+      "payload": {
+        "options": [
+          {
+            "label": "He screams",
+            "correct": false
+          },
+          {
+            "label": "He raises a finger",
+            "correct": true
+          },
+          {
+            "label": "He removes his helmet",
+            "correct": false
+          },
+          {
+            "label": "He throws his sword",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0127-1-en",
+      "type": "mcq",
+      "prompt": "In which country was the pre-Hispanic city of Teotihuacan found?",
+      "payload": {
+        "options": [
+          {
+            "label": "El Salvador",
+            "correct": false
+          },
+          {
+            "label": "Costa Rica",
+            "correct": false
+          },
+          {
+            "label": "Nicaragua",
+            "correct": false
+          },
+          {
+            "label": "Mexico",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0127-2-en",
+      "type": "mcq",
+      "prompt": "What shape are the structures at the Teotihuacan archaeological site?",
+      "payload": {
+        "options": [
+          {
+            "label": "Square",
+            "correct": false
+          },
+          {
+            "label": "Round",
+            "correct": false
+          },
+          {
+            "label": "Pyramidal",
+            "correct": true
+          },
+          {
+            "label": "Oval",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0127-4-en",
+      "type": "mcq",
+      "prompt": "How many people lived in the city of Teotihuacan at its peak?",
+      "payload": {
+        "options": [
+          {
+            "label": "200,000",
+            "correct": true
+          },
+          {
+            "label": "300,000",
+            "correct": false
+          },
+          {
+            "label": "500,000",
+            "correct": false
+          },
+          {
+            "label": "400,000",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0513-1-en",
+      "type": "mcq",
+      "prompt": "Machu Picchu was abandoned after the fall of which empire?",
+      "payload": {
+        "options": [
+          {
+            "label": "Inca",
+            "correct": true
+          },
+          {
+            "label": "Corsair",
+            "correct": false
+          },
+          {
+            "label": "Iroquois",
+            "correct": false
+          },
+          {
+            "label": "Aztec",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0513-2-en",
+      "type": "mcq",
+      "prompt": "At the edge of which forest does Machu Picchu stand?",
+      "payload": {
+        "options": [
+          {
+            "label": "Atlantic Forest",
+            "correct": false
+          },
+          {
+            "label": "Gola Forest",
+            "correct": false
+          },
+          {
+            "label": "Boreal Forest",
+            "correct": false
+          },
+          {
+            "label": "Amazon Rainforest",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0513-3-en",
+      "type": "mcq",
+      "prompt": "Which structures make up Machu Picchu's farming area?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mulch",
+            "correct": false
+          },
+          {
+            "label": "Moldboards",
+            "correct": false
+          },
+          {
+            "label": "Terraces",
+            "correct": true
+          },
+          {
+            "label": "Slash-and-burn",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0513-4-en",
+      "type": "mcq",
+      "prompt": "Which animal can the shape of the Machu Picchu site be linked to?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bear",
+            "correct": false
+          },
+          {
+            "label": "Puma",
+            "correct": true
+          },
+          {
+            "label": "Snake",
+            "correct": false
+          },
+          {
+            "label": "Dolphin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-civilisations-anciennes-en",
+      "title": "Ancient civilizations",
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0453-1-en",
+        "oqdb-0453-2-en",
+        "oqdb-0453-3-en",
+        "oqdb-0453-4-en",
+        "oqdb-0199-1-en",
+        "oqdb-0199-2-en",
+        "oqdb-0199-3-en",
+        "oqdb-0199-4-en",
+        "oqdb-0550-1-en",
+        "oqdb-0550-2-en",
+        "oqdb-0550-3-en",
+        "oqdb-0550-4-en",
+        "oqdb-0127-1-en",
+        "oqdb-0127-2-en",
+        "oqdb-0127-4-en",
+        "oqdb-0513-1-en",
+        "oqdb-0513-2-en",
+        "oqdb-0513-3-en",
+        "oqdb-0513-4-en"
+      ],
+      "description": "Based on OpenQuizzDB quizzes about ancient Egypt, Tutankhamun, gladiators, Teotihuacan and Machu Picchu."
+    }
+  ]
+}

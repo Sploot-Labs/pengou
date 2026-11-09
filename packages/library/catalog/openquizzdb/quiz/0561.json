@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=561"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0561-3",
+      "type": "mcq",
+      "prompt": "Quel titre France Gall a-t-elle sorti en hommage à Ella Fitzgerald ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ella, elle l'a",
+            "correct": true
+          },
+          {
+            "label": "Calypso",
+            "correct": false
+          },
+          {
+            "label": "Résiste",
+            "correct": false
+          },
+          {
+            "label": "Babacar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0561-4",
+      "type": "mcq",
+      "prompt": "Sur quel album retrouve-t-on « Hong-Kong Star » et « Cézanne peint » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dancing Disco",
+            "correct": false
+          },
+          {
+            "label": "Débranche !",
+            "correct": true
+          },
+          {
+            "label": "Babacar",
+            "correct": false
+          },
+          {
+            "label": "Double Jeu",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

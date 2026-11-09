@@ -1,0 +1,1109 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-01cb121594d2-fr",
+      "type": "mcq",
+      "prompt": "Quel est le nom scientifique du pygargue à tête blanche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cyanocitta cristata",
+            "correct": false
+          },
+          {
+            "label": "Haliaeetus leucocephalus",
+            "correct": true
+          },
+          {
+            "label": "Aquila chrysaetos",
+            "correct": false
+          },
+          {
+            "label": "Tyto alba",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-01edffe301a4-fr",
+      "type": "mcq",
+      "prompt": "Quelle race de chien est traditionnellement associée aux pompiers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dalmatien",
+            "correct": true
+          },
+          {
+            "label": "Berger allemand",
+            "correct": false
+          },
+          {
+            "label": "Dogue allemand",
+            "correct": false
+          },
+          {
+            "label": "Mastiff",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-172a31fabd90-fr",
+      "type": "mcq",
+      "prompt": "À quelle classe d'animaux appartiennent les tritons ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Amphibiens",
+            "correct": true
+          },
+          {
+            "label": "Poissons",
+            "correct": false
+          },
+          {
+            "label": "Mammifères",
+            "correct": false
+          },
+          {
+            "label": "Reptiles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3f4b9425fc98-fr",
+      "type": "mcq",
+      "prompt": "Quel est le nom scientifique du loup gris ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Canis latrans",
+            "correct": false
+          },
+          {
+            "label": "Canis lupus",
+            "correct": true
+          },
+          {
+            "label": "Canis lupus lycaon",
+            "correct": false
+          },
+          {
+            "label": "Canis aureus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-444000f6fdff-fr",
+      "type": "mcq",
+      "prompt": "Contrairement à la plupart des salamandres, quelle partie du triton est aplatie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tête",
+            "correct": false
+          },
+          {
+            "label": "Pattes",
+            "correct": false
+          },
+          {
+            "label": "Dents",
+            "correct": false
+          },
+          {
+            "label": "Queue",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-447dd0cd845d-fr",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on l'habitat d'un lapin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nid",
+            "correct": false
+          },
+          {
+            "label": "Nid d'écureuil",
+            "correct": false
+          },
+          {
+            "label": "Tanière",
+            "correct": false
+          },
+          {
+            "label": "Terrier",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4cf7b8f25b07-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces animaux n'est PAS un lézard ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Iguane vert",
+            "correct": false
+          },
+          {
+            "label": "Tuatara",
+            "correct": true
+          },
+          {
+            "label": "Dragon de Komodo",
+            "correct": false
+          },
+          {
+            "label": "Monstre de Gila",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-55980ed8d8c7-fr",
+      "type": "truefalse",
+      "prompt": "L'axolotl est un amphibien qui peut passer toute sa vie à l'état larvaire.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-57d1aee55981-fr",
+      "type": "mcq",
+      "prompt": "Quel est l'animal le plus rapide ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Taon",
+            "correct": false
+          },
+          {
+            "label": "Guépard",
+            "correct": false
+          },
+          {
+            "label": "Aigle royal",
+            "correct": false
+          },
+          {
+            "label": "Faucon pèlerin",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5bd1a69d0896-fr",
+      "type": "mcq",
+      "prompt": "Quelle sous-espèce d'ours brun n'est pas éteinte ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grizzly de Californie",
+            "correct": false
+          },
+          {
+            "label": "Ours de l'Atlas",
+            "correct": false
+          },
+          {
+            "label": "Grizzly du Mexique",
+            "correct": false
+          },
+          {
+            "label": "Ours brun de Syrie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5ea0f55201b5-fr",
+      "type": "mcq",
+      "prompt": "De quel continent la patate douce est-elle originaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Amérique du Sud",
+            "correct": true
+          },
+          {
+            "label": "Asie",
+            "correct": false
+          },
+          {
+            "label": "Afrique",
+            "correct": false
+          },
+          {
+            "label": "Europe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6a01995826c7-fr",
+      "type": "mcq",
+      "prompt": "Quelle race de chien est l'une des plus anciennes et prospère depuis avant 400 av. J.-C. ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Boxers",
+            "correct": false
+          },
+          {
+            "label": "Carlins",
+            "correct": true
+          },
+          {
+            "label": "Bouledogues",
+            "correct": false
+          },
+          {
+            "label": "Chihuahua",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7813e2c100b4-fr",
+      "type": "mcq",
+      "prompt": "De quelle couleur est la peau d'un ours polaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Verte",
+            "correct": false
+          },
+          {
+            "label": "Noire",
+            "correct": true
+          },
+          {
+            "label": "Rose",
+            "correct": false
+          },
+          {
+            "label": "Blanche",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7fba7be7a147-fr",
+      "type": "truefalse",
+      "prompt": "Les lapins sont des rongeurs.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-837d0dc0f5d4-fr",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on l'abeille mâle issue d'un œuf non fécondé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Soldat",
+            "correct": false
+          },
+          {
+            "label": "Mâle",
+            "correct": false
+          },
+          {
+            "label": "Faux-bourdon",
+            "correct": true
+          },
+          {
+            "label": "Ouvrière",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-86005f1a7d88-fr",
+      "type": "truefalse",
+      "prompt": "On peut connaître l'âge d'une coccinelle en comptant les points sur son dos.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-89099f00bba7-fr",
+      "type": "mcq",
+      "prompt": "D'où l'ananas est-il originaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Amérique du Sud",
+            "correct": true
+          },
+          {
+            "label": "Hawaï",
+            "correct": false
+          },
+          {
+            "label": "Asie",
+            "correct": false
+          },
+          {
+            "label": "Europe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8a407d3c5d7a-fr",
+      "type": "truefalse",
+      "prompt": "En 2016, l'UICN a fait passer le statut du panda géant de « en danger » à « vulnérable ».",
+      "payload": {
+        "correct": true
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8bcef5e2194b-fr",
+      "type": "truefalse",
+      "prompt": "Les kangourous gardent de la nourriture dans leur poche, à côté de leurs petits.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9b7f77cffa4d-fr",
+      "type": "truefalse",
+      "prompt": "L'ornithorynque est un mammifère.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9e82e246c793-fr",
+      "type": "truefalse",
+      "prompt": "Des scientifiques ont tué par accident un mollusque de 507 ans, alors la plus vieille créature vivante connue.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a368cba3bd4b-fr",
+      "type": "mcq",
+      "prompt": "De quoi est faite la corne du rhinocéros ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ivoire",
+            "correct": false
+          },
+          {
+            "label": "Kératine",
+            "correct": true
+          },
+          {
+            "label": "Os",
+            "correct": false
+          },
+          {
+            "label": "Peau",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a393c86ff55b-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces espèces n'est pas éteinte ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dragon de Komodo",
+            "correct": true
+          },
+          {
+            "label": "Tigre de Tasmanie",
+            "correct": false
+          },
+          {
+            "label": "Lion de mer du Japon",
+            "correct": false
+          },
+          {
+            "label": "Gazelle saoudienne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a4a032f5500e-fr",
+      "type": "truefalse",
+      "prompt": "Le navigateur Internet Firefox tire son nom du panda roux.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ae920814f32b-fr",
+      "type": "mcq",
+      "prompt": "Quel est l'animal national de l'Inde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cheval",
+            "correct": false
+          },
+          {
+            "label": "Lion",
+            "correct": false
+          },
+          {
+            "label": "Tigre",
+            "correct": true
+          },
+          {
+            "label": "Chameau",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-afd3209f0a9d-fr",
+      "type": "mcq",
+      "prompt": "Quel est le nom scientifique du guépard ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Felis catus",
+            "correct": false
+          },
+          {
+            "label": "Panthera onca",
+            "correct": false
+          },
+          {
+            "label": "Lynx rufus",
+            "correct": false
+          },
+          {
+            "label": "Acinonyx jubatus",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b6a1dfd2658a-fr",
+      "type": "mcq",
+      "prompt": "Combien d'espèces vivantes de hyènes connaît-on ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2",
+            "correct": false
+          },
+          {
+            "label": "4",
+            "correct": true
+          },
+          {
+            "label": "6",
+            "correct": false
+          },
+          {
+            "label": "8",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-bf8d1be8ff4e-fr",
+      "type": "mcq",
+      "prompt": "Si vous plantiez des graines de Quercus robur, que pousserait-il ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Des fleurs",
+            "correct": false
+          },
+          {
+            "label": "Des arbres",
+            "correct": true
+          },
+          {
+            "label": "Des céréales",
+            "correct": false
+          },
+          {
+            "label": "Des légumes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-bf93070e011b-fr",
+      "type": "mcq",
+      "prompt": "À quel embranchement biologique appartiennent tous les mammifères, oiseaux et reptiles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Chordés",
+            "correct": true
+          },
+          {
+            "label": "Annélides",
+            "correct": false
+          },
+          {
+            "label": "Placozoaires",
+            "correct": false
+          },
+          {
+            "label": "Échinodermes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c01f7758852d-fr",
+      "type": "truefalse",
+      "prompt": "Une chenille a plus de muscles qu'un humain.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c1d3f32f2486-fr",
+      "type": "truefalse",
+      "prompt": "Le lapphund finlandais servait à garder les rennes.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c35cd3600f10-fr",
+      "type": "mcq",
+      "prompt": "La « gomme arabique » est une gomme naturelle formée de la sève durcie de quelle espèce d'arbre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Palmier",
+            "correct": false
+          },
+          {
+            "label": "Ficus",
+            "correct": false
+          },
+          {
+            "label": "Acacia",
+            "correct": true
+          },
+          {
+            "label": "Eucalyptus",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c49d471ae4d9-fr",
+      "type": "truefalse",
+      "prompt": "L'orque est considérée comme un type de dauphin.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d1096c0c5122-fr",
+      "type": "truefalse",
+      "prompt": "Les éponges de mer peuvent avoir un cœur.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d6595968333b-fr",
+      "type": "mcq",
+      "prompt": "De quel pays les wombats sont-ils originaires ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Palaos",
+            "correct": false
+          },
+          {
+            "label": "Nouvelle-Zélande",
+            "correct": false
+          },
+          {
+            "label": "Papouasie-Nouvelle-Guinée",
+            "correct": false
+          },
+          {
+            "label": "Australie",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dc9019beb624-fr",
+      "type": "mcq",
+      "prompt": "Les serpents et les lézards dardent la langue. Dans quel but ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Capter des odeurs",
+            "correct": true
+          },
+          {
+            "label": "Goûter l'air sucré",
+            "correct": false
+          },
+          {
+            "label": "Attirer des femelles",
+            "correct": false
+          },
+          {
+            "label": "Menacer d'autres espèces",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-dcd9fbea4409-fr",
+      "type": "mcq",
+      "prompt": "Par définition, où vit un animal abyssopélagique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dans un arbre",
+            "correct": false
+          },
+          {
+            "label": "Au fond de l'océan",
+            "correct": true
+          },
+          {
+            "label": "Dans le désert",
+            "correct": false
+          },
+          {
+            "label": "Au sommet d'une montagne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e10828935ccf-fr",
+      "type": "truefalse",
+      "prompt": "Les taureaux sont attirés par la couleur rouge.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e6dbf4038025-fr",
+      "type": "mcq",
+      "prompt": "Quel est le nom scientifique de la perruche ondulée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ara macao",
+            "correct": false
+          },
+          {
+            "label": "Nymphicus hollandicus",
+            "correct": false
+          },
+          {
+            "label": "Melopsittacus undulatus",
+            "correct": true
+          },
+          {
+            "label": "Pyrrhura molinae",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ee7b1ec71000-fr",
+      "type": "mcq",
+      "prompt": "De quelle couleur est le merle femelle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brune",
+            "correct": true
+          },
+          {
+            "label": "Blanche",
+            "correct": false
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Noire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-eea4c972a91f-fr",
+      "type": "mcq",
+      "prompt": "À quel sous-ordre scientifique appartient la famille des Hyaenidae ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ciconiiformes",
+            "correct": false
+          },
+          {
+            "label": "Feliformia",
+            "correct": true
+          },
+          {
+            "label": "Caniformia",
+            "correct": false
+          },
+          {
+            "label": "Haplorhini",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f0f63deca756-fr",
+      "type": "mcq",
+      "prompt": "« Hippocampus » est le nom latin de quelle créature marine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pieuvre",
+            "correct": false
+          },
+          {
+            "label": "Baleine",
+            "correct": false
+          },
+          {
+            "label": "Dauphin",
+            "correct": false
+          },
+          {
+            "label": "Hippocampe",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f3ae89984271-fr",
+      "type": "mcq",
+      "prompt": "Un animal carnivore mange de la chair. Que mange un animal nucivore ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rien",
+            "correct": false
+          },
+          {
+            "label": "Des fruits",
+            "correct": false
+          },
+          {
+            "label": "Des noix",
+            "correct": true
+          },
+          {
+            "label": "Des algues",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f76b0767fb8b-fr",
+      "type": "truefalse",
+      "prompt": "Les lapins sont des carnivores.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f825a9889424-fr",
+      "type": "mcq",
+      "prompt": "À quelle famille scientifique appartient le protèle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eupleridae",
+            "correct": false
+          },
+          {
+            "label": "Hyaenidae",
+            "correct": true
+          },
+          {
+            "label": "Felidae",
+            "correct": false
+          },
+          {
+            "label": "Canidae",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-animals-fr",
+      "title": "Le règne animal",
+      "theme": "nature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-01edffe301a4-fr",
+        "otdb-172a31fabd90-fr",
+        "otdb-447dd0cd845d-fr",
+        "otdb-55980ed8d8c7-fr",
+        "otdb-57d1aee55981-fr",
+        "otdb-7813e2c100b4-fr",
+        "otdb-7fba7be7a147-fr",
+        "otdb-837d0dc0f5d4-fr",
+        "otdb-8a407d3c5d7a-fr",
+        "otdb-8bcef5e2194b-fr",
+        "otdb-9b7f77cffa4d-fr",
+        "otdb-a368cba3bd4b-fr",
+        "otdb-a4a032f5500e-fr",
+        "otdb-ae920814f32b-fr",
+        "otdb-c01f7758852d-fr",
+        "otdb-c49d471ae4d9-fr",
+        "otdb-d6595968333b-fr",
+        "otdb-dc9019beb624-fr",
+        "otdb-e10828935ccf-fr",
+        "otdb-f0f63deca756-fr"
+      ],
+      "description": "Mammifères, oiseaux, reptiles et autres créatures."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Compose de production (VPS). L'image est publiée par .github/workflows/release.yml sur GHCR.
 # Le tag git v1.2.3 produit l'image 1.2.3 (sans le v) : IMAGE_TAG est donc obligatoire, il n'y a pas de tag latest.
-# Les secrets (BETTER_AUTH_SECRET, SESSION_SECRET, POSTGRES_PASSWORD) viennent du .env présent sur le VPS
+# Les secrets (BETTER_AUTH_SECRET, SESSION_SECRET, POSTGRES_PASSWORD, APP_DB_PASSWORD) viennent du .env présent sur le VPS
 # à côté de ce fichier, jamais du dépôt.
 services:
   db:
@@ -29,8 +29,12 @@ services:
       DATABASE_URL: postgres://pengou:${POSTGRES_PASSWORD}@db:5432/pengou
       SESSION_SECRET: ${SESSION_SECRET:?Définissez SESSION_SECRET (≥32 caractères) dans le .env du VPS}
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Définissez BETTER_AUTH_SECRET (≥32 caractères, ex. openssl rand -base64 32) dans le .env du VPS}
+      # Mot de passe du rôle app_role (soumis au RLS), posé au démarrage. Le défaut de dev est refusé.
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?Définissez APP_DB_PASSWORD dans le .env du VPS}
       # Origine publique HTTPS de l'app (origine de confiance Better Auth et CORS Socket.IO).
       BETTER_AUTH_URL: ${BETTER_AUTH_URL:?Définissez BETTER_AUTH_URL (URL publique HTTPS) dans le .env du VPS}
+      # Reverse proxy dont le X-Forwarded-For est cru (limites de débit par IP client).
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:?Définissez TRUSTED_PROXIES (IP ou CIDR du reverse proxy vu depuis le conteneur) dans le .env du VPS}
       # Providers OAuth sociaux (optionnels), transmis depuis le .env s'ils sont définis.
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
@@ -38,8 +42,34 @@ services:
       FACEBOOK_CLIENT_SECRET: ${FACEBOOK_CLIENT_SECRET:-}
       GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
       GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+      # Conditions d'utilisation (voir README, section « Conditions d'utilisation »). Vides : aucune
+      # acceptation demandée. pengou.fr : LEGAL_TERMS_URL=https://pengou.fr/cgu/,
+      # LEGAL_PRIVACY_URL=https://pengou.fr/politique-de-confidentialite/ et LEGAL_TERMS_VERSION à la
+      # date de « Dernière mise à jour » des CGU, à monter à chaque changement de cette date.
+      LEGAL_TERMS_URL: ${LEGAL_TERMS_URL:-}
+      LEGAL_PRIVACY_URL: ${LEGAL_PRIVACY_URL:-}
+      LEGAL_TERMS_VERSION: ${LEGAL_TERMS_VERSION:-}
+      # Plafond de joueurs par partie (voir docs/charge).
+      MAX_PLAYERS_PER_SESSION: ${MAX_PLAYERS_PER_SESSION:-640}
+      # Envoi d'e-mails (optionnel, voir docs/devops.md, section « Envoi d'e-mails ») : sans
+      # MAIL_TRANSPORT, aucun e-mail n'est envoyé. Une valeur vide équivaut à une valeur absente.
+      MAIL_TRANSPORT: ${MAIL_TRANSPORT:-}
+      MAIL_FROM: ${MAIL_FROM:-}
+      MAIL_REPLY_TO: ${MAIL_REPLY_TO:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_REQUIRE_TLS: ${SMTP_REQUIRE_TLS:-}
+      BREVO_API_KEY: ${BREVO_API_KEY:-}
+      EMAIL_DOMAIN_CHECK: ${EMAIL_DOMAIN_CHECK:-}
+      # Contenu de bibliothèque propre à l'instance (optionnel, voir docs/devops.md) :
+      # décommenter cette ligne et le volume ci-dessous.
+      # LIBRARY_EXTRA_DIR: /data/library
     volumes:
       - media-data:/app/data/media
+      # Lecture seule, dossier lisible par l'utilisateur node de l'image.
+      # - ./library:/data/library:ro
     depends_on:
       db:
         condition: service_healthy

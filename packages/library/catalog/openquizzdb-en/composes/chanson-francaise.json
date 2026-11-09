@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0077-1-en",
+      "type": "mcq",
+      "prompt": "For which country did Aznavour play an active role in fundraising?",
+      "payload": {
+        "options": [
+          {
+            "label": "Armenia",
+            "correct": true
+          },
+          {
+            "label": "Lithuania",
+            "correct": false
+          },
+          {
+            "label": "Ukraine",
+            "correct": false
+          },
+          {
+            "label": "Greece",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0077-3-en",
+      "type": "mcq",
+      "prompt": "What was the real surname of French singer Charles Aznavour?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aznavourian",
+            "correct": true
+          },
+          {
+            "label": "Aznavourev",
+            "correct": false
+          },
+          {
+            "label": "Aznavouriak",
+            "correct": false
+          },
+          {
+            "label": "Aznavour",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0077-4-en",
+      "type": "mcq",
+      "prompt": "\"La Mamma\" was written for Aznavour by the father of which artist?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mireille Mathieu",
+            "correct": false
+          },
+          {
+            "label": "Sheila",
+            "correct": false
+          },
+          {
+            "label": "Dalida",
+            "correct": false
+          },
+          {
+            "label": "France Gall",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

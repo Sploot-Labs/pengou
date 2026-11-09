@@ -1,0 +1,442 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, plusieurs auteurs",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0545-1",
+      "type": "mcq",
+      "prompt": "De quelle fonction vitale le fennec peut-il étonnamment se passer ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Voir",
+            "correct": false
+          },
+          {
+            "label": "Boire",
+            "correct": true
+          },
+          {
+            "label": "Dormir",
+            "correct": false
+          },
+          {
+            "label": "Manger",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0545-3",
+      "type": "mcq",
+      "prompt": "Taillé pour la course, jusqu'à quelle vitesse un guépard peut-il courir ?",
+      "payload": {
+        "options": [
+          {
+            "label": "120 km/h",
+            "correct": true
+          },
+          {
+            "label": "90 km/h",
+            "correct": false
+          },
+          {
+            "label": "60 km/h",
+            "correct": false
+          },
+          {
+            "label": "150 km/h",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0545-4",
+      "type": "mcq",
+      "prompt": "À quel âge un tigreau commence-t-il à manger de la viande ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Un an",
+            "correct": false
+          },
+          {
+            "label": "Deux mois",
+            "correct": true
+          },
+          {
+            "label": "Deux ans",
+            "correct": false
+          },
+          {
+            "label": "Six mois",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0383-1",
+      "type": "mcq",
+      "prompt": "Quel est le régime alimentaire de l'éléphant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Carnivore",
+            "correct": false
+          },
+          {
+            "label": "Herbivore",
+            "correct": true
+          },
+          {
+            "label": "Insectivore",
+            "correct": false
+          },
+          {
+            "label": "Omnivore",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0383-2",
+      "type": "mcq",
+      "prompt": "Combien de temps dure environ la gestation d'une éléphante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "3 mois",
+            "correct": false
+          },
+          {
+            "label": "12 mois",
+            "correct": false
+          },
+          {
+            "label": "6 mois",
+            "correct": false
+          },
+          {
+            "label": "22 mois",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0383-3",
+      "type": "mcq",
+      "prompt": "Quelle est la principale menace pour les éléphants ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Prédation",
+            "correct": false
+          },
+          {
+            "label": "Braconnage",
+            "correct": true
+          },
+          {
+            "label": "Tempêtes",
+            "correct": false
+          },
+          {
+            "label": "Froid",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0383-4",
+      "type": "mcq",
+      "prompt": "Qu'est-ce qui distingue les éléphants d'Asie des éléphants d'Afrique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oreilles",
+            "correct": true
+          },
+          {
+            "label": "Couleur",
+            "correct": false
+          },
+          {
+            "label": "Trompe",
+            "correct": false
+          },
+          {
+            "label": "Queue",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0207-1",
+      "type": "mcq",
+      "prompt": "Grâce à quoi les requins peuvent-ils respirer, tout comme les raies ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peau",
+            "correct": false
+          },
+          {
+            "label": "Branchies",
+            "correct": true
+          },
+          {
+            "label": "Nageoires",
+            "correct": false
+          },
+          {
+            "label": "Poumons",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0207-2",
+      "type": "mcq",
+      "prompt": "Quel élément de la silhouette du requin nous fait trembler ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Queue",
+            "correct": false
+          },
+          {
+            "label": "Nageoire dorsale",
+            "correct": true
+          },
+          {
+            "label": "Nez",
+            "correct": false
+          },
+          {
+            "label": "Branchies",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0207-3",
+      "type": "mcq",
+      "prompt": "De quoi se nourrit surtout le requin-baleine, tout en se déplaçant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "De mousses",
+            "correct": false
+          },
+          {
+            "label": "De crabes",
+            "correct": false
+          },
+          {
+            "label": "De phoques",
+            "correct": false
+          },
+          {
+            "label": "Du plancton",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0207-4",
+      "type": "mcq",
+      "prompt": "Quel pourcentage du poids du requin le foie peut-il représenter ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jusqu'à 12 %",
+            "correct": false
+          },
+          {
+            "label": "Jusqu'à 25 %",
+            "correct": true
+          },
+          {
+            "label": "Jusqu'à 2 %",
+            "correct": false
+          },
+          {
+            "label": "Jusqu'à 6 %",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0491-2",
+      "type": "mcq",
+      "prompt": "Quel oiseau fournit le duvet servant à la fabrication des édredons ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eider",
+            "correct": true
+          },
+          {
+            "label": "Sarcelle",
+            "correct": false
+          },
+          {
+            "label": "Perruche",
+            "correct": false
+          },
+          {
+            "label": "Colvert",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0491-3",
+      "type": "mcq",
+      "prompt": "Quel oiseau pond ses oeufs dans le nid des autres espèces ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mésange",
+            "correct": false
+          },
+          {
+            "label": "Coucou",
+            "correct": true
+          },
+          {
+            "label": "Merle",
+            "correct": false
+          },
+          {
+            "label": "Faisan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0491-4",
+      "type": "mcq",
+      "prompt": "À quel oiseau ressemble un marabout ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Moineau",
+            "correct": false
+          },
+          {
+            "label": "Cigogne",
+            "correct": true
+          },
+          {
+            "label": "Goëland",
+            "correct": false
+          },
+          {
+            "label": "Mouette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-animaux-du-monde",
+      "title": "Animaux du monde",
+      "description": "D'après les quiz OpenQuizzDB « Animaux de la savane », « Les géants de la Terre », « Requins des Océans » et « Oiseaux ».",
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0545-1",
+        "oqdb-0545-3",
+        "oqdb-0545-4",
+        "oqdb-0383-1",
+        "oqdb-0383-2",
+        "oqdb-0383-3",
+        "oqdb-0383-4",
+        "oqdb-0207-1",
+        "oqdb-0207-2",
+        "oqdb-0207-3",
+        "oqdb-0207-4",
+        "oqdb-0491-2",
+        "oqdb-0491-3",
+        "oqdb-0491-4"
+      ]
+    }
+  ]
+}

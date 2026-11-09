@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=136"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0136-2",
+      "type": "mcq",
+      "prompt": "Quel est le plus utilisé des systèmes informatiques dits libres ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Links",
+            "correct": false
+          },
+          {
+            "label": "Lama",
+            "correct": false
+          },
+          {
+            "label": "Lamento",
+            "correct": false
+          },
+          {
+            "label": "Linux",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0136-3",
+      "type": "mcq",
+      "prompt": "Quel animal aurait nourri Romulus et Remus selon la légende de Rome ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lionne",
+            "correct": false
+          },
+          {
+            "label": "Lynx",
+            "correct": false
+          },
+          {
+            "label": "Lama",
+            "correct": false
+          },
+          {
+            "label": "Louve",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

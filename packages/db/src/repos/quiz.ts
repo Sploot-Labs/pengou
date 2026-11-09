@@ -1,5 +1,5 @@
-import { and, eq, sql } from 'drizzle-orm'
-import { schema } from '../index.js'
+import { and, eq, isNotNull, isNull, sql } from 'drizzle-orm'
+import { schema, type ContentSource } from '../index.js'
 import type { TenantScope } from '../tenant.js'
 
 export type Quiz = typeof schema.quiz.$inferSelect
@@ -38,7 +38,9 @@ export async function createQuiz(
 // `questionCount` vient d'un left join agrégé (count) sur `question`, comme
 // `playerCount` dans `listSessions` (repos/reports.ts) — un quiz sans
 // question renvoie 0 plutôt que d'être exclu de la liste.
-export async function listQuizzes(scope: TenantScope): Promise<QuizListItem[]> {
+// Par défaut seuls les quiz actifs sont listés ; `archived: true` liste uniquement les archivés.
+export async function listQuizzes(scope: TenantScope, options: { archived?: boolean } = {}): Promise<QuizListItem[]> {
+  const archived = options.archived ?? false
   return scope.db
     .select({
       id: schema.quiz.id,
@@ -47,13 +49,21 @@ export async function listQuizzes(scope: TenantScope): Promise<QuizListItem[]> {
       title: schema.quiz.title,
       description: schema.quiz.description,
       cover: schema.quiz.cover,
+      source: schema.quiz.source,
       createdAt: schema.quiz.createdAt,
       updatedAt: schema.quiz.updatedAt,
+      archivedAt: schema.quiz.archivedAt,
       questionCount: sql<number>`count(${schema.question.id})`.mapWith(Number),
     })
     .from(schema.quiz)
     .leftJoin(schema.question, eq(schema.question.quizId, schema.quiz.id))
-    .where(and(eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
+    .where(
+      and(
+        eq(schema.quiz.tenantId, scope.tenantId),
+        ownerPredicate(scope),
+        archived ? isNotNull(schema.quiz.archivedAt) : isNull(schema.quiz.archivedAt),
+      ),
+    )
     .groupBy(schema.quiz.id)
 }
 
@@ -79,10 +89,79 @@ export async function updateQuiz(
   return row ?? null
 }
 
+/** Archive (`archived: true`) ou restaure un quiz, sous les mêmes gardes tenant + propriétaire
+ * que `updateQuiz` : l'auteur, ou un rôle `content:access-all` (scope sans `ownerId`). */
+async function setArchived(scope: TenantScope, id: string, archived: boolean): Promise<Quiz | null> {
+  const [row] = await scope.db
+    .update(schema.quiz)
+    .set({ archivedAt: archived ? new Date() : null })
+    .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
+    .returning()
+  return row ?? null
+}
+
+export function archiveQuiz(scope: TenantScope, id: string): Promise<Quiz | null> {
+  return setArchived(scope, id, true)
+}
+
+export function restoreQuiz(scope: TenantScope, id: string): Promise<Quiz | null> {
+  return setArchived(scope, id, false)
+}
+
 export async function deleteQuiz(scope: TenantScope, id: string): Promise<boolean> {
   const rows = await scope.db
     .delete(schema.quiz)
     .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
     .returning({ id: schema.quiz.id })
   return rows.length > 0
+}
+
+export type ImportedQuestion = {
+  type: (typeof schema.question.$inferSelect)['type']
+  prompt: string
+  payload: unknown
+  timeLimit: number
+  readingTime: number
+  source: ContentSource | null
+}
+
+/** Crée un quiz et ses questions (copie d'une source externe) dans le scope courant. Sans
+ * transaction interne : l'appelant est dans `withTenantTx`. */
+export async function importQuiz(
+  scope: TenantScope,
+  input: {
+    ownerId: string
+    title: string
+    description?: string | null
+    source: ContentSource | null
+    questions: ImportedQuestion[]
+  },
+): Promise<Quiz> {
+  const [row] = await scope.db
+    .insert(schema.quiz)
+    .values({
+      tenantId: scope.tenantId,
+      ownerId: input.ownerId,
+      title: input.title,
+      description: input.description ?? null,
+      source: input.source,
+    })
+    .returning()
+  if (input.questions.length > 0) {
+    await scope.db.insert(schema.question).values(
+      input.questions.map((q, orderIndex) => ({
+        quizId: row.id,
+        tenantId: scope.tenantId,
+        type: q.type,
+        prompt: q.prompt,
+        timeLimit: q.timeLimit,
+        readingTime: q.readingTime,
+        payload: q.payload as never,
+        media: null,
+        source: q.source,
+        orderIndex,
+      })),
+    )
+  }
+  return row
 }

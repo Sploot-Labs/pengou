@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=285"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0285-2",
+      "type": "mcq",
+      "prompt": "Quel acteur a remplacé David Duchovny dans « X-Files » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gary Sinise",
+            "correct": false
+          },
+          {
+            "label": "Robert Wagner",
+            "correct": false
+          },
+          {
+            "label": "Robert Patrick",
+            "correct": true
+          },
+          {
+            "label": "Bruce Willis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0285-4",
+      "type": "mcq",
+      "prompt": "Quel tueur en série de « X-Files » arrache les foies de ses victimes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hosteen",
+            "correct": false
+          },
+          {
+            "label": "Burks",
+            "correct": false
+          },
+          {
+            "label": "Tooms",
+            "correct": true
+          },
+          {
+            "label": "Krycek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

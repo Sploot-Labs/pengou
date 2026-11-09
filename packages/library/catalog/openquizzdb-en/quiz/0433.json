@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=433"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0433-4-en",
+      "type": "mcq",
+      "prompt": "In \"Breaking Bad\", what is the first name of the White family's mother?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jayne",
+            "correct": false
+          },
+          {
+            "label": "Angela",
+            "correct": false
+          },
+          {
+            "label": "Rhona",
+            "correct": false
+          },
+          {
+            "label": "Skyler",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

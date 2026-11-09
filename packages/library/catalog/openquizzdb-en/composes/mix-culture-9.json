@@ -1,0 +1,532 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0273-3-en",
+      "type": "mcq",
+      "prompt": "Which plant is called \"farigoule\" in Provence?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thyme",
+            "correct": true
+          },
+          {
+            "label": "Marjoram",
+            "correct": false
+          },
+          {
+            "label": "Bergamot",
+            "correct": false
+          },
+          {
+            "label": "Basil",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0328-1-en",
+      "type": "mcq",
+      "prompt": "In which country is the Le Mans racing circuit?",
+      "payload": {
+        "options": [
+          {
+            "label": "Switzerland",
+            "correct": false
+          },
+          {
+            "label": "Belgium",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": true
+          },
+          {
+            "label": "Netherlands",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0325-4-en",
+      "type": "mcq",
+      "prompt": "Who is pushed out of a window by Jaime Lannister in \"Game of Thrones\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Craster",
+            "correct": false
+          },
+          {
+            "label": "Ned",
+            "correct": false
+          },
+          {
+            "label": "Bran",
+            "correct": true
+          },
+          {
+            "label": "Jon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0461-1-en",
+      "type": "mcq",
+      "prompt": "Oil, gas and coal are which kind of energy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Renewable",
+            "correct": false
+          },
+          {
+            "label": "Clean",
+            "correct": false
+          },
+          {
+            "label": "Fossil",
+            "correct": true
+          },
+          {
+            "label": "Solar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0607-2-en",
+      "type": "mcq",
+      "prompt": "In which season do most trees blossom in Europe?",
+      "payload": {
+        "options": [
+          {
+            "label": "Summer",
+            "correct": false
+          },
+          {
+            "label": "Autumn",
+            "correct": false
+          },
+          {
+            "label": "Winter",
+            "correct": false
+          },
+          {
+            "label": "Spring",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0225-3-en",
+      "type": "mcq",
+      "prompt": "Which soldier must be saved in a Steven Spielberg film?",
+      "payload": {
+        "options": [
+          {
+            "label": "Private Moore",
+            "correct": false
+          },
+          {
+            "label": "Private Garner",
+            "correct": false
+          },
+          {
+            "label": "Private Adams",
+            "correct": false
+          },
+          {
+            "label": "Private Ryan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0615-1-en",
+      "type": "mcq",
+      "prompt": "Which online marker uses the hash sign?",
+      "payload": {
+        "options": [
+          {
+            "label": "Backup",
+            "correct": false
+          },
+          {
+            "label": "Asset",
+            "correct": false
+          },
+          {
+            "label": "Hashtag",
+            "correct": true
+          },
+          {
+            "label": "Counter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0203-2-en",
+      "type": "mcq",
+      "prompt": "Which country is Shakira, the queen of Latin music, from?",
+      "payload": {
+        "options": [
+          {
+            "label": "United States",
+            "correct": false
+          },
+          {
+            "label": "Colombia",
+            "correct": true
+          },
+          {
+            "label": "Mexico",
+            "correct": false
+          },
+          {
+            "label": "Bolivia",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0349-2-en",
+      "type": "mcq",
+      "prompt": "Who is the most famous and influential reggae musician?",
+      "payload": {
+        "options": [
+          {
+            "label": "King Sporty",
+            "correct": false
+          },
+          {
+            "label": "Dobby Dobson",
+            "correct": false
+          },
+          {
+            "label": "Bob Marley",
+            "correct": true
+          },
+          {
+            "label": "Dawn Penn",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0323-1-en",
+      "type": "mcq",
+      "prompt": "In what year was footballer Kylian Mbappé born?",
+      "payload": {
+        "options": [
+          {
+            "label": "1998",
+            "correct": true
+          },
+          {
+            "label": "1999",
+            "correct": false
+          },
+          {
+            "label": "1996",
+            "correct": false
+          },
+          {
+            "label": "1997",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0163-3-en",
+      "type": "mcq",
+      "prompt": "Which giant conifer is found in California's Sierra Nevada?",
+      "payload": {
+        "options": [
+          {
+            "label": "Giant sequoia",
+            "correct": true
+          },
+          {
+            "label": "Black walnut",
+            "correct": false
+          },
+          {
+            "label": "White ash",
+            "correct": false
+          },
+          {
+            "label": "Graceful fir",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0398-1-en",
+      "type": "mcq",
+      "prompt": "In which country do the Kabyle people mainly live?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tunisia",
+            "correct": false
+          },
+          {
+            "label": "Algeria",
+            "correct": true
+          },
+          {
+            "label": "Libya",
+            "correct": false
+          },
+          {
+            "label": "Morocco",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0411-4-en",
+      "type": "mcq",
+      "prompt": "Which natural phenomenon's name comes from the Japanese for \"harbor wave\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Earthquake",
+            "correct": false
+          },
+          {
+            "label": "Tsunami",
+            "correct": true
+          },
+          {
+            "label": "Kendo",
+            "correct": false
+          },
+          {
+            "label": "Sakura",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0292-2-en",
+      "type": "mcq",
+      "prompt": "Which Japanese motorcycle maker also makes pianos?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yamaha",
+            "correct": true
+          },
+          {
+            "label": "Yema",
+            "correct": false
+          },
+          {
+            "label": "Yulon",
+            "correct": false
+          },
+          {
+            "label": "Yutong",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0607-3-en",
+      "type": "mcq",
+      "prompt": "What do you call a young male sheep under one year old?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lamb",
+            "correct": true
+          },
+          {
+            "label": "Kid",
+            "correct": false
+          },
+          {
+            "label": "Ram",
+            "correct": false
+          },
+          {
+            "label": "Billy goat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0442-1-en",
+      "type": "mcq",
+      "prompt": "What color is the European Union passport?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blue",
+            "correct": false
+          },
+          {
+            "label": "Green",
+            "correct": false
+          },
+          {
+            "label": "Burgundy",
+            "correct": true
+          },
+          {
+            "label": "Gray",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0049-4-en",
+      "type": "mcq",
+      "prompt": "What is the official retreat of the US president?",
+      "payload": {
+        "options": [
+          {
+            "label": "Camp David",
+            "correct": true
+          },
+          {
+            "label": "Camp Devon",
+            "correct": false
+          },
+          {
+            "label": "Camp Damon",
+            "correct": false
+          },
+          {
+            "label": "Camp Donald",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0379-1-en",
+      "type": "mcq",
+      "prompt": "Which war is the British-American film \"Full Metal Jacket\" about?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kuwait",
+            "correct": false
+          },
+          {
+            "label": "Korea",
+            "correct": false
+          },
+          {
+            "label": "Vietnam",
+            "correct": true
+          },
+          {
+            "label": "Iraq",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

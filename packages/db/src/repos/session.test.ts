@@ -1,9 +1,12 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import { eq, sql } from 'drizzle-orm'
-import { startTestDb, runMigrations, schema } from '../index.js'
+import { startTestDb, runMigrations, schema, withTenantTx } from '../index.js'
 import { tenantScope } from '../tenant.js'
 import { createQuiz } from './quiz.js'
+import { createQuestion } from './question.js'
 import {
+  setWordcloudRemoved,
+  loadWordcloudRemoved,
   createGameSession,
   getGameSessionById,
   addSessionPlayer,
@@ -18,6 +21,7 @@ import {
   listResumableSessions,
   abandonStaleSessions,
   abandonInactiveSessions,
+  deleteSessionPlayer,
 } from './session.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
@@ -413,5 +417,74 @@ describe('repo session scopé au tenant du quiz', () => {
         })
         .returning(),
     ).rejects.toThrow()
+  })
+
+  it('deleteSessionPlayer supprime le joueur et, en cascade, ses answer_record', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '777001',
+    })
+    const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Injure', joinToken: 'tok-kick' })
+    await recordAnswer(ctx.db, {
+      sessionId: session!.id,
+      questionId: questionA,
+      playerId: player.id,
+      answer: { choice: 0 },
+      timeMs: 1000,
+      isCorrect: true,
+      points: 900,
+    })
+    expect(await deleteSessionPlayer(ctx.db, player.id)).toBe(true)
+    expect(await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.id, player.id))).toHaveLength(
+      0,
+    )
+    expect(
+      await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.playerId, player.id)),
+    ).toHaveLength(0)
+    expect(await deleteSessionPlayer(ctx.db, player.id)).toBe(false)
+  })
+
+  it("deleteSessionPlayer sous RLS ne supprime rien dans le contexte d'un autre tenant", async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '777002',
+    })
+    const player = await addSessionPlayer(ctx.db, session!.id, { nickname: 'Hors champ', joinToken: 'tok-kick-rls' })
+    expect(await withTenantTx(ctx.appDb, { tenantId: tenantB }, (s) => deleteSessionPlayer(s.db, player.id))).toBe(
+      false,
+    )
+    expect(await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.id, player.id))).toHaveLength(
+      1,
+    )
+    expect(await withTenantTx(ctx.appDb, { tenantId: tenantA }, (s) => deleteSessionPlayer(s.db, player.id))).toBe(true)
+  })
+})
+
+describe('nuage de mots', () => {
+  it('stocke les mots retirés par question, de façon atomique', async () => {
+    const session = await createGameSession(tenantScope(ctx.db, tenantA), {
+      quizId: quizA,
+      hostId: ownerA,
+      pin: '909090',
+    })
+    const id = session!.id
+    expect(await loadWordcloudRemoved(ctx.db, id)).toEqual({})
+    await setWordcloudRemoved(ctx.db, id, 'q1', ['cafe'])
+    await setWordcloudRemoved(ctx.db, id, 'q2', ['x'])
+    expect(await loadWordcloudRemoved(ctx.db, id)).toEqual({ q1: ['cafe'], q2: ['x'] })
+    await setWordcloudRemoved(ctx.db, id, 'q1', ['cafe', 'rush'])
+    expect(await loadWordcloudRemoved(ctx.db, id)).toEqual({ q1: ['cafe', 'rush'], q2: ['x'] })
+  })
+
+  it('accepte une question de type wordcloud', async () => {
+    const q = await createQuestion(tenantScope(ctx.db, tenantA), quizA, {
+      type: 'wordcloud',
+      prompt: 'Un mot ?',
+      timeLimit: 30,
+      payload: {},
+    })
+    expect(q?.type).toBe('wordcloud')
   })
 })

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=568"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0568-4-en",
+      "type": "mcq",
+      "prompt": "Which forest is sometimes identified with the forest of Brocéliande?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bondy",
+            "correct": false
+          },
+          {
+            "label": "Paimpont",
+            "correct": true
+          },
+          {
+            "label": "Seillon",
+            "correct": false
+          },
+          {
+            "label": "Thelle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

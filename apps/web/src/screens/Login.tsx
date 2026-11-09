@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { signIn, useSession } from '../api/auth'
+import { useAuthFeatures } from '../api/features'
 import { ApiError } from '../api/client'
+import { safeNextPath, nextQuery } from '../nextPath'
 import { Button, Logo } from '../ui'
 
 interface FieldErrors {
@@ -13,7 +15,11 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function Login() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const { mailEnabled } = useAuthFeatures()
+  const passwordReset = (location.state as { passwordReset?: boolean } | null)?.passwordReset === true
   const { refresh } = useSession()
+  const returnTo = safeNextPath(useSearchParams()[0].get('next'))
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<FieldErrors>({})
@@ -67,7 +73,7 @@ export function Login() {
       // still see the pre-login (logged-out) state and bounce straight
       // back to /login.
       await refresh()
-      navigate('/', { replace: true })
+      navigate(returnTo ?? '/', { replace: true })
     } catch (err) {
       setPending(false)
       setFormError(
@@ -83,6 +89,12 @@ export function Login() {
       <form className="join-card" onSubmit={handleSubmit} noValidate>
         <h1>Connexion</h1>
         <p className="join-subtitle">Content de vous revoir : vos parties vous attendent.</p>
+
+        {passwordReset && (
+          <p className="join-status" role="status">
+            Mot de passe modifié. Vous pouvez vous connecter.
+          </p>
+        )}
 
         {formError && (
           <p className="join-error" role="alert" tabIndex={-1} ref={formErrorRef}>
@@ -134,12 +146,18 @@ export function Login() {
           )}
         </div>
 
+        {mailEnabled && (
+          <p className="join-reassure">
+            <Link to="/forgot-password">Mot de passe oublié ?</Link>
+          </p>
+        )}
+
         <Button variant="primary" type="submit" disabled={pending}>
           {pending ? 'Connexion…' : 'Se connecter'}
         </Button>
 
         <p className="join-reassure">
-          Pas encore de compte ? <Link to="/signup">Créer un compte</Link>
+          Pas encore de compte ? <Link to={`/signup${nextQuery(returnTo)}`}>Créer un compte</Link>
         </p>
       </form>
     </main>

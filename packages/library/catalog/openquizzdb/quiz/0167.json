@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=167"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0167-4",
+      "type": "mcq",
+      "prompt": "Pour quelle marque de vermouth George Clooney a-t-il fait de la pub ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dubonnet",
+            "correct": false
+          },
+          {
+            "label": "Cinzano",
+            "correct": false
+          },
+          {
+            "label": "Martini",
+            "correct": true
+          },
+          {
+            "label": "Noilly Prat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

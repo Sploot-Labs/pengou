@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=330"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0330-1",
+      "type": "mcq",
+      "prompt": "Quel est le deuxième prénom de Zorg dans « Le Cinquième Élément » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Simon",
+            "correct": false
+          },
+          {
+            "label": "Emmanuel",
+            "correct": true
+          },
+          {
+            "label": "Patrick",
+            "correct": false
+          },
+          {
+            "label": "Jean-Baptiste",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0330-2",
+      "type": "mcq",
+      "prompt": "Quelle arme fabrique l'entreprise Zorg dans « Le Cinquième Élément » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zag-1",
+            "correct": false
+          },
+          {
+            "label": "ZK-1",
+            "correct": false
+          },
+          {
+            "label": "ZZ-Top",
+            "correct": false
+          },
+          {
+            "label": "ZF-1",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0330-3",
+      "type": "mcq",
+      "prompt": "Quel acteur interprète le rôle de Zorg dans « Le Cinquième Élément » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ian Holm",
+            "correct": false
+          },
+          {
+            "label": "Chris Tucker",
+            "correct": false
+          },
+          {
+            "label": "Gary Oldman",
+            "correct": true
+          },
+          {
+            "label": "Bruce Willis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

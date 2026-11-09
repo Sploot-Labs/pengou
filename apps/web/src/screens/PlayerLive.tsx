@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { normalizeText, sliderTolerance } from '@splootlabs/quiz'
 import { useCue, useSound } from '../motion/index.js'
 import { clearPlayerSession, loadPlayerSession, savePlayerSession } from '../realtime/playerSession'
 import { hardReload } from '../realtime/hardReload'
+import { isKickedError } from '../realtime/ackError'
 import { useGameSocket } from '../realtime/useGameSocket'
 import type { RankingEntry, ReadingView, SessionRelaunchedView } from '../realtime/contracts'
+import { ClosingView } from './Podium'
+import { PlayerPoll } from './PlayerPoll'
+import { PlayerWordcloud, type WordcloudAck } from './PlayerWordcloud'
 import { AnswerShape, AnswerTile, Logo, SoundToggle, TimerPill } from '../ui'
 import { QuestionImage } from '../ui/QuestionImage'
 
@@ -21,7 +25,7 @@ import { QuestionImage } from '../ui/QuestionImage'
 /* Contrat serveur (types locaux — pas de mock)                        */
 /* ------------------------------------------------------------------ */
 
-type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider'
+type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud' | 'poll'
 
 /** `question:show` — projection anti-triche : jamais de bonne réponse.
  * `index`/`total` sont positionnels (numéro de question), ajoutés à la
@@ -36,18 +40,10 @@ interface QuestionShowPayload {
   payload: unknown
   index?: number
   total?: number
+  /** Posé par le serveur sur le `question:show` rejoué à la reconnexion d'un joueur qui a déjà répondu. */
+  alreadyAnswered?: boolean
   media?: string | null
   mediaAlt?: string | null
-}
-
-/** `lobby:update` — liste des joueurs de la room, diffusée par la passerelle
- * (`game-gateway.ts`) à TOUTE la room, joueur compris. On n'en consomme que
- * le compteur « manchots sur la glace » : aucun autre détail joueur n'est
- * affiché côté joueur. */
-interface LobbyPlayer {
-  id: string
-  nickname: string
-  connected?: boolean
 }
 
 /** Projection « lecture seule » émise par `question:reading` (Task 3, moteur
@@ -58,6 +54,10 @@ interface LobbyPlayer {
 
 interface McqShowPayload {
   options: { label: string }[]
+}
+interface PollShowPayload {
+  options: { label: string }[]
+  multiple: boolean
 }
 interface SliderShowPayload {
   min: number
@@ -124,6 +124,14 @@ const MCQ_SHAPES: readonly TileShape[] = ['triangle', 'diamond', 'circle', 'squa
 /** Variables CSS d'un aplat de réponse (couleur + encre + ombre portée) pour
  * une grande tuile de verdict, depuis les tokens `--ans-*` (une option, une
  * couleur partout). */
+/**
+ * Rang en toutes lettres abrégées, accordé à « place » (féminin) pour rester
+ * neutre vis-à-vis du joueur : 1ʳᵉ, 2ᵉ, 3ᵉ… (« 1ᵉ » n'existe pas).
+ */
+function placeOrdinal(rank: number): string {
+  return rank === 1 ? '1ʳᵉ' : `${rank}ᵉ`
+}
+
 function tileVars(shape: TileShape): CSSProperties {
   return {
     ['--tile-color' as string]: `var(--ans-${shape})`,
@@ -194,6 +202,8 @@ export function PlayerLive() {
   const storedRef = useRef(loadPlayerSession())
   const stored = storedRef.current
 
+  const [kicked, setKicked] = useState(false)
+  const kickedHeadingRef = useRef<HTMLHeadingElement>(null)
   const [phase, setPhase] = useState<PlayerPhase>('waiting')
   const [connection, setConnection] = useState<Connection>('online')
   const [score, setScore] = useState(0)
@@ -208,14 +218,15 @@ export function PlayerLive() {
   const [lastAward, setLastAward] = useState<number | null>(null)
   const [lastRanking, setLastRanking] = useState<RankingEntry[]>([])
   const [podiumTop, setPodiumTop] = useState<RankingEntry[]>([])
+  const [hasScoredQuestions, setHasScoredQuestions] = useState(true)
 
   // Enchaînement automatique : horodatage serveur de la prochaine bascule (diffusé par
   // `auto:advance`), reflété en compte à rebours — jamais un minuteur local indépendant.
   const [autoNextAt, setAutoNextAt] = useState<number | null>(null)
   const [autoRemaining, setAutoRemaining] = useState<number | null>(null)
 
-  // Compteur « manchots sur la glace » (lobby) — alimenté par `lobby:update`,
-  // vraie donnée serveur ; `null` tant qu'aucune liste n'est arrivée (on
+  // Compteur « manchots sur la glace » (lobby), alimenté par `lobby:count`,
+  // vraie donnée serveur ; `null` tant qu'aucun compteur n'est arrivé (on
   // n'invente pas de nombre).
   const [lobbyCount, setLobbyCount] = useState<number | null>(null)
 
@@ -231,6 +242,7 @@ export function PlayerLive() {
   const [textValue, setTextValue] = useState('')
   const [sliderValue, setSliderValue] = useState(0)
   const [sliderTouched, setSliderTouched] = useState(false)
+  const [pollSelection, setPollSelection] = useState<number[]>([])
 
   // Vérité serveur sur LA réponse effectivement comptabilisée pour cette
   // manche — distincte des valeurs capturées ci-dessus, qui ne reflètent que
@@ -252,6 +264,7 @@ export function PlayerLive() {
     setBoolChoice(null)
     setTextValue('')
     setSliderTouched(false)
+    setPollSelection([])
     setSliderValue(q.type === 'slider' ? (q.payload as SliderShowPayload).min : 0)
   }
 
@@ -266,7 +279,20 @@ export function PlayerLive() {
         return textValue.trim().length > 0
       case 'slider':
         return sliderTouched
+      case 'wordcloud':
+        return true
+      case 'poll':
+        return answerAccepted
     }
+  }
+
+  /** Nuage de mots : chaque idée est envoyée seule, la phase reste 'question'
+   * (le moteur accepte plusieurs envois) ; le refus est rendu par le composant. */
+  async function submitWord(word: string): Promise<WordcloudAck> {
+    if (phase !== 'question') return { accepted: false, reason: 'hors phase question' }
+    sound.unlock()
+    cue('answer.submit')
+    return emitAck<WordcloudAck>('player:answer', { answer: { word } })
   }
 
   /**
@@ -351,11 +377,15 @@ export function PlayerLive() {
         // podium) reprendront le fil normalement.
         if (ack.phase !== 'question') setPhase('waiting')
         if (showReconnectedBanner) setConnection('reconnected')
-      } catch {
+      } catch (err) {
         // joinToken invalide/périmé (ou PIN inconnu) : impossible de
         // continuer sans identité de joueur valide.
         if (cancelled) return
         clearPlayerSession()
+        if (isKickedError(err)) {
+          setKicked(true)
+          return
+        }
         navigate('/join', { replace: true })
       }
     }
@@ -390,6 +420,13 @@ export function PlayerLive() {
       hardReload('/play')
     })
 
+    // Exclusion par l'animateur : l'identité locale est oubliée et l'écran
+    // d'exclusion prend le pas sur tout le reste.
+    const offKicked = on('player:kicked', () => {
+      clearPlayerSession()
+      setKicked(true)
+    })
+
     const offReading = on<ReadingView>('question:reading', (view) => {
       setReading(view)
       // Même reset qu'à `question:show` ci-dessous — la phase lecture précède
@@ -418,7 +455,13 @@ export function PlayerLive() {
       setAnswerRejection(null)
       setAutoNextAt(null)
       resetAnswer(view)
-      setPhase('question')
+      if (view.type === 'poll' && view.alreadyAnswered === true) {
+        // Vote déjà compté avant le rechargement : on ne rouvre pas la saisie.
+        setAnswerAccepted(true)
+        setPhase('answered')
+      } else {
+        setPhase('question')
+      }
     })
 
     const offTimer = on<TimerPayload>('timer', (t) => {
@@ -440,21 +483,26 @@ export function PlayerLive() {
       }
     })
 
-    const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
-      setPodiumTop(top)
-      setAutoNextAt(null)
-      setPhase('podium')
-    })
+    const offPodium = on<{ top: RankingEntry[]; hasScoredQuestions?: boolean }>(
+      'podium',
+      ({ top, hasScoredQuestions: scored }) => {
+        setPodiumTop(top)
+        setHasScoredQuestions(scored !== false)
+        setAutoNextAt(null)
+        setPhase('podium')
+      },
+    )
 
     const offAuto = on<{ nextAt: number | null }>('auto:advance', ({ nextAt }) => {
       setAutoNextAt(nextAt)
     })
 
-    // Compteur du lobby (« manchots sur la glace ») — diffusé à toute la room
-    // à chaque arrivée/départ, et rejoué sur `player:reconnect`. On ne garde
-    // que le nombre : aucun autre détail joueur n'est exposé côté joueur.
-    const offLobby = on<{ players: LobbyPlayer[] }>('lobby:update', ({ players }) => {
-      setLobbyCount(players.filter((p) => p.connected !== false).length)
+    // Compteur du lobby (« manchots sur la glace ») : `lobby:count` porte le
+    // nombre de joueurs connectés, diffusé de façon coalescée à chaque arrivée
+    // ou reconnexion. La liste des pseudos (`lobby:update`) est réservée à
+    // l'hôte et au grand écran : le joueur n'en reçoit jamais.
+    const offLobby = on<{ count: number }>('lobby:count', ({ count }) => {
+      setLobbyCount(count)
     })
 
     return () => {
@@ -462,6 +510,7 @@ export function PlayerLive() {
       offConnect()
       offDisconnect()
       offRelaunch()
+      offKicked()
       offReading()
       offShow()
       offTimer()
@@ -572,6 +621,11 @@ export function PlayerLive() {
     return () => window.clearTimeout(timeout)
   }, [connection])
 
+  // Focus sur le titre de l'écran d'exclusion (rendu plus bas, après le dernier hook).
+  useEffect(() => {
+    if (kicked) kickedHeadingRef.current?.focus()
+  }, [kicked])
+
   if (!stored) {
     return <Navigate to="/join" replace />
   }
@@ -581,9 +635,16 @@ export function PlayerLive() {
     return index === -1 ? null : index + 1
   })()
 
-  const answeredMessage = hasSubmission()
-    ? 'Réponse enregistrée. En attente de la suite…'
-    : 'Temps écoulé. En attente de la suite…'
+  const answeredMessage =
+    question?.type === 'wordcloud'
+      ? 'Temps écoulé, merci pour tes idées'
+      : question?.type === 'poll'
+        ? answerAccepted
+          ? 'Vote enregistré'
+          : 'Temps écoulé. En attente de la suite…'
+        : hasSubmission()
+          ? 'Réponse enregistrée. En attente de la suite…'
+          : 'Temps écoulé. En attente de la suite…'
 
   // Ce que le serveur a réellement compté pour cette manche — `null`/vide si
   // la réponse n'a jamais été acceptée (rejetée, jamais soumise, temps
@@ -608,6 +669,9 @@ export function PlayerLive() {
         return { kind: evaluateText(revealPayload.correct as TextCorrect, effectiveTextValue), diff: null }
       case 'slider':
         return evaluateSlider(revealPayload.correct as SliderCorrect, effectiveSliderValue)
+      case 'wordcloud':
+      case 'poll':
+        return null
     }
   }
 
@@ -698,6 +762,9 @@ export function PlayerLive() {
           </div>
         )
       }
+      case 'wordcloud':
+      case 'poll':
+        return null
     }
   }
 
@@ -749,7 +816,26 @@ export function PlayerLive() {
         ? 'Curseur'
         : question?.type === 'text'
           ? 'Réponse libre'
-          : null
+          : question?.type === 'poll'
+            ? 'Sondage'
+            : null
+
+  // Rendu prioritaire sur tout le reste (la session locale est déjà effacée).
+  if (kicked) {
+    return (
+      <main className="join-screen" id="contenu-principal" tabIndex={-1}>
+        <div className="join-head">
+          <Logo />
+          <h1 ref={kickedHeadingRef} tabIndex={-1}>
+            L'animateur t'a retiré de la partie.
+          </h1>
+        </div>
+        <Link className="ab-button ab-button--primary" to="/join">
+          Rejoindre une partie
+        </Link>
+      </main>
+    )
+  }
 
   return (
     <main className="player-screen" id="contenu-principal" tabIndex={-1}>
@@ -819,7 +905,7 @@ export function PlayerLive() {
             {reading.prompt}
           </h1>
           <p className="player-status" role="status" aria-live="polite">
-            Préparez-vous…
+            Prépare-toi…
           </p>
           <div className="player-question__spacer" />
         </div>
@@ -851,9 +937,12 @@ export function PlayerLive() {
 
           <div className="player-question__spacer" />
 
-          {phase === 'question' && (question.type === 'mcq' || question.type === 'truefalse') && (
-            <p className="player-commit-hint">Le premier appui valide ta réponse.</p>
-          )}
+          {phase === 'question' &&
+            (question.type === 'mcq' ||
+              question.type === 'truefalse' ||
+              (question.type === 'poll' && !(question.payload as PollShowPayload).multiple)) && (
+              <p className="player-commit-hint">Le premier appui valide ta réponse.</p>
+            )}
 
           {question.type === 'mcq' && (
             <div className="player-tiles" role="group" aria-label="Réponses">
@@ -891,6 +980,24 @@ export function PlayerLive() {
                 />
               ))}
             </div>
+          )}
+
+          {question.type === 'wordcloud' && (
+            <PlayerWordcloud key={question.id} disabled={phase === 'answered'} submit={submitWord} />
+          )}
+
+          {question.type === 'poll' && (
+            <PlayerPoll
+              key={question.id}
+              options={(question.payload as PollShowPayload).options}
+              multiple={(question.payload as PollShowPayload).multiple}
+              disabled={phase === 'answered'}
+              selected={pollSelection}
+              onSubmit={(optionIndexes) => {
+                setPollSelection(optionIndexes)
+                submitAnswer({ optionIndexes })
+              }}
+            />
           )}
 
           {question.type === 'text' && (
@@ -1013,7 +1120,29 @@ export function PlayerLive() {
         </div>
       )}
 
-      {phase === 'result' && !evalResult && (
+      {phase === 'result' && question?.type === 'wordcloud' && (
+        <div className="player-verdict player-verdict--timeout" role="status">
+          <div className="player-verdict__spacer" />
+          <h1 className="player-verdict__title" ref={resultHeadingRef} tabIndex={-1}>
+            Merci pour tes idées
+          </h1>
+          <p className="player-verdict__sub">La question suivante arrive…</p>
+          <div className="player-verdict__spacer" />
+        </div>
+      )}
+
+      {phase === 'result' && question?.type === 'poll' && (
+        <div className="player-verdict player-verdict--timeout" role="status">
+          <div className="player-verdict__spacer" />
+          <h1 className="player-verdict__title" ref={resultHeadingRef} tabIndex={-1}>
+            Sondage clos
+          </h1>
+          <p className="player-verdict__sub">Regarde l'écran pour voir les résultats.</p>
+          <div className="player-verdict__spacer" />
+        </div>
+      )}
+
+      {phase === 'result' && !evalResult && question?.type !== 'wordcloud' && question?.type !== 'poll' && (
         // Rejoindre en pleine question (Plan 06 review, finding #2) : le serveur ne rejoue
         // `question:show` que sur `player:reconnect`, jamais sur `player:join` — un joueur qui
         // rejoint APRÈS le début d'une question a donc `question === null` quand
@@ -1110,7 +1239,7 @@ export function PlayerLive() {
               {myRank !== null && (
                 <div className="player-rankbar">
                   <span className="player-rankbar__rank">
-                    Tu es <strong>{myRank}ᵉ</strong>
+                    Tu es à la <strong>{placeOrdinal(myRank)}</strong> place
                     {lastRanking.length > 0 ? ` sur ${lastRanking.length}` : ''}
                   </span>
                   <span className="player-rankbar__score">{score.toLocaleString('fr-FR')}</span>
@@ -1128,28 +1257,34 @@ export function PlayerLive() {
 
       {phase === 'podium' && (
         <div className="player-result" role="status">
-          <h1 ref={podiumHeadingRef} tabIndex={-1}>
-            Partie terminée !
-          </h1>
-          <p className="player-result__points">Score final : {score.toLocaleString('fr-FR')}</p>
-          {myRank !== null ? (
-            <p>
-              Tu termines {myRank}ᵉ sur {lastRanking.length || podiumTop.length}.
-            </p>
+          {hasScoredQuestions ? (
+            <>
+              <h1 ref={podiumHeadingRef} tabIndex={-1}>
+                Partie terminée !
+              </h1>
+              <p className="player-result__points">Score final : {score.toLocaleString('fr-FR')}</p>
+              {myRank !== null ? (
+                <p>
+                  Tu termines à la {placeOrdinal(myRank)} place sur {lastRanking.length || podiumTop.length}.
+                </p>
+              ) : (
+                <p>Merci d'avoir joué !</p>
+              )}
+              {podiumTop.length > 0 && (
+                <ol className="player-result__recap">
+                  {podiumTop.map((entry, index) => (
+                    <li key={entry.playerId} className="player-result__recap-line">
+                      <span>
+                        {index + 1}. {entry.nickname} : {entry.score} points
+                        {entry.playerId === stored.playerId ? ' (toi)' : ''}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </>
           ) : (
-            <p>Merci d'avoir joué !</p>
-          )}
-          {podiumTop.length > 0 && (
-            <ol className="player-result__recap">
-              {podiumTop.map((entry, index) => (
-                <li key={entry.playerId} className="player-result__recap-line">
-                  <span>
-                    {index + 1}. {entry.nickname} : {entry.score} points
-                    {entry.playerId === stored.playerId ? ' (toi)' : ''}
-                  </span>
-                </li>
-              ))}
-            </ol>
+            <ClosingView headingRef={podiumHeadingRef} audience="player" />
           )}
 
           {/* Enchaîner une autre partie : on oublie l'identité de CETTE partie

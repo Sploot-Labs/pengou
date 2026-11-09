@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=572"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0572-1-en",
+      "type": "mcq",
+      "prompt": "Which sugar-free Coke is aimed at a more male audience?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coke Zoom",
+            "correct": false
+          },
+          {
+            "label": "Coke Zen",
+            "correct": false
+          },
+          {
+            "label": "Coke Zebra",
+            "correct": false
+          },
+          {
+            "label": "Coke Zero",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0572-4-en",
+      "type": "mcq",
+      "prompt": "Which version of Coca-Cola has a taste enriched with coffee?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zero",
+            "correct": false
+          },
+          {
+            "label": "BlaK",
+            "correct": true
+          },
+          {
+            "label": "Life",
+            "correct": false
+          },
+          {
+            "label": "Cherry",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

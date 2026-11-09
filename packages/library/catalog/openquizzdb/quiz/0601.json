@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=601"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0601-3",
+      "type": "mcq",
+      "prompt": "Quel intrus se cache parmi ces variétés de pomme de terre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Charlotte",
+            "correct": false
+          },
+          {
+            "label": "Carentan",
+            "correct": true
+          },
+          {
+            "label": "Monalisa",
+            "correct": false
+          },
+          {
+            "label": "Roseval",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

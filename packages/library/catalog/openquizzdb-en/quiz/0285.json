@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=285"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0285-2-en",
+      "type": "mcq",
+      "prompt": "Which actor replaced David Duchovny in \"The X-Files\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gary Sinise",
+            "correct": false
+          },
+          {
+            "label": "Robert Wagner",
+            "correct": false
+          },
+          {
+            "label": "Robert Patrick",
+            "correct": true
+          },
+          {
+            "label": "Bruce Willis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0285-4-en",
+      "type": "mcq",
+      "prompt": "Which serial killer in \"The X-Files\" tears out his victims' livers?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hosteen",
+            "correct": false
+          },
+          {
+            "label": "Burks",
+            "correct": false
+          },
+          {
+            "label": "Tooms",
+            "correct": true
+          },
+          {
+            "label": "Krycek",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

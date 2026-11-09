@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=337"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0337-2-en",
+      "type": "mcq",
+      "prompt": "What does a Medjool date generally taste like?",
+      "payload": {
+        "options": [
+          {
+            "label": "Salty",
+            "correct": false
+          },
+          {
+            "label": "Sweet",
+            "correct": true
+          },
+          {
+            "label": "Bitter",
+            "correct": false
+          },
+          {
+            "label": "Sour",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0337-3-en",
+      "type": "mcq",
+      "prompt": "What sets the Medjool date apart from other varieties?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sugar-free",
+            "correct": false
+          },
+          {
+            "label": "Crunchy",
+            "correct": false
+          },
+          {
+            "label": "Always green",
+            "correct": false
+          },
+          {
+            "label": "Fleshier",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0337-4-en",
+      "type": "mcq",
+      "prompt": "What is the typical color of a ripe Medjool date?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dark brown",
+            "correct": true
+          },
+          {
+            "label": "Purplish blue",
+            "correct": false
+          },
+          {
+            "label": "Bright green",
+            "correct": false
+          },
+          {
+            "label": "Lemon yellow",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -4,12 +4,17 @@ import { AppShell } from './AppShell'
 import { GameSocketProvider } from './realtime/GameSocketProvider'
 import { RequireAuth } from './RequireAuth'
 import { BigScreen } from './screens/BigScreen'
+import { Credits } from './screens/Credits'
+import { ForgotPassword } from './screens/ForgotPassword'
 import { Home } from './screens/Home'
 import { HostEditor } from './screens/HostEditor'
 import { HostLive } from './screens/HostLive'
 import { Join } from './screens/Join'
+import { Library } from './screens/Library'
 import { Login } from './screens/Login'
 import { PlayerLive } from './screens/PlayerLive'
+import { ResetPassword } from './screens/ResetPassword'
+import { RouteError } from './screens/RouteError'
 import { SessionReport } from './screens/SessionReport'
 import { Signup } from './screens/Signup'
 import { AcceptInvitation } from './screens/AcceptInvitation'
@@ -59,7 +64,7 @@ function HostRealtimeLayout() {
  * `/`, `/quizzes/:quizId` et `/host/:sessionId` sont protégées par
  * <RequireAuth> (redirection vers /login sans session, écran de chargement
  * pendant la résolution — pas de flash du contenu protégé). `/login`,
- * `/signup`, `/join`, `/play` et `/screen/:sessionId` restent publiques :
+ * `/signup`, `/join`, `/play`, `/screen/:sessionId` et `/credits` restent publiques :
  * joueurs et grand écran sont anonymes, et il faut pouvoir atteindre
  * login/signup sans session.
  *
@@ -85,9 +90,14 @@ function HostRealtimeLayout() {
 export const router = createBrowserRouter([
   {
     element: <AppShell />,
+    // Page introuvable (aucune route ne correspond) et erreur levée au rendu : écran maison
+    // plutôt que la page de développement de react-router.
+    errorElement: <RouteError />,
     children: [
       { path: '/login', element: <Login /> },
       { path: '/signup', element: <Signup /> },
+      { path: '/forgot-password', element: <ForgotPassword /> },
+      { path: '/reset-password', element: <ResetPassword /> },
       {
         element: <HostRealtimeLayout />,
         children: [
@@ -108,9 +118,20 @@ export const router = createBrowserRouter([
             ),
           },
           {
-            path: '/host/:sessionId',
+            // Bibliothèque de questions : sous HostRealtimeLayout pour « Jouer maintenant », qui
+            // crée la partie sur la socket partagée que `HostLive` reprend ensuite.
+            path: '/library',
             element: (
               <RequireAuth>
+                <Library />
+              </RequireAuth>
+            ),
+          },
+          {
+            path: '/host/:sessionId',
+            element: (
+              // Partie en cours : une nouvelle version des CGU ne la coupe pas (voir RequireAuth).
+              <RequireAuth allowPendingTerms>
                 <SceneRoute>
                   <HostLive />
                 </SceneRoute>
@@ -164,6 +185,8 @@ export const router = createBrowserRouter([
         ),
       },
       { path: '/screen/:sessionId', element: <BigScreen /> },
+      // Crédits des questions de la bibliothèque : publics, les mentions de l'interface y renvoient.
+      { path: '/credits', element: <Credits /> },
     ],
   },
 ])

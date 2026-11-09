@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=251"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0251-2-en",
+      "type": "mcq",
+      "prompt": "Which sea borders Bulgaria?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mediterranean Sea",
+            "correct": false
+          },
+          {
+            "label": "Red Sea",
+            "correct": false
+          },
+          {
+            "label": "Baltic Sea",
+            "correct": false
+          },
+          {
+            "label": "Black Sea",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0251-4-en",
+      "type": "mcq",
+      "prompt": "Which seaside resort is renowned in Bulgaria?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sofia",
+            "correct": false
+          },
+          {
+            "label": "Plovdiv",
+            "correct": false
+          },
+          {
+            "label": "Varna",
+            "correct": true
+          },
+          {
+            "label": "Ruse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,387 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0291-4-en",
+      "type": "mcq",
+      "prompt": "In which film is Dragon a military ship of Colonel Quaritch?",
+      "payload": {
+        "options": [
+          {
+            "label": "X-Men",
+            "correct": false
+          },
+          {
+            "label": "Avatar",
+            "correct": true
+          },
+          {
+            "label": "Cloverfield",
+            "correct": false
+          },
+          {
+            "label": "Avengers",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0527-1-en",
+      "type": "mcq",
+      "prompt": "Who was the first Russian woman tennis player to win Wimbledon?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sharapova",
+            "correct": true
+          },
+          {
+            "label": "Bovina",
+            "correct": false
+          },
+          {
+            "label": "Kirilenko",
+            "correct": false
+          },
+          {
+            "label": "Panova",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0203-4-en",
+      "type": "mcq",
+      "prompt": "What is the title of the first album Shakira wrote in English?",
+      "payload": {
+        "options": [
+          {
+            "label": "You and Me",
+            "correct": false
+          },
+          {
+            "label": "Oral Fixation",
+            "correct": false
+          },
+          {
+            "label": "Laundry Service",
+            "correct": true
+          },
+          {
+            "label": "She Wolf",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0444-2-en",
+      "type": "mcq",
+      "prompt": "Which ex-Beatle played in Red Square on May 24, 2003?",
+      "payload": {
+        "options": [
+          {
+            "label": "George Harrison",
+            "correct": false
+          },
+          {
+            "label": "Paul McCartney",
+            "correct": true
+          },
+          {
+            "label": "Ringo Starr",
+            "correct": false
+          },
+          {
+            "label": "John Lennon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0215-3-en",
+      "type": "mcq",
+      "prompt": "Which hat does Johnny Depp wear in \"Charlie and the Chocolate Factory\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Top hat",
+            "correct": true
+          },
+          {
+            "label": "Beret",
+            "correct": false
+          },
+          {
+            "label": "Bowler hat",
+            "correct": false
+          },
+          {
+            "label": "Boater",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0239-3-en",
+      "type": "mcq",
+      "prompt": "Which male first name is the title of one of Eminem's songs?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bran",
+            "correct": false
+          },
+          {
+            "label": "Sam",
+            "correct": false
+          },
+          {
+            "label": "Stan",
+            "correct": true
+          },
+          {
+            "label": "Dan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0497-1-en",
+      "type": "mcq",
+      "prompt": "Which objects are the basis of the game show \"Deal or No Deal\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gifts",
+            "correct": false
+          },
+          {
+            "label": "Tokens",
+            "correct": false
+          },
+          {
+            "label": "Balls",
+            "correct": false
+          },
+          {
+            "label": "Boxes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0512-2-en",
+      "type": "mcq",
+      "prompt": "Which SUV model did Nissan launch in 2007?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quantum",
+            "correct": false
+          },
+          {
+            "label": "Quoris",
+            "correct": false
+          },
+          {
+            "label": "Qashqai",
+            "correct": true
+          },
+          {
+            "label": "Quattro",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0193-4-en",
+      "type": "mcq",
+      "prompt": "Who created the hit American TV series \"Alias\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "J.J. Williams",
+            "correct": false
+          },
+          {
+            "label": "J.J. Abrams",
+            "correct": true
+          },
+          {
+            "label": "J.J. Lionel",
+            "correct": false
+          },
+          {
+            "label": "J.J. Morgan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0583-1-en",
+      "type": "mcq",
+      "prompt": "Which athlete dominated men's golf in the 2000s?",
+      "payload": {
+        "options": [
+          {
+            "label": "Payne Stewart",
+            "correct": false
+          },
+          {
+            "label": "Curtis Strange",
+            "correct": false
+          },
+          {
+            "label": "Tiger Woods",
+            "correct": true
+          },
+          {
+            "label": "Raymond Floyd",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0324-2-en",
+      "type": "mcq",
+      "prompt": "Which actress played Catwoman and Storm in \"X-Men\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Amber Heard",
+            "correct": false
+          },
+          {
+            "label": "Halle Berry",
+            "correct": true
+          },
+          {
+            "label": "Eva Mendes",
+            "correct": false
+          },
+          {
+            "label": "Kristen Stewart",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0095-4-en",
+      "type": "mcq",
+      "prompt": "Which film brought together Leonardo DiCaprio, Matt Damon and Jack Nicholson?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Aviator",
+            "correct": false
+          },
+          {
+            "label": "Celebrity",
+            "correct": false
+          },
+          {
+            "label": "Blood Diamond",
+            "correct": false
+          },
+          {
+            "label": "The Departed",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0586-2-en",
+      "type": "mcq",
+      "prompt": "Who does Orlando Bloom play in \"The Lord of the Rings\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Faramir",
+            "correct": false
+          },
+          {
+            "label": "Boromir",
+            "correct": false
+          },
+          {
+            "label": "Legolas",
+            "correct": true
+          },
+          {
+            "label": "Aragorn",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

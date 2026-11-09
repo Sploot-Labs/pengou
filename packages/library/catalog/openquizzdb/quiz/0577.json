@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=577"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0577-1",
+      "type": "mcq",
+      "prompt": "Quel cocktail comporte du gin mélangé à de la crème de cacao ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stinger",
+            "correct": false
+          },
+          {
+            "label": "Bandista",
+            "correct": false
+          },
+          {
+            "label": "Pink Love",
+            "correct": false
+          },
+          {
+            "label": "Alexander",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0577-2",
+      "type": "mcq",
+      "prompt": "Quelle boisson alcoolisée contient du gin et de la liqueur d'abricot ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Angel Face",
+            "correct": true
+          },
+          {
+            "label": "Manhattan",
+            "correct": false
+          },
+          {
+            "label": "Trou noir",
+            "correct": false
+          },
+          {
+            "label": "Cosmopolitan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0577-4",
+      "type": "mcq",
+      "prompt": "Quel cocktail à base de liqueur de cerise contient du gin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Casino",
+            "correct": true
+          },
+          {
+            "label": "Vesper",
+            "correct": false
+          },
+          {
+            "label": "Macca",
+            "correct": false
+          },
+          {
+            "label": "Baltimore",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

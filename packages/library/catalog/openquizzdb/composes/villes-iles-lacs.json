@@ -1,0 +1,502 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0360-1",
+      "type": "mcq",
+      "prompt": "Quelle est la capitale de Cuba, réputée pour ses cigares ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Santa Clara",
+            "correct": false
+          },
+          {
+            "label": "Guantanamo",
+            "correct": false
+          },
+          {
+            "label": "La Havane",
+            "correct": true
+          },
+          {
+            "label": "Santiago de Cuba",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0360-2",
+      "type": "mcq",
+      "prompt": "À la fois ville et province, de quel pays Bangkok est-elle la capitale ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Laos",
+            "correct": false
+          },
+          {
+            "label": "Thaïlande",
+            "correct": true
+          },
+          {
+            "label": "Malaisie",
+            "correct": false
+          },
+          {
+            "label": "Birmanie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0360-3",
+      "type": "mcq",
+      "prompt": "Dans quelle ville recense-t-on le plus grand nombre de taxis au monde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mexico",
+            "correct": true
+          },
+          {
+            "label": "New York",
+            "correct": false
+          },
+          {
+            "label": "Londres",
+            "correct": false
+          },
+          {
+            "label": "Tokyo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0360-4",
+      "type": "mcq",
+      "prompt": "Dans quel pays à forte densité de population Calcutta est-elle située ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Birmanie",
+            "correct": false
+          },
+          {
+            "label": "Brésil",
+            "correct": false
+          },
+          {
+            "label": "Bangladesh",
+            "correct": false
+          },
+          {
+            "label": "Inde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0542-1",
+      "type": "mcq",
+      "prompt": "À quelle ville de France le saucisson et Guignol vous font-ils penser ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lyon",
+            "correct": true
+          },
+          {
+            "label": "Cannes",
+            "correct": false
+          },
+          {
+            "label": "Nice",
+            "correct": false
+          },
+          {
+            "label": "Marseille",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0542-2",
+      "type": "mcq",
+      "prompt": "De quelle ville du Sud-Ouest proviennent de célèbres pruneaux AOC ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pau",
+            "correct": false
+          },
+          {
+            "label": "Bergerac",
+            "correct": false
+          },
+          {
+            "label": "Agen",
+            "correct": true
+          },
+          {
+            "label": "Bayonne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0542-3",
+      "type": "mcq",
+      "prompt": "Combien y a-t-il de communes à Paris sur une boucle de la Seine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "22",
+            "correct": false
+          },
+          {
+            "label": "13",
+            "correct": false
+          },
+          {
+            "label": "9",
+            "correct": false
+          },
+          {
+            "label": "Une seule",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0542-4",
+      "type": "mcq",
+      "prompt": "Quelle ville française est surnommée « la cité phocéenne » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nantes",
+            "correct": false
+          },
+          {
+            "label": "Bordeaux",
+            "correct": false
+          },
+          {
+            "label": "Nice",
+            "correct": false
+          },
+          {
+            "label": "Marseille",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0428-1",
+      "type": "mcq",
+      "prompt": "Située en mer Ionienne, de quel pays dépend l'île de Corfou ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grèce",
+            "correct": true
+          },
+          {
+            "label": "Italie",
+            "correct": false
+          },
+          {
+            "label": "Croatie",
+            "correct": false
+          },
+          {
+            "label": "Albanie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0428-2",
+      "type": "mcq",
+      "prompt": "Sur quelle île se sont réfugiés les mutins du Bounty, de la Royal Navy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pitcairn",
+            "correct": true
+          },
+          {
+            "label": "Nauru",
+            "correct": false
+          },
+          {
+            "label": "Cook",
+            "correct": false
+          },
+          {
+            "label": "Moorea",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0428-3",
+      "type": "mcq",
+      "prompt": "Dans quel océan se trouve l'île de Mayotte, dans l'archipel des Comores ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pacifique",
+            "correct": false
+          },
+          {
+            "label": "Atlantique",
+            "correct": false
+          },
+          {
+            "label": "Arctique",
+            "correct": false
+          },
+          {
+            "label": "Indien",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0428-4",
+      "type": "mcq",
+      "prompt": "De quel pays dépendent les îles Galapagos, dans l'océan Pacifique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pérou",
+            "correct": false
+          },
+          {
+            "label": "Colombie",
+            "correct": false
+          },
+          {
+            "label": "Équateur",
+            "correct": true
+          },
+          {
+            "label": "Vénézuéla",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0091-1",
+      "type": "mcq",
+      "prompt": "Quel autre nom porte le lac de Genève ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lac de Côme",
+            "correct": false
+          },
+          {
+            "label": "Lac de Lugano",
+            "correct": false
+          },
+          {
+            "label": "Lac Léman",
+            "correct": true
+          },
+          {
+            "label": "Lac Majeur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0091-2",
+      "type": "mcq",
+      "prompt": "Quel lac représente la plus grande réserve en eau douce au monde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lac Titicaca",
+            "correct": false
+          },
+          {
+            "label": "Lac Baïkal",
+            "correct": true
+          },
+          {
+            "label": "Lac Érié",
+            "correct": false
+          },
+          {
+            "label": "Lac Michigan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0091-3",
+      "type": "mcq",
+      "prompt": "Sur la rive nord de quel lac se situe la ville frontière de Toronto ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lac Ontario",
+            "correct": true
+          },
+          {
+            "label": "Lac Huron",
+            "correct": false
+          },
+          {
+            "label": "Lac Érié",
+            "correct": false
+          },
+          {
+            "label": "Lac Michigan",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0091-4",
+      "type": "mcq",
+      "prompt": "Le lac Titicaca sert entre autres de frontière à quels pays ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pérou et Chili",
+            "correct": false
+          },
+          {
+            "label": "Bolivie et Pérou",
+            "correct": true
+          },
+          {
+            "label": "Brésil et Bolivie",
+            "correct": false
+          },
+          {
+            "label": "Chili et Bolivie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-villes-iles-lacs",
+      "title": "Villes, îles et lacs",
+      "description": "D'après les quiz OpenQuizzDB « Villes du monde », « Villes de France », « Les îles du Globe » et « Grands lacs de la planète ».",
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0360-1",
+        "oqdb-0360-2",
+        "oqdb-0360-3",
+        "oqdb-0360-4",
+        "oqdb-0542-1",
+        "oqdb-0542-2",
+        "oqdb-0542-3",
+        "oqdb-0542-4",
+        "oqdb-0428-1",
+        "oqdb-0428-2",
+        "oqdb-0428-3",
+        "oqdb-0428-4",
+        "oqdb-0091-1",
+        "oqdb-0091-2",
+        "oqdb-0091-3",
+        "oqdb-0091-4"
+      ]
+    }
+  ]
+}

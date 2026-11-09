@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=512"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0512-1-en",
+      "type": "mcq",
+      "prompt": "Which carmaker produced the Diablo and Countach models?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ferrari",
+            "correct": false
+          },
+          {
+            "label": "Porsche",
+            "correct": false
+          },
+          {
+            "label": "Lamborghini",
+            "correct": true
+          },
+          {
+            "label": "Maserati",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0512-3-en",
+      "type": "mcq",
+      "prompt": "Which carmaker created the Cayenne model?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ferrari",
+            "correct": false
+          },
+          {
+            "label": "Maserati",
+            "correct": false
+          },
+          {
+            "label": "Lamborghini",
+            "correct": false
+          },
+          {
+            "label": "Porsche",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

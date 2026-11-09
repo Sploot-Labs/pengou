@@ -94,8 +94,9 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       }
       const mediaAlt = isNonEmptyString(body?.mediaAlt) ? body.mediaAlt : undefined
 
-      return withTenantTx(appDb, context, async (scope) => {
-        const question = await createQuestion(scope, request.params.quizId, {
+      // Réponse envoyée APRÈS le COMMIT (hors du callback) : voir POST /api/quizzes.
+      const question = await withTenantTx(appDb, context, (scope) =>
+        createQuestion(scope, request.params.quizId, {
           type: body.type as QuestionType,
           prompt: body.prompt as string,
           timeLimit: body.timeLimit as number,
@@ -103,10 +104,10 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
           payload: validatedPayload,
           media,
           mediaAlt,
-        })
-        if (!question) return reply.code(404).send({ error: 'Quiz introuvable.' })
-        return reply.code(201).send(question)
-      })
+        }),
+      )
+      if (!question) return reply.code(404).send({ error: 'Quiz introuvable.' })
+      return reply.code(201).send(question)
     },
   )
 
@@ -222,11 +223,11 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
     async (request, reply) => {
       const context = await resolveContextOr403(request, reply, systemDb, config)
       if (!context) return
-      return withTenantTx(appDb, context, async (scope) => {
-        const ok = await deleteQuestion(scope, request.params.quizId, request.params.questionId)
-        if (!ok) return reply.code(404).send({ error: 'Question ou quiz introuvable.' })
-        return reply.code(204).send()
-      })
+      const ok = await withTenantTx(appDb, context, (scope) =>
+        deleteQuestion(scope, request.params.quizId, request.params.questionId),
+      )
+      if (!ok) return reply.code(404).send({ error: 'Question ou quiz introuvable.' })
+      return reply.code(204).send()
     },
   )
 

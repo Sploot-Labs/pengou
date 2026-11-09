@@ -1,4 +1,5 @@
 import { and, desc, eq, gte, inArray, isNotNull, lt } from 'drizzle-orm'
+import { sql } from 'drizzle-orm'
 import { schema } from '../index.js'
 import type { Db } from '../client.js'
 import type { TenantScope } from '../tenant.js'
@@ -118,6 +119,17 @@ export async function setPlayerScore(db: Db, playerId: string, totalScore: numbe
   await db.update(schema.sessionPlayer).set({ totalScore }).where(eq(schema.sessionPlayer.id, playerId))
 }
 
+// Suppression d'un joueur (exclusion par l'animateur) : le pseudo ne doit subsister dans aucun
+// rapport. Les answer_record du joueur partent par la cascade ON DELETE CASCADE. Vrai si une
+// ligne a été supprimée (faux si le joueur n'existe plus, ou n'appartient pas au tenant du contexte RLS).
+export async function deleteSessionPlayer(db: Db, playerId: string): Promise<boolean> {
+  const rows = await db
+    .delete(schema.sessionPlayer)
+    .where(eq(schema.sessionPlayer.id, playerId))
+    .returning({ id: schema.sessionPlayer.id })
+  return rows.length > 0
+}
+
 // Classement d'une session : joueurs triés par total_score desc (podium/scoreboard).
 export async function listSessionPlayersByScore(db: Db, sessionId: string): Promise<SessionPlayer[]> {
   return db
@@ -155,6 +167,29 @@ export async function saveEngineState(db: Db, sessionId: string, state: unknown)
     .update(schema.gameSession)
     .set({ engineState: state as never, lastActivityAt: new Date() })
     .where(eq(schema.gameSession.id, sessionId))
+}
+
+// Écrase la liste des clés retirées pour UNE question, sans toucher aux autres (écriture atomique).
+export async function setWordcloudRemoved(
+  db: Db,
+  sessionId: string,
+  questionId: string,
+  keys: string[],
+): Promise<void> {
+  await db
+    .update(schema.gameSession)
+    .set({
+      wordcloudRemoved: sql`jsonb_set(${schema.gameSession.wordcloudRemoved}, ARRAY[${questionId}]::text[], ${JSON.stringify(keys)}::jsonb)`,
+    })
+    .where(eq(schema.gameSession.id, sessionId))
+}
+
+export async function loadWordcloudRemoved(db: Db, sessionId: string): Promise<Record<string, string[]>> {
+  const [row] = await db
+    .select({ removed: schema.gameSession.wordcloudRemoved })
+    .from(schema.gameSession)
+    .where(eq(schema.gameSession.id, sessionId))
+  return row?.removed ?? {}
 }
 
 export async function clearEngineState(db: Db, sessionId: string): Promise<void> {

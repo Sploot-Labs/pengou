@@ -12,11 +12,15 @@ vi.mock('../api/quizzes', () => ({
     ]),
   ),
   createQuiz: vi.fn(),
+  archiveQuiz: vi.fn(),
+  restoreQuiz: vi.fn(),
 }))
 vi.mock('../api/sessions', () => ({ listSessions: vi.fn(() => Promise.resolve([])) }))
+const mockSendVerificationEmail = vi.fn()
 vi.mock('../api/auth', () => ({
   signOut: vi.fn(),
-  useSession: () => ({ refresh: vi.fn() }),
+  useSession: () => ({ refresh: vi.fn(), user: { email: 'camille@example.com', emailVerified: false } }),
+  sendVerificationEmail: (...args: unknown[]) => mockSendVerificationEmail(...args),
 }))
 
 // `Home` now calls `useLaunchGame` (Task 7), which itself calls `useSharedGameSocket` — mocked
@@ -122,6 +126,30 @@ describe('Home', () => {
     expect(glyph).toHaveAttribute('aria-hidden', 'true')
   })
 
+  it("refus de création faute d'adresse confirmée : message dédié et renvoi sur place", async () => {
+    const { createQuiz } = await import('../api/quizzes')
+    const { ApiError } = await import('../api/client')
+    vi.mocked(createQuiz).mockRejectedValueOnce(
+      new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'),
+    )
+    mockSendVerificationEmail.mockResolvedValue(undefined)
+    render(
+      <MotionProvider>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </MotionProvider>,
+    )
+    fireEvent.click(screen.getByRole('button', { name: /nouveau quiz/i }))
+    fireEvent.change(screen.getByLabelText('Titre du nouveau quiz'), { target: { value: 'Second' } })
+    fireEvent.submit(screen.getByLabelText('Titre du nouveau quiz').closest('form') as HTMLFormElement)
+    const alert = await screen.findByRole('alert')
+    expect(alert).toHaveTextContent("Confirmez votre adresse e-mail pour créer d'autres quiz.")
+    fireEvent.click(within(alert).getByRole('button', { name: "Renvoyer l'e-mail" }))
+    await waitFor(() => expect(screen.getByText('E-mail envoyé')).toBeInTheDocument())
+    expect(mockSendVerificationEmail).toHaveBeenCalledWith('camille@example.com')
+  })
+
   it("affiche un état vide chaleureux quand il n'y a pas de quiz", async () => {
     const { listQuizzes } = await import('../api/quizzes')
     vi.mocked(listQuizzes).mockResolvedValueOnce([])
@@ -134,12 +162,10 @@ describe('Home', () => {
       </MotionProvider>,
     )
 
-    await waitFor(() => expect(screen.getByText(/on te fait de la place/i)).toBeInTheDocument())
+    await waitFor(() => expect(screen.getByText(/on vous fait de la place/i)).toBeInTheDocument())
 
-    // The single 🐾 stays, and the decorative shape motif (Task 5) is
-    // aria-hidden — it anchors the empty state visually without being
-    // announced to screen readers.
-    expect(screen.getByText(/on te fait de la place/i).textContent).toMatch(/🐾$/)
+    // Le motif décoratif de formes est aria-hidden : il ancre visuellement
+    // l'état vide sans être annoncé aux lecteurs d'écran.
     const motif = document.querySelector('.home-empty-motif')
     expect(motif).not.toBeNull()
     expect(motif).toHaveAttribute('aria-hidden', 'true')
@@ -270,8 +296,10 @@ describe('Home', () => {
         title: 'Quiz avec description',
         description: 'Ceci est une description',
         cover: null,
+        source: null,
         createdAt: '2026-07-20T15:30:00Z',
         updatedAt: '2026-07-20T15:30:00Z',
+        archivedAt: null,
         questionCount: 1,
       },
     ])
@@ -401,8 +429,10 @@ describe('Home', () => {
         title: 'Quiz avec plusieurs questions',
         description: null,
         cover: null,
+        source: null,
         createdAt: '2026-07-20T15:30:00Z',
         updatedAt: '2026-07-20T15:30:00Z',
+        archivedAt: null,
         questionCount: 5,
       },
     ])
@@ -419,6 +449,18 @@ describe('Home', () => {
     expect(screen.getByText(/5 questions/)).toBeInTheDocument()
   })
 
+  it('propose un lien « Bibliothèque » vers /library', async () => {
+    render(
+      <MotionProvider>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </MotionProvider>,
+    )
+    expect(screen.getByRole('link', { name: 'Bibliothèque' })).toHaveAttribute('href', '/library')
+    await waitFor(() => expect(screen.getByText('Culture G')).toBeInTheDocument())
+  })
+
   it('affiche 0 question quand le quiz est vide', async () => {
     const { listQuizzes } = await import('../api/quizzes')
     vi.mocked(listQuizzes).mockResolvedValueOnce([
@@ -429,8 +471,10 @@ describe('Home', () => {
         title: 'Quiz vide',
         description: null,
         cover: null,
+        source: null,
         createdAt: '2026-07-20T15:30:00Z',
         updatedAt: '2026-07-20T15:30:00Z',
+        archivedAt: null,
         questionCount: 0,
       },
     ])
@@ -445,5 +489,117 @@ describe('Home', () => {
 
     await waitFor(() => expect(screen.getByText('Quiz vide')).toBeInTheDocument())
     expect(screen.getByText(/0 question(?!s)/)).toBeInTheDocument()
+  })
+
+  describe('archivage', () => {
+    const archivedQuiz = {
+      id: 'qa',
+      tenantId: 't1',
+      ownerId: 'u1',
+      title: 'Vieux quiz',
+      description: null,
+      cover: null,
+      source: null,
+      createdAt: '2026-07-20T15:30:00Z',
+      updatedAt: '2026-07-20T15:30:00Z',
+      archivedAt: '2026-08-01T10:00:00Z',
+      questionCount: 3,
+    }
+
+    function renderHome() {
+      render(
+        <MotionProvider>
+          <MemoryRouter>
+            <Home />
+          </MemoryRouter>
+        </MotionProvider>,
+      )
+    }
+
+    it("« Archiver » ouvre une confirmation ; Annuler ne fait rien, confirmer retire la carte et l'annonce", async () => {
+      const { archiveQuiz } = await import('../api/quizzes')
+      vi.mocked(archiveQuiz).mockResolvedValueOnce({ ...archivedQuiz, id: 'q1', title: 'Culture G' })
+      renderHome()
+
+      await waitFor(() => expect(screen.getByText('Culture G')).toBeInTheDocument())
+      const card = screen.getByText('Culture G').closest('.home-card-item') as HTMLElement
+      const archiveButton = within(card).getByRole('button', { name: 'Archiver le quiz Culture G' })
+
+      // Annuler (et Échap) referment sans appel réseau, le focus revient au bouton
+      // (focus explicite : `fireEvent.click` ne le déplace pas comme un vrai clic).
+      archiveButton.focus()
+      fireEvent.click(archiveButton)
+      let dialog = screen.getByRole('dialog', { name: 'Archiver ce quiz ?' })
+      fireEvent.click(within(dialog).getByRole('button', { name: 'Annuler' }))
+      expect(screen.queryByRole('dialog')).toBeNull()
+      expect(archiveButton).toHaveFocus()
+      fireEvent.click(archiveButton)
+      fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' })
+      expect(screen.queryByRole('dialog')).toBeNull()
+      expect(archiveQuiz).not.toHaveBeenCalled()
+
+      fireEvent.click(archiveButton)
+      dialog = screen.getByRole('dialog', { name: 'Archiver ce quiz ?' })
+      expect(within(dialog).getByRole('button', { name: 'Archiver' })).toHaveFocus()
+      fireEvent.click(within(dialog).getByRole('button', { name: 'Archiver' }))
+
+      await waitFor(() => expect(screen.queryByText('Culture G')).toBeNull())
+      expect(archiveQuiz).toHaveBeenCalledWith('q1')
+      expect(screen.queryByRole('dialog')).toBeNull()
+      expect(screen.getByText('Quiz « Culture G » archivé.')).toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: 'Mes quiz' })).toHaveFocus()
+    })
+
+    it("la section « Archivés » charge les quiz archivés à l'ouverture et « Restaurer » les remet dans « Mes quiz »", async () => {
+      const { listQuizzes, restoreQuiz } = await import('../api/quizzes')
+      vi.mocked(restoreQuiz).mockResolvedValueOnce({ ...archivedQuiz, archivedAt: null })
+      renderHome()
+
+      await waitFor(() => expect(screen.getByText('Culture G')).toBeInTheDocument())
+      // Rien n'est chargé tant que la section reste repliée.
+      expect(listQuizzes).toHaveBeenCalledTimes(1)
+      expect(listQuizzes).not.toHaveBeenCalledWith({ archived: true })
+
+      vi.mocked(listQuizzes).mockResolvedValueOnce([archivedQuiz])
+      const summary = screen.getByText('Archivés')
+      const details = summary.closest('details') as HTMLDetailsElement
+      details.open = true
+      fireEvent(details, new Event('toggle'))
+
+      await waitFor(() => expect(screen.getByText('Vieux quiz')).toBeInTheDocument())
+      expect(listQuizzes).toHaveBeenCalledWith({ archived: true })
+      expect(screen.getByText(/Archivé le 1 août 2026/)).toBeInTheDocument()
+      // Pas de « Lancer » pour un quiz archivé.
+      const row = screen.getByText('Vieux quiz').closest('li') as HTMLElement
+      expect(within(row).queryByRole('button', { name: /^Lancer$/ })).toBeNull()
+
+      fireEvent.click(within(row).getByRole('button', { name: 'Restaurer le quiz Vieux quiz' }))
+
+      await waitFor(() => expect(restoreQuiz).toHaveBeenCalledWith('qa'))
+      await waitFor(() => expect(screen.getByText('Vieux quiz').closest('.home-card-item')).not.toBeNull())
+      expect(screen.getByText('Aucun quiz archivé.')).toBeInTheDocument()
+      expect(screen.getByText('Quiz « Vieux quiz » restauré.')).toBeInTheDocument()
+    })
+
+    it("« Restaurer » refusé faute d'adresse confirmée : message dédié et renvoi sur place", async () => {
+      const { listQuizzes, restoreQuiz } = await import('../api/quizzes')
+      const { ApiError } = await import('../api/client')
+      vi.mocked(restoreQuiz).mockRejectedValueOnce(
+        new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'),
+      )
+      mockSendVerificationEmail.mockResolvedValue(undefined)
+      renderHome()
+      await waitFor(() => expect(screen.getByText('Culture G')).toBeInTheDocument())
+      vi.mocked(listQuizzes).mockResolvedValueOnce([archivedQuiz])
+      const details = screen.getByText('Archivés').closest('details') as HTMLDetailsElement
+      details.open = true
+      fireEvent(details, new Event('toggle'))
+      await waitFor(() => expect(screen.getByText('Vieux quiz')).toBeInTheDocument())
+      fireEvent.click(screen.getByRole('button', { name: 'Restaurer le quiz Vieux quiz' }))
+      const alert = await screen.findByRole('alert')
+      expect(alert).toHaveTextContent("Confirmez votre adresse e-mail pour créer d'autres quiz.")
+      fireEvent.click(within(alert).getByRole('button', { name: "Renvoyer l'e-mail" }))
+      await waitFor(() => expect(screen.getByText('E-mail envoyé')).toBeInTheDocument())
+    })
   })
 })

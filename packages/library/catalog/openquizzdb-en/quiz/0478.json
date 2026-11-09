@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=478"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0478-1-en",
+      "type": "mcq",
+      "prompt": "How many attempts do you get for each lift in weightlifting?",
+      "payload": {
+        "options": [
+          {
+            "label": "Four",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": true
+          },
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Five",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0478-3-en",
+      "type": "mcq",
+      "prompt": "How much does the bar used by women in weightlifting weigh?",
+      "payload": {
+        "options": [
+          {
+            "label": "45 kg",
+            "correct": false
+          },
+          {
+            "label": "25 kg",
+            "correct": false
+          },
+          {
+            "label": "35 kg",
+            "correct": false
+          },
+          {
+            "label": "15 kg",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0478-4-en",
+      "type": "mcq",
+      "prompt": "In weightlifting, how much does a large red plate weigh?",
+      "payload": {
+        "options": [
+          {
+            "label": "45 kg",
+            "correct": false
+          },
+          {
+            "label": "25 kg",
+            "correct": true
+          },
+          {
+            "label": "35 kg",
+            "correct": false
+          },
+          {
+            "label": "15 kg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

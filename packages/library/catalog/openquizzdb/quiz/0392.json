@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=392"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0392-1",
+      "type": "mcq",
+      "prompt": "Dans la saga Alien, qui a réalisé le film « Alien, le retour » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ridley Scott",
+            "correct": false
+          },
+          {
+            "label": "Paul Anderson",
+            "correct": false
+          },
+          {
+            "label": "David Fincher",
+            "correct": false
+          },
+          {
+            "label": "James Cameron",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0392-2",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on la créature principale du film « Alien » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trilobite",
+            "correct": false
+          },
+          {
+            "label": "Facehugger",
+            "correct": false
+          },
+          {
+            "label": "Mala'kak",
+            "correct": false
+          },
+          {
+            "label": "Xénomorphe",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0392-3",
+      "type": "mcq",
+      "prompt": "Dans « Alien », quelle entreprise organise et finance le voyage spatial ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Requiem",
+            "correct": false
+          },
+          {
+            "label": "Cobb",
+            "correct": false
+          },
+          {
+            "label": "Fiorina",
+            "correct": false
+          },
+          {
+            "label": "Weyland",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

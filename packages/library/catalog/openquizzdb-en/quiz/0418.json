@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=418"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0418-3-en",
+      "type": "mcq",
+      "prompt": "What is a wine that can be kept for a long time and age called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cupbearer",
+            "correct": false
+          },
+          {
+            "label": "Graves",
+            "correct": false
+          },
+          {
+            "label": "Elixir",
+            "correct": false
+          },
+          {
+            "label": "Vin de garde",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0418-4-en",
+      "type": "mcq",
+      "prompt": "Which instrument gives a direct measure of a wine's alcohol content?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oenolitre",
+            "correct": false
+          },
+          {
+            "label": "Ebullioscope",
+            "correct": false
+          },
+          {
+            "label": "Alcoholmeter",
+            "correct": true
+          },
+          {
+            "label": "Barrica",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

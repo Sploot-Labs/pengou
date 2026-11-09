@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=172"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0172-1",
+      "type": "mcq",
+      "prompt": "Comment se prénomme la copine de Popeye le marin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Odile",
+            "correct": false
+          },
+          {
+            "label": "Olive",
+            "correct": true
+          },
+          {
+            "label": "Octavie",
+            "correct": false
+          },
+          {
+            "label": "Océane",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0172-4",
+      "type": "mcq",
+      "prompt": "Dans le domaine financier, que signifie le « O » du sigle boursier OPA ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ouverture",
+            "correct": false
+          },
+          {
+            "label": "Opportunité",
+            "correct": false
+          },
+          {
+            "label": "Opération",
+            "correct": false
+          },
+          {
+            "label": "Offre",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

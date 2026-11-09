@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=504"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0504-1",
+      "type": "mcq",
+      "prompt": "Quelle célèbre marque britannique de thé propose le « Yellow Label » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Twinnings",
+            "correct": false
+          },
+          {
+            "label": "Lipton",
+            "correct": true
+          },
+          {
+            "label": "Nestea",
+            "correct": false
+          },
+          {
+            "label": "Éléphant",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0504-2",
+      "type": "mcq",
+      "prompt": "Quel yaourt à boire est commercialisé par le groupe Yoplait ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Yop",
+            "correct": true
+          },
+          {
+            "label": "Chobani",
+            "correct": false
+          },
+          {
+            "label": "Yakult",
+            "correct": false
+          },
+          {
+            "label": "Sik",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0504-4",
+      "type": "mcq",
+      "prompt": "Quelle est la plus ancienne des marques de soda américaines ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dr Pepper",
+            "correct": true
+          },
+          {
+            "label": "Red Bull",
+            "correct": false
+          },
+          {
+            "label": "Pepsi",
+            "correct": false
+          },
+          {
+            "label": "Coca-Cola",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

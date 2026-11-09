@@ -11,13 +11,18 @@ import {
   uniqueIndex,
   index,
   foreignKey,
+  primaryKey,
 } from 'drizzle-orm/pg-core'
+import type { ContentSource } from '@splootlabs/library'
 import { user } from './auth-schema.js'
 
 export const planEnum = pgEnum('plan', ['free', 'pro'])
 export const roleEnum = pgEnum('role', ['owner', 'admin', 'member'])
 export const invitationStatusEnum = pgEnum('invitation_status', ['pending', 'accepted', 'revoked'])
-export const questionTypeEnum = pgEnum('question_type', ['mcq', 'truefalse', 'text', 'slider'])
+export const questionTypeEnum = pgEnum('question_type', ['mcq', 'truefalse', 'text', 'slider', 'wordcloud', 'poll'])
+export const libraryDifficultyEnum = pgEnum('library_difficulty', ['facile', 'moyen', 'difficile'])
+export const libraryAudienceEnum = pgEnum('library_audience', ['enfants', 'adultes', 'tous'])
+export const libraryOriginEnum = pgEnum('library_origin', ['builtin', 'instance'])
 export const sessionStatusEnum = pgEnum('session_status', ['lobby', 'active', 'ended', 'abandoned'])
 
 export const tenant = pgTable('tenant', {
@@ -75,6 +80,9 @@ export const invitation = pgTable(
     status: invitationStatusEnum('status').notNull().default('pending'),
     expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
     acceptedAt: timestamp('accepted_at', { withTimezone: true }),
+    // Posé quand l'e-mail d'invitation est réellement parti (création ou renvoi), remis à nul au
+    // renvoi. Seule une invitation e-mailée confirme l'adresse de celui qui l'accepte.
+    emailedAt: timestamp('emailed_at', { withTimezone: true }),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => ({
@@ -96,8 +104,12 @@ export const quiz = pgTable(
     title: text('title').notNull(),
     description: text('description'),
     cover: text('cover'),
+    // Attribution du contenu importé de la bibliothèque (null pour un quiz créé à la main).
+    source: jsonb('source').$type<ContentSource>(),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+    // Archivage (suppression douce) : non null = masqué de « Mes quiz » et non lançable.
+    archivedAt: timestamp('archived_at', { withTimezone: true }),
   },
   (t) => ({
     tenantIdx: index('quiz_tenant_idx').on(t.tenantId),
@@ -124,6 +136,7 @@ export const question = pgTable(
     readingTime: integer('reading_time').notNull().default(6),
     orderIndex: integer('order_index').notNull(),
     payload: jsonb('payload').notNull(),
+    source: jsonb('source').$type<ContentSource>(),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => ({
@@ -160,6 +173,8 @@ export const gameSession = pgTable(
     // État moteur sérialisé (résumé après crash serveur) : nul tant que la session
     // n'a pas été checkpointée par le moteur (@splootlabs/game, Task 2/3).
     engineState: jsonb('engine_state'),
+    // Mots retirés du nuage par l'animateur : { questionId: [clé normalisée, ...] }.
+    wordcloudRemoved: jsonb('wordcloud_removed').$type<Record<string, string[]>>().notNull().default({}),
   },
   (t) => ({
     // PIN unique PARMI les sessions actives (index partiel Postgres)
@@ -244,3 +259,71 @@ export const answerRecord = pgTable(
 
 // Tables Better Auth (user/session/account/verification) — générées, source de vérité des colonnes.
 export * from './auth-schema.js'
+
+// Catalogue de la bibliothèque : global (ni tenant_id ni RLS), lecture seule pour app_role,
+// écrit uniquement par la synchronisation sur la connexion privilégiée.
+export const libraryTheme = pgTable('library_theme', {
+  id: text('id').primaryKey(),
+  label: text('label').notNull(),
+  hidden: boolean('hidden').notNull().default(false),
+  origin: libraryOriginEnum('origin').notNull(),
+})
+
+export const libraryQuestion = pgTable(
+  'library_question',
+  {
+    id: text('id').primaryKey(),
+    type: questionTypeEnum('type').notNull(),
+    prompt: text('prompt').notNull(),
+    // Prompt en minuscules sans diacritiques, calculé à la synchronisation (recherche).
+    promptSearch: text('prompt_search').notNull(),
+    payload: jsonb('payload').notNull(),
+    themeId: text('theme_id')
+      .notNull()
+      .references(() => libraryTheme.id),
+    difficulty: libraryDifficultyEnum('difficulty').notNull(),
+    language: text('language').notNull(),
+    audience: libraryAudienceEnum('audience').notNull(),
+    timeLimit: integer('time_limit').notNull(),
+    readingTime: integer('reading_time').notNull(),
+    source: jsonb('source').$type<ContentSource>().notNull(),
+    origin: libraryOriginEnum('origin').notNull(),
+    originFile: text('origin_file').notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({
+    criteriaIdx: index('library_question_criteria_idx').on(t.themeId, t.difficulty, t.language, t.audience),
+  }),
+)
+
+export const libraryQuiz = pgTable('library_quiz', {
+  id: text('id').primaryKey(),
+  title: text('title').notNull(),
+  description: text('description'),
+  themeId: text('theme_id')
+    .notNull()
+    .references(() => libraryTheme.id),
+  difficulty: libraryDifficultyEnum('difficulty').notNull(),
+  language: text('language').notNull(),
+  audience: libraryAudienceEnum('audience').notNull(),
+  source: jsonb('source').$type<ContentSource>().notNull(),
+  origin: libraryOriginEnum('origin').notNull(),
+  originFile: text('origin_file').notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+})
+
+export const libraryQuizQuestion = pgTable(
+  'library_quiz_question',
+  {
+    quizId: text('quiz_id')
+      .notNull()
+      .references(() => libraryQuiz.id, { onDelete: 'cascade' }),
+    questionId: text('question_id')
+      .notNull()
+      .references(() => libraryQuestion.id, { onDelete: 'cascade' }),
+    position: integer('position').notNull(),
+  },
+  (t) => ({
+    pk: primaryKey({ columns: [t.quizId, t.position] }),
+  }),
+)

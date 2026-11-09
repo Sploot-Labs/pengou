@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=386"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0386-1",
+      "type": "mcq",
+      "prompt": "Quel noeud marin forme une boule et sert de lest ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poing de singe",
+            "correct": true
+          },
+          {
+            "label": "Noeud de palan",
+            "correct": false
+          },
+          {
+            "label": "Noeud de sang",
+            "correct": false
+          },
+          {
+            "label": "Noeud plat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0386-2",
+      "type": "mcq",
+      "prompt": "Quel noeud non coulant est facile à défaire après traction ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Noeud de ride",
+            "correct": false
+          },
+          {
+            "label": "Noeud plat",
+            "correct": false
+          },
+          {
+            "label": "Noeud de chaise",
+            "correct": true
+          },
+          {
+            "label": "Noeud de lestage",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

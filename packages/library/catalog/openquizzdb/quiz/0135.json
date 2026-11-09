@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=135"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0135-1",
+      "type": "mcq",
+      "prompt": "En mesure, quelle est la valeur en millimètres d'un pouce anglais ?",
+      "payload": {
+        "options": [
+          {
+            "label": "25 mm",
+            "correct": true
+          },
+          {
+            "label": "32 mm",
+            "correct": false
+          },
+          {
+            "label": "16 mm",
+            "correct": false
+          },
+          {
+            "label": "45 mm",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0135-2",
+      "type": "mcq",
+      "prompt": "Combien de travaux Hercule dut-il exécuter pour Eurysthée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dix",
+            "correct": false
+          },
+          {
+            "label": "Cent",
+            "correct": false
+          },
+          {
+            "label": "Quarante",
+            "correct": false
+          },
+          {
+            "label": "Douze",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

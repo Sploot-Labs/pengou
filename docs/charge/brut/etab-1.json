@@ -1,0 +1,139 @@
+{
+  "libelle": "etab-1",
+  "horodatage": "2026-10-31T09-04-45-170Z",
+  "cible": "http://localhost:3000",
+  "parametres": {
+    "joueurs": 30,
+    "parties": 10,
+    "questions": 10,
+    "cadence": 25,
+    "processus": 3,
+    "docker": "pengou-charge"
+  },
+  "parties": [
+    {
+      "pin": "053505",
+      "sessionId": "0d74b324-3665-47a8-ac58-211914e7f52d",
+      "rejoints": 30,
+      "reponsesAcceptees": 300
+    },
+    {
+      "pin": "364432",
+      "sessionId": "7988ec03-c0db-438d-936b-7e06365f403e",
+      "rejoints": 30,
+      "reponsesAcceptees": 300
+    },
+    {
+      "pin": "912334",
+      "sessionId": "aaba3990-6f11-469c-bc62-05a3cb88ad65",
+      "rejoints": 30,
+      "reponsesAcceptees": 300
+    },
+    {
+      "pin": "912314",
+      "sessionId": "02a0907f-1d94-416a-ae5a-92eec4c15f30",
+      "rejoints": 30,
+      "reponsesAcceptees": 300
+    },
+    {
+      "pin": "796638",
+      "sessionId": "78578c00-dca0-4d0d-8428-c4f40d962256",
+      "rejoints": 30,
+      "reponsesAcceptees": 300
+    },
+    {
+      "pin": "134187",
+      "sessionId": "d9c2b6ae-b185-4e0d-b424-99ba0350bc02",
+      "rejoints": 30,
+      "reponsesAcceptees": 300
+    },
+    {
+      "pin": "613626",
+      "sessionId": "e393115c-f07d-4a6f-8821-f65f77e11f00",
+      "rejoints": 30,
+      "reponsesAcceptees": 300
+    },
+    {
+      "pin": "852492",
+      "sessionId": "961f0ea8-c2ac-4184-a50d-b146cde37fd1",
+      "rejoints": 30,
+      "reponsesAcceptees": 300
+    },
+    {
+      "pin": "332268",
+      "sessionId": "fcc002c3-b9c6-49ac-b104-07a320f32262",
+      "rejoints": 30,
+      "reponsesAcceptees": 300
+    },
+    {
+      "pin": "759146",
+      "sessionId": "6a579304-b602-46c8-bd92-9be7163eff64",
+      "rejoints": 30,
+      "reponsesAcceptees": 300
+    }
+  ],
+  "joueurs": {
+    "tentes": 300,
+    "rejoints": 300,
+    "refus": {}
+  },
+  "latences": {
+    "join": {
+      "n": 300,
+      "p50": 10.1,
+      "p95": 12.7,
+      "p99": 17.2,
+      "max": 36.1
+    },
+    "reponse": {
+      "n": 3000,
+      "p50": 8.5,
+      "p95": 24.7,
+      "p99": 35,
+      "max": 50.2
+    },
+    "diffusion": {
+      "n": 100,
+      "p50": 11,
+      "p95": 75,
+      "p99": 101,
+      "max": 108
+    }
+  },
+  "erreurs": {
+    "ackTimeout": 0,
+    "reponseRefusee": 0,
+    "connexion": 0
+  },
+  "deconnexions": 0,
+  "horlogeIncoherente": 0,
+  "generateur": {
+    "lagP99MaxMs": 23.8
+  },
+  "serveur": {
+    "lagP99MaxMs": 36.2,
+    "rssMaxMo": 303.4,
+    "heapMaxMo": 135.1,
+    "cpuMoyenPct": 40.5,
+    "cpuMaxPct": 89.6,
+    "echantillons": 54
+  },
+  "docker": {
+    "pengou-charge-app-1": {
+      "cpuMaxPct": 61.89,
+      "memMaxMo": 261.7
+    },
+    "pengou-charge-db-1": {
+      "cpuMaxPct": 34.73,
+      "memMaxMo": 90.7
+    }
+  },
+  "criteres": {
+    "rejointTous": true,
+    "zeroDeconnexion": true,
+    "reponseP95": true,
+    "diffusionP95": true,
+    "lagServeurP99": true
+  },
+  "verdict": "reussi"
+}

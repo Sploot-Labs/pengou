@@ -1,0 +1,571 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-0c33419931d3-fr",
+      "type": "truefalse",
+      "prompt": "En 1993, Prince a changé son nom pour un symbole imprononçable parce qu'il était mécontent de son contrat avec Warner Bros.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0f70818e0a07-fr",
+      "type": "mcq",
+      "prompt": "Dans quel film le personnage de Robin Williams doit-il se déguiser en femme ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Madame Doubtfire",
+            "correct": true
+          },
+          {
+            "label": "L'Éveil",
+            "correct": false
+          },
+          {
+            "label": "Old Dogs",
+            "correct": false
+          },
+          {
+            "label": "Jumanji",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-342e650a0c31-fr",
+      "type": "mcq",
+      "prompt": "Quel a été le premier single de Britney Spears ?",
+      "payload": {
+        "options": [
+          {
+            "label": "(You Drive Me) Crazy",
+            "correct": false
+          },
+          {
+            "label": "...Baby One More Time",
+            "correct": true
+          },
+          {
+            "label": "Toxic",
+            "correct": false
+          },
+          {
+            "label": "Oops!... I Did It Again",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3649cb53ae5a-fr",
+      "type": "mcq",
+      "prompt": "La saison 1994 de Formule 1 reste dans les mémoires pour quel événement tragique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mort d'Ayrton Senna",
+            "correct": true
+          },
+          {
+            "label": "Verstappen en flammes",
+            "correct": false
+          },
+          {
+            "label": "Suspension de Schumacher",
+            "correct": false
+          },
+          {
+            "label": "Le duel d'Adélaïde",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-406be632d7c5-fr",
+      "type": "mcq",
+      "prompt": "En quelle année Nelson Mandela a-t-il été libéré de prison ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1994",
+            "correct": false
+          },
+          {
+            "label": "1992",
+            "correct": false
+          },
+          {
+            "label": "1990",
+            "correct": true
+          },
+          {
+            "label": "1980",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4e9c7a24028f-fr",
+      "type": "truefalse",
+      "prompt": "Dans le scénario original de « Matrix », les machines utilisaient les humains comme puissance de calcul supplémentaire plutôt que comme batteries.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-50c861205b6a-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle la libellule amie de Spyro dans Spyro the Dragon ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sparx",
+            "correct": true
+          },
+          {
+            "label": "Spinkles",
+            "correct": false
+          },
+          {
+            "label": "Sam",
+            "correct": false
+          },
+          {
+            "label": "Sparky",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-51d82f8ddafd-fr",
+      "type": "mcq",
+      "prompt": "Quel a été le premier album studio de Daft Punk ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Human After All",
+            "correct": false
+          },
+          {
+            "label": "Random Access Memories",
+            "correct": false
+          },
+          {
+            "label": "Homework",
+            "correct": true
+          },
+          {
+            "label": "Discovery",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-55b700aca9f5-fr",
+      "type": "mcq",
+      "prompt": "Quand Google a-t-il été fondé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "9 octobre 1997",
+            "correct": false
+          },
+          {
+            "label": "7 février 2000",
+            "correct": false
+          },
+          {
+            "label": "4 septembre 1998",
+            "correct": true
+          },
+          {
+            "label": "12 décembre 1989",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-579588941b6f-fr",
+      "type": "truefalse",
+      "prompt": "Dans l'univers de Sonic the Hedgehog, le vrai nom de Tails est Miles Prower.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-62fba77d68d4-fr",
+      "type": "mcq",
+      "prompt": "Quelle actrice danse le twist avec John Travolta dans « Pulp Fiction » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kathy Griffin",
+            "correct": false
+          },
+          {
+            "label": "Bridget Fonda",
+            "correct": false
+          },
+          {
+            "label": "Uma Thurman",
+            "correct": true
+          },
+          {
+            "label": "Pam Grier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b2152bdb43cf-fr",
+      "type": "mcq",
+      "prompt": "Quel joueur a donné un coup de pied de kung-fu à un supporter de Crystal Palace en janvier 1995 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mark Hughes",
+            "correct": false
+          },
+          {
+            "label": "Ashley Cole",
+            "correct": false
+          },
+          {
+            "label": "David Seaman",
+            "correct": false
+          },
+          {
+            "label": "Eric Cantona",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b5723058621e-fr",
+      "type": "mcq",
+      "prompt": "Quel acteur a joué le rôle principal dans « Edward aux mains d'argent » (1990) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ben Stiller",
+            "correct": false
+          },
+          {
+            "label": "Clint Eastwood",
+            "correct": false
+          },
+          {
+            "label": "Leonardo DiCaprio",
+            "correct": false
+          },
+          {
+            "label": "Johnny Depp",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-be60f8adde97-fr",
+      "type": "mcq",
+      "prompt": "Qui est le chanteur de Pearl Jam ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Eddie Vedder",
+            "correct": true
+          },
+          {
+            "label": "Stone Gossard",
+            "correct": false
+          },
+          {
+            "label": "Kurt Cobain",
+            "correct": false
+          },
+          {
+            "label": "Ozzy Osbourne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c6b537dc98a4-fr",
+      "type": "mcq",
+      "prompt": "En quelle année le « Titanic » de James Cameron est-il sorti en salles ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1998",
+            "correct": false
+          },
+          {
+            "label": "1997",
+            "correct": true
+          },
+          {
+            "label": "1999",
+            "correct": false
+          },
+          {
+            "label": "1996",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-cb3427e10e80-fr",
+      "type": "mcq",
+      "prompt": "« Doctor Jones », « Turn Back Time » et « Barbie Girl » ont été numéros un au Royaume-Uni pour quel groupe d'eurodance ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vengaboys",
+            "correct": false
+          },
+          {
+            "label": "Eiffel 65",
+            "correct": false
+          },
+          {
+            "label": "Sash!",
+            "correct": false
+          },
+          {
+            "label": "Aqua",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d84a3d66e4d4-fr",
+      "type": "mcq",
+      "prompt": "De quel type est Dracaufeu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dragon",
+            "correct": false
+          },
+          {
+            "label": "Feu/Vol",
+            "correct": true
+          },
+          {
+            "label": "Feu",
+            "correct": false
+          },
+          {
+            "label": "Feu/Dragon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "jeux-video",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d8c4bd6dfb51-fr",
+      "type": "mcq",
+      "prompt": "En quelle année l'Union soviétique s'est-elle effondrée ?",
+      "payload": {
+        "options": [
+          {
+            "label": "1992",
+            "correct": false
+          },
+          {
+            "label": "1991",
+            "correct": true
+          },
+          {
+            "label": "1990",
+            "correct": false
+          },
+          {
+            "label": "1891",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e95168f0e52a-fr",
+      "type": "mcq",
+      "prompt": "Quel humoriste de stand-up prête sa voix au perroquet Iago dans l'adaptation Disney d'« Aladdin » (1992) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jonathan Freeman",
+            "correct": false
+          },
+          {
+            "label": "Robin Williams",
+            "correct": false
+          },
+          {
+            "label": "Gilbert Gottfried",
+            "correct": true
+          },
+          {
+            "label": "Pauly Shore",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-eb119c33312d-fr",
+      "type": "mcq",
+      "prompt": "Laquelle des Spice Girls, groupe pop britannique, était surnommée Ginger Spice ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Melanie Brown",
+            "correct": false
+          },
+          {
+            "label": "Emma Bunton",
+            "correct": false
+          },
+          {
+            "label": "Geri Halliwell",
+            "correct": true
+          },
+          {
+            "label": "Victoria Beckham",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-the-90s-fr",
+      "title": "Années 90, culture pop",
+      "theme": "culture-generale",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-be60f8adde97-fr",
+        "otdb-4e9c7a24028f-fr",
+        "otdb-0c33419931d3-fr",
+        "otdb-e95168f0e52a-fr",
+        "otdb-b5723058621e-fr",
+        "otdb-51d82f8ddafd-fr",
+        "otdb-55b700aca9f5-fr",
+        "otdb-cb3427e10e80-fr",
+        "otdb-0f70818e0a07-fr",
+        "otdb-342e650a0c31-fr",
+        "otdb-62fba77d68d4-fr",
+        "otdb-406be632d7c5-fr",
+        "otdb-579588941b6f-fr",
+        "otdb-50c861205b6a-fr",
+        "otdb-d8c4bd6dfb51-fr",
+        "otdb-b2152bdb43cf-fr",
+        "otdb-d84a3d66e4d4-fr",
+        "otdb-eb119c33312d-fr",
+        "otdb-3649cb53ae5a-fr",
+        "otdb-c6b537dc98a4-fr"
+      ],
+      "description": "Films, musique, jeux et actualité des années 1990."
+    }
+  ]
+}

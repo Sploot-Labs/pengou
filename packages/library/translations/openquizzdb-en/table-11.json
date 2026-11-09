@@ -1,0 +1,860 @@
+{
+  "questions": {
+    "oqdb-0532-3": {
+      "prompt": "Which flower became a symbol of the Coco Chanel fashion house?",
+      "options": [
+        "Poppy",
+        "Rose",
+        "Camellia",
+        "Daisy"
+      ]
+    },
+    "oqdb-0532-4": {
+      "prompt": "What color are the soles of Louboutin shoes?",
+      "options": [
+        "Red",
+        "Gold",
+        "Mauve",
+        "Blue"
+      ]
+    },
+    "oqdb-0533-1": {
+      "prompt": "Who was the Roland-Garros tournament director in 2022?",
+      "options": [
+        "Julie Halard",
+        "Mary Pierce",
+        "Nathalie Tauziat",
+        "Amélie Mauresmo"
+      ]
+    },
+    "oqdb-0533-3": {
+      "prompt": "Which épée fencer became a French politician?",
+      "options": [
+        "Laura Flessel",
+        "Timea Nagy",
+        "Britta Heidemann",
+        "Valérie Barlois"
+      ]
+    },
+    "oqdb-0533-4": {
+      "prompt": "Who is the only French female athlete to be a three-time Olympic champion?",
+      "options": [
+        "Marie-José Pérec",
+        "Muriel Hurtis",
+        "Marita Koch",
+        "Sandra Myers"
+      ]
+    },
+    "oqdb-0534-1": {
+      "prompt": "Which treatment uses seawater to heal ailments of the body?",
+      "options": [
+        "Sophrology",
+        "Reflexology",
+        "Naturopathy",
+        "Thalassotherapy"
+      ]
+    },
+    "oqdb-0534-2": {
+      "prompt": "What can an athlete do to avoid sudden cramps?",
+      "options": [
+        "Sleep",
+        "Smoke",
+        "Stay hydrated",
+        "Eat"
+      ]
+    },
+    "oqdb-0534-3": {
+      "prompt": "Which position is the most tiring for our spine?",
+      "options": [
+        "Standing",
+        "Sitting",
+        "Balancing",
+        "Lying down"
+      ]
+    },
+    "oqdb-0534-4": {
+      "prompt": "What do sweat glands mainly secrete?",
+      "options": [
+        "Hair",
+        "Sweat",
+        "Body hair",
+        "Nails"
+      ]
+    },
+    "oqdb-0535-1": {
+      "skip": "rappeur français peu connu hors de France"
+    },
+    "oqdb-0535-2": {
+      "skip": "rappeurs français peu connus hors de la francophonie"
+    },
+    "oqdb-0535-3": {
+      "skip": "rappeurs français peu connus hors de la francophonie"
+    },
+    "oqdb-0535-4": {
+      "skip": "rappeurs français peu connus hors de la francophonie"
+    },
+    "oqdb-0536-1": {
+      "prompt": "What do ladybugs mainly eat?",
+      "options": [
+        "Caterpillars",
+        "Ants",
+        "Aphids",
+        "Mosquitoes"
+      ]
+    },
+    "oqdb-0536-2": {
+      "prompt": "Which environment favors dust mites?",
+      "options": [
+        "Warm and humid",
+        "Windy",
+        "Icy",
+        "Dry"
+      ]
+    },
+    "oqdb-0536-3": {
+      "prompt": "About how much does the smallest known species of shrew weigh?",
+      "options": [
+        "130 grams",
+        "70 grams",
+        "2 grams",
+        "20 grams"
+      ]
+    },
+    "oqdb-0536-4": {
+      "prompt": "How do millipedes protect themselves from predators?",
+      "options": [
+        "With secretions",
+        "By biting",
+        "By camouflage",
+        "By screaming"
+      ]
+    },
+    "oqdb-0537-1": {
+      "prompt": "What do you check to estimate a horse's approximate age?",
+      "options": [
+        "Tail",
+        "Teeth",
+        "Hooves",
+        "Mane"
+      ]
+    },
+    "oqdb-0537-2": {
+      "prompt": "How soon after birth can a foal walk?",
+      "options": [
+        "One hour",
+        "Two weeks",
+        "One month",
+        "Four weeks"
+      ]
+    },
+    "oqdb-0537-3": {
+      "prompt": "How often should a horse's hooves ideally be picked out?",
+      "options": [
+        "Every day",
+        "Every week",
+        "Every month",
+        "Every year"
+      ]
+    },
+    "oqdb-0537-4": {
+      "skip": "chanson d'un chanteur français peu connu hors de France, couleur du cheval douteuse"
+    },
+    "oqdb-0538-1": {
+      "skip": "roman français peu connu hors de France"
+    },
+    "oqdb-0538-2": {
+      "prompt": "Who wrote the short story \"The Snows of Kilimanjaro\"?",
+      "options": [
+        "Steinbeck",
+        "Camus",
+        "Mauriac",
+        "Hemingway"
+      ]
+    },
+    "oqdb-0538-4": {
+      "skip": "chanson française peu connue hors de France"
+    },
+    "oqdb-0539-1": {
+      "skip": "spécialité belgo-française sans écho à l'étranger"
+    },
+    "oqdb-0539-2": {
+      "prompt": "Which alcoholic drink is made with whisky and coffee?",
+      "options": [
+        "Irish coffee",
+        "French coffee",
+        "Viennese coffee",
+        "Café normand"
+      ]
+    },
+    "oqdb-0539-3": {
+      "skip": "ambiguïté dosettes/capsules (pods) en anglais"
+    },
+    "oqdb-0539-4": {
+      "prompt": "Which coffee variety is generally the strongest?",
+      "options": [
+        "Robusta",
+        "Arabica",
+        "Manila",
+        "Liberica"
+      ]
+    },
+    "oqdb-0541-1": {
+      "prompt": "In skiing, what difficulty level does a green run indicate?",
+      "options": [
+        "Very easy",
+        "Medium",
+        "Very difficult",
+        "Difficult"
+      ]
+    },
+    "oqdb-0541-2": {
+      "skip": "jeu de mots en français (tire-fesses)"
+    },
+    "oqdb-0541-3": {
+      "prompt": "What do you need to use ski lifts?",
+      "options": [
+        "A ski pass",
+        "A beanie",
+        "An ID card",
+        "A fingerprint"
+      ]
+    },
+    "oqdb-0541-4": {
+      "prompt": "What is the front part of a ski binding called?",
+      "options": [
+        "Telemark",
+        "Toe piece",
+        "Ski tip",
+        "Heel piece"
+      ]
+    },
+    "oqdb-0542-1": {
+      "skip": "référence à Guignol, sans écho à l'étranger"
+    },
+    "oqdb-0542-2": {
+      "prompt": "Which city in southwestern France is known for its famous prunes?",
+      "options": [
+        "Pau",
+        "Bergerac",
+        "Agen",
+        "Bayonne"
+      ]
+    },
+    "oqdb-0542-3": {
+      "skip": "question mal formulée, n'a plus de sens traduite"
+    },
+    "oqdb-0542-4": {
+      "prompt": "Which French city is nicknamed \"the Phocaean City\"?",
+      "options": [
+        "Nantes",
+        "Bordeaux",
+        "Nice",
+        "Marseille"
+      ]
+    },
+    "oqdb-0543-1": {
+      "skip": "ambiguïté : le mocha contient aussi du lait vapeur"
+    },
+    "oqdb-0543-2": {
+      "skip": "vocabulaire de café propre à la Suisse romande"
+    },
+    "oqdb-0543-3": {
+      "skip": "vocabulaire de café propre au français (noisette)"
+    },
+    "oqdb-0543-4": {
+      "prompt": "Which espresso drink has milk and a third of milk foam?",
+      "options": [
+        "Irish coffee",
+        "Mocha",
+        "Viennese coffee",
+        "Cappuccino"
+      ]
+    },
+    "oqdb-0544-1": {
+      "skip": "discographie de chanteur français peu connu hors de la francophonie"
+    },
+    "oqdb-0544-2": {
+      "skip": "chanteur français peu connu hors de la francophonie"
+    },
+    "oqdb-0544-3": {
+      "skip": "chanteurs français peu connus hors de la francophonie"
+    },
+    "oqdb-0544-4": {
+      "skip": "chanteur français peu connu hors de la francophonie"
+    },
+    "oqdb-0545-1": {
+      "prompt": "Which vital function can the fennec surprisingly do without?",
+      "options": [
+        "Seeing",
+        "Drinking",
+        "Sleeping",
+        "Eating"
+      ]
+    },
+    "oqdb-0545-3": {
+      "prompt": "Built for speed, how fast can a cheetah run?",
+      "options": [
+        "120 km/h",
+        "90 km/h",
+        "60 km/h",
+        "150 km/h"
+      ]
+    },
+    "oqdb-0545-4": {
+      "prompt": "At what age does a tiger cub start eating meat?",
+      "options": [
+        "One year",
+        "Two months",
+        "Two years",
+        "Six months"
+      ]
+    },
+    "oqdb-0547-1": {
+      "prompt": "What will you strap on to hike across soft snow?",
+      "options": [
+        "Ice skates",
+        "Snowshoes",
+        "Boots",
+        "Fins"
+      ]
+    },
+    "oqdb-0547-2": {
+      "prompt": "What is done on ski slopes between 5 pm and 9 am?",
+      "options": [
+        "Drying",
+        "Watering",
+        "Grooming",
+        "Wetting"
+      ]
+    },
+    "oqdb-0547-4": {
+      "prompt": "In which country is the very popular ski town of Innsbruck?",
+      "options": [
+        "Germany",
+        "Austria",
+        "Italy",
+        "Switzerland"
+      ]
+    },
+    "oqdb-0548-1": {
+      "prompt": "What is the name of the horse of Lucky Luke, the famous comic-book cowboy?",
+      "options": [
+        "Pegasus",
+        "Yakari",
+        "Tornado",
+        "Jolly Jumper"
+      ]
+    },
+    "oqdb-0548-2": {
+      "prompt": "Which famous car brand has a rearing horse as its emblem?",
+      "options": [
+        "Alfa Romeo",
+        "Ferrari",
+        "Peugeot",
+        "Lamborghini"
+      ]
+    },
+    "oqdb-0548-3": {
+      "prompt": "What is the name of the winged horse of Greek mythology?",
+      "options": [
+        "Fungus",
+        "Arion",
+        "Bucephalus",
+        "Pegasus"
+      ]
+    },
+    "oqdb-0548-4": {
+      "prompt": "How many knights are on a chessboard at the start of a game?",
+      "options": [
+        "Three",
+        "Two",
+        "Four",
+        "One"
+      ]
+    },
+    "oqdb-0549-1": {
+      "prompt": "What substance is used to melt snow on roads?",
+      "options": [
+        "Pepper",
+        "Sugar",
+        "Salt",
+        "Flour"
+      ]
+    },
+    "oqdb-0549-2": {
+      "skip": "chanteuse française peu connue hors de France"
+    },
+    "oqdb-0549-3": {
+      "prompt": "Which vehicle is used to clear snow from our roads?",
+      "options": [
+        "Spreader",
+        "Excavator",
+        "Snow groomer",
+        "Snowplow"
+      ]
+    },
+    "oqdb-0549-4": {
+      "prompt": "Which African general crossed the Alps with elephants?",
+      "options": [
+        "Scipio",
+        "Hanno",
+        "Hannibal",
+        "Hasdrubal"
+      ]
+    },
+    "oqdb-0550-1": {
+      "prompt": "In what type of building did gladiator fights take place?",
+      "options": [
+        "Temple",
+        "Gallodrome",
+        "Forum",
+        "Amphitheater"
+      ]
+    },
+    "oqdb-0550-2": {
+      "prompt": "Which tradesman trained and owned gladiators?",
+      "options": [
+        "Lanista",
+        "Market stallholder",
+        "Cheap eatery owner",
+        "Centurion"
+      ]
+    },
+    "oqdb-0550-3": {
+      "prompt": "Who is the most popular gladiator of Thracian origin?",
+      "options": [
+        "Crixus",
+        "Jugurtha",
+        "Spartacus",
+        "Maximus"
+      ]
+    },
+    "oqdb-0550-4": {
+      "prompt": "How did a gladiator signal that he was giving up the fight?",
+      "options": [
+        "He screams",
+        "He raises a finger",
+        "He removes his helmet",
+        "He throws his sword"
+      ]
+    },
+    "oqdb-0551-1": {
+      "skip": "émission de télé-réalité française sans écho à l'étranger"
+    },
+    "oqdb-0551-2": {
+      "skip": "émission de télé-réalité française sans écho à l'étranger"
+    },
+    "oqdb-0551-4": {
+      "skip": "émission de télé-réalité française sans écho à l'étranger"
+    },
+    "oqdb-0553-1": {
+      "prompt": "What color is SpongeBob's body?",
+      "options": [
+        "Yellow",
+        "White",
+        "Pink",
+        "Gray"
+      ]
+    },
+    "oqdb-0553-2": {
+      "prompt": "Which channel originally aired the series \"SpongeBob SquarePants\"?",
+      "options": [
+        "NTV",
+        "Nickelodeon",
+        "Netflix",
+        "NBC"
+      ]
+    },
+    "oqdb-0553-3": {
+      "prompt": "What does SpongeBob like to do with Sandy to pass the time?",
+      "options": [
+        "Tennis",
+        "Rugby",
+        "Karate",
+        "Soccer"
+      ]
+    },
+    "oqdb-0554-1": {
+      "prompt": "What is the largest city in the Grand Duchy of Luxembourg?",
+      "options": [
+        "Vianden",
+        "Diekirch",
+        "Luxembourg",
+        "Wiltz"
+      ]
+    },
+    "oqdb-0554-2": {
+      "prompt": "In which country is Ankara, a city of very ancient origins?",
+      "options": [
+        "Turkey",
+        "India",
+        "Burma",
+        "Pakistan"
+      ]
+    },
+    "oqdb-0554-4": {
+      "prompt": "Which sea has no fish or algae?",
+      "options": [
+        "Yellow Sea",
+        "Red Sea",
+        "White Sea",
+        "Dead Sea"
+      ]
+    },
+    "oqdb-0555-1": {
+      "prompt": "In \"Ice Age\", what slips away from Scrat the squirrel?",
+      "options": [
+        "An acorn",
+        "A marble",
+        "A bone",
+        "A stone"
+      ]
+    },
+    "oqdb-0555-2": {
+      "prompt": "What is the name of the orca that must be saved in a popular film saga?",
+      "options": [
+        "Tom",
+        "Jennifer",
+        "Willy",
+        "Monica"
+      ]
+    },
+    "oqdb-0555-3": {
+      "prompt": "Who does Tom the cat chase endlessly?",
+      "options": [
+        "Joshua",
+        "Jason",
+        "James",
+        "Jerry"
+      ]
+    },
+    "oqdb-0555-4": {
+      "prompt": "In the two \"Babe\" films, which animal plays the main character?",
+      "options": [
+        "Dog",
+        "Sheep",
+        "Goat",
+        "Pig"
+      ]
+    },
+    "oqdb-0556-1": {
+      "skip": "géographie locale française (Durance) sans écho à l'étranger"
+    },
+    "oqdb-0556-2": {
+      "skip": "géographie locale française (Durance) sans écho à l'étranger"
+    },
+    "oqdb-0556-3": {
+      "skip": "géographie locale française (Durance) sans écho à l'étranger"
+    },
+    "oqdb-0556-4": {
+      "skip": "géographie locale française (Durance) sans écho à l'étranger"
+    },
+    "oqdb-0557-1": {
+      "prompt": "How many pairs of ribs does the human skeleton have?",
+      "options": [
+        "32",
+        "24",
+        "12",
+        "6"
+      ]
+    },
+    "oqdb-0557-2": {
+      "prompt": "What is the average lifespan of a red blood cell?",
+      "options": [
+        "3 weeks",
+        "4 months",
+        "1 hour",
+        "2 days"
+      ]
+    },
+    "oqdb-0557-4": {
+      "skip": "exactitude douteuse : la perte d'eau par la respiration est plutôt de 0,3 à 0,5 litre par jour"
+    },
+    "oqdb-0559-1": {
+      "skip": "explorateur et expéditions peu connus hors de la francophonie"
+    },
+    "oqdb-0559-2": {
+      "skip": "explorateur et expéditions peu connus hors de la francophonie"
+    },
+    "oqdb-0559-3": {
+      "skip": "explorateur et expéditions peu connus hors de la francophonie"
+    },
+    "oqdb-0560-1": {
+      "skip": "géographie locale française (Vannes) sans écho à l'étranger"
+    },
+    "oqdb-0560-2": {
+      "skip": "jeu sur la langue française (gentilé)"
+    },
+    "oqdb-0560-3": {
+      "skip": "géographie locale française (Vannes) sans écho à l'étranger"
+    },
+    "oqdb-0560-4": {
+      "skip": "géographie locale française (Vannes) sans écho à l'étranger"
+    },
+    "oqdb-0561-1": {
+      "skip": "chanteuse française, titre à double sens en français"
+    },
+    "oqdb-0561-2": {
+      "skip": "chanteuse française peu connue hors de la francophonie"
+    },
+    "oqdb-0561-3": {
+      "skip": "chanteuse française peu connue hors de la francophonie"
+    },
+    "oqdb-0561-4": {
+      "skip": "chanteuse française peu connue hors de la francophonie"
+    },
+    "oqdb-0562-1": {
+      "prompt": "Who is the only member to have been in The Cure since the very beginning?",
+      "options": [
+        "Reeves Gabrels",
+        "Roger O'Donnell",
+        "Robert Smith",
+        "Simon Gallup"
+      ]
+    },
+    "oqdb-0562-2": {
+      "prompt": "With which musical movement is The Cure still associated?",
+      "options": [
+        "Rock",
+        "New wave",
+        "Pop",
+        "Dance"
+      ]
+    },
+    "oqdb-0562-3": {
+      "prompt": "Which supporting instrument is featured prominently in The Cure?",
+      "options": [
+        "Piano",
+        "Saxophone",
+        "Bass",
+        "Trumpet"
+      ]
+    },
+    "oqdb-0562-4": {
+      "prompt": "What is the title of The Cure's first single, released in 1978?",
+      "options": [
+        "Another Day",
+        "Killing an Arab",
+        "So What",
+        "Fire in Cairo"
+      ]
+    },
+    "oqdb-0563-2": {
+      "prompt": "Which active volcano is the highest in Europe, at 3,330 meters?",
+      "options": [
+        "Etna",
+        "Mount Fuji",
+        "Olca",
+        "Ebeko"
+      ]
+    },
+    "oqdb-0563-3": {
+      "prompt": "Which volcano, well known to tourists, is the highest point in Japan?",
+      "options": [
+        "Mount Longonot",
+        "Mount Ontake",
+        "Mount Spurr",
+        "Mount Fuji"
+      ]
+    },
+    "oqdb-0563-4": {
+      "prompt": "Which volcano caused a global cooling of 0.6°C?",
+      "options": [
+        "Pinatubo",
+        "Misti",
+        "Rasshua",
+        "Kurub"
+      ]
+    },
+    "oqdb-0565-1": {
+      "skip": "chanteuse française peu connue hors de la francophonie"
+    },
+    "oqdb-0565-3": {
+      "skip": "chanteuse française peu connue hors de la francophonie"
+    },
+    "oqdb-0565-4": {
+      "skip": "chanteuse française peu connue hors de la francophonie"
+    },
+    "oqdb-0566-1": {
+      "skip": "jeux sur la langue française (expressions)"
+    },
+    "oqdb-0566-2": {
+      "skip": "jeux sur la langue française (homonymes)"
+    },
+    "oqdb-0566-3": {
+      "skip": "jeux sur la langue française (expressions)"
+    },
+    "oqdb-0566-4": {
+      "skip": "jeux sur la langue française (homonymes)"
+    },
+    "oqdb-0567-1": {
+      "prompt": "Who is Princess Diana, who comes from a tribe of Amazons?",
+      "options": [
+        "Mega Mindy",
+        "Gwen Tennyson",
+        "Cipher",
+        "Wonder Woman"
+      ]
+    },
+    "oqdb-0567-4": {
+      "skip": "personnage obscur identifié par son nom français"
+    },
+    "oqdb-0568-2": {
+      "skip": "forêts françaises peu connues hors de France"
+    },
+    "oqdb-0568-3": {
+      "skip": "forêts corses peu connues hors de France"
+    },
+    "oqdb-0568-4": {
+      "prompt": "Which forest is sometimes identified with the forest of Brocéliande?",
+      "options": [
+        "Bondy",
+        "Paimpont",
+        "Seillon",
+        "Thelle"
+      ]
+    },
+    "oqdb-0569-1": {
+      "prompt": "Which Coca-Cola soda competes directly with 7 Up?",
+      "options": [
+        "Fanta",
+        "Bonaqua",
+        "Sprite",
+        "Nalu"
+      ]
+    },
+    "oqdb-0569-4": {
+      "prompt": "In which city in Georgia is the Coca-Cola company headquartered?",
+      "options": [
+        "Dalton",
+        "Atlanta",
+        "Albany",
+        "Brunswick"
+      ]
+    },
+    "oqdb-0571-1": {
+      "skip": "exactitude douteuse : jugement subjectif (Disintegration est aussi très sombre)"
+    },
+    "oqdb-0571-2": {
+      "prompt": "Which second album by The Cure is darker than the first?",
+      "options": [
+        "Pornography",
+        "The Top",
+        "Seventeen Seconds",
+        "Faith"
+      ]
+    },
+    "oqdb-0571-3": {
+      "prompt": "Which of these is not a live album by The Cure?",
+      "options": [
+        "Entreat",
+        "Dublin",
+        "Paris",
+        "Concert"
+      ]
+    },
+    "oqdb-0571-4": {
+      "prompt": "How many albums had The Cure sold worldwide by the end of 2018?",
+      "options": [
+        "20 million",
+        "30 million",
+        "10 million",
+        "40 million"
+      ]
+    },
+    "oqdb-0572-1": {
+      "prompt": "Which sugar-free Coke is aimed at a more male audience?",
+      "options": [
+        "Coke Zoom",
+        "Coke Zen",
+        "Coke Zebra",
+        "Coke Zero"
+      ]
+    },
+    "oqdb-0572-2": {
+      "prompt": "Which drink is also known as Diet Coke?",
+      "options": [
+        "Coke Zero",
+        "Coke Life",
+        "Coke BlaK",
+        "Coke Light"
+      ]
+    },
+    "oqdb-0572-4": {
+      "prompt": "Which version of Coca-Cola has a taste enriched with coffee?",
+      "options": [
+        "Zero",
+        "BlaK",
+        "Life",
+        "Cherry"
+      ]
+    },
+    "oqdb-0573-2": {
+      "prompt": "Which of these disorders can be linked to a magnesium deficiency?",
+      "options": [
+        "Cramps",
+        "Anorexia",
+        "Asthma",
+        "Bulimia"
+      ]
+    },
+    "oqdb-0573-3": {
+      "prompt": "Which of these fruits is by far the richest in magnesium?",
+      "options": [
+        "Pear",
+        "Grapes",
+        "Banana",
+        "Apple"
+      ]
+    },
+    "oqdb-0573-4": {
+      "prompt": "What effect is caused by an excess of magnesium?",
+      "options": [
+        "Stimulating",
+        "Anabolic",
+        "Sedating",
+        "Laxative"
+      ]
+    },
+    "oqdb-0574-1": {
+      "prompt": "In which country is the experimental city of Auroville located?",
+      "options": [
+        "India",
+        "Bangladesh",
+        "Canada",
+        "Pakistan"
+      ]
+    },
+    "oqdb-0574-2": {
+      "prompt": "Which Frenchwoman was behind the creation of the city of Auroville?",
+      "options": [
+        "Ellam Onru",
+        "Mirra Alfassa",
+        "Julie Dreyfus",
+        "Maïna Kataki"
+      ]
+    },
+    "oqdb-0574-3": {
+      "skip": "jeu sur la langue française (gentilé)"
+    },
+    "oqdb-0574-4": {
+      "prompt": "Which building is considered the soul of Auroville?",
+      "options": [
+        "Pooram",
+        "Bharat Niwas",
+        "Charaka",
+        "Matrimandir"
+      ]
+    },
+    "oqdb-0575-1": {
+      "prompt": "Gin is a spirit close to which alcoholic ancestor?",
+      "options": [
+        "Chartreuse",
+        "Triple sec",
+        "Schnapps",
+        "Genever"
+      ]
+    }
+  },
+  "quizzes": {}
+}

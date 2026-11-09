@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=446"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0446-3",
+      "type": "mcq",
+      "prompt": "Quels rongeurs sont les héros du film « Misson-G », sorti en 2009 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Souris",
+            "correct": false
+          },
+          {
+            "label": "Hamsters",
+            "correct": false
+          },
+          {
+            "label": "Cochons d'Inde",
+            "correct": true
+          },
+          {
+            "label": "Rats",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

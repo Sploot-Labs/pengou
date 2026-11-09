@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=483"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0483-1-en",
+      "type": "mcq",
+      "prompt": "Which German writer worked nearly 60 years on his work \"Faust\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Becker",
+            "correct": false
+          },
+          {
+            "label": "Goethe",
+            "correct": true
+          },
+          {
+            "label": "Lingg",
+            "correct": false
+          },
+          {
+            "label": "Jacoby",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0483-2-en",
+      "type": "mcq",
+      "prompt": "Which Russian writer was excommunicated by the Orthodox Church?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roman Gul",
+            "correct": false
+          },
+          {
+            "label": "Leonid Andreyev",
+            "correct": false
+          },
+          {
+            "label": "Vladimir Sharov",
+            "correct": false
+          },
+          {
+            "label": "Leo Tolstoy",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=268"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0268-1-en",
+      "type": "mcq",
+      "prompt": "Which Pixar hero does Tom Hanks voice?",
+      "payload": {
+        "options": [
+          {
+            "label": "Woody",
+            "correct": true
+          },
+          {
+            "label": "Wolverine",
+            "correct": false
+          },
+          {
+            "label": "Wukong",
+            "correct": false
+          },
+          {
+            "label": "Walter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=361"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0361-1-en",
+      "type": "mcq",
+      "prompt": "Which country is home to the royal Shalimar Gardens?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bangladesh",
+            "correct": false
+          },
+          {
+            "label": "Bhutan",
+            "correct": false
+          },
+          {
+            "label": "Afghanistan",
+            "correct": false
+          },
+          {
+            "label": "Pakistan",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0361-2-en",
+      "type": "mcq",
+      "prompt": "Which country do you head to for a tan in Rimini?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spain",
+            "correct": false
+          },
+          {
+            "label": "Greece",
+            "correct": false
+          },
+          {
+            "label": "Portugal",
+            "correct": false
+          },
+          {
+            "label": "Italy",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0361-4-en",
+      "type": "mcq",
+      "prompt": "In which country will you visit the ruins of Carthage?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hungary",
+            "correct": false
+          },
+          {
+            "label": "Tunisia",
+            "correct": true
+          },
+          {
+            "label": "Turkey",
+            "correct": false
+          },
+          {
+            "label": "Egypt",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

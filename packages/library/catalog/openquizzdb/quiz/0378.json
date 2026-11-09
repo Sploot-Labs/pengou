@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=378"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0378-2",
+      "type": "mcq",
+      "prompt": "Quelle organisation regroupe les clubs pros de basket en France ?",
+      "payload": {
+        "options": [
+          {
+            "label": "LNB",
+            "correct": true
+          },
+          {
+            "label": "Pro A",
+            "correct": false
+          },
+          {
+            "label": "B Pro",
+            "correct": false
+          },
+          {
+            "label": "Super G",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

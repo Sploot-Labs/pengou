@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 /**
@@ -22,12 +22,14 @@ const {
   mockDeleteQuestion,
   mockReorderQuestions,
   baseQuestion,
+  fixtures,
 } = vi.hoisted(() => ({
-  mockUpdateQuestion: vi.fn(() => Promise.resolve({ id: 'quest1' })),
   mockListQuestions: vi.fn(),
   mockCreateQuestion: vi.fn(),
   mockDeleteQuestion: vi.fn(),
   mockReorderQuestions: vi.fn(),
+  fixtures: { quizSource: null as unknown, questionSource: null as unknown, archivedAt: null as string | null },
+  mockUpdateQuestion: vi.fn(() => Promise.resolve({ id: 'quest1' })),
   baseQuestion: {
     id: 'quest1',
     quizId: 'quiz1',
@@ -57,8 +59,10 @@ vi.mock('../api/quizzes', () => ({
       title: 'Mon quiz',
       description: null,
       cover: null,
+      source: fixtures.quizSource,
       createdAt: '2026-07-20T15:30:00Z',
       updatedAt: '2026-07-20T15:30:00Z',
+      archivedAt: fixtures.archivedAt,
     }),
   ),
   listQuestions: mockListQuestions,
@@ -67,11 +71,15 @@ vi.mock('../api/quizzes', () => ({
   reorderQuestions: mockReorderQuestions,
   updateQuestion: mockUpdateQuestion,
   updateQuiz: vi.fn(),
+  archiveQuiz: vi.fn(),
+  restoreQuiz: vi.fn(),
 }))
 
+const mockSendVerificationEmail = vi.fn()
 vi.mock('../api/auth', () => ({
   signOut: vi.fn(),
-  useSession: () => ({ refresh: vi.fn() }),
+  useSession: () => ({ refresh: vi.fn(), user: { email: 'camille@example.com', emailVerified: false } }),
+  sendVerificationEmail: (...args: unknown[]) => mockSendVerificationEmail(...args),
 }))
 
 const { mockUploadMedia } = vi.hoisted(() => ({ mockUploadMedia: vi.fn() }))
@@ -88,13 +96,15 @@ vi.mock('../realtime/GameSocketProvider', () => ({
 
 import { HostEditor } from './HostEditor'
 
-mockListQuestions.mockResolvedValue([baseQuestion])
+const defaultQuestions = () => Promise.resolve([{ ...baseQuestion, source: fixtures.questionSource }])
+mockListQuestions.mockImplementation(defaultQuestions)
 
 function renderEditor() {
   return render(
     <MemoryRouter initialEntries={['/quizzes/quiz1']}>
       <Routes>
         <Route path="/quizzes/:quizId" element={<HostEditor />} />
+        <Route path="/" element={<p>Page d'accueil</p>} />
       </Routes>
     </MemoryRouter>,
   )
@@ -128,6 +138,235 @@ describe('HostEditor — champ Temps de lecture', () => {
   })
 })
 
+describe('HostEditor : attribution des sources', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+    fixtures.quizSource = null
+    fixtures.questionSource = null
+  })
+  afterEach(cleanup)
+
+  it("regroupe les sources dans l'encadré « Sources et licences », avec la licence liée", async () => {
+    fixtures.quizSource = { name: 'Open Trivia', license: 'CC BY-SA 4.0' }
+    fixtures.questionSource = { name: 'Open Trivia', license: 'CC BY-SA 4.0', url: 'https://example.org/q' }
+    renderEditor()
+    const panel = await screen.findByRole('region', { name: 'Sources et licences' })
+    expect(panel).toHaveTextContent('Toutes les questions : Open Trivia.')
+    expect(within(panel).getByRole('link', { name: 'Open Trivia' })).toHaveAttribute('href', 'https://example.org/q')
+    expect(within(panel).getByRole('link', { name: 'CC BY-SA 4.0' })).toHaveAttribute(
+      'href',
+      'https://creativecommons.org/licenses/by-sa/4.0/deed.fr',
+    )
+    expect(panel).toHaveTextContent('Vos modifications de ces contenus restent sous cette licence.')
+    expect(within(panel).getByRole('link', { name: 'Crédits et licences' })).toHaveAttribute('href', '/credits')
+  })
+
+  it("n'affiche aucun encadré de sources sans attribution", async () => {
+    renderEditor()
+    await screen.findByLabelText('Temps de lecture (s)')
+    expect(screen.queryByRole('region', { name: 'Sources et licences' })).toBeNull()
+  })
+})
+
+describe('HostEditor : archivage', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+    fixtures.quizSource = null
+    fixtures.questionSource = null
+    fixtures.archivedAt = null
+  })
+  afterEach(cleanup)
+
+  it("« Archiver ce quiz » demande confirmation, archive puis revient à l'accueil", async () => {
+    const { archiveQuiz } = await import('../api/quizzes')
+    vi.mocked(archiveQuiz).mockResolvedValueOnce({} as never)
+    renderEditor()
+
+    const trigger = await screen.findByRole('button', { name: 'Archiver ce quiz' })
+    trigger.focus()
+    fireEvent.click(trigger)
+    const dialog = screen.getByRole('dialog', { name: 'Archiver ce quiz ?' })
+    // L'éditeur passe en arrière-plan inerte pour les technologies d'assistance.
+    expect(document.getElementById('contenu-principal')).toHaveAttribute('aria-hidden', 'true')
+
+    fireEvent.keyDown(dialog, { key: 'Escape' })
+    expect(screen.queryByRole('dialog')).toBeNull()
+    expect(trigger).toHaveFocus()
+    expect(archiveQuiz).not.toHaveBeenCalled()
+
+    fireEvent.click(trigger)
+    fireEvent.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Archiver' }))
+    await screen.findByText("Page d'accueil")
+    expect(archiveQuiz).toHaveBeenCalledWith('quiz1')
+  })
+
+  it('un quiz archivé affiche le bandeau « Restaurer », bloque le lancement, et redevient lançable une fois restauré', async () => {
+    fixtures.archivedAt = '2026-08-01T10:00:00Z'
+    const { restoreQuiz } = await import('../api/quizzes')
+    vi.mocked(restoreQuiz).mockResolvedValueOnce({
+      id: 'quiz1',
+      tenantId: 't1',
+      ownerId: 'u1',
+      title: 'Mon quiz',
+      description: null,
+      cover: null,
+      source: null,
+      createdAt: '2026-07-20T15:30:00Z',
+      updatedAt: '2026-07-20T15:30:00Z',
+      archivedAt: null,
+    })
+    renderEditor()
+
+    expect(await screen.findByText(/Ce quiz est archivé\./)).toBeInTheDocument()
+    const launch = screen.getByRole('button', { name: 'Lancer la partie' })
+    expect(launch).toHaveAttribute('aria-disabled', 'true')
+    expect(launch).toHaveAccessibleDescription(/Ce quiz est archivé/)
+    // Contenu toujours modifiable, mais pas de second « Archiver ».
+    expect(screen.getByLabelText('Titre du quiz')).not.toBeDisabled()
+    expect(screen.queryByRole('button', { name: 'Archiver ce quiz' })).toBeNull()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Restaurer' }))
+    await waitFor(() => expect(screen.queryByText(/Ce quiz est archivé\./)).toBeNull())
+    expect(restoreQuiz).toHaveBeenCalledWith('quiz1')
+    expect(screen.getByRole('button', { name: 'Lancer la partie' })).toHaveAttribute('aria-disabled', 'false')
+    expect(screen.getByRole('button', { name: 'Archiver ce quiz' })).toBeInTheDocument()
+  })
+})
+
+describe('HostEditor : nuage de mots', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+    fixtures.quizSource = null
+    fixtures.questionSource = null
+    fixtures.archivedAt = null
+  })
+  afterEach(cleanup)
+
+  it('choisir « Nuage de mots » crée une question wordcloud et affiche le texte explicatif', async () => {
+    const { createQuestion, deleteQuestion } = await import('../api/quizzes')
+    vi.mocked(createQuestion).mockResolvedValueOnce({
+      ...baseQuestion,
+      id: 'quest2',
+      type: 'wordcloud',
+      payload: {},
+      source: null,
+    } as never)
+    vi.mocked(deleteQuestion).mockResolvedValueOnce(undefined as never)
+    renderEditor()
+
+    const select = (await screen.findByLabelText('Type de question')) as HTMLSelectElement
+    expect(within(select).getByRole('option', { name: 'Nuage de mots' })).toHaveValue('wordcloud')
+    // La question de départ (QCM) a des réponses : la confirmation s'ouvre d'abord.
+    fireEvent.change(select, { target: { value: 'wordcloud' } })
+    fireEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Changer de type' }))
+
+    await waitFor(() =>
+      expect(createQuestion).toHaveBeenCalledWith('quiz1', expect.objectContaining({ type: 'wordcloud', payload: {} })),
+    )
+    expect(
+      await screen.findByText('Les participants proposent leurs idées en direct. Pas de bonne réponse ni de points.'),
+    ).toBeInTheDocument()
+    expect(screen.queryByText('Incomplète')).toBeNull()
+  })
+})
+
+describe('HostEditor : sondage', () => {
+  const pollQuestion = (options: string[], multiple = false) => ({
+    ...baseQuestion,
+    id: 'quest2',
+    type: 'poll' as const,
+    payload: { options: options.map((label) => ({ label })), multiple },
+    source: null,
+  })
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+    fixtures.quizSource = null
+    fixtures.questionSource = null
+    fixtures.archivedAt = null
+  })
+  afterEach(cleanup)
+
+  async function openPoll(options: string[], multiple = false) {
+    const { createQuestion, deleteQuestion } = await import('../api/quizzes')
+    vi.mocked(createQuestion).mockResolvedValueOnce(pollQuestion(options, multiple) as never)
+    vi.mocked(deleteQuestion).mockResolvedValueOnce(undefined as never)
+    renderEditor()
+    const select = (await screen.findByLabelText('Type de question')) as HTMLSelectElement
+    fireEvent.change(select, { target: { value: 'poll' } })
+    fireEvent.click(within(await screen.findByRole('dialog')).getByRole('button', { name: 'Changer de type' }))
+    await screen.findByLabelText('Plusieurs réponses possibles')
+    return { createQuestion }
+  }
+
+  it('choisir « Sondage » crée un sondage à quatre choix sans bonne réponse', async () => {
+    const { createQuestion } = await openPoll(['Choix 1', 'Choix 2', 'Choix 3', 'Choix 4'])
+    const select = screen.getByLabelText('Type de question') as HTMLSelectElement
+    expect(within(select).getByRole('option', { name: 'Sondage' })).toHaveValue('poll')
+    expect(createQuestion).toHaveBeenCalledWith(
+      'quiz1',
+      expect.objectContaining({
+        type: 'poll',
+        payload: {
+          options: [{ label: 'Choix 1' }, { label: 'Choix 2' }, { label: 'Choix 3' }, { label: 'Choix 4' }],
+          multiple: false,
+        },
+      }),
+    )
+    expect(screen.queryByText('Correcte')).toBeNull()
+    expect(screen.queryByRole('radio')).toBeNull()
+    expect(screen.queryByText('Incomplète')).toBeNull()
+  })
+
+  it('cocher « Plusieurs réponses possibles » envoie un patch multiple: true', async () => {
+    await openPoll(['Choix 1', 'Choix 2', 'Choix 3', 'Choix 4'])
+    fireEvent.click(screen.getByLabelText('Plusieurs réponses possibles'))
+    await waitFor(
+      () =>
+        expect(mockUpdateQuestion).toHaveBeenCalledWith(
+          'quiz1',
+          'quest2',
+          expect.objectContaining({ payload: expect.objectContaining({ multiple: true }) }),
+        ),
+      { timeout: 2000 },
+    )
+  })
+
+  it('vider un libellé marque la question incomplète', async () => {
+    await openPoll(['Choix 1', 'Choix 2', 'Choix 3', 'Choix 4'])
+    fireEvent.change(screen.getByLabelText(/Libellé choix 2/), { target: { value: '' } })
+    expect(await screen.findByText('Chaque choix doit avoir un libellé.')).toBeInTheDocument()
+    expect(screen.getAllByText('Incomplète').length).toBeGreaterThan(0)
+  })
+
+  it("désactive l'ajout à six choix et le retrait à deux", async () => {
+    await openPoll(['A', 'B', 'C', 'D', 'E', 'F'])
+    expect(screen.getByRole('button', { name: 'Ajouter un choix' })).toBeDisabled()
+    for (let i = 0; i < 4; i++) {
+      fireEvent.click(screen.getAllByRole('button', { name: /^Retirer le choix/ })[0])
+    }
+    expect(screen.getAllByRole('button', { name: /^Retirer le choix/ })[0]).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Ajouter un choix' })).toBeEnabled()
+  })
+
+  it("« Restaurer » refusé faute d'adresse confirmée : message dédié et renvoi sur place", async () => {
+    fixtures.archivedAt = '2026-08-01T10:00:00Z'
+    const { restoreQuiz } = await import('../api/quizzes')
+    const { ApiError } = await import('../api/client')
+    vi.mocked(restoreQuiz).mockRejectedValueOnce(
+      new ApiError(403, "Confirmez votre adresse e-mail pour créer d'autres quiz.", 'email_unverified_quiz_limit'),
+    )
+    mockSendVerificationEmail.mockResolvedValue(undefined)
+    renderEditor()
+    fireEvent.click(await screen.findByRole('button', { name: 'Restaurer' }))
+    const notice = (await screen.findByText("Confirmez votre adresse e-mail pour créer d'autres quiz.")).closest(
+      '[role="alert"]',
+    ) as HTMLElement
+    fireEvent.click(within(notice).getByRole('button', { name: "Renvoyer l'e-mail" }))
+    await waitFor(() => expect(within(notice).getByText('E-mail envoyé')).toBeInTheDocument())
+  })
+})
+
 describe('HostEditor — image de la question', () => {
   const withImage = { ...baseQuestion, media: '/uploads/t/a.png', mediaAlt: 'Un manchot' }
   beforeEach(() => {
@@ -136,7 +375,7 @@ describe('HostEditor — image de la question', () => {
   })
   afterEach(() => {
     cleanup()
-    mockListQuestions.mockResolvedValue([baseQuestion])
+    mockListQuestions.mockImplementation(defaultQuestions)
   })
 
   it("retirer l'image envoie un PATCH avec media et mediaAlt à null", async () => {
@@ -192,7 +431,7 @@ describe("HostEditor — envoi d'image et changement de question", () => {
   })
   afterEach(() => {
     cleanup()
-    mockListQuestions.mockResolvedValue([baseQuestion])
+    mockListQuestions.mockImplementation(defaultQuestions)
   })
 
   it("un envoi terminé après être passé à une autre question est enregistré sur la question d'origine", async () => {

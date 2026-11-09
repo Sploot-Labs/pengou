@@ -1,0 +1,358 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0181-1-en",
+      "type": "mcq",
+      "prompt": "Which position does Harry Potter play on his Quidditch team?",
+      "payload": {
+        "options": [
+          {
+            "label": "Seeker",
+            "correct": true
+          },
+          {
+            "label": "Beater",
+            "correct": false
+          },
+          {
+            "label": "Keeper",
+            "correct": false
+          },
+          {
+            "label": "Chaser",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0181-2-en",
+      "type": "mcq",
+      "prompt": "What is Hermione's surname in the \"Harry Potter\" saga?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gaunt",
+            "correct": false
+          },
+          {
+            "label": "Greengrass",
+            "correct": false
+          },
+          {
+            "label": "Granger",
+            "correct": true
+          },
+          {
+            "label": "Grindelwald",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0181-3-en",
+      "type": "mcq",
+      "prompt": "In \"Harry Potter\", which title did Voldemort decide to take?",
+      "payload": {
+        "options": [
+          {
+            "label": "Count",
+            "correct": false
+          },
+          {
+            "label": "Baron",
+            "correct": false
+          },
+          {
+            "label": "Duke",
+            "correct": false
+          },
+          {
+            "label": "Lord",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0181-4-en",
+      "type": "mcq",
+      "prompt": "What shape does Ron's boggart take in the \"Harry Potter\" saga?",
+      "payload": {
+        "options": [
+          {
+            "label": "A spider",
+            "correct": true
+          },
+          {
+            "label": "A wolf",
+            "correct": false
+          },
+          {
+            "label": "A dragon",
+            "correct": false
+          },
+          {
+            "label": "A scorpion",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0312-1-en",
+      "type": "mcq",
+      "prompt": "Which novel features a teenage girl with paranormal powers?",
+      "payload": {
+        "options": [
+          {
+            "label": "Christine",
+            "correct": false
+          },
+          {
+            "label": "Misery",
+            "correct": false
+          },
+          {
+            "label": "Carrie",
+            "correct": true
+          },
+          {
+            "label": "Cujo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0312-2-en",
+      "type": "mcq",
+      "prompt": "What form does the villain take in Stephen King's novel \"It\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "A clown",
+            "correct": true
+          },
+          {
+            "label": "A monster",
+            "correct": false
+          },
+          {
+            "label": "A shadow",
+            "correct": false
+          },
+          {
+            "label": "A ghost",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0312-3-en",
+      "type": "mcq",
+      "prompt": "What is Christine in Stephen King's work?",
+      "payload": {
+        "options": [
+          {
+            "label": "A grave",
+            "correct": false
+          },
+          {
+            "label": "A car",
+            "correct": true
+          },
+          {
+            "label": "A house",
+            "correct": false
+          },
+          {
+            "label": "A doll",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0085-1-en",
+      "type": "mcq",
+      "prompt": "Which science fiction writer created the monumental \"Dune\" saga?",
+      "payload": {
+        "options": [
+          {
+            "label": "Robert Heinlein",
+            "correct": false
+          },
+          {
+            "label": "Arthur C. Clarke",
+            "correct": false
+          },
+          {
+            "label": "Isaac Asimov",
+            "correct": false
+          },
+          {
+            "label": "Frank Herbert",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0085-2-en",
+      "type": "mcq",
+      "prompt": "Who wrote the science fiction novel \"The Island of Doctor Moreau\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aldous Huxley",
+            "correct": false
+          },
+          {
+            "label": "George Orwell",
+            "correct": false
+          },
+          {
+            "label": "H. G. Wells",
+            "correct": true
+          },
+          {
+            "label": "Arthur C. Clarke",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0085-3-en",
+      "type": "mcq",
+      "prompt": "Which novel founded the cyberpunk movement?",
+      "payload": {
+        "options": [
+          {
+            "label": "Source Code",
+            "correct": false
+          },
+          {
+            "label": "Count Zero",
+            "correct": false
+          },
+          {
+            "label": "Neuromancer",
+            "correct": true
+          },
+          {
+            "label": "Idoru",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0397-1-en",
+      "type": "mcq",
+      "prompt": "Who volunteers to take Prim's place in \"The Hunger Games\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Katniss",
+            "correct": true
+          },
+          {
+            "label": "Primrose",
+            "correct": false
+          },
+          {
+            "label": "Peeta",
+            "correct": false
+          },
+          {
+            "label": "Gale",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0397-4-en",
+      "type": "mcq",
+      "prompt": "Which important character usually wears a white rose?",
+      "payload": {
+        "options": [
+          {
+            "label": "Peeta",
+            "correct": false
+          },
+          {
+            "label": "Cinna",
+            "correct": false
+          },
+          {
+            "label": "Katniss",
+            "correct": false
+          },
+          {
+            "label": "Snow",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,2221 @@
+{
+  "source": {
+    "name": "Open Trivia Database (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-02d87aa159d2-fr",
+      "type": "mcq",
+      "prompt": "Quel auteur américain a aussi écrit des récits de voyage avec son chien Charley ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ernest Hemingway",
+            "correct": false
+          },
+          {
+            "label": "William Faulkner",
+            "correct": false
+          },
+          {
+            "label": "John Steinbeck",
+            "correct": true
+          },
+          {
+            "label": "F. Scott Fitzgerald",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-082e816448cd-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit le roman « Las Vegas Parano » (« Fear and Loathing in Las Vegas ») ?",
+      "payload": {
+        "options": [
+          {
+            "label": "F. Scott Fitzgerald",
+            "correct": false
+          },
+          {
+            "label": "Henry Miller",
+            "correct": false
+          },
+          {
+            "label": "Hunter S. Thompson",
+            "correct": true
+          },
+          {
+            "label": "William S. Burroughs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0cbf2c2b87d7-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle l'île mystérieuse dans « L'Île mystérieuse » de Jules Verne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Île Neptune",
+            "correct": false
+          },
+          {
+            "label": "Île Lincoln",
+            "correct": true
+          },
+          {
+            "label": "Île Prométhée",
+            "correct": false
+          },
+          {
+            "label": "Île Vulcania",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-10d05362143c-fr",
+      "type": "mcq",
+      "prompt": "Abel Magwitch est un personnage de quel roman de Charles Dickens ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Club Pickwick",
+            "correct": false
+          },
+          {
+            "label": "De grandes espérances",
+            "correct": true
+          },
+          {
+            "label": "Nicolas Nickleby",
+            "correct": false
+          },
+          {
+            "label": "Oliver Twist",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-18e2cb543939-fr",
+      "type": "mcq",
+      "prompt": "Selon « Le Guide du voyageur galactique », la réponse à la vie, l'univers et le reste est...",
+      "payload": {
+        "options": [
+          {
+            "label": "42",
+            "correct": true
+          },
+          {
+            "label": "La mort",
+            "correct": false
+          },
+          {
+            "label": "Aimer son prochain",
+            "correct": false
+          },
+          {
+            "label": "Le chocolat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-19926196cd34-fr",
+      "type": "mcq",
+      "prompt": "George Orwell a écrit ce livre, souvent vu comme une critique de la surveillance d'État.",
+      "payload": {
+        "options": [
+          {
+            "label": "1984",
+            "correct": true
+          },
+          {
+            "label": "Le Vieil Homme et la Mer",
+            "correct": false
+          },
+          {
+            "label": "Du silence et des ombres",
+            "correct": false
+          },
+          {
+            "label": "L'Attrape-cœurs",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-19b5c2e0b2d1-fr",
+      "type": "mcq",
+      "prompt": "Quel personnage classique d'horreur a tué Elizabeth Lavenza ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Créature du lac noir",
+            "correct": false
+          },
+          {
+            "label": "Monstre de Frankenstein",
+            "correct": true
+          },
+          {
+            "label": "Loup-garou",
+            "correct": false
+          },
+          {
+            "label": "Comte Dracula",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-1d1602b8cec9-fr",
+      "type": "mcq",
+      "prompt": "Quel auteur et poète a écrit : « La femelle de l'espèce est plus mortelle que le mâle » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "William Shakespeare",
+            "correct": false
+          },
+          {
+            "label": "William Wordsworth",
+            "correct": false
+          },
+          {
+            "label": "Rudyard Kipling",
+            "correct": true
+          },
+          {
+            "label": "Edgar Allan Poe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-200487a8a502-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit « Frankenstein » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bram Stoker",
+            "correct": false
+          },
+          {
+            "label": "H. P. Lovecraft",
+            "correct": false
+          },
+          {
+            "label": "Mary Shelley",
+            "correct": true
+          },
+          {
+            "label": "Edgar Allan Poe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-20091fd561d0-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le frère de Sherlock Holmes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mederi Holmes",
+            "correct": false
+          },
+          {
+            "label": "Martin Holmes",
+            "correct": false
+          },
+          {
+            "label": "Herbie Hancock Holmes",
+            "correct": false
+          },
+          {
+            "label": "Mycroft Holmes",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-22e8d24d5b1a-fr",
+      "type": "mcq",
+      "prompt": "Selon le roman de Bram Stoker, dans quelle ville côtière britannique Dracula a-t-il débarqué ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Whitby",
+            "correct": true
+          },
+          {
+            "label": "Portsmouth",
+            "correct": false
+          },
+          {
+            "label": "Scarborough",
+            "correct": false
+          },
+          {
+            "label": "Brighton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-29c0b88fc399-fr",
+      "type": "mcq",
+      "prompt": "En 1818, la romancière Mary Shelley a écrit un roman et créé quel personnage célèbre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dracula",
+            "correct": false
+          },
+          {
+            "label": "Monstre de Frankenstein",
+            "correct": true
+          },
+          {
+            "label": "La Chose",
+            "correct": false
+          },
+          {
+            "label": "L'Homme invisible",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2d39d38f6074-fr",
+      "type": "mcq",
+      "prompt": "Dans « Harry Potter », que doit faire un élève pour entrer dans la salle commune de Serdaigle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tapoter des tonneaux",
+            "correct": false
+          },
+          {
+            "label": "Résoudre une énigme",
+            "correct": true
+          },
+          {
+            "label": "Frapper en séquence",
+            "correct": false
+          },
+          {
+            "label": "Dire un mot de passe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-347881364e88-fr",
+      "type": "mcq",
+      "prompt": "Lequel de ces auteurs n'est pas né en Angleterre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Arthur Conan Doyle",
+            "correct": true
+          },
+          {
+            "label": "H. G. Wells",
+            "correct": false
+          },
+          {
+            "label": "Graham Greene",
+            "correct": false
+          },
+          {
+            "label": "Arthur C. Clarke",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3ba71b59edeb-fr",
+      "type": "mcq",
+      "prompt": "Dans le roman « Seul sur Mars », combien de temps Mark Watney est-il resté bloqué sur Mars (en sols) ?",
+      "payload": {
+        "options": [
+          {
+            "label": "765 sols",
+            "correct": false
+          },
+          {
+            "label": "401 sols",
+            "correct": false
+          },
+          {
+            "label": "324 sols",
+            "correct": false
+          },
+          {
+            "label": "549 sols",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3d5767d53e30-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit « Le Petit Prince » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Antoine de Saint-Exupéry",
+            "correct": true
+          },
+          {
+            "label": "F. Scott Fitzgerald",
+            "correct": false
+          },
+          {
+            "label": "Miguel de Cervantes",
+            "correct": false
+          },
+          {
+            "label": "Jane Austen",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3f2cbd98c322-fr",
+      "type": "mcq",
+      "prompt": "Dans « Alice au pays des merveilles », comment s'appelle la chatte d'Alice ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Smokey",
+            "correct": false
+          },
+          {
+            "label": "Oscar",
+            "correct": false
+          },
+          {
+            "label": "Dinah",
+            "correct": true
+          },
+          {
+            "label": "Heath",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-465651f04dc8-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le chien à trois têtes dans « Harry Potter à l'école des sorciers » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spike",
+            "correct": false
+          },
+          {
+            "label": "Pouffy",
+            "correct": false
+          },
+          {
+            "label": "Touffu",
+            "correct": true
+          },
+          {
+            "label": "Spot",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-47d5e9d213be-fr",
+      "type": "mcq",
+      "prompt": "Dans quel tome de « Harry Potter » rencontre-t-on un Horcruxe pour la première fois ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Coupe de feu",
+            "correct": false
+          },
+          {
+            "label": "La Chambre des secrets",
+            "correct": true
+          },
+          {
+            "label": "Les Reliques de la Mort",
+            "correct": false
+          },
+          {
+            "label": "Le Prince de sang-mêlé",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-48d86b7ae2b9-fr",
+      "type": "mcq",
+      "prompt": "De quel auteur est « Les Œufs verts au jambon » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dr. Seuss",
+            "correct": true
+          },
+          {
+            "label": "Roald Dahl",
+            "correct": false
+          },
+          {
+            "label": "A. A. Milne",
+            "correct": false
+          },
+          {
+            "label": "Beatrix Potter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-49d27b977496-fr",
+      "type": "truefalse",
+      "prompt": "Les livres de la série « Harry Potter » totalisent plus d'un million de mots.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-517eb1564b0f-fr",
+      "type": "mcq",
+      "prompt": "Dans la série de livres « Odd Thomas », de quelle maladie génétique Danny Jessup est-il atteint ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Adrénoleucodystrophie",
+            "correct": false
+          },
+          {
+            "label": "Ostéogenèse imparfaite",
+            "correct": true
+          },
+          {
+            "label": "Mucoviscidose",
+            "correct": false
+          },
+          {
+            "label": "Ataxie spinocérébelleuse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-520f03d31f1a-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit « Harry Potter » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "J.K. Rowling",
+            "correct": true
+          },
+          {
+            "label": "J.R.R. Tolkien",
+            "correct": false
+          },
+          {
+            "label": "Daniel Radcliffe",
+            "correct": false
+          },
+          {
+            "label": "Terry Pratchett",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-581bc67061a6-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces histoires ne fait pas partie des fables d'Ésope ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Renard et les Raisins",
+            "correct": false
+          },
+          {
+            "label": "La Grenouille et le Bœuf",
+            "correct": false
+          },
+          {
+            "label": "Rox et Rouky",
+            "correct": true
+          },
+          {
+            "label": "La Tortue et le Lièvre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5eb44b56b155-fr",
+      "type": "mcq",
+      "prompt": "Sous quel surnom Jack Dawkins est-il connu dans le roman « Oliver Twist » de Charles Dickens ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bull's-eye",
+            "correct": false
+          },
+          {
+            "label": "M. Fang",
+            "correct": false
+          },
+          {
+            "label": "Fagin",
+            "correct": false
+          },
+          {
+            "label": "Le Renard",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-61a32e8f4243-fr",
+      "type": "mcq",
+      "prompt": "Dans « Le Livre de la jungle » de Rudyard Kipling, quel type de serpent est Kaa ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vipère",
+            "correct": false
+          },
+          {
+            "label": "Anaconda",
+            "correct": false
+          },
+          {
+            "label": "Python",
+            "correct": true
+          },
+          {
+            "label": "Cobra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-621949d97144-fr",
+      "type": "mcq",
+      "prompt": "Dans le roman « Jurassic Park » de Michael Crichton, quel dinosaure tue John Hammond ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tyrannosaure",
+            "correct": false
+          },
+          {
+            "label": "Vélociraptor",
+            "correct": false
+          },
+          {
+            "label": "Procompsognathus",
+            "correct": true
+          },
+          {
+            "label": "Dilophosaure",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6363afc472a1-fr",
+      "type": "mcq",
+      "prompt": "Quel roman de John Grisham est né d'un voyage en voiture en Floride, quand l'auteur imaginait avec sa femme des livres volés ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Camino Island",
+            "correct": true
+          },
+          {
+            "label": "Gray Mountain",
+            "correct": false
+          },
+          {
+            "label": "Rogue Lawyer",
+            "correct": false
+          },
+          {
+            "label": "The Litigators",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-67266348c8e5-fr",
+      "type": "mcq",
+      "prompt": "Parmi ces romans de Stephen King, lequel a été publié en premier ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Christine",
+            "correct": false
+          },
+          {
+            "label": "Misery",
+            "correct": false
+          },
+          {
+            "label": "Cujo",
+            "correct": true
+          },
+          {
+            "label": "Ça",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6821c580114b-fr",
+      "type": "mcq",
+      "prompt": "Quel est le deuxième prénom d'Hermione Granger ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Emma",
+            "correct": false
+          },
+          {
+            "label": "Jo",
+            "correct": false
+          },
+          {
+            "label": "Jane",
+            "correct": false
+          },
+          {
+            "label": "Jean",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-686026876e2c-fr",
+      "type": "mcq",
+      "prompt": "Dans quel roman de Mark Twain un mendiant et le prince de Galles échangent-ils leurs habits ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Prince et le Pauvre",
+            "correct": true
+          },
+          {
+            "label": "Une histoire à la Twain",
+            "correct": false
+          },
+          {
+            "label": "Le Riche et le Nigaud",
+            "correct": false
+          },
+          {
+            "label": "Hamlet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-68b8bb2236a7-fr",
+      "type": "mcq",
+      "prompt": "Quel était le pseudonyme de la romancière Mary Ann Evans ?",
+      "payload": {
+        "options": [
+          {
+            "label": "George Eliot",
+            "correct": true
+          },
+          {
+            "label": "George Orwell",
+            "correct": false
+          },
+          {
+            "label": "George Bernard Shaw",
+            "correct": false
+          },
+          {
+            "label": "George Saunders",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6c5b974fa618-fr",
+      "type": "mcq",
+      "prompt": "Combien de livres compte la série « Le Monde de Narnia » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "6",
+            "correct": false
+          },
+          {
+            "label": "7",
+            "correct": true
+          },
+          {
+            "label": "5",
+            "correct": false
+          },
+          {
+            "label": "8",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6e19074f2ff4-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le sous-marin du capitaine Nemo dans « Vingt mille lieues sous les mers » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Nautilus",
+            "correct": true
+          },
+          {
+            "label": "Le Poséidon",
+            "correct": false
+          },
+          {
+            "label": "L'Atlantide",
+            "correct": false
+          },
+          {
+            "label": "Le Neptune",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7ba7d06d2cdd-fr",
+      "type": "mcq",
+      "prompt": "Dans « Les Trois Royaumes », qui n'a pas fait partie du serment du Jardin des pêchers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Zhao Yun",
+            "correct": true
+          },
+          {
+            "label": "Liu Bei",
+            "correct": false
+          },
+          {
+            "label": "Guan Yu",
+            "correct": false
+          },
+          {
+            "label": "Zhang Fei",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7ec3fa0f0a03-fr",
+      "type": "mcq",
+      "prompt": "Dans l'univers de « Harry Potter », qui Drago Malefoy finit-il par épouser ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Astoria Greengrass",
+            "correct": true
+          },
+          {
+            "label": "Millicent Bulstrode",
+            "correct": false
+          },
+          {
+            "label": "Pansy Parkinson",
+            "correct": false
+          },
+          {
+            "label": "Hermione Granger",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-825fad4a4376-fr",
+      "type": "mcq",
+      "prompt": "Quel célèbre auteur de romans d'espionnage a écrit l'histoire pour enfants « Chitty Chitty Bang Bang » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "John Buchan",
+            "correct": false
+          },
+          {
+            "label": "Ian Fleming",
+            "correct": true
+          },
+          {
+            "label": "Joseph Conrad",
+            "correct": false
+          },
+          {
+            "label": "Graham Greene",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8647fd208275-fr",
+      "type": "mcq",
+      "prompt": "Dans « Le Seigneur des anneaux », qui est le père du nain Gimli ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Glóin",
+            "correct": true
+          },
+          {
+            "label": "Thorin Écu-de-Chêne",
+            "correct": false
+          },
+          {
+            "label": "Dwalin",
+            "correct": false
+          },
+          {
+            "label": "Bombur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-86c5df5a0ec9-fr",
+      "type": "truefalse",
+      "prompt": "Dans « Harry Potter et les Reliques de la Mort », Hermione détruit le quatrième Horcruxe en le transperçant avec l'épée de Gryffondor.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8848a1943da4-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit le roman « Moby Dick » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "William Shakespeare",
+            "correct": false
+          },
+          {
+            "label": "William Golding",
+            "correct": false
+          },
+          {
+            "label": "Herman Melville",
+            "correct": true
+          },
+          {
+            "label": "J. R. R. Tolkien",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-88feb8a54512-fr",
+      "type": "truefalse",
+      "prompt": "À l'origine, le personnage de Charlie, dans « Charlie et la Chocolaterie », devait être noir.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-899c292b5a3f-fr",
+      "type": "mcq",
+      "prompt": "Quel est le titre du quatrième tome de la série « La Tour sombre » de Stephen King ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les Loups de la Calla",
+            "correct": false
+          },
+          {
+            "label": "Cœurs perdus en Atlantide",
+            "correct": false
+          },
+          {
+            "label": "La Part des ténèbres",
+            "correct": false
+          },
+          {
+            "label": "Magie et Cristal",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-8bc5b6452899-fr",
+      "type": "mcq",
+      "prompt": "Quel poète a écrit « La Ballade de la geôle de Reading » alors qu'il était emprisonné pour homosexualité ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lord Byron",
+            "correct": false
+          },
+          {
+            "label": "William Blake",
+            "correct": false
+          },
+          {
+            "label": "Oscar Wilde",
+            "correct": true
+          },
+          {
+            "label": "Wilfred Owen",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-905958b18dc1-fr",
+      "type": "mcq",
+      "prompt": "Quel a été le premier texte écrit pour le projet d'écriture collaboratif SCP Foundation ?",
+      "payload": {
+        "options": [
+          {
+            "label": "SCP-1459",
+            "correct": false
+          },
+          {
+            "label": "SCP-999",
+            "correct": false
+          },
+          {
+            "label": "SCP-173",
+            "correct": true
+          },
+          {
+            "label": "SCP-001",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-96a05205906a-fr",
+      "type": "mcq",
+      "prompt": "Quel livre classique s'ouvre sur la phrase « Appelez-moi Ismaël » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Un conte de deux villes",
+            "correct": false
+          },
+          {
+            "label": "Les Hauts de Hurlevent",
+            "correct": false
+          },
+          {
+            "label": "Enlevé !",
+            "correct": false
+          },
+          {
+            "label": "Moby Dick",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-992bd66308cf-fr",
+      "type": "mcq",
+      "prompt": "Dans « Le Seigneur des anneaux », à qui appartient Asfaloth, le cheval qui conduit Frodon à Fondcombe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aragorn",
+            "correct": false
+          },
+          {
+            "label": "Haldir",
+            "correct": false
+          },
+          {
+            "label": "Glorfindel",
+            "correct": true
+          },
+          {
+            "label": "Arwen",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9ad03ab46b21-fr",
+      "type": "mcq",
+      "prompt": "À quel poste Harry Potter joue-t-il au Quidditch ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Batteur",
+            "correct": false
+          },
+          {
+            "label": "Gardien",
+            "correct": false
+          },
+          {
+            "label": "Attrapeur",
+            "correct": true
+          },
+          {
+            "label": "Poursuiveur",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9bdd80d9731c-fr",
+      "type": "mcq",
+      "prompt": "Dans « Les Trois Sorcières » de Terry Pratchett (Disque-monde), laquelle n'est pas l'une des trois sorcières principales ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Magrat Ail",
+            "correct": false
+          },
+          {
+            "label": "Mémé Ciredutemps",
+            "correct": false
+          },
+          {
+            "label": "Winny Hathersham",
+            "correct": true
+          },
+          {
+            "label": "Nounou Ogg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-9f04d7b75b3e-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit le roman « Jane Eyre » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Jane Austen",
+            "correct": false
+          },
+          {
+            "label": "Emily Brontë",
+            "correct": false
+          },
+          {
+            "label": "Charlotte Brontë",
+            "correct": true
+          },
+          {
+            "label": "Louisa May Alcott",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a96f73e225d3-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit la saga de fantasy « A Song of Ice and Fire » (« Le Trône de fer ») ?",
+      "payload": {
+        "options": [
+          {
+            "label": "George Lucas",
+            "correct": false
+          },
+          {
+            "label": "George R. R. Martin",
+            "correct": true
+          },
+          {
+            "label": "George Orwell",
+            "correct": false
+          },
+          {
+            "label": "George Eliot",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a9a219e9cc53-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit « Un conte de deux villes » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mark Twain",
+            "correct": false
+          },
+          {
+            "label": "Roald Dahl",
+            "correct": false
+          },
+          {
+            "label": "Charles Darwin",
+            "correct": false
+          },
+          {
+            "label": "Charles Dickens",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-aa3a43b5c70b-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces séries de livres est de James Patterson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trilogie de Bartiméus",
+            "correct": false
+          },
+          {
+            "label": "Harry Potter",
+            "correct": false
+          },
+          {
+            "label": "Maximum Ride",
+            "correct": true
+          },
+          {
+            "label": "La Légende de Xanth",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-aa91f7257840-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle le héros de « L'Attrape-cœurs » de J.D. Salinger ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Randall Flagg",
+            "correct": false
+          },
+          {
+            "label": "Jay Gatsby",
+            "correct": false
+          },
+          {
+            "label": "Fletcher Christian",
+            "correct": false
+          },
+          {
+            "label": "Holden Caulfield",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b00da953a2eb-fr",
+      "type": "mcq",
+      "prompt": "Quel a été le dernier message des dauphins dans « Le Guide du voyageur galactique » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La réponse est 42.",
+            "correct": false
+          },
+          {
+            "label": "Adieu, monde cruel !",
+            "correct": false
+          },
+          {
+            "label": "Et merci pour le poisson",
+            "correct": true
+          },
+          {
+            "label": "Terre des braves",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b068a9db8eea-fr",
+      "type": "mcq",
+      "prompt": "Qui est l'auteur du roman « Sa Majesté des mouches », paru en 1954 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hunter Fox",
+            "correct": false
+          },
+          {
+            "label": "William Golding",
+            "correct": true
+          },
+          {
+            "label": "F. Scott Fitzgerald",
+            "correct": false
+          },
+          {
+            "label": "Stephen King",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b7c25f888d42-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit « La Lettre écarlate », publiée en 1850 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Nathaniel Hawthorne",
+            "correct": true
+          },
+          {
+            "label": "James Fenimore Cooper",
+            "correct": false
+          },
+          {
+            "label": "Catherine Maria Sedgwick",
+            "correct": false
+          },
+          {
+            "label": "Washington Irving",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b7f2265cc0c4-fr",
+      "type": "mcq",
+      "prompt": "Quel comté anglais fictif sert de cadre aux romans de Thomas Hardy ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ambridge",
+            "correct": false
+          },
+          {
+            "label": "Barsetshire",
+            "correct": false
+          },
+          {
+            "label": "Wessex",
+            "correct": true
+          },
+          {
+            "label": "Fulchester",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b8e2ea06371e-fr",
+      "type": "mcq",
+      "prompt": "Dans « Les Mensonges de Locke Lamora », quel titre Locke porte-t-il dans le milieu criminel ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La Rose des Marrows",
+            "correct": false
+          },
+          {
+            "label": "L'Épine d'Emberlain",
+            "correct": false
+          },
+          {
+            "label": "L'Épine de Camorr",
+            "correct": true
+          },
+          {
+            "label": "L'Épine des Marrows",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-baf8309e802a-fr",
+      "type": "mcq",
+      "prompt": "Sous quel nom l'auteur Eric Blair est-il plus connu ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aldous Huxley",
+            "correct": false
+          },
+          {
+            "label": "George Orwell",
+            "correct": true
+          },
+          {
+            "label": "Ernest Hemingway",
+            "correct": false
+          },
+          {
+            "label": "Ray Bradbury",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c79ce531b843-fr",
+      "type": "mcq",
+      "prompt": "Comment s'appelle la ville où sont enterrés Lily et James Potter ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pré-au-Lard",
+            "correct": false
+          },
+          {
+            "label": "Godric's Hollow",
+            "correct": true
+          },
+          {
+            "label": "Little Hangleton",
+            "correct": false
+          },
+          {
+            "label": "Loutry Ste Chaspoule",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ce7f1b6ca788-fr",
+      "type": "mcq",
+      "prompt": "Quel écrivain russe a écrit le roman « Guerre et Paix » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fiodor Dostoïevski",
+            "correct": false
+          },
+          {
+            "label": "Vladimir Nabokov",
+            "correct": false
+          },
+          {
+            "label": "Léon Tolstoï",
+            "correct": true
+          },
+          {
+            "label": "Alexandre Pouchkine",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d24b5688efdd-fr",
+      "type": "mcq",
+      "prompt": "Dans le roman « Outsiders », de quel gang Ponyboy fait-il partie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les Outsiders",
+            "correct": false
+          },
+          {
+            "label": "Les Socs",
+            "correct": false
+          },
+          {
+            "label": "La Mafia",
+            "correct": false
+          },
+          {
+            "label": "Les Greasers",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d793a6af7353-fr",
+      "type": "mcq",
+      "prompt": "Laquelle de ces œuvres n'a PAS été écrite par Shakespeare ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mesure pour mesure",
+            "correct": false
+          },
+          {
+            "label": "Épreuve de tempérance",
+            "correct": true
+          },
+          {
+            "label": "Titus Andronicus",
+            "correct": false
+          },
+          {
+            "label": "Cymbeline",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d81d656cf7e7-fr",
+      "type": "mcq",
+      "prompt": "Sous quel pseudonyme Stephen King a-t-il publié cinq romans entre 1977 et 1984 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Richard Bachman",
+            "correct": true
+          },
+          {
+            "label": "Lewis Carroll",
+            "correct": false
+          },
+          {
+            "label": "Mark Twain",
+            "correct": false
+          },
+          {
+            "label": "J. D. Robb",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e04397a43b47-fr",
+      "type": "mcq",
+      "prompt": "Qui a écrit le roman pour jeunes adultes « Nos étoiles contraires » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stephenie Meyer",
+            "correct": false
+          },
+          {
+            "label": "John Green",
+            "correct": true
+          },
+          {
+            "label": "Suzanne Collins",
+            "correct": false
+          },
+          {
+            "label": "Stephen Chbosky",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e0d70810ca13-fr",
+      "type": "mcq",
+      "prompt": "Dans « Les Quatre Filles du docteur March », laquelle des sœurs March épouse Laurie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Amy",
+            "correct": true
+          },
+          {
+            "label": "Beth",
+            "correct": false
+          },
+          {
+            "label": "Jo",
+            "correct": false
+          },
+          {
+            "label": "Meg",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e3e2514b4418-fr",
+      "type": "mcq",
+      "prompt": "Quelle pièce, généralement considérée comme la plus adaptable de Shakespeare, met en scène deux « amants maudits » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hamlet",
+            "correct": false
+          },
+          {
+            "label": "Le Roi Lear",
+            "correct": false
+          },
+          {
+            "label": "La Tempête",
+            "correct": false
+          },
+          {
+            "label": "Roméo et Juliette",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e681ede2f911-fr",
+      "type": "mcq",
+      "prompt": "Où se déroule « Ça » de Stephen King ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Innsmouth, Massachusetts",
+            "correct": false
+          },
+          {
+            "label": "Derry, Maine",
+            "correct": true
+          },
+          {
+            "label": "Rockford, Illinois",
+            "correct": false
+          },
+          {
+            "label": "Kingsland, Texas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e6cf9491aa9d-fr",
+      "type": "mcq",
+      "prompt": "Dans « Le Hobbit », qui tue Smaug ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Frodon",
+            "correct": false
+          },
+          {
+            "label": "Gandalf le Gris",
+            "correct": false
+          },
+          {
+            "label": "Bard",
+            "correct": true
+          },
+          {
+            "label": "Bilbon Sacquet",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e6f3c47ff6da-fr",
+      "type": "mcq",
+      "prompt": "Dans le roman « 1984 » de George Orwell, comment s'appelle le régime totalitaire qui contrôle l'Océania ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Néo-bolchevisme",
+            "correct": false
+          },
+          {
+            "label": "Alliance terrestre",
+            "correct": false
+          },
+          {
+            "label": "Ingsoc",
+            "correct": true
+          },
+          {
+            "label": "Effacement du soi",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e83482a97591-fr",
+      "type": "mcq",
+      "prompt": "Dans la série de livres pour enfants, d'où vient à l'origine l'ours Paddington ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pérou",
+            "correct": true
+          },
+          {
+            "label": "Inde",
+            "correct": false
+          },
+          {
+            "label": "Canada",
+            "correct": false
+          },
+          {
+            "label": "Islande",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-eb2bb4827a0a-fr",
+      "type": "mcq",
+      "prompt": "Quel est le titre du premier livre de Sherlock Holmes écrit par Arthur Conan Doyle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le Signe des quatre",
+            "correct": false
+          },
+          {
+            "label": "Une affaire d'identité",
+            "correct": false
+          },
+          {
+            "label": "The Doings of Raffles Haw",
+            "correct": false
+          },
+          {
+            "label": "Une étude en rouge",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f2d10153e681-fr",
+      "type": "mcq",
+      "prompt": "Qui est l'auteur de la saga « A Song of Ice and Fire », qui commence par « A Game of Thrones » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "George R. R. Martin",
+            "correct": true
+          },
+          {
+            "label": "Brandon Sanderson",
+            "correct": false
+          },
+          {
+            "label": "J. R. R. Tolkien",
+            "correct": false
+          },
+          {
+            "label": "Steven Erikson",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f2ee7e6ddbc5-fr",
+      "type": "truefalse",
+      "prompt": "« Élémentaire, mon cher Watson » n'est jamais vraiment prononcé dans les livres de Conan Doyle sur Sherlock Holmes.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f3028b2a1954-fr",
+      "type": "mcq",
+      "prompt": "Dans quel roman classique y a-t-il un personnage nommé Homer Simpson ?",
+      "payload": {
+        "options": [
+          {
+            "label": "A Separate Peace",
+            "correct": false
+          },
+          {
+            "label": "Des souris et des hommes",
+            "correct": false
+          },
+          {
+            "label": "Catch-22",
+            "correct": false
+          },
+          {
+            "label": "Le Jour de la sauterelle",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f4aca684f4c2-fr",
+      "type": "truefalse",
+      "prompt": "Harry Potter est né le 31 juillet 1980.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "litterature",
+      "difficulty": "difficile",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-fc5f34cdfe15-fr",
+      "type": "mcq",
+      "prompt": "Dans « Le Seigneur des anneaux », combien d'anneaux de pouvoir ont été donnés à la race des Hommes ?",
+      "payload": {
+        "options": [
+          {
+            "label": "5",
+            "correct": false
+          },
+          {
+            "label": "11",
+            "correct": false
+          },
+          {
+            "label": "9",
+            "correct": true
+          },
+          {
+            "label": "13",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-books-fr",
+      "title": "Livres et auteurs",
+      "theme": "litterature",
+      "difficulty": "facile",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-19926196cd34-fr",
+        "otdb-200487a8a502-fr",
+        "otdb-20091fd561d0-fr",
+        "otdb-3d5767d53e30-fr",
+        "otdb-465651f04dc8-fr",
+        "otdb-48d86b7ae2b9-fr",
+        "otdb-520f03d31f1a-fr",
+        "otdb-6e19074f2ff4-fr",
+        "otdb-825fad4a4376-fr",
+        "otdb-96a05205906a-fr",
+        "otdb-a9a219e9cc53-fr",
+        "otdb-aa91f7257840-fr",
+        "otdb-b068a9db8eea-fr",
+        "otdb-d81d656cf7e7-fr",
+        "otdb-e3e2514b4418-fr",
+        "otdb-eb2bb4827a0a-fr",
+        "otdb-f2d10153e681-fr",
+        "otdb-e6cf9491aa9d-fr",
+        "otdb-18e2cb543939-fr",
+        "otdb-61a32e8f4243-fr"
+      ],
+      "description": "Auteurs célèbres, romans et personnages."
+    },
+    {
+      "id": "otdb-quiz-novels-and-characters-fr",
+      "title": "Romans et personnages",
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-02d87aa159d2-fr",
+        "otdb-0cbf2c2b87d7-fr",
+        "otdb-10d05362143c-fr",
+        "otdb-19b5c2e0b2d1-fr",
+        "otdb-22e8d24d5b1a-fr",
+        "otdb-2d39d38f6074-fr",
+        "otdb-347881364e88-fr",
+        "otdb-5eb44b56b155-fr",
+        "otdb-686026876e2c-fr",
+        "otdb-68b8bb2236a7-fr",
+        "otdb-6c5b974fa618-fr",
+        "otdb-8848a1943da4-fr",
+        "otdb-8bc5b6452899-fr",
+        "otdb-9f04d7b75b3e-fr",
+        "otdb-b00da953a2eb-fr",
+        "otdb-baf8309e802a-fr",
+        "otdb-ce7f1b6ca788-fr",
+        "otdb-e0d70810ca13-fr",
+        "otdb-e681ede2f911-fr",
+        "otdb-e83482a97591-fr"
+      ],
+      "description": "Grands romans et les personnages qui les habitent."
+    }
+  ]
+}

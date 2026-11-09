@@ -101,9 +101,16 @@ function waitFor<T = unknown>(client: ClientSocket, event: string): Promise<T> {
 /** Collecte tous les événements `event` reçus (au lieu de `.once`, qui rate un événement émis
  * avant l'enregistrement du listener) — `atLeast(n)` résout dès que le n-ième événement arrive.
  * Même utilitaire que `game-gateway.test.ts` (3 joueurs qui rejoignent coup sur coup). */
-function collect<T = unknown>(client: ClientSocket, event: string): { atLeast: (n: number) => Promise<T> } {
+function collect<T = unknown>(
+  client: ClientSocket,
+  event: string,
+): {
+  atLeast: (n: number) => Promise<T>
+  until: (predicate: (payload: T) => boolean) => Promise<T>
+} {
   const received: T[] = []
   const waiters: Array<{ n: number; resolve: (v: T) => void }> = []
+  const matchers: Array<{ predicate: (payload: T) => boolean; resolve: (v: T) => void }> = []
   client.on(event, (payload: T) => {
     received.push(payload)
     for (const w of [...waiters]) {
@@ -112,11 +119,24 @@ function collect<T = unknown>(client: ClientSocket, event: string): { atLeast: (
         w.resolve(received[w.n - 1])
       }
     }
+    for (const m of [...matchers]) {
+      if (m.predicate(payload)) {
+        matchers.splice(matchers.indexOf(m), 1)
+        m.resolve(payload)
+      }
+    }
   })
   return {
     atLeast(n: number) {
       if (received.length >= n) return Promise.resolve(received[n - 1])
       return new Promise((resolve) => waiters.push({ n, resolve }))
+    },
+    // Premier payload (déjà reçu ou à venir) qui satisfait `predicate` : la diffusion du lobby
+    // étant coalescée, on attend un état (ex. « 3 joueurs ») plutôt qu'un nombre d'événements.
+    until(predicate: (payload: T) => boolean) {
+      const found = received.find(predicate)
+      if (found !== undefined) return Promise.resolve(found)
+      return new Promise((resolve) => matchers.push({ predicate, resolve }))
     },
   }
 }
@@ -219,7 +239,8 @@ describe('e2e — partie complète (lobby → podium) : scoring serveur-autorita
       const bobPlayerId = join2.playerId!
       const carolPlayerId = join3.playerId!
 
-      const lobbyAfterAll = await lobbyUpdates.atLeast(3)
+      // Diffusion coalescée : on attend l'état final (3 joueurs), pas un événement par arrivée.
+      const lobbyAfterAll = await lobbyUpdates.until((u) => u.players.length === 3)
       expect(lobbyAfterAll.players).toHaveLength(3)
       expect(new Set(lobbyAfterAll.players.map((p) => p.nickname))).toEqual(new Set(['Alice', 'Bob', 'Carol']))
 

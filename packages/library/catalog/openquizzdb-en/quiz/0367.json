@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=367"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0367-1-en",
+      "type": "mcq",
+      "prompt": "Which nutrient is particularly abundant in almonds?",
+      "payload": {
+        "options": [
+          {
+            "label": "Iron",
+            "correct": false
+          },
+          {
+            "label": "Vitamin C",
+            "correct": false
+          },
+          {
+            "label": "Vitamin E",
+            "correct": true
+          },
+          {
+            "label": "Protein",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0367-2-en",
+      "type": "mcq",
+      "prompt": "What is the most common color of the almond tree's flower?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blue",
+            "correct": false
+          },
+          {
+            "label": "Red",
+            "correct": false
+          },
+          {
+            "label": "White",
+            "correct": true
+          },
+          {
+            "label": "Lemon yellow",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0367-3-en",
+      "type": "mcq",
+      "prompt": "What is a common culinary use for almonds?",
+      "payload": {
+        "options": [
+          {
+            "label": "Flourless bread",
+            "correct": false
+          },
+          {
+            "label": "Cheese",
+            "correct": false
+          },
+          {
+            "label": "Vinegar",
+            "correct": false
+          },
+          {
+            "label": "Plant-based milk",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { apiDelete, apiGet, apiPatch, apiPost, apiPostForm, ApiError } from './client.js'
+import { apiDelete, apiGet, apiPatch, apiPost, apiPostForm, ApiError, onTermsAcceptanceRequired } from './client.js'
 import { setActiveTenantId } from './activeTenant.js'
 
 function mockFetchOnce(status: number, body: unknown, ok = status >= 200 && status < 300) {
@@ -92,12 +92,22 @@ describe('client API typé', () => {
     })
   })
 
-  it('retombe sur un message générique si le corps ne porte ni `error` ni `message`', async () => {
+  it('retombe sur un message en français si le corps ne porte ni `error` ni `message`', async () => {
     mockFetchOnce(500, { whatever: true })
     await expect(apiGet('/api/broken')).rejects.toMatchObject({
       status: 500,
-      message: 'Erreur 500',
+      message: 'Le serveur a rencontré une erreur. Réessayez dans un instant.',
     })
+  })
+
+  it("ignore le corps d'erreur par défaut de Fastify (libellés techniques en anglais)", async () => {
+    mockFetchOnce(404, { statusCode: 404, error: 'Not Found', message: 'Route GET:/api/x not found' })
+    await expect(apiGet('/api/x')).rejects.toMatchObject({ status: 404, message: 'Élément introuvable.' })
+  })
+
+  it('garde le code HTTP dans le repli pour un statut sans message dédié', async () => {
+    mockFetchOnce(418, {})
+    await expect(apiGet('/api/x')).rejects.toMatchObject({ status: 418, message: 'Erreur 418' })
   })
 
   it('gère un corps non-JSON (ex. page 502 en HTML) sans lever une erreur de parsing', async () => {
@@ -105,13 +115,48 @@ describe('client API typé', () => {
       'fetch',
       vi.fn().mockResolvedValue({ ok: false, status: 502, text: () => Promise.resolve('<html>Bad Gateway</html>') }),
     )
-    await expect(apiGet('/api/x')).rejects.toBeInstanceOf(ApiError)
+    await expect(apiGet('/api/x')).rejects.toMatchObject({
+      status: 502,
+      message: 'Le serveur ne répond pas. Réessayez dans un instant.',
+    })
   })
 
   it('gère un corps vide (ex. 204) sans lever une erreur de parsing', async () => {
     mockFetchOnce(204, undefined)
     await expect(apiDelete('/api/x')).resolves.toBeUndefined()
   })
+})
+
+describe('client API, revalidation des CGU', () => {
+  it("expose le code d'erreur du serveur sur l'ApiError", async () => {
+    mockFetchOnce(400, { message: 'Acceptez les CGU.', code: 'TERMS_ACCEPTANCE_REQUIRED' })
+    await expect(apiPost('/api/auth/sign-up/email', {})).rejects.toMatchObject({
+      status: 400,
+      code: 'TERMS_ACCEPTANCE_REQUIRED',
+    })
+  })
+
+  it('signale un 403 TERMS_ACCEPTANCE_REQUIRED aux abonnés, une fois par réponse', async () => {
+    const listener = vi.fn()
+    const unsubscribe = onTermsAcceptanceRequired(listener)
+    mockFetchOnce(403, { error: 'Les CGU ont changé.', code: 'TERMS_ACCEPTANCE_REQUIRED' })
+    await expect(apiGet('/api/quizzes')).rejects.toMatchObject({ status: 403 })
+    expect(listener).toHaveBeenCalledTimes(1)
+    unsubscribe()
+    mockFetchOnce(403, { error: 'Les CGU ont changé.', code: 'TERMS_ACCEPTANCE_REQUIRED' })
+    await expect(apiGet('/api/quizzes')).rejects.toMatchObject({ status: 403 })
+    expect(listener).toHaveBeenCalledTimes(1)
+  })
+
+  it("ne signale rien pour un autre 403 (droits d'accès)", async () => {
+    const listener = vi.fn()
+    const unsubscribe = onTermsAcceptanceRequired(listener)
+    mockFetchOnce(403, { error: 'Accès refusé à ce workspace.' })
+    await expect(apiGet('/api/workspaces')).rejects.toMatchObject({ status: 403 })
+    expect(listener).not.toHaveBeenCalled()
+    unsubscribe()
+  })
+
   it('apiPostForm envoie le FormData tel quel, sans Content-Type, avec x-tenant-id', async () => {
     setActiveTenantId('t1')
     mockFetchOnce(201, { url: '/uploads/t1/a.png' })

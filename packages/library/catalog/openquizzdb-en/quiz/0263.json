@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=263"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0263-2-en",
+      "type": "mcq",
+      "prompt": "Which currency is used day to day in Denmark?",
+      "payload": {
+        "options": [
+          {
+            "label": "Franc",
+            "correct": false
+          },
+          {
+            "label": "Euro",
+            "correct": false
+          },
+          {
+            "label": "Danish krone",
+            "correct": true
+          },
+          {
+            "label": "Dollar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0263-4-en",
+      "type": "mcq",
+      "prompt": "Which symbol is regularly associated with Denmark?",
+      "payload": {
+        "options": [
+          {
+            "label": "Big Ben",
+            "correct": false
+          },
+          {
+            "label": "Statue of Liberty",
+            "correct": false
+          },
+          {
+            "label": "Eiffel Tower",
+            "correct": false
+          },
+          {
+            "label": "Little Mermaid",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=303"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0303-3-en",
+      "type": "mcq",
+      "prompt": "Which major mobile system is built on the Linux kernel?",
+      "payload": {
+        "options": [
+          {
+            "label": "Windows Phone",
+            "correct": false
+          },
+          {
+            "label": "BlackBerry 10",
+            "correct": false
+          },
+          {
+            "label": "Android",
+            "correct": true
+          },
+          {
+            "label": "iOS",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0303-4-en",
+      "type": "mcq",
+      "prompt": "What is the name of the Linux mascot, known to fans?",
+      "payload": {
+        "options": [
+          {
+            "label": "Puffy",
+            "correct": false
+          },
+          {
+            "label": "Gnu",
+            "correct": false
+          },
+          {
+            "label": "Tux",
+            "correct": true
+          },
+          {
+            "label": "Wilber",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

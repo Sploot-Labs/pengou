@@ -1,0 +1,503 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0043-2-en",
+      "type": "mcq",
+      "prompt": "What casing hides the seeds of peas?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pod",
+            "correct": true
+          },
+          {
+            "label": "Capsule",
+            "correct": false
+          },
+          {
+            "label": "Drupe",
+            "correct": false
+          },
+          {
+            "label": "Follicle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0293-3-en",
+      "type": "mcq",
+      "prompt": "What nickname do fans give Antoine Griezmann?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grizmanito",
+            "correct": false
+          },
+          {
+            "label": "Grizou",
+            "correct": true
+          },
+          {
+            "label": "Grizmo",
+            "correct": false
+          },
+          {
+            "label": "Griez",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0483-3-en",
+      "type": "mcq",
+      "prompt": "What was the nationality of novelist and essayist Aldous Huxley?",
+      "payload": {
+        "options": [
+          {
+            "label": "Greek",
+            "correct": false
+          },
+          {
+            "label": "British",
+            "correct": true
+          },
+          {
+            "label": "Russian",
+            "correct": false
+          },
+          {
+            "label": "Hungarian",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0376-1-en",
+      "type": "mcq",
+      "prompt": "In which American city does the Golden Gate Bridge stand?",
+      "payload": {
+        "options": [
+          {
+            "label": "San Diego",
+            "correct": false
+          },
+          {
+            "label": "New York",
+            "correct": false
+          },
+          {
+            "label": "San Francisco",
+            "correct": true
+          },
+          {
+            "label": "Los Angeles",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0572-2-en",
+      "type": "mcq",
+      "prompt": "Which drink is also known as Diet Coke?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coke Zero",
+            "correct": false
+          },
+          {
+            "label": "Coke Life",
+            "correct": false
+          },
+          {
+            "label": "Coke BlaK",
+            "correct": false
+          },
+          {
+            "label": "Coke Light",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0507-2-en",
+      "type": "mcq",
+      "prompt": "Which racket sport is named after a place in England?",
+      "payload": {
+        "options": [
+          {
+            "label": "Squash",
+            "correct": false
+          },
+          {
+            "label": "Badminton",
+            "correct": true
+          },
+          {
+            "label": "Padel",
+            "correct": false
+          },
+          {
+            "label": "Tennis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0553-2-en",
+      "type": "mcq",
+      "prompt": "Which channel originally aired the series \"SpongeBob SquarePants\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "NTV",
+            "correct": false
+          },
+          {
+            "label": "Nickelodeon",
+            "correct": true
+          },
+          {
+            "label": "Netflix",
+            "correct": false
+          },
+          {
+            "label": "NBC",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0183-1-en",
+      "type": "mcq",
+      "prompt": "In which adventures do the characters Lois and Clark appear?",
+      "payload": {
+        "options": [
+          {
+            "label": "Superman",
+            "correct": true
+          },
+          {
+            "label": "Spider-Man",
+            "correct": false
+          },
+          {
+            "label": "Batman",
+            "correct": false
+          },
+          {
+            "label": "Hulk",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0233-2-en",
+      "type": "mcq",
+      "prompt": "Which hacker does Keanu Reeves play in the \"Matrix\" trilogy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Morpheus",
+            "correct": false
+          },
+          {
+            "label": "Neo",
+            "correct": true
+          },
+          {
+            "label": "Trinity",
+            "correct": false
+          },
+          {
+            "label": "Smith",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0381-2-en",
+      "type": "mcq",
+      "prompt": "Which part of the blue bottle fly's body lets it eat?",
+      "payload": {
+        "options": [
+          {
+            "label": "Legs",
+            "correct": false
+          },
+          {
+            "label": "Wings",
+            "correct": false
+          },
+          {
+            "label": "Proboscis",
+            "correct": true
+          },
+          {
+            "label": "Jaw",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0031-3-en",
+      "type": "mcq",
+      "prompt": "Which Quebec dish is made of fries and fresh cheddar?",
+      "payload": {
+        "options": [
+          {
+            "label": "Poutine",
+            "correct": true
+          },
+          {
+            "label": "Cipaille",
+            "correct": false
+          },
+          {
+            "label": "Tourtière",
+            "correct": false
+          },
+          {
+            "label": "Gibelotte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0595-4-en",
+      "type": "mcq",
+      "prompt": "Which one is the odd one out among these capitals south of Paris?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beijing",
+            "correct": false
+          },
+          {
+            "label": "Vienna",
+            "correct": false
+          },
+          {
+            "label": "Budapest",
+            "correct": false
+          },
+          {
+            "label": "Kyiv",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0517-2-en",
+      "type": "mcq",
+      "prompt": "In which city does \"Nathalie\" guide Gilbert Bécaud in the song?",
+      "payload": {
+        "options": [
+          {
+            "label": "Belgrade",
+            "correct": false
+          },
+          {
+            "label": "Paris",
+            "correct": false
+          },
+          {
+            "label": "Madrid",
+            "correct": false
+          },
+          {
+            "label": "Moscow",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0473-2-en",
+      "type": "mcq",
+      "prompt": "Which enclave state lies within the city of Rome?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vatican City",
+            "correct": true
+          },
+          {
+            "label": "Liechtenstein",
+            "correct": false
+          },
+          {
+            "label": "Monaco",
+            "correct": false
+          },
+          {
+            "label": "San Marino",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0438-3-en",
+      "type": "mcq",
+      "prompt": "What are the members of the Sicilian mafia called?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mafiosi",
+            "correct": true
+          },
+          {
+            "label": "Marvoli",
+            "correct": false
+          },
+          {
+            "label": "Tifosi",
+            "correct": false
+          },
+          {
+            "label": "Barzotti",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0059-3-en",
+      "type": "mcq",
+      "prompt": "Which actor stars alongside Sylvester Stallone in \"Tango & Cash\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Edward Norton",
+            "correct": false
+          },
+          {
+            "label": "Brandon Lee",
+            "correct": false
+          },
+          {
+            "label": "Kurt Russell",
+            "correct": true
+          },
+          {
+            "label": "Russell Crowe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0402-1-en",
+      "type": "mcq",
+      "prompt": "What job did Jean-François Champollion hold at the Louvre?",
+      "payload": {
+        "options": [
+          {
+            "label": "Curator",
+            "correct": true
+          },
+          {
+            "label": "Architect",
+            "correct": false
+          },
+          {
+            "label": "Archaeologist",
+            "correct": false
+          },
+          {
+            "label": "Guard",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "histoire",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

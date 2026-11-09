@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=385"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0385-3-en",
+      "type": "mcq",
+      "prompt": "What is a stoppage of play called in basketball?",
+      "payload": {
+        "options": [
+          {
+            "label": "Timeout",
+            "correct": true
+          },
+          {
+            "label": "Jump ball",
+            "correct": false
+          },
+          {
+            "label": "Dribble",
+            "correct": false
+          },
+          {
+            "label": "Zone press",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0385-4-en",
+      "type": "mcq",
+      "prompt": "How many points is a regular basket worth in basketball?",
+      "payload": {
+        "options": [
+          {
+            "label": "One point",
+            "correct": false
+          },
+          {
+            "label": "Two points",
+            "correct": true
+          },
+          {
+            "label": "Four points",
+            "correct": false
+          },
+          {
+            "label": "Three points",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

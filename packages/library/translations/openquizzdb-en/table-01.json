@@ -1,0 +1,998 @@
+{
+  "questions": {
+    "oqdb-0027-1": {
+      "prompt": "Who becomes Tom Hanks's companion in \"Cast Away\"?",
+      "options": [
+        "A shoe",
+        "A ball",
+        "A photo",
+        "A cuddly toy"
+      ]
+    },
+    "oqdb-0027-2": {
+      "prompt": "What is the name of Zorro's sidekick on TV?",
+      "options": [
+        "Bonifacio",
+        "Bruno",
+        "Bartolo",
+        "Bernardo"
+      ]
+    },
+    "oqdb-0027-3": {
+      "prompt": "On consoles, who is Mario's mushroom companion?",
+      "options": [
+        "Peach",
+        "Toop",
+        "Luigi",
+        "Toad"
+      ]
+    },
+    "oqdb-0027-4": {
+      "prompt": "What is the name of Don Quixote's faithful companion?",
+      "options": [
+        "Sancho Panza",
+        "Sancho Taka",
+        "Sancho Nifroid",
+        "Sancho Mancha"
+      ]
+    },
+    "oqdb-0028-1": {
+      "prompt": "Which African reptile has skin that takes on the color of its surroundings?",
+      "options": [
+        "Crocodile",
+        "Chameleon",
+        "Rattlesnake",
+        "Cobra"
+      ]
+    },
+    "oqdb-0028-3": {
+      "prompt": "Founded on August 6, 1538, Bogota is the capital of which country?",
+      "options": [
+        "Colombia",
+        "Cuba",
+        "Costa Rica",
+        "Chile"
+      ]
+    },
+    "oqdb-0028-4": {
+      "prompt": "Which white bird is a symbol of peace?",
+      "options": [
+        "Stork",
+        "Dove",
+        "Hummingbird",
+        "Duck"
+      ]
+    },
+    "oqdb-0029-1": {
+      "skip": "chanteur francophone peu connu hors de la francophonie (Francis Cabrel)"
+    },
+    "oqdb-0029-2": {
+      "skip": "chanteur francophone peu connu hors de la francophonie (Francis Cabrel)"
+    },
+    "oqdb-0029-3": {
+      "skip": "chanteur francophone peu connu hors de la francophonie (Francis Cabrel)"
+    },
+    "oqdb-0029-4": {
+      "skip": "chanteur et humoristes français peu connus hors de France"
+    },
+    "oqdb-0031-1": {
+      "prompt": "What will you be given to put on your fries in the United States?",
+      "options": [
+        "Pickles",
+        "Ketchup",
+        "Mayonnaise",
+        "Tartar sauce"
+      ]
+    },
+    "oqdb-0031-2": {
+      "prompt": "What will you be given with salt for your fries in England?",
+      "options": [
+        "Vinegar",
+        "Milk",
+        "Sugar",
+        "Syrup"
+      ]
+    },
+    "oqdb-0031-3": {
+      "prompt": "Which Quebec dish is made of fries and fresh cheddar?",
+      "options": [
+        "Poutine",
+        "Cipaille",
+        "Tourtière",
+        "Gibelotte"
+      ]
+    },
+    "oqdb-0033-1": {
+      "prompt": "Which Lewis Carroll heroine sees a late white rabbit go by?",
+      "options": [
+        "Alice",
+        "Aurora",
+        "Camille",
+        "Cinderella"
+      ]
+    },
+    "oqdb-0033-2": {
+      "prompt": "Which rabbit is famous in the world of cartoons?",
+      "options": [
+        "Porky Pig",
+        "Elmer Fudd",
+        "Bugs Bunny",
+        "Speedy Gonzales"
+      ]
+    },
+    "oqdb-0033-3": {
+      "skip": "marque de conserves française peu connue hors de France"
+    },
+    "oqdb-0033-4": {
+      "prompt": "What color is the Duracell bunny, with its endless energy?",
+      "options": [
+        "Blue",
+        "Pink",
+        "Yellow",
+        "Green"
+      ]
+    },
+    "oqdb-0035-1": {
+      "prompt": "Gabin, Ventura and Delon star together in a film about which clan?",
+      "options": [
+        "Poles",
+        "Sicilians",
+        "Indians",
+        "Scots"
+      ]
+    },
+    "oqdb-0035-2": {
+      "prompt": "Which film starring Alain Delon is named after a hat?",
+      "options": [
+        "Borsalino",
+        "Cap",
+        "Bicorne",
+        "Balaclava"
+      ]
+    },
+    "oqdb-0035-3": {
+      "skip": "films français peu connus hors de France"
+    },
+    "oqdb-0035-4": {
+      "prompt": "Who played Alain Delon's partner in \"La Piscine\"?",
+      "options": [
+        "Romy Schneider",
+        "Brigitte Bardot",
+        "Mireille Darc",
+        "Sylvie Vartan"
+      ]
+    },
+    "oqdb-0037-1": {
+      "prompt": "In \"Star Wars\", which weapon do most Jedi use?",
+      "options": [
+        "Lightsaber",
+        "Speeder",
+        "X-wing",
+        "Blaster"
+      ]
+    },
+    "oqdb-0037-2": {
+      "prompt": "Who is the padawan of Jedi Knight and Master Obi-Wan Kenobi?",
+      "options": [
+        "Yoda",
+        "Mace Windu",
+        "Leia",
+        "Anakin Skywalker"
+      ]
+    },
+    "oqdb-0037-3": {
+      "prompt": "To which planet did Luke go to learn to become a Jedi?",
+      "options": [
+        "Naboo",
+        "Malastare",
+        "Utapau",
+        "Dagobah"
+      ]
+    },
+    "oqdb-0037-4": {
+      "prompt": "What do the Jedi control that makes them very powerful?",
+      "options": [
+        "Immortality",
+        "Droid language",
+        "The Force",
+        "Light"
+      ]
+    },
+    "oqdb-0039-1": {
+      "prompt": "Who directed the war film \"Platoon\", inspired by his own life?",
+      "options": [
+        "Brian De Palma",
+        "Clint Eastwood",
+        "John Woo",
+        "Oliver Stone"
+      ]
+    },
+    "oqdb-0039-2": {
+      "prompt": "In which war film does Clint Eastwood play Tom Highway?",
+      "options": [
+        "The Eiger Sanction",
+        "Platoon",
+        "Thunderbolt and Lightfoot",
+        "Heartbreak Ridge"
+      ]
+    },
+    "oqdb-0039-3": {
+      "prompt": "In which American war film does Jean Reno play a captain?",
+      "options": [
+        "Le Premier Cercle",
+        "Armored",
+        "Flyboys",
+        "Ronin"
+      ]
+    },
+    "oqdb-0039-4": {
+      "prompt": "Which war film opens with a speech by General Patton?",
+      "options": [
+        "Full Metal Jacket",
+        "Platoon",
+        "Casualties of War",
+        "Patton"
+      ]
+    },
+    "oqdb-0040-1": {
+      "prompt": "Which French city is the capital of mustard?",
+      "options": [
+        "Douai",
+        "Dijon",
+        "Dunkirk",
+        "Drancy"
+      ]
+    },
+    "oqdb-0040-3": {
+      "prompt": "Which two letters are the symbol for the decimetre?",
+      "options": [
+        "de",
+        "dm",
+        "dt",
+        "dc"
+      ]
+    },
+    "oqdb-0040-4": {
+      "prompt": "Which was the first 128-bit console released by Sega?",
+      "options": [
+        "DSi",
+        "Dreamcast",
+        "DS",
+        "DS Lite"
+      ]
+    },
+    "oqdb-0041-1": {
+      "prompt": "In which film does John Travolta play an angel fallen from the sky?",
+      "options": [
+        "Michael",
+        "Jerry",
+        "Johnny",
+        "Sam"
+      ]
+    },
+    "oqdb-0041-2": {
+      "prompt": "Who stars opposite John Travolta in \"Face/Off\"?",
+      "options": [
+        "Nicolas Cage",
+        "Wesley Snipes",
+        "Sean Connery",
+        "Mel Gibson"
+      ]
+    },
+    "oqdb-0041-3": {
+      "prompt": "What is John Travolta's character's first name in \"Grease\"?",
+      "options": [
+        "Tony",
+        "Johnny",
+        "Billy",
+        "Danny"
+      ]
+    },
+    "oqdb-0041-4": {
+      "prompt": "Which Tarantino film marked John Travolta's return to the big screen?",
+      "options": [
+        "Django Unchained",
+        "Pulp Fiction",
+        "Jackie Brown",
+        "Kill Bill"
+      ]
+    },
+    "oqdb-0043-1": {
+      "skip": "exactitude douteuse : la noix du Brésil répond aussi à la description"
+    },
+    "oqdb-0043-2": {
+      "prompt": "What casing hides the seeds of peas?",
+      "options": [
+        "Pod",
+        "Capsule",
+        "Drupe",
+        "Follicle"
+      ]
+    },
+    "oqdb-0043-3": {
+      "prompt": "What do you call a fleshy stone fruit such as the cherry?",
+      "options": [
+        "Beechnut",
+        "Nutlet",
+        "Drupe",
+        "Berry"
+      ]
+    },
+    "oqdb-0043-4": {
+      "prompt": "Which green covering around the shell is specific to the walnut?",
+      "options": [
+        "Husk",
+        "Peduncle",
+        "Crimson",
+        "Purple"
+      ]
+    },
+    "oqdb-0045-1": {
+      "prompt": "On which island does Mount Pelée, a volcano, rise in the north?",
+      "options": [
+        "Guadeloupe",
+        "Martinique",
+        "New Caledonia",
+        "Réunion"
+      ]
+    },
+    "oqdb-0045-2": {
+      "prompt": "In which country is Kilimanjaro, with its three volcanic cones?",
+      "options": [
+        "Japan",
+        "Tanzania",
+        "Tibet",
+        "Nepal"
+      ]
+    },
+    "oqdb-0045-3": {
+      "prompt": "Which volcano of the Aeolian Islands lies north of Sicily?",
+      "options": [
+        "Pinatubo",
+        "Stromboli",
+        "Villarrica",
+        "Vesuvius"
+      ]
+    },
+    "oqdb-0045-4": {
+      "prompt": "Which mineral water brand has a green volcano as its logo?",
+      "options": [
+        "Vittel",
+        "Vichy",
+        "Volvic",
+        "Valvert"
+      ]
+    },
+    "oqdb-0047-1": {
+      "prompt": "In which Moroccan city was Jean Reno born?",
+      "options": [
+        "Agadir",
+        "Marrakesh",
+        "Casablanca",
+        "Tangier"
+      ]
+    },
+    "oqdb-0047-2": {
+      "prompt": "Who stars opposite Jean Reno in \"The Crimson Rivers\"?",
+      "options": [
+        "Samy Naceri",
+        "Vincent Cassel",
+        "Alain Delon",
+        "François Cluzet"
+      ]
+    },
+    "oqdb-0047-3": {
+      "skip": "titres de film en noms d'animaux ambigus à la traduction, film français peu connu"
+    },
+    "oqdb-0047-4": {
+      "prompt": "In which Luc Besson film does Jean Reno play Enzo?",
+      "options": [
+        "Léon",
+        "The Big Blue",
+        "Nikita",
+        "The Last Battle"
+      ]
+    },
+    "oqdb-0049-1": {
+      "prompt": "How long is the term of the President of the United States?",
+      "options": [
+        "6 years",
+        "4 years",
+        "7 years",
+        "5 years"
+      ]
+    },
+    "oqdb-0049-2": {
+      "prompt": "What is the residence of the US president in Washington?",
+      "options": [
+        "White House",
+        "Blue House",
+        "Red House",
+        "Green House"
+      ]
+    },
+    "oqdb-0049-3": {
+      "prompt": "How many times at most can someone be elected US president?",
+      "options": [
+        "Twice",
+        "Four times",
+        "Three times",
+        "Once"
+      ]
+    },
+    "oqdb-0049-4": {
+      "prompt": "What is the official retreat of the US president?",
+      "options": [
+        "Camp David",
+        "Camp Devon",
+        "Camp Damon",
+        "Camp Donald"
+      ]
+    },
+    "oqdb-0051-1": {
+      "skip": "actrices et films francophones peu connus hors de la francophonie"
+    },
+    "oqdb-0051-2": {
+      "skip": "jeu sur le titre d'un film francophone peu connu"
+    },
+    "oqdb-0051-3": {
+      "prompt": "Which Belgian actress became known to the general public with the film \"Rosetta\"?",
+      "options": [
+        "Émilie Dequenne",
+        "Yolande Moreau",
+        "Marie Gillain",
+        "Lubna Azabal"
+      ]
+    },
+    "oqdb-0051-4": {
+      "skip": "artistes belges et français peu connus hors de la francophonie"
+    },
+    "oqdb-0052-1": {
+      "prompt": "What is the nationality of the legendary Loch Ness monster?",
+      "options": [
+        "Eritrean",
+        "Spanish",
+        "Ethiopian",
+        "Scottish"
+      ]
+    },
+    "oqdb-0052-3": {
+      "prompt": "What is the name of the Romani girl in \"The Hunchback of Notre-Dame\"?",
+      "options": [
+        "Evangelista",
+        "Eleonora",
+        "Esmeralda",
+        "Erika"
+      ]
+    },
+    "oqdb-0052-4": {
+      "skip": "chanson française peu connue hors de France"
+    },
+    "oqdb-0053-1": {
+      "prompt": "Which character did Roger Moore and Sean Connery both play?",
+      "options": [
+        "James Bond",
+        "The Saint",
+        "OSS 117",
+        "Dick Tracy"
+      ]
+    },
+    "oqdb-0053-2": {
+      "prompt": "Which film brought Sean Connery and Christopher Lambert together on screen?",
+      "options": [
+        "Greystoke",
+        "Highlander",
+        "Mad Max",
+        "Subway"
+      ]
+    },
+    "oqdb-0053-3": {
+      "prompt": "Which country is Sean Connery from?",
+      "options": [
+        "United States",
+        "Ireland",
+        "Scotland",
+        "England"
+      ]
+    },
+    "oqdb-0053-4": {
+      "prompt": "Which Vangelis single includes a text recited by Sean Connery?",
+      "options": [
+        "Mythodea",
+        "Alexander",
+        "Pulstar",
+        "Ithaka"
+      ]
+    },
+    "oqdb-0055-1": {
+      "prompt": "Which famous car did David Hasselhoff drive in \"Knight Rider\"?",
+      "options": [
+        "Kytie",
+        "Kate",
+        "KITT",
+        "Kiki"
+      ]
+    },
+    "oqdb-0055-2": {
+      "prompt": "What does Sister Clotilde drive in \"The Gendarme of Saint-Tropez\"?",
+      "options": [
+        "A 2CV",
+        "An A8",
+        "An R4",
+        "A C3"
+      ]
+    },
+    "oqdb-0057-1": {
+      "prompt": "How long does the Earth take to orbit the Sun?",
+      "options": [
+        "6 months",
+        "365 days",
+        "1 month",
+        "24 hours"
+      ]
+    },
+    "oqdb-0057-2": {
+      "prompt": "What is the approximate distance between the Earth and the Moon?",
+      "options": [
+        "420,000 km",
+        "380,000 km",
+        "460,000 km",
+        "340,000 km"
+      ]
+    },
+    "oqdb-0057-3": {
+      "prompt": "Which star is the brightest as seen from Earth?",
+      "options": [
+        "Sirius",
+        "Canopus",
+        "Vega",
+        "The Sun"
+      ]
+    },
+    "oqdb-0057-4": {
+      "prompt": "Who made the first measurement of the Earth's circumference?",
+      "options": [
+        "Eurydice",
+        "Eratosthenes",
+        "Euripides",
+        "Epicurus"
+      ]
+    },
+    "oqdb-0059-1": {
+      "prompt": "In which film does Stallone play a sheriff deaf in his right ear?",
+      "options": [
+        "Cop Land",
+        "Daylight",
+        "Judge Dredd",
+        "Spy Kids 3"
+      ]
+    },
+    "oqdb-0059-2": {
+      "skip": "titres français de films de Stallone non identifiables avec certitude"
+    },
+    "oqdb-0059-3": {
+      "prompt": "Which actor stars alongside Sylvester Stallone in \"Tango & Cash\"?",
+      "options": [
+        "Edward Norton",
+        "Brandon Lee",
+        "Kurt Russell",
+        "Russell Crowe"
+      ]
+    },
+    "oqdb-0059-4": {
+      "prompt": "Which film pits Sylvester Stallone against Antonio Banderas?",
+      "options": [
+        "Assassins",
+        "Cliffhanger",
+        "Judge Dredd",
+        "Demolition Man"
+      ]
+    },
+    "oqdb-0061-1": {
+      "prompt": "Who played Donna Martin in the series \"Beverly Hills, 90210\"?",
+      "options": [
+        "Tori Spelling",
+        "Carol Potter",
+        "Jennie Garth",
+        "Hilary Swank"
+      ]
+    },
+    "oqdb-0061-2": {
+      "skip": "série télévisée française peu connue hors de France"
+    },
+    "oqdb-0061-3": {
+      "skip": "série télévisée française peu connue hors de France"
+    },
+    "oqdb-0061-4": {
+      "skip": "série télévisée française peu connue hors de France"
+    },
+    "oqdb-0063-1": {
+      "prompt": "Which natural satellite is mainly responsible for the tides?",
+      "options": [
+        "Neptune",
+        "Mars",
+        "Mercury",
+        "The Moon"
+      ]
+    },
+    "oqdb-0063-2": {
+      "prompt": "Which natural satellite is closest to its parent planet?",
+      "options": [
+        "Deimos",
+        "Titan",
+        "Charon",
+        "Phobos"
+      ]
+    },
+    "oqdb-0063-3": {
+      "prompt": "What is the largest natural satellite in our solar system?",
+      "options": [
+        "The Moon",
+        "Ganymede",
+        "Umbriel",
+        "Titan"
+      ]
+    },
+    "oqdb-0064-1": {
+      "prompt": "What is the chemical symbol for fluorine, atomic number 9?",
+      "options": [
+        "FR",
+        "FL",
+        "FN",
+        "F"
+      ]
+    },
+    "oqdb-0064-2": {
+      "prompt": "Which flavor completes vanilla and chocolate in a banana split?",
+      "options": [
+        "Passion fruit",
+        "Fig",
+        "Raspberry",
+        "Strawberry"
+      ]
+    },
+    "oqdb-0064-3": {
+      "prompt": "Which team did Michael Schumacher race for in 2003?",
+      "options": [
+        "Fisker",
+        "Ferrari",
+        "Ford",
+        "Fiat"
+      ]
+    },
+    "oqdb-0064-4": {
+      "prompt": "Which mischievous black and white cat first appeared in \"Pinocchio\"?",
+      "options": [
+        "Firmin",
+        "Fidelio",
+        "Felix",
+        "Figaro"
+      ]
+    },
+    "oqdb-0065-2": {
+      "prompt": "Which film brought Isabelle Adjani and Sharon Stone together on screen?",
+      "options": [
+        "Diabolique",
+        "Angels & Demons",
+        "The Witches",
+        "Practical Magic"
+      ]
+    },
+    "oqdb-0065-4": {
+      "skip": "film français peu connu hors de France"
+    },
+    "oqdb-0067-1": {
+      "prompt": "Which carmaker built the famous Dauphine?",
+      "options": [
+        "Citroën",
+        "Simca",
+        "Peugeot",
+        "Renault"
+      ]
+    },
+    "oqdb-0067-2": {
+      "prompt": "What was the first name of Italian carmaker Ferrari?",
+      "options": [
+        "Elio",
+        "Ernesto",
+        "Emilio",
+        "Enzo"
+      ]
+    },
+    "oqdb-0067-3": {
+      "prompt": "Which German carmaker took over the Skoda brand in 1991?",
+      "options": [
+        "Opel",
+        "Volkswagen",
+        "Audi",
+        "Porsche"
+      ]
+    },
+    "oqdb-0067-4": {
+      "prompt": "What is the oldest Japanese carmaker?",
+      "options": [
+        "Mazda",
+        "Daihatsu",
+        "Honda",
+        "Suzuki"
+      ]
+    },
+    "oqdb-0069-1": {
+      "prompt": "Which US city is nicknamed the \"Big Apple\"?",
+      "options": [
+        "Miami",
+        "Las Vegas",
+        "Los Angeles",
+        "New York"
+      ]
+    },
+    "oqdb-0069-2": {
+      "skip": "jeu sur la langue française (vocabulaire)"
+    },
+    "oqdb-0069-3": {
+      "prompt": "Which apple variety is mainly produced in France?",
+      "options": [
+        "Pink Lady",
+        "Golden Delicious",
+        "Gala",
+        "Jonagold"
+      ]
+    },
+    "oqdb-0069-4": {
+      "prompt": "Which English physicist paid attention to falling apples?",
+      "options": [
+        "Tycho Brahe",
+        "Isaac Newton",
+        "Peter Higgs",
+        "Nicolaus Copernicus"
+      ]
+    },
+    "oqdb-0071-1": {
+      "prompt": "Who is Louis de Funès's accomplice in \"La Soupe aux choux\"?",
+      "options": [
+        "Michel Galabru",
+        "Bourvil",
+        "Jean Carmet",
+        "Jacques Villeret"
+      ]
+    },
+    "oqdb-0071-2": {
+      "prompt": "Who plays Louis de Funès's servant in \"La Folie des grandeurs\"?",
+      "options": [
+        "Bourvil",
+        "Yves Montand",
+        "Coluche",
+        "Michel Galabru"
+      ]
+    },
+    "oqdb-0071-3": {
+      "prompt": "What do Bourvil and De Funès throw onto the road in \"La Grande Vadrouille\"?",
+      "options": [
+        "Pumpkins",
+        "Banknotes",
+        "Wine barrels",
+        "Tomatoes"
+      ]
+    },
+    "oqdb-0071-4": {
+      "skip": "actrices françaises peu connues hors de France"
+    },
+    "oqdb-0073-1": {
+      "prompt": "Who won the Formula 1 world championship in 2019?",
+      "options": [
+        "Lewis Hamilton",
+        "Lando Norris",
+        "Pierre Gasly",
+        "Sebastian Vettel"
+      ]
+    },
+    "oqdb-0073-2": {
+      "prompt": "Who was the first French Formula 1 world champion?",
+      "options": [
+        "Didier Pironi",
+        "Jean Alesi",
+        "Alain Prost",
+        "Guy Ligier"
+      ]
+    },
+    "oqdb-0073-3": {
+      "prompt": "How many world titles did Michael Schumacher win?",
+      "options": [
+        "Seven",
+        "Eight",
+        "Nine",
+        "Six"
+      ]
+    },
+    "oqdb-0073-4": {
+      "prompt": "What was the first name of the father of F1 driver Jacques Villeneuve?",
+      "options": [
+        "Steve",
+        "Charles",
+        "Gilles",
+        "Christian"
+      ]
+    },
+    "oqdb-0075-1": {
+      "skip": "concours Miss France, sans écho à l'étranger"
+    },
+    "oqdb-0075-2": {
+      "skip": "concours Miss France et émission française"
+    },
+    "oqdb-0075-3": {
+      "skip": "concours Miss France, sans écho à l'étranger"
+    },
+    "oqdb-0075-4": {
+      "skip": "humoriste belge et émission peu connus hors de la francophonie"
+    },
+    "oqdb-0076-1": {
+      "prompt": "Which search engine remains the most popular on the internet?",
+      "options": [
+        "GitHub",
+        "Google",
+        "Gibiru",
+        "Giphy"
+      ]
+    },
+    "oqdb-0076-2": {
+      "prompt": "Among the Smurfs, who owns the cat Azrael?",
+      "options": [
+        "Gargantua",
+        "Geronimo",
+        "Gargamel",
+        "Gideon"
+      ]
+    },
+    "oqdb-0076-3": {
+      "skip": "jeu sur le vocabulaire français (rainette)"
+    },
+    "oqdb-0076-4": {
+      "skip": "artiste français peu connu hors de France"
+    },
+    "oqdb-0077-1": {
+      "prompt": "For which country did Aznavour play an active role in fundraising?",
+      "options": [
+        "Armenia",
+        "Lithuania",
+        "Ukraine",
+        "Greece"
+      ]
+    },
+    "oqdb-0077-3": {
+      "prompt": "What was the real surname of French singer Charles Aznavour?",
+      "options": [
+        "Aznavourian",
+        "Aznavourev",
+        "Aznavouriak",
+        "Aznavour"
+      ]
+    },
+    "oqdb-0077-4": {
+      "prompt": "\"La Mamma\" was written for Aznavour by the father of which artist?",
+      "options": [
+        "Mireille Mathieu",
+        "Sheila",
+        "Dalida",
+        "France Gall"
+      ]
+    },
+    "oqdb-0079-2": {
+      "skip": "bière belge et slogan français peu connus"
+    },
+    "oqdb-0079-3": {
+      "skip": "slogan publicitaire en français sans équivalent anglais"
+    },
+    "oqdb-0079-4": {
+      "prompt": "Which car brand has the slogan \"Sheer Driving Pleasure\"?",
+      "options": [
+        "BMW",
+        "Renault",
+        "Mercedes-Benz",
+        "Kia"
+      ]
+    },
+    "oqdb-0081-1": {
+      "skip": "film culte français peu connu hors de France"
+    },
+    "oqdb-0081-2": {
+      "skip": "film culte français peu connu hors de France"
+    },
+    "oqdb-0081-3": {
+      "skip": "film culte français peu connu hors de France"
+    },
+    "oqdb-0081-4": {
+      "skip": "film culte français peu connu hors de France"
+    },
+    "oqdb-0083-2": {
+      "skip": "chanson de Gainsbourg, jeu sur les paroles françaises"
+    },
+    "oqdb-0083-3": {
+      "skip": "chanson française peu connue hors de France"
+    },
+    "oqdb-0083-4": {
+      "skip": "incident télévisé français peu connu, exactitude douteuse"
+    },
+    "oqdb-0085-1": {
+      "prompt": "Which science fiction writer created the monumental \"Dune\" saga?",
+      "options": [
+        "Robert Heinlein",
+        "Arthur C. Clarke",
+        "Isaac Asimov",
+        "Frank Herbert"
+      ]
+    },
+    "oqdb-0085-2": {
+      "prompt": "Who wrote the science fiction novel \"The Island of Doctor Moreau\"?",
+      "options": [
+        "Aldous Huxley",
+        "George Orwell",
+        "H. G. Wells",
+        "Arthur C. Clarke"
+      ]
+    },
+    "oqdb-0085-3": {
+      "prompt": "Which novel founded the cyberpunk movement?",
+      "options": [
+        "Source Code",
+        "Count Zero",
+        "Neuromancer",
+        "Idoru"
+      ]
+    },
+    "oqdb-0087-1": {
+      "prompt": "What do the figures on the World Cup trophy hold up?",
+      "options": [
+        "Flame",
+        "Whistle",
+        "Shoe",
+        "Globe"
+      ]
+    },
+    "oqdb-0087-2": {
+      "prompt": "Who was sent off in the 1998 football World Cup final?",
+      "options": [
+        "Thierry Henry",
+        "Marcel Desailly",
+        "Laurent Blanc",
+        "Franck Leboeuf"
+      ]
+    },
+    "oqdb-0087-3": {
+      "prompt": "Which brand made the ball of the 2002 football World Cup?",
+      "options": [
+        "Adidas",
+        "Reebok",
+        "Nike",
+        "Puma"
+      ]
+    },
+    "oqdb-0087-4": {
+      "prompt": "Which horns did fans use in 2010?",
+      "options": [
+        "Vovomelas",
+        "Vivigalas",
+        "Vavadolas",
+        "Vuvuzelas"
+      ]
+    },
+    "oqdb-0088-1": {
+      "prompt": "Which coding format is commonly used in web pages?",
+      "options": [
+        "HDMI",
+        "Hertz",
+        "HTML",
+        "HTTP"
+      ]
+    },
+    "oqdb-0088-2": {
+      "prompt": "In \"The Simpsons\", what is the first name of Marge's husband?",
+      "options": [
+        "Harvey",
+        "Horace",
+        "Homer",
+        "Herbert"
+      ]
+    }
+  },
+  "quizzes": {}
+}

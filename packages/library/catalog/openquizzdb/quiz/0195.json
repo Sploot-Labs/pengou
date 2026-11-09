@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=195"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0195-2",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur de sa robe dans « Sept ans de réflexion » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rouge",
+            "correct": false
+          },
+          {
+            "label": "Bleue",
+            "correct": false
+          },
+          {
+            "label": "Blanche",
+            "correct": true
+          },
+          {
+            "label": "Noire",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

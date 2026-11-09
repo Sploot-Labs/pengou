@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=527"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0527-2-en",
+      "type": "mcq",
+      "prompt": "Which Romanian gymnast scored a perfect 10 at the Olympics?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oana Ban",
+            "correct": false
+          },
+          {
+            "label": "Nadia Comaneci",
+            "correct": true
+          },
+          {
+            "label": "Catalina Ponor",
+            "correct": false
+          },
+          {
+            "label": "Olga Korbut",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0527-4-en",
+      "type": "mcq",
+      "prompt": "Who was the first woman officially registered to run the Boston Marathon?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mary Decker",
+            "correct": false
+          },
+          {
+            "label": "Shalane Flanagan",
+            "correct": false
+          },
+          {
+            "label": "Kathrine Switzer",
+            "correct": true
+          },
+          {
+            "label": "Molly Huddle",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

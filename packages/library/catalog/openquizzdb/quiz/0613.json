@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=613"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0613-1",
+      "type": "mcq",
+      "prompt": "Quelles chaussures porte-t-on au judo ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sabots",
+            "correct": false
+          },
+          {
+            "label": "Baskets",
+            "correct": false
+          },
+          {
+            "label": "Aucune",
+            "correct": true
+          },
+          {
+            "label": "Bottes",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0613-2",
+      "type": "mcq",
+      "prompt": "Combien de feuilles possède généralement un trèfle de jardin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deux",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0613-3",
+      "type": "mcq",
+      "prompt": "Dans un jeu de cartes classique, de quelle couleur sont les carreaux ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bleu",
+            "correct": false
+          },
+          {
+            "label": "Noir",
+            "correct": false
+          },
+          {
+            "label": "Vert",
+            "correct": false
+          },
+          {
+            "label": "Rouge",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0613-4",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on la ligne imaginaire qui sépare deux pays ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tangente",
+            "correct": false
+          },
+          {
+            "label": "Section",
+            "correct": false
+          },
+          {
+            "label": "Médiane",
+            "correct": false
+          },
+          {
+            "label": "Frontière",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

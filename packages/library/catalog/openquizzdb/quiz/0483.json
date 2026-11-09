@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=483"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0483-1",
+      "type": "mcq",
+      "prompt": "Quel écrivain allemand a travaillé près de 60 ans sur son oeuvre « Faust » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Becker",
+            "correct": false
+          },
+          {
+            "label": "Goethe",
+            "correct": true
+          },
+          {
+            "label": "Lingg",
+            "correct": false
+          },
+          {
+            "label": "Jacoby",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0483-2",
+      "type": "mcq",
+      "prompt": "Quel écrivain russe a été excommunié par l'Église orthodoxe ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roman Goul",
+            "correct": false
+          },
+          {
+            "label": "Leonid Andreïev",
+            "correct": false
+          },
+          {
+            "label": "Vladimir Charov",
+            "correct": false
+          },
+          {
+            "label": "Léon Tolstoï",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

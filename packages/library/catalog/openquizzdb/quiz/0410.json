@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=410"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0410-1",
+      "type": "mcq",
+      "prompt": "Comment se prénomme le cow-boy héros de la saga « Toy Story » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Randy",
+            "correct": false
+          },
+          {
+            "label": "Pile-Poil",
+            "correct": false
+          },
+          {
+            "label": "Woody",
+            "correct": true
+          },
+          {
+            "label": "Jessy",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0410-3",
+      "type": "mcq",
+      "prompt": "Quelle est la senteur de Lotso dans « Toy Story 3 » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Framboise",
+            "correct": false
+          },
+          {
+            "label": "Fraise",
+            "correct": true
+          },
+          {
+            "label": "Pomme",
+            "correct": false
+          },
+          {
+            "label": "Banane",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0410-4",
+      "type": "mcq",
+      "prompt": "Quel dessin retrouve-t-on sur le tee-shirt noir de Sid dans « Toy Story » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tête de mort",
+            "correct": true
+          },
+          {
+            "label": "Nombre 95",
+            "correct": false
+          },
+          {
+            "label": "Éclair",
+            "correct": false
+          },
+          {
+            "label": "Smiley",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

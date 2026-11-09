@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=354"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0354-1",
+      "type": "mcq",
+      "prompt": "Comment Jacquouille appelle-t-il le postier dans le film « Les Visiteurs » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Noir",
+            "correct": false
+          },
+          {
+            "label": "Sarrazin",
+            "correct": true
+          },
+          {
+            "label": "Vilain",
+            "correct": false
+          },
+          {
+            "label": "Gueux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

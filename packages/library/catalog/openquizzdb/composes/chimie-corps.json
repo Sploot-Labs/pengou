@@ -1,0 +1,472 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0380-1",
+      "type": "mcq",
+      "prompt": "Comment appelle-t-on un récipient sphérique en chimie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bécher",
+            "correct": false
+          },
+          {
+            "label": "Burette",
+            "correct": false
+          },
+          {
+            "label": "Ballon",
+            "correct": true
+          },
+          {
+            "label": "Bocal",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0380-2",
+      "type": "mcq",
+      "prompt": "Quel métal brûle avec une flamme blanche aveuglante ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Radium",
+            "correct": false
+          },
+          {
+            "label": "Baryum",
+            "correct": false
+          },
+          {
+            "label": "Calcium",
+            "correct": false
+          },
+          {
+            "label": "Magnésium",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0380-3",
+      "type": "mcq",
+      "prompt": "Quel paramètre indique si une solution est acide, neutre ou basique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le pH",
+            "correct": true
+          },
+          {
+            "label": "La constante",
+            "correct": false
+          },
+          {
+            "label": "La base",
+            "correct": false
+          },
+          {
+            "label": "La puissance",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0380-4",
+      "type": "mcq",
+      "prompt": "Quel métal en fusion pouvez-vous tenir dans le creux de la main ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Mercure",
+            "correct": true
+          },
+          {
+            "label": "Iridium",
+            "correct": false
+          },
+          {
+            "label": "Platine",
+            "correct": false
+          },
+          {
+            "label": "Manganèse",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0375-1",
+      "type": "mcq",
+      "prompt": "Parmi les métaux alcalins, quel est le symbole chimique du sodium ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Na",
+            "correct": true
+          },
+          {
+            "label": "So",
+            "correct": false
+          },
+          {
+            "label": "Sd",
+            "correct": false
+          },
+          {
+            "label": "Um",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0375-2",
+      "type": "mcq",
+      "prompt": "Quel élément a pour symbole Na et pour numéro atomique 11 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sodium",
+            "correct": true
+          },
+          {
+            "label": "Sélénium",
+            "correct": false
+          },
+          {
+            "label": "Soufre",
+            "correct": false
+          },
+          {
+            "label": "Silicium",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0375-3",
+      "type": "mcq",
+      "prompt": "Quel est le symbole chimique du potassium, d'aspect blanc métallique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "T",
+            "correct": false
+          },
+          {
+            "label": "K",
+            "correct": true
+          },
+          {
+            "label": "P",
+            "correct": false
+          },
+          {
+            "label": "O",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0375-4",
+      "type": "mcq",
+      "prompt": "Quel élément chimique est représenté par le symbole B ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bismuth",
+            "correct": false
+          },
+          {
+            "label": "Bore",
+            "correct": true
+          },
+          {
+            "label": "Benzène",
+            "correct": false
+          },
+          {
+            "label": "Brome",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0557-1",
+      "type": "mcq",
+      "prompt": "De combien de paires de côtes est constitué le squelette humain ?",
+      "payload": {
+        "options": [
+          {
+            "label": "32",
+            "correct": false
+          },
+          {
+            "label": "24",
+            "correct": false
+          },
+          {
+            "label": "12",
+            "correct": true
+          },
+          {
+            "label": "6",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0557-2",
+      "type": "mcq",
+      "prompt": "Quelle est la durée de vie moyenne d'un globule rouge ?",
+      "payload": {
+        "options": [
+          {
+            "label": "3 semaines",
+            "correct": false
+          },
+          {
+            "label": "4 mois",
+            "correct": true
+          },
+          {
+            "label": "1 heure",
+            "correct": false
+          },
+          {
+            "label": "2 jours",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0557-4",
+      "type": "mcq",
+      "prompt": "Quelle quantité d'eau peut-on perdre environ par jour en respirant ?",
+      "payload": {
+        "options": [
+          {
+            "label": "2 litres",
+            "correct": false
+          },
+          {
+            "label": "3 litres",
+            "correct": false
+          },
+          {
+            "label": "1 litre",
+            "correct": true
+          },
+          {
+            "label": "4 litres",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0419-1",
+      "type": "mcq",
+      "prompt": "Que mesure-t-on avec l'échelle Kelvin, du nom de Lord Kelvin ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Distance",
+            "correct": false
+          },
+          {
+            "label": "Poids",
+            "correct": false
+          },
+          {
+            "label": "Vitesse",
+            "correct": false
+          },
+          {
+            "label": "Température",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0419-2",
+      "type": "mcq",
+      "prompt": "Qui a développé l'échelle de magnitude des séismes en 1935 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pauling",
+            "correct": false
+          },
+          {
+            "label": "Rankine",
+            "correct": false
+          },
+          {
+            "label": "Richter",
+            "correct": true
+          },
+          {
+            "label": "Monoyer",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0419-3",
+      "type": "mcq",
+      "prompt": "Lequel de ces pays ou territoires n'utilise pas le degré Celsius ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Canada",
+            "correct": false
+          },
+          {
+            "label": "Italie",
+            "correct": false
+          },
+          {
+            "label": "États-Unis",
+            "correct": true
+          },
+          {
+            "label": "Australie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0419-4",
+      "type": "mcq",
+      "prompt": "Quelle unité du Système international permet de mesurer une fréquence ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joule",
+            "correct": false
+          },
+          {
+            "label": "Becquerel",
+            "correct": false
+          },
+          {
+            "label": "Katal",
+            "correct": false
+          },
+          {
+            "label": "Hertz",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-chimie-corps",
+      "title": "Chimie, corps humain et mesures",
+      "description": "D'après les quiz OpenQuizzDB « Chimie », « Symboles chimiques », « Corps humain » et « Unités de mesure ».",
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0380-1",
+        "oqdb-0380-2",
+        "oqdb-0380-3",
+        "oqdb-0380-4",
+        "oqdb-0375-1",
+        "oqdb-0375-2",
+        "oqdb-0375-3",
+        "oqdb-0375-4",
+        "oqdb-0557-1",
+        "oqdb-0557-2",
+        "oqdb-0557-4",
+        "oqdb-0419-1",
+        "oqdb-0419-2",
+        "oqdb-0419-3",
+        "oqdb-0419-4"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=522"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0522-3",
+      "type": "mcq",
+      "prompt": "Quel personnage utilise les Potaras dans « Dragon Ball Z » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Aralé",
+            "correct": false
+          },
+          {
+            "label": "Dr. Slump",
+            "correct": false
+          },
+          {
+            "label": "Lao",
+            "correct": false
+          },
+          {
+            "label": "Kaio Shin",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0522-4",
+      "type": "mcq",
+      "prompt": "Dans « Dragon Ball », quel métal est censé être le plus dur de l'univers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cooler",
+            "correct": false
+          },
+          {
+            "label": "Katchin",
+            "correct": true
+          },
+          {
+            "label": "Piccolo",
+            "correct": false
+          },
+          {
+            "label": "Dabra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

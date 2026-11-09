@@ -1,0 +1,562 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0405-1",
+      "type": "mcq",
+      "prompt": "En quelle matière est construite la Pyramide du Louvre ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pierre",
+            "correct": false
+          },
+          {
+            "label": "Bois",
+            "correct": false
+          },
+          {
+            "label": "Verre",
+            "correct": true
+          },
+          {
+            "label": "Carton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0405-2",
+      "type": "mcq",
+      "prompt": "Quelles oeuvres sont exposées dans les Cours Marly et Puget ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Momies",
+            "correct": false
+          },
+          {
+            "label": "Sculptures",
+            "correct": true
+          },
+          {
+            "label": "Tableaux",
+            "correct": false
+          },
+          {
+            "label": "Croquis",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0377-1",
+      "type": "mcq",
+      "prompt": "Que représente la sculpture de Marcel Duchamp baptisée « Fontaine » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Utérus",
+            "correct": false
+          },
+          {
+            "label": "Ulcère",
+            "correct": false
+          },
+          {
+            "label": "Urinoir",
+            "correct": true
+          },
+          {
+            "label": "Urne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0377-2",
+      "type": "mcq",
+      "prompt": "Quelle était la nationalité du sculpteur et peintre Alberto Giacometti ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Portugaise",
+            "correct": false
+          },
+          {
+            "label": "Argentine",
+            "correct": false
+          },
+          {
+            "label": "Suisse",
+            "correct": true
+          },
+          {
+            "label": "Italienne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0377-3",
+      "type": "mcq",
+      "prompt": "À quel sculpteur doit-on un désormais célèbre baiser ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Choppin",
+            "correct": false
+          },
+          {
+            "label": "Rodin",
+            "correct": true
+          },
+          {
+            "label": "Lenoir",
+            "correct": false
+          },
+          {
+            "label": "Moreau",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0377-4",
+      "type": "mcq",
+      "prompt": "Dans quel type de sculpture le français Auguste Cain était-il spécialisé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Monumentale",
+            "correct": false
+          },
+          {
+            "label": "Architecturale",
+            "correct": false
+          },
+          {
+            "label": "Funéraire",
+            "correct": false
+          },
+          {
+            "label": "Animalière",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0466-1",
+      "type": "mcq",
+      "prompt": "Quel artiste a peint le célèbre tableau romantique « La Barque de Dante » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Girodet",
+            "correct": false
+          },
+          {
+            "label": "Goya",
+            "correct": false
+          },
+          {
+            "label": "Delacroix",
+            "correct": true
+          },
+          {
+            "label": "Turner",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0466-2",
+      "type": "mcq",
+      "prompt": "Quel peintre est célèbre pour sa troublante série des « Peintures noires » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Corot",
+            "correct": false
+          },
+          {
+            "label": "Gros",
+            "correct": false
+          },
+          {
+            "label": "Füssli",
+            "correct": false
+          },
+          {
+            "label": "Goya",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0466-3",
+      "type": "mcq",
+      "prompt": "Quel artiste danois a peint « Un groupe d'artistes danois à Rome » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hansen",
+            "correct": true
+          },
+          {
+            "label": "Malmström",
+            "correct": false
+          },
+          {
+            "label": "Bierstadt",
+            "correct": false
+          },
+          {
+            "label": "Delacroix",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0466-4",
+      "type": "mcq",
+      "prompt": "Quel artiste allemand a peint le tableau « Lever de lune sur la mer » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Quidor",
+            "correct": false
+          },
+          {
+            "label": "Raeburn",
+            "correct": false
+          },
+          {
+            "label": "Friedrich",
+            "correct": true
+          },
+          {
+            "label": "Runge",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0145-1",
+      "type": "mcq",
+      "prompt": "Quelle matière à base de silicates est fortement utilisée en céramique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Argile",
+            "correct": true
+          },
+          {
+            "label": "Céruse",
+            "correct": false
+          },
+          {
+            "label": "Sable",
+            "correct": false
+          },
+          {
+            "label": "Limon",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0145-2",
+      "type": "mcq",
+      "prompt": "Quel enduit vitrifiable durcit la céramique ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pige",
+            "correct": false
+          },
+          {
+            "label": "Biscuit",
+            "correct": false
+          },
+          {
+            "label": "Émail",
+            "correct": true
+          },
+          {
+            "label": "Ajour",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0145-3",
+      "type": "mcq",
+      "prompt": "Quelle civilisation est universellement connue pour sa porcelaine ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Grecque",
+            "correct": false
+          },
+          {
+            "label": "Chinoise",
+            "correct": true
+          },
+          {
+            "label": "Égyptienne",
+            "correct": false
+          },
+          {
+            "label": "Péruvienne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0145-4",
+      "type": "mcq",
+      "prompt": "Quelle couleur d'émaillage obtient-on avec l'oxyde de cobalt ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rouge",
+            "correct": false
+          },
+          {
+            "label": "Vert",
+            "correct": false
+          },
+          {
+            "label": "Jaune",
+            "correct": false
+          },
+          {
+            "label": "Bleu",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0399-1",
+      "type": "mcq",
+      "prompt": "Qui sait fabriquer un couteau à la main, de la lame jusqu'au manche ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Archetier",
+            "correct": false
+          },
+          {
+            "label": "Moireur",
+            "correct": false
+          },
+          {
+            "label": "Canneur",
+            "correct": false
+          },
+          {
+            "label": "Coutelier",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0399-2",
+      "type": "mcq",
+      "prompt": "Quel artisan transforme des bois pour créer du mobilier décoratif ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vannier",
+            "correct": false
+          },
+          {
+            "label": "Vernisseur",
+            "correct": false
+          },
+          {
+            "label": "Ébéniste",
+            "correct": true
+          },
+          {
+            "label": "Dinandier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0399-3",
+      "type": "mcq",
+      "prompt": "Quel artisan confectionne des objets à l'aide d'osier ou de paille ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vannier",
+            "correct": true
+          },
+          {
+            "label": "Canneur",
+            "correct": false
+          },
+          {
+            "label": "Laqueur",
+            "correct": false
+          },
+          {
+            "label": "Campaniste",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0399-4",
+      "type": "mcq",
+      "prompt": "Qui est chargé de conseiller les clients pour des accessoires de tête ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Gantier",
+            "correct": false
+          },
+          {
+            "label": "Chapelier",
+            "correct": true
+          },
+          {
+            "label": "Coutelier",
+            "correct": false
+          },
+          {
+            "label": "Cirier",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-art-musees",
+      "title": "Art et musées",
+      "description": "D'après les quiz OpenQuizzDB « Musée du Louvre », « Sculpture », « Romantisme », « Céramique et poterie » et « Métiers artistiques ».",
+      "theme": "art",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0405-1",
+        "oqdb-0405-2",
+        "oqdb-0377-1",
+        "oqdb-0377-2",
+        "oqdb-0377-3",
+        "oqdb-0377-4",
+        "oqdb-0466-1",
+        "oqdb-0466-2",
+        "oqdb-0466-3",
+        "oqdb-0466-4",
+        "oqdb-0145-1",
+        "oqdb-0145-2",
+        "oqdb-0145-3",
+        "oqdb-0145-4",
+        "oqdb-0399-1",
+        "oqdb-0399-2",
+        "oqdb-0399-3",
+        "oqdb-0399-4"
+      ]
+    }
+  ]
+}

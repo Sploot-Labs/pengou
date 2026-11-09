@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=424"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0424-4-en",
+      "type": "mcq",
+      "prompt": "In Hawaiian, what does Honolulu, the capital of the state of Hawaii, mean?",
+      "payload": {
+        "options": [
+          {
+            "label": "Two seas",
+            "correct": false
+          },
+          {
+            "label": "Cruel sun",
+            "correct": false
+          },
+          {
+            "label": "Sheltered bay",
+            "correct": true
+          },
+          {
+            "label": "Great harbor",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

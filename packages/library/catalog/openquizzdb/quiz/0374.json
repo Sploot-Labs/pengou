@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=374"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0374-1",
+      "type": "mcq",
+      "prompt": "Que désigne le mot « pomme » dans le langage populaire ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Le visage",
+            "correct": true
+          },
+          {
+            "label": "Les genoux",
+            "correct": false
+          },
+          {
+            "label": "Le ventre",
+            "correct": false
+          },
+          {
+            "label": "Les fesses",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0374-2",
+      "type": "mcq",
+      "prompt": "Quelle boisson alcoolisée à base de pommes titre entre 2 % et 8 % ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lambig",
+            "correct": false
+          },
+          {
+            "label": "Pommeau",
+            "correct": false
+          },
+          {
+            "label": "Cidre",
+            "correct": true
+          },
+          {
+            "label": "Calvados",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0374-3",
+      "type": "mcq",
+      "prompt": "Quelle princesse de contes a été empoisonnée par une pomme ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cendrillon",
+            "correct": false
+          },
+          {
+            "label": "Jasmine",
+            "correct": false
+          },
+          {
+            "label": "Aurore",
+            "correct": false
+          },
+          {
+            "label": "Blanche-Neige",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0374-4",
+      "type": "mcq",
+      "prompt": "Quelle multinationale américaine a pour logo une pomme ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Xerox",
+            "correct": false
+          },
+          {
+            "label": "IBM",
+            "correct": false
+          },
+          {
+            "label": "Microsoft",
+            "correct": false
+          },
+          {
+            "label": "Apple",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

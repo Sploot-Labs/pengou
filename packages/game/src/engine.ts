@@ -1,4 +1,16 @@
-import { questionTypes } from '@splootlabs/quiz'
+import {
+  questionTypes,
+  aggregateWords,
+  wordKey,
+  WORDCLOUD_MAX_WORDS_PER_PLAYER,
+  pollAnswerError,
+  tallyPoll,
+  isScoredType,
+  type PollAnswer,
+  type PollPayload,
+  type WordcloudAnswer,
+  type WordcloudAggregate,
+} from '@splootlabs/quiz'
 import type { GameSession, Player, EngineQuestion, SubmittedAnswer } from './state.js'
 import type { SessionStore } from './store.js'
 
@@ -17,7 +29,19 @@ export type CreateSessionInput = {
   questions: EngineQuestion[]
 }
 
-export type SubmitAnswerResult = { accepted: boolean; reason?: string }
+export type SubmitAnswerResult = { accepted: boolean; reason?: string; words?: string[] }
+
+/** Nombre maximal de mots du nuage envoyés dans la projection (le reste est compté, pas listé). */
+export const WORDCLOUD_VIEW_LIMIT = 100
+
+export type WordcloudView = WordcloudAggregate & { questionId: string; truncated: boolean }
+
+export type PollView = {
+  questionId: string
+  multiple: boolean
+  voters: number
+  options: { label: string; votes: number }[]
+}
 
 export type RankingEntry = { playerId: string; nickname: string; score: number }
 
@@ -51,6 +75,7 @@ export type ReadingView = {
 export type QuestionResult = {
   correct: unknown
   distribution: Record<string, number>
+  poll?: PollView
 }
 
 /** Compteur de réponses pour la question courante (destiné au grand écran) — jamais de contenu
@@ -96,17 +121,37 @@ export interface Engine {
    * qu'il y a AU MOINS un joueur connecté, et que CHAQUE joueur connecté a soumis une réponse
    * pour la question courante. Un joueur déconnecté ne bloque jamais (ignoré). Zéro joueur
    * connecté ⟹ false (ne jamais auto-révéler une salle vide). */
-  allConnectedAnswered(session: GameSession): boolean
+  allConnectedAnswered(session: Readonly<GameSession>): boolean
   playerQuestionView(session: GameSession): PlayerQuestionView
   /** Projection « temps de lecture » — énoncé SEUL (jamais les options/réponses possibles :
    * anti-triche, cohérent avec `playerQuestionView`). */
   readingView(session: GameSession): ReadingView
   questionResult(session: GameSession): QuestionResult
+  /** Projection agrégée du nuage de mots de la question courante (mots retirés exclus, 100 mots
+   * au plus). `null` si la question courante n'est pas un nuage de mots. */
+  wordcloudView(session: Readonly<GameSession>): WordcloudView | null
+  /** Projection du sondage de la question courante. `null` si ce n'est pas un sondage. */
+  pollView(session: Readonly<GameSession>): PollView | null
+  /** Faux pour un sondage ou un nuage de mots. */
+  isCurrentQuestionScored(session: Readonly<GameSession>): boolean
+  /** Au moins une question notée dans le quiz. */
+  hasScoredQuestions(session: Readonly<GameSession>): boolean
+  /** Retire un mot du nuage (par clé de fusion) pour la question courante. Phases question,
+   * reveal et scoreboard uniquement. */
+  removeWord(
+    sessionId: string,
+    word: string,
+  ): Promise<{ session: GameSession; questionId: string; removedKeys: string[] }>
   /** Marque un joueur (dé)connecté — n'affecte ni son score ni ses réponses. */
   setPlayerConnected(sessionId: string, playerId: string, connected: boolean): Promise<GameSession>
   /** Retrouve un joueur par joinToken (Task 5 : reconnexion) et le remarque `connected`. `null`
    * si aucun joueur de la session ne porte ce token. */
   reconnect(sessionId: string, joinToken: string): Promise<ReconnectResult>
+  /** Exclut un joueur : le retire de `players`, efface ses réponses de la manche courante tant
+   * que ses points ne sont pas crédités (sinon elles restent, le score déjà distribué ne bouge
+   * pas) et mémorise son joinToken pour refuser sa reconnexion. `kicked` vaut `null` (sans
+   * `store.save`) si le joueur est absent : idempotent. Refusé au podium. */
+  kickPlayer(sessionId: string, playerId: string): Promise<{ session: GameSession; kicked: Player | null }>
   /** Compteur de réponses pour la question courante — pour le grand écran (jamais de contenu
    * de réponse, uniquement `answered`/`total`). */
   progress(sessionId: string): Promise<ProgressInfo>
@@ -115,6 +160,10 @@ export interface Engine {
    * révélée avant `host:next`, ou si `host:reveal` est invoqué hors phase question) sans
    * dupliquer l'état moteur côté passerelle. */
   getSession(sessionId: string): Promise<GameSession>
+  /** Lecture seule SANS copie (objet en cache du store). Lecture seule superficielle : ni l'objet
+   * ni ses sous-objets ne doivent être modifiés : réservée aux chemins
+   * chauds (réponse de joueur). Lève la même erreur que `getSession` si la session est introuvable. */
+  peekSession(sessionId: string): Promise<Readonly<GameSession>>
   /** Re-ancre à `now()` le chrono de la phase COURANTE, sans changer de phase ni avancer
    * `currentIndex` (Task 4, réhydratation au boot) : après un redémarrage serveur, le chrono
    * repart à zéro plutôt que d'hériter d'un `questionStartedAt`/`readingStartedAt` figé à
@@ -131,11 +180,26 @@ export interface Engine {
   evictSession(sessionId: string): Promise<void>
 }
 
+/** Levée par `reconnect` quand le joinToken appartient à un joueur exclu par l'animateur. */
+export class PlayerKickedError extends Error {
+  readonly code = 'kicked'
+  constructor() {
+    super('joueur exclu de la partie')
+    this.name = 'PlayerKickedError'
+  }
+}
+
 export function createEngine(deps: EngineDeps): Engine {
   const { store, now, genPin, genId } = deps
 
   async function requireSession(sessionId: string): Promise<GameSession> {
     const session = await store.get(sessionId)
+    if (!session) throw new Error(`session introuvable : ${sessionId}`)
+    return session
+  }
+
+  async function requirePeek(sessionId: string): Promise<Readonly<GameSession>> {
+    const session = await store.peek(sessionId)
     if (!session) throw new Error(`session introuvable : ${sessionId}`)
     return session
   }
@@ -154,7 +218,7 @@ export function createEngine(deps: EngineDeps): Engine {
     throw new Error('impossible de générer un PIN unique')
   }
 
-  function currentQuestion(session: GameSession): EngineQuestion | undefined {
+  function currentQuestion(session: Readonly<GameSession>): EngineQuestion | undefined {
     return session.questions[session.currentIndex]
   }
 
@@ -229,7 +293,7 @@ export function createEngine(deps: EngineDeps): Engine {
     },
 
     async submitAnswer(sessionId, playerId, rawAnswer) {
-      const session = await requireSession(sessionId)
+      const session = await requirePeek(sessionId)
 
       if (session.phase !== 'question') {
         return { accepted: false, reason: 'hors phase question' }
@@ -241,8 +305,9 @@ export function createEngine(deps: EngineDeps): Engine {
       if (!question) {
         return { accepted: false, reason: 'aucune question active' }
       }
+      const isWordcloud = question.type === 'wordcloud'
       const alreadyAnswered = session.answers[session.currentIndex]?.[playerId]
-      if (alreadyAnswered) {
+      if (alreadyAnswered && !isWordcloud) {
         return { accepted: false, reason: 'réponse déjà soumise pour cette question' }
       }
       // Invariant normalement garanti par startQuestion (phase 'question' ⟹ questionStartedAt
@@ -260,19 +325,47 @@ export function createEngine(deps: EngineDeps): Engine {
         return { accepted: false, reason: 'réponse invalide pour ce type de question' }
       }
 
+      if (question.type === 'poll') {
+        const pollError = pollAnswerError(question.payload as PollPayload, answer as PollAnswer)
+        if (pollError !== null) return { accepted: false, reason: 'réponse invalide pour ce type de question' }
+      }
+
       // Horodatage 100% serveur : jamais de confiance dans un timing fourni par le client.
       const maxMs = question.timeLimit * 1000
       const rawTimeMs = now() - session.questionStartedAt
       const timeMs = Math.max(0, Math.min(rawTimeMs, maxMs))
 
+      if (isWordcloud) {
+        const { word } = answer as { word: string }
+        const previous = alreadyAnswered ? (alreadyAnswered.answer as WordcloudAnswer).words : []
+        const key = wordKey(word)
+        if (key === '') return { accepted: false, reason: 'mot invalide' }
+        if (previous.some((w) => wordKey(w) === key)) {
+          return { accepted: false, reason: 'mot déjà envoyé' }
+        }
+        if (previous.length >= WORDCLOUD_MAX_WORDS_PER_PLAYER) {
+          return { accepted: false, reason: `limite de ${WORDCLOUD_MAX_WORDS_PER_PLAYER} mots atteinte` }
+        }
+        const words = [...previous, word]
+        // Le premier envoi fixe timeMs. Aucun await entre peek et recordAnswer (atomicité).
+        const accumulated: SubmittedAnswer = {
+          answer: { words } satisfies WordcloudAnswer,
+          timeMs: alreadyAnswered ? alreadyAnswered.timeMs : timeMs,
+          correct: false,
+          points: 0,
+        }
+        await store.recordAnswer(sessionId, session.currentIndex, playerId, accumulated)
+        return { accepted: true, words }
+      }
+
       const correct = def.isCorrect(question.payload, answer)
       const points = def.score(question.payload, answer, { timeMs, maxMs, basePoints: question.basePoints })
 
       const submitted: SubmittedAnswer = { answer, timeMs, correct, points }
-      if (!session.answers[session.currentIndex]) session.answers[session.currentIndex] = {}
-      session.answers[session.currentIndex]![playerId] = submitted
 
-      await store.save(session)
+      // Aucun await entre la lecture par peek et l'insertion : la vérification « déjà répondu » et
+      // l'enregistrement restent atomiques sur la boucle d'événements.
+      await store.recordAnswer(sessionId, session.currentIndex, playerId, submitted)
       return { accepted: true }
     },
 
@@ -327,6 +420,9 @@ export function createEngine(deps: EngineDeps): Engine {
 
     allConnectedAnswered(session) {
       if (session.phase !== 'question') return false
+      const currentType = currentQuestion(session)?.type
+      if (currentType === 'wordcloud') return false
+      if (currentType === 'poll' && (currentQuestion(session)!.payload as PollPayload).multiple) return false
       const connectedPlayers = Object.values(session.players).filter((p) => p.connected)
       if (connectedPlayers.length < 1) return false
       const roundAnswers = session.answers[session.currentIndex] ?? {}
@@ -369,6 +465,8 @@ export function createEngine(deps: EngineDeps): Engine {
     // pendant `question`.
     questionResult(session) {
       const question = currentQuestion(session)
+      if (question?.type === 'wordcloud') return { correct: null, distribution: {} }
+      if (question?.type === 'poll') return { correct: null, distribution: {}, poll: engine.pollView(session)! }
       const roundAnswers = session.answers[session.currentIndex] ?? {}
       const distribution: Record<string, number> = {}
       for (const submitted of Object.values(roundAnswers)) {
@@ -376,6 +474,68 @@ export function createEngine(deps: EngineDeps): Engine {
         distribution[key] = (distribution[key] ?? 0) + 1
       }
       return { correct: question?.payload, distribution }
+    },
+
+    pollView(session) {
+      const question = currentQuestion(session)
+      if (question?.type !== 'poll') return null
+      const payload = question.payload as PollPayload
+      const answers = Object.values(session.answers[session.currentIndex] ?? {}).map(
+        (submitted) => submitted.answer as PollAnswer,
+      )
+      const { votes, voters } = tallyPoll(payload.options.length, answers)
+      return {
+        questionId: question.id,
+        multiple: payload.multiple,
+        voters,
+        options: payload.options.map((o, i) => ({ label: o.label, votes: votes[i]! })),
+      }
+    },
+
+    isCurrentQuestionScored(session) {
+      const question = currentQuestion(session)
+      return question ? isScoredType(question.type) : true
+    },
+
+    hasScoredQuestions(session) {
+      return session.questions.some((q) => isScoredType(q.type))
+    },
+
+    wordcloudView(session) {
+      const question = currentQuestion(session)
+      if (!question || question.type !== 'wordcloud') return null
+      const answers = Object.values(session.answers[session.currentIndex] ?? {}).map(
+        (submitted) => submitted.answer as WordcloudAnswer,
+      )
+      const removed = new Set(session.wordcloudRemoved?.[question.id] ?? [])
+      const aggregate = aggregateWords(answers, removed)
+      return {
+        questionId: question.id,
+        words: aggregate.words.slice(0, WORDCLOUD_VIEW_LIMIT),
+        participants: aggregate.participants,
+        totalWords: aggregate.totalWords,
+        truncated: aggregate.words.length > WORDCLOUD_VIEW_LIMIT,
+      }
+    },
+
+    async removeWord(sessionId, word) {
+      const session = await requireSession(sessionId)
+      const question = currentQuestion(session)
+      if (
+        !question ||
+        question.type !== 'wordcloud' ||
+        (session.phase !== 'question' && session.phase !== 'reveal' && session.phase !== 'scoreboard')
+      ) {
+        throw new Error('retrait impossible hors question nuage de mots')
+      }
+      const removedMap = session.wordcloudRemoved ?? {}
+      const removedKeys = removedMap[question.id] ?? []
+      const key = wordKey(word)
+      if (!removedKeys.includes(key)) removedKeys.push(key)
+      removedMap[question.id] = removedKeys
+      session.wordcloudRemoved = removedMap
+      await store.save(session)
+      return { session, questionId: question.id, removedKeys: [...removedKeys] }
     },
 
     async setPlayerConnected(sessionId, playerId, connected) {
@@ -390,6 +550,7 @@ export function createEngine(deps: EngineDeps): Engine {
 
     async reconnect(sessionId, joinToken) {
       const session = await requireSession(sessionId)
+      if (session.kickedJoinTokens?.includes(joinToken)) throw new PlayerKickedError()
       const player = Object.values(session.players).find((p) => p.joinToken === joinToken)
       if (!player) return null
       player.connected = true
@@ -397,8 +558,21 @@ export function createEngine(deps: EngineDeps): Engine {
       return { session, player }
     },
 
-    async progress(sessionId) {
+    async kickPlayer(sessionId, playerId) {
       const session = await requireSession(sessionId)
+      if (session.phase === 'podium') throw new Error('exclusion impossible au podium')
+      const player = session.players[playerId]
+      if (!player) return { session, kicked: null }
+      delete session.players[playerId]
+      // Manche non créditée : sa réponse ne doit plus compter (progress, auto-révélation, crédit).
+      if (!session.credited[session.currentIndex]) delete session.answers[session.currentIndex]?.[playerId]
+      session.kickedJoinTokens = [...(session.kickedJoinTokens ?? []), player.joinToken]
+      await store.save(session)
+      return { session, kicked: player }
+    },
+
+    async progress(sessionId) {
+      const session = await requirePeek(sessionId)
       const total = Object.keys(session.players).length
       const answered = Object.keys(session.answers[session.currentIndex] ?? {}).length
       return { answered, total }
@@ -406,6 +580,10 @@ export function createEngine(deps: EngineDeps): Engine {
 
     async getSession(sessionId) {
       return requireSession(sessionId)
+    },
+
+    async peekSession(sessionId) {
+      return requirePeek(sessionId)
     },
 
     async reanchorTimer(sessionId) {

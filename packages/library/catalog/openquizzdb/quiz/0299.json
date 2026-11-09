@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=299"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0299-2",
+      "type": "mcq",
+      "prompt": "Quel film a révélé Léa Seydoux au grand public ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Intouchables",
+            "correct": false
+          },
+          {
+            "label": "La Vie d'Adèle",
+            "correct": true
+          },
+          {
+            "label": "Amélie Poulain",
+            "correct": false
+          },
+          {
+            "label": "Kill Bill",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "cinema",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

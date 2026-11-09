@@ -6,6 +6,7 @@ import {
   countOwners,
   setMemberRole,
   removeMember,
+  revokePendingInvitationsBy,
   type Db,
 } from '@splootlabs/db'
 import { hasPermission, type AppConfig, type Role } from '@splootlabs/shared'
@@ -66,6 +67,8 @@ export function registerMemberRoutes(app: FastifyInstance, deps: Deps): void {
         if (currentRole === nextRole) return { userId: targetUserId, role: nextRole }
         const updated = await setMemberRole(scope, targetUserId, nextRole)
         if (!updated) return reply.code(404).send({ error: 'Membre introuvable.' })
+        // Perte de members:manage : les invitations en attente de l'auteur ne doivent plus servir.
+        if (!hasPermission(nextRole, 'members:manage')) await revokePendingInvitationsBy(scope, targetUserId)
         return updated
       })
     },
@@ -89,6 +92,7 @@ export function registerMemberRoutes(app: FastifyInstance, deps: Deps): void {
         }
         const ok = await removeMember(scope, targetUserId)
         if (!ok) return reply.code(404).send({ error: 'Membre introuvable.' })
+        await revokePendingInvitationsBy(scope, targetUserId)
         return { ok: true }
       })
     },

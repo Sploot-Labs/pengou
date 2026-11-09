@@ -1,0 +1,959 @@
+{
+  "questions": {
+    "otdb-48fee338470c": {
+      "skip": "doublon de oqdb-0263-1"
+    },
+    "otdb-4d3dd54cd182": {
+      "prompt": "Quel est le deuxième plus grand pays du monde par la superficie ?",
+      "options": [
+        "Russie",
+        "Canada",
+        "États-Unis",
+        "Chine"
+      ]
+    },
+    "otdb-4f0f4ef13ab7": {
+      "prompt": "Quelle est la superficie de la Cité du Vatican ?",
+      "options": [
+        "0,86 km²",
+        "0,10 km²",
+        "12,00 km²",
+        "0,44 km²"
+      ]
+    },
+    "otdb-508bfa1c5079": {
+      "prompt": "Brugelette, Arlon et Ath sont des villes de quel pays ?",
+      "options": [
+        "Andorre",
+        "Belgique",
+        "Luxembourg",
+        "France"
+      ]
+    },
+    "otdb-572b001645d7": {
+      "prompt": "Quel est le plus petit pays du monde ?",
+      "options": [
+        "Cité du Vatican",
+        "Monaco",
+        "Titania",
+        "Lesotho"
+      ]
+    },
+    "otdb-5b4ed7b06d27": {
+      "prompt": "Laquelle de ces villes n'est PAS en Inde ?",
+      "options": [
+        "Ghaziabad",
+        "Islamabad",
+        "Ahmedabad",
+        "Hyderabad"
+      ]
+    },
+    "otdb-5c831f731398": {
+      "prompt": "Quelle est la capitale de l'Estonie ?",
+      "options": [
+        "Tartu",
+        "Tallinn",
+        "Helsinki",
+        "Riga"
+      ]
+    },
+    "otdb-5edeb288d9cf": {
+      "prompt": "La Nouvelle-Écosse se trouve sur la côte est du Canada."
+    },
+    "otdb-5ef7614b707e": {
+      "prompt": "Lequel de ces pays n'est pas membre de l'ONU ?",
+      "options": [
+        "Monténégro",
+        "Tuvalu",
+        "Soudan du Sud",
+        "Niue"
+      ]
+    },
+    "otdb-60ffb01b4b7b": {
+      "prompt": "Quel pays a pour code « CH » ?",
+      "options": [
+        "Aucun pays",
+        "Canada",
+        "Suisse",
+        "Chine"
+      ]
+    },
+    "otdb-630a29873c61": {
+      "prompt": "Sur quel(s) continent(s) se trouve l'Espagne, tous territoires compris ?",
+      "options": [
+        "Europe et Asie",
+        "Europe",
+        "Europe, Afrique et Asie",
+        "Europe et Afrique"
+      ]
+    },
+    "otdb-63217852959e": {
+      "prompt": "Les îles Andaman-et-Nicobar, en Asie du Sud-Est, dépendent de quel pays ?",
+      "options": [
+        "Vietnam",
+        "Thaïlande",
+        "Indonésie",
+        "Inde"
+      ]
+    },
+    "otdb-647c3a3c5fe5": {
+      "prompt": "New Haven est la capitale de l'État du Connecticut, aux États-Unis."
+    },
+    "otdb-6d5a454af844": {
+      "prompt": "Quel est le pays à majorité musulmane le plus peuplé en 2010 ?",
+      "options": [
+        "Arabie saoudite",
+        "Soudan",
+        "Iran",
+        "Indonésie"
+      ]
+    },
+    "otdb-708ca8904460": {
+      "prompt": "Dans quelle ville indienne se trouve le Taj Mahal ?",
+      "options": [
+        "Faridabad",
+        "Agra",
+        "Thane",
+        "Mumbai"
+      ]
+    },
+    "otdb-7824bcace715": {
+      "prompt": "Quelle est la capitale de l'Espagne ?",
+      "options": [
+        "Barcelone",
+        "Madrid",
+        "Tolède",
+        "Séville"
+      ]
+    },
+    "otdb-78f8a4d9c51e": {
+      "prompt": "Quel est le plus petit pays d'Amérique du Sud par la superficie ?",
+      "options": [
+        "Uruguay",
+        "Suriname",
+        "Chili",
+        "Brésil"
+      ]
+    },
+    "otdb-7a21699f7885": {
+      "prompt": "Quel pays est entièrement enclavé dans l'Afrique du Sud ?",
+      "options": [
+        "Botswana",
+        "Swaziland",
+        "Zimbabwe",
+        "Lesotho"
+      ]
+    },
+    "otdb-7dd44ebccdca": {
+      "prompt": "Lequel de ces pays ne faisait pas partie de l'Union soviétique ?",
+      "options": [
+        "Tadjikistan",
+        "Biélorussie",
+        "Turkménistan",
+        "Roumanie"
+      ]
+    },
+    "otdb-7f2344b71db9": {
+      "prompt": "Quel est le plus long fleuve d'Europe ?",
+      "options": [
+        "Volga",
+        "Danube",
+        "Dniepr",
+        "Oural"
+      ]
+    },
+    "otdb-833db0ee6dd2": {
+      "prompt": "Quand la Finlande fête-t-elle son indépendance ?",
+      "options": [
+        "8 février",
+        "2 janvier",
+        "6 décembre",
+        "12 novembre"
+      ]
+    },
+    "otdb-85106bbe4fca": {
+      "prompt": "Quelle est la capitale des Bermudes ?",
+      "options": [
+        "La Havane",
+        "San Juan",
+        "Hamilton",
+        "Saint-Domingue"
+      ]
+    },
+    "otdb-87d40d274509": {
+      "prompt": "Laquelle de ces îles méditerranéennes est sous souveraineté française ?",
+      "options": [
+        "Corse",
+        "Sardaigne",
+        "Malte",
+        "Majorque"
+      ]
+    },
+    "otdb-89cf9c825cb7": {
+      "prompt": "La Hongrie est le seul pays du monde dont le nom commence par H."
+    },
+    "otdb-8e8e6c35cf8a": {
+      "prompt": "Combien de provinces y a-t-il aux Pays-Bas ?",
+      "options": [
+        "14",
+        "12",
+        "10",
+        "13"
+      ]
+    },
+    "otdb-915ae24c6e90": {
+      "prompt": "Quel océan borde la côte ouest des États-Unis ?",
+      "options": [
+        "Arctique",
+        "Pacifique",
+        "Atlantique",
+        "Indien"
+      ]
+    },
+    "otdb-947491dd00ce": {
+      "prompt": "La capitale de lequel de ces pays commence par un B ?",
+      "options": [
+        "Koweït",
+        "Qatar",
+        "Liban",
+        "Jordanie"
+      ]
+    },
+    "otdb-970c51eb946c": {
+      "prompt": "Tokyo est la capitale du Japon."
+    },
+    "otdb-98812fc6b5cf": {
+      "prompt": "Combien de pays ont une frontière terrestre avec le Luxembourg ?",
+      "options": [
+        "3",
+        "5",
+        "2",
+        "4"
+      ]
+    },
+    "otdb-98b2c9745ea5": {
+      "prompt": "Quel est le plus petit État des États-Unis ?",
+      "options": [
+        "Rhode Island",
+        "Vermont",
+        "Massachusetts",
+        "Maine"
+      ]
+    },
+    "otdb-992db0e428bf": {
+      "prompt": "Quel est le pays le moins peuplé du monde ?",
+      "options": [
+        "Cité du Vatican",
+        "Îles Marshall",
+        "Nauru",
+        "Liechtenstein"
+      ]
+    },
+    "otdb-9a434d9626bb": {
+      "prompt": "Quel État américain est surnommé « The Golden State » ?",
+      "options": [
+        "Alaska",
+        "Nouveau-Mexique",
+        "Floride",
+        "Californie"
+      ]
+    },
+    "otdb-9d1cd6a1f239": {
+      "prompt": "Dans quelle mer le Jourdain se jette-t-il ?",
+      "options": [
+        "Mer d'Aral",
+        "Mer Morte",
+        "Mer Caspienne",
+        "Mer de Salton"
+      ]
+    },
+    "otdb-a64abeb66e74": {
+      "prompt": "Où se trouve l'escalier de la Trinité-des-Monts (« Spanish Steps ») ?",
+      "options": [
+        "Barcelone, Espagne",
+        "Berlin, Allemagne",
+        "Rome, Italie",
+        "Londres, Angleterre"
+      ]
+    },
+    "otdb-aa8f23a28a4e": {
+      "prompt": "Quel pays ne fait pas partie de la Scandinavie ?",
+      "options": [
+        "Danemark",
+        "Suède",
+        "Finlande",
+        "Norvège"
+      ]
+    },
+    "otdb-b07f826a3c31": {
+      "prompt": "Lequel de ces anciens États yougoslaves est sans accès à la mer ?",
+      "options": [
+        "Bosnie-Herzégovine",
+        "Serbie",
+        "Monténégro",
+        "Croatie"
+      ]
+    },
+    "otdb-bd49c696a981": {
+      "prompt": "Quelle est la plus grande de ces 4 îles ?",
+      "options": [
+        "Madagascar",
+        "Bornéo",
+        "Grande-Bretagne",
+        "Cuba"
+      ]
+    },
+    "otdb-c046e9323d8c": {
+      "prompt": "Le Groenland est couvert d'herbe et l'Islande de glace."
+    },
+    "otdb-c0c793c1b6e5": {
+      "prompt": "Dans quel pays coule le Taedong ?",
+      "options": [
+        "Corée du Nord",
+        "Japon",
+        "Chine",
+        "Corée du Sud"
+      ]
+    },
+    "otdb-c23251c14237": {
+      "prompt": "Miami est la plus grande ville de Floride."
+    },
+    "otdb-c233f2c2e7dd": {
+      "prompt": "Quelle région d'Europe de l'Est est célèbre pour ses vampires ?",
+      "options": [
+        "Transylvanie",
+        "Macédoine",
+        "Silésie",
+        "Slovaquie"
+      ]
+    },
+    "otdb-c2dc0fd0b811": {
+      "prompt": "Bridgetown est la capitale de quel pays insulaire des Caraïbes ?",
+      "options": [
+        "Jamaïque",
+        "Cuba",
+        "Dominique",
+        "Barbade"
+      ]
+    },
+    "otdb-c7dc508c1114": {
+      "prompt": "Quel pays est voisin du Belize ?",
+      "options": [
+        "Laos",
+        "Kenya",
+        "Guatemala",
+        "Pérou"
+      ]
+    },
+    "otdb-ca116bab287a": {
+      "prompt": "Dans quel pays d'Afrique de l'Ouest se trouve la cité historique de Tombouctou ?",
+      "options": [
+        "Niger",
+        "Mali",
+        "Sénégal",
+        "Burkina Faso"
+      ]
+    },
+    "otdb-cc95c8db6e84": {
+      "prompt": "Quelle langue inuite a été la première à utiliser une écriture non latine ?",
+      "options": [
+        "Iñupiaq",
+        "Inuktitut",
+        "Inuinnaqtun",
+        "Groenlandais"
+      ]
+    },
+    "otdb-cd0a813b003f": {
+      "prompt": "Lequel de ces pays est doublement enclavé (entouré uniquement de pays sans littoral) ?",
+      "options": [
+        "Ouzbékistan",
+        "Éthiopie",
+        "Bolivie",
+        "Suisse"
+      ]
+    },
+    "otdb-d15a71a9b7b4": {
+      "prompt": "Quel pays a trois capitales ?",
+      "options": [
+        "Royaume-Uni",
+        "Somalie",
+        "Chine",
+        "Afrique du Sud"
+      ]
+    },
+    "otdb-d2caefd849e2": {
+      "prompt": "Comment s'appelait l'ancien pays dont sont issues la Serbie, la Croatie et la Slovénie ?",
+      "options": [
+        "Ossétie du Sud",
+        "Abkhazie",
+        "Yougoslavie",
+        "Tchécoslovaquie"
+      ]
+    },
+    "otdb-d51d30bc31f9": {
+      "prompt": "Quel est le cinquième plus grand pays par la superficie ?",
+      "options": [
+        "Australie",
+        "Brésil",
+        "États-Unis",
+        "Inde"
+      ]
+    },
+    "otdb-d69fae85c81a": {
+      "prompt": "Quelle ville polonaise les Allemands appellent-ils Danzig ?",
+      "options": [
+        "Gdańsk",
+        "Zakopane",
+        "Poznań",
+        "Varsovie"
+      ]
+    },
+    "otdb-d76ead9b448e": {
+      "prompt": "Dans quel pays se trouvent les monts Hunua ?",
+      "options": [
+        "Nouvelle-Zélande",
+        "Népal",
+        "Mexique",
+        "Chine"
+      ]
+    },
+    "otdb-da02934a343b": {
+      "prompt": "Ottawa est la capitale du Canada."
+    },
+    "otdb-db047052b22e": {
+      "prompt": "La capitale du Brésil est Rio de Janeiro."
+    },
+    "otdb-dcc60577faae": {
+      "prompt": "La principauté de Sealand, micronation non reconnue, se trouve au large de quel pays ?",
+      "options": [
+        "Japon",
+        "Argentine",
+        "Australie",
+        "Royaume-Uni"
+      ]
+    },
+    "otdb-dd8fafdf61c2": {
+      "prompt": "Où se trouve la ville de Haarlem ?",
+      "options": [
+        "Suisse",
+        "Allemagne",
+        "Pays-Bas",
+        "États-Unis"
+      ]
+    },
+    "otdb-df994f5cfa0f": {
+      "prompt": "Quel est le plus grand lac d'Afrique ?",
+      "options": [
+        "Lac Tanganyika",
+        "Lac Turkana",
+        "Lac Malawi",
+        "Lac Victoria"
+      ]
+    },
+    "otdb-e16d466e2294": {
+      "prompt": "Sur quelle île galloise se trouve le village de Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch ?",
+      "options": [
+        "Barry",
+        "Bardsey",
+        "Caldey",
+        "Anglesey"
+      ]
+    },
+    "otdb-e53e4ce34812": {
+      "prompt": "Quel passage relie l'océan Atlantique à la Méditerranée ?",
+      "options": [
+        "Détroit de Gibraltar",
+        "Chenal de Tanger",
+        "Passage de Gibraltar",
+        "Détroits espagnols"
+      ]
+    },
+    "otdb-eb825afba97e": {
+      "prompt": "Combien de pays indépendants compte l'Amérique du Sud ?",
+      "options": [
+        "12",
+        "9",
+        "8",
+        "10"
+      ]
+    },
+    "otdb-f179a758be81": {
+      "prompt": "Quel pays revendique le Kosovo, territoire contesté ?",
+      "options": [
+        "Albanie",
+        "Croatie",
+        "Macédoine du Nord",
+        "Serbie"
+      ]
+    },
+    "otdb-f2cf053285aa": {
+      "prompt": "Lequel de ces archipels ne fait PAS partie du Royaume-Uni ?",
+      "options": [
+        "Îles Shetland",
+        "Orcades",
+        "Îles Anglo-Normandes",
+        "Îles Sorlingues"
+      ]
+    },
+    "otdb-f860ef14255f": {
+      "prompt": "Quelle ville allemande est traversée par l'Isar ?",
+      "options": [
+        "Hambourg",
+        "Berlin",
+        "Dortmund",
+        "Munich"
+      ]
+    },
+    "otdb-f925d2e7fb0d": {
+      "prompt": "Sur quel continent se trouve la cordillère des Andes ?",
+      "options": [
+        "Afrique",
+        "Amérique du Sud",
+        "Europe",
+        "Asie"
+      ]
+    },
+    "otdb-0129a7f88a98": {
+      "prompt": "De quelle origine était le sultan Saladin ?",
+      "options": [
+        "Arabe",
+        "Égyptienne",
+        "Syrienne",
+        "Kurde"
+      ]
+    },
+    "otdb-0a1879139f41": {
+      "prompt": "Le calendrier éthiopien compte 13 mois."
+    },
+    "otdb-0dee9264fb43": {
+      "prompt": "Qui dirigeait la France pendant la Terreur ?",
+      "options": [
+        "Louis XVI",
+        "Napoléon Bonaparte",
+        "Jean-Paul Marat",
+        "Maximilien Robespierre"
+      ]
+    },
+    "otdb-0eb4303f71c7": {
+      "prompt": "Lequel de ces Pères fondateurs des États-Unis est devenu président ?",
+      "options": [
+        "James Monroe",
+        "Samuel Adams",
+        "Roger Sherman",
+        "Alexander Hamilton"
+      ]
+    },
+    "otdb-0f296a474252": {
+      "prompt": "Comment s'appelait le B-29 qui a largué la bombe « Little Boy » sur Hiroshima ?",
+      "options": [
+        "Necessary Evil",
+        "Full House",
+        "Enola Gay",
+        "The Great Artiste"
+      ]
+    },
+    "otdb-12064ee25495": {
+      "prompt": "Le Titanic a coulé lors de son voyage inaugural de Southampton vers quelle ville américaine ?",
+      "options": [
+        "New York",
+        "Boston",
+        "Philadelphie",
+        "Washington"
+      ]
+    },
+    "otdb-131ff08644fc": {
+      "prompt": "Pendant la guerre d'Hiver, l'URSS a eu cinq fois plus de morts et de disparus que la Finlande."
+    },
+    "otdb-1acbb7d874b4": {
+      "prompt": "En quelle année l'Irak a-t-il envahi le Koweït ?",
+      "options": [
+        "1992",
+        "1990",
+        "1986",
+        "1988"
+      ]
+    },
+    "otdb-1bd8709562c9": {
+      "prompt": "En quelle année la Première Guerre mondiale a-t-elle pris fin ?",
+      "options": [
+        "1916",
+        "1912",
+        "1918",
+        "1914"
+      ]
+    },
+    "otdb-1eef60fbe546": {
+      "prompt": "Les Védas, recueil d'hymnes sanskrits, sont des textes sacrés de quelle religion ?",
+      "options": [
+        "Hindouisme",
+        "Judaïsme",
+        "Islam",
+        "Bouddhisme"
+      ]
+    },
+    "otdb-1fd50ff6f75d": {
+      "prompt": "Quand les États-Unis ont-ils déclaré la guerre au Japon, entrant dans la Seconde Guerre mondiale ?",
+      "options": [
+        "1er septembre 1939",
+        "22 juin 1941",
+        "8 décembre 1941",
+        "6 juin 1944"
+      ]
+    },
+    "otdb-275a30a565df": {
+      "prompt": "Le terme « luddite » désignait à l'origine des ouvriers mécontents de quelle industrie ?",
+      "options": [
+        "Céramique",
+        "Textile",
+        "Mines",
+        "Agriculture"
+      ]
+    },
+    "otdb-27dc100367c8": {
+      "prompt": "Quel roi d'Angleterre a épousé Aliénor d'Aquitaine ?",
+      "options": [
+        "Henri V",
+        "Henri Ier",
+        "Richard Ier",
+        "Henri II"
+      ]
+    },
+    "otdb-283fdb329c50": {
+      "prompt": "Les émeus ont gagné la guerre des émeus de 1932."
+    },
+    "otdb-2ac21a16d90a": {
+      "prompt": "Pol Pot a été dictateur de quel pays ?",
+      "options": [
+        "Vietnam",
+        "Cambodge",
+        "Corée du Nord",
+        "Laos"
+      ]
+    },
+    "otdb-2c9a5dbf426e": {
+      "prompt": "Que s'est-il passé le 6 juin 1944 ?",
+      "options": [
+        "Libération de Paris",
+        "Hiroshima et Nagasaki",
+        "Pearl Harbor",
+        "Le Jour J"
+      ]
+    },
+    "otdb-362fb3ebc531": {
+      "prompt": "En quelle année a eu lieu la bataille d'Azincourt ?",
+      "options": [
+        "1463",
+        "1401",
+        "1415",
+        "1422"
+      ]
+    },
+    "otdb-389189040353": {
+      "prompt": "Quel roi a été tué à la bataille de Bosworth en 1485 ?",
+      "options": [
+        "Richard III",
+        "Édouard V",
+        "Henri VII",
+        "Jacques Ier"
+      ]
+    },
+    "otdb-38b13b044b55": {
+      "prompt": "Quel fabricant a conçu le minigun en 1960 ?",
+      "options": [
+        "General Electric",
+        "Heckler & Koch",
+        "Colt",
+        "Sig Sauer"
+      ]
+    },
+    "otdb-3c4e4a1620b0": {
+      "prompt": "Quel micro-État a la plus ancienne constitution encore en vigueur ?",
+      "options": [
+        "Saint-Marin",
+        "Monaco",
+        "Saint-Kitts-et-Nevis",
+        "Andorre"
+      ]
+    },
+    "otdb-406be632d7c5": {
+      "prompt": "En quelle année Nelson Mandela a-t-il été libéré de prison ?",
+      "options": [
+        "1994",
+        "1992",
+        "1990",
+        "1980"
+      ]
+    },
+    "otdb-475176886ac9": {
+      "prompt": "Qui était un stratège militaire de la période des Zhou orientaux ?",
+      "options": [
+        "Vlad l'Empaleur",
+        "Sun Tzu",
+        "Gengis Khan",
+        "Lü Bu"
+      ]
+    },
+    "otdb-476a72fd04dd": {
+      "prompt": "Quand la Jamaïque a-t-elle obtenu son indépendance du Royaume-Uni ?",
+      "options": [
+        "1963",
+        "1492",
+        "1962",
+        "1987"
+      ]
+    },
+    "otdb-47de9d4760f0": {
+      "prompt": "Quand a pris fin la bataille des Ardennes ?",
+      "options": [
+        "6 août 1945",
+        "16 décembre 1944",
+        "25 janvier 1945",
+        "7 décembre 1941"
+      ]
+    },
+    "otdb-482a7f8e6a15": {
+      "prompt": "Lors des invasions mongoles du Japon, qu'est-ce qui a surtout arrêté les navires mongols ?",
+      "options": [
+        "Des typhons",
+        "Des tornades",
+        "Des samouraïs",
+        "Une crise économique"
+      ]
+    },
+    "otdb-4ccfce05edfd": {
+      "prompt": "Le président John F. Kennedy a été assassiné lors de son cortège à Atlanta, en Géorgie, le 22 novembre 1963."
+    },
+    "otdb-4e263388396a": {
+      "prompt": "Quand le calendrier grégorien a-t-il été adopté pour la première fois ?",
+      "options": [
+        "1582",
+        "1623",
+        "1555",
+        "1501"
+      ]
+    },
+    "otdb-517ad0b849b9": {
+      "prompt": "Après la bataille de Marj Dabiq (1516), les Ottomans ont pris Jérusalem à quel sultanat ?",
+      "options": [
+        "Mamelouk",
+        "Omeyyade",
+        "Ayyoubide",
+        "Seldjoukide"
+      ]
+    },
+    "otdb-55b700aca9f5": {
+      "prompt": "Quand Google a-t-il été fondé ?",
+      "options": [
+        "9 octobre 1997",
+        "7 février 2000",
+        "4 septembre 1998",
+        "12 décembre 1989"
+      ]
+    },
+    "otdb-57942d56a141": {
+      "prompt": "Quelle a été la bataille la plus meurtrière en une journée de la guerre de Sécession ?",
+      "options": [
+        "Antietam",
+        "Chancellorsville",
+        "Gettysburg",
+        "Siège de Vicksburg"
+      ]
+    },
+    "otdb-5f7859cc2457": {
+      "prompt": "Quand la Grande Guerre patriotique s'est-elle terminée en URSS ?",
+      "options": [
+        "11 décembre 1945",
+        "9 mai 1945",
+        "9 août 1945",
+        "2 septembre 1945"
+      ]
+    },
+    "otdb-60919da3e1b2": {
+      "prompt": "Qui a couronné Charlemagne empereur le jour de Noël 800 ?",
+      "options": [
+        "Pape Étienne V",
+        "Pape Léon III",
+        "Pape Urbain IV",
+        "Pape Valentin"
+      ]
+    },
+    "otdb-650cc9c6c34f": {
+      "prompt": "Quel personnage historique est célèbre pour la phrase « Qu'ils mangent de la brioche », sans doute jamais prononcée ?",
+      "options": [
+        "Élisabeth Ire",
+        "Tsar Nicolas II",
+        "Marie-Antoinette",
+        "Henri VIII"
+      ]
+    },
+    "otdb-6532da3c258d": {
+      "prompt": "L'Empire ottoman a été dissous après sa défaite dans quelle guerre ?",
+      "options": [
+        "Guerre de Crimée",
+        "Révolution serbe",
+        "Première Guerre mondiale",
+        "Seconde guerre balkanique"
+      ]
+    },
+    "otdb-68057e9d8869": {
+      "prompt": "Pendant la guerre du Pacifique (1879-1883), la Bolivie a perdu son accès à la mer face à quel pays ?",
+      "options": [
+        "Chili",
+        "Pérou",
+        "Brésil",
+        "Argentine"
+      ]
+    },
+    "otdb-6f3715529b1c": {
+      "prompt": "La quatrième cheminée du Titanic était factice, pour rendre le navire plus puissant et symétrique."
+    },
+    "otdb-6fa907dc807a": {
+      "prompt": "Qui a été Premier ministre du Royaume-Uni pendant la majeure partie de la Seconde Guerre mondiale ?",
+      "options": [
+        "Edward Heath",
+        "Harold Macmillan",
+        "Winston Churchill",
+        "Neville Chamberlain"
+      ]
+    },
+    "otdb-713cf859de85": {
+      "prompt": "Combien y a-t-il eu d'alunissages habités ?",
+      "options": [
+        "7",
+        "1",
+        "6",
+        "3"
+      ]
+    },
+    "otdb-72288eb09c8a": {
+      "prompt": "Qui a été le premier dirigeant d'Haïti après son indépendance ?",
+      "options": [
+        "Toussaint Louverture",
+        "Alexandre Pétion",
+        "Henri Christophe",
+        "Jean-Jacques Dessalines"
+      ]
+    },
+    "otdb-735502f5eea4": {
+      "prompt": "En quelle année a eu lieu le krach de Wall Street ?",
+      "options": [
+        "1925",
+        "1932",
+        "1930",
+        "1929"
+      ]
+    },
+    "otdb-7371e6dc4c82": {
+      "prompt": "Quel produit chimique a été déversé sur le Vietnam pendant la guerre du Vietnam ?",
+      "options": [
+        "Cyanure d'hydrogène",
+        "Phosgène",
+        "Gaz moutarde",
+        "Agent orange"
+      ]
+    },
+    "otdb-79fb25fda650": {
+      "prompt": "Le cuirassé USS Missouri (BB-63) a servi pour la dernière fois pendant la guerre de Corée."
+    },
+    "otdb-7f2b15d123a3": {
+      "prompt": "Le système américain de défense stratégique de la guerre froide portait le nom de quel film ?",
+      "options": [
+        "Blade Runner",
+        "Alien",
+        "Les Dents de la mer",
+        "Star Wars"
+      ]
+    },
+    "otdb-82fdd7353184": {
+      "prompt": "Quel pays ne faisait PAS partie des Empires centraux pendant la Première Guerre mondiale ?",
+      "options": [
+        "Empire ottoman",
+        "Espagne",
+        "Allemagne",
+        "Autriche-Hongrie"
+      ]
+    },
+    "otdb-84f0b8a3d2e6": {
+      "prompt": "En quelle année Constantinople a-t-elle été conquise par les Turcs ?",
+      "options": [
+        "1440",
+        "1435",
+        "1454",
+        "1453"
+      ]
+    },
+    "otdb-882eaba17c92": {
+      "prompt": "Qui a été le premier Premier ministre du Canada ?",
+      "options": [
+        "Robert Borden",
+        "John Abbott",
+        "Alexander Mackenzie",
+        "John Macdonald"
+      ]
+    },
+    "otdb-8c68a13ce8c0": {
+      "prompt": "Où et quand a été fabriquée la première boîte en carton à usage industriel ?",
+      "options": [
+        "Angleterre, 1917",
+        "États-Unis, 1817",
+        "Angleterre, 1817",
+        "États-Unis, 1917"
+      ]
+    },
+    "otdb-8ccfeb49468d": {
+      "prompt": "Adolf Hitler a été jugé au procès de Nuremberg."
+    },
+    "otdb-8d62f2070dca": {
+      "prompt": "Quand la construction du canal de Suez s'est-elle achevée ?",
+      "options": [
+        "1869",
+        "1859",
+        "1850",
+        "1860"
+      ]
+    },
+    "otdb-8e9ad1e15b82": {
+      "prompt": "Quand la NSA américaine a-t-elle été créée ?",
+      "options": [
+        "1er juillet 1973",
+        "26 juillet 1908",
+        "25 novembre 2002",
+        "4 novembre 1952"
+      ]
+    },
+    "otdb-92fb4282abe7": {
+      "prompt": "Quel palais d'Henri VIII, près de Richmond (Londres), existe encore ?",
+      "options": [
+        "Buckingham Palace",
+        "Coughton Court",
+        "St James's Palace",
+        "Hampton Court"
+      ]
+    },
+    "otdb-948960cba94b": {
+      "prompt": "Quand la République populaire de Chine a-t-elle été fondée ?",
+      "options": [
+        "7 mai 1945",
+        "6 décembre 1950",
+        "3 avril 1947",
+        "1er octobre 1949"
+      ]
+    },
+    "otdb-9619b06bd02f": {
+      "prompt": "L'université d'Oxford est plus ancienne que l'Empire aztèque."
+    },
+    "otdb-98dd43ae5ec0": {
+      "prompt": "En quelle année la Norvège a-t-elle adopté sa constitution ?",
+      "options": [
+        "1854",
+        "1814",
+        "1905",
+        "1932"
+      ]
+    },
+    "otdb-a6536abb4cce": {
+      "prompt": "La majorité des habitants de l'Empire byzantin se disaient Romains."
+    }
+  },
+  "quizzes": {}
+}

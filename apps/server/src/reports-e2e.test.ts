@@ -1,5 +1,6 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import type { FastifyInstance } from 'fastify'
+import { eq } from 'drizzle-orm'
 import { io as ioClient, type Socket as ClientSocket } from 'socket.io-client'
 import {
   startTestDb,
@@ -7,6 +8,7 @@ import {
   schema,
   tenantScope,
   createQuiz,
+  setWordcloudRemoved,
   createGameSession,
   addSessionPlayer,
   recordAnswer,
@@ -113,9 +115,16 @@ function waitFor<T = unknown>(client: ClientSocket, event: string): Promise<T> {
 }
 
 /** Collecte tous les événements `event` reçus — même utilitaire que game-e2e.test.ts. */
-function collect<T = unknown>(client: ClientSocket, event: string): { atLeast: (n: number) => Promise<T> } {
+function collect<T = unknown>(
+  client: ClientSocket,
+  event: string,
+): {
+  atLeast: (n: number) => Promise<T>
+  until: (predicate: (payload: T) => boolean) => Promise<T>
+} {
   const received: T[] = []
   const waiters: Array<{ n: number; resolve: (v: T) => void }> = []
+  const matchers: Array<{ predicate: (payload: T) => boolean; resolve: (v: T) => void }> = []
   client.on(event, (payload: T) => {
     received.push(payload)
     for (const w of [...waiters]) {
@@ -124,11 +133,24 @@ function collect<T = unknown>(client: ClientSocket, event: string): { atLeast: (
         w.resolve(received[w.n - 1])
       }
     }
+    for (const m of [...matchers]) {
+      if (m.predicate(payload)) {
+        matchers.splice(matchers.indexOf(m), 1)
+        m.resolve(payload)
+      }
+    }
   })
   return {
     atLeast(n: number) {
       if (received.length >= n) return Promise.resolve(received[n - 1])
       return new Promise((resolve) => waiters.push({ n, resolve }))
+    },
+    // Premier payload (déjà reçu ou à venir) qui satisfait `predicate` : la diffusion du lobby
+    // étant coalescée, on attend un état (ex. « 3 joueurs ») plutôt qu'un nombre d'événements.
+    until(predicate: (payload: T) => boolean) {
+      const found = received.find(predicate)
+      if (found !== undefined) return Promise.resolve(found)
+      return new Promise((resolve) => matchers.push({ predicate, resolve }))
     },
   }
 }
@@ -265,7 +287,8 @@ describe('e2e — jouer une partie puis consulter le rapport (liste, détail, CS
       const bobPlayerId = join2.playerId!
       const carolPlayerId = join3.playerId!
 
-      await lobbyUpdates.atLeast(3)
+      // Diffusion coalescée : on attend l'état final (3 joueurs), pas un événement par arrivée.
+      await lobbyUpdates.until((u) => u.players.length === 3)
 
       // ============================================================================
       // Q1 (mcq) : Alice rapide-correcte, Bob lent-correct (écart de 300ms mesuré
@@ -445,6 +468,195 @@ describe('e2e — jouer une partie puis consulter le rapport (liste, détail, CS
       expect(foreignCsv.statusCode).toBe(404)
     } finally {
       for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 30_000)
+})
+
+describe('export CSV avec un nuage de mots', () => {
+  it('exporte le nuage mot par mot et le laisse hors des statistiques', async () => {
+    const { app } = await buildApp()
+    try {
+      const cookie = await signUp(app, 'e2e-wordcloud-csv@example.com')
+      const [host] = await ctx.db
+        .select()
+        .from(schema.user)
+        .where(eq(schema.user.email, 'e2e-wordcloud-csv@example.com'))
+      const [tenantRow] = await ctx.db.select().from(schema.tenant).limit(1)
+      const quizRes = await app.inject({
+        method: 'POST',
+        url: '/api/quizzes',
+        payload: { title: 'Quiz nuage csv' },
+        headers: { 'content-type': 'application/json', cookie },
+      })
+      const quiz = quizRes.json() as { id: string }
+      const [quizRow] = await ctx.db.select().from(schema.quiz).where(eq(schema.quiz.id, quiz.id))
+      const tenantId = quizRow.tenantId ?? tenantRow.id
+      const [cloud] = await ctx.db
+        .insert(schema.question)
+        .values({
+          quizId: quiz.id,
+          tenantId,
+          type: 'wordcloud',
+          prompt: 'Un mot sur le matin',
+          timeLimit: 20,
+          orderIndex: 0,
+          payload: {},
+        })
+        .returning()
+      const session = await createGameSession(tenantScope(ctx.db, tenantId), {
+        quizId: quiz.id,
+        hostId: host.id,
+        pin: '777001',
+      })
+      const sessionId = session!.id
+      const a = await addSessionPlayer(ctx.db, sessionId, { nickname: 'Ana', joinToken: 'tok-ana-wc' })
+      const b = await addSessionPlayer(ctx.db, sessionId, { nickname: 'Ben', joinToken: 'tok-ben-wc' })
+      await recordAnswer(ctx.db, {
+        sessionId,
+        questionId: cloud.id,
+        playerId: a.id,
+        answer: { words: ['café', 'rush'] },
+        timeMs: 1000,
+        isCorrect: false,
+        points: 0,
+      })
+      await recordAnswer(ctx.db, {
+        sessionId,
+        questionId: cloud.id,
+        playerId: b.id,
+        answer: { words: ['Café'] },
+        timeMs: 1000,
+        isCorrect: false,
+        points: 0,
+      })
+      await setSessionStatus(ctx.db, sessionId, 'ended')
+
+      const csv = (
+        await app.inject({ method: 'GET', url: `/api/sessions/${sessionId}/export.csv`, headers: { cookie } })
+      ).body
+      const lines = csv.split('\r\n')
+      expect(lines).toContain('1,Un mot sur le matin,2,,')
+      const i = lines.indexOf('"Nuage de mots : Un mot sur le matin (2 participants, 3 mots)"')
+      expect(i).toBeGreaterThan(-1)
+      expect(lines[i + 1]).toBe('Mot,Occurrences')
+      expect(lines[i + 2]).toBe('café,2')
+      expect(lines[i + 3]).toBe('rush,1')
+
+      await setWordcloudRemoved(ctx.db, sessionId, cloud.id, ['rush'])
+      const csv2 = (
+        await app.inject({ method: 'GET', url: `/api/sessions/${sessionId}/export.csv`, headers: { cookie } })
+      ).body
+      expect(csv2).not.toContain('rush')
+    } finally {
+      await app.close()
+    }
+  }, 30_000)
+})
+
+describe('export CSV avec un sondage', () => {
+  it('exporte la répartition par choix, y compris un sondage sans vote', async () => {
+    const { app } = await buildApp()
+    try {
+      const cookie = await signUp(app, 'e2e-poll-csv@example.com')
+      const [host] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'e2e-poll-csv@example.com'))
+      const [tenantRow] = await ctx.db.select().from(schema.tenant).limit(1)
+      const quizRes = await app.inject({
+        method: 'POST',
+        url: '/api/quizzes',
+        payload: { title: 'Quiz sondage csv' },
+        headers: { 'content-type': 'application/json', cookie },
+      })
+      const quiz = quizRes.json() as { id: string }
+      const [quizRow] = await ctx.db.select().from(schema.quiz).where(eq(schema.quiz.id, quiz.id))
+      const tenantId = quizRow.tenantId ?? tenantRow.id
+      const [mcq] = await ctx.db
+        .insert(schema.question)
+        .values({
+          quizId: quiz.id,
+          tenantId,
+          type: 'mcq',
+          prompt: 'QCM',
+          timeLimit: 20,
+          orderIndex: 0,
+          payload: {
+            options: [
+              { label: 'A', correct: true },
+              { label: 'B', correct: false },
+            ],
+          },
+        })
+        .returning()
+      const [poll] = await ctx.db
+        .insert(schema.question)
+        .values({
+          quizId: quiz.id,
+          tenantId,
+          type: 'poll',
+          prompt: 'Votre avis',
+          timeLimit: 20,
+          orderIndex: 1,
+          payload: { options: [{ label: 'Oui' }, { label: 'Non' }, { label: 'Peut-être' }], multiple: true },
+        })
+        .returning()
+      await ctx.db.insert(schema.question).values({
+        quizId: quiz.id,
+        tenantId,
+        type: 'poll',
+        prompt: 'Sondage vide',
+        timeLimit: 20,
+        orderIndex: 2,
+        payload: { options: [{ label: 'X' }, { label: 'Y' }], multiple: false },
+      })
+      const session = await createGameSession(tenantScope(ctx.db, tenantId), {
+        quizId: quiz.id,
+        hostId: host.id,
+        pin: '777002',
+      })
+      const sessionId = session!.id
+      const a = await addSessionPlayer(ctx.db, sessionId, { nickname: 'Ana', joinToken: 'tok-ana-poll' })
+      const b = await addSessionPlayer(ctx.db, sessionId, { nickname: 'Ben', joinToken: 'tok-ben-poll' })
+      await recordAnswer(ctx.db, {
+        sessionId,
+        questionId: mcq.id,
+        playerId: a.id,
+        answer: { choice: 0 },
+        timeMs: 1000,
+        isCorrect: true,
+        points: 900,
+      })
+      await recordAnswer(ctx.db, {
+        sessionId,
+        questionId: poll.id,
+        playerId: a.id,
+        answer: { optionIndexes: [0, 1] },
+        timeMs: 1000,
+        isCorrect: false,
+        points: 0,
+      })
+      await recordAnswer(ctx.db, {
+        sessionId,
+        questionId: poll.id,
+        playerId: b.id,
+        answer: { optionIndexes: [0] },
+        timeMs: 1000,
+        isCorrect: false,
+        points: 0,
+      })
+      await setSessionStatus(ctx.db, sessionId, 'ended')
+
+      const csv = (
+        await app.inject({ method: 'GET', url: `/api/sessions/${sessionId}/export.csv`, headers: { cookie } })
+      ).body
+      const lines = csv.split('\r\n')
+      expect(lines).toContain('2,Votre avis,2,,')
+      const i = lines.indexOf('Sondage : Votre avis (2 participants)')
+      expect(i).toBeGreaterThan(-1)
+      expect(lines.slice(i + 1, i + 5)).toEqual(['Choix,Votes,Pourcentage', 'Oui,2,100', 'Non,1,50', 'Peut-être,0,0'])
+      const j = lines.indexOf('Sondage : Sondage vide (0 participant)')
+      expect(j).toBeGreaterThan(-1)
+      expect(lines.slice(j + 1, j + 4)).toEqual(['Choix,Votes,Pourcentage', 'X,0,0', 'Y,0,0'])
+    } finally {
       await app.close()
     }
   }, 30_000)

@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=548"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0548-1-en",
+      "type": "mcq",
+      "prompt": "What is the name of the horse of Lucky Luke, the famous comic-book cowboy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pegasus",
+            "correct": false
+          },
+          {
+            "label": "Yakari",
+            "correct": false
+          },
+          {
+            "label": "Tornado",
+            "correct": false
+          },
+          {
+            "label": "Jolly Jumper",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0548-2-en",
+      "type": "mcq",
+      "prompt": "Which famous car brand has a rearing horse as its emblem?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alfa Romeo",
+            "correct": false
+          },
+          {
+            "label": "Ferrari",
+            "correct": true
+          },
+          {
+            "label": "Peugeot",
+            "correct": false
+          },
+          {
+            "label": "Lamborghini",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0548-3-en",
+      "type": "mcq",
+      "prompt": "What is the name of the winged horse of Greek mythology?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fungus",
+            "correct": false
+          },
+          {
+            "label": "Arion",
+            "correct": false
+          },
+          {
+            "label": "Bucephalus",
+            "correct": false
+          },
+          {
+            "label": "Pegasus",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0548-4-en",
+      "type": "mcq",
+      "prompt": "How many knights are on a chessboard at the start of a game?",
+      "payload": {
+        "options": [
+          {
+            "label": "Three",
+            "correct": false
+          },
+          {
+            "label": "Two",
+            "correct": false
+          },
+          {
+            "label": "Four",
+            "correct": true
+          },
+          {
+            "label": "One",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

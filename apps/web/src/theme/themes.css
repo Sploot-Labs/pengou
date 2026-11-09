@@ -23,6 +23,8 @@
   --success: var(--pengou-ok);
   --warn: var(--pengou-warn);
   --danger: var(--pengou-bad);
+  --ghost-line: var(--pengou-ghost-line);
+  --ghost-ink: var(--pengou-ghost-ink);
   /* Encre des boutons sémantiques, découplée de --ink-strong (qui bascule en
      clair en mode sombre et s'effondrerait sur les aplats vifs). Vérifié ≥4.5:1
      dans les deux schémas. */
@@ -93,6 +95,8 @@
   --success: #4fd6a6;
   --warn: #ffd15e;
   --danger: #ff6b5c;
+  --ghost-line: #2b7f99;
+  --ghost-ink: #6fd3ee;
   --success-ink: #0b2545;
   --danger-ink: #0b2545;
   --grad-brand: linear-gradient(135deg, #00a6cc, #7c6bf0);

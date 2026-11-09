@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=507"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0507-1",
+      "type": "mcq",
+      "prompt": "De quel petit objet utilise un golfeur pour poser sa balle ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Caddie",
+            "correct": false
+          },
+          {
+            "label": "Pitch",
+            "correct": false
+          },
+          {
+            "label": "Tee",
+            "correct": true
+          },
+          {
+            "label": "Putter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0507-3",
+      "type": "mcq",
+      "prompt": "À combien de sauts a droit un athlète en longueur en qualification ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Trois",
+            "correct": true
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          },
+          {
+            "label": "Deux",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0507-4",
+      "type": "mcq",
+      "prompt": "Dans le jargon de l'alpinisme, que fait un alpiniste qui dévisse ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Il dort",
+            "correct": false
+          },
+          {
+            "label": "Il mange",
+            "correct": false
+          },
+          {
+            "label": "Il tombe",
+            "correct": true
+          },
+          {
+            "label": "Il ôte un piton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sport",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

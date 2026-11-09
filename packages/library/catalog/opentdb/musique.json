@@ -1,0 +1,1912 @@
+{
+  "source": {
+    "name": "Open Trivia Database",
+    "license": "CC BY-SA 4.0",
+    "url": "https://opentdb.com"
+  },
+  "questions": [
+    {
+      "id": "otdb-0022bcee5bcc",
+      "type": "mcq",
+      "prompt": "What is the name of the 2016 mixtape released by Venezuelan electronic producer Arca?",
+      "payload": {
+        "options": [
+          {
+            "label": "Entrañas",
+            "correct": true
+          },
+          {
+            "label": "Xen",
+            "correct": false
+          },
+          {
+            "label": "Sheep",
+            "correct": false
+          },
+          {
+            "label": "&&&&&&",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0806098edbef",
+      "type": "mcq",
+      "prompt": "What is the real name of American rapper Pitbull?",
+      "payload": {
+        "options": [
+          {
+            "label": "Belcalis Marlenis Almánzar",
+            "correct": false
+          },
+          {
+            "label": "Ramón Luis Ayala Rodríguez",
+            "correct": false
+          },
+          {
+            "label": "Benito Antonio Martinez Ocasio",
+            "correct": false
+          },
+          {
+            "label": "Armando Christian Pérez",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0d36e1790a65",
+      "type": "truefalse",
+      "prompt": "The country song “A Boy Named Sue” was written by Shel Silverstein.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0f05cba52747",
+      "type": "mcq",
+      "prompt": "What is the relationship between the band members of American rock band King of Leon?",
+      "payload": {
+        "options": [
+          {
+            "label": "Fraternity house members",
+            "correct": false
+          },
+          {
+            "label": "Former classmates",
+            "correct": false
+          },
+          {
+            "label": "Childhood friends",
+            "correct": false
+          },
+          {
+            "label": "Brothers & cousins",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-0f5def660039",
+      "type": "mcq",
+      "prompt": "What year was Weezer's album \"Pinkerton\" released?",
+      "payload": {
+        "options": [
+          {
+            "label": "1996",
+            "correct": true
+          },
+          {
+            "label": "2001",
+            "correct": false
+          },
+          {
+            "label": "1990",
+            "correct": false
+          },
+          {
+            "label": "1994",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-11009659847f",
+      "type": "mcq",
+      "prompt": "Ozzy Osbourne was the lead singer for what metal band?",
+      "payload": {
+        "options": [
+          {
+            "label": "AC/DC",
+            "correct": false
+          },
+          {
+            "label": "Black Sabbath",
+            "correct": true
+          },
+          {
+            "label": "Judas Priest",
+            "correct": false
+          },
+          {
+            "label": "Iron Maiden",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-152ff8ddf565",
+      "type": "mcq",
+      "prompt": "Which member of \"The Beatles\" narrated episodes of \"Thomas the Tank Engine\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "George Harrison",
+            "correct": false
+          },
+          {
+            "label": "Paul McCartney",
+            "correct": false
+          },
+          {
+            "label": "John Lennon",
+            "correct": false
+          },
+          {
+            "label": "Ringo Starr",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-20358574edab",
+      "type": "mcq",
+      "prompt": "Which of these songs from American Idiot: The Musical was a previously unreleased Green Day song?",
+      "payload": {
+        "options": [
+          {
+            "label": "When It's Time",
+            "correct": true
+          },
+          {
+            "label": "Before The Lobotomy",
+            "correct": false
+          },
+          {
+            "label": "Are We The Waiting",
+            "correct": false
+          },
+          {
+            "label": "Favorite Son",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2268e6c88869",
+      "type": "mcq",
+      "prompt": "\"Make You Feel My Love\" was originally written and performed by which singer-songwriter?",
+      "payload": {
+        "options": [
+          {
+            "label": "Elvis",
+            "correct": false
+          },
+          {
+            "label": "Billy Joel",
+            "correct": false
+          },
+          {
+            "label": "Bob Dylan",
+            "correct": true
+          },
+          {
+            "label": "Adele",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-22a9112ede8d",
+      "type": "mcq",
+      "prompt": "Which of these is NOT the name of an album released by English singer-songwriter Adele?",
+      "payload": {
+        "options": [
+          {
+            "label": "21",
+            "correct": false
+          },
+          {
+            "label": "12",
+            "correct": true
+          },
+          {
+            "label": "25",
+            "correct": false
+          },
+          {
+            "label": "19",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2499893a8ca4",
+      "type": "mcq",
+      "prompt": "\"Hallelujah\" is a song written by which Canadian recording artist?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kory Lefkowits",
+            "correct": false
+          },
+          {
+            "label": "Ryan Letourneau",
+            "correct": false
+          },
+          {
+            "label": "Leonard Cohen",
+            "correct": true
+          },
+          {
+            "label": "Justin Bieber",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-25a2498a9b38",
+      "type": "mcq",
+      "prompt": "Who had a 1969 top 5 hit with the song, 'A Boy Named Sue'?",
+      "payload": {
+        "options": [
+          {
+            "label": "Willie Nelson",
+            "correct": false
+          },
+          {
+            "label": "Bob Dylan",
+            "correct": false
+          },
+          {
+            "label": "Kris Kristofferson",
+            "correct": false
+          },
+          {
+            "label": "Johnny Cash",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-264c8cc322dd",
+      "type": "mcq",
+      "prompt": "What Led Zeppelin album contains \"Stairway to Heaven\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Houses of the Holy",
+            "correct": false
+          },
+          {
+            "label": "Led Zeppelin IV",
+            "correct": true
+          },
+          {
+            "label": "Physical Graffiti",
+            "correct": false
+          },
+          {
+            "label": "Led Zeppelin III",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-27961f63be43",
+      "type": "mcq",
+      "prompt": "The Rush song \"YYZ\" derives its name from the IATA aiport identification code for which city?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vancouver",
+            "correct": false
+          },
+          {
+            "label": "Toronto",
+            "correct": true
+          },
+          {
+            "label": "Calgary",
+            "correct": false
+          },
+          {
+            "label": "Ottawa",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-282e7961545e",
+      "type": "mcq",
+      "prompt": "In what year was Taylor Swift born?",
+      "payload": {
+        "options": [
+          {
+            "label": "1989",
+            "correct": true
+          },
+          {
+            "label": "1988",
+            "correct": false
+          },
+          {
+            "label": "1990",
+            "correct": false
+          },
+          {
+            "label": "1987",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2c7d780fec20",
+      "type": "mcq",
+      "prompt": "How many members are in the Japanese rock band SCANDAL?",
+      "payload": {
+        "options": [
+          {
+            "label": "2",
+            "correct": false
+          },
+          {
+            "label": "4",
+            "correct": true
+          },
+          {
+            "label": "18",
+            "correct": false
+          },
+          {
+            "label": "5",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-2e9618b6e757",
+      "type": "mcq",
+      "prompt": "What was the name of the hip hop group Kanye West was a member of in the late 90s?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Jumpers",
+            "correct": false
+          },
+          {
+            "label": "The Kickstarters",
+            "correct": false
+          },
+          {
+            "label": "The Beat-Busters",
+            "correct": false
+          },
+          {
+            "label": "The Go-Getters",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-35b6c876eade",
+      "type": "mcq",
+      "prompt": "According to a Beatles song, who kept her face in a jar by the door?",
+      "payload": {
+        "options": [
+          {
+            "label": "Loretta Martin",
+            "correct": false
+          },
+          {
+            "label": "Lady Madonna",
+            "correct": false
+          },
+          {
+            "label": "Molly Jones",
+            "correct": false
+          },
+          {
+            "label": "Eleanor Rigby",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-3e27619bc27c",
+      "type": "truefalse",
+      "prompt": "\"The Division Bell\" is the final album of the progressive rock band Pink Floyd.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-435dc516ed8a",
+      "type": "mcq",
+      "prompt": "\"The Singing Cowboy\" Gene Autry is credited with the first recording for all but which classic Christmas jingle?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rudolph the Red-Nosed Reindeer",
+            "correct": false
+          },
+          {
+            "label": "Frosty the Snowman",
+            "correct": false
+          },
+          {
+            "label": "Here Comes Santa Claus",
+            "correct": false
+          },
+          {
+            "label": "White Christmas",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4381e71fb72c",
+      "type": "mcq",
+      "prompt": "Madonna's song \"Hung Up\" includes a piece from which popular 70s song?",
+      "payload": {
+        "options": [
+          {
+            "label": "Staying Alive",
+            "correct": false
+          },
+          {
+            "label": "The Chain",
+            "correct": false
+          },
+          {
+            "label": "Gimmie! Gimmie! Gimme! (A Man After Midnight)",
+            "correct": true
+          },
+          {
+            "label": "Night Fever",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4aca7400693c",
+      "type": "mcq",
+      "prompt": "What company developed the vocaloid Hatsune Miku?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sony",
+            "correct": false
+          },
+          {
+            "label": "Sega",
+            "correct": false
+          },
+          {
+            "label": "Yamaha Corporation",
+            "correct": false
+          },
+          {
+            "label": "Crypton Future Media",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4b0d0e38b376",
+      "type": "truefalse",
+      "prompt": "\"Twenty One Pilots\" made the song \"The Motion\" featuring Sampha.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4c4399a399ee",
+      "type": "mcq",
+      "prompt": "What is the name of Death Grips Front Man, MC Ride?",
+      "payload": {
+        "options": [
+          {
+            "label": "Stefan Burnett",
+            "correct": true
+          },
+          {
+            "label": "Stanley Burrell",
+            "correct": false
+          },
+          {
+            "label": "Andy Morin",
+            "correct": false
+          },
+          {
+            "label": "Zach Hill",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-4fefa79ecac8",
+      "type": "mcq",
+      "prompt": "According to their 1974 hit, what were Brownsville Station doing \"In The Boys' Room\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hangin'",
+            "correct": false
+          },
+          {
+            "label": "Peein'",
+            "correct": false
+          },
+          {
+            "label": "Lovin'",
+            "correct": false
+          },
+          {
+            "label": "Smokin'",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5ecf956e01a0",
+      "type": "truefalse",
+      "prompt": "Daft Punk originated in France.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-5ed74ae81ee9",
+      "type": "mcq",
+      "prompt": "Which song made by MAN WITH A MISSION was used as the opening for the anime \"Log Horizon\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "\"Dead End in Tokyo\"",
+            "correct": false
+          },
+          {
+            "label": "\"Raise Your Flag\"",
+            "correct": false
+          },
+          {
+            "label": "\"Database\"",
+            "correct": true
+          },
+          {
+            "label": "\"Out of Control\"",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6a08a062bb05",
+      "type": "mcq",
+      "prompt": "What was the name of the cold-war singer who has a song in Grand Theft Auto IV, and a wall landmark in Moscow for his memorial?",
+      "payload": {
+        "options": [
+          {
+            "label": "Viktor Tsoi",
+            "correct": true
+          },
+          {
+            "label": "Brian Jones",
+            "correct": false
+          },
+          {
+            "label": "Jimi Hendrix",
+            "correct": false
+          },
+          {
+            "label": "Vladimir Vysotsky",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6b524f33b042",
+      "type": "mcq",
+      "prompt": "The 'In the Flesh' tour was used in support of what Pink Floyd album?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Wall",
+            "correct": false
+          },
+          {
+            "label": "Wish You Were Here",
+            "correct": false
+          },
+          {
+            "label": "Animals",
+            "correct": true
+          },
+          {
+            "label": "The Final Cut",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-6c7121e9236b",
+      "type": "mcq",
+      "prompt": "Who had a 1976 hit with the song 'You Make Me Feel Like Dancing'?",
+      "payload": {
+        "options": [
+          {
+            "label": "Billy Joel",
+            "correct": false
+          },
+          {
+            "label": "Leo Sayer",
+            "correct": true
+          },
+          {
+            "label": "Andy Gibb",
+            "correct": false
+          },
+          {
+            "label": "Elton John",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-72c7001a4c86",
+      "type": "mcq",
+      "prompt": "Who is the lead singer of Silverchair?",
+      "payload": {
+        "options": [
+          {
+            "label": "Ben Gillies",
+            "correct": false
+          },
+          {
+            "label": "Daniel Johns",
+            "correct": true
+          },
+          {
+            "label": "Chris Joannou",
+            "correct": false
+          },
+          {
+            "label": "George Costanza",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7930f7c08f60",
+      "type": "mcq",
+      "prompt": "Which of these is NOT a song on The Beatles' 1968 self titled album, also known as the White album?",
+      "payload": {
+        "options": [
+          {
+            "label": "Why Don't We Do It in the Road?",
+            "correct": false
+          },
+          {
+            "label": "Everybody's Got Something to Hide Except Me and My Monkey",
+            "correct": false
+          },
+          {
+            "label": "The Continuing Story of Bungalow Bill",
+            "correct": false
+          },
+          {
+            "label": "Being For The Benefit Of Mr. Kite!",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-79c403bcd279",
+      "type": "mcq",
+      "prompt": "Which of these songs is NOT in The Beatles' album \"Sgt. Pepper's Lonely Hearts Club Band\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Getting Better",
+            "correct": false
+          },
+          {
+            "label": "Fixing a Hole",
+            "correct": false
+          },
+          {
+            "label": "Lucy in the Sky with Diamonds",
+            "correct": false
+          },
+          {
+            "label": "Strawberry Fields Forever",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7b8a87820a79",
+      "type": "mcq",
+      "prompt": "Who is the vocalist and frontman of rock band \"Guns N' Roses\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kurt Cobain",
+            "correct": false
+          },
+          {
+            "label": "Slash",
+            "correct": false
+          },
+          {
+            "label": "Axl Rose",
+            "correct": true
+          },
+          {
+            "label": "Bono",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7baa79c65a3d",
+      "type": "mcq",
+      "prompt": "What band featured Sting, Stewart Copeland and Andy Summers?",
+      "payload": {
+        "options": [
+          {
+            "label": "The Police",
+            "correct": true
+          },
+          {
+            "label": "Def Leppard",
+            "correct": false
+          },
+          {
+            "label": "Bon Jovi",
+            "correct": false
+          },
+          {
+            "label": "The Cure",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7cc0ff4e4afb",
+      "type": "mcq",
+      "prompt": "Which of these aliases has NOT been used by electronic musician Aphex Twin?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bradley Strider",
+            "correct": false
+          },
+          {
+            "label": "Burial",
+            "correct": true
+          },
+          {
+            "label": "Caustic Window",
+            "correct": false
+          },
+          {
+            "label": "GAK",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7dc8f10d186c",
+      "type": "mcq",
+      "prompt": "From which country does the piano originate?",
+      "payload": {
+        "options": [
+          {
+            "label": "Germany",
+            "correct": false
+          },
+          {
+            "label": "Italy",
+            "correct": true
+          },
+          {
+            "label": "Austria",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-7e4e1e60cdf9",
+      "type": "truefalse",
+      "prompt": "Pink Guy's debut album was \"Pink Season\".",
+      "payload": {
+        "correct": false
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-94c20dcce170",
+      "type": "truefalse",
+      "prompt": "Nick Mason is the only member to appear on every Pink Floyd album.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-95ab965e16c2",
+      "type": "mcq",
+      "prompt": "This album, now considered to be one of the greatest of all time, was a commercial failure when it was released.",
+      "payload": {
+        "options": [
+          {
+            "label": "The Velvet Underground and Nico",
+            "correct": true
+          },
+          {
+            "label": "Led Zeppelin IV",
+            "correct": false
+          },
+          {
+            "label": "Abbey Road",
+            "correct": false
+          },
+          {
+            "label": "Pet Sounds",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-965552a44be8",
+      "type": "truefalse",
+      "prompt": "Muse is a British (English) rock band",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-99ccdd57d685",
+      "type": "mcq",
+      "prompt": "Which album was released by Kanye West in 2013?",
+      "payload": {
+        "options": [
+          {
+            "label": "My Beautiful Dark Twisted Fantasy",
+            "correct": false
+          },
+          {
+            "label": "Watch the Throne",
+            "correct": false
+          },
+          {
+            "label": "Yeezus",
+            "correct": true
+          },
+          {
+            "label": "The Life of Pablo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a7661b4e9865",
+      "type": "mcq",
+      "prompt": "According to the American rapper Nelly, what should you do when its hot in here?",
+      "payload": {
+        "options": [
+          {
+            "label": "Take off all your clothes",
+            "correct": true
+          },
+          {
+            "label": "Take a cool shower",
+            "correct": false
+          },
+          {
+            "label": "Drink some water",
+            "correct": false
+          },
+          {
+            "label": "Go skinny dipping",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-a90d3842b2e9",
+      "type": "mcq",
+      "prompt": "Which time signature is commonly known as “Cut Time?”",
+      "payload": {
+        "options": [
+          {
+            "label": "3/4",
+            "correct": false
+          },
+          {
+            "label": "2/2",
+            "correct": true
+          },
+          {
+            "label": "6/8",
+            "correct": false
+          },
+          {
+            "label": "4/4",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ac0d58244138",
+      "type": "truefalse",
+      "prompt": "\"Neutral Milk Hotel\" is a real band.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ad39e1340c9f",
+      "type": "mcq",
+      "prompt": "What was George Michael's chart-topping 1987 debut studio album?",
+      "payload": {
+        "options": [
+          {
+            "label": "Faith",
+            "correct": true
+          },
+          {
+            "label": "Patience",
+            "correct": false
+          },
+          {
+            "label": "Songs from the Last Century",
+            "correct": false
+          },
+          {
+            "label": "Older",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-af20b37fad52",
+      "type": "mcq",
+      "prompt": "Which of these songs did Jimi Hendrix cover?",
+      "payload": {
+        "options": [
+          {
+            "label": "All Along the Watchtower",
+            "correct": false
+          },
+          {
+            "label": "House of the Rising Sun",
+            "correct": false
+          },
+          {
+            "label": "Sgt. Pepper's Lonely Hearts Club Band",
+            "correct": false
+          },
+          {
+            "label": "All of these songs",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b4b03ae9fbd9",
+      "type": "mcq",
+      "prompt": "Who sung the opening theme song to the 1995 James Bond film 'Goldeneye'?",
+      "payload": {
+        "options": [
+          {
+            "label": "Sheryl Crow",
+            "correct": false
+          },
+          {
+            "label": "Shirley Bassey",
+            "correct": false
+          },
+          {
+            "label": "Madonna",
+            "correct": false
+          },
+          {
+            "label": "Tina Turner",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b7e1333db6a6",
+      "type": "mcq",
+      "prompt": "Which song previously recorded by Elvis Presley was covered by UB40 with a reggae beat?",
+      "payload": {
+        "options": [
+          {
+            "label": "In the Ghetto",
+            "correct": false
+          },
+          {
+            "label": "Wooden Heart",
+            "correct": false
+          },
+          {
+            "label": "Jailhouse Rock",
+            "correct": false
+          },
+          {
+            "label": "Can't Help Falling in Love",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b8d846c885bd",
+      "type": "mcq",
+      "prompt": "What was the release date of the They Might Be Giants album, 'Mink Car?'",
+      "payload": {
+        "options": [
+          {
+            "label": "September 11th, 2001",
+            "correct": true
+          },
+          {
+            "label": "November 4th, 1999",
+            "correct": false
+          },
+          {
+            "label": "April 17th, 2003",
+            "correct": false
+          },
+          {
+            "label": "December 20th, 2002",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-b97c0a3a4653",
+      "type": "mcq",
+      "prompt": "Who was the lead singer and frontman of rock band R.E.M?",
+      "payload": {
+        "options": [
+          {
+            "label": "Thom Yorke",
+            "correct": false
+          },
+          {
+            "label": "Chris Martin",
+            "correct": false
+          },
+          {
+            "label": "Michael Stipe",
+            "correct": true
+          },
+          {
+            "label": "George Michael",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-bec5a267156f",
+      "type": "truefalse",
+      "prompt": "Lead Singer Rivers Cuomo of American rock band Weezer attended Harvard.",
+      "payload": {
+        "correct": true
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c6b429336dad",
+      "type": "mcq",
+      "prompt": "In August 1964, who introduced the Beatles to cannabis?",
+      "payload": {
+        "options": [
+          {
+            "label": "Brian Epstein",
+            "correct": false
+          },
+          {
+            "label": "Bob Dylan",
+            "correct": true
+          },
+          {
+            "label": "Jerry Garcia",
+            "correct": false
+          },
+          {
+            "label": "Jim Morrison",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c86c65a64b44",
+      "type": "mcq",
+      "prompt": "What French artist/band is known for playing on the midi instrument \"Launchpad\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "David Guetta",
+            "correct": false
+          },
+          {
+            "label": "Disclosure",
+            "correct": false
+          },
+          {
+            "label": "Daft Punk",
+            "correct": false
+          },
+          {
+            "label": "Madeon",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c8db40a80c0b",
+      "type": "mcq",
+      "prompt": "Who is the singer for Fall Out Boy?",
+      "payload": {
+        "options": [
+          {
+            "label": "Patrick Stump",
+            "correct": true
+          },
+          {
+            "label": "Gary Lee Weinrib",
+            "correct": false
+          },
+          {
+            "label": "Pete Wentz",
+            "correct": false
+          },
+          {
+            "label": "Brendon Urie",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-c8db83a4e836",
+      "type": "mcq",
+      "prompt": "What was the last Aphex Twin album released before his decade-long hiatus?",
+      "payload": {
+        "options": [
+          {
+            "label": "Drukqs",
+            "correct": true
+          },
+          {
+            "label": "Collected Ambient Works 85-92",
+            "correct": false
+          },
+          {
+            "label": "Syro",
+            "correct": false
+          },
+          {
+            "label": "Windowlicker",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-ca12f54079d0",
+      "type": "mcq",
+      "prompt": "Which of these women is not a member of the Korean girl group TWICE?",
+      "payload": {
+        "options": [
+          {
+            "label": "Myoui Mina",
+            "correct": false
+          },
+          {
+            "label": "Kang Seulgi",
+            "correct": true
+          },
+          {
+            "label": "Hirai Momo",
+            "correct": false
+          },
+          {
+            "label": "Kim Dahyun",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-cb77bea37983",
+      "type": "mcq",
+      "prompt": "The Proclaimers - I'm Gonna Be (500 Miles) reached what position on the US Hot 100 Charts in 1993?",
+      "payload": {
+        "options": [
+          {
+            "label": "3rd",
+            "correct": true
+          },
+          {
+            "label": "1st",
+            "correct": false
+          },
+          {
+            "label": "5th",
+            "correct": false
+          },
+          {
+            "label": "8th",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d0b8b0fb504b",
+      "type": "truefalse",
+      "prompt": "Myoui Mina, member of Korean girl group TWICE, was born in South Korea, despite being Japanese.",
+      "payload": {
+        "correct": false
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-d9608f84014c",
+      "type": "mcq",
+      "prompt": "Which term best describes the connection of two sections of a musical piece through a transitional passage?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bridge",
+            "correct": true
+          },
+          {
+            "label": "Binary Form",
+            "correct": false
+          },
+          {
+            "label": "Capo",
+            "correct": false
+          },
+          {
+            "label": "Coda",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e0d39b666c82",
+      "type": "mcq",
+      "prompt": "Which country does the band Rammstein hail from?",
+      "payload": {
+        "options": [
+          {
+            "label": "Germany",
+            "correct": true
+          },
+          {
+            "label": "Armenia",
+            "correct": false
+          },
+          {
+            "label": "Austria",
+            "correct": false
+          },
+          {
+            "label": "Belgium",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "facile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e5707637bd8b",
+      "type": "truefalse",
+      "prompt": "The band \"Panic! At the Disco\" has released 4 albums total",
+      "payload": {
+        "correct": false
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-e57d0e9d1a5f",
+      "type": "mcq",
+      "prompt": "In the Panic! At the Disco's song \"Nothern Downpour\", which lyric follows 'I know the world's a broken bone'.",
+      "payload": {
+        "options": [
+          {
+            "label": "\"So sing your song until you're home\"",
+            "correct": false
+          },
+          {
+            "label": "\"So melt your headaches call it home\"",
+            "correct": true
+          },
+          {
+            "label": "\"So let them know they're on their own\"",
+            "correct": false
+          },
+          {
+            "label": "\"So start a fire in their cold stone\"",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-eda226e36f6e",
+      "type": "mcq",
+      "prompt": "Which artists' version of the song \"The Tide is High\" came first?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kardinal Offishall",
+            "correct": false
+          },
+          {
+            "label": "Blondie",
+            "correct": false
+          },
+          {
+            "label": "Atomic Kitten",
+            "correct": false
+          },
+          {
+            "label": "The Paragons",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-edb9bf4cb67a",
+      "type": "mcq",
+      "prompt": "Who is the frontman of Muse?",
+      "payload": {
+        "options": [
+          {
+            "label": "Dominic Howard",
+            "correct": false
+          },
+          {
+            "label": "Jonny Greenwood",
+            "correct": false
+          },
+          {
+            "label": "Matt Bellamy",
+            "correct": true
+          },
+          {
+            "label": "Thom Yorke",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f06671b0f7d5",
+      "type": "mcq",
+      "prompt": "Which of these is the name of an American psychedelic rock band formed in 2002 by Benjamin Goldwasser and Andrew VanWyngarden?",
+      "payload": {
+        "options": [
+          {
+            "label": "STRFKR",
+            "correct": false
+          },
+          {
+            "label": "SBTRKT",
+            "correct": false
+          },
+          {
+            "label": "MGMT",
+            "correct": true
+          },
+          {
+            "label": "MSTRKRFT",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f129dd53b18f",
+      "type": "mcq",
+      "prompt": "What is the first Studio Album to be released on the Internet with a \"Pay-What-You-Want\" price?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blackstar",
+            "correct": false
+          },
+          {
+            "label": "The Help Album",
+            "correct": false
+          },
+          {
+            "label": "In Rainbows",
+            "correct": true
+          },
+          {
+            "label": "Skrillex and Diplo Present Jack Ü",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "difficile",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f58e42cac2ce",
+      "type": "mcq",
+      "prompt": "Who is the founder and leader of industrial rock band, 'Nine Inch Nails'?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trent Reznor",
+            "correct": true
+          },
+          {
+            "label": "Marilyn Manson",
+            "correct": false
+          },
+          {
+            "label": "Josh Homme",
+            "correct": false
+          },
+          {
+            "label": "Robin Finck",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-f6bbbabeef2d",
+      "type": "mcq",
+      "prompt": "The 1952 musical composition 4'33\", composed by prolific American composer John Cage, is mainly comprised of what sound?",
+      "payload": {
+        "options": [
+          {
+            "label": "Silence",
+            "correct": true
+          },
+          {
+            "label": "People talking",
+            "correct": false
+          },
+          {
+            "label": "Cricket chirps",
+            "correct": false
+          },
+          {
+            "label": "Farts",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "otdb-fa32b2fa1b5b",
+      "type": "mcq",
+      "prompt": "Who had hits in the 70s with the songs \"Lonely Boy\" and \"Never Let Her Slip Away\"?",
+      "payload": {
+        "options": [
+          {
+            "label": "Elton John",
+            "correct": false
+          },
+          {
+            "label": "Leo Sayer",
+            "correct": false
+          },
+          {
+            "label": "Barry White",
+            "correct": false
+          },
+          {
+            "label": "Andrew Gold",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "otdb-quiz-music",
+      "title": "Music",
+      "description": "Rock and pop bands, singers and songs.",
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-11009659847f",
+        "otdb-152ff8ddf565",
+        "otdb-2268e6c88869",
+        "otdb-2499893a8ca4",
+        "otdb-25a2498a9b38",
+        "otdb-27961f63be43",
+        "otdb-35b6c876eade",
+        "otdb-7b8a87820a79",
+        "otdb-7baa79c65a3d",
+        "otdb-94c20dcce170",
+        "otdb-3e27619bc27c",
+        "otdb-e0d39b666c82",
+        "otdb-7dc8f10d186c",
+        "otdb-d9608f84014c",
+        "otdb-f6bbbabeef2d",
+        "otdb-eda226e36f6e",
+        "otdb-5ecf956e01a0",
+        "otdb-22a9112ede8d",
+        "otdb-b4b03ae9fbd9",
+        "otdb-edb9bf4cb67a"
+      ]
+    },
+    {
+      "id": "otdb-quiz-music-trivia",
+      "title": "Music trivia",
+      "description": "Bands, rappers and albums, from rock to hip hop.",
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous",
+      "questionIds": [
+        "otdb-0f5def660039",
+        "otdb-72c7001a4c86",
+        "otdb-b97c0a3a4653",
+        "otdb-f58e42cac2ce",
+        "otdb-a7661b4e9865",
+        "otdb-c8db40a80c0b",
+        "otdb-f06671b0f7d5",
+        "otdb-c86c65a64b44",
+        "otdb-0806098edbef",
+        "otdb-0d36e1790a65",
+        "otdb-0f05cba52747",
+        "otdb-282e7961545e",
+        "otdb-2e9618b6e757",
+        "otdb-965552a44be8",
+        "otdb-bec5a267156f",
+        "otdb-e5707637bd8b"
+      ]
+    }
+  ]
+}

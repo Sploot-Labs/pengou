@@ -1,0 +1,126 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=496"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0496-1",
+      "type": "mcq",
+      "prompt": "Quelle fontaine de Rome est l'une des plus célèbres au monde ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Neptune",
+            "correct": false
+          },
+          {
+            "label": "Barcaccia",
+            "correct": false
+          },
+          {
+            "label": "Trevi",
+            "correct": true
+          },
+          {
+            "label": "Triton",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0496-2",
+      "type": "mcq",
+      "prompt": "Sur les côtes de quelle mer la ville de Rome est-elle située ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tyrrhénienne",
+            "correct": true
+          },
+          {
+            "label": "Égée",
+            "correct": false
+          },
+          {
+            "label": "Adriatique",
+            "correct": false
+          },
+          {
+            "label": "Ionienne",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0496-3",
+      "type": "mcq",
+      "prompt": "Par combien d'aéroports principaux la ville de Rome est-elle desservie ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Deux",
+            "correct": true
+          },
+          {
+            "label": "Trois",
+            "correct": false
+          },
+          {
+            "label": "Cinq",
+            "correct": false
+          },
+          {
+            "label": "Quatre",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0496-4",
+      "type": "mcq",
+      "prompt": "Sur quelle pièce de monnaie italienne le Colisée est-il représenté ?",
+      "payload": {
+        "options": [
+          {
+            "label": "20 centimes d'euro",
+            "correct": false
+          },
+          {
+            "label": "1 euro",
+            "correct": false
+          },
+          {
+            "label": "2 euros",
+            "correct": false
+          },
+          {
+            "label": "5 centimes d'euro",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

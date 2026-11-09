@@ -33,6 +33,7 @@ function tolerance(p: SliderPayload): number {
 
 export const slider: QuestionTypeDef<SliderPayload, SliderAnswer> = {
   key: 'slider',
+  scored: true,
   validatePayload: (raw) => sliderSchema.parse(raw),
   validateAnswer: (raw) => answerSchema.parse(raw),
   // `step` (granularité de drag) n'a aucune valeur de triche : il ne révèle ni `correct` ni la

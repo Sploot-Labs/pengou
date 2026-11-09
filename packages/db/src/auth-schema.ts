@@ -7,6 +7,10 @@ export const user = pgTable('user', {
   email: text('email').notNull().unique(),
   emailVerified: boolean('email_verified').default(false).notNull(),
   image: text('image'),
+  // Acceptation des CGU : version acceptée (date AAAA-MM-JJ) et horodatage serveur. Null : jamais
+  // acceptées (compte antérieur, ou créé par un fournisseur tiers), d'où la revalidation.
+  termsVersion: text('terms_version'),
+  termsAcceptedAt: timestamp('terms_accepted_at', { withTimezone: true }),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at')
     .defaultNow()

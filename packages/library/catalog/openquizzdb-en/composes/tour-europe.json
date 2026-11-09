@@ -1,0 +1,503 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0257-1-en",
+      "type": "mcq",
+      "prompt": "What is the capital of Germany?",
+      "payload": {
+        "options": [
+          {
+            "label": "Hamburg",
+            "correct": false
+          },
+          {
+            "label": "Frankfurt",
+            "correct": false
+          },
+          {
+            "label": "Munich",
+            "correct": false
+          },
+          {
+            "label": "Berlin",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0257-2-en",
+      "type": "mcq",
+      "prompt": "Which major mountain range is located in Germany?",
+      "payload": {
+        "options": [
+          {
+            "label": "Andes",
+            "correct": false
+          },
+          {
+            "label": "Alps",
+            "correct": true
+          },
+          {
+            "label": "Himalayas",
+            "correct": false
+          },
+          {
+            "label": "Rockies",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0257-3-en",
+      "type": "mcq",
+      "prompt": "Which festival attracts millions of visitors in Germany?",
+      "payload": {
+        "options": [
+          {
+            "label": "Oktoberfest",
+            "correct": true
+          },
+          {
+            "label": "Thanksgiving",
+            "correct": false
+          },
+          {
+            "label": "Carnival",
+            "correct": false
+          },
+          {
+            "label": "Halloween",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0257-4-en",
+      "type": "mcq",
+      "prompt": "Which industry is highly developed in Germany?",
+      "payload": {
+        "options": [
+          {
+            "label": "Coffee growing",
+            "correct": false
+          },
+          {
+            "label": "Fishing",
+            "correct": false
+          },
+          {
+            "label": "Petroleum",
+            "correct": false
+          },
+          {
+            "label": "Automotive",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0359-1-en",
+      "type": "mcq",
+      "prompt": "Which currency did Austria use before the euro?",
+      "payload": {
+        "options": [
+          {
+            "label": "Franc",
+            "correct": false
+          },
+          {
+            "label": "Pound",
+            "correct": false
+          },
+          {
+            "label": "Schilling",
+            "correct": true
+          },
+          {
+            "label": "Mark",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0359-2-en",
+      "type": "mcq",
+      "prompt": "Which language is official in Austria?",
+      "payload": {
+        "options": [
+          {
+            "label": "Austrian",
+            "correct": false
+          },
+          {
+            "label": "German",
+            "correct": true
+          },
+          {
+            "label": "Hungarian",
+            "correct": false
+          },
+          {
+            "label": "French",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0359-3-en",
+      "type": "mcq",
+      "prompt": "Which river flows through Vienna?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rhine",
+            "correct": false
+          },
+          {
+            "label": "Loire",
+            "correct": false
+          },
+          {
+            "label": "Seine",
+            "correct": false
+          },
+          {
+            "label": "Danube",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0454-2-en",
+      "type": "mcq",
+      "prompt": "How many official languages are spoken in Belgium?",
+      "payload": {
+        "options": [
+          {
+            "label": "Two",
+            "correct": false
+          },
+          {
+            "label": "Four",
+            "correct": false
+          },
+          {
+            "label": "One",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0454-3-en",
+      "type": "mcq",
+      "prompt": "How many digits does a Belgian postal code have?",
+      "payload": {
+        "options": [
+          {
+            "label": "Six",
+            "correct": false
+          },
+          {
+            "label": "Three",
+            "correct": false
+          },
+          {
+            "label": "Five",
+            "correct": false
+          },
+          {
+            "label": "Four",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0454-4-en",
+      "type": "mcq",
+      "prompt": "On what date is Belgium's national day celebrated each year?",
+      "payload": {
+        "options": [
+          {
+            "label": "11 September",
+            "correct": false
+          },
+          {
+            "label": "14 July",
+            "correct": false
+          },
+          {
+            "label": "4 October",
+            "correct": false
+          },
+          {
+            "label": "21 July",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0353-1-en",
+      "type": "mcq",
+      "prompt": "What is the capital of Greece?",
+      "payload": {
+        "options": [
+          {
+            "label": "Patras",
+            "correct": false
+          },
+          {
+            "label": "Thessaloniki",
+            "correct": false
+          },
+          {
+            "label": "Heraklion",
+            "correct": false
+          },
+          {
+            "label": "Athens",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0353-2-en",
+      "type": "mcq",
+      "prompt": "Which sea touches the coasts of Greece?",
+      "payload": {
+        "options": [
+          {
+            "label": "Black Sea",
+            "correct": false
+          },
+          {
+            "label": "North Sea",
+            "correct": false
+          },
+          {
+            "label": "Red Sea",
+            "correct": false
+          },
+          {
+            "label": "Aegean Sea",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0353-3-en",
+      "type": "mcq",
+      "prompt": "What is the sacred mountain of the Greek gods?",
+      "payload": {
+        "options": [
+          {
+            "label": "Atlas Mountains",
+            "correct": false
+          },
+          {
+            "label": "Mount Etna",
+            "correct": false
+          },
+          {
+            "label": "Mount Olympus",
+            "correct": true
+          },
+          {
+            "label": "Mount Fuji",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0353-4-en",
+      "type": "mcq",
+      "prompt": "Which Greek city is famous for its Acropolis?",
+      "payload": {
+        "options": [
+          {
+            "label": "Corinth",
+            "correct": false
+          },
+          {
+            "label": "Delphi",
+            "correct": false
+          },
+          {
+            "label": "Athens",
+            "correct": true
+          },
+          {
+            "label": "Sparta",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0365-1-en",
+      "type": "mcq",
+      "prompt": "What is the capital of Portugal?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lisbon",
+            "correct": true
+          },
+          {
+            "label": "Faro",
+            "correct": false
+          },
+          {
+            "label": "Porto",
+            "correct": false
+          },
+          {
+            "label": "Coimbra",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0365-2-en",
+      "type": "mcq",
+      "prompt": "Which Portuguese city is famous for its wine cellars?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lisbon",
+            "correct": false
+          },
+          {
+            "label": "Porto",
+            "correct": true
+          },
+          {
+            "label": "Faro",
+            "correct": false
+          },
+          {
+            "label": "Braga",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0365-4-en",
+      "type": "mcq",
+      "prompt": "Which country is Portugal's only land neighbor?",
+      "payload": {
+        "options": [
+          {
+            "label": "Spain",
+            "correct": true
+          },
+          {
+            "label": "Italy",
+            "correct": false
+          },
+          {
+            "label": "Morocco",
+            "correct": false
+          },
+          {
+            "label": "France",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "geographie",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

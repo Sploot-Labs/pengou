@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { buildDistributionRows, type QuestionKind } from '../realtime/distribution'
-import type { RankingEntry, ReadingView } from '../realtime/contracts'
+import { isScoredType, pollPercent } from '@splootlabs/quiz'
+import { buildDistributionRows, pollRows, type QuestionKind } from '../realtime/distribution'
+import type { PodiumPayload, PollView, RankingEntry, ReadingView, WordcloudView } from '../realtime/contracts'
+import { WordCloud, wordcloudSummary } from '../ui/WordCloud'
+import { QuestionImage } from '../ui/QuestionImage'
 import { listQuizzes, type QuizListItem } from '../api/quizzes'
+import { boardEntries } from '../realtime/board'
 import { hardReload } from '../realtime/hardReload'
 import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import { Button, Logo, PinDisplay, TimerRing } from '../ui'
-import { QuestionImage } from '../ui/QuestionImage'
-import { PodiumView } from './Podium'
+import { ClosingView, PodiumView } from './Podium'
 
 /**
  * Contrôleur hôte réel, câblé sur `apps/server/src/game-gateway.ts` via la
@@ -54,6 +57,8 @@ interface TimerPayload {
 interface RevealPayload {
   correct: unknown
   distribution: Record<string, number>
+  /** Présent pour un sondage seulement : sa répartition (pas de bonne réponse). */
+  poll?: PollView
 }
 
 interface LobbyPlayer {
@@ -180,10 +185,12 @@ export function HostLive() {
   const [remaining, setRemaining] = useState<number | null>(null)
   const [progressAnswered, setProgressAnswered] = useState(0)
   const [respondedAnnouncement, setRespondedAnnouncement] = useState('')
+  const [wordcloud, setWordcloud] = useState<WordcloudView | null>(null)
 
   const [revealPayload, setRevealPayload] = useState<RevealPayload | null>(null)
   const [ranking, setRanking] = useState<RankingEntry[]>([])
   const [podiumTop, setPodiumTop] = useState<RankingEntry[]>([])
+  const [hasScoredQuestions, setHasScoredQuestions] = useState(true)
 
   // Enchaînement automatique des étapes (demande produit) : l'hôte bascule le mode, le serveur
   // planifie l'avance vers la question suivante après une pause sur le classement. Activé par
@@ -196,6 +203,7 @@ export function HostLive() {
 
   const [actionPending, setActionPending] = useState(false)
   const [actionError, setActionError] = useState<string | null>(null)
+  const [kickPendingId, setKickPendingId] = useState<string | null>(null)
   // `host:skip` déclenche EXACTEMENT le même reveal+scoreboard serveur que
   // `host:reveal` (voir doReveal côté passerelle) — la seule différence
   // voulue est visuelle : « Passer » ne doit jamais montrer l'écran de
@@ -278,8 +286,16 @@ export function HostLive() {
       setRemaining(null)
       setRevealPayload(null)
       setProgressAnswered(0)
+      // Un skip ne survit jamais à la question qu'il visait.
+      skipRequestedRef.current = false
+      // Effacé seulement si la question change (rejeu de `question:show` à la reconnexion).
+      setWordcloud((prev) => (prev && prev.questionId === view.id ? prev : null))
       setAutoNextAt(null)
       setPhase('question')
+    })
+
+    const offWordcloud = on<WordcloudView>('wordcloud:update', (v) => {
+      setWordcloud(v)
     })
 
     const offTimer = on<TimerPayload>('timer', (t) => {
@@ -303,8 +319,10 @@ export function HostLive() {
       }
     })
 
-    const offPodium = on<{ top: RankingEntry[] }>('podium', ({ top }) => {
+    const offPodium = on<PodiumPayload>('podium', ({ top, ranking: full, hasScoredQuestions: scored }) => {
       setPodiumTop(top)
+      if (full) setRanking(full)
+      setHasScoredQuestions(scored !== false)
       setAutoNextAt(null)
       setPhase('podium')
     })
@@ -360,6 +378,7 @@ export function HostLive() {
       offShow()
       offTimer()
       offProgress()
+      offWordcloud()
       offReveal()
       offScoreboard()
       offPodium()
@@ -497,6 +516,20 @@ export function HostLive() {
     }
   }
 
+  // Exclusion d'un joueur : pas de retrait optimiste, la liste suit le `lobby:update` du serveur.
+  async function kickPlayer(playerId: string, nickname: string): Promise<void> {
+    if (!window.confirm(`Exclure ${nickname} de la partie ?`)) return
+    setKickPendingId(playerId)
+    setActionError(null)
+    try {
+      await emitAck('host:kick', { playerId })
+    } catch (err) {
+      setActionError(friendlyActionError(err, connection))
+    } finally {
+      setKickPendingId(null)
+    }
+  }
+
   if (!sessionId) {
     return (
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
@@ -542,7 +575,7 @@ export function HostLive() {
   /* Actions hôte                                                       */
   /* ---------------------------------------------------------------- */
 
-  async function runHostAction(event: string): Promise<void> {
+  async function runHostAction(event: string, payload: unknown = {}): Promise<void> {
     setActionPending(true)
     setActionError(null)
     // Autorité déjà connue perdue (voir ConnectionState) : inutile d'attendre
@@ -554,7 +587,7 @@ export function HostLive() {
       return
     }
     try {
-      await emitAck(event, {})
+      await emitAck(event, payload)
     } catch (err) {
       setActionError(friendlyActionError(err, connection))
     } finally {
@@ -576,9 +609,12 @@ export function HostLive() {
    * empêcherait à tort le handler `question:reveal` d'avancer la phase). Le
    * flag n'est nettoyé sur le chemin de SUCCÈS que par le handler
    * `scoreboard` (voir l'abonnement plus haut), au moment où le classement
-   * réellement arrivé du serveur permet d'avancer directement dessus. */
-  function skipQuestion() {
-    skipRequestedRef.current = true
+   * réellement arrivé du serveur permet d'avancer directement dessus.
+   * Question non notée (sondage, nuage) : le serveur n'émet alors ni révélation ni classement et
+   * enchaîne directement (question suivante ou podium) ; le flag n'est donc pas armé, sinon il
+   * resterait levé et masquerait la révélation de la question suivante. */
+  function skipQuestion(scored: boolean) {
+    skipRequestedRef.current = scored
     setActionPending(true)
     setActionError(null)
     if (connection === 'broken') {
@@ -653,14 +689,48 @@ export function HostLive() {
 
   const connectedCount = players.filter((p) => p.connected).length
   const canLaunch = players.length > 0
+  // Question non notée (sondage, nuage de mots) : jamais de classement après elle. La révélation
+  // propose directement « Suivant », et un `scoreboard` reçu ne change pas la phase.
+  const scored = question ? isScoredType(question.type) : true
+  // Répartition d'un sondage : seulement si elle porte sur la question affichée.
+  const poll =
+    question?.type === 'poll' && revealPayload?.poll && revealPayload.poll.questionId === question.id
+      ? revealPayload.poll
+      : null
   const rows =
     phase === 'reveal' && question && revealPayload
-      ? buildDistributionRows(question.type, revealPayload.correct, revealPayload.distribution)
+      ? poll
+        ? pollRows(poll)
+        : buildDistributionRows(question.type, revealPayload.correct, revealPayload.distribution)
       : null
   const maxRowCount = rows && rows.length > 0 ? Math.max(1, ...rows.map((r) => r.count)) : 1
   const revealedAnswerText = rows ? (rows.find((r) => r.correct)?.label ?? '') : ''
+  const revealStatus =
+    question?.type === 'wordcloud'
+      ? 'Nuage de mots figé.'
+      : question?.type === 'poll'
+        ? 'Sondage clos.'
+        : `Réponse révélée : ${revealedAnswerText}`
+
+  function renderWordcloud() {
+    // Un nuage d'une autre question (course entre événements) n'est jamais affiché.
+    const current = wordcloud && question && wordcloud.questionId === question.id ? wordcloud : null
+    return (
+      <div className="hostlive-wordcloud">
+        <WordCloud
+          words={current?.words ?? []}
+          onRemove={(w) => void runHostAction('host:wordcloudRemove', { word: w.text })}
+        />
+        {current && <p className="hostlive-progress">{wordcloudSummary(current)}</p>}
+      </div>
+    )
+  }
 
   function renderDistribution() {
+    if (question?.type === 'wordcloud') return renderWordcloud()
+    if (poll && poll.voters === 0) {
+      return <p style={{ color: 'var(--ink-dim)' }}>Aucun vote</p>
+    }
     if (!rows) return null
     if (rows.length === 0) {
       return <p style={{ color: 'var(--ink-dim)' }}>Aucune réponse reçue pour cette question.</p>
@@ -686,7 +756,17 @@ export function HostLive() {
                 }}
               />
             </span>
-            <span className="hostlive-answer-row__count">{row.count}</span>
+            {poll ? (
+              <span className="hostlive-answer-row__count">
+                {row.count} vote{row.count > 1 ? 's' : ''},{' '}
+                <span>
+                  {pollPercent(row.count, poll.voters)}
+                  {' '}%
+                </span>
+              </span>
+            ) : (
+              <span className="hostlive-answer-row__count">{row.count}</span>
+            )}
           </li>
         ))}
       </ul>
@@ -694,7 +774,8 @@ export function HostLive() {
   }
 
   function renderLeaderboard(limit: number, focusTarget: boolean) {
-    const top = ranking.slice(0, limit)
+    const top = boardEntries(ranking, players).slice(0, limit)
+    const hasRanking = ranking.length > 0
     if (top.length === 0) {
       return <p style={{ color: 'var(--ink-dim)' }}>Le classement s'affichera après la première question.</p>
     }
@@ -710,15 +791,59 @@ export function HostLive() {
         <ol className="hostlive-board">
           {top.map((p, index) => (
             <li key={p.playerId} className="hostlive-board__row">
-              <span className={`hostlive-board__rank${index === 0 ? ' hostlive-board__rank--first' : ''}`}>
-                {index + 1}
-              </span>
+              {/* Avant le premier classement, l'ordre n'est que celui d'arrivée : pas de rang. */}
+              {hasRanking && (
+                <span className={`hostlive-board__rank${index === 0 ? ' hostlive-board__rank--first' : ''}`}>
+                  {index + 1}
+                </span>
+              )}
               <span className="hostlive-board__name">{p.nickname}</span>
               <span className="hostlive-board__score">{p.score} pts</span>
+              <Button
+                variant="ghost"
+                type="button"
+                className="hostlive-kick"
+                aria-label={`Exclure ${p.nickname}`}
+                disabled={kickPendingId === p.playerId}
+                onClick={() => void kickPlayer(p.playerId, p.nickname)}
+              >
+                Exclure
+              </Button>
             </li>
           ))}
         </ol>
       </>
+    )
+  }
+
+  // Liste repliable de tous les joueurs présents (retardataires et joueurs au-delà du top
+  // compris), pour pouvoir exclure n'importe lequel en cours de partie.
+  function renderAllPlayers() {
+    if (players.length === 0) return null
+    return (
+      <details className="hostlive-all-players">
+        <summary>Tous les joueurs ({players.length})</summary>
+        <ul className="hostlive-board">
+          {players.map((p) => (
+            <li key={p.id} className="hostlive-board__row">
+              <span className="hostlive-board__name">
+                {p.nickname}
+                {!p.connected && <span className="visually-hidden"> (hors ligne)</span>}
+              </span>
+              <Button
+                variant="ghost"
+                type="button"
+                className="hostlive-kick"
+                aria-label={`Exclure ${p.nickname}`}
+                disabled={kickPendingId === p.id}
+                onClick={() => void kickPlayer(p.id, p.nickname)}
+              >
+                Exclure
+              </Button>
+            </li>
+          ))}
+        </ul>
+      </details>
     )
   }
 
@@ -853,6 +978,16 @@ export function HostLive() {
                       <li key={p.id} className="hostlive-players__chip">
                         {p.nickname}
                         {!p.connected && <span className="visually-hidden"> (hors ligne)</span>}
+                        <Button
+                          variant="ghost"
+                          type="button"
+                          className="hostlive-kick"
+                          aria-label={`Exclure ${p.nickname}`}
+                          disabled={kickPendingId === p.id}
+                          onClick={() => void kickPlayer(p.id, p.nickname)}
+                        >
+                          Exclure
+                        </Button>
                       </li>
                     ))}
                   </ul>
@@ -919,35 +1054,49 @@ export function HostLive() {
                 </div>
                 <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="host" />
 
-                <p className="hostlive-progress" aria-hidden="true">
-                  {progressAnswered} / {players.length} {progressAnswered > 1 ? 'ont' : 'a'} répondu
-                </p>
+                {question.type === 'poll' && (question.payload as { multiple?: boolean }).multiple && (
+                  <p className="hostlive-progress">Plusieurs réponses possibles</p>
+                )}
+
+                {question.type !== 'wordcloud' && (
+                  <p className="hostlive-progress" aria-hidden="true">
+                    {progressAnswered} / {players.length} {progressAnswered > 1 ? 'ont' : 'a'} répondu
+                  </p>
+                )}
                 <p className="visually-hidden" role="status" aria-live="polite">
                   {respondedAnnouncement}
                 </p>
 
+                {question.type === 'wordcloud' && renderWordcloud()}
+
                 <div className="hostlive-controls">
                   <Button variant="primary" type="button" disabled={actionPending} onClick={revealAnswer}>
-                    Révéler la réponse
+                    {question.type === 'wordcloud'
+                      ? 'Clore le nuage'
+                      : question.type === 'poll'
+                        ? 'Clore le sondage'
+                        : 'Révéler la réponse'}
                   </Button>
                   <Button
                     variant="ghost"
                     type="button"
                     disabled={actionPending}
                     onClick={() => {
-                      // Honnêteté : `host:skip` est un ALIAS serveur de `host:reveal` (voir
-                      // `doReveal`, game-gateway.ts) — il diffuse `question:reveal` à TOUTE la
-                      // room comme un reveal normal ; seul `skipRequestedRef` (ci-dessus) empêche
-                      // CET écran hôte de basculer sur la vue révélation. Les joueurs et le grand
-                      // écran, eux, voient la réponse. Un vrai skip serveur (sans révélation pour
-                      // personne) est un suivi Plan 7 — ce libellé ne doit jamais prétendre le
-                      // contraire.
+                      // Honnêteté : pour une question notée, `host:skip` est un ALIAS serveur de
+                      // `host:reveal` (voir `doReveal`, game-gateway.ts) — il diffuse
+                      // `question:reveal` à TOUTE la room comme un reveal normal ; seul
+                      // `skipRequestedRef` (ci-dessus) empêche CET écran hôte de basculer sur la
+                      // vue révélation. Les joueurs et le grand écran, eux, voient la réponse. Pour
+                      // une question non notée (sondage, nuage), le serveur n'émet ni révélation ni
+                      // classement et enchaîne directement : le message le dit tel quel.
                       if (
                         window.confirm(
-                          'Révéler la réponse et passer directement au classement ? La réponse sera affichée aux joueurs et au grand écran.',
+                          scored
+                            ? 'Révéler la réponse et passer directement au classement ? La réponse sera affichée aux joueurs et au grand écran.'
+                            : 'Passer directement à la suite, sans afficher les résultats ?',
                         )
                       ) {
-                        skipQuestion()
+                        skipQuestion(scored)
                       }
                     }}
                   >
@@ -964,15 +1113,23 @@ export function HostLive() {
                 </h2>
                 <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="host" />
                 <p className="visually-hidden" role="status" aria-live="polite">
-                  Réponse révélée : {revealedAnswerText}
+                  {revealStatus}
                 </p>
 
                 {renderDistribution()}
 
                 <div className="hostlive-controls">
-                  <Button variant="primary" type="button" onClick={goToScoreboard}>
-                    Afficher le classement
-                  </Button>
+                  {scored ? (
+                    <Button variant="primary" type="button" onClick={goToScoreboard}>
+                      Afficher le classement
+                    </Button>
+                  ) : (
+                    // Pas de classement après une question non notée : même avance que depuis
+                    // l'écran de classement (le serveur tranche entre question suivante et fin).
+                    <Button variant="primary" type="button" disabled={actionPending} onClick={advance}>
+                      {actionPending ? '…' : 'Suivant'}
+                    </Button>
+                  )}
                   {autoCountdownLabel && (
                     <p className="hostlive-controls__hint" role="status" aria-live="polite">
                       {autoCountdownLabel}
@@ -1006,7 +1163,16 @@ export function HostLive() {
 
             {phase === 'podium' && (
               <>
-                <PodiumView quizTitle={quizTitle} top={podiumTop} fullRanking={ranking} headingRef={podiumHeadingRef} />
+                {hasScoredQuestions ? (
+                  <PodiumView
+                    quizTitle={quizTitle}
+                    top={podiumTop}
+                    fullRanking={ranking}
+                    headingRef={podiumHeadingRef}
+                  />
+                ) : (
+                  <ClosingView quizTitle={quizTitle} headingRef={podiumHeadingRef} audience="room" />
+                )}
                 <div className="hostlive-relaunch">
                   {relaunchLoadError ? (
                     <p className="join-error" role="alert">
@@ -1045,9 +1211,16 @@ export function HostLive() {
             )}
           </section>
 
-          {(phase === 'question' || phase === 'reveal') && (
-            <aside className="hostlive-aside" aria-label="Dernier classement connu">
-              {renderLeaderboard(5, false)}
+          {(phase === 'reading' || phase === 'question' || phase === 'reveal') && (
+            <aside className="hostlive-aside" aria-label={scored ? 'Dernier classement connu' : 'Joueurs de la partie'}>
+              {/* Question non notée (sondage, nuage) : pas de rappel du classement, hors sujet ici. */}
+              {scored && renderLeaderboard(5, false)}
+              {renderAllPlayers()}
+            </aside>
+          )}
+          {phase === 'scoreboard' && players.length > 0 && (
+            <aside className="hostlive-aside" aria-label="Joueurs de la partie">
+              {renderAllPlayers()}
             </aside>
           )}
         </div>

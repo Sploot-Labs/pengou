@@ -1,0 +1,502 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0313-1",
+      "type": "mcq",
+      "prompt": "Dans quel groupe chante Robert Smith, avec sa coiffure arachnéenne ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Alphaville",
+            "correct": false
+          },
+          {
+            "label": "Cocteau Twins",
+            "correct": false
+          },
+          {
+            "label": "Indochine",
+            "correct": false
+          },
+          {
+            "label": "The Cure",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0313-2",
+      "type": "mcq",
+      "prompt": "Quel groupe a connu son premier succès avec « People Are People » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bauhaus",
+            "correct": false
+          },
+          {
+            "label": "U2",
+            "correct": false
+          },
+          {
+            "label": "Depeche Mode",
+            "correct": true
+          },
+          {
+            "label": "The Chameleons",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0313-3",
+      "type": "mcq",
+      "prompt": "Quel groupe anglais a obtenu son premier numéro un avec « Relax » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "OMD",
+            "correct": false
+          },
+          {
+            "label": "A4D",
+            "correct": false
+          },
+          {
+            "label": "FGTH",
+            "correct": true
+          },
+          {
+            "label": "U2",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0313-4",
+      "type": "mcq",
+      "prompt": "Quel groupe a été formé par les membres restants de Joy Division ?",
+      "payload": {
+        "options": [
+          {
+            "label": "New World",
+            "correct": false
+          },
+          {
+            "label": "Soft Cell",
+            "correct": false
+          },
+          {
+            "label": "New Order",
+            "correct": true
+          },
+          {
+            "label": "Kajagoogoo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0307-1",
+      "type": "mcq",
+      "prompt": "Quel groupe new wave a sorti les tubes « Electricity » et « Enola Gay » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Joy Division",
+            "correct": false
+          },
+          {
+            "label": "Yazoo",
+            "correct": false
+          },
+          {
+            "label": "Fox The Fox",
+            "correct": false
+          },
+          {
+            "label": "OMD",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0307-2",
+      "type": "mcq",
+      "prompt": "Quel groupe a connu son premier tube en 1981 avec « Tainted Love » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Depeche Mode",
+            "correct": false
+          },
+          {
+            "label": "Yazoo",
+            "correct": false
+          },
+          {
+            "label": "Soft Cell",
+            "correct": true
+          },
+          {
+            "label": "Simple Minds",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0307-3",
+      "type": "mcq",
+      "prompt": "À quel groupe new wave doit-on le hit « Shout », enregistré en 1984 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Pet Shop Boys",
+            "correct": false
+          },
+          {
+            "label": "Dead Or Alive",
+            "correct": false
+          },
+          {
+            "label": "Cocteau Twins",
+            "correct": false
+          },
+          {
+            "label": "Tears For Fears",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0307-4",
+      "type": "mcq",
+      "prompt": "Quel est le plus gros succès commercial du groupe New Order ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Paradise",
+            "correct": false
+          },
+          {
+            "label": "Sunrise",
+            "correct": false
+          },
+          {
+            "label": "Blue Monday",
+            "correct": true
+          },
+          {
+            "label": "Ultraviolence",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0429-1",
+      "type": "mcq",
+      "prompt": "Quel album de Depeche Mode propose une rose rouge sur sa pochette ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Violator",
+            "correct": true
+          },
+          {
+            "label": "A Broken Frame",
+            "correct": false
+          },
+          {
+            "label": "Ultra",
+            "correct": false
+          },
+          {
+            "label": "Exciter",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0429-2",
+      "type": "mcq",
+      "prompt": "Qui a dirigé la plupart des clips vidéos du groupe Depeche Mode ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Clive Richardson",
+            "correct": false
+          },
+          {
+            "label": "Anton Corbijn",
+            "correct": true
+          },
+          {
+            "label": "Julien Temple",
+            "correct": false
+          },
+          {
+            "label": "John Hillcoat",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0429-3",
+      "type": "mcq",
+      "prompt": "Avec quel label anglais le groupe Depeche Mode a-t-il géré sa carrière ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Warner",
+            "correct": false
+          },
+          {
+            "label": "EMI",
+            "correct": false
+          },
+          {
+            "label": "Mute Records",
+            "correct": true
+          },
+          {
+            "label": "Mercury",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0429-4",
+      "type": "mcq",
+      "prompt": "Qui est le chanteur principal du groupe Depeche Mode ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Vince Clarke",
+            "correct": false
+          },
+          {
+            "label": "Andrew Fletcher",
+            "correct": false
+          },
+          {
+            "label": "Dave Gahan",
+            "correct": true
+          },
+          {
+            "label": "Alan Wilder",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0562-1",
+      "type": "mcq",
+      "prompt": "Qui est le seul membre présent depuis l'origine du groupe The Cure ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Reeves Gabrels",
+            "correct": false
+          },
+          {
+            "label": "Roger O'Donnell",
+            "correct": false
+          },
+          {
+            "label": "Robert Smith",
+            "correct": true
+          },
+          {
+            "label": "Simon Gallup",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0562-2",
+      "type": "mcq",
+      "prompt": "À quel mouvement musical le groupe The Cure est-il encore associé ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Rock",
+            "correct": false
+          },
+          {
+            "label": "New wave",
+            "correct": true
+          },
+          {
+            "label": "Pop",
+            "correct": false
+          },
+          {
+            "label": "Dance",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0562-3",
+      "type": "mcq",
+      "prompt": "Quel instrument d'accompagnement est mis en avant chez The Cure ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Piano",
+            "correct": false
+          },
+          {
+            "label": "Saxophone",
+            "correct": false
+          },
+          {
+            "label": "Basse",
+            "correct": true
+          },
+          {
+            "label": "Trompette",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0562-4",
+      "type": "mcq",
+      "prompt": "Quel est le titre du premier 45 tours de The Cure, sorti en 1978 ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Another Day",
+            "correct": false
+          },
+          {
+            "label": "Killing an Arab",
+            "correct": true
+          },
+          {
+            "label": "So What",
+            "correct": false
+          },
+          {
+            "label": "Fire in Cairo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "oqdb-quiz-new-wave",
+      "title": "Les années new wave",
+      "description": "D'après les quiz OpenQuizzDB « Groupes new wave », « Titres new wave », « Depeche Mode » et « The Cure ».",
+      "theme": "musique",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous",
+      "questionIds": [
+        "oqdb-0313-1",
+        "oqdb-0313-2",
+        "oqdb-0313-3",
+        "oqdb-0313-4",
+        "oqdb-0307-1",
+        "oqdb-0307-2",
+        "oqdb-0307-3",
+        "oqdb-0307-4",
+        "oqdb-0429-1",
+        "oqdb-0429-2",
+        "oqdb-0429-3",
+        "oqdb-0429-4",
+        "oqdb-0562-1",
+        "oqdb-0562-2",
+        "oqdb-0562-3",
+        "oqdb-0562-4"
+      ]
+    }
+  ]
+}

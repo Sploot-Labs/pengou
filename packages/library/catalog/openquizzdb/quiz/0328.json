@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=328"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0328-2",
+      "type": "mcq",
+      "prompt": "Comment s'appelle la voiture de Batman ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Batmobile",
+            "correct": true
+          },
+          {
+            "label": "Batdrive",
+            "correct": false
+          },
+          {
+            "label": "Batauto",
+            "correct": false
+          },
+          {
+            "label": "Batcar",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0328-3",
+      "type": "mcq",
+      "prompt": "Quelle enseigne du groupe Belron répare les pare-brises ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Norauto",
+            "correct": false
+          },
+          {
+            "label": "Speedy",
+            "correct": false
+          },
+          {
+            "label": "Carglass",
+            "correct": true
+          },
+          {
+            "label": "Midas",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

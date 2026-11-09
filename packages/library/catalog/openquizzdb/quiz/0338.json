@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=338"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0338-2",
+      "type": "mcq",
+      "prompt": "Quels insectes sont parfois appelés « fourmis blanches » ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Les blattes",
+            "correct": false
+          },
+          {
+            "label": "Les termites",
+            "correct": true
+          },
+          {
+            "label": "Les cancrelats",
+            "correct": false
+          },
+          {
+            "label": "Les cafards",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "nature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0338-3",
+      "type": "mcq",
+      "prompt": "Avec quel insecte la fourmi est-elle associée dans une fable ?",
+      "payload": {
+        "options": [
+          {
+            "label": "La libellule",
+            "correct": false
+          },
+          {
+            "label": "La coccinelle",
+            "correct": false
+          },
+          {
+            "label": "La mouche",
+            "correct": false
+          },
+          {
+            "label": "La cigale",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "litterature",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

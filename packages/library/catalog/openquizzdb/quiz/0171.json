@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=171"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0171-1",
+      "type": "mcq",
+      "prompt": "Dans quel portefeuille peuvent être stockés les Ethers ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Disket",
+            "correct": false
+          },
+          {
+            "label": "Wallet",
+            "correct": true
+          },
+          {
+            "label": "Magnet",
+            "correct": false
+          },
+          {
+            "label": "Basket",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0171-3",
+      "type": "mcq",
+      "prompt": "Quelle monnaie native est utilisée par le protocole de paiement Ripple ?",
+      "payload": {
+        "options": [
+          {
+            "label": "XPP",
+            "correct": false
+          },
+          {
+            "label": "XRP",
+            "correct": true
+          },
+          {
+            "label": "XLE",
+            "correct": false
+          },
+          {
+            "label": "XPL",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0171-4",
+      "type": "mcq",
+      "prompt": "Quel investisseur est aussi le créateur du site bitcoin.com ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roger Ver",
+            "correct": true
+          },
+          {
+            "label": "Charlie Lee",
+            "correct": false
+          },
+          {
+            "label": "Sunny King",
+            "correct": false
+          },
+          {
+            "label": "Gavin Wood",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

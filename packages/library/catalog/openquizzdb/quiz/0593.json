@@ -1,0 +1,39 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=593"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0593-3",
+      "type": "mcq",
+      "prompt": "De combien d'années Meghan Markle est-elle l'aînée du prince Harry ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Trois ans",
+            "correct": true
+          },
+          {
+            "label": "Sept ans",
+            "correct": false
+          },
+          {
+            "label": "Neuf ans",
+            "correct": false
+          },
+          {
+            "label": "Cinq ans",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "people",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

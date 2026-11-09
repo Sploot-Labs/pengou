@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=189"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0189-1",
+      "type": "mcq",
+      "prompt": "Quelle bière belge est fabriquée en ajoutant des cerises au lambic ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Kwak",
+            "correct": false
+          },
+          {
+            "label": "Kronenbourg",
+            "correct": false
+          },
+          {
+            "label": "Kriek",
+            "correct": true
+          },
+          {
+            "label": "Keystone",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0189-2",
+      "type": "mcq",
+      "prompt": "Quelle bière belge, produit phare de la brasserie Dubuisson, titre 12 % ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Bush",
+            "correct": true
+          },
+          {
+            "label": "Chimay Bleue",
+            "correct": false
+          },
+          {
+            "label": "Mort Subite",
+            "correct": false
+          },
+          {
+            "label": "Tongerlo",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    },
+    {
+      "id": "oqdb-0189-4",
+      "type": "mcq",
+      "prompt": "Quelle bière belge reste la référence au pays des blanches ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Corsendonk",
+            "correct": false
+          },
+          {
+            "label": "Hoegaarden",
+            "correct": true
+          },
+          {
+            "label": "Bacchus",
+            "correct": false
+          },
+          {
+            "label": "Floreffe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "adultes"
+    }
+  ],
+  "quizzes": []
+}

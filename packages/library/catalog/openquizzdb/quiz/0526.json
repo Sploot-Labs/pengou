@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=526"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0526-3",
+      "type": "mcq",
+      "prompt": "Quel est l'ancien nom autrefois donné à la planète Vegeta ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Beerus",
+            "correct": false
+          },
+          {
+            "label": "Plant",
+            "correct": true
+          },
+          {
+            "label": "Namek",
+            "correct": false
+          },
+          {
+            "label": "Melmac",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0526-4",
+      "type": "mcq",
+      "prompt": "Qui a aidé à éteindre le château en feu du père de Chi-Chi ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Tortue Géniale",
+            "correct": true
+          },
+          {
+            "label": "Goku",
+            "correct": false
+          },
+          {
+            "label": "Bulma",
+            "correct": false
+          },
+          {
+            "label": "Drum",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "television",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

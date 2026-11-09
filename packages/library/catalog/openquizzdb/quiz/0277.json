@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=277"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0277-2",
+      "type": "mcq",
+      "prompt": "Le safran est une épice tirée de quelle variété de fleur ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Acacia",
+            "correct": false
+          },
+          {
+            "label": "Crocus",
+            "correct": true
+          },
+          {
+            "label": "Pavot",
+            "correct": false
+          },
+          {
+            "label": "Tulipe",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0277-3",
+      "type": "mcq",
+      "prompt": "Quelle herbe est essentielle dans la sauce béarnaise ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Cerfeuil",
+            "correct": false
+          },
+          {
+            "label": "Estragon",
+            "correct": true
+          },
+          {
+            "label": "Sauge",
+            "correct": false
+          },
+          {
+            "label": "Romarin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "gastronomie",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

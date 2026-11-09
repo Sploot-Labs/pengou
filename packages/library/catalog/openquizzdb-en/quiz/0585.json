@@ -1,0 +1,68 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=585"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0585-1-en",
+      "type": "mcq",
+      "prompt": "Which of these is not one of the seven deadly sins?",
+      "payload": {
+        "options": [
+          {
+            "label": "Lying",
+            "correct": true
+          },
+          {
+            "label": "Envy",
+            "correct": false
+          },
+          {
+            "label": "Sloth",
+            "correct": false
+          },
+          {
+            "label": "Wrath",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0585-2-en",
+      "type": "mcq",
+      "prompt": "Which plant is the odd one out among those whose root is eaten?",
+      "payload": {
+        "options": [
+          {
+            "label": "Turnip",
+            "correct": false
+          },
+          {
+            "label": "Asparagus",
+            "correct": true
+          },
+          {
+            "label": "Beetroot",
+            "correct": false
+          },
+          {
+            "label": "Carrot",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

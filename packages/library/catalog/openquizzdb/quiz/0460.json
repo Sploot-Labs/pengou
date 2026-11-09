@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=460"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0460-2",
+      "type": "mcq",
+      "prompt": "Quelle est la couleur de la « boîte noire » en aviation ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Blanche",
+            "correct": false
+          },
+          {
+            "label": "Orange",
+            "correct": true
+          },
+          {
+            "label": "Noire",
+            "correct": false
+          },
+          {
+            "label": "Verte",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0460-3",
+      "type": "mcq",
+      "prompt": "Quel mammifère a donné son nom à un instrument de rasage ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Buffle",
+            "correct": false
+          },
+          {
+            "label": "Bison",
+            "correct": false
+          },
+          {
+            "label": "Blaireau",
+            "correct": true
+          },
+          {
+            "label": "Bouquetin",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0460-4",
+      "type": "mcq",
+      "prompt": "Quel appareil de levage permet entre autre de soulever une voiture ?",
+      "payload": {
+        "options": [
+          {
+            "label": "Delco",
+            "correct": false
+          },
+          {
+            "label": "Rustine",
+            "correct": false
+          },
+          {
+            "label": "Hayon",
+            "correct": false
+          },
+          {
+            "label": "Cric",
+            "correct": true
+          }
+        ]
+      },
+      "theme": "culture-generale",
+      "difficulty": "moyen",
+      "language": "fr",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}

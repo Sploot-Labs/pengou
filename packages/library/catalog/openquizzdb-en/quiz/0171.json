@@ -1,0 +1,97 @@
+{
+  "source": {
+    "name": "OpenQuizzDB, Philippe Bresoux (traduction Sploot Labs)",
+    "license": "CC BY-SA 4.0",
+    "url": "https://www.openquizzdb.org/download.php?id=171"
+  },
+  "questions": [
+    {
+      "id": "oqdb-0171-1-en",
+      "type": "mcq",
+      "prompt": "What can Ether be stored in?",
+      "payload": {
+        "options": [
+          {
+            "label": "Disket",
+            "correct": false
+          },
+          {
+            "label": "Wallet",
+            "correct": true
+          },
+          {
+            "label": "Magnet",
+            "correct": false
+          },
+          {
+            "label": "Basket",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0171-3-en",
+      "type": "mcq",
+      "prompt": "Which native currency does the Ripple payment protocol use?",
+      "payload": {
+        "options": [
+          {
+            "label": "XPP",
+            "correct": false
+          },
+          {
+            "label": "XRP",
+            "correct": true
+          },
+          {
+            "label": "XLE",
+            "correct": false
+          },
+          {
+            "label": "XPL",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    },
+    {
+      "id": "oqdb-0171-4-en",
+      "type": "mcq",
+      "prompt": "Which investor also created the website bitcoin.com?",
+      "payload": {
+        "options": [
+          {
+            "label": "Roger Ver",
+            "correct": true
+          },
+          {
+            "label": "Charlie Lee",
+            "correct": false
+          },
+          {
+            "label": "Sunny King",
+            "correct": false
+          },
+          {
+            "label": "Gavin Wood",
+            "correct": false
+          }
+        ]
+      },
+      "theme": "sciences",
+      "difficulty": "moyen",
+      "language": "en",
+      "audience": "tous"
+    }
+  ],
+  "quizzes": []
+}
