@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { escapeHtml, invitationMail, passwordChangedMail, resetPasswordMail, verifyEmailMail } from '../index.js'
+import {
+  escapeHtml,
+  invitationMail,
+  passwordChangedMail,
+  resetPasswordMail,
+  trimBase,
+  verifyEmailMail,
+} from '../index.js'
 
 const baseUrl = 'https://app.pengou.fr'
 const url = 'https://app.pengou.fr/action/abc123'
@@ -111,6 +118,22 @@ describe("garde d'URL et sujet", () => {
     const mail = inv({ inviterName: 'Camille\r\nBcc: x@y' })
     expect(mail.subject).not.toMatch(/[\r\n]/)
     expect(mail.subject).toBe('Camille Bcc: x@y vous invite sur Pengou')
+  })
+})
+
+describe('trimBase', () => {
+  it.each([
+    ['https://app.pengou.fr', 'https://app.pengou.fr'],
+    ['https://app.pengou.fr/', 'https://app.pengou.fr'],
+    ['https://app.pengou.fr/pengou///', 'https://app.pengou.fr/pengou'],
+    ['///', ''],
+    ['', ''],
+  ])('réduit %j à %j', (entree, attendu) => {
+    expect(trimBase(entree)).toBe(attendu)
+  })
+  it('garde les barres qui ne sont pas finales, même très nombreuses', () => {
+    const entree = `${'/'.repeat(100_000)}x`
+    expect(trimBase(entree)).toBe(entree)
   })
 })
 

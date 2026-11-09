@@ -9,6 +9,7 @@ import {
   recipientDomain,
   resetPasswordMail,
   sendAndLog,
+  trimBase,
   verifyEmailMail,
   type DnsResolver,
   type Mailer,
@@ -86,7 +87,7 @@ export function createAuth(db: Db, config: AuthConfig) {
         // ni faire échouer la réponse. `sendAndLog` ne lève pas ; le `catch` couvre le rendu du gabarit.
         onPasswordReset: async ({ user }) => {
           void (async () => {
-            const url = `${config.baseURL.replace(/\/+$/, '')}/forgot-password`
+            const url = `${trimBase(config.baseURL)}/forgot-password`
             const rendered = passwordChangedMail({ baseUrl: config.baseURL, url })
             await sendAndLog(mailer, { to: user.email, kind: 'password-changed', ...rendered }, logger, transport)
           })().catch((error: unknown) => logRenderFailure('password-changed', user.email, error))
