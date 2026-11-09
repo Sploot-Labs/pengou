@@ -1,5 +1,7 @@
 import { describe, it, expect, afterAll, beforeAll, vi } from 'vitest'
-import { startTestDb, runMigrations } from '@splootlabs/db'
+import { randomUUID } from 'node:crypto'
+import { eq } from 'drizzle-orm'
+import { startTestDb, runMigrations, schema } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { createMailer, MemoryMailer, type Mailer } from '@splootlabs/mail'
 import { loadConfig } from '@splootlabs/shared'
@@ -44,6 +46,18 @@ async function buildApp(
 
 function post(app: Awaited<ReturnType<typeof buildApp>>, url: string, payload: object) {
   return app.inject({ method: 'POST', url, payload, headers: { 'content-type': 'application/json' } })
+}
+
+/** Demande un lien de réinitialisation, en extrait le jeton et vide la boîte du mailer. */
+async function requestResetToken(app: Awaited<ReturnType<typeof buildApp>>, mailer: MemoryMailer, email: string) {
+  mailer.sent.length = 0 // l'inscription envoie la confirmation d'adresse, hors sujet ici
+  const request = await post(app, '/api/auth/request-password-reset', { email, redirectTo: '/reset-password' })
+  expect(request.statusCode).toBe(200)
+  await vi.waitFor(() => expect(mailer.sent).toHaveLength(1))
+  const token = /\/api\/auth\/reset-password\/([^?\s]+)/.exec(mailer.sent[0].text)?.[1]
+  if (!token) throw new Error('Aucun jeton dans le lien de réinitialisation')
+  mailer.sent.length = 0
+  return token
 }
 
 describe('e2e : réinitialisation du mot de passe', () => {
@@ -91,6 +105,91 @@ describe('e2e : réinitialisation du mot de passe', () => {
 
     await app.close()
   })
+
+  it('prévient le titulaire une fois le mot de passe modifié', async () => {
+    const mailer = new MemoryMailer()
+    const logger = captureLogger()
+    const app = await buildApp(mailer, { logger })
+    const email = 'prevenu@example.com'
+    await post(app, '/api/auth/sign-up/email', { email, password: 'ancien-motdepasse-123', name: 'Prévenu' })
+
+    const token = await requestResetToken(app, mailer, email)
+    expect(mailer.sent).toHaveLength(0)
+
+    const reset = await post(app, '/api/auth/reset-password', { newPassword: 'nouveau-motdepasse-456', token })
+    expect(reset.statusCode).toBe(200)
+
+    await vi.waitFor(() => expect(mailer.sent).toHaveLength(1))
+    const [mail] = mailer.sent
+    expect(mail.kind).toBe('password-changed')
+    expect(mail.to).toBe(email)
+    expect(mail.subject).toBe('Votre mot de passe Pengou a été modifié')
+    expect(mail.text).toContain(`${BASE_URL}/forgot-password`)
+    expect(mail.text).not.toContain(token)
+    await vi.waitFor(() =>
+      expect(logger.info).toHaveBeenCalledWith(
+        { kind: 'password-changed', transport: 'smtp', domain: 'example.com', ok: true },
+        expect.any(String),
+      ),
+    )
+
+    await app.close()
+  })
+
+  it("garde la réinitialisation réussie quand l'e-mail de confirmation échoue", async () => {
+    const mailer = new MemoryMailer()
+    const logger = captureLogger()
+    const app = await buildApp(mailer, { logger })
+    const email = 'echec-envoi@example.com'
+    const newPassword = 'nouveau-motdepasse-456'
+    await post(app, '/api/auth/sign-up/email', { email, password: 'ancien-motdepasse-123', name: 'Échec' })
+
+    const token = await requestResetToken(app, mailer, email)
+    mailer.failNext()
+    const reset = await post(app, '/api/auth/reset-password', { newPassword, token })
+    expect(reset.statusCode).toBe(200)
+    await vi.waitFor(() =>
+      expect(logger.error).toHaveBeenCalledWith(
+        expect.objectContaining({ kind: 'password-changed', transport: 'smtp', domain: 'example.com' }),
+        expect.any(String),
+      ),
+    )
+
+    const withNew = await post(app, '/api/auth/sign-in/email', { email, password: newPassword })
+    expect(withNew.statusCode).toBe(200)
+
+    await app.close()
+  })
+
+  it.each(['google', 'facebook'])(
+    'crée un mot de passe pour un compte %s, sans retirer le fournisseur',
+    async (provider) => {
+      const mailer = new MemoryMailer()
+      const app = await buildApp(mailer)
+      const userId = randomUUID()
+      const email = `social-${provider}@example.com`
+      const newPassword = 'premier-motdepasse-789'
+      await ctx.db.insert(schema.user).values({ id: userId, name: 'Social', email, emailVerified: true })
+      await ctx.db
+        .insert(schema.account)
+        .values({ id: randomUUID(), userId, providerId: provider, accountId: `id-${provider}` })
+
+      const before = await post(app, '/api/auth/sign-in/email', { email, password: newPassword })
+      expect(before.statusCode).not.toBe(200)
+
+      const token = await requestResetToken(app, mailer, email)
+      const reset = await post(app, '/api/auth/reset-password', { newPassword, token })
+      expect(reset.statusCode).toBe(200)
+
+      const accounts = await ctx.db.select().from(schema.account).where(eq(schema.account.userId, userId))
+      expect(accounts.map((a) => a.providerId).sort()).toEqual(['credential', provider].sort())
+      const after = await post(app, '/api/auth/sign-in/email', { email, password: newPassword })
+      expect(after.statusCode).toBe(200)
+      await vi.waitFor(() => expect(mailer.sent.map((m) => m.kind)).toEqual(['password-changed']))
+
+      await app.close()
+    },
+  )
 
   it("répond pareil pour une adresse inconnue et n'envoie rien", async () => {
     const mailer = new MemoryMailer()

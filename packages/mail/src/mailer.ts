@@ -3,7 +3,7 @@ import { BrevoMailer } from './brevo.js'
 import { maskTokens, recipientDomain } from './mask.js'
 import { SmtpMailer } from './smtp.js'
 
-export type MailKind = 'invitation' | 'reset-password' | 'verify-email'
+export type MailKind = 'invitation' | 'reset-password' | 'password-changed' | 'verify-email'
 
 export type OutgoingMail = { to: string; subject: string; text: string; html: string; kind: MailKind }
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { escapeHtml, invitationMail, resetPasswordMail, verifyEmailMail } from '../index.js'
+import { escapeHtml, invitationMail, passwordChangedMail, resetPasswordMail, verifyEmailMail } from '../index.js'
 
 const baseUrl = 'https://app.pengou.fr'
 const url = 'https://app.pengou.fr/action/abc123'
@@ -28,6 +28,12 @@ const cases = [
     make: (u: string) => resetPasswordMail({ baseUrl, url: u }),
     subject: 'Réinitialiser votre mot de passe Pengou',
     title: 'Choisir un nouveau mot de passe',
+  },
+  {
+    nom: 'mot de passe modifié',
+    make: (u: string) => passwordChangedMail({ baseUrl, url: u }),
+    subject: 'Votre mot de passe Pengou a été modifié',
+    title: 'Votre mot de passe a été modifié',
   },
   {
     nom: 'confirmation',
@@ -80,6 +86,16 @@ describe('invitation', () => {
     expect(inv().html).toContain('Rôle : membre')
     expect(inv({ role: 'admin', workspaceName: 'école' }).html).toContain('Rôle : administrateur')
     expect(inv({ workspaceName: 'école' }).html).toMatch(/>É<\/td>/)
+  })
+})
+
+describe('mot de passe modifié', () => {
+  it("dit quoi faire si le changement n'est pas du titulaire, sans jeton dans le lien", () => {
+    const lien = 'https://app.pengou.fr/forgot-password'
+    const mail = passwordChangedMail({ baseUrl, url: lien })
+    expect(mail.text).toContain("Si ce n'est pas vous")
+    expect(mail.html).toContain('Si ce n&#39;est pas vous')
+    expect(mail.text).toContain(lien)
   })
 })
 

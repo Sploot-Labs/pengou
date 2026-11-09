@@ -5,6 +5,7 @@ import {
   checkEmailDeliverable,
   DELIVERABILITY_MESSAGES,
   maskTokens,
+  passwordChangedMail,
   recipientDomain,
   resetPasswordMail,
   sendAndLog,
@@ -80,6 +81,15 @@ export function createAuth(db: Db, config: AuthConfig) {
             const rendered = resetPasswordMail({ baseUrl: config.baseURL, url })
             await sendAndLog(mailer, { to: user.email, kind: 'reset-password', ...rendered }, logger, transport)
           })().catch((error: unknown) => logRenderFailure('reset-password', user.email, error))
+        },
+        // Le mot de passe est déjà changé à cet appel : un envoi lent ou en échec ne doit ni retarder
+        // ni faire échouer la réponse. `sendAndLog` ne lève pas ; le `catch` couvre le rendu du gabarit.
+        onPasswordReset: async ({ user }) => {
+          void (async () => {
+            const url = `${config.baseURL.replace(/\/+$/, '')}/forgot-password`
+            const rendered = passwordChangedMail({ baseUrl: config.baseURL, url })
+            await sendAndLog(mailer, { to: user.email, kind: 'password-changed', ...rendered }, logger, transport)
+          })().catch((error: unknown) => logRenderFailure('password-changed', user.email, error))
         },
         resetPasswordTokenExpiresIn: 3600,
         revokeSessionsOnPasswordReset: true,
