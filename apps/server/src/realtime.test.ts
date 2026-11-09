@@ -8,7 +8,7 @@ import { loadConfig } from '@splootlabs/shared'
 async function listenOn(app: FastifyInstance): Promise<string> {
   await app.listen({ port: 0, host: '127.0.0.1' })
   const address = app.server.address()
-  if (!address || typeof address === 'string') throw new Error('pas d\'adresse')
+  if (!address || typeof address === 'string') throw new Error("pas d'adresse")
   return `http://127.0.0.1:${address.port}`
 }
 
@@ -19,10 +19,10 @@ describe('Socket.IO ping/pong', () => {
     const io = attachRealtime(app, config)
     await app.listen({ port: 0, host: '127.0.0.1' })
     const address = app.server.address()
-    if (!address || typeof address === 'string') throw new Error('pas d\'adresse')
+    if (!address || typeof address === 'string') throw new Error("pas d'adresse")
 
     const client = ioClient(`http://127.0.0.1:${address.port}`, {
-      reconnection: false
+      reconnection: false,
     })
 
     try {

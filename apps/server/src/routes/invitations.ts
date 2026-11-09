@@ -1,8 +1,17 @@
 import type { FastifyInstance } from 'fastify'
 import {
-  withTenantTx, createInvitation, listInvitations, getInvitationById, revokeInvitation,
-  resendInvitation, getInvitationByToken, acceptInvitation, newInvitationToken, invitationExpiry,
-  InvitationError, type Db,
+  withTenantTx,
+  createInvitation,
+  listInvitations,
+  getInvitationById,
+  revokeInvitation,
+  resendInvitation,
+  getInvitationByToken,
+  acceptInvitation,
+  newInvitationToken,
+  invitationExpiry,
+  InvitationError,
+  type Db,
 } from '@splootlabs/db'
 import type { AppConfig, Role } from '@splootlabs/shared'
 import { requireUser } from '../require-user.js'
@@ -25,11 +34,16 @@ function isEmail(value: unknown): value is string {
 
 function mapAcceptError(code: string): { status: number; error: string } {
   switch (code) {
-    case 'not_found': return { status: 404, error: 'Invitation introuvable.' }
-    case 'not_pending': return { status: 409, error: 'Cette invitation a déjà été utilisée ou révoquée.' }
-    case 'expired': return { status: 410, error: 'Cette invitation a expiré.' }
-    case 'already_member': return { status: 409, error: 'Vous êtes déjà membre de ce workspace.' }
-    default: return { status: 400, error: 'Invitation invalide.' }
+    case 'not_found':
+      return { status: 404, error: 'Invitation introuvable.' }
+    case 'not_pending':
+      return { status: 409, error: 'Cette invitation a déjà été utilisée ou révoquée.' }
+    case 'expired':
+      return { status: 410, error: 'Cette invitation a expiré.' }
+    case 'already_member':
+      return { status: 409, error: 'Vous êtes déjà membre de ce workspace.' }
+    default:
+      return { status: 400, error: 'Invitation invalide.' }
   }
 }
 
@@ -60,7 +74,9 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: Deps): void
 
   app.get<{ Params: { tenantId: string } }>('/api/workspaces/:tenantId/invitations', guard, async (request) => {
     const { tenantId } = request.workspace!
-    const invitations = await withTenantTx(appDb, { tenantId }, (scope) => listInvitations(scope, { status: 'pending' }))
+    const invitations = await withTenantTx(appDb, { tenantId }, (scope) =>
+      listInvitations(scope, { status: 'pending' }),
+    )
     return { invitations }
   })
 
@@ -73,23 +89,30 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: Deps): void
     const token = newInvitationToken()
     const expiresAt = invitationExpiry()
     const invitation = await withTenantTx(appDb, { tenantId }, (scope) =>
-      createInvitation(scope, { email: body.email as string, role, invitedBy: request.user.id, token, expiresAt }))
+      createInvitation(scope, { email: body.email as string, role, invitedBy: request.user.id, token, expiresAt }),
+    )
     return reply.code(201).send({ invitation })
   })
 
   app.post<{ Params: { tenantId: string; id: string } }>(
-    '/api/workspaces/:tenantId/invitations/:id/resend', guard, async (request, reply) => {
+    '/api/workspaces/:tenantId/invitations/:id/resend',
+    guard,
+    async (request, reply) => {
       const { tenantId } = request.workspace!
       const token = newInvitationToken()
       const expiresAt = invitationExpiry()
       const invitation = await withTenantTx(appDb, { tenantId }, (scope) =>
-        resendInvitation(scope, request.params.id, { token, expiresAt }))
+        resendInvitation(scope, request.params.id, { token, expiresAt }),
+      )
       if (!invitation) return reply.code(404).send({ error: 'Invitation en attente introuvable.' })
       return { invitation }
-    })
+    },
+  )
 
   app.delete<{ Params: { tenantId: string; id: string } }>(
-    '/api/workspaces/:tenantId/invitations/:id', guard, async (request, reply) => {
+    '/api/workspaces/:tenantId/invitations/:id',
+    guard,
+    async (request, reply) => {
       const { tenantId } = request.workspace!
       const invitation = await withTenantTx(appDb, { tenantId }, async (scope) => {
         const existing = await getInvitationById(scope, request.params.id)
@@ -98,7 +121,8 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: Deps): void
       })
       if (!invitation) return reply.code(404).send({ error: 'Invitation en attente introuvable.' })
       return { ok: true }
-    })
+    },
+  )
 
   // --- Endpoints par token (pré-contexte, systemDb) ---
 
@@ -112,16 +136,20 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: Deps): void
     return view
   })
 
-  app.post<{ Params: { token: string } }>('/api/invitations/:token/accept', { preHandler: requireUser }, async (request, reply) => {
-    try {
-      const result = await acceptInvitation(systemDb, { token: request.params.token, userId: request.user.id })
-      return reply.code(200).send(result)
-    } catch (e) {
-      if (e instanceof InvitationError) {
-        const { status, error } = mapAcceptError(e.code)
-        return reply.code(status).send({ error })
+  app.post<{ Params: { token: string } }>(
+    '/api/invitations/:token/accept',
+    { preHandler: requireUser },
+    async (request, reply) => {
+      try {
+        const result = await acceptInvitation(systemDb, { token: request.params.token, userId: request.user.id })
+        return reply.code(200).send(result)
+      } catch (e) {
+        if (e instanceof InvitationError) {
+          const { status, error } = mapAcceptError(e.code)
+          return reply.code(status).send({ error })
+        }
+        throw e
       }
-      throw e
-    }
-  })
+    },
+  )
 }

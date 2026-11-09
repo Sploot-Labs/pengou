@@ -96,9 +96,7 @@ export function Join() {
   const pinCells = [0, 1, 2, 3, 4, 5].map((i) => pin[i] ?? '')
   // Le champ PIN est toujours décrit par son aide ; l'éventuel message d'erreur
   // s'ajoute devant (ordre de lecture : erreur puis rappel de l'attendu).
-  const pinDescribedBy = [errors.pin ? 'join-pin-error' : null, 'join-pin-aide']
-    .filter(Boolean)
-    .join(' ')
+  const pinDescribedBy = [errors.pin ? 'join-pin-error' : null, 'join-pin-aide'].filter(Boolean).join(' ')
 
   return (
     <main className="join-screen" id="contenu-principal" tabIndex={-1}>

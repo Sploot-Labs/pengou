@@ -166,9 +166,7 @@ export function SessionReport() {
         <div className="report-summary">
           <PinDisplay pin={session.pin} compact />
           <div className="report-summary__facts">
-            <span className={`host-badge host-badge--${session.status}`}>
-              {STATUS_LABEL[session.status]}
-            </span>
+            <span className={`host-badge host-badge--${session.status}`}>{STATUS_LABEL[session.status]}</span>
             <span>{formatDate(session.startedAt)}</span>
             {session.startedAt && session.endedAt && (
               <span>Durée : {formatDuration(session.startedAt, session.endedAt)}</span>
@@ -179,21 +177,15 @@ export function SessionReport() {
         <div className="report-stats">
           <div className="report-stat">
             <span className="report-stat__value">{players.length}</span>
-            <span className="report-stat__label">
-              joueur{players.length > 1 ? 's' : ''}
-            </span>
+            <span className="report-stat__label">joueur{players.length > 1 ? 's' : ''}</span>
           </div>
           <div className="report-stat">
             <span className="report-stat__value">{questions.length}</span>
-            <span className="report-stat__label">
-              question{questions.length > 1 ? 's' : ''}
-            </span>
+            <span className="report-stat__label">question{questions.length > 1 ? 's' : ''}</span>
           </div>
           {session.startedAt && session.endedAt && (
             <div className="report-stat">
-              <span className="report-stat__value">
-                {formatDuration(session.startedAt, session.endedAt)}
-              </span>
+              <span className="report-stat__value">{formatDuration(session.startedAt, session.endedAt)}</span>
               <span className="report-stat__label">durée</span>
             </div>
           )}
@@ -206,9 +198,7 @@ export function SessionReport() {
           ) : (
             <div className="report-table-wrap">
               <table className="report-table">
-                <caption className="visually-hidden">
-                  Classement des joueurs, du meilleur score au moins bon.
-                </caption>
+                <caption className="visually-hidden">Classement des joueurs, du meilleur score au moins bon.</caption>
                 <thead>
                   <tr>
                     <th scope="col">Pseudo</th>
@@ -236,9 +226,8 @@ export function SessionReport() {
         <section aria-labelledby="report-questions-heading" style={{ marginTop: 'var(--space-6)' }}>
           <h2 id="report-questions-heading">Questions</h2>
           <p style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
-            Cette liste reflète la version actuelle du quiz : si une question a été modifiée ou
-            supprimée depuis cette partie, son contenu ci-dessous peut différer de ce qui a
-            réellement été joué.
+            Cette liste reflète la version actuelle du quiz : si une question a été modifiée ou supprimée depuis cette
+            partie, son contenu ci-dessous peut différer de ce qui a réellement été joué.
           </p>
           {questions.length === 0 ? (
             <p className="ab-empty-state">Ce quiz n'a aucune question.</p>

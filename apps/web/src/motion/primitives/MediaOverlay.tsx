@@ -3,15 +3,7 @@ import { useState } from 'react'
 /** Fond animé / stinger vidéo. <video> muet + playsInline + loop (autoplay muet
  * autorisé). Fallback dégradé si la vidéo ne charge pas. aria-hidden : décoratif.
  * `src` = clé résolue vers /media/<src>.mp4 dans apps/web/public/media/. */
-export function MediaOverlay({
-  src,
-  mode,
-  active,
-}: {
-  src: string
-  mode: 'overlay' | 'background'
-  active: boolean
-}) {
+export function MediaOverlay({ src, mode, active }: { src: string; mode: 'overlay' | 'background'; active: boolean }) {
   const [failed, setFailed] = useState(false)
   if (!active) return null
 

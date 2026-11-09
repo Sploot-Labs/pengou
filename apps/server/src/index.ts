@@ -1,8 +1,14 @@
 import { join } from 'node:path'
 import { loadConfig } from '@splootlabs/shared'
 import {
-  createDb, createAppDb, deriveAppUrl, ensureAppRole, setAppRolePassword,
-  runMigrations, ensureDefaultTenant, pingDb,
+  createDb,
+  createAppDb,
+  deriveAppUrl,
+  ensureAppRole,
+  setAppRolePassword,
+  runMigrations,
+  ensureDefaultTenant,
+  pingDb,
 } from '@splootlabs/db'
 import { createAuth, enabledSocialProviders } from '@splootlabs/auth'
 import { createEngine, generatePin } from '@splootlabs/game'
@@ -29,7 +35,8 @@ await setAppRolePassword(client, APP_ROLE, config.appDbPassword)
 if (config.migrateOnBoot) await runMigrations(systemDb)
 if (config.tenancyMode === 'single') await ensureDefaultTenant(systemDb)
 
-const appUrl = config.appDatabaseUrl ?? deriveAppUrl(config.databaseUrl, { user: APP_ROLE, password: config.appDbPassword })
+const appUrl =
+  config.appDatabaseUrl ?? deriveAppUrl(config.databaseUrl, { user: APP_ROLE, password: config.appDbPassword })
 const { db: appDb, client: appClient } = createAppDb(appUrl)
 
 let dbUp = true

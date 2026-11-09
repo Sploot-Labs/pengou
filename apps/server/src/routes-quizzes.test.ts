@@ -197,7 +197,7 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await app.close()
   })
 
-  it('intra-tenant (member) : le quiz d\'un autre MEMBER du même tenant est invisible (404) et non modifiable/supprimable', async () => {
+  it("intra-tenant (member) : le quiz d'un autre MEMBER du même tenant est invisible (404) et non modifiable/supprimable", async () => {
     const app = await buildApp()
 
     // Deux utilisateurs distincts qui, en mode single, résolvent vers LE MÊME tenant par défaut.
@@ -244,7 +244,7 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await app.close()
   })
 
-  it('un quiz d\'un AUTRE tenant est invisible (404, pas juste un id manquant) et absent de la liste', async () => {
+  it("un quiz d'un AUTRE tenant est invisible (404, pas juste un id manquant) et absent de la liste", async () => {
     const app = await buildApp()
 
     // Seed direct en base : un second tenant, un owner qui lui appartient, et un quiz
@@ -252,7 +252,8 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     // single, résout toujours vers le tenant par défaut ; on simule ainsi un tenant
     // "étranger" que l'utilisateur de test ne pourra jamais atteindre via l'API).
     const [foreignTenant] = await ctx.db.insert(schema.tenant).values({ name: 'Autre' }).returning()
-    const [foreignOwner] = await ctx.db.insert(schema.user)
+    const [foreignOwner] = await ctx.db
+      .insert(schema.user)
       .values({ id: crypto.randomUUID(), email: 'etranger@x.fr', name: 'Étranger', emailVerified: false })
       .returning()
     const foreignQuiz = await createQuiz(tenantScope(ctx.db, foreignTenant.id), {
@@ -289,7 +290,7 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await app.close()
   })
 
-  it('un admin voit et modifie le quiz d\'un autre membre du même tenant (accès croisé par rôle)', async () => {
+  it("un admin voit et modifie le quiz d'un autre membre du même tenant (accès croisé par rôle)", async () => {
     const app = await buildApp()
     const adminCookie = await signUp(app, 'admin-x@example.com')
     const memberCookie = await signUp(app, 'member-x@example.com')
@@ -302,7 +303,8 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
 
     // member-x crée un quiz.
     const created = await app.inject({
-      method: 'POST', url: '/api/quizzes',
+      method: 'POST',
+      url: '/api/quizzes',
       payload: { title: 'Quiz du membre' },
       headers: { 'content-type': 'application/json', cookie: memberCookie },
     })
@@ -312,7 +314,8 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     const listAdmin = await app.inject({ method: 'GET', url: '/api/quizzes', headers: { cookie: adminCookie } })
     expect((listAdmin.json() as { id: string }[]).some((q) => q.id === quizId)).toBe(true)
     const patch = await app.inject({
-      method: 'PATCH', url: `/api/quizzes/${quizId}`,
+      method: 'PATCH',
+      url: `/api/quizzes/${quizId}`,
       payload: { title: 'Modifié par admin' },
       headers: { 'content-type': 'application/json', cookie: adminCookie },
     })
@@ -321,7 +324,7 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await app.close()
   })
 
-  it('un member ne voit pas le quiz d\'un autre (owner-scoping maintenu)', async () => {
+  it("un member ne voit pas le quiz d'un autre (owner-scoping maintenu)", async () => {
     const app = await buildApp()
     const ownerCookie = await signUp(app, 'owner-y@example.com')
     const memberCookie = await signUp(app, 'member-y@example.com')
@@ -329,7 +332,8 @@ describe('routes CRUD /api/quizzes (protégées, scopées)', () => {
     await ctx.db.update(schema.membership).set({ role: 'member' }).where(eq(schema.membership.userId, memberU.id))
 
     const created = await app.inject({
-      method: 'POST', url: '/api/quizzes',
+      method: 'POST',
+      url: '/api/quizzes',
       payload: { title: 'Quiz owner-y' },
       headers: { 'content-type': 'application/json', cookie: ownerCookie },
     })

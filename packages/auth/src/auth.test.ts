@@ -16,7 +16,9 @@ beforeAll(async () => {
   })
 }, 120_000)
 
-afterAll(async () => { await ctx?.stop() })
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 describe('Better Auth email/mot de passe', () => {
   it('inscrit puis connecte un hôte', async () => {
@@ -39,8 +41,7 @@ describe('Better Auth email/mot de passe', () => {
     const userId = signUp.user!.id
     const defaultTenantId = await ensureDefaultTenant(ctx.db)
 
-    const [m] = await ctx.db.select().from(schema.membership)
-      .where(eq(schema.membership.userId, userId))
+    const [m] = await ctx.db.select().from(schema.membership).where(eq(schema.membership.userId, userId))
     expect(m).toBeTruthy()
     expect(m.tenantId).toBe(defaultTenantId)
     expect(m.role).toBe('member') // 2e inscrit (hote@pengou.app du test précédent était le 1er)

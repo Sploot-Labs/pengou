@@ -38,9 +38,7 @@ describe('QuestionImageField, envoi par défaut', () => {
       transformed: true,
     })
     const onChange = pick()
-    expect(
-      await screen.findByText('Image trop lourde, même après réduction (2 Mo max).'),
-    ).toBeInTheDocument()
+    expect(await screen.findByText('Image trop lourde, même après réduction (2 Mo max).')).toBeInTheDocument()
     expect(mockUploadMedia).not.toHaveBeenCalled()
     expect(onChange).not.toHaveBeenCalled()
   })

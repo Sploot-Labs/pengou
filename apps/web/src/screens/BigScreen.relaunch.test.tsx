@@ -59,7 +59,12 @@ describe('BigScreen, relance de partie (session:relaunched)', () => {
     renderBigScreen('token=tok-abc&pin=1234&title=Mon%20quiz')
     await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('screen:join', { displayToken: 'tok-abc' }))
 
-    emitServerEvent('session:relaunched', { role: 'screen', pin: '777777', sessionId: 'sess-new', displayToken: 'tok-new' })
+    emitServerEvent('session:relaunched', {
+      role: 'screen',
+      pin: '777777',
+      sessionId: 'sess-new',
+      displayToken: 'tok-new',
+    })
 
     expect(hardReload).toHaveBeenCalledTimes(1)
     expect(hardReload).toHaveBeenCalledWith(expect.stringContaining('/screen/sess-new'))

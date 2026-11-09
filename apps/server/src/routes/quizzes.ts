@@ -64,14 +64,16 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
     const patch: Partial<{ title: string; description: string | null; cover: string | null }> = {}
     if (body?.title !== undefined) {
       if (!isNonEmptyString(body.title)) return reply.code(400).send({ error: 'Le titre ne peut pas être vide.' })
-      if (tooLong(body.title, MAX_TITLE)) return reply.code(400).send({ error: `Le titre est trop long (${MAX_TITLE} caractères max).` })
+      if (tooLong(body.title, MAX_TITLE))
+        return reply.code(400).send({ error: `Le titre est trop long (${MAX_TITLE} caractères max).` })
       patch.title = body.title
     }
     if (body?.description !== undefined) {
       if (body.description !== null && typeof body.description !== 'string') {
         return reply.code(400).send({ error: 'La description doit être une chaîne ou null.' })
       }
-      if (tooLong(body.description, MAX_DESCRIPTION)) return reply.code(400).send({ error: `La description est trop longue (${MAX_DESCRIPTION} caractères max).` })
+      if (tooLong(body.description, MAX_DESCRIPTION))
+        return reply.code(400).send({ error: `La description est trop longue (${MAX_DESCRIPTION} caractères max).` })
       patch.description = body.description
     }
     if (body?.cover !== undefined) {

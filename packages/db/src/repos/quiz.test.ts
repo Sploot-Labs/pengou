@@ -17,16 +17,23 @@ beforeAll(async () => {
   await runMigrations(ctx.db)
   const [tA] = await ctx.db.insert(schema.tenant).values({ name: 'Tenant A' }).returning()
   const [tB] = await ctx.db.insert(schema.tenant).values({ name: 'Tenant B' }).returning()
-  const [uA] = await ctx.db.insert(schema.user)
+  const [uA] = await ctx.db
+    .insert(schema.user)
     .values({ id: crypto.randomUUID(), email: 'a@x.fr', name: 'Owner A', emailVerified: false })
     .returning()
-  const [uB] = await ctx.db.insert(schema.user)
+  const [uB] = await ctx.db
+    .insert(schema.user)
     .values({ id: crypto.randomUUID(), email: 'b@x.fr', name: 'Owner B', emailVerified: false })
     .returning()
-  tenantA = tA.id; tenantB = tB.id; ownerA = uA.id; ownerB = uB.id
+  tenantA = tA.id
+  tenantB = tB.id
+  ownerA = uA.id
+  ownerB = uB.id
 }, 120_000)
 
-afterAll(async () => { await ctx?.stop() })
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 describe('repo quiz scoped par tenant', () => {
   it('createQuiz écrit le tenant_id du scope', async () => {
@@ -44,7 +51,7 @@ describe('repo quiz scoped par tenant', () => {
     expect(listA.some((q) => q.title === 'Quiz B1')).toBe(false)
   })
 
-  it('getQuiz renvoie null pour un quiz d\'un autre tenant (pas de fuite)', async () => {
+  it("getQuiz renvoie null pour un quiz d'un autre tenant (pas de fuite)", async () => {
     const qb = await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerB, title: 'Quiz B2' })
     const leaked = await getQuiz(tenantScope(ctx.db, tenantA), qb.id)
     expect(leaked).toBeNull()
@@ -56,7 +63,7 @@ describe('repo quiz scoped par tenant', () => {
     expect(updated?.title).toBe('Quiz A2 modifié')
   })
 
-  it('updateQuiz renvoie null pour un quiz d\'un autre tenant (pas de fuite)', async () => {
+  it("updateQuiz renvoie null pour un quiz d'un autre tenant (pas de fuite)", async () => {
     const qb = await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerB, title: 'Quiz B3' })
     const result = await updateQuiz(tenantScope(ctx.db, tenantA), qb.id, { title: 'hack' })
     expect(result).toBeNull()
@@ -71,7 +78,7 @@ describe('repo quiz scoped par tenant', () => {
     expect(await getQuiz(tenantScope(ctx.db, tenantA), q.id)).toBeNull()
   })
 
-  it('deleteQuiz renvoie false pour un quiz d\'un autre tenant (pas de fuite)', async () => {
+  it("deleteQuiz renvoie false pour un quiz d'un autre tenant (pas de fuite)", async () => {
     const qb = await createQuiz(tenantScope(ctx.db, tenantB), { ownerId: ownerB, title: 'Quiz B4' })
     const ok = await deleteQuiz(tenantScope(ctx.db, tenantA), qb.id)
     expect(ok).toBe(false)
@@ -82,7 +89,12 @@ describe('repo quiz scoped par tenant', () => {
     const scope = tenantScope(ctx.db, tenantA)
     const withQuestions = await createQuiz(scope, { ownerId: ownerA, title: 'Quiz avec questions' })
     const withoutQuestions = await createQuiz(scope, { ownerId: ownerA, title: 'Quiz sans question' })
-    const validMcq = { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] }
+    const validMcq = {
+      options: [
+        { label: 'A', correct: true },
+        { label: 'B', correct: false },
+      ],
+    }
     await createQuestion(scope, withQuestions.id, { type: 'mcq', prompt: 'Q1', timeLimit: 20, payload: validMcq })
     await createQuestion(scope, withQuestions.id, { type: 'mcq', prompt: 'Q2', timeLimit: 20, payload: validMcq })
     await createQuestion(scope, withQuestions.id, { type: 'mcq', prompt: 'Q3', timeLimit: 20, payload: validMcq })

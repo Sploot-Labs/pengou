@@ -6,7 +6,8 @@ import { slugify, generateUniqueSlug, createWorkspace, listUserWorkspaces, getWo
 let ctx: Awaited<ReturnType<typeof startTestDb>>
 
 async function makeUser(email: string): Promise<string> {
-  const [u] = await ctx.db.insert(schema.user)
+  const [u] = await ctx.db
+    .insert(schema.user)
     .values({ id: crypto.randomUUID(), email, name: email, emailVerified: false })
     .returning()
   return u.id
@@ -16,7 +17,9 @@ beforeAll(async () => {
   ctx = await startTestDb()
   await runMigrations(ctx.db)
 }, 120_000)
-afterAll(async () => { await ctx?.stop() })
+afterAll(async () => {
+  await ctx?.stop()
+})
 
 describe('slugify', () => {
   it('normalise en minuscules, tirets, sans bords', () => {
@@ -44,7 +47,9 @@ describe('createWorkspace', () => {
     const ws = await createWorkspace(ctx.db, { name: 'Mon Espace', ownerId: uid })
     expect(ws.name).toBe('Mon Espace')
     expect(ws.slug).toBe('mon-espace')
-    const [m] = await ctx.db.select().from(schema.membership)
+    const [m] = await ctx.db
+      .select()
+      .from(schema.membership)
       .where(and(eq(schema.membership.userId, uid), eq(schema.membership.tenantId, ws.id)))
     expect(m.role).toBe('owner')
   })

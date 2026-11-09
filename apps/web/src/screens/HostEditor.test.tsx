@@ -104,7 +104,7 @@ describe('HostEditor — champ Temps de lecture', () => {
   beforeEach(() => vi.clearAllMocks())
   afterEach(cleanup)
 
-  it('affiche le temps de lecture de la question sélectionnée, avec l\'aide contextuelle', async () => {
+  it("affiche le temps de lecture de la question sélectionnée, avec l'aide contextuelle", async () => {
     renderEditor()
 
     const input = (await screen.findByLabelText('Temps de lecture (s)')) as HTMLInputElement
@@ -121,11 +121,7 @@ describe('HostEditor — champ Temps de lecture', () => {
 
     await waitFor(
       () => {
-        expect(mockUpdateQuestion).toHaveBeenCalledWith(
-          'quiz1',
-          'quest1',
-          expect.objectContaining({ readingTime: 10 }),
-        )
+        expect(mockUpdateQuestion).toHaveBeenCalledWith('quiz1', 'quest1', expect.objectContaining({ readingTime: 10 }))
       },
       { timeout: 2000 },
     )

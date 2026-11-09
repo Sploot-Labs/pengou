@@ -255,14 +255,19 @@ describe('game engine — cycle déterministe complet', () => {
     })
 
     it('slider : uniquement min/max (pas de `correct`)', async () => {
-      const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [sliderQuestion] })
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [sliderQuestion],
+      })
       const s = await engine.startQuestion(session.id)
       const view = engine.playerQuestionView(s) as { payload: Record<string, unknown> }
       expect(view.payload).toEqual({ min: 0, max: 100 })
       expect(view.payload).not.toHaveProperty('correct')
     })
 
-    it("expose id/type/prompt/timeLimit en plus du payload sans la réponse", async () => {
+    it('expose id/type/prompt/timeLimit en plus du payload sans la réponse', async () => {
       const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
       const s = await engine.startQuestion(session.id)
       const view = engine.playerQuestionView(s) as Record<string, unknown>
@@ -276,11 +281,21 @@ describe('game engine — cycle déterministe complet', () => {
   describe('PIN unique', () => {
     it('deux createSession successifs obtiennent des PIN différents', async () => {
       const sharedStore = new MemorySessionStore()
-      const e1 = createEngine({ store: sharedStore, now: clock.now, genPin: makePinGen(['111111']), genId: makeIdGen('a') })
+      const e1 = createEngine({
+        store: sharedStore,
+        now: clock.now,
+        genPin: makePinGen(['111111']),
+        genId: makeIdGen('a'),
+      })
       const first = await e1.createSession({ quizId: 'q1', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
       expect(first.pin).toBe('111111')
 
-      const e2 = createEngine({ store: sharedStore, now: clock.now, genPin: makePinGen(['222222']), genId: makeIdGen('b') })
+      const e2 = createEngine({
+        store: sharedStore,
+        now: clock.now,
+        genPin: makePinGen(['222222']),
+        genId: makeIdGen('b'),
+      })
       const second = await e2.createSession({ quizId: 'q2', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
       expect(second.pin).toBe('222222')
       expect(second.pin).not.toBe(first.pin)
@@ -288,7 +303,12 @@ describe('game engine — cycle déterministe complet', () => {
 
     it('genPin collision (retourne un PIN déjà pris) puis un PIN libre → le moteur retente', async () => {
       const sharedStore = new MemorySessionStore()
-      const e1 = createEngine({ store: sharedStore, now: clock.now, genPin: makePinGen(['111111']), genId: makeIdGen('a') })
+      const e1 = createEngine({
+        store: sharedStore,
+        now: clock.now,
+        genPin: makePinGen(['111111']),
+        genId: makeIdGen('a'),
+      })
       await e1.createSession({ quizId: 'q1', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
 
       let calls = 0
@@ -304,21 +324,36 @@ describe('game engine — cycle déterministe complet', () => {
 
     it('un PIN redevient disponible une fois la session au podium (ended)', async () => {
       const sharedStore = new MemorySessionStore()
-      const e1 = createEngine({ store: sharedStore, now: clock.now, genPin: makePinGen(['111111']), genId: makeIdGen('a') })
+      const e1 = createEngine({
+        store: sharedStore,
+        now: clock.now,
+        genPin: makePinGen(['111111']),
+        genId: makeIdGen('a'),
+      })
       const first = await e1.createSession({ quizId: 'q1', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
       await e1.startQuestion(first.id)
       await e1.reveal(first.id)
       await e1.scoreboard(first.id)
       await e1.nextQuestion(first.id) // plus de questions → podium
 
-      const e2 = createEngine({ store: sharedStore, now: clock.now, genPin: makePinGen(['111111']), genId: makeIdGen('b') })
+      const e2 = createEngine({
+        store: sharedStore,
+        now: clock.now,
+        genPin: makePinGen(['111111']),
+        genId: makeIdGen('b'),
+      })
       const second = await e2.createSession({ quizId: 'q2', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
       expect(second.pin).toBe('111111') // réutilisé, aucune collision détectée
     })
 
     it('genPin qui collide TOUJOURS → createSession rejette après la borne (pas de boucle infinie)', async () => {
       const sharedStore = new MemorySessionStore()
-      const e1 = createEngine({ store: sharedStore, now: clock.now, genPin: makePinGen(['111111']), genId: makeIdGen('a') })
+      const e1 = createEngine({
+        store: sharedStore,
+        now: clock.now,
+        genPin: makePinGen(['111111']),
+        genId: makeIdGen('a'),
+      })
       await e1.createSession({ quizId: 'q1', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
 
       let calls = 0
@@ -329,7 +364,7 @@ describe('game engine — cycle déterministe complet', () => {
       const e2 = createEngine({ store: sharedStore, now: clock.now, genPin: alwaysColliding, genId: makeIdGen('b') })
 
       await expect(
-        e2.createSession({ quizId: 'q2', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+        e2.createSession({ quizId: 'q2', tenantId: 't', hostId: 'h', questions: [mcqQuestion] }),
       ).rejects.toThrow(/PIN/)
       // borné : ne doit pas avoir retenté indéfiniment
       expect(calls).toBeLessThanOrEqual(50)
@@ -338,7 +373,7 @@ describe('game engine — cycle déterministe complet', () => {
   })
 
   describe('id/pin fournis (unification moteur↔DB, Task 2 persistance)', () => {
-    it('createSession({ id, pin }) utilise EXACTEMENT l\'id et le PIN fournis (pas de genId/uniquePin)', async () => {
+    it("createSession({ id, pin }) utilise EXACTEMENT l'id et le PIN fournis (pas de genId/uniquePin)", async () => {
       const session = await engine.createSession({
         id: 'fixed-id',
         pin: '424242',
@@ -371,7 +406,14 @@ describe('game engine — cycle déterministe complet', () => {
         genPin: makePinGen(['111111', '222222']),
         genId: makeIdGen('a'),
       })
-      await e.createSession({ id: 'sess-1', pin: takenPin, quizId: 'q1', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
+      await e.createSession({
+        id: 'sess-1',
+        pin: takenPin,
+        quizId: 'q1',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [mcqQuestion],
+      })
 
       // genPin() renvoie d'abord '111111' (libre, pas de collision avec takenPin) : accepté direct.
       const pin = await e.generateUniquePin()
@@ -522,7 +564,7 @@ describe('game engine — cycle déterministe complet', () => {
       expect(engine.allConnectedAnswered(current)).toBe(false)
     })
 
-    it('true quand tous les CONNECTÉS ont répondu même si un joueur DÉCONNECTÉ, lui, n\'a pas répondu (ignoré)', async () => {
+    it("true quand tous les CONNECTÉS ont répondu même si un joueur DÉCONNECTÉ, lui, n'a pas répondu (ignoré)", async () => {
       const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [mcqQuestion] })
       const { player: alice } = await engine.addPlayer(session.id, 'Alice')
       const { player: bob } = await engine.addPlayer(session.id, 'Bob')
@@ -620,7 +662,14 @@ describe('game engine — cycle déterministe complet', () => {
       expect(view).not.toHaveProperty('options')
       expect(view).not.toHaveProperty('payload')
       expect(view.prompt).toBeDefined()
-      expect(view).toEqual({ prompt: 'Capitale du Japon ?', index: 0, total: 1, readingTime: 6, media: null, mediaAlt: null })
+      expect(view).toEqual({
+        prompt: 'Capitale du Japon ?',
+        index: 0,
+        total: 1,
+        readingTime: 6,
+        media: null,
+        mediaAlt: null,
+      })
     })
   })
 
@@ -637,7 +686,12 @@ describe('game engine — cycle déterministe complet', () => {
     it('état ancien sans media : les projections renvoient null', async () => {
       // readingQuestion n'a pas les clés media/mediaAlt, comme un JSON persisté avant cette version
       expect(readingQuestion).not.toHaveProperty('media')
-      const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [readingQuestion] })
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [readingQuestion],
+      })
       const reading = await engine.startQuestion(session.id)
       expect(engine.readingView(reading)).toMatchObject({ media: null, mediaAlt: null })
       const asked = await engine.revealAnswers(session.id)
@@ -646,7 +700,7 @@ describe('game engine — cycle déterministe complet', () => {
   })
 
   describe('progress — compteur de réponses (pour le grand écran)', () => {
-    it("total = nombre de joueurs, answered = nombre de réponses soumises pour la question courante", async () => {
+    it('total = nombre de joueurs, answered = nombre de réponses soumises pour la question courante', async () => {
       const session = await engine.createSession({
         quizId: 'q',
         tenantId: 't',

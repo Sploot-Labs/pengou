@@ -25,7 +25,7 @@ afterEach(() => {
 })
 
 describe('moteur de cues', () => {
-  it("un cue non enregistré est un no-op (ne lève pas)", () => {
+  it('un cue non enregistré est un no-op (ne lève pas)', () => {
     expect(() =>
       render(
         <MotionProvider>
@@ -47,8 +47,8 @@ describe('moteur de cues', () => {
   })
 
   it("saute l'animation en reduced-motion mais laisse le cue passer", () => {
-    window.matchMedia = ((q: string) =>
-      ({ matches: true, media: q, addEventListener() {}, removeEventListener() {} }) as unknown as MediaQueryList)
+    window.matchMedia = (q: string) =>
+      ({ matches: true, media: q, addEventListener() {}, removeEventListener() {} }) as unknown as MediaQueryList
     const anim = vi.fn()
     registry['test.rm'] = { animation: anim, reducedMotion: 'skip' }
     render(

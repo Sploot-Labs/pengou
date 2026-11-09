@@ -23,7 +23,14 @@ vi.mock('../motion/index.js', async (importOriginal) => {
   return {
     ...actual,
     useCue: () => () => {},
-    useSound: () => ({ unlock: () => {}, play: () => {}, loop: () => {}, stop: () => {}, setMuted: () => {}, muted: false }),
+    useSound: () => ({
+      unlock: () => {},
+      play: () => {},
+      loop: () => {},
+      stop: () => {},
+      setMuted: () => {},
+      muted: false,
+    }),
   }
 })
 
@@ -83,7 +90,12 @@ const MCQ_SHOW = {
   payload: { options: [{ label: 'Empereur' }, { label: 'Adélie' }] },
 }
 const MCQ_REVEAL = {
-  correct: { options: [{ label: 'Empereur', correct: true }, { label: 'Adélie', correct: false }] },
+  correct: {
+    options: [
+      { label: 'Empereur', correct: true },
+      { label: 'Adélie', correct: false },
+    ],
+  },
   distribution: {},
 }
 
@@ -94,9 +106,7 @@ async function playCorrectRound(index: number, score: number) {
   const tile = await screen.findByRole('button', { name: /Empereur/ })
   fireEvent.click(tile)
   // La réponse est verrouillée (phase 'answered') puis acceptée par le serveur.
-  await waitFor(() =>
-    expect(mockEmitAck).toHaveBeenCalledWith('player:answer', { answer: { optionIndex: 0 } }),
-  )
+  await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('player:answer', { answer: { optionIndex: 0 } }))
   await screen.findByText(/Réponse enregistrée/)
   emitServerEvent('question:reveal', MCQ_REVEAL)
   emitServerEvent('scoreboard', { ranking: [{ playerId: 'p1', nickname: 'Ana', score }] })

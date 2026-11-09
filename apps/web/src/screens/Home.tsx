@@ -170,10 +170,7 @@ export function Home() {
   function loadSessions() {
     setSessionsLoading(true)
     setSessionsError(null)
-    Promise.all([
-      listSessions({ status: ['lobby', 'active'] }),
-      listSessions({ status: ['ended', 'abandoned'] }),
-    ])
+    Promise.all([listSessions({ status: ['lobby', 'active'] }), listSessions({ status: ['ended', 'abandoned'] })])
       .then(([live, history]) => {
         setLiveSessions(live)
         setHistorySessions(history)
@@ -271,11 +268,7 @@ export function Home() {
                   purely decorative, so it stays out of the accessible name. */}
               <div className="home-empty-motif" aria-hidden="true">
                 {ANSWER_SHAPES.map((shape) => (
-                  <span
-                    key={shape}
-                    className="home-empty-motif__shape"
-                    style={{ color: `var(--ans-${shape})` }}
-                  >
+                  <span key={shape} className="home-empty-motif__shape" style={{ color: `var(--ans-${shape})` }}>
                     <AnswerShape shape={shape} size={22} />
                   </span>
                 ))}
@@ -298,11 +291,7 @@ export function Home() {
                         {/* Corner signature glyph — decorative only, cycles the
                             4 answer shapes so the dashboard echoes the brand
                             motif shown in the logo and the editor. */}
-                        <span
-                          className="home-card__glyph"
-                          aria-hidden="true"
-                          style={{ color: `var(--ans-${shape})` }}
-                        >
+                        <span className="home-card__glyph" aria-hidden="true" style={{ color: `var(--ans-${shape})` }}>
                           <AnswerShape shape={shape} size={18} />
                         </span>
                         <span className="home-card__title">{q.title}</span>
@@ -353,7 +342,9 @@ export function Home() {
                     {s.playerCount > 1 ? 's' : ''}
                   </span>
                   <span className={`host-badge host-badge--${s.status}`}>{STATUS_LABEL[s.status]}</span>
-                  <span className="home-list__cta" aria-hidden="true">{sessionCtaLabel(s.status)}</span>
+                  <span className="home-list__cta" aria-hidden="true">
+                    {sessionCtaLabel(s.status)}
+                  </span>
                 </Link>
               </li>
             )
@@ -362,14 +353,18 @@ export function Home() {
               return (
                 <div className="ab-empty-state">
                   <p role="alert">{sessionsError}</p>
-                  <Button variant="primary" type="button" onClick={loadSessions}>Réessayer</Button>
+                  <Button variant="primary" type="button" onClick={loadSessions}>
+                    Réessayer
+                  </Button>
                 </div>
               )
             }
             return (
               <>
                 <section aria-labelledby="home-live-heading" style={{ marginBottom: 'var(--space-6)' }}>
-                  <div className="home-section__header"><h2 id="home-live-heading">En cours</h2></div>
+                  <div className="home-section__header">
+                    <h2 id="home-live-heading">En cours</h2>
+                  </div>
                   {liveSessions.length === 0 ? (
                     <p className="ab-empty-state">Aucune partie en cours, lancez-en une depuis un quiz.</p>
                   ) : (
@@ -378,7 +373,9 @@ export function Home() {
                 </section>
 
                 <section aria-labelledby="home-history-heading">
-                  <div className="home-section__header"><h2 id="home-history-heading">Historique</h2></div>
+                  <div className="home-section__header">
+                    <h2 id="home-history-heading">Historique</h2>
+                  </div>
                   {historySessions.length === 0 ? (
                     <p className="ab-empty-state">Aucune partie terminée pour l'instant.</p>
                   ) : (

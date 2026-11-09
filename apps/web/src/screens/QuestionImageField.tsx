@@ -57,12 +57,7 @@ export interface QuestionImageFieldProps {
   upload?: (file: File) => Promise<string>
 }
 
-export function QuestionImageField({
-  media,
-  mediaAlt,
-  onChange,
-  upload = defaultUpload,
-}: QuestionImageFieldProps) {
+export function QuestionImageField({ media, mediaAlt, onChange, upload = defaultUpload }: QuestionImageFieldProps) {
   const id = useId()
   const fileRef = useRef<HTMLInputElement>(null)
   const [urlInput, setUrlInput] = useState('')
@@ -85,9 +80,7 @@ export function QuestionImageField({
       onChange({ media: url })
     } catch (err) {
       setUploadError(
-        err instanceof ApiError || err instanceof TooHeavyError
-          ? err.message
-          : "L'envoi de l'image a échoué.",
+        err instanceof ApiError || err instanceof TooHeavyError ? err.message : "L'envoi de l'image a échoué.",
       )
     } finally {
       setUploading(false)

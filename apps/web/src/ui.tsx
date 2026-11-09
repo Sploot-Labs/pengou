@@ -1,11 +1,4 @@
-import {
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-  type ButtonHTMLAttributes,
-  type ReactNode,
-} from 'react'
+import { forwardRef, useEffect, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { Link } from 'react-router-dom'
 import type { AnswerShapeKind } from './constants'
@@ -150,20 +143,14 @@ export function AnswerShape({ shape, size = 28 }: { shape: AnswerShapeKind; size
       // Étoile / scintillement à 4 branches.
       return (
         <svg {...common}>
-          <path
-            d="M12 1.5 L14.8 9.2 L22.5 12 L14.8 14.8 L12 22.5 L9.2 14.8 L1.5 12 L9.2 9.2 Z"
-            fill="currentColor"
-          />
+          <path d="M12 1.5 L14.8 9.2 L22.5 12 L14.8 14.8 L12 22.5 L9.2 14.8 L1.5 12 L9.2 9.2 Z" fill="currentColor" />
         </svg>
       )
     case 'diamond':
       // Goutte de glace.
       return (
         <svg {...common}>
-          <path
-            d="M12 2 C9 6.5 4.5 11 4.5 15 A7.5 7.5 0 0 0 19.5 15 C19.5 11 15 6.5 12 2 Z"
-            fill="currentColor"
-          />
+          <path d="M12 2 C9 6.5 4.5 11 4.5 15 A7.5 7.5 0 0 0 19.5 15 C19.5 11 15 6.5 12 2 Z" fill="currentColor" />
         </svg>
       )
     case 'circle':
@@ -267,9 +254,7 @@ export function AnswerTile({ shape, label, onClick, disabled, selected, dimmed, 
       {reveal && (
         <span className="ab-tile__reveal">
           <span aria-hidden="true">{reveal === 'correct' ? '✓' : '✕'}</span>
-          <span className="visually-hidden">
-            {reveal === 'correct' ? 'Bonne réponse' : 'Réponse incorrecte'}
-          </span>
+          <span className="visually-hidden">{reveal === 'correct' ? 'Bonne réponse' : 'Réponse incorrecte'}</span>
         </span>
       )}
     </button>
@@ -302,8 +287,7 @@ export function TimerRing({ remainingSeconds, totalSeconds, size = 96, large = f
   const lastAnnounced = useRef(clamped)
 
   useEffect(() => {
-    const shouldAnnounce =
-      clamped === totalSeconds || clamped <= 5 || clamped % 5 === 0 || clamped === 0
+    const shouldAnnounce = clamped === totalSeconds || clamped <= 5 || clamped % 5 === 0 || clamped === 0
     if (shouldAnnounce && clamped !== lastAnnounced.current) {
       lastAnnounced.current = clamped
       setAnnounced(clamped)
@@ -315,14 +299,7 @@ export function TimerRing({ remainingSeconds, totalSeconds, size = 96, large = f
   return (
     <div className={`ab-timer${urgent ? ' ab-timer--urgent' : ''}${large ? ' ab-timer--xl' : ''}`}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          fill="none"
-          stroke="var(--surface-2)"
-          strokeWidth={6}
-        />
+        <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="var(--surface-2)" strokeWidth={6} />
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -370,8 +347,7 @@ export function TimerPill({ remainingSeconds, totalSeconds }: { remainingSeconds
   const lastAnnounced = useRef(clamped)
 
   useEffect(() => {
-    const shouldAnnounce =
-      clamped === totalSeconds || clamped <= 5 || clamped % 5 === 0 || clamped === 0
+    const shouldAnnounce = clamped === totalSeconds || clamped <= 5 || clamped % 5 === 0 || clamped === 0
     if (shouldAnnounce && clamped !== lastAnnounced.current) {
       lastAnnounced.current = clamped
       setAnnounced(clamped)
@@ -498,7 +474,13 @@ export function SoundToggle({ className = '' }: { className?: string }) {
         ) : (
           <>
             <path d="M16 8.5a5 5 0 0 1 0 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
-            <path d="M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+            <path
+              d="M18.5 6a8.5 8.5 0 0 1 0 12"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              fill="none"
+            />
           </>
         )}
       </svg>

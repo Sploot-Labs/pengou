@@ -47,13 +47,7 @@ export interface PodiumViewProps {
   showConversionFooter?: boolean
 }
 
-export function PodiumView({
-  quizTitle,
-  top,
-  fullRanking,
-  headingRef,
-  showConversionFooter = false,
-}: PodiumViewProps) {
+export function PodiumView({ quizTitle, top, fullRanking, headingRef, showConversionFooter = false }: PodiumViewProps) {
   const [gold, silver, bronze] = top
   // Le reste du classement complet, au-delà des 3 déjà montrés sur le podium.
   const rest = (fullRanking ?? top).slice(3)

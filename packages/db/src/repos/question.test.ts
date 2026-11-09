@@ -3,37 +3,69 @@ import { eq, sql } from 'drizzle-orm'
 import { startTestDb, runMigrations, schema } from '../index.js'
 import { tenantScope } from '../tenant.js'
 import { createQuiz } from './quiz.js'
-import { createQuestion, listQuestions, getQuestion, updateQuestion, deleteQuestion, reorderQuestions } from './question.js'
+import {
+  createQuestion,
+  listQuestions,
+  getQuestion,
+  updateQuestion,
+  deleteQuestion,
+  reorderQuestions,
+} from './question.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
 let tenantA: string, tenantB: string, ownerA: string, ownerB: string, quizA: string
 
 beforeAll(async () => {
-  ctx = await startTestDb(); await runMigrations(ctx.db)
+  ctx = await startTestDb()
+  await runMigrations(ctx.db)
   const [tA] = await ctx.db.insert(schema.tenant).values({ name: 'A' }).returning()
   const [tB] = await ctx.db.insert(schema.tenant).values({ name: 'B' }).returning()
-  const [uA] = await ctx.db.insert(schema.user)
-    .values({ id: crypto.randomUUID(), email: 'a@x.fr', name: 'A', emailVerified: false }).returning()
-  const [uB] = await ctx.db.insert(schema.user)
-    .values({ id: crypto.randomUUID(), email: 'b@x.fr', name: 'B', emailVerified: false }).returning()
-  tenantA = tA.id; tenantB = tB.id; ownerA = uA.id; ownerB = uB.id
+  const [uA] = await ctx.db
+    .insert(schema.user)
+    .values({ id: crypto.randomUUID(), email: 'a@x.fr', name: 'A', emailVerified: false })
+    .returning()
+  const [uB] = await ctx.db
+    .insert(schema.user)
+    .values({ id: crypto.randomUUID(), email: 'b@x.fr', name: 'B', emailVerified: false })
+    .returning()
+  tenantA = tA.id
+  tenantB = tB.id
+  ownerA = uA.id
+  ownerB = uB.id
   const q = await createQuiz(tenantScope(ctx.db, tenantA), { ownerId: ownerA, title: 'Quiz A' })
   quizA = q.id
 }, 120_000)
-afterAll(async () => { await ctx?.stop() })
+afterAll(async () => {
+  await ctx?.stop()
+})
 
-const validMcq = { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] }
+const validMcq = {
+  options: [
+    { label: 'A', correct: true },
+    { label: 'B', correct: false },
+  ],
+}
 
 describe('repo question scopé par jointure sur quiz', () => {
   it('createQuestion écrit sous un quiz du tenant', async () => {
-    const q = await createQuestion(tenantScope(ctx.db, tenantA), quizA, { type: 'mcq', prompt: 'Q1', timeLimit: 20, payload: validMcq })
+    const q = await createQuestion(tenantScope(ctx.db, tenantA), quizA, {
+      type: 'mcq',
+      prompt: 'Q1',
+      timeLimit: 20,
+      payload: validMcq,
+    })
     expect(q?.quizId).toBe(quizA)
   })
   it('createQuestion renvoie null si le quiz appartient à un autre tenant (pas de fuite)', async () => {
-    const leaked = await createQuestion(tenantScope(ctx.db, tenantB), quizA, { type: 'mcq', prompt: 'X', timeLimit: 20, payload: validMcq })
+    const leaked = await createQuestion(tenantScope(ctx.db, tenantB), quizA, {
+      type: 'mcq',
+      prompt: 'X',
+      timeLimit: 20,
+      payload: validMcq,
+    })
     expect(leaked).toBeNull()
   })
-  it('listQuestions renvoie null pour un quiz d\'un autre tenant', async () => {
+  it("listQuestions renvoie null pour un quiz d'un autre tenant", async () => {
     expect(await listQuestions(tenantScope(ctx.db, tenantB), quizA)).toBeNull()
     const own = await listQuestions(tenantScope(ctx.db, tenantA), quizA)
     expect(Array.isArray(own)).toBe(true)
@@ -41,14 +73,24 @@ describe('repo question scopé par jointure sur quiz', () => {
 
   it('getQuestion renvoie la question du quiz du tenant', async () => {
     const scope = tenantScope(ctx.db, tenantA)
-    const created = await createQuestion(scope, quizA, { type: 'mcq', prompt: 'GetMe', timeLimit: 20, payload: validMcq })
+    const created = await createQuestion(scope, quizA, {
+      type: 'mcq',
+      prompt: 'GetMe',
+      timeLimit: 20,
+      payload: validMcq,
+    })
     const fetched = await getQuestion(scope, quizA, created!.id)
     expect(fetched?.id).toBe(created!.id)
     expect(fetched?.type).toBe('mcq')
   })
 
   it('getQuestion renvoie null si le quiz appartient à un autre tenant (pas de fuite)', async () => {
-    const created = await createQuestion(tenantScope(ctx.db, tenantA), quizA, { type: 'mcq', prompt: 'Hidden', timeLimit: 20, payload: validMcq })
+    const created = await createQuestion(tenantScope(ctx.db, tenantA), quizA, {
+      type: 'mcq',
+      prompt: 'Hidden',
+      timeLimit: 20,
+      payload: validMcq,
+    })
     const leaked = await getQuestion(tenantScope(ctx.db, tenantB), quizA, created!.id)
     expect(leaked).toBeNull()
   })
@@ -69,13 +111,23 @@ describe('repo question scopé par jointure sur quiz', () => {
 
   it('updateQuestion modifie une question du quiz du tenant', async () => {
     const scope = tenantScope(ctx.db, tenantA)
-    const created = await createQuestion(scope, quizA, { type: 'mcq', prompt: 'Before', timeLimit: 20, payload: validMcq })
+    const created = await createQuestion(scope, quizA, {
+      type: 'mcq',
+      prompt: 'Before',
+      timeLimit: 20,
+      payload: validMcq,
+    })
     const updated = await updateQuestion(scope, quizA, created!.id, { prompt: 'After' })
     expect(updated?.prompt).toBe('After')
   })
 
   it('updateQuestion renvoie null si le quiz appartient à un autre tenant (pas de fuite)', async () => {
-    const created = await createQuestion(tenantScope(ctx.db, tenantA), quizA, { type: 'mcq', prompt: 'Guard', timeLimit: 20, payload: validMcq })
+    const created = await createQuestion(tenantScope(ctx.db, tenantA), quizA, {
+      type: 'mcq',
+      prompt: 'Guard',
+      timeLimit: 20,
+      payload: validMcq,
+    })
     const result = await updateQuestion(tenantScope(ctx.db, tenantB), quizA, created!.id, { prompt: 'Hacked' })
     expect(result).toBeNull()
     const untouched = await listQuestions(tenantScope(ctx.db, tenantA), quizA)
@@ -84,7 +136,12 @@ describe('repo question scopé par jointure sur quiz', () => {
 
   it('updateQuestion avec un patch vide est un no-op qui renvoie la ligne courante (pas de 500 drizzle)', async () => {
     const scope = tenantScope(ctx.db, tenantA)
-    const created = await createQuestion(scope, quizA, { type: 'mcq', prompt: 'Unchanged', timeLimit: 20, payload: validMcq })
+    const created = await createQuestion(scope, quizA, {
+      type: 'mcq',
+      prompt: 'Unchanged',
+      timeLimit: 20,
+      payload: validMcq,
+    })
     const result = await updateQuestion(scope, quizA, created!.id, {})
     expect(result).not.toBeNull()
     expect(result?.id).toBe(created!.id)
@@ -93,7 +150,12 @@ describe('repo question scopé par jointure sur quiz', () => {
 
   it('deleteQuestion supprime une question du quiz du tenant', async () => {
     const scope = tenantScope(ctx.db, tenantA)
-    const created = await createQuestion(scope, quizA, { type: 'mcq', prompt: 'ToDelete', timeLimit: 20, payload: validMcq })
+    const created = await createQuestion(scope, quizA, {
+      type: 'mcq',
+      prompt: 'ToDelete',
+      timeLimit: 20,
+      payload: validMcq,
+    })
     const ok = await deleteQuestion(scope, quizA, created!.id)
     expect(ok).toBe(true)
     const remaining = await listQuestions(scope, quizA)
@@ -101,7 +163,12 @@ describe('repo question scopé par jointure sur quiz', () => {
   })
 
   it('deleteQuestion renvoie false si le quiz appartient à un autre tenant (pas de fuite)', async () => {
-    const created = await createQuestion(tenantScope(ctx.db, tenantA), quizA, { type: 'mcq', prompt: 'Survive', timeLimit: 20, payload: validMcq })
+    const created = await createQuestion(tenantScope(ctx.db, tenantA), quizA, {
+      type: 'mcq',
+      prompt: 'Survive',
+      timeLimit: 20,
+      payload: validMcq,
+    })
     const ok = await deleteQuestion(tenantScope(ctx.db, tenantB), quizA, created!.id)
     expect(ok).toBe(false)
     const remaining = await listQuestions(tenantScope(ctx.db, tenantA), quizA)
@@ -133,7 +200,12 @@ describe('repo question scopé par jointure sur quiz', () => {
   it('reorderQuestions renvoie false et ne touche pas un autre quiz du même tenant (id empoisonné)', async () => {
     const scope = tenantScope(ctx.db, tenantA)
     const quizA2 = await createQuiz(scope, { ownerId: ownerA, title: 'Quiz A2 sibling' })
-    const foreign = await createQuestion(scope, quizA2.id, { type: 'mcq', prompt: 'Foreign', timeLimit: 20, payload: validMcq })
+    const foreign = await createQuestion(scope, quizA2.id, {
+      type: 'mcq',
+      prompt: 'Foreign',
+      timeLimit: 20,
+      payload: validMcq,
+    })
     const foreignOrderIndexBefore = foreign!.orderIndex
 
     const ok = await reorderQuestions(scope, quizA, [foreign!.id])
@@ -190,59 +262,113 @@ describe('repo question scopé par jointure sur quiz', () => {
     const scope = tenantScope(ctx.db, tenantA)
     const def = await createQuestion(scope, quizA, { type: 'mcq', prompt: 'D', timeLimit: 20, payload: validMcq })
     expect(def!.readingTime).toBe(6) // défaut
-    const withReading = await createQuestion(scope, quizA, { type: 'mcq', prompt: 'R', timeLimit: 20, readingTime: 6, payload: validMcq })
+    const withReading = await createQuestion(scope, quizA, {
+      type: 'mcq',
+      prompt: 'R',
+      timeLimit: 20,
+      readingTime: 6,
+      payload: validMcq,
+    })
     expect(withReading!.readingTime).toBe(6)
     const patched = await updateQuestion(scope, quizA, def!.id, { readingTime: 4 })
     expect(patched!.readingTime).toBe(4)
   })
 
   it('createQuestion écrit le tenant_id du scope', async () => {
-    const q = await createQuestion(tenantScope(ctx.db, tenantA), quizA, { type: 'mcq', prompt: 'TenantSet', timeLimit: 20, payload: validMcq })
+    const q = await createQuestion(tenantScope(ctx.db, tenantA), quizA, {
+      type: 'mcq',
+      prompt: 'TenantSet',
+      timeLimit: 20,
+      payload: validMcq,
+    })
     expect(q?.tenantId).toBe(tenantA)
   })
 
   it('la FK composite rejette une question dont le tenant_id ne colle pas au quiz parent', async () => {
     // quizA appartient à tenantA ; forcer tenantB viole (quiz_id, tenant_id) → quiz(id, tenant_id)
     await expect(
-      ctx.db.insert(schema.question).values({
-        quizId: quizA, tenantId: tenantB, type: 'mcq', prompt: 'Cross', timeLimit: 20, orderIndex: 999, payload: validMcq,
-      }).returning(),
+      ctx.db
+        .insert(schema.question)
+        .values({
+          quizId: quizA,
+          tenantId: tenantB,
+          type: 'mcq',
+          prompt: 'Cross',
+          timeLimit: 20,
+          orderIndex: 999,
+          payload: validMcq,
+        })
+        .returning(),
     ).rejects.toThrow()
   })
 
   it('la colonne tenant_id est NOT NULL (aucun insert sans tenant résoluble)', async () => {
     await expect(
-      ctx.db.insert(schema.question).values({
-        quizId: quizA, type: 'mcq', prompt: 'NoTenant', timeLimit: 20, orderIndex: 998, payload: validMcq,
-      } as never).returning(),
+      ctx.db
+        .insert(schema.question)
+        .values({
+          quizId: quizA,
+          type: 'mcq',
+          prompt: 'NoTenant',
+          timeLimit: 20,
+          orderIndex: 998,
+          payload: validMcq,
+        } as never)
+        .returning(),
     ).rejects.toThrow()
   })
 
-  it('le backfill dérive tenant_id du quiz parent (simulation d\'une ligne legacy)', async () => {
-    const created = await createQuestion(tenantScope(ctx.db, tenantA), quizA, { type: 'mcq', prompt: 'Legacy', timeLimit: 20, payload: validMcq })
+  it("le backfill dérive tenant_id du quiz parent (simulation d'une ligne legacy)", async () => {
+    const created = await createQuestion(tenantScope(ctx.db, tenantA), quizA, {
+      type: 'mcq',
+      prompt: 'Legacy',
+      timeLimit: 20,
+      payload: validMcq,
+    })
     // Simuler une ligne d'avant la migration : relâcher NOT NULL, vider la colonne, rejouer le backfill.
     await ctx.db.execute(sql`ALTER TABLE question ALTER COLUMN tenant_id DROP NOT NULL`)
     await ctx.db.execute(sql`UPDATE question SET tenant_id = NULL WHERE id = ${created!.id}`)
-    await ctx.db.execute(sql`UPDATE question q SET tenant_id = z.tenant_id FROM quiz z WHERE z.id = q.quiz_id AND q.tenant_id IS NULL`)
+    await ctx.db.execute(
+      sql`UPDATE question q SET tenant_id = z.tenant_id FROM quiz z WHERE z.id = q.quiz_id AND q.tenant_id IS NULL`,
+    )
     await ctx.db.execute(sql`ALTER TABLE question ALTER COLUMN tenant_id SET NOT NULL`)
     const [row] = await ctx.db.select().from(schema.question).where(eq(schema.question.id, created!.id))
     expect(row.tenantId).toBe(tenantA)
   })
 })
 
-describe('texte alternatif de l\'image (media_alt)', () => {
+describe("texte alternatif de l'image (media_alt)", () => {
   const scopeA = () => tenantScope(ctx.db, tenantA)
   it('createQuestion stocke media et mediaAlt', async () => {
-    const q = await createQuestion(scopeA(), quizA, { type: 'truefalse', prompt: 'P', timeLimit: 20, payload: { correct: true }, media: '/uploads/t/a.png', mediaAlt: 'Un manchot' })
+    const q = await createQuestion(scopeA(), quizA, {
+      type: 'truefalse',
+      prompt: 'P',
+      timeLimit: 20,
+      payload: { correct: true },
+      media: '/uploads/t/a.png',
+      mediaAlt: 'Un manchot',
+    })
     expect(q?.media).toBe('/uploads/t/a.png')
     expect(q?.mediaAlt).toBe('Un manchot')
   })
   it('createQuestion sans mediaAlt le laisse à null', async () => {
-    const q = await createQuestion(scopeA(), quizA, { type: 'truefalse', prompt: 'P', timeLimit: 20, payload: { correct: true } })
+    const q = await createQuestion(scopeA(), quizA, {
+      type: 'truefalse',
+      prompt: 'P',
+      timeLimit: 20,
+      payload: { correct: true },
+    })
     expect(q?.mediaAlt).toBeNull()
   })
   it('updateQuestion peut effacer media et mediaAlt', async () => {
-    const q = await createQuestion(scopeA(), quizA, { type: 'truefalse', prompt: 'P', timeLimit: 20, payload: { correct: true }, media: 'https://exemple.org/a.png', mediaAlt: 'alt' })
+    const q = await createQuestion(scopeA(), quizA, {
+      type: 'truefalse',
+      prompt: 'P',
+      timeLimit: 20,
+      payload: { correct: true },
+      media: 'https://exemple.org/a.png',
+      mediaAlt: 'alt',
+    })
     const u = await updateQuestion(scopeA(), quizA, q!.id, { media: null, mediaAlt: null })
     expect(u?.media).toBeNull()
     expect(u?.mediaAlt).toBeNull()

@@ -12,12 +12,8 @@ function deserialize(raw: unknown): GameSession {
   const s = raw as GameSession
   return {
     ...s,
-    answers: Object.fromEntries(
-      Object.entries(s.answers ?? {}).map(([k, v]) => [Number(k), v]),
-    ),
-    credited: Object.fromEntries(
-      Object.entries(s.credited ?? {}).map(([k, v]) => [Number(k), v]),
-    ),
+    answers: Object.fromEntries(Object.entries(s.answers ?? {}).map(([k, v]) => [Number(k), v])),
+    credited: Object.fromEntries(Object.entries(s.credited ?? {}).map(([k, v]) => [Number(k), v])),
   }
 }
 
@@ -46,7 +42,9 @@ export class PersistentSessionStore implements SessionStore {
    * → écriture coalescée. Le crédit (scoring) et les transitions de phase restent, eux, durables
    * immédiatement — condition de la cicatrisation P1-8 et de l'idempotence du reveal. */
   private signature(s: GameSession): string {
-    const creditedRounds = Object.keys(s.credited ?? {}).filter((k) => s.credited[Number(k)]).sort()
+    const creditedRounds = Object.keys(s.credited ?? {})
+      .filter((k) => s.credited[Number(k)])
+      .sort()
     const players = Object.keys(s.players ?? {}).sort()
     return JSON.stringify({ phase: s.phase, idx: s.currentIndex, creditedRounds, players })
   }

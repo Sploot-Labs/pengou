@@ -5,8 +5,12 @@ import { hasPermission, type AppConfig } from '@splootlabs/shared'
 import type { Auth } from '@splootlabs/auth'
 
 declare module 'fastify' {
-  interface FastifyRequest { user: { id: string; email: string } }
-  interface FastifyInstance { auth: Auth }
+  interface FastifyRequest {
+    user: { id: string; email: string }
+  }
+  interface FastifyInstance {
+    auth: Auth
+  }
 }
 
 /** Contexte tenant résolu pour une requête : le tenant applicable + `ownerId` role-aware
@@ -20,7 +24,10 @@ export function registerRequireUser(app: FastifyInstance, auth: Auth): void {
 
 export async function requireUser(request: FastifyRequest, reply: FastifyReply): Promise<void> {
   const session = await request.server.auth.api.getSession({ headers: fromNodeHeaders(request.headers) })
-  if (!session?.user) { reply.code(401).send({ error: 'Non authentifié.' }); return }
+  if (!session?.user) {
+    reply.code(401).send({ error: 'Non authentifié.' })
+    return
+  }
   request.user = { id: session.user.id, email: session.user.email }
 }
 
@@ -38,7 +45,8 @@ export async function resolveTenantContext(
   config: AppConfig,
 ): Promise<TenantContext> {
   if (!request.user?.id) throw new Error('resolveTenantContext requires requireUser preHandler')
-  const explicitTenantId = typeof request.headers['x-tenant-id'] === 'string' ? (request.headers['x-tenant-id'] as string) : undefined
+  const explicitTenantId =
+    typeof request.headers['x-tenant-id'] === 'string' ? (request.headers['x-tenant-id'] as string) : undefined
   const tenantId = await resolveTenantId(systemDb, config, { userId: request.user.id, explicitTenantId })
   const role = (await getMembershipRole(systemDb, request.user.id, tenantId)) ?? 'member'
   const ownerId = hasPermission(role, 'content:access-all') ? undefined : request.user.id

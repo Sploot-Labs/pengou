@@ -30,13 +30,22 @@ export function AcceptInvitation() {
     let cancelled = false
     setLoading(true)
     fetchInvitationPreview(token)
-      .then((p) => { if (!cancelled) { setPreview(p); setLoadError(null) } })
+      .then((p) => {
+        if (!cancelled) {
+          setPreview(p)
+          setLoadError(null)
+        }
+      })
       .catch((err) => {
         if (cancelled) return
         setLoadError(err instanceof ApiError ? err.message : 'Invitation introuvable.')
       })
-      .finally(() => { if (!cancelled) setLoading(false) })
-    return () => { cancelled = true }
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
   }, [token])
 
   async function handleAccept() {
@@ -75,7 +84,9 @@ export function AcceptInvitation() {
         {loadError && !loading && (
           <div className="ab-empty-state">
             <p role="alert">{loadError}</p>
-            <Link className="ab-button ab-button--primary" to="/">Retour à l'accueil</Link>
+            <Link className="ab-button ab-button--primary" to="/">
+              Retour à l'accueil
+            </Link>
           </div>
         )}
 
@@ -89,7 +100,11 @@ export function AcceptInvitation() {
               </p>
             ) : user ? (
               <>
-                {acceptError && <p role="alert" className="join-error">{acceptError}</p>}
+                {acceptError && (
+                  <p role="alert" className="join-error">
+                    {acceptError}
+                  </p>
+                )}
                 <p>
                   Connecté·e en tant que <strong>{user.email}</strong>.
                 </p>
@@ -101,8 +116,12 @@ export function AcceptInvitation() {
               <>
                 <p>Connectez-vous ou créez un compte pour rejoindre ce workspace.</p>
                 <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
-                  <Link className="ab-button ab-button--primary" to="/login">Se connecter</Link>
-                  <Link className="ab-button ab-button--ghost" to="/signup">Créer un compte</Link>
+                  <Link className="ab-button ab-button--primary" to="/login">
+                    Se connecter
+                  </Link>
+                  <Link className="ab-button ab-button--ghost" to="/signup">
+                    Créer un compte
+                  </Link>
                 </div>
                 <p className="home-card__meta" style={{ marginTop: 'var(--space-3)' }}>
                   Revenez sur ce lien une fois connecté·e pour finaliser.

@@ -17,7 +17,10 @@ afterAll(async () => {
 
 describe('routes auth + garde de session', () => {
   it('monte /api/auth et protège une route (401 sans session)', async () => {
-    const auth = createAuth(ctx.db, { secret: 'test-secret-at-least-32-chars-long!!', baseURL: 'http://localhost:3000' })
+    const auth = createAuth(ctx.db, {
+      secret: 'test-secret-at-least-32-chars-long!!',
+      baseURL: 'http://localhost:3000',
+    })
     const app = await buildServer(loadConfig({ NODE_ENV: 'test' }), { dbStatus: () => 'up' })
     await registerAuth(app, auth)
     const res = await app.inject({ method: 'GET', url: '/api/me' })
@@ -26,7 +29,10 @@ describe('routes auth + garde de session', () => {
   })
 
   it('inscrit un hôte puis autorise /api/me avec le cookie de session', async () => {
-    const auth = createAuth(ctx.db, { secret: 'test-secret-at-least-32-chars-long!!', baseURL: 'http://localhost:3000' })
+    const auth = createAuth(ctx.db, {
+      secret: 'test-secret-at-least-32-chars-long!!',
+      baseURL: 'http://localhost:3000',
+    })
     const app = await buildServer(loadConfig({ NODE_ENV: 'test' }), { dbStatus: () => 'up' })
     await registerAuth(app, auth)
 

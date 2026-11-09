@@ -3,7 +3,13 @@ import type { FastifyInstance } from 'fastify'
 import { io as ioClient, type Socket as ClientSocket } from 'socket.io-client'
 import { eq } from 'drizzle-orm'
 import {
-  startTestDb, runMigrations, schema, tenantScope, createQuiz, createQuestion, ensureDefaultTenant,
+  startTestDb,
+  runMigrations,
+  schema,
+  tenantScope,
+  createQuiz,
+  createQuestion,
+  ensureDefaultTenant,
 } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { loadConfig } from '@splootlabs/shared'
@@ -183,11 +189,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const hostSocket = await connectClient(url, { cookie })
       clients.push(hostSocket)
 
-      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
-        hostSocket,
-        'host:create',
-        { quizId: quiz.id },
-      )
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
+        quizId: quiz.id,
+      })
       expect(created.error).toBeUndefined()
       expect(created.sessionId).toBeTruthy()
       expect(created.pin).toMatch(/^\d{6}$/)
@@ -200,20 +204,18 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const lobbyUpdates = collect<{ players: Array<{ id: string }> }>(hostSocket, 'lobby:update')
 
-      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(
-        player1,
-        'player:join',
-        { pin, nickname: 'Alice' },
-      )
+      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player1, 'player:join', {
+        pin,
+        nickname: 'Alice',
+      })
       expect(join1.error).toBeUndefined()
       expect(join1.playerId).toBeTruthy()
       expect(join1.joinToken).toBeTruthy()
 
-      const join2 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(
-        player2,
-        'player:join',
-        { pin, nickname: 'Bob' },
-      )
+      const join2 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player2, 'player:join', {
+        pin,
+        nickname: 'Bob',
+      })
       expect(join2.error).toBeUndefined()
       expect(join2.playerId).toBeTruthy()
 
@@ -242,11 +244,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       }
 
       // 5. Un joueur répond correctement (index 0 = Paris).
-      const answerAck = await ack<{ accepted?: boolean; error?: string }>(
-        player1,
-        'player:answer',
-        { answer: { optionIndex: 0 } },
-      )
+      const answerAck = await ack<{ accepted?: boolean; error?: string }>(player1, 'player:answer', {
+        answer: { optionIndex: 0 },
+      })
       expect(answerAck.accepted).toBe(true)
 
       // 6. host:reveal → question:reveal contient la bonne réponse + la distribution.
@@ -277,7 +277,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 30_000)
 
-  it("refuse host:create sans session authentifiée", async () => {
+  it('refuse host:create sans session authentifiée', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -292,7 +292,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 15_000)
 
-  it("un joueur ne peut pas piloter les événements hôte (host:reveal refusé, aucune fuite sur le fil)", async () => {
+  it('un joueur ne peut pas piloter les événements hôte (host:reveal refusé, aucune fuite sur le fil)', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -315,7 +315,12 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
           prompt: 'Q ?',
           timeLimit: 20,
           readingTime: 0,
-          payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+          payload: {
+            options: [
+              { label: 'A', correct: true },
+              { label: 'B', correct: false },
+            ],
+          },
         },
         headers: { 'content-type': 'application/json', cookie },
       })
@@ -323,18 +328,19 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const hostSocket = await connectClient(url, { cookie })
       clients.push(hostSocket)
-      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
-        hostSocket,
-        'host:create',
-        { quizId: quiz.id },
-      )
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
+        quizId: quiz.id,
+      })
       expect(created.error).toBeUndefined()
       const { pin } = created as { sessionId: string; pin: string }
 
       // Un joueur anonyme rejoint — il n'a JAMAIS le rôle 'host' côté passerelle.
       const mallory = await connectClient(url)
       clients.push(mallory)
-      const joinRes = await ack<{ playerId?: string; error?: string }>(mallory, 'player:join', { pin, nickname: 'Mallory' })
+      const joinRes = await ack<{ playerId?: string; error?: string }>(mallory, 'player:join', {
+        pin,
+        nickname: 'Mallory',
+      })
       expect(joinRes.error).toBeUndefined()
       expect(joinRes.playerId).toBeTruthy()
 
@@ -372,9 +378,18 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       // Tenant B, seedé directement via les repos (même approche que editor-e2e.test.ts) :
       // un tenant + un owner qui lui appartient + un quiz + une question, tous hors du tenant
       // par défaut résolu pour l'hôte authentifié ci-dessus (mode 'single').
-      const [foreignTenant] = await ctx.db.insert(schema.tenant).values({ name: 'Tenant étranger (gateway)' }).returning()
-      const [foreignOwner] = await ctx.db.insert(schema.user)
-        .values({ id: crypto.randomUUID(), email: 'foreign-owner-gateway@x.fr', name: 'Étranger', emailVerified: false })
+      const [foreignTenant] = await ctx.db
+        .insert(schema.tenant)
+        .values({ name: 'Tenant étranger (gateway)' })
+        .returning()
+      const [foreignOwner] = await ctx.db
+        .insert(schema.user)
+        .values({
+          id: crypto.randomUUID(),
+          email: 'foreign-owner-gateway@x.fr',
+          name: 'Étranger',
+          emailVerified: false,
+        })
         .returning()
       const foreignScope = tenantScope(ctx.db, foreignTenant.id)
       const foreignQuiz = await createQuiz(foreignScope, { ownerId: foreignOwner.id, title: 'Quiz étranger (gateway)' })
@@ -383,18 +398,21 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         prompt: 'Question étrangère',
         timeLimit: 20,
         readingTime: 0,
-        payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+        payload: {
+          options: [
+            { label: 'A', correct: true },
+            { label: 'B', correct: false },
+          ],
+        },
       })
 
       const hostSocket = await connectClient(url, { cookie })
       clients.push(hostSocket)
 
       // L'hôte (tenant par défaut) tente de créer une session sur le quiz du tenant étranger.
-      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
-        hostSocket,
-        'host:create',
-        { quizId: foreignQuiz.id },
-      )
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
+        quizId: foreignQuiz.id,
+      })
       expect(created.error).toBeTruthy()
       expect(created.sessionId).toBeUndefined()
       expect(created.pin).toBeUndefined()
@@ -428,8 +446,16 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const scopeA = tenantScope(ctx.db, tenantId, memberAU.id)
       const quiz = await createQuiz(scopeA, { ownerId: memberAU.id, title: 'Quiz de memberA' })
       await createQuestion(scopeA, quiz.id, {
-        type: 'mcq', prompt: 'Q', timeLimit: 20, readingTime: 0,
-        payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+        type: 'mcq',
+        prompt: 'Q',
+        timeLimit: 20,
+        readingTime: 0,
+        payload: {
+          options: [
+            { label: 'A', correct: true },
+            { label: 'B', correct: false },
+          ],
+        },
       })
 
       // Un autre member ne peut PAS lancer sur le quiz de memberA (owner-scoping maintenu).
@@ -442,7 +468,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       // L'admin, lui, PEUT lancer sur le quiz de memberA (accès croisé par rôle — parité avec HTTP).
       const adminSock = await connectClient(url, { cookie: adminCookie })
       clients.push(adminSock)
-      const ok = await ack<{ sessionId?: string; pin?: string; error?: string }>(adminSock, 'host:create', { quizId: quiz.id })
+      const ok = await ack<{ sessionId?: string; pin?: string; error?: string }>(adminSock, 'host:create', {
+        quizId: quiz.id,
+      })
       expect(ok.error).toBeUndefined()
       expect(ok.sessionId).toBeTruthy()
     } finally {
@@ -490,11 +518,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     expect(questionRes.statusCode).toBe(201)
 
     const hostSocket = await connectClient(url, { cookie })
-    const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
-      hostSocket,
-      'host:create',
-      { quizId: quiz.id },
-    )
+    const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
+      quizId: quiz.id,
+    })
     expect(created.error).toBeUndefined()
     return { hostSocket, sessionId: created.sessionId!, pin: created.pin!, quizId: quiz.id }
   }
@@ -538,16 +564,14 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     })
 
     const hostSocket = await connectClient(url, { cookie })
-    const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
-      hostSocket,
-      'host:create',
-      { quizId: quiz.id },
-    )
+    const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
+      quizId: quiz.id,
+    })
     expect(created.error).toBeUndefined()
     return { hostSocket, sessionId: created.sessionId!, pin: created.pin!, quizId: quiz.id, cookie }
   }
 
-  it("player:reconnect (joinToken) : un joueur déconnecté puis reconnecté retrouve son score et sa place dans la room", async () => {
+  it('player:reconnect (joinToken) : un joueur déconnecté puis reconnecté retrouve son score et sa place dans la room', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -556,11 +580,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const player1 = await connectClient(url)
       clients.push(player1)
-      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(
-        player1,
-        'player:join',
-        { pin, nickname: 'Alice' },
-      )
+      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player1, 'player:join', {
+        pin,
+        nickname: 'Alice',
+      })
       expect(join1.error).toBeUndefined()
       const joinToken = join1.joinToken!
 
@@ -612,7 +635,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("player:reconnect avec un joinToken invalide/inconnu est refusé", async () => {
+  it('player:reconnect avec un joinToken invalide/inconnu est refusé', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -625,11 +648,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const player2 = await connectClient(url)
       clients.push(player2)
-      const res = await ack<{ error?: string; playerId?: string }>(
-        player2,
-        'player:reconnect',
-        { pin, joinToken: 'jeton-inexistant' },
-      )
+      const res = await ack<{ error?: string; playerId?: string }>(player2, 'player:reconnect', {
+        pin,
+        joinToken: 'jeton-inexistant',
+      })
       expect(res.error).toBeTruthy()
       expect(res.playerId).toBeUndefined()
     } finally {
@@ -638,7 +660,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 15_000)
 
-  it("player:reconnect EN PLEINE QUESTION renvoie question:show (sans bonne réponse) + timer au socket reconnecté, qui peut alors répondre", async () => {
+  it('player:reconnect EN PLEINE QUESTION renvoie question:show (sans bonne réponse) + timer au socket reconnecté, qui peut alors répondre', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -647,11 +669,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const player1 = await connectClient(url)
       clients.push(player1)
-      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(
-        player1,
-        'player:join',
-        { pin, nickname: 'Alice' },
-      )
+      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player1, 'player:join', {
+        pin,
+        nickname: 'Alice',
+      })
       expect(join1.error).toBeUndefined()
       const joinToken = join1.joinToken!
 
@@ -671,11 +692,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(player1b, 'question:show')
       const timerPromise = waitFor<{ timeLimit?: number; startedAt?: number }>(player1b, 'timer')
 
-      const reconnectAck = await ack<{ phase?: string; score?: number; error?: string }>(
-        player1b,
-        'player:reconnect',
-        { pin, joinToken },
-      )
+      const reconnectAck = await ack<{ phase?: string; score?: number; error?: string }>(player1b, 'player:reconnect', {
+        pin,
+        joinToken,
+      })
       expect(reconnectAck.error).toBeUndefined()
       expect(reconnectAck.phase).toBe('question')
 
@@ -688,11 +708,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       expect(timer.timeLimit).toBe(30)
 
       // Alice peut désormais répondre à la question qu'elle vient de recevoir en reconnectant.
-      const answerAck = await ack<{ accepted?: boolean; error?: string }>(
-        player1b,
-        'player:answer',
-        { answer: { optionIndex: 0 } },
-      )
+      const answerAck = await ack<{ accepted?: boolean; error?: string }>(player1b, 'player:answer', {
+        answer: { optionIndex: 0 },
+      })
       expect(answerAck.accepted).toBe(true)
     } finally {
       for (const c of clients) c.disconnect()
@@ -711,11 +729,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const player1 = await connectClient(url)
       clients.push(player1)
-      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(
-        player1,
-        'player:join',
-        { pin, nickname: 'Alice' },
-      )
+      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player1, 'player:join', {
+        pin,
+        nickname: 'Alice',
+      })
       expect(join1.error).toBeUndefined()
       const { playerId, joinToken } = join1 as { playerId: string; joinToken: string }
       await lobbyUpdates.atLeast(1) // lobby:update du player:join
@@ -728,11 +745,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       // (~pingTimeout) par rapport à un client qui a déjà rouvert une nouvelle connexion.
       const player1b = await connectClient(url)
       clients.push(player1b)
-      const reconnectAck = await ack<{ error?: string; phase?: string }>(
-        player1b,
-        'player:reconnect',
-        { pin, joinToken },
-      )
+      const reconnectAck = await ack<{ error?: string; phase?: string }>(player1b, 'player:reconnect', {
+        pin,
+        joinToken,
+      })
       expect(reconnectAck.error).toBeUndefined()
       await lobbyUpdates.atLeast(2) // lobby:update du player:reconnect
 
@@ -771,7 +787,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       // Token inconnu → refusé.
       const badScreen = await connectClient(url)
       clients.push(badScreen)
-      const badJoin = await ack<{ error?: string; ok?: boolean }>(badScreen, 'screen:join', { displayToken: 'nimporte-quoi' })
+      const badJoin = await ack<{ error?: string; ok?: boolean }>(badScreen, 'screen:join', {
+        displayToken: 'nimporte-quoi',
+      })
       expect(badJoin.error).toBeTruthy()
       expect(badJoin.ok).toBeUndefined()
 
@@ -803,7 +821,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("host:createScreenToken est refusé pour un socket non-hôte (requireHost, comme les autres commandes hôte)", async () => {
+  it('host:createScreenToken est refusé pour un socket non-hôte (requireHost, comme les autres commandes hôte)', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -812,7 +830,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const mallory = await connectClient(url)
       clients.push(mallory)
-      const joinRes = await ack<{ playerId?: string; error?: string }>(mallory, 'player:join', { pin, nickname: 'Mallory' })
+      const joinRes = await ack<{ playerId?: string; error?: string }>(mallory, 'player:join', {
+        pin,
+        nickname: 'Mallory',
+      })
       expect(joinRes.error).toBeUndefined()
 
       const res = await ack<{ displayToken?: string; error?: string }>(mallory, 'host:createScreenToken', {})
@@ -824,7 +845,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("host:start émet `timer` (chrono mesuré, dérivé du timeLimit de la question) à toute la room", async () => {
+  it('host:start émet `timer` (chrono mesuré, dérivé du timeLimit de la question) à toute la room', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -850,7 +871,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("screen:progress : le grand écran reçoit le compteur de réponses (answered/total), sans jamais la bonne réponse", async () => {
+  it('screen:progress : le grand écran reçoit le compteur de réponses (answered/total), sans jamais la bonne réponse', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -885,7 +906,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("enchaînement automatique (défaut activé) : après la révélation, le serveur diffuse `auto:advance` puis avance SEUL vers le podium, sans host:next", async () => {
+  it('enchaînement automatique (défaut activé) : après la révélation, le serveur diffuse `auto:advance` puis avance SEUL vers le podium, sans host:next', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -919,7 +940,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const auto = await autoPromise
       expect(typeof auto.nextAt).toBe('number')
-      expect((auto.nextAt as number)).toBeGreaterThan(Date.now())
+      expect(auto.nextAt as number).toBeGreaterThan(Date.now())
 
       const podium = await podiumPromise // arrive sans host:next
       expect(podium.top[0]!.score).toBeGreaterThan(0)
@@ -942,11 +963,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       // Désactivation du mode (le défaut est activé) → diffusion `auto:advance {nextAt:null}`.
       const nullAutoPromise = waitFor<{ nextAt: number | null }>(player1, 'auto:advance')
-      const offAck = await ack<{ ok?: boolean; autoAdvance?: boolean; error?: string }>(
-        hostSocket,
-        'host:setAuto',
-        { enabled: false },
-      )
+      const offAck = await ack<{ ok?: boolean; autoAdvance?: boolean; error?: string }>(hostSocket, 'host:setAuto', {
+        enabled: false,
+      })
       expect(offAck.error).toBeUndefined()
       expect(offAck.autoAdvance).toBe(false)
       const nullAuto = await nullAutoPromise
@@ -972,7 +991,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("host:setAuto est refusé pour un socket non-hôte (requireHost)", async () => {
+  it('host:setAuto est refusé pour un socket non-hôte (requireHost)', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -992,7 +1011,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("host:next SANS host:reveal préalable crédite ET persiste quand même la manche en cours (bug important corrigé)", async () => {
+  it('host:next SANS host:reveal préalable crédite ET persiste quand même la manche en cours (bug important corrigé)', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -1043,13 +1062,19 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       // son total_score reflète ces points — la manche n'a pas été silencieusement perdue.
       const [dbSession] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, quizId))
       expect(dbSession).toBeDefined()
-      const dbPlayers = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.sessionId, dbSession.id))
+      const dbPlayers = await ctx.db
+        .select()
+        .from(schema.sessionPlayer)
+        .where(eq(schema.sessionPlayer.sessionId, dbSession.id))
       const aliceDb = dbPlayers.find((p) => p.nickname === 'Alice')
       expect(aliceDb).toBeDefined()
       expect(aliceDb!.totalScore).toBeGreaterThan(0)
       expect(aliceDb!.totalScore).toBe(aliceTop!.score)
 
-      const dbAnswers = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+      const dbAnswers = await ctx.db
+        .select()
+        .from(schema.answerRecord)
+        .where(eq(schema.answerRecord.sessionId, dbSession.id))
       expect(dbAnswers).toHaveLength(1)
       expect(dbAnswers[0].playerId).toBe(aliceDb!.id)
       expect(dbAnswers[0].isCorrect).toBe(true)
@@ -1061,7 +1086,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("host:reconnect : un NOUVEAU socket authentifié comme le même hôte reprend la main (host:start/host:reveal) ; un autre utilisateur authentifié est refusé", async () => {
+  it('host:reconnect : un NOUVEAU socket authentifié comme le même hôte reprend la main (host:start/host:reveal) ; un autre utilisateur authentifié est refusé', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -1082,7 +1107,12 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
           prompt: 'Q ?',
           timeLimit: 20,
           readingTime: 0,
-          payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+          payload: {
+            options: [
+              { label: 'A', correct: true },
+              { label: 'B', correct: false },
+            ],
+          },
         },
         headers: { 'content-type': 'application/json', cookie },
       })
@@ -1090,11 +1120,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const hostSocketA = await connectClient(url, { cookie })
       clients.push(hostSocketA)
-      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
-        hostSocketA,
-        'host:create',
-        { quizId: quiz.id },
-      )
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocketA, 'host:create', {
+        quizId: quiz.id,
+      })
       expect(created.error).toBeUndefined()
       const { sessionId, pin } = created as { sessionId: string; pin: string }
 
@@ -1102,7 +1130,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       // reconnecté reçoit bien le snapshot lobby (Task 8), pas seulement l'ack.
       const player1 = await connectClient(url)
       clients.push(player1)
-      const joinRes = await ack<{ playerId?: string; error?: string }>(player1, 'player:join', { pin, nickname: 'Alice' })
+      const joinRes = await ack<{ playerId?: string; error?: string }>(player1, 'player:join', {
+        pin,
+        nickname: 'Alice',
+      })
       expect(joinRes.error).toBeUndefined()
 
       // L'hôte A disparaît (ex. rechargement de page) — l'ancien socket ne peut plus rien piloter.
@@ -1114,7 +1145,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       // `host:reconnect`, donc AVANT que l'ack ne résolve côté client.
       const hostSocketB = await connectClient(url, { cookie })
       clients.push(hostSocketB)
-      const lobbySnapshotPromise = waitFor<{ players: Array<{ id: string; nickname: string }> }>(hostSocketB, 'lobby:update')
+      const lobbySnapshotPromise = waitFor<{ players: Array<{ id: string; nickname: string }> }>(
+        hostSocketB,
+        'lobby:update',
+      )
       const reconnectAck = await ack<{ sessionId?: string; pin?: string; phase?: string; error?: string }>(
         hostSocketB,
         'host:reconnect',
@@ -1171,7 +1205,12 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
           prompt: 'Q ?',
           timeLimit: 20,
           readingTime: 0,
-          payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+          payload: {
+            options: [
+              { label: 'A', correct: true },
+              { label: 'B', correct: false },
+            ],
+          },
         },
         headers: { 'content-type': 'application/json', cookie },
       })
@@ -1179,11 +1218,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const hostSocket = await connectClient(url, { cookie })
       clients.push(hostSocket)
-      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
-        hostSocket,
-        'host:create',
-        { quizId: quiz.id },
-      )
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
+        quizId: quiz.id,
+      })
       expect(created.error).toBeUndefined()
       const { sessionId } = created as { sessionId: string; pin: string }
 
@@ -1200,7 +1237,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("screen:reconnect : un écran déconnecté puis reconnecté rejoint à nouveau et continue de recevoir les diffusions", async () => {
+  it('screen:reconnect : un écran déconnecté puis reconnecté rejoint à nouveau et continue de recevoir les diffusions', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -1225,11 +1262,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       // projecteur définitivement inaccessible après le moindre blip réseau.
       const screen2 = await connectClient(url)
       clients.push(screen2)
-      const reconnectRes = await ack<{ ok?: boolean; error?: string }>(
-        screen2,
-        'screen:reconnect',
-        { sessionId, displayToken },
-      )
+      const reconnectRes = await ack<{ ok?: boolean; error?: string }>(screen2, 'screen:reconnect', {
+        sessionId,
+        displayToken,
+      })
       expect(reconnectRes.error).toBeUndefined()
       expect(reconnectRes.ok).toBe(true)
 
@@ -1246,7 +1282,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("player:join et screen:join EN PLEINE QUESTION (latecomer) reçoivent question:show (sans bonne réponse) + timer", async () => {
+  it('player:join et screen:join EN PLEINE QUESTION (latecomer) reçoivent question:show (sans bonne réponse) + timer', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -1261,7 +1297,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       clients.push(latePlayer)
       const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(latePlayer, 'question:show')
       const timerPromise = waitFor<{ timeLimit?: number }>(latePlayer, 'timer')
-      const joinAck = await ack<{ playerId?: string; error?: string }>(latePlayer, 'player:join', { pin, nickname: 'Latecomer' })
+      const joinAck = await ack<{ playerId?: string; error?: string }>(latePlayer, 'player:join', {
+        pin,
+        nickname: 'Latecomer',
+      })
       expect(joinAck.error).toBeUndefined()
 
       const show = await showPromise
@@ -1274,8 +1313,13 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const tokenAck = await ack<{ displayToken?: string }>(hostSocket, 'host:createScreenToken', {})
       const screen = await connectClient(url)
       clients.push(screen)
-      const screenShowPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(screen, 'question:show')
-      const screenJoinAck = await ack<{ ok?: boolean; error?: string }>(screen, 'screen:join', { displayToken: tokenAck.displayToken })
+      const screenShowPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(
+        screen,
+        'question:show',
+      )
+      const screenJoinAck = await ack<{ ok?: boolean; error?: string }>(screen, 'screen:join', {
+        displayToken: tokenAck.displayToken,
+      })
       expect(screenJoinAck.error).toBeUndefined()
       const screenShow = await screenShowPromise
       expect(JSON.stringify(screenShow)).not.toContain('correct') // anti-triche
@@ -1285,7 +1329,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("host:skip : avance SANS jamais émettre question:reveal, mais crédite et persiste les réponses déjà données (vrai skip, pas un alias de reveal)", async () => {
+  it('host:skip : avance SANS jamais émettre question:reveal, mais crédite et persiste les réponses déjà données (vrai skip, pas un alias de reveal)', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -1333,7 +1377,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       // Persistance : la réponse d'Alice a bien été enregistrée en base malgré le skip.
       const [dbSession] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.quizId, quizId))
-      const dbAnswers = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+      const dbAnswers = await ctx.db
+        .select()
+        .from(schema.answerRecord)
+        .where(eq(schema.answerRecord.sessionId, dbSession.id))
       expect(dbAnswers).toHaveLength(1)
       expect(dbAnswers[0].isCorrect).toBe(true)
       expect(dbAnswers[0].points).toBeGreaterThan(0)
@@ -1343,7 +1390,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("host:skip émis depuis le lobby (avant host:start) est refusé, sans fuite de scoreboard", async () => {
+  it('host:skip émis depuis le lobby (avant host:start) est refusé, sans fuite de scoreboard', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -1364,7 +1411,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 15_000)
 
-  it("player:reconnect inclut `alreadyAnswered` : true si le joueur avait déjà répondu à la question en cours, false sinon", async () => {
+  it('player:reconnect inclut `alreadyAnswered` : true si le joueur avait déjà répondu à la question en cours, false sinon', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -1373,12 +1420,18 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const player1 = await connectClient(url)
       clients.push(player1)
-      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player1, 'player:join', { pin, nickname: 'Alice' })
+      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player1, 'player:join', {
+        pin,
+        nickname: 'Alice',
+      })
       expect(join1.error).toBeUndefined()
 
       const player2 = await connectClient(url)
       clients.push(player2)
-      const join2 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player2, 'player:join', { pin, nickname: 'Bob' })
+      const join2 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player2, 'player:join', {
+        pin,
+        nickname: 'Bob',
+      })
       expect(join2.error).toBeUndefined()
 
       const startAck = await ack<{ error?: string }>(hostSocket, 'host:start', {})
@@ -1394,21 +1447,19 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       const player1b = await connectClient(url)
       clients.push(player1b)
-      const reconnect1 = await ack<{ alreadyAnswered?: boolean; error?: string }>(
-        player1b,
-        'player:reconnect',
-        { pin, joinToken: join1.joinToken },
-      )
+      const reconnect1 = await ack<{ alreadyAnswered?: boolean; error?: string }>(player1b, 'player:reconnect', {
+        pin,
+        joinToken: join1.joinToken,
+      })
       expect(reconnect1.error).toBeUndefined()
       expect(reconnect1.alreadyAnswered).toBe(true)
 
       const player2b = await connectClient(url)
       clients.push(player2b)
-      const reconnect2 = await ack<{ alreadyAnswered?: boolean; error?: string }>(
-        player2b,
-        'player:reconnect',
-        { pin, joinToken: join2.joinToken },
-      )
+      const reconnect2 = await ack<{ alreadyAnswered?: boolean; error?: string }>(player2b, 'player:reconnect', {
+        pin,
+        joinToken: join2.joinToken,
+      })
       expect(reconnect2.error).toBeUndefined()
       expect(reconnect2.alreadyAnswered).toBe(false)
     } finally {
@@ -1417,7 +1468,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("host:reveal émis depuis le lobby (avant host:start) est refusé, sans fuite de question:reveal/scoreboard", async () => {
+  it('host:reveal émis depuis le lobby (avant host:start) est refusé, sans fuite de question:reveal/scoreboard', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -1443,7 +1494,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 15_000)
 
-  it("auto-révélation serveur : quand TOUS les joueurs connectés ont répondu, question:reveal + scoreboard sont émis SANS host:reveal/host:skip", async () => {
+  it('auto-révélation serveur : quand TOUS les joueurs connectés ont répondu, question:reveal + scoreboard sont émis SANS host:reveal/host:skip', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -1463,8 +1514,14 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
       // hostSocket observe la room (jamais host:reveal/host:skip émis dans ce test — la
       // révélation doit provenir UNIQUEMENT du serveur, déclenchée par les 2 réponses ci-dessous).
-      const revealPromise = waitFor<{ correct: unknown; distribution: Record<string, number> }>(hostSocket, 'question:reveal')
-      const scoreboardPromise = waitFor<{ ranking: Array<{ playerId: string; score: number }> }>(hostSocket, 'scoreboard')
+      const revealPromise = waitFor<{ correct: unknown; distribution: Record<string, number> }>(
+        hostSocket,
+        'question:reveal',
+      )
+      const scoreboardPromise = waitFor<{ ranking: Array<{ playerId: string; score: number }> }>(
+        hostSocket,
+        'scoreboard',
+      )
 
       const answer1 = await ack<{ accepted?: boolean }>(player1, 'player:answer', { answer: { optionIndex: 0 } })
       expect(answer1.accepted).toBe(true)
@@ -1543,7 +1600,7 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     }
   }, 20_000)
 
-  it("auto-révélation serveur : un seul question:reveal par manche (idempotent), même si les 2 dernières réponses arrivent quasi simultanément", async () => {
+  it('auto-révélation serveur : un seul question:reveal par manche (idempotent), même si les 2 dernières réponses arrivent quasi simultanément', async () => {
     const { app, url } = await buildApp()
     const clients: ClientSocket[] = []
     try {
@@ -1588,13 +1645,29 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
     async function setupRelaunch(app: FastifyInstance, url: string, email: string) {
       const cookie = await signUp(app, email)
       const mkQuiz = async (title: string) => {
-        const quizRes = await app.inject({ method: 'POST', url: '/api/quizzes', payload: { title }, headers: { 'content-type': 'application/json', cookie } })
+        const quizRes = await app.inject({
+          method: 'POST',
+          url: '/api/quizzes',
+          payload: { title },
+          headers: { 'content-type': 'application/json', cookie },
+        })
         expect(quizRes.statusCode).toBe(201)
         const quiz = quizRes.json() as { id: string }
         const qRes = await app.inject({
           method: 'POST',
           url: `/api/quizzes/${quiz.id}/questions`,
-          payload: { type: 'mcq', prompt: 'Capitale de la France ?', timeLimit: 20, readingTime: 0, payload: { options: [{ label: 'Paris', correct: true }, { label: 'Lyon', correct: false }] } },
+          payload: {
+            type: 'mcq',
+            prompt: 'Capitale de la France ?',
+            timeLimit: 20,
+            readingTime: 0,
+            payload: {
+              options: [
+                { label: 'Paris', correct: true },
+                { label: 'Lyon', correct: false },
+              ],
+            },
+          },
           headers: { 'content-type': 'application/json', cookie },
         })
         expect(qRes.statusCode).toBe(201)
@@ -1603,7 +1676,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const quizA = await mkQuiz('Quiz A')
       const quizB = await mkQuiz('Quiz B')
       const hostSocket = await connectClient(url, { cookie })
-      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', { quizId: quizA })
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
+        quizId: quizA,
+      })
       expect(created.error).toBeUndefined()
       return { hostSocket, pinA: created.pin!, sessionIdA: created.sessionId!, quizA, quizB }
     }
@@ -1623,11 +1698,21 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         clients.push(hostSocket)
         const player = await connectClient(url)
         clients.push(player)
-        expect((await ack<{ error?: string }>(player, 'player:join', { pin: pinA, nickname: 'Ana' })).error).toBeUndefined()
+        expect(
+          (await ack<{ error?: string }>(player, 'player:join', { pin: pinA, nickname: 'Ana' })).error,
+        ).toBeUndefined()
         await toPodium(hostSocket, player)
 
-        const relaunched = waitFor<{ role: string; pin: string; playerId: string; joinToken: string; nickname: string }>(player, 'session:relaunched')
-        const res = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:relaunch', { quizId: quizB })
+        const relaunched = waitFor<{
+          role: string
+          pin: string
+          playerId: string
+          joinToken: string
+          nickname: string
+        }>(player, 'session:relaunched')
+        const res = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:relaunch', {
+          quizId: quizB,
+        })
         expect(res.error).toBeUndefined()
         const ev = await relaunched
         expect(ev.role).toBe('player')
@@ -1637,7 +1722,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         expect(ev.playerId).toBeTruthy()
         expect(ev.joinToken).toBeTruthy()
         // Ligne DB du nouveau joueur, dans la NOUVELLE session, avec le joinToken émis.
-        const rows = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.sessionId, res.sessionId!))
+        const rows = await ctx.db
+          .select()
+          .from(schema.sessionPlayer)
+          .where(eq(schema.sessionPlayer.sessionId, res.sessionId!))
         expect(rows).toHaveLength(1)
         expect(rows[0].nickname).toBe('Ana')
         expect(rows[0].joinToken).toBe(ev.joinToken)
@@ -1697,15 +1785,35 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       try {
         const { hostSocket, pinA } = await setupRelaunch(app, url, 'gateway-relaunch-foreign@example.com')
         clients.push(hostSocket)
-        const [foreignTenant] = await ctx.db.insert(schema.tenant).values({ name: 'Tenant étranger (relaunch)' }).returning()
-        const [foreignOwner] = await ctx.db.insert(schema.user)
-          .values({ id: crypto.randomUUID(), email: 'foreign-owner-relaunch@x.fr', name: 'Étranger', emailVerified: false })
+        const [foreignTenant] = await ctx.db
+          .insert(schema.tenant)
+          .values({ name: 'Tenant étranger (relaunch)' })
+          .returning()
+        const [foreignOwner] = await ctx.db
+          .insert(schema.user)
+          .values({
+            id: crypto.randomUUID(),
+            email: 'foreign-owner-relaunch@x.fr',
+            name: 'Étranger',
+            emailVerified: false,
+          })
           .returning()
         const foreignScope = tenantScope(ctx.db, foreignTenant.id)
-        const foreignQuiz = await createQuiz(foreignScope, { ownerId: foreignOwner.id, title: 'Quiz étranger (relaunch)' })
+        const foreignQuiz = await createQuiz(foreignScope, {
+          ownerId: foreignOwner.id,
+          title: 'Quiz étranger (relaunch)',
+        })
         await createQuestion(foreignScope, foreignQuiz.id, {
-          type: 'mcq', prompt: 'Question étrangère', timeLimit: 20, readingTime: 0,
-          payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+          type: 'mcq',
+          prompt: 'Question étrangère',
+          timeLimit: 20,
+          readingTime: 0,
+          payload: {
+            options: [
+              { label: 'A', correct: true },
+              { label: 'B', correct: false },
+            ],
+          },
         })
         const player = await connectClient(url)
         clients.push(player)
@@ -1713,7 +1821,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         await toPodium(hostSocket, player)
 
         const noRelaunch = raceNoEvent(player, 'session:relaunched', 400)
-        const res = await ack<{ error?: string; sessionId?: string }>(hostSocket, 'host:relaunch', { quizId: foreignQuiz.id })
+        const res = await ack<{ error?: string; sessionId?: string }>(hostSocket, 'host:relaunch', {
+          quizId: foreignQuiz.id,
+        })
         expect(res.error).toBeDefined()
         expect(res.sessionId).toBeUndefined()
         expect(await noRelaunch).toBe(true)
@@ -1735,11 +1845,18 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         expect(tokenAck.error).toBeUndefined()
         const screen = await connectClient(url)
         clients.push(screen)
-        expect((await ack<{ error?: string }>(screen, 'screen:join', { displayToken: tokenAck.displayToken })).error).toBeUndefined()
+        expect(
+          (await ack<{ error?: string }>(screen, 'screen:join', { displayToken: tokenAck.displayToken })).error,
+        ).toBeUndefined()
         await toPodium(hostSocket, screen)
 
-        const relaunched = waitFor<{ role: string; pin: string; sessionId: string; displayToken: string }>(screen, 'session:relaunched')
-        const res = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:relaunch', { quizId: quizB })
+        const relaunched = waitFor<{ role: string; pin: string; sessionId: string; displayToken: string }>(
+          screen,
+          'session:relaunched',
+        )
+        const res = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:relaunch', {
+          quizId: quizB,
+        })
         expect(res.error).toBeUndefined()
         const ev = await relaunched
         expect(ev.role).toBe('screen')
@@ -1761,15 +1878,29 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         clients.push(hostSocket)
         await signUp(app, 'gw-relaunch-membera@example.com')
         const tenantId = await ensureDefaultTenant(ctx.db)
-        const [memberAU] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'gw-relaunch-membera@example.com'))
-        const [memberBU] = await ctx.db.select().from(schema.user).where(eq(schema.user.email, 'gw-relaunch-memberb@example.com'))
+        const [memberAU] = await ctx.db
+          .select()
+          .from(schema.user)
+          .where(eq(schema.user.email, 'gw-relaunch-membera@example.com'))
+        const [memberBU] = await ctx.db
+          .select()
+          .from(schema.user)
+          .where(eq(schema.user.email, 'gw-relaunch-memberb@example.com'))
         await ctx.db.update(schema.membership).set({ role: 'member' }).where(eq(schema.membership.userId, memberAU.id))
         await ctx.db.update(schema.membership).set({ role: 'member' }).where(eq(schema.membership.userId, memberBU.id))
         const scopeA = tenantScope(ctx.db, tenantId, memberAU.id)
         const quizOfA = await createQuiz(scopeA, { ownerId: memberAU.id, title: 'Quiz de memberA (relaunch)' })
         await createQuestion(scopeA, quizOfA.id, {
-          type: 'mcq', prompt: 'Q', timeLimit: 20, readingTime: 0,
-          payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+          type: 'mcq',
+          prompt: 'Q',
+          timeLimit: 20,
+          readingTime: 0,
+          payload: {
+            options: [
+              { label: 'A', correct: true },
+              { label: 'B', correct: false },
+            ],
+          },
         })
         const player = await connectClient(url)
         clients.push(player)
@@ -1777,7 +1908,9 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         await toPodium(hostSocket, player)
 
         const noRelaunch = raceNoEvent(player, 'session:relaunched', 400)
-        const res = await ack<{ error?: string; sessionId?: string }>(hostSocket, 'host:relaunch', { quizId: quizOfA.id })
+        const res = await ack<{ error?: string; sessionId?: string }>(hostSocket, 'host:relaunch', {
+          quizId: quizOfA.id,
+        })
         expect(res.error).toBeTruthy()
         expect(res.sessionId).toBeUndefined()
         expect(await noRelaunch).toBe(true)
@@ -1809,7 +1942,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         expect(res.error).toBeUndefined()
         expect((await got1).nickname).toBe('Ana')
         // État serveur : seule Ana a été recréée dans la nouvelle session (Bob, déconnecté, non migré).
-        const rows = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.sessionId, res.sessionId!))
+        const rows = await ctx.db
+          .select()
+          .from(schema.sessionPlayer)
+          .where(eq(schema.sessionPlayer.sessionId, res.sessionId!))
         expect(rows.map((r) => r.nickname)).toEqual(['Ana'])
       } finally {
         for (const c of clients) c.disconnect()
@@ -1829,7 +1965,13 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const { app, url } = await buildApp()
       const clients: ClientSocket[] = []
       try {
-        const { hostSocket, pin } = await setupHostedSessionWithReading(app, url, 'gateway-reading-flow@example.com', 6, 20)
+        const { hostSocket, pin } = await setupHostedSessionWithReading(
+          app,
+          url,
+          'gateway-reading-flow@example.com',
+          6,
+          20,
+        )
         clients.push(hostSocket)
 
         const player1 = await connectClient(url)
@@ -1838,11 +1980,18 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
         vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
         try {
-          const readingPromise = waitFor<{ prompt?: string; index?: number; total?: number; readingTime?: number; startedAt?: number }>(
-            player1,
-            'question:reading',
+          const readingPromise = waitFor<{
+            prompt?: string
+            index?: number
+            total?: number
+            readingTime?: number
+            startedAt?: number
+          }>(player1, 'question:reading')
+          const startAckPromise = ack<{ prompt?: string; readingTime?: number; error?: string }>(
+            hostSocket,
+            'host:start',
+            {},
           )
-          const startAckPromise = ack<{ prompt?: string; readingTime?: number; error?: string }>(hostSocket, 'host:start', {})
 
           const reading = await readingPromise
           expect(reading.readingTime).toBe(6)
@@ -1863,7 +2012,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
           expect(await noShowYet).toBe(true)
 
           // À l'échéance (6 s au total) : question:show (sans bonne réponse) + timer.
-          const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(player1, 'question:show')
+          const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(
+            player1,
+            'question:show',
+          )
           const timerPromise = waitFor<{ timeLimit?: number; startedAt?: number }>(player1, 'timer')
           await vi.advanceTimersByTimeAsync(5_600)
 
@@ -1884,12 +2036,19 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       }
     }, 20_000)
 
-    it("question:reading puis question:show portent media et mediaAlt de la question", async () => {
+    it('question:reading puis question:show portent media et mediaAlt de la question', async () => {
       const { app, url } = await buildApp()
       const clients: ClientSocket[] = []
       try {
         const image = { media: '/uploads/x/y.png', mediaAlt: 'alt' }
-        const { hostSocket, pin } = await setupHostedSessionWithReading(app, url, 'gateway-reading-media@example.com', 6, 20, image)
+        const { hostSocket, pin } = await setupHostedSessionWithReading(
+          app,
+          url,
+          'gateway-reading-media@example.com',
+          6,
+          20,
+          image,
+        )
         clients.push(hostSocket)
         const player1 = await connectClient(url)
         clients.push(player1)
@@ -1914,11 +2073,17 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       }
     }, 20_000)
 
-    it("une question sans image émet media: null et mediaAlt: null", async () => {
+    it('une question sans image émet media: null et mediaAlt: null', async () => {
       const { app, url } = await buildApp()
       const clients: ClientSocket[] = []
       try {
-        const { hostSocket, pin } = await setupHostedSessionWithReading(app, url, 'gateway-noreading-nomedia@example.com', 0, 20)
+        const { hostSocket, pin } = await setupHostedSessionWithReading(
+          app,
+          url,
+          'gateway-noreading-nomedia@example.com',
+          0,
+          20,
+        )
         clients.push(hostSocket)
         const player1 = await connectClient(url)
         clients.push(player1)
@@ -1932,11 +2097,16 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       }
     }, 20_000)
 
-    it("une révélation manuelle anticipée (host:reveal) pendant la lecture annule le minuteur planifié (pas de question:show fantôme après échéance)", async () => {
+    it('une révélation manuelle anticipée (host:reveal) pendant la lecture annule le minuteur planifié (pas de question:show fantôme après échéance)', async () => {
       const { app, url } = await buildApp()
       const clients: ClientSocket[] = []
       try {
-        const { hostSocket, pin } = await setupHostedSessionWithReading(app, url, 'gateway-reading-cancel@example.com', 6)
+        const { hostSocket, pin } = await setupHostedSessionWithReading(
+          app,
+          url,
+          'gateway-reading-cancel@example.com',
+          6,
+        )
         clients.push(hostSocket)
 
         const player1 = await connectClient(url)
@@ -2036,7 +2206,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
           // Le minuteur serveur continue de courir indépendamment de la reconnexion : à
           // échéance, la room reçoit toujours question:show + timer.
-          const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(player1, 'question:show')
+          const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(
+            player1,
+            'question:show',
+          )
           await vi.advanceTimersByTimeAsync(4_500) // 2000 déjà écoulés + 4500 = 6500 > 6000
           const show = await showPromise
           expect(show.payload).toBeDefined()
@@ -2096,18 +2269,19 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
 
         const hostSocket = await connectClient(url1, { cookie })
         clients1.push(hostSocket)
-        const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
-          hostSocket,
-          'host:create',
-          { quizId: quiz.id },
-        )
+        const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
+          quizId: quiz.id,
+        })
         expect(created.error).toBeUndefined()
         sessionId = created.sessionId!
         pin = created.pin!
 
         const player1 = await connectClient(url1)
         clients1.push(player1)
-        const join1 = await ack<{ playerId?: string; error?: string }>(player1, 'player:join', { pin, nickname: 'Alice' })
+        const join1 = await ack<{ playerId?: string; error?: string }>(player1, 'player:join', {
+          pin,
+          nickname: 'Alice',
+        })
         expect(join1.error).toBeUndefined()
 
         const timerPromise = waitFor<{ startedAt?: number }>(player1, 'timer')
@@ -2137,7 +2311,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         // Posés AVANT l'appel : `emitReconnectSnapshot` les émet de façon synchrone dans le
         // handler `host:reconnect`, avant que son ack ne résolve côté client.
         const lobbyPromise = waitFor<{ players: Array<{ id: string; nickname: string }> }>(hostSocketB, 'lobby:update')
-        const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(hostSocketB, 'question:show')
+        const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(
+          hostSocketB,
+          'question:show',
+        )
         const timerAfterRestartPromise = waitFor<{ timeLimit?: number; startedAt?: number }>(hostSocketB, 'timer')
 
         const reconnectAck = await ack<{ sessionId?: string; pin?: string; phase?: string; error?: string }>(
@@ -2183,16 +2360,26 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       try {
         cookie = await signUp(app1, 'p1-8-heal@example.com')
         const quizRes = await app1.inject({
-          method: 'POST', url: '/api/quizzes',
+          method: 'POST',
+          url: '/api/quizzes',
           payload: { title: 'Quiz cicatrisation' },
           headers: { 'content-type': 'application/json', cookie },
         })
         quizId = (quizRes.json() as { id: string }).id
         await app1.inject({
-          method: 'POST', url: `/api/quizzes/${quizId}/questions`,
+          method: 'POST',
+          url: `/api/quizzes/${quizId}/questions`,
           payload: {
-            type: 'mcq', prompt: 'Capitale ?', timeLimit: 20, readingTime: 0,
-            payload: { options: [{ label: 'Paris', correct: true }, { label: 'Lyon', correct: false }] },
+            type: 'mcq',
+            prompt: 'Capitale ?',
+            timeLimit: 20,
+            readingTime: 0,
+            payload: {
+              options: [
+                { label: 'Paris', correct: true },
+                { label: 'Lyon', correct: false },
+              ],
+            },
           },
           headers: { 'content-type': 'application/json', cookie },
         })
@@ -2214,17 +2401,26 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         // La persistance de la manche (persistRound → recordAnswer) peut se terminer juste APRÈS
         // l'ack de host:reveal : on attend (poll court) que l'answer_record soit écrit avant
         // d'asserter, au lieu de supposer une écriture synchrone (source de flakiness sous charge).
-        let before = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+        let before = await ctx.db
+          .select()
+          .from(schema.answerRecord)
+          .where(eq(schema.answerRecord.sessionId, dbSession.id))
         for (let i = 0; i < 50 && before.length === 0; i++) {
           await new Promise((r) => setTimeout(r, 20))
-          before = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+          before = await ctx.db
+            .select()
+            .from(schema.answerRecord)
+            .where(eq(schema.answerRecord.sessionId, dbSession.id))
         }
         expect(before).toHaveLength(1)
 
         // SIMULATION de la fenêtre de crash : les answer_record n'ont jamais atteint la base
         // (crash pile entre engine.reveal() et persistRound) — mais engine_state a bien credited[0].
         await ctx.db.delete(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
-        const gap = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+        const gap = await ctx.db
+          .select()
+          .from(schema.answerRecord)
+          .where(eq(schema.answerRecord.sessionId, dbSession.id))
         expect(gap).toHaveLength(0)
       } finally {
         for (const c of clients1) c.disconnect()
@@ -2237,7 +2433,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const { app: app2 } = await buildApp(store2)
       try {
         const [dbSession] = await ctx.db.select().from(schema.gameSession).where(eq(schema.gameSession.id, sessionId))
-        const healed = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+        const healed = await ctx.db
+          .select()
+          .from(schema.answerRecord)
+          .where(eq(schema.answerRecord.sessionId, dbSession.id))
         expect(healed).toHaveLength(1)
         expect(healed[0].isCorrect).toBe(true)
         expect(healed[0].points).toBeGreaterThan(0)
@@ -2286,8 +2485,14 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
         const hostSocketB = await connectClient(url2, { cookie })
         clients2.push(hostSocketB)
 
-        const reconnectReadingPromise = waitFor<{ startedAt?: number; readingTime?: number }>(hostSocketB, 'question:reading')
-        const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(hostSocketB, 'question:show')
+        const reconnectReadingPromise = waitFor<{ startedAt?: number; readingTime?: number }>(
+          hostSocketB,
+          'question:reading',
+        )
+        const showPromise = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(
+          hostSocketB,
+          'question:show',
+        )
 
         const reconnectAck = await ack<{ sessionId?: string; phase?: string; error?: string }>(
           hostSocketB,

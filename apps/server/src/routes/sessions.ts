@@ -26,7 +26,8 @@ type SessionStatus = (typeof VALID_STATUSES)[number]
  * `undefined` si rien de valide (⇒ pas de filtre, comme une query absente). */
 function parseStatuses(raw: unknown): SessionStatus[] | undefined {
   if (typeof raw !== 'string') return undefined
-  const parsed = raw.split(',')
+  const parsed = raw
+    .split(',')
     .map((s) => s.trim())
     .filter((s): s is SessionStatus => (VALID_STATUSES as readonly string[]).includes(s))
   return parsed.length > 0 ? parsed : undefined

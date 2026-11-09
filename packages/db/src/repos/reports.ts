@@ -80,10 +80,10 @@ export async function listSessions(
     })
     .from(schema.gameSession)
     .innerJoin(schema.quiz, eq(schema.quiz.id, schema.gameSession.quizId))
-    .leftJoin(schema.sessionPlayer, and(
-      eq(schema.sessionPlayer.sessionId, schema.gameSession.id),
-      eq(schema.sessionPlayer.tenantId, scope.tenantId),
-    ))
+    .leftJoin(
+      schema.sessionPlayer,
+      and(eq(schema.sessionPlayer.sessionId, schema.gameSession.id), eq(schema.sessionPlayer.tenantId, scope.tenantId)),
+    )
     .where(and(...conditions))
     .groupBy(schema.gameSession.id, schema.quiz.title)
     .orderBy(desc(schema.gameSession.createdAt))
@@ -106,7 +106,9 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
     })
     .from(schema.gameSession)
     .innerJoin(schema.quiz, eq(schema.quiz.id, schema.gameSession.quizId))
-    .where(and(eq(schema.gameSession.id, sessionId), eq(schema.gameSession.tenantId, scope.tenantId), hostPredicate(scope)))
+    .where(
+      and(eq(schema.gameSession.id, sessionId), eq(schema.gameSession.tenantId, scope.tenantId), hostPredicate(scope)),
+    )
     .limit(1)
   if (!session) return null
 
@@ -121,7 +123,8 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
       type: schema.question.type,
       orderIndex: schema.question.orderIndex,
       answerCount: sql<number>`count(${schema.answerRecord.id})`.mapWith(Number),
-      correctCount: sql<number>`count(${schema.answerRecord.id}) filter (where ${schema.answerRecord.isCorrect})`.mapWith(Number),
+      correctCount:
+        sql<number>`count(${schema.answerRecord.id}) filter (where ${schema.answerRecord.isCorrect})`.mapWith(Number),
       avgTimeMs: sql<number | null>`avg(${schema.answerRecord.timeMs})`.mapWith((v) => (v === null ? null : Number(v))),
     })
     .from(schema.question)
@@ -145,14 +148,15 @@ export async function getSessionReport(scope: TenantScope, sessionId: string): P
       playerId: schema.sessionPlayer.id,
       nickname: schema.sessionPlayer.nickname,
       totalScore: schema.sessionPlayer.totalScore,
-      correctCount: sql<number>`count(${schema.answerRecord.id}) filter (where ${schema.answerRecord.isCorrect})`.mapWith(Number),
+      correctCount:
+        sql<number>`count(${schema.answerRecord.id}) filter (where ${schema.answerRecord.isCorrect})`.mapWith(Number),
       answerCount: sql<number>`count(${schema.answerRecord.id})`.mapWith(Number),
     })
     .from(schema.sessionPlayer)
-    .leftJoin(schema.answerRecord, and(
-      eq(schema.answerRecord.playerId, schema.sessionPlayer.id),
-      eq(schema.answerRecord.tenantId, scope.tenantId),
-    ))
+    .leftJoin(
+      schema.answerRecord,
+      and(eq(schema.answerRecord.playerId, schema.sessionPlayer.id), eq(schema.answerRecord.tenantId, scope.tenantId)),
+    )
     .where(and(eq(schema.sessionPlayer.sessionId, sessionId), eq(schema.sessionPlayer.tenantId, scope.tenantId)))
     .groupBy(schema.sessionPlayer.id)
     .orderBy(desc(schema.sessionPlayer.totalScore))

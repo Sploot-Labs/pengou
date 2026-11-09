@@ -3,7 +3,7 @@
    vivent dans pengou-primitives.css. Les primitives éditeur --sploot-* restent
    disponibles pour les surfaces de marque Sploot Labs. */
 
-[data-theme='app'] {
+[data-theme="app"] {
   /* Typo produit : Fredoka (display) + Nunito Sans (corps) + DM Mono. */
   --font-display: "Fredoka", "Trebuchet MS", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Nunito Sans", system-ui, ui-sans-serif, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -36,13 +36,21 @@
      pleine (nuance foncée de l'aplat, relief de touche arcade). Contraste
      texte/fond ≥4.5:1 vérifié : violet/sarcelle en encre blanche,
      rose/glace en encre bleu nuit. */
-  --ans-triangle: #5b4bd6;  --ans-triangle-ink: #ffffff;  --ans-triangle-sh: #3a2e9e;
-  --ans-diamond:  #ff9ec4;  --ans-diamond-ink:  #0b2545;  --ans-diamond-sh:  #d9669a;
-  --ans-circle:   #007a99;  --ans-circle-ink:   #ffffff;  --ans-circle-sh:   #00566c;
-  --ans-square:   #bdebf7;  --ans-square-ink:   #0b2545;  --ans-square-sh:   #7fc3d8;
+  --ans-triangle: #5b4bd6;
+  --ans-triangle-ink: #ffffff;
+  --ans-triangle-sh: #3a2e9e;
+  --ans-diamond: #ff9ec4;
+  --ans-diamond-ink: #0b2545;
+  --ans-diamond-sh: #d9669a;
+  --ans-circle: #007a99;
+  --ans-circle-ink: #ffffff;
+  --ans-circle-sh: #00566c;
+  --ans-square: #bdebf7;
+  --ans-square-ink: #0b2545;
+  --ans-square-sh: #7fc3d8;
 
   /* Podium — or/argent/bronze, RÉSERVÉ au classement, jamais accent. */
-  --gold:   #e3b341;
+  --gold: #e3b341;
   --silver: #c7ccdd;
   --bronze: #e0954f;
 
@@ -58,7 +66,7 @@
    que la banquise reste identique quel que soit le mode OS, sans toucher
    l'admin. Fond posé sur le wrapper lui-même : la scène ne dépend plus du
    fond de .prototype-root derrière elle. */
-[data-theme='scene'] {
+[data-theme="scene"] {
   /* Fond posé sur le wrapper lui-même : la scène ne dépend plus du fond de
      .prototype-root derrière elle. */
   background: #0b2545;
@@ -91,13 +99,21 @@
 
   /* Réponses — même mapping que le thème `app` (une option, une couleur
      partout). Contraste ≥4.5:1 vérifié sur banquise. */
-  --ans-triangle: #5b4bd6;  --ans-triangle-ink: #ffffff;  --ans-triangle-sh: #3a2e9e;
-  --ans-diamond:  #ff9ec4;  --ans-diamond-ink:  #0b2545;  --ans-diamond-sh:  #d9669a;
-  --ans-circle:   #007a99;  --ans-circle-ink:   #ffffff;  --ans-circle-sh:   #00566c;
-  --ans-square:   #bdebf7;  --ans-square-ink:   #0b2545;  --ans-square-sh:   #7fc3d8;
+  --ans-triangle: #5b4bd6;
+  --ans-triangle-ink: #ffffff;
+  --ans-triangle-sh: #3a2e9e;
+  --ans-diamond: #ff9ec4;
+  --ans-diamond-ink: #0b2545;
+  --ans-diamond-sh: #d9669a;
+  --ans-circle: #007a99;
+  --ans-circle-ink: #ffffff;
+  --ans-circle-sh: #00566c;
+  --ans-square: #bdebf7;
+  --ans-square-ink: #0b2545;
+  --ans-square-sh: #7fc3d8;
 
   /* Podium — or/argent/bronze, RÉSERVÉ au classement, jamais accent. */
-  --gold:   #e3b341;
+  --gold: #e3b341;
   --silver: #c7ccdd;
   --bronze: #e0954f;
 
@@ -110,7 +126,7 @@
 /* data-scheme force la palette produit indépendamment de prefers-color-scheme.
    On réexpose les primitives Pengou sous notre attribut dédié data-scheme pour
    lever l'ambiguïté avec le thème PRODUIT (data-theme="app"|"scene"). */
-[data-scheme='dark'] {
+[data-scheme="dark"] {
   --pengou-cyan: #2cc7e8;
   --pengou-brand: #35cbec;
   --pengou-cyan-soft: #0e3647;
@@ -130,7 +146,7 @@
   --pengou-on-danger: #0b2545;
   --pengou-focus: #6fd3ee;
 }
-[data-scheme='light'] {
+[data-scheme="light"] {
   --pengou-cyan: #00a6cc;
   --pengou-brand: #0a7188;
   --pengou-cyan-soft: #d6f2f9;

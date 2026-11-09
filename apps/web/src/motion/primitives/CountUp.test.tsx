@@ -5,8 +5,8 @@ import { MotionProvider } from '../MotionProvider.js'
 import { CountUp } from './CountUp.js'
 
 function withRM(matches: boolean) {
-  window.matchMedia = ((q: string) =>
-    ({ matches, media: q, addEventListener() {}, removeEventListener() {} }) as unknown as MediaQueryList)
+  window.matchMedia = (q: string) =>
+    ({ matches, media: q, addEventListener() {}, removeEventListener() {} }) as unknown as MediaQueryList
 }
 
 describe('CountUp', () => {

@@ -2,9 +2,18 @@ import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import type { FastifyInstance } from 'fastify'
 import { io as ioClient, type Socket as ClientSocket } from 'socket.io-client'
 import {
-  startTestDb, runMigrations, schema, tenantScope, createQuiz,
-  createGameSession, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
-  type SessionSummary, type SessionReport,
+  startTestDb,
+  runMigrations,
+  schema,
+  tenantScope,
+  createQuiz,
+  createGameSession,
+  addSessionPlayer,
+  recordAnswer,
+  setSessionStatus,
+  setPlayerScore,
+  type SessionSummary,
+  type SessionReport,
 } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { loadConfig } from '@splootlabs/shared'
@@ -133,21 +142,41 @@ function sleep(ms: number): Promise<void> {
  * l'isolation cross-tenant sur les trois routes de rapport. */
 async function seedForeignSession(): Promise<string> {
   const [foreignTenant] = await ctx.db.insert(schema.tenant).values({ name: 'Étranger e2e rapports' }).returning()
-  const [foreignOwner] = await ctx.db.insert(schema.user)
+  const [foreignOwner] = await ctx.db
+    .insert(schema.user)
     .values({ id: crypto.randomUUID(), email: 'etranger-rapports@x.fr', name: 'Étranger', emailVerified: false })
     .returning()
   const scope = tenantScope(ctx.db, foreignTenant.id)
   const quiz = await createQuiz(scope, { ownerId: foreignOwner.id, title: 'Quiz étranger' })
-  const [question] = await ctx.db.insert(schema.question).values({
-    quizId: quiz.id, tenantId: foreignTenant.id, type: 'mcq', prompt: 'Q étrangère', timeLimit: 20, orderIndex: 0,
-    payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
-  }).returning()
+  const [question] = await ctx.db
+    .insert(schema.question)
+    .values({
+      quizId: quiz.id,
+      tenantId: foreignTenant.id,
+      type: 'mcq',
+      prompt: 'Q étrangère',
+      timeLimit: 20,
+      orderIndex: 0,
+      payload: {
+        options: [
+          { label: 'A', correct: true },
+          { label: 'B', correct: false },
+        ],
+      },
+    })
+    .returning()
 
   const session = await createGameSession(scope, { quizId: quiz.id, hostId: foreignOwner.id, pin: '888888' })
   const sessionId = session!.id
   const dave = await addSessionPlayer(ctx.db, sessionId, { nickname: 'Dave', joinToken: 'tok-dave' })
   await recordAnswer(ctx.db, {
-    sessionId, questionId: question.id, playerId: dave.id, answer: { choice: 0 }, timeMs: 1000, isCorrect: true, points: 900,
+    sessionId,
+    questionId: question.id,
+    playerId: dave.id,
+    answer: { choice: 0 },
+    timeMs: 1000,
+    isCorrect: true,
+    points: 900,
   })
   await setPlayerScore(ctx.db, dave.id, 900)
   await setSessionStatus(ctx.db, sessionId, 'ended')
@@ -210,9 +239,9 @@ describe('e2e — jouer une partie puis consulter le rapport (liste, détail, CS
       const hostSocket = await connectClient(url, { cookie })
       clients.push(hostSocket)
 
-      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
-        hostSocket, 'host:create', { quizId: quiz.id },
-      )
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
+        quizId: quiz.id,
+      })
       expect(created.error).toBeUndefined()
       expect(created.pin).toMatch(/^\d{6}$/)
       const { pin } = created as { sessionId: string; pin: string }
@@ -298,7 +327,10 @@ describe('e2e — jouer une partie puis consulter le rapport (liste, détail, CS
       expect(carolFinal).toBe(0)
 
       // ---- host:next → podium (fin de partie). Capture le podium comme référence. ----
-      const podiumPromise = waitFor<{ top: Array<{ playerId: string; nickname: string; score: number }> }>(player1, 'podium')
+      const podiumPromise = waitFor<{ top: Array<{ playerId: string; nickname: string; score: number }> }>(
+        player1,
+        'podium',
+      )
       const nextAck2 = await ack<{ phase?: string; error?: string }>(hostSocket, 'host:next', {})
       expect(nextAck2.error).toBeUndefined()
       expect(nextAck2.phase).toBe('podium')
@@ -370,7 +402,11 @@ describe('e2e — jouer une partie puis consulter le rapport (liste, détail, CS
       // ============================================================================
       // 6. GET /api/sessions/:id/export.csv — CSV réel : 200, content-type, BOM, contenu.
       // ============================================================================
-      const csvRes = await app.inject({ method: 'GET', url: `/api/sessions/${sessionId}/export.csv`, headers: { cookie } })
+      const csvRes = await app.inject({
+        method: 'GET',
+        url: `/api/sessions/${sessionId}/export.csv`,
+        headers: { cookie },
+      })
       expect(csvRes.statusCode).toBe(200)
       expect(csvRes.headers['content-type']).toMatch(/^text\/csv/)
       const csvBody = csvRes.body
@@ -387,15 +423,25 @@ describe('e2e — jouer une partie puis consulter le rapport (liste, détail, CS
       // ============================================================================
       const foreignSessionId = await seedForeignSession()
 
-      const foreignInList = (await app.inject({ method: 'GET', url: '/api/sessions', headers: { cookie } })
-        .then((r) => r.json() as SessionSummary[]))
-        .some((s) => s.id === foreignSessionId)
+      const foreignInList = (
+        await app
+          .inject({ method: 'GET', url: '/api/sessions', headers: { cookie } })
+          .then((r) => r.json() as SessionSummary[])
+      ).some((s) => s.id === foreignSessionId)
       expect(foreignInList).toBe(false)
 
-      const foreignDetail = await app.inject({ method: 'GET', url: `/api/sessions/${foreignSessionId}`, headers: { cookie } })
+      const foreignDetail = await app.inject({
+        method: 'GET',
+        url: `/api/sessions/${foreignSessionId}`,
+        headers: { cookie },
+      })
       expect(foreignDetail.statusCode).toBe(404)
 
-      const foreignCsv = await app.inject({ method: 'GET', url: `/api/sessions/${foreignSessionId}/export.csv`, headers: { cookie } })
+      const foreignCsv = await app.inject({
+        method: 'GET',
+        url: `/api/sessions/${foreignSessionId}/export.csv`,
+        headers: { cookie },
+      })
       expect(foreignCsv.statusCode).toBe(404)
     } finally {
       for (const c of clients) c.disconnect()

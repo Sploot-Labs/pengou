@@ -1,5 +1,14 @@
 import type { FastifyInstance } from 'fastify'
-import { createQuestion, listQuestions, getQuestion, updateQuestion, deleteQuestion, reorderQuestions, withTenantTx, type Db } from '@splootlabs/db'
+import {
+  createQuestion,
+  listQuestions,
+  getQuestion,
+  updateQuestion,
+  deleteQuestion,
+  reorderQuestions,
+  withTenantTx,
+  type Db,
+} from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
 import { validateQuestionPayload, questionTypes, type QuestionType } from '@splootlabs/quiz'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
@@ -36,7 +45,15 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       if (!context) return
 
       const body = request.body as
-        | { type?: unknown; prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown; mediaAlt?: unknown }
+        | {
+            type?: unknown
+            prompt?: unknown
+            timeLimit?: unknown
+            readingTime?: unknown
+            payload?: unknown
+            media?: unknown
+            mediaAlt?: unknown
+          }
         | undefined
 
       if (!isQuestionType(body?.type)) {
@@ -121,22 +138,40 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       if (!context) return
 
       const body = request.body as
-        | { prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown; mediaAlt?: unknown }
+        | {
+            prompt?: unknown
+            timeLimit?: unknown
+            readingTime?: unknown
+            payload?: unknown
+            media?: unknown
+            mediaAlt?: unknown
+          }
         | undefined
 
-      const patch: Partial<{ prompt: string; timeLimit: number; readingTime: number; payload: unknown; media: string | null; mediaAlt: string | null }> = {}
+      const patch: Partial<{
+        prompt: string
+        timeLimit: number
+        readingTime: number
+        payload: unknown
+        media: string | null
+        mediaAlt: string | null
+      }> = {}
 
       if (body?.prompt !== undefined) {
-        if (!isNonEmptyString(body.prompt)) return reply.code(400).send({ error: "L'énoncé (prompt) ne peut pas être vide." })
-        if (tooLong(body.prompt, MAX_PROMPT)) return reply.code(400).send({ error: `L'énoncé est trop long (${MAX_PROMPT} caractères max).` })
+        if (!isNonEmptyString(body.prompt))
+          return reply.code(400).send({ error: "L'énoncé (prompt) ne peut pas être vide." })
+        if (tooLong(body.prompt, MAX_PROMPT))
+          return reply.code(400).send({ error: `L'énoncé est trop long (${MAX_PROMPT} caractères max).` })
         patch.prompt = body.prompt
       }
       if (body?.timeLimit !== undefined) {
-        if (!isPositiveInt(body.timeLimit)) return reply.code(400).send({ error: 'timeLimit doit être un entier positif.' })
+        if (!isPositiveInt(body.timeLimit))
+          return reply.code(400).send({ error: 'timeLimit doit être un entier positif.' })
         patch.timeLimit = body.timeLimit
       }
       if (body?.readingTime !== undefined) {
-        if (!isNonNegativeInt(body.readingTime)) return reply.code(400).send({ error: 'readingTime doit être un entier positif ou nul.' })
+        if (!isNonNegativeInt(body.readingTime))
+          return reply.code(400).send({ error: 'readingTime doit être un entier positif ou nul.' })
         patch.readingTime = body.readingTime
       }
       if (body?.media !== undefined) {
@@ -155,7 +190,9 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
           return reply.code(400).send({ error: 'mediaAlt doit être une chaîne ou null.' })
         }
         if (tooLong(body.mediaAlt, LIMITS.mediaAlt)) {
-          return reply.code(400).send({ error: `Le texte alternatif est trop long (${LIMITS.mediaAlt} caractères max).` })
+          return reply
+            .code(400)
+            .send({ error: `Le texte alternatif est trop long (${LIMITS.mediaAlt} caractères max).` })
         }
         // Chaîne vide ou blanche : pas de texte alternatif (comme au POST).
         patch.mediaAlt = isNonEmptyString(body.mediaAlt) ? body.mediaAlt : null

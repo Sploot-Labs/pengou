@@ -9,9 +9,7 @@ afterEach(cleanup)
 function setup(props: Partial<Parameters<typeof QuestionImageField>[0]> = {}) {
   const onChange = vi.fn()
   const upload = vi.fn((_file: File) => Promise.resolve('/uploads/t/a.png'))
-  render(
-    <QuestionImageField media={null} mediaAlt={null} onChange={onChange} upload={upload} {...props} />,
-  )
+  render(<QuestionImageField media={null} mediaAlt={null} onChange={onChange} upload={upload} {...props} />)
   return { onChange, upload }
 }
 

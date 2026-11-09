@@ -87,9 +87,7 @@ export function Signup() {
     } catch (err) {
       setPending(false)
       setFormError(
-        err instanceof ApiError
-          ? err.message
-          : 'Inscription impossible. Vérifiez votre connexion et réessayez.',
+        err instanceof ApiError ? err.message : 'Inscription impossible. Vérifiez votre connexion et réessayez.',
       )
     }
   }

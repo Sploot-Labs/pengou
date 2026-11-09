@@ -66,8 +66,13 @@ export async function getQuiz(scope: TenantScope, id: string): Promise<Quiz | nu
   return row ?? null
 }
 
-export async function updateQuiz(scope: TenantScope, id: string, patch: Partial<{ title: string; description: string | null; cover: string | null }>): Promise<Quiz | null> {
-  const [row] = await scope.db.update(schema.quiz)
+export async function updateQuiz(
+  scope: TenantScope,
+  id: string,
+  patch: Partial<{ title: string; description: string | null; cover: string | null }>,
+): Promise<Quiz | null> {
+  const [row] = await scope.db
+    .update(schema.quiz)
     .set({ ...patch, updatedAt: new Date() })
     .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
     .returning()
@@ -75,7 +80,8 @@ export async function updateQuiz(scope: TenantScope, id: string, patch: Partial<
 }
 
 export async function deleteQuiz(scope: TenantScope, id: string): Promise<boolean> {
-  const rows = await scope.db.delete(schema.quiz)
+  const rows = await scope.db
+    .delete(schema.quiz)
     .where(and(eq(schema.quiz.id, id), eq(schema.quiz.tenantId, scope.tenantId), ownerPredicate(scope)))
     .returning({ id: schema.quiz.id })
   return rows.length > 0

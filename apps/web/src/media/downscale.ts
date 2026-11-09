@@ -8,11 +8,7 @@ export const UPLOAD_MAX_BYTES = 2 * 1024 * 1024
 const QUALITY = 0.85
 
 /** Dimensions cibles, côté le plus long ramené à `maxSide`, en conservant le ratio ; n'agrandit jamais. */
-export function targetSize(
-  width: number,
-  height: number,
-  maxSide: number,
-): { width: number; height: number } {
+export function targetSize(width: number, height: number, maxSide: number): { width: number; height: number } {
   if (Math.max(width, height) <= maxSide) return { width, height }
   if (width >= height) return { width: maxSide, height: Math.round((height * maxSide) / width) }
   return { width: Math.round((width * maxSide) / height), height: maxSide }

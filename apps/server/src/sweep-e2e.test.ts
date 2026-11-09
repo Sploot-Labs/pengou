@@ -125,9 +125,9 @@ describe('sweepAbandonedSessions — balayage périodique des parties inactives'
       const hostSocket = await connectClient(url, { cookie })
       clients.push(hostSocket)
 
-      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
-        hostSocket, 'host:create', { quizId: quiz.id },
-      )
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
+        quizId: quiz.id,
+      })
       expect(created.error).toBeUndefined()
       expect(created.pin).toMatch(/^\d{6}$/)
       const sessionId = created.sessionId!
@@ -137,7 +137,8 @@ describe('sweepAbandonedSessions — balayage périodique des parties inactives'
       expect(startAck.error).toBeUndefined()
 
       // ---- 3. Rendre la partie « inactive » : `last_activity_at` bien avant le seuil de balayage. ----
-      await ctx.db.update(schema.gameSession)
+      await ctx.db
+        .update(schema.gameSession)
         .set({ lastActivityAt: new Date('2020-01-01T00:00:00Z') })
         .where(eq(schema.gameSession.id, sessionId))
 

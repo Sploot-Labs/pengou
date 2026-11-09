@@ -20,11 +20,9 @@ function walk(dir: string): string[] {
 // exclu (son propre chemin commence par `MOTION_DIR + sep`).
 const filesOutsideMotion = () => walk(SRC).filter((p) => !p.startsWith(MOTION_DIR + sep))
 
-describe('garde d\'architecture', () => {
+describe("garde d'architecture", () => {
   it("aucun fichier hors motion/ n'importe framer-motion", () => {
-    const offenders = filesOutsideMotion().filter((p) =>
-      /from ['"]framer-motion['"]/.test(readFileSync(p, 'utf8')),
-    )
+    const offenders = filesOutsideMotion().filter((p) => /from ['"]framer-motion['"]/.test(readFileSync(p, 'utf8')))
     expect(offenders, `framer-motion importé hors de motion/: ${offenders.join(', ')}`).toEqual([])
   })
 

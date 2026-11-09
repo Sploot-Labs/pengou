@@ -71,9 +71,7 @@ export function Login() {
     } catch (err) {
       setPending(false)
       setFormError(
-        err instanceof ApiError
-          ? err.message
-          : 'Connexion impossible. Vérifiez votre connexion et réessayez.',
+        err instanceof ApiError ? err.message : 'Connexion impossible. Vérifiez votre connexion et réessayez.',
       )
     }
   }

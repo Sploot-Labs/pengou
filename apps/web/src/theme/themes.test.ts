@@ -19,8 +19,14 @@ describe('themes.css', () => {
 
   it('définit les rôles réponse, podium et focus dans les deux blocs (source unique)', () => {
     const roles = [
-      '--ans-triangle', '--ans-diamond', '--ans-circle', '--ans-square',
-      '--gold', '--silver', '--bronze', '--focus',
+      '--ans-triangle',
+      '--ans-diamond',
+      '--ans-circle',
+      '--ans-square',
+      '--gold',
+      '--silver',
+      '--bronze',
+      '--focus',
     ]
     for (const selector of ["[data-theme='app']", "[data-theme='scene']"]) {
       const start = themesCss.indexOf(selector)
@@ -44,10 +50,7 @@ describe('themes.css', () => {
 })
 
 it("tokens.css ne définit plus de primitive couleur de l'ancienne palette", () => {
-  const tokensCss = readFileSync(
-    fileURLToPath(new URL('../tokens.css', import.meta.url)),
-    'utf-8',
-  ).toLowerCase()
+  const tokensCss = readFileSync(fileURLToPath(new URL('../tokens.css', import.meta.url)), 'utf-8').toLowerCase()
   expect(tokensCss).not.toContain('#ff3d7f') // ancien rose
   expect(tokensCss).not.toContain('#7a5cff') // ancien violet
   expect(tokensCss).not.toContain('#0e1230') // ancien midnight bleuté
@@ -56,18 +59,12 @@ it("tokens.css ne définit plus de primitive couleur de l'ancienne palette", () 
 })
 
 it("prototype.css ne réintroduit pas l'ancien rose (hex ni rgba)", () => {
-  const prototypeCss = readFileSync(
-    fileURLToPath(new URL('../prototype.css', import.meta.url)),
-    'utf-8',
-  ).toLowerCase()
+  const prototypeCss = readFileSync(fileURLToPath(new URL('../prototype.css', import.meta.url)), 'utf-8').toLowerCase()
   expect(prototypeCss).not.toContain('#ff3d7f')
   expect(prototypeCss).not.toMatch(/rgba\(\s*255\s*,\s*61\s*,\s*127/)
 })
 
 it("la règle de couleur de lien de base ne s'applique qu'aux liens textuels (pas aux liens à classe)", () => {
-  const tokensCss = readFileSync(
-    fileURLToPath(new URL('../tokens.css', import.meta.url)),
-    'utf-8',
-  )
+  const tokensCss = readFileSync(fileURLToPath(new URL('../tokens.css', import.meta.url)), 'utf-8')
   expect(tokensCss).toContain('.prototype-root a:not([class])')
 })

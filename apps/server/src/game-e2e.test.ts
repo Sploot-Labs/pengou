@@ -183,11 +183,9 @@ describe('e2e — partie complète (lobby → podium) : scoring serveur-autorita
       const hostSocket = await connectClient(url, { cookie })
       clients.push(hostSocket)
 
-      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(
-        hostSocket,
-        'host:create',
-        { quizId: quiz.id },
-      )
+      const created = await ack<{ sessionId?: string; pin?: string; error?: string }>(hostSocket, 'host:create', {
+        quizId: quiz.id,
+      })
       expect(created.error).toBeUndefined()
       expect(created.pin).toMatch(/^\d{6}$/)
       const { pin } = created as { sessionId: string; pin: string }
@@ -200,15 +198,18 @@ describe('e2e — partie complète (lobby → podium) : scoring serveur-autorita
 
       const lobbyUpdates = collect<{ players: Array<{ id: string; nickname: string }> }>(hostSocket, 'lobby:update')
 
-      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(
-        player1, 'player:join', { pin, nickname: 'Alice' },
-      )
-      const join2 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(
-        player2, 'player:join', { pin, nickname: 'Bob' },
-      )
-      const join3 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(
-        player3, 'player:join', { pin, nickname: 'Carol' },
-      )
+      const join1 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player1, 'player:join', {
+        pin,
+        nickname: 'Alice',
+      })
+      const join2 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player2, 'player:join', {
+        pin,
+        nickname: 'Bob',
+      })
+      const join3 = await ack<{ playerId?: string; joinToken?: string; error?: string }>(player3, 'player:join', {
+        pin,
+        nickname: 'Carol',
+      })
       for (const j of [join1, join2, join3]) {
         expect(j.error).toBeUndefined()
         expect(j.playerId).toBeTruthy()
@@ -230,7 +231,9 @@ describe('e2e — partie complète (lobby → podium) : scoring serveur-autorita
       const show3 = waitFor<{ payload: { options: Array<Record<string, unknown>> } }>(player3, 'question:show')
 
       const startAck = await ack<{ payload?: { options: Array<Record<string, unknown>> }; error?: string }>(
-        hostSocket, 'host:start', {},
+        hostSocket,
+        'host:start',
+        {},
       )
       expect(startAck.error).toBeUndefined()
 
@@ -249,7 +252,9 @@ describe('e2e — partie complète (lobby → podium) : scoring serveur-autorita
 
       // ---- 5. Réponses : Alice rapide-correcte, Bob lent-correct, Carol incorrecte. ----
       const answer1 = await ack<{ accepted?: boolean; error?: string }>(
-        player1, 'player:answer', { answer: { optionIndex: 0 } }, // Paris
+        player1,
+        'player:answer',
+        { answer: { optionIndex: 0 } }, // Paris
       )
       expect(answer1.accepted).toBe(true)
 
@@ -259,21 +264,27 @@ describe('e2e — partie complète (lobby → podium) : scoring serveur-autorita
       await sleep(300)
 
       const answer2 = await ack<{ accepted?: boolean; error?: string }>(
-        player2, 'player:answer', { answer: { optionIndex: 0 } }, // Paris
+        player2,
+        'player:answer',
+        { answer: { optionIndex: 0 } }, // Paris
       )
       expect(answer2.accepted).toBe(true)
 
       const answer3 = await ack<{ accepted?: boolean; error?: string }>(
-        player3, 'player:answer', { answer: { optionIndex: 1 } }, // Lyon (mauvais)
+        player3,
+        'player:answer',
+        { answer: { optionIndex: 1 } }, // Lyon (mauvais)
       )
       expect(answer3.accepted).toBe(true)
 
       // ---- 6. host:reveal → question:reveal contient la bonne réponse + distribution. ----
       const revealPromise = waitFor<{ correct: unknown; distribution: Record<string, number> }>(
-        player1, 'question:reveal',
+        player1,
+        'question:reveal',
       )
       const scoreboardPromise = waitFor<{ ranking: Array<{ playerId: string; nickname: string; score: number }> }>(
-        player1, 'scoreboard',
+        player1,
+        'scoreboard',
       )
       const revealAck = await ack<{ error?: string }>(hostSocket, 'host:reveal', {})
       expect(revealAck.error).toBeUndefined()
@@ -320,9 +331,13 @@ describe('e2e — partie complète (lobby → podium) : scoring serveur-autorita
       const q2Answer3 = await ack<{ accepted?: boolean }>(player3, 'player:answer', { answer: { value: false } })
       expect(q2Answer3.accepted).toBe(true)
 
-      const reveal2Promise = waitFor<{ correct: unknown; distribution: Record<string, number> }>(player1, 'question:reveal')
+      const reveal2Promise = waitFor<{ correct: unknown; distribution: Record<string, number> }>(
+        player1,
+        'question:reveal',
+      )
       const scoreboard2Promise = waitFor<{ ranking: Array<{ playerId: string; nickname: string; score: number }> }>(
-        player1, 'scoreboard',
+        player1,
+        'scoreboard',
       )
       const revealAck2 = await ack<{ error?: string }>(hostSocket, 'host:reveal', {})
       expect(revealAck2.error).toBeUndefined()
@@ -341,7 +356,10 @@ describe('e2e — partie complète (lobby → podium) : scoring serveur-autorita
       expect(bobCumulative).toBeGreaterThan(carolCumulative)
       expect(carolCumulative).toBe(0) // toujours incorrecte sur les 2 manches
 
-      const podiumPromise = waitFor<{ top: Array<{ playerId: string; nickname: string; score: number }> }>(player1, 'podium')
+      const podiumPromise = waitFor<{ top: Array<{ playerId: string; nickname: string; score: number }> }>(
+        player1,
+        'podium',
+      )
       const nextAck2 = await ack<{ phase?: string; error?: string }>(hostSocket, 'host:next', {})
       expect(nextAck2.error).toBeUndefined()
       expect(nextAck2.phase).toBe('podium')
@@ -363,7 +381,10 @@ describe('e2e — partie complète (lobby → podium) : scoring serveur-autorita
       expect(dbSession.startedAt).not.toBeNull()
       expect(dbSession.endedAt).not.toBeNull()
 
-      const dbPlayers = await ctx.db.select().from(schema.sessionPlayer).where(eq(schema.sessionPlayer.sessionId, dbSession.id))
+      const dbPlayers = await ctx.db
+        .select()
+        .from(schema.sessionPlayer)
+        .where(eq(schema.sessionPlayer.sessionId, dbSession.id))
       expect(dbPlayers).toHaveLength(3)
       const dbPlayerByNickname = new Map(dbPlayers.map((p) => [p.nickname, p]))
 
@@ -377,7 +398,10 @@ describe('e2e — partie complète (lobby → podium) : scoring serveur-autorita
       expect(bobDb.totalScore).toBeGreaterThan(carolDb.totalScore)
       expect(carolDb.totalScore).toBe(0)
 
-      const dbAnswers = await ctx.db.select().from(schema.answerRecord).where(eq(schema.answerRecord.sessionId, dbSession.id))
+      const dbAnswers = await ctx.db
+        .select()
+        .from(schema.answerRecord)
+        .where(eq(schema.answerRecord.sessionId, dbSession.id))
       // 3 joueurs × 2 questions = 6 réponses persistées.
       expect(dbAnswers).toHaveLength(6)
 

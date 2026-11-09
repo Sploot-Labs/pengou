@@ -1,9 +1,21 @@
 import type { Server, Socket } from 'socket.io'
 import { fromNodeHeaders } from 'better-auth/node'
 import {
-  resolveTenantId, getMembershipRole, withTenantTx, listQuestions,
-  createGameSession, getGameSessionById, addSessionPlayer, recordAnswer, setSessionStatus, setPlayerScore,
-  clearEngineState, listResumableSessions, abandonStaleSessions, abandonInactiveSessions, listSessionPlayers,
+  resolveTenantId,
+  getMembershipRole,
+  withTenantTx,
+  listQuestions,
+  createGameSession,
+  getGameSessionById,
+  addSessionPlayer,
+  recordAnswer,
+  setSessionStatus,
+  setPlayerScore,
+  clearEngineState,
+  listResumableSessions,
+  abandonStaleSessions,
+  abandonInactiveSessions,
+  listSessionPlayers,
   type Db,
 } from '@splootlabs/db'
 import type { Auth } from '@splootlabs/auth'
@@ -119,7 +131,16 @@ const SESSION_MAX_AGE = 12 * 3600_000
  * réhydratée). 10 min : large pour un post-partie, borné pour la mémoire. */
 const PODIUM_EVICTION_DELAY = 10 * 60_000
 
-function toEngineQuestion(row: { id: string; type: string; prompt: string; timeLimit: number; readingTime: number; payload: unknown; media: string | null; mediaAlt: string | null }): EngineQuestion {
+function toEngineQuestion(row: {
+  id: string
+  type: string
+  prompt: string
+  timeLimit: number
+  readingTime: number
+  payload: unknown
+  media: string | null
+  mediaAlt: string | null
+}): EngineQuestion {
   return {
     id: row.id,
     type: row.type as EngineQuestion['type'],
@@ -133,7 +154,9 @@ function toEngineQuestion(row: { id: string; type: string; prompt: string; timeL
   }
 }
 
-function playersPayload(session: GameSession): Array<{ id: string; nickname: string; score: number; connected: boolean }> {
+function playersPayload(
+  session: GameSession,
+): Array<{ id: string; nickname: string; score: number; connected: boolean }> {
   return Object.values(session.players).map((p) => ({
     id: p.id,
     nickname: p.nickname,
@@ -142,7 +165,10 @@ function playersPayload(session: GameSession): Array<{ id: string; nickname: str
   }))
 }
 
-export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Promise<{ sweepAbandonedSessions: () => Promise<void> }> {
+export async function registerGameGateway(
+  io: Server,
+  deps: GameGatewayDeps,
+): Promise<{ sweepAbandonedSessions: () => Promise<void> }> {
   const { engine, systemDb, appDb, auth, config, store } = deps
 
   // État de la passerelle : local à CET appel de registerGameGateway (donc à CETTE instance
@@ -257,14 +283,17 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     }
     const session = await engine.podium(sessionId)
     await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
-      setSessionStatus(scope.db, meta.dbSessionId, 'ended'))
+      setSessionStatus(scope.db, meta.dbSessionId, 'ended'),
+    )
     // Nettoyage `engine_state` passé le podium — cohérent avec l'ancien host:next (le rapport final
     // reste lisible via session_player/answer_record).
     await clearEngineState(systemDb, meta.dbSessionId)
     const top = engine.ranking(session).slice(0, 3)
     io.to(roomName(sessionId)).emit('podium', { top })
     // Éviction mémoire différée (P1-6) : fenêtre de grâce pour une reconnexion au podium.
-    setTimeout(() => { void evictSessionMemory(sessionId, meta) }, PODIUM_EVICTION_DELAY).unref()
+    setTimeout(() => {
+      void evictSessionMemory(sessionId, meta)
+    }, PODIUM_EVICTION_DELAY).unref()
     return session
   }
 
@@ -329,7 +358,9 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
   }
 
   /** Réauth + résolution tenant/rôle/owner (début historique de `host:create`). */
-  async function resolveHostContext(socket: Socket): Promise<{ userId: string; context: { tenantId: string; ownerId?: string } }> {
+  async function resolveHostContext(
+    socket: Socket,
+  ): Promise<{ userId: string; context: { tenantId: string; ownerId?: string } }> {
     const authSession = await auth.api.getSession({ headers: fromNodeHeaders(socket.handshake.headers) })
     if (!authSession?.user) throw new Error('authentification requise')
 
@@ -338,9 +369,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // siens — parité avec les routes HTTP). En mode multi, le workspace actif est porté par le
     // handshake socket (`io({ auth: { tenantId } })`, voir apps/web) — l'équivalent WS de
     // l'en-tête `x-tenant-id`. Sans ça, `resolveTenantId` lèverait « tenant explicite requis ».
-    const explicitTenantId = typeof socket.handshake.auth?.tenantId === 'string'
-      ? (socket.handshake.auth.tenantId as string)
-      : undefined
+    const explicitTenantId =
+      typeof socket.handshake.auth?.tenantId === 'string' ? (socket.handshake.auth.tenantId as string) : undefined
     const tenantId = await resolveTenantId(systemDb, config, { userId: authSession.user.id, explicitTenantId })
     const role = (await getMembershipRole(systemDb, authSession.user.id, tenantId)) ?? 'member'
     const ownerId = hasPermission(role, 'content:access-all') ? undefined : authSession.user.id
@@ -370,7 +400,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     const pin = await engine.generateUniquePin()
     // Création sous RLS (appDb + GUC) : WITH CHECK garantit tenant_id = contexte.
     const dbSession = await withTenantTx(appDb, context, (scope) =>
-      createGameSession(scope, { quizId, hostId: userId, pin }))
+      createGameSession(scope, { quizId, hostId: userId, pin }),
+    )
     if (!dbSession) throw new Error('création de la session impossible')
 
     // L'id `game_session` DB devient l'id moteur — UN SEUL id partout (plus de map de
@@ -404,7 +435,7 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
 
   function requireHost(socket: Socket): { sessionId: string; meta: SessionMeta } {
     const data = socket.data as SocketData
-    if (data.role !== 'host' || !data.sessionId) throw new Error('action réservée à l\'hôte de la session')
+    if (data.role !== 'host' || !data.sessionId) throw new Error("action réservée à l'hôte de la session")
     const meta = sessionMetaByEngineId.get(data.sessionId)
     if (!meta) throw new Error('session introuvable')
     return { sessionId: data.sessionId, meta }
@@ -883,7 +914,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         if (typeof quizId !== 'string' || !quizId) throw new Error('quizId requis')
 
         const oldSession = await engine.getSession(oldId)
-        if (oldSession.phase !== 'podium') throw new Error('host:relaunch : relance possible seulement en fin de partie')
+        if (oldSession.phase !== 'podium')
+          throw new Error('host:relaunch : relance possible seulement en fin de partie')
 
         const { userId, context } = await resolveHostContext(socket)
         const { session: neu } = await buildHostedSession(userId, context, quizId)
@@ -902,9 +934,19 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
               try {
                 const { player } = await engine.addPlayer(neu.id, oldPlayer.nickname)
                 const dbPlayer = await withTenantTx(appDb, { tenantId: newMeta.tenantId }, (scope) =>
-                  addSessionPlayer(scope.db, newMeta.dbSessionId, { nickname: oldPlayer.nickname, joinToken: player.joinToken }))
+                  addSessionPlayer(scope.db, newMeta.dbSessionId, {
+                    nickname: oldPlayer.nickname,
+                    joinToken: player.joinToken,
+                  }),
+                )
                 newMeta.playerDbIds.set(player.id, dbPlayer.id)
-                s.emit('session:relaunched', { role: 'player', pin: neu.pin, playerId: player.id, joinToken: player.joinToken, nickname: oldPlayer.nickname })
+                s.emit('session:relaunched', {
+                  role: 'player',
+                  pin: neu.pin,
+                  playerId: player.id,
+                  joinToken: player.joinToken,
+                  nickname: oldPlayer.nickname,
+                })
               } catch (err) {
                 /* best-effort : ce participant reste sur l'ancien podium */
                 console.error(`host:relaunch : migration du joueur ${oldPlayer.nickname} (${sd.playerId}) échouée`, err)
@@ -964,7 +1006,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
           throw new Error("cet utilisateur n'est pas l'hôte de cette session")
         }
         const dbSession = await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
-          getGameSessionById(scope.db, meta.dbSessionId))
+          getGameSessionById(scope.db, meta.dbSessionId),
+        )
         if (!dbSession || dbSession.hostId !== authSession.user.id) {
           throw new Error("cet utilisateur n'est pas l'hôte de cette session")
         }
@@ -977,7 +1020,11 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         // Enchaînement automatique : rejoue le compte à rebours en cours à l'hôte qui reprend en
         // pleine étape classement (le minuteur serveur, lui, continue de tourner sans être touché),
         // pour qu'il revoie le compteur plutôt qu'un écran figé.
-        if (meta.autoAdvance && meta.advanceNextAt !== null && (session.phase === 'reveal' || session.phase === 'scoreboard')) {
+        if (
+          meta.autoAdvance &&
+          meta.advanceNextAt !== null &&
+          (session.phase === 'reveal' || session.phase === 'scoreboard')
+        ) {
           socket.emit('auto:advance', { nextAt: meta.advanceNextAt })
         }
 
@@ -1002,7 +1049,8 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
         const { sessionId, meta } = requireHost(socket)
         if (!meta.statusActiveSet) {
           await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
-            setSessionStatus(scope.db, meta.dbSessionId, 'active'))
+            setSessionStatus(scope.db, meta.dbSessionId, 'active'),
+          )
           meta.statusActiveSet = true
         }
         // Démarrage de la question : voir `startQuestionFlow` (route 'reading' vs 'question'
@@ -1062,68 +1110,75 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // une étape classement en cours planifie l'avance immédiatement ; désactiver annule toute
     // avance planifiée et notifie les clients d'effacer leur compte à rebours (`auto:advance`
     // `{ nextAt: null }`).
-    socket.on('host:setAuto', async (payload: { enabled?: unknown; delaySeconds?: unknown } | undefined, ack?: (res: unknown) => void) => {
-      const reply = typeof ack === 'function' ? ack : () => {}
-      try {
-        const { sessionId, meta } = requireHost(socket)
-        if (typeof payload?.enabled === 'boolean') meta.autoAdvance = payload.enabled
-        if (typeof payload?.delaySeconds === 'number' && Number.isFinite(payload.delaySeconds)) {
-          const clamped = Math.min(Math.max(payload.delaySeconds, MIN_AUTO_ADVANCE_DELAY_S), MAX_AUTO_ADVANCE_DELAY_S)
-          meta.autoAdvanceDelayMs = clamped * 1000
+    socket.on(
+      'host:setAuto',
+      async (payload: { enabled?: unknown; delaySeconds?: unknown } | undefined, ack?: (res: unknown) => void) => {
+        const reply = typeof ack === 'function' ? ack : () => {}
+        try {
+          const { sessionId, meta } = requireHost(socket)
+          if (typeof payload?.enabled === 'boolean') meta.autoAdvance = payload.enabled
+          if (typeof payload?.delaySeconds === 'number' && Number.isFinite(payload.delaySeconds)) {
+            const clamped = Math.min(Math.max(payload.delaySeconds, MIN_AUTO_ADVANCE_DELAY_S), MAX_AUTO_ADVANCE_DELAY_S)
+            meta.autoAdvanceDelayMs = clamped * 1000
+          }
+          const current = await engine.getSession(sessionId)
+          if (!meta.autoAdvance) {
+            clearAdvanceTimeout(meta)
+            io.to(roomName(sessionId)).emit('auto:advance', { nextAt: null })
+          } else if (current.phase === 'reveal' || current.phase === 'scoreboard') {
+            // Activé en pleine étape classement : enchaîne sans attendre la manche suivante.
+            scheduleAutoAdvance(sessionId, meta, current)
+          }
+          reply({ ok: true, autoAdvance: meta.autoAdvance, delaySeconds: meta.autoAdvanceDelayMs / 1000 })
+        } catch (e) {
+          reply({ error: message(e) })
         }
-        const current = await engine.getSession(sessionId)
-        if (!meta.autoAdvance) {
-          clearAdvanceTimeout(meta)
-          io.to(roomName(sessionId)).emit('auto:advance', { nextAt: null })
-        } else if (current.phase === 'reveal' || current.phase === 'scoreboard') {
-          // Activé en pleine étape classement : enchaîne sans attendre la manche suivante.
-          scheduleAutoAdvance(sessionId, meta, current)
+      },
+    )
+
+    socket.on(
+      'player:join',
+      async (payload: { pin?: unknown; nickname?: unknown } | undefined, ack?: (res: unknown) => void) => {
+        const reply = typeof ack === 'function' ? ack : () => {}
+        try {
+          const pin = payload?.pin
+          if (typeof pin !== 'string' || !pin) throw new Error('pin requis')
+          // Pseudo borné à 32 caractères (P2) et trimmé : sans borne, un joueur pouvait diffuser
+          // un pseudo géant re-broadcasté à toute la room (lobby:update) et persisté en base.
+          const nickname = typeof payload?.nickname === 'string' ? payload.nickname.trim() : ''
+          if (!nickname) throw new Error('nickname requis')
+          if (nickname.length > 32) throw new Error('nickname trop long (32 caractères max)')
+
+          const sessionId = pinToSessionId.get(pin)
+          if (!sessionId) throw new Error('PIN invalide')
+          const meta = sessionMetaByEngineId.get(sessionId)
+          if (!meta) throw new Error('session introuvable')
+
+          const { session, player } = await engine.addPlayer(sessionId, nickname)
+          const dbPlayer = await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
+            addSessionPlayer(scope.db, meta.dbSessionId, { nickname, joinToken: player.joinToken }),
+          )
+          meta.playerDbIds.set(player.id, dbPlayer.id)
+
+          const data = socket.data as SocketData
+          data.role = 'player'
+          data.sessionId = sessionId
+          data.playerId = player.id
+          activeSocketIdByPlayerId.set(player.id, socket.id)
+          await socket.join(roomName(sessionId))
+
+          reply({ playerId: player.id, joinToken: player.joinToken })
+          io.to(roomName(sessionId)).emit('lobby:update', { players: playersPayload(session) })
+
+          // Latecomer (Task 3, hardening) : un joueur qui rejoint EN PLEINE QUESTION (ex. PIN
+          // partagé après le lancement) ne doit pas rester aveugle jusqu'à la question suivante —
+          // on lui rejoue, à LUI SEUL, la même projection anti-triche que host:start/host:next.
+          replayCurrentQuestionTo(socket, session)
+        } catch (e) {
+          reply({ error: message(e) })
         }
-        reply({ ok: true, autoAdvance: meta.autoAdvance, delaySeconds: meta.autoAdvanceDelayMs / 1000 })
-      } catch (e) {
-        reply({ error: message(e) })
-      }
-    })
-
-    socket.on('player:join', async (payload: { pin?: unknown; nickname?: unknown } | undefined, ack?: (res: unknown) => void) => {
-      const reply = typeof ack === 'function' ? ack : () => {}
-      try {
-        const pin = payload?.pin
-        if (typeof pin !== 'string' || !pin) throw new Error('pin requis')
-        // Pseudo borné à 32 caractères (P2) et trimmé : sans borne, un joueur pouvait diffuser
-        // un pseudo géant re-broadcasté à toute la room (lobby:update) et persisté en base.
-        const nickname = typeof payload?.nickname === 'string' ? payload.nickname.trim() : ''
-        if (!nickname) throw new Error('nickname requis')
-        if (nickname.length > 32) throw new Error('nickname trop long (32 caractères max)')
-
-        const sessionId = pinToSessionId.get(pin)
-        if (!sessionId) throw new Error('PIN invalide')
-        const meta = sessionMetaByEngineId.get(sessionId)
-        if (!meta) throw new Error('session introuvable')
-
-        const { session, player } = await engine.addPlayer(sessionId, nickname)
-        const dbPlayer = await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
-          addSessionPlayer(scope.db, meta.dbSessionId, { nickname, joinToken: player.joinToken }))
-        meta.playerDbIds.set(player.id, dbPlayer.id)
-
-        const data = socket.data as SocketData
-        data.role = 'player'
-        data.sessionId = sessionId
-        data.playerId = player.id
-        activeSocketIdByPlayerId.set(player.id, socket.id)
-        await socket.join(roomName(sessionId))
-
-        reply({ playerId: player.id, joinToken: player.joinToken })
-        io.to(roomName(sessionId)).emit('lobby:update', { players: playersPayload(session) })
-
-        // Latecomer (Task 3, hardening) : un joueur qui rejoint EN PLEINE QUESTION (ex. PIN
-        // partagé après le lancement) ne doit pas rester aveugle jusqu'à la question suivante —
-        // on lui rejoue, à LUI SEUL, la même projection anti-triche que host:start/host:next.
-        replayCurrentQuestionTo(socket, session)
-      } catch (e) {
-        reply({ error: message(e) })
-      }
-    })
+      },
+    )
 
     socket.on('player:answer', async (payload: { answer?: unknown } | undefined, ack?: (res: unknown) => void) => {
       const reply = typeof ack === 'function' ? ack : () => {}
@@ -1169,51 +1224,54 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // par le joueur) plutôt qu'un sessionId interne, symétrique de player:join. Le moteur retrouve
     // le joueur par joinToken, le remarque connected, et son score/état sont conservés (le moteur
     // ne réinitialise jamais un joueur existant — voir engine.reconnect()).
-    socket.on('player:reconnect', async (payload: { pin?: unknown; joinToken?: unknown } | undefined, ack?: (res: unknown) => void) => {
-      const reply = typeof ack === 'function' ? ack : () => {}
-      try {
-        const pin = payload?.pin
-        const joinToken = payload?.joinToken
-        if (typeof pin !== 'string' || !pin) throw new Error('pin requis')
-        if (typeof joinToken !== 'string' || !joinToken) throw new Error('joinToken requis')
+    socket.on(
+      'player:reconnect',
+      async (payload: { pin?: unknown; joinToken?: unknown } | undefined, ack?: (res: unknown) => void) => {
+        const reply = typeof ack === 'function' ? ack : () => {}
+        try {
+          const pin = payload?.pin
+          const joinToken = payload?.joinToken
+          if (typeof pin !== 'string' || !pin) throw new Error('pin requis')
+          if (typeof joinToken !== 'string' || !joinToken) throw new Error('joinToken requis')
 
-        const sessionId = pinToSessionId.get(pin)
-        if (!sessionId) throw new Error('PIN invalide')
-        if (!sessionMetaByEngineId.has(sessionId)) throw new Error('session introuvable')
+          const sessionId = pinToSessionId.get(pin)
+          if (!sessionId) throw new Error('PIN invalide')
+          if (!sessionMetaByEngineId.has(sessionId)) throw new Error('session introuvable')
 
-        const result = await engine.reconnect(sessionId, joinToken)
-        if (!result) throw new Error('joinToken invalide')
-        const { session, player } = result
+          const result = await engine.reconnect(sessionId, joinToken)
+          if (!result) throw new Error('joinToken invalide')
+          const { session, player } = result
 
-        const data = socket.data as SocketData
-        data.role = 'player'
-        data.sessionId = sessionId
-        data.playerId = player.id
-        // CE socket devient le socket actif du joueur — voir le garde dans le handler
-        // `disconnect` : un disconnect tardif de l'ANCIEN socket ne devra plus rien changer.
-        activeSocketIdByPlayerId.set(player.id, socket.id)
-        await socket.join(roomName(sessionId))
+          const data = socket.data as SocketData
+          data.role = 'player'
+          data.sessionId = sessionId
+          data.playerId = player.id
+          // CE socket devient le socket actif du joueur — voir le garde dans le handler
+          // `disconnect` : un disconnect tardif de l'ANCIEN socket ne devra plus rien changer.
+          activeSocketIdByPlayerId.set(player.id, socket.id)
+          await socket.join(roomName(sessionId))
 
-        // "Déjà répondu" (hardening, Task 5) : `question:show` (replayé ci-dessous) rend un
-        // client qui avait DÉJÀ soumis pour la question en cours indiscernable d'un client qui
-        // n'a pas encore répondu — sans ce booléen, l'UI reconnectée affiche à tort "en attente
-        // de réponse" à côté d'un score pourtant déjà crédité pour cette manche. Ne lit QUE
-        // l'existence d'une réponse (booléen) — jamais son contenu (`submitted.answer`/`.correct`
-        // ne sont jamais exposés ici, anti-triche).
-        const alreadyAnswered = Boolean(session.answers[session.currentIndex]?.[player.id])
+          // "Déjà répondu" (hardening, Task 5) : `question:show` (replayé ci-dessous) rend un
+          // client qui avait DÉJÀ soumis pour la question en cours indiscernable d'un client qui
+          // n'a pas encore répondu — sans ce booléen, l'UI reconnectée affiche à tort "en attente
+          // de réponse" à côté d'un score pourtant déjà crédité pour cette manche. Ne lit QUE
+          // l'existence d'une réponse (booléen) — jamais son contenu (`submitted.answer`/`.correct`
+          // ne sont jamais exposés ici, anti-triche).
+          const alreadyAnswered = Boolean(session.answers[session.currentIndex]?.[player.id])
 
-        reply({ playerId: player.id, phase: session.phase, score: player.score, alreadyAnswered })
-        io.to(roomName(sessionId)).emit('lobby:update', { players: playersPayload(session) })
+          reply({ playerId: player.id, phase: session.phase, score: player.score, alreadyAnswered })
+          io.to(roomName(sessionId)).emit('lobby:update', { players: playersPayload(session) })
 
-        // Un joueur qui reconnecte EN PLEINE QUESTION doit pouvoir la voir/y répondre tout de
-        // suite, pas seulement à partir de la question suivante : on lui renvoie, à LUI SEUL
-        // (pas à la room — les autres l'ont déjà reçu), la même projection anti-triche que
-        // host:start/host:next (`playerQuestionView`, jamais `questionResult`) + le `timer`.
-        replayCurrentQuestionTo(socket, session)
-      } catch (e) {
-        reply({ error: message(e) })
-      }
-    })
+          // Un joueur qui reconnecte EN PLEINE QUESTION doit pouvoir la voir/y répondre tout de
+          // suite, pas seulement à partir de la question suivante : on lui renvoie, à LUI SEUL
+          // (pas à la room — les autres l'ont déjà reçu), la même projection anti-triche que
+          // host:start/host:next (`playerQuestionView`, jamais `questionResult`) + le `timer`.
+          replayCurrentQuestionTo(socket, session)
+        } catch (e) {
+          reply({ error: message(e) })
+        }
+      },
+    )
 
     // Marque le joueur non-connecté sans le retirer de la session (score/réponses conservés,
     // récupérables via player:reconnect). Ne s'applique qu'aux sockets 'player' rattachés, et
@@ -1280,30 +1338,33 @@ export async function registerGameGateway(io: Server, deps: GameGatewayDeps): Pr
     // bien pour la toute première prise de contrôle que pour un ré-accrochage ultérieur, tant
     // que le token correspond bien à LA session demandée (`sessionId`, connu du client) et que
     // la session existe toujours.
-    socket.on('screen:reconnect', async (payload: { sessionId?: unknown; displayToken?: unknown } | undefined, ack?: (res: unknown) => void) => {
-      const reply = typeof ack === 'function' ? ack : () => {}
-      try {
-        const sessionId = payload?.sessionId
-        const displayToken = payload?.displayToken
-        if (typeof sessionId !== 'string' || !sessionId) throw new Error('sessionId requis')
-        if (typeof displayToken !== 'string' || !displayToken) throw new Error('displayToken requis')
+    socket.on(
+      'screen:reconnect',
+      async (payload: { sessionId?: unknown; displayToken?: unknown } | undefined, ack?: (res: unknown) => void) => {
+        const reply = typeof ack === 'function' ? ack : () => {}
+        try {
+          const sessionId = payload?.sessionId
+          const displayToken = payload?.displayToken
+          if (typeof sessionId !== 'string' || !sessionId) throw new Error('sessionId requis')
+          if (typeof displayToken !== 'string' || !displayToken) throw new Error('displayToken requis')
 
-        const mappedSessionId = screenTokenToSessionId.get(displayToken)
-        if (!mappedSessionId || mappedSessionId !== sessionId) throw new Error('displayToken invalide')
-        if (!sessionMetaByEngineId.has(sessionId)) throw new Error('session introuvable')
+          const mappedSessionId = screenTokenToSessionId.get(displayToken)
+          if (!mappedSessionId || mappedSessionId !== sessionId) throw new Error('displayToken invalide')
+          if (!sessionMetaByEngineId.has(sessionId)) throw new Error('session introuvable')
 
-        const data = socket.data as SocketData
-        data.role = 'screen'
-        data.sessionId = sessionId
-        await socket.join(roomName(sessionId))
-        reply({ ok: true })
+          const data = socket.data as SocketData
+          data.role = 'screen'
+          data.sessionId = sessionId
+          await socket.join(roomName(sessionId))
+          reply({ ok: true })
 
-        const session = await engine.getSession(sessionId)
-        replayCurrentQuestionTo(socket, session)
-      } catch (e) {
-        reply({ error: message(e) })
-      }
-    })
+          const session = await engine.getSession(sessionId)
+          replayCurrentQuestionTo(socket, session)
+        } catch (e) {
+          reply({ error: message(e) })
+        }
+      },
+    )
   })
 
   /** Balayage d'abandon (mono-instance) : bascule en base les parties inactives (autoritatif via

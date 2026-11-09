@@ -87,9 +87,7 @@ function sliderRows(correct: SliderCorrect, distribution: Record<string, number>
     .map(([key, count]) => {
       const parsed = parseAnswerKey(key)
       const value =
-        typeof parsed === 'object' && parsed !== null && 'value' in parsed
-          ? (parsed as { value: unknown }).value
-          : null
+        typeof parsed === 'object' && parsed !== null && 'value' in parsed ? (parsed as { value: unknown }).value : null
       return typeof value === 'number' ? { value, count } : null
     })
     .filter((e): e is { value: number; count: number } => e !== null)
@@ -112,9 +110,7 @@ function textRows(correct: TextCorrect, distribution: Record<string, number>): D
     .map(([key, count]) => {
       const parsed = parseAnswerKey(key)
       const value =
-        typeof parsed === 'object' && parsed !== null && 'text' in parsed
-          ? (parsed as { text: unknown }).text
-          : null
+        typeof parsed === 'object' && parsed !== null && 'text' in parsed ? (parsed as { text: unknown }).text : null
       return typeof value === 'string' ? { value, count } : null
     })
     .filter((e): e is { value: string; count: number } => e !== null)

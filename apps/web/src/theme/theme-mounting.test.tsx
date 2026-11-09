@@ -58,8 +58,6 @@ describe('SceneRoute', () => {
         <p>x</p>
       </SceneRoute>,
     )
-    expect(
-      container.querySelector('[data-theme="scene"][data-scheme="dark"]'),
-    ).not.toBeNull()
+    expect(container.querySelector('[data-theme="scene"][data-scheme="dark"]')).not.toBeNull()
   })
 })

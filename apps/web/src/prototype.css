@@ -85,7 +85,9 @@
   font-weight: 700;
   font-size: var(--fs-body);
   cursor: pointer;
-  transition: transform var(--transition-fast), filter var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    filter var(--transition-fast);
 }
 
 .ab-button:hover:not(:disabled):not([aria-disabled="true"]) {
@@ -165,7 +167,9 @@
      --tile-shadow, posée par AnswerTile ; repli noir translucide pour tout
      usage sans token de forme) qui se compresse à l'appui. */
   box-shadow: 0 6px 0 var(--tile-shadow, rgba(0, 0, 0, 0.35));
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 /* La tuile EST un <button> : il faut repasser devant le reset
@@ -193,7 +197,9 @@
    blanc intérieur — le geste « clic arcade » figé (maquette QCM / vrai-faux). */
 .ab-tile--selected {
   transform: translateY(6px);
-  box-shadow: 0 2px 0 var(--tile-shadow, rgba(0, 0, 0, 0.35)), inset 0 0 0 4px #ffffff;
+  box-shadow:
+    0 2px 0 var(--tile-shadow, rgba(0, 0, 0, 0.35)),
+    inset 0 0 0 4px #ffffff;
 }
 
 /* Les autres tuiles reculent après le choix, sans perdre le contraste du
@@ -876,7 +882,9 @@
   padding: 10px;
   border-radius: 18px;
   background: var(--stage-2);
-  box-shadow: inset 0 4px 0 rgba(0, 0, 0, 0.45), inset 0 -2px 0 rgba(189, 235, 247, 0.15);
+  box-shadow:
+    inset 0 4px 0 rgba(0, 0, 0, 0.45),
+    inset 0 -2px 0 rgba(189, 235, 247, 0.15);
 }
 .join-pin__cell {
   display: flex;
@@ -1302,7 +1310,9 @@
   padding: 14px 26px;
   border-radius: 22px;
   background: var(--stage-2);
-  box-shadow: inset 0 4px 0 rgba(0, 0, 0, 0.45), 0 0 0 2px var(--line);
+  box-shadow:
+    inset 0 4px 0 rgba(0, 0, 0, 0.45),
+    0 0 0 2px var(--line);
 }
 .player-slider__value output {
   font-family: var(--font-mono);
@@ -1339,7 +1349,9 @@
   font-family: var(--font-mono);
   font-size: 30px;
   cursor: pointer;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 .player-step:active:not(:disabled) {
   transform: translateY(4px);
@@ -1438,7 +1450,9 @@
   font-weight: 700;
   font-size: 22px;
   cursor: pointer;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 .prototype-root .player-cta:active:not(:disabled) {
   transform: translateY(6px);
@@ -3027,7 +3041,9 @@
   background: color-mix(in srgb, var(--surface-2) 82%, transparent);
   color: var(--ink);
   cursor: pointer;
-  transition: transform var(--transition-fast, 120ms), background var(--transition-fast, 120ms),
+  transition:
+    transform var(--transition-fast, 120ms),
+    background var(--transition-fast, 120ms),
     color var(--transition-fast, 120ms);
 }
 
@@ -3039,7 +3055,7 @@
   transform: scale(0.94);
 }
 
-.ab-soundtoggle[aria-pressed='true'] {
+.ab-soundtoggle[aria-pressed="true"] {
   color: var(--ink-dim);
 }
 

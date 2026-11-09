@@ -89,7 +89,12 @@ describe('api/quizzes — routes et méthodes HTTP', () => {
       type: 'mcq',
       prompt: 'Question ?',
       timeLimit: 20,
-      payload: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+      payload: {
+        options: [
+          { label: 'A', correct: true },
+          { label: 'B', correct: false },
+        ],
+      },
     })
     const [path, init] = lastCall()
     expect(path).toBe('/api/quizzes/q1/questions')

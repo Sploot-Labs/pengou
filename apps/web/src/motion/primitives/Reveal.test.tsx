@@ -6,8 +6,8 @@ import { Reveal } from './Reveal.js'
 
 describe('Reveal', () => {
   it('rend son contenu immédiatement (présent dans le DOM)', () => {
-    window.matchMedia = ((q: string) =>
-      ({ matches: false, media: q, addEventListener() {}, removeEventListener() {} }) as unknown as MediaQueryList)
+    window.matchMedia = (q: string) =>
+      ({ matches: false, media: q, addEventListener() {}, removeEventListener() {} }) as unknown as MediaQueryList
     render(
       <MotionProvider>
         <Reveal>coucou</Reveal>
@@ -17,8 +17,8 @@ describe('Reveal', () => {
   })
 
   it("n'applique aucune animation inline en reduced-motion", () => {
-    window.matchMedia = ((q: string) =>
-      ({ matches: true, media: q, addEventListener() {}, removeEventListener() {} }) as unknown as MediaQueryList)
+    window.matchMedia = (q: string) =>
+      ({ matches: true, media: q, addEventListener() {}, removeEventListener() {} }) as unknown as MediaQueryList
     render(
       <MotionProvider>
         <Reveal>salut</Reveal>

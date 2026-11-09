@@ -249,7 +249,7 @@ export function createEngine(deps: EngineDeps): Engine {
       // posé) ; si jamais corrompu, on échoue FERMÉ (rejet) plutôt que d'ouvrir un fallback
       // `now()` qui accorderait silencieusement timeMs=0 (score plein) à une question mal démarrée.
       if (session.questionStartedAt === null) {
-        return { accepted: false, reason: "question non démarrée correctement (questionStartedAt manquant)" }
+        return { accepted: false, reason: 'question non démarrée correctement (questionStartedAt manquant)' }
       }
 
       const def = questionTypes[question.type]

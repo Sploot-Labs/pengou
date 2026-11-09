@@ -56,7 +56,6 @@ interface RevealPayload {
   distribution: Record<string, number>
 }
 
-
 interface LobbyPlayer {
   id: string
   nickname: string
@@ -331,7 +330,9 @@ export function HostLive() {
     // `phase` en dehors d'un skip — voir son handler ci-dessus).
     let cancelled = false
     if (!navState?.pin && sessionId) {
-      emitAck<{ sessionId?: string; pin?: string; phase?: UiPhase; autoAdvance?: boolean }>('host:reconnect', { sessionId })
+      emitAck<{ sessionId?: string; pin?: string; phase?: UiPhase; autoAdvance?: boolean }>('host:reconnect', {
+        sessionId,
+      })
         .then((res) => {
           if (cancelled) return
           if (res.pin) setPin(res.pin)
@@ -616,8 +617,7 @@ export function HostLive() {
   }
 
   /** Libellé réutilisé sur les vues révélation et classement quand une avance est en attente. */
-  const autoCountdownLabel =
-    autoAdvance && autoRemaining !== null ? `Question suivante dans ${autoRemaining} s` : null
+  const autoCountdownLabel = autoAdvance && autoRemaining !== null ? `Question suivante dans ${autoRemaining} s` : null
 
   async function createScreenLink() {
     if (!sessionId) return
@@ -668,10 +668,7 @@ export function HostLive() {
     return (
       <ul className="hostlive-answers" aria-label="Réponses et distribution">
         {rows.map((row) => (
-          <li
-            key={row.key}
-            className={`hostlive-answer-row${row.correct ? ' hostlive-answer-row--correct' : ''}`}
-          >
+          <li key={row.key} className={`hostlive-answer-row${row.correct ? ' hostlive-answer-row--correct' : ''}`}>
             <span className="hostlive-answer-row__label">
               {row.label}
               {row.correct && (
@@ -744,7 +741,9 @@ export function HostLive() {
         <div className="hostlive-header__status">
           <span className="host-badge">
             {players.length} joueur{players.length > 1 ? 's' : ''}
-            {phase !== 'lobby' && players.length > 0 ? ` (${connectedCount} connecté${connectedCount > 1 ? 's' : ''})` : ''}
+            {phase !== 'lobby' && players.length > 0
+              ? ` (${connectedCount} connecté${connectedCount > 1 ? 's' : ''})`
+              : ''}
           </span>
           <span className="host-badge">{phaseLabel(phase)}</span>
         </div>
@@ -759,7 +758,13 @@ export function HostLive() {
         <p
           className="player-net player-net--reconnecting"
           role="alert"
-          style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-3)' }}
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 'var(--space-3)',
+          }}
         >
           <span>{HOST_AUTHORITY_LOST_MESSAGE}</span>
           <Button variant="ghost" type="button" onClick={() => navigate('/')}>
@@ -806,8 +811,8 @@ export function HostLive() {
         )}
         {screenUrl && (
           <p style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
-            À usage unique : ouvrez ce lien sur le projecteur AVANT de lancer la partie ; il devient invalide une
-            fois utilisé.
+            À usage unique : ouvrez ce lien sur le projecteur AVANT de lancer la partie ; il devient invalide une fois
+            utilisé.
           </p>
         )}
       </div>
@@ -836,9 +841,7 @@ export function HostLive() {
                 <h2 ref={phaseHeadingRef} tabIndex={-1}>
                   En attente des joueurs
                 </h2>
-                <p style={{ color: 'var(--ink-dim)' }}>
-                  Partagez le PIN sur le grand écran, ou le lien ci-dessus.
-                </p>
+                <p style={{ color: 'var(--ink-dim)' }}>Partagez le PIN sur le grand écran, ou le lien ci-dessus.</p>
 
                 {players.length === 0 ? (
                   <p className="hostlive-empty">
@@ -908,7 +911,11 @@ export function HostLive() {
                   <h2 ref={phaseHeadingRef} tabIndex={-1}>
                     {question.prompt}
                   </h2>
-                  <TimerRing remainingSeconds={remaining ?? question.timeLimit} totalSeconds={question.timeLimit} size={72} />
+                  <TimerRing
+                    remainingSeconds={remaining ?? question.timeLimit}
+                    totalSeconds={question.timeLimit}
+                    size={72}
+                  />
                 </div>
                 <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="host" />
 

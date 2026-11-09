@@ -1,8 +1,6 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import { eq } from 'drizzle-orm'
-import {
-  startTestDb, runMigrations, schema, tenantScope, resolveTenantId, createQuiz,
-} from '@splootlabs/db'
+import { startTestDb, runMigrations, schema, tenantScope, resolveTenantId, createQuiz } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { loadConfig } from '@splootlabs/shared'
 import { buildServer } from './app.js'

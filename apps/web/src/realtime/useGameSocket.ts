@@ -99,7 +99,7 @@ export function useGameSocket(): UseGameSocket {
   }, [])
 
   const emitAck = useCallback(
-    <T,>(event: string, payload?: unknown): Promise<T> =>
+    <T>(event: string, payload?: unknown): Promise<T> =>
       new Promise<T>((resolve, reject) => {
         let settled = false
         const timer = window.setTimeout(() => {
@@ -123,7 +123,7 @@ export function useGameSocket(): UseGameSocket {
   )
 
   const on = useCallback(
-    <T = unknown,>(event: string, callback: (payload: T) => void): (() => void) => {
+    <T = unknown>(event: string, callback: (payload: T) => void): (() => void) => {
       socket.on(event, callback)
       return () => {
         socket.off(event, callback)

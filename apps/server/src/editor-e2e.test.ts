@@ -49,7 +49,12 @@ async function buildApp(): Promise<FastifyInstance> {
 
 // Un payload valide par type, couvrant les 4 types du registre @splootlabs/quiz.
 const validPayloadByType = {
-  mcq: { options: [{ label: 'A', correct: true }, { label: 'B', correct: false }] },
+  mcq: {
+    options: [
+      { label: 'A', correct: true },
+      { label: 'B', correct: false },
+    ],
+  },
   truefalse: { correct: true },
   text: { answers: ['x'] },
   slider: { min: 0, max: 100, correct: 42 },
@@ -128,7 +133,8 @@ describe('e2e éditeur : inscription → quiz → 4 types de questions → reord
     // distinct, seedé directement en base (même approche que dans routes-quizzes.test.ts) :
     // un 2e tenant, un owner qui lui appartient, et un quiz + question rattachés.
     const [foreignTenant] = await ctx.db.insert(schema.tenant).values({ name: 'Autre (e2e)' }).returning()
-    const [foreignOwner] = await ctx.db.insert(schema.user)
+    const [foreignOwner] = await ctx.db
+      .insert(schema.user)
       .values({ id: crypto.randomUUID(), email: 'editor-e2e-foreign@x.fr', name: 'Étranger', emailVerified: false })
       .returning()
     const foreignQuiz = await createQuiz(tenantScope(ctx.db, foreignTenant.id), {
