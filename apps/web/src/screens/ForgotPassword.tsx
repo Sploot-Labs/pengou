@@ -24,11 +24,17 @@ export function ForgotPassword() {
 
   const emailRef = useRef<HTMLInputElement>(null)
   const formErrorRef = useRef<HTMLParagraphElement>(null)
+  const statusRef = useRef<HTMLParagraphElement>(null)
 
   // Même logique que Login : le focus va au résumé d'erreur (WCAG 2.4.3 / 3.3.1).
   useEffect(() => {
     if (formError) formErrorRef.current?.focus()
   }, [formError])
+
+  // Le bouton d'envoi garde sinon le focus : la confirmation doit être atteinte sans chercher.
+  useEffect(() => {
+    if (sent) statusRef.current?.focus()
+  }, [sent])
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -93,7 +99,7 @@ export function ForgotPassword() {
         )}
 
         {sent && (
-          <p className="join-status" role="status">
+          <p className="join-status" role="status" tabIndex={-1} ref={statusRef}>
             {NEUTRAL_MESSAGE}
           </p>
         )}

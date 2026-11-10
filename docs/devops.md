@@ -85,7 +85,7 @@ Tant que le paquet GHCR est privé, l'hôte doit s'authentifier (`docker login g
 
 ### Envoi d'e-mails
 
-Pengou envoie des e-mails transactionnels : réinitialisation du mot de passe, confirmation d'adresse à l'inscription et invitations à un espace de travail. Tout est optionnel. Sans transport configuré, l'application reste complète, simplement sans envoi.
+Pengou envoie des e-mails transactionnels : réinitialisation du mot de passe et avis de modification une fois celle-ci faite, confirmation d'adresse à l'inscription et invitations à un espace de travail. Tout est optionnel. Sans transport configuré, l'application reste complète, simplement sans envoi.
 
 Les variables, lues par `packages/shared/src/config.ts`, sont les suivantes. Une valeur vide compte comme une valeur absente.
 
