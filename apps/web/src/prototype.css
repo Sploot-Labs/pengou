@@ -4053,17 +4053,6 @@ p.source-credit {
   white-space: nowrap;
 }
 
-.host-image__url {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.host-image__url input {
-  flex: 1 1 200px;
-  min-width: 0;
-}
-
 /* Image facultative d'une question (grand écran, hôte, joueur). */
 .question-image {
   display: block;

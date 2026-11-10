@@ -2976,7 +2976,10 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       const { app, url } = await buildApp()
       const clients: ClientSocket[] = []
       try {
-        const image = { media: '/uploads/x/y.png', mediaAlt: 'alt' }
+        const image = {
+          media: `/uploads/${await ensureDefaultTenant(ctx.db)}/00000000-0000-4000-8000-000000000002.png`,
+          mediaAlt: 'alt',
+        }
         const { hostSocket, pin } = await setupHostedSessionWithReading(
           app,
           url,

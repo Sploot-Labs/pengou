@@ -2,7 +2,7 @@
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { ApiError } from '../api/client'
-import { QuestionImageField, parseImageUrl } from './QuestionImageField'
+import { QuestionImageField } from './QuestionImageField'
 
 afterEach(cleanup)
 
@@ -15,47 +15,11 @@ function setup(props: Partial<Parameters<typeof QuestionImageField>[0]> = {}) {
 
 const png = () => new File(['x'], 'a.png', { type: 'image/png' })
 
-describe('parseImageUrl', () => {
-  it('refuse http', () =>
-    expect(parseImageUrl('http://exemple.org/a.png')).toEqual({
-      ok: false,
-      error: 'Seules les adresses https sont acceptées.',
-    }))
-  it('refuse une adresse invalide', () =>
-    expect(parseImageUrl('pas une url')).toEqual({ ok: false, error: 'Adresse invalide.' }))
-  it('refuse une adresse plus longue que la limite du serveur (2048)', () => {
-    const base = 'https://exemple.org/'
-    expect(parseImageUrl(base + 'a'.repeat(2049 - base.length))).toEqual({
-      ok: false,
-      error: 'Adresse trop longue.',
-    })
-    expect(parseImageUrl(base + 'a'.repeat(2048 - base.length)).ok).toBe(true)
-  })
-  it('accepte https et trime', () =>
-    expect(parseImageUrl('  https://exemple.org/a.png ')).toEqual({
-      ok: true,
-      url: 'https://exemple.org/a.png',
-    }))
-})
-
 describe('QuestionImageField', () => {
-  it('URL http collée : message affiché, onChange jamais appelé', () => {
-    const { onChange } = setup()
-    const field = screen.getByLabelText("Ou coller l'adresse d'une image")
-    fireEvent.change(field, { target: { value: 'http://exemple.org/a.png' } })
-    fireEvent.click(screen.getByRole('button', { name: 'Utiliser' }))
-    expect(screen.getByText('Seules les adresses https sont acceptées.')).toBeInTheDocument()
-    expect(field).toHaveAttribute('aria-invalid', 'true')
-    expect(onChange).not.toHaveBeenCalled()
-  })
-
-  it('URL https collée : onChange({ media })', () => {
-    const { onChange } = setup()
-    fireEvent.change(screen.getByLabelText("Ou coller l'adresse d'une image"), {
-      target: { value: 'https://exemple.org/a.png' },
-    })
-    fireEvent.click(screen.getByRole('button', { name: 'Utiliser' }))
-    expect(onChange).toHaveBeenCalledWith({ media: 'https://exemple.org/a.png' })
+  it("ne propose pas de coller une adresse d'image", () => {
+    setup()
+    expect(screen.queryByRole('textbox')).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Utiliser' })).toBeNull()
   })
 
   it('envoi de fichier : appelle upload puis onChange({ media: url })', async () => {

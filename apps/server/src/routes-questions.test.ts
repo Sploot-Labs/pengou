@@ -1,6 +1,6 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import type { FastifyInstance } from 'fastify'
-import { startTestDb, runMigrations } from '@splootlabs/db'
+import { startTestDb, runMigrations, ensureDefaultTenant } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { loadConfig } from '@splootlabs/shared'
 import { buildServer } from './app.js'
@@ -8,10 +8,13 @@ import { registerAuth } from './auth-plugin.js'
 import { registerEditor } from './editor.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
+/** Chemin d'une image du workspace par défaut, celui des comptes de ces tests (mode single). */
+let image: string
 
 beforeAll(async () => {
   ctx = await startTestDb()
   await runMigrations(ctx.db)
+  image = `/uploads/${await ensureDefaultTenant(ctx.db)}/00000000-0000-4000-8000-000000000002.png`
 }, 120_000)
 
 afterAll(async () => {
@@ -379,17 +382,74 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
       ...extra,
     })
 
+    it.each(['https://exemple.org/a.png', 'http://exemple.org/a.png', '/media/clip.webm', '/uploads/x/y.png'])(
+      "refuse une image qui n'a pas été envoyée : %s",
+      async (media) => {
+        const app = await buildApp()
+        const { cookie, quizId } = await createQuizAndCookie(app, `externe-${crypto.randomUUID()}@example.com`)
+        const res = await app.inject({
+          method: 'POST',
+          url: `/api/quizzes/${quizId}/questions`,
+          payload: mcq({ media }),
+          headers: { ...json, cookie },
+        })
+        expect(res.statusCode).toBe(400)
+        await app.close()
+      },
+    )
+
+    const autreWorkspace = '/uploads/00000000-0000-4000-8000-000000000001/00000000-0000-4000-8000-000000000002.png'
+
+    it("POST refuse l'image d'un autre workspace", async () => {
+      const app = await buildApp()
+      const { cookie, quizId } = await createQuizAndCookie(app, 'autre-workspace-post@example.com')
+      const res = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quizId}/questions`,
+        payload: mcq({ media: autreWorkspace }),
+        headers: { ...json, cookie },
+      })
+      expect(res.statusCode).toBe(400)
+      await app.close()
+    })
+
+    it("PATCH refuse l'image d'un autre workspace", async () => {
+      const app = await buildApp()
+      const { cookie, quizId } = await createQuizAndCookie(app, 'autre-workspace-patch@example.com')
+      const create = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quizId}/questions`,
+        payload: mcq({}),
+        headers: { ...json, cookie },
+      })
+      const created = create.json() as { id: string }
+      const patched = await app.inject({
+        method: 'PATCH',
+        url: `/api/quizzes/${quizId}/questions/${created.id}`,
+        payload: { media: autreWorkspace },
+        headers: { ...json, cookie },
+      })
+      expect(patched.statusCode).toBe(400)
+      await app.close()
+    })
+
     it('POST accepte media + mediaAlt et les renvoie', async () => {
       const app = await buildApp()
       const { cookie, quizId } = await createQuizAndCookie(app, 'alt1@example.com')
       const res = await app.inject({
         method: 'POST',
         url: `/api/quizzes/${quizId}/questions`,
-        payload: mcq({ media: '/uploads/x/y.png', mediaAlt: 'Un manchot' }),
+        payload: mcq({
+          media: image,
+          mediaAlt: 'Un manchot',
+        }),
         headers: { ...json, cookie },
       })
       expect(res.statusCode).toBe(201)
-      expect(res.json()).toMatchObject({ media: '/uploads/x/y.png', mediaAlt: 'Un manchot' })
+      expect(res.json()).toMatchObject({
+        media: image,
+        mediaAlt: 'Un manchot',
+      })
       await app.close()
     })
 
@@ -399,7 +459,10 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
       const res = await app.inject({
         method: 'POST',
         url: `/api/quizzes/${quizId}/questions`,
-        payload: mcq({ media: '/uploads/x/y.png', mediaAlt: 'a'.repeat(201) }),
+        payload: mcq({
+          media: image,
+          mediaAlt: 'a'.repeat(201),
+        }),
         headers: { ...json, cookie },
       })
       expect(res.statusCode).toBe(400)
@@ -412,7 +475,10 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
       const create = await app.inject({
         method: 'POST',
         url: `/api/quizzes/${quizId}/questions`,
-        payload: mcq({ media: '/uploads/x/y.png', mediaAlt: 'Un manchot' }),
+        payload: mcq({
+          media: image,
+          mediaAlt: 'Un manchot',
+        }),
         headers: { ...json, cookie },
       })
       const created = create.json() as { id: string }
@@ -433,7 +499,10 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
       const create = await app.inject({
         method: 'POST',
         url: `/api/quizzes/${quizId}/questions`,
-        payload: mcq({ media: '/uploads/x/y.png', mediaAlt: 'Un manchot' }),
+        payload: mcq({
+          media: image,
+          mediaAlt: 'Un manchot',
+        }),
         headers: { ...json, cookie },
       })
       const created = create.json() as { id: string }
@@ -444,7 +513,10 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
         headers: { ...json, cookie },
       })
       expect(patched.statusCode).toBe(200)
-      expect(patched.json()).toMatchObject({ media: '/uploads/x/y.png', mediaAlt: 'Nouveau' })
+      expect(patched.json()).toMatchObject({
+        media: image,
+        mediaAlt: 'Nouveau',
+      })
       await app.close()
     })
 
@@ -454,7 +526,10 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
       const create = await app.inject({
         method: 'POST',
         url: `/api/quizzes/${quizId}/questions`,
-        payload: mcq({ media: '/uploads/x/y.png', mediaAlt: 'Un manchot' }),
+        payload: mcq({
+          media: image,
+          mediaAlt: 'Un manchot',
+        }),
         headers: { ...json, cookie },
       })
       const created = create.json() as { id: string }
@@ -466,7 +541,10 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
           headers: { ...json, cookie },
         })
         expect(patched.statusCode).toBe(200)
-        expect(patched.json()).toMatchObject({ media: '/uploads/x/y.png', mediaAlt: null })
+        expect(patched.json()).toMatchObject({
+          media: image,
+          mediaAlt: null,
+        })
       }
       await app.close()
     })

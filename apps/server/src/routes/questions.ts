@@ -12,7 +12,7 @@ import {
 import type { AppConfig } from '@splootlabs/shared'
 import { validateQuestionPayload, questionTypes, type QuestionType } from '@splootlabs/quiz'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
-import { LIMITS, tooLong, isSafeMedia } from '../validation.js'
+import { LIMITS, tooLong, isUploadedMedia } from '../validation.js'
 
 type Deps = { systemDb: Db; appDb: Db; config: AppConfig }
 
@@ -82,8 +82,8 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       }
 
       const media = isNonEmptyString(body?.media) ? body.media : undefined
-      if (media !== undefined && !isSafeMedia(media)) {
-        return reply.code(400).send({ error: 'media invalide (URL http(s) ou référence relative attendue).' })
+      if (media !== undefined && !isUploadedMedia(media, context.tenantId)) {
+        return reply.code(400).send({ error: 'media invalide (image envoyée attendue).' })
       }
 
       if (body?.mediaAlt != null && typeof body.mediaAlt !== 'string') {
@@ -179,8 +179,8 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
         if (body.media !== null && typeof body.media !== 'string') {
           return reply.code(400).send({ error: 'media doit être une chaîne ou null.' })
         }
-        if (typeof body.media === 'string' && !isSafeMedia(body.media)) {
-          return reply.code(400).send({ error: 'media invalide (URL http(s) ou référence relative attendue).' })
+        if (typeof body.media === 'string' && !isUploadedMedia(body.media, context.tenantId)) {
+          return reply.code(400).send({ error: 'media invalide (image envoyée attendue).' })
         }
         patch.media = body.media
         // Retirer l'image retire aussi son texte alternatif, sauf si le corps en fournit un.

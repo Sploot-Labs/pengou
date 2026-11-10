@@ -13,26 +13,6 @@ const EXTENSIONS: Record<string, string> = {
 }
 const TOO_HEAVY = 'Image trop lourde (2 Mo max).'
 const TOO_HEAVY_AFTER_REDUCTION = 'Image trop lourde, même après réduction (2 Mo max).'
-/** Longueur maximale d'une adresse acceptée par le serveur (`LIMITS.media`). */
-const MAX_URL_LENGTH = 2048
-
-type ParsedUrl = { ok: true; url: string } | { ok: false; error: string }
-
-/** N'accepte que les adresses https (chaîne trimée, analysée par `new URL`). */
-export function parseImageUrl(input: string): ParsedUrl {
-  const trimmed = input.trim()
-  if (trimmed.length > MAX_URL_LENGTH) return { ok: false, error: 'Adresse trop longue.' }
-  let parsed: URL
-  try {
-    parsed = new URL(trimmed)
-  } catch {
-    return { ok: false, error: 'Adresse invalide.' }
-  }
-  if (parsed.protocol !== 'https:') {
-    return { ok: false, error: 'Seules les adresses https sont acceptées.' }
-  }
-  return { ok: true, url: trimmed }
-}
 
 class TooHeavyError extends Error {
   constructor(transformed: boolean) {
@@ -60,13 +40,9 @@ export interface QuestionImageFieldProps {
 export function QuestionImageField({ media, mediaAlt, onChange, upload = defaultUpload }: QuestionImageFieldProps) {
   const id = useId()
   const fileRef = useRef<HTMLInputElement>(null)
-  const [urlInput, setUrlInput] = useState('')
-  const [urlError, setUrlError] = useState<string | null>(null)
   const [uploadError, setUploadError] = useState<string | null>(null)
   const [uploading, setUploading] = useState(false)
 
-  const urlId = `${id}-url`
-  const urlErrorId = `${id}-url-error`
   const altId = `${id}-alt`
   const altHelpId = `${id}-alt-help`
   const uploadErrorId = `${id}-upload-error`
@@ -86,17 +62,6 @@ export function QuestionImageField({ media, mediaAlt, onChange, upload = default
       setUploading(false)
       if (fileRef.current) fileRef.current.value = ''
     }
-  }
-
-  function applyUrl() {
-    const result = parseImageUrl(urlInput)
-    if (!result.ok) {
-      setUrlError(result.error)
-      return
-    }
-    setUrlError(null)
-    setUrlInput('')
-    onChange({ media: result.url })
   }
 
   return (
@@ -135,28 +100,6 @@ export function QuestionImageField({ media, mediaAlt, onChange, upload = default
         {uploadError && (
           <p className="host-inline-error" id={uploadErrorId} role="alert">
             {uploadError}
-          </p>
-        )}
-      </div>
-
-      <div className="host-field">
-        <label htmlFor={urlId}>Ou coller l'adresse d'une image</label>
-        <div className="host-image__url">
-          <input
-            id={urlId}
-            type="url"
-            value={urlInput}
-            onChange={(e) => setUrlInput(e.target.value)}
-            aria-invalid={urlError ? true : undefined}
-            aria-describedby={urlError ? urlErrorId : undefined}
-          />
-          <Button variant="ghost" type="button" onClick={applyUrl}>
-            Utiliser
-          </Button>
-        </div>
-        {urlError && (
-          <p className="host-inline-error" id={urlErrorId}>
-            {urlError}
           </p>
         )}
       </div>
