@@ -12,6 +12,7 @@ type CreateInput = {
   readingTime?: number
   payload: unknown
   media?: string | null
+  mediaAlt?: string | null
   orderIndex?: number
 }
 
@@ -34,6 +35,7 @@ export async function createQuestion(scope: TenantScope, quizId: string, input: 
       readingTime: input.readingTime ?? 6,
       payload: input.payload as never,
       media: input.media ?? null,
+      mediaAlt: input.mediaAlt ?? null,
       orderIndex,
     })
     .returning()
@@ -68,7 +70,14 @@ export async function updateQuestion(
   scope: TenantScope,
   quizId: string,
   questionId: string,
-  patch: Partial<{ prompt: string; timeLimit: number; readingTime: number; payload: unknown; media: string | null }>,
+  patch: Partial<{
+    prompt: string
+    timeLimit: number
+    readingTime: number
+    payload: unknown
+    media: string | null
+    mediaAlt: string | null
+  }>,
 ): Promise<Question | null> {
   if (!(await assertQuizInTenant(scope, quizId))) return null
   // Patch vide : `.set({})` fait échouer drizzle ("No values to set") — un patch vide est un

@@ -14,7 +14,8 @@ export function registerStatic(app: FastifyInstance, webDistDir: string): void {
     // Fallback SPA : toute route non-API renvoie index.html. Déclaré dans le même contexte pour
     // disposer de `reply.sendFile` ; il couvre tout le serveur, ce contexte n'ayant pas de préfixe.
     spa.setNotFoundHandler((req, reply) => {
-      if (req.url.startsWith('/api') || req.url.startsWith('/health')) {
+      // /uploads : un fichier envoyé absent doit répondre 404, jamais index.html en 200.
+      if (req.url.startsWith('/api') || req.url.startsWith('/health') || req.url.startsWith('/uploads')) {
         // Message affiché tel quel par le front : une route d'API inconnue signale en pratique un
         // serveur qui n'a pas la version attendue par la page.
         reply.code(404).send({ error: "Cette fonctionnalité n'est pas disponible sur ce serveur." })

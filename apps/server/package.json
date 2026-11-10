@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@fastify/helmet": "^13",
+    "@fastify/multipart": "^9",
     "@fastify/proxy-addr": "^5.1.2",
     "@fastify/rate-limit": "^11",
     "@fastify/static": "^10.1.10",

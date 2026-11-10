@@ -23,6 +23,7 @@ import {
 import { ANSWER_SHAPES, type AnswerShapeKind } from '../constants'
 import { AnswerShape, Button, Logo, SHAPE_NAME_FR } from '../ui'
 import { AppHeader } from '../ui/AppHeader.js'
+import { QuestionImageField } from './QuestionImageField'
 import { ConfirmDialog } from '../ui/ConfirmDialog.js'
 import { isQuizLimitError, QuizLimitNotice } from '../ui/QuizLimitNotice.js'
 import { SourcesPanel } from '../ui/SourceCredit.js'
@@ -73,6 +74,8 @@ interface QuestionBase {
   id: string
   type: QuestionType
   prompt: string
+  media: string | null
+  mediaAlt: string | null
   timeLimit: number
   readingTime: number
   /** Attribution héritée de la bibliothèque (absente pour une question créée ici). */
@@ -126,6 +129,8 @@ function fromApiQuestion(row: ApiQuestion): Question {
   const base = {
     id: row.id,
     prompt: row.prompt,
+    media: row.media,
+    mediaAlt: row.mediaAlt,
     timeLimit: row.timeLimit,
     readingTime: row.readingTime,
     source: row.source,
@@ -188,6 +193,8 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
     case 'mcq':
       return {
         prompt: q.prompt,
+        media: q.media,
+        mediaAlt: q.mediaAlt,
         timeLimit: q.timeLimit,
         readingTime: q.readingTime,
         payload: { options: q.options.map((o) => ({ label: o.label, correct: o.correct })) },
@@ -195,6 +202,8 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
     case 'truefalse':
       return {
         prompt: q.prompt,
+        media: q.media,
+        mediaAlt: q.mediaAlt,
         timeLimit: q.timeLimit,
         readingTime: q.readingTime,
         payload: { correct: q.correctAnswer },
@@ -202,6 +211,8 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
     case 'text':
       return {
         prompt: q.prompt,
+        media: q.media,
+        mediaAlt: q.mediaAlt,
         timeLimit: q.timeLimit,
         readingTime: q.readingTime,
         payload: {
@@ -212,15 +223,26 @@ function toQuestionPatch(q: Question): UpdateQuestionInput {
     case 'slider':
       return {
         prompt: q.prompt,
+        media: q.media,
+        mediaAlt: q.mediaAlt,
         timeLimit: q.timeLimit,
         readingTime: q.readingTime,
         payload: { min: q.min, max: q.max, correct: q.correctValue, step: q.step > 0 ? q.step : undefined },
       }
     case 'wordcloud':
-      return { prompt: q.prompt, timeLimit: q.timeLimit, readingTime: q.readingTime, payload: {} }
+      return {
+        prompt: q.prompt,
+        media: q.media,
+        mediaAlt: q.mediaAlt,
+        timeLimit: q.timeLimit,
+        readingTime: q.readingTime,
+        payload: {},
+      }
     case 'poll':
       return {
         prompt: q.prompt,
+        media: q.media,
+        mediaAlt: q.mediaAlt,
         timeLimit: q.timeLimit,
         readingTime: q.readingTime,
         payload: { options: q.options.map((o) => ({ label: o.label })), multiple: q.multiple },
@@ -704,12 +726,40 @@ export function HostEditor() {
     setQuestions((prev) => prev.map((q) => (q.id === selected.id ? ({ ...q, ...patch } as Question) : q)))
   }
 
+  // Latest questions and selection, read by `updateQuestionById` when an asynchronous edit (an
+  // image upload) lands after the host has moved to another question.
+  const questionsRef = useRef(questions)
+  questionsRef.current = questions
+  const selectedIdRef = useRef(selectedId)
+  selectedIdRef.current = selectedId
+
+  /** Applies a patch to the question `id`, whichever question is selected by then. The autosave
+   * effect above only watches the selected question: when `id` is no longer selected (an upload
+   * finished after a switch), the patch is persisted here directly, superseding any pending edit
+   * of that question so a later flush can't send the older content over it. */
+  function updateQuestionById(id: string, patch: Partial<Question>) {
+    const current = questionsRef.current.find((q) => q.id === id)
+    if (!current) return
+    const next = { ...current, ...patch } as Question
+    setQuestions((prev) => prev.map((q) => (q.id === id ? ({ ...q, ...patch } as Question) : q)))
+    if (id === selectedIdRef.current || !quizId || validationError(next)) return
+    const nextPatch = toQuestionPatch(next)
+    const key = JSON.stringify(nextPatch)
+    if (pendingSaveRef.current?.id === id) pendingSaveRef.current = null
+    if (lastSavedRef.current.get(id) === key) return
+    void persistQuestionPatch({ quizId, id, patch: nextPatch, key }).catch(() => {
+      // Already surfaced via actionError inside persistQuestionPatch.
+    })
+  }
+
   /** Applies a new type LOCALLY only — used to build the create-input for the
    * delete+recreate flow in `confirmTypeChange` (see its comment for why a
    * question's type can't simply be PATCHed). */
   function draftForType(type: QuestionType, keep: Question): Question {
     const input = defaultCreateInput(type)
     input.prompt = keep.prompt
+    input.media = keep.media
+    input.mediaAlt = keep.mediaAlt
     input.timeLimit = keep.timeLimit
     input.readingTime = keep.readingTime
     return fromApiQuestion({
@@ -717,7 +767,8 @@ export function HostEditor() {
       quizId: '',
       type,
       prompt: input.prompt,
-      media: null,
+      media: input.media ?? null,
+      mediaAlt: input.mediaAlt ?? null,
       timeLimit: input.timeLimit,
       readingTime: input.readingTime ?? 0,
       orderIndex: 0,
@@ -1283,6 +1334,13 @@ export function HostEditor() {
                     )}
                   </div>
 
+                  <QuestionImageField
+                    key={selected.id}
+                    media={selected.media}
+                    mediaAlt={selected.mediaAlt}
+                    onChange={(patch) => updateQuestionById(selected.id, patch)}
+                  />
+
                   <div className="host-field-row">
                     <div className="host-field">
                       <label htmlFor="q-type">Type de question</label>
@@ -1699,7 +1757,7 @@ export function HostEditor() {
           >
             <h2 id="host-dialog-title">Changer le type de question ?</h2>
             <p id="host-dialog-desc" style={{ color: 'var(--ink-dim)' }}>
-              Les réponses saisies pour cette question seront effacées. Le reste (intitulé, durée) est conservé.
+              Les réponses saisies pour cette question seront effacées. Le reste (intitulé, durée, image) est conservé.
             </p>
             <div className="host-dialog__actions">
               <Button variant="ghost" type="button" onClick={cancelTypeChange}>

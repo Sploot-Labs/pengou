@@ -4,6 +4,7 @@ import { isScoredType, pollPercent } from '@splootlabs/quiz'
 import { buildDistributionRows, pollRows, type QuestionKind } from '../realtime/distribution'
 import type { PodiumPayload, PollView, RankingEntry, ReadingView, WordcloudView } from '../realtime/contracts'
 import { WordCloud, wordcloudSummary } from '../ui/WordCloud'
+import { QuestionImage } from '../ui/QuestionImage'
 import { listQuizzes, type QuizListItem } from '../api/quizzes'
 import { boardEntries } from '../realtime/board'
 import { hardReload } from '../realtime/hardReload'
@@ -31,6 +32,8 @@ interface QuestionShowPayload {
   prompt: string
   timeLimit: number
   payload: unknown
+  media?: string | null
+  mediaAlt?: string | null
 }
 
 /** Projection « lecture seule » émise par `question:reading` (Task 3, moteur
@@ -1030,6 +1033,7 @@ export function HostLive() {
                     {reading.prompt}
                   </h2>
                 </div>
+                <QuestionImage key={reading.media ?? ''} src={reading.media} alt={reading.mediaAlt} variant="host" />
                 <p role="status" aria-live="polite">
                   Lecture en cours… {readingRemaining ?? reading.readingTime} s restantes
                 </p>
@@ -1048,6 +1052,7 @@ export function HostLive() {
                     size={72}
                   />
                 </div>
+                <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="host" />
 
                 {question.type === 'poll' && (question.payload as { multiple?: boolean }).multiple && (
                   <p className="hostlive-progress">Plusieurs réponses possibles</p>
@@ -1106,6 +1111,7 @@ export function HostLive() {
                 <h2 ref={phaseHeadingRef} tabIndex={-1}>
                   Révélation : {question.prompt}
                 </h2>
+                <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="host" />
                 <p className="visually-hidden" role="status" aria-live="polite">
                   {revealStatus}
                 </p>

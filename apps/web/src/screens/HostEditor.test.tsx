@@ -15,7 +15,19 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 // `const` declarations) — anything they reference must come from
 // `vi.hoisted` (not a plain top-level `const`), or the reference throws
 // "Cannot access '...' before initialization" at collection time.
-const { mockUpdateQuestion, baseQuestion, fixtures } = vi.hoisted(() => ({
+const {
+  mockUpdateQuestion,
+  mockListQuestions,
+  mockCreateQuestion,
+  mockDeleteQuestion,
+  mockReorderQuestions,
+  baseQuestion,
+  fixtures,
+} = vi.hoisted(() => ({
+  mockListQuestions: vi.fn(),
+  mockCreateQuestion: vi.fn(),
+  mockDeleteQuestion: vi.fn(),
+  mockReorderQuestions: vi.fn(),
   fixtures: { quizSource: null as unknown, questionSource: null as unknown, archivedAt: null as string | null },
   mockUpdateQuestion: vi.fn(() => Promise.resolve({ id: 'quest1' })),
   baseQuestion: {
@@ -24,6 +36,7 @@ const { mockUpdateQuestion, baseQuestion, fixtures } = vi.hoisted(() => ({
     type: 'mcq' as const,
     prompt: 'Une question',
     media: null,
+    mediaAlt: null,
     timeLimit: 20,
     readingTime: 5,
     orderIndex: 0,
@@ -52,10 +65,10 @@ vi.mock('../api/quizzes', () => ({
       archivedAt: fixtures.archivedAt,
     }),
   ),
-  listQuestions: vi.fn(() => Promise.resolve([{ ...baseQuestion, source: fixtures.questionSource }])),
-  createQuestion: vi.fn(),
-  deleteQuestion: vi.fn(),
-  reorderQuestions: vi.fn(),
+  listQuestions: mockListQuestions,
+  createQuestion: mockCreateQuestion,
+  deleteQuestion: mockDeleteQuestion,
+  reorderQuestions: mockReorderQuestions,
   updateQuestion: mockUpdateQuestion,
   updateQuiz: vi.fn(),
   archiveQuiz: vi.fn(),
@@ -69,11 +82,22 @@ vi.mock('../api/auth', () => ({
   sendVerificationEmail: (...args: unknown[]) => mockSendVerificationEmail(...args),
 }))
 
+const { mockUploadMedia } = vi.hoisted(() => ({ mockUploadMedia: vi.fn() }))
+vi.mock('../api/media', () => ({ uploadMedia: mockUploadMedia }))
+// Pas de canvas dans jsdom : le fichier est envoyé tel quel.
+vi.mock('../media/downscale', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../media/downscale')>()),
+  prepareImageForUpload: (file: File) => Promise.resolve({ blob: file, transformed: false }),
+}))
+
 vi.mock('../realtime/GameSocketProvider', () => ({
   useSharedGameSocket: () => ({ emitAck: vi.fn(), connected: true, socket: {}, on: vi.fn() }),
 }))
 
 import { HostEditor } from './HostEditor'
+
+const defaultQuestions = () => Promise.resolve([{ ...baseQuestion, source: fixtures.questionSource }])
+mockListQuestions.mockImplementation(defaultQuestions)
 
 function renderEditor() {
   return render(
@@ -340,5 +364,102 @@ describe('HostEditor : sondage', () => {
     ) as HTMLElement
     fireEvent.click(within(notice).getByRole('button', { name: "Renvoyer l'e-mail" }))
     await waitFor(() => expect(within(notice).getByText('E-mail envoyé')).toBeInTheDocument())
+  })
+})
+
+describe('HostEditor — image de la question', () => {
+  const withImage = { ...baseQuestion, media: '/uploads/t/a.png', mediaAlt: 'Un manchot' }
+  beforeEach(() => {
+    vi.clearAllMocks()
+    mockListQuestions.mockResolvedValue([withImage])
+  })
+  afterEach(() => {
+    cleanup()
+    mockListQuestions.mockImplementation(defaultQuestions)
+  })
+
+  it("retirer l'image envoie un PATCH avec media et mediaAlt à null", async () => {
+    renderEditor()
+    fireEvent.click(await screen.findByRole('button', { name: "Retirer l'image" }))
+    await waitFor(
+      () =>
+        expect(mockUpdateQuestion).toHaveBeenCalledWith(
+          'quiz1',
+          'quest1',
+          expect.objectContaining({ media: null, mediaAlt: null }),
+        ),
+      { timeout: 2000 },
+    )
+  })
+
+  it("changer le type d'une question conserve son image", async () => {
+    mockCreateQuestion.mockResolvedValue({ ...withImage, id: 'quest2', type: 'truefalse', payload: { correct: true } })
+    mockDeleteQuestion.mockResolvedValue(undefined)
+    mockReorderQuestions.mockResolvedValue(undefined)
+    renderEditor()
+    fireEvent.change(await screen.findByLabelText('Type de question'), { target: { value: 'truefalse' } })
+    fireEvent.click(await screen.findByRole('button', { name: 'Changer de type' }))
+    await waitFor(() =>
+      expect(mockCreateQuestion).toHaveBeenCalledWith(
+        'quiz1',
+        expect.objectContaining({ media: '/uploads/t/a.png', mediaAlt: 'Un manchot' }),
+      ),
+    )
+  })
+
+  it('annuler une suppression recrée la question avec son image', async () => {
+    mockCreateQuestion.mockResolvedValue({ ...withImage, id: 'quest3' })
+    mockDeleteQuestion.mockResolvedValue(undefined)
+    mockReorderQuestions.mockResolvedValue(undefined)
+    renderEditor()
+    fireEvent.click(await screen.findByRole('button', { name: 'Supprimer la question' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Annuler' }))
+    await waitFor(() =>
+      expect(mockCreateQuestion).toHaveBeenCalledWith(
+        'quiz1',
+        expect.objectContaining({ media: '/uploads/t/a.png', mediaAlt: 'Un manchot' }),
+      ),
+    )
+  })
+})
+
+describe("HostEditor — envoi d'image et changement de question", () => {
+  const second = { ...baseQuestion, id: 'quest2', prompt: 'Deuxième question', orderIndex: 1 }
+  beforeEach(() => {
+    vi.clearAllMocks()
+    mockListQuestions.mockResolvedValue([baseQuestion, second])
+  })
+  afterEach(() => {
+    cleanup()
+    mockListQuestions.mockImplementation(defaultQuestions)
+  })
+
+  it("un envoi terminé après être passé à une autre question est enregistré sur la question d'origine", async () => {
+    let resolveUpload: (value: { url: string }) => void = () => {}
+    mockUploadMedia.mockReturnValue(
+      new Promise((resolve) => {
+        resolveUpload = resolve
+      }),
+    )
+    renderEditor()
+    fireEvent.change(await screen.findByTestId('question-image-file'), {
+      target: { files: [new File(['x'], 'photo.png', { type: 'image/png' })] },
+    })
+    await waitFor(() => expect(mockUploadMedia).toHaveBeenCalled())
+    fireEvent.click(screen.getByRole('button', { name: /Deuxième question/ }))
+    expect(await screen.findByDisplayValue('Deuxième question')).toBeInTheDocument()
+    // Le champ image est propre à chaque question : pas d'« Envoi… » hérité de la première.
+    expect(screen.getByRole('button', { name: 'Envoyer une image' })).toBeEnabled()
+
+    resolveUpload({ url: '/uploads/t/nouvelle.png' })
+
+    await waitFor(() =>
+      expect(mockUpdateQuestion).toHaveBeenCalledWith(
+        'quiz1',
+        'quest1',
+        expect.objectContaining({ media: '/uploads/t/nouvelle.png' }),
+      ),
+    )
+    expect(mockUpdateQuestion).not.toHaveBeenCalledWith('quiz1', 'quest2', expect.anything())
   })
 })

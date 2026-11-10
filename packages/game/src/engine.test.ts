@@ -662,7 +662,40 @@ describe('game engine — cycle déterministe complet', () => {
       expect(view).not.toHaveProperty('options')
       expect(view).not.toHaveProperty('payload')
       expect(view.prompt).toBeDefined()
-      expect(view).toEqual({ prompt: 'Capitale du Japon ?', index: 0, total: 1, readingTime: 6 })
+      expect(view).toEqual({
+        prompt: 'Capitale du Japon ?',
+        index: 0,
+        total: 1,
+        readingTime: 6,
+        media: null,
+        mediaAlt: null,
+      })
+    })
+  })
+
+  describe('media et mediaAlt dans les projections', () => {
+    it('readingView et playerQuestionView transportent media et mediaAlt', async () => {
+      const withMedia: EngineQuestion = { ...readingQuestion, media: '/uploads/t/a.png', mediaAlt: 'Un manchot' }
+      const session = await engine.createSession({ quizId: 'q', tenantId: 't', hostId: 'h', questions: [withMedia] })
+      const reading = await engine.startQuestion(session.id)
+      expect(engine.readingView(reading)).toMatchObject({ media: '/uploads/t/a.png', mediaAlt: 'Un manchot' })
+      const asked = await engine.revealAnswers(session.id)
+      expect(engine.playerQuestionView(asked)).toMatchObject({ media: '/uploads/t/a.png', mediaAlt: 'Un manchot' })
+    })
+
+    it('état ancien sans media : les projections renvoient null', async () => {
+      // readingQuestion n'a pas les clés media/mediaAlt, comme un JSON persisté avant cette version
+      expect(readingQuestion).not.toHaveProperty('media')
+      const session = await engine.createSession({
+        quizId: 'q',
+        tenantId: 't',
+        hostId: 'h',
+        questions: [readingQuestion],
+      })
+      const reading = await engine.startQuestion(session.id)
+      expect(engine.readingView(reading)).toMatchObject({ media: null, mediaAlt: null })
+      const asked = await engine.revealAnswers(session.id)
+      expect(engine.playerQuestionView(asked)).toMatchObject({ media: null, mediaAlt: null })
     })
   })
 

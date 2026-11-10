@@ -12,7 +12,7 @@ import {
 import type { AppConfig } from '@splootlabs/shared'
 import { validateQuestionPayload, questionTypes, type QuestionType } from '@splootlabs/quiz'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
-import { LIMITS, tooLong, isSafeMedia } from '../validation.js'
+import { LIMITS, tooLong, isUploadedMedia } from '../validation.js'
 
 type Deps = { systemDb: Db; appDb: Db; config: AppConfig }
 
@@ -52,6 +52,7 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
             readingTime?: unknown
             payload?: unknown
             media?: unknown
+            mediaAlt?: unknown
           }
         | undefined
 
@@ -81,9 +82,17 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       }
 
       const media = isNonEmptyString(body?.media) ? body.media : undefined
-      if (media !== undefined && !isSafeMedia(media)) {
-        return reply.code(400).send({ error: 'media invalide (URL http(s) ou référence relative attendue).' })
+      if (media !== undefined && !isUploadedMedia(media, context.tenantId)) {
+        return reply.code(400).send({ error: 'media invalide (image envoyée attendue).' })
       }
+
+      if (body?.mediaAlt != null && typeof body.mediaAlt !== 'string') {
+        return reply.code(400).send({ error: 'mediaAlt doit être une chaîne ou null.' })
+      }
+      if (tooLong(body?.mediaAlt, LIMITS.mediaAlt)) {
+        return reply.code(400).send({ error: `Le texte alternatif est trop long (${LIMITS.mediaAlt} caractères max).` })
+      }
+      const mediaAlt = isNonEmptyString(body?.mediaAlt) ? body.mediaAlt : undefined
 
       // Réponse envoyée APRÈS le COMMIT (hors du callback) : voir POST /api/quizzes.
       const question = await withTenantTx(appDb, context, (scope) =>
@@ -94,6 +103,7 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
           readingTime: isNonNegativeInt(body.readingTime) ? body.readingTime : undefined,
           payload: validatedPayload,
           media,
+          mediaAlt,
         }),
       )
       if (!question) return reply.code(404).send({ error: 'Quiz introuvable.' })
@@ -129,7 +139,14 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
       if (!context) return
 
       const body = request.body as
-        | { prompt?: unknown; timeLimit?: unknown; readingTime?: unknown; payload?: unknown; media?: unknown }
+        | {
+            prompt?: unknown
+            timeLimit?: unknown
+            readingTime?: unknown
+            payload?: unknown
+            media?: unknown
+            mediaAlt?: unknown
+          }
         | undefined
 
       const patch: Partial<{
@@ -138,6 +155,7 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
         readingTime: number
         payload: unknown
         media: string | null
+        mediaAlt: string | null
       }> = {}
 
       if (body?.prompt !== undefined) {
@@ -161,10 +179,24 @@ export function registerQuestionRoutes(app: FastifyInstance, deps: Deps): void {
         if (body.media !== null && typeof body.media !== 'string') {
           return reply.code(400).send({ error: 'media doit être une chaîne ou null.' })
         }
-        if (typeof body.media === 'string' && !isSafeMedia(body.media)) {
-          return reply.code(400).send({ error: 'media invalide (URL http(s) ou référence relative attendue).' })
+        if (typeof body.media === 'string' && !isUploadedMedia(body.media, context.tenantId)) {
+          return reply.code(400).send({ error: 'media invalide (image envoyée attendue).' })
         }
         patch.media = body.media
+        // Retirer l'image retire aussi son texte alternatif, sauf si le corps en fournit un.
+        if (body.media === null && body.mediaAlt === undefined) patch.mediaAlt = null
+      }
+      if (body?.mediaAlt !== undefined) {
+        if (body.mediaAlt !== null && typeof body.mediaAlt !== 'string') {
+          return reply.code(400).send({ error: 'mediaAlt doit être une chaîne ou null.' })
+        }
+        if (tooLong(body.mediaAlt, LIMITS.mediaAlt)) {
+          return reply
+            .code(400)
+            .send({ error: `Le texte alternatif est trop long (${LIMITS.mediaAlt} caractères max).` })
+        }
+        // Chaîne vide ou blanche : pas de texte alternatif (comme au POST).
+        patch.mediaAlt = isNonEmptyString(body.mediaAlt) ? body.mediaAlt : null
       }
 
       return withTenantTx(appDb, context, async (scope) => {

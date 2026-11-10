@@ -212,6 +212,8 @@ function toEngineQuestion(row: {
   timeLimit: number
   readingTime: number
   payload: unknown
+  media: string | null
+  mediaAlt: string | null
 }): EngineQuestion {
   return {
     id: row.id,
@@ -221,6 +223,8 @@ function toEngineQuestion(row: {
     readingTime: row.readingTime,
     basePoints: DEFAULT_BASE_POINTS,
     payload: row.payload,
+    media: row.media,
+    mediaAlt: row.mediaAlt,
   }
 }
 

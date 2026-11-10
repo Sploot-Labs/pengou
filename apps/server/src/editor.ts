@@ -11,6 +11,8 @@ import { registerWorkspaceRoutes } from './routes/workspaces.js' // Slice 3a
 import { registerMemberRoutes } from './routes/members.js' // Slice 3b
 import { registerInvitationRoutes, type InvitationDeps } from './routes/invitations.js' // Slice 3b
 import { registerLibraryRoutes } from './routes/library.js' // Bibliothèque de questions
+import { registerMediaRoutes } from './routes/media.js'
+import { registerUploads } from './uploads.js'
 
 export function registerEditor(
   app: FastifyInstance,
@@ -38,6 +40,8 @@ export function registerEditor(
     invitationRateLimit: deps.invitationRateLimit,
   }) // Slice 3b : invitations, envoyées par e-mail
   registerLibraryRoutes(app, quotaDeps) // Bibliothèque de questions
+  registerMediaRoutes(app, quotaDeps) // images de question
+  registerUploads(app, deps.config.mediaDir) // service en lecture seule des images envoyées
 }
 // NOTE : les routes 3b (membres/invitations) sont enregistrées ci-dessus ; leurs fichiers sont
 // livrés dans le même chantier. Voir routes/members.ts, routes/invitations.ts, require-permission.ts.

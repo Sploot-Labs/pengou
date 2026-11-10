@@ -9,7 +9,7 @@ import { SanitizedLogController, serializeRequest } from './request-log.js'
 
 declare module 'fastify' {
   interface FastifyContextConfig {
-    /** Route d'un fichier du SPA (posé par registerStatic) : exemptée de la limite de débit. */
+    /** Fichier public du SPA ou image envoyée (posé par registerStatic et registerUploads) : exempté de la limite de débit. */
     spaAsset?: boolean
   }
 }

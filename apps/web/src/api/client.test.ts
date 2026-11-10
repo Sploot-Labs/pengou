@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { apiDelete, apiGet, apiPatch, apiPost, onTermsAcceptanceRequired } from './client.js'
+import { apiDelete, apiGet, apiPatch, apiPost, apiPostForm, ApiError, onTermsAcceptanceRequired } from './client.js'
 import { setActiveTenantId } from './activeTenant.js'
 
 function mockFetchOnce(status: number, body: unknown, ok = status >= 200 && status < 300) {
@@ -155,5 +155,29 @@ describe('client API, revalidation des CGU', () => {
     await expect(apiGet('/api/workspaces')).rejects.toMatchObject({ status: 403 })
     expect(listener).not.toHaveBeenCalled()
     unsubscribe()
+  })
+
+  it('apiPostForm envoie le FormData tel quel, sans Content-Type, avec x-tenant-id', async () => {
+    setActiveTenantId('t1')
+    mockFetchOnce(201, { url: '/uploads/t1/a.png' })
+    const form = new FormData()
+    form.append('file', new Blob(['x']), 'a.png')
+    const result = await apiPostForm<{ url: string }>('/api/media', form)
+    const [path, init] = (fetch as unknown as ReturnType<typeof vi.fn>).mock.calls[0]
+    expect(path).toBe('/api/media')
+    expect(init.method).toBe('POST')
+    expect(init.credentials).toBe('same-origin')
+    expect(init.body).toBe(form)
+    expect(init.headers['Content-Type']).toBeUndefined()
+    expect(init.headers['x-tenant-id']).toBe('t1')
+    expect(result).toEqual({ url: '/uploads/t1/a.png' })
+  })
+
+  it('apiPostForm lève ApiError avec le message serveur sur 413', async () => {
+    mockFetchOnce(413, { error: 'Image trop lourde (2 Mo max).' })
+    const err = (await apiPostForm('/api/media', new FormData()).catch((e) => e)) as ApiError
+    expect(err).toBeInstanceOf(ApiError)
+    expect(err.status).toBe(413)
+    expect(err.message).toBe('Image trop lourde (2 Mo max).')
   })
 })

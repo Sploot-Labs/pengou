@@ -11,6 +11,7 @@ import { ClosingView } from './Podium'
 import { PlayerPoll } from './PlayerPoll'
 import { PlayerWordcloud, type WordcloudAck } from './PlayerWordcloud'
 import { AnswerShape, AnswerTile, Logo, SoundToggle, TimerPill } from '../ui'
+import { QuestionImage } from '../ui/QuestionImage'
 
 /**
  * Parcours joueur réel, câblé sur la passerelle Socket.IO du serveur de jeu
@@ -41,6 +42,8 @@ interface QuestionShowPayload {
   total?: number
   /** Posé par le serveur sur le `question:show` rejoué à la reconnexion d'un joueur qui a déjà répondu. */
   alreadyAnswered?: boolean
+  media?: string | null
+  mediaAlt?: string | null
 }
 
 /** Projection « lecture seule » émise par `question:reading` (Task 3, moteur
@@ -929,6 +932,8 @@ export function PlayerLive() {
           <h1 className="player-question__prompt" tabIndex={-1} ref={promptRef}>
             {question.prompt}
           </h1>
+
+          <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="player" />
 
           <div className="player-question__spacer" />
 
