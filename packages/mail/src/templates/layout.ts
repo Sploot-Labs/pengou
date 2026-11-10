@@ -9,7 +9,9 @@ export const FONT = "-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
 
 /** Retire les barres finales de l'adresse de base. */
 export function trimBase(baseUrl: string): string {
-  return baseUrl.replace(/\/+$/, '')
+  let end = baseUrl.length
+  while (end > 0 && baseUrl[end - 1] === '/') end--
+  return baseUrl.slice(0, end)
 }
 
 /** Refuse tout lien d'action qui ne part pas de l'adresse publique de l'app. */
