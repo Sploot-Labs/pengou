@@ -184,3 +184,38 @@ describe('POST /api/media', () => {
     expect(res.statusCode).toBe(201)
   })
 })
+
+describe('POST /api/media : quota du workspace (multi)', () => {
+  it("refuse en 403 l'image qui dépasse le quota", async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'media-quota-'))
+    const config = loadConfig({ NODE_ENV: 'test', TENANCY_MODE: 'multi', MEDIA_DIR: dir, MEDIA_QUOTA_MB: '1' })
+    const auth = createAuth(ctx.db, {
+      secret: 'test-secret-at-least-32-chars-long!!',
+      baseURL: 'http://localhost:3000',
+      tenancyMode: config.tenancyMode,
+    })
+    const server = await buildServer(config, { dbStatus: () => 'up' })
+    await registerAuth(server, auth)
+    registerEditor(server, { systemDb: ctx.db, appDb: ctx.appDb, auth, config })
+    try {
+      const owner = await signUp(server, 'media-quota@example.com')
+      const workspaces = await server.inject({ method: 'GET', url: '/api/workspaces', headers: { cookie: owner } })
+      const tenantId = (workspaces.json() as { workspaces: Array<{ tenantId: string }> }).workspaces[0].tenantId
+      const body = await multipart(png(600 * 1024), 'a.png')
+      const send = () =>
+        server.inject({
+          method: 'POST',
+          url: '/api/media',
+          headers: { cookie: owner, 'x-tenant-id': tenantId, 'content-type': body.contentType },
+          payload: body.payload,
+        })
+      expect((await send()).statusCode).toBe(201)
+      const refused = await send()
+      expect(refused.statusCode).toBe(403)
+      expect(refused.json()).toEqual({ error: 'Espace images du workspace plein (1 Mo max).' })
+    } finally {
+      await server.close()
+      rmSync(dir, { recursive: true, force: true })
+    }
+  })
+})

@@ -7,11 +7,12 @@ import type { Db } from '@splootlabs/db'
 import type { AppConfig } from '@splootlabs/shared'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
 import { sniffImageType } from '../media-sniff.js'
+import { mediaQuotaRefusal } from '../media-quota.js'
 
 /** Taille maximale d'une image envoyée : 2 Mio (2 097 152 octets inclus). */
 export const MEDIA_MAX_BYTES = 2 * 1024 * 1024
 
-type Deps = { systemDb: Db; config: AppConfig }
+type Deps = { systemDb: Db; config: AppConfig; mailEnabled?: boolean }
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
@@ -62,8 +63,16 @@ export function registerMediaRoutes(app: FastifyInstance, deps: Deps): void {
         return reply.code(415).send({ error: 'Format non pris en charge (PNG, JPEG, WebP ou GIF).' })
       }
 
-      const fileName = `${randomUUID()}.${kind}`
       const dir = join(config.mediaDir, context.tenantId)
+      const refusal = await mediaQuotaRefusal(dir, bytes.length, {
+        tenancyMode: config.tenancyMode,
+        mailEnabled: deps.mailEnabled === true,
+        emailVerified: request.user.emailVerified,
+        quotaBytes: config.mediaQuotaBytes,
+      })
+      if (refusal) return reply.code(403).send({ error: refusal })
+
+      const fileName = `${randomUUID()}.${kind}`
       await mkdir(dir, { recursive: true })
       await writeFile(join(dir, fileName), bytes, { flag: 'wx' })
       return reply.code(201).send({ url: `/uploads/${context.tenantId}/${fileName}` })

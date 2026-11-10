@@ -40,7 +40,7 @@ export function registerEditor(
     invitationRateLimit: deps.invitationRateLimit,
   }) // Slice 3b : invitations, envoyées par e-mail
   registerLibraryRoutes(app, quotaDeps) // Bibliothèque de questions
-  registerMediaRoutes(app, { systemDb: deps.systemDb, config: deps.config }) // images de question
+  registerMediaRoutes(app, quotaDeps) // images de question
   registerUploads(app, deps.config.mediaDir) // service en lecture seule des images envoyées
 }
 // NOTE : les routes 3b (membres/invitations) sont enregistrées ci-dessus ; leurs fichiers sont

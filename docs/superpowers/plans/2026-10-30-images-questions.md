@@ -12,6 +12,8 @@
 
 Pas de spec écrite : les décisions ci-dessous, prises par le propriétaire du produit, en tiennent lieu.
 
+Mise à jour du 2026-11-10 : le collage d'une adresse https (décision 1) est abandonné avant livraison, le téléphone d'un joueur ne devant jamais contacter un site tiers. Seuls les fichiers envoyés sont acceptés, éditeur et API compris. Un quota d'espace par workspace s'ajoute (`MEDIA_QUOTA_MB`, 100 Mo par défaut, 10 Mo tant que l'adresse e-mail n'est pas confirmée).
+
 1. Deux façons d'ajouter une image dans l'éditeur : envoyer un fichier, ou coller une URL https. Une image par question au plus, facultative, avec un texte alternatif (nouvelle colonne `media_alt`, 200 car. max) pour l'accessibilité.
 2. Envoi : `POST /api/media` (utilisateur connecté avec le droit d'éditer des quiz dans le tenant actif), multipart via `@fastify/multipart`. Formats acceptés PNG, JPEG, WebP, GIF, vérifiés par les octets magiques et non par l'extension ou le Content-Type ; SVG refusé (risque XSS). Taille max 2 Mo. Pas de redimensionnement côté serveur (pas de dépendance native) ; le navigateur réduit l'image avant envoi si elle dépasse 1600 px de large, via un canvas.
 3. Stockage sur disque local dans `MEDIA_DIR` (nouvelle variable, défaut raisonnable en dev), sous `<tenantId>/<uuid>.<ext>`, servi publiquement en lecture sur `/uploads/<tenantId>/<uuid>.<ext>` avec cache long et `X-Content-Type-Options: nosniff` (les joueurs n'ont pas de compte, la non-devinabilité de l'uuid suffit). Volume Docker dédié dans les deux fichiers compose et mention de la sauvegarde dans `docs/devops.md`. `isSafeMedia` continue d'accepter ces chemins relatifs.
