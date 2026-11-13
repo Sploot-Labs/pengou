@@ -3,6 +3,7 @@ import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-li
 import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
 import { MotionProvider } from '../motion/index.js'
+import { PAGE_LOAD_ID } from '../realtime/pageLoad'
 import type { SessionStatus, SessionSummary } from '../api/sessions'
 
 vi.mock('../api/quizzes', () => ({
@@ -354,7 +355,7 @@ describe('Home', () => {
     await waitFor(() => expect(mockEmitAck).toHaveBeenCalledWith('host:create', { quizId: 'q1' }))
     await waitFor(() =>
       expect(mockNavigate).toHaveBeenCalledWith('/host/s1', {
-        state: { pin: '123456', quizTitle: 'Culture G' },
+        state: { pin: '123456', quizTitle: 'Culture G', launch: PAGE_LOAD_ID },
       }),
     )
   })

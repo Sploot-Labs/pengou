@@ -13,15 +13,23 @@ import { registerInvitationRoutes, type InvitationDeps } from './routes/invitati
 import { registerLibraryRoutes } from './routes/library.js' // Bibliothèque de questions
 import { registerMediaRoutes } from './routes/media.js'
 import { registerUploads } from './uploads.js'
+import { registerDemoRoutes } from './routes/demo.js'
 
 export function registerEditor(
   app: FastifyInstance,
   // `mailer` et les options d'envoi servent aux routes d'invitation ; sans mailer, l'envoi est
   // désactivé (routes de test qui n'en ont pas besoin).
-  deps: { systemDb: Db; appDb: Db; auth: Auth; config: AppConfig; mailer?: Mailer } & Pick<
-    InvitationDeps,
-    'mailLogger' | 'resolver' | 'invitationRateLimit'
-  >,
+  // `now` : horloge de la partie de démonstration (tests).
+  deps: {
+    systemDb: Db
+    appDb: Db
+    auth: Auth
+    config: AppConfig
+    mailer?: Mailer
+    now?: () => number
+    /** Copie du quiz de démonstration, injectable (tests). */
+    demoCopyQuiz?: (tenantId: string, ownerId: string) => Promise<string>
+  } & Pick<InvitationDeps, 'mailLogger' | 'resolver' | 'invitationRateLimit'>,
 ): void {
   registerRequireUser(app, deps.auth, deps.config.legal?.termsVersion ?? null)
   const routeDeps = { systemDb: deps.systemDb, appDb: deps.appDb, config: deps.config }
@@ -42,6 +50,8 @@ export function registerEditor(
   registerLibraryRoutes(app, quotaDeps) // Bibliothèque de questions
   registerMediaRoutes(app, quotaDeps) // images de question
   registerUploads(app, deps.config.mediaDir) // service en lecture seule des images envoyées
+  // Partie de démonstration sans compte.
+  registerDemoRoutes(app, { ...routeDeps, auth: deps.auth, now: deps.now, copyQuiz: deps.demoCopyQuiz })
 }
 // NOTE : les routes 3b (membres/invitations) sont enregistrées ci-dessus ; leurs fichiers sont
 // livrés dans le même chantier. Voir routes/members.ts, routes/invitations.ts, require-permission.ts.

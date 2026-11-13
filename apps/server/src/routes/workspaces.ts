@@ -22,7 +22,8 @@ export function registerWorkspaceRoutes(app: FastifyInstance, deps: Deps): void 
 
   // Liste des workspaces de l'utilisateur + le mode de tenancy (le client s'en sert pour
   // n'afficher le switcher qu'en multi).
-  app.get('/api/workspaces', { preHandler: requireUser }, async (request) => {
+  // Ouverte à l'hôte invité : l'écran hôte y lit l'espace de sa démonstration.
+  app.get('/api/workspaces', { preHandler: requireUser, config: { guestAllowed: true } }, async (request) => {
     const workspaces = await listUserWorkspaces(systemDb, request.user.id)
     return { tenancyMode: config.tenancyMode, workspaces }
   })

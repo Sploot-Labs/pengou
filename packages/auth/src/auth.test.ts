@@ -1,6 +1,6 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import { eq } from 'drizzle-orm'
-import { startTestDb, runMigrations, schema, ensureDefaultTenant } from '@splootlabs/db'
+import { startTestDb, runMigrations, schema, ensureDefaultTenant, listUserWorkspaces } from '@splootlabs/db'
 import { MemoryMailer } from '@splootlabs/mail'
 import { createAuth, type Auth } from './auth.js'
 
@@ -88,5 +88,48 @@ describe("Better Auth et l'envoi d'e-mails", () => {
       '/request-password-reset': { window: 600, max: 3 },
       '/send-verification-email': { window: 600, max: 3 },
     })
+  })
+})
+
+describe('Compte invité de la démonstration', () => {
+  const multi = () =>
+    createAuth(ctx.db, {
+      secret: 'test-secret-at-least-32-chars-long!!',
+      baseURL: 'http://localhost:3000',
+      tenancyMode: 'multi',
+    })
+
+  /** En-tête Cookie rejouant les cookies posés par une réponse de Better Auth. */
+  const cookieFrom = (headers: Headers) =>
+    headers
+      .getSetCookie()
+      .map((c) => c.split(';')[0])
+      .join('; ')
+
+  it('crée un invité sans adresse réelle, avec son espace en mode multi', async () => {
+    const { response } = await multi().api.signInAnonymous({ headers: new Headers(), returnHeaders: true })
+    const [row] = await ctx.db.select().from(schema.user).where(eq(schema.user.id, response!.user.id))
+    expect(row.isAnonymous).toBe(true)
+    expect(row.name).toBe('Invité')
+    expect(row.email.endsWith('@invite.invalid')).toBe(true)
+    expect(await listUserWorkspaces(ctx.db, row.id)).toHaveLength(1)
+  })
+
+  it("laisse l'invité en place quand un compte ordinaire est créé avec son cookie", async () => {
+    const guestAuth = multi()
+    const { headers, response } = await guestAuth.api.signInAnonymous({ headers: new Headers(), returnHeaders: true })
+    const guestId = response!.user.id
+
+    const signUp = await guestAuth.api.signUpEmail({
+      body: { email: 'apres-demo@pengou.app', password: 'motdepasse-solide-123', name: 'Après Démo' },
+      headers: new Headers({ cookie: cookieFrom(headers) }),
+    })
+
+    const [guest] = await ctx.db.select().from(schema.user).where(eq(schema.user.id, guestId))
+    expect(guest?.isAnonymous).toBe(true)
+    const [created] = await ctx.db.select().from(schema.user).where(eq(schema.user.id, signUp.user.id))
+    expect(created.isAnonymous).toBe(false)
+    expect(created.id).not.toBe(guestId)
+    expect(await listUserWorkspaces(ctx.db, created.id)).toHaveLength(1)
   })
 })

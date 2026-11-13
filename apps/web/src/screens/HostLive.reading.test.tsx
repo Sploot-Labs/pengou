@@ -2,6 +2,7 @@
 import { act, cleanup, render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { PAGE_LOAD_ID } from '../realtime/pageLoad'
 import { HostLive } from './HostLive'
 
 /**
@@ -43,7 +44,9 @@ vi.mock('../realtime/GameSocketProvider', () => ({
  * la partie démarre directement en 'lobby'. */
 function renderHostLive() {
   return render(
-    <MemoryRouter initialEntries={[{ pathname: '/host/s1', state: { pin: '1234', quizTitle: 'Quiz Test' } }]}>
+    <MemoryRouter
+      initialEntries={[{ pathname: '/host/s1', state: { pin: '1234', quizTitle: 'Quiz Test', launch: PAGE_LOAD_ID } }]}
+    >
       <Routes>
         <Route path="/host/:sessionId" element={<HostLive />} />
       </Routes>

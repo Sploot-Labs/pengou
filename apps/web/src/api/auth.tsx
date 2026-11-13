@@ -24,6 +24,8 @@ export interface User {
   email: string
   name?: string | null
   emailVerified: boolean
+  /** Hôte invité de la partie de démonstration : compte sans adresse, limité à l'écran hôte. */
+  isAnonymous?: boolean | null
   [key: string]: unknown
 }
 
@@ -196,4 +198,10 @@ export function useSession(): UseSessionResult {
     throw new Error('useSession() must be used within a <SessionProvider> (see AppShell.tsx)')
   }
   return ctx
+}
+
+/** Variante sans exigence de fournisseur : `null` hors de <SessionProvider>. Pour les composants
+ * d'appoint montés dans des écrans qui, eux, ne dépendent pas de la session. */
+export function useSessionOptional(): UseSessionResult | null {
+  return useContext(SessionContext)
 }

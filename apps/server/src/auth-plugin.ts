@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify'
 import { toNodeHandler, fromNodeHeaders } from 'better-auth/node'
 import type { Auth } from '@splootlabs/auth'
-import type { LegalConfig } from '@splootlabs/shared'
+import type { AppConfig, LegalConfig } from '@splootlabs/shared'
 import { termsAcceptanceRequired } from './legal.js'
 
 // NOTE(déviation) : le brief prévoyait `fastify-better-auth` (`FastifyBetterAuth` +
@@ -16,7 +16,11 @@ import { termsAcceptanceRequired } from './legal.js'
 export async function registerAuth(
   app: FastifyInstance,
   auth: Auth,
-  options: { legal?: LegalConfig | null; mailEnabled?: boolean } = {},
+  options: {
+    legal?: LegalConfig | null
+    mailEnabled?: boolean
+    demo?: Pick<AppConfig['demo'], 'enabled' | 'maxPlayers'>
+  } = {},
 ): Promise<void> {
   const legal = options.legal ?? null
   const authHandler = toNodeHandler(auth)
@@ -41,10 +45,13 @@ export async function registerAuth(
     })
   })
 
-  // Publique : ce que le web peut proposer (mot de passe oublié, bandeau de confirmation).
-  // Aucun détail sur le transport.
+  // Publique : ce que le web peut proposer (mot de passe oublié, bandeau de confirmation, partie
+  // de démonstration sans compte). Aucun détail sur le transport.
   const mailEnabled = options.mailEnabled ?? false
-  app.get('/api/auth-features', async () => ({ mailEnabled }))
+  // `demoMaxPlayers` : le nombre de joueurs que l'écran /demo annonce au visiteur.
+  const demoEnabled = options.demo?.enabled ?? false
+  const demoMaxPlayers = options.demo?.maxPlayers ?? 30
+  app.get('/api/auth-features', async () => ({ mailEnabled, demoEnabled, demoMaxPlayers }))
 
   // Sonde de session : renvoie l'utilisateur courant, ou 401. Reste ouverte pendant la
   // revalidation des CGU et indique au client s'il doit afficher l'écran d'acceptation.

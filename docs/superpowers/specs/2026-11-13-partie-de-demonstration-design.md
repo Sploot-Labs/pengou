@@ -1,6 +1,6 @@
 # Partie de démonstration sans compte
 
-Date : 2026-11-13. Statut : proposition issue de l'audit SEO du 12 novembre 2026, en attente de l'accord de l'utilisateur. Rien n'est codé.
+Date : 2026-11-13. Statut : proposition issue de l'audit SEO du 12 novembre 2026, acceptée par l'utilisateur le 13 novembre 2026 (décisions en fin de document). Plan d'implémentation : `docs/superpowers/plans/2026-11-13-partie-de-demonstration.md`.
 
 ## Intention
 
@@ -12,7 +12,7 @@ L'application reste en noindex. La page qui se classe sur ces recherches vit sur
 
 ## Parcours
 
-Le site pose un bouton « Essayer sans compte » vers `https://app.pengou.fr/demo?from=<slug-de-page>`. L'écran `/demo` tient en une phrase, un bouton « Lancer la démonstration » et la mention des conditions d'utilisation. Le clic sur ce bouton, et lui seul, crée la partie : une simple visite de l'URL (robot, aperçu de lien dans une messagerie) ne crée rien.
+Le site pose un bouton « Essayer sans compte » vers `https://app.pengou.fr/demo?from=<slug-de-page>`. L'écran `/demo` tient en une phrase, la case « J'ai 15 ans ou plus », la mention des conditions d'utilisation et un bouton « Lancer la démonstration ». Le clic sur ce bouton, et lui seul, crée la partie : une simple visite de l'URL (robot, aperçu de lien dans une messagerie) ne crée rien.
 
 Le serveur crée alors un hôte invité, lui attribue le quiz d'exemple de cinq questions et ouvre la partie. Le navigateur arrive sur `/host/:sessionId`, l'écran de salon existant, avec le code, le QR code et le lien du grand écran. Tout ce qui suit (questions, classement, podium, écran joueur) est l'application actuelle, sans variante.
 
@@ -24,7 +24,7 @@ Une partie de démonstration accueille 30 joueurs au plus, la taille d'une class
 
 Elle vit une heure au plus après sa création, et s'arrête après trente minutes sans activité (le balayage existant). L'hôte invité peut la relancer tant que son accès dure, soit vingt-quatre heures, mais n'anime qu'une partie à la fois.
 
-Rien n'est sauvegardé : pas d'éditeur, pas de bibliothèque, pas de rapport, pas d'historique. L'hôte invité, son quiz, sa partie, les pseudos et les réponses sont supprimés dans les vingt-quatre heures.
+Rien n'est sauvegardé : pas d'éditeur, pas de bibliothèque, pas de rapport, pas d'historique. L'hôte invité, son quiz, sa partie, les pseudos et les réponses sont supprimés entre vingt-quatre et vingt-cinq heures après la création de l'invité (la purge passe toutes les heures et attend la fin d'une partie encore en cours).
 
 L'instance n'accepte que 20 parties de démonstration simultanées. Au-delà, l'écran `/demo` explique que la démonstration est très demandée et propose de créer un compte gratuit.
 
@@ -42,13 +42,23 @@ Une route `POST /api/demo`, protégée par le contrôle d'origine existant, cré
 
 Un invité est restreint côté serveur, pas seulement dans l'interface. Les routes de l'éditeur, de la bibliothèque, des workspaces et des invitations lui répondent 403. `host:create` et `host:relaunch` n'acceptent de lui que son quiz de démonstration. Le plafond de joueurs devient le plus petit de `MAX_PLAYERS_PER_SESSION` et de `DEMO_MAX_PLAYERS` quand l'hôte est invité : la vérification existe déjà (`seatsTaken` dans `game-gateway.ts`), seule la borne change.
 
-Un balayage périodique, sur le modèle de celui des parties inactives, supprime les invités de plus de vingt-quatre heures avec leur workspace. La suppression du workspace emporte par cascade le quiz, la partie, les joueurs et les réponses.
+Un balayage périodique, sur le modèle de celui des parties inactives, supprime les invités de plus de vingt-quatre heures avec leur workspace. La cascade du workspace ne suffit pas (les questions, les joueurs et les réponses le référencent sans cascade) : le balayage supprime dans l'ordre les parties, avec leurs joueurs et leurs réponses, les quiz, avec leurs questions, puis le workspace et le compte.
 
 Quatre variables règlent la fonction : `DEMO_ENABLED` (faux par défaut, une instance auto-hébergée n'est pas concernée ; vrai sur app.pengou.fr), `DEMO_MAX_PLAYERS` (30), `DEMO_MAX_CONCURRENT` (20) et `DEMO_PER_IP_PER_HOUR` (5).
 
+### Précisions arrêtées en préparant le plan
+
+Seule la route `POST /api/demo` crée un invité : les deux points d'entrée que le plugin ajoute à Better Auth (`/api/auth/sign-in/anonymous` et `/api/auth/delete-anonymous-user`) ne sont jamais joignables en HTTP, que la fonction soit active ou non. Les budgets ne peuvent donc pas être contournés.
+
+`DEMO_ENABLED=true` exige `TENANCY_MODE=multi`. En mode single, l'invité deviendrait membre de l'unique espace de l'instance, et la purge ne doit jamais pouvoir toucher cet espace : le serveur refuse de démarrer avec cette combinaison.
+
+L'invité lit la liste de ses espaces et de ses quiz, parce que l'écran hôte en a besoin pour reprendre et relancer la partie. Toutes les autres routes protégées lui répondent 403.
+
+Une inscription faite après la démonstration crée un compte ordinaire, sans lien avec le compte invité. Celui-ci n'est pas supprimé à ce moment : la purge s'en charge, comme pour les autres.
+
 ### Conditions d'utilisation
 
-L'hôte invité utilise le service : les conditions d'utilisation s'appliquent à lui. L'écran `/demo` porte la phrase « En lançant la démonstration, vous acceptez les conditions d'utilisation », avec le lien, et le serveur enregistre la version acceptée sur le compte invité, comme pour une inscription. La case « J'ai 15 ans ou plus » est une question ouverte, plus bas.
+L'hôte invité utilise le service : les conditions d'utilisation s'appliquent à lui. L'écran `/demo` porte la phrase « En lançant la démonstration, vous acceptez les conditions d'utilisation », avec le lien, et le serveur enregistre la version acceptée sur le compte invité, comme pour une inscription. L'écran porte aussi la case « J'ai 15 ans ou plus », à cocher avant de lancer, comme à l'inscription : le serveur refuse la démonstration sans elle.
 
 ## Risques d'abus et parades
 
@@ -80,12 +90,12 @@ Le paramètre `from` du bouton du site est conservé jusqu'au compte invité, da
 
 Le site ajoute le bouton « Essayer sans compte » et, s'il vise ces recherches, une page dédiée. Son texte doit annoncer les limites réelles : 30 joueurs, cinq questions d'exemple, rien n'est conservé, un compte gratuit pour créer ses propres quiz.
 
-## Questions ouvertes
+## Décisions du 13 novembre 2026
 
-1. Faut-il la case « J'ai 15 ans ou plus » sur l'écran `/demo`, comme à l'inscription ? Elle a une raison juridique à l'inscription ; ici aucune donnée personnelle de l'hôte n'est collectée, mais c'est à l'utilisateur d'en décider.
-2. Les valeurs proposées (30 joueurs, une heure, 20 parties simultanées, cinq démonstrations par heure et par IP) conviennent-elles ?
-3. La démonstration joue-t-elle le quiz d'exemple de l'inscription, ou un quiz conçu pour l'effet de démonstration (images, questions plus ludiques) ?
-4. La fonction doit-elle rester éteinte par défaut en auto-hébergement, comme proposé ?
+1. L'écran `/demo` porte la case « J'ai 15 ans ou plus », comme l'inscription.
+2. Les valeurs proposées sont retenues : 30 joueurs, une heure, 20 parties simultanées, cinq démonstrations par heure et par IP.
+3. La démonstration joue le quiz d'exemple de l'inscription.
+4. La fonction reste éteinte par défaut ; app.pengou.fr l'active par `DEMO_ENABLED=true`.
 
 ## Découpage envisagé
 

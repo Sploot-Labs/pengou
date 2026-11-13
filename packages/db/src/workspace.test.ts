@@ -74,6 +74,18 @@ describe('createWorkspace', () => {
   })
 })
 
+describe('createWorkspace, créations simultanées', () => {
+  // Douze créations du même nom lisent toutes le même slug libre : onze butent sur l'unicité et
+  // doivent retenter, pas échouer. L'erreur de Postgres arrive enveloppée par drizzle.
+  it('donne un slug distinct à chacune, sans erreur', async () => {
+    const owners = await Promise.all(Array.from({ length: 12 }, (_, i) => makeUser(`simultane-${i}@example.org`)))
+    const created = await Promise.all(
+      owners.map((ownerId) => createWorkspace(ctx.db, { name: 'Salle commune', ownerId })),
+    )
+    expect(new Set(created.map((w) => w.slug)).size).toBe(12)
+  })
+})
+
 describe('listUserWorkspaces', () => {
   it('renvoie les workspaces de l’utilisateur avec son rôle', async () => {
     const uid = await makeUser('multi@pengou.app')

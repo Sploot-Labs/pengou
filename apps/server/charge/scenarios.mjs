@@ -11,6 +11,9 @@ export const SCENARIOS = {
   // Tailles de classe et d'amphithéâtre, une partie chacune : le chiffre « testé à N joueurs » que
   // le site vitrine peut citer pour une salle ordinaire. Quelques minutes.
   paliers: [palier(30, 1), palier(50, 1), palier(100, 1), palier(200, 1)],
+  // Le plafond de la partie de démonstration sans compte : vingt parties de 30 joueurs en même
+  // temps (DEMO_MAX_CONCURRENT et DEMO_MAX_PLAYERS). À jouer avant d'activer DEMO_ENABLED.
+  demo: [{ libelle: 'demo', joueurs: 30, parties: 20, cadence: 25, essais: 1 }],
   // Le protocole du rapport du 31 octobre 2026 : toute l'échelle, deux essais par palier.
   complet: [
     palier(300, 2),

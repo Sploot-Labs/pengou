@@ -7,6 +7,7 @@ describe('isSpaRoute', () => {
     '/login',
     '/signup',
     '/signup/',
+    '/demo',
     '/join',
     '/play',
     '/quizzes/abc-123',

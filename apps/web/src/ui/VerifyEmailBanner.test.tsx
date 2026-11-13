@@ -3,7 +3,7 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 import { MemoryRouter } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-let user: { email: string; emailVerified: boolean } | null = null
+let user: { email: string; emailVerified: boolean; isAnonymous?: boolean } | null = null
 let mailEnabled = true
 const refresh = vi.fn()
 const sendVerificationEmail = vi.fn()
@@ -53,6 +53,12 @@ describe('VerifyEmailBanner', () => {
       'compte confirmé',
       () => {
         user = { email: 'a@b.fr', emailVerified: true }
+      },
+    ],
+    [
+      'hôte invité de la démonstration',
+      () => {
+        user = { email: 'temp-g1@invite.invalid', emailVerified: false, isAnonymous: true }
       },
     ],
     [

@@ -53,6 +53,12 @@ services:
       ROBOTS_NOINDEX: ${ROBOTS_NOINDEX:-true}
       # Plafond de joueurs par partie (voir docs/charge).
       MAX_PLAYERS_PER_SESSION: ${MAX_PLAYERS_PER_SESSION:-640}
+      # Démonstration sans compte (écran /demo) : éteinte par défaut, demande TENANCY_MODE=multi.
+      DEMO_ENABLED: ${DEMO_ENABLED:-false}
+      # Joueurs par démonstration, démonstrations simultanées, démonstrations par IP et par heure.
+      DEMO_MAX_PLAYERS: ${DEMO_MAX_PLAYERS:-30}
+      DEMO_MAX_CONCURRENT: ${DEMO_MAX_CONCURRENT:-20}
+      DEMO_PER_IP_PER_HOUR: ${DEMO_PER_IP_PER_HOUR:-5}
       # Envoi d'e-mails (optionnel, voir docs/devops.md, section « Envoi d'e-mails ») : sans
       # MAIL_TRANSPORT, aucun e-mail n'est envoyé. Une valeur vide équivaut à une valeur absente.
       MAIL_TRANSPORT: ${MAIL_TRANSPORT:-}

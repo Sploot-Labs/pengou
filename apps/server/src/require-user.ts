@@ -7,7 +7,7 @@ import { termsAcceptanceRequired, TERMS_REQUIRED_BODY } from './legal.js'
 
 declare module 'fastify' {
   interface FastifyRequest {
-    user: { id: string; email: string; name: string; emailVerified: boolean }
+    user: { id: string; email: string; name: string; emailVerified: boolean; isAnonymous: boolean }
   }
   interface FastifyInstance {
     auth: Auth
@@ -15,6 +15,9 @@ declare module 'fastify' {
     legalTermsVersion: string | null
   }
 }
+
+/** Code du refus opposé à un hôte invité (partie de démonstration) hors des routes qui lui sont ouvertes. */
+export const GUEST_NOT_ALLOWED = 'GUEST_NOT_ALLOWED'
 
 /** Contexte tenant résolu pour une requête : le tenant applicable + `ownerId` role-aware
  * (owner/admin → undefined = tout le tenant ; member → son userId). Utilisé pour construire
@@ -32,6 +35,9 @@ export function registerRequireUser(app: FastifyInstance, auth: Auth, termsVersi
  * `/api/auth/*`), la déconnexion et `POST /api/legal/accept`. Les sockets de jeu n'y passent pas
  * non plus : un hôte en pleine partie n'est jamais coupé, et les joueurs n'ont pas de compte.
  *
+ * Un hôte invité (partie de démonstration, `user.isAnonymous`) n'anime que sa démonstration : il est
+ * refusé (403 `GUEST_NOT_ALLOWED`) partout, sauf sur les routes déclarées `config: { guestAllowed: true }`.
+ *
  * Un refus renvoie `reply` : c'est ce qui dit à Fastify que la requête est terminée. Sans cela, dès
  * qu'un hook `onSend` asynchrone existe, la réponse ne part pas dans le même tour et Fastify
  * exécuterait le gestionnaire de la route, sans utilisateur.
@@ -45,11 +51,18 @@ export async function requireUser(request: FastifyRequest, reply: FastifyReply):
   if (termsAcceptanceRequired(session.user, currentVersion)) {
     return reply.code(403).send(TERMS_REQUIRED_BODY)
   }
+  const isAnonymous = session.user.isAnonymous === true
+  if (isAnonymous && request.routeOptions.config.guestAllowed !== true) {
+    return reply
+      .code(403)
+      .send({ error: 'Créez un compte gratuit pour utiliser cette fonction.', code: GUEST_NOT_ALLOWED })
+  }
   request.user = {
     id: session.user.id,
     email: session.user.email,
     name: session.user.name,
     emailVerified: session.user.emailVerified === true,
+    isAnonymous,
   }
 }
 

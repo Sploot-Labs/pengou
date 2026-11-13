@@ -9,6 +9,7 @@ export const SPA_ROUTES = [
   '/',
   '/login',
   '/signup',
+  '/demo',
   '/forgot-password',
   '/reset-password',
   '/quizzes/:quizId',

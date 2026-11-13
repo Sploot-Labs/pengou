@@ -240,7 +240,7 @@ describe('GET /api/auth-features', () => {
     const app = await buildApp(new MemoryMailer())
     const res = await app.inject({ method: 'GET', url: '/api/auth-features' })
     expect(res.statusCode).toBe(200)
-    expect(res.json()).toEqual({ mailEnabled: true })
+    expect(res.json()).toEqual({ mailEnabled: true, demoEnabled: false, demoMaxPlayers: 30 })
     await app.close()
   })
 
@@ -250,7 +250,7 @@ describe('GET /api/auth-features', () => {
     const send = vi.spyOn(mailer, 'send')
     const app = await buildApp(mailer, { logger })
     const res = await app.inject({ method: 'GET', url: '/api/auth-features' })
-    expect(res.json()).toEqual({ mailEnabled: false })
+    expect(res.json()).toEqual({ mailEnabled: false, demoEnabled: false, demoMaxPlayers: 30 })
 
     const signUp = await post(app, '/api/auth/sign-up/email', {
       email: 'sans-envoi@example.com',

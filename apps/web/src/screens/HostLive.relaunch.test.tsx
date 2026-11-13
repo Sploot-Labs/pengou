@@ -3,6 +3,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-libra
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { hardReload } from '../realtime/hardReload'
+import { PAGE_LOAD_ID } from '../realtime/pageLoad'
 import { HostLive } from './HostLive'
 
 type Handler = (payload: unknown) => void
@@ -41,9 +42,14 @@ vi.mock('../api/quizzes', () => ({
 
 vi.mock('../realtime/hardReload', () => ({ hardReload: vi.fn() }))
 
+// Le composant réel lit la session : ici, seul son montage au podium est vérifié.
+vi.mock('../ui/GuestSignupOffer', () => ({ GuestSignupOffer: () => <p>Offre à l'hôte invité</p> }))
+
 function renderHostLive() {
   return render(
-    <MemoryRouter initialEntries={[{ pathname: '/host/s1', state: { pin: '1234', quizTitle: 'Quiz Test' } }]}>
+    <MemoryRouter
+      initialEntries={[{ pathname: '/host/s1', state: { pin: '1234', quizTitle: 'Quiz Test', launch: PAGE_LOAD_ID } }]}
+    >
       <Routes>
         <Route path="/host/:sessionId" element={<HostLive />} />
       </Routes>
@@ -97,6 +103,13 @@ describe('HostLive, relance au podium', () => {
 
     await screen.findByText('Aucun quiz disponible à relancer.')
     expect(screen.queryByRole('button', { name: 'Relancer une partie' })).toBeNull()
+  })
+
+  it("podium : l'offre d'inscription à l'hôte invité est montée", async () => {
+    renderHostLive()
+    expect(screen.queryByText("Offre à l'hôte invité")).not.toBeInTheDocument()
+    emitServerEvent('podium', { top: [] })
+    expect(await screen.findByText("Offre à l'hôte invité")).toBeInTheDocument()
   })
 
   it('pas de contrôle de relance hors podium', () => {

@@ -52,6 +52,10 @@ export interface UseGameSocket {
    * appelant, sinon le composant précédent continuerait à recevoir des events
    * après démontage. */
   on<T = unknown>(event: string, callback: (payload: T) => void): () => void
+  /** Refait la poignée de main : le serveur y lit le cookie de session et le workspace actif, qui
+   * ont pu changer depuis la connexion (hôte invité créé après le montage). Les émissions faites
+   * pendant la reconnexion sont mises en attente par Socket.IO puis envoyées. */
+  reconnect(): void
 }
 
 export function useGameSocket(): UseGameSocket {
@@ -73,10 +77,18 @@ export function useGameSocket(): UseGameSocket {
     // Multi-tenant (Slice 3) : le workspace actif voyage dans le handshake (`auth.tenantId`) —
     // l'équivalent WS de l'en-tête `x-tenant-id`. Le serveur le lit dans `host:create`
     // (`socket.handshake.auth.tenantId`). Null en single/anonyme → omis, le serveur retombe sur
-    // `default`. Fixé à la création de la socket (une par montage) : basculer de workspace passe
-    // par un rechargement (voir le switcher), ce qui recrée la socket avec le bon tenant.
-    const tenantId = getActiveTenantId() ?? undefined
-    socketRef.current = io({ path: '/socket.io', autoConnect: false, auth: tenantId ? { tenantId } : undefined })
+    // `default`. Forme fonction : le workspace actif est relu à CHAQUE poignée de main, donc aussi
+    // après `reconnect()` (partie de démonstration : l'espace de l'hôte invité naît après le
+    // montage de la socket). Basculer de workspace passe toujours par un rechargement (voir le
+    // switcher).
+    socketRef.current = io({
+      path: '/socket.io',
+      autoConnect: false,
+      auth: (cb) => {
+        const tenantId = getActiveTenantId()
+        cb(tenantId ? { tenantId } : {})
+      },
+    })
   }
   const socket = socketRef.current
 
@@ -134,5 +146,10 @@ export function useGameSocket(): UseGameSocket {
     [socket],
   )
 
-  return { socket, connected, emitAck, on }
+  const reconnect = useCallback(() => {
+    socket.disconnect()
+    socket.connect()
+  }, [socket])
+
+  return { socket, connected, emitAck, on, reconnect }
 }

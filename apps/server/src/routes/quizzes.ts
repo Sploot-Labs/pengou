@@ -73,9 +73,10 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
   })
 
   // `?archived=1` liste les quiz archivés ; par défaut, seulement les actifs (« Mes quiz »).
+  // Ouverte à l'hôte invité : l'écran hôte y lit le quiz de sa démonstration pour la relancer.
   app.get<{ Querystring: { archived?: string } }>(
     '/api/quizzes',
-    { preHandler: requireUser },
+    { preHandler: requireUser, config: { guestAllowed: true } },
     async (request, reply) => {
       const context = await resolveContextOr403(request, reply, systemDb, config)
       if (!context) return

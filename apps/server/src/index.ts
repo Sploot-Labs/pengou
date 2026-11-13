@@ -80,7 +80,7 @@ const auth = createAuth(systemDb, {
   logger: app.log,
   termsVersion: config.legal?.termsVersion,
 })
-await registerAuth(app, auth, { legal: config.legal, mailEnabled: mailer.enabled })
+await registerAuth(app, auth, { legal: config.legal, mailEnabled: mailer.enabled, demo: config.demo })
 registerLegal(app, { db: systemDb, auth, legal: config.legal })
 // Bibliothèque de questions : lecture du catalogue (livré + dossier d'instance) puis synchronisation
 // en base. Une erreur sur le catalogue livré lève ici et fait échouer le démarrage, comme une
@@ -129,6 +129,20 @@ const sweepTimer = setInterval(() => {
 }, config.sessionSweepIntervalMs)
 sweepTimer.unref()
 
+// Purge des hôtes invités de la partie de démonstration : au démarrage, puis toutes les heures.
+// Elle tourne même fonction éteinte, pour faire le ménage après une désactivation. Erreurs
+// journalisées, jamais propagées.
+const purgeGuests = (): Promise<void> =>
+  gateway.purgeGuests().then(
+    (purged) => {
+      if (purged > 0) app.log.info({ purged }, 'hôtes invités purgés')
+    },
+    (err) => app.log.error(err, 'purge des hôtes invités échouée'),
+  )
+void purgeGuests()
+const guestPurgeTimer = setInterval(() => void purgeGuests(), 3_600_000)
+guestPurgeTimer.unref()
+
 // En production, le build du SPA est copié à côté du serveur (voir Dockerfile).
 const webDist = process.env.WEB_DIST ?? join(process.cwd(), 'public')
 registerStatic(app, webDist, { publicUrl: config.authUrl, noindex: config.robotsNoindex })
@@ -138,6 +152,7 @@ app.addHook('onClose', async () => {
   // PUIS ferme le pool.
   await store.flushAll().catch(() => {})
   clearInterval(sweepTimer)
+  clearInterval(guestPurgeTimer)
   await appClient.end({ timeout: 5 })
   await client.end({ timeout: 5 })
 })

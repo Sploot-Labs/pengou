@@ -11,6 +11,7 @@ import { HostEditor } from './screens/HostEditor'
 import { HostLive } from './screens/HostLive'
 import { Join } from './screens/Join'
 import { Library } from './screens/Library'
+import { Demo } from './screens/Demo'
 import { Login } from './screens/Login'
 import { PlayerLive } from './screens/PlayerLive'
 import { ResetPassword } from './screens/ResetPassword'
@@ -128,10 +129,17 @@ export const router = createBrowserRouter([
             ),
           },
           {
+            // Partie de démonstration sans compte : publique, mais sous HostRealtimeLayout, car elle
+            // crée la partie sur la socket partagée que `HostLive` reprend ensuite.
+            path: '/demo',
+            element: <Demo />,
+          },
+          {
             path: '/host/:sessionId',
             element: (
               // Partie en cours : une nouvelle version des CGU ne la coupe pas (voir RequireAuth).
-              <RequireAuth allowPendingTerms>
+              // Seul écran protégé ouvert à l'hôte invité de la démonstration.
+              <RequireAuth allowPendingTerms allowGuest>
                 <SceneRoute>
                   <HostLive />
                 </SceneRoute>
