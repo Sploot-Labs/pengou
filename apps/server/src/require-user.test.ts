@@ -162,3 +162,49 @@ describe('resolveContextOr403 : ne masque QUE le refus de membership en 403', ()
     await app.close()
   })
 })
+
+describe('requireUser et hôte invité', () => {
+  it("refuse l'invité sur une route ordinaire et le laisse passer sur une route guestAllowed", async () => {
+    const auth = createAuth(ctx.db, {
+      secret: 'test-secret-at-least-32-chars-long!!',
+      baseURL: 'http://localhost:3000',
+      tenancyMode: 'multi',
+    })
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }), { dbStatus: () => 'up' })
+    await registerAuth(app, auth)
+    registerRequireUser(app, auth)
+    app.addHook('onSend', async () => {})
+    let reached = false
+    app.post('/api/ordinaire', { preHandler: requireUser }, async () => {
+      reached = true
+      return { ok: true }
+    })
+    app.get('/api/ouverte-aux-invites', { preHandler: requireUser, config: { guestAllowed: true } }, async (req) => ({
+      isAnonymous: req.user.isAnonymous,
+    }))
+
+    const guest = await auth.api.signInAnonymous({ headers: new Headers(), returnHeaders: true })
+    const cookie = guest.headers
+      .getSetCookie()
+      .map((c) => c.split(';')[0])
+      .join('; ')
+
+    const refused = await app.inject({
+      method: 'POST',
+      url: '/api/ordinaire',
+      payload: {},
+      headers: { cookie, 'content-type': 'application/json' },
+    })
+    expect(refused.statusCode).toBe(403)
+    expect(refused.json()).toEqual({
+      error: 'Créez un compte gratuit pour utiliser cette fonction.',
+      code: 'GUEST_NOT_ALLOWED',
+    })
+    expect(reached).toBe(false)
+
+    const allowed = await app.inject({ method: 'GET', url: '/api/ouverte-aux-invites', headers: { cookie } })
+    expect(allowed.statusCode).toBe(200)
+    expect(allowed.json()).toEqual({ isAnonymous: true })
+    await app.close()
+  })
+})

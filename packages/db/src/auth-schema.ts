@@ -14,6 +14,9 @@ export const user = pgTable('user', {
   // Provenance de l'inscription (`?from=` des liens du site vitrine), slug normalisé par le serveur.
   // Null : inscription directe, par invitation ou par un fournisseur tiers.
   signupSource: text('signup_source'),
+  // Hôte invité de la démonstration (plugin `anonymous` de Better Auth) : compte sans adresse réelle,
+  // restreint côté serveur et supprimé au bout de 24 heures.
+  isAnonymous: boolean('is_anonymous').default(false).notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at')
     .defaultNow()

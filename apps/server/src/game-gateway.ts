@@ -19,6 +19,12 @@ import {
   listSessionPlayers,
   deleteSessionPlayer,
   setWordcloudRemoved,
+  isGuestUser,
+  countLiveGuestSessions,
+  findGuestDemo,
+  abandonExpiredGuestSessions,
+  purgeExpiredGuests,
+  recordDemoStarted,
   type ContentSource,
   type Db,
 } from '@splootlabs/db'
@@ -107,8 +113,13 @@ type SessionMeta = {
   advanceNextAt: number | null
   /** Places prises (joueurs inscrits + arrivées en cours), lu et incrémenté sans await entre les deux.
    * Compteur synchrone : `player:join` réserve sa place AVANT tout `await` (sinon des arrivées
-   * concurrentes dépasseraient `config.maxPlayersPerSession`) et la rend si l'ajout moteur échoue. */
+   * concurrentes dépasseraient `maxPlayers`) et la rend si l'ajout moteur échoue. */
   seatsTaken: number
+  /** Plafond de joueurs de CETTE partie : `config.maxPlayersPerSession`, ou le plus petit de ce
+   * plafond et de `config.demo.maxPlayers` quand l'hôte est invité (partie de démonstration). */
+  maxPlayers: number
+  /** Vrai si l'hôte est un invité (partie de démonstration sans compte). */
+  isGuest: boolean
   /** Diffusion différée du lobby (voir `scheduleLobbyBroadcast`) : au plus un minuteur en attente
    * par session. `null` quand aucune diffusion n'est planifiée. Annulé à la fin de session
    * (`clearLobbyBroadcastTimeout`) comme les autres minuteurs. */
@@ -122,7 +133,14 @@ type SessionMeta = {
   lastWordcloudBroadcastAt: number
 }
 
-/** Refus de `player:join` quand la partie a atteint `config.maxPlayersPerSession`. */
+/** Durée de vie d'une partie de démonstration : au-delà, le balayage l'abandonne. */
+const DEMO_SESSION_MAX_AGE_MS = 3_600_000
+/** Durée de vie d'un hôte invité : au-delà, la purge le supprime avec son espace. */
+const GUEST_MAX_AGE_MS = 86_400_000
+const DEMO_ALREADY_LIVE_MESSAGE = 'Une démonstration est déjà en cours.'
+const DEMO_FULL_MESSAGE = 'La démonstration est très demandée en ce moment.'
+
+/** Refus de `player:join` quand la partie a atteint son plafond de joueurs (`meta.maxPlayers`). */
 export const SESSION_FULL_MESSAGE = 'La partie est complète.'
 
 /** Fenêtre de coalescence de la diffusion du lobby : au plus une diffusion `lobby:update` /
@@ -255,7 +273,7 @@ function playersPayload(
 export async function registerGameGateway(
   io: Server,
   deps: GameGatewayDeps,
-): Promise<{ sweepAbandonedSessions: () => Promise<void> }> {
+): Promise<{ sweepAbandonedSessions: () => Promise<void>; purgeGuests: () => Promise<number> }> {
   const { engine, systemDb, appDb, auth, config, store, lobbyBroadcastIntervalMs = LOBBY_BROADCAST_INTERVAL_MS } = deps
 
   // État de la passerelle : local à CET appel de registerGameGateway (donc à CETTE instance
@@ -618,7 +636,7 @@ export async function registerGameGateway(
   /** Réauth + résolution tenant/rôle/owner (début historique de `host:create`). */
   async function resolveHostContext(
     socket: Socket,
-  ): Promise<{ userId: string; context: { tenantId: string; ownerId?: string } }> {
+  ): Promise<{ userId: string; context: { tenantId: string; ownerId?: string }; isGuest: boolean }> {
     const authSession = await auth.api.getSession({ headers: fromNodeHeaders(socket.handshake.headers) })
     if (!authSession?.user) throw new Error('authentification requise')
 
@@ -633,14 +651,50 @@ export async function registerGameGateway(
     const role = (await getMembershipRole(systemDb, authSession.user.id, tenantId)) ?? 'member'
     const ownerId = hasPermission(role, 'content:access-all') ? undefined : authSession.user.id
     const context = { tenantId, ownerId }
-    return { userId: authSession.user.id, context }
+    return { userId: authSession.user.id, context, isGuest: authSession.user.isAnonymous === true }
   }
 
-  /** Crée la partie (questions sous RLS, PIN, ligne DB, session moteur, meta, maps). Ne touche NI `socket.data` NI les rooms. */
+  // Partie de démonstration : les créations de partie d'un hôte invité passent une par une. Sans
+  // cette file, des lancements simultanés liraient tous un compte de parties vivantes sous le
+  // plafond avant qu'aucune ne soit écrite. Une seule instance : une file en mémoire suffit.
+  let guestCreations: Promise<unknown> = Promise.resolve()
+  function inGuestQueue<T>(task: () => Promise<T>): Promise<T> {
+    const run = guestCreations.then(task, task)
+    guestCreations = run.catch(() => {})
+    return run
+  }
+
+  /**
+   * Crée la partie d'un hôte, invité ou non. Pour un invité (partie de démonstration), les bornes
+   * sont vérifiées avant toute écriture, dans la file des créations invitées : une seule partie
+   * vivante par invité (hors celle que `host:relaunch` remplace) et le plafond global de
+   * démonstrations vivantes.
+   */
   async function buildHostedSession(
     userId: string,
     context: { tenantId: string; ownerId?: string },
     quizId: string,
+    host: { isGuest: boolean; replacingSessionId?: string },
+  ): Promise<{ session: GameSession }> {
+    if (!host.isGuest) return createHostedSession(userId, context, quizId, config.maxPlayersPerSession, false)
+    return inGuestQueue(async () => {
+      const demo = await findGuestDemo(systemDb, userId)
+      if (demo.liveSessionId && demo.liveSessionId !== host.replacingSessionId) {
+        throw new Error(DEMO_ALREADY_LIVE_MESSAGE)
+      }
+      if ((await countLiveGuestSessions(systemDb)) >= config.demo.maxConcurrent) throw new Error(DEMO_FULL_MESSAGE)
+      const maxPlayers = Math.min(config.maxPlayersPerSession, config.demo.maxPlayers)
+      return createHostedSession(userId, context, quizId, maxPlayers, true)
+    })
+  }
+
+  /** Crée la partie (questions sous RLS, PIN, ligne DB, session moteur, meta, maps). Ne touche NI `socket.data` NI les rooms. */
+  async function createHostedSession(
+    userId: string,
+    context: { tenantId: string; ownerId?: string },
+    quizId: string,
+    maxPlayers: number,
+    isGuest: boolean,
   ): Promise<{ session: GameSession }> {
     const { tenantId } = context
     // Lecture du quiz sous RLS (appDb + GUC) : un quiz d'un autre tenant n'existe pas pour ce
@@ -695,6 +749,8 @@ export async function registerGameGateway(
       advanceTimeout: null,
       advanceNextAt: null,
       seatsTaken: 0,
+      maxPlayers,
+      isGuest,
       lobbyBroadcastTimeout: null,
       lastLobbyBroadcastAt: 0,
       wordcloudBroadcastTimeout: null,
@@ -1211,6 +1267,9 @@ export async function registerGameGateway(
           listQuestions(scope, session.quizId),
         )
 
+        // Le plafond de joueurs d'une partie de démonstration survit au redémarrage.
+        const isGuest = await isGuestUser(systemDb, session.hostId)
+
         const meta: SessionMeta = {
           dbSessionId: row.id,
           tenantId: session.tenantId,
@@ -1228,6 +1287,10 @@ export async function registerGameGateway(
           advanceNextAt: null,
           // Joueurs inscrits avant le redémarrage, déconnectés compris (ils peuvent revenir).
           seatsTaken: Object.keys(session.players).length,
+          maxPlayers: isGuest
+            ? Math.min(config.maxPlayersPerSession, config.demo.maxPlayers)
+            : config.maxPlayersPerSession,
+          isGuest,
           lobbyBroadcastTimeout: null,
           lastLobbyBroadcastAt: 0,
           wordcloudBroadcastTimeout: null,
@@ -1310,9 +1373,9 @@ export async function registerGameGateway(
         const quizId = payload?.quizId
         if (typeof quizId !== 'string' || !quizId) throw new Error('quizId requis')
 
-        const { userId, context } = await resolveHostContext(socket)
+        const { userId, context, isGuest } = await resolveHostContext(socket)
 
-        const { session } = await buildHostedSession(userId, context, quizId)
+        const { session } = await buildHostedSession(userId, context, quizId, { isGuest })
 
         // Une socket qui devient hôte rend d'abord le siège joueur qu'elle occupait.
         await releasePlayerSeat(socket)
@@ -1344,8 +1407,11 @@ export async function registerGameGateway(
         if (oldSession.phase !== 'podium')
           throw new Error('host:relaunch : relance possible seulement en fin de partie')
 
-        const { userId, context } = await resolveHostContext(socket)
-        const { session: neu } = await buildHostedSession(userId, context, quizId)
+        const { userId, context, isGuest } = await resolveHostContext(socket)
+        const { session: neu } = await buildHostedSession(userId, context, quizId, {
+          isGuest,
+          replacingSessionId: oldId,
+        })
         const newMeta = sessionMetaByEngineId.get(neu.id)!
 
         // Invariant : une relance engagée (nouvelle session créée) n'est jamais abandonnée.
@@ -1485,6 +1551,7 @@ export async function registerGameGateway(
       const reply = typeof ack === 'function' ? ack : () => {}
       try {
         const { sessionId, meta } = await requireLiveHost(socket)
+        const firstStart = !meta.statusActiveSet
         if (!meta.statusActiveSet) {
           await withTenantTx(appDb, { tenantId: meta.tenantId }, (scope) =>
             setSessionStatus(scope.db, meta.dbSessionId, 'active'),
@@ -1496,6 +1563,9 @@ export async function registerGameGateway(
         // bonne réponse est diffusée, à TOUTE la room, que ce soit `question:reading` ou
         // `question:show`).
         const session = await startQuestionFlow(sessionId, meta)
+        if (firstStart && meta.isGuest && Object.keys(session.players).length > 0) {
+          await countDemoStarted(session.hostId)
+        }
         const view = session.phase === 'reading' ? engine.readingView(session) : engine.playerQuestionView(session)
         reply(view)
       } catch (e) {
@@ -1704,7 +1774,7 @@ export async function registerGameGateway(
           // Plafond : place réservée de façon synchrone (aucun `await` entre lecture et incrément),
           // rendue si le joueur n'a pas pu être ajouté au moteur. Une fois ajouté, il l'occupe même
           // si la suite échoue (il existe côté moteur et pourrait revenir).
-          if (meta.seatsTaken >= config.maxPlayersPerSession) throw new Error(SESSION_FULL_MESSAGE)
+          if (meta.seatsTaken >= meta.maxPlayers) throw new Error(SESSION_FULL_MESSAGE)
           meta.seatsTaken += 1
           let added = false
           try {
@@ -1968,7 +2038,31 @@ export async function registerGameGateway(
    * correspondance, et évince le cache du store (le PIN redevient réutilisable). Best-effort :
    * une session déjà absente de la mémoire (ex. jamais pilotée par ce process) est simplement
    * ignorée par les `get`/`delete` de Map. Appelé périodiquement par la composition root. */
+  /** Compteur quotidien : une partie de démonstration démarrée avec au moins un joueur. Ne fait
+   * jamais échouer le démarrage de la partie : une erreur est seulement journalisée. */
+  async function countDemoStarted(hostId: string): Promise<void> {
+    try {
+      const { source } = await findGuestDemo(systemDb, hostId)
+      await recordDemoStarted(systemDb, new Date().toISOString().slice(0, 10), source ?? 'direct')
+    } catch (err) {
+      console.error('compteur des démonstrations : partie démarrée non comptée', err)
+    }
+  }
+
+  /** Supprime les hôtes invités de plus de 24 heures, avec leur espace. Appelé au démarrage puis
+   * périodiquement par la composition root, même fonction éteinte (ménage après désactivation). */
+  async function purgeGuests(): Promise<number> {
+    return purgeExpiredGuests(systemDb, GUEST_MAX_AGE_MS)
+  }
+
   async function sweepAbandonedSessions(): Promise<void> {
+    // Une partie de démonstration ne dure pas plus d'une heure : elle peut être en pleine question,
+    // d'où l'éviction complète (tous les minuteurs) plutôt que le nettoyage des parties inactives.
+    for (const id of await abandonExpiredGuestSessions(systemDb, DEMO_SESSION_MAX_AGE_MS)) {
+      const meta = sessionMetaByEngineId.get(id)
+      if (meta) await evictSessionMemory(id, meta)
+      else store.evict(id)
+    }
     const ids = await abandonInactiveSessions(systemDb, config.sessionInactivityTimeoutMs)
     for (const id of ids) {
       const meta = sessionMetaByEngineId.get(id)
@@ -1993,5 +2087,5 @@ export async function registerGameGateway(
   // qu'aucune reconnexion n'est traitée avant que la reprise ne soit terminée.
   await rehydrateActiveSessions(SESSION_MAX_AGE)
 
-  return { sweepAbandonedSessions }
+  return { sweepAbandonedSessions, purgeGuests }
 }

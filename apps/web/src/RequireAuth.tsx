@@ -30,9 +30,12 @@ import { Button, Logo } from './ui'
 export function RequireAuth({
   children,
   allowPendingTerms = false,
+  allowGuest = false,
 }: {
   children: ReactNode
   allowPendingTerms?: boolean
+  /** Écran ouvert à l'hôte invité de la partie de démonstration (l'écran hôte seulement). */
+  allowGuest?: boolean
 }) {
   const { user, loading, error, refresh, termsAcceptanceRequired } = useSession()
 
@@ -62,6 +65,12 @@ export function RequireAuth({
 
   if (!user) {
     return <Navigate to="/login" replace />
+  }
+
+  // Hôte invité (partie de démonstration) : il n'anime que sa démonstration. Partout ailleurs, il
+  // est ramené à l'écran qui la lance ou la reprend ; le serveur lui refuse de toute façon ces routes.
+  if (user.isAnonymous === true && !allowGuest) {
+    return <Navigate to="/demo" replace />
   }
 
   if (termsAcceptanceRequired && !allowPendingTerms) {

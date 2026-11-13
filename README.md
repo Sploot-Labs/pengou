@@ -159,6 +159,10 @@ un test qui oblige à changer la date des pages légales quand leur texte change
 pengou.fr utilise `LEGAL_TERMS_URL=https://pengou.fr/cgu/` et
 `LEGAL_PRIVACY_URL=https://pengou.fr/politique-de-confidentialite/`.
 
+Une instance en mode multi peut aussi proposer une partie de démonstration sans compte sur `/demo`
+(`DEMO_ENABLED=true`) : un visiteur lance le quiz d'exemple en hôte invité, et rien n'est conservé
+au-delà de 24 heures. Voir [docs/devops.md](./docs/devops.md), section « Démonstration sans compte ».
+
 ## Contribuer
 
 Les contributions, surtout les premières, sont célébrées ici. Voir

@@ -51,7 +51,8 @@ export async function createWorkspace(db: Db, input: { name: string; ownerId: st
   const name = input.name.trim()
   for (let attempt = 0; attempt < 5; attempt++) {
     let slug = await generateUniqueSlug(db, name)
-    if (attempt > 0) slug = `${slug}-${Math.floor(performance.now()).toString(36).slice(-4)}`
+    // Suffixe aléatoire : des créations simultanées du même nom retentent sans se heurter à nouveau.
+    if (attempt > 0) slug = `${slug}-${crypto.randomUUID().slice(0, 6)}`
     try {
       return await db.transaction(async (tx) => {
         const [tenant] = await tx.insert(schema.tenant).values({ name, slug }).returning()
@@ -100,8 +101,15 @@ export async function isMember(db: Db, userId: string, tenantId: string): Promis
   return Boolean(m)
 }
 
+/** Vrai pour une violation d'unicité de Postgres (23505). drizzle enveloppe l'erreur du pilote dans
+ * une erreur « Failed query » : le code est alors porté par `cause`, d'où la remontée de la chaîne. */
 function isUniqueViolation(e: unknown): boolean {
-  return typeof e === 'object' && e !== null && (e as { code?: string }).code === '23505'
+  for (let current: unknown = e, depth = 0; current && depth < 5; depth++) {
+    if (typeof current !== 'object') return false
+    if ((current as { code?: unknown }).code === '23505') return true
+    current = (current as { cause?: unknown }).cause
+  }
+  return false
 }
 
 // --- Gestion des membres (Slice 3b) — opèrent sur un TenantScope (appDb sous RLS dans les

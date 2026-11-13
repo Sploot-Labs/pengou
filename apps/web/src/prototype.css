@@ -3364,6 +3364,21 @@ fieldset.host-field > legend {
   }
 }
 
+/* Fin d'une partie de démonstration : offre d'inscription faite à l'hôte invité (GuestSignupOffer). */
+.hostlive-guest-offer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 520px;
+  margin: 24px auto 0;
+  text-align: center;
+}
+
+.hostlive-guest-offer p {
+  margin: 0;
+}
+
 .hostlive-relaunch {
   display: flex;
   flex-wrap: wrap;

@@ -80,6 +80,13 @@ const EnvSchema = z.object({
   // Échecs de PIN (player:join) tolérés par IP, ou par préfixe /64 en IPv6, sur 5 minutes. Haut
   // par défaut : une salle entière derrière une seule IP publique se trompe souvent de PIN.
   PIN_FAILURE_MAX: z.coerce.number().int().positive().default(100),
+  // Partie de démonstration sans compte (`/demo`) : un hôte invité lance le quiz d'exemple. Éteinte
+  // par défaut ; demande TENANCY_MODE=multi. Plafonds : joueurs par démonstration, démonstrations
+  // vivantes sur l'instance, démonstrations lancées par IP et par heure.
+  DEMO_ENABLED: z.enum(['true', 'false']).default('false'),
+  DEMO_MAX_PLAYERS: z.coerce.number().int().positive().default(30),
+  DEMO_MAX_CONCURRENT: z.coerce.number().int().positive().default(20),
+  DEMO_PER_IP_PER_HOUR: z.coerce.number().int().positive().default(5),
   // Envoi d'e-mails transactionnels. Sans MAIL_TRANSPORT, aucun e-mail n'est envoyé (les
   // fonctions qui en dépendent restent désactivées). 'smtp' ou 'brevo' (API HTTP).
   MAIL_TRANSPORT: optionalMail(z.enum(['smtp', 'brevo'])),
@@ -161,6 +168,8 @@ export type AppConfig = {
   maxPlayersPerSession: number
   /** Échecs de PIN tolérés par IP (préfixe /64 en IPv6) sur la fenêtre du budget. */
   pinFailureMax: number
+  /** Partie de démonstration sans compte : activation et plafonds. */
+  demo: { enabled: boolean; maxPlayers: number; maxConcurrent: number; perIpPerHour: number }
   mail: MailConfig
   /** Contrôle DNS du domaine des e-mails ('auto' résolu : vrai si un transport est configuré). */
   emailDomainCheck: boolean
@@ -227,6 +236,11 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
       'Configuration invalide : APP_DB_PASSWORD doit être défini en production (mot de passe du rôle app_role).',
     )
   }
+  if (parsed.DEMO_ENABLED === 'true' && parsed.TENANCY_MODE !== 'multi') {
+    // En mode single, un invité deviendrait membre de l'unique espace de l'instance, que la purge
+    // des invités ne doit jamais pouvoir toucher.
+    throw new Error('Configuration invalide : DEMO_ENABLED=true demande TENANCY_MODE=multi.')
+  }
   const mail = resolveMail(parsed)
   let legal: LegalConfig | null = null
   if (parsed.LEGAL_TERMS_VERSION) {
@@ -268,6 +282,12 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     mediaQuotaBytes: parsed.MEDIA_QUOTA_MB * 1024 * 1024,
     maxPlayersPerSession: parsed.MAX_PLAYERS_PER_SESSION,
     pinFailureMax: parsed.PIN_FAILURE_MAX,
+    demo: {
+      enabled: parsed.DEMO_ENABLED === 'true',
+      maxPlayers: parsed.DEMO_MAX_PLAYERS,
+      maxConcurrent: parsed.DEMO_MAX_CONCURRENT,
+      perIpPerHour: parsed.DEMO_PER_IP_PER_HOUR,
+    },
     mail,
     emailDomainCheck:
       parsed.EMAIL_DOMAIN_CHECK === 'auto' ? mail.transport !== 'none' : parsed.EMAIL_DOMAIN_CHECK === 'true',

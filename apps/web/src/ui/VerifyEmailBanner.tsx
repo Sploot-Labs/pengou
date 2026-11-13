@@ -52,7 +52,8 @@ export function VerifyEmailBanner() {
 
   if (HIDDEN_PREFIXES.some((p) => pathname.startsWith(p))) return null
 
-  const showBanner = mailEnabled && !!user && user.emailVerified === false && !dismissed
+  // Un hôte invité (partie de démonstration) n'a pas d'adresse à confirmer.
+  const showBanner = mailEnabled && !!user && user.emailVerified === false && user.isAnonymous !== true && !dismissed
 
   return (
     <>

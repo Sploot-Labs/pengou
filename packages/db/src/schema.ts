@@ -12,6 +12,7 @@ import {
   index,
   foreignKey,
   primaryKey,
+  date,
 } from 'drizzle-orm/pg-core'
 import type { ContentSource } from '@splootlabs/library'
 import { user } from './auth-schema.js'
@@ -325,5 +326,22 @@ export const libraryQuizQuestion = pgTable(
   },
   (t) => ({
     pk: primaryKey({ columns: [t.quizId, t.position] }),
+  }),
+)
+
+// Compteur quotidien des parties de démonstration sans compte : par jour (UTC) et par provenance,
+// les démonstrations lancées et les parties démarrées avec au moins un joueur. Aucune donnée
+// personnelle : les comptes invités sont supprimés au bout de 24 heures, ce compteur reste.
+// Hors RLS et sans droit pour app_role : lu et écrit par la connexion privilégiée seulement.
+export const demoDaily = pgTable(
+  'demo_daily',
+  {
+    day: date('day').notNull(),
+    source: text('source').notNull(),
+    launched: integer('launched').notNull().default(0),
+    started: integer('started').notNull().default(0),
+  },
+  (t) => ({
+    pk: primaryKey({ columns: [t.day, t.source] }),
   }),
 )

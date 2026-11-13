@@ -9,6 +9,7 @@
     "start": "node dist/index.js",
     "migrate": "node dist/migrate.js",
     "inscriptions:provenance": "node dist/signups-report.js",
+    "demos:rapport": "node dist/demo-report.js",
     "typecheck": "tsc --noEmit -p tsconfig.json --customConditions development",
     "test": "vitest run",
     "charge": "node charge/charge.mjs",

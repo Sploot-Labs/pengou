@@ -1,4 +1,5 @@
 import { describe, it, expect, afterAll, beforeAll, vi } from 'vitest'
+import { sql } from 'drizzle-orm'
 import { startTestDb, runMigrations } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { buildServer } from './app.js'
@@ -150,4 +151,35 @@ describe('TRUSTED_PROXIES', () => {
     expect(warnAvec).not.toHaveBeenCalledWith(message)
     await avecListe.close()
   })
+})
+
+describe("compte invité : points d'entrée de Better Auth jamais exposés", () => {
+  it.each(['/api/auth/sign-in/anonymous', '/api/auth/delete-anonymous-user', '/api/auth/sign-in/anonymous?x=1'])(
+    'répond 404 sur POST %s sans créer de compte',
+    async (url) => {
+      const auth = createAuth(ctx.db, {
+        secret: 'test-secret-at-least-32-chars-long!!',
+        baseURL: 'http://localhost:3000',
+        tenancyMode: 'multi',
+      })
+      const app = await buildServer(loadConfig({ NODE_ENV: 'test' }), { dbStatus: () => 'up' })
+      await registerAuth(app, auth)
+      const count = async () => {
+        const rows = await ctx.db.execute(sql`select count(*)::int as n from "user" where is_anonymous`)
+        return (rows as unknown as Array<{ n: number }>)[0]?.n
+      }
+      const before = await count()
+
+      const res = await app.inject({
+        method: 'POST',
+        url,
+        headers: { 'content-type': 'application/json' },
+        payload: {},
+      })
+
+      expect(res.statusCode).toBe(404)
+      expect(await count()).toBe(before)
+      await app.close()
+    },
+  )
 })

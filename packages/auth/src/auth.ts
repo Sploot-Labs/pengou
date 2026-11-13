@@ -1,6 +1,7 @@
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { APIError, createAuthMiddleware } from 'better-auth/api'
+import { anonymous } from 'better-auth/plugins/anonymous'
 import {
   checkEmailDeliverable,
   DELIVERABILITY_MESSAGES,
@@ -156,6 +157,20 @@ export function createAuth(db: Db, config: AuthConfig) {
       },
     },
     socialProviders: config.socialProviders ?? {},
+    // Hôte invité de la partie de démonstration : un compte sans adresse réelle (`user.is_anonymous`).
+    // Le plugin est toujours chargé, mais ses deux points d'entrée HTTP sont fermés (`disabledPaths`,
+    // 404 rendu par le routeur de Better Auth, sur le chemin qu'il a lui-même normalisé) : seule la
+    // route POST /api/demo crée un invité, par l'appel serveur `auth.api.signInAnonymous`, qui ne
+    // passe pas par le routeur. Le compte invité n'est pas supprimé quand son porteur s'inscrit
+    // ensuite : sa purge passe par le balayage des invités, qui emporte aussi son espace.
+    disabledPaths: ['/sign-in/anonymous', '/delete-anonymous-user'],
+    plugins: [
+      anonymous({
+        disableDeleteAnonymousUser: true,
+        emailDomainName: 'invite.invalid',
+        generateName: () => 'Invité',
+      }),
+    ],
     user: {
       // Acceptation des CGU : renseignée uniquement par le serveur (hook `before` ci-dessous et
       // POST /api/legal/accept). `input: false` fait refuser par Better Auth toute valeur envoyée
@@ -191,7 +206,12 @@ export function createAuth(db: Db, config: AuthConfig) {
             // Multi (Slice 3) : chaque inscription obtient un workspace personnel dont elle est
             // owner — pas d'état « aucun workspace ». Nom dérivé du nom d'affichage, à défaut de la
             // partie locale de l'e-mail. L'utilisateur pourra créer/rejoindre d'autres workspaces.
-            const label = personalWorkspaceName(user)
+            // Hôte invité (partie de démonstration) : tous s'appellent « Invité ». Un nom d'espace
+            // propre à chacun évite qu'ils se disputent le même slug quand ils naissent ensemble.
+            const label =
+              (user as { isAnonymous?: boolean | null }).isAnonymous === true
+                ? `Démonstration ${crypto.randomUUID().slice(0, 8)}`
+                : personalWorkspaceName(user)
             await createWorkspace(db, { name: label, ownerId: user.id })
           },
         },

@@ -11,6 +11,8 @@ declare module 'fastify' {
   interface FastifyContextConfig {
     /** Fichier public du SPA ou image envoyée (posé par registerStatic et registerUploads) : exempté de la limite de débit. */
     spaAsset?: boolean
+    /** Route protégée ouverte à un hôte invité (partie de démonstration), voir requireUser. */
+    guestAllowed?: boolean
   }
 }
 

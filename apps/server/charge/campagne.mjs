@@ -2,7 +2,7 @@
 // `pengou-charge` à zéro, attend /health, lance charge.mjs, vérifie la cohérence de la base, puis
 // ajoute une ligne par passage à docs/charge/historique.jsonl et compare à la campagne précédente.
 //
-// Usage : pnpm --filter @splootlabs/server charge:campagne -- [--scenario rapide|complet]
+// Usage : pnpm --filter @splootlabs/server charge:campagne -- [--scenario rapide|paliers|demo|complet]
 //   [--pause SECONDES] [--sans-build]
 // Codes de sortie : 0 tout réussi sans régression, 1 passage non réussi ou régression, 2 pile
 // impossible à démarrer.

@@ -104,6 +104,20 @@ export {
 export { syncLibrary, normalizeSearch } from './repos/library-sync.js'
 export { countSignupsBySourceAndWeek, type SignupsBySourceRow } from './repos/signups.js'
 export {
+  isGuestUser,
+  countLiveGuestSessions,
+  findGuestDemo,
+  setGuestAcceptance,
+  abandonExpiredGuestSessions,
+  purgeExpiredGuests,
+  deleteGuest,
+  recordDemoLaunched,
+  recordDemoStarted,
+  listDemoDaily,
+  type GuestDemo,
+  type DemoDailyRow,
+} from './repos/demo.js'
+export {
   listLibraryThemes,
   listLibraryLanguages,
   searchLibraryQuestions,

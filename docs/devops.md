@@ -130,6 +130,34 @@ ORDER BY 1 DESC, 3 DESC;
 
 La provenance est rattachée au compte : c'est une donnée personnelle, à mentionner dans la politique de confidentialité de l'instance qui l'exploite.
 
+### Démonstration sans compte
+
+L'écran `/demo` laisse un visiteur lancer une vraie partie du quiz d'exemple sans s'inscrire. Le serveur crée pour lui un hôte invité : un compte sans adresse réelle, avec son espace et son quiz, qui ne peut rien faire d'autre qu'animer cette partie. La fonction est éteinte par défaut et demande `TENANCY_MODE=multi` ; le serveur refuse de démarrer avec `DEMO_ENABLED=true` en mode single.
+
+Quatre variables la règlent : `DEMO_ENABLED` (`false` par défaut), `DEMO_MAX_PLAYERS` (30 joueurs par démonstration), `DEMO_MAX_CONCURRENT` (20 démonstrations vivantes en même temps sur l'instance) et `DEMO_PER_IP_PER_HOUR` (5 démonstrations lancées par adresse IP et par heure ; une IPv6 compte pour son préfixe /64). Le budget par IP suppose que `TRUSTED_PROXIES` est réglé : sans lui, tous les visiteurs partagent l'adresse du reverse proxy.
+
+Une démonstration s'arrête au bout d'une heure, ou après la durée d'inactivité commune à toutes les parties. Un hôte invité est supprimé entre 24 et 25 heures après sa création, avec son espace, son quiz, sa partie, les pseudos et les réponses : la purge tourne au démarrage du serveur puis toutes les heures, et elle attend la fin de la partie qu'un invité anime encore. Elle tourne même quand la fonction est éteinte, pour faire le ménage après une désactivation.
+
+Ce qui est conservé au-delà : un compteur quotidien sans donnée personnelle (jour, provenance, démonstrations lancées, parties démarrées avec au moins un joueur). Pendant la vie de l'invité, le serveur garde son compte sans adresse, sa session (avec l'adresse IP et le navigateur qui l'ont ouverte, comme pour tout compte), la version des conditions d'utilisation qu'il a acceptée et la provenance du lancement. Le budget par IP ne vit qu'en mémoire. À mentionner dans la politique de confidentialité et les conditions d'utilisation de l'instance qui active la fonction.
+
+Pour lire le compteur, au format CSV :
+
+```sh
+docker compose exec app node apps/server/dist/demo-report.js > demonstrations.csv
+```
+
+En développement, après `pnpm build` : `pnpm --filter @splootlabs/server demos:rapport`. La requête équivalente en SQL :
+
+```sql
+SELECT day AS jour, source AS provenance, launched AS lancees, started AS demarrees
+FROM demo_daily
+ORDER BY day DESC, source;
+```
+
+Sur le site, le bouton « Essayer sans compte » pointe vers `/demo?from=<slug-de-page>`. La provenance d'un visiteur arrivé sans ce paramètre est comptée `direct`. Une inscription faite après une démonstration arrive avec la provenance `demo` et sort dans l'export des inscriptions.
+
+Avant d'activer la fonction, jouez le scénario de charge `demo` (vingt parties de 30 joueurs, voir `docs/charge/README.md`).
+
 ### Envoi d'e-mails
 
 Pengou envoie des e-mails transactionnels : réinitialisation du mot de passe et avis de modification une fois celle-ci faite, confirmation d'adresse à l'inscription et invitations à un espace de travail. Tout est optionnel. Sans transport configuré, l'application reste complète, simplement sans envoi.

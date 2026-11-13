@@ -11,6 +11,8 @@ import { hardReload } from '../realtime/hardReload'
 import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import { Button, Logo, PinDisplay, TimerRing } from '../ui'
 import { ClosingView, PodiumView } from './Podium'
+import { GuestSignupOffer } from '../ui/GuestSignupOffer'
+import { PAGE_LOAD_ID } from '../realtime/pageLoad'
 
 /**
  * Contrôleur hôte réel, câblé sur `apps/server/src/game-gateway.ts` via la
@@ -163,15 +165,19 @@ export function HostLive() {
   // reconstitué par `host:reconnect` (voir l'effet de montage plus bas) ;
   // `quizTitle`, lui, RESTE dégradé gracieusement (le serveur ne le renvoie
   // jamais, ni à host:create ni à host:reconnect), jamais fabriqué.
-  const navState = location.state as { pin?: string; quizTitle?: string } | null
+  const navState = location.state as { pin?: string; quizTitle?: string; launch?: string } | null
   const [pin, setPin] = useState<string | null>(navState?.pin ?? null)
+  // L'état de navigation survit à un rechargement de page (il vit dans l'historique du navigateur),
+  // pas l'autorité d'hôte, liée à la socket. Il ne prouve donc « partie lancée sur cette socket »
+  // que s'il a été posé pendant CE chargement de page. Sinon, l'écran demande la reprise.
+  const launchedHere = Boolean(navState?.pin) && navState?.launch === PAGE_LOAD_ID
   const quizTitle = navState?.quizTitle ?? 'Partie en direct'
 
   // Reprise (Task 8) : `true` tant que `host:reconnect` n'a pas répondu, UNIQUEMENT quand cet
   // écran est atteint SANS `navState?.pin` (reprise depuis Home, ou rechargement de page) — un
   // lancement direct (`navState?.pin` présent, `host:create` déjà passé sur cette même socket)
   // n'a rien à reprendre et démarre directement en 'lobby'.
-  const [resuming, setResuming] = useState(!navState?.pin)
+  const [resuming, setResuming] = useState(!launchedHere)
   const [resumeError, setResumeError] = useState<string | null>(null)
 
   const [phase, setPhase] = useState<UiPhase>('lobby')
@@ -347,7 +353,7 @@ export function HostLive() {
     // événement de snapshot pour cette phase, `scoreboard`, ne fait volontairement PAS avancer
     // `phase` en dehors d'un skip — voir son handler ci-dessus).
     let cancelled = false
-    if (!navState?.pin && sessionId) {
+    if (!launchedHere && sessionId) {
       emitAck<{ sessionId?: string; pin?: string; phase?: UiPhase; autoAdvance?: boolean }>('host:reconnect', {
         sessionId,
       })
@@ -1173,6 +1179,8 @@ export function HostLive() {
                 ) : (
                   <ClosingView quizTitle={quizTitle} headingRef={podiumHeadingRef} audience="room" />
                 )}
+                {/* Partie de démonstration : l'hôte invité se voit proposer un vrai compte. */}
+                <GuestSignupOffer />
                 <div className="hostlive-relaunch">
                   {relaunchLoadError ? (
                     <p className="join-error" role="alert">

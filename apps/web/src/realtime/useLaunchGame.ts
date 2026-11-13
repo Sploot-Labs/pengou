@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSharedGameSocket } from './GameSocketProvider'
+import { PAGE_LOAD_ID } from './pageLoad'
 
 /** Ack de succès de `host:create` — voir `apps/server/src/game-gateway.ts`. Déclaré ICI et
  * réexporté plutôt que dupliqué dans chaque appelant (`HostEditor`, `Home`) : une seule forme,
@@ -53,7 +54,8 @@ export function useLaunchGame(): UseLaunchGame {
       setError(null)
       try {
         const ack = await emitAck<HostCreateAck>('host:create', { quizId })
-        navigate(`/host/${ack.sessionId}`, { state: { pin: ack.pin, quizTitle } })
+        // `launch` date cet état : il ne vaut que pour ce chargement de page (voir `pageLoad.ts`).
+        navigate(`/host/${ack.sessionId}`, { state: { pin: ack.pin, quizTitle, launch: PAGE_LOAD_ID } })
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Impossible de lancer la partie.'
         setLaunching(false)

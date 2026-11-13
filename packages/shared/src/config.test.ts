@@ -288,3 +288,23 @@ describe('loadConfig — dossier des médias envoyés', () => {
     expect(loadConfig({ MEDIA_DIR: '/srv/media' }).mediaDir).toBe(path.resolve('/srv/media'))
   })
 })
+
+describe('loadConfig, démonstration sans compte', () => {
+  it('est éteinte par défaut, avec les plafonds de la proposition', () => {
+    expect(loadConfig({}).demo).toEqual({ enabled: false, maxPlayers: 30, maxConcurrent: 20, perIpPerHour: 5 })
+  })
+
+  it("s'active en mode multi", () => {
+    expect(loadConfig({ DEMO_ENABLED: 'true', TENANCY_MODE: 'multi' }).demo.enabled).toBe(true)
+  })
+
+  it('refuse DEMO_ENABLED=true en mode single', () => {
+    expect(() => loadConfig({ DEMO_ENABLED: 'true' })).toThrow(/DEMO_ENABLED.*TENANCY_MODE=multi/)
+  })
+
+  it('lit les plafonds et refuse zéro', () => {
+    const env = { DEMO_MAX_PLAYERS: '12', DEMO_MAX_CONCURRENT: '3', DEMO_PER_IP_PER_HOUR: '2' }
+    expect(loadConfig(env).demo).toMatchObject({ maxPlayers: 12, maxConcurrent: 3, perIpPerHour: 2 })
+    expect(() => loadConfig({ DEMO_MAX_PLAYERS: '0' })).toThrow()
+  })
+})
