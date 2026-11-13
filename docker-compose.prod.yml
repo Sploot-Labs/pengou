@@ -49,6 +49,8 @@ services:
       LEGAL_TERMS_URL: ${LEGAL_TERMS_URL:-}
       LEGAL_PRIVACY_URL: ${LEGAL_PRIVACY_URL:-}
       LEGAL_TERMS_VERSION: ${LEGAL_TERMS_VERSION:-}
+      # Moteurs de recherche : true (défaut) demande à ne pas être indexé, false autorise l'indexation.
+      ROBOTS_NOINDEX: ${ROBOTS_NOINDEX:-true}
       # Plafond de joueurs par partie (voir docs/charge).
       MAX_PLAYERS_PER_SESSION: ${MAX_PLAYERS_PER_SESSION:-640}
       # Envoi d'e-mails (optionnel, voir docs/devops.md, section « Envoi d'e-mails ») : sans

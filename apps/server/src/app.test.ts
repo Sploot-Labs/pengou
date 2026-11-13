@@ -53,8 +53,16 @@ describe('durcissement sécurité (helmet + rate-limit)', () => {
     const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
     const res = await app.inject({ method: 'GET', url: '/health' })
     expect(res.headers['x-content-type-options']).toBe('nosniff')
-    expect(res.headers['x-frame-options']).toBe('SAMEORIGIN')
+    expect(res.headers['x-frame-options']).toBe('DENY')
     expect(res.headers['content-security-policy']).toBeDefined()
+    await app.close()
+  })
+
+  it('aligne frame-ancestors et Permissions-Policy sur le site vitrine', async () => {
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
+    const res = await app.inject({ method: 'GET', url: '/health' })
+    expect(String(res.headers['content-security-policy'])).toContain("frame-ancestors 'none'")
+    expect(res.headers['permissions-policy']).toBe('camera=(), microphone=(), geolocation=()')
     await app.close()
   })
 

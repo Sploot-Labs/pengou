@@ -102,6 +102,7 @@ export {
   type SessionReport,
 } from './repos/reports.js'
 export { syncLibrary, normalizeSearch } from './repos/library-sync.js'
+export { countSignupsBySourceAndWeek, type SignupsBySourceRow } from './repos/signups.js'
 export {
   listLibraryThemes,
   listLibraryLanguages,

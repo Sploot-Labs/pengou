@@ -43,7 +43,6 @@ function fillValidFields() {
   fireEvent.change(screen.getByLabelText('Nom'), { target: { value: 'Ada' } })
   fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'ada@example.com' } })
   fireEvent.change(screen.getByLabelText('Mot de passe'), { target: { value: 'motdepasse-1' } })
-  fireEvent.change(screen.getByLabelText('Confirmer le mot de passe'), { target: { value: 'motdepasse-1' } })
 }
 
 function submit() {
@@ -162,7 +161,7 @@ describe('Signup avec CGU activées', () => {
       acceptedTermsVersion: '2026-10-31',
       ageConfirmed: true,
     })
-    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true }))
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/?premier-quiz=1', { replace: true }))
   })
 })
 
@@ -222,9 +221,59 @@ describe("Signup, aide à la saisie de l'e-mail et destination ?next=", () => {
     await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/invitations/abc?v=xyz', { replace: true }))
   })
 
+  it('envoie la provenance ?from= normalisée et la garde sur le lien de connexion', async () => {
+    renderSignup('/signup?from=Kahoot-Gratuit')
+    expect(screen.getByRole('link', { name: 'Se connecter' })).toHaveAttribute('href', '/login?from=kahoot-gratuit')
+    await fillAndSubmit()
+    await waitFor(() => expect(mockSignUp).toHaveBeenCalledWith(expect.objectContaining({ from: 'kahoot-gratuit' })))
+  })
+
+  it("n'envoie aucune provenance sans ?from= valide", async () => {
+    renderSignup('/signup?from=%3Cscript%3E')
+    await fillAndSubmit()
+    await waitFor(() => expect(mockSignUp).toHaveBeenCalled())
+    expect(mockSignUp.mock.calls[0]?.[0]).not.toHaveProperty('from')
+  })
+
   it('ignore une destination ?next= externe', async () => {
     renderSignup('/signup?next=%2F%2Fevil.example')
     await fillAndSubmit()
-    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true }))
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/?premier-quiz=1', { replace: true }))
+  })
+})
+
+describe('Signup, champ mot de passe', () => {
+  beforeEach(() => mockFetchLegal.mockResolvedValue({ termsVersion: null, termsUrl: null, privacyUrl: null }))
+
+  it('ne demande plus de confirmation et annonce la longueur minimale', () => {
+    renderSignup()
+    expect(screen.queryByLabelText('Confirmer le mot de passe')).not.toBeInTheDocument()
+    const password = screen.getByLabelText('Mot de passe')
+    expect(password).toHaveAccessibleDescription('8 caractères minimum.')
+  })
+
+  it('affiche puis masque la saisie avec le bouton', () => {
+    renderSignup()
+    const password = screen.getByLabelText('Mot de passe')
+    expect(password).toHaveAttribute('type', 'password')
+    fireEvent.click(screen.getByRole('button', { name: 'Afficher le mot de passe' }))
+    expect(password).toHaveAttribute('type', 'text')
+    fireEvent.click(screen.getByRole('button', { name: 'Masquer le mot de passe' }))
+    expect(password).toHaveAttribute('type', 'password')
+  })
+
+  it('dit combien de caractères manquent et met le focus sur le champ, sans rien envoyer', async () => {
+    renderSignup()
+    await waitFor(() => expect(screen.getByRole('button', { name: "S'inscrire" })).toBeEnabled())
+    fireEvent.change(screen.getByLabelText('Nom'), { target: { value: 'Ada' } })
+    fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'ada@example.com' } })
+    fireEvent.change(screen.getByLabelText('Mot de passe'), { target: { value: 'court' } })
+    submit()
+    const password = screen.getByLabelText('Mot de passe')
+    expect(password).toHaveFocus()
+    expect(password).toHaveAccessibleDescription(
+      '8 caractères minimum. Mot de passe trop court : 8 caractères minimum, 5 saisis.',
+    )
+    expect(mockSignUp).not.toHaveBeenCalled()
   })
 })

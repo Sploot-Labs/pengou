@@ -15,6 +15,16 @@
       "development": "./src/email-suggest.ts",
       "types": "./dist/email-suggest.d.ts",
       "default": "./dist/email-suggest.js"
+    },
+    "./spa-routes": {
+      "development": "./src/spa-routes.ts",
+      "types": "./dist/spa-routes.d.ts",
+      "default": "./dist/spa-routes.js"
+    },
+    "./signup-source": {
+      "development": "./src/signup-source.ts",
+      "types": "./dist/signup-source.d.ts",
+      "default": "./dist/signup-source.js"
     }
   },
   "scripts": {

@@ -7,6 +7,7 @@ import {
   archiveQuiz,
   restoreQuiz,
   deleteQuiz,
+  importQuiz,
   withTenantTx,
   type Db,
 } from '@splootlabs/db'
@@ -14,6 +15,7 @@ import type { AppConfig } from '@splootlabs/shared'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
 import { assertCanOwnAnotherQuiz } from '../quiz-quota.js'
 import { LIMITS, tooLong, isSafeMedia } from '../validation.js'
+import { EXAMPLE_QUIZ } from '../example-quiz.js'
 
 type Deps = { systemDb: Db; appDb: Db; config: AppConfig; mailEnabled?: boolean }
 
@@ -52,6 +54,20 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
     // requête qui ne voit pas encore le quiz.
     const quiz = await withTenantTx(appDb, context, (scope) =>
       createQuiz(scope, { ownerId: request.user.id, title: body.title as string, description }),
+    )
+    return reply.code(201).send(quiz)
+  })
+
+  // Quiz d'exemple déjà rempli, proposé juste après l'inscription : l'hôte arrive dans l'éditeur
+  // avec un quiz à modifier plutôt que sur une liste vide. Mêmes droits et même limite qu'une
+  // création ordinaire ; le contenu est fixe, le client n'envoie rien.
+  app.post('/api/quizzes/example', { preHandler: requireUser }, async (request, reply) => {
+    const context = await resolveContextOr403(request, reply, systemDb, config)
+    if (!context) return
+    const refused = await assertCanOwnAnotherQuiz(systemDb, request.user, quotaOpts)
+    if (refused) return reply.code(refused.status).send(refused.body)
+    const quiz = await withTenantTx(appDb, context, (scope) =>
+      importQuiz(scope, { ownerId: request.user.id, source: null, ...EXAMPLE_QUIZ }),
     )
     return reply.code(201).send(quiz)
   })

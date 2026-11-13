@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-do
 import { signIn, useSession } from '../api/auth'
 import { useAuthFeatures } from '../api/features'
 import { ApiError } from '../api/client'
+import { normalizeSignupSource } from '@splootlabs/shared/signup-source'
 import { safeNextPath, nextQuery } from '../nextPath'
 import { Button, Logo } from '../ui'
 
@@ -19,7 +20,10 @@ export function Login() {
   const { mailEnabled } = useAuthFeatures()
   const passwordReset = (location.state as { passwordReset?: boolean } | null)?.passwordReset === true
   const { refresh } = useSession()
-  const returnTo = safeNextPath(useSearchParams()[0].get('next'))
+  const [searchParams] = useSearchParams()
+  const returnTo = safeNextPath(searchParams.get('next'))
+  // Provenance d'inscription (voir Signup) : conservée sur le lien « Créer un compte ».
+  const from = normalizeSignupSource(searchParams.get('from'))
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<FieldErrors>({})
@@ -157,7 +161,7 @@ export function Login() {
         </Button>
 
         <p className="join-reassure">
-          Pas encore de compte ? <Link to={`/signup${nextQuery(returnTo)}`}>Créer un compte</Link>
+          Pas encore de compte ? <Link to={`/signup${nextQuery(returnTo, from)}`}>Créer un compte</Link>
         </p>
       </form>
     </main>

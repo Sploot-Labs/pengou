@@ -12,7 +12,7 @@ Docker doit être démarré et le port 3000 libre : arrêtez le serveur de dev (
 pnpm --filter @splootlabs/server charge:campagne -- --scenario rapide
 ```
 
-Le scénario `rapide` (par défaut) joue une fois 640 joueurs, 800 joueurs et dix parties de 30 joueurs, en une dizaine de minutes. Le scénario `complet` reprend le protocole du rapport de référence : les paliers 300, 500, 750, 800, 900 et 1000 deux fois chacun, dix parties de 30 deux fois et une rafale de 800 joueurs à 250 arrivées par seconde, soit environ une heure. Les scénarios sont définis dans `apps/server/charge/scenarios.mjs`.
+Le scénario `rapide` (par défaut) joue une fois 640 joueurs, 800 joueurs et dix parties de 30 joueurs, en une dizaine de minutes. Le scénario `paliers` joue une partie de 30, de 50, de 100 puis de 200 joueurs, en quelques minutes : ce sont les tailles d'une classe ou d'un amphithéâtre. Le scénario `complet` reprend le protocole du rapport de référence : les paliers 300, 500, 750, 800, 900 et 1000 deux fois chacun, dix parties de 30 deux fois et une rafale de 800 joueurs à 250 arrivées par seconde, soit environ une heure. Les scénarios sont définis dans `apps/server/charge/scenarios.mjs`.
 
 L'option `--pause` règle l'attente après le démarrage du serveur (30 secondes par défaut) et `--sans-build` réutilise l'image déjà construite.
 

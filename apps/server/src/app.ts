@@ -87,6 +87,20 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
     warnForwardedFor(request.raw)
   })
 
+  // En-têtes communs à toutes les réponses (HTML, fichiers, API, erreurs), posés dès `onRequest` par
+  // un hook synchrone. Surtout pas par un hook `onSend` asynchrone : la réponse d'un garde
+  // (`requireUser`, 401) ne partirait plus dans le même tour, voir require-user.ts.
+  //  - X-Robots-Tag : l'application n'a rien à faire dans l'index des moteurs (elle concurrencerait
+  //    le site vitrine sur sa propre marque). index.html porte aussi la balise robots en filet de
+  //    sécurité (voir static.ts). Réglable par ROBOTS_NOINDEX.
+  //  - Permissions-Policy, alignée sur le site vitrine : l'application n'utilise ni caméra, ni
+  //    micro, ni géolocalisation, et n'en accorde pas l'accès à du contenu embarqué (médias de quiz).
+  app.addHook('onRequest', (_request, reply, done) => {
+    if (config.robotsNoindex) reply.header('x-robots-tag', 'noindex')
+    reply.header('permissions-policy', 'camera=(), microphone=(), geolocation=()')
+    done()
+  })
+
   // Sécurité (P2) : en-têtes HTTP durcis (anti-clickjacking, anti-sniffing MIME, Referrer-Policy…).
   // CSP réglée pour rester compatible avec le SPA servi par le même serveur : styles inline
   // (framer-motion), images data:/blob:, et connexions websocket (Socket.IO). Les polices sont
@@ -103,8 +117,12 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
         // validation isSafeMedia côté serveur, qui accepte les URLs http(s)).
         imgSrc: ["'self'", 'data:', 'blob:', 'https:'],
         connectSrc: ["'self'", 'ws:', 'wss:'],
+        // Aucun écran de l'application ne s'affiche dans un cadre : comme le site vitrine, on
+        // interdit tout encadrement (anti-clickjacking), y compris par l'application elle-même.
+        frameAncestors: ["'none'"],
       },
     },
+    xFrameOptions: { action: 'deny' },
     // Même origine SPA↔API : COEP casserait le chargement des polices tierces sans bénéfice ici.
     crossOriginEmbedderPolicy: false,
   })

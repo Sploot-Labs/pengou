@@ -7,6 +7,8 @@
 Une alternative open source à Kahoot : créez des quiz, lancez des parties en temps réel,
 projetez le grand écran, jouez depuis n'importe quel téléphone. Auto-hébergeable en une commande.
 
+Site officiel : [pengou.fr](https://pengou.fr). Instance hébergée en France, gratuite : [app.pengou.fr](https://app.pengou.fr).
+
 [![CI](https://github.com/Sploot-Labs/pengou/actions/workflows/ci.yml/badge.svg)](https://github.com/Sploot-Labs/pengou/actions/workflows/ci.yml)
 [![Licence Apache-2.0](https://img.shields.io/badge/licence-Apache--2.0-3F7D57?style=flat-square)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%E2%89%A520-3F7D57?style=flat-square)](https://nodejs.org)
@@ -14,7 +16,7 @@ projetez le grand écran, jouez depuis n'importe quel téléphone. Auto-héberge
 [![PRs bienvenues](https://img.shields.io/badge/PRs-bienvenues%20%F0%9F%90%BE-D9772B?style=flat-square)](./CONTRIBUTING.md)
 ![Par Sploot Labs](https://img.shields.io/badge/par-sploot%20labs-1E5F60?style=flat-square)
 
-[Démarrer](#démarrer-en-une-commande-docker) | [Fonctionnalités](#ce-que-fait-pengou) | [Contribuer](#contribuer) | [Contributeurs](#contributeurs)
+[Site officiel](https://pengou.fr) | [Démarrer](#démarrer-en-une-commande-docker) | [Fonctionnalités](#ce-que-fait-pengou) | [Contribuer](#contribuer) | [Contributeurs](#contributeurs)
 
 </div>
 
@@ -122,6 +124,9 @@ par construction. Voir les specs de conception dans [`docs/superpowers/`](docs/s
 - Base de données : Postgres (migrations appliquées au démarrage).
 - Secrets : injectez `BETTER_AUTH_SECRET` et `DATABASE_URL` via votre gestionnaire de secrets.
   En production, servez derrière HTTPS et fixez `BETTER_AUTH_URL` en `https://`.
+- Moteurs de recherche : par défaut, une instance demande à ne pas être indexée
+  (`ROBOTS_NOINDEX=true`, en-tête `X-Robots-Tag: noindex`). Une instance publique qui veut
+  apparaître dans les résultats met `ROBOTS_NOINDEX=false`. Voir [`docs/devops.md`](docs/devops.md).
 - Multi-instance : le passage à l'échelle horizontale (Redis, état de jeu partagé) est en cours.
   Le déploiement actuel est mono-instance. Voir [`docs/audit/`](docs/audit/).
 

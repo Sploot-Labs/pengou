@@ -3,11 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pengou : le quiz en direct, open-source. Chez vous ou dans le cloud.</title>
+    <title>Pengou, l'application : rejoindre ou animer une partie</title>
     <meta
       name="description"
-      content="Pengou, le quiz interactif en direct, gratuit pour tout le monde, sans version premium. Crée un quiz, la colonie rejoint avec un code et répond depuis son téléphone. Édité par Sploot Labs."
+      content="Rejoignez une partie de quiz avec le code affiché par l'animateur, ou connectez-vous pour créer et animer vos quiz en direct. Pengou est édité par Sploot Labs."
     />
+    <!-- L'application n'a pas à figurer dans les moteurs : c'est le site pengou.fr qui présente Pengou.
+         Le serveur envoie aussi X-Robots-Tag: noindex, et retire cette balise si ROBOTS_NOINDEX=false. -->
+    <meta name="robots" content="noindex" />
 
     <!-- Identité Pengou (kit logo « Croissant ») : favicon adaptatif au mode sombre,
          icônes PWA (manifest), couleur de thème bleu nuit, image de partage Open Graph. -->
@@ -16,9 +19,21 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#0B2545" />
+    <!-- og:url et og:image sont réécrits en URL absolues par le serveur (origine de BETTER_AUTH_URL). -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Pengou : le quiz en direct, open-source" />
+    <meta property="og:site_name" content="Pengou" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="Pengou, l'application : rejoindre ou animer une partie" />
+    <meta
+      property="og:description"
+      content="Rejoignez une partie de quiz avec le code affiché par l'animateur, ou créez et animez vos quiz en direct."
+    />
+    <meta property="og:url" content="/" />
     <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Grande image dans les aperçus de lien (X, messageries) : sans cette balise, l'aperçu est réduit. -->
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <div id="root"></div>

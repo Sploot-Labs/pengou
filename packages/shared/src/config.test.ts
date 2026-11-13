@@ -263,3 +263,17 @@ describe("loadConfig, conditions d'utilisation (CGU)", () => {
     expect(() => loadConfig({ ...LEGAL, LEGAL_TERMS_URL: 'javascript:alert(1)' })).toThrow()
   })
 })
+
+describe('loadConfig, indexation par les moteurs', () => {
+  it('demande le noindex par défaut', () => {
+    expect(loadConfig({}).robotsNoindex).toBe(true)
+  })
+
+  it("autorise l'indexation avec ROBOTS_NOINDEX=false", () => {
+    expect(loadConfig({ ROBOTS_NOINDEX: 'false' }).robotsNoindex).toBe(false)
+  })
+
+  it('rejette une valeur ROBOTS_NOINDEX invalide', () => {
+    expect(() => loadConfig({ ROBOTS_NOINDEX: 'oui' })).toThrow()
+  })
+})

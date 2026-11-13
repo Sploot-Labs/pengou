@@ -29,12 +29,63 @@ describe('service statique du SPA', () => {
     await app.close()
   })
 
-  it('fait un fallback SPA sur une route inconnue', async () => {
+  it.each(['/join', '/join/', '/join?pin=123456', '/quizzes/123', '/host/abc', '/invitations/jeton?v=preuve'])(
+    "sert index.html en 200 sur la route de l'application %s rechargée directement",
+    async (url) => {
+      const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
+      registerStatic(app, dist)
+      const res = await app.inject({ method: 'GET', url })
+      expect(res.statusCode).toBe(200)
+      expect(res.headers['content-type']).toMatch(/^text\/html/)
+      expect(res.body).toContain('id="root"')
+      await app.close()
+    },
+  )
+
+  it("répond 404 avec la page de l'application sur un chemin inconnu sans extension", async () => {
     const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
     registerStatic(app, dist)
-    const res = await app.inject({ method: 'GET', url: '/quiz/123' })
+    for (const url of ['/zzz-unknown', '/quiz/123', '/quizzes', '/play/123456']) {
+      const res = await app.inject({ method: 'GET', url })
+      expect(res.statusCode, url).toBe(404)
+      // Le corps reste la page : elle affiche l'écran « page introuvable » à un humain.
+      expect(res.body, url).toContain('id="root"')
+    }
+    await app.close()
+  })
+
+  it("ne sert jamais la page de l'application pour un fichier absent ou /.well-known", async () => {
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
+    registerStatic(app, dist)
+    for (const url of [
+      '/sitemap.xml',
+      '/favicon.ico',
+      '/assets/index-ancien.js',
+      '/.well-known/security.txt',
+      '/.well-known/x',
+    ]) {
+      const res = await app.inject({ method: 'GET', url })
+      expect(res.statusCode, url).toBe(404)
+      expect(res.headers['content-type'], url).toMatch(/^text\/plain/)
+      expect(res.body, url).not.toContain('id="root"')
+    }
+    await app.close()
+  })
+
+  it("répond 404 sans la page à une méthode d'écriture sur une route de l'application", async () => {
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
+    registerStatic(app, dist)
+    const res = await app.inject({ method: 'POST', url: '/join' })
+    expect(res.statusCode).toBe(404)
+    expect(res.body).not.toContain('id="root"')
+    await app.close()
+  })
+
+  it("répond à HEAD sur une route de l'application", async () => {
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
+    registerStatic(app, dist)
+    const res = await app.inject({ method: 'HEAD', url: '/join' })
     expect(res.statusCode).toBe(200)
-    expect(res.body).toContain('id="root"')
     await app.close()
   })
 
@@ -66,7 +117,7 @@ describe('limite de débit HTTP et fichiers du SPA', () => {
       codes.push((await app.inject({ method: 'GET', url: '/assets/index-abc123.js' })).statusCode)
       codes.push((await app.inject({ method: 'GET', url: '/index.html' })).statusCode)
       codes.push((await app.inject({ method: 'GET', url: '/' })).statusCode)
-      codes.push((await app.inject({ method: 'GET', url: '/play/123456' })).statusCode)
+      codes.push((await app.inject({ method: 'GET', url: '/quizzes/123456' })).statusCode)
     }
     expect(codes.every((c) => c === 200)).toBe(true)
     await app.close()
