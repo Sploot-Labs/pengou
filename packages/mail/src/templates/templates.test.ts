@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { escapeHtml, invitationMail, resetPasswordMail, verifyEmailMail } from '../index.js'
+import {
+  escapeHtml,
+  invitationMail,
+  passwordChangedMail,
+  resetPasswordMail,
+  trimBase,
+  verifyEmailMail,
+} from '../index.js'
 
 const baseUrl = 'https://app.pengou.fr'
 const url = 'https://app.pengou.fr/action/abc123'
@@ -28,6 +35,12 @@ const cases = [
     make: (u: string) => resetPasswordMail({ baseUrl, url: u }),
     subject: 'Réinitialiser votre mot de passe Pengou',
     title: 'Choisir un nouveau mot de passe',
+  },
+  {
+    nom: 'mot de passe modifié',
+    make: (u: string) => passwordChangedMail({ baseUrl, url: u }),
+    subject: 'Votre mot de passe Pengou a été modifié',
+    title: 'Votre mot de passe a été modifié',
   },
   {
     nom: 'confirmation',
@@ -83,6 +96,16 @@ describe('invitation', () => {
   })
 })
 
+describe('mot de passe modifié', () => {
+  it("dit quoi faire si le changement n'est pas du titulaire, sans jeton dans le lien", () => {
+    const lien = 'https://app.pengou.fr/forgot-password'
+    const mail = passwordChangedMail({ baseUrl, url: lien })
+    expect(mail.text).toContain("Si ce n'est pas vous")
+    expect(mail.html).toContain('Si ce n&#39;est pas vous')
+    expect(mail.text).toContain(lien)
+  })
+})
+
 describe("garde d'URL et sujet", () => {
   it('refuse les hôtes qui ressemblent à la base', () => {
     expect(() => inv({ url: 'https://app.pengou.fr.evil.com/x' })).toThrow()
@@ -95,6 +118,22 @@ describe("garde d'URL et sujet", () => {
     const mail = inv({ inviterName: 'Camille\r\nBcc: x@y' })
     expect(mail.subject).not.toMatch(/[\r\n]/)
     expect(mail.subject).toBe('Camille Bcc: x@y vous invite sur Pengou')
+  })
+})
+
+describe('trimBase', () => {
+  it.each([
+    ['https://app.pengou.fr', 'https://app.pengou.fr'],
+    ['https://app.pengou.fr/', 'https://app.pengou.fr'],
+    ['https://app.pengou.fr/pengou///', 'https://app.pengou.fr/pengou'],
+    ['///', ''],
+    ['', ''],
+  ])('réduit %j à %j', (entree, attendu) => {
+    expect(trimBase(entree)).toBe(attendu)
+  })
+  it('garde les barres qui ne sont pas finales, même très nombreuses', () => {
+    const entree = `${'/'.repeat(100_000)}x`
+    expect(trimBase(entree)).toBe(entree)
   })
 })
 

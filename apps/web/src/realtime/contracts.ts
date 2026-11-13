@@ -41,6 +41,8 @@ export interface ReadingView {
   total: number
   readingTime: number
   startedAt: number | null
+  media?: string | null
+  mediaAlt?: string | null
 }
 
 /** Payload de `auto:advance` (enchaînement automatique des étapes) : horodatage serveur (ms epoch)

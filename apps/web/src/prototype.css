@@ -4017,3 +4017,106 @@ p.source-credit {
 .ab-quiz-limit p {
   margin: 0;
 }
+
+/* Champ image d'une question (QuestionImageField). */
+.host-image {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  margin: 0;
+  padding: var(--space-3);
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.16));
+  border-radius: var(--radius-sm);
+}
+
+.host-image legend {
+  padding: 0 var(--space-2);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--ink-dim);
+}
+
+.host-image__preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.host-image__preview img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+}
+
+.host-image__upload {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+}
+
+.host-image__file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Image facultative d'une question (grand écran, hôte, joueur). */
+.question-image {
+  display: block;
+  margin-inline: auto;
+  object-fit: contain;
+  max-width: 100%;
+}
+
+.question-image--player {
+  max-height: min(16vh, 110px);
+  max-height: min(16dvh, 110px);
+  width: 100%;
+  object-fit: contain;
+}
+
+/* Question avec image sur le téléphone : les réponses doivent rester visibles
+   sans défiler dès 360x640. Image plafonnée ci-dessus, écarts et contrôles
+   resserrés ici (sans image, la mise en page d'origine est inchangée). */
+.player-question:has(.question-image) {
+  gap: 10px;
+}
+.player-question:has(.question-image) .player-tiles .ab-tile {
+  min-height: 88px;
+  padding: 12px 14px;
+  gap: 8px;
+}
+.player-question:has(.question-image) .player-tiles .ab-tile__shape svg {
+  width: 28px;
+  height: 28px;
+}
+.player-question:has(.question-image) .player-duo .ab-tile {
+  min-height: 72px;
+}
+.player-question:has(.question-image) .player-slider {
+  gap: 8px;
+}
+.player-question:has(.question-image) .player-slider__value {
+  padding: 8px 20px;
+}
+.player-question:has(.question-image) .player-slider__value output {
+  font-size: 40px;
+}
+.player-question:has(.question-image) .player-slider input[type="range"] {
+  height: 48px;
+}
+
+.question-image--big {
+  max-height: 45vh;
+}
+
+.question-image--host {
+  max-height: 30vh;
+}

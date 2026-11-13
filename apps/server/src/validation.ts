@@ -6,9 +6,21 @@ export const LIMITS = {
   description: 2000,
   prompt: 500,
   media: 2048,
+  mediaAlt: 200,
   cover: 2048,
   nickname: 32,
 } as const
+
+const UUID_PATTERN = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+const UPLOADED_FILE = new RegExp(`^${UUID_PATTERN}\\.(png|jpg|webp|gif)$`)
+
+/** Vrai si `value` est le chemin d'une image envoyée par `POST /api/media` dans ce workspace. Aucune
+ * adresse externe : le téléphone d'un joueur ne doit jamais contacter un site tiers pendant une
+ * partie. Aucune image d'un autre workspace : son propriétaire reste seul à décider de son usage. */
+export function isUploadedMedia(value: string, tenantId: string): boolean {
+  const prefix = `/uploads/${tenantId}/`
+  return value.startsWith(prefix) && UPLOADED_FILE.test(value.slice(prefix.length))
+}
 
 /** Vrai si `value` est une chaîne dépassant `max` caractères. */
 export function tooLong(value: unknown, max: number): boolean {

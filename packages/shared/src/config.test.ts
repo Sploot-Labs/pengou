@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import path from 'node:path'
 import { loadConfig, DEFAULT_APP_DB_PASSWORD } from './config'
 
 describe('loadConfig', () => {
@@ -275,5 +276,15 @@ describe('loadConfig, indexation par les moteurs', () => {
 
   it('rejette une valeur ROBOTS_NOINDEX invalide', () => {
     expect(() => loadConfig({ ROBOTS_NOINDEX: 'oui' })).toThrow()
+  })
+})
+
+describe('loadConfig — dossier des médias envoyés', () => {
+  it('par défaut : ./data/media résolu en chemin absolu', () => {
+    expect(loadConfig({}).mediaDir).toBe(path.resolve('./data/media'))
+  })
+
+  it('MEDIA_DIR surcharge le dossier, résolu en chemin absolu', () => {
+    expect(loadConfig({ MEDIA_DIR: '/srv/media' }).mediaDir).toBe(path.resolve('/srv/media'))
   })
 })

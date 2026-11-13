@@ -141,3 +141,43 @@ describe('HostLive — phase lecture (question:reading)', () => {
     expect(screen.getByText('Lecture en cours')).toBeInTheDocument()
   })
 })
+
+describe('HostLive - image de la question', () => {
+  beforeEach(() => {
+    handlers.clear()
+    mockEmitAck.mockClear()
+  })
+  afterEach(cleanup)
+
+  it("affiche l'image dès la phase lecture", async () => {
+    renderHostLive()
+
+    emitServerEvent('question:reading', {
+      prompt: 'Quel est cet animal ?',
+      index: 0,
+      total: 3,
+      readingTime: 6,
+      startedAt: Date.now(),
+      media: 'https://ok.example/manchot.png',
+      mediaAlt: 'Un manchot',
+    })
+
+    const img = await screen.findByRole('img', { name: 'Un manchot' })
+    expect(img).toHaveClass('question-image--host')
+  })
+
+  it('question:show sans media (flux ancien) : aucun img, pas d’erreur', async () => {
+    renderHostLive()
+
+    emitServerEvent('question:show', {
+      id: 'q1',
+      type: 'mcq',
+      prompt: 'Quel est cet animal ?',
+      timeLimit: 20,
+      payload: { options: [{ label: 'Manchot' }, { label: 'Pingouin' }] },
+    })
+
+    await screen.findByText('Question en cours')
+    expect(screen.queryByRole('img')).toBeNull()
+  })
+})

@@ -61,6 +61,7 @@ describe("Better Auth et l'envoi d'e-mails", () => {
     for (const mailer of [undefined, new MemoryMailer({ enabled: false })]) {
       const a = createAuth(ctx.db, { ...base, mailer })
       expect(a.options.emailAndPassword?.sendResetPassword).toBeUndefined()
+      expect(a.options.emailAndPassword?.onPasswordReset).toBeUndefined()
       expect(a.options.emailVerification).toBeUndefined()
     }
   })

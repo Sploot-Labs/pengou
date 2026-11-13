@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ForgotPassword } from './ForgotPassword'
@@ -92,6 +92,19 @@ describe('ForgotPassword', () => {
       email: 'camille@gmail.com',
       redirectTo: '/reset-password',
     })
+  })
+
+  it('place le focus sur le message de confirmation, à chaque envoi', async () => {
+    fetchMock.mockImplementation(() => Promise.resolve(jsonResponse(200, { status: true })))
+    renderScreen()
+    typeEmail('camille@gmail.com')
+    submit()
+    const status = await screen.findByRole('status')
+    await waitFor(() => expect(status).toHaveFocus())
+
+    screen.getByLabelText('E-mail').focus()
+    submit()
+    await waitFor(() => expect(screen.getByRole('status')).toHaveFocus())
   })
 
   it('signale un excès de demandes sur 429', async () => {

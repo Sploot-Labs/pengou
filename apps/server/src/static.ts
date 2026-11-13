@@ -101,7 +101,8 @@ export function registerStatic(app: FastifyInstance, webDistDir: string, options
     // route et n'est donc jamais compté par la limite de débit.
     spa.setNotFoundHandler(async (req, reply) => {
       const pathname = req.url.split('?')[0] ?? ''
-      if (pathname.startsWith('/api') || pathname.startsWith('/health')) {
+      // /uploads : un fichier envoyé absent doit répondre 404, jamais la page de l'application.
+      if (pathname.startsWith('/api') || pathname.startsWith('/health') || pathname.startsWith('/uploads')) {
         // Message affiché tel quel par le front : une route d'API inconnue signale en pratique un
         // serveur qui n'a pas la version attendue par la page.
         return reply.code(404).send({ error: "Cette fonctionnalité n'est pas disponible sur ce serveur." })

@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { buildServer } from './app'
 import { registerStatic } from './static'
+import { registerUploads } from './uploads'
 import { loadConfig } from '@splootlabs/shared'
 
 let dist: string
@@ -103,6 +104,20 @@ describe('service statique du SPA', () => {
 
     await app.close()
   })
+
+  it('ne fait pas de fallback SPA sous /uploads (404, pas index.html)', async () => {
+    const media = mkdtempSync(join(tmpdir(), 'media-'))
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }))
+    registerUploads(app, media)
+    registerStatic(app, dist)
+    for (const url of ['/uploads/t1/absent.png', '/uploads/t1/', '/uploads']) {
+      const res = await app.inject({ method: 'GET', url })
+      expect(res.statusCode, url).toBe(404)
+      expect(res.body, url).not.toContain('id="root"')
+    }
+    await app.close()
+    rmSync(media, { recursive: true, force: true })
+  })
 })
 
 describe('limite de débit HTTP et fichiers du SPA', () => {
@@ -121,6 +136,19 @@ describe('limite de débit HTTP et fichiers du SPA', () => {
     }
     expect(codes.every((c) => c === 200)).toBe(true)
     await app.close()
+  })
+
+  it('ne plafonne pas les images envoyées', async () => {
+    const media = mkdtempSync(join(tmpdir(), 'uploads-rl-'))
+    mkdirSync(join(media, 't1'))
+    writeFileSync(join(media, 't1', 'a.png'), 'x')
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test', RATE_LIMIT_MAX: '3' }))
+    registerUploads(app, media)
+    const codes: number[] = []
+    for (let i = 0; i < 8; i++) codes.push((await app.inject({ method: 'GET', url: '/uploads/t1/a.png' })).statusCode)
+    expect(codes.every((c) => c === 200)).toBe(true)
+    await app.close()
+    rmSync(media, { recursive: true, force: true })
   })
 
   it('plafonne toujours les routes dynamiques, même après des chargements du SPA', async () => {

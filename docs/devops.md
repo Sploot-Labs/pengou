@@ -79,6 +79,8 @@ Le service app n'écoute que sur `127.0.0.1:3000`. Un reverse proxy TLS (Caddy, 
 
 Le volume `db-data` fige le mot de passe de la base au premier démarrage. Changer `POSTGRES_PASSWORD` ensuite dans `.env` ne modifie pas la base existante : il faut soit changer le mot de passe dans PostgreSQL, soit supprimer le volume (perte de données).
 
+Le volume `media-data` contient les images envoyées depuis l'éditeur (montées dans `/app/data/media`). Il est à sauvegarder avec la base, par exemple : `docker run --rm -v <projet>_media-data:/data -v "$PWD":/backup alpine tar czf /backup/media.tgz -C /data .`. Les fichiers orphelins (image remplacée, question ou quiz supprimé) ne sont pas nettoyés automatiquement et comptent dans le quota de `MEDIA_QUOTA_MB` (100 Mo par workspace par défaut, en mode multi-tenant).
+
 Tant que le paquet GHCR est privé, l'hôte doit s'authentifier (`docker login ghcr.io`) avec un jeton disposant du scope `read:packages` pour tirer l'image.
 
 ### Moteurs de recherche
@@ -130,7 +132,7 @@ La provenance est rattachée au compte : c'est une donnée personnelle, à menti
 
 ### Envoi d'e-mails
 
-Pengou envoie des e-mails transactionnels : réinitialisation du mot de passe, confirmation d'adresse à l'inscription et invitations à un espace de travail. Tout est optionnel. Sans transport configuré, l'application reste complète, simplement sans envoi.
+Pengou envoie des e-mails transactionnels : réinitialisation du mot de passe et avis de modification une fois celle-ci faite, confirmation d'adresse à l'inscription et invitations à un espace de travail. Tout est optionnel. Sans transport configuré, l'application reste complète, simplement sans envoi.
 
 Les variables, lues par `packages/shared/src/config.ts`, sont les suivantes. Une valeur vide compte comme une valeur absente.
 

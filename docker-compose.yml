@@ -63,6 +63,8 @@ services:
       SMTP_REQUIRE_TLS: ${SMTP_REQUIRE_TLS:-false}
       MAIL_FROM: ${MAIL_FROM:-Pengou <contact@pengou.fr>}
       BREVO_API_KEY: ${BREVO_API_KEY:-}
+    volumes:
+      - media-data:/app/data/media
     depends_on:
       db:
         condition: service_healthy
@@ -78,3 +80,4 @@ services:
 
 volumes:
   db-data:
+  media-data:

@@ -35,6 +35,8 @@ export default defineConfig({
           })
         },
       },
+      // Images envoyées par l'éditeur, servies par le serveur Fastify.
+      '/uploads': { target: 'http://localhost:3000', changeOrigin: false },
       '/socket.io': {
         target: apiTarget,
         ws: true,

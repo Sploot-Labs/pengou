@@ -99,24 +99,31 @@ function fallbackMessage(status: number): string {
   return `Erreur ${status}`
 }
 
-async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
-  const hasBody = body !== undefined
+function buildHeaders(withJsonBody: boolean): Record<string, string> {
   // Multi-tenant (Slice 3) : le workspace actif est porté par `x-tenant-id` sur CHAQUE requête.
   // En mode single (ou avant résolution du workspace), `getActiveTenantId()` renvoie null et
   // l'en-tête est omis — le serveur retombe sur le tenant `default`. C'est l'unique point
-  // d'injection : toute la CRUD passe par `request()`.
+  // d'injection : toute la CRUD passe par `send()`.
   const tenantId = getActiveTenantId()
   const headers: Record<string, string> = {}
-  if (hasBody) headers['Content-Type'] = 'application/json'
+  if (withJsonBody) headers['Content-Type'] = 'application/json'
   if (tenantId) headers['x-tenant-id'] = tenantId
+  return headers
+}
 
+async function send<T>(
+  method: string,
+  path: string,
+  headers: Record<string, string>,
+  body: BodyInit | undefined,
+): Promise<T> {
   const response = await fetch(path, {
     method,
     // Always same-origin: no cross-origin auth calls are ever intended, and
     // this is what carries the Better Auth session cookie.
     credentials: 'same-origin',
     headers: Object.keys(headers).length > 0 ? headers : undefined,
-    body: hasBody ? JSON.stringify(body) : undefined,
+    body,
   })
 
   const text = await response.text()
@@ -132,6 +139,16 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
   }
 
   return data as T
+}
+
+function request<T>(method: string, path: string, body?: unknown): Promise<T> {
+  const hasBody = body !== undefined
+  return send<T>(method, path, buildHeaders(hasBody), hasBody ? JSON.stringify(body) : undefined)
+}
+
+/** Envoi multipart. Pas de `Content-Type` : le navigateur le pose avec la frontière. */
+export function apiPostForm<T>(path: string, form: FormData): Promise<T> {
+  return send<T>('POST', path, buildHeaders(false), form)
 }
 
 export function apiGet<T>(path: string): Promise<T> {

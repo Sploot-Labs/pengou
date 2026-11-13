@@ -96,12 +96,14 @@ export async function resolveTenantId(
   if (!explicitTenantId) throw new Error('mode multi : un tenant explicite est requis')
   if (!userId) throw new Error('mode multi : utilisateur requis')
   const [m] = await db
-    .select({ id: schema.membership.id })
+    .select({ tenantId: schema.membership.tenantId })
     .from(schema.membership)
     .where(and(eq(schema.membership.userId, userId), eq(schema.membership.tenantId, explicitTenantId)))
     .limit(1)
   if (!m) throw new TenantAccessDeniedError()
-  return explicitTenantId
+  // La valeur de la base, jamais celle de l'en-tête : Postgres accepte plusieurs graphies d'un même
+  // uuid, et cet identifiant sert aussi à nommer le dossier d'images du workspace.
+  return m.tenantId
 }
 
 /** Rôle du membership (userId, tenantId), ou null si l'utilisateur n'est pas membre. */

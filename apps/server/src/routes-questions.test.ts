@@ -1,6 +1,6 @@
 import { describe, it, expect, afterAll, beforeAll } from 'vitest'
 import type { FastifyInstance } from 'fastify'
-import { startTestDb, runMigrations } from '@splootlabs/db'
+import { startTestDb, runMigrations, ensureDefaultTenant } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { loadConfig } from '@splootlabs/shared'
 import { buildServer } from './app.js'
@@ -8,10 +8,13 @@ import { registerAuth } from './auth-plugin.js'
 import { registerEditor } from './editor.js'
 
 let ctx: Awaited<ReturnType<typeof startTestDb>>
+/** Chemin d'une image du workspace par défaut, celui des comptes de ces tests (mode single). */
+let image: string
 
 beforeAll(async () => {
   ctx = await startTestDb()
   await runMigrations(ctx.db)
+  image = `/uploads/${await ensureDefaultTenant(ctx.db)}/00000000-0000-4000-8000-000000000002.png`
 }, 120_000)
 
 afterAll(async () => {
@@ -367,6 +370,204 @@ describe('routes CRUD /api/quizzes/:quizId/questions (protégées, scopées)', (
     expect((valid.json() as { readingTime: number }).readingTime).toBe(12)
 
     await app.close()
+  })
+
+  describe('mediaAlt', () => {
+    const json = { 'content-type': 'application/json' }
+    const mcq = (extra: Record<string, unknown>) => ({
+      type: 'mcq',
+      prompt: 'Q',
+      timeLimit: 20,
+      payload: validMcq,
+      ...extra,
+    })
+
+    it.each(['https://exemple.org/a.png', 'http://exemple.org/a.png', '/media/clip.webm', '/uploads/x/y.png'])(
+      "refuse une image qui n'a pas été envoyée : %s",
+      async (media) => {
+        const app = await buildApp()
+        const { cookie, quizId } = await createQuizAndCookie(app, `externe-${crypto.randomUUID()}@example.com`)
+        const res = await app.inject({
+          method: 'POST',
+          url: `/api/quizzes/${quizId}/questions`,
+          payload: mcq({ media }),
+          headers: { ...json, cookie },
+        })
+        expect(res.statusCode).toBe(400)
+        await app.close()
+      },
+    )
+
+    const autreWorkspace = '/uploads/00000000-0000-4000-8000-000000000001/00000000-0000-4000-8000-000000000002.png'
+
+    it("POST refuse l'image d'un autre workspace", async () => {
+      const app = await buildApp()
+      const { cookie, quizId } = await createQuizAndCookie(app, 'autre-workspace-post@example.com')
+      const res = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quizId}/questions`,
+        payload: mcq({ media: autreWorkspace }),
+        headers: { ...json, cookie },
+      })
+      expect(res.statusCode).toBe(400)
+      await app.close()
+    })
+
+    it("PATCH refuse l'image d'un autre workspace", async () => {
+      const app = await buildApp()
+      const { cookie, quizId } = await createQuizAndCookie(app, 'autre-workspace-patch@example.com')
+      const create = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quizId}/questions`,
+        payload: mcq({}),
+        headers: { ...json, cookie },
+      })
+      const created = create.json() as { id: string }
+      const patched = await app.inject({
+        method: 'PATCH',
+        url: `/api/quizzes/${quizId}/questions/${created.id}`,
+        payload: { media: autreWorkspace },
+        headers: { ...json, cookie },
+      })
+      expect(patched.statusCode).toBe(400)
+      await app.close()
+    })
+
+    it('POST accepte media + mediaAlt et les renvoie', async () => {
+      const app = await buildApp()
+      const { cookie, quizId } = await createQuizAndCookie(app, 'alt1@example.com')
+      const res = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quizId}/questions`,
+        payload: mcq({
+          media: image,
+          mediaAlt: 'Un manchot',
+        }),
+        headers: { ...json, cookie },
+      })
+      expect(res.statusCode).toBe(201)
+      expect(res.json()).toMatchObject({
+        media: image,
+        mediaAlt: 'Un manchot',
+      })
+      await app.close()
+    })
+
+    it('POST refuse un mediaAlt de 201 caractères (400)', async () => {
+      const app = await buildApp()
+      const { cookie, quizId } = await createQuizAndCookie(app, 'alt2@example.com')
+      const res = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quizId}/questions`,
+        payload: mcq({
+          media: image,
+          mediaAlt: 'a'.repeat(201),
+        }),
+        headers: { ...json, cookie },
+      })
+      expect(res.statusCode).toBe(400)
+      await app.close()
+    })
+
+    it('PATCH media: null efface aussi mediaAlt', async () => {
+      const app = await buildApp()
+      const { cookie, quizId } = await createQuizAndCookie(app, 'alt3@example.com')
+      const create = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quizId}/questions`,
+        payload: mcq({
+          media: image,
+          mediaAlt: 'Un manchot',
+        }),
+        headers: { ...json, cookie },
+      })
+      const created = create.json() as { id: string }
+      const patched = await app.inject({
+        method: 'PATCH',
+        url: `/api/quizzes/${quizId}/questions/${created.id}`,
+        payload: { media: null },
+        headers: { ...json, cookie },
+      })
+      expect(patched.statusCode).toBe(200)
+      expect(patched.json()).toMatchObject({ media: null, mediaAlt: null })
+      await app.close()
+    })
+
+    it('PATCH mediaAlt seul le met à jour sans toucher media', async () => {
+      const app = await buildApp()
+      const { cookie, quizId } = await createQuizAndCookie(app, 'alt4@example.com')
+      const create = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quizId}/questions`,
+        payload: mcq({
+          media: image,
+          mediaAlt: 'Un manchot',
+        }),
+        headers: { ...json, cookie },
+      })
+      const created = create.json() as { id: string }
+      const patched = await app.inject({
+        method: 'PATCH',
+        url: `/api/quizzes/${quizId}/questions/${created.id}`,
+        payload: { mediaAlt: 'Nouveau' },
+        headers: { ...json, cookie },
+      })
+      expect(patched.statusCode).toBe(200)
+      expect(patched.json()).toMatchObject({
+        media: image,
+        mediaAlt: 'Nouveau',
+      })
+      await app.close()
+    })
+
+    it('PATCH mediaAlt vide ou blanc le ramène à null', async () => {
+      const app = await buildApp()
+      const { cookie, quizId } = await createQuizAndCookie(app, 'alt6@example.com')
+      const create = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quizId}/questions`,
+        payload: mcq({
+          media: image,
+          mediaAlt: 'Un manchot',
+        }),
+        headers: { ...json, cookie },
+      })
+      const created = create.json() as { id: string }
+      for (const mediaAlt of ['', '   ']) {
+        const patched = await app.inject({
+          method: 'PATCH',
+          url: `/api/quizzes/${quizId}/questions/${created.id}`,
+          payload: { mediaAlt },
+          headers: { ...json, cookie },
+        })
+        expect(patched.statusCode).toBe(200)
+        expect(patched.json()).toMatchObject({
+          media: image,
+          mediaAlt: null,
+        })
+      }
+      await app.close()
+    })
+
+    it('PATCH refuse un mediaAlt non chaîne (400)', async () => {
+      const app = await buildApp()
+      const { cookie, quizId } = await createQuizAndCookie(app, 'alt5@example.com')
+      const create = await app.inject({
+        method: 'POST',
+        url: `/api/quizzes/${quizId}/questions`,
+        payload: mcq({}),
+        headers: { ...json, cookie },
+      })
+      const created = create.json() as { id: string }
+      const res = await app.inject({
+        method: 'PATCH',
+        url: `/api/quizzes/${quizId}/questions/${created.id}`,
+        payload: { mediaAlt: 42 },
+        headers: { ...json, cookie },
+      })
+      expect(res.statusCode).toBe(400)
+      await app.close()
+    })
   })
 
   it('PATCH sous un quiz inexistant/étranger → 404', async () => {

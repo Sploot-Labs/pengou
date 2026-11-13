@@ -31,6 +31,15 @@ describe('résolution multi via membership', () => {
     const r = await resolveTenantId(ctx.db, { tenancyMode: 'multi' }, { userId, explicitTenantId: tenantId })
     expect(r).toBe(tenantId)
   })
+  it("multi → renvoie l'identifiant de la base, pas la graphie reçue dans l'en-tête", async () => {
+    await ensureMembership(ctx.db, userId, tenantId)
+    const r = await resolveTenantId(
+      ctx.db,
+      { tenancyMode: 'multi' },
+      { userId, explicitTenantId: tenantId.toUpperCase() },
+    )
+    expect(r).toBe(tenantId)
+  })
   it('single → tenant par défaut (sans exiger de membership)', async () => {
     const r = await resolveTenantId(ctx.db, { tenancyMode: 'single' }, {})
     expect(r).toBe(tenantId)
