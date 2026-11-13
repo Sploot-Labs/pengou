@@ -18,6 +18,7 @@ import {
 } from '@splootlabs/mail'
 import type { Db } from '@splootlabs/db'
 import { schema, ensureDefaultTenant, ensureMembership, firstMembershipRole, createWorkspace } from '@splootlabs/db'
+import { applySignupSource } from './signup-source.js'
 import { applyTermsOnUserCreate } from './terms.js'
 
 export type AuthConfig = {
@@ -162,12 +163,20 @@ export function createAuth(db: Db, config: AuthConfig) {
       additionalFields: {
         termsVersion: { type: 'string', required: false, input: false },
         termsAcceptedAt: { type: 'date', required: false, input: false },
+        // Provenance de l'inscription : lue par le serveur dans le champ `from` du corps (voir
+        // signup-source.ts), jamais fixée directement par le client (`input: false`) ni renvoyée au
+        // navigateur dans l'utilisateur de la session (`returned: false`). Elle ne sert qu'à
+        // l'export agrégé de l'exploitant.
+        signupSource: { type: 'string', required: false, input: false, returned: false },
       },
     },
     databaseHooks: {
       user: {
         create: {
-          before: async (user, context) => applyTermsOnUserCreate(config.termsVersion, user, context),
+          before: async (user, context) => {
+            const { data } = applyTermsOnUserCreate(config.termsVersion, user, context)
+            return { data: applySignupSource(data, context) }
+          },
           // Better Auth v1.6.24 (@better-auth/core init-options.ts) : la signature réelle
           // est `after?: (user, context: GenericEndpointContext | null) => Promise<void>`
           // (un 2e paramètre contexte, non utilisé ici) — conforme au brief.

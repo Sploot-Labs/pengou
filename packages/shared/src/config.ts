@@ -50,6 +50,10 @@ const EnvSchema = z.object({
   // Self-host : fermer l'inscription publique une fois le(s) compte(s) créé(s). 'true' désactive
   // le sign-up e-mail/mot de passe (les comptes existants continuent de se connecter).
   DISABLE_SIGNUP: z.enum(['true', 'false']).default('false'),
+  // Moteurs de recherche : 'true' (défaut) envoie `X-Robots-Tag: noindex` sur toutes les réponses
+  // et garde `<meta name="robots" content="noindex">` dans index.html. Une instance qui veut être
+  // indexée met 'false'.
+  ROBOTS_NOINDEX: z.enum(['true', 'false']).default('true'),
   // Appliquer les migrations au démarrage du serveur. Pratique en mono-instance/self-host.
   // Mettre 'false' en multi-instance et lancer les migrations dans une étape DÉDIÉE
   // (`pnpm --filter @splootlabs/server migrate`) avant de démarrer les répliques — évite N
@@ -144,6 +148,8 @@ export type AppConfig = {
   /** Proxys dont le X-Forwarded-For est cru (format proxy-addr). Vide : en-tête ignoré. */
   trustedProxies: string[]
   disableSignup: boolean
+  /** Demande aux moteurs de ne pas indexer l'instance (X-Robots-Tag et balise robots). */
+  robotsNoindex: boolean
   migrateOnBoot: boolean
   libraryExtraDir?: string
   sessionInactivityTimeoutMs: number
@@ -253,6 +259,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
       .map((entry) => entry.trim())
       .filter((entry) => entry.length > 0),
     disableSignup: parsed.DISABLE_SIGNUP === 'true',
+    robotsNoindex: parsed.ROBOTS_NOINDEX === 'true',
     migrateOnBoot: parsed.MIGRATE_ON_BOOT === 'true',
     libraryExtraDir: parsed.LIBRARY_EXTRA_DIR,
     sessionInactivityTimeoutMs: parsed.SESSION_INACTIVITY_TIMEOUT_MINUTES * 60_000,

@@ -131,6 +131,11 @@ export function createQuiz(input: CreateQuizInput): Promise<Quiz> {
   return apiPost<Quiz>('/api/quizzes', input)
 }
 
+/** Crée le quiz d'exemple de cinq questions proposé après l'inscription (contenu fixé par le serveur). */
+export function createExampleQuiz(): Promise<Quiz> {
+  return apiPost<Quiz>('/api/quizzes/example')
+}
+
 export function getQuiz(id: string): Promise<Quiz> {
   return apiGet<Quiz>(`/api/quizzes/${id}`)
 }

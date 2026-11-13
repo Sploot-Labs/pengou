@@ -13,7 +13,15 @@ export function safeNextPath(raw: string | null | undefined): string | null {
   return raw
 }
 
-/** Suffixe `?next=…` à ajouter à un lien vers /login ou /signup (chaîne vide sans destination valide). */
-export function nextQuery(next: string | null): string {
-  return next ? `?next=${encodeURIComponent(next)}` : ''
+/**
+ * Suffixe `?next=…&from=…` à ajouter à un lien vers /login ou /signup (chaîne vide sans destination
+ * ni provenance). `from` est la provenance d'inscription posée par le site vitrine : elle suit le
+ * visiteur qui passe de l'inscription à la connexion et revient.
+ */
+export function nextQuery(next: string | null, from?: string | null): string {
+  const params = [
+    ...(next ? [`next=${encodeURIComponent(next)}`] : []),
+    ...(from ? [`from=${encodeURIComponent(from)}`] : []),
+  ]
+  return params.length ? `?${params.join('&')}` : ''
 }

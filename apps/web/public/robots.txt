@@ -1,0 +1,4 @@
+# L'exploration reste permise : les moteurs doivent pouvoir lire l'en-tête X-Robots-Tag: noindex
+# pour retirer les pages de leur index. Voir docs/devops.md, section « Moteurs de recherche ».
+User-agent: *
+Allow: /

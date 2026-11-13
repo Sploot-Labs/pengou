@@ -22,22 +22,21 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
  *
  * On ne distingue PAS « non membre » de « membre sans la capacité » dans la réponse (403 générique)
  * pour ne pas divulguer l'existence d'un workspace à un non-membre.
+ *
+ * Comme `requireUser`, un refus renvoie `reply` pour que Fastify n'exécute jamais le gestionnaire.
  */
 export function requirePermission(systemDb: Db, cap: Capability) {
-  return async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+  return async (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply | undefined> => {
     if (!request.user?.id) {
-      reply.code(401).send({ error: 'Non authentifié.' })
-      return
+      return reply.code(401).send({ error: 'Non authentifié.' })
     }
     const tenantId = (request.params as { tenantId?: string }).tenantId
     if (!tenantId || !UUID_RE.test(tenantId)) {
-      reply.code(400).send({ error: 'Identifiant de workspace invalide.' })
-      return
+      return reply.code(400).send({ error: 'Identifiant de workspace invalide.' })
     }
     const role = await getMembershipRole(systemDb, request.user.id, tenantId)
     if (!role || !hasPermission(role, cap)) {
-      reply.code(403).send({ error: 'Accès refusé à ce workspace.' })
-      return
+      return reply.code(403).send({ error: 'Accès refusé à ce workspace.' })
     }
     request.workspace = { tenantId, role }
   }

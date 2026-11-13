@@ -64,6 +64,14 @@ describe('Login', () => {
     await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/invitations/abc?v=xyz', { replace: true }))
   })
 
+  it('garde la provenance ?from= sur le lien « Créer un compte »', () => {
+    renderLogin(undefined, '?next=%2Fjoin&from=accueil')
+    expect(screen.getByRole('link', { name: 'Créer un compte' })).toHaveAttribute(
+      'href',
+      '/signup?next=%2Fjoin&from=accueil',
+    )
+  })
+
   it('ignore une destination externe', async () => {
     mockNavigate.mockClear()
     renderLogin(undefined, '?next=https%3A%2F%2Fevil.example')

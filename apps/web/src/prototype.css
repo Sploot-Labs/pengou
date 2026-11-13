@@ -1018,6 +1018,20 @@ fieldset.host-field > legend {
   color: var(--ink-dim);
 }
 
+/* Mot de passe avec bouton « Afficher » à droite, à la même hauteur tactile que le champ. */
+.join-password {
+  display: flex;
+  gap: var(--space-2);
+}
+.join-password input {
+  flex: 1;
+  min-width: 0;
+}
+.join-password .ab-button {
+  flex: none;
+  min-height: 48px;
+}
+
 .prototype-root .join-pseudo {
   height: 60px;
   border-radius: 16px;

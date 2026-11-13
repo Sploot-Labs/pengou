@@ -8,6 +8,9 @@ const etab = (essais) => ({ libelle: 'etab', joueurs: 30, parties: 10, cadence: 
 export const SCENARIOS = {
   // Une dizaine de minutes : le chiffre annoncé (640), le plus haut palier tenu (800) et dix salles.
   rapide: [palier(640, 1), palier(800, 1), etab(1)],
+  // Tailles de classe et d'amphithéâtre, une partie chacune : le chiffre « testé à N joueurs » que
+  // le site vitrine peut citer pour une salle ordinaire. Quelques minutes.
+  paliers: [palier(30, 1), palier(50, 1), palier(100, 1), palier(200, 1)],
   // Le protocole du rapport du 31 octobre 2026 : toute l'échelle, deux essais par palier.
   complet: [
     palier(300, 2),

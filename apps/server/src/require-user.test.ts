@@ -3,6 +3,7 @@ import { startTestDb, runMigrations } from '@splootlabs/db'
 import { createAuth } from '@splootlabs/auth'
 import { buildServer } from './app.js'
 import { registerAuth } from './auth-plugin.js'
+import { requirePermission } from './require-permission.js'
 import { registerRequireUser, requireUser, resolveContextOr403 } from './require-user.js'
 import { loadConfig } from '@splootlabs/shared'
 
@@ -28,6 +29,59 @@ describe('requireUser', () => {
     app.get('/api/protected', { preHandler: requireUser }, async (req) => ({ id: req.user.id }))
     const res = await app.inject({ method: 'GET', url: '/api/protected' })
     expect(res.statusCode).toBe(401)
+    await app.close()
+  })
+
+  // Avec un hook `onSend` asynchrone, la réponse d'un garde ne part pas dans le même tour. Un garde
+  // qui répondrait sans renvoyer `reply` laisserait Fastify enchaîner sur le gestionnaire de la
+  // route, exécuté alors sans utilisateur.
+  it("n'exécute jamais le gestionnaire d'une requête refusée, même avec un hook onSend asynchrone", async () => {
+    const auth = createAuth(ctx.db, {
+      secret: 'test-secret-at-least-32-chars-long!!',
+      baseURL: 'http://localhost:3000',
+    })
+    const app = await buildServer(loadConfig({ NODE_ENV: 'test' }), { dbStatus: () => 'up' })
+    await registerAuth(app, auth)
+    registerRequireUser(app, auth)
+    app.addHook('onSend', async () => {})
+    const reached: string[] = []
+    app.post('/api/protected-write', { preHandler: requireUser }, async (_req, reply) => {
+      reached.push('requireUser')
+      return reply.code(400).send({ error: 'gestionnaire atteint' })
+    })
+    app.post(
+      '/api/workspaces/:tenantId/protected-write',
+      { preHandler: [requireUser, requirePermission(ctx.db, 'members:manage')] },
+      async (_req, reply) => {
+        reached.push('requirePermission')
+        return reply.code(400).send({ error: 'gestionnaire atteint' })
+      },
+    )
+    const headers = { 'content-type': 'application/json' }
+
+    const anonymous = await app.inject({ method: 'POST', url: '/api/protected-write', payload: {}, headers })
+    expect(anonymous.statusCode).toBe(401)
+    expect(anonymous.json()).toEqual({ error: 'Non authentifié.' })
+
+    const signUp = await app.inject({
+      method: 'POST',
+      url: '/api/auth/sign-up/email',
+      payload: { email: 'garde-onsend@example.com', password: 'motdepasse-123456', name: 'Garde' },
+      headers,
+    })
+    const cookie = ([] as string[])
+      .concat(signUp.headers['set-cookie'] ?? [])
+      .map((c) => c.split(';')[0])
+      .join('; ')
+    const notMember = await app.inject({
+      method: 'POST',
+      url: '/api/workspaces/00000000-0000-4000-8000-000000000000/protected-write',
+      payload: {},
+      headers: { ...headers, cookie },
+    })
+    expect(notMember.statusCode).toBe(403)
+
+    expect(reached).toEqual([])
     await app.close()
   })
 })

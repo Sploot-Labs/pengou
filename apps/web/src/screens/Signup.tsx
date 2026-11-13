@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { normalizeSignupSource } from '@splootlabs/shared/signup-source'
 import { signUp, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
 import { fetchLegal, isLegalActive, type ActiveLegalInfo } from '../api/legal'
@@ -12,7 +13,6 @@ interface FieldErrors {
   name?: string
   email?: string
   password?: string
-  confirmPassword?: string
   age?: string
   terms?: string
 }
@@ -28,12 +28,15 @@ const MIN_PASSWORD_LENGTH = 8
 export function Signup() {
   const navigate = useNavigate()
   const { refresh } = useSession()
-  const returnTo = safeNextPath(useSearchParams()[0].get('next'))
+  const [searchParams] = useSearchParams()
+  const returnTo = safeNextPath(searchParams.get('next'))
+  // Provenance posée par le site vitrine (`?from=<slug>`) : envoyée avec l'inscription, sans cookie.
+  const from = normalizeSignupSource(searchParams.get('from'))
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [emailChecked, setEmailChecked] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [ageConfirmed, setAgeConfirmed] = useState(false)
   const [termsAccepted, setTermsAccepted] = useState(false)
   const [legalState, setLegalState] = useState<LegalState>({ status: 'loading' })
@@ -44,7 +47,6 @@ export function Signup() {
   const nameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
-  const confirmPasswordRef = useRef<HTMLInputElement>(null)
   const ageRef = useRef<HTMLInputElement>(null)
   const termsRef = useRef<HTMLInputElement>(null)
   const formErrorRef = useRef<HTMLParagraphElement>(null)
@@ -81,10 +83,7 @@ export function Signup() {
       next.email = 'Adresse e-mail invalide.'
     }
     if (password.length < MIN_PASSWORD_LENGTH) {
-      next.password = `Mot de passe trop court (minimum ${MIN_PASSWORD_LENGTH} caractères).`
-    }
-    if (confirmPassword !== password) {
-      next.confirmPassword = 'Les mots de passe ne correspondent pas.'
+      next.password = `Mot de passe trop court : ${MIN_PASSWORD_LENGTH} caractères minimum, ${password.length} saisis.`
     }
     if (legal && !ageConfirmed) {
       next.age = 'Confirmez que vous avez 15 ans ou plus.'
@@ -113,10 +112,6 @@ export function Signup() {
       passwordRef.current?.focus()
       return
     }
-    if (next.confirmPassword) {
-      confirmPasswordRef.current?.focus()
-      return
-    }
     if (next.age) {
       ageRef.current?.focus()
       return
@@ -133,11 +128,13 @@ export function Signup() {
         password,
         name: name.trim(),
         ...(legal ? { acceptedTermsVersion: legal.termsVersion, ageConfirmed: true } : {}),
+        ...(from ? { from } : {}),
       })
       // Same reasoning as Login: refresh the shared context before
       // navigating so <RequireAuth> on `/` sees the new session immediately.
       await refresh()
-      navigate(returnTo ?? '/', { replace: true })
+      // Sans destination imposée (invitation), l'accueil ouvre un quiz d'exemple à modifier.
+      navigate(returnTo ?? '/?premier-quiz=1', { replace: true })
     } catch (err) {
       setPending(false)
       setFormError(
@@ -214,46 +211,37 @@ export function Signup() {
 
         <div className="join-field">
           <label htmlFor="signup-password">Mot de passe</label>
-          <input
-            id="signup-password"
-            ref={passwordRef}
-            type="password"
-            autoComplete="new-password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value)
-              if (errors.password) setErrors((prev) => ({ ...prev, password: undefined }))
-            }}
-            aria-invalid={errors.password ? true : undefined}
-            aria-describedby={errors.password ? 'signup-password-error' : undefined}
-          />
+          {/* Un seul champ, avec « Afficher » pour vérifier la saisie : remplace la confirmation. */}
+          <div className="join-password">
+            <input
+              id="signup-password"
+              ref={passwordRef}
+              type={showPassword ? 'text' : 'password'}
+              autoComplete="new-password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value)
+                if (errors.password) setErrors((prev) => ({ ...prev, password: undefined }))
+              }}
+              aria-invalid={errors.password ? true : undefined}
+              aria-describedby={errors.password ? 'signup-password-hint signup-password-error' : 'signup-password-hint'}
+            />
+            <Button
+              variant="ghost"
+              type="button"
+              aria-controls="signup-password"
+              aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+              onClick={() => setShowPassword((shown) => !shown)}
+            >
+              {showPassword ? 'Masquer' : 'Afficher'}
+            </Button>
+          </div>
+          <p className="join-hint" id="signup-password-hint">
+            {MIN_PASSWORD_LENGTH} caractères minimum.
+          </p>
           {errors.password && (
             <p className="join-error" id="signup-password-error" role="alert">
               {errors.password}
-            </p>
-          )}
-        </div>
-
-        <div className="join-field">
-          <label htmlFor="signup-confirm-password">Confirmer le mot de passe</label>
-          <input
-            id="signup-confirm-password"
-            ref={confirmPasswordRef}
-            type="password"
-            autoComplete="new-password"
-            value={confirmPassword}
-            onChange={(e) => {
-              setConfirmPassword(e.target.value)
-              if (errors.confirmPassword) {
-                setErrors((prev) => ({ ...prev, confirmPassword: undefined }))
-              }
-            }}
-            aria-invalid={errors.confirmPassword ? true : undefined}
-            aria-describedby={errors.confirmPassword ? 'signup-confirm-password-error' : undefined}
-          />
-          {errors.confirmPassword && (
-            <p className="join-error" id="signup-confirm-password-error" role="alert">
-              {errors.confirmPassword}
             </p>
           )}
         </div>
@@ -331,7 +319,7 @@ export function Signup() {
         </Button>
 
         <p className="join-reassure">
-          Déjà un compte ? <Link to={`/login${nextQuery(returnTo)}`}>Se connecter</Link>
+          Déjà un compte ? <Link to={`/login${nextQuery(returnTo, from)}`}>Se connecter</Link>
         </p>
       </form>
     </main>

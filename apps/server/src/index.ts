@@ -131,7 +131,7 @@ sweepTimer.unref()
 
 // En production, le build du SPA est copié à côté du serveur (voir Dockerfile).
 const webDist = process.env.WEB_DIST ?? join(process.cwd(), 'public')
-registerStatic(app, webDist)
+registerStatic(app, webDist, { publicUrl: config.authUrl, noindex: config.robotsNoindex })
 
 app.addHook('onClose', async () => {
   // Arrêt gracieux : écrit d'abord les états de jeu encore coalescés (P0-5), arrête le balayage,

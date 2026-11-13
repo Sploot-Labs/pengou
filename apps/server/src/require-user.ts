@@ -31,17 +31,19 @@ export function registerRequireUser(app: FastifyInstance, auth: Auth, termsVersi
  * (403 `TERMS_ACCEPTANCE_REQUIRED`). Restent hors de ce garde la lecture de session (`/api/me`,
  * `/api/auth/*`), la déconnexion et `POST /api/legal/accept`. Les sockets de jeu n'y passent pas
  * non plus : un hôte en pleine partie n'est jamais coupé, et les joueurs n'ont pas de compte.
+ *
+ * Un refus renvoie `reply` : c'est ce qui dit à Fastify que la requête est terminée. Sans cela, dès
+ * qu'un hook `onSend` asynchrone existe, la réponse ne part pas dans le même tour et Fastify
+ * exécuterait le gestionnaire de la route, sans utilisateur.
  */
-export async function requireUser(request: FastifyRequest, reply: FastifyReply): Promise<void> {
+export async function requireUser(request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply | undefined> {
   const session = await request.server.auth.api.getSession({ headers: fromNodeHeaders(request.headers) })
   if (!session?.user) {
-    reply.code(401).send({ error: 'Non authentifié.' })
-    return
+    return reply.code(401).send({ error: 'Non authentifié.' })
   }
   const currentVersion = request.server.hasDecorator('legalTermsVersion') ? request.server.legalTermsVersion : null
   if (termsAcceptanceRequired(session.user, currentVersion)) {
-    reply.code(403).send(TERMS_REQUIRED_BODY)
-    return
+    return reply.code(403).send(TERMS_REQUIRED_BODY)
   }
   request.user = {
     id: session.user.id,

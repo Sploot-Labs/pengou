@@ -36,6 +36,8 @@ export interface SignUpInput {
   acceptedTermsVersion?: string
   /** Case « J'ai 15 ans ou plus », exigée par le serveur avec les CGU. */
   ageConfirmed?: boolean
+  /** Provenance de l'inscription (`?from=` du lien du site vitrine), enregistrée par le serveur. */
+  from?: string
 }
 
 export interface SignInInput {

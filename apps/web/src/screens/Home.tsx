@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { signOut, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
-import { archiveQuiz, createQuiz, listQuizzes, restoreQuiz, type QuizListItem } from '../api/quizzes'
+import { archiveQuiz, createExampleQuiz, createQuiz, listQuizzes, restoreQuiz, type QuizListItem } from '../api/quizzes'
 import { listSessions, type SessionStatus, type SessionSummary } from '../api/sessions'
 import { Reveal } from '../motion/index.js'
 import { useLaunchGame } from '../realtime/useLaunchGame'
@@ -145,6 +145,41 @@ export function Home() {
   useEffect(() => {
     if (creatingQuiz) newQuizTitleRef.current?.focus()
   }, [creatingQuiz])
+
+  // --- Premier quiz -----------------------------------------------------------
+  // Après l'inscription (`/?premier-quiz=1`, voir Signup), l'hôte arrive dans l'éditeur sur un quiz
+  // d'exemple déjà rempli plutôt que sur une liste vide. Seulement si la liste est vide : un
+  // rechargement ou un retour arrière ne crée pas de second exemple. En cas d'échec (limite de
+  // quiz, réseau), l'accueil reste là, sans message : il propose déjà « Nouveau quiz ».
+  const [searchParams, setSearchParams] = useSearchParams()
+  const wantsExample = searchParams.get('premier-quiz') === '1'
+  const [preparingExample, setPreparingExample] = useState(false)
+  const exampleRequested = useRef(false)
+
+  useEffect(() => {
+    if (!wantsExample || quizzesLoading || exampleRequested.current) return
+    exampleRequested.current = true
+    const dropParam = () =>
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev)
+          next.delete('premier-quiz')
+          return next
+        },
+        { replace: true },
+      )
+    if (quizzesError || quizzes.length > 0) {
+      dropParam()
+      return
+    }
+    setPreparingExample(true)
+    createExampleQuiz()
+      .then((quiz) => navigate(`/quizzes/${quiz.id}`, { replace: true }))
+      .catch(() => {
+        setPreparingExample(false)
+        dropParam()
+      })
+  }, [wantsExample, quizzesLoading, quizzesError, quizzes.length, navigate, setSearchParams])
 
   async function handleCreateQuiz(event: FormEvent) {
     event.preventDefault()
@@ -348,8 +383,8 @@ export function Home() {
             </form>
           )}
 
-          {quizzesLoading ? (
-            <p role="status">Chargement de vos quiz…</p>
+          {quizzesLoading || preparingExample ? (
+            <p role="status">{preparingExample ? "Préparation de votre quiz d'exemple…" : 'Chargement de vos quiz…'}</p>
           ) : quizzesError && quizzes.length === 0 ? (
             <div className="ab-empty-state">
               <p role="alert">{quizzesError}</p>

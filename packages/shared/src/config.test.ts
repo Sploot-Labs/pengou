@@ -265,6 +265,20 @@ describe("loadConfig, conditions d'utilisation (CGU)", () => {
   })
 })
 
+describe('loadConfig, indexation par les moteurs', () => {
+  it('demande le noindex par défaut', () => {
+    expect(loadConfig({}).robotsNoindex).toBe(true)
+  })
+
+  it("autorise l'indexation avec ROBOTS_NOINDEX=false", () => {
+    expect(loadConfig({ ROBOTS_NOINDEX: 'false' }).robotsNoindex).toBe(false)
+  })
+
+  it('rejette une valeur ROBOTS_NOINDEX invalide', () => {
+    expect(() => loadConfig({ ROBOTS_NOINDEX: 'oui' })).toThrow()
+  })
+})
+
 describe('loadConfig — dossier des médias envoyés', () => {
   it('par défaut : ./data/media résolu en chemin absolu', () => {
     expect(loadConfig({}).mediaDir).toBe(path.resolve('./data/media'))

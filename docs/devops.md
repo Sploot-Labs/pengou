@@ -83,6 +83,53 @@ Le volume `media-data` contient les images envoyées depuis l'éditeur (montées
 
 Tant que le paquet GHCR est privé, l'hôte doit s'authentifier (`docker login ghcr.io`) avec un jeton disposant du scope `read:packages` pour tirer l'image.
 
+### Moteurs de recherche
+
+Par défaut, une instance demande à ne pas être indexée : le serveur envoie `X-Robots-Tag: noindex` sur toutes ses réponses et `index.html` porte `<meta name="robots" content="noindex">`. Une instance publique qui veut apparaître dans les résultats met `ROBOTS_NOINDEX=false` : l'en-tête disparaît et la balise est retirée de la page servie.
+
+`robots.txt` autorise volontairement l'exploration (`Allow: /`). Un moteur qui n'a pas le droit d'explorer une page ne lit jamais son en-tête noindex et peut la garder indéfiniment dans son index : interdire l'exploration avant la désindexation produit l'inverse de l'effet voulu.
+
+Note de déploiement pour app.pengou.fr. La sortie de l'index se constate dans la Search Console (rapport « Pages » de la propriété de domaine pengou.fr, filtré sur app.pengou.fr : les URL passent dans « Exclue par la balise noindex »). Elle prend de quelques jours à quelques semaines ; l'outil « Suppressions », avec le préfixe `https://app.pengou.fr/`, masque les résultats tout de suite en attendant. Une fois qu'aucune URL de l'application n'est plus indexée, on peut fermer l'exploration avec `Disallow: /`, à deux conditions.
+
+La première : le faire dans le reverse proxy de l'instance, pas dans `apps/web/public/robots.txt`, qui est livré à toutes les instances auto-hébergées. Avec Caddy, dans le bloc du site, avant `reverse_proxy` :
+
+```
+handle /robots.txt {
+	header Content-Type "text/plain; charset=utf-8"
+	respond <<TXT
+		User-agent: *
+		Disallow: /
+		TXT 200
+}
+```
+
+La seconde : s'assurer qu'aucune page publique ne fait de lien vers l'application. Tant que le site vitrine renvoie vers `/signup` et `/join`, un moteur qui ne peut plus lire le noindex peut réindexer ces adresses d'après les seuls liens (statut « Indexée malgré le blocage par robots.txt »). Dans ce cas, garder `Allow: /` et le noindex est le bon réglage durable : l'exploration d'une quinzaine de routes ne coûte rien, et les moteurs espacent d'eux-mêmes leurs visites sur des pages en noindex.
+
+Seules les routes de l'application, listées dans `packages/shared/src/spa-routes.ts`, reçoivent la page de l'application. Un autre chemin répond 404 : avec la page comme corps s'il n'a pas d'extension (elle affiche « page introuvable »), avec un simple texte pour un fichier absent (`/sitemap.xml`, ancien bundle) ou sous `/.well-known/`. Une nouvelle route de `apps/web/src/routes.tsx` doit être ajoutée à cette liste, ce que vérifie un test.
+
+### Provenance des inscriptions
+
+Les liens du site vitrine vers `/signup` portent `?from=<slug-de-page>`. Le formulaire transmet cette valeur avec l'inscription et le serveur l'enregistre, normalisée, dans la colonne `user.signup_source` (null pour une inscription directe). Aucun cookie ni traceur n'est utilisé. Une valeur qui n'est pas un slug court (lettres minuscules, chiffres et tirets, 64 caractères au plus) est ignorée.
+
+Pour obtenir le nombre d'inscriptions par semaine (semaines ISO, du lundi, en UTC) et par provenance, au format CSV :
+
+```sh
+docker compose exec app node apps/server/dist/signups-report.js > inscriptions.csv
+```
+
+En développement, après `pnpm build` : `pnpm --filter @splootlabs/server inscriptions:provenance`. La requête équivalente en SQL :
+
+```sql
+SELECT to_char(date_trunc('week', created_at), 'YYYY-MM-DD') AS semaine,
+       coalesce(signup_source, '(aucune)') AS provenance,
+       count(*) AS inscriptions
+FROM "user"
+GROUP BY 1, 2
+ORDER BY 1 DESC, 3 DESC;
+```
+
+La provenance est rattachée au compte : c'est une donnée personnelle, à mentionner dans la politique de confidentialité de l'instance qui l'exploite.
+
 ### Envoi d'e-mails
 
 Pengou envoie des e-mails transactionnels : réinitialisation du mot de passe et avis de modification une fois celle-ci faite, confirmation d'adresse à l'inscription et invitations à un espace de travail. Tout est optionnel. Sans transport configuré, l'application reste complète, simplement sans envoi.

@@ -12,6 +12,7 @@ vi.mock('../api/quizzes', () => ({
     ]),
   ),
   createQuiz: vi.fn(),
+  createExampleQuiz: vi.fn(),
   archiveQuiz: vi.fn(),
   restoreQuiz: vi.fn(),
 }))
@@ -601,5 +602,56 @@ describe('Home', () => {
       fireEvent.click(within(alert).getByRole('button', { name: "Renvoyer l'e-mail" }))
       await waitFor(() => expect(screen.getByText('E-mail envoyé')).toBeInTheDocument())
     })
+  })
+})
+
+describe("Home, quiz d'exemple après l'inscription", () => {
+  afterEach(() => {
+    cleanup()
+    vi.clearAllMocks()
+  })
+
+  function renderAt(path: string) {
+    render(
+      <MotionProvider>
+        <MemoryRouter initialEntries={[path]}>
+          <Home />
+        </MemoryRouter>
+      </MotionProvider>,
+    )
+  }
+
+  it("crée le quiz d'exemple et ouvre l'éditeur quand la liste est vide", async () => {
+    const { listQuizzes, createExampleQuiz } = await import('../api/quizzes')
+    vi.mocked(listQuizzes).mockResolvedValueOnce([])
+    vi.mocked(createExampleQuiz).mockResolvedValueOnce({ id: 'exemple-1' } as never)
+    renderAt('/?premier-quiz=1')
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/quizzes/exemple-1', { replace: true }))
+    expect(createExampleQuiz).toHaveBeenCalledTimes(1)
+  })
+
+  it("n'en crée pas si l'hôte a déjà des quiz", async () => {
+    const { createExampleQuiz } = await import('../api/quizzes')
+    renderAt('/?premier-quiz=1')
+    await waitFor(() => expect(screen.getByText('Culture G')).toBeInTheDocument())
+    expect(createExampleQuiz).not.toHaveBeenCalled()
+  })
+
+  it("n'en crée pas sans le paramètre", async () => {
+    const { listQuizzes, createExampleQuiz } = await import('../api/quizzes')
+    vi.mocked(listQuizzes).mockResolvedValueOnce([])
+    renderAt('/')
+    await waitFor(() => expect(screen.queryByText('Chargement de vos quiz…')).not.toBeInTheDocument())
+    expect(createExampleQuiz).not.toHaveBeenCalled()
+  })
+
+  it("reste sur l'accueil si la création échoue", async () => {
+    const { listQuizzes, createExampleQuiz } = await import('../api/quizzes')
+    vi.mocked(listQuizzes).mockResolvedValueOnce([])
+    vi.mocked(createExampleQuiz).mockRejectedValueOnce(new Error('limite'))
+    renderAt('/?premier-quiz=1')
+    await waitFor(() => expect(createExampleQuiz).toHaveBeenCalled())
+    await waitFor(() => expect(screen.queryByText("Préparation de votre quiz d'exemple…")).not.toBeInTheDocument())
+    expect(mockNavigate).not.toHaveBeenCalledWith(expect.stringMatching(/^\/quizzes\//), expect.anything())
   })
 })

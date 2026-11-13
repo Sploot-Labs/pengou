@@ -11,6 +11,9 @@ export const user = pgTable('user', {
   // acceptées (compte antérieur, ou créé par un fournisseur tiers), d'où la revalidation.
   termsVersion: text('terms_version'),
   termsAcceptedAt: timestamp('terms_accepted_at', { withTimezone: true }),
+  // Provenance de l'inscription (`?from=` des liens du site vitrine), slug normalisé par le serveur.
+  // Null : inscription directe, par invitation ou par un fournisseur tiers.
+  signupSource: text('signup_source'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at')
     .defaultNow()
