@@ -80,3 +80,12 @@ export type SessionRelaunchedView =
 
 /** Code d'ack renvoyé par `player:reconnect` quand le joueur a été exclu. */
 export const KICKED_ACK_CODE = 'kicked'
+
+/** Codes machine des refus (`{ error, code }` ou `{ accepted: false, reason, code }`). Le message
+ * arrive dans la langue de la socket : l'écran compare toujours le code, jamais le texte. */
+/** Commande d'hôte venue d'une socket qui n'est pas (ou plus) l'hôte de la partie. */
+export const NOT_HOST_ACK_CODE = 'NOT_HOST'
+/** `player:join` refusé : la partie a atteint son plafond de joueurs. */
+export const SESSION_FULL_ACK_CODE = 'SESSION_FULL'
+/** `player:answer` refusé : réponse invalide pour le type de question, la manche reste ouverte. */
+export const INVALID_ANSWER_ACK_CODE = 'INVALID_ANSWER'

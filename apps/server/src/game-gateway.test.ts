@@ -4114,4 +4114,132 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       }
     }, 20_000)
   })
+  describe('langue des acquittements (auth.lang, puis Accept-Language du handshake, puis français)', () => {
+    it('traduit un refus selon auth.lang ; sans auth.lang, reste en français malgré Accept-Language', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const join = async (headers?: Record<string, string>, auth?: Record<string, string>) => {
+          const client = await connectClient(url, headers, auth)
+          clients.push(client)
+          return ack<{ error?: string; code?: string }>(client, 'player:join', { pin: '000000', nickname: 'Ana' })
+        }
+        expect(await join(undefined, { lang: 'en' })).toEqual({ error: 'Invalid PIN' })
+        // Onglet ouvert avant le déploiement (pas d'auth.lang) : il compare des textes français.
+        expect(await join({ 'accept-language': 'es-ES,es;q=0.9' })).toEqual({ error: 'PIN invalide' })
+        expect(await join({ 'accept-language': 'en' }, { lang: 'de' })).toEqual({ error: 'Invalid PIN' })
+        expect(await join({ 'accept-language': 'en' }, { lang: 'es' })).toEqual({ error: 'PIN no válido' })
+        expect(await join()).toEqual({ error: 'PIN invalide' })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it('lang:set change la langue des acquittements suivants, une langue inconnue est ignorée', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const client = await connectClient(url, undefined, { lang: 'fr' })
+        clients.push(client)
+        const join = () => ack<{ error?: string }>(client, 'player:join', { pin: '000000', nickname: 'Ana' })
+        expect(await join()).toEqual({ error: 'PIN invalide' })
+        client.emit('lang:set', 'en')
+        expect(await join()).toEqual({ error: 'Invalid PIN' })
+        client.emit('lang:set', 'de')
+        expect(await join()).toEqual({ error: 'Invalid PIN' })
+        client.emit('lang:set', 'es')
+        expect(await join()).toEqual({ error: 'PIN no válido' })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it('partie complète : message traduit et code SESSION_FULL', async () => {
+      const { app, url } = await buildApp(undefined, { MAX_PLAYERS_PER_SESSION: '1' })
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gw-lang-full@example.com')
+        const ana = await connectClient(url)
+        const bob = await connectClient(url, undefined, { lang: 'en' })
+        clients.push(hostSocket, ana, bob)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+        expect(await ack(bob, 'player:join', { pin, nickname: 'Bob' })).toEqual({
+          error: 'The game is full.',
+          code: 'SESSION_FULL',
+        })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it("commande d'hôte refusée à une autre socket : message traduit et code NOT_HOST", async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gw-lang-not-host@example.com')
+        const ana = await connectClient(url, undefined, { lang: 'en' })
+        clients.push(hostSocket, ana)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+        expect(await ack(ana, 'host:start', {})).toEqual({
+          error: 'action reserved for the game host',
+          code: 'NOT_HOST',
+        })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it('réponse invalide : raison traduite et code INVALID_ANSWER ; une autre raison reste sans code', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gw-lang-invalid@example.com')
+        const ana = await connectClient(url, undefined, { lang: 'es' })
+        clients.push(hostSocket, ana)
+        expect((await ack<{ error?: string }>(ana, 'player:join', { pin, nickname: 'Ana' })).error).toBeUndefined()
+        expect((await ack<{ error?: string }>(hostSocket, 'host:start', {})).error).toBeUndefined()
+        expect(await ack(ana, 'player:answer', { answer: { optionIndex: 'pas un index' } })).toEqual({
+          accepted: false,
+          reason: 'respuesta no válida para este tipo de pregunta',
+          code: 'INVALID_ANSWER',
+        })
+        expect((await ack<{ accepted?: boolean }>(ana, 'player:answer', { answer: { optionIndex: 0 } })).accepted).toBe(
+          true,
+        )
+        // Seule joueuse : sa réponse a déclenché l'auto-révélation, la manche est close.
+        expect(await ack(ana, 'player:answer', { answer: { optionIndex: 1 } })).toEqual({
+          accepted: false,
+          reason: 'fuera de la fase de pregunta',
+        })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+
+    it('reconnexion après exclusion : message traduit et code kicked conservé', async () => {
+      const { app, url } = await buildApp()
+      const clients: ClientSocket[] = []
+      try {
+        const { hostSocket, pin } = await setupHostedSession(app, url, 'gw-lang-kicked@example.com')
+        const ana = await connectClient(url)
+        clients.push(hostSocket, ana)
+        const joined = await ack<{ playerId: string; joinToken: string }>(ana, 'player:join', { pin, nickname: 'Ana' })
+        expect(await ack(hostSocket, 'host:kick', { playerId: joined.playerId })).toEqual({ ok: true })
+        const ana2 = await connectClient(url, undefined, { lang: 'en' })
+        clients.push(ana2)
+        expect(await ack(ana2, 'player:reconnect', { pin, joinToken: joined.joinToken })).toEqual({
+          error: 'player kicked from the game',
+          code: 'kicked',
+        })
+      } finally {
+        for (const c of clients) c.disconnect()
+        await app.close()
+      }
+    }, 20_000)
+  })
 })

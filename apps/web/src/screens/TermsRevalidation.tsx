@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { signOut, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
 import { acceptTerms, fetchLegal, formatTermsDate, isLegalActive, type ActiveLegalInfo } from '../api/legal'
+import { LanguageSelect } from '../i18n/LanguageSelect'
+import { useT } from '../i18n/useT'
 import { Button, Logo } from '../ui'
 import { ExternalLink } from '../ui/ExternalLink'
-
-const CHECK_ERROR = "Cochez la case pour accepter les conditions d'utilisation."
 
 /**
  * Écran bloquant affiché par `<RequireAuth>` quand l'hôte connecté n'a pas accepté la version
@@ -18,6 +18,7 @@ const CHECK_ERROR = "Cochez la case pour accepter les conditions d'utilisation."
  * annoncé tout de suite.
  */
 export function TermsRevalidation() {
+  const { t } = useT()
   const navigate = useNavigate()
   const { refresh } = useSession()
   const [legal, setLegal] = useState<ActiveLegalInfo | null>(null)
@@ -61,7 +62,7 @@ export function TermsRevalidation() {
     setFormError(null)
     if (!legal) return
     if (!checked) {
-      setCheckError(CHECK_ERROR)
+      setCheckError(t("Cochez la case pour accepter les conditions d'utilisation."))
       checkRef.current?.focus()
       return
     }
@@ -77,7 +78,7 @@ export function TermsRevalidation() {
         await load()
       }
       setFormError(
-        err instanceof ApiError ? err.message : 'Enregistrement impossible. Vérifiez votre connexion et réessayez.',
+        err instanceof ApiError ? err.message : t('Enregistrement impossible. Vérifiez votre connexion et réessayez.'),
       )
     }
   }
@@ -100,24 +101,26 @@ export function TermsRevalidation() {
 
       <form className="join-card" onSubmit={handleSubmit} noValidate aria-labelledby="cgu-titre">
         <h1 id="cgu-titre" tabIndex={-1} ref={headingRef}>
-          Les conditions d'utilisation ont changé
+          {t("Les conditions d'utilisation ont changé")}
         </h1>
         {legal ? (
           <p className="join-subtitle">
-            Une nouvelle version, datée du {formatTermsDate(legal.termsVersion)}, est en vigueur. Lisez-la puis
-            acceptez-la pour continuer à utiliser votre compte.
+            {t(
+              'Une nouvelle version, datée du {date}, est en vigueur. Lisez-la puis acceptez-la pour continuer à utiliser votre compte.',
+              { date: formatTermsDate(legal.termsVersion) },
+            )}
           </p>
         ) : (
-          !loadFailed && <p role="status">Chargement des conditions d'utilisation…</p>
+          !loadFailed && <p role="status">{t("Chargement des conditions d'utilisation…")}</p>
         )}
 
         {loadFailed && (
           <>
             <p className="join-error" role="alert">
-              Impossible de charger les conditions d'utilisation. Vérifiez votre connexion et réessayez.
+              {t("Impossible de charger les conditions d'utilisation. Vérifiez votre connexion et réessayez.")}
             </p>
             <Button variant="ghost" type="button" onClick={() => void load()}>
-              Réessayer
+              {t('Réessayer')}
             </Button>
           </>
         )}
@@ -131,7 +134,7 @@ export function TermsRevalidation() {
         {legal && (
           <>
             <p>
-              Lire les <ExternalLink href={legal.termsUrl}>conditions d'utilisation</ExternalLink>
+              {t('Lire les')} <ExternalLink href={legal.termsUrl}>{t("conditions d'utilisation")}</ExternalLink>
             </p>
 
             <div className="join-field">
@@ -148,7 +151,7 @@ export function TermsRevalidation() {
                   aria-invalid={checkError ? true : undefined}
                   aria-describedby={checkError ? 'cgu-acceptation-error' : undefined}
                 />
-                <label htmlFor="cgu-acceptation">J'accepte les conditions d'utilisation</label>
+                <label htmlFor="cgu-acceptation">{t("J'accepte les conditions d'utilisation")}</label>
               </div>
               {checkError && (
                 <p className="join-error" id="cgu-acceptation-error" role="alert">
@@ -158,17 +161,18 @@ export function TermsRevalidation() {
             </div>
 
             <Button variant="primary" type="submit" disabled={pending}>
-              {pending ? 'Enregistrement…' : 'Accepter et continuer'}
+              {pending ? t('Enregistrement…') : t('Accepter et continuer')}
             </Button>
           </>
         )}
 
         <p className="join-reassure">
           <Button variant="ghost" type="button" onClick={() => void handleSignOut()} disabled={signingOut}>
-            {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
+            {signingOut ? t('Déconnexion…') : t('Se déconnecter')}
           </Button>
         </p>
       </form>
+      <LanguageSelect className="join-lang" />
     </main>
   )
 }

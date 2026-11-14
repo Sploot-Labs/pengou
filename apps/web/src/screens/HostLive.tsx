@@ -2,7 +2,15 @@ import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { isScoredType, pollPercent } from '@splootlabs/quiz'
 import { buildDistributionRows, pollRows, type QuestionKind } from '../realtime/distribution'
-import type { PodiumPayload, PollView, RankingEntry, ReadingView, WordcloudView } from '../realtime/contracts'
+import {
+  NOT_HOST_ACK_CODE,
+  type PodiumPayload,
+  type PollView,
+  type RankingEntry,
+  type ReadingView,
+  type WordcloudView,
+} from '../realtime/contracts'
+import { hasAckCode } from '../realtime/ackError'
 import { WordCloud, wordcloudSummary } from '../ui/WordCloud'
 import { QuestionImage } from '../ui/QuestionImage'
 import { listQuizzes, type QuizListItem } from '../api/quizzes'
@@ -10,6 +18,9 @@ import { boardEntries } from '../realtime/board'
 import { hardReload } from '../realtime/hardReload'
 import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import { Button, Logo, PinDisplay, TimerRing } from '../ui'
+import { useT } from '../i18n/useT'
+import { formatNumber as formatNumberNow, t, tp as tpNow } from '../i18n/t'
+import { getLang } from '../i18n/lang'
 import { ClosingView, PodiumView } from './Podium'
 import { GuestSignupOffer } from '../ui/GuestSignupOffer'
 import { PAGE_LOAD_ID } from '../realtime/pageLoad'
@@ -75,17 +86,17 @@ type UiPhase = 'lobby' | 'reading' | 'question' | 'reveal' | 'scoreboard' | 'pod
 function phaseLabel(phase: UiPhase): string {
   switch (phase) {
     case 'lobby':
-      return 'Lobby'
+      return t('Lobby')
     case 'reading':
-      return 'Lecture en cours'
+      return t('Lecture en cours')
     case 'question':
-      return 'Question en cours'
+      return t('Question en cours')
     case 'reveal':
-      return 'Révélation'
+      return t('Révélation')
     case 'scoreboard':
-      return 'Classement'
+      return t('Classement')
     case 'podium':
-      return 'Podium'
+      return t('Podium')
   }
 }
 
@@ -106,6 +117,9 @@ function buildScreenUrl(sessionId: string, displayToken: string, pin: string | n
   url.searchParams.set('token', displayToken)
   if (pin) url.searchParams.set('pin', pin)
   if (quizTitle) url.searchParams.set('title', quizTitle)
+  // Le projecteur s'ouvre dans la langue courante de l'hôte ; `lang.ts` consomme puis retire le
+  // paramètre, le grand écran garde ensuite sa propre langue.
+  url.searchParams.set('lang', getLang())
   return url.toString()
 }
 
@@ -134,23 +148,29 @@ function buildScreenUrl(sessionId: string, displayToken: string, pin: string | n
  */
 type ConnectionState = 'online' | 'reconnecting' | 'broken'
 
-const HOST_AUTHORITY_LOST_MESSAGE =
-  "La connexion a été interrompue puis rétablie, mais cette partie ne peut plus être pilotée depuis cet onglet (le serveur ne permet pas de reprendre l'autorité hôte après une coupure). Retournez à l'éditeur et relancez la partie."
+/** Fonction et non constante : le texte suit la langue courante à chaque lecture. */
+function hostAuthorityLostMessage(): string {
+  return t(
+    "La connexion a été interrompue puis rétablie, mais cette partie ne peut plus être pilotée depuis cet onglet (le serveur ne permet pas de reprendre l'autorité hôte après une coupure). Retournez à l'éditeur et relancez la partie.",
+  )
+}
 
-/** Traduit une erreur serveur brute en message actionnable. La string exacte
- * « action réservée à l'hôte de la session » (`requireHost`, game-gateway.ts)
- * ne dit à l'hôte ni CE QUI s'est passé ni QUOI FAIRE — si elle survient
+/** Traduit une erreur serveur brute en message actionnable. Le refus
+ * « action réservée à l'hôte de la session » (`requireHost`, game-gateway.ts,
+ * reconnu à son code `NOT_HOST` : le message arrive dans la langue de la socket)
+ * ne dit à l'hôte ni CE QUI s'est passé ni QUOI FAIRE — s'il survient
  * alors qu'on sait la connexion compromise (`connection === 'broken'`), ou
  * même si on ne le savait pas encore (course reconnect/clic), on la remplace
  * par une consigne claire plutôt que de l'afficher telle quelle. */
 function friendlyActionError(err: unknown, connection: ConnectionState): string {
-  if (connection === 'broken') return HOST_AUTHORITY_LOST_MESSAGE
-  const message = err instanceof Error ? err.message : null
-  if (message === "action réservée à l'hôte de la session") return HOST_AUTHORITY_LOST_MESSAGE
-  return message ?? 'Une erreur est survenue.'
+  if (connection === 'broken') return hostAuthorityLostMessage()
+  if (hasAckCode(err, NOT_HOST_ACK_CODE)) return hostAuthorityLostMessage()
+  return err instanceof Error ? err.message : t('Une erreur est survenue.')
 }
 
 export function HostLive() {
+  // Abonne l'écran à la langue : les textes calculés plus bas (helpers hors composant compris) suivent.
+  const { tp, formatNumber } = useT()
   const { sessionId } = useParams<{ sessionId: string }>()
   const location = useLocation()
   const navigate = useNavigate()
@@ -171,7 +191,10 @@ export function HostLive() {
   // pas l'autorité d'hôte, liée à la socket. Il ne prouve donc « partie lancée sur cette socket »
   // que s'il a été posé pendant CE chargement de page. Sinon, l'écran demande la reprise.
   const launchedHere = Boolean(navState?.pin) && navState?.launch === PAGE_LOAD_ID
-  const quizTitle = navState?.quizTitle ?? 'Partie en direct'
+  // Titre brut (peut être absent) pour le lien du grand écran : le repli traduit n'est posé qu'à l'affichage,
+  // dans la langue de celui qui regarde, jamais celle de l'hôte dans l'URL du projecteur.
+  const rawQuizTitle = navState?.quizTitle ?? ''
+  const quizTitle = navState?.quizTitle ?? t('Partie en direct')
 
   // Reprise (Task 8) : `true` tant que `host:reconnect` n'a pas répondu, UNIQUEMENT quand cet
   // écran est atteint SANS `navState?.pin` (reprise depuis Home, ou rechargement de page) — un
@@ -370,7 +393,9 @@ export function HostLive() {
           setResumeError(
             err instanceof Error
               ? err.message
-              : "Impossible de reprendre cette partie : session introuvable, terminée, ou vous n'en êtes pas l'hôte.",
+              : t(
+                  "Impossible de reprendre cette partie : session introuvable, terminée, ou vous n'en êtes pas l'hôte.",
+                ),
           )
         })
     }
@@ -464,26 +489,27 @@ export function HostLive() {
   // annonce par joueur.
   useEffect(() => {
     if (phase !== 'lobby') return
-    const t = window.setTimeout(() => {
-      const verb = players.length > 1 ? 'ont' : 'a'
+    const timeout = window.setTimeout(() => {
       setLobbyAnnouncement(
         players.length === 0
           ? ''
-          : `${players.length} joueur${players.length > 1 ? 's' : ''} ${verb} rejoint la partie.`,
+          : tpNow(players.length, '{n} joueur a rejoint la partie.', '{n} joueurs ont rejoint la partie.'),
       )
     }, 600)
-    return () => window.clearTimeout(t)
+    return () => window.clearTimeout(timeout)
   }, [phase, players])
 
   // Annonce debouncée du compteur de réponses (question uniquement).
   useEffect(() => {
     if (phase !== 'question') return
-    const t = window.setTimeout(() => {
+    const timeout = window.setTimeout(() => {
       setRespondedAnnouncement(
-        `${progressAnswered} sur ${players.length} ${progressAnswered > 1 ? 'ont' : 'a'} répondu.`,
+        tpNow(progressAnswered, '{n} sur {total} a répondu.', '{n} sur {total} ont répondu.', {
+          total: formatNumberNow(players.length),
+        }),
       )
     }, 700)
-    return () => window.clearTimeout(t)
+    return () => window.clearTimeout(timeout)
   }, [phase, progressAnswered, players.length])
 
   useEffect(() => {
@@ -501,7 +527,7 @@ export function HostLive() {
         setRelaunchQuizId((current) => current || list[0]?.id || '')
       })
       .catch(() => {
-        if (!cancelled) setRelaunchLoadError('Impossible de charger vos quiz.')
+        if (!cancelled) setRelaunchLoadError(t('Impossible de charger vos quiz.'))
       })
     return () => {
       cancelled = true
@@ -524,7 +550,7 @@ export function HostLive() {
 
   // Exclusion d'un joueur : pas de retrait optimiste, la liste suit le `lobby:update` du serveur.
   async function kickPlayer(playerId: string, nickname: string): Promise<void> {
-    if (!window.confirm(`Exclure ${nickname} de la partie ?`)) return
+    if (!window.confirm(t('Exclure {nickname} de la partie ?', { nickname }))) return
     setKickPendingId(playerId)
     setActionError(null)
     try {
@@ -541,7 +567,7 @@ export function HostLive() {
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
         <p className="join-error" role="alert">
-          Identifiant de session manquant dans l'URL.
+          {t("Identifiant de session manquant dans l'URL.")}
         </p>
       </main>
     )
@@ -559,7 +585,7 @@ export function HostLive() {
           {resumeError}
         </p>
         <Button variant="primary" type="button" onClick={() => navigate('/')}>
-          Retour à l'accueil
+          {t("Retour à l'accueil")}
         </Button>
       </main>
     )
@@ -572,7 +598,7 @@ export function HostLive() {
     return (
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
-        <p role="status">Reprise de la partie…</p>
+        <p role="status">{t('Reprise de la partie…')}</p>
       </main>
     )
   }
@@ -588,7 +614,7 @@ export function HostLive() {
     // un aller-retour réseau qui échouera à coup sûr — message actionnable
     // immédiat plutôt qu'un délai suivi de la même conclusion.
     if (connection === 'broken') {
-      setActionError(HOST_AUTHORITY_LOST_MESSAGE)
+      setActionError(hostAuthorityLostMessage())
       setActionPending(false)
       return
     }
@@ -625,7 +651,7 @@ export function HostLive() {
     setActionError(null)
     if (connection === 'broken') {
       skipRequestedRef.current = false
-      setActionError(HOST_AUTHORITY_LOST_MESSAGE)
+      setActionError(hostAuthorityLostMessage())
       setActionPending(false)
       return
     }
@@ -659,7 +685,8 @@ export function HostLive() {
   }
 
   /** Libellé réutilisé sur les vues révélation et classement quand une avance est en attente. */
-  const autoCountdownLabel = autoAdvance && autoRemaining !== null ? `Question suivante dans ${autoRemaining} s` : null
+  const autoCountdownLabel =
+    autoAdvance && autoRemaining !== null ? t('Question suivante dans {n} s', { n: autoRemaining }) : null
 
   async function createScreenLink() {
     if (!sessionId) return
@@ -667,13 +694,13 @@ export function HostLive() {
     setScreenError(null)
     setScreenCopyStatus(null)
     if (connection === 'broken') {
-      setScreenError(HOST_AUTHORITY_LOST_MESSAGE)
+      setScreenError(hostAuthorityLostMessage())
       setScreenPending(false)
       return
     }
     try {
       const ack = await emitAck<ScreenTokenAck>('host:createScreenToken', {})
-      setScreenUrl(buildScreenUrl(sessionId, ack.displayToken, pin, quizTitle))
+      setScreenUrl(buildScreenUrl(sessionId, ack.displayToken, pin, rawQuizTitle))
     } catch (err) {
       setScreenError(friendlyActionError(err, connection))
     } finally {
@@ -685,9 +712,9 @@ export function HostLive() {
     if (!screenUrl) return
     try {
       await navigator.clipboard.writeText(screenUrl)
-      setScreenCopyStatus('Lien copié.')
+      setScreenCopyStatus(t('Lien copié.'))
     } catch {
-      setScreenCopyStatus('Copie impossible, sélectionnez et copiez le lien manuellement.')
+      setScreenCopyStatus(t('Copie impossible, sélectionnez et copiez le lien manuellement.'))
     }
   }
 
@@ -713,10 +740,10 @@ export function HostLive() {
   const revealedAnswerText = rows ? (rows.find((r) => r.correct)?.label ?? '') : ''
   const revealStatus =
     question?.type === 'wordcloud'
-      ? 'Nuage de mots figé.'
+      ? t('Nuage de mots figé.')
       : question?.type === 'poll'
-        ? 'Sondage clos.'
-        : `Réponse révélée : ${revealedAnswerText}`
+        ? t('Sondage clos.')
+        : t('Réponse révélée : {answer}', { answer: revealedAnswerText })
 
   function renderWordcloud() {
     // Un nuage d'une autre question (course entre événements) n'est jamais affiché.
@@ -735,21 +762,21 @@ export function HostLive() {
   function renderDistribution() {
     if (question?.type === 'wordcloud') return renderWordcloud()
     if (poll && poll.voters === 0) {
-      return <p style={{ color: 'var(--ink-dim)' }}>Aucun vote</p>
+      return <p style={{ color: 'var(--ink-dim)' }}>{t('Aucun vote')}</p>
     }
     if (!rows) return null
     if (rows.length === 0) {
-      return <p style={{ color: 'var(--ink-dim)' }}>Aucune réponse reçue pour cette question.</p>
+      return <p style={{ color: 'var(--ink-dim)' }}>{t('Aucune réponse reçue pour cette question.')}</p>
     }
     return (
-      <ul className="hostlive-answers" aria-label="Réponses et distribution">
+      <ul className="hostlive-answers" aria-label={t('Réponses et distribution')}>
         {rows.map((row) => (
           <li key={row.key} className={`hostlive-answer-row${row.correct ? ' hostlive-answer-row--correct' : ''}`}>
             <span className="hostlive-answer-row__label">
               {row.label}
               {row.correct && (
                 <span className="hostlive-answer-row__correct-tag">
-                  <span aria-hidden="true">✓</span> Bonne réponse
+                  <span aria-hidden="true">✓</span> {t('Bonne réponse')}
                 </span>
               )}
             </span>
@@ -764,11 +791,8 @@ export function HostLive() {
             </span>
             {poll ? (
               <span className="hostlive-answer-row__count">
-                {row.count} vote{row.count > 1 ? 's' : ''},{' '}
-                <span>
-                  {pollPercent(row.count, poll.voters)}
-                  {' '}%
-                </span>
+                {tp(row.count, '{n} vote', '{n} votes')},{' '}
+                <span>{t('{percent}\u00a0%', { percent: pollPercent(row.count, poll.voters) })}</span>
               </span>
             ) : (
               <span className="hostlive-answer-row__count">{row.count}</span>
@@ -783,16 +807,16 @@ export function HostLive() {
     const top = boardEntries(ranking, players).slice(0, limit)
     const hasRanking = ranking.length > 0
     if (top.length === 0) {
-      return <p style={{ color: 'var(--ink-dim)' }}>Le classement s'affichera après la première question.</p>
+      return <p style={{ color: 'var(--ink-dim)' }}>{t("Le classement s'affichera après la première question.")}</p>
     }
     return (
       <>
         {focusTarget ? (
           <h2 ref={phaseHeadingRef} tabIndex={-1}>
-            Classement
+            {t('Classement')}
           </h2>
         ) : (
-          <h2>Top joueurs</h2>
+          <h2>{t('Top joueurs')}</h2>
         )}
         <ol className="hostlive-board">
           {top.map((p, index) => (
@@ -804,16 +828,16 @@ export function HostLive() {
                 </span>
               )}
               <span className="hostlive-board__name">{p.nickname}</span>
-              <span className="hostlive-board__score">{p.score} pts</span>
+              <span className="hostlive-board__score">{t('{score} pts', { score: p.score })}</span>
               <Button
                 variant="ghost"
                 type="button"
                 className="hostlive-kick"
-                aria-label={`Exclure ${p.nickname}`}
+                aria-label={t('Exclure {nickname}', { nickname: p.nickname })}
                 disabled={kickPendingId === p.playerId}
                 onClick={() => void kickPlayer(p.playerId, p.nickname)}
               >
-                Exclure
+                {t('Exclure')}
               </Button>
             </li>
           ))}
@@ -828,23 +852,23 @@ export function HostLive() {
     if (players.length === 0) return null
     return (
       <details className="hostlive-all-players">
-        <summary>Tous les joueurs ({players.length})</summary>
+        <summary>{t('Tous les joueurs ({n})', { n: players.length })}</summary>
         <ul className="hostlive-board">
           {players.map((p) => (
             <li key={p.id} className="hostlive-board__row">
               <span className="hostlive-board__name">
                 {p.nickname}
-                {!p.connected && <span className="visually-hidden"> (hors ligne)</span>}
+                {!p.connected && <span className="visually-hidden"> {t('(hors ligne)')}</span>}
               </span>
               <Button
                 variant="ghost"
                 type="button"
                 className="hostlive-kick"
-                aria-label={`Exclure ${p.nickname}`}
+                aria-label={t('Exclure {nickname}', { nickname: p.nickname })}
                 disabled={kickPendingId === p.id}
                 onClick={() => void kickPlayer(p.id, p.nickname)}
               >
-                Exclure
+                {t('Exclure')}
               </Button>
             </li>
           ))}
@@ -862,19 +886,17 @@ export function HostLive() {
             <span className="hostlive-header__title">{quizTitle}</span>
           </div>
           {pin ? (
-            <PinDisplay pin={pin} compact label="Code PIN de la partie" />
+            <PinDisplay pin={pin} compact label={t('Code PIN de la partie')} />
           ) : (
             <p style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
-              PIN indisponible (session atteinte sans passer par « Lancer la partie »).
+              {t('PIN indisponible (session atteinte sans passer par « Lancer la partie »).')}
             </p>
           )}
         </div>
         <div className="hostlive-header__status">
           <span className="host-badge">
-            {players.length} joueur{players.length > 1 ? 's' : ''}
-            {phase !== 'lobby' && players.length > 0
-              ? ` (${connectedCount} connecté${connectedCount > 1 ? 's' : ''})`
-              : ''}
+            {tp(players.length, '{n} joueur', '{n} joueurs')}
+            {phase !== 'lobby' && players.length > 0 ? ` (${tp(connectedCount, '{n} connecté', '{n} connectés')})` : ''}
           </span>
           <span className="host-badge">{phaseLabel(phase)}</span>
         </div>
@@ -882,7 +904,7 @@ export function HostLive() {
 
       {connection === 'reconnecting' && (
         <p className="player-net player-net--reconnecting" role="alert">
-          Connexion perdue, reconnexion…
+          {t('Connexion perdue, reconnexion…')}
         </p>
       )}
       {connection === 'broken' && (
@@ -897,9 +919,9 @@ export function HostLive() {
             gap: 'var(--space-3)',
           }}
         >
-          <span>{HOST_AUTHORITY_LOST_MESSAGE}</span>
+          <span>{hostAuthorityLostMessage()}</span>
           <Button variant="ghost" type="button" onClick={() => navigate('/')}>
-            Retour à l'éditeur
+            {t("Retour à l'éditeur")}
           </Button>
         </p>
       )}
@@ -909,12 +931,12 @@ export function HostLive() {
       <div className="host-field" style={{ padding: 'var(--space-3) var(--space-4)' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 'var(--space-3)' }}>
           <Button variant="ghost" type="button" disabled={screenPending} onClick={() => void createScreenLink()}>
-            {screenPending ? 'Génération…' : screenUrl ? 'Régénérer le lien grand écran' : 'Grand écran'}
+            {screenPending ? t('Génération…') : screenUrl ? t('Régénérer le lien grand écran') : t('Grand écran')}
           </Button>
           {screenUrl && (
             <>
               <label htmlFor="hostlive-screen-url" className="visually-hidden">
-                Lien du grand écran
+                {t('Lien du grand écran')}
               </label>
               <input
                 id="hostlive-screen-url"
@@ -925,7 +947,7 @@ export function HostLive() {
                 style={{ flex: '1 1 320px', minWidth: 0, fontFamily: 'var(--font-mono)' }}
               />
               <Button variant="ghost" type="button" onClick={() => void copyScreenLink()}>
-                Copier
+                {t('Copier')}
               </Button>
             </>
           )}
@@ -942,8 +964,9 @@ export function HostLive() {
         )}
         {screenUrl && (
           <p style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
-            À usage unique : ouvrez ce lien sur le projecteur AVANT de lancer la partie ; il devient invalide une fois
-            utilisé.
+            {t(
+              'À usage unique : ouvrez ce lien sur le projecteur AVANT de lancer la partie ; il devient invalide une fois utilisé.',
+            )}
           </p>
         )}
       </div>
@@ -952,12 +975,12 @@ export function HostLive() {
       <div className="host-field" style={{ padding: 'var(--space-3) var(--space-4)' }}>
         <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', cursor: 'pointer' }}>
           <input type="checkbox" checked={autoAdvance} onChange={(e) => toggleAuto(e.currentTarget.checked)} />
-          <span>Enchaînement automatique des étapes (10 s de pause sur le classement)</span>
+          <span>{t('Enchaînement automatique des étapes (10 s de pause sur le classement)')}</span>
         </label>
       </div>
 
       <main className="ab-shell__main hostlive-main" id="contenu-principal" tabIndex={-1}>
-        <h1 className="visually-hidden">Contrôleur hôte live</h1>
+        <h1 className="visually-hidden">{t('Contrôleur hôte live')}</h1>
 
         {actionError && (
           <p className="join-error" role="alert">
@@ -966,33 +989,35 @@ export function HostLive() {
         )}
 
         <div className="hostlive-layout">
-          <section className="hostlive-primary" aria-label="Pilotage de la partie">
+          <section className="hostlive-primary" aria-label={t('Pilotage de la partie')}>
             {phase === 'lobby' && (
               <div className="hostlive-phase">
                 <h2 ref={phaseHeadingRef} tabIndex={-1}>
-                  En attente des joueurs
+                  {t('En attente des joueurs')}
                 </h2>
-                <p style={{ color: 'var(--ink-dim)' }}>Partagez le PIN sur le grand écran, ou le lien ci-dessus.</p>
+                <p style={{ color: 'var(--ink-dim)' }}>
+                  {t('Partagez le PIN sur le grand écran, ou le lien ci-dessus.')}
+                </p>
 
                 {players.length === 0 ? (
                   <p className="hostlive-empty">
-                    Aucun joueur pour l'instant. La partie se lance dès qu'un joueur rejoint.
+                    {t("Aucun joueur pour l'instant. La partie se lance dès qu'un joueur rejoint.")}
                   </p>
                 ) : (
-                  <ul className="hostlive-players" aria-label="Joueurs ayant rejoint la partie">
+                  <ul className="hostlive-players" aria-label={t('Joueurs ayant rejoint la partie')}>
                     {players.map((p) => (
                       <li key={p.id} className="hostlive-players__chip">
                         {p.nickname}
-                        {!p.connected && <span className="visually-hidden"> (hors ligne)</span>}
+                        {!p.connected && <span className="visually-hidden"> {t('(hors ligne)')}</span>}
                         <Button
                           variant="ghost"
                           type="button"
                           className="hostlive-kick"
-                          aria-label={`Exclure ${p.nickname}`}
+                          aria-label={t('Exclure {nickname}', { nickname: p.nickname })}
                           disabled={kickPendingId === p.id}
                           onClick={() => void kickPlayer(p.id, p.nickname)}
                         >
-                          Exclure
+                          {t('Exclure')}
                         </Button>
                       </li>
                     ))}
@@ -1016,11 +1041,11 @@ export function HostLive() {
                       startGame()
                     }}
                   >
-                    {actionPending ? 'Lancement…' : 'Lancer la partie'}
+                    {actionPending ? t('Lancement…') : t('Lancer la partie')}
                   </Button>
                   {!canLaunch && (
                     <p className="hostlive-controls__hint" id="hostlive-launch-reason">
-                      En attente d'au moins un joueur pour lancer la partie.
+                      {t("En attente d'au moins un joueur pour lancer la partie.")}
                     </p>
                   )}
                 </div>
@@ -1041,7 +1066,7 @@ export function HostLive() {
                 </div>
                 <QuestionImage key={reading.media ?? ''} src={reading.media} alt={reading.mediaAlt} variant="host" />
                 <p role="status" aria-live="polite">
-                  Lecture en cours… {readingRemaining ?? reading.readingTime} s restantes
+                  {t('Lecture en cours… {n} s restantes', { n: readingRemaining ?? reading.readingTime })}
                 </p>
               </div>
             )}
@@ -1061,12 +1086,14 @@ export function HostLive() {
                 <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="host" />
 
                 {question.type === 'poll' && (question.payload as { multiple?: boolean }).multiple && (
-                  <p className="hostlive-progress">Plusieurs réponses possibles</p>
+                  <p className="hostlive-progress">{t('Plusieurs réponses possibles')}</p>
                 )}
 
                 {question.type !== 'wordcloud' && (
                   <p className="hostlive-progress" aria-hidden="true">
-                    {progressAnswered} / {players.length} {progressAnswered > 1 ? 'ont' : 'a'} répondu
+                    {tp(progressAnswered, '{n} / {total} a répondu', '{n} / {total} ont répondu', {
+                      total: formatNumber(players.length),
+                    })}
                   </p>
                 )}
                 <p className="visually-hidden" role="status" aria-live="polite">
@@ -1078,10 +1105,10 @@ export function HostLive() {
                 <div className="hostlive-controls">
                   <Button variant="primary" type="button" disabled={actionPending} onClick={revealAnswer}>
                     {question.type === 'wordcloud'
-                      ? 'Clore le nuage'
+                      ? t('Clore le nuage')
                       : question.type === 'poll'
-                        ? 'Clore le sondage'
-                        : 'Révéler la réponse'}
+                        ? t('Clore le sondage')
+                        : t('Révéler la réponse')}
                   </Button>
                   <Button
                     variant="ghost"
@@ -1098,15 +1125,17 @@ export function HostLive() {
                       if (
                         window.confirm(
                           scored
-                            ? 'Révéler la réponse et passer directement au classement ? La réponse sera affichée aux joueurs et au grand écran.'
-                            : 'Passer directement à la suite, sans afficher les résultats ?',
+                            ? t(
+                                'Révéler la réponse et passer directement au classement ? La réponse sera affichée aux joueurs et au grand écran.',
+                              )
+                            : t('Passer directement à la suite, sans afficher les résultats ?'),
                         )
                       ) {
                         skipQuestion(scored)
                       }
                     }}
                   >
-                    Passer
+                    {t('Passer')}
                   </Button>
                 </div>
               </div>
@@ -1115,7 +1144,7 @@ export function HostLive() {
             {phase === 'reveal' && question && (
               <div className="hostlive-phase">
                 <h2 ref={phaseHeadingRef} tabIndex={-1}>
-                  Révélation : {question.prompt}
+                  {t('Révélation : {prompt}', { prompt: question.prompt })}
                 </h2>
                 <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="host" />
                 <p className="visually-hidden" role="status" aria-live="polite">
@@ -1127,13 +1156,13 @@ export function HostLive() {
                 <div className="hostlive-controls">
                   {scored ? (
                     <Button variant="primary" type="button" onClick={goToScoreboard}>
-                      Afficher le classement
+                      {t('Afficher le classement')}
                     </Button>
                   ) : (
                     // Pas de classement après une question non notée : même avance que depuis
                     // l'écran de classement (le serveur tranche entre question suivante et fin).
                     <Button variant="primary" type="button" disabled={actionPending} onClick={advance}>
-                      {actionPending ? '…' : 'Suivant'}
+                      {actionPending ? '…' : t('Suivant')}
                     </Button>
                   )}
                   {autoCountdownLabel && (
@@ -1156,7 +1185,7 @@ export function HostLive() {
                       (nouvelle question ou `podium`), les deux sont gérés par
                       les mêmes abonnements `question:show`/`podium`. */}
                   <Button variant="primary" type="button" disabled={actionPending} onClick={advance}>
-                    {actionPending ? '…' : 'Suivant'}
+                    {actionPending ? '…' : t('Suivant')}
                   </Button>
                   {autoCountdownLabel && (
                     <p className="hostlive-controls__hint" role="status" aria-live="polite">
@@ -1187,12 +1216,12 @@ export function HostLive() {
                       {relaunchLoadError}
                     </p>
                   ) : relaunchQuizzes === null ? (
-                    <p role="status">Chargement de vos quiz…</p>
+                    <p role="status">{t('Chargement de vos quiz…')}</p>
                   ) : relaunchQuizzes.length === 0 ? (
-                    <p role="status">Aucun quiz disponible à relancer.</p>
+                    <p role="status">{t('Aucun quiz disponible à relancer.')}</p>
                   ) : (
                     <>
-                      <label htmlFor="relaunch-quiz">Quiz de la prochaine partie</label>
+                      <label htmlFor="relaunch-quiz">{t('Quiz de la prochaine partie')}</label>
                       <select
                         id="relaunch-quiz"
                         value={relaunchQuizId}
@@ -1210,7 +1239,7 @@ export function HostLive() {
                         disabled={actionPending || !relaunchQuizId}
                         onClick={() => void relaunch()}
                       >
-                        Relancer une partie
+                        {t('Relancer une partie')}
                       </Button>
                     </>
                   )}
@@ -1220,14 +1249,17 @@ export function HostLive() {
           </section>
 
           {(phase === 'reading' || phase === 'question' || phase === 'reveal') && (
-            <aside className="hostlive-aside" aria-label={scored ? 'Dernier classement connu' : 'Joueurs de la partie'}>
+            <aside
+              className="hostlive-aside"
+              aria-label={scored ? t('Dernier classement connu') : t('Joueurs de la partie')}
+            >
               {/* Question non notée (sondage, nuage) : pas de rappel du classement, hors sujet ici. */}
               {scored && renderLeaderboard(5, false)}
               {renderAllPlayers()}
             </aside>
           )}
           {phase === 'scoreboard' && players.length > 0 && (
-            <aside className="hostlive-aside" aria-label="Joueurs de la partie">
+            <aside className="hostlive-aside" aria-label={t('Joueurs de la partie')}>
               {renderAllPlayers()}
             </aside>
           )}

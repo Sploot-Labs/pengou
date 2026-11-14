@@ -3,6 +3,8 @@ import { ApiError } from '../api/client'
 import { uploadMedia } from '../api/media'
 import { UPLOAD_MAX_BYTES, prepareImageForUpload } from '../media/downscale'
 import { Button } from '../ui'
+import { t } from '../i18n/t'
+import { useT } from '../i18n/useT'
 
 const ACCEPT = 'image/png,image/jpeg,image/webp,image/gif'
 const EXTENSIONS: Record<string, string> = {
@@ -11,12 +13,9 @@ const EXTENSIONS: Record<string, string> = {
   'image/webp': 'webp',
   'image/gif': 'gif',
 }
-const TOO_HEAVY = 'Image trop lourde (2 Mo max).'
-const TOO_HEAVY_AFTER_REDUCTION = 'Image trop lourde, même après réduction (2 Mo max).'
-
 class TooHeavyError extends Error {
   constructor(transformed: boolean) {
-    super(transformed ? TOO_HEAVY_AFTER_REDUCTION : TOO_HEAVY)
+    super(transformed ? t('Image trop lourde, même après réduction (2 Mo max).') : t('Image trop lourde (2 Mo max).'))
   }
 }
 
@@ -38,6 +37,7 @@ export interface QuestionImageFieldProps {
 }
 
 export function QuestionImageField({ media, mediaAlt, onChange, upload = defaultUpload }: QuestionImageFieldProps) {
+  useT()
   const id = useId()
   const fileRef = useRef<HTMLInputElement>(null)
   const [uploadError, setUploadError] = useState<string | null>(null)
@@ -56,7 +56,7 @@ export function QuestionImageField({ media, mediaAlt, onChange, upload = default
       onChange({ media: url })
     } catch (err) {
       setUploadError(
-        err instanceof ApiError || err instanceof TooHeavyError ? err.message : "L'envoi de l'image a échoué.",
+        err instanceof ApiError || err instanceof TooHeavyError ? err.message : t("L'envoi de l'image a échoué."),
       )
     } finally {
       setUploading(false)
@@ -66,13 +66,13 @@ export function QuestionImageField({ media, mediaAlt, onChange, upload = default
 
   return (
     <fieldset className="host-image">
-      <legend>Image (facultative)</legend>
+      <legend>{t('Image (facultative)')}</legend>
 
       {media && (
         <div className="host-image__preview">
           <img src={media} alt={mediaAlt ?? ''} />
           <Button variant="ghost" type="button" onClick={() => onChange({ media: null, mediaAlt: null })}>
-            Retirer l'image
+            {t("Retirer l'image")}
           </Button>
         </div>
       )}
@@ -95,7 +95,7 @@ export function QuestionImageField({ media, mediaAlt, onChange, upload = default
           aria-describedby={uploadError ? uploadErrorId : undefined}
           onClick={() => fileRef.current?.click()}
         >
-          {uploading ? 'Envoi…' : 'Envoyer une image'}
+          {uploading ? t('Envoi…') : t('Envoyer une image')}
         </Button>
         {uploadError && (
           <p className="host-inline-error" id={uploadErrorId} role="alert">
@@ -106,9 +106,9 @@ export function QuestionImageField({ media, mediaAlt, onChange, upload = default
 
       {media && (
         <div className="host-field">
-          <label htmlFor={altId}>Texte alternatif</label>
+          <label htmlFor={altId}>{t('Texte alternatif')}</label>
           <p className="host-field__help" id={altHelpId}>
-            Décrivez l'image pour les personnes qui ne la voient pas, sans donner la réponse.
+            {t("Décrivez l'image pour les personnes qui ne la voient pas, sans donner la réponse.")}
           </p>
           <input
             id={altId}

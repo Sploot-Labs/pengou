@@ -3,6 +3,7 @@ import { toNodeHandler, fromNodeHeaders } from 'better-auth/node'
 import type { Auth } from '@splootlabs/auth'
 import type { AppConfig, LegalConfig } from '@splootlabs/shared'
 import { termsAcceptanceRequired } from './legal.js'
+import { localizeAuthHandler } from './i18n/localize.js'
 
 // NOTE(déviation) : le brief prévoyait `fastify-better-auth` (`FastifyBetterAuth` +
 // `getAuthDecorator`). Ce paquet (v1.2.0) déclare `peerDependencies: { fastify: '5.x' }`
@@ -23,7 +24,9 @@ export async function registerAuth(
   } = {},
 ): Promise<void> {
   const legal = options.legal ?? null
-  const authHandler = toNodeHandler(auth)
+  // Better Auth écrit directement sur la réponse Node, hors du crochet onSend de traduction : ses
+  // messages d'erreur (en anglais) sont traduits ici par leur code, voir localizeAuthHandler.
+  const authHandler = toNodeHandler(localizeAuthHandler(auth.handler))
 
   // Encapsulé dans un sous-contexte Fastify pour que la désactivation du parsing JSON
   // (Better Auth lit lui-même le corps brut de la requête) ne s'applique qu'aux routes

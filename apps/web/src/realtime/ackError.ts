@@ -15,5 +15,11 @@ export class AckError extends Error {
 /** Vrai si l'erreur vient d'un refus pour exclusion. Test par propriété et non
  * par `instanceof` : les tests d'écran mockent `useGameSocket`. */
 export function isKickedError(err: unknown): boolean {
-  return typeof err === 'object' && err !== null && (err as { code?: unknown }).code === KICKED_ACK_CODE
+  return hasAckCode(err, KICKED_ACK_CODE)
+}
+
+/** Vrai si l'erreur porte le code machine `code` (voir les `*_ACK_CODE` de contracts.ts). Test par
+ * propriété, comme `isKickedError`. */
+export function hasAckCode(err: unknown, code: string): boolean {
+  return typeof err === 'object' && err !== null && (err as { code?: unknown }).code === code
 }

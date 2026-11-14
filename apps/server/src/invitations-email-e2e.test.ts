@@ -172,6 +172,23 @@ describe('e2e : invitation envoyée par e-mail', () => {
     await app.close()
   })
 
+  it("l'e-mail part dans la langue de l'invitant", async () => {
+    const mailer = new MemoryMailer()
+    const app = await buildApp(mailer)
+    const { cookie, tenantId } = await setupOwner(app, 'inv-mail-lang@example.com')
+    const res = await app.inject({
+      method: 'POST',
+      url: `/api/workspaces/${tenantId}/invitations`,
+      payload: { email: 'invite-es@example.com', role: 'member' },
+      headers: { 'content-type': 'application/json', cookie, 'accept-language': 'es' },
+    })
+    expect(res.statusCode).toBe(201)
+    expect(mailer.sent).toHaveLength(1)
+    expect(mailer.sent[0].subject).toMatch(/te invita a Pengou$/)
+    expect(mailer.sent[0].html).toContain('<html lang="es">')
+    await app.close()
+  })
+
   it('renvoi : nouveau token dans le nouvel e-mail ; échec du renvoi remet emailed_at à nul', async () => {
     const mailer = new MemoryMailer()
     const app = await buildApp(mailer)

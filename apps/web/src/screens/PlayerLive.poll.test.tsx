@@ -2,6 +2,7 @@
 import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { setLang } from '../i18n/lang'
 import { MotionProvider } from '../motion/index.js'
 import { savePlayerSession, clearPlayerSession } from '../realtime/playerSession'
 import { PlayerLive } from './PlayerLive'
@@ -29,7 +30,7 @@ const mockEmitAck = vi.fn(async (event: string, _payload?: unknown) => {
   return {}
 })
 
-type Ack = { accepted: boolean; reason?: string; words?: string[] }
+type Ack = { accepted: boolean; reason?: string; code?: string; words?: string[] }
 let answerAcks: Ack[] = []
 function nextAnswerAck(): Ack {
   return answerAcks.shift() ?? { accepted: false, reason: 'hors phase question' }
@@ -131,11 +132,34 @@ describe('PlayerLive sondage', () => {
 
   it('un refus rouvre le sondage', async () => {
     await start(false)
-    answerAcks.push({ accepted: false, reason: 'réponse invalide pour ce type de question' })
+    answerAcks.push({ accepted: false, reason: 'réponse invalide pour ce type de question', code: 'INVALID_ANSWER' })
     fireEvent.click(screen.getByRole('button', { name: /Oui/ }))
     await screen.findByRole('alert')
     expect(screen.getByRole('button', { name: /Non/ })).toBeEnabled()
     expect(screen.queryByText('Vote enregistré')).toBeNull()
+  })
+
+  it('un refus INVALID_ANSWER en anglais rouvre aussi le sondage', async () => {
+    setLang('en')
+    try {
+      await start(false)
+      answerAcks.push({ accepted: false, reason: 'invalid answer for this question type', code: 'INVALID_ANSWER' })
+      fireEvent.click(screen.getByRole('button', { name: /Oui/ }))
+      expect(await screen.findByRole('alert')).toHaveTextContent(
+        "Your answer wasn't counted: invalid answer for this question type",
+      )
+      expect(screen.getByRole('button', { name: /Non/ })).toBeEnabled()
+    } finally {
+      setLang('fr')
+    }
+  })
+
+  it('un autre refus garde le sondage verrouillé', async () => {
+    await start(false)
+    answerAcks.push({ accepted: false, reason: 'hors phase question' })
+    fireEvent.click(screen.getByRole('button', { name: /Oui/ }))
+    await screen.findByRole('alert')
+    expect(screen.getByRole('button', { name: /Non/ })).toBeDisabled()
   })
 
   it('question:reveal affiche Sondage clos sans répartition ni verdict', async () => {

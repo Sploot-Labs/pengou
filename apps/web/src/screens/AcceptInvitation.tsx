@@ -4,11 +4,14 @@ import { useSession } from '../api/auth'
 import { useWorkspaces } from '../api/workspace-context'
 import { ApiError } from '../api/client'
 import { fetchInvitationPreview, acceptInvitation, type InvitationPreview } from '../api/workspaces'
+import type { WebKey } from '../i18n/catalog'
+import { t as translate } from '../i18n/t'
+import { useT } from '../i18n/useT'
 import { nextQuery } from '../nextPath'
 import { AppHeader } from '../ui/AppHeader'
 import { Button } from '../ui'
 
-const ROLE_LABEL: Record<string, string> = { owner: 'propriétaire', admin: 'administrateur', member: 'membre' }
+const ROLE_LABEL: Record<string, WebKey> = { owner: 'propriétaire', admin: 'administrateur', member: 'membre' }
 
 /**
  * Écran d'acceptation d'invitation (Slice 3c) — PUBLIC (l'aperçu ne requiert pas de session : le
@@ -17,6 +20,7 @@ const ROLE_LABEL: Record<string, string> = { owner: 'propriétaire', admin: 'adm
  * acceptation, on bascule le workspace actif sur celui rejoint et on recharge l'accueil.
  */
 export function AcceptInvitation() {
+  const { t } = useT()
   const { token = '' } = useParams()
   // Preuve du lien e-mailé : la renvoyer à l'acceptation confirme l'adresse.
   const [searchParams] = useSearchParams()
@@ -46,7 +50,7 @@ export function AcceptInvitation() {
       })
       .catch((err) => {
         if (cancelled) return
-        setLoadError(err instanceof ApiError ? err.message : 'Invitation introuvable.')
+        setLoadError(err instanceof ApiError ? err.message : translate('Invitation introuvable.'))
       })
       .finally(() => {
         if (!cancelled) setLoading(false)
@@ -65,11 +69,12 @@ export function AcceptInvitation() {
       // Rechargement dur : la nouvelle membership + le nouveau contexte tenant sont pris en compte.
       window.location.assign('/')
     } catch (err) {
-      setAcceptError(err instanceof ApiError ? err.message : "Impossible d'accepter l'invitation.")
+      setAcceptError(err instanceof ApiError ? err.message : t("Impossible d'accepter l'invitation."))
       setAccepting(false)
     }
   }
 
+  const roleKey = preview ? ROLE_LABEL[preview.role] : undefined
   const unusable = preview && (preview.expired || preview.status !== 'pending')
 
   return (
@@ -78,22 +83,22 @@ export function AcceptInvitation() {
       <main className="ab-shell__main" id="contenu-principal" tabIndex={-1}>
         <section className="home-hero">
           <div>
-            <h1>Invitation</h1>
+            <h1>{t('Invitation')}</h1>
             {preview && (
               <p className="home-hero__sub">
-                Vous êtes invité·e à rejoindre <strong>{preview.workspaceName}</strong> en tant que{' '}
-                {ROLE_LABEL[preview.role] ?? preview.role}.
+                {t('Vous êtes invité·e à rejoindre')} <strong>{preview.workspaceName}</strong> {t('en tant que')}{' '}
+                {roleKey ? t(roleKey) : preview.role}.
               </p>
             )}
           </div>
         </section>
 
-        {loading && <p role="status">Chargement de l'invitation…</p>}
+        {loading && <p role="status">{t("Chargement de l'invitation…")}</p>}
         {loadError && !loading && (
           <div className="ab-empty-state">
             <p role="alert">{loadError}</p>
             <Link className="ab-button ab-button--primary" to="/">
-              Retour à l'accueil
+              {t("Retour à l'accueil")}
             </Link>
           </div>
         )}
@@ -103,8 +108,8 @@ export function AcceptInvitation() {
             {unusable ? (
               <p role="alert" className="join-error">
                 {preview.expired
-                  ? 'Cette invitation a expiré. Demandez-en une nouvelle.'
-                  : 'Cette invitation a déjà été utilisée ou révoquée.'}
+                  ? t('Cette invitation a expiré. Demandez-en une nouvelle.')
+                  : t('Cette invitation a déjà été utilisée ou révoquée.')}
               </p>
             ) : user ? (
               <>
@@ -114,25 +119,25 @@ export function AcceptInvitation() {
                   </p>
                 )}
                 <p>
-                  Connecté·e en tant que <strong>{user.email}</strong>.
+                  {t('Connecté·e en tant que')} <strong>{user.email}</strong>.
                 </p>
                 <Button variant="primary" type="button" disabled={accepting} onClick={() => void handleAccept()}>
-                  {accepting ? 'Acceptation…' : `Rejoindre ${preview.workspaceName}`}
+                  {accepting ? t('Acceptation…') : t('Rejoindre {name}', { name: preview.workspaceName })}
                 </Button>
               </>
             ) : (
               <>
-                <p>Connectez-vous ou créez un compte pour rejoindre ce workspace.</p>
+                <p>{t('Connectez-vous ou créez un compte pour rejoindre ce workspace.')}</p>
                 <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
                   <Link className="ab-button ab-button--primary" to={`/login${returnQuery}`}>
-                    Se connecter
+                    {t('Se connecter')}
                   </Link>
                   <Link className="ab-button ab-button--ghost" to={`/signup${returnQuery}`}>
-                    Créer un compte
+                    {t('Créer un compte')}
                   </Link>
                 </div>
                 <p className="home-card__meta" style={{ marginTop: 'var(--space-3)' }}>
-                  Revenez sur ce lien une fois connecté·e pour finaliser.
+                  {t('Revenez sur ce lien une fois connecté·e pour finaliser.')}
                 </p>
               </>
             )}

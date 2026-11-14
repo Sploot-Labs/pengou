@@ -46,6 +46,7 @@ calculé côté serveur avec un bonus de rapidité, donc impossible à truquer d
 - Rapports de partie : scores, réponses, export CSV.
 - Multi-tenant : mode `single` pour le self-host, mode `multi` pour le SaaS.
 - Authentification intégrée : e-mail et mot de passe, plus OAuth Google, GitHub et Facebook en option.
+- Trois langues : français (par défaut), anglais et espagnol, au choix de chacun depuis le sélecteur de langue. Pour en ajouter une, déclarez-la dans `packages/shared/src/i18n.ts`, puis complétez les catalogues par écran (`apps/web/src/i18n/catalog/`), le catalogue serveur `apps/server/src/i18n/`, les gabarits d'e-mail de `packages/mail/src/templates/` et le quiz d'exemple `apps/server/src/example-quiz.ts` (TypeScript signale toute traduction manquante).
 
 ## Démarrer en une commande (Docker)
 

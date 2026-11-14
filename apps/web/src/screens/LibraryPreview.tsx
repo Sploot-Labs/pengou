@@ -5,14 +5,27 @@ import type { McqPayload, SliderPayload, TextPayload, TrueFalsePayload } from '.
 import { Button } from '../ui'
 import { QuizLimitNotice } from '../ui/QuizLimitNotice'
 import { SourceCredit } from '../ui/SourceCredit'
+import { t, tp } from '../i18n/t'
+import { useT } from '../i18n/useT'
 
-const TYPE_LABEL: Record<string, string> = {
-  mcq: 'Choix multiple',
-  truefalse: 'Vrai ou faux',
-  text: 'Réponse libre',
-  slider: 'Curseur',
-  wordcloud: 'Nuage de mots',
-  poll: 'Sondage',
+/** Libellé d'un type de question ; le type brut en repli. */
+export function typeLabel(type: string): string {
+  switch (type) {
+    case 'mcq':
+      return t('Choix multiple')
+    case 'truefalse':
+      return t('Vrai ou faux')
+    case 'text':
+      return t('Réponse libre')
+    case 'slider':
+      return t('Curseur')
+    case 'wordcloud':
+      return t('Nuage de mots')
+    case 'poll':
+      return t('Sondage')
+    default:
+      return type
+  }
 }
 
 /** Bonne réponse en une ligne, selon le type. Payload inattendu : rien plutôt qu'un plantage. */
@@ -20,20 +33,24 @@ export function answerText(q: Pick<LibraryQuestion, 'type' | 'payload'>): string
   switch (q.type) {
     case 'mcq': {
       const labels = ((q.payload as McqPayload).options ?? []).filter((o) => o.correct).map((o) => o.label)
-      return labels.length > 0 ? `Réponse : ${labels.join(' ou ')}` : null
+      return labels.length > 0 ? t('Réponse : {answer}', { answer: labels.join(t(' ou ')) }) : null
     }
     case 'truefalse': {
       const correct = (q.payload as TrueFalsePayload).correct
-      return typeof correct === 'boolean' ? `Réponse : ${correct ? 'vrai' : 'faux'}` : null
+      return typeof correct === 'boolean' ? t('Réponse : {answer}', { answer: correct ? t('vrai') : t('faux') }) : null
     }
     case 'text': {
       const answers = (q.payload as TextPayload).answers ?? []
       if (answers.length === 0) return null
-      return answers.length === 1 ? `Réponse : ${answers[0]}` : `Réponses acceptées : ${answers.join(', ')}`
+      return answers.length === 1
+        ? t('Réponse : {answer}', { answer: answers[0] })
+        : t('Réponses acceptées : {answers}', { answers: answers.join(', ') })
     }
     case 'slider': {
       const p = q.payload as SliderPayload
-      return typeof p.correct === 'number' ? `Réponse : ${p.correct} (entre ${p.min} et ${p.max})` : null
+      return typeof p.correct === 'number'
+        ? t('Réponse : {value} (entre {min} et {max})', { value: p.correct, min: p.min, max: p.max })
+        : null
     }
     default:
       return null
@@ -64,6 +81,7 @@ export function LibraryPreview({
   onCustomize: (quiz: LibraryQuizSummary) => void
   onPlay: (quiz: LibraryQuizSummary) => void
 }) {
+  useT()
   const [data, setData] = useState<{ quiz: LibraryQuizSummary; questions: LibraryQuestion[] } | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [showAnswers, setShowAnswers] = useState(false)
@@ -79,7 +97,7 @@ export function LibraryPreview({
         if (!stale) setData(res)
       })
       .catch((err) => {
-        if (!stale) setError(err instanceof ApiError ? err.message : 'Une erreur réseau est survenue. Réessayez.')
+        if (!stale) setError(err instanceof ApiError ? err.message : t('Une erreur réseau est survenue. Réessayez.'))
       })
     return () => {
       stale = true
@@ -124,15 +142,13 @@ export function LibraryPreview({
       >
         <div className="library-preview__head">
           <div>
-            <h2 id="library-preview-title">{quiz?.title ?? 'Aperçu du quiz'}</h2>
+            <h2 id="library-preview-title">{quiz?.title ?? t('Aperçu du quiz')}</h2>
             {data && (
-              <span className="home-card__meta">
-                {data.questions.length} question{data.questions.length > 1 ? 's' : ''}
-              </span>
+              <span className="home-card__meta">{tp(data.questions.length, '{n} question', '{n} questions')}</span>
             )}
           </div>
           <Button variant="ghost" type="button" ref={closeRef} onClick={onClose}>
-            Fermer
+            {t('Fermer')}
           </Button>
         </div>
 
@@ -141,11 +157,11 @@ export function LibraryPreview({
             {error}
           </p>
         ) : !data ? (
-          <p role="status">Chargement des questions…</p>
+          <p role="status">{t('Chargement des questions…')}</p>
         ) : (
           <>
             <Button variant="ghost" type="button" aria-pressed={showAnswers} onClick={() => setShowAnswers((v) => !v)}>
-              {showAnswers ? 'Masquer les réponses' : 'Afficher les réponses'}
+              {showAnswers ? t('Masquer les réponses') : t('Afficher les réponses')}
             </Button>
             <ol className="library-preview__list">
               {data.questions.map((q) => {
@@ -154,7 +170,7 @@ export function LibraryPreview({
                   <li key={q.id} className="library-preview__item">
                     <span className="library-preview__prompt">
                       <span>{q.prompt}</span>
-                      <span className="host-badge">{TYPE_LABEL[q.type] ?? q.type}</span>
+                      <span className="host-badge">{typeLabel(q.type)}</span>
                     </span>
                     {answer && <span className="library-preview__answer">{answer}</span>}
                   </li>
@@ -182,7 +198,7 @@ export function LibraryPreview({
             disabled={!quiz || busy !== null}
             onClick={() => quiz && onCustomize(quiz)}
           >
-            {busy === 'customize' ? 'Création…' : 'Personnaliser'}
+            {busy === 'customize' ? t('Création…') : t('Personnaliser')}
           </Button>
           <Button
             variant="primary"
@@ -190,7 +206,7 @@ export function LibraryPreview({
             disabled={!quiz || busy !== null}
             onClick={() => quiz && onPlay(quiz)}
           >
-            {busy === 'play' ? 'Lancement…' : 'Jouer maintenant'}
+            {busy === 'play' ? t('Lancement…') : t('Jouer maintenant')}
           </Button>
         </div>
       </div>

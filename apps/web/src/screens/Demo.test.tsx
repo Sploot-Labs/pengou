@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ApiError } from '../api/client'
+import { setLang } from '../i18n/lang'
 import type { LegalInfo } from '../api/legal'
 
 const mockStartDemo = vi.fn()
@@ -81,6 +82,7 @@ beforeEach(() => {
 
 afterEach(() => {
   cleanup()
+  setLang('fr')
   vi.clearAllMocks()
 })
 
@@ -97,6 +99,18 @@ describe('écran /demo', () => {
     expect(screen.getByText(/En lançant la démonstration, vous acceptez les/)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /conditions d'utilisation/ })).toHaveAttribute('href', LEGAL.termsUrl)
     expect(await launchButton()).toBeEnabled()
+  })
+
+  it("propose le sélecteur de langue, qui retraduit l'écran", async () => {
+    renderDemo()
+    const select = screen.getByRole('combobox', { name: "Langue de l'interface" })
+    act(() => {
+      fireEvent.change(select, { target: { value: 'en' } })
+    })
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'Try Pengou without creating an account' }),
+    ).toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: 'Start the demo' })).toBeEnabled()
   })
 
   it("annonce le plafond de joueurs réel de l'instance", async () => {

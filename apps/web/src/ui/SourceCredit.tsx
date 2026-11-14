@@ -1,9 +1,12 @@
 import type { ReactNode } from 'react'
 import type { ContentSource } from '../api/quizzes'
+import { getLang } from '../i18n/lang'
+import { t } from '../i18n/t'
+import { useT } from '../i18n/useT'
 
 // Licences connues, avec leur texte officiel. Une chaîne inconnue reste du texte simple.
 const LICENSE_URLS: Record<string, string> = {
-  'CC BY-SA 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/deed.fr',
+  'CC BY-SA 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/deed',
 }
 
 /** Page publique des crédits : auteurs, modifications et licence de chaque base. */
@@ -48,21 +51,23 @@ function CreditsLink({ href = CREDITS_PATH, children }: { href?: string; childre
   )
 }
 
-/** « d'OpenQuizzDB », « de Wikipédia » : élision devant une voyelle ou un h. */
+/** « d'OpenQuizzDB », « de Wikipédia » : élision devant une voyelle ou un h. Seul le français
+ * répète la préposition devant chaque nom ; l'anglais et l'espagnol la portent une fois, dans la phrase. */
 function deName(name: string): string {
+  if (getLang() !== 'fr') return name
   return /^[aeiouyhàâéèêëîïôöûü]/i.test(name) ? `d'${name}` : `de ${name}`
 }
 
-/** « A », « A et B », « A, B et C ». */
-function joinFr(items: string[]): string {
+/** « A », « A et B », « A, B et C » (« A and B », « A y B » dans les autres langues). */
+function joinList(items: string[]): string {
   if (items.length <= 1) return items.join('')
-  return `${items.slice(0, -1).join(', ')} et ${items[items.length - 1]}`
+  return `${items.slice(0, -1).join(', ')}${t(' et ')}${items[items.length - 1]}`
 }
 
 function LicenseLink({ license }: { license: string }) {
   const url = LICENSE_URLS[license]
   return url ? (
-    <a href={url} target="_blank" rel="noreferrer">
+    <a href={`${url}.${getLang()}`} target="_blank" rel="noreferrer">
       {license}
     </a>
   ) : (
@@ -89,16 +94,17 @@ function isShareAlike(license: string): boolean {
 /** Étiquettes des cartes de quiz : la base d'origine, et la traduction s'il y en a une. Chacune
  * renvoie à sa section de la page des crédits, qui porte le détail (auteurs, licence). */
 export function SourceShort({ source }: { source: ContentSource | null }) {
+  const { t } = useT()
   if (!source) return null
   const translator = sourceTranslator(source)
   return (
     <span className="source-tags">
       <a className="source-tag" href={creditsHref(source)} target="_blank" rel="noreferrer">
-        <span className="visually-hidden">Crédits :</span> {sourceBaseName(source)}
+        <span className="visually-hidden">{t('Crédits :')}</span> {sourceBaseName(source)}
       </a>
       {translator && (
         <a className="source-tag" href={creditsHref(source, 'traductions')} target="_blank" rel="noreferrer">
-          Traduit par {translator}
+          {t('Traduit par {translator}', { translator })}
         </a>
       )}
     </span>
@@ -109,24 +115,27 @@ export function SourceShort({ source }: { source: ContentSource | null }) {
  * Le nom renvoie à l'original ; la licence et les modifications sont sur la page des crédits,
  * ce que CC BY-SA 4.0 admet (attribution par un lien vers une page qui la contient). Rien sans source. */
 export function SourceCredit({ source }: { source: ContentSource | null }) {
+  const { t } = useT()
   if (!source) return null
   const translator = sourceTranslator(source)
   return (
     <span className="source-credit">
-      D'après <SourceName source={source} withTranslation={false} />
-      {translator && `, traduit par ${translator}`}.{' '}
-      <CreditsLink href={creditsHref(source)}>Crédits et licence</CreditsLink>
+      {t("D'après")} <SourceName source={source} withTranslation={false} />
+      {translator && t(', traduit par {translator}', { translator })}.{' '}
+      <CreditsLink href={creditsHref(source)}>{t('Crédits et licence')}</CreditsLink>
     </span>
   )
 }
 
 /** Note unique sous une liste de questions : bases d'origine, le détail étant sur la page des crédits. */
 export function SourcesNote({ sources }: { sources: ContentSource[] }) {
+  const { t } = useT()
   if (sources.length === 0) return null
   const names = [...new Set(sources.map(sourceBaseName))]
   return (
     <p className="source-credit">
-      Questions issues {joinFr(names.map(deName))}. <CreditsLink>Crédits et licences</CreditsLink>
+      {t('Questions issues {names}.', { names: joinList(names.map(deName)) })}{' '}
+      <CreditsLink>{t('Crédits et licences')}</CreditsLink>
     </p>
   )
 }
@@ -134,14 +143,22 @@ export function SourcesNote({ sources }: { sources: ContentSource[] }) {
 /** Crédit de fin de partie sur le grand écran : bases d'origine, licence et adresse de la page
  * des crédits écrite en clair, un écran projeté ne se cliquant pas. Rien sans source. */
 export function PodiumCredits({ sources }: { sources: ContentSource[] }) {
+  const { t } = useT()
   if (sources.length === 0) return null
   const names = [...new Set(sources.map(sourceBaseName))]
   const licenses = [...new Set(sources.map((s) => s.license))]
   return (
     <p className="source-credit podium-credits">
-      Questions issues {joinFr(names.map(deName))}, licence{licenses.length > 1 ? 's' : ''} {joinFr(licenses)}. Crédits
-      : {window.location.host}
-      {CREDITS_PATH}
+      {t(
+        licenses.length > 1
+          ? 'Questions issues {names}, licences {licenses}. Crédits : {url}'
+          : 'Questions issues {names}, licence {licenses}. Crédits : {url}',
+        {
+          names: joinList(names.map(deName)),
+          licenses: joinList(licenses),
+          url: `${window.location.host}${CREDITS_PATH}`,
+        },
+      )}
     </p>
   )
 }
@@ -156,11 +173,11 @@ function formatPositions(positions: number[]): string {
       prev = n
       continue
     }
-    ranges.push(start === prev ? String(start) : `${start} à ${prev}`)
+    ranges.push(start === prev ? String(start) : t('{from} à {to}', { from: start, to: prev }))
     start = n
     prev = n
   }
-  return joinFr(ranges)
+  return joinList(ranges)
 }
 
 /**
@@ -174,6 +191,7 @@ export function SourcesPanel({
   quizSource: ContentSource | null
   questionSources: (ContentSource | null)[]
 }) {
+  const { t } = useT()
   const groups = new Map<string, { source: ContentSource; positions: number[] }>()
   questionSources.forEach((source, index) => {
     if (!source) return
@@ -191,30 +209,32 @@ export function SourcesPanel({
 
   return (
     <section className="sources-panel" aria-labelledby="sources-panel-title">
-      <h2 id="sources-panel-title">Sources et licences</h2>
+      <h2 id="sources-panel-title">{t('Sources et licences')}</h2>
       {quizSource && sourced.length === 0 && (
         <p>
-          Quiz d'origine : <SourceName source={quizSource} />.
+          {t("Quiz d'origine :")} <SourceName source={quizSource} />.
         </p>
       )}
       {sourced.map(({ source, positions }) => (
         <p key={`${source.name}|${source.url ?? ''}|${source.license}`}>
           {positions.length === total
-            ? 'Toutes les questions'
-            : `Question${positions.length > 1 ? 's' : ''} ${formatPositions(positions)}`}{' '}
-          : <SourceName source={source} />.
+            ? t('Toutes les questions :')
+            : t(positions.length > 1 ? 'Questions {positions} :' : 'Question {positions} :', {
+                positions: formatPositions(positions),
+              })}{' '}
+          <SourceName source={source} />.
         </p>
       ))}
       <p>
-        Licence{licenses.length > 1 ? 's' : ''}{' '}
+        {licenses.length > 1 ? t('Licences') : t('Licence')}{' '}
         {licenses.map((l, i) => (
           <span key={l}>
-            {i > 0 && (i === licenses.length - 1 ? ' et ' : ', ')}
+            {i > 0 && (i === licenses.length - 1 ? t(' et ') : ', ')}
             <LicenseLink license={l} />
           </span>
         ))}
-        .{licenses.some(isShareAlike) && ' Vos modifications de ces contenus restent sous cette licence.'}{' '}
-        <CreditsLink>Crédits et licences</CreditsLink>
+        .{licenses.some(isShareAlike) && ` ${t('Vos modifications de ces contenus restent sous cette licence.')}`}{' '}
+        <CreditsLink>{t('Crédits et licences')}</CreditsLink>
       </p>
     </section>
   )

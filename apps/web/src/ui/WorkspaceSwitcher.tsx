@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useWorkspacesOptional } from '../api/workspace-context'
+import type { WebKey } from '../i18n/catalog'
+import { useT } from '../i18n/useT'
 
-const ROLE_LABEL: Record<string, string> = { owner: 'propriétaire', admin: 'admin', member: 'membre' }
+const ROLE_LABEL: Record<string, WebKey> = { owner: 'propriétaire', admin: 'admin', member: 'membre' }
 
 /**
  * Sélecteur de workspace (Slice 3c) — rendu dans l'en-tête, UNIQUEMENT en mode multi (en single il
@@ -11,6 +13,7 @@ const ROLE_LABEL: Record<string, string> = { owner: 'propriétaire', admin: 'adm
  */
 export function WorkspaceSwitcher() {
   const ctx = useWorkspacesOptional()
+  const { t } = useT()
   // Hors provider (écran rendu isolément en test) ou en mode single : rien à afficher.
   if (!ctx || ctx.tenancyMode !== 'multi') return null
   const { workspaces, activeTenantId, setActive } = ctx
@@ -18,7 +21,7 @@ export function WorkspaceSwitcher() {
   if (workspaces.length === 0) {
     return (
       <Link className="ab-button ab-button--ghost" to="/workspace">
-        Créer un workspace
+        {t('Créer un workspace')}
       </Link>
     )
   }
@@ -26,7 +29,7 @@ export function WorkspaceSwitcher() {
   return (
     <div className="ab-workspace-switcher" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
       <label htmlFor="ws-switch" className="visually-hidden">
-        Workspace actif
+        {t('Workspace actif')}
       </label>
       <select
         id="ws-switch"
@@ -44,12 +47,12 @@ export function WorkspaceSwitcher() {
         {workspaces.map((w) => (
           <option key={w.tenantId} value={w.tenantId}>
             {w.name}
-            {w.role !== 'member' ? ` (${ROLE_LABEL[w.role]})` : ''}
+            {w.role !== 'member' ? ` (${t(ROLE_LABEL[w.role] ?? 'membre')})` : ''}
           </option>
         ))}
       </select>
       <Link className="ab-button ab-button--ghost" to="/workspace">
-        Gérer
+        {t('Gérer')}
       </Link>
     </div>
   )

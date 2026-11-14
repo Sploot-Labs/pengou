@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-do
 import { signIn, useSession } from '../api/auth'
 import { useAuthFeatures } from '../api/features'
 import { ApiError } from '../api/client'
+import { LanguageSelect } from '../i18n/LanguageSelect'
+import { useT } from '../i18n/useT'
 import { normalizeSignupSource } from '@splootlabs/shared/signup-source'
 import { safeNextPath, nextQuery } from '../nextPath'
 import { Button, Logo } from '../ui'
@@ -15,6 +17,7 @@ interface FieldErrors {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function Login() {
+  const { t } = useT()
   const navigate = useNavigate()
   const location = useLocation()
   const { mailEnabled } = useAuthFeatures()
@@ -44,10 +47,10 @@ export function Login() {
   function validate(): FieldErrors {
     const next: FieldErrors = {}
     if (!EMAIL_RE.test(email.trim())) {
-      next.email = 'Adresse e-mail invalide.'
+      next.email = t('Adresse e-mail invalide.')
     }
     if (password.length === 0) {
-      next.password = 'Mot de passe requis.'
+      next.password = t('Mot de passe requis.')
     }
     return next
   }
@@ -81,7 +84,7 @@ export function Login() {
     } catch (err) {
       setPending(false)
       setFormError(
-        err instanceof ApiError ? err.message : 'Connexion impossible. Vérifiez votre connexion et réessayez.',
+        err instanceof ApiError ? err.message : t('Connexion impossible. Vérifiez votre connexion et réessayez.'),
       )
     }
   }
@@ -91,12 +94,12 @@ export function Login() {
       <Logo />
 
       <form className="join-card" onSubmit={handleSubmit} noValidate>
-        <h1>Connexion</h1>
-        <p className="join-subtitle">Content de vous revoir : vos parties vous attendent.</p>
+        <h1>{t('Connexion')}</h1>
+        <p className="join-subtitle">{t('Content de vous revoir : vos parties vous attendent.')}</p>
 
         {passwordReset && (
           <p className="join-status" role="status">
-            Mot de passe modifié. Vous pouvez vous connecter.
+            {t('Mot de passe modifié. Vous pouvez vous connecter.')}
           </p>
         )}
 
@@ -107,7 +110,7 @@ export function Login() {
         )}
 
         <div className="join-field">
-          <label htmlFor="login-email">E-mail</label>
+          <label htmlFor="login-email">{t('E-mail')}</label>
           <input
             id="login-email"
             ref={emailRef}
@@ -129,7 +132,7 @@ export function Login() {
         </div>
 
         <div className="join-field">
-          <label htmlFor="login-password">Mot de passe</label>
+          <label htmlFor="login-password">{t('Mot de passe')}</label>
           <input
             id="login-password"
             ref={passwordRef}
@@ -152,18 +155,19 @@ export function Login() {
 
         {mailEnabled && (
           <p className="join-reassure">
-            <Link to="/forgot-password">Mot de passe oublié ?</Link>
+            <Link to="/forgot-password">{t('Mot de passe oublié ?')}</Link>
           </p>
         )}
 
         <Button variant="primary" type="submit" disabled={pending}>
-          {pending ? 'Connexion…' : 'Se connecter'}
+          {pending ? t('Connexion…') : t('Se connecter')}
         </Button>
 
         <p className="join-reassure">
-          Pas encore de compte ? <Link to={`/signup${nextQuery(returnTo, from)}`}>Créer un compte</Link>
+          {t('Pas encore de compte ?')} <Link to={`/signup${nextQuery(returnTo, from)}`}>{t('Créer un compte')}</Link>
         </p>
       </form>
+      <LanguageSelect className="join-lang" />
     </main>
   )
 }

@@ -1,6 +1,8 @@
 import type { Ref } from 'react'
 import type { ContentSource } from '../api/quizzes'
+import { useT } from '../i18n/useT'
 import { PodiumCredits } from '../ui/SourceCredit'
+import { placeOrdinal } from './placeOrdinal'
 
 /**
  * `PodiumView` — composant de PRÉSENTATION pur, alimenté par l'événement
@@ -54,18 +56,19 @@ export interface PodiumViewProps {
 
 /** Pitch de conversion en bas d'écran du grand écran. */
 export function ConversionFooter() {
+  const { t } = useT()
   return (
     <p className="podium-convert">
       <a href="#cloud" onClick={(e) => e.preventDefault()}>
-        Créez votre quiz gratuitement, aucune installation
+        {t('Créez votre quiz gratuitement, aucune installation')}
       </a>
-      , ou{' '}
+      {t(', ou')}{' '}
       <a href="#host" onClick={(e) => e.preventDefault()}>
-        hébergez votre propre instance
+        {t('hébergez votre propre instance')}
       </a>
-      , c'est open-source.{' '}
+      {t(", c'est open-source.")}{' '}
       <a href="#source" onClick={(e) => e.preventDefault()}>
-        Voir le code
+        {t('Voir le code')}
       </a>
     </p>
   )
@@ -80,10 +83,11 @@ export interface ClosingViewProps {
 
 /** Fin de partie d'un quiz sans aucune question notée : un remerciement, ni podium ni score. */
 export function ClosingView({ quizTitle, headingRef, audience }: ClosingViewProps) {
+  const { t } = useT()
   return (
     <div style={{ textAlign: 'center' }}>
       <h1 className="ab-hero-title" ref={headingRef} tabIndex={-1}>
-        {audience === 'room' ? 'Merci pour vos réponses' : 'Merci pour tes réponses'}
+        {audience === 'room' ? t('Merci pour vos réponses') : t('Merci pour tes réponses')}
       </h1>
       {quizTitle && <p style={{ color: 'var(--ink-dim)' }}>{quizTitle}</p>}
     </div>
@@ -98,6 +102,7 @@ export function PodiumView({
   showConversionFooter = false,
   sources = [],
 }: PodiumViewProps) {
+  const { t } = useT()
   const [gold, silver, bronze] = top
   // Le reste du classement complet : les joueurs absents du podium (et non `slice(3)`, qui
   // doublonnerait ou montrerait un exclu si `fullRanking` et `top` divergent).
@@ -108,56 +113,59 @@ export function PodiumView({
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-5)' }}>
       <div style={{ textAlign: 'center' }}>
         <h1 className="ab-hero-title" ref={headingRef} tabIndex={-1}>
-          Classement final
+          {t('Classement final')}
         </h1>
         {quizTitle && <p style={{ color: 'var(--ink-dim)' }}>{quizTitle}</p>}
       </div>
 
       {/* Ordre DOM 1-2-3 (lecture/tabulation logique) ; `order` CSS dessine la
           forme classique 2-1-3 du podium. */}
-      <div className="podium-top3" aria-label="Podium des trois premiers">
+      <div className="podium-top3" aria-label={t('Podium des trois premiers')}>
         {gold && (
           <div className="podium-step podium-step--gold">
-            <span className="visually-hidden">1ʳᵉ place</span>
+            <span className="visually-hidden">{t('{rank} place', { rank: placeOrdinal(1) })}</span>
             <div className="podium-step__block" aria-hidden="true">
               1
             </div>
             <strong>{gold.nickname}</strong>
-            <span style={{ fontFamily: 'var(--font-mono)' }}>{gold.score} pts</span>
+            <span style={{ fontFamily: 'var(--font-mono)' }}>{t('{score} pts', { score: gold.score })}</span>
           </div>
         )}
         {silver && (
           <div className="podium-step podium-step--silver">
-            <span className="visually-hidden">2ᵉ place</span>
+            <span className="visually-hidden">{t('{rank} place', { rank: placeOrdinal(2) })}</span>
             <div className="podium-step__block" aria-hidden="true">
               2
             </div>
             <strong>{silver.nickname}</strong>
-            <span style={{ fontFamily: 'var(--font-mono)' }}>{silver.score} pts</span>
+            <span style={{ fontFamily: 'var(--font-mono)' }}>{t('{score} pts', { score: silver.score })}</span>
           </div>
         )}
         {bronze && (
           <div className="podium-step podium-step--bronze">
-            <span className="visually-hidden">3ᵉ place</span>
+            <span className="visually-hidden">{t('{rank} place', { rank: placeOrdinal(3) })}</span>
             <div className="podium-step__block" aria-hidden="true">
               3
             </div>
             <strong>{bronze.nickname}</strong>
-            <span style={{ fontFamily: 'var(--font-mono)' }}>{bronze.score} pts</span>
+            <span style={{ fontFamily: 'var(--font-mono)' }}>{t('{score} pts', { score: bronze.score })}</span>
           </div>
         )}
       </div>
 
       {rest.length > 0 && (
-        <section aria-label="Classement complet" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <section
+          aria-label={t('Classement complet')}
+          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+        >
           <div style={{ width: 'min(560px, 100%)' }}>
-            <h2 style={{ marginBottom: 'var(--space-3)' }}>Classement complet</h2>
+            <h2 style={{ marginBottom: 'var(--space-3)' }}>{t('Classement complet')}</h2>
             <ol className="podium-list">
               {rest.map((p, index) => (
                 <li key={p.playerId} className="podium-list__item">
                   <span className="podium-list__rank">{top.length + index + 1}</span>
                   <span>{p.nickname}</span>
-                  <span className="podium-list__score">{p.score} pts</span>
+                  <span className="podium-list__score">{t('{score} pts', { score: p.score })}</span>
                 </li>
               ))}
             </ol>

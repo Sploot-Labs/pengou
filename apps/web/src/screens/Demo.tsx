@@ -11,12 +11,12 @@ import { useSharedGameSocket } from '../realtime/GameSocketProvider'
 import { useLaunchGame } from '../realtime/useLaunchGame'
 import { Button, Logo } from '../ui'
 import { ExternalLink } from '../ui/ExternalLink'
+import { LanguageSelect } from '../i18n/LanguageSelect'
+import { t } from '../i18n/t'
+import { useT } from '../i18n/useT'
 
 /** Conditions d'utilisation de l'instance : en cours de chargement, actives, absentes (null) ou injoignables. */
 type LegalState = { status: 'loading' } | { status: 'ready'; legal: ActiveLegalInfo | null } | { status: 'error' }
-
-/** Titre affiché par l'écran hôte : le serveur ne renvoie que l'identifiant du quiz d'exemple. */
-const DEMO_QUIZ_TITLE = 'Quiz de démonstration'
 
 /** Inscription proposée depuis la démonstration : la provenance `demo` sort dans l'export des inscriptions. */
 const SIGNUP_FROM_DEMO = '/signup?from=demo'
@@ -28,6 +28,7 @@ const SIGNUP_FROM_DEMO = '/signup?from=demo'
  * et ouvre le salon. Rien n'est créé par une simple visite (robot, aperçu de lien).
  */
 export function Demo() {
+  useT()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const { user, refresh } = useSession()
@@ -65,7 +66,7 @@ export function Demo() {
     event.preventDefault()
     if (pendingRef.current || legalState.status !== 'ready') return
     if (legal && !ageConfirmed) {
-      setAgeError('Confirmez que vous avez 15 ans ou plus.')
+      setAgeError(t('Confirmez que vous avez 15 ans ou plus.'))
       ageRef.current?.focus()
       return
     }
@@ -86,11 +87,12 @@ export function Demo() {
         navigate(`/host/${demo.liveSessionId}`)
         return
       }
-      await launch(demo.quizId, DEMO_QUIZ_TITLE)
+      // Titre affiché par l'écran hôte : le serveur ne renvoie que l'identifiant du quiz d'exemple.
+      await launch(demo.quizId, t('Quiz de démonstration'))
     } catch (err) {
       const code = err instanceof ApiError ? err.code : undefined
       setFormError({
-        message: err instanceof Error ? err.message : 'Impossible de lancer la démonstration. Réessayez.',
+        message: err instanceof Error ? err.message : t('Impossible de lancer la démonstration. Réessayez.'),
         offerSignup: code === DEMO_FULL || code === DEMO_RATE_LIMITED,
       })
       pendingRef.current = false
@@ -100,10 +102,11 @@ export function Demo() {
 
   const intro = (
     <>
-      <h1>Essayez Pengou sans créer de compte</h1>
+      <h1>{t('Essayez Pengou sans créer de compte')}</h1>
       <p className="join-subtitle">
-        Une vraie partie du quiz d'exemple, jusqu'à {demoMaxPlayers} joueurs. Rien n'est conservé après la
-        démonstration.
+        {t("Une vraie partie du quiz d'exemple, jusqu'à {max} joueurs. Rien n'est conservé après la démonstration.", {
+          max: demoMaxPlayers,
+        })}
       </p>
     </>
   )
@@ -114,11 +117,12 @@ export function Demo() {
         <Logo />
         <div className="join-card">
           {intro}
-          <p>La démonstration n'est pas disponible sur cette instance.</p>
+          <p>{t("La démonstration n'est pas disponible sur cette instance.")}</p>
           <p className="join-switch">
-            <Link to={SIGNUP_FROM_DEMO}>Créer un compte gratuit</Link>
+            <Link to={SIGNUP_FROM_DEMO}>{t('Créer un compte gratuit')}</Link>
           </p>
         </div>
+        <LanguageSelect className="join-lang" />
       </main>
     )
   }
@@ -129,11 +133,12 @@ export function Demo() {
         <Logo />
         <div className="join-card">
           {intro}
-          <p>Vous êtes déjà connecté : la démonstration s'adresse aux visiteurs sans compte.</p>
+          <p>{t("Vous êtes déjà connecté : la démonstration s'adresse aux visiteurs sans compte.")}</p>
           <p className="join-switch">
-            <Link to="/">Ouvrir mon espace</Link>
+            <Link to="/">{t('Ouvrir mon espace')}</Link>
           </p>
         </div>
+        <LanguageSelect className="join-lang" />
       </main>
     )
   }
@@ -151,7 +156,7 @@ export function Demo() {
             </p>
             {formError.offerSignup && (
               <p className="join-switch">
-                <Link to={SIGNUP_FROM_DEMO}>Créer un compte gratuit</Link>
+                <Link to={SIGNUP_FROM_DEMO}>{t('Créer un compte gratuit')}</Link>
               </p>
             )}
           </>
@@ -160,10 +165,10 @@ export function Demo() {
         {legalState.status === 'error' && (
           <>
             <p className="join-error" role="alert">
-              Impossible de charger les conditions d'utilisation. Vérifiez votre connexion et réessayez.
+              {t("Impossible de charger les conditions d'utilisation. Vérifiez votre connexion et réessayez.")}
             </p>
             <Button variant="ghost" type="button" onClick={() => void loadLegal()}>
-              Réessayer
+              {t('Réessayer')}
             </Button>
           </>
         )}
@@ -183,7 +188,7 @@ export function Demo() {
                 aria-invalid={ageError ? true : undefined}
                 aria-describedby={ageError ? 'demo-age-error' : undefined}
               />
-              <label htmlFor="demo-age">J'ai 15 ans ou plus</label>
+              <label htmlFor="demo-age">{t("J'ai 15 ans ou plus")}</label>
             </div>
             {ageError && (
               <p className="join-error" id="demo-age-error" role="alert">
@@ -194,20 +199,21 @@ export function Demo() {
         )}
 
         <Button variant="primary" type="submit" disabled={pending || legalState.status !== 'ready'}>
-          {pending ? 'Lancement…' : 'Lancer la démonstration'}
+          {pending ? t('Lancement…') : t('Lancer la démonstration')}
         </Button>
 
         {legal && (
           <p className="join-hint">
-            En lançant la démonstration, vous acceptez les{' '}
-            <ExternalLink href={legal.termsUrl}>conditions d'utilisation</ExternalLink>.
+            {t('En lançant la démonstration, vous acceptez les')}{' '}
+            <ExternalLink href={legal.termsUrl}>{t("conditions d'utilisation")}</ExternalLink>.
           </p>
         )}
 
         <p className="join-switch">
-          Déjà convaincu ? <Link to={SIGNUP_FROM_DEMO}>Créer mon compte</Link>
+          {t('Déjà convaincu ?')} <Link to={SIGNUP_FROM_DEMO}>{t('Créer mon compte')}</Link>
         </p>
       </form>
+      <LanguageSelect className="join-lang" />
     </main>
   )
 }

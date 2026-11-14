@@ -83,4 +83,24 @@ describe('POST /api/quizzes/example', () => {
     })
     expect(renamed.statusCode).toBe(200)
   })
+
+  it("crée le quiz d'exemple dans la langue de la requête", async () => {
+    const signUp = await app.inject({
+      method: 'POST',
+      url: '/api/auth/sign-up/email',
+      payload: { email: 'ejemplo@example.org', password: 'motdepasse-123456', name: 'Anfitrión' },
+      headers: { 'content-type': 'application/json' },
+    })
+    const cookie = ([] as string[])
+      .concat(signUp.headers['set-cookie'] ?? [])
+      .map((c) => c.split(';')[0])
+      .join('; ')
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/quizzes/example',
+      headers: { cookie, 'accept-language': 'es-ES,es;q=0.9' },
+    })
+    expect(res.statusCode).toBe(201)
+    expect((res.json() as { title: string }).title).toBe('Mi primer quiz (ejemplo)')
+  })
 })

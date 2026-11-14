@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { useSession } from '../api/auth'
 import { useAuthFeatures } from '../api/features'
+import { useT } from '../i18n/useT'
 import { useResendVerification } from './useResendVerification'
 
 const DISMISS_KEY = 'pengou:verify-banner-dismissed'
@@ -23,6 +24,7 @@ function readDismissed(): boolean {
  */
 export function VerifyEmailBanner() {
   const { user, refresh } = useSession()
+  const { t } = useT()
   const { mailEnabled } = useAuthFeatures()
   const { pathname } = useLocation()
   const [params, setParams] = useSearchParams()
@@ -58,23 +60,23 @@ export function VerifyEmailBanner() {
   return (
     <>
       <div role="status" className={confirmed ? 'ab-verify-banner ab-verify-banner--ok' : undefined}>
-        {confirmed ? 'Adresse e-mail confirmée.' : null}
+        {confirmed ? t('Adresse e-mail confirmée.') : null}
       </div>
       {showBanner && (
-        <section className="ab-verify-banner" aria-label="Confirmation de l'adresse e-mail">
-          <p>Confirmez votre adresse pour créer plus d'un quiz.</p>
+        <section className="ab-verify-banner" aria-label={t("Confirmation de l'adresse e-mail")}>
+          <p>{t("Confirmez votre adresse pour créer plus d'un quiz.")}</p>
           <button
             type="button"
             className="ab-verify-banner__action"
             disabled={state === 'sending'}
             onClick={() => void resend()}
           >
-            Renvoyer l'e-mail
+            {t("Renvoyer l'e-mail")}
           </button>
-          <span role="status">{state === 'sent' ? 'E-mail envoyé' : ''}</span>
+          <span role="status">{state === 'sent' ? t('E-mail envoyé') : ''}</span>
           {error && <span role="alert">{error}</span>}
           <button type="button" className="ab-verify-banner__action" onClick={dismiss}>
-            Fermer
+            {t('Fermer')}
           </button>
         </section>
       )}

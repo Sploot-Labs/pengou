@@ -21,7 +21,12 @@ import { SourceShort, SourcesNote } from '../ui/SourceCredit'
 import { WorkspaceSwitcher } from '../ui/WorkspaceSwitcher'
 import { useLaunchGame } from '../realtime/useLaunchGame'
 import { isQuizLimitError, QuizLimitNotice } from '../ui/QuizLimitNotice'
-import { LibraryPreview } from './LibraryPreview'
+import { LibraryPreview, typeLabel } from './LibraryPreview'
+import { LOCALES } from '@splootlabs/shared/i18n'
+import { themeLabel } from '../i18n/catalog/themes'
+import { getLang } from '../i18n/lang'
+import { t, tp } from '../i18n/t'
+import { useT } from '../i18n/useT'
 
 /**
  * Bibliothèque de questions : deux onglets (quiz tout prêts à prévisualiser, personnaliser ou
@@ -36,46 +41,64 @@ const DRAW_MAX = 50
 const SELECTION_MAX = 100
 const TITLE_MAX = 200
 
-const DIFFICULTY_LABEL: Record<Difficulty, string> = { facile: 'Facile', moyen: 'Moyen', difficile: 'Difficile' }
-const AUDIENCE_LABEL: Record<Audience, string> = { enfants: 'Enfants', adultes: 'Adultes', tous: 'Tous publics' }
-const TYPE_LABEL: Record<string, string> = {
-  mcq: 'Choix multiple',
-  truefalse: 'Vrai ou faux',
-  text: 'Réponse libre',
-  slider: 'Curseur',
-  wordcloud: 'Nuage de mots',
-  poll: 'Sondage',
+function difficultyLabel(difficulty: string): string {
+  switch (difficulty) {
+    case 'facile':
+      return t('Facile')
+    case 'moyen':
+      return t('Moyen')
+    case 'difficile':
+      return t('Difficile')
+    default:
+      return difficulty
+  }
 }
 
-// Noms de langue en français (« fr » devient « français »), le code ISO en repli.
-const languageNames = (() => {
-  try {
-    return new Intl.DisplayNames(['fr'], { type: 'language' })
-  } catch {
-    return null
+function audienceLabel(audience: string): string {
+  switch (audience) {
+    case 'enfants':
+      return t('Enfants')
+    case 'adultes':
+      return t('Adultes')
+    case 'tous':
+      return t('Tous publics')
+    default:
+      return audience
   }
-})()
+}
+
+// Noms de langue dans la langue de l'interface (« fr » devient « français », « French », « francés »),
+// le code ISO en repli.
+const languageNames = new Map<string, Intl.DisplayNames | null>()
 
 function languageLabel(code: string): string {
+  const locale = LOCALES[getLang()]
+  if (!languageNames.has(locale)) {
+    try {
+      languageNames.set(locale, new Intl.DisplayNames([locale], { type: 'language' }))
+    } catch {
+      languageNames.set(locale, null)
+    }
+  }
   try {
-    return languageNames?.of(code) ?? code
+    return languageNames.get(locale)?.of(code) ?? code
   } catch {
     return code
   }
 }
 
 function errorMessage(err: unknown): string {
-  return err instanceof ApiError ? err.message : 'Une erreur réseau est survenue. Réessayez.'
+  return err instanceof ApiError ? err.message : t('Une erreur réseau est survenue. Réessayez.')
 }
 
 function formatQuestionCount(count: number): string {
-  return `${count} question${count > 1 ? 's' : ''}`
+  return tp(count, '{n} question', '{n} questions')
 }
 
 function drawMessage(found: number): string {
-  if (found === 0) return 'Aucune question disponible avec ces filtres.'
-  if (found === 1) return 'Seulement 1 question disponible avec ces filtres.'
-  return `Seulement ${found} questions disponibles avec ces filtres.`
+  if (found === 0) return t('Aucune question disponible avec ces filtres.')
+  if (found === 1) return t('Seulement 1 question disponible avec ces filtres.')
+  return t('Seulement {n} questions disponibles avec ces filtres.', { n: found })
 }
 
 type Tab = 'quizzes' | 'questions'
@@ -102,7 +125,7 @@ function FilterSelect({
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >
-        <option value="">Tous</option>
+        <option value="">{t('Tous')}</option>
         {options.map((o) => (
           <option key={o.value} value={o.value}>
             {o.label}
@@ -114,9 +137,13 @@ function FilterSelect({
 }
 
 export function Library() {
+  useT()
   const navigate = useNavigate()
   const [tab, setTab] = useState<Tab>('quizzes')
   const [meta, setMeta] = useState<LibraryMeta | null>(null)
+  // Les listes attendent le catalogue : le filtre de langue y est présélectionné, et partir sans lui
+  // ferait deux requêtes dont la première serait aussitôt périmée.
+  const [metaReady, setMetaReady] = useState(false)
   const [metaError, setMetaError] = useState<string | null>(null)
   const [theme, setTheme] = useState('')
   const [difficulty, setDifficulty] = useState('')
@@ -126,8 +153,17 @@ export function Library() {
 
   useEffect(() => {
     getLibraryMeta()
-      .then(setMeta)
-      .catch((err) => setMetaError(errorMessage(err)))
+      .then((res) => {
+        setMeta(res)
+        // Langue de l'interface au premier chargement si la bibliothèque la propose, sinon « Tous ».
+        const lang = getLang()
+        if (res.languages.includes(lang)) setLanguage(lang)
+        setMetaReady(true)
+      })
+      .catch((err) => {
+        setMetaError(errorMessage(err))
+        setMetaReady(true)
+      })
   }, [])
 
   const filters: LibraryFilters = {}
@@ -149,7 +185,7 @@ export function Library() {
   const { launch } = useLaunchGame()
 
   useEffect(() => {
-    if (tab !== 'quizzes') return
+    if (tab !== 'quizzes' || !metaReady) return
     let stale = false
     setQuizzesLoading(true)
     setQuizzesError(null)
@@ -167,7 +203,7 @@ export function Library() {
     return () => {
       stale = true
     }
-  }, [tab, filterKey])
+  }, [tab, filterKey, metaReady])
 
   /** « Personnaliser » : copie dans l'espace de l'utilisateur, puis ouverture dans l'éditeur. */
   async function handleCustomize(id: string) {
@@ -202,8 +238,8 @@ export function Library() {
       await launch(copy.id, copy.title)
     } catch (err) {
       // La copie existe déjà : on le dit, pour qu'un nouvel essai ne crée pas un doublon à l'aveugle.
-      const reason = err instanceof Error ? err.message : 'Impossible de lancer la partie.'
-      setActionError(`Le quiz a été ajouté à vos quiz, mais la partie n'a pas pu démarrer. ${reason}`)
+      const reason = err instanceof Error ? err.message : t('Impossible de lancer la partie.')
+      setActionError(t("Le quiz a été ajouté à vos quiz, mais la partie n'a pas pu démarrer. {reason}", { reason }))
       setPending(null)
     }
   }
@@ -224,7 +260,7 @@ export function Library() {
   const requestRef = useRef(0)
 
   useEffect(() => {
-    if (tab !== 'questions') return
+    if (tab !== 'questions' || !metaReady) return
     const request = ++requestRef.current
     setQuestionsLoading(true)
     setQuestionsError(null)
@@ -242,7 +278,7 @@ export function Library() {
         setQuestionsError(errorMessage(err))
         setQuestionsLoading(false)
       })
-  }, [tab, filterKey, searchTerm])
+  }, [tab, filterKey, searchTerm, metaReady])
 
   const loadMore = useCallback(async () => {
     const request = requestRef.current
@@ -344,7 +380,8 @@ export function Library() {
     }
   }
 
-  const themeLabel = (id: string) => meta?.themes.find((t) => t.id === id)?.label ?? id
+  const lang = getLang()
+  const themeName = (id: string) => themeLabel(id, meta?.themes.find((th) => th.id === id)?.label ?? id, lang)
   const selectionFull = selection.length >= SELECTION_MAX
   const canCompose = selection.length > 0 && selection.length <= SELECTION_MAX && title.trim() !== '' && !composePending
 
@@ -354,11 +391,13 @@ export function Library() {
       <main className="ab-shell__main" id="contenu-principal" tabIndex={-1}>
         <section className="home-hero">
           <div>
-            <h1>Bibliothèque</h1>
-            <p className="home-hero__sub">Des quiz et des questions prêts à utiliser, copiés dans votre espace.</p>
+            <h1>{t('Bibliothèque')}</h1>
+            <p className="home-hero__sub">
+              {t('Des quiz et des questions prêts à utiliser, copiés dans votre espace.')}
+            </p>
           </div>
           <Link className="ab-button ab-button--ghost" to="/">
-            Retour à l'accueil
+            {t("Retour à l'accueil")}
           </Link>
         </section>
 
@@ -368,38 +407,38 @@ export function Library() {
           </p>
         )}
 
-        <div className="home-inline-form library-filters" role="group" aria-label="Filtres">
+        <div className="home-inline-form library-filters" role="group" aria-label={t('Filtres')}>
           <FilterSelect
             id="library-theme"
-            label="Thème"
+            label={t('Thème')}
             value={theme}
             onChange={setTheme}
-            options={(meta?.themes ?? []).map((t) => ({ value: t.id, label: t.label }))}
+            options={(meta?.themes ?? []).map((th) => ({ value: th.id, label: themeLabel(th.id, th.label, lang) }))}
           />
           <FilterSelect
             id="library-difficulty"
-            label="Difficulté"
+            label={t('Difficulté')}
             value={difficulty}
             onChange={setDifficulty}
-            options={(meta?.difficulties ?? []).map((d) => ({ value: d, label: DIFFICULTY_LABEL[d] ?? d }))}
+            options={(meta?.difficulties ?? []).map((d) => ({ value: d, label: difficultyLabel(d) }))}
           />
           <FilterSelect
             id="library-language"
-            label="Langue"
+            label={t('Langue')}
             value={language}
             onChange={setLanguage}
             options={(meta?.languages ?? []).map((l) => ({ value: l, label: languageLabel(l) }))}
           />
           <FilterSelect
             id="library-audience"
-            label="Public"
+            label={t('Public')}
             value={audience}
             onChange={setAudience}
-            options={(meta?.audiences ?? []).map((a) => ({ value: a, label: AUDIENCE_LABEL[a] ?? a }))}
+            options={(meta?.audiences ?? []).map((a) => ({ value: a, label: audienceLabel(a) }))}
           />
         </div>
 
-        <div role="tablist" aria-label="Contenus de la bibliothèque" className="library-tabs">
+        <div role="tablist" aria-label={t('Contenus de la bibliothèque')} className="library-tabs">
           <Button
             variant={tab === 'quizzes' ? 'primary' : 'ghost'}
             type="button"
@@ -411,7 +450,7 @@ export function Library() {
             onClick={() => setTab('quizzes')}
             onKeyDown={onTabKeyDown}
           >
-            Quiz tout prêts
+            {t('Quiz tout prêts')}
           </Button>
           <Button
             variant={tab === 'questions' ? 'primary' : 'ghost'}
@@ -424,7 +463,7 @@ export function Library() {
             onClick={() => setTab('questions')}
             onKeyDown={onTabKeyDown}
           >
-            Questions
+            {t('Questions')}
           </Button>
         </div>
 
@@ -440,13 +479,13 @@ export function Library() {
                 </p>
               ))}
             {quizzesLoading ? (
-              <p role="status">Chargement des quiz…</p>
+              <p role="status">{t('Chargement des quiz…')}</p>
             ) : quizzesError ? (
               <p className="join-error" role="alert">
                 {quizzesError}
               </p>
             ) : quizzes.length === 0 ? (
-              <p className="ab-empty-state">Aucun quiz ne correspond à ces filtres.</p>
+              <p className="ab-empty-state">{t('Aucun quiz ne correspond à ces filtres.')}</p>
             ) : (
               <ul className="home-cards">
                 {quizzes.map((q) => (
@@ -455,8 +494,11 @@ export function Library() {
                       <span className="home-card__title">{q.title}</span>
                       {q.description && <span className="home-card__desc">{q.description}</span>}
                       <span className="home-card__meta">
-                        {formatQuestionCount(q.questionCount)}, {DIFFICULTY_LABEL[q.difficulty] ?? q.difficulty},{' '}
-                        {themeLabel(q.theme)}
+                        {t('{questions}, {difficulty}, {theme}', {
+                          questions: formatQuestionCount(q.questionCount),
+                          difficulty: difficultyLabel(q.difficulty),
+                          theme: themeName(q.theme),
+                        })}
                       </span>
                       <SourceShort source={q.source} />
                     </div>
@@ -465,31 +507,31 @@ export function Library() {
                         variant="ghost"
                         type="button"
                         id={`library-preview-${q.id}`}
-                        aria-label={`Aperçu du quiz ${q.title}`}
+                        aria-label={t('Aperçu du quiz {title}', { title: q.title })}
                         onClick={() => {
                           setActionError(null)
                           setPreviewId(q.id)
                         }}
                       >
-                        Aperçu
+                        {t('Aperçu')}
                       </Button>
                       <Button
                         variant="ghost"
                         type="button"
                         disabled={pending !== null}
-                        aria-label={`Personnaliser le quiz ${q.title}`}
+                        aria-label={t('Personnaliser le quiz {title}', { title: q.title })}
                         onClick={() => void handleCustomize(q.id)}
                       >
-                        {pending?.id === q.id && pending.action === 'customize' ? 'Création…' : 'Personnaliser'}
+                        {pending?.id === q.id && pending.action === 'customize' ? t('Création…') : t('Personnaliser')}
                       </Button>
                       <Button
                         variant="primary"
                         type="button"
                         disabled={pending !== null}
-                        aria-label={`Jouer maintenant au quiz ${q.title}`}
+                        aria-label={t('Jouer maintenant au quiz {title}', { title: q.title })}
                         onClick={() => void handlePlay(q.id)}
                       >
-                        {pending?.id === q.id && pending.action === 'play' ? 'Lancement…' : 'Jouer maintenant'}
+                        {pending?.id === q.id && pending.action === 'play' ? t('Lancement…') : t('Jouer maintenant')}
                       </Button>
                     </div>
                   </li>
@@ -506,15 +548,15 @@ export function Library() {
             id="library-panel-questions"
             aria-labelledby="library-tab-questions"
           >
-            <section aria-label="Questions">
+            <section aria-label={t('Questions')}>
               <div className="host-field">
-                <label htmlFor="library-search">Rechercher une question</label>
+                <label htmlFor="library-search">{t('Rechercher une question')}</label>
                 <input id="library-search" type="search" value={search} onChange={(e) => setSearch(e.target.value)} />
               </div>
 
               <div className="home-inline-form">
                 <div className="host-field">
-                  <label htmlFor="library-draw-count">Tirer N questions au hasard</label>
+                  <label htmlFor="library-draw-count">{t('Tirer N questions au hasard')}</label>
                   <input
                     id="library-draw-count"
                     type="number"
@@ -530,7 +572,7 @@ export function Library() {
                   disabled={drawPending || selectionFull}
                   onClick={() => void handleDraw()}
                 >
-                  {drawPending ? 'Tirage…' : 'Tirer'}
+                  {drawPending ? t('Tirage…') : t('Tirer')}
                 </Button>
                 {drawError && (
                   <p className="join-error" role="alert">
@@ -541,13 +583,13 @@ export function Library() {
               </div>
 
               {questionsLoading ? (
-                <p role="status">Chargement des questions…</p>
+                <p role="status">{t('Chargement des questions…')}</p>
               ) : questionsError && questions.length === 0 ? (
                 <p className="join-error" role="alert">
                   {questionsError}
                 </p>
               ) : questions.length === 0 ? (
-                <p className="ab-empty-state">Aucune question ne correspond à ces filtres.</p>
+                <p className="ab-empty-state">{t('Aucune question ne correspond à ces filtres.')}</p>
               ) : (
                 <>
                   {questionsError && (
@@ -568,7 +610,10 @@ export function Library() {
                           />
                           <label htmlFor={checkId} className="library-question__body">
                             <span className="home-list__meta">
-                              {TYPE_LABEL[q.type] ?? q.type}, {DIFFICULTY_LABEL[q.difficulty] ?? q.difficulty}
+                              {t('{type}, {difficulty}', {
+                                type: typeLabel(q.type),
+                                difficulty: difficultyLabel(q.difficulty),
+                              })}
                             </span>
                             <span className="home-list__title">{q.prompt}</span>
                           </label>
@@ -578,7 +623,7 @@ export function Library() {
                   </ul>
                   {questions.length < total && (
                     <Button variant="ghost" type="button" disabled={moreLoading} onClick={() => void loadMore()}>
-                      {moreLoading ? 'Chargement…' : 'Afficher plus'}
+                      {moreLoading ? t('Chargement…') : t('Afficher plus')}
                     </Button>
                   )}
                   <SourcesNote sources={questions.map((q) => q.source)} />
@@ -588,15 +633,18 @@ export function Library() {
 
             <aside aria-labelledby="library-selection-heading" className="library-selection">
               <h2 id="library-selection-heading">
-                Ma sélection ({selection.length}/{SELECTION_MAX})
+                {t('Ma sélection ({n}/{max})', { n: selection.length, max: SELECTION_MAX })}
               </h2>
               {selection.length > SELECTION_MAX && (
                 <p className="join-error" role="status">
-                  Un quiz contient au plus {SELECTION_MAX} questions : retirez-en {selection.length - SELECTION_MAX}.
+                  {t('Un quiz contient au plus {max} questions : retirez-en {n}.', {
+                    max: SELECTION_MAX,
+                    n: selection.length - SELECTION_MAX,
+                  })}
                 </p>
               )}
               {selection.length === 0 ? (
-                <p className="ab-empty-state">Cochez ou tirez des questions pour composer un quiz.</p>
+                <p className="ab-empty-state">{t('Cochez ou tirez des questions pour composer un quiz.')}</p>
               ) : (
                 <ol className="home-list">
                   {selection.map((q) => (
@@ -605,10 +653,10 @@ export function Library() {
                       <Button
                         variant="ghost"
                         type="button"
-                        aria-label={`Retirer la question ${q.prompt}`}
+                        aria-label={t('Retirer la question {prompt}', { prompt: q.prompt })}
                         onClick={() => toggleQuestion(q)}
                       >
-                        Retirer
+                        {t('Retirer')}
                       </Button>
                     </li>
                   ))}
@@ -622,7 +670,7 @@ export function Library() {
                   </p>
                 )}
                 <div className="host-field">
-                  <label htmlFor="library-title">Titre du quiz</label>
+                  <label htmlFor="library-title">{t('Titre du quiz')}</label>
                   <input
                     id="library-title"
                     type="text"
@@ -633,7 +681,7 @@ export function Library() {
                   />
                 </div>
                 <Button variant="primary" type="submit" disabled={!canCompose}>
-                  {composePending ? 'Création…' : 'Créer le quiz'}
+                  {composePending ? t('Création…') : t('Créer le quiz')}
                 </Button>
               </form>
             </aside>

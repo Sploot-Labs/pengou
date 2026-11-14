@@ -19,6 +19,7 @@ import {
 } from '@splootlabs/mail'
 import type { Db } from '@splootlabs/db'
 import { schema, ensureDefaultTenant, ensureMembership, firstMembershipRole, createWorkspace } from '@splootlabs/db'
+import { DEFAULT_LANG, matchLang, type Lang } from '@splootlabs/shared/i18n'
 import { applySignupSource } from './signup-source.js'
 import { applyTermsOnUserCreate } from './terms.js'
 
@@ -46,6 +47,11 @@ export type AuthConfig = {
 }
 
 const silentLogger: MailLogger = { info() {}, warn() {}, error() {} }
+
+/** Langue de la requête qui déclenche le courriel (Accept-Language du client), français sans requête. */
+function requestLang(request: Request | undefined): Lang {
+  return request ? matchLang(request.headers.get('accept-language')) : DEFAULT_LANG
+}
 
 /** Nom du workspace personnel créé au signup multi : nom d'affichage s'il est non vide, sinon la
  * partie locale de l'e-mail, sinon un repli générique. Le slug unique est dérivé par `createWorkspace`. */
@@ -79,18 +85,18 @@ export function createAuth(db: Db, config: AuthConfig) {
       ...(mailer && {
         // Envoi non attendu : le temps de réponse dépend le moins possible de l'existence du compte.
         // `sendAndLog` ne lève pas ; le `catch` couvre le rendu du gabarit (garde d'URL).
-        sendResetPassword: async ({ user, url }) => {
+        sendResetPassword: async ({ user, url }, request) => {
           void (async () => {
-            const rendered = resetPasswordMail({ baseUrl: config.baseURL, url })
+            const rendered = resetPasswordMail({ baseUrl: config.baseURL, url, lang: requestLang(request) })
             await sendAndLog(mailer, { to: user.email, kind: 'reset-password', ...rendered }, logger, transport)
           })().catch((error: unknown) => logRenderFailure('reset-password', user.email, error))
         },
         // Le mot de passe est déjà changé à cet appel : un envoi lent ou en échec ne doit ni retarder
         // ni faire échouer la réponse. `sendAndLog` ne lève pas ; le `catch` couvre le rendu du gabarit.
-        onPasswordReset: async ({ user }) => {
+        onPasswordReset: async ({ user }, request) => {
           void (async () => {
             const url = `${trimBase(config.baseURL)}/forgot-password`
-            const rendered = passwordChangedMail({ baseUrl: config.baseURL, url })
+            const rendered = passwordChangedMail({ baseUrl: config.baseURL, url, lang: requestLang(request) })
             await sendAndLog(mailer, { to: user.email, kind: 'password-changed', ...rendered }, logger, transport)
           })().catch((error: unknown) => logRenderFailure('password-changed', user.email, error))
         },
@@ -105,9 +111,9 @@ export function createAuth(db: Db, config: AuthConfig) {
         autoSignInAfterVerification: true,
         // Attendu par Better Auth pendant l'inscription, après création du compte : un échec est
         // journalisé sans être propagé (le compte existe, l'utilisateur pourra redemander l'e-mail).
-        sendVerificationEmail: async ({ user, url }) => {
+        sendVerificationEmail: async ({ user, url }, request) => {
           try {
-            const rendered = verifyEmailMail({ baseUrl: config.baseURL, url })
+            const rendered = verifyEmailMail({ baseUrl: config.baseURL, url, lang: requestLang(request) })
             await sendAndLog(mailer, { to: user.email, kind: 'verify-email', ...rendered }, logger, transport)
           } catch (error) {
             logRenderFailure('verify-email', user.email, error)

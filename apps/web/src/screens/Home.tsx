@@ -12,6 +12,8 @@ import { isQuizLimitError, QuizLimitNotice } from '../ui/QuizLimitNotice.js'
 import { WorkspaceSwitcher } from '../ui/WorkspaceSwitcher.js'
 import { AnswerShape, Button } from '../ui'
 import { ANSWER_SHAPES } from '../constants'
+import { useT } from '../i18n/useT'
+import { formatDate as formatLocalDate, t, tp } from '../i18n/t'
 
 /**
  * Home — the host's landing screen (Plan 07 Task 4), now living at `/`
@@ -34,14 +36,20 @@ import { ANSWER_SHAPES } from '../constants'
  */
 
 function errorMessage(err: unknown): string {
-  return err instanceof ApiError ? err.message : 'Une erreur réseau est survenue. Réessayez.'
+  return err instanceof ApiError ? err.message : t('Une erreur réseau est survenue. Réessayez.')
 }
 
-const STATUS_LABEL: Record<SessionStatus, string> = {
-  lobby: 'En attente',
-  active: 'En cours',
-  ended: 'Terminée',
-  abandoned: 'Abandonnée',
+function statusLabel(status: SessionStatus): string {
+  switch (status) {
+    case 'lobby':
+      return t('En attente')
+    case 'active':
+      return t('En cours')
+    case 'ended':
+      return t('Terminée')
+    case 'abandoned':
+      return t('Abandonnée')
+  }
 }
 
 /** Une partie encore vivante (`lobby`/`active`) mène vers le contrôleur hôte LIVE (`/host/:id`,
@@ -63,7 +71,7 @@ function sessionHref(s: SessionSummary): string {
  * « Terminée », « Abandonnée ») ne dit pas ce que le clic va faire. */
 function sessionCtaLabel(s: SessionStatus): string {
   const terminal = s === 'ended' || s === 'abandoned'
-  return terminal ? 'Voir le rapport →' : 'Reprendre →'
+  return terminal ? t('Voir le rapport →') : t('Reprendre →')
 }
 
 /** How many rows render before the "Voir toutes" ghost button takes over —
@@ -76,22 +84,23 @@ const SESSIONS_PAGE_SIZE = 8
  * started — still in lobby) renders as an explicit label rather than a
  * blank cell or a fabricated date. */
 function formatDate(iso: string | null): string {
-  if (!iso) return 'Pas encore démarrée'
-  return new Date(iso).toLocaleString('fr-FR', { dateStyle: 'medium', timeStyle: 'short' })
+  if (!iso) return t('Pas encore démarrée')
+  return formatLocalDate(new Date(iso), { dateStyle: 'medium', timeStyle: 'short' })
 }
 
 /** Format a date string as `23 juil. 2026` for the quiz card metadata. */
 function formatDateOnly(iso: string): string {
-  return new Date(iso).toLocaleDateString('fr-FR', { dateStyle: 'medium' })
+  return formatLocalDate(new Date(iso), { dateStyle: 'medium' })
 }
 
 /** `0 question` / `1 question` / `N questions` (Task 6) — plural agreement,
  * not just an `s` tacked onto a count. */
 function formatQuestionCount(count: number): string {
-  return `${count} question${count > 1 ? 's' : ''}`
+  return tp(count, '{n} question', '{n} questions')
 }
 
 export function Home() {
+  useT()
   const navigate = useNavigate()
   const { refresh: refreshSession } = useSession()
   const [signingOut, setSigningOut] = useState(false)
@@ -185,7 +194,7 @@ export function Home() {
     event.preventDefault()
     const trimmed = newQuizTitle.trim()
     if (trimmed.length === 0) {
-      setNewQuizError('Le titre est requis.')
+      setNewQuizError(t('Le titre est requis.'))
       newQuizTitleRef.current?.focus()
       return
     }
@@ -247,7 +256,7 @@ export function Home() {
       setQuizzes((prev) => prev.filter((q) => q.id !== target.id))
       if (archivedLoaded) setArchived((prev) => [{ ...target, archivedAt: row.archivedAt }, ...prev])
       setArchiveTarget(null)
-      setAnnouncement(`Quiz « ${target.title} » archivé.`)
+      setAnnouncement(t('Quiz « {title} » archivé.', { title: target.title }))
     } catch (err) {
       setArchiveError(errorMessage(err))
     } finally {
@@ -263,7 +272,7 @@ export function Home() {
       await restoreQuiz(target.id)
       setArchived((prev) => prev.filter((q) => q.id !== target.id))
       setQuizzes((prev) => [...prev, { ...target, archivedAt: null }])
-      setAnnouncement(`Quiz « ${target.title} » restauré.`)
+      setAnnouncement(t('Quiz « {title} » restauré.', { title: target.title }))
     } catch (err) {
       if (isQuizLimitError(err)) setRestoreLimit(true)
       else setRestoreError(errorMessage(err))
@@ -306,13 +315,15 @@ export function Home() {
       <div aria-hidden={archiveTarget ? true : undefined}>
         <AppHeader
           brandline={
-            <span className="host-brandline__tagline">quiz en direct, open-source, chez vous ou dans le cloud</span>
+            <span className="host-brandline__tagline">
+              {t('quiz en direct, open-source, chez vous ou dans le cloud')}
+            </span>
           }
           actions={
             <>
               <WorkspaceSwitcher />
               <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
-                {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
+                {signingOut ? t('Déconnexion…') : t('Se déconnecter')}
               </Button>
             </>
           }
@@ -327,8 +338,8 @@ export function Home() {
       >
         <section className="home-hero">
           <div>
-            <h1>Bonjour</h1>
-            <p className="home-hero__sub">Prêt à lancer une partie&nbsp;?</p>
+            <h1>{t('Bonjour')}</h1>
+            <p className="home-hero__sub">{t('Prêt à lancer une partie\u00a0?')}</p>
           </div>
           {/* Une fois le formulaire ouvert, l'action principale devient
               « Créer et ouvrir » : « Annuler » passe en ghost pour ne pas
@@ -342,17 +353,17 @@ export function Home() {
               setNewQuizError(null)
             }}
           >
-            {creatingQuiz ? 'Annuler' : '+ Nouveau quiz'}
+            {creatingQuiz ? t('Annuler') : t('+ Nouveau quiz')}
           </Button>
         </section>
 
         <section aria-labelledby="home-quizzes-heading" style={{ marginBottom: 'var(--space-6)' }}>
           <div className="home-section__header">
             <h2 id="home-quizzes-heading" ref={quizzesHeadingRef} tabIndex={-1}>
-              Mes quiz
+              {t('Mes quiz')}
             </h2>
             <Link className="ab-button ab-button--ghost" to="/library">
-              Bibliothèque
+              {t('Bibliothèque')}
             </Link>
           </div>
 
@@ -365,31 +376,33 @@ export function Home() {
                 </p>
               )}
               <div className="host-field">
-                <label htmlFor="new-quiz-title">Titre du nouveau quiz</label>
+                <label htmlFor="new-quiz-title">{t('Titre du nouveau quiz')}</label>
                 <input
                   id="new-quiz-title"
                   ref={newQuizTitleRef}
                   type="text"
                   value={newQuizTitle}
                   onChange={(e) => setNewQuizTitle(e.target.value)}
-                  placeholder="Ex. Culture générale, spécial vendredi"
+                  placeholder={t('Ex. Culture générale, spécial vendredi')}
                   aria-invalid={newQuizError ? true : undefined}
                   aria-describedby={newQuizError ? 'new-quiz-title-error' : undefined}
                 />
               </div>
               <Button variant="primary" type="submit" disabled={newQuizPending}>
-                {newQuizPending ? 'Création…' : 'Créer et ouvrir'}
+                {newQuizPending ? t('Création…') : t('Créer et ouvrir')}
               </Button>
             </form>
           )}
 
           {quizzesLoading || preparingExample ? (
-            <p role="status">{preparingExample ? "Préparation de votre quiz d'exemple…" : 'Chargement de vos quiz…'}</p>
+            <p role="status">
+              {preparingExample ? t("Préparation de votre quiz d'exemple…") : t('Chargement de vos quiz…')}
+            </p>
           ) : quizzesError && quizzes.length === 0 ? (
             <div className="ab-empty-state">
               <p role="alert">{quizzesError}</p>
               <Button variant="primary" type="button" onClick={loadQuizzes}>
-                Réessayer
+                {t('Réessayer')}
               </Button>
             </div>
           ) : quizzes.length === 0 ? (
@@ -403,7 +416,7 @@ export function Home() {
                   </span>
                 ))}
               </div>
-              <p>Pas encore de quiz. On vous fait de la place : créez-en un pour démarrer.</p>
+              <p>{t('Pas encore de quiz. On vous fait de la place : créez-en un pour démarrer.')}</p>
             </div>
           ) : (
             <Reveal from="up">
@@ -427,10 +440,13 @@ export function Home() {
                         <span className="home-card__title">{q.title}</span>
                         {q.description && <span className="home-card__desc">{q.description}</span>}
                         <span className="home-card__meta">
-                          Modifié le {formatDateOnly(q.updatedAt)}, {formatQuestionCount(q.questionCount)}
+                          {t('Modifié le {date}, {questions}', {
+                            date: formatDateOnly(q.updatedAt),
+                            questions: formatQuestionCount(q.questionCount),
+                          })}
                         </span>
                         <span className="home-card__cta" aria-hidden="true">
-                          Ouvrir →
+                          {t('Ouvrir →')}
                         </span>
                       </Link>
                       {/* Sibling of the `<Link>` above, NOT nested inside it — a `<button>` inside
@@ -452,19 +468,19 @@ export function Home() {
                             launch(q.id, q.title).catch(() => {})
                           }}
                         >
-                          {gameLaunching ? 'Lancement…' : 'Lancer'}
+                          {gameLaunching ? t('Lancement…') : t('Lancer')}
                         </Button>
                         <Button
                           variant="ghost"
                           type="button"
                           className="home-card__archive"
-                          aria-label={`Archiver le quiz ${q.title}`}
+                          aria-label={t('Archiver le quiz {title}', { title: q.title })}
                           onClick={() => {
                             setArchiveError(null)
                             setArchiveTarget(q)
                           }}
                         >
-                          Archiver
+                          {t('Archiver')}
                         </Button>
                       </div>
                     </li>
@@ -481,18 +497,18 @@ export function Home() {
               if (e.currentTarget.open && !archivedLoaded && !archivedLoading) loadArchived()
             }}
           >
-            <summary className="home-archived__summary">Archivés</summary>
+            <summary className="home-archived__summary">{t('Archivés')}</summary>
             {archivedLoading ? (
-              <p role="status">Chargement des quiz archivés…</p>
+              <p role="status">{t('Chargement des quiz archivés…')}</p>
             ) : archivedError ? (
               <div className="ab-empty-state">
                 <p role="alert">{archivedError}</p>
                 <Button variant="primary" type="button" onClick={loadArchived}>
-                  Réessayer
+                  {t('Réessayer')}
                 </Button>
               </div>
             ) : archived.length === 0 ? (
-              <p className="ab-empty-state">Aucun quiz archivé.</p>
+              <p className="ab-empty-state">{t('Aucun quiz archivé.')}</p>
             ) : (
               <>
                 {restoreLimit && <QuizLimitNotice />}
@@ -507,18 +523,22 @@ export function Home() {
                       <Link className="home-list__item" to={`/quizzes/${q.id}`}>
                         <span className="home-list__title">{q.title}</span>
                         <span className="home-list__meta">
-                          {q.archivedAt ? `Archivé le ${formatDateOnly(q.archivedAt)}, ` : ''}
-                          {formatQuestionCount(q.questionCount)}
+                          {q.archivedAt
+                            ? t('Archivé le {date}, {questions}', {
+                                date: formatDateOnly(q.archivedAt),
+                                questions: formatQuestionCount(q.questionCount),
+                              })
+                            : formatQuestionCount(q.questionCount)}
                         </span>
                       </Link>
                       <Button
                         variant="ghost"
                         type="button"
-                        aria-label={`Restaurer le quiz ${q.title}`}
+                        aria-label={t('Restaurer le quiz {title}', { title: q.title })}
                         disabled={restoringId === q.id}
                         onClick={() => void handleRestore(q)}
                       >
-                        {restoringId === q.id ? 'Restauration…' : 'Restaurer'}
+                        {restoringId === q.id ? t('Restauration…') : t('Restaurer')}
                       </Button>
                     </li>
                   ))}
@@ -528,30 +548,33 @@ export function Home() {
           </details>
         </section>
 
-        <section aria-label="Parties">
+        <section aria-label={t('Parties')}>
           {(() => {
             const renderRow = (s: SessionSummary) => (
               <li key={s.id}>
                 <Link className="home-list__item" to={sessionHref(s)}>
                   <span className="home-list__title">{s.quizTitle}</span>
                   <span className="home-list__meta">
-                    PIN {s.pin}, {formatDate(s.startedAt)}, {s.playerCount} joueur
-                    {s.playerCount > 1 ? 's' : ''}
+                    {t('PIN {pin}, {date}, {players}', {
+                      pin: s.pin,
+                      date: formatDate(s.startedAt),
+                      players: tp(s.playerCount, '{n} joueur', '{n} joueurs'),
+                    })}
                   </span>
-                  <span className={`host-badge host-badge--${s.status}`}>{STATUS_LABEL[s.status]}</span>
+                  <span className={`host-badge host-badge--${s.status}`}>{statusLabel(s.status)}</span>
                   <span className="home-list__cta" aria-hidden="true">
                     {sessionCtaLabel(s.status)}
                   </span>
                 </Link>
               </li>
             )
-            if (sessionsLoading) return <p role="status">Chargement des parties…</p>
+            if (sessionsLoading) return <p role="status">{t('Chargement des parties…')}</p>
             if (sessionsError && liveSessions.length === 0 && historySessions.length === 0) {
               return (
                 <div className="ab-empty-state">
                   <p role="alert">{sessionsError}</p>
                   <Button variant="primary" type="button" onClick={loadSessions}>
-                    Réessayer
+                    {t('Réessayer')}
                   </Button>
                 </div>
               )
@@ -560,10 +583,10 @@ export function Home() {
               <>
                 <section aria-labelledby="home-live-heading" style={{ marginBottom: 'var(--space-6)' }}>
                   <div className="home-section__header">
-                    <h2 id="home-live-heading">En cours</h2>
+                    <h2 id="home-live-heading">{t('En cours')}</h2>
                   </div>
                   {liveSessions.length === 0 ? (
-                    <p className="ab-empty-state">Aucune partie en cours, lancez-en une depuis un quiz.</p>
+                    <p className="ab-empty-state">{t('Aucune partie en cours, lancez-en une depuis un quiz.')}</p>
                   ) : (
                     <ul className="home-list">{liveSessions.map(renderRow)}</ul>
                   )}
@@ -571,16 +594,16 @@ export function Home() {
 
                 <section aria-labelledby="home-history-heading">
                   <div className="home-section__header">
-                    <h2 id="home-history-heading">Historique</h2>
+                    <h2 id="home-history-heading">{t('Historique')}</h2>
                   </div>
                   {historySessions.length === 0 ? (
-                    <p className="ab-empty-state">Aucune partie terminée pour l'instant.</p>
+                    <p className="ab-empty-state">{t("Aucune partie terminée pour l'instant.")}</p>
                   ) : (
                     <>
                       <ul className="home-list">{visibleHistory.map(renderRow)}</ul>
                       {hiddenHistoryCount > 0 && (
                         <Button variant="ghost" type="button" onClick={() => setShowAllHistory(true)}>
-                          Voir tout l'historique ({historySessions.length})
+                          {t("Voir tout l'historique ({n})", { n: historySessions.length })}
                         </Button>
                       )}
                     </>
@@ -599,10 +622,13 @@ export function Home() {
       {archiveTarget && (
         <ConfirmDialog
           id="home-archive-dialog"
-          title="Archiver ce quiz ?"
-          description={`« ${archiveTarget.title} » quittera « Mes quiz » et ne pourra plus être lancé. Ses parties passées et leurs rapports restent consultables, et vous pourrez le restaurer depuis la section « Archivés ».`}
-          confirmLabel="Archiver"
-          pendingLabel="Archivage…"
+          title={t('Archiver ce quiz ?')}
+          description={t(
+            '« {title} » quittera « Mes quiz » et ne pourra plus être lancé. Ses parties passées et leurs rapports restent consultables, et vous pourrez le restaurer depuis la section « Archivés ».',
+            { title: archiveTarget.title },
+          )}
+          confirmLabel={t('Archiver')}
+          pendingLabel={t('Archivage…')}
           pending={archivePending}
           error={archiveError}
           onConfirm={() => void confirmArchive()}

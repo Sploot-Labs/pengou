@@ -2,7 +2,9 @@ import { forwardRef, useEffect, useRef, useState, type ButtonHTMLAttributes, typ
 import { QRCodeSVG } from 'qrcode.react'
 import { Link } from 'react-router-dom'
 import type { AnswerShapeKind } from './constants'
+import { useT } from './i18n/useT'
 import { useSound } from './motion/index.js'
+import { t } from './i18n/t'
 
 /* ------------------------------------------------------------------ */
 /* Logo                                                                 */
@@ -16,6 +18,7 @@ import { useSound } from './motion/index.js'
  * `to`, le logo reste un simple `<span>` non interactif, comportement d'origine.
  */
 export function Logo({ compact = false, to }: { compact?: boolean; to?: string }) {
+  const { t } = useT()
   const className = `ab-logo${compact ? ' ab-logo--compact' : ''}`
   const content = (
     <>
@@ -44,7 +47,7 @@ export function Logo({ compact = false, to }: { compact?: boolean; to?: string }
 
   if (to) {
     return (
-      <Link to={to} className={`${className} ab-logo--link`} aria-label="Pengou, retour à l'accueil">
+      <Link to={to} className={`${className} ab-logo--link`} aria-label={t("Pengou, retour à l'accueil")}>
         {content}
       </Link>
     )
@@ -208,11 +211,21 @@ const SHAPE_SH_TOKEN: Record<AnswerShapeKind, string> = {
 
 // Noms alignés sur les glyphes polaires réellement dessinés (voir AnswerShape) :
 // la lecture d'écran décrit la forme vue, pas une géométrie abstraite.
+// Accesseurs : le nom suit la langue courante à chaque lecture. Le nom de la constante vient du
+// français d'origine, des écrans l'importent encore.
 export const SHAPE_NAME_FR: Record<AnswerShapeKind, string> = {
-  triangle: 'étoile',
-  diamond: 'goutte',
-  circle: 'vague',
-  square: 'flocon',
+  get triangle() {
+    return t('étoile')
+  },
+  get diamond() {
+    return t('goutte')
+  },
+  get circle() {
+    return t('vague')
+  },
+  get square() {
+    return t('flocon')
+  },
 }
 
 /* ------------------------------------------------------------------ */
@@ -233,6 +246,7 @@ interface AnswerTileProps {
 }
 
 export function AnswerTile({ shape, label, onClick, disabled, selected, dimmed, reveal }: AnswerTileProps) {
+  const { t } = useT()
   const style = {
     ['--tile-color' as string]: `var(${SHAPE_TOKEN[shape]})`,
     ['--tile-ink' as string]: `var(${SHAPE_INK_TOKEN[shape]})`,
@@ -253,12 +267,12 @@ export function AnswerTile({ shape, label, onClick, disabled, selected, dimmed, 
       </span>
       <span className="ab-tile__label">
         {label}
-        <span className="visually-hidden">, réponse {SHAPE_NAME_FR[shape]}</span>
+        <span className="visually-hidden">{t(', réponse {shape}', { shape: SHAPE_NAME_FR[shape] })}</span>
       </span>
       {reveal && (
         <span className="ab-tile__reveal">
           <span aria-hidden="true">{reveal === 'correct' ? '✓' : '✕'}</span>
-          <span className="visually-hidden">{reveal === 'correct' ? 'Bonne réponse' : 'Réponse incorrecte'}</span>
+          <span className="visually-hidden">{reveal === 'correct' ? t('Bonne réponse') : t('Réponse incorrecte')}</span>
         </span>
       )}
     </button>
@@ -278,6 +292,7 @@ interface TimerRingProps {
 }
 
 export function TimerRing({ remainingSeconds, totalSeconds, size = 96, large = false }: TimerRingProps) {
+  const { tp } = useT()
   const clamped = Math.max(0, Math.min(remainingSeconds, totalSeconds))
   const ratio = totalSeconds > 0 ? clamped / totalSeconds : 0
   const radius = (size - 12) / 2
@@ -321,7 +336,7 @@ export function TimerRing({ remainingSeconds, totalSeconds, size = 96, large = f
         {clamped}
       </span>
       <span className="visually-hidden" role="status" aria-live="polite">
-        {`Temps restant : ${announced} seconde${announced > 1 ? 's' : ''}`}
+        {tp(announced, 'Temps restant : {n} seconde', 'Temps restant : {n} secondes')}
       </span>
     </div>
   )
@@ -346,6 +361,7 @@ function formatClock(totalSeconds: number): string {
  * pour ne pas marteler l'`aria-live` à chaque tick.
  */
 export function TimerPill({ remainingSeconds, totalSeconds }: { remainingSeconds: number; totalSeconds: number }) {
+  const { tp } = useT()
   const clamped = Math.max(0, Math.min(remainingSeconds, totalSeconds))
   const [announced, setAnnounced] = useState(clamped)
   const lastAnnounced = useRef(clamped)
@@ -364,7 +380,7 @@ export function TimerPill({ remainingSeconds, totalSeconds }: { remainingSeconds
     <span className={`ab-timerpill${urgent ? ' ab-timerpill--urgent' : ''}`}>
       <span aria-hidden="true">{formatClock(clamped)}</span>
       <span className="visually-hidden" role="status" aria-live="polite">
-        {`Temps restant : ${announced} seconde${announced > 1 ? 's' : ''}`}
+        {tp(announced, 'Temps restant : {n} seconde', 'Temps restant : {n} secondes')}
       </span>
     </span>
   )
@@ -376,7 +392,7 @@ export function TimerPill({ remainingSeconds, totalSeconds }: { remainingSeconds
 
 export function PinDisplay({
   pin,
-  label = 'Code PIN de la partie',
+  label,
   compact = false,
 }: {
   pin: string
@@ -384,6 +400,7 @@ export function PinDisplay({
   /** Smaller marquee for cramped headers (e.g. HostLive) — same signature element, scaled down. */
   compact?: boolean
 }) {
+  const { t } = useT()
   const digits = pin.split('')
   const spaced = digits.join(' ')
 
@@ -397,7 +414,9 @@ export function PinDisplay({
         ))}
         <span className="ab-pin__scanline motion-safe-only" />
       </span>
-      <span className="visually-hidden">{`${label} : ${spaced}`}</span>
+      <span className="visually-hidden">
+        {t('{label} : {pin}', { label: label ?? t('Code PIN de la partie'), pin: spaced })}
+      </span>
     </div>
   )
 }
@@ -418,6 +437,7 @@ export function PinDisplay({
  * depuis un mobile distant (résolution locale) : c'est attendu, pas un bug.
  */
 export function JoinInvite({ pin, size = 208 }: { pin: string; size?: number }) {
+  const { t } = useT()
   const joinUrl = `${window.location.origin}/join?pin=${encodeURIComponent(pin)}`
   const displayUrl = `${window.location.host}/join`
   return (
@@ -430,11 +450,11 @@ export function JoinInvite({ pin, size = 208 }: { pin: string; size?: number }) 
           marginSize={2}
           bgColor="#ffffff"
           fgColor="#0b1220"
-          title={`QR code pour rejoindre la partie sur ${displayUrl}`}
+          title={t('QR code pour rejoindre la partie sur {url}', { url: displayUrl })}
         />
       </div>
       <p className="join-invite__hint">
-        Scannez pour rejoindre, ou allez sur <strong>{displayUrl}</strong>
+        {t('Scannez pour rejoindre, ou allez sur')} <strong>{displayUrl}</strong>
       </p>
     </div>
   )
@@ -453,6 +473,7 @@ export function JoinInvite({ pin, size = 208 }: { pin: string; size?: number }) 
  */
 export function SoundToggle({ className = '' }: { className?: string }) {
   const sound = useSound()
+  const { t } = useT()
   const [muted, setMuted] = useState(() => sound.muted)
 
   function toggle() {
@@ -468,8 +489,8 @@ export function SoundToggle({ className = '' }: { className?: string }) {
       className={`ab-soundtoggle ${className}`.trim()}
       onClick={toggle}
       aria-pressed={muted}
-      aria-label={muted ? 'Activer le son' : 'Couper le son'}
-      title={muted ? 'Activer le son' : 'Couper le son'}
+      aria-label={muted ? t('Activer le son') : t('Couper le son')}
+      title={muted ? t('Activer le son') : t('Couper le son')}
     >
       <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
         <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" />
@@ -488,7 +509,7 @@ export function SoundToggle({ className = '' }: { className?: string }) {
           </>
         )}
       </svg>
-      <span className="visually-hidden">{muted ? 'Son coupé' : 'Son activé'}</span>
+      <span className="visually-hidden">{muted ? t('Son coupé') : t('Son activé')}</span>
     </button>
   )
 }

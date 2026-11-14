@@ -267,4 +267,57 @@ describe('GET /api/auth-features', () => {
 
     await app.close()
   })
+
+  it("envoie confirmation, réinitialisation et avis dans la langue d'Accept-Language", async () => {
+    const mailer = new MemoryMailer()
+    const app = await buildApp(mailer, { logger: captureLogger() })
+    const email = 'idioma@example.com'
+    const send = (url: string, payload: object, lang: string) =>
+      app.inject({
+        method: 'POST',
+        url,
+        payload,
+        headers: { 'content-type': 'application/json', 'accept-language': lang },
+      })
+
+    await send(
+      '/api/auth/sign-up/email',
+      { email, password: 'ancien-motdepasse-123', name: 'Idioma' },
+      'es-ES,es;q=0.9',
+    )
+    await vi.waitFor(() => expect(mailer.sent).toHaveLength(1))
+    expect(mailer.sent[0].subject).toBe('Confirma tu dirección de correo en Pengou')
+    mailer.sent.length = 0
+
+    await send('/api/auth/request-password-reset', { email, redirectTo: '/reset-password' }, 'en-US,en;q=0.9')
+    await vi.waitFor(() => expect(mailer.sent).toHaveLength(1))
+    expect(mailer.sent[0].subject).toBe('Reset your Pengou password')
+    const token = /\/api\/auth\/reset-password\/([^?\s]+)/.exec(mailer.sent[0].text)?.[1]
+    mailer.sent.length = 0
+
+    await send('/api/auth/reset-password', { newPassword: 'nouveau-motdepasse-456', token }, 'es')
+    await vi.waitFor(() => expect(mailer.sent).toHaveLength(1))
+    expect(mailer.sent[0].subject).toBe('Tu contraseña de Pengou ha cambiado')
+  })
+
+  it("renvoie la confirmation d'adresse dans la langue d'Accept-Language", async () => {
+    const mailer = new MemoryMailer()
+    const app = await buildApp(mailer, { logger: captureLogger() })
+    const email = 'reenvio@example.com'
+    await post(app, '/api/auth/sign-up/email', { email, password: 'ancien-motdepasse-123', name: 'Reenvio' })
+    await vi.waitFor(() => expect(mailer.sent).toHaveLength(1))
+    mailer.sent.length = 0
+
+    const res = await app.inject({
+      method: 'POST',
+      url: '/api/auth/send-verification-email',
+      payload: { email, callbackURL: '/' },
+      headers: { 'content-type': 'application/json', 'accept-language': 'es-ES,es;q=0.9' },
+    })
+    expect(res.statusCode).toBe(200)
+    await vi.waitFor(() => expect(mailer.sent).toHaveLength(1))
+    expect(mailer.sent[0].subject).toBe('Confirma tu dirección de correo en Pengou')
+
+    await app.close()
+  })
 })

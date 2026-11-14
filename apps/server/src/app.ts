@@ -6,6 +6,7 @@ import type { AppConfig } from '@splootlabs/shared'
 import { registerOriginGuard } from './origin-guard.js'
 import { compileTrust, createForwardedForWarner } from './client-ip.js'
 import { SanitizedLogController, serializeRequest } from './request-log.js'
+import { registerErrorLocalization } from './i18n/localize.js'
 
 declare module 'fastify' {
   interface FastifyContextConfig {
@@ -102,6 +103,10 @@ export async function buildServer(config: AppConfig, deps: ServerDeps = {}): Pro
     reply.header('permissions-policy', 'camera=(), microphone=(), geolocation=()')
     done()
   })
+
+  // Messages `{ error }` traduits à la sortie selon `?lang=` puis Accept-Language (français par
+  // défaut). Crochet onSend synchrone, posé avant toute route pour les couvrir toutes.
+  registerErrorLocalization(app)
 
   // Sécurité (P2) : en-têtes HTTP durcis (anti-clickjacking, anti-sniffing MIME, Referrer-Policy…).
   // CSP réglée pour rester compatible avec le SPA servi par le même serveur : styles inline

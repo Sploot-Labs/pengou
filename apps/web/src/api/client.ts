@@ -9,6 +9,8 @@
  * real one.
  */
 
+import { t } from '../i18n/t'
+import { getLang } from '../i18n/lang'
 import { getActiveTenantId } from './activeTenant'
 
 /** Thrown on any non-2xx response. `message` is the server's own error text
@@ -77,26 +79,26 @@ function safeJsonParse(text: string): unknown {
 function fallbackMessage(status: number): string {
   switch (status) {
     case 400:
-      return 'La demande est invalide.'
+      return t('La demande est invalide.')
     case 401:
-      return 'Votre session a expiré. Reconnectez-vous.'
+      return t('Votre session a expiré. Reconnectez-vous.')
     case 403:
-      return "Vous n'avez pas les droits pour cette action."
+      return t("Vous n'avez pas les droits pour cette action.")
     case 404:
-      return 'Élément introuvable.'
+      return t('Élément introuvable.')
     case 409:
-      return 'Conflit avec une modification récente. Rechargez la page.'
+      return t('Conflit avec une modification récente. Rechargez la page.')
     case 413:
-      return 'Envoi trop volumineux.'
+      return t('Envoi trop volumineux.')
     case 429:
-      return 'Trop de demandes. Patientez un instant puis réessayez.'
+      return t('Trop de demandes. Patientez un instant puis réessayez.')
     case 502:
     case 503:
     case 504:
-      return 'Le serveur ne répond pas. Réessayez dans un instant.'
+      return t('Le serveur ne répond pas. Réessayez dans un instant.')
   }
-  if (status >= 500) return 'Le serveur a rencontré une erreur. Réessayez dans un instant.'
-  return `Erreur ${status}`
+  if (status >= 500) return t('Le serveur a rencontré une erreur. Réessayez dans un instant.')
+  return t('Erreur {status}', { status })
 }
 
 function buildHeaders(withJsonBody: boolean): Record<string, string> {
@@ -105,7 +107,7 @@ function buildHeaders(withJsonBody: boolean): Record<string, string> {
   // l'en-tête est omis — le serveur retombe sur le tenant `default`. C'est l'unique point
   // d'injection : toute la CRUD passe par `send()`.
   const tenantId = getActiveTenantId()
-  const headers: Record<string, string> = {}
+  const headers: Record<string, string> = { 'Accept-Language': getLang() }
   if (withJsonBody) headers['Content-Type'] = 'application/json'
   if (tenantId) headers['x-tenant-id'] = tenantId
   return headers
@@ -122,7 +124,7 @@ async function send<T>(
     // Always same-origin: no cross-origin auth calls are ever intended, and
     // this is what carries the Better Auth session cookie.
     credentials: 'same-origin',
-    headers: Object.keys(headers).length > 0 ? headers : undefined,
+    headers,
     body,
   })
 

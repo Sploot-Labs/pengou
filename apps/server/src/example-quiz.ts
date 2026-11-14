@@ -1,4 +1,5 @@
 import type { ImportedQuestion } from '@splootlabs/db'
+import type { Lang } from '@splootlabs/shared/i18n'
 
 /**
  * Quiz d'exemple offert juste après l'inscription : cinq questions courtes, une par grand type
@@ -60,4 +61,70 @@ export const EXAMPLE_QUIZ = {
       source: null,
     },
   ] satisfies ImportedQuestion[],
+}
+
+type ExampleText = {
+  title: string
+  description: string
+  prompts: [string, string, string, string, string]
+  mcq: [string, string, string, string]
+  poll: [string, string, string, string]
+}
+
+/** Textes traduits ; réglages, types et bonnes réponses restent ceux de `EXAMPLE_QUIZ`. */
+const TRANSLATIONS: Record<'en' | 'es', ExampleText> = {
+  en: {
+    title: 'My first quiz (example)',
+    description: 'An example quiz to edit: change the questions, add your own, then start the game.',
+    prompts: [
+      'What is the capital of Australia?',
+      'The emperor penguin is the largest of all penguins.',
+      'In what year did humans first set foot on the Moon?',
+      'Which theme do you prefer for the next game?',
+      'In one word, what did you think of this quiz?',
+    ],
+    mcq: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
+    poll: ['Science', 'History', 'Movies', 'Sports'],
+  },
+  es: {
+    title: 'Mi primer quiz (ejemplo)',
+    description: 'Un quiz de ejemplo para modificar: cambia las preguntas, añade las tuyas y empieza la partida.',
+    prompts: [
+      '¿Cuál es la capital de Australia?',
+      'El pingüino emperador es el más grande de los pingüinos.',
+      '¿En qué año pisó el ser humano la Luna por primera vez?',
+      '¿Qué tema prefieres para la próxima partida?',
+      'En una palabra, ¿qué te ha parecido este quiz?',
+    ],
+    mcq: ['Sídney', 'Canberra', 'Melbourne', 'Perth'],
+    poll: ['Ciencias', 'Historia', 'Cine', 'Deporte'],
+  },
+}
+
+function translated(text: ExampleText): typeof EXAMPLE_QUIZ {
+  const quiz = structuredClone(EXAMPLE_QUIZ)
+  quiz.title = text.title
+  quiz.description = text.description
+  quiz.questions.forEach((q, i) => {
+    q.prompt = text.prompts[i] as string
+  })
+  const [mcq, , , poll] = quiz.questions
+  ;(mcq.payload as { options: { label: string }[] }).options.forEach((o, i) => {
+    o.label = text.mcq[i] as string
+  })
+  ;(poll.payload as { options: { label: string }[] }).options.forEach((o, i) => {
+    o.label = text.poll[i] as string
+  })
+  return quiz
+}
+
+const BY_LANG: Record<Lang, typeof EXAMPLE_QUIZ> = {
+  fr: EXAMPLE_QUIZ,
+  en: translated(TRANSLATIONS.en),
+  es: translated(TRANSLATIONS.es),
+}
+
+/** Quiz d'exemple dans la langue demandée (le français est `EXAMPLE_QUIZ`). */
+export function exampleQuiz(lang: Lang): typeof EXAMPLE_QUIZ {
+  return BY_LANG[lang]
 }

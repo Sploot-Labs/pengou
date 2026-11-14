@@ -180,6 +180,10 @@ export interface Engine {
   evictSession(sessionId: string): Promise<void>
 }
 
+/** Refus de `submitAnswer` quand la réponse ne correspond pas au type de la question : seul refus
+ * après lequel la manche reste ouverte (le client peut réessayer, voir la passerelle). */
+export const INVALID_ANSWER_MESSAGE = 'réponse invalide pour ce type de question'
+
 /** Levée par `reconnect` quand le joinToken appartient à un joueur exclu par l'animateur. */
 export class PlayerKickedError extends Error {
   readonly code = 'kicked'
@@ -322,12 +326,12 @@ export function createEngine(deps: EngineDeps): Engine {
       try {
         answer = def.validateAnswer(rawAnswer)
       } catch {
-        return { accepted: false, reason: 'réponse invalide pour ce type de question' }
+        return { accepted: false, reason: INVALID_ANSWER_MESSAGE }
       }
 
       if (question.type === 'poll') {
         const pollError = pollAnswerError(question.payload as PollPayload, answer as PollAnswer)
-        if (pollError !== null) return { accepted: false, reason: 'réponse invalide pour ce type de question' }
+        if (pollError !== null) return { accepted: false, reason: INVALID_ANSWER_MESSAGE }
       }
 
       // Horodatage 100% serveur : jamais de confiance dans un timing fourni par le client.

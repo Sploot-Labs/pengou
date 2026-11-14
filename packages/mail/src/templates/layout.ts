@@ -1,3 +1,4 @@
+import { DEFAULT_LANG, type Lang } from '@splootlabs/shared/i18n'
 import { escapeHtml } from './escape.js'
 
 export type RenderedMail = { subject: string; text: string; html: string }
@@ -33,7 +34,23 @@ export function assertUrlUnderBase(baseUrl: string, url: string): void {
 export const P_STYLE = `margin:0 0 14px;font-family:${FONT};font-size:16px;line-height:1.55;color:${NAVY};`
 export const SMALL_STYLE = `margin:0 0 14px;font-family:${FONT};font-size:14px;line-height:1.55;color:${MUTED};`
 
-export const FOOTER_TEXT = 'Pengou, des quiz en direct pour la classe. Une question ? Répondez à cet e-mail.'
+const TEXT: Record<Lang, { footer: string; fallback: string; openLink: string }> = {
+  fr: {
+    footer: 'Pengou, des quiz en direct pour la classe. Une question ? Répondez à cet e-mail.',
+    fallback: 'Le bouton ne fonctionne pas ? Copiez ce lien :',
+    openLink: 'Ouvrez ce lien :',
+  },
+  en: {
+    footer: 'Pengou, live quizzes for the classroom. A question? Reply to this email.',
+    fallback: 'Button not working? Copy this link:',
+    openLink: 'Open this link:',
+  },
+  es: {
+    footer: 'Pengou, quiz en vivo para el aula. ¿Tienes una pregunta? Responde a este correo.',
+    fallback: '¿No funciona el botón? Copia este enlace:',
+    openLink: 'Abre este enlace:',
+  },
+}
 
 function shape(color: string, radius: string): string {
   return `<td width="22" height="22" bgcolor="${color}" style="width:22px;height:22px;background:${color};font-size:0;line-height:0;${radius}">&nbsp;</td>`
@@ -56,13 +73,15 @@ export type LayoutInput = {
   url: string
   /** HTML déjà échappé, placé sous le lien de secours. */
   afterHtml: string
+  lang?: Lang
 }
 
 export function renderLayout(i: LayoutInput): string {
+  const lang = i.lang ?? DEFAULT_LANG
   const url = escapeHtml(i.url)
   const logo = escapeHtml(`${trimBase(i.baseUrl)}/email/logo.png`)
   return `<!doctype html>
-<html lang="fr">
+<html lang="${lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -80,10 +99,10 @@ ${shapes()}
 <h1 style="margin:0 0 12px;font-family:${FONT};font-size:23px;line-height:1.25;font-weight:800;color:${NAVY};">${escapeHtml(i.title)}</h1>
 ${i.introHtml}
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:4px 0 18px;"><tr><td bgcolor="#0B2545" style="background:#0B2545;border-radius:999px;"><a href="${url}" style="display:inline-block;padding:14px 28px;font-family:${FONT};font-size:16px;font-weight:800;color:#ffffff;text-decoration:none;">${escapeHtml(i.buttonLabel)}</a></td></tr></table>
-<p style="${SMALL_STYLE}">Le bouton ne fonctionne pas ? Copiez ce lien :<br><a href="${url}" style="color:${LINK};text-decoration:underline;word-break:break-all;">${url}</a></p>
+<p style="${SMALL_STYLE}">${escapeHtml(TEXT[lang].fallback)}<br><a href="${url}" style="color:${LINK};text-decoration:underline;word-break:break-all;">${url}</a></p>
 ${i.afterHtml}
 </td></tr>
-<tr><td style="padding:16px 26px;background:#f6fafc;border-top:1px solid #e3eef4;border-radius:0 0 16px 16px;font-family:${FONT};font-size:13px;line-height:1.5;color:${MUTED};">${escapeHtml(FOOTER_TEXT)}</td></tr>
+<tr><td style="padding:16px 26px;background:#f6fafc;border-top:1px solid #e3eef4;border-radius:0 0 16px 16px;font-family:${FONT};font-size:13px;line-height:1.5;color:${MUTED};">${escapeHtml(TEXT[lang].footer)}</td></tr>
 </table>
 </td></tr>
 </table>
@@ -93,17 +112,24 @@ ${i.afterHtml}
 }
 
 /** Version texte commune : titre, corps, lien, mentions, pied. */
-export function renderText(parts: { title: string; body: string[]; url: string; after: string[] }): string {
+export function renderText(parts: {
+  title: string
+  body: string[]
+  url: string
+  after: string[]
+  lang?: Lang
+}): string {
+  const text = TEXT[parts.lang ?? DEFAULT_LANG]
   return [
     parts.title,
     '',
     ...parts.body.flatMap((l) => [l, '']),
-    'Ouvrez ce lien :',
+    text.openLink,
     parts.url,
     '',
     ...parts.after.flatMap((l) => [l, '']),
     '--',
-    FOOTER_TEXT,
+    text.footer,
     '',
   ].join('\n')
 }

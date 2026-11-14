@@ -1,4 +1,5 @@
 import { isRouteErrorResponse, Link, useRouteError } from 'react-router-dom'
+import { useT } from '../i18n/useT'
 import { ThemeProvider } from '../theme/ThemeProvider'
 import { Button, Logo } from '../ui'
 import '../tokens.css'
@@ -10,6 +11,7 @@ import '../prototype.css'
  * provider (session, workspace) : c'est souvent l'un d'eux qui vient de lever.
  */
 export function RouteError() {
+  const { t } = useT()
   const error = useRouteError()
   const notFound = isRouteErrorResponse(error) && error.status === 404
   if (!notFound) console.error(error)
@@ -21,16 +23,18 @@ export function RouteError() {
           <Logo />
           <p className="join-error" role="alert">
             {notFound
-              ? "Cette page n'existe pas."
-              : "Une erreur inattendue est survenue. Rechargez la page ; si le problème persiste, revenez à l'accueil."}
+              ? t("Cette page n'existe pas.")
+              : t(
+                  "Une erreur inattendue est survenue. Rechargez la page ; si le problème persiste, revenez à l'accueil.",
+                )}
           </p>
           {!notFound && (
             <Button variant="primary" type="button" onClick={() => window.location.reload()}>
-              Recharger la page
+              {t('Recharger la page')}
             </Button>
           )}
           <Link className="ab-button" to="/">
-            ← Retour à l'accueil
+            {t("← Retour à l'accueil")}
           </Link>
         </main>
       </div>

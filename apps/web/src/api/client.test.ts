@@ -39,7 +39,7 @@ describe('client API typé', () => {
     const [path, init] = (fetch as unknown as ReturnType<typeof vi.fn>).mock.calls[0]
     expect(path).toBe('/api/quizzes')
     expect(init.method).toBe('POST')
-    expect(init.headers).toEqual({ 'Content-Type': 'application/json' })
+    expect(init.headers).toEqual({ 'Accept-Language': 'fr', 'Content-Type': 'application/json' })
     expect(init.body).toBe(JSON.stringify({ title: 'Quiz' }))
   })
 
@@ -57,7 +57,7 @@ describe('client API typé', () => {
     mockFetchOnce(200, { ok: true })
     await apiGet('/api/quizzes')
     const [, init] = (fetch as unknown as ReturnType<typeof vi.fn>).mock.calls[0]
-    expect(init.headers).toBeUndefined()
+    expect(init.headers).toEqual({ 'Accept-Language': 'fr' })
   })
 
   it('ajoute x-tenant-id sur GET quand un workspace est actif', async () => {
@@ -65,7 +65,7 @@ describe('client API typé', () => {
     mockFetchOnce(200, { ok: true })
     await apiGet('/api/quizzes')
     const [, init] = (fetch as unknown as ReturnType<typeof vi.fn>).mock.calls[0]
-    expect(init.headers).toEqual({ 'x-tenant-id': 'tenant-123' })
+    expect(init.headers).toEqual({ 'Accept-Language': 'fr', 'x-tenant-id': 'tenant-123' })
   })
 
   it('combine Content-Type et x-tenant-id sur un POST avec corps', async () => {
@@ -73,7 +73,11 @@ describe('client API typé', () => {
     mockFetchOnce(200, { ok: true })
     await apiPost('/api/quizzes', { title: 'Quiz' })
     const [, init] = (fetch as unknown as ReturnType<typeof vi.fn>).mock.calls[0]
-    expect(init.headers).toEqual({ 'Content-Type': 'application/json', 'x-tenant-id': 'tenant-abc' })
+    expect(init.headers).toEqual({
+      'Accept-Language': 'fr',
+      'Content-Type': 'application/json',
+      'x-tenant-id': 'tenant-abc',
+    })
   })
 
   it('lève une ApiError avec le message du champ `error` du serveur (routes maison)', async () => {

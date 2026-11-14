@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSharedGameSocket } from './GameSocketProvider'
+import { t } from '../i18n/t'
 import { PAGE_LOAD_ID } from './pageLoad'
 
 /** Ack de succès de `host:create` — voir `apps/server/src/game-gateway.ts`. Déclaré ICI et
@@ -57,7 +58,7 @@ export function useLaunchGame(): UseLaunchGame {
         // `launch` date cet état : il ne vaut que pour ce chargement de page (voir `pageLoad.ts`).
         navigate(`/host/${ack.sessionId}`, { state: { pin: ack.pin, quizTitle, launch: PAGE_LOAD_ID } })
       } catch (err) {
-        const message = err instanceof Error ? err.message : 'Impossible de lancer la partie.'
+        const message = err instanceof Error ? err.message : t('Impossible de lancer la partie.')
         setLaunching(false)
         setError(message)
         throw new Error(message)

@@ -15,4 +15,4 @@ export type {
   ProgressInfo,
   ReconnectResult,
 } from './engine.js'
-export { createEngine, PlayerKickedError } from './engine.js'
+export { createEngine, INVALID_ANSWER_MESSAGE, PlayerKickedError } from './engine.js'

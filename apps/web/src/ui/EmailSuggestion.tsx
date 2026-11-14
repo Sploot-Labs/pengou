@@ -1,4 +1,5 @@
 import { suggestEmailDomain } from '@splootlabs/shared/email-suggest'
+import { useT } from '../i18n/useT'
 
 interface EmailSuggestionProps {
   /** Valeur courante du champ e-mail (la suggestion se calcule dessus). */
@@ -13,16 +14,17 @@ interface EmailSuggestionProps {
  * pour que l'apparition de la suggestion soit annoncée.
  */
 export function EmailSuggestion({ value, onApply }: EmailSuggestionProps) {
+  const { t } = useT()
   const suggestion = suggestEmailDomain(value.trim())
   return (
     <div aria-live="polite" className="join-suggestion">
       {suggestion && (
         <p>
-          Vouliez-vous dire{' '}
+          {t('Vouliez-vous dire')}{' '}
           <button type="button" className="join-suggestion__apply" onClick={() => onApply(suggestion)}>
             {suggestion}
-          </button>{' '}
-          ?
+          </button>
+          {t(' ?')}
         </p>
       )}
     </div>

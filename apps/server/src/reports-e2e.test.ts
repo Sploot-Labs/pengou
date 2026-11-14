@@ -543,6 +543,17 @@ describe('export CSV avec un nuage de mots', () => {
       expect(lines[i + 2]).toBe('café,2')
       expect(lines[i + 3]).toBe('rush,1')
 
+      const esLines = (
+        await app.inject({
+          method: 'GET',
+          url: `/api/sessions/${sessionId}/export.csv?lang=es`,
+          headers: { cookie },
+        })
+      ).body.split('\r\n')
+      const k = esLines.indexOf('"Nube de palabras: Un mot sur le matin (2 participantes, 3 palabras)"')
+      expect(k).toBeGreaterThan(-1)
+      expect(esLines[k + 1]).toBe('Palabra,Apariciones')
+
       await setWordcloudRemoved(ctx.db, sessionId, cloud.id, ['rush'])
       const csv2 = (
         await app.inject({ method: 'GET', url: `/api/sessions/${sessionId}/export.csv`, headers: { cookie } })
@@ -656,6 +667,26 @@ describe('export CSV avec un sondage', () => {
       const j = lines.indexOf('Sondage : Sondage vide (0 participant)')
       expect(j).toBeGreaterThan(-1)
       expect(lines.slice(j + 1, j + 4)).toEqual(['Choix,Votes,Pourcentage', 'X,0,0', 'Y,0,0'])
+
+      const en = (
+        await app.inject({ method: 'GET', url: `/api/sessions/${sessionId}/export.csv?lang=en`, headers: { cookie } })
+      ).body.split('\r\n')
+      expect(
+        en.slice(
+          en.indexOf('Poll: Votre avis (2 participants)') + 1,
+          en.indexOf('Poll: Votre avis (2 participants)') + 2,
+        ),
+      ).toEqual(['Choice,Votes,Percentage'])
+      expect(en).toContain('Poll: Sondage vide (0 participants)')
+      const es = (
+        await app.inject({
+          method: 'GET',
+          url: `/api/sessions/${sessionId}/export.csv`,
+          headers: { cookie, 'accept-language': 'es' },
+        })
+      ).body.split('\r\n')
+      expect(es).toContain('Encuesta: Sondage vide (0 participantes)')
+      expect(es).toContain('Opción,Votos,Porcentaje')
     } finally {
       await app.close()
     }

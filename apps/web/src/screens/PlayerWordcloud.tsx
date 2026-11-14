@@ -1,5 +1,6 @@
 import { useRef, useState, type FormEvent } from 'react'
 import { WORDCLOUD_MAX_WORD_LENGTH, WORDCLOUD_MAX_WORDS_PER_PLAYER } from '@splootlabs/quiz'
+import { useT } from '../i18n/useT'
 
 export interface WordcloudAck {
   accepted: boolean
@@ -19,6 +20,7 @@ interface PlayerWordcloudProps {
  * renvoie la liste complète).
  */
 export function PlayerWordcloud({ disabled, submit }: PlayerWordcloudProps) {
+  const { t } = useT()
   const [value, setValue] = useState('')
   const [words, setWords] = useState<string[]>([])
   const [error, setError] = useState<string | null>(null)
@@ -37,10 +39,12 @@ export function PlayerWordcloud({ disabled, submit }: PlayerWordcloudProps) {
         setValue('')
         if (ack.words) setWords(ack.words)
       } else {
-        setError(ack.reason ?? 'Idée non prise en compte.')
+        setError(ack.reason ?? t('Idée non prise en compte.'))
       }
     } catch (err) {
-      setError(err instanceof Error ? `Idée non envoyée (${err.message}).` : 'Idée non envoyée.')
+      setError(
+        err instanceof Error ? t('Idée non envoyée ({message}).', { message: err.message }) : t('Idée non envoyée.'),
+      )
     } finally {
       setSending(false)
       inputRef.current?.focus()
@@ -51,7 +55,7 @@ export function PlayerWordcloud({ disabled, submit }: PlayerWordcloudProps) {
     <div className="player-wordcloud">
       <form className="player-text" onSubmit={onSubmit}>
         <label htmlFor="player-wordcloud-input" className="visually-hidden">
-          Ton idée
+          {t('Ton idée')}
         </label>
         <input
           id="player-wordcloud-input"
@@ -61,17 +65,20 @@ export function PlayerWordcloud({ disabled, submit }: PlayerWordcloudProps) {
           value={value}
           disabled={disabled}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Un mot ou deux"
+          placeholder={t('Un mot ou deux')}
           autoComplete="off"
           aria-describedby="player-wordcloud-help"
         />
         <div className="player-text__row">
           <span id="player-wordcloud-help">
-            {`${WORDCLOUD_MAX_WORD_LENGTH} caractères max, jusqu'à ${WORDCLOUD_MAX_WORDS_PER_PLAYER} idées`}
+            {t("{max} caractères max, jusqu'à {words} idées", {
+              max: WORDCLOUD_MAX_WORD_LENGTH,
+              words: WORDCLOUD_MAX_WORDS_PER_PLAYER,
+            })}
           </span>
         </div>
         <button type="submit" className="player-cta" disabled={disabled || sending || value.trim().length === 0}>
-          Envoyer
+          {t('Envoyer')}
         </button>
       </form>
 
@@ -83,7 +90,7 @@ export function PlayerWordcloud({ disabled, submit }: PlayerWordcloudProps) {
 
       {words.length > 0 && (
         <section aria-labelledby="player-wordcloud-list">
-          <h2 id="player-wordcloud-list">Tes idées envoyées</h2>
+          <h2 id="player-wordcloud-list">{t('Tes idées envoyées')}</h2>
           <ul>
             {words.map((w) => (
               <li key={w}>{w}</li>

@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { SessionProvider } from './api/auth'
 import { WorkspaceProvider } from './api/workspace-context'
+import { useT } from './i18n/useT'
 import { MotionProvider } from './motion/index.js'
 import { ThemeProvider } from './theme/ThemeProvider'
 import { VerifyEmailBanner } from './ui/VerifyEmailBanner'
@@ -22,6 +23,15 @@ import './prototype.css'
  * sur un rechargement complet de page, jamais lors d'une navigation gérée
  * par le routeur — la session survit donc à `/` → `/host/:id`.
  */
+function SkipLink() {
+  const { t } = useT()
+  return (
+    <a className="ab-skip-link" href="#contenu-principal">
+      {t('Aller au contenu')}
+    </a>
+  )
+}
+
 export function AppShell() {
   return (
     <SessionProvider>
@@ -29,9 +39,7 @@ export function AppShell() {
         <MotionProvider>
           <ThemeProvider theme="app">
             <div className="prototype-root">
-              <a className="ab-skip-link" href="#contenu-principal">
-                Aller au contenu
-              </a>
+              <SkipLink />
               <VerifyEmailBanner />
               <Outlet />
             </div>

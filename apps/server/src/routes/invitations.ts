@@ -27,6 +27,7 @@ import {
   type MailLogger,
 } from '@splootlabs/mail'
 import type { AppConfig, Role } from '@splootlabs/shared'
+import { langOf } from '../i18n/localize.js'
 import { requireUser } from '../require-user.js'
 import { requirePermission } from '../require-permission.js'
 import { invitationEmailProof, isInvitationEmailProofValid } from '../invitation-proof.js'
@@ -163,6 +164,7 @@ export function registerInvitationRoutes(app: FastifyInstance, deps: InvitationD
         workspaceName: await workspaceName(systemDb, tenantId),
         role: invitation.role === 'admin' ? 'admin' : 'member',
         expiresAt: invitation.expiresAt,
+        lang: langOf(request),
       })
       const mail = { ...rendered, to: invitation.email, kind: 'invitation' as const }
       // Libellé du transport configuré (un mailer de test injecté garde ce libellé) ; un mailer
