@@ -2031,6 +2031,9 @@ export async function registerGameGateway(
         // Latecomer (Task 3, hardening) : le grand écran connecté en PLEINE QUESTION doit
         // afficher la question courante tout de suite, pas seulement à partir de la suivante.
         const session = await engine.getSession(sessionId)
+        // Liste des joueurs déjà arrivés : l'écran ouvert après eux n'en reçoit sinon aucune avant la
+        // prochaine arrivée, et son compteur de réponses affiche « 0 / 0 ».
+        socket.emit('lobby:update', { players: playersPayload(session) })
         replayCurrentQuestionTo(socket, session)
         // Clôture d'une question non notée : l'écran reste sur la révélation, rejouée ici (nuage
         // compris) ; sinon, rejeu du nuage en cours comme avant.
@@ -2072,6 +2075,7 @@ export async function registerGameGateway(
           reply({ ok: true })
 
           const session = await engine.getSession(sessionId)
+          socket.emit('lobby:update', { players: playersPayload(session) })
           replayCurrentQuestionTo(socket, session)
           if (!replayUnscoredRevealTo(socket, session)) replayWordcloudTo(socket, session)
         } catch (e) {

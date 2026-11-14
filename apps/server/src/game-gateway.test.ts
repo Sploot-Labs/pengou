@@ -1563,12 +1563,15 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       // projecteur définitivement inaccessible après le moindre blip réseau.
       const screen2 = await connectClient(url)
       clients.push(screen2)
+      // La reprise rejoue d'abord la liste courante (vide ici) avant toute diffusion.
+      const replayPromise = waitFor<{ players: Array<{ id: string }> }>(screen2, 'lobby:update')
       const reconnectRes = await ack<{ ok?: boolean; error?: string }>(screen2, 'screen:reconnect', {
         sessionId,
         displayToken,
       })
       expect(reconnectRes.error).toBeUndefined()
       expect(reconnectRes.ok).toBe(true)
+      expect((await replayPromise).players).toHaveLength(0)
 
       // Le nouvel écran continue bien de recevoir les diffusions de la room.
       const lobbyPromise = waitFor<{ players: Array<{ id: string }> }>(screen2, 'lobby:update')
@@ -1577,6 +1580,46 @@ describe('passerelle Socket.IO du jeu (hôte / grand écran / joueurs)', () => {
       await ack(player1, 'player:join', { pin, nickname: 'Zoé' })
       const lobby = await lobbyPromise
       expect(lobby.players).toHaveLength(1)
+    } finally {
+      for (const c of clients) c.disconnect()
+      await app.close()
+    }
+  }, 20_000)
+
+  it('screen:join et screen:reconnect reçoivent la liste des joueurs déjà arrivés', async () => {
+    const { app, url } = await buildApp()
+    const clients: ClientSocket[] = []
+    try {
+      const { hostSocket, pin, sessionId } = await setupHostedSession(app, url, 'gateway-screen-lobby@example.com')
+      clients.push(hostSocket)
+
+      // Les joueurs arrivent AVANT que le grand écran soit ouvert : sans rejeu de la liste, l'écran
+      // affiche « 0 / 0 ont répondu » jusqu'à la prochaine arrivée.
+      for (const nickname of ['Alice', 'Bob', 'Chloé']) {
+        const player = await connectClient(url)
+        clients.push(player)
+        expect((await ack<{ error?: string }>(player, 'player:join', { pin, nickname })).error).toBeUndefined()
+      }
+      // Au-delà de la fenêtre de coalescence du lobby : aucune diffusion différée ne doit tomber sur
+      // l'écran et masquer l'absence de rejeu.
+      await new Promise((resolve) => setTimeout(resolve, 400))
+
+      const tokenAck = await ack<{ displayToken?: string }>(hostSocket, 'host:createScreenToken', {})
+      const displayToken = tokenAck.displayToken!
+      const screen = await connectClient(url)
+      clients.push(screen)
+      const lobbyOnJoin = waitFor<{ players: Array<{ nickname: string }> }>(screen, 'lobby:update')
+      expect((await ack<{ error?: string }>(screen, 'screen:join', { displayToken })).error).toBeUndefined()
+      expect((await lobbyOnJoin).players.map((p) => p.nickname).sort()).toEqual(['Alice', 'Bob', 'Chloé'])
+
+      screen.disconnect()
+      const screen2 = await connectClient(url)
+      clients.push(screen2)
+      const lobbyOnReconnect = waitFor<{ players: Array<{ nickname: string }> }>(screen2, 'lobby:update')
+      expect(
+        (await ack<{ error?: string }>(screen2, 'screen:reconnect', { sessionId, displayToken })).error,
+      ).toBeUndefined()
+      expect((await lobbyOnReconnect).players).toHaveLength(3)
     } finally {
       for (const c of clients) c.disconnect()
       await app.close()

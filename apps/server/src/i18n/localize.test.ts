@@ -15,6 +15,10 @@ describe('localizeMessage', () => {
     expect(localizeMessage('session introuvable', 'es')).toBe('partida no encontrada')
     expect(localizeMessage('exclusion impossible au podium', 'en')).toBe('players cannot be kicked at the podium')
     expect(localizeMessage('joueur exclu de la partie', 'en')).toBe('player kicked from the game')
+    // Message de packages/db repris par l'acquittement de `host:create` quand la socket n'a pas d'espace.
+    expect(localizeMessage('mode multi : un tenant explicite est requis', 'en')).toBe(
+      'multi mode: an explicit workspace is required',
+    )
   })
 
   it('traduit un message variable avec sa valeur', () => {
