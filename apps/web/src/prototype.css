@@ -520,6 +520,15 @@
   overflow-wrap: anywhere;
 }
 
+.host-list__item:not(:lang(fr)) {
+  /* Anglais et espagnol : le badge de type est long, il passe sous l'intitulé plutôt que de l'écraser. */
+  flex-wrap: wrap;
+}
+
+.host-list__item:not(:lang(fr)) .host-list__prompt {
+  flex: 1 1 7rem;
+}
+
 .host-badge {
   display: inline-flex;
   align-items: center;
@@ -771,6 +780,11 @@
 .host-field textarea {
   min-height: 44px;
   padding: var(--space-2) var(--space-3);
+}
+
+.host-field select {
+  min-width: 0;
+  text-overflow: ellipsis;
 }
 
 .host-field-row {
@@ -1089,6 +1103,11 @@ fieldset.host-field > legend {
   text-align: center;
   color: var(--ink-dim);
   font-size: 13px;
+}
+
+/* Sélecteur de langue sous le formulaire des écrans publics. */
+.join-lang {
+  align-self: center;
 }
 
 /* ====================================================================== */

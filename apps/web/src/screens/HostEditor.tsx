@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { signOut, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
+import { t } from '../i18n/t'
+import { useT } from '../i18n/useT'
 import { useLaunchGame } from '../realtime/useLaunchGame'
 import {
   archiveQuiz,
@@ -41,13 +43,21 @@ import { SourcesPanel } from '../ui/SourceCredit.js'
  * situation.
  */
 
-const TYPE_LABEL: Record<QuestionType, string> = {
-  mcq: 'QCM',
-  truefalse: 'Vrai / Faux',
-  text: 'Réponse libre',
-  slider: 'Curseur',
-  wordcloud: 'Nuage de mots',
-  poll: 'Sondage',
+function typeLabel(type: QuestionType): string {
+  switch (type) {
+    case 'mcq':
+      return t('QCM')
+    case 'truefalse':
+      return t('Vrai / Faux')
+    case 'text':
+      return t('Réponse libre')
+    case 'slider':
+      return t('Curseur')
+    case 'wordcloud':
+      return t('Nuage de mots')
+    case 'poll':
+      return t('Sondage')
+  }
 }
 
 /** Decorative only (color + glyph reinforcing the shape cue on mcq tiles) —
@@ -263,7 +273,7 @@ function toCreateInput(q: Question): CreateQuestionInput {
  * badge (its placeholder content already passes validation) — documented
  * trade-off, not a bug. */
 function defaultCreateInput(type: QuestionType): CreateQuestionInput {
-  const prompt = 'Nouvelle question'
+  const prompt = t('Nouvelle question')
   const timeLimit = 20
   const readingTime = 6
   switch (type) {
@@ -275,17 +285,17 @@ function defaultCreateInput(type: QuestionType): CreateQuestionInput {
         readingTime,
         payload: {
           options: [
-            { label: 'Réponse 1', correct: true },
-            { label: 'Réponse 2', correct: false },
-            { label: 'Réponse 3', correct: false },
-            { label: 'Réponse 4', correct: false },
+            { label: t('Réponse {n}', { n: 1 }), correct: true },
+            { label: t('Réponse {n}', { n: 2 }), correct: false },
+            { label: t('Réponse {n}', { n: 3 }), correct: false },
+            { label: t('Réponse {n}', { n: 4 }), correct: false },
           ],
         },
       }
     case 'truefalse':
       return { type, prompt, timeLimit, readingTime, payload: { correct: true } }
     case 'text':
-      return { type, prompt, timeLimit, readingTime, payload: { answers: ['Réponse'], caseSensitive: false } }
+      return { type, prompt, timeLimit, readingTime, payload: { answers: [t('Réponse')], caseSensitive: false } }
     case 'slider':
       return { type, prompt, timeLimit, readingTime, payload: { min: 0, max: 100, correct: 50, step: 1 } }
     case 'wordcloud':
@@ -297,7 +307,7 @@ function defaultCreateInput(type: QuestionType): CreateQuestionInput {
         timeLimit,
         readingTime,
         payload: {
-          options: [{ label: 'Choix 1' }, { label: 'Choix 2' }, { label: 'Choix 3' }, { label: 'Choix 4' }],
+          options: [1, 2, 3, 4].map((n) => ({ label: t('Choix {n}', { n }) })),
           multiple: false,
         },
       }
@@ -321,30 +331,30 @@ function hasTypeSpecificData(q: Question): boolean {
 
 /** Returns a human reason string when the question is incomplete, else null. */
 function validationError(q: Question): string | null {
-  if (q.prompt.trim().length === 0) return 'Intitulé manquant.'
+  if (q.prompt.trim().length === 0) return t('Intitulé manquant.')
   // Number fields yield NaN when cleared; reject NaN and out-of-range values so
   // an invalid duration can never reach the timer, nor an invalid launch. The
   // server itself only requires a positive integer — [5, 120] is a client-side
   // product guardrail, kept from the prototype.
-  if (!Number.isInteger(q.timeLimit) || q.timeLimit < 5 || q.timeLimit > 120) return 'Durée entre 5 et 120 s.'
+  if (!Number.isInteger(q.timeLimit) || q.timeLimit < 5 || q.timeLimit > 120) return t('Durée entre 5 et 120 s.')
   // 0 = pas de temps de lecture (valeur légitime), donc seul le signe/l'intégrité est vérifié —
   // pas de borne haute produit comme pour `timeLimit`.
-  if (!Number.isInteger(q.readingTime) || q.readingTime < 0) return 'Le temps de lecture doit être un entier ≥ 0.'
+  if (!Number.isInteger(q.readingTime) || q.readingTime < 0) return t('Le temps de lecture doit être un entier ≥ 0.')
   switch (q.type) {
     case 'mcq': {
-      if (q.options.some((o) => o.label.trim().length === 0)) return 'Chaque réponse doit avoir un libellé.'
-      if (!q.options.some((o) => o.correct)) return 'Choisissez la bonne réponse.'
+      if (q.options.some((o) => o.label.trim().length === 0)) return t('Chaque réponse doit avoir un libellé.')
+      if (!q.options.some((o) => o.correct)) return t('Choisissez la bonne réponse.')
       return null
     }
     case 'poll':
-      return q.options.some((o) => o.label.trim().length === 0) ? 'Chaque choix doit avoir un libellé.' : null
+      return q.options.some((o) => o.label.trim().length === 0) ? t('Chaque choix doit avoir un libellé.') : null
     case 'text':
-      return q.acceptedAnswers.some((a) => a.trim().length > 0) ? null : 'Ajoutez au moins une réponse acceptée.'
+      return q.acceptedAnswers.some((a) => a.trim().length > 0) ? null : t('Ajoutez au moins une réponse acceptée.')
     case 'slider':
-      if (q.min >= q.max) return 'Le minimum doit être inférieur au maximum.'
+      if (q.min >= q.max) return t('Le minimum doit être inférieur au maximum.')
       if (q.correctValue < q.min || q.correctValue > q.max)
-        return 'La valeur correcte doit être comprise entre le minimum et le maximum.'
-      if (!(q.step > 0)) return 'Le pas doit être positif.'
+        return t('La valeur correcte doit être comprise entre le minimum et le maximum.')
+      if (!(q.step > 0)) return t('Le pas doit être positif.')
       return null
     case 'truefalse':
     case 'wordcloud':
@@ -359,35 +369,35 @@ function validationError(q: Question): string | null {
  */
 function fieldErrors(q: Question): Record<string, string> {
   const errs: Record<string, string> = {}
-  if (q.prompt.trim().length === 0) errs['q-prompt'] = 'Intitulé manquant.'
+  if (q.prompt.trim().length === 0) errs['q-prompt'] = t('Intitulé manquant.')
   if (!Number.isInteger(q.timeLimit) || q.timeLimit < 5 || q.timeLimit > 120)
-    errs['q-duration'] = 'Durée entre 5 et 120 s.'
+    errs['q-duration'] = t('Durée entre 5 et 120 s.')
   if (!Number.isInteger(q.readingTime) || q.readingTime < 0)
-    errs['q-reading-time'] = 'Le temps de lecture doit être un entier ≥ 0.'
+    errs['q-reading-time'] = t('Le temps de lecture doit être un entier ≥ 0.')
   switch (q.type) {
     case 'mcq':
       q.options.forEach((o, i) => {
-        if (o.label.trim().length === 0) errs[`mcq-label-${o.id}`] = `Réponse ${i + 1} : libellé manquant.`
+        if (o.label.trim().length === 0) errs[`mcq-label-${o.id}`] = t('Réponse {n} : libellé manquant.', { n: i + 1 })
       })
-      if (!q.options.some((o) => o.correct)) errs['mcq-correct'] = 'Choisissez la bonne réponse.'
+      if (!q.options.some((o) => o.correct)) errs['mcq-correct'] = t('Choisissez la bonne réponse.')
       break
     case 'poll':
       q.options.forEach((o) => {
-        if (o.label.trim().length === 0) errs[`poll-label-${o.id}`] = 'Chaque choix doit avoir un libellé.'
+        if (o.label.trim().length === 0) errs[`poll-label-${o.id}`] = t('Chaque choix doit avoir un libellé.')
       })
       break
     case 'text':
       if (!q.acceptedAnswers.some((a) => a.trim().length > 0))
-        errs['text-answer-0'] = 'Ajoutez au moins une réponse acceptée.'
+        errs['text-answer-0'] = t('Ajoutez au moins une réponse acceptée.')
       break
     case 'slider':
       if (q.min >= q.max) {
-        errs['q-slider-min'] = 'Le minimum doit être inférieur au maximum.'
-        errs['q-slider-max'] = 'Le minimum doit être inférieur au maximum.'
+        errs['q-slider-min'] = t('Le minimum doit être inférieur au maximum.')
+        errs['q-slider-max'] = t('Le minimum doit être inférieur au maximum.')
       }
       if (q.correctValue < q.min || q.correctValue > q.max)
-        errs['q-slider-correct'] = 'La valeur correcte doit être comprise entre le minimum et le maximum.'
-      if (!(q.step > 0)) errs['q-slider-step'] = 'Le pas doit être positif.'
+        errs['q-slider-correct'] = t('La valeur correcte doit être comprise entre le minimum et le maximum.')
+      if (!(q.step > 0)) errs['q-slider-step'] = t('Le pas doit être positif.')
       break
     case 'truefalse':
     case 'wordcloud':
@@ -397,7 +407,7 @@ function fieldErrors(q: Question): Record<string, string> {
 }
 
 function errorMessage(err: unknown): string {
-  return err instanceof ApiError ? err.message : 'Une erreur réseau est survenue. Réessayez.'
+  return err instanceof ApiError ? err.message : t('Une erreur réseau est survenue. Réessayez.')
 }
 
 /** A debounced-but-not-yet-sent question edit, tracked in `pendingSaveRef` so it can be flushed on
@@ -411,6 +421,8 @@ interface PendingSave {
 }
 
 export function HostEditor() {
+  // S'abonne à la langue : les messages de validation et les libellés construits hors rendu suivent.
+  const { t, tc, tp } = useT()
   const navigate = useNavigate()
   // Guaranteed present by the matching route (`/quizzes/:quizId`) — `useParams`
   // types it optional only because react-router can't know that statically.
@@ -601,11 +613,15 @@ export function HostEditor() {
   const invalidCount = questions.filter((q) => validationError(q) !== null).length
   const isArchived = quiz?.archivedAt != null
   const launchReason = isArchived
-    ? 'Ce quiz est archivé : restaurez-le pour lancer une partie.'
+    ? t('Ce quiz est archivé : restaurez-le pour lancer une partie.')
     : questions.length === 0
-      ? 'Ajoutez au moins une question pour lancer la partie.'
+      ? t('Ajoutez au moins une question pour lancer la partie.')
       : invalidCount > 0
-        ? `${invalidCount} question${invalidCount > 1 ? 's' : ''} à compléter avant de lancer la partie.`
+        ? tp(
+            invalidCount,
+            '{n} question à compléter avant de lancer la partie.',
+            '{n} questions à compléter avant de lancer la partie.',
+          )
         : null
   const canLaunch = launchReason === null
 
@@ -664,7 +680,9 @@ export function HostEditor() {
     } catch (err) {
       setLaunching(false)
       setLaunchError(
-        `Vos dernières modifications n'ont pas pu être enregistrées, la partie n'a pas été lancée. ${errorMessage(err)}`,
+        t("Vos dernières modifications n'ont pas pu être enregistrées, la partie n'a pas été lancée. {error}", {
+          error: errorMessage(err),
+        }),
       )
       return
     }
@@ -672,7 +690,7 @@ export function HostEditor() {
       await launch(quizId, title)
     } catch (err) {
       setLaunching(false)
-      setLaunchError(err instanceof Error ? err.message : 'Impossible de lancer la partie.')
+      setLaunchError(err instanceof Error ? err.message : t('Impossible de lancer la partie.'))
     }
   }
 
@@ -832,7 +850,10 @@ export function HostEditor() {
       // resync from the server so the host sees the duplicate for what it is (and can delete the
       // leftover original manually) instead of the local list quietly diverging from reality.
       setActionError(
-        `La nouvelle question a été créée, mais l'ancienne n'a pas pu être supprimée : ${errorMessage(err)}. Liste resynchronisée, vous pouvez supprimer le doublon manuellement.`,
+        t(
+          "La nouvelle question a été créée, mais l'ancienne n'a pas pu être supprimée : {error}. Liste resynchronisée, vous pouvez supprimer le doublon manuellement.",
+          { error: errorMessage(err) },
+        ),
       )
       loadQuestions(quizId)
       return
@@ -886,7 +907,7 @@ export function HostEditor() {
     try {
       const row = await restoreQuiz(quizId)
       setQuiz(row)
-      setAnnouncement('Quiz restauré, il peut de nouveau être lancé.')
+      setAnnouncement(t('Quiz restauré, il peut de nouveau être lancé.'))
     } catch (err) {
       if (isQuizLimitError(err)) setRestoreLimit(true)
       else setActionError(errorMessage(err))
@@ -930,7 +951,7 @@ export function HostEditor() {
       // succeeded even when it's rolled back a moment later in the catch
       // below (sighted users would see the list revert while SR users never
       // hear about it).
-      setAnnouncement(`Question déplacée en position ${target + 1}.`)
+      setAnnouncement(t('Question déplacée en position {n}.', { n: target + 1 }))
     } catch (err) {
       setActionError(errorMessage(err))
       setQuestions(previous)
@@ -938,7 +959,7 @@ export function HostEditor() {
       // (back at its original position) and correct the record for
       // screen-reader users, who otherwise never learn the move didn't stick.
       pendingFocus.current = { kind: 'item', id: moved.id }
-      setAnnouncement(`Déplacement annulé, la question est revenue en position ${index + 1}.`)
+      setAnnouncement(t('Déplacement annulé, la question est revenue en position {n}.', { n: index + 1 }))
     }
   }
 
@@ -951,7 +972,7 @@ export function HostEditor() {
       primeSaved(q)
       setQuestions((prev) => [...prev, q])
       setSelectedId(q.id)
-      setAnnouncement('Question ajoutée.')
+      setAnnouncement(t('Question ajoutée.'))
     } catch (err) {
       setActionError(errorMessage(err))
     }
@@ -980,7 +1001,7 @@ export function HostEditor() {
       return next
     })
     setLastDeleted({ question: removed, index })
-    setAnnouncement('Question supprimée. Utilisez « Annuler » pour la restaurer.')
+    setAnnouncement(t('Question supprimée. Utilisez « Annuler » pour la restaurer.'))
   }
 
   /** Deletion is permanent server-side (204, no soft-delete) — there is no
@@ -1006,7 +1027,7 @@ export function HostEditor() {
       setQuestions(next)
       setSelectedId(restored.id)
       setLastDeleted(null)
-      setAnnouncement('Question restaurée.')
+      setAnnouncement(t('Question restaurée.'))
       await reorderQuestions(
         quizId,
         next.map((x) => x.id),
@@ -1042,7 +1063,7 @@ export function HostEditor() {
   function handleTitleBlur() {
     const trimmed = title.trim()
     if (trimmed.length === 0) {
-      setTitleError('Le titre est requis.')
+      setTitleError(t('Le titre est requis.'))
       return
     }
     setTitleError(null)
@@ -1064,7 +1085,7 @@ export function HostEditor() {
     return (
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
-        <p role="status">Chargement du quiz…</p>
+        <p role="status">{t('Chargement du quiz…')}</p>
       </main>
     )
   }
@@ -1078,10 +1099,10 @@ export function HostEditor() {
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
         <p className="join-error" role="alert">
-          Quiz introuvable.
+          {t('Quiz introuvable.')}
         </p>
         <Link className="ab-button ab-button--primary" to="/">
-          ← Retour à l'accueil
+          {t("← Retour à l'accueil")}
         </Link>
       </main>
     )
@@ -1092,10 +1113,10 @@ export function HostEditor() {
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
         <p className="join-error" role="alert">
-          {quizError ?? 'Une erreur inattendue est survenue.'}
+          {quizError ?? t('Une erreur inattendue est survenue.')}
         </p>
         <Button variant="primary" type="button" onClick={() => quizId && loadQuiz(quizId)}>
-          Réessayer
+          {t('Réessayer')}
         </Button>
       </main>
     )
@@ -1110,7 +1131,7 @@ export function HostEditor() {
           brandline={
             <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
               <button type="button" className="host-link-button" onClick={handleBackToHome}>
-                ← Retour à l'accueil
+                {t("← Retour à l'accueil")}
               </button>{' '}
               ({title})
             </span>
@@ -1118,7 +1139,7 @@ export function HostEditor() {
           actions={
             <>
               <Button variant="ghost" type="button" disabled={signingOut} onClick={() => void handleSignOut()}>
-                {signingOut ? 'Déconnexion…' : 'Se déconnecter'}
+                {signingOut ? t('Déconnexion…') : t('Se déconnecter')}
               </Button>
               {/* La raison du blocage n'est affichée qu'une fois, dans le
                   bandeau #host-launch-reason sous le titre : la répéter ici
@@ -1135,7 +1156,7 @@ export function HostEditor() {
                   void launchGame()
                 }}
               >
-                {launching ? 'Lancement…' : 'Lancer la partie'}
+                {launching ? t('Lancement…') : t('Lancer la partie')}
               </Button>
             </>
           }
@@ -1143,15 +1164,15 @@ export function HostEditor() {
       </div>
 
       <main className="ab-shell__main" id="contenu-principal" tabIndex={-1} aria-hidden={modalOpen ? true : undefined}>
-        <h1 style={{ marginBottom: 'var(--space-4)' }}>Éditeur de quiz</h1>
+        <h1 style={{ marginBottom: 'var(--space-4)' }}>{t('Éditeur de quiz')}</h1>
 
         {/* Quiz archivé : l'id `host-launch-reason` porte ici la raison du blocage du lancement
             (référencée par l'`aria-describedby` du bouton « Lancer la partie »). */}
         {isArchived && (
           <div className="host-archived">
-            <p id="host-launch-reason">Ce quiz est archivé. Restaurez-le pour pouvoir lancer une partie.</p>
+            <p id="host-launch-reason">{t('Ce quiz est archivé. Restaurez-le pour pouvoir lancer une partie.')}</p>
             <Button variant="primary" type="button" disabled={restorePending} onClick={() => void handleRestore()}>
-              {restorePending ? 'Restauration…' : 'Restaurer'}
+              {restorePending ? t('Restauration…') : t('Restaurer')}
             </Button>
           </div>
         )}
@@ -1171,14 +1192,14 @@ export function HostEditor() {
 
         <div className="host-meta">
           <div className="host-field">
-            <label htmlFor="quiz-title">Titre du quiz</label>
+            <label htmlFor="quiz-title">{t('Titre du quiz')}</label>
             <input
               id="quiz-title"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               onBlur={handleTitleBlur}
-              placeholder="Ex. Culture générale, spécial vendredi"
+              placeholder={t('Ex. Culture générale, spécial vendredi')}
               aria-invalid={titleError ? true : undefined}
               aria-describedby={titleError ? 'quiz-title-error' : undefined}
             />
@@ -1189,14 +1210,14 @@ export function HostEditor() {
             )}
           </div>
           <div className="host-field">
-            <label htmlFor="quiz-description">Description</label>
+            <label htmlFor="quiz-description">{t('Description')}</label>
             <textarea
               id="quiz-description"
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               onBlur={handleDescriptionBlur}
-              placeholder="Une phrase pour situer le quiz."
+              placeholder={t('Une phrase pour situer le quiz.')}
             />
           </div>
         </div>
@@ -1211,28 +1232,28 @@ export function HostEditor() {
           // Visual affordance only — the deletion announcement is carried once
           // by the dedicated visually-hidden status region below.
           <div className="host-undo">
-            <span>Question supprimée.</span>
+            <span>{t('Question supprimée.')}</span>
             <Button variant="ghost" type="button" onClick={undoDelete}>
-              Annuler
+              {tc('Annuler', 'undo')}
             </Button>
           </div>
         )}
 
         {questionsLoading ? (
-          <p role="status">Chargement des questions…</p>
+          <p role="status">{t('Chargement des questions…')}</p>
         ) : questionsError && questions.length === 0 ? (
           <div className="ab-empty-state">
             <p role="alert">{questionsError}</p>
             <Button variant="primary" type="button" onClick={() => quizId && loadQuestions(quizId)}>
-              Réessayer
+              {t('Réessayer')}
             </Button>
           </div>
         ) : (
           <div className="host-layout">
-            <section aria-label="Liste des questions">
-              <h2 style={{ marginBottom: 'var(--space-3)' }}>Questions</h2>
+            <section aria-label={t('Liste des questions')}>
+              <h2 style={{ marginBottom: 'var(--space-3)' }}>{t('Questions')}</h2>
               {questions.length === 0 ? (
-                <p className="ab-empty-state">Aucune question pour l'instant, ajoutez-en une pour commencer.</p>
+                <p className="ab-empty-state">{t("Aucune question pour l'instant, ajoutez-en une pour commencer.")}</p>
               ) : (
                 <ul className="host-list">
                   {questions.map((q, index) => {
@@ -1250,29 +1271,29 @@ export function HostEditor() {
                           aria-current={q.id === selectedId ? 'true' : undefined}
                         >
                           <span className="host-list__index">{index + 1}</span>
-                          <span className="host-list__prompt">{q.prompt.trim() || 'Question sans intitulé'}</span>
+                          <span className="host-list__prompt">{q.prompt.trim() || t('Question sans intitulé')}</span>
                           {error && (
                             <span
                               className="host-badge host-badge--warn"
                               title={error}
-                              aria-label={`Incomplète : ${error}`}
+                              aria-label={t('Incomplète : {error}', { error })}
                             >
-                              Incomplète
+                              {t('Incomplète')}
                             </span>
                           )}
-                          <span className="host-badge">{TYPE_LABEL[q.type]}</span>
+                          <span className="host-badge">{typeLabel(q.type)}</span>
                         </button>
                         <div
                           className="host-list__reorder"
                           role="group"
-                          aria-label={`Réordonner la question ${index + 1}`}
+                          aria-label={t('Réordonner la question {n}', { n: index + 1 })}
                         >
                           <button
                             type="button"
                             className="host-list__reorder-btn"
                             onClick={() => void move(index, -1)}
                             disabled={index === 0}
-                            aria-label={`Monter la question ${index + 1}`}
+                            aria-label={t('Monter la question {n}', { n: index + 1 })}
                           >
                             ▲
                           </button>
@@ -1281,7 +1302,7 @@ export function HostEditor() {
                             className="host-list__reorder-btn"
                             onClick={() => void move(index, 1)}
                             disabled={index === questions.length - 1}
-                            aria-label={`Descendre la question ${index + 1}`}
+                            aria-label={t('Descendre la question {n}', { n: index + 1 })}
                           >
                             ▼
                           </button>
@@ -1293,7 +1314,7 @@ export function HostEditor() {
               )}
               <div style={{ marginTop: 'var(--space-3)' }}>
                 <Button variant="ghost" type="button" onClick={() => void addQuestion()} ref={addRef}>
-                  Ajouter une question
+                  {t('Ajouter une question')}
                 </Button>
               </div>
               <SourcesPanel
@@ -1302,28 +1323,30 @@ export function HostEditor() {
               />
             </section>
 
-            <section className="host-panel" aria-label="Formulaire de question">
+            <section className="host-panel" aria-label={t('Formulaire de question')}>
               {!selected ? (
-                <p className="ab-empty-state">Aucune question sélectionnée. Ajoutez une question pour commencer.</p>
+                <p className="ab-empty-state">
+                  {t('Aucune question sélectionnée. Ajoutez une question pour commencer.')}
+                </p>
               ) : (
                 <form className="host-form" onSubmit={(e) => e.preventDefault()}>
                   {(() => {
                     const error = validationError(selected)
                     return error ? (
                       <p className="host-field-error" role="status">
-                        À corriger : {error}
+                        {t('À corriger : {error}', { error })}
                       </p>
                     ) : null
                   })()}
 
                   <div className="host-field">
-                    <label htmlFor="q-prompt">Intitulé de la question</label>
+                    <label htmlFor="q-prompt">{t('Intitulé de la question')}</label>
                     <input
                       id="q-prompt"
                       type="text"
                       value={selected.prompt}
                       onChange={(e) => updateSelected({ prompt: e.target.value })}
-                      placeholder="Ex. Quelle planète est surnommée la « planète rouge » ?"
+                      placeholder={t('Ex. Quelle planète est surnommée la « planète rouge » ?')}
                       aria-invalid={fErrors['q-prompt'] ? true : undefined}
                       aria-describedby={fErrors['q-prompt'] ? 'q-prompt-error' : undefined}
                     />
@@ -1343,23 +1366,23 @@ export function HostEditor() {
 
                   <div className="host-field-row">
                     <div className="host-field">
-                      <label htmlFor="q-type">Type de question</label>
+                      <label htmlFor="q-type">{t('Type de question')}</label>
                       <select
                         id="q-type"
                         ref={typeSelectRef}
                         value={selected.type}
                         onChange={(e) => changeType(e.target.value as QuestionType)}
                       >
-                        <option value="mcq">QCM (4 réponses)</option>
-                        <option value="truefalse">Vrai / Faux</option>
-                        <option value="text">Réponse libre</option>
-                        <option value="slider">Curseur</option>
-                        <option value="wordcloud">Nuage de mots</option>
-                        <option value="poll">Sondage</option>
+                        <option value="mcq">{t('QCM (4 réponses)')}</option>
+                        <option value="truefalse">{t('Vrai / Faux')}</option>
+                        <option value="text">{t('Réponse libre')}</option>
+                        <option value="slider">{t('Curseur')}</option>
+                        <option value="wordcloud">{t('Nuage de mots')}</option>
+                        <option value="poll">{t('Sondage')}</option>
                       </select>
                     </div>
                     <div className="host-field">
-                      <label htmlFor="q-duration">Durée (secondes)</label>
+                      <label htmlFor="q-duration">{t('Durée (secondes)')}</label>
                       <input
                         id="q-duration"
                         type="number"
@@ -1377,7 +1400,7 @@ export function HostEditor() {
                       )}
                     </div>
                     <div className="host-field">
-                      <label htmlFor="q-reading-time">Temps de lecture (s)</label>
+                      <label htmlFor="q-reading-time">{t('Temps de lecture (s)')}</label>
                       <input
                         id="q-reading-time"
                         type="number"
@@ -1390,7 +1413,7 @@ export function HostEditor() {
                         }
                       />
                       <p className="host-field__help" id="q-reading-time-help">
-                        0 = pas de temps de lecture
+                        {t('0 = pas de temps de lecture')}
                       </p>
                       {fErrors['q-reading-time'] && (
                         <p className="host-inline-error" id="q-reading-time-error">
@@ -1402,7 +1425,7 @@ export function HostEditor() {
 
                   {(selected.type === 'mcq' || selected.type === 'poll') && (
                     <fieldset className="host-field">
-                      <legend>{selected.type === 'poll' ? 'Choix' : 'Réponses (cochez la bonne réponse)'}</legend>
+                      <legend>{selected.type === 'poll' ? t('Choix') : t('Réponses (cochez la bonne réponse)')}</legend>
                       {selected.type === 'mcq' && fErrors['mcq-correct'] && (
                         <p className="host-inline-error" id="mcq-correct-error">
                           {fErrors['mcq-correct']}
@@ -1426,23 +1449,36 @@ export function HostEditor() {
                                   }}
                                 />
                                 <span className="visually-hidden">
-                                  Marquer « {opt.label || `réponse ${index + 1}`} » comme correcte
+                                  {t('Marquer « {label} » comme correcte', {
+                                    label: opt.label || t('réponse {n}', { n: index + 1 }),
+                                  })}
                                 </span>
-                                <span aria-hidden="true">Correcte</span>
+                                <span aria-hidden="true">{t('Correcte')}</span>
                               </label>
                             )}
                             <span className="host-option-row__shape">
                               <AnswerShape shape={MCQ_SHAPES[index % MCQ_SHAPES.length]} size={20} />
                             </span>
                             <label htmlFor={`${selected.type}-label-${opt.id}`} className="visually-hidden">
-                              {selected.type === 'poll' ? 'Libellé choix' : 'Libellé réponse'} {index + 1},{' '}
-                              {SHAPE_NAME_FR[MCQ_SHAPES[index % MCQ_SHAPES.length]]}
+                              {selected.type === 'poll'
+                                ? t('Libellé choix {n}, {shape}', {
+                                    n: index + 1,
+                                    shape: SHAPE_NAME_FR[MCQ_SHAPES[index % MCQ_SHAPES.length]],
+                                  })
+                                : t('Libellé réponse {n}, {shape}', {
+                                    n: index + 1,
+                                    shape: SHAPE_NAME_FR[MCQ_SHAPES[index % MCQ_SHAPES.length]],
+                                  })}
                             </label>
                             <input
                               id={`${selected.type}-label-${opt.id}`}
                               type="text"
                               value={opt.label}
-                              placeholder={`${selected.type === 'poll' ? 'Choix' : 'Réponse'} ${index + 1}`}
+                              placeholder={
+                                selected.type === 'poll'
+                                  ? t('Choix {n}', { n: index + 1 })
+                                  : t('Réponse {n}', { n: index + 1 })
+                              }
                               onChange={(e) => {
                                 const options = selected.options.map((o, i) =>
                                   i === index ? { ...o, label: e.target.value } : o,
@@ -1460,7 +1496,7 @@ export function HostEditor() {
                               <button
                                 type="button"
                                 className="host-variant-remove"
-                                aria-label={`Retirer le choix ${index + 1}`}
+                                aria-label={t('Retirer le choix {n}', { n: index + 1 })}
                                 disabled={selected.options.length <= POLL_MIN_OPTIONS}
                                 onClick={() => {
                                   const options = selected.options.filter((_, i) => i !== index)
@@ -1494,7 +1530,7 @@ export function HostEditor() {
                               } as Partial<PollQuestion>)
                             }}
                           >
-                            Ajouter un choix
+                            {t('Ajouter un choix')}
                           </Button>
                         </div>
                       )}
@@ -1509,17 +1545,17 @@ export function HostEditor() {
                           checked={selected.multiple}
                           onChange={(e) => updateSelected({ multiple: e.target.checked } as Partial<PollQuestion>)}
                         />
-                        Plusieurs réponses possibles
+                        {t('Plusieurs réponses possibles')}
                       </label>
                       <p className="host-field__help">
-                        Les participants votent en direct. Pas de bonne réponse ni de points.
+                        {t('Les participants votent en direct. Pas de bonne réponse ni de points.')}
                       </p>
                     </div>
                   )}
 
                   {selected.type === 'truefalse' && (
                     <fieldset className="host-field">
-                      <legend>Bonne réponse</legend>
+                      <legend>{t('Bonne réponse')}</legend>
                       <div className="host-truefalse">
                         <label>
                           <input
@@ -1528,7 +1564,7 @@ export function HostEditor() {
                             checked={selected.correctAnswer === true}
                             onChange={() => updateSelected({ correctAnswer: true })}
                           />
-                          Vrai
+                          {t('Vrai')}
                         </label>
                         <label>
                           <input
@@ -1537,7 +1573,7 @@ export function HostEditor() {
                             checked={selected.correctAnswer === false}
                             onChange={() => updateSelected({ correctAnswer: false })}
                           />
-                          Faux
+                          {t('Faux')}
                         </label>
                       </div>
                     </fieldset>
@@ -1545,19 +1581,19 @@ export function HostEditor() {
 
                   {selected.type === 'text' && (
                     <fieldset className="host-field">
-                      <legend>Réponses acceptées</legend>
-                      <p className="host-field__help">Casse et accents ignorés.</p>
+                      <legend>{t('Réponses acceptées')}</legend>
+                      <p className="host-field__help">{t('Casse et accents ignorés.')}</p>
                       <div className="host-variants">
                         {selected.acceptedAnswers.map((answer, index) => (
                           <div className="host-variant-row" key={index}>
                             <label htmlFor={`text-answer-${index}`} className="visually-hidden">
-                              Variante {index + 1}
+                              {t('Variante {n}', { n: index + 1 })}
                             </label>
                             <input
                               id={`text-answer-${index}`}
                               type="text"
                               value={answer}
-                              placeholder="Ex. Reykjavik"
+                              placeholder={t('Ex. Reykjavik')}
                               onChange={(e) => {
                                 const acceptedAnswers = selected.acceptedAnswers.map((a, i) =>
                                   i === index ? e.target.value : a,
@@ -1572,7 +1608,7 @@ export function HostEditor() {
                             <button
                               type="button"
                               className="host-variant-remove"
-                              aria-label={`Supprimer la variante ${index + 1}`}
+                              aria-label={t('Supprimer la variante {n}', { n: index + 1 })}
                               disabled={selected.acceptedAnswers.length <= 1}
                               onClick={() => {
                                 const acceptedAnswers = selected.acceptedAnswers.filter((_, i) => i !== index)
@@ -1599,7 +1635,7 @@ export function HostEditor() {
                             } as Partial<TextQuestion>)
                           }
                         >
-                          Ajouter une variante
+                          {t('Ajouter une variante')}
                         </Button>
                       </div>
                     </fieldset>
@@ -1607,14 +1643,14 @@ export function HostEditor() {
 
                   {selected.type === 'wordcloud' && (
                     <p className="host-field__help">
-                      Les participants proposent leurs idées en direct. Pas de bonne réponse ni de points.
+                      {t('Les participants proposent leurs idées en direct. Pas de bonne réponse ni de points.')}
                     </p>
                   )}
 
                   {selected.type === 'slider' && (
                     <div className="host-field-row">
                       <div className="host-field">
-                        <label htmlFor="q-slider-min">Minimum</label>
+                        <label htmlFor="q-slider-min">{t('Minimum')}</label>
                         <input
                           id="q-slider-min"
                           type="number"
@@ -1630,7 +1666,7 @@ export function HostEditor() {
                         )}
                       </div>
                       <div className="host-field">
-                        <label htmlFor="q-slider-max">Maximum</label>
+                        <label htmlFor="q-slider-max">{t('Maximum')}</label>
                         <input
                           id="q-slider-max"
                           type="number"
@@ -1646,7 +1682,7 @@ export function HostEditor() {
                         )}
                       </div>
                       <div className="host-field">
-                        <label htmlFor="q-slider-step">Pas (step)</label>
+                        <label htmlFor="q-slider-step">{t('Pas (step)')}</label>
                         <input
                           id="q-slider-step"
                           type="number"
@@ -1663,7 +1699,7 @@ export function HostEditor() {
                         )}
                       </div>
                       <div className="host-field">
-                        <label htmlFor="q-slider-correct">Valeur correcte</label>
+                        <label htmlFor="q-slider-correct">{t('Valeur correcte')}</label>
                         <input
                           id="q-slider-correct"
                           type="number"
@@ -1683,7 +1719,7 @@ export function HostEditor() {
 
                   <div className="host-actions">
                     <Button variant="danger" type="button" onClick={() => void removeQuestion(selected.id)}>
-                      Supprimer la question
+                      {t('Supprimer la question')}
                     </Button>
                   </div>
                 </form>
@@ -1702,7 +1738,7 @@ export function HostEditor() {
                 setArchiveDialogOpen(true)
               }}
             >
-              Archiver ce quiz
+              {t('Archiver ce quiz')}
             </Button>
           </div>
         )}
@@ -1715,10 +1751,12 @@ export function HostEditor() {
       {archiveDialogOpen && (
         <ConfirmDialog
           id="host-archive-dialog"
-          title="Archiver ce quiz ?"
-          description="Il quittera « Mes quiz » et ne pourra plus être lancé. Ses parties passées et leurs rapports restent consultables, et vous pourrez le restaurer depuis la section « Archivés » de l'accueil."
-          confirmLabel="Archiver"
-          pendingLabel="Archivage…"
+          title={t('Archiver ce quiz ?')}
+          description={t(
+            "Il quittera « Mes quiz » et ne pourra plus être lancé. Ses parties passées et leurs rapports restent consultables, et vous pourrez le restaurer depuis la section « Archivés » de l'accueil.",
+          )}
+          confirmLabel={t('Archiver')}
+          pendingLabel={t('Archivage…')}
           pending={archivePending}
           error={archiveError}
           onConfirm={() => void confirmArchive()}
@@ -1755,16 +1793,18 @@ export function HostEditor() {
               }
             }}
           >
-            <h2 id="host-dialog-title">Changer le type de question ?</h2>
+            <h2 id="host-dialog-title">{t('Changer le type de question ?')}</h2>
             <p id="host-dialog-desc" style={{ color: 'var(--ink-dim)' }}>
-              Les réponses saisies pour cette question seront effacées. Le reste (intitulé, durée, image) est conservé.
+              {t(
+                'Les réponses saisies pour cette question seront effacées. Le reste (intitulé, durée, image) est conservé.',
+              )}
             </p>
             <div className="host-dialog__actions">
               <Button variant="ghost" type="button" onClick={cancelTypeChange}>
-                Annuler
+                {t('Annuler')}
               </Button>
               <Button variant="danger" type="button" onClick={confirmTypeChange} ref={dialogConfirmRef}>
-                Changer de type
+                {t('Changer de type')}
               </Button>
             </div>
           </div>

@@ -2,8 +2,10 @@ import type { FastifyInstance } from 'fastify'
 import { listSessions, getSessionReport, withTenantTx, type SessionReport, type Db } from '@splootlabs/db'
 import { pollPercent } from '@splootlabs/quiz'
 import type { AppConfig } from '@splootlabs/shared'
+import { pluralCategory, type Lang } from '@splootlabs/shared/i18n'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
 import { toCsv } from '../csv.js'
+import { csvLabel, langOf } from '../i18n/localize.js'
 
 type Deps = { systemDb: Db; appDb: Db; config: AppConfig }
 
@@ -36,22 +38,28 @@ function parseStatuses(raw: unknown): SessionStatus[] | undefined {
 
 /** Section CSV : une ligne titre, une ligne d'en-têtes, puis les lignes de données. Deux sections
  * (joueurs, questions) séparées par une ligne vide dans le même fichier — plus simple à consommer
- * dans un tableur qu'un ZIP à deux fichiers, et les deux blocs sont clairement titrés. */
-function buildReportCsv(report: SessionReport): string {
+ * dans un tableur qu'un ZIP à deux fichiers, et les deux blocs sont clairement titrés. Les libellés
+ * suivent la langue de la requête (`?lang=` posé par le lien du web, puis Accept-Language) ; le
+ * contenu saisi par l'hôte et les joueurs n'est jamais traduit. */
+function buildReportCsv(report: SessionReport, lang: Lang): string {
+  const l = csvLabel.bind(null, lang)
+  const participants = (count: number) =>
+    l(pluralCategory(lang, count) === 'one' ? '{count} participant' : '{count} participants', { count })
+  const words = (count: number) => l(pluralCategory(lang, count) === 'one' ? '{count} mot' : '{count} mots', { count })
   const rows: (string | number | null)[][] = []
 
-  rows.push([`Partie ${report.session.pin} — ${report.session.quizTitle}`])
+  rows.push([l('Partie {pin} — {title}', { pin: report.session.pin, title: report.session.quizTitle })])
   rows.push([])
 
-  rows.push(['Joueurs'])
-  rows.push(['Pseudo', 'Score total', 'Réponses correctes', 'Réponses données'])
+  rows.push([l('Joueurs')])
+  rows.push([l('Pseudo'), l('Score total'), l('Réponses correctes'), l('Réponses données')])
   for (const p of report.players) {
     rows.push([p.nickname, p.totalScore, p.correctCount, p.answerCount])
   }
   rows.push([])
 
-  rows.push(['Questions'])
-  rows.push(['# ', 'Énoncé', 'Réponses données', 'Réponses correctes', 'Temps moyen (ms)'])
+  rows.push([l('Questions')])
+  rows.push(['# ', l('Énoncé'), l('Réponses données'), l('Réponses correctes'), l('Temps moyen (ms)')])
   for (const q of report.questions) {
     if (q.wordcloud) {
       rows.push([q.orderIndex + 1, q.prompt, q.wordcloud.participants, null, null])
@@ -66,11 +74,14 @@ function buildReportCsv(report: SessionReport): string {
   for (const q of report.questions) {
     if (!q.wordcloud) continue
     rows.push([])
-    const { participants, totalWords } = q.wordcloud
     rows.push([
-      `Nuage de mots : ${q.prompt} (${participants} participant${participants > 1 ? 's' : ''}, ${totalWords} mot${totalWords > 1 ? 's' : ''})`,
+      l('Nuage de mots : {prompt} ({participants}, {words})', {
+        prompt: q.prompt,
+        participants: participants(q.wordcloud.participants),
+        words: words(q.wordcloud.totalWords),
+      }),
     ])
-    rows.push(['Mot', 'Occurrences'])
+    rows.push([l('Mot'), l('Occurrences')])
     for (const w of q.wordcloud.words) rows.push([w.text, w.count])
   }
 
@@ -79,8 +90,8 @@ function buildReportCsv(report: SessionReport): string {
     if (!q.poll) continue
     rows.push([])
     const { voters } = q.poll
-    rows.push([`Sondage : ${q.prompt} (${voters} participant${voters > 1 ? 's' : ''})`])
-    rows.push(['Choix', 'Votes', 'Pourcentage'])
+    rows.push([l('Sondage : {prompt} ({participants})', { prompt: q.prompt, participants: participants(voters) })])
+    rows.push([l('Choix'), l('Votes'), l('Pourcentage')])
     for (const o of q.poll.options) rows.push([o.label, o.votes, pollPercent(o.votes, voters)])
   }
 
@@ -130,7 +141,7 @@ export function registerReportRoutes(app: FastifyInstance, deps: Deps): void {
       reply
         .header('content-type', 'text/csv; charset=utf-8')
         .header('content-disposition', `attachment; filename="${filename}"`)
-      return buildReportCsv(report)
+      return buildReportCsv(report, langOf(request))
     },
   )
 }

@@ -8,6 +8,7 @@
  */
 
 import { normalizeText, sliderTolerance } from '@splootlabs/quiz'
+import { t } from '../i18n/t'
 import type { PollView } from './contracts'
 
 export type QuestionKind = 'mcq' | 'truefalse' | 'text' | 'slider' | 'wordcloud' | 'poll'
@@ -64,14 +65,14 @@ function truefalseRows(correct: TrueFalseCorrect, distribution: Record<string, n
   return [
     {
       key: 'true',
-      label: 'Vrai',
+      label: t('Vrai'),
       correct: correct.correct === true,
       shape: null,
       count: distribution[JSON.stringify({ value: true })] ?? 0,
     },
     {
       key: 'false',
-      label: 'Faux',
+      label: t('Faux'),
       correct: correct.correct === false,
       shape: null,
       count: distribution[JSON.stringify({ value: false })] ?? 0,
@@ -118,7 +119,7 @@ function textRows(correct: TextCorrect, distribution: Record<string, number>): D
     .sort((a, b) => b.count - a.count)
     .map((e) => ({
       key: e.value,
-      label: e.value.trim().length > 0 ? e.value : '(réponse vide)',
+      label: e.value.trim().length > 0 ? e.value : t('(réponse vide)'),
       correct: correct.answers.some(
         (candidate) => normalizeText(candidate, caseSensitive) === normalizeText(e.value, caseSensitive),
       ),

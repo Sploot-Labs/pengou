@@ -25,6 +25,11 @@
       "development": "./src/signup-source.ts",
       "types": "./dist/signup-source.d.ts",
       "default": "./dist/signup-source.js"
+    },
+    "./i18n": {
+      "development": "./src/i18n.ts",
+      "types": "./dist/i18n.d.ts",
+      "default": "./dist/i18n.js"
     }
   },
   "scripts": {

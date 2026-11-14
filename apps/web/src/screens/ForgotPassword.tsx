@@ -3,16 +3,15 @@ import { Link } from 'react-router-dom'
 import { requestPasswordReset } from '../api/auth'
 import { ApiError } from '../api/client'
 import { useAuthFeatures } from '../api/features'
+import { LanguageSelect } from '../i18n/LanguageSelect'
+import { useT } from '../i18n/useT'
 import { Button, Logo } from '../ui'
 import { EmailSuggestion } from '../ui/EmailSuggestion'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-// Texte identique que l'adresse existe ou non : on ne révèle rien sur les comptes.
-const NEUTRAL_MESSAGE =
-  'Si un compte existe pour cette adresse, un e-mail vient de partir. Pensez à vérifier les indésirables.'
-
 export function ForgotPassword() {
+  const { t } = useT()
   const { mailEnabled, loading: featuresLoading } = useAuthFeatures()
   const [email, setEmail] = useState('')
   // Valeur sur laquelle la suggestion est calculée : mise à jour à la perte de focus seulement.
@@ -42,7 +41,7 @@ export function ForgotPassword() {
     setSent(false)
 
     if (!EMAIL_RE.test(email.trim())) {
-      setEmailError('Adresse e-mail invalide.')
+      setEmailError(t('Adresse e-mail invalide.'))
       emailRef.current?.focus()
       return
     }
@@ -54,7 +53,7 @@ export function ForgotPassword() {
     } catch (err) {
       if (err instanceof ApiError && err.status === 429) {
         setPending(false)
-        setFormError('Trop de demandes, réessayez dans quelques minutes.')
+        setFormError(t('Trop de demandes, réessayez dans quelques minutes.'))
         return
       }
       // Toute autre erreur (adresse inconnue, panne réseau, 5xx) : même confirmation neutre.
@@ -70,14 +69,15 @@ export function ForgotPassword() {
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
         <div className="join-card">
-          <h1>Mot de passe oublié</h1>
+          <h1>{t('Mot de passe oublié')}</h1>
           <p className="join-subtitle">
-            La réinitialisation par e-mail n'est pas disponible sur cette instance. Contactez l'administrateur.
+            {t("La réinitialisation par e-mail n'est pas disponible sur cette instance. Contactez l'administrateur.")}
           </p>
           <p className="join-reassure">
-            <Link to="/login">Retour à la connexion</Link>
+            <Link to="/login">{t('Retour à la connexion')}</Link>
           </p>
         </div>
+        <LanguageSelect className="join-lang" />
       </main>
     )
   }
@@ -87,9 +87,9 @@ export function ForgotPassword() {
       <Logo />
 
       <form className="join-card" onSubmit={handleSubmit} noValidate>
-        <h1>Mot de passe oublié</h1>
+        <h1>{t('Mot de passe oublié')}</h1>
         <p className="join-subtitle">
-          Indiquez votre adresse e-mail : nous vous enverrons un lien pour choisir un nouveau mot de passe.
+          {t('Indiquez votre adresse e-mail : nous vous enverrons un lien pour choisir un nouveau mot de passe.')}
         </p>
 
         {formError && (
@@ -100,12 +100,15 @@ export function ForgotPassword() {
 
         {sent && (
           <p className="join-status" role="status" tabIndex={-1} ref={statusRef}>
-            {NEUTRAL_MESSAGE}
+            {/* Texte identique que l'adresse existe ou non : on ne révèle rien sur les comptes. */}
+            {t(
+              'Si un compte existe pour cette adresse, un e-mail vient de partir. Pensez à vérifier les indésirables.',
+            )}
           </p>
         )}
 
         <div className="join-field">
-          <label htmlFor="forgot-email">E-mail</label>
+          <label htmlFor="forgot-email">{t('E-mail')}</label>
           <input
             id="forgot-email"
             ref={emailRef}
@@ -135,13 +138,14 @@ export function ForgotPassword() {
         </div>
 
         <Button variant="primary" type="submit" disabled={pending}>
-          {pending ? 'Envoi…' : 'Envoyer le lien'}
+          {pending ? t('Envoi…') : t('Envoyer le lien')}
         </Button>
 
         <p className="join-reassure">
-          <Link to="/login">Retour à la connexion</Link>
+          <Link to="/login">{t('Retour à la connexion')}</Link>
         </p>
       </form>
+      <LanguageSelect className="join-lang" />
     </main>
   )
 }

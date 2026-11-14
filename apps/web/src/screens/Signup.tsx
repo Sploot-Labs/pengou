@@ -4,6 +4,8 @@ import { normalizeSignupSource } from '@splootlabs/shared/signup-source'
 import { signUp, useSession } from '../api/auth'
 import { ApiError } from '../api/client'
 import { fetchLegal, isLegalActive, type ActiveLegalInfo } from '../api/legal'
+import { LanguageSelect } from '../i18n/LanguageSelect'
+import { useT } from '../i18n/useT'
 import { safeNextPath, nextQuery } from '../nextPath'
 import { Button, Logo } from '../ui'
 import { EmailSuggestion } from '../ui/EmailSuggestion'
@@ -26,6 +28,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const MIN_PASSWORD_LENGTH = 8
 
 export function Signup() {
+  const { t } = useT()
   const navigate = useNavigate()
   const { refresh } = useSession()
   const [searchParams] = useSearchParams()
@@ -77,19 +80,22 @@ export function Signup() {
   function validate(): FieldErrors {
     const next: FieldErrors = {}
     if (name.trim().length === 0) {
-      next.name = 'Nom requis.'
+      next.name = t('Nom requis.')
     }
     if (!EMAIL_RE.test(email.trim())) {
-      next.email = 'Adresse e-mail invalide.'
+      next.email = t('Adresse e-mail invalide.')
     }
     if (password.length < MIN_PASSWORD_LENGTH) {
-      next.password = `Mot de passe trop court : ${MIN_PASSWORD_LENGTH} caractères minimum, ${password.length} saisis.`
+      next.password = t('Mot de passe trop court : {min} caractères minimum, {count} saisis.', {
+        min: MIN_PASSWORD_LENGTH,
+        count: password.length,
+      })
     }
     if (legal && !ageConfirmed) {
-      next.age = 'Confirmez que vous avez 15 ans ou plus.'
+      next.age = t('Confirmez que vous avez 15 ans ou plus.')
     }
     if (legal && !termsAccepted) {
-      next.terms = "Acceptez les conditions d'utilisation pour créer votre compte."
+      next.terms = t("Acceptez les conditions d'utilisation pour créer votre compte.")
     }
     return next
   }
@@ -138,7 +144,7 @@ export function Signup() {
     } catch (err) {
       setPending(false)
       setFormError(
-        err instanceof ApiError ? err.message : 'Inscription impossible. Vérifiez votre connexion et réessayez.',
+        err instanceof ApiError ? err.message : t('Inscription impossible. Vérifiez votre connexion et réessayez.'),
       )
     }
   }
@@ -148,8 +154,8 @@ export function Signup() {
       <Logo />
 
       <form className="join-card" onSubmit={handleSubmit} noValidate>
-        <h1>Inscription</h1>
-        <p className="join-subtitle">On vous fait de la place : quelques infos et votre compte est prêt.</p>
+        <h1>{t('Inscription')}</h1>
+        <p className="join-subtitle">{t('On vous fait de la place : quelques infos et votre compte est prêt.')}</p>
 
         {formError && (
           <p className="join-error" role="alert" tabIndex={-1} ref={formErrorRef}>
@@ -158,7 +164,7 @@ export function Signup() {
         )}
 
         <div className="join-field">
-          <label htmlFor="signup-name">Nom</label>
+          <label htmlFor="signup-name">{t('Nom')}</label>
           <input
             id="signup-name"
             ref={nameRef}
@@ -180,7 +186,7 @@ export function Signup() {
         </div>
 
         <div className="join-field">
-          <label htmlFor="signup-email">E-mail</label>
+          <label htmlFor="signup-email">{t('E-mail')}</label>
           <input
             id="signup-email"
             ref={emailRef}
@@ -210,7 +216,7 @@ export function Signup() {
         </div>
 
         <div className="join-field">
-          <label htmlFor="signup-password">Mot de passe</label>
+          <label htmlFor="signup-password">{t('Mot de passe')}</label>
           {/* Un seul champ, avec « Afficher » pour vérifier la saisie : remplace la confirmation. */}
           <div className="join-password">
             <input
@@ -230,14 +236,14 @@ export function Signup() {
               variant="ghost"
               type="button"
               aria-controls="signup-password"
-              aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+              aria-label={showPassword ? t('Masquer le mot de passe') : t('Afficher le mot de passe')}
               onClick={() => setShowPassword((shown) => !shown)}
             >
-              {showPassword ? 'Masquer' : 'Afficher'}
+              {showPassword ? t('Masquer') : t('Afficher')}
             </Button>
           </div>
           <p className="join-hint" id="signup-password-hint">
-            {MIN_PASSWORD_LENGTH} caractères minimum.
+            {t('{min} caractères minimum.', { min: MIN_PASSWORD_LENGTH })}
           </p>
           {errors.password && (
             <p className="join-error" id="signup-password-error" role="alert">
@@ -249,10 +255,10 @@ export function Signup() {
         {legalState.status === 'error' && (
           <>
             <p className="join-error" role="alert">
-              Impossible de charger les conditions d'utilisation. Vérifiez votre connexion et réessayez.
+              {t("Impossible de charger les conditions d'utilisation. Vérifiez votre connexion et réessayez.")}
             </p>
             <Button variant="ghost" type="button" onClick={() => void loadLegal()}>
-              Réessayer
+              {t('Réessayer')}
             </Button>
           </>
         )}
@@ -273,7 +279,7 @@ export function Signup() {
                   aria-invalid={errors.age ? true : undefined}
                   aria-describedby={errors.age ? 'signup-age-error' : undefined}
                 />
-                <label htmlFor="signup-age">J'ai 15 ans ou plus</label>
+                <label htmlFor="signup-age">{t("J'ai 15 ans ou plus")}</label>
               </div>
               {errors.age && (
                 <p className="join-error" id="signup-age-error" role="alert">
@@ -297,7 +303,8 @@ export function Signup() {
                   aria-describedby={errors.terms ? 'signup-terms-error' : undefined}
                 />
                 <label htmlFor="signup-terms">
-                  J'accepte les <ExternalLink href={legal.termsUrl}>conditions d'utilisation</ExternalLink>
+                  {t("J'accepte les")}{' '}
+                  <ExternalLink href={legal.termsUrl}>{t("conditions d'utilisation")}</ExternalLink>
                 </label>
               </div>
               {errors.terms && (
@@ -308,20 +315,21 @@ export function Signup() {
             </div>
 
             <p className="join-legal">
-              La <ExternalLink href={legal.privacyUrl}>politique de confidentialité</ExternalLink> explique comment vos
-              données sont traitées.
+              {t('La')} <ExternalLink href={legal.privacyUrl}>{t('politique de confidentialité')}</ExternalLink>{' '}
+              {t('explique comment vos données sont traitées.')}
             </p>
           </>
         )}
 
         <Button variant="primary" type="submit" disabled={pending || legalState.status !== 'ready'}>
-          {pending ? 'Inscription…' : "S'inscrire"}
+          {pending ? t('Inscription…') : t("S'inscrire")}
         </Button>
 
         <p className="join-reassure">
-          Déjà un compte ? <Link to={`/login${nextQuery(returnTo, from)}`}>Se connecter</Link>
+          {t('Déjà un compte ?')} <Link to={`/login${nextQuery(returnTo, from)}`}>{t('Se connecter')}</Link>
         </p>
       </form>
+      <LanguageSelect className="join-lang" />
     </main>
   )
 }

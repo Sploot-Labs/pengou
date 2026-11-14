@@ -15,7 +15,8 @@ import type { AppConfig } from '@splootlabs/shared'
 import { requireUser, resolveContextOr403 } from '../require-user.js'
 import { assertCanOwnAnotherQuiz } from '../quiz-quota.js'
 import { LIMITS, tooLong, isSafeMedia } from '../validation.js'
-import { EXAMPLE_QUIZ } from '../example-quiz.js'
+import { exampleQuiz } from '../example-quiz.js'
+import { langOf } from '../i18n/localize.js'
 
 type Deps = { systemDb: Db; appDb: Db; config: AppConfig; mailEnabled?: boolean }
 
@@ -67,7 +68,7 @@ export function registerQuizRoutes(app: FastifyInstance, deps: Deps): void {
     const refused = await assertCanOwnAnotherQuiz(systemDb, request.user, quotaOpts)
     if (refused) return reply.code(refused.status).send(refused.body)
     const quiz = await withTenantTx(appDb, context, (scope) =>
-      importQuiz(scope, { ownerId: request.user.id, source: null, ...EXAMPLE_QUIZ }),
+      importQuiz(scope, { ownerId: request.user.id, source: null, ...exampleQuiz(langOf(request)) }),
     )
     return reply.code(201).send(quiz)
   })

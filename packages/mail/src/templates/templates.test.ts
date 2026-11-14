@@ -1,3 +1,4 @@
+import type { Lang } from '@splootlabs/shared/i18n'
 import { describe, expect, it } from 'vitest'
 import {
   escapeHtml,
@@ -140,5 +141,56 @@ describe('trimBase', () => {
 describe('escapeHtml', () => {
   it('échappe les cinq caractères sensibles', () => {
     expect(escapeHtml(`<&>"'`)).toBe('&lt;&amp;&gt;&quot;&#39;')
+  })
+})
+
+describe('langues des gabarits', () => {
+  const makers = {
+    verify: (lang: Lang) => verifyEmailMail({ baseUrl, url, lang }),
+    reset: (lang: Lang) => resetPasswordMail({ baseUrl, url, lang }),
+    changed: (lang: Lang) => passwordChangedMail({ baseUrl, url, lang }),
+    invitation: (lang: Lang) => inv({ lang }),
+  }
+  const expected: Record<keyof typeof makers, Record<Lang, { subject: string; title: string }>> = {
+    verify: {
+      fr: { subject: 'Confirmez votre adresse e-mail Pengou', title: 'Confirmez votre adresse e-mail' },
+      en: { subject: 'Confirm your Pengou email address', title: 'Confirm your email address' },
+      es: { subject: 'Confirma tu dirección de correo en Pengou', title: 'Confirma tu dirección de correo' },
+    },
+    reset: {
+      fr: { subject: 'Réinitialiser votre mot de passe Pengou', title: 'Choisir un nouveau mot de passe' },
+      en: { subject: 'Reset your Pengou password', title: 'Choose a new password' },
+      es: { subject: 'Restablece tu contraseña de Pengou', title: 'Elige una contraseña nueva' },
+    },
+    changed: {
+      fr: { subject: 'Votre mot de passe Pengou a été modifié', title: 'Votre mot de passe a été modifié' },
+      en: { subject: 'Your Pengou password was changed', title: 'Your password was changed' },
+      es: { subject: 'Tu contraseña de Pengou ha cambiado', title: 'Tu contraseña ha cambiado' },
+    },
+    invitation: {
+      fr: { subject: 'Camille Martin vous invite sur Pengou', title: 'Une invitation vous attend !' },
+      en: { subject: 'Camille Martin invites you to Pengou', title: 'An invitation is waiting for you!' },
+      es: { subject: 'Camille Martin te invita a Pengou', title: '¡Te espera una invitación!' },
+    },
+  }
+  const cases = (Object.keys(makers) as (keyof typeof makers)[]).flatMap((nom) =>
+    (['fr', 'en', 'es'] as const).map((lang) => ({ nom, lang, ...expected[nom][lang] })),
+  )
+  it.each(cases)('$nom en $lang', ({ nom, lang, subject, title }) => {
+    const mail = makers[nom](lang)
+    expect(mail.subject).toBe(subject)
+    expect(mail.text).toContain(title)
+    expect(mail.html).toContain(title.replace(/'/g, '&#39;'))
+    expect(mail.html).toContain(`<html lang="${lang}">`)
+    for (const s of [mail.text, mail.html, mail.subject]) expect(s).not.toMatch(/[·—–]/)
+  })
+  it('sans langue, le français', () => {
+    expect(verifyEmailMail({ baseUrl, url }).html).toContain('<html lang="fr">')
+  })
+  it("date et rôle de l'invitation dans la langue", () => {
+    expect(inv({ lang: 'en' }).text).toContain('November 11, 2026')
+    expect(inv({ lang: 'es' }).text).toContain('11 de noviembre de 2026')
+    expect(inv({ lang: 'en' }).html).toContain('Role: member')
+    expect(inv({ lang: 'es', role: 'admin' }).html).toContain('Rol: administrador')
   })
 })

@@ -22,11 +22,22 @@ import { AppHeader } from '../ui/AppHeader'
 import { EmailSuggestion } from '../ui/EmailSuggestion'
 import { WorkspaceSwitcher } from '../ui/WorkspaceSwitcher'
 import { Button } from '../ui'
+import { formatDate, t } from '../i18n/t'
+import { useT } from '../i18n/useT'
 
-const ROLE_LABEL: Record<Role, string> = { owner: 'Propriétaire', admin: 'Administrateur', member: 'Membre' }
+function roleLabel(role: Role): string {
+  switch (role) {
+    case 'owner':
+      return t('Propriétaire')
+    case 'admin':
+      return t('Administrateur')
+    case 'member':
+      return t('Membre')
+  }
+}
 
 function errorMessage(err: unknown): string {
-  return err instanceof ApiError ? err.message : 'Une erreur réseau est survenue.'
+  return err instanceof ApiError ? err.message : t('Une erreur réseau est survenue.')
 }
 
 function invitationLink(token: string): string {
@@ -40,6 +51,7 @@ function invitationLink(token: string): string {
  * de masquer ce qui échouerait. `member` n'y voit que la création de workspace + le switcher.
  */
 export function WorkspaceSettings() {
+  useT()
   const { tenancyMode, active, refresh, setActive } = useWorkspaces()
 
   if (tenancyMode !== 'multi') {
@@ -49,15 +61,16 @@ export function WorkspaceSettings() {
         <main className="ab-shell__main" id="contenu-principal" tabIndex={-1}>
           <section className="home-hero">
             <div>
-              <h1>Workspaces</h1>
+              <h1>{t('Workspaces')}</h1>
             </div>
           </section>
           <p className="ab-empty-state">
-            La gestion des workspaces est disponible uniquement en mode multi (cloud). En self-host mono-espace, il n'y
-            a qu'un seul workspace.
+            {t(
+              "La gestion des workspaces est disponible uniquement en mode multi (cloud). En self-host mono-espace, il n'y a qu'un seul workspace.",
+            )}
           </p>
           <Link className="ab-button ab-button--ghost" to="/">
-            Retour à l'accueil
+            {t("Retour à l'accueil")}
           </Link>
         </main>
       </div>
@@ -72,15 +85,15 @@ export function WorkspaceSettings() {
       <main className="ab-shell__main" id="contenu-principal" tabIndex={-1}>
         <section className="home-hero">
           <div>
-            <h1>Gérer les workspaces</h1>
+            <h1>{t('Gérer les workspaces')}</h1>
             {active && (
               <p className="home-hero__sub">
-                Espace actif : <strong>{active.name}</strong>
+                {t('Espace actif :')} <strong>{active.name}</strong>
               </p>
             )}
           </div>
           <Link className="ab-button ab-button--ghost" to="/">
-            ← Accueil
+            {t('← Accueil')}
           </Link>
         </section>
 
@@ -96,7 +109,7 @@ export function WorkspaceSettings() {
         {active && canManage && <InvitationsSection tenantId={active.tenantId} />}
         {active && !canManage && (
           <p className="ab-empty-state" style={{ marginTop: 'var(--space-6)' }}>
-            Vous êtes membre de cet espace. La gestion des membres est réservée aux administrateurs.
+            {t('Vous êtes membre de cet espace. La gestion des membres est réservée aux administrateurs.')}
           </p>
         )}
       </main>
@@ -105,6 +118,7 @@ export function WorkspaceSettings() {
 }
 
 function CreateWorkspaceSection({ onCreated }: { onCreated: (tenantId: string) => void | Promise<void> }) {
+  useT()
   const [name, setName] = useState('')
   const [pending, setPending] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -113,7 +127,7 @@ function CreateWorkspaceSection({ onCreated }: { onCreated: (tenantId: string) =
     e.preventDefault()
     const trimmed = name.trim()
     if (!trimmed) {
-      setError('Le nom est requis.')
+      setError(t('Le nom est requis.'))
       return
     }
     setPending(true)
@@ -130,7 +144,7 @@ function CreateWorkspaceSection({ onCreated }: { onCreated: (tenantId: string) =
   return (
     <section aria-labelledby="ws-create-heading" style={{ marginBottom: 'var(--space-6)' }}>
       <div className="home-section__header">
-        <h2 id="ws-create-heading">Nouveau workspace</h2>
+        <h2 id="ws-create-heading">{t('Nouveau workspace')}</h2>
       </div>
       <form className="home-inline-form" onSubmit={(e) => void handleSubmit(e)} noValidate>
         {error && (
@@ -139,17 +153,17 @@ function CreateWorkspaceSection({ onCreated }: { onCreated: (tenantId: string) =
           </p>
         )}
         <div className="host-field">
-          <label htmlFor="ws-name">Nom du workspace</label>
+          <label htmlFor="ws-name">{t('Nom du workspace')}</label>
           <input
             id="ws-name"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Ex. Équipe Marketing"
+            placeholder={t('Ex. Équipe Marketing')}
           />
         </div>
         <Button variant="primary" type="submit" disabled={pending}>
-          {pending ? 'Création…' : 'Créer'}
+          {pending ? t('Création…') : t('Créer')}
         </Button>
       </form>
     </section>
@@ -157,6 +171,7 @@ function CreateWorkspaceSection({ onCreated }: { onCreated: (tenantId: string) =
 }
 
 function MembersSection({ tenantId, actorRole }: { tenantId: string; actorRole: Role }) {
+  useT()
   const { user } = useSession()
   const [members, setMembers] = useState<Member[]>([])
   const [loading, setLoading] = useState(true)
@@ -201,7 +216,7 @@ function MembersSection({ tenantId, actorRole }: { tenantId: string; actorRole: 
   return (
     <section aria-labelledby="ws-members-heading" style={{ marginBottom: 'var(--space-6)' }}>
       <div className="home-section__header">
-        <h2 id="ws-members-heading">Membres</h2>
+        <h2 id="ws-members-heading">{t('Membres')}</h2>
       </div>
       {rowError && (
         <p className="join-error" role="alert">
@@ -209,12 +224,12 @@ function MembersSection({ tenantId, actorRole }: { tenantId: string; actorRole: 
         </p>
       )}
       {loading ? (
-        <p role="status">Chargement des membres…</p>
+        <p role="status">{t('Chargement des membres…')}</p>
       ) : error ? (
         <div className="ab-empty-state">
           <p role="alert">{error}</p>
           <Button variant="primary" onClick={load}>
-            Réessayer
+            {t('Réessayer')}
           </Button>
         </div>
       ) : (
@@ -228,11 +243,11 @@ function MembersSection({ tenantId, actorRole }: { tenantId: string; actorRole: 
                 <span className="home-list__title">{m.name || m.email}</span>
                 <span className="home-list__meta">
                   {m.email}
-                  {isSelf ? ' (vous)' : ''}
+                  {isSelf ? t(' (vous)') : ''}
                 </span>
                 <span className="ab-member-row__controls">
                   <label className="visually-hidden" htmlFor={`role-${m.userId}`}>
-                    Rôle de {m.email}
+                    {t('Rôle de {email}', { email: m.email })}
                   </label>
                   <select
                     id={`role-${m.userId}`}
@@ -244,12 +259,12 @@ function MembersSection({ tenantId, actorRole }: { tenantId: string; actorRole: 
                     {/* Le rôle courant reste affiché même s'il n'est pas ré-assignable par l'acteur. */}
                     {Array.from(new Set([m.role, ...assignable])).map((r) => (
                       <option key={r} value={r}>
-                        {ROLE_LABEL[r]}
+                        {roleLabel(r)}
                       </option>
                     ))}
                   </select>
                   <Button variant="danger" type="button" disabled={!editable} onClick={() => void remove(m.userId)}>
-                    Retirer
+                    {t('Retirer')}
                   </Button>
                 </span>
               </li>
@@ -262,6 +277,7 @@ function MembersSection({ tenantId, actorRole }: { tenantId: string; actorRole: 
 }
 
 function InvitationsSection({ tenantId }: { tenantId: string }) {
+  useT()
   const [invitations, setInvitations] = useState<PendingInvitation[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -291,7 +307,7 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
     e.preventDefault()
     const trimmed = email.trim()
     if (!trimmed) {
-      setFormError('E-mail requis.')
+      setFormError(t('E-mail requis.'))
       return
     }
     setPending(true)
@@ -311,11 +327,13 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
   /** Sans envoi configuré l'écran reste celui d'avant : aucune note. */
   function sendNote({ invitation, emailSent, emailSkipped }: InvitationResult): string | null {
     if (!mailEnabled) return null
-    if (emailSent) return `Invitation envoyée à ${invitation.email}`
+    if (emailSent) return t('Invitation envoyée à {email}', { email: invitation.email })
     if (emailSkipped === 'inviter_unverified') {
-      return 'Confirmez votre adresse pour envoyer les invitations par e-mail. En attendant, copiez le lien ci-dessous.'
+      return t(
+        'Confirmez votre adresse pour envoyer les invitations par e-mail. En attendant, copiez le lien ci-dessous.',
+      )
     }
-    return "L'e-mail n'a pas pu partir, copiez le lien ci-dessous"
+    return t("L'e-mail n'a pas pu partir, copiez le lien ci-dessous")
   }
   async function handleRevoke(id: string) {
     try {
@@ -339,7 +357,7 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
   return (
     <section aria-labelledby="ws-invites-heading" style={{ marginBottom: 'var(--space-6)' }}>
       <div className="home-section__header">
-        <h2 id="ws-invites-heading">Invitations</h2>
+        <h2 id="ws-invites-heading">{t('Invitations')}</h2>
       </div>
 
       <form className="home-inline-form" onSubmit={(e) => void handleInvite(e)} noValidate>
@@ -349,14 +367,14 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
           </p>
         )}
         <div className="host-field">
-          <label htmlFor="invite-email">E-mail à inviter</label>
+          <label htmlFor="invite-email">{t('E-mail à inviter')}</label>
           <input
             id="invite-email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onBlur={() => setEmailChecked(email)}
-            placeholder="collegue@exemple.fr"
+            placeholder={t('collegue@exemple.fr')}
           />
           <EmailSuggestion
             value={emailChecked}
@@ -367,19 +385,19 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
           />
         </div>
         <div className="host-field">
-          <label htmlFor="invite-role">Rôle</label>
+          <label htmlFor="invite-role">{t('Rôle')}</label>
           <select
             id="invite-role"
             className="ab-workspace-switcher__select"
             value={role}
             onChange={(e) => setRole(e.target.value as Role)}
           >
-            <option value="member">Membre</option>
-            <option value="admin">Administrateur</option>
+            <option value="member">{t('Membre')}</option>
+            <option value="admin">{t('Administrateur')}</option>
           </select>
         </div>
         <Button variant="primary" type="submit" disabled={pending}>
-          {pending ? 'Envoi…' : 'Inviter'}
+          {pending ? t('Envoi…') : t('Inviter')}
         </Button>
       </form>
 
@@ -390,32 +408,35 @@ function InvitationsSection({ tenantId }: { tenantId: string }) {
       )}
       {lastLink && (
         <p className="ab-invite-link" role="status">
-          Lien d'invitation (à transmettre) : <code>{lastLink}</code>
+          {t("Lien d'invitation (à transmettre) :")} <code>{lastLink}</code>
         </p>
       )}
 
       {loading ? (
-        <p role="status">Chargement des invitations…</p>
+        <p role="status">{t('Chargement des invitations…')}</p>
       ) : error ? (
         <p role="alert" className="join-error">
           {error}
         </p>
       ) : invitations.length === 0 ? (
-        <p className="ab-empty-state">Aucune invitation en attente.</p>
+        <p className="ab-empty-state">{t('Aucune invitation en attente.')}</p>
       ) : (
         <ul className="home-list">
           {invitations.map((inv) => (
             <li key={inv.id} className="ab-member-row">
               <span className="home-list__title">{inv.email}</span>
               <span className="home-list__meta">
-                {ROLE_LABEL[inv.role]}, expire le {new Date(inv.expiresAt).toLocaleDateString('fr-FR')}
+                {t('{role}, expire le {date}', {
+                  role: roleLabel(inv.role),
+                  date: formatDate(new Date(inv.expiresAt)),
+                })}
               </span>
               <span className="ab-member-row__controls">
                 <Button variant="ghost" type="button" onClick={() => void handleResend(inv.id)}>
-                  Renvoyer
+                  {t('Renvoyer')}
                 </Button>
                 <Button variant="danger" type="button" onClick={() => void handleRevoke(inv.id)}>
-                  Révoquer
+                  {t('Révoquer')}
                 </Button>
               </span>
             </li>

@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { io, type Socket } from 'socket.io-client'
 import { getActiveTenantId } from '../api/activeTenant'
+import { getLang, subscribeLang } from '../i18n/lang'
+import { t } from '../i18n/t'
 import { AckError } from './ackError'
 
 /**
@@ -86,7 +88,7 @@ export function useGameSocket(): UseGameSocket {
       autoConnect: false,
       auth: (cb) => {
         const tenantId = getActiveTenantId()
-        cb(tenantId ? { tenantId } : {})
+        cb(tenantId ? { tenantId, lang: getLang() } : { lang: getLang() })
       },
     })
   }
@@ -112,6 +114,17 @@ export function useGameSocket(): UseGameSocket {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- une socket par montage : `socket` est stable pour toute la durée de vie du composant.
   }, [])
 
+  // Changement de langue dans l'interface : le serveur traduit les acquittements suivants dans la
+  // nouvelle langue, sans reconnexion (la partie en cours continue). Socket coupée : la prochaine
+  // poignée de main relit `getLang()` dans `auth`, rien à envoyer.
+  useEffect(
+    () =>
+      subscribeLang(() => {
+        if (socket.connected) socket.emit('lang:set', getLang())
+      }),
+    [socket],
+  )
+
   const emitAck = useCallback(
     <T>(event: string, payload?: unknown): Promise<T> =>
       new Promise<T>((resolve, reject) => {
@@ -119,7 +132,7 @@ export function useGameSocket(): UseGameSocket {
         const timer = window.setTimeout(() => {
           if (settled) return
           settled = true
-          reject(new Error(`Le serveur n'a pas répondu à « ${event} » à temps.`))
+          reject(new Error(t("Le serveur n'a pas répondu à « {event} » à temps.", { event })))
         }, ACK_TIMEOUT_MS)
 
         socket.emit(event, payload, (ack: unknown) => {

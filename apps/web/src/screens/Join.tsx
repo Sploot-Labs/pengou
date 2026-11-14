@@ -1,16 +1,24 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import type { WebKey } from '../i18n/catalog'
+import { LanguageSelect } from '../i18n/LanguageSelect'
+import { useT } from '../i18n/useT'
+import { hasAckCode } from '../realtime/ackError'
+import { SESSION_FULL_ACK_CODE } from '../realtime/contracts'
 import { savePlayerSession } from '../realtime/playerSession'
 import { useGameSocket } from '../realtime/useGameSocket'
 import { Logo, Mascot } from '../ui'
 
-// Message exact renvoyé par le serveur quand la session a atteint son plafond.
+// Texte local affiché quand le serveur refuse le joueur (code `SESSION_FULL`) : la partie est pleine.
 const PARTIE_COMPLETE = 'La partie est complète.'
 
+/** Erreur locale (clé traduite à l'affichage) ou message du serveur (déjà dans sa langue). */
+type ErrorText = { key: WebKey } | { text: string }
+
 interface FieldErrors {
-  pin?: string
-  pseudo?: string
-  form?: string
+  pin?: ErrorText
+  pseudo?: ErrorText
+  form?: ErrorText
 }
 
 interface JoinAck {
@@ -22,6 +30,7 @@ type Status = 'idle' | 'pending'
 
 export function Join() {
   const navigate = useNavigate()
+  const { t, tc } = useT()
   const { emitAck } = useGameSocket()
   const [searchParams] = useSearchParams()
 
@@ -47,14 +56,18 @@ export function Join() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  function showError(error: ErrorText): string {
+    return 'key' in error ? t(error.key) : error.text
+  }
+
   function validate(): FieldErrors {
     const next: FieldErrors = {}
     const digitsOnly = pin.replace(/\D/g, '')
     if (digitsOnly.length !== 6) {
-      next.pin = 'Le PIN doit comporter exactement 6 chiffres.'
+      next.pin = { key: 'Le PIN doit comporter exactement 6 chiffres.' }
     }
     if (pseudo.trim().length === 0) {
-      next.pseudo = 'Pseudo requis. Choisis un pseudo pour rejoindre.'
+      next.pseudo = { key: 'Pseudo requis. Choisis un pseudo pour rejoindre.' }
     }
     return next
   }
@@ -88,8 +101,8 @@ export function Join() {
       setStatus('idle')
       // Partie pleine : le PIN est correct, l'erreur concerne le formulaire et
       // non le champ. On l'annonce et on y place le focus sans toucher au PIN.
-      if (err instanceof Error && err.message === PARTIE_COMPLETE) {
-        setErrors({ form: PARTIE_COMPLETE })
+      if (hasAckCode(err, SESSION_FULL_ACK_CODE)) {
+        setErrors({ form: { key: PARTIE_COMPLETE } })
         // Le paragraphe n'existe qu'après le rendu : focus au prochain tick.
         setTimeout(() => formErrorRef.current?.focus(), 0)
         return
@@ -98,7 +111,7 @@ export function Join() {
       // existing textual error UI, on the PIN field since an unknown PIN is
       // by far the most common cause.
       setErrors({
-        pin: err instanceof Error ? err.message : 'Impossible de rejoindre la partie.',
+        pin: err instanceof Error ? { text: err.message } : { key: 'Impossible de rejoindre la partie.' },
       })
       pinRef.current?.focus()
     }
@@ -118,12 +131,12 @@ export function Join() {
         <Logo />
         {/* No PIN shown here: the player reads it off the big screen. Revealing
             it on the joining device conflicts with the projector's role. */}
-        <p className="join-tagline">Pas de compte. Juste un code et un pseudo.</p>
+        <p className="join-tagline">{t('Pas de compte. Juste un code et un pseudo.')}</p>
       </div>
 
       <form className="join-form" onSubmit={handleSubmit} noValidate>
         <div className="join-field">
-          <label htmlFor="join-pin">Code banquise</label>
+          <label htmlFor="join-pin">{t('Code banquise')}</label>
           <div className="join-pin">
             {pinCells.map((digit, index) => (
               <span className="join-pin__cell" key={index} aria-hidden="true">
@@ -150,17 +163,17 @@ export function Join() {
             />
           </div>
           <span className="join-hint" id="join-pin-aide">
-            Les 6 chiffres affichés sur le grand écran.
+            {t('Les 6 chiffres affichés sur le grand écran.')}
           </span>
           {errors.pin && (
             <p className="join-error" id="join-pin-error" role="alert">
-              {errors.pin}
+              {showError(errors.pin)}
             </p>
           )}
         </div>
 
         <div className="join-field">
-          <label htmlFor="join-pseudo">Ton pseudo</label>
+          <label htmlFor="join-pseudo">{t('Ton pseudo')}</label>
           <input
             id="join-pseudo"
             className="join-pseudo"
@@ -168,7 +181,7 @@ export function Join() {
             type="text"
             autoComplete="off"
             maxLength={20}
-            placeholder="ex. Plume"
+            placeholder={t('ex. Plume')}
             value={pseudo}
             onChange={(e) => {
               setPseudo(e.target.value)
@@ -179,7 +192,7 @@ export function Join() {
           />
           {errors.pseudo && (
             <p className="join-error" id="join-pseudo-error" role="alert">
-              {errors.pseudo}
+              {showError(errors.pseudo)}
             </p>
           )}
         </div>
@@ -188,15 +201,16 @@ export function Join() {
 
         {errors.form && (
           <p className="join-error" role="alert" tabIndex={-1} ref={formErrorRef}>
-            {errors.form}
+            {showError(errors.form)}
           </p>
         )}
 
         <button type="submit" className="player-cta" disabled={status === 'pending'}>
-          {status === 'pending' ? 'Connexion…' : 'Rejoindre la colonie'}
+          {status === 'pending' ? tc('Connexion…', 'partie') : t('Rejoindre la colonie')}
         </button>
-        <p className="join-reassure">Ton pseudo est visible par toute la salle.</p>
+        <p className="join-reassure">{t('Ton pseudo est visible par toute la salle.')}</p>
       </form>
+      <LanguageSelect className="join-lang" />
     </main>
   )
 }

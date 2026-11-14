@@ -2,6 +2,8 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { resetPassword } from '../api/auth'
 import { ApiError } from '../api/client'
+import { LanguageSelect } from '../i18n/LanguageSelect'
+import { useT } from '../i18n/useT'
 import { Button, Logo } from '../ui'
 
 // Même longueur minimale que Signup.tsx.
@@ -13,6 +15,7 @@ interface FieldErrors {
 }
 
 export function ResetPassword() {
+  const { t } = useT()
   const navigate = useNavigate()
   const [params] = useSearchParams()
   const token = params.get('token')
@@ -39,14 +42,15 @@ export function ResetPassword() {
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
         <div className="join-card">
-          <h1>Nouveau mot de passe</h1>
+          <h1>{t('Nouveau mot de passe')}</h1>
           <p className="join-error" role="alert">
-            Ce lien a expiré ou a déjà servi.
+            {t('Ce lien a expiré ou a déjà servi.')}
           </p>
           <p className="join-reassure">
-            <Link to="/forgot-password">Faire une nouvelle demande</Link>
+            <Link to="/forgot-password">{t('Faire une nouvelle demande')}</Link>
           </p>
         </div>
+        <LanguageSelect className="join-lang" />
       </main>
     )
   }
@@ -57,10 +61,10 @@ export function ResetPassword() {
 
     const next: FieldErrors = {}
     if (password.length < MIN_PASSWORD_LENGTH) {
-      next.password = `Au moins ${MIN_PASSWORD_LENGTH} caractères.`
+      next.password = t('Au moins {min} caractères.', { min: MIN_PASSWORD_LENGTH })
     }
     if (confirm !== password) {
-      next.confirm = 'Les mots de passe ne correspondent pas.'
+      next.confirm = t('Les mots de passe ne correspondent pas.')
     }
     setErrors(next)
     if (next.password) {
@@ -83,7 +87,7 @@ export function ResetPassword() {
         return
       }
       setFormError(
-        err instanceof ApiError ? err.message : 'Enregistrement impossible. Vérifiez votre connexion et réessayez.',
+        err instanceof ApiError ? err.message : t('Enregistrement impossible. Vérifiez votre connexion et réessayez.'),
       )
     }
   }
@@ -93,8 +97,10 @@ export function ResetPassword() {
       <Logo />
 
       <form className="join-card" onSubmit={handleSubmit} noValidate>
-        <h1>Nouveau mot de passe</h1>
-        <p className="join-subtitle">Choisissez un mot de passe d'au moins {MIN_PASSWORD_LENGTH} caractères.</p>
+        <h1>{t('Nouveau mot de passe')}</h1>
+        <p className="join-subtitle">
+          {t("Choisissez un mot de passe d'au moins {min} caractères.", { min: MIN_PASSWORD_LENGTH })}
+        </p>
 
         {formError && (
           <p className="join-error" role="alert" tabIndex={-1} ref={formErrorRef}>
@@ -103,7 +109,7 @@ export function ResetPassword() {
         )}
 
         <div className="join-field">
-          <label htmlFor="reset-password">Nouveau mot de passe</label>
+          <label htmlFor="reset-password">{t('Nouveau mot de passe')}</label>
           <input
             id="reset-password"
             ref={passwordRef}
@@ -125,7 +131,7 @@ export function ResetPassword() {
         </div>
 
         <div className="join-field">
-          <label htmlFor="reset-confirm">Confirmer le mot de passe</label>
+          <label htmlFor="reset-confirm">{t('Confirmer le mot de passe')}</label>
           <input
             id="reset-confirm"
             ref={confirmRef}
@@ -147,9 +153,10 @@ export function ResetPassword() {
         </div>
 
         <Button variant="primary" type="submit" disabled={pending}>
-          {pending ? 'Enregistrement…' : 'Enregistrer'}
+          {pending ? t('Enregistrement…') : t('Enregistrer')}
         </Button>
       </form>
+      <LanguageSelect className="join-lang" />
     </main>
   )
 }

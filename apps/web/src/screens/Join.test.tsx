@@ -2,6 +2,8 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { setLang } from '../i18n/lang'
+import { AckError } from '../realtime/ackError'
 import { Join } from './Join'
 
 const mockEmitAck = vi.fn()
@@ -35,12 +37,33 @@ describe('Join : erreurs renvoyées par le serveur', () => {
   })
 
   it('partie pleine : affiche « La partie est complète. » sans invalider le PIN', async () => {
-    mockEmitAck.mockRejectedValueOnce(new Error('La partie est complète.'))
+    mockEmitAck.mockRejectedValueOnce(new AckError('La partie est complète.', 'SESSION_FULL'))
     submitForm()
     const alert = await screen.findByRole('alert')
     expect(alert).toHaveTextContent('La partie est complète.')
     expect(screen.getByLabelText('Code banquise')).not.toHaveAttribute('aria-invalid')
     expect(alert).toHaveFocus()
+  })
+
+  it('partie pleine en anglais : reconnue par son code, annoncée au formulaire', async () => {
+    setLang('en')
+    try {
+      mockEmitAck.mockRejectedValueOnce(new AckError('The game is full.', 'SESSION_FULL'))
+      render(
+        <MemoryRouter initialEntries={['/join']}>
+          <Join />
+        </MemoryRouter>,
+      )
+      fireEvent.change(screen.getByLabelText('Ice floe code'), { target: { value: '123456' } })
+      fireEvent.change(screen.getByLabelText('Your nickname'), { target: { value: 'Plume' } })
+      fireEvent.click(screen.getByRole('button', { name: 'Join the colony' }))
+      const alert = await screen.findByRole('alert')
+      expect(alert).toHaveTextContent('The game is full.')
+      expect(screen.getByLabelText('Ice floe code')).not.toHaveAttribute('aria-invalid')
+      expect(alert).toHaveFocus()
+    } finally {
+      setLang('fr')
+    }
   })
 
   it('PIN invalide : le message reste attaché au champ PIN', async () => {

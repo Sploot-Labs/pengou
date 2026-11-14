@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useSession } from './api/auth'
 import { useWorkspaces } from './api/workspace-context'
+import { useT } from './i18n/useT'
 import { TermsRevalidation } from './screens/TermsRevalidation'
 import { Button, Logo } from './ui'
 
@@ -38,12 +39,13 @@ export function RequireAuth({
   allowGuest?: boolean
 }) {
   const { user, loading, error, refresh, termsAcceptanceRequired } = useSession()
+  const { t } = useT()
 
   if (loading) {
     return (
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
-        <p role="status">Vérification de la session…</p>
+        <p role="status">{t('Vérification de la session…')}</p>
       </main>
     )
   }
@@ -53,11 +55,12 @@ export function RequireAuth({
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
         <p className="join-error" role="alert">
-          Impossible de vérifier votre session (problème réseau ou serveur temporairement indisponible). Vous n'avez pas
-          été déconnecté, réessayez.
+          {t(
+            "Impossible de vérifier votre session (problème réseau ou serveur temporairement indisponible). Vous n'avez pas été déconnecté, réessayez.",
+          )}
         </p>
         <Button variant="primary" type="button" onClick={() => void refresh()}>
-          Réessayer
+          {t('Réessayer')}
         </Button>
       </main>
     )
@@ -88,11 +91,12 @@ export function RequireAuth({
  */
 function WorkspaceGate({ children }: { children: ReactNode }) {
   const { ready } = useWorkspaces()
+  const { t } = useT()
   if (!ready) {
     return (
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
-        <p role="status">Chargement de votre espace…</p>
+        <p role="status">{t('Chargement de votre espace…')}</p>
       </main>
     )
   }

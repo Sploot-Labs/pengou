@@ -287,7 +287,7 @@ describe('Library', () => {
     await waitFor(() =>
       expect(screen.getByText('Seulement 2 questions disponibles avec ces filtres.')).toBeInTheDocument(),
     )
-    expect(lib.drawLibraryQuestions).toHaveBeenCalledWith({}, 5, ['b'])
+    expect(lib.drawLibraryQuestions).toHaveBeenCalledWith({ language: 'fr' }, 5, ['b'])
     expect(screen.getByRole('heading', { name: 'Ma sélection (2/100)' })).toBeInTheDocument()
   })
 

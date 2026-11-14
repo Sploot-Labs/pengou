@@ -1,3 +1,4 @@
+import { formatDate } from '../i18n/t'
 import { apiGet, apiPost } from './client'
 
 /** Configuration des CGU de l'instance (`GET /api/legal`). `termsVersion` à null : aucune
@@ -29,11 +30,9 @@ export function acceptTerms(version: string): Promise<{ termsVersion: string; te
   return apiPost('/api/legal/accept', { version })
 }
 
-/** « 2026-10-31 » → « 31 octobre 2026 » (date calendaire, sans décalage de fuseau). */
+/** « 2026-10-31 » → « 31 octobre 2026 », « October 31, 2026 » ou « 31 de octubre de 2026 » (date calendaire, sans décalage de fuseau). */
 export function formatTermsDate(version: string): string {
   const date = new Date(`${version}T00:00:00Z`)
   if (Number.isNaN(date.getTime())) return version
-  return new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(
-    date,
-  )
+  return formatDate(date, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
 }

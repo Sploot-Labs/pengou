@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { sendVerificationEmail } from '../api/auth'
 import { ApiError } from '../api/client'
+import { t } from '../i18n/t'
 
 export type ResendState = 'idle' | 'sending' | 'sent' | 'error'
 
@@ -17,7 +18,7 @@ export function useResendVerification(email?: string) {
       setState('sent')
     } catch (err) {
       setState('error')
-      setError(err instanceof ApiError ? err.message : "L'e-mail n'a pas pu partir. Réessayez.")
+      setError(err instanceof ApiError ? err.message : t("L'e-mail n'a pas pu partir. Réessayez."))
     }
   }
 

@@ -10,6 +10,9 @@ import {
   type SessionStatus,
 } from '../api/sessions'
 import { Button, Logo, PinDisplay } from '../ui'
+import { getLang } from '../i18n/lang'
+import { formatDate as formatLocalDate, formatNumber, t, tp } from '../i18n/t'
+import { useT } from '../i18n/useT'
 
 /**
  * SessionReport — post-game report screen (Plan 07 Task 5), mounted at
@@ -23,20 +26,26 @@ import { Button, Logo, PinDisplay } from '../ui'
  *    session cookie rides along automatically — no `fetch`/blob juggling.
  */
 
-const STATUS_LABEL: Record<SessionStatus, string> = {
-  lobby: 'En attente',
-  active: 'En cours',
-  ended: 'Terminée',
-  abandoned: 'Abandonnée',
+function statusLabel(status: SessionStatus): string {
+  switch (status) {
+    case 'lobby':
+      return t('En attente')
+    case 'active':
+      return t('En cours')
+    case 'ended':
+      return t('Terminée')
+    case 'abandoned':
+      return t('Abandonnée')
+  }
 }
 
 function errorMessage(err: unknown): string {
-  return err instanceof ApiError ? err.message : 'Une erreur réseau est survenue. Réessayez.'
+  return err instanceof ApiError ? err.message : t('Une erreur réseau est survenue. Réessayez.')
 }
 
 function formatDate(iso: string | null): string {
-  if (!iso) return 'Pas encore démarrée'
-  return new Date(iso).toLocaleString('fr-FR', { dateStyle: 'medium', timeStyle: 'short' })
+  if (!iso) return t('Pas encore démarrée')
+  return formatLocalDate(new Date(iso), { dateStyle: 'medium', timeStyle: 'short' })
 }
 
 /** Only rendered when BOTH timestamps are present — never a fabricated
@@ -46,7 +55,7 @@ function formatDuration(startedAt: string, endedAt: string): string {
   const totalSeconds = Math.max(0, Math.round(ms / 1000))
   const minutes = Math.floor(totalSeconds / 60)
   const seconds = totalSeconds % 60
-  return minutes > 0 ? `${minutes} min ${seconds} s` : `${seconds} s`
+  return minutes > 0 ? t('{min} min {s} s', { min: minutes, s: seconds }) : t('{s} s', { s: seconds })
 }
 
 /** `avgTimeMs` is `null` when a question got zero answers — an average over
@@ -54,7 +63,13 @@ function formatDuration(startedAt: string, endedAt: string): string {
  * requires rather than inventing a `0 s`. */
 function formatAvgTime(avgTimeMs: number | null): string {
   if (avgTimeMs === null) return '-'
-  return `${(avgTimeMs / 1000).toFixed(1)} s`
+  const seconds = avgTimeMs / 1000
+  // Le français garde le point de toFixed (sortie historique) ; les autres langues suivent leur locale.
+  const text =
+    getLang() === 'fr'
+      ? seconds.toFixed(1)
+      : formatNumber(seconds, { minimumFractionDigits: 1, maximumFractionDigits: 1 })
+  return t('{s} s', { s: text })
 }
 
 /** `null` (no answers yet) is distinct from `0` (answered, all wrong) — both
@@ -71,26 +86,38 @@ function wordcloudSummary(cloud: {
   totalWords: number
   words: { text: string; count: number }[]
 }): string {
-  const head = `Nuage de mots, ${cloud.participants} participant${cloud.participants > 1 ? 's' : ''}, ${cloud.totalWords} mot${cloud.totalWords > 1 ? 's' : ''}`
-  if (cloud.words.length === 0) return `${head}. Aucune idée proposée`
-  return `${head} : ${cloud.words
-    .slice(0, 4)
-    .map((w) => `${w.text} (${w.count})`)
-    .join(', ')}`
+  const head = t('Nuage de mots, {participants}, {words}', {
+    participants: tp(cloud.participants, '{n} participant', '{n} participants'),
+    words: tp(cloud.totalWords, '{n} mot', '{n} mots'),
+  })
+  if (cloud.words.length === 0) return t('{head}. Aucune idée proposée', { head })
+  return t('{head} : {words}', {
+    head,
+    words: cloud.words
+      .slice(0, 4)
+      .map((w) => `${w.text} (${w.count})`)
+      .join(', '),
+  })
 }
 
 /** Sondage : participation puis une ligne par choix, dans l'ordre du quiz. */
 function PollSummary({ poll }: { poll: NonNullable<SessionReportQuestion['poll']> }) {
   return (
     <>
-      <span>{`Sondage, ${poll.voters} participant${poll.voters > 1 ? 's' : ''}`}</span>
+      <span>
+        {t('Sondage, {participants}', { participants: tp(poll.voters, '{n} participant', '{n} participants') })}
+      </span>
       {poll.voters === 0 ? (
-        <p style={{ margin: 0 }}>Aucun vote</p>
+        <p style={{ margin: 0 }}>{t('Aucun vote')}</p>
       ) : (
         <ul style={{ margin: 0, paddingLeft: 'var(--space-4)' }}>
           {poll.options.map((o, i) => (
             <li key={`${i}-${o.label}`}>
-              {`${o.label} : ${o.votes} vote${o.votes > 1 ? 's' : ''} (${pollPercent(o.votes, poll.voters)} %)`}
+              {t('{label} : {votes} ({percent} %)', {
+                label: o.label,
+                votes: tp(o.votes, '{n} vote', '{n} votes'),
+                percent: pollPercent(o.votes, poll.voters),
+              })}
             </li>
           ))}
         </ul>
@@ -100,6 +127,7 @@ function PollSummary({ poll }: { poll: NonNullable<SessionReportQuestion['poll']
 }
 
 export function SessionReport() {
+  const { lang } = useT()
   // Guaranteed present by the matching route (`/sessions/:sessionId`).
   const { sessionId } = useParams<{ sessionId: string }>()
 
@@ -137,7 +165,7 @@ export function SessionReport() {
     return (
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
-        <p role="status">Chargement du rapport…</p>
+        <p role="status">{t('Chargement du rapport…')}</p>
       </main>
     )
   }
@@ -147,10 +175,10 @@ export function SessionReport() {
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
         <p className="join-error" role="alert">
-          Partie introuvable.
+          {t('Partie introuvable.')}
         </p>
         <Link className="ab-button ab-button--primary" to="/">
-          ← Retour à l'accueil
+          {t("← Retour à l'accueil")}
         </Link>
       </main>
     )
@@ -161,10 +189,10 @@ export function SessionReport() {
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
         <p className="join-error" role="alert">
-          {error ?? 'Une erreur inattendue est survenue.'}
+          {error ?? t('Une erreur inattendue est survenue.')}
         </p>
         <Button variant="primary" type="button" onClick={() => sessionId && load(sessionId)}>
-          Réessayer
+          {t('Réessayer')}
         </Button>
       </main>
     )
@@ -191,12 +219,12 @@ export function SessionReport() {
         <div style={{ flex: 1, minWidth: 0 }}>
           <span style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
             <Link className="host-link-button" to="/">
-              ← Retour à l'accueil
+              {t("← Retour à l'accueil")}
             </Link>
           </span>
         </div>
-        <a className="ab-button ab-button--primary" href={sessionCsvUrl(session.id)} download>
-          Exporter en CSV
+        <a className="ab-button ab-button--primary" href={`${sessionCsvUrl(session.id)}?lang=${lang}`} download>
+          {t('Exporter en CSV')}
         </a>
       </header>
 
@@ -206,10 +234,10 @@ export function SessionReport() {
         <div className="report-summary">
           <PinDisplay pin={session.pin} compact />
           <div className="report-summary__facts">
-            <span className={`host-badge host-badge--${session.status}`}>{STATUS_LABEL[session.status]}</span>
+            <span className={`host-badge host-badge--${session.status}`}>{statusLabel(session.status)}</span>
             <span>{formatDate(session.startedAt)}</span>
             {session.startedAt && session.endedAt && (
-              <span>Durée : {formatDuration(session.startedAt, session.endedAt)}</span>
+              <span>{t('Durée : {duration}', { duration: formatDuration(session.startedAt, session.endedAt) })}</span>
             )}
           </div>
         </div>
@@ -217,33 +245,35 @@ export function SessionReport() {
         <div className="report-stats">
           <div className="report-stat">
             <span className="report-stat__value">{players.length}</span>
-            <span className="report-stat__label">joueur{players.length > 1 ? 's' : ''}</span>
+            <span className="report-stat__label">{tp(players.length, 'joueur', 'joueurs')}</span>
           </div>
           <div className="report-stat">
             <span className="report-stat__value">{questions.length}</span>
-            <span className="report-stat__label">question{questions.length > 1 ? 's' : ''}</span>
+            <span className="report-stat__label">{tp(questions.length, 'question', 'questions')}</span>
           </div>
           {session.startedAt && session.endedAt && (
             <div className="report-stat">
               <span className="report-stat__value">{formatDuration(session.startedAt, session.endedAt)}</span>
-              <span className="report-stat__label">durée</span>
+              <span className="report-stat__label">{t('durée')}</span>
             </div>
           )}
         </div>
 
         <section aria-labelledby="report-players-heading" style={{ marginTop: 'var(--space-6)' }}>
-          <h2 id="report-players-heading">Joueurs</h2>
+          <h2 id="report-players-heading">{t('Joueurs')}</h2>
           {players.length === 0 ? (
-            <p className="ab-empty-state">Aucun joueur n'a rejoint cette partie.</p>
+            <p className="ab-empty-state">{t("Aucun joueur n'a rejoint cette partie.")}</p>
           ) : (
             <div className="report-table-wrap">
               <table className="report-table">
-                <caption className="visually-hidden">Classement des joueurs, du meilleur score au moins bon.</caption>
+                <caption className="visually-hidden">
+                  {t('Classement des joueurs, du meilleur score au moins bon.')}
+                </caption>
                 <thead>
                   <tr>
-                    <th scope="col">Pseudo</th>
-                    <th scope="col">Score</th>
-                    <th scope="col">Réponses correctes</th>
+                    <th scope="col">{t('Pseudo')}</th>
+                    <th scope="col">{t('Score')}</th>
+                    <th scope="col">{t('Réponses correctes')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -264,25 +294,26 @@ export function SessionReport() {
         </section>
 
         <section aria-labelledby="report-questions-heading" style={{ marginTop: 'var(--space-6)' }}>
-          <h2 id="report-questions-heading">Questions</h2>
+          <h2 id="report-questions-heading">{t('Questions')}</h2>
           <p style={{ color: 'var(--ink-dim)', fontSize: 'var(--fs-small)' }}>
-            Cette liste reflète la version actuelle du quiz : si une question a été modifiée ou supprimée depuis cette
-            partie, son contenu ci-dessous peut différer de ce qui a réellement été joué.
+            {t(
+              'Cette liste reflète la version actuelle du quiz : si une question a été modifiée ou supprimée depuis cette partie, son contenu ci-dessous peut différer de ce qui a réellement été joué.',
+            )}
           </p>
           {questions.length === 0 ? (
-            <p className="ab-empty-state">Ce quiz n'a aucune question.</p>
+            <p className="ab-empty-state">{t("Ce quiz n'a aucune question.")}</p>
           ) : (
             <div className="report-table-wrap">
               <table className="report-table">
                 <caption className="visually-hidden">
-                  Taux de réussite et temps moyen par question, dans l'ordre du quiz.
+                  {t("Taux de réussite et temps moyen par question, dans l'ordre du quiz.")}
                 </caption>
                 <thead>
                   <tr>
-                    <th scope="col">N°</th>
-                    <th scope="col">Intitulé</th>
-                    <th scope="col">Taux de réussite</th>
-                    <th scope="col">Temps moyen</th>
+                    <th scope="col">{t('N°')}</th>
+                    <th scope="col">{t('Intitulé')}</th>
+                    <th scope="col">{t('Taux de réussite')}</th>
+                    <th scope="col">{t('Temps moyen')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -296,7 +327,7 @@ export function SessionReport() {
                           {q.prompt}
                           {isWorst && (
                             <span className="host-badge host-badge--warn" style={{ marginLeft: 'var(--space-2)' }}>
-                              Question la plus ratée
+                              {t('Question la plus ratée')}
                             </span>
                           )}
                         </td>
@@ -306,9 +337,13 @@ export function SessionReport() {
                           ) : q.poll !== null ? (
                             <PollSummary poll={q.poll} />
                           ) : rate === null ? (
-                            '(aucune réponse)'
+                            t('(aucune réponse)')
                           ) : (
-                            `${Math.round(rate * 100)} % (${q.correctCount}/${q.answerCount})`
+                            t('{percent} % ({correct}/{total})', {
+                              percent: Math.round(rate * 100),
+                              correct: q.correctCount ?? 0,
+                              total: q.answerCount,
+                            })
                           )}
                         </td>
                         <td>{formatAvgTime(q.avgTimeMs)}</td>

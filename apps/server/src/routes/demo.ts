@@ -1,3 +1,4 @@
+import type { Lang } from '@splootlabs/shared/i18n'
 import type { FastifyInstance } from 'fastify'
 import { fromNodeHeaders } from 'better-auth/node'
 import {
@@ -13,7 +14,8 @@ import {
 import type { Auth } from '@splootlabs/auth'
 import { normalizeSignupSource, type AppConfig } from '@splootlabs/shared'
 import { pinFailureKey } from '../client-ip.js'
-import { EXAMPLE_QUIZ } from '../example-quiz.js'
+import { exampleQuiz } from '../example-quiz.js'
+import { langOf } from '../i18n/localize.js'
 import { FailureBudget } from '../failure-budget.js'
 
 type Deps = {
@@ -24,7 +26,7 @@ type Deps = {
   /** Horloge injectée (tests) : budget par IP, horodatage de l'acceptation, jour du compteur. */
   now?: () => number
   /** Copie du quiz de démonstration dans l'espace de l'invité ; par défaut, le quiz d'exemple. */
-  copyQuiz?: (tenantId: string, ownerId: string) => Promise<string>
+  copyQuiz?: (tenantId: string, ownerId: string, lang: Lang) => Promise<string>
 }
 
 /** Fenêtre du budget de démonstrations par IP. */
@@ -59,9 +61,9 @@ export function registerDemoRoutes(app: FastifyInstance, deps: Deps): void {
 
   const copyExampleQuiz =
     deps.copyQuiz ??
-    (async (tenantId: string, ownerId: string): Promise<string> => {
+    (async (tenantId: string, ownerId: string, lang: Lang): Promise<string> => {
       const quiz = await withTenantTx(appDb, { tenantId }, (scope) =>
-        importQuiz(scope, { ownerId, source: null, ...EXAMPLE_QUIZ }),
+        importQuiz(scope, { ownerId, source: null, ...exampleQuiz(lang) }),
       )
       return quiz.id
     })
@@ -81,7 +83,7 @@ export function registerDemoRoutes(app: FastifyInstance, deps: Deps): void {
     if (session?.user) {
       // Second onglet, double clic, retour sur /demo : le même invité, la même démonstration.
       const demo = await findGuestDemo(systemDb, session.user.id)
-      const quizId = demo.quizId ?? (await copyExampleQuiz(demo.tenantId, session.user.id))
+      const quizId = demo.quizId ?? (await copyExampleQuiz(demo.tenantId, session.user.id, langOf(request)))
       return reply.code(201).send({ quizId, tenantId: demo.tenantId, liveSessionId: demo.liveSessionId })
     }
 
@@ -142,7 +144,7 @@ export function registerDemoRoutes(app: FastifyInstance, deps: Deps): void {
     try {
       await setGuestAcceptance(systemDb, userId, { termsVersion, acceptedAt: new Date(now()), source })
       demo = await findGuestDemo(systemDb, userId)
-      quizId = await copyExampleQuiz(demo.tenantId, userId)
+      quizId = await copyExampleQuiz(demo.tenantId, userId, langOf(request))
     } catch (error) {
       // L'invité existe mais sa démonstration n'a pas pu être préparée : il est supprimé, plutôt que
       // laissé sans quiz jusqu'à la purge, et son cookie de session n'est pas posé.

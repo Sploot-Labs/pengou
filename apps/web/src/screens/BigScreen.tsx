@@ -31,6 +31,8 @@ import { AnswerShape, JoinInvite, Logo, PinDisplay, SoundToggle, TimerRing } fro
 import { PodiumCredits } from '../ui/SourceCredit'
 import { QuestionImage } from '../ui/QuestionImage'
 import { ClosingView, ConversionFooter, PodiumView } from './Podium'
+import { useT } from '../i18n/useT'
+import { t, tp as tpNow } from '../i18n/t'
 
 /**
  * Grand écran réel, lecture seule — câblé sur `apps/server/src/game-gateway.ts`
@@ -104,11 +106,15 @@ type JoinState = 'connecting' | 'joined' | 'error'
 const REVEAL_HOLD_MS = 5000
 
 function BigScreenInner() {
+  // Abonne l'écran à la langue : les textes calculés plus bas (helpers hors composant compris) suivent.
+  const { tp, formatNumber } = useT()
   const { sessionId } = useParams<{ sessionId: string }>()
   const [searchParams] = useSearchParams()
   const token = searchParams.get('token')
   const pin = searchParams.get('pin')
-  const quizTitle = searchParams.get('title') ?? 'Le quiz en direct, open-source.'
+  // Titre brut : le repli traduit n'est posé qu'à l'affichage, il ne doit pas être figé dans l'URL de relance.
+  const rawQuizTitle = searchParams.get('title')
+  const quizTitle = rawQuizTitle ?? t('Le quiz en direct, open-source.')
 
   const { socket, emitAck, on } = useGameSocket()
   const cue = useCue()
@@ -117,7 +123,7 @@ function BigScreenInner() {
 
   const [joinState, setJoinState] = useState<JoinState>(token ? 'connecting' : 'error')
   const [joinError, setJoinError] = useState<string | null>(
-    token ? null : "Lien invalide : jeton d'affichage manquant dans l'URL.",
+    token ? null : t("Lien invalide : jeton d'affichage manquant dans l'URL."),
   )
   const joinAttemptedRef = useRef(false)
   // `true` une fois `screen:join` réellement réussi au moins une fois — sert
@@ -187,10 +193,10 @@ function BigScreenInner() {
           // (« displayToken invalide ou déjà utilisé »), qui ne dirait pas
           // à l'opérateur QUOI FAIRE.
           hasJoinedOnceRef.current
-            ? "Lien grand écran expiré après une coupure réseau. Demandez un nouveau lien à l'hôte."
+            ? t("Lien grand écran expiré après une coupure réseau. Demandez un nouveau lien à l'hôte.")
             : err instanceof Error
               ? err.message
-              : 'Connexion au grand écran impossible.',
+              : t('Connexion au grand écran impossible.'),
         )
       }
     }
@@ -306,7 +312,7 @@ function BigScreenInner() {
       const u = new URL('/screen/' + v.sessionId, window.location.origin)
       u.searchParams.set('token', v.displayToken)
       u.searchParams.set('pin', v.pin)
-      if (quizTitle) u.searchParams.set('title', quizTitle)
+      if (rawQuizTitle) u.searchParams.set('title', rawQuizTitle)
       hardReload(u.pathname + u.search)
     })
 
@@ -335,11 +341,11 @@ function BigScreenInner() {
   useEffect(() => {
     if (phase !== 'reveal' || ranking.length === 0) return
     if (revealedType !== null && !isScoredType(revealedType)) return
-    const t = window.setTimeout(() => {
+    const timeout = window.setTimeout(() => {
       cue('phase.enter:scoreboard')
       setPhase('scoreboard')
     }, REVEAL_HOLD_MS)
-    return () => window.clearTimeout(t)
+    return () => window.clearTimeout(timeout)
   }, [phase, ranking, revealedType])
 
   // Décompte de lecture — même dérivation que le chrono de réponse ci-dessous
@@ -438,12 +444,11 @@ function BigScreenInner() {
   // Annonce debouncée de l'arrivée des joueurs (lobby uniquement).
   useEffect(() => {
     if (phase !== 'lobby') return
-    const t = window.setTimeout(() => {
+    const timeout = window.setTimeout(() => {
       if (players.length === 0) return
-      const verb = players.length > 1 ? 'ont' : 'a'
-      setAnnouncement(`${players.length} joueur${players.length > 1 ? 's' : ''} ${verb} rejoint la partie.`)
+      setAnnouncement(tpNow(players.length, '{n} joueur a rejoint la partie.', '{n} joueurs ont rejoint la partie.'))
     }, 600)
-    return () => window.clearTimeout(t)
+    return () => window.clearTimeout(timeout)
   }, [phase, players])
 
   if (joinState === 'error') {
@@ -453,7 +458,9 @@ function BigScreenInner() {
         <p className="join-error" role="alert">
           {joinError}
         </p>
-        <p style={{ color: 'var(--ink-dim)' }}>Générez un nouveau lien depuis le contrôleur hôte (« Grand écran »).</p>
+        <p style={{ color: 'var(--ink-dim)' }}>
+          {t('Générez un nouveau lien depuis le contrôleur hôte (« Grand écran »).')}
+        </p>
       </main>
     )
   }
@@ -462,7 +469,7 @@ function BigScreenInner() {
     return (
       <main className="join-screen" id="contenu-principal" tabIndex={-1}>
         <Logo />
-        <p role="status">Connexion au grand écran…</p>
+        <p role="status">{t('Connexion au grand écran…')}</p>
       </main>
     )
   }
@@ -534,8 +541,8 @@ function BigScreenInner() {
     if (question.type === 'truefalse') {
       return (
         <div className="big-answers big-answers--duo">
-          <div className="big-answer big-answer--neutral">Vrai</div>
-          <div className="big-answer big-answer--neutral">Faux</div>
+          <div className="big-answer big-answer--neutral">{t('Vrai')}</div>
+          <div className="big-answer big-answer--neutral">{t('Faux')}</div>
         </div>
       )
     }
@@ -543,15 +550,13 @@ function BigScreenInner() {
       const { min, max } = question.payload as SliderShowPayload
       return (
         <div className="big-answer__range">
-          <span>
-            De {min} à {max}
-          </span>
+          <span>{t('De {min} à {max}', { min, max })}</span>
         </div>
       )
     }
     return (
       <div className="big-answer__range">
-        <span>Réponse libre : tapez sur votre mobile</span>
+        <span>{t('Réponse libre : tapez sur votre mobile')}</span>
       </div>
     )
   }
@@ -559,10 +564,10 @@ function BigScreenInner() {
   function renderDistribution() {
     if (question?.type === 'wordcloud') return renderWordcloud()
     if (poll && poll.voters === 0) {
-      return <p style={{ color: 'var(--ink-dim)' }}>Aucun vote</p>
+      return <p style={{ color: 'var(--ink-dim)' }}>{t('Aucun vote')}</p>
     }
     if (!rows || rows.length === 0) {
-      return <p style={{ color: 'var(--ink-dim)' }}>Aucune réponse reçue pour cette question.</p>
+      return <p style={{ color: 'var(--ink-dim)' }}>{t('Aucune réponse reçue pour cette question.')}</p>
     }
     return (
       <div className="big-distribution" style={{ ['--dist-cols' as string]: String(rows.length) }}>
@@ -592,22 +597,17 @@ function BigScreenInner() {
                   ✓
                 </span>
               )}
-              {row.correct && <span className="visually-hidden"> (bonne réponse)</span>}
+              {row.correct && <span className="visually-hidden"> {t('(bonne réponse)')}</span>}
             </span>
             {poll ? (
               <>
+                <span className="big-distribution__count">{tp(row.count, '{n} vote', '{n} votes')}</span>
                 <span className="big-distribution__count">
-                  {row.count} vote{row.count > 1 ? 's' : ''}
-                </span>
-                <span className="big-distribution__count">
-                  {pollPercent(row.count, poll.voters)}
-                  {' '}%
+                  {t('{percent}\u00a0%', { percent: pollPercent(row.count, poll.voters) })}
                 </span>
               </>
             ) : (
-              <span className="big-distribution__count">
-                {row.count} réponse{row.count > 1 ? 's' : ''}
-              </span>
+              <span className="big-distribution__count">{tp(row.count, '{n} réponse', '{n} réponses')}</span>
             )}
           </div>
         ))}
@@ -625,16 +625,16 @@ function BigScreenInner() {
           question pendant la tentative de reconnexion. */}
       {connection === 'reconnecting' && (
         <p className="player-net player-net--reconnecting" role="alert">
-          Connexion perdue, reconnexion…
+          {t('Connexion perdue, reconnexion…')}
         </p>
       )}
       {(phase === 'reading' || phase === 'question' || phase === 'reveal' || phase === 'scoreboard') && (
         <div className="big-join-reminder">
-          Rejoignez sur <strong>{window.location.host}</strong>
+          {t('Rejoignez sur')} <strong>{window.location.host}</strong>
           {pin && (
             <>
               {', '}
-              code banquise <strong>{pin}</strong>
+              {t('code banquise')} <strong>{pin}</strong>
             </>
           )}
         </div>
@@ -648,9 +648,9 @@ function BigScreenInner() {
               <h1 className="ab-hero-title" ref={focusPhaseHeading} tabIndex={-1}>
                 {quizTitle}
               </h1>
-              <p className="big-lobby__tagline">Le quiz en direct, open-source.</p>
+              <p className="big-lobby__tagline">{t('Le quiz en direct, open-source.')}</p>
               <p className="big-lobby__proof">
-                Rejoignez en 5 secondes, aucune appli à installer. Vos données restent chez vous.
+                {t('Rejoignez en 5 secondes, aucune appli à installer. Vos données restent chez vous.')}
               </p>
             </div>
             {pin ? (
@@ -659,19 +659,21 @@ function BigScreenInner() {
                 <JoinInvite pin={pin} />
               </div>
             ) : (
-              <p style={{ color: 'var(--ink-dim)' }}>PIN indisponible, demandez-le à l'hôte.</p>
+              <p style={{ color: 'var(--ink-dim)' }}>{t("PIN indisponible, demandez-le à l'hôte.")}</p>
             )}
 
             {players.length === 0 ? (
-              <p className="big-lobby__empty">En attente de la colonie… Saisissez le code banquise pour rejoindre.</p>
+              <p className="big-lobby__empty">
+                {t('En attente de la colonie… Saisissez le code banquise pour rejoindre.')}
+              </p>
             ) : (
-              <ul className="big-players" aria-label="Joueurs ayant rejoint la partie">
+              <ul className="big-players" aria-label={t('Joueurs ayant rejoint la partie')}>
                 {players.map((p) => (
                   <li key={p.id} className={`big-players__chip${!p.connected ? ' big-players__chip--off' : ''}`}>
                     {p.nickname}
                     {!p.connected && (
                       <span className="big-players__badge">
-                        <span aria-hidden="true">⚠</span> déconnecté
+                        <span aria-hidden="true">⚠</span> {t('déconnecté')}
                       </span>
                     )}
                   </li>
@@ -687,7 +689,7 @@ function BigScreenInner() {
         {phase === 'reading' && reading && (
           <div className="big-live big-live--reading">
             <div className="big-live__header">
-              <span className="host-badge">Lecture en cours</span>
+              <span className="host-badge">{t('Lecture en cours')}</span>
               <span className="big-live__reading-count" aria-hidden="true">
                 {readingRemaining ?? reading.readingTime} s
               </span>
@@ -709,7 +711,7 @@ function BigScreenInner() {
               chaque frame chez tous les lecteurs d'écran — cohérent avec le
               chrono de réponse, non annoncé en continu lui non plus). */}
             <p className="big-live__answered" role="status" aria-live="polite">
-              Lecture : {readingRemaining ?? reading.readingTime} s restantes
+              {t('Lecture : {n} s restantes', { n: readingRemaining ?? reading.readingTime })}
             </p>
           </div>
         )}
@@ -721,7 +723,7 @@ function BigScreenInner() {
             {/* En-tête compact sur une ligne. À la révélation, la place du chrono reste réservée :
               la question et le nuage gardent leur taille et leur position (la salle garde ses repères). */}
             <div className="big-live__header">
-              <span className="host-badge">{phase === 'reveal' ? 'Révélation' : 'Question en cours'}</span>
+              <span className="host-badge">{phase === 'reveal' ? t('Révélation') : t('Question en cours')}</span>
               <h1 className="big-live__prompt" key={phase} ref={focusPhaseHeading} tabIndex={-1}>
                 {question.prompt}
               </h1>
@@ -740,7 +742,7 @@ function BigScreenInner() {
             {renderWordcloud(
               phase === 'reveal' && autoRemaining !== null && (
                 <p className="big-auto-countdown" role="status" aria-live="polite">
-                  Question suivante dans {autoRemaining} s
+                  {t('Question suivante dans {n} s', { n: autoRemaining })}
                 </p>
               ),
             )}
@@ -750,7 +752,7 @@ function BigScreenInner() {
         {phase === 'question' && question && !cloudLive && (
           <div className="big-live">
             <div className="big-live__header">
-              <span className="host-badge">Question en cours</span>
+              <span className="host-badge">{t('Question en cours')}</span>
               <TimerRing
                 remainingSeconds={remaining ?? question.timeLimit}
                 totalSeconds={question.timeLimit}
@@ -766,14 +768,16 @@ function BigScreenInner() {
             <QuestionImage key={question.media ?? ''} src={question.media} alt={question.mediaAlt} variant="big" />
 
             {question.type === 'poll' && (question.payload as PollShowPayload).multiple && (
-              <p className="big-live__answered">Plusieurs réponses possibles</p>
+              <p className="big-live__answered">{t('Plusieurs réponses possibles')}</p>
             )}
 
             {renderLiveAnswers()}
 
             {question.type !== 'wordcloud' && (
               <p className="big-live__answered">
-                {progressAnswered} / {players.length} {progressAnswered <= 1 ? 'a' : 'ont'} répondu
+                {tp(progressAnswered, '{n} / {total} a répondu', '{n} / {total} ont répondu', {
+                  total: formatNumber(players.length),
+                })}
               </p>
             )}
           </div>
@@ -784,7 +788,7 @@ function BigScreenInner() {
             {question ? (
               <>
                 <div className="big-live__header">
-                  <span className="host-badge">Révélation</span>
+                  <span className="host-badge">{t('Révélation')}</span>
                 </div>
 
                 <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
@@ -797,7 +801,7 @@ function BigScreenInner() {
                   classement, donc le compte à rebours d'enchaînement s'affiche ici. */}
                 {!isScoredType(question.type) && autoRemaining !== null && (
                   <p className="big-auto-countdown" role="status" aria-live="polite">
-                    Question suivante dans {autoRemaining} s
+                    {t('Question suivante dans {n} s', { n: autoRemaining })}
                   </p>
                 )}
               </>
@@ -810,7 +814,7 @@ function BigScreenInner() {
               // `question:show` rejoué) : mieux vaut ce message honnête qu'un écran vide. La
               // bascule auto reveal→scoreboard ci-dessus ne dépend pas de `question`.
               <h1 className="big-live__prompt" ref={focusPhaseHeading} tabIndex={-1}>
-                Résultat indisponible pour cette question, la suivante arrive.
+                {t('Résultat indisponible pour cette question, la suivante arrive.')}
               </h1>
             )}
           </div>
@@ -819,15 +823,15 @@ function BigScreenInner() {
         {phase === 'scoreboard' && (
           <div className="big-scoreboard">
             <h1 className="ab-hero-title" ref={focusPhaseHeading} tabIndex={-1}>
-              Classement
+              {t('Classement')}
             </h1>
             {autoRemaining !== null && (
               <p className="big-auto-countdown" role="status" aria-live="polite">
-                Question suivante dans {autoRemaining} s
+                {t('Question suivante dans {n} s', { n: autoRemaining })}
               </p>
             )}
             {ranking.length === 0 ? (
-              <p style={{ color: 'var(--ink-dim)' }}>Le classement s'affichera après la première question.</p>
+              <p style={{ color: 'var(--ink-dim)' }}>{t("Le classement s'affichera après la première question.")}</p>
             ) : (
               <ol className="big-scoreboard__list">
                 {boardEntries(ranking, players)
@@ -839,7 +843,7 @@ function BigScreenInner() {
                       </span>
                       <span className="big-scoreboard__name">{p.nickname}</span>
                       <span className="big-scoreboard__score">
-                        <CountUp value={p.score} format={(n) => `${n} pts`} />
+                        <CountUp value={p.score} format={(n) => t('{score} pts', { score: n })} />
                       </span>
                     </li>
                   ))}

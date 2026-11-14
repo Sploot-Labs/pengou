@@ -30,16 +30,20 @@ import {
 } from '@splootlabs/db'
 import type { Auth } from '@splootlabs/auth'
 import { hasPermission, type AppConfig } from '@splootlabs/shared'
+import { isLang, type Lang } from '@splootlabs/shared/i18n'
 import {
+  INVALID_ANSWER_MESSAGE,
   PlayerKickedError,
   type Engine,
   type EngineQuestion,
   type GameSession,
   type SessionStore,
+  type SubmitAnswerResult,
 } from '@splootlabs/game'
 import { WORDCLOUD_MAX_WORD_LENGTH, wordKey } from '@splootlabs/quiz'
 import { clientIpFromRequest, compileTrust, pinFailureKey } from './client-ip.js'
 import { FailureBudget } from './failure-budget.js'
+import { localizeMessage, socketLang } from './i18n/localize.js'
 
 export type GameGatewayDeps = {
   engine: Engine
@@ -143,6 +147,23 @@ const DEMO_FULL_MESSAGE = 'La démonstration est très demandée en ce moment.'
 /** Refus de `player:join` quand la partie a atteint son plafond de joueurs (`meta.maxPlayers`). */
 export const SESSION_FULL_MESSAGE = 'La partie est complète.'
 
+/** Codes machine stables envoyés avec certains refus (`{ error, code }`) : le message est traduit
+ * dans la langue de la socket, le client compare donc le code, jamais le texte. */
+export const SESSION_FULL_CODE = 'SESSION_FULL'
+export const NOT_HOST_CODE = 'NOT_HOST'
+export const INVALID_ANSWER_CODE = 'INVALID_ANSWER'
+
+/** Refus porteur d'un code machine (voir `errorAck`). */
+class CodedError extends Error {
+  constructor(
+    message: string,
+    readonly code: string,
+  ) {
+    super(message)
+    this.name = 'CodedError'
+  }
+}
+
 /** Fenêtre de coalescence de la diffusion du lobby : au plus une diffusion `lobby:update` /
  * `lobby:count` par session et par fenêtre. Une rafale d'arrivées ne coûte donc plus une
  * diffusion de la liste complète par joueur (coût quadratique en nombre de joueurs). */
@@ -169,6 +190,9 @@ type SocketData = {
   /** Clé du budget d'échecs de PIN (IP du client), calculée une fois à la connexion. Absente si
    * l'IP est inconnue : la socket échappe alors au budget plutôt que de partager une clé commune. */
   pinFailureKey?: string
+  /** Langue des messages renvoyés à cette socket : fixée à la connexion (voir `socketLang`), puis
+   * suivie par `lang:set` quand l'utilisateur change de langue. */
+  lang?: Lang
 }
 
 /** Throttle par socket (P2) : Socket.IO court-circuite le rate-limit HTTP (serveur brut), donc
@@ -203,6 +227,23 @@ function viewersRoomName(sessionId: string): string {
 
 function message(err: unknown): string {
   return err instanceof Error ? err.message : 'erreur inconnue'
+}
+
+/** Acquittement d'échec dans la langue de la socket, avec le code machine du refus s'il en a un. */
+function errorAck(socket: Socket, err: unknown): { error: string; code?: string } {
+  const error = localizeMessage(message(err), (socket.data as SocketData).lang ?? 'fr')
+  if (err instanceof CodedError || err instanceof PlayerKickedError) return { error, code: err.code }
+  return { error }
+}
+
+/** Acquittement de `player:answer` : raison du refus traduite ; une réponse invalide pour le type de
+ * question (seul refus après lequel le client peut réessayer) porte le code `INVALID_ANSWER`. */
+function answerAck(result: SubmitAnswerResult, lang: Lang): SubmitAnswerResult & { code?: string } {
+  if (result.reason === undefined) return result
+  const reason = localizeMessage(result.reason, lang)
+  return result.reason === INVALID_ANSWER_MESSAGE
+    ? { ...result, reason, code: INVALID_ANSWER_CODE }
+    : { ...result, reason }
 }
 
 /** Un seul type de question en base pour l'instant : pas de champ `basePoints` dédié au schéma
@@ -773,7 +814,8 @@ export async function registerGameGateway(
    * Pas de cache : les événements d'hôte sont rares (quelques-uns par minute). */
   async function requireLiveHost(socket: Socket): Promise<{ sessionId: string; meta: SessionMeta }> {
     const data = socket.data as SocketData
-    if (data.role !== 'host' || !data.sessionId) throw new Error("action réservée à l'hôte de la session")
+    if (data.role !== 'host' || !data.sessionId)
+      throw new CodedError("action réservée à l'hôte de la session", NOT_HOST_CODE)
     const sessionId = data.sessionId
     const meta = sessionMetaByEngineId.get(sessionId)
     if (!meta) throw new Error('session introuvable')
@@ -962,7 +1004,7 @@ export async function registerGameGateway(
       await doRevealBySession(sessionId, meta)
       reply({ ok: true })
     } catch (e) {
-      reply({ error: message(e) })
+      reply(errorAck(socket, e))
     }
   }
 
@@ -1037,7 +1079,7 @@ export async function registerGameGateway(
 
       reply({ ok: true })
     } catch (e) {
-      reply({ error: message(e) })
+      reply(errorAck(socket, e))
     }
   }
 
@@ -1348,6 +1390,8 @@ export async function registerGameGateway(
     // Une IPv6 compte pour son /64 entier (un seul client en détient en général tout le préfixe).
     const clientIp = clientIpFromRequest(socket.request, trustProxy) || socket.handshake.address || undefined
     ;(socket.data as SocketData).pinFailureKey = clientIp ? pinFailureKey(clientIp) : undefined
+    // Langue des acquittements : `auth.lang` du handshake (posé par le web), sinon son Accept-Language.
+    ;(socket.data as SocketData).lang = socketLang(socket.handshake)
 
     // Throttle par socket (P2, anti-DoS) : middleware exécuté avant CHAQUE handler d'event.
     // Au-delà de SOCKET_RATE_MAX events par fenêtre, l'event est rejeté (le handler n'est pas
@@ -1365,6 +1409,12 @@ export async function registerGameGateway(
         return
       }
       next()
+    })
+
+    // Changement de langue dans l'interface : les acquittements suivants suivent la nouvelle langue.
+    // Une valeur inconnue est ignorée.
+    socket.on('lang:set', (lang: unknown) => {
+      if (isLang(lang)) (socket.data as SocketData).lang = lang
     })
 
     socket.on('host:create', async (payload: { quizId?: unknown } | undefined, ack?: (res: unknown) => void) => {
@@ -1387,7 +1437,7 @@ export async function registerGameGateway(
 
         reply({ sessionId: session.id, pin: session.pin })
       } catch (e) {
-        reply({ error: message(e) })
+        reply(errorAck(socket, e))
       }
     })
 
@@ -1463,7 +1513,7 @@ export async function registerGameGateway(
 
         reply({ sessionId: neu.id, pin: neu.pin })
       } catch (e) {
-        reply({ error: message(e) })
+        reply(errorAck(socket, e))
       }
     })
 
@@ -1543,7 +1593,7 @@ export async function registerGameGateway(
           autoAdvanceDelaySeconds: meta.autoAdvanceDelayMs / 1000,
         })
       } catch (e) {
-        reply({ error: message(e) })
+        reply(errorAck(socket, e))
       }
     })
 
@@ -1569,7 +1619,7 @@ export async function registerGameGateway(
         const view = session.phase === 'reading' ? engine.readingView(session) : engine.playerQuestionView(session)
         reply(view)
       } catch (e) {
-        reply({ error: message(e) })
+        reply(errorAck(socket, e))
       }
     })
 
@@ -1587,7 +1637,7 @@ export async function registerGameGateway(
           throw new Error('host:reveal : aucune question active (session encore en lobby)')
         }
       } catch (e) {
-        reply({ error: message(e) })
+        reply(errorAck(socket, e))
         return
       }
       void doReveal(socket, ack)
@@ -1609,7 +1659,7 @@ export async function registerGameGateway(
         const session = await doAdvance(sessionId, meta)
         reply({ phase: session.phase })
       } catch (e) {
-        reply({ error: message(e) })
+        reply(errorAck(socket, e))
       }
     })
 
@@ -1639,7 +1689,7 @@ export async function registerGameGateway(
           }
           reply({ ok: true, autoAdvance: meta.autoAdvance, delaySeconds: meta.autoAdvanceDelayMs / 1000 })
         } catch (e) {
-          reply({ error: message(e) })
+          reply(errorAck(socket, e))
         }
       },
     )
@@ -1662,7 +1712,7 @@ export async function registerGameGateway(
         await flushWordcloudBroadcast(sessionId, meta)
         reply({ ok: true })
       } catch (e) {
-        reply({ error: message(e) })
+        reply(errorAck(socket, e))
       }
     })
 
@@ -1738,7 +1788,7 @@ export async function registerGameGateway(
         }
         reply({ ok: true })
       } catch (e) {
-        reply({ error: message(e) })
+        reply(errorAck(socket, e))
       }
     })
 
@@ -1774,7 +1824,7 @@ export async function registerGameGateway(
           // Plafond : place réservée de façon synchrone (aucun `await` entre lecture et incrément),
           // rendue si le joueur n'a pas pu être ajouté au moteur. Une fois ajouté, il l'occupe même
           // si la suite échoue (il existe côté moteur et pourrait revenir).
-          if (meta.seatsTaken >= meta.maxPlayers) throw new Error(SESSION_FULL_MESSAGE)
+          if (meta.seatsTaken >= meta.maxPlayers) throw new CodedError(SESSION_FULL_MESSAGE, SESSION_FULL_CODE)
           meta.seatsTaken += 1
           let added = false
           try {
@@ -1809,7 +1859,7 @@ export async function registerGameGateway(
             throw e
           }
         } catch (e) {
-          reply({ error: message(e) })
+          reply(errorAck(socket, e))
         }
       },
     )
@@ -1838,7 +1888,7 @@ export async function registerGameGateway(
             if (meta) scheduleWordcloudBroadcast(data.sessionId, meta)
           }
         }
-        reply(result)
+        reply(answerAck(result, data.lang ?? 'fr'))
 
         // Auto-révélation serveur (voir `maybeAutoReveal`) : dès que TOUS les joueurs connectés ont
         // répondu, on révèle sans attendre l'hôte ni le timer (le chrono s'arrête côté clients au
@@ -1853,7 +1903,7 @@ export async function registerGameGateway(
           }
         }
       } catch (e) {
-        reply({ accepted: false, error: message(e) })
+        reply({ accepted: false, ...errorAck(socket, e) })
       }
     })
 
@@ -1920,7 +1970,7 @@ export async function registerGameGateway(
         } catch (e) {
           // Jeton exclu par l'hôte (`host:kick`) : code dédié pour que le client affiche l'écran
           // « retiré de la partie » et oublie le jeton, au lieu de retenter une reconnexion.
-          reply(e instanceof PlayerKickedError ? { error: e.message, code: e.code } : { error: message(e) })
+          reply(errorAck(socket, e))
         }
       },
     )
@@ -1949,7 +1999,7 @@ export async function registerGameGateway(
         screenTokenToSessionId.set(displayToken, sessionId)
         reply({ displayToken })
       } catch (e) {
-        reply({ error: message(e) })
+        reply(errorAck(socket, e))
       }
     })
 
@@ -1986,7 +2036,7 @@ export async function registerGameGateway(
         // compris) ; sinon, rejeu du nuage en cours comme avant.
         if (!replayUnscoredRevealTo(socket, session)) replayWordcloudTo(socket, session)
       } catch (e) {
-        reply({ error: message(e) })
+        reply(errorAck(socket, e))
       }
     })
 
@@ -2025,7 +2075,7 @@ export async function registerGameGateway(
           replayCurrentQuestionTo(socket, session)
           if (!replayUnscoredRevealTo(socket, session)) replayWordcloudTo(socket, session)
         } catch (e) {
-          reply({ error: message(e) })
+          reply(errorAck(socket, e))
         }
       },
     )

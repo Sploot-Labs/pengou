@@ -1,4 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react'
+import { useT } from '../i18n/useT'
 import { Button, type ButtonVariant } from '../ui'
 
 /**
@@ -32,6 +33,7 @@ export function ConfirmDialog({
   onConfirm: () => void
   onCancel: () => void
 }) {
+  const { t } = useT()
   const dialogRef = useRef<HTMLDivElement>(null)
   const confirmRef = useRef<HTMLButtonElement>(null)
 
@@ -84,7 +86,7 @@ export function ConfirmDialog({
         )}
         <div className="host-dialog__actions">
           <Button variant="ghost" type="button" onClick={onCancel} disabled={pending}>
-            Annuler
+            {t('Annuler')}
           </Button>
           <Button
             variant={confirmVariant}

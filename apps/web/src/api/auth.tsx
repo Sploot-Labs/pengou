@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react'
+import { t } from '../i18n/t'
 import { apiGet, apiPost, ApiError, onTermsAcceptanceRequired } from './client'
 
 /**
@@ -89,7 +90,7 @@ export async function sendVerificationEmail(email?: string): Promise<void> {
   let address = email
   if (!address) {
     const probe = await fetchSession()
-    if (!probe) throw new ApiError(401, 'Votre session a expiré. Reconnectez-vous.')
+    if (!probe) throw new ApiError(401, t('Votre session a expiré. Reconnectez-vous.'))
     address = probe.user.email
   }
   await apiPost('/api/auth/send-verification-email', { email: address, callbackURL: VERIFIED_CALLBACK_URL })

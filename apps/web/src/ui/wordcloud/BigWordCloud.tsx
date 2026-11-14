@@ -10,6 +10,8 @@ import {
   sortWords,
   STAGE_W,
 } from './layout'
+import { pluralCategory } from '@splootlabs/shared/i18n'
+import { useT } from '../../i18n/useT'
 import { useWordMeasure } from './useWordMeasure'
 
 export { useWordMeasure } from './useWordMeasure'
@@ -37,12 +39,10 @@ const SIZE_ANIMATION_MS = 800
 const badgeWidth = (label: string) => 76 + 15 * label.length
 const BADGE_H = 56
 
-export function BigWordCloud({
-  words,
-  revealed,
-  reducedMotion,
-  emptyLabel = 'En attente des premières idées…',
-}: BigWordCloudProps) {
+export function BigWordCloud({ words, revealed, reducedMotion, emptyLabel }: BigWordCloudProps) {
+  const { t, tc, lang } = useT()
+  const timesLabel = (n: number) =>
+    pluralCategory(lang, n) === 'one' ? tc('{n} fois', 'one', { n }) : t('{n} fois', { n })
   const { measure, version } = useWordMeasure()
   const frameRef = useRef<HTMLDivElement | null>(null)
   const [scale, setScale] = useState(1)
@@ -103,7 +103,7 @@ export function BigWordCloud({
           return p ? { ...f, count: p.count } : f
         })
   const top = revealed ? sortWords(placed.filter((f) => present.has(f.key))).slice(0, TOP_COUNT) : []
-  const lit = new Set(top.map((t) => t.key))
+  const lit = new Set(top.map((w) => w.key))
   // Agrandissement des mots allumés, borné pour qu'ils ne se chevauchent pas.
   const scales = litScales(placed, [...lit])
   // Pastilles : posées dans l'ordre du rang, chacune évite les autres mots allumés et les pastilles
@@ -111,7 +111,7 @@ export function BigWordCloud({
   const badges: { word: PlacedWord; label: string; x: number; y: number }[] = []
   for (const w of top) {
     const s = scales.get(w.key) ?? 1
-    const label = `${w.count} fois`
+    const label = timesLabel(w.count)
     const size = { w: badgeWidth(label), h: BADGE_H }
     const obstacles: Box[] = [
       ...top
@@ -259,15 +259,17 @@ export function BigWordCloud({
           )
         })}
       </div>
-      {placed.length === 0 && <p className="bigcloud__empty">{emptyLabel}</p>}
+      {placed.length === 0 && <p className="bigcloud__empty">{emptyLabel ?? t('En attente des premières idées…')}</p>}
       {revealed && top.length > 0 && (
-        <ol className="visually-hidden" aria-label="Mots les plus proposés">
+        <ol className="visually-hidden" aria-label={t('Mots les plus proposés')}>
           {top.map((w, i) => (
-            <li key={w.key}>{`${i + 1}. ${w.text}, ${w.count} fois`}</li>
+            <li key={w.key}>
+              {t('{rank}. {word}, {times}', { rank: i + 1, word: w.text, times: timesLabel(w.count) })}
+            </li>
           ))}
         </ol>
       )}
-      <ul className="visually-hidden" aria-label="Nuage de mots">
+      <ul className="visually-hidden" aria-label={t('Nuage de mots')}>
         {sorted.map((w) => (
           <li key={w.key}>{`${w.text}, ${w.count}`}</li>
         ))}

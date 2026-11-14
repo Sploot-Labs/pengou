@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useSessionOptional } from '../api/auth'
+import { useT } from '../i18n/useT'
 
 /** Inscription proposée depuis la démonstration : la provenance `demo` sort dans l'export des inscriptions. */
 const SIGNUP_FROM_DEMO = '/signup?from=demo'
@@ -15,16 +16,18 @@ const SIGNUP_FROM_DEMO = '/signup?from=demo'
  */
 export function GuestSignupOffer() {
   const session = useSessionOptional()
+  const { t } = useT()
   if (session?.user?.isAnonymous !== true) return null
 
   return (
-    <aside className="hostlive-guest-offer" aria-label="Après la démonstration">
+    <aside className="hostlive-guest-offer" aria-label={t('Après la démonstration')}>
       <p>
-        La démonstration s'arrête ici et rien n'est conservé. Avec un compte gratuit, vous créez vos propres quiz et
-        vous gardez vos résultats.
+        {t(
+          "La démonstration s'arrête ici et rien n'est conservé. Avec un compte gratuit, vous créez vos propres quiz et vous gardez vos résultats.",
+        )}
       </p>
       <Link className="ab-button ab-button--primary" to={SIGNUP_FROM_DEMO}>
-        Créer mon compte pour faire mes propres quiz
+        {t('Créer mon compte pour faire mes propres quiz')}
       </Link>
     </aside>
   )

@@ -306,6 +306,24 @@ describe('routes de rapport /api/sessions (protégées, scopées)', () => {
     expect(body.charCodeAt(0)).toBe(0xfeff) // BOM UTF-8
     expect(body).toContain('Alice')
     expect(body).toContain('900')
+    expect(body.split('\r\n')).toContain('Pseudo,Score total,Réponses correctes,Réponses données')
+
+    // En-têtes dans la langue demandée : `?lang=` d'abord, puis Accept-Language.
+    const en = await app.inject({
+      method: 'GET',
+      url: `/api/sessions/${sessionId}/export.csv?lang=en`,
+      headers: { cookie, 'accept-language': 'es' },
+    })
+    const enLines = en.body.split('\r\n')
+    expect(enLines[0]?.startsWith('\ufeffGame 444444: ')).toBe(true)
+    expect(enLines).toContain('Nickname,Total score,Correct answers,Answers given')
+    expect(enLines).toContain('# ,Question,Answers given,Correct answers,Average time (ms)')
+    const es = await app.inject({
+      method: 'GET',
+      url: `/api/sessions/${sessionId}/export.csv`,
+      headers: { cookie, 'accept-language': 'es-ES' },
+    })
+    expect(es.body.split('\r\n')).toContain('Apodo,Puntuación total,Respuestas correctas,Respuestas dadas')
 
     await app.close()
   })
