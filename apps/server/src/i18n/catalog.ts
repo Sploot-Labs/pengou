@@ -147,6 +147,9 @@ const en = {
 
   // Passerelle de jeu (acquittements Socket.IO)
   'authentification requise': 'authentication required',
+  // Levés par `resolveTenantId` (packages/db) quand la socket n'a pas transmis d'espace actif.
+  'mode multi : un tenant explicite est requis': 'multi mode: an explicit workspace is required',
+  'mode multi : utilisateur requis': 'multi mode: a user is required',
   'Ce quiz est archivé : restaurez-le pour lancer une partie.': 'This quiz is archived: restore it to start a game.',
   'quiz introuvable': 'quiz not found',
   'création de la session impossible': 'unable to create the game',
@@ -346,6 +349,8 @@ const es: Record<ServerKey, string> = {
   'Partie introuvable.': 'Partida no encontrada.',
 
   'authentification requise': 'autenticación requerida',
+  'mode multi : un tenant explicite est requis': 'modo multi: se requiere un espacio de trabajo explícito',
+  'mode multi : utilisateur requis': 'modo multi: se requiere un usuario',
   'Ce quiz est archivé : restaurez-le pour lancer une partie.':
     'Este quiz está archivado: restáuralo para iniciar una partida.',
   'quiz introuvable': 'quiz no encontrado',
@@ -465,6 +470,9 @@ export const INDIRECT_MESSAGES: readonly ServerKey[] = [
   'joueur exclu de la partie',
   "Confirmez votre adresse e-mail pour envoyer d'autres images.",
   'Espace images du workspace plein ({max} Mo max).',
+  // `resolveTenantId` (packages/db), repris tel quel par les acquittements de la passerelle.
+  'mode multi : un tenant explicite est requis',
+  'mode multi : utilisateur requis',
   // Repli de `message()` (game-gateway.ts) pour une exception qui n'est pas une Error.
   'erreur inconnue',
 ]

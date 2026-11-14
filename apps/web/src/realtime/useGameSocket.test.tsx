@@ -1,11 +1,13 @@
 // @vitest-environment jsdom
 import { act, cleanup, renderHook } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { setActiveTenantId } from '../api/activeTenant'
 import { setLang } from '../i18n/lang'
 
 /** Socket factice : on enregistre les émissions et les (re)connexions, sans réseau. */
 const mockSocket = {
   connected: true,
+  active: true,
   emit: vi.fn(),
   on: vi.fn(),
   off: vi.fn(),
@@ -45,5 +47,39 @@ describe('useGameSocket et la langue', () => {
     act(() => setLang('es'))
     // Démontée : plus d'émission.
     expect(mockSocket.emit).not.toHaveBeenCalled()
+  })
+})
+
+describe("useGameSocket et l'espace actif", () => {
+  afterEach(() => {
+    setActiveTenantId(null)
+  })
+
+  it("refait la poignée de main quand l'espace actif change, pour qu'elle le porte", () => {
+    mockSocket.active = true
+    renderHook(() => useGameSocket())
+    expect(mockSocket.connect).toHaveBeenCalledTimes(1)
+
+    // Session résolue après la connexion : l'espace actif arrive après la première poignée de main.
+    act(() => setActiveTenantId('tenant-a'))
+
+    expect(mockSocket.disconnect).toHaveBeenCalledTimes(1)
+    expect(mockSocket.connect).toHaveBeenCalledTimes(2)
+    expect(mockIo).toHaveBeenCalledTimes(1)
+  })
+
+  it('ne relance pas une socket fermée ni démontée', () => {
+    mockSocket.active = false
+    const { unmount } = renderHook(() => useGameSocket())
+    act(() => setActiveTenantId('tenant-a'))
+    expect(mockSocket.disconnect).not.toHaveBeenCalled()
+    expect(mockSocket.connect).toHaveBeenCalledTimes(1)
+
+    mockSocket.active = true
+    unmount()
+    mockSocket.disconnect.mockClear()
+    mockSocket.connect.mockClear()
+    act(() => setActiveTenantId('tenant-b'))
+    expect(mockSocket.connect).not.toHaveBeenCalled()
   })
 })

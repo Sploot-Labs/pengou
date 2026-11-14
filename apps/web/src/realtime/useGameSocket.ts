@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { io, type Socket } from 'socket.io-client'
-import { getActiveTenantId } from '../api/activeTenant'
+import { getActiveTenantId, subscribeActiveTenant } from '../api/activeTenant'
 import { getLang, subscribeLang } from '../i18n/lang'
 import { t } from '../i18n/t'
 import { AckError } from './ackError'
@@ -113,6 +113,20 @@ export function useGameSocket(): UseGameSocket {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- une socket par montage : `socket` est stable pour toute la durée de vie du composant.
   }, [])
+
+  // Espace actif résolu ou changé après la connexion (session lue après le montage, première
+  // connexion sur cet appareil, invitation acceptée) : la poignée de main déjà faite ne le porte
+  // pas, et le serveur ne le lit qu'à ce moment-là. On la refait. Socket fermée ou démontée : rien
+  // à faire, la prochaine connexion relira l'espace dans `auth`.
+  useEffect(
+    () =>
+      subscribeActiveTenant(() => {
+        if (!socket.active) return
+        socket.disconnect()
+        socket.connect()
+      }),
+    [socket],
+  )
 
   // Changement de langue dans l'interface : le serveur traduit les acquittements suivants dans la
   // nouvelle langue, sans reconnexion (la partie en cours continue). Socket coupée : la prochaine

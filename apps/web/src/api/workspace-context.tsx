@@ -28,7 +28,10 @@ interface WorkspaceContextValue {
 const WorkspaceContext = createContext<WorkspaceContextValue | null>(null)
 
 export function WorkspaceProvider({ children }: { children: ReactNode }) {
-  const { user } = useSession()
+  const { user, loading } = useSession()
+  // Seul le chargement SANS utilisateur compte : la relecture de session d'un hôte déjà connecté
+  // (acceptation des CGU, par exemple) ne doit pas relancer la résolution des espaces.
+  const sessionPending = !user && loading
   const [tenancyMode, setTenancyMode] = useState<'single' | 'multi'>('single')
   const [workspaces, setWorkspaces] = useState<Workspace[]>([])
   const [activeTenantId, setActiveState] = useState<string | null>(getActiveTenantId())
@@ -50,6 +53,10 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let cancelled = false
     if (!user) {
+      // Session encore en cours de lecture (premier rendu, ou `refresh()` après une connexion) :
+      // `user` vaut `null` sans que l'hôte soit déconnecté. On garde l'espace persisté, que la
+      // socket partagée lit à sa poignée de main ; l'effacer ici la connectait sans espace.
+      if (sessionPending) return
       // Déconnexion : on oublie tout contexte tenant.
       setActiveTenantId(null)
       setActiveState(null)
@@ -69,7 +76,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true
     }
-  }, [user, refresh])
+  }, [user, sessionPending, refresh])
 
   const setActive = useCallback((tenantId: string) => {
     setActiveTenantId(tenantId)
