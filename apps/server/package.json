@@ -29,7 +29,7 @@
     "@splootlabs/mail": "workspace:*",
     "@splootlabs/quiz": "workspace:*",
     "@splootlabs/shared": "workspace:*",
-    "better-auth": "^1.7.17",
+    "better-auth": "^1.7.21",
     "drizzle-orm": "^0.45.4",
     "fastify": "^5.12.8",
     "ioredis": "^6",
